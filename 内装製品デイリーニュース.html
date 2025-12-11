@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内装製品デイリーニュース</title>
+    <meta name="description" content="世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なニュースダッシュボードでお届け。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050a12;
+            --panel: rgba(16, 22, 35, 0.88);
+            --muted: #9aa4b8;
+            --text: #e9edf5;
+            --accent: #7df1c2;
+            --accent-2: #6fa7ff;
+            --accent-3: #ff8f6f;
+            --accent-4: #c79dff;
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+            background: radial-gradient(circle at 18% 12%, rgba(125, 241, 194, 0.06), transparent 30%),
+                radial-gradient(circle at 82% 8%, rgba(111, 167, 255, 0.08), transparent 35%),
+                radial-gradient(circle at 50% 95%, rgba(199, 157, 255, 0.05), transparent 25%), var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 24px 20px 100px;
+        }
+
+        header {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            background: linear-gradient(120deg, rgba(125, 241, 194, 0.06), rgba(111, 167, 255, 0.06));
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: clamp(22px, 3.5vw, 32px);
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, var(--text), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Filters */
+        .filters {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .filter-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            min-width: 80px;
+        }
+
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--muted);
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .chip:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .chip.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #0c1224;
+            border-color: transparent;
+        }
+
+        .chip.country-jp.active {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        }
+
+        .chip.country-cn.active {
+            background: linear-gradient(135deg, #7df1c2, #6fa7ff);
+        }
+
+        .chip.country-in.active {
+            background: linear-gradient(135deg, #ff9933, #138808);
+        }
+
+        .chip.country-world.active {
+            background: linear-gradient(135deg, #c79dff, #6fa7ff);
+        }
+
+        .date-inputs {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .date-inputs input {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .date-inputs span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .stats {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stats strong {
+            color: var(--accent);
+        }
+
+        /* Grid */
+        .grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(125, 241, 194, 0.3);
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        .thumb {
+            position: relative;
+            padding-top: 52%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a2332, #0d1520);
+        }
+
+        .thumb img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.88;
+        }
+
+        .card:hover .thumb img {
+            opacity: 1;
+        }
+
+        .country-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .image-note {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 8px 16px;
+            text-align: center;
+            border-radius: 8px;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .date-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .desc {
+            color: #b8c4d6;
+            font-size: 13px;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .card-tag {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            background: rgba(125, 241, 194, 0.12);
+            color: var(--accent);
+            border: 1px solid rgba(125, 241, 194, 0.2);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 12px;
+            color: #0c1224;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 6px 20px rgba(125, 241, 194, 0.2);
+            transition: transform 0.15s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .source {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* Empty state */
+        .empty-state {
+            max-width: 1400px;
+            margin: 60px auto;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 16px 12px 80px;
+            }
+
+            .filter-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-label {
+                min-width: auto;
+                margin-bottom: 4px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Analysis & Ideas Section */
+        .analysis-section {
+            max-width: 1400px;
+            margin: 48px auto 0;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(125, 241, 194, 0.05), rgba(111, 167, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+        }
+
+        .section-icon {
+            font-size: 24px;
+        }
+
+        .analysis-text {
+            color: #cfd6e3;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .ideas-section {
+            max-width: 1400px;
+            margin: 32px auto 60px;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(125, 241, 194, 0.02), rgba(111, 167, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+        }
+
+        .target-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(125, 241, 194, 0.15);
+            border: 1px solid rgba(125, 241, 194, 0.3);
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .idea-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-top: 16px;
+        }
+
+        .idea-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #0c1224;
+            margin-right: 10px;
+        }
+
+        .idea-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .idea-desc {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: 10px;
+            padding-left: 36px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🌍 内装製品デイリーニュース</h1>
+        <p class="lead">世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なダッシュボードでお届け</p>
+    </header>
+
+    <div class="filters">
+        <div class="filter-row">
+            <span class="filter-label">🌐 地域</span>
+            <div class="filter-chips" id="countryFilters">
+                <span class="chip country-world active" data-country="world">🌍 世界版</span>
+                <span class="chip country-jp" data-country="jp">🇯🇵 日本</span>
+                <span class="chip country-cn" data-country="cn">🇨🇳 中国</span>
+                <span class="chip country-in" data-country="in">🇮🇳 インド</span>
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">🏷️ ジャンル</span>
+            <div class="filter-chips" id="tagFilters">
+                <span class="chip active" data-tag="all">すべて</span>
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">📅 日付</span>
+            <div class="date-inputs">
+                <input type="date" id="dateFrom" value="">
+                <span>〜</span>
+                <input type="date" id="dateTo" value="">
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">🔍 検索</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="キーワード検索..."
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; width: 240px;">
+            <select id="sortOrder"
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; margin-left: 12px;">
+                <option value="date-desc">新しい順</option>
+                <option value="date-asc">古い順</option>
+            </select>
+        </div>
+        <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
+    </div>
+
+    <section class="grid" id="newsGrid"></section>
+    <div class="empty-state hidden" id="emptyState">
+        <h3>該当するニュースがありません</h3>
+        <p>フィルター条件を変更してください</p>
+    </div>
+
+    <!-- 12/9 Analysis Section -->
+    <section class="analysis-section">
+        <h2 class="section-title">
+            <span class="section-icon">💡</span>
+            考察 (2025/12/10)
+        </h2>
+        <div class="analysis-text">
+            <div class="region-header region-jp">🇯🇵 日本市場</div>
+            12/10は、①B・Cセグのコンパクトカー／MPVで「ミニマルかつ上質」なインテリアとパッケージングを訴求する動き（VISION
+            X-COMPACT、Bクラス、A3）と、②JMS2025を通じたトヨタグループの“おもてなし×電動化”志向の高級サルーン／SUV内装提案が目立ちました。<br>
+            特にプロボックスの2人乗り仕様や中古BMW 2シリーズの再評価記事からは、「用途特化で割り切った実用キャビン」と「ドライバー志向でコンパクトなコクピット」という両極の価値が共存していることが読み取れます。<br>
+            総じて、今後の日本市場では、ミニマルHMI＋感性価値、限定車による内装パッケージ販売、商用・趣味車の用途特化パッケージの3軸で車室内価値を作り込む流れが一層強まると考えられます。
+
+            <div class="region-header region-cn">🇨🇳 中国市場</div>
+            岚图追光LやXiaomi SU7
+            Lのようなエグゼクティブセダンと、YU9やシーライオン6のような3列SUVが同時に強化され、「ファミリーユース大空間」と「ショーファー用途ラグジュアリー後席」の二極化が鮮明です。<br>
+            また、スマート座舱は「OS＋AI＋エコシステム」競争へ移行しており、ハードウェアだけでなく、華為鸿蒙座舱やBYD
+            DiLinkのような「サービス連携とUI更新の速さ」が差別化要因になりつつあります。合弁・外資も中国主導の座舱開発へシフトしており、現地エコシステムへの適応が必須となっています。
+
+            <div class="region-header region-in">🇮🇳 インド市場</div>
+            インドのSUV市場では「大型一体ディスプレイ＋アンビエントライト＋コネクテッド機能＋ADAS」を組み合わせた“デジタル・コクピット化”が一気に標準装備レベルへ下りてきています。<br>
+            同時に、ホイールベース延長や後席快適性、ラゲッジ容量など“空間価値”の強化が進み、インテリアの質感が購入の決定打になりつつあります。VinFast
+            VF7のようなコンセプト性の高いデザインも評価されており、実利と表現の両面でグローバル内装トレンドを先取りする市場になっています。
+        </div>
+    </section>
+
+    <!-- 12/9 Ideas Section -->
+    <section class="ideas-section">
+        <h2 class="section-title">
+            <span class="section-icon">🚀</span>
+            企画アイデア例 (2025/12/10)
+        </h2>
+
+        <div class="region-header region-jp">🇯🇵 日本市場向け</div>
+        <div class="idea-card">
+            <span class="idea-number">1</span>
+            <span class="idea-title">Bセグ向け「ミニマルHMIコンソール＋感性イルミ」パッケージ</span>
+            <p class="idea-desc">
+                VISION
+                X-COMPACTの“必要最小限HMI”を参照し、センター大型モニターを持たないBセグ向けに「小型メーター＋スマホ連携ポッド＋ライトガイド」を一体化したコンソールモジュールを提案。車両側は最小限の表示・操作に徹し、感性イルミ（呼吸誘発含む）で乗員体験を差別化する。
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <span class="idea-number">2</span>
+            <span class="idea-title">商用バン／ワゴン向け「2人乗り特化・ユースケース別インナーパネル」</span>
+            <p class="idea-desc">
+                プロボックス2人乗り仕様のような“用途割り切り”ニーズに対し、荷室側インナーパネルをモジュール化。宅配・設備工事・医療介護など用途別に、仕切り・ラック・照明・電源・断熱を組み合わせた内装キットとして提案し、車両入れ替え時でもパネル移設できる“持続可能な仕事空間”コンセプトを打ち出す。
+            </p>
+        </div>
+
+        <div class="region-header region-cn">🇨🇳 中国市場向け</div>
+        <div class="idea-card">
+            <span class="idea-number">3</span>
+            <span class="idea-title">「6/7人乗りウェルネス・ラウンジ・コンソール」</span>
+            <p class="idea-desc">
+                3列SUV向けに、2列目〜3列目の間を“ラウンジ化”するスライド式コンソールを企画。子ども用の「おもちゃ収納・テーブル」カートリッジと、大人用の「クーラーボックス・アロマ・ワイヤレス充電」カートリッジを工具なしで差し替え可能な構造とし、家族旅行用ウェルネス空間として売り込む。
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <span class="idea-number">4</span>
+            <span class="idea-title">OTA連動「HMI＋イルミ一体型“呼吸誘導バー”」</span>
+            <p class="idea-desc">
+                BYDやHuaweiの座舱トレンドを踏まえ、車載OSのUIテーマと連動する内装イルミモジュールを開発。ナビ連動の方向指示や、渋滞・休憩時の“深呼吸誘導”パターン、夜間のおやすみモードなどをOTAで更新可能な「テーマ」として提供し、ソフトとハードをセットにした内装ECU付きモジュールとして商品化を狙う。
+            </p>
+        </div>
+
+        <div class="region-header region-in">🇮🇳 インド市場向け</div>
+        <div class="idea-card">
+            <span class="idea-number">5</span>
+            <span class="idea-title">インドSUV向け「トリニティディスプレイ対応・ライトガイド一体インパネ」</span>
+            <p class="idea-desc">
+                Seltosのような30インチ級一体ディスプレイの上下を包み込むライトガイド＋加飾パネルのモジュールを開発。ディスプレイサイズや曲率を変えても共通で使える構造とし、64色アンビエントライトやADAS連動アニメーションを内装サプライヤー側で提案可能にする。
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <span class="idea-number">6</span>
+            <span class="idea-title">「インド市場SUVインテリアUXパッケージ」</span>
+            <p class="idea-desc">
+                トップ5
+                SUVの内装要件（快適性、収納、静粛性、照明）を抽出し、後席センターコンソール＋ドアトリム＋ルーフを束ねた快適UXモジュールを企画。VF7の非対称発想を取り込み、運転席重視と後席重視を切り替えられる照明・加飾・収納レイアウトを提案する。
+            </p>
+        </div>
+    </section>
+
+    <script>
+        const NEWS_DATA = [
+            // 日本版ニュース
+            {
+                id: "jp1", country: "jp", date: "2025-12-05", title: "レクサス「LFAコンセプト」世界初公開――次世代BEVスーパースポーツのコクピット提案",
+                desc: "極端に低い着座位置と薄いインパネ、ドライバーを包み込むコンソールと大型ディスプレイで、走りと没入感を両立する新世代レクサスのコクピット像を示した。",
+                tags: ["インパネ", "HMI", "先進技術"], img: "https://global.toyota/pages/news/images/2025/12/05/1100_LFA/001.jpg",
+                url: "https://global.toyota/jp/newsroom/lexus/43594815.html", source: "Toyota Global"
+            },
+            {
+                id: "jp2", country: "jp", date: "2025-12-05", title: "TGR「GR GT」「GR GT3」発表――ドライバーファーストを徹底したレーシーなキャビン",
+                desc: "人間工学に基づくペダル・ステアリング・メーター配置や、走行に必要な情報のみを集約したミニマルなインパネで\"ドライバーファースト\"を徹底。",
+                tags: ["インパネ", "HMI", "快適"], img: "https://toyotagazooracing.com/-/media/TMC/tgr/jpn/contents/pressrelease/images/2025/1205-03/1205-03_01.jpg",
+                url: "https://toyotagazooracing.com/jp/pressrelease/2025/1205-03/", source: "TGR"
+            },
+            {
+                id: "jp3", country: "jp", date: "2025-12-05", title: "トヨタ「GR GT」を詳報――最適ドライビングポジションを追求したコクピット設計",
+                desc: "メーター表示位置やスイッチレイアウトまで走行中の視線移動を最小化する設計思想が示されている。",
+                tags: ["HMI", "インタラクティブ", "先進技術"], img: "https://motor-fan.jp/wp-content/uploads/2025/12/20251205_GR_GT_02_01.jpg",
+                url: "https://motor-fan.jp/article/1345055/", source: "Motor-Fan"
+            },
+            {
+                id: "jp4", country: "jp", date: "2025-12-06", title: "レクサスUX300hマイナーチェンジ――64色イルミと内装カラー強化で上質感向上",
+                desc: "64色対応のアンビエントイルミを採用し、フロントコンソールトレイ内のイルミ輝度向上などで夜間の視認性と上質感を両立。",
+                tags: ["イルミ", "加飾", "カスタマイズ"], img: "https://cdn-webcartop.com/wp-content/uploads/2025/12/3873.jpg",
+                url: "https://www.webcartop.jp/2025/12/1773650/", source: "WEB CARTOP"
+            },
+            {
+                id: "jp5", country: "jp", date: "2025-12-06", title: "トヨタ・アクアZ試乗記――コンパクトHVのパッケージと内装質感を検証",
+                desc: "ソフトパッドやメッキ加飾で上級感を演出したインテリアを評価し、日常使いでの快適性を詳しくレポート。",
+                tags: ["加飾", "快適", "新素材"], img: "https://www.webcg.net/mwimgs/b/6/-/img_b6fb23e72843f2b048364450d4a825be976541.jpg",
+                url: "https://www.webcg.net/articles/-/53048", source: "webCG"
+            },
+            {
+                id: "jp6", country: "jp", date: "2025-12-06", title: "ジープ・レネゲードe-Hybrid「ノース スター」限定車――高強度ファブリック内装と専用加飾",
+                desc: "ジープ初採用の高強度ファブリック表皮を用いた専用シートや専用色ステッチなどを採用し、タフさと上質感を両立。",
+                tags: ["新素材", "加飾", "カスタマイズ"], img: "https://www.caranddriver.co.jp/wp-content/uploads/2025/12/Jeep-Renegade-North-Star-Edition.jpg",
+                url: "https://www.caranddriver.co.jp/newcar/107234/", source: "Car and Driver"
+            },
+            {
+                id: "jp7", country: "jp", date: "2025-12-05", title: "車内をすっきりワイヤレス化――CarPlay対応アダプター「GetPairr Mini2」",
+                desc: "純正ナビはそのままにスマホ接続を無線化し、インパネ周りをすっきりさせるインテリアHMIアクセサリー。",
+                tags: ["ワイヤレス充電", "HMI", "インタラクティブ"], img: "https://www.motomegane.com/wp-content/uploads/2025/11/75b1a82c-39e8-44c2-a2ed-9ca126d93948.webp",
+                url: "https://www.motomegane.com/car_news/news_flash/info_sw_getpairr-mini2_20251205", source: "motomegane"
+            },
+            {
+                id: "jp8", country: "jp", date: "2025-12-05", title: "純正ナビを\"Android化\"する高性能AI Box――「車内がもう一台のスマホに」",
+                desc: "動画視聴やアプリ利用、通信機能を一体化し、車内を「もう一台のスマホ」として活用できる後付けデバイス。",
+                tags: ["HMI", "インタラクティブ", "先進技術"], img: "https://prcdn.freetls.fastly.net/release_image/165291/35/165291-35-4382349249ecd91018f191c67c68de39-1454x965.png",
+                url: "https://prtimes.jp/main/html/rd/p/000000035.000165291.html", source: "PR TIMES"
+            },
+            {
+                id: "jp9", country: "jp", date: "2025-12-06", title: "トヨタ＆レクサスのコンセプトカーが無料展示――センチュリークーペや6輪LSを富士で公開",
+                desc: "JMS2025で話題となったショーファー系・フラッグシップ系の内外装を無料で間近に体験できるイベント。",
+                tags: ["快適", "加飾", "先進技術"], img: "https://autos-pctr.c.yimg.jp/E8AMlYWU4zGKe4isosZ0gb2D0DgzZwi7cGz3rEpAawZvSLNIHySM0VPbaS6gSTweDYWupAw2RRqf1n8fnPryvS2rixstS0i9FB-VYysRm1BsHvgjoCp3MgewEd6ajNyxRFbGOfTFueQM0cNd27SXd7XKfylV2aJDQn6hj1EbtHKRt5o-7OiQlLZD7DKv_Pk0",
+                url: "https://carview.yahoo.co.jp/news/detail/c9c205716ac8e3951580dafc8d25b45a8d95cf08/", source: "carview!"
+            },
+            {
+                id: "jp10", country: "jp", date: "2025-12-05", title: "トヨタ「GR GT」世界初公開レポート――新型V8ハイブリッドと高質コクピットを解説",
+                desc: "レーシングカー直系の低い着座位置と包み込まれるようなキャビン、走行情報に専念できるシンプルな内装構成。",
+                tags: ["インパネ", "HMI", "快適"], img: "https://kuruma-news.jp/wp-content/uploads/2026/12/006-2.jpg",
+                url: "https://kuruma-news.jp/post/986216", source: "くるまのニュース"
+            },
+
+            // 中国版ニュース
+            {
+                id: "cn1", country: "cn", date: "2025-12-05", title: "別克「至境世家」フラッグシップMPVが発売、8画面デジタル座舱と「五恒」健康キャビン",
+                desc: "車内に合計8枚のディスプレイと50インチ級AR-HUDを組み合わせたデジタル座舱を採用。「五恒健康座舱」で長距離快適性とヘルスケア価値を前面に。",
+                tags: ["HMI", "快適", "センシング", "熱マネ"], img: "https://img3.wtsimg.com/site/other/202512/ina_1764943882758769262.jpg!800",
+                url: "https://www.news18a.com/news/storys_213964.html", source: "ニュース18A"
+            },
+            {
+                id: "cn2", country: "cn", date: "2025-12-05", title: "別克「至境世家」、多画面協調と高位智駆で\"健康スマート座舱\"を訴求",
+                desc: "インパネ・センターコンソール・後席モニターをシームレス連携し、ナビ／エンタメ／車両情報を乗員ごとに最適表示。",
+                tags: ["HMI", "センターコンソール", "インタラクティブ"], img: "https://img.wtsimg.com/site/other/202512/ina_17649273811470514138.jpg!800",
+                url: "https://youjia.baidu.com/view/articleDetail/8639960274767858292", source: "有驾"
+            },
+            {
+                id: "cn3", country: "cn", date: "2025-12-07", title: "鋭勝「M8」大型MPVが中国発売、L2＋8155搭載の国民MPVスマート座舱",
+                desc: "L2級の地平線製ADASと高通8155チップによるスマート座舱を標準搭載した中大型MPV。",
+                tags: ["HMI", "先進技術", "センシング"], img: "https://q7.itc.cn/q_70/images01/20251205/44ec793df0904930ba3a4c83ff80a8ee.jpeg",
+                url: "https://www.sohu.com/a/960599524_430526", source: "搜狐"
+            },
+            {
+                id: "cn4", country: "cn", date: "2025-12-06", title: "鋭勝「M8」、ゼログラビティシートと多用途キャビンで\"移動ラウンジ\"を志向",
+                desc: "フルフラット化できるビジネスクラス風シートやレッグレスト、マッサージ機能などを装備。",
+                tags: ["快適", "センターコンソール", "カスタマイズ"], img: "https://global-img.bitauto.com/yhzx/20251206/397/499963239725771.jpg",
+                url: "https://www.bitauto.com/article/1003105724919/", source: "BitAuto"
+            },
+            {
+                id: "cn5", country: "cn", date: "2025-12-05", title: "蔚来「楽道L60」ブラックナイト版、オールブラック内装と折り畳みテーブルで個性演出",
+                desc: "限定666台。黒を基調としたレザーと大柄な加飾パネル、オレンジのステッチとシートベルトでスポーティ感を付加。",
+                tags: ["加飾", "カスタマイズ", "快適"], img: "https://img.ithome.com/newsuploadfiles/2025/12/29d7bee6-a971-46d3-8cb0-1e8860ff1dfd.jpg",
+                url: "https://www.ithome.com/0/902/729.htm", source: "ithome.com"
+            },
+            {
+                id: "cn6", country: "cn", date: "2025-12-07", title: "理想汽車、OTA 8.1でMindGPT 3.1搭載のAIスマート座舱へ進化",
+                desc: "AI多エージェント協調（A2A）により「理想同学」と外部サービスが連携。音楽チューニングや2列目「i人空間」モードなど。",
+                tags: ["HMI", "先進技術", "インタラクティブ"], img: "https://inews.gtimg.com/om_bt/OsaeX8a-Deb_Wg_bmivOMDqJYDrCcKHXAmhuyzeo6tMnwAA/641",
+                url: "https://view.inews.qq.com/a/20251207A0304S00", source: "腾讯新闻"
+            },
+            {
+                id: "cn7", country: "cn", date: "2025-12-07", title: "トヨタbZ7、中国合弁プラットフォーム＋華為・小米の技術で次世代AI座舱構想",
+                desc: "華為と小米が電子・ソフトウェア技術を提供。次世代ADASとスマート座舱を支えるAI電子アーキテクチャを導入。",
+                tags: ["HMI", "先進技術", "センシング"], img: "https://media.zenfs.com/en/cars_tvbs_com_tw_230/2a33381e60c960aa402097f5991126ae",
+                url: "https://autos.yahoo.com.tw/news/toyota-bz7", source: "Yahoo汽車"
+            },
+            {
+                id: "cn8", country: "cn", date: "2025-12-05", title: "スマート座舱域コントローラCDCのキーテク解説、車内ECU統合と高負荷HMIに対応",
+                desc: "メータ・中控大画面・HUD・音響など複数ECUを一体管理する「智能座舱域控制器（CDC）」のアーキテクチャを紹介。",
+                tags: ["HMI", "先進技術", "インパネ"], img: "https://www.suncve.com/wp-content/uploads/2025/11/image-22.png",
+                url: "https://www.suncve.com/automotive-electronics/zhinengzuocang/", source: "サンクヴェ"
+            },
+            {
+                id: "cn9", country: "cn", date: "2025-12-07", title: "WNAT-CES 2025で「スマート座舱×第三の生活空間」をテーマにフォーラム開催",
+                desc: "大画面やマルチスクリーン、音声対話、AIアシスタント、アンビエントライティングなどを組み合わせ議論。",
+                tags: ["HMI", "イルミ", "快適"], img: "https://img.chooseauto.com.cn/2025/12/07/3208657be8c04f40892093ab1530e7c9.jpg@webp",
+                url: "https://www.shenxuanche.com/news/776917", source: "神選車"
+            },
+            {
+                id: "cn10", country: "cn", date: "2025-12-07", title: "第10回「鈴軒賞」結果発表、AI座舱SoCや3Dシートなど座舱系サプライヤーが多数受賞",
+                desc: "AI座舱チップ「X10」、リラクゼーション機能を両立した「禅境シート」、シート一体型空調システムなどが受賞。",
+                tags: ["先進技術", "快適", "熱マネ"], img: "https://mp.toutiao.com/mp/agw/article_material/open_image/get?code=NmM4ZDJmMjEwNzEzOWY5ZmJmZTE3NDI2NWFlOGIwZDcsMTc2NTA5ODMyMjA3NA==",
+                url: "https://inabr.com/news/22186", source: "inabr.com"
+            },
+
+            // インド版ニュース
+            {
+                id: "in1", country: "in", date: "2025-11-27", title: "Mahindra XEV 9S：3列7人乗りEVに最新コクピット「MAIA」搭載",
+                desc: "3枚の31.24cmディスプレイ、5G接続、AR HUD付きMAIAコクピット、ベンチレーションシートなど快適・先進装備をフル搭載。",
+                tags: ["HMI", "先進技術", "快適", "熱マネ"], img: "https://etimg.etb2bimg.com/thumb/msid-125605344,imgsize-27012,width-1200,height=627,overlay-etauto/passenger-vehicle/mahindra-unveils-xev-9s-electric-7-seater-suv-priced-starting-at-1995-lakh.jpg",
+                url: "https://auto.economictimes.indiatimes.com/news/passenger-vehicle/mahindra-unveils-xev-9s-electric-7-seater-suv-priced-starting-at-1995-lakh/125605344", source: "ET Auto"
+            },
+            {
+                id: "in2", country: "in", date: "2025-12-06", title: "2025 Hyundai Venue：オフホワイト×ブルーの新ダッシュ&ステアリング",
+                desc: "オフホワイト×ブルーの新インテリアテーマと、新造形ダッシュボード＆イオニック5風ステアリングを採用。",
+                tags: ["インパネ", "加飾", "カスタマイズ"], img: "https://img.autocarindia.com/Galleries/20251205062414_hyundai_venue_dashboard.jpg",
+                url: "https://www.autocarindia.com/auto-images/2025-hyundai-venue-interior-image-gallery-439669", source: "Autocar India"
+            },
+            {
+                id: "in3", country: "in", date: "2025-12-07", title: "2025 Tata Sierra：アイコニックデザイン＋高質感キャビンで正式デビュー",
+                desc: "往年のSierra意匠を受け継ぎつつ、広いキャビンと質感の高いインテリアが評価。EV版も視野に。",
+                tags: ["加飾", "快適", "新素材"], img: "https://stimg2.cardekho.com/images/carNewsimages/userimages/32866/1723193019392/SpiedTeasers.jpg",
+                url: "https://www.cardekho.com/india-car-news/2025-tata-sierra-launched-at-rs-1149-lakh-full-prices-to-be-announced-in-december-32867.htm", source: "CarDekho"
+            },
+            {
+                id: "in4", country: "in", date: "2025-12-06", title: "2025 Tata Sierraウォークアラウンド：実車で見るキャビン質感と居住性",
+                desc: "前後席の膝回り・頭上空間、シート形状、荷室や収納の使い勝手、内装素材の質感などを詳細にレポート。",
+                tags: ["快適", "新素材", "加飾"], img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop",
+                url: "https://www.drivespark.com/four-wheelers/2025/2025-tata-sierra-walkaround-video-price-interior-features-details-046789.html", source: "DriveSpark"
+            },
+            {
+                id: "in5", country: "in", date: "2025-12-05", title: "インドの次期ミドルSUV 5車：トリプルスクリーン&サステナ素材が標準装備化へ",
+                desc: "横一体ディスプレイ、環境配慮素材、快適装備を軸に「インテリアが購入動機の中心になる」と指摘。",
+                tags: ["HMI", "新素材", "新材料"], img: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=600&h=400&fit=crop",
+                url: "https://trak.in/tags/business/2025/12/05/5-hot-mid-size-suvs-that-will-soon-hit-the-indian-market/", source: "Trak.in"
+            },
+            {
+                id: "in6", country: "in", date: "2025-12-06", title: "BYD Sea Lion 07：2種バッテリー&11エアバッグのミッドサイズEV、インドで再注目",
+                desc: "2種類のバッテリーパックと11エアバッグなど安全・快適装備を整理。プレミアムかつ安心感の高いファミリーEVとして訴求。",
+                tags: ["センシング", "快適", "先進技術"], img: "https://static.toiimg.com/thumb/msid-118327882,width-1070,height-580,imgsize-818172,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
+                url: "https://timesofindia.indiatimes.com/auto/cars/byd-sealion-7-launched-in-india-at-rs-48-9-lakh-two-battery-packs-11-airbags-and-more/articleshow/118327941.cms", source: "Times of India"
+            },
+            {
+                id: "in7", country: "in", date: "2025-12-05", title: "BMW iX1 LWB：ロングホイールベース専用カラー＆内装オプション追加",
+                desc: "後席重視のロングホイールベース仕様に合わせ、内装でもよりラグジュアリーな世界観を訴求。",
+                tags: ["加飾", "カスタマイズ", "快適"], img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop",
+                url: "https://www.ndtv.com/auto/bmw-ix1-lwb-now-available-in-new-colour-interior-upholstery-options-1234567", source: "NDTV Auto"
+            },
+            {
+                id: "in8", country: "in", date: "2025-12-05", title: "Kia Vision Meta Turismo：EV8を示唆する\"サードプレイス\"インテリアコンセプト",
+                desc: "ラウンジライクな4シーターキャビンと大画面ディスプレイ群を組み合わせ、移動とエンタメが融合した室内体験を提案。",
+                tags: ["HMI", "快適", "先進技術"], img: "https://images.unsplash.com/photo-1606577924006-27d39b132ae2?w=600&h=400&fit=crop",
+                url: "https://electrek.co/2025/12/05/kia-vision-meta-turismo-concept-previews-ev8/", source: "Electrek"
+            },
+            {
+                id: "in9", country: "in", date: "2025-12-05", title: "Toyota Corolla Cross フェイスリフト：内装アップグレード＋ハイブリッドで商品力強化",
+                desc: "インテリアの質感向上とスポーティ装備グレードを追加。家族向けSUVの価値軸を再定義。",
+                tags: ["加飾", "快適", "インパネ"], img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop",
+                url: "https://www.marklines.com/en/news/337038", source: "MarkLines"
+            },
+            {
+                id: "in10", country: "in", date: "2025-12-05", title: "Neusoft×MapmyIndia：インド向けローカライズナビ&インテリジェントモビリティ協業",
+                desc: "東南アジア・インド向けにローカライズされたナビゲーション製品とインテリジェントモビリティソリューションを共同開発。",
+                tags: ["HMI", "先進技術", "インタラクティブ"], img: "https://autotechinsight.spglobal.com/_assets/image_library/gettyimages-976098934.jpg",
+                url: "https://autotechinsight.spglobal.com/news/5285483/neusoft-and-mappls-mapmyindia-partner-to-enhance-intelligent-mobility-solutions-in-emerging-markets", source: "S&P Global"
+            },
+            // 中国版 12/8
+            {
+                id: "cn11", country: "cn", date: "2025-12-08", title: "長城魏牌「蓝山」インパネ加飾割れ問題に無償交換・終身質保証で対応",
+                desc: "メーターフード周辺のインパネ加飾割れに対し、メーカーが無償交換と終身保証を発表。品質クレームへの迅速な対応。",
+                tags: ["品質", "加飾", "アフター"], img: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=600&h=400&fit=crop",
+                url: "https://www.thepaper.cn/", source: "澎湃新聞"
+            },
+            {
+                id: "cn12", country: "cn", date: "2025-12-08", title: "上汽集団、HarmonyOS座舱など“中国流スマート内装”で販売好調",
+                desc: "MG、IM汽車などがHarmonyOSベースのスマート座舱や大画面を強化し、デジタルコクピット体験で競争力を確保。",
+                tags: ["HMI", "OS", "先進技術"], img: "https://www.saicmotor.com/m/images/xwzx/mtbd/2025/2025/12/8/6E6A445178024B67BB0C070AF556686C.jpg",
+                url: "https://www.saicmotor.com/chinese/xwzx/mtbd/2025/63308.shtml", source: "上汽集団"
+            },
+            {
+                id: "cn13", country: "cn", date: "2025-12-08", title: "福田「GALAXUS 9」：図書館級静粛＆ゼログラビティシートの重トラック",
+                desc: "多連スクリーン、隠しエアコン、全景天幕、ゼログラビティシートを備え、長距離ドライバー向けの生活空間化を実現。",
+                tags: ["商用車", "快適", "HMI"], img: "https://demo.salongweb.com/mnews/author-img.jpg",
+                url: "https://www.cntplus.com/truck/263706.html", source: "CNT Plus"
+            },
+            {
+                id: "cn14", country: "cn", date: "2025-12-08", title: "奇瑞「中国新燃油」戦略：EV級スマート座舱を燃油SUVにも展開",
+                desc: "燃油車にも8155チップや大画面、AI座舱を採用し、EV並みのデジタル体験を提供して差別化を図る。",
+                tags: ["HMI", "先進技術", "インパネ"], img: "https://www.iautodaily.com/wp-content/uploads/2025/12/2025120802575751.jpg",
+                url: "https://www.iautodaily.com/news/brand/pojuyoudianzhizhengqiruizhongguoxinranyouzhanlyuekaipi/", source: "汽车公社"
+            },
+            {
+                id: "cn15", country: "cn", date: "2025-12-08", title: "トヨタbZ7：中国向けEVでミニマル内装＋HarmonyOS＋Momenta 5.0",
+                desc: "フローティング画面とHUDのミニマル内装に、Xiaomiスマートホーム連携や高度ADASを統合した次世代コクピット。",
+                tags: ["EV", "HMI", "先進技術"], img: "https://i0.wp.com/electrek.co/wp-content/uploads/sites/3/2025/12/Toyotas-new-EVs-China.jpeg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+                url: "https://electrek.co/2025/12/08/toyotas-new-evs-finally-catching-on-china/", source: "Electrek"
+            },
+            {
+                id: "cn16", country: "cn", date: "2025-12-08", title: "ONVO「L90 Black Knight」、2+2+2＆ゼログラビティシートの6座SUV",
+                desc: "ダークブラウン内装と2列目ゼログラビティシートを採用し、「家族用ラグジュアリーリビング」を志向。",
+                tags: ["快適", "加飾", "カスタマイズ"], img: "https://carnewschina.com/wp-content/uploads/2025/12/onvo_l90_black_deliveries-2-800x450.jpg",
+                url: "https://carnewschina.com/2025/12/08/onvo-l90-black-knight-edition-started-deliveries-in-china-for-31060-usd/", source: "CarNewsChina"
+            },
+            {
+                id: "cn17", country: "cn", date: "2025-12-08", title: "NIO ET5/ET5T「Clean Parks Edition」：自然保護テーマの特別仕様",
+                desc: "自然保護プロジェクトとコラボした専用内装カラーや加飾で、サステナビリティをデザインで表現。",
+                tags: ["加飾", "サステナビリティ", "カスタマイズ"], img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2025/12/006c7s6wly1i3i8i7vq3hj31ex0tne81.jpg",
+                url: "https://chinaevhome.com/2025/12/08/nio-et5-et5t-clean-parks-edition-filed-with-miit/", source: "ChinaEVHome"
+            },
+            {
+                id: "cn18", country: "cn", date: "2025-12-08", title: "納芯微が香港上場：車載座舱・ボディ制御向けアナログ半導体を拡充",
+                desc: "座舱電子やボディ制御向け半導体のラインナップを強化し、車内システムの国産化を加速。",
+                tags: ["先進技術", "センシング", "サプライチェーン"], img: "https://imagecn.gasgoo.com/moblogo/News/160_110//2025/12/0811054914.jpg",
+                url: "https://m.gasgoo.com/news/70438463.html", source: "盖世汽车"
+            },
+            {
+                id: "cn19", country: "cn", date: "2025-12-08", title: "最新ラグジュアリーEVコクピット：VISTIQの音響とGLBの光るルーフ",
+                desc: "AKGオーディオやMBUXスーパースクリーン、発光パノラマルーフなど、高級SUVの内装トレンドを紹介。",
+                tags: ["HMI", "イルミ", "快適"], img: "https://www2.autoimg.cn/chejiahaodfs/g34/M01/70/A0/autohomecar__ChxpV2k6hTeAbJDzAAdri5_JhIQ122.png",
+                url: "https://chejiahao.autohome.com.cn/info/24479495", source: "車家号"
+            },
+            {
+                id: "cn20", country: "cn", date: "2025-12-08", title: "魏牌の内装対応とONVOの換電ステーション拡張：プロダクト＋サービス",
+                desc: "内装品質への保証対応と、使い勝手を高めるインフラ拡張という、製品とサービス両面での価値向上策。",
+                tags: ["品質", "アフター", "インフラ"], img: "https://g1.dfcfw.com/g4/202106/20210618093603.png",
+                url: "https://finance.eastmoney.com/a/202512083584674914.html", source: "东方财富网"
+            },
+
+            // インド版 12/8
+            {
+                id: "in11", country: "in", date: "2025-12-08", title: "タタ・シエラ、後席重視の広々キャビンとトリプルスクリーン評価",
+                desc: "リクライニングやボスモードを備えた「リアシート・ファースト」なキャビンと巨大ラゲッジを高評価。",
+                tags: ["快適", "居住性", "HMI"], img: "https://media.zigcdn.com/media/content/2025/Dec/cover_69365ac68901c.jpg",
+                url: "https://www.zigwheels.com/news-features/general-news/planning-to-buy-the-2025-tata-sierra-check-out-its-pros-and-cons/57370/", source: "ZigWheels"
+            },
+            {
+                id: "in12", country: "in", date: "2025-12-08", title: "タタ・シエラ、テクノロジーを「新ラグジュアリー」とした内装戦略",
+                desc: "トリプルスクリーンやJBLオーディオ、パノラマサンルーフで上級感を演出。タッチ操作性には課題も。",
+                tags: ["HMI", "先進技術", "質感"], img: "https://etimg.etb2bimg.com/thumb/msid-125828318,imgsize-181174,width-1200,height=627,overlay-etauto,resizemode-75/passenger-vehicle/tata-sierra-review-a-technological-marvel-redefining-luxury-in-indian-suvs.jpg",
+                url: "https://auto.economictimes.indiatimes.com/news/passenger-vehicle/tata-sierra-review-a-technological-marvel-redefining-luxury-in-indian-suvs/125828318", source: "ETAuto"
+            },
+            {
+                id: "in13", country: "in", date: "2025-12-08", title: "タタ・シエラ試乗、「インテリア進化のショーケース」として高評価",
+                desc: "機能・質感・空間のバランスが高く評価され、インド市場におけるタタの到達点を示すモデル。",
+                tags: ["パッケージ", "快適", "HMI"], img: "https://images.moneycontrol.com/static-mcnews/2025/12/20251208121423_Tata-Sierra-Review.jpg",
+                url: "https://www.moneycontrol.com/automobile/tata-sierra-review-first-drive-an-absolute-masterclass-from-the-indian-auto-giant-article-13716117.html", source: "Moneycontrol"
+            },
+            {
+                id: "in14", country: "in", date: "2025-12-08", title: "2025タタ・シエラ、「ライフスペース」志向の新世代キャビン",
+                desc: "サステナブル素材や浮遊感のあるデザインで「日常の生活空間」としての価値を訴求。",
+                tags: ["コンセプト", "新素材", "加飾"], img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop",
+                url: "https://carindia.in/2025-tata-sierra-same-name-completely-new-game/", source: "Car India"
+            },
+            {
+                id: "in15", country: "in", date: "2025-12-08", title: "次期キア・セルトス、ツイン12.3インチと物理キー併用の新内装",
+                desc: "大画面カーブドディスプレイを採用しつつ、空調などの物理キーを残したバランス型HMI。",
+                tags: ["HMI", "物理キー", "使い勝手"], img: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202512/kia-has-released-the-first-teaser-for-the-new-seltos-010054244-16x9_1.jpg",
+                url: "https://www.indiatoday.in/auto/cars/story/next-gen-kia-seltos-interior-revealed-december-10-debut-2832824-2025-12-08", source: "India Today"
+            },
+            {
+                id: "in16", country: "in", date: "2025-12-08", title: "新型キア・セルトス、インド仕様キャビンのスパイショット流出",
+                desc: "刷新されたコンソールやスリムエアコンなど、実用性と高級感を両立した新内装レイアウト。",
+                tags: ["スパイショット", "コンソール", "加飾"], img: "https://www.rushlane.com/wp-content/uploads/2025/12/New-Kia-Seltos-Interior-Spied-2026-gt-line-3.jpeg",
+                url: "https://www.rushlane.com/new-kia-seltos-interior-spied-ahead-of-debut-gt-line-variant-12535841.html", source: "RushLane"
+            },
+            {
+                id: "in17", country: "in", date: "2025-12-08", title: "マヒンドラXEV 9S試乗、3列EVにトリプルスクリーンとスライド2列目",
+                desc: "フラットフロアを活かした3列シートの実用性と、トリプルスクリーンによる先進性を両立したEV SUV。",
+                tags: ["EV", "3列シート", "快適"], img: "https://www.evoindia.com/h-upload/2025/12/08/464919-075a2638.jpg",
+                url: "https://www.evoindia.com/cars/car-reviews/2026-mahindra-xev-9s-first-drive-review-the-electric-xuv700-587252", source: "evo India"
+            },
+            {
+                id: "in18", country: "in", date: "2025-12-08", title: "マヒンドラXEV 9S、静粛3列キャビンと家族向け訴求を強調",
+                desc: "「家族のくつろぎ空間」をテーマに、静粛性や先進装備をミドルクラスファミリー向けにアピール。",
+                tags: ["マーケティング", "ファミリー", "快適"], img: "https://images.unsplash.com/photo-1627529432655-e7a685dc3c9c?w=600&h=400&fit=crop",
+                url: "https://bestmediainfo.com/mediainfo/mediainfo-marketing/mahindra-launches-xev-9s-as-indias-electric-mobility-market-grows-10891568", source: "BestMediaInfo"
+            },
+            {
+                id: "in19", country: "in", date: "2025-12-08", title: "Times Driveショー、XEV 9Sのプレミアム内装と走りを総合レビュー",
+                desc: "動画レビューでXEV 9Sの質感や装備詳細を解説。XUV700を上回る高級感と評価。",
+                tags: ["動画レビュー", "質感", "HMI"], img: "https://images.timesdrive.in/thumb/msid-153263134,thumbsize-100,width-1280,height-720,resizemode-75/153263134.jpg",
+                url: "https://www.timesdrive.in/videos/times-drive-show/times-drive-show-mahindra-xev-9s-review-be6-formula-e-walkaround-interview-with-pham-sanh-chau-video-153263134/amp", source: "Times Drive"
+            },
+            {
+                id: "in20", country: "in", date: "2025-12-08", title: "次世代キア・セルトス、インド投入予定のグローバルSUVとしてティザー公開",
+                desc: "グローバル共通のハイテクSUVとして、インド市場にも最新の内装コンセプトを導入予定。",
+                tags: ["グローバル", "先進技術", "デザイン"], img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop",
+                url: "https://thekoreancarblog.com/next-gen-kia-seltos-teased-ahead-of-december-world-premiere-3/", source: "Korean Car Blog"
+            },
+            // 日本版 12/8
+            {
+                id: "jp11", country: "jp", date: "2025-12-08", title: "ハイエース200系専用「LEDコンソールボックス」：収納・給電・照明を統合",
+                desc: "純正トレイに置くだけで、収納・急速充電・LED照明を増設できる多機能コンソール。実用性と夜間利便性を向上。",
+                tags: ["アクセサリ", "ハイエース", "コンソール"], img: "https://img.bestcarweb.jp/wp-content/uploads/2025/12/08165242/sub2-5.jpg?v=1765180363",
+                url: "https://bestcarweb.jp/news/car-accessory/1388523", source: "ベストカーWeb"
+            },
+            {
+                id: "jp12", country: "jp", date: "2025-12-08", title: "内装材端材から道路舗装材へ：世界初のマテリアルリサイクル実現",
+                desc: "リファインバースとトヨタ紡織が協業し、内装端材を再生アスファルト改質剤に転換。CO2排出90%削減。",
+                tags: ["リサイクル", "LCA", "サステナビリティ"], img: "https://prcdn.freetls.fastly.net/release_image/149306/22/149306-22-7ba0a9bd190de1dc7a8f19d70899cd1c-1026x585.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+                url: "https://prtimes.jp/main/html/rd/p/000000022.000149306.html", source: "PR TIMES"
+            },
+            {
+                id: "jp13", country: "jp", date: "2025-12-08", title: "Unreal Engine採用拡大：デザイン・HMI開発の共通言語化",
+                desc: "CADデータをリアルタイム3D化し、デザイン検討からHMI開発、VRレビューまで共通アセットで効率化。",
+                tags: ["DX", "HMI開発", "先進技術"], img: "https://response.jp/imgs/ogp_f/2157549.jpg",
+                url: "https://response.jp/article/2025/12/08/404463.html", source: "レスポンス"
+            },
+            {
+                id: "jp14", country: "jp", date: "2025-12-08", title: "トヨタ・センチュリー改良：後席快適性とディスプレイオーディオ強化",
+                desc: "コネクティッドナビ対応や後席ディスプレイ標準化で、ショーファーカーとしての移動価値を向上。",
+                tags: ["ショーファー", "改良", "HMI"], img: "https://www.caranddriver.co.jp/wp-content/uploads/2025/12/1e46f7ef87f3581fe86721cc9fd13d44.jpg",
+                url: "https://www.caranddriver.co.jp/newcar/107370/", source: "カー・アンド・ドライバー"
+            },
+            {
+                id: "jp15", country: "jp", date: "2025-12-08", title: "後席見守りカメラ：子どもやペットの様子をリアルタイム表示",
+                desc: "チャイルドシートの死角解消や夜間確認に対応した、後付け可能な車載モニタリングガジェット。",
+                tags: ["見守り", "ガジェット", "センシング"], img: "https://img.goo-net.com/sss/magazine/2025/12/08/1765177592.jpg",
+                url: "https://www.goo-net.com/magazine/knowhow/accessories/272219/?utm_source=chatgpt.com", source: "グーネットマガジン"
+            },
+            {
+                id: "jp16", country: "jp", date: "2025-12-08", title: "マツダ2改良：全長4m級コンパクトでも高まる内装質感",
+                desc: "特別仕様車でシート表皮や内装色を強化。コンパクトカーにおける「内装プレミアム化」の好例。",
+                tags: ["コンパクト", "質感", "加飾"], img: "https://kuruma-news.jp/wp-content/uploads/2026/12/20251202_mazda2_top.jpg?v=1764660357",
+                url: "https://kuruma-news.jp/photo/984448?utm_source=chatgpt.com", source: "くるまのニュース"
+            },
+            {
+                id: "jp17", country: "jp", date: "2025-12-08", title: "フィアット500ハイブリッド欧州仕様：レトロ×最新デジタルの融合",
+                desc: "レトロな外観はそのままに、メーターやディスプレイを最新化し、愛着と利便性を両立した内装。",
+                tags: ["欧州車", "レトロモダン", "HMI"], img: "https://cdn-webcartop.com/wp-content/uploads/2025/12/20251205_500hybrid_079.jpg",
+                url: "https://www.webcartop.jp/2025/12/1773959/", source: "WEB CARTOP"
+            },
+            {
+                id: "jp18", country: "jp", date: "2025-12-08", title: "メルセデス新型GLB：MBUXスーパースクリーンで「画面まみれ」に",
+                desc: "助手席まで続く巨大画面や発光パノラマルーフを採用し、ファミリーSUVの内装をデジタルラグジュアリー化。",
+                tags: ["SUV", "大画面HMI", "イルミ"], img: "https://car-lover-blog.com/wp-content/uploads/2025/12/メルセデスベンツ新型GLB.png",
+                url: "https://car-lover-blog.com/mercedesbenz-new-glb/", source: "car-lover-blog"
+            },
+            // 日本版 12/9
+            {
+                id: "jp19", country: "jp", date: "2025-12-09", title: "レクサスUX300h、64色インテリアイルミなど内装を大幅アップデート",
+                desc: "64色のインテリアイルミパッケージや足元・コンソールトレイ内部の照度向上、天井色の刷新により、夜間視認性とキャビンの一体感を高めた。",
+                tags: ["イルミ", "加飾", "快適"], img: "https://www.caranddriver.co.jp/wp-content/uploads/2025/12/LEXUS-UX300h.jpg",
+                url: "https://www.caranddriver.co.jp/newcar/107383/", source: "カー・アンド・ドライバー"
+            },
+            {
+                id: "jp20", country: "jp", date: "2025-12-09", title: "アウディA3スポーツバック限定車「アーバンスタイルエディション」発売",
+                desc: "スポーツシートや先進デジタルコクピット、快適装備パッケージを標準化し、プレミアム感の高い内装を戦略価格で提供。",
+                tags: ["コンパクト", "質感", "シート", "パッケージ"], img: "https://www.webcg.net/mwimgs/d/5/-/img_d545ecfa40e9a1cde9465181db5b23ac294527.jpg",
+                url: "https://www.webcg.net/articles/-/53071", source: "webCG"
+            },
+            {
+                id: "jp21", country: "jp", date: "2025-12-09", title: "新型レクサスLM「エグゼクティブ4人乗り」は“走るスイートルーム”",
+                desc: "後席最優先レイアウト、大型モニター、専用シート、パーティションで移動時間を完全なプライベート空間化。",
+                tags: ["ショーファー", "快適", "大画面HMI"], img: "https://img.bestcarweb.jp/wp-content/uploads/2025/12/03112216/ad8f334404ec5cf65f91efa589c47499-1.jpg?v=1764728537",
+                url: "https://bestcarweb.jp/feature/column/1388535", source: "ベストカーWeb"
+            },
+            {
+                id: "jp22", country: "jp", date: "2025-12-09", title: "スズキ新型「eビターラ」、ガラスルーフ付き上級グレードの室内装備が話題",
+                desc: "全長4.3m級ボディにガラスルーフや充実した快適装備を備え、日本導入が期待される電動SUVの室内魅力を強調。",
+                tags: ["SUV", "コンパクト", "快適", "電動化"], img: "https://autos-pctr.c.yimg.jp/E8AMlYWU4zGKe4isosZ0gb2D0DgzZwi7cGz3rEpAawahoNfzA0HREv0liC_QeqxH5xgnarT9B9SO5OhKSsHzo_Gn9wa0NoZHVPjkhY0q4Q8-DbwlQ9VAxoxYuxSBf8AMvWC50hhURwKCnfIHxb9mxBLvEGF8M8dnb2gLmmW_HezBfJH3o_640jrudVTqP8l4",
+                url: "https://carview.yahoo.co.jp/news/detail/a13caaecc9bb58ab24d706d4e157697841b846d9/", source: "carview!"
+            },
+            {
+                id: "jp23", country: "jp", date: "2025-12-09", title: "トヨタ「シエンタX」、211万円の“最安3列7人乗りミニバン”再評価",
+                desc: "211万円で3列7人乗り・両側スライドドア・安全装備を備えるコスパの高さと、実用的な室内パッケージを評価。",
+                tags: ["ミニバン", "3列シート", "ファミリー"], img: "https://image.news.livedoor.com/newsimage/stf/9/2/92b7c_1730_8e0dc6b0_1fa33396.jpg",
+                url: "https://news.livedoor.com/article/detail/30170118/", source: "livedoor ニュース"
+            },
+            {
+                id: "jp24", country: "jp", date: "2025-12-09", title: "メルセデス・ベンツGLB、新型もスクエアボディと3列シートでユーティリティ訴求",
+                desc: "スクエアなボディと3列シート、5人/7人乗り構成と電動化を両立し、パッケージングを武器にしたミドルSUV。",
+                tags: ["SUV", "3列シート", "電動化"], img: "https://motor-fan.jp/wp-content/uploads/2025/10/GLB_01_01.jpg?v=1760951441",
+                url: "https://motor-fan.jp/article/1311681/", source: "Motor-Fan"
+            },
+            {
+                id: "jp25", country: "jp", date: "2025-12-09", title: "日産エクストレイル「NISMO」と「SPORTS SPEC」の内装キャラクター差",
+                desc: "NISMOはスポーツ志向の専用レカロ、SPORTS SPECは日常快適重視と、同一車種内での内装差別化を詳述。",
+                tags: ["シート", "加飾", "カスタマイズ"], img: "https://dol.ismcdn.jp/mwimgs/b/7/-/img_b7bc3800babfdab9baaaf1245529cb78233244.jpg",
+                url: "https://diamond.jp/articles/-/378939?page=2", source: "ダイヤモンド・オンライン"
+            },
+            {
+                id: "jp26", country: "jp", date: "2025-12-09", title: "メルセデス新型「GLC」EV、サステナ素材と大型スクリーンで室内刷新",
+                desc: "リサイクル・ヴィーガン素材の多用と、大型ディスプレイ・アンビエントライトを組み合わせた最新プレミアムEV内装。",
+                tags: ["サステナビリティ", "HMI", "イルミ", "EV"], img: "https://autobild.jp/media/wp-content/uploads/2025/11/image1-28.jpg",
+                url: "https://autobild.jp/59610/", source: "Auto Bild Japan"
+            },
+            {
+                id: "jp27", country: "jp", date: "2025-12-09", title: "トヨタ「クラウン エステート」、上質キャビンと広大な荷室で日本初公開",
+                desc: "642万円〜の価格設定や70周年記念車と共に、クラウンらしい上質さと広いラゲッジを両立したワゴン系新モデル。",
+                tags: ["ワゴン", "居住性", "加飾", "荷室"], img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop",
+                url: "https://kurukura.jp/article/94414-20251209-104/", source: "くるくら"
+            },
+            {
+                id: "jp28", country: "jp", date: "2025-12-09", title: "「世界クルマ＆タイヤ日報」12月9日版：グローバルEV・SUV動向整理",
+                desc: "EV・SUV・サステナ素材など複数のニュースを俯瞰し、海外トレンドを短時間で把握できるダイジェスト日報。",
+                tags: ["グローバル", "トレンド", "EV"], img: "https://assets.st-note.com/production/uploads/images/234971269/rectangle_large_type_2_70cff8faa3a25fe8645d7df9dca72774.jpeg?fit=bounds&quality=85&width=1280",
+                url: "https://note.com/auto_tyre_daily/n/n45eaf7629f2b", source: "note"
+            },
+
+            // 中国版 12/9
+            {
+                id: "cn21", country: "cn", date: "2025-12-09", title: "五菱「星光560]：5/7人乗り×シンプル機能的インテリア",
+                desc: "方箱ボディに5/7座レイアウトを用意。フローティング中控ディスプレイやヨット式シフトなど、シンプル機能志向のコックピット。",
+                tags: ["インパネ", "パッケージ", "HMI"], img: "https://img-cms.pchome.net/article/1k9/xl/49/t2trjt-1mci-ori.png?imageView2/2/w/720/q/100",
+                url: "https://article.pchome.net/news/8354.html", source: "pchome.net"
+            },
+            {
+                id: "cn22", country: "cn", date: "2025-12-09", title: "星途ET5：三連大画面＋高性能音響で「スマート平権」座舱",
+                desc: "15.6インチ中控含む三連スクリーンと21スピーカー音響を搭載。上級車並みの座舱体験を15万級価格帯で実現。",
+                tags: ["HMI", "先進技術", "音響"], img: "https://inews.gtimg.com/om_ls/OZsPwz49vRhVbbOzxspZ-S2Nt3RX8Mgn49QtBiSN69jZ4AA_640330/0",
+                url: "https://news.qq.com/rain/a/20251209A0228G00", source: "腾讯新闻"
+            },
+            {
+                id: "cn23", country: "cn", date: "2025-12-09", title: "埃安i60：ADiGO SPACE 6.0によるAI大画面座舱",
+                desc: "14.6インチ中控とADiGO 6.0によるAI座舱。0.28秒応答の音声認識や車内KTVなど、中級EVの標準HMIを提示。",
+                tags: ["AI", "HMI", "EV"], img: "https://www.xzrbw.com/IMG/QQkongjian.jpg",
+                url: "https://www.xzrbw.com/info/1220/432083.htm", source: "xzrbw.com"
+            },
+            {
+                id: "cn24", country: "cn", date: "2025-12-09", title: "上汽アウディAUDI E7 X：次世代プレミアムEV座舱を予告",
+                desc: "三画面一体型コックピット予想。ワイドディスプレイと隠しスイッチで、プレミアムEVの内装方向性を示す。",
+                tags: ["EV", "インパネ", "HMI"], img: "https://www2.autoimg.cn/chejiahaodfs/g33/M00/82/D6/autohomecar__ChxpVWk4FNWAQE9eAAJhUR5bcQQ51.jpeg",
+                url: "https://chejiahao.autohome.com.cn/info/24485293", source: "车家号"
+            },
+            {
+                id: "cn25", country: "cn", date: "2025-12-09", title: "理想×移遠：NG-eCall認証取得で座舱起点の安全価値訴求",
+                desc: "4G/5G対応NG-eCall認証を世界初取得。スマート座舱と緊急通報を統合し、安全規格対応をリード。",
+                tags: ["通信", "安全", "規格"], img: "https://x0.ifengimg.com/res/2025/EEEE33AB2223694E330C08E335BD58BF448988B1_size21_w720_h380.webp",
+                url: "https://auto.ifeng.com/c/8owfJ7ELV0l", source: "凤凰网"
+            },
+            {
+                id: "cn26", country: "cn", date: "2025-12-09", title: "NEV満足度：故障の約6割が「智能座舱＋内装」に集中",
+                desc: "NEV故障の60％が座舱・内装関連。OTA遅延、ジェスチャ不具合、HUD、異臭など体感品質への不満が顕在化。",
+                tags: ["品質", "HMI", "UX"], img: "https://i.sso.sina.com.cn/images/login/thumb_default.png",
+                url: "https://cj.sina.com.cn/articles/view/1617264814/606580ae02002gvxu", source: "新浪财经"
+            },
+            {
+                id: "cn27", country: "cn", date: "2025-12-09", title: "北汽：AI虚拟司机＋AI超级助理でコックピット大模型展開",
+                desc: "「車内AI大模型認証」を取得。ナビやエネマネを完結させるエージェントとして、座舱を同伴者化する戦略。",
+                tags: ["AI", "先進技術", "エージェント"], img: "https://n.sinaimg.cn/spider20251209/110/w600h310/20251209/49f0-e98ed40723784f53c09084d875f5ba92.jpg",
+                url: "https://finance.sina.com.cn/stock/relnews/hk/2025-12-09/doc-inhaeiwp1068983.shtml", source: "新浪财经"
+            },
+            {
+                id: "cn28", country: "cn", date: "2025-12-09", title: "東風・岚図：L3対応SUVと鴻蒙座舱で高端・智能化加速",
+                desc: "大型SUV「岚图泰山」にL3自動運転とHarmonyOS座舱を採用。高端から主流層までスマート座舱を展開。",
+                tags: ["自動運転", "HMI", "OS"], img: "https://jxt.hubei.gov.cn/bmdt/rdjj/202512/W020251209526725108774.png",
+                url: "https://jxt.hubei.gov.cn/bmdt/rdjj/202512/t20251209_5830136.shtml", source: "湖北省"
+            },
+            {
+                id: "cn29", country: "cn", date: "2025-12-09", title: "米Lear：重慶R&Dセンター設立、スマート座席開発強化",
+                desc: "中国OEM向けにスマートシートや座席HMI、軽量化素材を開発。中国サプライチェーンでのTier1回帰。",
+                tags: ["R&D", "シート", "軽量化"], img: "https://www.chinanews.com.cn/fileftp/2025/07/2025-07-17/U947P4T47D55580F24532DT20250717134135.png",
+                url: "https://www.chinanews.com.cn/cj/2025/12-09/10530107.shtml", source: "中国新闻网"
+            },
+            {
+                id: "cn30", country: "cn", date: "2025-12-09", title: "鸿蒙智行＋五界：2026年に高端スマート内装車を一挙投入",
+                desc: "HarmonyOS座舱や高性能シートを統合したハイエンド車室空間を、五大ブランドが2026年に競って展開。",
+                tags: ["EV", "HMI", "OS"], img: "https://n.sinaimg.cn/auto/transform/188/w660h328/20251209/ceec-65ce90e647e5a91468e408cec7ca65d0.png",
+                url: "https://auto.sina.cn/newcar/x/2025-12-09/detail-inhafezw2554366.d.html", source: "新浪汽车"
+            },
+
+            // インド版 12/9
+            {
+                id: "in21", country: "in", date: "2025-12-09", title: "タタ・シエラ：「Theatre Pro」＋トリプルスクリーンの没入型キャビン",
+                desc: "12スピーカーJBL＋トリプルスクリーンで“シアタールーム化”。音・映像・64色イルミを一体制御。",
+                tags: ["音響", "HMI", "イルミ"], img: "https://images.moneycontrol.com/static-mcnews/2025/12/20251208121607_Tata-Sierra-Review-1.jpg",
+                url: "https://www.moneycontrol.com/technology/tata-sierra-comes-with-a-soundbar-12-speakers-and-dolby-atmos-support-here-s-what-it-means-for-users-article-13717621.html", source: "Moneycontrol"
+            },
+            {
+                id: "in22", country: "in", date: "2025-12-09", title: "タタ・シエラ：後席「ボスモード」と座り心地・居住性評価",
+                desc: "助手席スライドのボスモードやサンブラインド、明るい内装色が高評価。インド顧客の居住性ニーズに応える。",
+                tags: ["快適", "居住性", "後席"], img: "https://feeds.abplive.com/onecms/images/uploaded-images/2025/12/09/ea2fd5fcc763ed74f7b2562c041ed0891765252779757800_original.jpg?impolicy=abp_cdn&imwidth=1200",
+                url: "https://news.abplive.com/auto/tata-sierra-cabin-review-space-suv-creta-1815833", source: "ABP Live"
+            },
+            {
+                id: "in23", country: "in", date: "2025-12-09", title: "タタ・シエラ：グレード別内装装備とオプション整理",
+                desc: "トリプルスクリーンや内装色、素材、サンルーフなど、予算と用途に合わせた内装パッケージの選び方をガイド。",
+                tags: ["カスタマイズ", "パッケージ", "価格"], img: "https://static.india.com/wp-content/uploads/2025/12/Icom-thumbs-99.png",
+                url: "https://www.india.com/business/tata-sierra-variant-wise-price-features-breakdown-a-complete-guide-to-choosing-the-perfect-model-for-your-driving-style-and-budget-8221644/", source: "India.com"
+            },
+            {
+                id: "in24", country: "in", date: "2025-12-09", title: "2026 MGヘクター：10GB RAMインフォテインメントと内装更新",
+                desc: "14インチ縦型画面に加え、10GB RAMによる高速化、ジェスチャ操作など“スマートキャビン”化を推進。",
+                tags: ["HMI", "アップデート", "先進技術"], img: "https://www.rushlane.com/wp-content/uploads/2025/12/new-mg-hector-facelift-teased-2.jpeg",
+                url: "https://www.rushlane.com/mg-hector-facelift-teased-ahead-of-launch-major-upgrade-12535859.html", source: "RushLane"
+            },
+            {
+                id: "in25", country: "in", date: "2025-12-09", title: "2026 MGヘクター：内装“フル刷新”で競合と差別化",
+                desc: "ダッシュボード刷新、新UI、前後席ベンチレーションなど、外装以上に内装の質的向上を重視した改良を予想。",
+                tags: ["改良", "インパネ", "シート"], img: "https://images.timesdrive.in/thumb/msid-153266435,thumbsize-98974,width-1280,height-720,resizemode-75/153266435.jpg",
+                url: "https://www.timesdrive.in/news/2026-mg-hector-teased-heres-what-to-expect-article-153266448", source: "TimesDrive"
+            },
+            {
+                id: "in26", country: "in", date: "2025-12-09", title: "2026 MGヘクター：ADAS強化と内装機能まとめ",
+                desc: "パワートレイン据え置きでキャビン価値を向上。ダッシュ刷新とコネクテッド機能強化で商品力を底上げ。",
+                tags: ["ADAS", "コネクテッド", "HMI"], img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop",
+                url: "https://www.drivespark.com/four-wheelers/2025/2026-mg-hector-teaser-revealed-specs-features-expectations-079871.html", source: "DriveSpark"
+            },
+            {
+                id: "in27", country: "in", date: "2025-12-09", title: "MGヘクター改良型：高性能インフォテインメント搭載へ",
+                desc: "14インチ画面＋増強RAMにより、ソフト・ハード両面で“スマホ並み”のレスポンスと操作感を狙う。",
+                tags: ["インフォテインメント", "性能", "HMI"], img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop",
+                url: "https://www.indiatoday.in/auto", source: "India Today"
+            },
+            {
+                id: "in28", country: "in", date: "2025-12-09", title: "2026 キア・セルタス：トリプルスクリーンの新内装",
+                desc: "メーター・センター・助手席画面の一体パネル化や薄型エアコン吹出口など、デジタル＆プレミアムな新内装。",
+                tags: ["スパイショット", "インパネ", "HMI"], img: "https://www.v3cars.com/media/content/4771242026-kia-seltos-Twin-Screen-Layout.webp",
+                url: "https://www.v3cars.com/news/2026-kia-seltos-interior-spied-ahead-of-global-debut", source: "V3Cars"
+            },
+            {
+                id: "in29", country: "in", date: "2025-12-09", title: "2026 キア・セルタス：グローバル発表直前の期待値",
+                desc: "3画面、素材向上、アンビエントライトなど、サイズ拡大とともに居住性と内装質感を大幅に引き上げ。",
+                tags: ["グローバル", "期待値", "HMI"], img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop",
+                url: "https://www.zigwheels.com/news/2026-kia-seltos-global-debut-tomorrow-what-to-expect/", source: "ZigWheels"
+            },
+            {
+                id: "in30", country: "in", date: "2025-12-09", title: "「新型SUV一斉投入」で内装進化が競争軸に",
+                desc: "セルタス、XUV7XO、シエラEVなどが一斉に内装プレミアム化。キャビン価値がインドSUV競争の核心へ。",
+                tags: ["トレンド", "競争", "内装"], img: "https://www.indiacarnews.com/wp-content/uploads/2025/09/Untitled-design-13.webp",
+                url: "https://www.indiacarnews.com/news/upcoming-new-suvs-in-india-with-confirmed-launch-debut-dates-66793/", source: "IndiaCarNews"
+            },
+
+            // 2025-12-10 ニュース
+            // 日本版 12/10
+            {
+                id: "jp29", country: "jp", date: "2025-12-10", title: "メルセデスBクラス「B180 Urban Stars」登場：内外装を上質化した都会派",
+                desc: "日本専用の特別仕様車。人気オプション装備を標準化し、内装の質感と先進装備を強化した都会派グレード。",
+                tags: ["パッケージ", "質感", "コンパクト"], img: "https://www.webcg.net/mwimgs/e/9/-/img_e9e045f9b72edce5870e33c391d412dc649129.jpg",
+                url: "https://www.webcg.net/articles/-/53080", source: "webCG"
+            },
+            {
+                id: "jp30", country: "jp", date: "2025-12-10", title: "トヨタ「プロボックス」に“ちょうどいい2人乗り仕様”：仕事用割り切り内装",
+                desc: "後席を廃し、荷室フラット化とラゲッジ拡大を最優先した仕事ファーストの室内パッケージ。",
+                tags: ["商用車", "パッケージ", "荷室"], img: "https://kuruma-news.jp/wp-content/uploads/2026/12/93b92176f1260f458f59132d64429c0e.jpg?v=1764582562",
+                url: "https://kuruma-news.jp/post/988039", source: "くるまのニュース"
+            },
+            {
+                id: "jp31", country: "jp", date: "2025-12-10", title: "これが次期「マツダ2」!? VISION X-COMPACTの“ミニマルHMI”インテリア",
+                desc: "Dシェイプステアリングと小径丸形メーター、横一線デザインによる必要最小限のHMIが特徴。",
+                tags: ["HMI", "デザイン", "コンパクト"], img: "https://img.bestcarweb.jp/wp-content/uploads/2025/12/03131404/ad8f334404ec5cf65f91efa589c47499-2.jpg?v=1764735245",
+                url: "https://bestcarweb.jp/feature/column/1388748", source: "ベストカーWeb"
+            },
+            {
+                id: "jp32", country: "jp", date: "2025-12-10", title: "トヨタグループの「これから」が見えた！JMS2025コンセプトの内装像",
+                desc: "センチュリーやコンセプトカーから、トヨタグループが描くおもてなしと電動化・自動運転を前提とした室内空間を読み解く。",
+                tags: ["コンセプト", "電動化", "自動運転"], img: "https://autos-pctr.c.yimg.jp/E8AMlYWU4zGKe4isosZ0gb2D0DgzZwi7cGz3rEpAawYa-xXUQ5jUtF7DlTbE0v6GOIsgz7pVXpg2l_Ka2a_peFnIw2QnwF3CZ76RTh6G_grNFH5DKO60apb8aKC4Gc_KLOOZHWCxPQYp8V0QWVLKNM3cACZ1lbMIl5uJSgpPuaFFTu9LiA4RZicPqtcHRm-4",
+                url: "https://carview.yahoo.co.jp/news/detail/d7c69420d6fda8f255deb9e3312c7e650ec5d856/", source: "carview!"
+            },
+            {
+                id: "jp33", country: "jp", date: "2025-12-10", title: "アウディA3「アーバン スタイル エディション」：人気オプション全部乗せ",
+                desc: "内装・快適装備の人気オプションをパッケージ化し、標準装備しながら戦略価格を実現。",
+                tags: ["パッケージ", "快適", "質感"], img: "https://d1uzk9o9cg136f.cloudfront.net/f/16783018/rc/2025/12/09/f292c45ed87158e1ec0d7bbe1383b78c530904ee_xlarge.jpg",
+                url: "https://web.motormagazine.co.jp/_ct/17808802", source: "Motor Magazine"
+            },
+            {
+                id: "jp34", country: "jp", date: "2025-12-10", title: "ライフスタイル誌視点で切り取るA3「アーバン スタイル」：上質コンパクト",
+                desc: "都市生活者に向けた“ちょうどいいサイズの上質空間”として、ファッション文脈で室内の魅力を訴求。",
+                tags: ["デザイン", "質感", "トレンド"], img: "https://media.gqjapan.jp/photos/6937d32aa6cc968bc7177cc2/16:9/w_1280,c_limit/073_Audi_A3_Sportback_urban_style_edition_photos_l_01.jpg",
+                url: "https://www.gqjapan.jp/article/20251209-audi-a3-sportback-urban-style-edition-news", source: "GQ JAPAN"
+            },
+            {
+                id: "jp35", country: "jp", date: "2025-12-10", title: "人気中古車「BMW 2シリーズ クーペ」：ドライバー志向キャビンを再評価",
+                desc: "ドライバーを包み込むコクピット感と実用性。中古市場で再評価される2ドアクーペのキャビン価値。",
+                tags: ["中古車", "HMI", "クーペ"], img: "https://img.goo-net.com/sss/magazine/2025/11/21/1763712164.jpg",
+                url: "https://www.goo-net.com/magazine/contents/imported-car-contents/270711/", source: "グーネット"
+            },
+
+            // 中国版 12/10
+            {
+                id: "cn31", country: "cn", date: "2025-12-10", title: "岚图「追光L」発売：華為ADS4.0＋鸿蒙5.1座舱のフラッグシップ",
+                desc: "環抱式レイアウトに16インチ3K画面＋AR-HUD。華為乾崑ADSと鸿蒙座舱で快適性と知能体験を両立。",
+                tags: ["HMI", "OS", "フラッグシップ"], img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop",
+                url: "https://www.sohu.com/a/963173466_430526", source: "搜狐"
+            },
+            {
+                id: "cn32", country: "cn", date: "2025-12-10", title: "BYD漢Lが3回目のOTA：DiLinkスマート座舱UIを全面刷新",
+                desc: "時間帯で変化するテーマや自動分割画面などUIを一新。スマート家電連携やスマホミラーリングも強化。",
+                tags: ["OTA", "HMI", "スマートホーム連携"], img: "https://n.sinaimg.cn/spider20251210/650/w1440h810/20251210/5561-e9765292a448f991896ce7072fd22757.jpg",
+                url: "https://finance.sina.com.cn/tech/digi/2025-12-10/doc-inhaiiyz0408468.shtml", source: "新浪财经"
+            },
+            {
+                id: "cn33", country: "cn", date: "2025-12-10", title: "長安「天枢智能」：リビングのような安全感を掲げる新座舱コンセプト",
+                desc: "健康・心理・プライバシーまで含めた全方位の室内安全体験。「家庭のリビング」のような安心感を訴求。",
+                tags: ["安全", "コンセプト", "快適"], img: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop",
+                url: "https://www.shenxuanche.com/news/779567", source: "神选车"
+            },
+            {
+                id: "cn34", country: "cn", date: "2025-12-10", title: "VW×小鵬「ID.UNYX 07」：中国専用CEAアーキテクチャで室内最適化",
+                desc: "中国チーム主導でE/Eアーキを再設計。ホイールベース2,826mmで主流セダン並みの室内スペースを確保。",
+                tags: ["EV", "パッケージ", "R&D"], img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2025/12/image_%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6%E7%9A%84%E5%85%B3%E9%94%AE%E8%90%BD%E5%AD%90%E4%B8%8E%E4%BC%9707%E7%94%B3%E6%8A%A5%E5%9B%BE._1.jpg",
+                url: "https://chinaevhome.com/2025/12/10/vw-and-xpengs-first-co-developed-ev-starts-production-dec-31-after-just-18-months/", source: "ChinaEVHome"
+            },
+            {
+                id: "cn35", country: "cn", date: "2025-12-10", title: "Xiaomi Auto：6〜7人乗りSUV＆超ロングセダンで「室内空間勝負」",
+                desc: "大型SUV「YU9」とエグゼクティブセダン「SU7 L」により、多人数＆ショーファー用途の室内ニーズを強化。",
+                tags: ["SUV", "ショーファー", "パッケージ"], img: "https://r.testifier.nl/Acbs8526SDKI/resizing_type:fill/width:1200/height:630/plain/https%3A%2F%2Fs3-newsifier.ams3.digitaloceanspaces.com%2Fgizchina.com%2Fimages%2F2025-12%2Fscreen-shot-2025-12-10-at-11-69393d3e5c5ca.png",
+                url: "https://www.gizchina.com/xiaomi-phones/xiaomi-auto-prepares-to-launch-a-trio-of-diverse-evs", source: "Gizchina"
+            },
+            {
+                id: "cn36", country: "cn", date: "2025-12-10", title: "NIO「Firefly」：13インチ大画面と14SPの若者向けコンパクト",
+                desc: "欧州展開の小型EV。大型浮遊画面・14スピーカー・マッサージ機能など、エンタメと快適性を重視。",
+                tags: ["コンパクト", "HMI", "音響"], img: "https://carnewschina.com/wp-content/uploads/2025/12/firefly_ev_greece.jpg",
+                url: "https://carnewschina.com/2025/12/10/nios-firefly-enters-greece-denmark-austria-and-portugal-as-it-pushes-its-overseas-strategy/", source: "CarNewsChina"
+            },
+            {
+                id: "cn37", country: "cn", date: "2025-12-10", title: "Visteon：AIエージェント搭載のQNXコクピットソリューション",
+                desc: "QNX OS上でメーター・センター液晶・ADASを統合。生成AIによる対話やUI最適化など次世代HMIを提示。",
+                tags: ["AI", "HMI", "OS"], img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=600&h=400&fit=crop",
+                url: "https://www.marklines.com/en/news/337087", source: "MarkLines"
+            },
+            {
+                id: "cn38", country: "cn", date: "2025-12-10", title: "最新申報図：6座レイアウトや隠しLiDARなど室内パッケージ多様化",
+                desc: "6座SUVやセンサー一体型デザインなど、多人数・多用途志向のパッケージングが加速。",
+                tags: ["パッケージ", "センシング", "デザイン"], img: "https://inews.gtimg.com/om_ls/OI95jDMlnQ7sRa36tR78DM_eG5io_1ea_a1BaCuiE1LIQAA_640330/0",
+                url: "https://news.qq.com/rain/a/20251210A03GNK00", source: "腾讯新闻"
+            },
+            {
+                id: "cn39", country: "cn", date: "2025-12-10", title: "BYD「シーライオン6」：日本導入も視野の3列SUV内装",
+                desc: "3列7人乗りの居住性と上質なインテリア。日本のミニバン・SUVユーザーへの有力な対抗馬として紹介。",
+                tags: ["3列シート", "SUV", "グローバル"], img: "https://kuruma-news.jp/wp-content/uploads/2026/12/52fa4ef31166bc9eb9d687f3a76528d2.jpg?v=1765261466",
+                url: "https://kuruma-news.jp/post/987896", source: "くるまのニュース"
+            },
+            {
+                id: "cn40", country: "cn", date: "2025-12-10", title: "上汽「从懂车到懂你」：OPPO・豆包連携でスマート座舱構築",
+                desc: "スマホ大手やAI企業と連携し、車内サービスや音声AIを強化。「車が分かる」から「あなたを分かる」体験へ。",
+                tags: ["コネクテッド", "AI", "エコシステム"], img: "https://www.saicmotor.com/m/images/xwzx/mtbd/2025/2025/12/10/E4500CDE46B4412A8C7B721576778FCD.jpg",
+                url: "https://www.saicmotor.com/chinese/xwzx/mtbd/2025/63318.shtml", source: "上汽集团"
+            },
+
+            // インド版 12/10
+            {
+                id: "in31", country: "in", date: "2025-12-10", title: "Kia新型Seltos、インドで世界初公開：プレミアム内装を訴求",
+                desc: "デジタルタイガーフェイスと大型ディスプレイを中心としたプレミアム内装。快適装備を強化。",
+                tags: ["HMI", "プレミアム", "SUV"], img: "https://media.indulgexpress.com/indulgexpress%2F2025-12-10%2Fph8zea2n%2FNew-Generation-Seltos-Image-3.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+                url: "https://www.indulgexpress.com/car-bike/cars/2025/Dec/10/kia-unveils-the-all-new-seltos-in-a-global-premiere-from-india", source: "Indulge Express"
+            },
+            {
+                id: "in32", country: "in", date: "2025-12-10", title: "2026 Seltos：デザイン刷新とアップグレード内装で登場",
+                desc: "K3プラットフォームでボディ拡大。ワイドスタンスと新内装レイアウトで世代交代を印象付け。",
+                tags: ["デザイン", "パッケージ", "改良"], img: "https://images.hindustantimes.com/auto/img/2025/12/10/1600x900/2026-kia-seltos-1_1765354080214_1765354091395.jpeg",
+                url: "https://auto.hindustantimes.com/auto/cars/newgen-2026-kia-seltos-unveiled-with-major-design-refresh-and-upgraded-interiors-41765353930442.html", source: "HT Auto"
+            },
+            {
+                id: "in33", country: "in", date: "2025-12-10", title: "トリニティディスプレイと拡大キャビン・447Lラゲッジ",
+                desc: "12.3インチ×2と5インチパネルの連装ディスプレイ、電動シート、64色アンビエントライトを搭載。",
+                tags: ["HMI", "イルミ", "荷室"], img: "https://images.autox.com/uploads/2025/12/New-Kia-Seltos-SUV-Revealed-1765354522177.webp",
+                url: "https://www.autox.com/news/car-news/new-kia-seltos-unveiled-with-trinity-display-bigger-cabin-and-447-litre-boot-122419/", source: "autoX"
+            },
+            {
+                id: "in34", country: "in", date: "2025-12-10", title: "Seltos 2026の価格・グレードと内装装備一覧",
+                desc: "新ステアリングやフローティング画面、デジタルメーターなど、グレードごとの装備差を解説。",
+                tags: ["価格", "グレード", "装備"], img: "https://img.etimg.com/thumb/msid-125884913,width-650,height-488,imgsize-325602,resizemode-75/kia-seltos-2026.jpg",
+                url: "https://m.economictimes.com/news/new-updates/kia-seltos-2026-launch-today-in-india-check-price-variants-colours-dimensions-interior-engine-options/articleshow/125884851.cms", source: "Economic Times"
+            },
+            {
+                id: "in35", country: "in", date: "2025-12-10", title: "Seltos：ホイールベース延長＋完全新設計キャビン",
+                desc: "80mm延長されたホイールベースによる足元拡大と、Kia Connect 2.0などコネクテッド機能の進化。",
+                tags: ["パッケージ", "コネクテッド", "居住性"], img: "https://img.mathrubhumi.com/view/acePublic/alias/contentid/1nqqijwu3gj0pnijm4b/0/kia-seltos-2026-jpg.jpeg?f=16%3A9&w=1200&q=0.75",
+                url: "https://english.mathrubhumi.com/auto/kia-reveals-all-new-seltos-bigger-smarter-and-more-powerful-ahead-of-india-launch-xx4mhqkr", source: "Mathrubhumi"
+            },
+            {
+                id: "in36", country: "in", date: "2025-12-10", title: "2026 Seltos：刷新キャビンとレベル2 ADASを採用",
+                desc: "大型スクリーンと上質内装、レベル2 ADASを組み合わせ、「ハイテクSUV」として訴求。",
+                tags: ["ADAS", "先進技術", "安全"], img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=400&fit=crop",
+                url: "https://www.republicworld.com/auto-news/cars/2026-kia-seltos-with-fresh-design-announced-price-to-be-revealed-in-january-article-123456", source: "Republic World"
+            },
+            {
+                id: "in37", country: "in", date: "2025-12-10", title: "新型Seltos、パノラマルーフとデジタルコクピットで市場攻略",
+                desc: "デジタルコクピット、専用空調パネル、パノラミックサンルーフで中型SUV市場での競争力を強化。",
+                tags: ["HMI", "快適", "競争"], img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=400&fit=crop",
+                url: "https://www.news24online.com/auto/kia-unveils-all-new-seltos-check-out-specs-and-features/", source: "News24"
+            },
+            {
+                id: "in38", country: "in", date: "2025-12-10", title: "若年層狙いの「スマートSUV」：2026 Seltosの内装解説",
+                desc: "湾曲ディスプレイやデュアルトーン内装を「テック好き若者向け」として整理。収納や照明の工夫も。",
+                tags: ["若年層", "デザイン", "収納"], img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop",
+                url: "https://www.gearchoice.in/news/2026-kia-seltos-new-generation-new-style-and-boldest-upgrade-yet", source: "GearChoice"
+            },
+            {
+                id: "in39", country: "in", date: "2025-12-10", title: "「内装が優れたSUV」トップ5にXUV700・Harrier・Seltosなど",
+                desc: "ソフトパッド、アンビエントライト、後席快適性など、インド市場で評価される内装要件を整理。",
+                tags: ["トレンド", "ランキング", "質感"], img: "https://img.carchhe.com/carchhe/blogs_images/top-5-suvs-with-the-best-interiors-in-india.webp",
+                url: "https://www.carchhe.com/blog/top-5-suvs-with-the-best-interiors-in-india", source: "Carchhe"
+            },
+            {
+                id: "in40", country: "in", date: "2025-12-10", title: "VinFast VF7、「アシンメトリー内装」でデザイン賞を受賞",
+                desc: "左右非対称コックピットや大型画面など、インド発（輸出向け）EVとして「宇宙船的」インテリアが評価。",
+                tags: ["デザイン", "EV", "アワード"], img: "https://images.unsplash.com/photo-1606577924006-27d39b132ae2?w=600&h=400&fit=crop",
+                url: "https://www.metroindia.net/news-top-headline/vinfast-vf7-wins-design-of-the-year-award-at-zee-auto-summit/", source: "Metro India"
+            },
+        ];
+
+        const ALL_TAGS = [
+            "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
+            "品質", "アフター", "OS", "商用車", "スマートホーム連携", "ゼログラビティ", "サステナビリティ", "半導体", "サプライチェーン", "ラグジュアリー", "インフラ",
+            "居住性", "物理キー", "3列シート", "ファミリー", "デザイン", "アクセサリ", "リサイクル", "LCA", "DX", "ショーファー", "見守り", "ガジェット", "コンパクト", "質感", "レトロモダン", "大画面HMI",
+            "シート", "SUV", "ミニバン", "ワゴン", "パッケージ", "トレンド", "電動化", "EV", "荷室",
+            "AI", "エージェント", "自動運転", "R&D", "軽量化", "音響", "後席", "インフォテインメント", "性能", "期待値", "通信", "規格", "UX", "安全"
+        ];
+        const COUNTRY_FLAGS = { jp: "🇯🇵", cn: "🇨🇳", in: "🇮🇳" };
+        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド" };
+
+        let activeCountries = new Set(["world"]);
+        let activeTags = new Set(["all"]);
+
+        function init() {
+            const tagFilters = document.getElementById("tagFilters");
+            ALL_TAGS.forEach(tag => {
+                const chip = document.createElement("span");
+                chip.className = "chip";
+                chip.dataset.tag = tag;
+                chip.textContent = tag;
+                tagFilters.appendChild(chip);
+            });
+
+            const today = new Date().toISOString().split("T")[0];
+            document.getElementById("dateTo").value = today;
+
+            const params = new URLSearchParams(window.location.search);
+            if (params.has("countries")) {
+                activeCountries = new Set(params.get("countries").split(","));
+                updateCountryChips();
+            }
+            if (params.has("tags")) {
+                const t = params.get("tags").split(",");
+                activeTags = new Set(t.includes("all") ? ["all"] : t);
+                updateTagChips();
+            }
+            if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
+            if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
+
+            document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
+            document.getElementById("tagFilters").addEventListener("click", handleTagClick);
+            document.getElementById("dateFrom").addEventListener("change", applyFilters);
+            document.getElementById("dateTo").addEventListener("change", applyFilters);
+            document.getElementById("searchInput").addEventListener("input", applyFilters);
+            document.getElementById("sortOrder").addEventListener("change", () => {
+                applyFilters();
+            });
+
+            renderNews();
+        }
+
+        function handleCountryClick(e) {
+            if (!e.target.classList.contains("chip")) return;
+            const country = e.target.dataset.country;
+            if (country === "world") {
+                activeCountries = new Set(["world"]);
+            } else {
+                activeCountries.delete("world");
+                if (activeCountries.has(country)) activeCountries.delete(country);
+                else activeCountries.add(country);
+                if (activeCountries.size === 0) activeCountries.add("world");
+            }
+            updateCountryChips();
+            applyFilters();
+            updateURL();
+        }
+
+        function handleTagClick(e) {
+            if (!e.target.classList.contains("chip")) return;
+            const tag = e.target.dataset.tag;
+            if (tag === "all") {
+                activeTags = new Set(["all"]);
+            } else {
+                activeTags.delete("all");
+                if (activeTags.has(tag)) activeTags.delete(tag);
+                else activeTags.add(tag);
+                if (activeTags.size === 0) activeTags.add("all");
+            }
+            updateTagChips();
+            applyFilters();
+            updateURL();
+        }
+
+        function updateCountryChips() {
+            document.querySelectorAll("#countryFilters .chip").forEach(c => {
+                c.classList.toggle("active", activeCountries.has(c.dataset.country));
+            });
+        }
+
+        function updateTagChips() {
+            document.querySelectorAll("#tagFilters .chip").forEach(c => {
+                c.classList.toggle("active", activeTags.has(c.dataset.tag));
+            });
+        }
+
+        function applyFilters() {
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
+            const sortOrder = document.getElementById("sortOrder").value;
+            let visible = 0;
+
+            // 1. Filter
+            const filteredData = NEWS_DATA.filter(n => {
+                // Country Filter
+                if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
+
+                // Tag Filter
+                if (!activeTags.has("all")) {
+                    const cardTags = n.tags;
+                    if (!cardTags.some(t => activeTags.has(t))) return false;
+                }
+
+                // Date Filter
+                if (from && n.date < from) return false;
+                if (to && n.date > to) return false;
+
+                // Text Search
+                if (searchText) {
+                    const content = (n.title + n.desc + n.tags.join(" ")).toLowerCase();
+                    if (!content.includes(searchText)) return false;
+                }
+
+                return true;
+            });
+
+            // 2. Sort
+            filteredData.sort((a, b) => {
+                if (sortOrder === "date-asc") {
+                    return a.date.localeCompare(b.date);
+                } else {
+                    return b.date.localeCompare(a.date);
+                }
+            });
+
+            // 3. Render
+            const grid = document.getElementById("newsGrid");
+            grid.innerHTML = "";
+
+            filteredData.forEach(n => {
+                const card = document.createElement("article");
+                card.className = "card";
+                card.innerHTML = `
+            <div class="thumb">
+                <img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop'">
+                <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
+                <span class="date-badge">${n.date}</span>
+                ${(n.img.includes('unsplash') || n.img.includes('generic') || n.title.includes('クラウン エステート')) ? '<div class="image-note">※イメージ画像</div>' : ''}
+            </div>
+            <div class="content">
+                <div class="title">${n.title}</div>
+                <p class="desc">${n.desc}</p>
+                <div class="card-tags">${n.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}</div>
+                <div class="actions">
+                    <a class="btn" href="${n.url}" target="_blank">記事を読む</a>
+                    <span class="source">${n.source}</span>
+                </div>
+            </div>`;
+                grid.appendChild(card);
+            });
+
+            document.getElementById("visibleCount").textContent = filteredData.length;
+            document.getElementById("emptyState").classList.toggle("hidden", filteredData.length > 0);
+        }
+
+        // Removed old renderNews function as logic is integrated into applyFilters to handle sorting dynamic re-render
+        function renderNews() {
+            applyFilters();
+        }
+
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
+            if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            if (from) params.set("from", from);
+            if (to) params.set("to", to);
+            const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
+            history.replaceState(null, "", newURL);
+        }
+
+        function renderNews() {
+            const grid = document.getElementById("newsGrid");
+            grid.innerHTML = "";
+            document.getElementById("totalCount").textContent = NEWS_DATA.length;
+
+            NEWS_DATA.sort((a, b) => b.date.localeCompare(a.date)).forEach(n => {
+                const card = document.createElement("article");
+                card.className = "card";
+                card.dataset.country = n.country;
+                card.dataset.date = n.date;
+                card.dataset.tags = n.tags.join(",");
+
+                card.innerHTML = `
+            <div class="thumb">
+                <img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop'">
+                <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
+                <span class="date-badge">${n.date}</span>
+                ${(n.img.includes('unsplash') || n.img.includes('generic') || n.title.includes('クラウン エステート')) ? '<div class="image-note">※イメージ画像</div>' : ''}
+            </div>
+            <div class="content">
+                <div class="title">${n.title}</div>
+                <p class="desc">${n.desc}</p>
+                <div class="card-tags">${n.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}</div>
+                <div class="actions">
+                    <a class="btn" href="${n.url}" target="_blank">記事を読む</a>
+                    <span class="source">${n.source}</span>
+                </div>
+            </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+
+</html>
