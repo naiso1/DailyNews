@@ -1291,6 +1291,8 @@
                 tagFilters.appendChild(chip);
             });
 
+            document.getElementById("totalCount").textContent = NEWS_DATA.length;
+
             const today = new Date().toISOString().split("T")[0];
             document.getElementById("dateTo").value = today;
 
@@ -1316,8 +1318,7 @@
                 applyFilters();
             });
 
-            renderNews();
-            renderInsights();
+            applyFilters();
         }
 
         function handleCountryClick(e) {
@@ -1435,9 +1436,7 @@
             renderInsights(); // Also render insights with same filters
         }
 
-        function renderNews() {
-            applyFilters();
-        }
+
 
         function updateURL() {
             const params = new URLSearchParams();
@@ -1451,37 +1450,7 @@
             history.replaceState(null, "", newURL);
         }
 
-        function renderNews() {
-            const grid = document.getElementById("newsGrid");
-            grid.innerHTML = "";
-            document.getElementById("totalCount").textContent = NEWS_DATA.length;
 
-            NEWS_DATA.sort((a, b) => b.date.localeCompare(a.date)).forEach(n => {
-                const card = document.createElement("article");
-                card.className = "card";
-                card.dataset.country = n.country;
-                card.dataset.date = n.date;
-                card.dataset.tags = n.tags.join(",");
-
-                card.innerHTML = `
-            <div class="thumb">
-                <img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop'">
-                <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
-                <span class="date-badge">${n.date}</span>
-                ${(n.img.includes('unsplash') || n.img.includes('generic') || n.title.includes('クラウン エステート')) ? '<div class="image-note">※イメージ画像</div>' : ''}
-            </div>
-            <div class="content">
-                <div class="title">${n.title}</div>
-                <p class="desc">${n.desc}</p>
-                <div class="card-tags">${n.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}</div>
-                <div class="actions">
-                    <a class="btn" href="${n.url}" target="_blank">記事を読む</a>
-                    <span class="source">${n.source}</span>
-                </div>
-            </div>`;
-                grid.appendChild(card);
-            });
-        }
 
         function renderInsights() {
             const container = document.getElementById("insightsContainer");
