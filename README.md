@@ -1,2 +1,0 @@
-# DailyNews
-Naiso Dayliy News

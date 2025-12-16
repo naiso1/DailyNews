@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <title>Toyota bZ7採用廣汽豐田開發的平台架構，華為和小米攜手提供科技技術？ - Yahoo奇摩汽車機車</title>
+<meta property="og:title" content="Toyota bZ7採用廣汽豐田開發的平台架構，華為和小米攜手提供科技技術？ - Yahoo奇摩汽車機車">
+
+<meta name="description" content="">
+<meta property="og:description" content="">
+
+<link rel="alternate" type="application/rss+xml" href="https://autos.yahoo.com.tw/rss/car-news" title="RSS Feed">
+
+<link rel="alternate" media="only screen and (max-width: 640px)" href="https://tw.yahoo.com/autos/toyota-bz7採用廣汽豐田開發的平台架構-華為和小米攜手提供科技技術-000000636.html">
+
+  <link rel="canonical" href="https://autos.yahoo.com.tw/toyota-bz7%E6%8E%A1%E7%94%A8%E5%BB%A3%E6%B1%BD%E8%B1%90%E7%94%B0%E9%96%8B%E7%99%BC%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%A7%8B-%E8%8F%AF%E7%82%BA%E5%92%8C%E5%B0%8F%E7%B1%B3%E6%94%9C%E6%89%8B%E6%8F%90%E4%BE%9B%E7%A7%91%E6%8A%80%E6%8A%80%E8%A1%93-000000636.html">
+
+  <meta property="og:url" content="http://autos.yahoo.com.tw/news/toyota-bz7%E6%8E%A1%E7%94%A8%E5%BB%A3%E6%B1%BD%E8%B1%90%E7%94%B0%E9%96%8B%E7%99%BC%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%A7%8B-%E8%8F%AF%E7%82%BA%E5%92%8C%E5%B0%8F%E7%B1%B3%E6%94%9C%E6%89%8B%E6%8F%90%E4%BE%9B%E7%A7%91%E6%8A%80%E6%8A%80%E8%A1%93-000000636.html">
+
+  <meta property="og:image" content="https://s.yimg.com/uu/api/res/1.2/y5K2nIjl9JFJnX71uFCHxQ--~B/aD00Nzg7dz04NTA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/cars_tvbs_com_tw_230/8719cfab036c891515a50cd0958f911f">
+
+  <link rel="amphtml" href="https://autos.yahoo.com.tw/amphtml/toyota-bz7採用廣汽豐田開發的平台架構-華為和小米攜手提供科技技術-000000636.html">
+
+<meta name="at-token" content="e1eba75272ae3ea4fa9e80459949feda4e63133a">
+    <link rel="stylesheet" href="/css/app.css?id=60ec63d7da45b83a123974ec049fdb61">
+    <link rel="icon" href="/favicon.ico?v=2" />
+
+            <script type="text/javascript" src="https://s.yimg.com/aaq/benji/benji-2.3.37.js" ></script>    
+    <script src="https://s.yimg.com/ss/analytics3.js"></script>
+    <meta name="oath:guce:consent-host" content="guce.yahoo.com.tw"/>
+
+<!-- Consent Manager Tag : Script -->
+<script type="text/javascript" src="https://consent.cmp.oath.com/cmp.js"></script>
+<script type="text/javascript" src="https://s.yimg.com/nb/AdLib/adlib-prod.umd.min.js"></script>
+
+<!-- Consent Manager Tag : Stubbed (updated 2018-04-27T17:00) -->
+<script type="text/javascript">
+    (function () {
+        var gdprAppliesGlobally = false;
+
+        function addFrame() {
+            if (!window.frames['__cmpLocator']) {
+                if (document.body && document.body.firstChild) {
+                    var body = document.body,
+                        iframe = document.createElement('iframe');
+
+                      iframe.style.display = 'none';
+                	  iframe.height = iframe.width = 0;
+
+                    iframe.name = '__cmpLocator';
+                    body.insertBefore(iframe, body.firstChild);
+                } else {
+                    setTimeout(addFrame, 5);
+                }
+            }
+        }
+
+        addFrame();
+
+        function stubCMP() {
+            var b = arguments;
+            __cmp.a = __cmp.a || [];
+
+            if (!b.length) return __cmp.a;
+            else if (b[0] === 'ping') {
+                b[2]({
+                    "gdprAppliesGlobally": gdprAppliesGlobally,
+                    "cmpLoaded": false
+                }, true);
+            }
+            else {
+                __cmp.a.push([].slice.apply(b));
+            }
+        }
+
+        function cmpMsgHandler(event) {
+            var msgIsString = typeof event.data === "string";
+            var json = event.data;
+            if (msgIsString) {
+                try {
+                    json = JSON.parse(event.data);
+                } catch (e) {}
+            }
+            if (json.__cmpCall) {
+                var i = json.__cmpCall;
+                window.__cmp(i.command, i.parameter, function (retValue, success) {
+                    var returnMsg = {
+                        "__cmpReturn": {
+                            "returnValue": retValue,
+                            "success": success,
+                            "callId": i.callId
+                        }
+                    };
+                    event.source.postMessage(msgIsString ?
+                        JSON.stringify(returnMsg) : returnMsg, '*');
+                });
+            }
+        }
+
+        if (typeof (__cmp) !== 'function') {
+            window.__cmp = stubCMP;
+            __cmp.msgHandler = cmpMsgHandler;
+            if (window.addEventListener)
+                window.addEventListener('message', cmpMsgHandler, false);
+            else window.attachEvent('onmessage', cmpMsgHandler);
+        }
+    })();
+
+</script>
+<!-- End Consent Manager Tag : Stubbed -->
+
+
+<script type="text/javascript">
+    window.__cmp('init');
+</script>
+
+
+
+</head>
+
+<body>
+    <span id="tracking-data" 
+             data-pt="content"        data-pct="story"        data-pstcat="yct:001000993"        data-pstaid="cf0c813a-91ce-3f9a-a3fb-b089953d98a0"        data-pcp="地球黃金線"     ></span>
+
+    <script src='https://s.yimg.com/ss/rapid3.js'></script>
+    <script src='https://s.yimg.com/ss/rapidworker-1.2.js'></script>
+    <script> 
+      var trackingData = document.getElementById('tracking-data');
+      if(trackingData) {
+        var _pt = trackingData.getAttribute('data-pt') === undefined ? 0 : trackingData.getAttribute('data-pt');
+        var _pct = trackingData.getAttribute('data-pct');
+        var _pstcat = trackingData.getAttribute('data-pstcat');
+        var _pstaid = trackingData.getAttribute('data-pstaid');
+        var _pcp = trackingData.getAttribute('data-pcp');
+      }
+
+
+    function rapids() {
+      var keys = { pt: _pt };
+      if (_pct) keys.pct = _pct;
+      if (_pstcat) keys.pstcat = _pstcat;
+      if (_pstaid) keys.pstaid = _pstaid;
+      if (_pcp) keys.pcp = _pcp;
+
+      var space_id = "794027424";
+      var conf = {spaceid:space_id,pageview_on_init:true,client_only:1,keys: keys}; 
+      var ins = new YAHOO.i13n.Rapid(conf);
+      ins.init(); 
+    };
+    rapids();
+    </script>
+
+    <script>
+      window.__adlib.fireComscoreBeacon({
+        c1: "2",
+        c2: "7241469",
+        c5: "794027424",
+        c7: "https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html"
+      });
+    </script> 
+    <noscript>  
+      <img src="https://sb.scorecardresearch.com/p?c1=2&c2=7241469&c7=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html&c5=794027424&cv=2.0&cj=1" />
+    </noscript>    <header>
+    <ul class="top-nav">
+        <a class="gabtn" href="https://tw.yahoo.com/" title="首頁" data-ga="['UH','UH_頻道入口','UH_首頁']"><li>首頁</li></a>
+        <a class="gabtn" href="https://tw.mail.yahoo.com/" title="信箱" data-ga="['UH','UH_頻道入口','UH_信箱']"><li>信箱</li></a>
+        <a class="gabtn" href="https://tw.news.yahoo.com/" title="新聞" data-ga="['UH','UH_頻道入口','UH_新聞']"><li>新聞</li></a>
+        <a class="gabtn" href="https://tw.stock.yahoo.com/" title="股市" data-ga="['UH','UH_頻道入口','UH_股市']"><li>股市</li></a>
+        <a class="gabtn" href="https://tw.news.yahoo.com/weather-forecast/" title="氣象" data-ga="['UH','UH_頻道入口','UH_氣象']"><li>氣象</li></a>
+        <a class="gabtn" href="https://tw.sports.yahoo.com/" title="運動" data-ga="['UH','UH_頻道入口','UH_運動']"><li>運動</li></a>
+        <a class="gabtn" href="https://tw.video.yahoo.com/" title="Yahoo TV" data-ga="['UH','UH_頻道入口','UH_Yahoo TV']"><li>Yahoo TV</li></a>
+        <a class="gabtn" href="https://tw.news.yahoo.com/entertainment" title="娛樂" data-ga="['UH','UH_頻道入口','UH_娛樂']"><li>娛樂</li></a>
+        <a class="gabtn" href="https://movies.yahoo.com.tw/" title="電影" data-ga="['UH','UH_頻道入口','UH_電影']"><li>電影</li></a>
+        <a class="gabtn" href="https://tw.buy.yahoo.com/" title="購物中心" data-ga="['UH','UH_頻道入口','UH_購物中心']"><li>購物中心</li></a>
+        <a class="gabtn" href="https://tw.bid.yahoo.com/" title="拍賣" data-ga="['UH','UH_頻道入口','UH_拍賣']"><li>拍賣</li></a>
+
+        <li title="更多" class="top-nav-more">
+            更多
+            <ul class="top-nav-hide">
+                <a class="gabtn" href="https://autos.yahoo.com.tw/" title="汽車機車" data-ga="['UH','UH_頻道入口','UH_汽車機車']"><li>汽車機車</li></a>
+                <a class="gabtn" href="https://tw.dictionary.yahoo.com" title="字典" data-ga="['UH','UH_頻道入口','UH_字典']"><li>字典</li></a>
+                <a class="gabtn" href="https://games.yahoo.com.tw/" title="遊戲" data-ga="['UH','UH_頻道入口','UH_遊戲']"><li>遊戲</li></a>
+                <a class="gabtn" href="https://travel.yahoo.com.tw/" title="旅遊" data-ga="['UH','UH_頻道入口','UH_旅遊']"><li>旅遊</li></a>
+                <a class="gabtn" href="https://tw.money.yahoo.com/" title="理財" data-ga="['UH','UH_頻道入口','UH_理財']"><li>理財</li></a>
+                <a class="gabtn" href="https://house.yahoo.com.tw/" title="房地產" data-ga="['UH','UH_頻道入口','UH_房地產']"><li>房地產</li></a>
+                <a class="gabtn" href="https://style.yahoo.com.tw/" title="時尚美妝" data-ga="['UH','UH_頻道入口','UH_時尚美妝']"><li>時尚美妝</li></a>
+                <a class="gabtn" href="https://tw.news.yahoo.com/technology" title="3C科技" data-ga="['UH','UH_頻道入口','UH_3C科技']"><li>3C科技</li></a>
+                <a class="gabtn" href="https://tw.discount.yahoo.net/index.php?group=all" title="折扣城" data-ga="['UH','UH_頻道入口','UH_折扣城']"><li>折扣城</li></a>
+            </ul>
+        </li>
+    </ul>
+    <div class="search-head">
+        <ul>
+            <a class="logo gabtn" href="https://autos.yahoo.com.tw" title="Yahoo! 奇摩汽車機車" data-ga="['UH','UH_Logo','N/A']">
+                <img src="/images/logo_pc.png?id=dd7164e04ae7d0c3de8158d6af89abc9" alt="Yahoo Logo" srcset="/images/logo_pc@2x.png?id=e081ab1877a7ddaeb4f79d6196e148d6 2x, /images/logo_pc@3x.png?id=90c1cf2d19854c464222e887658f8dff 3x" /> 
+            </a>
+
+            <li class="search-bar">
+                <ul>
+                    <li>
+                        <form method="get" action="https://tw.search.yahoo.com/search" target="_blank">
+                            <input type="text" name="p">
+                            <input type="hidden" name="fr" value="uh3_autos_web_gs">
+                            <button class="search-btn blue gabtn" data-ga="['UH','UH_網頁搜尋','N/A']">網頁搜尋</button>
+                        </form>
+                    </li>
+
+                                            <li>
+                            
+                            
+                        </li>
+                    
+                </ul>
+            </li>
+            
+            
+
+        </ul>
+    </div>
+
+    <div class="common-nav-holder">
+
+    <nav class="common-nav">
+        <ul>
+
+            
+                    <a class="gabtn" href="/" title="首頁"
+               target="_self" data-ga="['選單', '第一層_首頁', 'N/A']"
+            ><li>首頁</li></a>
+                    
+                    
+            <li class="relative">
+                                新車
+                <ul class="common-nav-lg">
+  <li>
+              <a class="gabtn" href="/new-cars/" title="找新車"
+        data-ga="['選單', '第二層_新車', '找新車']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/1-找汽車.png" alt="找新車">
+          <span>找新車</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/cars-compare/" title="車款比較"
+        data-ga="['選單', '第二層_新車', '車款比較']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/5-車款比較.png" alt="車款比較">
+          <span>車款比較</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/new-cars/research/" title="汽車資料庫"
+        data-ga="['選單', '第二層_新車', '汽車資料庫']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/4-汽車資料庫.png" alt="汽車資料庫">
+          <span>汽車資料庫</span>
+        </span>
+      </a>
+              <br>
+                <a class="gabtn" href="/popular-cars/" title="熱門新車排行"
+        data-ga="['選單', '第二層_新車', '熱門新車排行']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/2- 熱門車排行.png" alt="熱門新車排行">
+          <span>熱門新車排行</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/car-topics/" title="汽車特輯"
+        data-ga="['選單', '第二層_新車', '汽車特輯']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/3-汽車特輯.png" alt="汽車特輯">
+          <span>汽車特輯</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/latest-cars/" title="最新上架車款"
+        data-ga="['選單', '第二層_新車', '最新上架車款']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/October2019/car_20191023.png" alt="最新上架車款">
+          <span>最新上架車款</span>
+        </span>
+      </a>
+              <br>
+            </li>
+      <li>
+      <ul>
+                          <li><a class="gabtn" href="/car-news/" title="汽車新聞"
+            data-ga="['選單', '第二層_新車', '汽車新聞']" target="_self"
+          >汽車新聞</a></li>
+                            <li><a class="gabtn" href="/car-news/新車試駕#index-news" title="新車試駕"
+            data-ga="['選單', '第二層_新車', '新車試駕']" target="_self"
+          >新車試駕</a></li>
+                            <li><a class="gabtn" href="/car-news/明星愛車#index-news" title="明星愛車"
+            data-ga="['選單', '第二層_新車', '明星愛車']" target="_self"
+          >明星愛車</a></li>
+                      <br>
+                            <li><a class="gabtn" href="/photos/" title="新車圖輯"
+            data-ga="['選單', '第二層_新車', '新車圖輯']" target="_self"
+          >新車圖輯</a></li>
+                            <li><a class="gabtn" href="/car-news/優惠快訊#index-news" title="優惠快訊"
+            data-ga="['選單', '第二層_新車', '優惠快訊']" target="_self"
+          >優惠快訊</a></li>
+                            <li><a class="gabtn" href="/car-news/售後市場#index-news" title="售後市場"
+            data-ga="['選單', '第二層_新車', '售後市場']" target="_self"
+          >售後市場</a></li>
+                      <br>
+                            <li><a class="gabtn" href="/car-news/特別企劃#index-news" title="特別企劃"
+            data-ga="['選單', '第二層_新車', '特別企劃']" target="_self"
+          >特別企劃</a></li>
+                            <li><a class="gabtn" href="/car-news/銷售排行#index-news" title="銷售排行"
+            data-ga="['選單', '第二層_新車', '銷售排行']" target="_self"
+          >銷售排行</a></li>
+                            <li><a class="gabtn" href="/car-news/賽車報導#index-news" title="賽車報導"
+            data-ga="['選單', '第二層_新車', '賽車報導']" target="_self"
+          >賽車報導</a></li>
+                      <br>
+                            <li><a class="gabtn" href="https://autos.yahoo.com.tw/video/%E7%89%B9%E5%88%A5%E4%BC%81%E7%95%AB-%E5%85%A8%E6%96%B0%E7%A6%8F%E7%89%B9%E6%97%85%E8%A1%8C%E5%AE%B6-bus-titanium-pro-094803750.html" title="｜八人大空間｜"
+            data-ga="['選單', '第二層_新車', '｜八人大空間｜']" target="_self"
+          >｜八人大空間｜</a></li>
+                        </ul>
+    </li>
+  </ul>
+
+            </li>
+                    
+                    
+            <li class="relative">
+                                機車
+                <ul class="common-nav-lg">
+  <li>
+              <a class="gabtn" href="/new-bikes/" title="找機車"
+        data-ga="['選單', '第二層_機車', '找機車']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/1-找機車.png" alt="找機車">
+          <span>找機車</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/bikes-compare/" title="車款比較"
+        data-ga="['選單', '第二層_機車', '車款比較']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/5-車款比較1.png" alt="車款比較">
+          <span>車款比較</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/new-bikes/research/" title="機車資料庫"
+        data-ga="['選單', '第二層_機車', '機車資料庫']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/4-機車資料庫.png" alt="機車資料庫">
+          <span>機車資料庫</span>
+        </span>
+      </a>
+              <br>
+                <a class="gabtn" href="/popular-bikes/" title="熱門機車排行"
+        data-ga="['選單', '第二層_機車', '熱門機車排行']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/2-熱門車排行.png" alt="熱門機車排行">
+          <span>熱門機車排行</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/bike-topics/" title="機車特輯"
+        data-ga="['選單', '第二層_機車', '機車特輯']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/3-機車特輯.png" alt="機車特輯">
+          <span>機車特輯</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/latest-bikes/" title="最新上架車款"
+        data-ga="['選單', '第二層_機車', '最新上架車款']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/October2019/bike_20191023.png" alt="最新上架車款">
+          <span>最新上架車款</span>
+        </span>
+      </a>
+              <br>
+            </li>
+      <li>
+      <ul>
+                          <li><a class="gabtn" href="/bike-news/" title="機車新聞"
+            data-ga="['選單', '第二層_機車', '機車新聞']" target="_self"
+          >機車新聞</a></li>
+                            <li><a class="gabtn" href="/bike-news/機車評測#index-news" title="機車評測"
+            data-ga="['選單', '第二層_機車', '機車評測']" target="_self"
+          >機車評測</a></li>
+                            <li><a class="gabtn" href="/bike-news/優惠快訊#index-news" title="優惠快訊"
+            data-ga="['選單', '第二層_機車', '優惠快訊']" target="_self"
+          >優惠快訊</a></li>
+                      <br>
+                            <li><a class="gabtn" href="/bike-news/售後市場#index-news" title="售後市場"
+            data-ga="['選單', '第二層_機車', '售後市場']" target="_self"
+          >售後市場</a></li>
+                            <li><a class="gabtn" href="/bike-news/特別企劃#index-news" title="特別企劃"
+            data-ga="['選單', '第二層_機車', '特別企劃']" target="_self"
+          >特別企劃</a></li>
+                        </ul>
+    </li>
+  </ul>
+
+            </li>
+                    
+                    
+            <li class="relative">
+                                中古車
+                <ul class="common-nav-lg">
+  <li>
+              <a class="gabtn" href="/used-cars/" title="找中古車"
+        data-ga="['選單', '第二層_中古車', '找中古車']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/1-找中古車.png" alt="找中古車">
+          <span>找中古車</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/used-cars-news/主題車款推薦" title="主題車款"
+        data-ga="['選單', '第二層_中古車', '主題車款']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/4-主題車款.png" alt="主題車款">
+          <span>主題車款</span>
+        </span>
+      </a>
+                <a class="gabtn" href="/used-cars-news/本季行情分析" title="行情分析"
+        data-ga="['選單', '第二層_中古車', '行情分析']" target="_self"
+      >
+        <span class="wrapper">
+          <img src="https://autos.yahoo.com.tw//p/r/w28/menu_items/November2017/2-行情分析.png" alt="行情分析">
+          <span>行情分析</span>
+        </span>
+      </a>
+              <br>
+            </li>
+      <li>
+      <ul>
+                          <li><a class="gabtn" href="/used-cars-brand/abc好車網/" title="abc好車網"
+            data-ga="['選單', '第二層_中古車', 'abc好車網']" target="_self"
+          >abc好車網</a></li>
+                        </ul>
+    </li>
+  </ul>
+
+            </li>
+                    
+                    <a class="gabtn" href="/videos/" title="影音"
+               target="_self" data-ga="['選單', '第一層_影音', 'N/A']"
+            ><li>影音</li></a>
+                    
+                    <a class="gabtn" href="https://autos.yahoo.com.tw/car-topics/EV-and-Hybrid" title="電動車"
+               target="_blank" data-ga="['選單', '第一層_電動車', 'N/A']"
+            ><li>電動車</li></a>
+                    
+                    <a class="gabtn" href="https://yahoo.ebo.tmnewa.com.tw/tmnewa/portal/index?hashcal=1&amp;car_make_id=74&amp;utm_source=yahoo&amp;utm_medium=yahoo-referral-autos&amp;utm_campaign=yahoo-referral-autos-car&amp;utm_content=2Ed#calc-tool" title="車險試算"
+               target="_blank" data-ga="['選單', '第一層_車險試算', 'N/A']"
+            ><li>車險試算</li></a>
+                    
+                    <a class="gabtn" href="https://autos.yahoo.com.tw/2025toyota-live" title="TOYOTA直播特企"
+               target="_self" data-ga="['選單', '第一層_TOYOTA直播特企', 'N/A']"
+            ><li>TOYOTA直播特企</li></a>
+                        <li class="subscribe">
+                <ul>
+                                                                    <li>
+                                <a href="https://www.facebook.com/YahooAutosTaiwan/" title="" target="_blank"
+                                   class="gabtn" data-ga="['選單', 'Follow', 'Follow_fb']">
+                                    <img src="https://autos.yahoo.com.tw//p/r/w25/mod-wordings/May2018/8DcCWdsBGv1RDMi9DC76.png"
+                                      alt="">
+                                </a>
+                            </li>
+                                                                        <li>
+                                <a href="https://www.instagram.com/yahootwautos/" title="" target="_blank"
+                                   class="gabtn" data-ga="['選單', 'Follow', 'Follow_ig']">
+                                    <img src="https://autos.yahoo.com.tw//p/r/w25/mod-wordings/May2018/OvrWkp4EgGqYd4W9vFM4.png"
+                                      alt="">
+                                </a>
+                            </li>
+                                                                        <li><a href="https://www.youtube.com/channel/UCklmBc-HxgA7j62DE8PWLQA" title="" target="_blank"
+                                   class="gabtn" data-ga="['選單', 'Follow', 'Follow_youtube']">
+                                <img src="https://autos.yahoo.com.tw//p/r/w25/mod-wordings/May2018/YhtZ2B8OHnP9De4knKGs.png" alt=""></a>
+                            </li>
+                                        </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+</header>
+<!-- /header -->
+
+    <div class="body-wrapper">
+                
+          <div class="ad-LDRB-728x90">
+	<div id="boxLDRB" class="yom-ad ad-N force-responsive">
+   <div id="tgtLDRB" class="adpos">
+      <div class="ad-placeholder h-250">廣告</div>
+   </div>
+
+</div> <!-- ad N. --> 
+</div>
+        <div class="main">
+
+            
+  
+  <div class="bread">
+    <span>
+        <a class="gabtn" href="https://autos.yahoo.com.tw" title="回首頁" data-ga="['麵包屑1_首頁', 'N/A', 'N/A']">首頁</a>
+                      <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <a class="gabtn" href="https://autos.yahoo.com.tw/car-news" title="車訊情報"
+                data-ga="['麵包屑1_首頁', '麵包屑2_車訊情報', 'N/A']"
+              >車訊情報</a>
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <a class="disabled">Toyota bZ7採用廣汽豐田開發的平台架構，華為和小米攜手提供科技技術？</a>
+                      </span>
+</div>
+
+  <div class="usedcars-news">
+    <h1 class="title">Toyota bZ7採用廣汽豐田開發的平台架構，華為和小米攜手提供科技技術？</h1>
+    <h3 class="info">
+      <div class="info-list">
+                <div class="brand">
+          <a 
+            class="gabtn" 
+            href="https://cars.tvbs.com.tw/" 
+            target="_blank" 
+            rel="noopener"
+            data-ga="['單文頁_一般', '單文頁_一般_ProviderLogo', 'N/A']"
+          >
+            <img src="https://s.yimg.com/os/creatr-uploaded-images/2025-06/345a5b80-4a63-11f0-95f9-5f644addfcfc" alt="地球黃金線">
+          </a>
+        </div>
+                <div class="detail">
+          <span>地球黃金線</span>
+          <span> 2025-10-08 08:00:00</span>
+        </div>
+      </div>
+      <div class="share">
+        <div class="share-button">
+
+    
+    <ul>
+        <li>
+            <a 
+                class="gabtn" 
+                href="https://timeline.line.me/social-plugin/share?url=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html" 
+                title="透過 Line 分享" 
+                target="_blank" 
+                rel="noopener"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_Line&#039;]"
+            >
+                <svg width="80px" height="80px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: sketchtool 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+                    <title>透過 Line 分享</title>
+                    <desc>Created with sketchtool.</desc>
+                    <defs></defs>
+                    <g id="Mobile_spec-android" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="line_share_icon" transform="translate(-68.000000, -12.000000)" fill="#00C300">
+                            <g id="Group-Copy" transform="translate(68.000000, 12.000000)">
+                                <g id="share_line" transform="translate(0.000000, 1.000000)">
+                                    <path d="M23.9391198,9.74981993 C23.9391198,4.37987446 18.5699889,0 11.9697528,0 C5.37028851,0 0,4.36381821 0,9.73376368 C0,14.5479307 4.25860889,18.5786301 10.0105188,19.3406249 C10.4002433,19.4245817 10.930616,19.5981053 11.0650902,19.9318045 C11.1860592,20.2343584 11.1443857,20.7088884 11.1038698,21.0151178 C11.1038698,21.0151178 10.9636075,21.8622301 10.9331241,22.0432982 C10.8810322,22.3462391 10.6923438,23.2504188 11.9697528,22.7108901 C13.2473548,22.1713613 18.8628611,18.6651017 21.3738833,15.7633696 L21.3731116,15.7633696 C23.1085434,13.8288815 23.9391198,11.8994231 23.9391198,9.74981993 L23.9391198,9.74981993 Z M7.28418332,13.0550863 L4.90589892,13.0550863 C4.56035601,13.0550863 4.24317425,12.6414927 4.24317425,12.2936718 L4.24317425,7.52477174 C4.24317425,7.17830492 4.47623725,6.89528932 4.82178015,6.89528932 C5.16809479,6.89528932 5.40077192,7.17830492 5.40077192,7.52477174 L5.40077192,11.7009446 L7.28418332,11.7009446 C7.63069089,11.7009446 7.91160126,12.0309683 7.91160126,12.3776285 C7.91160126,12.7254495 7.63069089,13.0550863 7.28418332,13.0550863 L7.28418332,13.0550863 Z M9.6452967,12.2936718 C9.6452967,12.6414927 9.41242664,12.9235411 9.06649787,12.9235411 C8.7205691,12.9235411 8.48769903,12.6414927 8.48769903,12.2936718 L8.48769903,7.52477174 C8.48769903,7.17830492 8.7205691,6.89528932 9.06649787,6.89528932 C9.41242664,6.89528932 9.6452967,7.17830492 9.6452967,7.52477174 L9.6452967,12.2936718 L9.6452967,12.2936718 Z M15.433285,12.2936718 C15.433285,12.5656608 15.2791316,12.8055373 15.0221449,12.8912351 C14.9577053,12.9129014 14.8990537,12.9235411 14.831913,12.9235411 C14.6358932,12.9235411 14.386045,12.8297184 14.2679701,12.6714773 L11.7675591,9.34396433 L11.7675591,12.2936718 C11.7675591,12.6414927 11.5352678,12.9235411 11.1889532,12.9235411 C10.8428315,12.9235411 10.6099614,12.6414927 10.6099614,12.2936718 L10.6099614,7.52477174 C10.6099614,7.25374996 10.800965,7.01406688 11.0575659,6.92778872 C11.1220055,6.9063159 11.1984069,6.89528932 11.2657405,6.89528932 C11.4615674,6.89528932 11.5885173,6.98930544 11.7060135,7.14754656 L14.0827544,10.4762202 L14.0827544,7.52477174 C14.0827544,7.17830492 14.412091,6.89528932 14.7580197,6.89528932 C15.1043344,6.89528932 15.433285,7.17830492 15.433285,7.52477174 L15.433285,12.2936718 L15.433285,12.2936718 Z M19.317604,9.37955891 C19.6639186,9.37955891 19.9452149,9.61247127 19.9452149,9.96009878 C19.9452149,10.3065656 19.6639186,10.5402518 19.317604,10.5402518 L17.5555474,10.5402518 L17.5555474,11.7009446 L19.317604,11.7009446 C19.662954,11.7009446 19.9452149,12.0309683 19.9452149,12.3776285 C19.9452149,12.7254495 19.662954,13.0550863 19.317604,13.0550863 L16.9391267,13.0550863 C16.5935838,13.0550863 16.2050168,12.6414927 16.2050168,12.2936718 L16.2050168,9.91154313 L16.2050168,9.90999554 L16.2050168,9.90844795 L16.2050168,7.52477174 C16.2050168,7.17830492 16.5931979,7.05817321 16.9391267,7.05817321 L19.317604,7.05817321 C19.6639186,7.05817321 19.9452149,7.29185937 19.9452149,7.63832619 C19.9452149,7.98576025 19.6639186,8.21886606 19.317604,8.21886606 L17.5555474,8.21886606 L17.5555474,9.37955891 L19.317604,9.37955891 L19.317604,9.37955891 Z" id="Share-Line" class="share-line"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a 
+                class="gabtn" 
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html" 
+                title="透過 FB 分享" 
+                target="_blank" 
+                rel="noopener"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_FB&#039;]"
+            >
+                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+                    <title>透過 Facebook 分享</title>
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="FUJICONS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="facebook" fill="#000000">
+                            <path d="M13.3426585,23 L13.3426585,12.9648254 L16.6779845,12.9648254 L17.1773268,9.05386965 L13.3426585,9.05386965 L13.3426585,6.55689722 C13.3426585,5.42458426 13.6539543,4.65297638 15.2617712,4.65297638 L17.3124011,4.65200544 L17.3124011,1.15408855 C16.9576508,1.10651238 15.7404438,1 14.3243267,1 C11.3677857,1 9.34378609,2.82255587 9.34378609,6.16968541 L9.34378609,9.05386965 L6,9.05386965 L6,12.9648254 L9.34378609,12.9648254 L9.34378609,23 L13.3426585,23 Z" id="Fill-1" class="share-fb"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a 
+                class="gabtn" 
+                href="mailto:?subject=Toyota bZ7採用廣汽豐田開發的平台架構，華為和小米攜手提供科技技術？&body=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html" 
+                title="透過 Mail 分享" 
+                target="_blank" 
+                rel="noopener"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_Mail&#039;]"
+            >
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M14.66 2.667h-13.327c-0.368 0-0.666 0.298-0.666 0.667v1.239l7.329 3.361 7.33-3.361v-1.239c0-0.369-0.298-0.667-0.666-0.667v0zM7.996 9.333l-7.329-3.295v6.628c0 0.369 0.298 0.667 0.667 0.667h13.327c0.367 0 0.666-0.298 0.666-0.667v-6.628l-7.33 3.295z" class="share-mail"></path>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <button title="複製網頁連結" class="copy gabtn" data-clipboard data-clipboard-text="https://autos.yahoo.com.tw/news/toyota-bz7%E6%8E%A1%E7%94%A8%E5%BB%A3%E6%B1%BD%E8%B1%90%E7%94%B0%E9%96%8B%E7%99%BC%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%A7%8B-%E8%8F%AF%E7%82%BA%E5%92%8C%E5%B0%8F%E7%B1%B3%E6%94%9C%E6%89%8B%E6%8F%90%E4%BE%9B%E7%A7%91%E6%8A%80%E6%8A%80%E8%A1%93-000000636.html"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_Copy&#039;]"
+            >
+            <svg width="16" height="16" fill="#b3b3b3" viewBox="0 0 24 24"><path d="M7.371 8.785a5.001 5.001 0 0 1 7.071 0 1 1 0 1 1-1.414 1.415 3 3 0 0 0-4.243 0l-4.83 4.83c-1.148 1.148-1.318 3.038-.23 4.245a3 3 0 0 0 4.353.117l1.414-1.414a.999.999 0 1 1 1.414 1.414l-1.414 1.414a5 5 0 0 1-7.4-.364c-1.665-2.012-1.367-5.012.48-6.859Zm6.212-6.212C15.43.727 18.43.428 20.443 2.091a5 5 0 0 1 .363 7.401l-4.95 4.95a5 5 0 0 1-7.07 0 1 1 0 0 1 1.413-1.414 3 3 0 0 0 4.243 0l4.95-4.95a3 3 0 0 0-.117-4.353c-1.207-1.088-3.097-.918-4.246.23L13.735 5.25a1 1 0 0 1-1.414 0l-.083-.094a.999.999 0 0 1 .083-1.32Z"></path></svg>
+
+            </button>
+        </li>
+
+        <div class="iscopy-modal">
+            <span class="modal-icon">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M10.388 8.279v-3.333l3.333 3.333h-3.333zM15.138 7.805l-4.277-4.277c-0.125-0.125-0.294-0.195-0.471-0.195h-4.391c-0.367 0-0.667 0.3-0.667 0.667v10.667c0 0.367 0.3 0.667 0.667 0.667h8.667c0.367 0 0.667-0.299 0.667-0.667v-6.39c0-0.177-0.070-0.347-0.195-0.471v0zM6.195 0.862c-0.125-0.125-0.295-0.195-0.471-0.195h-4.391c-0.367 0-0.667 0.3-0.667 0.667v10.667c0 0.367 0.3 0.667 0.667 0.667h2c0.368 0 0.667-0.299 0.667-0.667v-9.333c0-0.367 0.3-0.667 0.667-0.667h1.057c0.594 0 0.891-0.718 0.471-1.138z" class="share-url"></path>
+                </svg>
+            </span>
+            <span class="modal-text">網址已複製</span>
+            <a href="#" id="modal-close" class="modal-close">×</a>
+        </div>
+
+                <li>
+            <form method="post" action="https://autos.yahoo.com.tw/ajax/font_scale">
+                <input type="hidden" name="_token" value="ZQEHNpL1arljg4d9kKCdxRjSUXpcQqxcHTwQe7VF">
+                <input type="hidden" name="font_class" class="input-font" value="">
+                <a class="gabtn font-scaling" href="#" title="放大字級">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6069 16.5469L16.9929 4.97187C16.8259 4.62787 16.4779 4.40887 16.0949 4.40887H16.0939C15.7109 4.40887 15.3619 4.62687 15.1949 4.97087L10.4709 14.6719L7.1369 7.62487C6.9709 7.27487 6.6189 7.05187 6.2329 7.05187H6.2309C5.8439 7.05287 5.4909 7.27687 5.3269 7.62787L1.0949 16.5789C0.860901 17.0799 1.0749 17.6739 1.5749 17.9089C2.0929 18.1509 2.6929 17.8829 2.9049 17.4279L3.6319 15.8959H8.8359L9.5529 17.4109C9.9039 18.1669 11.0049 18.1589 11.3569 17.4209L12.8249 14.4039H19.3449L20.8079 17.4199C21.1179 18.0589 21.8499 18.0249 22.1439 17.8829C22.6409 17.6419 22.8479 17.0439 22.6069 16.5469ZM13.7999 12.4039L16.0919 7.69687L18.3749 12.4039H13.7999ZM6.2369 10.3999L4.5789 13.8959H7.8899L6.2369 10.3999Z" fill="#232A31"/>
+                        </svg>
+                </a>
+            </form>
+        </li>
+            </ul>
+</div>
+      </div>
+    </h3>
+
+    <div class="content news-content-20 jq-add-blank">
+      <p>在2025年Toyota中國技術日活動上，Toyota宣布未來在中國市場的重要發展計畫，其中最引人注目的便是即將推出的全新純電動旗艦房車bZ7（鉑智7）。該車款將使用由廣汽豐田專門開發的全新能源車平台架構，並與中國科技巨頭華為和小米展開合作，提升電動車的性能與智能化表現。</p>
+<figure><img src="https://media.zenfs.com/en/cars_tvbs_com_tw_230/2a33381e60c960aa402097f5991126ae" data-uuid="77cb9b23-ca2e-33c6-b3bd-e3d9158aaf25"/><figcaption>廣汽豐田在上海車展第5款電動車作品bZ7，也就是鉑智7。(圖片來源 / Toyota)</figcaption></figure>
+<p>Toyota與廣汽豐田正在中國市場共同研發兩個全新平台，專為新能源車設計，可支援純電動、增程式電動以及插電式混合動力系統。兩個平台各自針對不同車型尺寸，其中較小的平台適用於5米以下的中小型車輛，另一平台則適用於較大型、最長5.3米的車輛。</p>
+<p>首款採用較大平台的純電動房車bZ7將在2026年第一季正式於中國上市。定位為Toyota在中國市場的純電旗艦，這款車型有望以較具競爭力的價格，與Tesla Model S等同級距車款抗衡。</p>
+<figure><img src="https://media.zenfs.com/en/cars_tvbs_com_tw_230/8b067ce5d3c83123b633c3754486787e" data-uuid="9a567161-74e8-34f1-ba3a-539272246350"/><figcaption>首款採用較大平台的純電動房車bZ7將在2026年第一季正式於中國上市。(圖片來源 / Toyota)</figcaption></figure>
+<ul class="wp-block-list">
+<li><p><strong>更多新聞：</strong><a data-i13n="cpos:1;pos:1" href="https://cars.tvbs.com.tw/car-news/278833"><strong>Toyota bZ7尺碼與動力規格流出，豐田首款大型純電房車即將登場</strong></a></p></li>
+<li><p><strong>更多新聞：</strong><a data-i13n="cpos:2;pos:1" href="https://cars.tvbs.com.tw/video/liveview/250864"><strong>Toyota上海車展秀bZ家族！現場直擊bZ7再加碼bZ5越野版與bZ3X露營套件</strong></a></p></li>
+</ul>
+<p>值得注意的是，bZ7將成為Toyota第一款採用華為DriveONE動力單元的純電動車型，這套系統將電動馬達、MCU控制器及逆變器整合為單一模組。此外，內裝將搭載華為鴻蒙智能座艙系統，提供更全面的應用程式與連網功能，並配備LiDAR雷射感測器，進一步強化自動駕駛的能力。</p>
+<p>另一方面，Toyota也將與小米合作開發車內科技，包括音響系統與智能座艙內的前後座互動系統，透過內建的螢幕與攝影機，提供更直覺與便利的通訊方式。</p>
+<figure><img src="https://media.zenfs.com/en/cars_tvbs_com_tw_230/cf85af8ad6faffd63c2842be10df8495" data-uuid="15ea8bbf-5b39-3c64-869b-c3c2cc453ab0"/><figcaption>Toyota也將與小米合作開發車內科技。(圖片來源 / Toyota)</figcaption></figure>
+<p>未來，廣汽豐田更計畫推出AI智能電子架構，支援下一代先進駕駛輔助系統（ADAS）及智能座艙。根據中國媒體報導，廣汽豐田預期在2026至2027年間，車內語音助理將升級為如同「貼心管家」般存在，而到了2028年，這項技術甚至將能夠直覺地感知並回應駕駛與乘客的需求。</p>
+<figure><img src="https://media.zenfs.com/en/cars_tvbs_com_tw_230/2767c803e79ce13ea116da842244a681" data-uuid="f99eacb2-f886-3193-8989-3742ba52ec36"/><figcaption>廣汽豐田更計畫推出AI智能電子架構，支援下一代先進駕駛輔助系統（ADAS）及智能座艙。(圖片來源 / Toyota)</figcaption></figure>
+<p>除了車內應用外，廣汽豐田也計畫將AI技術擴展至研發、生產、品管及物流等各個環節。然而，目前仍不清楚這些在中國市場推出的創新科技，是否會應用到Toyota全球其他市場的產品上。</p>
+<p><strong>延伸閱讀：</strong></p>
+<ul class="wp-block-list">
+<li><p><a data-i13n="cpos:3;pos:1" href="https://cars.tvbs.com.tw/car-news/249471"><strong>廣汽豐田bZ7上海車展發表，車長超過5米成中國bZ電動車系新成員</strong></a></p></li>
+<li><p><a data-i13n="cpos:4;pos:1" href="https://cars.tvbs.com.tw/car-news/225742"><strong>Toyota Camry變電動轎跑就是bZ7 Concept？廣汽豐田展出謎樣概念車</strong></a></p></li>
+<li><p><a data-i13n="cpos:5;pos:1" href="https://cars.tvbs.com.tw/car-news/280231"><strong>美國Toyota召回逾68萬輛車，涵蓋Lexus部分車型以及Subaru電動車</strong></a></p></li>
+<li><p><a data-i13n="cpos:6;pos:1" href="https://cars.tvbs.com.tw/car-news/278616"><strong>Toyota不只為6代RAV4搭2.0汽油與2.0油電！調整產線佈局還推RAV4 EV</strong></a></p></li>
+</ul>
+<p><strong>[更多詳細資訊]</strong></p>
+<p>🚘 看更多👉<a data-i13n="cpos:7;pos:1" href="https://autos.yahoo.com.tw/latest-cars">最新上架汽車車款</a></p>
+<p>🏍️ 看更多👉<a data-i13n="cpos:8;pos:1" href="https://autos.yahoo.com.tw/latest-bikes">最新上架機車車款</a></p>
+<p>🚙 看更多👉<a data-i13n="cpos:9;pos:1" href="https://autos.yahoo.com.tw/popular-cars/">熱門新車排行</a></p>
+<p>🔌 看更多👉<a data-i13n="cpos:10;pos:1" href="https://autos.yahoo.com.tw/car-topics/EV-and-Hybrid">電動車與油電車</a></p>
+
+      <div class="share-button">
+
+    
+    <ul>
+        <li>
+            <a 
+                class="gabtn" 
+                href="https://timeline.line.me/social-plugin/share?url=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html" 
+                title="透過 Line 分享" 
+                target="_blank" 
+                rel="noopener"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_Line&#039;]"
+            >
+                <svg width="80px" height="80px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: sketchtool 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+                    <title>透過 Line 分享</title>
+                    <desc>Created with sketchtool.</desc>
+                    <defs></defs>
+                    <g id="Mobile_spec-android" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="line_share_icon" transform="translate(-68.000000, -12.000000)" fill="#00C300">
+                            <g id="Group-Copy" transform="translate(68.000000, 12.000000)">
+                                <g id="share_line" transform="translate(0.000000, 1.000000)">
+                                    <path d="M23.9391198,9.74981993 C23.9391198,4.37987446 18.5699889,0 11.9697528,0 C5.37028851,0 0,4.36381821 0,9.73376368 C0,14.5479307 4.25860889,18.5786301 10.0105188,19.3406249 C10.4002433,19.4245817 10.930616,19.5981053 11.0650902,19.9318045 C11.1860592,20.2343584 11.1443857,20.7088884 11.1038698,21.0151178 C11.1038698,21.0151178 10.9636075,21.8622301 10.9331241,22.0432982 C10.8810322,22.3462391 10.6923438,23.2504188 11.9697528,22.7108901 C13.2473548,22.1713613 18.8628611,18.6651017 21.3738833,15.7633696 L21.3731116,15.7633696 C23.1085434,13.8288815 23.9391198,11.8994231 23.9391198,9.74981993 L23.9391198,9.74981993 Z M7.28418332,13.0550863 L4.90589892,13.0550863 C4.56035601,13.0550863 4.24317425,12.6414927 4.24317425,12.2936718 L4.24317425,7.52477174 C4.24317425,7.17830492 4.47623725,6.89528932 4.82178015,6.89528932 C5.16809479,6.89528932 5.40077192,7.17830492 5.40077192,7.52477174 L5.40077192,11.7009446 L7.28418332,11.7009446 C7.63069089,11.7009446 7.91160126,12.0309683 7.91160126,12.3776285 C7.91160126,12.7254495 7.63069089,13.0550863 7.28418332,13.0550863 L7.28418332,13.0550863 Z M9.6452967,12.2936718 C9.6452967,12.6414927 9.41242664,12.9235411 9.06649787,12.9235411 C8.7205691,12.9235411 8.48769903,12.6414927 8.48769903,12.2936718 L8.48769903,7.52477174 C8.48769903,7.17830492 8.7205691,6.89528932 9.06649787,6.89528932 C9.41242664,6.89528932 9.6452967,7.17830492 9.6452967,7.52477174 L9.6452967,12.2936718 L9.6452967,12.2936718 Z M15.433285,12.2936718 C15.433285,12.5656608 15.2791316,12.8055373 15.0221449,12.8912351 C14.9577053,12.9129014 14.8990537,12.9235411 14.831913,12.9235411 C14.6358932,12.9235411 14.386045,12.8297184 14.2679701,12.6714773 L11.7675591,9.34396433 L11.7675591,12.2936718 C11.7675591,12.6414927 11.5352678,12.9235411 11.1889532,12.9235411 C10.8428315,12.9235411 10.6099614,12.6414927 10.6099614,12.2936718 L10.6099614,7.52477174 C10.6099614,7.25374996 10.800965,7.01406688 11.0575659,6.92778872 C11.1220055,6.9063159 11.1984069,6.89528932 11.2657405,6.89528932 C11.4615674,6.89528932 11.5885173,6.98930544 11.7060135,7.14754656 L14.0827544,10.4762202 L14.0827544,7.52477174 C14.0827544,7.17830492 14.412091,6.89528932 14.7580197,6.89528932 C15.1043344,6.89528932 15.433285,7.17830492 15.433285,7.52477174 L15.433285,12.2936718 L15.433285,12.2936718 Z M19.317604,9.37955891 C19.6639186,9.37955891 19.9452149,9.61247127 19.9452149,9.96009878 C19.9452149,10.3065656 19.6639186,10.5402518 19.317604,10.5402518 L17.5555474,10.5402518 L17.5555474,11.7009446 L19.317604,11.7009446 C19.662954,11.7009446 19.9452149,12.0309683 19.9452149,12.3776285 C19.9452149,12.7254495 19.662954,13.0550863 19.317604,13.0550863 L16.9391267,13.0550863 C16.5935838,13.0550863 16.2050168,12.6414927 16.2050168,12.2936718 L16.2050168,9.91154313 L16.2050168,9.90999554 L16.2050168,9.90844795 L16.2050168,7.52477174 C16.2050168,7.17830492 16.5931979,7.05817321 16.9391267,7.05817321 L19.317604,7.05817321 C19.6639186,7.05817321 19.9452149,7.29185937 19.9452149,7.63832619 C19.9452149,7.98576025 19.6639186,8.21886606 19.317604,8.21886606 L17.5555474,8.21886606 L17.5555474,9.37955891 L19.317604,9.37955891 L19.317604,9.37955891 Z" id="Share-Line" class="share-line"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a 
+                class="gabtn" 
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html" 
+                title="透過 FB 分享" 
+                target="_blank" 
+                rel="noopener"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_FB&#039;]"
+            >
+                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+                    <title>透過 Facebook 分享</title>
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="FUJICONS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="facebook" fill="#000000">
+                            <path d="M13.3426585,23 L13.3426585,12.9648254 L16.6779845,12.9648254 L17.1773268,9.05386965 L13.3426585,9.05386965 L13.3426585,6.55689722 C13.3426585,5.42458426 13.6539543,4.65297638 15.2617712,4.65297638 L17.3124011,4.65200544 L17.3124011,1.15408855 C16.9576508,1.10651238 15.7404438,1 14.3243267,1 C11.3677857,1 9.34378609,2.82255587 9.34378609,6.16968541 L9.34378609,9.05386965 L6,9.05386965 L6,12.9648254 L9.34378609,12.9648254 L9.34378609,23 L13.3426585,23 Z" id="Fill-1" class="share-fb"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a 
+                class="gabtn" 
+                href="mailto:?subject=Toyota bZ7採用廣汽豐田開發的平台架構，華為和小米攜手提供科技技術？&body=https%3A%2F%2Fautos.yahoo.com.tw%2Fnews%2Ftoyota-bz7%25E6%258E%25A1%25E7%2594%25A8%25E5%25BB%25A3%25E6%25B1%25BD%25E8%25B1%2590%25E7%2594%25B0%25E9%2596%258B%25E7%2599%25BC%25E7%259A%2584%25E5%25B9%25B3%25E5%258F%25B0%25E6%259E%25B6%25E6%25A7%258B-%25E8%258F%25AF%25E7%2582%25BA%25E5%2592%258C%25E5%25B0%258F%25E7%25B1%25B3%25E6%2594%259C%25E6%2589%258B%25E6%258F%2590%25E4%25BE%259B%25E7%25A7%2591%25E6%258A%2580%25E6%258A%2580%25E8%25A1%2593-000000636.html" 
+                title="透過 Mail 分享" 
+                target="_blank" 
+                rel="noopener"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_Mail&#039;]"
+            >
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M14.66 2.667h-13.327c-0.368 0-0.666 0.298-0.666 0.667v1.239l7.329 3.361 7.33-3.361v-1.239c0-0.369-0.298-0.667-0.666-0.667v0zM7.996 9.333l-7.329-3.295v6.628c0 0.369 0.298 0.667 0.667 0.667h13.327c0.367 0 0.666-0.298 0.666-0.667v-6.628l-7.33 3.295z" class="share-mail"></path>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <button title="複製網頁連結" class="copy gabtn" data-clipboard data-clipboard-text="https://autos.yahoo.com.tw/news/toyota-bz7%E6%8E%A1%E7%94%A8%E5%BB%A3%E6%B1%BD%E8%B1%90%E7%94%B0%E9%96%8B%E7%99%BC%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%A7%8B-%E8%8F%AF%E7%82%BA%E5%92%8C%E5%B0%8F%E7%B1%B3%E6%94%9C%E6%89%8B%E6%8F%90%E4%BE%9B%E7%A7%91%E6%8A%80%E6%8A%80%E8%A1%93-000000636.html"
+                data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_社群分享&#039;, &#039;單文頁_一般_社群分享_Copy&#039;]"
+            >
+            <svg width="16" height="16" fill="#b3b3b3" viewBox="0 0 24 24"><path d="M7.371 8.785a5.001 5.001 0 0 1 7.071 0 1 1 0 1 1-1.414 1.415 3 3 0 0 0-4.243 0l-4.83 4.83c-1.148 1.148-1.318 3.038-.23 4.245a3 3 0 0 0 4.353.117l1.414-1.414a.999.999 0 1 1 1.414 1.414l-1.414 1.414a5 5 0 0 1-7.4-.364c-1.665-2.012-1.367-5.012.48-6.859Zm6.212-6.212C15.43.727 18.43.428 20.443 2.091a5 5 0 0 1 .363 7.401l-4.95 4.95a5 5 0 0 1-7.07 0 1 1 0 0 1 1.413-1.414 3 3 0 0 0 4.243 0l4.95-4.95a3 3 0 0 0-.117-4.353c-1.207-1.088-3.097-.918-4.246.23L13.735 5.25a1 1 0 0 1-1.414 0l-.083-.094a.999.999 0 0 1 .083-1.32Z"></path></svg>
+
+            </button>
+        </li>
+
+        <div class="iscopy-modal">
+            <span class="modal-icon">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M10.388 8.279v-3.333l3.333 3.333h-3.333zM15.138 7.805l-4.277-4.277c-0.125-0.125-0.294-0.195-0.471-0.195h-4.391c-0.367 0-0.667 0.3-0.667 0.667v10.667c0 0.367 0.3 0.667 0.667 0.667h8.667c0.367 0 0.667-0.299 0.667-0.667v-6.39c0-0.177-0.070-0.347-0.195-0.471v0zM6.195 0.862c-0.125-0.125-0.295-0.195-0.471-0.195h-4.391c-0.367 0-0.667 0.3-0.667 0.667v10.667c0 0.367 0.3 0.667 0.667 0.667h2c0.368 0 0.667-0.299 0.667-0.667v-9.333c0-0.367 0.3-0.667 0.667-0.667h1.057c0.594 0 0.891-0.718 0.471-1.138z" class="share-url"></path>
+                </svg>
+            </span>
+            <span class="modal-text">網址已複製</span>
+            <a href="#" id="modal-close" class="modal-close">×</a>
+        </div>
+
+            </ul>
+</div>
+      <div class="more-content">
+    <div class="title">更多內容</div>
+    <ul>
+                      <li>
+          <a class="gabtn" href="https://autos.yahoo.com.tw/%E6%96%B0%E6%AC%BEglb%E6%9B%9D%E5%85%89%EF%BC%81%E7%A9%BA%E9%96%93%E6%9B%B4%E5%A4%A7%E6%9B%B4%E8%B1%AA%E8%8F%AF-%E9%9B%BB%E5%8B%95%E7%89%88%E5%85%88%E7%99%BC-%E6%B2%B9%E9%9B%BB%E9%9A%A8%E5%BE%8C%E4%BE%86-042046088.html" title="新款GLB曝光！空間更大更豪華 電動版先發 油電隨後來" target="_self"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_更多內容&#039;, &#039;單文頁_一般_更多內容_新款GLB曝光！空間更大更豪華 電動版先發 油電隨後來&#039;]"
+          >
+            新款GLB曝光！空間更大更豪華 電動版先發 油電隨後來
+          </a>
+        </li>
+                      <li>
+          <a class="gabtn" href="https://autos.yahoo.com.tw/%E8%BB%8A%E8%BF%B7%E4%BF%B1%E6%A8%82%E9%83%A8-2025-luxgen-n7%E5%85%A8%E5%9C%8B%E5%A4%A7%E6%9C%83%E5%B8%AB-%E6%BB%BF%E9%9B%BB%E8%A1%8C%E9%A7%9B%E9%87%8C%E7%A8%8B%E6%9C%89%E5%A4%9A%E5%B0%91-034314642.html" title="【車迷俱樂部】 2025 Luxgen n7全國大會師 滿電行駛里程有多少？且聽車主來分享！" target="_self"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_更多內容&#039;, &#039;單文頁_一般_更多內容_【車迷俱樂部】 2025 Luxgen n7全國大會師 滿電行駛里程有多少？且聽車主來分享！&#039;]"
+          >
+            【車迷俱樂部】 2025 Luxgen n7全國大會師 滿電行駛里程有多少？且聽車主來分享！
+          </a>
+        </li>
+                      <li>
+          <a class="gabtn" href="https://autos.yahoo.com.tw/%E5%9C%8B%E5%A4%96%E8%B3%BD%E4%BA%8B-bc-racing%E9%BB%83%E8%BB%8D%E6%99%BA%E5%8B%87%E5%A5%AA%E5%88%86%E7%AB%99%E7%AC%AC%E4%BA%8C%E5%90%8D-2025-lamborghini-025454390.html" title="【國外賽事】 BC Racing黃軍智勇奪分站第二名 2025 Lamborghini Super Trofeo 亞洲挑戰賽最終站" target="_self"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_更多內容&#039;, &#039;單文頁_一般_更多內容_【國外賽事】 BC Racing黃軍智勇奪分站第二名 2025 Lamborghini Super Trofeo 亞洲挑戰賽最終站&#039;]"
+          >
+            【國外賽事】 BC Racing黃軍智勇奪分站第二名 2025 Lamborghini Super Trofeo 亞洲挑戰賽最終站
+          </a>
+        </li>
+                      <li>
+          <a class="gabtn" href="https://autos.yahoo.com.tw/%E9%9B%96%E6%9C%AA%E8%B4%8F%E5%BE%97%E9%A0%AD%E9%8A%9C%E4%BD%86verstappen%E7%A8%B12025%E7%82%BA%E5%85%B6%E7%94%9F%E6%B6%AF%E6%9C%80%E4%BD%B3%E8%B3%BD%E5%AD%A3-025233870.html" title="雖未贏得頭銜但Verstappen稱2025為其生涯最佳賽季" target="_self"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_更多內容&#039;, &#039;單文頁_一般_更多內容_雖未贏得頭銜但Verstappen稱2025為其生涯最佳賽季&#039;]"
+          >
+            雖未贏得頭銜但Verstappen稱2025為其生涯最佳賽季
+          </a>
+        </li>
+                      <li>
+          <a class="gabtn" href="https://autos.yahoo.com.tw/12%E6%9C%88%E5%85%A5%E4%B8%BBtoyota-granvia-hiace-%E4%BA%AB5%E8%90%AC%E5%85%83%E8%B3%BC%E8%BB%8A%E9%87%91-%E5%86%8D%E4%BA%AB%E9%AB%98%E9%A1%8D%E9%9B%B6%E5%88%A9%E7%8E%87%E8%B3%BC%E8%BB%8A%E5%84%AA%E6%83%A0-024309190.html" title="12月入主TOYOTA GRANVIA、HIACE 享5萬元購車金　再享高額零利率購車優惠" target="_self"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_更多內容&#039;, &#039;單文頁_一般_更多內容_12月入主TOYOTA GRANVIA、HIACE 享5萬元購車金　再享高額零利率購車優惠&#039;]"
+          >
+            12月入主TOYOTA GRANVIA、HIACE 享5萬元購車金　再享高額零利率購車優惠
+          </a>
+        </li>
+          </ul>
+  </div>
+    </div>
+
+    <div class="usedcar-related">
+    <h3 class="left-title">
+      <span>相關車款</span>
+    </h3>
+
+    <div class="related-content">
+      <ul>
+                            <a class="gabtn"
+            href="https://autos.yahoo.com.tw/new-cars/trim/toyota-bz-2026-4x"
+            title="2026 Toyota bZ 4X"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關車款&#039;, &#039;單文頁_一般_相關車款_Toyota_2026_bZ_4X&#039;]"
+          >
+            <li class="usedcar-thumbnail">
+              <div class="img-wrapper">
+                <img src="https://autos.yahoo.com.tw//p/r/w644/car-trim/October2025/7c6c60d619cbe1b94ce8df419f95d3cc.jpeg" alt="2026 Toyota bZ 4X">
+              </div>
+              <div class="usedcar-infos">
+                <span class="title limit-line-3">2026 Toyota bZ 4X</span>
+                <span class="discount">128</span>
+              </div>
+            </li>
+          </a>
+                            <a class="gabtn"
+            href="https://autos.yahoo.com.tw/new-cars/trim/toyota-corolla-altis-2026-1.8-hybrid-gr-sport"
+            title="2026 Toyota Corolla Altis 1.8 Hybrid GR Sport"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關車款&#039;, &#039;單文頁_一般_相關車款_Toyota_2026_Corolla Altis_1.8 Hybrid GR Sport&#039;]"
+          >
+            <li class="usedcar-thumbnail">
+              <div class="img-wrapper">
+                <img src="https://autos.yahoo.com.tw//p/r/w644/car-trim/October2025/d8cdcfacad95e438abfdf91675957778.jpeg" alt="2026 Toyota Corolla Altis 1.8 Hybrid GR Sport">
+              </div>
+              <div class="usedcar-infos">
+                <span class="title limit-line-3">2026 Toyota Corolla Altis 1.8 Hybrid GR Sport</span>
+                <span class="discount">91.9</span>
+              </div>
+            </li>
+          </a>
+                            <a class="gabtn"
+            href="https://autos.yahoo.com.tw/new-cars/trim/toyota-corolla-altis-2026-1.8-hybrid%E5%B0%8A%E7%88%B5"
+            title="2026 Toyota Corolla Altis 1.8 Hybrid尊爵"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關車款&#039;, &#039;單文頁_一般_相關車款_Toyota_2026_Corolla Altis_1.8 Hybrid尊爵&#039;]"
+          >
+            <li class="usedcar-thumbnail">
+              <div class="img-wrapper">
+                <img src="https://autos.yahoo.com.tw//p/r/w644/car-trim/April2023/71dfa10f7d7c2e629d3ab9ba9f79db10.jpeg" alt="2026 Toyota Corolla Altis 1.8 Hybrid尊爵">
+              </div>
+              <div class="usedcar-infos">
+                <span class="title limit-line-3">2026 Toyota Corolla Altis 1.8 Hybrid尊爵</span>
+                <span class="discount">89.5</span>
+              </div>
+            </li>
+          </a>
+                            <a class="gabtn"
+            href="https://autos.yahoo.com.tw/new-cars/trim/toyota-corolla-altis-2026-1.8-hybrid%E8%B1%AA%E8%8F%AF"
+            title="2026 Toyota Corolla Altis 1.8 Hybrid豪華"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關車款&#039;, &#039;單文頁_一般_相關車款_Toyota_2026_Corolla Altis_1.8 Hybrid豪華&#039;]"
+          >
+            <li class="usedcar-thumbnail">
+              <div class="img-wrapper">
+                <img src="https://autos.yahoo.com.tw//p/r/w644/car-trim/April2023/72ded6d2b79495c831489286a179a0d3.png" alt="2026 Toyota Corolla Altis 1.8 Hybrid豪華">
+              </div>
+              <div class="usedcar-infos">
+                <span class="title limit-line-3">2026 Toyota Corolla Altis 1.8 Hybrid豪華</span>
+                <span class="discount">86.5</span>
+              </div>
+            </li>
+          </a>
+                            <a class="gabtn"
+            href="https://autos.yahoo.com.tw/new-cars/trim/toyota-corolla-altis-2026-1.8%E8%B1%AA%E8%8F%AF"
+            title="2026 Toyota Corolla Altis 1.8豪華"
+            data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關車款&#039;, &#039;單文頁_一般_相關車款_Toyota_2026_Corolla Altis_1.8豪華&#039;]"
+          >
+            <li class="usedcar-thumbnail">
+              <div class="img-wrapper">
+                <img src="https://autos.yahoo.com.tw//p/r/w644/car-trim/March2019/139301d3ca914b593d8ddc8cb066f255.jpeg" alt="2026 Toyota Corolla Altis 1.8豪華">
+              </div>
+              <div class="usedcar-infos">
+                <span class="title limit-line-3">2026 Toyota Corolla Altis 1.8豪華</span>
+                <span class="discount">80.5</span>
+              </div>
+            </li>
+          </a>
+                      </ul>
+    </div>
+  </div>
+
+    
+                <div class="usedcar-related">
+      <h3 class="left-title">
+      <span>相關中古車</span>
+    </h3>
+  
+  <div class="related-content">
+    <ul>
+                      <a 
+          class="gabtn"
+          href="https://autos.yahoo.com.tw/used-cars-rd/3921001"
+          title="2021 Toyota 豐田 Corolla Altis"
+          target="_blank"
+          rel="noopener"
+          data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關中古車&#039;, &#039;單文頁_一般_相關中古車_abc好車網&#039;]"
+        >
+          <li class="usedcar-thumbnail">
+            <div class="img-wrapper">
+              <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/c35f72d3bc07250bd8baa8a72f444c96.jpg" alt="2021 Toyota 豐田 Corolla Altis" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="usedcar-infos">
+              <span class="title limit-line-2 jq-tracking-dot-click" data-custid="14">2021 Toyota 豐田 Corolla Altis
+              </span>
+              <span class="info">2021年12月 | 桃園市</span>
+              <div class="price-items">
+                <span class="discount">41.0</span>
+              </div>
+            </div>
+          </li>
+        </a>
+                      <a 
+          class="gabtn"
+          href="https://autos.yahoo.com.tw/used-cars-rd/3920995"
+          title="2014 Toyota 豐田 Corolla Altis"
+          target="_blank"
+          rel="noopener"
+          data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關中古車&#039;, &#039;單文頁_一般_相關中古車_abc好車網&#039;]"
+        >
+          <li class="usedcar-thumbnail">
+            <div class="img-wrapper">
+              <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/639006052101306934LH5Pib.jpeg" alt="2014 Toyota 豐田 Corolla Altis" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="usedcar-infos">
+              <span class="title limit-line-2 jq-tracking-dot-click" data-custid="14">2014 Toyota 豐田 Corolla Altis
+              </span>
+              <span class="info">2014年12月 | 高雄市</span>
+              <div class="price-items">
+                <span class="discount">20.8</span>
+              </div>
+            </div>
+          </li>
+        </a>
+                      <a 
+          class="gabtn"
+          href="https://autos.yahoo.com.tw/used-cars-rd/3920994"
+          title="2014 Toyota 豐田 Corolla Altis"
+          target="_blank"
+          rel="noopener"
+          data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關中古車&#039;, &#039;單文頁_一般_相關中古車_abc好車網&#039;]"
+        >
+          <li class="usedcar-thumbnail">
+            <div class="img-wrapper">
+              <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/639006055721896974pwgA92.jpeg" alt="2014 Toyota 豐田 Corolla Altis" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="usedcar-infos">
+              <span class="title limit-line-2 jq-tracking-dot-click" data-custid="14">2014 Toyota 豐田 Corolla Altis
+              </span>
+              <span class="info">2014年11月 | 高雄市</span>
+              <div class="price-items">
+                <span class="discount">21.8</span>
+              </div>
+            </div>
+          </li>
+        </a>
+                      <a 
+          class="gabtn"
+          href="https://autos.yahoo.com.tw/used-cars-rd/3920991"
+          title="2021 Toyota 豐田 RAV4"
+          target="_blank"
+          rel="noopener"
+          data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關中古車&#039;, &#039;單文頁_一般_相關中古車_abc好車網&#039;]"
+        >
+          <li class="usedcar-thumbnail">
+            <div class="img-wrapper">
+              <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/5bc5a31a487544b0784e1790a07821dd.jpg" alt="2021 Toyota 豐田 RAV4" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="usedcar-infos">
+              <span class="title limit-line-2 jq-tracking-dot-click" data-custid="14">2021 Toyota 豐田 RAV4
+              </span>
+              <span class="info">2021年3月 | 新北市</span>
+              <div class="price-items">
+                <span class="discount">60.2</span>
+              </div>
+            </div>
+          </li>
+        </a>
+                      <a 
+          class="gabtn"
+          href="https://autos.yahoo.com.tw/used-cars-rd/3920985"
+          title="2019 Toyota 豐田 RAV4"
+          target="_blank"
+          rel="noopener"
+          data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_相關中古車&#039;, &#039;單文頁_一般_相關中古車_abc好車網&#039;]"
+        >
+          <li class="usedcar-thumbnail">
+            <div class="img-wrapper">
+              <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/8a9f4f9a-e5dd-46d8-b10a-944b6fbff953.JPG" alt="2019 Toyota 豐田 RAV4" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="usedcar-infos">
+              <span class="title limit-line-2 jq-tracking-dot-click" data-custid="14">2019 Toyota 豐田 RAV4
+              </span>
+              <span class="info">2019年12月 | 新竹市</span>
+              <div class="price-items">
+                <span class="discount">68.8</span>
+              </div>
+            </div>
+          </li>
+        </a>
+          </ul>
+  </div>
+</div>
+    
+
+          <div class="static-nav nav">
+  <ul class="nav-wrapper">
+                                 <li title="推薦閱讀" class="picked">推薦閱讀</li>
+              
+        </ul>
+</div>
+    
+    <div class="main-news-list" id="index-news">
+        <div class="news-wrapper" data-href="https://autos.yahoo.com.tw/ajax/api_common_news?type=car" data-token="ZQEHNpL1arljg4d9kKCdxRjSUXpcQqxcHTwQe7VF" data-pageinfo="{&quot;requestedCount&quot;:20,&quot;contentOverrides&quot;:{&quot;45fd2c6b-ee23-473e-925e-18fbe284a718&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;1cb2d954-e114-319b-8ffc-d65bc6d6512c&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;89d82c9a-608d-3f3c-917f-17dd204818fe&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;95c24e96-2b1b-36fd-b62f-0efcec67a56a&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;97c90693-b3de-3bda-a97c-8b6e4a77e255&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;d90865aa-45bd-3c24-8475-0ab6d300f73b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9f7f3edd-ff4a-3789-a12e-c935304a9fce&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;5d238f32-17c4-3119-aff0-0100fe7adfcc&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;f38622a6-56e7-3e7e-8644-7e8ca65a90d4&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;3d6960bf-f71c-3a35-b017-ed0fe43a41d3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;89ed6d72-c400-3d83-a5a2-54c71dd7ddd3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;df592c34-25c1-367d-a15a-5f149d4e10db&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7d1c6769-d2c9-3d53-8e54-09eef1600f76&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;59b6a0b4-75f8-316f-9b63-e9f67f9c63ca&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;c4f560ac-311f-31c8-bca3-ae6bb7a3e877&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2e56807f-1f52-3a2c-8d5d-5b2a2169f129&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;13b020cf-60e2-3fa9-8682-7f85b08a4e38&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e8da8d12-0d27-34ad-8740-c1a99358977a&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;b9b4c0f8-7bf1-3d5c-bdb7-36ded3396c85&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;4ee8e701-efb8-37ec-9eca-63fb7583eea1&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;24eb2054-37d7-317e-9009-c4d9f74f7d90&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;1be28690-cfe8-46d2-a6ac-da1f8bc0f07a&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;c1357fc4-7e2c-3c15-9900-babc66c0a20f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;d41947a3-b5a1-3674-93e6-7dd91f81d17e&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;ebea12da-447f-3b2f-b413-9c0feb843a6b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;95d83e38-09b1-3340-8c48-acf1dc2b96a6&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2ceee9ad-62c9-36a2-af20-2baf42427264&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7ab9d502-5056-3b8f-9ec2-292ed7b4ae78&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;f9167043-67b6-3b60-a0ea-074242861f05&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;06b58f64-70f4-3e44-ac9c-7b7193b2dbd1&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;969e9782-c2eb-3292-9ad9-8549853666e2&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;bb792153-bc18-3824-90b5-34251a121810&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;84c3cfc3-0e25-3a55-93de-0552f58829bd&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;173662ae-a719-3c29-80e0-7eb760391c02&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;afa72a1e-5567-3f71-a5ad-04a8daa37871&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9994c5c9-014f-3dd1-b6ad-a11e9b59d2fb&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;46b1781a-e07a-359d-8fff-48fb57497b68&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;759da828-f91e-3704-a2ee-01e3f47596a2&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;515d91d7-79ee-365f-af50-b32100fe7c1b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;f4fe25ed-2288-3a0b-bbe6-e27e4cfa2ef0&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;828fa49c-5668-32f6-988b-cc8191940e61&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;83e54125-0899-4234-a828-d59e01b5ae38&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8d810041-4b4e-399a-add8-c32e98448334&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e82bf0ab-3167-34cf-99a0-a4be8536a6a6&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2c1a0ac6-c6ac-388b-bdb4-4dfaa33a9adb&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9c0a657f-4f51-3483-8760-8c544015683f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;10c6e7aa-8275-3038-baf1-6fb18491abff&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;cb1ba186-397a-39c5-82fc-2e487ee7aad0&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2f427654-7f85-3049-9693-a26777a345f8&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9827d4bb-a893-3137-b652-77b4a2693cc3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;fb13dc59-14c8-37b9-aeb5-75fe53d7cbf3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;01ffbb9f-7e8e-39d6-bafd-51712f42a212&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e3ebdae8-21fb-3b28-8df8-50ee16843c6b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;3424b930-5331-3675-ba79-b6d865e734c6&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;0fdd6ac2-484d-3a89-92e2-dd5448b9465f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;a3360a25-b27f-3948-a985-3c672fffab23&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;0f6c4f47-59be-4ef9-8acf-a9b80e04a2da&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;0040ab8d-bdf2-3287-bc41-f235e49a9704&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8468e4ed-8580-425f-bd47-3c67f219c9ec&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;fc72b2a4-cf27-358e-98b4-b858d2146913&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;44779387-1cb7-39f0-9493-e1b1dad25d4f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;f329c79b-1e65-3b31-b65c-e8ded5473b52&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;1aa8f337-0bce-3e05-b608-c108b95d44af&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2531a9ca-327c-30f2-b550-447078dba737&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;54d63af5-2e0b-3dfb-b066-7dc7db545419&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;bd52478f-617d-3bd5-8b28-723bc6ed912d&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8737d954-4464-4656-8a7d-d3b2cc53c71d&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2788ea69-b5b7-3da2-85cd-bf2fcd42fde4&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;bdbabeb3-1486-33ec-8baf-f5a3228c2110&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;27429eea-9764-3d47-99b1-48a810ec8ac6&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;552adfba-238b-3cbd-85fd-5890a30803c0&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;ae998894-e77d-3886-9436-6f2fc26ae3cd&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;299307ce-a38c-3aa5-a944-b741e3bd640b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9c6602c7-d274-3dcb-824d-444ceaba6396&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7f13fbbd-4a3a-33b2-add4-bdb90be28207&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;551f81b5-209f-3ff0-8589-899d39be48c2&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e92a48e1-66c9-3d59-a90d-c60f9bec46cb&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;c14a4b9d-4b31-38a0-b3c7-40c6ba62097d&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;14282b72-06d0-41d7-8c99-045b2b855428&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;453d025a-6f1e-3e7c-85ef-c1c2bfe08da3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;1af69730-2ee3-3346-b351-b36e87bc8a73&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;30080229-1bed-3642-b8d1-a3c917c22a7a&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7fd3fa71-f3b5-3ac6-87ed-8f4086e359fe&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;d72e95b9-65b5-3f11-81e5-f916457255a8&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;216e9f17-6bff-3477-b030-0f6056923246&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7964f2a2-1a91-3b60-bede-45676d83ecf5&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;62976f0d-083b-36f3-8193-52946bc2a3d0&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7874fca2-8b8b-3a00-8f1b-dc42a24ccfe7&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;69f74d94-2911-3c3c-a879-329169afae2d&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;778bbbe2-e1d2-3aee-ac45-ccb9bcd6782b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8ac333d5-53a5-377b-b749-2fe6c495381d&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;24e1bafd-b9b9-3eb7-80b3-e79aa5f21b52&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;0120b0b3-be78-4060-8bb3-18494b8bc7fa&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;25ba1c2b-4444-3dd9-99c0-7af869e38659&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;74dce682-ad07-30d4-84fe-1254f05eb04a&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e06fc2ed-771c-3c55-85dd-97c879411218&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e04e0bf6-adc7-3d74-99cb-731b102a9ded&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;820852c5-b0c2-4218-b3d7-7a0ae460b4e5&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;f7d32eb5-900a-39f6-86f5-f3cd9512dc84&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8e7b8e1a-b1e7-3f01-a90a-bab774b1d600&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;440fb294-8aa8-3c10-b5f8-f3fcaa4ea08e&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;bbf8f5d4-8b81-381c-b4fd-df39ddbb2418&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;bcdcb897-6cb3-3e8e-8fb8-9c827189b93c&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e10006a0-500f-3b31-bcf1-8587e4e204d3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;97f93548-f508-35ca-932a-92e09d3c59d3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;6767b899-14e0-3bc8-8a9d-a758d6d70f5c&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;23dd9f05-2d83-4898-967d-1c3ca3f9d6c1&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7c23764b-adf5-3544-b058-c6a13e422c69&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;155d504f-d82b-33bc-97d4-276d0775c9e3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;5e655e05-5d5c-3a42-93ec-c817db55c918&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;41814fbb-7e8d-3ba0-ad5d-6064a18a84af&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;eabd3205-33ce-3dd6-921e-74f636c3a169&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2feecfc3-5287-3e18-be7e-9df0a3408afe&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;b03b56c7-a082-3897-8e72-beceba2f7fca&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8309f5ab-0394-4a43-94ba-2a93ea010d94&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9e565cb5-ffeb-386e-81df-e23efec53bc1&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;7e4b6540-428b-3a1d-a0e7-a1b980e60a1c&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;01ebfc01-3cb6-3edb-bc1f-670431fd0bce&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;54ebccea-1dde-3e32-854e-811c19181e1e&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;a7d8e687-b191-3523-8202-72dd1367478b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e13212e5-937e-3b72-9b66-8af5c3225b5d&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;3b434ced-ea82-3a02-97c7-23612938905b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8f850131-deab-361b-8414-1561c42554b8&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;84ca8267-5b9d-3c7a-8b6d-73fdb0feaaed&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;4bcb6720-c83a-317d-aef3-e8466a68f1bb&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;f23f1bbb-8704-3b37-a75e-29ee913899a9&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;0647415b-fb3e-37a1-87a1-4dd6f406930f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;487741d8-0a5d-3050-8281-f26bffa793a3&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;93d95921-c8b3-319c-908f-b0ce072cd114&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e64272b1-58cc-3bc2-a054-ef940091120e&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;d3692f83-0d26-3897-9a21-73c2fe051c92&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e1c68aa0-ade9-30ce-8134-da3b3b3a8f72&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;a0f8afbb-cfb6-3c8d-a6d6-3bbd8f04ff1c&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;5649b05b-5a22-327a-847e-e9f612f408b2&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;230ae3fc-39c8-4379-af25-dd8c9e8a899f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e4f6e122-1fd9-3418-af1a-78ee060346b5&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;62bafc2d-e030-3ee1-ad97-1b6bed7e3788&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;d6737258-b7a0-3727-9956-31a140efc346&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;46d25c34-792f-391f-87db-b4a7e3873520&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;94b45c10-8023-32c4-b01e-413c9754b422&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;103e4172-2ba7-393c-91f3-156381969bc8&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;2c3ec26d-a183-3fff-877f-47f68a3071bb&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e6fefdc4-aeab-3e83-af3e-3c1bdf54a830&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;bd31cefa-ebaf-3904-9080-63232df111f9&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;81369fc0-0d71-3571-8475-baaf529abea6&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;94e37169-1584-3009-8327-fc2dbc6e2aa9&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8e84a905-521d-35b6-b3d6-4492420133e7&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;a6ed185d-18be-38c4-ad96-c80ba3d5fdc9&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;4ce263e7-ca6f-3b45-a3d9-d370bdb1b479&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;e4ef682d-5900-3d27-ad4b-bf11c517a25e&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;50bdbdd3-66fe-328d-9c62-3e431c341f2c&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;89006204-e341-3d69-9627-65fd8a0404fb&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;8eda0fe9-cf68-3504-971c-5793bcc94767&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;9a92b7a8-4b86-317f-beec-6c14aab3c99b&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;1fda9fe2-63d4-30f8-a885-58644ee633b1&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;841d7650-503a-3076-bc04-d7e1d60608bf&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;0580fb72-2897-3b93-a58e-8e36ad4bb086&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;d51c776c-4a4d-37e5-b262-c09b94b03014&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;69620d9a-7548-4598-b93f-3d888451377f&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;11a75b31-8a3e-31ef-a8e1-64594d5d4204&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;85a8d5ca-8cb2-3e6d-9c5a-f39e36f5b4b8&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;fc7c0623-1570-3727-8727-3a7d56fce740&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;3380cd86-34b5-38ee-a9c9-1e8abc2a6410&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;1d8cf406-2a8f-3a5d-90e2-a3ae352adf44&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;b661ad82-a87d-39c0-ba4a-b00b9823080a&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;},&quot;4f71a46b-79b1-4703-9400-6c73f80d4723&quot;:{&quot;list&quot;:&quot;9a0dfa27-586b-4a47-a7c4-fa0c8f0c5832&quot;}},&quot;remainingCount&quot;:166,&quot;uuids&quot;:&quot;1af69730-2ee3-3346-b351-b36e87bc8a73:STORY,7e4b6540-428b-3a1d-a0e7-a1b980e60a1c:STORY,3380cd86-34b5-38ee-a9c9-1e8abc2a6410:STORY,9c0a657f-4f51-3483-8760-8c544015683f:STORY,27429eea-9764-3d47-99b1-48a810ec8ac6:STORY,3424b930-5331-3675-ba79-b6d865e734c6:STORY,e4ef682d-5900-3d27-ad4b-bf11c517a25e:STORY,30080229-1bed-3642-b8d1-a3c917c22a7a:STORY,d51c776c-4a4d-37e5-b262-c09b94b03014:STORY,95d83e38-09b1-3340-8c48-acf1dc2b96a6:STORY,b03b56c7-a082-3897-8e72-beceba2f7fca:STORY,5649b05b-5a22-327a-847e-e9f612f408b2:STORY,41814fbb-7e8d-3ba0-ad5d-6064a18a84af:STORY,84c3cfc3-0e25-3a55-93de-0552f58829bd:STORY,a3360a25-b27f-3948-a985-3c672fffab23:STORY,841d7650-503a-3076-bc04-d7e1d60608bf:STORY,9a92b7a8-4b86-317f-beec-6c14aab3c99b:STORY,2c3ec26d-a183-3fff-877f-47f68a3071bb:STORY,0647415b-fb3e-37a1-87a1-4dd6f406930f:STORY,e13212e5-937e-3b72-9b66-8af5c3225b5d:STORY,8468e4ed-8580-425f-bd47-3c67f219c9ec:STORY,df592c34-25c1-367d-a15a-5f149d4e10db:STORY,230ae3fc-39c8-4379-af25-dd8c9e8a899f:STORY,2f427654-7f85-3049-9693-a26777a345f8:STORY,0120b0b3-be78-4060-8bb3-18494b8bc7fa:STORY,f4fe25ed-2288-3a0b-bbe6-e27e4cfa2ef0:STORY,b9b4c0f8-7bf1-3d5c-bdb7-36ded3396c85:STORY,ebea12da-447f-3b2f-b413-9c0feb843a6b:STORY,46b1781a-e07a-359d-8fff-48fb57497b68:STORY,44779387-1cb7-39f0-9493-e1b1dad25d4f:STORY,f23f1bbb-8704-3b37-a75e-29ee913899a9:STORY,552adfba-238b-3cbd-85fd-5890a30803c0:STORY,46d25c34-792f-391f-87db-b4a7e3873520:STORY,bbf8f5d4-8b81-381c-b4fd-df39ddbb2418:STORY,8e7b8e1a-b1e7-3f01-a90a-bab774b1d600:STORY,2ceee9ad-62c9-36a2-af20-2baf42427264:STORY,8309f5ab-0394-4a43-94ba-2a93ea010d94:STORY,f38622a6-56e7-3e7e-8644-7e8ca65a90d4:STORY,9c6602c7-d274-3dcb-824d-444ceaba6396:STORY,13b020cf-60e2-3fa9-8682-7f85b08a4e38:STORY,6767b899-14e0-3bc8-8a9d-a758d6d70f5c:STORY,d90865aa-45bd-3c24-8475-0ab6d300f73b:STORY,1d8cf406-2a8f-3a5d-90e2-a3ae352adf44:STORY,cb1ba186-397a-39c5-82fc-2e487ee7aad0:STORY,45fd2c6b-ee23-473e-925e-18fbe284a718:STORY,06b58f64-70f4-3e44-ac9c-7b7193b2dbd1:STORY,14282b72-06d0-41d7-8c99-045b2b855428:STORY,e3ebdae8-21fb-3b28-8df8-50ee16843c6b:STORY,d72e95b9-65b5-3f11-81e5-f916457255a8:VIDEO,828fa49c-5668-32f6-988b-cc8191940e61:VIDEO,7964f2a2-1a91-3b60-bede-45676d83ecf5:STORY,1cb2d954-e114-319b-8ffc-d65bc6d6512c:STORY,0580fb72-2897-3b93-a58e-8e36ad4bb086:STORY,2c1a0ac6-c6ac-388b-bdb4-4dfaa33a9adb:STORY,1fda9fe2-63d4-30f8-a885-58644ee633b1:STORY,9e565cb5-ffeb-386e-81df-e23efec53bc1:STORY,2531a9ca-327c-30f2-b550-447078dba737:STORY,62976f0d-083b-36f3-8193-52946bc2a3d0:STORY,4f71a46b-79b1-4703-9400-6c73f80d4723:STORY,89006204-e341-3d69-9627-65fd8a0404fb:STORY,fc7c0623-1570-3727-8727-3a7d56fce740:STORY,3b434ced-ea82-3a02-97c7-23612938905b:STORY,7874fca2-8b8b-3a00-8f1b-dc42a24ccfe7:STORY,e64272b1-58cc-3bc2-a054-ef940091120e:STORY,bd31cefa-ebaf-3904-9080-63232df111f9:STORY,7d1c6769-d2c9-3d53-8e54-09eef1600f76:STORY,e06fc2ed-771c-3c55-85dd-97c879411218:STORY,4ee8e701-efb8-37ec-9eca-63fb7583eea1:STORY,1be28690-cfe8-46d2-a6ac-da1f8bc0f07a:STORY,5e655e05-5d5c-3a42-93ec-c817db55c918:STORY,afa72a1e-5567-3f71-a5ad-04a8daa37871:STORY,e1c68aa0-ade9-30ce-8134-da3b3b3a8f72:STORY,54ebccea-1dde-3e32-854e-811c19181e1e:STORY,83e54125-0899-4234-a828-d59e01b5ae38:STORY,8eda0fe9-cf68-3504-971c-5793bcc94767:STORY,7ab9d502-5056-3b8f-9ec2-292ed7b4ae78:STORY,3d6960bf-f71c-3a35-b017-ed0fe43a41d3:STORY,9827d4bb-a893-3137-b652-77b4a2693cc3:STORY,23dd9f05-2d83-4898-967d-1c3ca3f9d6c1:STORY,e6fefdc4-aeab-3e83-af3e-3c1bdf54a830:STORY,487741d8-0a5d-3050-8281-f26bffa793a3:STORY,820852c5-b0c2-4218-b3d7-7a0ae460b4e5:STORY,eabd3205-33ce-3dd6-921e-74f636c3a169:STORY,0f6c4f47-59be-4ef9-8acf-a9b80e04a2da:STORY,84ca8267-5b9d-3c7a-8b6d-73fdb0feaaed:STORY,a0f8afbb-cfb6-3c8d-a6d6-3bbd8f04ff1c:STORY,fc72b2a4-cf27-358e-98b4-b858d2146913:STORY,4ce263e7-ca6f-3b45-a3d9-d370bdb1b479:STORY,fb13dc59-14c8-37b9-aeb5-75fe53d7cbf3:VIDEO,59b6a0b4-75f8-316f-9b63-e9f67f9c63ca:STORY,25ba1c2b-4444-3dd9-99c0-7af869e38659:STORY,94b45c10-8023-32c4-b01e-413c9754b422:STORY,ae998894-e77d-3886-9436-6f2fc26ae3cd:STORY,2feecfc3-5287-3e18-be7e-9df0a3408afe:STORY,c1357fc4-7e2c-3c15-9900-babc66c0a20f:STORY,54d63af5-2e0b-3dfb-b066-7dc7db545419:STORY,89ed6d72-c400-3d83-a5a2-54c71dd7ddd3:STORY,69f74d94-2911-3c3c-a879-329169afae2d:STORY,62bafc2d-e030-3ee1-ad97-1b6bed7e3788:STORY,299307ce-a38c-3aa5-a944-b741e3bd640b:STORY,69620d9a-7548-4598-b93f-3d888451377f:STORY,e82bf0ab-3167-34cf-99a0-a4be8536a6a6:STORY,c4f560ac-311f-31c8-bca3-ae6bb7a3e877:STORY,969e9782-c2eb-3292-9ad9-8549853666e2:STORY,9f7f3edd-ff4a-3789-a12e-c935304a9fce:STORY,93d95921-c8b3-319c-908f-b0ce072cd114:STORY,2788ea69-b5b7-3da2-85cd-bf2fcd42fde4:STORY,8ac333d5-53a5-377b-b749-2fe6c495381d:STORY,bb792153-bc18-3824-90b5-34251a121810:STORY,f9167043-67b6-3b60-a0ea-074242861f05:STORY,5d238f32-17c4-3119-aff0-0100fe7adfcc:STORY,e8da8d12-0d27-34ad-8740-c1a99358977a:STORY,bcdcb897-6cb3-3e8e-8fb8-9c827189b93c:STORY,440fb294-8aa8-3c10-b5f8-f3fcaa4ea08e:STORY,01ebfc01-3cb6-3edb-bc1f-670431fd0bce:STORY,d3692f83-0d26-3897-9a21-73c2fe051c92:STORY,24e1bafd-b9b9-3eb7-80b3-e79aa5f21b52:STORY,1aa8f337-0bce-3e05-b608-c108b95d44af:STORY,f329c79b-1e65-3b31-b65c-e8ded5473b52:STORY,11a75b31-8a3e-31ef-a8e1-64594d5d4204:STORY,e4f6e122-1fd9-3418-af1a-78ee060346b5:STORY,4bcb6720-c83a-317d-aef3-e8466a68f1bb:STORY,7f13fbbd-4a3a-33b2-add4-bdb90be28207:STORY,e04e0bf6-adc7-3d74-99cb-731b102a9ded:STORY,a6ed185d-18be-38c4-ad96-c80ba3d5fdc9:STORY,81369fc0-0d71-3571-8475-baaf529abea6:STORY,2e56807f-1f52-3a2c-8d5d-5b2a2169f129:STORY,d41947a3-b5a1-3674-93e6-7dd91f81d17e:STORY,bdbabeb3-1486-33ec-8baf-f5a3228c2110:STORY,01ffbb9f-7e8e-39d6-bafd-51712f42a212:STORY,89d82c9a-608d-3f3c-917f-17dd204818fe:STORY,85a8d5ca-8cb2-3e6d-9c5a-f39e36f5b4b8:STORY,759da828-f91e-3704-a2ee-01e3f47596a2:STORY,0040ab8d-bdf2-3287-bc41-f235e49a9704:STORY,0fdd6ac2-484d-3a89-92e2-dd5448b9465f:STORY,778bbbe2-e1d2-3aee-ac45-ccb9bcd6782b:STORY,7c23764b-adf5-3544-b058-c6a13e422c69:STORY,515d91d7-79ee-365f-af50-b32100fe7c1b:STORY,94e37169-1584-3009-8327-fc2dbc6e2aa9:STORY,c14a4b9d-4b31-38a0-b3c7-40c6ba62097d:STORY,551f81b5-209f-3ff0-8589-899d39be48c2:STORY,b661ad82-a87d-39c0-ba4a-b00b9823080a:STORY,155d504f-d82b-33bc-97d4-276d0775c9e3:STORY,9994c5c9-014f-3dd1-b6ad-a11e9b59d2fb:STORY,8d810041-4b4e-399a-add8-c32e98448334:STORY,f7d32eb5-900a-39f6-86f5-f3cd9512dc84:STORY,97c90693-b3de-3bda-a97c-8b6e4a77e255:STORY,d6737258-b7a0-3727-9956-31a140efc346:STORY,8737d954-4464-4656-8a7d-d3b2cc53c71d:STORY,8f850131-deab-361b-8414-1561c42554b8:STORY,173662ae-a719-3c29-80e0-7eb760391c02:STORY,e92a48e1-66c9-3d59-a90d-c60f9bec46cb:STORY,8e84a905-521d-35b6-b3d6-4492420133e7:STORY,95c24e96-2b1b-36fd-b62f-0efcec67a56a:STORY,e10006a0-500f-3b31-bcf1-8587e4e204d3:STORY,24eb2054-37d7-317e-9009-c4d9f74f7d90:STORY,bd52478f-617d-3bd5-8b28-723bc6ed912d:STORY,103e4172-2ba7-393c-91f3-156381969bc8:STORY,97f93548-f508-35ca-932a-92e09d3c59d3:STORY,453d025a-6f1e-3e7c-85ef-c1c2bfe08da3:STORY,216e9f17-6bff-3477-b030-0f6056923246:STORY,7fd3fa71-f3b5-3ac6-87ed-8f4086e359fe:STORY,a7d8e687-b191-3523-8202-72dd1367478b:STORY,74dce682-ad07-30d4-84fe-1254f05eb04a:STORY,10c6e7aa-8275-3038-baf1-6fb18491abff:STORY,50bdbdd3-66fe-328d-9c62-3e431c341f2c:STORY&quot;}">
+            <a class="gabtn news-item" href="https://autos.yahoo.com.tw/2025-audi-q5-tfsi-quattro-150kw-s-line%E9%81%8B%E5%8B%95%E7%89%88%E8%A9%A6%E9%A7%95%EF%BC%9A%E5%AE%83%E6%80%8E%E9%BA%BC%E5%9C%A8lsuv%E7%B4%85%E6%B5%B7%E4%B8%AD%E7%AA%81%E5%9C%8D%EF%BC%9F-001207605.html" title="2025 Audi Q5 TFSI quattro 150kW S-Line運動版試駕：它怎麼在LSUV紅海中突圍？" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/sADsNOLnbbOEQSgccyfGMw--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://s.yimg.com/os/creatr-uploaded-images/2025-12/c960a280-d360-11f0-bf7f-43df6fabf59e" alt="2025 Audi Q5 TFSI quattro 150kW S-Line運動版試駕：它怎麼在LSUV紅海中突圍？">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>8</span>
+                    </div>
+                    <div class="title">2025 Audi Q5 TFSI quattro 150kW S-Line運動版試駕：它怎麼在LSUV紅海中突圍？</div>
+                    <div class="sub">Yahoo奇摩汽車機車</div>
+                    <div class="content">在純電浪潮席捲豪華休旅市場的當下，有別於對手逐步轉向電動化的作法，全新Audi Q5 TFSI quattro 150kW S-Line運動版依然穩居燃油陣營的核心位置，並藉由「雙線並行」策略，在電動車系擴大布局的同時，亦針對燃油車型導入新平台技術，以及精密的48V MHEV輕油電動力，讓Audi Q5成為燃油SUV少數...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/nissan-%E6%8B%9B%E7%89%8C%E4%B8%83%E4%BA%BA%E5%BA%A7-mpv-%E5%8D%B3%E5%B0%87%E6%94%B9%E6%AC%BE%E5%8D%87%E7%B4%9A-%E6%8F%9B%E8%A3%9D%E8%B1%AA%E8%8F%AF%E9%9D%A2%E5%AE%B9-073800751.html" title="Nissan 招牌七人座 MPV 即將改款升級！換裝豪華面容 強化內裝科技感" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/vVZ_YWEOAsr83sjRtUWv3g--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/no/__405/7bae158082b09e1dc3dddc1972a91e2d" alt="Nissan 招牌七人座 MPV 即將改款升級！換裝豪華面容 強化內裝科技感">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>2</span>
+                    </div>
+                    <div class="title">Nissan 招牌七人座 MPV 即將改款升級！換裝豪華面容 強化內裝科技感</div>
+                    <div class="sub">自由時報汽車頻道</div>
+                    <div class="content">Nissan 招牌七人座廂旅 Serena 即將迎接小改款升級，根據外媒最新報導有望在 12 月中旬公布相關資訊，預期將針對外觀造型及內裝配備進行更新，強化整體質感表現來提升競爭力，預計將於 2026 年 2 月在日本上市。值得一提的是，現行 Serena 正積極搶攻東南亞市場，若之後推出左駕版本，屆時便...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E5%BD%B1%E7%89%87-%E8%AB%96%E5%8B%95%E5%8A%9B-%E7%AF%80%E8%83%BD-%E7%A9%BA%E9%96%93-%E9%85%8D%E5%82%99-095307465.html" title="『影片』論動力、節能、空間、配備、科技性到售價，全新Territory交出了一張非常漂亮的成績單....." target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/rD37LRBHixvdKyj8lRdCfQ--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/en/lian-car.com.tw/c160aadb854d3340f4d3f0d49bb87290" alt="『影片』論動力、節能、空間、配備、科技性到售價，全新Territory交出了一張非常漂亮的成績單.....">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>6</span>
+                    </div>
+                    <div class="title">『影片』論動力、節能、空間、配備、科技性到售價，全新Territory交出了一張非常漂亮的成績單.....</div>
+                    <div class="sub">CARLINK鏈車網</div>
+                    <div class="content">年底最具代表性、話題性十足的就是這部福特全新世代的中型休旅Territory。對於一部中型休旅、消費者非常在乎的像是方便性、舒適性還有科技性這三方面，全新Ford Territory交出了一張非常漂亮的成績單，而且面對同級競爭對手它幾乎是完勝。即使將面對明年(2026)全新改款的競爭對手，相信以Terr...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E8%A9%A6%E9%A7%95-%E8%A9%A6%E9%81%8Etesla-model-plaid%E4%B9%8B%E5%BE%8C%E6%98%8E%E7%99%BD%E7%82%BA%E4%BD%95%E5%8F%97%E6%AD%A1%E8%BF%8E%E4%BA%86-152107365.html" title="【試駕】試過Tesla Model S Plaid之後明白為何受歡迎了" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/DWxcA.M7MXg6UJGQCOr9jQ--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/ca/carture__812/204d5f35ddbd088074d1c2f6bbd55768" alt="【試駕】試過Tesla Model S Plaid之後明白為何受歡迎了">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>7</span>
+                    </div>
+                    <div class="title">【試駕】試過Tesla Model S Plaid之後明白為何受歡迎了</div>
+                    <div class="sub">Carture 車勢文化</div>
+                    <div class="content">Tesla年中時帶來進行升級的Model S，除了提供冰霜藍新車色外，Model S Plaid亦配備碳纖維尾翼和標誌，然而在試駕過Model S Plaid後，終於了解為何Tesla如此受歡迎了。老實說在此之前對於Tesla的內裝設計與操作邏輯不太有好感，但直到試過Model S Plaid後，不僅態度轉變也了解到Tesla為何受歡...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/citro-n-basalt-vision%E6%96%BC%E5%B7%B4%E8%A5%BF%E6%AD%A3%E5%BC%8F%E4%BA%AE%E7%9B%B8-%E4%BD%8E%E8%BB%8A%E8%BA%AB-000000320.html" title="Citroën Basalt Vision於巴西正式亮相！低車身、視覺套件強化運動化形象" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/.Zztu_wcZT9EAZT_tJ7YWA--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/en/cars_tvbs_com_tw_230/24db9c8f7825844a41e06b9dbf3d7dd4" alt="Citroën Basalt Vision於巴西正式亮相！低車身、視覺套件強化運動化形象">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>8</span>
+                    </div>
+                    <div class="title">Citroën Basalt Vision於巴西正式亮相！低車身、視覺套件強化運動化形象</div>
+                    <div class="sub">地球黃金線</div>
+                    <div class="content">Citroen選擇在巴西2025聖保羅國際車展上，再度端出Basalt Vision概念車，以更具侵略性與更高辨識度的外觀設定，彰顯品牌在新興市場中推動跑旅設計語彙的企圖心，Basalt本身是Citroen專為南美與印度市場所打造的平價斜背跨界車，在訴求務實、節能與價格親民的前提下，仍希望保留一些年輕化與動...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/nissan-%E6%9C%80%E8%A6%AA%E6%B0%91%E5%B0%8F%E8%BB%8A%E5%A4%A7%E6%94%B9%E6%AC%BE%E5%AF%A6%E8%BB%8A%E7%85%A7%E5%A4%96%E6%B5%81-%E6%9B%B4%E5%8B%95%E6%84%9F%E8%BA%AB%E5%BD%A2%E5%8A%A0%E6%B2%B9%E9%9B%BB%E5%B0%8D%E6%B1%BA-vios-062100695.html" title="Nissan 最親民小車大改款實車照外流！更動感身形加油電對決 Vios" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/XkWbN6PloO1wsg3td0oxsA--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/ca/__405/b8e230e32019defa1661bc7a07aa8673" alt="Nissan 最親民小車大改款實車照外流！更動感身形加油電對決 Vios">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>7</span>
+                    </div>
+                    <div class="title">Nissan 最親民小車大改款實車照外流！更動感身形加油電對決 Vios</div>
+                    <div class="sub">自由時報汽車頻道</div>
+                    <div class="content">擔任 Nissan 最親民入門小車的 Versa 及將迎來大改款，將跟進新世代設計語彙打造外觀造型及內裝鋪陳，並追加 1.2 升 e-Power 油電動力選項，近日實車照曝光，採用和剛發表的小型跨界 Kait 相仿的設計，屆時將與 Toyota Vios 同場較勁。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E5%94%AF-%E5%85%A5%E6%A6%9C-%E6%97%A5%E6%9C%AC%E5%B9%B4%E5%BA%A610%E5%A4%A7%E9%A2%A8%E9%9B%B2%E8%BB%8A-%E7%9A%84%E6%AD%90%E6%B4%B2%E6%B2%B9%E9%9B%BB%E8%BB%8A-peugeot-084734247.html" title="唯一入榜「日本年度10大風雲車」的歐洲油電車：PEUGEOT 3008 HYBRID！" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/I3OaigrDI58WzUZBsxZrkw--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/vi/lian-car.com.tw/d1945a62904a190c783b0bfcbda5d996" alt="唯一入榜「日本年度10大風雲車」的歐洲油電車：PEUGEOT 3008 HYBRID！">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>5</span>
+                    </div>
+                    <div class="title">唯一入榜「日本年度10大風雲車」的歐洲油電車：PEUGEOT 3008 HYBRID！</div>
+                    <div class="sub">CARLINK鏈車網</div>
+                    <div class="content">全球車壇具高度指標性的汽車評選——日本年度風雲車Japan Car of the Year(JCOTY），於2025年12月4日公布第46屆評選結果。PEUGEOT 3008以前衛設計語彙、創新的P2 HYBRID油電混合動力科技與跨級距的產品實力脫穎而出，成功躋身年度「10 大最佳車款」，名列第八。在以日系品牌為主導、評選標準向...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E6%B6%88%E8%B2%BB%E8%80%85%E5%A0%B1%E5%91%8A-2026-%E6%9C%80%E4%BD%B3%E5%93%81%E7%89%8C%E6%8E%92%E8%A1%8C%E5%87%BA%E7%88%90-subaru-%E8%9F%AC%E8%81%AF%E5%AF%B6%E5%BA%A7-073300476.html" title="消費者報告 2026 最佳品牌排行出爐！Subaru 蟬聯寶座 BMW 操控性能最優" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/YeSKl3cWF_TBJnOZayOHVA--~B/Zmk9ZmlsbDtoPTE5NTt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/vi/__405/951f4aef1d3f70c54dcff278fcedccfe" alt="消費者報告 2026 最佳品牌排行出爐！Subaru 蟬聯寶座 BMW 操控性能最優">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>7</span>
+                    </div>
+                    <div class="title">消費者報告 2026 最佳品牌排行出爐！Subaru 蟬聯寶座 BMW 操控性能最優</div>
+                    <div class="sub">自由時報汽車頻道</div>
+                    <div class="content">許多消費者在選購新車時，對於大量汽車品牌與車款如何選擇而感到苦惱，對此知名汽車評測機構《消費者報告》每年都會針對市場上各品牌，進行各方面調查，搭配上自家的道路實測團隊，進而選出表現優異的品牌排行榜。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/1-3-%E8%90%AC%E5%85%83%E6%9C%89%E6%89%BE-%E6%AF%94%E6%AD%90%E6%B4%B2%E5%92%8C%E7%BE%8E%E5%9C%8B%E4%BE%BF%E5%AE%9C-%E7%89%B9%E6%96%AF%E6%8B%89-014055848.html" title="1.3 萬元有找、比歐洲和美國便宜，特斯拉 Model 3 煥新版方向燈撥桿改裝服務台灣也有了" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/EV5lEUKiKIaQXhsa99R.3w--~B/Zmk9ZmlsbDtoPTMyNTt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/ca/ddcar_com_tw_219/67435eddd0f2ede5e916b55664743918" alt="1.3 萬元有找、比歐洲和美國便宜，特斯拉 Model 3 煥新版方向燈撥桿改裝服務台灣也有了">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>4</span>
+                    </div>
+                    <div class="title">1.3 萬元有找、比歐洲和美國便宜，特斯拉 Model 3 煥新版方向燈撥桿改裝服務台灣也有了</div>
+                    <div class="sub">DDCAR電動車</div>
+                    <div class="content">幾個月前特斯拉陸續在中國、歐洲和美國市場推出一項改裝服務，內容是針對沒有實體方向燈撥桿、要打方向燈需透過方向盤上觸控按鍵的操作的 Model 3 煥新版，提供官方的方向燈撥桿加裝服務。現在台灣特斯拉終於也跟進推出。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/f1%E3%80%8Blando-norris%E5%8B%87%E5%A5%AA2025%E5%B9%B4%E8%BB%8A%E6%89%8B%E4%B8%96%E7%95%8C%E5%86%A0%E8%BB%8D-2%E5%88%86%E5%B7%AE%E8%B7%9D%E6%96%AC%E6%96%B7max-verstappen%E9%80%A3%E9%9C%B8-145331780.html" title="F1》Lando Norris勇奪2025年車手世界冠軍 2分差距斬斷Max Verstappen連霸" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/nIBSm6J6DMyNtKdKms2dgQ--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://s.yimg.com/os/creatr-uploaded-images/2025-12/e9605c90-d37b-11f0-bcfd-5ad4605326b4" alt="F1》Lando Norris勇奪2025年車手世界冠軍 2分差距斬斷Max Verstappen連霸">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>7</span>
+                    </div>
+                    <div class="title">F1》Lando Norris勇奪2025年車手世界冠軍 2分差距斬斷Max Verstappen連霸</div>
+                    <div class="sub">Yahoo奇摩運動</div>
+                    <div class="content">一級方程式賽車（F1）2025年12月7日在Yas Marina Circuit賽道進行2025年賽季最終站阿布達比大獎賽正賽，紅牛車隊Max Verstappen最終以1小時26分07.469秒拿下單站冠軍，而麥拉倫車隊的Oscar Piastri、Lando Norris分居第2、第3，而Lando Norris靠著總積分423擊退Verstappen的421分順利封王，No...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E5%9C%8B%E5%A4%96%E8%B3%BD%E4%BA%8B-bc-racing%E9%BB%83%E8%BB%8D%E6%99%BA%E5%8B%87%E5%A5%AA%E5%88%86%E7%AB%99%E7%AC%AC%E4%BA%8C%E5%90%8D-2025-lamborghini-025454390.html" title="【國外賽事】 BC Racing黃軍智勇奪分站第二名 2025 Lamborghini Super Trofeo 亞洲挑戰賽最終站" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/ZnwlXv3R.T7nhRnaBvdv6Q--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/en/twautos.carnews.com/3eabe3b86f090fd5cb79b572dafa99ca" alt="【國外賽事】 BC Racing黃軍智勇奪分站第二名 2025 Lamborghini Super Trofeo 亞洲挑戰賽最終站">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>8</span>
+                    </div>
+                    <div class="title">【國外賽事】 BC Racing黃軍智勇奪分站第二名 2025 Lamborghini Super Trofeo 亞洲挑戰賽最終站</div>
+                    <div class="sub">車訊網</div>
+                    <div class="content">若要考驗車手駕駛技巧的話，統一規格賽是最好的賽事之一，因為在車輛條件幾乎相同的情況下，想要勝出唯有依靠車手的操駕技術才行，而台灣知名賽車隊-BC Racing當家車手-黃軍智，也就在這樣的條件下，於2025年Lamborghini Super Trofeo亞洲挑戰賽-最終站中，取得分站第二的優異成績，我們就來...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/kymco%E6%96%B0k1-125-150%E5%8D%97%E5%8F%B0%E8%BB%8A%E5%B1%95%E7%99%BC%E8%A1%A8%E4%B8%8A%E5%B8%82-%E9%9B%99%E8%BB%8A-%E6%BB%BF%E9%85%8D-104004280.html" title="KYMCO新K1 125/150南台車展發表上市！雙車「滿配」均一價6.05萬搶市" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/9cWZ2im52RTfV_QJOO4_VQ--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/vi/zeek__596/43073b8f123539ad18654c9c808244a1" alt="KYMCO新K1 125/150南台車展發表上市！雙車「滿配」均一價6.05萬搶市">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>6</span>
+                    </div>
+                    <div class="title">KYMCO新K1 125/150南台車展發表上市！雙車「滿配」均一價6.05萬搶市</div>
+                    <div class="sub">Zeek玩家誌</div>
+                    <div class="content">南臺灣第一大車展「南臺科大汽機車大展」第36屆今日盛大開展，南臺灣第一大車廠光陽機車董座柯俊斌親臨展會，為自家攤位開幕並宣布KYMCO「新K1 125/150特仕版」正式上市。柯俊斌董事長致詞表示，南台車展歷史悠久，早於民國78年開辦迄今，規模愈來愈大，是一個非常成功的車展，早在20多年前光...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/toyota-%E5%A4%A7%E6%94%B9%E6%AC%BE-rav4-2-0-062100274.html" title="Toyota 大改款 RAV4 2.0 升入門動力規格終於揭曉！台灣有望爭取導入" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/u.hYaGyIr5HCbtdXDLyxVw--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/vi/__405/494a0d3194c82deda3471642edb95077" alt="Toyota 大改款 RAV4 2.0 升入門動力規格終於揭曉！台灣有望爭取導入">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>6</span>
+                    </div>
+                    <div class="title">Toyota 大改款 RAV4 2.0 升入門動力規格終於揭曉！台灣有望爭取導入</div>
+                    <div class="sub">自由時報汽車頻道</div>
+                    <div class="content">隨著 Toyota 全新大改款 RAV4 陸續在全球各大市場上市，除了 2.5 升 Hybrid、2.5 升 PHEV 兩款油電動力之外，也追加推出 2.0 升自然進氣汽油的入門選擇，如今 2.0 升動力規格終於正式曝光，據了解台灣也有望爭取導入來滿足市場需求。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E6%80%8E%E8%83%BD%E4%B8%8D%E6%84%9B%E8%BB%8A-jdm%E7%B2%89%E5%B0%96%E5%8F%AB-nsx%E5%88%9D%E4%BB%A3%E9%87%8D%E7%94%9F%E7%89%88%E8%B6%85%E9%99%90%E9%87%8F-%E8%BA%AB%E5%83%B9%E9%A9%9A%E4%BA%BA-020600067.html" title="【怎能不愛車】JDM粉尖叫！NSX初代重生版超限量、身價驚人" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/_VQMXeH.H.tf_8cTmD9DIw--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/ca/setn.com.tw/75de94815373ffd934cf801bbf9b8d43" alt="【怎能不愛車】JDM粉尖叫！NSX初代重生版超限量、身價驚人">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>5</span>
+                    </div>
+                    <div class="title">【怎能不愛車】JDM粉尖叫！NSX初代重生版超限量、身價驚人</div>
+                    <div class="sub">三立新聞網 setn.com</div>
+                    <div class="content">初代Honda NSX在跑車迷心中一直是傳奇級存在，而現在這款90年代的日本神車，將以超稀有改裝版姿態復活！義大利設計名門賓尼法利納握刀，搭配JAS Motorsport多年賽車技術，把第一代NSX的底盤重新包上全碳纖維外衣，打造全新重生版「Tensei」，光聽名字就很有武俠味。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E7%A6%8F%E7%89%B9%E6%95%91%E4%B8%96%E4%B8%BB-%E8%B7%9F%E9%9A%A8%E4%B8%BB%E6%B5%81%E6%9C%83%E6%98%AF%E6%AD%A3%E7%A2%BA%E6%B1%BA%E5%AE%9A%E5%97%8E-ford-territory-%E6%86%91%E5%95%A5%E8%AA%AA%E6%98%AF%E5%9B%9B%E9%9B%BB%E9%A9%85%E6%B8%A6%E8%BC%AA%E6%B2%B9%E9%9B%BB-040210812.html" title="福特救世主？跟隨主流會是正確決定嗎？Ford Territory 憑啥說是四電驅渦輪油電？" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/aGHm.Ml..mSWWMjp5jRKHg--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/no/2gamesome_455/c7b9486a12466f36076db0b12b19bf4d" alt="福特救世主？跟隨主流會是正確決定嗎？Ford Territory 憑啥說是四電驅渦輪油電？">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>6</span>
+                    </div>
+                    <div class="title">福特救世主？跟隨主流會是正確決定嗎？Ford Territory 憑啥說是四電驅渦輪油電？</div>
+                    <div class="sub">2GameSome</div>
+                    <div class="content">正當市場都以為福特六和已經無車可賣，品牌聲勢浩大地宣布國內第一款油電中大型休旅 Territory 正式發表，且開出的價格也超出市場預期，面對許多級距對手都足以產生極強破壞力。不過，作為同樣是國內首輛亞太市場戰略產品，Territory 與過往我們印象中那充滿歐系血統的 Ford 到底有啥差異？4 ...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/2026%E5%B9%B4%E5%BC%8Fhonda-n-one%E6%97%A5%E6%9C%AC%E7%99%BC%E8%A1%A8-%E6%96%B0%E5%A2%9Ecraft-style%E7%89%B9%E4%BB%95%E7%89%88-140754928.html" title="2026年式Honda N-ONE日本發表 新增CRAFT STYLE特仕版｜RS車型純化為六速手排專屬" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/L5IKzslOnSZipi4.O.QHQg--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/no/zeek__596/d27347808cada534c7db2a2058af04fe" alt="2026年式Honda N-ONE日本發表 新增CRAFT STYLE特仕版｜RS車型純化為六速手排專屬">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>6</span>
+                    </div>
+                    <div class="title">2026年式Honda N-ONE日本發表 新增CRAFT STYLE特仕版｜RS車型純化為六速手排專屬</div>
+                    <div class="sub">Zeek玩家誌</div>
+                    <div class="content">Honda日前針對旗下輕型車（K-Car）「N-ONE」進行了部分改良更新，並已在日本市場正式發售。N-ONE是一款繼承了Honda乘用車原點「N360」的MM思想（最大化乘坐空間，最小化機械結構），追求雋永外觀設計與簡約舒適車室空間的車款。此次改良，全車系標配了前方停車輔助雷達與7吋TFT液晶儀表，並針...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/nissan-%E5%A4%A7%E6%94%B9%E6%AC%BE-elgrand-%E6%9C%80%E6%96%B0%E6%B6%88%E6%81%AF%E6%9B%9D%E5%85%89-%E9%A0%90%E4%BC%B0%E5%94%AE%E5%83%B9%E6%8F%90%E5%89%8D%E6%8F%AD%E6%9B%89%E6%8C%91%E6%88%B0-073300389.html" title="Nissan 大改款 Elgrand 最新消息曝光！預估售價提前揭曉挑戰 Alphard" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/pIQMhd57X2t8w3RsalNqpQ--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/vi/__405/63c5ee21299a5d6d861ceb8514f27d54" alt="Nissan 大改款 Elgrand 最新消息曝光！預估售價提前揭曉挑戰 Alphard">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>6</span>
+                    </div>
+                    <div class="title">Nissan 大改款 Elgrand 最新消息曝光！預估售價提前揭曉挑戰 Alphard</div>
+                    <div class="sub">自由時報汽車頻道</div>
+                    <div class="content">Nissan 在 2025 日本移動展（Japan Mobility Show）正式發表全新大改款 Elgrand，不僅擁有展現日式傳統美學及豪華質感的外觀造型與內裝鋪陳，也採用最新 e-Power 油電動力系統和先進 e-4orce 四輪驅動系統營造舒適靜謐的駕馭感受，將成為 Toyota Alphard 的最強勁敵。如今日媒透露大改款 Elgr...</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E6%80%8E%E8%83%BD%E4%B8%8D%E6%84%9B%E8%BB%8A-jaguar%E4%B8%8D%E8%B5%B0%E6%BA%AB%E5%92%8C%E8%B7%AF%E7%B7%9A%E4%BA%86-type-00%E5%A4%96%E5%9E%8B%E7%8B%82%E5%88%B0%E8%BB%8A%E8%BF%B7%E5%90%B5%E7%BF%BB%E5%A4%A9-030500643.html" title="【怎能不愛車】Jaguar不走溫和路線了！Type 00外型狂到車迷吵翻天" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/vctqwCGn7yxFYt9TQ7s6uQ--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/en/setn.com.tw/6f7fcb88118aca45b5280cd30b5a09e4" alt="【怎能不愛車】Jaguar不走溫和路線了！Type 00外型狂到車迷吵翻天">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>5</span>
+                    </div>
+                    <div class="title">【怎能不愛車】Jaguar不走溫和路線了！Type 00外型狂到車迷吵翻天</div>
+                    <div class="sub">三立新聞網 setn.com</div>
+                    <div class="content">Jaguar一年前推出的Type 00概念車，原本只是宣示品牌跨向超高端豪華市場的起手式。沒想到最近又成為焦點，只因應景地換上「倫敦紅消光漆」，被大方停在英國五星級飯店門口，替捷豹慶祝品牌首款車誕生90週年。雖然外型一直被網友討論不休，但至少一件事很明確，它超會吸睛。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E7%A6%8F%E7%89%B9ford-ceo%E8%AA%AA%E4%BB%96%E6%98%AF%E8%A2%AB%E5%BC%B7%E8%BF%AB%E5%81%9A%E9%9B%BB%E5%8B%95%E8%BB%8A%E7%9A%84-%E7%A8%B1%E8%AE%9A%E5%B7%9D%E6%99%AE%E5%8F%96%E6%B6%88%E9%81%8E%E5%BA%A6%E5%9A%B4%E8%8B%9B%E7%9A%84%E6%8E%92%E6%94%BE%E6%A8%99%E6%BA%96-071626730.html" title="福特Ford CEO說他是被強迫做電動車的！稱讚川普取消過度嚴苛的排放標準" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/io2xtvv37tDOs.zEoflnsg--~B/Zmk9ZmlsbDtoPTI0Njt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/zh-tw/sicar_385/a8a4cb8ad7d1dcd0be1d2975e56d4e7a" alt="福特Ford CEO說他是被強迫做電動車的！稱讚川普取消過度嚴苛的排放標準">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>5</span>
+                    </div>
+                    <div class="title">福特Ford CEO說他是被強迫做電動車的！稱讚川普取消過度嚴苛的排放標準</div>
+                    <div class="sub">SiCAR愛車酷</div>
+                    <div class="content">福特Ford CEO說他是被強迫做電動車的！稱讚川普取消過度嚴苛的排放標準</div>
+                </div>
+            </div>
+        </a>
+
+        
+            
+        <a class="gabtn news-item" href="https://autos.yahoo.com.tw/%E6%97%A5%E6%9C%AC%E8%BC%95%E5%9E%8B%E5%B0%8F%E8%BB%8A%E8%BF%B7%E5%80%92%E7%BE%8E%E5%9C%8B%E4%BA%BA-%E5%B7%9D%E6%99%AE-%E6%AF%94%E9%87%91%E9%BE%9C%E8%BB%8A%E9%82%84%E8%90%8C-%E6%88%91%E5%B7%B2%E4%B8%8B%E4%BB%A4%E6%94%BE%E8%A1%8C-040500427.html" title="日本輕型小車迷倒美國人？川普：比金龜車還萌、我已下令放行！" target="_self" data-ga="[&#039;單文頁_一般&#039;, &#039;單文頁_一般_推薦閱讀&#039;, &#039;N/A&#039;]">
+            <div class="single-new   ">
+                                    <div class="left">
+                        <img src="https://s.yimg.com/uu/api/res/1.2/G66xDxrDrraRW1rsNK3mfQ--~B/Zmk9ZmlsbDtoPTIwODt3PTM2OTthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/ca/setn.com.tw/c9606f162290efce458ad8141ff96233" alt="日本輕型小車迷倒美國人？川普：比金龜車還萌、我已下令放行！">
+                    </div>
+                
+                <div class="right">
+                    <div class="date">
+                        <span>Dec<br>5</span>
+                    </div>
+                    <div class="title">日本輕型小車迷倒美國人？川普：比金龜車還萌、我已下令放行！</div>
+                    <div class="sub">三立新聞網 setn.com</div>
+                    <div class="content">日本特有的輕型汽車Kei Car(K Car)進軍美國市場有譜？美國總統川普最近在宣佈放寬燃油經濟標準的記者會上，突然大聊他在訪日時看到的日本Kei Car，甚至大讚「非常可愛」，還說自己想讓這些迷你小車能在美國上路。他甚至拿它們比喻成「新的金龜車」，並強調已指示交通部長加速批准。</div>
+                </div>
+            </div>
+        </a>
+
+        
+            </div>
+    </div>
+  </div>
+
+  <span id="tracking-dot-pages" class="tracking-dot-pages">
+
+            <img src="https://sp.analytics.yahoo.com/spp.pl?a=10000&.yp=428726&country=tw&property=auto"/>
+
+    
+      </span>
+        </div>
+
+        <div class="right-holder">
+            <div class="right">
+
+                  <div class="ad-LREC-300x250">
+	<div id="boxLREC" class="yom-ad LREC">
+	  
+	  
+	    
+	  
+	  <div id="tgtLREC" class="adpos">
+		<div class="ad-placeholder">廣告</div>
+	  </div>
+
+	</div>
+</div>  <div class="search-right">
+  <input id="search-right-car" type="radio" name="search-right-tab"
+         class="gabtn" data-ga="['右欄_快速搜尋', '右欄_快速搜尋_找新車', '快速搜尋_找新車_Tab']"
+          checked >
+  <label for="search-right-car" class="search-tab">找新車</label>
+  <input id="search-right-bike" type="radio" name="search-right-tab"
+         class="gabtn" data-ga="['右欄_快速搜尋', '右欄_快速搜尋_找機車', '快速搜尋_找機車_Tab']"
+         >
+  <label for="search-right-bike" class="search-tab">找機車</label>
+  <input id="search-right-usedcar" type="radio" name="search-right-tab"
+         class="gabtn" data-ga="['右欄_快速搜尋', '右欄_快速搜尋_找中古車', '快速搜尋_找中古車_Tab']"
+         >
+  <label for="search-right-usedcar" class="search-tab">找中古車</label>
+      <div class="search-content search-right-car">
+      <form class="search-right-form" autocomplete="off" data-href="https://autos.yahoo.com.tw/car-search">
+        <ul>
+          <li>
+            <select id="car_make_id_right" name="make_id" data-href="https://autos.yahoo.com.tw/v1/autos/newcar/model/list/make">
+              <option value="" hidden>廠牌</option>
+              
+                              <option value="118" >
+                  AC Cars
+                </option>
+                              <option value="2" >
+                  Alfa Romeo
+                </option>
+                              <option value="96" >
+                  Aston Martin
+                </option>
+                              <option value="6" >
+                  Audi 奧迪
+                </option>
+                              <option value="8" >
+                  Bentley 賓利
+                </option>
+                              <option value="11" >
+                  BMW 寶馬
+                </option>
+                              <option value="104" >
+                  Citroen 雪鐵龍
+                </option>
+                              <option value="117" >
+                  Dallara
+                </option>
+                              <option value="22" >
+                  Ferrari 法拉利
+                </option>
+                              <option value="24" >
+                  Ford 福特
+                </option>
+                              <option value="28" >
+                  Honda 本田
+                </option>
+                              <option value="30"  selected >
+                  Hyundai 現代
+                </option>
+                              <option value="115" >
+                  Ineos
+                </option>
+                              <option value="32" >
+                  Infiniti
+                </option>
+                              <option value="35" >
+                  Jaguar 捷豹
+                </option>
+                              <option value="37" >
+                  Kia 起亞
+                </option>
+                              <option value="116" >
+                  KTM Sportcar
+                </option>
+                              <option value="88" >
+                  Lamborghini
+                </option>
+                              <option value="85" >
+                  Land Rover
+                </option>
+                              <option value="41" >
+                  Lexus 凌志
+                </option>
+                              <option value="99" >
+                  Lotus 蓮花
+                </option>
+                              <option value="95" >
+                  Luxgen 納智捷
+                </option>
+                              <option value="9" >
+                  M-Benz 賓士
+                </option>
+                              <option value="44" >
+                  Maserati 瑪莎拉蒂
+                </option>
+                              <option value="45" >
+                  Mazda 馬自達
+                </option>
+                              <option value="102" >
+                  McLaren 麥拉倫
+                </option>
+                              <option value="114" >
+                  MG
+                </option>
+                              <option value="86" >
+                  Mini 迷你
+                </option>
+                              <option value="48" >
+                  Mitsubishi 三菱
+                </option>
+                              <option value="103" >
+                  Morgan
+                </option>
+                              <option value="50" >
+                  Nissan 日產
+                </option>
+                              <option value="53" >
+                  Opel
+                </option>
+                              <option value="55" >
+                  Peugeot 寶獅
+                </option>
+                              <option value="59" >
+                  Porsche 保時捷
+                </option>
+                              <option value="101" >
+                  Rolls-Royce 勞斯萊斯
+                </option>
+                              <option value="87" >
+                  Skoda
+                </option>
+                              <option value="69" >
+                  Subaru 速霸陸
+                </option>
+                              <option value="71" >
+                  Suzuki 鈴木
+                </option>
+                              <option value="106" >
+                  Tesla 特斯拉
+                </option>
+                              <option value="74" >
+                  Toyota 豐田
+                </option>
+                              <option value="76" >
+                  Volkswagen 福斯
+                </option>
+                              <option value="78" >
+                  Volvo 富豪
+                </option>
+                          </select>
+
+          </li>
+          <li>
+            <select id="car_model_id_right" name="model_id" >
+              <option value="">所有車系</option>
+                                                <option value="7471"  selected >
+                    2026 Inster
+                  </option>
+                                  <option value="7243" >
+                    2025 Venue
+                  </option>
+                                  <option value="7244" >
+                    2025 Custin
+                  </option>
+                                  <option value="7245" >
+                    2025 Santa Fe
+                  </option>
+                                  <option value="7247" >
+                    2025 Staria
+                  </option>
+                                  <option value="7248" >
+                    2025 Ioniq 5
+                  </option>
+                                  <option value="7346" >
+                    2025 Ioniq 6
+                  </option>
+                                  <option value="7368" >
+                    2025 Tucson L(NEW)
+                  </option>
+                                  <option value="7379" >
+                    2025 Mufasa
+                  </option>
+                                          </select>
+          </li>
+        </ul>
+        <button type="submit"           class="gabtn" data-ga="['右欄_快速搜尋', '右欄_快速搜尋_找新車', '快速搜尋_找新車_放大鏡']">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+        <div class="search-content search-right-bike">
+      <form class="search-right-form" autocomplete="off" data-href="https://autos.yahoo.com.tw/bike-search">
+        <ul>
+          <li>
+            <select id="bike_make_id_right" name="make_id" data-href='https://autos.yahoo.com.tw/v1/autos/newbike/model/list/make'>
+              <option value="" hidden>廠牌</option>
+              
+                              <option value="20" >
+                  Aeonmotor 宏佳騰
+                </option>
+                              <option value="16" >
+                  Aprilia
+                </option>
+                              <option value="15" >
+                  BMW
+                </option>
+                              <option value="6" >
+                  Ducati 杜卡迪
+                </option>
+                              <option value="25" >
+                  eMOVING
+                </option>
+                              <option value="40" >
+                  eReady
+                </option>
+                              <option value="46" >
+                  Fantic
+                </option>
+                              <option value="26" >
+                  Gogoro
+                </option>
+                              <option value="7" >
+                  Harley-Davidson 哈雷
+                </option>
+                              <option value="8" >
+                  Hartford 哈特佛
+                </option>
+                              <option value="19" >
+                  Honda 本田
+                </option>
+                              <option value="24" >
+                  Indian 印地安
+                </option>
+                              <option value="4" >
+                  Kawasaki 川崎
+                </option>
+                              <option value="1" >
+                  Kymco 光陽
+                </option>
+                              <option value="44" >
+                  Lambretta 蘭美達
+                </option>
+                              <option value="2" >
+                  PGO
+                </option>
+                              <option value="5" >
+                  Suzuki 鈴木
+                </option>
+                              <option value="13" >
+                  SYM 三陽
+                </option>
+                              <option value="14" >
+                  Triumph 凱旋
+                </option>
+                              <option value="21" >
+                  Vespa
+                </option>
+                              <option value="3"  selected >
+                  Yamaha 山葉
+                </option>
+                              <option value="45" >
+                  ZAU
+                </option>
+                          </select>
+          </li>
+          <li>
+            <select id="bike_model_id_right" name="model_id" >
+              <option value="">所有車系</option>
+                                                <option value="3303" >
+                    2026 MT
+                  </option>
+                                  <option value="3302" >
+                    2026 TMAX
+                  </option>
+                                  <option value="3237" >
+                    2025 MT
+                  </option>
+                                  <option value="3296"  selected >
+                    2025 CUXiE
+                  </option>
+                                  <option value="3295" >
+                    2025 Cygnus-X
+                  </option>
+                                  <option value="3294" >
+                    2025 NMAX(NEW)
+                  </option>
+                                  <option value="3293" >
+                    2025 FZ-X
+                  </option>
+                                  <option value="3287" >
+                    2025 XMAX
+                  </option>
+                                  <option value="3238" >
+                    2025 YZF-R
+                  </option>
+                                  <option value="3176" >
+                    2025 Limi
+                  </option>
+                                  <option value="3236" >
+                    2025 EMF
+                  </option>
+                                  <option value="3235" >
+                    2025 RS NEO
+                  </option>
+                                  <option value="3234" >
+                    2025 Axis Z勁豪
+                  </option>
+                                  <option value="3232" >
+                    2025 Force 2.0
+                  </option>
+                                  <option value="3231" >
+                    2025 Augur
+                  </option>
+                                  <option value="3230" >
+                    2025 BW’S
+                  </option>
+                                  <option value="3227" >
+                    2025 Jog
+                  </option>
+                                  <option value="3177" >
+                    2025 Vinoora
+                  </option>
+                                          </select>
+          </li>
+        </ul>
+        <button type="submit"           class="gabtn" data-ga="['右欄_快速搜尋', '右欄_快速搜尋_找機車', '快速搜尋_找機車_放大鏡']">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+        <div class="search-content search-right-usedcar">
+      <form class="search-right-form" autocomplete="off" data-href="https://autos.yahoo.com.tw/usedcar-search">
+        <ul>
+          <li>
+                        <select id="usedcars_make_id_right" name="make_name" data-href="https://autos.yahoo.com.tw/v1/autos/usedcar/model/list">
+              <option value="" hidden>廠牌</option>
+                              <option
+                  value="AC Cars" >
+                  AC Cars
+                </option>
+                              <option
+                  value="Alfa Romeo" >
+                  Alfa Romeo
+                </option>
+                              <option
+                  value="Aston Martin" >
+                  Aston Martin
+                </option>
+                              <option
+                  value="Audi" >
+                  Audi 奧迪
+                </option>
+                              <option
+                  value="Bentley" >
+                  Bentley 賓利
+                </option>
+                              <option
+                  value="BMW" >
+                  BMW 寶馬
+                </option>
+                              <option
+                  value="Bugatti" >
+                  Bugatti
+                </option>
+                              <option
+                  value="Buick" >
+                  Buick 別克
+                </option>
+                              <option
+                  value="Cadillac" >
+                  Cadillac 凱迪拉克
+                </option>
+                              <option
+                  value="Chery" >
+                  Chery
+                </option>
+                              <option
+                  value="Chrysler" >
+                  Chrysler 克萊斯勒
+                </option>
+                              <option
+                  value="Citroen" >
+                  Citroen 雪鐵龍
+                </option>
+                              <option
+                  value="Daihatsu" >
+                  Daihatsu 大發
+                </option>
+                              <option
+                  value="Dallara" >
+                  Dallara
+                </option>
+                              <option
+                  value="Ferrari" >
+                  Ferrari 法拉利
+                </option>
+                              <option
+                  value="Fiat" >
+                  Fiat 飛雅特
+                </option>
+                              <option
+                  value="Ford" >
+                  Ford 福特
+                </option>
+                              <option
+                  value="Honda" >
+                  Honda 本田
+                </option>
+                              <option
+                  value="Hyundai" >
+                  Hyundai 現代
+                </option>
+                              <option
+                  value="Ineos" >
+                  Ineos
+                </option>
+                              <option
+                  value="Infiniti" >
+                  Infiniti
+                </option>
+                              <option
+                  value="Jaguar" >
+                  Jaguar 捷豹
+                </option>
+                              <option
+                  value="Jeep" >
+                  Jeep 吉普
+                </option>
+                              <option
+                  value="Kia" >
+                  Kia 起亞
+                </option>
+                              <option
+                  value="KTM Sportcar" >
+                  KTM Sportcar
+                </option>
+                              <option
+                  value="Lamborghini" >
+                  Lamborghini
+                </option>
+                              <option
+                  value="Land Rover" >
+                  Land Rover
+                </option>
+                              <option
+                  value="Lexus" >
+                  Lexus 凌志
+                </option>
+                              <option
+                  value="Lotus" >
+                  Lotus 蓮花
+                </option>
+                              <option
+                  value="Luxgen" >
+                  Luxgen 納智捷
+                </option>
+                              <option
+                  value="M-Benz" >
+                  M-Benz 賓士
+                </option>
+                              <option
+                  value="Mahindra" >
+                  Mahindra
+                </option>
+                              <option
+                  value="Maserati" >
+                  Maserati 瑪莎拉蒂
+                </option>
+                              <option
+                  value="Mazda" >
+                  Mazda 馬自達
+                </option>
+                              <option
+                  value="McLaren" >
+                  McLaren 麥拉倫
+                </option>
+                              <option
+                  value="MG" >
+                  MG
+                </option>
+                              <option
+                  value="Mini" >
+                  Mini 迷你
+                </option>
+                              <option
+                  value="Mitsubishi" >
+                  Mitsubishi 三菱
+                </option>
+                              <option
+                  value="Morgan" >
+                  Morgan
+                </option>
+                              <option
+                  value="Nissan" >
+                  Nissan 日產
+                </option>
+                              <option
+                  value="Opel" >
+                  Opel
+                </option>
+                              <option
+                  value="Peugeot" >
+                  Peugeot 寶獅
+                </option>
+                              <option
+                  value="Porsche" >
+                  Porsche 保時捷
+                </option>
+                              <option
+                  value="Proton" >
+                  Proton 寶騰
+                </option>
+                              <option
+                  value="Renault" >
+                  Renault 雷諾
+                </option>
+                              <option
+                  value="Rolls-Royce" >
+                  Rolls-Royce 勞斯萊斯
+                </option>
+                              <option
+                  value="Saab" >
+                  Saab 紳寶
+                </option>
+                              <option
+                  value="Skoda" >
+                  Skoda
+                </option>
+                              <option
+                  value="Smart" >
+                  Smart
+                </option>
+                              <option
+                  value="Ssangyong" >
+                  Ssangyong 雙龍
+                </option>
+                              <option
+                  value="Subaru" >
+                  Subaru 速霸陸
+                </option>
+                              <option
+                  value="Suzuki" >
+                  Suzuki 鈴木
+                </option>
+                              <option
+                  value="Tesla" >
+                  Tesla 特斯拉
+                </option>
+                              <option
+                  value="Tobe" >
+                  Tobe 酷比
+                </option>
+                              <option
+                  value="Toyota" selected=&quot;selected&quot;>
+                  Toyota 豐田
+                </option>
+                              <option
+                  value="Volkswagen" >
+                  Volkswagen 福斯
+                </option>
+                              <option
+                  value="Volvo" >
+                  Volvo 富豪
+                </option>
+                          </select>
+          </li>
+          <li>
+            <select id="usedcars_model_id_right" name="model_name"
+                    >
+              <option value="">所有車系</option>
+                                                <option value="Corolla Altis"
+                          >
+                    Corolla Altis
+                  </option>
+                                  <option value="Corolla Cross"
+                          >
+                    Corolla Cross
+                  </option>
+                                  <option value="bZ"
+                          >
+                    bZ
+                  </option>
+                                  <option value="Land Cruiser"
+                          >
+                    Land Cruiser
+                  </option>
+                                  <option value="Hilux"
+                          >
+                    Hilux
+                  </option>
+                                  <option value="GR Supra"
+                          >
+                    GR Supra
+                  </option>
+                                  <option value="Granvia"
+                          >
+                    Granvia
+                  </option>
+                                  <option value="Sienna"
+                          >
+                    Sienna
+                  </option>
+                                  <option value="GR86"
+                          >
+                    GR86
+                  </option>
+                                  <option value="Corolla Sport"
+                          >
+                    Corolla Sport
+                  </option>
+                                  <option value="Crown"
+                          >
+                    Crown
+                  </option>
+                                  <option value="Prius PHEV"
+                          >
+                    Prius PHEV
+                  </option>
+                                  <option value="Vios"
+                          >
+                    Vios
+                  </option>
+                                  <option value="Camry"
+                          >
+                    Camry
+                  </option>
+                                  <option value="Yaris Cross"
+                          >
+                    Yaris Cross
+                  </option>
+                                  <option value="Alphard"
+                          >
+                    Alphard
+                  </option>
+                                  <option value="GR Yaris"
+                          >
+                    GR Yaris
+                  </option>
+                                  <option value="RAV4"
+                          >
+                    RAV4
+                  </option>
+                                  <option value="Corolla Cross(NEW)"
+                          >
+                    Corolla Cross(NEW)
+                  </option>
+                                  <option value="Camry(NEW)"
+                          >
+                    Camry(NEW)
+                  </option>
+                                  <option value="Sienta"
+                          >
+                    Sienta
+                  </option>
+                                  <option value="Alphard(NEW)"
+                          >
+                    Alphard(NEW)
+                  </option>
+                                  <option value="Prius PHV"
+                          >
+                    Prius PHV
+                  </option>
+                                  <option value="Yaris"
+                          >
+                    Yaris
+                  </option>
+                                  <option value="C-HR"
+                          >
+                    C-HR
+                  </option>
+                                  <option value="86"
+                          >
+                    86
+                  </option>
+                                  <option value="Prius Alpha"
+                          >
+                    Prius Alpha
+                  </option>
+                                  <option value="Prius"
+                          >
+                    Prius
+                  </option>
+                                  <option value="Hilux(NEW)"
+                          >
+                    Hilux(NEW)
+                  </option>
+                                  <option value="Prius c"
+                          >
+                    Prius c
+                  </option>
+                                  <option value="Previa"
+                          >
+                    Previa
+                  </option>
+                                  <option value="Auris"
+                          >
+                    Auris
+                  </option>
+                                  <option value="Prius PHV(NEW)"
+                          >
+                    Prius PHV(NEW)
+                  </option>
+                                  <option value="Corolla Altis(NEW)"
+                          >
+                    Corolla Altis(NEW)
+                  </option>
+                                  <option value="商用車"
+                          >
+                    商用車
+                  </option>
+                                  <option value="Yaris(NEW)"
+                          >
+                    Yaris(NEW)
+                  </option>
+                                  <option value="Vios(NEW)"
+                          >
+                    Vios(NEW)
+                  </option>
+                                  <option value="Wish"
+                          >
+                    Wish
+                  </option>
+                                  <option value="Innova"
+                          >
+                    Innova
+                  </option>
+                                  <option value="X"
+                          >
+                    X
+                  </option>
+                                  <option value="Prius Hybrid"
+                          >
+                    Prius Hybrid
+                  </option>
+                                  <option value="其他"
+                          >
+                    其他
+                  </option>
+                                          </select>
+          </li>
+        </ul>
+        <button type="submit"
+          class="gabtn" data-ga="['右欄_快速搜尋', '右欄_快速搜尋_找中古車', '快速搜尋_找中古車_放大鏡']"
+          >
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+    <div class="hot-spot-video">
+        <h3 class="right-tite"><span>焦點影音</span></h3>
+
+                                <a class="gabtn" href="https://autos.yahoo.com.tw/video/c%E7%B4%9Asuv%E6%96%B0%E6%A8%99%E7%AB%BF-%E5%84%AA%E7%BC%BA%E5%AE%8C%E6%95%B4%E6%8F%AD%E9%9C%B2-%E6%87%B8%E5%90%8A%E8%A1%A8%E7%8F%BE%E5%8B%9D%E9%81%8E%E5%8B%95%E5%8A%9B-%E6%8A%93-%E5%8F%B0toyota-022753980.html" title="【C級SUV新標竿！優缺完整揭露】懸吊表現勝過動力！抓一台Toyota CC直接實測對比｜HYUNDAI MUFASA 新車試駕" data-ga="['右欄_焦點影音', '右欄_焦點影音1', 'N/A']">
+                <div class="player-container">
+                    
+                    <img src="https://s.yimg.com/uu/api/res/1.2/jNkPgaTN2sT.fh6eYCfKcg--~B/aD03MjA7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://s.yimg.com/os/creatr-uploaded-images/2025-12/7120e620-d3dd-11f0-9fdd-7217215ebaf5" alt="【C級SUV新標竿！優缺完整揭露】懸吊表現勝過動力！抓一台Toyota CC直接實測對比｜HYUNDAI MUFASA 新車試駕">
+                </div>
+                <h4>【C級SUV新標竿！優缺完整揭露】懸吊表現勝過動力！抓一台Toyota CC直接實測對比｜HYUNDAI MUFASA 新車試駕</h4>
+            </a>
+                                <a class="gabtn" href="https://autos.yahoo.com.tw/video/%E6%89%BE%E4%B8%8D%E5%88%B0%E5%95%8F%E9%A1%8C%E5%B0%B1%E8%AC%9B%E9%80%9A%E7%97%85-%E9%85%8D%E5%82%99%E7%AB%9F%E5%BE%97%E8%A6%81%E5%86%8D%E8%8A%B129%E8%90%AC-%E9%9F%B3%E9%9F%BF%E7%88%86%E9%9F%B3%E6%8B%96%E4%BA%86%E5%85%A9%E5%B9%B4%E6%89%8D%E8%A7%A3%E6%B1%BA-kia-carnival-022440703.html" title="【找不到問題就講通病?!】配備竟得要再花29萬？音響爆音拖了兩年才解決？｜Kia Carnival、Golf Mk8、Ford Ranger【車主長期追蹤EP101】" data-ga="['右欄_焦點影音', '右欄_焦點影音2', 'N/A']">
+                <div class="player-container">
+                    
+                    <img src="https://s.yimg.com/uu/api/res/1.2/Fe9nveSNguqt8JFdoW2lBg--~B/aD03MjA7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://s.yimg.com/os/creatr-uploaded-images/2025-12/f0e969a0-d3dc-11f0-9f7f-6fdc29951c17" alt="【找不到問題就講通病?!】配備竟得要再花29萬？音響爆音拖了兩年才解決？｜Kia Carnival、Golf Mk8、Ford Ranger【車主長期追蹤EP101】">
+                </div>
+                <h4>【找不到問題就講通病?!】配備竟得要再花29萬？音響爆音拖了兩年才解決？｜Kia Carnival、Golf Mk8、Ford Ranger【車主長期追蹤EP101】</h4>
+            </a>
+                                <a class="gabtn" href="https://autos.yahoo.com.tw/video/%E7%A6%8F%E7%89%B9%E6%9C%80%E5%BC%B7%E7%94%9F%E5%8A%9B%E8%BB%8D%E4%BE%86%E4%BA%86-%E7%99%BE%E8%90%AC%E5%85%A7%E4%BA%AB%E6%9C%89%E8%B1%AA%E8%8F%AF%E8%BB%8A%E5%B0%8A%E6%A6%AE%E9%85%8D%E5%82%99-%E5%98%89%E5%81%89%E5%93%A5%E8%A1%A8%E7%A4%BA-%E5%86%8D%E5%AB%8C-%E4%BD%A0%E5%B0%B1%E6%B2%92%E8%BB%8A%E5%8F%AF%E4%BB%A5%E8%B2%B7%E4%BA%86-070238086.html" title="【福特最強生力軍來了！】百萬內享有豪華車尊榮配備！嘉偉哥表示：再嫌？你就沒車可以買了～｜Ford Territory 1.5T Per4mance Hybrid 驚豔版 新車試駕" data-ga="['右欄_焦點影音', '右欄_焦點影音3', 'N/A']">
+                <div class="player-container">
+                    
+                    <img src="https://s.yimg.com/uu/api/res/1.2/1is78d7Af8bBWlh7zzu1jA--~B/aD0xMDgwO3c9MTkyMDthcHBpZD15dGFjaHlvbg--/https://s.yimg.com/os/creatr-uploaded-images/2025-12/6ab70140-d1a6-11f0-9b8d-52be79182cd1" alt="【福特最強生力軍來了！】百萬內享有豪華車尊榮配備！嘉偉哥表示：再嫌？你就沒車可以買了～｜Ford Territory 1.5T Per4mance Hybrid 驚豔版 新車試駕">
+                </div>
+                <h4>【福特最強生力軍來了！】百萬內享有豪華車尊榮配備！嘉偉哥表示：再嫌？你就沒車可以買了～｜Ford Territory 1.5T Per4mance Hybrid 驚豔版 新車試駕</h4>
+            </a>
+        
+        <div class="read-more">
+            <a class="gabtn" href="https://autos.yahoo.com.tw/videos" title="看更多" data-ga="['右欄_焦點影音', '右欄_焦點影音_more', 'N/A']">more</a>
+        </div>
+    </div>
+  <!-- /latest check -->
+  <div class="usedcar-ranking">
+    <h3 class="right-tite"><span>熱門中古車排行 未滿20萬 </span></h3>
+                  <a class="gabtn" data-ga="['右欄_熱門排行_中古車', '右欄_熱門_中古_未滿20萬', '右欄_熱門_中古_未滿20萬_abc好車網']" href="https://autos.yahoo.com.tw/used-cars-rd/3919857" title="Toyota 豐田 2020 Prius c" target="_blank" rel="noopener">
+            <div class="ranking-wrapper">
+                <span class="counter">1</span>
+                <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/ce00fdc31a0ba962d4984843b584ac7c.jpg" alt="Toyota 豐田 2020 Prius c" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="info">
+                <div class="title jq-tracking-dot-click" data-custid="14">
+                    Toyota 豐田 2020 Prius c
+                </div>
+                <span class="price">16.8</span>
+            </div>
+        </a>
+                  <a class="gabtn" data-ga="['右欄_熱門排行_中古車', '右欄_熱門_中古_未滿20萬', '右欄_熱門_中古_未滿20萬_abc好車網']" href="https://autos.yahoo.com.tw/used-cars-rd/3916099" title="Kia 起亞 2019 Stonic" target="_blank" rel="noopener">
+            <div class="ranking-wrapper">
+                <span class="counter">2</span>
+                <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/eaf6fc1903efdafa81aa0d5577647fa2.jpeg" alt="Kia 起亞 2019 Stonic" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="info">
+                <div class="title jq-tracking-dot-click" data-custid="14">
+                    Kia 起亞 2019 Stonic
+                </div>
+                <span class="price">17.8</span>
+            </div>
+        </a>
+                  <a class="gabtn" data-ga="['右欄_熱門排行_中古車', '右欄_熱門_中古_未滿20萬', '右欄_熱門_中古_未滿20萬_abc好車網']" href="https://autos.yahoo.com.tw/used-cars-rd/3906717" title="Volkswagen 福斯 2011 Golf" target="_blank" rel="noopener">
+            <div class="ranking-wrapper">
+                <span class="counter">3</span>
+                <img src="https://img.abccar.com.tw/resize?key=416x234/https://image.abccar.com.tw/carimages/images/76527272a735980901f054e0118c7160.jpg" alt="Volkswagen 福斯 2011 Golf" data-custid="14" class="jq-tracking-dot-click">
+            </div>
+            <div class="info">
+                <div class="title jq-tracking-dot-click" data-custid="14">
+                    Volkswagen 福斯 2011 Golf
+                </div>
+                <span class="price">5.8</span>
+            </div>
+        </a>
+        <div class="read-more">
+        <a class="gabtn" data-ga="['右欄_熱門排行_中古車', '右欄_熱門_中古_未滿20萬', '右欄_熱門_汽車_未滿20萬_more']" href="https://autos.yahoo.com.tw/popular-used-cars" title="看更多">more</a>
+    </div>
+</div>
+<!-- /ranking right -->
+    <div class="fb-box fb-position-fixed">
+	<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FYahooAutosTaiwan%2F&tabs=timeline&width=300&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=1436005369851063" width="300" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+</div>
+  <div class="ad-LREC3-300x250">
+	<div id="boxLREC3" class="yom-ad LREC3">
+	  
+	  
+	    
+	  
+	  <div id="tgtLREC3" class="adpos">
+		<div class="ad-placeholder">廣告</div>
+	  </div>
+
+	</div>
+</div>
+                <ul class="footer-url">
+	<li>
+		<a class="gabtn" href="https://tw.help.yahoo.com/kb/autos-tw" title="服務中心" target="_blank" data-ga="['Footer', 'Footer_服務中心', 'N/A']">服務中心</a>
+	</li>
+	<li>|</li>
+	<li>
+		<a class="gabtn" href="https://autos.yahoo.com.tw/sitemap" title="網站地圖" data-ga="['Footer', 'Footer_網站地圖', 'N/A']">網站地圖</a>
+	</li>
+	<li>|</li>
+	<li>
+		<a class="gabtn" href="https://policies.yahoo.com/tw/zh-hant/yahoo/privacy/index.htm" title="隱私權" title="_blank" data-ga="['Footer', 'Footer_隱私權', 'N/A']">隱私權(更新)</a>
+	</li>
+	<li>|</li>
+	<li>
+		<a class="gabtn" href="https://policies.yahoo.com/tw/zh-hant/yahoo/terms/utos/index.htm" title="服務條款" target="_blank" data-ga="['Footer', 'Footer_服務條款', 'N/A']">服務條款(更新)</a>
+	</li>
+	<li>|</li>
+	<li>
+		<a class="gabtn" href="https://marketing.tw.campaign.yahoo.net/emarketing/searchmarketing/" title="關鍵字廣告" target="_blank" data-ga="['Footer', 'Footer_關鍵字廣告', 'N/A']">關鍵字廣告</a>
+	</li>
+	<li>|</li>
+	<li>
+		<a href="" title="" target="_blank"></a>
+	</li>
+	</ul>
+            </div>
+        </div>
+
+    </div>
+
+            <footer  class="disabled" >
+	<div class="compare-basket mouseleave ga-parent">
+		<input type="hidden" name="now-compare-type" value="">
+<ul>
+                      <li class="last"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+            
+  <span class="now-select">目前選擇<font>0</font>輛</span>
+  <li>
+    <span class="now-select">目前選擇<font>0</font>輛</span>
+    <button  class="disabled"  data-href="https://autos.yahoo.com.tw/cars/submit-compare">開始比較
+    </button>
+  </li>
+</ul>
+	</div>
+	<form method="post" action="https://autos.yahoo.com.tw/ajax/clear_compare_list">
+		<input type="hidden" name="_token" value="ZQEHNpL1arljg4d9kKCdxRjSUXpcQqxcHTwQe7VF">
+		<input type="hidden" name="view_type" value="1">
+		<div class="cancel-compare" data-href="https://autos.yahoo.com.tw/ajax/clear_compare_list">
+			<span>取消比較</span>
+		</div>
+	</form>
+</footer>    
+    
+    <script src="/js/library.js?id=7df0222a0b65a38d358941215218492f"></script>
+
+      <script src="/js/common.js?id=90620dc8535ee0e6b5229299db600a3e"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script async src="//platform.instagram.com/en_US/embeds.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener('message', function(event) {
+            //修正其中一種case 的iframe size. 目前的寫法盡可能不要去影響其他的iframe case
+            try {
+                var data = JSON.parse(event.data);
+                if (data.context === 'iframe.resize' && data.height) {
+                    var iframes = document.querySelectorAll("iframe");
+                    iframes.forEach(function(iframe) {
+                        if (iframe.src === data.src) {
+                            iframe.style.height = data.height + 'px';
+                            iframe.style.minHeight = data.height + 'px';
+                        }
+                    });
+                }
+                if (data.context === 'sport.iframe.resize' && data.height){
+                    var iframes = document.querySelectorAll("iframe.sport-iframe");
+                    iframes.forEach(function(iframe) {
+                        iframe.style.height = data.height + 'px';
+                        iframe.style.minHeight = data.height + 'px';
+                    });
+                }
+            } catch (e) {
+                console.error('Error parsing message data:', e);
+            }
+        });
+
+        var iframes = document.querySelectorAll("iframe");
+        iframes.forEach(function(iframe, index) {
+            iframe.id = 'iframe-' + index;
+        });
+    });
+    </script> </body>
+    <script>
+    (function () {
+                    const position_tgtLREC = {
+                id: 'tgtLREC',
+                kvs: {
+                    loc: 'top_right',
+                },
+                path: '/22888152279/tw/yauto/ros/dt/tw_yauto_ros_dt_top_right',
+                region: 'index',
+                                    size: [[300, 250], [300, 600]],
+                            };
+
+                        const position_tgtLREC3 = {
+                id: 'tgtLREC3',
+                kvs: {
+                    loc: 'mid_right',
+                },
+                path: '/22888152279/tw/yauto/ros/dt/tw_yauto_ros_dt_mid_right',
+                region: 'index',
+                                    size: [[300, 250], [300, 600]],
+                            };
+            
+            const position_tgtLDRB = {
+                id: 'tgtLDRB',
+                kvs: {
+                    loc: 'top_center',
+                },
+                path: '/22888152279/tw/yauto/ros/dt/tw_yauto_ros_dt_top_center',
+                region: 'index',
+                                    size: [[728, 90],[970, 250],[3,1]],
+                    customSizeConfig: {
+                        Horizon: true,
+                    },
+                            };
+        
+                const position_tgtMAST = {};
+        
+        const position_tgtLDRB2 = {  
+            id: "tgtLDRB2",  
+            kvs: {
+                loc: 'btm_center',
+            },
+            path: '/22888152279/tw/yauto/ros/dt/tw_yauto_ros_dt_btm_center',
+            region: 'index',
+            size: [[728, 90]],
+        };
+        const configs = {
+            tgtMAST: position_tgtMAST,
+            tgtLREC: position_tgtLREC,
+            tgtLREC3: position_tgtLREC3,
+            tgtLDRB: position_tgtLDRB,
+            tgtLDRB2: position_tgtLDRB2,
+        }
+        window.configs = configs;
+
+        const taboolaSetting = {
+            publisherId: 'yahootwhk-network',
+            pageType: 'article',
+        }
+
+        const benjiConfig = {
+            feature: {
+                enableEdgeToEdge: true,
+                enableYahooPrebid: true,
+                enableRefreshDebounce: true,
+                enableTaboolaDebounce: true,
+                enableLazyFetch: true,
+            },
+            setting: {
+                taboolaSetting: taboolaSetting,
+                                lazyLoad: {
+                    lazyFetch: {
+                        taboola: {
+                            offset: 300,
+                        }
+                    }
+                },
+                                refresh: {
+                    duration: 30,
+                    limit: 100,
+                    requireUserAction: true,
+                    sameSizeRefresh: true,
+                    tabFocus: {
+                        outOfFocusDuration: 3,
+                    },
+                },
+            },
+
+
+            positions: {},
+
+            i13n: {
+                site: 'autos',
+                region: 'TW',
+                lang: 'zh-Hant-TW',
+                spaceid: '794027424',
+                bucket: [],
+                device:  'desktop' ,
+                usercountry: 'JP',
+            }
+        };
+
+        const pt = "content";
+        const pct = "story";
+        if(pt) benjiConfig.i13n.pt = pt;
+        if(pct) benjiConfig.i13n.pct = pct;
+
+        const adsElements = document.querySelectorAll(".adpos");
+        adsElements.forEach((e)=> {
+            const id = e.id;
+            benjiConfig['positions'][id] = configs[id];
+        })
+
+                    const hashtag = 'autos,電動車,news,autos';
+            benjiConfig['i13n']['hashtag'] = hashtag.split(",");
+                // console.log('benji?', benjiConfig);
+
+        //Native Ads START
+        const nadsElements = document.querySelectorAll(".nadpos");
+        let nadPositions = {};
+        nadsElements.forEach(function(e) {
+            let config = JSON.parse(e.getAttribute('data-nad-benji-config'));
+            let configId = e.getAttribute('data-nad-benji-id');
+            if (config && configId) {
+                nadPositions[configId] = config;
+            }
+        });
+
+        if (benjiConfig && nadPositions) {
+            Object.assign(benjiConfig.positions, nadPositions);
+        }
+        //Native Ads END
+
+        if (typeof window.benji !== 'undefined') {
+            window.benji.start(benjiConfig);
+        } else {
+            window.benji = {
+                config: benjiConfig
+            };
+        }
+        // 監聽廣告
+        const adSlot = document.querySelector('.adpos');
+
+        const observer = new MutationObserver(() => {
+            const iframe = adSlot.querySelector('iframe');
+            if (iframe) {
+                // 嘗試監聽 iframe load
+                const placeholder = adSlot.querySelector('.ad-placeholder');
+                try {
+                    iframe.addEventListener('load', () => {
+                        if (placeholder) {
+                            placeholder.style.display = 'none';
+                        }
+                    });
+                } catch (e) {
+                    // 無法監聽時 fallback
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
+                    }
+                }
+                observer.disconnect(); // 停止監聽
+            }
+        });
+
+        observer.observe(adSlot, { childList: true, subtree: true });
+
+    })();
+</script>
+ 
+
+ </html>

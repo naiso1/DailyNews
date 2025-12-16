@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover">
+    <meta name="keywords" content="汽车，颁奖典礼，技术，苏州，交流会，资讯">
+    <meta name="description" content="2025新汽车技术交流会暨第十届铃轩奖颁奖典礼在苏州圆满落幕">
+    <meta name="format-detection" content="telephone=no">
+    <title>2025新汽车技术交流会暨第十届铃轩奖颁奖典礼在苏州圆满落幕_产经_神选车</title>
+    <link rel="stylesheet" href="https://cdn.shenxuanche.com/icon/iconfont.css">
+    <link rel="stylesheet" href="https://cdn.shenxuanche.com/css/global.min.css">
+    <link rel="stylesheet" href="https://cdn.shenxuanche.com/css/article.min.css">
+    <script>
+  // 百度
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?921e697ff49ccd71710ffad6f523a566";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  // 头条
+  (function () {
+    var el = document.createElement("script");
+    el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?d92de76156971a91aef9db873df2e169fff55468d109c5fc7dc8408e39c98ea08a24d2f724c31ebe20c1e4e6fba6d91caf576100b02a2870c72f38fc574066fef065d152c73bf1cbb2ebad3b5b5265d8";
+    el.id = "ttzz";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(el, s);
+  })(window)
+</script>
+</head>
+
+<body>
+    <div class="main-header">
+    <div class="logo">
+        <a href="/"><img src="https://cdn.shenxuanche.com/img/logo.png" alt="" srcset=""></a>
+    </div>
+    <div class="curr-position">
+        <div class="curr-city" id="city-switch">
+            <div class="handler city-handler">
+                <span class="text">定位中…</span><span class="arrow-icon"><i class="iconfont icon-arrow-down"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="channel-nav">
+        <div class="act-channel">
+            <a href="/list/xinche" data-url="xinche" target="_blank">新车</a>
+            <a href="/list/pingce" data-url="pingce" target="_blank">评测</a>
+            <a href="/list/shipin" data-url="shipin" target="_blank">视频</a>
+            <a href="/list/yongche" data-url="yongche" target="_blank">用车</a>
+            <a href="/list/daogou" data-url="daogou" target="_blank">导购</a>
+        </div>
+        <div class="show-more-channel">更多</div>
+    </div>
+    <div class="search-container">
+        <div class="search-content">
+            <div class="search-keyword">
+                <input id="search_context" type="text" class="input-keyword" placeholder="启源A07">
+            </div>
+            <div class="search-btn">搜&nbsp;索</div>
+        </div>
+    </div>
+    <div class="h5-version-btn">
+        <div class="icon"></div>
+        <div class="context">手机版</div>
+        <div class="h5-view-ewm">
+            <div class="arrow-top"><span class="arrow"></span></div>
+            <div class="h5-ewm-box">
+                <div id="h5-ewm-img"><img src="https://cdn.shenxuanche.com/img/h5-version-qrcode.png" alt="手机版神选车"></div>
+            </div>
+        </div>
+    </div>
+    <div class="app-version-btn">
+        <div class="context"><a href="/app/download.html" target="_blank">下载APP</a></div>
+    </div>
+    <div class="login-group">
+        <div class="btn btn-primary login-btn">登&nbsp;录</div>
+        <!-- <div class="btn btn-primary-light signin-btn">注&nbsp;册</div> -->
+    </div>
+</div>
+    <div class="main-container">
+        <div class="main-left">
+            <div class="content-container">
+                <div class="title">2025新汽车技术交流会暨第十届铃轩奖颁奖典礼在苏州圆满落幕</div>
+                <div class="meta-info">
+                    <span class="icon">原创</span>
+                    <span class="author">
+                        <a href="https://www.shenxuanche.com/user/0_211350" target="_blank">车谈怪杰</a>
+                    </span>
+                    <span class="publish-time">2025/12/7 10:30:38</span>
+                    <span class="show-count">--阅读</span>
+                </div>
+                <div class="content article">
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp;12月5日至6日，2025新汽车技术合作生态交流会在苏州知音温德姆至尊酒店隆重举行。本次活动由世界新汽车生态协会联合轩辕同学主办，以 &ldquo;长期与短期&rdquo; 为核心主题，广邀汽车全产业链同仁齐聚一堂，共话产业变革趋势，共探生态协同路径。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;世界新汽车生态协会理事长、轩辕同学校长贾可博士在开场演讲《中国新汽车产业还远没有进入稳态》中，以生动比喻点出产业机遇窗口：&ldquo;大船航行的时候，从0到1没有跟上不要着急、不要焦虑，大船从1到10必须要跟上，必须要参与进去，等大船从10到N的时候就没有机会了。&rdquo;这一观点精准契合当前产业发展脉搏，引发全场共鸣。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/3208657be8c04f40892093ab1530e7c9.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;随着新能源汽车与智能网联技术的迭代加速，中国汽车产业正经历从规模制胜到生态竞合的战略转型。如何在应对短期市场竞争压力的同时，筑牢长期生态构建的根基，已成为全产业链共同面临的核心命题，也正是本次交流会的研讨重心。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;为期两天的议程内容丰富、聚焦实效，涵盖2场主论坛、8场专业技术分论坛、1场新汽车技术展览、1场主零对接交流之夜，以及备受行业关注的第十届铃轩奖颁奖典礼。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/9c026928b1924abd94bc85470974f840.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;其中，两大主论坛紧密围绕 &ldquo;新汽车技术合作现状与供应链发展&rdquo;的行业核心关切展开，八大专业分论坛则精准聚焦动力系统、智能底盘、智能座舱、组合辅驾、热管理、车载声学、车身系统、汽车安全等关键技术领域，旨在探寻产业协同与创新升级的有效路径。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>主论坛高屋建瓴 破解产业核心命题</strong></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;12月5日的主论坛上，主机厂领袖分享了在长期主义指引下的战略思考与实践。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;中国一汽红旗品牌运营委员会副总裁蒋文虎强调了创新联盟与海外协同，提出打造&ldquo;风险共担、成果共享的命运共同体&rdquo;，并直言：&ldquo;只有深度融合，深化合作，定能携手打造更有韧性与活力的产业生态，定能推动中国汽车产业在全球舞台上阔步前行，大放异彩。&rdquo;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;广汽集团副总经理郑衡阐述了短期&ldquo;聚焦核心、协同固本&rdquo;与长期&ldquo;创新引领、生态共赢&rdquo;相结合的思路，并提出&ldquo;企业找到独特生态位&rdquo;&ldquo;回归产品品质&rdquo;等观点。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;上汽大众汽车有限公司党委书记、总经理陶海龙呼吁回归专业化分工与商业道德，以&ldquo;价值竞争&rdquo;取代&ldquo;价格内耗&rdquo;，维护产业健康生态。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;北京现代董事长吴周涛点明目前产业合作早已不是简单的能源互补，而是技术同源、标准同轨、价值共创的深度融合，并提出了本土化运营、内需转型、出口基地建设、运营高效等路径，以适应新能源智能化浪潮。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;随后的圆桌论坛围绕&ldquo;中国汽车主零关系新形势&rdquo;展开热烈讨论。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/877f8ff308e8490281b90838e7bfd13f.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&ldquo;60天账期&rdquo;政策作为改善供应链现金流、构建互信基础的重要举措，得到了主机厂与供应商的积极反馈。深蓝汽车首席供应链官金国庆表示已全面贯彻，李尔公司副总裁兼中国区座椅业务总经理孙琦认为这为供应商创新投入提供了保障。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;更深入的讨论聚焦于合作模式的升级&mdash;&mdash;&ldquo;Tier 0.5&rdquo;共创成为共识。轻舟智航联合创始人、CEO于骞认为，在快速迭代的智能化领域，供应商需与主机厂深度互信、共同定义产品。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;长城汽车副总裁李树会透露合作已前置至&ldquo;Tier 0.1&rdquo;级别的概念阶段。采埃孚集团亚太区销售与客户发展高级副总裁许欢平、英飞凌科技副总裁、汽车业务动力与新能源系统业务单元大中华区负责人仲小龙均表示，合作正从&ldquo;卖产品&rdquo;转向&ldquo;卖能力&rdquo;，通过前期共创将技术价值转化为用户价值。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;12月6日的主论坛话题更趋具体，聚焦技术合作落地与供应链实战挑战。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/b70c317e176e427884a088032aa79cd2.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;大众汽车集团（中国）执行副总裁及CARIAD中国首席执行官韩三楚详细介绍了其&ldquo;在中国，为中国&rdquo;的研发战略转变，将新能源整车及平台架构决策权移交中国团队，并通过与本土伙伴合作打造的CEA电子电气架构，实现了研发效率提升30%、成本降低40%。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;奇瑞汽车股份有限公司副总裁、采购中心执行总监王厅提出了&ldquo;361供应链发展战略&rdquo;，强调通过理念、战略、能力融合，构建高质量产业链生态圈，认为未来竞争是产业链之间的竞争。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;理想汽车供应链副总裁孟庆鹏直面价格内卷、供应风险等七大挑战，提出以联合创新、产研主导降本、提升产能与计划柔性等具体策略应对市场波动。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/4727774dd5364c9bbdb2ebafcdc4b547.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;长安汽车采购中心副总经理陈津主张从B2B2C转向B+B2C，以&ldquo;产品最优、成本最低、柔性最强、关系最铁&rdquo;四原则重构合作生态。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;吉利汽车研究院新能源中心副主任、技术规划总工程师孔庆波分享了其在多能源布局、全链路垂直整合及全球化生态出海方面的实践，强调主机厂与供应商应从&ldquo;甲乙方&rdquo;转为&ldquo;共创伙伴&rdquo;。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>八大分论坛深耕细作 技术前沿干货满满</strong></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;与此同时，八大分论坛参会嘉宾通过技术分享与思想碰撞，既拆解了当下产业发展的痛点难题，也勾勒了未来技术演进的清晰路径。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;动力系统论坛围绕 &ldquo;技术路线多元化&rdquo; 展开讨论，热议混动与纯电长期共存的必然性，并交流增程与串并联的市场格局，以及AI与动力系统的融合应用，还有混动出海的标准构建与产业链协同挑战。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/c3069c8148944f27bb037f91f3716d03.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;底盘系统论坛围绕智能底盘技术趋势展开，交流线控化、集成化技术落地实践，探讨生态共创模式的未来格局，分析国产底盘企业的核心竞争力与短板，预判未来本土供应链渗透率的提升趋势。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;智能座舱论坛聚焦 &ldquo;第三空间进化论&rdquo;，探讨当前体验与用户期待的差距，热议生态乱、体验不实用等痛点。围绕多屏交互、语音控制等功能短板优化展开交流，探讨AI大模型对交互逻辑的重构，以及跨场景无缝衔接的生态壁垒突破路径。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;组合辅驾与具身智能论坛讨论了汽车与具身智能的溢出效应，交流技术复用、产业链协同的底层逻辑。探讨端侧计算、云端算力、数据闭环等技术的跨领域迁移挑战，展望中国玩家在全球竞赛中的长板与合作模式，以及低空经济等新场景的应用潜力。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;热管理系统论坛围绕 &ldquo;全域智能协同热管理&rdquo;，讨论系统架构的收敛与提升方向，分享AI在热管理开发中的应用实践，畅想自动驾驶、固态电池普及后，热管理在形态、功能上的终局演变。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;车身系统论坛以 &ldquo;车身系统的情绪价值&rdquo; 为核心，嘉宾定义情绪价值关键词，探讨用户场景痛点挖掘与技术落地，热议功能冗余与协同逻辑，展望AI赋能、场景拓展等未来进化方向。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/7295b4f2eb3e4b4eb70b6b4893992861.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;车载声学论坛围绕 &ldquo;超越音响系统的汽车声音新可能&rdquo; 展开，探讨消费者对音响的判断标准、硬件与体验的平衡，热议金材声标准、AI声学优化等技术价值，以及独立音区、多模态交互等场景的落地难点。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;汽车安全论坛聚焦 &ldquo;智能汽车网络安全攻防未来态势&rdquo;，研判AI与量子计算的颠覆性影响，讨论无线协议漏洞、芯片侧攻击等手段，探讨OTA升级安全防护与AI应用风险，呼吁建立良性行业应急响应联盟。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<strong>特色活动添彩 铃轩盛典致敬创新</strong></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;除了干货满满的论坛交流，大会精心打造的特色环节同样成为亮点。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;12月5日晚，轩辕同学巨浪5期毕业典礼与铃轩4期官方画册颁发仪式在苏州举行。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/8be7f980d81e408a9018d11c6a77b180.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&ldquo;浪拥抱着浪，光簇拥着光。&rdquo;这句口号如今已不仅是口号，而是这群新汽车人共同践行的信念。他们的成长，见证了轩辕平台从知识赋能的课堂向生态共生的共同体的深刻转变。毕业不是终点，而是另一种形式的同行。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;12月6日晚，以第十届中国汽车零部件年度贡献奖&mdash;&mdash;铃轩奖颁奖典礼作为压轴环节，标志着本次汽车行业交流盛会圆满结束。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;作为中国汽车零部件领域的权威奖项，铃轩奖肩负三大使命：旨在发掘同等技术条件下成本优先供应链；发掘逆全球化时代高科技供应链新力量；发掘电动智能网联化时代供应链新势力。</p>
+<p style="text-align: center;"><img src="https://img.chooseauto.com.cn/2025/12/07/01d20215d72c4fcca6844e66379ca6ed.jpg@webp"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;本次颁奖典礼邀请了北汽集团研究总院党委书记兼院长王磊、奇瑞汽车副总裁王厅、长安汽车采购中心副总经理陈津等众多评委代表，按照量产类、前瞻类两大类别，并通过全场大奖争夺演讲环节，全方位展示优秀企业的创新成果。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;获奖企业代表齐聚舞台，接过象征荣誉与认可的奖杯，他们的创新实践不仅为自身发展注入动力，更成为推动中国汽车产业高质量发展的重要力量。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;从技术前沿的深度研讨到产业资源的高效聚合，本次交流会以&ldquo;长期与短期&rdquo;的辩证思考为引，为中国新汽车产业的生态构建注入了强劲动力。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;这种主机厂与供应链的全方位对接、产学研用的多维度联动，不仅让本次盛会成为资源整合的关键平台，更将为中国汽车产业发展提供科学的方法论，助力行业在变革浪潮中把握机遇、行稳致远。</p>
+                </div>
+                <div class="share-bottom">
+                    <div class="share-container">
+                        <span class="share-title">分享:</span>
+                        <span class="share-btn wx shareToBtn" data-type="1">
+                            <i class="iconfont icon-weixin-btn-touming"></i>
+                        </span>
+                        <span class="share-btn qq shareToBtn" data-type="2">
+                            <i class="iconfont icon-qq-btn-touming"></i>
+                        </span>
+                        <span class="share-btn wb shareToBtn" data-type="3">
+                            <i class="iconfont icon-weibo-btn"></i>
+                        </span>
+                    </div>
+                    <div class="report-btn">举报</div>
+                </div>
+            </div>
+            <div class="comment-container">
+                <div class="comment-title">评论<span>--</span></div>
+                <div class="comment-editor">
+                    <div class="com-left">
+                        <div class="avatar"></div>
+                    </div>
+                    <div class="com-right">
+                        <div class="com-input com-input-login">
+                            <p>请您<span class="login-btn">登录</span>神选车账号参与评论</p>
+                        </div>
+                        <div class="com-input" style="display: none;">
+                            <textarea class="com-textarea" id="com-main-textarea" placeholder="说点什么吧…"></textarea>
+                            <div class="com-action">
+                                <div class="com-submit" data-t="1">发布</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-list"></div>
+                <div class="show-all-comment" style="display: none;">查看全部<i class="iconfont icon-month-next"></i></div>
+            </div>
+            <div class="recommend-container"></div>
+        </div>
+        <div class="main-right">
+            <div class="author-data">
+                <div class="author-info">
+                    <a class="avatar" href="https://www.shenxuanche.com/user/0_211350" target="_blank"><img src="https://img.chooseauto.com.cn/user/avatar/000/21/13/50_avatar_medium.jpg" alt="车谈怪杰"></a><a class="username" href="https://www.shenxuanche.com/user/0_211350" target="_blank">车谈怪杰</a>
+                    <p class="desc">混迹车圈二十年的车坛老炮儿</p>
+                    <div class="follow-btn" data-id="211350">关注</div>
+                </div>
+                <div class="split-line">
+                    <span>TA的作品</span>
+                </div>
+                <div class="works-list"></div>
+                <a class="all-works-btn" href="https://www.shenxuanche.com/user/0_211350" target="_blank">查看全部<i class="iconfont icon-month-next"></i></a>
+            </div>
+            
+            <div class="company-info">
+    <p>&copy;神选车</p>
+    <p><a href="https://beian.miit.gov.cn" target="_blank">京ICP备12003842号-4</a></p>
+    <p><a href="" target="_blank">广播电视节目制作经营许可证</a></p>
+    <p><a href="https://www.12377.cn/" target="_blank">中央网信办违法和不良信息举报中心</a></p>
+    <p>违法和不良信息举报：010-51254090</p>
+    <p>
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010202008714" target="_blank">
+            <img class="gongan" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAABvFBMVEVHcEz25qTk0JXnxWXs04vktmTlzXP89t337Lr+/OD69M3eqFf53I316pzu46vu3H/Yrn3owH7UrFrftWjx166xkHz7x2fcrGrgvovz6ZLcp1nkvFnTk3DZr4LKhFvDfz7jrFPnvGzbnFHoxnz/+dDqw3r/74bktoCaaVyfaFXRrnbqvlkABHjVHhjWPCEFAWQBAW3qxmDmv1HvzGPw1nHkslTuy2zdm0T/1FXWAgjNAALcSSbWZDTquVDuyVnmuFjfo0rrsEnluF3VkkPdkkbUh0D8xVS5kVp2eX//3WDklTjUxXVreYnrXyPtgjvqcDLEun+Ujn3143PpwWDjrVPTLhw5FDjVdC/yoEHjrUqTeFpRNlHdhTXDEgpZVnPJJxNkEUPREg7MPSfYVi7URCj9LA/acTi7ABA8H0h7ipcAEpBzY2EZN5D2qjy7TCYAAID9vUbuvlDWjjzzfCjYnlj8jizXkVOsonP/723twmKTYDa0o2aptJHJWSr/vmBODk6NhnfFUiReWWbGPh1MADmxDg770m//0maBWDqEaUrEazOeXzCjfVKnjVm1gD/TvIfFrnz8zGSjmYTOeDoOTxX1AAAAK3RSTlMAKgLukeT5HEEIW8a2PIDnrMb6/GnOwuCcq+v0FEhdnOS80vtM5r6x+/dvgk6cRwAAAWVJREFUGNNjYIAAdhFRURF2BmTAIaDZ3dHZoyGgghDjdA+r6vL1Fy4Pc+eEibGLRUcVW+pZW0XURPNARRmFM5pKdXVDrRNj63wyVBnBgryB+b2+lqG6iXpWvgEGDYwQzYE6fdaWunp6ulZ63gYeaiA3aOVOynf3s6p1NnJJ9Pc2CLTgAwpKeE3Iyi7Ia7ZJS3P1zNYJyJUACorHmOUY5PmlJNmk+Nvo55h4iQMFhSYXZOqkp9o0hvulphv4uLmyAgXVzSf2Z7W0xsbHWycl6AS0mbIABQVdQtozdfT16xP09XU8PJ0iBYGCyiVlXmbeUT7VQnFxHpUR5pH8QEEuIwfncDdPCzdHiwqLGGdTOw6Q67mYjVyLjLVNtY1NzF3MmDkg4cZqaGivbRhsrO1gbxIsxQsW5AkycTLVDgm2NXewdzILkoSEJou0rV2ho62jtp2RIT8fEzRAZeTkuZUUWLkVWWTBQgDxBU8MyWNkzgAAAABJRU5ErkJggg==">京公网安备 11010202008714号
+        </a>
+    </p>
+    <p><a href="" target="_blank">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">用户协议</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" target="_blank">隐私政策</a></p>
+    <p><a href="https://xyt.xcc.cn/getpcInfo?sn=1937472556688670720&language=CN&certType=8&url=*.shenxuanche.com" target="_blank" style="position: relative;display: inline-block;height: 38px;">
+<div style="width:100%;height:100%;position: absolute;top: 0;left: 0;"></div><embed src="https://cdn.shenxuanche.com/img/shenxuanche.com.svg"width="103" height="38" type="image/svg+xml" pluginspage="//www.adobe.com/svg/viewer/install/"/></a></p>
+</div>
+        </div>
+    </div>
+    <div class="main-left-aside">
+    <div class="aside-btn like news-like-btn">
+        <i class="iconfont icon-dianzan-fill"></i>
+        <span>--</span>
+    </div>
+    <div class="aside-btn comment news-comment-btn">
+        <i class="iconfont icon-pinglun-btn"></i>
+        <span>--</span>
+    </div>
+    <div class="aside-btn favorite news-favorite-btn">
+        <i class="iconfont icon-shoucang-btn"></i>
+        <span>--</span>
+    </div>
+    <div class="aside-title">分享至</div>
+    <div class="aside-share-btn wx shareToBtn" data-type="1">
+        <i class="iconfont icon-weixin"></i>
+    </div>
+    <div class="aside-share-btn qq shareToBtn" data-type="2">
+        <i class="iconfont icon-qq"></i>
+    </div>
+    <div class="aside-share-btn wb shareToBtn" data-type="3">
+        <i class="iconfont icon-weibo"></i>
+    </div>
+</div>
+    <div class="rtl-drawer comment-panel">
+    <div class="layer">
+        <div class="content">
+            <div class="header">
+                <div class="title">全部评论<span>--</span></div>
+                <div class="close-btn"><i class="iconfont icon-close"></i></div>
+            </div>
+            <div class="body">
+                <div class="comment-list"></div>
+                <div class="com-load-status"><span>加载中…</span></div>
+            </div>
+            <div class="footer">
+                <div class="comment-editor">
+                    <div class="com-right">
+                        <div class="com-input">
+                            <textarea class="com-textarea" id="com-list-textarea" placeholder="说点什么吧…"></textarea>
+                            <div class="com-action">
+                                <div class="com-submit" data-t="2">发布</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="main-footer">
+    <div class="left">
+        <span><a href="/public/sitemap" target="_blank">站点地图</a></span>
+        <span><a href="/public/about" target="_blank">关于我们</a></span>
+        <span><a href="/public/service_agreement" target="_blank">用户协议</a></span>
+        <span><a href="/public/privacy_policy" target="_blank">隐私政策</a></span>
+        <span><a href="/public/contact" target="_blank">媒体合作</a></span>
+        <span><a href="/public/contact" target="_blank">广告合作</a></span>
+        <span><a href="/public/friend_link" target="_blank">友情链接</a></span>
+    </div>
+    <div class="right">
+        <span><a>北京正则阳光文化传播有限公司</a></span>
+        <span><a>违法和不良信息举报：010-51254090</a></span>
+    </div>
+</div>
+</body>
+<script>
+var contentID = 776917;var authorID = 211350;var FID = 2;var TID = 321058;
+</script>
+<script src="https://cdn.shenxuanche.com/js/qrcode.min.js"></script>
+<script data-main="https://cdn.shenxuanche.com/js/article.min.js" defer async="true" src="https://cdn.shenxuanche.com/js/require.js"></script>
+
+</html>

@@ -1,0 +1,114 @@
+2025-12-05 11:01:23,033 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 11:01:23,034 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 11:01:23,057 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 11:01:24,069 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 11:01:24,980 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 11:01:29,771 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 11:01:31,085 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 11:01:32,125 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 11:01:32,889 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 11:01:33,912 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 11:01:35,431 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 11:01:36,480 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:01:37,101 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:01:37,103 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 11:01:38,457 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 11:01:39,549 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 11:16:32,901 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 11:16:32,903 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 11:16:32,923 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 11:16:34,567 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 11:16:35,960 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 11:16:36,677 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 11:16:37,759 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 11:16:39,298 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 11:16:40,312 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 11:16:41,383 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 11:16:42,343 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 11:16:44,553 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 11:16:45,625 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 11:16:46,964 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:16:47,946 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:16:47,946 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 11:39:49,185 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 11:39:49,185 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 11:39:49,207 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:39:49,925 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:39:49,927 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 11:39:51,203 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 11:39:52,223 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 11:39:53,143 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 11:39:55,693 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 11:39:57,364 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 11:39:58,491 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 11:39:59,386 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 11:40:00,996 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 11:40:01,601 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 11:40:02,462 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 11:40:03,217 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 11:58:47,731 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 11:58:47,731 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 11:58:47,759 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 11:58:48,973 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 11:58:51,658 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 11:58:52,608 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 11:58:53,779 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 11:58:54,915 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 11:58:56,089 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 11:58:57,310 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:58:58,281 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:58:58,282 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 11:58:59,325 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 11:59:00,251 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 11:59:01,107 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 11:59:02,691 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 11:59:42,301 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 11:59:42,302 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 11:59:42,323 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 11:59:46,669 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 11:59:48,041 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 11:59:49,149 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 11:59:50,345 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 11:59:50,883 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 11:59:52,097 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 11:59:52,791 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 11:59:53,780 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 11:59:54,369 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 11:59:55,188 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 11:59:55,742 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:59:56,370 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 11:59:56,371 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 12:06:46,265 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 12:06:46,265 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 12:06:46,299 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 12:06:47,230 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 12:06:48,557 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 12:06:50,304 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 12:06:51,399 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 12:06:53,082 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 12:06:54,191 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 12:06:55,289 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 12:06:56,499 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 12:06:57,299 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 12:06:57,904 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 12:06:57,905 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 12:06:59,482 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 12:07:00,272 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 12:29:25,154 - INFO - Starting processing in: C:\Users\demo\Desktop\中村\ホームページ作成
+2025-12-05 12:29:25,154 - INFO - Processing: 2025年11月19日 自動車内装製品開発ニュース10選 - コピー.docx
+2025-12-05 12:29:25,177 - INFO - Scraping URL: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 12:29:26,039 - WARNING - Failed to scrape https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html: 404 Client Error: Not Found for url: https://www.sponichi.co.jp/car/news/2025/11/19/kiji/20251119c00045SCE008000c.html
+2025-12-05 12:29:26,042 - INFO - Scraping URL: https://kahoku.news/release/dpr122886.html
+2025-12-05 12:29:27,448 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/b48868b84091a9537d481ffca0bdb5d0470fc3d6/
+2025-12-05 12:29:28,980 - INFO - Scraping URL: https://kuruma-news.jp/post/975510
+2025-12-05 12:29:30,312 - INFO - Scraping URL: https://www.marklines.com/ja/news/335943
+2025-12-05 12:29:31,624 - INFO - Scraping URL: https://www.motomegane.com/car_news/news_flash/info_sw_hayashi-telempu_20251119
+2025-12-05 12:29:32,931 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/6e70f3536a33a432358c1206fde2c4b83fcb61da/
+2025-12-05 12:29:34,202 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/c166633f74ef9e473527d0934a67b0de076ba863/
+2025-12-05 12:29:35,838 - INFO - Scraping URL: https://www.caranddriver.co.jp/newcar/103290/
+2025-12-05 12:29:37,643 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/?mode=top
+2025-12-05 12:29:39,543 - INFO - Scraping URL: https://www.webcg.net/articles/-/52984
+2025-12-05 12:29:42,599 - INFO - Scraping URL: https://carview.yahoo.co.jp/news/detail/162e8443e7f211ded2fe6431160669e2d99984c3/
+2025-12-05 12:29:44,104 - INFO - Scraping URL: https://motor-fan.jp/article/1311822/
+2025-12-05 12:29:45,542 - INFO - Generated: C:\Users\demo\Desktop\中村\ホームページ作成\2025年11月19日 自動車内装製品開発ニュース10選 - コピー.html
+2025-12-05 12:29:45,542 - INFO - All processing complete.
