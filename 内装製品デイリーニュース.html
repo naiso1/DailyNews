@@ -322,6 +322,20 @@
             color: var(--muted);
         }
 
+        .id-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            font-family: monospace;
+        }
+
         .content {
             padding: 16px;
             display: flex;
@@ -1448,7 +1462,7 @@
 
                 // Text Search
                 if (searchText) {
-                    const content = (n.title + n.desc + (n.summary || "") + (n.note || "") + n.tags.join(" ")).toLowerCase();
+                    const content = (n.id + " " + n.title + n.desc + (n.summary || "") + (n.note || "") + n.tags.join(" ")).toLowerCase();
                     if (!content.includes(searchText)) return false;
                 }
 
@@ -1478,6 +1492,7 @@
                 <img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop'">
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="date-badge">${n.date}</span>
+                <span class="id-badge">${n.id}</span>
                 ${(n.img.includes('unsplash') || n.img.includes('generic')) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
