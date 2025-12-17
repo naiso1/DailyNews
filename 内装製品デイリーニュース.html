@@ -1056,6 +1056,7 @@
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; margin-left: 12px;">
                 <option value="date-desc">新しい順</option>
                 <option value="date-asc">古い順</option>
+                <option value="country">国順（日本→中国→インド）</option>
             </select>
         </div>
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
@@ -1465,9 +1466,15 @@
             });
 
             // 2. Sort
+            const countryOrder = { jp: 0, cn: 1, in: 2 };
             filteredData.sort((a, b) => {
                 if (sortOrder === "date-asc") {
                     return a.date.localeCompare(b.date);
+                } else if (sortOrder === "country") {
+                    // First by country (jp -> cn -> in), then by date desc within same country
+                    const countryDiff = (countryOrder[a.country] ?? 99) - (countryOrder[b.country] ?? 99);
+                    if (countryDiff !== 0) return countryDiff;
+                    return b.date.localeCompare(a.date);
                 } else {
                     return b.date.localeCompare(a.date);
                 }
