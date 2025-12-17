@@ -1488,7 +1488,7 @@
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="date-badge">${n.date}</span>
                 <span class="id-badge">${n.id}</span>
-                ${(n.img.includes('unsplash') || n.img.includes('generic')) ? '<div class="image-note">※イメージ画像</div>' : ''}
+                ${(n.img.includes('unsplash') || n.img.includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
                 <div class="title">${n.title}</div>
