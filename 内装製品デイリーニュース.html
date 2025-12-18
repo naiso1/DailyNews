@@ -1053,10 +1053,12 @@
             <input type="text" id="searchInput" class="search-input" placeholder="キーワード検索..."
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; width: 240px;">
             <select id="sortOrder"
-                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; margin-left: 12px;">
-                <option value="date-desc">新しい順</option>
-                <option value="date-asc">古い順</option>
-                <option value="country">国順（日本→中国→インド）</option>
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
+                <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
+                <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
+                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド）</option>
+                <option value="likes-desc" style="background: #1e222d; color: #fff;">いいね順</option>
+                <option value="comments-desc" style="background: #1e222d; color: #fff;">コメント数順</option>
             </select>
         </div>
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
@@ -1076,7 +1078,7 @@
     <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, runTransaction, doc, getDoc, setDoc, updateDoc, arrayUnion, onSnapshot, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, runTransaction, doc, getDoc, setDoc, updateDoc, arrayUnion, onSnapshot, increment, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEKRdUl_mOYjBGLKY35IFWLAHEyDH3Og8",
@@ -1093,11 +1095,31 @@
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             console.log("Firebase Connected");
+            // Load all interactions for sorting
+            loadInteractions();
         } catch (e) {
             console.error("Firebase Connection Failed:", e);
         }
 
+        // Global interactions data for sorting
+        window.interactionsData = {};
 
+        async function loadInteractions() {
+            if (!db) return;
+            try {
+                const snapshot = await getDocs(collection(db, "interactions"));
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    window.interactionsData[docSnap.id] = {
+                        likes: data.likes || 0,
+                        comments: (data.comments || []).length
+                    };
+                });
+                console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
+            } catch (e) {
+                console.error("Failed to load interactions:", e);
+            }
+        }
 
         // Live Listeners Registry
         const unsubscribes = {};
@@ -1377,6 +1399,7 @@
             }
             if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
             if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
+            if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
 
             document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
             document.getElementById("tagFilters").addEventListener("click", handleTagClick);
@@ -1385,6 +1408,7 @@
             document.getElementById("searchInput").addEventListener("input", applyFilters);
             document.getElementById("sortOrder").addEventListener("change", () => {
                 applyFilters();
+                updateURL();
             });
 
             applyFilters();
@@ -1467,6 +1491,7 @@
 
             // 2. Sort
             const countryOrder = { jp: 0, cn: 1, in: 2 };
+            const interactions = window.interactionsData || {};
             filteredData.sort((a, b) => {
                 if (sortOrder === "date-asc") {
                     return a.date.localeCompare(b.date);
@@ -1474,6 +1499,18 @@
                     // First by country (jp -> cn -> in), then by date desc within same country
                     const countryDiff = (countryOrder[a.country] ?? 99) - (countryOrder[b.country] ?? 99);
                     if (countryDiff !== 0) return countryDiff;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "likes-desc") {
+                    // Sort by likes (descending), then by date desc
+                    const likesA = interactions[a.id]?.likes || 0;
+                    const likesB = interactions[b.id]?.likes || 0;
+                    if (likesB !== likesA) return likesB - likesA;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "comments-desc") {
+                    // Sort by comment count (descending), then by date desc
+                    const commentsA = interactions[a.id]?.comments || 0;
+                    const commentsB = interactions[b.id]?.comments || 0;
+                    if (commentsB !== commentsA) return commentsB - commentsA;
                     return b.date.localeCompare(a.date);
                 } else {
                     return b.date.localeCompare(a.date);
@@ -1567,6 +1604,8 @@
             const to = document.getElementById("dateTo").value;
             if (from) params.set("from", from);
             if (to) params.set("to", to);
+            const sortOrder = document.getElementById("sortOrder").value;
+            if (sortOrder && sortOrder !== "date-desc") params.set("sort", sortOrder);
             const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
             history.replaceState(null, "", newURL);
         }
