@@ -1226,16 +1226,12 @@
             const ref = getItemRef(itemId);
 
             try {
-                // Optimistic UI
+                // Optimistic UI - update class and count immediately
                 btn.classList.toggle('liked');
-
-                // Determine increment or decrement
-                // Note: Firestore increment is atomic
-                // Ideally we should transaction check, but for this demo simple increment is fine.
-                // However, without Auth, we can't curb duplicates on server easily.
-                // We rely on localStorage for UI state.
-
+                const countSpan = btn.querySelector('.count');
+                const currentCount = parseInt(countSpan.textContent) || 0;
                 const val = isLiked ? -1 : 1;
+                countSpan.textContent = Math.max(0, currentCount + val);
 
                 // Update DB
                 // Ensure doc exists
@@ -1251,6 +1247,10 @@
                 console.error("Like Error", e);
                 // Revert UI if error
                 btn.classList.toggle('liked');
+                const countSpan = btn.querySelector('.count');
+                const currentCount = parseInt(countSpan.textContent) || 0;
+                const val = isLiked ? 1 : -1;
+                countSpan.textContent = Math.max(0, currentCount + val);
             }
         };
 

@@ -1,0 +1,618 @@
+[
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M07/16/06/620x0_1_autohomecar__ChxpVmlEuyiAeDKYAGH-cS8iAug710.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、背景は建物と地面。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M04/DF/C5/620x0_1_autohomecar__ChtpWGlBJ3OABjcKAAGj65mAmyY315.jpg",
+    "image_size": "620x322",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のコクピット内部を示し、ステアリング、ダッシュボード、インフォテインメント画面が確認できる"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M03/04/01/620x0_1_autohomecar__ChtpWGlDpoCAfw3cACukI3uwhj8398.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像にステアリングやシフトレバー、ダッシュボードの一部が写っており、車のインテリアである"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g34/M01/04/33/620x0_1_autohomecar__ChxpWGlDpnCAKYKwACFlE4Hxqi8239.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車のコクピット、ステアリング、ダッシュボード、シートが写っている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M01/13/74/620x0_1_autohomecar__ChxpV2lEuziAQOw8AHCPFYuOp4s723.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、背景は建物と地面。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M08/07/78/620x0_1_autohomecar__ChxpVmlDpoWAJxJ7ACTRiJ_9LOs063.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のシフトレバーと周囲のインテリア部品を写しており、車室内である。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M08/03/C6/620x0_1_autohomecar__ChtpWGlDoyiAOhAPAEDjT0uYrJ8959.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "画像は車のフロント外観を示しており、ダッシュボードやシートなどのインテリア要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g31/M07/81/82/620x0_1_autohomecar__ChxoHmfl3iyAFIXDABEK_8hDYmQ123.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を展示場で撮影した写真"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M06/DF/F8/620x0_1_autohomecar__ChxpWGlBJ3OAAYUgAAFUWTZNjZQ900.jpg",
+    "image_size": "620x321",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を捉えた動画で、車内は見えない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M03/04/00/620x0_1_autohomecar__ChtpWGlDpnWAZ-YVACy_W2ibt1Q718.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のコクピットを示し、ステアリング、ダッシュボード、シフトレバー、室内照明などが確認できる"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M02/34/06/620x0_1_autohomecar__ChxpVWlHYUqAcP3DABChhTMp57c788.png",
+    "image_size": "620x346",
+    "interior": false,
+    "confidence": 0.99,
+    "reason": "画像は車の価格表で、製品単体の情報表示であり、車室内の写真ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M03/16/05/620x0_1_autohomecar__ChxpVWlEuzCAErAHAGOOtmrNZfg291.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、背景は建物と地面。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M00/34/0A/620x0_1_autohomecar__ChxpVmlHYYWAdvieABnzLCzWepM346.png",
+    "image_size": "620x344",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "展示会のブースで車の外観が表示されている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M05/07/52/620x0_1_autohomecar__Chto52lDo16AF9m_ABpK8717Gx8108.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車のエンブレムは外観部品で、車室内ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M06/34/07/620x0_1_autohomecar__ChxpVWlHYXCAIvS_AA-OTIa95UU485.png",
+    "image_size": "620x349",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "これは車の販売情報のスライドで、外観やインテリアの写真ではなく、製品単体の価格表です。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311310.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M06/07/45/620x0_1_autohomecar__ChxpVWlDo2eAcawqAEOaf5PPVXY063.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "エンジンルームの外観写真で、車室内ではない"
+  },
+  {
+    "article_url": "https://m.autohome.com.cn/news/202512/1310981.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M05/3A/AE/620x0_1_autohomecar__Chto52kw9gCAXacYAAJ0692pW18286.jpg",
+    "image_size": "620x409",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観で、全体がカモフラージュで覆われている"
+  },
+  {
+    "article_url": "https://m.autohome.com.cn/news/202512/1310981.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M06/38/65/620x0_1_autohomecar__ChtpWGkw9gCAJdagAAFJe3MEsmk033.jpg",
+    "image_size": "620x431",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "窓ガラス越しに車内が見え、手元にラップトップがあるため車室内と判断"
+  },
+  {
+    "article_url": "https://m.autohome.com.cn/news/202512/1310981.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g27/M04/D6/96/620x0_1_autohomecar__CjIFVWgoB1mAb3bmAA1MdGC_SLU792.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観全体が写っており、室内の要素は一切ない"
+  },
+  {
+    "article_url": "https://m.autohome.com.cn/news/202512/1310981.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M04/38/8E/620x0_1_autohomecar__ChxpV2kw9gCAQSjqAAJKgfmYh5o107.jpg",
+    "image_size": "620x427",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観で、カモフラージュテープが貼られており、室内は見えない"
+  },
+  {
+    "article_url": "https://m.autohome.com.cn/news/202512/1310981.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M03/3A/AE/620x0_1_autohomecar__Chto52kw9gCAJEmwAAGBuGbBXY4871.jpg",
+    "image_size": "620x416",
+    "interior": false,
+    "confidence": 0.95,
+    "reason": "画像は車の窓越しの反射で、車内が直接見えず、外観や周囲の反射が主。"
+  },
+  {
+    "article_url": "https://m.autohome.com.cn/news/202512/1310981.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M05/3A/A0/620x0_1_autohomecar__ChxpVWkw9gCAFB0kAAJ6Kx6pCdU361.jpg",
+    "image_size": "620x427",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観が全体的に写っており、カモフラージュで覆われているが、車室内の要素は確認できない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M07/70/7F/620x0_1_autohomecar__ChxpVmk2UYeARyVQADUcA5kZ-eA860.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、ダッシュボードやシートなどのインテリア要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M03/46/87/620x0_1_autohomecar__ChxpV2kyRBiAWM_eADwODvxEWKU776.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車の後部シートと内装が写っており、車室内（インテリア）である"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M04/46/83/620x0_1_autohomecar__ChxpV2kyQ-aAL6FKADj8wN3yRqE991.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のコクピット内部を示し、ステアリング、ダッシュボード、シフトレバーなどのインテリア部品が写っている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g34/M0A/6E/19/620x0_1_autohomecar__ChxpV2k2UYiAULzNADZLElHg650960.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観全体が写っており、ダッシュボードやシートなどのインテリア要素は確認できない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M0A/48/48/620x0_1_autohomecar__Chto52kyQ9iANpvPACZw4rypfJc049.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のダッシュボードと中控画面を示しており、車室内（インテリア）の典型的な構成要素である"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M0B/48/48/620x0_1_autohomecar__Chto52kyQ9iAY7raACHaD2B6GP8528.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像は車のダッシュボードとステアリングの一部を含み、インテリアの典型的な構成要素を示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M05/48/3A/620x0_1_autohomecar__ChxpVmkyQ92Ae4MxACtcTpcs600408.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のシフトレバーと周囲のインテリア部品を示しており、車室内（インテリア）である。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M0A/25/EF/620x0_1_autohomecar__ChtpWGlGEnKAZmyOAALmf6NSOzc677.jpg",
+    "image_size": "620x574",
+    "interior": false,
+    "confidence": 1.0,
+    "reason": "画像は車の価格表であり、車室内の写真ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M08/26/22/620x0_1_autohomecar__ChxpWGlGEnKAHzKoAANPIRm9ZzM270.jpg",
+    "image_size": "620x825",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "画像は車の外観と仕様説明を示しており、車室内ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M00/48/39/620x0_1_autohomecar__ChxpVWkyQ8-AXuJuACJodTBkieA965.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "ステアリングとダッシュボードが写っており、車のコクピット内部である"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M00/46/87/620x0_1_autohomecar__ChxpV2kyRB-AOqFdAF_sQsBvyME029.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車のコクピットとシート、ダッシュボードが写っており、車室内（インテリア）である"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M01/6E/23/620x0_1_autohomecar__ChxpWGk2UYmACZ6JADRVcEr9PDI277.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観全体が写っており、室内の要素は一切ない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g34/M00/46/86/620x0_1_autohomecar__ChxpV2kyRA-AMXyZADl8KAAz7lY085.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.95,
+    "reason": "画像は車のトランク内部を示しており、車室内（インテリア）とは言えません。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311296.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M0A/48/3A/620x0_1_autohomecar__ChxpVWkyQ9OAd1-8AC2AEroXiCA894.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のコクピット、ステアリング、ダッシュボード、シートを含む車室内（インテリア）を示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M09/1A/91/620x0_1_autohomecar__ChxpVWlFAaWASGU9AAxtvGJyYoA169.jpg",
+    "image_size": "620x1342",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像中央に車のシートとダッシュボードのインテリアが描かれている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M08/19/C0/620x0_1_autohomecar__ChxpWGlFE4OAeBhVAAT6R1Nb9RQ506.jpg",
+    "image_size": "620x1359",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像は車のシートとダッシュボードの一部を示し、車室内（インテリア）の写真である。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M09/19/B8/620x0_1_autohomecar__ChxpV2lFE4OAARA0AASLc0dohB8402.jpg",
+    "image_size": "620x1365",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像に車のインテリア部品（香氛装置、操作ボタン、ダッシュボードの一部）が写っており、車室内の写真と判断できる。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M0B/1A/AB/620x0_1_autohomecar__ChxpVmlFAmOAbvU5AABbIk2CVhA567.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の後部外観、排気管、ナンバープレートが見えるため、車室内ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M00/1A/93/620x0_1_autohomecar__ChxpVmlFAaWAGV17AAweZEUKtTU169.jpg",
+    "image_size": "620x1342",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像中央の車の天井と内装部品が車室内（インテリア）を示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M01/70/14/620x0_1_autohomecar__Chto52jQ3eqABpYrAEsTLP_asag553.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観（フロントビュー）を示しており、インテリア要素は一切ない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M00/70/06/620x0_1_autohomecar__ChxpVmjQ3eqACOjRAEEVSZm7b94838.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観全体が写っており、室内の要素は一切ない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M03/1B/BF/620x0_1_autohomecar__ChxpVmlFE4OASiVGAASkg7CIh1o662.jpg",
+    "image_size": "620x1382",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像に車の内装（ダッシュボード、航空読灯）が写っており、車室内のインテリアを示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M0A/70/04/620x0_1_autohomecar__ChxpVWjQ3eqADFAlAD7O1u0Dv4s831.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、車体全体が映っている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M05/70/06/620x0_1_autohomecar__ChxpVmjQ3eqAF-r9AEOtlqLVGpA983.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を示しており、ダッシュボードやシートなどのインテリア要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311291.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M07/70/04/620x0_1_autohomecar__ChxpVWjQ3eqAComNAEMkO8_uOcQ593.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観（リアビュー）を示しており、インテリア要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g34/M03/A4/03/620x0_1_autohomecar__ChxpWGk7rlyAAdCNABeGsRP0Ge0086.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像は車のダッシュボードとステアリングを含む車室内のインテリアを示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M08/A6/AE/620x0_1_autohomecar__ChxpVWk7rmiAJ8llAB2GgFagpis372.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車のシート、ステアリング、ダッシュボードが見える車室内の写真"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M08/A6/AD/620x0_1_autohomecar__ChxpVWk7rlyAKCsVAB1y---y6Rs368.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画面显示车载中控系统，背景可见车窗和内饰结构，符合车室内（インテリア）特征"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M07/0B/AD/620x0_1_autohomecar__Chto52lD4KeAH9D9ACRW95liuUw486.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "エンジンルームの外観写真で、車室内ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M05/0B/9E/620x0_1_autohomecar__ChxpVmlD4HiAESPZAEGKqgPAZGY331.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を捉えた写真で、周囲の建物や道路が見える"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M06/0B/9E/620x0_1_autohomecar__ChxpVmlD4HeAMAq_ADPMMcAxaDc863.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を正面から撮影した写真で、道路と建物が背景にある"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M02/A6/AE/620x0_1_autohomecar__ChxpVWk7rmeAB4Q2AB6tU6BO29M627.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車の後部座席とドア内側が写っており、インテリアの典型的な構成"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M07/0B/AB/620x0_1_autohomecar__Chto52lD4HeAdD4PAEZiejWL7Yg732.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を示しており、背景に建物と木々がある"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car2.autoimg.cn/cardfs/product/g33/M0B/0B/AB/620x0_1_autohomecar__Chto52lD4HiAO-gwAD4-mTYblHk590.jpg",
+    "image_size": "620x465",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、背景に建物と植生が見える"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M0B/A6/BB/620x0_1_autohomecar__Chto52k7rlyAZyCUAB3ko83JxwU685.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車のコクピット、ステアリング、ダッシュボード、シートが写っている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M01/16/6B/620x0_1_autohomecar__ChxpVWlEwIGAPy5WAAXeuiZDvq0312.jpg",
+    "image_size": "620x1854",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観と広告文が中心で、車室内は表示されていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311282.html",
+    "image_url": "http://car3.autoimg.cn/cardfs/product/g33/M01/A6/AE/620x0_1_autohomecar__ChxpVmk7rl2AVF2bABmFgQKmQak898.jpg",
+    "image_size": "620x465",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "写真は車のコクピット内部を捉えており、ステアリング、ダッシュボード、シート、室内照明などが確認できる"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M00/15/F0/620x0_1_autohomecar__ChxpVmlEukCAOxQhAANmejuARmE404.jpg",
+    "image_size": "620x348",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観が写っており、カモフラージュで覆われた前面と側面が見える"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M06/13/65/620x0_1_autohomecar__ChxpV2lEukCABmeNAAIf5pL4vVQ766.jpg",
+    "image_size": "620x348",
+    "interior": false,
+    "confidence": 0.95,
+    "reason": "車の外装にカモフラージュテープが貼られており、展示会のブースの一部と判断される"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M03/15/F0/620x0_1_autohomecar__ChxpVmlEukCAaMEIAAOEl5JSUAU795.jpg",
+    "image_size": "620x348",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観写真で、カモフラージュが施されたリアビュー。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M07/13/65/620x0_1_autohomecar__ChxpV2lEukCAXOVrAAPhFMUT7yk376.jpg",
+    "image_size": "620x348",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観でカモフラージュが施され、充電ケーブルが接続されている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M08/13/6D/620x0_1_autohomecar__ChxpWGlEukCAFVLxAAN8P4vPhiI080.jpg",
+    "image_size": "620x348",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の充電口とカモフラージュテープが外観の一部であり、車室内ではない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M07/13/6D/620x0_1_autohomecar__ChxpWGlEukCAAEztAAJDbIrGPAM12.jpeg",
+    "image_size": "620x348",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像は車のコクピット内部を示しており、ステアリング、ダッシュボード、操作ボタンなどが確認できる"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M04/15/EF/620x0_1_autohomecar__ChxpVWlEukCAeNerAAMvhvcjz_s649.jpg",
+    "image_size": "620x348",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "画像は車の外観（フロントビュー）を示しており、カモフラージュテープで覆われているが、車室内ではない。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311281.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M08/15/EF/620x0_1_autohomecar__ChxpVWlEukCAXFY1AAHtO9ZGrGI400.jpg",
+    "image_size": "620x348",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "ダッシュボード、ステアリング、シートが見える車室内の写真"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M08/07/61/620x0_1_autohomecar__ChxpVWlDpaCAJym3AAPd91C7T6k757.jpg",
+    "image_size": "620x585",
+    "interior": false,
+    "confidence": 0.95,
+    "reason": "画像は車の外観とチップの概念図を示しており、車室内の要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M07/07/6F/620x0_1_autohomecar__Chto52lDpaCABlJ9AAGoeD181RE285.jpg",
+    "image_size": "620x408",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を示しており、室内の要素は一切ない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M0B/07/61/620x0_1_autohomecar__ChxpVWlDpaCADWdCAARHyI_mkfM150.jpg",
+    "image_size": "620x595",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像は車のコクピット、ダッシュボード、ステアリング、シート、インテリア照明、充電ポートなど車室内の複数の部品を示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M06/07/6F/620x0_1_autohomecar__Chto52lDpaCAYRrrAAIFHqoTrwI482.jpg",
+    "image_size": "620x359",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を示しており、インテリア要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M0A/07/6F/620x0_1_autohomecar__Chto52lDpaCAA6DlAAHaB_GYYLw350.jpg",
+    "image_size": "620x319",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車のコクピット、ステアリング、ダッシュボード、シートが写っている"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M0A/07/61/620x0_1_autohomecar__ChxpVWlDpaCAco4CAAGzA7b6SUk331.jpg",
+    "image_size": "620x324",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車の外観を示しており、ダッシュボードやシートなどのインテリア要素は含まれていない"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M05/04/26/620x0_1_autohomecar__ChxpWGlDpaCAQWFiAAGATahZ-fc039.jpg",
+    "image_size": "620x244",
+    "interior": true,
+    "confidence": 0.95,
+    "reason": "画像は車のダッシュボードとタッチスクリーンを含み、車室内（インテリア）の典型的な構成要素である"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g34/M08/03/F3/620x0_1_autohomecar__ChtpWGlDpaCAF0XnAAKO0WxK0Ns620.jpg",
+    "image_size": "620x456",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "車の後部座席とダッシュボード、天井、ドア内装が写っており、車室内（インテリア）である。"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M09/07/6F/620x0_1_autohomecar__Chto52lDpaCARhNhAAGAgbLcSMA560.jpg",
+    "image_size": "620x242",
+    "interior": true,
+    "confidence": 0.98,
+    "reason": "画像は車のシート、ステアリング、ダッシュボードなどのインテリアを示している"
+  },
+  {
+    "article_url": "https://www.autohome.com.cn/news/202512/1311272.html",
+    "image_url": "http://www2.autoimg.cn/chejiahaodfs/g33/M01/07/63/620x0_1_autohomecar__ChxpVmlDpaCAFR5vAAHMZRykkU0573.jpg",
+    "image_size": "620x369",
+    "interior": false,
+    "confidence": 0.98,
+    "reason": "車のエンブレムとモデル名の表示で、外観の製品単体写真"
+  }
+]
