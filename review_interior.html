@@ -120,6 +120,8 @@
       flex-direction: column;
       gap: 4px;
       min-height: 160px;
+      position: relative;
+      overflow: hidden;
     }
     .candidate img {
       width: 100%;
@@ -128,6 +130,20 @@
       max-height: 120px;
       background: #0c1116;
       border: 1px solid #162030;
+    }
+    .candidate .fallback-text {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #cdd7e6;
+      font-weight: 700;
+      font-size: 14px;
+      background: linear-gradient(135deg, rgba(76,195,255,0.18), rgba(13,21,32,0.9));
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
     label.select {
       display: flex;
@@ -185,6 +201,20 @@
   <script>
     let data = null;
     let hideNoCandidates = false;
+    const FALLBACK_SRC = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+        <defs>
+          <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#1b2735"/>
+            <stop offset="100%" stop-color="#0d1520"/>
+          </linearGradient>
+        </defs>
+        <rect width="800" height="450" fill="url(#g)" />
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+          fill="#cdd7e6" font-family="Inter, \'Noto Sans JP\', sans-serif"
+          font-size="40" font-weight="700">イメージ画像</text>
+      </svg>
+    `);
 
     async function load() {
       try {
@@ -252,7 +282,7 @@
           <div class="images">
             <div class="image-block">
               <h4>現行画像</h4>
-              ${article.current_img ? `<img class="current-img" src="${article.current_img}" loading="lazy" alt="current">` : '<div class="meta">No current image</div>'}
+              ${article.current_img ? `<img class="current-img img-check" src="${article.current_img}" loading="lazy" alt="current">` : '<div class="meta">No current image</div>'}
               <label class="select"><input type="radio" name="sel-${article.id}" value="">現行のまま</label>
               ${article.current_img ? `<div class="meta" style="word-break:break-all;">${article.current_img}</div>` : ""}
             </div>
@@ -273,6 +303,7 @@
 
       document.getElementById("counter").textContent = `表示: ${visibleCount} / ${data.articles.length}`;
       updatePreview();
+      wireFallbacks();
     }
 
     function renderCandidates(article) {
@@ -285,6 +316,7 @@
         return `
           <label class="candidate">
             <img src="${url}" loading="lazy" alt="candidate">
+            <span class="fallback-text" aria-hidden="true">イメージ画像</span>
             <label class="select">
               <input type="radio" name="sel-${article.id}" value="${encodeURIComponent(url)}">
               この画像を使う
@@ -354,6 +386,23 @@
       if (!data) return setStatus("データが未読込です。『JSONを読み込む』で review_data.json を選択してください。");
       hideNoCandidates = !hideNoCandidates;
       render();
+    }
+
+    function wireFallbacks() {
+      document.querySelectorAll("img.img-check:not([data-fallback])").forEach(img => {
+        img.dataset.fallback = "1";
+        img.addEventListener("error", () => {
+          if (img.dataset.failed) return;
+          img.dataset.failed = "1";
+          img.src = FALLBACK_SRC;
+          img.style.objectFit = "contain";
+          const wrap = img.closest(".candidate");
+          if (wrap) {
+            const label = wrap.querySelector(".fallback-text");
+            if (label) label.style.display = "flex";
+          }
+        }, { once: false });
+      });
     }
 
     function updatePreview() {

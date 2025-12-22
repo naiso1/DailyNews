@@ -280,6 +280,22 @@
             opacity: 1;
         }
 
+        .fallback-overlay {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #e3e9f4;
+            font-weight: 800;
+            font-size: 16px;
+            background: linear-gradient(135deg, rgba(76, 195, 255, 0.14), rgba(13, 21, 32, 0.9));
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
         .country-badge {
             position: absolute;
             top: 10px;
@@ -1360,6 +1376,22 @@
         const COUNTRY_FLAGS = { jp: "<span class='flag-icon flag-jp'></span>", cn: "<span class='flag-icon flag-cn'></span>", in: "<span class='flag-icon flag-in'></span>" };
         const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド" };
 
+        // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
+        const FALLBACK_SRC = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#1b2735"/>
+                  <stop offset="100%" stop-color="#0d1520"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="450" fill="url(#g)" />
+              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                fill="#cdd7e6" font-family="Inter, 'Noto Sans JP', sans-serif"
+                font-size="40" font-weight="700">イメージ画像</text>
+            </svg>
+        `);
+
         let activeCountries = new Set(["world"]);
         let activeTags = new Set(["all"]);
 
@@ -1528,7 +1560,8 @@
                 card.className = "card";
                 card.innerHTML = `
             <div class="thumb">
-                <img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop'">
+                <img src="${n.img}" alt="${n.title}" loading="lazy" class="img-with-fallback">
+                <div class="fallback-overlay">イメージ画像</div>
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="date-badge">${n.date}</span>
                 <span class="id-badge">${n.id}</span>
@@ -1587,6 +1620,7 @@
             }
 
             // Empty state removed
+            wireImageFallbacks(document);
             renderInsights();
         }
 
@@ -1710,7 +1744,7 @@
                         ideas.forEach(idea => {
                             ideasHTML += `
                                 <div class="idea-card">
-                                    ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img" loading="lazy"></div>` : ""}
+                                ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
                                     <div class="idea-content">
                                         <div class="idea-header">
                                             <span class="idea-number">${idea.id}</span>
@@ -1750,6 +1784,22 @@
 
                 wrapper.innerHTML = analysisHTML + ideasHTML;
                 container.appendChild(wrapper);
+            });
+            wireImageFallbacks(container);
+        }
+
+        function wireImageFallbacks(scope = document) {
+            scope.querySelectorAll("img.img-with-fallback").forEach(img => {
+                if (img.dataset.fallbackWired) return;
+                img.dataset.fallbackWired = "1";
+                img.addEventListener("error", () => {
+                    if (img.dataset.failed) return;
+                    img.dataset.failed = "1";
+                    img.src = FALLBACK_SRC;
+                    img.style.objectFit = "contain";
+                    const overlay = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".fallback-overlay");
+                    if (overlay) overlay.style.display = "flex";
+                });
             });
         }
 
