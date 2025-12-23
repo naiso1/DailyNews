@@ -1792,6 +1792,16 @@
             scope.querySelectorAll("img.img-with-fallback").forEach(img => {
                 if (img.dataset.fallbackWired) return;
                 img.dataset.fallbackWired = "1";
+                img.addEventListener("load", () => {
+                    const overlay = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".fallback-overlay");
+                    if (overlay) overlay.style.display = "none";
+                    const src = img.currentSrc || img.src || "";
+                    const isPlaceholder = src.includes("placeholder") || src.includes("unsplash") || src.includes("thumb_default.png");
+                    if (!isPlaceholder) {
+                        const note = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".image-note");
+                        if (note) note.style.display = "none";
+                    }
+                });
                 img.addEventListener("error", () => {
                     if (img.dataset.failed) return;
                     img.dataset.failed = "1";
