@@ -3746,5 +3746,128 @@ window.LOADED_NEWS_DATA = [
         "country": "in",
         "img": "https://acko-cms.ackoassets.com/Untitled_design_33_86733a884e.webp",
         "note": "※イメージ画像／二輪安全プラットフォーム"
+    },
+
+    
+    // 2025-12-23 グローバルニュース追加
+    {
+        id: "jp97",
+        title: "トヨタ新型RAV4に日本精機のヘッドアップディスプレイ初採用",
+        desc: "日本精機がトヨタ新型RAV4向けに薄型ヘッドアップディスプレイを供給。速度などをフロントガラスに投影し、視線移動を減らす初採用事例。",
+        url: "https://newsdig.tbs.co.jp/articles/bsn/2364991",
+        source: "TBS NEWS DIG",
+        date: "2025-12-23",
+        tags: ["トヨタ", "RAV4", "HUD", "HMI"],
+        country: "jp",
+        img: "https://newsdig.ismcdn.jp/mwimgs/7/5/1200w/img_750357eeb58eec889fb4d53561660cdd74204.jpg",
+        note: "HUD初採用"
+    },
+    {
+        id: "jp98",
+        title: "日産セレナ改良モデル、木目調加飾と後席モニターで快適性向上",
+        desc: "改良型セレナは木目調加飾や合成皮革インパネ、USB Type-C×5を備え、Tailor Fitシートや15.6型後席モニター、AUTECHなど特別仕様も展開。",
+        url: "https://www.caranddriver.co.jp/newcar/108648/",
+        source: "Car and Driver Japan",
+        date: "2025-12-23",
+        tags: ["日産", "セレナ", "ミニバン", "後席モニター", "加飾"],
+        country: "jp",
+        img: "https://www.caranddriver.co.jp/wp-content/uploads/2025/12/NISSAN-SERENA.jpg",
+        note: "快適装備強化"
+    },
+    {
+        id: "jp99",
+        title: "ボッシュ、AI搭載コックピット拡張を発表",
+        desc: "AI音声アシスタントとNvidia Orin SoCを採用した後付け可能なコックピット拡張を公開。Microsoft Teamsなどビジネス機能も統合しHMIを強化。",
+        url: "https://www.automotiveinteriorsworld.com/news/hmi/ai-powered-cockpit-extension-unveiled-by-bosch.html",
+        source: "Automotive Interiors World",
+        date: "2025-12-23",
+        tags: ["Bosch", "AI", "HMI", "コックピット"],
+        country: "jp",
+        img: "https://www.automotiveinteriorsworld.com/wp-content/uploads/2025/12/Bosch_15_xc_visuals_handson_driving_ai_ring_50perz_v7_16_9.jpg",
+        note: "AIコックピット拡張"
+    },
+    {
+        id: "jp100",
+        title: "ヤマハ、車載オーディオ用「Isolation Frame」技術発表",
+        desc: "スピーカーをばね機構で車体から隔離し振動を抑えるIsolation Frameを発表。共振ノイズを低減し、中低音をクリアに再生して“車内を第二のリビング”に。",
+        url: "https://www.yamaha.com/ja/news_release/2025/25122301/",
+        source: "ヤマハ",
+        date: "2025-12-23",
+        tags: ["ヤマハ", "オーディオ", "振動対策", "快適性"],
+        country: "jp",
+        img: "https://www.yamaha.com/ja/news_release/files/news/25122301/images/2512230101.jpg",
+        note: "公式画像"
+    },
+    {
+        id: "jp101",
+        title: "DVNデザインコンテスト報告　内装イルミネーションが欧州でトレンドに",
+        desc: "DVN年末コラムで、欧州で内装パネルに照明を組み込むトレンドが顕著と指摘。ルノー4やメルセデスCLA、BMW iX3などで採用例が拡大。",
+        url: "https://www.drivingvisionnews.com/news/2025/12/23/years-end-time-to-relax-think-and-take-force-for-next-year/",
+        source: "Driving Vision News",
+        date: "2025-12-23",
+        tags: ["イルミネーション", "加飾", "欧州トレンド", "照明"],
+        country: "jp",
+        img: "https://www.drivingvisionnews.com/wp-content/uploads/2025/12/231225_edito1.jpg",
+        note: "欧州加飾トレンド"
+    },
+    {
+        id: "jp102",
+        title: "クラウン エステート「THE 70th」特別仕様　黒光沢内装と赤ステッチ採用",
+        desc: "70周年記念モデルで黒光沢インパネや専用シフトノブ、プロジェクションロゴ付きイルミなど特別装備を採用。RSグレードは赤ステッチ入りスポーティシートを設定。",
+        url: "https://news.livedoor.com/article/detail/30256123/",
+        source: "livedoor NEWS",
+        date: "2025-12-23",
+        tags: ["トヨタ", "クラウン", "特別仕様", "加飾", "イルミ"],
+        country: "jp",
+        img: "https://image.news.livedoor.com/newsimage/stf/f/e/fe5ee_1730_c4241e51_020f255c.jpg",
+        note: "特別内装"
+    },
+    {
+        id: "jp103",
+        title: "新型RAV4、Arene OSと島型インテリアを採用",
+        desc: "新型RAV4はArene OSでソフト更新を高速化し、水平基調の島型インテリアでディスプレイとシフターを島状に配置。カラーHUDや一方向シフターを導入し先進HMIを強化。",
+        url: "https://news.livedoor.com/article/detail/30256968/",
+        source: "livedoor NEWS",
+        date: "2025-12-23",
+        tags: ["トヨタ", "RAV4", "Arene OS", "HUD", "HMI"],
+        country: "jp",
+        img: "https://image.news.livedoor.com/newsimage/stf/4/1/41990_1854_3da27f4835b5022739817c8f0c2801fc.jpg",
+        note: "新世代SUV HMI"
+    },
+    {
+        id: "jp104",
+        title: "43年間保存された1982年式メルセデスSL500、内装も新車同様",
+        desc: "英国のSL専門店が43年間保管された1982年式500SLを公開。レザーシートや木目パネルが新車同様の艶と香りを保ち、防錆剤やチョークマークも残る保存状態を紹介。",
+        url: "https://vague.style/post/384034",
+        source: "VAGUE",
+        date: "2025-12-23",
+        tags: ["メルセデス", "SL", "保存", "クラシックカー", "内装"],
+        country: "jp",
+        img: "https://vague.style/wp-content/uploads/2026/12/11_20251213_SL.jpg",
+        note: "差し替えURL・画像"
+    },
+    {
+        id: "jp105",
+        title: "Autoneum、ポールスター5に完全リサイクル可能な内外装部品を供給",
+        desc: "ポリエステルベースのモノマテリアル内外装部品を供給。ラテックスフリーで音響特性も向上し、5年以上かけて開発したリサイクル技術を採用。",
+        url: "https://www.marklines.com/ja/news/337555",
+        source: "MarkLines",
+        date: "2025-12-23",
+        tags: ["Autoneum", "ポールスター", "リサイクル", "サステナブル", "音響"],
+        country: "jp",
+        img: "https://www.marklines.com/statics/page_header_img/news_ogp.jpg",
+        note: "サステナブル部品"
+    },
+    {
+        id: "jp106",
+        title: "Valeo、CES 2026で拡張現実搭載インテリアを展示予定",
+        desc: "センサーから高性能コンピューティング、ソフトウェアを統合したSDVエコシステムを展示予定。デモカーではドライバーと車内モニタリングを備えたAugmented Panovisionを搭載。",
+        url: "https://www.marklines.com/ja/news/337553",
+        source: "MarkLines",
+        date: "2025-12-23",
+        tags: ["Valeo", "CES2026", "AR", "モニタリング", "SDV"],
+        country: "jp",
+        img: "https://www.marklines.com/statics/page_header_img/news_ogp.jpg",
+        note: "ARインテリア展示"
     }
 ];
