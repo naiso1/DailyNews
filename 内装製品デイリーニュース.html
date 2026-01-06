@@ -138,6 +138,14 @@
             background: linear-gradient(135deg, #ff9933, #138808);
         }
 
+        .chip.country-us.active {
+            background: linear-gradient(135deg, #3c3b6e, #b22234);
+        }
+
+        .chip.country-eu.active {
+            background: linear-gradient(135deg, #003399, #ffcc00);
+        }
+
         .chip.country-world.active {
             background: linear-gradient(135deg, #c79dff, #6fa7ff);
         }
@@ -198,6 +206,41 @@
             transform: translate(-50%, -50%);
             line-height: 0;
             font-weight: bold;
+        }
+
+        .flag-us {
+            background: linear-gradient(to bottom,
+                    #b22234 0 14%,
+                    #ffffff 14% 28%,
+                    #b22234 28% 42%,
+                    #ffffff 42% 56%,
+                    #b22234 56% 70%,
+                    #ffffff 70% 84%,
+                    #b22234 84% 100%);
+        }
+
+        .flag-us::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 50%;
+            background: #3c3b6e;
+        }
+
+        .flag-eu {
+            background: #003399;
+        }
+
+        .flag-eu::after {
+            content: '★';
+            color: #ffcc00;
+            font-size: 9px;
+            position: absolute;
+            top: 1px;
+            left: 5px;
+            line-height: 1;
         }
 
         .date-inputs {
@@ -326,6 +369,66 @@
             z-index: 2;
         }
 
+
+        /* New Badge */
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(255, 77, 77, 0.4);
+            animation: pulse 2s infinite;
+            z-index: 4;
+        }
+        
+        /* Country Badge - positioned below New badge when present */
+        .country-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* When New badge is present, move country badge down */
+        .thumb .new-badge + .country-badge {
+            top: 42px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .idea-new-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #fff;
+            margin-left: 10px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
         .date-badge {
             position: absolute;
             top: 10px;
@@ -338,15 +441,18 @@
             color: var(--muted);
         }
 
+        /* ID Badge moved to source area */
+        .id-badge-thumb {
+            display: none;  /* Hide the old one in thumb */
+        }
+        
         .id-badge {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            padding: 4px 10px;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            border-radius: 8px;
-            font-size: 11px;
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(125, 241, 194, 0.15);
+            border: 1px solid rgba(125, 241, 194, 0.3);
+            border-radius: 6px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--muted);
             font-family: monospace;
@@ -666,6 +772,14 @@
             border-top: 3px solid #ff9933;
         }
 
+        .analysis-card.region-us {
+            border-top: 3px solid #3c3b6e;
+        }
+
+        .analysis-card.region-eu {
+            border-top: 3px solid #003399;
+        }
+
         .flag-header {
             display: flex;
             align-items: center;
@@ -833,6 +947,16 @@
         .region-section.in {
             border-left: 4px solid #ff9933;
             background: linear-gradient(90deg, rgba(255, 153, 51, 0.05), transparent);
+        }
+
+        .region-section.us {
+            border-left: 4px solid #3c3b6e;
+            background: linear-gradient(90deg, rgba(60, 59, 110, 0.05), transparent);
+        }
+
+        .region-section.eu {
+            border-left: 4px solid #003399;
+            background: linear-gradient(90deg, rgba(0, 51, 153, 0.05), transparent);
         }
 
         @media (max-width: 900px) {
@@ -1048,6 +1172,8 @@
                 <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本</span>
                 <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国</span>
                 <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド</span>
+                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国</span>
+                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州</span>
             </div>
         </div>
         <div class="filter-row">
@@ -1072,7 +1198,7 @@
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
                 <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
                 <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
-                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド）</option>
+                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド→米国→欧州）</option>
                 <option value="likes-desc" style="background: #1e222d; color: #fff;">いいね順</option>
                 <option value="comments-desc" style="background: #1e222d; color: #fff;">コメント数順</option>
             </select>
@@ -1364,6 +1490,19 @@
     <script>
         let NEWS_DATA = [];
         let visibleLimit = 30;
+        
+        // Newバッジ表示用：2025-12-29以降のニュースをすべてNewとして扱う
+        function isNewContent(dateStr, latestDate) {
+            if (!latestDate) return false;
+            const date = new Date(dateStr);
+            const cutoffDate = new Date('2025-12-29');
+            return date >= cutoffDate;
+        }
+        
+        function getLatestDate(data) {
+            if (!data || data.length === 0) return null;
+            return data.reduce((max, item) => item.date > max ? item.date : max, data[0].date);
+        }
 
 
         const ALL_TAGS = [
@@ -1373,8 +1512,14 @@
             "シート", "SUV", "ミニバン", "ワゴン", "パッケージ", "トレンド", "電動化", "EV", "荷室",
             "AI", "エージェント", "自動運転", "R&D", "軽量化", "音響", "後席", "インフォテインメント", "性能", "期待値", "通信", "規格", "UX", "安全"
         ];
-        const COUNTRY_FLAGS = { jp: "<span class='flag-icon flag-jp'></span>", cn: "<span class='flag-icon flag-cn'></span>", in: "<span class='flag-icon flag-in'></span>" };
-        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド" };
+        const COUNTRY_FLAGS = {
+            jp: "<span class='flag-icon flag-jp'></span>",
+            cn: "<span class='flag-icon flag-cn'></span>",
+            in: "<span class='flag-icon flag-in'></span>",
+            us: "<span class='flag-icon flag-us'></span>",
+            eu: "<span class='flag-icon flag-eu'></span>"
+        };
+        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州" };
 
         // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
         const FALLBACK_SRC = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
@@ -1452,10 +1597,8 @@
             if (country === "world") {
                 activeCountries = new Set(["world"]);
             } else {
-                activeCountries.delete("world");
-                if (activeCountries.has(country)) activeCountries.delete(country);
-                else activeCountries.add(country);
-                if (activeCountries.size === 0) activeCountries.add("world");
+                // 単一選択に変更：選択した国のみをアクティブに
+                activeCountries = new Set([country]);
             }
             updateCountryChips();
             applyFilters();
@@ -1522,7 +1665,7 @@
             });
 
             // 2. Sort
-            const countryOrder = { jp: 0, cn: 1, in: 2 };
+            const countryOrder = { jp: 0, cn: 1, in: 2, us: 3, eu: 4 };
             const interactions = window.interactionsData || {};
             filteredData.sort((a, b) => {
                 if (sortOrder === "date-asc") {
@@ -1555,16 +1698,18 @@
 
             const itemsToShow = filteredData.slice(0, visibleLimit);
 
+            const latestNewsDate = getLatestDate(NEWS_DATA);
             itemsToShow.forEach(n => {
                 const card = document.createElement("article");
                 card.className = "card";
+                const isNew = isNewContent(n.date, latestNewsDate);
                 card.innerHTML = `
             <div class="thumb">
                 <img src="${n.img}" alt="${n.title}" loading="lazy" class="img-with-fallback">
                 <div class="fallback-overlay">イメージ画像</div>
+                ${isNew ? '<span class="new-badge">New</span>' : ''}
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="date-badge">${n.date}</span>
-                <span class="id-badge">${n.id}</span>
                 ${(n.img.includes('unsplash') || n.img.includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
@@ -1589,6 +1734,7 @@
                     </button>
 
                     <span class="source">${n.source}</span>
+                    <span class="id-badge">${n.id}</span>
                 </div>
     
                 <div class="comment-section">
@@ -1653,16 +1799,32 @@
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.toLowerCase();
+            
+            // 最新のインサイト日付を取得
+            const latestInsightDate = DAILY_INSIGHTS.length > 0 ? DAILY_INSIGHTS[0].date : null;
 
             DAILY_INSIGHTS.forEach(day => {
-                // Date Filter (simple string compare works for YYYY-MM-DD)
-                if (from && day.date < from) return;
-                if (to && day.date > to) return;
+                // この日付が最新かどうかを判定（最初のエントリーのみNew）
+                const isNewInsight = (day.date === latestInsightDate);
+                // Date Filter (supports single date or range like YYYY-MM-DD〜YYYY-MM-DD)
+                let rangeStart = day.date;
+                let rangeEnd = day.date;
+                if (day.date.includes("〜") || day.date.includes("～") || day.date.includes("~")) {
+                    const parts = day.date.split(/[〜～~]/).map(s => s.trim()).filter(Boolean);
+                    if (parts.length >= 2) {
+                        rangeStart = parts[0];
+                        rangeEnd = parts[1];
+                    }
+                }
+                if (from && rangeEnd < from) return;
+                if (to && rangeStart > to) return;
 
                 // Active Countries Logic
-                const showJp = activeCountries.has("world") || activeCountries.has("jp");
-                const showCn = activeCountries.has("world") || activeCountries.has("cn");
-                const showIn = activeCountries.has("world") || activeCountries.has("in");
+                const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
+                const showCn = (activeCountries.has("world") || activeCountries.has("cn")) && day.analysis.cn;
+                const showIn = (activeCountries.has("world") || activeCountries.has("in")) && day.analysis.in;
+                const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
+                const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
 
                 // Text Search Check
                 let hasMatch = false;
@@ -1671,9 +1833,11 @@
                 } else {
                     const allText = [
                         day.date,
-                        showJp ? day.analysis.jp + JSON.stringify(day.ideas.jp) : "",
-                        showCn ? day.analysis.cn + JSON.stringify(day.ideas.cn) : "",
-                        showIn ? day.analysis.in + JSON.stringify(day.ideas.in) : ""
+                        showJp ? day.analysis.jp + JSON.stringify(day.ideas.jp || []) : "",
+                        showCn ? day.analysis.cn + JSON.stringify(day.ideas.cn || []) : "",
+                        showIn ? day.analysis.in + JSON.stringify(day.ideas.in || []) : "",
+                        showUs ? day.analysis.us + JSON.stringify(day.ideas.us || []) : "",
+                        showEu ? day.analysis.eu + JSON.stringify(day.ideas.eu || []) : ""
                     ].join(" ").toLowerCase();
                     if (allText.includes(searchText)) hasMatch = true;
                 }
@@ -1681,7 +1845,7 @@
                 if (!hasMatch) return;
 
                 // Only render if there is content to show for active countries
-                if (!showJp && !showCn && !showIn) return;
+                if (!showJp && !showCn && !showIn && !showUs && !showEu) return;
 
                 // Create Wrapper
                 const wrapper = document.createElement("div");
@@ -1690,7 +1854,7 @@
                 // Analysis Section
                 let analysisHTML = `
                     <section class="analysis-section" style="margin-top: 48px;">
-                        <h2 class="section-title"><span class="section-icon">💡</span> 考察 (${day.date})</h2>
+                        <h2 class="section-title"><span class="section-icon">💡</span> 考察 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
                         <div class="analysis-grid">
                 `;
 
@@ -1721,13 +1885,31 @@
                         <div class="analysis-text-body">${day.analysis.in}</div>
                     </div>`;
 
+                if (showUs) analysisHTML += `
+                    <div class="analysis-card region-us">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-us" style="width:32px; height:22px;"></span>
+                            <span class="country-label">USA</span>
+                        </div>
+                        <div class="analysis-text-body">${day.analysis.us}</div>
+                    </div>`;
+
+                if (showEu) analysisHTML += `
+                    <div class="analysis-card region-eu">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-eu" style="width:32px; height:22px;"></span>
+                            <span class="country-label">EUROPE</span>
+                        </div>
+                        <div class="analysis-text-body">${day.analysis.eu}</div>
+                    </div>`;
+
                 analysisHTML += `</div></section>`;
 
 
                 // Ideas Section
                 let ideasHTML = `
                     <section class="ideas-section">
-                        <h2 class="section-title"><span class="section-icon">🚀</span> 企画アイデア例 (${day.date})</h2>
+                        <h2 class="section-title"><span class="section-icon">🚀</span> 企画アイデア例 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
                 `;
 
                 const renderIdeas = (ideas, regionName, regionClass, flagIcon) => {
@@ -1779,6 +1961,8 @@
                 if (showJp) renderIdeas(day.ideas.jp || [], '日本市場向け', 'jp', '<span class="flag-icon flag-jp" style="width:28px; height:18px;"></span>');
                 if (showCn) renderIdeas(day.ideas.cn || [], '中国市場向け', 'cn', '<span class="flag-icon flag-cn" style="width:28px; height:18px;"></span>');
                 if (showIn) renderIdeas(day.ideas.in || [], 'インド市場向け', 'in', '<span class="flag-icon flag-in" style="width:28px; height:18px;"></span>');
+                if (showUs) renderIdeas(day.ideas.us || [], '米国市場向け', 'us', '<span class="flag-icon flag-us" style="width:28px; height:18px;"></span>');
+                if (showEu) renderIdeas(day.ideas.eu || [], '欧州市場向け', 'eu', '<span class="flag-icon flag-eu" style="width:28px; height:18px;"></span>');
 
                 ideasHTML += `</section>`;
 
