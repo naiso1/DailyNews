@@ -126,6 +126,27 @@
             border-color: transparent;
         }
 
+        .chip .new-count {
+            margin-left: 6px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 120, 120, 0.6);
+            color: #ff8a8a;
+            background: rgba(255, 120, 120, 0.12);
+        }
+
+        .chip .new-count.hidden {
+            display: none;
+        }
+
+        .chip.active .new-count {
+            color: #0c1224;
+            background: rgba(255, 255, 255, 0.7);
+            border-color: transparent;
+        }
+
         .chip.country-jp.active {
             background: linear-gradient(135deg, #ff6b6b, #ffd93d);
         }
@@ -373,8 +394,8 @@
         /* New Badge */
         .new-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 6px;
+            left: 6px;
             padding: 4px 10px;
             background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
             border-radius: 8px;
@@ -387,12 +408,12 @@
             animation: pulse 2s infinite;
             z-index: 4;
         }
-        
+
         /* Country Badge - positioned below New badge when present */
         .country-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 6px;
+            left: 6px;
             padding: 4px 10px;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(6px);
@@ -405,17 +426,24 @@
             align-items: center;
             gap: 4px;
         }
-        
+
         /* When New badge is present, move country badge down */
-        .thumb .new-badge + .country-badge {
-            top: 42px;
+        .thumb .new-badge+.country-badge {
+            top: 34px;
         }
-        
+
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
-        
+
         .idea-new-badge {
             display: inline-block;
             padding: 3px 8px;
@@ -443,9 +471,10 @@
 
         /* ID Badge moved to source area */
         .id-badge-thumb {
-            display: none;  /* Hide the old one in thumb */
+            display: none;
+            /* Hide the old one in thumb */
         }
-        
+
         .id-badge {
             display: inline-block;
             padding: 2px 8px;
@@ -1162,18 +1191,23 @@
     <header>
         <h1>🌍 内装製品デイリーニュース</h1>
         <p class="lead">世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なダッシュボードでお届け</p>
+        <div class="access-counter"
+            style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px;">
+            <span>📊 総アクセス数: <strong id="totalVisits" style="color:var(--accent);">-</strong></span>
+            <span>📅 本日: <strong id="todayVisits" style="color:var(--accent-2);">-</strong></span>
+        </div>
     </header>
 
     <div class="filters">
         <div class="filter-row">
             <span class="filter-label">🌐 地域</span>
             <div class="filter-chips" id="countryFilters">
-                <span class="chip country-world active" data-country="world">🌍 世界版</span>
-                <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本</span>
-                <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国</span>
-                <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド</span>
-                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国</span>
-                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州</span>
+                <span class="chip country-world active" data-country="world">🌍 世界版<span class="new-count" data-country="world"></span></span>
+                <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本<span class="new-count" data-country="jp"></span></span>
+                <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国<span class="new-count" data-country="cn"></span></span>
+                <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド<span class="new-count" data-country="in"></span></span>
+                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国<span class="new-count" data-country="us"></span></span>
+                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州<span class="new-count" data-country="eu"></span></span>
             </div>
         </div>
         <div class="filter-row">
@@ -1239,6 +1273,8 @@
             console.log("Firebase Connected");
             // Load all interactions for sorting
             loadInteractions();
+            // Update access counter
+            updateAccessCounter();
         } catch (e) {
             console.error("Firebase Connection Failed:", e);
         }
@@ -1260,6 +1296,57 @@
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
             } catch (e) {
                 console.error("Failed to load interactions:", e);
+            }
+        }
+
+        // アクセスカウンター（Firebase連携）
+        async function updateAccessCounter() {
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const counterRef = doc(db, 'pageStats', 'accessCounter');
+
+                // トランザクションでカウンターをインクリメント
+                await runTransaction(db, async (transaction) => {
+                    const docSnap = await transaction.get(counterRef);
+                    if (!docSnap.exists()) {
+                        transaction.set(counterRef, {
+                            total: 1,
+                            daily: { [today]: 1 },
+                            lastUpdated: today
+                        });
+                    } else {
+                        const data = docSnap.data();
+                        const newTotal = (data.total || 0) + 1;
+                        const daily = data.daily || {};
+                        daily[today] = (daily[today] || 0) + 1;
+
+                        // 古い日付のデータを削除（7日以上前）
+                        const weekAgo = new Date();
+                        weekAgo.setDate(weekAgo.getDate() - 7);
+                        Object.keys(daily).forEach(date => {
+                            if (new Date(date) < weekAgo) delete daily[date];
+                        });
+
+                        transaction.update(counterRef, {
+                            total: newTotal,
+                            daily: daily,
+                            lastUpdated: today
+                        });
+                    }
+                });
+
+                // 最新のカウントを取得して表示
+                const snapshot = await getDoc(counterRef);
+                if (snapshot.exists()) {
+                    const data = snapshot.data();
+                    document.getElementById('totalVisits').textContent = (data.total || 0).toLocaleString();
+                    document.getElementById('todayVisits').textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
+                }
+                console.log("Access counter updated");
+            } catch (error) {
+                console.log('Access counter error:', error.message);
+                document.getElementById('totalVisits').textContent = '-';
+                document.getElementById('todayVisits').textContent = '-';
             }
         }
 
@@ -1490,15 +1577,46 @@
     <script>
         let NEWS_DATA = [];
         let visibleLimit = 30;
-        
-        // Newバッジ表示用：2025-12-29以降のニュースをすべてNewとして扱う
-        function isNewContent(dateStr, latestDate) {
-            if (!latestDate) return false;
-            const date = new Date(dateStr);
-            const cutoffDate = new Date('2025-12-29');
-            return date >= cutoffDate;
+
+        const NEW_DATE_RANGE = { start: "2026-01-06", end: "2026-01-07" };
+
+        // New????????????New?????
+        function isNewContent(dateStr) {
+            if (!dateStr) return false;
+            return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
         }
-        
+
+        function isNewInsightDate(dateLabel) {
+            if (!dateLabel) return false;
+            return dateLabel.includes(NEW_DATE_RANGE.start) || dateLabel.includes(NEW_DATE_RANGE.end);
+        }
+
+        function getNewCounts(data) {
+            const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0 };
+            if (!data) return counts;
+            data.forEach(item => {
+                if (!isNewContent(item.date)) return;
+                counts.world += 1;
+                if (counts[item.country] !== undefined) counts[item.country] += 1;
+            });
+            return counts;
+        }
+
+        function updateNewCountBadges() {
+            const counts = getNewCounts(NEWS_DATA);
+            document.querySelectorAll("#countryFilters .new-count").forEach(el => {
+                const country = el.dataset.country;
+                const count = counts[country] || 0;
+                if (count > 0) {
+                    el.textContent = `New ${count}`;
+                    el.classList.remove("hidden");
+                } else {
+                    el.textContent = "";
+                    el.classList.add("hidden");
+                }
+            });
+        }
+
         function getLatestDate(data) {
             if (!data || data.length === 0) return null;
             return data.reduce((max, item) => item.date > max ? item.date : max, data[0].date);
@@ -1544,6 +1662,7 @@
             if (window.LOADED_NEWS_DATA) {
                 NEWS_DATA = window.LOADED_NEWS_DATA;
                 document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                updateNewCountBadges();
             } else {
                 console.error("News data not loaded from JS file");
             }
@@ -1558,6 +1677,7 @@
             });
 
             document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                updateNewCountBadges();
 
             const today = new Date().toISOString().split("T")[0];
 
@@ -1589,6 +1709,9 @@
             });
 
             applyFilters();
+
+            // アクセスカウンター更新
+            updateAccessCounter();
         }
 
         function handleCountryClick(e) {
@@ -1633,6 +1756,64 @@
             });
         }
 
+
+
+        // タグクリックで検索
+        function searchByTag(tag) {
+            document.getElementById("searchInput").value = tag;
+            applyFilters();
+        }
+
+
+        // アクセスカウンター（Firebase連携）
+        async function updateAccessCounter() {
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const counterRef = window.db.collection('pageStats').doc('accessCounter');
+
+                // トランザクションでカウンターをインクリメント
+                await window.db.runTransaction(async (transaction) => {
+                    const doc = await transaction.get(counterRef);
+                    if (!doc.exists) {
+                        transaction.set(counterRef, {
+                            total: 1,
+                            daily: { [today]: 1 },
+                            lastUpdated: today
+                        });
+                    } else {
+                        const data = doc.data();
+                        const newTotal = (data.total || 0) + 1;
+                        const daily = data.daily || {};
+                        daily[today] = (daily[today] || 0) + 1;
+
+                        // 古い日付のデータを削除（7日以上前）
+                        const weekAgo = new Date();
+                        weekAgo.setDate(weekAgo.getDate() - 7);
+                        Object.keys(daily).forEach(date => {
+                            if (new Date(date) < weekAgo) delete daily[date];
+                        });
+
+                        transaction.update(counterRef, {
+                            total: newTotal,
+                            daily: daily,
+                            lastUpdated: today
+                        });
+                    }
+                });
+
+                // 最新のカウントを取得して表示
+                const snapshot = await counterRef.get();
+                if (snapshot.exists) {
+                    const data = snapshot.data();
+                    document.getElementById('totalVisits').textContent = (data.total || 0).toLocaleString();
+                    document.getElementById('todayVisits').textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
+                }
+            } catch (error) {
+                console.log('Access counter not available:', error.message);
+                document.getElementById('totalVisits').textContent = '-';
+                document.getElementById('todayVisits').textContent = '-';
+            }
+        }
 
         function applyFilters() {
             const from = document.getElementById("dateFrom").value;
@@ -1698,11 +1879,10 @@
 
             const itemsToShow = filteredData.slice(0, visibleLimit);
 
-            const latestNewsDate = getLatestDate(NEWS_DATA);
-            itemsToShow.forEach(n => {
+                        itemsToShow.forEach(n => {
                 const card = document.createElement("article");
                 card.className = "card";
-                const isNew = isNewContent(n.date, latestNewsDate);
+                const isNew = isNewContent(n.date);
                 card.innerHTML = `
             <div class="thumb">
                 <img src="${n.img}" alt="${n.title}" loading="lazy" class="img-with-fallback">
@@ -1720,7 +1900,7 @@
                     <button class="summary-btn" onclick="toggleSummary(this)">詳細要約を見る</button>
                     <div class="summary-content">${n.summary}</div>
                 </div>` : ''}
-                <div class="card-tags">${n.tags.map(t => `<span class="card-tag">${t}</span>`).join("")}</div>
+                <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
 
                 
                 <div class="actions">
@@ -1792,6 +1972,8 @@
 
 
 
+        let insightsVisibleLimit = 3;  // 初期表示は3回分
+
         function renderInsights() {
             const container = document.getElementById("insightsContainer");
             container.innerHTML = "";
@@ -1799,13 +1981,14 @@
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.toLowerCase();
-            
+
             // 最新のインサイト日付を取得
             const latestInsightDate = DAILY_INSIGHTS.length > 0 ? DAILY_INSIGHTS[0].date : null;
 
-            DAILY_INSIGHTS.forEach(day => {
-                // この日付が最新かどうかを判定（最初のエントリーのみNew）
-                const isNewInsight = (day.date === latestInsightDate);
+            let visibleCount = 0;
+            const filteredInsights = DAILY_INSIGHTS.filter(day => {
+                // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
+                const isNewInsight = isNewInsightDate(day.date);
                 // Date Filter (supports single date or range like YYYY-MM-DD〜YYYY-MM-DD)
                 let rangeStart = day.date;
                 let rangeEnd = day.date;
@@ -1816,8 +1999,8 @@
                         rangeEnd = parts[1];
                     }
                 }
-                if (from && rangeEnd < from) return;
-                if (to && rangeStart > to) return;
+                if (from && rangeEnd < from) return false;
+                if (to && rangeStart > to) return false;
 
                 // Active Countries Logic
                 const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
@@ -1842,10 +2025,26 @@
                     if (allText.includes(searchText)) hasMatch = true;
                 }
 
-                if (!hasMatch) return;
+                if (!hasMatch) return false;
 
                 // Only render if there is content to show for active countries
-                if (!showJp && !showCn && !showIn && !showUs && !showEu) return;
+                if (!showJp && !showCn && !showIn && !showUs && !showEu) return false;
+                return true;
+            });
+
+            // 表示するインサイトを制限
+            const insightsToShow = filteredInsights.slice(0, insightsVisibleLimit);
+
+            insightsToShow.forEach(day => {
+                // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
+                const isNewInsight = isNewInsightDate(day.date);
+
+                // 国別表示フラグを再計算
+                const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
+                const showCn = (activeCountries.has("world") || activeCountries.has("cn")) && day.analysis.cn;
+                const showIn = (activeCountries.has("world") || activeCountries.has("in")) && day.analysis.in;
+                const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
+                const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
 
                 // Create Wrapper
                 const wrapper = document.createElement("div");
@@ -1970,6 +2169,21 @@
                 container.appendChild(wrapper);
             });
             wireImageFallbacks(container);
+
+            // もっと見るボタン（インサイト用）
+            if (filteredInsights.length > insightsVisibleLimit) {
+                const loadMoreDiv = document.createElement("div");
+                loadMoreDiv.style.cssText = "text-align:center; margin-top:20px;";
+                loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;">
+                    📚 もっと見る (あと ${filteredInsights.length - insightsVisibleLimit} 件)
+                </button>`;
+                container.appendChild(loadMoreDiv);
+            }
+        }
+
+        function loadMoreInsights() {
+            insightsVisibleLimit += 3;
+            renderInsights();
         }
 
         function wireImageFallbacks(scope = document) {
