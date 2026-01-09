@@ -103,6 +103,107 @@
             flex: 1;
         }
 
+        .tag-filter-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tag-chips {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            max-height: 34px;
+            scrollbar-width: none;
+            min-width: 0;
+        }
+
+        .tag-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tag-chips.expanded {
+            flex-wrap: wrap;
+            max-height: none;
+            overflow: visible;
+        }
+
+        .tag-toggle {
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+
+        .tag-chips .chip {
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+
+        /* Region Badge - replaces emoji icons for better compatibility */
+        .region-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 12px;
+            margin-right: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            vertical-align: middle;
+        }
+
+        .region-badge.world {
+            background: linear-gradient(135deg, #7df1c2, #6fa7ff);
+            color: #0c1224;
+        }
+
+        .region-badge.jp {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: #0c1224;
+        }
+
+        .region-badge.cn {
+            background: linear-gradient(135deg, #de2910, #ffde00);
+            color: #fff;
+        }
+
+        .region-badge.in {
+            background: linear-gradient(135deg, #ff9933, #138808);
+            color: #fff;
+        }
+
+        .region-badge.us {
+            background: linear-gradient(135deg, #3c3b6e, #b22234);
+            color: #fff;
+        }
+
+        .region-badge.eu {
+            background: linear-gradient(135deg, #003399, #ffcc00);
+            color: #fff;
+        }
+
+        /* World/Globe icon using image */
+        .globe-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: url('images/globe_icon.png') no-repeat center center;
+            background-size: contain;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        /* Title globe icon (larger) */
+        .title-globe-icon {
+            height: 32px;
+            width: auto;
+            vertical-align: middle;
+            margin-right: 12px;
+            object-fit: contain;
+        }
+
         .chip {
             padding: 6px 12px;
             border-radius: 20px;
@@ -171,97 +272,44 @@
             background: linear-gradient(135deg, #c79dff, #6fa7ff);
         }
 
-        /* CSS Flags */
+        /* Image-based Flags */
         .flag-icon {
-            width: 20px;
-            height: 14px;
+            height: 18px;
+            width: auto;
             display: inline-block;
             vertical-align: middle;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
             margin-right: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+            border-radius: 2px;
+        }
+
+        /* Background-based flag icons (for span elements) */
+        .flag-icon[class*="flag-"] {
+            width: 24px;
+            height: 16px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .flag-jp {
-            background: white;
-        }
-
-        .flag-jp::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background: #bc002d;
-            border-radius: 50%;
+            background-image: url('images/icon_jp.png');
         }
 
         .flag-cn {
-            background: #de2910;
-        }
-
-        .flag-cn::after {
-            content: '★';
-            color: #ffde00;
-            font-size: 8px;
-            position: absolute;
-            top: 0px;
-            left: 2px;
-            line-height: 1;
+            background-image: url('images/icon_cn.png');
         }
 
         .flag-in {
-            background: linear-gradient(to bottom, #FF9933 33%, white 33%, white 66%, #138808 66%);
-        }
-
-        .flag-in::after {
-            content: '◎';
-            color: #000080;
-            font-size: 8px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            line-height: 0;
-            font-weight: bold;
+            background-image: url('images/icon_in.png');
         }
 
         .flag-us {
-            background: linear-gradient(to bottom,
-                    #b22234 0 14%,
-                    #ffffff 14% 28%,
-                    #b22234 28% 42%,
-                    #ffffff 42% 56%,
-                    #b22234 56% 70%,
-                    #ffffff 70% 84%,
-                    #b22234 84% 100%);
-        }
-
-        .flag-us::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 40%;
-            height: 50%;
-            background: #3c3b6e;
+            background-image: url('images/icon_us.png');
         }
 
         .flag-eu {
-            background: #003399;
-        }
-
-        .flag-eu::after {
-            content: '★';
-            color: #ffcc00;
-            font-size: 9px;
-            position: absolute;
-            top: 1px;
-            left: 5px;
-            line-height: 1;
+            background-image: url('images/icon_eu.png');
         }
 
         .date-inputs {
@@ -1189,7 +1237,7 @@
 
 <body>
     <header>
-        <h1>🌍 内装製品デイリーニュース</h1>
+        <h1><img id="titleIcon" class="title-globe-icon" src="images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
         <p class="lead">世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なダッシュボードでお届け</p>
         <div class="access-counter"
             style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px;">
@@ -1202,18 +1250,27 @@
         <div class="filter-row">
             <span class="filter-label">🌐 地域</span>
             <div class="filter-chips" id="countryFilters">
-                <span class="chip country-world active" data-country="world">🌍 世界版<span class="new-count" data-country="world"></span></span>
-                <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本<span class="new-count" data-country="jp"></span></span>
-                <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国<span class="new-count" data-country="cn"></span></span>
-                <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド<span class="new-count" data-country="in"></span></span>
-                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国<span class="new-count" data-country="us"></span></span>
-                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州<span class="new-count" data-country="eu"></span></span>
+                <span class="chip country-world active" data-country="world"><img src="images/icon_world.png"
+                        class="flag-icon" alt="World"> 世界版<span class="new-count" data-country="world"></span></span>
+                <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本<span
+                        class="new-count" data-country="jp"></span></span>
+                <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国<span
+                        class="new-count" data-country="cn"></span></span>
+                <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド<span
+                        class="new-count" data-country="in"></span></span>
+                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国<span
+                        class="new-count" data-country="us"></span></span>
+                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州<span
+                        class="new-count" data-country="eu"></span></span>
             </div>
         </div>
         <div class="filter-row">
             <span class="filter-label">🏷️ ジャンル</span>
-            <div class="filter-chips" id="tagFilters">
-                <span class="chip active" data-tag="all">すべて</span>
+            <div class="tag-filter-container">
+                <div class="filter-chips tag-chips" id="tagFilters">
+                    <span class="chip active" data-tag="all">すべて</span>
+                </div>
+                <button class="chip tag-toggle" id="tagToggle" type="button" aria-expanded="false">もっと見る</button>
             </div>
         </div>
         <div class="filter-row">
@@ -1578,16 +1635,16 @@
         let NEWS_DATA = [];
         let visibleLimit = 30;
 
-        const NEW_DATE_RANGE = { start: "2026-01-06", end: "2026-01-07" };
+        let NEW_DATE_RANGE = { start: null, end: null };
 
         // New????????????New?????
         function isNewContent(dateStr) {
-            if (!dateStr) return false;
+            if (!dateStr || !NEW_DATE_RANGE.start) return false;
             return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
         }
 
         function isNewInsightDate(dateLabel) {
-            if (!dateLabel) return false;
+            if (!dateLabel || !NEW_DATE_RANGE.start) return false;
             return dateLabel.includes(NEW_DATE_RANGE.start) || dateLabel.includes(NEW_DATE_RANGE.end);
         }
 
@@ -1617,9 +1674,27 @@
             });
         }
 
+        function updateTitleIcon() {
+            const iconEl = document.getElementById("titleIcon");
+            if (!iconEl) return;
+            let key = "world";
+            if (!activeCountries.has("world") && activeCountries.size === 1) {
+                const selected = [...activeCountries][0];
+                if (selected) key = selected;
+            }
+            iconEl.src = TITLE_ICONS[key] || TITLE_ICONS.world;
+        }
+
         function getLatestDate(data) {
             if (!data || data.length === 0) return null;
             return data.reduce((max, item) => item.date > max ? item.date : max, data[0].date);
+        }
+
+        function setNewDateRangeFromNews(data) {
+            const latest = getLatestDate(data);
+            if (latest) {
+                NEW_DATE_RANGE = { start: latest, end: latest };
+            }
         }
 
 
@@ -1638,6 +1713,14 @@
             eu: "<span class='flag-icon flag-eu'></span>"
         };
         const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州" };
+        const TITLE_ICONS = {
+            world: "images/icon_world.png",
+            jp: "images/icon_jp.png",
+            cn: "images/icon_cn.png",
+            in: "images/icon_in.png",
+            us: "images/icon_us.png",
+            eu: "images/icon_eu.png"
+        };
 
         // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
         const FALLBACK_SRC = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
@@ -1661,8 +1744,10 @@
         async function init() {
             if (window.LOADED_NEWS_DATA) {
                 NEWS_DATA = window.LOADED_NEWS_DATA;
+                setNewDateRangeFromNews(NEWS_DATA);
                 document.getElementById("totalCount").textContent = NEWS_DATA.length;
                 updateNewCountBadges();
+                updateTitleIcon();
             } else {
                 console.error("News data not loaded from JS file");
             }
@@ -1676,8 +1761,17 @@
                 tagFilters.appendChild(chip);
             });
 
+            const tagToggle = document.getElementById("tagToggle");
+            if (tagToggle) {
+                tagToggle.addEventListener("click", () => {
+                    const expanded = tagFilters.classList.toggle("expanded");
+                    tagToggle.textContent = expanded ? "閉じる" : "もっと見る";
+                    tagToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+                });
+            }
+
             document.getElementById("totalCount").textContent = NEWS_DATA.length;
-                updateNewCountBadges();
+            updateNewCountBadges();
 
             const today = new Date().toISOString().split("T")[0];
 
@@ -1715,8 +1809,9 @@
         }
 
         function handleCountryClick(e) {
-            if (!e.target.classList.contains("chip")) return;
-            const country = e.target.dataset.country;
+            const chip = e.target.closest(".chip");
+            if (!chip || !chip.dataset.country) return;
+            const country = chip.dataset.country;
             if (country === "world") {
                 activeCountries = new Set(["world"]);
             } else {
@@ -1748,6 +1843,7 @@
             document.querySelectorAll("#countryFilters .chip").forEach(c => {
                 c.classList.toggle("active", activeCountries.has(c.dataset.country));
             });
+            updateTitleIcon();
         }
 
         function updateTagChips() {
@@ -1826,10 +1922,12 @@
                 // Country Filter
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
 
-                // Tag Filter
+                const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ")).toLowerCase();
+
+                // Tag Filter (tag text can match title/desc as well)
                 if (!activeTags.has("all")) {
-                    const cardTags = n.tags;
-                    if (!cardTags.some(t => activeTags.has(t))) return false;
+                    const tagMatches = [...activeTags].some(tag => searchable.includes(tag.toLowerCase()));
+                    if (!tagMatches) return false;
                 }
 
                 // Date Filter (YYYY-MM-DD string comparison works)
@@ -1837,10 +1935,7 @@
                 if (to && n.date > to) return false;
 
                 // Text Search
-                if (searchText) {
-                    const content = (n.id + " " + n.title + n.desc + (n.summary || "") + (n.note || "") + n.tags.join(" ")).toLowerCase();
-                    if (!content.includes(searchText)) return false;
-                }
+                if (searchText && !searchable.includes(searchText)) return false;
 
                 return true;
             });
@@ -1879,7 +1974,7 @@
 
             const itemsToShow = filteredData.slice(0, visibleLimit);
 
-                        itemsToShow.forEach(n => {
+            itemsToShow.forEach(n => {
                 const card = document.createElement("article");
                 card.className = "card";
                 const isNew = isNewContent(n.date);
