@@ -345,6 +345,75 @@
             color: var(--accent);
         }
 
+        .ranking-section {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .ranking-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ranking-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .ranking-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .ranking-rank {
+            width: 28px;
+            text-align: center;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .ranking-title-text {
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ranking-meta {
+            font-size: 11px;
+            color: var(--muted);
+            white-space: nowrap;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .ranking-empty {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
         /* Grid */
         .grid {
             max-width: 1400px;
@@ -629,6 +698,15 @@
 
             .grid {
                 grid-template-columns: 1fr;
+            }
+
+            .ranking-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .ranking-title-text {
+                white-space: normal;
             }
         }
 
@@ -1240,9 +1318,11 @@
         <h1><img id="titleIcon" class="title-globe-icon" src="images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
         <p class="lead">世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なダッシュボードでお届け</p>
         <div class="access-counter"
-            style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px;">
+            style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px; flex-wrap:wrap;">
             <span>📊 総アクセス数: <strong id="totalVisits" style="color:var(--accent);">-</strong></span>
             <span>📅 本日: <strong id="todayVisits" style="color:var(--accent-2);">-</strong></span>
+            <span>🗓️ 昨日: <strong id="yesterdayVisits" style="color:var(--accent-3);">-</strong></span>
+            <span>🕒 更新日時: <strong id="lastUpdated" style="color:var(--accent-4);">-</strong></span>
         </div>
     </header>
 
@@ -1297,6 +1377,12 @@
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
     </div>
 
+    <section class="ranking-section" id="weeklyRanking">
+        <div class="ranking-title">🏆 1週間以内の人気ニュース</div>
+        <div class="ranking-list" id="weeklyRankingList">
+            <div class="ranking-empty">ランキングを計算中...</div>
+        </div>
+    </section>
 
     <section class="grid" id="newsGrid"></section>
     <div style="text-align: center; margin: 2rem 0;">
@@ -1351,6 +1437,7 @@
                     };
                 });
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
+                renderWeeklyRanking();
             } catch (e) {
                 console.error("Failed to load interactions:", e);
             }
@@ -1396,14 +1483,19 @@
                 const snapshot = await getDoc(counterRef);
                 if (snapshot.exists()) {
                     const data = snapshot.data();
+                    const yesterday = new Date();
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    const yesterdayKey = yesterday.toISOString().split('T')[0];
                     document.getElementById('totalVisits').textContent = (data.total || 0).toLocaleString();
                     document.getElementById('todayVisits').textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
+                    document.getElementById('yesterdayVisits').textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
                 }
                 console.log("Access counter updated");
             } catch (error) {
                 console.log('Access counter error:', error.message);
                 document.getElementById('totalVisits').textContent = '-';
                 document.getElementById('todayVisits').textContent = '-';
+                document.getElementById('yesterdayVisits').textContent = '-';
             }
         }
 
@@ -1473,6 +1565,11 @@
                         </div>
                      `).join('');
             }
+            window.interactionsData[itemId] = {
+                likes: data.likes || 0,
+                comments: (data.comments || []).length
+            };
+            scheduleRankingUpdate();
         };
 
         // Listen for updates on an item (Realtime)
@@ -1705,6 +1802,74 @@
             }
         }
 
+        function formatDateTime(date) {
+            const pad = (n) => String(n).padStart(2, "0");
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+        }
+
+        function updateUpdatedAt() {
+            const el = document.getElementById("lastUpdated");
+            if (!el) return;
+            el.textContent = formatDateTime(new Date());
+        }
+
+        let rankingUpdateTimer = null;
+
+        function scheduleRankingUpdate() {
+            if (rankingUpdateTimer) clearTimeout(rankingUpdateTimer);
+            rankingUpdateTimer = setTimeout(renderWeeklyRanking, 150);
+        }
+
+        function renderWeeklyRanking() {
+            const list = document.getElementById("weeklyRankingList");
+            if (!list) return;
+            const interactions = window.interactionsData || {};
+            const latest = getLatestDate(NEWS_DATA);
+            if (!latest) {
+                list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                return;
+            }
+            const endDate = new Date(`${latest}T00:00:00`);
+            const startDate = new Date(endDate);
+            startDate.setDate(startDate.getDate() - 6);
+
+            const ranked = NEWS_DATA.map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                return { ...item, likes, comments, score: likes + comments };
+            }).filter(item => {
+                if (!item.date) return false;
+                const d = new Date(`${item.date}T00:00:00`);
+                return d >= startDate && d <= endDate;
+            }).sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                if (b.likes !== a.likes) return b.likes - a.likes;
+                if (b.comments !== a.comments) return b.comments - a.comments;
+                return b.date.localeCompare(a.date);
+            });
+
+            const top = ranked.filter(item => item.score > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = '<div class="ranking-empty">1週間以内のいいね・コメントがまだありません。</div>';
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <span>👍 ${item.likes}</span>
+                        <span>💬 ${item.comments}</span>
+                    </div>
+                </div>
+            `).join("");
+        }
+
 
         const ALL_TAGS = [
             "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
@@ -1756,6 +1921,8 @@
                 document.getElementById("totalCount").textContent = NEWS_DATA.length;
                 updateNewCountBadges();
                 updateTitleIcon();
+                updateUpdatedAt();
+                renderWeeklyRanking();
             } else {
                 console.error("News data not loaded from JS file");
             }
@@ -1909,13 +2076,18 @@
                 const snapshot = await counterRef.get();
                 if (snapshot.exists) {
                     const data = snapshot.data();
+                    const yesterday = new Date();
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    const yesterdayKey = yesterday.toISOString().split('T')[0];
                     document.getElementById('totalVisits').textContent = (data.total || 0).toLocaleString();
                     document.getElementById('todayVisits').textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
+                    document.getElementById('yesterdayVisits').textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
                 }
             } catch (error) {
                 console.log('Access counter not available:', error.message);
                 document.getElementById('totalVisits').textContent = '-';
                 document.getElementById('todayVisits').textContent = '-';
+                document.getElementById('yesterdayVisits').textContent = '-';
             }
         }
 
