@@ -1638,7 +1638,15 @@
         let NEW_DATE_RANGE = { start: null, end: null };
 
         // New????????????New?????
-        function isNewContent(dateStr) {
+        function isNewContent(itemOrDate) {
+            if (itemOrDate && typeof itemOrDate === "object") {
+                if (itemOrDate.isNew === true) return true;
+                if (itemOrDate.isNew === false) return false;
+                const dateStr = itemOrDate.date;
+                if (!dateStr || !NEW_DATE_RANGE.start) return false;
+                return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
+            }
+            const dateStr = itemOrDate;
             if (!dateStr || !NEW_DATE_RANGE.start) return false;
             return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
         }
@@ -1652,7 +1660,7 @@
             const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0 };
             if (!data) return counts;
             data.forEach(item => {
-                if (!isNewContent(item.date)) return;
+                if (!isNewContent(item)) return;
                 counts.world += 1;
                 if (counts[item.country] !== undefined) counts[item.country] += 1;
             });
@@ -1977,7 +1985,7 @@
             itemsToShow.forEach(n => {
                 const card = document.createElement("article");
                 card.className = "card";
-                const isNew = isNewContent(n.date);
+                const isNew = isNewContent(n);
                 card.innerHTML = `
             <div class="thumb">
                 <img src="${n.img}" alt="${n.title}" loading="lazy" class="img-with-fallback">
