@@ -386,9 +386,9 @@
         }
 
         .ranking-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto;
             align-items: center;
-            justify-content: space-between;
             gap: 12px;
             padding: 10px 12px;
             border: 1px solid var(--border);
@@ -399,7 +399,7 @@
 
         .ranking-left {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             min-width: 0;
         }
@@ -413,24 +413,29 @@
 
         .ranking-title-text {
             font-size: 13px;
-            white-space: nowrap;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .ranking-meta {
             font-size: 11px;
             color: var(--muted);
-            white-space: nowrap;
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             align-items: center;
+            justify-content: flex-start;
+            min-width: 0;
         }
 
         .ranking-actions {
             display: flex;
             gap: 8px;
             align-items: center;
+            justify-self: end;
         }
 
         .ranking-actions .action-btn {
@@ -736,17 +741,17 @@
             }
 
             .ranking-item {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 align-items: flex-start;
             }
 
             .ranking-title-text {
-                white-space: normal;
+                -webkit-line-clamp: 3;
             }
 
             .ranking-actions {
                 width: 100%;
-                justify-content: flex-start;
+                justify-self: flex-start;
             }
         }
 
@@ -1039,8 +1044,8 @@
         }
 
         .ideas-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 24px;
         }
 
@@ -1050,6 +1055,9 @@
             border-radius: 16px;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             align-items: stretch;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -1062,11 +1070,19 @@
             background: rgba(30, 34, 45, 0.8);
         }
 
+        .idea-body {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+
         .idea-image-wrapper {
-            width: 360px;
+            width: 45%;
+            min-width: 220px;
             position: relative;
-            min-height: 240px;
-            border: none;
+            min-height: 220px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             background: #000;
         }
 
@@ -1083,17 +1099,17 @@
         }
 
         .idea-content {
-            padding: 32px;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            min-width: 0;
         }
 
         .idea-header {
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 16px;
+            align-items: center;
+            gap: 12px;
         }
 
         .idea-number {
@@ -1107,25 +1123,23 @@
             width: 32px;
             height: 32px;
             font-size: 16px;
-            margin-right: 16px;
             flex-shrink: 0;
             box-shadow: 0 4px 10px rgba(125, 241, 194, 0.3);
         }
 
         .idea-title {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
-            line-height: 1.3;
-            margin-top: -4px;
-            /* Optical alignment with number */
+            line-height: 1.35;
+            margin-top: 0;
         }
 
         .idea-desc {
             color: #b0b8c4;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.8;
-            margin-top: 0;
+            margin: 0;
         }
 
         /* Distinct Region Styles */
@@ -1155,6 +1169,14 @@
         }
 
         @media (max-width: 900px) {
+            .ideas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .idea-body {
+                flex-direction: column;
+            }
+
             .idea-card {
                 flex-direction: column;
             }
@@ -1165,7 +1187,7 @@
             }
 
             .idea-content {
-                padding: 24px;
+                padding: 0;
             }
 
             .idea-title {
@@ -1461,17 +1483,116 @@
             console.log("Firebase Connected");
             // Load all interactions for sorting
             loadInteractions();
-            // Update access counter
-            updateAccessCounter();
+            if (!window.__accessCounterCounted) {
+                updateAccessCounter();
+            }
         } catch (e) {
             console.error("Firebase Connection Failed:", e);
         }
 
         // Global interactions data for sorting
         window.interactionsData = {};
+        window.useLocalInteractions = false;
+        let localInteractionsCache = null;
+        const LOCAL_ACCESS_KEY = "local_access_stats";
+        const LOCAL_INTERACTIONS_KEY = "local_interactions";
+
+        function loadLocalAccessStats() {
+            try {
+                return JSON.parse(localStorage.getItem(LOCAL_ACCESS_KEY)) || { total: 0, daily: {} };
+            } catch {
+                return { total: 0, daily: {} };
+            }
+        }
+
+        function saveLocalAccessStats(data) {
+            try {
+                localStorage.setItem(LOCAL_ACCESS_KEY, JSON.stringify(data));
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        function bumpLocalAccessStats() {
+            const today = new Date().toISOString().split("T")[0];
+            const data = loadLocalAccessStats();
+            data.total = (data.total || 0) + 1;
+            data.daily = data.daily || {};
+            data.daily[today] = (data.daily[today] || 0) + 1;
+
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            Object.keys(data.daily).forEach(date => {
+                if (new Date(date) < weekAgo) delete data.daily[date];
+            });
+
+            saveLocalAccessStats(data);
+            return data;
+        }
+
+        function renderAccessStats(data) {
+            const today = new Date().toISOString().split("T")[0];
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayKey = yesterday.toISOString().split("T")[0];
+            document.getElementById("totalVisits").textContent = (data.total || 0).toLocaleString();
+            document.getElementById("todayVisits").textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
+            document.getElementById("yesterdayVisits").textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
+        }
+
+        function loadLocalInteractions() {
+            if (localInteractionsCache) return localInteractionsCache;
+            try {
+                localInteractionsCache = JSON.parse(localStorage.getItem(LOCAL_INTERACTIONS_KEY)) || {};
+            } catch {
+                localInteractionsCache = {};
+            }
+            return localInteractionsCache;
+        }
+
+        function saveLocalInteractions(data) {
+            localInteractionsCache = data;
+            try {
+                localStorage.setItem(LOCAL_INTERACTIONS_KEY, JSON.stringify(data));
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        function getLocalInteractionData(itemId) {
+            const data = loadLocalInteractions();
+            return data[itemId] || { likes: 0, comments: [] };
+        }
+
+        function setLocalInteractionData(itemId, value) {
+            const data = loadLocalInteractions();
+            data[itemId] = value;
+            saveLocalInteractions(data);
+            window.interactionsData[itemId] = {
+                likes: value.likes || 0,
+                comments: (value.comments || []).length
+            };
+        }
+
+        function enableLocalInteractions() {
+            window.useLocalInteractions = true;
+            const data = loadLocalInteractions();
+            window.interactionsData = {};
+            Object.keys(data).forEach(id => {
+                window.interactionsData[id] = {
+                    likes: data[id].likes || 0,
+                    comments: (data[id].comments || []).length
+                };
+            });
+            if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            if (window.renderWeeklyRanking) window.renderWeeklyRanking();
+        }
 
         async function loadInteractions() {
-            if (!db) return;
+            if (!db) {
+                enableLocalInteractions();
+                return;
+            }
             try {
                 const snapshot = await getDocs(collection(db, "interactions"));
                 snapshot.forEach(docSnap => {
@@ -1482,17 +1603,22 @@
                     };
                 });
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
-                renderWeeklyRanking();
+                if (window.renderWeeklyRanking) window.renderWeeklyRanking();
+                if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             } catch (e) {
                 console.error("Failed to load interactions:", e);
+                enableLocalInteractions();
             }
         }
 
         // アクセスカウンター（Firebase連携）
         async function updateAccessCounter() {
+            if (window.__accessCounterInFlight || window.__accessCounterCounted) return;
+            window.__accessCounterInFlight = true;
             try {
-                const today = new Date().toISOString().split('T')[0];
-                const counterRef = doc(db, 'pageStats', 'accessCounter');
+                if (!db) throw new Error("db-not-ready");
+                const today = new Date().toISOString().split("T")[0];
+                const counterRef = doc(db, "pageStats", "accessCounter");
 
                 // トランザクションでカウンターをインクリメント
                 await runTransaction(db, async (transaction) => {
@@ -1527,22 +1653,35 @@
                 // 最新のカウントを取得して表示
                 const snapshot = await getDoc(counterRef);
                 if (snapshot.exists()) {
-                    const data = snapshot.data();
-                    const yesterday = new Date();
-                    yesterday.setDate(yesterday.getDate() - 1);
-                    const yesterdayKey = yesterday.toISOString().split('T')[0];
-                    document.getElementById('totalVisits').textContent = (data.total || 0).toLocaleString();
-                    document.getElementById('todayVisits').textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
-                    document.getElementById('yesterdayVisits').textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
+                    renderAccessStats(snapshot.data());
                 }
+                window.__accessCounterCounted = true;
                 console.log("Access counter updated");
             } catch (error) {
-                console.log('Access counter error:', error.message);
-                document.getElementById('totalVisits').textContent = '-';
-                document.getElementById('todayVisits').textContent = '-';
-                document.getElementById('yesterdayVisits').textContent = '-';
+                console.log("Access counter fallback:", error.message);
+                const data = bumpLocalAccessStats();
+                renderAccessStats(data);
+                window.__accessCounterCounted = true;
+            } finally {
+                window.__accessCounterInFlight = false;
             }
         }
+        window.updateAccessCounter = updateAccessCounter;
+
+        function refreshInteractionCounts() {
+            const interactions = window.interactionsData || {};
+            document.querySelectorAll(".card").forEach(card => {
+                if (!card.id || !card.id.startsWith("card-")) return;
+                const itemId = card.id.slice(5);
+                const data = interactions[itemId];
+                if (!data) return;
+                const btnLike = card.querySelector('.action-btn[onclick*="toggleLike"] .count');
+                if (btnLike) btnLike.textContent = data.likes || 0;
+                const btnComment = card.querySelector('.btn-comment .count');
+                if (btnComment) btnComment.textContent = data.comments || 0;
+            });
+        }
+        window.refreshInteractionCounts = refreshInteractionCounts;
 
         // Live Listeners Registry
         const unsubscribes = {};
@@ -1551,6 +1690,21 @@
 
         window.deleteComment = async (itemId, commentIndex) => {
             if (!confirm('コメントを削除しますか？')) return;
+
+            if (!db || window.useLocalInteractions) {
+                const data = getLocalInteractionData(itemId);
+                const comments = data.comments || [];
+                if (commentIndex >= 0 && commentIndex < comments.length) {
+                    comments.splice(commentIndex, 1);
+                    data.comments = comments;
+                    setLocalInteractionData(itemId, data);
+                    if (liveElements[itemId]) {
+                        liveElements[itemId].lastData = data;
+                        renderItem(itemId);
+                    }
+                }
+                return;
+            }
 
             const ref = getItemRef(itemId);
 
@@ -1614,12 +1768,20 @@
                 likes: data.likes || 0,
                 comments: (data.comments || []).length
             };
-            scheduleRankingUpdate();
+            if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
         };
 
         // Listen for updates on an item (Realtime)
         window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
-            if (!db) return;
+            if (!db || window.useLocalInteractions) {
+                if (!liveElements[itemId]) liveElements[itemId] = {};
+                if (btnLike) liveElements[itemId].btnLike = btnLike;
+                if (btnComment) liveElements[itemId].btnComment = btnComment;
+                if (commentList) liveElements[itemId].commentList = commentList;
+                liveElements[itemId].lastData = getLocalInteractionData(itemId);
+                renderItem(itemId);
+                return;
+            }
 
             // Register/Update elements
             if (!liveElements[itemId]) liveElements[itemId] = {};
@@ -1645,50 +1807,47 @@
             });
         };
         window.toggleLike = async (itemId, btn) => {
-            if (!db) return;
-
             // Check Local State for "Liked by me" visual (Local Storage)
             const storageKey = `liked_${itemId}`;
             const isLiked = localStorage.getItem(storageKey);
 
+            // Optimistic UI - update class and count immediately
+            btn.classList.toggle('liked');
+            const countSpan = btn.querySelector('.count');
+            const currentCount = parseInt(countSpan.textContent) || 0;
+            const val = isLiked ? -1 : 1;
+            const nextCount = Math.max(0, currentCount + val);
+            countSpan.textContent = nextCount;
+            const existing = window.interactionsData[itemId] || { likes: 0, comments: 0 };
+            existing.likes = nextCount;
+            window.interactionsData[itemId] = existing;
+            if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
+
+            if (isLiked) localStorage.removeItem(storageKey);
+            else localStorage.setItem(storageKey, "true");
+
+            if (!db || window.useLocalInteractions) {
+                const local = getLocalInteractionData(itemId);
+                local.likes = nextCount;
+                setLocalInteractionData(itemId, local);
+                return;
+            }
+
             const ref = getItemRef(itemId);
 
             try {
-                // Optimistic UI - update class and count immediately
-                btn.classList.toggle('liked');
-                const countSpan = btn.querySelector('.count');
-                const currentCount = parseInt(countSpan.textContent) || 0;
-                const val = isLiked ? -1 : 1;
-                const nextCount = Math.max(0, currentCount + val);
-                countSpan.textContent = nextCount;
-                const existing = window.interactionsData[itemId] || { likes: 0, comments: 0 };
-                existing.likes = nextCount;
-                window.interactionsData[itemId] = existing;
-                scheduleRankingUpdate();
-
                 // Update DB
                 // Ensure doc exists
                 await setDoc(ref, { last_update: new Date() }, { merge: true });
                 await updateDoc(ref, {
                     likes: increment(val)
                 });
-
-                if (isLiked) localStorage.removeItem(storageKey);
-                else localStorage.setItem(storageKey, 'true');
-
             } catch (e) {
                 console.error("Like Error", e);
-                // Revert UI if error
-                btn.classList.toggle('liked');
-                const countSpan = btn.querySelector('.count');
-                const currentCount = parseInt(countSpan.textContent) || 0;
-                const val = isLiked ? 1 : -1;
-                const nextCount = Math.max(0, currentCount + val);
-                countSpan.textContent = nextCount;
-                const existing = window.interactionsData[itemId] || { likes: 0, comments: 0 };
-                existing.likes = nextCount;
-                window.interactionsData[itemId] = existing;
-                scheduleRankingUpdate();
+                window.useLocalInteractions = true;
+                const local = getLocalInteractionData(itemId);
+                local.likes = nextCount;
+                setLocalInteractionData(itemId, local);
             }
         };
 
@@ -1707,18 +1866,31 @@
 
         window.submitComment = async (itemId, input) => {
             const text = input.value.trim();
-            if (!text || !db) return;
+            if (!text) return;
 
-            const ref = getItemRef(itemId);
             const newComment = {
                 user: "Guest", // Replace with Auth name if available
                 text: text,
                 date: new Date().toLocaleDateString()
             };
 
-            try {
-                input.value = ""; // Clear input immediately
+            input.value = ""; // Clear input immediately
 
+            if (!db || window.useLocalInteractions) {
+                const local = getLocalInteractionData(itemId);
+                local.comments = local.comments || [];
+                local.comments.push(newComment);
+                setLocalInteractionData(itemId, local);
+                if (liveElements[itemId]) {
+                    liveElements[itemId].lastData = local;
+                    renderItem(itemId);
+                }
+                return;
+            }
+
+            const ref = getItemRef(itemId);
+
+            try {
                 // Ensure doc exists
                 await setDoc(ref, { last_update: new Date() }, { merge: true });
                 await updateDoc(ref, {
@@ -1726,7 +1898,15 @@
                 });
             } catch (e) {
                 console.error("Comment Error", e);
-                alert("コメント送信に失敗しました");
+                window.useLocalInteractions = true;
+                const local = getLocalInteractionData(itemId);
+                local.comments = local.comments || [];
+                local.comments.push(newComment);
+                setLocalInteractionData(itemId, local);
+                if (liveElements[itemId]) {
+                    liveElements[itemId].lastData = local;
+                    renderItem(itemId);
+                }
             }
         };
 
@@ -1857,6 +2037,18 @@
             }
         }
 
+        function normalizeIsNewFlags(data) {
+            const latest = getLatestDate(data);
+            if (!latest || !data) return;
+            data.forEach(item => {
+                if (item.date === latest) {
+                    item.isNew = true;
+                } else if (item.isNew) {
+                    item.isNew = false;
+                }
+            });
+        }
+
         function formatDateTime(date) {
             const pad = (n) => String(n).padStart(2, "0");
             return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
@@ -1865,6 +2057,15 @@
         function updateUpdatedAt() {
             const el = document.getElementById("lastUpdated");
             if (!el) return;
+            if (window.NEWS_UPDATED_AT) {
+                el.textContent = window.NEWS_UPDATED_AT;
+                return;
+            }
+            const latest = getLatestDate(NEWS_DATA);
+            if (latest) {
+                el.textContent = latest;
+                return;
+            }
             el.textContent = formatDateTime(new Date());
         }
 
@@ -1949,12 +2150,8 @@
                     <div class="ranking-meta">
                         <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
                         <span>${item.date}</span>
-                        <span>👍 ${item.likes}</span>
-                        <span>💬 ${item.comments}</span>
-                    </div>
-                    <div class="ranking-actions">
                         <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
-                            <span>♡</span> <span class="count">${item.likes}</span>
+                            <span>👍</span> <span class="count">${item.likes}</span>
                         </button>
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
@@ -2012,6 +2209,7 @@
             if (window.LOADED_NEWS_DATA) {
                 NEWS_DATA = window.LOADED_NEWS_DATA;
                 setNewDateRangeFromNews(NEWS_DATA);
+                normalizeIsNewFlags(NEWS_DATA);
                 document.getElementById("totalCount").textContent = NEWS_DATA.length;
                 updateNewCountBadges();
                 updateTitleIcon();
@@ -2088,7 +2286,7 @@
             applyFilters();
 
             // アクセスカウンター更新
-            updateAccessCounter();
+            if (window.updateAccessCounter) window.updateAccessCounter();
         }
 
         function handleCountryClick(e) {
@@ -2142,63 +2340,6 @@
             document.getElementById("searchInput").value = tag;
             applyFilters();
         }
-
-
-        // アクセスカウンター（Firebase連携）
-        async function updateAccessCounter() {
-            try {
-                const today = new Date().toISOString().split('T')[0];
-                const counterRef = window.db.collection('pageStats').doc('accessCounter');
-
-                // トランザクションでカウンターをインクリメント
-                await window.db.runTransaction(async (transaction) => {
-                    const doc = await transaction.get(counterRef);
-                    if (!doc.exists) {
-                        transaction.set(counterRef, {
-                            total: 1,
-                            daily: { [today]: 1 },
-                            lastUpdated: today
-                        });
-                    } else {
-                        const data = doc.data();
-                        const newTotal = (data.total || 0) + 1;
-                        const daily = data.daily || {};
-                        daily[today] = (daily[today] || 0) + 1;
-
-                        // 古い日付のデータを削除（7日以上前）
-                        const weekAgo = new Date();
-                        weekAgo.setDate(weekAgo.getDate() - 7);
-                        Object.keys(daily).forEach(date => {
-                            if (new Date(date) < weekAgo) delete daily[date];
-                        });
-
-                        transaction.update(counterRef, {
-                            total: newTotal,
-                            daily: daily,
-                            lastUpdated: today
-                        });
-                    }
-                });
-
-                // 最新のカウントを取得して表示
-                const snapshot = await counterRef.get();
-                if (snapshot.exists) {
-                    const data = snapshot.data();
-                    const yesterday = new Date();
-                    yesterday.setDate(yesterday.getDate() - 1);
-                    const yesterdayKey = yesterday.toISOString().split('T')[0];
-                    document.getElementById('totalVisits').textContent = (data.total || 0).toLocaleString();
-                    document.getElementById('todayVisits').textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
-                    document.getElementById('yesterdayVisits').textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
-                }
-            } catch (error) {
-                console.log('Access counter not available:', error.message);
-                document.getElementById('totalVisits').textContent = '-';
-                document.getElementById('todayVisits').textContent = '-';
-                document.getElementById('yesterdayVisits').textContent = '-';
-            }
-        }
-
         function applyFilters() {
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
@@ -2263,6 +2404,9 @@
             const itemsToShow = filteredData.slice(0, visibleLimit);
 
             itemsToShow.forEach(n => {
+                const interaction = window.interactionsData?.[n.id] || {};
+                const likeCount = interaction.likes || 0;
+                const commentCount = interaction.comments || 0;
                 const card = document.createElement("article");
                 card.className = "card";
                 card.id = `card-${n.id}`;
@@ -2291,10 +2435,10 @@
                     <a class="btn" href="${n.url}" target="_blank">記事を読む</a>
                     
                     <button class="action-btn" onclick="toggleLike('${n.id}', this)">
-                        <span>♡</span> <span class="count">0</span>
+                        <span>👍</span> <span class="count">${likeCount}</span>
                     </button>
                     <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
-                        <span>💬</span> <span class="count">0</span>
+                        <span>💬</span> <span class="count">${commentCount}</span>
                     </button>
 
                     <span class="source">${n.source}</span>
@@ -2331,6 +2475,7 @@
 
             // Empty state removed
             wireImageFallbacks(document);
+            if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             renderInsights();
         }
 
@@ -2509,26 +2654,28 @@
                         ideas.forEach(idea => {
                             ideasHTML += `
                                 <div class="idea-card">
-                                ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
-                                    <div class="idea-content">
-                                        <div class="idea-header">
-                                            <span class="idea-number">${idea.id}</span>
-                                            <span class="idea-title">${idea.title}</span>
-                                        </div>
-                                        <p class="idea-desc">${idea.desc}</p>
-                                        <div class="actions">
-                                            <button class="action-btn" onclick="toggleLike('${idea.id}', this)">
-                                                <span>♡</span> <span class="count">0</span>
-                                            </button>
-                                            <button class="action-btn btn-comment" onclick="toggleComments('${idea.id}', this)">
-                                                <span>💬</span> <span class="count">0</span>
-                                            </button>
-                                        </div>
-                                        <div class="comment-section">
-                                            <div class="comment-list"></div>
-                                            <div class="comment-input-area">
-                                                <input type="text" class="comment-input" placeholder="コメント..." onkeypress="if(event.key==='Enter') submitComment('${idea.id}', this)">
-                                                <button class="comment-submit" onclick="submitComment('${idea.id}', this.previousElementSibling)">送信</button>
+                                    <div class="idea-header">
+                                        <span class="idea-number">${idea.id}</span>
+                                        <span class="idea-title">${idea.title}</span>
+                                    </div>
+                                    <div class="idea-body">
+                                        ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
+                                        <div class="idea-content">
+                                            <p class="idea-desc">${idea.desc}</p>
+                                            <div class="actions">
+                                                <button class="action-btn" onclick="toggleLike('${idea.id}', this)">
+                                                    <span>👍</span> <span class="count">0</span>
+                                                </button>
+                                                <button class="action-btn btn-comment" onclick="toggleComments('${idea.id}', this)">
+                                                    <span>💬</span> <span class="count">0</span>
+                                                </button>
+                                            </div>
+                                            <div class="comment-section">
+                                                <div class="comment-list"></div>
+                                                <div class="comment-input-area">
+                                                    <input type="text" class="comment-input" placeholder="コメント..." onkeypress="if(event.key==='Enter') submitComment('${idea.id}', this)">
+                                                    <button class="comment-submit" onclick="submitComment('${idea.id}', this.previousElementSibling)">送信</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
