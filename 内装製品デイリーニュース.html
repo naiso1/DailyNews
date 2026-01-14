@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -345,9 +345,22 @@
             color: var(--accent);
         }
 
-        .ranking-section {
+        .author-line {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .ranking-wrapper {
             max-width: 1400px;
             margin: 0 auto 20px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .ranking-section {
+            margin: 0;
             padding: 20px;
             background: var(--panel);
             border: 1px solid var(--border);
@@ -372,7 +385,6 @@
         }
 
         .ranking-body.collapsed {
-            max-height: 0;
             overflow: hidden;
         }
 
@@ -452,6 +464,12 @@
         .ranking-empty {
             color: var(--muted);
             font-size: 13px;
+        }
+
+        @media (max-width: 1100px) {
+            .ranking-wrapper {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Grid */
@@ -1386,6 +1404,7 @@
             <span>🗓️ 昨日: <strong id="yesterdayVisits" style="color:var(--accent-3);">-</strong></span>
             <span>🕒 更新日時: <strong id="lastUpdated" style="color:var(--accent-4);">-</strong></span>
         </div>
+        <div class="author-line">作成者：IE開発　内装開発室　中村</div>
     </header>
 
     <div class="filters">
@@ -1439,17 +1458,30 @@
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
     </div>
 
-    <section class="ranking-section" id="weeklyRanking">
-        <div class="ranking-header">
-            <div class="ranking-title">🏆 1週間以内の人気ニュース</div>
-            <button class="chip ranking-toggle" id="rankingToggle" type="button" aria-expanded="false">開く</button>
-        </div>
-        <div class="ranking-body collapsed" id="weeklyRankingBody">
-            <div class="ranking-list" id="weeklyRankingList">
-                <div class="ranking-empty">ランキングを計算中...</div>
+    <div class="ranking-wrapper">
+        <section class="ranking-section" id="weeklyRanking">
+            <div class="ranking-header">
+                <div class="ranking-title">🏆 1週間以内の人気ニュース</div>
+                <button class="chip ranking-toggle" id="weeklyRankingToggle" type="button" aria-expanded="false">開く</button>
             </div>
-        </div>
-    </section>
+            <div class="ranking-body collapsed" id="weeklyRankingBody">
+                <div class="ranking-list" id="weeklyRankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+        </section>
+        <section class="ranking-section" id="allTimeRanking">
+            <div class="ranking-header">
+                <div class="ranking-title">🏆 今までの人気ニュース</div>
+                <button class="chip ranking-toggle" id="allTimeRankingToggle" type="button" aria-expanded="false">開く</button>
+            </div>
+            <div class="ranking-body collapsed" id="allTimeRankingBody">
+                <div class="ranking-list" id="allTimeRankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <section class="grid" id="newsGrid"></section>
     <div style="text-align: center; margin: 2rem 0;">
@@ -1586,6 +1618,7 @@
             });
             if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             if (window.renderWeeklyRanking) window.renderWeeklyRanking();
+            if (window.renderAllTimeRanking) window.renderAllTimeRanking();
         }
 
         async function loadInteractions() {
@@ -1604,6 +1637,7 @@
                 });
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
                 if (window.renderWeeklyRanking) window.renderWeeklyRanking();
+                if (window.renderAllTimeRanking) window.renderAllTimeRanking();
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             } catch (e) {
                 console.error("Failed to load interactions:", e);
@@ -2101,10 +2135,39 @@
         }
 
         let rankingUpdateTimer = null;
+        const RANKING_PREVIEW_COUNT = 3;
+
+        function applyRankingPreview(bodyEl, listEl) {
+            if (!bodyEl || !listEl) return;
+            const items = Array.from(listEl.querySelectorAll(".ranking-item"));
+            if (items.length === 0) {
+                bodyEl.style.maxHeight = `${bodyEl.scrollHeight}px`;
+                return;
+            }
+            bodyEl.style.maxHeight = "none";
+            const targetIndex = Math.min(RANKING_PREVIEW_COUNT, items.length) - 1;
+            const target = items[targetIndex];
+            const listRect = listEl.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const height = Math.ceil(targetRect.bottom - listRect.top);
+            bodyEl.style.maxHeight = `${height}px`;
+        }
+
+        function updateRankingHeight(bodyEl, listEl) {
+            if (!bodyEl) return;
+            if (bodyEl.classList.contains("collapsed")) {
+                applyRankingPreview(bodyEl, listEl);
+            } else {
+                bodyEl.style.maxHeight = `${bodyEl.scrollHeight}px`;
+            }
+        }
 
         function scheduleRankingUpdate() {
             if (rankingUpdateTimer) clearTimeout(rankingUpdateTimer);
-            rankingUpdateTimer = setTimeout(renderWeeklyRanking, 150);
+            rankingUpdateTimer = setTimeout(() => {
+                renderWeeklyRanking();
+                renderAllTimeRanking();
+            }, 150);
         }
 
         function renderWeeklyRanking() {
@@ -2114,6 +2177,7 @@
             const latest = getLatestDate(NEWS_DATA);
             if (!latest) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
                 return;
             }
             const endDate = new Date(`${latest}T00:00:00`);
@@ -2139,6 +2203,7 @@
             const top = ranked.filter(item => item.score > 0).slice(0, 10);
             if (top.length === 0) {
                 list.innerHTML = '<div class="ranking-empty">1週間以内のいいね・コメントがまだありません。</div>';
+                updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
                 return;
             }
             list.innerHTML = top.map((item, idx) => `
@@ -2159,9 +2224,51 @@
                     </div>
                 </div>
             `).join("");
+            updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
         }
 
+        function renderAllTimeRanking() {
+            const list = document.getElementById("allTimeRankingList");
+            if (!list) return;
+            const interactions = window.interactionsData || {};
+            const ranked = NEWS_DATA.map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                return { ...item, likes, comments, score: likes + comments };
+            }).sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                if (b.likes !== a.likes) return b.likes - a.likes;
+                if (b.comments !== a.comments) return b.comments - a.comments;
+                return b.date.localeCompare(a.date);
+            });
 
+            const top = ranked.filter(item => item.score > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = '<div class="ranking-empty">いいね・コメントがまだありません。</div>';
+                updateRankingHeight(document.getElementById("allTimeRankingBody"), list);
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item" onclick="showNewsItem('${item.id}')">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
+                            <span>👍</span> <span class="count">${item.likes}</span>
+                        </button>
+                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
+                            <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+            updateRankingHeight(document.getElementById("allTimeRankingBody"), list);
+        }
         const ALL_TAGS = [
             "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
             "品質", "アフター", "OS", "商用車", "スマートホーム連携", "ゼログラビティ", "サステナビリティ", "半導体", "サプライチェーン", "ラグジュアリー", "インフラ",
@@ -2205,6 +2312,19 @@
         let activeCountries = new Set(["world"]);
         let activeTags = new Set(["all"]);
 
+        function setupRankingToggle(toggleId, bodyId, listId) {
+            const toggle = document.getElementById(toggleId);
+            const body = document.getElementById(bodyId);
+            const list = document.getElementById(listId);
+            if (!toggle || !body) return;
+            toggle.addEventListener("click", () => {
+                const isCollapsed = body.classList.toggle("collapsed");
+                toggle.textContent = isCollapsed ? "開く" : "閉じる";
+                toggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+                updateRankingHeight(body, list);
+            });
+        }
+
         async function init() {
             if (window.LOADED_NEWS_DATA) {
                 NEWS_DATA = window.LOADED_NEWS_DATA;
@@ -2215,6 +2335,7 @@
                 updateTitleIcon();
                 updateUpdatedAt();
                 renderWeeklyRanking();
+                renderAllTimeRanking();
             } else {
                 console.error("News data not loaded from JS file");
             }
@@ -2268,20 +2389,8 @@
                 applyFilters();
                 updateURL();
             });
-            const rankingToggle = document.getElementById("rankingToggle");
-            const rankingBody = document.getElementById("weeklyRankingBody");
-            if (rankingToggle && rankingBody) {
-                rankingToggle.addEventListener("click", () => {
-                    const isCollapsed = rankingBody.classList.toggle("collapsed");
-                    rankingToggle.textContent = isCollapsed ? "開く" : "閉じる";
-                    rankingToggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
-                    if (!isCollapsed) {
-                        rankingBody.style.maxHeight = `${rankingBody.scrollHeight}px`;
-                    } else {
-                        rankingBody.style.maxHeight = "0px";
-                    }
-                });
-            }
+            setupRankingToggle("weeklyRankingToggle", "weeklyRankingBody", "weeklyRankingList");
+            setupRankingToggle("allTimeRankingToggle", "allTimeRankingBody", "allTimeRankingList");
 
             applyFilters();
 
