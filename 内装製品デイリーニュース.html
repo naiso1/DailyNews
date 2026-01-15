@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>内装製品デイリーニュース</title>
-    <meta name="description" content="世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なニュースダッシュボードでお届け。">
+    <meta name="description" content="生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け。">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -349,6 +352,105 @@
             margin-top: 8px;
             font-size: 12px;
             color: var(--muted);
+        }
+
+        .analysis-toggle {
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .analysis-toggle:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .analysis-panel {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .analysis-panel.hidden {
+            display: none;
+        }
+
+        .analysis-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .analysis-panel-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .analysis-panel-sub {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .analysis-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 12px;
+            align-items: end;
+            min-height: 160px;
+        }
+
+        .chart-bar {
+            display: grid;
+            grid-template-rows: 1fr auto auto;
+            align-items: end;
+            justify-items: center;
+            height: 160px;
+            gap: 6px;
+        }
+
+        .chart-bar .bar {
+            width: 100%;
+            max-width: 36px;
+            border-radius: 10px 10px 6px 6px;
+            background: linear-gradient(180deg, rgba(125, 241, 194, 0.95), rgba(125, 241, 194, 0.2));
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+            transition: height 0.2s ease;
+        }
+
+        .chart-bar .bar-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .chart-bar .bar-label {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .chart-empty {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .ranking-back {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .ranking-back.hidden {
+            display: none;
         }
 
         .ranking-wrapper {
@@ -1370,6 +1472,11 @@
             color: #666;
         }
 
+        .read-count {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
         /* Comment Section Adjustments */
         .comment-item {
             position: relative;
@@ -1396,13 +1503,14 @@
 <body>
     <header>
         <h1><img id="titleIcon" class="title-globe-icon" src="images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
-        <p class="lead">世界の自動車内装・HMI・コクピットトレンドをフィルタリング可能なダッシュボードでお届け</p>
+        <p class="lead">生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け</p>
         <div class="access-counter"
             style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px; flex-wrap:wrap;">
             <span>📊 総アクセス数: <strong id="totalVisits" style="color:var(--accent);">-</strong></span>
             <span>📅 本日: <strong id="todayVisits" style="color:var(--accent-2);">-</strong></span>
             <span>🗓️ 昨日: <strong id="yesterdayVisits" style="color:var(--accent-3);">-</strong></span>
             <span>🕒 更新日時: <strong id="lastUpdated" style="color:var(--accent-4);">-</strong></span>
+            <button class="analysis-toggle" id="analysisToggle" type="button" aria-expanded="false">アクセス推移</button>
         </div>
         <div class="author-line">作成者：IE開発　内装開発室　中村</div>
     </header>
@@ -1458,6 +1566,16 @@
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
     </div>
 
+    <section class="analysis-panel hidden" id="accessAnalytics">
+        <div class="analysis-panel-header">
+            <div class="analysis-panel-title">日別アクセス分析</div>
+            <div class="analysis-panel-sub" id="accessChartRange">直近7日</div>
+        </div>
+        <div class="analysis-chart" id="accessChart">
+            <div class="chart-empty">データを取得中...</div>
+        </div>
+    </section>
+
     <div class="ranking-wrapper">
         <section class="ranking-section" id="weeklyRanking">
             <div class="ranking-header">
@@ -1481,6 +1599,10 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <div class="ranking-back hidden" id="rankingBack">
+        <button class="chip" id="rankingBackBtn" type="button">ランキングから戻る</button>
     </div>
 
     <section class="grid" id="newsGrid"></section>
@@ -1509,17 +1631,16 @@
         };
 
         let db;
-        try {
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            console.log("Firebase Connected");
-            // Load all interactions for sorting
-            loadInteractions();
-            if (!window.__accessCounterCounted) {
-                updateAccessCounter();
+        function initFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                console.log("Firebase Connected");
+                // Load all interactions for sorting
+                loadInteractions();
+            } catch (e) {
+                console.error("Firebase Connection Failed:", e);
             }
-        } catch (e) {
-            console.error("Firebase Connection Failed:", e);
         }
 
         // Global interactions data for sorting
@@ -1528,6 +1649,9 @@
         let localInteractionsCache = null;
         const LOCAL_ACCESS_KEY = "local_access_stats";
         const LOCAL_INTERACTIONS_KEY = "local_interactions";
+        const LOCAL_READS_KEY = "local_article_reads";
+        const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date";
+        let accessStatsCache = null;
 
         function loadLocalAccessStats() {
             try {
@@ -1545,31 +1669,109 @@
             }
         }
 
+        function getTodayKey() {
+            return new Date().toISOString().split("T")[0];
+        }
+
+        function hasCountedAccessToday() {
+            try {
+                return localStorage.getItem(LOCAL_ACCESS_MARK_KEY) === getTodayKey();
+            } catch {
+                // Ignore storage errors
+            }
+            try {
+                return sessionStorage.getItem(LOCAL_ACCESS_MARK_KEY) === getTodayKey();
+            } catch {
+                // Ignore storage errors
+            }
+            return false;
+        }
+
+        function markAccessCountedToday() {
+            try {
+                localStorage.setItem(LOCAL_ACCESS_MARK_KEY, getTodayKey());
+            } catch {
+                // Ignore storage errors
+            }
+            try {
+                sessionStorage.setItem(LOCAL_ACCESS_MARK_KEY, getTodayKey());
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
         function bumpLocalAccessStats() {
-            const today = new Date().toISOString().split("T")[0];
+            if (hasCountedAccessToday()) {
+                return loadLocalAccessStats();
+            }
+            const today = getTodayKey();
             const data = loadLocalAccessStats();
             data.total = (data.total || 0) + 1;
             data.daily = data.daily || {};
             data.daily[today] = (data.daily[today] || 0) + 1;
 
-            const weekAgo = new Date();
-            weekAgo.setDate(weekAgo.getDate() - 7);
+            const cutoff = new Date();
+            cutoff.setDate(cutoff.getDate() - 30);
             Object.keys(data.daily).forEach(date => {
-                if (new Date(date) < weekAgo) delete data.daily[date];
+                if (new Date(date) < cutoff) delete data.daily[date];
             });
 
             saveLocalAccessStats(data);
+            markAccessCountedToday();
             return data;
         }
 
         function renderAccessStats(data) {
-            const today = new Date().toISOString().split("T")[0];
+            const today = getTodayKey();
             const yesterday = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
             const yesterdayKey = yesterday.toISOString().split("T")[0];
             document.getElementById("totalVisits").textContent = (data.total || 0).toLocaleString();
             document.getElementById("todayVisits").textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
             document.getElementById("yesterdayVisits").textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
+            accessStatsCache = data;
+            window.accessStatsCache = data;
+            renderAccessChart(data);
+        }
+
+        function buildAccessSeries(data) {
+            const daily = (data && data.daily) ? data.daily : {};
+            const today = new Date();
+            const series = [];
+            for (let i = 6; i >= 0; i -= 1) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const key = d.toISOString().split("T")[0];
+                const label = `${d.getMonth() + 1}/${d.getDate()}`;
+                series.push({ key, label, value: daily[key] || 0 });
+            }
+            return series;
+        }
+
+        function renderAccessChart(data) {
+            const chart = document.getElementById("accessChart");
+            if (!chart) return;
+            const series = buildAccessSeries(data || accessStatsCache || loadLocalAccessStats());
+            if (!series.length) {
+                chart.innerHTML = '<div class="chart-empty">データがありません。</div>';
+                return;
+            }
+            const max = Math.max(...series.map(item => item.value), 1);
+            chart.innerHTML = series.map(item => {
+                const height = Math.max(8, Math.round((item.value / max) * 100));
+                return `
+                    <div class="chart-bar">
+                        <div class="bar" style="height:${height}%"></div>
+                        <div class="bar-value">${item.value}</div>
+                        <div class="bar-label">${item.label}</div>
+                    </div>
+                `;
+            }).join("");
+
+            const range = document.getElementById("accessChartRange");
+            if (range && series.length > 0) {
+                range.textContent = `${series[0].label} - ${series[series.length - 1].label}`;
+            }
         }
 
         function loadLocalInteractions() {
@@ -1602,9 +1804,75 @@
             saveLocalInteractions(data);
             window.interactionsData[itemId] = {
                 likes: value.likes || 0,
-                comments: (value.comments || []).length
+                comments: (value.comments || []).length,
+                reads: value.reads || getLocalReadCount(itemId)
             };
         }
+
+        function loadLocalReads() {
+            try {
+                return JSON.parse(localStorage.getItem(LOCAL_READS_KEY)) || {};
+            } catch {
+                return {};
+            }
+        }
+
+        function saveLocalReads(data) {
+            try {
+                localStorage.setItem(LOCAL_READS_KEY, JSON.stringify(data));
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        function hasReadToday(itemId, dateKey) {
+            const data = loadLocalReads();
+            return Boolean(data[itemId] && data[itemId][dateKey]);
+        }
+
+        function markReadToday(itemId, dateKey) {
+            const data = loadLocalReads();
+            if (!data[itemId]) data[itemId] = {};
+            data[itemId][dateKey] = true;
+            saveLocalReads(data);
+        }
+
+        function getLocalReadCount(itemId) {
+            const data = loadLocalReads();
+            const entry = data[itemId] || {};
+            return Object.keys(entry).length;
+        }
+        window.getLocalReadCount = getLocalReadCount;
+
+        async function trackArticleRead(itemId) {
+            if (!itemId) return;
+            const today = new Date().toISOString().split("T")[0];
+            if (hasReadToday(itemId, today)) return;
+            markReadToday(itemId, today);
+
+            if (!db || window.useLocalInteractions) return;
+            try {
+                const ref = doc(db, "interactions", itemId);
+                await runTransaction(db, async (transaction) => {
+                    const snap = await transaction.get(ref);
+                    if (!snap.exists()) {
+                        transaction.set(ref, { likes: 0, comments: [], reads: 1 });
+                    } else {
+                        const data = snap.data();
+                        const reads = (data.reads || 0) + 1;
+                        transaction.update(ref, { reads });
+                    }
+                });
+                if (!window.interactionsData[itemId]) {
+                    window.interactionsData[itemId] = { likes: 0, comments: 0, reads: 0 };
+                }
+                window.interactionsData[itemId].reads = (window.interactionsData[itemId].reads || 0) + 1;
+                if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            } catch (e) {
+                console.warn("Read count update failed:", e);
+            }
+        }
+        window.trackArticleRead = trackArticleRead;
 
         function enableLocalInteractions() {
             window.useLocalInteractions = true;
@@ -1613,7 +1881,8 @@
             Object.keys(data).forEach(id => {
                 window.interactionsData[id] = {
                     likes: data[id].likes || 0,
-                    comments: (data[id].comments || []).length
+                    comments: (data[id].comments || []).length,
+                    reads: data[id].reads || getLocalReadCount(id)
                 };
             });
             if (window.refreshInteractionCounts) window.refreshInteractionCounts();
@@ -1632,7 +1901,8 @@
                     const data = docSnap.data();
                     window.interactionsData[docSnap.id] = {
                         likes: data.likes || 0,
-                        comments: (data.comments || []).length
+                        comments: (data.comments || []).length,
+                        reads: data.reads || 0
                     };
                 });
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
@@ -1651,8 +1921,20 @@
             window.__accessCounterInFlight = true;
             try {
                 if (!db) throw new Error("db-not-ready");
-                const today = new Date().toISOString().split("T")[0];
+                const today = getTodayKey();
                 const counterRef = doc(db, "pageStats", "accessCounter");
+
+                if (hasCountedAccessToday()) {
+                    const snapshot = await getDoc(counterRef);
+                    if (snapshot.exists()) {
+                        renderAccessStats(snapshot.data());
+                    } else {
+                        renderAccessStats(loadLocalAccessStats());
+                    }
+                    window.__accessCounterCounted = true;
+                    return;
+                }
+                markAccessCountedToday();
 
                 // トランザクションでカウンターをインクリメント
                 await runTransaction(db, async (transaction) => {
@@ -1669,11 +1951,11 @@
                         const daily = data.daily || {};
                         daily[today] = (daily[today] || 0) + 1;
 
-                        // 古い日付のデータを削除（7日以上前）
-                        const weekAgo = new Date();
-                        weekAgo.setDate(weekAgo.getDate() - 7);
+                        // 古い日付のデータを削除（30日以上前）
+                        const cutoff = new Date();
+                        cutoff.setDate(cutoff.getDate() - 30);
                         Object.keys(daily).forEach(date => {
-                            if (new Date(date) < weekAgo) delete daily[date];
+                            if (new Date(date) < cutoff) delete daily[date];
                         });
 
                         transaction.update(counterRef, {
@@ -1702,6 +1984,77 @@
         }
         window.updateAccessCounter = updateAccessCounter;
 
+        async function resetTodayAccessCount() {
+            const today = getTodayKey();
+            const resetLocal = () => {
+                const data = loadLocalAccessStats();
+                const prev = (data.daily && data.daily[today]) || 0;
+                data.total = Math.max(0, (data.total || 0) - prev);
+                data.daily = data.daily || {};
+                data.daily[today] = 0;
+                saveLocalAccessStats(data);
+                renderAccessStats(data);
+                markAccessCountedToday();
+                window.__accessCounterCounted = true;
+            };
+
+            if (!db) {
+                resetLocal();
+                return;
+            }
+            try {
+                const counterRef = doc(db, "pageStats", "accessCounter");
+                await runTransaction(db, async (transaction) => {
+                    const docSnap = await transaction.get(counterRef);
+                    if (!docSnap.exists()) {
+                        transaction.set(counterRef, {
+                            total: 0,
+                            daily: { [today]: 0 },
+                            lastUpdated: today
+                        });
+                        return;
+                    }
+                    const data = docSnap.data();
+                    const daily = data.daily || {};
+                    const prev = daily[today] || 0;
+                    daily[today] = 0;
+                    const total = Math.max(0, (data.total || 0) - prev);
+                    transaction.update(counterRef, {
+                        total,
+                        daily,
+                        lastUpdated: today
+                    });
+                });
+
+                const snapshot = await getDoc(counterRef);
+                if (snapshot.exists()) {
+                    renderAccessStats(snapshot.data());
+                }
+                markAccessCountedToday();
+                window.__accessCounterCounted = true;
+            } catch (e) {
+                console.warn("Reset today access failed:", e);
+                resetLocal();
+            }
+        }
+        window.resetTodayAccessCount = resetTodayAccessCount;
+        window.initFirebase = initFirebase;
+
+        function setupAccessAnalyticsToggle() {
+            const toggle = document.getElementById("analysisToggle");
+            const panel = document.getElementById("accessAnalytics");
+            if (!toggle || !panel) return;
+            toggle.addEventListener("click", () => {
+                const willShow = panel.classList.contains("hidden");
+                panel.classList.toggle("hidden", !willShow);
+                toggle.textContent = willShow ? "閉じる" : "アクセス推移";
+                toggle.setAttribute("aria-expanded", willShow ? "true" : "false");
+                if (willShow) renderAccessChart(accessStatsCache || loadLocalAccessStats());
+            });
+        }
+        window.setupAccessAnalyticsToggle = setupAccessAnalyticsToggle;
+        window.renderAccessChart = renderAccessChart;
+
         function refreshInteractionCounts() {
             const interactions = window.interactionsData || {};
             document.querySelectorAll(".card").forEach(card => {
@@ -1713,6 +2066,13 @@
                 if (btnLike) btnLike.textContent = data.likes || 0;
                 const btnComment = card.querySelector('.btn-comment .count');
                 if (btnComment) btnComment.textContent = data.comments || 0;
+                const readEl = card.querySelector('.read-count');
+                if (readEl) {
+                    const reads = (typeof data.reads === "number")
+                        ? data.reads
+                        : (window.getLocalReadCount ? window.getLocalReadCount(itemId) : 0);
+                    readEl.textContent = `閲覧 ${reads || 0}`;
+                }
             });
         }
         window.refreshInteractionCounts = refreshInteractionCounts;
@@ -1995,8 +2355,33 @@
 
     </script>
 
-    <script src="news_data.js" defer></script>
-    <script src="insights_data.js" defer></script>
+    <script>
+        window.__dataScriptsReady = new Promise((resolve) => {
+            const sources = ["news_data.js", "insights_data.js"];
+            const cacheBuster = Date.now().toString();
+            let loaded = 0;
+            const loadScript = (src, useCacheBuster) => {
+                const script = document.createElement("script");
+                script.src = useCacheBuster ? `${src}?v=${cacheBuster}` : src;
+                script.async = false;
+                script.onload = () => {
+                    loaded += 1;
+                    if (loaded === sources.length) resolve();
+                };
+                script.onerror = () => {
+                    if (useCacheBuster) {
+                        loadScript(src, false);
+                        return;
+                    }
+                    console.warn(`Failed to load ${src}`);
+                    loaded += 1;
+                    if (loaded === sources.length) resolve();
+                };
+                document.head.appendChild(script);
+            };
+            sources.forEach((src) => loadScript(src, true));
+        });
+    </script>
     <script>
         let NEWS_DATA = [];
         let visibleLimit = 30;
@@ -2103,9 +2488,13 @@
             el.textContent = formatDateTime(new Date());
         }
 
-        function showNewsItem(itemId) {
+        function showNewsItem(itemId, fromRanking = false) {
             const target = NEWS_DATA.find(n => n.id === itemId);
             if (!target) return;
+            if (fromRanking && !rankingBackState) {
+                rankingBackState = captureFilterState();
+                setRankingBackVisibility(true);
+            }
             document.getElementById("searchInput").value = itemId;
             document.getElementById("dateFrom").value = "";
             document.getElementById("dateTo").value = "";
@@ -2207,7 +2596,7 @@
                 return;
             }
             list.innerHTML = top.map((item, idx) => `
-                <div class="ranking-item" onclick="showNewsItem('${item.id}')">
+                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-title-text">${item.title}</div>
@@ -2250,7 +2639,7 @@
                 return;
             }
             list.innerHTML = top.map((item, idx) => `
-                <div class="ranking-item" onclick="showNewsItem('${item.id}')">
+                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-title-text">${item.title}</div>
@@ -2311,6 +2700,40 @@
 
         let activeCountries = new Set(["world"]);
         let activeTags = new Set(["all"]);
+        let rankingBackState = null;
+
+        function setRankingBackVisibility(visible) {
+            const wrapper = document.getElementById("rankingBack");
+            if (!wrapper) return;
+            wrapper.classList.toggle("hidden", !visible);
+        }
+
+        function captureFilterState() {
+            return {
+                search: document.getElementById("searchInput").value,
+                dateFrom: document.getElementById("dateFrom").value,
+                dateTo: document.getElementById("dateTo").value,
+                sortOrder: document.getElementById("sortOrder").value,
+                countries: new Set(activeCountries),
+                tags: new Set(activeTags)
+            };
+        }
+
+        function restoreRankingState() {
+            if (!rankingBackState) return;
+            document.getElementById("searchInput").value = rankingBackState.search || "";
+            document.getElementById("dateFrom").value = rankingBackState.dateFrom || "";
+            document.getElementById("dateTo").value = rankingBackState.dateTo || "";
+            document.getElementById("sortOrder").value = rankingBackState.sortOrder || "date-desc";
+            activeCountries = new Set(rankingBackState.countries || ["world"]);
+            activeTags = new Set(rankingBackState.tags || ["all"]);
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            rankingBackState = null;
+            setRankingBackVisibility(false);
+        }
 
         function setupRankingToggle(toggleId, bodyId, listId) {
             const toggle = document.getElementById(toggleId);
@@ -2326,71 +2749,95 @@
         }
 
         async function init() {
-            if (window.LOADED_NEWS_DATA) {
-                NEWS_DATA = window.LOADED_NEWS_DATA;
-                setNewDateRangeFromNews(NEWS_DATA);
-                normalizeIsNewFlags(NEWS_DATA);
+            try {
+                if (window.__dataScriptsReady) {
+                    try {
+                        await window.__dataScriptsReady;
+                    } catch (e) {
+                        console.warn("Data scripts failed to load", e);
+                    }
+                }
+                if (window.LOADED_NEWS_DATA) {
+                    NEWS_DATA = window.LOADED_NEWS_DATA;
+                    setNewDateRangeFromNews(NEWS_DATA);
+                    normalizeIsNewFlags(NEWS_DATA);
+                    document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                    updateNewCountBadges();
+                    updateTitleIcon();
+                    updateUpdatedAt();
+                    renderWeeklyRanking();
+                    renderAllTimeRanking();
+                } else {
+                    console.error("News data not loaded from JS file");
+                }
+
+                const tagFilters = document.getElementById("tagFilters");
+                ALL_TAGS.forEach(tag => {
+                    const chip = document.createElement("span");
+                    chip.className = "chip";
+                    chip.dataset.tag = tag;
+                    chip.textContent = tag;
+                    tagFilters.appendChild(chip);
+                });
+
+                const tagToggle = document.getElementById("tagToggle");
+                if (tagToggle) {
+                    tagToggle.addEventListener("click", () => {
+                        const expanded = tagFilters.classList.toggle("expanded");
+                        tagToggle.textContent = expanded ? "閉じる" : "もっと見る";
+                        tagToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+                    });
+                }
+
                 document.getElementById("totalCount").textContent = NEWS_DATA.length;
                 updateNewCountBadges();
-                updateTitleIcon();
-                updateUpdatedAt();
-                renderWeeklyRanking();
-                renderAllTimeRanking();
-            } else {
-                console.error("News data not loaded from JS file");
-            }
 
-            const tagFilters = document.getElementById("tagFilters");
-            ALL_TAGS.forEach(tag => {
-                const chip = document.createElement("span");
-                chip.className = "chip";
-                chip.dataset.tag = tag;
-                chip.textContent = tag;
-                tagFilters.appendChild(chip);
-            });
+                const params = new URLSearchParams(window.location.search);
+                const latestDate = getLatestDate(NEWS_DATA);
+                const dateToInput = document.getElementById("dateTo");
+                if (!params.has("to")) {
+                    dateToInput.value = latestDate || new Date().toISOString().split("T")[0];
+                }
 
-            const tagToggle = document.getElementById("tagToggle");
-            if (tagToggle) {
-                tagToggle.addEventListener("click", () => {
-                    const expanded = tagFilters.classList.toggle("expanded");
-                    tagToggle.textContent = expanded ? "閉じる" : "もっと見る";
-                    tagToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+                if (params.has("countries")) {
+                    activeCountries = new Set(params.get("countries").split(","));
+                    updateCountryChips();
+                }
+                if (params.has("tags")) {
+                    const t = params.get("tags").split(",");
+                    activeTags = new Set(t.includes("all") ? ["all"] : t);
+                    updateTagChips();
+                }
+                if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
+                if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
+                if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
+                if (!params.toString()) {
+                    document.getElementById("searchInput").value = "";
+                    activeCountries = new Set(["world"]);
+                    activeTags = new Set(["all"]);
+                    updateCountryChips();
+                    updateTagChips();
+                }
+
+                document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
+                document.getElementById("tagFilters").addEventListener("click", handleTagClick);
+                document.getElementById("dateFrom").addEventListener("change", applyFilters);
+                document.getElementById("dateTo").addEventListener("change", applyFilters);
+                document.getElementById("searchInput").addEventListener("input", applyFilters);
+                document.getElementById("sortOrder").addEventListener("change", () => {
+                    applyFilters();
+                    updateURL();
                 });
+
+                const rankingBackBtn = document.getElementById("rankingBackBtn");
+                if (rankingBackBtn) rankingBackBtn.addEventListener("click", restoreRankingState);
+                if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
+                if (window.initFirebase) window.initFirebase();
+                setupRankingToggle("weeklyRankingToggle", "weeklyRankingBody", "weeklyRankingList");
+                setupRankingToggle("allTimeRankingToggle", "allTimeRankingBody", "allTimeRankingList");
+            } catch (e) {
+                console.error("Init failed:", e);
             }
-
-            document.getElementById("totalCount").textContent = NEWS_DATA.length;
-            updateNewCountBadges();
-
-            const today = new Date().toISOString().split("T")[0];
-
-
-            document.getElementById("dateTo").value = today;
-
-            const params = new URLSearchParams(window.location.search);
-            if (params.has("countries")) {
-                activeCountries = new Set(params.get("countries").split(","));
-                updateCountryChips();
-            }
-            if (params.has("tags")) {
-                const t = params.get("tags").split(",");
-                activeTags = new Set(t.includes("all") ? ["all"] : t);
-                updateTagChips();
-            }
-            if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
-            if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
-            if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
-
-            document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
-            document.getElementById("tagFilters").addEventListener("click", handleTagClick);
-            document.getElementById("dateFrom").addEventListener("change", applyFilters);
-            document.getElementById("dateTo").addEventListener("change", applyFilters);
-            document.getElementById("searchInput").addEventListener("input", applyFilters);
-            document.getElementById("sortOrder").addEventListener("change", () => {
-                applyFilters();
-                updateURL();
-            });
-            setupRankingToggle("weeklyRankingToggle", "weeklyRankingBody", "weeklyRankingList");
-            setupRankingToggle("allTimeRankingToggle", "allTimeRankingBody", "allTimeRankingList");
 
             applyFilters();
 
@@ -2452,11 +2899,17 @@
         function applyFilters() {
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
-            const searchText = document.getElementById("searchInput").value.toLowerCase();
+            const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
             const sortOrder = document.getElementById("sortOrder").value;
 
+            if (activeTags.size === 0) activeTags = new Set(["all"]);
+            if (activeCountries.size === 0) activeCountries = new Set(["world"]);
+            if (from && to && from > to) {
+                document.getElementById("dateFrom").value = "";
+            }
+
             // 1. Filter
-            const filteredData = NEWS_DATA.filter(n => {
+            let filteredData = NEWS_DATA.filter(n => {
                 // Country Filter
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
 
@@ -2477,6 +2930,11 @@
 
                 return true;
             });
+
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world"));
+            if (!hasActiveFilter && filteredData.length === 0 && NEWS_DATA.length > 0) {
+                filteredData = [...NEWS_DATA];
+            }
 
             // 2. Sort
             const countryOrder = { jp: 0, cn: 1, in: 2, us: 3, eu: 4 };
@@ -2516,6 +2974,9 @@
                 const interaction = window.interactionsData?.[n.id] || {};
                 const likeCount = interaction.likes || 0;
                 const commentCount = interaction.comments || 0;
+                const readCount = (typeof interaction.reads === "number")
+                    ? interaction.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
                 const card = document.createElement("article");
                 card.className = "card";
                 card.id = `card-${n.id}`;
@@ -2541,7 +3002,7 @@
 
                 
                 <div class="actions">
-                    <a class="btn" href="${n.url}" target="_blank">記事を読む</a>
+                    <a class="btn" href="${n.url}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
                     
                     <button class="action-btn" onclick="toggleLike('${n.id}', this)">
                         <span>👍</span> <span class="count">${likeCount}</span>
@@ -2550,6 +3011,7 @@
                         <span>💬</span> <span class="count">${commentCount}</span>
                     </button>
 
+                    <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
                     <span class="source">${n.source}</span>
                     <span class="id-badge">${n.id}</span>
                 </div>
@@ -2620,11 +3082,12 @@
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.toLowerCase();
 
+            const insightsData = window.DAILY_INSIGHTS || [];
             // 最新のインサイト日付を取得
-            const latestInsightDate = DAILY_INSIGHTS.length > 0 ? DAILY_INSIGHTS[0].date : null;
+            const latestInsightDate = insightsData.length > 0 ? insightsData[0].date : null;
 
             let visibleCount = 0;
-            const filteredInsights = DAILY_INSIGHTS.filter(day => {
+            const filteredInsights = insightsData.filter(day => {
                 // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
                 const isNewInsight = isNewInsightDate(day.date);
                 // Date Filter (supports single date or range like YYYY-MM-DD〜YYYY-MM-DD)
@@ -2870,3 +3333,8 @@
 </body>
 
 </html>
+
+
+
+
+
