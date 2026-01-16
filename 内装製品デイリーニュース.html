@@ -486,6 +486,37 @@
             margin-bottom: 12px;
         }
 
+        .ranking-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .ranking-sort-label {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .ranking-sort {
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            font-size: 11px;
+        }
+
+        .ranking-sort:focus {
+            outline: 2px solid rgba(125, 241, 194, 0.6);
+            outline-offset: 2px;
+        }
+
+        .ranking-sort option {
+            background: #0f1726;
+            color: #e6edf7;
+        }
+
         .ranking-body.collapsed {
             overflow: hidden;
         }
@@ -543,6 +574,11 @@
             align-items: center;
             justify-content: flex-start;
             min-width: 0;
+        }
+
+        .ranking-stat {
+            font-size: 11px;
+            color: var(--muted);
         }
 
         .ranking-actions {
@@ -1580,7 +1616,15 @@
         <section class="ranking-section" id="weeklyRanking">
             <div class="ranking-header">
                 <div class="ranking-title">🏆 1週間以内の人気ニュース</div>
-                <button class="chip ranking-toggle" id="weeklyRankingToggle" type="button" aria-expanded="false">開く</button>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="weeklyRankingSort">並び替え</label>
+                    <select id="weeklyRankingSort" class="ranking-sort">
+                        <option value="reads">閲覧数</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                    </select>
+                    <button class="chip ranking-toggle" id="weeklyRankingToggle" type="button" aria-expanded="false">開く</button>
+                </div>
             </div>
             <div class="ranking-body collapsed" id="weeklyRankingBody">
                 <div class="ranking-list" id="weeklyRankingList">
@@ -1591,7 +1635,15 @@
         <section class="ranking-section" id="allTimeRanking">
             <div class="ranking-header">
                 <div class="ranking-title">🏆 今までの人気ニュース</div>
-                <button class="chip ranking-toggle" id="allTimeRankingToggle" type="button" aria-expanded="false">開く</button>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="allTimeRankingSort">並び替え</label>
+                    <select id="allTimeRankingSort" class="ranking-sort">
+                        <option value="reads">閲覧数</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                    </select>
+                    <button class="chip ranking-toggle" id="allTimeRankingToggle" type="button" aria-expanded="false">開く</button>
+                </div>
             </div>
             <div class="ranking-body collapsed" id="allTimeRankingBody">
                 <div class="ranking-list" id="allTimeRankingList">
@@ -2559,10 +2611,44 @@
             }, 150);
         }
 
+        function getRankingSortKey(scope) {
+            const selectId = scope === "weekly" ? "weeklyRankingSort" : "allTimeRankingSort";
+            const select = document.getElementById(selectId);
+            return select ? select.value : "reads";
+        }
+
+        function getRankingMetricValue(item, key) {
+            if (key === "likes") return item.likes || 0;
+            if (key === "comments") return item.comments || 0;
+            return item.reads || 0;
+        }
+
+        function compareRankingItems(a, b, key) {
+            const order = key === "likes"
+                ? ["likes", "comments", "reads"]
+                : key === "comments"
+                    ? ["comments", "likes", "reads"]
+                    : ["reads", "likes", "comments"];
+            for (const k of order) {
+                const diff = (b[k] || 0) - (a[k] || 0);
+                if (diff !== 0) return diff;
+            }
+            return b.date.localeCompare(a.date);
+        }
+
+        function getRankingEmptyMessage(scope, key) {
+            const labelMap = { reads: "閲覧", likes: "いいね", comments: "コメント" };
+            const label = labelMap[key] || "閲覧";
+            return scope === "weekly"
+                ? `1週間以内の${label}がまだありません。`
+                : `${label}がまだありません。`;
+        }
+
         function renderWeeklyRanking() {
             const list = document.getElementById("weeklyRankingList");
             if (!list) return;
             const interactions = window.interactionsData || {};
+            const sortKey = getRankingSortKey("weekly");
             const latest = getLatestDate(NEWS_DATA);
             if (!latest) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
@@ -2577,21 +2663,21 @@
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
-                return { ...item, likes, comments, score: likes + comments };
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                return { ...item, likes, comments, reads };
             }).filter(item => {
                 if (!item.date) return false;
                 const d = new Date(`${item.date}T00:00:00`);
                 return d >= startDate && d <= endDate;
             }).sort((a, b) => {
-                if (b.score !== a.score) return b.score - a.score;
-                if (b.likes !== a.likes) return b.likes - a.likes;
-                if (b.comments !== a.comments) return b.comments - a.comments;
-                return b.date.localeCompare(a.date);
+                return compareRankingItems(a, b, sortKey);
             });
 
-            const top = ranked.filter(item => item.score > 0).slice(0, 10);
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
             if (top.length === 0) {
-                list.innerHTML = '<div class="ranking-empty">1週間以内のいいね・コメントがまだありません。</div>';
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage("weekly", sortKey)}</div>`;
                 updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
                 return;
             }
@@ -2604,6 +2690,7 @@
                     <div class="ranking-meta">
                         <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
                         <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
                         <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
                             <span>👍</span> <span class="count">${item.likes}</span>
                         </button>
@@ -2620,21 +2707,22 @@
             const list = document.getElementById("allTimeRankingList");
             if (!list) return;
             const interactions = window.interactionsData || {};
+            const sortKey = getRankingSortKey("allTime");
             const ranked = NEWS_DATA.map(item => {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
-                return { ...item, likes, comments, score: likes + comments };
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                return { ...item, likes, comments, reads };
             }).sort((a, b) => {
-                if (b.score !== a.score) return b.score - a.score;
-                if (b.likes !== a.likes) return b.likes - a.likes;
-                if (b.comments !== a.comments) return b.comments - a.comments;
-                return b.date.localeCompare(a.date);
+                return compareRankingItems(a, b, sortKey);
             });
 
-            const top = ranked.filter(item => item.score > 0).slice(0, 10);
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
             if (top.length === 0) {
-                list.innerHTML = '<div class="ranking-empty">いいね・コメントがまだありません。</div>';
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage("allTime", sortKey)}</div>`;
                 updateRankingHeight(document.getElementById("allTimeRankingBody"), list);
                 return;
             }
@@ -2647,6 +2735,7 @@
                     <div class="ranking-meta">
                         <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
                         <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
                         <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
                             <span>👍</span> <span class="count">${item.likes}</span>
                         </button>
@@ -2835,6 +2924,10 @@
                 if (window.initFirebase) window.initFirebase();
                 setupRankingToggle("weeklyRankingToggle", "weeklyRankingBody", "weeklyRankingList");
                 setupRankingToggle("allTimeRankingToggle", "allTimeRankingBody", "allTimeRankingList");
+                const weeklySort = document.getElementById("weeklyRankingSort");
+                if (weeklySort) weeklySort.addEventListener("change", renderWeeklyRanking);
+                const allTimeSort = document.getElementById("allTimeRankingSort");
+                if (allTimeSort) allTimeSort.addEventListener("change", renderAllTimeRanking);
             } catch (e) {
                 console.error("Init failed:", e);
             }
