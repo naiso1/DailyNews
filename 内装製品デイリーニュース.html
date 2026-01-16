@@ -1623,7 +1623,8 @@
                         <option value="likes">いいね</option>
                         <option value="comments">コメント</option>
                     </select>
-                    <button class="chip ranking-toggle" id="weeklyRankingToggle" type="button" aria-expanded="false">開く</button>
+                    <button class="chip ranking-toggle" id="weeklyRankingToggle" type="button"
+                        aria-expanded="false">開く</button>
                 </div>
             </div>
             <div class="ranking-body collapsed" id="weeklyRankingBody">
@@ -1642,7 +1643,8 @@
                         <option value="likes">いいね</option>
                         <option value="comments">コメント</option>
                     </select>
-                    <button class="chip ranking-toggle" id="allTimeRankingToggle" type="button" aria-expanded="false">開く</button>
+                    <button class="chip ranking-toggle" id="allTimeRankingToggle" type="button"
+                        aria-expanded="false">開く</button>
                 </div>
             </div>
             <div class="ranking-body collapsed" id="allTimeRankingBody">
@@ -2408,13 +2410,15 @@
     </script>
 
     <script>
+        // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
+        const CACHE_BUSTER = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
         window.__dataScriptsReady = new Promise((resolve) => {
             const sources = ["news_data.js", "insights_data.js"];
-            const cacheBuster = Date.now().toString();
             let loaded = 0;
             const loadScript = (src, useCacheBuster) => {
                 const script = document.createElement("script");
-                script.src = useCacheBuster ? `${src}?v=${cacheBuster}` : src;
+                script.src = useCacheBuster ? `${src}?v=${CACHE_BUSTER}` : src;
                 script.async = false;
                 script.onload = () => {
                     loaded += 1;
@@ -2432,6 +2436,14 @@
                 document.head.appendChild(script);
             };
             sources.forEach((src) => loadScript(src, true));
+        });
+
+        // BFcache対策: ページが戻るボタンで表示された場合リロード
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // BFcacheから復元された場合、強制リロード
+                window.location.reload();
+            }
         });
     </script>
     <script>
@@ -2848,12 +2860,15 @@
                 }
                 if (window.LOADED_NEWS_DATA) {
                     NEWS_DATA = window.LOADED_NEWS_DATA;
+                    console.log("News data loaded:", NEWS_DATA.length, "items");
                     setNewDateRangeFromNews(NEWS_DATA);
                     normalizeIsNewFlags(NEWS_DATA);
                     document.getElementById("totalCount").textContent = NEWS_DATA.length;
                     updateNewCountBadges();
                     updateTitleIcon();
                     updateUpdatedAt();
+                    // 初期ランキング描画（interactionsデータなし）
+                    // loadInteractions完了後に再描画される
                     renderWeeklyRanking();
                     renderAllTimeRanking();
                 } else {
@@ -3426,8 +3441,3 @@
 </body>
 
 </html>
-
-
-
-
-
