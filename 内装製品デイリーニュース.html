@@ -2635,6 +2635,12 @@
             return item.reads || 0;
         }
 
+        function filterRankingByCountry(items) {
+            if (activeCountries.has("world")) return items;
+            const allowed = new Set(activeCountries);
+            return items.filter(item => allowed.has(item.country));
+        }
+
         function compareRankingItems(a, b, key) {
             const order = key === "likes"
                 ? ["likes", "comments", "reads"]
@@ -2671,7 +2677,7 @@
             const startDate = new Date(endDate);
             startDate.setDate(startDate.getDate() - 6);
 
-            const ranked = NEWS_DATA.map(item => {
+            const ranked = filterRankingByCountry(NEWS_DATA).map(item => {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
@@ -2720,7 +2726,7 @@
             if (!list) return;
             const interactions = window.interactionsData || {};
             const sortKey = getRankingSortKey("allTime");
-            const ranked = NEWS_DATA.map(item => {
+            const ranked = filterRankingByCountry(NEWS_DATA).map(item => {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
@@ -2965,6 +2971,7 @@
             }
             updateCountryChips();
             applyFilters();
+            scheduleRankingUpdate();
             updateURL();
         }
 
