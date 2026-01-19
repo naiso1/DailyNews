@@ -2568,20 +2568,20 @@
                 const end = latest;
                 const startDate = new Date(`${latest}T00:00:00`);
                 startDate.setDate(startDate.getDate() - 2);
-                const start = startDate.toISOString().split("T")[0];
+                const pad = (n) => String(n).padStart(2, "0");
+                const start = `${startDate.getFullYear()}-${pad(startDate.getMonth() + 1)}-${pad(startDate.getDate())}`;
                 NEW_DATE_RANGE = { start, end };
             }
         }
 
         function normalizeIsNewFlags(data) {
-            const latest = getLatestDate(data);
-            if (!latest || !data) return;
+            if (!data || !NEW_DATE_RANGE.start) return;
             data.forEach(item => {
-                if (item.date === latest) {
-                    item.isNew = true;
-                } else if (item.isNew) {
+                if (!item.date) {
                     item.isNew = false;
+                    return;
                 }
+                item.isNew = item.date >= NEW_DATE_RANGE.start && item.date <= NEW_DATE_RANGE.end;
             });
         }
 
