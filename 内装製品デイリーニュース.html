@@ -1904,7 +1904,14 @@
             if (hasReadToday(itemId, today)) return;
             markReadToday(itemId, today);
 
-            if (!db || window.useLocalInteractions) return;
+            if (!db || window.useLocalInteractions) {
+                const local = getLocalInteractionData(itemId);
+                setLocalInteractionData(itemId, local);
+                if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+                if (window.renderWeeklyRanking) window.renderWeeklyRanking();
+                if (window.renderAllTimeRanking) window.renderAllTimeRanking();
+                return;
+            }
             try {
                 const ref = doc(db, "interactions", itemId);
                 await runTransaction(db, async (transaction) => {
@@ -1927,6 +1934,48 @@
             }
         }
         window.trackArticleRead = trackArticleRead;
+
+        const hoverReadTimers = new Map();
+
+        function startHoverRead(itemId) {
+            if (!itemId) return;
+            const today = new Date().toISOString().split("T")[0];
+            if (hasReadToday(itemId, today)) return;
+            if (hoverReadTimers.has(itemId)) return;
+            const timer = setTimeout(() => {
+                hoverReadTimers.delete(itemId);
+                trackArticleRead(itemId);
+            }, 5000);
+            hoverReadTimers.set(itemId, timer);
+        }
+
+        function cancelHoverRead(itemId) {
+            const timer = hoverReadTimers.get(itemId);
+            if (!timer) return;
+            clearTimeout(timer);
+            hoverReadTimers.delete(itemId);
+        }
+
+        function setupHoverReadTracking() {
+            const grid = document.getElementById("newsGrid");
+            if (!grid || grid.__hoverReadBound) return;
+            grid.__hoverReadBound = true;
+            grid.addEventListener("mouseover", (event) => {
+                const card = event.target.closest(".card");
+                if (!card || !grid.contains(card)) return;
+                if (card.contains(event.relatedTarget)) return;
+                const itemId = card.id ? card.id.replace("card-", "") : "";
+                startHoverRead(itemId);
+            });
+            grid.addEventListener("mouseout", (event) => {
+                const card = event.target.closest(".card");
+                if (!card || !grid.contains(card)) return;
+                if (card.contains(event.relatedTarget)) return;
+                const itemId = card.id ? card.id.replace("card-", "") : "";
+                cancelHoverRead(itemId);
+            });
+        }
+        window.setupHoverReadTracking = setupHoverReadTracking;
 
         function enableLocalInteractions() {
             window.useLocalInteractions = true;
@@ -2516,7 +2565,11 @@
         function setNewDateRangeFromNews(data) {
             const latest = getLatestDate(data);
             if (latest) {
-                NEW_DATE_RANGE = { start: latest, end: latest };
+                const end = latest;
+                const startDate = new Date(`${latest}T00:00:00`);
+                startDate.setDate(startDate.getDate() - 2);
+                const start = startDate.toISOString().split("T")[0];
+                NEW_DATE_RANGE = { start, end };
             }
         }
 
@@ -2871,6 +2924,10 @@
                     normalizeIsNewFlags(NEWS_DATA);
                     document.getElementById("totalCount").textContent = NEWS_DATA.length;
                     updateNewCountBadges();
+                    const newCounts = getNewCounts(NEWS_DATA);
+                    if (newCounts.world > visibleLimit) {
+                        visibleLimit = newCounts.world;
+                    }
                     updateTitleIcon();
                     updateUpdatedAt();
                     // 初期ランキング描画（interactionsデータなし）
@@ -2954,6 +3011,7 @@
             }
 
             applyFilters();
+            if (window.setupHoverReadTracking) window.setupHoverReadTracking();
 
             // アクセスカウンター更新
             if (window.updateAccessCounter) window.updateAccessCounter();
@@ -3187,7 +3245,7 @@
 
 
 
-        let insightsVisibleLimit = 3;  // 初期表示は3回分
+        let insightsVisibleLimit = 1;  // 初期表示は最新のみ
 
         function renderInsights() {
             const container = document.getElementById("insightsContainer");
