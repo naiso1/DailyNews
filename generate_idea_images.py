@@ -19,52 +19,52 @@ COMFY_OUTPUT_DIR = Path(r"C:\ComfyUI\ComfyUI_windows_portable_nvidia\ComfyUI_win
 IMAGES_DIR = BASE_DIR / "images"
 IMAGES_DIR.mkdir(exist_ok=True)
 
-# 2026-01-16〜2026-01-18のアイデア画像リスト
+# 2026-01-19のアイデア画像リスト
 IDEAS = [
     # 日本
     {
-        "name": "jp_console_care_0118",
-        "prompt": "Automotive interior concept: LED console with display protection film bundle pack. Japanese kei car N-BOX style center console with integrated LED ambient lighting in warm orange glow. Protective film being applied to infotainment touchscreen display. Package contents visible: LED console unit and screen protector film. Clean Japanese minimalist product design. 30-minute DIY installation concept. Photorealistic 3D render, accessory product visualization, studio lighting, 8k quality."
+        "name": "jp_led_console_0119",
+        "prompt": "Automotive interior concept: LED console nighttime comfort kit for Japanese kei cars and minivans. Integrated LED console unit combining wireless charging pad, small items tray, and ambient footwell lighting in warm orange glow. Tool-free 30-minute installation demonstration. Interior of Honda N-BOX or Nissan Roox with the premium accessory kit installed, illuminating the cabin softly at night. Japanese family car interior upgrade concept. Photorealistic 3D render, accessory product visualization, 8k quality."
     },
     {
-        "name": "jp_shift_touch_0118",
-        "prompt": "Automotive interior concept: tactile-focused shift operation module for Honda S+Shift system. Ergonomic shift lever unit with enhanced click feedback mechanism and premium leather-wrapped tactile surface. Close-up of driver's hand operating the precision shifter with satisfying mechanical feel. Brushed aluminum accents. Modern Japanese automotive design emphasizing tactile quality and driving precision. Photorealistic 3D render, high-end product visualization, 8k quality."
+        "name": "jp_retro_hmi_0119",
+        "prompt": "Automotive interior concept: classic retro display UI pack for modern vehicles. Digital instrument cluster showing nostalgic vintage analog gauge design with classic fonts and needle indicators. Split screen comparison showing modern minimal UI on weekday mode and warm retro wood-grain styled UI on weekend mode. VW ID. Polo inspired HMI customization. Switchable mood enhancement through display themes. Photorealistic 3D render, UI design visualization, 8k quality."
     },
     # 中国
     {
-        "name": "cn_streamshare_0118",
-        "prompt": "Automotive interior concept: sound zone cockpit with Harman StreamShare audio technology. Chinese family SUV interior with front and rear seat independent audio zones visualized by colored sound wave graphics in blue and purple. Parents in front seats with navigation audio, children in rear with headrest speakers enjoying entertainment. Premium speaker system visible. Modern Chinese smart cockpit design. Photorealistic 3D render, lifestyle visualization, 8k quality."
+        "name": "cn_battery_hud_0119",
+        "prompt": "Automotive interior concept: seat-linked smart screen UX for Chinese EVs. Large curved touchscreen display that automatically adjusts angle and brightness based on driver posture and eye position detected by sensors. Synchronized climate control visualization. Premium Chinese smart cockpit with intelligent seat and screen coordination. Long-distance comfort optimization system. Photorealistic 3D render, smart cabin technology visualization, 8k quality."
     },
     {
-        "name": "cn_recyclable_trim_0118",
-        "prompt": "Automotive interior concept: recyclable resin door trim panel with material passport QR code display. Chinese EV interior showing eco-friendly recyclable epoxy material with visible sustainable texture pattern. Small digital display or QR code showing material composition and recycling information. Green accent lighting emphasizing eco design. Modern Chinese automotive sustainability concept. Photorealistic 3D render, eco-product visualization, 8k quality."
+        "name": "cn_three_row_cabin_0119",
+        "prompt": "Automotive interior concept: integrated card-based operation cockpit for Chinese smart vehicles. Unified service layer UI showing navigation, voice control, climate, and seat functions controlled through swipeable card interface on large central display. Minimalist Chinese smart cabin design with software-updatable features. Streamlined operation reducing user confusion. Modern Chinese EV interior. Photorealistic 3D render, UI/UX visualization, 8k quality."
     },
     # インド
     {
-        "name": "in_affordable_ui_0118",
-        "prompt": "Automotive interior concept: simplified 10-inch touchscreen UI template for affordable Indian SUV. Clean intuitive interface with minimal hierarchy, large colorful icons for navigation, music, phone, and climate controls on bright 10-inch display. Easy one-touch operation demonstration with finger touching screen. Dashboard of modern Indian SUV. Practical design balancing simplicity and functionality for mass market. Photorealistic 3D render, UI visualization, 8k quality."
+        "name": "in_ac_efficiency_0119",
+        "prompt": "Automotive interior concept: eco air conditioning dashboard for Indian EVs. Digital display showing AC power consumption, range impact visualization with green efficiency meter, and smart temperature recommendations based on outside temperature and traffic conditions. Dashboard of Indian electric vehicle with energy-efficient climate control interface. Mandatory AC fuel efficiency testing compliance concept. Photorealistic 3D render, eco-friendly UI visualization, 8k quality."
     },
     {
-        "name": "in_trim_upgrade_0118",
-        "prompt": "Automotive interior concept: interior upgrade kit package for Kia grade models in India. Package display showing premium brown leather seat covers, LED ambient lighting strips in blue, and enhanced storage compartments. Before and after transformation of Indian SUV interior from basic grey to premium leather look. Affordable luxury upgrade concept. Photorealistic 3D render, product kit visualization, 8k quality."
+        "name": "in_smart_grade_0119",
+        "prompt": "Automotive interior concept: mini HMI template for affordable Indian EVs and electric scooters. Compact 4-6 inch TFT display with clear three-section layout showing speed, battery level, and simple navigation. Highly readable design for first-time EV users with multi-language support. Affordable electric two-wheeler dashboard. Clean and intuitive interface for mass market India. Photorealistic 3D render, compact display UI visualization, 8k quality."
     },
     # 米国
     {
-        "name": "us_performance_controls_0118",
-        "prompt": "Automotive interior concept: dedicated performance control panel for BMW iX3 M electric vehicle. Premium tactile button panel with illuminated drive mode selector showing Sport, Efficient, and Personal modes. Regenerative braking control dial and M sport settings buttons. Brushed aluminum and carbon fiber materials with red accent lighting. German performance EV cockpit design. Photorealistic 3D render, premium sports car visualization, 8k quality."
+        "name": "us_piano_black_0119",
+        "prompt": "Automotive interior concept: clean trim design solving piano black fingerprint problem. Premium dark interior trim panel with micro-texture surface that resists fingerprints. HMI notification showing cleaning reminder on central display. Comparison view of regular glossy black trim with visible fingerprints versus new anti-fingerprint textured surface. Luxury American car interior maintaining elegance while staying clean. Photorealistic 3D render, material innovation visualization, 8k quality."
     },
     {
-        "name": "us_mirror_film_0118",
-        "prompt": "Automotive interior concept: hydrophobic mirror film with rain-detection interior alert system. Split view showing side mirror with water-repelling film and water droplets beading off, and interior dashboard displaying rain alert icon with ambient lighting changing to blue for visibility warning. Safety-focused connected car feature. Modern American automotive design emphasizing safety technology. Photorealistic 3D render, safety feature visualization, 8k quality."
+        "name": "us_window_safety_0119",
+        "prompt": "Automotive interior concept: conversational in-car task assistant using cross-domain integration. Driver speaking naturally to AI assistant displayed on HUD and central screen simultaneously. Voice command controlling route, climate, and seat settings in one conversation. Volvo EX60 inspired natural dialogue AI cockpit. Hands-free operation for enhanced driving safety and focus. Modern American premium EV interior. Photorealistic 3D render, voice AI visualization, 8k quality."
     },
     # 欧州
     {
-        "name": "eu_paintless_surface_0118",
-        "prompt": "Automotive interior concept: paintless high-quality surface interior trim panels. European luxury car interior with premium matte finish door panels achieved without traditional painting process. Close-up detail of scratch-resistant surface with elegant brushed texture. Environmentally friendly manufacturing with long-lasting beauty. Soft ambient lighting. Modern German automotive quality design. Photorealistic 3D render, premium material visualization, 8k quality."
+        "name": "eu_ai_ambient_0119",
+        "prompt": "Automotive interior concept: proactive comfort suggestion UI with AI agent technology. European luxury car interior with ambient lighting and seat adjusting automatically based on traffic and weather predictions. Transparent AI recommendation popup on display with easy accept/modify/reject options. Pre-emptive comfort optimization for stress-free driving. BMW or Audi style premium cabin with intelligent anticipation features. Photorealistic 3D render, AI assistant visualization, 8k quality."
     },
     {
-        "name": "eu_resale_trim_0118",
-        "prompt": "Automotive interior concept: resale value protection interior trim for European lease vehicles. Easily replaceable surface trim panels with scratch-resistant coating being demonstrated. Quick swap mechanism showing worn panel removal and fresh panel installation. Value retention concept for lease and rental markets with euro currency symbols. Modern European practical automotive design. Photorealistic 3D render, functional product visualization, 8k quality."
+        "name": "eu_polyester_trim_0119",
+        "prompt": "Automotive interior concept: material passport feature for sustainable interior trim. European car door panel with recycled polyester fiber trim showing digital QR code or small display indicating recycled content percentage and repair history. Eco-friendly interior materials with traceability. Green accent lighting highlighting sustainability features. Premium European automotive sustainability design. Photorealistic 3D render, eco-material visualization, 8k quality."
     }
 ]
 

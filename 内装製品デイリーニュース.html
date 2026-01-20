@@ -1391,6 +1391,54 @@
             background: rgba(79, 172, 254, 0.1);
         }
 
+        .action-btn.favorite-btn.active {
+            color: #ffd540;
+            background: rgba(255, 213, 64, 0.18);
+            border: 1px solid rgba(255, 213, 64, 0.45);
+        }
+
+        .favorite-toggle.active {
+            color: #ffd540;
+            border: 1px solid rgba(255, 213, 64, 0.45);
+            background: rgba(255, 213, 64, 0.18);
+        }
+
+        .favorites-actions {
+            margin: 12px 0 20px;
+            padding: 12px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .favorites-actions.hidden {
+            display: none;
+        }
+
+        .favorites-actions-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .favorite-select-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .favorite-select {
+            accent-color: #ffd540;
+        }
+
         .comment-section {
             display: none;
             margin-top: 12px;
@@ -1598,9 +1646,24 @@
                 <option value="likes-desc" style="background: #1e222d; color: #fff;">いいね順</option>
                 <option value="comments-desc" style="background: #1e222d; color: #fff;">コメント数順</option>
             </select>
+            <button id="favoritesToggle" class="chip favorite-toggle" type="button" aria-pressed="false"
+                style="margin-left: 12px;">★ お気に入り</button>
         </div>
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
     </div>
+
+    <section class="favorites-actions hidden" id="favoritesActions">
+        <div class="favorites-actions-title">★ お気に入り共有</div>
+        <div class="favorites-actions-controls">
+            <span id="favoritesSelectedCount">選択: 0</span>
+            <button class="chip" id="favoritesSelectAll" type="button">全選択</button>
+            <button class="chip" id="favoritesClearSelection" type="button">全解除</button>
+            <button class="chip" id="favoritesExportCsv" type="button">CSV出力（選択）</button>
+            <button class="chip" id="favoritesExportCsvAll" type="button">CSV出力（全て）</button>
+            <button class="chip" id="favoritesEmailShare" type="button">メール共有（選択）</button>
+            <button class="chip" id="favoritesEmailShareAll" type="button">メール共有（全て）</button>
+        </div>
+    </section>
 
     <section class="analysis-panel hidden" id="accessAnalytics">
         <div class="analysis-panel-header">
@@ -2565,12 +2628,7 @@
         function setNewDateRangeFromNews(data) {
             const latest = getLatestDate(data);
             if (latest) {
-                const end = latest;
-                const startDate = new Date(`${latest}T00:00:00`);
-                startDate.setDate(startDate.getDate() - 2);
-                const pad = (n) => String(n).padStart(2, "0");
-                const start = `${startDate.getFullYear()}-${pad(startDate.getMonth() + 1)}-${pad(startDate.getDate())}`;
-                NEW_DATE_RANGE = { start, end };
+                NEW_DATE_RANGE = { start: latest, end: latest };
             }
         }
 
@@ -2858,9 +2916,226 @@
             </svg>
         `);
 
+        const FAVORITES_STORAGE_KEY = "favorites_v1";
+        let favoriteIds = new Set();
+        let favoritesOnly = false;
+        let selectedFavoriteKeys = new Set();
         let activeCountries = new Set(["world"]);
         let activeTags = new Set(["all"]);
         let rankingBackState = null;
+
+        function loadFavorites() {
+            try {
+                const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+                if (!raw) return;
+                const list = JSON.parse(raw);
+                if (Array.isArray(list)) favoriteIds = new Set(list);
+            } catch (e) {
+                console.warn("Failed to load favorites:", e);
+            }
+        }
+
+        function saveFavorites() {
+            try {
+                localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([...favoriteIds]));
+            } catch (e) {
+                console.warn("Failed to save favorites:", e);
+            }
+        }
+
+        function isFavorite(itemId) {
+            return favoriteIds.has(itemId);
+        }
+
+        function updateFavoriteButton(btn, isFav) {
+            if (!btn) return;
+            btn.classList.toggle("active", isFav);
+            const icon = btn.querySelector(".fav-icon");
+            if (icon) icon.textContent = isFav ? "★" : "☆";
+        }
+
+        function updateFavoritesToggle() {
+            const btn = document.getElementById("favoritesToggle");
+            if (!btn) return;
+            const count = favoriteIds.size;
+            btn.textContent = `★ お気に入り${count ? ` (${count})` : ""}`;
+            btn.classList.toggle("active", favoritesOnly);
+            btn.setAttribute("aria-pressed", favoritesOnly ? "true" : "false");
+        }
+
+        function updateFavoritesActionsVisibility() {
+            const panel = document.getElementById("favoritesActions");
+            if (!panel) return;
+            panel.classList.toggle("hidden", !favoritesOnly);
+        }
+
+        function updateFavoritesActionsState() {
+            const countEl = document.getElementById("favoritesSelectedCount");
+            const selectedCount = selectedFavoriteKeys.size;
+            if (countEl) countEl.textContent = `選択: ${selectedCount}`;
+            const disableSelected = selectedCount === 0;
+            const btnCsv = document.getElementById("favoritesExportCsv");
+            const btnMail = document.getElementById("favoritesEmailShare");
+            if (btnCsv) btnCsv.disabled = disableSelected;
+            if (btnMail) btnMail.disabled = disableSelected;
+        }
+
+        function clearFavoriteSelections() {
+            selectedFavoriteKeys.clear();
+            document.querySelectorAll(".favorite-select").forEach(el => {
+                el.checked = false;
+            });
+            updateFavoritesActionsState();
+        }
+
+        function escapeCsv(value) {
+            const str = String(value ?? "");
+            return `"${str.replace(/\"/g, '\"\"')}"`;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function buildIdeaIndex() {
+            const ideas = new Map();
+            const insights = window.DAILY_INSIGHTS || [];
+            insights.forEach(day => {
+                const regions = ["jp", "cn", "in", "us", "eu"];
+                regions.forEach(region => {
+                    const list = (day.ideas && day.ideas[region]) ? day.ideas[region] : [];
+                    list.forEach(idea => {
+                        const key = `idea-${idea.id}`;
+                        if (!ideas.has(key)) {
+                            ideas.set(key, {
+                                type: "idea",
+                                key,
+                                id: idea.id,
+                                title: idea.title,
+                                desc: idea.desc,
+                                img: idea.img || "",
+                                date: day.date,
+                                country: region
+                            });
+                        }
+                    });
+                });
+            });
+            return ideas;
+        }
+
+        function getFavoriteItems(keys = null) {
+            const targetKeys = keys && keys.length ? keys : [...favoriteIds];
+            const items = [];
+            const newsMap = new Map(NEWS_DATA.map(n => [n.id, n]));
+            const ideaMap = buildIdeaIndex();
+            targetKeys.forEach(key => {
+                if (newsMap.has(key)) {
+                    const n = newsMap.get(key);
+                    items.push({
+                        type: "news",
+                        key,
+                        id: n.id,
+                        title: n.title,
+                        desc: n.desc,
+                        img: n.img,
+                        date: n.date,
+                        country: n.country,
+                        url: n.url,
+                        source: n.source
+                    });
+                } else if (ideaMap.has(key)) {
+                    items.push(ideaMap.get(key));
+                }
+            });
+            return items;
+        }
+
+        function downloadFavoritesCsv(keys = null) {
+            const items = getFavoriteItems(keys);
+            if (!items.length) return;
+            const header = ["type", "id", "title", "date", "country", "url", "image", "description"];
+            const rows = items.map(item => [
+                item.type,
+                item.id,
+                item.title,
+                item.date || "",
+                item.country || "",
+                item.url || "",
+                item.img || "",
+                item.desc || ""
+            ]);
+            const csv = [header, ...rows]
+                .map(row => row.map(escapeCsv).join(","))
+                .join("\r\n");
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+            link.download = `favorites_${stamp}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        function buildFavoritesEmailHtml(items) {
+            const cards = items.map(item => {
+                const title = escapeHtml(item.title);
+                const desc = escapeHtml(item.desc).replace(/\n/g, "<br>");
+                const img = item.img ? `<img src="${item.img}" alt="${title}" style="max-width:100%; border-radius:12px; margin:8px 0;">` : "";
+                const url = item.url ? `<div><a href="${item.url}" target="_blank" rel="noopener">${item.url}</a></div>` : "";
+                const meta = `<div style="color:#667085;font-size:12px;">${item.type === "idea" ? "アイデア" : "記事"} / ${item.date || "-"} / ${COUNTRY_NAMES[item.country] || item.country || "-"}</div>`;
+                return `
+                    <div style="border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:12px 0;background:#f9fafb;">
+                        <div style="font-weight:700;font-size:16px;color:#111827;">${title}</div>
+                        ${meta}
+                        ${img}
+                        <div style="font-size:14px;color:#111827;line-height:1.6;">${desc}</div>
+                        ${url}
+                    </div>`;
+            }).join("");
+            return `
+                <div style="font-family:'Noto Sans JP', Arial, sans-serif;background:#ffffff;color:#111827;padding:16px;">
+                    <h2 style="margin:0 0 12px;">お気に入り共有</h2>
+                    ${cards}
+                </div>`;
+        }
+
+        async function shareFavoritesByEmail(keys = null) {
+            const items = getFavoriteItems(keys);
+            if (!items.length) return;
+            const subject = items.length === 1 ? items[0].title : `お気に入り共有 (${items.length}件)`;
+            const html = buildFavoritesEmailHtml(items);
+            try {
+                await navigator.clipboard.writeText(html);
+                alert("HTMLをコピーしました。メールに貼り付けてください。");
+            } catch (e) {
+                console.warn("Clipboard copy failed:", e);
+            }
+            const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(html)}`;
+            window.open(mailto, "_blank");
+        }
+
+        window.toggleFavorite = (itemId, btn) => {
+            if (!itemId) return;
+            if (favoriteIds.has(itemId)) {
+                favoriteIds.delete(itemId);
+                selectedFavoriteKeys.delete(itemId);
+            } else {
+                favoriteIds.add(itemId);
+            }
+            saveFavorites();
+            updateFavoriteButton(btn, favoriteIds.has(itemId));
+            updateFavoritesToggle();
+            updateFavoritesActionsState();
+            if (favoritesOnly) applyFilters();
+        };
 
         function setRankingBackVisibility(visible) {
             const wrapper = document.getElementById("rankingBack");
@@ -2875,7 +3150,8 @@
                 dateTo: document.getElementById("dateTo").value,
                 sortOrder: document.getElementById("sortOrder").value,
                 countries: new Set(activeCountries),
-                tags: new Set(activeTags)
+                tags: new Set(activeTags),
+                favoritesOnly
             };
         }
 
@@ -2887,6 +3163,8 @@
             document.getElementById("sortOrder").value = rankingBackState.sortOrder || "date-desc";
             activeCountries = new Set(rankingBackState.countries || ["world"]);
             activeTags = new Set(rankingBackState.tags || ["all"]);
+            favoritesOnly = Boolean(rankingBackState.favoritesOnly);
+            updateFavoritesToggle();
             updateCountryChips();
             updateTagChips();
             applyFilters();
@@ -2922,6 +3200,15 @@
                     console.log("News data loaded:", NEWS_DATA.length, "items");
                     setNewDateRangeFromNews(NEWS_DATA);
                     normalizeIsNewFlags(NEWS_DATA);
+                    loadFavorites();
+                    if (favoriteIds.size) {
+                        const validNews = new Set(NEWS_DATA.map(n => n.id));
+                        const validIdeas = new Set(buildIdeaIndex().keys());
+                        const filtered = [...favoriteIds].filter(id => validNews.has(id) || validIdeas.has(id));
+                        favoriteIds = new Set(filtered);
+                        saveFavorites();
+                    }
+                    updateFavoritesToggle();
                     document.getElementById("totalCount").textContent = NEWS_DATA.length;
                     updateNewCountBadges();
                     const newCounts = getNewCounts(NEWS_DATA);
@@ -2982,8 +3269,10 @@
                     document.getElementById("searchInput").value = "";
                     activeCountries = new Set(["world"]);
                     activeTags = new Set(["all"]);
+                    favoritesOnly = false;
                     updateCountryChips();
                     updateTagChips();
+                    updateFavoritesToggle();
                 }
 
                 document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
@@ -2994,6 +3283,56 @@
                 document.getElementById("sortOrder").addEventListener("change", () => {
                     applyFilters();
                     updateURL();
+                });
+                const favoritesToggle = document.getElementById("favoritesToggle");
+                if (favoritesToggle) {
+                    favoritesToggle.addEventListener("click", () => {
+                        favoritesOnly = !favoritesOnly;
+                        if (!favoritesOnly) clearFavoriteSelections();
+                        updateFavoritesToggle();
+                        updateFavoritesActionsVisibility();
+                        applyFilters();
+                    });
+                }
+
+                const selectAllBtn = document.getElementById("favoritesSelectAll");
+                if (selectAllBtn) {
+                    selectAllBtn.addEventListener("click", () => {
+                        document.querySelectorAll(".favorite-select").forEach(el => {
+                            el.checked = true;
+                            selectedFavoriteKeys.add(el.dataset.favKey);
+                        });
+                        updateFavoritesActionsState();
+                    });
+                }
+
+                const clearSelectBtn = document.getElementById("favoritesClearSelection");
+                if (clearSelectBtn) clearSelectBtn.addEventListener("click", clearFavoriteSelections);
+
+                const exportCsvBtn = document.getElementById("favoritesExportCsv");
+                if (exportCsvBtn) exportCsvBtn.addEventListener("click", () => {
+                    downloadFavoritesCsv([...selectedFavoriteKeys]);
+                });
+                const exportCsvAllBtn = document.getElementById("favoritesExportCsvAll");
+                if (exportCsvAllBtn) exportCsvAllBtn.addEventListener("click", () => {
+                    downloadFavoritesCsv();
+                });
+                const emailBtn = document.getElementById("favoritesEmailShare");
+                if (emailBtn) emailBtn.addEventListener("click", () => {
+                    shareFavoritesByEmail([...selectedFavoriteKeys]);
+                });
+                const emailAllBtn = document.getElementById("favoritesEmailShareAll");
+                if (emailAllBtn) emailAllBtn.addEventListener("click", () => {
+                    shareFavoritesByEmail();
+                });
+
+                document.addEventListener("change", (event) => {
+                    const target = event.target;
+                    if (!target || !target.classList.contains("favorite-select")) return;
+                    const key = target.dataset.favKey;
+                    if (target.checked) selectedFavoriteKeys.add(key);
+                    else selectedFavoriteKeys.delete(key);
+                    updateFavoritesActionsState();
                 });
 
                 const rankingBackBtn = document.getElementById("rankingBackBtn");
@@ -3015,6 +3354,8 @@
 
             // アクセスカウンター更新
             if (window.updateAccessCounter) window.updateAccessCounter();
+            updateFavoritesActionsVisibility();
+            updateFavoritesActionsState();
         }
 
         function handleCountryClick(e) {
@@ -3085,6 +3426,7 @@
             let filteredData = NEWS_DATA.filter(n => {
                 // Country Filter
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
+                if (favoritesOnly && !isFavorite(n.id)) return false;
 
                 const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ")).toLowerCase();
 
@@ -3104,7 +3446,7 @@
                 return true;
             });
 
-            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world"));
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly);
             if (!hasActiveFilter && filteredData.length === 0 && NEWS_DATA.length > 0) {
                 filteredData = [...NEWS_DATA];
             }
@@ -3150,6 +3492,8 @@
                 const readCount = (typeof interaction.reads === "number")
                     ? interaction.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
+                const favActive = isFavorite(n.id);
+                const favSelected = favoritesOnly && selectedFavoriteKeys.has(n.id);
                 const card = document.createElement("article");
                 card.className = "card";
                 card.id = `card-${n.id}`;
@@ -3177,6 +3521,10 @@
                 <div class="actions">
                     <a class="btn" href="${n.url}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
                     
+                    ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                    <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
+                        <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                    </button>
                     <button class="action-btn" onclick="toggleLike('${n.id}', this)">
                         <span>👍</span> <span class="count">${likeCount}</span>
                     </button>
@@ -3258,6 +3606,12 @@
             const insightsData = window.DAILY_INSIGHTS || [];
             // 最新のインサイト日付を取得
             const latestInsightDate = insightsData.length > 0 ? insightsData[0].date : null;
+            const ideaTextForSearch = (ideas) => {
+                return (ideas || [])
+                    .filter(idea => !favoritesOnly || isFavorite(`idea-${idea.id}`))
+                    .map(idea => `${idea.title} ${idea.desc}`)
+                    .join(" ");
+            };
 
             let visibleCount = 0;
             const filteredInsights = insightsData.filter(day => {
@@ -3283,6 +3637,18 @@
                 const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
                 const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
 
+                const jpIdeas = day.ideas?.jp || [];
+                const cnIdeas = day.ideas?.cn || [];
+                const inIdeas = day.ideas?.in || [];
+                const usIdeas = day.ideas?.us || [];
+                const euIdeas = day.ideas?.eu || [];
+                const hasFavJp = showJp && jpIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavCn = showCn && cnIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavIn = showIn && inIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavUs = showUs && usIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavEu = showEu && euIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasAnyFavIdeas = hasFavJp || hasFavCn || hasFavIn || hasFavUs || hasFavEu;
+
                 // Text Search Check
                 let hasMatch = false;
                 if (!searchText) {
@@ -3290,16 +3656,23 @@
                 } else {
                     const allText = [
                         day.date,
-                        showJp ? day.analysis.jp + JSON.stringify(day.ideas.jp || []) : "",
-                        showCn ? day.analysis.cn + JSON.stringify(day.ideas.cn || []) : "",
-                        showIn ? day.analysis.in + JSON.stringify(day.ideas.in || []) : "",
-                        showUs ? day.analysis.us + JSON.stringify(day.ideas.us || []) : "",
-                        showEu ? day.analysis.eu + JSON.stringify(day.ideas.eu || []) : ""
+                        !favoritesOnly && showJp ? day.analysis.jp : "",
+                        !favoritesOnly && showCn ? day.analysis.cn : "",
+                        !favoritesOnly && showIn ? day.analysis.in : "",
+                        !favoritesOnly && showUs ? day.analysis.us : "",
+                        !favoritesOnly && showEu ? day.analysis.eu : "",
+                        showJp ? ideaTextForSearch(jpIdeas) : "",
+                        showCn ? ideaTextForSearch(cnIdeas) : "",
+                        showIn ? ideaTextForSearch(inIdeas) : "",
+                        showUs ? ideaTextForSearch(usIdeas) : "",
+                        showEu ? ideaTextForSearch(euIdeas) : ""
                     ].join(" ").toLowerCase();
                     if (allText.includes(searchText)) hasMatch = true;
                 }
 
                 if (!hasMatch) return false;
+
+                if (favoritesOnly && !hasAnyFavIdeas) return false;
 
                 // Only render if there is content to show for active countries
                 if (!showJp && !showCn && !showIn && !showUs && !showEu) return false;
@@ -3307,7 +3680,9 @@
             });
 
             // 表示するインサイトを制限
-            const insightsToShow = filteredInsights.slice(0, insightsVisibleLimit);
+            const insightsToShow = favoritesOnly
+                ? filteredInsights
+                : filteredInsights.slice(0, insightsVisibleLimit);
 
             insightsToShow.forEach(day => {
                 // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
@@ -3325,7 +3700,9 @@
                 wrapper.className = "daily-insight-group";
 
                 // Analysis Section
-                let analysisHTML = `
+                let analysisHTML = "";
+                if (!favoritesOnly) {
+                    analysisHTML = `
                     <section class="analysis-section" style="margin-top: 48px;">
                         <h2 class="section-title"><span class="section-icon">💡</span> 考察 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
                         <div class="analysis-grid">
@@ -3377,6 +3754,7 @@
                     </div>`;
 
                 analysisHTML += `</div></section>`;
+                }
 
 
                 // Ideas Section
@@ -3386,7 +3764,10 @@
                 `;
 
                 const renderIdeas = (ideas, regionName, regionClass, flagIcon) => {
-                    if (ideas.length > 0) {
+                    const visibleIdeas = favoritesOnly
+                        ? ideas.filter(idea => isFavorite(`idea-${idea.id}`))
+                        : ideas;
+                    if (visibleIdeas.length > 0) {
                         ideasHTML += `
                             <div class="region-section ${regionClass}">
                                 <div class="region-title-wrapper">
@@ -3396,7 +3777,10 @@
                                 <div class="ideas-grid">
                         `;
 
-                        ideas.forEach(idea => {
+                        visibleIdeas.forEach(idea => {
+                            const ideaKey = `idea-${idea.id}`;
+                            const favActive = isFavorite(ideaKey);
+                            const favSelected = favoritesOnly && selectedFavoriteKeys.has(ideaKey);
                             ideasHTML += `
                                 <div class="idea-card">
                                     <div class="idea-header">
@@ -3408,6 +3792,10 @@
                                         <div class="idea-content">
                                             <p class="idea-desc">${idea.desc}</p>
                                             <div class="actions">
+                                                ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${ideaKey}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                                                <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${ideaKey}', this)">
+                                                    <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                                                </button>
                                                 <button class="action-btn" onclick="toggleLike('${idea.id}', this)">
                                                     <span>👍</span> <span class="count">0</span>
                                                 </button>
@@ -3447,7 +3835,7 @@
             wireImageFallbacks(container);
 
             // もっと見るボタン（インサイト用）
-            if (filteredInsights.length > insightsVisibleLimit) {
+            if (!favoritesOnly && filteredInsights.length > insightsVisibleLimit) {
                 const loadMoreDiv = document.createElement("div");
                 loadMoreDiv.style.cssText = "text-align:center; margin-top:20px;";
                 loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;">
@@ -3455,6 +3843,8 @@
                 </button>`;
                 container.appendChild(loadMoreDiv);
             }
+            updateFavoritesActionsVisibility();
+            updateFavoritesActionsState();
         }
 
         function loadMoreInsights() {
