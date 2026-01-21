@@ -143,6 +143,27 @@
             white-space: nowrap;
         }
 
+        @media (max-width: 768px) {
+            .tag-filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tag-chips {
+                flex-wrap: wrap;
+                overflow-x: hidden;
+                max-height: 120px;
+            }
+
+            .tag-chips.expanded {
+                max-height: none;
+            }
+
+            .tag-toggle {
+                align-self: flex-start;
+            }
+        }
+
         /* Region Badge - replaces emoji icons for better compatibility */
         .region-badge {
             display: inline-flex;
@@ -410,7 +431,7 @@
 
         .chart-bar {
             display: grid;
-            grid-template-rows: 1fr auto auto;
+            grid-template-rows: 1fr auto auto auto;
             align-items: end;
             justify-items: center;
             height: 160px;
@@ -437,9 +458,18 @@
             color: var(--muted);
         }
 
+        .chart-bar .bar-dow {
+            font-size: 10px;
+            color: rgba(154, 164, 184, 0.8);
+        }
+
         .chart-empty {
             font-size: 13px;
             color: var(--muted);
+        }
+
+        .jump-anchor {
+            scroll-margin-top: 90px;
         }
 
         .ranking-back {
@@ -456,9 +486,12 @@
         .ranking-wrapper {
             max-width: 1400px;
             margin: 0 auto 20px;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            display: block;
             gap: 16px;
+        }
+
+        .ranking-wrapper.hidden {
+            display: none;
         }
 
         .ranking-section {
@@ -604,9 +637,44 @@
             font-size: 13px;
         }
 
+        .quick-nav {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 60;
+        }
+
+        .quick-nav a {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            border: 1px solid var(--border);
+            background: rgba(15, 22, 32, 0.92);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+            text-align: center;
+        }
+
+        .quick-nav a:hover {
+            border-color: rgba(125, 241, 194, 0.6);
+            color: var(--accent);
+        }
+
         @media (max-width: 1100px) {
             .ranking-wrapper {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .quick-nav {
+                right: 12px;
+                bottom: 12px;
             }
         }
 
@@ -1585,7 +1653,7 @@
 </head>
 
 <body>
-    <header>
+    <header id="top" class="jump-anchor">
         <h1><img id="titleIcon" class="title-globe-icon" src="images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
         <p class="lead">生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け</p>
         <div class="access-counter"
@@ -1668,50 +1736,36 @@
     <section class="analysis-panel hidden" id="accessAnalytics">
         <div class="analysis-panel-header">
             <div class="analysis-panel-title">日別アクセス分析</div>
-            <div class="analysis-panel-sub" id="accessChartRange">直近7日</div>
+            <div class="analysis-panel-sub" id="accessChartRange">データ範囲</div>
         </div>
         <div class="analysis-chart" id="accessChart">
             <div class="chart-empty">データを取得中...</div>
         </div>
     </section>
 
-    <div class="ranking-wrapper">
-        <section class="ranking-section" id="weeklyRanking">
+    <div class="ranking-wrapper" id="rankingWrapper">
+        <section class="ranking-section" id="rankingSection">
             <div class="ranking-header">
-                <div class="ranking-title">🏆 1週間以内の人気ニュース</div>
+                <div class="ranking-title">🏆 人気ニュースランキング</div>
                 <div class="ranking-controls">
-                    <label class="ranking-sort-label" for="weeklyRankingSort">並び替え</label>
-                    <select id="weeklyRankingSort" class="ranking-sort">
-                        <option value="reads">閲覧数</option>
+                    <label class="ranking-sort-label" for="rankingScope">期間</label>
+                    <select id="rankingScope" class="ranking-sort">
+                        <option value="weekly">1週間以内</option>
+                        <option value="all">今まで</option>
+                    </select>
+                    <label class="ranking-sort-label" for="rankingSort">並び替え</label>
+                    <select id="rankingSort" class="ranking-sort">
+                        <option value="score">総合</option>
                         <option value="likes">いいね</option>
                         <option value="comments">コメント</option>
+                        <option value="reads">閲覧数</option>
                     </select>
-                    <button class="chip ranking-toggle" id="weeklyRankingToggle" type="button"
+                    <button class="chip ranking-toggle" id="rankingToggle" type="button"
                         aria-expanded="false">開く</button>
                 </div>
             </div>
-            <div class="ranking-body collapsed" id="weeklyRankingBody">
-                <div class="ranking-list" id="weeklyRankingList">
-                    <div class="ranking-empty">ランキングを計算中...</div>
-                </div>
-            </div>
-        </section>
-        <section class="ranking-section" id="allTimeRanking">
-            <div class="ranking-header">
-                <div class="ranking-title">🏆 今までの人気ニュース</div>
-                <div class="ranking-controls">
-                    <label class="ranking-sort-label" for="allTimeRankingSort">並び替え</label>
-                    <select id="allTimeRankingSort" class="ranking-sort">
-                        <option value="reads">閲覧数</option>
-                        <option value="likes">いいね</option>
-                        <option value="comments">コメント</option>
-                    </select>
-                    <button class="chip ranking-toggle" id="allTimeRankingToggle" type="button"
-                        aria-expanded="false">開く</button>
-                </div>
-            </div>
-            <div class="ranking-body collapsed" id="allTimeRankingBody">
-                <div class="ranking-list" id="allTimeRankingList">
+            <div class="ranking-body collapsed" id="rankingBody">
+                <div class="ranking-list" id="rankingList">
                     <div class="ranking-empty">ランキングを計算中...</div>
                 </div>
             </div>
@@ -1722,6 +1776,7 @@
         <button class="chip" id="rankingBackBtn" type="button">ランキングから戻る</button>
     </div>
 
+    <div id="newsSection" class="jump-anchor"></div>
     <section class="grid" id="newsGrid"></section>
     <div style="text-align: center; margin: 2rem 0;">
         <button id="loadMoreBtn" onclick="loadMore()" class="btn" style="display: none;">もっと見る</button>
@@ -1730,6 +1785,13 @@
 
 
     <div id="insightsContainer"></div>
+
+    <nav class="quick-nav" aria-label="ページ内ナビゲーション">
+        <a href="#top">トップ</a>
+        <a href="#newsSection">ニュース</a>
+        <a href="#analysisSection">考察</a>
+        <a href="#ideasSection">企画</a>
+    </nav>
 
 
     <!-- Firebase SDKs -->
@@ -1853,14 +1915,20 @@
 
         function buildAccessSeries(data) {
             const daily = (data && data.daily) ? data.daily : {};
-            const today = new Date();
+            const keys = Object.keys(daily);
+            if (!keys.length) return [];
+            const dates = keys
+                .map(key => new Date(`${key}T00:00:00`))
+                .filter(d => !Number.isNaN(d.getTime()));
+            if (!dates.length) return [];
+            const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
+            const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
             const series = [];
-            for (let i = 6; i >= 0; i -= 1) {
-                const d = new Date(today);
-                d.setDate(d.getDate() - i);
+            for (let d = new Date(minDate); d <= maxDate; d.setDate(d.getDate() + 1)) {
                 const key = d.toISOString().split("T")[0];
                 const label = `${d.getMonth() + 1}/${d.getDate()}`;
-                series.push({ key, label, value: daily[key] || 0 });
+                const dow = ["日", "月", "火", "水", "木", "金", "土"][d.getDay()];
+                series.push({ key, label, dow, value: daily[key] || 0 });
             }
             return series;
         }
@@ -1873,6 +1941,12 @@
                 chart.innerHTML = '<div class="chart-empty">データがありません。</div>';
                 return;
             }
+            const range = document.getElementById("accessChartRange");
+            if (range) {
+                const start = series[0].key.replace(/-/g, "/");
+                const end = series[series.length - 1].key.replace(/-/g, "/");
+                range.textContent = `${start}〜${end} (${series.length}日)`;
+            }
             const max = Math.max(...series.map(item => item.value), 1);
             chart.innerHTML = series.map(item => {
                 const height = Math.max(8, Math.round((item.value / max) * 100));
@@ -1881,14 +1955,10 @@
                         <div class="bar" style="height:${height}%"></div>
                         <div class="bar-value">${item.value}</div>
                         <div class="bar-label">${item.label}</div>
+                        <div class="bar-dow">${item.dow || ""}</div>
                     </div>
                 `;
             }).join("");
-
-            const range = document.getElementById("accessChartRange");
-            if (range && series.length > 0) {
-                range.textContent = `${series[0].label} - ${series[series.length - 1].label}`;
-            }
         }
 
         function loadLocalInteractions() {
@@ -1971,8 +2041,7 @@
                 const local = getLocalInteractionData(itemId);
                 setLocalInteractionData(itemId, local);
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-                if (window.renderWeeklyRanking) window.renderWeeklyRanking();
-                if (window.renderAllTimeRanking) window.renderAllTimeRanking();
+                renderRanking();
                 return;
             }
             try {
@@ -2052,8 +2121,7 @@
                 };
             });
             if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-            if (window.renderWeeklyRanking) window.renderWeeklyRanking();
-            if (window.renderAllTimeRanking) window.renderAllTimeRanking();
+            renderRanking();
         }
 
         async function loadInteractions() {
@@ -2072,8 +2140,7 @@
                     };
                 });
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
-                if (window.renderWeeklyRanking) window.renderWeeklyRanking();
-                if (window.renderAllTimeRanking) window.renderAllTimeRanking();
+                renderRanking();
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             } catch (e) {
                 console.error("Failed to load interactions:", e);
@@ -2729,18 +2796,22 @@
         function scheduleRankingUpdate() {
             if (rankingUpdateTimer) clearTimeout(rankingUpdateTimer);
             rankingUpdateTimer = setTimeout(() => {
-                renderWeeklyRanking();
-                renderAllTimeRanking();
+                renderRanking();
             }, 150);
         }
 
-        function getRankingSortKey(scope) {
-            const selectId = scope === "weekly" ? "weeklyRankingSort" : "allTimeRankingSort";
-            const select = document.getElementById(selectId);
-            return select ? select.value : "reads";
+        function getRankingScopeValue() {
+            const select = document.getElementById("rankingScope");
+            return select ? select.value : "weekly";
+        }
+
+        function getRankingSortKey() {
+            const select = document.getElementById("rankingSort");
+            return select ? select.value : "score";
         }
 
         function getRankingMetricValue(item, key) {
+            if (key === "score") return item.score || 0;
             if (key === "likes") return item.likes || 0;
             if (key === "comments") return item.comments || 0;
             return item.reads || 0;
@@ -2753,11 +2824,13 @@
         }
 
         function compareRankingItems(a, b, key) {
-            const order = key === "likes"
-                ? ["likes", "comments", "reads"]
-                : key === "comments"
-                    ? ["comments", "likes", "reads"]
-                    : ["reads", "likes", "comments"];
+            const order = key === "score"
+                ? ["score", "likes", "comments", "reads"]
+                : key === "likes"
+                    ? ["likes", "comments", "reads"]
+                    : key === "comments"
+                        ? ["comments", "likes", "reads"]
+                        : ["reads", "likes", "comments"];
             for (const k of order) {
                 const diff = (b[k] || 0) - (a[k] || 0);
                 if (diff !== 0) return diff;
@@ -2766,48 +2839,55 @@
         }
 
         function getRankingEmptyMessage(scope, key) {
-            const labelMap = { reads: "閲覧", likes: "いいね", comments: "コメント" };
+            const labelMap = { score: "総合", reads: "閲覧", likes: "いいね", comments: "コメント" };
             const label = labelMap[key] || "閲覧";
             return scope === "weekly"
                 ? `1週間以内の${label}がまだありません。`
                 : `${label}がまだありません。`;
         }
 
-        function renderWeeklyRanking() {
-            const list = document.getElementById("weeklyRankingList");
-            if (!list) return;
+        function renderRanking() {
+            const list = document.getElementById("rankingList");
+            const body = document.getElementById("rankingBody");
+            if (!list || !body) return;
             const interactions = window.interactionsData || {};
-            const sortKey = getRankingSortKey("weekly");
+            const sortKey = getRankingSortKey();
+            const scope = getRankingScopeValue();
             const latest = getLatestDate(NEWS_DATA);
-            if (!latest) {
+
+            if (scope === "weekly" && !latest) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
-                updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
+                updateRankingHeight(body, list);
                 return;
             }
-            const endDate = new Date(`${latest}T00:00:00`);
-            const startDate = new Date(endDate);
-            startDate.setDate(startDate.getDate() - 6);
 
-            const ranked = filterRankingByCountry(NEWS_DATA).map(item => {
+            let ranked = filterRankingByCountry(NEWS_DATA).map(item => {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
                 const reads = (typeof data.reads === "number")
                     ? data.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
-                return { ...item, likes, comments, reads };
-            }).filter(item => {
-                if (!item.date) return false;
-                const d = new Date(`${item.date}T00:00:00`);
-                return d >= startDate && d <= endDate;
-            }).sort((a, b) => {
-                return compareRankingItems(a, b, sortKey);
+                const score = likes * 3 + comments * 2 + reads;
+                return { ...item, likes, comments, reads, score };
             });
 
+            if (scope === "weekly" && latest) {
+                const endDate = new Date(`${latest}T00:00:00`);
+                const startDate = new Date(endDate);
+                startDate.setDate(startDate.getDate() - 6);
+                ranked = ranked.filter(item => {
+                    if (!item.date) return false;
+                    const d = new Date(`${item.date}T00:00:00`);
+                    return d >= startDate && d <= endDate;
+                });
+            }
+
+            ranked.sort((a, b) => compareRankingItems(a, b, sortKey));
             const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
             if (top.length === 0) {
-                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage("weekly", sortKey)}</div>`;
-                updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage(scope, sortKey)}</div>`;
+                updateRankingHeight(body, list);
                 return;
             }
             list.innerHTML = top.map((item, idx) => `
@@ -2829,52 +2909,15 @@
                     </div>
                 </div>
             `).join("");
-            updateRankingHeight(document.getElementById("weeklyRankingBody"), list);
+            updateRankingHeight(body, list);
+        }
+
+        function renderWeeklyRanking() {
+            renderRanking();
         }
 
         function renderAllTimeRanking() {
-            const list = document.getElementById("allTimeRankingList");
-            if (!list) return;
-            const interactions = window.interactionsData || {};
-            const sortKey = getRankingSortKey("allTime");
-            const ranked = filterRankingByCountry(NEWS_DATA).map(item => {
-                const data = interactions[item.id] || {};
-                const likes = data.likes || 0;
-                const comments = data.comments || 0;
-                const reads = (typeof data.reads === "number")
-                    ? data.reads
-                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
-                return { ...item, likes, comments, reads };
-            }).sort((a, b) => {
-                return compareRankingItems(a, b, sortKey);
-            });
-
-            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
-            if (top.length === 0) {
-                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage("allTime", sortKey)}</div>`;
-                updateRankingHeight(document.getElementById("allTimeRankingBody"), list);
-                return;
-            }
-            list.innerHTML = top.map((item, idx) => `
-                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
-                    <div class="ranking-left">
-                        <div class="ranking-rank">${idx + 1}</div>
-                        <div class="ranking-title-text">${item.title}</div>
-                    </div>
-                    <div class="ranking-meta">
-                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
-                        <span>${item.date}</span>
-                        <span class="ranking-stat">👀 ${item.reads}</span>
-                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
-                            <span>👍</span> <span class="count">${item.likes}</span>
-                        </button>
-                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
-                            <span>💬</span> <span class="count">${item.comments}</span>
-                        </button>
-                    </div>
-                </div>
-            `).join("");
-            updateRankingHeight(document.getElementById("allTimeRankingBody"), list);
+            renderRanking();
         }
         const ALL_TAGS = [
             "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
@@ -2961,12 +3004,19 @@
             btn.textContent = `★ お気に入り${count ? ` (${count})` : ""}`;
             btn.classList.toggle("active", favoritesOnly);
             btn.setAttribute("aria-pressed", favoritesOnly ? "true" : "false");
+            updateRankingVisibility();
         }
 
         function updateFavoritesActionsVisibility() {
             const panel = document.getElementById("favoritesActions");
             if (!panel) return;
             panel.classList.toggle("hidden", !favoritesOnly);
+        }
+
+        function updateRankingVisibility() {
+            const wrapper = document.getElementById("rankingWrapper");
+            if (wrapper) wrapper.classList.toggle("hidden", favoritesOnly);
+            setRankingBackVisibility(Boolean(rankingBackState));
         }
 
         function updateFavoritesActionsState() {
@@ -3107,19 +3157,82 @@
                 </div>`;
         }
 
+        function buildFavoritesPlainText(items) {
+            return items.map((item, idx) => {
+                return [
+                    `[${idx + 1}] ${item.title}`,
+                    item.desc || "",
+                    item.url || "",
+                    `(${item.type === "idea" ? "アイデア" : "記事"} / ${item.date || "-"} / ${COUNTRY_NAMES[item.country] || item.country || "-"})`
+                ].filter(Boolean).join("\n");
+            }).join("\n\n");
+        }
+
+        function toBase64Utf8(str) {
+            const bytes = new TextEncoder().encode(str);
+            let binary = "";
+            bytes.forEach(b => binary += String.fromCharCode(b));
+            return btoa(binary);
+        }
+
+        function chunkBase64(str, size = 76) {
+            return (str.match(new RegExp(`.{1,${size}}`, "g")) || []).join("\r\n");
+        }
+
+        function downloadFavoritesEml(subject, html, plainText) {
+            const boundary = `----=_Part_${Math.random().toString(36).slice(2)}`;
+            const htmlBase64 = chunkBase64(toBase64Utf8(html));
+            const eml = [
+                `Subject: ${subject}`,
+                "MIME-Version: 1.0",
+                `Content-Type: multipart/alternative; boundary=\"${boundary}\"`,
+                "",
+                `--${boundary}`,
+                "Content-Type: text/plain; charset=UTF-8",
+                "Content-Transfer-Encoding: 7bit",
+                "",
+                plainText,
+                `--${boundary}`,
+                "Content-Type: text/html; charset=UTF-8",
+                "Content-Transfer-Encoding: base64",
+                "",
+                htmlBase64,
+                `--${boundary}--`,
+                ""
+            ].join("\r\n");
+            const blob = new Blob([eml], { type: "message/rfc822" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+            link.download = `favorites_${stamp}.eml`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
         async function shareFavoritesByEmail(keys = null) {
             const items = getFavoriteItems(keys);
             if (!items.length) return;
             const subject = items.length === 1 ? items[0].title : `お気に入り共有 (${items.length}件)`;
             const html = buildFavoritesEmailHtml(items);
-            try {
-                await navigator.clipboard.writeText(html);
-                alert("HTMLをコピーしました。メールに貼り付けてください。");
-            } catch (e) {
-                console.warn("Clipboard copy failed:", e);
+            const plain = buildFavoritesPlainText(items);
+            if (navigator.clipboard && window.ClipboardItem) {
+                try {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            "text/html": new Blob([html], { type: "text/html" }),
+                            "text/plain": new Blob([plain], { type: "text/plain" })
+                        })
+                    ]);
+                } catch (e) {
+                    console.warn("Clipboard copy failed:", e);
+                }
             }
-            const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(html)}`;
+            const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(plain)}`;
             window.open(mailto, "_blank");
+            downloadFavoritesEml(subject, html, plain);
+            alert("テキストメールを開きました。HTML表示は.emlを開くとレンダリングされます。");
         }
 
         window.toggleFavorite = (itemId, btn) => {
@@ -3140,7 +3253,8 @@
         function setRankingBackVisibility(visible) {
             const wrapper = document.getElementById("rankingBack");
             if (!wrapper) return;
-            wrapper.classList.toggle("hidden", !visible);
+            const shouldShow = visible && !favoritesOnly;
+            wrapper.classList.toggle("hidden", !shouldShow);
         }
 
         function captureFilterState() {
@@ -3219,8 +3333,7 @@
                     updateUpdatedAt();
                     // 初期ランキング描画（interactionsデータなし）
                     // loadInteractions完了後に再描画される
-                    renderWeeklyRanking();
-                    renderAllTimeRanking();
+                    renderRanking();
                 } else {
                     console.error("News data not loaded from JS file");
                 }
@@ -3339,12 +3452,11 @@
                 if (rankingBackBtn) rankingBackBtn.addEventListener("click", restoreRankingState);
                 if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
                 if (window.initFirebase) window.initFirebase();
-                setupRankingToggle("weeklyRankingToggle", "weeklyRankingBody", "weeklyRankingList");
-                setupRankingToggle("allTimeRankingToggle", "allTimeRankingBody", "allTimeRankingList");
-                const weeklySort = document.getElementById("weeklyRankingSort");
-                if (weeklySort) weeklySort.addEventListener("change", renderWeeklyRanking);
-                const allTimeSort = document.getElementById("allTimeRankingSort");
-                if (allTimeSort) allTimeSort.addEventListener("change", renderAllTimeRanking);
+                setupRankingToggle("rankingToggle", "rankingBody", "rankingList");
+                const rankingSort = document.getElementById("rankingSort");
+                if (rankingSort) rankingSort.addEventListener("change", renderRanking);
+                const rankingScope = document.getElementById("rankingScope");
+                if (rankingScope) rankingScope.addEventListener("change", renderRanking);
             } catch (e) {
                 console.error("Init failed:", e);
             }
@@ -3356,6 +3468,7 @@
             if (window.updateAccessCounter) window.updateAccessCounter();
             updateFavoritesActionsVisibility();
             updateFavoritesActionsState();
+            updateRankingVisibility();
         }
 
         function handleCountryClick(e) {
@@ -3569,6 +3682,8 @@
             wireImageFallbacks(document);
             if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             renderInsights();
+            updateRankingVisibility();
+            scheduleRankingUpdate();
         }
 
         function loadMore() {
@@ -3614,6 +3729,8 @@
             };
 
             let visibleCount = 0;
+            let analysisAnchorInserted = false;
+            let ideasAnchorInserted = false;
             const filteredInsights = insightsData.filter(day => {
                 // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
                 const isNewInsight = isNewInsightDate(day.date);
@@ -3701,8 +3818,12 @@
 
                 // Analysis Section
                 let analysisHTML = "";
+                if (!analysisAnchorInserted) {
+                    analysisHTML += `<div id="analysisSection" class="jump-anchor"></div>`;
+                    analysisAnchorInserted = true;
+                }
                 if (!favoritesOnly) {
-                    analysisHTML = `
+                    analysisHTML += `
                     <section class="analysis-section" style="margin-top: 48px;">
                         <h2 class="section-title"><span class="section-icon">💡</span> 考察 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
                         <div class="analysis-grid">
@@ -3758,7 +3879,12 @@
 
 
                 // Ideas Section
-                let ideasHTML = `
+                let ideasHTML = "";
+                if (!ideasAnchorInserted) {
+                    ideasHTML += `<div id="ideasSection" class="jump-anchor"></div>`;
+                    ideasAnchorInserted = true;
+                }
+                ideasHTML += `
                     <section class="ideas-section">
                         <h2 class="section-title"><span class="section-icon">🚀</span> 企画アイデア例 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
                 `;
@@ -3832,6 +3958,18 @@
                 wrapper.innerHTML = analysisHTML + ideasHTML;
                 container.appendChild(wrapper);
             });
+            if (!analysisAnchorInserted) {
+                const anchor = document.createElement("div");
+                anchor.id = "analysisSection";
+                anchor.className = "jump-anchor";
+                container.appendChild(anchor);
+            }
+            if (!ideasAnchorInserted) {
+                const anchor = document.createElement("div");
+                anchor.id = "ideasSection";
+                anchor.className = "jump-anchor";
+                container.appendChild(anchor);
+            }
             wireImageFallbacks(container);
 
             // もっと見るボタン（インサイト用）
