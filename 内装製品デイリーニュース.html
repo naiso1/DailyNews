@@ -2630,6 +2630,7 @@
         let visibleLimit = 30;
 
         let NEW_DATE_RANGE = { start: null, end: null };
+        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-01-22", end: "2026-01-26" };
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
@@ -2693,6 +2694,10 @@
         }
 
         function setNewDateRangeFromNews(data) {
+            if (NEW_DATE_RANGE_OVERRIDE?.start && NEW_DATE_RANGE_OVERRIDE?.end) {
+                NEW_DATE_RANGE = { start: NEW_DATE_RANGE_OVERRIDE.start, end: NEW_DATE_RANGE_OVERRIDE.end };
+                return;
+            }
             const latest = getLatestDate(data);
             if (latest) {
                 NEW_DATE_RANGE = { start: latest, end: latest };
