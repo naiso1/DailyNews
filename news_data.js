@@ -13537,7 +13537,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-19",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13549,7 +13549,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-20",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13561,7 +13561,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-27",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/77a1/12377065/2d470c227ff3/d5ra03748d-ga.jpg",
         note: "",
     },
     {
@@ -13573,7 +13573,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-28",
         tags: ["カスタマイズ"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/febe/12388489/019218f2aa1f/micromachines-16-00940-g001.jpg",
         note: "",
     },
     {
@@ -13585,7 +13585,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-28",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/cdb6/12389532/f57ae533c796/polymers-17-02200-g001.jpg",
         note: "",
     },
     {
@@ -13597,7 +13597,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-28",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/7851/12387702/30392478940f/materials-18-03846-g001.jpg",
         note: "",
     },
     {
@@ -13609,7 +13609,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-08-29",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e8f3/12397395/ae03ac3f5802/41598_2025_17543_Article_IEq1.gif",
         note: "",
     },
     {
@@ -13621,7 +13621,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-02",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13633,7 +13633,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-03",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13645,7 +13645,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-04",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13657,7 +13657,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-08",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13669,7 +13669,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-11",
         tags: ["リサイクル"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13681,7 +13681,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-13",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bb95/12430037/4cb142ddda98/materials-18-04069-g001.jpg",
         note: "",
     },
     {
@@ -13693,7 +13693,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-13",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/f9b7/12429556/cae8b1900dea/materials-18-04042-g001.jpg",
         note: "",
     },
     {
@@ -13705,7 +13705,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-13",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2ad3/12429823/780f4b40c576/materials-18-03930-g001.jpg",
         note: "",
     },
     {
@@ -13717,7 +13717,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-13",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2d44/12431483/42bd7e0e30a2/polymers-17-02314-g001.jpg",
         note: "",
     },
     {
@@ -13729,7 +13729,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-16",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13741,7 +13741,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-22",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13753,7 +13753,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-22",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13765,7 +13765,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-23",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ec8a/12457652/e00f5e278321/d33e169.gif",
         note: "",
     },
     {
@@ -13777,7 +13777,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-24",
         tags: ["音響", "性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13789,7 +13789,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-25",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13801,7 +13801,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-26",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2f9d/12475468/a426cf10f4d9/41598_2025_16863_Article_IEq1.gif",
         note: "",
     },
     {
@@ -13813,7 +13813,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-26",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1487/12467122/839ba125178c/biomimetics-10-00630-g001.jpg",
         note: "",
     },
     {
@@ -13825,7 +13825,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-26",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/55fd/12457447/83b4f08c2375/fmed-12-1601033-g001.jpg",
         note: "",
     },
     {
@@ -13837,7 +13837,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-27",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13849,7 +13849,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-27",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b3a1/12473145/dcd48d1af001/sensors-25-05885-g001.jpg",
         note: "",
     },
     {
@@ -13861,7 +13861,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-27",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/5ed9/12473684/5d8b3cf41a6a/polymers-17-02438-g001.jpg",
         note: "",
     },
     {
@@ -13873,7 +13873,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-09-27",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/a666/12475227/435d6ab806f4/41598_2025_18423_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -13885,7 +13885,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-01",
         tags: ["性能", "安全"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/0543/12489006/361b863dd71f/41598_2025_14937_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -13897,7 +13897,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-02",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13909,7 +13909,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-06",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9e11/12501269/e643cbe9ba07/d33e321.gif",
         note: "",
     },
     {
@@ -13921,7 +13921,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-09",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/eb0e/12511547/303e776310f6/41598_2025_23295_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -13933,7 +13933,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-12",
         tags: ["シート"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -13945,7 +13945,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-13",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/743f/12511979/347a642ca484/lg5c00065_0015.jpg",
         note: "",
     },
     {
@@ -13957,7 +13957,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-14",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/992c/12522744/57b50c0d5a06/12887_2025_6102_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -13969,7 +13969,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-15",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/06fc/12528381/55e27a1fff0e/d33e364.gif",
         note: "",
     },
     {
@@ -13981,7 +13981,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-16",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8bb5/12536183/39cd3c4b24e6/10.1177_00368504251352072-fig1.jpg",
         note: "",
     },
     {
@@ -13993,7 +13993,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-16",
         tags: ["リサイクル"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/3d9c/12526548/3c39dd396fe0/polymers-17-02569-g001.jpg",
         note: "",
     },
     {
@@ -14005,7 +14005,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-16",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/dccc/12525894/e093c0869355/materials-18-04574-g001.jpg",
         note: "",
     },
     {
@@ -14017,7 +14017,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-17",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14029,7 +14029,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-18",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14041,7 +14041,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-22",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14053,7 +14053,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-23",
         tags: ["EV", "軽量化", "性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ede8/12549810/f56731edb5a9/41598_2024_83772_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14065,7 +14065,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-23",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14077,7 +14077,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-28",
         tags: ["リサイクル"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/35b8/12567114/89a50b23118a/polymers-17-02743-g001.jpg",
         note: "",
     },
     {
@@ -14089,7 +14089,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-29",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14101,7 +14101,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-29",
         tags: ["品質"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/f606/12568163/94eb6c021f88/sensors-25-06383-g001.jpg",
         note: "",
     },
     {
@@ -14113,7 +14113,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-10-29",
         tags: ["OS"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2b10/12561695/366390dad3b6/antioxidants-14-01251-g001.jpg",
         note: "",
     },
     {
@@ -14125,7 +14125,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-02",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14137,7 +14137,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-08",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ef88/12595795/15d70b049eaa/BIP-116-e70059-g003.jpg",
         note: "",
     },
     {
@@ -14149,7 +14149,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-10",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/16c3/12590021/bd45fd3260ce/fx1.jpg",
         note: "",
     },
     {
@@ -14161,7 +14161,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-12",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d34b/8636974/5ca59a214245/tunismedv99i2-259-263-image1.jpg",
         note: "",
     },
     {
@@ -14173,7 +14173,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2498/12611045/e72ee78d6290/sensors-25-06778-g001.jpg",
         note: "",
     },
     {
@@ -14185,7 +14185,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["AI", "音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/f804/12610131/10b799c6be5b/sensors-25-06753-g001.jpg",
         note: "",
     },
     {
@@ -14197,7 +14197,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["AI", "安全"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ac1b/12611093/7d5152377396/sensors-25-06670-g001.jpg",
         note: "",
     },
     {
@@ -14209,7 +14209,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/d5bc/12609154/4715adf492cd/sensors-25-06510-g001.jpg",
         note: "",
     },
     {
@@ -14221,7 +14221,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/eebb/12608994/39f7b6c83750/polymers-17-02940-g001.jpg",
         note: "",
     },
     {
@@ -14233,7 +14233,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9e0b/12609052/50aab3a50042/materials-18-05054-g001.jpg",
         note: "",
     },
     {
@@ -14245,7 +14245,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/34ea/12608638/34f008b12238/materials-18-04962-g001.jpg",
         note: "",
     },
     {
@@ -14257,7 +14257,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-13",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8afc/12608217/10619c9353fa/materials-18-04909-g001.jpg",
         note: "",
     },
     {
@@ -14269,7 +14269,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-17",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e666/12622811/1aef6316ef71/pone.0334454.g001.jpg",
         note: "",
     },
     {
@@ -14281,7 +14281,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-17",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/f124/12616061/9fc8785f5e89/gr1.jpg",
         note: "",
     },
     {
@@ -14293,7 +14293,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-18",
         tags: ["軽量化", "音響", "性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/fc96/12627618/f82a073cf9c1/41598_2025_24387_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14305,7 +14305,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-18",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/05b5/12627762/096a7448decb/41598_2025_24370_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14317,7 +14317,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-19",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/5628/12677256/daf9320286eb/NH-27-746-g001.jpg",
         note: "",
     },
     {
@@ -14329,7 +14329,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-19",
         tags: ["自動運転", "性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/a5fa/12629436/8a60a0363c74/pone.0336777.g001.jpg",
         note: "",
     },
     {
@@ -14341,7 +14341,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-19",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14353,7 +14353,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-20",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/7839/12635296/ae4fe098360d/41598_2025_25027_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14365,7 +14365,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-24",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14377,7 +14377,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-24",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/cms/images/pmc-card-share.jpg?_=0",
         note: "",
     },
     {
@@ -14389,7 +14389,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-25",
         tags: ["安全"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/0a05/12647839/54fd032e67e9/41598_2025_25722_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14401,7 +14401,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-25",
         tags: ["品質"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/26c7/12647916/a930f935411b/41598_2025_25883_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14413,7 +14413,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-25",
         tags: ["OS", "性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2e7e/12647138/cadae8d9dfe2/41598_2025_25887_Fig1_HTML.jpg",
         note: "",
     },
     {
@@ -14425,7 +14425,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-25",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9b58/12644627/827295285a95/d33e1127.gif",
         note: "",
     },
     {
@@ -14437,7 +14437,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-25",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/f6b4/12644574/355db155d4f0/d33e631.gif",
         note: "",
     },
     {
@@ -14449,7 +14449,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-26",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/85ee/12655751/84b398726530/nanomaterials-15-01696-g001.jpg",
         note: "",
     },
     {
@@ -14461,7 +14461,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-27",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e67c/12656569/2e53b88bc090/polymers-17-03035-g001.jpg",
         note: "",
     },
     {
@@ -14473,7 +14473,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-27",
         tags: ["インフラ"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/b6cd/12656172/caa7a3a1b55e/polymers-17-02981-g001.jpg",
         note: "",
     },
     {
@@ -14485,7 +14485,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-11-29",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/821e/12663159/1d31bfe62344/d33e318.gif",
         note: "",
     },
     {
@@ -14497,7 +14497,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-04",
         tags: ["安全"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/90bf/12671991/4b42d4e98584/nihms-2123267-f0001.jpg",
         note: "",
     },
     {
@@ -14509,7 +14509,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-08",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14521,7 +14521,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-11",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/3cdc/12694507/55804e0ab350/polymers-17-03114-g001.jpg",
         note: "",
     },
     {
@@ -14533,7 +14533,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-11",
         tags: ["センシング"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/6dc5/12694658/db71b586f898/sensors-25-07395-g001.jpg",
         note: "",
     },
     {
@@ -14545,7 +14545,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-11",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ff4a/12693020/ede98be3243d/materials-18-05390-g001.jpg",
         note: "",
     },
     {
@@ -14557,7 +14557,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-17",
         tags: ["音響", "性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14569,7 +14569,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-18",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14581,7 +14581,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-29",
         tags: ["快適"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/03ff/12747388/61b40b76fb63/pone.0339599.g001.jpg",
         note: "",
     },
     {
@@ -14593,7 +14593,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-31",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/c4a6/12736671/9cc8b8800854/polymers-17-03335-g001.jpg",
         note: "",
     },
     {
@@ -14605,7 +14605,7 @@ window.LOADED_NEWS_DATA = [
         date: "2025-12-31",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9a55/12736921/092d7aa8b18f/polymers-17-03309-g001.jpg",
         note: "",
     },
     {
@@ -14617,7 +14617,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-01",
         tags: ["リサイクル"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2435/12750390/5e37bcb73d22/ao5c08107_0012.jpg",
         note: "",
     },
     {
@@ -14629,7 +14629,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-02",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14641,7 +14641,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-05",
         tags: ["リサイクル"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/52b6/12766866/192b935250e0/CSSC-19-e202502161-g005.jpg",
         note: "",
     },
     {
@@ -14653,7 +14653,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-09",
         tags: ["音響"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14665,7 +14665,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-10",
         tags: ["性能"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e852/12787497/168c5d70a174/polymers-18-00091-g001.jpg",
         note: "",
     },
     {
@@ -14677,7 +14677,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-10",
         tags: ["安全"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1c17/12788222/2f699c0ba25d/sensors-26-00241-g001.jpg",
         note: "",
     },
     {
@@ -14689,7 +14689,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-16",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14701,7 +14701,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-16",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14713,7 +14713,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-24",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: "",
     },
     {
@@ -14725,7 +14725,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-01-26",
         tags: ["トレンド"],
         country: "paper",
-        img: "images/placeholder.png",
+        img: "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/ba63/12824961/8f5eb586a979/ao5c09144_0014.jpg",
         note: "",
     },
     {

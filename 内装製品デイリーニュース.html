@@ -1792,6 +1792,7 @@
                 <div class="ranking-controls">
                     <label class="ranking-sort-label" for="paperRankingScope">期間</label>
                     <select id="paperRankingScope" class="ranking-sort">
+                        <option value="6m">6か月以内</option>
                         <option value="weekly">1週間以内</option>
                         <option value="all">今まで</option>
                     </select>
@@ -1890,8 +1891,28 @@
             }
         }
 
+        const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+        function getJstDateKey(offsetDays = 0) {
+            const target = new Date(Date.now() + JST_OFFSET_MS + offsetDays * 24 * 60 * 60 * 1000);
+            const y = target.getUTCFullYear();
+            const m = String(target.getUTCMonth() + 1).padStart(2, "0");
+            const d = String(target.getUTCDate()).padStart(2, "0");
+            return `${y}-${m}-${d}`;
+        }
+
         function getTodayKey() {
-            return new Date().toISOString().split("T")[0];
+            return getJstDateKey(0);
+        }
+
+        function getYesterdayKey() {
+            return getJstDateKey(-1);
+        }
+
+        function parseDateKeyToUTC(dateKey) {
+            if (!dateKey) return null;
+            const parts = dateKey.split("-").map(Number);
+            if (parts.length < 3 || !parts[0]) return null;
+            return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
         }
 
         function hasCountedAccessToday() {
@@ -1931,10 +1952,9 @@
             data.daily = data.daily || {};
             data.daily[today] = (data.daily[today] || 0) + 1;
 
-            const cutoff = new Date();
-            cutoff.setDate(cutoff.getDate() - 30);
+            const cutoffKey = getJstDateKey(-30);
             Object.keys(data.daily).forEach(date => {
-                if (new Date(date) < cutoff) delete data.daily[date];
+                if (date < cutoffKey) delete data.daily[date];
             });
 
             saveLocalAccessStats(data);
@@ -1944,9 +1964,7 @@
 
         function renderAccessStats(data) {
             const today = getTodayKey();
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            const yesterdayKey = yesterday.toISOString().split("T")[0];
+            const yesterdayKey = getYesterdayKey();
             document.getElementById("totalVisits").textContent = (data.total || 0).toLocaleString();
             document.getElementById("todayVisits").textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
             document.getElementById("yesterdayVisits").textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
@@ -1960,16 +1978,19 @@
             const keys = Object.keys(daily);
             if (!keys.length) return [];
             const dates = keys
-                .map(key => new Date(`${key}T00:00:00`))
-                .filter(d => !Number.isNaN(d.getTime()));
+                .map(key => parseDateKeyToUTC(key))
+                .filter(d => d && !Number.isNaN(d.getTime()));
             if (!dates.length) return [];
             const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
             const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
             const series = [];
-            for (let d = new Date(minDate); d <= maxDate; d.setDate(d.getDate() + 1)) {
-                const key = d.toISOString().split("T")[0];
-                const label = `${d.getMonth() + 1}/${d.getDate()}`;
-                const dow = ["日", "月", "火", "水", "木", "金", "土"][d.getDay()];
+            for (let d = new Date(minDate); d <= maxDate; d.setUTCDate(d.getUTCDate() + 1)) {
+                const y = d.getUTCFullYear();
+                const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+                const day = String(d.getUTCDate()).padStart(2, "0");
+                const key = `${y}-${m}-${day}`;
+                const label = `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
+                const dow = ["日", "月", "火", "水", "木", "金", "土"][d.getUTCDay()];
                 series.push({ key, label, dow, value: daily[key] || 0 });
             }
             return series;
@@ -2075,7 +2096,7 @@
 
         async function trackArticleRead(itemId) {
             if (!itemId) return;
-            const today = new Date().toISOString().split("T")[0];
+            const today = getTodayKey();
             if (hasReadToday(itemId, today)) return;
             markReadToday(itemId, today);
 
@@ -2113,7 +2134,7 @@
 
         function startHoverRead(itemId) {
             if (!itemId) return;
-            const today = new Date().toISOString().split("T")[0];
+            const today = getTodayKey();
             if (hasReadToday(itemId, today)) return;
             if (hoverReadTimers.has(itemId)) return;
             const timer = setTimeout(() => {
@@ -2898,9 +2919,9 @@
         function getRankingEmptyMessage(scope, key) {
             const labelMap = { score: "総合", reads: "閲覧", likes: "いいね", comments: "コメント" };
             const label = labelMap[key] || "閲覧";
-            return scope === "weekly"
-                ? `1週間以内の${label}がまだありません。`
-                : `${label}がまだありません。`;
+            if (scope === "weekly") return `1週間以内の${label}がまだありません。`;
+            if (scope === "6m") return `6か月以内の${label}がまだありません。`;
+            return `${label}がまだありません。`;
         }
 
         function renderRanking() {
@@ -2976,9 +2997,9 @@
             const interactions = window.interactionsData || {};
             const sortKey = getPaperRankingSortKey();
             const scope = getPaperRankingScopeValue();
-            const latest = getLatestDate(NEWS_DATA);
-
             const papers = NEWS_DATA.filter(item => item.country === "paper");
+            const latest = getLatestDate(papers);
+
             if (scope === "weekly" && !latest) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
                 updateRankingHeight(body, list);
@@ -2996,10 +3017,14 @@
                 return { ...item, likes, comments, reads, score };
             });
 
-            if (scope === "weekly" && latest) {
+            if ((scope === "weekly" || scope === "6m") && latest) {
                 const endDate = new Date(`${latest}T00:00:00`);
                 const startDate = new Date(endDate);
-                startDate.setDate(startDate.getDate() - 6);
+                if (scope === "6m") {
+                    startDate.setMonth(startDate.getMonth() - 6);
+                } else {
+                    startDate.setDate(startDate.getDate() - 6);
+                }
                 ranked = ranked.filter(item => {
                     if (!item.date) return false;
                     const d = new Date(`${item.date}T00:00:00`);
@@ -3146,10 +3171,11 @@
 
         function updateRankingVisibility() {
             const wrapper = document.getElementById("rankingWrapper");
-            if (wrapper) wrapper.classList.toggle("hidden", favoritesOnly);
             const paperWrapper = document.getElementById("paperRankingWrapper");
-            if (paperWrapper) paperWrapper.classList.toggle("hidden", favoritesOnly);
-            setRankingBackVisibility(Boolean(rankingBackState));
+            const paperActive = activeCountries.has("paper");
+            if (wrapper) wrapper.classList.toggle("hidden", favoritesOnly || paperActive);
+            if (paperWrapper) paperWrapper.classList.toggle("hidden", favoritesOnly || !paperActive);
+            setRankingBackVisibility(Boolean(rankingBackState) && !paperActive);
         }
 
         function updateFavoritesActionsState() {
@@ -3259,7 +3285,7 @@
             const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+            const stamp = getTodayKey().replace(/-/g, "");
             link.download = `favorites_${stamp}.csv`;
             document.body.appendChild(link);
             link.click();
@@ -3336,7 +3362,7 @@
             const blob = new Blob([eml], { type: "message/rfc822" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+            const stamp = getTodayKey().replace(/-/g, "");
             link.download = `favorites_${stamp}.eml`;
             document.body.appendChild(link);
             link.click();
@@ -3496,7 +3522,7 @@
                 const latestDate = getLatestDate(NEWS_DATA);
                 const dateToInput = document.getElementById("dateTo");
                 if (!params.has("to")) {
-                    dateToInput.value = latestDate || new Date().toISOString().split("T")[0];
+                    dateToInput.value = latestDate || getTodayKey();
                 }
 
                 if (params.has("countries")) {
