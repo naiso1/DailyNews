@@ -316,6 +316,17 @@
             background-position: center;
         }
 
+        .paper-icon {
+            width: 24px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 6px;
+            font-size: 14px;
+            line-height: 1;
+        }
+
         .flag-jp {
             background-image: url('images/icon_jp.png');
         }
@@ -1683,6 +1694,8 @@
                         class="new-count" data-country="us"></span></span>
                 <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州<span
                         class="new-count" data-country="eu"></span></span>
+                <span class="chip country-paper" data-country="paper"><span class="paper-icon">📄</span>論文<span
+                        class="new-count" data-country="paper"></span></span>
             </div>
         </div>
         <div class="filter-row">
@@ -1710,7 +1723,7 @@
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
                 <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
                 <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
-                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド→米国→欧州）</option>
+                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド→米国→欧州→論文）</option>
                 <option value="likes-desc" style="background: #1e222d; color: #fff;">いいね順</option>
                 <option value="comments-desc" style="background: #1e222d; color: #fff;">コメント数順</option>
             </select>
@@ -1766,6 +1779,35 @@
             </div>
             <div class="ranking-body collapsed" id="rankingBody">
                 <div class="ranking-list" id="rankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="ranking-wrapper" id="paperRankingWrapper">
+        <section class="ranking-section" id="paperRankingSection">
+            <div class="ranking-header">
+                <div class="ranking-title">📚 人気論文ランキング</div>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="paperRankingScope">期間</label>
+                    <select id="paperRankingScope" class="ranking-sort">
+                        <option value="weekly">1週間以内</option>
+                        <option value="all">今まで</option>
+                    </select>
+                    <label class="ranking-sort-label" for="paperRankingSort">並び替え</label>
+                    <select id="paperRankingSort" class="ranking-sort">
+                        <option value="score">総合</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                        <option value="reads">閲覧数</option>
+                    </select>
+                    <button class="chip ranking-toggle" id="paperRankingToggle" type="button"
+                        aria-expanded="false">開く</button>
+                </div>
+            </div>
+            <div class="ranking-body collapsed" id="paperRankingBody">
+                <div class="ranking-list" id="paperRankingList">
                     <div class="ranking-empty">ランキングを計算中...</div>
                 </div>
             </div>
@@ -2041,7 +2083,7 @@
                 const local = getLocalInteractionData(itemId);
                 setLocalInteractionData(itemId, local);
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-                renderRanking();
+                scheduleRankingUpdate();
                 return;
             }
             try {
@@ -2121,7 +2163,7 @@
                 };
             });
             if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-            renderRanking();
+            renderAllRankings();
         }
 
         async function loadInteractions() {
@@ -2140,7 +2182,7 @@
                     };
                 });
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
-                renderRanking();
+                renderAllRankings();
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
             } catch (e) {
                 console.error("Failed to load interactions:", e);
@@ -2630,7 +2672,7 @@
         let visibleLimit = 30;
 
         let NEW_DATE_RANGE = { start: null, end: null };
-        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-01-22", end: "2026-01-26" };
+        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-01-27", end: "2026-01-27" };
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
@@ -2652,7 +2694,7 @@
         }
 
         function getNewCounts(data) {
-            const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0 };
+            const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0, paper: 0 };
             if (!data) return counts;
             data.forEach(item => {
                 if (!isNewContent(item)) return;
@@ -2801,7 +2843,7 @@
         function scheduleRankingUpdate() {
             if (rankingUpdateTimer) clearTimeout(rankingUpdateTimer);
             rankingUpdateTimer = setTimeout(() => {
-                renderRanking();
+                renderAllRankings();
             }, 150);
         }
 
@@ -2812,6 +2854,16 @@
 
         function getRankingSortKey() {
             const select = document.getElementById("rankingSort");
+            return select ? select.value : "score";
+        }
+
+        function getPaperRankingScopeValue() {
+            const select = document.getElementById("paperRankingScope");
+            return select ? select.value : "weekly";
+        }
+
+        function getPaperRankingSortKey() {
+            const select = document.getElementById("paperRankingSort");
             return select ? select.value : "score";
         }
 
@@ -2866,7 +2918,74 @@
                 return;
             }
 
-            let ranked = filterRankingByCountry(NEWS_DATA).map(item => {
+            let ranked = filterRankingByCountry(NEWS_DATA.filter(item => item.country !== "paper")).map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                const score = likes * 3 + comments * 2 + reads;
+                return { ...item, likes, comments, reads, score };
+            });
+
+            if (scope === "weekly" && latest) {
+                const endDate = new Date(`${latest}T00:00:00`);
+                const startDate = new Date(endDate);
+                startDate.setDate(startDate.getDate() - 6);
+                ranked = ranked.filter(item => {
+                    if (!item.date) return false;
+                    const d = new Date(`${item.date}T00:00:00`);
+                    return d >= startDate && d <= endDate;
+                });
+            }
+
+            ranked.sort((a, b) => compareRankingItems(a, b, sortKey));
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage(scope, sortKey)}</div>`;
+                updateRankingHeight(body, list);
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
+                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
+                            <span>👍</span> <span class="count">${item.likes}</span>
+                        </button>
+                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
+                            <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+            updateRankingHeight(body, list);
+        }
+
+        function renderPaperRanking() {
+            const list = document.getElementById("paperRankingList");
+            const body = document.getElementById("paperRankingBody");
+            if (!list || !body) return;
+            const interactions = window.interactionsData || {};
+            const sortKey = getPaperRankingSortKey();
+            const scope = getPaperRankingScopeValue();
+            const latest = getLatestDate(NEWS_DATA);
+
+            const papers = NEWS_DATA.filter(item => item.country === "paper");
+            if (scope === "weekly" && !latest) {
+                list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                updateRankingHeight(body, list);
+                return;
+            }
+
+            let ranked = papers.map(item => {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
@@ -2918,11 +3037,16 @@
         }
 
         function renderWeeklyRanking() {
-            renderRanking();
+            renderAllRankings();
         }
 
         function renderAllTimeRanking() {
+            renderAllRankings();
+        }
+
+        function renderAllRankings() {
             renderRanking();
+            renderPaperRanking();
         }
         const ALL_TAGS = [
             "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
@@ -2936,16 +3060,18 @@
             cn: "<span class='flag-icon flag-cn'></span>",
             in: "<span class='flag-icon flag-in'></span>",
             us: "<span class='flag-icon flag-us'></span>",
-            eu: "<span class='flag-icon flag-eu'></span>"
+            eu: "<span class='flag-icon flag-eu'></span>",
+            paper: "<span class='paper-icon'>📄</span>"
         };
-        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州" };
+        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
         const TITLE_ICONS = {
             world: "images/icon_world.png",
             jp: "images/icon_jp.png",
             cn: "images/icon_cn.png",
             in: "images/icon_in.png",
             us: "images/icon_us.png",
-            eu: "images/icon_eu.png"
+            eu: "images/icon_eu.png",
+            paper: "images/icon_world.png"
         };
 
         // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
@@ -3021,6 +3147,8 @@
         function updateRankingVisibility() {
             const wrapper = document.getElementById("rankingWrapper");
             if (wrapper) wrapper.classList.toggle("hidden", favoritesOnly);
+            const paperWrapper = document.getElementById("paperRankingWrapper");
+            if (paperWrapper) paperWrapper.classList.toggle("hidden", favoritesOnly);
             setRankingBackVisibility(Boolean(rankingBackState));
         }
 
@@ -3338,7 +3466,7 @@
                     updateUpdatedAt();
                     // 初期ランキング描画（interactionsデータなし）
                     // loadInteractions完了後に再描画される
-                    renderRanking();
+                    renderAllRankings();
                 } else {
                     console.error("News data not loaded from JS file");
                 }
@@ -3458,10 +3586,15 @@
                 if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
                 if (window.initFirebase) window.initFirebase();
                 setupRankingToggle("rankingToggle", "rankingBody", "rankingList");
+                setupRankingToggle("paperRankingToggle", "paperRankingBody", "paperRankingList");
                 const rankingSort = document.getElementById("rankingSort");
-                if (rankingSort) rankingSort.addEventListener("change", renderRanking);
+                if (rankingSort) rankingSort.addEventListener("change", renderAllRankings);
                 const rankingScope = document.getElementById("rankingScope");
-                if (rankingScope) rankingScope.addEventListener("change", renderRanking);
+                if (rankingScope) rankingScope.addEventListener("change", renderAllRankings);
+                const paperRankingSort = document.getElementById("paperRankingSort");
+                if (paperRankingSort) paperRankingSort.addEventListener("change", renderPaperRanking);
+                const paperRankingScope = document.getElementById("paperRankingScope");
+                if (paperRankingScope) paperRankingScope.addEventListener("change", renderPaperRanking);
             } catch (e) {
                 console.error("Init failed:", e);
             }
@@ -3570,7 +3703,7 @@
             }
 
             // 2. Sort
-            const countryOrder = { jp: 0, cn: 1, in: 2, us: 3, eu: 4 };
+            const countryOrder = { jp: 0, cn: 1, in: 2, us: 3, eu: 4, paper: 5 };
             const interactions = window.interactionsData || {};
             filteredData.sort((a, b) => {
                 if (sortOrder === "date-asc") {
