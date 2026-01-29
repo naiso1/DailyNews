@@ -21,50 +21,50 @@ IMAGES_DIR.mkdir(exist_ok=True)
 
 # 2026-01-19のアイデア画像リスト
 IDEAS = [
-    # 日本 (2026-01-27)
+    # 日本 (2026-01-28)
     {
-        "name": "jp_digital_mirror_0127",
-        "prompt": "Automotive interior concept: digital inner mirror vision assist UI. Rearview mirror display showing 3-camera split view for blind spots, with safety overlays highlighting pedestrians or vehicles in rainy night conditions. Advanced safety feature for Japanese minivans. High-tech visibility assistance. Photorealistic 3D render, UI visualization, 8k quality."
+        "name": "jp_ambient_shadow_0128",
+        "prompt": "Automotive interior concept: shadow ambient lighting with thermal insulation panel. Car door panel showing soft indirect lighting casting artistic shadows on textured insulation material. Nighttime scene in a Japanese camping car or minivan. Comfort and atmosphere integration. Photorealistic 3D render, interior lighting visualization, 8k quality."
     },
     {
-        "name": "jp_smart_console_0127",
-        "prompt": "Automotive interior concept: large center console organizer booster. Aftermarket module fitting into existing console, adding adjustable dividers, wireless charging pad, and LED lighting. Tidy and organized car interior. Practical accessory for family cars. Photorealistic 3D render, product visualization, 8k quality."
+        "name": "jp_vegan_seatcover_0128",
+        "prompt": "Automotive interior concept: high-quality vegan leather seat cover kit. Custom-fit seat covers installed on a standard car seat, transforming it into a premium leather-like finish. Split view showing before and after installation. Sustainable and stylish upgrade for Japanese compact cars. Photorealistic 3D render, product visualization, 8k quality."
     },
-    # 中国 (2026-01-27)
+    # 中国 (2026-01-28)
     {
-        "name": "cn_waveguide_hud_0127",
-        "prompt": "Automotive interior concept: waveguide HUD navigation UI. Large clear holographic display on windshield showing AR navigation arrows and ADAS warnings directly on the road view. Seamless integration of information and reality. Driver's perspective in a premium Chinese EV. Photorealistic 3D render, HUD technology visualization, 8k quality."
-    },
-    {
-        "name": "cn_material_trace_0127",
-        "prompt": "Automotive interior concept: interior material traceability display panel. Dashboard screen showing the origin, sustainability score, and supply chain info of the leather and fabric used in the cabin. Quality assurance visualization for premium Chinese market. Transparent luxury. Photorealistic 3D render, UI design visualization, 8k quality."
-    },
-    # インド (2026-01-27)
-    {
-        "name": "in_suv_upgrade_0127",
-        "prompt": "Automotive interior concept: unified SUV tech package UI. Central touchscreen interface controlling ADAS settings, climate, and ambient lighting in one simple menu. Tech upgrade for Indian SUVs like Hyryder. User-friendly digital cockpit. Photorealistic 3D render, UI visualization, 8k quality."
+        "name": "cn_aeb_lcv_ui_0128",
+        "prompt": "Automotive interior concept: AEB guide UI for commercial vehicles. Dashboard of a Chinese light commercial van showing clear, simple graphics explaining Automatic Emergency Braking activation and warning zones. Safety feature education for professional drivers. Practical and high-visibility interface. Photorealistic 3D render, UI design visualization, 8k quality."
     },
     {
-        "name": "in_family_cabin_0127",
-        "prompt": "Automotive interior concept: 3-row SUV rear seat comfort kit. Third-row seating area equipped with extra USB ports, reading lights, and cup holders. Enhanced comfort for large Indian families in cars like Scorpio N. Practical interior upgrade. Photorealistic 3D render, interior feature visualization, 8k quality."
+        "name": "cn_ev_infra_panel_0128",
+        "prompt": "Automotive interior concept: EV charging infrastructure visualization panel. Large central screen displaying a density map of available charging stations and real-time vacancy status. Route planning interface minimizing charging anxiety. Modern Chinese EV smart cockpit. Photorealistic 3D render, infotainment UI visualization, 8k quality."
     },
-    # 米国 (2026-01-27)
+    # インド (2026-01-28)
     {
-        "name": "us_screen_balance_0127",
-        "prompt": "Automotive interior concept: balanced screen size proposal for American trucks. Interior featuring a medium-sized functional touchscreen flanked by large physical knobs and buttons for easy operation with gloves. Hybrid interface design prioritizing usability over screen size. Rugged American pick-up truck dashboard. Photorealistic 3D render, interior design visualization, 8k quality."
-    },
-    {
-        "name": "us_biobased_trim_0127",
-        "prompt": "Automotive interior concept: bio-based sustainable interior trim. Door panel and dashboard featuring textured plant-based materials and recycled fabrics. Natural aesthetic with premium feel. Eco-friendly American luxury car interior. Photorealistic 3D render, material texture visualization, 8k quality."
-    },
-    # 欧州 (2026-01-27)
-    {
-        "name": "eu_reliability_ui_0127",
-        "prompt": "Automotive interior concept: vehicle health and reliability notification UI. Dashboard display alerting early signs of key battery low or system anomalies before failure. Peace of mind interface for European drivers. Proactive maintenance visualization. Photorealistic 3D render, UI design visualization, 8k quality."
+        "name": "in_big_screen_pack_0128",
+        "prompt": "Automotive interior concept: affordable big screen operational package for Indian SUVs. 10-inch touchscreen integrated combined with large, easy-to-use physical buttons and dials for climate and volume. Robust design for mass-market Indian SUVs. Durability and usability focus. Photorealistic 3D render, interior design visualization, 8k quality."
     },
     {
-        "name": "eu_lease_value_0127",
-        "prompt": "Automotive interior concept: lease value protection interior care guide. Infotainment screen showing guide for maintaining seat leather and trim to preserve resale value. Smart maintenance reminders for leaseholders. Practical European car ownership feature. Photorealistic 3D render, UI visualization, 8k quality."
+        "name": "in_smart_cockpit_ai_0128",
+        "prompt": "Automotive interior concept: AI cockpit experience mode selector. Dashboard UI showing \"Experience Modes\" powered by NVIDIA AI, coordinating ADAS, climate, and audio settings for specific scenes like \"City Drive\" or \"Highway Relax\". Advanced technology perception for Indian market. Photorealistic 3D render, digital cockpit visualization, 8k quality."
+    },
+    # 米国 (2026-01-28)
+    {
+        "name": "us_button_return_0128",
+        "prompt": "Automotive interior concept: dedicated physical button add-on kit. Aftermarket control panel fitting over a section of the touchscreen or console, adding tactile buttons for volume, AC, and shortcuts. \"Tactile Return\" concept for drivers who prefer physical feedback. High-quality metal and rubber finish. Photorealistic 3D render, accessory visualization, 8k quality."
+    },
+    {
+        "name": "us_bio_leather_trim_0128",
+        "prompt": "Automotive interior concept: bio-leather interior trim proposal. Close-up of car dashboard and door trim made from spider silk or mushroom-based leather. Natural texture and premium finish. Sustainable luxury material for American market. Photorealistic 3D render, material texture visualization, 8k quality."
+    },
+    # 欧州 (2026-01-28)
+    {
+        "name": "eu_robotaxi_ui_0128",
+        "prompt": "Automotive interior concept: robotaxi passenger guidance UI. Interior screen in an autonomous shuttle showing clear welcome message, route progress, and emergency contact button. Reassuring and simple interface for first-time robotaxi users in Europe. Clean and friendly design. Photorealistic 3D render, UX design visualization, 8k quality."
+    },
+    {
+        "name": "eu_sustainable_interior_0128",
+        "prompt": "Automotive interior concept: sustainable material digital label. Interior trim piece with an embedded digital tag or QR code displaying the plant-based origin and recycling info of the material. \"Eco-Passport\" concept for European vehicles. Green driving value visualization. Photorealistic 3D render, detail visualization, 8k quality."
     }
 ]
 
@@ -135,6 +135,14 @@ def main():
         prompt_text = idea["prompt"]
         print(f"\n[{idx}/{len(IDEAS)}] {name}")
         print(f"Prompt: {prompt_text[:60]}...")
+
+        dest_filename = f"{name}.png"
+        dest_path = IMAGES_DIR / dest_filename
+        
+        if dest_path.exists():
+            print(f" [SKIP] File exists: {dest_path}")
+            success_count += 1
+            continue
 
         # Deep copy
         current_workflow = json.loads(json.dumps(base_prompt))
