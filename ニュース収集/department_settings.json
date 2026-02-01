@@ -1,0 +1,583 @@
+{
+  "interior": {
+    "rss_feeds": [
+      {
+        "name": "\u30ec\u30b9\u30dd\u30f3\u30b9",
+        "url": "https://news.yahoo.co.jp/rss/media/rps/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "carview!",
+        "url": "https://news.yahoo.co.jp/rss/media/carv/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "MotorFan",
+        "url": "https://news.yahoo.co.jp/rss/media/motorfan/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "WEB CARTOP",
+        "url": "https://news.yahoo.co.jp/rss/media/wcartop/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "webCG",
+        "url": "https://news.yahoo.co.jp/rss/media/webcg/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "Auto Messe Web",
+        "url": "https://news.yahoo.co.jp/rss/media/amweb/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "VAGUE",
+        "url": "https://news.yahoo.co.jp/rss/media/vague/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "\u30d9\u30b9\u30c8\u30ab\u30fcWeb",
+        "url": "https://news.yahoo.co.jp/rss/media/bestcar/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "\u304f\u308b\u307e\u306e\u30cb\u30e5\u30fc\u30b9",
+        "url": "https://news.yahoo.co.jp/rss/media/kurumans/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "\u65e5\u520a\u81ea\u52d5\u8eca\u65b0\u805e",
+        "url": "https://news.yahoo.co.jp/rss/media/netdenjd/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "THE EV TIMES",
+        "url": "https://news.yahoo.co.jp/rss/media/evtimes/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "AUTOCAR JAPAN",
+        "url": "https://news.yahoo.co.jp/rss/media/autocar/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "AUTO BILD JAPAN Web",
+        "url": "https://news.yahoo.co.jp/rss/media/autobild/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "\u30c9\u30e9\u30a4\u30d0\u30fcWeb",
+        "url": "https://news.yahoo.co.jp/rss/media/driverweb/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "MONOist",
+        "url": "https://news.yahoo.co.jp/rss/media/it_monoist/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "EE Times Japan",
+        "url": "https://news.yahoo.co.jp/rss/media/it_eetimes/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "TechTarget\u30b8\u30e3\u30d1\u30f3",
+        "url": "https://news.yahoo.co.jp/rss/media/zdn_tt/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "ZDNET Japan",
+        "url": "https://news.yahoo.co.jp/rss/media/zdnet/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "CNET Japan",
+        "url": "https://news.yahoo.co.jp/rss/media/cnetj/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "Impress Watch",
+        "url": "https://news.yahoo.co.jp/rss/media/impress/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "ScanNetSecurity",
+        "url": "https://news.yahoo.co.jp/rss/media/scan/all.xml",
+        "country": "\u65e5\u672c"
+      },
+      {
+        "name": "The Drive",
+        "url": "https://www.thedrive.com/rss/all",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "Motor1",
+        "url": "https://www.motor1.com/rss/news/all/",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "CarScoops",
+        "url": "https://www.carscoops.com/feed/",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "Jalopnik",
+        "url": "https://jalopnik.com/rss",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "Car and Driver",
+        "url": "https://www.caranddriver.com/rss/all.xml/",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "The Car Connection",
+        "url": "https://feeds.highgearmedia.com/?sites=TheCarConnection&type=all",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "The Truth About Cars",
+        "url": "https://www.thetruthaboutcars.com/rss/feed/all",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "The Torque Report",
+        "url": "https://www.thetorquereport.com/feed",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "Top Speed",
+        "url": "https://www.topspeed.com/feed",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "CarComplaints",
+        "url": "https://www.carcomplaints.com/news/feed.xml",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "NVIDIA Blog - Auto",
+        "url": "https://blogs.nvidia.com/blog/category/auto/feed/",
+        "country": "\u7c73\u56fd"
+      },
+      {
+        "name": "AUTOCAR UK",
+        "url": "https://www.autocar.co.uk/rss",
+        "country": "\u6b27\u5dde"
+      },
+      {
+        "name": "Auto Express",
+        "url": "https://www.autoexpress.co.uk/feed/all",
+        "country": "\u6b27\u5dde"
+      },
+      {
+        "name": "Autocar Reviews",
+        "url": "https://www.autocar.co.uk/rss/reviews",
+        "country": "\u6b27\u5dde"
+      },
+      {
+        "name": "Auto Express Car News",
+        "url": "https://www.autoexpress.co.uk/car-news/feed",
+        "country": "\u6b27\u5dde"
+      },
+      {
+        "name": "Autohome (CN)",
+        "url": "https://www.autohome.com.cn/rss/news.xml",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "PCauto (CN)",
+        "url": "https://www.pcauto.com.cn/rss/news.xml",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CarNewsChina - All",
+        "url": "https://carnewschina.com/feed/",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CarNewsChina - EV",
+        "url": "https://carnewschina.com/category/electric-vehicles/feed/",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CarNewsChina - ICE",
+        "url": "https://carnewschina.com/category/internal-combustion-engine-vehicles/feed/",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CnEVPost - All",
+        "url": "https://cnevpost.com/feed/",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CnEVPost - Huawei",
+        "url": "https://cnevpost.com/huawei/feed",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CnEVPost - Xiaomi",
+        "url": "https://cnevpost.com/xiaomi/feed",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CnEVPost - Self-driving",
+        "url": "https://cnevpost.com/self-driving/feed",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CnEVPost - Industry",
+        "url": "https://cnevpost.com/industry/feed",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "CnEVPost - Policy",
+        "url": "https://cnevpost.com/policy/feed",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Inside China Auto - All",
+        "url": "https://insidechinaauto.com/feed",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 107",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=107",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 108",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=108",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 109",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=109",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 110",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=110",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 409",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=409",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 601",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=601",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 501",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=501",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 103",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=103",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 901",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=901",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "Gasgoo CN - Class 112",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=112",
+        "country": "\u4e2d\u56fd"
+      },
+      {
+        "name": "ETAuto - Auto Components",
+        "url": "https://auto.economictimes.indiatimes.com/rss/auto-components",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "ETAuto - Auto Technology",
+        "url": "https://auto.economictimes.indiatimes.com/rss/auto-technology",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "Autocar India - All",
+        "url": "https://www.autocarindia.com/rss/all",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "RushLane",
+        "url": "https://www.rushlane.com/feed",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "GaadiWaadi",
+        "url": "https://gaadiwaadi.com/feed",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "IndiaCarNews",
+        "url": "https://www.indiacarnews.com/news/feed",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "Car Blog India",
+        "url": "https://www.carblogindia.com/feed",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "Auto Punditz",
+        "url": "https://www.autopunditz.com/blog-feed.xml",
+        "country": "\u30a4\u30f3\u30c9"
+      },
+      {
+        "name": "PubMed - Search",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/rss/search/1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF/?limit=100&utm_campaign=pubmed-2&fc=20260127232539",
+        "country": "\u8ad6\u6587"
+      }
+    ],
+    "country_settings": {
+      "\u65e5\u672c": {
+        "lang": "ja",
+        "bing_market": "ja-JP",
+        "keywords": [
+          "\u81ea\u52d5\u8eca \u5185\u88c5 \u958b\u767a",
+          "\u8eca \u30bb\u30f3\u30bf\u30fc\u30b3\u30f3\u30bd\u30fc\u30eb",
+          "\u81ea\u52d5\u8eca \u30a4\u30f3\u30d1\u30cd",
+          "\u81ea\u52d5\u8eca \u5185\u88c5 \u52a0\u98fe",
+          "\u81ea\u52d5\u8eca \u5185\u88c5 \u65b0\u7d20\u6750",
+          "\u8eca \u5185\u88c5 \u30a4\u30eb\u30df\u30cd\u30fc\u30b7\u30e7\u30f3",
+          "\u81ea\u52d5\u8eca HMI",
+          "\u81ea\u52d5\u8eca \u30b3\u30c3\u30af\u30d4\u30c3\u30c8",
+          "\u8eca\u5185 \u30c7\u30a3\u30b9\u30d7\u30ec\u30a4",
+          "\u81ea\u52d5\u8eca \u30b7\u30fc\u30c8 \u958b\u767a",
+          "\u8eca \u30b9\u30c6\u30a2\u30ea\u30f3\u30b0",
+          "\u81ea\u52d5\u8eca \u30e1\u30fc\u30bf\u30fc",
+          "\u8eca \u30a2\u30f3\u30d3\u30a8\u30f3\u30c8\u30e9\u30a4\u30c8",
+          "\u81ea\u52d5\u8eca \u30c9\u30a2\u30c8\u30ea\u30e0",
+          "\u8eca \u30a4\u30f3\u30b9\u30c8\u30eb\u30e1\u30f3\u30c8\u30d1\u30cd\u30eb",
+          "\u81ea\u52d5\u8eca \u30ef\u30a4\u30e4\u30ec\u30b9\u5145\u96fb",
+          "\u8eca \u71b1\u30de\u30cd\u30b8\u30e1\u30f3\u30c8",
+          "\u81ea\u52d5\u8eca \u30bb\u30f3\u30b7\u30f3\u30b0"
+        ]
+      },
+      "\u7c73\u56fd": {
+        "lang": "en",
+        "bing_market": "en-US",
+        "keywords": [
+          "Automotive Interior Development",
+          "Car Center Console Design",
+          "Automotive Dashboard Innovation",
+          "Vehicle Instrument Panel",
+          "Automotive Interior Trim Materials",
+          "Car Interior Lighting System",
+          "Automotive HMI Technology",
+          "Vehicle Cockpit Design",
+          "Automotive Seat Technology",
+          "Car Wireless Charging System",
+          "Automotive Display Screen",
+          "Vehicle Interior Design Trends",
+          "Automotive Ambient Lighting",
+          "Car Steering Wheel Technology",
+          "Automotive Door Panel Design",
+          "Vehicle Climate Control Interior",
+          "Automotive Infotainment System",
+          "Car Interior Sensor Technology"
+        ]
+      },
+      "\u6b27\u5dde": {
+        "lang": "en",
+        "bing_market": "en-GB",
+        "keywords": [
+          "Automotive Interior Europe",
+          "Car Interior Design Germany",
+          "Vehicle Cockpit Technology Europe",
+          "Automotive HMI Europe",
+          "Car Interior Innovation Europe",
+          "Automotive Seat Design Europe",
+          "Vehicle Dashboard Europe",
+          "Car Console Technology Europe",
+          "Automotive Interior Trim Europe",
+          "Vehicle Lighting System Europe",
+          "Automotive Display Europe",
+          "Car Interior Materials Europe",
+          "Vehicle Climate Control Europe",
+          "Automotive Infotainment Europe",
+          "Car Steering Technology Europe",
+          "Automotive Interior Sensor Europe"
+        ]
+      },
+      "\u4e2d\u56fd": {
+        "lang": "zh",
+        "bing_market": "zh-CN",
+        "keywords": [
+          "\u6c7d\u8f66 \u5185\u9970 \u5f00\u53d1",
+          "\u6c7d\u8f66 \u4e2d\u63a7\u53f0 \u8bbe\u8ba1",
+          "\u6c7d\u8f66 \u4eea\u8868\u76d8 \u521b\u65b0",
+          "\u6c7d\u8f66 \u5185\u9970 \u88c5\u9970 \u6750\u6599",
+          "\u6c7d\u8f66 \u5185\u9970 \u65b0\u6750\u6599",
+          "\u6c7d\u8f66 \u6c1b\u56f4\u706f",
+          "\u6c7d\u8f66 HMI \u7cfb\u7edf",
+          "\u6c7d\u8f66 \u667a\u80fd\u5ea7\u8231",
+          "\u6c7d\u8f66 \u663e\u793a\u5c4f",
+          "\u6c7d\u8f66 \u65e0\u7ebf\u5145\u7535",
+          "\u6c7d\u8f66 \u95e8\u677f \u8bbe\u8ba1",
+          "\u6c7d\u8f66 \u7a7a\u8c03 \u5185\u9970",
+          "\u6c7d\u8f66 \u4fe1\u606f\u5a31\u4e50 \u7cfb\u7edf",
+          "\u6c7d\u8f66 \u5185\u9970 \u4f20\u611f\u5668",
+          "\u6c7d\u8f66 \u5185\u9970 \u7167\u660e",
+          "\u6c7d\u8f66 \u89e6\u63a7\u5c4f"
+        ]
+      },
+      "\u30a4\u30f3\u30c9": {
+        "lang": "en",
+        "bing_market": "en-IN",
+        "keywords": [
+          "Automotive Interior India",
+          "Car Interior Design India",
+          "Vehicle Dashboard India",
+          "Automotive Seat Manufacturer India",
+          "Car Interior Technology India",
+          "Automotive HMI India",
+          "Vehicle Cockpit India",
+          "Car Console Design India",
+          "Automotive Interior Trim India",
+          "Car Display System India",
+          "Vehicle Interior Lighting India",
+          "Automotive Infotainment India",
+          "Car Steering Wheel India",
+          "Automotive Interior Materials India",
+          "Vehicle Climate Control India",
+          "Car Interior Innovation India"
+        ]
+      }
+    },
+    "keywords": [
+      "\u5185\u88c5",
+      "\u8eca\u5ba4",
+      "\u30b3\u30c3\u30af\u30d4\u30c3\u30c8",
+      "\u30a4\u30f3\u30d1\u30cd",
+      "\u30c9\u30a2\u30c8\u30ea\u30e0",
+      "\u30bb\u30f3\u30bf\u30fc\u30b3\u30f3\u30bd\u30fc\u30eb",
+      "\u30b7\u30fc\u30c8",
+      "\u30b9\u30c6\u30a2\u30ea\u30f3\u30b0",
+      "\u30e1\u30fc\u30bf\u30fc",
+      "\u30a2\u30f3\u30d3\u30a8\u30f3\u30c8\u30e9\u30a4\u30c8",
+      "\u30a4\u30eb\u30df",
+      "HMI",
+      "HUD",
+      "\u30bf\u30c3\u30c1",
+      "\u97f3\u58f0",
+      "UX",
+      "\u30c7\u30a3\u30b9\u30d7\u30ec\u30a4",
+      "\u30a4\u30f3\u30d5\u30a9\u30c6\u30a4\u30f3\u30e1\u30f3\u30c8",
+      "\u30ef\u30a4\u30e4\u30ec\u30b9\u5145\u96fb",
+      "\u53ce\u7d0d",
+      "\u30c8\u30ec\u30a4",
+      "\u30c6\u30fc\u30d6\u30eb",
+      "\u30ab\u30c3\u30d7\u30db\u30eb\u30c0\u30fc",
+      "\u30c9\u30ea\u30f3\u30af\u30db\u30eb\u30c0\u30fc",
+      "\u30b9\u30a4\u30c3\u30c1",
+      "\u30bb\u30f3\u30b5\u30fc",
+      "\u30bb\u30f3\u30b7\u30f3\u30b0",
+      "\u5feb\u9069",
+      "\u65b0\u7d20\u6750",
+      "\u65b0\u6750\u6599",
+      "\u52a0\u98fe",
+      "\u8868\u76ae",
+      "\u767a\u6ce1",
+      "\u8efd\u91cf\u5316",
+      "\u30ea\u30b5\u30a4\u30af\u30eb\u6750",
+      "\u30d0\u30a4\u30aa\u6750",
+      "\u30ab\u30b9\u30bf\u30de\u30a4\u30ba",
+      "\u5148\u9032",
+      "\u8eca",
+      "interior",
+      "dashboard",
+      "cockpit",
+      "console",
+      "seat",
+      "steering",
+      "display",
+      "ambient",
+      "lighting",
+      "trim",
+      "leather",
+      "fabric",
+      "infotainment",
+      "cluster",
+      "panel",
+      "upholstery",
+      "touchscreen",
+      "cabin",
+      "climate",
+      "hvac",
+      "wireless charging",
+      "door panel",
+      "car",
+      "customization",
+      "advanced",
+      "comfort",
+      "new material",
+      "heater",
+      "cup holder",
+      "drink holder",
+      "tray",
+      "table",
+      "slide",
+      "mechanism",
+      "storage",
+      "sensor",
+      "sensing",
+      "switch",
+      "\u6c7d\u8f66 \u5185\u9970",
+      "\u4e2d\u63a7",
+      "\u4eea\u8868",
+      "\u6c1b\u56f4\u706f",
+      "\u663e\u793a\u5c4f",
+      "\u65b9\u5411\u76d8",
+      "\u5ea7\u8231",
+      "\u95e8\u677f",
+      "\u5185\u9970 \u4f20\u611f\u5668",
+      "\u89e6\u63a7\u5c4f",
+      "\u5185\u9970 \u6750\u6599",
+      "\u5185\u9970 \u8bbe\u8ba1",
+      "\u8f66\u5185",
+      "\u8212\u9002",
+      "\u65b0\u6750\u6599"
+    ],
+    "synonym_groups": [
+      [
+        "car",
+        "\u8eca",
+        "\u6c7d\u8f66"
+      ],
+      [
+        "interior",
+        "\u5185\u88c5",
+        "\u5185\u9970",
+        "\u8eca\u5185",
+        "\u8eca\u5ba4"
+      ],
+      [
+        "cockpit",
+        "\u30b3\u30c3\u30af\u30d4\u30c3\u30c8",
+        "\u5ea7\u8231"
+      ],
+      [
+        "dashboard",
+        "\u30a4\u30f3\u30d1\u30cd",
+        "\u4eea\u8868"
+      ],
+      [
+        "console",
+        "\u30bb\u30f3\u30bf\u30fc\u30b3\u30f3\u30bd\u30fc\u30eb",
+        "\u4e2d\u63a7"
+      ]
+    ],
+    "prompt_path": "\u30d7\u30ed\u30f3\u30d7\u30c8.md",
+    "subject_name": "\u5185\u88c5",
+    "photo_target_label": "\u8eca\u5185\u88c5"
+  }
+}

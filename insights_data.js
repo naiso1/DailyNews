@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-01-29",
+        analysis: {
+            jp: "日本の内装市場は**カスタマイズ**と**高級感**に注目。**本革内装**や**新素材**がトレンドで、**EV車の内装**も進化中。**子育て向け**や**レトロデザイン**のニーズも顕著。競合は**HMIの革新**と**快適性**を強調。サプライチェーンは**高コスト素材**に依存。自社は**カスタム性と快適性の両立**を強みに、**子育て・レトロ・高級**の3つのニッチを狙うべき。",
+            cn: "中国市場では**AI搭載**と**OTA対応**が主流になり、**HMIの進化**が加速中。**EV用バッテリー**の中国製依存度が高く、**内装素材の国産化**も進む。**スマート座席**や**タッチスクリーン**の技術が成熟しており、**内装の高機能化**と**コスト削減**がトレンド。自社は**AIインテリジェントコントロール**と**国産素材採用**で差別化を図るべき。",
+            in: "インド市場では**HMIの大型化**と**耐久性内装**が注目。**空気サスペンション**や**静粛設計**が悪路対応に求められる。**日差し屋根**や**通気性シート**の導入が進み、快適性が重視されている。**OLEDディスプレイ**の拡張も技術トレンド。自社製品開発では、**耐久性と快適性を両立するハイブリッド内装**が鍵。",
+            us: "**ウール素材**の採用が進む中、**天然素材重視**のトレンドが強化。**HMI**の不具合回収が相次ぐため、**ソフトウェア信頼性**が課題。**カスタマイズ**の高まりに対し、**MB.OS**や**Apple CarPlay**との統合が重要。**安全規制**の厳格化に伴い、**AI**による**シート**監視が注目。",
+            eu: "欧州市場では**HMI**と**触覚コントローラ**の進化が進み、**AR**や**AIアシスタント**の導入が加速中。**EV化**が進む中、**内装の耐久性と高機能化**が求められ、**高級車ブランドの電気化**が新たなトレンド。サプライチェーンの変化も影響し、**柔軟性のある内装設計**が重要。自社は**触覚インターフェース**や**AR支援型内装**の開発を加速すべき。",
+        },
+        ideas: {
+            jp: [
+                { id: 201, img: "images/idea_201.png", title: "子育て向けカスタムコンソール「BabyCradle Console」", desc: "子供が乗車中に安心できるクッション式コンソールで、スマホやナビを安全に収納。柔らかい素材と温かみのある照明で、親子の癒し空間を演出。子育てママたちに「子供の安全と自分の便利さを両立できる」と評価される。", imagePrompt: "Driver eye level, close-up on center console featuring a cushioned, soft-touch plastic baby cradle with integrated storage, surrounded by brushed aluminum accents and warm ambient lighting, inside a premium sedan interior, mood: cozy and high-tech." },
+                { id: 202, img: "images/idea_202.png", title: "昭和レトロ高級内装キット「RetroLux Pack」", desc: "木目パネルやメッキパーツ、レースシートを搭載した昭和レトロ風内装キット。軽自動車にも対応で、実用性とレトロデザインを両立。ユーザーに「昔ながらの高級感を、現代の車に」を体感させ、SNSで話題になる。", imagePrompt: "Driver eye level, close-up on the center console, featuring warm ambient lighting that highlights brushed aluminum accents and rich wood-grain panels contrasted with soft-touch plastic and vintage-style fabric upholstery, set within a compact SUV cabin with a calm, nostalgic high-tech mood." },
+            ],
+            cn: [
+                { id: 203, img: "images/idea_203.png", title: "AIスマートアシスタント・パネル", desc: "車内に設置するAI対応タッチパネルで、運転中の操作を最適化。音声認識と視覚表示を融合し、快適なドライビング体験を提供。**「声で操作できるから、手を離せる」**という安心感がうれしい。国産素材で構成し、コスト削減と耐久性を両立。", imagePrompt: "Driver eye level, close-up on center console AI touch panel, brushed aluminum frame with soft-touch plastic accents and premium leather trim, warm ambient lighting with subtle daylight glow, premium sedan interior, calm and high-tech mood." },
+                { id: 204, img: "images/idea_204.png", title: "国産高機能シートカバー", desc: "日本製の耐久素材と中国製の軽量構造を融合したシートカバー。**「国産素材なのに軽くて丈夫」**という安心感を提供。空調と快適性を両立し、長距離運転でも疲れにくい。**「洗えるし、色も選べる」**という自由度がうれしい。", imagePrompt: "Driver eye level, close-up on the center console of a premium sedan interior, featuring brushed aluminum accents, soft-touch plastic surfaces, and premium leather upholstery, illuminated by warm ambient lighting with subtle daylight bleed, evoking a calm, high-tech, and cozy mood." },
+            ],
+            in: [
+                { id: 205, img: "images/idea_205.png", title: "耐久快適シート「DustGuard」", desc: "砂害や悪路対応の**耐摩耗レザー**と**通気性マット**を採用。長時間運転でも快適な**3Dクッション構造**で、**「砂風に負けない、まるでホテルのソファ」**という体験を提供。インド市場の悪路運転者に愛される、**快適性と実用性の両立**。", imagePrompt: "Driver eye level, close-up on the seat, showcasing plush 3D cushioned upholstery in durable leather with breathable matting, framed by brushed aluminum accents and soft-touch plastic trim; warm ambient lighting casting gentle highlights on premium materials; scene: compact SUV cabin; mood: cozy and high-tech." },
+                { id: 206, img: "images/idea_206.png", title: "AIオフロードHUD「TerrainView」", desc: "**リアルタイム地形表示**と**AIナビゲーション**を搭載。**「地面の状態が見える」**という安心感で、悪路運転を快適化。**「車が道を読み、運転手が楽しむ」**という体験。インドの渋滞や砂害に対応する、**スマートで安心なドライビング支援**。", imagePrompt: "Driver eye level, close-up on the center console with a minimalist HUD projection overlaying the windshield, showcasing terrain data in soft glowing lines; materials: brushed aluminum accents, matte black soft-touch plastic, and perforated leather seat stitching; lighting: warm ambient glow from hidden LED strips with natural daylight filtering through tinted windows; scene: premium compact SUV cabin with open-air driving feel; mood: calm, high-tech, and reassuringly intuitive." },
+            ],
+            us: [
+                { id: 207, img: "images/idea_207.png", title: "ウール・マルチセンサーシート", desc: "天然ウール素材のシートに、AIによる圧力・温度センサーを内蔵。快適性と安全性を両立。運転中の体調変化をリアルタイムで通知し、**うれしい安心感**と**高級感**を提供。", imagePrompt: "Driver eye level, close-up on the seat, featuring plush wool-textured upholstery with subtle embedded sensor lines, framed by brushed aluminum trim and soft-touch plastic accents; warm ambient lighting glows softly from overhead panels, casting gentle reflections on the materials; interior of a premium sedan cabin with minimalist design lines and ergonomic contours; mood is calm and high-tech, evoking serene luxury and intelligent comfort." },
+                { id: 208, img: "images/idea_208.png", title: "MB.OS対応カスタムコックピット", desc: "メルセデスのMB.OSと統合した**カスタムコックピット**。150色の内装・外装で**個性表現**可能。**Apple CarPlay**対応でスマホ操作を最適化。**うれしい自由度**と**未来感**を体感。", imagePrompt: "Driver eye level, close-up on center console and dashboard, featuring brushed aluminum accents, soft-touch plastic surfaces, and premium leather trim, illuminated by warm ambient lighting with subtle daylight bleed, inside a sleek premium sedan cabin, evoking a calm yet high-tech mood with minimalist design and futuristic tactile interfaces." },
+            ],
+            eu: [
+                { id: 209, img: "images/idea_209.png", title: "触覚フィードバックコントローラー「TactiLink」", desc: "金属オーバーレイ下でも使える触覚・力検出コントローラーで、運転中の操作をより自然に。手のひらにフィードバックを提供し、誤操作を防ぐ。高級車でも使えるシンプルなデザインで、**運転中のストレスを軽減**し、**安全と快適さを両立**する。", imagePrompt: "Driver eye level, close-up on center console featuring a minimalist tactile controller with brushed aluminum overlay and soft-touch plastic accents, illuminated by warm ambient lighting, inside a premium sedan cabin with leather and fabric seating, conveying a calm, high-tech mood." },
+                { id: 210, img: "images/idea_210.png", title: "ARアシスタント内装「VisionDrive」", desc: "ARヘッドアップディスプレイとAIアシスタントを組み合わせた内装。運転中にナビゲーションや車両状態を視覚的に提示。**運転中の集中力を保ちながら、情報の把握を簡単**に。高級車向けに開発し、**ドライバーの安心感と楽しさ**を同時に提供。", imagePrompt: "Driver eye level, close-up on center console with AR head-up display projection and minimalist AI interface, materials: brushed aluminum accents, soft-touch plastic surfaces, premium leather trim, ambient warm lighting with subtle daylight bleed, scene: premium sedan interior, mood: calm yet high-tech with futuristic sophistication." },
+            ],
+        }
+    },
+{
         date: "2026-01-28",
         analysis: {
             jp: "イルミ演出や断熱素材、キャンピングカー／カスタム系の話題が集中し、内装は“使い方に合わせて体験を作る”方向へ。ヴィーガンレザーや専用シートカバーなど素材提案も増え、快適性と個性の両立が進んでいる。",

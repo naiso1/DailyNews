@@ -2693,7 +2693,7 @@
         let visibleLimit = 30;
 
         let NEW_DATE_RANGE = { start: null, end: null };
-        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-01-28", end: "2026-01-28" };
+        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-01-29", end: "2026-01-29" };
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
@@ -3209,6 +3209,13 @@
                 .replace(/>/g, "&gt;")
                 .replace(/\"/g, "&quot;")
                 .replace(/'/g, "&#39;");
+        }
+
+        function formatRichText(value) {
+            const escaped = escapeHtml(value ?? "");
+            return escaped
+                .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
         }
 
         function buildIdeaIndex() {
@@ -3999,7 +4006,7 @@
                             <span class="flag-icon flag-jp" style="width:32px; height:22px;"></span>
                             <span class="country-label">JAPAN</span>
                         </div>
-                        <div class="analysis-text-body">${day.analysis.jp}</div>
+                        <div class="analysis-text-body">${formatRichText(day.analysis.jp)}</div>
                     </div>`;
 
                 if (showCn) analysisHTML += `
@@ -4008,7 +4015,7 @@
                             <span class="flag-icon flag-cn" style="width:32px; height:22px;"></span>
                             <span class="country-label">CHINA</span>
                         </div>
-                        <div class="analysis-text-body">${day.analysis.cn}</div>
+                        <div class="analysis-text-body">${formatRichText(day.analysis.cn)}</div>
                     </div>`;
 
                 if (showIn) analysisHTML += `
@@ -4017,7 +4024,7 @@
                             <span class="flag-icon flag-in" style="width:32px; height:22px;"></span>
                             <span class="country-label">INDIA</span>
                         </div>
-                        <div class="analysis-text-body">${day.analysis.in}</div>
+                        <div class="analysis-text-body">${formatRichText(day.analysis.in)}</div>
                     </div>`;
 
                 if (showUs) analysisHTML += `
@@ -4026,7 +4033,7 @@
                             <span class="flag-icon flag-us" style="width:32px; height:22px;"></span>
                             <span class="country-label">USA</span>
                         </div>
-                        <div class="analysis-text-body">${day.analysis.us}</div>
+                        <div class="analysis-text-body">${formatRichText(day.analysis.us)}</div>
                     </div>`;
 
                 if (showEu) analysisHTML += `
@@ -4035,7 +4042,7 @@
                             <span class="flag-icon flag-eu" style="width:32px; height:22px;"></span>
                             <span class="country-label">EUROPE</span>
                         </div>
-                        <div class="analysis-text-body">${day.analysis.eu}</div>
+                        <div class="analysis-text-body">${formatRichText(day.analysis.eu)}</div>
                     </div>`;
 
                 analysisHTML += `</div></section>`;
@@ -4080,7 +4087,7 @@
                                     <div class="idea-body">
                                         ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
                                         <div class="idea-content">
-                                            <p class="idea-desc">${idea.desc}</p>
+                                            <p class="idea-desc">${formatRichText(idea.desc)}</p>
                                             <div class="actions">
                                                 ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${ideaKey}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
                                                 <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${ideaKey}', this)">

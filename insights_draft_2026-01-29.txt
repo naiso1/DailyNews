@@ -1,0 +1,38 @@
+{
+  "analysis": {
+    "jp": "**HMI**と**新素材**の融合が進む。**本革内装**や**ウール採用**が高級感と持続可能性を強調。**カスタマイズ**が子育てやレトロ志向に応じて拡大。**EV**は高性能化と実用性の両立が求められ、**安全**・**シート**の改良が注目。",
+    "cn": "**AI**と**EV**が中心の技術競争。**バッテリー**の中国依存が課題。**ディスプレイ**の高機能化と**スマート座席**の普及が進む。**コスト効率**と**開発スピード**が企業戦略の鍵。",
+    "in": "**内装**の**耐久性**と**快適性**が悪路対応の要。**HMI**と**新素材**の融合で高級感を実現。**大型ディスプレイ**と**通気性シート**が市場に合わせた革新。**安全**と**AR**の導入が進む。",
+    "us": "**天然素材**と**高級感**が内装のトレンド。**カスタマイズ**と**AI**の統合が進む。**ディスプレイ**の不具合は深刻だが、**OTA**で改善。**安全性**と**静粛性**が顧客の選択基準。",
+    "eu": "**高級化**と**カスタマイズ**が主流。**HMI**と**AR**の進化が進む。**EV**はプラットフォームの統一が課題。**触覚コントローラ**や**自律走行**が未来の内装に影響。"
+  },
+  "ideas": {
+    "jp": [
+      {
+        "title": "ウール×AIナビゲーションシート",
+        "desc": "ウール素材で作られた高級感あるシートに、AIが運転者の疲労度を検知し、自動でクッションの硬度や温度を調整。快適さと省エネを両立。長時間運転でも「まるでリラックスしたカフェ」の感覚。うれしいのは、自然素材の安心感とAIの知能が合わさった未来感。",
+        "imagePrompt": "Upholstered car seat with wool texture, AI interface projected on seat back, ambient lighting, luxury vehicle interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality"
+      },
+      {
+        "title": "カスタムコンソール・香りディフューザー",
+        "desc": "子育てやレトロ志向のユーザー向けに、コンソールに内蔵された香りディフューザー。季節や気分に合わせて香りを自動調整。レトロデザインと現代機能を融合。お風呂の香りや森林の香りで「気分転換」を実現。うれしいのは、香りで心を癒し、家族との思い出を大切にできる機能。",
+        "imagePrompt": "Customizable car console with built-in aroma diffuser, retro-inspired design, ambient lighting, luxury car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality"
+      }
+    ],
+    "cn": [
+      {
+        "title": "スマートARシート",
+        "desc": "AIとAR技術を搭載したシート。運転中の疲労度やストレスをリアルタイムで分析し、視覚的アシストで「目を閉じても安全」をサポート。中国の工場で製造されるためコストが抑えられ、高機能で実用性も高い。うれしいのは、安全と快適さを同時に実現する最先端技術。",
+        "imagePrompt": "Smart AR seat with holographic interface, AI-powered fatigue detection, luxury car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality"
+      },
+      {
+        "title": "OLEDディスプレイ×スマート座席",
+        "desc": "OLEDディスプレイとスマート座席を統合。座席の状態をリアルタイムで表示し、快適な姿勢を自動調整。中国の製造技術と低コストで実現。うれしいのは、高級感と実用性を両立させた、未来の自動車内装。",
+        "imagePrompt": "OLED display integrated with smart seat, luxury car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality"
+      }
+    ],
+    "in": [
+      {
+        "title": "耐久性高級シート",
+        "desc": "悪路や渋滞に強い耐久性と快適性を両立した高級シート。インドの気候に合わせた素材と構造で、長時間運転でも疲れにくい。うれしいのは、安全と快適さを両立させた、実用性と高級感を兼ね備えた内装。",
+        "imagePrompt": "High-performance car seat with durable material, luxury car interior, photorealistic
