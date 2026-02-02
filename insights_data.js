@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-02",
+        analysis: {
+            jp: "**GHG削減**と**カーボンニュートラル**が主流になり、**素材の持続可能性**が内装開発のキーワード。**V2H対応**や**低床設計**が**介護・VANLIFE**ニーズに応える。**AIアシスタント**や**タッチパネル**のストレスは消費者の不満を増幅。**安全センサー**の標準化は**安心感**を高める。日本市場では**カスタマイズ性**と**実用性**の両立が求められる。",
+            cn: "中国市場では**AI**と**EV**の融合が進み、**BYD**や**XPeng**がグローバル展開を加速。**5Cバッテリー**の耐久性向上や**呼吸型シリコン負極**の開発により、**次世代電池**の実用化が近づく。**ライドシェア向けブランド「凌輝」**の登場は、**内装のブランド化**と**HMIの統一**を示唆。**ロボット企業の資金調達**は、**自動運転と内装の連携**に期待。自社は**AI搭載HMI**と**長寿命電池対応内装部品**の開発を加速すべき。",
+            in: "インド市場では**EV普及**と**スマートコクピット**の需要が急増中。**Make-in-India政策**の推進により、**ディスプレイ**や**内装部品の自給化**が進む。タタやマラーティーの**高機能内装**が主流となり、**低コスト・高機能**が求められる。競合他社は**価格競争**と**技術革新**で勝負。自社開発では**地元製造パートナーとの連携**と**コストパフォーマンス**を重視すべき。",
+            us: "米国市場では**物理ボタン**の維持や**HMIの進化**が見られ、**安全**と**使いやすさ**が重視されている。一方で**EVの規制**（中国の電子ハンドル禁止）や**開発遅延**（ポルシェ）が課題。**高級車のAR内装**（アストンマーティン）や**3列シートEV**（トヨタ）の登場で、**空間と機能性**のバランスが求められる。自社開発では、**触覚操作**や**アメニティ照明**を融合した**ユーザビリティ重視の内装**が鍵。",
+            eu: "EU市場では**ハイブリッド高性能モデル**と**EVのリース価格競争**が激化。**ドリフトモード**や**音響性能**が内装の訴求ポイントに。**中国EVブランドの進出**でサプライチェーンリスクも増加。自社は**AIアシスタント**と**音響体験**を融合した**「コネクテッドエンタメ内装」**で差別化すべき。",
+        },
+        ideas: {
+            jp: [
+                { id: 221, img: "images/idea_221.png", title: "VANLIFE ワンタッチウッド内装キット", desc: "「YURT製VANLIFE ROOMKIT」をベースに、1時間でウッド内装に変換可能なキット。介護・旅行に最適で、燃費28.2km/Lの実用性と「最高に格好いい」満足感を提供。手軽さと高級感を両立した、カスタマイズの自由度が最大の製品。", imagePrompt: "Wooden interior conversion kit for van, one-touch installation, modern vehicle cabin with warm lighting, YURT brand design, natural oak texture, premium automotive interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 222, img: "images/idea_222.png", title: "デュアルセンサーブレーキサポートII 搭載「安心ドライビングパック」", desc: "スズキ・ダイハツの安全機能をベースに、AIが運転者を監視する「安心ドライビングパック」。センサーによるリアルタイムアラートで「安全な運転」を保証。家族や介護者との移動をより安心に、ストレスフリーなドライブを実現。", imagePrompt: "Dual sensor brake support II integrated into modern vehicle dashboard, AI monitoring interface, safety alert visualization, premium car interior with ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 223, img: "images/idea_223.png", title: "AI音声付きスマートコンソール", desc: "AIアシスタントが音声で運転者と会話し、天候や目的地に応じて内装LEDを変化させる。タッチレス操作で快適さを追求。うれしいのは、運転中のストレス軽減と、個性あふれる車内空間の演出。", imagePrompt: "AI-powered voice assistant integrated into car center console, ambient lighting changes based on mood or destination, futuristic luxury interior, glowing touchless controls, photorealistic 3D render, cinematic lighting" },
+                { id: 224, img: "images/idea_224.png", title: "5Cバッテリー対応耐久性内装材", desc: "5Cバッテリーの長寿命に対応した、熱・電気抵抗性の内装素材。耐久性と見た目の美しさを両立。うれしいのは、バッテリー寿命に合わせて内装も長く使える安心感と、環境に配慮した持続可能性。", imagePrompt: "Premium automotive interior with heat-resistant and electrically insulated materials, matching 5C battery durability, sleek modern design, natural wood and matte finish, photorealistic 3D render, professional product visualization" },
+            ],
+            in: [
+                { id: 225, img: "images/idea_225.png", title: "スマートコクピット・アシスタントパネル", desc: "タタやマラーティーの車両に搭載可能な、**AI音声アシスタント**と**マルチタッチディスプレイ**を統合した内装部品。**運転中の操作が簡単で、ナビや音楽、天気情報が一目で確認できる**。**低価格で高機能**な設計で、**インドの若年層に人気**。日常使いの「便利さ」と「楽しさ」を同時に提供。", imagePrompt: "Smart cockpit assistant panel integrated into car dashboard, touch screen interface with AI voice assistant, modern Indian car interior, ambient lighting, sleek design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 226, img: "images/idea_226.png", title: "エコ・インテリジェントコンソール", desc: "**EV車専用のコンソール**で、**充電ステータス**と**環境モード**を視覚的に表示。**自然素材と再生可能素材**を用いた**低環境負荷設計**。**運転中の快適性と省エネ**を両立させ、**インドの熱帯気候にも対応**。**「省エネ」で「快適」なドライビング体験**を提供し、**ユーザーの環境意識を高める**。", imagePrompt: "Eco-intelligent center console for EV cars, digital charging status display, ambient color-changing lighting, sustainable materials, modern Indian vehicle interior, photorealistic 3D render, premium design, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 227, img: "images/idea_227.png", title: "触覚フィードバック式スイッチパネル", desc: "物理ボタンを触覚で操作できる新世代パネル。視線移動を最小限に抑え、運転中の集中力を維持。高級感と実用性を両立。ドライバーに「**安心して操作できる**」快適さを提供。", imagePrompt: "Touch-sensitive switch panel with haptic feedback, automotive interior design, minimalist dashboard, brushed aluminum finish, soft ambient lighting, photorealistic 3D render, premium car cockpit, cinematic lighting, high detail, 4K quality" },
+                { id: 228, img: "images/idea_228.png", title: "アメニティ照明付き3列シートEV用コンソール", desc: "3列シートEV向けに開発したコンソール。**独立クーラー**と**アメニティ照明**を内蔵。家族で乗車する際の快適性を最優先。子どもが乗るたびに「**明るく、涼しく、楽しい**」空間を体感できる。", imagePrompt: "Premium 3-row EV console with ambient lighting and individual cooling vents, modern vehicle cockpit, luxury car interior, matte black and wood grain materials, soft glowing lights, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 229, img: "images/idea_229.png", title: "AI音響体験パネル：ドライバーの気分に合わせた空間音楽", desc: "AIがドライバーの気分や走行状況を分析し、リアルタイムで空間音楽を調整するパネル。ドリフトモード時は「レーシングサウンド」、リラックス時は「自然音」を自動再生。毎日が新しいサウンドアドベンチャーで、運転の楽しみが倍増する。", imagePrompt: "AI-powered ambient sound panel integrated into car dashboard, adaptive audio visualization, luxury car interior, warm wood and leather materials, glowing blue interface, cinematic lighting, photorealistic 3D render, premium automotive design" },
+                { id: 230, img: "images/idea_230.png", title: "ドリフトモード専用インテリア：サスペンションと音響が連動", desc: "ドリフトモード起動時に、内装のLEDライトが「レーシングブルー」に変化し、音響が「F1サウンド」に切り替わる。センサーで路面状況を感知し、シートのクッション性やステアリングの反応を最適化。ハンドルを握るたびに「走る喜び」が体感できる。", imagePrompt: "Drift mode interior with dynamic lighting, glowing blue accents, racing sound system visualization, luxury sports car cockpit, carbon fiber and leather materials, high-performance steering wheel, photorealistic 3D render, cinematic lighting" },
+            ],
+        }
+    },
+{
         date: "2026-01-30~2026-02-01",
         analysis: {
             jp: "日本の自動車内装市場では、**カスタマイズ**と**機能性**が注目され、特に**HRC技術**や**後付けアクセサリー**の需要が高まっています。**香り対策**や**充電機能**も消費者ニーズに応える要素として強化。**高級感と実用性の融合**が主流で、**価格帯の拡大**も見られます。自社製品開発では、**カスタマイズ性と快適性**を両立した製品が求められ、**AI連携や香り制御**の機能を組み込むことが示唆されます。",
