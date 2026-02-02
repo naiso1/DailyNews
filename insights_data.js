@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-01-30~2026-02-01",
+        analysis: {
+            jp: "日本の自動車内装市場では、**カスタマイズ**と**機能性**が注目され、特に**HRC技術**や**後付けアクセサリー**の需要が高まっています。**香り対策**や**充電機能**も消費者ニーズに応える要素として強化。**高級感と実用性の融合**が主流で、**価格帯の拡大**も見られます。自社製品開発では、**カスタマイズ性と快適性**を両立した製品が求められ、**AI連携や香り制御**の機能を組み込むことが示唆されます。",
+            cn: "中国市場では**EVの急速な普及**と**ガソリン車の衰退**が進み、**内装のUX重視**が加速。**V2G充電インフラ**拡大で**持続可能な内装設計**が求められ、**多言語対応フォント**（GWM Sans）の普及により**グローバル化された内装UI**が注目。**BYDやXiaomi**の製品が品質・販売で競合し、**安全・快適性**の差別化が鍵。自社は**多言語対応のスマート内装**と**V2G連携型エコモード**の開発を推進。",
+            in: "インド市場では**EV支援政策**と**AI内装技術**が急速に進化中。**CCUS投資**や**関税緩和**により、持続可能な内装素材の導入が加速。**MB.OS**や**NVIDIA DRIVE**の導入により、**Level-4自動運転**対応内装が主流化。**高級内装**と**AIアシスタント**の組み合わせが競合を圧倒。自社は**AI音声対応**と**環境負荷低減素材**の融合製品開発を急ぐべき。",
+            us: "**HMIの物理ボタン復活**がトレンド。KiaとHyundaiのディスプレイ不具合回収で、**OTA対応**の重要性が浮上。若年層は**ARナビや音声アシスタント**を重視し、**高級感と実用性の両立**が求められる。**環境照明**や**新素材**の導入で、**快適性とデザイン性**を高めるのが鍵。サプライチェーンの安定化も課題。",
+            eu: "欧州市場では**AI対応**の内装が主流化し、**メルセデスSクラス**や**レクサスRX**が信頼性と**静かな快適性**を重視する傾向。**高級ブランド**（Bugatti、Renault）は**レトロデザインと現代性能**の融合で注目。**空気清浄機市場**は成長中だが、**フィルター交換コスト**が課題。**サプライチェーンの不安定さ**は中国メーカーの撤退リスクに反映。自社開発では、**AI×快適性**を両立した**低コスト・高信頼**製品が鍵。",
+        },
+        ideas: {
+            jp: [
+                { id: 211, img: "images/idea_211.png", title: "香りと快適性をコントロールするスマートドリンクホルダー", desc: "ドリンクホルダーに内蔵された香りディフューザーと温度調節機能で、車内空気を最適化。USB充電対応でスマートフォンと連動し、好みの香りをAIが提案。移動中のリラックスをサポートし、『車内がまるでカフェのように快適になる』という満足感を提供。", imagePrompt: "Smart drink holder with built-in aroma diffuser and temperature control, integrated with smartphone via USB, luxury car interior, ambient lighting, modern minimalist design, photorealistic 3D render, premium automotive styling" },
+                { id: 212, img: "images/idea_212.png", title: "HRCテクノロジーを搭載したカスタム・コンソールユニット", desc: "HRCのオフロード技術を転用した、**耐衝撃・耐熱・耐汚れ仕様**のコンソールユニット。**カスタムパーツ**と**LEDアクセント**で個性を演出。**快適性と機能性**を両立し、『車内空間を自分だけのオフロード基地に変える』というワクワク感を体感できる製品。", imagePrompt: "Customizable HRC tech console unit with rugged design, LED accent lighting, off-road inspired materials, modern vehicle cockpit, photorealistic 3D render, premium automotive interior, cinematic lighting" },
+            ],
+            cn: [
+                { id: 213, img: "images/idea_213.png", title: "多言語対応スマート内装UI「GWM Sans Plus」", desc: "車載ディスプレイにGWM Sansの拡張版を採用し、中国・欧州・アジア圏の170言語に対応。運転者に「安心・快適」を提供する音声ガイドと自動言語切り替えで、海外旅行でもストレスフリー。家族や同乗者とのコミュニケーションを自然に。", imagePrompt: "Multilingual automotive interior UI with GWM Sans font, holographic navigation display, ambient lighting, dashboard with Chinese, English, and Arabic text, photorealistic 3D render, premium vehicle cockpit, cinematic lighting, high detail, 4K quality" },
+                { id: 214, img: "images/idea_214.png", title: "V2G連携型エコモード「ChargeSync」", desc: "充電しながら車内を快適に保つ「ChargeSync」。充電中は空調を最適化し、バッテリー残量に応じて「充電モード」「リフレッシュモード」を切り替え。充電完了時に「お疲れ様」の音声メッセージで心地よい仕上げ。環境にもやさしく、ユーザーにも嬉しい設計。", imagePrompt: "V2G-enabled eco-mode dashboard with charging status indicator, ambient lighting, eco-friendly interior materials, smart climate control interface, photorealistic 3D render, premium vehicle cockpit, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 215, img: "images/idea_215.png", title: "AI音声対応パーソナライズド内装パネル", desc: "車両の運転者に合わせて自動で内装色や質感を変更するAIパネル。音声で「落ち着いたモード」や「エネルギッシュモード」を切り替えられ、ストレス軽減と快適性を両立。うれしいのは、毎日違う気分に合わせて内装をカスタムできる点。", imagePrompt: "AI voice-controlled customizable interior panel, luxury car cabin, adaptive color and texture based on user mood, ambient lighting, leather and wood grain finish, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 216, img: "images/idea_216.png", title: "CCUS対応低炭素内装材「エコグリーン」", desc: "CCUS技術と再生素材を融合した内装材で、CO2排出量を最大50%削減。触り心地と見た目は高級感を保ち、環境負荷を抑えながらも快適性を追求。うれしいのは、地球に優しくて、自分も心地よく使えるという満足感。", imagePrompt: "Eco-friendly low-carbon interior material panel, car cabin with recycled textile and bio-based components, sustainable design, green ambient lighting, premium quality finish, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 217, img: "images/idea_217.png", title: "ARナビと物理ボタンのハイブリッドコントロールパネル", desc: "スマートフォンを超えるARナビを搭載しつつ、基本操作は**物理ボタン**で安心。若年層が求める**直感的かつ高機能**な操作性を実現。**運転中の誤操作防止**と、**高級車のような洗練されたデザイン**で、快適なドライビングを提供。うれしさ：「操作が簡単で、目線を下げずにナビが使える！」", imagePrompt: "Hybrid control panel with AR navigation overlay, physical buttons for basic functions, modern car interior, sleek design with ambient lighting, photorealistic 3D render, premium automotive cockpit, cinematic lighting, high detail, 4K quality" },
+                { id: 218, img: "images/idea_218.png", title: "環境照明＋触感素材の高級内装パッケージ", desc: "**環境照明**で気分に合わせた空間演出、**触感素材**で手触りの快適さを提供。メルセデスSクラスの刷新を参考に、**高級感と実用性**を両立。**省エネ・メンテナンス軽減**にも貢献。うれしさ：「夜でも明るく、手に触れた瞬間が癒される！」", imagePrompt: "Luxury interior package with ambient lighting system, textured premium materials like leather and brushed metal, modern car dashboard with mood lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 219, img: "images/idea_219.png", title: "AI快適センサー内装パネル", desc: "車内温度・湿度・香りをAIで最適化するパネル。快適性と省エネを両立し、**「気分に合わせて空間を変える」**のがうれしい。センサーとAIが自動調整し、**毎日快適なドライブを実現**。高級感のある**メタリック調素材**で、**洗練されたデザイン**が魅力。", imagePrompt: "AI-powered comfort sensor interior panel, auto-adjusting temperature and scent based on mood, luxury car dashboard design, sleek metallic finish, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 220, img: "images/idea_220.png", title: "レトロモダンコックピットアシスタント", desc: "クラシックデザインのダッシュボードに、**AIアシスタントが透明表示**。**レトロな見た目**で**現代の機能**を備え、**「懐かしさと未来感」の融合**がうれしい。**操作が簡単**で、**運転中の集中力**を維持。**高級感のある木目調**と**ブルーLED照明**で、**個性的な空間**を演出。", imagePrompt: "Retro-modern cockpit with transparent AI assistant display, classic dashboard design with futuristic holographic interface, wooden panel and blue LED lighting, luxury car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-01-29",
         analysis: {
             jp: "日本の内装市場は**カスタマイズ**と**高級感**に注目。**本革内装**や**新素材**がトレンドで、**EV車の内装**も進化中。**子育て向け**や**レトロデザイン**のニーズも顕著。競合は**HMIの革新**と**快適性**を強調。サプライチェーンは**高コスト素材**に依存。自社は**カスタム性と快適性の両立**を強みに、**子育て・レトロ・高級**の3つのニッチを狙うべき。",

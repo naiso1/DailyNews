@@ -164,7 +164,13 @@ def append_news_items(js_text: str, items_by_date):
         insertion.append(f"    // {date_key} (google検索からExcel sheet2_llm_targets)")
         insertion.extend(items_by_date[date_key])
     block = "\n".join(insertion) + "\n"
-    return re.sub(r"\n\];\s*$", f"\n{block}];", js_text, flags=re.MULTILINE)
+    updated = re.sub(r"\n\];\s*$", f"\n{block}];", js_text, flags=re.MULTILINE)
+    if updated == js_text:
+        # Fallback: append before last ]
+        idx = js_text.rfind("];")
+        if idx != -1:
+            updated = js_text[:idx] + "\n" + block + js_text[idx:]
+    return updated
 
 
 def update_new_date_range(html_text: str, start: str, end: str):
@@ -404,8 +410,13 @@ def main():
     if not items:
         print("No items to append after filtering.")
         return
+    dates_in_items = sorted({it.get("date") for it in items if it.get("date")})
+    if dates_in_items:
+        print(f"Loaded {len(items)} items from sheet: {sheet_path} (dates: {dates_in_items[0]} ~ {dates_in_items[-1]})")
+    else:
+        print(f"Loaded {len(items)} items from sheet: {sheet_path} (date: unknown)")
 
-    news_text = NEWS_PATH.read_text(encoding="utf-8")
+    news_text = read_text_any(NEWS_PATH)
     existing_urls, max_ids = parse_existing_news(news_text)
 
     new_items = []
@@ -440,6 +451,11 @@ def main():
 
     if not new_items and not args.fix_existing:
         print("No new items to append (all URLs exist). Continue for insights if enabled.")
+        if items:
+            print(f"Sample incoming URL: {items[0].get('url')}")
+        print(f"Existing URL count: {len(existing_urls)}")
+    else:
+        print(f"New items to append: {len(new_items)}")
 
     # group by date
     items_by_date = {}
@@ -465,7 +481,7 @@ def main():
 
     # Update NEW date range
     if not args.skip_html:
-        html_text = HTML_PATH.read_text(encoding="utf-8")
+        html_text = read_text_any(HTML_PATH)
         if new_dates:
             start = min(new_dates)
             end = max(new_dates)
@@ -475,7 +491,7 @@ def main():
 
     # Insights generation
     if not args.skip_insights:
-        insights_text = INSIGHTS_PATH.read_text(encoding="utf-8")
+        insights_text = read_text_any(INSIGHTS_PATH)
         latest_date = max(new_dates) if new_dates else (all_dates[-1] if all_dates else None)
         if latest_date and latest_date in insights_text and not args.replace_insights:
             print(f"Insights for {latest_date} already exists. Use --replace-insights to overwrite.")

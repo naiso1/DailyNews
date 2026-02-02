@@ -132,8 +132,8 @@ def main():
     ap.add_argument("--poll-interval", type=float, default=2.0)
     ap.add_argument("--max-wait", type=int, default=240, help="Max wait seconds per image")
     ap.add_argument("--ids", default="", help="Comma/range list like 201,202 or 201-210")
-    ap.add_argument("--prompt-node", default="6")
-    ap.add_argument("--negative-node", default="7")
+    ap.add_argument("--prompt-node", default="auto")
+    ap.add_argument("--negative-node", default="")
     ap.add_argument("--sampler-node", default="3")
     ap.add_argument("--size-node", default="5")
     ap.add_argument("--seed-node", default="")
@@ -204,19 +204,32 @@ def main():
         prompt_text = build_prompt(idea["title"], idea["desc"], idea.get("imagePrompt", ""))
         workflow = json.loads(json.dumps(base_prompt))
 
-        if args.prompt_node in workflow:
-            prompt_inputs = workflow[args.prompt_node]["inputs"]
+        prompt_node = args.prompt_node
+        if prompt_node == "auto":
+            # Prefer a direct text holder (PrimitiveStringMultiline), fallback to CLIPTextEncode
+            for k, v in workflow.items():
+                if isinstance(v, dict) and v.get("class_type") in ("PrimitiveStringMultiline", "PrimitiveString"):
+                    prompt_node = k
+                    break
+            if prompt_node == "auto":
+                for k, v in workflow.items():
+                    if isinstance(v, dict) and v.get("class_type") == "CLIPTextEncode":
+                        prompt_node = k
+                        break
+
+        if prompt_node in workflow:
+            prompt_inputs = workflow[prompt_node].get("inputs", {})
             if "text" in prompt_inputs:
                 prompt_inputs["text"] = prompt_text
             elif "value" in prompt_inputs:
                 prompt_inputs["value"] = prompt_text
             else:
-                print(f"[FAIL] prompt node {args.prompt_node} has no text/value")
+                print(f"[FAIL] prompt node {prompt_node} has no text/value")
         else:
-            print(f"[FAIL] prompt node {args.prompt_node} not found")
+            print(f"[FAIL] prompt node {prompt_node} not found")
             continue
 
-        if args.negative_node in workflow:
+        if args.negative_node and args.negative_node in workflow:
             neg_inputs = workflow[args.negative_node]["inputs"]
             if "text" in neg_inputs:
                 neg_inputs["text"] = args.negative

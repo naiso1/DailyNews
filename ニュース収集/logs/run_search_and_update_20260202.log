@@ -1,0 +1,34 @@
+================================================== 
+[START] + 
+================================================== 
+[START] + 
+================================================== 
+[START] + 
+[INFO] Target range: 2026-02-01 to 2026-02-01 
+================================================== 
+[START] + 
+[INFO] Target range:  to  
+==================================================
+[START] 2026-02-02 02:04:36
+[INFO] Target range: 2026-01-30 to 2026-02-01
+[ERROR] Command failed: Command '['C:\\Users\\demo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'google_search_script.py', '--dates', '2026-01-30,2026-02-01']' returned non-zero exit status 2.
+[END] 2026-02-02 02:04:36
+==================================================
+==================================================
+[START] 2026-02-02 02:05:47
+[INFO] Target range: 2026-01-30 to 2026-02-01
+==================================================
+[START] 2026-02-02 02:12:50
+[INFO] Target range: 2026-01-30 to 2026-02-01
+==================================================
+[START] 2026-02-02 02:19:49
+[INFO] Target range: 2026-01-30 to 2026-02-01
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-01-30,2026-01-31,2026-02-01
+==================================================
+[START] 2026-02-02 02:22:07
+[INFO] Target range: 2026-01-30 to 2026-02-01
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-01-30,2026-01-31,2026-02-01
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[RUN] generate_idea_images_comfyui: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_comfyui.py --only-missing --workflow C:\Users\demo\Desktop\中村\DailyNews\image_flux2_klein_text_to_image (1).json
+[END] 2026-02-02 06:46:30
+==================================================

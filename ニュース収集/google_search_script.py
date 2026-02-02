@@ -1494,10 +1494,10 @@ def fetch_from_rss(target_dates):
             response = None
             for _ in range(retries):
                 response = requests.get(url, headers=HEADERS, timeout=timeout)
-                if response.status_code == 200:
+                if response and response.status_code == 200:
                     break
             
-            if response.status_code == 200:
+            if response and response.status_code == 200:
                 feed = feedparser.parse(response.content)
                 count = 0
                 
@@ -1505,6 +1505,11 @@ def fetch_from_rss(target_dates):
                     title = entry.get("title", "")
                     link = entry.get("link", "")
                     published = entry.get("published", "") or entry.get("updated", "")
+                    pub_date = parse_date(published)
+                    if not pub_date:
+                        continue
+                    if not is_target_date(pub_date, target_dates):
+                        continue
                     
                     desc = ""
                     if 'summary' in entry:
@@ -1538,6 +1543,9 @@ def fetch_from_rss(target_dates):
                 if count > 0:
                     print(f"  ✓ [{name}] {count}件")
                     
+        except KeyboardInterrupt:
+            print("  ✗ RSS取得を中断しました。")
+            break
         except Exception as e:
             print(f"  ✗ [{name}] エラー")
         
