@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-03",
+        analysis: {
+            jp: "**新素材**と**豪華内装**が注目され、**EV**車の価格抑制と**シート**の高級化がトレンド。**北米トヨタ**の3列シートEVや**トヨタモデリスタ**の「オシャレでイイ」コンセプトは、**消費者の質感重視**を反映。**規制**による価格下落も影響し、**サプライチェーン**の再編で**日本製**の高品質素材が強み。自社開発では、**環境配慮型高級内装**と**AI連携シート**の実用化が示唆。",
+            cn: "中国市場では**AI座舱**と**スマートシート**の統合が進み、**HMI革新**と**安全装備**の高度化がトレンド。**GB 48001-2026規制**により、**機械式非常開閉装置**の義務化が2027年実施。**HarmonyOS Cockpit 5**や**火山方舟プラットフォーム**の導入により、**ユーザー体験の質**が高まり、**価格競争力**と**技術的差別化**が両立する必要性が強まっている。",
+            in: "インド市場では**EV**と**ディスプレイ**技術の進化が加速。**Dolby Vision**搭載車や**パノラマサンルーフ**が主流になり、**高級感**と**機能性**が融合。**サステナビリティ**重視の内装素材も注目。競合は**メルセデス・ベンツ**や**マヒンドラ**が先導。政策面では**隠しドアハンドル禁止**など安全性重視の規制が進む。自社開発では、**環境配慮素材**と**AI連携機能**を組み込んだ次世代内装が有利。",
+            us: "**HMI**と**AR**技術の進化が加速し、**高級車**市場では**静かさ**と**実用性**が重視される。**中国企業**の**空気サスペンションシート**はコスト効果で普及しつつあり、**サプライチェーン**の多様化が進む。**EV**車の内装は**多機能性**と**快適性**を最優先。自社開発では、**スマートシート**と**AR HUD**の統合が差別化ポイント。",
+            eu: "欧州市場では**安全規制**が強化され、隠しドアハンドルや電動ハンドルの禁止が進む。**EVの内装**は**快適性**と**実用性**の両立が求められ、メルセデスやLeapmotorが**AI・EV融合**を推進。**照明技術**も進化し、LG Innotekの**Nexlide**は高機能な内装照明を示唆。日本の内装開発は、**安全・快適・省エネ**のバランスを重視し、**規制対応型**製品開発が重要。",
+        },
+        ideas: {
+            jp: [
+                { id: 231, img: "images/idea_231.png", title: "「光る本革シート」スマートアシスト対応モデル", desc: "本革シートに内蔵された**光触媒素材**で空気清浄、**AI連動**で座り心地最適化。**高級感と快適性**を両立。雨天でも**温かさ**を保つ**ヒート機能**付き。毎日のドライブを「リラックス」に。", imagePrompt: "Luxury leather seats with embedded glowing ambient lighting, AI-responsive seat cushion, modern vehicle interior with touch-sensitive controls, brushed aluminum trim, warm lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 232, img: "images/idea_232.png", title: "「ブロンズアクセント」EV専用高級内装パッケージ", desc: "**ブロンズゴールド**のアクセントで**上質感**を演出。**EV専用**の静音設計と**快適な座席**。**充電ステーション**との連携で「充電済み」を視覚化。**価格抑制**と**豪華さ**の両立で、**EVユーザーの満足度**を高める。", imagePrompt: "Premium EV interior with bronze accent trim, minimalist dashboard with charging status display, soft ambient lighting, high-quality leather and wood grain finishes, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 233, img: "images/idea_233.png", title: "AI体験マスター・スマートシート", desc: "AIが座席の姿勢・温度・快適性を自動最適化し、運転者と乗員の「快適さ」をリアルタイムに調整。スマートフォンとの連携で「座り心地の報告」も可能。うれしいのは、毎日違う体感で「疲れない」運転が実現される。", imagePrompt: "AI-powered smart seat with adaptive lumbar support and temperature control, integrated with smartphone app interface, luxurious car interior, ambient lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 234, img: "images/idea_234.png", title: "安全安心・非常開閉ハンドル", desc: "500N耐力の**機械式非常開閉装置**を内装に統合し、**緊急時**に確実にドアを開ける安心感を提供。**操作の簡易さ**と**デザインの美しさ**を両立。うれしいのは、事故時に「逃げられる」安心と、「見た目も美しい」高級感が融合。", imagePrompt: "Emergency door handle with 500N mechanical strength integrated into car interior, sleek design with metallic finish, illuminated control panel, luxury vehicle cabin, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 235, img: "images/idea_235.png", title: "Dolby Atmos音響シートカバー", desc: "車内をまるで劇場のようにする、Dolby Atmos音響機能を内蔵した高級シートカバー。快適な座り心地と臨場感のあるサウンドで、日常のドライブをエンタメに。素材は環境配慮型で、洗濯可能。高級感と機能性を両立した、まさに「ドライブの贅沢」。", imagePrompt: "Dolby Atmos sound-enhancing seat cover with ambient lighting, luxury car interior, fabric texture, integrated audio speakers, cinematic car cockpit design, photorealistic 3D render, premium automotive aesthetic, warm ambient glow, high detail, 4K quality" },
+                { id: 236, img: "images/idea_236.png", title: "サステナブルスマートコントロールパネル", desc: "環境配慮素材で作られたタッチパネル。車両の温度・照明・音楽をスマートにコントロール。操作感が心地よく、視認性も高い。また、**AIが自動で最適化**する機能で、ドライバーの疲れを軽減。快適さと地球への配慮を両立した、本当に「うれしい」内装アイテム。", imagePrompt: "Sustainable smart control panel with touch interface, eco-friendly material texture, modern vehicle cockpit, ambient lighting, minimalist design, photorealistic 3D render, premium automotive interior, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 237, img: "images/idea_237.png", title: "スマート空気サスペンションシート「AirComfort+」", desc: "ユーザーの体格や好みに合わせて自動調整する空気サスペンションシート。静かなドライブと快適な座り心地を実現。高級感と実用性を両立し、毎日の通勤からレジャーまで「**座るだけで癒される**」体験を提供。", imagePrompt: "Smart air suspension seat with adaptive contouring, luxury car interior, premium leather upholstery, subtle ambient lighting, futuristic dashboard with AR interface, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 238, img: "images/idea_238.png", title: "AR HUD「DriveView Pro」", desc: "運転中の視界に自然に重ねるAR情報表示。ナビゲーションや車両状態をリアルタイムで投影。夜間でも明るく鮮明な表示で「**見やすく、安心して運転できる**」。高級車の先進技術として、視認性と機能性を両立。", imagePrompt: "Advanced AR HUD overlaying navigation and vehicle data on windshield, modern vehicle cockpit, holographic interface floating above dashboard, night driving scene, blue accent lighting, photorealistic 3D render, premium automotive design" },
+            ],
+            eu: [
+                { id: 239, img: "images/idea_239.png", title: "安全安心ドアハンドル：機械式＋スマートセンサー", desc: "事故時に操作可能な**機械式ドアハンドル**に、**スマートセンサー**を統合。ドア開閉時の**音と視覚的フィードバック**で安心感を提供。**手を挿すと自動停止**機能で、**運転中のストレスを大幅軽減**。車両の見た目を損なわず、**高機能・高品質な内装パーツ**として販売。", imagePrompt: "Mechanical door handle with integrated smart sensor in premium car interior, safety feature activated by touch, ambient lighting feedback, brushed aluminum finish, modern automotive design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 240, img: "images/idea_240.png", title: "AI快適照明「Nexlide」：自動調整＋気分モード", desc: "**LG InnotekのNexlide**技術を応用した**AI対応照明**。**運転者の気分や時間帯**に応じて**自動調光・色温度変化**。**「リラックス」「集中」「夜間安心」**モードで、**内装空間の心地よさを最適化**。**高級感と機能性**を両立し、**運転中の快適さと安心感**を提供。", imagePrompt: "AI adaptive car interior lighting system Nexlide, ambient color temperature shifting based on mood, futuristic dashboard with soft glow, luxury materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-02",
         analysis: {
             jp: "**GHG削減**と**カーボンニュートラル**が主流になり、**素材の持続可能性**が内装開発のキーワード。**V2H対応**や**低床設計**が**介護・VANLIFE**ニーズに応える。**AIアシスタント**や**タッチパネル**のストレスは消費者の不満を増幅。**安全センサー**の標準化は**安心感**を高める。日本市場では**カスタマイズ性**と**実用性**の両立が求められる。",

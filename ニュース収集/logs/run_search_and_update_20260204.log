@@ -1,0 +1,8 @@
+==================================================
+[START] 2026-02-04 00:01:00
+[INFO] Target range: 2026-02-03 to 2026-02-03
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-03
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[RUN] generate_idea_images_comfyui: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_comfyui.py --only-missing --workflow C:\Users\demo\Desktop\中村\DailyNews\image_flux2_klein_text_to_image (1).json
+[END] 2026-02-04 01:14:37
+==================================================
