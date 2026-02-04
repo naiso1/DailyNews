@@ -1,7 +1,7 @@
 ﻿import datetime
 import re
 from pathlib import Path
-from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP
+from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT
 import signal
 import sys
 
@@ -29,9 +29,24 @@ def latest_news_date():
 
 def run_cmd(cmd, label, log_file):
     log(f"[RUN] {label}: {' '.join(cmd)}")
+    proc = None
     try:
-        proc = Popen(cmd, creationflags=CREATE_NEW_PROCESS_GROUP)
+        proc = Popen(
+            cmd,
+            creationflags=CREATE_NEW_PROCESS_GROUP,
+            stdout=PIPE,
+            stderr=STDOUT,
+            text=True,
+            bufsize=1,
+        )
+        if proc.stdout:
+            for line in proc.stdout:
+                line = line.rstrip("\r\n")
+                if line:
+                    log(f"[{label}] {line}")
+                    print(f"[{label}] {line}", flush=True)
         proc.wait()
+        log(f"[EXIT] {label}: code={proc.returncode}")
         if proc.returncode != 0:
             raise CalledProcessError(proc.returncode, cmd)
     except KeyboardInterrupt:

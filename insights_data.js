@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-04",
+        analysis: {
+            jp: "日本市場では**カスタマイズ**と**燃費性能**が注目され、**安全センサー**や**AR技術**の進化も顕著。**内装快適性**へのこだわりが高まり、**フッ素不使用素材**の開発も進む。自社製品では**個性化内装**と**省エネ機能**を強みに、**AI連携**や**耐熱素材**の応用で差別化を図るべき。",
+            cn: "中国市場では**AI座舱**と**大型ディスプレイ**が主流化し、**HUD**や**全息投影**技術の導入が進む。消費者は**テクノロジー感**と**ラグジュアリー**を重視。雷軍の投資で**スマートシート**の普及も加速。規制やサプライチェーンの変化に対応しつつ、**中国特化のAIOS**や**高解像度ディスプレイ**を活用した製品開発が求められる。",
+            in: "インド市場では**パノラマルーフ**や**デュアルスクリーン**が主流になり、**多感覚カスタマイズ**（My Auras）が導入され、**安全規制**（隠し式ドアハンドル禁止）が強化されている。消費者は**デジタル体験**と**快適性**を重視しており、**AI連携**や**通風シート**の機能性も注目点。内装開発では、**視覚的インパクト**と**操作の直感性**を両立させる設計が求められる。",
+            us: "米国市場では**素材軽量化**と**サブスクモデル**が主流化。**レザー無し内装**が主流となり、**AIアシスタント**や**ヒートベルト**などの**安全機能**が強化。**CDプレーヤー廃止**や**OTA更新対応**で柔軟性向上。**EV規制**の影響で**手動ハンドル**や**高解像度ディスプレイ**が必須。自社製品では**軽量・高機能素材**と**AI連携型機能**の融合が鍵。",
+            eu: "EU市場ではソフトトップ車の需要が低下し、**高価格化**と**SUVの台頭**が主因。一方、**新素材**の導入（例：Norrskenプロジェクト）と**HMIの進化**（i.safe Mobile）が高級車内装のトレンド。**安全規制**（隠しハンドル禁止）の影響で、**直感的・物理的な操作性**が重視される。自社開発では、**クラシックと現代の融合**をテーマに、**安全かつ快適な内装**を提供する製品が求められる。",
+        },
+        ideas: {
+            jp: [
+                { id: 241, img: "images/jp_music_aroma_0204.png", title: "AI音楽・香りコントロールセンターユニット", desc: "スマートフォンと連動し、音楽や香りをAIが最適化。ドライバーの気分に合わせて自動調整。車中泊や出張時に「リラックスモード」で心地よさを提供。音楽と香りの組み合わせで、毎日のドライブを「癒しの時間」に変える。", imagePrompt: "AI-powered music and aroma control center unit integrated into car dashboard, ambient lighting, sleek minimalist design, wooden and matte black finish, holographic interface, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 242, img: "images/jp_heat_seat_cover_0204.png", title: "耐熱離型シートカバー「トライアングル」", desc: "フッ素不使用で160度耐熱の新素材を採用。高温でも変形せず、清潔に保てる。シートに装着すれば、車中泊や洗車後の快適性が格段に向上。見た目もスタイリッシュで、家族や同乗者に「これでいい！」と喜ばれる、日常使いの“安心”を提供。", imagePrompt: "Triangle-shaped heat-resistant seat cover with non-fluorine material, integrated into car interior, sleek geometric design, charcoal gray and white color scheme, modern vehicle cockpit, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 243, img: "images/cn_smart_seat_capsule_0204.png", title: "AIアシスタント搭載スマートシートカプセル", desc: "AIアシスタントが車内を「居心地の良い空間」に変換するスマートシート。雷軍の博泰技術を活用し、運転中の疲れを軽減。座席が自動で体勢を調整し、快適さを保つ。ユーザーは「座っても楽しく、疲れない」を実感できる。", imagePrompt: "Smart seat capsule with AI assistant interface, futuristic automotive interior, ergonomic design, glowing control panel, soft ambient lighting, photorealistic 3D render, premium automotive tech" },
+                { id: 244, img: "images/cn_ar_hud_sky_0204.png", title: "超広角HUD＋AI天窓システム", desc: "HUDにAIが搭載され、運転中の情報を「視界に自然に溶け込む」ように表示。天窓を操作すると、AIが車内を「快適な気温・照明」に調整。ユーザーは「視界が広がり、車内が心地よくなる」を体感。日常の運転をより楽しく、安全に。", imagePrompt: "Augmented reality HUD with AI window control, futuristic car cockpit, holographic interface floating above dashboard, panoramic glass roof with ambient lighting, photorealistic 3D render, cinematic lighting" },
+            ],
+            in: [
+                { id: 245, img: "images/in_multisensor_panel_0204.png", title: "スマートマルチセンサー内装パネル", desc: "車内空間をセンサーで自動調整するパネル。温度・湿度・空気質に応じて、照明・空調・香りを最適化。操作はタッチ＆音声で、快適さを「気づかないうちに」提供。ユーザーは「いつもより気持ちいい」を実感できる。", imagePrompt: "Smart multi-sensor interior panel with ambient lighting, climate control, and aroma diffuser, integrated into modern car dashboard, futuristic design, wooden finish with metallic accents, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+                { id: 246, img: "images/in_aroma_seat_0204.png", title: "カスタムアロマ・マッピングシート", desc: "シートに埋め込まれたアロマディフューザーと、車内空間を「香りでマッピング」する機能。好きな香りをタッチで選択し、ドライバーと乗員の位置に応じて香りを配分。ストレス軽減や集中力アップを実感できる「心地よい空間」を自動生成。", imagePrompt: "Customizable aroma mapping seat with embedded diffuser, scent visualization on dashboard screen, ambient lighting, premium leather upholstery, modern car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 247, img: "images/idea_247.png", title: "AI連携温熱ベルト「WarmSync」", desc: "車内温度に応じて自動加熱する温熱ベルト。AIが運転者の体調と好みを学習し、快適な温度を維持。冬の着用コートを脱ぐ促進で安全性能向上。運転中のストレス軽減と、温かさで「心地よいドライブ」を実現。", imagePrompt: "AI-powered heated seatbelt integrated into car interior, glowing warmth effect, futuristic dashboard, premium materials, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 248, img: "images/idea_248.png", title: "サブスク対応スマートコンソール「FlexConsole」", desc: "USB接続のポータブルプレーヤーに代わる、機能を後払い可能なスマートコンソール。ADASや360度カメラなど、必要に応じて有料で追加。使い方の自由度とコスト削減で「好きな機能だけ選べる」快適さ。車内を自分のスタイルにカスタマイズできる喜び。", imagePrompt: "Smart console with subscription-based features, car interior with touch screen, customizable interface, ambient lighting, modern design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 249, img: "images/idea_249.png", title: "クラシックモード・ソフトトップコンソール", desc: "1970年代のVolvo P1800 ESをモチーフにしたソフトトップ車用コンソール。レトロな質感と現代の**タッチレスHMI**、**天然木とレザー**の素材で、ドライバーに「風を感じる」歴史的喜びと「今すぐ使える」便利さを提供。クラシック車好きと現代テクノロジー愛好家にうれしい、**タイムトラベル感覚の内装**。", imagePrompt: "Classic-inspired convertible car interior console with retro wood grain and leather, modern touchless HMI display, ambient lighting, 1970s Volvo P1800 ES design elements, luxury car cockpit, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 250, img: "images/idea_250.png", title: "安全安心ハンドル・オープンドアシステム", desc: "隠しハンドル禁止の規制に対応し、**引き出し式ハンドル**を「開閉が直感的で安全」に進化させた製品。**物理的開閉**と**HMI連動**で、ドライバーの手を離さずにドアを開ける。**家族連れや高齢者**にうれしい、**緊急時にも安心**な操作性。EV車やSUVにも搭載可能。", imagePrompt: "Modern car door handle system with intuitive pull-open mechanism, integrated HMI display, safety-focused design, sleek metallic finish, ambient lighting, luxury vehicle interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+    {
         date: "2026-02-03",
         analysis: {
             jp: "**新素材**と**豪華内装**が注目され、**EV**車の価格抑制と**シート**の高級化がトレンド。**北米トヨタ**の3列シートEVや**トヨタモデリスタ**の「オシャレでイイ」コンセプトは、**消費者の質感重視**を反映。**規制**による価格下落も影響し、**サプライチェーン**の再編で**日本製**の高品質素材が強み。自社開発では、**環境配慮型高級内装**と**AI連携シート**の実用化が示唆。",
@@ -31,7 +63,7 @@ window.DAILY_INSIGHTS = [
             ],
         }
     },
-{
+    {
         date: "2026-02-02",
         analysis: {
             jp: "**GHG削減**と**カーボンニュートラル**が主流になり、**素材の持続可能性**が内装開発のキーワード。**V2H対応**や**低床設計**が**介護・VANLIFE**ニーズに応える。**AIアシスタント**や**タッチパネル**のストレスは消費者の不満を増幅。**安全センサー**の標準化は**安心感**を高める。日本市場では**カスタマイズ性**と**実用性**の両立が求められる。",
@@ -63,7 +95,7 @@ window.DAILY_INSIGHTS = [
             ],
         }
     },
-{
+    {
         date: "2026-01-30~2026-02-01",
         analysis: {
             jp: "日本の自動車内装市場では、**カスタマイズ**と**機能性**が注目され、特に**HRC技術**や**後付けアクセサリー**の需要が高まっています。**香り対策**や**充電機能**も消費者ニーズに応える要素として強化。**高級感と実用性の融合**が主流で、**価格帯の拡大**も見られます。自社製品開発では、**カスタマイズ性と快適性**を両立した製品が求められ、**AI連携や香り制御**の機能を組み込むことが示唆されます。",
@@ -95,7 +127,7 @@ window.DAILY_INSIGHTS = [
             ],
         }
     },
-{
+    {
         date: "2026-01-29",
         analysis: {
             jp: "日本の内装市場は**カスタマイズ**と**高級感**に注目。**本革内装**や**新素材**がトレンドで、**EV車の内装**も進化中。**子育て向け**や**レトロデザイン**のニーズも顕著。競合は**HMIの革新**と**快適性**を強調。サプライチェーンは**高コスト素材**に依存。自社は**カスタム性と快適性の両立**を強みに、**子育て・レトロ・高級**の3つのニッチを狙うべき。",
@@ -127,7 +159,7 @@ window.DAILY_INSIGHTS = [
             ],
         }
     },
-{
+    {
         date: "2026-01-28",
         analysis: {
             jp: "イルミ演出や断熱素材、キャンピングカー／カスタム系の話題が集中し、内装は“使い方に合わせて体験を作る”方向へ。ヴィーガンレザーや専用シートカバーなど素材提案も増え、快適性と個性の両立が進んでいる。",
@@ -287,7 +319,7 @@ window.DAILY_INSIGHTS = [
             ]
         }
     },
-            {
+    {
         date: "2026-01-19",
         analysis: {
             jp: "軽・ミニバン向けのLEDコンソールやワイヤレス充電など後付け利便装備が注目され、短時間施工で室内価値を上げる流れが強い。さらにID.ポロのレトロ表示などHMIデザインで気分を変える操作体験が差別化要素になっている。",
