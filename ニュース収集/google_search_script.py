@@ -281,6 +281,26 @@ def normalize_image_url(candidate, base_url):
         return candidate
     return ""
 
+def rank_image_url(url: str) -> int:
+    """Prefer higher-quality Yahoo (yimg.jp) image variants when multiple candidates exist."""
+    if not url:
+        return -999
+    score = 0
+    lower = url.lower()
+    if "yimg.jp" in lower:
+        score += 10
+        # Prefer URLs with explicit size/quality params
+        if "pri=" in lower:
+            score += 5
+        if "w=" in lower or "h=" in lower:
+            score += 3
+        # Prefer -000-2- over -000-1- when both exist
+        if re.search(r"-000-2-", lower):
+            score += 4
+        if re.search(r"-000-1-", lower):
+            score -= 1
+    return score
+
 def collect_image_candidates(soup, base_url):
     candidates = []
     metas = [
@@ -344,6 +364,8 @@ def collect_image_candidates(soup, base_url):
         norm = normalize_image_url(cand, base_url)
         if norm:
             normalized.append(norm)
+    if normalized:
+        normalized.sort(key=rank_image_url, reverse=True)
     return normalized
 
 def is_pubmed_or_pmc_url(url):

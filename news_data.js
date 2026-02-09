@@ -18890,7 +18890,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-02-08",
         tags: ["シート"],
         country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260209-10398709-vague-000-1-view.jpg?exp=10800",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260209-10398709-vague-000-2-view.jpg?pri=l&w=450&h=300&exp=10800",
         note: ""
     },
     {
