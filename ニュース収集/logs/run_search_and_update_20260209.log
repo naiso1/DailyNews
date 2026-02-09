@@ -1,0 +1,10 @@
+==================================================
+[START] 2026-02-09 08:39:13
+[INFO] Target range: 2026-02-05 to 2026-02-08
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-05,2026-02-06,2026-02-07,2026-02-08
+[google_search_script] C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py:1516: MarkupResemblesLocatorWarning: The input looks more like a filename than markup. You may want to open this file and pass the filehandle into Beautiful Soup.
+[google_search_script]   desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
+[google_search_script] C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py:1654: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+[google_search_script]   ddgs = DDGS()
+[google_search_script] C:\Users\demo\AppData\Local\Programs\Python\Python311\Lib\site-packages\PIL\Image.py:970: UserWarning: Palette images with Transparency expressed in bytes should be converted to RGBA images
+[google_search_script]   warnings.warn(

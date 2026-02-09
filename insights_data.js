@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-05~2026-02-08",
+        analysis: {
+            jp: "**内装のカスタマイズ性**が注目され、限定車や専用収納アイテムの需要が高まっている。**EV車の快適性**（シート・航続）や**ディスプレイの標準化**（9インチ）がトレンド。**高級SUVの後席快適性**が競争要素となり、**コネクテッド機能**（CD対応）も需要の転換点。自社製品では**モジュラーコンソール**や**EV向け快適シート**の開発が示唆される。",
+            cn: "中国市場では**高級SUV**と**スマート座席**が注目され、**AIコネクテッド**機能の強化が進む。**軽量化材料**や**3D視覚技術**の特許取得が目立つ。消費者は**快適性**と**安全体験**を重視し、**座席の回転・調整機能**や**フロントディスプレイ**の革新が求められる。自社開発では、**AI対応のスマート座席**と**回転ディスプレイ**を組み合わせた製品が差別化につながる。",
+            in: "インド市場では**ダブルスクリーン**や**パノラマサンルーフ**が主流化し、**家族向け実用性**が重視されている。**EV車**は**航続距離500km**や**高音質オーディオ**で差別化。規制では**隠しハンドル禁止**で**安全性**重視。内装開発では**柔軟シートレイアウト**と**直感的HMI**が求められる。",
+            us: "米国市場では**EV中心の新車多数登場**がトレンドで、**ステアリングヒーターの温度差問題**が注目。**高級感のある新素材**（フェイクレザー、ソフトタッチ）と**AIコックピット**の進化が進む。**カスタマイズ需要**が高まり、**HMIの親和性**や**シート機能**（マッサージ、回転式）が重要。規制や価格戦略も影響し、**快適性・機能性**を重視する消費者のニーズが顕著。自社製品では**温度均一性・カスタム対応・AI連携**を強みにすべき。",
+            eu: "欧州市場では**EVシェア20%**と成長が加速し、**HMIのUI課題**や**AI統合ネットワーク**（10BASE-T1S）が注目。**高級感の再定義**（トヨタSUV）や**文化融合デザイン**（日産の日本文化導入）がトレンド。**サブスク通知**の誤解が話題となり、**ユーザー体験の透明性**が求められる。内装開発では、**文化的要素**と**テクノロジーの融合**、**直感的HMI**、**サステナブル素材**の導入が示唆。",
+        },
+        ideas: {
+            jp: [
+                { id: 251, img: "images/jp_modular_console_0205.png", title: "モジュラーコンソールトレイ「FlexFit」", desc: "ジムニー・キャラバン向けの**カスタムトレイ**で、**収納・照明・USBポート**を自由に配置。**車種別サイズ対応**で、**洗練された内装を演出**。**おしゃれな光り方**でドライバーの気分をUP！", imagePrompt: "Modular center console tray for compact SUVs, customizable lighting zones, USB ports and storage compartments, leather and aluminum finish, modern automotive interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 252, img: "images/jp_ev_seat_0205.png", title: "EV快適シート「ComfortAir」", desc: "**EV専用のヒート＆クーラー機能**を搭載。**頭上・膝下の空間を最大限確保**。**快適な座り心地**で長時間ドライブもストレスフリー。**電動調節で自分好みの姿勢**に！", imagePrompt: "Premium EV seat with integrated heating and cooling, ergonomic design with ample headroom and legroom, soft-touch materials and ambient lighting, futuristic automotive interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 253, img: "images/idea_253.png", title: "AI対応回転スマート座席", desc: "座席が180°回転し、AIが快適な姿勢を自動調整。天然木とNAPPAレザーで高級感を演出。家族や友人と話しながらリラックスできる設計で、移動の楽しみを劇的に変える。", imagePrompt: "AI-powered rotating smart seat with luxury wood and NAPPA leather, 180-degree rotation, ambient lighting, futuristic automotive interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 254, img: "images/idea_254.png", title: "3D浮遊ディスプレイ付きコントロールパネル", desc: "中央に浮遊する3Dディスプレイで操作が楽しくなる。車内を「モバイルホーム」として体感できる。親子や友人との会話に最適な画面サイズと角度で、移動の時間も心地よいものに。", imagePrompt: "3D floating display integrated into automotive dashboard, holographic interface with intuitive controls, modern car interior, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 255, img: "images/in_panorama_seat_0205.png", title: "家族の笑顔を育むパノラマシートシステム", desc: "車内を「遊び場」に。**パノラマサンルーフ**と**3列シートの角度調整**で家族が自由に配置。**USB充電・音楽共有**機能で、おしゃべりも楽しめる。子供が乗ったら「笑顔が増える」そんな車内を提供。", imagePrompt: "Family-friendly panoramic roof interior with adjustable 3-row seats, kids playing and laughing, USB charging ports and shared audio system, modern Indian MPV design, warm ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 256, img: "images/idea_256.png", title: "500km航続＋ハーマン・カーンオーディオのEVサウンドパッド", desc: "**500km航続**で遠出も安心。**12.3インチタッチスクリーン**に**ハーマン・カーンオーディオ**を搭載。**音楽が広がる**車内は、**運転中のストレスを解消**。音楽で「気分を上げる」、そんな充電しながらのドライブ体験。", imagePrompt: "EV interior with 12.3-inch touchscreen and Harman Kardon audio system, premium materials, panoramic view, ambient lighting, modern Indian EV design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 257, img: "images/us_heated_steering_0205.png", title: "温度均一ヒーターステアリング", desc: "ステアリング全体を均一に温かくするヒーターで、運転中の手の冷たさを解消。快適な握り心地と、温度差による不快感を排除。高級感のあるブラック・レザー調デザインで、運転の安心感と満足感を同時に提供。", imagePrompt: "Temperature-uniform steering wheel heater, modern vehicle cockpit, integrated heating elements glowing softly, black leather finish, premium automotive design, cinematic lighting, photorealistic 3D render, 4K quality" },
+                { id: 258, img: "images/idea_258.png", title: "360度回転チャイルドシート「Galaxy360」対応モデル", desc: "Britaxの「Galaxy360」をモチーフにした、車内に取り付けられる回転式チャイルドシート。子供が好きな方向に自由に回転でき、後向き使用も可能。安全・便利・遊び心を兼ね備え、親子の笑顔を生み出す。", imagePrompt: "360-degree rotating child seat integrated into car interior, modern vehicle cockpit, sleek design with safety harnesses, warm ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 259, img: "images/idea_259.png", title: "文化融合デザインパネル：日本の「Pike車」をモチーフにした欧州向け内装", desc: "日本文化の「Pike車」をモチーフに、温かみのある木目と柔らかな曲線で欧州市場に新感覚を提供。タッチパネルの操作性を高め、**文化を体感できるデザイン**でユーザーの心を満たす。高級感と親しみやすさを両立し、**「日本製」の信頼性**を強化する。", imagePrompt: "Cultural fusion interior panel inspired by Japanese 'Pike car' design, warm wood grain and soft curves, European luxury car cockpit, ambient lighting, premium materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 260, img: "images/idea_260.png", title: "AI統合HMI：直感的UIと感情認識でドライバーをサポートするナビゲーション", desc: "AIがドライバーの表情や操作習慣を学び、**直感的で親しみやすいUI**を提供。**「怒りの表情」や「疲労」を検知**して、音声アシスタントや音楽を自動調整。**安全・快適さの両立**で、運転中のストレスを減らし、**「心地よいドライブ」を実現**。", imagePrompt: "AI-powered intuitive HMI with emotion recognition, holographic interface floating above dashboard, futuristic cockpit design, ambient lighting, blue accent, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+    {
         date: "2026-02-04",
         analysis: {
             jp: "日本市場では**カスタマイズ**と**燃費性能**が注目され、**安全センサー**や**AR技術**の進化も顕著。**内装快適性**へのこだわりが高まり、**フッ素不使用素材**の開発も進む。自社製品では**個性化内装**と**省エネ機能**を強みに、**AI連携**や**耐熱素材**の応用で差別化を図るべき。",
