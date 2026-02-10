@@ -1,0 +1,8 @@
+==================================================
+[START] 2026-02-10 00:00:01
+[INFO] Target range: 2026-02-09 to 2026-02-09
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-09
+[google_search_script] C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py:1538: MarkupResemblesLocatorWarning: The input looks more like a filename than markup. You may want to open this file and pass the filehandle into Beautiful Soup.
+[google_search_script]   desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
+[google_search_script] C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py:1676: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+[google_search_script]   ddgs = DDGS()

@@ -1,4 +1,5 @@
-﻿import datetime
+import datetime
+import os
 import re
 from pathlib import Path
 from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT
@@ -31,6 +32,8 @@ def run_cmd(cmd, label, log_file):
     log(f"[RUN] {label}: {' '.join(cmd)}")
     proc = None
     try:
+        env = os.environ.copy()
+        env["PYTHONUNBUFFERED"] = "1"
         proc = Popen(
             cmd,
             creationflags=CREATE_NEW_PROCESS_GROUP,
@@ -38,6 +41,7 @@ def run_cmd(cmd, label, log_file):
             stderr=STDOUT,
             text=True,
             bufsize=1,
+            env=env,
         )
         if proc.stdout:
             for line in proc.stdout:
@@ -84,12 +88,12 @@ def main():
             cur += datetime.timedelta(days=1)
         dates_arg = ",".join(dates)
         try:
-            run_cmd([sys.executable, str(SCRIPT_DIR / "google_search_script.py"), "--dates", dates_arg], "google_search_script", LOG_FILE)
-            run_cmd([sys.executable, str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
-            if WORKFLOW.exists():
-                run_cmd([sys.executable, str(ROOT / "generate_idea_images_comfyui.py"), "--only-missing", "--workflow", str(WORKFLOW)], "generate_idea_images_comfyui", LOG_FILE)
+            run_cmd([sys.executable, "-u", str(SCRIPT_DIR / "google_search_script.py"), "--dates", dates_arg], "google_search_script", LOG_FILE)
+            run_cmd([sys.executable, "-u", str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
+            if os.environ.get("OPENAI_API_KEY"):
+                run_cmd([sys.executable, "-u", str(ROOT / "generate_idea_images_openai.py"), "--only-missing", "--quality", "low"], "generate_idea_images_openai", LOG_FILE)
             else:
-                log(f"[WARN] Workflow not found: {WORKFLOW}")
+                log("[WARN] OPENAI_API_KEY not set; skip OpenAI image generation.")
         except KeyboardInterrupt:
             log("[INFO] Interrupted by user.")
             return

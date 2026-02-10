@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-09",
+        analysis: {
+            jp: "日本の自動車内装市場は**カスタマイズ**と**省エネ素材**の需要が高まり、**EV**や**AI音声ナビ**の普及で**コネクテッド**な体験が主流化。**トヨタ**の多用途設計や**フェラーリ**のシンプル機能主義は、高級感と実用性のバランスを重視するトレンド。**税制改革**で低コスト化が進む中、**安全・快適性**を強化した製品が求められる。",
+            cn: "中国市場では**OTAによるソフトウェア更新**が安全対策として広く採用され、**スマートシート**や**カスタム素材**の革新が進む。**華為のスマート座席**がMPV市場に新たな体験をもたらし、**新素材の軽量化**や**自発光内装**の技術が注目。消費者は**機能性とカスタマイズ性**を重視しており、内装製品開発では**AI連携**と**体感革新**が差別化ポイントとなる。",
+            in: "インド市場では**AI対応CarPlay**と**EVのOTA更新**が主流化し、**安全技術**がマス市場へ浸透中。**AR**や**ディスプレイ**の進化が内装のUXを変革。**コスト競争力**の向上により、**高機能・低価格**の内装製品が求められる。日産Graviteやタタ・パーンチEVの内装は、**AMT**や**360度カメラ**の統合が特徴。**素材・照明**の高機能化もトレンド。",
+            us: "**Apple元デザイナーJony Ive**と**Marc Newson**が手がけたフェラーリLuce EVの内装は、**アナログとデジタル融合**のHMIを採用。**ガラスボタン**や**メカニカル針**を重視し、**視覚的負担を軽減**する設計が特徴。**航空機・クラシックカーのデザイン**を融合させ、**タッチスクリーンではなくタクトスイッチ**を採用。**高級感と操縦感**を両立させた**革新的な内装トレンド**を示唆。日本市場では**高級EVの内装デザイン**に**触覚・視覚の両面で新規性**を求める消費者ニーズに応えるべき。",
+            eu: "**物理操作重視**の内装が**高級感と機能性**を両立させるトレンドが欧州で顕著。**Jony Ive**の設計思想がフェラーリLuce EVに反映され、**視線逸らしを防ぐ安全設計**が重視。**欧州NCAPの規制**により、基本機能はボタン統一が義務化され、**直感的かつ安全な操作**が求められる。これにより、**高級車向けのタッチスクリーン離れ**が進む可能性あり。",
+        },
+        ideas: {
+            jp: [
+                { id: 261, img: "images/jp_ai_voice_0209.png", title: "AI音声アシスタント搭載「GetPairr Vista 2.0」カスタムパッケージ", desc: "2万円台で手に入るAI音声ナビを、高級内装素材と統合したカスタムパッケージ。家族での移動を快適にし、**「声で操作できるから、子供も安心」**。木目調パネルと柔らかいレザーで、**「まるで高級車の内装が、普通の車に乗れる」**感覚。", imagePrompt: "AI voice assistant nav system integrated with luxury wood trim and soft leather interior, modern vehicle cockpit, ambient lighting, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+                { id: 262, img: "images/jp_jeep_console_0209.png", title: "モジュラーコンソール「Jeep 1941」デザイン・カスタムキット", desc: "Jeep限定モデルのセンターコンソールをモジュール化し、**「好きな色や素材でカスタマイズできる」**。**「おしゃれな内装が、自分の車に合う」**感覚で、**「友達に見せたら「これ、俺の車だ！」って言われる」**喜びを提供。", imagePrompt: "Modular center console with 'Jeep 1941' engraving, customizable materials and colors, luxury car interior, brushed aluminum and leather materials, photorealistic 3D render, premium automotive design" },
+            ],
+            cn: [
+                { id: 263, img: "images/cn_ai_smart_seat_0209.png", title: "AIスマートシート「智活座」", desc: "AIが座り方を学習し、体圧を最適化するスマートシート。車内を「リビング」のように自由に変形し、長時間ドライブでも疲れ知らず。スマートフォン連携で好みの温度・姿勢を記憶。旅の終わりに「快適さの感謝」をAIが伝える。うれしさ：体の負担を軽く、心の余裕を増やす。", imagePrompt: "AI-powered smart seat with adaptive pressure distribution, transforming into a lounge mode, futuristic vehicle interior, warm ambient lighting, leather and carbon fiber materials, holographic interface showing comfort level, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 264, img: "images/cn_luminous_console_0209.png", title: "軽量自発光コンソール「光のリビング」", desc: "透光性素材で作られたコンソールが、車内を「光の空間」に変換。OTAで色やパターンをカスタマイズ。夜間運転時も視認性を高め、気分をリラックスさせる。スマートフォンで「お気に入りの光」を保存。うれしさ：車内をまるでアート空間のように、毎日が新しい発見。", imagePrompt: "Self-luminous console with customizable light patterns, integrated into vehicle interior, glowing ambient lighting, minimalist design, translucent material with embedded LED, premium finish, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 265, img: "images/in_ai_console_0209.png", title: "AIチャット付きスマートコンソール", desc: "CarPlayとChatGPT・Gemini対応のコンソールで、運転中の質問に即座に答える。高級感のある木目調とLEDリングで、操作の楽しさと安心感を両立。家族や同乗者との会話が楽しくなる、心地よいドライビング体験。", imagePrompt: "AI chat-enabled smart console with holographic interface, luxury car interior, wood grain finish and ambient LED ring, futuristic yet cozy design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 266, img: "images/in_led_panel_0209.png", title: "マルチモードLEDイルミネーションパネル", desc: "運転中の気分に合わせて色やパターンを変えるLEDパネル。安全運転モードでは青、快適モードでは温かみのあるオレンジ。内装の雰囲気を演出しながら、運転者のストレス軽減に貢献。見た目だけでなく、心のケアもしてくれる、心地よい空間づくり。", imagePrompt: "Multi-mode LED illumination panel for car interior, ambient color-changing effect, modern vehicle cockpit, sleek minimalist design, warm and cool lighting modes, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 267, img: "images/us_tactile_ev_0209.png", title: "タクト・クラシック：物理ボタン搭載の高級EV内装", desc: "クラシックカーの操作感を現代EVに再現。**ガラスボタンとメカニカル針**で、**タッチスクリーンの煩わしさを解消**。**高級感と操縦の安心感**を両立。**運転中の集中力維持**に貢献。**「手触りの質」が新しい快適性**を生み出す。", imagePrompt: "Classic-inspired automotive interior with glass buttons and mechanical dials, luxury EV cockpit, brushed aluminum and leather materials, ambient warm lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 268, img: "images/us_analog_digital_0209.png", title: "アナログ・デジタル融合：ダッシュボード・OLEDインストルメント", desc: "**アナログメーターとOLEDディスプレイを融合**したコックピット。**視覚的負担を軽減**し、**運転中の集中力を維持**。**高級感と機能性の両立**。**「見やすい」デザインが安心感**を生み出す。**「見た目も使いやすい」快適性**を追求。", imagePrompt: "Futuristic dashboard with analog dials and OLED display, luxury EV cockpit, sleek glass panel, ambient blue lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 269, img: "images/eu_unified_buttons_0209.png", title: "物理ボタン統一コントロールパネル", desc: "運転中の視線移動を最小限に抑えられる、**ボタンとダイヤルの統一設計**。高級感ある金属・木目調素材で、**触れるすべてが機能**。**安全と快適さ**を両立し、**「運転中の手の動きがストレスフリー」**という満足感を提供。", imagePrompt: "Premium automotive interior control panel with unified physical buttons and dials, minimalist luxury design, brushed metal and wood grain materials, ergonomic layout for driver safety, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 270, img: "images/eu_aroma_display_0209.png", title: "高級香りディスプレイ一体型パネル", desc: "**香りとディスプレイを統合した高級内装**。Apple風の**洗練されたデザイン**で、**気分をコントロール**。**「好きな香りで気分転換」**の楽しさと、**視覚・嗅覚で楽しめる高級感**を提供。**運転中にリラックスできる**という実用性と愉しみ。", imagePrompt: "Luxury car interior with integrated aroma diffuser and display panel, minimalist modern design, ambient lighting with scent visualization, premium materials like leather and aluminum, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+    {
         date: "2026-02-05~2026-02-08",
         analysis: {
             jp: "**内装のカスタマイズ性**が注目され、限定車や専用収納アイテムの需要が高まっている。**EV車の快適性**（シート・航続）や**ディスプレイの標準化**（9インチ）がトレンド。**高級SUVの後席快適性**が競争要素となり、**コネクテッド機能**（CD対応）も需要の転換点。自社製品では**モジュラーコンソール**や**EV向け快適シート**の開発が示唆される。",
