@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-11",
+        analysis: {
+            jp: "日本市場では**SUV化**と**レトロデザイン**が内装トレンド。トヨタクラウンSUVやダイハツミライースの昭和風内装が好評。**AI内装**（メルセデスMBUX）や**EV化**（トヨタハイランダーBEV）が進むが、**物理操作部品重視**のフェラーリLuceも注目。消費者は「**威圧感**」「**コスパ**」「**親しみやすさ**」を重視。内装開発では**機能性とデザインの両立**、**高齢者向け物理操作**、**レトロとモダンの融合**が鍵。",
+            cn: "中国市場では**EV内装**と**新素材**が注目され、フェラーリLuceの**アップル風デザイン**がクラシックへの敬意と現代技術の融合を示す。**知能製造**や**特許取得**が進み、生産能力拡大と**高品質素材**の需要が高まっている。消費者は**安全**と**スマート機能**を重視し、**逆送電**による収益モデルも実用化されつつある。内装開発では**人間中心デザイン**と**持続可能性**を軸に、**物理ボタン**や**高級感素材**の復活が差別化ポイントとなる。",
+            in: "インド市場では**電動化**と**ソフトウェア定義車両**の進化が加速し、**軽量素材**と**AI搭載内装**が注目されている。タタやヒュンダイは**工場拡大**と**内装革新**を推進。**規制・政策**の影響で、**サプライチェーンのグローバル化**が進む。自社開発では**AI連携型内装**と**軽量高機能素材**の導入が鍵となる。",
+            us: "米国市場では**電動化**が進み、トヨタのHighlander EVは**320マイル航続**と**NACS対応**で注目。**新素材**の導入（Compax、リサイクルファブリック）や**カスタマイズ**（3Dプリント部品）がトレンド。**機能オンデマンド**（ヒートシートサブスク）の試みも見られ、**持続可能な素材**への関心が高まっている。内装開発では、**軽量・耐久性・省エネ**を重視しつつ、**顧客の個性**を尊重するデザインが求められる。",
+            eu: "欧州市場では**リトロデザイン**と**EVの低重心化**がトレンド。Volvoやトヨタが伝統的車体を復活させ、**安全・快適性**重視の**コックピット**が主流。**Lotus調教**や**高機能HUD**の導入で、**家族向け**かつ**スタイリッシュ**な内装が求められている。サプライチェーンの拡大（HELMA、BYD）も、**コストパフォーマンス**と**機能性**の両立が鍵。",
+        },
+        ideas: {
+            jp: [
+                { id: 281, img: "images/idea_281.png", title: "レトロ×モダン メッキ・木目内装パッケージ", desc: "昭和レトロの木目パネルとメッキパーツを、高精度なタッチセンサーとLED照明で現代化。高齢者でも安心操作、家族の思い出を呼ぶデザイン。車内を「心地よい空間」に。親しみやすさと機能性を両立した、日本の「おもてなし」を体現する内装。", imagePrompt: "Retro-modern automotive interior with wood grain panels and chrome accents, touch-sensitive controls, ambient LED lighting, warm tones, luxury car cabin, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 282, img: "images/idea_282.png", title: "AIアシスタント搭載「MBUX4.0」スマートコントロールパネル", desc: "メルセデスのMBUX第4世代をベースに、日本語対応で音声・タッチ・物理ボタンを最適化。後部座席からスマホ充電やビデオ会議を可能に。家族で使える「スマートな親しみやすさ」。夜間運転でも「安心・快適」な操作体験。家族の笑顔を増やす、未来の車内。", imagePrompt: "AI-powered MBUX 4.0 control panel with voice and touch interface, holographic display, modern car interior, soft ambient lighting, Japanese language support, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 283, img: "images/idea_283.png", title: "クラシック・アップル風インテリアパネル", desc: "フェラーリLuceを模したアップル風デザインの内装パネル。物理ボタンとタッチ操作を融合し、高級感と直感性を両立。タッチレス操作でストレスフリーなドライビングを実現。**うれしさ**：昔ながらの操作感と未来のデザインが共存し、運転中の心地よさがアップ！", imagePrompt: "Apple-inspired automotive interior panel with hybrid physical buttons and touch interface, luxury car cockpit, brushed aluminum and matte black finish, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 284, img: "images/idea_284.png", title: "スマート・逆送電充電モジュール", desc: "車両が夜間充電後、昼間に電網へ逆送電するモジュール。ユーザーが**収益を得られる**スマート充電体験。充電中も**快適な内装照明**と**温湿度管理**で快適性を保つ。**うれしさ**：毎日が収益の日！充電を楽しみ、環境にも貢献できる新感覚の移動生活。", imagePrompt: "Smart vehicle charging module with bidirectional power flow, integrated into car interior dashboard, modern cockpit design with ambient lighting, sleek metallic finish, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 285, img: "images/idea_285.png", title: "AI音声アシスタント内装パネル", desc: "車内に設置するAI音声アシスタントパネルで、運転中の操作を最小化。音声でカスタムモード切り替えや環境調整が可能。家族や同乗者との会話も自然にサポート。**運転の安心感と快適性が格段に向上**。", imagePrompt: "AI voice assistant panel integrated into car interior, sleek minimalist design, ambient lighting, responsive touch interface, modern vehicle cockpit, matte black and metallic accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 286, img: "images/idea_286.png", title: "軽量カーボンファイバー内装パネル", desc: "軽量かつ高剛性のカーボンファイバー素材で内装を構成。軽量化による燃費向上と、高級感あふれる質感で**快適なドライビング体験を提供**。熱伝導性も優れており、夏場の快適性も確保。**見た目と実用性の両立で、カスタマーサポートも高まる**。", imagePrompt: "Carbon fiber interior panel with sleek modern design, luxury car cockpit, matte finish and subtle gloss highlights, integrated lighting, premium quality materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 287, img: "images/idea_287.png", title: "モジュラーハイブリッドシート：カスタム＆省エネ", desc: "座席のクッションとフレームを3Dプリントで自由にカスタム可能。**省エネ設計**で熱管理も最適化。**高級感と機能性を両立**。車両に合わせて**個性的なデザイン**で、**乗り心地と快適さ**を最大限に。うれしいのは、**好きなスタイルで自分の車をカスタム**できること。", imagePrompt: "Modular hybrid car seat with customizable 3D-printed cushions and frame, integrated thermal management system, luxury interior with ambient lighting, eco-friendly materials, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+                { id: 288, img: "images/idea_288.png", title: "サステナブルテクノロジー・シート：カシミア＆リサイクルファブリック", desc: "**高級感のカシミア**と**リサイクル素材**を組み合わせたシート。**省エネ**・**耐久性**・**快適性**を実現。**環境配慮型**で、**持続可能な選択肢**を提供。**見た目も実用性も抜群**。うれしいのは、**地球に優しく、自分に優しく**、**高級感とエコを両立**できる点。", imagePrompt: "Luxury car seat with cashmere and recycled fabric blend, eco-conscious design with sustainable materials, modern vehicle cockpit, soft ambient lighting, premium quality, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 289, img: "images/idea_289.png", title: "リトロモダンセンターコンソール", desc: "1980年代の日産Be-1をモチーフにしたコンソール。柔らかな曲線と木目調パネルで、クラシックな温かみと現代のタッチスクリーンを融合。家族で楽しめる**レトロな遊び心**と、**直感的HMI**でストレスフリー。車内を「思い出の部屋」に変える。", imagePrompt: "Retro-modern center console with curved wood grain panel, integrated touch screen, ambient lighting, vintage Nissan Be-1 inspired design, luxury car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 290, img: "images/idea_290.png", title: "Lotus調教快適セグメント最高峰セーフティコックピット", desc: "Geely Starray EM-Iの乗り心地をベースに、Lotusの**ダンス・コントロール**を内装に取り入れた。**360度安全モード**と**AIアシスタント**が快適運転をサポート。**家族向け**でも**スタイリッシュ**な乗り味で、**安心感**と**楽しさ**を両立した設計。", imagePrompt: "Lotus-tuned premium safety cockpit with AI assistant hologram, ergonomic dashboard, ambient lighting, family-friendly seating, modern vehicle interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-10",
         analysis: {
             jp: "日本市場では**HMI**と**新素材**の融合が進み、フェラーリのEV「ルーチェ」が**物理操作＋デジタルUI**を採用。**カスタマイズ**需要も高まり、NATS学生のカスタムヴェルファイアが車検通過。**シート**機能の進化（セレナマルチベッド）や**EV**の普及（BYD DOLPHIN）がトレンド。内装製品開発では、**ユーザー体験重視の物理＋デジタル融合**、**カスタマイズ性の高い素材**、**快適性を高める機能**が重要。",
