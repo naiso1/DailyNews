@@ -780,6 +780,31 @@ def is_missing_url(val):
             return True
     return False
 
+def is_yimg_placeholder(url, timeout=5):
+    """Detect Yahoo yimg.jp placeholder (often 404 image/gif small file)."""
+    if not url or "yimg.jp" not in str(url).lower():
+        return False
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=timeout, stream=True)
+        if resp.status_code >= 400:
+            return True
+        ctype = (resp.headers.get("Content-Type", "") or "").lower()
+        clen = resp.headers.get("Content-Length")
+        if clen:
+            try:
+                if int(clen) < 2000:
+                    return True
+            except Exception:
+                pass
+        if "image/gif" in ctype:
+            # Yahoo 404 placeholder tends to be a tiny gif
+            chunk = resp.raw.read(2048, decode_content=True)
+            if chunk and len(chunk) < 2000:
+                return True
+        return False
+    except Exception:
+        return True
+
 _translation_cache = {}
 _summary_cache = {}
 _article_text_cache = {}
@@ -1549,6 +1574,11 @@ def fetch_from_rss(target_dates):
                             resolved_link = resolved_pw
                         if image_pw:
                             image_url = image_pw
+                    # Yahoo yimg placeholder: fallback to og:image
+                    if image_url and is_yimg_placeholder(image_url):
+                        alt = fetch_image_from_page(resolved_link) if resolved_link else ""
+                        if alt:
+                            image_url = alt
                     results.append({
                         "国": country,
                         "検索ワード": "RSS",

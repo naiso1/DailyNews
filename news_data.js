@@ -19636,7 +19636,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-02-10",
         tags: ["ディスプレイ"],
         country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260211-01014725-kurumans-000-2-view.jpg?exp=10800",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260211-01014725-kurumans-000-3-view.jpg?exp=10800",
         note: ""
     },
     {
@@ -19648,7 +19648,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-02-10",
         tags: ["EV"],
         country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260210-01014390-kurumans-000-7-view.jpg?exp=10800",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260210-01014390-kurumans-000-8-view.jpg?exp=10800",
         note: ""
     },
     {
