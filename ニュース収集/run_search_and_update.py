@@ -34,15 +34,22 @@ def run_cmd(cmd, label, log_file):
     try:
         env = os.environ.copy()
         env["PYTHONUNBUFFERED"] = "1"
-        proc = Popen(
-            cmd,
-            creationflags=CREATE_NEW_PROCESS_GROUP,
-            stdout=PIPE,
-            stderr=STDOUT,
-            text=True,
-            bufsize=1,
-            env=env,
-        )
+        try:
+            proc = Popen(
+                cmd,
+                creationflags=CREATE_NEW_PROCESS_GROUP,
+                stdout=PIPE,
+                stderr=STDOUT,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                bufsize=1,
+                env=env,
+            )
+        except Exception as e:
+            log(f"[ERROR] {label} failed to start: {type(e).__name__}: {e}")
+            raise
+        log(f"[PID] {label}: {proc.pid}")
         if proc.stdout:
             for line in proc.stdout:
                 line = line.rstrip("\r\n")
@@ -99,6 +106,8 @@ def main():
             return
         except CalledProcessError as e:
             log(f"[ERROR] Command failed: {e}")
+        except Exception as e:
+            log(f"[ERROR] Unexpected error: {type(e).__name__}: {e}")
 
     log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     log("==================================================")

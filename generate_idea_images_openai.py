@@ -133,7 +133,7 @@ def main():
         if args.limit and count >= args.limit:
             break
         current = idea["img"] or ""
-        if args.only-missing and current and current != "images/idea_dummy.svg":
+        if args.only_missing and current and current != "images/idea_dummy.svg":
             continue
         dest_path = IMAGES_DIR / f"idea_{idea['id']}.png"
         if dest_path.exists() and not args.overwrite:

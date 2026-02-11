@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-10",
+        analysis: {
+            jp: "日本市場では**HMI**と**新素材**の融合が進み、フェラーリのEV「ルーチェ」が**物理操作＋デジタルUI**を採用。**カスタマイズ**需要も高まり、NATS学生のカスタムヴェルファイアが車検通過。**シート**機能の進化（セレナマルチベッド）や**EV**の普及（BYD DOLPHIN）がトレンド。内装製品開発では、**ユーザー体験重視の物理＋デジタル融合**、**カスタマイズ性の高い素材**、**快適性を高める機能**が重要。",
+            cn: "中国市場では**イオンスキン**や**新素材**が内装の耐寒性・快適性を向上させ、**HMI**や**スマートコックピット**の進化が加速。BYDの**UIアップグレード**やメルセデスの**フロア装飾特許**は、**個性化**と**安全性**を重視するトレンド。消費者は**操作の簡素化**と**視界の明瞭化**を求める。自社開発では、**耐極端温度素材**と**AI連携型HMI**の導入が示唆される。",
+            in: "インド市場では**EV化**と**高級内装**の需要が急増中。フェラーリの**Jony Iveデザイン**が**アナログメーター**と**タクトコントロール**を重視し、**AR・HMI**の革新を示唆。**後市場の部品信頼性向上**と**AI搭載シート**の導入が消費者ニーズに応える。自社開発では、**ハイブリッドデザイン**（デジタル＋アナログ）と**カスタマイズ可能な内装**を軸に、**高品質素材**と**低コスト製造**の両立を狙うべき。",
+            us: "**物理ボタン**と**アナログ操作**が再び主流となり、**HMIの安全設計**が重視される。**AppleデザインDNA**の導入により、**高級感と直感性**の両立が求められる。**タッチスクリーンへの懐疑**は、**運転中の集中力維持**に直結。**サプライチェーン**では**OLEDディスプレイ**や**E-ink素材**の供給が新たな課題となる。自社開発では、**物理インターフェースとデジタル融合**を軸にした新製品が有利。",
+            eu: "欧州市場では**HMI**と**AI**技術の進化が顕著で、STマイクロエレクトロニクスの**Stellar P3E**はエッジAI推論を実現。**Jony Ive**がデザインした**Ferrari Luce**はApple風の**高級内装**を示唆。消費者は**高機能・高デザイン**を重視しており、**Mazda 6e**や**Audi A6**の刷新は**快適性と信頼性**の両立を重視。サプライチェーンでは**リマニュファクチャ**が拡大し、コスト削減と持続可能性がトレンド。内装開発では**デザインと機能性の統合**が鍵。",
+        },
+        ideas: {
+            jp: [
+                { id: 271, img: "images/jp_smart_console_0210.png", title: "物理スイッチ付きスマートコンソール", desc: "ジョナサン・アイブ監修の「物理＋デジタル」UIを採用。タッチパネルに加え、高級アルミ製の物理スイッチで操作。運転中の誤操作防止と、高級感のある操作体験を実現。車内が「ライブ会場」のように楽しい。", imagePrompt: "Smart console with hybrid UI, physical aluminum switches, digital touchscreen, luxury car interior, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 272, img: "images/jp_cordura_seat_0210.png", title: "CORDURA素材のマルチベッドシート", desc: "日産セレナマルチベッドにインスパイアされた、CORDURA生地で作る快適車中泊シート。フルフラット空間と、オグショー製マットで「ホテルライク」な寝心地。旅行やレジャーで「まるでホテル」の快適さを実現。", imagePrompt: "Multi-bed seat with CORDURA fabric, full-flat space, luxury car interior, hotel-like comfort, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 273, img: "images/idea_273.png", title: "耐極寒イオンスキンシート", desc: "超低温でも柔軟性を保つイオンスキン素材をシートに採用。-40℃でも快適な座り心地で、冬の運転をストレスフリーに。家族やアウトドアユーザーに「寒さも怖くない！」と喜ばれる、温かさと先進性を融合した内装革命。", imagePrompt: "Ion-skin seat material with flexible texture, automotive interior design, integrated temperature-resistant feature, luxury car cockpit, metallic blue and warm beige color scheme, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 274, img: "images/idea_274.png", title: "AI視界最適化コックピット", desc: "運転中の視界をAIが自動最適化するコックピット。複雑な画面を整理し、運転視界を広げる設計で、「前方の視界が不自然だ！」という悩みを解消。安全と快適さを両立させ、ユーザーは「運転が楽しくなった！」と感じる、スマートで安心なドライビング空間。", imagePrompt: "AI-optimized cockpit with adaptive display, automotive interior design, holographic interface, clear driver's view, minimalist dashboard, futuristic blue and black color scheme, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 275, img: "images/idea_275.png", title: "タクトコントロールインテリジェントパネル", desc: "タッチレスで直感的な操作を可能にするパネル。アナログメーター風デザインで、高級感と使いやすさを両立。ユーザーが「手を動かすだけで操作できる」と感じる快適性と、**個別カスタム**（色・形状）が楽しめる。EV車にも対応し、**タッチパネルのストレス**を大幅に削減。", imagePrompt: "Tactile control panel with analog meter style, minimalist automotive interior, wooden texture and soft ambient lighting, touch-sensitive buttons with subtle glow, premium materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 276, img: "images/idea_276.png", title: "AR対応モバイルインテリアミラー", desc: "後席からも楽しめる**AR映像**を投影するミラー。家族や乗員の安全をサポートする**リアルタイムナビゲーション**や**天候情報**を映し出し、**家族の安心**と**旅の楽しみ**を同時に提供。**カスタムモード**で好みの映像やテーマを設定可能で、「家族が笑顔で過ごせる車内」を実現。", imagePrompt: "AR-enabled mobile interior mirror in luxury car, holographic navigation overlay, family-friendly interface, ambient lighting, glass surface reflecting AR content, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 277, img: "images/idea_277.png", title: "物理ボタン×ARコントロールユニット", desc: "ドライバーが直感的に操作できる物理ボタンに、ARによる情報投影機能を搭載。運転中の集中力を損なわない設計で、安全とスタイリッシュを両立。高級車のインテリアに「未来の手触り」を提供。うれしさ：操作が「わかる」から「感じる」体験に。", imagePrompt: "Automotive interior with physical knobs and buttons, AR holographic interface projected above dashboard, minimalist luxury design, warm ambient lighting, brushed aluminum and leather materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 278, img: "images/idea_278.png", title: "iPhone風デザイン・エコフレンドリー内装パッケージ", desc: "iPhoneの洗練されたデザインDNAを採用し、**環境負荷の低い素材**で構成した内装。**E-inkキーフォブ**や**OLEDダイヤル**で省エネ・高機能を実現。高級感と持続可能性を両立。うれしさ：「スマート」で「地球にやさしい」内装を、自分だけの車に。", imagePrompt: "Luxury car interior with eco-friendly materials, iPhone-inspired minimalist design, E-ink key fob and OLED dials, soft natural lighting, sustainable leather and recycled aluminum, photorealistic 3D render, professional product visualization, 4K quality" },
+            ],
+            eu: [
+                { id: 279, img: "images/idea_279.png", title: "Apple風デザインAIコントロールパネル", desc: "Jony Iveのデザイン哲学を反映したAI操作パネル。タッチレス操作と自然言語対話で、運転中のストレスを軽減。高級感のあるメタリック＆レザー仕上げで、**「スマートで美しい内装」の快適さ**を提供。運転者に「デザインと機能がひとつになった」と実感させる。", imagePrompt: "Apple-inspired AI control panel in luxury car interior, minimalist interface with touchless gesture controls, premium metallic and leather materials, soft ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 280, img: "images/idea_280.png", title: "エッジAI搭載マルチモードセンサー内装", desc: "STマイクロの**Stellar P3E**を採用し、リアルタイムで車内環境を最適化するセンサー内装。温度・湿度・空気質を自動調整。**「心地よい空間を常に維持する」**という安心感と、**「技術が自然に溶け込む」**快適さを実現。特に長時間運転者に「体感の快適さ」を提供。", imagePrompt: "Edge AI-enabled smart interior with multi-sensor system, automatic climate and air quality control, sleek dashboard with glowing indicators, premium fabric and wood trim, photorealistic 3D render, futuristic car cockpit, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+    {
         date: "2026-02-09",
         analysis: {
             jp: "日本の自動車内装市場は**カスタマイズ**と**省エネ素材**の需要が高まり、**EV**や**AI音声ナビ**の普及で**コネクテッド**な体験が主流化。**トヨタ**の多用途設計や**フェラーリ**のシンプル機能主義は、高級感と実用性のバランスを重視するトレンド。**税制改革**で低コスト化が進む中、**安全・快適性**を強化した製品が求められる。",

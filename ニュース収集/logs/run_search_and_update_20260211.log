@@ -1,0 +1,290 @@
+==================================================
+[START] 2026-02-11 00:00:02
+[INFO] Target range: 2026-02-10 to 2026-02-10
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-10
+==================================================
+[START] 2026-02-11 08:41:31
+[INFO] Target range: 2026-02-10 to 2026-02-10
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-10
+==================================================
+[START] 2026-02-11 08:49:47
+[INFO] Target range: 2026-02-10 to 2026-02-10
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-10
+[PID] google_search_script: 39300
+[ERROR] Unexpected error: UnicodeDecodeError: 'cp932' codec can't decode byte 0x85 in position 6: illegal multibyte sequence
+[END] 2026-02-11 08:49:50
+==================================================
+==================================================
+[START] 2026-02-11 08:51:24
+[INFO] Target range: 2026-02-10 to 2026-02-10
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-10
+[PID] google_search_script: 29348
+[google_search_script] ============================================================
+[google_search_script]   内装ニュース収集スクリプト（検証済みRSS版）
+[google_search_script] ============================================================
+[google_search_script] 対象日付: 2026-02-10
+[google_search_script] RSSフィード: 67サイト（検証済み）
+[google_search_script]   RSSフィード一覧を出力: rss_feed_list.csv
+[google_search_script] Bing検索: 各国5地域 × 16-18キーワード
+[google_search_script] === RSSフィード ===
+[google_search_script]   ✓ [レスポンス] 22件
+[google_search_script]   ✓ [carview!] 9件
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1538: MarkupResemblesLocatorWarning: The input looks more like a filename than markup. You may want to open this file and pass the filehandle into Beautiful Soup.
+[google_search_script]   desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
+[google_search_script]   ✓ [MotorFan] 29件
+[google_search_script]   ✓ [WEB CARTOP] 4件
+[google_search_script]   ✓ [webCG] 3件
+[google_search_script]   ✓ [Auto Messe Web] 3件
+[google_search_script]   ✓ [VAGUE] 11件
+[google_search_script]   ✓ [ベストカーWeb] 13件
+[google_search_script]   ✓ [くるまのニュース] 34件
+[google_search_script]   ✓ [日刊自動車新聞] 4件
+[google_search_script]   ✓ [AUTOCAR JAPAN] 8件
+[google_search_script]   ✓ [AUTO BILD JAPAN Web] 2件
+[google_search_script]   ✓ [MONOist] 2件
+[google_search_script]   ✓ [EE Times Japan] 8件
+[google_search_script]   ✓ [TechTargetジャパン] 2件
+[google_search_script]   ✓ [ZDNET Japan] 4件
+[google_search_script]   ✓ [CNET Japan] 6件
+[google_search_script]   ✓ [Impress Watch] 16件
+[google_search_script]   ✓ [The Drive] 5件
+[google_search_script]   ✓ [Motor1] 6件
+[google_search_script]   ✓ [CarScoops] 18件
+[google_search_script]   ✓ [Jalopnik] 20件
+[google_search_script]   ✓ [Car and Driver] 12件
+[google_search_script]   ✓ [The Truth About Cars] 5件
+[google_search_script]   ✓ [The Torque Report] 2件
+[google_search_script]   ✓ [Top Speed] 10件
+[google_search_script]   ✓ [AUTOCAR UK] 7件
+[google_search_script]   ✓ [Auto Express] 8件
+[google_search_script]   ✓ [Autocar Reviews] 7件
+[google_search_script]   ✓ [CarNewsChina - All] 10件
+[google_search_script]   ✓ [CarNewsChina - EV] 9件
+[google_search_script]   ✓ [CnEVPost - All] 8件
+[google_search_script]   ✓ [CnEVPost - Xiaomi] 2件
+[google_search_script]   ✓ [CnEVPost - Self-driving] 1件
+[google_search_script]   ✓ [Gasgoo CN - Class 108] 1件
+[google_search_script]   ✓ [Gasgoo CN - Class 109] 1件
+[google_search_script]   ✓ [Gasgoo CN - Class 601] 4件
+[google_search_script]   ✓ [Gasgoo CN - Class 103] 1件
+[google_search_script]   ✓ [ETAuto - Auto Components] 1件
+[google_search_script]   ✓ [ETAuto - Auto Technology] 4件
+[google_search_script]   ✓ [Autocar India - All] 10件
+[google_search_script]   ✓ [RushLane] 8件
+[google_search_script]   ✓ [GaadiWaadi] 6件
+[google_search_script]   ✓ [IndiaCarNews] 2件
+[google_search_script]   ✓ [Car Blog India] 3件
+[google_search_script]   ✓ [Auto Punditz] 4件
+[google_search_script]   RSS合計: 355件
+[google_search_script] === Bing News 検索 ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 中国 / 汽车 内饰 开发... RSSで返っておらず（HTML/制限の可能性）
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   Bing検索合計: 0件
+[google_search_script] === DuckDuckGo News 検索 ===
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1676: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+[google_search_script]   ddgs = DDGS()
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 54件
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 93件
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 86件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 39件
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 89件
+[google_search_script]   DuckDuckGo合計: 361件
+[google_search_script] === Google News RSS ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 15件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 32件
+[google_search_script]   Google News合計: 47件
+[google_search_script] === NewsAPI.org ===
+[google_search_script]   ✓ [米国] Automotive Inte...: 3件
+[google_search_script]   ✓ [米国] Car Center Cons...: 7件
+[google_search_script]   ✓ [欧州] Automotive Inte...: 5件
+[google_search_script]   ✓ [中国] 汽车 内饰 开发...: 4件
+[google_search_script]   ✓ [中国] 汽车 中控台 设计...: 5件
+[google_search_script]   ✓ [インド] Automotive Inte...: 2件
+[google_search_script]   ✓ [インド] Car Interior De...: 1件
+[google_search_script]   NewsAPI合計: 27件
+[google_search_script] ============================================================
+[google_search_script] 全ソース合計: 790件
+[google_search_script]   取得内訳（ソース別）: {'レスポンス': 22, 'carview!': 9, 'MotorFan': 29, 'WEB CARTOP': 4, 'webCG': 3, 'Auto Messe Web': 3, 'VAGUE': 11, 'ベストカーWeb': 13, 'くるまのニュース': 34, '日刊自動車新聞': 4, 'AUTOCAR JAPAN': 8, 'AUTO BILD JAPAN Web': 2, 'MONOist': 2, 'EE Times Japan': 8, 'TechTargetジャパン': 2, 'ZDNET Japan': 4, 'CNET Japan': 6, 'Impress Watch': 16, 'The Drive': 5, 'Motor1': 6, 'CarScoops': 18, 'Jalopnik': 20, 'Car and Driver': 12, 'The Truth About Cars': 5, 'The Torque Report': 2, 'Top Speed': 10, 'AUTOCAR UK': 7, 'Auto Express': 8, 'Autocar Reviews': 7, 'CarNewsChina - All': 10, 'CarNewsChina - EV': 9, 'CnEVPost - All': 8, 'CnEVPost - Xiaomi': 2, 'CnEVPost - Self-driving': 1, 'Gasgoo CN - Class 108': 1, 'Gasgoo CN - Class 109': 1, 'Gasgoo CN - Class 601': 4, 'Gasgoo CN - Class 103': 1, 'ETAuto - Auto Components': 1, 'ETAuto - Auto Technology': 4, 'Autocar India - All': 10, 'RushLane': 8, 'GaadiWaadi': 6, 'IndiaCarNews': 2, 'Car Blog India': 3, 'Auto Punditz': 4, 'DuckDuckGo': 361, 'GoogleNews': 47, 'NewsAPI': 27}
+[google_search_script]   取得内訳（国別）: {'日本': 249, '米国': 181, '欧州': 113, '中国': 117, 'インド': 130}
+[google_search_script] === 重複除去処理 ===
+[google_search_script]   重複除去: 167件
+[google_search_script]   重複内訳（ソース別）: {'Car and Driver': 2, 'Autocar Reviews': 7, 'CarNewsChina - EV': 9, 'CnEVPost - Xiaomi': 2, 'CnEVPost - Self-driving': 1, 'Gasgoo CN - Class 601': 1, 'Gasgoo CN - Class 103': 1, 'Car Blog India': 2, 'Auto Punditz': 2, 'DuckDuckGo': 128, 'GoogleNews': 4, 'NewsAPI': 8}
+[google_search_script]   重複理由内訳: {'タイトル類似': 33, '既存URL': 134}
+[google_search_script]   最終結果: 623件
+[google_search_script]   最終内訳（ソース別）: {'レスポンス': 22, 'carview!': 9, 'MotorFan': 29, 'WEB CARTOP': 4, 'webCG': 3, 'Auto Messe Web': 3, 'VAGUE': 11, 'ベストカーWeb': 13, 'くるまのニュース': 34, '日刊自動車新聞': 4, 'AUTOCAR JAPAN': 8, 'AUTO BILD JAPAN Web': 2, 'MONOist': 2, 'EE Times Japan': 8, 'TechTargetジャパン': 2, 'ZDNET Japan': 4, 'CNET Japan': 6, 'Impress Watch': 16, 'The Drive': 5, 'Motor1': 6, 'CarScoops': 18, 'Jalopnik': 20, 'Car and Driver': 10, 'The Truth About Cars': 5, 'The Torque Report': 2, 'Top Speed': 10, 'AUTOCAR UK': 7, 'Auto Express': 8, 'CarNewsChina - All': 10, 'CnEVPost - All': 8, 'Gasgoo CN - Class 108': 1, 'Gasgoo CN - Class 109': 1, 'Gasgoo CN - Class 601': 3, 'ETAuto - Auto Components': 1, 'ETAuto - Auto Technology': 4, 'Autocar India - All': 10, 'RushLane': 8, 'GaadiWaadi': 6, 'IndiaCarNews': 2, 'Car Blog India': 1, 'Auto Punditz': 2, 'DuckDuckGo': 233, 'GoogleNews': 43, 'NewsAPI': 19}
+[google_search_script]   最終内訳（国別）: {'日本': 234, '米国': 149, '欧州': 64, '中国': 98, 'インド': 78}
+[google_search_script]   [新規] 関連度・翻訳処理 623件 開始
+[google_search_script]     進捗: 1/623
+[google_search_script]     進捗: 5/623
+[google_search_script]     進捗: 10/623
+[google_search_script]     進捗: 15/623
+[google_search_script]     進捗: 20/623
+[google_search_script]     進捗: 25/623
+[google_search_script]     進捗: 30/623
+[google_search_script]     進捗: 35/623
+[google_search_script]     進捗: 40/623
+[google_search_script]     進捗: 45/623
+[google_search_script]     進捗: 50/623
+[google_search_script]     進捗: 55/623
+[google_search_script]     進捗: 60/623
+[google_search_script]     進捗: 65/623
+[google_search_script]     進捗: 70/623
+[google_search_script]     進捗: 75/623
+[google_search_script]     進捗: 80/623
+[google_search_script]     進捗: 85/623
+[google_search_script]     進捗: 90/623
+[google_search_script]     進捗: 95/623
+[google_search_script]     進捗: 100/623
+[google_search_script]     進捗: 105/623
+[google_search_script]     進捗: 110/623
+[google_search_script]     進捗: 115/623
+[google_search_script]     進捗: 120/623
+[google_search_script]     進捗: 125/623
+[google_search_script]     進捗: 130/623
+[google_search_script]     進捗: 135/623
+[google_search_script]     進捗: 140/623
+[google_search_script]     進捗: 145/623
+[google_search_script]     進捗: 150/623
+[google_search_script]     進捗: 155/623
+[google_search_script]     進捗: 160/623
+[google_search_script]     進捗: 165/623
+[google_search_script]     進捗: 170/623
+[google_search_script]     進捗: 175/623
+[google_search_script]     進捗: 180/623
+[google_search_script]     進捗: 185/623
+[google_search_script]     進捗: 190/623
+[google_search_script]     進捗: 195/623
+[google_search_script]     進捗: 200/623
+[google_search_script]     進捗: 205/623
+[google_search_script]     進捗: 210/623
+[google_search_script]     進捗: 215/623
+[google_search_script]     進捗: 220/623
+[google_search_script]     進捗: 225/623
+[google_search_script]     進捗: 230/623
+[google_search_script]     進捗: 235/623
+[google_search_script]     進捗: 240/623
+[google_search_script]     進捗: 245/623
+[google_search_script]     進捗: 250/623
+[google_search_script]     進捗: 255/623
+[google_search_script]     進捗: 260/623
+[google_search_script]     進捗: 265/623
+[google_search_script]     進捗: 270/623
+[google_search_script]     進捗: 275/623
+[google_search_script]     進捗: 280/623
+[google_search_script]     進捗: 285/623
+[google_search_script]     進捗: 290/623
+[google_search_script]     進捗: 295/623
+[google_search_script]     進捗: 300/623
+[google_search_script]     進捗: 305/623
+[google_search_script]     進捗: 310/623
+[google_search_script]     進捗: 315/623
+[google_search_script]     進捗: 320/623
+[google_search_script]     進捗: 325/623
+[google_search_script]     進捗: 330/623
+[google_search_script] C:\Users\demo\AppData\Local\Programs\Python\Python311\Lib\site-packages\PIL\Image.py:970: UserWarning: Palette images with Transparency expressed in bytes should be converted to RGBA images
+[google_search_script]   warnings.warn(
+[google_search_script]     進捗: 335/623
+[google_search_script]     進捗: 340/623
+[google_search_script]     進捗: 345/623
+[google_search_script]     進捗: 350/623
+[google_search_script]     進捗: 355/623
+[google_search_script]     進捗: 360/623
+[google_search_script]     進捗: 365/623
+[google_search_script]     進捗: 370/623
+[google_search_script]     進捗: 375/623
+[google_search_script]     進捗: 380/623
+[google_search_script]     進捗: 385/623
+[google_search_script]     進捗: 390/623
+[google_search_script]     進捗: 395/623
+[google_search_script]     進捗: 400/623
+[google_search_script]     進捗: 405/623
+[google_search_script]     進捗: 410/623
+[google_search_script]     進捗: 415/623
+[google_search_script]     進捗: 420/623
+[google_search_script]     進捗: 425/623
+[google_search_script]     進捗: 430/623
+[google_search_script]     進捗: 435/623
+[google_search_script]     進捗: 440/623
+[google_search_script]     進捗: 445/623
+[google_search_script]     進捗: 450/623
+[google_search_script]     進捗: 455/623
+[google_search_script]     進捗: 460/623
+[google_search_script]     進捗: 465/623
+[google_search_script]     進捗: 470/623
+[google_search_script]     進捗: 475/623
+[google_search_script]     進捗: 480/623
+[google_search_script]     進捗: 485/623
+[google_search_script]     進捗: 490/623
+[google_search_script]     進捗: 495/623
+[google_search_script]     進捗: 500/623
+[google_search_script]     進捗: 505/623
+[google_search_script]     進捗: 510/623
+[google_search_script]     進捗: 515/623
+[google_search_script]     進捗: 520/623
+[google_search_script]     進捗: 525/623
+[google_search_script]     進捗: 530/623
+[google_search_script]     進捗: 535/623
+[google_search_script]     進捗: 540/623
+[google_search_script]     進捗: 545/623
+[google_search_script]     進捗: 550/623
+[google_search_script]     進捗: 555/623
+[google_search_script]     進捗: 560/623
+[google_search_script]     進捗: 565/623
+[google_search_script]     進捗: 570/623
+[google_search_script]     進捗: 575/623
+[google_search_script]     進捗: 580/623
+[google_search_script]     進捗: 585/623
+[google_search_script]     進捗: 590/623
+[google_search_script]     進捗: 595/623
+[google_search_script]     進捗: 600/623
+[google_search_script]     進捗: 605/623
+[google_search_script]     進捗: 610/623
+[google_search_script]     進捗: 615/623
+[google_search_script]     進捗: 620/623
+[google_search_script]     進捗: 623/623
+[google_search_script]   [新規] 関連度・翻訳処理 完了
+[google_search_script]     画像補完: 108件 並列取得開始
+[google_search_script]     画像URL未取得: 268件
+[google_search_script] ✅ 完了！ 623 件の新規記事を追加しました。
+[google_search_script]    URLはハイパーリンク化済み
+[google_search_script]    保存先: C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\search_results.csv
+[google_search_script]   Sheet2補完: 4件
+[google_search_script]     進捗: 1/4
+[google_search_script]     進捗: 4/4
+[google_search_script]   Sheet2/CSV 出力: 50件, sheet2_llm_targets.csv
+[EXIT] google_search_script: code=0
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[PID] auto_update_daily_news: 4376
+[auto_update_daily_news] Loaded 50 items from sheet: C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\sheet2_llm_targets.csv (dates: 2026-02-10 ~ 2026-02-10)
+[auto_update_daily_news] New items to append: 50
+[auto_update_daily_news] Done.
+[EXIT] auto_update_daily_news: code=0
+[RUN] generate_idea_images_openai: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_openai.py --only-missing --quality low
+[PID] generate_idea_images_openai: 18196
+[generate_idea_images_openai] Traceback (most recent call last):
+[generate_idea_images_openai]   File "C:\Users\demo\Desktop\����\DailyNews\generate_idea_images_openai.py", line 177, in <module>
+[generate_idea_images_openai]     main()
+[generate_idea_images_openai]   File "C:\Users\demo\Desktop\����\DailyNews\generate_idea_images_openai.py", line 136, in main
+[generate_idea_images_openai]     if args.only-missing and current and current != "images/idea_dummy.svg":
+[generate_idea_images_openai]        ^^^^^^^^^
+[generate_idea_images_openai] AttributeError: 'Namespace' object has no attribute 'only'
+[EXIT] generate_idea_images_openai: code=1
+[ERROR] Command failed: Command '['C:\\Users\\demo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-u', 'C:\\Users\\demo\\Desktop\\中村\\DailyNews\\generate_idea_images_openai.py', '--only-missing', '--quality', 'low']' returned non-zero exit status 1.
+[END] 2026-02-11 10:06:36
+==================================================
