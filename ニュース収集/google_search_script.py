@@ -441,6 +441,22 @@ def fetch_image_from_page(url, timeout=10):
     except Exception:
         return ""
 
+def fetch_meta_description(url, timeout=10):
+    """Fetch og:description or meta description from the article page."""
+    if not url:
+        return ""
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=timeout)
+        if resp.status_code != 200:
+            return ""
+        soup = BeautifulSoup(resp.text, "html.parser")
+        meta = soup.find("meta", property="og:description") or soup.find("meta", attrs={"name": "description"})
+        if meta and meta.get("content"):
+            return meta.get("content").strip()
+        return ""
+    except Exception:
+        return ""
+
 def resolve_final_url(url, timeout=5):
     """リダイレクトを解決して最終URLを返す（失敗時は元URL）"""
     if not url:
@@ -1563,6 +1579,8 @@ def fetch_from_rss(target_dates):
                         desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
                     # Google News??????????URL???????????
                     resolved_link = resolve_final_url(link)
+                    if not desc and resolved_link:
+                        desc = fetch_meta_description(resolved_link)
                     # ??URL?RSS?????
                     image_url = extract_image_from_rss(entry)
                     if is_missing_url(image_url):

@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-12",
+        analysis: {
+            jp: "日本の自動車内装市場では、**安全装備の標準化**と**新素材の導入**が顕著。マツダやプジョーがセンシング技術を標準装備し、フェラーリやヒョンデが**再生アルミ**や**高評価安全性**を強調。AIとXR体験の融合も始まり、**没入型エンタメ**が新たな需要となる。内装開発では、**安全＋快適＋スマート**の3軸を軸に、**環境配慮素材**と**AI連携機能**を組み込むべき。",
+            cn: "中国市場では**AIアシスタント**と**バイオフィードバックシート**が注目され、**Micro-LEDディスプレイ**の輝度向上が安全面で革新をもたらす。消費者は**懐かしのデザイン**や**スマートインタラクション**を求めており、**高機能・高品質**な内装が競争力となる。サプライチェーンは**専精特新企業**の台頭で安定しつつあり、**電気化とスマート化**が主流トレンド。",
+            in: "インド市場では**大型SUV**と**EV**が注目され、**12.3インチディスプレイ**や**JBLサウンド**などの**高機能内装**が主流化。**Level 2 ADAS**や**AR機能**の導入で安全性と操作性が重視され、**素材の豪華さ**も顧客の購買意欲を刺激。自社では**スマート内装**と**環境に配慮した素材**を融合した製品開発が有効。",
+            us: "米国市場では**EV**と**HMI**の進化が顕著で、BMWのiDrive 8.5やi4の高級感が評価。**サスペンションシート**のコストダウンもトレンド。**AI**と**新素材**が内装の未来を形作る。自社は**インタラクティブなHMI**と**快適性重視のシート**開発に注力すべき。",
+            eu: "欧州市場では**EV化**と**HMI革新**が進む。Lucidの文化体験やAirConsoleの車内ゲームが、**エンタメ機能**の重要性を示す。高級ブランド（Alpina）は**素材・デザインの高級化**を強化。競合は**AI・AR・音楽体験**を組み込むことで差別化。内装開発では、**インタラクティブ性**と**感覚体験**を重視する必要あり。",
+        },
+        ideas: {
+            jp: [
+                { id: 291, img: "images/idea_291.png", title: "AI体験センサー付きマルチモードインテリア", desc: "運転中の気分に合わせて、AIが自動で照明・香り・音楽を調整。快適ゾーンをリアルタイムにカスタムし、家族や友人との移動を「楽しい体験」に。安全と快適さを両立させた、心地よい毎日の移動を実現。", imagePrompt: "AI-powered ambient interior with adaptive lighting, scent diffusion, and sound system, futuristic car cockpit, holographic interface, soft leather and recycled aluminum materials, warm cinematic glow, photorealistic 3D render, premium automotive design" },
+                { id: 292, img: "images/idea_292.png", title: "再生アルミ＋抗菌素材のモジュール式コンソール", desc: "フェラーリやヒョンデの新素材を採用し、**再生アルミ＋抗菌レザー**で作る、取り外し可能なコンソール。お子様の安全を最優先に、汚れや臭いを防ぎつつ、カスタム可能なデザインで毎日の移動を「家族の思い出」に変える。", imagePrompt: "Modular console made of recycled aluminum and antimicrobial leather, sleek modern car interior, customizable color panels, child-safe design, soft ambient lighting, photorealistic 3D render, premium automotive design" },
+            ],
+            cn: [
+                { id: 293, img: "images/idea_293.png", title: "AIアシスタント搭載スマートシート「心読まくらし」", desc: "ユーザーの脳波と心拍をリアルタイムで読み取り、疲労度や気分に応じてシートが自動調整。話しかけるだけで「コーヒーを注文」や「音楽を再生」。家族や恋人との思い出を呼び出す機能も搭載。**心地よい体験で日常をより快適に**。", imagePrompt: "Smart car seat with biofeedback sensors, AI assistant hologram floating above, ambient lighting, futuristic cockpit design, soft leather and metallic accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 294, img: "images/idea_294.png", title: "懐かしのデザイン×スマート機能「QQ3レトロモード」", desc: "クラシックQQ3の外観を忠実に再現しながら、**Micro-LEDディスプレイ**と**AIアシスタント**を内蔵。操作はタッチパネルとボタンの組み合わせで、**懐かしさと未来感を両立**。親子や世代を超えたユーザーに「遊び心」を提供。**レトロな見た目で最新技術を体感できる**。", imagePrompt: "Retro-styled car interior with classic QQ3 design, modern Micro-LED display, AI assistant interface on center console, warm ambient lighting, polished wood and leather materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 295, img: "images/idea_295.png", title: "スマート香り調整コンソール", desc: "コンソールに内蔵されたAI香りディフューザーで、運転中のストレスを軽減。ユーザーの気分や天候に応じて自動香りを調整し、リラックス・集中モードを切り替えられる。高級感のある木目調デザインで、車内を心地よく演出。香りの選択肢も豊富で、毎日が「気分転換」になる。", imagePrompt: "Smart aroma diffuser integrated into car center console, AI-controlled fragrance adjustment, luxurious wood finish, ambient lighting effects, modern vehicle interior, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 296, img: "images/idea_296.png", title: "ARナビゲーション付きマルチモードヘッドアップディスプレイ", desc: "HUDにAR機能を搭載し、運転中に地図やナビゲーションを車の前方に投影。天候や渋滞情報もリアルタイムで表示し、安全運転をサポート。夜間でも青色LEDで視認性を確保。スマートフォンとの連携で、音楽やメッセージも視覚化。運転中の「安心」を、まるで魔法のように体感できる。", imagePrompt: "Augmented reality head-up display with navigation overlay, floating holographic interface above dashboard, night driving scene with blue ambient lighting, modern luxury car cockpit, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 297, img: "images/idea_297.png", title: "AI音声アシスタント付き快適シート", desc: "AI音声アシスタントが座席の温度・柔らかさ・香りを自動調整。家族向けで「ママ、涼しくしてね」など自然な会話で操作可能。高級感と便利さが融合した日常のうれしさ。", imagePrompt: "AI voice assistant integrated into luxury car seat, ambient lighting, adaptive heating and cooling system, soft leather material, cinematic lighting, photorealistic 3D render, premium automotive interior" },
+                { id: 298, img: "images/idea_298.png", title: "HMI連動型マルチモードダッシュボード", desc: "ドライバーの視線と操作に応じて画面を最適化。夜間はブルー光、昼間はナチュラルホワイトで快適視認。運転中に「お疲れ様」や「コーヒー注文」も音声で可能。安全と楽しさを両立したうれしさ。", imagePrompt: "Advanced HMI dashboard with adaptive lighting, responsive touch interface, futuristic cockpit design, ambient color shifting, photorealistic 3D render, professional automotive visualization" },
+            ],
+            eu: [
+                { id: 299, img: "images/idea_299.png", title: "AI音楽体験ユニット「Audiobloom」", desc: "車内に音楽と空間を体験できるAIユニット。ユーザーが好みの音楽を選択し、内装LEDと香りで空間を演出。充電時や移動中も楽しめる。家族や友人と共有プレイ可能で、**「車内がライブハウスに変わる」**という喜びを提供。", imagePrompt: "AI music experience unit integrated into car interior, ambient lighting and scent system, holographic music visualization, futuristic dashboard, warm cinematic lighting, photorealistic 3D render, premium automotive design" },
+                { id: 300, img: "images/idea_300.png", title: "ARゲームコントローラー「TetrisDrive」", desc: "スマホで操作するARゲーム「Tetris」を車内に実装。充電時や待ち時間に遊び、家族や友人と共有プレイ可能。**「運転中の休憩がゲームに変わる」**という楽しさと、**「車内が遊び場に変わる」**という驚きを提供。", imagePrompt: "AR Tetris game controller inside car, holographic game interface floating above dashboard, smartphone connected, colorful game blocks, modern vehicle cockpit, cinematic lighting, photorealistic 3D render, premium automotive design" },
+            ],
+        }
+    },
+{
         date: "2026-02-11",
         analysis: {
             jp: "日本市場では**SUV化**と**レトロデザイン**が内装トレンド。トヨタクラウンSUVやダイハツミライースの昭和風内装が好評。**AI内装**（メルセデスMBUX）や**EV化**（トヨタハイランダーBEV）が進むが、**物理操作部品重視**のフェラーリLuceも注目。消費者は「**威圧感**」「**コスパ**」「**親しみやすさ**」を重視。内装開発では**機能性とデザインの両立**、**高齢者向け物理操作**、**レトロとモダンの融合**が鍵。",
