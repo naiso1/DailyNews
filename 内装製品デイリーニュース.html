@@ -1253,6 +1253,23 @@
             font-weight: 600;
         }
 
+        .analysis-ref-group {
+            display: inline;
+            margin-top: 0;
+            font-size: 12px;
+            color: var(--muted);
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            line-height: 1.6;
+        }
+
+        .analysis-ref-link {
+            color: #8ec5ff;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
         /* Improved Ideas Layout */
         .region-section {
             margin-bottom: 40px;
@@ -2693,7 +2710,7 @@
         let visibleLimit = 30;
 
         let NEW_DATE_RANGE = { start: null, end: null };
-        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-02-12", end: "2026-02-12" };
+        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-02-13", end: "2026-02-15" };
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
@@ -3216,6 +3233,36 @@
             return escaped
                 .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
                 .replace(/\n/g, "<br>");
+        }
+
+        function normalizeAnalysisRefs(value) {
+            const text = String(value ?? "");
+            return text.replace(/\[id:\s*([^\]]+)\]/gi, "[$1]");
+        }
+
+        function formatAnalysisTextWithRefs(value, newsById) {
+            const normalized = normalizeAnalysisRefs(value)
+                .replace(/\r\n/g, "\n")
+                // Keep refs on the same line as the sentence.
+                .replace(/\n\s*(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])/gi, " $1")
+                .replace(/(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])\s*\n/gi, "$1 ")
+                .replace(/\n{2,}/g, "\n");
+            const html = formatRichText(normalized);
+            return html.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
+                const ids = String(rawIds)
+                    .split(",")
+                    .map(s => s.trim())
+                    .filter(Boolean);
+                if (!ids.length) return all;
+                const links = ids.map(id => {
+                    const n = newsById.get(id);
+                    if (n && n.url) {
+                        return `<a class="analysis-ref-link" href="${escapeHtml(n.url)}" target="_blank" rel="noopener">${escapeHtml(id)}</a>`;
+                    }
+                    return escapeHtml(id);
+                });
+                return `<span class="analysis-ref-group">[${links.join(",<wbr>")}]</span>`;
+            });
         }
 
         function buildIdeaIndex() {
@@ -3884,6 +3931,7 @@
         function renderInsights() {
             const container = document.getElementById("insightsContainer");
             container.innerHTML = "";
+            const newsById = new Map((NEWS_DATA || []).map(n => [n.id, n]));
 
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
@@ -4006,7 +4054,7 @@
                             <span class="flag-icon flag-jp" style="width:32px; height:22px;"></span>
                             <span class="country-label">JAPAN</span>
                         </div>
-                        <div class="analysis-text-body">${formatRichText(day.analysis.jp)}</div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.jp, newsById)}</div>
                     </div>`;
 
                 if (showCn) analysisHTML += `
@@ -4015,7 +4063,7 @@
                             <span class="flag-icon flag-cn" style="width:32px; height:22px;"></span>
                             <span class="country-label">CHINA</span>
                         </div>
-                        <div class="analysis-text-body">${formatRichText(day.analysis.cn)}</div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.cn, newsById)}</div>
                     </div>`;
 
                 if (showIn) analysisHTML += `
@@ -4024,7 +4072,7 @@
                             <span class="flag-icon flag-in" style="width:32px; height:22px;"></span>
                             <span class="country-label">INDIA</span>
                         </div>
-                        <div class="analysis-text-body">${formatRichText(day.analysis.in)}</div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.in, newsById)}</div>
                     </div>`;
 
                 if (showUs) analysisHTML += `
@@ -4033,7 +4081,7 @@
                             <span class="flag-icon flag-us" style="width:32px; height:22px;"></span>
                             <span class="country-label">USA</span>
                         </div>
-                        <div class="analysis-text-body">${formatRichText(day.analysis.us)}</div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.us, newsById)}</div>
                     </div>`;
 
                 if (showEu) analysisHTML += `
@@ -4042,7 +4090,7 @@
                             <span class="flag-icon flag-eu" style="width:32px; height:22px;"></span>
                             <span class="country-label">EUROPE</span>
                         </div>
-                        <div class="analysis-text-body">${formatRichText(day.analysis.eu)}</div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.eu, newsById)}</div>
                     </div>`;
 
                 analysisHTML += `</div></section>`;

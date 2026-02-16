@@ -98,7 +98,21 @@ def main():
             run_cmd([sys.executable, "-u", str(SCRIPT_DIR / "google_search_script.py"), "--dates", dates_arg], "google_search_script", LOG_FILE)
             run_cmd([sys.executable, "-u", str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
             if os.environ.get("OPENAI_API_KEY"):
-                run_cmd([sys.executable, "-u", str(ROOT / "generate_idea_images_openai.py"), "--only-missing", "--quality", "low"], "generate_idea_images_openai", LOG_FILE)
+                image_quality = os.environ.get("OPENAI_IMAGE_QUALITY", "high").strip().lower() or "high"
+                if image_quality not in {"low", "medium", "high"}:
+                    image_quality = "high"
+                run_cmd(
+                    [
+                        sys.executable,
+                        "-u",
+                        str(ROOT / "generate_idea_images_openai.py"),
+                        "--only-missing",
+                        "--quality",
+                        image_quality,
+                    ],
+                    "generate_idea_images_openai",
+                    LOG_FILE,
+                )
             else:
                 log("[WARN] OPENAI_API_KEY not set; skip OpenAI image generation.")
         except KeyboardInterrupt:

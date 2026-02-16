@@ -3,6 +3,7 @@ import csv
 import os
 import re
 import sys
+from difflib import SequenceMatcher
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
@@ -153,6 +154,14 @@ def parse_existing_news(js_text: str):
     return urls, max_ids
 
 
+def parse_news_id_map(js_text: str):
+    out = {}
+    pattern = re.compile(r'id:\s*"([^"]+)"[\s\S]*?url:\s*"([^"]+)"')
+    for m in pattern.finditer(js_text):
+        out[m.group(2)] = m.group(1)
+    return out
+
+
 def update_news_updated_at(js_text: str):
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     return re.sub(r"window\.NEWS_UPDATED_AT\s*=\s*\"[^\"]*\";", f"window.NEWS_UPDATED_AT = \"{now}\";", js_text, count=1)
@@ -292,22 +301,261 @@ def parse_insights_max_id(js_text: str):
     return max(nums) if nums else 0
 
 
+def _normalize_for_similarity(text: str):
+    text = (text or "").lower()
+    text = re.sub(r"[\s\"'`“”‘’「」『』【】\[\]（）(){}<>、。,.!！?？:：;；/\\|_-]+", "", text)
+    return text
+
+
+def _similarity(a: str, b: str):
+    if not a or not b:
+        return 0.0
+    return SequenceMatcher(None, _normalize_for_similarity(a), _normalize_for_similarity(b)).ratio()
+
+
+def extract_recent_ideas_by_country(insights_text: str, country: str, limit: int = 40):
+    ideas = []
+    pattern_country = re.compile(rf"{re.escape(country)}\s*:\s*\[(.*?)\]\s*,", flags=re.DOTALL)
+    pattern_idea = re.compile(
+        r'title:\s*"([^"]*)"\s*,\s*desc:\s*"([^"]*)"(?:\s*,\s*imagePrompt:\s*"([^"]*)")?',
+        flags=re.DOTALL,
+    )
+    for cm in pattern_country.finditer(insights_text):
+        block = cm.group(1)
+        for im in pattern_idea.finditer(block):
+            ideas.append(
+                {
+                    "title": (im.group(1) or "").strip(),
+                    "desc": (im.group(2) or "").strip(),
+                    "imagePrompt": (im.group(3) or "").strip(),
+                }
+            )
+            if len(ideas) >= limit:
+                return ideas
+    return ideas
+
+
+def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
+    history_texts = [f"{x.get('title', '')} {x.get('desc', '')}".strip() for x in history_ideas]
+    picked = []
+    picked_texts = []
+    for idea in raw_ideas or []:
+        title = str((idea or {}).get("title", "")).strip()
+        desc = str((idea or {}).get("desc", "")).strip()
+        image_prompt = str((idea or {}).get("imagePrompt", "")).strip()
+        if not title or not desc:
+            continue
+        cand = f"{title} {desc}"
+        duplicate = False
+        for ht in history_texts:
+            if _similarity(cand, ht) >= 0.72:
+                duplicate = True
+                break
+        if not duplicate:
+            for pt in picked_texts:
+                if _similarity(cand, pt) >= 0.78:
+                    duplicate = True
+                    break
+        if duplicate:
+            continue
+        picked.append({"title": title, "desc": desc, "imagePrompt": image_prompt})
+        picked_texts.append(cand)
+        if len(picked) >= limit:
+            break
+    return picked
+
+
+def build_duplicate_guard_text(history_ideas: list, max_items: int = 20):
+    if not history_ideas:
+        return ""
+    lines = []
+    for x in history_ideas[:max_items]:
+        t = (x.get("title", "") or "").strip()
+        if t:
+            lines.append(f"- {t}")
+    if not lines:
+        return ""
+    return "【過去アイデア（重複禁止）】\n" + "\n".join(lines)
+
+
+def normalize_analysis_refs_per_sentence(text: str):
+    if not text:
+        return text
+    text = re.sub(r"[\r\n\u2028\u2029]+", " ", text)
+    text = re.sub(r"\s{2,}", " ", text).strip()
+    # Keep refs as provided by LLM, only normalize bracket format: [id:jp1,us2] -> [jp1,us2]
+    text = re.sub(r"\[id:\s*([^\]]+)\]", r"[\1]", text, flags=re.IGNORECASE)
+
+    def _norm_ref_block(m):
+        raw = m.group(1)
+        ids = re.findall(r"[a-z]{2,}\d+", raw, flags=re.IGNORECASE)
+        if not ids:
+            return m.group(0)
+        seen = set()
+        out = []
+        for x in ids:
+            k = x.lower()
+            if k in seen:
+                continue
+            seen.add(k)
+            out.append(k)
+        return "[" + ",".join(out) + "]"
+
+    text = re.sub(r"\[([^\]]+)\]", _norm_ref_block, text)
+    return text
+
+
+def analysis_ref_coverage_ok(text: str):
+    parts = [p.strip() for p in re.findall(r"[^。！？!?]+[。！？!?]?", text or "") if p.strip()]
+    if not parts:
+        return False
+    ref_pat = re.compile(r"\[\s*[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\s*\]", re.IGNORECASE)
+    covered = sum(1 for p in parts if ref_pat.search(p))
+    return covered >= len(parts)
+
+
+def build_allowed_news_ids(source_items: list):
+    return {
+        (it.get("newsId", "") or "").strip().lower()
+        for it in (source_items or [])
+        if (it.get("newsId", "") or "").strip()
+    }
+
+
+def filter_analysis_refs_to_allowed(text: str, allowed_ids: set[str]):
+    if not text or not allowed_ids:
+        return text
+
+    def _filter_block(m):
+        ids = re.findall(r"[a-z]{2,}\d+", m.group(1), flags=re.IGNORECASE)
+        if not ids:
+            return m.group(0)
+        seen = set()
+        kept = []
+        for x in ids:
+            k = x.lower()
+            if k in seen:
+                continue
+            seen.add(k)
+            if k in allowed_ids:
+                kept.append(k)
+        if not kept:
+            return ""
+        return "[" + ",".join(kept[:3]) + "]"
+
+    out = re.sub(r"\[([^\]]+)\]", _filter_block, text)
+    out = re.sub(r"\s{2,}", " ", out).strip()
+    return out
+
+
+def rewrite_analysis_with_refs(endpoint: str, model: str, country: str, analysis_text: str, source_items: list):
+    id_lines = []
+    for it in source_items[:12]:
+        nid = it.get("newsId", "")
+        if not nid:
+            continue
+        id_lines.append(f"- {nid}: {it.get('title', '')}")
+    if not id_lines:
+        return analysis_text
+    prompt = (
+        "次の考察文を、文ごとに関連ニュースID参照を付けて書き直してください。\n"
+        "重要ルール:\n"
+        "1) 各文に必ず1つ以上の参照を付ける\n"
+        "2) 参照は [jp123,in332] 形式のみ（id:は禁止）\n"
+        "3) 参照は文末にまとめず、関連語の直後に自然に挿入する\n"
+        "4) 参照はその文に関係するIDのみ（1文あたり1〜3件）\n"
+        "5) 文章は日本語のまま、内容改変は最小限\n"
+        "6) ideas向けではなくanalysis文のみを返す\n\n"
+        f"国: {country}\n"
+        f"利用可能ID一覧:\n" + "\n".join(id_lines) + "\n\n"
+        f"原文:\n{analysis_text}\n"
+    )
+    try:
+        out = call_llm(endpoint, model, prompt)
+        out = re.sub(r"^```(?:json)?\s*|\s*```$", "", out.strip(), flags=re.IGNORECASE | re.MULTILINE)
+        out = normalize_analysis_refs_per_sentence(out)
+        return out if out else analysis_text
+    except Exception:
+        return analysis_text
+
+
 def insert_insight(js_text: str, new_entry: str):
     # insert after opening bracket
     return re.sub(r"window\.DAILY_INSIGHTS\s*=\s*\[\s*", f"window.DAILY_INSIGHTS = [\n{new_entry}\n", js_text, count=1)
 
 
-def make_country_prompt(date_key: str, country: str, items: list, prompt_template: str):
+def remove_insight_by_date(js_text: str, date_key: str):
+    marker = f'date: "{date_key}"'
+    pos = js_text.find(marker)
+    if pos == -1:
+        return js_text
+    # find object start
+    start = js_text.rfind("{", 0, pos)
+    if start == -1:
+        return js_text
+    # find matching object end by brace depth (string-aware)
+    depth = 0
+    in_str = False
+    esc = False
+    end = -1
+    for i in range(start, len(js_text)):
+        ch = js_text[i]
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                end = i + 1
+                break
+    if end == -1:
+        return js_text
+    # consume trailing comma/space/newline
+    while end < len(js_text) and js_text[end] in " \t\r\n,":
+        end += 1
+    return js_text[:start] + js_text[end:]
+
+
+def js_escape(value: str):
+    s = str(value or "")
+    s = s.replace("\u2028", " ").replace("\u2029", " ")
+    s = s.replace("\\", "\\\\")
+    s = s.replace("\"", "\\\"")
+    s = s.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "\\n")
+    return s
+
+
+def make_country_prompt(
+    date_key: str,
+    country: str,
+    items: list,
+    prompt_template: str,
+    history_ideas: list | None = None,
+    need_count: int = 2,
+):
     summary_lines = [f"[{country}] 件数: {len(items)}"]
     for it in items[:10]:
-        summary_lines.append(f"- {it['title']} / {it['desc']} / {it.get('tags', '')}")
+        news_id = it.get("newsId", "")
+        id_text = f"id={news_id} / " if news_id else ""
+        summary_lines.append(f"- {id_text}{it['title']} / {it['desc']} / {it.get('tags', '')}")
     summary = "\n".join(summary_lines)
+    duplicate_guard = build_duplicate_guard_text(history_ideas or [], max_items=20)
     extra = textwrap.dedent(f"""
 
     【対象日】{date_key}
     【対象国】{country}
     【ニュース概要】
     {summary}
+    {duplicate_guard}
 
     出力は必ずJSONのみで返してください。
     JSON以外の文字や説明、コードフェンスは一切出力しないでください。
@@ -321,9 +569,17 @@ def make_country_prompt(date_key: str, country: str, items: list, prompt_templat
     }}
 
     制約:
-    - 2件提案
+    - {need_count}件提案
+    - 2件の発想軸を明確に分ける（例: 1件は素材/ハード、もう1件はUI/ソフト/サービス）
+    - 過去アイデアの言い換え・焼き直しは禁止
     - うれしさを必ず明記
     - 200〜300文字程度
+    - imagePromptは構図・素材・配色を2件で明確に変える
+    - analysisは文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
+    - 参照は文末にまとめず、関連語の直後に入れる
+    - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）
+    - id: という文字は書かない
+    - ideasのdescにはID参照を書かない
     """)
     return prompt_template + "\n" + extra
 
@@ -475,6 +731,9 @@ def main():
         updated_news_text = append_news_items(updated_news_text, items_by_date)
     if args.fix_existing:
         updated_news_text = fix_existing_entries(updated_news_text, items)
+    news_id_map = parse_news_id_map(updated_news_text)
+    for it in items:
+        it["newsId"] = news_id_map.get(it.get("url", ""), "")
 
     if not args.dry_run:
         NEWS_PATH.write_text(updated_news_text, encoding="utf-8")
@@ -507,7 +766,15 @@ def main():
             for key in ["jp", "cn", "in", "us", "eu"]:
                 if not grouped.get(key):
                     continue
-                prompt = make_country_prompt(latest_date, key, grouped[key], prompt_template)
+                history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
+                prompt = make_country_prompt(
+                    latest_date,
+                    key,
+                    grouped[key],
+                    prompt_template,
+                    history_ideas=history_ideas,
+                    need_count=2,
+                )
                 llm_text = ""
                 try:
                     llm_text = call_llm(args.llm_endpoint, args.llm_model, prompt)
@@ -516,8 +783,45 @@ def main():
                     data = None
                     print(f"LLM error ({key}): {e}")
                 if data and isinstance(data, dict):
-                    analysis_out[key] = data.get("analysis", "")
-                    ideas_out[key] = data.get("ideas", [])
+                    analysis_text = normalize_analysis_refs_per_sentence(data.get("analysis", ""))
+                    allowed_ids = build_allowed_news_ids(grouped[key])
+                    analysis_text = filter_analysis_refs_to_allowed(analysis_text, allowed_ids)
+                    if analysis_text and not analysis_ref_coverage_ok(analysis_text):
+                        analysis_text = rewrite_analysis_with_refs(
+                            args.llm_endpoint,
+                            args.llm_model,
+                            key,
+                            analysis_text,
+                            grouped[key],
+                        )
+                    analysis_out[key] = filter_analysis_refs_to_allowed(
+                        normalize_analysis_refs_per_sentence(analysis_text),
+                        allowed_ids,
+                    )
+                    deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
+                    if len(deduped) < 2:
+                        retry_prompt = make_country_prompt(
+                            latest_date,
+                            key,
+                            grouped[key],
+                            prompt_template,
+                            history_ideas=(history_ideas + deduped),
+                            need_count=(2 - len(deduped)),
+                        )
+                        try:
+                            retry_text = call_llm(args.llm_endpoint, args.llm_model, retry_prompt)
+                            retry_data = extract_json_block(retry_text)
+                        except Exception as e:
+                            retry_data = None
+                            print(f"LLM retry error ({key}): {e}")
+                        if retry_data and isinstance(retry_data, dict):
+                            add_ideas = dedupe_ideas(
+                                retry_data.get("ideas", []),
+                                history_ideas + deduped,
+                                limit=(2 - len(deduped)),
+                            )
+                            deduped.extend(add_ideas)
+                    ideas_out[key] = deduped[:2]
                 else:
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
             if analysis_out or ideas_out:
@@ -526,7 +830,7 @@ def main():
                 for key in ["jp", "cn", "in", "us", "eu"]:
                     val = analysis_out.get(key, "")
                     if val:
-                        entry_lines.append(f"            {key}: \"{val}\",")
+                        entry_lines.append(f"            {key}: \"{js_escape(val)}\",")
                 entry_lines.append("        },")
                 entry_lines.append("        ideas: {")
                 for key in ["jp", "cn", "in", "us", "eu"]:
@@ -536,11 +840,9 @@ def main():
                     entry_lines.append(f"            {key}: [")
                     for idea in idea_list[:2]:
                         max_id += 1
-                        title = idea.get("title", "")
-                        desc = idea.get("desc", "")
-                        image_prompt = idea.get("imagePrompt", "")
-                        if image_prompt:
-                            image_prompt = image_prompt.replace("\"", "\\\"")
+                        title = js_escape(idea.get("title", ""))
+                        desc = js_escape(idea.get("desc", ""))
+                        image_prompt = js_escape(idea.get("imagePrompt", ""))
                         entry_lines.append(
                             f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\" }},"
                         )
@@ -550,7 +852,7 @@ def main():
                 new_entry = "\n".join(entry_lines)
                 updated_insights = insights_text
                 if args.replace_insights and latest_date in insights_text:
-                    updated_insights = re.sub(r"\{\s*date:\s*\"%s\"[\s\S]*?\},\s*" % re.escape(latest_date), "", updated_insights, count=1)
+                    updated_insights = remove_insight_by_date(updated_insights, latest_date)
                 updated_insights = insert_insight(updated_insights, new_entry)
                 if not args.dry_run:
                     INSIGHTS_PATH.write_text(updated_insights, encoding="utf-8")
