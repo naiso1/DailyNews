@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-16",
+        analysis: {
+            jp: "車高自由コントロールの普及は、HMIとセンサーの進化に伴い、快適性と個別化を求める消費者のニーズに応える[jp472]。再生素材やバイオマス樹脂の開発が進む中、持続可能性が内装の重要な軸となる[jp476]。AI体験やXR技術の導入は、エンタメ要素を内装に取り込むトレンド[jp479]。ダイハツヒナタのデザインDNAは、カスタマイズとレトロモダンの融合で、若年層の共感を得る[jp473,jp478]。規制やサプライチェーンは、新素材の導入を促す要因[jp472]。",
+            cn: "中国市場では物理ボタンの義務化[cn325]とスマート座席連動技術[cn328]が進み、耐寒アルミ電池[cn324]や高ニッケル陽極[cn321]の素材革新が加速中。HMIはディスプレイ中心化[cn327]が主流だが、レトロ操作重視デザイン[cn326]も注目。内装開発では「安全・操作性・極寒性能」の3軸で、ソフトウェア連携型座席[cn328]と耐久素材[cn324]の両立が求められる。",
+            in: "インド市場ではEVとPHEVの導入が加速し、HMIやディスプレイの機能性が重視されている[in337][in342]。マヒンドラXEV9Eの三画面や360度カメラ、トヨタUrban Cruiser Ebellaの500km航続がトレンド[in344][in342]。また、安全と快適性の両立が求められ、シートやコックピットの高機能化が進む[in337]。素材面ではスエードトリムやCNG対応の柔軟性が注目[in337]。自社開発では、低コスト高性能かつ高機能UIを融合した製品が求められる[in337][in344]。",
+            us: "米国市場では高級感のリーズナブル化がトレンドで、トヨタクラウンがレクサス級内装を$41,440で提供[us283]。軽量化素材の需要が高まり、LZ Toolingの急速射出成形強化やポリプロピレン市場拡大が背景[us284,us285]。安全技術では飲酒検知装置の実用化遅れが課題[us288]。UI/UXの進化は「デジタル意識」の必要性を反映[us290]。サステナブル素材市場の拡大とAI連携の進化が両輪[us287,us286]。内装開発ではコストと高級感の両立、軽量素材の応用、安全と快適性の統合が鍵[us284,us285,us288]。",
+            eu: "EU市場ではEV価格の安定化と安全技術の進化が注目[eu259]。ZFのステアリングワイヤシステムは操縦感と安全性を高め、内装の静粛性を向上させる[eu259]。また、座席充電機能の商業化は、乗員の利便性を高めるトレンド[eu263]。規制対応とコスト削減の動きから、高機能・低価格内装が求められる[eu262]。自社開発では、耐久性と快適性を両立した素材と、直感的UIを組み合わせた製品が有効[eu260,eu261]。",
+        },
+        ideas: {
+            jp: [
+                { id: 359, img: "images/idea_359.png", title: "再生シートベルト生地「尾州編」モジュールパネル", desc: "自動車用シートベルト端材を再生し、尾州編技術で生地化した**新素材**「尾州編」を、モジュール式パネルとして内装に採用。**高級感**と**持続可能性**を両立。**カスタム**で好きな色や柄に変更可能。**おしゃれで地球に優しい**という気持ちでドライブを楽しめる。[jp480]", imagePrompt: "Modular interior panel made from recycled seatbelt material, woven with 'Ozushima Thread' technology, luxury car cabin, eco-friendly fabric texture, soft beige and charcoal gray color palette, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 360, img: "images/idea_360.png", title: "AI体験融合「XR-Drive」センサーファイバーインテリア", desc: "**XR**と**AI**を融合した**体験型**内装。ドアやシートに埋め込まれた**センサー**が、**振動**や**映像**で**没入感**を提供。**観音開きドア**や**グルグルシート**の**遊び心**を現代的に再解釈。**遊びながら運転**できる**新感覚**で、**楽しいドライブ**を実現。[jp473]", imagePrompt: "Automotive interior with embedded AI-XR sensors, holographic interface on seats and doors, immersive visual and haptic feedback, retro-futuristic design with glowing blue accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 361, img: "images/idea_361.png", title: "AI連動耐寒アルミシート「極寒快適」", desc: "アルミ電池対応の耐寒性内装材を採用し、-25℃でも快適性を維持。AIが座席温度・空調を最適化し、寒さに負けない「あったかさ」を提供。極寒地域でも安心な乗り心地で、家族の冬のドライブを快適に。", imagePrompt: "AI-controlled aluminum alloy seat with heating function, integrated temperature sensor and ambient lighting, cold weather automotive interior, matte silver and warm beige color scheme, photorealistic rendering, professional product visualization, cinematic lighting, high detail, 4K quality" },
+                { id: 362, img: "images/idea_362.png", title: "クラシックレトロ操作パネル「アップル風メカニズム」", desc: "アップル元デザイナーのデザイン哲学を反映した、**物理操作重視**のレトロモード。クラシックなレーシング感と現代テクノロジーを融合し、操作の「安心感」を演出。高級感のあるメカニズムで、運転の儀式感を味わえる。", imagePrompt: "Retro-inspired mechanical control panel with polished chrome and leather accents, vintage racing aesthetics blended with modern tech, ambient blue backlighting, luxury car cockpit, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 363, img: "images/idea_363.png", title: "スマートマルチモードコクピットパネル", desc: "10.1インチタッチディスプレイに360度カメラとAIナビゲーションを統合。操作はタッチと音声で、天候・乗員数に応じて自動UI変更。家族の安心感と、運転者の集中力を両立する。親しみやすいデザインで、毎日のドライブが「心地よい儀式」に。[in339][in343]", imagePrompt: "Smart multi-mode cockpit panel with 10.1-inch touchscreen, 360-degree camera overlay, AI navigation interface, family-friendly UI, ambient lighting, premium car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 364, img: "images/idea_364.png", title: "エコ・サウンドマッピングシート", desc: "天然素材の快適シートに、**Dolby Atmos音響**と**香りセンサー**を内蔵。走行状況に応じて「リラックス」「集中」「家族向け」の3モードに切り替え、音と香りで気分を最適化。車内は「居心地の良い部屋」に。[in341][in345]", imagePrompt: "Eco-sound mapping seat with embedded Dolby Atmos audio system and aroma sensor, three mood modes (relax, focus, family), natural leather upholstery, ambient color lighting, photorealistic 3D render, modern vehicle interior, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 365, img: "images/idea_365.png", title: "LightLux エコプレミアムコンソール", desc: "アルミ・リサイクルファブリックで構成されたコンソールは、軽量かつ高級感を実現。HMI連動で照明が自動調整し、夜間運転でも視認性を確保。リサイクル素材使用で環境負荷を削減。**「地球にやさしく、自分に贅沢」**という快適さと責任感を両立。素材[jp285]と設計[jp287]のトレンドを踏まえた実用性と美意識。", imagePrompt: "Eco-premium console made of recycled aluminum and fabric, integrated ambient lighting with HMI control, luxury car interior, sustainable materials, warm metallic finish, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 366, img: "images/idea_366.png", title: "GuardSync 智能安全ハンドリングパネル", desc: "物理ボタンとAR HUDを融合したパネルで、飲酒検知装置[jp288]との連動で自動的に運転状態を監視。運転者に「**安全をサポートする快適さ**」を提供。AIアシスタント[jp289]と連携し、操作が直感的かつ安心。**「安心して運転できる、心地よいコントロール」**を実現。技術[jp288]と人間工学[jp289]の両立。", imagePrompt: "Smart safety handling panel with physical buttons and AR HUD interface, integrated alcohol detection system, futuristic car cockpit, blue ambient lighting, holographic display, photorealistic 3D render, professional automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 367, img: "images/idea_367.png", title: "静粛快適シートユニット「SilentComfort」", desc: "高密度フォームとマイクロファイバー素材で、座席の**静粛性と快適性**を最大化。ZFのステアリングワイヤ技術[jp259]を応用し、**騒音を抑制**しながら操縦感を保つ。ドライバーの**リラックス**と**集中力維持**をサポート。車内空間に**安心感**と**上質な体感**を提供。", imagePrompt: "Premium automotive seat with silent foam cushion and microfiber upholstery, integrated noise-dampening technology, modern minimalist interior, soft ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 368, img: "images/idea_368.png", title: "AI快適空間モード「AuraSync」", desc: "座席充電機能[jp263]とAIが連動し、**乗員の気分や体調に合わせた空間調整**。温度、照明、香り、音響を自動最適化。**日常のストレス軽減**と**心地よい移動体験**を実現。**スマートで温かみのある内装**が、**家族や友人との移動をより楽しく**する。", imagePrompt: "AI-powered ambient control system in car interior, mood-responsive lighting and fragrance, seamless integration with seat charging ports, futuristic yet cozy cabin design, warm color palette, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
             date: "2026-02-15",
             analysis: {
                 jp: "ヴィーガンレザーの普及とAI体験の深化が進む。[jp467,jp469] センターコクピットや異形ステアリングの導入は運転体験の再定義。[jp468] 再生アルミや抗菌素材の採用が環境志向を強調。[jp463,jp471] AIアシスタントとXRゲームの融合はエンタメ体験を拡張。[jp469] モジュラーな構造はカスタマイズニーズに対応。[jp464,jp471] 自社開発のソフトウェア強化と素材革新が差別化の鍵。[jp462,jp466]",

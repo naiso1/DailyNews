@@ -788,6 +788,9 @@ def is_missing_url(val):
         if s == "":
             return True
         lower = s.lower()
+        # IT之家で頻出する極小プレースホルダー画像
+        if "img.ithome.com/images/v2/t.png" in lower:
+            return True
         if "google.com/s2/favicons" in lower:
             return True
         if lower.endswith("favicon.ico"):
