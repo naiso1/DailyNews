@@ -294,12 +294,51 @@ def rank_image_url(url: str) -> int:
             score += 5
         if "w=" in lower or "h=" in lower:
             score += 3
-        # Prefer -000-2- over -000-1- when both exist
-        if re.search(r"-000-2-", lower):
-            score += 4
-        if re.search(r"-000-1-", lower):
-            score -= 1
+        # Prefer larger image index when available (e.g. -000-3- over -000-2- over -000-1-)
+        m = re.search(r"-000-(\d+)-", lower)
+        if m:
+            try:
+                score += int(m.group(1))
+            except Exception:
+                pass
     return score
+
+
+def choose_best_yimg_variant(url: str) -> str:
+    """Try sibling Yahoo image variants and pick a non-placeholder one."""
+    if not url or "yimg.jp" not in str(url).lower():
+        return url or ""
+    m = re.search(r"(-000-)(\d+)(-)", url)
+    if not m:
+        return url
+
+    prefix_a, num_s, prefix_b = m.groups()
+    try:
+        base_num = int(num_s)
+    except Exception:
+        return url
+
+    # Probe around current number (higher first), then fallback to common indices.
+    probe = []
+    for n in range(max(base_num + 3, 9), 0, -1):
+        probe.append(n)
+    # keep order unique
+    seen = set()
+    ordered = []
+    for n in probe:
+        if n in seen:
+            continue
+        seen.add(n)
+        ordered.append(n)
+
+    for n in ordered:
+        cand = re.sub(r"-000-\d+-", f"{prefix_a}{n}{prefix_b}", url, count=1)
+        if not check_url_ok(cand, is_image=True):
+            continue
+        if is_yimg_placeholder(cand):
+            continue
+        return cand
+    return url
 
 def collect_image_candidates(soup, base_url):
     candidates = []
@@ -1586,6 +1625,8 @@ def fetch_from_rss(target_dates):
                         desc = fetch_meta_description(resolved_link)
                     # ??URL?RSS?????
                     image_url = extract_image_from_rss(entry)
+                    if image_url and "yimg.jp" in str(image_url).lower():
+                        image_url = choose_best_yimg_variant(image_url)
                     if is_missing_url(image_url):
                         image_url = fetch_image_from_page(resolved_link) if resolved_link else ""
                     if is_missing_url(image_url):
@@ -1844,6 +1885,8 @@ def fetch_from_google_news(target_dates):
                     resolved_link = resolve_final_url(link)
                     # ??URL?RSS?????
                     image_url = extract_image_from_rss(entry)
+                    if image_url and "yimg.jp" in str(image_url).lower():
+                        image_url = choose_best_yimg_variant(image_url)
                     if is_missing_url(image_url):
                         image_url = fetch_image_from_page(resolved_link) if resolved_link else ""
                     if is_missing_url(image_url):

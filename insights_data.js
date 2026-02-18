@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-17",
+        analysis: {
+            jp: "日本市場では再生素材の活用が進む[jp490,jp491]。東海理化がシートベルト端材から衣類生地へと変換する技術を発表[jp491]。また、AI音声アシスタントやAR対応のコネクテッド機能が主流化[jp488]。高級感と機能性を両立させる本革キャプテンシートやQi充電対応ディスプレイも注目[jp487]。内装のモジュラリティやリサイクル素材へのニーズが高まっている。自社開発では、再生素材を内装に統合し、AI音声と充電機能を組み合わせたサステナブル・スマートパッケージを提案[jp487,jp488]。",
+            cn: "中国市場では海洋美学を採用したBYD RACCO内装が注目され、実用性とデザイン性のバランスが重要視されている[cn333]。また、AIアシスタントの導入（Grok）や安全性の懸念（テスラModel Y停止事案）が課題となっている[cn336,cn332]。素材やUIの革新が求められ、特に磁気吸着式スマートフォン置き場や調節可能なカップホルダーといった機能が実用的評価を得ている。規制や価格戦略の影響も大きく、LFPバッテリーや低コスト設計が普及傾向にある[cn334]。",
+            in: "インド市場ではAIカスタマイズと安全・信頼性への関心が高まっている[in346]。内装の差別化が重要で、ARや音楽統合のサービスが注目[in354]。素材や構造の革新も必要で、サステナブルかつ高機能な内装が求められる[in355]。また、メンテナンスの低コスト化も顧客の購買意欲を高める要因[in347]。",
+            us: "高強度カーボンファイバーの実用化が進む中、サステナブル素材の需要が拡大中 [us298]。 AIやHMIの進化に伴い、物理ボタンの重要性が再評価され [us298]。 オフロード性能と収納力を重視する家族向けEV市場が拡大中 [us299]。 レトロモチーフのデジタルリデザインが注目され [us300]。 快適性と実用性の両立が求められる中、ハイブリッド内装の開発が急務 [us295]。",
+            eu: "欧州市場ではAI統合HMIと物理ボタン義務化の動きが顕著で、[eu271]、[eu274]。 高機能センサーやARデザインが主流化傾向。[eu267]、[eu273]。 特にFerrariのLuceやHyundai Ioniq 9は実用性と革新的デザインを両立させ、[eu268]、[eu272]。 ユーザー体験の質に注目が集まっている。[eu267]。 規制の影響で物理操作の安定性が重視され、[eu271]。 素材の耐久性や低空力デザインもトレンド。[eu274]。 内装開発ではソフトウェアとハードウェアの統合、[eu270]。 感情認識UI、[eu270]。 文化融合デザインが新たな差別化ポイントとなる。[eu270]。",
+        },
+        ideas: {
+            jp: [
+                { id: 369, img: "images/idea_369.png", title: "再生シートベルト生地「尾州編」モジュールパネル", desc: "車両のシートベルト端材を再利用した再生素材で作られたモジュールパネル。高級感のある質感と、**AI音声**操作で色や照明を変更できる。**充電ポート**内蔵でスマホをワイヤレス充電。環境配慮と**快適性**を両立。車内を「リサイクルの美しさ」で満たす。", imagePrompt: "Modular interior panel made from recycled seat belt material, luxury car cabin, warm ambient lighting controlled by AI voice, integrated wireless charging port, brushed texture, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 370, img: "images/idea_370.png", title: "AI音声アシスタント搭載「GetPairr Vista 2.0」カスタムパッケージ", desc: "AI音声アシスタントで運転中の操作を最小化。**再生素材**のシートと**充電機能**を組み合わせ、車内を「環境に優しい高級空間」に。**AR対応**ディスプレイでナビや音楽を視覚的に操作。**うれしさ**は、音声で「お気に入りの香りを点灯」できる機能。快適さと楽しさを同時に実現。", imagePrompt: "Luxury car interior with AI voice assistant interface, AR display showing navigation and music, recycled material seats with ambient lighting, futuristic dashboard with holographic controls, soft blue and gold color scheme, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 371, img: "images/idea_371.png", title: "磁気吸着式スマートフォン置き場「海洋の磁気」", desc: "BYD RACCOの**海洋美学**を継承した磁気吸着式スマートフォン置き場。スマートフォンをワンタッチで吸着し、**磁気吸着**により安定した収納が可能。**温かみのある円形デザイン**と**高級感のあるマットブラック**で、**使いやすさと美しさ**を両立。ドライバーの操作の邪魔にならない設計で、**ストレスフリーな運転体験**を実現。", imagePrompt: "Magnetic smartphone holder integrated into car interior, ocean-inspired circular design, matte black finish, brushed aluminum accents, warm ambient lighting, photorealistic 3D render, premium automotive interior, cinematic lighting, high detail, 4K quality" },
+                { id: 372, img: "images/idea_372.png", title: "AI体験マスター・マルチモードコントロールパネル", desc: "テスラの**Grok AIアシスタント**を参考にした、**AI体験マスター**機能を搭載したマルチモードコントロールパネル。**音声・視覚・タッチ**の3つの操作モードで、**運転中の集中力維持**と**直感的な操作**を実現。**スマートフォンとの連携**により、**運転中でも楽しく操作可能**。**遊び心と実用性**の両立で、**運転のストレスを軽減**し、**快適なドライブ体験**を提供。", imagePrompt: "AI-powered multi-mode control panel in futuristic car cockpit, holographic interface with voice, touch, and gesture controls, glowing blue accents, sleek minimalist design, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 373, img: "images/idea_373.png", title: "スマートアロマ・カスタムシート", desc: "AIが車内環境と乗員の好みを学習し、香りを自動調整するシート。快適性と個性を両立させ、毎日の通勤を「心地よい習慣」に。素材は**リサイクルポリエステル**と**天然植物由来フィルター**で、香りの持続性と環境負荷を最小化。うれしさ：「香りが変わるたびに、気分が変わる」", imagePrompt: "Smart aromatherapy seat with AI scent adjustment, modern car interior, eco-friendly recycled polyester and plant-based filter materials, warm ambient lighting, subtle mist effect, photorealistic 3D render, premium automotive design" },
+                { id: 374, img: "images/idea_374.png", title: "AR音楽・ナビゲーション統合パネル", desc: "車内に設置する**マルチモードパネル**で、**ARナビ**と**Spotify**を統合。視界に重ねて音楽や目的地を表示し、手の動きで操作。**高解像度タッチパネル**と**低反射素材**で、雨天でも使いやすい。うれしさ：「目的地と音楽が、目の前で一緒に動く」", imagePrompt: "AR navigation and music integration panel in car interior, holographic interface overlaying dashboard, Spotify controls visible, low-reflection touch surface, sleek modern design with blue ambient lighting, photorealistic 3D render" },
+            ],
+            us: [
+                { id: 375, img: "images/idea_375.png", title: "CarbonGlow モジュラーカーボンコンソール", desc: "高強度カーボンファイバーで構成されたモジュール式コンソール。温かみのあるLED照明と触覚フィードバック機能を搭載。家族が一緒にカスタマイズできるデザインで、**おもちゃのように楽しい操作感**を提供。素材の持続可能性も強調。[jp298]", imagePrompt: "Modular carbon fiber console with warm ambient LED lighting, tactile feedback buttons, family-friendly design, luxury vehicle interior, brushed carbon texture, soft glow effect, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 376, img: "images/idea_376.png", title: "RetroSync デジタルレトロモチーフHMI", desc: "1970年代のレトロデザインをデジタルで再解釈したHMI。**アナログ風の物理ボタン**と**ARグラフィック**を融合。**レッド・ピッグ**のデザインをモチーフに、**遊び心と信頼感**を両立。家族でのドライブをより楽しい体験に。[jp295]", imagePrompt: "Retro-inspired digital HMI with analog-style physical buttons, holographic AR graphics, classic red pig motif, vintage car dashboard, warm amber lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 377, img: "images/idea_377.png", title: "AR感情応答式ドライビングコンソール", desc: "ドライバーの感情をAIがリアルタイムで読み取り、照明・音響・温度を最適化するAR表示コンソール。レッド・ピッグのスタイリッシュなデザインをベースに、**ARグラフィックと物理ボタンの融合**で操作性を高める。ドライビングの「楽しさ」を最大化し、**心地よさとパフォーマンスの両立**を実現。毎日の通勤でも「ワクワク感」を味わえる。", imagePrompt: "AR-responsive driving console with emotional feedback interface, holographic displays floating above physical buttons, luxury car interior, warm ambient lighting, sleek red and black color scheme, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 378, img: "images/idea_378.png", title: "低空力・耐熱性ハイブリッド素材内装パネル", desc: "ラスベガス高温環境にも耐える**低空力設計**と**耐熱性素材**を採用した内装パネル。BMWやメルセデスの精密エンジニアリングを参考に、**熱伝導率を抑制**しつつ**快適性を維持**。欧州の規制に準拠しつつ、**メンテナンスの簡易化**と**見た目の持続性**を追求。ドライバーは「涼しくて頼もしい」空間を体感できる。", imagePrompt: "Low-drag, heat-resistant hybrid interior panel with sleek aerodynamic curves, carbon fiber and ceramic composite materials, cool blue and silver color palette, premium automotive design, photorealistic 3D render, professional product visualization, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-16",
         analysis: {
             jp: "車高自由コントロールの普及は、HMIとセンサーの進化に伴い、快適性と個別化を求める消費者のニーズに応える[jp472]。再生素材やバイオマス樹脂の開発が進む中、持続可能性が内装の重要な軸となる[jp476]。AI体験やXR技術の導入は、エンタメ要素を内装に取り込むトレンド[jp479]。ダイハツヒナタのデザインDNAは、カスタマイズとレトロモダンの融合で、若年層の共感を得る[jp473,jp478]。規制やサプライチェーンは、新素材の導入を促す要因[jp472]。",
