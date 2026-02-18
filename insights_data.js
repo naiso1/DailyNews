@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-18",
+        analysis: {
+            jp: "日本市場では軽自動車向けHUDの実用化が進む[jp492]。後席着用率の低さは安全課題[jp499]。EV航続距離の長さと高級内装が注目[jp494]。カスタム市場の拡大[jp497]、限定モデルの発売[jp500]で、個人化・感情デザインへのニーズが高まっている。素材の再利用や抗菌性も注目[jp501]。日本向けのBEV車の導入は遅れ[jp496]。シートの多様化と内装のモジュール化が主流になりつつある。",
+            cn: "中国市場ではEVの内装デザインがシンプルかつ科技感を重視する傾向にあり、物理操作装置の義務化（cn344）は操作性と安全性を強調する。AR技術（cn338）やAIデザイン（cn342）の導入が進み、素材・配色の選択も環境配慮（cn343）に応じて変化。規制の影響で直感的UIやマルチモード操作が求められる。自社開発では素材の持続性とAI連動UIの両立が鍵。",
+            in: "インド市場ではAIとディスプレイの進化が加速中で、特にダブルスクリーンやレッドアクセント内装が主流化傾向。[in360] 価格競争が激しく、BaaSやkm単位バッテリー料金の導入により、EVの普及が進む。[in358] カーボンブレーキやHMI技術の導入は高級化の象徴。[in365] スロバキア買収によるエンジニアリング力強化も注目。[in361] 素材面では軽量カーボンとマルチカラー塗装が主流。[in359] 内装開発ではUIの直感性とコスト削減が鍵。[in358]",
+            us: "2026トヨタC-HRのEV化で素材ミックスによる「格安感」が注目され、操縦の鈍さと高価格の矛盾が課題[us304]。一方、安全と実用性の重視が子供乗車や都市走行で顕在化[us310]。サプライチェーンではTata AutoCompが欧州拠点強化し、内装プラットフォームの統合が進む[us307]。EV性能の向上とコスト削減の両立が開発の鍵[us305]。",
+            eu: "EU市場では排出ゼロの方向性が強まり、[eu275]、[eu281]。 夜間視界への配慮が進み、[eu279]。 センサー市場は急速に成長中、[eu283]。 AIとHMIの統合が進む中で、安全基準への対応が必須、[eu283]。 低価格と長期使用を重視する傾向も顕著、[eu278]。 内装開発では直感性と安全性を両立させ、経済的快適性を追求する必要がある、[eu283]。 素材・センサー・UI・安全・価格・視界・AIのトレンドを踏まえる、[eu283]、[eu284]。",
+        },
+        ideas: {
+            jp: [
+                { id: 379, img: "images/idea_379.png", title: "再生アルミ×抗菌モジュールシート「ReNewSeat」", desc: "軽量で耐久性のある再生アルミフレームに、抗菌性素材を採用。3段階で高さ・角度調整可能。後席でも快適な「**座り心地**」を実現。**車内を清潔に保ちながら、カスタマイズできる**という安心感と自由度がうれしい。[jp499] [jp501]", imagePrompt: "Modular seat with recycled aluminum frame and antimicrobial fabric, adjustable height and angle, clean car interior with soft ambient lighting, minimalist design, photorealistic 3D render, premium automotive interior, warm neutral tones" },
+                { id: 380, img: "images/idea_380.png", title: "AI香り＆音楽コントロール「AromaSync」", desc: "ドライバーと乗員の気分に合わせて、**香りと音楽をAIが自動調整**。タッチ式操作で好みの香りを設定。**「気分に合わせて変化する内装」**という感覚が、**毎日のドライブを特別にしてくれる**。[jp492] [jp501]", imagePrompt: "AI-controlled aroma and music system integrated into car dashboard, glowing touch interface, ambient scented mist floating above console, futuristic car interior with soft blue lighting, photorealistic 3D render, high detail, cinematic lighting" },
+            ],
+            cn: [
+                { id: 381, img: "images/idea_381.png", title: "光触媒抗菌内装パネル「清風」", desc: "光触媒素材で空気中の**フォルムアルデヒド**を分解し、**安心な呼吸空間**を提供。**自然素材**と**高級感**を融合したデザインで、**視覚的快適さ**と**健康への配慮**を両立。車内を「清風の部屋」に。[cn343]", imagePrompt: "Photorealistic rendering of automotive interior panels with photocatalytic surface, natural wood grain and soft leather textures, subtle blue ambient glow, clean minimalist design, premium quality, cinematic lighting, high detail, 4K" },
+                { id: 382, img: "images/idea_382.png", title: "AR投影式マルチモードコントロール「山河」", desc: "**AR技術**（cn338）を活用した**投影式操作パネル**で、**タッチレス**かつ**直感的**な操作を実現。**中国市場の文化**に合わせた**山河モチーフ**のデザインで、**運転中の集中力**と**快適さ**を両立。**視覚的愉しみ**と**操作の安心感**を兼ね備える。[cn338]", imagePrompt: "Augmented reality HUD projection on dashboard with mountain landscape motif, holographic controls floating above, modern vehicle cockpit, ambient blue and gold lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K" },
+            ],
+            in: [
+                { id: 383, img: "images/idea_383.png", title: "スマートアロマ・カスタムシート", desc: "車内空間に「笑顔のセンサー」を搭載し、乗員の気分に応じて香りを自動調整。香りの種類は15色展開で、Cosmic CarbonやVoyager Redの個性を反映。家族の笑顔を育む機能で、運転中のストレスを軽減。[in359]", imagePrompt: "Smart aroma custom seat with mood-sensing technology, vehicle interior design with 15 color options including Cosmic Carbon and Voyager Red, ambient lighting effects, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 384, img: "images/idea_384.png", title: "ARナビゲーション付きマルチモードヘッドアップディスプレイ", desc: "HUDにARナビゲーションを搭載し、車外の道路状況をリアルタイムで投影。ダブルスクリーンと連動し、運転中の視線を最小限に。夜間でも青いLEDで照らすことで、視認性を高める。[in360]", imagePrompt: "Advanced AR navigation HUD with holographic projection, futuristic vehicle cockpit design, blue ambient lighting for night visibility, dual-screen integration, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 385, img: "images/idea_385.png", title: "EcoGlow モジュラーカーボンコンソール", desc: "カーボン素材とLED照明で「高級感」を演出するモジュラー型コンソール。車両の走行モードに応じて色と輝度が変化し、**運転中の気分を明るくする**。軽量で取り付け容易な設計で、**価格を抑えつつ高級感を実現**。[us303][us304]", imagePrompt: "Modular carbon fiber console with glowing LED accents, automotive interior design, minimalist cockpit with ambient lighting, brushed carbon texture, warm blue glow, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+                { id: 386, img: "images/idea_386.png", title: "SafeSync パーソナライズドシートマネージャー", desc: "シートの高さ・角度・温度をAIが自動調整する**安全・快適性の両立**を実現。**子供乗車時**は安全ベルトの位置や**安全基準**に合わせて自動調整。**運転者の好み**も学習し、**毎日快適なドライビング**を可能に。[us302][us309][us310]", imagePrompt: "Smart adjustable seat with AI interface, automotive interior design, child safety mode with auto-positioning, holographic display showing comfort settings, soft leather and matte black materials, warm ambient lighting, photorealistic 3D render, premium quality, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 387, img: "images/idea_387.png", title: "物理ボタン統合型安全内装ユニット「SafeTact」", desc: "物理ボタンを軸にした操作性を高め、**安全基準**を満たす設計。**カラフル内装**で視認性を強化し、**夜間視界**への配慮を徹底。ドライバーの操作ストレスを軽減し、**安心感**と**快適性**を同時に提供。素材は耐久性と滑らかさを両立。高級感と実用性のバランスを狙う。", imagePrompt: "Integrated physical button control unit with colorful safety interior, modern vehicle cockpit, brushed metal and soft-touch leather materials, ambient lighting effects, night driving scene, cinematic lighting, photorealistic 3D render, premium automotive design" },
+                { id: 388, img: "images/idea_388.png", title: "AI快適空間モード「AuraSync」", desc: "車内空間を**AI**で自動調整し、**気分モード**に応じて照明・香り・温度を最適化。**低価格**でも高品質な快適性を実現。**センサー**で周囲環境を認識し、**夜間視界**を損なわない設計。**安心感**と**楽しさ**を同時に提供。ドライバーの心地よさを最大限に追求。素材は柔らかさと耐久性を両立。", imagePrompt: "AI-driven comfort space mode with ambient lighting, fragrance diffusion, and temperature control, modern vehicle cockpit, soft-touch materials and wood accents, day driving scene, warm glow and holographic interface, photorealistic 3D render, premium automotive design" },
+            ],
+        }
+    },
+{
         date: "2026-02-17",
         analysis: {
             jp: "日本市場では再生素材の活用が進む[jp490,jp491]。東海理化がシートベルト端材から衣類生地へと変換する技術を発表[jp491]。また、AI音声アシスタントやAR対応のコネクテッド機能が主流化[jp488]。高級感と機能性を両立させる本革キャプテンシートやQi充電対応ディスプレイも注目[jp487]。内装のモジュラリティやリサイクル素材へのニーズが高まっている。自社開発では、再生素材を内装に統合し、AI音声と充電機能を組み合わせたサステナブル・スマートパッケージを提案[jp487,jp488]。",
