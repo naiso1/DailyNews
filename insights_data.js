@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-19",
+        analysis: {
+            jp: "日本市場ではAI対話型HMIがApple CarPlayで実用化され[jp508]、EV用導電接着剤の開発[jp509]も進む。高級感と実用性の両立が求められ[jp506]、モジュラーや再生素材への注目[jp504,jp510]が高まっている。シートの快適性と燃費性能の両立[jp503,jp507]も重要。内装開発はAI連携・持続性・快適性を軸に進化すべき。",
+            cn: "中国市場では換電ネットワークの高速化とEV内装の実用性が強調され、蔚来の記録的な換電回数はユーザー利便性の高さを示す[cn348,cn349]。ARやHMIの進化は高級車のデジタル体験を拡張し、スマートシートコックピットSoCの普及は低コスト・高機能化のトレンドを反映[cn356]。これに対し、日本市場向けのK-Car内装は規制対応と地元化デザインが鍵となる[cn352,cn353]。開発上では、素材の軽量化とAI連動UIの融合が重要[cn350]。また、高級車の性能拡張は内装の機能性と耐久性を重視する傾向が見られる[cn354,cn355]。",
+            in: "インド市場ではEV専用生産ラインの拡充とHMIの高度化が進む[in369]。VWやトヨタが7座仕様やLevel 2 ADASを導入し、ARディスプレイやAIアシスタントが主流化の兆し[in370,in374]。素材面では軽量カーボンファイバーの導入も予想される[in371]。消費者ニーズは「家族向け多機能」と「高品質サウンド」が求められ、価格帯の拡大も見られる[in368,in372]。規制ではEV導入促進策が強化され、サプライチェーンの地域化が進む[in373]。自社開発では、マルチモードUIとサステナブル素材の融合が鍵[in371,in375]。素材、HMI、ADAS、EV、価格帯を意識する[in366,in367]。",
+            us: "米国市場ではEV化とハイブリッド性能が主流だが、内装の信頼性が課題 [us313]。 AR技術の導入が進む中、高級車の歴史的価値や耐久性への需要も顕在化 [us314,us315]。 素材の革新（例：カシミア×リサイクル）とAR連動UIの融合が、高級感と機能性を両立させる突破口 [us318,us320]。",
+            eu: "物理ボタンの規制により、UIの直感性がより重要になり、HMIの革新が求められる [eu293]。 AIとUXの融合は、Giorgetto Giugiaroが語る通り、未来のデザイン基盤となる [eu294]。 EVバッテリーの長寿命は、内装の耐久性や低メンテナンス設計の価値を高める [eu291]。 AIによる画像偽装防止は、信頼性重視の内装に影響 [eu290]。",
+        },
+        ideas: {
+            jp: [
+                { id: 389, img: "images/idea_389.png", title: "AI音声対話型「コネクト・コクピット」", desc: "運転中の自然な会話で、ナビ・音楽・温度・香りを制御。AIが状況に応じて「快適モード」を自動選択。家族との会話も自然に可能で、運転中のストレスを軽減。AIの「声」に親しみを感じる設計で、日常のドライブを心地よいものに。", imagePrompt: "AI voice assistant interface integrated into car dashboard, holographic controls floating above, natural conversation with driver and passenger, ambient lighting, modern cockpit design, photorealistic 3D render, cinematic lighting, premium automotive interior" },
+                { id: 390, img: "images/idea_390.png", title: "再生アルミ・抗菌モジュール「ReNewCore」", desc: "アルミフレームと抗菌素材で構成されたモジュール式コンソール。車の使用年数に応じて「リフレッシュ」可能で、見た目も機能性も長持ち。汚れや細菌を防ぎ、清潔感を保ちながら、カスタマイズ可能な形状で個性を演出。家族やペットでも安心な、快適な空間を実現。", imagePrompt: "Modular aluminum and antibacterial interior panel, sleek and clean design, customizable shape with interchangeable modules, soft ambient lighting, photorealistic 3D render, modern car interior, premium materials, high detail, cinematic lighting" },
+            ],
+            cn: [
+                { id: 391, img: "images/idea_391.png", title: "光触媒抗菌内装パネル「清風」", desc: "内装パネルに光触媒素材を採用し、空気中の細菌を分解する「清風」。抗菌効果により、乗り心地の安心感を提供。換電頻度の高いユーザー[jp348]に最適。清潔で快適な空間を実現し、乗り出し前のストレスを解消。", imagePrompt: "Photorealistic rendering of a car interior with antibacterial panels glowing softly under ambient lighting, modern minimalist design, light wood and matte black finish, clean and hygienic atmosphere, high detail, 4K quality" },
+                { id: 392, img: "images/idea_392.png", title: "AR視界最適化コントロールパネル「見通し」", desc: "AR技術を搭載し、運転中の視界を最適化するコントロールパネル。前方道路の障害物やカーブを投影し、運転者の負担を軽減。蔚来の換電記録[jp348]に応じた使い勝手で、安全と快適さを両立。運転中の「安心感」を視覚的に体感できる。", imagePrompt: "Augmented reality HUD integrated into car dashboard, glowing digital overlays showing road curves and obstacles, sleek modern cockpit design, blue and silver color scheme, photorealistic render, cinematic lighting" },
+            ],
+            in: [
+                { id: 393, img: "images/idea_393.png", title: "スマートマルチセンサー内装パネル", desc: "車内を「**安全・快適・つながり**」の3軸で制御するAIパネル。**センサー**で乗員の姿勢・体温・ストレスレベルをリアルタイムに感知し、自動で**クッション調整**や**香り・照明**を最適化。**家族との連携**も可能で、スマホとの同期で「**笑顔の数値**」を表示。**サステナブル素材**で構成し、**メンテナンスフリー**設計。家族の安心を数字で可視化する「**安心の指標**」を提供。うれしさ：家族の笑顔が数値化され、快適さが自動調整される。", imagePrompt: "Smart multi-sensor interior panel in luxury SUV, real-time monitoring of passengers' posture and stress levels, adaptive cushion adjustment, ambient lighting and aroma system, family connection interface, sustainable eco-materials, photorealistic 3D render, cinematic lighting, premium automotive interior, 4K quality" },
+                { id: 394, img: "images/idea_394.png", title: "ARナビゲーション・サウンドマッピングパネル", desc: "**ARナビゲーション**と**サウンドマッピング**を融合したパネル。**3D地図**と**音楽の空間音響**を車内に投影し、**ドライバーの視界**を拡張。**サウンド**は「**高品質オーディオ**」の**音圧・周波数**を空間にマッピングし、**音楽の没入感**を高める。**EV専用**設計で、**電力効率**と**軽量化**を両立。**子供の遊び声**や**家族の会話**も空間に反映。うれしさ：音楽とナビが空間で「**生きている**」ように感じられる。", imagePrompt: "AR navigation and sound mapping panel in modern electric vehicle, 3D map projection, spatial audio visualization, immersive sound field, child's laughter and family conversation integrated into space, eco-friendly lightweight design, photorealistic 3D render, cinematic lighting, premium automotive interior, 4K quality" },
+            ],
+            us: [
+                { id: 395, img: "images/idea_395.png", title: "TimeGlow モジュラーライフサイクルコンソール", desc: "高耐久性のリサイクルカシミアと、AR映像を投影する透明樹脂パネルを組み合わせたコンソール。10年間の使用で色褪せも光の変化を楽しむ「時空の輝き」。車内を高級空間に、メンテナンスの煩わしさから解放。新素材の魅力と、ARによる遊び心でユーザーを魅了。", imagePrompt: "Modular console with recycled cashmere fabric and transparent resin panel projecting AR visuals, luxury car interior, warm ambient lighting, wooden accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 396, img: "images/idea_396.png", title: "SyncSync リアルタイムARシートマネージャー", desc: "座席の位置・角度をARで可視化し、自動調整するスマートシート。車両の走行状態や天候に応じて、シートの温度・照明を自動最適化。ドライバーの「快適さ」をリアルタイムで管理。高級感の代わりに、安心と楽しさを提供する。車内空間を「あなたの居場所」に。", imagePrompt: "AR-enabled smart seat with real-time visualization of position and comfort settings, luxury car interior, holographic interface above seat, ambient lighting, leather and carbon fiber materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 397, img: "images/idea_397.png", title: "AI感情応答型HMI「FeelSync」", desc: "ドライバーの感情と疲労度をAIでリアルタイムに分析し、照明・音響・温度を最適化。快適さと安全性を同時に追求。運転中のストレス軽減で「安心して走れる」快適性を実現。感情認識[jp294]、AI[jp290]。", imagePrompt: "AI-powered emotional HMI dashboard with adaptive lighting, soothing color palette, futuristic car interior, glowing interface responding to driver’s mood, photorealistic 3D render, cinematic lighting, premium automotive design" },
+                { id: 398, img: "images/idea_398.png", title: "耐久性高級素材「EverlastWeave」", desc: "EVの長寿命バッテリー[jp291]に見られる耐久性を内装素材に応用。高温・低温・紫外線にも強い織物素材で、10年間の快適性を実現。メンテナンス不要で「ずっときれいな内装」を提供。耐熱性素材[jp287]、長寿命設計[jp291]。", imagePrompt: "Luxury car interior with woven EverlastWeave fabric, durable and scratch-resistant, warm ambient lighting, natural wood accents, photorealistic 3D render, high detail, cinematic lighting, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-18",
         analysis: {
             jp: "日本市場では軽自動車向けHUDの実用化が進む[jp492]。後席着用率の低さは安全課題[jp499]。EV航続距離の長さと高級内装が注目[jp494]。カスタム市場の拡大[jp497]、限定モデルの発売[jp500]で、個人化・感情デザインへのニーズが高まっている。素材の再利用や抗菌性も注目[jp501]。日本向けのBEV車の導入は遅れ[jp496]。シートの多様化と内装のモジュール化が主流になりつつある。",
