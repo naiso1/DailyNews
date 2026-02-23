@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-22",
+        analysis: {
+            jp: "日本の自動車内装市場は、**快適性**と**遊び心**の融合がトレンド。猫モチーフの**ねこシート**[jp512]や、**7人乗り広々空間**[jp515]が人気。**EV車の内装**[jp514]では、**静粛性**と**操作性**が重視され、**安全装備**[jp518]も重要な評価軸。**レトロデザイン**[jp516]や**AI音声**[jp520]の要素も注目され、**知能化**[jp519]が進む中で、**人間味**を加える製品が差別化ポイント。",
+            cn: "中国市場ではAR-HUDとスマート座舱が主流化し、第三空間としての内装価値が注目されている[cn363,cn364,cn365]。BYDのRaccoはレトロデザインと実用性を融合し、日本市場向けの内装戦略を示す[cn361,cn362]。競合他社の無インストルメントパネル設計は、AI連動と快適性を強調する[cn363]。規制面では関税問題が続くが、有機リチウム電池の開発により耐熱・耐衝撃の安全性が向上中[cn360]。素材面ではアルミ・レザーの高級感と耐寒性が求められる。",
+            in: "インド市場では**Make in India**政策下、クアルコムとタタ電子の提携により、デジタルコックピット向け**OSAT工場**が稼働し、**Snapdragon SoC統合製品**のローカライズが進む[in376,in381]。同時に、**高級インテリアイベント**や**EV内装の微調整**が見られ、**持続可能性**と**カスタマイズ**が重要視されている[in382,in383]。素材面では**軽量カーボンファイバー**や**トグル式操作**が登場し、**AR対応ディスプレイ**も注目[in385]。競合車両の**高級内装**と**音楽再生機能**の拡張がトレンド[in380,in384]。内装開発では**ローカル製造・AI統合・持続性**を軸に、**ユーザー体験の柔軟性**を強化すべき[in379,in383]。",
+            us: "欧州で物理ボタン義務化が進む中、HMIの物理的安心性が重視される傾向[us321]。AIアシスタントの普及により、タッチ操作のストレスが増加[us325]。素材面ではナッパレザーや通気性座椅子の需要が高まる[us324]。EV車の内装ではシフトレバーの多機能化が進む[us325]。中国の規制も影響し、安全・快適性の両立が求められる[us328]。自社製品では、物理ボタンとARの融合[us321]、快適素材の高機能化[us324]を軸に開発すべき。",
+            eu: "EV化とクラシックデザインの融合が注目され、フェラーリ「ルチェ」のミニマル内装とリサイクルアルミは高級感と持続可能性を両立[eu300]。Apple CarPlayの動画ストリーミングでエンタメ体験が進化中[eu299]。警告灯無視の安全リスクが懸念され、AI安全監視の必要性が高まる[eu303]。素材、内装、EV、安全のトレンドを踏まえ、持続可能な高級内装とAI監視型快適空間の開発が示唆[eu300,eu303,eu299]。",
+        },
+        ideas: {
+            jp: [
+                { id: 399, img: "images/idea_399.png", title: "猫モチーフ・マルチモードシート「ねこラグジュアリー」", desc: "猫の手袋で迎える**ねこタクシー**[jp512]のコンセプトを、**モジュラーコンソール**[jp514]と組み合わせた快適シート。**猫の耳型ヘッドレスト**と**ふわふわシートクッション**で、運転中のリラックスと遊び心を実現。**猫のシール**[jp512]の楽しさを、**長時間ドライブ**でも味わえる。高級感と癒しの両立で、**家族やペット好き**にうれしい。", imagePrompt: "Cat-themed luxury car seat with fluffy cushion and ear-shaped headrest, integrated modular console, ambient lighting, brushed aluminum and soft leather materials, warm glow, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 400, img: "images/idea_400.png", title: "AI音声アシスタント「ねこコントロール」", desc: "猫の声で**AI音声アシスタント**[jp520]を操作できる、**猫モチーフのスイッチ**と**音声認識**を組み合わせた**コンソール**。**「ねこさん、窓開けて」**で窓を開ける、**「ねこさん、音楽」**で再生。**猫のデザイン**[jp512]と**音声操作**[jp520]の融合で、**家族やペット**に優しい操作性。**猫の声**で**車内を楽しく**、**運転のストレスを減らす**のがうれしい。", imagePrompt: "AI voice assistant with cat-themed control panel, holographic interface, ambient lighting, futuristic dashboard, soft blue and orange color scheme, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 401, img: "images/idea_401.png", title: "AI連動マルチセンサー内装パネル「智感壁」", desc: "車両の温度・湿度・音圧をリアルタイムで感知し、**AIが最適な素材温度と照明**を自動調整。**快適性を最大化**し、**視界・音質・体感**を最適化する。**高級感のあるアルミと木目調素材**で、**リラックスした空間**を演出。特に**長時間運転者**にうれしい。", imagePrompt: "AI-controlled multi-sensor interior panel with ambient temperature adjustment, wood grain and brushed aluminum finish, glowing subtle LED lighting, futuristic luxury car cockpit, cinematic lighting, photorealistic 3D render, 4K quality" },
+                { id: 402, img: "images/idea_402.png", title: "AR-HUD拡張座舱「第三空間」", desc: "**AR-HUD**と**スマート座舱**を融合し、**車内空間を第三空間**として体験可能。**ホンマーン座舱**の**AI連動機能**と**スポーツデザイン**で、**都市生活のリラックス空間**を提供。**視界最適化**と**操作の簡易化**で、**運転者のストレスを軽減**。**快適さとデザイン性**を両立させた新体験。", imagePrompt: "AR-HUD extended cockpit with smart cabin interface, holographic display floating above dashboard, sporty interior design with premium leather and carbon fiber, ambient blue lighting, photorealistic 3D render, cinematic lighting, 4K quality" },
+            ],
+            in: [
+                { id: 403, img: "images/idea_403.png", title: "スマートトグル・コンソール：インドの「トグル文化」を内装に反映", desc: "インドの伝統的な「トグル式」操作をモダンに再解釈したコンソール。スイッチ操作で音楽/香り/照明を切り替え、**トグル式窓操作スイッチ**[in382]をモチーフにしたデザインで、手のひらサイズで操作しやすい。車内空間を「トグル」で快適にカスタムできる。**うれしさ**：操作が直感的で、家族や友人との車内コミュニケーションを楽しくする。", imagePrompt: "Smart toggle console with touch-sensitive switches, Indian-inspired design, wooden and matte black materials, warm ambient lighting, modern vehicle interior, cinematic lighting, photorealistic 3D render, 4K quality" },
+                { id: 404, img: "images/idea_404.png", title: "アナモルフィック・デジタルパネル：車内を「映画館」に", desc: "Defenderの**アナモルフィックディスプレイ**[in385]をベースに、車内に**映画館体験**を実装。座席に埋め込む小型ディスプレイで、**AR音楽・ナビゲーション**[in384]を映像化。**うれしさ**：車内で好きな映画や音楽を「上映」できる。家族や友人と車内を「共有空間」に変える。", imagePrompt: "Anamorphic digital panel embedded in car seat, cinematic movie experience, holographic AR interface, ambient lighting, luxury car interior, blue and gold accents, photorealistic 3D render, 4K quality" },
+            ],
+            us: [
+                { id: 405, img: "images/idea_405.png", title: "TouchGuard フィジカル・ARコントロールユニット", desc: "物理ボタンとAR表示を融合した新型コントロールユニット。運転中の視線を最小限に抑えながら、**ARでボタンの機能を視覚化**。**タッチ操作のストレスを軽減**し、**安全運転をサポート**。**高級車向け**で、**高輝度OLED＋アルミフレーム**のデザイン。運転者の**安心感と新鮮さ**を両立。[us321, us326]", imagePrompt: "Futuristic automotive control unit with physical buttons and holographic AR interface, ambient glow effect, modern dashboard, brushed aluminum frame and premium OLED display, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 406, img: "images/idea_406.png", title: "ThermoNappa リチウムイオンヒート・ナッパレザー座椅子", desc: "**ナッパレザー素材に内蔵されたヒートテクノロジー**。**快適性と省エネ**を両立。**冬場の除湿・除霜機能**と連動し、**体感温度を均一化**。**通気性と柔らかさ**を兼ね備え、**長時間の快適座り**を実現。**高級EV車向け**で、**香りと温かさの併用**で**心地よい空間**を演出。[us322, us323]", imagePrompt: "Luxury car seat with heated Nappa leather and embedded thermal technology, ambient lighting effect, modern vehicle interior, warm beige and black color scheme, soft leather texture, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 407, img: "images/idea_407.png", title: "リサイクルアルミ・高級内装パネル「EcoLuxe」", desc: "フェラーリ「ルチェ」の**リサイクルアルミ**をベースに、**高級感と環境負荷の低さ**を両立。表面は**マットブラックとシルバーグレー**の2色で、**タッチレス操作**に対応。**ドライバーの快適性と地球への配慮**を同時に実現。車内が「贅沢に見える」快感と「責任ある選択」の喜びを提供。", imagePrompt: "Luxury car interior panel made from recycled aluminum, matte black and silver gray finish, touchless control interface, minimalist design, eco-friendly material texture, cinematic lighting, photorealistic 3D render, premium automotive interior" },
+                { id: 408, img: "images/idea_408.png", title: "AI安全監視・快適空間ユニット「GuardAura」", desc: "警告灯無視のリスク[jp303]に対応し、**AIがドライバーの疲労や集中度を監視**。**安全警告は優しい音とグラフィック**で、**快適空間モード**を自動でオン。**運転中のリラックスと安心感**を実現。**「安全を楽しむ」喜び**と、**快適さの自動調整**が新たな快適体験。", imagePrompt: "AI-powered safety monitoring unit in car interior, glowing ambient blue light, holographic safety alerts floating above dashboard, driver relaxed posture, modern minimalist cockpit design, soft cinematic lighting, photorealistic 3D render, premium automotive tech" },
+            ],
+        }
+    },
+{
         date: "2026-02-19",
         analysis: {
             jp: "日本市場ではAI対話型HMIがApple CarPlayで実用化され[jp508]、EV用導電接着剤の開発[jp509]も進む。高級感と実用性の両立が求められ[jp506]、モジュラーや再生素材への注目[jp504,jp510]が高まっている。シートの快適性と燃費性能の両立[jp503,jp507]も重要。内装開発はAI連携・持続性・快適性を軸に進化すべき。",
