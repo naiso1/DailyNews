@@ -1,4 +1,4 @@
-﻿import sys
+import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 import os
@@ -142,23 +142,23 @@ try:
     DDGS_AVAILABLE = True
 except ImportError:
     DDGS_AVAILABLE = False
-    print("豕ｨ諢・ duckduckgo-search 縺後う繝ｳ繧ｹ繝医・繝ｫ縺輔ｌ縺ｦ縺・∪縺帙ｓ縲Ｑip install duckduckgo-search 繧貞ｮ溯｡後＠縺ｦ縺上□縺輔＞縲・)
+    print("注意: duckduckgo-search がインストールされていません。pip install duckduckgo-search を実行してください。")
 
 try:
     from deep_translator import GoogleTranslator
     TRANSLATOR_AVAILABLE = True
 except ImportError:
     TRANSLATOR_AVAILABLE = False
-    print("豕ｨ諢・ deep-translator 縺後う繝ｳ繧ｹ繝医・繝ｫ縺輔ｌ縺ｦ縺・∪縺帙ｓ縲Ｑip install deep-translator 繧貞ｮ溯｡後＠縺ｦ縺上□縺輔＞縲・)
+    print("注意: deep-translator がインストールされていません。pip install deep-translator を実行してください。")
 
 try:
     from playwright.sync_api import sync_playwright
     PLAYWRIGHT_AVAILABLE = True
 except ImportError:
     PLAYWRIGHT_AVAILABLE = False
-    print("豕ｨ諢・ playwright 縺後う繝ｳ繧ｹ繝医・繝ｫ縺輔ｌ縺ｦ縺・∪縺帙ｓ縲Ｑip install playwright 縺ｧ霑ｽ蜉縺ｧ縺阪∪縺吶・)
+    print("注意: playwright がインストールされていません。pip install playwright で追加できます。")
 
-# --- 險ｭ螳・---
+# --- 設定 ---
 def load_json_file(path):
     try:
         if path and Path(path).exists():
@@ -232,48 +232,39 @@ def parse_date(date_str):
         return dt.strftime('%Y-%m-%d')
     except:
         return None
+
 def extract_image_from_rss(entry):
-    """RSS/Atom縺ｮ繧ｨ繝ｳ繝医Μ縺九ｉ逕ｻ蜒酋RL繧呈歓蜃ｺ"""
-    candidates = []
+    """RSS/Atomのエントリから画像URLを抽出"""
     try:
         media = entry.get("media_content", [])
         if media and isinstance(media, list):
             for m in media:
                 url = m.get("url") or m.get("href")
                 if url:
-                    candidates.append(str(url))
+                    return url
         thumbs = entry.get("media_thumbnail", [])
         if thumbs and isinstance(thumbs, list):
             for m in thumbs:
                 url = m.get("url") or m.get("href")
                 if url:
-                    candidates.append(str(url))
+                    return url
         enclosures = entry.get("enclosures", [])
         if enclosures:
             for enc in enclosures:
                 url = enc.get("url")
                 if url and "image" in str(enc.get("type", "")).lower():
-                    candidates.append(str(url))
+                    return url
         links = entry.get("links", [])
         if links:
             for lnk in links:
                 if lnk.get("rel") == "enclosure" and "image" in str(lnk.get("type", "")).lower():
                     url = lnk.get("href") or lnk.get("url")
                     if url:
-                        candidates.append(str(url))
+                        return url
     except Exception:
         pass
-    if not candidates:
-        return ""
-    uniq = []
-    seen = set()
-    for c in candidates:
-        if c in seen:
-            continue
-        seen.add(c)
-        uniq.append(c)
-    uniq.sort(key=rank_image_url, reverse=True)
-    return uniq[0]
+    return ""
+
 def is_target_date(pub_date, target_dates):
     if not target_dates:
         return True
@@ -506,17 +497,17 @@ def fetch_meta_description(url, timeout=10):
         return ""
 
 def resolve_final_url(url, timeout=5):
-    """繝ｪ繝繧､繝ｬ繧ｯ繝医ｒ隗｣豎ｺ縺励※譛邨６RL繧定ｿ斐☆・亥､ｱ謨玲凾縺ｯ蜈ザRL・・""
+    """リダイレクトを解決して最終URLを返す（失敗時は元URL）"""
     if not url:
         return url
     try:
         parsed = urlparse(url)
-        # Google News縺ｮRSS繝ｪ繝ｳ繧ｯ縺ｯ ?url= 繧・ｸｭ髢薙・繝ｼ繧ｸ邨檎罰縺ｪ縺ｮ縺ｧ蜆ｪ蜈育噪縺ｫ螳欟RL繧呈歓蜃ｺ
+        # Google NewsのRSSリンクは ?url= や中間ページ経由なので優先的に実URLを抽出
         qs = parse_qs(parsed.query)
         if parsed.netloc.endswith("news.google.com"):
             if "url" in qs and qs["url"]:
                 return qs["url"][0]
-            # base64逶ｸ蠖薙・繝壹う繝ｭ繝ｼ繝峨°繧蔚RL繧呈歓蜃ｺ
+            # base64相当のペイロードからURLを抽出
             try:
                 payload = parsed.path.split("/")[-1].split("?")[0]
                 pad = "=" * (-len(payload) % 4)
@@ -528,7 +519,7 @@ def resolve_final_url(url, timeout=5):
                 pass
         resp = requests.get(url, headers=HEADERS, timeout=timeout, allow_redirects=True)
         final_url = resp.url or url
-        # news.google.com 縺ｮ險倅ｺ九・繝ｼ繧ｸ縺九ｉ canonical 繧呈鏡縺・
+        # news.google.com の記事ページから canonical を拾う
         if urlparse(final_url).netloc.endswith("news.google.com"):
             try:
                 soup = BeautifulSoup(resp.text, "html.parser")
@@ -546,7 +537,7 @@ def resolve_final_url(url, timeout=5):
         return url
 
 def resolve_with_playwright(url, timeout_ms=15000):
-    """Playwright縺ｧJS繝ｬ繝ｳ繝繝ｪ繝ｳ繧ｰ蠕後・URL縺ｨ逕ｻ蜒上ｒ蜿門ｾ暦ｼ・laywright縺後≠繧句ｴ蜷医・縺ｿ・・""
+    """PlaywrightでJSレンダリング後のURLと画像を取得（Playwrightがある場合のみ）"""
     if not PLAYWRIGHT_AVAILABLE or not USE_PLAYWRIGHT:
         return None, None
     try:
@@ -568,7 +559,7 @@ def resolve_with_playwright(url, timeout_ms=15000):
                 content = og_image.get_attribute("content")
                 if content:
                     image_url = content
-            # 繝壹・繧ｸ荳ｭ縺ｮ螟夜Κ繝ｪ繝ｳ繧ｯ繧偵し繝ｼ繝・ｼ磯撼google・・
+            # ページ中の外部リンクをサーチ（非google）
             if "news.google.com" in (final_url or ""):
                 html = page.content()
                 links = re.findall(r"https?://[^\"'\\s<>]+", html)
@@ -582,7 +573,7 @@ def resolve_with_playwright(url, timeout_ms=15000):
         return None, None
 
 def search_article_url(title, country=""):
-    """險倅ｺ九ち繧､繝医Ν縺ｧWeb讀懃ｴ｢縺励∵怙荳贋ｽ阪・URL繧定ｿ斐☆・・DGS縺御ｽｿ縺医ｋ蝣ｴ蜷医・縺ｿ・・""
+    """記事タイトルでWeb検索し、最上位のURLを返す（DDGSが使える場合のみ）"""
     if not DDGS_AVAILABLE:
         return ""
     query = title
@@ -610,7 +601,7 @@ def load_prompt_text():
     return ""
 
 def image_url_to_data_url(image_url):
-    """逕ｻ蜒酋RL繧鱈LM蜈･蜉帛髄縺代・data URL縺ｫ螟画鋤・医し繧､繧ｺ邵ｮ蟆擾ｼ・""
+    """画像URLをLLM入力向けのdata URLに変換（サイズ縮小）"""
     if not image_url or not PIL_AVAILABLE:
         return ""
     if image_url in LLM_IMAGE_CACHE:
@@ -644,7 +635,7 @@ def image_url_to_data_url(image_url):
         return ""
 
 def call_llm_classify(title, content, image_url="", mode="both"):
-    """繝ｭ繝ｼ繧ｫ繝ｫLLM縺ｧ蟇ｾ雎｡蛻､螳壹→逕ｻ蜒丞愛螳壹ｒ螳滓命縺吶ｋ"""
+    """ローカルLLMで対象判定と画像判定を実施する"""
     global PROMPT_TEXT, LLM_ERROR_LOGGED
     if not USE_LLM:
         return "", ""
@@ -652,7 +643,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
         PROMPT_TEXT = load_prompt_text()
     if not PROMPT_TEXT:
         if not LLM_ERROR_LOGGED:
-            print("  笨・繝励Ο繝ｳ繝励ヨ.md 繧定ｪｭ縺ｿ霎ｼ繧√∪縺帙ｓ縺ｧ縺励◆・医お繝ｳ繧ｳ繝ｼ繝・繝代せ遒ｺ隱搾ｼ・)
+            print("  ✗ プロンプト.md を読み込めませんでした（エンコード/パス確認）")
             LLM_ERROR_LOGGED = True
         return "", ""
     cache_key = (title, content, image_url, mode)
@@ -662,25 +653,25 @@ def call_llm_classify(title, content, image_url="", mode="both"):
         return "", ""
     if mode == "relevance":
         prompt = (
-            f"{PROMPT_TEXT}\n\n繧ｿ繧､繝医Ν:\n{title}\n\n譛ｬ譁・\n{content}\n\n"
-            "莉･荳九ｒ邁｡貎斐↓JSON縺ｧ蝗樒ｭ斐＠縺ｦ縺上□縺輔＞縲・n"
+            f"{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
+            "以下を簡潔にJSONで回答してください。\n"
             "keys=['relevance']\n"
-            "relevance縺ｯ蟇ｾ雎｡縺ｪ繧液rue/false縲ら炊逕ｱ縺ｯ荳崎ｦ√・
+            "relevanceは対象ならtrue/false。理由は不要。"
         )
     elif mode == "photo":
         prompt = (
-            f"{PROMPT_TEXT}\n\n繧ｿ繧､繝医Ν:\n{title}\n\n譛ｬ譁・\n{content}\n\n"
-            "莉･荳九ｒ邁｡貎斐↓JSON縺ｧ蝗樒ｭ斐＠縺ｦ縺上□縺輔＞縲・n"
+            f"{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
+            "以下を簡潔にJSONで回答してください。\n"
             "keys=['has_target_photo']\n"
-            f"has_target_photo縺ｯ縲鶏PHOTO_TARGET_LABEL}縲阪・蜀咏悄縺梧悽譁・ｄ逕ｻ蜒上°繧臥｢ｺ隱阪〒縺阪◎縺・↑繧液rue/false縲ら炊逕ｱ縺ｯ荳崎ｦ√・
+            f"has_target_photoは「{PHOTO_TARGET_LABEL}」の写真が本文や画像から確認できそうならtrue/false。理由は不要。"
         )
     else:
         prompt = (
-            f"{PROMPT_TEXT}\n\n繧ｿ繧､繝医Ν:\n{title}\n\n譛ｬ譁・\n{content}\n\n"
-            "莉･荳九ｒ邁｡貎斐↓JSON縺ｧ蝗樒ｭ斐＠縺ｦ縺上□縺輔＞縲・n"
+            f"{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
+            "以下を簡潔にJSONで回答してください。\n"
             "keys=['relevance','has_target_photo']\n"
-            "relevance縺ｯ蟇ｾ雎｡縺ｪ繧液rue/false縲・n"
-            f"has_target_photo縺ｯ縲鶏PHOTO_TARGET_LABEL}縲阪・蜀咏悄縺梧悽譁・ｄ逕ｻ蜒上°繧臥｢ｺ隱阪〒縺阪◎縺・↑繧液rue/false縲ら炊逕ｱ縺ｯ荳崎ｦ√・
+            "relevanceは対象ならtrue/false。\n"
+            f"has_target_photoは「{PHOTO_TARGET_LABEL}」の写真が本文や画像から確認できそうならtrue/false。理由は不要。"
         )
     try:
         content_payload = prompt
@@ -705,7 +696,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
                 resp = requests.post(LLM_ENDPOINT, json=payload, timeout=LLM_TIMEOUT)
             if resp.status_code != 200:
                 if not LLM_ERROR_LOGGED:
-                    print(f"  笨・LLM蜻ｼ縺ｳ蜃ｺ縺励お繝ｩ繝ｼ: HTTP {resp.status_code}")
+                    print(f"  ✗ LLM呼び出しエラー: HTTP {resp.status_code}")
                     print(resp.text[:200])
                     LLM_ERROR_LOGGED = True
                 return "", ""
@@ -716,11 +707,11 @@ def call_llm_classify(title, content, image_url="", mode="both"):
             if mode in ("both", "relevance"):
                 m = re.search(r'"relevance"\s*:\s*(true|false)', txt, re.IGNORECASE)
                 if m:
-                    rel = "蟇ｾ雎｡" if m.group(1).lower() == "true" else "髱槫ｯｾ雎｡"
+                    rel = "対象" if m.group(1).lower() == "true" else "非対象"
             if mode in ("both", "photo"):
                 m2 = re.search(r'"has_target_photo"\s*:\s*(true|false)', txt, re.IGNORECASE)
                 if m2:
-                    photo = "縺ゅｊ" if m2.group(1).lower() == "true" else "縺ｪ縺・
+                    photo = "あり" if m2.group(1).lower() == "true" else "なし"
         except Exception:
             pass
         result = (rel, photo)
@@ -733,7 +724,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
         return "", ""
 
 def check_url_ok(url, is_image=False, timeout=URL_CHECK_TIMEOUT):
-    """URL縺梧怏蜉ｹ縺ｪ繧欝rue縲∫┌蜉ｹ縺ｪ繧宇alse"""
+    """URLが有効ならTrue、無効ならFalse"""
     if not url or not isinstance(url, str):
         return False
     lower = url.lower()
@@ -790,7 +781,7 @@ def check_url_ok(url, is_image=False, timeout=URL_CHECK_TIMEOUT):
         return False
 
 def bulk_fetch_images(urls):
-    """URL繝ｪ繧ｹ繝医ｒ荳ｦ蛻怜叙蠕励＠縺ｦ逕ｻ蜒酋RL繧定ｿ斐☆霎樊嶌繧剃ｽ懈・"""
+    """URLリストを並列取得して画像URLを返す辞書を作成"""
     unique = []
     seen = set()
     for u in urls:
@@ -809,7 +800,7 @@ def bulk_fetch_images(urls):
                 results[u] = fut.result()
             except Exception:
                 results[u] = ""
-    # 莠梧ｬ｡: 螟ｱ謨怜・繧帝聞繧√ち繧､繝繧｢繧ｦ繝医〒蜀榊叙蠕・
+    # 二次: 失敗分を長めタイムアウトで再取得
     secondary_targets = [u for u, img in results.items() if is_missing_url(img)]
     if secondary_targets:
         with ThreadPoolExecutor(max_workers=max(4, IMAGE_FETCH_WORKERS // 2)) as executor:
@@ -822,8 +813,8 @@ def bulk_fetch_images(urls):
                         results[u] = img
                 except Exception:
                     pass
-    # 荳画ｬ｡: 繧ｵ繧､繝医せ繧ｯ繝ｪ繝ｼ繝ｳ繧ｷ繝ｧ繝・ヨ繧ｵ繝ｼ繝薙せ縺ｧ繧ｵ繝繝咲函謌・
-    # 辟｡蜉ｹ縺ｪ繧峨せ繧ｭ繝・・・育ｩｺ谺・・縺ｾ縺ｾ谿九☆・・
+    # 三次: サイトスクリーンショットサービスでサムネ生成
+    # 無効ならスキップ（空欄のまま残す）
     return results
 
 def is_missing_url(val):
@@ -836,7 +827,8 @@ def is_missing_url(val):
         if s == "":
             return True
         lower = s.lower()
-        # IT荵句ｮｶ縺ｧ鬆ｻ蜃ｺ縺吶ｋ讌ｵ蟆上・繝ｬ繝ｼ繧ｹ繝帙Ν繝繝ｼ逕ｻ蜒・        if "img.ithome.com/images/v2/t.png" in lower:
+        # IT之家で頻出する極小プレースホルダー画像
+        if "img.ithome.com/images/v2/t.png" in lower:
             return True
         if "google.com/s2/favicons" in lower:
             return True
@@ -876,13 +868,13 @@ _summary_cache = {}
 _article_text_cache = {}
 
 def compute_relevance(title, content=""):
-    """繧ｿ繧､繝医Ν/譛ｬ譁・°繧牙ｯｾ雎｡蛻・㍽縺ｮ髢｢騾｣蠎ｦ繧偵せ繧ｳ繧｢繝ｪ繝ｳ繧ｰ縺吶ｋ"""
+    """タイトル/本文から対象分野の関連度をスコアリングする"""
     text = (str(title) + " " + str(content)).lower()
     hits = []
     seen_canon = []
     for kw in INTERIOR_KEYWORDS_LOWER:
         if kw and kw in text:
-            # 蜷檎ｾｩ隱槭げ繝ｫ繝ｼ繝励ｒ縺ｾ縺ｨ繧√※繧ｫ繧ｦ繝ｳ繝・
+            # 同義語グループをまとめてカウント
             canon = kw
             for group in SYNONYM_GROUPS:
                 if kw in group:
@@ -892,27 +884,27 @@ def compute_relevance(title, content=""):
                 seen_canon.append(canon)
             hits.append(kw)
     unique_hits = seen_canon
-    score = min(1.0, len(unique_hits) / 5.0)  # 5遞ｮ莉･荳翫〒1.0
+    score = min(1.0, len(unique_hits) / 5.0)  # 5種以上で1.0
     if score >= 0.7:
-        label = "鬮・
+        label = "高"
     elif score >= 0.4:
-        label = "荳ｭ"
+        label = "中"
     else:
-        label = "菴・
+        label = "低"
     return round(score, 2), label, unique_hits
 
 def normalize_text(text):
     return re.sub(r"\s+", " ", str(text or "")).strip()
 
 def has_japanese_kana(text):
-    return re.search(r"[縺・繧溘ぃ-繝ｿ]", str(text or "")) is not None
+    return re.search(r"[ぁ-ゟァ-ヿ]", str(text or "")) is not None
 
 def has_kanji(text):
     return re.search(r"[\u4e00-\u9fff]", str(text or "")) is not None
 
 def kana_kanji_counts(text):
     s = str(text or "")
-    kana = len(re.findall(r"[縺・繧溘ぃ-繝ｿ]", s))
+    kana = len(re.findall(r"[ぁ-ゟァ-ヿ]", s))
     kanji = len(re.findall(r"[\u4e00-\u9fff]", s))
     return kana, kanji
 
@@ -998,9 +990,9 @@ def ends_with_sentence(text):
     if not s:
         return False
     last = s[-1]
-    if last in "縲ゑｼ・ｼ・!?":
+    if last in "。！？.!?":
         return True
-    if last in "縲阪擾ｼ峨托ｼｽ" and len(s) >= 2 and s[-2] in "縲ゑｼ・ｼ・!?":
+    if last in "」』）】］" and len(s) >= 2 and s[-2] in "。！？.!?":
         return True
     return False
 
@@ -1008,7 +1000,7 @@ def trim_to_sentence(text, limit):
     s = normalize_text(text)
     if len(s) <= limit:
         return s
-    boundaries = ["縲・, "・・, "・・, ".", "!", "?"]
+    boundaries = ["。", "！", "？", ".", "!", "?"]
     best = ""
     for b in boundaries:
         idx = s.rfind(b, 0, limit + 1)
@@ -1047,7 +1039,7 @@ def parse_json_field(text, key):
     return ""
 
 def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=False):
-    """鄙ｻ險ｳ・医Ο繝ｼ繧ｫ繝ｫLLM・峨ょ､ｱ謨玲凾縺ｯ遨ｺ譁・ｭ励ｒ霑斐☆"""
+    """翻訳（ローカルLLM）。失敗時は空文字を返す"""
     if not text:
         return ""
     key = (text, target_lang, force_japanese, require_kanji)
@@ -1057,40 +1049,40 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
         return ""
     if target_lang == "ja" and force_japanese:
         prompt = (
-            "谺｡縺ｮ譁・ｫ繧定・辟ｶ縺ｪ譌･譛ｬ隱槭↓鄙ｻ險ｳ縺励※縺上□縺輔＞縲ょｿ・★譌･譛ｬ隱槭〒縲∵ｼ｢蟄励→縺ｲ繧峨′縺ｪ繧帝←蛻・↓豺ｷ縺懊※縺上□縺輔＞縲・
-            "縺ｲ繧峨′縺ｪ/繧ｫ繧ｿ繧ｫ繝翫□縺代・蜃ｺ蜉帙・遖∵ｭ｢縺ｧ縺吶・
-            '蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {"translation":"..."}\\n\\n'
+            "次の文章を自然な日本語に翻訳してください。必ず日本語で、漢字とひらがなを適切に混ぜてください。"
+            "ひらがな/カタカナだけの出力は禁止です。"
+            '出力はJSONのみ。形式: {"translation":"..."}\\n\\n'
             f"{text}"
         )
     else:
         prompt = (
-            f"谺｡縺ｮ譁・ｫ繧畜target_lang}縺ｫ鄙ｻ險ｳ縺励※縺上□縺輔＞縲ょ・蜉帙・JSON縺ｮ縺ｿ縲・
-            f'蠖｢蠑・ {{"translation":"..."}}\\n\\n{text}'
+            f"次の文章を{target_lang}に翻訳してください。出力はJSONのみ。"
+            f'形式: {{"translation":"..."}}\\n\\n{text}'
         )
     if target_lang == "ja" and force_japanese:
-        # 蜀榊ｮ夂ｾｩ: 蝗ｺ譛牙錐隧槭・蠖薙※蟄励ｒ謚大宛
+        # 再定義: 固有名詞の当て字を抑制
         prompt = (
-            "谺｡縺ｮ譁・ｫ繧定・辟ｶ縺ｪ譌･譛ｬ隱槭↓鄙ｻ險ｳ縺励※縺上□縺輔＞縲ょｿ・★譌･譛ｬ隱槭〒縲∵ｼ｢蟄励→縺ｲ繧峨′縺ｪ繧帝←蛻・↓豺ｷ縺懊※縺上□縺輔＞縲・n"
-            "蝗ｺ譛牙錐隧槭・闍ｱ蟄励∪縺溘・荳闊ｬ逧・↑陦ｨ險倥ｒ菴ｿ縺・√・繧峨′縺ｪ荳ｻ菴薙・蠖薙※蟄励・驕ｿ縺代※縺上□縺輔＞縲・n"
-            "縺ｲ繧峨′縺ｪ/繧ｫ繧ｿ繧ｫ繝翫□縺代・蜃ｺ蜉帙・遖∵ｭ｢縺ｧ縺吶・n"
-            '蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {"translation":"..."}\n\n'
+            "次の文章を自然な日本語に翻訳してください。必ず日本語で、漢字とひらがなを適切に混ぜてください。\n"
+            "固有名詞は英字または一般的な表記を使い、ひらがな主体の当て字は避けてください。\n"
+            "ひらがな/カタカナだけの出力は禁止です。\n"
+            '出力はJSONのみ。形式: {"translation":"..."}\n\n'
             f"{text}"
         )
     output = call_llm_text(prompt)
     translated = parse_json_field(output, "translation")
     if target_lang == "ja" and force_japanese and require_kanji and translated and not has_kanji(translated):
         strict_prompt = (
-            "谺｡縺ｮ譁・ｫ繧呈律譛ｬ隱槭↓鄙ｻ險ｳ縺励※縺上□縺輔＞縲ょｿ・★貍｢蟄励ｒ蜷ｫ繧√∬・辟ｶ縺ｪ譌･譛ｬ隱槭↓縺励※縺上□縺輔＞縲・
-            "縺ｲ繧峨′縺ｪ/繧ｫ繧ｿ繧ｫ繝翫□縺代・蜃ｺ蜉帙・遖∵ｭ｢縺ｧ縺吶・
-            '蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {"translation":"..."}\\n\\n'
+            "次の文章を日本語に翻訳してください。必ず漢字を含め、自然な日本語にしてください。"
+            "ひらがな/カタカナだけの出力は禁止です。"
+            '出力はJSONのみ。形式: {"translation":"..."}\\n\\n'
             f"{text}"
         )
-        # 蜀榊ｮ夂ｾｩ: 蝗ｺ譛牙錐隧槭・蠖薙※蟄励ｒ謚大宛
+        # 再定義: 固有名詞の当て字を抑制
         strict_prompt = (
-            "谺｡縺ｮ譁・ｫ繧呈律譛ｬ隱槭↓鄙ｻ險ｳ縺励※縺上□縺輔＞縲ょｿ・★貍｢蟄励ｒ蜷ｫ繧√∬・辟ｶ縺ｪ譌･譛ｬ隱槭↓縺励※縺上□縺輔＞縲・n"
-            "蝗ｺ譛牙錐隧槭・闍ｱ蟄励∪縺溘・荳闊ｬ逧・↑陦ｨ險倥ｒ菴ｿ縺・√・繧峨′縺ｪ荳ｻ菴薙・蠖薙※蟄励・驕ｿ縺代※縺上□縺輔＞縲・n"
-            "縺ｲ繧峨′縺ｪ/繧ｫ繧ｿ繧ｫ繝翫□縺代・蜃ｺ蜉帙・遖∵ｭ｢縺ｧ縺吶・n"
-            '蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {"translation":"..."}\n\n'
+            "次の文章を日本語に翻訳してください。必ず漢字を含め、自然な日本語にしてください。\n"
+            "固有名詞は英字または一般的な表記を使い、ひらがな主体の当て字は避けてください。\n"
+            "ひらがな/カタカナだけの出力は禁止です。\n"
+            '出力はJSONのみ。形式: {"translation":"..."}\n\n'
             f"{text}"
         )
         strict_prompt = strict_prompt + "\nCurrency rule: Keep original currency/units; do not convert to JPY or invent amounts."
@@ -1100,9 +1092,9 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
             translated = strict_translated
     if target_lang == "ja" and not force_japanese and translated and not has_japanese_kana(translated):
         strict_prompt = (
-            "谺｡縺ｮ譁・ｫ繧呈律譛ｬ隱槭↓鄙ｻ險ｳ縺励※縺上□縺輔＞縲ょｿ・★譌･譛ｬ隱槭〒縲∵ｼ｢蟄励→縺ｲ繧峨′縺ｪ繧帝←蛻・↓豺ｷ縺懊※縺上□縺輔＞縲・
-            "縺ｲ繧峨′縺ｪ/繧ｫ繧ｿ繧ｫ繝翫□縺代・蜃ｺ蜉帙・遖∵ｭ｢縺ｧ縺吶・
-            '蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {"translation":"..."}\\n\\n'
+            "次の文章を日本語に翻訳してください。必ず日本語で、漢字とひらがなを適切に混ぜてください。"
+            "ひらがな/カタカナだけの出力は禁止です。"
+            '出力はJSONのみ。形式: {"translation":"..."}\\n\\n'
             f"{text}"
         )
         strict_output = call_llm_text(strict_prompt)
@@ -1137,7 +1129,7 @@ def fetch_article_text(url):
     return text
 
 def summarize_article(title, content, url, country=""):
-    """URL譛ｬ譁・+ 譌｢蟄倥ち繧､繝医Ν/譛ｬ譁・°繧画律譛ｬ隱櫁ｦ∫ｴ・ｒ逕滓・"""
+    """URL本文 + 既存タイトル/本文から日本語要約を生成"""
     cache_key = (url or "", title or "", content or "")
     if cache_key in _summary_cache:
         return _summary_cache[cache_key]
@@ -1147,7 +1139,7 @@ def summarize_article(title, content, url, country=""):
         fallback_title = trim_to_sentence(fallback_title, SUMMARY_TITLE_LIMIT)
         fallback_body = trim_to_sentence(fallback_body, SUMMARY_CONTENT_LIMIT)
         if fallback_body and not ends_with_sentence(fallback_body):
-            fallback_body = fallback_body + "縲・
+            fallback_body = fallback_body + "。"
         _summary_cache[cache_key] = (fallback_title, fallback_body)
         return fallback_title, fallback_body
 
@@ -1156,39 +1148,39 @@ def summarize_article(title, content, url, country=""):
         if "gasgoo.com" not in url:
             html_text = fetch_article_text(url)
     source_text = f"{title} {content}"
-    cn_keywords = extract_cjk_keywords(source_text) if country == "荳ｭ蝗ｽ" else []
+    cn_keywords = extract_cjk_keywords(source_text) if country == "中国" else []
     keep_terms = ""
     if cn_keywords:
         keep_terms = "Use these terms as-is (do not translate): " + ", ".join(cn_keywords[:6]) + "\\n"
     currency_rule = "Currency rule: Keep original currency/units; do not convert to JPY or invent amounts.\\n"
     prompt = (
-        "莉･荳九・諠・ｱ繧堤ｵｱ蜷医＠縺ｦ縲∵律譛ｬ隱槭〒隕∫ｴ・＠縺ｦ縺上□縺輔＞縲・\n"
-        f"譚｡莉ｶ1: 繧ｿ繧､繝医Ν縺ｯ{SUMMARY_TITLE_LIMIT}蟄嶺ｻ･蜀・ｼ域枚繧帝比ｸｭ縺ｧ蛻・ｉ縺ｪ縺・ｼ峨・\n"
-        f"譚｡莉ｶ2: 蜀・ｮｹ縺ｯ{SUMMARY_CONTENT_LIMIT}蟄嶺ｻ･蜀・ｼ域枚繧帝比ｸｭ縺ｧ蛻・ｉ縺ｪ縺・ｼ峨・\n"
-        "譚｡莉ｶ3: 莠句ｮ溘・繝ｼ繧ｹ縺ｧ邁｡貎斐↓縲・\n"
-        "譚｡莉ｶ4: 蜿ｯ閭ｽ縺ｪ繧牙崋譛牙錐隧・謨ｰ蛟､/莨∵･ｭ蜷阪↑縺ｩ譛ｬ譁・・蜈ｷ菴捺ュ蝣ｱ繧・縺､莉･荳雁性繧√ｋ縲・\n"
-        "譚｡莉ｶ5: 蜀・ｮｹ縺ｯ蠢・★蜿･轤ｹ縺ｧ邨ゅ∴繧九・\n"
-        "譚｡莉ｶ6: 蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {\"title\":\"...\",\"summary\":\"...\"}\\n\\n"
-        f"譌｢蟄倥ち繧､繝医Ν: {title}\\n"
-        f"譌｢蟄伜・螳ｹ: {content}\\n"
-        f"譛ｬ譁⑨TML謚ｽ蜃ｺ: {html_text}\\n"
+        "以下の情報を統合して、日本語で要約してください。\\n"
+        f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内（文を途中で切らない）。\\n"
+        f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内（文を途中で切らない）。\\n"
+        "条件3: 事実ベースで簡潔に。\\n"
+        "条件4: 可能なら固有名詞/数値/企業名など本文の具体情報を1つ以上含める。\\n"
+        "条件5: 内容は必ず句点で終える。\\n"
+        "条件6: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\\n\\n"
+        f"既存タイトル: {title}\\n"
+        f"既存内容: {content}\\n"
+        f"本文HTML抽出: {html_text}\\n"
         f"URL: {url}"
     )
-    if country == "荳ｭ蝗ｽ":
+    if country == "中国":
         prompt = (
-            "莉･荳九・諠・ｱ繧堤ｵｱ蜷医＠縺ｦ縲∵律譛ｬ隱槭〒隕∫ｴ・＠縺ｦ縺上□縺輔＞縲・n"
-            f"譚｡莉ｶ1: 繧ｿ繧､繝医Ν縺ｯ{SUMMARY_TITLE_LIMIT}蟄嶺ｻ･蜀・∵枚繧帝比ｸｭ縺ｧ蛻・ｉ縺ｪ縺・・n"
-            f"譚｡莉ｶ2: 蜀・ｮｹ縺ｯ{SUMMARY_CONTENT_LIMIT}蟄嶺ｻ･蜀・∵枚繧帝比ｸｭ縺ｧ蛻・ｉ縺ｪ縺・・n"
-            "譚｡莉ｶ3: 莠句ｮ溘・繝ｼ繧ｹ縺ｧ邁｡貎斐↓縲・n"
-            "譚｡莉ｶ4: 蜿ｯ閭ｽ縺ｪ繧牙崋譛牙錐隧・謨ｰ蛟､/莨∵･ｭ蜷阪↑縺ｩ蜈ｷ菴捺ュ蝣ｱ繧・縺､莉･荳雁性繧√ｋ縲・n"
-            "譚｡莉ｶ5: 蜀・ｮｹ縺ｯ蠢・★蜿･轤ｹ縺ｧ邨ゅ∴繧九・n"
-            "譚｡莉ｶ6: 荳ｭ蝗ｽ險倅ｺ九・貍｢蟄励ｄ荳闊ｬ逧・↑繧ｫ繧ｿ繧ｫ繝願｡ｨ險倥ｒ蜆ｪ蜈医＠縲√・繧峨′縺ｪ荳ｻ菴薙・蠖薙※蟄励・菴ｿ繧上↑縺・・n"
-            "譚｡莉ｶ7: 蝗ｺ譛牙錐隧槭・闍ｱ蟄苓｡ｨ險倥°荳闊ｬ逧・↑譌･譛ｬ隱櫁｡ｨ險假ｼ井ｾ・ Huawei=繝輔ぃ繝ｼ繧ｦ繧ｧ繧､縲．ongfeng=譚ｱ鬚ｨ・峨ｒ菴ｿ縺・・n"
-            "譚｡莉ｶ8: 荳肴・縺ｪ蝗ｺ譛牙錐隧槭・蜴滓枚縺ｮ荳ｭ蝗ｽ隱櫁｡ｨ險倥ｒ邯ｭ謖√☆繧九・n"
-            "譚｡莉ｶ9: 蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲ょｽ｢蠑・ {\"title\":\"...\",\"summary\":\"...\"}\n\n"
-            f"譌｢蟄倥ち繧､繝医Ν: {title}\n"
-            f"譌｢蟄伜・螳ｹ: {content}\n"
-            f"譛ｬ譁⑨TML謚ｽ蜃ｺ: {html_text}\n"
+            "以下の情報を統合して、日本語で要約してください。\n"
+            f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内、文を途中で切らない。\n"
+            f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内、文を途中で切らない。\n"
+            "条件3: 事実ベースで簡潔に。\n"
+            "条件4: 可能なら固有名詞/数値/企業名など具体情報を2つ以上含める。\n"
+            "条件5: 内容は必ず句点で終える。\n"
+            "条件6: 中国記事は漢字や一般的なカタカナ表記を優先し、ひらがな主体の当て字は使わない。\n"
+            "条件7: 固有名詞は英字表記か一般的な日本語表記（例: Huawei=ファーウェイ、Dongfeng=東風）を使う。\n"
+            "条件8: 不明な固有名詞は原文の中国語表記を維持する。\n"
+            "条件9: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
+            f"既存タイトル: {title}\n"
+            f"既存内容: {content}\n"
+            f"本文HTML抽出: {html_text}\n"
             f"URL: {url}"
         )
     if keep_terms:
@@ -1200,11 +1192,11 @@ def summarize_article(title, content, url, country=""):
 
     if len(summary_title) > SUMMARY_TITLE_LIMIT or len(summary_body) > SUMMARY_CONTENT_LIMIT or not ends_with_sentence(summary_body):
         refine_prompt = (
-            f"谺｡縺ｮJSON縺ｮtitle縺ｨsummary繧呈擅莉ｶ蜀・↓蜿弱ａ縺ｦ譖ｸ縺咲峩縺励※縺上□縺輔＞縲・\n"
-            f"譚｡莉ｶ1: 繧ｿ繧､繝医Ν縺ｯ{SUMMARY_TITLE_LIMIT}蟄嶺ｻ･蜀・ｼ域枚繧帝比ｸｭ縺ｧ蛻・ｉ縺ｪ縺・ｼ峨・\n"
-            f"譚｡莉ｶ2: 蜀・ｮｹ縺ｯ{SUMMARY_CONTENT_LIMIT}蟄嶺ｻ･蜀・ｼ域枚繧帝比ｸｭ縺ｧ蛻・ｉ縺ｪ縺・ｼ峨・\n"
-            "譚｡莉ｶ3: 蜀・ｮｹ縺ｯ蠢・★蜿･轤ｹ縺ｧ邨ゅ∴繧九・\n"
-            "蜃ｺ蜉帙・JSON縺ｮ縺ｿ縲・\n\\n"
+            f"次のJSONのtitleとsummaryを条件内に収めて書き直してください。\\n"
+            f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内（文を途中で切らない）。\\n"
+            f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内（文を途中で切らない）。\\n"
+            "条件3: 内容は必ず句点で終える。\\n"
+            "出力はJSONのみ。\\n\\n"
             f'{{"title":"{summary_title}","summary":"{summary_body}"}}'
         )
         refined = call_llm_text(refine_prompt)
@@ -1216,13 +1208,13 @@ def summarize_article(title, content, url, country=""):
     if not summary_body:
         summary_body = translate_text(content) or normalize_text(content)
 
-    force_jp = (country == "荳ｭ蝗ｽ")
+    force_jp = (country == "中国")
     summary_title = ensure_japanese(summary_title, title, force=force_jp, require_kanji=force_jp)
     summary_body = ensure_japanese(summary_body, content, force=force_jp, require_kanji=force_jp)
 
     # Retry if summary looks off-topic for CN sources
     source_text = f"{title} {content}"
-    if country == "荳ｭ蝗ｽ":
+    if country == "中国":
         combined = f"{summary_title} {summary_body}"
         if not summary_matches_source(combined, source_text):
             keywords = ", ".join(extract_cjk_keywords(source_text))
@@ -1244,9 +1236,9 @@ def summarize_article(title, content, url, country=""):
                 summary_body = ensure_japanese(retry_body, content, force=force_jp, require_kanji=force_jp)
 
     # Avoid adding Japanese company suffixes if not present in source
-    if country == "荳ｭ蝗ｽ" and "譬ｪ蠑丈ｼ夂､ｾ" in f"{summary_title} {summary_body}" and "譬ｪ蠑丈ｼ夂､ｾ" not in source_text:
+    if country == "中国" and "株式会社" in f"{summary_title} {summary_body}" and "株式会社" not in source_text:
         fix_prompt = (
-            "Fix this Japanese summary to avoid Japanese company suffixes like '譬ｪ蠑丈ｼ夂､ｾ'.\n"
+            "Fix this Japanese summary to avoid Japanese company suffixes like '株式会社'.\n"
             "Keep original Chinese company names as-is if unsure.\n"
             'Output JSON only: {"title":"...","summary":"..."}\n\n'
             f"Source: {source_text}\n"
@@ -1286,7 +1278,7 @@ def summarize_article(title, content, url, country=""):
         summary_body = trim_to_sentence(summary_body, SUMMARY_CONTENT_LIMIT)
     if summary_body and not ends_with_sentence(summary_body):
         if len(summary_body) < SUMMARY_CONTENT_LIMIT:
-            summary_body = summary_body + "縲・
+            summary_body = summary_body + "。"
 
     _summary_cache[cache_key] = (summary_title, summary_body)
     return summary_title, summary_body
@@ -1295,7 +1287,7 @@ def save_with_hyperlinks(df, filename):
     drop_cols = [c for c in DROP_OUTPUT_COLUMNS if c in df.columns]
     if drop_cols:
         df = df.drop(columns=drop_cols)
-    """DataFrame繧辰SV/Excel縺ｫ菫晏ｭ倥☆繧九・xcel縺ｮ蝣ｴ蜷医・URL蛻励ｒ繝上う繝代・繝ｪ繝ｳ繧ｯ蛹悶☆繧・""
+    """DataFrameをCSV/Excelに保存する。Excelの場合はURL列をハイパーリンク化する"""
     if str(filename).lower().endswith(".csv"):
         csv_df = df.copy()
         for col in csv_df.columns:
@@ -1327,7 +1319,7 @@ def save_with_hyperlinks(df, filename):
                 cell.style = "Hyperlink"
 
     apply_hyperlink("URL")
-    apply_hyperlink("逕ｻ蜒酋RL")
+    apply_hyperlink("画像URL")
 
     wb.save(filename)
 
@@ -1342,28 +1334,28 @@ def load_existing_data(path):
         return pd.DataFrame()
 
 def build_sheet2_and_csv(df, excel_path, target_dates):
-    """LLM蛻､螳壼ｯｾ雎｡繝ｻ逕ｻ蜒酋RL縺ゅｊ繝ｻ蟇ｾ雎｡譌･莉倥・荳隕ｧ繧担heet2縺ｨCSV縺ｫ蜃ｺ蜉・""
+    """LLM判定対象・画像URLあり・対象日付の一覧をSheet2とCSVに出力"""
     if df is None or df.empty:
-        print("  Sheet2/CSV: 蟇ｾ雎｡繝・・繧ｿ縺ｪ縺・)
+        print("  Sheet2/CSV: 対象データなし")
         return
-    col_country = "蝗ｽ"
-    col_title = "繧ｿ繧､繝医Ν"
-    col_title_jp = "繧ｿ繧､繝医Ν・域律譛ｬ隱橸ｼ・
-    col_content = "蜀・ｮｹ"
-    col_content_jp = "蜀・ｮｹ・域律譛ｬ隱橸ｼ・
-    col_site = "蜃ｺ螻輔し繧､繝・
-    col_image = "逕ｻ蜒酋RL"
+    col_country = "国"
+    col_title = "タイトル"
+    col_title_jp = "タイトル（日本語）"
+    col_content = "内容"
+    col_content_jp = "内容（日本語）"
+    col_site = "出展サイト"
+    col_image = "画像URL"
     col_url = "URL"
-    col_llm = "LLM蛻､螳・
-    col_llm_post = "LLM蠕悟・逅・
-    col_date = "譌･莉・
+    col_llm = "LLM判定"
+    col_llm_post = "LLM後処理"
+    col_date = "日付"
 
     work = df.copy()
     for col in [col_country, col_title, col_title_jp, col_content, col_content_jp, col_site, col_image, col_url, col_llm, col_llm_post, col_date]:
         if col not in work.columns:
             work[col] = ""
 
-    # 譌･譛ｬ隱樊ｬ・′遨ｺ縺ｪ繧牙次譁・〒陬懷ｮ・
+    # 日本語欄が空なら原文で補完
     work[col_title_jp] = work[col_title_jp].where(work[col_title_jp].astype(str).str.strip().ne(""), work[col_title])
     work[col_content_jp] = work[col_content_jp].where(work[col_content_jp].astype(str).str.strip().ne(""), work[col_content])
 
@@ -1378,10 +1370,10 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             max_date = dt.max().date()
             filtered = filtered[dt.dt.date == max_date]
 
-    # 逕ｻ蜒酋RL縺ゅｊ・郁ｫ匁枚縺ｯ萓句､悶〒險ｱ螳ｹ・・
-    filtered = filtered[(~filtered[col_image].apply(is_missing_url)) | (filtered[col_country] == "隲匁枚")]
+    # 画像URLあり（論文は例外で許容）
+    filtered = filtered[(~filtered[col_image].apply(is_missing_url)) | (filtered[col_country] == "論文")]
 
-    # 蝗ｽ蛻･縺ｫLLM蛻､螳・蟇ｾ雎｡繧貞━蜈医＠縲・0莉ｶ譛ｪ貅縺ｪ繧蛾撼蟇ｾ雎｡繧りｿｽ蜉・磯｡樔ｼｼ縺ｯ讌ｵ蜉幃勁螟厄ｼ・
+    # 国別にLLM判定=対象を優先し、10件未満なら非対象も追加（類似は極力除外）
     filtered = filtered.copy()
     # related_sort_applied
     score_col = "\u95a2\u9023\u5ea6\u30b9\u30b3\u30a2"
@@ -1395,12 +1387,12 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             group = group.sort_values([score_col, "_order"], ascending=[False, True])
         else:
             group = group.sort_values("_order")
-        target_group = group[llm_flag.loc[group.index] == "蟇ｾ雎｡"]
-        extras = group[llm_flag.loc[group.index] != "蟇ｾ雎｡"]
+        target_group = group[llm_flag.loc[group.index] == "対象"]
+        extras = group[llm_flag.loc[group.index] != "対象"]
         selected = []
         selected_idx = set()
         selected_texts = []
-        limit = None if country_name == "隲匁枚" else 10
+        limit = None if country_name == "論文" else 10
 
         def text_key(row):
             return f"{row.get(col_title_jp, '')} {row.get(col_content_jp, '')}".strip()
@@ -1441,17 +1433,17 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     filtered = filtered.sort_values("_order")
     filtered = filtered.drop(columns=["_order"], errors="ignore")
 
-    # Sheet2縺ｫ霈峨ｋ繧ｹ繧ｭ繝・・貂医∩・域律譛ｬ隱樊悴陬懷ｮ鯉ｼ峨ｒ陬懷ｮ・
+    # Sheet2に載るスキップ済み（日本語未補完）を補完
     if not filtered.empty:
         need_indices = []
         for idx, row in filtered.iterrows():
             title_jp = str(row.get(col_title_jp, "")).strip()
             content_jp = str(row.get(col_content_jp, "")).strip()
             llm_post = str(row.get(col_llm_post, "")).strip()
-            if not title_jp or not content_jp or llm_post == "繧ｹ繧ｭ繝・・":
+            if not title_jp or not content_jp or llm_post == "スキップ":
                 need_indices.append(idx)
         if need_indices:
-            print(f"  Sheet2陬懷ｮ・ {len(need_indices)}莉ｶ")
+            print(f"  Sheet2補完: {len(need_indices)}件")
             for n, idx in enumerate(need_indices, 1):
                 row = work.loc[idx]
                 summary_title, summary_body = summarize_article(
@@ -1466,11 +1458,11 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 if summary_body:
                     work.at[idx, col_content_jp] = summary_body
                     filtered.at[idx, col_content_jp] = summary_body
-                if str(row.get(col_llm_post, "")).strip() == "繧ｹ繧ｭ繝・・":
-                    work.at[idx, col_llm_post] = "陬懷ｮ・
-                    filtered.at[idx, col_llm_post] = "陬懷ｮ・
+                if str(row.get(col_llm_post, "")).strip() == "スキップ":
+                    work.at[idx, col_llm_post] = "補完"
+                    filtered.at[idx, col_llm_post] = "補完"
                 if n == 1 or n % PROGRESS_EVERY == 0 or n == len(need_indices):
-                    print(f"    騾ｲ謐・ {n}/{len(need_indices)}")
+                    print(f"    進捗: {n}/{len(need_indices)}")
             try:
                 save_with_hyperlinks(work, excel_path)
             except Exception:
@@ -1483,11 +1475,11 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
 
     excel_path_str = str(excel_path).lower()
     if not excel_path_str.endswith(".csv"):
-        # Sheet2譖ｸ縺崎ｾｼ縺ｿ
+        # Sheet2書き込み
         with pd.ExcelWriter(excel_path, engine="openpyxl", mode="a", if_sheet_exists="replace") as writer:
             sheet2_df.to_excel(writer, index=False, sheet_name="Sheet2")
 
-        # Sheet2縺ｮURL繧偵ワ繧､繝代・繝ｪ繝ｳ繧ｯ蛹・
+        # Sheet2のURLをハイパーリンク化
         wb = load_workbook(excel_path)
         if "Sheet2" in wb.sheetnames:
             ws = wb["Sheet2"]
@@ -1506,7 +1498,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             apply_hyperlink(col_url)
             wb.save(excel_path)
 
-    # CSV蜃ｺ蜉幢ｼ医Μ繝ｳ繧ｯ隱､邨仙粋/謾ｹ陦悟ｯｾ遲厄ｼ・
+    # CSV出力（リンク誤結合/改行対策）
     csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
     sheet2_csv = sheet2_df.copy()
     for col in sheet2_csv.columns:
@@ -1519,9 +1511,9 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     if OUTPUT_PAPERS_SHEET2:
         build_papers_sheet2(work, excel_path, target_dates)
 
-    print(f"  Sheet2/CSV 蜃ｺ蜉・ {len(sheet2_df)}莉ｶ, {csv_path}")
+    print(f"  Sheet2/CSV 出力: {len(sheet2_df)}件, {csv_path}")
 
-# ========== 繧ｽ繝ｼ繧ｹ1: 讀懆ｨｼ貂医∩RSS繝輔ぅ繝ｼ繝・==========
+# ========== ソース1: 検証済みRSSフィード ==========
 def build_papers_sheet2(df, excel_path, target_dates):
     """Build papers_sheet2.csv for LLM target rows."""
     if df is None or df.empty:
@@ -1590,7 +1582,7 @@ def build_rss_feed_list(path="rss_feed_list.csv"):
     print(f"  RSS\u30d5\u30a3\u30fc\u30c9\u4e00\u89a7\u3092\u51fa\u529b: {path}")
 
 def fetch_from_rss(target_dates):
-    print("\n=== RSS繝輔ぅ繝ｼ繝・===")
+    print("\n=== RSSフィード ===")
     results = []
     
     for feed_info in RSS_FEEDS:
@@ -1601,7 +1593,7 @@ def fetch_from_rss(target_dates):
         try:
             timeout = 10
             retries = 1
-            if country == "隲匁枚" or "pubmed.ncbi.nlm.nih.gov" in url:
+            if country == "論文" or "pubmed.ncbi.nlm.nih.gov" in url:
                 timeout = 30
                 retries = 2
             response = None
@@ -1650,43 +1642,43 @@ def fetch_from_rss(target_dates):
                         if alt:
                             image_url = alt
                     results.append({
-                        "蝗ｽ": country,
-                        "讀懃ｴ｢繝ｯ繝ｼ繝・: "RSS",
-                        "繧ｿ繧､繝医Ν": title,
-                        "譌･莉・: pub_date,
-                        "蜀・ｮｹ": desc[:300] if desc else "",
-                        "蜃ｺ螻輔し繧､繝・: name,
-                        "逕ｻ蜒酋RL": image_url,
+                        "国": country,
+                        "検索ワード": "RSS",
+                        "タイトル": title,
+                        "日付": pub_date,
+                        "内容": desc[:300] if desc else "",
+                        "出展サイト": name,
+                        "画像URL": image_url,
                         "URL": link,
-                        "繧ｽ繝ｼ繧ｹ": name
+                        "ソース": name
                     })
                     count += 1
                 
                 if count > 0:
-                    print(f"  笨・[{name}] {count}莉ｶ")
+                    print(f"  ✓ [{name}] {count}件")
                     
         except KeyboardInterrupt:
-            print("  笨・RSS蜿門ｾ励ｒ荳ｭ譁ｭ縺励∪縺励◆縲・)
+            print("  ✗ RSS取得を中断しました。")
             break
         except Exception as e:
-            print(f"  笨・[{name}] 繧ｨ繝ｩ繝ｼ")
+            print(f"  ✗ [{name}] エラー")
         
         time.sleep(0.3)
     
-    print(f"  RSS蜷郁ｨ・ {len(results)}莉ｶ")
+    print(f"  RSS合計: {len(results)}件")
     return results
 
-# ========== 繧ｽ繝ｼ繧ｹ2: Bing News 讀懃ｴ｢・・oogle News莉｣譖ｿ・・=========
+# ========== ソース2: Bing News 検索（Google News代替）==========
 def fetch_from_bing_search(target_dates):
-    """Bing News RSS讀懃ｴ｢・医く繝ｼ繝ｯ繝ｼ繝画､懃ｴ｢蟇ｾ蠢懶ｼ・""
-    print("\n=== Bing News 讀懃ｴ｢ ===")
+    """Bing News RSS検索（キーワード検索対応）"""
+    print("\n=== Bing News 検索 ===")
     results = []
     
     for country, settings in COUNTRY_SETTINGS.items():
         market = settings["bing_market"]
         keywords = settings["keywords"]
         
-        print(f"  [{country}] 讀懃ｴ｢荳ｭ...")
+        print(f"  [{country}] 検索中...")
         country_count = 0
         force_skip = False
         
@@ -1694,7 +1686,7 @@ def fetch_from_bing_search(target_dates):
             if force_skip:
                 break
             encoded_keyword = quote(keyword)
-            # Bing蛛ｴ繧よ律莉倥ｒ1譌･縺ｫ邨槭ｋ縺溘ａ when:1d 繧剃ｻ倅ｸ・
+            # Bing側も日付を1日に絞るため when:1d を付与
             rss_url = f"https://www.bing.com/news/search?q={encoded_keyword}%20when%3A1d&format=rss&mkt={market}"
             
             try:
@@ -1703,9 +1695,9 @@ def fetch_from_bing_search(target_dates):
                 if response.status_code == 200:
                     content_type = response.headers.get("Content-Type", "").lower()
                     if ("xml" not in content_type) and (b"<rss" not in response.content[:200]):
-                        print(f"    -> {country} / {keyword[:10]}... RSS縺ｧ霑斐▲縺ｦ縺翫ｉ縺夲ｼ・TML/蛻ｶ髯舌・蜿ｯ閭ｽ諤ｧ・・)
-                        if country == "荳ｭ蝗ｽ":
-                            force_skip = True  # 荳ｭ蝗ｽ繝槭・繧ｱ繝・ヨ縺粂TML縺ｪ繧牙ｾ檎ｶ壹く繝ｼ繝ｯ繝ｼ繝峨ｒ繧ｹ繧ｭ繝・・
+                        print(f"    -> {country} / {keyword[:10]}... RSSで返っておらず（HTML/制限の可能性）")
+                        if country == "中国":
+                            force_skip = True  # 中国マーケットがHTMLなら後続キーワードをスキップ
                         continue
                     feed = feedparser.parse(response.content)
                     
@@ -1722,21 +1714,21 @@ def fetch_from_bing_search(target_dates):
                     
                     desc = BeautifulSoup(entry.get("summary", ""), "html.parser").get_text()
                     image_url = extract_image_from_rss(entry)
-                    # Bing繝ｪ繝ｳ繧ｯ縺・msn/bing 縺ｮ蝣ｴ蜷医ｂ譛邨６RL繧定ｧ｣豎ｺ縺励※逕ｻ蜒丞・蜿門ｾ・
+                    # Bingリンクが msn/bing の場合も最終URLを解決して画像再取得
                     resolved_link = resolve_final_url(link)
                     if resolved_link and is_missing_url(image_url):
                         image_url = fetch_image_from_page(resolved_link)
                     
                     results.append({
-                        "蝗ｽ": country,
-                        "讀懃ｴ｢繝ｯ繝ｼ繝・: keyword,
-                        "繧ｿ繧､繝医Ν": title,
-                        "譌･莉・: pub_date,
-                        "蜀・ｮｹ": desc[:300],
-                        "蜃ｺ螻輔し繧､繝・: get_domain(link),
-                        "逕ｻ蜒酋RL": image_url,
+                        "国": country,
+                        "検索ワード": keyword,
+                        "タイトル": title,
+                        "日付": pub_date,
+                        "内容": desc[:300],
+                        "出展サイト": get_domain(link),
+                        "画像URL": image_url,
                         "URL": resolved_link or link,
-                        "繧ｽ繝ｼ繧ｹ": "Bing讀懃ｴ｢"
+                        "ソース": "Bing検索"
                     })
                     country_count += 1
                         
@@ -1746,30 +1738,30 @@ def fetch_from_bing_search(target_dates):
             time.sleep(0.5)
         
         if country_count > 0:
-            print(f"    -> {country_count}莉ｶ")
+            print(f"    -> {country_count}件")
         else:
-            print("    -> 0莉ｶ・・SS辟｡縺・譌･莉倅ｸ堺ｸ閾ｴ/驥崎､・・蜿ｯ閭ｽ諤ｧ・・)
+            print("    -> 0件（RSS無し/日付不一致/重複の可能性）")
     
-    print(f"  Bing讀懃ｴ｢蜷郁ｨ・ {len(results)}莉ｶ")
+    print(f"  Bing検索合計: {len(results)}件")
     return results
 
-# ========== 繧ｽ繝ｼ繧ｹ3: DuckDuckGo News 讀懃ｴ｢ ==========
+# ========== ソース3: DuckDuckGo News 検索 ==========
 def fetch_from_duckduckgo(target_dates):
-    """DuckDuckGo News讀懃ｴ｢"""
-    print("\n=== DuckDuckGo News 讀懃ｴ｢ ===")
+    """DuckDuckGo News検索"""
+    print("\n=== DuckDuckGo News 検索 ===")
     results = []
     
     if not DDGS_AVAILABLE:
-        print("  笨・duckduckgo-search 縺後う繝ｳ繧ｹ繝医・繝ｫ縺輔ｌ縺ｦ縺・∪縺帙ｓ")
+        print("  ✗ duckduckgo-search がインストールされていません")
         return results
     
-    # 蝨ｰ蝓溯ｨｭ螳・
+    # 地域設定
     region_map = {
-        "譌･譛ｬ": "jp-jp",
-        "邀ｳ蝗ｽ": "us-en",
-        "繧､繝ｳ繝・: "in-en",
-        "荳ｭ蝗ｽ": "cn-zh",
-        "谺ｧ蟾・: "uk-en"
+        "日本": "jp-jp",
+        "米国": "us-en",
+        "インド": "in-en",
+        "中国": "cn-zh",
+        "欧州": "uk-en"
     }
     
     try:
@@ -1777,10 +1769,10 @@ def fetch_from_duckduckgo(target_dates):
         
         for country, settings in COUNTRY_SETTINGS.items():
             region = region_map.get(country, "wt-wt")
-            # 蜷・嵜縺九ｉ莉｣陦ｨ繧ｭ繝ｼ繝ｯ繝ｼ繝峨ｒ諡｡螟ｧ縺励※讀懃ｴ｢莉ｶ謨ｰ繧貞｢励ｄ縺・
+            # 各国から代表キーワードを拡大して検索件数を増やす
             keywords = settings["keywords"][:10]
             
-            print(f"  [{country}] 讀懃ｴ｢荳ｭ...")
+            print(f"  [{country}] 検索中...")
             country_count = 0
             
             for keyword in keywords:
@@ -1789,7 +1781,7 @@ def fetch_from_duckduckgo(target_dates):
                         keywords=keyword,
                         region=region,
                         safesearch="off",
-                        # 逶ｴ霑・騾ｱ髢薙ｒ蜿門ｾ励＠縲∝ｾ梧ｮｵ縺ｧ縲梧乖譌･縲阪↓邨槭ｊ霎ｼ繧
+                        # 直近1週間を取得し、後段で「昨日」に絞り込む
                         timelimit="w",
                         max_results=25
                     )
@@ -1804,14 +1796,14 @@ def fetch_from_duckduckgo(target_dates):
                         
                         pub_date = parse_date(date_str)
                         if not pub_date:
-                            # timestamp 縺後≠繧後・陬懷ｮ・
+                            # timestamp があれば補完
                             ts = item.get("timestamp")
                             if ts:
                                 try:
                                     pub_date = datetime.fromtimestamp(int(ts)).strftime('%Y-%m-%d')
                                 except:
                                     pass
-                        # 譏守｢ｺ縺ｫ譌･莉倥′蛻､螳壹〒縺阪↑縺・ｴ蜷医・繧ｹ繧ｭ繝・・縺励※邊ｾ蠎ｦ繧呈球菫・
+                        # 明確に日付が判定できない場合はスキップして精度を担保
                         if not pub_date:
                             continue
                         
@@ -1819,48 +1811,48 @@ def fetch_from_duckduckgo(target_dates):
                             continue
                         
                         results.append({
-                            "蝗ｽ": country,
-                            "讀懃ｴ｢繝ｯ繝ｼ繝・: keyword,
-                            "繧ｿ繧､繝医Ν": title,
-                            "譌･莉・: pub_date,
-                            "蜀・ｮｹ": body[:300] if body else "",
-                            "蜃ｺ螻輔し繧､繝・: source,
-                            "逕ｻ蜒酋RL": image_url,
+                            "国": country,
+                            "検索ワード": keyword,
+                            "タイトル": title,
+                            "日付": pub_date,
+                            "内容": body[:300] if body else "",
+                            "出展サイト": source,
+                            "画像URL": image_url,
                             "URL": url,
-                            "繧ｽ繝ｼ繧ｹ": "DuckDuckGo"
+                            "ソース": "DuckDuckGo"
                         })
                         country_count += 1
                         
                 except Exception as e:
                     pass
                 
-                time.sleep(1)  # 繝ｬ繝ｼ繝亥宛髯仙ｯｾ遲・
+                time.sleep(1)  # レート制限対策
             
             if country_count > 0:
-                print(f"    -> {country_count}莉ｶ")
+                print(f"    -> {country_count}件")
             else:
-                print("    -> 0莉ｶ・・uckDuckGo縺ｧ繝偵ャ繝育┌縺・譌･莉倅ｸ堺ｸ閾ｴ縺ｮ蜿ｯ閭ｽ諤ｧ・・)
+                print("    -> 0件（DuckDuckGoでヒット無し/日付不一致の可能性）")
                 
     except Exception as e:
-        print(f"  笨・繧ｨ繝ｩ繝ｼ: {e}")
+        print(f"  ✗ エラー: {e}")
     
-    print(f"  DuckDuckGo蜷郁ｨ・ {len(results)}莉ｶ")
+    print(f"  DuckDuckGo合計: {len(results)}件")
     return results
 
-# ========== 繧ｽ繝ｼ繧ｹ4: Google News RSS ==========
+# ========== ソース4: Google News RSS ==========
 def fetch_from_google_news(target_dates):
-    """Google News RSS・亥ｰ鷹㍼繝ｻ髯仙ｮ壹く繝ｼ繝ｯ繝ｼ繝峨〒螳溯｡鯉ｼ・""
+    """Google News RSS（少量・限定キーワードで実行）"""
     print("\n=== Google News RSS ===")
     results = []
     
     google_news_regions = {
-        "譌･譛ｬ": {"hl": "ja", "gl": "JP", "ceid": "JP:ja"},
-        "荳ｭ蝗ｽ": {"hl": "zh-CN", "gl": "CN", "ceid": "CN:zh-Hans"}
+        "日本": {"hl": "ja", "gl": "JP", "ceid": "JP:ja"},
+        "中国": {"hl": "zh-CN", "gl": "CN", "ceid": "CN:zh-Hans"}
     }
     
     for country, region_params in google_news_regions.items():
         keywords = COUNTRY_SETTINGS.get(country, {}).get("keywords", [])[:3]
-        print(f"  [{country}] 讀懃ｴ｢荳ｭ...")
+        print(f"  [{country}] 検索中...")
         country_count = 0
         
         for keyword in keywords:
@@ -1873,7 +1865,7 @@ def fetch_from_google_news(target_dates):
             try:
                 response = requests.get(rss_url, headers=HEADERS, timeout=10)
                 if response.status_code != 200:
-                    print(f"    -> {keyword[:10]}... 蜿門ｾ怜､ｱ謨・HTTP {response.status_code}")
+                    print(f"    -> {keyword[:10]}... 取得失敗 HTTP {response.status_code}")
                     continue
                 
                 feed = feedparser.parse(response.content)
@@ -1905,31 +1897,31 @@ def fetch_from_google_news(target_dates):
                         if image_pw:
                             image_url = image_pw
                     results.append({
-                        "蝗ｽ": country,
-                        "讀懃ｴ｢繝ｯ繝ｼ繝・: keyword,
-                        "繧ｿ繧､繝医Ν": title,
-                        "譌･莉・: pub_date,
-                        "蜀・ｮｹ": desc[:300] if desc else "",
-                        "蜃ｺ螻輔し繧､繝・: get_domain(link),
-                        "逕ｻ蜒酋RL": image_url,
+                        "国": country,
+                        "検索ワード": keyword,
+                        "タイトル": title,
+                        "日付": pub_date,
+                        "内容": desc[:300] if desc else "",
+                        "出展サイト": get_domain(link),
+                        "画像URL": image_url,
                         "URL": resolved_link or link,
-                        "繧ｽ繝ｼ繧ｹ": "GoogleNews"
+                        "ソース": "GoogleNews"
                     })
                     country_count += 1
             except Exception as e:
-                print(f"    -> {keyword[:10]}... 蜿門ｾ励お繝ｩ繝ｼ {e}")
+                print(f"    -> {keyword[:10]}... 取得エラー {e}")
             
             time.sleep(0.5)
         
         if country_count > 0:
-            print(f"    -> {country_count}莉ｶ")
+            print(f"    -> {country_count}件")
         else:
-            print("    -> 0莉ｶ・医ヲ繝・ヨ辟｡縺・譌･莉倅ｸ堺ｸ閾ｴ/驥崎､・・蜿ｯ閭ｽ諤ｧ・・)
+            print("    -> 0件（ヒット無し/日付不一致/重複の可能性）")
     
-    print(f"  Google News蜷郁ｨ・ {len(results)}莉ｶ")
+    print(f"  Google News合計: {len(results)}件")
     return results
 
-# ========== 繧ｽ繝ｼ繧ｹ5: NewsAPI ==========
+# ========== ソース5: NewsAPI ==========
 def fetch_from_newsapi(target_dates):
     print("\n=== NewsAPI.org ===")
     results = []
@@ -1946,7 +1938,7 @@ def fetch_from_newsapi(target_dates):
         from_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
         to_date = datetime.now().strftime('%Y-%m-%d')
     
-    # 蜷・嵜縺九ｉ莉｣陦ｨ繧ｭ繝ｼ繝ｯ繝ｼ繝峨ｒ驕ｸ謚橸ｼ・PI蛻ｶ髯舌・縺溘ａ蟆代↑繧・ｼ・
+    # 各国から代表キーワードを選択（API制限のため少なめ）
     keywords_to_search = []
     for country, settings in COUNTRY_SETTINGS.items():
         lang = settings["lang"]
@@ -1979,23 +1971,23 @@ def fetch_from_newsapi(target_dates):
                     image_url = article.get("urlToImage", "")
                         
                     results.append({
-                        "蝗ｽ": country,
-                        "讀懃ｴ｢繝ｯ繝ｼ繝・: keyword,
-                        "繧ｿ繧､繝医Ν": article.get("title", ""),
-                        "譌･莉・: pub_date,
-                        "蜀・ｮｹ": article.get("description", "") or "",
-                        "蜃ｺ螻輔し繧､繝・: article.get("source", {}).get("name", ""),
-                        "逕ｻ蜒酋RL": image_url,
+                        "国": country,
+                        "検索ワード": keyword,
+                        "タイトル": article.get("title", ""),
+                        "日付": pub_date,
+                        "内容": article.get("description", "") or "",
+                        "出展サイト": article.get("source", {}).get("name", ""),
+                        "画像URL": image_url,
                         "URL": article.get("url", ""),
-                        "繧ｽ繝ｼ繧ｹ": "NewsAPI"
+                        "ソース": "NewsAPI"
                     })
                     count += 1
                 
                 if count > 0:
-                    print(f"  笨・[{country}] {keyword[:15]}...: {count}莉ｶ")
+                    print(f"  ✓ [{country}] {keyword[:15]}...: {count}件")
                     
             elif response.status_code == 429:
-                print(f"  笨・繝ｬ繝ｼ繝亥宛髯仙芦驕・)
+                print(f"  ✗ レート制限到達")
                 break
                 
         except:
@@ -2003,92 +1995,92 @@ def fetch_from_newsapi(target_dates):
         
         time.sleep(0.5)
     
-    print(f"  NewsAPI蜷郁ｨ・ {len(results)}莉ｶ")
+    print(f"  NewsAPI合計: {len(results)}件")
     return results
 
-def enrich_results(items, label="譁ｰ隕・, existing_df=None, save_path=None):
-    """髢｢騾｣蠎ｦ繧ｹ繧ｳ繧｢縺ｨ譌･譛ｬ隱櫁ｦ∫ｴ・ｒ莉倅ｸ弱☆繧・""
+def enrich_results(items, label="新規", existing_df=None, save_path=None):
+    """関連度スコアと日本語要約を付与する"""
     total = len(items)
     if total:
-        print(f"  [{label}] 髢｢騾｣蠎ｦ繝ｻ鄙ｻ險ｳ蜃ｦ逅・{total}莉ｶ 髢句ｧ・)
+        print(f"  [{label}] 関連度・翻訳処理 {total}件 開始")
     missing_img_urls = []
     for idx, item in enumerate(items, 1):
-        title = item.get("繧ｿ繧､繝医Ν", "")
-        content = str(item.get("蜀・ｮｹ", "")).strip()
-        item["蜀・ｮｹ"] = content
+        title = item.get("タイトル", "")
+        content = str(item.get("内容", "")).strip()
+        item["内容"] = content
         score, rel_label, hits = compute_relevance(title, content)
-        item["髢｢騾｣蠎ｦ繧ｹ繧ｳ繧｢"] = score
-        item["髢｢騾｣蠎ｦ"] = rel_label
-        item["髢｢騾｣繧ｭ繝ｼ繝ｯ繝ｼ繝・] = ", ".join(hits)
-        item.setdefault("HTML蜿門ｾ・, "蜿ｯ閭ｽ")
-        item.setdefault("LLM蛻､螳・, "")
-        item.setdefault("逕ｻ蜒丞愛螳・, "")
-        item.setdefault("LLM蠕悟・逅・, "")
+        item["関連度スコア"] = score
+        item["関連度"] = rel_label
+        item["関連キーワード"] = ", ".join(hits)
+        item.setdefault("HTML取得", "可能")
+        item.setdefault("LLM判定", "")
+        item.setdefault("画像判定", "")
+        item.setdefault("LLM後処理", "")
         
-        country = item.get("蝗ｽ", "")
-        source = item.get("繧ｽ繝ｼ繧ｹ", "")
+        country = item.get("国", "")
+        source = item.get("ソース", "")
         url_value = item.get("URL")
-        # LLM蛻､螳夲ｼ磯未騾｣諤ｧ縺ｮ縺ｿ・峨ｒ蜈医↓螳滓命
+        # LLM判定（関連性のみ）を先に実施
         llm_relevance = ""
         if USE_LLM:
             llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
             if llm_relevance:
-                item["LLM蛻､螳・] = llm_relevance
-        # GoogleNews縺ｮURL縺ｯ蠑ｷ蛻ｶ逧・↓隗｣豎ｺ繧定ｩｦ縺ｿ繧・
+                item["LLM判定"] = llm_relevance
+        # GoogleNewsのURLは強制的に解決を試みる
         if source == "GoogleNews" and isinstance(url_value, str) and "news.google.com" in url_value:
             resolved_pw, image_pw = resolve_with_playwright(url_value)
             if resolved_pw:
                 item["URL"] = resolved_pw
             if image_pw and is_missing_url(item.get("????RL")):
-                item["逕ｻ蜒酋RL"] = image_pw
+                item["画像URL"] = image_pw
             url_value = item.get("URL")
-        # 縺ｪ縺頑ｮ九ｋ news.google.com 繧・ｩｺ谺・・繧ｿ繧､繝医Ν讀懃ｴ｢縺ｧ陬懷ｮ・
+        # なお残る news.google.com や空欄はタイトル検索で補完
         if source == "GoogleNews" and (not item.get("URL") or (isinstance(item.get("URL"), str) and "news.google.com" in item.get("URL"))):
             guessed = search_article_url(title, country)
             if guessed:
                 item["URL"] = guessed
-                if is_missing_url(item.get("逕ｻ蜒酋RL")):
-                    item["逕ｻ蜒酋RL"] = fetch_image_from_page(guessed)
-        if FETCH_MISSING_IMAGES and is_missing_url(item.get("逕ｻ蜒酋RL")) and item.get("URL"):
+                if is_missing_url(item.get("画像URL")):
+                    item["画像URL"] = fetch_image_from_page(guessed)
+        if FETCH_MISSING_IMAGES and is_missing_url(item.get("画像URL")) and item.get("URL"):
             resolved = resolve_final_url(item.get("URL"))
             item["URL"] = resolved
             missing_img_urls.append(resolved)
-            if is_missing_url(item.get("逕ｻ蜒酋RL")):
+            if is_missing_url(item.get("画像URL")):
                 resolved_pw, image_pw = resolve_with_playwright(resolved)
                 if resolved_pw:
                     item["URL"] = resolved_pw
                 if image_pw:
-                    item["逕ｻ蜒酋RL"] = image_pw
-        # URL蛛･蜈ｨ諤ｧ繝√ぉ繝・け・郁ｨ倅ｺ具ｼ・
+                    item["画像URL"] = image_pw
+        # URL健全性チェック（記事）
         if not check_url_ok(item.get("URL"), is_image=False):
-            item["HTML蜿門ｾ・] = "ﾃ・
-        # 逕ｻ蜒上・蛛･蜈ｨ諤ｧ繝√ぉ繝・け
-        if not is_missing_url(item.get("逕ｻ蜒酋RL")):
-            if not check_url_ok(item.get("逕ｻ蜒酋RL"), is_image=True):
-                item["逕ｻ蜒酋RL"] = ""
-        # 縺ｾ縺 news.google.com 縺ｮ縺ｾ縺ｾ縺ｪ繧臥┌蜉ｹ縺ｨ縺励※遨ｺ谺・
+            item["HTML取得"] = "×"
+        # 画像の健全性チェック
+        if not is_missing_url(item.get("画像URL")):
+            if not check_url_ok(item.get("画像URL"), is_image=True):
+                item["画像URL"] = ""
+        # まだ news.google.com のままなら無効として空欄
         if source == "GoogleNews" and isinstance(item.get("URL"), str) and "news.google.com" in item.get("URL"):
-            item["HTML蜿門ｾ・] = "ﾃ・
+            item["HTML取得"] = "×"
             item["URL"] = ""
-            item["逕ｻ蜒酋RL"] = ""
-        # LLM蛻､螳壹′髱槫ｯｾ雎｡縺ｪ繧牙ｾ悟・逅・ｒ繧ｹ繧ｭ繝・・
-        if USE_LLM and item.get("LLM蛻､螳・) == "髱槫ｯｾ雎｡":
-            item["LLM蠕悟・逅・] = "繧ｹ繧ｭ繝・・"
+            item["画像URL"] = ""
+        # LLM判定が非対象なら後処理をスキップ
+        if USE_LLM and item.get("LLM判定") == "非対象":
+            item["LLM後処理"] = "スキップ"
         else:
-            # 隕∫ｴ・ｼ域律譛ｬ隱橸ｼ峨ｒ逕滓・
+            # 要約（日本語）を生成
             summary_title, summary_body = summarize_article(title, content, item.get("URL", ""), country)
             if summary_title:
-                item["繧ｿ繧､繝医Ν・域律譛ｬ隱橸ｼ・] = summary_title
+                item["タイトル（日本語）"] = summary_title
             if summary_body:
-                item["蜀・ｮｹ・域律譛ｬ隱橸ｼ・] = summary_body
-            # 逕ｻ蜒丞愛螳夲ｼ亥ｯｾ雎｡縺ｮ縺ｿ・・
+                item["内容（日本語）"] = summary_body
+            # 画像判定（対象のみ）
             if USE_LLM:
-                _, llm_photo = call_llm_classify(title, content, item.get("逕ｻ蜒酋RL", ""), mode="photo")
+                _, llm_photo = call_llm_classify(title, content, item.get("画像URL", ""), mode="photo")
                 if llm_photo:
-                    item["逕ｻ蜒丞愛螳・] = llm_photo
-            item["LLM蠕悟・逅・] = "螳滓命"
+                    item["画像判定"] = llm_photo
+            item["LLM後処理"] = "実施"
         if total and (idx == 1 or idx % PROGRESS_EVERY == 0 or idx == total):
-            print(f"    騾ｲ謐・ {idx}/{total}")
+            print(f"    進捗: {idx}/{total}")
         if LLM_SAVE_INTERVAL > 0 and idx % LLM_SAVE_INTERVAL == 0 and existing_df is not None and save_path:
             try:
                 partial_df = pd.DataFrame(items[:idx])
@@ -2104,190 +2096,190 @@ def enrich_results(items, label="譁ｰ隕・, existing_df=None, save_path=None)
                 else:
                     merged = partial_df
                 save_with_hyperlinks(merged, save_path)
-                print(f"    騾比ｸｭ菫晏ｭ・ {idx}莉ｶ")
+                print(f"    途中保存: {idx}件")
             except Exception:
                 pass
     if total:
-        print(f"  [{label}] 髢｢騾｣蠎ｦ繝ｻ鄙ｻ險ｳ蜃ｦ逅・螳御ｺ・)
+        print(f"  [{label}] 関連度・翻訳処理 完了")
         if FETCH_MISSING_IMAGES and missing_img_urls:
-            print(f"    逕ｻ蜒剰｣懷ｮ・ {len(missing_img_urls)}莉ｶ 荳ｦ蛻怜叙蠕鈴幕蟋・)
+            print(f"    画像補完: {len(missing_img_urls)}件 並列取得開始")
             img_map = bulk_fetch_images(missing_img_urls)
             for item in items:
-                if is_missing_url(item.get("逕ｻ蜒酋RL")) and item.get("URL"):
-                    item["逕ｻ蜒酋RL"] = img_map.get(item.get("URL"), item.get("逕ｻ蜒酋RL"))
-            empty_after = sum(1 for it in items if is_missing_url(it.get("逕ｻ蜒酋RL")))
-            print(f"    逕ｻ蜒酋RL譛ｪ蜿門ｾ・ {empty_after}莉ｶ")
+                if is_missing_url(item.get("画像URL")) and item.get("URL"):
+                    item["画像URL"] = img_map.get(item.get("URL"), item.get("画像URL"))
+            empty_after = sum(1 for it in items if is_missing_url(it.get("画像URL")))
+            print(f"    画像URL未取得: {empty_after}件")
     return items
 
 def enrich_existing_df(df):
-    """譌｢蟄倥ョ繝ｼ繧ｿ縺ｫ繧る未騾｣蠎ｦ縺ｨ譌･譛ｬ隱櫁ｦ∫ｴ・ｒ莉倅ｸ弱☆繧・""
+    """既存データにも関連度と日本語要約を付与する"""
     if df.empty:
         return df
     for col, default in [
-        ("髢｢騾｣蠎ｦ", ""),
-        ("髢｢騾｣蠎ｦ繧ｹ繧ｳ繧｢", 0.0),
-        ("髢｢騾｣繧ｭ繝ｼ繝ｯ繝ｼ繝・, ""),
-        ("繧ｿ繧､繝医Ν・域律譛ｬ隱橸ｼ・, ""),
-        ("蜀・ｮｹ・域律譛ｬ隱橸ｼ・, ""),
-        ("逕ｻ蜒酋RL", ""),
-        ("HTML蜿門ｾ・, "蜿ｯ閭ｽ"),
-        ("LLM蛻､螳・, ""),
-        ("逕ｻ蜒丞愛螳・, ""),
-        ("LLM蠕悟・逅・, "")
+        ("関連度", ""),
+        ("関連度スコア", 0.0),
+        ("関連キーワード", ""),
+        ("タイトル（日本語）", ""),
+        ("内容（日本語）", ""),
+        ("画像URL", ""),
+        ("HTML取得", "可能"),
+        ("LLM判定", ""),
+        ("画像判定", ""),
+        ("LLM後処理", "")
     ]:
         if col not in df.columns:
             df[col] = default
     total = len(df)
     df_out = df.copy()
-    print(f"  [譌｢蟄肋 髢｢騾｣蠎ｦ繝ｻ鄙ｻ險ｳ蜀崎ｨ育ｮ・{total}莉ｶ 髢句ｧ・)
+    print(f"  [既存] 関連度・翻訳再計算 {total}件 開始")
     if USE_LLM:
-        print("  [譌｢蟄肋 LLM蛻､螳・ 譛牙柑")
+        print("  [既存] LLM判定: 有効")
     if LLM_ONLY:
-        print("  [譌｢蟄肋 LLM-only: URL/鄙ｻ險ｳ/逕ｻ蜒上メ繧ｧ繝・け繧堤怐逡･")
+        print("  [既存] LLM-only: URL/翻訳/画像チェックを省略")
     missing_img_urls = []
     llm_calls = 0
     for count, (row_idx, row) in enumerate(df_out.iterrows(), 1):
-        title = row.get("繧ｿ繧､繝医Ν", "")
-        content = str(row.get("蜀・ｮｹ", "")).strip()
-        row["蜀・ｮｹ"] = content
+        title = row.get("タイトル", "")
+        content = str(row.get("内容", "")).strip()
+        row["内容"] = content
         score, label, hits = compute_relevance(title, content)
-        row["髢｢騾｣蠎ｦ繧ｹ繧ｳ繧｢"] = score
-        row["髢｢騾｣蠎ｦ"] = label
-        row["髢｢騾｣繧ｭ繝ｼ繝ｯ繝ｼ繝・] = ", ".join(hits)
-        if "HTML蜿門ｾ・ not in row or pd.isna(row.get("HTML蜿門ｾ・)):
-            row["HTML蜿門ｾ・] = "蜿ｯ閭ｽ"
-        if "LLM蛻､螳・ not in row or pd.isna(row.get("LLM蛻､螳・)):
-            row["LLM蛻､螳・] = ""
-        if "逕ｻ蜒丞愛螳・ not in row or pd.isna(row.get("逕ｻ蜒丞愛螳・)):
-            row["逕ｻ蜒丞愛螳・] = ""
-        if RESUME_LLM and str(row.get("LLM蠕悟・逅・)).strip() in ("螳滓命", "繧ｹ繧ｭ繝・・"):
+        row["関連度スコア"] = score
+        row["関連度"] = label
+        row["関連キーワード"] = ", ".join(hits)
+        if "HTML取得" not in row or pd.isna(row.get("HTML取得")):
+            row["HTML取得"] = "可能"
+        if "LLM判定" not in row or pd.isna(row.get("LLM判定")):
+            row["LLM判定"] = ""
+        if "画像判定" not in row or pd.isna(row.get("画像判定")):
+            row["画像判定"] = ""
+        if RESUME_LLM and str(row.get("LLM後処理")).strip() in ("実施", "スキップ"):
             df_out.loc[row_idx] = row
             if total and (count == 1 or count % PROGRESS_EVERY == 0 or count == total):
-                print(f"    騾ｲ謐・ {count}/{total}")
+                print(f"    進捗: {count}/{total}")
             continue
         if LLM_ONLY:
             if USE_LLM:
                 llm_need = False
-                if pd.isna(row.get("LLM蛻､螳・)) or str(row.get("LLM蛻､螳・)).strip() == "":
+                if pd.isna(row.get("LLM判定")) or str(row.get("LLM判定")).strip() == "":
                     llm_need = True
-                if pd.isna(row.get("逕ｻ蜒丞愛螳・)) or str(row.get("逕ｻ蜒丞愛螳・)).strip() == "":
+                if pd.isna(row.get("画像判定")) or str(row.get("画像判定")).strip() == "":
                     llm_need = True
                 if llm_need:
                     llm_rel, _ = call_llm_classify(title, content, "", mode="relevance")
                     if llm_rel:
-                        row["LLM蛻､螳・] = llm_rel
-                    if row.get("LLM蛻､螳・) == "蟇ｾ雎｡":
-                        _, llm_photo = call_llm_classify(title, content, row.get("逕ｻ蜒酋RL", ""), mode="photo")
+                        row["LLM判定"] = llm_rel
+                    if row.get("LLM判定") == "対象":
+                        _, llm_photo = call_llm_classify(title, content, row.get("画像URL", ""), mode="photo")
                         if llm_photo:
-                            row["逕ｻ蜒丞愛螳・] = llm_photo
-                        row["LLM蠕悟・逅・] = "螳滓命"
-                    elif row.get("LLM蛻､螳・) == "髱槫ｯｾ雎｡":
-                        row["LLM蠕悟・逅・] = "繧ｹ繧ｭ繝・・"
+                            row["画像判定"] = llm_photo
+                        row["LLM後処理"] = "実施"
+                    elif row.get("LLM判定") == "非対象":
+                        row["LLM後処理"] = "スキップ"
                     llm_calls += 1
             df_out.loc[row_idx] = row
             if total and (count == 1 or count % PROGRESS_EVERY == 0 or count == total):
-                print(f"    騾ｲ謐・ {count}/{total}")
+                print(f"    進捗: {count}/{total}")
             if USE_LLM and ENRICH_ONLY and LLM_SAVE_INTERVAL > 0 and count % LLM_SAVE_INTERVAL == 0:
                 try:
                     temp_df = df_out.copy()
                     save_with_hyperlinks(temp_df, EXCEL_FILE)
-                    print(f"    騾比ｸｭ菫晏ｭ・ {count}莉ｶ")
+                    print(f"    途中保存: {count}件")
                 except Exception:
                     pass
             continue
-        source = row.get("繧ｽ繝ｼ繧ｹ", "")
+        source = row.get("ソース", "")
         url_value = row.get("URL")
-        # GoogleNews縺ｮURL縺ｯ蠑ｷ蛻ｶ逧・↓隗｣豎ｺ繧定ｩｦ縺ｿ繧・
+        # GoogleNewsのURLは強制的に解決を試みる
         if source == "GoogleNews" and isinstance(url_value, str) and "news.google.com" in url_value:
             resolved_pw, image_pw = resolve_with_playwright(url_value)
             if resolved_pw:
                 row["URL"] = resolved_pw
             if image_pw and is_missing_url(row.get("????RL")):
-                row["逕ｻ蜒酋RL"] = image_pw
-        if FETCH_MISSING_IMAGES and is_missing_url(row.get("逕ｻ蜒酋RL")) and row.get("URL"):
+                row["画像URL"] = image_pw
+        if FETCH_MISSING_IMAGES and is_missing_url(row.get("画像URL")) and row.get("URL"):
             resolved = resolve_final_url(row.get("URL"))
             row["URL"] = resolved
             missing_img_urls.append(resolved)
-            if is_missing_url(row.get("逕ｻ蜒酋RL")):
+            if is_missing_url(row.get("画像URL")):
                 resolved_pw, image_pw = resolve_with_playwright(resolved)
                 if resolved_pw:
                     row["URL"] = resolved_pw
                 if image_pw:
-                    row["逕ｻ蜒酋RL"] = image_pw
-        # 縺ｪ縺頑ｮ九ｋ news.google.com 繧・ｩｺ谺・・繧ｿ繧､繝医Ν讀懃ｴ｢縺ｧ陬懷ｮ・
+                    row["画像URL"] = image_pw
+        # なお残る news.google.com や空欄はタイトル検索で補完
         if source == "GoogleNews" and (not row.get("URL") or (isinstance(row.get("URL"), str) and "news.google.com" in row.get("URL"))):
-            guessed = search_article_url(title, row.get("蝗ｽ", ""))
+            guessed = search_article_url(title, row.get("国", ""))
             if guessed:
                 row["URL"] = guessed
-                if is_missing_url(row.get("逕ｻ蜒酋RL")):
-                    row["逕ｻ蜒酋RL"] = fetch_image_from_page(guessed)
-        # URL蛛･蜈ｨ諤ｧ繝√ぉ繝・け・郁ｨ倅ｺ具ｼ・
+                if is_missing_url(row.get("画像URL")):
+                    row["画像URL"] = fetch_image_from_page(guessed)
+        # URL健全性チェック（記事）
         if not check_url_ok(row.get("URL"), is_image=False):
-            row["HTML蜿門ｾ・] = "ﾃ・
-        # 逕ｻ蜒上・蛛･蜈ｨ諤ｧ繝√ぉ繝・け
-        if not is_missing_url(row.get("逕ｻ蜒酋RL")):
-            if not check_url_ok(row.get("逕ｻ蜒酋RL"), is_image=True):
-                row["逕ｻ蜒酋RL"] = ""
-        # 縺ｾ縺 news.google.com 縺ｮ縺ｾ縺ｾ縺ｪ繧臥┌蜉ｹ縺ｨ縺励※遨ｺ谺・
+            row["HTML取得"] = "×"
+        # 画像の健全性チェック
+        if not is_missing_url(row.get("画像URL")):
+            if not check_url_ok(row.get("画像URL"), is_image=True):
+                row["画像URL"] = ""
+        # まだ news.google.com のままなら無効として空欄
         if source == "GoogleNews" and isinstance(row.get("URL"), str) and "news.google.com" in row.get("URL"):
-            row["HTML蜿門ｾ・] = "ﾃ・
+            row["HTML取得"] = "×"
             row["URL"] = ""
-            row["逕ｻ蜒酋RL"] = ""
-        force_process = PROCESS_LLM_SKIPPED and str(row.get("LLM蠕悟・逅・)).strip() == "繧ｹ繧ｭ繝・・"
+            row["画像URL"] = ""
+        force_process = PROCESS_LLM_SKIPPED and str(row.get("LLM後処理")).strip() == "スキップ"
         if USE_LLM and not force_process:
-            if pd.isna(row.get("LLM蛻､螳・)) or str(row.get("LLM蛻､螳・)).strip() == "":
+            if pd.isna(row.get("LLM判定")) or str(row.get("LLM判定")).strip() == "":
                 llm_rel, _ = call_llm_classify(title, content, "", mode="relevance")
                 if llm_rel:
-                    row["LLM蛻､螳・] = llm_rel
+                    row["LLM判定"] = llm_rel
                 llm_calls += 1
-            if row.get("LLM蛻､螳・) == "髱槫ｯｾ雎｡":
-                row["LLM蠕悟・逅・] = "繧ｹ繧ｭ繝・・"
+            if row.get("LLM判定") == "非対象":
+                row["LLM後処理"] = "スキップ"
                 df_out.loc[row_idx] = row
                 if total and (count == 1 or count % PROGRESS_EVERY == 0 or count == total):
-                    print(f"    騾ｲ謐・ {count}/{total}")
+                    print(f"    進捗: {count}/{total}")
                 if USE_LLM and ENRICH_ONLY and LLM_SAVE_INTERVAL > 0 and count % LLM_SAVE_INTERVAL == 0:
                     try:
                         temp_df = df_out.copy()
                         save_with_hyperlinks(temp_df, EXCEL_FILE)
-                        print(f"    騾比ｸｭ菫晏ｭ・ {count}莉ｶ")
+                        print(f"    途中保存: {count}件")
                     except Exception:
                         pass
                 continue
-        # 隕∫ｴ・ｼ域律譛ｬ隱橸ｼ峨ｒ逕滓・
-        summary_title, summary_body = summarize_article(title, content, row.get("URL", ""), row.get("蝗ｽ", ""))
+        # 要約（日本語）を生成
+        summary_title, summary_body = summarize_article(title, content, row.get("URL", ""), row.get("国", ""))
         if summary_title:
-            row["繧ｿ繧､繝医Ν・域律譛ｬ隱橸ｼ・] = summary_title
+            row["タイトル（日本語）"] = summary_title
         if summary_body:
-            row["蜀・ｮｹ・域律譛ｬ隱橸ｼ・] = summary_body
-        # 逕ｻ蜒丞愛螳夲ｼ亥ｯｾ雎｡/蠑ｷ蛻ｶ蜃ｦ逅・・縺ｿ・・
+            row["内容（日本語）"] = summary_body
+        # 画像判定（対象/強制処理のみ）
         if USE_LLM:
-            _, llm_photo = call_llm_classify(title, content, row.get("逕ｻ蜒酋RL", ""), mode="photo")
+            _, llm_photo = call_llm_classify(title, content, row.get("画像URL", ""), mode="photo")
             if llm_photo:
-                row["逕ｻ蜒丞愛螳・] = llm_photo
+                row["画像判定"] = llm_photo
             llm_calls += 1
-        row["LLM蠕悟・逅・] = "螳滓命"
+        row["LLM後処理"] = "実施"
         df_out.loc[row_idx] = row
         if total and (count == 1 or count % PROGRESS_EVERY == 0 or count == total):
-            print(f"    騾ｲ謐・ {count}/{total}")
+            print(f"    進捗: {count}/{total}")
         if USE_LLM and ENRICH_ONLY and LLM_SAVE_INTERVAL > 0 and count % LLM_SAVE_INTERVAL == 0:
             try:
                 temp_df = df_out.copy()
                 save_with_hyperlinks(temp_df, EXCEL_FILE)
-                print(f"    騾比ｸｭ菫晏ｭ・ {count}莉ｶ")
+                print(f"    途中保存: {count}件")
             except Exception:
                 pass
-    print("  [譌｢蟄肋 髢｢騾｣蠎ｦ繝ｻ鄙ｻ險ｳ蜀崎ｨ育ｮ・螳御ｺ・)
+    print("  [既存] 関連度・翻訳再計算 完了")
     if USE_LLM:
-        print(f"  [譌｢蟄肋 LLM蛻､螳・螳溯｡御ｻｶ謨ｰ: {llm_calls}")
+        print(f"  [既存] LLM判定 実行件数: {llm_calls}")
     if FETCH_MISSING_IMAGES:
         if missing_img_urls:
-            print(f"    逕ｻ蜒剰｣懷ｮ・ {len(missing_img_urls)}莉ｶ 荳ｦ蛻怜叙蠕鈴幕蟋・)
+            print(f"    画像補完: {len(missing_img_urls)}件 並列取得開始")
             img_map = bulk_fetch_images(missing_img_urls)
             for r_idx, r in df_out.iterrows():
-                if is_missing_url(r.get("逕ｻ蜒酋RL")) and r.get("URL"):
-                    df_out.at[r_idx, "逕ｻ蜒酋RL"] = img_map.get(r.get("URL"), r.get("逕ｻ蜒酋RL"))
-        empty_after = sum(1 for _, r in df_out.iterrows() if is_missing_url(r.get("逕ｻ蜒酋RL")))
-        print(f"    逕ｻ蜒酋RL譛ｪ蜿門ｾ・ {empty_after}莉ｶ・郁｣懷ｮ瑚ｩｦ陦・ {len(missing_img_urls)}莉ｶ・・)
+                if is_missing_url(r.get("画像URL")) and r.get("URL"):
+                    df_out.at[r_idx, "画像URL"] = img_map.get(r.get("URL"), r.get("画像URL"))
+        empty_after = sum(1 for _, r in df_out.iterrows() if is_missing_url(r.get("画像URL")))
+        print(f"    画像URL未取得: {empty_after}件（補完試行: {len(missing_img_urls)}件）")
     return df_out
 
 def main():
@@ -2325,17 +2317,17 @@ def main():
         target_dates = []
     
     print("=" * 60)
-    print(f"  {SUBJECT_NAME}繝九Η繝ｼ繧ｹ蜿朱寔繧ｹ繧ｯ繝ｪ繝励ヨ・域､懆ｨｼ貂医∩RSS迚茨ｼ・)
+    print(f"  {SUBJECT_NAME}ニュース収集スクリプト（検証済みRSS版）")
     print("=" * 60)
     if target_dates:
-        print(f"蟇ｾ雎｡譌･莉・ {', '.join(target_dates)}")
+        print(f"対象日付: {', '.join(target_dates)}")
     else:
-        print("蟇ｾ雎｡譌･莉・ 蛻ｶ髯舌↑縺暦ｼ亥・譛滄俣・・)
-    print(f"RSS繝輔ぅ繝ｼ繝・ {len(RSS_FEEDS)}繧ｵ繧､繝茨ｼ域､懆ｨｼ貂医∩・・)
+        print("対象日付: 制限なし（全期間）")
+    print(f"RSSフィード: {len(RSS_FEEDS)}サイト（検証済み）")
     build_rss_feed_list()
-    print(f"Bing讀懃ｴ｢: 蜷・嵜{len(COUNTRY_SETTINGS)}蝨ｰ蝓・ﾃ・16-18繧ｭ繝ｼ繝ｯ繝ｼ繝・)
+    print(f"Bing検索: 各国{len(COUNTRY_SETTINGS)}地域 × 16-18キーワード")
 
-    # 譌｢蟄倥ョ繝ｼ繧ｿ隱ｭ縺ｿ霎ｼ縺ｿ
+    # 既存データ読み込み
     existing_urls = set()
     collected_titles = []
     df_existing = pd.DataFrame()
@@ -2350,18 +2342,18 @@ def main():
             existing_urls = set(
                 u for u in df_existing["URL"].tolist() if str(u).strip()
             )
-        if "繧ｿ繧､繝医Ν" in df_existing.columns:
+        if "タイトル" in df_existing.columns:
             collected_titles = [
-                str(t) for t in df_existing["繧ｿ繧､繝医Ν"].tolist() if str(t).strip()
+                str(t) for t in df_existing["タイトル"].tolist() if str(t).strip()
             ]
         if ENRICH_ONLY or ENRICH_EXISTING:
             df_existing = enrich_existing_df(df_existing)
-            print(f"譌｢蟄倥ョ繝ｼ繧ｿ: {len(df_existing)} 莉ｶ")
+            print(f"既存データ: {len(df_existing)} 件")
 
-    # 譌｢蟄倥・縺ｿ蜀崎ｨ育ｮ励Δ繝ｼ繝・
+    # 既存のみ再計算モード
     if ENRICH_ONLY:
         if df_existing.empty:
-            print("譌｢蟄倥ョ繝ｼ繧ｿ縺後≠繧翫∪縺帙ｓ縲ょ・逅・ｒ邨ゆｺ・＠縺ｾ縺吶・)
+            print("既存データがありません。処理を終了します。")
             return
         for col in OUTPUT_COLUMNS:
             if col not in df_existing.columns:
@@ -2370,19 +2362,19 @@ def main():
         df_final = df_existing[OUTPUT_COLUMNS + extra_cols]
         try:
             save_with_hyperlinks(df_final, EXCEL_FILE)
-            print(f"\n笨・螳御ｺ・ｼ・譌｢蟄・{len(df_existing)} 莉ｶ繧貞・險育ｮ励＠菫晏ｭ倥＠縺ｾ縺励◆縲・)
-            print(f"   菫晏ｭ伜・: {os.path.abspath(EXCEL_FILE)}")
+            print(f"\n✅ 完了！ 既存 {len(df_existing)} 件を再計算し保存しました。")
+            print(f"   保存先: {os.path.abspath(EXCEL_FILE)}")
             build_sheet2_and_csv(df_final, EXCEL_FILE, target_dates)
         except Exception as e:
-            print(f"\n笶・菫晏ｭ倥お繝ｩ繝ｼ: {e}")
+            print(f"\n❌ 保存エラー: {e}")
         return
 
     all_results = []
 
     if ONLY_PAPERS_RSS:
-        RSS_FEEDS[:] = [f for f in RSS_FEEDS if f.get("country") == "隲匁枚"]
+        RSS_FEEDS[:] = [f for f in RSS_FEEDS if f.get("country") == "論文"]
     
-    # 蜷・た繝ｼ繧ｹ縺九ｉ蜿門ｾ・
+    # 各ソースから取得
     all_results.extend(fetch_from_rss(target_dates))
     if not ONLY_PAPERS_RSS:
         all_results.extend(fetch_from_bing_search(target_dates))
@@ -2392,15 +2384,15 @@ def main():
         all_results.extend(fetch_from_newsapi(target_dates))
     
     print("\n" + "=" * 60)
-    print(f"蜈ｨ繧ｽ繝ｼ繧ｹ蜷郁ｨ・ {len(all_results)}莉ｶ")
+    print(f"全ソース合計: {len(all_results)}件")
     if all_results:
-        src_counter = Counter([item.get("繧ｽ繝ｼ繧ｹ", "") for item in all_results if item.get("繧ｽ繝ｼ繧ｹ")])
-        cty_counter = Counter([item.get("蝗ｽ", "") for item in all_results if item.get("蝗ｽ")])
-        print(f"  蜿門ｾ怜・險ｳ・医た繝ｼ繧ｹ蛻･・・ {dict(src_counter)}")
-        print(f"  蜿門ｾ怜・險ｳ・亥嵜蛻･・・ {dict(cty_counter)}")
+        src_counter = Counter([item.get("ソース", "") for item in all_results if item.get("ソース")])
+        cty_counter = Counter([item.get("国", "") for item in all_results if item.get("国")])
+        print(f"  取得内訳（ソース別）: {dict(src_counter)}")
+        print(f"  取得内訳（国別）: {dict(cty_counter)}")
     
-    # 驥崎､・勁蜴ｻ
-    print("\n=== 驥崎､・勁蜴ｻ蜃ｦ逅・===")
+    # 重複除去
+    print("\n=== 重複除去処理 ===")
     unique_results = []
     seen_urls = set(existing_urls)
     seen_titles = list(collected_titles)
@@ -2409,15 +2401,15 @@ def main():
     
     for item in all_results:
         url = item.get("URL", "")
-        title = item.get("繧ｿ繧､繝医Ν", "")
-        source_name = item.get("繧ｽ繝ｼ繧ｹ", "荳肴・")
+        title = item.get("タイトル", "")
+        source_name = item.get("ソース", "不明")
         
         if not url or not title:
             continue
         
         if url in seen_urls:
             dup_by_source[source_name] += 1
-            dup_by_reason["譌｢蟄篭RL"] += 1
+            dup_by_reason["既存URL"] += 1
             continue
         
         is_dup = False
@@ -2427,7 +2419,7 @@ def main():
                 break
         if is_dup:
             dup_by_source[source_name] += 1
-            dup_by_reason["繧ｿ繧､繝医Ν鬘樔ｼｼ"] += 1
+            dup_by_reason["タイトル類似"] += 1
             continue
         
         seen_urls.add(url)
@@ -2435,20 +2427,20 @@ def main():
         unique_results.append(item)
     
     removed = len(all_results) - len(unique_results)
-    print(f"  驥崎､・勁蜴ｻ: {removed}莉ｶ")
+    print(f"  重複除去: {removed}件")
     if dup_by_source:
-        print(f"  驥崎､・・險ｳ・医た繝ｼ繧ｹ蛻･・・ {dict(dup_by_source)}")
+        print(f"  重複内訳（ソース別）: {dict(dup_by_source)}")
     if dup_by_reason:
-        print(f"  驥崎､・炊逕ｱ蜀・ｨｳ: {dict(dup_by_reason)}")
-    print(f"  譛邨らｵ先棡: {len(unique_results)}莉ｶ")
+        print(f"  重複理由内訳: {dict(dup_by_reason)}")
+    print(f"  最終結果: {len(unique_results)}件")
     if unique_results:
-        src_counter_final = Counter([item.get("繧ｽ繝ｼ繧ｹ", "") for item in unique_results if item.get("繧ｽ繝ｼ繧ｹ")])
-        cty_counter_final = Counter([item.get("蝗ｽ", "") for item in unique_results if item.get("蝗ｽ")])
-        print(f"  譛邨ょ・險ｳ・医た繝ｼ繧ｹ蛻･・・ {dict(src_counter_final)}")
-        print(f"  譛邨ょ・險ｳ・亥嵜蛻･・・ {dict(cty_counter_final)}")
+        src_counter_final = Counter([item.get("ソース", "") for item in unique_results if item.get("ソース")])
+        cty_counter_final = Counter([item.get("国", "") for item in unique_results if item.get("国")])
+        print(f"  最終内訳（ソース別）: {dict(src_counter_final)}")
+        print(f"  最終内訳（国別）: {dict(cty_counter_final)}")
     
     if unique_results:
-        unique_results = enrich_results(unique_results, label="譁ｰ隕・, existing_df=df_existing, save_path=EXCEL_FILE)
+        unique_results = enrich_results(unique_results, label="新規", existing_df=df_existing, save_path=EXCEL_FILE)
         df_new = pd.DataFrame(unique_results)
         
         for col in OUTPUT_COLUMNS:
@@ -2456,8 +2448,8 @@ def main():
                 df_new[col] = ""
         df_new = df_new[OUTPUT_COLUMNS]
         
-        df_new["繧ｹ繝・・繧ｿ繧ｹ"] = "OK"
-        df_new["HTML蜿門ｾ・] = "蜿ｯ閭ｽ"
+        df_new["ステータス"] = "OK"
+        df_new["HTML取得"] = "可能"
         
         if not df_existing.empty:
             for col in df_new.columns:
@@ -2469,14 +2461,14 @@ def main():
             
         try:
             save_with_hyperlinks(df_final, EXCEL_FILE)
-            print(f"\n笨・螳御ｺ・ｼ・{len(unique_results)} 莉ｶ縺ｮ譁ｰ隕剰ｨ倅ｺ九ｒ霑ｽ蜉縺励∪縺励◆縲・)
-            print(f"   URL縺ｯ繝上う繝代・繝ｪ繝ｳ繧ｯ蛹匁ｸ医∩")
-            print(f"   菫晏ｭ伜・: {os.path.abspath(EXCEL_FILE)}")
+            print(f"\n✅ 完了！ {len(unique_results)} 件の新規記事を追加しました。")
+            print(f"   URLはハイパーリンク化済み")
+            print(f"   保存先: {os.path.abspath(EXCEL_FILE)}")
             build_sheet2_and_csv(df_final, EXCEL_FILE, target_dates)
         except Exception as e:
-            print(f"\n笶・菫晏ｭ倥お繝ｩ繝ｼ: {e}")
+            print(f"\n❌ 保存エラー: {e}")
     else:
-        print("\n譁ｰ隕剰ｨ倅ｺ九・隕九▽縺九ｊ縺ｾ縺帙ｓ縺ｧ縺励◆縲・)
+        print("\n新規記事は見つかりませんでした。")
         if not df_existing.empty:
             try:
                 build_sheet2_and_csv(df_existing, EXCEL_FILE, target_dates)
@@ -2485,4 +2477,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
