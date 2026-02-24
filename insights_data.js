@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-23",
+        analysis: {
+            jp: "日本の自動車内装は高級感と機能性の両立が求められ、HMIの進化と素材の革新がトレンド[jp529]。特に本革シートやワイヤレス充電器の標準化が「ラグジュアリー感」を高めている[jp529]。また、AI体験融合やスマホ化の動き[jp531]は、ユーザーの「乗り味」や「使い勝手」を個別化する方向性を示す。再生アルミ素材や抗菌モジュールの需要も高まっている[jp530]。競合はプラットフォーム統合やデザインの多様化で差別化しており、規制・政策の影響も顕著[jp523]。内装開発では、持続可能な素材とAI連携の体験設計が重要[jp530]。",
+            cn: "中国市場ではHMIの高度化とAI連動が主流で、高通Snapdragon 8295チップの導入によりスマートカーナビゲーションの体験が刷新中[cn373,cn374]。シートや内装の新素材も重視され、長安汽車のGUI設計やBYDのスマート座席がトレンド[cn369,cn370]。競合他社はローカライズ設計とアウトドア対応を強化しており、規制は環境対応に重点を置く[cn376]。自社開発ではAI連動とユーザー体験最適化に注力すべき[cn372]。素材、HMI、AI、シート、内装、環境を軸に構築[cn367,cn375]。",
+            in: "インド市場ではEV化とディスプレイ技術の進化が顕著で、MB.OSやGoogle Gemini対応ディスプレイが主流化傾向[in387,in391]。ADASやマッサージシートの導入で快適性重視の内装が進む[in388,in393]。高級MPV市場の急成長はラグジュアリーコンセプトの需要を示す[in391]。素材面ではカーボンファイバーや高級皮革の採用が見られ、ARやマルチモードディスプレイが次世代のHMIとして注目[in394,in395]。規制面ではEVの普及促進政策が影響し、サプライチェーンのローカライズが進んでいる[in386,in392]。自社開発ではスマート素材とAR対応UIの融合が重要[in393,in395]。素材、HMI、快適性、EV、ラグジュアリーを軸に開発を進める[in388,in391,in395]。",
+            us: "米国市場では広々後席[us334]と高級内装が主流のトレンドで、マツダCX-5[us331,us335]やGenesis GV70[us338]が素材質感[us331]と空間設計[us331]で競合を圧倒。AR[us333]やコネクテッド機能は既に普及し、Audiの有料テーマ[us332]やジープのハイブリッド[us336,us337]技術が注目。EV規制緩和[us340]により、ハイブリッド車[us337]が主流となり、実用性と快適性[us334]を重視する消費者が増加。自社製品開発では、高級素材とモジュラーデザイン[us333]を融合した機能性と快適性[us334]を両立させる必要あり。",
+            eu: "EU市場ではAR HUDと傾斜タッチスクリーンの標準搭載が進み、高級SUVの快適性が重視されている [eu308,eu306]。一方、EVの操作ストレスや物理ボタンの必要性が浮上 [eu307]。Visteonの内装製品拡販と中国ブランドのディーラー展開はサプライチェーンの多様化を示す [eu312,eu311]。高級EVの生産中止は需要の不安定さを反映 [eu313]。自社内装開発では、AR機能の直感性向上と物理ボタンの「儀式感」を活かしたデザインが差別化ポイントとなる [eu307,eu312]。",
+        },
+        ideas: {
+            jp: [
+                { id: 409, img: "images/idea_409.png", title: "スマートレトロ・本革シート「Nostalgia Luxe」", desc: "レトロモダンデザインの本革シートで、クラシックな質感とAIが調整する「快適度」を実現。座面は温度感知で自動リクライニング、足元はWi-Fi対応でスマートデバイスとの連携。乗る人の「心の余裕」を生み出す、まるで過去の高級車の雰囲気を現代に蘇らせる。日本市場向けに「和の色合い」をオプションで提供。", imagePrompt: "Retro-modern leather seat with AI adaptive comfort, warm ambient lighting, wood grain trim, vintage car aesthetic, photorealistic rendering, cinematic lighting, 4K quality, premium automotive interior" },
+                { id: 410, img: "images/idea_410.png", title: "再生アルミ×抗菌モジュールパネル「EcoGuard」", desc: "再生アルミと抗菌素材を組み合わせたモジュール式パネルで、環境配慮と健康対策を両立。表面はタッチセンサーで操作可能、内部には空気清浄機能を内蔵。カスタムパッケージとして提供し、ユーザーが「自分だけの車内空間」を演出できる。見た目はシンプルで高級感があり、「安心・快適」を日常に。日本市場向けに「和風配色」もラインアップ。", imagePrompt: "Modular aluminum panel with antimicrobial coating, minimalist design, touch-sensitive surface, air purification system visible, clean white interior with subtle wood accents, photorealistic rendering, professional product visualization, 4K quality" },
+            ],
+            cn: [
+                { id: 411, img: "images/idea_411.png", title: "AI体験マスター・マルチモードコントロールパネル", desc: "車内空間をAIが最適化する「体験マスター」コントロールパネル。音楽・温度・照明・シート姿勢を一括管理し、ユーザーの好みを学習。運転中の集中力維持とリラックスモードの切り替えが楽しく、家族での乗車もストレスフリーに。AI連動で「この時間帯はリラックスモード」に自動切り替え。", imagePrompt: "AI-powered multi-mode control panel integrated into car dashboard, holographic interface with ambient lighting, futuristic cockpit design, soft-touch materials, warm blue glow, photorealistic 3D render, premium automotive interior" },
+                { id: 412, img: "images/idea_412.png", title: "光触媒抗菌内装パネル「清風」", desc: "車内空間を清浄に保つ光触媒素材で作られた内装パネル。紫外線で空気中の細菌・ウイルスを分解し、長時間乗車でも快適。新素材の抗菌性能は**環境対応**のトレンドに沿い、家族やペットとの乗車でも安心。清風の香りが心地よく、車内空間を「自然の風」でリフレッシュ。", imagePrompt: "Photocatalytic antibacterial interior panel with air purification effect, sleek minimalist design, natural wood texture with subtle mist effect, clean white and pastel blue color scheme, photorealistic 3D render, high detail, cinematic lighting" },
+            ],
+            in: [
+                { id: 413, img: "images/idea_413.png", title: "グリーンレトロ・マッサージシート", desc: "インドの伝統色「オリーブ・グリーン」をモチーフにしたマッサージ機能付きシート。**高密度カーボンファイバー**と**天然レザー**のハイブリッド素材で軽量かつ高耐久。**Google Gemini対応AI**が体の疲れ具合を分析し、**10秒で自動調整**。車内に「リラックス感」を届け、**快適さと文化的な美しさ**を融合。素材[jp389]、快適性[jp389]、素材[jp394]、AI[jp389]", imagePrompt: "Retro green massage seat with carbon fiber and leather hybrid, Indian traditional olive green color, built-in AI massage system with Google Gemini integration, ambient lighting, photorealistic 3D render, luxury car interior, cinematic lighting, high detail, 4K quality" },
+                { id: 414, img: "images/idea_414.png", title: "マルチモードARナビ・スマートミラー", desc: "**ARナビゲーション**と**スマートミラー**を1台に統合した次世代内装部品。**MB.OS**や**Google Gemini**対応で、**14インチディスプレイ**から**リアミラー**にまで情報を投影。**子供向けサプライズドライブ**のような**楽しさと実用性**を両立。**夜間走行時も鮮明なAR表示**で安心。AR[jp387]、ディスプレイ[jp387]、快適性[jp390]、AR[jp395]、スマートミラー[jp389]", imagePrompt: "AR navigation smart mirror integrated into car interior, holographic projection on rearview mirror, 14-inch MB.OS display, night driving scene with clear AR guidance, photorealistic 3D render, futuristic cockpit design, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 415, img: "images/idea_415.png", title: "LuxFit モジュラーハイブリッドシート：快適性×省エネ", desc: "高密度リサイクルファブリックと熱管理素材を採用したシートで、長時間ドライブでも快適性を保ち、省エネ機能で冷暖房負荷を軽減。後席も広々設計で、**家族やペットとの共存**をサポート。**高級感と実用性**が両立し、**EV/ハイブリッド車両**に最適。", imagePrompt: "Modular hybrid seat with recycled fabric and thermal management, luxury car interior, ergonomic design for rear passengers, soft ambient lighting, warm beige and gray tones, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 416, img: "images/idea_416.png", title: "SyncGlow ARダッシュボード：直感操作×未来感", desc: "HMI連動型AR表示で、**操作性と視認性**を高め、**夜間走行時**の安全を強化。**デジタルレトロモチーフ**を融合させ、**未来感と親しみやすさ**を両立。**スマートフォンの直感操作**を車内に再現し、**新規ユーザーでも直ぐに使える**。**高級感と実用性**を両立し、**EV/ハイブリッド車両**に最適。", imagePrompt: "Augmented reality dashboard with holographic interface, futuristic car interior, glowing blue and silver accents, digital retro motif, night driving scene, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 417, img: "images/idea_417.png", title: "AR感情応答型コンソール「EmoHUD」", desc: "ドライバーの視線と表情をAIで読み取り、AR HUDの情報表示を自動調整。快適な運転環境を維持し、**「操作が楽しくなる」**という体験を提供。VWの「不服従」問題を解決するデザインで、**「ストレスゼロの運転」**を実現。AR HUD搭載車両の普及を加速する。", imagePrompt: "Emotion-responsive AR HUD integrated into modern car dashboard, adaptive holographic interface based on driver's gaze and facial expression, ambient lighting, sleek minimalist design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 418, img: "images/idea_418.png", title: "クラシックボタン統合型快適ユニット「ClassicTact」", desc: "物理ボタンを「儀式感」を演出する高級素材で再設計。**「始動の儀式」を愉しむ」**という快適性を提供。高級SUVの快適性[jp306]とEVのストレス[jp307]を両立し、**「昔ながらの安心感と未来の快適さ」**を融合した内装ユニット。Visteonの製品展開[jp312]にマッチする素材感で、**「手触りで安心」**の体験を生み出す。", imagePrompt: "Luxury car interior with classic tactile buttons made of brushed metal and leather, elegant vintage-inspired design with modern lighting, warm ambient glow, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-22",
         analysis: {
             jp: "日本の自動車内装市場は、**快適性**と**遊び心**の融合がトレンド。猫モチーフの**ねこシート**[jp512]や、**7人乗り広々空間**[jp515]が人気。**EV車の内装**[jp514]では、**静粛性**と**操作性**が重視され、**安全装備**[jp518]も重要な評価軸。**レトロデザイン**[jp516]や**AI音声**[jp520]の要素も注目され、**知能化**[jp519]が進む中で、**人間味**を加える製品が差別化ポイント。",

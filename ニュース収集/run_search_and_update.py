@@ -5,6 +5,7 @@ from pathlib import Path
 from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT
 import signal
 import sys
+import py_compile
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
@@ -18,6 +19,19 @@ LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y
 def log(msg):
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(msg + "\n")
+
+
+def get_google_search_entrypoint():
+    src = SCRIPT_DIR / "google_search_script.py"
+    pyc = SCRIPT_DIR / "__pycache__" / f"google_search_script.cpython-{sys.version_info.major}{sys.version_info.minor}.pyc"
+    try:
+        py_compile.compile(str(src), doraise=True)
+        return src
+    except Exception as e:
+        if pyc.exists():
+            log(f"[WARN] google_search_script.py syntax check failed; fallback to pyc: {type(e).__name__}: {e}")
+            return pyc
+        raise
 
 
 def latest_news_date():
@@ -95,7 +109,8 @@ def main():
             cur += datetime.timedelta(days=1)
         dates_arg = ",".join(dates)
         try:
-            run_cmd([sys.executable, "-u", str(SCRIPT_DIR / "google_search_script.py"), "--dates", dates_arg], "google_search_script", LOG_FILE)
+            google_search_script = get_google_search_entrypoint()
+            run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
             run_cmd([sys.executable, "-u", str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
             if os.environ.get("OPENAI_API_KEY"):
                 image_quality = os.environ.get("OPENAI_IMAGE_QUALITY", "high").strip().lower() or "high"

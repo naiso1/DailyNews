@@ -234,36 +234,47 @@ def parse_date(date_str):
         return None
 
 def extract_image_from_rss(entry):
-    """RSS/Atomのエントリから画像URLを抽出"""
+    """RSS/Atom?????????URL???"""
+    candidates = []
     try:
         media = entry.get("media_content", [])
         if media and isinstance(media, list):
             for m in media:
                 url = m.get("url") or m.get("href")
                 if url:
-                    return url
+                    candidates.append(str(url))
         thumbs = entry.get("media_thumbnail", [])
         if thumbs and isinstance(thumbs, list):
             for m in thumbs:
                 url = m.get("url") or m.get("href")
                 if url:
-                    return url
+                    candidates.append(str(url))
         enclosures = entry.get("enclosures", [])
         if enclosures:
             for enc in enclosures:
                 url = enc.get("url")
                 if url and "image" in str(enc.get("type", "")).lower():
-                    return url
+                    candidates.append(str(url))
         links = entry.get("links", [])
         if links:
             for lnk in links:
                 if lnk.get("rel") == "enclosure" and "image" in str(lnk.get("type", "")).lower():
                     url = lnk.get("href") or lnk.get("url")
                     if url:
-                        return url
+                        candidates.append(str(url))
     except Exception:
         pass
-    return ""
+    if not candidates:
+        return ""
+    uniq = []
+    seen = set()
+    for c in candidates:
+        if c in seen:
+            continue
+        seen.add(c)
+        uniq.append(c)
+    uniq.sort(key=rank_image_url, reverse=True)
+    return uniq[0]
 
 def is_target_date(pub_date, target_dates):
     if not target_dates:
@@ -1387,8 +1398,13 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             group = group.sort_values([score_col, "_order"], ascending=[False, True])
         else:
             group = group.sort_values("_order")
-        target_group = group[llm_flag.loc[group.index] == "対象"]
-        extras = group[llm_flag.loc[group.index] != "対象"]
+        if str(country_name).strip() in ("\u8ad6\u6587", "paper", "papers"):
+            # PubMed RSS is curated for this project; do not gate papers by LLM relevance.
+            target_group = group
+            extras = group.iloc[0:0]
+        else:
+            target_group = group[llm_flag.loc[group.index] == "\u5bfe\u8c61"]
+            extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
         selected = []
         selected_idx = set()
         selected_texts = []
@@ -1549,7 +1565,11 @@ def build_papers_sheet2(df, excel_path, target_dates):
         dt = pd.to_datetime(filtered[col_date], errors="coerce")
         filtered = filtered[dt.dt.strftime("%Y-%m-%d").isin(date_set)]
 
-    filtered = filtered[filtered[col_llm].astype(str).str.strip() == "\u5bfe\u8c61"]
+    # PubMed RSS is curated upstream; export papers regardless of LLM relevance flag.
+    filtered = filtered[
+        (filtered[col_country].astype(str).str.strip() == "\u8ad6\u6587")
+        | (filtered[col_llm].astype(str).str.strip() == "\u5bfe\u8c61")
+    ]
 
     sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url]
     papers_df = filtered[sheet_cols].copy()
@@ -2022,7 +2042,10 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         url_value = item.get("URL")
         # LLM判定（関連性のみ）を先に実施
         llm_relevance = ""
-        if USE_LLM:
+        is_paper_item = str(country).strip() in ("\u8ad6\u6587", "paper", "papers")
+        if is_paper_item:
+            item["LLM\u5224\u5b9a"] = "\u5bfe\u8c61"
+        elif USE_LLM:
             llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
             if llm_relevance:
                 item["LLM判定"] = llm_relevance
@@ -2225,8 +2248,12 @@ def enrich_existing_df(df):
             row["HTML取得"] = "×"
             row["URL"] = ""
             row["画像URL"] = ""
+        row_country_raw = str(row.get("\u56fd", "")).strip()
+        is_paper_row = row_country_raw in ("\u8ad6\u6587", "paper", "papers")
+        if is_paper_row:
+            row["LLM\u5224\u5b9a"] = "\u5bfe\u8c61"
         force_process = PROCESS_LLM_SKIPPED and str(row.get("LLM後処理")).strip() == "スキップ"
-        if USE_LLM and not force_process:
+        if USE_LLM and (not is_paper_row) and not force_process:
             if pd.isna(row.get("LLM判定")) or str(row.get("LLM判定")).strip() == "":
                 llm_rel, _ = call_llm_classify(title, content, "", mode="relevance")
                 if llm_rel:

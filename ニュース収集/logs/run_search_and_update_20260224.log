@@ -1,0 +1,236 @@
+==================================================
+[START] 2026-02-24 00:00:01
+[INFO] Target range: 2026-02-23 to 2026-02-23
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-23
+[PID] google_search_script: 33500
+[google_search_script]   File "C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py", line 549
+[google_search_script]     """PlaywrightでJSレンダリング後�EURLと画像を取得！Elaywrightがある場合�Eみ�E�E""
+[google_search_script]                           ^
+[google_search_script] SyntaxError: invalid non-printable character U+0080
+[EXIT] google_search_script: code=1
+[ERROR] Command failed: Command '['C:\\Users\\demo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-u', 'C:\\Users\\demo\\Desktop\\中村\\DailyNews\\ニュース収集\\google_search_script.py', '--dates', '2026-02-23']' returned non-zero exit status 1.
+[END] 2026-02-24 00:00:02
+==================================================
+[WARN] google_search_script.py syntax check failed; fallback to pyc: PyCompileError:   File "C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py", line 551
+    """Playwright縺ｧJS繝ｬ繝ｳ繝繝ｪ繝ｳ繧ｰ蠕後・URL縺ｨ逕ｻ蜒上ｒ蜿門ｾ暦ｼ・laywright縺後≠繧句ｴ蜷医・縺ｿ・・""
+                          ^
+SyntaxError: invalid non-printable character U+0080
+
+==================================================
+[START] 2026-02-24 10:36:23
+[INFO] Target range: 2026-02-23 to 2026-02-23
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-02-23
+[PID] google_search_script: 81292
+[google_search_script] ============================================================
+[google_search_script]   内装ニュース収集スクリプト（検証済みRSS版）
+[google_search_script] ============================================================
+[google_search_script] 対象日付: 2026-02-23
+[google_search_script] RSSフィード: 67サイト（検証済み）
+[google_search_script]   RSSフィード一覧を出力: rss_feed_list.csv
+[google_search_script] Bing検索: 各国5地域 × 16-18キーワード
+[google_search_script] === RSSフィード ===
+[google_search_script]   ✓ [レスポンス] 13件
+[google_search_script]   ✓ [carview!] 3件
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1641: MarkupResemblesLocatorWarning: The input looks more like a filename than markup. You may want to open this file and pass the filehandle into Beautiful Soup.
+[google_search_script]   desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
+[google_search_script]   ✓ [MotorFan] 22件
+[google_search_script]   ✓ [WEB CARTOP] 6件
+[google_search_script]   ✓ [Auto Messe Web] 5件
+[google_search_script]   ✓ [VAGUE] 13件
+[google_search_script]   ✓ [ベストカーWeb] 14件
+[google_search_script]   ✓ [くるまのニュース] 30件
+[google_search_script]   ✓ [AUTOCAR JAPAN] 6件
+[google_search_script]   ✓ [AUTO BILD JAPAN Web] 4件
+[google_search_script]   ✓ [MONOist] 1件
+[google_search_script]   ✓ [TechTargetジャパン] 2件
+[google_search_script]   ✓ [ZDNET Japan] 4件
+[google_search_script]   ✓ [CNET Japan] 2件
+[google_search_script]   ✓ [The Drive] 9件
+[google_search_script]   ✓ [Motor1] 7件
+[google_search_script]   ✓ [CarScoops] 15件
+[google_search_script]   ✓ [Jalopnik] 18件
+[google_search_script]   ✓ [Car and Driver] 12件
+[google_search_script]   ✓ [The Truth About Cars] 8件
+[google_search_script]   ✓ [Top Speed] 9件
+[google_search_script]   ✓ [CarComplaints] 1件
+[google_search_script]   ✓ [AUTOCAR UK] 7件
+[google_search_script]   ✓ [Auto Express] 13件
+[google_search_script]   ✓ [Autocar Reviews] 7件
+[google_search_script]   ✓ [CarNewsChina - All] 2件
+[google_search_script]   ✓ [ETAuto - Auto Components] 4件
+[google_search_script]   ✓ [ETAuto - Auto Technology] 4件
+[google_search_script]   ✓ [Autocar India - All] 9件
+[google_search_script]   ✓ [RushLane] 7件
+[google_search_script]   ✓ [GaadiWaadi] 6件
+[google_search_script]   ✓ [IndiaCarNews] 4件
+[google_search_script]   ✓ [Car Blog India] 7件
+[google_search_script]   ✓ [Auto Punditz] 1件
+[google_search_script]   ✓ [PubMed - Search] 1件
+[google_search_script]   RSS合計: 276件
+[google_search_script] === Bing News 検索 ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 中国 / 汽车 内饰 开发... RSSで返っておらず（HTML/制限の可能性）
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   Bing検索合計: 0件
+[google_search_script] === DuckDuckGo News 検索 ===
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1788: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+[google_search_script]   ddgs = DDGS()
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 26件
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 50件
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 44件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 26件
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 63件
+[google_search_script]   DuckDuckGo合計: 209件
+[google_search_script] === Google News RSS ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 8件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 16件
+[google_search_script]   Google News合計: 24件
+[google_search_script] === NewsAPI.org ===
+[google_search_script]   NewsAPI合計: 0件
+[google_search_script] ============================================================
+[google_search_script] 全ソース合計: 509件
+[google_search_script]   取得内訳（ソース別）: {'レスポンス': 13, 'carview!': 3, 'MotorFan': 22, 'WEB CARTOP': 6, 'Auto Messe Web': 5, 'VAGUE': 13, 'ベストカーWeb': 14, 'くるまのニュース': 30, 'AUTOCAR JAPAN': 6, 'AUTO BILD JAPAN Web': 4, 'MONOist': 1, 'TechTargetジャパン': 2, 'ZDNET Japan': 4, 'CNET Japan': 2, 'The Drive': 9, 'Motor1': 7, 'CarScoops': 15, 'Jalopnik': 18, 'Car and Driver': 12, 'The Truth About Cars': 8, 'Top Speed': 9, 'CarComplaints': 1, 'AUTOCAR UK': 7, 'Auto Express': 13, 'Autocar Reviews': 7, 'CarNewsChina - All': 2, 'ETAuto - Auto Components': 4, 'ETAuto - Auto Technology': 4, 'Autocar India - All': 9, 'RushLane': 7, 'GaadiWaadi': 6, 'IndiaCarNews': 4, 'Car Blog India': 7, 'Auto Punditz': 1, 'PubMed - Search': 1, 'DuckDuckGo': 209, 'GoogleNews': 24}
+[google_search_script]   取得内訳（国別）: {'日本': 159, '米国': 129, '欧州': 71, '中国': 44, 'インド': 105, '論文': 1}
+[google_search_script] === 重複除去処理 ===
+[google_search_script]   重複除去: 84件
+[google_search_script]   重複内訳（ソース別）: {'Car and Driver': 1, 'Autocar Reviews': 7, 'Car Blog India': 3, 'DuckDuckGo': 70, 'GoogleNews': 3}
+[google_search_script]   重複理由内訳: {'タイトル類似': 16, '既存URL': 68}
+[google_search_script]   最終結果: 425件
+[google_search_script]   最終内訳（ソース別）: {'レスポンス': 13, 'carview!': 3, 'MotorFan': 22, 'WEB CARTOP': 6, 'Auto Messe Web': 5, 'VAGUE': 13, 'ベストカーWeb': 14, 'くるまのニュース': 30, 'AUTOCAR JAPAN': 6, 'AUTO BILD JAPAN Web': 4, 'MONOist': 1, 'TechTargetジャパン': 2, 'ZDNET Japan': 4, 'CNET Japan': 2, 'The Drive': 9, 'Motor1': 7, 'CarScoops': 15, 'Jalopnik': 18, 'Car and Driver': 11, 'The Truth About Cars': 8, 'Top Speed': 9, 'CarComplaints': 1, 'AUTOCAR UK': 7, 'Auto Express': 13, 'CarNewsChina - All': 2, 'ETAuto - Auto Components': 4, 'ETAuto - Auto Technology': 4, 'Autocar India - All': 9, 'RushLane': 7, 'GaadiWaadi': 6, 'IndiaCarNews': 4, 'Car Blog India': 4, 'Auto Punditz': 1, 'PubMed - Search': 1, 'DuckDuckGo': 139, 'GoogleNews': 21}
+[google_search_script]   最終内訳（国別）: {'日本': 150, '米国': 116, '欧州': 46, '中国': 41, 'インド': 71, '論文': 1}
+[google_search_script]   [新規] 関連度・翻訳処理 425件 開始
+[google_search_script]     進捗: 1/425
+[google_search_script]     進捗: 5/425
+[google_search_script]     進捗: 10/425
+[google_search_script]     進捗: 15/425
+[google_search_script]     進捗: 20/425
+[google_search_script]     進捗: 25/425
+[google_search_script]     進捗: 30/425
+[google_search_script]     進捗: 35/425
+[google_search_script]     進捗: 40/425
+[google_search_script]     進捗: 45/425
+[google_search_script]     進捗: 50/425
+[google_search_script]     進捗: 55/425
+[google_search_script]     進捗: 60/425
+[google_search_script]     進捗: 65/425
+[google_search_script]     進捗: 70/425
+[google_search_script]     進捗: 75/425
+[google_search_script]     進捗: 80/425
+[google_search_script]     進捗: 85/425
+[google_search_script]     進捗: 90/425
+[google_search_script]     進捗: 95/425
+[google_search_script]     進捗: 100/425
+[google_search_script]     進捗: 105/425
+[google_search_script]     進捗: 110/425
+[google_search_script]     進捗: 115/425
+[google_search_script]     進捗: 120/425
+[google_search_script]     進捗: 125/425
+[google_search_script]     進捗: 130/425
+[google_search_script]     進捗: 135/425
+[google_search_script]     進捗: 140/425
+[google_search_script]     進捗: 145/425
+[google_search_script]     進捗: 150/425
+[google_search_script]     進捗: 155/425
+[google_search_script]     進捗: 160/425
+[google_search_script]     進捗: 165/425
+[google_search_script]     進捗: 170/425
+[google_search_script]     進捗: 175/425
+[google_search_script]     進捗: 180/425
+[google_search_script]     進捗: 185/425
+[google_search_script]     進捗: 190/425
+[google_search_script]     進捗: 195/425
+[google_search_script]     進捗: 200/425
+[google_search_script]     進捗: 205/425
+[google_search_script]     進捗: 210/425
+[google_search_script]     進捗: 215/425
+[google_search_script]     進捗: 220/425
+[google_search_script]     進捗: 225/425
+[google_search_script]     進捗: 230/425
+[google_search_script]     進捗: 235/425
+[google_search_script]     進捗: 240/425
+[google_search_script]     進捗: 245/425
+[google_search_script]     進捗: 250/425
+[google_search_script]     進捗: 255/425
+[google_search_script]     進捗: 260/425
+[google_search_script]     進捗: 265/425
+[google_search_script]     進捗: 270/425
+[google_search_script]     進捗: 275/425
+[google_search_script]     進捗: 280/425
+[google_search_script]     進捗: 285/425
+[google_search_script]     進捗: 290/425
+[google_search_script]     進捗: 295/425
+[google_search_script]     進捗: 300/425
+[google_search_script]     進捗: 305/425
+[google_search_script]     進捗: 310/425
+[google_search_script]     進捗: 315/425
+[google_search_script]     進捗: 320/425
+[google_search_script]     進捗: 325/425
+[google_search_script]     進捗: 330/425
+[google_search_script]     進捗: 335/425
+[google_search_script]     進捗: 340/425
+[google_search_script]     進捗: 345/425
+[google_search_script]     進捗: 350/425
+[google_search_script]     進捗: 355/425
+[google_search_script]     進捗: 360/425
+[google_search_script]     進捗: 365/425
+[google_search_script]     進捗: 370/425
+[google_search_script]     進捗: 375/425
+[google_search_script]     進捗: 380/425
+[google_search_script]     進捗: 385/425
+[google_search_script]     進捗: 390/425
+[google_search_script]     進捗: 395/425
+[google_search_script]     進捗: 400/425
+[google_search_script]     進捗: 405/425
+[google_search_script]     進捗: 410/425
+[google_search_script]     進捗: 415/425
+[google_search_script]     進捗: 420/425
+[google_search_script]     進捗: 425/425
+[google_search_script]   [新規] 関連度・翻訳処理 完了
+[google_search_script]     画像補完: 67件 並列取得開始
+[google_search_script]     画像URL未取得: 69件
+[google_search_script] ✅ 完了！ 425 件の新規記事を追加しました。
+[google_search_script]    URLはハイパーリンク化済み
+[google_search_script]    保存先: C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\search_results.csv
+[google_search_script]   Sheet2補完: 10件
+[google_search_script]     進捗: 1/10
+[google_search_script]     進捗: 5/10
+[google_search_script]     進捗: 10/10
+[google_search_script]   Sheet2/CSV 出力: 51件, sheet2_llm_targets.csv
+[EXIT] google_search_script: code=0
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[PID] auto_update_daily_news: 83552
+[auto_update_daily_news] Loaded 50 items from sheet: C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\sheet2_llm_targets.csv (dates: 2026-02-23 ~ 2026-02-23)
+[auto_update_daily_news] New items to append: 50
+[auto_update_daily_news] Done.
+[EXIT] auto_update_daily_news: code=0
+[RUN] generate_idea_images_openai: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_openai.py --only-missing --quality high
+[PID] generate_idea_images_openai: 81824
+[generate_idea_images_openai] [OK] Saved idea_409.png
+[generate_idea_images_openai] [OK] Saved idea_410.png
+[generate_idea_images_openai] [OK] Saved idea_411.png
+[generate_idea_images_openai] [OK] Saved idea_412.png
+[generate_idea_images_openai] [OK] Saved idea_413.png
+[generate_idea_images_openai] [OK] Saved idea_414.png
+[generate_idea_images_openai] [OK] Saved idea_415.png
+[generate_idea_images_openai] [OK] Saved idea_416.png
+[generate_idea_images_openai] [OK] Saved idea_417.png
+[generate_idea_images_openai] [OK] Saved idea_418.png
+[generate_idea_images_openai] Done.
+[EXIT] generate_idea_images_openai: code=0
+[END] 2026-02-24 11:39:00
+==================================================
