@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-25",
+        analysis: {
+            jp: "日本市場ではカスタマイズと実用性が重視され、木目内装やメッキエアロといった昭和風デザインが人気[jp547,jp548]。一方、EVと安全性能の両立が求められ、断熱パネルや超急速充電の実装が進む[jp543,jp547]。ARやAIアシスタントの導入も加速し、TSS/LSSの性能向上が実現[jp550]。再生アルミや抗菌素材の内装部品の需要も高まり[jp551]。自社はカスタムと持続可能性を軸に、ハイブリッド×EV両対応のモジュール式内装を提案すべき[jp547,jp551]。",
+            cn: "中国市場ではAIアシスタントと大画面ディスプレイの統合が進み、光環境（ムードライト）の体験も高度化中[cn395]。半幅ステアリングの規制緩和は操作性の進化を促す[cn394]。熱快適性評価システムの本土化は内装素材の性能基準に影響[cn393]。大ベッドモードは空間利用の革新を示す[cn388]。自社開発で素材/機能の両輪で差別化すべき[cn388,cn393]。",
+            in: "インド市場ではサスペンションフィードバックやマルチモードドライブが主流化し、HMIの進化（360度カメラ、大型画面）とEVの普及が加速[in406,in412]。マヒンドラXUV7XOの70％が上位グレードで、高機能内装への需要が高まっている[in411]。また、マラーティ・スズキの鉄道輸送によるカーボンクレジット取得は、サステナブル内装への期待を反映[in410]。安全装備の標準化も進む。自社はモジュラーコンソールやARナビゲーションを活用し、カスタマイズ性と環境配慮を両立した製品開発を推進すべき。",
+            us: "US市場ではEV性能とデザイン革新が競争の中心[us354,us359]。ポルシェのTurbo GT ElectricやトヨタbZ4X Touringは航続距離と加速でユーザーを惹きつける。AR技術も進化中で、Amalgamの1:8モデルやメルセデスのAR展示が高級感と遊び心を提供[us352,us358]。内装素材は省エネ・耐久性重視で、過去のモジュラーハイブリッドシートと類似だが、HMI連動型ダッシュボードの直感性が新たな価値を生む[us357]。安全・接続性も課題[us353,us355]。実用性と未来感の融合が今後の開発キーワード。",
+            eu: "EU市場ではAIとAR技術の進化が加速中で、Gordon MurrayのV12 T33やPeugeotの新世代ステアリングが高級感と技術革新を融合[eu327,eu330]。素材面ではエポキシ樹脂やバイオベース製品の需要拡大が見られ[eu333]。安全と快適性の両立が求められ、AI監視やAR操作が主流化する可能性[eu331]。サプライチェーンでは中国製品との競合が強化され、デザインと機能の両立が求められる[eu332,eu334]。",
+        },
+        ideas: {
+            jp: [
+                { id: 429, img: "images/idea_429.png", title: "昭和レトロ・木目×再生アルミモジュールパネル「Wabi-Sabi Core」", desc: "昭和のクラシックデザインをモダンに再解釈。木目調と再生アルミのコンビネーションで、温かみと軽量性を両立。**木目内装**のトレンド[jp547]を現代素材で再現。**抗菌**・**耐熱**仕様で長期間快適。**カスタム**が楽しくなる、**うれしさ**は「昭和の味を、未来に残す」", imagePrompt: "Retro-modern automotive interior panel with wood grain texture and recycled aluminum frame, warm beige and brushed silver color scheme, modular design with magnetic attachment points, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+                { id: 430, img: "images/idea_430.png", title: "AI音声対話型「コネクト・コクピット」スマートモジュール", desc: "AIが車内を「会話空間」に。**音声アシスタント**を搭載し、**AR**や**安全**情報を自然な会話で提示[jp550]。**マルチモード**で、**音楽・香り・照明**を音声で操作。**うれしさ**は「車内が、まるで親しい友達になった」", imagePrompt: "AI voice assistant interface floating above dashboard in premium vehicle, holographic display with natural language interaction, ambient lighting effects, futuristic cockpit design with curved glass surfaces, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 431, img: "images/idea_431.png", title: "光感応型ムードライト「映画の窓」", desc: "車内照明が映画のシーンに合わせて色と明るさを自動調整。映画鑑賞時、夜行時、リラックスモードと3種類のシーンに応じて空間を演出。**光の変化で気分が変わる**、まるで車内に映画館が移動する。視覚的快適性と感情の安定を同時に実現。素材は柔らかいレザーと光導体フィルムで、**光の反射を最小限に抑える**。", imagePrompt: "Car interior mood lighting system that changes color and brightness to match movie scenes, cinematic ambient glow, floating light effects, premium car cockpit, warm and cool color transitions, photorealistic 3D render, high detail, 4K quality" },
+                { id: 432, img: "images/idea_432.png", title: "AI対応熱快適性調節シート「快適な寝る」", desc: "座席が**熱快適性評価システム**と連動し、体温と座り方で自動的に温度・空気循環を最適化。**半幅ステアリング**と同様に、運転中の快適さを最大限に。**大ベッドモード**との連携で、寝転がりのときも快適。**素材は吸湿性と熱分散性を両立**、長時間の使用でも体に優しい。寝たきりでも安心できる快適性。", imagePrompt: "AI-controlled thermal comfort seat with automatic temperature and airflow adjustment, ergonomic design for sleeping mode, modern car interior with heat dissipation materials, soft-touch fabric, ambient lighting, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 433, img: "images/idea_433.png", title: "エコ・サスペンションフィードバックマット", desc: "サスペンションモードに応じてマット表面が変化する**触覚フィードバック**機能を搭載。Raceモードでは**熱伝導性素材**で振動を伝える、Comfortモードでは**クッション性素材**で快適性を提供。**環境配慮**なリサイクル素材で構成し、**カーボンクレジット対応**を実現。乗り手の**ドライビングスタイルに応じた快適さ**と**サステナブル性**を両立。", imagePrompt: "Eco suspension feedback mat with tactile surface changing based on driving mode, luxury car interior, thermal conductive and cushioning materials, green recycled texture, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 434, img: "images/idea_434.png", title: "ARナビゲーション・マルチモードスマートミラー", desc: "**ARナビゲーション**を映し出す**スマートミラー**で、**ドライバー視点の3Dマップ**をリアルタイムに表示。**マルチモード対応**（Race/Comfort）で、**視界の拡張**と**安全性能**を両立。**360度カメラ**との連携で、**死角を補完**。**スマートフォンアプリ**との連携で、**目的地の気分に合わせたUI**を提供。**乗り手の楽しみ**と**安心感**を同時に実現。", imagePrompt: "AR navigation smart mirror with 3D map overlay, luxury vehicle cockpit, holographic interface floating above mirror, dual-mode display, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 435, img: "images/idea_435.png", title: "EcoGlow リサイクルファブリック・モジュラーコンソール", desc: "リサイクル素材で作られたモジュラーコンソール。快適な接触感と省エネ設計で、ユーザーのカスタマイズをサポート。**内装を「遊び心と省エネ」で充実させる**。メンテナンスが簡単で、長寿命設計。車内を「環境に優しい」空間に変える喜びを提供。", imagePrompt: "Modular console made from recycled fabric, sleek eco-friendly automotive interior, integrated storage compartments, soft ambient lighting, minimalist design, brushed aluminum accents, photorealistic 3D render, high detail, 4K quality" },
+                { id: 436, img: "images/idea_436.png", title: "SyncGlow ARダッシュボード：直感操作×未来感", desc: "AR技術でリアルタイムで操作画面を投影するダッシュボード。**HMI連動型**で、運転中の視界を損なわず、直感操作を実現。**安全と未来感の両立**が最大の魅力。視界の広がりと操作のシンプルさで、運転を「楽しく、安心に」する。ARの遊び心と実用性を融合した新しい体験。", imagePrompt: "Augmented reality dashboard projecting holographic controls onto windshield, futuristic car cockpit, glowing blue interface, driver-focused UI, realistic dashboard with touch-sensitive elements, photorealistic render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 437, img: "images/idea_437.png", title: "バイオベース・アロマテラピー内装パネル「BloomWeave」", desc: "天然素材で作られた内装パネルが、車内空間を自然の香りで包み込む。香りの強度は乗員のストレスレベルに応じて調整し、**心地よい気分を保つ**。バイオベース素材は環境負荷を抑え、**高級感と持続可能性**を両立。内装部品の軽量化と耐久性も確保。", imagePrompt: "Biodegradable aroma-infused interior panel, natural wood grain texture with embedded scent diffuser, eco-friendly car interior, soft green and beige color palette, ambient lighting, photorealistic 3D render, premium automotive design" },
+                { id: 438, img: "images/idea_438.png", title: "AR感情応答型ドライビングコンソール「EmoSync」", desc: "ドライバーの感情をAIがリアルタイムで読み取り、**運転の快適性と安全性**を最適化。**AR表示**でナビゲーションや警告を視覚的に提示し、**ストレス軽減**を実現。**高級感と未来感**を兼ね備えたデザインで、**運転の楽しみを増やす**。", imagePrompt: "AR-enabled driving console with emotional response interface, holographic displays floating above dashboard, futuristic cockpit design, blue and silver accents, cinematic lighting, photorealistic 3D render, premium automotive design" },
+            ],
+        }
+    },
+{
         date: "2026-02-24",
         analysis: {
             jp: "日本市場では**EV化**と**カスタマイズ志向**が顕著[jp534,jp537]。BYDドルフィンのシートベンチレーションや、LAC EVキャンパーの長時間エアコン使用が消費者の快適性ニーズを反映。一方、**内装の高級感**も重視され、杉浦太陽のナッツRV CREA[jp539]やレクサスLSコンセプトの回転対面シート[jp536]が注目。**ディスプレイ保護フィルム**の採用[jp533]は、耐久性と見た目の美しさを両立させる傾向。素材・機能の両面で**差別化が求められる**。",
