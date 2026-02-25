@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-24",
+        analysis: {
+            jp: "日本市場では**EV化**と**カスタマイズ志向**が顕著[jp534,jp537]。BYDドルフィンのシートベンチレーションや、LAC EVキャンパーの長時間エアコン使用が消費者の快適性ニーズを反映。一方、**内装の高級感**も重視され、杉浦太陽のナッツRV CREA[jp539]やレクサスLSコンセプトの回転対面シート[jp536]が注目。**ディスプレイ保護フィルム**の採用[jp533]は、耐久性と見た目の美しさを両立させる傾向。素材・機能の両面で**差別化が求められる**。",
+            cn: "中国市場ではAI体験の深化と固形電池の実用化が進む[cn379]。长安の「金鐘罩」電池は航続距離1500kmを実現し、内装の耐久性と快適性に期待が高まっている[cn379]。BYDの急速充電器は「1秒2km」の充電速度を実現し、EVインフラの充実が加速中[cn378,cn382]。また、蔚来やXPengが海外展開を加速し、グローバルな内装デザインの多様化が求められている[cn383,cn384]。スマートコントロールと安全機能の統合が新たな差別化ポイントとなる[cn380,cn381]。",
+            in: "インド市場では規制対応とサプライチェーン強化が内装業界の主戦場[in398]。TennecoがBS-VII規制に対応し、新素材と低コスト設計を重視[in398]。ボルボのバッテリー回収事件はEVリスクを浮き彫りにし、ガソリン車の感情的体験が顧客ニーズとして残る[in399]。ラダーフレームやG-Wagonデザインの継続性は、高級感の持続を意味する[in403]。Forviaの内装事業売却は、コスト削減と技術転換の流れを示す[in396]。素材、規制、感情体験の3軸が今後の開発に影響[in398,in399,in403]。",
+            us: "アメリカ市場ではEVの安全性問題（Volvo EX30回収）[us346]と高級SUVの実用性重視（BMW X1）[us348]がトレンド。AR技術（ロータスEmira）[us342]とカスタマイズ内装（リンカーンMark IV）[us345]も注目。燃費と快適性の両立（Lexus RX350h）[us350]が消費者の選択基準。内装開発では耐久性・低コスト（IS350）[us349]とAR連動UI（Stellantis Corsa GSE）[us343]の融合が求められる。",
+            eu: "欧州市場では**EV普及**と**コスト効率**が焦点で、Vauxhall Corsa GSEやLepas L8が日常使いに適した価格帯を提供[eu320,eu318]。**HMI**の進化が進む中、Vauxhallは**スポーツ性能**と**操作性**を強調[eu320]。**内装**面ではLepas L8の**デザイン**と**素材**が注目[eu318,eu323]。軍需分野の**AI**や**AR**技術の流入は、**安全**と**快適性**の両立を促す可能性[eu319]。素材面では**軽量化**と**耐久性**が求められる[eu319,eu322]。",
+        },
+        ideas: {
+            jp: [
+                { id: 419, img: "images/idea_419.png", title: "温感調節・抗菌モジュールシート「Sensitouch」", desc: "内装に埋め込む温感素材で、体温に応じて自動で座面温度を最適化。抗菌加工により、長時間の使用でも快適・清潔な体感。家族やペットとの共同利用でも安心。冬場の暖かさと夏の涼しさを「まるで肌に寄り添うように」感じられる。", imagePrompt: "Smart temperature-adjusting antibacterial seat module integrated into luxury car interior, subtle glowing texture on seat surface, wood grain and leather accents, warm ambient lighting, photorealistic 3D render, cinematic view from passenger side" },
+                { id: 420, img: "images/idea_420.png", title: "AR対応・マルチモードディスプレイ「AR-View Pro」", desc: "AR技術を搭載したディスプレイで、運転中の情報は視界に自然に重ねて表示。親子や家族での移動でも、子ども向けの絵本やゲームモードに切り替わる。親子で「一緒に見て、一緒に遊べる」新しいドライブ体験。", imagePrompt: "Augmented reality display with child-friendly interface overlaying dashboard, holographic icons floating above steering wheel, soft pastel colors, family-oriented UI with cartoon characters, photorealistic 3D render, daylight scene inside car" },
+            ],
+            cn: [
+                { id: 421, img: "images/idea_421.png", title: "AI体験マスター・マルチモードコントロールパネル", desc: "AIアシスタントが車内を「第三空間」のように操作可能。操作を「言葉・視覚・触覚」で選択し、運転中のストレスを軽減。**快適さと操作性の両立**で、ユーザーが「もう一度乗る」と感じるほど楽しい体験を提供。素材は**高耐久性のソフトタッチ素材**で、指紋や汚れに強い。", imagePrompt: "AI-powered multi-mode control panel with holographic interface, futuristic car interior, touch-sensitive surface, ambient lighting, brushed aluminum frame, modern dashboard, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 422, img: "images/idea_422.png", title: "光触媒抗菌内装パネル「清風」", desc: "車内空間を**自然の風**のように清潔に保つ光触媒素材。**抗菌・消臭・空気浄化**を1つのパネルで実現。長時間のドライビングでも安心・快適。特に**子供やペットのいる家庭**向けに、**安心感と清潔感**を強調。色は**柔らかいブルー・ホワイト系**で、リラックス効果を最大化。", imagePrompt: "Photocatalytic antibacterial interior panel with air purification function, car dashboard design, light blue and white color scheme, sleek modern texture, integrated into car interior, photorealistic 3D render, soft ambient glow, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 423, img: "images/idea_423.png", title: "ラダーフレーム・エコロジックマット", desc: "ラダーフレーム構造を活かした軽量マットで、**自然素材**（コルク・シルク混紡）と**モジュール式**設計。**メンテナンス不要**で、**香りの変化**や**色のカスタム**が可能。**足元の快適さ**と**環境への配慮**を両立。価格は低めで、**日常の心地よさ**を提供。", imagePrompt: "Eco-friendly modular car floor mat with cork and silk blend, ladder frame structure integrated, natural earth tones, subtle aroma diffuser texture, photorealistic 3D render, cinematic lighting, premium automotive interior design" },
+                { id: 424, img: "images/idea_424.png", title: "感情モード・マルチセンサーパネル", desc: "内装に搭載される**感情モード**パネル。**顔認識**と**心拍センサー**で、**ドライバーの状態**に応じて**照明・音楽・香り**を自動調整。**感情の安定**を促し、**運転の安心感**を高める。**遊び心のあるUI**で、**日常の快適さ**を演出。**高級感と親しみやすさ**の両立。", imagePrompt: "Emotional mode dashboard panel with facial recognition and heart rate sensors, adaptive lighting and scent system, futuristic cockpit design, soft ambient glow, blue and gold accent lighting, photorealistic 3D render, cinematic lighting" },
+            ],
+            us: [
+                { id: 425, img: "images/idea_425.png", title: "Duraflex モジュラーマイクロファイバー内装パネル", desc: "耐熱・耐衝撃性を備えたマイクロファイバー素材で、高級車の内装を長期使用でも美しさを保つ。リサイクル素材使用で環境負荷を抑え、メンテナンスコスト削減。手触りの快適さと、**低コスト長期保有**の安心感を提供。洗濯機で洗える機能も搭載。", imagePrompt: "Modular microfiber interior panel with durable texture, automotive cabin design, eco-friendly recycled material, gray and beige tones, seamless integration with dashboard and door trims, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+                { id: 426, img: "images/idea_426.png", title: "ARSync デジタルラジオ・モニタリングハンドル", desc: "ハンドルに内蔵されたAR機能で、ドライバーの視界にナビゲーションや車両状態を投影。**誤操作防止**（ウイスキー・スロットル[jp344]）と**直感操作**（BMW X1[jp348]）を実現。音声アシスタントとの連携でストレスフリー運転。視界に映る情報が「**安心感と未来感**」を同時に演出。", imagePrompt: "AR-enabled steering wheel with holographic display, modern car interior, blue ambient lighting, digital radio interface projected on windshield, sleek metallic finish, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 427, img: "images/idea_427.png", title: "軽量カーボン・高耐熱内装パネル「CarbonHeat」", desc: "F355やLepas L8向けに開発した**カーボン複合素材**の内装パネル。熱伝導性を活かし、**高速走行時の熱管理**を実現。**高耐熱・軽量化**で、**快適な乗り心地**と**安全性**を両立。**スポーツモデル**に最適で、**高級感**と**機能性**を兼ね備えた「**熱を逃がすデザイン**」がうれしい。", imagePrompt: "Carbon fiber composite interior panel with heat dissipation vents, luxury sports car cockpit, matte black and carbon weave texture, ambient red lighting, photorealistic 3D render, high detail, cinematic lighting, 4K quality" },
+                { id: 428, img: "images/idea_428.png", title: "AI快適空間モード「AuraSync」", desc: "**AIが自動で室内温度・照明・空気質を最適化**するモード。**HMI**と**センサー**を統合し、**運転者の快適性**を最優先。**Lepas L8**や**Corsa GSE**向けに開発。**音楽・香り・照明**を連動させ、**リラックス空間**を自動生成。**日常使いでも安心**で、**快適な移動体験**がうれしい。", imagePrompt: "AI-controlled ambient lighting and climate system in modern vehicle interior, glowing blue and warm white LEDs, floating digital interface on dashboard, soft leather seats, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-23",
         analysis: {
             jp: "日本の自動車内装は高級感と機能性の両立が求められ、HMIの進化と素材の革新がトレンド[jp529]。特に本革シートやワイヤレス充電器の標準化が「ラグジュアリー感」を高めている[jp529]。また、AI体験融合やスマホ化の動き[jp531]は、ユーザーの「乗り味」や「使い勝手」を個別化する方向性を示す。再生アルミ素材や抗菌モジュールの需要も高まっている[jp530]。競合はプラットフォーム統合やデザインの多様化で差別化しており、規制・政策の影響も顕著[jp523]。内装開発では、持続可能な素材とAI連携の体験設計が重要[jp530]。",
