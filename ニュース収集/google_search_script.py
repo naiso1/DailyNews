@@ -19,6 +19,7 @@ from collections import Counter
 import math
 import re
 import base64
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from io import BytesIO
 
@@ -275,6 +276,20 @@ def extract_image_from_rss(entry):
         uniq.append(c)
     uniq.sort(key=rank_image_url, reverse=True)
     return uniq[0]
+
+def extract_item_image_map_from_rss_xml(xml_bytes):
+    """Extract <item><link>/<image> pairs from RSS XML (Yahoo media feeds use this pattern)."""
+    mapping = {}
+    try:
+        root = ET.fromstring(xml_bytes)
+        for item in root.findall(".//item"):
+            link = (item.findtext("link") or "").strip()
+            image = (item.findtext("image") or "").strip()
+            if link and image:
+                mapping[link] = image.replace("&amp;", "&")
+    except Exception:
+        pass
+    return mapping
 
 def is_target_date(pub_date, target_dates):
     if not target_dates:
@@ -1624,6 +1639,7 @@ def fetch_from_rss(target_dates):
             
             if response and response.status_code == 200:
                 feed = feedparser.parse(response.content)
+                rss_item_image_map = extract_item_image_map_from_rss_xml(response.content)
                 count = 0
                 
                 for entry in feed.entries:
@@ -1644,8 +1660,9 @@ def fetch_from_rss(target_dates):
                     if not desc and resolved_link:
                         desc = fetch_meta_description(resolved_link)
                     # ??URL?RSS?????
-                    image_url = extract_image_from_rss(entry)
-                    if image_url and "yimg.jp" in str(image_url).lower():
+                    image_url_from_item = rss_item_image_map.get(link, "")
+                    image_url = image_url_from_item or extract_image_from_rss(entry)
+                    if (not image_url_from_item) and image_url and "yimg.jp" in str(image_url).lower():
                         image_url = choose_best_yimg_variant(image_url)
                     if is_missing_url(image_url):
                         image_url = fetch_image_from_page(resolved_link) if resolved_link else ""

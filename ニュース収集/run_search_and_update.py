@@ -1,6 +1,7 @@
 import datetime
 import os
 import re
+import subprocess
 from pathlib import Path
 from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT
 import signal
@@ -42,7 +43,7 @@ def latest_news_date():
     return max(dates) if dates else None
 
 
-def run_cmd(cmd, label, log_file):
+def run_cmd(cmd, label, log_file, cwd=None):
     log(f"[RUN] {label}: {' '.join(cmd)}")
     proc = None
     try:
@@ -59,6 +60,7 @@ def run_cmd(cmd, label, log_file):
                 errors="replace",
                 bufsize=1,
                 env=env,
+                cwd=str(cwd) if cwd else None,
             )
         except Exception as e:
             log(f"[ERROR] {label} failed to start: {type(e).__name__}: {e}")
@@ -84,6 +86,75 @@ def run_cmd(cmd, label, log_file):
         except Exception:
             pass
         raise
+
+
+def run_git_sync(log_file):
+    # Default ON (set AUTO_GIT_SYNC=0 to disable)
+    if os.environ.get("AUTO_GIT_SYNC", "1").strip().lower() in {"0", "false", "no"}:
+        log("[INFO] AUTO_GIT_SYNC disabled; skip git commit/push.")
+        return
+
+    # Avoid self-dirtying the repo by excluding volatile runtime files.
+    pathspecs = [
+        ".",
+        ":(exclude)ニュース収集/logs/*",
+        ":(exclude)ニュース収集/__pycache__/*",
+        ":(exclude)**/__pycache__/*",
+    ]
+
+    status_cmd = ["git", "status", "--porcelain", "--", *pathspecs]
+    log(f"[RUN] git_status: {' '.join(status_cmd)}")
+    st = subprocess.run(
+        status_cmd,
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if st.returncode != 0:
+        if st.stdout:
+            for line in st.stdout.splitlines():
+                if line.strip():
+                    log(f"[git_status] {line}")
+        if st.stderr:
+            for line in st.stderr.splitlines():
+                if line.strip():
+                    log(f"[git_status] {line}")
+        raise CalledProcessError(st.returncode, status_cmd)
+
+    if st.stdout:
+        for line in st.stdout.splitlines():
+            if line.strip():
+                log(f"[git_status] {line}")
+    if not st.stdout.strip():
+        log("[INFO] No git changes to commit/push.")
+        return
+
+    run_cmd(["git", "add", "-A", "--", *pathspecs], "git_add", log_file, cwd=ROOT)
+
+    diff_cmd = ["git", "diff", "--cached", "--quiet"]
+    diff_rc = subprocess.run(diff_cmd, cwd=str(ROOT)).returncode
+    if diff_rc == 0:
+        log("[INFO] No staged changes after filtered git add.")
+        return
+    if diff_rc not in (0, 1):
+        raise CalledProcessError(diff_rc, diff_cmd)
+
+    branch_cmd = ["git", "branch", "--show-current"]
+    branch_cp = subprocess.run(
+        branch_cmd,
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=True,
+    )
+    branch = branch_cp.stdout.strip() or "main"
+    msg = f"Auto update daily news ({datetime.date.today().isoformat()})"
+    run_cmd(["git", "commit", "-m", msg], "git_commit", log_file, cwd=ROOT)
+    run_cmd(["git", "push", "origin", branch], "git_push", log_file, cwd=ROOT)
 
 
 def main():
@@ -130,6 +201,7 @@ def main():
                 )
             else:
                 log("[WARN] OPENAI_API_KEY not set; skip OpenAI image generation.")
+            run_git_sync(LOG_FILE)
         except KeyboardInterrupt:
             log("[INFO] Interrupted by user.")
             return
