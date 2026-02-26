@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-02-26",
+        analysis: {
+            jp: "日本の自動車内装市場では、**快適性**と**静粛性**が強調され、**Google搭載Honda CONNECT**の標準化が進む中、**樹脂パーツのチープ感**がユーザーの不満点として浮上[jp556]。一方、**カスタマイズアイテム**の発売[jp553]や**GRエアロパーツ**の導入[jp554]は、**高機能性**と**パーソナライズ**の需要が高まっている。また、**センシング360**や**SNOWモード**の標準搭載[jp561]は、**安全性**と**操縦性**の進化を示す。今後の開発では、**高質感素材**と**スマート機能の統合**が鍵となる。",
+            cn: "中国市場では新素材と低価格戦略が主流[cn404,cn399]。竹素材の活用が環境志向の内装革新を示し[cn404]、700Wh/kgの電解液開発は電池性能の向上に繋がる[cn398]。価格戦の激化で、コストパフォーマンス重視の内装が求められる[cn399,cn401]。延鋒座椅の新工場稼働は生産力強化を意味し[cn402]、AR内装の実装が次世代UIの土台となる[cn402]。自社開発では、持続可能な素材とAI連動の快適性制御を軸に[cn404]、コストと環境性能を両立させる製品が重要[cn404,cn398]。",
+            in: "インド市場ではガソリン車の復活と高級セキュリティ車両の需要が高まっている[in416,in418]。アウディA8 L Securityの装甲ボディやポルシェK1のV8搭載は、高級感と安全性を重視する層に訴求[in416,in418]。一方、パワードテールゲートやマルチユースEVの普及は、実用性とコストパフォーマンスのバランスが重要視されている[in417,in420]。内装面では快適シートと新素材の導入がトレンド[in423]。日本企業は、耐久性と快適性を両立する素材開発、家族向けの実用性を強調するUI設計を軸に、インド市場にアピールすべき[in424,in419]。",
+            us: "US市場ではEV普及が加速し、ハイブリッド車もシェア低下中 [us361]。Pleosシステム搭載車やAR機能の導入が進む中、高級感と信頼性の重要性が再認識 [us363]。リサイクル素材や天然木の再評価も見られ、過去の高級内装の質感が現代のデジタル重視内装に新風をもたらす [us367]。サンバイザーの不具合など、ユーザー体験の細部がブランド評価に直結する [us364]。BaaS価格戦略はコスト競争力に加え、内装の快適性とデザイン性を強化する必要性が高まる [us370]。",
+            eu: "EU市場では高級素材とHMI革新が主流 [eu335,eu337]。Cupra Bornの新内装はTerramarを参考にしたデザインで、高級感を強調 [eu335]。Porsche K1とAudi Q9の共同開発はプラットフォーム共有によるコスト削減を狙う [eu337,eu340]。Volvo EX30のWLTP476kmは充電効率重視の傾向 [eu344,eu340]。AR技術はBella Fine ArtやSalient Motionの提携で応用 [eu342,eu343]。中国ブランドの進出はHMI競争を激化させる [eu336]。",
+        },
+        ideas: {
+            jp: [
+                { id: 439, img: "images/idea_439.png", title: "高質感再生アルミ・抗菌モジュールパネル「ReNewLux」", desc: "内装の樹脂パーツ不満を解決。再生アルミと抗菌素材で高級感と清潔感を実現。カスタム可能で、車の個性を反映。乗り心地と見た目を両立させる「**うれしさ**」は、見た目だけでなく、**手触りの質感**と**香りのない安心感**。", imagePrompt: "Premium automotive interior panel with brushed aluminum and antibacterial finish, modular design, sleek minimalist aesthetic, warm ambient lighting, photorealistic 3D render, luxury car cockpit, high detail, 4K quality" },
+                { id: 440, img: "images/idea_440.png", title: "AI音声対話型「コネクト・コクピット」スマートモジュール", desc: "Google搭載Honda CONNECTの進化。音声で操作できるマルチモードディスプレイ。運転中の視界を確保しつつ、**AIが会話する**快適さ。**「助手の声」が心地よい**という**うれしさ**を提供。操作が簡単で、**目線を車外に向けられる**安心感。", imagePrompt: "Augmented reality smart module integrated into car dashboard, AI voice assistant interface, holographic display, futuristic cockpit design, soft ambient lighting, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 441, img: "images/idea_441.png", title: "竹繊維・光触媒内装パネル「自然の呼吸」", desc: "竹素材で作られた内装パネルに、光触媒機能を組み合わせ。車内を自然の風を感じさせるように清浄化し、**快適さと環境配慮を両立**。竹の温かみと光触媒の抗菌効果で、**乗り心地の質感と安心感**を提供。中国市場で注目される**持続可能な素材**に応える。", imagePrompt: "Bamboo fiber interior panel with photocatalytic coating, automotive cabin design, natural wood texture and subtle antibacterial glow, warm ambient lighting, green and earthy tones, photorealistic rendering, high detail, 4K quality" },
+                { id: 442, img: "images/idea_442.png", title: "AI連動快適性モード「気分に合わせる」", desc: "乗員の体調や気分に応じて、**AIが自動で温度・照明・香りを調整**。**700Wh/kgの高性能バッテリー**と連動し、**長時間の快適ドライブを実現**。**低価格戦略**に対応したコスト効率設計で、**日常のドライブをより心地よい体験**に。ユーザーの**心の快適さ**を最優先に設計。", imagePrompt: "AI-controlled comfort system with ambient lighting, temperature adjustment, and scent diffusion, futuristic vehicle cockpit, holographic interface, soft blue and white color scheme, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 443, img: "images/idea_443.png", title: "アーマード・コンフォートシート：装甲級快適性", desc: "高強度VR9装甲素材を内装に採用し、衝撃吸収と静粛性を実現。座面は高密度フォームで長時間運転も疲れにくい。インドの高級車市場向けに「安全×快適」を訴求。家族の安心とドライバーの快適さが両立する、**装甲級の乗り心地**を提供。", imagePrompt: "Armored car seat with VR9 armor material, high-density foam cushion, luxury interior design, brushed aluminum trim, ambient blue lighting, photorealistic 3D render, cinematic lighting, premium automotive interior" },
+                { id: 444, img: "images/idea_444.png", title: "ファミリー・マルチモードディスプレイ：親子で楽しめるナビ", desc: "子供向けのカラフルなUIと大人向けのナビゲーションを1画面で切り替え可能なディスプレイ。座席の傾きや温度を自動調整し、家族全員の快適性を最適化。**親子で楽しめる操作性**と、**家族の安全をサポートする機能**が魅力。インドの家族向け実用車市場に強い訴求力。", imagePrompt: "Family-friendly multi-mode display with colorful child interface and navigation mode, mounted on car dashboard, adjustable seat angle visualization, warm ambient lighting, photorealistic 3D render, cinematic lighting, premium automotive interior" },
+            ],
+            us: [
+                { id: 445, img: "images/idea_445.png", title: "RetroLux モジュラーナチュラルウッドパネル", desc: "天然木とリサイクル素材のハイブリッドパネルで、**温かみと質感**を提供。**レクサスLSのクラシックデザイン**を現代化し、**高級感と信頼性**をユーザーに届ける。**組み換え可能**で、**カスタマイズ**も可能。**木の風合い**と**ナチュラルな色合い**で、**目を楽しませ、心を落ち着かせる**。", imagePrompt: "Modular natural wood panel with recycled material texture, luxury car interior, warm wood grain finish, ambient lighting, minimalist design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 446, img: "images/idea_446.png", title: "ARSync ライフサイクルモード・シートマネージャー", desc: "**AR表示**で座席の**使用状況・快適性**をリアルタイムに可視化。**10年ぶりのレクサスLS**の**質感と快適性**を**デジタル体験**に落とし込む。**座席の位置・温度・圧力**を**AIが最適化**し、**ユーザーの好みに合わせて自動調整**。**乗り心地と快適性**の両立で、**「これでいい」**という安心感を提供。", imagePrompt: "AR interface displaying seat comfort metrics in luxury car, holographic visualization above seat, digital dashboard integration, futuristic cockpit design, blue ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 447, img: "images/idea_447.png", title: "モジュラーライフスタイル座席「ModuFlex」", desc: "座席をカスタマイズ可能にした革新的ユニット。快適性とデザインを自由に調整できる**高級素材**と**ソフトウェア定義型アクチュエータ**を採用[jp343]。車内空間を自分だけの理想にカスタムし、**旅の終わりまでずっと心地よい**。", imagePrompt: "Modular luxury car seat with customizable upholstery and adjustable lumbar support, sleek carbon fiber frame, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 448, img: "images/idea_448.png", title: "感情応答型ナビゲーション「FeelRoute」", desc: "ドライバーの**感情状態**をリアルタイムで認識し、最適なルートや音楽、温度を提案する**AI快適空間モード**。**AR感情応答**機能で、運転中のストレスを軽減[jp342]。**目的地に到着するとき、いつもより心地よく**。", imagePrompt: "Augmented reality navigation system with emotional feedback interface, floating holographic map above dashboard, soft blue ambient lighting, futuristic vehicle cockpit, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-25",
         analysis: {
             jp: "日本市場ではカスタマイズと実用性が重視され、木目内装やメッキエアロといった昭和風デザインが人気[jp547,jp548]。一方、EVと安全性能の両立が求められ、断熱パネルや超急速充電の実装が進む[jp543,jp547]。ARやAIアシスタントの導入も加速し、TSS/LSSの性能向上が実現[jp550]。再生アルミや抗菌素材の内装部品の需要も高まり[jp551]。自社はカスタムと持続可能性を軸に、ハイブリッド×EV両対応のモジュール式内装を提案すべき[jp547,jp551]。",
