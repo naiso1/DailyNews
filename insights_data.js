@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-01",
+        analysis: {
+            jp: "日本の内装市場は素材の革新と機能性強化がトレンド。自然由来成分[jp565]や消臭機能[jp566]の普及で、快適性と環境配慮が重視されている。また、HMIの進化も目立つ（Google対応ディスプレイ[jp571]）が、安全機能の標準装備[jp564]も重要な課題。過去のデザイン[jp568]やカスタマイズ要素[jp570]が再評価され、レトロ・モダン融合の可能性が浮上。内装製品開発では、抗菌・消臭機能とスマート連携を両立させた製品が差別化の鍵。",
+            cn: "中国市場ではAIアシスタントとHUDの実用化が進み、スマートシートの体験価値が競争要素となりつつある[cn413]。新素材への関心が高まり、健康性能（臭気対策）が購買判断に影響する[cn411]。素材、AI、HUDの動向を踏まえ、内装開発は「快適性」と「健康性」を両立させる必要がある[cn413,cn411]。",
+            in: "インド市場ではAR HUDと高級音響がマヒンドラXEV 9e Cineluxeに搭載され、EVのラグジュアリー化が加速中[in426,in430]。レトロデザインの現代再解釈もタタ・モーターズで見られ、文化的なデザイン軸が重要[in428]。サプライチェーンの拡大（Carraro Indiaの投資）でEV内装部品の供給力が強化[in434]。AIとディスプレイの進化は、ユーザー体験の質を高める[in432]。日本企業はAR技術の応用と文化的デザイン要素を活かした内装開発で差別化を図るべき[in428,in432]。",
+            us: "TPMSの位置追跡が安全リスクとなりつつある[us371]。新素材としてSunbrella®やEnduratex™が主流[us374]。物理操作が好まれる傾向[us375]。カスタマイズが主流化[us377]。AI音響と高級感が重視[us379]。内装開発ではセキュリティ対策と物理操作の再導入[us375]、耐久素材[us374]、カスタムテーマ[us377]、高級感演出[us379]を軸にすべき。",
+            eu: "物理ボタンの復活が欧州の内装トレンドとして浮上中。フェラーリ・Domus 1109やRenault Megane Coupeの例から、人間工学と操作直感性が重視される [eu345,eu346]。 V2L機能やOTA更新の導入は、電気自動車の利便性を高めるが、ユーザーの操作権限を尊重する設計が求められる [eu349,eu351]。 クラシックボタンの復活は、安心感と信頼性を提供する [eu351]。 素材面では、コスト削減と耐久性を両立する再生素材が注目 [eu347]。 EU市場では、規制と安全基準がデザインに強く影響しており、シンプルで直感的な内装が主流 [eu347,eu354]。 自社開発への示唆：物理ボタンの再設計と再生素材の導入を検討 [eu347,eu354]。",
+        },
+        ideas: {
+            jp: [
+                { id: 449, img: "images/idea_449.png", title: "抗菌・消臭機能搭載「エア・フォレスト」モジュールパネル", desc: "自然由来成分[jp565]を採用した抗菌・消臭機能を内蔵。木目調と再生アルミ素材で、車内空間を「森の風」のようにリフレッシュ。ドライバーと乗員の健康を守りつつ、香りで気分をリフレッシュ。快適性と安心感を両立した、新感覚の内装パネル。", imagePrompt: "Antibacterial and deodorizing module panel with forest-inspired design, wood grain texture and recycled aluminum finish, natural scent diffusion system, modern car interior, soft green ambient lighting, photorealistic 3D render, premium automotive design" },
+                { id: 450, img: "images/idea_450.png", title: "AI音声対話型「コネクト・コクピット」スマートモジュール", desc: "Google対応ディスプレイ[jp571]と連携し、音声で目的地や楽曲を操作。車内を「スマートな空間」に。安全運転をサポートするナビゲーションと、快適性を高める環境調整機能を搭載。運転中のストレスを軽減し、楽しいドライブ体験を提供。", imagePrompt: "AI voice assistant module with holographic interface floating above dashboard, modern car cockpit design, glowing blue accent lighting, voice control panel with touch-sensitive buttons, photorealistic 3D render, cinematic lighting, high detail" },
+            ],
+            cn: [
+                { id: 451, img: "images/idea_451.png", title: "光触媒抗菌+香り調整フロアマット「心地の風」", desc: "フロアマットに光触媒素材を採用し、車内空気を浄化。さらにAI連動で香りを自動調整し、快適な空間を提供。臭気[jn411]への対応で安心感と快適さを両立。車内が「心地よい風」に包まれる喜び。", imagePrompt: "Photorealistic render of a car floor mat with photocatalytic surface and subtle aroma diffuser vents, integrated with AI control interface, soft ambient lighting, luxury car interior, leather and carbon fiber materials, cinematic lighting, 4K quality" },
+                { id: 452, img: "images/idea_452.png", title: "AI音響体験シート「音楽の寝床」", desc: "AIが運転者の好みに合わせて、座席の音響環境を自動調整。低周波でリラックス、高周波で集中、サウンドを「寝床」のように包み込む。極狐S5の音響[jn412]を参考に、音楽体験を快適に。音楽で心を癒す喜び。", imagePrompt: "Luxury car seat with embedded AI audio system, holographic sound visualization, ambient lighting effects, modern vehicle cockpit, leather upholstery with glowing control interface, cinematic lighting, photorealistic 3D render, 4K quality" },
+            ],
+            in: [
+                { id: 453, img: "images/idea_453.png", title: "ラグジュアリー・AR音響コクピット", desc: "AR HUDとHarman Kardon音響を統合し、ドライバーに「音楽と映像が車内空間に溶け込む」体験を提供。**文化的なデザイン軸**を活かし、インドの音楽文化を反映したサウンドパッケージを用意。**高級感と楽しさ**を両立させ、**サプライチェーンの強化**を背景にした価格帯で展開。", imagePrompt: "Luxury automotive cockpit with integrated AR HUD and Harman Kardon sound system, ambient lighting with Indian music motifs, brushed aluminum and leather interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 454, img: "images/idea_454.png", title: "モジュラーレトロ・マルチモードディスプレイ", desc: "PorscheやVWのデザインを参考にしつつ、**文化的なデザイン軸**を反映したレトロモードとモダンモードを切り替え可能なディスプレイ。**ユーザーの感情に応じたUI変更**を可能にし、**親しみやすさと機能性**を両立。**高級感と遊び心**を兼ね備えた**新感覚の操作体験**を提供。", imagePrompt: "Retro-modern modular display in luxury car interior, switchable UI modes with Indian cultural motifs, ambient lighting, wood and metallic finish, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 455, img: "images/idea_455.png", title: "SecureTouch フィジカル・セキュリティタッチパネル", desc: "TPMS追跡リスクに対応する**物理操作中心のタッチパネル**。セキュリティモードで無線信号遮断、操作ボタンは耐久素材で作成。ユーザーに「安全な操作」を実感させる。高級感のあるマット調デザインで、**カスタムテーマ**対応可能。", imagePrompt: "SecureTouch physical security touchscreen panel, automotive interior design, brushed metal and matte black finish, integrated security lock button, cinematic lighting, photorealistic 3D render, premium automotive design" },
+                { id: 456, img: "images/idea_dummy.svg", title: "ChromaCool エコマット調レザー内装パネル", desc: "**新素材**ChromaCool™テクノロジーを採用した**マット調レザー**。深色で高級感を演出し、**耐久性**と**快適性**を両立。**清掃容易**で、**ペットや家族**にも安心。見た目も使い勝手も「うれしい」高級感内装。", imagePrompt: "ChromaCool eco-matte leather interior panel, automotive design, deep blue color, soft texture, luxury car cockpit, cinematic lighting, photorealistic 3D render, premium automotive design" },
+            ],
+            eu: [
+                { id: 457, img: "images/idea_dummy.svg", title: "クラシック・タッチ・エコパネル「ClassicEco」", desc: "レトロな金属ボタンと再生アルミ素材で構成されたコンソールパネル。操作の安心感と環境負荷の低減を両立。ボタンは耐久性と触感でユーザーの信頼を獲得。車内に「**安心した操作**」と「**地球への配慮**」を届ける。価格は通常製品の30%割引。素材はリサイクルアルミで、**環境配慮型**設計。", imagePrompt: "Classic touch eco panel with retro metal buttons and recycled aluminum material, automotive interior design, minimalist dashboard with vintage aesthetics, warm metallic finish, soft ambient lighting, photorealistic 3D render, premium automotive design" },
+                { id: 458, img: "images/idea_dummy.svg", title: "AI快適空間モード「AuraSync+」", desc: "ユーザーの好みに応じて自動で内装環境を調整するAIモード。空気質、照明、温度を最適化。**快適性**と**個性化**を両立。ボタン操作も可能で、**直感性**と**自由度**を提供。ユーザーが「**快適に過ごせる**」と感じられる体験を提供。価格は通常製品の20%割引。AIはOTAで最新化可能。", imagePrompt: "AI comfort mode AuraSync+ with ambient lighting, temperature control, and air quality adjustment, modern vehicle cockpit with holographic interface, blue and white color scheme, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-02-26",
         analysis: {
             jp: "日本の自動車内装市場では、**快適性**と**静粛性**が強調され、**Google搭載Honda CONNECT**の標準化が進む中、**樹脂パーツのチープ感**がユーザーの不満点として浮上[jp556]。一方、**カスタマイズアイテム**の発売[jp553]や**GRエアロパーツ**の導入[jp554]は、**高機能性**と**パーソナライズ**の需要が高まっている。また、**センシング360**や**SNOWモード**の標準搭載[jp561]は、**安全性**と**操縦性**の進化を示す。今後の開発では、**高質感素材**と**スマート機能の統合**が鍵となる。",
