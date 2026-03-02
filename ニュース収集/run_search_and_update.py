@@ -183,24 +183,28 @@ def main():
             google_search_script = get_google_search_entrypoint()
             run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
             run_cmd([sys.executable, "-u", str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
-            if os.environ.get("OPENAI_API_KEY"):
-                image_quality = os.environ.get("OPENAI_IMAGE_QUALITY", "high").strip().lower() or "high"
-                if image_quality not in {"low", "medium", "high"}:
-                    image_quality = "high"
+            if os.environ.get("GEMINI_API_KEY"):
+                gemini_model = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-preview").strip() or "gemini-3.1-flash-image-preview"
+                gemini_image_size = os.environ.get("GEMINI_IMAGE_SIZE", "512px").strip() or "512px"
+                gemini_aspect_ratio = os.environ.get("GEMINI_IMAGE_ASPECT_RATIO", "1:1").strip() or "1:1"
                 run_cmd(
                     [
                         sys.executable,
                         "-u",
-                        str(ROOT / "generate_idea_images_openai.py"),
+                        str(ROOT / "generate_idea_images_gemini.py"),
                         "--only-missing",
-                        "--quality",
-                        image_quality,
+                        "--model",
+                        gemini_model,
+                        "--image-size",
+                        gemini_image_size,
+                        "--aspect-ratio",
+                        gemini_aspect_ratio,
                     ],
-                    "generate_idea_images_openai",
+                    "generate_idea_images_gemini",
                     LOG_FILE,
                 )
             else:
-                log("[WARN] OPENAI_API_KEY not set; skip OpenAI image generation.")
+                log("[WARN] GEMINI_API_KEY not set; skip Gemini image generation.")
             run_git_sync(LOG_FILE)
         except KeyboardInterrupt:
             log("[INFO] Interrupted by user.")
