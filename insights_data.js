@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-02",
+        analysis: {
+            jp: "日本の内装市場はAIと素材革新が加速中。アントリンのAI開発短縮[jp579]は生産効率を飛躍的に向上。再生アルミや抗菌素材の応用[jp574]はカスタマイズ性と実用性を両立。フェラーリのミニマルデザイン[jp578]は高級感とデジタル融合を示唆。音響[jp575]・EV[jp572]の進化も内装に影響。自社開発ではAI対応と持続可能素材の両立が鍵。",
+            cn: "中国市場ではAIとEVの融合が進み、L3自動運転や800V電気システムが主流化中[cn420]。スマートシートと4D体験が注目され、音響・光・電気の統合がトレンド[cn424]。気氛灯の特許化も進み、コスト削減型LEDが普及傾向[cn421]。座舱チップ市場では芯驰科技がシェアを拡大し、AI駆動のインタラクションが深まっている[cn425]。素材面では光触媒や竹繊維の自然素材が注目され、快適性と健康志向が強調されている。",
+            in: "インド市場では高級MPVの復帰とAR・AI要素の浸透が進んでおり、通風シートやバーメスター音響が主流の快適性要件となっている[in436][in438]。EVとHMIの進化も加速し、マルチモードディスプレイや音響統合が求められる[in436]。競合はトヨタやマヒンドラで、価格競争と機能強化が鍵[in436][in441]。素材はレザーとアルミニウムの高級感が主流だが、通気性と冷却機能の素材革新が期待される[in436][in443]。サプライチェーンはローカル生産が主流だが、EV部品の供給リスクが浮上[in440]。内装開発への示唆：スマート通気シートと音響・AR統合パネルの開発が最優先[in438][in445]。素材は冷却性素材と柔軟性を重視[in436][in443]。",
+            us: "US市場ではEV車の内装デザインが「SUBARUらしい」独自性を重視しており、[us384,us385]。HMIの統合と新素材（青レザー、木調）がトレンドで、[us383]。BMW M5はiX3のディスプレイを採用し、HUDの普及が進む。[us383]。一方、AIの誤認識事故（Lynk & Co）は安全基準強化の必要性を浮き彫りにした。[us388]。充電インフラ（東大開発のベンチサイズ充電台）も実用化の兆し。[us389]。開発上ではユーザーエクスペリエンスの直感性と安全性の両立が求められる。",
+            eu: "EU市場ではAIデザイン支援が進み[eu361]、RExEVの導入が議論され[eu359]。高級車の内装寿命短縮問題が顕在化[eu363]。EVプラットフォームの成熟とHMI機能の多様化が進む中、耐久性と快適性の両立が求められる。素材のリサイクル性や低空力設計が注目[eu364]。開発の示唆：AIと人間の協働設計を活用し、高耐熱・軽量素材を内装に導入[eu361]。また、快適性と長寿命を両立させるモジュラー内装システムの開発が有効[eu363]。",
+        },
+        ideas: {
+            jp: [
+                { id: 459, img: "images/idea_459.png", title: "AI音響マッピング「SoundSync」", desc: "AIが車内音響をリアルタイムで最適化するモジュール。乗員の好みや環境に応じて音質・ボリュームを調整。音楽や通話の「**音の質感が変わる**」体験で、日常のドライブを**心地よく**する。素材は再生アルミと抗菌合成樹脂[jp574]。", imagePrompt: "AI-powered sound mapping system in premium car interior, dynamic audio visualization with ambient lighting, brushed aluminum and eco-friendly composite materials, futuristic yet cozy cockpit design, cinematic lighting, photorealistic 3D render" },
+                { id: 460, img: "images/idea_460.png", title: "再生アルミカスタムパネル「EcoLuxe」", desc: "車内壁面に貼る再生アルミパネル。**カスタマイズ**と**耐久性**を両立。色や模様を自由にカスタム可能。**触れた瞬間、温かさと質感が伝わる**。環境配慮型で、**毎日使う車内を「おしゃれで安心」に**。素材は再生アルミ[jp574]と抗菌樹脂。", imagePrompt: "Customizable eco-luxury aluminum panel for car interior, matte finish with customizable patterns, warm metallic texture and eco-friendly antibacterial coating, minimalist modern design, soft ambient lighting, photorealistic 3D render" },
+            ],
+            cn: [
+                { id: 461, img: "images/idea_461.png", title: "AI音響体験シート「音楽の寝床」", desc: "AIが車内音響を最適化し、音楽・ナビ・通話の音質を自動調整。快適な寝る・話す・聞くの3モードで、音の「心地よさ」を最大限に。音楽が心を癒し、眠りを誘う。音の魔法でストレスフリーなドライブを。", imagePrompt: "AI-powered smart seat with ambient sound system, futuristic car interior, glowing audio waves visualizing music and voice, soft leather and ambient lighting, cinematic lighting, photorealistic 3D render, premium automotive design" },
+                { id: 462, img: "images/idea_462.png", title: "光触媒抗菌内装パネル「自然の呼吸」", desc: "光触媒素材で空気中の細菌・花粉を分解し、自然な香りを放出。**竹繊維**と**光触媒**の組み合わせで、**快適性**と**健康志向**を両立。車内空間を「自然の風」に。快適な呼吸と安心感で、ストレスフリーなドライブを。", imagePrompt: "Natural bamboo fiber interior panel with photocatalytic coating, car cabin with fresh air flow visualization, soft green and white color scheme, clean and minimalistic design, photorealistic 3D render, cinematic lighting, high detail" },
+            ],
+            in: [
+                { id: 463, img: "images/idea_463.png", title: "クール・コクピット・シート：冷却機能搭載の快適座席", desc: "冷却性素材と通風機能を融合したシートで、熱いインドの日差しでも快適に過ごせます。3列目にも装備し、家族全員が涼しくリラックス。**通気性**と**冷却機能**で、車内はまるでエアコンの効いた部屋。価格帯に合わせて**モジュール交換式**で、コスト効果も◎。うれしさは「暑い日でも安心、家族みんなが笑顔」。", imagePrompt: "Cooling seat with integrated ventilation and mist effect, luxury car interior, mesh fabric and metallic trim, blue ambient lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 464, img: "images/idea_464.png", title: "AR・サウンドマッピングパネル：音楽とナビをひとつに", desc: "ARナビと音楽を統合した**マルチモードパネル**で、運転中の視界を最小限に抑えます。**音響**と**ナビゲーション**を同時に操作可能。インドの**家族向けSUV**にも最適で、子供が乗っても安心。**サウンドマッピング**で、道路の曲がりに合わせて音楽が変化。うれしさは「ナビと音楽が仲良く、運転が楽しくなる」。", imagePrompt: "Augmented reality sound mapping panel with holographic interface, floating navigation and music controls, modern vehicle cockpit, wood grain and matte black finish, ambient blue lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 465, img: "images/idea_465.png", title: "AromaSync モジュラーカーボン香りディフューザー", desc: "カーボン素材のコンソールに内蔵された香りディフューザー。ユーザーの気分に合わせて香りを自動調整し、ドライブ中のリラックスをサポート。**青レザー**と**カーボン**の高級感で、SUBARUの「サブーラらしさ」を演出。**EV車の内装に自然な香り**を加えることで、快適さと個性を両立。毎日、心地よいドライブの始まりを。", imagePrompt: "Modular carbon fiber aroma diffuser integrated into car center console, subtle scent mist effect, premium vehicle interior with blue leather seats, ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 466, img: "images/idea_466.png", title: "HUDSync フルスクリーンARヘッドアップディスプレイ", desc: "広域HUDで運転中の情報（ナビ、速度、天候）を**直感的かつ安全に**表示。**AI誤認識**のリスクを軽減するため、**タッチ操作を最小限に**し、視線を路面に集中。**BMW M5のHUD技術**を進化させ、**リアルタイムAR**で周囲の障害物を可視化。運転中の安心と未来感を同時に体験。", imagePrompt: "Full-screen AR head-up display in premium vehicle cockpit, holographic interface with navigation and weather data, night driving scene with road obstacles visualized, blue accent lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 467, img: "images/idea_467.png", title: "AI協働設計・耐熱軽量内装パネル「ThermoTact」", desc: "AIと人間が交互にデザインを磨くプロセスで開発された、耐熱性と軽量性を兼ね備えた内装パネル。**低空力設計**で乗り心地向上、**リサイクル素材**使用で環境負荷低減。**快適な温度管理**と**長寿命**を実現し、ユーザーは「毎日が新しく、安心して使える」を実感。", imagePrompt: "Lightweight thermally resistant interior panel with recycled aluminum and eco-leather texture, AI-assisted design visualization, modern car cabin, ambient blue lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 468, img: "images/idea_468.png", title: "モジュラー快適シートユニット「FlexComfort+」", desc: "**モジュラーデザイン**で座席のレイアウトを自由に変更可能。**長寿命設計**と**快適性**を両立し、**専門診断不要**でメンテナンスしやすい。**乗り心地の向上**と**見た目のカスタマイズ性**で、ユーザーは「自分の車に最適な空間を創り出す喜び」を感じられる。", imagePrompt: "Modular flexible seating unit with adjustable layout and premium materials, luxury car interior, warm ambient lighting, ergonomic design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-01",
         analysis: {
             jp: "日本の内装市場は素材の革新と機能性強化がトレンド。自然由来成分[jp565]や消臭機能[jp566]の普及で、快適性と環境配慮が重視されている。また、HMIの進化も目立つ（Google対応ディスプレイ[jp571]）が、安全機能の標準装備[jp564]も重要な課題。過去のデザイン[jp568]やカスタマイズ要素[jp570]が再評価され、レトロ・モダン融合の可能性が浮上。内装製品開発では、抗菌・消臭機能とスマート連携を両立させた製品が差別化の鍵。",
