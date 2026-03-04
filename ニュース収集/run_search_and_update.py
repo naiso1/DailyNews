@@ -174,6 +174,7 @@ def main():
         log("[INFO] No new dates to process.")
     else:
         dates = []
+        
         cur = start
         while cur <= end:
             dates.append(cur.strftime("%Y-%m-%d"))

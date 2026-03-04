@@ -593,6 +593,23 @@
             min-width: 0;
         }
 
+        .ranking-thumb {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, #1a2332, #0d1520);
+            flex: 0 0 44px;
+        }
+
+        .ranking-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .ranking-rank {
             width: 28px;
             text-align: center;
@@ -686,6 +703,12 @@
             .quick-nav {
                 right: 12px;
                 bottom: 12px;
+            }
+
+            .ranking-thumb {
+                width: 40px;
+                height: 40px;
+                flex-basis: 40px;
             }
         }
 
@@ -2990,6 +3013,10 @@
                 <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-thumb">
+                            <img src="${item.img || FALLBACK_SRC}" loading="lazy" alt="${item.title || 'news image'}"
+                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                        </div>
                         <div class="ranking-title-text">${item.title}</div>
                     </div>
                     <div class="ranking-meta">
@@ -3061,6 +3088,10 @@
                 <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-thumb">
+                            <img src="${item.img || FALLBACK_SRC}" loading="lazy" alt="${item.title || 'paper image'}"
+                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                        </div>
                         <div class="ranking-title-text">${item.title}</div>
                     </div>
                     <div class="ranking-meta">
