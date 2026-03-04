@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-03",
+        analysis: {
+            jp: "日本の自動車内装市場は、**カスタマイズ**と**素材革新**が主流。DIYユーザーの負担軽減[jp584]や、レトロデザインの復活[jp585]、高コスパの内装[jp586]がトレンド。HMIは**ディスプレイ**の進化[jp589]と**シート**の高級化[jp587]が注目。**内装**のカスタム価格低下[jp590]や、専用マット[jp591]の登場で、個人化・低コスト化が進む。素材面では、**再生アルミ**や**抗菌**素材の応用が期待される。",
+            cn: "中国市場では**AI統合座舱**が加速しており、何小鵬の「スーパーヒューマンインテリジェンス」宣言や「座舱センター統合」[cn435]が示すように、運転支援と乗車体験の融合がトレンド。**光触媒抗菌素材**[cn431]や**赤外線理療SPA**[cn433]といった快適性要素も注目され、**800V高電圧アーキテクチャ**[cn426]や**LiDAR搭載**[cn426]の技術進化と相まって、内装は「快適・健康・スマート」の三拍子が必須。競合は既に**AI連動体験**や**AR-HUD**[cn427]を模索しており、差別化は「体感型」の新素材・新機能に求められる。",
+            in: "インド市場では高級MPVの需要が高まり、メルセデスV-ClassがトヨタVellfireやレクサスLMと価格・仕様で対抗[in451]。ラウンジシートの採用は快適性の追求を示す[in451]。EVモデルの改良（Tata Tiago EV）やプラグインハイブリッド（JSW Motors）が主流化し、素材・デザインの地元化が進む[in448][in452]。AR・センシングのリスクも指摘され、セキュリティ対応が求められる[in453]。内装開発では快適性・モジュール性・地元文化を軸に、素材とUIの両面で革新を推進すべき[in453]。",
+            us: "US市場ではAI優先コックピットが主流化し、VWのID. Era 9XやアウディRS5が高画質スクリーンを採用[us392,us393]。竹素材の普及も進み、中国の環境政策が内装材料に影響[us397]。空気質管理が新たな価値となり、Forbesが注目[us399]。HMIのEdgeAI化が進む中、Tier-0.5サプライヤーとの共同開発が加速[us400]。高級車のクラシックデザインも需要があり、ラピッドSの内装が現代車より優れている[us398]。低価格化トレンドでは、レクサスESの5年保有価格が31万円に下がる[us394]。",
+            eu: "HMIの進化が加速中で、VolvoのOTA更新はGoogle Gemini対応へと進展中 [eu365,eu372]。電動走行距離の拡大と高級感の強化が主流 [eu365,eu367]。内装素材の実用性とデザイン賞受賞が重視される [eu365,eu370]。AIとコネクテッド技術がユーザー体験を変革 [eu372,eu374]。シートや音響のクラシック要素も再評価中 [eu371,eu373]。ARやモジュラーな機能が若い層に支持されている [eu374,eu368]。",
+        },
+        ideas: {
+            jp: [
+                { id: 469, img: "images/idea_469.png", title: "温感調節・抗菌モジュールパネル「Sensitouch Plus」", desc: "温度に応じて自動調節する温感パネルで、夏は涼しく冬は温かく。抗菌加工と光吸収素材で、車内を清潔に保ちながら断熱効果も。カスタムショップ向けに「Sensitouch」のアップグレード版として提供。価格も低コストで、DIYユーザーにも手が届く。安心・快適・経済性を同時に実現する。", imagePrompt: "Temperature-responsive antibacterial interior panel with smart color-changing surface, modern car dashboard, brushed aluminum texture, subtle ambient glow, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 470, img: "images/idea_470.png", title: "AR対応・マルチモードディスプレイ「AR-View Pro」", desc: "AR技術を搭載したディスプレイで、運転中にナビゲーションや車両状態を頭上に投影。操作はタッチパネルと音声で、視界を遮らないように設計。新しく登場する専用マット[jp591]との連携で、カスタムユーザー向けに「AR-View Pro」パッケージを提供。運転中の安心と、カスタマイズの自由度を両立。新感覚の操作快適さで、ユーザーを魅了する。", imagePrompt: "Augmented reality display projecting navigation and vehicle status above dashboard, futuristic car interior, holographic interface, night driving scene, blue ambient lighting, photorealistic render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 471, img: "images/idea_471.png", title: "光触媒抗菌+温熱理療シート「心地の寝床」", desc: "光触媒素材で空気を浄化し、内蔵の赤外線温熱機能で体を包む快適さを提供。5段階の温熱・マッサージモードで、長時間のドライブでも「まるでリラックスサロン」。後席でも使える2+2設計[jn431]に対応。うれしさ：体にやさしく、空気もきれいに、どこでも「癒しの空間」を実現。", imagePrompt: "Photorealistic render of a luxury car seat with embedded infrared heating and massage function, glowing ambient light, antimicrobial fabric texture, sleek modern design, cinematic lighting, 4K quality" },
+                { id: 472, img: "images/idea_472.png", title: "AI体験マスター・マルチモードコントロールパネル「智感壁」", desc: "車内壁面に内蔵されたAIパネルで、音楽・温度・照明・マッサージを1つで操作。触覚フィードバックと自然音声ガイドで直感操作。車両の走行状態に応じて「運転モード」「リラックスモード」「チャットモード」を自動切り替え。うれしさ：「手を動かすだけで、まるでスマートホーム」。操作が楽しく、体験が豊か。", imagePrompt: "Modern vehicle interior wall panel with touch-sensitive AI interface, glowing holographic controls, ambient lighting effects, sleek minimalist design, photorealistic 3D render, cinematic lighting, 4K quality" },
+            ],
+            in: [
+                { id: 473, img: "images/idea_473.png", title: "インテリジェント・ラウンジ・シート", desc: "高級MPV向けのラウンジシートをベースに、**AIが自動で座り方を最適化**し、**快適性を30%向上**。**インドの「トグル文化」**を反映した**マルチモード**で、**家族や友人との会話**が楽しくなる。**柔らかい素材**と**温熱機能**で、**長時間のドライブでも疲れにくい**。[in451]", imagePrompt: "Intelligent lounge seat with AI adaptive recline, premium leather and fabric blend, warm ambient lighting, Indian-inspired patterned stitching, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 474, img: "images/idea_474.png", title: "モジュラーデジタル・コクピット・パネル", desc: "**ARナビと音楽を統合**し、**ディスプレイを自由にカスタム**できるパネル。**インドの「トグル文化」**に合わせて、**画面の切り替えが素早く**、**親子や友人とのコミュニケーション**を楽しむ。**光の色調**で**気分を変える**機能も搭載。**高解像度**で、**視認性が抜群**。[in447][in454]", imagePrompt: "Modular digital cockpit panel with AR navigation and music integration, customizable interface, Indian cultural motifs, holographic display, vibrant color accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 475, img: "images/idea_475.png", title: "BambooLux モジュラーナチュラル竹内装パネル", desc: "竹製の高耐久内装パネルで、自然素材の質感と抗菌性を実現。2026年モデル車向けに開発し、軽量かつ高級感を提供。環境負荷の低減と、手触りの心地よさでユーザーに「自然の安心」を届ける。竹素材の国産化推進[jp397]。", imagePrompt: "Modular bamboo interior panel with natural grain texture, luxury car dashboard integration, warm beige and wood tones, ambient lighting, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 476, img: "images/idea_476.png", title: "AirPureSync スマート空気質管理シートマネージャー", desc: "シートに内蔵されたセンサーで車内空気質をリアルタイムモニタリング。PM2.5やCO2濃度を表示し、空気清浄機能を自動起動。快適性と健康を両立させ、ユーザーに「呼吸できる安心」を提供。空気質管理が新たな価値となる[jp399]。", imagePrompt: "Smart air quality seat manager integrated into car seat, digital HUD showing air purity metrics, futuristic cockpit design, blue and white color scheme, photorealistic 3D render, premium automotive interior, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 477, img: "images/idea_477.png", title: "AI感情応答型快適シート「EmoComfort」", desc: "AIが乗員の体調や気分を感知し、自動で座席の高さ・角度・温度を最適化。**快適さ**と**個別化**を両立。**クラシック**な高級感を残しつつ、**モダン**なAI機能を搭載。**家族や友人**とのドライブでも**心地よさ**を維持。価格は**高級車向け**だが、**中堅モデル**にも展開可能。", imagePrompt: "AI-responsive ergonomic seat with adaptive lumbar support and temperature control, luxury car interior, leather and wood trim, soft ambient lighting, holographic comfort indicator, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 478, img: "images/idea_478.png", title: "AR快適空間モード「AuraSync+」", desc: "AR技術で車内空間を**視覚的に最適化**。**天井やドア**に**光の演出**を加え、**気分**や**時間帯**に応じて**空間の雰囲気**を変更。**高級感**と**楽しさ**を両立。**子供のドライブ**でも**安全**な**遊び心**を提供。**音響**と**照明**を**同期**させ、**感動の空間**を演出。", imagePrompt: "Augmented reality interior with dynamic ambient lighting and projection mapping on ceiling and doors, futuristic car cockpit, soft glowing patterns, immersive atmosphere, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-02",
         analysis: {
             jp: "日本の内装市場はAIと素材革新が加速中。アントリンのAI開発短縮[jp579]は生産効率を飛躍的に向上。再生アルミや抗菌素材の応用[jp574]はカスタマイズ性と実用性を両立。フェラーリのミニマルデザイン[jp578]は高級感とデジタル融合を示唆。音響[jp575]・EV[jp572]の進化も内装に影響。自社開発ではAI対応と持続可能素材の両立が鍵。",
