@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-04",
+        analysis: {
+            jp: "日本の内装市場は**レトロカスタム**と**高機能EV**の二極化が進む。1970年代車の再評価[jp592]や、**温感・抗菌素材**の需要[jp598]が高まり、高級感と快適性を両立させる製品が求められる。一方、**センターコンソールの簡素化**[jp600]や**AI搭載**[jp601]で、操作の直感性とスマート化がトレンド。**安全・快適性**を重視する消費者の声[jp598]を反映し、**素材の持続可能性**と**AIの親しみやすさ**を軸に製品開発すべき。",
+            cn: "中国市場ではスマート座舱と多画面ディスプレイが主流化し、BladeバッテリーやFlash Charge対応のEVが注目[cn436,cn440]。BYDのGreat TangやET9は5D没入体験を重視し、AI体験マスターやAR-HUDが競争軸[cn436,cn440]。通領科技の内装生産拡大と、Qiao Lu Mingの特許技術がサプライチェーンの強化を示す[cn437,cn438]。センターコンソールのデザインが質感向上の鍵[cn444]。中国一汽の全固体電池と飛行自動車の未来指向が、内装の電気的・機能的進化を促す[cn444]。",
+            in: "インド市場では曲面ディスプレイとAI機能の導入が進み、Hyundai i20の内装がVenueに流用されたデザインを採用[in460,in465]。ARやセンサーの活用が増加中で、安全と快適性の両立が求められている[in462]。素材面では金メッキやレアウッドの高級内装が注目[in460]。また、洗浄料金や清掃方法の変化は内装のメンテナンス意識を反映[in463,in464]。自社製品開発では、AI対応と高級素材を組み合わせたモジュラーコンソールが有効[in460]。",
+            us: "音響システムの「ガソリン車風」サウンド再現がトレンド [us402,us408]。 内装の機能性重視の傾向が強ま [us410,us403]。 HMIの進化はARやセンサーの融合に注目 [us408,us406]。 素材面ではナチュラルやリサイクル素材が重要 [us403,us407]。 規制や充電インフラの不備がEV撤退を招く [us403,us405]。 自社開発では音響体験と機能性の両立、ARとナチュラル素材の融合が鍵 [us408,us406,us407]。",
+            eu: "欧州市場ではEV移行のコスト負担と政策の不備が課題[eu380]。一方、価格競争力と性能で勝機を掴む中国系メーカーが台頭[eu378,eu383]。クラシックなSUVのDNAが今なお魅力[eu377]。AIやARの要素はまだ普及せず、内装の操作性不足も課題[eu381]。素材の軽量化と耐久性、直感的UI、快適性と機能性の両立が求められる[eu384]。",
+        },
+        ideas: {
+            jp: [
+                { id: 479, img: "images/idea_479.png", title: "レトロ・温感抗菌コンソール「WARMRETRO」", desc: "1970年代のクラウン[jp592]をモチーフにした温感素材コンソール。抗菌加工と温め機能で快適性を高め、レトロな木目デザインがインテリアに親しみやすさを提供。運転席の「温かさ」でストレス軽減、**高級感と機能性を両立**する。", imagePrompt: "Retro-inspired automotive console with wood grain texture, warm glowing touch-sensitive surface, integrated antibacterial material, vintage Toyota Crown 1970s design elements, modern vehicle interior, soft ambient lighting, photorealistic 3D render, premium quality, cinematic lighting" },
+                { id: 480, img: "images/idea_480.png", title: "AI音声対話型「HoloVoice」マルチモードディスプレイ", desc: "AR対応の**タッチレス**操作ディスプレイで、音声アシスタントと画面操作を融合。**操作の簡素化**[jp600]を実現し、視線移動の負担を軽減。AIが運転者に「お疲れ様」や「気分転換の音楽」を提案。**親しみやすさとスマートさ**で、ドライバーの心を満たす。", imagePrompt: "Holographic voice assistant interface floating above dashboard, AR overlay with intuitive touchless controls, futuristic vehicle cockpit design, soft blue ambient lighting, modern minimalist UI, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 481, img: "images/idea_481.png", title: "AR-HUD拡張座舱「第三空間」", desc: "ドライバーと乗員が共に楽しめるAR-HUDを搭載。3D空間でゲームや映画を体験可能。座席の動きに応じて画面が自動調整し、**「旅の途中で映画館にいるような感覚」**を提供。通領科技の生産力[jp437]とBYDの技術[jp436]を活用して、高画質・低遅延実現。", imagePrompt: "AR-HUD display projecting immersive 3D movie scene onto car windshield, floating holographic characters, luxury car interior with leather seats, ambient blue lighting, photorealistic 3D render, cinematic view, high detail, 4K quality" },
+                { id: 482, img: "images/idea_482.png", title: "光触媒抗菌+温熱理療シート「心地の寝床」", desc: "通領科技の素材[jp437]を活用した抗菌+温熱理療シート。**「寝た瞬間からリラックス」**する体感。温熱機能で肩や腰のこりをほぐし、香りの調整機能で気分を変化させる。Qiao Lu Mingの特許技術[jp438]を応用し、快適性と清潔性を両立。", imagePrompt: "Luxury car seat with embedded heating and aromatherapy system, glowing subtle light, leather texture with antibacterial coating, modern vehicle cockpit, warm ambient glow, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 483, img: "images/idea_483.png", title: "グリーンレトロ・マッサージシート：自然素材とAIが奏でるリラックス空間", desc: "天然素材のレトロデザインシートにAIが搭載され、運転中のストレスを自動で軽減。温熱・振動・香りの3重奏で「リラックスモード」が発動。インドの「ホリ祭」後の清掃習慣に合わせて、**洗浄後**に自動で「清潔モード」へ切り替える。快適さと伝統の融合で、ドライバーの心を癒す。", imagePrompt: "Retro-style massage seat with natural wood and leather textures, AI interface glowing softly on side panel, ambient green lighting, Indian festival theme background, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 484, img: "images/idea_484.png", title: "マルチモードARナビ・スマートミラー：視界に応じたナビゲーションとサウンドマッピング", desc: "車両の運転状況に応じて、ARナビを**ステアリングに投影**し、視界を遮らない設計。音楽やナビの音声をミラーに投影し、**視聴覚を統合**。**ホリ祭後の洗浄**をトリガーに、**清潔モード**で視界を明るくする機能を追加。運転中の集中力と楽しさを両立させる、スマートで楽しい体験。", imagePrompt: "AR navigation projected onto car's rearview mirror, holographic sound waves visualizing music and directions, modern vehicle cockpit with glowing blue accents, Indian street scene at dusk, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 485, img: "images/idea_485.png", title: "SoundNest モジュラーオーディオインテリアパネル", desc: "高音質サウンドディフューザーを内装パネルに統合。車内空間に「ガソリン車風」サウンドを再現し、ドライバーに懐かしさと没入感を提供。ナチュラル木目調で高級感を演出し、音質と見た目の両立で新車体験を刷新。音楽好きやレトロファン必見。", imagePrompt: "Modular audio interior panel with wood grain texture, integrated sound diffuser emitting nostalgic gasoline car sound, premium car cabin, warm ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 486, img: "images/idea_486.png", title: "EcoWeave リサイクルファブリック・モジュラーコンソール", desc: "リサイクル素材で作られたコンソールは、軽量かつ耐久性を兼ね備え、環境配慮と機能性を両立。操作性に優れたタッチ面と、温かみのある色合いが車内を快適に。ユーザーに「責任ある選択」の喜びと「デザインの美しさ」を届ける。", imagePrompt: "Recycled fabric modular console in car interior, eco-friendly material texture, minimalist design with warm beige color, ergonomic touch surface, photorealistic 3D render, natural daylight, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 487, img: "images/idea_487.png", title: "レトロモダン・耐熱軽量パネル「RetroHeat」", desc: "1990年代のSUVのDNAをモチーフにした**レトロデザイン**の内装パネル。**耐熱・軽量素材**で、高熱環境でも快適。**クラシックな質感**と**現代の機能性**を融合。運転中に「あの頃の安心感」を感じられる。価格は競合より30%低く、**高耐熱・低メンテナンス**で顧客満足度向上。", imagePrompt: "Retro-modern automotive interior panel with classic wood grain texture and heat-resistant composite material, warm ambient lighting, brushed metal accents, photorealistic 3D render, cinematic lighting, 4K quality" },
+                { id: 488, img: "images/idea_488.png", title: "直感型ARナビゲーション「AuraSync+」", desc: "**ARヘッドアップディスプレイ**を搭載し、運転中の操作を**直感的かつ簡易化**。**AIが運転者のストレス状態**を検知し、**ナビの視覚表示を自動調整**。**快適性と安全性**を両立。特に**長距離ドライビング**で「心の余裕」が生まれる。**操作の煩雑さを解消**し、**運転の安心感**を提供。", imagePrompt: "Augmented reality navigation HUD with holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, cinematic lighting, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-03",
         analysis: {
             jp: "日本の自動車内装市場は、**カスタマイズ**と**素材革新**が主流。DIYユーザーの負担軽減[jp584]や、レトロデザインの復活[jp585]、高コスパの内装[jp586]がトレンド。HMIは**ディスプレイ**の進化[jp589]と**シート**の高級化[jp587]が注目。**内装**のカスタム価格低下[jp590]や、専用マット[jp591]の登場で、個人化・低コスト化が進む。素材面では、**再生アルミ**や**抗菌**素材の応用が期待される。",
