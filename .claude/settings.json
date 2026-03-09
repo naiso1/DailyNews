@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \":*)",
+      "Bash(node --stack-trace-limit=50 -e \":*)",
+      "Bash(py --version)",
+      "Bash(ls /c/Python*)",
+      "Read(//c/Users/demo/AppData/Local/Programs/Python//**)",
+      "Bash(py auto_update_daily_news.py --replace-insights --skip-html)"
+    ]
+  }
+}
