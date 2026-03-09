@@ -1,0 +1,265 @@
+==================================================
+[START] 2026-03-10 00:00:00
+[INFO] Target range: 2026-03-09 to 2026-03-09
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-03-09
+[PID] google_search_script: 28616
+[google_search_script] ============================================================
+[google_search_script]   内装ニュース収集スクリプト（検証済みRSS版）
+[google_search_script] ============================================================
+[google_search_script] 対象日付: 2026-03-09
+[google_search_script] RSSフィード: 67サイト（検証済み）
+[google_search_script]   RSSフィード一覧を出力: rss_feed_list.csv
+[google_search_script] Bing検索: 各国5地域 × 16-18キーワード
+[google_search_script] === RSSフィード ===
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1659: MarkupResemblesLocatorWarning: The input looks more like a filename than markup. You may want to open this file and pass the filehandle into Beautiful Soup.
+[google_search_script]   desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
+[google_search_script]   ✓ [レスポンス] 23件
+[google_search_script]   ✓ [carview!] 3件
+[google_search_script]   ✓ [MotorFan] 27件
+[google_search_script]   ✓ [WEB CARTOP] 5件
+[google_search_script]   ✓ [webCG] 1件
+[google_search_script]   ✓ [Auto Messe Web] 3件
+[google_search_script]   ✓ [VAGUE] 9件
+[google_search_script]   ✓ [ベストカーWeb] 12件
+[google_search_script]   ✓ [くるまのニュース] 35件
+[google_search_script]   ✓ [日刊自動車新聞] 2件
+[google_search_script]   ✓ [AUTOCAR JAPAN] 4件
+[google_search_script]   ✓ [AUTO BILD JAPAN Web] 2件
+[google_search_script]   ✓ [EE Times Japan] 7件
+[google_search_script]   ✓ [TechTargetジャパン] 1件
+[google_search_script]   ✓ [ZDNET Japan] 5件
+[google_search_script]   ✓ [CNET Japan] 9件
+[google_search_script]   ✓ [Impress Watch] 16件
+[google_search_script]   ✓ [The Drive] 5件
+[google_search_script]   ✓ [Motor1] 4件
+[google_search_script]   ✓ [CarScoops] 10件
+[google_search_script]   ✓ [Jalopnik] 9件
+[google_search_script]   ✓ [Car and Driver] 6件
+[google_search_script]   ✓ [Top Speed] 5件
+[google_search_script]   ✓ [CarComplaints] 1件
+[google_search_script]   ✗ [AUTOCAR UK] エラー
+[google_search_script]   ✓ [Auto Express] 4件
+[google_search_script]   ✗ [Autocar Reviews] エラー
+[google_search_script]   ✓ [CarNewsChina - All] 8件
+[google_search_script]   ✓ [CarNewsChina - EV] 5件
+[google_search_script]   ✓ [CnEVPost - All] 8件
+[google_search_script]   ✓ [CnEVPost - Huawei] 1件
+[google_search_script]   ✓ [CnEVPost - Self-driving] 1件
+[google_search_script]   ✓ [ETAuto - Auto Components] 3件
+[google_search_script]   ✓ [ETAuto - Auto Technology] 5件
+[google_search_script]   ✓ [Autocar India - All] 10件
+[google_search_script]   ✓ [RushLane] 8件
+[google_search_script]   ✓ [GaadiWaadi] 7件
+[google_search_script]   ✓ [IndiaCarNews] 4件
+[google_search_script]   ✓ [Car Blog India] 4件
+[google_search_script]   ✓ [Auto Punditz] 1件
+[google_search_script]   RSS合計: 273件
+[google_search_script] === Bing News 検索 ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 中国 / 汽车 内饰 开发... RSSで返っておらず（HTML/制限の可能性）
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   Bing検索合計: 0件
+[google_search_script] === DuckDuckGo News 検索 ===
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1807: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+[google_search_script]   ddgs = DDGS()
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 38件
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 43件
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 43件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 44件
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 94件
+[google_search_script]   DuckDuckGo合計: 262件
+[google_search_script] === Google News RSS ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 17件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 23件
+[google_search_script]   Google News合計: 40件
+[google_search_script] === NewsAPI.org ===
+[google_search_script]   NewsAPI合計: 0件
+[google_search_script] ============================================================
+[google_search_script] 全ソース合計: 575件
+[google_search_script]   取得内訳（ソース別）: {'レスポンス': 23, 'carview!': 3, 'MotorFan': 27, 'WEB CARTOP': 5, 'webCG': 1, 'Auto Messe Web': 3, 'VAGUE': 9, 'ベストカーWeb': 12, 'くるまのニュース': 35, '日刊自動車新聞': 2, 'AUTOCAR JAPAN': 4, 'AUTO BILD JAPAN Web': 2, 'EE Times Japan': 7, 'TechTargetジャパン': 1, 'ZDNET Japan': 5, 'CNET Japan': 9, 'Impress Watch': 16, 'The Drive': 5, 'Motor1': 4, 'CarScoops': 10, 'Jalopnik': 9, 'Car and Driver': 6, 'Top Speed': 5, 'CarComplaints': 1, 'Auto Express': 4, 'CarNewsChina - All': 8, 'CarNewsChina - EV': 5, 'CnEVPost - All': 8, 'CnEVPost - Huawei': 1, 'CnEVPost - Self-driving': 1, 'ETAuto - Auto Components': 3, 'ETAuto - Auto Technology': 5, 'Autocar India - All': 10, 'RushLane': 8, 'GaadiWaadi': 7, 'IndiaCarNews': 4, 'Car Blog India': 4, 'Auto Punditz': 1, 'DuckDuckGo': 262, 'GoogleNews': 40}
+[google_search_script]   取得内訳（国別）: {'日本': 219, '米国': 83, '欧州': 47, '中国': 90, 'インド': 136}
+[google_search_script] === 重複除去処理 ===
+[google_search_script]   重複除去: 102件
+[google_search_script]   重複内訳（ソース別）: {'CarNewsChina - EV': 5, 'CnEVPost - Huawei': 1, 'CnEVPost - Self-driving': 1, 'GaadiWaadi': 1, 'DuckDuckGo': 87, 'GoogleNews': 7}
+[google_search_script]   重複理由内訳: {'既存URL': 81, 'タイトル類似': 21}
+[google_search_script]   最終結果: 473件
+[google_search_script]   最終内訳（ソース別）: {'レスポンス': 23, 'carview!': 3, 'MotorFan': 27, 'WEB CARTOP': 5, 'webCG': 1, 'Auto Messe Web': 3, 'VAGUE': 9, 'ベストカーWeb': 12, 'くるまのニュース': 35, '日刊自動車新聞': 2, 'AUTOCAR JAPAN': 4, 'AUTO BILD JAPAN Web': 2, 'EE Times Japan': 7, 'TechTargetジャパン': 1, 'ZDNET Japan': 5, 'CNET Japan': 9, 'Impress Watch': 16, 'The Drive': 5, 'Motor1': 4, 'CarScoops': 10, 'Jalopnik': 9, 'Car and Driver': 6, 'Top Speed': 5, 'CarComplaints': 1, 'Auto Express': 4, 'CarNewsChina - All': 8, 'CnEVPost - All': 8, 'ETAuto - Auto Components': 3, 'ETAuto - Auto Technology': 5, 'Autocar India - All': 10, 'RushLane': 8, 'GaadiWaadi': 6, 'IndiaCarNews': 4, 'Car Blog India': 4, 'Auto Punditz': 1, 'DuckDuckGo': 175, 'GoogleNews': 33}
+[google_search_script]   最終内訳（国別）: {'日本': 206, '米国': 74, '欧州': 31, '中国': 79, 'インド': 83}
+[google_search_script]   [新規] 関連度・翻訳処理 473件 開始
+[google_search_script]     進捗: 1/473
+[google_search_script]     進捗: 5/473
+[google_search_script]     進捗: 10/473
+[google_search_script]     進捗: 15/473
+[google_search_script]     進捗: 20/473
+[google_search_script]     進捗: 25/473
+[google_search_script]     進捗: 30/473
+[google_search_script]     進捗: 35/473
+[google_search_script]     進捗: 40/473
+[google_search_script]     進捗: 45/473
+[google_search_script]     進捗: 50/473
+[google_search_script]     進捗: 55/473
+[google_search_script]     進捗: 60/473
+[google_search_script]     進捗: 65/473
+[google_search_script]     進捗: 70/473
+[google_search_script]     進捗: 75/473
+[google_search_script]     進捗: 80/473
+[google_search_script]     進捗: 85/473
+[google_search_script]     進捗: 90/473
+[google_search_script]     進捗: 95/473
+[google_search_script]     進捗: 100/473
+[google_search_script]     進捗: 105/473
+[google_search_script]     進捗: 110/473
+[google_search_script]     進捗: 115/473
+[google_search_script]     進捗: 120/473
+[google_search_script]     進捗: 125/473
+[google_search_script]     進捗: 130/473
+[google_search_script]     進捗: 135/473
+[google_search_script]     進捗: 140/473
+[google_search_script]     進捗: 145/473
+[google_search_script]     進捗: 150/473
+[google_search_script]     進捗: 155/473
+[google_search_script]     進捗: 160/473
+[google_search_script]     進捗: 165/473
+[google_search_script]     進捗: 170/473
+[google_search_script]     進捗: 175/473
+[google_search_script]     進捗: 180/473
+[google_search_script]     進捗: 185/473
+[google_search_script]     進捗: 190/473
+[google_search_script]     進捗: 195/473
+[google_search_script]     進捗: 200/473
+[google_search_script]     進捗: 205/473
+[google_search_script]     進捗: 210/473
+[google_search_script]     進捗: 215/473
+[google_search_script]     進捗: 220/473
+[google_search_script]     進捗: 225/473
+[google_search_script]     進捗: 230/473
+[google_search_script]     進捗: 235/473
+[google_search_script]     進捗: 240/473
+[google_search_script]     進捗: 245/473
+[google_search_script]     進捗: 250/473
+[google_search_script]     進捗: 255/473
+[google_search_script]     進捗: 260/473
+[google_search_script]     進捗: 265/473
+[google_search_script]     進捗: 270/473
+[google_search_script]     進捗: 275/473
+[google_search_script]     進捗: 280/473
+[google_search_script]     進捗: 285/473
+[google_search_script]     進捗: 290/473
+[google_search_script]     進捗: 295/473
+[google_search_script]     進捗: 300/473
+[google_search_script]     進捗: 305/473
+[google_search_script]     進捗: 310/473
+[google_search_script]     進捗: 315/473
+[google_search_script]     進捗: 320/473
+[google_search_script]     進捗: 325/473
+[google_search_script]     進捗: 330/473
+[google_search_script]     進捗: 335/473
+[google_search_script]     進捗: 340/473
+[google_search_script]     進捗: 345/473
+[google_search_script]     進捗: 350/473
+[google_search_script]     進捗: 355/473
+[google_search_script]     進捗: 360/473
+[google_search_script]     進捗: 365/473
+[google_search_script]     進捗: 370/473
+[google_search_script]     進捗: 375/473
+[google_search_script]     進捗: 380/473
+[google_search_script]     進捗: 385/473
+[google_search_script]     進捗: 390/473
+[google_search_script]     進捗: 395/473
+[google_search_script]     進捗: 400/473
+[google_search_script]     進捗: 405/473
+[google_search_script]     進捗: 410/473
+[google_search_script]     進捗: 415/473
+[google_search_script]     進捗: 420/473
+[google_search_script]     進捗: 425/473
+[google_search_script]     進捗: 430/473
+[google_search_script]     進捗: 435/473
+[google_search_script]     進捗: 440/473
+[google_search_script]     進捗: 445/473
+[google_search_script]     進捗: 450/473
+[google_search_script]     進捗: 455/473
+[google_search_script]     進捗: 460/473
+[google_search_script]     進捗: 465/473
+[google_search_script]     進捗: 470/473
+[google_search_script]     進捗: 473/473
+[google_search_script]   [新規] 関連度・翻訳処理 完了
+[google_search_script]     画像補完: 79件 並列取得開始
+[google_search_script]     画像URL未取得: 85件
+[google_search_script] ✅ 完了！ 473 件の新規記事を追加しました。
+[google_search_script]    URLはハイパーリンク化済み
+[google_search_script]    保存先: C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\search_results.csv
+[google_search_script]   Sheet2補完: 10件
+[google_search_script]     進捗: 1/10
+[google_search_script]     進捗: 5/10
+[google_search_script]     進捗: 10/10
+[google_search_script]   Sheet2/CSV 出力: 50件, sheet2_llm_targets.csv
+[EXIT] google_search_script: code=0
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[PID] auto_update_daily_news: 19804
+[auto_update_daily_news] Loaded 50 items from sheet: C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\sheet2_llm_targets.csv (dates: 2026-03-09 ~ 2026-03-09)
+[auto_update_daily_news] New items to append: 50
+[auto_update_daily_news] Insights draft saved: C:\Users\demo\Desktop\����\DailyNews\insights_draft_2026-03-09.txt
+[auto_update_daily_news] Done.
+[EXIT] auto_update_daily_news: code=0
+[RUN] generate_idea_images_gemini: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_gemini.py --only-missing --model gemini-3.1-flash-image-preview --image-size 512px --aspect-ratio 1:1
+[PID] generate_idea_images_gemini: 7452
+[generate_idea_images_gemini] [OK] Saved idea_498.png
+[generate_idea_images_gemini] [OK] Saved idea_499.png
+[generate_idea_images_gemini] [OK] Saved idea_500.png
+[generate_idea_images_gemini] [OK] Saved idea_501.png
+[generate_idea_images_gemini] [OK] Saved idea_502.png
+[generate_idea_images_gemini] [OK] Saved idea_503.png
+[generate_idea_images_gemini] Done.
+[EXIT] generate_idea_images_gemini: code=0
+[RUN] git_status: git status --porcelain -- . :(exclude)ニュース収集/logs/* :(exclude)ニュース収集/__pycache__/* :(exclude)**/__pycache__/*
+[git_status]  M insights_data.js
+[git_status]  M news_data.js
+[git_status]  M "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/search_results.csv"
+[git_status]  M "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/sheet2_llm_targets.csv"
+[git_status]  M "\345\206\205\350\243\205\350\243\275\345\223\201\343\203\207\343\202\244\343\203\252\343\203\274\343\203\213\343\203\245\343\203\274\343\202\271.html"
+[git_status] ?? images/idea_498.png
+[git_status] ?? images/idea_499.png
+[git_status] ?? images/idea_500.png
+[git_status] ?? images/idea_501.png
+[git_status] ?? images/idea_502.png
+[git_status] ?? images/idea_503.png
+[git_status] ?? insights_draft_2026-03-09.txt
+[RUN] git_add: git add -A -- . :(exclude)ニュース収集/logs/* :(exclude)ニュース収集/__pycache__/* :(exclude)**/__pycache__/*
+[PID] git_add: 17720
+[git_add] warning: in the working copy of 'ニュース収集/search_results.csv', LF will be replaced by CRLF the next time Git touches it
+[git_add] warning: in the working copy of 'ニュース収集/sheet2_llm_targets.csv', LF will be replaced by CRLF the next time Git touches it
+[EXIT] git_add: code=0
+[RUN] git_commit: git commit -m Auto update daily news (2026-03-10)
+[PID] git_commit: 36344
+[git_commit] [main 6a64c76] Auto update daily news (2026-03-10)
+[git_commit]  12 files changed, 1169 insertions(+), 52 deletions(-)
+[git_commit]  create mode 100644 images/idea_498.png
+[git_commit]  create mode 100644 images/idea_499.png
+[git_commit]  create mode 100644 images/idea_500.png
+[git_commit]  create mode 100644 images/idea_501.png
+[git_commit]  create mode 100644 images/idea_502.png
+[git_commit]  create mode 100644 images/idea_503.png
+[git_commit]  create mode 100644 insights_draft_2026-03-09.txt
+[EXIT] git_commit: code=0
+[RUN] git_push: git push origin main
+[PID] git_push: 38536
+[git_push] To github.com:naiso1/DailyNews.git
+[git_push]    cf3580f..6a64c76  main -> main
+[EXIT] git_push: code=0
+[END] 2026-03-10 01:11:14
+==================================================

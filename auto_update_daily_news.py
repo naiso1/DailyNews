@@ -18,7 +18,7 @@ HTML_PATH = ROOT / "内装製品デイリーニュース.html"
 PROMPT_PATH = ROOT / ".agent" / "prompts" / "insights_generation_prompt.md"
 DEFAULT_SHEET = ROOT / "ニュース収集" / "sheet2_llm_targets.csv"
 
-ENCODINGS = ["utf-8-sig", "cp932", "utf-16", "utf-8"]
+ENCODINGS = ["utf-8-sig", "utf-8", "cp932", "utf-16"]
 
 COUNTRY_MAP = {
     "日本": "jp",
@@ -64,6 +64,24 @@ TAG_RULES = [
 ]
 
 PLACEHOLDER_IMG = "images/idea_dummy.svg"
+
+ITEM_OVERRIDES = {
+    "https://www.sohu.com/a/994292210_122645970": {
+        "title": "起亜EV9コンセプト、海をモチーフにしたサステナブル内装",
+        "desc": "起亜のEV9コンセプトは、広大な海を着想源にしたエクステリアと、静かな空の青を取り入れた車内空間を組み合わせ、自然に近い安らぎを演出する。廃漁網由来の床材や再生PETボトル由来のシート・ドア加飾など、持続可能素材の活用も特徴。",
+        "source": "搜狐",
+    },
+    "https://auto.ifeng.com/c/8rMV470fRfX": {
+        "title": "新車コックピット週報：小米は個性化、VWは脱・大衆、極氪は4Dシアターへ",
+        "desc": "極氪8XはNaimオーディオと4D体験を備えた内装を採用。小米SU7は安全装備と2色ステアリングを強化し、フォルクスワーゲン陣営は連動型ディスプレイ、ID.ERA 9XはSmart Surfaceのマジックスクリーンを導入している。",
+        "source": "鳳凰網汽車",
+    },
+    "https://www.msn.com/en-in/autos/general/a-closer-look-at-the-luxurious-interior-of-the-skoda-vision-7s/vi-AA1XNsOx": {
+        "title": "Skoda Vision 7Sの豪華な内装を詳しく見る",
+        "desc": "SkodaのコンセプトカーVision 7Sは、技術、快適性、内装レイアウトの将来像を示すために設計された、未来志向のショーカーです。",
+        "source": "Autogefuhl",
+    },
+}
 
 
 def read_csv_any(path: Path):
@@ -128,6 +146,17 @@ def derive_source(url, fallback=""):
         return host.replace("www.", "")
     except Exception:
         return fallback or ""
+
+
+def apply_item_overrides(item: dict):
+    override = ITEM_OVERRIDES.get(item.get("url", ""))
+    if not override:
+        return item
+    out = dict(item)
+    for key, value in override.items():
+        if value:
+            out[key] = value
+    return out
 
 
 def generate_tags(text: str):
@@ -294,6 +323,30 @@ def extract_json_block(text: str):
         return json.loads(m.group(0))
     except Exception:
         return None
+
+
+def repair_json_with_llm(endpoint: str, model: str, raw_text: str):
+    if not raw_text or not raw_text.strip():
+        return None
+    prompt = (
+        "次のテキストを、内容を極力変えずに strict JSON へ整形してください。\n"
+        "出力は JSON のみ。コードフェンスや説明文は禁止。\n"
+        "形式:\n"
+        "{\n"
+        '  "analysis": "...",\n'
+        '  "ideas": [\n'
+        '    {"title": "...", "desc": "...", "imagePrompt": "..."},\n'
+        '    {"title": "...", "desc": "...", "imagePrompt": "..."}\n'
+        "  ]\n"
+        "}\n\n"
+        "入力テキスト:\n"
+        f"{raw_text}"
+    )
+    try:
+        repaired = call_llm(endpoint, model, prompt)
+    except Exception:
+        return None
+    return extract_json_block(repaired)
 
 
 def parse_insights_max_id(js_text: str):
@@ -653,7 +706,7 @@ def main():
 
         country = map_country(country_raw) or "jp"
         tags = generate_tags(f"{title} {desc}")
-        items.append({
+        items.append(apply_item_overrides({
             "country": country,
             "date": date_val,
             "title": title,
@@ -662,7 +715,7 @@ def main():
             "url": url,
             "source": source,
             "tags": tags,
-        })
+        }))
 
     if not items:
         print("No items to append after filtering.")
@@ -780,6 +833,8 @@ def main():
                 try:
                     llm_text = call_llm(args.llm_endpoint, args.llm_model, prompt)
                     data = extract_json_block(llm_text)
+                    if not data:
+                        data = repair_json_with_llm(args.llm_endpoint, args.llm_model, llm_text)
                 except Exception as e:
                     data = None
                     print(f"LLM error ({key}): {e}")
@@ -812,6 +867,8 @@ def main():
                         try:
                             retry_text = call_llm(args.llm_endpoint, args.llm_model, retry_prompt)
                             retry_data = extract_json_block(retry_text)
+                            if not retry_data:
+                                retry_data = repair_json_with_llm(args.llm_endpoint, args.llm_model, retry_text)
                         except Exception as e:
                             retry_data = None
                             print(f"LLM retry error ({key}): {e}")
