@@ -247,6 +247,7 @@ def call_llm(endpoint, model, prompt):
         "messages": [
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
+            {"role": "assistant", "content": "<think>\n</think>\n"},
         ],
         "temperature": 0.7,
         "max_tokens": 1200,

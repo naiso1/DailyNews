@@ -82,8 +82,8 @@ LLM_ONLY = False
 RESUME_LLM = False
 PROCESS_LLM_SKIPPED = False
 LLM_ENDPOINT = os.environ.get("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions")
-LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3-vl-8b")
-LLM_TIMEOUT = 120
+LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
+LLM_TIMEOUT = 300
 LLM_SAVE_INTERVAL = 0
 LLM_CACHE = {}
 LLM_IMAGE_CACHE = {}
@@ -711,7 +711,8 @@ def call_llm_classify(title, content, image_url="", mode="both"):
         payload = {
             "model": LLM_MODEL,
             "messages": [
-                {"role": "user", "content": content_payload}
+                {"role": "user", "content": content_payload},
+                {"role": "assistant", "content": "<think>\n</think>\n"},
             ],
             "temperature": 0.2,
         }
@@ -1042,7 +1043,8 @@ def call_llm_text(prompt):
     payload = {
         "model": LLM_MODEL,
         "messages": [
-            {"role": "user", "content": prompt}
+            {"role": "user", "content": prompt},
+            {"role": "assistant", "content": "<think>\n</think>\n"},
         ],
         "temperature": 0.2,
     }
