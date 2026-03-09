@@ -1,0 +1,21 @@
+[jp]
+```json
+{
+  "analysis": "日本の自動車内装業界では【薄型フラップ採用の50系プリウス用エアロ[jp622]】や【ホンダ新N-ONE特別仕様車の北欧レトロなウッド内装[jp627]】から、素材の軽量化と自然素材の回帰がトレンド。また【中国新安全規則でヨーク型ハンドル採用禁止[jp623]】と【シートベルト市場拡大[jp631]】により、安全規制強化が内装設計に直結。【メルセデス・マイバッハ「S680 V12エディション」[jp626]】のような高級車では【V12エンジン搭載の特別仕様車[jp629]】で、排気音や質感を重視する顧客層も。【ホンダ「エディックス」の2列6人乗り[jp628]】や【アルパインBIG-X搭載[jp624]】から、多目的利用と音質向上のニーズも明確。さらに【ホンダ「エディックス」のEV化でレイアウト自由度[jp628]】や【ZEEKRの高性能バッテリー[jp625]】から、EV化・安全技術の融合が進む。"],
+  "ideas": [
+    {
+      "title": "薄型フラップ×抗菌再生アルミ「ZenAero」コンソール",
+      "desc": "【薄型フラップ採用の50系プリウス用エアロ[jp622]】の軽量化コンセプトと【再生アルミカスタムパネル[jp626]】の高質感を融合。薄型フラップの風切り音抑制技術を採用し、抗菌加工再生アルミパネルで衛生面も確保。北欧レトロなウッド[jp627]の温もりと、薄型フラップの機能美を両立。内装の軽量化と高級感を同時に実現。安全[jp623]への対応も考慮。",
+      "imagePrompt": "Minimalist car center console with slim aerodynamic flaps, brushed aluminum finish, warm ambient lighting, Nordic retro wood accents, premium interior design, photorealistic render, cinematic lighting, high detail, 4K quality"
+    },
+    {
+      "title": "AI音響マッピング×抗菌「Sensitouch Voice」スマートパネル",
+      "desc": "【AI音声対話型「HoloVoice」[jp630]】のマルチモード対話を進化。抗菌機能【抗菌・消臭機能搭載「エア・フォレスト」[jp631]】と組み合わせ、AIが乗員の音声を認識して最適な環境音や温度を自動調整。【メルセデス・マイバッハ「S680 V12エディション」[jp629]】のような高級車でも使える。【アルパインBIG-X搭載[jp624]】の音質向上も考慮。",
+      "imagePrompt": "Luxury car dashboard with holographic AI interface, advanced sound mapping visualization, soft blue and gold lighting, premium leather and glass materials, futuristic cockpit design, photorealistic render, cinematic lighting, high detail, 4K quality"
+    }
+  ]
+}
+```
+
+[in]
+{"analysis":"インド市場では、[in486][in487][in491]のニュースから、価格帯10〜18万ルピーのBセグメントで**安全装備強化**と**ディスプレイ充実**がトレンドです。特に**7エアバッグ**や**10.25インチデュアルスクリーン**が新機能として注目。[in495][in499]のAMG GT事例から、**ロータリーノブ**や**カスタマイズ性**が高付加価値と認識され、[in494]のVision 7Sコンセプトは**内装レイアウトの未来性**を示唆しています。[in488][in492]では**新色追加**で**顧客選択肢の拡大**が進んでいます。自社開発では、**コスパ重視の安全装備**と**洗練されたカスタマイズ**の両軸を強化すべきです。","ideas":[{"title":"マルチモード・スマート・コンソール","desc":"インド市場向けに、10.25インチディスプレイと物理ボタンの最適な組み合わせを提案。[in491][in493]のトレンドを踏まえ、**価格帯10〜18万ルピー**でも**高機能性**と**安価な操作性**の両立を実現。[in495]のロータリーノブをコンソールに統合し、**運転中の直感的な操作**で**「安心感」と「ワクワク感」**を提供。[in488][in492]の**新色**と組み合わせることで、**個性的な内装**を表現。画像生成用：\"Multi-mode smart console integrated with 10.25-inch touchscreen display, physical rotary knobs for intuitive control, brushed aluminum and soft-touch materials, warm ambient lighting, luxury car interior, photorealistic render\""},{"title":"グリーンレトロ・マルチモード・ディスプレイ","desc":"[in494]のVision 7Sコンセプトから、**内装レイアウトの未来性**を表現。インド市場向けに、**天然素材のグリーンパネル**と**レトロなデジタル表示**を組み合わせ。[in486][in487]の**安全装備強化**と連動し、**ナビゲーションやマルチメディア**を**「映画館のような体験」**に。[in495]の**カスタマイズ性**を踏まえ、**ユーザーが好きな色やデザイン**で**「自分だけの空間」**を創造。画像生成用：\"Retro-futuristic digital display with natural green materials, holographic interface, luxury car interior, warm ambient lighting, photorealistic render\"}]}

@@ -1,5 +1,27 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-09",
+        analysis: {
+            cn: "中国市場では、**30インチ6Kディスプレイ**[cn467][cn469]の普及と、**Naimオーディオ**[cn466]や**4Dシイター**[cn472]といった高級オーディオ体験への関心が顕著です。一方、**HUD表示の過剰化**[cn473]に対し、情報の質の向上が求められています。また、**新素材技術**[cn471]や**AI技術**[cn472]の産業展での展示は、開発の方向性を示唆しています。自社は、高級感と機能性を両立する**マルチモードコントロール**や**調和した香り空間**を開拓すべきです。",
+            us: "米国における内装トレンドは、**EV化**[us436]と**安全性**[us433]の加速が見られます。中国市場向けに開発されたVW ID. Unyxは、物理ボタンの排除と、センターコンソールに配置された14.96インチ×2の**2.4K解像度**ディスプレイ[us431]を特徴とし、**音響**システムも強化されています。フォードは**衝突前ブレーキ**を備えた**スマートドア**の技術で特許を取得[us433]しました。メルセデス・AMGはGT 4-Doorクーペで**回転ダイヤル**と**先進ディスプレイ**を組み合わせ[us437,us438]、新素材や**UFS 3.1フラッシュ**の導入も進行中[us439]です。EV化と安全の両立が求められる状況です。",
+            eu: "欧州の自動車内装トレンドは、HMIと安全性の両立、EVプラットフォームの進化、そして次世代照明技術で注目を集めています[eu414]。特にVauxhallのLED調査やVolvoのソフトウェア定義車から、内装の「体験価値」が重視される傾向が明確です[eu405][eu406][eu414]。また、LumissilのRGBマトリクスLEDは車内環境照明の多様化を後押しし[eu409][eu411]、消費者は個性豊かな車内空間を求めています。これらを踏まえ、内装製品開発では「安全性の向上」「体験の深化」「持続可能性」の3軸を軸に、ハードウェアとソフトウェアの融合を進める必要があります[eu409]。",
+        },
+        ideas: {
+            cn: [
+                { id: 498, img: "images/idea_498.png", title: "調和の香り空間「星空の息吹」", desc: "30インチディスプレイの余白を有効活用。星空のイメージと連動し、車内全体に**幻想的な淡い光**と**星の香る香り**が漂う内装空間を創出。Naimオーディオ[cn466][cn472]との相性を考慮し、音響体験と香り空間が調和し、**まるで星空の下で静寂を味わうような心地良さ**と、**高級感のある癒やし**を提供します。", imagePrompt: "Luxury car interior, large 30-inch panoramic display showing a starry night sky, ambient lighting matching the display, subtle mist diffuser integrated into the center console, soft warm glow, brushed aluminum and dark wood materials, premium leather seats, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 499, img: "images/idea_499.png", title: "マルチモード制御パネル「智感壁」", desc: "HUD情報過多[cn473]への対策として、**物理的なマルチモードコントロールパネル**を搭載。運転モード（エコ/スポーツ）や音楽ジャンル、**気候条件**（温度/湿度）に応じて、**自動的に最適な香りや照明色、音響設定**が切り替わる**AI連動機能**。ユーザーが**直感的に**車内環境をコントロールできる**喜び**と、**一人ひとりの好みに合わせた快適さ**を体験できます。", imagePrompt: "Close-up of advanced center console with multi-mode physical control panel, illuminated touch-sensitive buttons, ambient lighting changing colors, high-quality leather and metallic trim, modern vehicle cockpit, night driving scene, blue and warm accent lighting, photorealistic render, professional product visualization, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 500, img: "images/idea_500.png", title: "SafeGlow AR安全コックピット：衝突回避×癒やし照明", desc: "フォードのスマートドア[jp433]からインスパイア。衝突回避時に**AR表示**で経路を案内。事故後の**癒やし照明**でストレスを軽減。**安全**を**癒やし**に変える。運転者が安心し、家族も笑顔。", imagePrompt: "Futuristic car cockpit with augmented reality safety display, collision avoidance visualization, soft healing ambient lighting, AR safety icons floating above dashboard, warm color palette with blue safety accents, photorealistic 3D render, premium automotive interior design, cinematic lighting, high detail, 4K quality" },
+                { id: 501, img: "images/idea_501.png", title: "AromaWeave 調香ファブリック：香りで癒やされるシート", desc: "KUMHO SUNNYの新素材[jp435]を応用。シートに**調香ファブリック**を採用。運転中に**癒やされる香り**でストレスを軽減。**癒やし**を日常に。家族も笑顔。", imagePrompt: "Luxury car interior with aromatic fabric seats, KUMHO SUNNY innovative material, subtle mist effect, natural color palette with soft beige and earth tones, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 502, img: "images/idea_502.png", title: "AI感情共感型アロマテラピーコンソール「EmoAroma EU」", desc: "Vauxhallの視認性向上技術[jp405]とLumissilのRGBマトリクスLED[jp409]を融合し、ドライバーのストレスを即座に軽減する次世代コンソールです。車内環境照明と香りディフューザーを連動させ、運転中の感情状態をAIが検知。疲れていると感知すると、リラックスアロマと暖色系LEDが自動で点灯。【うれしさ】『疲れを吹き飛ばす魔法の空間』が実現し、毎日の運転が癒やしになります。", imagePrompt: "Integrated aromatherapy diffuser with RGB matrix LED lighting in center console, AI emotion visualization interface, luxury European vehicle interior, brushed aluminum and sustainable wood materials, soft warm glow, ambient lighting effects, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 503, img: "images/idea_503.png", title: "AR直感型ソフトウェア定義シート「SoftDef EU」", desc: "Volvoのソフトウェア定義車コンセプト[jp414]を内装へ拡張し、シートがAIと連動して形状や機能を最適化する次世代製品です。Google技術との統合[jp413]を活用し、ドライバーの姿勢や疲労度から自動で座面角度やクッション性を調整。車外環境に合わせて照明色や香りを連動させ、車内空間を「生き物」のように体験可能にします。【うれしさ】『シートが自分に合わせて変わる』という驚きと心地よさを実感。", imagePrompt: "Advanced augmented reality head-up display in premium European vehicle, holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, software-defined interior concept, sustainable materials, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-08",
         analysis: {
             jp: "日本市場の自動車内装トレンドは、**静音性向上**[jp612]、**EV/BEVの普及**[jp613]、**居住性重視の設計**[jp614]、**高級感と自然素材の採用**[jp620]、**サステナビリティ**[jp621]が顕著。特に**シート素材**[jp617]や**EV専用内装**[jp613]の展開が加速しており、消費者は**静寂**と**高級感**を同時に求める傾向。また、レトロデザイン[jp617]や竹由来素材[jp620]など、**情緒的価値**と**環境配慮**の両立が鍵。自社開発では、EV車向け**静音性内装**と**サステナブル素材**のハイブリッド提案が有力。",
