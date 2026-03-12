@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-12",
+        analysis: {
+            jp: "日産リーフのナビ採用[jp652]はコネクテッド化の加速を示唆。洗車時のフロアマット清掃[jp653]は内装メンテナンス意識の高まり。イルミネーション[jp654][jp660]は夜間視認性の向上志向。LEXUS LMの改良[jp658][jp661]は高級ミニバンの機能進化。JDIの分割中止[jp658]はサプライチェーン統合への転換。富山県メーカー[jp659]は地域サプライヤーとの連携強化。ホンダオデッセイのシート[jp657]は快適性重視。クラウンエステート[jp656]は記念仕様でも機能性を重視。",
+            cn: "中国市場では2000 TOPSの計算性能と全固体電池[cn496]、LiDAR搭載のADAS[cn497]、ステアリング制御による空間拡大[cn498]といった高機能化が進む一方、HUDメーカーの収益鈍化[cn503]や生産設備の飽和[cn500]が課題。特に内装では素材革新とAI連携が加速しており、[cn501]のPVC粒子や[cn502]の企業転換から、環境対応と機能性の両立が必須。BMW iX3の中国サプライヤー化[cn504]から、地域密着型のサプライチェーン構築が重要。",
+            in: "インド市場では、顔認識技術やAIによる運用管理への需要が高まっており、ドライバー認証や疲労リスク管理の技術が注目されています [in517]。また、高級車のカスタマイズ需要が拡大しており、個性的な素材運用や専用カラーリングへの関心が強まっています [in519][in524]。EV戦略の再構築に伴うコスト最適化も課題として浮上し、安価な内装ソリューションへの転換が求められています [in518]。",
+            us: "米国市場では**AIとコネクテッド技術**の進化が加速しており、CES 2026でのSnapdragon Cockpit Elite実装やQualcommとの連携、Leapmotor D19の展示が示す通り**[us469]**、**AIアシスタント**による自律運転サポートや、**HMI**の直感性向上が課題。また、VW ID.3 Neoのソフトウェア刷新や、Rivian R2の革新的内装から、**モジュラー設計**や**新素材**の採用がトレンド**[us465][us466]**。しかし、GMのEV戦略揺らぎやBMWのF1断念から、**ブランドアイデンティティ**と**技術実装**のバランスが重要**[us463][us462]**。さらに、Dodge ChargerとMustang GTの**プレミアム内装**や、Rivian R2のミニマリストデザインから、**個性的なカスタマイズ**へのニーズも高まっています**[us467]**。",
+            eu: "EU市場はEV移行と中国車価格競争の激化が同時進行[eu441]。英国のEV目標達成はCO2クレジット取引による実質数値で[eu435]。消費者はEVの割引に敏感だが、音響やNVHへの関心も高まっている[eu444]。中国EVの多機能化やMPVの実用性が示唆[eu437]。内装では、EV価格競争力維持と音質向上の両立が課題[eu440]。AI搭載やARナビは、EV普及加速と併せて、新価値提案が必要[eu438]。",
+        },
+        ideas: {
+            jp: [
+                { id: 528, img: "images/idea_528.png", title: "温感抗菌・再生アルミパネル「WarmEcoLuxe」", desc: "フロアマット清掃[jp653]の需要を踏まえ、車内温度感知で自動抗菌処理を行う再生アルミパネル。触覚で温かみを感じ、清潔さが保たれる「うれしさ」を体感。素材[jp659]の技術連携で実現。再生アルミは環境配慮も。", imagePrompt: "Premium car interior panel, warm aluminum texture with subtle heat-sensitive pattern change, antibacterial glowing micro-texture, Japanese aesthetic craftsmanship, soft ambient lighting, photorealistic render, high detail" },
+                { id: 529, img: "images/idea_529.png", title: "ナビ連携・ARイルミネーション「ZenAR-Nav」", desc: "ゼンリンナビ[jp652]と連動し、車外情報をARで表示。イルミネーション[jp654]の技術を活かし、夜間の視認性を向上。LEXUSの機能[jp661]を参考。ナビゲーションと内装照明の統合で「うれしさ」を提供。", imagePrompt: "AR navigation display integrated with interior lighting, holographic map overlay on dashboard, LED ambient light strips, Zenrini navigation interface, night driving scene, blue accent lighting, photorealistic 3D render" },
+            ],
+            cn: [
+                { id: 530, img: "images/idea_530.png", title: "全固体電池連携・温熱理療パネル「電池の鼓動」", desc: "全固体電池[cn496]の熱管理と連動した温熱理療パネルです。バッテリー残量に応じて座席の温熱治療が自動調整され、長距離走行でも快適性が維持されます。疲労蓄積を解消し、ドライバーの集中力を回復させる『疲れ知らずのドライブ体験』を提供。素材は自然素材調の抗菌表皮を採用し、高級感と機能性を両立。", imagePrompt: "Advanced heated therapy panel integrated with solid-state battery, luxury car interior, warm amber lighting, brushed titanium accents, leather upholstery, thermal diffusion visualization, serene cabin atmosphere, photorealistic rendering, cinematic lighting, premium automotive design" },
+                { id: 531, img: "images/idea_531.png", title: "AR-HUD香気空間『第三の窓』", desc: "AR-HUD[cn503]と連動した香気制御システムです。ナビゲーション情報に合わせて香りの種類が自動変化し、集中モードやリラックスモードなど、状況に応じた空間演出を実現。ステアリング制御[cn498]による広々とした空間感と相まって、車内を『屋外拡張空間』のように感じさせます。AIが最適な香りを提案し、運転中のストレスを軽減。", imagePrompt: "AR-HUD augmented reality head-up display with integrated scent diffusion system, futuristic vehicle cockpit, holographic interface floating above dashboard, night driving scene, blue and green accent lighting, mist effect visualization, photorealistic render, premium automotive visualization" },
+            ],
+            in: [
+                { id: 532, img: "images/idea_532.png", title: "AR・スマートミラー・排気監視・ナビゲーション", desc: "インド市場の顔認証技術[jn517]と排気監視ニーズを融合。スマートミラーにARナビゲーションを投射し、ドライバー認証と排気ガス濃度表示を同時視認。運転中に排気トラブルを検知すると、ミラーが赤く点滅し警告。家族で共有できる運転記録機能も搭載。", imagePrompt: "Augmented reality smart mirror integrated in car interior, displaying navigation and exhaust gas monitoring, Indian driver wearing traditional attire with face recognition, futuristic dashboard design, warm ambient lighting with red warning indicator, photorealistic automotive render, premium materials" },
+                { id: 533, img: "images/idea_533.png", title: "モジュラーレトロ・マルチモードディスプレイ", desc: "インド市場の高級車カスタマイズ[jn524]需要に応えるモジュラー式内装ディスプレイ。レトロなデジタル時計と現代的なタッチ操作を両立し、ユーザーが好きなカラーパターンを交換可能。家族全員が楽しめるマルチモードで、運転中だけでなく待機時にも楽しめる。", imagePrompt: "Modular retro-style multi-mode display panel in luxury car interior, interchangeable color patterns with traditional Indian textile motifs, holographic interface projection, brushed metal and handcrafted wood materials, cinematic lighting, photorealistic 3D render, premium automotive design" },
+            ],
+            us: [
+                { id: 534, img: "images/idea_534.png", title: "AI香る調和コックピット：自律運転×癒やし空間", desc: "AIが運転者状態を分析し、最適な香りと照明を自動調整。衝突時でも安全な香りで安心感[jp463][jp469]。運転者負担を軽減し、移動中もリラックスできる**癒やし空間**を創造。AIが香りの種類や濃度、照明の色を自動調整し、**個々の好みに合わせたパーソナライズ**。運転中も**安全かつ快適**な空間を提供。", imagePrompt: "AI-powered aromatherapy diffuser integrated into dashboard, holographic display showing scent analysis, soft warm lighting, autonomous driving mode, luxury car interior, brushed titanium and matte black materials, serene atmosphere, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 535, img: "images/idea_535.png", title: "Modular Eco-Luxe: モジュラー調和パネル×リサイクル素材", desc: "リサイクル素材で作られたモジュールパネルで、**環境負荷を低減**しつつ**高級感**を維持。運転者が好きな配置で**モジュールを自由に組み合わせ**、**個性的な内装**を実現。VW ID.3 Neo[jp465]やRivian R2[jp466]のトレンドを踏まえ、**サステナブル**かつ**スタイリッシュ**なデザイン。", imagePrompt: "Modular interior panels made from recycled materials, sleek geometric shapes, brushed aluminum and eco-friendly fabric, modern vehicle cockpit, premium quality, photorealistic rendering, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 536, img: "images/idea_536.png", title: "音響最適化EV内装パネル「SoundGuard EU」", desc: "EVのモーター音と道路騒音を低減し、静粛性を最大化する内装パネルです。吸音材と共振抑制構造を組み合わせ、静かな空間で音楽や会話の品質を向上させます。EVの静けさを活かした、リラクゼーション効果の高い内装空間を実現。", imagePrompt: "EV interior cabin, premium sound-absorbing panels with textured fabric, warm ambient lighting, focus on acoustic quality, luxury car interior design, photorealistic render, high detail, 4K quality, cinematic lighting" },
+                { id: 537, img: "images/idea_537.png", title: "AI多機能コンソール「MultiTouch EU」", desc: "EVのマルチスクリーン機能を拡張し、ナビゲーションやエンターテインメントを一元管理するタッチパネルです。AIが乗員の好みを学習し、音楽や映画を自動最適化。EVの静かな空間で、没入感のあるエンターテインメント体験を提供します。", imagePrompt: "EV center console with multi-touch display, holographic interface, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, modern vehicle interior, high detail" },
+            ],
+        }
+    },
+{
         date: "2026-03-11",
         analysis: {
             jp: "日本の自動車内装トレンドは「ラグジュアリー体験のローカリゼーション[jp642]」と「個性的なカスタマイズの普及[jp644]」が顕著で、機能性よりも体験価値が重視されている。また、EV化に伴うコックピットの空間再定義[jp645]や、高級車でも求められる温感性[jp649]が見られる。これらを踏まえ、AI音声アシスタントの進化[jp648]や、EV用拡張バッテリーの視覚化[jp651]といった新技術の日常利用を見出す。特に「昭和のレトロ技術[jp647]」への関心の高さから、伝統と先端技術の融合が新たな価値を生むと考えられる。",

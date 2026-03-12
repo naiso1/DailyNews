@@ -1,7 +1,11 @@
+import argparse
 import datetime
+import json
 import os
 import re
 import subprocess
+import time
+import urllib.request
 from pathlib import Path
 from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT
 import signal
@@ -20,6 +24,89 @@ LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y
 def log(msg):
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(msg + "\n")
+
+
+LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
+
+
+def _llm_host():
+    endpoint = os.environ.get("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions")
+    idx = endpoint.find("/v1/")
+    return endpoint[:idx] if idx != -1 else "http://127.0.0.1:1234"
+
+
+def _server_up(host):
+    try:
+        with urllib.request.urlopen(f"{host}/v1/models", timeout=5) as r:
+            return r.status == 200
+    except Exception:
+        return False
+
+
+def _model_loaded(host):
+    try:
+        with urllib.request.urlopen(f"{host}/v1/models", timeout=5) as r:
+            data = json.loads(r.read())
+            return len(data.get("data", [])) > 0
+    except Exception:
+        return False
+
+
+def ensure_lm_studio():
+    """LM Studio サーバーが起動していなければ起動し、モデルをロードする。"""
+    host = _llm_host()
+    model = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
+
+    if _server_up(host) and _model_loaded(host):
+        log("[LM Studio] サーバー起動済み・モデルロード済み。")
+        return
+
+    if not _server_up(host):
+        if not LMS_EXE.exists():
+            log(f"[WARN] lms.exe が見つかりません ({LMS_EXE})。自動起動をスキップします。")
+            return
+        log("[LM Studio] サーバーを起動します...")
+        try:
+            Popen(
+                [str(LMS_EXE), "server", "start"],
+                creationflags=CREATE_NEW_PROCESS_GROUP,
+                stdout=PIPE, stderr=STDOUT,
+            )
+        except Exception as e:
+            log(f"[WARN] lms server start 失敗: {e}")
+            return
+        for i in range(24):  # 最大120秒待機
+            time.sleep(5)
+            if _server_up(host):
+                log(f"[LM Studio] サーバー起動完了 ({(i + 1) * 5}秒)。")
+                break
+        else:
+            log("[WARN] LM Studio サーバーが120秒以内に起動しませんでした。")
+            return
+
+    if not _model_loaded(host):
+        log(f"[LM Studio] モデルをロードします: {model}")
+        try:
+            Popen(
+                [str(LMS_EXE), "load", model],
+                creationflags=CREATE_NEW_PROCESS_GROUP,
+                stdout=PIPE, stderr=STDOUT,
+            )
+        except Exception as e:
+            log(f"[WARN] lms load 失敗: {e}")
+        for i in range(30):  # 最大300秒待機
+            time.sleep(10)
+            if _model_loaded(host):
+                log(f"[LM Studio] モデルロード完了 ({(i + 1) * 10}秒)。")
+                break
+        else:
+            log("[WARN] モデルが300秒以内にロードされませんでした。")
+
+
+def sleep_computer():
+    """PCをスリープ状態にする（Windows）。"""
+    log("[INFO] 処理完了。PCをスリープします...")
+    subprocess.run(["rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0"])
 
 
 def get_google_search_entrypoint():
@@ -158,6 +245,10 @@ def run_git_sync(log_file):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--no-sleep", action="store_true", help="処理完了後にスリープしない")
+    args = parser.parse_args()
+
     log("==================================================")
     log(f"[START] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
 
@@ -181,6 +272,7 @@ def main():
             cur += datetime.timedelta(days=1)
         dates_arg = ",".join(dates)
         try:
+            ensure_lm_studio()
             google_search_script = get_google_search_entrypoint()
             run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
             run_cmd([sys.executable, "-u", str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
@@ -217,6 +309,8 @@ def main():
 
     log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     log("==================================================")
+    if not args.no_sleep:
+        sleep_computer()
 
 if __name__ == "__main__":
     main()
