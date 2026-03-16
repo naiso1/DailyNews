@@ -19,6 +19,7 @@ PROMPT_PATH = ROOT / ".agent" / "prompts" / "insights_generation_prompt.md"
 DEFAULT_SHEET = ROOT / "ニュース収集" / "sheet2_llm_targets.csv"
 
 ENCODINGS = ["utf-8-sig", "utf-8", "cp932", "utf-16"]
+ANALYSIS_CHAR_LIMIT = 300
 
 COUNTRY_MAP = {
     "日本": "jp",
@@ -563,6 +564,39 @@ def rewrite_analysis_with_refs(endpoint: str, model: str, country: str, analysis
         return analysis_text
 
 
+def shorten_analysis_with_llm(endpoint: str, model: str, analysis_text: str, limit: int = ANALYSIS_CHAR_LIMIT) -> str:
+    """analysis_text が limit 字を超えていたら LLM で圧縮して返す。"""
+    if not analysis_text or len(analysis_text) <= limit:
+        return analysis_text
+    prompt = (
+        f"次の考察文を{limit}字以内に圧縮してください。\n"
+        "ルール:\n"
+        "1) 文中のニュースID参照（例: [cn506]）はそのまま保持する\n"
+        "2) 重要なキーワードと示唆だけ残し、冗長な説明は削る\n"
+        "3) 日本語のまま。句点で終わること\n"
+        f"4) 必ず{limit}字以内（ID参照の[...]も字数に含める）\n"
+        "5) 考察文のみ返す。説明・注釈は不要\n\n"
+        f"原文:\n{analysis_text}\n"
+    )
+    try:
+        out = call_llm(endpoint, model, prompt).strip()
+        out = re.sub(r"^```.*?\n|```$", "", out, flags=re.MULTILINE).strip()
+        out = re.split(r"\s*---\s*", out)[0].strip()
+        if out and len(out) <= limit:
+            return out
+    except Exception:
+        pass
+    # フォールバック: 文単位で切り詰め
+    sentences = re.findall(r"[^。！？!?]+[。！？!?]", analysis_text)
+    result = ""
+    for s in sentences:
+        if len(result) + len(s) <= limit:
+            result += s
+        else:
+            break
+    return result or analysis_text[:limit]
+
+
 def insert_insight(js_text: str, new_entry: str):
     # insert after opening bracket
     return re.sub(r"window\.DAILY_INSIGHTS\s*=\s*\[\s*", f"window.DAILY_INSIGHTS = [\n{new_entry}\n", js_text, count=1)
@@ -659,11 +693,12 @@ def make_country_prompt(
     - うれしさを必ず明記
     - 200〜300文字程度
     - imagePromptは構図・素材・配色を2件で明確に変える
-    - analysisは文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
+    - analysisは300字以内（厳守）。文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
     - 参照は文末にまとめず、関連語の直後に入れる
     - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）
     - id: という文字は書かない
     - ideasのdescにはID参照を書かない
+    - analysisに説明・解説・注釈・思考過程を含めない。考察文のみ出力する
     """)
     return prompt_template + "\n" + extra
 
@@ -880,10 +915,14 @@ def main():
                             analysis_text,
                             grouped[key],
                         )
-                    analysis_out[key] = filter_analysis_refs_to_allowed(
+                    analysis_final = filter_analysis_refs_to_allowed(
                         normalize_analysis_refs_per_sentence(analysis_text),
                         allowed_ids,
                     )
+                    analysis_final = shorten_analysis_with_llm(
+                        args.llm_endpoint, args.llm_model, analysis_final
+                    )
+                    analysis_out[key] = analysis_final
                     deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
                     if len(deduped) < 2:
                         retry_prompt = make_country_prompt(
