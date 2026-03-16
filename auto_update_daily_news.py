@@ -419,14 +419,18 @@ def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
     return picked
 
 
-def build_duplicate_guard_text(history_ideas: list, max_items: int = 20):
+def build_duplicate_guard_text(history_ideas: list, max_items: int = 50):
     if not history_ideas:
         return ""
     lines = []
     for x in history_ideas[:max_items]:
         t = (x.get("title", "") or "").strip()
+        d = (x.get("desc", "") or "").strip()[:40]
         if t:
-            lines.append(f"- {t}")
+            entry = f"- {t}"
+            if d:
+                entry += f"（{d}…）"
+            lines.append(entry)
     if not lines:
         return ""
     return "【過去アイデア（重複禁止）】\n" + "\n".join(lines)
@@ -457,6 +461,27 @@ def normalize_analysis_refs_per_sentence(text: str):
 
     text = re.sub(r"\[([^\]]+)\]", _norm_ref_block, text)
     return text
+
+
+def fix_idea_ref_prefix(text: str, country_prefix: str) -> str:
+    """アイデアdesc内の [xxNNN] 参照の国コードが間違っていたら正しいprefixに修正する。
+    例: country_prefix='cn' のとき [jp506] → [cn506]
+    """
+    if not text or not country_prefix:
+        return text
+    # 国コード2文字+数字 の形式のみ対象
+    def _fix(m):
+        ids = re.findall(r"([a-z]{2})(\d+)", m.group(1), flags=re.IGNORECASE)
+        if not ids:
+            return m.group(0)
+        fixed = []
+        for prefix, num in ids:
+            if prefix.lower() != country_prefix.lower():
+                fixed.append(f"{country_prefix.lower()}{num}")
+            else:
+                fixed.append(f"{prefix.lower()}{num}")
+        return "[" + ",".join(fixed) + "]"
+    return re.sub(r"\[([a-z]{2}\d+(?:,[a-z]{2}\d+)*)\]", _fix, text, flags=re.IGNORECASE)
 
 
 def analysis_ref_coverage_ok(text: str):
@@ -514,12 +539,13 @@ def rewrite_analysis_with_refs(endpoint: str, model: str, country: str, analysis
     prompt = (
         "次の考察文を、文ごとに関連ニュースID参照を付けて書き直してください。\n"
         "重要ルール:\n"
-        "1) 各文に必ず1つ以上の参照を付ける\n"
-        "2) 参照は [jp123,in332] 形式のみ（id:は禁止）\n"
+        "1) 各文に必ず1つ以上の参照を付ける（利用可能ID一覧にあるIDのみ使用すること）\n"
+        "2) 参照は [jp123,in332] 形式のみ（id:は禁止、[1][2]などの番号のみの参照は禁止）\n"
         "3) 参照は文末にまとめず、関連語の直後に自然に挿入する\n"
         "4) 参照はその文に関係するIDのみ（1文あたり1〜3件）\n"
         "5) 文章は日本語のまま、内容改変は最小限\n"
-        "6) ideas向けではなくanalysis文のみを返す\n\n"
+        "6) 最終的な考察文のみを返す。説明・解説・注釈・思考過程は一切含めない\n"
+        "7) ---や###などの区切り文字の後に説明を追記しない\n\n"
         f"国: {country}\n"
         f"利用可能ID一覧:\n" + "\n".join(id_lines) + "\n\n"
         f"原文:\n{analysis_text}\n"
@@ -527,6 +553,10 @@ def rewrite_analysis_with_refs(endpoint: str, model: str, country: str, analysis
     try:
         out = call_llm(endpoint, model, prompt)
         out = re.sub(r"^```(?:json)?\s*|\s*```$", "", out.strip(), flags=re.IGNORECASE | re.MULTILINE)
+        # --- 以降の解説・メタ文を除去
+        out = re.split(r"\s*---\s*", out)[0].strip()
+        # [1] [2] などの番号のみ参照が残っていたら全削除
+        out = re.sub(r"\[\d+\]", "", out).strip()
         out = normalize_analysis_refs_per_sentence(out)
         return out if out else analysis_text
     except Exception:
@@ -899,7 +929,7 @@ def main():
                     for idea in idea_list[:2]:
                         max_id += 1
                         title = js_escape(idea.get("title", ""))
-                        desc = js_escape(idea.get("desc", ""))
+                        desc = js_escape(fix_idea_ref_prefix(idea.get("desc", ""), key))
                         image_prompt = js_escape(idea.get("imagePrompt", ""))
                         entry_lines.append(
                             f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\" }},"
