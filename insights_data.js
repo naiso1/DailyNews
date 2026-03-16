@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-16",
+        analysis: {
+            jp: "2026年3月、日本市場の自動車内装トレンドは**EV化**と**HMIの再考**が顕著[jp672][jp678]。メルセデスの8Kディスプレイやホンダの物理スイッチ回帰は、**高級感**と**操作性**の両立が求められている[jp672][jp678]。また、**高級感**を追求するエルメスコラボ[jp677]や、環境配慮のアップサイクル[jp681]も注目を集める。日産セレナのGoogleナビ導入[jp673]は、**コネクテッド**機能の普及が加速している[jp673]。",
+            cn: "中国市場ではEVメーカーが初黒字[cn516]を達成するなど事業転換が進み、高機能HMIがIFデザイン賞を受賞[cn519][cn520]。センサー数[cn517]やワイヤレス充電普及率[cn525]の急増も、EV化とデジタル体験の深化が**内装開発の核心**を示唆。特に元アップルデザイナーによるインテリア設計[cn518]や鸿蒙座艙の採用[cn524]が、**UI/UXの洗練化**と**高級感**を同時に追求するトレンドを明確に。これに対し、3Mの钣噴美容新品[cn522]や天安新材の株主売却[cn521]は、サプライチェーンの再構築と**品質向上**への投資が加速している。",
+            in: "インド市場はEV化と高級化の両軸で内装開発の転換期を迎えている。VWの中国首位[CN506]は新エネルギー車への課税で市場混乱、EV普及加速が急務。タタの現金割引やマルチスズキの台数トップ[in541]は価格競争激化でコスト最適化が重要。ホンダの0 Alpha EVテスト[in538]やアウディSQ8のV8搭載[in542]はEVとICEのハイブリッド戦略が明確。GHSPの統合[in543]やロールスロイスのラグジュアリーは高級車市場でもAIやAR技術が浸透している。[in544] インドのオンライン査定AI限界[in545]は車内体験の付加価値が価格決定に直結することを示唆する。",
+            us: "米国市場では、シート安全[us485][us486]と新素材のトレンドが顕著。SUVの2列化やコネクテッド化も進む。AI技術[us490]は信頼設計に焦点。自社の示唆：(1)安全と癒やしの両立、(2)リサイクル素材の高級化、(3)AIによる個別最適化を追求。",
+            eu: "EU市場では**EV化**[eu455]、**プラグインハイブリッド**[eu456]の加速と、**CarPlay/Android Auto**の標準化[eu457]がトレンド。高級感[eu461]と**軽量性**[eu458]が両立され、**AR**や**AI**による**感情共感**[eu459]も進化。特に**シート**[eu460]の革新や、**モータースポーツ**[eu463]のような**バランス**が求められ、**コスト効率**[eu461]と**高機能**の両立が鍵。",
+        },
+        ideas: {
+            jp: [
+                { id: 558, img: "images/idea_558.png", title: "温感・抗菌・高級木調コンソール「Wabi-Sabi Luxe」", desc: "高級木材調の再生アルミパネルに、温度感知で自動発熱する温感ヒーターと抗菌コーティングを統合。冬は手元が温かくなり、夏は涼しさを保つ。**手触りの良さ**で**運転の疲れを軽減**し、**高級感**と**機能性**を両立。エルメスコラボ[jp677]のような**上質感**と、アップサイクル[jp681]の**環境配慮**を融合。", imagePrompt: "Premium car interior center console with warm wood grain texture, brushed aluminum finish, integrated heating element glowing softly, antimicrobial surface, luxury cabin atmosphere, soft ambient lighting, high-end materials, photorealistic 3D render, cinematic lighting, 4K quality" },
+                { id: 559, img: "images/idea_559.png", title: "AI音声・ARイルミネーションHUD「ZenAI-Nav」", desc: "AR技術でナビゲーション情報を車外に投影し、**運転中の視線移動を減らす**。AI音声アシスタントで目的地や楽曲を**音声操作**可能。ホンダの物理スイッチ[jp678]の**操作性**を維持しつつ、**コネクテッド**機能[jp673]を向上。Googleナビ連携で**リアルタイム情報**をARで表示。", imagePrompt: "Advanced augmented reality head-up display in premium vehicle, holographic navigation interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 560, img: "images/idea_560.png", title: "生体認証連動・温熱理療シート「癒しの風」", desc: "ドライバーの**バイタルサイン**（心拍数、体温）をセンサーで検知し、AIが最適な**温熱・通気・香り**を自動調整。運転中の**疲労回復**をサポート。竹繊維素材[cn521]と光触媒機能を組み込み、車内を**自然の風**に包まれるような**心地よさ**を実感できる。", imagePrompt: "Luxury car interior with driver wearing smart shirt, seat with bamboo fiber texture and thermal therapy heating elements, subtle mist effect, biometric sensor interface on dashboard, warm ambient lighting, photorealistic 3D render, premium automotive design, high detail, 4K quality" },
+                { id: 561, img: "images/idea_561.png", title: "AR-HUD拡張座舱「第三空間」", desc: "AR-HUD[cn517]と連動し、ナビゲーション情報や音楽、ゲームを**3D空間**で体験。副駕の**零重力座椅**[cn524]と連動し、車内が**リビングルーム**のように変化する**没入感**を実現。鸿蒙座艙のAI機能[cn524]を活用し、**家族全員**が楽しめる**スマート体験**を提供。", imagePrompt: "Futuristic car cockpit with AR-HUD displaying holographic interface, 3D space visualization, zero-gravity front passenger seat, warm ambient lighting, night driving scene, photorealistic render, modern vehicle interior design, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 562, img: "images/idea_562.png", title: "サステナブル・AI・エモーショナルコンソール", desc: "天然バフと再生プラスチックで構成する**サステナブルコンソール**に、運転者の感情を認識する**AIカメラ**を埋め込む。AIが運転中のストレスを感知し、芳香療法の香りや照明色を**自動で調整**する。特に、**「疲れたら自然に癒やされる」**という**うれしい瞬間**を追求。インドの高温環境に対応する**冷却機能**も追加。", imagePrompt: "Sustainable console with natural buffalo leather and recycled plastic, emotional AI camera embedded, ambient lighting changes based on driver emotion, aromatic diffuser with subtle mist, cooling vents visible, warm golden interior lighting, photorealistic 3D render, luxury car interior, high detail" },
+                { id: 563, img: "images/idea_563.png", title: "AR・マルチモード・サウンドコクピット", desc: "フロントガラスに**ARナビゲーション**を投影し、車両周囲の障害物を**リアルタイムで表示**。運転中に音楽を聴きたい場合、**AR HUDとHarman Kardon音響**が**シームレスに統合**され、**「音楽と映像を同時に楽しむ」**という**うれしい体験**を創出。インドの多言語需要に応えるため、**ヒンディー語・英語・タミル語**の音声アシスタントも対応。", imagePrompt: "Advanced AR HUD displaying navigation and obstacle detection, holographic interface floating above dashboard, seamless integration with premium Harman Kardon sound system, multi-language voice assistant interface, futuristic cockpit design, night driving scene with blue accent lighting, photorealistic render, high detail" },
+            ],
+            us: [
+                { id: 564, img: "images/idea_564.png", title: "SafeBreathe 調和エアロ・コンソール", desc: "衝突時でも安全装置作動が確実な**調香ディフューザー**を搭載。シートバックのロック機構と連動し、事故時は香りを停止。日常運転中は、AIが運転者の疲労度を検知し、リラックスさせる香りと照明を自動調整。衝突時でも安全な香り成分で安心感を。運転者が「車内がいつもより心地よい」と実感できる。", imagePrompt: "Conceptual luxury car interior center console with integrated aromatherapy diffuser, safety mechanism visible, brushed titanium finish, ambient blue light, soft mist effect, modern dashboard, photorealistic 3D render, premium materials, cinematic lighting, high detail, 4K quality" },
+                { id: 565, img: "images/idea_565.png", title: "EcoWeave 調和リサイクル・パネル", desc: "**リサイクル素材**で作られたモジュールパネルで、環境負荷を低減しつつ高級感を維持。再生プラスチックと難燃合金を組み合わせ、自然な木目調の調和パネルを実現。触り心地は高級レザーに近く、**自然素材**の温もりを。運転者が「環境に優しい高級車に乗っている」という**うれしさ**と、**安心感**を同時に感じられる。", imagePrompt: "Automotive interior dashboard panel made of recycled materials, wood-grain texture, brushed aluminum accents, warm earth tones, premium leather touch, modern vehicle cockpit, photorealistic rendering, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 566, img: "images/idea_566.png", title: "再生アルミ×AI制御の温度調節コンソール『EcoTemp EU』", desc: "**再生アルミ**とリサイクル合成皮革で環境負荷を低減。AIが**車内温度**と**乗員の体温**を測定し、コンソール内部の循環ファンで自動で最適な温度を維持。夏は涼しく、冬は温かい**快適空間**を演出。操作は**直感的タッチ**で、高級感のある**金属の質感**と**温かみのある照明**で、**癒やし**と**安心感**を同時に提供。", imagePrompt: "EcoTemp EU console, sustainable recycled aluminum and synthetic leather, integrated AI temperature control vents, ambient warm lighting, luxury car interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 567, img: "images/idea_567.png", title: "AR×AIの感情共感型ヘッドアップディスプレイ『AuraSync EU』", desc: "**AR技術**で**ナビゲーション**と**警告**を視覚化し、AIが**運転者の視線**や**疲労度**を検知。ストレスを感じると画面が**リラックスモード**へ切り替え、**自然の色**や**穏やかな音楽**を提案。**感情に寄り添う**設計で、**安全**を確保しつつ、**旅の楽しさ**を**最大化**。未来的で**洗練された**デザイン。", imagePrompt: "AuraSync EU HUD, augmented reality navigation display, AI driver fatigue detection, soothing natural color interface, futuristic car cockpit, night driving scene, holographic elements, photorealistic render, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-15",
         analysis: {
             jp: "日本市場の自動車内装トレンドは、トヨタ「26式GRヤリス」一部改良発表、新開発GRステアリング採用[jp662]のような操縦性を重視したスポーツ内装と、レクサス「LM」一部改良、後席静粛性強化で4月1日発売[jp665]のウェルカムイルミによる高級静寂感の両極端が見られます。フォルクスワーゲン「T7マルチバン」改良型、2026年後半に登場[jp664]のChatGPT統合やテスラモデルYにヨークハンドル交換で快適化[jp667]のヨークハンドルは、AIとハードウェアの融合が進んでいることを示唆。ホンダ新型CR-V、2026年2月26日発表。",
