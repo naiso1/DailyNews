@@ -103,8 +103,32 @@ def ensure_lm_studio():
             log("[WARN] モデルが300秒以内にロードされませんでした。")
 
 
+def _register_wake_task():
+    """翌日 23:57 にPCを起こすワンショットタスクを登録する。
+    タスクスケジューラの wake timer は 23:59:30 に登録されるため、
+    それより前にPCが起きている必要がある。"""
+    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+    wake_dt = datetime.datetime.combine(tomorrow, datetime.time(23, 57, 0))
+    wake_str = wake_dt.strftime("%Y-%m-%dT%H:%M:%S")
+    ps = (
+        f'$t = New-ScheduledTaskTrigger -Once -At "{wake_str}";'
+        f'$a = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c exit";'
+        f'$s = New-ScheduledTaskSettingsSet -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Minutes 1);'
+        f'Register-ScheduledTask -TaskName "DailyNewsWakeHelper" -Trigger $t -Action $a -Settings $s -Force -RunLevel Highest | Out-Null'
+    )
+    try:
+        r = subprocess.run(["powershell.exe", "-Command", ps], capture_output=True, text=True, timeout=30)
+        if r.returncode == 0:
+            log(f"[INFO] ウェイクタスク登録: {wake_dt:%Y-%m-%d %H:%M}")
+        else:
+            log(f"[WARN] ウェイクタスク登録失敗: {r.stderr.strip()[:200]}")
+    except Exception as e:
+        log(f"[WARN] ウェイクタスク登録例外: {e}")
+
+
 def sleep_computer():
     """PCをスリープ状態にする（Windows）。"""
+    _register_wake_task()
     log("[INFO] 処理完了。PCをスリープします...")
     subprocess.run(["rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0"])
 
