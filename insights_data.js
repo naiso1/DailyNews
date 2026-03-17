@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-17",
+        analysis: {
+            jp: "自動車内装はEV化・高級化の二大潮流が顕著[jp682,jp683,jp685]。V2L機能やリサイクル素材導入が加速し、健康志向の抗菌・消臭機能も注目[jp682,jp683]。特にリコール対応でシート安全性が再確認[jp682]されており、快適性向上[jp686,jp688]とEV航続距離表示の需要[jp689]が高まっている。",
+            cn: "中国市場の**EV**・**スマートシート**・**HMI**トレンドは加速している[cn532]。コスト高騰やTMA価格上昇[cn529]は内装素材選定に影響。一方、**iFデザイン賞**[cn527]や**EV**の**スマートエージェント**[cn533]は、座席と運転を融合させる**EV**技術の重要性を示唆。消費者は**天然皮革**[cn528]や**抗菌**素材を求めつつ、**AR-HUD**など**ディスプレイ**[cn526]との連動も期待。豊田合成の**操作部品**は、これら**EV**・**スマート**技術と融合し、**健康**・**ウェルネス**価値を高める方向性が鍵。",
+            in: "インド市場は低価格帯から高級EVまで多層的な需要があり、ルノーやBYDがHMI拡大やAR機能を強化している[in546][in547][in550]。消費者はコネクテッド体験への期待が高く、一方で7人乗りMPVやステアリングなど実用性を重視する層も存在する[in549][in552][in553]。グローバル戦略として現地化と海外調達のバランスが重要で、豊田合成のステアリングは革巻きやヒーター機能で差別化が可能[in554][in555]。",
+            us: "米国の自動車内装トレンドは、EV化加速[us496]とコスト最適化の二極化が進む。高級EVでは再生素材の高級感追求[us500]、実用車ではコスト抑制とHMI簡素化[us493]が顕著。消費者はサステナビリティへの関心が高まりつつ、高級感と実用性の両立を求めている。自社開発では、EVプラットフォーム向けにバイオベース素材を採用し、高級感と環境負荷低減を両立する調和内装を提案する必要がある。",
+            eu: "EU市場のEV化eu467eu468や、VWグループのハイブリッド軸足変更eu469は、内装製品の柔軟性要件を急増させている。特に、再生アルミやリサイクル素材の採用はサステナビリティトレンドと一致する。一方、デジタルコックピットの需要増eu472や、Google搭載の進化eu474は、HMIとAI連携の重要度を示している。安全面では、EVバッテリーの発熱対策や、衝突時の乗員保護eu470が課題であり、これらを統合した内装ソリューションへの転換が不可欠。",
+        },
+        ideas: {
+            jp: [
+                { id: 568, img: "images/idea_568.png", title: "EV熱管理・抗菌コンソール「EcoHeat Core」", desc: "EV車特有の熱管理と抗菌機能を統合したコンソールパネル。[jp685]のリサイクル素材[jp688]の高級感と、[jp682]のシート安全性を踏まえ、温度感知で自動発熱するヒーターと抗菌コーティングを備える。運転中に足元が温まり、空気も清潔な「うれしさ」を実感。", imagePrompt: "Luxury EV center console with integrated heating elements and antimicrobial coating, brushed aluminum and warm wood grain materials, ambient lighting showing temperature zones, photorealistic 3D render, cinematic lighting, high detail, premium automotive interior design" },
+                { id: 569, img: "images/idea_569.png", title: "AI音声・消臭・抗菌モジュール「ZenAir Voice」", desc: "車内空気質をAIで最適化する消臭・抗菌モジュール。[jp686]のウェルカムイルミネーションと連携し、ドア開閉で自動作動。[jp683]のEV V2L機能と連動し、車外でEV充電中も車内を清潔に保つ「うれしさ」を提供。", imagePrompt: "Automotive interior air quality module with AI voice interface, holographic display, integrated air purifier vents, soft blue and green ambient lighting, premium materials with antimicrobial texture, photorealistic render, futuristic cockpit design" },
+            ],
+            cn: [
+                { id: 570, img: "images/idea_570.png", title: "生体認証連動・温熱理療シート「癒しの風」", desc: "ドライバーのバイタルサイン（心拍数、体温）をセンサーで検知し、AIが最適な**温熱**・**マッサージ**コースを自動調整。天然皮革[cn145]の**タクタイル**質感と、**抗菌**処理[cn123]で清潔感を維持。車内が**リラクゼーション**空間に生まれ、疲れを吹き飛ばす**うれしさ**を体験できる。", imagePrompt: "Relaxing luxury car seat with integrated heating and massage, biometric sensors on the headrest, natural leather texture, ambient warm lighting, serene atmosphere, photorealistic 3D render, premium automotive interior design" },
+                { id: 571, img: "images/idea_571.png", title: "AI音響体験シート「音楽の寝床」", desc: "AIが運転者の好みに合わせて、座席の**音響環境**を自動調整。低周波でリラックス、高周波で集中モードに切り替え。**EV**の静寂性と**HMI**の連動で、音楽・ナビ・通話の**音質**が最適化。車内が**音楽ホール**のように**うれしさ**に包まれる。", imagePrompt: "Premium car seat with integrated acoustic technology, holographic music visualization, advanced sound system, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, luxury vehicle interior" },
+            ],
+            in: [
+                { id: 572, img: "images/idea_572.png", title: "グローバル・スマート・ステアリング：現地化と快適性の融合", desc: "インドの熱帯気候と低価格市場に対応。豊田合成のステアリングをベースに、ヒーター機能と冷却機能を両立。革巻き素材はサステナブルな再生プラスチックを採用。運転中の冷房や暖房で快適なコクピットを実現。海外調達の素材をローカライズし、現地化の戦略を実現し、うれしさを感じて。", imagePrompt: "Steering wheel with dual-zone heating and cooling elements, premium leather and sustainable recycled plastic materials, tropical Indian interior lighting, warm ambient glow, ergonomic design, photorealistic 3D render, automotive product visualization, high detail, 4K quality" },
+                { id: 573, img: "images/idea_573.png", title: "マルチモード・AR・ナビゲーション・コクピット：安全とエンタメの統合", desc: "インドの都市部交通とEV需要に対応。フロントガラスにARナビを投影し、ADASと連動。サウンドシステムはダイナウオやローカル音楽に最適化。HMIは回転タッチスクリーンを備え、モジュラーでカスタマイズ可能。ARとAIが安全とエンタメを統合し、運転中の視界を遮らない。うれしさを感じて。", imagePrompt: "Augmented reality head-up display in premium vehicle cockpit, holographic navigation interface floating above dashboard, AI assistant visualization, futuristic interior with dual-tone seats, night driving scene, blue accent lighting, photorealistic 3D render, automotive product visualization, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 574, img: "images/idea_574.png", title: "BioLuxe 調和バイオ・インパネ", desc: "植物由来のバイオベース素材で製造されたインパネパネル。EV車の**高級感**を**再生素材**の質感で表現。触り心地は**高級レザー**と同様の滑らかさを保ちつつ、**自然の温もり**を感じさせる。EV化加速[us492]のトレンドに対応し、**サステナビリティ**と**ラグジュアリー**を両立。運転中に**癒やし**を感じ、**環境負荷低減**にも貢献する。", imagePrompt: "Luxury EV interior dashboard close-up, plant-based biocomposite material texture, warm organic tones, brushed metal trim accents, soft ambient lighting, photorealistic 3D render, premium automotive design, high detail, 4K quality" },
+                { id: 575, img: "images/idea_575.png", title: "EcoTouch AR パネル", desc: "AR表示を統合した**調和パネル**。物理ボタンを**ARディスプレイ**で置き換えつつ、**実用性**を確保。HMI簡素化[us493]のトレンドを**デジタル化**で補完。タッチレス操作で**衛生面**も向上。EV化[us492]と**コスト抑制**[us493]のバランスを**インテリジェンス**で実現。運転中に**楽しさ**と**安心感**を同時に提供。", imagePrompt: "Modern vehicle cockpit with AR display integrated in center console, holographic interface floating above dashboard, sleek minimalist design, blue accent lighting, night driving scene, photorealistic render, automotive interior concept, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 576, img: "images/idea_576.png", title: "EV安全統合・緊急脱出コンソール『SafeExit EU』", desc: "EVバッテリーの発熱[eu468]や衝突時のリスクを考慮した、**緊急脱出**を支援するコンソール設計。再生アルミと耐熱カーボンを組み合わせ、**衝突時**に自動的に開くドアハッチを内蔵。子供安全も考慮し、**緊急時**に即座にアクセス可能な設計。安全で**安心感**を。", imagePrompt: "Automotive interior design concept, emergency escape console, EV battery thermal protection, crash safety features, heat-resistant carbon fiber materials, brushed aluminum accents, modern vehicle cockpit, dramatic lighting, photorealistic render, cinematic composition, high detail, 4K quality" },
+                { id: 577, img: "images/idea_577.png", title: "AI安全統合・耐熱軽量パネル『SafeMod EU+』", desc: "EVプラットフォームに最適化された**モジュラーコンソール**で、AI安全コーチと連動。衝突時の乗員保護を拡大する**耐熱カーボン**を採用。軽量設計でEVの航続距離向上にも貢献。従来の**安全技術**を**内装**へ統合し、**快適さ**と**安全性**の両立を実現。", imagePrompt: "Automotive interior design concept, modular safe console, AI safety integration, heat-resistant carbon fiber, lightweight materials, modern vehicle cockpit, soft ambient lighting, photorealistic render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-16",
         analysis: {
             jp: "2026年3月、日本市場の自動車内装トレンドは**EV化**と**HMIの再考**が顕著[jp672][jp678]。メルセデスの8Kディスプレイやホンダの物理スイッチ回帰は、**高級感**と**操作性**の両立が求められている[jp672][jp678]。また、**高級感**を追求するエルメスコラボ[jp677]や、環境配慮のアップサイクル[jp681]も注目を集める。日産セレナのGoogleナビ導入[jp673]は、**コネクテッド**機能の普及が加速している[jp673]。",
