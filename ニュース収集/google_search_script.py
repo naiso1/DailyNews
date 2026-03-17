@@ -263,6 +263,12 @@ def extract_image_from_rss(entry):
                     url = lnk.get("href") or lnk.get("url")
                     if url:
                         candidates.append(str(url))
+        # summary / content:encoded 内の <img src="..."> を抽出
+        for html_field in [entry.get("summary", ""), *[c.get("value", "") for c in entry.get("content", [])]]:
+            if not html_field:
+                continue
+            for m in re.finditer(r'<img[^>]+src=["\']?(https?[^"\'> ]+)', html_field):
+                candidates.append(m.group(1))
     except Exception:
         pass
     if not candidates:
@@ -1141,9 +1147,11 @@ def fetch_article_text(url):
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15)
         if resp.status_code != 200:
+            print(f"  [FETCH_FAIL] HTTP {resp.status_code}: {url}")
             return ""
         html = resp.text
-    except Exception:
+    except Exception as e:
+        print(f"  [FETCH_FAIL] {type(e).__name__}: {url}")
         return ""
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(["script", "style", "noscript"]):
@@ -1153,6 +1161,11 @@ def fetch_article_text(url):
     text = normalize_text(text)
     if len(text) > SUMMARY_HTML_CHARS:
         text = text[:SUMMARY_HTML_CHARS]
+    char_count = len(text)
+    if char_count < 100:
+        print(f"  [FETCH_SHORT] {char_count}chars: {url}")
+    else:
+        print(f"  [FETCH_OK] {char_count}chars: {url}")
     _article_text_cache[url] = text
     return text
 
@@ -1188,7 +1201,8 @@ def summarize_article(title, content, url, country=""):
         "条件3: 事実ベースで簡潔に。\\n"
         "条件4: 可能なら固有名詞/数値/企業名など本文の具体情報を1つ以上含める。\\n"
         "条件5: 内容は必ず句点で終える。\\n"
-        "条件6: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\\n\\n"
+        "条件6: 自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。\\n"
+        "条件7: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\\n\\n"
         f"既存タイトル: {title}\\n"
         f"既存内容: {content}\\n"
         f"本文HTML抽出: {html_text}\\n"
@@ -1202,10 +1216,11 @@ def summarize_article(title, content, url, country=""):
             "条件3: 事実ベースで簡潔に。\n"
             "条件4: 可能なら固有名詞/数値/企業名など具体情報を2つ以上含める。\n"
             "条件5: 内容は必ず句点で終える。\n"
-            "条件6: 中国記事は漢字や一般的なカタカナ表記を優先し、ひらがな主体の当て字は使わない。\n"
-            "条件7: 固有名詞は英字表記か一般的な日本語表記（例: Huawei=ファーウェイ、Dongfeng=東風）を使う。\n"
-            "条件8: 不明な固有名詞は原文の中国語表記を維持する。\n"
-            "条件9: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
+            "条件6: 自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。\n"
+            "条件7: 中国記事は漢字や一般的なカタカナ表記を優先し、ひらがな主体の当て字は使わない。\n"
+            "条件8: 固有名詞は英字表記か一般的な日本語表記（例: Huawei=ファーウェイ、Dongfeng=東風）を使う。\n"
+            "条件9: 不明な固有名詞は原文の中国語表記を維持する。\n"
+            "条件10: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
             f"既存タイトル: {title}\n"
             f"既存内容: {content}\n"
             f"本文HTML抽出: {html_text}\n"

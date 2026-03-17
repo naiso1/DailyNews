@@ -1,6 +1,7 @@
 ﻿import argparse
 import csv
 import os
+import random
 import re
 import sys
 from difflib import SequenceMatcher
@@ -17,6 +18,8 @@ INSIGHTS_PATH = ROOT / "insights_data.js"
 HTML_PATH = ROOT / "内装製品デイリーニュース.html"
 PROMPT_PATH = ROOT / ".agent" / "prompts" / "insights_generation_prompt.md"
 DEFAULT_SHEET = ROOT / "ニュース収集" / "sheet2_llm_targets.csv"
+IDEA_ANGLES_PATH = ROOT / "ニュース収集" / "idea_angles.json"
+TG_PRODUCTS_PATH = ROOT / "ニュース収集" / "tg_products.json"
 
 ENCODINGS = ["utf-8-sig", "utf-8", "cp932", "utf-16"]
 ANALYSIS_CHAR_LIMIT = 300
@@ -652,6 +655,22 @@ def js_escape(value: str):
     return s
 
 
+def load_idea_angles() -> list[str]:
+    try:
+        data = json.loads(IDEA_ANGLES_PATH.read_text(encoding="utf-8"))
+        return data.get("angles", [])
+    except Exception:
+        return []
+
+
+def load_tg_products() -> list[dict]:
+    try:
+        data = json.loads(TG_PRODUCTS_PATH.read_text(encoding="utf-8"))
+        return data.get("products", [])
+    except Exception:
+        return []
+
+
 def make_country_prompt(
     date_key: str,
     country: str,
@@ -667,14 +686,26 @@ def make_country_prompt(
         summary_lines.append(f"- {id_text}{it['title']} / {it['desc']} / {it.get('tags', '')}")
     summary = "\n".join(summary_lines)
     duplicate_guard = build_duplicate_guard_text(history_ideas or [], max_items=20)
+    angles = load_idea_angles()
+    angle = random.choice(angles) if angles else ""
+    angle_instruction = f"    - 【今回の発想切り口】1件目は「{angle}」の視点で発想すること（ただしニュース内容と関連させること）\n" if angle else ""
+    tg_products = load_tg_products()
+    tg_product = random.choice(tg_products) if tg_products else None
+    tg_block = ""
+    if tg_product:
+        tg_block = (
+            f"\n    【豊田合成の参考製品（今回）】\n"
+            f"    製品: {tg_product['name']}\n"
+            f"    概要: {tg_product['desc']}\n"
+            f"    ※ 上記製品を起点として2件目のアイデアに発展させること（ニュースと絡めること）\n"
+        )
     extra = textwrap.dedent(f"""
 
     【対象日】{date_key}
     【対象国】{country}
     【ニュース概要】
     {summary}
-    {duplicate_guard}
-
+    {duplicate_guard}{tg_block}
     出力は必ずJSONのみで返してください。
     JSON以外の文字や説明、コードフェンスは一切出力しないでください。
     形式:
@@ -688,7 +719,7 @@ def make_country_prompt(
 
     制約:
     - {need_count}件提案
-    - 2件の発想軸を明確に分ける（例: 1件は素材/ハード、もう1件はUI/ソフト/サービス）
+{angle_instruction}    - 2件の発想軸を明確に分ける（例: 1件は素材/ハード、もう1件はUI/ソフト/サービス）
     - 過去アイデアの言い換え・焼き直しは禁止
     - うれしさを必ず明記
     - 200〜300文字程度
