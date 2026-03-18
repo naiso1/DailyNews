@@ -691,13 +691,10 @@ def make_country_prompt(
     angle_instruction = f"    - 【今回の発想切り口】1件目は「{angle}」の視点で発想すること（ただしニュース内容と関連させること）\n" if angle else ""
     tg_products = load_tg_products()
     tg_product = random.choice(tg_products) if tg_products else None
-    tg_block = ""
+    tg_constraint = ""
     if tg_product:
-        tg_block = (
-            f"\n    【豊田合成の参考製品（今回）】\n"
-            f"    製品: {tg_product['name']}\n"
-            f"    概要: {tg_product['desc']}\n"
-            f"    ※ 上記製品を起点として2件目のアイデアに発展させること（ニュースと絡めること）\n"
+        tg_constraint = (
+            f"    - ideas[1]（2件目）は豊田合成の既存製品「{tg_product['name']}」（{tg_product['desc'][:40]}…）を起点に、ニュース内容と絡めて発展させること\n"
         )
     extra = textwrap.dedent(f"""
 
@@ -705,7 +702,7 @@ def make_country_prompt(
     【対象国】{country}
     【ニュース概要】
     {summary}
-    {duplicate_guard}{tg_block}
+    {duplicate_guard}
     出力は必ずJSONのみで返してください。
     JSON以外の文字や説明、コードフェンスは一切出力しないでください。
     形式:
@@ -719,8 +716,7 @@ def make_country_prompt(
 
     制約:
     - {need_count}件提案
-{angle_instruction}    - 2件の発想軸を明確に分ける（例: 1件は素材/ハード、もう1件はUI/ソフト/サービス）
-    - 過去アイデアの言い換え・焼き直しは禁止
+{angle_instruction}{tg_constraint}    - 過去アイデアの言い換え・焼き直しは禁止
     - うれしさを必ず明記
     - 200〜300文字程度
     - imagePromptは構図・素材・配色を2件で明確に変える

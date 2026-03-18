@@ -935,6 +935,13 @@ def has_japanese_kana(text):
 def has_kanji(text):
     return re.search(r"[\u4e00-\u9fff]", str(text or "")) is not None
 
+def is_chinese_text(text):
+    """CJK文字はあるが日本語仮名がない → 中国語テキストと判定"""
+    s = str(text or "")
+    cjk = len(re.findall(r"[\u4e00-\u9fff\u3400-\u4dbf]", s))
+    kana = len(re.findall(r"[ぁ-ゟァ-ヿ]", s))
+    return cjk >= 3 and kana == 0
+
 def kana_kanji_counts(text):
     s = str(text or "")
     kana = len(re.findall(r"[ぁ-ゟァ-ヿ]", s))
@@ -988,10 +995,14 @@ def enforce_kanji_text(text):
         return fixed
     return ""
 
+def _is_valid_japanese(text):
+    """日本語として有効か判定（仮名があり、かつ中国語テキストでない）"""
+    return has_japanese_kana(text) and not is_chinese_text(text)
+
 def ensure_japanese(text, fallback="", force=False, require_kanji=False):
     if not text:
         return ""
-    if not force and has_japanese_kana(text):
+    if not force and _is_valid_japanese(text):
         return text
     translated = translate_text(text, target_lang="ja", force_japanese=True, require_kanji=require_kanji)
     if translated:
@@ -1002,7 +1013,7 @@ def ensure_japanese(text, fallback="", force=False, require_kanji=False):
                 translated = converted
             else:
                 translated = ""
-        if translated and (has_japanese_kana(translated) or has_kanji(translated)):
+        if translated and _is_valid_japanese(translated):
             return translated
     if fallback and fallback != text:
         translated_alt = translate_text(fallback, target_lang="ja", force_japanese=True, require_kanji=require_kanji)
@@ -1014,7 +1025,7 @@ def ensure_japanese(text, fallback="", force=False, require_kanji=False):
                     translated_alt = converted
                 else:
                     translated_alt = ""
-            if translated_alt:
+            if translated_alt and _is_valid_japanese(translated_alt):
                 return translated_alt
     return translated or text
 
@@ -1236,6 +1247,7 @@ def summarize_article(title, content, url, country=""):
     if len(summary_title) > SUMMARY_TITLE_LIMIT or len(summary_body) > SUMMARY_CONTENT_LIMIT or not ends_with_sentence(summary_body):
         refine_prompt = (
             f"次のJSONのtitleとsummaryを条件内に収めて書き直してください。\\n"
+            "条件0: 必ず日本語で出力する（中国語・英語・その他言語は禁止）。\\n"
             f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内（文を途中で切らない）。\\n"
             f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内（文を途中で切らない）。\\n"
             "条件3: 内容は必ず句点で終える。\\n"
@@ -1322,6 +1334,34 @@ def summarize_article(title, content, url, country=""):
     if summary_body and not ends_with_sentence(summary_body):
         if len(summary_body) < SUMMARY_CONTENT_LIMIT:
             summary_body = summary_body + "。"
+
+    # --- 最終中国語チェック: 中国語が残っていたら強制翻訳リトライ (最大3回) ---
+    if country == "中国":
+        for attempt in range(3):
+            title_cn = is_chinese_text(summary_title)
+            body_cn = is_chinese_text(summary_body)
+            if not title_cn and not body_cn:
+                break
+            print(f"  [CHINESE_DETECTED] attempt={attempt+1} title_cn={title_cn} body_cn={body_cn}: {(summary_title or summary_body)[:40]}")
+            cn_force_prompt = (
+                "以下の中国語テキストを日本語に翻訳してください。\n"
+                "IMPORTANT: Output must be in Japanese only. Do NOT output Chinese.\n"
+                f"条件1: titleは{SUMMARY_TITLE_LIMIT}字以内、句点または体言止めで終える。\n"
+                f"条件2: summaryは{SUMMARY_CONTENT_LIMIT}字以内、句点で終える。\n"
+                "出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
+                f"title: {summary_title}\n"
+                f"summary: {summary_body}"
+            )
+            forced = call_llm_text(cn_force_prompt)
+            forced_title = parse_json_field(forced, "title")
+            forced_body = parse_json_field(forced, "summary")
+            if forced_title and _is_valid_japanese(forced_title):
+                summary_title = forced_title
+            if forced_body and _is_valid_japanese(forced_body):
+                summary_body = forced_body
+        # 3回試みても中国語が残った場合はログに記録
+        if is_chinese_text(summary_title) or is_chinese_text(summary_body):
+            print(f"  [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: {(summary_title or summary_body)[:40]}")
 
     _summary_cache[cache_key] = (summary_title, summary_body)
     return summary_title, summary_body
