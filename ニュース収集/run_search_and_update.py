@@ -104,11 +104,15 @@ def ensure_lm_studio():
 
 
 def _register_wake_task():
-    """翌日 23:57 にPCを起こすワンショットタスクを登録する。
+    """次回の 23:57 にPCを起こすワンショットタスクを登録する。
+    通常は深夜実行の直後に当日 23:57 を登録する。
+    もし 23:57 を過ぎて実行された場合だけ翌日に繰り越す。
     タスクスケジューラの wake timer は 23:59:30 に登録されるため、
     それより前にPCが起きている必要がある。"""
-    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-    wake_dt = datetime.datetime.combine(tomorrow, datetime.time(23, 57, 0))
+    now = datetime.datetime.now()
+    wake_dt = datetime.datetime.combine(now.date(), datetime.time(23, 57, 0))
+    if now >= wake_dt:
+        wake_dt += datetime.timedelta(days=1)
     wake_str = wake_dt.strftime("%Y-%m-%dT%H:%M:%S")
     ps = (
         f'$t = New-ScheduledTaskTrigger -Once -At "{wake_str}";'

@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-18",
+        analysis: {
+            jp: "日本市場の自動車内装トレンドを分析しました。カーメイトのRAZOは穴あけ不要の3Dアルミダイキャスト構造を採用し、純正ペダルへの適合を重視[jp692]。BMW M5はセンターコンソールをiX3から流用する可能性を示唆[jp693]。Google GeminiはSDV移行期の過渡的カオスを指摘[jp694]。レクサスは中国向けESの特別仕様「ムーンシャドウ」を展開[jp695]。ダイハツはインドネシア向けに9人乗り・窓なし仕様を強化[jp697]。トヨタクラウンはアラミド繊維キーカバーなどスポーティパーツを追加[jp698]。フォレスターは直感的コックピットを強調[jp699]。",
+            cn: "中国市場ではAIと自律走行技術の急速な進歩が、「静粛な高級感」という感性品質の需要を後押ししている[cn536]。特にLiDAR搭載や超大画面ディスプレイの普及に伴い、車内空間の「第三のリビング」としての質が重要視されている[cn545]。また、サプライチェーンの分断を背景に、「独自素材」や「高付加価値」な内装が差別化の鍵となる[cn539]。NVIDIAとの連携や物理AIの進展は、「静寂と快適さ」をさらに高める技術基盤となり[cn540]、内装製品開発においては「触覚的な質感」と「音響環境」の最適化が不可欠である[cn542]。",
+            in: "インド市場では、EV化とサステナビリティが加速し、健康志向も顕在化しています[in556]。特に抗菌・消臭や空気質管理は、熱帯気候での快適性向上に直結します。また、新素材や高級感を求めるプレミアム内装への関心も高まっており、単なる機能ではなくウェルネス体験への移行がトレンドです[in558]。これに対し、モジュール化やマルチモード対応は、多様な消費者ニーズを柔軟に満たす鍵となります[in561]。",
+            us: "US市場では**EV化**と**新素材**が加速しており、BMW i3の**Neue Klasse**プラットフォームやJeepの**ハイブリッド化**[us502]が示唆。また、Polestar 4の**最小限の計器**[us503]やフォードGT500の**カーボン内装**[us510]から、量産性と高級感の両立が鍵。テッドモスの**無線照明**[us509]のように、**センシング**技術と照明の融合も注目。これらを踏まえ、**モジュール設計**によるコスト削減と、**調和**素材の**量産化**を目指す企画を提案する。",
+            eu: "EU市場のEV技術は急速に進化し、内装のラグジュアリー化も進む[eu475,eu476,eu483]。EV向けにAI制御やセンシング技術が注目され[eu482,eu483]、内装素材のサステナビリティもEU規制で強化[eu484]。AR技術活用や感情共感機能もトレンド[eu481,eu483]。自社内装製品開発では、EVプラットフォーム連携やサステナブル素材採用、AR・AIによるユーザー体験向上が重要[eu476,eu482,eu483]。",
+        },
+        ideas: {
+            jp: [
+                { id: 578, img: "images/idea_578.png", title: "モジュール型ペダル・コンソール「EasyFit Core」", desc: "カーメイトの穴あけ不要構造を模倣。量産部品共通化でコスト削減。コンソールに統合したペダルユニットで、純正車種横断適合を実現。3Dアルミダイキャスト採用で軽量かつ高強度。インストール作業が90%削減。DIYユーザーも簡単に交換可能。取り付けが簡単で、好きな車種に合うといううれしい感覚を提供。", imagePrompt: "Modular pedal and console unit integrated into center console, brushed aluminum and carbon fiber materials, automotive interior design, photorealistic 3D render, warm ambient lighting, premium quality, clean composition, modern vehicle cockpit, high detail, 4K quality" },
+                { id: 579, img: "images/idea_579.png", title: "レトロ・モダンステアリング「WabiSteer Hybrid」", desc: "豊田合成の革巻き・木目加飾ステアリングをベース。レクサスLMのラグジュアリーミニバンのエグゼクティブラウンジ感と、フォレスターの直感的コックピットを融合。伝統的な素材と先進的な機能性を融合。ハンドリングの向上とドライバーの疲労軽減を実現。", imagePrompt: "Luxury leather wrapped steering wheel with wood grain accents, modern dashboard integration, premium interior design, photorealistic 3D render, soft ambient lighting, high detail, 8K quality" },
+            ],
+            cn: [
+                { id: 580, img: "images/idea_580.png", title: "極静・高質感シート「森の鼓動」", desc: "LiDAR搭載車のような自律走行環境を想定し、車内を「静寂の聖地」にするコンセプトシートです。生体認証センサーと連動して、ドライバーのバイタルサインをモニター。心拍が安定すると、「温熱リファレックス」と「音響遮断モード」を自動起動。竹の繊維と吸音材を複合した「森の肌触り」で、「静かで心地よい」空間を「癒やし」を提供し、「高級感」を「静粛性」で「実感」できます。", imagePrompt: "Luxury car interior, driver seat with bamboo fiber texture and sound-absorbing materials, serene atmosphere, soft ambient lighting, LiDAR sensor integration concept, high-end premium materials, photorealistic 3D render, warm and calming mood, cinematic lighting, 4K quality" },
+                { id: 581, img: "images/idea_581.png", title: "豊田合成×AI加飾パネル「智感壁」", desc: "豊田合成の発泡ウレタンパッドを採用し、NVIDIAの物理AI技術と連携したインパネ・ドアトリムです。AIが運転者の表情や視線を分析し、「疲れたら」自動で「マッサージ機能」と「香り」を演出。加飾フィルムは「竹の息吹」や「星空」など「感性デザイン」に変化し、「癒やし", imagePrompt: "" },
+            ],
+            in: [
+                { id: 582, img: "images/idea_582.png", title: "ウェルネス・エコ・抗菌・消臭・スマートコンソール", desc: "インドの熱帯気候に対応する**抗菌・消臭**コンソールです。天然バフや**再生素材**を組み合わせ、**AIセンサー**で空気を分析。運転中の**ストレス軽減**と**健康維持**を実現し、**家族全員が**安心して乗れる**ウェルネス空間**を創造します。", imagePrompt: "Premium automotive center console with integrated air purification, natural bamboo and bamboo-derived sustainable wood grain texture, soft green ambient lighting, subtle mist effect, health-focused wellness interior design, photorealistic 3D render, luxury car interior, high detail, 4K quality" },
+                { id: 583, img: "images/idea_583.png", title: "モジュラー・プレミアム・EV・フラット・フロア・センターコンソール", desc: "EVの**フラットフロア**を活かした**モジュラー設計**です。**高級感**のある**カーボンファイバー**や**アルカンターラ**を多用し、**マルチモードディスプレイ**で**ナビ・エンタメ**を統合。豊田合成の**EV向けフロア部品**をベースに、**インダストリアルデザイン**で**革新性**を追求し、**運転者への**快楽**を提供します。", imagePrompt: "Futuristic EV center console with flat floor layout, sleek brushed aluminum and carbon fiber trim, holographic display floating above, blue accent lighting, premium automotive design, modern vehicle cockpit, night driving scene, photorealistic render, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 584, img: "images/idea_584.png", title: "Modular Eco-Luxe：量産・調和インパネ", desc: "**量産化**を**モジュール設計**で実現。フォードGT500の**鍛造カーボン**[us510]技術と、BMW i3の**Neue Klasse**の**新素材**[us506]を組み合わせ。**リサイクル素材**も活用し、**コスト競争力**を**向上**。運転者への**うれしさ**は、**高級感**と**環境配慮**が**両立**する**調和**体験。", imagePrompt: "Modular luxury interior panel with carbon fiber and recycled materials, seamless design, modular assembly structure, high-end automotive cockpit, brushed aluminum accents, warm ambient lighting, photorealistic 3D render, 4K quality" },
+                { id: 585, img: "images/idea_585.png", title: "SoftGlow AR：調和加飾×ARインタラクション", desc: "豊田合成の**ソフトパッド**技術を**進化**。Jeepの**回転式シフター**[us502]のような**インタラクション**を**AR**で**再現**。Polestar 4の**大型タッチスクリーン**[us503]から**インスパイア**。運転者への**うれしさ**は、**物理ボタン**の**廃止**と**AR**の**融合**による**革新性**。", imagePrompt: "Soft-touch AR panel with holographic interface, futuristic dashboard design, night driving scene, blue accent lighting, premium leather and fabric textures, photorealistic render, cinematic lighting, high detail" },
+            ],
+            eu: [
+                { id: 586, img: "images/idea_586.png", title: "スマート・デジタル・コックピット「SmartAura EU」", desc: "EU市場の**EV**トレンド[eu476,eu483]を活かし、**AI**搭載**HMI**で車内を**デジタル化**。運転中の**AR**ナビゲーションや**感情共感**ディスプレイで、**ユーザー体験**を**革新**。**安全**かつ**快適**な**コックピット**を実現し、**欧州の高級車**との**差別化**を**可能に**する**革新的**機能で、**乗客の**満足度**を**最大化**します。", imagePrompt: "Futuristic digital cockpit interior, AI-powered holographic interface floating above dashboard, augmented reality navigation display, emotional recognition sensors, luxury EV design, brushed aluminum and sustainable leather materials, ambient lighting effects, photorealistic rendering, cinematic lighting, high detail, 4K quality" },
+                { id: 587, img: "images/idea_587.png", title: "ソフトパッド・進化版「SoftPad EU+」", desc: "豊田合成の**ソフトパッド**技術を**EV**プラットフォーム[eu475,eu476]に**最適化**。**サステナブル素材**[eu484]を採用し、**AR**技術で**内装**の**視覚的体験**を**向上**。特に**EV**車内での**モーター音**低減や**熱管理**機能で、**静粛性**と**快適性**を**両立**。欧州市場の**高級感**と**機能性**を**融合**し、**ユーザーの****うれしさ**を**最大化**する**革新的**製品で、**差別化**を**実現**します。", imagePrompt: "Luxury car interior close-up, soft touch foam panel integrated into dashboard, sustainable recycled leather texture, ambient lighting integration, EV motor noise insulation design, thermal management features, premium quality materials, photorealistic rendering, warm ambient glow, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-17",
         analysis: {
             jp: "自動車内装はEV化・高級化の二大潮流が顕著[jp682,jp683,jp685]。V2L機能やリサイクル素材導入が加速し、健康志向の抗菌・消臭機能も注目[jp682,jp683]。特にリコール対応でシート安全性が再確認[jp682]されており、快適性向上[jp686,jp688]とEV航続距離表示の需要[jp689]が高まっている。",
