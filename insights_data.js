@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-19",
+        analysis: {
+            jp: "日本市場ではサステナブル素材の採用が加速しており、EV向けに軽量化とリサイクル設計の重要性が増しています[jp703]。また、マツダの遮音ガラス採用やホンダのType-C端子化から、コックピット機能性の向上がトレンドです[jp704]。さらに、カーエアコン臭対策や静寂性向上など、快適性への関心も高まっています[jp705][jp711]。自社の内装製品開発では、環境配慮と運転者の満足度の両立をテーマに、新素材と機能性を統合したソリューション開発が求められます。",
+            cn: "中国市場では、小鹏汽車や金杯汽車の最新プロジェクトから、L4自動運転対応の次世代ワイヤー操舵システムや、8.86億元規模の高級車内装受注が確認できる[cn546,cn548,cn550]。特にXiaomi SU7のアップグレード事例では、3層環状雰囲気照明やナッパレザー採用、独立コンプレッサー搭載の車載冷蔵庫など、「五感に訴える極上空間」の実現がトレンド[cn551,cn553,cn554]。また、Dezaix威がシートサプライヤーで15.3%シェアを誇り、ボッシュや華為技術との競争が激化[cn555]。",
+            in: "インド市場のEV化と高級感が加速中です[in568]。KiaのEV MPV追加[in568]やルノーのEV化[in575]、フェラーリの物理ボタン採用[in572]など、EVでも高級感を追求する傾向があります[in574]。さらに、デリーのEV補助政策[in567]やBMWの高級クーペ登場[in571]は、サステナブルかつプレミアムな内装需要を示唆[in566]。Kiaの6人乗り設定[in569]やルノーの快適装備[in575]は、家族向け内装の多機能化を強調[in573]。HMIやコネクテッド機能の進化も期待されます[in575]。",
+            us: "US市場の自動車内装トレンドは、**物理ボタン復活**[us511][us512]と**高級素材追求**[us515][us519]が顕著。EV化で**コスト削減**[us511]が必要だが、フェラーリやベンレーは**デジタルと物理の融合**[us512][us517]を重視。BMWやVWは**急速充電技術**[us513][us514]と**高級感**[us516]の両立へ。トヨタは**実用性と快適性のバランス**[us518]。メタル加工技術の進化[us520]も内装品質向上に寄与。",
+            eu: "欧州市場ではEV化[eu485]と高級車市場拡大[eu488]が加速し、地域戦略も変動中[eu486]。BYD傘下Denza B5[eu489]やMG S9[eu490]の新型PHEV SUV投入で高級化・電気化が進む。特に子孫・高齢者利用拡大に伴い「緊急脱出」「安全確保」ニーズが高まり、EVプラットフォームのバッテリー熱対策[eu492]が重要。豊田合成の光加飾パネル技術[eu491]をEV・高級車向けに進化させ、課題解決を図る必要がある。",
+        },
+        ideas: {
+            jp: [
+                { id: 588, img: "images/idea_588.png", title: "リサイクルアルミ×温感抗菌モジュール「EcoWarm Core」", desc: "EV車向けに、リサイクルアルミパネルを基調としたコンソールモジュール。車内温度感知で自動発熱する温感ヒーターと抗菌コーティングを統合。EVトレンドに合わせ、軽量化と環境配慮を実現。エアコン臭対策も兼ね、運転の快適さを愉しみに。素材の再生性で環境に優しい選択肢も愉しみです。", imagePrompt: "Recycled aluminum console panel with integrated temperature-sensitive heater, antimicrobial coating, EV vehicle interior, brushed aluminum and matte black materials, subtle warm glow from heater, minimalist design, photorealistic 3D render, premium automotive sustainability concept, cinematic lighting, high detail, 4K quality" },
+                { id: 589, img: "images/idea_589.png", title: "アップグレードステアリング「WabiSteer EV」", desc: "革巻き・木目加飾をベースに、EV車向けの軽量化と抗菌機能を追加。ヒーター機能付きで、冬は温かみ、夏は涼しさを愉しみに。48Vハイブリッドトレンドに合わせ、スポーツ感とラグジュアリーを愉しみに。素材の質感と機能性の愉しみも。", imagePrompt: "Premium leather-wrapped steering wheel with wood grain trim, integrated heater function, minimalist EV interior design, warm ambient lighting, photorealistic 3D render, high detail, 4K quality, sustainable materials, Japanese wabi-sabi aesthetic" },
+            ],
+            cn: [
+                { id: 590, img: "images/idea_590.png", title: "AI連携マルチモードコントロールパネル「智感壁」", desc: "小鹏G XやXiaomi SU7のデジタルコックピットトレンドを踏まえ、車内壁面にAI搭載コントロールパネルを埋め込み、音楽・照明・香りを1つで操作。運転モード変化と連動し、「デジタル空間が身体を包む」うれしさを実現。タッチレスで直感的な操作性と、Xiaomi SU7の3層環状照明のような没入感を再現。", imagePrompt: "Futuristic car interior dashboard with integrated AI control panel, holographic interface floating above smooth dashboard, multi-color ambient lighting rings, premium leather and brushed aluminum materials, night driving scene, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 591, img: "images/idea_591.png", title: "ウェザーストリップ搭載「静音防水ドアトリム」", desc: "金杯汽車の高級車内装受注事例を基に、ドア・トランク周りのウェザーストリップ技術を発展。遮音・防水・摺動音低減を「静寂の聖地」を実現。Xiaomi SU7のナッパレザーや雰囲気照明と連携し、「ドアを開ける瞬間から癒やされる」うれしさ。防水加工で「雨の日でも安心」、「高級感と機能性の両立」を提案。", imagePrompt: "Luxury car door panel interior with weather stripping technology, high-quality leather trim, seamless door seal, soft ambient lighting strip along the door frame, water droplet protection demonstration, premium craftsmanship, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 592, img: "images/idea_592.png", title: "デジタル・スマートコックピット：EVでも高級感を演出", desc: "EV化が進むインド市場でも**高級感**を損なわない**デジタル・スマートコックピット**です。**ARナビゲーション**と**物理ボタンの最適配置**を組み合わせ、**フェラーリ[in572]**のような**プレミアム**な操作性を実現。**KiaのEV MPV[in568]**のような多機能**内装**と融合し、**6人乗り**でも**快適**な**コックピット**を演出。運転者が**ストレスなく**操作できる**スマート**体験を提供。", imagePrompt: "Advanced digital smart cockpit interior for EV vehicle, modern luxury car dashboard with AR navigation display integrated into windshield, hybrid physical buttons and touch screen, premium materials like brushed aluminum and soft leather, ambient lighting effects, futuristic yet premium design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 593, img: "images/idea_593.png", title: "アンビエント・レトロ・プレミアムパネル：EVの高級感向上", desc: "EVの**高級感**を高める**アンビエント・レトロ・プレミアムパネル**です。**光加飾**と**面発光フィルム**を組み合わせ、**フェラーリ[in572]**のような**物理ボタン**と**デジタル**を融合。**KiaのEV MPV[in568]**のような**6人乗り**でも**快適**な**内装**空間を演出。ドライバーが**リラックス**しながら**操作**できる**プレミアム**な**体験**を提供。", imagePrompt: "Retro premium ambient lighting panel for EV interior, face emitting light diffusion film integrated into dashboard, brushed aluminum trim with warm ambient glow, luxury car interior design, modern vehicle cockpit, premium quality, photorealistic rendering, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 594, img: "images/idea_594.png", title: "BioTouch 調和バイオ・インパネ", desc: "植物由来の**バイオベース素材**で、触覚も自然な木肌を再現。フェラーリCEOが「物理ボタン復活」[us512]と明言する流れを受け、デジタルパネルに**温かみのある質感**を追加。運転中に**癒やし**を感じ、高級感と親しみやすさを両立する**調和空間**を実現。", imagePrompt: "Luxury car dashboard made of plant-based bio material with wood grain texture, integrated digital display with physical tactile buttons, warm ambient lighting, premium leather accents, photorealistic 3D render, cinematic interior shot" },
+                { id: 595, img: "images/idea_595.png", title: "AirBagNest 調和安全・クッション", desc: "豊田合成の**エアバッグ技術**[us520]を応用。衝突時の衝撃を和らげる**クッション構造**をインパネに統合。高級感ある**調香ディフューザー**と連動し、安全装置作動時に**安心感**を伝える。運転者の**安全と癒やし**を同時に支える**調和コックピット**を創出。", imagePrompt: "Premium vehicle interior with integrated airbag cushion technology, soft-touch dashboard surface, subtle aroma diffuser, safety lighting indicators, high-detail 3D render, professional automotive product visualization, night driving atmosphere" },
+            ],
+            eu: [
+                { id: 596, img: "images/idea_596.png", title: "緊急脱出・子供安全統合コンソール『SafeExit EU+』", desc: "EVバッテリー熱対策[eu489]や衝突時の脱出支援を統合。緊急時LED誘導と子供用ロック解除ボタン搭載。衝突センサー連動でドア開閉可能。緊急時は家族全員が安全に脱出できる安心感。", imagePrompt: "Emergency exit console integrated in luxury EV interior, illuminated guide lights for evacuation, child safety lock release button, crash sensor integration, thermal management display, sleek modern dashboard design, warm ambient lighting, photorealistic 3D render, premium automotive quality" },
+                { id: 597, img: "images/idea_597.png", title: "光加飾・アンビエントライト進化した『LumaSoft EU+』", desc: "EVプラットフォーム[eu485]に最適化。豊田合成の光加飾技術を進化させ、車内ムード照明と連動。子供向けアニメーション投影や、緊急時の安全表示も。高級感と機能性を兼ね備えた新しい内装体験", imagePrompt: "Advanced ambient lighting panel with holographic projections, soft glowing decorative surfaces, integrated in premium EV cockpit, night driving atmosphere, blue and purple LED accents, high-tech interior design, photorealistic automotive visualization, luxury materials" },
+            ],
+        }
+    },
+{
         date: "2026-03-18",
         analysis: {
             jp: "日本市場の自動車内装トレンドを分析しました。カーメイトのRAZOは穴あけ不要の3Dアルミダイキャスト構造を採用し、純正ペダルへの適合を重視[jp692]。BMW M5はセンターコンソールをiX3から流用する可能性を示唆[jp693]。Google GeminiはSDV移行期の過渡的カオスを指摘[jp694]。レクサスは中国向けESの特別仕様「ムーンシャドウ」を展開[jp695]。ダイハツはインドネシア向けに9人乗り・窓なし仕様を強化[jp697]。トヨタクラウンはアラミド繊維キーカバーなどスポーティパーツを追加[jp698]。フォレスターは直感的コックピットを強調[jp699]。",
