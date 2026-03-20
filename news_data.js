@@ -36354,7 +36354,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-03-19",
         tags: ["ディスプレイ", "センターコンソール", "新素材", "EV"],
         country: "cn",
-        img: "https://z.autoimg.cn/zixun/www/img/opg_400_400.png",
+        img: "http://www2.autoimg.cn/chejiahaodfs/g33/M04/14/4D/620x0_1_autohomecar__ChxpVmm7V3KABqEMAE1OhJCrXBQ845.png",
         note: ""
     },
     {
@@ -36390,7 +36390,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-03-19",
         tags: ["シート"],
         country: "cn",
-        img: "https://inews.gtimg.com/om_ls/OWxX7onFucwOpnkCcamDVDhms1DqfhgHfRgnM0yrJXhRwAA_640330/0",
+        img: "https://inews.gtimg.com/news_bt/OXSQswPRTMZa7VgRQIsLdImvl2pORzKsQTqTvZp1-rzR0AA/641",
         note: ""
     },
     {

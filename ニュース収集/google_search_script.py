@@ -76,6 +76,24 @@ HEADERS = {
 SIMILARITY_THRESHOLD = 0.9
 SHEET2_SIMILARITY_THRESHOLD = 0.9
 
+TOPIC_TOKEN_STOPWORDS = {
+    "発売", "発表", "公開", "改良", "搭載", "追加", "採用", "向上", "強化", "新型", "新車",
+    "内装", "車内", "自動車", "モデル", "機能", "装備", "画像", "写真", "価格", "予定",
+    "市場", "記事", "技術", "システム", "インチ", "グレード", "インド", "中国", "日本",
+    "欧州", "米国", "静粛性", "安全性", "快適性", "販売", "導入", "一部改良",
+    "interior", "launch", "revealed", "reveal", "update", "updated", "facelift",
+    "new", "car", "cars", "auto", "automotive",
+}
+
+SUSPICIOUS_IMAGE_MARKERS = [
+    "logo", "icon", "sprite", "favicon", "placeholder", "blank", "spacer", "qrcode",
+    "article.gif", "a.gif", "beacon.sina.com.cn", "tracking/article.gif", "thumb_default",
+    "app_share_defaut", "app_share_default", "opg_400_400", "google.com/s2/favicons",
+    "topbar_app_qrcode", "topbar_miniprogram_qrcode", "/shared_files/ssl/images/logo.png",
+    "/logo.svg", "/images/t_", "/images/facebook", "/images/twitter", "/images/google",
+    "/images/pinterest",
+]
+
 # LLM defaults
 USE_LLM = True
 LLM_ONLY = False
@@ -221,6 +239,50 @@ def is_similar(text1, text2):
     ratio = difflib.SequenceMatcher(None, str(text1).lower(), str(text2).lower()).ratio()
     return ratio > SIMILARITY_THRESHOLD
 
+def extract_topic_tokens(text):
+    text = str(text or "")
+    raw_tokens = []
+    raw_tokens.extend(re.findall(r"[A-Za-z]{1,12}(?:[-/][A-Za-z0-9]{1,12})+", text))
+    raw_tokens.extend(re.findall(r"[A-Za-z]{2,}\d+[A-Za-z0-9-]*", text))
+    raw_tokens.extend(re.findall(r"[\u30A1-\u30FAー]{2,}", text))
+    raw_tokens.extend(re.findall(r"[一-龥々]{2,8}", text))
+    tokens = []
+    seen = set()
+    for token in raw_tokens:
+        for part in re.split(r"[/／]", token):
+            t = part.strip().lower()
+            if not t or t in TOPIC_TOKEN_STOPWORDS:
+                continue
+            if len(t) <= 1:
+                continue
+            if t.isdigit():
+                continue
+            if t in seen:
+                continue
+            seen.add(t)
+            tokens.append(t)
+    return tokens
+
+def is_same_topic_text(text1, text2):
+    if not text1 or not text2:
+        return False
+    ratio = difflib.SequenceMatcher(None, str(text1).lower(), str(text2).lower()).ratio()
+    if ratio >= SHEET2_SIMILARITY_THRESHOLD:
+        return True
+    tokens1 = set(extract_topic_tokens(text1))
+    tokens2 = set(extract_topic_tokens(text2))
+    if not tokens1 or not tokens2:
+        return False
+    overlap = tokens1 & tokens2
+    if len(overlap) >= 4:
+        return True
+    model_like_overlap = [tok for tok in overlap if re.search(r"\d|[-/]", tok)]
+    if len(model_like_overlap) >= 2:
+        return True
+    if len(overlap) >= 3 and any(re.search(r"\d|[-/]", tok) or tok.isascii() for tok in overlap):
+        return True
+    return False
+
 def is_interior_related(title, content=""):
     text = (str(title) + " " + str(content)).lower()
     return any(kw.lower() in text for kw in INTERIOR_KEYWORDS)
@@ -305,6 +367,7 @@ def is_target_date(pub_date, target_dates):
 def normalize_image_url(candidate, base_url):
     if not candidate:
         return ""
+    candidate = str(candidate).strip().rstrip("\\")
     if candidate.startswith("//"):
         candidate = "https:" + candidate
     elif candidate.startswith("/"):
@@ -333,7 +396,39 @@ def rank_image_url(url: str) -> int:
                 score += int(m.group(1))
             except Exception:
                 pass
+    if "news_bt/" in lower or "newsapp_bt/" in lower:
+        score += 12
+    if "autoimg.cn" in lower:
+        score += 10
+        if "autohomecar__" in lower:
+            score += 8
+    if "_200200/" in lower or "/0/0" in lower:
+        score -= 8
+    if is_suspicious_image_url(url):
+        score -= 50
     return score
+
+
+def is_suspicious_image_url(url: str) -> bool:
+    if not url or not isinstance(url, str):
+        return True
+    lower = url.strip().lower()
+    if not lower.startswith("http"):
+        return True
+    if any(marker in lower for marker in SUSPICIOUS_IMAGE_MARKERS):
+        return True
+    m = re.search(r"[/_-]w(\d{1,4})h(\d{1,4})[/_-]", lower)
+    if m:
+        try:
+            if int(m.group(1)) < 220 or int(m.group(2)) < 220:
+                return True
+        except Exception:
+            pass
+    if re.search(r"/\d+_200200/0(?:$|[?#])", lower):
+        return True
+    if lower.endswith(".svg"):
+        return True
+    return False
 
 
 def choose_best_yimg_variant(url: str) -> str:
@@ -430,11 +525,22 @@ def collect_image_candidates(soup, base_url):
     match = re.search(r'https?://img-[\w.-]+/[^"\'\s>]+\.img[^"\'\s>]*', text)
     if match:
         candidates.append(match.group(0))
+    host = urlparse(base_url).netloc.lower()
+    if "qq.com" in host or "gtimg.com" in host:
+        candidates.extend(re.findall(r'https?://inews\.gtimg\.com/(?:news_bt|newsapp_bt)/[^"\'\s>]+', text, flags=re.IGNORECASE))
+    if "autohome.com.cn" in host or "autoimg.cn" in host:
+        candidates.extend(re.findall(r'https?://(?:www\d?|car\d?|img\d?|z|car3)\.autoimg\.cn/[^"\'\s>]+(?:jpg|jpeg|png|webp)[^"\'\s>]*', text, flags=re.IGNORECASE))
+    if "sina.com.cn" in host or "sinaimg.cn" in host:
+        candidates.extend(re.findall(r'https?://n\.sinaimg\.cn/[^"\'\s>]+(?:jpg|jpeg|png|webp)[^"\'\s>]*', text, flags=re.IGNORECASE))
     normalized = []
+    seen = set()
     for cand in candidates:
         norm = normalize_image_url(cand, base_url)
-        if norm:
-            normalized.append(norm)
+        if not norm or norm in seen:
+            continue
+        seen.add(norm)
+        normalized.append(norm)
+    normalized = [u for u in normalized if not is_suspicious_image_url(u)]
     if normalized:
         normalized.sort(key=rank_image_url, reverse=True)
     return normalized
@@ -764,7 +870,7 @@ def check_url_ok(url, is_image=False, timeout=URL_CHECK_TIMEOUT):
     is_yimg = "yimg.jp" in lower
     if "favicon" in lower or "sprite" in lower:
         return False
-    if is_image and ("logo" in lower or "placeholder" in lower or "googleusercontent" in lower):
+    if is_image and (is_suspicious_image_url(url) or "googleusercontent" in lower):
         return False
     try:
         resp = requests.head(url, headers=HEADERS, timeout=timeout, allow_redirects=True)
@@ -868,6 +974,8 @@ def is_missing_url(val):
         if lower.endswith("favicon.ico"):
             return True
         if PUBMED_META_IMAGE in lower:
+            return True
+        if is_suspicious_image_url(s):
             return True
     return False
 
@@ -1488,6 +1596,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         def is_similar_text(text):
             for s in selected_texts:
                 if difflib.SequenceMatcher(None, text, s).ratio() >= SHEET2_SIMILARITY_THRESHOLD:
+                    return True
+                if is_same_topic_text(text, s):
                     return True
             return False
 
@@ -2138,7 +2248,9 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                 item["URL"] = guessed
                 if is_missing_url(item.get("画像URL")):
                     item["画像URL"] = fetch_image_from_page(guessed)
-        if FETCH_MISSING_IMAGES and is_missing_url(item.get("画像URL")) and item.get("URL"):
+        if FETCH_MISSING_IMAGES and item.get("URL") and (
+            is_missing_url(item.get("画像URL")) or is_suspicious_image_url(str(item.get("画像URL", "")))
+        ):
             resolved = resolve_final_url(item.get("URL"))
             item["URL"] = resolved
             missing_img_urls.append(resolved)
@@ -2293,7 +2405,9 @@ def enrich_existing_df(df):
                 row["URL"] = resolved_pw
             if image_pw and is_missing_url(row.get("????RL")):
                 row["画像URL"] = image_pw
-        if FETCH_MISSING_IMAGES and is_missing_url(row.get("画像URL")) and row.get("URL"):
+        if FETCH_MISSING_IMAGES and row.get("URL") and (
+            is_missing_url(row.get("画像URL")) or is_suspicious_image_url(str(row.get("画像URL", "")))
+        ):
             resolved = resolve_final_url(row.get("URL"))
             row["URL"] = resolved
             missing_img_urls.append(resolved)

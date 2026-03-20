@@ -1,0 +1,450 @@
+==================================================
+[START] 2026-03-20 08:35:50
+[INFO] Target range: 2026-03-19 to 2026-03-19
+[LM Studio] サーバー起動済み・モデルロード済み。
+[RUN] google_search_script: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\google_search_script.py --dates 2026-03-19
+[PID] google_search_script: 19012
+[google_search_script] ============================================================
+[google_search_script]   内装ニュース収集スクリプト（検証済みRSS版）
+[google_search_script] ============================================================
+[google_search_script] 対象日付: 2026-03-19
+[google_search_script] RSSフィード: 67サイト（検証済み）
+[google_search_script]   RSSフィード一覧を出力: rss_feed_list.csv
+[google_search_script] Bing検索: 各国5地域 × 16-18キーワード
+[google_search_script] === RSSフィード ===
+[google_search_script]   ✓ [レスポンス] 17件
+[google_search_script]   ✓ [carview!] 9件
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1714: MarkupResemblesLocatorWarning: The input looks more like a filename than markup. You may want to open this file and pass the filehandle into Beautiful Soup.
+[google_search_script]   desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
+[google_search_script]   ✓ [MotorFan] 33件
+[google_search_script]   ✓ [WEB CARTOP] 7件
+[google_search_script]   ✓ [webCG] 2件
+[google_search_script]   ✓ [Auto Messe Web] 3件
+[google_search_script]   ✓ [VAGUE] 13件
+[google_search_script]   ✓ [ベストカーWeb] 13件
+[google_search_script]   ✓ [くるまのニュース] 38件
+[google_search_script]   ✓ [日刊自動車新聞] 1件
+[google_search_script]   ✓ [THE EV TIMES] 1件
+[google_search_script]   ✓ [AUTOCAR JAPAN] 10件
+[google_search_script]   ✓ [AUTO BILD JAPAN Web] 2件
+[google_search_script]   ✓ [MONOist] 3件
+[google_search_script]   ✓ [EE Times Japan] 1件
+[google_search_script]   ✓ [TechTargetジャパン] 2件
+[google_search_script]   ✓ [ZDNET Japan] 10件
+[google_search_script]   ✓ [CNET Japan] 8件
+[google_search_script]   ✓ [Impress Watch] 15件
+[google_search_script]   ✓ [The Drive] 10件
+[google_search_script]   ✓ [Motor1] 9件
+[google_search_script]   ✓ [CarScoops] 18件
+[google_search_script]   ✓ [Jalopnik] 14件
+[google_search_script]   ✓ [Car and Driver] 13件
+[google_search_script]   ✓ [The Car Connection] 4件
+[google_search_script]   ✓ [The Truth About Cars] 6件
+[google_search_script]   ✓ [The Torque Report] 2件
+[google_search_script]   ✓ [Top Speed] 10件
+[google_search_script]   ✓ [AUTOCAR UK] 9件
+[google_search_script]   ✓ [Auto Express] 9件
+[google_search_script]   ✓ [Autocar Reviews] 9件
+[google_search_script]   ✓ [CarNewsChina - All] 7件
+[google_search_script]   ✓ [CarNewsChina - EV] 6件
+[google_search_script]   ✓ [CarNewsChina - ICE] 1件
+[google_search_script]   ✓ [CnEVPost - All] 8件
+[google_search_script]   ✓ [CnEVPost - Xiaomi] 1件
+[google_search_script]   ✓ [CnEVPost - Self-driving] 1件
+[google_search_script]   ✓ [Gasgoo CN - Class 109] 3件
+[google_search_script]   ✓ [Gasgoo CN - Class 601] 2件
+[google_search_script]   ✓ [Gasgoo CN - Class 501] 2件
+[google_search_script]   ✓ [ETAuto - Auto Components] 3件
+[google_search_script]   ✓ [ETAuto - Auto Technology] 3件
+[google_search_script]   ✓ [Autocar India - All] 10件
+[google_search_script]   ✓ [RushLane] 3件
+[google_search_script]   ✓ [GaadiWaadi] 8件
+[google_search_script]   ✓ [IndiaCarNews] 3件
+[google_search_script]   ✓ [Auto Punditz] 4件
+[google_search_script]   RSS合計: 366件
+[google_search_script] === Bing News 検索 ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 中国 / 汽车 内饰 开发... RSSで返っておらず（HTML/制限の可能性）
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 0件（RSS無し/日付不一致/重複の可能性）
+[google_search_script]   Bing検索合計: 0件
+[google_search_script] === DuckDuckGo News 検索 ===
+[google_search_script] C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\google_search_script.py:1862: RuntimeWarning: This package (`duckduckgo_search`) has been renamed to `ddgs`! Use `pip install ddgs` instead.
+[google_search_script]   ddgs = DDGS()
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 52件
+[google_search_script]   [米国] 検索中...
+[google_search_script]     -> 70件
+[google_search_script]   [欧州] 検索中...
+[google_search_script]     -> 66件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 44件
+[google_search_script]   [インド] 検索中...
+[google_search_script]     -> 70件
+[google_search_script]   DuckDuckGo合計: 302件
+[google_search_script] === Google News RSS ===
+[google_search_script]   [日本] 検索中...
+[google_search_script]     -> 12件
+[google_search_script]   [中国] 検索中...
+[google_search_script]     -> 32件
+[google_search_script]   Google News合計: 44件
+[google_search_script] === NewsAPI.org ===
+[google_search_script]   NewsAPI合計: 0件
+[google_search_script] ============================================================
+[google_search_script] 全ソース合計: 712件
+[google_search_script]   取得内訳（ソース別）: {'レスポンス': 17, 'carview!': 9, 'MotorFan': 33, 'WEB CARTOP': 7, 'webCG': 2, 'Auto Messe Web': 3, 'VAGUE': 13, 'ベストカーWeb': 13, 'くるまのニュース': 38, '日刊自動車新聞': 1, 'THE EV TIMES': 1, 'AUTOCAR JAPAN': 10, 'AUTO BILD JAPAN Web': 2, 'MONOist': 3, 'EE Times Japan': 1, 'TechTargetジャパン': 2, 'ZDNET Japan': 10, 'CNET Japan': 8, 'Impress Watch': 15, 'The Drive': 10, 'Motor1': 9, 'CarScoops': 18, 'Jalopnik': 14, 'Car and Driver': 13, 'The Car Connection': 4, 'The Truth About Cars': 6, 'The Torque Report': 2, 'Top Speed': 10, 'AUTOCAR UK': 9, 'Auto Express': 9, 'Autocar Reviews': 9, 'CarNewsChina - All': 7, 'CarNewsChina - EV': 6, 'CarNewsChina - ICE': 1, 'CnEVPost - All': 8, 'CnEVPost - Xiaomi': 1, 'CnEVPost - Self-driving': 1, 'Gasgoo CN - Class 109': 3, 'Gasgoo CN - Class 601': 2, 'Gasgoo CN - Class 501': 2, 'ETAuto - Auto Components': 3, 'ETAuto - Auto Technology': 3, 'Autocar India - All': 10, 'RushLane': 3, 'GaadiWaadi': 8, 'IndiaCarNews': 3, 'Auto Punditz': 4, 'DuckDuckGo': 302, 'GoogleNews': 44}
+[google_search_script]   取得内訳（国別）: {'日本': 252, '米国': 156, '欧州': 93, '中国': 107, 'インド': 104}
+[google_search_script] === 重複除去処理 ===
+[google_search_script]   重複除去: 120件
+[google_search_script]   重複内訳（ソース別）: {'Car and Driver': 1, 'AUTOCAR UK': 1, 'Autocar Reviews': 9, 'CarNewsChina - EV': 6, 'CarNewsChina - ICE': 1, 'CnEVPost - Xiaomi': 1, 'CnEVPost - Self-driving': 1, 'Gasgoo CN - Class 601': 1, 'Gasgoo CN - Class 501': 1, 'DuckDuckGo': 95, 'GoogleNews': 3}
+[google_search_script]   重複理由内訳: {'タイトル類似': 17, '既存URL': 103}
+[google_search_script]   最終結果: 592件
+[google_search_script]   最終内訳（ソース別）: {'レスポンス': 17, 'carview!': 9, 'MotorFan': 33, 'WEB CARTOP': 7, 'webCG': 2, 'Auto Messe Web': 3, 'VAGUE': 13, 'ベストカーWeb': 13, 'くるまのニュース': 38, '日刊自動車新聞': 1, 'THE EV TIMES': 1, 'AUTOCAR JAPAN': 10, 'AUTO BILD JAPAN Web': 2, 'MONOist': 3, 'EE Times Japan': 1, 'TechTargetジャパン': 2, 'ZDNET Japan': 10, 'CNET Japan': 8, 'Impress Watch': 15, 'The Drive': 10, 'Motor1': 9, 'CarScoops': 18, 'Jalopnik': 14, 'Car and Driver': 12, 'The Car Connection': 4, 'The Truth About Cars': 6, 'The Torque Report': 2, 'Top Speed': 10, 'AUTOCAR UK': 8, 'Auto Express': 9, 'CarNewsChina - All': 7, 'CnEVPost - All': 8, 'Gasgoo CN - Class 109': 3, 'Gasgoo CN - Class 601': 1, 'Gasgoo CN - Class 501': 1, 'ETAuto - Auto Components': 3, 'ETAuto - Auto Technology': 3, 'Autocar India - All': 10, 'RushLane': 3, 'GaadiWaadi': 8, 'IndiaCarNews': 3, 'Auto Punditz': 4, 'DuckDuckGo': 207, 'GoogleNews': 41}
+[google_search_script]   最終内訳（国別）: {'日本': 238, '米国': 142, '欧州': 56, '中国': 90, 'インド': 66}
+[google_search_script]   [新規] 関連度・翻訳処理 592件 開始
+[google_search_script]     進捗: 1/592
+[google_search_script]   [FETCH_OK] 1057chars: https://news.yahoo.co.jp/articles/1400331917df6fe702ed04fbdd19ac44a2e23430?source=rss
+[google_search_script]     進捗: 5/592
+[google_search_script]   [FETCH_OK] 1633chars: https://news.yahoo.co.jp/articles/47d7647d9acc78bcd476fa600a98fa176cbba8a8?source=rss
+[google_search_script]   [FETCH_OK] 1050chars: https://news.yahoo.co.jp/articles/ed16957073e0e95a36ca5057a52d31df1b3df605?source=rss
+[google_search_script]     進捗: 10/592
+[google_search_script]   [FETCH_OK] 1313chars: https://news.yahoo.co.jp/articles/74874b8ec345d1cb1fe190dac5e47407acf0e1e1?source=rss
+[google_search_script]   [FETCH_OK] 2837chars: https://news.yahoo.co.jp/articles/597264c2e6ae21727e3ab593f06cc7d73ce33480?source=rss
+[google_search_script]     進捗: 15/592
+[google_search_script]   [FETCH_OK] 1337chars: https://news.yahoo.co.jp/articles/30fd6be7f42a5d7dc455c5a347eed00188410a1b?source=rss
+[google_search_script]   [FETCH_OK] 1706chars: https://news.yahoo.co.jp/articles/a265f8c15bc03100fd4e813fd0f8d50148494627?source=rss
+[google_search_script]     進捗: 20/592
+[google_search_script]     進捗: 25/592
+[google_search_script]     進捗: 30/592
+[google_search_script]   [FETCH_OK] 2382chars: https://news.yahoo.co.jp/articles/c496f9f9e67ac98bd7b88ff9410767fdd90feb44?source=rss
+[google_search_script]   [FETCH_OK] 1277chars: https://news.yahoo.co.jp/articles/4fe54fca807d4e6c8c457a8d989b0ead4be2d823?source=rss
+[google_search_script]     進捗: 35/592
+[google_search_script]     進捗: 40/592
+[google_search_script]   [FETCH_OK] 1711chars: https://news.yahoo.co.jp/articles/ec2c4bfb113b97888543ada00ada742e0724b7c8?source=rss
+[google_search_script]     進捗: 45/592
+[google_search_script]   [FETCH_OK] 2963chars: https://news.yahoo.co.jp/articles/625c7fcca532bcbf36d58bd79ccc479d87bf4dab?source=rss
+[google_search_script]     進捗: 50/592
+[google_search_script]   [FETCH_OK] 1953chars: https://news.yahoo.co.jp/articles/abf2d6b1a9977e628fa7ff4d6b1cae6b24983b70?source=rss
+[google_search_script]     進捗: 55/592
+[google_search_script]     進捗: 60/592
+[google_search_script]     進捗: 65/592
+[google_search_script]     進捗: 70/592
+[google_search_script]     進捗: 75/592
+[google_search_script]     進捗: 80/592
+[google_search_script]     進捗: 85/592
+[google_search_script]     進捗: 90/592
+[google_search_script]     進捗: 95/592
+[google_search_script]   [FETCH_OK] 1376chars: https://news.yahoo.co.jp/articles/3b2057a127fb1f2d68a378bb95decc22c2a5427f?source=rss
+[google_search_script]   [FETCH_OK] 1871chars: https://news.yahoo.co.jp/articles/ad3b9291a4724b4c08019c4ea4eb88f9226d402b?source=rss
+[google_search_script]     進捗: 100/592
+[google_search_script]   [FETCH_OK] 1958chars: https://news.yahoo.co.jp/articles/42e9c5b430e9ac4551fbf2cd79f5d11f5052376c?source=rss
+[google_search_script]     進捗: 105/592
+[google_search_script]     進捗: 110/592
+[google_search_script]     進捗: 115/592
+[google_search_script]     進捗: 120/592
+[google_search_script]   [FETCH_OK] 1337chars: https://news.yahoo.co.jp/articles/5eb40ca3d7d4caa2d1b3e42239a823b0d67e5222?source=rss
+[google_search_script]     進捗: 125/592
+[google_search_script]   [FETCH_OK] 1637chars: https://news.yahoo.co.jp/articles/1a48061273eef8efcf6178f1a3443ef243c6bada?source=rss
+[google_search_script]   [FETCH_OK] 2271chars: https://news.yahoo.co.jp/articles/c1466050dbe06a3cfd32afa9456618f356734d3d?source=rss
+[google_search_script]   [FETCH_OK] 2152chars: https://news.yahoo.co.jp/articles/bf33c5c2e7be2d5c11c3e7574c61bffaa4403df2?source=rss
+[google_search_script]     進捗: 130/592
+[google_search_script]   [FETCH_OK] 1651chars: https://news.yahoo.co.jp/articles/7928a368bd6020a4274c5b3b5258ca474a512b9b?source=rss
+[google_search_script]     進捗: 135/592
+[google_search_script]     進捗: 140/592
+[google_search_script]   [FETCH_OK] 1768chars: https://news.yahoo.co.jp/articles/5a7a48c8ae882c1bc8536549f2e782a1e5010113?source=rss
+[google_search_script]   [FETCH_OK] 1219chars: https://news.yahoo.co.jp/articles/1950a847255736d033089a416f7f6296ccf9967c?source=rss
+[google_search_script]     進捗: 145/592
+[google_search_script]   [FETCH_OK] 1650chars: https://news.yahoo.co.jp/articles/952aa7d88fb381f1b1c1246949f522d4fbbda74e?source=rss
+[google_search_script]     進捗: 150/592
+[google_search_script]   [FETCH_OK] 1289chars: https://news.yahoo.co.jp/articles/0085f70437ba70c4239daf992f2b121f9928ba5e?source=rss
+[google_search_script]     進捗: 155/592
+[google_search_script]     進捗: 160/592
+[google_search_script]     進捗: 165/592
+[google_search_script]     進捗: 170/592
+[google_search_script]     進捗: 175/592
+[google_search_script]     進捗: 180/592
+[google_search_script]     進捗: 185/592
+[google_search_script]     進捗: 190/592
+[google_search_script]   [FETCH_OK] 2884chars: https://www.thedrive.com/news/touch-controls-are-50-cheaper-than-real-buttons-ferrari-ceo-says
+[google_search_script]     進捗: 195/592
+[google_search_script]     進捗: 200/592
+[google_search_script]     進捗: 205/592
+[google_search_script]   [FETCH_OK] 6238chars: https://www.motor1.com/news/790467/ferrari-touch-buttons-cost-half-physical-buttons/
+[google_search_script]     進捗: 210/592
+[google_search_script]   [FETCH_OK] 2978chars: https://www.carscoops.com/2026/03/bmws-new-ix1-could-become-its-best-selling-ev/
+[google_search_script]     進捗: 215/592
+[google_search_script]   [FETCH_OK] 3640chars: https://www.carscoops.com/2026/03/vw-multivan-facelift-update/
+[google_search_script]     進捗: 220/592
+[google_search_script]     進捗: 225/592
+[google_search_script]     進捗: 230/592
+[google_search_script]     進捗: 235/592
+[google_search_script]     進捗: 240/592
+[google_search_script]   [FETCH_OK] 8000chars: https://www.caranddriver.com/bentley/flying-spur
+[google_search_script]     進捗: 245/592
+[google_search_script]   [FETCH_OK] 8000chars: https://www.caranddriver.com/polestar/polestar-4
+[google_search_script]   [FETCH_OK] 2412chars: https://www.caranddriver.com/photos/g70772550/2025-bentley-flying-spur-speed-test-interior-gallery/
+[google_search_script]     進捗: 250/592
+[google_search_script]   [FETCH_OK] 4623chars: https://www.caranddriver.com/news/a70782801/range-rover-sport-sv-winter-dusk-revealed/
+[google_search_script]     進捗: 255/592
+[google_search_script]     進捗: 260/592
+[google_search_script]   [FETCH_OK] 1850chars: https://www.thetorquereport.com/2027-volkswagen-atlas-vw-teases-its-new-interior/
+[google_search_script]     進捗: 265/592
+[google_search_script]   [FETCH_OK] 8000chars: https://www.topspeed.com/honda-prologue-secrets/
+[google_search_script]     進捗: 270/592
+[google_search_script]     進捗: 275/592
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocar.co.uk/car-review/mg-motor/s9
+[google_search_script]     進捗: 280/592
+[google_search_script]   [FETCH_OK] 3216chars: https://www.autoexpress.co.uk/volkswagen/multivan/369202/revamped-volkswagen-multivan-turns-glam
+[google_search_script]     進捗: 285/592
+[google_search_script]   [FETCH_OK] 2466chars: https://www.autoexpress.co.uk/bmw/3-series/369196/ive-seen-it-and-bmws-new-i3-looks-taut-and-agile-opposite-bloated-suvs-jordan-katsianis
+[google_search_script]     進捗: 290/592
+[google_search_script]   [FETCH_OK] 3598chars: https://carnewschina.com/2026/03/19/xpeng-gx-begins-global-mass-production-featuring-bosch-next-generation-steer-by-wire-system/
+[google_search_script]     進捗: 295/592
+[google_search_script]     進捗: 300/592
+[google_search_script]     進捗: 305/592
+[google_search_script]     進捗: 310/592
+[google_search_script]     進捗: 315/592
+[google_search_script]     進捗: 320/592
+[google_search_script]     進捗: 325/592
+[google_search_script]     進捗: 330/592
+[google_search_script]     進捗: 335/592
+[google_search_script]   [FETCH_OK] 3285chars: https://www.indiacarnews.com/news/2026-kia-carens-clavis-ev-6-seater-gt-line-x-line-variants-full-details-67409/
+[google_search_script]     進捗: 340/592
+[google_search_script]   [FETCH_OK] 1206chars: https://www.afpbb.com/articles/-/3627409
+[google_search_script]     進捗: 345/592
+[google_search_script]   [FETCH_OK] 2075chars: https://mainichi.jp/articles/20260319/pls/00m/020/295000c
+[google_search_script]     進捗: 350/592
+[google_search_script]   [FETCH_OK] 4098chars: https://motor-fan.jp/article/1432527/
+[google_search_script]     進捗: 355/592
+[google_search_script]     進捗: 360/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/ja-jp/autos/news/%E3%83%9E%E3%83%84%E3%83%80%E3%81%8C-%E6%96%B0%E5%9E%8B-3%E5%88%97%E3%82%B7%E3%83%BC%E3%83%88-%E9%AB%98%E7%B4%9Asuv-%E7%99%BA%E8%A1%A8-%E5%85%A8%E9%95%B75m%E7%B4%9A-%E5%A0%82%E3%80%85%E3%83%9C%E3%83%87%E3%82%A3-%E3%81%AE%E6%9C%80%E4%B8%8A%E7%B4%9A%E4%BB%95%E6%A7%98%E3%81%8C%E5%A4%A7%E3%81%8D%E3%81%8F%E9%80%B2%E5%8C%96-%E3%82%88%E3%82%8A%E9%81%B8%E3%81%B3%E3%82%84%E3%81%99%E3%81%8F%E3%81%AA%E3%81%A3%E3%81%9F%E6%9C%80%E6%96%B0%E3%83%A9%E3%83%BC%E3%82%B8%E3%82%AF%E3%83%A9%E3%82%B9-%E6%96%B0-cx-80-%E4%B8%80%E9%83%A8%E6%94%B9%E8%89%AF%E3%83%A2%E3%83%87%E3%83%AB%E7%99%BA%E5%A3%B2/ar-AA1YWPz6
+[google_search_script]   [FETCH_OK] 5360chars: https://motor-fan.jp/article/1433076/
+[google_search_script]     進捗: 365/592
+[google_search_script]   [FETCH_OK] 925chars: https://response.jp/article/2026/03/19/408884.html
+[google_search_script]   [FETCH_OK] 6681chars: https://motor-fan.jp/article/1430382/
+[google_search_script]     進捗: 370/592
+[google_search_script]   [FETCH_OK] 3016chars: https://news.mynavi.jp/article/20260319-4236209/
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/ja-jp/autos/news/%E3%81%93%E3%82%8C%E3%81%AF%E6%AC%A1%E4%B8%96%E4%BB%A3%E3%81%AE-%E3%82%A2%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%A4%E3%83%A0-%E3%81%AA%E3%81%AE%E3%81%8B-%E6%96%B0%E3%81%9F%E3%81%AA%E6%9C%AA%E6%9D%A5%E3%81%AB%E5%82%99%E3%81%88%E3%82%8B%E3%83%AB%E3%83%8E%E3%83%BC%E3%81%AE%E6%AC%A1%E4%B8%96%E4%BB%A3%E3%83%9F%E3%83%8B%E3%83%90%E3%83%B3%E3%82%92%E7%A4%BA%E5%94%86%E3%81%99%E3%82%8B%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88-%E3%83%A2%E3%83%87%E3%83%AB%E3%81%8C%E5%85%AC%E9%96%8B/ar-AA1Z0zhd
+[google_search_script]     進捗: 375/592
+[google_search_script]   [FETCH_OK] 3176chars: https://av.watch.impress.co.jp/docs/news/2094890.html
+[google_search_script]     進捗: 380/592
+[google_search_script]     進捗: 385/592
+[google_search_script]     進捗: 390/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-us/autos/autos-luxury/bmw-s-most-traditional-sedan-becomes-its-most-futuristic-yet-with-new-i3/ar-AA1YTV1D
+[google_search_script]     進捗: 395/592
+[google_search_script]   [FETCH_OK] 2697chars: https://www.motorious.com/articles/all/1990-buick-reatta-showcases-early-digital-innovation-in-classic-american-coupe/
+[google_search_script]     進捗: 400/592
+[google_search_script]     進捗: 405/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-ca/autos/electric-cars/mercedes-new-era-of-ultra-luxurious-electric-limousines-will-be-vans/ar-AA1YZ0yl
+[google_search_script]     進捗: 410/592
+[google_search_script]   [FETCH_FAIL] HTTP 401: https://www.marketwatch.com/press-release/the-peak-of-automotive-sophistication-arrives-in-scottsdale-the-2026-mercedes-benz-gls-class-1935846d
+[google_search_script]     進捗: 415/592
+[google_search_script]   [FETCH_OK] 2905chars: https://www.motortrend.com/reviews/first-test-2026-toyota-corolla-cross-hybrid
+[google_search_script]   [FETCH_FAIL] HTTP 403: https://gmauthority.com/blog/2026/03/2027-cadillac-vistiq-to-offer-a-new-interior-color/
+[google_search_script]   [FETCH_OK] 6093chars: https://carbuzz.com/bentley-naim-virtuoso-stereo/
+[google_search_script]     進捗: 420/592
+[google_search_script]   [FETCH_FAIL] HTTP 403: https://www.autoblog.com/luxury/bmw-says-chrome-is-out-light-up-grilles-are-the-future
+[google_search_script]   [FETCH_FAIL] HTTP 503: https://www.oklahoman.com/press-release/story/153176/top-metal-forming-machine-manufacturers-steering-efficiency-and-innovation-in-manufacturing/
+[google_search_script]     進捗: 425/592
+[google_search_script]   [FETCH_FAIL] HTTP 401: https://www.marketwatch.com/press-release/geely-expands-strategic-partnership-with-nvidia-across-physical-enterprise-and-industrial-ai-4e240319
+[google_search_script]   [FETCH_OK] 8000chars: https://www.electrive.com/2026/03/19/first-drive-nissan-micra-adopts-curves-over-angular-design/
+[google_search_script]     進捗: 430/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-gb/cars/general/all-new-mgs9-phev-adds-value-and-style-to-the-7-seat-large-suv-sector/ar-AA1Z0Vts
+[google_search_script]     進捗: 435/592
+[google_search_script]     進捗: 440/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-ie/cars/news/the-honda-civic-interior-makes-this-car-feel-more-premium/vi-AA1YYZCz
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-us/autos/other/inside-a-luxury-maybach-with-a-unique-pink-interior/vi-AA1YYwgK
+[google_search_script]     進捗: 445/592
+[google_search_script]     進捗: 450/592
+[google_search_script]   [FETCH_OK] 6992chars: https://news.webindia123.com/news/Articles/Business/20260319/4429068.html
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autoexpress.co.uk/peugeot/208/364074/new-peugeot-208-be-revealed-2026-paris-motor-show-well-almost
+[google_search_script]     進捗: 455/592
+[google_search_script]   [FETCH_FAIL] HTTP 403: https://www.news.com.au/technology/motoring/on-the-road/china-tightens-ev-safety-rules-in-major-shakeup-for-global-carmakers/news-story/debdbe2a353b14b32d5727e4c7f538e1
+[google_search_script]     進捗: 460/592
+[google_search_script]     進捗: 465/592
+[google_search_script]     進捗: 470/592
+[google_search_script]     進捗: 475/592
+[google_search_script]     進捗: 480/592
+[google_search_script]   [FETCH_OK] 183chars: https://www.sohu.com/a/998576159_115433
+[google_search_script]   [FETCH_OK] 8000chars: https://finance.sina.com.cn/roll/2026-03-19/doc-inhrpnfr8629156.shtml
+[google_search_script]   [FETCH_OK] 299chars: https://news.qq.com/rain/a/20260319A06S3P00
+[google_search_script]   [FETCH_OK] 240chars: https://news.qq.com/rain/a/20260319A06VRJ00
+[google_search_script]   [FETCH_OK] 710chars: https://auto.ifeng.com/c/8rcooRhwuYY
+[google_search_script]     進捗: 485/592
+[google_search_script]   [FETCH_FAIL] HTTP 403: https://cn.investing.com/news/stock-market-news/article-3269529
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/zh-cn/autos/%E5%A5%A2%E4%BE%88%E5%93%81/%E9%87%91%E6%9D%AF%E6%B1%BD%E8%BD%A6-600609-sh-%E8%8E%B7%E5%BE%97%E4%B9%98%E7%94%A8%E8%BD%A6%E5%86%85%E9%A5%B0%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E5%AE%9A%E7%82%B9/ar-AA1YXEpz
+[google_search_script]   [FETCH_OK] 5107chars: https://finance.sina.com.cn/tech/digi/2026-03-19/doc-inhrpspu1351135.shtml
+[google_search_script]   [FETCH_OK] 1246chars: https://www.autohome.com.cn/news/202603/1313020.html
+[google_search_script]     進捗: 490/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/zh-cn/%E6%8A%80%E6%9C%AF/%E7%A1%AC%E4%BB%B6%E5%92%8C%E8%AE%BE%E5%A4%87/%E8%A7%A6%E6%8E%A7%E6%8C%89%E9%94%AE%E7%9C%81%E6%88%90%E6%9C%AC%E5%8D%B4%E7%89%BA%E7%89%B2%E4%BD%93%E9%AA%8C-%E6%B3%95%E6%8B%89%E5%88%A9%E7%AD%89%E5%A4%9A%E5%AE%B6%E8%BD%A6%E4%BC%81%E5%AE%98%E5%AE%A3%E5%9B%9E%E5%BD%92%E5%AE%9E%E4%BD%93%E6%8C%89%E9%94%AE/ar-AA1YZiuG
+[google_search_script]   [FETCH_OK] 7735chars: https://finance.sina.com.cn/roll/2026-03-19/doc-inhrnzrq0887868.shtml
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=False: 智己汽车搭载千问大模型，打通三大系统
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=False: 智己汽车搭载千问大模型，打通三大系统
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=False: 智己汽车搭载千问大模型，打通三大系统
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 智己汽车搭载千问大模型，打通三大系统
+[google_search_script]   [FETCH_OK] 1746chars: https://sports.sohu.com/a/998721933_121850794
+[google_search_script]   [FETCH_OK] 8000chars: https://www.itbear.com.cn/html/2026-03/1220914.html
+[google_search_script]     進捗: 495/592
+[google_search_script]   [FETCH_OK] 8000chars: https://www.163.com/digi/article/KODT2411001680P9.html
+[google_search_script]   [FETCH_OK] 8000chars: https://finance.sina.com.cn/tech/roll/2026-03-19/doc-inhrpwvq4535898.shtml
+[google_search_script]   [FETCH_OK] 3868chars: https://news.qq.com/rain/a/20260319A08JRO00
+[google_search_script]     進捗: 500/592
+[google_search_script]   [FETCH_OK] 829chars: https://auto.ifeng.com/c/8rcSZJMXPTA
+[google_search_script]   [FETCH_OK] 1263chars: https://news.qq.com/rain/a/20260319A08HMI00
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/zh-cn/news/other/%E7%8E%B0%E4%BB%A3%E6%91%A9%E6%AF%94%E6%96%AF%E8%AE%A1%E5%88%922033%E5%B9%B4%E5%B0%86%E9%9D%9E%E5%85%B3%E8%81%94%E8%BD%A6%E4%BC%81%E9%94%80%E5%94%AE%E9%A2%9D%E5%8D%A0%E6%AF%94%E6%8F%90%E5%8D%87%E8%87%B340/ar-AA1YXjZw
+[google_search_script]     進捗: 505/592
+[google_search_script]   [FETCH_OK] 2602chars: https://www.sohu.com/a/998605448_122628468
+[google_search_script]   [FETCH_OK] 8000chars: http://jjckb.xinhuanet.com/20260319/6f64d63a78ea446389bf6926873e3bc0/c.html
+[google_search_script]     進捗: 510/592
+[google_search_script]   [FETCH_OK] 4773chars: https://news.qq.com/rain/a/20260319A06N6700
+[google_search_script]   [FETCH_OK] 8000chars: https://finance.sina.com.cn/stock/relnews/cn/2026-03-19/doc-inhrnvix8740288.shtml
+[google_search_script]   [FETCH_OK] 406chars: https://news.qq.com/rain/a/20260319A0846Z00
+[google_search_script]   [FETCH_OK] 8000chars: https://finance.sina.com.cn/stock/relnews/cn/2026-03-19/doc-inhrpnfx7444007.shtml
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=False: 斑马智能向港交所进行二次递表，智能座舱龙头公司冲击IPO
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=False: 斑马智能向港交所进行二次递表，智能座舱龙头公司冲击IPO
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=False: 斑马智能向港交所进行二次递表，智能座舱龙头公司冲击IPO
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 斑马智能向港交所进行二次递表，智能座舱龙头公司冲击IPO
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/zh-cn/%E6%8A%80%E6%9C%AF/%E9%80%9A%E7%94%A8/%E7%AC%AC%E4%BA%94%E4%BB%A3%E5%B8%9D%E8%B1%AAflyme-auto%E5%8A%A0%E6%8C%81-%E6%99%BA%E8%83%BD%E5%BA%A7%E8%88%B1%E5%A4%AA%E6%87%82%E4%BD%A0/ar-AA1YX6CK
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=False: 第五代帝豪Flyme Auto加持，智能座舱太懂你
+[google_search_script]     進捗: 515/592
+[google_search_script]   [FETCH_OK] 8000chars: https://finance.sina.com.cn/tech/roll/2026-03-19/doc-inhrnzrq0882213.shtml
+[google_search_script]   [FETCH_OK] 3662chars: https://news.sohu.com/a/998599393_121874049
+[google_search_script]   [FETCH_OK] 1327chars: https://www.jiemian.com/article/14132541.html
+[google_search_script]     進捗: 520/592
+[google_search_script]     進捗: 525/592
+[google_search_script]   [FETCH_OK] 8000chars: https://timesofindia.indiatimes.com/auto/cars/new-lexus-es-india-launch-tomorrow-expected-price-features/articleshow/129673019.cms
+[google_search_script]   [FETCH_OK] 5840chars: https://carbuzz.com/ferrari-ceo-haptic-touch-cost/
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-in/autos/news/5-cars-under-12-lakh-i-would-buy-for-ventilated-seats-to-survive-indian-summers/ar-AA1YYdWv
+[google_search_script]     進捗: 530/592
+[google_search_script]     進捗: 535/592
+[google_search_script]     進捗: 540/592
+[google_search_script]     進捗: 545/592
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-in/autos/news/2026-renault-duster-techno-mid-variant-explained-price-features-and-should-you-buy/ar-AA1YXitR
+[google_search_script]     進捗: 550/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 555/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 560/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 565/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 570/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 575/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 580/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 585/592
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]     進捗: 590/592
+[google_search_script]     進捗: 592/592
+[google_search_script]   [新規] 関連度・翻訳処理 完了
+[google_search_script]     画像補完: 137件 並列取得開始
+[google_search_script]     画像URL未取得: 121件
+[google_search_script] ✅ 完了！ 592 件の新規記事を追加しました。
+[google_search_script]    URLはハイパーリンク化済み
+[google_search_script]    保存先: C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\search_results.csv
+[google_search_script]   Sheet2補完: 13件
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocar.co.uk/car-review/jeep/compass
+[google_search_script]     進捗: 1/13
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocar.co.uk/car-news/new-cars/seat-and-cupra-ateca-pulled-uk-after-decade-sale
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocar.co.uk/car-news/motor-shows-paris-motor-show/fiat-reveal-new-giga-panda-paris-motor-show
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocar.co.uk/car-news/new-cars/lamborghini-confirms-four-new-cars-2026
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocar.co.uk/car-news/new-cars/denza-b5-we-drive-677bhp-chinese-defender
+[google_search_script]     進捗: 5/13
+[google_search_script]   [FETCH_OK] 8000chars: https://www.autocarindia.com/car-news/kia-updates-carens-clavis-with-new-variants-added-features-439255
+[google_search_script]   [FETCH_FAIL] HTTP 307: https://gaadiwaadi.com/delhi-ev-policy-2026-up-to-rs-1-lakh-benefit-for-switching-from-old-cars-to-evs/
+[google_search_script]   [FETCH_FAIL] HTTP 307: https://gaadiwaadi.com/kia-carens-clavis-ev-gt-line-x-line-trims-launched-gets-6-seater-option-too/
+[google_search_script]   [FETCH_OK] 8000chars: https://carbuzz.com/used-bmw-i3-luxury-ev-is-now-cheaper-new-economy-car/
+[google_search_script]   [FETCH_SHORT] 0chars: https://www.msn.com/en-in/autos/news/lexus-all-set-to-unveil-new-es-in-india-tomorrow-details-inside/ar-AA1YYSLh
+[google_search_script]     進捗: 10/13
+[google_search_script]   [FETCH_OK] 4554chars: https://www.indiatvnews.com/auto/bmw-m2-cs-launched-in-india-at-rs-1-66-crore-fastest-compact-car-with-merino-leather-finish-2026-03-19-1034374
+[google_search_script]   [FETCH_OK] 3052chars: https://www.cnbctv18.com/auto/kia-carens-clavis-ev-now-offers-6-seats-and-new-gt-line-x-line-trims-full-variant-wise-price-list-ws-l-19871401.htm
+[google_search_script]   [FETCH_OK] 8000chars: https://timesofindia.indiatimes.com/auto/news/top-5-premium-cars-for-an-exceptional-driving-experience/photostory/129681225.cms
+[google_search_script]     進捗: 13/13
+[google_search_script]   Sheet2/CSV 出力: 50件, sheet2_llm_targets.csv
+[EXIT] google_search_script: code=0
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[PID] auto_update_daily_news: 37232
+[auto_update_daily_news] Loaded 50 items from sheet: C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\sheet2_llm_targets.csv (dates: 2026-03-19 ~ 2026-03-19)
+[auto_update_daily_news] New items to append: 50
+[auto_update_daily_news] Done.
+[EXIT] auto_update_daily_news: code=0
+[RUN] generate_idea_images_gemini: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_gemini.py --only-missing --model gemini-3.1-flash-image-preview --image-size 512px --aspect-ratio 1:1
+[PID] generate_idea_images_gemini: 49220
+[generate_idea_images_gemini] [OK] Saved idea_588.png
+[generate_idea_images_gemini] [OK] Saved idea_589.png
+[generate_idea_images_gemini] [OK] Saved idea_590.png
+[generate_idea_images_gemini] [OK] Saved idea_591.png
+[generate_idea_images_gemini] [OK] Saved idea_592.png
+[generate_idea_images_gemini] [OK] Saved idea_593.png
+[generate_idea_images_gemini] [OK] Saved idea_594.png
+[generate_idea_images_gemini] [OK] Saved idea_595.png
+[generate_idea_images_gemini] [OK] Saved idea_596.png
+[generate_idea_images_gemini] [OK] Saved idea_597.png
+[generate_idea_images_gemini] Done.
+[EXIT] generate_idea_images_gemini: code=0
+[RUN] git_status: git status --porcelain -- . :(exclude)ニュース収集/logs/* :(exclude)ニュース収集/__pycache__/* :(exclude)**/__pycache__/*
+[git_status]  M insights_data.js
+[git_status]  M news_data.js
+[git_status]  M "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/search_results.csv"
+[git_status]  M "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/sheet2_llm_targets.csv"
+[git_status]  M "\345\206\205\350\243\205\350\243\275\345\223\201\343\203\207\343\202\244\343\203\252\343\203\274\343\203\213\343\203\245\343\203\274\343\202\271.html"
+[git_status] ?? images/idea_588.png
+[git_status] ?? images/idea_589.png
+[git_status] ?? images/idea_590.png
+[git_status] ?? images/idea_591.png
+[git_status] ?? images/idea_592.png
+[git_status] ?? images/idea_593.png
+[git_status] ?? images/idea_594.png
+[git_status] ?? images/idea_595.png
+[git_status] ?? images/idea_596.png
+[git_status] ?? images/idea_597.png
+[RUN] git_add: git add -A -- . :(exclude)ニュース収集/logs/* :(exclude)ニュース収集/__pycache__/* :(exclude)**/__pycache__/*
+[PID] git_add: 43528
+[git_add] warning: in the working copy of 'ニュース収集/search_results.csv', LF will be replaced by CRLF the next time Git touches it
+[git_add] warning: in the working copy of 'ニュース収集/sheet2_llm_targets.csv', LF will be replaced by CRLF the next time Git touches it
+[EXIT] git_add: code=0
+[RUN] git_commit: git commit -m Auto update daily news (2026-03-20)
+[PID] git_commit: 8664
+[git_commit] [main 3b1e55c] Auto update daily news (2026-03-20)
+[git_commit]  15 files changed, 1277 insertions(+), 53 deletions(-)
+[git_commit]  create mode 100644 images/idea_588.png
+[git_commit]  create mode 100644 images/idea_589.png
+[git_commit]  create mode 100644 images/idea_590.png
+[git_commit]  create mode 100644 images/idea_591.png
+[git_commit]  create mode 100644 images/idea_592.png
+[git_commit]  create mode 100644 images/idea_593.png
+[git_commit]  create mode 100644 images/idea_594.png
+[git_commit]  create mode 100644 images/idea_595.png
+[git_commit]  create mode 100644 images/idea_596.png
+[git_commit]  create mode 100644 images/idea_597.png
+[EXIT] git_commit: code=0
+[RUN] git_push: git push origin main
+[PID] git_push: 17020
+[git_push] To github.com:naiso1/DailyNews.git
+[git_push]    4636d91..3b1e55c  main -> main
+[EXIT] git_push: code=0
+[END] 2026-03-20 10:01:26
+==================================================
+[INFO] ウェイクタスク登録: 2026-03-20 23:57
+[INFO] 処理完了。PCをスリープします...
