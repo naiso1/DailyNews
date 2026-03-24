@@ -1,5 +1,32 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-23",
+        analysis: {
+            cn: "中国市場ではXiaomi SU7の高速販売が消費者ニーズを示しており[cn556]、天瑞汽車の業績悪化はR&D投資と品質維持のバランスを重要視する示唆[cn557]。回転式ディスプレイは多機能・操作感を追求するトレンド[cn558]。新恒泰の機能性高分子材料は高機能素材の需要を後押し[cn560]。天演架構のアップグレードはSUV市場の成長を示唆し[cn559]、タイスカの現地化はグローバルサプライチェーンの重要性を強調[cn561]。生体認証やAIはパーソナライズを実現する技術トレンド[cn563,cn565]。",
+            in: "インド市場の自動車内装はEV化と高級感の両立が課題。2026年モデルでデジタルコックピットが主流化し、10.1インチスクリーン搭載が標準化。Tata Punchなど廉価車でもカーボン調ダッシュボードで質感向上。EV航続距離不安解消のため軽量化素材への注力。Lexus ESやXiaomi SU7がプレミアムオーディオとスマートシートで差別化。V2X技術でコネクテッドインフラ整備が進み、都市交通改善に寄与。",
+            us: "トヨタのA80スーパダッシュボード再販[us521][us526]やGLC400 EVのHyperscreen[us523]から、**レトロデザイン**と**最先端HMI**の共存が**トレンド**であることが示唆される。Kia EV9やリンカーン・アビエーターの**高級感**重視[us525][us529]や、タッチスクリーン嫌いな層への対応[us528]が、**アナログとデジタルの融合**をさらに加速。新素材やベジタリアン認定素材の採用は、**環境配慮**と**プレミアム化**の両立が必須。",
+            eu: "国: eu EU市場では**EV化**[eu499]と**HMI**[eu502]の進化が加速、**AI**技術[eu502]の搭載も進んでおり、**安全**[eu501,eu504]への関心の高まりが顕著。特に**EVバッテリー熱対策**や**緊急脱出**の技術的課題に対し、内装の機能拡張が求められている。さらに、**製造プロセスの効率化**と**サステナビリティ**[eu503]が業界の重要課題として浮上している[eu504]。",
+        },
+        ideas: {
+            cn: [
+                { id: 598, img: "images/idea_598.png", title: "グローバル戦略・現地調達内装「中国の鼓動」", desc: "タイスカの青浦基地と新恒泰の機能性高分子を活用し、中国市場向けに現地調達を推進。高品質素材でコスト競争力を維持。Xiaomi SU7の販売成功を参考にスマート機能を追加。中国市場のニーズに即応し現地顧客に信頼を与える。うれしさは自国で育った内装を体験できる満足感と安心感。", imagePrompt: "Automotive interior design concept for Chinese market, premium dashboard with local Chinese materials like bamboo and lacquer, integrated with modern AI displays and holographic interface, warm amber lighting accents, high-quality textures, photorealistic rendering, professional product visualization, cinematic lighting, high detail, 4K quality" },
+                { id: 599, img: "images/idea_599.png", title: "ウェザーストリップ連携・静音防水ドアトリム「風の息吹」", desc: "豊田合成のウェザーストリップ技術を活かし、ドア・トランク周りの防水・遮音を強化。天瑞汽車の品質課題を解決し静音性を向上。回転式ディスプレイと連携して多機能性を追求し、中国市場の高級車需要に応える。", imagePrompt: "Close-up of high-end car door trim with integrated weather stripping, waterproof seal, sound insulation, premium materials like soft-touch leather and wood grain, warm ambient lighting, detailed texture, photorealistic rendering, professional automotive photography style, high detail, 8K quality" },
+            ],
+            in: [
+                { id: 600, img: "images/idea_600.png", title: "デジタル・スマートコックピット：コネクテッド・コックピット", desc: "10.1インチタッチスクリーンにV2X通信機能を統合し、都市渋滞回避や事故防止をリアルタイムで案内。ARナビゲーションで前方車線を強調表示。運転者のストレス軽減とエンタメ性を両立。インドの都市部交通課題に対応し、**安全で快適**なドライブ体験を実現。**うれしさ**は、自動で最適ルート案内され、家族全員が安心できる**安全な旅**が叶うこと。", imagePrompt: "Digital smart cockpit with 10.1 inch touchscreen integrated V2X communication, augmented reality navigation highlighting forward lane, urban traffic flow visualization, premium automotive interior, brushed aluminum and dark blue materials, warm ambient lighting, photorealistic 3D render, modern vehicle cockpit, cinematic lighting, high detail, 4K quality" },
+                { id: 601, img: "images/idea_601.png", title: "ステアリング・ヒーター・マイク・スマートコックピット", desc: "豊田合成の**革巻きステアリング**をベースに、V2X通信とARナビ機能を統合。ヒーター機能でインドの熱帯気候に対応し、冬でも**暖かい運転**を実現。マイク内蔵で音声操作を強化。物理ボタンとタッチスクリーンの最適な組み合わせで、**高級感**と**操作性**を両立。運転者の**快適さ**を最優先し、**うれしさ**は、寒さ対策や音声操作の**便利性**が日常に溶け込むこと。", imagePrompt: "Leather wrapped steering wheel with built-in heater and microphone, integrated V2X communication interface, augmented reality display on dashboard, premium automotive interior, warm brown leather and dark gray materials, soft ambient lighting, photorealistic 3D render, modern vehicle cockpit, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 602, img: "images/idea_602.png", title: "CostModular 量産調和パネル", desc: "GR Heritage Partsの**レトロデザイン**[us521]と、GLC400 EVの**Hyperscreen**[us523]の両極端を、**モジュール設計**で融合。**コスト競争力**を高めつつ、**物理ボタン**と**AR表示**を最適配置。量産化で**価格を下げ**、**一般層にも**高品質**を享受。運転者の**懐かしさ**と**最先端**の**両立**を実現。", imagePrompt: "Cost-effective modular interior panel with hybrid design, combining retro classic dashboard aesthetics with modern digital AR display elements. Brushed aluminum and recycled leather materials, warm ambient lighting, photorealistic 3D render, automotive interior design concept, premium quality, cinematic lighting, high detail, 4K quality" },
+                { id: 603, img: "images/idea_603.png", title: "FreshGuard 調和抗菌インパネ", desc: "豊田合成の**抗菌内装部品**[us447]を応用し、**衝突時でも**作動する**消臭ディフューザー**を搭載。**Kia EV9**の**高級感**[us525]を意識し、**ベジタリアン認定素材**を採用。運転者の**健康**と**安心**を**確保**。香りで**癒やし**を感じ、**空気質**を**最適化**。家族で**安心して**ドライブ。**うれしさ**を**実感**。", imagePrompt: "Premium automotive interior with fresh guard antimicrobial features, integrated aromatherapy diffuser with safety operation, natural wood texture and vegan leather materials, soft glowing ambient lighting, night driving scene, photorealistic 3D render, high detail, cinematic lighting, premium quality visualization" },
+            ],
+            eu: [
+                { id: 604, img: "images/idea_604.png", title: "スマート製造・自動組立コンソール「AutoCraft EU+」", desc: "EVプラットフォーム[eu494]向けに、製造ラインでの自動化技術を内装生産へ応用。ボトムアップ型組立で歩留まりを15%向上、コストを削減。熟練工さんの手作業をAI支援で補完し、**製造効率の向上**で**生産性**を高める。現場の負担軽減と品質向上を同時に実現、**作業者の働きやすさ**を**実感**できる設計。", imagePrompt: "Automated interior manufacturing concept, robotic arm assembling center console in factory setting, sleek metallic tools, clean industrial lighting, EV platform components, sustainable materials, photorealistic industrial design, high detail, professional product visualization" },
+                { id: 605, img: "images/idea_605.png", title: "グリップ進化・AI制御操作部「SmartGrip EU+」", desc: "既存の**グリップ・スイッチ操作部品**[eu401]をAI制御で進化。EVの**タッチスクリーン**[eu498]への不満[eu501]を解消し、**音振動フィードバック**で**操作感**を向上。**Tactile feedback**技術で**視認性**を確保しつつ、**AIが操作パターンを学習**して最適化。**操作のしやすさ**を**実感**し、**運転の安心感**を高める。", imagePrompt: "Premium tactile control panel concept, ergonomic grip switches with haptic feedback, brushed aluminum and soft-touch materials, warm ambient lighting, modern luxury car interior, close-up detail shot, photorealistic rendering, professional automotive visualization" },
+            ],
+        }
+    },
+{
         date: "2026-03-19",
         analysis: {
             jp: "日本市場ではサステナブル素材の採用が加速しており、EV向けに軽量化とリサイクル設計の重要性が増しています[jp703]。また、マツダの遮音ガラス採用やホンダのType-C端子化から、コックピット機能性の向上がトレンドです[jp704]。さらに、カーエアコン臭対策や静寂性向上など、快適性への関心も高まっています[jp705][jp711]。自社の内装製品開発では、環境配慮と運転者の満足度の両立をテーマに、新素材と機能性を統合したソリューション開発が求められます。",

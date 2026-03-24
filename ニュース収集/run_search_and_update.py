@@ -3,30 +3,29 @@ import datetime
 import json
 import os
 import re
+import signal
 import subprocess
+import sys
 import time
 import urllib.request
 from pathlib import Path
-from subprocess import Popen, CalledProcessError, CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT
-import signal
-import sys
+from subprocess import CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT, CalledProcessError, Popen
+
 import py_compile
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 NEWS_JS = ROOT / "news_data.js"
 WORKFLOW = ROOT / "image_flux2_klein_text_to_image (1).json"
-LOG_DIR = Path(__file__).resolve().parent / "logs"
+LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
+LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 
 
 def log(msg):
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(msg + "\n")
-
-
-LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 
 
 def _llm_host():
@@ -53,87 +52,141 @@ def _model_loaded(host):
 
 
 def ensure_lm_studio():
-    """LM Studio サーバーが起動していなければ起動し、モデルをロードする。"""
     host = _llm_host()
     model = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
 
     if _server_up(host) and _model_loaded(host):
-        log("[LM Studio] サーバー起動済み・モデルロード済み。")
+        log("[LM Studio] Server and model are already ready.")
         return
 
     if not _server_up(host):
         if not LMS_EXE.exists():
-            log(f"[WARN] lms.exe が見つかりません ({LMS_EXE})。自動起動をスキップします。")
+            log(f"[WARN] lms.exe not found: {LMS_EXE}")
             return
-        log("[LM Studio] サーバーを起動します...")
+        log("[LM Studio] Starting server...")
         try:
             Popen(
                 [str(LMS_EXE), "server", "start"],
                 creationflags=CREATE_NEW_PROCESS_GROUP,
-                stdout=PIPE, stderr=STDOUT,
+                stdout=PIPE,
+                stderr=STDOUT,
             )
         except Exception as e:
-            log(f"[WARN] lms server start 失敗: {e}")
+            log(f"[WARN] lms server start failed: {e}")
             return
-        for i in range(24):  # 最大120秒待機
+        for i in range(24):
             time.sleep(5)
             if _server_up(host):
-                log(f"[LM Studio] サーバー起動完了 ({(i + 1) * 5}秒)。")
+                log(f"[LM Studio] Server became ready after {(i + 1) * 5}s.")
                 break
         else:
-            log("[WARN] LM Studio サーバーが120秒以内に起動しませんでした。")
+            log("[WARN] LM Studio server did not become ready within 120s.")
             return
 
     if not _model_loaded(host):
-        log(f"[LM Studio] モデルをロードします: {model}")
+        log(f"[LM Studio] Loading model: {model}")
         try:
             Popen(
                 [str(LMS_EXE), "load", model],
                 creationflags=CREATE_NEW_PROCESS_GROUP,
-                stdout=PIPE, stderr=STDOUT,
+                stdout=PIPE,
+                stderr=STDOUT,
             )
         except Exception as e:
-            log(f"[WARN] lms load 失敗: {e}")
-        for i in range(30):  # 最大300秒待機
+            log(f"[WARN] lms load failed: {e}")
+        for i in range(30):
             time.sleep(10)
             if _model_loaded(host):
-                log(f"[LM Studio] モデルロード完了 ({(i + 1) * 10}秒)。")
+                log(f"[LM Studio] Model became ready after {(i + 1) * 10}s.")
                 break
         else:
-            log("[WARN] モデルが300秒以内にロードされませんでした。")
+            log("[WARN] Model did not become ready within 300s.")
 
 
-def _register_wake_task():
-    """次回の 23:57 にPCを起こすワンショットタスクを登録する。
-    通常は深夜実行の直後に当日 23:57 を登録する。
-    もし 23:57 を過ぎて実行された場合だけ翌日に繰り越す。
-    タスクスケジューラの wake timer は 23:59:30 に登録されるため、
-    それより前にPCが起きている必要がある。"""
-    now = datetime.datetime.now()
+def _next_wake_datetime(now=None):
+    now = now or datetime.datetime.now()
     wake_dt = datetime.datetime.combine(now.date(), datetime.time(23, 57, 0))
     if now >= wake_dt:
         wake_dt += datetime.timedelta(days=1)
+    return wake_dt
+
+
+def _register_wake_task(wake_dt=None):
+    wake_dt = wake_dt or _next_wake_datetime()
     wake_str = wake_dt.strftime("%Y-%m-%dT%H:%M:%S")
-    ps = (
-        f'$t = New-ScheduledTaskTrigger -Once -At "{wake_str}";'
-        f'$a = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c exit";'
-        f'$s = New-ScheduledTaskSettingsSet -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Minutes 1);'
-        f'Register-ScheduledTask -TaskName "DailyNewsWakeHelper" -Trigger $t -Action $a -Settings $s -Force -RunLevel Highest | Out-Null'
-    )
+    ps = rf"""
+$ErrorActionPreference = 'Stop'
+$trigger = New-ScheduledTaskTrigger -Once -At '{wake_str}'
+$action = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument '/c exit'
+$settings = New-ScheduledTaskSettingsSet -WakeToRun -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$existing = Get-ScheduledTask -TaskName 'DailyNewsWakeHelper' -ErrorAction SilentlyContinue
+if ($null -eq $existing) {{
+    Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -User $env:USERNAME -RunLevel Highest -Force | Out-Null
+}} else {{
+    Set-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings | Out-Null
+}}
+"""
     try:
         r = subprocess.run(["powershell.exe", "-Command", ps], capture_output=True, text=True, timeout=30)
         if r.returncode == 0:
-            log(f"[INFO] ウェイクタスク登録: {wake_dt:%Y-%m-%d %H:%M}")
+            log(f"[INFO] Wake task registered: {wake_dt:%Y-%m-%d %H:%M}")
         else:
-            log(f"[WARN] ウェイクタスク登録失敗: {r.stderr.strip()[:200]}")
+            detail = (r.stderr or r.stdout or "").strip()
+            log(f"[WARN] Wake task registration failed: {detail[:200]}")
     except Exception as e:
-        log(f"[WARN] ウェイクタスク登録例外: {e}")
+        log(f"[WARN] Wake task registration exception: {e}")
+
+
+def _harden_scheduled_tasks():
+    wake_dt = _next_wake_datetime()
+    wake_str = wake_dt.strftime("%Y-%m-%dT%H:%M:%S")
+    ps = rf"""
+$ErrorActionPreference = 'Stop'
+$mainTask = Get-ScheduledTask -TaskName 'DailyNews_RunSearchAndUpdate' -ErrorAction SilentlyContinue
+if ($null -ne $mainTask) {{
+    $mainTask.Settings.DisallowStartIfOnBatteries = $false
+    $mainTask.Settings.StopIfGoingOnBatteries = $false
+    $mainTask.Settings.WakeToRun = $true
+    $mainTask.Settings.StartWhenAvailable = $true
+    Set-ScheduledTask -TaskName 'DailyNews_RunSearchAndUpdate' -Settings $mainTask.Settings | Out-Null
+}}
+
+$trigger = New-ScheduledTaskTrigger -Once -At '{wake_str}'
+$action = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument '/c exit'
+$settings = New-ScheduledTaskSettingsSet -WakeToRun -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$existingWake = Get-ScheduledTask -TaskName 'DailyNewsWakeHelper' -ErrorAction SilentlyContinue
+if ($null -eq $existingWake) {{
+    Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -User $env:USERNAME -RunLevel Highest -Force | Out-Null
+}} else {{
+    Set-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings | Out-Null
+}}
+
+$wakeInfo = schtasks /Query /TN DailyNewsWakeHelper /V /FO LIST | Out-String
+$mainInfo = schtasks /Query /TN DailyNews_RunSearchAndUpdate /V /FO LIST | Out-String
+[pscustomobject]@{{
+    WakeAt = '{wake_str}'
+    WakeInfo = $wakeInfo
+    MainInfo = $mainInfo
+}} | ConvertTo-Json -Compress
+"""
+    try:
+        r = subprocess.run(["powershell.exe", "-Command", ps], capture_output=True, text=True, timeout=60)
+        if r.returncode == 0:
+            log(f"[INFO] Scheduled task settings refreshed. Wake target: {wake_dt:%Y-%m-%d %H:%M}")
+            if r.stdout.strip():
+                log(f"[INFO] Task refresh details: {r.stdout.strip()[:1000]}")
+        else:
+            detail = (r.stderr or r.stdout or "").strip()
+            log(f"[WARN] Scheduled task refresh failed: {detail[:300]}")
+    except Exception as e:
+        log(f"[WARN] Scheduled task refresh exception: {e}")
 
 
 def sleep_computer():
-    """PCをスリープ状態にする（Windows）。"""
-    _register_wake_task()
-    log("[INFO] 処理完了。PCをスリープします...")
+    wake_dt = _next_wake_datetime()
+    _harden_scheduled_tasks()
+    _register_wake_task(wake_dt)
+    log("[INFO] Processing complete. Suspending PC...")
     subprocess.run(["rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0"])
 
 
@@ -154,7 +207,7 @@ def latest_news_date():
     if not NEWS_JS.exists():
         return None
     text = NEWS_JS.read_text(encoding="utf-8", errors="ignore")
-    dates = re.findall(r"\bdate:\s*\"(\d{4}-\d{2}-\d{2})\"", text)
+    dates = re.findall(r'\bdate:\s*"(\d{4}-\d{2}-\d{2})"', text)
     return max(dates) if dates else None
 
 
@@ -204,12 +257,10 @@ def run_cmd(cmd, label, log_file, cwd=None):
 
 
 def run_git_sync(log_file):
-    # Default ON (set AUTO_GIT_SYNC=0 to disable)
     if os.environ.get("AUTO_GIT_SYNC", "1").strip().lower() in {"0", "false", "no"}:
         log("[INFO] AUTO_GIT_SYNC disabled; skip git commit/push.")
         return
 
-    # Avoid self-dirtying the repo by excluding volatile runtime files.
     pathspecs = [
         ".",
         ":(exclude)ニュース収集/logs/*",
@@ -274,7 +325,7 @@ def run_git_sync(log_file):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--no-sleep", action="store_true", help="処理完了後にスリープしない")
+    parser.add_argument("--no-sleep", action="store_true", help="Do not suspend after processing.")
     args = parser.parse_args()
 
     log("==================================================")
@@ -293,7 +344,6 @@ def main():
         log("[INFO] No new dates to process.")
     else:
         dates = []
-        
         cur = start
         while cur <= end:
             dates.append(cur.strftime("%Y-%m-%d"))
@@ -339,6 +389,7 @@ def main():
     log("==================================================")
     if not args.no_sleep:
         sleep_computer()
+
 
 if __name__ == "__main__":
     main()
