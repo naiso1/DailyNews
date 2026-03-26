@@ -6,7 +6,8 @@
       "Bash(powershell -command \"Get-Process python -ErrorAction SilentlyContinue | Select-Object Id, StartTime, CPU | Format-Table\")",
       "Bash(powershell -NoProfile -Command \"Get-Process -Name python* -ErrorAction SilentlyContinue | Select-Object Id,CPU,StartTime | Format-Table -AutoSize\")",
       "Bash(powershell -NoProfile -Command \"\\(Get-Item ''c:/Users/demo/Desktop/中村/DailyNews/ニュース収集/logs/run_search_and_update_20260309.log''\\).Length; \\(Get-Content ''c:/Users/demo/Desktop/中村/DailyNews/ニュース収集/logs/run_search_and_update_20260309.log'' | Measure-Object -Line\\).Lines\")",
-      "Bash(C:/Users/demo/AppData/Local/Programs/Python/Python311/python.exe -c \":*)"
+      "Bash(C:/Users/demo/AppData/Local/Programs/Python/Python311/python.exe -c \":*)",
+      "Bash(powershell -Command \"Get-WmiObject -Class Win32_ComputerSystem | Select-Object Manufacturer, Model; Get-WmiObject -Class Win32_BaseBoard | Select-Object Manufacturer, Product, Version\")"
     ]
   }
 }

@@ -178,12 +178,49 @@ $mainInfo = schtasks /Query /TN DailyNews_RunSearchAndUpdate /V /FO LIST | Out-S
         log(f"[WARN] Scheduled task refresh exception: {e}")
 
 
+REVIEW_EMAIL_ATTACHMENT = ROOT / "内装開発デイリーニュース（米国、欧州追加）　ChatGPT活用.msg"
+MAIL_CONFIG_PATH = SCRIPT_DIR / "mail_config.json"
+
+
+def send_review_email():
+    import smtplib, json
+    from email.message import EmailMessage
+    try:
+        if not MAIL_CONFIG_PATH.exists():
+            log(f"[WARN] mail_config.json が見つかりません。メール送信をスキップします。")
+            return
+        cfg = json.loads(MAIL_CONFIG_PATH.read_text(encoding="utf-8"))
+        msg = EmailMessage()
+        msg["From"] = cfg["from_address"]
+        msg["To"] = cfg["to_address"]
+        msg["Subject"] = f"【確認依頼】内装開発デイリーニュース {datetime.date.today():%Y-%m-%d}"
+        msg.set_content("デイリーニュースを添付します。ご確認の上、配信をお願いします。")
+        if REVIEW_EMAIL_ATTACHMENT.exists():
+            data = REVIEW_EMAIL_ATTACHMENT.read_bytes()
+            msg.add_attachment(data, maintype="application", subtype="vnd.ms-outlook",
+                               filename=REVIEW_EMAIL_ATTACHMENT.name)
+            log(f"[INFO] 添付ファイル: {REVIEW_EMAIL_ATTACHMENT.name}")
+        else:
+            log(f"[WARN] 添付ファイルが見つかりません: {REVIEW_EMAIL_ATTACHMENT}")
+        with smtplib.SMTP(cfg["smtp_host"], cfg["smtp_port"]) as server:
+            server.starttls()
+            server.login(cfg["from_address"], cfg["app_password"])
+            server.send_message(msg)
+        log(f"[INFO] 確認メール送信完了: {cfg['to_address']}")
+    except Exception as e:
+        log(f"[WARN] 確認メール送信失敗: {type(e).__name__}: {e}")
+
+
 def sleep_computer():
     wake_dt = _next_wake_datetime()
     _harden_scheduled_tasks()
     _register_wake_task(wake_dt)
     log("[INFO] Processing complete. Suspending PC...")
-    subprocess.run(["rundll32.exe", "powrprof.dll,SetSuspendState", "0,1,0"])
+    subprocess.run([
+        "powershell.exe", "-NoProfile", "-Command",
+        "Add-Type -Assembly System.Windows.Forms; "
+        "[System.Windows.Forms.Application]::SetSuspendState('Suspend', $false, $false)"
+    ])
 
 
 def get_google_search_entrypoint():
@@ -383,6 +420,7 @@ def main():
 
     log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     log("==================================================")
+    send_review_email()
     if not args.no_sleep:
         sleep_computer()
 
