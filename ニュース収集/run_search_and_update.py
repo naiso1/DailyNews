@@ -119,12 +119,8 @@ $ErrorActionPreference = 'Stop'
 $trigger = New-ScheduledTaskTrigger -Once -At '{wake_str}'
 $action = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument '/c exit'
 $settings = New-ScheduledTaskSettingsSet -WakeToRun -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
-$existing = Get-ScheduledTask -TaskName 'DailyNewsWakeHelper' -ErrorAction SilentlyContinue
-if ($null -eq $existing) {{
-    Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -User $env:USERNAME -RunLevel Highest -Force | Out-Null
-}} else {{
-    Set-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings | Out-Null
-}}
+Unregister-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -RunLevel Highest | Out-Null
 """
     try:
         r = subprocess.run(["powershell.exe", "-Command", ps], capture_output=True, text=True, timeout=30)
@@ -144,22 +140,22 @@ def _harden_scheduled_tasks():
 $ErrorActionPreference = 'Stop'
 $mainTask = Get-ScheduledTask -TaskName 'DailyNews_RunSearchAndUpdate' -ErrorAction SilentlyContinue
 if ($null -ne $mainTask) {{
-    $mainTask.Settings.DisallowStartIfOnBatteries = $false
-    $mainTask.Settings.StopIfGoingOnBatteries = $false
-    $mainTask.Settings.WakeToRun = $true
-    $mainTask.Settings.StartWhenAvailable = $true
-    Set-ScheduledTask -TaskName 'DailyNews_RunSearchAndUpdate' -Settings $mainTask.Settings | Out-Null
+    try {{
+        $mainTask.Settings.DisallowStartIfOnBatteries = $false
+        $mainTask.Settings.StopIfGoingOnBatteries = $false
+        $mainTask.Settings.WakeToRun = $true
+        $mainTask.Settings.StartWhenAvailable = $true
+        $mainTask | Set-ScheduledTask | Out-Null
+    }} catch {{
+        # 認証エラー等で失敗しても続行
+    }}
 }}
 
 $trigger = New-ScheduledTaskTrigger -Once -At '{wake_str}'
 $action = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument '/c exit'
 $settings = New-ScheduledTaskSettingsSet -WakeToRun -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
-$existingWake = Get-ScheduledTask -TaskName 'DailyNewsWakeHelper' -ErrorAction SilentlyContinue
-if ($null -eq $existingWake) {{
-    Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -User $env:USERNAME -RunLevel Highest -Force | Out-Null
-}} else {{
-    Set-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings | Out-Null
-}}
+Unregister-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -RunLevel Highest | Out-Null
 
 $wakeInfo = schtasks /Query /TN DailyNewsWakeHelper /V /FO LIST | Out-String
 $mainInfo = schtasks /Query /TN DailyNews_RunSearchAndUpdate /V /FO LIST | Out-String
