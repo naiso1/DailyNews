@@ -1080,11 +1080,17 @@ def extract_cjk_keywords(text, limit=8):
     counts = Counter(tokens)
     return [t for t, _ in counts.most_common(limit)]
 
-def summary_matches_source(summary, source):
-    keys = extract_cjk_keywords(source)
-    if not keys:
+def summary_matches_source(summary, source, title=""):
+    """要約がソース（タイトル+本文）と内容的に一致するか確認。
+    漢字語句とカタカナ固有名詞（3字以上）の両方でチェック。
+    """
+    check_text = (title + " " + source).strip() if title else source
+    kanji_keys = extract_cjk_keywords(check_text)
+    kata_keys = re.findall(r'[\u30a1-\u30f6\u30fc]{3,}', check_text)
+    all_keys = list(set(kanji_keys + kata_keys))
+    if not all_keys:
         return True
-    return any(k in summary for k in keys)
+    return any(k in summary for k in all_keys)
 
 def enforce_kanji_text(text):
     if not text or not USE_LLM:
@@ -1375,11 +1381,12 @@ def summarize_article(title, content, url, country=""):
     summary_title = ensure_japanese(summary_title, title, force=force_jp, require_kanji=force_jp)
     summary_body = ensure_japanese(summary_body, content, force=force_jp, require_kanji=force_jp)
 
-    # Retry if summary looks off-topic for CN sources
+    # Retry if summary looks off-topic (全国対応)
     source_text = f"{title} {content}"
-    if country == "中国":
-        combined = f"{summary_title} {summary_body}"
-        if not summary_matches_source(combined, source_text):
+    combined = f"{summary_title} {summary_body}"
+    if not summary_matches_source(combined, source_text, title=title):
+        print(f"  [SUMMARY_MISMATCH] タイトル不一致のためリトライ: {title[:50]}")
+        if country == "中国":
             keywords = ", ".join(extract_cjk_keywords(source_text))
             retry_prompt = (
                 "Summarize strictly based on the provided title/content. Avoid generic AI boilerplate.\n"
@@ -1390,13 +1397,22 @@ def summarize_article(title, content, url, country=""):
                 f"Content: {content}\n"
                 f"Keywords: {keywords}\n"
             )
-            retry = call_llm_text(retry_prompt)
-            retry_title = parse_json_field(retry, "title")
-            retry_body = parse_json_field(retry, "summary")
-            if retry_title:
-                summary_title = ensure_japanese(retry_title, title, force=force_jp, require_kanji=force_jp)
-            if retry_body:
-                summary_body = ensure_japanese(retry_body, content, force=force_jp, require_kanji=force_jp)
+        else:
+            retry_prompt = (
+                "以下の記事タイトル・本文・本文HTML抽出に基づき、正確に日本語で要約してください。汎用的なAIボイラープレートは禁止。\n"
+                f"タイトルは{SUMMARY_TITLE_LIMIT}字以内、内容は{SUMMARY_CONTENT_LIMIT}字以内。内容は句点で終える。\n"
+                "出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
+                f"記事タイトル: {title}\n"
+                f"記事内容: {content}\n"
+                f"本文HTML抽出: {html_text}\n"
+            )
+        retry = call_llm_text(retry_prompt)
+        retry_title = parse_json_field(retry, "title")
+        retry_body = parse_json_field(retry, "summary")
+        if retry_title:
+            summary_title = ensure_japanese(retry_title, title, force=force_jp, require_kanji=force_jp)
+        if retry_body:
+            summary_body = ensure_japanese(retry_body, content, force=force_jp, require_kanji=force_jp)
 
     # Avoid adding Japanese company suffixes if not present in source
     if country == "中国" and "株式会社" in f"{summary_title} {summary_body}" and "株式会社" not in source_text:
