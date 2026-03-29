@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-29",
+        analysis: {
+            jp: "日本国内は再生材や新素材への関心が高まっている。オートバックスのFRPシート[jp742]やサンワサプライの軽量化ホルダー[jp743]は、軽量化と素材革新のニーズを示唆する。日産のe-POWER拡大[jp744]やラグジュアリーSUV需要[jp747]は、高級感と環境配慮の両立が求められている。AE86のポン付けメーター[jp746]やティーノ[jp749]のレトロ・カスタム文化は、個性的な内装への情熱を反映し、LEDルームランプ[jp745]やピラーレススライドドア[jp750]は照明や空間デザインの進化を示す。これらのトレンドを踏まえ、素材革新と光加飾の融合が鍵となる。",
+            cn: "中国市場では、EV化と高級化が加速し、内装の安全性と健康機能が重視されています。衝突耐性や緊急脱出を助けるシート構造[cn591]や、抗菌・消臭機能[cn586]がトレンドです。また、HMI進化[cn587]やディスプレイ統合[cn594]により、車内を「デジタルコックピット」化し、ユーザー体験向上を図っています。特に後部座席のエンタメ機能[cn586]は、家族向けEVの需要増を反映。さらに、新素材[cn588]やLED照明[cn593]による個性化も進んでいます。",
+            in: "インド市場では、高級感とカスタマイズ性への需要拡大[in606]が背景にあり、安全性[in614][in613]やコネクテッド機能・快適性[in607][in608]の両立がトレンド。商用車ではコストパフォーマンスと品質向上のバランスが鍵[in611]。特に熱帯気候下では、抗菌・消臭機能と安全な内装設計の両立[in612]が不可欠。",
+            us: "米国国の自動**内装トレンド**は、物理ボタン復活と**快適性向上**が顕著 [us551,us552]。特にVWの**物理ボタンの復活**やJeepの**居心地重視設計**が示唆する**アナログ回帰**が鍵 [us556,us557,us558]。また、**抗菌・消臭機能**や**衝突安全基準強化**から、**健康×安全**の両立が必須 [us560]。トヨタクラウンの**高級感追求**や**シートベルト誤作動解消**は、**信頼性**と**素材質感**の重要性を示す [us555,us552]。Jeep Cherokeeの**新素材採用**も注目 [us558]。",
+            eu: "国: eu 欧州市場では、高級感を重視した内装トレンドが顕著。特に、シートやドアトリムの質感向上や、EVプラットフォームへの適応性[eu532]が重要。一方で、静粛性や光加飾の進化も高級感を強調。これらのトレンドを踏まえ、高級感×静粛性の融合を追求する。また、EV化による熱対策やAI制御も必須[eu529]。これらを統合し、高級感×静粛性×EVの相乗効果を発揮する製品が必要。",
+        },
+        ideas: {
+            jp: [
+                { id: 626, img: "images/idea_626.png", title: "バイオ再生×温感抗菌コンソール「BioZen Luxe」", desc: "**FRPシート[jp742]**や**軽量化ホルダー[jp743]**の素材革新を踏まえ、バイオマス由来の再生木材調パネルを採用。接触温感で自動抗菌発熱し、**上質な温もり**と**清潔感**を同時に提供。レクサスGS[jp638]のような**ラグジュアリーな**触感を、環境負荷の低い**新素材**で実現。**車内がいつも清潔で、温かみのある空間**に。", imagePrompt: "Luxury car interior center console made from light beige bio-renewable wood-grain material with subtle thermal glow effect, warm ambient lighting under the panel, soft touch surface, premium automotive design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 627, img: "images/idea_627.png", title: "光透過×ARイルミネーションパネル「LumiAR Zen Pro」", desc: "豊田合成の**光加飾パネル**をベースに、ニュースの**LEDルームランプ[jp745]**や**ピラーレスドア[jp750]**の空間演出技術を統合。ARで**車外情報を**投影しながら、**アンビエントライト**で**幻想的な**車内空間を演出。**運転中に**リラックスできる**癒やしの空間**を**実現。", imagePrompt: "Futuristic car dashboard with translucent AR holographic display panel, glowing ambient light strips in soft blue and warm white, holographic information overlays, sleek modern design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 628, img: "images/idea_628.png", title: "緊急脱出支援シート「エスケープ・セーフティ」", desc: "衝突時にシートが自動で緩み、脱出を容易にする**シート構造**[cn591]を採用。緊急時、シートバックが展開し、子供や高齢者の**脱出支援**を可能に。**抗菌・消臭**[cn586]機能も統合し、安全かつ清潔な車内空間を提供。**うれしさ**は、家族が安心して旅できる安心感です。", imagePrompt: "Safety-focused automotive interior seat design, emergency ejection mechanism visible but subtle, brushed aluminum safety frame, warm beige leather upholstery, soft ambient lighting, photorealistic 3D render, premium automotive safety technology, cinematic lighting, high detail, 4K quality" },
+                { id: 629, img: "images/idea_629.png", title: "抗菌・消臭機能「フレッシュ・エア」", desc: "EV車特有の閉鎖空間臭を**抗菌・消臭機能**[cn586]で解消。シート素材に**新素材**[cn588]を採用し、波状ストライプ柄で**個性**を演出。**HMI連動**[cn587]で、車内空気をリアルタイム制御。**うれしさ**は、常に清潔で香りの良い車内空間で、リラックスして過ごせることです。", imagePrompt: "Premium automotive interior with fabric trim featuring wave-pattern stripes, fresh air ventilation system integrated into dashboard, cool blue LED accent lighting, high-quality leather and fabric materials, photorealistic 3D render, modern vehicle cockpit design, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 630, img: "images/idea_630.png", title: "安全・緊急脱出・スマートシート", desc: "衝突時の**サイドエアバッグ**保護機能を強化した**シートフレーム**です。リコール[in614]で発覚した欠陥を踏まえ、**衝突安全**を徹底。また、子供が誤って触れない**ロック機構**と、緊急時の**脱出用ハッチ**を内蔵。ヨット[in606]の**高級感**を損なわず、**安心感**を演出。運転者と家族の**安全**を最優先した、**信頼できる**内装ソリューション", imagePrompt: "Emergency escape smart seat design for luxury Indian SUV, integrated side airbag protection frame, child lock mechanism, emergency hatch, premium leather upholstery, warm ambient lighting, photorealistic 3D render, cinematic interior view, safety focus" },
+                { id: 631, img: "images/idea_631.png", title: "抗菌・消臭・香りコンソール", desc: "天然バフと再生プラスチックで構成する**サステナブルコンソール**に、**空気感知AIセンサー**を搭載。インドの熱帯気候[in611]に対応し、**抗菌・消臭**機能を向上。フェラーリの高級感[in613]やAudiのパフォーマンス[in612]に並ぶ、**香り付き**の**快適空間**を演出。運転者の**健康**と**爽快感**を両立。うれしい**香り**で、**リラックス**したドライブを実現", imagePrompt: "Sustainable aromatic console with AI air sensor for Indian luxury SUV, natural buffalo horn and recycled plastic materials, subtle fragrance diffusion, ambient lighting effects, premium design, photorealistic render, modern cockpit interior, health-focused, relaxing atmosphere" },
+            ],
+            us: [
+                { id: 632, img: "images/idea_632.png", title: "ScentShield 調和安全×香りコンソール", desc: "衝突時でも安全装置作動が確実な**調香ディフューザー**を搭載。シートバックのロック機構と連動し、緊急時に**心地よい香り**で不安を和らげる。Jeepの**居心地重視設計**[us558]とトヨタクラウンの**高級感**[us555]を融合。物理ボタンの**触覚安心感**も維持。衝突時の安全装置作動が確実な**調香ディフューザー**を搭載。シートバックのロック機構と連動し、緊急時に**心地よい香り**で不安を和らげる。Jeepの**居心地重視設計**[us558]とトヨタクラウンの**高級感**[us555]を融合。物理ボタンの**触覚安心感**も維持。", imagePrompt: "Luxury car interior center console with integrated aroma diffuser, physical buttons with tactile feedback, brushed aluminum finish, warm ambient lighting, night driving scene, premium leather materials, photorealistic 3D render, cinematic lighting" },
+                { id: 633, img: "images/idea_633.png", title: "BioGuard 調和抗菌×安全シート", desc: "豊田合成の**抗菌内装部品**[us447]を応用し、**衝突時でも**作動する**調和エアバッグ**と統合。**車椅子衝突テスト基準強化**[us560]に対応。シート表面に**調和抗菌加工**を施し、健康リスクを**82%低減**[us560]。Jeep Cherokeeの**新素材採用**[us558]とVWの**物理ボタン復活**[us556]を融合。**安心感**と**高級感**を両立。", imagePrompt: "Automotive interior seat with integrated airbag and antibacterial coating, bio-based sustainable materials, soft-touch fabric texture, safety focus visualization, modern vehicle cockpit, clean white and green accent colors, photorealistic render, high detail" },
+            ],
+            eu: [
+                { id: 634, img: "images/idea_634.png", title: "「SilentLux EU+」プレミアム静粛×光加飾コックピット", desc: "高級車[eu525]の**職人技**を**EV**プラットフォーム[eu532]に最適化。豊田合成の**光加飾技術**[eu531]と**シート**[eu530]を**EV**化し、**AI**制御で**静粛性**を最大化。車内を**高級**な**空間**に、**光**で**演出**。運転者の**疲れ**を**軽減**し、**愉しみ**を**増**大。", imagePrompt: "Luxury car interior with premium silent design, brushed aluminum console, ambient lighting effects, high-quality leather seats, modern EV cockpit, photorealistic rendering, cinematic lighting, 4K quality" },
+                { id: 635, img: "images/idea_635.png", title: "「SoftGrip EU+」ソフトパッド×EV安全統合コンソール", desc: "豊田合成の**ソフトパッド**技術[eu532]を**EV**プラットフォーム[eu534]に**応用**。**AI**制御で**衝突時**の**安全領域**を**拡大**。再生アルミとリサイクル合成皮革で**環境負荷**を**低減**。車内の**安全**と**快適さ**を**両立**。運転者の**安心感**を**高**め、**愉しみ**を**増**大。", imagePrompt: "Modern vehicle cockpit with integrated safety features, soft touch control surfaces, sustainable materials, premium quality, photorealistic 3D render, warm ambient glow, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-03-26",
         analysis: {
             jp: "日本の自動車内装市場では、安全装備強化とHMI進化が顕著[jp733]です。マツダCX-60/80はタッチ操作追加[jp733]、消費者は直感的操作を求めています[jp734]。トヨタbZ4Xはディスプレイ大型化とEV化が進み[jp736]、航続距離表示も重要[jp736]です。デジタル計器クラスター市場は2035年まで拡大予測で[jp740]、HMI規制要件の高まりが牽引[jp740]しています。AI技術進化は人間性問い直し新たな安全観を生み[jp741]、車内環境最適化が進む[jp741]状況です。安全・HMI・EV化のトレンドが明確[jp733]です。",
