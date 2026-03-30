@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-30",
+        analysis: {
+            jp: "日本市場では、新車価格高騰[jp752]を受け、純正アップグレード需要が急増しており、愛車進化の文脈で内装部品への関心が高まっています。消費者は「高級感」を求めつつ、**レトロ**な温もりや**木材**調デザインに親和性[jp755]を示しています。一方、**抗菌**や**消臭**機能への関心はEV化や健康意識の高まりから持続的に向上[jp759]しており、車内空気質管理は必須要件となっています。さらに、**EV**車向けに**熱管理**や**抗菌**機能を統合したコンソールモジュールへの注目[jp760]も顕著です。",
+            cn: "中国市場ではEVとスマートコックピットの進化が加速し、抗菌・消臭や温熱理療といった健康・ウェルネス要素が重視されている[cn598,cn605]。レーザーレーダーやAIアシスタントの標準化により車内体験が拡張され、静寂とリラクゼーションが求められている[cn597,cn601]。デザインアップグレードや現地調達の推進により、高品質な内装素材への関心も高まっている[cn600,cn599]。これらトレンドを踏まえ、健康を最優先とした車内環境の革新が期待される[cn596,cn603]。",
+            in: "インド市場では低価格帯のサンルーフ普及やEV価格上昇がトレンド。特に安全基準強化で5つ星評価が重視[in618]。リコール問題からシートフレーム品質が課題[in622]。マツダQuickstopはオフラインサービスの模範[in620]。次世代車種ハイブリッド化が進むが、家族向け快適性も重要[in621]。グローバル戦略で現地調達と品質向上の両立が鍵[in616]。",
+            us: "2026年の米国自動車内装トレンドは、モータースポーツ技術の量産車への転用[us562]やEV/SUVの高級装備[us566]が進化。特に衝突時の安全性やカスタマイズの停滞[us564]が課題。また、シートベルト不具合からの安全規制強化[us565]やツーリングバイクの高級感[us568]も示唆。自社は調和技術を安全装置と融合し、衝突時でも作動する調香・抗菌機能や子供安全の緊急脱出機構を開発すべき。",
+            eu: "欧州市場はZEVマンド[eu538]や英国の規制[eu542]でEV化が加速し、Kia[eu535]やChangan[eu544]がBセグメントで参入。競合はccNCナビコックピット[eu543]でHMIを強化。他方でステアバイワイヤー[eu539]などSDV時代への移行はソフトウェア定義が鍵。さらにロボタクシー[eu540]や駐車割引[eu541]のように、コックピット体験やAI連携が消費者ニーズを後押し。自社はEVプラットフォームで現地調達や市場参入戦略を強化し、グローバル戦略を軸に差別化を図るべき。",
+        },
+        ideas: {
+            jp: [
+                { id: 636, img: "images/idea_636.png", title: "バイオ再生×温感抗菌コンソール「BioZen Luxe」", desc: "**バイオ由来**の再生素材で製造し、車内温度感知で自動発熱する**温感ヒーター**と**抗菌**コーティングを備えた高級コンソールパネル。[jp752]の高騰対策で、愛車の**高級感**を維持しながら、**健康**と**快適性**を両立。触れるたびに**心地よい温もり**を感じ、**清潔な空気**でリラックスできます。", imagePrompt: "Integrated center console made from sustainable bio-based materials with warm wood grain texture, embedded temperature-sensitive heating elements glowing softly, antimicrobial surface finish, luxury car interior, modern Japanese automotive design, warm ambient lighting, photorealistic 3D render, premium quality, cinematic lighting, high detail, 4K quality" },
+                { id: 637, img: "images/idea_637.png", title: "内装用消臭・抗菌機能モジュール「ZenAir Core」", desc: "豊田合成の**抗菌消臭**技術をベースに、[jp759]のEV車向け**空気質管理**機能を統合。車内を常に**新鮮な空気**で保ち、**アレルギー**や**悪臭**から守る**健康モジュール**。[jp758]の**サプライチェーン**課題を考慮し、**軽量設計**で搭載容易。運転中に**安心感**と**爽やかさ**を常に保てます。", imagePrompt: "Advanced air purification module integrated into vehicle dashboard, emitting subtle antimicrobial mist, sleek black and metallic finish with LED status indicators, modern Japanese automotive interior, clean and minimalistic design, soft ambient lighting, photorealistic 3D render, premium quality, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 638, img: "images/idea_638.png", title: "ウェルネス・コックピット「癒しの空間」", desc: "**EV車**特有の**閉鎖空間臭**を**抗菌・消臭機能**で**解消**し、**温熱理療**パネルで**リラックス**できる**空間**を**実現**[cn598, cn605]。**光の紋様**や**香気**で**気分**を**調整**し、**静寂**を**享受**できる**車内**を**目指す**[cn601]。**素材**は**高品質**な**機能性高分子**で**仕上げ**、**静寂**と**癒やし**を**感じ**させる**車内**を**実現**[cn599]。", imagePrompt: "Luxury car interior, wellness-focused cockpit with ambient lighting, aromatherapy diffuser, heated massage panels, natural materials like bamboo and leather, soft warm glow, photorealistic 3D render, premium automotive design, high detail, 4K quality" },
+                { id: 639, img: "images/idea_639.png", title: "スマート・フローティングコンソール「未来の調和」", desc: "**EVのフラットフロア**を活かし、**モダンなレイアウト**を**採用**[cn596]。**AIアシスタント**と**連動**し、**音楽**や**照明**を**自動調整**する**コントロールパネル**を**搭載**[cn601]。**デザイン**は**東方風韻**の**哲学**を**取り入れ**、**高品質**な**加飾**を**施し**[cn600]。**静寂**と**調和**を**感じ**させる**車内**を**目指す**[cn597]。", imagePrompt: "Futuristic car interior, floating center console with AI assistant interface, holographic controls, brushed aluminum and leather materials, night driving scene, blue accent lighting, photorealistic 3D render, premium automotive design, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 640, img: "images/idea_640.png", title: "グローバル・スマート・コンソール：低価格への挑戦", desc: "インド市場向けに**低価格帯でも**品質を保つ**スマートコンソール**。再生プラスチックと天然バフの**サステナブル素材**を採用。芳香成分を**AIセンサー**で制御し、熱帯気候の**湿度変化**に対応。家族向けに**抗菌・消臭**機能を強化。運転中の**ストレス軽減**を**うれしさ**として提供。", imagePrompt: "Center console in budget Indian vehicle, sustainable materials with recycled plastic and natural buffalo horn, ambient lighting strips in warm orange tones, integrated air purification vents with subtle mist output, compact form factor suitable for compact SUVs, photorealistic 3D render, warm lighting, premium budget quality" },
+                { id: 641, img: "images/idea_641.png", title: "エアバッグ進化型：**サイドエアバッグ**の**フレーム強化**", desc: "豊田合成の**前席センターエアバッグ**をベースに、**シートフレーム**強度を強化。インド市場で**リコール問題**[in622]を回避。Kia Seltosの**5つ星評価**[in618]を参考に。サイドエアバッグの**展開速度**を向上。家族乗員保護を**優先**。**うれしさ**は**安心感**。", imagePrompt: "Side airbag deployment mechanism in premium Indian SUV, high-strength steel frame structure, blue and white safety indicator lights, transparent protective cover showing deployment path, detailed mechanical components, studio lighting, technical CAD-style rendering, safety focus" },
+            ],
+            us: [
+                { id: 642, img: "images/idea_642.png", title: "SafeScent：衝突時でも作動する調香安全シート", desc: "衝突時でも安全装置作動が確実な**調香ディフューザー**を搭載。シートバックのロック機構と連動し、緊急時でも香りによる鎮静効果を発揮。**子供安全**と**衝突安全**を両立し、**うれしさ**を感じられる安心空間を創出。", imagePrompt: "Safety-focused interior design, integrated aroma diffuser in seat backrest, emergency release mechanism, child safety features, crash-safe materials, soft warm lighting, photorealistic 3D render, premium automotive interior, detailed fabric texture, cinematic lighting, high detail, 4K quality" },
+                { id: 643, img: "images/idea_643.png", title: "GripShift：グリップ・スイッチ×EVシフトノブ", desc: "豊田合成の**グリップ・スイッチ**技術を**EVシフトノブ**に転用。スポーツカーのような**高級感**を**EV SUV**に。物理ボタン復活の流れ[jus542]を受け、**タクト感**を**デジタル**と融合。運転者の**うれしさ**を**操作感**で表現。", imagePrompt: "EV interior design, digital shift knob with tactile grip, luxury materials, brushed aluminum and leather, modern dashboard, ambient lighting, futuristic cockpit, photorealistic 3D render, premium automotive design, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 644, img: "images/idea_644.png", title: "GlobalGrip EU+：グローバル戦略で**現地化**した**EV**コンソール", desc: "欧州市場の**ZEVマンド**[eu538]や**英国規制**[eu542]に対応し、**Kia**[eu535]や**Changan**[eu544]が**Bセグメント**で**参入**。自社は**グローバル戦略**で**現地調達**を強化し、**ccNCナビコックピット**[eu543]のような**HMI**強化と**ステアバイワイヤー**[eu539]を統合。さらに**ロボタクシー**[eu540]や**駐車割引**[eu541]の**消費者ニーズ**に応え、**AI**連携で**コックピット**体験を向上。これで**差別化**し、**うれしさ**を**創造**！", imagePrompt: "Global strategy inspired center console for European EV market, sleek brushed aluminum finish with ambient lighting, integrated steering-by-wire controls, compact B-segment SUV interior, premium texture, photorealistic 3D render, warm lighting, high detail, 4K quality" },
+                { id: 645, img: "images/idea_645.png", title: "EcoMod EU+：EVプラットフォーム[eu494]の**新レイアウト**で**快適**な**フロア**", desc: "豊田合成の**EV向けフロア・センタートンネル**を起点に、**ZEVマンド**[eu538]や**英国規制**[eu542]に対応した**新レイアウト**で**最適化**。**Kia**[eu535]や**Changan**[eu544]の**Bセグメント**参入", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-03-29",
         analysis: {
             jp: "日本国内は再生材や新素材への関心が高まっている。オートバックスのFRPシート[jp742]やサンワサプライの軽量化ホルダー[jp743]は、軽量化と素材革新のニーズを示唆する。日産のe-POWER拡大[jp744]やラグジュアリーSUV需要[jp747]は、高級感と環境配慮の両立が求められている。AE86のポン付けメーター[jp746]やティーノ[jp749]のレトロ・カスタム文化は、個性的な内装への情熱を反映し、LEDルームランプ[jp745]やピラーレススライドドア[jp750]は照明や空間デザインの進化を示す。これらのトレンドを踏まえ、素材革新と光加飾の融合が鍵となる。",

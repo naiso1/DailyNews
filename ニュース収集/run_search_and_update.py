@@ -119,8 +119,9 @@ $ErrorActionPreference = 'Stop'
 $trigger = New-ScheduledTaskTrigger -Once -At '{wake_str}'
 $action = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument '/c exit'
 $settings = New-ScheduledTaskSettingsSet -WakeToRun -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$principal = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -RunLevel Highest
 Unregister-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Confirm:$false -ErrorAction SilentlyContinue
-Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -RunLevel Highest | Out-Null
+Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -Principal $principal | Out-Null
 """
     try:
         r = subprocess.run(["powershell.exe", "-Command", ps], capture_output=True, text=True, timeout=30)
@@ -154,8 +155,9 @@ if ($null -ne $mainTask) {{
 $trigger = New-ScheduledTaskTrigger -Once -At '{wake_str}'
 $action = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument '/c exit'
 $settings = New-ScheduledTaskSettingsSet -WakeToRun -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$principal = New-ScheduledTaskPrincipal -UserId 'SYSTEM' -RunLevel Highest
 Unregister-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Confirm:$false -ErrorAction SilentlyContinue
-Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -RunLevel Highest | Out-Null
+Register-ScheduledTask -TaskName 'DailyNewsWakeHelper' -Trigger $trigger -Action $action -Settings $settings -Principal $principal | Out-Null
 
 $wakeInfo = schtasks /Query /TN DailyNewsWakeHelper /V /FO LIST | Out-String
 $mainInfo = schtasks /Query /TN DailyNews_RunSearchAndUpdate /V /FO LIST | Out-String
