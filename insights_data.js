@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-03-31",
+        analysis: {
+            jp: "日本市場は**安全技術**[jp763]と**合成皮革**[jp770]の進化が顕著。ロールスロイスの**ハンドメイド**[jp764]が示すように、職人技と**サステナビリティ**を融合した**高級内装**への関心が強まっている。また、**EV化**[jp767]に伴う**熱管理**と**音質**[jp763]の両立が課題。消費者は**機能性**と**情緒**の両方を求め、**デジタル**[jp769]と**アナログ**の**ハイブリッド**体験を期待している。",
+            cn: "中国市場でNEV（電気自動車）の普及加速が見られる。BYD、NIO、CATL は充電インフラやバッテリー交換インフラへの投資を拡大 [cn611] しており、EV専用設計の重要性が高まっている。また、華為やCATLのバッテリー採用など、サプライチェーンの効率化がトレンド。消費者は静寂価値を重視し、EV特有の閉鎖空間臭への対策を求めている。さらに、高級NEVブランドの立ち上げ [cn606] や、AI搭載のコントロールパネルなど、高級化・デジタル化の両輪が進行中。",
+            in: "インドの自動車内装市場では、EV化の加速と資源安全保障が課題[in632][in635]。特にバッテリー資源の輸入依存から国内生産への転換が急務。一方で、競合がデジタルコックピットや高級感を追求[in629][in630]。また、女性向け安全や熱帯気候対応も重要[in627][in633][in634]。自社はEVプラットフォームやフラットフロアを活用したモジュラー設計で差別化を図る必要がある。",
+            us: "米国市場ではEV普及の地域差と多様なエネルギー対応が課題だが、トヨタ、内燃機関車は長期的に必要と強調[us571]や独法裁判、BMW・メルセデスICE販売禁止却下、立法権は議員に[us573]から規制緩和と多様性がトレンド。高級車ではARインタラクションと64色イルミなどデジタル化が加速[us580]。一方で耐久性への要望（バッテリー・ヘーターコアなど）は、読者が「壊れない車部品」を希望[us577]、EV移行期でも実用性が重視されつつある。これらを踏まえ、スマートコックピットと触覚的快適性の融合が鍵となる。",
+            eu: "欧州市場では**新素材**[eu545]や**EV**アーキテクチャがトレンド。ルノーの**軽量化**[eu547]戦略や、ジャガーの**コックピット**再定義[eu551]から、EVプラットフォーム向けに**製造プロセス改善**[eu554]の視点が重要。特に上海ACDCハブ活用[eu554]により開発期間100週短縮。豊田合成の**消臭・抗菌機能**[eu548]をEV向けに拡張する余地あり。",
+        },
+        ideas: {
+            jp: [
+                { id: 646, img: "images/idea_646.png", title: "緊急脱出×温感抗菌コンソール「SafeZen Core」", desc: "衝突時や火災時に**温感ヒーター**でドアハンドルを暖め、**抗菌機能**で細菌を消滅させる**安全コンソール**です。**子供安全**を徹底し、緊急時の**脱出支援**も可能。車内の**安心感**を高める設計。", imagePrompt: "Emergency escape console in luxury Japanese car interior, heated door handles glowing warm orange during fire scenario, antimicrobial silver coating visible, child safety design with soft rounded edges, dramatic lighting, photorealistic 3D render, high detail" },
+                { id: 647, img: "images/idea_647.png", title: "音質×触感スイッチモジュール「ZenTouch Pro」", desc: "アウディA1の**高音質**[jp763]技術を応用した**触感スイッチ**モジュール。**ジュラルミン**のような**高級感**と**クリック感**を再現。**EV車**にも最適。**運転の心地よさ**を向上。**愉**しい**操作感**を提供。", imagePrompt: "Premium touch switch module for EV interior, brushed aluminum finish with soft haptic feedback, integrated high-quality speaker grille, modern Japanese automotive cockpit, warm ambient lighting, photorealistic render" },
+            ],
+            cn: [
+                { id: 648, img: "images/idea_648.png", title: "EV特化・熱管理コンソール「静の心臓」", desc: "EVのフラットフロアを活かし、コンソールにバッテリー熱管理ユニットを内蔵。EV特有の閉鎖空間臭を抗菌消臭で解消[cn126]。モダンで洗練されたデザインで、運転中の静寂をより高次元のものへ昇華。【うれしさ】", imagePrompt: "Premium EV center console with integrated thermal management system, sleek minimalist design, brushed aluminum and matte black materials, ambient lighting strips along edges, clean modern automotive interior, warm soft lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 649, img: "images/idea_649.png", title: "グリップ連動・AI音響シート「響きの調和」", desc: "豊田合成のグリップ操作系[cn129]をベースに、AIが運転者の好みに合わせて座席の音響環境を自動調整。低周波でリラックス、高周波で集中モードへ。【うれしさ】", imagePrompt: "Luxury car seat with integrated audio system and tactile control grips, advanced haptic feedback interface, premium leather upholstery, blue ambient lighting accents, futuristic cockpit design, night driving scene, photorealistic render, cinematic lighting" },
+            ],
+            in: [
+                { id: 650, img: "images/idea_650.png", title: "EV・フラット・フロア活用・センターコンソール：熱管理とモビリティの融合", desc: "EVプラットフォームの**フラットフロア**を活かした**モジュラーセンターコンソール**。インドの熱帯気候に対応し、**ヒートポンプ機能**と**自然素材**を組み合わせ、涼やかな風を生成。EV化で**バッテリー温度管理**も最適化。運転者の**快適さ**と**安全性**を両立。", imagePrompt: "Luxury SUV center console with integrated heat pump vents, brushed aluminum and teak wood materials, cool blue ambient lighting, flat floor design, modern EV cockpit, photorealistic 3D render, premium automotive interior, cinematic lighting, high detail, 4K quality" },
+                { id: 651, img: "images/idea_651.png", title: "EV・サステナブル・スマートコンソール：自然素材とAIの調和", desc: "再生プラスチックと**天然バフ**を組み合わせ、**空気感知AI**を搭載。運転者の**香り**や**温度**を自動調整し、**癒やし**を提供。EVの**バッテリー温度管理**も最適化。インドの熱帯気候に対応し、**抗菌・消臭**機能も強化。運転者の**幸福**を追求。", imagePrompt: "Center console with natural buff and recycled plastic materials, integrated AI air sensor, mist effect, warm amber lighting, luxury car interior, sustainable materials, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 652, img: "images/idea_652.png", title: "AR Navigation HUD：ナビ×ARで道案内を視覚化", desc: "Jeep回転式シフター[us579]の**回転機構**を**HUDディスプレイ**に応用。ナビゲーション情報を**ARで視覚化**し、ドライバーが**視線移動**を最小限に抑えながら**道案内**を受けられる。**夜間走行**時でも**ブルーアクセント**で**視認性**を確保。これにより、**運転集中度**が向上し、**安全性**と**快適さ**を両立。ドライバーが**ストレスなく**走行できる**スマートナビゲーション**を実現。", imagePrompt: "Augmented reality head-up display integrated into premium vehicle dashboard, holographic navigation map floating above instrument cluster, AR lane guidance lines glowing on road surface, blue accent lighting for night driving, futuristic cockpit interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 653, img: "images/idea_653.png", title: "SoftGlow Touch：ソフトパッド×加飾パネルの進化", desc: "豊田合成の**ソフトパッド**技術を**インパネ**に応用。**発泡ウレタン**で**触覚的快適性**を向上。Jeep回転式シフター[us579]の**回転機構**を**物理ボタンの**操作感**に転用。これにより、**ドライバーが**安心感**を**感じながら**操作**できる。また、**64色イルミ**[us580]と**キモノ柄ステッチ**[us580]を**組み合わせ**、**高級感**と**個性**を**演出**。ドライバーが**心地よい**驾驶体験**を得られる**。**うれしさ**を**感じられる**。**触覚的**な**喜び**を**提供**する。", imagePrompt: "Premium vehicle interior with soft-touch foam pad dashboard, textured upholstery with kimono-style stitching, ambient 64-color LED lighting strips along console, brushed aluminum trim accents, warm evening lighting, photorealistic 3D render, professional automotive product visualization, high detail" },
+            ],
+            eu: [
+                { id: 654, img: "images/idea_654.png", title: "SmartCraft EU+", desc: "EVプラットフォーム向け、上海ACDCハブ活用[eu554]の自動化技術で、内装コンソール生産ラインを再構築。歩留まり向上とコスト削減を実現。**製造プロセス改善**[eu554]により、高品質な内装部品の効率化を達成。生産現場の**自動化**と**AI**制御を組み合わせ、**生産効率**が向上し、**コスト削減**と**品質向上**を同時に実現。**生産現場**が**スマート化**され、**自動化**技術が**内装部品**生産に貢献し、**歩留まり向上**と**コスト削減**が実現。", imagePrompt: "Automotive interior console manufacturing line, robotic automation, smart factory, EV component production, clean modern facility, robotic arms assembling center console, digital manufacturing technology, photorealistic render, industrial design, high detail, 4K quality" },
+                { id: 655, img: "images/idea_655.png", title: "CleanAir EU+", desc: "EVプラットフォーム向けに、豊田合成の**消臭・抗菌機能**[eu548]を拡張。EV車内特有の**空気質**管理と**健康**ニーズに対応。EV車内の**空気質**を**抗菌・消臭**機能で向上させ、**健康**な**車内環境**を実現。**抗菌・消臭**機能が**EV車内**の**空気質**を向上させ、**健康**な**車内環境**を提供。", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-03-30",
         analysis: {
             jp: "日本市場では、新車価格高騰[jp752]を受け、純正アップグレード需要が急増しており、愛車進化の文脈で内装部品への関心が高まっています。消費者は「高級感」を求めつつ、**レトロ**な温もりや**木材**調デザインに親和性[jp755]を示しています。一方、**抗菌**や**消臭**機能への関心はEV化や健康意識の高まりから持続的に向上[jp759]しており、車内空気質管理は必須要件となっています。さらに、**EV**車向けに**熱管理**や**抗菌**機能を統合したコンソールモジュールへの注目[jp760]も顕著です。",
