@@ -709,8 +709,8 @@ def make_country_prompt(
     {{
       "analysis": "...",
       "ideas": [
-        {{"title": "...", "desc": "(200〜300文字・うれしさを含む)", "imagePrompt": "English prompt for image generation"}},
-        {{"title": "...", "desc": "(200〜300文字・うれしさを含む)", "imagePrompt": "English prompt for image generation"}}
+        {{"title": "...", "desc": "(200〜300文字・うれしさを含む)"}},
+        {{"title": "...", "desc": "(200〜300文字・うれしさを含む)"}}
       ]
     }}
 
@@ -719,7 +719,6 @@ def make_country_prompt(
 {angle_instruction}{tg_constraint}    - 過去アイデアの言い換え・焼き直しは禁止
     - うれしさを必ず明記
     - 200〜300文字程度
-    - imagePromptは構図・素材・配色を2件で明確に変える
     - analysisは300字以内（厳守）。文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
     - 参照は文末にまとめず、関連語の直後に入れる
     - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）

@@ -345,6 +345,18 @@ def extract_image_from_rss(entry):
     uniq.sort(key=rank_image_url, reverse=True)
     return uniq[0]
 
+def strip_expiring_params(url):
+    """yimg.jp の exp= など有効期限付きパラメータを除去する。"""
+    if not url or "yimg.jp" not in str(url).lower() or "exp=" not in url:
+        return url
+    try:
+        from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+        p = urlparse(url)
+        qs = {k: v for k, v in parse_qs(p.query).items() if k != "exp"}
+        return urlunparse(p._replace(query=urlencode(qs, doseq=True)))
+    except Exception:
+        return url
+
 def extract_item_image_map_from_rss_xml(xml_bytes):
     """Extract <item><link>/<image> pairs from RSS XML (Yahoo media feeds use this pattern)."""
     mapping = {}
@@ -354,7 +366,8 @@ def extract_item_image_map_from_rss_xml(xml_bytes):
             link = (item.findtext("link") or "").strip()
             image = (item.findtext("image") or "").strip()
             if link and image:
-                mapping[link] = image.replace("&amp;", "&")
+                image = strip_expiring_params(image.replace("&amp;", "&"))
+                mapping[link] = image
     except Exception:
         pass
     return mapping
@@ -373,6 +386,7 @@ def normalize_image_url(candidate, base_url):
     elif candidate.startswith("/"):
         candidate = urljoin(base_url, candidate)
     if candidate.startswith("http"):
+        candidate = strip_expiring_params(candidate)
         return candidate
     return ""
 

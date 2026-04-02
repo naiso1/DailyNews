@@ -74,13 +74,7 @@ def extract_date(block: str) -> str:
 
 
 def build_prompt(title: str, desc: str, image_prompt: str = "") -> str:
-    if image_prompt:
-        return image_prompt
-    return (
-        f"{title}. {desc}\n"
-        "Automotive interior design concept, premium materials, "
-        "photorealistic 3D render, cinematic lighting, high detail."
-    )
+    return f"{title}\n{desc}"
 
 
 def update_image_path(js_text: str, idea_id: int, new_path: str) -> str:

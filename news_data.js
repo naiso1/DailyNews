@@ -40183,7 +40183,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-04-01",
         tags: ["EV"],
         country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260401-10413582-vague-000-1-view.jpg?pri=l&w=450&h=300&exp=10800",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260401-10413582-vague-000-2-view.jpg",
         note: ""
     },
     {
