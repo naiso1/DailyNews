@@ -40772,7 +40772,7 @@ window.LOADED_NEWS_DATA = [
         date: "2026-04-02",
         tags: ["シート"],
         country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260402-10413574-vague-000-1-view.jpg?pri=l&w=450&h=300",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260402-10413574-vague-000-2-view.jpg",
         note: ""
     },
     {

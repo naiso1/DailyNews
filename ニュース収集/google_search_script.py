@@ -1859,7 +1859,7 @@ def fetch_from_rss(target_dates):
                     # ??URL?RSS?????
                     image_url_from_item = rss_item_image_map.get(link, "")
                     image_url = image_url_from_item or extract_image_from_rss(entry)
-                    if (not image_url_from_item) and image_url and "yimg.jp" in str(image_url).lower():
+                    if image_url and "yimg.jp" in str(image_url).lower():
                         image_url = choose_best_yimg_variant(image_url)
                     if is_missing_url(image_url):
                         image_url = fetch_image_from_page(resolved_link) if resolved_link else ""

@@ -73,8 +73,40 @@ def extract_date(block: str) -> str:
     return m.group(1) if m else ""
 
 
-def build_prompt(title: str, desc: str, image_prompt: str = "") -> str:
-    return f"{title}\n{desc}"
+def translate_to_image_prompt(title: str, desc: str, api_key: str, model: str) -> str:
+    """Geminiで日本語タイトル・説明を画像生成向け英語プロンプトに変換する。"""
+    import re as _re
+    clean_title = _re.sub(r'\*+', '', title).strip()
+    clean_desc = _re.sub(r'\*+', '', desc).strip()
+    translate_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+    payload = {
+        "contents": [{"parts": [{"text": (
+            f"Convert the following Japanese automotive interior product idea into a concise English image generation prompt "
+            f"(max 80 words). Focus on visual elements: materials, colors, shapes, lighting. Do NOT include any Japanese text.\n\n"
+            f"Title: {clean_title}\nDescription: {clean_desc}"
+        )}]}]
+    }
+    try:
+        r = requests.post(translate_url, headers={"x-goog-api-key": api_key, "Content-Type": "application/json"},
+                          json=payload, timeout=30)
+        if r.status_code == 200:
+            for cand in r.json().get("candidates", []):
+                for part in cand.get("content", {}).get("parts", []):
+                    if "text" in part:
+                        return part["text"].strip()
+    except Exception:
+        pass
+    return f"Automotive interior concept: {clean_title}. Photorealistic 3D render, premium materials, cinematic lighting."
+
+
+def build_prompt(title: str, desc: str, image_prompt: str = "", api_key: str = "", model: str = "") -> str:
+    if image_prompt:
+        return image_prompt
+    if api_key:
+        return translate_to_image_prompt(title, desc, api_key, model)
+    import re as _re
+    clean_title = _re.sub(r'\*+', '', title).strip()
+    return f"Automotive interior concept: {clean_title}. Photorealistic 3D render, premium materials, cinematic lighting."
 
 
 def update_image_path(js_text: str, idea_id: int, new_path: str) -> str:
@@ -156,7 +188,7 @@ def main():
             updated = update_image_path(updated, idea["id"], f"images/{dest_path.name}")
             continue
 
-        prompt_text = build_prompt(idea["title"], idea["desc"], idea.get("imagePrompt", ""))
+        prompt_text = build_prompt(idea["title"], idea["desc"], idea.get("imagePrompt", ""), api_key=api_key, model=args.model)
         payload = {
             "contents": [{"parts": [{"text": prompt_text}]}],
             "generationConfig": {

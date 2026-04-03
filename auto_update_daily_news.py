@@ -393,13 +393,34 @@ def extract_recent_ideas_by_country(insights_text: str, country: str, limit: int
     return ideas
 
 
+def _clean_idea_field(text: str, max_len: int = 400) -> str:
+    """LLM出力のtitle/descを正規化する。
+    - **マークダウン** を除去
+    - titleへのdesc混入を除去（）の後に続く余分なテキストをカット）
+    - 先頭・末尾の空白除去
+    - max_len 超過分をカット
+    """
+    text = text.strip()
+    # **bold** マークダウン除去
+    text = re.sub(r"\*+", "", text)
+    # titleの場合: 「）**、...」のように閉じ括弧の後に説明が続く場合をカット
+    if max_len <= 40:
+        # 全角）または ) の後に読点・句点・空白が続く場合は括弧まででカット
+        text = re.sub(r"[）\)][、。\s].*$", "）", text).rstrip("）") + ("）" if "（" in text and "）" not in text.split("（")[-1] else "")
+        # それでも長すぎる場合は単純カット
+        if len(text) > max_len:
+            text = text[:max_len].rstrip("（（、。 　")
+    text = text.strip()
+    return text[:max_len]
+
+
 def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
     history_texts = [f"{x.get('title', '')} {x.get('desc', '')}".strip() for x in history_ideas]
     picked = []
     picked_texts = []
     for idea in raw_ideas or []:
-        title = str((idea or {}).get("title", "")).strip()
-        desc = str((idea or {}).get("desc", "")).strip()
+        title = _clean_idea_field(str((idea or {}).get("title", "")), max_len=40)
+        desc = _clean_idea_field(str((idea or {}).get("desc", "")), max_len=400)
         image_prompt = str((idea or {}).get("imagePrompt", "")).strip()
         if not title or not desc:
             continue
@@ -718,7 +739,9 @@ def make_country_prompt(
     - {need_count}件提案
 {angle_instruction}{tg_constraint}    - 過去アイデアの言い換え・焼き直しは禁止
     - うれしさを必ず明記
-    - 200〜300文字程度
+    - titleは20文字以内の短い名称のみ（説明・括弧書き・句点を含めない）
+    - descは200〜300文字程度
+    - titleとdescにマークダウン記法（**太字**等）を使用しない
     - analysisは300字以内（厳守）。文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
     - 参照は文末にまとめず、関連語の直後に入れる
     - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）
