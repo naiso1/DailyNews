@@ -346,14 +346,16 @@ def extract_image_from_rss(entry):
     return uniq[0]
 
 def strip_expiring_params(url):
-    """yimg.jp の exp= など有効期限付きパラメータを除去する。"""
-    if not url or "yimg.jp" not in str(url).lower() or "exp=" not in url:
+    """yimg.jp のクエリパラメータをすべて除去する（exp=, pri=, w=, h= など）。
+    これらのリサイズ・有効期限パラメータはバリアントによって404を引き起こすため。"""
+    if not url or "yimg.jp" not in str(url).lower():
+        return url
+    if "?" not in url:
         return url
     try:
-        from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+        from urllib.parse import urlparse, urlunparse
         p = urlparse(url)
-        qs = {k: v for k, v in parse_qs(p.query).items() if k != "exp"}
-        return urlunparse(p._replace(query=urlencode(qs, doseq=True)))
+        return urlunparse(p._replace(query=""))
     except Exception:
         return url
 
@@ -449,6 +451,8 @@ def choose_best_yimg_variant(url: str) -> str:
     """Try sibling Yahoo image variants and pick a non-placeholder one."""
     if not url or "yimg.jp" not in str(url).lower():
         return url or ""
+    # Strip all query params first so candidates are probed without resize/expiry params
+    url = strip_expiring_params(url)
     m = re.search(r"(-000-)(\d+)(-)", url)
     if not m:
         return url
@@ -1350,16 +1354,17 @@ def summarize_article(title, content, url, country=""):
     if country == "中国":
         prompt = (
             "以下の情報を統合して、日本語で要約してください。\n"
+            "IMPORTANT: Output must be entirely in Japanese. Do NOT output Chinese characters as the main language. "
+            "All text in title and summary must be Japanese (kanji+kana mix).\n"
             f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内、文を途中で切らない。\n"
             f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内、文を途中で切らない。\n"
             "条件3: 事実ベースで簡潔に。\n"
             "条件4: 可能なら固有名詞/数値/企業名など具体情報を2つ以上含める。\n"
             "条件5: 内容は必ず句点で終える。\n"
             "条件6: 自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。\n"
-            "条件7: 中国記事は漢字や一般的なカタカナ表記を優先し、ひらがな主体の当て字は使わない。\n"
-            "条件8: 固有名詞は英字表記か一般的な日本語表記（例: Huawei=ファーウェイ、Dongfeng=東風）を使う。\n"
-            "条件9: 不明な固有名詞は原文の中国語表記を維持する。\n"
-            "条件10: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
+            "条件7: 漢字や一般的なカタカナ表記を優先し、ひらがな主体の当て字は使わない。\n"
+            "条件8: 固有名詞は英字表記か一般的な日本語表記（例: Huawei=ファーウェイ、Dongfeng=東風）を使う。不明な場合はカタカナ読みに変換する。\n"
+            "条件9: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
             f"既存タイトル: {title}\n"
             f"既存内容: {content}\n"
             f"本文HTML抽出: {html_text}\n"
