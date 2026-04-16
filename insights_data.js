@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-04-16",
+        analysis: {
+            jp: "花粉・黄砂・PM2.5対策の空気清浄ニーズとe-POWER採用によるEV化を踏まえ、車内環境を最適化[jp882,jp891]。日産「サクラ」のデザイン刷新やテスラ「モデルY L」の大型化から、EV化と6人乗り対応の2点[jp887,jp890]。サクラの新色「水面乃桜」やBRIDEのスポーツシートも参考[jp888,jp886]。日産「サクラ」の軽EV化とエクストレイルのe-POWER化から、小型EVとハイブリッドの両立を重視[jp891,jp889]。",
+            cn: "中国市場ではEV普及に伴い**静粛性**への**要求**が**高まり**[cn723]、**閉鎖空間臭**対策も**重要**[cn727]。また**バッテリー技術**の**進化**[cn724]が**内装熱管理**に**影響**[cn726]している。**AI**による**HMI**の**高度化**[cn729]は**ユーザー体験**を**革新**[cn728]。自社開発では**高級感**と**機能性**の**両立**が**鍵**[cn725]。",
+            in: "インド市場では低価格化とEV化が進行中[in750]。通風シートの導入が廉価車でも普及[in746]、VWは物理ボタンで操作性向上[in747]、Volvoは価格引き上げと価格感度が高い[in748]。中国メーカーはEV用車内トイレ特許取得[in752]など画期的機能も。EV販売が主力だが、機能不足や新車投入計画で競争激化[in753]。マハティ・スズキは販売増[in755]。内装素材は抗菌消臭や軽量高強度が求められる[in749]。コスト競争力と機能拡充の両立が鍵[in754]。",
+            us: "米国市場ではEV化・スポーツカーへの回帰が顕著[us691]。特にMBUX Hyperscreenやベジタリアンパッケージなどの高級内装トレンドが広がりつつあり、安全性への関心も高まっている[us696]。また、兵器製造要請や労働違反などサプライチェーンの課題も浮き彫り[us697]。これらを踏まえ、新素材や安全機能を融合した製品開発が鍵[us695]。",
+            eu: "欧州EV市場は電池設計統一[eu662]やリサイクル素材活用[eu664]のトレンドが顕著。特に英国市場ではEV撤退[eu667]の懸念もあり、中古車供給過多[eu664]が課題。一方でLotusやVolvoの高級EVではコックピット快適性[eu668]が重視。HMI領域ではソフトウェア不具合[eu669]が課題だが、新素材やタッチスクリーンの普及でデジタルコックピットの進化が加速。自社のUV-C内装除菌やリサイクル素材を応用し、健康与安全を強化する必要がある。",
+        },
+        ideas: {
+            jp: [
+                { id: 766, img: "images/idea_766.png", title: "ZenAir Green", desc: "花粉・黄砂・PM2.5対策の空気清浄ニーズとe-POWER採用によるEV化を踏まえ、車内環境を最適化。", imagePrompt: "緑色の空気を清浄化するEVの車内" },
+                { id: 767, img: "images/idea_767.png", title: "ZenAutoFlow", desc: "製造ラインを自動化し、歩留まりを10%向上させる新システム。リサイクルアルミパネル[jp837]の加工をAI制御で最適化。不良品を0%に近づけ、コスト削減で価格競争力を強化。生産効率化により、高品質な内装を低価格で提供。顧客は「高品質が安く買える」と喜ぶ。", imagePrompt: "" },
+            ],
+            cn: [
+                { id: 768, img: "images/idea_768.png", title: "静謐の森", desc: "EV車特有の静粛性を活かし、閉鎖空間臭を遮断する香りディフューザーをコンソールに内蔵。自然素材のバイオ素材と調光照明で癒やしを感じてくれます。", imagePrompt: "Aromatic diffuser integrated into center console of a quiet EV, natural wood and stone textures, soft ambient lighting, healing atmosphere, photorealistic automotive interior design, premium quality" },
+                { id: 769, img: "images/idea_769.png", title: "骨格樹脂インパネ", desc: "鉄製インパネを高強度樹脂に置き換える技術で大幅な軽量化。ニュース[cn726]のバッテリー技術と連携し、内装の質感と安全性を両立。乗員に安心感と快適さを提供。", imagePrompt: "Advanced lightweight interior panel made of high-strength resin replacing traditional metal, futuristic vehicle cockpit design, premium materials, cinematic lighting, photorealistic 3D render, automotive interior concept" },
+            ],
+            in: [
+                { id: 770, img: "images/idea_770.png", title: "量産型通風スマートコンソール", desc: "インパネに低コスト通風ファンとHEPAフィルターを統合。熱帯気候でも車内快適性を維持。廉価車でも差別化。量産で単価下がり。部品共通化でコスト削減。量産効率化で価格競争力向上。", imagePrompt: "" },
+                { id: 771, img: "images/idea_771.png", title: "バイオ・サステナブル・プレミアム・コンソール", desc: "再生プラスチックと天然バフを組み合わせたプレミアムコンソール。インドの熱帯気候に対応し、抗菌かつ消臭効果を兼ね備えたバイオ・サステナブル・レトロ・デザイン。車内を清潔に保ち、高級感のある質感を演出。", imagePrompt: "" },
+            ],
+            us: [
+                { id: 772, img: "images/idea_772.png", title: "BioLux Console", desc: "バイオベース素材を採用したセンターコンソールで、高級感と環境配慮を両立。Nissanのスポーツカー復活動き[us691]やMercedesのベジタリアンパッケージ[us696]のトレンドに追随。衝突時でも調香機能[us695]や安全イルミネーションを内蔵。車内を高級で安心な空間に。", imagePrompt: "" },
+                { id: 773, img: "images/idea_773.png", title: "SafeGlow Panel", desc: "豊田合成のLED通知イルミネーションをインパネに統合。速度違反対策ISA装置[us695]やリコール防止[us700]の観点から、ギアポジションや警告灯を光で直感的に通知。盗難対策[us693]も可能。安全で便利。", imagePrompt: "" },
+            ],
+            eu: [
+                { id: 774, img: "images/idea_774.png", title: "SmartGlow EU", desc: "ARナビゲーションとEVバッテリー残量を同時表示するデジタルコンソール。衝突時はLED誘導光で脱出経路を視覚化。Lotusの高級感[eu605]を維持しつつ、Volvoの快適性[eu606]と統合。", imagePrompt: "" },
+                { id: 775, img: "images/idea_775.png", title: "EcoPulse EU", desc: "Re-Sブランドのアップサイクル素材[eu616]で制作した、廃ステアリング革から再生したエコバッグを内装に埋め込む。廃棄エアバッグ生地[eu617]を活用し、EVプラットフォームの静粛性[eu618]を最大限に活かす。", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-04-15",
         analysis: {
             jp: "日本市場の自動車内装では、音響システム[jp872]やEV搭載モデル[jp875]の普及が顕著。シート素材形状[jp874][jp877]、コックピットEV熱管理[jp878]への関心も高まり、消費者はディスプレイ進化[jp873][jp876]と内装質感[jp880]を重視する。EV車内高温対策や抗菌機能の需要が特に顕著で、製造コスト削減や品質向上への製造プロセス改善を促す。EV化やAI搭載[jp875]は内装軽量化や熱管理技術革新を要求しており、音響や熱管理を含む内装技術革新が加速する。",
