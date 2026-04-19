@@ -1,5 +1,32 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-04-19",
+        analysis: {
+            cn: "中国市場ではHMIの高度化[cn730]と安全性への意識が高まっています。吉利のFlyme Auto[cn730]や奇瑞の6Kディスプレイ[cn731]は、運転者のデジタル体験を重視する傾向を示します。また、航空機グレードのEMBブレーキ[cn731]やナント大学の耐熱断熱材[cn737]は、極限環境下での安全性能への追求が顕著です。さらに、サンウォダのナトリウム電池[cn736]や耐熱素材[cn737]は、バッテリー安全や熱管理への注目が集まっています。これらの動向から、内装製品開発において「安全」「安心」「快適」をテーマにした提案が有効です。",
+            in: "インド市場では、音響やEV技術の統合が加速しており、車内快適性への注目が高まっている[in762]。特にサウナパッドや芳香剤といったウェルネス要素が重要視されている[in762]。また、ラグジュアリーなサービスとプレミアム感の両立が求められ、デザイン面で差別化が鍵となる[in762]。さらに、発光技術やデジタルコックピットのトレンドも踏まえ、視覚的体験の向上が期待される[in762]。",
+            us: "米国市場ではAIによる開発効率化[us702]や巨大ディスプレイ[us709]がトレンドだが、コスト競争力が鍵となる。トヨタのプラットフォーム共有[us701]やフォードの高級感確保[us710]から、モジュール化で部品共通化によるコスト削減を実現しつつ、インモールドコート[us706]技術でシームレス外観と高級感を両立させる。EV化[us704]に伴うバッテリー熱管理[us709]と連動した温度最適化も需要が伸びる。高級感と機能性のバランスを重視した設計が必須だ。",
+            eu: "欧州市場では、物理ボタンの復活やアナログメーターの高級化がトレンド[eu677][eu678]。フェイスブックマーケットプレイスの車探体験から、中古車情報の透明化やHMIの活用。EVプラットフォーム向けに、衝突時の安全誘導や環境配慮型素材。新素材の活用やデジタル化を踏まえ、コックピットのスマート化が必要[eu671]。",
+        },
+        ideas: {
+            cn: [
+                { id: 776, img: "images/idea_776.png", title: "緊急脱出アシストシート", desc: "衝突時や火災時、シートが自動で緩み乗員の脱出を容易にする革新的構造を採用。航空機グレードの安全基準[cn731]や耐熱断熱材[cn737]の技術を応用し、バッテリー熱管理[cn737]との連携も可能。緊急時でも冷静に動ける安心感と、家族を守る強い信頼感を提供。", imagePrompt: "Emergency escape assist seat concept for luxury EV, seat structure automatically loosening during emergency, aviation-grade safety materials, thermal insulation barriers, cinematic lighting, photorealistic 3D render, premium automotive interior design, high detail, 4K quality" },
+                { id: 777, img: "images/idea_777.png", title: "スマートHMIステアリング", desc: "豊田合成のグリップセンサ付きHMIステアリング技術を基盤に、中国市場のAIアシスタント[cn739]やマルチメディアシステム[cn730]と連動。手放し検知と多機能スイッチを統合し、運転者の意図をAIが予測。運転のストレスを減らし、音楽やナビゲーション操作を直感的に行える喜びを提供。", imagePrompt: "Smart HMI steering wheel with grip sensor, integrated with AI assistant interface, futuristic automotive cockpit design, advanced augmented reality display, night driving scene, blue accent lighting, photorealistic render, premium quality, cinematic lighting" },
+            ],
+            in: [
+                { id: 778, img: "images/idea_778.png", title: "ネオ・サウンド・コンソール", desc: "後部スピーカー[in756]の音響効果を最大化。コンソール内部に埋め込んだLEDストリップが、音楽のビートに合わせて光る。高級感と楽しさの両立を追求。", imagePrompt: "" },
+                { id: 779, img: "images/idea_779.png", title: "ルミナード・ミリ波・エンブレム", desc: "発光ミリ波レーダー透過エンブレム[in761]をインパネに拡張。EV[in764]のフラットフロアを活かし、充電ステーションと連動して発灯する。", imagePrompt: "" },
+            ],
+            us: [
+                { id: 780, img: "images/idea_780.png", title: "ModuCore Console", desc: "新プラットフォーム[us701]に合わせたモジュール化インパネ。共通部品率90%で生産コストを50%削減。EV用熱管理システム[us704]と連動し、センターコンソール内部にヒートポンプユニットを配置。夏は涼しい手触り、冬は温かい触感が実現。高級感のあるダークグレーカーボン調素材[us650]を採用し、広大な収納空間とワイヤレス充電ポートを標準装備。量産化によるコスト低下と高級感を両立。", imagePrompt: "" },
+                { id: 781, img: "images/idea_781.png", title: "SeamGlow Panel", desc: "インモールドコート[us706]技術を活用したシームレスインパネ。ガラス面と一体化したデザインで、AI搭載HMI[us709]の画面と調和。衝突時や緊急時に発光する安全イルミネーション機能[us630]を内蔵。フォードの高級感確保[us710]やトヨタのプラットフォーム共有[us701]を踏まえ、コスト競争力を維持。高級感のある暗色系インパネにLED照明演出を施し、欧州展開のプレミアム感を米国市場へ導入。", imagePrompt: "" },
+            ],
+            eu: [
+                { id: 782, img: "images/idea_782.png", title: "SmartTouch EU", desc: "デジタルコックピットと物理ボタンのハイブリッド。衝突時はLED誘導光で脱出を支援。廃車部品のリサイクル素材も活用。", imagePrompt: "" },
+                { id: 783, img: "images/idea_783.png", title: "GripSense EU", desc: "グリップセンサ付きHMIステアリングをEVプラットフォームに最適化。手放し検知で安全運転を支援。", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-04-16",
         analysis: {
             jp: "花粉・黄砂・PM2.5対策の空気清浄ニーズとe-POWER採用によるEV化を踏まえ、車内環境を最適化[jp882,jp891]。日産「サクラ」のデザイン刷新やテスラ「モデルY L」の大型化から、EV化と6人乗り対応の2点[jp887,jp890]。サクラの新色「水面乃桜」やBRIDEのスポーツシートも参考[jp888,jp886]。日産「サクラ」の軽EV化とエクストレイルのe-POWER化から、小型EVとハイブリッドの両立を重視[jp891,jp889]。",
