@@ -315,16 +315,36 @@ def call_llm(endpoint, model, prompt):
     return ""
 
 
+def _prerepair_json(text: str) -> str:
+    """LLMが出しやすい壊れたJSONを正規表現で簡易修復する。
+    例: アイデア配列内で { が抜けた要素 -> 補完する"""
+    # ], "title": -> ], {"title": (配列内の先頭 { 欠落)
+    text = re.sub(r'(\})\s*,\s*"(title|desc|imagePrompt)":', r'\1, {"\2":', text)
+    # [  "title": -> [ {"title": (最初の要素から { が欠落)
+    text = re.sub(r'(\[)\s*"(title|desc|imagePrompt)":', r'\1{"\2":', text)
+    return text
+
+
 def extract_json_block(text: str):
     if not text:
         return None
     cleaned = re.sub(r"```(?:json)?\s*", "", text, flags=re.IGNORECASE)
     cleaned = cleaned.replace("```", "")
+    # </think> タグなど思考過程の除去
+    cleaned = re.sub(r"</?think[^>]*>[\s\S]*?</think>", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"</?think[^>]*>", "", cleaned, flags=re.IGNORECASE)
     m = re.search(r"\{[\s\S]*\}", cleaned)
     if not m:
         return None
+    raw = m.group(0)
+    # まずそのまま試す
     try:
-        return json.loads(m.group(0))
+        return json.loads(raw)
+    except Exception:
+        pass
+    # 簡易プレ修復後に再試行
+    try:
+        return json.loads(_prerepair_json(raw))
     except Exception:
         return None
 

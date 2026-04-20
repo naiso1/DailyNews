@@ -2,12 +2,17 @@ window.DAILY_INSIGHTS = [
     {
         date: "2026-04-19",
         analysis: {
+            jp: "日産「サクラ」が1500W給電機能を追加[jp892]し、EVの利便性向上がトレンド。メルセデス新型GLEクーペはMB.OSとAI制御で快適性を追求[jp896]。トヨタ新型ハイランダーBEVは14インチセンターディスプレイで先進内装を実現[jp897]。これらの技術トレンドを踏まえ、EV車内熱管理と抗菌機能を組み合わせたコンソールが有効。",
             cn: "中国市場ではHMIの高度化[cn730]と安全性への意識が高まっています。吉利のFlyme Auto[cn730]や奇瑞の6Kディスプレイ[cn731]は、運転者のデジタル体験を重視する傾向を示します。また、航空機グレードのEMBブレーキ[cn731]やナント大学の耐熱断熱材[cn737]は、極限環境下での安全性能への追求が顕著です。さらに、サンウォダのナトリウム電池[cn736]や耐熱素材[cn737]は、バッテリー安全や熱管理への注目が集まっています。これらの動向から、内装製品開発において「安全」「安心」「快適」をテーマにした提案が有効です。",
             in: "インド市場では、音響やEV技術の統合が加速しており、車内快適性への注目が高まっている[in762]。特にサウナパッドや芳香剤といったウェルネス要素が重要視されている[in762]。また、ラグジュアリーなサービスとプレミアム感の両立が求められ、デザイン面で差別化が鍵となる[in762]。さらに、発光技術やデジタルコックピットのトレンドも踏まえ、視覚的体験の向上が期待される[in762]。",
             us: "米国市場ではAIによる開発効率化[us702]や巨大ディスプレイ[us709]がトレンドだが、コスト競争力が鍵となる。トヨタのプラットフォーム共有[us701]やフォードの高級感確保[us710]から、モジュール化で部品共通化によるコスト削減を実現しつつ、インモールドコート[us706]技術でシームレス外観と高級感を両立させる。EV化[us704]に伴うバッテリー熱管理[us709]と連動した温度最適化も需要が伸びる。高級感と機能性のバランスを重視した設計が必須だ。",
             eu: "欧州市場では、物理ボタンの復活やアナログメーターの高級化がトレンド[eu677][eu678]。フェイスブックマーケットプレイスの車探体験から、中古車情報の透明化やHMIの活用。EVプラットフォーム向けに、衝突時の安全誘導や環境配慮型素材。新素材の活用やデジタル化を踏まえ、コックピットのスマート化が必要[eu671]。",
         },
         ideas: {
+            jp: [
+                { id: 784, img: "images/idea_784.png", title: "EV温感抗菌コンソール", desc: "EV車内高温問題を解決。コンソールパネルにヒーター内蔵でドアハンドル暖房機能。抗菌コーティングで衛生面も対応。EVの利便性[jp892]と快適性を両立。" },
+                { id: 785, img: "images/idea_785.png", title: "アップサイクルレザーパネル", desc: "廃棄ステアリング革をアップサイクルしたレザーパネル。リサイクル素材で環境負荷低減。カフェ風のプレミアム内装[jp896]を実現し、持続可能なものづくりを訴求。" },
+            ],
             cn: [
                 { id: 776, img: "images/idea_776.png", title: "緊急脱出アシストシート", desc: "衝突時や火災時、シートが自動で緩み乗員の脱出を容易にする革新的構造を採用。航空機グレードの安全基準[cn731]や耐熱断熱材[cn737]の技術を応用し、バッテリー熱管理[cn737]との連携も可能。緊急時でも冷静に動ける安心感と、家族を守る強い信頼感を提供。", imagePrompt: "Emergency escape assist seat concept for luxury EV, seat structure automatically loosening during emergency, aviation-grade safety materials, thermal insulation barriers, cinematic lighting, photorealistic 3D render, premium automotive interior design, high detail, 4K quality" },
                 { id: 777, img: "images/idea_777.png", title: "スマートHMIステアリング", desc: "豊田合成のグリップセンサ付きHMIステアリング技術を基盤に、中国市場のAIアシスタント[cn739]やマルチメディアシステム[cn730]と連動。手放し検知と多機能スイッチを統合し、運転者の意図をAIが予測。運転のストレスを減らし、音楽やナビゲーション操作を直感的に行える喜びを提供。", imagePrompt: "Smart HMI steering wheel with grip sensor, integrated with AI assistant interface, futuristic automotive cockpit design, advanced augmented reality display, night driving scene, blue accent lighting, photorealistic render, premium quality, cinematic lighting" },
