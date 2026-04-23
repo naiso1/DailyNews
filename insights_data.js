@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-04-23",
+        analysis: {
+            jp: "日本市場では、Z世代の「夜のドライブ」体験[jp932]やノイエクラッセによるパノラミックiDrive標準化[jp934]がデジタル化加速を示唆。後席サーキュレーター[jp936]やBOSEサウンド[jp941]への関心から快適性と音響両立が求められ、面発光や生体情報センシング[jp939]などAI技術活用がスマート化を後押し。BMW 8Kシアタースクリーン[jp934]やレクサスLS対面シート[jp940]など高級感・空間演出も進化。これらを踏まえ、コネクテッド機能やUI/UX革新がユーザー満足度向上の鍵となる。",
+            cn: "中国市場ではハイブリッドSUVの需要が5万台生産を突破する[cn766]など、環境性能と高級感の両立が重要。FSDの急ピッチ展開[cn768]やロボセンスのPhoenixチップ発表[cn771]など、自動運転・AR技術が内装体験へ浸透。ニオの3ブランド合同展示[cn769]やES8の10万台販売[cn770]は、中国内装市場の多様化と規模拡大を示唆。BuickのElectra E7発売[cn767]から、長距離走行を前提とした快適性への関心も高まっている。",
+            in: "インド市場ではEV化とデジタル化が加速しており、リチウムイオン電池のリサイクル施設[in796]や自律トラックの導入[in797]が示すように、サステナビリティとAI技術への投資が活発です。さらに、BMWやTeslaなどのEVプラットフォーム[in800][in802]の拡大と、TFTディスプレイの更新[in803]によるコックピット進化が顕著です。しかし、熱帯気候下での快適性確保が課題であり、内装の冷却や音質の向上[in804]が求められます。特に、音の可視化や香りなど、五感への訴求[in799]が競争優位性を高めます。",
+            us: "米国市場ではテスラCEOがロードスターを手動操縦車として再定義し、高級EVのハンドリング回帰が進む[us741]。BMWは中国向けiX3で物理ボタン増など、アナログ操作の再評価も[us743]。一方、フォードランジャーのサンバイザー短絡で14万台リコールなど、内装配線による安全リスクが表面化[us750]。レクサスES300hが「静かな自信」を掲げ、EV特有の静寂性をプレミアム化[us746]。この矛盾を解決し、EVの静寂性と物理操作の心地よさを両立させる内装が求められている。",
+            eu: "EU市場のニュースから、EVプラットフォームの静粛性活用[eu718]、AIによる顧客維持[eu717]、デジタル化と高級感の両立[eu720]のトレンドが浮き彫り。特にMorganのSupersport 400でアルカンターラや専用アルミギアセレクターを採用する[eu720]など、質感重視の高級EV志向が強まっている。また、ヘッドライト眩光対策[eu711]やテスラのような価格競争[eu716]から、コスト効率と高級感のバランスが重要。型内塗装技術でシームレスな高級感を維持しつつ、AI連携でパーソナライゼーションを実現する方向性が示唆される。",
+        },
+        ideas: {
+            jp: [
+                { id: 816, img: "images/idea_816.png", title: "ZenGlow Seamless", desc: "インモールドコート技術で、ディスプレイとパネルがシームレスに一体化。ガラス面との一体感で、高級感と清潔さが実感。後席サーキュレーターとの連動で、快適な空間を実現。", imagePrompt: "" },
+                { id: 817, img: "images/idea_817.png", title: "AromaZen Harmony", desc: "Z世代向け芳香剤の消臭機能と、BOSEサウンドシステム[jp941]の音の質感を融合。車内を香りと音楽で包み込み、リラックスしたドライブ体験を実現。竹の本杢[jp940]のような自然素材の温かみも取り入れ、心地よい空間を創出。", imagePrompt: "" },
+            ],
+            cn: [
+                { id: 818, img: "images/idea_818.png", title: "調香静謐コンソール", desc: "ハイブリッドSUVの静粛性[cn766]とFSDの先進性[cn768]を融合。コンソールに埋め込む香りシステムは、車内を『静謐の森』に。AIが外の騒音パターンを分析し、最適な香りを自動調整。乗客が『心が落ち着く』空間を、自動運転中に自動的に作り出します。", imagePrompt: "" },
+                { id: 819, img: "images/idea_819.png", title: "骨格スマートインパネ", desc: "スマート薄型インパネ[cn767]を応用。BuickのElectra E7[cn767]のZhenlongシステムのように、EVプラットフォームのフラットフロアを活かす。大型ディスプレイを骨格樹脂化し、LiDARのPhoenixチップ[cn771]と連動。乗員の視線や姿勢をAIが読み取り、最適な表示位置へ自動最適化。『空間が自分に合わせて変わる』という驚きを提供します。", imagePrompt: "" },
+            ],
+            in: [
+                { id: 820, img: "images/idea_820.png", title: "SensoryCoolCon", desc: "インド市場の熱帯気候を考慮し、EVプラットフォームのフラットフロアを活かし、コンソールに埋め込んだ冷却ファンと香りディフューザーを統合。自律トラック[in797]のAI制御と連動し、車内温度が上昇する前に自動で冷房を最適化。また、Bowers & Wilkins[in802]のような高音質スピーカーと連携し、熱帯特有の暑さを涼しげな香りと清涼感のある音で中和。乗り手が熱帯の暑さを忘れるような快適な空間を創出します。", imagePrompt: "Premium car interior center console with integrated cooling vents emitting mist, ambient blue lighting, luxury leather and brushed aluminum materials, aromatherapy diffuser releasing subtle mist, modern vehicle cockpit, night driving scene, photorealistic rendering, high detail, 4K quality" },
+                { id: 821, img: "images/idea_821.png", title: "MeteorTexEV", desc: "メテオコート加飾パネルの技術を活用し、EVバッテリーの熱管理と連動した動的なテクスチャーをコンソールに実装。バッテリー温度が上昇すると、パネル表面の凹凸が視覚的に変化し、乗客に「バッテリーが安全に保たれている」という安心感を与える。Panoramic iDrive[in802]のような大画面ディスプレイと連携し、熱帯の暑さをモダンで未来的なデザインでカバー。乗り手が先進技術を感じながら、快適で涼しい車内を楽しむことができます。", imagePrompt: "Futuristic car interior center console with dynamic textured surface that changes appearance based on battery temperature, holographic display showing battery status, luxury leather and brushed aluminum materials, ambient lighting effects, modern vehicle cockpit, photorealistic 3D render, premium automotive design" },
+            ],
+            us: [
+                { id: 822, img: "images/idea_822.png", title: "GlowTactile Panel", desc: "EVの静寂性を活かしたセンターコンソール。触覚フィードバックのある物理ボタンをLED陰影で演出。ボタンを押す「クリック感」を音で補うのではなく、光の微細な揺らぎで表現。静かにでも「操作している」満足感を得られ、テスラのような純粋なEV体験を向上。", imagePrompt: "" },
+                { id: 823, img: "images/idea_823.png", title: "SlimCharge Dock", desc: "豊田合成の小型ワイヤレス充電ホルダを応用。センターコンソールに埋め込み式で、スマートフォンを置くだけで自動検知。EVの静寂性を活かした「置くだけ充電」の快感。ホルダがコンソールと一体化し、デザイン性を損なわない。", imagePrompt: "" },
+            ],
+            eu: [
+                { id: 824, img: "images/idea_824.png", title: "AIコックピットアタラ", desc: "EVプラットフォームの静粛性[eu715]を活かし、AIが乗員の好みに合わせてコックピット環境を最適化。音声で「今日はお疲れ様」など、人間らしい接し方で癒やしを提供。衝突時はLED誘導光で脱出を支援[eu717]。デジタルコックピットと物理ボタンのハイブリッドで、操作直感とAIの優しさを両立。乗員が「まるで車から包み込まれる」幸せを実感。", imagePrompt: "" },
+                { id: 825, img: "images/idea_825.png", title: "シームレスルックEV", desc: "型内塗装技術でガラス面との一体感[eu711]を維持。高級EVのデザイン性とPHEVのコックピット[eu716]を融合。廃車由来プラスチックを50%含有した水平リサイクル内装部品[eu718]を採用し、環境負荷を減ら。衝突時はLED通知イルミネーション[eu717]で脱出を支援。シームレスな高級感とサステナビリティの両立で、乗員が「環境に優しく、高級車に乗っている」幸せを実感。", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-04-22",
         analysis: {
             jp: "日本市場では、電動パワーステアリングの制御プログラム設計不足[jp922]に起因するステアリング操作力増大のリスクが浮上し、安全面での信頼性向上が求められている。他方、次期GLAのMBUXスーパースクリーン[jp923]や新型Cクラスの39.1インチハイパースクリーン[jp929]など、大型化・統合化されたHMIへの投資が加速しており、ドライバーの視線誘導と情報過多のバランスが課題となる。",
