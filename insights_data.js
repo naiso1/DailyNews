@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-04-27",
+        analysis: {
+            jp: "日本市場では、トヨタ紡織のCROWN SEAT[jp952]やデリカミニ/eKスペースの価格差[jp954]など、**機能性**と**ブランド価値**の両立が課題。また、トヨタ「ハイランダー」の英語仕様ナビ[jp953]やアウディの物理スイッチ復活[jp961]に代表されるように、**操作性**と**直感的操作**のバランスが重視される。消費者は、メルセデスのMBUXハイパースクリーン[jp958]や日本精機のHUD[LumieHUD][jp955]から、**デジタル技術**と**安心感**を両立した製品を求めつつ、**抗菌・消臭**など**健康面**への関心も高まっている。",
+            cn: "中国市場の自動車内装トレンドは、サステナビリティとAI技術の融合が顕著です。EV化が進み[cn787]、フラットフロアプラットフォームの活用が軽量化・環境負荷低減に寄与しています。加飾面ではメテオコートや木材調素材の高級感[cn789]と、型内塗装技術によるシームレスデザインの両立が見られます。また、Huawei ADS 5や凌渓スマートコックピットのようなAI搭載[cn791]がコックピット革新を牽引。さらに、UV-C LED除菌システムやナトリウムイオン電池技術[cn784]といった環境対策も内装設計に反映されつつあります。",
+            in: "インド市場ではEV化とコネクテッド化が進み[in821]、V2V/V2Iによる道路安全強化も課題[in818]。Forviaの売却[in816]はサプライチェーン再編を示唆。AudiやHondaがデジタルコックピット強化[in822]、ADAS搭載の安価車普及[in823]から、低価格帯でも高品質体験が求められている[in824]。Welpit技術の進化で、健康・ウェルネス機能の拡大が期待。",
+            us: "米国市場では**EV化**と**デジタル化**が加速中[us763]。物理ボタン廃止と**AI**機能統合がトレンド[us764]。一方で**レトロ**な**クラシック**への愛着も根強く[us766]。安全性向上や**UV-C LED**除菌といった機能性も求められる[us763]。トヨタは販売記録を更新中[us762]。",
+            eu: "欧州市場で物理操作の再評価**[eu731][eu735]**が顕著。高級EVの静粛性**[eu738][eu739]**を最大限に活用したウェルネス空間の創出が重要。中国EVの垂直統合**[eu737]**から学ぶサプライチェーン効率化を、リサイクル材**[ELV]**で実現。メルセデスのアナログ回帰**[eu731]**は、デジタルと物理の共存価値を示唆。高級感維持**[eu734]**と環境配慮の両立が欧州トレンド。",
+        },
+        ideas: {
+            jp: [
+                { id: 836, img: "images/idea_836.png", title: "ZenAroma Fresh", desc: "洗いたてタオルのような『サボンブラン』香[jp957]を再現し、ゲルディフューザーで車内を清潔な空気質に保つ。抗菌コーティングでウイルス不活化も。運転中に爽やかに過ごせるうれしさを。", imagePrompt: "" },
+                { id: 837, img: "images/idea_837.png", title: "ZenUV Clean", desc: "豊田合成のUV-C LED除菌システムを応用。コンソールやドアトリに組み込み、走行中は車内を除菌・ウイルス不活化。清潔で安心な車内空間をうれしさと共に。", imagePrompt: "" },
+            ],
+            cn: [
+                { id: 838, img: "images/idea_838.png", title: "バイオ調和スマートコンソール", desc: "植物由来バイオ素材とEVリサイクル樹脂をブレンドしたコンソール。軽量化と二酸化炭素削減を実現。CATLのナトリウムイオン電池技術[cn784]やBYDのEVプラットフォーム[cn782]を参考。表面にUV-C LEDを内蔵し、日常の除菌も。自然の香りディフューザー搭載で、乗車時の心地よさを向上。環境配慮と快適性の両立で、サステナブルな高級感を体感。", imagePrompt: "" },
+                { id: 839, img: "images/idea_839.png", title: "スマート除菌シームレスパネル", desc: "インモールド技術でインパネとコンソールをシームレスに。型内塗装でガラス面との一体感を実現。UV-C LEDをコンソールに内蔵し、車内除菌効果を最大化。P1＋P3デュアルモーターの高効率エンジン[cn790]のように、省エネと清潔さを両立。凌渓スマートコックピット[cn791]のAI連携で除菌状態を可視化。健康意識の高まりに応え、衛生的でラグジュアリーな空間を提案。", imagePrompt: "" },
+            ],
+            in: [
+                { id: 840, img: "images/idea_840.png", title: "芳香調和サステナブルコンソール", desc: "インドの熱帯気候に対応し、自然素材と芳香分子を融合。コンソール表面に温熱反応性樹脂を採用し、手触り感を季節で変化。EVバッテリー熱管理と連動し、車内温度上昇時に自動で清涼感誘発。乗客が「ほっとする」清涼感と「癒やされる」香りで、移動をリラックスタイムに変容。", imagePrompt: "" },
+                { id: 841, img: "images/idea_841.png", title: "ウェルネスデジタルコックピット", desc: "Welpit技術をEVプラットフォームに統合。ミリ波レーダーで乗員の疲労・ストレスを検知し、シート振動・香り・照明で自動調整。ニュースのADAS安全機能[in823]と連動し、不快感を検知すれば即座にリラックスタイムへ誘導。乗客が「楽になる」自動環境制御で、移動中の快適性を最大化。", imagePrompt: "" },
+            ],
+            us: [
+                { id: 842, img: "images/idea_842.png", title: "BioLux Console", desc: "再生材とバイオベース素材を採用したセンターコンソール。触覚フィードバックのある物理ボタンをL型スイッチに再設計。高級感と環境配慮を両立。Nappaレザー調のダークブラウンで、静寂性を活かしたウェルネス空間を演出。", imagePrompt: "" },
+                { id: 843, img: "images/idea_843.png", title: "SeamGlow Panel", desc: "インモールドコート技術を活用したシームレスインパネ。ガラス面と一体感のあるデザインで、衝突時の安全信号を投影。赤色で危険を警告し、乗員の安心感を高める。LED陰影イルミネーションを採用。", imagePrompt: "" },
+            ],
+            eu: [
+                { id: 844, img: "images/idea_844.png", title: "BreathPure EU", desc: "EVプラットフォーム[eu738]の静粛性を最大限に活用し、車内を天然のオゾンフリー空間に変える。空気清浄と抗菌機能を統合し、長時間ドライブでも疲れない新鮮な空気質を提供。乗員の健康を最優先し、リラックスしたドライブ体験を実現する。", imagePrompt: "Luxury European car interior, EV platform, advanced air purification system visible as subtle air flow visualization, clean breathable atmosphere, health and wellness theme, fresh air quality, premium materials, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 845, img: "images/idea_845.png", title: "EcoCraft EU", desc: "水平リサイクル内装部品[ELV]の技術を活用し、廃車由来プラスチック[ELV]を50%配合した高強度素材で、欧州で愛される物理ボタンの質感を再現。メルセデス復活[eu731]やAudiのスクロールホイール[eu735]のような物理操作感を維持しつつ、環境負荷も削減。触覚の豊かさと持続可能性の両立を追求する。", imagePrompt: "Sustainable automotive interior design, recycled high-strength material texture, eco-friendly premium interior, tactile physical buttons and steering wheel details, European luxury car cockpit, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-04-26",
         analysis: {
             jp: "日本市場の自動車内装トレンドを**ディスプレイ**・**シート**・**EV**視点で分析。BMW7シリーズ[jp942][jp943]は14.6インチ助手席スクリーンや後席8Kシアターを採用し、デジタル体験進化を明確に示唆。マツダ・トヨタのインダッシュナビ[jp945]は起動時のワクワク感に注目が集まる。ホンダZR-V[jp947]は専用本革シートやGoogle搭載ディスプレイを組み合わせ、高級感とコネクテッドを両立。ジーカー009[jp951]は15.6インチスクリーンとナッパレザーでEVミニバンの新基準を確立。",
