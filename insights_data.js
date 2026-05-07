@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-07",
+        analysis: {
+            jp: "日本市場ではアウトドア化とEV化の二大トレンドが顕著[jp979][jp980]。特にレクサスTZやGR8ハイエースは、リサイクル素材や竹など新素材の採用で環境意識を反映[jp983][jp977]。センシングAI導入[jp986]やe-POWERによる静粛性[jp978]は、EV化に伴う熱管理や音質の再定義を迫る。さらにLEDコンソールボックスやダッシュボードのシボ加工[jp981][jp984]は、機能性と安全性の両立を重視する傾向を示す。これらの動向を踏まえ、グローバル戦略と独自技術を掛け合わせた企画が必要だ。",
+            cn: "中国市場はEV技術革新が激しく、バッテリー技術とHMIが競争の焦点 [cn816,cn810]。CATLなどサプライチェーンの統合が重要 [cn811]。安全基準（ANCAP）や音響など、消費者ニーズは快適性と安全性并重 [cn809]。自社開発では、グローバル戦略を意識した現地化対応が必要 [cn814]。EV販売首位BYDの動向から、3nmチップやフラッシュ充電の技術トレンドを自社製品開発に組み込むべき [cn808,cn815]。",
+            in: "インド市場はEV化・CNG普及で内装の環境性能が重要[in844]。レクサスTZの生け垣竹素材[in847]や豊田合成の抗菌技術[in846]が示すように、健康配慮と高級感の両立がトレンド。また、中国依存削減[in844]の動きから、インド製サステナブル素材の採用が戦略的。",
+            us: "米国のEV市場は3万ドル台の価格帯で競争が激化しており、フォードやトヨタがプラットフォーム共通化や48Vシステム導入[us789]で部品削減を推進。一方、レクサスTZやハーレーCVO[us796]は高級感を維持しつつ、竹材やバイオ素材[us791]など新素材で差別化を図っている。シートヒーター訴訟[us798]や静粛性重視から、快適性と安全性を両立する設計が求められている。コスト競争力とウェルネス機能の両立が鍵。",
+            eu: "欧州EV市場では、高級EVの静粛性活用がトレンドである[eu760]。VolvoやMercedes-AMGがEV移行を加速し、バッテリー容量増大が進む[eu762]。消費者は車内を「ラグジュアリーリビング」と捉え、快適性を重視する。過去から続く「ガソリン不足による行列」の教訓から[eu757]、EVの静粛性を最大限に活用した体験向上が求められている。また、リース契約の普及で[eu764]、初期投資を抑えつつ高品質な内装を求める層が増えている。",
+        },
+        ideas: {
+            jp: [
+                { id: 856, img: "images/idea_856.png", title: "GlobalZen Outdoor", desc: "FIELD STYLE TOKYO 2026のコンセプトカー[jp977]をヒントに、日本発のアウトドア空間を海外市場にも展開。レクサスTZの竹素材[jp983]やGR8のデニム[jp980]を応用し、世界中のユーザーが車内を『屋外』のように楽しめるグローバルプラットフォームを構築。現地の気候や文化に合わせた現地化対応を可能にし、海外展開の壁を乗り越える安心感を与える。", imagePrompt: "A luxury car interior concept blending outdoor nature and Japanese craftsmanship, featuring bamboo dashboard accents, denim upholstery, and ambient lighting mimicking a seaside sunset, photorealistic 3D render, premium materials, cinematic lighting, high detail, 4K quality" },
+                { id: 857, img: "images/idea_857.png", title: "MeteoCoat Zen", desc: "豊田合成のメテオコート技術[jp980]を応用し、型内塗装で凹凸のある独自テクスチャーを創出。GR8ハイエースのクラシックレザーとデニム[jp980]や、レクサスTZのリサイクル素材[jp983]を組み合わせ、視界確保や光反射制御を兼ね備えた安全性と高級感を両立。ユーザーが車内をカスタマイズする楽しみを喜びに変える。", imagePrompt: "Close-up of a luxury car dashboard featuring textured in-mold coating with subtle grain patterns, brushed aluminum accents, and warm ambient lighting that reflects off the surface, photorealistic 3D render, premium automotive design, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 858, img: "images/idea_858.png", title: "グローバル調和コンソール", desc: "中国市場のフラッシュ充電とANCAP安全基準に対応。BYDの10万台予約のようなグローバル戦略を考慮。リサイクル素材で環境配慮、AIが乗員安全を自動で管理し、海外ユーザーが安心しうれしく感じられる。", imagePrompt: "Center console in Chinese EV, integrated flash charging port with blue LED indicator, AR safety display showing crash protection metrics, sustainable bamboo and recycled plastic materials, warm ambient lighting, photorealistic automotive interior render, premium quality design, cinematic lighting, high detail, 4K quality" },
+                { id: 859, img: "images/idea_859.png", title: "スマート薄型インパネEV版", desc: "豊田合成のスマート薄型インパネ技術を中国EV向けに進化。BYDの3nmチップやANCAP 5つ星を模倣。EV特有のフラットフロアを活かし、乗員が安全で快適に。", imagePrompt: "Slim EV dashboard with advanced touch interface, 3nm chip integration, 5-star ANCAP safety badges, flat floor design for spacious cabin, high-res holographic display, modern minimalist aesthetic, sleek materials, professional automotive photography, bright studio lighting, ultra HD detail" },
+            ],
+            in: [
+                { id: 860, img: "images/idea_860.png", title: "バイオ抗菌コックピット", desc: "インドの高温多湿に強い自然抗菌素材で、車内を清潔に。抗菌コンソールに芳香分子を埋め込み、熱帯気候でも快適に過ごせる。家族が安心して乗れる車室がうれしい。", imagePrompt: "Automotive interior concept with natural antibacterial materials, warm tropical lighting, bamboo and organic fabric textures, premium dashboard with subtle aroma diffuser, photorealistic render, clean and healthy atmosphere, 4K quality" },
+                { id: 861, img: "images/idea_861.png", title: "コンパクトワイヤレス充電コンソール", desc: "豊田合成の小型充電ホルダ技術を応用。センターコンソールに自然素材とLED照明を組み合わせ、スマホを置くだけで充電。インド市場の狭い車室でも使いやすい。", imagePrompt: "Compact wireless charging console in car interior, natural wood texture with LED ambient lighting, smartphone on charging pad, modern Indian car cabin, warm golden lighting, photorealistic 3D render" },
+            ],
+            us: [
+                { id: 862, img: "images/idea_862.png", title: "モジュール化インパネ", desc: "共通プラットフォーム[us701]で部品共通率90%を実現。竹材や再生樹脂を標準モジュール化し、コスト削減と量産効率を両立。開発期間短縮で価格競争力を高め、消費者が安価な高級感を享受。うれしい", imagePrompt: "Automotive interior design concept showing a modular center console and dashboard, brushed aluminum and bamboo materials, clean geometric lines, neutral gray and warm wood tones, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+                { id: 863, img: "images/idea_863.png", title: "ウェルネスコンソール", desc: "豊田合成ウェルピット技術を応用。ミリ波レーダー[us745]で疲労度を検知し、ベンチレーションシートや香りディフューザーを自動制御。EVの静粛性[us794]を活かし、乗員の気分を快適に保ち、長時間ドライブの疲れを解消。うれしい", imagePrompt: "Premium vehicle cockpit with integrated wellness system, holographic interface floating above dashboard, AI assistant visualization, futuristic design, night driving scene, soft blue ambient lighting, photorealistic render" },
+            ],
+            eu: [
+                { id: 864, img: "images/idea_864.png", title: "ソファリビングEV", desc: "EVプラットフォームの圧倒的静粛性[eu759]を生かし、車内を高級ホテルのラウンジのように。天然木材調の触感素材と、微かな香りでリラックス空間を演出。ドライバーも乗客も、移動中を「くつろぎの時間」として愉しむ。", imagePrompt: "Luxury electric SUV interior, spacious 2-2-2 seating layout with plush cream leather sofas, natural wood trim accents, soft ambient lighting, calm atmosphere, driver relaxing in the back seat, premium materials, photorealistic render, cinematic lighting, 4K quality" },
+                { id: 865, img: "images/idea_865.png", title: "ResinBone Support", desc: "鉄製インパネリンフォースを軽量化した高強度樹脂[eu758]でリファイン。衝撃吸収性を高めつつ、EVプラットフォームの静粛性を維持。触覚も柔らかく、長距離ドライブでも疲れにくい「骨格の軽さ」を実感できる。", imagePrompt: "Automotive interior dashboard close-up, high-strength resin frame structure visible, sleek modern design, soft touch materials, premium metallic accents, clean lines, professional product visualization, photorealistic 3D render, automotive engineering detail" },
+            ],
+        }
+    },
+{
         date: "2026-05-06",
         analysis: {
             jp: "日本市場では、**物理スイッチ回帰**と**新素材**の両輪で高級感と利便性を追求する動きが加速している[jp964][jp968]。アウディやメルセデスがタッチパネルから物理スイッチへ回帰し、操作性と信頼性を再評価している[jp963][jp968]。一方で、ブリッドは高触感素材「ヌグレ」を用いたシートで快適性を高め[jp965]、ランボルギーニは極限のカスタマイズ性を提示している[jp966]。EV化の進展に伴い、内装の質感と機能性の両立が競争の鍵となる[jp962]。コスト競争力と独自のカスタマイズ性を組み合わせた製品展開が期待される[jp970]。",
