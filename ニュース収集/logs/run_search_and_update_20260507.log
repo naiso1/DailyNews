@@ -2735,3 +2735,353 @@
 [google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 途昂的中控设计好看吗 - 汽车之家
 [google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 途昂的中控设计好看吗 - 汽车之家
 [google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 途昂的中控设计好看吗 - 汽车之家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 雪佛兰trAx是哪款车 - 车家号
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 雪佛兰trAx是哪款车 - 车家号
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 雪佛兰trAx是哪款车 - 车家号
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 雪佛兰trAx是哪款车 - 车家号
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 马自达CX-5e设计曝光，续航或突破500km，2027年见？ - 车家号
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 马自达CX-5e设计曝光，续航或突破500km，2027年见？ - 车家号
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 马自达CX-5e设计曝光，续航或突破500km，2027年见？ - 车家号
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 马自达CX-5e设计曝光，续航或突破500km，2027年见？ - 车家号
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 哈弗H6的中控设计好看吗 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 哈弗H6的中控设计好看吗 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 哈弗H6的中控设计好看吗 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 哈弗H6的中控设计好看吗 - 汽车之家
+[google_search_script]     進捗: 1935/2011
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://new
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 4月申报亮相！长安CS55非插电混动版曝光，1.5T混动油耗4.68L - 车家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 4月申报亮相！长安CS55非插电混动版曝光，1.5T混动油耗4.68L - 车家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 4月申报亮相！长安CS55非插电混动版曝光，1.5T混动油耗4.68L - 车家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 4月申报亮相！长安CS55非插电混动版曝光，1.5T混动油耗4.68L - 车家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 瑞虎8的氛围灯效果怎么样 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 瑞虎8的氛围灯效果怎么样 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 瑞虎8的氛围灯效果怎么样 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 瑞虎8的氛围灯效果怎么样 - 汽车之家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 理想L8的驾驶体验如何 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 理想L8的驾驶体验如何 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 理想L8的驾驶体验如何 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 理想L8的驾驶体验如何 - 汽车之家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 钛7的性价比如何 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 钛7的性价比如何 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 钛7的性价比如何 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 钛7的性价比如何 - 汽车之家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 星愿氛围灯的效果怎么样 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 星愿氛围灯的效果怎么样 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 星愿氛围灯的效果怎么样 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 星愿氛围灯的效果怎么样 - 汽车之家
+[google_search_script]     進捗: 1940/2011
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 缤果S的外观如何 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 缤果S的外观如何 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 缤果S的外观如何 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 缤果S的外观如何 - 汽车之家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 哈弗猛龙燃油车的车身设计好看吗 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 哈弗猛龙燃油车的车身设计好看吗 - 汽车之家
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 哈弗猛龙燃油车的车身设计好看吗 - 汽车之家
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 哈弗猛龙燃油车的车身设计好看吗 - 汽车之家
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 宝马哪款车最值得买？推荐几款经典车型，满足不同需求 - 车家号
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 宝马哪款车最值得买？推荐几款经典车型，满足不同需求 - 车家号
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 宝马哪款车最值得买？推荐几款经典车型，满足不同需求 - 车家号
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 宝马哪款车最值得买？推荐几款经典车型，满足不同需求 - 车家号
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.g
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 锐胜M8新能源王者归来!有经典有创新 - 新浪财经
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 锐胜M8新能源王者归来!有经典有创新 - 新浪财经
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 锐胜M8新能源王者归来!有经典有创新 - 新浪财经
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 锐胜M8新能源王者归来!有经典有创新 - 新浪财经
+[google_search_script]   [FETCH_SHORT] 95chars: http://electrek.co/2026/05/05/i-toured-fords-secret-lab-where-its-designing-an-ev-to-compete-with-china/
+[google_search_script]     進捗: 1945/2011
+[google_search_script]   [FETCH_OK] 8000chars: https://www.theverge.com/transportation/923704/ford-ev-skunkworks-lab-long-beach
+[google_search_script]   [FETCH_OK] 8000chars: https://www.thelocal.de/20260505/today-in-germany-a-roundup-of-the-latest-news-on-tuesday-122
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/05/04/3286717/0/en/Automotive-Software-Market-Outlook-2026-2031-Passenger-Cars-Accounted-for-74-91-Share-in-2025-Says-Mordor-Intelligence.html
+[google_search_script]   [FETCH_OK] 8000chars: https://www.naturalnews.com/2026-05-04-chinese-evs-to-project-movies-from-headlights.html
+[google_search_script]   [FETCH_OK] 3884chars: https://www.ubergizmo.com/2026/05/xiaomi-ev-yu7-gt/
+[google_search_script]     進捗: 1950/2011
+[google_search_script]   [FETCH_OK] 8000chars: https://www.bmwblog.com/2026/05/02/2027-bmw-m3-za0-electric-g84-mild-hybrid/
+[google_search_script]   [FETCH_OK] 7620chars: http://robbreport.com/motors/cars/porsche-carrera-gt-record-breaking-auctions-1238011421/
+[google_search_script]   [FETCH_OK] 5426chars: https://www.globenewswire.com/news-release/2026/05/01/3285647/0/en/li-auto-inc-april-2026-delivery-update.html
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/04/30/3285571/0/en/Global-Multi-layer-Film-Recycling-Market-Size-Share-Worth-USD-6-92-Billion-by-2035-at-a-9-2-CAGR-Custom-Market-Insights-Analysis-Outlook-Leaders-Report-Trends-Forecast-Segmentation.html
+[google_search_script]   [FETCH_OK] 7950chars: https://www.prnewswire.co.uk/news-releases/texture-paints-market-to-witness-robust-growth-by-2031-with-residential-segment-holding-60-31-share-in-2025--says-mordor-intelligence-302758799.html
+[google_search_script]     進捗: 1955/2011
+[google_search_script]   [FETCH_FAIL] ConnectionError: https://www.autocar.co.uk/car-news/features/life-grenadier-i-used-no-nonsense-4x4-everything-everyday
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/04/29/3283912/0/en/Autonomous-Driving-Software-Market-worth-7-0-billion-in-2035-MarketsandMarkets.html
+[google_search_script]   [FETCH_OK] 8000chars: https://www.dailymail.com/money/electriccars/article-15771343/The-electric-cars-CANCELLED-Makers-wielded-axe-EVs-low-demand.html
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/04/28/3282960/0/en/Synthetic-Fibers-Market-Size-Worth-USD-162-40-Billion-by-2035.html
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/04/28/3282805/0/en/COLLEGE-FOR-CREATIVE-STUDIES-PRESENTED-THE-SHOW-2026-AT-SOMERSET-COLLECTION.html
+[google_search_script]     進捗: 1960/2011
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/04/28/3282306/0/en/onsemi-and-Geely-Expand-Strategic-Collaboration-to-Elevate-the-Driving-Experience.html
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2022-porsche-911-gt3-touring-151/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/1995-mercedes-benz-e320-w124-16/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2017-porsche-panamera-turbo-20/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2024-porsche-718-cayman-gt4-rs-24/
+[google_search_script]     進捗: 1965/2011
+[google_search_script]   [FETCH_OK] 8000chars: https://silodrome.com/studebaker-avanti-r2-car/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2021-audi-rs6-avant-34/
+[google_search_script]   [FETCH_OK] 239chars: https://hiconsumption.com/motors/2026-cadillac-ct5-v-blackwing-f1-collector-series/
+[google_search_script]   [FETCH_OK] 2688chars: https://www.bmwblog.com/2026/05/01/2027-bmw-7-series-facelift-designer-walkthrough/
+[google_search_script]   [FETCH_OK] 8000chars: https://sixcolors.com/post/2026/05/apple-in-the-enterprise-the-complete-2026-commentary/
+[google_search_script]     進捗: 1970/2011
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2024-porsche-718-cayman-gt4-rs-25/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2008-bentley-continental-gt-speed-18/
+[google_search_script]   [FETCH_OK] 8000chars: http://comicbook.com/gaming/news/fortnite-update-patch-notes-40-30/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2024-porsche-911-dakar-40/
+[google_search_script]   [FETCH_SHORT] 35chars: https://bringatrailer.com/listing/2023-porsche-911-turbo-s-coupe-28/
+[google_search_script]     進捗: 1975/2011
+[google_search_script]   [FETCH_OK] 3524chars: http://robbreport.com/motors/cars/porsche-911-gt3-artisan-edition-japan-exclusive-1238024889/
+[google_search_script]   [FETCH_OK] 8000chars: https://anglotopia.net/columns/great-british-motoring-columns/great-british-motors-the-story-of-the-mini-how-a-tiny-car-changed-everything/
+[google_search_script]   [FETCH_OK] 8000chars: https://www.thejournal.ie/readme/people-carrier-column-paddy-comyn-7028720-May2026/
+[google_search_script]   [FETCH_OK] 2696chars: https://paultan.org/2026/04/30/updated-zeekr-x-launching-in-malaysia-in-q2-2026/
+[google_search_script]   [FETCH_OK] 8000chars: https://www.globenewswire.com/news-release/2026/04/28/3282461/0/en/Polypropylene-Market-Expected-to-Exceed-USD-163-61-Billion-by-2035-SNS-Insider.html
+[google_search_script]     進捗: 1980/2011
+[google_search_script]   [FETCH_OK] 4537chars: https://paultan.org/2026/05/05/2026-bmw-i3-l-in-china-lwb-with-manual-door-handles-over-1000-km-cltc-coming-to-malaysia/
+[google_search_script]   [FETCH_OK] 8000chars: https://www.dailymail.com/money/electriccars/article-15774843/VW-Polo-goes-electric-new-ID-Polo-supermini.html
+[google_search_script]   [FETCH_OK] 1301chars: https://www.ithome.com/0/946/342.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 首台领克 10 量产车下线，预售价 20.99 万元起
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 首台领克 10 量产车下线，预售价 20.99 万元起
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 首台领克 10 量产车下线，预售价 20.99 万元起
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 首台领克 10 量产车下线，预售价 20.99 万元起
+[google_search_script]   [FETCH_OK] 1434chars: https://www.ithome.com/0/946/063.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 广汽昊铂 S600 部分规格公布：零百加速 4.3 秒，标配激光雷达
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 广汽昊铂 S600 部分规格公布：零百加速 4.3 秒，标配激光雷达
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 广汽昊铂 S600 部分规格公布：零百加速 4.3 秒，标配激光雷达
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 广汽昊铂 S600 部分规格公布：零百加速 4.3 秒，标配激光雷达
+[google_search_script]   [FETCH_OK] 7058chars: https://www.cnbeta.com.tw/articles/tech/1560984.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 中国电动车已演变为AI军备竞赛 不仅局限低价
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 中国电动车已演变为AI军备竞赛 不仅局限低价
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 中国电动车已演变为AI军备竞赛 不仅局限低价
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 中国电动车已演变为AI军备竞赛 不仅局限低价
+[google_search_script]     進捗: 1985/2011
+[google_search_script]   [FETCH_OK] 1716chars: https://www.ithome.com/0/944/670.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 53.99 万元起，2026 款别克世纪 CENTURY 豪华 MPV 上市
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 53.99 万元起，2026 款别克世纪 CENTURY 豪华 MPV 上市
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 53.99 万元起，2026 款别克世纪 CENTURY 豪华 MPV 上市
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 53.99 万元起，2026 款别克世纪 CENTURY 豪华 MPV 上市
+[google_search_script]   [FETCH_OK] 1969chars: https://www.ithome.com/0/944/341.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 10.98~12.98 万元广汽埃安 N60 上市，标配 4D 毫米波雷达 + 
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 10.98~12.98 万元广汽埃安 N60 上市，标配 4D 毫米波雷达 + 
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 10.98~12.98 万元广汽埃安 N60 上市，标配 4D 毫米波雷达 + 
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 10.98~12.98 万元广汽埃安 N60 上市，标配 4D 毫米波雷达 + 
+[google_search_script]   [FETCH_OK] 8000chars: https://36kr.com/p/3785730095127817
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 8点1氪：中方禁止外资收购Manus；上海迪士尼回应游客吸烟冲突事件；泡泡玛特L
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 8点1氪：中方禁止外资收购Manus；上海迪士尼回应游客吸烟冲突事件；泡泡玛特L
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 8点1氪：中方禁止外资收购Manus；上海迪士尼回应游客吸烟冲突事件；泡泡玛特L
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 8点1氪：中方禁止外资收购Manus；上海迪士尼回应游客吸烟冲突事件；泡泡玛特L
+[google_search_script]   [FETCH_OK] 1989chars: https://www.ithome.com/0/946/438.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 难达成碳排放目标，大众汽车面临 15 亿欧元巨额罚款
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 难达成碳排放目标，大众汽车面临 15 亿欧元巨额罚款
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 难达成碳排放目标，大众汽车面临 15 亿欧元巨额罚款
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 难达成碳排放目标，大众汽车面临 15 亿欧元巨额罚款
+[google_search_script]   [FETCH_FAIL] ConnectTimeout: http://www.geekpark.net/news/363701
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 传小米新 SU7 锁单突破 7 万；微信输入法测「隔空发图」功能；豆包二代 AI
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 传小米新 SU7 锁单突破 7 万；微信输入法测「隔空发图」功能；豆包二代 AI
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 传小米新 SU7 锁单突破 7 万；微信输入法测「隔空发图」功能；豆包二代 AI
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 传小米新 SU7 锁单突破 7 万；微信输入法测「隔空发图」功能；豆包二代 AI
+[google_search_script]     進捗: 1990/2011
+[google_search_script]   [FETCH_OK] 3796chars: https://www.ithome.com/0/946/087.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: IT早报 0503：张雪机车匈牙利站再夺冠军；俞浩再放狠话称追觅手机对标苹果三星
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: IT早报 0503：张雪机车匈牙利站再夺冠军；俞浩再放狠话称追觅手机对标苹果三星
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: IT早报 0503：张雪机车匈牙利站再夺冠军；俞浩再放狠话称追觅手机对标苹果三星
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: IT早报 0503：张雪机车匈牙利站再夺冠军；俞浩再放狠话称追觅手机对标苹果三星
+[google_search_script]   [FETCH_OK] 5380chars: https://36kr.com/p/3789475357400068
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 卓驭于贝贝：向物理AI转型，是生存法则的必然选择 | 最前线
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 卓驭于贝贝：向物理AI转型，是生存法则的必然选择 | 最前线
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 卓驭于贝贝：向物理AI转型，是生存法则的必然选择 | 最前线
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 卓驭于贝贝：向物理AI转型，是生存法则的必然选择 | 最前线
+[google_search_script]   [FETCH_OK] 4330chars: https://36kr.com/p/3792155815304450
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 在硅谷，中美具身公司聊了聊了4个问题的解法
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 在硅谷，中美具身公司聊了聊了4个问题的解法
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 在硅谷，中美具身公司聊了聊了4个问题的解法
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 在硅谷，中美具身公司聊了聊了4个问题的解法
+[google_search_script]   [FETCH_OK] 5618chars: https://36kr.com/p/3791546608049152
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 9.35万, 威马破产大甩卖
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 9.35万, 威马破产大甩卖
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 9.35万, 威马破产大甩卖
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 9.35万, 威马破产大甩卖
+[google_search_script]   [FETCH_OK] 8000chars: https://www.cnbeta.com.tw/articles/tech/1560932.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 马斯克因对OpenAI资金承诺问题陷入被动辩解
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 马斯克因对OpenAI资金承诺问题陷入被动辩解
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 马斯克因对OpenAI资金承诺问题陷入被动辩解
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 马斯克因对OpenAI资金承诺问题陷入被动辩解
+[google_search_script]     進捗: 1995/2011
+[google_search_script]   [FETCH_OK] 4451chars: https://36kr.com/p/3790587098832137
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 追觅造车，从“火箭”开始
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 追觅造车，从“火箭”开始
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 追觅造车，从“火箭”开始
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 追觅造车，从“火箭”开始
+[google_search_script]   [FETCH_OK] 4308chars: https://www.ithome.com/0/945/760.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: IT早报 0501：追觅 CEO 俞浩要求所有员工开通社媒账号；曝 OPPO 将
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: IT早报 0501：追觅 CEO 俞浩要求所有员工开通社媒账号；曝 OPPO 将
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: IT早报 0501：追觅 CEO 俞浩要求所有员工开通社媒账号；曝 OPPO 将
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: IT早报 0501：追觅 CEO 俞浩要求所有员工开通社媒账号；曝 OPPO 将
+[google_search_script]   [FETCH_OK] 6585chars: https://www.cnbeta.com.tw/articles/tech/1560794.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 微型自制太阳能小车找到现实可行的“甜蜜点”
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 微型自制太阳能小车找到现实可行的“甜蜜点”
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 微型自制太阳能小车找到现实可行的“甜蜜点”
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 微型自制太阳能小车找到现实可行的“甜蜜点”
+[google_search_script]   [FETCH_FAIL] ConnectTimeout: http://www.geekpark.net/news/363649
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 对话奔驰高管：AI 上车之后，豪华品牌如何重新定义智能化？
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 对话奔驰高管：AI 上车之后，豪华品牌如何重新定义智能化？
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 对话奔驰高管：AI 上车之后，豪华品牌如何重新定义智能化？
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 对话奔驰高管：AI 上车之后，豪华品牌如何重新定义智能化？
+[google_search_script]   [FETCH_OK] 5306chars: https://www.cnbeta.com.tw/articles/tech/1560686.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 经典小车电动化重生 大众ID.Polo正式发布：实体按键管够
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 经典小车电动化重生 大众ID.Polo正式发布：实体按键管够
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 经典小车电动化重生 大众ID.Polo正式发布：实体按键管够
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 经典小车电动化重生 大众ID.Polo正式发布：实体按键管够
+[google_search_script]     進捗: 2000/2011
+[google_search_script]   [FETCH_OK] 8000chars: https://36kr.com/p/3788573115735299
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 8点1氪丨官方通报“霸王茶姬中喝出水银”；马斯克称创办OpenAI只为拯救人类；
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 8点1氪丨官方通报“霸王茶姬中喝出水银”；马斯克称创办OpenAI只为拯救人类；
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 8点1氪丨官方通报“霸王茶姬中喝出水银”；马斯克称创办OpenAI只为拯救人类；
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 8点1氪丨官方通报“霸王茶姬中喝出水银”；马斯克称创办OpenAI只为拯救人类；
+[google_search_script]   [FETCH_OK] 5474chars: https://www.ithome.com/0/945/245.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: IT早报 0430：微信朋友圈灰度改版；追觅回应造车质疑称我们不可能是乐视；小米
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: IT早报 0430：微信朋友圈灰度改版；追觅回应造车质疑称我们不可能是乐视；小米
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: IT早报 0430：微信朋友圈灰度改版；追觅回应造车质疑称我们不可能是乐视；小米
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: IT早报 0430：微信朋友圈灰度改版；追觅回应造车质疑称我们不可能是乐视；小米
+[google_search_script]   [FETCH_OK] 4333chars: https://36kr.com/p/3786532449312007
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 36氪首发 | 主攻氢涡轮增程的全倾转eVTOL，「华喜航空」完成数千万元种子轮
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 36氪首发 | 主攻氢涡轮增程的全倾转eVTOL，「华喜航空」完成数千万元种子轮
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 36氪首发 | 主攻氢涡轮增程的全倾转eVTOL，「华喜航空」完成数千万元种子轮
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 36氪首发 | 主攻氢涡轮增程的全倾转eVTOL，「华喜航空」完成数千万元种子轮
+[google_search_script]   [FETCH_OK] 8000chars: https://www.cnbeta.com.tw/articles/tech/1560472.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 威马汽车近1.3亿元债权9.35万元成交 起拍价仅100元
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 威马汽车近1.3亿元债权9.35万元成交 起拍价仅100元
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 威马汽车近1.3亿元债权9.35万元成交 起拍价仅100元
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 威马汽车近1.3亿元债权9.35万元成交 起拍价仅100元
+[google_search_script]   [FETCH_OK] 8000chars: https://36kr.com/p/3787150633065728
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 8点1氪丨百度废除字母职级标签；Meta被曝准备撤销对Manus收购；张雪称曾拒
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 8点1氪丨百度废除字母职级标签；Meta被曝准备撤销对Manus收购；张雪称曾拒
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 8点1氪丨百度废除字母职级标签；Meta被曝准备撤销对Manus收购；张雪称曾拒
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 8点1氪丨百度废除字母职级标签；Meta被曝准备撤销对Manus收购；张雪称曾拒
+[google_search_script]     進捗: 2005/2011
+[google_search_script]   [FETCH_FAIL] ConnectTimeout: http://www.geekpark.net/news/363403
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 汽车的「OpenClaw 时刻」，到了？
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 汽车的「OpenClaw 时刻」，到了？
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 汽车的「OpenClaw 时刻」，到了？
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 汽车的「OpenClaw 时刻」，到了？
+[google_search_script]   [FETCH_OK] 1699chars: https://www.ithome.com/0/944/354.htm
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 上汽荣威 i6 正式上市：限时抢定价 6.59~7.59 万元，搭载高通 815
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 上汽荣威 i6 正式上市：限时抢定价 6.59~7.59 万元，搭载高通 815
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 上汽荣威 i6 正式上市：限时抢定价 6.59~7.59 万元，搭载高通 815
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 上汽荣威 i6 正式上市：限时抢定价 6.59~7.59 万元，搭载高通 815
+[google_search_script]   [FETCH_FAIL] ConnectTimeout: http://www.geekpark.net/news/363371
+[google_search_script]   [CHINESE_DETECTED] attempt=1 title_cn=True body_cn=True: 小红书：内容添加 AI 标识，反对 AI 造假；小米全新机器人亮相；微信 15 
+[google_search_script]   [CHINESE_DETECTED] attempt=2 title_cn=True body_cn=True: 小红书：内容添加 AI 标识，反对 AI 造假；小米全新机器人亮相；微信 15 
+[google_search_script]   [CHINESE_DETECTED] attempt=3 title_cn=True body_cn=True: 小红书：内容添加 AI 标识，反对 AI 造假；小米全新机器人亮相；微信 15 
+[google_search_script]   [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: 小红书：内容添加 AI 标识，反对 AI 造假；小米全新机器人亮相；微信 15 
+[google_search_script]   [FETCH_OK] 4428chars: https://cleantechnica.com/2026/05/05/vinfast-scales-up-in-asia-as-mpv-7-electric-7-seater-debuts-in-the-philippines/
+[google_search_script]   [FETCH_OK] 5246chars: https://finance.yahoo.com/markets/stocks/article/ferrari-reports-q1-earnings-beat-affirms-guidance-despite-middle-east-war-183144761.html
+[google_search_script]     進捗: 2010/2011
+[google_search_script]   [FETCH_OK] 4488chars: https://economictimes.indiatimes.com/industry/renewables/hyundai-ioniq-5-launched-in-india-check-price-range-interiors-and-exterior-features/articleshow/130577199.cms
+[google_search_script]     進捗: 2011/2011
+[google_search_script]   [新規] 関連度・翻訳処理 完了
+[google_search_script]     画像補完: 264件 並列取得開始
+[google_search_script]     画像URL未取得: 394件
+[google_search_script] ✅ 完了！ 2011 件の新規記事を追加しました。
+[google_search_script]    URLはハイパーリンク化済み
+[google_search_script]    保存先: C:\Users\demo\Desktop\中村\DailyNews\ニュース収集\search_results.csv
+[google_search_script]   Sheet2補完: 1件
+[google_search_script]   [FETCH_OK] 6565chars: https://carnewschina.com/2026/04/28/gwm-launches-hev-and-ice-trims-for-previously-ev-ora-5-in-china-starting-at-10200-usd/
+[google_search_script]     進捗: 1/1
+[google_search_script]   Sheet2/CSV 出力: 55件, sheet2_llm_targets.csv
+[EXIT] google_search_script: code=0
+[RUN] auto_update_daily_news: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\auto_update_daily_news.py
+[PID] auto_update_daily_news: 30988
+[auto_update_daily_news] Loaded 52 items from sheet: C:\Users\demo\Desktop\����\DailyNews\�j���[�X���W\sheet2_llm_targets.csv (dates: 2026-04-28 ~ 2026-05-06)
+[auto_update_daily_news] New items to append: 32
+[auto_update_daily_news] LLM error (jp): 400 {
+[auto_update_daily_news]   "error": {
+[auto_update_daily_news]     "message": "No models loaded. Please load a model in the developer page or use the 'lms load' command.",
+[auto_update_daily_news]     "type": "invalid_request_error",
+[auto_update_daily_news]     "param": "model",
+[auto_update_daily_news]     "code": null
+[auto_update_daily_news]   }
+[auto_update_daily_news] }
+[auto_update_daily_news] LLM error (cn): 400 {
+[auto_update_daily_news]   "error": {
+[auto_update_daily_news]     "message": "No models loaded. Please load a model in the developer page or use the 'lms load' command.",
+[auto_update_daily_news]     "type": "invalid_request_error",
+[auto_update_daily_news]     "param": "model",
+[auto_update_daily_news]     "code": null
+[auto_update_daily_news]   }
+[auto_update_daily_news] }
+[auto_update_daily_news] LLM error (in): 400 {
+[auto_update_daily_news]   "error": {
+[auto_update_daily_news]     "message": "No models loaded. Please load a model in the developer page or use the 'lms load' command.",
+[auto_update_daily_news]     "type": "invalid_request_error",
+[auto_update_daily_news]     "param": "model",
+[auto_update_daily_news]     "code": null
+[auto_update_daily_news]   }
+[auto_update_daily_news] }
+[auto_update_daily_news] LLM error (us): 400 {
+[auto_update_daily_news]   "error": {
+[auto_update_daily_news]     "message": "No models loaded. Please load a model in the developer page or use the 'lms load' command.",
+[auto_update_daily_news]     "type": "invalid_request_error",
+[auto_update_daily_news]     "param": "model",
+[auto_update_daily_news]     "code": null
+[auto_update_daily_news]   }
+[auto_update_daily_news] }
+[auto_update_daily_news] LLM error (eu): 400 {
+[auto_update_daily_news]   "error": {
+[auto_update_daily_news]     "message": "No models loaded. Please load a model in the developer page or use the 'lms load' command.",
+[auto_update_daily_news]     "type": "invalid_request_error",
+[auto_update_daily_news]     "param": "model",
+[auto_update_daily_news]     "code": null
+[auto_update_daily_news]   }
+[auto_update_daily_news] }
+[auto_update_daily_news] Insights draft saved: C:\Users\demo\Desktop\����\DailyNews\insights_draft_2026-05-06.txt
+[auto_update_daily_news] Done.
+[EXIT] auto_update_daily_news: code=0
+[RUN] generate_idea_images_gemini: C:\Users\demo\AppData\Local\Programs\Python\Python311\python.exe -u C:\Users\demo\Desktop\中村\DailyNews\generate_idea_images_gemini.py --only-missing --model gemini-3.1-flash-image-preview --image-size 512px --aspect-ratio 1:1
+[PID] generate_idea_images_gemini: 33996
+[generate_idea_images_gemini] Done.
+[EXIT] generate_idea_images_gemini: code=0
+[RUN] git_status: git status --porcelain -- . :(exclude)ニュース収集/logs/* :(exclude)ニュース収集/__pycache__/* :(exclude)**/__pycache__/*
+[git_status]  M news_data.js
+[git_status]  M "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/search_results.csv"
+[git_status]  M "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/sheet2_llm_targets.csv"
+[RUN] git_add: git add -A -- . :(exclude)ニュース収集/logs/* :(exclude)ニュース収集/__pycache__/* :(exclude)**/__pycache__/*
+[PID] git_add: 25464
+[git_add] warning: in the working copy of 'ニュース収集/search_results.csv', LF will be replaced by CRLF the next time Git touches it
+[git_add] warning: in the working copy of 'ニュース収集/sheet2_llm_targets.csv', LF will be replaced by CRLF the next time Git touches it
+[EXIT] git_add: code=0
+[RUN] git_commit: git commit -m Auto update daily news (2026-05-08)
+[PID] git_commit: 6024
+[git_commit] [main 0b3e4c0] Auto update daily news (2026-05-08)
+[git_commit]  10 files changed, 6309 insertions(+), 340 deletions(-)
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260421.log"
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260422.log"
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260423.log"
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260424.log"
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260427.log"
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260428.log"
+[git_commit]  create mode 100644 "\343\203\213\343\203\245\343\203\274\343\202\271\345\217\216\351\233\206/logs/run_search_and_update_20260507.log"
+[EXIT] git_commit: code=0
+[RUN] git_push: git push origin main
+[PID] git_push: 22028
+[git_push] To github.com:naiso1/DailyNews.git
+[git_push]  ! [rejected]        main -> main (non-fast-forward)
+[git_push] error: failed to push some refs to 'github.com:naiso1/DailyNews.git'
+[git_push] hint: Updates were rejected because the tip of your current branch is behind
+[git_push] hint: its remote counterpart. If you want to integrate the remote changes,
+[git_push] hint: use 'git pull' before pushing again.
+[git_push] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+[EXIT] git_push: code=1
+[ERROR] Command failed: Command '['git', 'push', 'origin', 'main']' returned non-zero exit status 1.
+[END] 2026-05-08 01:39:40
+==================================================
+[INFO] 添付ファイル: 内装開発デイリーニュース（米国、欧州追加）　ChatGPT活用.msg
+[INFO] 確認メール送信完了: yuki.nakamura@toyoda-gosei.co.jp
+[INFO] Scheduled task settings refreshed. Wake target: 2026-05-08 23:57
+[INFO] Task refresh details: {"WakeAt":"2026-05-08T23:57:00","WakeInfo":"\r\nフォルダー\\\r\nホスト名:                                       DESKTOP-BSU6L19\r\nタスク名:                                       \\DailyNewsWakeHelper\r\n次回の実行時刻:                                 2026/05/08 23:57:00\r\n状態:                                           準備完了\r\nログオン モード:                                対話型/バックグラウンド\r\n前回の実行時刻:                                 1999/11/30 0:00:00\r\n前回の結果:                                     267011\r\n作成者:                                         N/A\r\n実行するタスク:                                 cmd.exe /c exit\r\n開始:                                           N/A\r\nコメント:                                       N/A\r\nスケジュールされたタスクの状態:                 有効\r\nアイドル時間:                                   無効\r\n電源管理:                                       \r\nユーザーとして実行:                             SYSTEM\r\n再度スケジュールされない場合はタスクを削除する: 無効\r\nタスクを停止するまでの時間:                     00:05:00\r\nスケジュール:                                 
+[INFO] Wake task registered: 2026-05-08 23:57
+[INFO] Processing complete. Suspending PC...
