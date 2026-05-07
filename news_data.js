@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-07 08:48";
+window.NEWS_UPDATED_AT = "2026-05-08 01:39";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -52015,6 +52015,399 @@ window.LOADED_NEWS_DATA = [
         tags: ["HMI", "AR", "AI"],
         country: "in",
         img: "https://www.indiacarnews.com/wp-content/uploads/2024/03/Hyundai-Creta-N-Line-Mileage.jpg",
+        note: ""
+    },
+    // 2026-04-28 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "cn802",
+        title: "奇瑞のArrizo Xコンセプトは、Cd値0.",
+        desc: "2026年北京モーターショーで公開されたArrizo Xは、Cd値0.196の空力設計と、鲲鹏エンジンおよび8AT変速機を採用。凌犀3.0コックピットとFalcon 700 ADASシステムを備え、次世代燃料・ハイブリッドセダンの技術デモとして位置づけられる。",
+        url: "https://carnewschina.com/2026/04/28/chery-arrizo-x-debuts-with-0-196-cd-drag-previews-next-gen-fuel-and-hybrid-sedan-strategy/",
+        source: "CarNewsChina - ICE",
+        date: "2026-04-28",
+        tags: ["AR", "コックピット", "安全"],
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/04/image-picsart-aiimageenhancer-19.png",
+        note: ""
+    },
+    // 2026-04-29 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "eu752",
+        title: "BMWとPolestar、侵襲性の低い安全技術で成功",
+        desc: "BMWのiX3とPolestar 3は、ドライバーの状態に連動する安全技術で侵襲性を低減。これにより、ドライバーがアシストシステムをオフにする必要がなくなり、より安全な運転環境が実現されている。",
+        url: "https://www.autoexpress.co.uk/opinion/369482/overbearing-safety-tech-annoying-bmw-and-polestar-have-nailed-it",
+        source: "Auto Express Car News",
+        date: "2026-04-29",
+        tags: ["AR", "安全"],
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1777470453/autoexpress/2026/04/Opinion - Polestar 3.jpg",
+        note: ""
+    },
+    {
+        id: "paper123",
+        title: "フィッシャー情報誘導型間接ToF画像化技術",
+        desc: "間接時間差（iToF）画像化は、能動照明による光輸送遅延の相関測定で絶対深度を取得し、物体検出に不可欠。本研究はFisher情報を用いた最適化手法を提案。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42055982/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260506173340&v=2.19.0.post6+133c1fe",
+        source: "PubMed - Search",
+        date: "2026-04-29",
+        tags: ["イルミ"],
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
+        note: ""
+    },
+    {
+        id: "in837",
+        title: "2026年メルセデス・ベンツ・BMW・アウディの高級車インフォテインメント比較",
+        desc: "2026年、メルセデス・ベンツのEQS 450は3画面構成で乗客向けディスプレイを備え、BMWのi7は31.5インチシアター画面を採用。アウディのQ8はCarPlay非対応など機能に保守的。各社のHMI・コックピット設計が差別化要因となる。",
+        url: "https://www.livemint.com/mint-lounge/business-of-life/luxury-car-india-mercedes-benz-bmw-audi-11777365276956.html",
+        source: "www.bing.com",
+        date: "2026-04-29",
+        tags: ["HMI", "AR", "ディスプレイ", "コネクテッド", "コックピット"],
+        country: "in",
+        img: "https://www.livemint.com/lm-img/img/2026/04/28/600x338/BMW_I7_interior_1777365741870_1777365756039.webp",
+        note: ""
+    },
+    // 2026-04-30 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "paper122",
+        title: "自動車ドアトリム用低コスト音響メタマテリアル板",
+        desc: "本研究は、自動車ドアトリムに用いられる低コスト・大量生産可能な音響メタマテリアル板を開発。既存の複雑構造と異なり、単一素材で道路騒音低減を実現し、音響伝播損失を改善する。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42062385/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260506173340&v=2.19.0.post6+133c1fe",
+        source: "PubMed - Search",
+        date: "2026-04-30",
+        tags: ["新素材", "音響"],
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
+        note: ""
+    },
+    {
+        id: "us782",
+        title: "Genesisは「ホワイトスペース」哲学で、過剰なスクリーンを避け高級内装を維持",
+        desc: "Genesisは「Beauty of White Space」哲学で、過剰なスクリーン採用を避け、物理ボタンを維持。G90は$92,700から、木目調とNappaレザーで高級感を保ち、JD Power調査でもスクリーン過多への不満が示されている。",
+        url: "https://carbuzz.com/genesis-winning-the-interior-war-without-increasing-screen-sizes/",
+        source: "CarBuzz",
+        date: "2026-04-30",
+        tags: ["ディスプレイ", "新素材"],
+        country: "us",
+        img: "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2026/04/genesis-g90-main.png?w=1600&h=900&fit=crop",
+        note: ""
+    },
+    {
+        id: "us784",
+        title: "2027年Chevy Traxのダッシュボード改修をスパイショットが示す",
+        desc: "2027年Chevy Traxの新型スパイショットで、コックピットの計器盤が改修されたことが判明。サブコンパクトクロスオーバーのインテリアに早期のヒントが示された。",
+        url: "https://gmauthority.com/blog/2026/04/2027-chevy-trax-spy-shot-shows-this-instrument-panel-revision/",
+        source: "GM Authority",
+        date: "2026-04-30",
+        tags: ["コックピット", "EV"],
+        country: "us",
+        img: "https://gmauthority.com/blog/wp-content/uploads/2026/04/2027-Chevrolet-Trax-Refresh-Prototype-Spy-Shots-April-2026-Interior-001-passenger-side-window-dash-720x480.jpg",
+        note: ""
+    },
+    {
+        id: "cn806",
+        title: "车载显示研究：多屏化进程放缓，OLED、MiniLED加速上车",
+        desc: "佐思汽研发布《2026年汽车显示屏及中控仪表行业研究报告》。 2026年，车载显示不再过度追求屏幕的多和大，而转向提升显示屏的光学性能、能效以及视觉体验。根据佐思汽研数据库统计，2025年，中国乘用车座舱显示屏装载量为4631.4万块，同比增长1.3%。作为对比，2024年该同比数据为8.",
+        url: "https://www.sohu.com/a/1016582650_121124477",
+        source: "搜狐",
+        date: "2026-04-30",
+        tags: ["ディスプレイ"],
+        country: "cn",
+        img: "https://q5.itc.cn/q_70/images03/20260430/c9e0c141a27b437bb3c5d17b89c1ad27.jpeg",
+        note: ""
+    },
+    // 2026-05-01 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp974",
+        title: "AIの進化と未来の可能性について",
+        desc: "人工知能の急速な発展は、医療や教育など社会のあらゆる分野に変革をもたらしています。しかし、その進展に伴う倫理的課題や雇用への影響も懸念されています。",
+        url: "https://motor-fan.jp/article/1460286/",
+        source: "Motor-Fan",
+        date: "2026-05-01",
+        tags: ["AI", "新素材"],
+        country: "jp",
+        img: "https://motor-fan.jp/wp-content/uploads/2026/04/Porsche911_Carrera_20260410_17.jpg?v=1776576456",
+        note: ""
+    },
+    {
+        id: "jp976",
+        title: "セーレン、メキシコ新工場竣工でカーシート用合成皮革生産能力増強",
+        desc: "セーレンの連結子会社は、メキシコグアナファト州アバソロ市に新工場を竣工。北米向け車両内装材事業を拡大し、カーシート用合成皮革の生産能力増強と拡販を目的としている。",
+        url: "https://response.jp/article/2026/05/01/410801.html",
+        source: "レスポンス（Response.jp）",
+        date: "2026-05-01",
+        tags: ["シート", "新素材"],
+        country: "jp",
+        img: "https://response.jp/imgs/ogp_f/2206768.jpg",
+        note: ""
+    },
+    {
+        id: "us781",
+        title: "ピアノブラックプラスチックが現代車内装の最悪トレンドとされる理由",
+        desc: "記事は、ピアノブラックプラスチックが車内装に多用される理由と、光沢による指紋や傷の目立ち、反射による眩しさといった欠点を指摘している。",
+        url: "https://www.msn.com/en-us/autos/news/why-piano-black-plastic-is-the-worst-design-trend-in-modern-car-interiors/ar-AA22e05X",
+        source: "CarBuzz",
+        date: "2026-05-01",
+        tags: ["内装"],
+        country: "us",
+        img: "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2026/04/piano-black-main.png?w=1600&h=900&fit=crop",
+        note: ""
+    },
+    // 2026-05-02 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "us786",
+        title: "2026年レクサスRX 450h+は実用性と高級感を両立",
+        desc: "2026年レクサスRX 450h+はプラグインハイブリッドで全電気走行距離38マイル。新グレードで価格が下がり、内装は高級感があり、14インチタッチスクリーン搭載。",
+        url: "https://newatlas.com/automotive/review-2026-lexus-rx-450h-plus",
+        source: "New Atlas",
+        date: "2026-05-02",
+        tags: ["ディスプレイ"],
+        country: "us",
+        img: "https://assets.newatlas.com/dims4/default/3bc1a18/2147483647/strip/true/crop/4000x2100+0+0/resize/1200x630!/quality/85/?url=https://newatlas-brightspot.s3.amazonaws.com/51/c1/a51b79964c64b114d3d8f0d80baf/2026-lexus-450h-1.jpg&na.image_optimisation=0",
+        note: ""
+    },
+    // 2026-05-03 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp975",
+        title: "日本未導入の新型Sクラス、富士スピードウェイパドックに展示",
+        desc: "富士スピードウェイAパドックに、1月29日発表の日本未導入新型Sクラスが展示された。MB.OSを採用した全面ディスプレイのフロントコクピットや、1886・2026・140の数字を記したボディが特徴。南米や北米、大阪など経由したワールドツアー車両である。",
+        url: "https://car.watch.impress.co.jp/docs/news/2106416.html",
+        source: "Car Watch",
+        date: "2026-05-03",
+        tags: ["ディスプレイ"],
+        country: "jp",
+        img: "https://car.watch.impress.co.jp/img/car/list/2106/416/004.jpg",
+        note: ""
+    },
+    {
+        id: "cn803",
+        title: "2026年奥迪原厂配置升级：岑木内饰，豪华质感与匠心工艺深度解析",
+        desc: "在奥迪原厂配置升级领域，岑木内饰正成为越来越多车主关注的焦点。2026年，随着德系豪华车用户对车内空间质感的要求不断提升，岑木内饰已从单纯的装饰件升级为衡量车辆豪华感的重要标尺。",
+        url: "https://news.sohu.com/a/1017683459_122697011",
+        source: "搜狐新闻",
+        date: "2026-05-03",
+        tags: ["内装"],
+        country: "cn",
+        img: "https://q8.itc.cn/images01/20260503/8d6a440763b94bc4933d38bfd82c8678.jpeg",
+        note: ""
+    },
+    // 2026-05-04 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "us783",
+        title: "5 個の DIY 車内アップグレード方法：スマート画面から香りまで",
+        desc: "車内を DIY でアップグレードする 5 つの方法を紹介。Madoec 9 インチ CarPlay 画面や Yorkim LED 電球、Winzwon LED ライト、BODEGA 車内冷蔵庫、NEXHC 香りディフューザーなど、具体的な製品名と価格を含め、コックピットや快適装備の改善策を解説。",
+        url: "https://www.slashgear.com/2160149/simple-ways-upgrade-car-interior/",
+        source: "SlashGear",
+        date: "2026-05-04",
+        tags: ["AR", "コックピット"],
+        country: "us",
+        img: "https://www.slashgear.com/img/gallery/simple-ways-upgrade-car-interior/l-intro-1777483836.jpg",
+        note: ""
+    },
+    {
+        id: "eu753",
+        title: "Kirkland, Baker McKenzie Headline Apollo's $2.",
+        desc: "Paul Weiss and O'Melveny & Myers are also advising in Forvia SE's sale of its business supplying such auto interior components as instrument panels, d",
+        url: "https://www.law.com/international-edition/2026/05/04/kirkland-baker-mckenzie-headline-apollos-21b-buy-of-french-auto-interiors-business/",
+        source: "Law.com",
+        date: "2026-05-04",
+        tags: ["AR"],
+        country: "eu",
+        img: "https://images.law.com/brightspot/69/1d/9c59027d46108b65dc84970d879c/hallavisteonclimatecontrolcorp-copy-jpg767x505.jpg",
+        note: ""
+    },
+    {
+        id: "eu754",
+        title: "New Mercedes-Benz CLA - luxury & style redefined",
+        desc: "Explore the new Mercedes-Benz CLA, featuring a larger design, luxurious interior, and cutting-edge technology for advanced comfort.",
+        url: "https://avondhupress.ie/new-mercedes-benz-cla-luxury-style-redefined/",
+        source: "The Avondhu",
+        date: "2026-05-04",
+        tags: ["HMI", "AR"],
+        country: "eu",
+        img: "https://avondhupress.ie/wp-content/uploads/2026/04/Mercedes-Benz-CLA.webp",
+        note: ""
+    },
+    {
+        id: "in840",
+        title: "BMW launches M440i xDrive Convertible in India at",
+        desc: "BMW Group India has launched the all-new M440i xDrive Convertible at an ex-showroom price of ₹1.09 crore, featuring a powerful 3.",
+        url: "https://auto.economictimes.indiatimes.com/news/passenger-vehicle/bmw-m440i-xdrive-convertible-launched-in-india-at-109-crore-specifications-and-features/130783200",
+        source: "ET Auto",
+        date: "2026-05-04",
+        tags: ["内装"],
+        country: "in",
+        img: "https://etimg.etb2bimg.com/thumb/msid-130783200,imgsize-91812,width-1200,height=627,overlay-etauto,resizemode-75/passenger-vehicle/bmw-m440i-xdrive-convertible-launched-in-india-at-109-crore-specifications-and-features.jpg",
+        note: ""
+    },
+    {
+        id: "in842",
+        title: "Hyundai Creta 2027 Spied Testing: AI Features, Lar",
+        desc: "The upcoming next-generation Hyundai Creta has been spotted testing with completely redesigned interiors, signaling a major shift toward a more tech-d",
+        url: "https://trak.in/stories/hyundai-creta-2027-spied-testing-ai-features-large-display-shift-in-gears-expected/",
+        source: "Trak.in",
+        date: "2026-05-04",
+        tags: ["AR", "AI"],
+        country: "in",
+        img: "https://trak.in/stories/wp-content/uploads/2026/05/Screenshot-2026-05-05-at-8.50.05-AM-1024x577.png",
+        note: ""
+    },
+    // 2026-05-05 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "in836",
+        title: "Sona Comstar、EV向け受注強化でM&A検討、最大2000億ルピー規模",
+        desc: "Sona ComstarはEV向け受注比率70%の23700億ルピーを保有し、技術・新製品分野でのM&A（最大2000億ルピー）を検討中。CFO Rohit Nandaは国内優先だが国際も視野に、鉄道事業1300億ルピーを含む受注を7〜10年で執行予定。",
+        url: "https://auto.economictimes.indiatimes.com/news/auto-components/sona-comstar-sets-sights-on-acquisitions-ev-focused-order-book-to-drive-growth/130814353",
+        source: "ETAuto - Auto Components",
+        date: "2026-05-05",
+        tags: ["AR", "EV"],
+        country: "in",
+        img: "https://etimg.etb2bimg.com/thumb/img-size-125382/130814353.cms",
+        note: ""
+    },
+    {
+        id: "jp972",
+        title: "充電ポケットをBRZに取り付け断念、車種適合が重要",
+        desc: "YouTube「りーちゃんねるBRZ」で検証。友人からもらった充電可能なシート隙間サイドポケットをスバル・BRZに取り付けようとしたが、隙間が狭く無理に押し込むと内装を傷つける恐れがあるため断念。車種適合確認の重要性を説く。",
+        url: "https://news.livedoor.com/article/detail/31188253/",
+        source: "ライブドアニュース",
+        date: "2026-05-05",
+        tags: ["シート", "EV"],
+        country: "jp",
+        img: "https://image.news.livedoor.com/newsimage/stf/d/6/d6f12_1845_612822a4_4342114c.jpg",
+        note: ""
+    },
+    {
+        id: "jp973",
+        title: "トヨタ新型「ヴォクシー」発売！新色ブラック×黒ガーニッシュ採用で精悍フェイスに進化！",
+        desc: "トヨタ新型「ヴォクシー」は2026年5月6日発売。2リッターガソリン廃止で1.8リッターハイブリッド一本化。新色「ニュートラルブラック」やピアノブラック加飾、12.3インチディスプレイ、デュアルパワースライドドア標準化など内外装・装備が拡充された。",
+        url: "https://kuruma-news.jp/post/1051609",
+        source: "くるまのニュース",
+        date: "2026-05-05",
+        tags: ["ディスプレイ"],
+        country: "jp",
+        img: "https://kuruma-news.jp/wp-content/uploads/2027/04/20260410_toyota_voxy_0000.jpg?v=1775805444",
+        note: ""
+    },
+    {
+        id: "us785",
+        title: "サムスン、200 PPIの伸縮可能ディスプレイで車内インストルメントクラスターを再定義",
+        desc: "サムスンディスプレイは、200 PPIの微細LED採用伸縮可能ディスプレイ2.0を展示。車速に応じた形状変化で、運転情報の可視性を維持しつつ、ソフトウェア定義車両の適応型コックピット実現を目指す。",
+        url: "https://www.digitaltrends.com/home-theater/samsung-reveals-sharp-stretchable-display-thats-ready-for-your-cars-dashboard/",
+        source: "Digital Trends",
+        date: "2026-05-05",
+        tags: ["ディスプレイ", "コックピット"],
+        country: "us",
+        img: "https://www.digitaltrends.com/tachyon/2026/05/Samsung-display-scaled.jpg?resize=1200%2C630",
+        note: ""
+    },
+    {
+        id: "us787",
+        title: "Kraiburg TPE、運転支援技術向けソフトタッチ素材で革新",
+        desc: "Kraiburgは自動車内装向けTPE素材を提供。運転支援技術向けにソフトタッチで耐久性の高い素材を開発し、快適性・安全性・デザインを向上させる。",
+        url: "https://www.plasticstoday.com/automotive-mobility/kraiburg-tpe-steers-innovation-in-in-car-robots",
+        source: "PlasticsToday",
+        date: "2026-05-05",
+        tags: ["AI", "新素材", "安全"],
+        country: "us",
+        img: "https://eu-images.contentstack.com/v3/assets/blt08823f5db61ded5d/blt435e34d8089643f0/69f9f7e20638c254a3aa652b/Car_Robot_1600x900.jpg?disable=upscale&width=1200&height=630&fit=crop",
+        note: ""
+    },
+    {
+        id: "us788",
+        title: "天馬、2026年SID展示会で次世代自動車ディスプレイ技術発表",
+        desc: "天馬は2026年5月5-7日のSID Display Weekで、49.6インチ曲線型ACRUSディスプレイやMicro-LED HUDなど次世代コックピット向けディスプレイ技術を展示する。",
+        url: "https://www.lelezard.com/en/news-22213219.html",
+        source: "Le Lézard",
+        date: "2026-05-05",
+        tags: ["HUD", "ディスプレイ", "コックピット"],
+        country: "us",
+        img: "https://www.lelezard.com/img/pr_sections/transportation.jpg",
+        note: ""
+    },
+    {
+        id: "cn807",
+        title: "5月19日首发 最长续航430km 斯柯达最便宜纯电SUV来了!",
+        desc: "Epiq是斯柯达首款落地Modern Solid设计语言的量产车。车辆搭载5.3英寸六边形数字仪表+13英寸悬浮式中控屏。同时，车辆还配备双辐式方向盘，屏幕下方设细长出风口与触控快捷按键，兼顾科技与易用性。开放式储物区带手机无线充电，纤细中央通道，提升前排通透感。",
+        url: "https://www.autohome.com.cn/news/202605/1314108.html",
+        source: "汽车之家",
+        date: "2026-05-05",
+        tags: ["内装"],
+        country: "cn",
+        img: "http://www2.autoimg.cn/chejiahaodfs/g33/M08/E8/F8/620x0_1_autohomecar__Chto52n5oLWAO83gAAUNWRSjicA005.jpg",
+        note: ""
+    },
+    {
+        id: "in838",
+        title: "2027 Hyundai Creta interior spied with bigger touc",
+        desc: "The new freestanding unit is likely based on the brand's new in-car infotainment software platform - Pleos Connect.",
+        url: "https://www.autocarindia.com/car-news-amp/2027-hyundai-creta-interior-spied-with-bigger-touchscreen-439638",
+        source: "Autocar India",
+        date: "2026-05-05",
+        tags: ["AR", "AI"],
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260505_103918_e7b181e0.png",
+        note: ""
+    },
+    {
+        id: "in841",
+        title: "Force Motors rolls out new Traveller N Range; pans",
+        desc: "The Traveller N introduces changes to the driver cockpit and passenger cabin, including a digital instrument cluster and a 9-inch infotainment unit.",
+        url: "https://www.fortuneindia.com/auto/force-motors-rolls-out-new-traveller-n-range-pans-full-transition-from-existing-line-up/135895",
+        source: "Fortune India",
+        date: "2026-05-05",
+        tags: ["AI"],
+        country: "in",
+        img: "https://media.fortuneindia.com/fortune-india/2026-05-05/gsp0e5o2/New-Force-Traveller-N.jpg?w=1200&ar=40:21&auto=format,compress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+        note: ""
+    },
+    // 2026-05-06 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "eu751",
+        title: "政府、キーレス盗難対策でジャマー禁止を決定",
+        desc: "政府がキーレスエントリー車の盗難対策として、信号ジャマーやリレー装置の禁止を決定した。ロンドンでは盗難の半数以上が電子機器によるもので、全国で年間約7万5千台が失われている。",
+        url: "https://www.autoexpress.co.uk/opinion/369521/lawmakers-are-finally-tackling-keyless-car-theft-paul-barker",
+        source: "Auto Express",
+        date: "2026-05-06",
+        tags: ["内装"],
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--G151FJu7--/t_rss_image_w_845/v1778072501/autoexpress/2026/05/Opinion%20-%20keyless%20car%20theft.jpg",
+        note: ""
+    },
+    {
+        id: "cn804",
+        title: "喜报! 红旗数字座舱HMI斩获2026年缪斯设计奖金奖!",
+        desc: "缪斯设计奖由国际奖项协会（IAA）主办，是全球创意设计领域最具影响力的奖项之一，被誉为"设计界奥斯卡"。该奖项覆盖产品、数字艺术等多领域，评审团由全球200 余位权威专家组成，以双盲评审、严苛标准著称，代表着全球设计领域的极高水准。2026年赛事参赛范围覆盖全球100多个国家和地区，参赛作品超万件。",
+        url: "https://www.sohu.com/a/1019024565_222650",
+        source: "搜狐",
+        date: "2026-05-06",
+        tags: ["HMI"],
+        country: "cn",
+        img: "https://q6.itc.cn/q_70/images03/20260506/d57dfb5547364e3e8c760cd50790b7e8.jpeg",
+        note: ""
+    },
+    {
+        id: "cn805",
+        title: "理想汽车完整展示理想L9 Livis座舱设计",
+        desc: "5月6日，理想汽车官方正式对外披露了全新理想L9 Livis的内饰设计细节。官方称，新车座舱以"家的最高标准"为理念打造，定位新一代旗舰级智能空间。 图片来源：理想汽车 此次公布的信息显示，理想L9 Livis采用星环环抱式座舱布局，车内配备超宽全景屏、神奇移动屏以及安全岛扶手。",
+        url: "https://www.msn.cn/zh-cn/autos/电动汽车/理想汽车完整展示理想l9-livis座舱设计/ar-AA22uAnp",
+        source: "盖世汽车",
+        date: "2026-05-06",
+        tags: ["コネクテッド", "安全"],
+        country: "cn",
+        img: "https://img-s.msn.cn/tenant/amp/entityid/AA22uKfi.img?w=531&h=693&m=4&q=100",
+        note: ""
+    },
+    {
+        id: "in839",
+        title: "Tesla Model Y Booking Details Simplified: Complete",
+        desc: "Key feature highlights in the Model Y include a panoramic glass roof, 16-inch touchscreen infotainment system, powered front and rear seats, an 8-inch",
+        url: "https://www.cardekho.com/india-car-news/tesla-model-y-booking-details-simplified-complete-booking-process-and-details-explained-35982.htm",
+        source: "CarDekho",
+        date: "2026-05-06",
+        tags: ["AR", "AI"],
+        country: "in",
+        img: "https://stimg2.cardekho.com/images/carNewsimages/userimages/35981/1778067440993/GeneralNew.jpg",
         note: ""
     },
 ];
