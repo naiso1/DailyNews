@@ -1,37 +1,5 @@
 window.DAILY_INSIGHTS = [
     {
-        date: "2026-05-06",
-        analysis: {
-            jp: "日本市場では、**物理スイッチ回帰**と**新素材**の両輪で高級感と利便性を追求する動きが加速している[jp964][jp968]。アウディやメルセデスがタッチパネルから物理スイッチへ回帰し、操作性と信頼性を再評価している[jp963][jp968]。一方で、ブリッドは高触感素材「ヌグレ」を用いたシートで快適性を高め[jp965]、ランボルギーニは極限のカスタマイズ性を提示している[jp966]。EV化の進展に伴い、内装の質感と機能性の両立が競争の鍵となる[jp962]。コスト競争力と独自のカスタマイズ性を組み合わせた製品展開が期待される[jp970]。",
-            cn: "中国市場ではAIアシスタントの車載統合とHMI進化が急進展。小米SU7 [cn798] や次世代Apple CarPlay [cn799] が事例。豊田合成はミリ波レーダー透過エンブレムを開発し、ADASとデザインの融合を図る。北京モーターショーの盛況 [cn793] やEV車載AI動向 [cn796] からEV普及と高付加価値化が進む。今後はAI連携による快適性 [cn801] と環境配慮素材のコスト競争力両立が必須。量産対応モジュール設計とリサイクル素材活用が鍵となる。",
-            in: "インド市場では、Hybrid車の需要がトヨタとマールティ・スズキにより牽引されており [in829,in832]、特にファミリー層向け7人乗りモデルの投入が競争の鍵となる。ヒュンダイは30周年を記念し新車26台を投入する計画で [in830,in833]、次世代クレタでは大型ディスプレイとAI技術の採用が確認されている [in834]。また、xAIのGrokとCarPlayの統合計画は、車内での自然な音声対話（HMI）が重要視されていることを示唆する [in826]。これにより、先進技術と快適性を融合した内装開発が求められている。",
-            us: "米国高級EV市場では、サステナブルな内装素材（Lotus、Lexus、Hyundai）や、物理ボタンとAI連携を両立するHMI設計が競争の鍵となっている [us773][us774][us778]。豊田合成のインモールドコート技術は、ガラス面との一体感を実現し、シームレスなコックピット追求への供給拡大が期待される [us773][us774]。EV静寂性による触覚フィードバックの再評価も進み、物理ボタンとAI表示のバランスが今後の重要課題となる [us778]。",
-            eu: "欧州自動車内装の動向は、デザインと技術の多様化を示す。ステラントISは「驚き」をテーマに新設計を進めるが[eu741]、Peugeot E-408は変更を最小限に留める[eu742]。Skoda Epiqはリサイクル素材とModern Solidデザインを採用[eu744]。BMWやBYDはHMIやEV技術に注力[eu745]。一方、レンジローバーSVは限定高級内装で伝統的ラグジュアリーを追求[eu748]。欧州市場では、持続可能性、デジタル化、そして伝統的高級感の融合が内装開発の鍵となる。",
-        },
-        ideas: {
-            jp: [
-                { id: 846, img: "images/idea_846.png", title: "着せ替えコンソール", desc: "物理スイッチの安心感を残しながら、表皮・加飾・スイッチ配置を後から選べるモジュール式コンソール。量産部品を共通化しつつ、ユーザーは自分仕様の内装を手頃に選べるうれしさがあります。", imagePrompt: "Square photorealistic render of a modular center console with interchangeable tactile switch panels, warm gray recycled trim, visible swappable inserts, inside a compact Japanese EV cabin, close three-quarter view, soft daylight." },
-                { id: 847, img: "images/idea_847.png", title: "質感スイッチパネル", desc: "型内塗装の凹凸テクスチャーを活かし、物理スイッチ周辺だけ触感を変える加飾パネル。操作部が手探りで分かりやすく、量産車でも上質なカスタム感を楽しめるうれしさがあります。", imagePrompt: "Square photorealistic macro render of a textured dashboard switch panel, raised tactile surface around physical buttons, deep satin black and muted copper accents, no text, premium sports car interior lighting." },
-            ],
-            cn: [
-                { id: 848, img: "images/idea_848.png", title: "循環素材AIコンソール", desc: "リサイクル樹脂と植物由来素材を使ったEV向けコンソール。AIが座席位置や照明を整え、家族ごとの好みを記憶します。環境に配慮しながら快適設定がすぐ呼び出せるうれしさがあります。", imagePrompt: "Square photorealistic render of an eco-friendly EV center console made from speckled recycled resin and plant fiber, subtle embedded sensors, soft green ambient light, flat-floor cabin, clean minimal composition." },
-                { id: 849, img: "images/idea_849.png", title: "光る安全エンブレム", desc: "ミリ波レーダーを妨げない透過エンブレムに、柔らかなイルミを重ねるアイデア。ADAS部品を隠すのではなく魅せる加飾に変え、安全機能とブランド感を同時に感じられるうれしさがあります。", imagePrompt: "Square photorealistic close-up of a translucent illuminated interior emblem integrated with hidden ADAS sensor module, floating on a dark dashboard panel, cool blue edge lighting, luxury cockpit, no logo text." },
-            ],
-            in: [
-                { id: 850, img: "images/idea_850.png", title: "家族席コネクト", desc: "3列シート車の後席向けに、充電・空調・音声操作をまとめた小型ドック。子どもや高齢者も声で温度やナビ補助を頼めるため、長距離移動で家族全員が快適に過ごせるうれしさがあります。", imagePrompt: "Square photorealistic render of a rear-seat family console dock between second-row seats, USB-C ports, small voice assistant light ring, air vents, durable dark fabric, Indian seven-seat MPV cabin, bright practical lighting." },
-                { id: 851, img: "images/idea_851.png", title: "ウェルネス車室", desc: "乗員の疲れをセンサーで見て、照明・香り・送風を穏やかに整えるコックピット。暑い地域でも乗車直後から落ち着ける空間をつくり、通勤や送迎の疲れが軽くなるうれしさがあります。", imagePrompt: "Square photorealistic render of a wellness cockpit with soft amber ambient lighting, discreet millimeter-wave sensor in overhead console, aroma diffuser near dashboard, ventilated seats, calm tropical evening mood." },
-            ],
-            us: [
-                { id: 852, img: "images/idea_852.png", title: "再生樹脂グロス", desc: "再生樹脂の表面に微細な凹凸と透明コートを重ね、高級車にも合う艶感へ変えるインパネ加飾。環境配慮を見せながら安っぽく見えず、触れて納得できるうれしさがあります。", imagePrompt: "Square photorealistic render of a glossy recycled-resin instrument panel insert, fine speckled texture under clear coat, physical climate buttons nearby, American premium EV interior, crisp studio reflections." },
-                { id: 853, img: "images/idea_853.png", title: "触感一体パネル", desc: "ガラス調パネルの裏に物理ボタンと触覚フィードバックを組み込み、見た目は滑らかでも操作は確実にする提案。夜間や走行中でも迷わず押せて、きれいさと安心感を両立できます。", imagePrompt: "Square photorealistic render of seamless glass-like center stack with hidden tactile buttons subtly illuminated, fingertip pressing one physical-feeling zone, dark luxury EV cabin, high contrast lighting, no text." },
-            ],
-            eu: [
-                { id: 854, img: "images/idea_854.png", title: "自然繊維トリム", desc: "セルロースナノファイバーを配合した軽量トリム材。木目とは違う繊維の奥行きと温かみを出し、欧州EVの静かな車室に自然素材らしい落ち着きと触れる楽しさを加えます。", imagePrompt: "Square photorealistic render of a natural fiber interior door trim panel, visible woven cellulose texture, matte earth tones, Scandinavian European EV cabin, soft side light, material-focused composition." },
-                { id: 855, img: "images/idea_855.png", title: "やわらか発光材", desc: "植物由来素材に光導波路を組み込み、ドアやインパネから均一に淡く光らせる加飾材。派手なLEDではなく素材自体が光るため、夜の車内に安心感と特別感が生まれます。", imagePrompt: "Square photorealistic night render of bio-based interior trim softly glowing from within, door panel and dashboard accent line, warm diffuse light through translucent fiber material, elegant European SUV cabin, no text." },
-            ],
-        }
-    },
-{
         date: "2026-04-27",
         analysis: {
             jp: "日本市場では、トヨタ紡織のCROWN SEAT[jp952]やデリカミニ/eKスペースの価格差[jp954]など、**機能性**と**ブランド価値**の両立が課題。また、トヨタ「ハイランダー」の英語仕様ナビ[jp953]やアウディの物理スイッチ復活[jp961]に代表されるように、**操作性**と**直感的操作**のバランスが重視される。消費者は、メルセデスのMBUXハイパースクリーン[jp958]や日本精機のHUD[LumieHUD][jp955]から、**デジタル技術**と**安心感**を両立した製品を求めつつ、**抗菌・消臭**など**健康面**への関心も高まっている。",
