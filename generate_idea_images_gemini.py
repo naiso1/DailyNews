@@ -83,7 +83,16 @@ def build_prompt(title: str, desc: str, image_prompt: str = "", api_key: str = "
     import re as _re
     clean_title = _re.sub(r'\*+', '', title).strip()
     clean_desc = _re.sub(r'\*+', '', desc).strip()
-    return f"{clean_title}\n\n{clean_desc}"
+    clean_desc = _re.sub(r'\[[a-z]{2,5}\d+\]', '', clean_desc)
+    clean_desc = _re.sub(r'\s+', ' ', clean_desc)[:700]
+    return (
+        "Create one square photorealistic concept render of an automotive interior product. "
+        "Do not include any text, labels, logos, captions, UI words, watermarks, or people. "
+        "Show the physical object clearly in a modern vehicle cabin with premium materials, "
+        "realistic lighting, detailed surfaces, and production-ready industrial design.\n\n"
+        f"Concept name: {clean_title}\n"
+        f"Design brief: {clean_desc}"
+    )
 
 
 def update_image_path(js_text: str, idea_id: int, new_path: str) -> str:
