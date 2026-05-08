@@ -435,7 +435,6 @@ def _clean_idea_field(text: str, max_len: int = 400) -> str:
 
 
 def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
-    history_texts = [f"{x.get('title', '')} {x.get('desc', '')}".strip() for x in history_ideas]
     picked = []
     picked_texts = []
     for idea in raw_ideas or []:
@@ -446,10 +445,6 @@ def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
             continue
         cand = f"{title} {desc}"
         duplicate = False
-        for ht in history_texts:
-            if _similarity(cand, ht) >= 0.72:
-                duplicate = True
-                break
         if not duplicate:
             for pt in picked_texts:
                 if _similarity(cand, pt) >= 0.78:
@@ -726,7 +721,6 @@ def make_country_prompt(
         id_text = f"id={news_id} / " if news_id else ""
         summary_lines.append(f"- {id_text}{it['title']} / {it['desc']} / {it.get('tags', '')}")
     summary = "\n".join(summary_lines)
-    duplicate_guard = build_duplicate_guard_text(history_ideas or [], max_items=20)
     angles = load_idea_angles()
     angle = random.choice(angles) if angles else ""
     angle_instruction = f"    - 【今回の発想切り口】1件目は「{angle}」の視点で発想すること（ただしニュース内容と関連させること）\n" if angle else ""
@@ -743,7 +737,6 @@ def make_country_prompt(
     【対象国】{country}
     【ニュース概要】
     {summary}
-    {duplicate_guard}
     出力は必ずJSONのみで返してください。
     JSON以外の文字や説明、コードフェンスは一切出力しないでください。
     形式:
