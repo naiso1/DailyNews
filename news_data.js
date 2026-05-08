@@ -52953,12 +52953,12 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in852",
-        title: "新しいJSONのタイトルです",
-        desc: "これは新しいJSONのサマリーです。",
+        title: "マルチ・スズキ、2026年に新型4車投入へ。7人乗りSUVや小型MPVも",
+        desc: "マルチ・スズキは市場シェア回復に向け、2030-31年までに28モデルへ拡充する計画。2026年にはBrezza/Baleno改良、サブ4m級MPV、7人乗りGrand Vitaraを投入する見通しで、ガソリン、ハイブリッド、CNG、EVなど複数パワートレイン戦略を進める。",
         url: "https://www.indiacarnews.com/news/4-new-maruti-cars-launching-in-2026-brezza-facelift-to-7-seater-suv-67794/",
         source: "IndiaCarNews",
         date: "2026-05-07",
-        tags: ["内装"],
+        tags: ["SUV", "MPV", "ハイブリッド"],
         country: "in",
         img: "https://www.indiacarnews.com/wp-content/uploads/2025/12/Representational-Image-1.webp",
         note: ""

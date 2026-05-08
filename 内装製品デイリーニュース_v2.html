@@ -1,0 +1,3480 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内装製品デイリーニュース [v2]</title>
+    <meta name="description" content="生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け。">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+/* ============================================================
+   Atelier Interior Theme v2 — v1カラー + ランキングホバー + 参照サムネイル
+   ============================================================ */
+
+:root {
+    --bg: #050a12;
+    --panel: rgba(16, 22, 35, 0.88);
+    --muted: #9aa4b8;
+    --text: #e9edf5;
+    --accent: #7df1c2;
+    --accent-2: #6fa7ff;
+    --accent-3: #ff8f6f;
+    --accent-4: #c79dff;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+    --radius: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(125, 241, 194, 0.06), transparent 30%),
+        radial-gradient(circle at 82% 8%,  rgba(111, 167, 255, 0.08), transparent 35%),
+        radial-gradient(circle at 50% 95%, rgba(199, 157, 255, 0.05), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 24px 20px 100px;
+}
+
+/* ── Header ─────────────────────────────── */
+header {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    background: linear-gradient(120deg, rgba(125, 241, 194, 0.06), rgba(111, 167, 255, 0.06));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+h1 {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, var(--text), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.lead { color: var(--muted); font-size: 14px; }
+
+/* ── Filters ─────────────────────────────── */
+.filters {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+.filter-row:last-child { margin-bottom: 0; }
+
+.filter-label { font-size: 13px; font-weight: 600; color: var(--muted); min-width: 80px; }
+
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+
+.tag-filter-container { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+
+.tag-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: 34px;
+    scrollbar-width: none;
+    min-width: 0;
+}
+.tag-chips::-webkit-scrollbar { display: none; }
+.tag-chips.expanded { flex-wrap: wrap; max-height: none; overflow: visible; }
+.tag-toggle { white-space: nowrap; flex: 0 0 auto; }
+.tag-chips .chip { flex: 0 0 auto; white-space: nowrap; }
+
+@media (max-width: 768px) {
+    .tag-filter-container { flex-direction: column; align-items: stretch; }
+    .tag-chips { flex-wrap: wrap; overflow-x: hidden; max-height: 120px; }
+    .tag-chips.expanded { max-height: none; }
+    .tag-toggle { align-self: flex-start; }
+}
+
+/* ── Region Badge ────────────────────────── */
+.region-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    margin-right: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    vertical-align: middle;
+}
+.region-badge.world { background: linear-gradient(135deg, #7df1c2, #6fa7ff); color: #0c1224; }
+.region-badge.jp    { background: linear-gradient(135deg, #ff6b6b, #ffd93d); color: #0c1224; }
+.region-badge.cn    { background: linear-gradient(135deg, #de2910, #ffde00); color: #fff; }
+.region-badge.in    { background: linear-gradient(135deg, #ff9933, #138808); color: #fff; }
+.region-badge.us    { background: linear-gradient(135deg, #3c3b6e, #b22234); color: #fff; }
+.region-badge.eu    { background: linear-gradient(135deg, #003399, #ffcc00); color: #fff; }
+
+/* ── Icons ───────────────────────────────── */
+.globe-icon {
+    display: inline-block;
+    width: 18px; height: 18px;
+    background: url('images/globe_icon.png') no-repeat center center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.title-globe-icon {
+    height: 32px; width: auto;
+    vertical-align: middle;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+/* ── Chips ───────────────────────────────── */
+.chip {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--muted);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+.chip:hover { background: rgba(255, 255, 255, 0.08); }
+.chip.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0c1224;
+    border-color: transparent;
+}
+
+.chip .new-count {
+    margin-left: 6px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    border: 1px solid rgba(255, 120, 120, 0.6);
+    color: #ff8a8a;
+    background: rgba(255, 120, 120, 0.12);
+}
+.chip .new-count.hidden { display: none; }
+.chip.active .new-count { color: #0c1224; background: rgba(255, 255, 255, 0.7); border-color: transparent; }
+
+.chip.country-jp.active  { background: linear-gradient(135deg, #ff6b6b, #ffd93d); }
+.chip.country-cn.active  { background: linear-gradient(135deg, #7df1c2, #6fa7ff); }
+.chip.country-in.active  { background: linear-gradient(135deg, #ff9933, #138808); }
+.chip.country-us.active  { background: linear-gradient(135deg, #3c3b6e, #b22234); }
+.chip.country-eu.active  { background: linear-gradient(135deg, #003399, #ffcc00); }
+.chip.country-world.active { background: linear-gradient(135deg, #c79dff, #6fa7ff); }
+
+/* ── Flag Icons ──────────────────────────── */
+.flag-icon {
+    height: 18px; width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    object-fit: contain;
+    border-radius: 2px;
+}
+.flag-icon[class*="flag-"] { width: 24px; height: 16px; background-size: cover; background-repeat: no-repeat; background-position: center; }
+.paper-icon { width: 24px; height: 16px; display: inline-flex; align-items: center; justify-content: center; margin-right: 6px; font-size: 14px; line-height: 1; }
+.flag-jp { background-image: url('images/icon_jp.png'); }
+.flag-cn { background-image: url('images/icon_cn.png'); }
+.flag-in { background-image: url('images/icon_in.png'); }
+.flag-us { background-image: url('images/icon_us.png'); }
+.flag-eu { background-image: url('images/icon_eu.png'); }
+
+/* ── Date / Stats ────────────────────────── */
+.date-inputs { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.date-inputs input {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 13px;
+}
+.date-inputs span { color: var(--muted); font-size: 13px; }
+
+.stats { font-size: 13px; color: var(--muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.stats strong { color: var(--accent); }
+.author-line { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+.analysis-toggle {
+    padding: 4px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--muted);
+    font-size: 11px;
+    cursor: pointer;
+}
+.analysis-toggle:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); }
+
+/* ── Access Analytics Panel ──────────────── */
+.analysis-panel {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+.analysis-panel.hidden { display: none; }
+.analysis-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.analysis-panel-title { font-size: 16px; font-weight: 700; }
+.analysis-panel-sub { font-size: 12px; color: var(--muted); }
+
+.analysis-chart { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 12px; align-items: end; min-height: 160px; }
+.chart-bar { display: grid; grid-template-rows: 1fr auto auto auto; align-items: end; justify-items: center; height: 160px; gap: 6px; }
+.chart-bar .bar {
+    width: 100%; max-width: 36px;
+    border-radius: 10px 10px 6px 6px;
+    background: linear-gradient(180deg, rgba(125, 241, 194, 0.95), rgba(125, 241, 194, 0.2));
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+    transition: height 0.2s ease;
+}
+.chart-bar .bar-value { font-size: 12px; font-weight: 600; color: var(--text); }
+.chart-bar .bar-label { font-size: 11px; color: var(--muted); }
+.chart-bar .bar-dow   { font-size: 10px; color: rgba(154, 164, 184, 0.8); }
+.chart-empty { font-size: 13px; color: var(--muted); }
+
+/* ── Jump Anchor ─────────────────────────── */
+.jump-anchor { scroll-margin-top: 90px; }
+
+/* ── Ranking ─────────────────────────────── */
+.ranking-back { max-width: 1400px; margin: 0 auto 20px; display: flex; justify-content: flex-end; }
+.ranking-back.hidden { display: none; }
+.ranking-wrapper { max-width: 1400px; margin: 0 auto 20px; display: block; gap: 16px; }
+.ranking-wrapper.hidden { display: none; }
+.ranking-section { margin: 0; padding: 20px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); }
+.ranking-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.ranking-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.ranking-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ranking-sort-label { font-size: 11px; color: var(--muted); }
+.ranking-sort { padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.04); color: var(--text); font-size: 11px; }
+.ranking-sort:focus { outline: 2px solid rgba(125, 241, 194, 0.6); outline-offset: 2px; }
+.ranking-sort option { background: #0f1726; color: #e6edf7; }
+.ranking-body.collapsed { overflow: hidden; }
+.ranking-body { transition: max-height 0.25s ease; }
+.ranking-list { display: grid; gap: 10px; }
+.ranking-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+}
+.ranking-left { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.ranking-thumb { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(135deg, #1a2332, #0d1520); flex: 0 0 44px; }
+.ranking-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ranking-rank { width: 28px; text-align: center; font-weight: 800; color: var(--accent); }
+.ranking-title-text { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ranking-meta { font-size: 11px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-start; min-width: 0; }
+.ranking-stat { font-size: 11px; color: var(--muted); }
+.ranking-actions { display: flex; gap: 8px; align-items: center; justify-self: end; }
+.ranking-actions .action-btn { height: 30px; font-size: 11px; padding: 4px 10px; }
+.ranking-item:hover { border-color: rgba(125, 241, 194, 0.35); background: rgba(125, 241, 194, 0.04); }
+.card-highlight { outline: 2px solid rgba(125, 241, 194, 0.6); box-shadow: 0 0 0 3px rgba(125, 241, 194, 0.15); }
+.ranking-empty { color: var(--muted); font-size: 13px; }
+
+/* ── Quick Nav ───────────────────────────── */
+.quick-nav { position: fixed; right: 24px; bottom: 24px; display: flex; flex-direction: column; gap: 8px; z-index: 60; }
+.quick-nav a {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: rgba(15, 22, 32, 0.92);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+.quick-nav a:hover { border-color: rgba(125, 241, 194, 0.6); color: var(--accent); }
+
+@media (max-width: 1100px) { .ranking-wrapper { grid-template-columns: 1fr; } }
+@media (max-width: 800px) {
+    .quick-nav { right: 12px; bottom: 12px; }
+    .ranking-thumb { width: 40px; height: 40px; flex-basis: 40px; }
+}
+
+/* ── News Grid ───────────────────────────── */
+.grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.card:hover { transform: translateY(-3px); border-color: rgba(125, 241, 194, 0.3); }
+.card.hidden { display: none; }
+
+.thumb { position: relative; padding-top: 52%; overflow: hidden; background: linear-gradient(135deg, #1a2332, #0d1520); }
+.thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
+.card:hover .thumb img { opacity: 1; }
+
+.fallback-overlay {
+    position: absolute; inset: 0;
+    display: none; align-items: center; justify-content: center;
+    color: #e3e9f4; font-weight: 800; font-size: 16px;
+    background: linear-gradient(135deg, rgba(76, 195, 255, 0.14), rgba(13, 21, 32, 0.9));
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.country-badge {
+    position: absolute; top: 6px; left: 6px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    font-size: 11px; font-weight: 600; color: #fff;
+    z-index: 2; display: flex; align-items: center; gap: 4px;
+}
+
+.image-note {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: #fff; font-size: 14px; font-weight: 700;
+    padding: 8px 16px; text-align: center;
+    border-radius: 8px; pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; z-index: 2;
+}
+
+/* ── New Badge ───────────────────────────── */
+.new-badge {
+    position: absolute; top: 6px; left: 6px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+    border-radius: 8px;
+    font-size: 11px; font-weight: 700; color: #fff;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255, 77, 77, 0.4);
+    animation: pulse 2s infinite;
+    z-index: 4;
+}
+.thumb .new-badge + .country-badge { top: 34px; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.05); }
+}
+
+.idea-new-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+    border-radius: 6px;
+    font-size: 10px; font-weight: 700; color: #fff;
+    margin-left: 10px; text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+.date-badge {
+    position: absolute; top: 10px; right: 10px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    font-size: 11px; color: var(--muted);
+}
+
+.id-badge-thumb { display: none; }
+.id-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(125, 241, 194, 0.15);
+    border: 1px solid rgba(125, 241, 194, 0.3);
+    border-radius: 6px;
+    font-size: 10px; font-weight: 600; color: var(--muted);
+    font-family: monospace;
+}
+
+/* ── Card Content ────────────────────────── */
+.content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.title {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.desc { color: #b8c4d6; font-size: 13px; line-height: 1.6; }
+
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.card-tag {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    background: rgba(125, 241, 194, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(125, 241, 194, 0.2);
+}
+
+/* ── Actions (like/comment row) — 元の設計に忠実 ── */
+.actions {
+    margin-top: auto;
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 12px;
+    color: #0c1224;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 6px 20px rgba(125, 241, 194, 0.2);
+    transition: transform 0.15s ease;
+    white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: #b0b8c4;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+}
+.action-btn:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+.action-btn.liked { color: #ff4d4d; background: rgba(255, 77, 77, 0.1); }
+.action-btn.active-comment { color: #4facfe; background: rgba(79, 172, 254, 0.1); }
+
+.action-btn.favorite-btn.active {
+    color: #ffd540;
+    background: rgba(255, 213, 64, 0.18);
+    border: 1px solid rgba(255, 213, 64, 0.45);
+}
+.favorite-toggle.active {
+    color: #ffd540;
+    border: 1px solid rgba(255, 213, 64, 0.45);
+    background: rgba(255, 213, 64, 0.18);
+}
+
+.source {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: #666;
+}
+.read-count { font-size: 11px; color: var(--muted); }
+
+/* ── Empty State ─────────────────────────── */
+.empty-state { max-width: 1400px; margin: 60px auto; text-align: center; color: var(--muted); }
+.empty-state h3 { font-size: 20px; margin-bottom: 10px; color: var(--text); }
+
+@media (max-width: 700px) {
+    body { padding: 16px 12px 80px; }
+    .filter-row { flex-direction: column; align-items: flex-start; }
+    .filter-label { min-width: auto; margin-bottom: 4px; }
+    .grid { grid-template-columns: 1fr; }
+    .ranking-item { grid-template-columns: 1fr; align-items: flex-start; }
+    .ranking-title-text { -webkit-line-clamp: 3; }
+    .ranking-actions { width: 100%; justify-self: flex-start; }
+}
+
+/* ── Favorites ───────────────────────────── */
+.favorites-actions {
+    margin: 12px 0 20px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.favorites-actions.hidden { display: none; }
+.favorites-actions-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+.favorites-actions-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.favorite-select-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.favorite-select { accent-color: #ffd540; }
+
+/* ── Comments ────────────────────────────── */
+.comment-section {
+    display: none;
+    margin-top: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+}
+.comment-section.open { display: block; animation: slideDown 0.3s ease-out; }
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.comment-list { max-height: 200px; overflow-y: auto; margin-bottom: 12px; font-size: 13px; }
+.comment-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; }
+.comment-user { font-weight: bold; color: var(--accent); font-size: 11px; margin-bottom: 2px; }
+.comment-text { color: #ddd; line-height: 1.4; }
+
+.comment-input-area { display: flex; gap: 8px; }
+.comment-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    color: #fff;
+    font-size: 13px;
+}
+.comment-submit {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-btn { position: absolute; right: 0; top: 0; background: none; border: none; color: #666; cursor: pointer; font-size: 14px; padding: 4px; }
+.delete-btn:hover { color: #ff4d4d; }
+
+/* ── Analysis & Ideas Sections ───────────── */
+.analysis-section {
+    max-width: 1400px;
+    margin: 48px auto 0;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(125, 241, 194, 0.05), rgba(111, 167, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+}
+.section-icon { font-size: 24px; }
+.analysis-text { color: #cfd6e3; font-size: 15px; line-height: 1.8; }
+
+.ideas-section {
+    max-width: 1400px;
+    margin: 32px auto 60px;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(199, 157, 255, 0.04), rgba(111, 167, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+}
+
+/* ── Target Badge ────────────────────────── */
+.target-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(125, 241, 194, 0.15);
+    border: 1px solid rgba(125, 241, 194, 0.3);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+/* ── Summary Toggle ──────────────────────── */
+.summary-wrapper { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.summary-btn {
+    background: none; border: none;
+    color: var(--accent); cursor: pointer;
+    font-size: 0.85rem; padding: 0;
+    display: flex; align-items: center; gap: 0.25rem;
+    transition: color 0.2s;
+}
+.summary-btn:hover { text-decoration: underline; }
+.summary-btn::after { content: '▼'; font-size: 0.7em; transition: transform 0.3s; }
+.summary-btn.open::after { transform: rotate(180deg); }
+.summary-content {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    font-size: 0.9rem; line-height: 1.6;
+    margin-top: 0; opacity: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+.summary-content.open { margin-top: 0.5rem; padding: 0.75rem; opacity: 1; }
+
+/* ── Analysis Grid / Cards ───────────────── */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+.analysis-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.analysis-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.analysis-card:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
+.analysis-card.region-jp { border-top: 3px solid #ff4d4d; }
+.analysis-card.region-cn { border-top: 3px solid #ffcc00; }
+.analysis-card.region-in { border-top: 3px solid #ff9933; }
+.analysis-card.region-us { border-top: 3px solid #3c3b6e; }
+.analysis-card.region-eu { border-top: 3px solid #003399; }
+
+.flag-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px; }
+.flag-emoji { font-size: 32px; line-height: 1; }
+.country-label { font-size: 18px; font-weight: 700; color: var(--text); opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+.analysis-text-body { font-size: 15px; line-height: 1.8; color: #d0d0d0; text-align: justify; }
+.analysis-text-body strong { color: #fff; background: rgba(125, 241, 194, 0.15); padding: 0 4px; border-radius: 4px; font-weight: 600; }
+.analysis-ref-group { display: inline; margin-top: 0; font-size: 11px; color: var(--muted); white-space: normal; overflow-wrap: anywhere; word-break: break-word; line-height: 1.6; }
+.analysis-ref-link { color: #8ec5ff; font-size: 11px; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── Social Actions ──────────────────────── */
+.social-actions {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 16px; padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Region Section (Ideas) ──────────────── */
+.region-section {
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.region-section.jp { border-left: 4px solid #ff4d4d; background: linear-gradient(90deg, rgba(255, 77, 77, 0.05), transparent); }
+.region-section.cn { border-left: 4px solid #ffcc00; background: linear-gradient(90deg, rgba(255, 204, 0, 0.05), transparent); }
+.region-section.in { border-left: 4px solid #ff9933; background: linear-gradient(90deg, rgba(255, 153, 51, 0.05), transparent); }
+.region-section.us { border-left: 4px solid #3c3b6e; background: linear-gradient(90deg, rgba(60, 59, 110, 0.05), transparent); }
+.region-section.eu { border-left: 4px solid #003399; background: linear-gradient(90deg, rgba(0, 51, 153, 0.05), transparent); }
+
+.region-title-wrapper { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.region-title-text {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.05em;
+}
+
+/* ── Ideas Grid ──────────────────────────── */
+.ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* カードは縦方向に積む: [タイトル行] → [画像｜本文] */
+.idea-card {
+    background: rgba(30, 34, 45, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;   /* ← 縦積み */
+    gap: 14px;
+    padding: 18px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.idea-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(30, 34, 45, 0.8);
+}
+
+/* タイトル行: 番号バッジ + タイトルテキスト（横並び） */
+.idea-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* コンテンツ行: 画像 | 説明文（横並び） */
+.idea-body {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.idea-image-wrapper {
+    flex: 0 0 42%;
+    max-width: 42%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #000;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;   /* 画像を切らずに見せる */
+}
+.idea-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.idea-card:hover .idea-img { transform: scale(1.03); }
+
+.idea-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.idea-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--accent), #4facfe);
+    color: #000; font-weight: 900;
+    border-radius: 8px;
+    width: 30px; height: 30px; font-size: 14px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(125, 241, 194, 0.3);
+}
+.idea-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    /* 横書き固定 */
+    writing-mode: horizontal-tb;
+}
+.idea-desc { color: #b0b8c4; font-size: 13px; line-height: 1.75; margin: 0; }
+.idea-refs { font-size: 11px; color: var(--muted); margin-top: 8px; }
+.idea-ref-link { color: #8ec5ff; text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 900px) {
+    .ideas-grid { grid-template-columns: 1fr; }
+    .idea-body { flex-direction: column; }
+    .idea-image-wrapper { flex: none; max-width: 100%; width: 100%; aspect-ratio: 16 / 9; }
+    .idea-title { font-size: 1.1rem; }
+}
+
+        /* ── Citation Thumbnail ──────────────────── */
+        .analysis-ref-group {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+        /* クリッカブルなサムネイルカード */
+        .ref-card {
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0;
+            border-radius: 7px;
+            overflow: hidden;
+            vertical-align: middle;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+            line-height: 0;
+        }
+        .ref-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            border-color: rgba(125, 241, 194, 0.5);
+        }
+        .ref-thumb {
+            width: 88px;
+            height: 58px;
+            object-fit: cover;
+            display: block;
+        }
+        /* 画像なし記事の代替表示 */
+        .ref-card-noimg {
+            width: 88px;
+            height: 58px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--muted);
+            text-align: center;
+            padding: 4px;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="top" class="jump-anchor">
+        <h1><img id="titleIcon" class="title-globe-icon" src="images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
+        <p class="lead">生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け</p>
+        <div class="access-counter"
+            style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px; flex-wrap:wrap;">
+            <span>📊 総アクセス数: <strong id="totalVisits" style="color:var(--accent);">-</strong></span>
+            <span>📅 本日: <strong id="todayVisits" style="color:var(--accent-2);">-</strong></span>
+            <span>🗓️ 昨日: <strong id="yesterdayVisits" style="color:var(--accent-3);">-</strong></span>
+            <span>🕒 更新日時: <strong id="lastUpdated" style="color:var(--accent-4);">-</strong></span>
+            <button class="analysis-toggle" id="analysisToggle" type="button" aria-expanded="false">アクセス推移</button>
+        </div>
+        <div class="author-line">作成者：IE開発　内装開発室　中村</div>
+    </header>
+
+    <div class="filters">
+        <div class="filter-row">
+            <span class="filter-label">🌐 地域</span>
+            <div class="filter-chips" id="countryFilters">
+                <span class="chip country-world active" data-country="world"><img src="images/icon_world.png"
+                        class="flag-icon" alt="World"> 世界版<span class="new-count" data-country="world"></span></span>
+                <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本<span
+                        class="new-count" data-country="jp"></span></span>
+                <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国<span
+                        class="new-count" data-country="cn"></span></span>
+                <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド<span
+                        class="new-count" data-country="in"></span></span>
+                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国<span
+                        class="new-count" data-country="us"></span></span>
+                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州<span
+                        class="new-count" data-country="eu"></span></span>
+                <span class="chip country-paper" data-country="paper"><span class="paper-icon">📄</span>論文<span
+                        class="new-count" data-country="paper"></span></span>
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">🏷️ ジャンル</span>
+            <div class="tag-filter-container">
+                <div class="filter-chips tag-chips" id="tagFilters">
+                    <span class="chip active" data-tag="all">すべて</span>
+                </div>
+                <button class="chip tag-toggle" id="tagToggle" type="button" aria-expanded="false">もっと見る</button>
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">📅 日付</span>
+            <div class="date-inputs">
+                <input type="date" id="dateFrom" value="">
+                <span>〜</span>
+                <input type="date" id="dateTo" value="">
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">🔍 検索</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="キーワード検索..."
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; width: 240px;">
+            <select id="sortOrder"
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
+                <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
+                <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
+                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド→米国→欧州→論文）</option>
+                <option value="likes-desc" style="background: #1e222d; color: #fff;">いいね順</option>
+                <option value="comments-desc" style="background: #1e222d; color: #fff;">コメント数順</option>
+            </select>
+            <button id="favoritesToggle" class="chip favorite-toggle" type="button" aria-pressed="false"
+                style="margin-left: 12px;">★ お気に入り</button>
+        </div>
+        <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
+    </div>
+
+    <section class="favorites-actions hidden" id="favoritesActions">
+        <div class="favorites-actions-title">★ お気に入り共有</div>
+        <div class="favorites-actions-controls">
+            <span id="favoritesSelectedCount">選択: 0</span>
+            <button class="chip" id="favoritesSelectAll" type="button">全選択</button>
+            <button class="chip" id="favoritesClearSelection" type="button">全解除</button>
+            <button class="chip" id="favoritesExportCsv" type="button">CSV出力（選択）</button>
+            <button class="chip" id="favoritesExportCsvAll" type="button">CSV出力（全て）</button>
+            <button class="chip" id="favoritesEmailShare" type="button">メール共有（選択）</button>
+            <button class="chip" id="favoritesEmailShareAll" type="button">メール共有（全て）</button>
+        </div>
+    </section>
+
+    <section class="analysis-panel hidden" id="accessAnalytics">
+        <div class="analysis-panel-header">
+            <div class="analysis-panel-title">日別アクセス分析</div>
+            <div class="analysis-panel-sub" id="accessChartRange">データ範囲</div>
+        </div>
+        <div class="analysis-chart" id="accessChart">
+            <div class="chart-empty">データを取得中...</div>
+        </div>
+    </section>
+
+    <div class="ranking-wrapper" id="rankingWrapper">
+        <section class="ranking-section" id="rankingSection">
+            <div class="ranking-header">
+                <div class="ranking-title">🏆 人気ニュースランキング</div>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="rankingScope">期間</label>
+                    <select id="rankingScope" class="ranking-sort">
+                        <option value="weekly">1週間以内</option>
+                        <option value="all">今まで</option>
+                    </select>
+                    <label class="ranking-sort-label" for="rankingSort">並び替え</label>
+                    <select id="rankingSort" class="ranking-sort">
+                        <option value="score">総合</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                        <option value="reads">閲覧数</option>
+                    </select>
+                    <button class="chip ranking-toggle" id="rankingToggle" type="button"
+                        aria-expanded="false">開く</button>
+                </div>
+            </div>
+            <div class="ranking-body collapsed" id="rankingBody">
+                <div class="ranking-list" id="rankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="ranking-wrapper" id="paperRankingWrapper">
+        <section class="ranking-section" id="paperRankingSection">
+            <div class="ranking-header">
+                <div class="ranking-title">📚 人気論文ランキング</div>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="paperRankingScope">期間</label>
+                    <select id="paperRankingScope" class="ranking-sort">
+                        <option value="6m">6か月以内</option>
+                        <option value="weekly">1週間以内</option>
+                        <option value="all">今まで</option>
+                    </select>
+                    <label class="ranking-sort-label" for="paperRankingSort">並び替え</label>
+                    <select id="paperRankingSort" class="ranking-sort">
+                        <option value="score">総合</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                        <option value="reads">閲覧数</option>
+                    </select>
+                    <button class="chip ranking-toggle" id="paperRankingToggle" type="button"
+                        aria-expanded="false">開く</button>
+                </div>
+            </div>
+            <div class="ranking-body collapsed" id="paperRankingBody">
+                <div class="ranking-list" id="paperRankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="ranking-back hidden" id="rankingBack">
+        <button class="chip" id="rankingBackBtn" type="button">← 前の表示に戻る</button>
+    </div>
+
+    <div id="newsSection" class="jump-anchor"></div>
+    <section class="grid" id="newsGrid"></section>
+    <div style="text-align: center; margin: 2rem 0;">
+        <button id="loadMoreBtn" onclick="loadMore()" class="btn" style="display: none;">もっと見る</button>
+    </div>
+
+
+
+    <div id="insightsContainer"></div>
+
+    <nav class="quick-nav" aria-label="ページ内ナビゲーション">
+        <a href="#top">トップ</a>
+        <a href="#newsSection">ニュース</a>
+        <a href="#analysisSection">考察</a>
+        <a href="#ideasSection">企画</a>
+    </nav>
+
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, runTransaction, doc, getDoc, setDoc, updateDoc, arrayUnion, onSnapshot, increment, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEKRdUl_mOYjBGLKY35IFWLAHEyDH3Og8",
+            authDomain: "daily-news-9a418.firebaseapp.com",
+            projectId: "daily-news-9a418",
+            storageBucket: "daily-news-9a418.firebasestorage.app",
+            messagingSenderId: "965463819558",
+            appId: "1:965463819558:web:89e6c8907aec51155bede7",
+            measurementId: "G-L82JZQYM25"
+        };
+
+        let db;
+        function initFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                console.log("Firebase Connected");
+                // Load all interactions for sorting
+                loadInteractions();
+            } catch (e) {
+                console.error("Firebase Connection Failed:", e);
+            }
+        }
+
+        // Global interactions data for sorting
+        window.interactionsData = {};
+        window.useLocalInteractions = false;
+        let localInteractionsCache = null;
+        const LOCAL_ACCESS_KEY = "local_access_stats";
+        const LOCAL_INTERACTIONS_KEY = "local_interactions";
+        const LOCAL_READS_KEY = "local_article_reads";
+        const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date";
+        let accessStatsCache = null;
+
+        function loadLocalAccessStats() {
+            try {
+                return JSON.parse(localStorage.getItem(LOCAL_ACCESS_KEY)) || { total: 0, daily: {} };
+            } catch {
+                return { total: 0, daily: {} };
+            }
+        }
+
+        function saveLocalAccessStats(data) {
+            try {
+                localStorage.setItem(LOCAL_ACCESS_KEY, JSON.stringify(data));
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+        function getJstDateKey(offsetDays = 0) {
+            const target = new Date(Date.now() + JST_OFFSET_MS + offsetDays * 24 * 60 * 60 * 1000);
+            const y = target.getUTCFullYear();
+            const m = String(target.getUTCMonth() + 1).padStart(2, "0");
+            const d = String(target.getUTCDate()).padStart(2, "0");
+            return `${y}-${m}-${d}`;
+        }
+
+        function getTodayKey() {
+            return getJstDateKey(0);
+        }
+
+        function getYesterdayKey() {
+            return getJstDateKey(-1);
+        }
+
+        function parseDateKeyToUTC(dateKey) {
+            if (!dateKey) return null;
+            const parts = dateKey.split("-").map(Number);
+            if (parts.length < 3 || !parts[0]) return null;
+            return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+        }
+
+        function hasCountedAccessToday() {
+            try {
+                return localStorage.getItem(LOCAL_ACCESS_MARK_KEY) === getTodayKey();
+            } catch {
+                // Ignore storage errors
+            }
+            try {
+                return sessionStorage.getItem(LOCAL_ACCESS_MARK_KEY) === getTodayKey();
+            } catch {
+                // Ignore storage errors
+            }
+            return false;
+        }
+
+        function markAccessCountedToday() {
+            try {
+                localStorage.setItem(LOCAL_ACCESS_MARK_KEY, getTodayKey());
+            } catch {
+                // Ignore storage errors
+            }
+            try {
+                sessionStorage.setItem(LOCAL_ACCESS_MARK_KEY, getTodayKey());
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        function bumpLocalAccessStats() {
+            if (hasCountedAccessToday()) {
+                return loadLocalAccessStats();
+            }
+            const today = getTodayKey();
+            const data = loadLocalAccessStats();
+            data.total = (data.total || 0) + 1;
+            data.daily = data.daily || {};
+            data.daily[today] = (data.daily[today] || 0) + 1;
+
+            const cutoffKey = getJstDateKey(-30);
+            Object.keys(data.daily).forEach(date => {
+                if (date < cutoffKey) delete data.daily[date];
+            });
+
+            saveLocalAccessStats(data);
+            markAccessCountedToday();
+            return data;
+        }
+
+        function renderAccessStats(data) {
+            const today = getTodayKey();
+            const yesterdayKey = getYesterdayKey();
+            document.getElementById("totalVisits").textContent = (data.total || 0).toLocaleString();
+            document.getElementById("todayVisits").textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
+            document.getElementById("yesterdayVisits").textContent = ((data.daily && data.daily[yesterdayKey]) || 0).toLocaleString();
+            accessStatsCache = data;
+            window.accessStatsCache = data;
+            renderAccessChart(data);
+        }
+
+        function buildAccessSeries(data) {
+            const daily = (data && data.daily) ? data.daily : {};
+            const keys = Object.keys(daily);
+            if (!keys.length) return [];
+            const dates = keys
+                .map(key => parseDateKeyToUTC(key))
+                .filter(d => d && !Number.isNaN(d.getTime()));
+            if (!dates.length) return [];
+            const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
+            const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
+            const series = [];
+            for (let d = new Date(minDate); d <= maxDate; d.setUTCDate(d.getUTCDate() + 1)) {
+                const y = d.getUTCFullYear();
+                const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+                const day = String(d.getUTCDate()).padStart(2, "0");
+                const key = `${y}-${m}-${day}`;
+                const label = `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
+                const dow = ["日", "月", "火", "水", "木", "金", "土"][d.getUTCDay()];
+                series.push({ key, label, dow, value: daily[key] || 0 });
+            }
+            return series;
+        }
+
+        function renderAccessChart(data) {
+            const chart = document.getElementById("accessChart");
+            if (!chart) return;
+            const series = buildAccessSeries(data || accessStatsCache || loadLocalAccessStats());
+            if (!series.length) {
+                chart.innerHTML = '<div class="chart-empty">データがありません。</div>';
+                return;
+            }
+            const range = document.getElementById("accessChartRange");
+            if (range) {
+                const start = series[0].key.replace(/-/g, "/");
+                const end = series[series.length - 1].key.replace(/-/g, "/");
+                range.textContent = `${start}〜${end} (${series.length}日)`;
+            }
+            const max = Math.max(...series.map(item => item.value), 1);
+            chart.innerHTML = series.map(item => {
+                const height = Math.max(8, Math.round((item.value / max) * 100));
+                return `
+                    <div class="chart-bar">
+                        <div class="bar" style="height:${height}%"></div>
+                        <div class="bar-value">${item.value}</div>
+                        <div class="bar-label">${item.label}</div>
+                        <div class="bar-dow">${item.dow || ""}</div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function loadLocalInteractions() {
+            if (localInteractionsCache) return localInteractionsCache;
+            try {
+                localInteractionsCache = JSON.parse(localStorage.getItem(LOCAL_INTERACTIONS_KEY)) || {};
+            } catch {
+                localInteractionsCache = {};
+            }
+            return localInteractionsCache;
+        }
+
+        function saveLocalInteractions(data) {
+            localInteractionsCache = data;
+            try {
+                localStorage.setItem(LOCAL_INTERACTIONS_KEY, JSON.stringify(data));
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        function getLocalInteractionData(itemId) {
+            const data = loadLocalInteractions();
+            return data[itemId] || { likes: 0, comments: [] };
+        }
+
+        function setLocalInteractionData(itemId, value) {
+            const data = loadLocalInteractions();
+            data[itemId] = value;
+            saveLocalInteractions(data);
+            window.interactionsData[itemId] = {
+                likes: value.likes || 0,
+                comments: (value.comments || []).length,
+                reads: value.reads || getLocalReadCount(itemId)
+            };
+        }
+
+        function loadLocalReads() {
+            try {
+                return JSON.parse(localStorage.getItem(LOCAL_READS_KEY)) || {};
+            } catch {
+                return {};
+            }
+        }
+
+        function saveLocalReads(data) {
+            try {
+                localStorage.setItem(LOCAL_READS_KEY, JSON.stringify(data));
+            } catch {
+                // Ignore storage errors
+            }
+        }
+
+        function hasReadToday(itemId, dateKey) {
+            const data = loadLocalReads();
+            return Boolean(data[itemId] && data[itemId][dateKey]);
+        }
+
+        function markReadToday(itemId, dateKey) {
+            const data = loadLocalReads();
+            if (!data[itemId]) data[itemId] = {};
+            data[itemId][dateKey] = true;
+            saveLocalReads(data);
+        }
+
+        function getLocalReadCount(itemId) {
+            const data = loadLocalReads();
+            const entry = data[itemId] || {};
+            return Object.keys(entry).length;
+        }
+        window.getLocalReadCount = getLocalReadCount;
+
+        async function trackArticleRead(itemId) {
+            if (!itemId) return;
+            const today = getTodayKey();
+            if (hasReadToday(itemId, today)) return;
+            markReadToday(itemId, today);
+
+            if (!db || window.useLocalInteractions) {
+                const local = getLocalInteractionData(itemId);
+                setLocalInteractionData(itemId, local);
+                if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+                scheduleRankingUpdate();
+                return;
+            }
+            try {
+                const ref = doc(db, "interactions", itemId);
+                await runTransaction(db, async (transaction) => {
+                    const snap = await transaction.get(ref);
+                    if (!snap.exists()) {
+                        transaction.set(ref, { likes: 0, comments: [], reads: 1 });
+                    } else {
+                        const data = snap.data();
+                        const reads = (data.reads || 0) + 1;
+                        transaction.update(ref, { reads });
+                    }
+                });
+                if (!window.interactionsData[itemId]) {
+                    window.interactionsData[itemId] = { likes: 0, comments: 0, reads: 0 };
+                }
+                window.interactionsData[itemId].reads = (window.interactionsData[itemId].reads || 0) + 1;
+                if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            } catch (e) {
+                console.warn("Read count update failed:", e);
+            }
+        }
+        window.trackArticleRead = trackArticleRead;
+
+        const hoverReadTimers = new Map();
+
+        function startHoverRead(itemId) {
+            if (!itemId) return;
+            const today = getTodayKey();
+            if (hasReadToday(itemId, today)) return;
+            if (hoverReadTimers.has(itemId)) return;
+            const timer = setTimeout(() => {
+                hoverReadTimers.delete(itemId);
+                trackArticleRead(itemId);
+            }, 5000);
+            hoverReadTimers.set(itemId, timer);
+        }
+
+        function cancelHoverRead(itemId) {
+            const timer = hoverReadTimers.get(itemId);
+            if (!timer) return;
+            clearTimeout(timer);
+            hoverReadTimers.delete(itemId);
+        }
+
+        function setupHoverReadTracking() {
+            const grid = document.getElementById("newsGrid");
+            if (!grid || grid.__hoverReadBound) return;
+            grid.__hoverReadBound = true;
+            grid.addEventListener("mouseover", (event) => {
+                const card = event.target.closest(".card");
+                if (!card || !grid.contains(card)) return;
+                if (card.contains(event.relatedTarget)) return;
+                const itemId = card.id ? card.id.replace("card-", "") : "";
+                startHoverRead(itemId);
+            });
+            grid.addEventListener("mouseout", (event) => {
+                const card = event.target.closest(".card");
+                if (!card || !grid.contains(card)) return;
+                if (card.contains(event.relatedTarget)) return;
+                const itemId = card.id ? card.id.replace("card-", "") : "";
+                cancelHoverRead(itemId);
+            });
+        }
+        window.setupHoverReadTracking = setupHoverReadTracking;
+
+        function enableLocalInteractions() {
+            window.useLocalInteractions = true;
+            const data = loadLocalInteractions();
+            window.interactionsData = {};
+            Object.keys(data).forEach(id => {
+                window.interactionsData[id] = {
+                    likes: data[id].likes || 0,
+                    comments: (data[id].comments || []).length,
+                    reads: data[id].reads || getLocalReadCount(id)
+                };
+            });
+            if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            renderAllRankings();
+        }
+
+        async function loadInteractions() {
+            if (!db) {
+                enableLocalInteractions();
+                return;
+            }
+            try {
+                const snapshot = await getDocs(collection(db, "interactions"));
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    window.interactionsData[docSnap.id] = {
+                        likes: data.likes || 0,
+                        comments: (data.comments || []).length,
+                        reads: data.reads || 0
+                    };
+                });
+                console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
+                renderAllRankings();
+                if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            } catch (e) {
+                console.error("Failed to load interactions:", e);
+                enableLocalInteractions();
+            }
+        }
+
+        // アクセスカウンター（Firebase連携）
+        async function updateAccessCounter() {
+            if (window.__accessCounterInFlight || window.__accessCounterCounted) return;
+            window.__accessCounterInFlight = true;
+            try {
+                if (!db) throw new Error("db-not-ready");
+                const today = getTodayKey();
+                const counterRef = doc(db, "pageStats", "accessCounter");
+
+                if (hasCountedAccessToday()) {
+                    const snapshot = await getDoc(counterRef);
+                    if (snapshot.exists()) {
+                        renderAccessStats(snapshot.data());
+                    } else {
+                        renderAccessStats(loadLocalAccessStats());
+                    }
+                    window.__accessCounterCounted = true;
+                    return;
+                }
+                markAccessCountedToday();
+
+                // トランザクションでカウンターをインクリメント
+                await runTransaction(db, async (transaction) => {
+                    const docSnap = await transaction.get(counterRef);
+                    if (!docSnap.exists()) {
+                        transaction.set(counterRef, {
+                            total: 1,
+                            daily: { [today]: 1 },
+                            lastUpdated: today
+                        });
+                    } else {
+                        const data = docSnap.data();
+                        const newTotal = (data.total || 0) + 1;
+                        const daily = data.daily || {};
+                        daily[today] = (daily[today] || 0) + 1;
+
+                        // 古い日付のデータを削除（30日以上前）
+                        const cutoff = new Date();
+                        cutoff.setDate(cutoff.getDate() - 30);
+                        Object.keys(daily).forEach(date => {
+                            if (new Date(date) < cutoff) delete daily[date];
+                        });
+
+                        transaction.update(counterRef, {
+                            total: newTotal,
+                            daily: daily,
+                            lastUpdated: today
+                        });
+                    }
+                });
+
+                // 最新のカウントを取得して表示
+                const snapshot = await getDoc(counterRef);
+                if (snapshot.exists()) {
+                    renderAccessStats(snapshot.data());
+                }
+                window.__accessCounterCounted = true;
+                console.log("Access counter updated");
+            } catch (error) {
+                console.log("Access counter fallback:", error.message);
+                const data = bumpLocalAccessStats();
+                renderAccessStats(data);
+                window.__accessCounterCounted = true;
+            } finally {
+                window.__accessCounterInFlight = false;
+            }
+        }
+        window.updateAccessCounter = updateAccessCounter;
+
+        async function resetTodayAccessCount() {
+            const today = getTodayKey();
+            const resetLocal = () => {
+                const data = loadLocalAccessStats();
+                const prev = (data.daily && data.daily[today]) || 0;
+                data.total = Math.max(0, (data.total || 0) - prev);
+                data.daily = data.daily || {};
+                data.daily[today] = 0;
+                saveLocalAccessStats(data);
+                renderAccessStats(data);
+                markAccessCountedToday();
+                window.__accessCounterCounted = true;
+            };
+
+            if (!db) {
+                resetLocal();
+                return;
+            }
+            try {
+                const counterRef = doc(db, "pageStats", "accessCounter");
+                await runTransaction(db, async (transaction) => {
+                    const docSnap = await transaction.get(counterRef);
+                    if (!docSnap.exists()) {
+                        transaction.set(counterRef, {
+                            total: 0,
+                            daily: { [today]: 0 },
+                            lastUpdated: today
+                        });
+                        return;
+                    }
+                    const data = docSnap.data();
+                    const daily = data.daily || {};
+                    const prev = daily[today] || 0;
+                    daily[today] = 0;
+                    const total = Math.max(0, (data.total || 0) - prev);
+                    transaction.update(counterRef, {
+                        total,
+                        daily,
+                        lastUpdated: today
+                    });
+                });
+
+                const snapshot = await getDoc(counterRef);
+                if (snapshot.exists()) {
+                    renderAccessStats(snapshot.data());
+                }
+                markAccessCountedToday();
+                window.__accessCounterCounted = true;
+            } catch (e) {
+                console.warn("Reset today access failed:", e);
+                resetLocal();
+            }
+        }
+        window.resetTodayAccessCount = resetTodayAccessCount;
+        window.initFirebase = initFirebase;
+
+        function setupAccessAnalyticsToggle() {
+            const toggle = document.getElementById("analysisToggle");
+            const panel = document.getElementById("accessAnalytics");
+            if (!toggle || !panel) return;
+            toggle.addEventListener("click", () => {
+                const willShow = panel.classList.contains("hidden");
+                panel.classList.toggle("hidden", !willShow);
+                toggle.textContent = willShow ? "閉じる" : "アクセス推移";
+                toggle.setAttribute("aria-expanded", willShow ? "true" : "false");
+                if (willShow) renderAccessChart(accessStatsCache || loadLocalAccessStats());
+            });
+        }
+        window.setupAccessAnalyticsToggle = setupAccessAnalyticsToggle;
+        window.renderAccessChart = renderAccessChart;
+
+        function refreshInteractionCounts() {
+            const interactions = window.interactionsData || {};
+            document.querySelectorAll(".card").forEach(card => {
+                if (!card.id || !card.id.startsWith("card-")) return;
+                const itemId = card.id.slice(5);
+                const data = interactions[itemId];
+                if (!data) return;
+                const btnLike = card.querySelector('.action-btn[onclick*="toggleLike"] .count');
+                if (btnLike) btnLike.textContent = data.likes || 0;
+                const btnComment = card.querySelector('.btn-comment .count');
+                if (btnComment) btnComment.textContent = data.comments || 0;
+                const readEl = card.querySelector('.read-count');
+                if (readEl) {
+                    const reads = (typeof data.reads === "number")
+                        ? data.reads
+                        : (window.getLocalReadCount ? window.getLocalReadCount(itemId) : 0);
+                    readEl.textContent = `閲覧 ${reads || 0}`;
+                }
+            });
+        }
+        window.refreshInteractionCounts = refreshInteractionCounts;
+
+        // Live Listeners Registry
+        const unsubscribes = {};
+        const liveElements = {}; // { btnLike, btnComment, commentList, lastData }
+
+
+        window.deleteComment = async (itemId, commentIndex) => {
+            if (!confirm('コメントを削除しますか？')) return;
+
+            if (!db || window.useLocalInteractions) {
+                const data = getLocalInteractionData(itemId);
+                const comments = data.comments || [];
+                if (commentIndex >= 0 && commentIndex < comments.length) {
+                    comments.splice(commentIndex, 1);
+                    data.comments = comments;
+                    setLocalInteractionData(itemId, data);
+                    if (liveElements[itemId]) {
+                        liveElements[itemId].lastData = data;
+                        renderItem(itemId);
+                    }
+                }
+                return;
+            }
+
+            const ref = getItemRef(itemId);
+
+            try {
+                // To delete from array, we normally need the EXACT object.
+                // But here we only have index. Firestore arrayRemove requires exact object match.
+                // So we must: Read -> Modify -> Write.
+
+                await runTransaction(db, async (transaction) => {
+                    const docSnap = await transaction.get(ref);
+                    if (!docSnap.exists()) return;
+
+                    const data = docSnap.data();
+                    const comments = data.comments || [];
+
+                    if (commentIndex >= 0 && commentIndex < comments.length) {
+                        const newComments = [...comments];
+                        newComments.splice(commentIndex, 1);
+                        transaction.update(ref, { comments: newComments });
+                    }
+                });
+
+                // UI update will happen via snapshot
+            } catch (e) {
+                console.error("Delete Error", e);
+                alert("削除に失敗しました");
+            }
+        };
+
+        // Helper to get doc ref
+        const getItemRef = (itemId) => doc(db, "interactions", itemId);
+
+        const renderItem = (itemId) => {
+            const els = liveElements[itemId];
+            const data = els.lastData;
+            if (!els || !data) return;
+
+            // Update Like Count
+            if (els.btnLike) {
+                const countSpan = els.btnLike.querySelector('.count');
+                if (countSpan) countSpan.textContent = data.likes || 0;
+            }
+            // Update Comment Count
+            if (els.btnComment) {
+                const countSpan = els.btnComment.querySelector('.count');
+                const comments = data.comments || [];
+                if (countSpan) countSpan.textContent = comments.length;
+            }
+            // Update Comment List
+            if (els.commentList) {
+                const comments = data.comments || [];
+                els.commentList.innerHTML = comments.map((c, i) => `
+                        <div class="comment-item">
+                            <div class="comment-user">${c.user || 'Guest'} <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${c.date || ''}</span></div>
+                            <div class="comment-text">${c.text}</div>
+                            <button class="delete-btn" onclick="deleteComment('${itemId}', ${i})">×</button>
+                        </div>
+                     `).join('');
+            }
+            window.interactionsData[itemId] = {
+                likes: data.likes || 0,
+                comments: (data.comments || []).length
+            };
+            if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
+        };
+
+        // Listen for updates on an item (Realtime)
+        window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
+            if (!db || window.useLocalInteractions) {
+                if (!liveElements[itemId]) liveElements[itemId] = {};
+                if (btnLike) liveElements[itemId].btnLike = btnLike;
+                if (btnComment) liveElements[itemId].btnComment = btnComment;
+                if (commentList) liveElements[itemId].commentList = commentList;
+                liveElements[itemId].lastData = getLocalInteractionData(itemId);
+                renderItem(itemId);
+                return;
+            }
+
+            // Register/Update elements
+            if (!liveElements[itemId]) liveElements[itemId] = {};
+            if (btnLike) liveElements[itemId].btnLike = btnLike;
+            if (btnComment) liveElements[itemId].btnComment = btnComment;
+            if (commentList) liveElements[itemId].commentList = commentList;
+
+            // If we already have data, render immediately to cover the newly added element
+            if (liveElements[itemId].lastData) {
+                renderItem(itemId);
+            }
+
+            if (unsubscribes[itemId]) return;
+
+            unsubscribes[itemId] = onSnapshot(getItemRef(itemId), (docSnap) => {
+                if (docSnap.exists()) {
+                    liveElements[itemId].lastData = docSnap.data();
+                    renderItem(itemId);
+                } else {
+                    liveElements[itemId].lastData = { likes: 0, comments: [] };
+                    renderItem(itemId);
+                }
+            });
+        };
+        window.toggleLike = async (itemId, btn) => {
+            // Check Local State for "Liked by me" visual (Local Storage)
+            const storageKey = `liked_${itemId}`;
+            const isLiked = localStorage.getItem(storageKey);
+
+            // Optimistic UI - update class and count immediately
+            btn.classList.toggle('liked');
+            const countSpan = btn.querySelector('.count');
+            const currentCount = parseInt(countSpan.textContent) || 0;
+            const val = isLiked ? -1 : 1;
+            const nextCount = Math.max(0, currentCount + val);
+            countSpan.textContent = nextCount;
+            const existing = window.interactionsData[itemId] || { likes: 0, comments: 0 };
+            existing.likes = nextCount;
+            window.interactionsData[itemId] = existing;
+            if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
+
+            if (isLiked) localStorage.removeItem(storageKey);
+            else localStorage.setItem(storageKey, "true");
+
+            if (!db || window.useLocalInteractions) {
+                const local = getLocalInteractionData(itemId);
+                local.likes = nextCount;
+                setLocalInteractionData(itemId, local);
+                return;
+            }
+
+            const ref = getItemRef(itemId);
+
+            try {
+                // Update DB
+                // Ensure doc exists
+                await setDoc(ref, { last_update: new Date() }, { merge: true });
+                await updateDoc(ref, {
+                    likes: increment(val)
+                });
+            } catch (e) {
+                console.error("Like Error", e);
+                window.useLocalInteractions = true;
+                const local = getLocalInteractionData(itemId);
+                local.likes = nextCount;
+                setLocalInteractionData(itemId, local);
+            }
+        };
+
+        window.toggleComments = (itemId, btn) => {
+            const card = btn.closest('.card') || btn.closest('.idea-card');
+            const section = card.querySelector('.comment-section');
+            const commentList = section.querySelector('.comment-list');
+
+            const isOpen = section.classList.toggle('open');
+            btn.classList.toggle('active-comment');
+
+            if (isOpen) {
+                subscribeItem(itemId, null, null, commentList);
+            }
+        };
+
+        window.submitComment = async (itemId, input) => {
+            const text = input.value.trim();
+            if (!text) return;
+
+            const newComment = {
+                user: "Guest", // Replace with Auth name if available
+                text: text,
+                date: new Date().toLocaleDateString()
+            };
+
+            input.value = ""; // Clear input immediately
+
+            if (!db || window.useLocalInteractions) {
+                const local = getLocalInteractionData(itemId);
+                local.comments = local.comments || [];
+                local.comments.push(newComment);
+                setLocalInteractionData(itemId, local);
+                if (liveElements[itemId]) {
+                    liveElements[itemId].lastData = local;
+                    renderItem(itemId);
+                }
+                return;
+            }
+
+            const ref = getItemRef(itemId);
+
+            try {
+                // Ensure doc exists
+                await setDoc(ref, { last_update: new Date() }, { merge: true });
+                await updateDoc(ref, {
+                    comments: arrayUnion(newComment)
+                });
+            } catch (e) {
+                console.error("Comment Error", e);
+                window.useLocalInteractions = true;
+                const local = getLocalInteractionData(itemId);
+                local.comments = local.comments || [];
+                local.comments.push(newComment);
+                setLocalInteractionData(itemId, local);
+                if (liveElements[itemId]) {
+                    liveElements[itemId].lastData = local;
+                    renderItem(itemId);
+                }
+            }
+        };
+
+        // Initial Subscription for visible items (Lazy load preferred but simple for now)
+        // We will hook this into the render loop implicitly by observing elements? 
+        // Or simply wait for interaction.
+        // For Counts to show initially, we need to subscribe or fetch.
+        // Let's create an IntersectionObserver to subscribe when visible.
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    const btnLike = card.querySelector('.action-btn[onclick*="toggleLike"]'); // primitive selector
+                    // Extract ID from onclick attribute... hacky but works without changing render logic
+                    // onclick="toggleLike('jp1', this)"
+                    if (btnLike) {
+                        const match = btnLike.getAttribute('onclick').match(/'([^']+)'/);
+                        if (match) {
+                            const itemId = match[1];
+                            const btnComment = card.querySelector('.btn-comment');
+                            window.subscribeItem(itemId, btnLike, btnComment, null);
+
+                            // Check "Liked" status
+                            if (localStorage.getItem(`liked_${itemId}`)) {
+                                btnLike.classList.add('liked');
+                            }
+                        }
+                    }
+                    observer.unobserve(card);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Wait for DOM
+        setTimeout(() => {
+            document.querySelectorAll('.card, .idea-card').forEach(el => observer.observe(el));
+
+            // Also observe new elements added later (Load More)
+            const grid = document.getElementById('newsGrid');
+            if (grid) {
+                const mutObserver = new MutationObserver((muts) => {
+                    muts.forEach(m => {
+                        m.addedNodes.forEach(n => {
+                            if (n.nodeType === 1) observer.observe(n);
+                        });
+                    });
+                });
+                mutObserver.observe(grid, { childList: true });
+            }
+        }, 1000);
+
+    </script>
+
+    <script>
+        // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
+        const CACHE_BUSTER = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+        window.__dataScriptsReady = new Promise((resolve) => {
+            const sources = ["news_data.js", "insights_data.js"];
+            let loaded = 0;
+            const loadScript = (src, useCacheBuster) => {
+                const script = document.createElement("script");
+                script.src = useCacheBuster ? `${src}?v=${CACHE_BUSTER}` : src;
+                script.async = false;
+                script.onload = () => {
+                    loaded += 1;
+                    if (loaded === sources.length) resolve();
+                };
+                script.onerror = () => {
+                    if (useCacheBuster) {
+                        loadScript(src, false);
+                        return;
+                    }
+                    console.warn(`Failed to load ${src}`);
+                    loaded += 1;
+                    if (loaded === sources.length) resolve();
+                };
+                document.head.appendChild(script);
+            };
+            sources.forEach((src) => loadScript(src, true));
+        });
+
+        // BFcache対策: ページが戻るボタンで表示された場合リロード
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                // BFcacheから復元された場合、強制リロード
+                window.location.reload();
+            }
+        });
+    </script>
+    <script>
+        let NEWS_DATA = [];
+        let visibleLimit = 30;
+
+        let NEW_DATE_RANGE = { start: null, end: null };
+        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-05-07", end: "2026-05-07" };
+
+        // New????????????New?????
+        function isNewContent(itemOrDate) {
+            if (itemOrDate && typeof itemOrDate === "object") {
+                if (itemOrDate.isNew === true) return true;
+                if (itemOrDate.isNew === false) return false;
+                const dateStr = itemOrDate.date;
+                if (!dateStr || !NEW_DATE_RANGE.start) return false;
+                return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
+            }
+            const dateStr = itemOrDate;
+            if (!dateStr || !NEW_DATE_RANGE.start) return false;
+            return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
+        }
+
+        function isNewInsightDate(dateLabel) {
+            if (!dateLabel || !NEW_DATE_RANGE.start) return false;
+            return dateLabel.includes(NEW_DATE_RANGE.start) || dateLabel.includes(NEW_DATE_RANGE.end);
+        }
+
+        function getNewCounts(data) {
+            const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0, paper: 0 };
+            if (!data) return counts;
+            data.forEach(item => {
+                if (!isNewContent(item)) return;
+                counts.world += 1;
+                if (counts[item.country] !== undefined) counts[item.country] += 1;
+            });
+            return counts;
+        }
+
+        function updateNewCountBadges() {
+            const counts = getNewCounts(NEWS_DATA);
+            document.querySelectorAll("#countryFilters .new-count").forEach(el => {
+                const country = el.dataset.country;
+                const count = counts[country] || 0;
+                if (count > 0) {
+                    el.textContent = `New ${count}`;
+                    el.classList.remove("hidden");
+                } else {
+                    el.textContent = "";
+                    el.classList.add("hidden");
+                }
+            });
+        }
+
+        function updateTitleIcon() {
+            const iconEl = document.getElementById("titleIcon");
+            if (!iconEl) return;
+            let key = "world";
+            if (!activeCountries.has("world") && activeCountries.size === 1) {
+                const selected = [...activeCountries][0];
+                if (selected) key = selected;
+            }
+            iconEl.src = TITLE_ICONS[key] || TITLE_ICONS.world;
+        }
+
+        function getLatestDate(data) {
+            if (!data || data.length === 0) return null;
+            return data.reduce((max, item) => item.date > max ? item.date : max, data[0].date);
+        }
+
+        function setNewDateRangeFromNews(data) {
+            if (NEW_DATE_RANGE_OVERRIDE?.start && NEW_DATE_RANGE_OVERRIDE?.end) {
+                NEW_DATE_RANGE = { start: NEW_DATE_RANGE_OVERRIDE.start, end: NEW_DATE_RANGE_OVERRIDE.end };
+                return;
+            }
+            const latest = getLatestDate(data);
+            if (latest) {
+                NEW_DATE_RANGE = { start: latest, end: latest };
+            }
+        }
+
+        function normalizeIsNewFlags(data) {
+            if (!data || !NEW_DATE_RANGE.start) return;
+            data.forEach(item => {
+                if (!item.date) {
+                    item.isNew = false;
+                    return;
+                }
+                item.isNew = item.date >= NEW_DATE_RANGE.start && item.date <= NEW_DATE_RANGE.end;
+            });
+        }
+
+        function formatDateTime(date) {
+            const pad = (n) => String(n).padStart(2, "0");
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+        }
+
+        function updateUpdatedAt() {
+            const el = document.getElementById("lastUpdated");
+            if (!el) return;
+            if (window.NEWS_UPDATED_AT) {
+                el.textContent = window.NEWS_UPDATED_AT;
+                return;
+            }
+            const latest = getLatestDate(NEWS_DATA);
+            if (latest) {
+                el.textContent = latest;
+                return;
+            }
+            el.textContent = formatDateTime(new Date());
+        }
+
+        function showNewsItem(itemId, fromRanking = false) {
+            const target = NEWS_DATA.find(n => n.id === itemId);
+            if (!target) return;
+            if (fromRanking && !rankingBackState) {
+                rankingBackState = captureFilterState();
+                setRankingBackVisibility(true);
+            }
+            document.getElementById("searchInput").value = itemId;
+            document.getElementById("dateFrom").value = "";
+            document.getElementById("dateTo").value = "";
+            activeCountries = new Set(["world"]);
+            activeTags = new Set(["all"]);
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            setTimeout(() => {
+                const card = document.getElementById(`card-${itemId}`);
+                if (!card) return;
+                card.scrollIntoView({ behavior: "smooth", block: "center" });
+                card.classList.add("card-highlight");
+                setTimeout(() => card.classList.remove("card-highlight"), 1500);
+            }, 100);
+        }
+
+        function openCommentsFor(itemId) {
+            showNewsItem(itemId);
+            setTimeout(() => {
+                const card = document.getElementById(`card-${itemId}`);
+                if (!card) return;
+                const btn = card.querySelector(".btn-comment");
+                if (btn) toggleComments(itemId, btn);
+            }, 250);
+        }
+
+        let rankingUpdateTimer = null;
+        const RANKING_PREVIEW_COUNT = 3;
+
+        function applyRankingPreview(bodyEl, listEl) {
+            if (!bodyEl || !listEl) return;
+            const items = Array.from(listEl.querySelectorAll(".ranking-item"));
+            if (items.length === 0) {
+                bodyEl.style.maxHeight = `${bodyEl.scrollHeight}px`;
+                return;
+            }
+            bodyEl.style.maxHeight = "none";
+            const targetIndex = Math.min(RANKING_PREVIEW_COUNT, items.length) - 1;
+            const target = items[targetIndex];
+            const listRect = listEl.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const height = Math.ceil(targetRect.bottom - listRect.top);
+            bodyEl.style.maxHeight = `${height}px`;
+        }
+
+        function updateRankingHeight(bodyEl, listEl) {
+            if (!bodyEl) return;
+            if (bodyEl.classList.contains("collapsed")) {
+                applyRankingPreview(bodyEl, listEl);
+            } else {
+                bodyEl.style.maxHeight = `${bodyEl.scrollHeight}px`;
+            }
+        }
+
+        function scheduleRankingUpdate() {
+            if (rankingUpdateTimer) clearTimeout(rankingUpdateTimer);
+            rankingUpdateTimer = setTimeout(() => {
+                renderAllRankings();
+            }, 150);
+        }
+
+        function getRankingScopeValue() {
+            const select = document.getElementById("rankingScope");
+            return select ? select.value : "weekly";
+        }
+
+        function getRankingSortKey() {
+            const select = document.getElementById("rankingSort");
+            return select ? select.value : "score";
+        }
+
+        function getPaperRankingScopeValue() {
+            const select = document.getElementById("paperRankingScope");
+            return select ? select.value : "weekly";
+        }
+
+        function getPaperRankingSortKey() {
+            const select = document.getElementById("paperRankingSort");
+            return select ? select.value : "score";
+        }
+
+        function getRankingMetricValue(item, key) {
+            if (key === "score") return item.score || 0;
+            if (key === "likes") return item.likes || 0;
+            if (key === "comments") return item.comments || 0;
+            return item.reads || 0;
+        }
+
+        function filterRankingByCountry(items) {
+            if (activeCountries.has("world")) return items;
+            const allowed = new Set(activeCountries);
+            return items.filter(item => allowed.has(item.country));
+        }
+
+        function compareRankingItems(a, b, key) {
+            const order = key === "score"
+                ? ["score", "likes", "comments", "reads"]
+                : key === "likes"
+                    ? ["likes", "comments", "reads"]
+                    : key === "comments"
+                        ? ["comments", "likes", "reads"]
+                        : ["reads", "likes", "comments"];
+            for (const k of order) {
+                const diff = (b[k] || 0) - (a[k] || 0);
+                if (diff !== 0) return diff;
+            }
+            return b.date.localeCompare(a.date);
+        }
+
+        function getRankingEmptyMessage(scope, key) {
+            const labelMap = { score: "総合", reads: "閲覧", likes: "いいね", comments: "コメント" };
+            const label = labelMap[key] || "閲覧";
+            if (scope === "weekly") return `1週間以内の${label}がまだありません。`;
+            if (scope === "6m") return `6か月以内の${label}がまだありません。`;
+            return `${label}がまだありません。`;
+        }
+
+        function renderRanking() {
+            const list = document.getElementById("rankingList");
+            const body = document.getElementById("rankingBody");
+            if (!list || !body) return;
+            const interactions = window.interactionsData || {};
+            const sortKey = getRankingSortKey();
+            const scope = getRankingScopeValue();
+            const latest = getLatestDate(NEWS_DATA);
+
+            if (scope === "weekly" && !latest) {
+                list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                updateRankingHeight(body, list);
+                return;
+            }
+
+            let ranked = filterRankingByCountry(NEWS_DATA.filter(item => item.country !== "paper")).map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                const score = likes * 3 + comments * 2 + reads;
+                return { ...item, likes, comments, reads, score };
+            });
+
+            if (scope === "weekly" && latest) {
+                const endDate = new Date(`${latest}T00:00:00`);
+                const startDate = new Date(endDate);
+                startDate.setDate(startDate.getDate() - 6);
+                ranked = ranked.filter(item => {
+                    if (!item.date) return false;
+                    const d = new Date(`${item.date}T00:00:00`);
+                    return d >= startDate && d <= endDate;
+                });
+            }
+
+            ranked.sort((a, b) => compareRankingItems(a, b, sortKey));
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage(scope, sortKey)}</div>`;
+                updateRankingHeight(body, list);
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-thumb">
+                            <img src="${item.img || FALLBACK_SRC}" loading="lazy" alt="${item.title || 'news image'}"
+                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                        </div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
+                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
+                            <span>👍</span> <span class="count">${item.likes}</span>
+                        </button>
+                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
+                            <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+            updateRankingHeight(body, list);
+        }
+
+        function renderPaperRanking() {
+            const list = document.getElementById("paperRankingList");
+            const body = document.getElementById("paperRankingBody");
+            if (!list || !body) return;
+            const interactions = window.interactionsData || {};
+            const sortKey = getPaperRankingSortKey();
+            const scope = getPaperRankingScopeValue();
+            const papers = NEWS_DATA.filter(item => item.country === "paper");
+            const latest = getLatestDate(papers);
+
+            if (scope === "weekly" && !latest) {
+                list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                updateRankingHeight(body, list);
+                return;
+            }
+
+            let ranked = papers.map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                const score = likes * 3 + comments * 2 + reads;
+                return { ...item, likes, comments, reads, score };
+            });
+
+            if ((scope === "weekly" || scope === "6m") && latest) {
+                const endDate = new Date(`${latest}T00:00:00`);
+                const startDate = new Date(endDate);
+                if (scope === "6m") {
+                    startDate.setMonth(startDate.getMonth() - 6);
+                } else {
+                    startDate.setDate(startDate.getDate() - 6);
+                }
+                ranked = ranked.filter(item => {
+                    if (!item.date) return false;
+                    const d = new Date(`${item.date}T00:00:00`);
+                    return d >= startDate && d <= endDate;
+                });
+            }
+
+            ranked.sort((a, b) => compareRankingItems(a, b, sortKey));
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage(scope, sortKey)}</div>`;
+                updateRankingHeight(body, list);
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-thumb">
+                            <img src="${item.img || FALLBACK_SRC}" loading="lazy" alt="${item.title || 'paper image'}"
+                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                        </div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
+                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
+                            <span>👍</span> <span class="count">${item.likes}</span>
+                        </button>
+                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
+                            <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+            updateRankingHeight(body, list);
+        }
+
+        function renderWeeklyRanking() {
+            renderAllRankings();
+        }
+
+        function renderAllTimeRanking() {
+            renderAllRankings();
+        }
+
+        function renderAllRankings() {
+            renderRanking();
+            renderPaperRanking();
+        }
+        const ALL_TAGS = [
+            "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
+            "品質", "アフター", "OS", "商用車", "スマートホーム連携", "ゼログラビティ", "サステナビリティ", "半導体", "サプライチェーン", "ラグジュアリー", "インフラ",
+            "居住性", "物理キー", "3列シート", "ファミリー", "デザイン", "アクセサリ", "リサイクル", "LCA", "DX", "ショーファー", "見守り", "ガジェット", "コンパクト", "質感", "レトロモダン", "大画面HMI",
+            "シート", "SUV", "ミニバン", "ワゴン", "パッケージ", "トレンド", "電動化", "EV", "荷室",
+            "AI", "エージェント", "自動運転", "R&D", "軽量化", "音響", "後席", "インフォテインメント", "性能", "期待値", "通信", "規格", "UX", "安全"
+        ];
+        const COUNTRY_FLAGS = {
+            jp: "<span class='flag-icon flag-jp'></span>",
+            cn: "<span class='flag-icon flag-cn'></span>",
+            in: "<span class='flag-icon flag-in'></span>",
+            us: "<span class='flag-icon flag-us'></span>",
+            eu: "<span class='flag-icon flag-eu'></span>",
+            paper: "<span class='paper-icon'>📄</span>"
+        };
+        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
+        const TITLE_ICONS = {
+            world: "images/icon_world.png",
+            jp: "images/icon_jp.png",
+            cn: "images/icon_cn.png",
+            in: "images/icon_in.png",
+            us: "images/icon_us.png",
+            eu: "images/icon_eu.png",
+            paper: "images/icon_world.png"
+        };
+
+        // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
+        const FALLBACK_SRC = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#1b2735"/>
+                  <stop offset="100%" stop-color="#0d1520"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="450" fill="url(#g)" />
+              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                fill="#cdd7e6" font-family="Inter, 'Noto Sans JP', sans-serif"
+                font-size="40" font-weight="700">イメージ画像</text>
+            </svg>
+        `);
+
+        const FAVORITES_STORAGE_KEY = "favorites_v1";
+        let favoriteIds = new Set();
+        let favoritesOnly = false;
+        let selectedFavoriteKeys = new Set();
+        let activeCountries = new Set(["world"]);
+        let activeTags = new Set(["all"]);
+        let rankingBackState = null;
+
+        function loadFavorites() {
+            try {
+                const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+                if (!raw) return;
+                const list = JSON.parse(raw);
+                if (Array.isArray(list)) favoriteIds = new Set(list);
+            } catch (e) {
+                console.warn("Failed to load favorites:", e);
+            }
+        }
+
+        function saveFavorites() {
+            try {
+                localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([...favoriteIds]));
+            } catch (e) {
+                console.warn("Failed to save favorites:", e);
+            }
+        }
+
+        function isFavorite(itemId) {
+            return favoriteIds.has(itemId);
+        }
+
+        function updateFavoriteButton(btn, isFav) {
+            if (!btn) return;
+            btn.classList.toggle("active", isFav);
+            const icon = btn.querySelector(".fav-icon");
+            if (icon) icon.textContent = isFav ? "★" : "☆";
+        }
+
+        function updateFavoritesToggle() {
+            const btn = document.getElementById("favoritesToggle");
+            if (!btn) return;
+            const count = favoriteIds.size;
+            btn.textContent = `★ お気に入り${count ? ` (${count})` : ""}`;
+            btn.classList.toggle("active", favoritesOnly);
+            btn.setAttribute("aria-pressed", favoritesOnly ? "true" : "false");
+            updateRankingVisibility();
+        }
+
+        function updateFavoritesActionsVisibility() {
+            const panel = document.getElementById("favoritesActions");
+            if (!panel) return;
+            panel.classList.toggle("hidden", !favoritesOnly);
+        }
+
+        function updateRankingVisibility() {
+            const wrapper = document.getElementById("rankingWrapper");
+            const paperWrapper = document.getElementById("paperRankingWrapper");
+            const paperActive = activeCountries.has("paper");
+            if (wrapper) wrapper.classList.toggle("hidden", favoritesOnly || paperActive);
+            if (paperWrapper) paperWrapper.classList.toggle("hidden", favoritesOnly || !paperActive);
+            setRankingBackVisibility(Boolean(rankingBackState) && !paperActive);
+        }
+
+        function updateFavoritesActionsState() {
+            const countEl = document.getElementById("favoritesSelectedCount");
+            const selectedCount = selectedFavoriteKeys.size;
+            if (countEl) countEl.textContent = `選択: ${selectedCount}`;
+            const disableSelected = selectedCount === 0;
+            const btnCsv = document.getElementById("favoritesExportCsv");
+            const btnMail = document.getElementById("favoritesEmailShare");
+            if (btnCsv) btnCsv.disabled = disableSelected;
+            if (btnMail) btnMail.disabled = disableSelected;
+        }
+
+        function clearFavoriteSelections() {
+            selectedFavoriteKeys.clear();
+            document.querySelectorAll(".favorite-select").forEach(el => {
+                el.checked = false;
+            });
+            updateFavoritesActionsState();
+        }
+
+        function escapeCsv(value) {
+            const str = String(value ?? "");
+            return `"${str.replace(/\"/g, '\"\"')}"`;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatRichText(value) {
+            const escaped = escapeHtml(value ?? "");
+            return escaped
+                .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
+        }
+
+        function normalizeAnalysisRefs(value) {
+            const text = String(value ?? "");
+            return text.replace(/\[id:\s*([^\]]+)\]/gi, "[$1]");
+        }
+
+        function formatAnalysisTextWithRefs(value, newsById) {
+            const normalized = normalizeAnalysisRefs(value)
+                .replace(/\r\n/g, "\n")
+                // Keep refs on the same line as the sentence.
+                .replace(/\n\s*(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])/gi, " $1")
+                .replace(/(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])\s*\n/gi, "$1 ")
+                .replace(/\n{2,}/g, "\n");
+            const html = formatRichText(normalized);
+            return html.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
+                const ids = String(rawIds)
+                    .split(",")
+                    .map(s => s.trim())
+                    .filter(Boolean);
+                if (!ids.length) return all;
+                const cards = ids.map(id => {
+                    const n = newsById.get(id);
+                    if (!n) return '';
+                    const titleAttr = escapeHtml(n.title || id);
+                    if (n.img) {
+                        return `<button class="ref-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}"><img class="ref-thumb" src="${escapeHtml(n.img)}" alt="" loading="lazy" onerror="this.closest('.ref-card').style.display='none'"></button>`;
+                    }
+                    return `<button class="ref-card ref-card-noimg" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}">${escapeHtml(id)}</button>`;
+                }).filter(Boolean);
+                return cards.length ? `<span class="analysis-ref-group">${cards.join('')}</span>` : '';
+            });
+        }
+
+        function buildIdeaIndex() {
+            const ideas = new Map();
+            const insights = window.DAILY_INSIGHTS || [];
+            insights.forEach(day => {
+                const regions = ["jp", "cn", "in", "us", "eu"];
+                regions.forEach(region => {
+                    const list = (day.ideas && day.ideas[region]) ? day.ideas[region] : [];
+                    list.forEach(idea => {
+                        const key = `idea-${idea.id}`;
+                        if (!ideas.has(key)) {
+                            ideas.set(key, {
+                                type: "idea",
+                                key,
+                                id: idea.id,
+                                title: idea.title,
+                                desc: idea.desc,
+                                img: idea.img || "",
+                                date: day.date,
+                                country: region
+                            });
+                        }
+                    });
+                });
+            });
+            return ideas;
+        }
+
+        function getFavoriteItems(keys = null) {
+            const targetKeys = keys && keys.length ? keys : [...favoriteIds];
+            const items = [];
+            const newsMap = new Map(NEWS_DATA.map(n => [n.id, n]));
+            const ideaMap = buildIdeaIndex();
+            targetKeys.forEach(key => {
+                if (newsMap.has(key)) {
+                    const n = newsMap.get(key);
+                    items.push({
+                        type: "news",
+                        key,
+                        id: n.id,
+                        title: n.title,
+                        desc: n.desc,
+                        img: n.img,
+                        date: n.date,
+                        country: n.country,
+                        url: n.url,
+                        source: n.source
+                    });
+                } else if (ideaMap.has(key)) {
+                    items.push(ideaMap.get(key));
+                }
+            });
+            return items;
+        }
+
+        function downloadFavoritesCsv(keys = null) {
+            const items = getFavoriteItems(keys);
+            if (!items.length) return;
+            const header = ["type", "id", "title", "date", "country", "url", "image", "description"];
+            const rows = items.map(item => [
+                item.type,
+                item.id,
+                item.title,
+                item.date || "",
+                item.country || "",
+                item.url || "",
+                item.img || "",
+                item.desc || ""
+            ]);
+            const csv = [header, ...rows]
+                .map(row => row.map(escapeCsv).join(","))
+                .join("\r\n");
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            const stamp = getTodayKey().replace(/-/g, "");
+            link.download = `favorites_${stamp}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        function buildFavoritesEmailHtml(items) {
+            const cards = items.map(item => {
+                const title = escapeHtml(item.title);
+                const desc = escapeHtml(item.desc).replace(/\n/g, "<br>");
+                const img = item.img ? `<img src="${item.img}" alt="${title}" style="max-width:100%; border-radius:12px; margin:8px 0;">` : "";
+                const url = item.url ? `<div><a href="${item.url}" target="_blank" rel="noopener">${item.url}</a></div>` : "";
+                const meta = `<div style="color:#667085;font-size:12px;">${item.type === "idea" ? "アイデア" : "記事"} / ${item.date || "-"} / ${COUNTRY_NAMES[item.country] || item.country || "-"}</div>`;
+                return `
+                    <div style="border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:12px 0;background:#f9fafb;">
+                        <div style="font-weight:700;font-size:16px;color:#111827;">${title}</div>
+                        ${meta}
+                        ${img}
+                        <div style="font-size:14px;color:#111827;line-height:1.6;">${desc}</div>
+                        ${url}
+                    </div>`;
+            }).join("");
+            return `
+                <div style="font-family:'Noto Sans JP', Arial, sans-serif;background:#ffffff;color:#111827;padding:16px;">
+                    <h2 style="margin:0 0 12px;">お気に入り共有</h2>
+                    ${cards}
+                </div>`;
+        }
+
+        function buildFavoritesPlainText(items) {
+            return items.map((item, idx) => {
+                return [
+                    `[${idx + 1}] ${item.title}`,
+                    item.desc || "",
+                    item.url || "",
+                    `(${item.type === "idea" ? "アイデア" : "記事"} / ${item.date || "-"} / ${COUNTRY_NAMES[item.country] || item.country || "-"})`
+                ].filter(Boolean).join("\n");
+            }).join("\n\n");
+        }
+
+        function toBase64Utf8(str) {
+            const bytes = new TextEncoder().encode(str);
+            let binary = "";
+            bytes.forEach(b => binary += String.fromCharCode(b));
+            return btoa(binary);
+        }
+
+        function chunkBase64(str, size = 76) {
+            return (str.match(new RegExp(`.{1,${size}}`, "g")) || []).join("\r\n");
+        }
+
+        function downloadFavoritesEml(subject, html, plainText) {
+            const boundary = `----=_Part_${Math.random().toString(36).slice(2)}`;
+            const htmlBase64 = chunkBase64(toBase64Utf8(html));
+            const eml = [
+                `Subject: ${subject}`,
+                "MIME-Version: 1.0",
+                `Content-Type: multipart/alternative; boundary=\"${boundary}\"`,
+                "",
+                `--${boundary}`,
+                "Content-Type: text/plain; charset=UTF-8",
+                "Content-Transfer-Encoding: 7bit",
+                "",
+                plainText,
+                `--${boundary}`,
+                "Content-Type: text/html; charset=UTF-8",
+                "Content-Transfer-Encoding: base64",
+                "",
+                htmlBase64,
+                `--${boundary}--`,
+                ""
+            ].join("\r\n");
+            const blob = new Blob([eml], { type: "message/rfc822" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            const stamp = getTodayKey().replace(/-/g, "");
+            link.download = `favorites_${stamp}.eml`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        async function shareFavoritesByEmail(keys = null) {
+            const items = getFavoriteItems(keys);
+            if (!items.length) return;
+            const subject = items.length === 1 ? items[0].title : `お気に入り共有 (${items.length}件)`;
+            const html = buildFavoritesEmailHtml(items);
+            const plain = buildFavoritesPlainText(items);
+            if (navigator.clipboard && window.ClipboardItem) {
+                try {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            "text/html": new Blob([html], { type: "text/html" }),
+                            "text/plain": new Blob([plain], { type: "text/plain" })
+                        })
+                    ]);
+                } catch (e) {
+                    console.warn("Clipboard copy failed:", e);
+                }
+            }
+            const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(plain)}`;
+            window.open(mailto, "_blank");
+            downloadFavoritesEml(subject, html, plain);
+            alert("テキストメールを開きました。HTML表示は.emlを開くとレンダリングされます。");
+        }
+
+        window.toggleFavorite = (itemId, btn) => {
+            if (!itemId) return;
+            if (favoriteIds.has(itemId)) {
+                favoriteIds.delete(itemId);
+                selectedFavoriteKeys.delete(itemId);
+            } else {
+                favoriteIds.add(itemId);
+            }
+            saveFavorites();
+            updateFavoriteButton(btn, favoriteIds.has(itemId));
+            updateFavoritesToggle();
+            updateFavoritesActionsState();
+            if (favoritesOnly) applyFilters();
+        };
+
+        function setRankingBackVisibility(visible) {
+            const wrapper = document.getElementById("rankingBack");
+            if (!wrapper) return;
+            const shouldShow = visible && !favoritesOnly;
+            wrapper.classList.toggle("hidden", !shouldShow);
+        }
+
+        function captureFilterState() {
+            return {
+                search: document.getElementById("searchInput").value,
+                dateFrom: document.getElementById("dateFrom").value,
+                dateTo: document.getElementById("dateTo").value,
+                sortOrder: document.getElementById("sortOrder").value,
+                countries: new Set(activeCountries),
+                tags: new Set(activeTags),
+                favoritesOnly
+            };
+        }
+
+        function restoreRankingState() {
+            if (!rankingBackState) return;
+            const scrollTarget = rankingBackState.scrollTarget || null;
+            document.getElementById("searchInput").value = rankingBackState.search || "";
+            document.getElementById("dateFrom").value = rankingBackState.dateFrom || "";
+            document.getElementById("dateTo").value = rankingBackState.dateTo || "";
+            document.getElementById("sortOrder").value = rankingBackState.sortOrder || "date-desc";
+            activeCountries = new Set(rankingBackState.countries || ["world"]);
+            activeTags = new Set(rankingBackState.tags || ["all"]);
+            favoritesOnly = Boolean(rankingBackState.favoritesOnly);
+            updateFavoritesToggle();
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            rankingBackState = null;
+            setRankingBackVisibility(false);
+            if (scrollTarget) {
+                const el = document.getElementById(scrollTarget);
+                if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+            }
+        }
+
+        /* 考察の参照サムネイル用: 戻り先を analysisSection に指定 */
+        function showNewsItemFromRef(itemId) {
+            showNewsItem(itemId, true);
+            if (rankingBackState) {
+                rankingBackState.scrollTarget = "analysisSection";
+            }
+        }
+
+        function setupRankingToggle(toggleId, bodyId, listId) {
+            const toggle = document.getElementById(toggleId);
+            const body = document.getElementById(bodyId);
+            const list = document.getElementById(listId);
+            if (!toggle || !body) return;
+            toggle.addEventListener("click", () => {
+                const isCollapsed = body.classList.toggle("collapsed");
+                toggle.textContent = isCollapsed ? "開く" : "閉じる";
+                toggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+                updateRankingHeight(body, list);
+            });
+        }
+
+        async function init() {
+            try {
+                if (window.__dataScriptsReady) {
+                    try {
+                        await window.__dataScriptsReady;
+                    } catch (e) {
+                        console.warn("Data scripts failed to load", e);
+                    }
+                }
+                if (window.LOADED_NEWS_DATA) {
+                    NEWS_DATA = window.LOADED_NEWS_DATA;
+                    console.log("News data loaded:", NEWS_DATA.length, "items");
+                    setNewDateRangeFromNews(NEWS_DATA);
+                    normalizeIsNewFlags(NEWS_DATA);
+                    loadFavorites();
+                    if (favoriteIds.size) {
+                        const validNews = new Set(NEWS_DATA.map(n => n.id));
+                        const validIdeas = new Set(buildIdeaIndex().keys());
+                        const filtered = [...favoriteIds].filter(id => validNews.has(id) || validIdeas.has(id));
+                        favoriteIds = new Set(filtered);
+                        saveFavorites();
+                    }
+                    updateFavoritesToggle();
+                    document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                    updateNewCountBadges();
+                    const newCounts = getNewCounts(NEWS_DATA);
+                    if (newCounts.world > visibleLimit) {
+                        visibleLimit = newCounts.world;
+                    }
+                    updateTitleIcon();
+                    updateUpdatedAt();
+                    // 初期ランキング描画（interactionsデータなし）
+                    // loadInteractions完了後に再描画される
+                    renderAllRankings();
+                } else {
+                    console.error("News data not loaded from JS file");
+                }
+
+                const tagFilters = document.getElementById("tagFilters");
+                ALL_TAGS.forEach(tag => {
+                    const chip = document.createElement("span");
+                    chip.className = "chip";
+                    chip.dataset.tag = tag;
+                    chip.textContent = tag;
+                    tagFilters.appendChild(chip);
+                });
+
+                const tagToggle = document.getElementById("tagToggle");
+                if (tagToggle) {
+                    tagToggle.addEventListener("click", () => {
+                        const expanded = tagFilters.classList.toggle("expanded");
+                        tagToggle.textContent = expanded ? "閉じる" : "もっと見る";
+                        tagToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+                    });
+                }
+
+                document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                updateNewCountBadges();
+
+                const params = new URLSearchParams(window.location.search);
+                const latestDate = getLatestDate(NEWS_DATA);
+                const dateToInput = document.getElementById("dateTo");
+                if (!params.has("to")) {
+                    dateToInput.value = latestDate || getTodayKey();
+                }
+
+                if (params.has("countries")) {
+                    activeCountries = new Set(params.get("countries").split(","));
+                    updateCountryChips();
+                }
+                if (params.has("tags")) {
+                    const t = params.get("tags").split(",");
+                    activeTags = new Set(t.includes("all") ? ["all"] : t);
+                    updateTagChips();
+                }
+                if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
+                if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
+                if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
+                if (!params.toString()) {
+                    document.getElementById("searchInput").value = "";
+                    activeCountries = new Set(["world"]);
+                    activeTags = new Set(["all"]);
+                    favoritesOnly = false;
+                    updateCountryChips();
+                    updateTagChips();
+                    updateFavoritesToggle();
+                }
+
+                document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
+                document.getElementById("tagFilters").addEventListener("click", handleTagClick);
+                document.getElementById("dateFrom").addEventListener("change", applyFilters);
+                document.getElementById("dateTo").addEventListener("change", applyFilters);
+                document.getElementById("searchInput").addEventListener("input", applyFilters);
+                document.getElementById("sortOrder").addEventListener("change", () => {
+                    applyFilters();
+                    updateURL();
+                });
+                const favoritesToggle = document.getElementById("favoritesToggle");
+                if (favoritesToggle) {
+                    favoritesToggle.addEventListener("click", () => {
+                        favoritesOnly = !favoritesOnly;
+                        if (!favoritesOnly) clearFavoriteSelections();
+                        updateFavoritesToggle();
+                        updateFavoritesActionsVisibility();
+                        applyFilters();
+                    });
+                }
+
+                const selectAllBtn = document.getElementById("favoritesSelectAll");
+                if (selectAllBtn) {
+                    selectAllBtn.addEventListener("click", () => {
+                        document.querySelectorAll(".favorite-select").forEach(el => {
+                            el.checked = true;
+                            selectedFavoriteKeys.add(el.dataset.favKey);
+                        });
+                        updateFavoritesActionsState();
+                    });
+                }
+
+                const clearSelectBtn = document.getElementById("favoritesClearSelection");
+                if (clearSelectBtn) clearSelectBtn.addEventListener("click", clearFavoriteSelections);
+
+                const exportCsvBtn = document.getElementById("favoritesExportCsv");
+                if (exportCsvBtn) exportCsvBtn.addEventListener("click", () => {
+                    downloadFavoritesCsv([...selectedFavoriteKeys]);
+                });
+                const exportCsvAllBtn = document.getElementById("favoritesExportCsvAll");
+                if (exportCsvAllBtn) exportCsvAllBtn.addEventListener("click", () => {
+                    downloadFavoritesCsv();
+                });
+                const emailBtn = document.getElementById("favoritesEmailShare");
+                if (emailBtn) emailBtn.addEventListener("click", () => {
+                    shareFavoritesByEmail([...selectedFavoriteKeys]);
+                });
+                const emailAllBtn = document.getElementById("favoritesEmailShareAll");
+                if (emailAllBtn) emailAllBtn.addEventListener("click", () => {
+                    shareFavoritesByEmail();
+                });
+
+                document.addEventListener("change", (event) => {
+                    const target = event.target;
+                    if (!target || !target.classList.contains("favorite-select")) return;
+                    const key = target.dataset.favKey;
+                    if (target.checked) selectedFavoriteKeys.add(key);
+                    else selectedFavoriteKeys.delete(key);
+                    updateFavoritesActionsState();
+                });
+
+                const rankingBackBtn = document.getElementById("rankingBackBtn");
+                if (rankingBackBtn) rankingBackBtn.addEventListener("click", restoreRankingState);
+                if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
+                if (window.initFirebase) window.initFirebase();
+                setupRankingToggle("rankingToggle", "rankingBody", "rankingList");
+                setupRankingToggle("paperRankingToggle", "paperRankingBody", "paperRankingList");
+                const rankingSort = document.getElementById("rankingSort");
+                if (rankingSort) rankingSort.addEventListener("change", renderAllRankings);
+                const rankingScope = document.getElementById("rankingScope");
+                if (rankingScope) rankingScope.addEventListener("change", renderAllRankings);
+                const paperRankingSort = document.getElementById("paperRankingSort");
+                if (paperRankingSort) paperRankingSort.addEventListener("change", renderPaperRanking);
+                const paperRankingScope = document.getElementById("paperRankingScope");
+                if (paperRankingScope) paperRankingScope.addEventListener("change", renderPaperRanking);
+            } catch (e) {
+                console.error("Init failed:", e);
+            }
+
+            applyFilters();
+            if (window.setupHoverReadTracking) window.setupHoverReadTracking();
+
+            // アクセスカウンター更新
+            if (window.updateAccessCounter) window.updateAccessCounter();
+            updateFavoritesActionsVisibility();
+            updateFavoritesActionsState();
+            updateRankingVisibility();
+        }
+
+        function handleCountryClick(e) {
+            const chip = e.target.closest(".chip");
+            if (!chip || !chip.dataset.country) return;
+            const country = chip.dataset.country;
+            if (country === "world") {
+                activeCountries = new Set(["world"]);
+            } else {
+                // 単一選択に変更：選択した国のみをアクティブに
+                activeCountries = new Set([country]);
+            }
+            updateCountryChips();
+            applyFilters();
+            scheduleRankingUpdate();
+            updateURL();
+        }
+
+        function handleTagClick(e) {
+            if (!e.target.classList.contains("chip")) return;
+            const tag = e.target.dataset.tag;
+            if (tag === "all") {
+                activeTags = new Set(["all"]);
+            } else {
+                activeTags.delete("all");
+                if (activeTags.has(tag)) activeTags.delete(tag);
+                else activeTags.add(tag);
+                if (activeTags.size === 0) activeTags.add("all");
+            }
+            updateTagChips();
+            applyFilters();
+            updateURL();
+        }
+
+        function updateCountryChips() {
+            document.querySelectorAll("#countryFilters .chip").forEach(c => {
+                c.classList.toggle("active", activeCountries.has(c.dataset.country));
+            });
+            updateTitleIcon();
+        }
+
+        function updateTagChips() {
+            document.querySelectorAll("#tagFilters .chip").forEach(c => {
+                c.classList.toggle("active", activeTags.has(c.dataset.tag));
+            });
+        }
+
+
+
+        // タグクリックで検索
+        function searchByTag(tag) {
+            document.getElementById("searchInput").value = tag;
+            applyFilters();
+        }
+        function applyFilters() {
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
+            const sortOrder = document.getElementById("sortOrder").value;
+
+            if (activeTags.size === 0) activeTags = new Set(["all"]);
+            if (activeCountries.size === 0) activeCountries = new Set(["world"]);
+            if (from && to && from > to) {
+                document.getElementById("dateFrom").value = "";
+            }
+
+            // 1. Filter
+            let filteredData = NEWS_DATA.filter(n => {
+                // Country Filter
+                if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
+                if (favoritesOnly && !isFavorite(n.id)) return false;
+
+                const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ")).toLowerCase();
+
+                // Tag Filter (tag text can match title/desc as well)
+                if (!activeTags.has("all")) {
+                    const tagMatches = [...activeTags].some(tag => searchable.includes(tag.toLowerCase()));
+                    if (!tagMatches) return false;
+                }
+
+                // Date Filter (YYYY-MM-DD string comparison works)
+                if (from && n.date < from) return false;
+                if (to && n.date > to) return false;
+
+                // Text Search
+                if (searchText && !searchable.includes(searchText)) return false;
+
+                return true;
+            });
+
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly);
+            if (!hasActiveFilter && filteredData.length === 0 && NEWS_DATA.length > 0) {
+                filteredData = [...NEWS_DATA];
+            }
+
+            // 2. Sort
+            const countryOrder = { jp: 0, cn: 1, in: 2, us: 3, eu: 4, paper: 5 };
+            const interactions = window.interactionsData || {};
+            filteredData.sort((a, b) => {
+                if (sortOrder === "date-asc") {
+                    return a.date.localeCompare(b.date);
+                } else if (sortOrder === "country") {
+                    // First by country (jp -> cn -> in), then by date desc within same country
+                    const countryDiff = (countryOrder[a.country] ?? 99) - (countryOrder[b.country] ?? 99);
+                    if (countryDiff !== 0) return countryDiff;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "likes-desc") {
+                    // Sort by likes (descending), then by date desc
+                    const likesA = interactions[a.id]?.likes || 0;
+                    const likesB = interactions[b.id]?.likes || 0;
+                    if (likesB !== likesA) return likesB - likesA;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "comments-desc") {
+                    // Sort by comment count (descending), then by date desc
+                    const commentsA = interactions[a.id]?.comments || 0;
+                    const commentsB = interactions[b.id]?.comments || 0;
+                    if (commentsB !== commentsA) return commentsB - commentsA;
+                    return b.date.localeCompare(a.date);
+                } else {
+                    return b.date.localeCompare(a.date);
+                }
+            });
+
+            // 3. Render (Pagination)
+            const grid = document.getElementById("newsGrid");
+            grid.innerHTML = "";
+
+            const itemsToShow = filteredData.slice(0, visibleLimit);
+
+            itemsToShow.forEach(n => {
+                const interaction = window.interactionsData?.[n.id] || {};
+                const likeCount = interaction.likes || 0;
+                const commentCount = interaction.comments || 0;
+                const readCount = (typeof interaction.reads === "number")
+                    ? interaction.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
+                const favActive = isFavorite(n.id);
+                const favSelected = favoritesOnly && selectedFavoriteKeys.has(n.id);
+                const card = document.createElement("article");
+                card.className = "card";
+                card.id = `card-${n.id}`;
+                const isNew = isNewContent(n);
+                card.innerHTML = `
+            <div class="thumb">
+                <img src="${n.img}" alt="${n.title}" loading="lazy" class="img-with-fallback">
+                <div class="fallback-overlay">イメージ画像</div>
+                ${isNew ? '<span class="new-badge">New</span>' : ''}
+                <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
+                <span class="date-badge">${n.date}</span>
+                ${(n.img.includes('unsplash') || n.img.includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
+            </div>
+            <div class="content">
+                <div class="title">${n.title}</div>
+                <p class="desc">${n.desc}</p>
+                ${n.summary ? `
+                <div class="summary-wrapper">
+                    <button class="summary-btn" onclick="toggleSummary(this)">詳細要約を見る</button>
+                    <div class="summary-content">${n.summary}</div>
+                </div>` : ''}
+                <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
+
+                
+                <div class="actions">
+                    <a class="btn" href="${n.url}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
+                    
+                    ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                    <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
+                        <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                    </button>
+                    <button class="action-btn" onclick="toggleLike('${n.id}', this)">
+                        <span>👍</span> <span class="count">${likeCount}</span>
+                    </button>
+                    <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
+                        <span>💬</span> <span class="count">${commentCount}</span>
+                    </button>
+
+                    <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
+                    <span class="source">${n.source}</span>
+                    <span class="id-badge">${n.id}</span>
+                </div>
+    
+                <div class="comment-section">
+                    <div class="comment-list">
+                        <!-- Demo Comments -->
+                    </div>
+                    <div class="comment-input-area">
+                        <input type="text" class="comment-input" placeholder="コメントを入力..." onkeypress="if(event.key==='Enter') submitComment('${n.id}', this)">
+                        <button class="comment-submit" onclick="submitComment('${n.id}', this.previousElementSibling)">送信</button>
+                    </div>
+                </div>
+    
+            </div>`;
+                grid.appendChild(card);
+            });
+
+            // Update Counts
+            document.getElementById("visibleCount").textContent = filteredData.length;
+
+            // Load More Button Visibility
+            const loadMoreBtn = document.getElementById("loadMoreBtn");
+            if (loadMoreBtn) {
+                if (filteredData.length > visibleLimit) {
+                    loadMoreBtn.style.display = "inline-block";
+                    loadMoreBtn.textContent = `もっと見る (あと ${filteredData.length - visibleLimit} 件)`;
+                } else {
+                    loadMoreBtn.style.display = "none";
+                }
+            }
+
+            // Empty state removed
+            wireImageFallbacks(document);
+            if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            renderInsights();
+            updateRankingVisibility();
+            scheduleRankingUpdate();
+        }
+
+        function loadMore() {
+            visibleLimit += 30;
+            applyFilters();
+        }
+
+
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
+            if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            if (from) params.set("from", from);
+            if (to) params.set("to", to);
+            const sortOrder = document.getElementById("sortOrder").value;
+            if (sortOrder && sortOrder !== "date-desc") params.set("sort", sortOrder);
+            const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
+            history.replaceState(null, "", newURL);
+        }
+
+
+
+        let insightsVisibleLimit = 1;  // 初期表示は最新のみ
+
+        function renderInsights() {
+            const container = document.getElementById("insightsContainer");
+            container.innerHTML = "";
+            const newsById = new Map((NEWS_DATA || []).map(n => [n.id, n]));
+
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
+
+            const insightsData = window.DAILY_INSIGHTS || [];
+            // 最新のインサイト日付を取得
+            const latestInsightDate = insightsData.length > 0 ? insightsData[0].date : null;
+            const ideaTextForSearch = (ideas) => {
+                return (ideas || [])
+                    .filter(idea => !favoritesOnly || isFavorite(`idea-${idea.id}`))
+                    .map(idea => `${idea.title} ${idea.desc}`)
+                    .join(" ");
+            };
+
+            let visibleCount = 0;
+            let analysisAnchorInserted = false;
+            let ideasAnchorInserted = false;
+            const filteredInsights = insightsData.filter(day => {
+                // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
+                const isNewInsight = isNewInsightDate(day.date);
+                // Date Filter (supports single date or range like YYYY-MM-DD〜YYYY-MM-DD)
+                let rangeStart = day.date;
+                let rangeEnd = day.date;
+                if (day.date.includes("〜") || day.date.includes("～") || day.date.includes("~")) {
+                    const parts = day.date.split(/[〜～~]/).map(s => s.trim()).filter(Boolean);
+                    if (parts.length >= 2) {
+                        rangeStart = parts[0];
+                        rangeEnd = parts[1];
+                    }
+                }
+                if (from && rangeEnd < from) return false;
+                if (to && rangeStart > to) return false;
+
+                // Active Countries Logic
+                const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
+                const showCn = (activeCountries.has("world") || activeCountries.has("cn")) && day.analysis.cn;
+                const showIn = (activeCountries.has("world") || activeCountries.has("in")) && day.analysis.in;
+                const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
+                const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
+
+                const jpIdeas = day.ideas?.jp || [];
+                const cnIdeas = day.ideas?.cn || [];
+                const inIdeas = day.ideas?.in || [];
+                const usIdeas = day.ideas?.us || [];
+                const euIdeas = day.ideas?.eu || [];
+                const hasFavJp = showJp && jpIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavCn = showCn && cnIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavIn = showIn && inIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavUs = showUs && usIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavEu = showEu && euIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasAnyFavIdeas = hasFavJp || hasFavCn || hasFavIn || hasFavUs || hasFavEu;
+
+                // Text Search Check
+                let hasMatch = false;
+                if (!searchText) {
+                    hasMatch = true;
+                } else {
+                    const allText = [
+                        day.date,
+                        !favoritesOnly && showJp ? day.analysis.jp : "",
+                        !favoritesOnly && showCn ? day.analysis.cn : "",
+                        !favoritesOnly && showIn ? day.analysis.in : "",
+                        !favoritesOnly && showUs ? day.analysis.us : "",
+                        !favoritesOnly && showEu ? day.analysis.eu : "",
+                        showJp ? ideaTextForSearch(jpIdeas) : "",
+                        showCn ? ideaTextForSearch(cnIdeas) : "",
+                        showIn ? ideaTextForSearch(inIdeas) : "",
+                        showUs ? ideaTextForSearch(usIdeas) : "",
+                        showEu ? ideaTextForSearch(euIdeas) : ""
+                    ].join(" ").toLowerCase();
+                    if (allText.includes(searchText)) hasMatch = true;
+                }
+
+                if (!hasMatch) return false;
+
+                if (favoritesOnly && !hasAnyFavIdeas) return false;
+
+                // Only render if there is content to show for active countries
+                if (!showJp && !showCn && !showIn && !showUs && !showEu) return false;
+                return true;
+            });
+
+            // 表示するインサイトを制限
+            const insightsToShow = favoritesOnly
+                ? filteredInsights
+                : filteredInsights.slice(0, insightsVisibleLimit);
+
+            insightsToShow.forEach(day => {
+                // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
+                const isNewInsight = isNewInsightDate(day.date);
+
+                // 国別表示フラグを再計算
+                const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
+                const showCn = (activeCountries.has("world") || activeCountries.has("cn")) && day.analysis.cn;
+                const showIn = (activeCountries.has("world") || activeCountries.has("in")) && day.analysis.in;
+                const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
+                const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
+
+                // Create Wrapper
+                const wrapper = document.createElement("div");
+                wrapper.className = "daily-insight-group";
+
+                // Analysis Section
+                let analysisHTML = "";
+                if (!analysisAnchorInserted) {
+                    analysisHTML += `<div id="analysisSection" class="jump-anchor"></div>`;
+                    analysisAnchorInserted = true;
+                }
+                if (!favoritesOnly) {
+                    analysisHTML += `
+                    <section class="analysis-section" style="margin-top: 48px;">
+                        <h2 class="section-title"><span class="section-icon">💡</span> 考察 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
+                        <div class="analysis-grid">
+                `;
+
+                if (showJp) analysisHTML += `
+                    <div class="analysis-card region-jp">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-jp" style="width:32px; height:22px;"></span>
+                            <span class="country-label">JAPAN</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.jp, newsById)}</div>
+                    </div>`;
+
+                if (showCn) analysisHTML += `
+                    <div class="analysis-card region-cn">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-cn" style="width:32px; height:22px;"></span>
+                            <span class="country-label">CHINA</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.cn, newsById)}</div>
+                    </div>`;
+
+                if (showIn) analysisHTML += `
+                    <div class="analysis-card region-in">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-in" style="width:32px; height:22px;"></span>
+                            <span class="country-label">INDIA</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.in, newsById)}</div>
+                    </div>`;
+
+                if (showUs) analysisHTML += `
+                    <div class="analysis-card region-us">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-us" style="width:32px; height:22px;"></span>
+                            <span class="country-label">USA</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.us, newsById)}</div>
+                    </div>`;
+
+                if (showEu) analysisHTML += `
+                    <div class="analysis-card region-eu">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-eu" style="width:32px; height:22px;"></span>
+                            <span class="country-label">EUROPE</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.eu, newsById)}</div>
+                    </div>`;
+
+                analysisHTML += `</div></section>`;
+                }
+
+
+                // Ideas Section
+                let ideasHTML = "";
+                if (!ideasAnchorInserted) {
+                    ideasHTML += `<div id="ideasSection" class="jump-anchor"></div>`;
+                    ideasAnchorInserted = true;
+                }
+                ideasHTML += `
+                    <section class="ideas-section">
+                        <h2 class="section-title"><span class="section-icon">🚀</span> 企画アイデア例 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
+                `;
+
+                const renderIdeas = (ideas, regionName, regionClass, flagIcon) => {
+                    const visibleIdeas = favoritesOnly
+                        ? ideas.filter(idea => isFavorite(`idea-${idea.id}`))
+                        : ideas;
+                    if (visibleIdeas.length > 0) {
+                        ideasHTML += `
+                            <div class="region-section ${regionClass}">
+                                <div class="region-title-wrapper">
+                                    ${flagIcon}
+                                    <span class="region-title-text">${regionName}</span>
+                                </div>
+                                <div class="ideas-grid">
+                        `;
+
+                        visibleIdeas.forEach(idea => {
+                            const ideaKey = `idea-${idea.id}`;
+                            const favActive = isFavorite(ideaKey);
+                            const favSelected = favoritesOnly && selectedFavoriteKeys.has(ideaKey);
+                            ideasHTML += `
+                                <div class="idea-card">
+                                    <div class="idea-header">
+                                        <span class="idea-number">${idea.id}</span>
+                                        <span class="idea-title">${idea.title}</span>
+                                    </div>
+                                    <div class="idea-body">
+                                        ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
+                                        <div class="idea-content">
+                                            <p class="idea-desc">${formatAnalysisTextWithRefs(idea.desc, newsById)}</p>
+                                            <div class="actions">
+                                                ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${ideaKey}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                                                <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${ideaKey}', this)">
+                                                    <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                                                </button>
+                                                <button class="action-btn" onclick="toggleLike('${idea.id}', this)">
+                                                    <span>👍</span> <span class="count">0</span>
+                                                </button>
+                                                <button class="action-btn btn-comment" onclick="toggleComments('${idea.id}', this)">
+                                                    <span>💬</span> <span class="count">0</span>
+                                                </button>
+                                            </div>
+                                            <div class="comment-section">
+                                                <div class="comment-list"></div>
+                                                <div class="comment-input-area">
+                                                    <input type="text" class="comment-input" placeholder="コメント..." onkeypress="if(event.key==='Enter') submitComment('${idea.id}', this)">
+                                                    <button class="comment-submit" onclick="submitComment('${idea.id}', this.previousElementSibling)">送信</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        ideasHTML += `</div></div>`;
+                    }
+                };
+
+                // Note: removed single quotes around font-size style in Python string to avoid conflict
+                if (showJp) renderIdeas(day.ideas.jp || [], '日本市場向け', 'jp', '<span class="flag-icon flag-jp" style="width:28px; height:18px;"></span>');
+                if (showCn) renderIdeas(day.ideas.cn || [], '中国市場向け', 'cn', '<span class="flag-icon flag-cn" style="width:28px; height:18px;"></span>');
+                if (showIn) renderIdeas(day.ideas.in || [], 'インド市場向け', 'in', '<span class="flag-icon flag-in" style="width:28px; height:18px;"></span>');
+                if (showUs) renderIdeas(day.ideas.us || [], '米国市場向け', 'us', '<span class="flag-icon flag-us" style="width:28px; height:18px;"></span>');
+                if (showEu) renderIdeas(day.ideas.eu || [], '欧州市場向け', 'eu', '<span class="flag-icon flag-eu" style="width:28px; height:18px;"></span>');
+
+                ideasHTML += `</section>`;
+
+                wrapper.innerHTML = analysisHTML + ideasHTML;
+                container.appendChild(wrapper);
+            });
+            if (!analysisAnchorInserted) {
+                const anchor = document.createElement("div");
+                anchor.id = "analysisSection";
+                anchor.className = "jump-anchor";
+                container.appendChild(anchor);
+            }
+            if (!ideasAnchorInserted) {
+                const anchor = document.createElement("div");
+                anchor.id = "ideasSection";
+                anchor.className = "jump-anchor";
+                container.appendChild(anchor);
+            }
+            wireImageFallbacks(container);
+
+            // もっと見るボタン（インサイト用）
+            if (!favoritesOnly && filteredInsights.length > insightsVisibleLimit) {
+                const loadMoreDiv = document.createElement("div");
+                loadMoreDiv.style.cssText = "text-align:center; margin-top:20px;";
+                loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;">
+                    📚 もっと見る (あと ${filteredInsights.length - insightsVisibleLimit} 件)
+                </button>`;
+                container.appendChild(loadMoreDiv);
+            }
+            updateFavoritesActionsVisibility();
+            updateFavoritesActionsState();
+        }
+
+        function loadMoreInsights() {
+            insightsVisibleLimit += 3;
+            renderInsights();
+        }
+
+        function wireImageFallbacks(scope = document) {
+            scope.querySelectorAll("img.img-with-fallback").forEach(img => {
+                if (img.dataset.fallbackWired) return;
+                img.dataset.fallbackWired = "1";
+                img.addEventListener("load", () => {
+                    const overlay = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".fallback-overlay");
+                    if (overlay) overlay.style.display = "none";
+                    const src = img.currentSrc || img.src || "";
+                    const isPlaceholder = src.includes("placeholder") || src.includes("unsplash") || src.includes("thumb_default.png");
+                    if (!isPlaceholder) {
+                        const note = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".image-note");
+                        if (note) note.style.display = "none";
+                    }
+                });
+                img.addEventListener("error", () => {
+                    if (img.dataset.failed) return;
+                    img.dataset.failed = "1";
+                    img.src = FALLBACK_SRC;
+                    img.style.objectFit = "contain";
+                    const overlay = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".fallback-overlay");
+                    if (overlay) overlay.style.display = "flex";
+                });
+            });
+        }
+
+        function toggleSummary(btn) {
+            const content = btn.nextElementSibling;
+            btn.classList.toggle('open');
+            content.classList.toggle('open');
+
+            if (content.classList.contains('open')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                btn.textContent = "詳細要約を閉じる";
+            } else {
+                content.style.maxHeight = null;
+                btn.textContent = "詳細要約を見る";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+
+</html>
