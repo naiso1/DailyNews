@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-10",
+        analysis: {
+            jp: "日本の自動車内装市場では、新素材やコネクテッド技術の導入が加速しています。レクサスTZは2026年冬発売の3列シートBEVとして世界初公開され、Driving Loungeコンセプトを提案しています。四国竹材Forged bambooも、高級感とサステナビリティを両立する新素材トレンドを示唆しています。また、ホンダフリードの一部改良ではエアーEXに2列シートが追加されています。トヨタ紡織とイトーキが共同開発したクラウンシート技術を応用したデスクチェアも、シート技術のグローバル展開や内装の機能的進化を象徴しています。",
+            cn: "中国市場のEV内装トレンドは、CATL のバッテリー技術やLiDAR 搭載など高技術競争が激化している[cn818][cn827]。BYD のフラッシュ充電網や 900V プラットフォームが量産効率化の鍵[cn826][cn825]。消費者は OLED 天井スクリーンや AI コックピットなど体験価値を求めている[cn820]。音の可視化技術は高級感向上に有効[cn825]。バッテリーロック問題は信頼性重視の流れを示す[cn819]。",
+            in: "インド自動車内装市場では、安全規制強化[in855]とV2V通信普及が主要トレンド。一方で、トルコ生産終了によるサプライチェーン再編も課題[in853]。競合は安価な内装アクセサリー展開[in860]やパンルーフ普及[in861]で差別化を図る。マツダの7人乗り車人気[in862]からファミリー層向け空間価値向上が必要。自社は、環境対応素材導入と新質感開発で差別化を。",
+            us: "米国市場ではEV化と機能課金への批判が激化[us801]。高級車でも基本機能課金に反対の声があり、ユーザーはサブスク断片化に疲弊している。一方で、Gen Zは日本車やクラシックEVを愛し、HMIやディスプレイを重視する傾向[us800]。トヨタ系はロールスロイス級シート機能をコローラに搭載し[us802]、サステナビリティも重要視されている。",
+            eu: "欧州市場では、**EV復活**[eu765][eu773]と**音響演出**[eu774]のトレンドが顕著で、高級車は**触覚的体験**[eu769]を重視する。一方、**部品コスト高騰**[eu771]が製造効率化を迫る。サアブ博物館の**歴史的保存**[eu768]は、ブランド継承への関心の高さを示し、V8やVauxhallの**技術共有**[eu773]から学べる。規制・金融課題[eu770]は、サプライチェーンの**透明性向上**[eu771]を促す。",
+        },
+        ideas: {
+            jp: [
+                { id: 866, img: "images/idea_866.png", title: "竹材を活用したグローバル展開可能な内装パネル", desc: "四国産竹材「Forged bamboo」[jp988]を活用、日本発祥のサステナブル素材を海外展開。高級感と環境配慮を両立。海外市場でも「竹」のブランド力を活用し、環境意識の高い層にアピール。現地化戦略で、海外でも「竹」の美しさを享受できる。", imagePrompt: "Luxury car interior featuring forged bamboo wood grain material, Japanese sustainable design, warm natural lighting, premium dashboard and door panels, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 867, img: "images/idea_867.png", title: "UV-C LEDと新素材を組み合わせた除菌内装システム", desc: "UV-C LED内装除菌システム[jp995]をベースに、竹材[jp989]の抗菌性と相乗効果で、車内衛生を強化。新素材と新素材の組み合わせで、ウイルス対策と高級感を両立。家族連れや高齢者層に安心感を提供。", imagePrompt: "Futuristic car interior with UV-C LED lighting strips integrated into dashboard and air vents, bamboo material accents, clean and sterile atmosphere, blue accent lighting, photorealistic 3D render, premium automotive design, high detail" },
+            ],
+            cn: [
+                { id: 868, img: "images/idea_868.png", title: "モジュール式フラッシュ充電内装", desc: "1500kW急速充電対応の冷却モジュールをセンターコンソールに統合。BYDのフラッシュ充電網[cn826]と連携し、充電中の熱管理を自動制御。乗客が充電待ちでも快適に過ごせる。内装デザインも統一化しコスト削減。量産で価格競争力も向上。", imagePrompt: "Premium EV interior center console with integrated cooling module, sleek brushed aluminum and soft-touch leather surfaces, subtle LED ambient lighting in blue tones, charging indicator glow visible, minimalist design, photorealistic 3D render, automotive product visualization" },
+                { id: 869, img: "images/idea_869.png", title: "音の可視化トリムアクセント", desc: "ウェザーストリップにアコースティック設計を応用し、車内音質を可視化。高級感ある音響効果を視覚的に表現。BYDの高級感追求[cn825]やCATLの技術[cn820]と組み合わせ。乗客が音の美しさを視覚的に楽しみ、癒やされる体験を提供。", imagePrompt: "Luxury car interior door trim with acoustic visualization feature, glowing wave patterns on weather stripping, warm ambient lighting in amber and gold tones, premium leather and wood materials, cinematic lighting, photorealistic render, automotive design concept" },
+            ],
+            in: [
+                { id: 870, img: "images/idea_870.png", title: "バイオ再生素材加飾パネル", desc: "カカ豆殻や竹繊維を混入した再生素材で、ダッシュボードやドアトリムに独自質感を発現。V2V通信導入の安全トレンドと合わせ、環境配慮型高級内装で、エコ意識高い若年層と環境重視経営層が「地球に優しい高級感」を味わう。", imagePrompt: "Luxury car dashboard made from bamboo fiber and cocoa shell composite material, textured eco-friendly surface, warm natural lighting, Indian market interior concept, sustainable automotive design, photorealistic render, premium eco materials" },
+                { id: 871, img: "images/idea_871.png", title: "メテオコート進化型加飾パネル", desc: "型内塗装技術で凹凸のあるメテオコート加飾パネルを、インドの高温多湿環境に最適化。V2V通信システムや安全装備と調和する高級感を出す。シートやドアに貼り付け、既存車でも「シームレスな高級内装」を、運転手と家族が「快適で洗練された空間」を体験。", imagePrompt: "Seamless textured interior panel with integrated coating technology, automotive dashboard with wavy pattern, premium metallic finish, Indian car interior, modern luxury cockpit design, photorealistic rendering, cinematic lighting" },
+            ],
+            us: [
+                { id: 872, img: "images/idea_872.png", title: "リサイクル素材でEVシート", desc: "EV車向けにリサイクルプラスチックをシートに採用。環境に配慮しつつ、高級感と快適性を両立。脱炭素社会で選ぶ人のうれしさを最大限に。", imagePrompt: "Recycled material EV car seat interior, sustainable automotive design, premium eco-friendly materials, green and earth tone palette, modern vehicle cockpit, photorealistic render" },
+                { id: 873, img: "images/idea_873.png", title: "ミリ波透過エンブレムLED", desc: "ADAS信号を遮らず発光するエンブレムをEV車に搭載。安全性とデザイン性を両立。夜間の走行時に周囲のうれしさを感じさせます。", imagePrompt: "Glowing emblem with millimeter wave radar transparency, modern EV vehicle front view, futuristic lighting, night driving scene, photorealistic 3D render" },
+            ],
+            eu: [
+                { id: 874, img: "images/idea_874.png", title: "自動内装組立ライン", desc: "部品コスト高騰[eu771]に対応。AIカメラがトリム接着位置をリアルタイム検知し、歩留まりを15%向上。作業者は複雑なマニュアル不要で、熟練工でも初心者でも誰でも高品質な内装が組立可能。生産ラインが自動で最適化され、コスト削減と生産性向上の両立を実現。", imagePrompt: "Automated automotive interior assembly line, AI camera system detecting trim positioning in real-time, robotic arms assisting workers, modern factory environment, bright LED lighting, clean white and silver color scheme, photorealistic high detail, 4K quality, industrial design concept" },
+                { id: 875, img: "images/idea_875.png", title: "音響可視化トリム", desc: "既存の音の可視化技術を応用。車内トリム表面に埋め込みLEDで、エンジン音や風音の波長パターンを可視化。運転中は音の質を視覚化し、静寂感を音の波として表現。高級車オーナーは音の美しさを目で確認し、没入感を二重で楽しむ。", imagePrompt: "Luxury car interior dashboard, embedded LED strips visualizing sound wave patterns on trim surface, holographic acoustic visualization, blue and gold ambient lighting, night driving scene, premium leather materials, photorealistic 3D render, cinematic lighting, high detail" },
+            ],
+        }
+    },
+{
         date: "2026-05-07",
         analysis: {
             jp: "日本市場ではアウトドア化とEV化の二大トレンドが顕著[jp979][jp980]。特にレクサスTZやGR8ハイエースは、リサイクル素材や竹など新素材の採用で環境意識を反映[jp983][jp977]。センシングAI導入[jp986]やe-POWERによる静粛性[jp978]は、EV化に伴う熱管理や音質の再定義を迫る。さらにLEDコンソールボックスやダッシュボードのシボ加工[jp981][jp984]は、機能性と安全性の両立を重視する傾向を示す。これらの動向を踏まえ、グローバル戦略と独自技術を掛け合わせた企画が必要だ。",
