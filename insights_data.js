@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-11",
+        analysis: {
+            jp: "2026年の日本自動車内装市場は、EV化[jp1000,jp1003]と軽量化[jp1000]がトレンド。軽キャブバン「エブリイ」に採用されるHDナビ[jp997]や、スポーツEV「スーパーワン」の専用シート[jp1000]から、小型車でもコネクテッド機能と快適性を両立する必要性が明確。また、北京モーターショーで展開されるALCANTARA素材[jp998]やPVCレザー[jp1006]から、高級感のある新素材が次期主流になりつつある。",
+            cn: "中国EV市場では、**バッテリー技術**の進化と**HMI**の高度化が顕著[cn833]。BYDやMGは**LiDAR**選装や**液態・固態電池**を投入し[cn829]、航続距離405〜610kmを実現[cn831]。一方で、**OTAアップデート**による航続距離低下や充電時間延長が課題[cn832]。CATLは**三元電池**で82.52%のシェアを維持[cn833]。BYDは有料**画面アップグレード**で後市場収益を拡大[cn836]。ユーザーは**快適性**と**信頼性**を求め[cn828]。",
+            in: "インド市場ではAI開発支援とEV普及が加速しており、新素材やAR認証対応も進んでいます[in863]。2029年までの新工場建設やデザインコンテストで若手育成が注目[in869][in870]。トヨタ・カメリーなど既存EVの課題も浮き彫り[in866]。これらの動向から、内装製品開発においては、AI開発を加速させるためのモジュール化と、EV時代を見据えたリサイクル素材の活用が鍵となります。",
+            us: "北米市場ではHMI使い勝手の改善、LiDAR 低価格化、高級感回帰のトレンドが顕著です。EV航続距離短さへの不満に対し、[us809] [us812] [us810] ユーザー体験向上が最優先課題です。欧州メーカーの中国企業工場売却は、[us813] 海外展開加速を示唆します。ブランドロゴ強調ステアリングや計器盤不具合、[us818] から品質担保とブランド性両立が重要です。内装素材多様化は、機能性と快適性両立が鍵となります。",
+            eu: "EU市場では**大型SUVの競争激化**[eu777][eu778]と**EV化の加速**[eu781]が進む中、**自動化による製造効率化**[eu784]が求められ、**高品質な内装体験**[eu783]への関心が高まっています。",
+        },
+        ideas: {
+            jp: [
+                { id: 876, img: "images/idea_876.png", title: "子供優先サテライトシート", desc: "衝突時や緊急時に子供を保護する「子供優先サテライトシート」を提案。ニュースで話題の「逆走探知機能」[jp997]を統合し、衝突を検知すればシートが自動で保護姿勢へ変形。また、緊急脱出時にシートが自動開放する機能も搭載。親は「子供が安全」という安心感を、運転中は「手放しても安心」といううれしさを同時に得られる。", imagePrompt: "Automotive safety concept, child safety seat transforming into protective position during collision, emergency escape mode, interior of compact car, Japanese market, warm lighting, photorealistic 3D render, premium quality, high detail, 4K quality" },
+                { id: 877, img: "images/idea_877.png", title: "樹脂インパネ軽量化モジュール", desc: "豊田合成の「樹脂インパネリンフォース」技術を応用した軽量化モジュールを提案。ニュースで話題のEV「スーパーワン」[jp1000]のような小型EV向けに最適化。1090kgの軽量化を実現しつつ、高級感あるALCANTARA素材[jp998]やPVCレザー[jp1006]を組み合わせて、軽量化と高級感の両立を可能に。ドライバーは「軽くて快適」といううれしさを享受できる。", imagePrompt: "Automotive interior design concept, lightweight resin dashboard module, luxury materials like Alcantara and PVC leather, compact car interior, modern vehicle cockpit, cinematic lighting, photorealistic 3D render, premium quality, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 878, img: "images/idea_878.png", title: "香りと音で癒やされる内装", desc: "BYDの『オーツミールライス』テーマ[cn123]から着想。車内を自然の香りで包み、エンジン音の代わりに自然音を流す。ドライバーが心を癒やされ、長距離でもストレスフリーに旅できる。", imagePrompt: "Luxury car interior with natural aromatherapy diffuser emitting soft mist, soft beige and wood grain materials, ambient lighting mimicking sunrise glow, serene atmosphere, photorealistic 3D render, premium automotive design" },
+                { id: 879, img: "images/idea_879.png", title: "漆黒光沢インパネとARナビ", desc: "新漆黒めっき加飾部品[cn123]を応用。深みのある漆黒インパネにARナビを投影。BYDの12.8インチタッチスクリーン[cn123]とLiDAR[cn829]を融合。夜間走行で見やすく、高級感を維持する。", imagePrompt: "Dark glossy dashboard with AR navigation projection, deep matte black finish, night driving scene, holographic interface floating above console, blue accent lighting, futuristic automotive interior, photorealistic render" },
+            ],
+            in: [
+                { id: 880, img: "images/idea_880.png", title: "AI開発モジュール付きコンソールユニット", desc: "インド市場向けに、AIワークスプラットフォームとの連携を容易にする標準化コンソールモジュール。主要OEMで導入実績があるため、開発期間短縮とコスト削減を実現。量産化による部品共通化で低価格化も可能。開発スピードアップで新車リリースが早くなり、市場シェア拡大に貢献します。", imagePrompt: "Automotive center console module with integrated AI processing unit, modular design with standardized connectors, industrial design studio setting, brushed aluminum and black matte finish, technical blueprint overlays, soft blue ambient lighting, photorealistic product visualization, premium automotive interior component, high detail 4K render" },
+                { id: 881, img: "images/idea_881.png", title: "アップサイクル革シートパッド", desc: "廃棄エアバッグ生地や廃ステアリング革をアップサイクルしたシートパッド。インドのEV普及促進政策やスクラップ優遇と連動し、環境配慮型素材をアピール。リサイクル素材の活用でCO2削減に貢献。環境意識の高い消費者にも好まれ、差別化ポイントになります。", imagePrompt: "Luxury car seat cushion made from recycled automotive leather, sustainable material texture visible, earthy brown and green color scheme, natural lighting in eco-friendly showroom, soft fabric texture with subtle stitching detail, photorealistic product photography, premium automotive sustainability concept, high detail 4K render" },
+            ],
+            us: [
+                { id: 882, img: "images/idea_882.png", title: "バイオ素材採用の薄型パネル", desc: "再生材で軽量薄型インパネを新開発。EV航続距離向上と高級感を両立。触り心地の良い新素材で、運転中の疲れを軽減。ユーザーが「車内がより快適で、環境に優しい」と実感できる。", imagePrompt: "Modern vehicle interior dashboard made from light bio-based sustainable materials, thin profile with premium wood grain texture, soft natural lighting, warm ambient glow, photorealistic 3D render, luxury automotive design" },
+                { id: 883, img: "images/idea_883.png", title: "骨格樹脂化のモジュール化パネル", desc: "スマート薄型インパネをEV向けに最適化。大型HMIと連動し、LiDARセンサーを低コストで統合。品質問題から自動検知機能付き。運転者が「最新技術で安全に、快適に」と感じられる。", imagePrompt: "Automotive interior instrument panel with advanced modular plastic frame structure, integrated LiDAR sensor module, sleek black and silver finish, futuristic cockpit design, professional product visualization, cinematic lighting, high detail" },
+            ],
+            eu: [
+                { id: 884, img: "images/idea_884.png", title: "自律走行対応コンソール", desc: "EVフラットフロアを活かし、自動運転時でも快適な座席配置と広々収納を実現。ワイヤレス充電とリバーシブルアームレストで、ドライバーの疲れを軽減し、移動中も働くことが楽しく。", imagePrompt: "Minimalist center console in electric vehicle with flat floor design, wireless charging pad, reversible armrest, spacious storage compartments, driver and passenger seated comfortably, soft ambient lighting, high-end materials like brushed metal and soft-touch leather, photorealistic interior shot, warm and inviting atmosphere" },
+                { id: 885, img: "images/idea_885.png", title: "自動避災コンソール", desc: "センサーとAIが障害物を検知し、自動で避災するコンソールシステム。歩留まり向上とコスト削減を実現。運転者の負担を減らし、安全で安心なドライブを提供。", imagePrompt: "Futuristic center console with integrated sensors and AI interface, holographic display showing object detection, sleek design with LED indicators, premium materials like carbon fiber and aluminum, night driving scene with city lights, cinematic lighting, high detail automotive interior" },
+            ],
+        }
+    },
+{
         date: "2026-05-10",
         analysis: {
             jp: "日本の自動車内装市場では、新素材やコネクテッド技術の導入が加速しています。レクサスTZは2026年冬発売の3列シートBEVとして世界初公開され、Driving Loungeコンセプトを提案しています。四国竹材Forged bambooも、高級感とサステナビリティを両立する新素材トレンドを示唆しています。また、ホンダフリードの一部改良ではエアーEXに2列シートが追加されています。トヨタ紡織とイトーキが共同開発したクラウンシート技術を応用したデスクチェアも、シート技術のグローバル展開や内装の機能的進化を象徴しています。",
