@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-12 00:37";
+window.NEWS_UPDATED_AT = "2026-05-13 00:40";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -54364,6 +54364,628 @@ window.LOADED_NEWS_DATA = [
         interiorScore: 79,
         country: "jp",
         img: "https://gomuhouchi.com/wp-content/uploads/2026/05/be34dc0def9eb342073494d32d04bd58-e1778218353864-300x258.jpg",
+        note: ""
+    },
+    // 2026-05-12 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1007",
+        title: "トヨタノア/ヴォクシーウェルキャブ改良、車いす固定装置新設定",
+        desc: "トヨタはノア/ヴォクシーのウェルキャブを5月12日発売で一部改良。車いす仕様車に「ワンタッチ式固定装置」を新設定し、介助者の負担軽減を図る。また、一部仕様に四輪駆動システム「E-Four」を追加した。",
+        url: "https://news.yahoo.co.jp/articles/853fa49f30d32104d24cd69c315e35220e121821?source=rss",
+        source: "レスポンス",
+        date: "2026-05-12",
+        tags: [],
+    
+        interiorScore: 79,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260512-00000018-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1008",
+        title: "トヨタハリアーの純正JBLをブラムS165.80に交換、クリアな音へ",
+        desc: "トヨタハリアーオーナーの下島さんが奈良BREEZEでプロ施工。純正JBLをブラム2ウェイS165.80に交換し、純正デザインを活かしたインナー取り付けで、もわっとした音をキリリと引き締まったクリアな音へ変えた。",
+        url: "https://news.yahoo.co.jp/articles/5eee83539b90232585ab0b6c03804ad3dcdabeef?source=rss",
+        source: "レスポンス",
+        date: "2026-05-12",
+        tags: [],
+    
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260512-00000007-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1009",
+        title: "トヨタJPN TAXI一部改良、運転支援制動時メーター表示灯標準装備",
+        desc: "トヨタは5月12日、JPN TAXIの一部改良モデルを発売した。税込車両価格は標準「和」が348万9200円、上級「匠」が371万3600円。運転支援システムによる制動時にもメーター表示灯が点灯し、ドライバーの安心感を高める。",
+        url: "https://news.yahoo.co.jp/articles/28e6ee43a8761f705de8cfafbf7ea6918343af69?source=rss",
+        source: "MotorFan",
+        date: "2026-05-12",
+        tags: [],
+    
+        interiorScore: 67,
+        interiorReason: "text mentions meter display for driver support system status (cabin HMI feature)",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260512-01482171-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1010",
+        title: "テスラモデルY LとフォルクスワーゲンID. Buzz Pro NWBを比較",
+        desc: "テスラは6月、ホイールベースを150mm延長した3列6人乗りの「モデルY L」を発売。フォルクスワーゲンの「ID. Buzz Pro NWB」と比較すると、全長はモデルY Lが193mm長いが、全高はID. Buzz NWBが255mm高い。",
+        url: "https://news.yahoo.co.jp/articles/bdb0df43d23d9ac6511721849951afa83112e78d?source=rss",
+        source: "MotorFan",
+        date: "2026-05-12",
+        tags: [],
+    
+        interiorScore: 72,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260512-01475962-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1011",
+        title: "ステアリング形状変更で操縦性向上の26式GRヤリスを公道試乗",
+        desc: "26式GRヤリスはステアリング形状変更やスイッチ配列変更で誤操作抑制。EPS制御見直しでモード別操舵力調整。タイヤにブリヂントPOTENZA RACE標準装着。縦引きパーキングブレーキ選択時でもシートヒーター装着可能に。",
+        url: "https://news.yahoo.co.jp/articles/042fc44c2ddf5ff9e42395288452dff9a9447a0c?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-05-12",
+        tags: ["シート"],
+    
+        interiorScore: 70,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260512-00010001-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1012",
+        title: "モータージャーナリストが断言、不必要な装備とは？",
+        desc: "モータージャーナリストは、自動運転機能の「レベル2」は運転支援の延長であり、過剰なコストをユーザーに負担させる不要な装備と指摘。カメラやレーダーなど高額なセンサーを必要とするため、本来の自律走行とは異なる。",
+        url: "https://news.yahoo.co.jp/articles/48dcdb59efc03316fd53fe78a38133692d7d0aa4?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-12",
+        tags: ["センシング"],
+    
+        interiorScore: 80,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260512-00000011-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us819",
+        title: "Lotus、EV計画見送り V8ハイブリッド新車2028年発売へ",
+        desc: "LotusはEV計画を撤回し、2028年にV8ハイブリッド新車「Type 135」を発売予定。既存のガソリン車「Emira」もパワーアップと軽量化で更新する。",
+        url: "https://www.thedrive.com/news/lotus-dumps-ev-plan-for-a-new-v8-supercar-tds",
+        source: "The Drive",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/05/Lotus_Type_135_Teaser_16x9-copy.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us820",
+        title: "ステラントスがチスラーに安価な新車「Pronto」開発を検討",
+        desc: "ステラントスは、チスラー向けに2万ドルから始める小型車「Pronto」をディーラーに提示したと報じられている。同社は現在ミニバン2モデルのみで、新戦略発表会でも新車ラインナップの拡大が期待されている。",
+        url: "https://www.motor1.com/news/795622/chrysler-affordable-future-model/",
+        source: "Motor1",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/Ak3PZW/s3/2027-chrysler-pacifica.jpg",
+        note: ""
+    },
+    {
+        id: "us821",
+        title: "2027年Audi Q9でピアノブラックトリム削減へ、マット素材採用",
+        desc: "2027年Audi Q9ではピアノブラックトリムを大幅に削減し、指紋や汚れに強いマット・テクスチャ素材を採用。ステアリングやセンターコンソールの光沢プラスチックは残るが、インテリア素材の改善は期待される。",
+        url: "https://www.motor1.com/news/795566/audi-reducing-piano-black-trim/",
+        source: "Motor1",
+        date: "2026-05-12",
+        tags: ["センターコンソール", "新素材"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/P3BrQ8/s3/2027-audi-q9-interior.jpg",
+        note: ""
+    },
+    {
+        id: "us822",
+        title: "Lotus、2028年発売のV8ハイブリッド超跑「Type 135」を新車として発表",
+        desc: "Lotusは2028年発売の新型超跑「Type 135」を新車として発表。V8エンジンとハイブリッドシステムを組み合わせた出力1,000馬力以上を目標に開発しており、Emiraの上位モデルとして位置づけられる。",
+        url: "https://www.motor1.com/news/795545/lotus-v8-supercar-teaser/",
+        source: "Motor1",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/YAzvJy/s3/lotus-type-135-supercar-teasers.jpg",
+        note: ""
+    },
+    {
+        id: "us823",
+        title: "2026年Lexus ESに14インチタッチスクリーンとカスタマイズ可能なホーム画面が標準搭載",
+        desc: "2026年Lexus ESは、14インチタッチスクリーン搭載のタブレット風インターフェースを採用。カスタマイズ可能なホーム画面、音声アシスタントの性別選択、標準装備のDashcam、EV向け充電管理システムなど、コックピットと快適装備が大幅に向上する。",
+        url: "https://www.carscoops.com/2026/05/lexus-es-infotainment-update/",
+        source: "CarScoops",
+        date: "2026-05-12",
+        tags: ["HMI", "ディスプレイ", "AI", "コックピット", "EV", "カスタマイズ"],
+    
+        interiorScore: 100,
+        interiorReason: "infotainment display and voice assistant plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Lexus-Interface_Spotify-2-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us824",
+        title: "2027年Q9、ドアハンドル不要の高級内装とスイッチャブルルーフを備える大型SUV",
+        desc: "2027年発売のAudi Q9は、欧州スロバキア製で、ビジネスクラス航空機をイメージしたキャプテンシートや84 LED搭載のスイッチャブルルーフ、ピアノブラックを避けた素材を採用。価格は$90kからで、V6/V8エンジンが搭載される。",
+        url: "https://www.carscoops.com/2026/05/audis-new-q9-is-so-luxurious-you-might-never-touch-a-door-handle/",
+        source: "CarScoops",
+        date: "2026-05-12",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 89,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Q9-lead-May122698765-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us825",
+        title: "1980年代BMW 745i、2台目のターボ搭載高級車",
+        desc: "1980-86年式BMW 745iは、3.2L直6ターボで252馬力を発生。ZF 3速ATとABSを標準装備し、メルセデス450SELと競合した。米国では非正規輸入のみで、2007年E90 335iまでターボガソリン最後のモデルとなった。",
+        url: "https://www.jalopnik.com/2167703/1980s-bmw-745i-turbo-flagship/",
+        source: "Jalopnik",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/this-7-series-flagship-from-the-80s-was-the-second-turbo-road-car-bmw-ever-produced/l-intro-1778240949.jpg",
+        note: ""
+    },
+    {
+        id: "us826",
+        title: "2026年トヨタGRスープラ最終版のインテリア写真",
+        desc: "2026年トヨタGRスープラ最終版は、赤いステッチやトリム、シートベルトなどインテリアに赤いアクセントを多用。ダッシュボード末端に番号入りプレートも配置される。",
+        url: "https://www.caranddriver.com/photos/g68037819/2026-toyota-gr-supra-mkv-final-edition-drive-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-05-12",
+        tags: ["シート", "コックピット"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/276ac0af-ddc7-42f2-a151-67a882c73222.jpg",
+        note: ""
+    },
+    {
+        id: "us827",
+        title: "ラリーのトラブル解決術：9回優勝のデイヴィッド・ラング氏に聞く",
+        desc: "ラリーはスピードだけでなく生存力も重要。9回GTA優勝のデイヴィッド・ラング氏は、1959年トヨタ・TR3やジープでの冷却液漏れやヘッドガスケット破損など、トラブルを冷静に解決する姿勢と、コミュニティの助けを強調。",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/houston-weve-had-a-problem-rally-breakdowns-ft-david-lang-45135274?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/05/12/07231/houston-weve-had-a-problem-rally-breakdowns-ft-david-lang.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us828",
+        title: "2027 Audi Q9 内装詳細：7 人乗りで高級感と快適性を追求",
+        desc: "2027 Audi Q9 は同社最大級 SUV として 7 月 28 日 2026 年 7 月 28 日に発表予定。6〜7 人乗りで 2 列目には電動調整のキャプテンシート選べる。全 4 扉電動開閉、16 平方フィートパノラマサンルーフ、Bang & Olufsen 4D サウンドシステム搭載。",
+        url: "https://www.thetorquereport.com/2027-audi-q9s-interior-teased-ahead-of-its-debut-in-july/",
+        source: "The Torque Report",
+        date: "2026-05-12",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thetorquereport.com/wp-content/uploads/2026/05/Original-16977-second-a260907-large-1024x769.jpeg",
+        note: ""
+    },
+    {
+        id: "eu785",
+        title: "未発売のVW秘密車：1955 EA 48や1963 EA 128など",
+        desc: "VWはヴォルフスブルクに2つの博物館を運営。ZeitHausとStiftungには、1955 EA 48（0.7リットル平二気筒、18bhp）や1963 EA 128（911系2.0L平六気筒、89bhp）など未発売の秘密車やコンセプトカーが展示されている。",
+        url: "https://www.autocar.co.uk/car-news/slideshow/secret-volkswagens-were-never-sold-0",
+        source: "AUTOCAR UK",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_vw-vario_vw_0_1_0_0_0_0.jpg?itok=d0llC1_q",
+        note: ""
+    },
+    {
+        id: "eu786",
+        title: "Lotus、ノルフォークのHethel工場で新型ハイブリッドスポーツカー生産計画",
+        desc: "LotusはノルフォークのHethel工場をEmira PHEVやType 135の生産拠点として維持する方針を明らかにした。CEOは同工場が米国市場向けに優位性を有すると指摘。2030年に年間3万台の売上目標達成に向け、供給チェーンの強化や英国政府からの支援も検討中である。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/lotus-tips-hethel-best-location-build-new-hybrid-sports-cars",
+        source: "AUTOCAR UK",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/handmade_in_hethel_0.jpg?itok=K69qHgqL",
+        note: ""
+    },
+    {
+        id: "eu787",
+        title: "スウェーデンの伝説的自動車メーカー、サボの最終車体がオークションに",
+        desc: "スウェーデンのトロールハッタン工場に残ったサボ9-3など8台が、NEVSの破綻に伴い5月21日からオークションにかけられる。内訳は2014年製プレプロダクション車3台、NEVS製電気原型車3台、レンジエクステンダー搭載テスト車1台、および恒大集団製の電気SUV「Hengchi 5」1台。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/final-saabs-auction-curtain-call-swedish-legend",
+        source: "AUTOCAR UK",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/last-saabs-at-trollhattan.jpg?itok=RsYeGqiM",
+        note: ""
+    },
+    {
+        id: "eu788",
+        title: "Renault JP4x4コンセプト、オープンサイドのビーチバギー化",
+        desc: "RenaultはEVベースのJP4x4コンセプトを公開。1980年代のビーチバギーをイメージし、ドアをブレード状に短縮、屋根と荷台を開放。インテリアは独立型センターコンソールとバケットシートを採用。4 Savaneと同様のデュアルモーター4WDを備え、15mmの接地高さを確保。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/renault-4-gets-beach-buggy-treatment-new-jp4x4-concept",
+        source: "AUTOCAR UK",
+        date: "2026-05-12",
+        tags: ["シート", "センターコンソール", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/renault-4-jp4x4-13.jpg?itok=RmeVqEiB",
+        note: ""
+    },
+    {
+        id: "eu789",
+        title: "2028年発売のLotus新V8ハイブリッドスーパーカー「Esprit」発表",
+        desc: "Lotusは2028年発売のV8ハイブリッドスーパーカー「Esprit」を発表。Renault-GeelyのHorse社製V8エンジン（986bhp超）を採用し、Hethel工場でEmiraと並行生産。Theory 1コンセプトカーを基盤に、McLaren F1式3人乗りや排気管2本などの特徴を持つ。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/lotus-confirms-new-v8-hybrid-supercar-2028",
+        source: "AUTOCAR UK",
+        date: "2026-05-12",
+        tags: ["AR"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/lotus-news-2026-b_1.jpg?itok=2pg1hSFZ",
+        note: ""
+    },
+    {
+        id: "eu790",
+        title: "EV 一辺倒は環境を阻害、効率的ハイブリッドが解決策",
+        desc: "CLEPA の Benjamin Grieger は、欧州で電気自動車への移行速度より排出削減結果を重視すべきと提言。",
+        url: "https://www.autoexpress.co.uk/news/369572/our-ev-obsession-holding-back-green-mobility-efficient-hybrids-are-answer",
+        source: "Auto Express",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--DS8lEwPy--/t_rss_image_w_845/v1731075210/autoexpress/2024/11/Toyota%20Prius%20Plug-in-6.jpg",
+        note: ""
+    },
+    {
+        id: "eu791",
+        title: "NEVS、サードの最後の9-3をオークションへ、原型車も出品",
+        desc: "NEVSは Trollhattan 工場で製造された最後の 9-3 をオークションに出品。2014 年製の 3 台の Aero 仕様と、インホイールモーター搭載などの 4 台の電気化原型車を含む計 7 台が対象。中国系企業 Evergrand の買収後、投資停止で「冬眠」状態にある。",
+        url: "https://www.autoexpress.co.uk/saab/9-3/369569/saabs-final-closing-down-sale-sad-sell-will-shift-last-few-cars",
+        source: "Auto Express",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--mGCgfod5--/t_rss_image_w_845/v1778594564/autoexpress/2026/05/Saab%20Trollhattan-2.jpg",
+        note: ""
+    },
+    {
+        id: "eu792",
+        title: "新Skoda Epiqの画像リーク、5月19日発表へ",
+        desc: "Skodaの新型EV「Epiq」が5月19日に正式発表されることを示唆する画像リークが公開された。同車はRenault 4のライバルとして位置づけられ、7月発売予定のPeaqとの差別化も示唆されている。",
+        url: "https://www.autoexpress.co.uk/skoda/369567/new-skoda-epiq-teasers-pictures",
+        source: "Auto Express",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--_Hek4UIm--/t_rss_image_w_845/v1778588219/autoexpress/2026/05/Skoda%20Epiq%20-%20under%20cover_hxxgbl.jpg",
+        note: ""
+    },
+    {
+        id: "eu793",
+        title: "欧州メーカー、ハイブリッドエンジン標準化提言",
+        desc: "欧州自動車メーカーは、ハイブリッドエンジンの開発を統合し、コストをユーザーインターフェースや自動化技術に再投資すべきだ。Horse PowertrainsのCEOマティアス・ジアンニニ氏は、2035年まで内燃機関車は半数以上残ると指摘。",
+        url: "https://www.autoexpress.co.uk/news/369566/call-carmakers-standardise-petrol-engines",
+        source: "Auto Express",
+        date: "2026-05-12",
+        tags: ["HMI", "AI"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--08TZsosL--/t_rss_image_w_845/v1764864664/autoexpress/2025/12/Vauxhall%20Frontera%20Hybrid%20-%20front%20cornering_ekyzan.jpg",
+        note: ""
+    },
+    {
+        id: "eu794",
+        title: "Renault 4 JP4x4コンセプトカー、双モータービーチバギー",
+        desc: "Renault 4 JP4x4は、サーファー向けに設計された双モーターのオープントップ・オープンサイドビーチバギーコンセプトカーである。",
+        url: "https://www.autoexpress.co.uk/renault/4/369564/new-renault-4-jp4x4-concept-car-pictures",
+        source: "Auto Express",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--xargVuSm--/t_rss_image_w_845/v1778581034/autoexpress/2026/05/Renault%204%20JP4x4%20-%20dynamic%20front%20tracking_gfp1cj.jpg",
+        note: ""
+    },
+    {
+        id: "cn838",
+        title: "BYD Atto 3、240kW RWDモデルとフラッシュ充電機能を搭載し、5 月 21 日の発売前",
+        desc: "BYDのAtto 3（中国名：元PLUS）は5月21日の発売前に店舗に到着した。240kWのRWD、630kmの航続距離、ブレードバッテリー2.0、Yun-N Cサスペンション、大型ディスプレイ、ワイヤレス充電パッド、フラットフロアなど、内装や走行性能が強化された。",
+        url: "https://carnewschina.com/2026/05/12/byd-atto-3-lands-in-showrooms-with-240-kw-rwd-and-flash-charging-ahead-of-may-21-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-05-12",
+        tags: ["ディスプレイ", "EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/640-large-1-1500x888.jpg",
+        note: ""
+    },
+    {
+        id: "cn839",
+        title: "ホンダは中国でZR-V、フィット、アコードe:PHEVの清算を進め、4 月には販売台数が前年比48%",
+        desc: "ホンダは中国で4月の販売が48%減少し、ZR-Vやフィット、アコードe:PHEVを清算段階へ進める。GACホンダ広州工場は2026年6月に稼働停止予定で、生産能力は120万台から72万台に縮小される。",
+        url: "https://carnewschina.com/2026/05/12/honda-ends-zr-v-fit-accord-ephev-production-as-april-sales-collapse-48-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e8b083e695b4e69cace794b0e6a087e5bf97e4bd8de7bdaee58f8ae8838ce699afe889b2-1-1430x900.png",
+        note: ""
+    },
+    {
+        id: "cn840",
+        title: "2028 年発売予定の V8 ハイブリッドスーパーカー、EV 戦略から転換",
+        desc: "ロータスは、2028 年発売の V8 ハイブリッドスーパーカー「タイプ 135」を発表し、2028 年までの全 EV 戦略から転換する。メルセデス・AMG 製の 4.0 リットルツインターボ V8 エンジンと 1000 馬力超の高出力を予定している。",
+        url: "https://carnewschina.com/2026/05/12/lotus-announces-1000-hp-v8-hev-supercar-for-2028-pivoting-from-full-ev-strategy/",
+        source: "CarNewsChina - All",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-38-e1778565472109.png",
+        note: ""
+    },
+    {
+        id: "cn841",
+        title: "Xiaomi YU7 GTは990馬力を持ち、5月末に発売される予定。赤色のモデルが街に登場する",
+        desc: "Xiaomi YU7 GTは、990馬力（738kW）のデュアルモーターを搭載し、最高時速300km/hを達成する高性能SUVです。101.7kWhのバッテリーを搭載し、CLTC航続距離は705kmです。21インチホイールやBremboブレーキ、空力パーツを備え、車長は5015mmです。",
+        url: "https://carnewschina.com/2026/05/12/xiaomi-yu7-gt-spotted-on-streets-a-990-hp-performance-suv-ready-for-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-33-e1778547526911_webhook_1500x900_q85_1778548126.jpg",
+        note: ""
+    },
+    {
+        id: "cn842",
+        title: "イーブ・エナジーは、インドの GNEPL から 8GWh のエネルギー貯蔵システムの受注を獲得しまし",
+        desc: "中国の第 5 位バッテリーメーカーであるイーブ・エナジーは、インドの GNEPL と 8GWh のエネルギー貯蔵システム受注を締結した。今後 5 年間で最大 60GWh の協力規模を目指す。628Ah のバッテリーは高安全性を備え、再生可能エネルギー比率の増加に伴う電力網の安定化に貢献する。",
+        url: "https://cnevpost.com/2026/05/12/eve-energy-secures-8-gwh-energy-storage-order-from-india-gnepl/",
+        source: "CnEVPost - All",
+        date: "2026-05-12",
+        tags: ["EV", "バッテリー", "安全"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051211142321.jpg",
+        note: ""
+    },
+    {
+        id: "cn843",
+        title: "BYDは5月21日に第3世代のYuan Plusを発売し、フラッシュ充電機能を搭載します",
+        desc: "BYDは5月21日に第3世代の「Yuan Plus」を発売します。車体サイズは4,665mm×1,895mm×1,675mmで、ホイールベースは2,770mmです。2次世代のブレードバッテリーとフラッシュ充電機能により、10%から70%まで約5分で充電可能です。",
+        url: "https://cnevpost.com/2026/05/12/byd-to-launch-third-gen-yuan-plus-may-21/",
+        source: "CnEVPost - All",
+        date: "2026-05-12",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051210550361.jpg",
+        note: ""
+    },
+    {
+        id: "cn844",
+        title: "理想汽車が独自開発したM100チップを搭載したL9 LiDAR搭載のフラッグシップSUV",
+        desc: "理想汽車は5月12日に自社開発のM100チップを発表しました。このチップは5ナノメートル製程を採用し、単チップの計算能力は1280 TOPSに達します。フラッグシップモデルのL9 Livisには2つのM100チップを搭載し、合計計算能力は2560 TOPSです。",
+        url: "https://cnevpost.com/2026/05/12/li-auto-unveils-in-house-m100-chip/",
+        source: "CnEVPost - All",
+        date: "2026-05-12",
+        tags: ["AR", "コネクテッド"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051210093227.jpg",
+        note: ""
+    },
+    {
+        id: "cn845",
+        title: "理想汽車のQ1納期は5月28日、L9 Livisは5月15日に発売されます",
+        desc: "理想汽車のQ1の納期は5月28日、L9 Livisは5月15日に発売されます。Q1の納期は95,142台で、ガイダンスの予想を上回りました。L9 LivisにはM100チップが搭載されており、前売価格は559,800元です。",
+        url: "https://cnevpost.com/2026/05/12/li-auto-q1-2026-earnings-release-may-28/",
+        source: "CnEVPost - All",
+        date: "2026-05-12",
+        tags: ["コネクテッド"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051209203558.jpg",
+        note: ""
+    },
+    {
+        id: "cn846",
+        title: "テスラ中国の4月の販売台数：モデルYが9割を占め、輸出も急増",
+        desc: "テスラ中国の4月の小売販売台数は2万5956台で、モデルYが88.57%を占めた。一方、モデル3は2966台と大幅に減少した。輸出は5万3522台で、モデルYが2万9153台を輸出した。",
+        url: "https://cnevpost.com/2026/05/12/tesla-apr-2026-china-retail-breakdown/",
+        source: "CnEVPost - All",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051208210441.jpg",
+        note: ""
+    },
+    {
+        id: "cn847",
+        title: "ユニトリ、世界初の量産型有人ロボットGD01を発売、390万元から販売",
+        desc: "ユニトリは世界初の量産型有人メカ「GD01」を発売し、価格は390万元（約57万ドル）から。重量は乗員を含む約500kgで、二足歩行から四足歩行へ変形可能。同社はSTAR市場でのIPO準備を進め、2025年の売上は17億8000万元、利益は6億万元に達した。",
+        url: "https://cnevpost.com/2026/05/12/unitree-unveils-manned-mecha-gd01/",
+        source: "CnEVPost - All",
+        date: "2026-05-12",
+        tags: ["AR"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051206592965.jpg",
+        note: ""
+    },
+    {
+        id: "in873",
+        title: "タタ・ネクソンの44バリエーションと価格・装備詳細",
+        desc: "インドで売れ筋のタタ・ネクソンは、1.2Lターボガソリン、CNG、1.5Lディーゼルエンジンと44バリエーションを提供。価格は7.37〜14.02ラakhで、Fearless+PSにはJBLサウンドやベンチレーテッドシートなど高級装備を備える。",
+        url: "https://www.autocarindia.com/auto-features/2025-tata-nexon-price-variants-features-engine-and-gearbox-options-colours-explained-429326",
+        source: "Autocar India - All",
+        date: "2026-05-12",
+        tags: ["AR", "シート"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260512_091921_f38798b5.jpg",
+        note: ""
+    },
+    {
+        id: "in874",
+        title: "Audi Q9 内装画像公開、トリプルスクリーンとBang & Olufsen搭載",
+        desc: "Audiは2026年7月29日の正式発表前に、フラッグシップSUV「Q9」の内装を公開。トリプルスクリーン、Bang & Olufsen 4Dサウンド、電気式ドア、Qi2.2対応無線充電パッド、84 LED搭載パノラマサンルーフ、電動3列目シートなど、高級装備を備える。",
+        url: "https://www.autocarindia.com/auto-images/audi-q9-interior-image-gallery-440277",
+        source: "Autocar India - All",
+        date: "2026-05-12",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        interiorScore: 100,
+        interiorReason: "The article is entirely focused on the interior of the Audi Q9, detailing specif",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260512_083216_e7ce9f6b.jpg",
+        note: ""
+    },
+    {
+        id: "in875",
+        title: "ランドローバー、インドでRange Rover Sport SVを2.05億ルピーから発売",
+        desc: "ランドローバーはインド市場向けにRange Rover Sport SVを発売し、起価2.05億ルピー（税抜）で販売開始。専用ペイントや22インチフォージドアルミホイール、パーフォレイトドウィンザーレザーシート、メリディアンサウンドシステムなどのインテリア装備を備える。",
+        url: "https://www.autocarindia.com/car-news/range-rover-sport-sv-launched-at-rs-205-crore-439713",
+        source: "Autocar India - All",
+        date: "2026-05-12",
+        tags: ["シート", "新素材"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260512_081109_ac7e5662.jpg",
+        note: ""
+    },
+    {
+        id: "in876",
+        title: "Kia、5月最大15.5万ルピーの割引をCarens Clavisなどに",
+        desc: "Kiaは2026年5月に、Carens Clavisで最大15.5万ルピー、Carnivalで27万ルピーの割引を提供。交換・スクラップ支援など多様なオファーがあり、Carens Clavisの1.5リットルターボガソリン車には5年延長保証も付く。",
+        url: "https://www.autocarindia.com/car-news/kia-carens-clavis-syros-seltos-get-benefits-of-up-to-rs-155-lakh-in-may-439711",
+        source: "Autocar India - All",
+        date: "2026-05-12",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260512_074613_a0bfdd48.jpg",
+        note: ""
+    },
+    {
+        id: "in877",
+        title: "Lotus、2028年V8ハイブリッドスーパーカー「Type 135」復活",
+        desc: "Lotusは2028年デビューのV8ハイブリッドスーパーカー「Type 135」を復活させる。出力は1,000hp超で、2004年のEsprit以来のV8搭載となる。",
+        url: "https://www.autocarindia.com/car-news/over-1000hp-lotus-v8-hybrid-supercar-debut-in-2028-439710",
+        source: "Autocar India - All",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260512_054734_89b8e67f.png",
+        note: ""
+    },
+    {
+        id: "in878",
+        title: "Bharat NCAP、結果発表前に7車種を再テスト",
+        desc: "Bharat NCAPは31年3月時点で35車種を評価し、Maruti DzireやTata Punch ICEなど7車種を再テストした。政府選定車は現時点でなく、修正詳細は非公開。",
+        url: "https://www.rushlane.com/rti-reveals-bharat-ncap-retested-7-cars-before-publishing-results-12546294.html",
+        source: "RushLane",
+        date: "2026-05-12",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2025/06/maruti-dzire-bharat-ncap-5-star-2.jpeg",
+        note: ""
+    },
+    {
+        id: "in879",
+        title: "タタ・アルトロズCNG AMT、インドで8.69万ルピーから発売",
+        desc: "タタ・モーターズはインドでアルトロズCNG AMTを発売。純粋、クリエイティブ、アコモリッシュの3グレードをラインナップし、8.69万ルピーから販売開始。",
+        url: "https://gaadiwaadi.com/tata-altroz-cng-amt-launched-at-rs-8-69-lakh-in-india/",
+        source: "GaadiWaadi",
+        date: "2026-05-12",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/Altroz-iCNG-AMT.jpg",
+        note: ""
+    },
+    {
+        id: "in880",
+        title: "4月2026年売れ筋MUVはErtiga、Innova、Carens Clavis",
+        desc: "4月2026年の売れ筋MUVは、Maruti Suzuki Ertigaがトップで、Toyota InnovaやKia Carens Clavisが続く。Toyota Vellfireは前年比490%増の118台とMUVセグメントで最高成長率を記録した。",
+        url: "https://gaadiwaadi.com/top-selling-muvs-april-2026-ertiga-innova-carens-xl6-rumion-triber/",
+        source: "GaadiWaadi",
+        date: "2026-05-12",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2025/07/Kia-Carens-Clavis-EV-1.jpg",
+        note: ""
+    },
+    {
+        id: "in881",
+        title: "マルチ・スズキ、インド向け7人乗りEV MPV開発",
+        desc: "マルチ・スズキはインド向け7人乗りEV MPV「YMC」を開発中。発売は年内か2027年初め予定。同社初のEV導入後、EVラインナップ拡大を目指す。",
+        url: "https://gaadiwaadi.com/maruti-suzuki-developing-a-7-seater-electric-mpv-for-india-key-details/",
+        source: "GaadiWaadi",
+        date: "2026-05-12",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2024/03/Maruti-Suzuki-R3-MPV-Concept.jpg",
         note: ""
     },
 ];

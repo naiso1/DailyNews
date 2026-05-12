@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-12",
+        analysis: {
+            jp: "日本市場では、車いす固定装置のワンタッチ化[jp1007]や、JPN TAXIのメーター表示灯標準化[jp1009]から**アクセシビリティ**と**ドライバー安心感**の高まりが浮き彫り。また、JBL交換事例[jp1008]やGRヤリスの操縦性向上[jp1011]は、**カスタマイズ**と**性能重視**のニーズを示唆。モデルY L比較[jp1010]やレベル2批判[jp1012]は、**価格敏感層**への配慮と**実用性**の再定義が必要。これらのトレンドから、低価格帯でも高機能を実現する**コスト競争力**と、既存技術の進化を踏まえた**省エネ・快適性**の両立が鍵。",
+            cn: "中国市場はEV普及加速[cn843]と、既存車種の清算が並行して進む。特にBYDのフラッシュ充電や理想汽車のM100チップ[cn844]のように、バッテリーとコネクテッド技術が内装価値を再定義。さらにロボットや無人物流など、AI・自動化技術が車内体験を拡張。内装開発ではEV専用に設計された熱管理システムや、フロアスペースの有効活用が競争優位に。また、鉄製インパネを樹脂化する軽量化技術を応用し、衝突安全性とデザイン性を両立させるのが鍵。",
+            in: "インド市場では**量産コスト削減**と**高級装備の普及**が並行して進む[in874,in879]。タタ・ネクソンの44バリエーションやKiaのスクラップオファーは**価格競争**の激化を示す[in873,in876]。一方、Audi Q9やランドローバーの高級内装は**プレミアム化**のトレンド[in874,in875]。EV化とCNGのエネルギー多様化も進行[in879,in881]。安全基準の厳格化は**安全装備**の必須化を促す[in878]。自社の**モジュール化戦略**や**コスト競争力向上**が鍵になる[in873,in876]。",
+            us: "LotusがEV計画を見送りV8ハイブリッドへ転換し、高級感重視のトレンドが浮き彫り[us819]。一方でAudi Q9がピアノブラックを削減し、マット素材や環境配慮型内装へ移行[us821]。Lexus ESなどHMIとAIアシスタントの進化も進行中[us823]。消費者は「高級感」と「環境」の両立を求めている[us821]。また、Welpitのようなウェルネス機能への関心も高まっている[us828]。これらを踏まえ、脱炭素とウェルネスを両立する内装ソリューションが必要[us827]。",
+            eu: "欧州ではEV移行と並行した**ハイブリッド技術の標準化**[eu793]が加速し、**効率的な熱管理**[eu790]への関心が高まっている。特に**コンセプトカーのフロア活用**[eu788]や**未発売車の展示戦略**[eu785]から、**EV専用設計の多用途性**が重要視されている。一方で**サボの最終車体オークション**[eu791]や**NEVSの破綻**[eu791]は、**サプライチェーンの脆弱性**を示唆しており、**EV一辺倒**のリスク[eu790]を回避した**熱管理ソリューション**への需要が拡大する。",
+        },
+        ideas: {
+            jp: [
+                { id: 886, img: "images/idea_886.png", title: "ワンタッチ固定アームレスト", desc: "車いす固定装置をアームレストに統合。ワンタッチで固定・解放でき、介助者の負担を減らす。高齢者や車いすユーザーが乗り心地を高め、安心感を得られる。", imagePrompt: "Integrated wheelchair restraint system built into armrest, one-touch release mechanism, modern car interior, luxury leather and brushed metal finish, warm ambient lighting, photorealistic 3D render, premium automotive design" },
+                { id: 887, img: "images/idea_887.png", title: "省エネヒーターアームレスト", desc: "面状発熱ヒーター搭載で電力消費50%削減。BEV向け省エネ設計。冬場の足元暖房をアームレストから広げ、車内全体を温かく保ち、快適なドライブ体験を提供。", imagePrompt: "Integrated heater armrest with surface heating element, energy-efficient design, electric vehicle interior, soft warm glow from heating element, premium materials, photorealistic 3D render, high detail 4K quality" },
+            ],
+            cn: [
+                { id: 888, img: "images/idea_888.png", title: "EV専用熱管理インパネ", desc: "バッテリー熱を直接制御するインパネ素材。EVオーナーは車内暑さから解放され、快適走行が楽しめる。", imagePrompt: "" },
+                { id: 889, img: "images/idea_889.png", title: "骨格樹脂インパネリンフォース", desc: "鉄製を樹脂化で軽量化し、衝突安全性も向上。ドライバーは安心感で、家族との長距離ドライブも楽しく。", imagePrompt: "" },
+            ],
+            in: [
+                { id: 890, img: "images/idea_890.png", title: "量産型高級内装モジュール", desc: "タタ・ネクソンの44バリエーション[in873]やKiaのオファー[in876]のように価格競争が激化。モジュール設計で高級装備を安く提供。量産コストを下げつつ、Fearless+PSのJBLサウンドやベンチレーテッドシート[in873]のような高級感を低価格層に広げ、ユーザーはコストパフォーマンスの高さに喜びます。", imagePrompt: "Mass-produced luxury interior module in Indian automotive market, integrated JBL sound system and ventilated seat, brushed aluminum trim, cost-effective manufacturing process visible, bright showroom lighting, photorealistic 3D render, modern vehicle cockpit, premium quality, high detail, 4K quality" },
+                { id: 891, img: "images/idea_891.png", title: "発光ミリ波レーダーエンブレム", desc: "Audi Q9のトリプルスクリーン[in874]やLand Roverの高級シート[in875]を参考。発光ミリ波レーダー透過エンブレムをインド向けに最適化。ミリ波信号を透過しつつ、後部座席からの高輝度発光で安全性を向上。ユーザーは夜間の視認性向上と先進安全技術に喜び、高級感を実感します。", imagePrompt: "Illuminating millimeter wave radar emblem on Indian luxury SUV, high-intensity backlighting visible from rear seats, transparent material allowing radar signals to pass through, brushed metal finish, night driving scene, ambient lighting effects, photorealistic 3D render, premium automotive design, modern vehicle cockpit, cinematic lighting" },
+            ],
+            us: [
+                { id: 892, img: "images/idea_892.png", title: "リサイクル素材で高級感", desc: "リサイクル素材を使った高級マット仕上げのセンターコンソール。指紋に強く汚れにくく、環境にも優しい。高級車ならではの質感と、脱炭素への貢献を同時に感じられる。", imagePrompt: "Premium luxury car interior center console made from recycled matte textured materials, warm ambient lighting, subtle grain pattern, brushed aluminum accents, no glossy black surfaces, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 893, img: "images/idea_893.png", title: "ウェルネスコックピット", desc: "ミリ波レーダーで乗員の状態を検知し、香りやイルミを自動調整。緊張を和らげ、リラックスしたドライブ体験を。ストレス解消と快適性を同時に叶える。", imagePrompt: "Modern vehicle cockpit interior with subtle biometric sensors, calming blue and warm ambient lighting, soft mist effect from integrated air freshener, premium leather seats, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 894, img: "images/idea_894.png", title: "EVフロアヒーターモジュール", desc: "EV専用設計のフロアスペースを活用した、低温環境でも効率的な暖房モジュール。EV車独特のバッテリー熱管理と連携し、乗員の快適性を確保。従来のエンジン熱を利用せず、EV特有のバッテリー発熱を回収する熱循環システムで、冬場のEV走行距離を30%向上。EVオーナーは寒さの悩みから解放され、快適な冬ドライブを楽しめる", imagePrompt: "Electric vehicle interior floor heating module concept, sleek battery thermal management system integrated with floor heating, premium EV cabin design, glowing warm ambient lighting, minimalist dashboard with EV battery indicators, photorealistic 3D render, modern automotive technology, clean lines, high detail, cinematic lighting" },
+                { id: 895, img: "images/idea_895.png", title: "安全通知イルミネーションEV版", desc: "EVのバッテリー残量警告や充電完了通知を、直感的な光で伝えるLED通知イルミネーション。バッテリー残量が少ないと、足元が赤く光り、充電完了では天井が優しく輝く。EVオーナーは視覚的な安心感を得て、バッテリー残量への不安が解消。特に夜間走行で、バッテリー残量確認の手間を省き、安全な走行をサポート", imagePrompt: "EV interior safety notification illumination system, LED lighting integrated with center console and floor, battery level warning glow in red at feet, charging complete soft blue ceiling light, futuristic automotive interior, photorealistic render, modern EV cockpit design, ambient lighting effects, high detail, premium quality" },
+            ],
+        }
+    },
+{
         date: "2026-05-11",
         analysis: {
             jp: "2026年の日本自動車内装市場は、EV化[jp1000,jp1003]と軽量化[jp1000]がトレンド。軽キャブバン「エブリイ」に採用されるHDナビ[jp997]や、スポーツEV「スーパーワン」の専用シート[jp1000]から、小型車でもコネクテッド機能と快適性を両立する必要性が明確。また、北京モーターショーで展開されるALCANTARA素材[jp998]やPVCレザー[jp1006]から、高級感のある新素材が次期主流になりつつある。",
