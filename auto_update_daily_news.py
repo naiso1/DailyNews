@@ -62,6 +62,7 @@ TAG_RULES = [
     (r"イルミ|照明|アンビエント", "イルミ"),
     (r"素材|レザー|革|バイオ|リサイクル|サステナ", "新素材"),
     (r"EV|電動|電気自動車|充電|バッテリー|BEV", "EV"),
+    (r"電池|動力電池|LFP|三元|NCM|CATL|BYD|ギガワット|GWh", "バッテリー"),
     (r"安全|エアバッグ|ADAS|衝突|セーフティ", "安全"),
     (r"音響|スピーカー|オーディオ", "音響"),
     (r"カスタム|パーソナル|カスタマイズ", "カスタマイズ"),
@@ -129,6 +130,21 @@ def find_col_exact(header, name):
     return None
 
 
+def parse_score_0_100(value):
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    m = re.search(r"-?\d+(?:\.\d+)?", text)
+    if not m:
+        return None
+    score = float(m.group(0))
+    if score <= 1:
+        score *= 100
+    return int(max(0, min(100, round(score))))
+
+
 def map_country(value: str):
     if not value:
         return ""
@@ -169,9 +185,23 @@ def generate_tags(text: str):
         if re.search(pattern, text, flags=re.IGNORECASE):
             if tag not in tags:
                 tags.append(tag)
-    if not tags:
-        tags.append("内装")
     return tags[:6]
+
+
+BAD_SUMMARY_PATTERNS = [
+    r"新しい\s*JSON\s*の\s*タイトル",
+    r"新しい\s*JSON\s*の\s*サマリー",
+    r"JSON\s*形式の\s*サマリー",
+    r"タイトルを\s*(?:日本語で)?\s*設定",
+    r"サマリーを\s*(?:日本語で)?\s*設定",
+]
+
+
+def is_bad_generated_text(text: str):
+    if not text:
+        return True
+    normalized = re.sub(r"\s+", "", text)
+    return any(re.search(pattern, normalized, flags=re.IGNORECASE) for pattern in BAD_SUMMARY_PATTERNS)
 
 
 def parse_existing_news(js_text: str):
@@ -806,6 +836,8 @@ def main():
         idx_source = find_col(header, "出典サイト", "出展サイト")
     idx_llm = find_col(header, "LLM判定")
     idx_img判定 = find_col(header, "画像判定")
+    idx_interior_score = find_col(header, "内装関連度", "関連度スコア")
+    idx_interior_reason = find_col(header, "内装判定理由")
 
     def get(row, idx):
         if idx is None:
@@ -823,14 +855,19 @@ def main():
         source = get(row, idx_source)
         llm_val = get(row, idx_llm)
         img_val = get(row, idx_img判定)
+        interior_score = parse_score_0_100(get(row, idx_interior_score))
+        interior_reason = get(row, idx_interior_reason)
 
         if idx_llm is not None and llm_val and "対象" not in llm_val:
             continue
-        if idx_img判定 is not None and img_val and "あり" not in img_val:
+        if idx_img判定 is not None and img_val and "あり" not in img_val and (interior_score is None or interior_score < 70):
             continue
         if not img:
             continue
         if not title or not url:
+            continue
+        if is_bad_generated_text(title) or is_bad_generated_text(desc):
+            print(f"Skip placeholder summary: {url}")
             continue
 
         country = map_country(country_raw) or "jp"
@@ -844,6 +881,9 @@ def main():
             "url": url,
             "source": source,
             "tags": tags,
+            "interiorScore": interior_score,
+            "interiorReason": interior_reason,
+            "imageInterior": True if img_val and "あり" in img_val else (False if img_val and "なし" in img_val else None),
         }))
 
     if not items:
@@ -872,6 +912,16 @@ def main():
         note = ""
         if any(k in it["img"] for k in ["unsplash", "placeholder", "thumb_default"]):
             note = "※イメージ画像"
+        extra_lines = []
+        if it.get("interiorScore") is not None:
+            extra_lines.append(f'                interiorScore: {int(it["interiorScore"])},')
+        if it.get("interiorReason"):
+            extra_lines.append(f'                interiorReason: "{js_escape(it["interiorReason"])}",')
+        if it.get("imageInterior") is not None:
+            extra_lines.append(f'                imageInterior: {str(bool(it["imageInterior"])).lower()},')
+        extra_block = "\n".join(extra_lines)
+        if extra_block:
+            extra_block = "\n" + extra_block
         item_block = textwrap.dedent(f"""
             {{
                 id: "{it_id}",
@@ -881,6 +931,7 @@ def main():
                 source: "{source}",
                 date: "{it['date']}",
                 tags: {json.dumps(tags, ensure_ascii=False)},
+{extra_block}
                 country: "{it['country']}",
                 img: "{it['img']}",
                 note: "{note}"

@@ -39298,12 +39298,12 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "jp761",
-        title: "新しいJSONのタイトルを日本語で設定します",
-        desc: "新しいJSONのサマリーを日本語で設定し、条件に従って出力します。",
+        title: "マツダCX-60/CX-80改良、バーガンディ内装の魅力を継続",
+        desc: "マツダはCX-60とCX-80を商品改良し、複雑だったグレード体系を整理した。深みのある赤内装が特徴のバーガンディレザーパッケージは上質感を訴求し、ラージ商品群の内装価値を高める仕様として注目される。",
         url: "https://motor-fan.jp/article/1442596/",
         source: "Motor-Fan",
         date: "2026-03-30",
-        tags: ["内装"],
+        tags: ["シート", "新素材", "ラグジュアリー"],
         country: "jp",
         img: "https://motor-fan.jp/wp-content/uploads/2026/03/MAZDA_CX-60_BURGUNDY-LEATHER-PACKAGE_9.jpg?v=1774832927",
         note: ""
@@ -53635,6 +53635,8 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-05-11",
         tags: ["AR", "ディスプレイ", "コネクテッド"],
+        interiorReason: "Text relevance: 72 (main topic is interior HMI/display/navigation syst",
+        interiorScore: 72,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-00000012-rps-000-1-view.jpg",
         note: ""
@@ -53647,6 +53649,9 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-05-11",
         tags: ["AR", "シート", "新素材"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 83,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-00000004-rps-000-1-view.jpg",
         note: ""
@@ -53659,6 +53664,8 @@ window.LOADED_NEWS_DATA = [
         source: "VAGUE",
         date: "2026-05-11",
         tags: ["内装"],
+        interiorReason: "Text mentions interior option 'Tan Color' (内装オプション「タンカラー」) which adds ",
+        interiorScore: 60,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-10423166-vague-000-1-view.jpg",
         note: ""
@@ -53671,6 +53678,9 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-05-11",
         tags: ["ディスプレイ", "シート", "EV"],
+        imageInterior: false,
+        interiorReason: "Text mentions specific interior features like 'dedicated sport seats' ",
+        interiorScore: 62,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-01054807-kurumans-000-1-view.jpg",
         note: ""
@@ -53683,6 +53693,9 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-05-11",
         tags: ["シート"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 88,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-01055266-kurumans-000-1-view.jpg",
         note: ""
@@ -53695,6 +53708,8 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR JAPAN",
         date: "2026-05-11",
         tags: ["新素材"],
+        interiorReason: "Text mentions interior space, Dinamica material, physical switches, an",
+        interiorScore: 62,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-01241582-autocar-000-1-view.jpg",
         note: ""
@@ -53707,6 +53722,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR JAPAN",
         date: "2026-05-11",
         tags: ["EV"],
+        imageInterior: false,
+        interiorReason: "Text relevance is low (0-14) as the article focuses on range, charging",
+        interiorScore: 34,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-01241925-autocar-000-1-view.jpg",
         note: ""
@@ -53719,6 +53737,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTO BILD JAPAN Web",
         date: "2026-05-11",
         tags: ["AI"],
+        imageInterior: false,
+        interiorReason: "Text mentions 'Citroën Advanced Comfort' philosophy and 'Aeroform' des",
+        interiorScore: 27,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260511-00010003-autobild-000-1-view.jpg",
         note: ""
@@ -53731,6 +53752,9 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-05-11",
         tags: ["HMI", "ディスプレイ", "EV"],
+        imageInterior: false,
+        interiorReason: "Text relevance: 65 (HMI and steering feel are central interior/UX topi",
+        interiorScore: 62,
         country: "us",
         img: "https://www.thedrive.com/wp-content/uploads/2026/04/BMW-550e-01.jpg?quality=85",
         note: ""
@@ -53743,6 +53767,9 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-05-11",
         tags: ["ディスプレイ", "シート", "新素材"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 91,
         country: "us",
         img: "https://cdn.motor1.com/images/mgl/wl8Q9m/s3/bmw-7-series-interior-feature.jpg",
         note: ""
@@ -53755,6 +53782,9 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-05-11",
         tags: ["AR"],
+        imageInterior: false,
+        interiorReason: "The text discusses the return of the Audi R8, focusing on hybridizatio",
+        interiorScore: 7,
         country: "us",
         img: "https://cdn.motor1.com/images/mgl/koEZMR/s3/audi-r8-gt-2023-last-drive-review.jpg",
         note: ""
@@ -53767,6 +53797,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-05-11",
         tags: ["AR", "センシング", "EV", "安全"],
+        imageInterior: false,
+        interiorReason: "The text focuses on LiDAR deployment and cost, which is sensor/ADAS te",
+        interiorScore: 9,
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/BYD-Seagull-MY26-May11261-1024x576.jpg",
         note: ""
@@ -53779,6 +53812,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: true,
+        interiorReason: "Text relevance is low (0-14) as the article is about factory sales and",
+        interiorScore: 63,
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/006ppx7agy1icnsqed158j3440334b2d-copy-1024x640.jpg",
         note: ""
@@ -53791,6 +53827,8 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-05-11",
         tags: ["HUD", "安全", "カスタマイズ"],
+        interiorReason: "image/text LLM judgment",
+        interiorScore: 71,
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/Cadillac-steering-wheel-May7261-copy-1024x576.jpg",
         note: ""
@@ -53803,6 +53841,9 @@ window.LOADED_NEWS_DATA = [
         source: "Jalopnik",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 81,
         country: "us",
         img: "https://www.jalopnik.com/img/gallery/there-can-be-some-terrifying-stuff-in-your-cars-air-filters/l-intro-1778249934.jpg",
         note: ""
@@ -53815,6 +53856,9 @@ window.LOADED_NEWS_DATA = [
         source: "Car and Driver",
         date: "2026-05-11",
         tags: ["ディスプレイ", "音響"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 90,
         country: "us",
         img: "https://hips.hearstapps.com/hmg-prod/images/0599a98c-6b4f-4ba7-89e4-d6f59814c1b1.jpg",
         note: ""
@@ -53827,6 +53871,9 @@ window.LOADED_NEWS_DATA = [
         source: "The Truth About Cars",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: false,
+        interiorReason: "Text explicitly mentions 'wood interior' (木製内装) as a key feature of th",
+        interiorScore: 72,
         country: "us",
         img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/05/08/16351/post.jpg?size=720x845&nocrop=1",
         note: ""
@@ -53839,6 +53886,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarComplaints",
         date: "2026-05-11",
         tags: ["コネクテッド"],
+        imageInterior: true,
+        interiorReason: "The text is about a recall specifically for the instrument panel (dash",
+        interiorScore: 78,
         country: "us",
         img: "https://cdn.carcomplaints.com/news/images/mercedes-benz-instrument-panel-failure-recall.jpg",
         note: ""
@@ -53851,6 +53901,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["シート"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 70,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/land-rover-defender-camo-3.jpg?itok=9OL9y0__",
         note: ""
@@ -53863,6 +53916,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: false,
+        interiorReason: "The text explicitly mentions '内装' (interior) in tags and describes adv",
+        interiorScore: 73,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/buick_y-job_concept_2_1.jpg?itok=cktJodi1",
         note: ""
@@ -53875,6 +53931,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["ディスプレイ"],
+        imageInterior: true,
+        interiorReason: "interior material and display plus cabin image",
+        interiorScore: 76,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/freelander-8-miit-front-quarter.jpg?itok=iqh9vSbk",
         note: ""
@@ -53887,6 +53946,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: false,
+        interiorReason: "Text mentions '内装' (interior) in tags and description implies differen",
+        interiorScore: 32,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/bmw-vision-alpina-teaser.jpg?itok=PG12Wto_",
         note: ""
@@ -53899,6 +53961,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 64,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/ford-s-max-road-test-201009.jpg?itok=d9SQw04m",
         note: ""
@@ -53911,6 +53976,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: false,
+        interiorReason: "text mentions interior tag but content is engine specs; image is exter",
+        interiorScore: 36,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/de_tomaso_p900_front_lead_0.jpg?itok=s2mZ3IKO",
         note: ""
@@ -53923,6 +53991,8 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["EV"],
+        interiorReason: "The text mentions a new EV model 'Vision Meta Turismo' as a successor ",
+        interiorScore: 31,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/kia-meta-turismo-2.jpg?itok=00omLjDk",
         note: ""
@@ -53935,6 +54005,9 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-05-11",
         tags: ["AR"],
+        imageInterior: false,
+        interiorReason: "The text describes a junkyard with old cars and parts, which is exteri",
+        interiorScore: 7,
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_0-intro1_0_0_0_0_0_0_0_0_0_2_0_0_0.jpg?itok=dIIpDOb_",
         note: ""
@@ -53947,6 +54020,9 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-05-11",
         tags: ["AR", "ディスプレイ", "シート", "音響"],
+        imageInterior: false,
+        interiorReason: "Text lists specific interior features like heated seats, 8-inch touchs",
+        interiorScore: 65,
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--ld4MI3SI--/t_rss_image_w_845/v1778502476/autoexpress/2026/05/New%20Skoda%20Karoq%20Design%20Edition%20-%20front%203_4_zgsvgb.jpg",
         note: ""
@@ -53959,6 +54035,8 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-05-11",
         tags: ["センシング", "安全"],
+        interiorReason: "The text describes a safety technology patent for avoiding shopping tr",
+        interiorScore: 14,
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--fb1SY_IJ--/t_rss_image_w_845/v1778499795/autoexpress/2026/05/Ford%20Mustang%20Mach-E.jpg",
         note: ""
@@ -53971,6 +54049,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-05-11",
         tags: ["AR", "EV"],
+        imageInterior: false,
+        interiorReason: "The text is about a partnership for 100,000 rental cars and flash char",
+        interiorScore: 9,
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/05/shenzhou_b.webp",
         note: ""
@@ -53983,6 +54064,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-05-11",
         tags: ["AR"],
+        imageInterior: false,
+        interiorReason: "Text mentions interior theme 'Oats Meal Rice' but cuts off, providing ",
+        interiorScore: 37,
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-29-e1778471036103.png",
         note: ""
@@ -53995,6 +54079,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-05-11",
         tags: ["ディスプレイ", "シート", "EV"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 77,
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/05/6f061d950a7b02087a4c808b93e154c2562cc899-large-large-1500x877.jpeg",
         note: ""
@@ -54007,6 +54094,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-05-11",
         tags: ["HMI", "AI"],
+        imageInterior: false,
+        interiorReason: "Text mentions HMI optimization (interior software) and interior comfor",
+        interiorScore: 37,
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-23-506x900.png",
         note: ""
@@ -54019,6 +54109,9 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-05-11",
         tags: ["EV"],
+        imageInterior: false,
+        interiorReason: "The text focuses on OTA updates affecting range and charging time, whi",
+        interiorScore: 13,
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/05/image-22_webhook_1500x900_q85_1778463928.jpg",
         note: ""
@@ -54031,18 +54124,22 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-05-11",
         tags: ["EV"],
+        interiorReason: "battery market share news with no interior product detail and no inter",
+        interiorScore: 12,
         country: "cn",
         img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051113173163.jpg",
         note: ""
     },
     {
         id: "cn834",
-        title: "新しい JSON のタイトルを設定します",
-        desc: "新しい JSON のサマリーを設定します。",
+        title: "中国4月の動力電池搭載量、2か月ぶり増加。LFPが8割超",
+        desc: "中国の2026年4月の動力電池搭載量は62.4GWhとなり、前年同月比15.1%増、前月比10.5%増で2か月ぶりに増加した。LFP電池は50.8GWhで全体の81.5%を占め、三元系電池は11.6GWhだった。",
         url: "https://cnevpost.com/2026/05/11/china-apr-2026-battery-installations/",
         source: "CnEVPost - All",
         date: "2026-05-11",
-        tags: ["内装"],
+        tags: ["EV", "バッテリー"],
+        interiorReason: "battery deployment news with no interior product detail and no interio",
+        interiorScore: 12,
         country: "cn",
         img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051112454452.jpg",
         note: ""
@@ -54055,6 +54152,9 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-05-11",
         tags: ["EV"],
+        imageInterior: false,
+        interiorReason: "Sales data and chart only, no interior/cabin details or images",
+        interiorScore: 33,
         country: "cn",
         img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051106545722.jpg",
         note: ""
@@ -54067,6 +54167,8 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-05-11",
         tags: ["EV"],
+        interiorReason: "Text mentions interior display upgrade (12.8 to 15.6 inch screen) but ",
+        interiorScore: 32,
         country: "cn",
         img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051106170484.jpg",
         note: ""
@@ -54079,6 +54181,9 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-05-11",
         tags: ["AR", "ディスプレイ", "EV"],
+        imageInterior: false,
+        interiorReason: "Text mentions interior features like 12.8-inch touchscreen and wireles",
+        interiorScore: 64,
         country: "cn",
         img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051103490766.jpg",
         note: ""
@@ -54091,6 +54196,9 @@ window.LOADED_NEWS_DATA = [
         source: "ETAuto - Auto Technology",
         date: "2026-05-11",
         tags: ["AI"],
+        imageInterior: false,
+        interiorReason: "The text discusses AI simulation and market share goals, with no menti",
+        interiorScore: 11,
         country: "in",
         img: "https://etimg.etb2bimg.com/thumb/img-size-140032/131010268.cms",
         note: ""
@@ -54103,6 +54211,9 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-05-11",
         tags: ["新素材"],
+        imageInterior: false,
+        interiorReason: "Text mentions interior materials and grades, but image is exterior-onl",
+        interiorScore: 41,
         country: "in",
         img: "https://asset.autocarindia.com/static/features/images/20260511_094209_68588e60.jpeg",
         note: ""
@@ -54115,6 +54226,9 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-05-11",
         tags: ["AR", "EV"],
+        imageInterior: false,
+        interiorReason: "EV pricing news with exterior image only; no interior/cabin details vi",
+        interiorScore: 35,
         country: "in",
         img: "https://asset.autocarindia.com/static/news/images/20260511_094306_d20455af.png",
         note: ""
@@ -54127,6 +54241,8 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-05-11",
         tags: ["シート", "EV"],
+        interiorReason: "Text mentions specific interior features like rear seat ventilation an",
+        interiorScore: 43,
         country: "in",
         img: "https://asset.autocarindia.com/static/features/images/20260511_091404_4c28acd6.jpg",
         note: ""
@@ -54139,6 +54255,9 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-05-11",
         tags: ["AI"],
+        imageInterior: false,
+        interiorReason: "Sales milestone news with no interior product details; image shows onl",
+        interiorScore: 12,
         country: "in",
         img: "https://asset.autocarindia.com/static/news/images/20260511_090249_5051f3d8.jpeg",
         note: ""
@@ -54151,6 +54270,9 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-05-11",
         tags: ["AR", "AI"],
+        imageInterior: false,
+        interiorReason: "The text is about WLTP certification and regulatory compliance, which ",
+        interiorScore: 8,
         country: "in",
         img: "https://asset.autocarindia.com/static/news/images/20260511_075240_66c47350.jpg",
         note: ""
@@ -54163,6 +54285,9 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-05-11",
         tags: ["HMI"],
+        imageInterior: false,
+        interiorReason: "Factory production line image with no interior cabin details; text men",
+        interiorScore: 31,
         country: "in",
         img: "https://asset.autocarindia.com/static/news/images/20260511_064038_d38a1245.png",
         note: ""
@@ -54175,6 +54300,9 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 97,
         country: "in",
         img: "https://www.rushlane.com/wp-content/uploads/2026/05/maruti-future-car-2036-design-contest-4.jpeg",
         note: ""
@@ -54187,6 +54315,9 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-05-11",
         tags: ["AR"],
+        imageInterior: false,
+        interiorReason: "Sales figures and model list (Seltos, Sonet, etc.) with exterior-only ",
+        interiorScore: 35,
         country: "in",
         img: "https://gaadiwaadi.com/wp-content/uploads/2025/12/New-Kia-Seltos-5.jpg",
         note: ""
@@ -54199,6 +54330,9 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-05-11",
         tags: ["内装"],
+        imageInterior: false,
+        interiorReason: "Tags include '内装' (interior) and title mentions 'DesignXathon' (design",
+        interiorScore: 41,
         country: "in",
         img: "https://www.indiacarnews.com/wp-content/uploads/2026/02/1-2.webp",
         note: ""
@@ -54211,6 +54345,8 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-05-11",
         tags: ["内装"],
+        interiorReason: "Text relevance: 72 (main topic is interior material, seats, cockpit, d",
+        interiorScore: 75,
         country: "jp",
         img: "https://kuruma-news.jp/wp-content/uploads/2027/05/20260508_hayashi__-9-1.jpg?v=1778370921",
         note: ""
@@ -54223,6 +54359,9 @@ window.LOADED_NEWS_DATA = [
         source: "ゴム報知新聞NEXT",
         date: "2026-05-11",
         tags: ["新素材"],
+        imageInterior: true,
+        interiorReason: "seat and display plus cabin image",
+        interiorScore: 79,
         country: "jp",
         img: "https://gomuhouchi.com/wp-content/uploads/2026/05/be34dc0def9eb342073494d32d04bd58-e1778218353864-300x258.jpg",
         note: ""
