@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-13",
+        analysis: {
+            jp: "日本市場では、トヨタRAV4の純正アクセサリー[jp1013]や日本精機のHUD出展[jp1014]により、HMIと機能性素材の融合が加速している。アウディQ9の大型化[jp1016]やフィアットパンダのEV化[jp1021]は、EVプラットフォーム向け空間設計の重要性を示唆。一方、レクサスLBXの安全機能拡充[jp1022]やジムニーのクラシックレザーシート[jp1018]は、新素材とプレミアム感の両立が求められている。特にバイオ素材や再生材の採用は、若年層の環境意識と相性良[jp1019]。ステアリングの多機能化[jp1022]は、手放し検知の需要向上を意味する。",
+            cn: "中国市場ではNEV浸透率が61%に達し[cn852]、BYDやWulingがEVバッテリー技術や生産効率で競争力維持している一方[cn851]、サステナビリティへの意識が高まっている。HuaweiやStellantisとの連携はHMI・AI連携が進み[cn856]、軽量化・リサイクル素材への関心も高まっている。自社製品開発では環境配慮と軽量化を両立させる必要がある。",
+            in: "インド市場ではEV普及加速と価格競争が顕著[in882]。BYDの価格引き上げやKiaのバッテリーサブスクリプションから[in886][in887]、ユーザーは初期購入費を抑制しつつ機能性を求める傾向が明確。GoogleのHMI刷新やHondaのフェイスリフトから[in883][in888]、シンプルで直感的な操作性への需要。また、Skodaの価格優遇やLamborghiniの限定モデルから[in891][in885]、プレミアム感と実用性の両立が重要なトレンドである。これらの知見を踏まえ、デザイン性と機能性を両立する内装ソリューションの開発が求められる。",
+            us: "米国のニュースを分析すると、EV、AI、HMI、ARの技術進化と、中国車への規制強化が顕著 [us833] である。特にJaguar Type 01の名付け [us829] やLexus TZの3列EV SUVは、EVプラットフォームのHMI再構築が進む示唆 [us838] である。また、MG3のシートスライド問題 [us832] は、EV化に伴うAI制御の安全性向上の必要性を浮き彫りにする。",
+            eu: "EU市場ではEV化とデザイン革新が加速しておりeu796: The cars that shocked and surprised the world、特に小型EVの登場と往年のデザインへの回帰が見られるeu801: Best selling cars of all time, from each car maker。健康志向の高まりや、空気が澄んだ高級感を求める傾向が強まっているeu795: BYD to launch new wave of European-specific models。",
+        },
+        ideas: {
+            jp: [
+                { id: 896, img: "images/idea_896.png", title: "バイオ素材でリッチな質感", desc: "RAV4の純正レベル感[jp1013]を、再生皮革で再現。触った時の温かさと、自然な風合いの両立。環境に優しい素材で、ドライバーが「心地よさ」を感じられる内装空間を創造。", imagePrompt: "Luxury car interior with steering wheel wrapped in bio-based material, warm amber lighting, soft grain texture, brushed aluminum accents, premium Japanese craftsmanship, photorealistic 3D render, cinematic lighting, 4K quality" },
+                { id: 897, img: "images/idea_897.png", title: "グリップセンサ連携ステアリング", desc: "豊田合成のHMIハンドル[jp1022]をベースに、ステアリングの握り方を検知。運転者の疲労度をAIが分析し、最適なシート位置やエアコンを自動調整。運転負担を減らし、走行中の「安心感」を高める。", imagePrompt: "Futuristic car steering wheel with integrated sensor, blue holographic interface showing grip patterns, night driving scene, digital dashboard display, AI visualization, cool blue accent lighting, photorealistic render, 4K quality" },
+            ],
+            cn: [
+                { id: 898, img: "images/idea_898.png", title: "リサイクル素材で軽量化", desc: "植物由来セルロースナノファイバー配合の軽量内装材[cn857]を採用。石油系素材を減らし、脱炭素に貢献。軽量化と高級感の両立で、環境意識の高い消費者にうれしい。", imagePrompt: "sustainable automotive interior panel made from plant-based cellulose nanofiber, lightweight design, brushed metal trim accents, soft natural lighting, eco-friendly texture visible on surface, premium cabin atmosphere, photorealistic 3D render" },
+                { id: 899, img: "images/idea_899.png", title: "AI連携でリサイクル素材の最適化", desc: "AI搭載HMI[cn850]と連携し、リサイクル素材の使用量を最適化。軽量化と環境負荷低減を両立。消費者は地球に優しい車に、開発者はコスト削減でうれしい。", imagePrompt: "futuristic AI interface integrated into car dashboard, holographic display showing recycling efficiency metrics, sleek modern vehicle interior, blue accent lighting, high-tech materials with sustainable texture, cinematic lighting, photorealistic render" },
+            ],
+            in: [
+                { id: 900, img: "images/idea_900.png", title: "光と質感の調和コンソール", desc: "EVフラットフロアを活かし、コンソール表面に自然光を想起させるマット質感を採用。夜間には柔らかな間接照明が空間を彩り、高級感と安らぎを両立。デザイン好きのユーザーが毎日愛用する、視覚的・触覚的愉しみが詰まったコンソール設計。", imagePrompt: "Close-up view of luxury car center console with matte natural texture, ambient soft warm lighting underneath, brushed aluminum accents, minimalist modern design, evening interior scene, photorealistic render, high detail, 4K quality" },
+                { id: 901, img: "images/idea_901.png", title: "マルチファンクションコンソールボックス", desc: "EVフラットフロアを最大限活用し、リバーシブルアームレストとワイヤレス充電機能を統合。コンソール内部に大容量収納を確保し、EV特有のバッテリーサブスクリプションモデルにも対応。実用性とデザイン性を兼ね備え、家族連れやビジネスユーザーが毎日快適に使える多機能収納ソリューション。", imagePrompt: "Interior shot of spacious car console with reversible armrest and wireless charging pad, sleek EV-friendly flat floor design, deep storage compartment inside, premium leather and soft-touch materials, clean modern aesthetic, daylight lighting, photorealistic 3D render, premium automotive quality" },
+            ],
+            us: [
+                { id: 902, img: "images/idea_902.png", title: "ARコックピットナビゲーション", desc: "中国車AR規制[us833]を逆手にEVのARディスプレイを強化。Jaguar Type 01のHMI[us831]を模倣し、ARでEVのAIアシスタントをナビゲーションに統合。ドライバーがEVのARでARをEVにナビゲーションし、ARがAIをEVにナビゲーションし、ARがAIをEVにナビゲーションするうれしさが生まれる。", imagePrompt: "Augmented reality navigation interface projected on windshield, AR HUD displaying EV route with AI assistant hologram, luxury car cockpit interior, night driving scene, blue and green accent lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 903, img: "images/idea_903.png", title: "ウェルネスEVコックピット", desc: "Lexus TZの静寂[us838]をWelpit技術[us838]でAR化。ミリ波レーダーでEVのAIがウェルネスをARし、EVのAIがARでEVのAIをウェルネスにARし、EVのAIがARでEVのAIをウェルネスにARするうれしさが生まれる。", imagePrompt: "Wellness EV cockpit with Welpit technology, millimeter wave radar sensors embedded in dashboard, ambient lighting changing with passenger mood, luxury car interior, soft warm glow, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 904, img: "images/idea_904.png", title: "抗菌消臭スマートインパネ", desc: "薄型インストルメントパネルに抗菌・消臭機能を内蔵。EV車内の空気を清浄に保ちながら、高級な素材感とモダンなHMIを両立。運転者が健康で快適な空間を楽しめるよう設計。", imagePrompt: "" },
+                { id: 905, img: "images/idea_905.png", title: "ウェルネスアロマコンソール", desc: "センターコンソールに埋め込むスマートアロマディフューザー。抗菌効果と香りを組み合わせ、運転者のストレスを軽減。EVの静かな空間で、癒やしの時間を提供。", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-05-12",
         analysis: {
             jp: "日本市場では、車いす固定装置のワンタッチ化[jp1007]や、JPN TAXIのメーター表示灯標準化[jp1009]から**アクセシビリティ**と**ドライバー安心感**の高まりが浮き彫り。また、JBL交換事例[jp1008]やGRヤリスの操縦性向上[jp1011]は、**カスタマイズ**と**性能重視**のニーズを示唆。モデルY L比較[jp1010]やレベル2批判[jp1012]は、**価格敏感層**への配慮と**実用性**の再定義が必要。これらのトレンドから、低価格帯でも高機能を実現する**コスト競争力**と、既存技術の進化を踏まえた**省エネ・快適性**の両立が鍵。",

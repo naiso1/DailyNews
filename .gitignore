@@ -1,1 +1,5 @@
+繝九Η繝ｼ繧ｹ蜿朱寔/mail_config.json
 ニュース収集/mail_config.json
+__pycache__/
+*.pyc
+ニュース収集/logs/

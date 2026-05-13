@@ -712,6 +712,10 @@ def remove_insight_by_date(js_text: str, date_key: str):
     return js_text[:start] + js_text[end:]
 
 
+def has_insight_for_date(js_text: str, date_key: str):
+    return re.search(rf'\bdate:\s*"{re.escape(date_key)}"', js_text) is not None
+
+
 def js_escape(value: str):
     s = str(value or "")
     s = s.replace("\u2028", " ").replace("\u2029", " ")
@@ -806,7 +810,7 @@ def main():
     ap.add_argument("--replace-insights", action="store_true")
     ap.add_argument("--fix-existing", action="store_true", help="Fix url/source for existing entries using CSV rows")
     ap.add_argument("--llm-endpoint", default=os.getenv("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions"))
-    ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3-8b"))
+    ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.5-9b"))
     args = ap.parse_args()
 
     sheet_path = Path(args.sheet)
@@ -986,7 +990,8 @@ def main():
     if not args.skip_insights:
         insights_text = read_text_any(INSIGHTS_PATH)
         latest_date = max(new_dates) if new_dates else (all_dates[-1] if all_dates else None)
-        if latest_date and latest_date in insights_text and not args.replace_insights:
+        insight_exists = has_insight_for_date(insights_text, latest_date) if latest_date else False
+        if latest_date and insight_exists and not args.replace_insights:
             print(f"Insights for {latest_date} already exists. Use --replace-insights to overwrite.")
         elif latest_date:
             grouped = {"jp": [], "cn": [], "in": [], "us": [], "eu": []}
@@ -997,9 +1002,11 @@ def main():
             analysis_out = {}
             ideas_out = {}
             draft_parts = []
+            attempted_insight_countries = 0
             for key in ["jp", "cn", "in", "us", "eu"]:
                 if not grouped.get(key):
                     continue
+                attempted_insight_countries += 1
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
                 prompt = make_country_prompt(
                     latest_date,
@@ -1093,11 +1100,15 @@ def main():
                 entry_lines.append("    },")
                 new_entry = "\n".join(entry_lines)
                 updated_insights = insights_text
-                if args.replace_insights and latest_date in insights_text:
+                if args.replace_insights and insight_exists:
                     updated_insights = remove_insight_by_date(updated_insights, latest_date)
                 updated_insights = insert_insight(updated_insights, new_entry)
                 if not args.dry_run:
                     INSIGHTS_PATH.write_text(updated_insights, encoding="utf-8")
+            elif attempted_insight_countries:
+                raise RuntimeError(
+                    f"Insights generation failed for {latest_date}: no valid LLM output for any country."
+                )
             if draft_parts:
                 draft_path = ROOT / f"insights_draft_{latest_date}.txt"
                 if not args.dry_run:

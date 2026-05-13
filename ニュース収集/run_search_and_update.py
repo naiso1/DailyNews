@@ -21,6 +21,7 @@ LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
+DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
 
 
 def log(msg):
@@ -53,7 +54,7 @@ def _model_loaded(host):
 
 def ensure_lm_studio():
     host = _llm_host()
-    model = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
+    model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL)
 
     if _server_up(host) and _model_loaded(host):
         log("[LM Studio] Server and model are already ready.")
@@ -388,7 +389,18 @@ def main():
             ensure_lm_studio()
             google_search_script = get_google_search_entrypoint()
             run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
-            run_cmd([sys.executable, "-u", str(ROOT / "auto_update_daily_news.py")], "auto_update_daily_news", LOG_FILE)
+            ensure_lm_studio()
+            run_cmd(
+                [
+                    sys.executable,
+                    "-u",
+                    str(ROOT / "auto_update_daily_news.py"),
+                    "--llm-model",
+                    os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL),
+                ],
+                "auto_update_daily_news",
+                LOG_FILE,
+            )
             if os.environ.get("GEMINI_API_KEY"):
                 gemini_model = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-preview").strip() or "gemini-3.1-flash-image-preview"
                 gemini_image_size = os.environ.get("GEMINI_IMAGE_SIZE", "512px").strip() or "512px"

@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-14 00:28";
+window.NEWS_UPDATED_AT = "2026-05-14 08:50";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
