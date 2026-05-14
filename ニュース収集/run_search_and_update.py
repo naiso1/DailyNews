@@ -333,7 +333,23 @@ def run_git_sync(log_file):
         log("[INFO] No git changes to commit/push.")
         return
 
-    run_cmd(["git", "add", "-A", "--", *pathspecs], "git_add", log_file, cwd=ROOT)
+    run_cmd(["git", "add", "-A", "--", "."], "git_add", log_file, cwd=ROOT)
+    reset_paths = [
+        "__pycache__",
+        "ニュース収集/__pycache__",
+        "ニュース収集/logs",
+    ]
+    reset_cmd = ["git", "restore", "--staged", "--", *reset_paths]
+    reset_cp = subprocess.run(
+        reset_cmd,
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if reset_cp.returncode not in (0, 1):
+        raise CalledProcessError(reset_cp.returncode, reset_cmd)
 
     diff_cmd = ["git", "diff", "--cached", "--quiet"]
     diff_rc = subprocess.run(diff_cmd, cwd=str(ROOT)).returncode

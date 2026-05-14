@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-14 08:50";
+window.NEWS_UPDATED_AT = "2026-05-15 00:37";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -55229,6 +55229,135 @@ window.LOADED_NEWS_DATA = [
         tags: ["安全", "音響"],
         country: "jp",
         img: "https://cdn-image.as-web.jp/2026/05/13140834/20260513_01_04.jpg",
+        note: ""
+    },
+    // 2026-05-14 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1023",
+        title: "梅雨時フロントウインドウ曇り対策：内側清掃と曇り止め剤で予防",
+        desc: "梅雨時のフロントウインドウ曇りは、車内湿度と温度差による水蒸気結露が原因。内側の汚れが水滴付着を招くため、洗車時にガラスクリーナーや中性洗剤で清掃し、必要に応じて曇り止め剤を施工することで視界不良を防げる。",
+        url: "https://news.yahoo.co.jp/articles/3e69989e8dd490106d0441fbc9486b9a946e64ae?source=rss",
+        source: "レスポンス",
+        date: "2026-05-14",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "interior glass cleaning and anti-fog agent application",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-00000022-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1024",
+        title: "アウディQ9、電動ドアやパノラマサンルーフなど豪華インテリアで話題",
+        desc: "アウディは5月12日、新型SUV『Q9』のインテリアを先行公開。電動ドアや最大7席の座席、換気機能付きシート、84個のLEDで彩るサンルーフ、ダイナミック・インタラクション・ライト（IAL）など、快適装備やHMIに注目が集まっている。",
+        url: "https://news.yahoo.co.jp/articles/6479401bf7c6853037e51b061d07b6a6e20e461e?source=rss",
+        source: "レスポンス",
+        date: "2026-05-14",
+        tags: ["HMI", "シート", "EV"],
+    
+        interiorScore: 100,
+        interiorReason: "flagship cabin refresh with concrete interior details (seats, HMI, lighting, mat",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-00000011-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1025",
+        title: "ブリッド「ユーロスターIIクルーズ」2026年限定「ベージュレザー」追加",
+        desc: "ブリッドのコンフォートリクライニングシート『ユーロスターIIクルーズ』に、2026年限定カラー「ベージュレザー」が追加された。高級感あふれるPVCレザーを採用し、滑りにくい素材でホールド性を確保。T&E上野高広さんの70ランクル実装で、シートレール交換によるドラポジ改善も実現した。",
+        url: "https://news.yahoo.co.jp/articles/0abac35e36f891cc6dee93123d23b9d82b84b4f7?source=rss",
+        source: "MotorFan",
+        date: "2026-05-14",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 93,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01476570-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1026",
+        title: "業界初Dolby Atmos対応で4スピーカーでも没入感MAX！",
+        desc: "カロッツェリアから業界初Dolby Atmos対応ディスプレイオーディオ「DMH-SF1000」が登場。4スピーカー環境でも車内を包み込む立体音響を実現し、10.1インチディスプレイ上部の「ルミナスバー」で音と光を演出。適合車種は473車種に及ぶ。",
+        url: "https://news.yahoo.co.jp/articles/7580019200fa5adbf29ff27872d7632abfd045bf?source=rss",
+        source: "MotorFan",
+        date: "2026-05-14",
+        tags: ["ディスプレイ", "音響"],
+    
+        interiorScore: 90,
+        interiorReason: "new display audio unit with Dolby Atmos and Luminous Bar lighting feature; inter",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01485154-motorfan-000-2-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1027",
+        title: "トヨタ・ノア＆ヴォクシー福祉車に新設「ワンタッチ固定装置」",
+        desc: "トヨタは2026年5月12日、ノア・ヴォクシーのウェルキャブシリーズを一部改良し、スロープタイプ車に車いす固定がワンタッチで可能となる新装置を新設定した。従来のベルト・ワイヤー式に加え、固定アームにアンカーバーを突っ込むだけの簡易化により、介助者の負担軽減と運行効率向上が期待される。",
+        url: "https://news.yahoo.co.jp/articles/c011511bd69708bc34d4009bbfe4c84de1fb2131?source=rss",
+        source: "MotorFan",
+        date: "2026-05-14",
+        tags: [],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01484099-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1028",
+        title: "スズキ・クロスビー、25年10月大改良でSUVらしさ向上",
+        desc: "スズキ・クロスビーは25年10月に大規模改良。フロントマスクの厚み増やインパネ変更でSUVらしさが向上。全長3760mmの5ナンバー車でありながら、大人4人が乗れる広さを維持。排気量1.2lへの換装で燃費も改善した。",
+        url: "https://news.yahoo.co.jp/articles/cdcf5b3e541f7c077cd2559ea733d1cbc2c82280?source=rss",
+        source: "MotorFan",
+        date: "2026-05-14",
+        tags: ["コックピット"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image shows trunk storage and rear cabin space, text mentions dashboard",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01456812-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1029",
+        title: "カロッツェリアTS-X40、40周年で光るボックススピーカー復活",
+        desc: "カロッツェリアはブランド誕生40周年を記念し、TS-X40という新作スピーカーを発売する。1980年代の「光るボックススピーカー」をオマージュし、ブルーイルミネーションやヘキサゴンビスで当時感を演出。3ウェイ構成で高音質を追求した自動車内装用品だ。",
+        url: "https://news.yahoo.co.jp/articles/4eab29e0c41137cbc30767a795ef601c4f41e572?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-05-14",
+        tags: ["イルミ", "音響"],
+    
+        interiorScore: 87,
+        interiorReason: "speaker product launch with clear interior image showing cabin integration and d",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-00010004-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "eu805",
+        title: "Android Auto、フルスクリーンナビでCarPlayを凌駕",
+        desc: "Android Autoが大幅アップデートし、MINI CooperやBMW iX3など特殊形状ディスプレイでもGoogle Mapsをフルスクリーン表示。Apple CarPlayにはないカスタマイズウィジェットや動画再生、VolvoやRenaultへの対応も予定。",
+        url: "https://www.autoexpress.co.uk/news/369591/huge-android-auto-update-embarrasses-apple-carplay-full-screen-experience",
+        source: "Auto Express",
+        date: "2026-05-14",
+        tags: ["AR", "ディスプレイ", "コネクテッド", "カスタマイズ"],
+    
+        interiorScore: 88,
+        interiorReason: "HMI and display UX update with clear interior image showing full-screen navigati",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--9lpoDQLV--/t_rss_image_w_845/v1778752267/autoexpress/2026/05/android-auto-update-2.jpg",
         note: ""
     },
 ];

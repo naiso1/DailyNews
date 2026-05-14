@@ -1,5 +1,22 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-14",
+        analysis: {
+            jp: "日本市場の自動車内装トレンドを分析する。環境対応の強化[jp1023]と、HMIや照明演出[jp1029]の両輪が進行している。福祉機能の簡素化[jp1027]も、車内空間の使い勝手を重視する流れを示唆する。特に音響技術[jp1026]は、静寂感を可視化・操作化する新価値を創出する機会だ。また、クロスビーのコックピット改良[jp1028]から、小型車でも高品質を追求する傾向が明確。",
+            eu: "欧州市場のAndroid Autoフルスクリーン対応は、Google Mapsの最適化とVolvo、Renaultなどへの展開が示唆される[eu805]。カスタマイズウィジェットや動画再生機能により、乗用車内の情報表示の自由度が向上する[eu805]。特にMINI CooperやBMW iX3などの特殊形状ディスプレイへの対応は、内装の形状制約を超えた柔軟なUI実装を可能にする[eu805]。これにより、既存のHMIデザイン刷新や、デジタルインテリジェンスとの連携が加速する[eu805]。",
+        },
+        ideas: {
+            jp: [
+                { id: 906, img: "images/idea_906.png", title: "リサイクル素材で静かな香り空間", desc: "再生プラスチックを内装トリムに採用し、車内を包み込む自然な香りが漂う空間を創出。軽量化でCO2削減[jp1023]に貢献しながら、高級感のあるPVCレザー[jp1025]のような質感と香りを両立。環境に配慮した素材を選び、運転中に心地よい香りに包まれる喜びを提供。", imagePrompt: "Eco-friendly car interior with recycled plastic trim, natural soft lighting, subtle aroma diffuser on dashboard, premium beige and green color palette, photorealistic render, sustainable materials texture, cozy cabin atmosphere" },
+                { id: 907, img: "images/idea_907.png", title: "音の可視化で没入空間を実現", desc: "音響技術[jp1026]を応用し、車内音場を可視化するデジタルディスプレイを新設。Dolby Atmos[jp1026]の立体音響を視覚的に表現し、高音質を楽しむ喜びを視覚化。ウェザーストリップ[jp1024]の設計と連携し、音質の向上をユーザーに直感的に伝える。", imagePrompt: "Advanced car interior with holographic audio visualization display, Dolby Atmos sound waves floating in air, premium black and blue lighting, futuristic HUD interface, photorealistic render, immersive audio experience visualization" },
+            ],
+            eu: [
+                { id: 908, img: "images/idea_908.png", title: "ARナビ用カスタム枠組み", desc: "Android Autoのフルスクリーンナビに合わせたAR表示枠組み。ミニマルなアルミフレームで、地図表示時に車内の雰囲気を損なわない。Google Mapsとの親和性を高め、ドライバーがナビに頼りすぎないよう、美しい余白と照明演出で快適な視覚体験を提供する。", imagePrompt: "" },
+                { id: 909, img: "images/idea_909.png", title: "小型ワイヤレス充電ホルダ連携", desc: "既存の小型ワイヤレス充電ホルダをAndroid Autoのフルスクリーンナビと連携。ナビ表示時に、充電ホルダが自動で最適な角度に調整され、スマートフォンとナビ画面が調和した美しい車内空間が実現する。ドライバーが充電しながらも、ナビ表示を妨げない心地よさを提供する。", imagePrompt: "" },
+            ],
+        }
+    },
+{
         date: "2026-05-13",
         analysis: {
             jp: "日本市場では、RAV4専用品[jp1013]やHUD出展[jp1014]により、量販SUVでも後付けアクセサリーと視認支援HMIの重要性が高まっている。アウディQ9の内装初公開[jp1016]、ジムニー専用シートカバー[jp1018]、LBX Morizo RRの内外装色拡充[jp1022]から、シート・加飾・カラー提案が商品価値を左右する流れが明確。3列シートSUV[jp1015]やSクラス刷新[jp1020]も、広い車室と上質な操作体験を求める需要を示す。",
