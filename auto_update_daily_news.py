@@ -928,17 +928,17 @@ def main():
             extra_block = "\n" + extra_block
         item_block = textwrap.dedent(f"""
             {{
-                id: "{it_id}",
-                title: "{it['title']}",
-                desc: "{it['desc']}",
-                url: "{it['url']}",
-                source: "{source}",
-                date: "{it['date']}",
+                id: "{js_escape(it_id)}",
+                title: "{js_escape(it['title'])}",
+                desc: "{js_escape(it['desc'])}",
+                url: "{js_escape(it['url'])}",
+                source: "{js_escape(source)}",
+                date: "{js_escape(it['date'])}",
                 tags: {json.dumps(tags, ensure_ascii=False)},
 {extra_block}
-                country: "{it['country']}",
-                img: "{it['img']}",
-                note: "{note}"
+                country: "{js_escape(it['country'])}",
+                img: "{js_escape(it['img'])}",
+                note: "{js_escape(note)}"
             }},
         """).strip("\n")
         new_items.append(item_block)

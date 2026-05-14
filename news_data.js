@@ -55109,7 +55109,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us829",
         title: "Jaguar Type 01 Is the Official Name of the Upcomin",
-        desc: "On one hand, "Type 01" sounds as aggressively soulless as the upcoming Jag's sans-serif flat-surfaces design.",
+        desc: "On one hand, \"Type 01\" sounds as aggressively soulless as the upcoming Jag's sans-serif flat-surfaces design.",
         url: "https://www.thedrive.com/news/jaguar-type-01-is-the-official-name-of-the-upcoming-ultra-luxe-jag-tds",
         source: "The Drive",
         date: "2026-05-13",
@@ -55265,7 +55265,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "eu797",
         title: "The biggest oddballs ever made in the car world",
-        desc: "Join us to celebrate all the cars that dared to be different - and didn't always succeed Every so often, the cry goes up: "Cars all look the same nowa",
+        desc: "Join us to celebrate all the cars that dared to be different - and didn't always succeed Every so often, the cry goes up: \"Cars all look the same nowa",
         url: "https://www.autocar.co.uk/car-news/slideshow/biggest-oddballs-ever-made-car-world",
         source: "AUTOCAR UK",
         date: "2026-05-13",
@@ -55291,7 +55291,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "eu799",
         title: "Volkswagen Golf EV won't arrive until end of decad",
-        desc: "Autocar rendering shows what the new ID Golf could look like CEO Thomas Schafer confirms "we do not need an electric Golf in 2028" as "we are well set",
+        desc: "Autocar rendering shows what the new ID Golf could look like CEO Thomas Schafer confirms \"we do not need an electric Golf in 2028\" as \"we are well set",
         url: "https://www.autocar.co.uk/car-news/new-cars/volkswagen-golf-ev-wont-arrive-until-end-decade-ceo-confirms",
         source: "AUTOCAR UK",
         date: "2026-05-13",
