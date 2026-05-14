@@ -188,6 +188,10 @@ def generate_tags(text: str):
     return tags[:6]
 
 
+def has_japanese_text(text: str):
+    return bool(re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", str(text or "")))
+
+
 BAD_SUMMARY_PATTERNS = [
     r"新しい\s*JSON\s*の\s*タイトル",
     r"新しい\s*JSON\s*の\s*サマリー",
@@ -849,6 +853,8 @@ def main():
         return row[idx].strip() if idx < len(row) else ""
 
     items = []
+    non_paper_rows = 0
+    rows_with_relevance_signal = 0
     for row in rows:
         country_raw = get(row, idx_country)
         date_val = get(row, idx_date)
@@ -861,6 +867,11 @@ def main():
         img_val = get(row, idx_img判定)
         interior_score = parse_score_0_100(get(row, idx_interior_score))
         interior_reason = get(row, idx_interior_reason)
+        country = map_country(country_raw) or "jp"
+        if country != "paper":
+            non_paper_rows += 1
+            if ("対象" in llm_val) or interior_score is not None:
+                rows_with_relevance_signal += 1
 
         if idx_llm is not None and llm_val and "対象" not in llm_val:
             continue
@@ -873,8 +884,10 @@ def main():
         if is_bad_generated_text(title) or is_bad_generated_text(desc):
             print(f"Skip placeholder summary: {url}")
             continue
+        if country != "paper" and (not has_japanese_text(title) or not has_japanese_text(desc)):
+            print(f"Skip non-Japanese title/summary: {url}")
+            continue
 
-        country = map_country(country_raw) or "jp"
         tags = generate_tags(f"{title} {desc}")
         items.append(apply_item_overrides({
             "country": country,
@@ -889,6 +902,11 @@ def main():
             "interiorReason": interior_reason,
             "imageInterior": True if img_val and "あり" in img_val else (False if img_val and "なし" in img_val else None),
         }))
+
+    if non_paper_rows and idx_llm is not None and rows_with_relevance_signal == 0:
+        raise RuntimeError(
+            "sheet2 has no LLM/interior relevance signals. Abort to avoid publishing weak non-interior articles."
+        )
 
     if not items:
         print("No items to append after filtering.")

@@ -54997,7 +54997,6 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-05-13",
         tags: [],
-    
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-00000020-rps-000-1-view.jpg",
         note: ""
@@ -55010,7 +55009,6 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-05-13",
         tags: ["HUD"],
-    
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-00000015-rps-000-1-view.jpg",
         note: ""
@@ -55023,7 +55021,6 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-05-13",
         tags: ["シート", "EV"],
-    
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-00010008-carv-000-1-view.jpg",
         note: ""
@@ -55036,22 +55033,8 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-05-13",
         tags: ["EV"],
-    
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-00010004-carv-000-1-view.jpg",
-        note: ""
-    },
-    {
-        id: "jp1017",
-        title: "「C125なのに低すぎる！",
-        desc: "一見するとロングシート仕様のスーパーカブC125。しかし近づいてみると、異様なまでに低い車高とホイールへ覆い被さるフェンダーが目に飛び込んでくる。奈良カブミーティングで注目を集めていたのが、ハーレー用。",
-        url: "https://news.yahoo.co.jp/articles/9cb04ca50a7b2aacef8853612a60878b2e43450d?source=rss",
-        source: "MotorFan",
-        date: "2026-05-13",
-        tags: ["シート"],
-    
-        country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-01478464-motorfan-000-1-view.jpg",
         note: ""
     },
     {
@@ -55062,22 +55045,8 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-05-13",
         tags: ["シート", "新素材"],
-    
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-01472829-motorfan-000-1-view.jpg",
-        note: ""
-    },
-    {
-        id: "jp1019",
-        title: "100台限定車に4400人が殺到した「ミライース tuned by D-SPORT Racing」！",
-        desc: "わずか100台の限定モデルに、約4400人の購入希望者が殺到！ ダイハツ車のカスタマイズを手掛ける「D-SPORT」ブランドでおなじみのSPKが販売を行う「ミライース tuned by D-SPOR。",
-        url: "https://news.yahoo.co.jp/articles/f2ec91aace2c809e5b70f77df49e7f3e2404233c?source=rss",
-        source: "WEB CARTOP",
-        date: "2026-05-13",
-        tags: ["カスタマイズ"],
-    
-        country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-00010002-wcartop-000-1-view.jpg",
         note: ""
     },
     {
@@ -55088,555 +55057,162 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-05-13",
         tags: [],
-    
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-01056217-kurumans-000-3-view.jpg",
         note: ""
     },
     {
-        id: "jp1021",
-        title: "新たな発見が止まらない！",
-        desc: "フィアット・パンダが、グレートブリテン島へ帰ってきた。ひと回り大きくなったボディに、ハイブリッドとエレクトリック、2種類のパワートレインを用意して。 グローバルモデルとして、ハッチバックではなく、よ。",
-        url: "https://news.yahoo.co.jp/articles/9ab13d65cbf716a1bbcfaa40bd7fae519fb15316?source=rss",
-        source: "AUTOCAR JAPAN",
-        date: "2026-05-13",
-        tags: [],
-    
-        country: "jp",
-        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-01239558-autocar-000-1-view.jpg",
-        note: ""
-    },
-    {
-        id: "us829",
-        title: "Jaguar Type 01 Is the Official Name of the Upcomin",
-        desc: "On one hand, \"Type 01\" sounds as aggressively soulless as the upcoming Jag's sans-serif flat-surfaces design.",
-        url: "https://www.thedrive.com/news/jaguar-type-01-is-the-official-name-of-the-upcoming-ultra-luxe-jag-tds",
-        source: "The Drive",
-        date: "2026-05-13",
-        tags: ["AR"],
-    
-        country: "us",
-        img: "https://www.thedrive.com/wp-content/uploads/2026/05/Jaguar-Type-01.jpg?quality=85",
-        note: ""
-    },
-    {
-        id: "us830",
-        title: "The Last BMW Z4 Has Been Built",
-        desc: "The beloved Bavarian two-seater convertible has reached the end of the road.",
-        url: "https://www.motor1.com/news/795674/last-bmw-z4-built/",
-        source: "Motor1",
-        date: "2026-05-13",
-        tags: ["HMI", "AR"],
-    
-        country: "us",
-        img: "https://cdn.motor1.com/images/mgl/7Zvw46/s3/bmw-z4-edition-pure-impulse-2024.jpg",
-        note: ""
-    },
-    {
-        id: "us831",
-        title: "Jaguar's New EV Finally Has A Name: Type 01",
-        desc: "Jaguar's ultra-luxury electric grand tourer gets a simple yet meaningful name.",
-        url: "https://www.motor1.com/news/795700/jaguar-type-01-name-announced/",
-        source: "Motor1",
-        date: "2026-05-13",
-        tags: ["HMI", "AR", "EV"],
-    
-        country: "us",
-        img: "https://cdn.motor1.com/images/mgl/Oo9GpA/s3/jaguar-type-01-teaser.jpg",
-        note: ""
-    },
-    {
         id: "us832",
-        title: "A Chinese Hatch’s Driver Seat Slid 4.",
-        desc: "Eight months after a first-of-its-kind crash test failure, the MG3's fix is sitting at dealers waiting for owners who never came in。",
+        title: "MG3の運転席シート不具合、リコール対応が未完了",
+        desc: "衝突試験で運転席シートが大きくずれたMG3について、修理部品は販売店に用意されているが、未入庫のオーナーが多い。シート安全性に関わる事例。",
         url: "https://www.carscoops.com/2026/05/mg3-seat-recall/",
         source: "CarScoops",
         date: "2026-05-13",
-        tags: ["AI", "EV"],
-    
+        tags: ["シート", "安全"],
+        interiorScore: 85,
+        interiorReason: "運転席シートの固定・衝突安全に直接関係する。",
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/MG3-Crash-1024x576.jpg",
         note: ""
     },
     {
-        id: "us833",
-        title: "A New US Bill Starts Chinese Car Penalties At $1.",
-        desc: "Chinese vehicles are already effectively banned from the US market, and a new House bill would back that ban with a $1.",
-        url: "https://www.carscoops.com/2026/05/connected-vehicle-security-act/",
-        source: "CarScoops",
-        date: "2026-05-13",
-        tags: ["AR"],
-    
-        country: "us",
-        img: "https://www.carscoops.com/wp-content/uploads/2026/05/China-Car-Ban-USA-1024x576.jpg",
-        note: ""
-    },
-    {
         id: "us834",
-        title: "The $43K LBX Morizo RR Gets A Color Lexus Killed O",
-        desc: "The LBX Morizo RR is now available with a Neutrino Gray exterior and Ochre interior along with improved equipment。",
+        title: "レクサスLBX Morizo RR、オーカー内装色と装備を拡充",
+        desc: "レクサスLBX Morizo RRにニュートリノグレー外装とオーカー内装が追加され、装備も改善。小型高性能車でも内装色と質感が商品価値を左右する。",
         url: "https://www.carscoops.com/2026/05/lexus-lbx-morizo-rr-2027-update/",
         source: "CarScoops",
         date: "2026-05-13",
-        tags: ["HMI", "AI"],
-    
+        tags: ["内装", "加飾", "プレミアム"],
+        interiorScore: 78,
+        interiorReason: "内装色・装備改善が主題に含まれる。",
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/20260513_01_04-copy-1024x576.jpg",
         note: ""
     },
     {
         id: "us835",
-        title: "Ineos Wants Defender Money For The Plushest Grenad",
-        desc: "Equipped with locking diffs and 17-inch wheels shod in BF Goodrich All-Terrain tires, as well as a plush interior, this Grenadier combines the best of",
+        title: "Ineos Grenadier、上質内装仕様で高価格帯を狙う",
+        desc: "Ineos Grenadierの上級仕様は、悪路性能に加えてプラッシュな内装を訴求。オフロード車でも触感・加飾・快適性が差別化要素になっている。",
         url: "https://www.carscoops.com/2026/05/ineos-grenadier-trailmaster-x/",
         source: "CarScoops",
         date: "2026-05-13",
-        tags: ["HMI", "AI"],
-    
+        tags: ["内装", "プレミアム", "快適"],
+        interiorScore: 72,
+        interiorReason: "上質内装を商品価値として扱っている。",
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/INEOS-Grenadier-Trialmaster-X-08aaa-1024x576.jpg",
         note: ""
     },
     {
-        id: "us836",
-        title: "Jaguar’s Type Name Is Back, And It’s Wearing Four",
-        desc: "The Jaguar Type 01 swaps concept-car fantasy for production reality, though the styling still looks anything but ordinary。",
-        url: "https://www.carscoops.com/2026/05/jaguars-new-ev-is-badged-the-type-01-but-more-is-needed-to-convince-buyers/",
-        source: "CarScoops",
-        date: "2026-05-13",
-        tags: ["AR"],
-    
-        country: "us",
-        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Wordmark-copy-1024x576.jpg",
-        note: ""
-    },
-    {
-        id: "us837",
-        title: "Katherine Legge Will Become The First Woman In His",
-        desc: "She should have plenty of time to catch a helicopter from Indy to an airport, hop a flight, and get another helicopter into Charlotte for the big NASC",
-        url: "https://www.jalopnik.com/2171967/katherine-legge-first-woman-history-run-indy-500-coca-cola-600/",
-        source: "Jalopnik",
-        date: "2026-05-13",
-        tags: ["AR", "AI"],
-    
-        country: "us",
-        img: "https://www.jalopnik.com/img/gallery/katherine-legge-will-become-the-first-woman-in-history-to-run-indy-500-and-coca-cola-600-in-the-same-day/l-intro-1778682817.jpg",
-        note: ""
-    },
-    {
         id: "us838",
-        title: "2027 Lexus TZ Interior And Exterior Picture Galler",
-        desc: "The 2027 Lexus TZ debuts as the brand's first three-row electric SUV, pairing dual battery options with DIRECT4 AWD and a quiet, lounge-like cabin.",
+        title: "レクサスTZ、3列EV SUVの静かなラウンジ風キャビンを公開",
+        desc: "2027年型レクサスTZは、3列シートEV SUVとして静かでラウンジのようなキャビンを訴求。EV時代の後席快適性と空間演出が焦点となる。",
         url: "https://www.topspeed.com/2027-lexus-tz-interior-and-exterior-picture-gallery/",
         source: "Top Speed",
         date: "2026-05-13",
-        tags: ["HMI", "AI"],
-    
+        tags: ["シート", "EV", "内装", "快適"],
+        interiorScore: 88,
+        interiorReason: "キャビン、3列シート、静粛性に直接関係する。",
         country: "us",
         img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/05/2027-lexus-tz-20.jpg",
         note: ""
     },
     {
-        id: "eu795",
-        title: "BYD to launch new wave of European-specific models",
-        desc: "New B- and C-segment cars will arrive over the next three years, starting with Dolphin G PHEV supermini in June BYD will launch a wave of models desig",
-        url: "https://www.autocar.co.uk/car-news/new-cars/byd-launch-new-wave-european-specific-models",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "EV", "バッテリー"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/byd_supermini_phev_render_0.jpg?itok=vbx58HSy",
-        note: ""
-    },
-    {
-        id: "eu796",
-        title: "The cars that shocked and surprised the world",
-        desc: "We take a close look at the cars that shocked us all when they arrived It’s fair to say that plenty of BMW’s designs in recent years have raised a few",
-        url: "https://www.autocar.co.uk/car-news/slideshow/cars-shocked-and-surprised-world",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "AI"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_1-bmw-xm-label-red-2023-front-quar_1_1_0_1_0_2_0_1.jpg?itok=2EX3jTME",
-        note: ""
-    },
-    {
-        id: "eu797",
-        title: "The biggest oddballs ever made in the car world",
-        desc: "Join us to celebrate all the cars that dared to be different - and didn't always succeed Every so often, the cry goes up: \"Cars all look the same nowa",
-        url: "https://www.autocar.co.uk/car-news/slideshow/biggest-oddballs-ever-made-car-world",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_00-intro_ac_2_0_0_0_0_0_1_0_0_1_8_0_1_0_0_0.jpg?itok=CbLr6Vr2",
-        note: ""
-    },
-    {
-        id: "eu798",
-        title: "The secret Volkswagens that were never sold",
-        desc: "Fan favourites and secret one-offs live under the same roof - these are the interesting VWs the company never sold Volkswagen runs two museums in its。",
-        url: "https://www.autocar.co.uk/car-news/slideshow/secret-volkswagens-were-never-sold-1",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_vw-vario_vw_0_1_0_0_0_1.jpg?itok=EXb2quxj",
-        note: ""
-    },
-    {
-        id: "eu799",
-        title: "Volkswagen Golf EV won't arrive until end of decad",
-        desc: "Autocar rendering shows what the new ID Golf could look like CEO Thomas Schafer confirms \"we do not need an electric Golf in 2028\" as \"we are well set",
-        url: "https://www.autocar.co.uk/car-news/new-cars/volkswagen-golf-ev-wont-arrive-until-end-decade-ceo-confirms",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/2028-vw-id-golf-autocar-render-2025-front-quarter_2.jpg?itok=QxIKfpPy",
-        note: ""
-    },
-    {
-        id: "eu800",
-        title: "Lotus Emira to drop Toyota, AMG engines in switch",
-        desc: "Revised sports car is due next year and will use new powertrain from Renault-Geely-owned Horse The updated Lotus Emira sports car will be the first to",
-        url: "https://www.autocar.co.uk/car-news/new-cars/lotus-emira-drop-toyota-amg-engines-switch-new-hybrid-v6",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "AI", "EV"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/lotus-emira-v6-front-quarter-tracking.jpg?itok=wGFqTH6X",
-        note: ""
-    },
-    {
-        id: "eu801",
-        title: "Best selling cars of all time, from each car maker",
-        desc: "Some of the information was easy to find, others difficult, and some of the results were surprising We all have a pretty good idea of what the best se",
-        url: "https://www.autocar.co.uk/car-news/slideshow/best-selling-cars-all-time-each-car-maker",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_0-intro-bmw-3-series-01-front-tracking_0_0_0_0_2_0_1_0_1_0_0_0.jpg?itok=_uaAVCM9",
-        note: ""
-    },
-    {
-        id: "eu802",
-        title: "20 very angry-looking cars",
-        desc: "We suggest you get well out of the way of these cars They say that road cars are angrier than ever.",
-        url: "https://www.autocar.co.uk/car-news/slideshow/20-very-angry-looking-cars",
-        source: "AUTOCAR UK",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "eu",
-        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_0-lamborghini-huracan-sto-2021-f_0_0_0_0_0_0_0_0_0_0_0_0_9_0_0_0_0.jpg?itok=Brhw3Dj5",
-        note: ""
-    },
-    {
         id: "eu803",
-        title: "Jeep Avenger update brings light-up grille and int",
-        desc: "First major update for three-year-old baby crossover brings its look into line with the bigger Compass Jeep has given the Avenger its first major upda",
+        title: "Jeep Avenger改良、発光グリルと内装の小変更を実施",
+        desc: "Jeep Avengerの初の大幅改良では、上位Compassに近い外観へ寄せつつ、内装にも小変更を加える。小型SUVの内外装統一感がテーマ。",
         url: "https://www.autocar.co.uk/car-news/new-cars/jeep-avenger-update-brings-light-grille-and-interior-tweaks",
         source: "AUTOCAR UK",
         date: "2026-05-13",
-        tags: ["AR"],
-    
+        tags: ["内装", "加飾", "イルミ"],
+        interiorScore: 65,
+        interiorReason: "内装変更を含む改良記事。",
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/jeep-avenger-4xe-facelift-1.jpg?itok=W7-pr7lU",
         note: ""
     },
     {
         id: "eu804",
-        title: "New Omoda 7 Noble Tech has unique screen that slid",
-        desc: "A new top-spec variant of the Omoda 7 has a few functions we’ve not seen before。",
+        title: "Omoda 7 Noble Tech、横方向にスライドする独自スクリーンを採用",
+        desc: "Omoda 7の上級仕様Noble Techは、車内を横断するようにスライドする独自スクリーンを採用。HMIとディスプレイ配置の新しい見せ方として注目される。",
         url: "https://www.autoexpress.co.uk/omoda/7/369584/new-omoda-7-noble-tech-has-unique-screen-slides-right-across-car",
         source: "Auto Express",
         date: "2026-05-13",
-        tags: ["AR"],
-    
+        tags: ["HMI", "ディスプレイ", "コックピット"],
+        interiorScore: 90,
+        interiorReason: "車内ディスプレイ/HMIに直接関係する。",
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--nck1Sq-K--/t_rss_image_w_845/v1778670479/autoexpress/2026/05/Omoda%207%20sliding%20screen-3.jpg",
         note: ""
     },
     {
-        id: "cn848",
-        title: "Xiaomi YU7: waits drop from 33–56 weeks to 2‑hour",
-        desc: "Xiaomi says improved YU7 production and inventory availability reduced delivery times across all SUV variants in China.",
-        url: "https://carnewschina.com/2026/05/13/xiaomi-yu7-waits-drop-from-33-56-weeks-to-2-hour-delivery-for-some-stock-suvs/",
-        source: "CarNewsChina - All",
-        date: "2026-05-13",
-        tags: ["AR", "AI"],
-    
-        country: "cn",
-        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e8bdace9ab98e6b885-1_webhook_1500x900_q85_1778669211.jpg",
-        note: ""
-    },
-    {
-        id: "cn849",
-        title: "Arcfox S3 to officially launch on May 22 with swap",
-        desc: "Arcfox S3 to officially launch on May 22 in China, the swappable battery option will start from less than 9,500 USD.",
-        url: "https://carnewschina.com/2026/05/13/arcfox-s3-to-officially-launch-on-may-22-with-swappable-battery-option/",
-        source: "CarNewsChina - All",
-        date: "2026-05-13",
-        tags: ["AR"],
-    
-        country: "cn",
-        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-45.png",
-        note: ""
-    },
-    {
         id: "cn850",
-        title: "Maextro S800 continues China’s ultra-luxury sedan",
-        desc: "Maextro S800 remained China’s best-selling ultra-luxury sedan in April as BMW and Audi lost ranking positions.",
+        title: "Maextro S800、中国超高級セダン市場で首位を維持",
+        desc: "Maextro S800は4月も中国の超高級セダン市場で販売首位を維持。高級セダンでは後席空間、静粛性、HMI、加飾品質が購買理由になりやすい。",
         url: "https://carnewschina.com/2026/05/13/maextro-s800-continues-chinas-ultra-luxury-sedan-dominance-as-bmw-drops-to-5/",
         source: "CarNewsChina - All",
         date: "2026-05-13",
-        tags: ["HMI", "AI"],
-    
+        tags: ["プレミアム", "内装", "HMI"],
+        interiorScore: 55,
+        interiorReason: "内装そのものの記事ではないが、超高級セダンの車室価値に関係する。",
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/05/top-china-luxury-car-sales-march-2026-1500x810.png",
         note: ""
     },
     {
-        id: "cn851",
-        title: "Wuling Binguo Pro hits 30,000 pre-orders, ahead of",
-        desc: "SAIC-GM-Wuling's Binguo (Bingo) Pro EV hatchback has received over 30,000 orders in China, with more than 10,000 cars delivered in the first month.",
-        url: "https://carnewschina.com/2026/05/13/wuling-binguo-pro-hits-30000-orders-delivers-10000-cars-in-one-month-launching-in-may-22-in-china/",
-        source: "CarNewsChina - All",
-        date: "2026-05-13",
-        tags: ["AR", "AI", "EV"],
-    
-        country: "cn",
-        img: "https://carnewschina.com/wp-content/uploads/2026/05/binguo_pro_a.jpg",
-        note: ""
-    },
-    {
-        id: "cn852",
-        title: "China’s NEV penetration hits historic 61.",
-        desc: "Only one fuel-powered model remains in China's top 10 best-selling cars for April. The post China’s NEV penetration hits historic 61.",
-        url: "https://carnewschina.com/2026/05/13/chinas-nev-penetration-hits-historic-61-4-in-april-as-ice-sales-collapse/",
-        source: "CarNewsChina - All",
-        date: "2026-05-13",
-        tags: ["AR", "AI", "EV"],
-    
-        country: "cn",
-        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-44-e1778636071627.png",
-        note: ""
-    },
-    {
-        id: "cn853",
-        title: "BYD expands flash charging lineup with new Fang Ch",
-        desc: "Fang Cheng Bao launched the flash charging editions of the Bao 8 and Bao 5, both equipped with the second-generation Blade Battery and flash charging。",
-        url: "https://cnevpost.com/2026/05/13/byd-expands-flash-charging-lineup-new-fang-cheng-bao-suvs/",
-        source: "CnEVPost - All",
-        date: "2026-05-13",
-        tags: ["HMI", "AR", "バッテリー"],
-    
-        country: "cn",
-        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051313064727.jpg",
-        note: ""
-    },
-    {
-        id: "cn854",
-        title: "Huawei, JAC and Stellantis in talks to build Maser",
-        desc: "Co-developed models will include a domestic Maextro version and an overseas Maserati version, with mass production planned for the second half of next",
-        url: "https://cnevpost.com/2026/05/13/huawei-jac-stellantis-in-talks-build-maserati-ev/",
-        source: "CnEVPost - All",
-        date: "2026-05-13",
-        tags: ["HMI", "EV"],
-    
-        country: "cn",
-        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051311431886.jpg",
-        note: ""
-    },
-    {
-        id: "cn855",
-        title: "China auto exports seen topping 10 million units a",
-        desc: "China's auto exports reached 3.13 million units from January to April, up 61.5% year-on-year. For details, please visit CnEVPost.",
-        url: "https://cnevpost.com/2026/05/13/china-auto-exports-seen-topping-10-million-2026/",
-        source: "CnEVPost - All",
-        date: "2026-05-13",
-        tags: ["AR", "AI", "EV"],
-    
-        country: "cn",
-        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051310582553.jpg",
-        note: ""
-    },
-    {
-        id: "cn856",
-        title: "BYD in talks with Stellantis and other carmakers t",
-        desc: "BYD prefers to operate the factories independently rather than through joint ventures. For details, please visit CnEVPost.",
-        url: "https://cnevpost.com/2026/05/13/byd-in-talks-stellantis-other-carmakers-take-european-factories/",
-        source: "CnEVPost - All",
-        date: "2026-05-13",
-        tags: ["AR", "AI", "EV", "バッテリー"],
-    
-        country: "cn",
-        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051308320782.jpg",
-        note: ""
-    },
-    {
-        id: "cn857",
-        title: "Automakers' share in China's NEV market in April:",
-        desc: "In the overall passenger car market, BYD ranked first in retail sales in April with a 13.2% share. For details, please visit CnEVPost.",
-        url: "https://cnevpost.com/2026/05/13/automakers-share-china-nev-market-apr-2026/",
-        source: "CnEVPost - All",
-        date: "2026-05-13",
-        tags: ["AR", "AI", "EV", "バッテリー"],
-    
-        country: "cn",
-        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051302502087.jpg",
-        note: ""
-    },
-    {
-        id: "in882",
-        title: "BYD India to hike car prices by up to 2 percent fr",
-        desc: "BYD India will hike prices of its cars by up to 2 percent from July 1, 2026.",
-        url: "https://www.autocarindia.com/car-news/byd-india-to-hike-car-prices-by-up-to-2-percent-from-july-439724",
-        source: "Autocar India - All",
-        date: "2026-05-13",
-        tags: ["AR", "バッテリー"],
-    
-        country: "in",
-        img: "https://asset.autocarindia.com/static/news/images/20260513_123955_49a24753.png",
-        note: ""
-    },
-    {
         id: "in883",
-        title: "Google revamps Android Auto with updated Google Ma",
-        desc: "Google just announced a slew of major updates to Android Auto and to the cars with Google built-in platform, bringing a redesigned interface, high-def",
+        title: "Android Auto刷新、Google Mapsと車載画面対応を強化",
+        desc: "GoogleはAndroid AutoとGoogle built-in車向けに、地図表示や画面サイズ対応を含む大規模アップデートを発表。車載HMIの使いやすさに直結する。",
         url: "https://www.autocarindia.com/industry/google-revamps-android-auto-with-updated-google-maps-dolby-atmos-439725",
         source: "Autocar India - All",
         date: "2026-05-13",
-        tags: ["HMI", "AR", "EV"],
-    
+        tags: ["HMI", "コネクテッド", "ディスプレイ"],
+        interiorScore: 86,
+        interiorReason: "車載HMI/Android Autoに直接関係する。",
         country: "in",
         img: "https://asset.autocarindia.com/static/news/images/20260513_123246_85a6ac2f.jpg",
         note: ""
     },
     {
-        id: "in884",
-        title: "BMW K 1600 GTL image gallery",
-        desc: "The BMW K 1600 GTL is powered by a 1,649cc inline six-cylinder, liquid-cooled engine producing 160hp at 6,750rpm and 180Nm of torque at 5,250rpm, pair",
-        url: "https://www.autocarindia.com/auto-images/bmw-k1600-gtl-image-gallery-440279",
-        source: "Autocar India - All",
-        date: "2026-05-13",
-        tags: ["HMI", "ディスプレイ", "AI"],
-    
-        country: "in",
-        img: "https://asset.autocarindia.com/static/image-galleries/images/20260513_115313_4be95f05.jpg",
-        note: ""
-    },
-    {
-        id: "in885",
-        title: "Lamborghini Revuelto NA63 image gallery",
-        desc: "Lamborghini has introduced the Revuelto NA63, a limited-edition model made for North America, which the carmaker calls its most important market.",
-        url: "https://www.autocarindia.com/auto-images/lamborghini-revuelto-na63-image-gallery-440278",
-        source: "Autocar India - All",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "in",
-        img: "https://asset.autocarindia.com/static/image-galleries/images/20260513_091212_8847d7f3.png",
-        note: ""
-    },
-    {
         id: "in886",
-        title: "Kia launches battery rental scheme for Carens Clav",
-        desc: "Kia has joined the growing list of carmakers offering a Battery-as-a-Service (BaaS) scheme by introducing it for the Carens Clavis EV.",
+        title: "Kia、Carens Clavis EVにバッテリーレンタルを導入",
+        desc: "KiaはCarens Clavis EVにBattery-as-a-Serviceを導入。購入負担を下げる施策で、EVミニバンの車室・シート・収納価値を広げる前提となる。",
         url: "https://www.autocarindia.com/car-news/kia-launches-my26-carens-clavis-ev-with-battery-rental-scheme-439723",
         source: "Autocar India - All",
         date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
+        tags: ["EV", "シート"],
+        interiorScore: 50,
+        interiorReason: "内装直接ではないが、EVミニバンの商品企画に関連する。",
         country: "in",
         img: "https://asset.autocarindia.com/static/news/images/20260513_115040_83c8b090.jpg",
         note: ""
     },
     {
         id: "in887",
-        title: "Kia Carens Clavis EV BaaS Finance Program Launched",
-        desc: "Under this structure, buyers pay for the vehicle body through a standard vehicle loan, while the battery cost is covered through a subscription-based。",
+        title: "Kia Carens Clavis EV、BaaS金融プログラムを開始",
+        desc: "Carens Clavis EVでは車体ローンとバッテリー費用を分けるBaaS型金融を採用。多人数乗車EVの普及により、後席快適性や収納設計の重要性が増す。",
         url: "https://www.rushlane.com/kia-carens-clavis-ev-baas-finance-program-launched-emi-26k-rs-3-3-per-km-12546428.html",
         source: "RushLane",
         date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
+        tags: ["EV", "シート", "収納"],
+        interiorScore: 50,
+        interiorReason: "内装直接ではないが、多人数乗車EVの企画文脈に関係する。",
         country: "in",
         img: "https://www.rushlane.com/wp-content/uploads/2026/03/kia-carens-clavis-ev-x-line-gt-line-launch-price-1.jpeg",
         note: ""
     },
     {
-        id: "in888",
-        title: "2026 Honda City Facelift Spied Undisguised Ahead O",
-        desc: "Honda Cars India is preparing to launch the updated City facelift later this month and ahead of its official debut, the sedan has now been spotted und",
-        url: "https://www.rushlane.com/2026-honda-city-facelift-spied-undisguised-12546422.html",
-        source: "RushLane",
-        date: "2026-05-13",
-        tags: ["HMI", "AR"],
-    
-        country: "in",
-        img: "https://www.rushlane.com/wp-content/uploads/2026/05/2026-honda-city-facelift-spied-undisguised-3.jpeg",
-        note: ""
-    },
-    {
-        id: "in889",
-        title: "Kia Launches BaaS Finance Programme For Carens Cla",
-        desc: "GaadiWaadi - The Standard pack is priced at Rs 17,99,000 (ex-showroom) for the Kia Carens Clavis EV BaaS with a down payment starting at Rs 51,520 Kia",
-        url: "https://gaadiwaadi.com/kia-launches-baas-finance-programme-for-carens-clavis-ev/",
-        source: "GaadiWaadi",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "in",
-        img: "https://gaadiwaadi.com/wp-content/uploads/2025/07/Kia-Carens-Clavis-EV-1.jpg",
-        note: ""
-    },
-    {
         id: "in890",
-        title: "2026 Honda City Facelift Spotted Undisguised Ahead",
-        desc: "GaadiWaadi - 2026 Honda City gets a refreshed exterior and interior while the familiar mechanical package will likely stay put Honda Cars India is all",
+        title: "2026年型Honda City改良、外装と内装を刷新へ",
+        desc: "2026年型Honda Cityのフェイスリフト車が発売前に撮影され、外装と内装の刷新が見込まれる。量販セダンの車室質感改善に関わるニュース。",
         url: "https://gaadiwaadi.com/2026-honda-city-facelift-spotted-undisguised-ahead-of-launch/",
         source: "GaadiWaadi",
         date: "2026-05-13",
-        tags: ["HMI", "AR"],
-    
+        tags: ["内装", "コックピット"],
+        interiorScore: 72,
+        interiorReason: "内装刷新が明記されている。",
         country: "in",
         img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/2026-Honda-City-Facelift-Spotted-1.jpg",
-        note: ""
-    },
-    {
-        id: "in891",
-        title: "Huge Skoda Car Discounts May 2026 – Kodiaq, Slavia",
-        desc: "GaadiWaadi - Skoda is selling its Kodiaq, Slavia, Kushaq And Kylaq with notable discounts in May 2026 and here we have explained them In the month of。",
-        url: "https://gaadiwaadi.com/huge-skoda-car-discounts-may-2026-kodiaq-slavia-kushaq-kylaq/",
-        source: "GaadiWaadi",
-        date: "2026-05-13",
-        tags: ["AR", "AI"],
-    
-        country: "in",
-        img: "https://gaadiwaadi.com/wp-content/uploads/2025/07/New-Skoda-Kodiaq.jpg",
-        note: ""
-    },
-    {
-        id: "paper125",
-        title: "From Light Pulses to Selective Enhancement: Perfor",
-        desc: "Pulse-width-modulated (PWM) automotive headlights enhance nighttime event-based camera detection, yet systematic parameter optimization for vulnerable",
-        url: "https://pubmed.ncbi.nlm.nih.gov/42122317/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260513111207&v=2.20.0",
-        source: "PubMed - Search",
-        date: "2026-05-13",
-        tags: ["AR", "EV"],
-    
-        country: "paper",
-        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: ""
     },
     {
@@ -55647,7 +55223,6 @@ window.LOADED_NEWS_DATA = [
         source: "autosport web",
         date: "2026-05-13",
         tags: ["安全", "音響"],
-    
         country: "jp",
         img: "https://cdn-image.as-web.jp/2026/05/13140834/20260513_01_04.jpg",
         note: ""

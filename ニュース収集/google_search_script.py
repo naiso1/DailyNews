@@ -1780,7 +1780,10 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             extras = group.iloc[0:0]
         else:
             target_group = group[llm_flag.loc[group.index] == "\u5bfe\u8c61"]
-            extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
+            # Do not fill the daily dashboard with non-target articles. If LLM
+            # relevance failed and no rows are marked as target, leave the
+            # country short/empty instead of backfilling weak generic auto news.
+            extras = group.iloc[0:0]
         selected = []
         selected_idx = set()
         selected_texts = []
@@ -1813,10 +1816,6 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                     return
 
         add_rows(target_group, allow_similar=False)
-        if len(selected) < 10:
-            add_rows(extras, allow_similar=False)
-        if len(selected) < 10:
-            add_rows(pd.concat([target_group, extras], ignore_index=False), allow_similar=True)
 
         if selected:
             result_groups.append(pd.DataFrame(selected))
