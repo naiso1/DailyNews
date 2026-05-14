@@ -2384,6 +2384,15 @@ h1 {
             });
             const localTags = item?.localTags || deriveLocalTags(item);
             if (localTags.length >= 3) score += 6;
+            if (/専用グッズ|専用設計|純正|ドリンクホルダー|ティシューケース|etcカバー|シートカバー|accessor/.test(blob)) {
+                score = Math.max(score, 90);
+            }
+            if (/(sクラス|s-class|フラッグシップ|高級セダン|ラグジュアリー)/.test(blob) && /(大刷新|刷新|改良|初公開|facelift|refresh|revealed|unveiled)/.test(blob)) {
+                score = Math.max(score, 78);
+            }
+            if (/リコール|不具合|衝突試験|修理部品|未完了|recall|defect|failure|crash test/.test(blob)) {
+                score = Math.min(score, 68);
+            }
             if (/販売台数|生産台数|搭載量|株価|決算|補助金|価格だけ|エンジン|排気|タイヤ|バッテリー市場/.test(blob) && score < 45) {
                 score = Math.max(5, score - 12);
             }

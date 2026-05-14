@@ -54997,6 +54997,8 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-05-13",
         tags: [],
+        interiorScore: 94,
+        interiorReason: "RAV4専用の車室アクセサリーで、収納・質感改善に直接関係する。",
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-00000020-rps-000-1-view.jpg",
         note: ""
@@ -55057,6 +55059,8 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-05-13",
         tags: [],
+        interiorScore: 84,
+        interiorReason: "高級セダンの大幅刷新で、車室価値・快適性・上質感の企画参考度が高い。",
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260513-01056217-kurumans-000-3-view.jpg",
         note: ""
@@ -55069,8 +55073,8 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-05-13",
         tags: ["シート", "安全"],
-        interiorScore: 85,
-        interiorReason: "運転席シートの固定・衝突安全に直接関係する。",
+        interiorScore: 63,
+        interiorReason: "シート安全には関係するが、リコール中心で内装企画への示唆は限定的。",
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/05/MG3-Crash-1024x576.jpg",
         note: ""

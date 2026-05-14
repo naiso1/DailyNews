@@ -929,6 +929,66 @@ def spread_interior_score(score, title="", url="", image_interior=None):
         score += offset
     return int(max(0, min(100, score)))
 
+
+def _contains_any(text, words):
+    return any(word in text for word in words)
+
+
+def calibrate_interior_score(score, title="", content="", summary="", image_interior=None):
+    """Tune LLM score toward usefulness for interior product planning."""
+    score = normalize_interior_score(score)
+    if score is None:
+        return None, ""
+    text = f"{title} {content} {summary}".lower()
+
+    product_terms = [
+        "interior", "cabin", "cockpit", "seat cover", "center console", "cup holder",
+        "dashboard", "instrument panel", "infotainment", "display", "hmi", "hud",
+        "trim", "ambient lighting", "upholstery", "material",
+        "内装", "車内", "室内", "キャビン", "インテリア", "シートカバー",
+        "ドリンクホルダー", "ティシューケース", "etcカバー", "コンソール",
+        "ダッシュボード", "インパネ", "ディスプレイ", "スクリーン", "hud",
+        "hmi", "加飾", "トリム", "素材", "質感", "快適",
+    ]
+    accessory_terms = [
+        "accessory", "accessories", "純正", "専用グッズ", "専用設計",
+        "ドリンクホルダー", "ティシューケース", "etcカバー", "シートカバー",
+    ]
+    flagship_terms = [
+        "sクラス", "s-class", "mercedes-benz s", "flagship", "フラッグシップ",
+        "luxury sedan", "高級セダン", "ラグジュアリー",
+    ]
+    refresh_terms = [
+        "大刷新", "刷新", "改良", "一部改良", "facelift", "refresh", "updated",
+        "初公開", "revealed", "unveiled",
+    ]
+    defect_terms = [
+        "recall", "リコール", "defect", "fault", "不具合", "crash test",
+        "衝突試験", "修理部品", "未完了", "failure",
+    ]
+
+    reason = ""
+    has_product = _contains_any(text, product_terms)
+    has_accessory = _contains_any(text, accessory_terms)
+    has_flagship_refresh = _contains_any(text, flagship_terms) and _contains_any(text, refresh_terms)
+    has_defect = _contains_any(text, defect_terms)
+
+    if has_accessory:
+        score = max(score, 90)
+        reason = "interior accessory/product"
+    if has_flagship_refresh and (has_product or image_interior is True):
+        score = max(score, 82)
+        reason = "flagship interior refresh"
+    if has_product and image_interior is True and not has_defect:
+        score = max(score, 78)
+    if has_defect:
+        # Defect/recall stories can be directly related to seats or IPs, but they
+        # are usually less useful than product, material, HMI, or design news.
+        score = min(score, 68)
+        reason = "defect/recall cap"
+
+    return int(max(0, min(100, score))), reason
+
 def call_llm_interior_assessment(title, content, image_url="", url="", summary=""):
     """Local LLM judgment for fuzzy interior relevance, including image evidence."""
     global LLM_ERROR_LOGGED
@@ -938,22 +998,24 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
     if cache_key in LLM_CACHE:
         return LLM_CACHE[cache_key]
     prompt = (
-        "Classify this automotive news item for relevance to vehicle interior/cabin products.\n"
+        "Classify this automotive news item for usefulness to vehicle interior product planning.\n"
         "Continue from the provided JSON prefix. Use real values, for example: 87,\"reason\":\"seat and display plus cabin image\",\"image_interior\":true}\n"
         "score is an exact integer 0-100. image_interior is true, false, or null.\n"
         "Avoid coarse buckets and avoid ending most scores in 0 or 5. Use the whole 0-100 range.\n\n"
         "Scoring method:\n"
-        "Start with text relevance: 0-75 based on how central cabin/interior products are.\n"
-        "Add image evidence: +18 to +25 if the image clearly shows a vehicle cabin, seats, cockpit, dashboard, display, steering wheel, console, or interior material; +8 to +15 if the image partly shows interior; +0 if exterior/logo/unclear/no image.\n"
-        "Then adjust 0-8 points for specificity: concrete product details, dimensions, materials, suppliers, UI functions, or user experience deserve more.\n\n"
+        "Start with product-planning relevance: 0-75 based on how useful the item is for interior parts, materials, HMI, seat, console, trim, comfort, or cabin UX planning.\n"
+        "Add image evidence: +8 to +15 if the image clearly shows useful cabin/interior details; +3 to +7 if partly useful; +0 if exterior/logo/unclear/no image.\n"
+        "Then adjust 0-10 points for specificity: concrete product details, dimensions, materials, suppliers, UI functions, or user experience deserve more.\n\n"
         "Text relevance guide:\n"
-        "70-75: article is mainly interior material, seats, cockpit, dashboard, HMI, infotainment display, center console, trim, ambient lighting, audio, comfort equipment, cabin UX, or in-cabin safety equipment.\n"
-        "50-69: vehicle news/review where several concrete interior features are important.\n"
+        "70-75: article is mainly interior accessory, material, seat cover, cockpit, dashboard, HMI, display, center console, trim, ambient lighting, audio, comfort equipment, cabin UX, or a flagship cabin/interior refresh.\n"
+        "50-69: vehicle news/review where concrete interior features are important, or a seat/interior safety issue with limited product-design learning.\n"
         "30-49: interior/HMI/cabin is present but secondary.\n"
         "15-29: weak or indirect interior relevance.\n"
         "0-14: battery, sales volume, production, factory, partnership, policy, exterior-only, price-only, charging, drivetrain, or company news with almost no cabin detail.\n\n"
         "Strict rules:\n"
         "No concrete cabin/interior/HMI/display/seat/material/audio/comfort detail in text and no interior image => score 35 or lower.\n"
+        "Interior accessories, seat covers, console/cup-holder products, trim/material changes, and flagship cabin refreshes should generally score higher than defect/recall-only stories.\n"
+        "Seat or dashboard recall/defect stories are relevant but usually cap around 55-68 unless the article explains reusable design, material, or UX lessons.\n"
         "Battery deployment/share/capacity => 0-18 unless cabin products or a clear cabin image are present.\n"
         "Sales/factory/partnership/pricing campaign => 0-28 unless interior features are central.\n"
         "ADAS/LiDAR general is not interior unless in-cabin HMI/driver monitoring/display is central.\n"
@@ -1029,6 +1091,9 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
                 raw = m.group(1).lower()
                 image_interior = True if raw == "true" else (False if raw == "false" else None)
         score = spread_interior_score(score, title, url, image_interior)
+        score, calibration_reason = calibrate_interior_score(score, title, content, summary, image_interior)
+        if calibration_reason:
+            reason = (reason + "; " + calibration_reason).strip("; ")[:80]
         result = {"score": score, "image_interior": image_interior, "reason": reason}
         LLM_CACHE[cache_key] = result
         return result
