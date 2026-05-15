@@ -134,6 +134,28 @@ IMAGE_FETCH_TIMEOUT_SECOND = 12
 IMAGE_FETCH_WORKERS = 12
 OUTPUT_PAPERS_SHEET2 = False
 
+SHEET2_INTERIOR_TERMS = [
+    "interior", "cabin", "cockpit", "dashboard", "console", "seat", "seats",
+    "steering", "display", "screen", "touchscreen", "infotainment", "hmi",
+    "hud", "trim", "panel", "door panel", "upholstery", "leather", "fabric",
+    "ambient", "lighting", "comfort", "climate", "hvac", "storage",
+    "material", "materials", "software", "digital", "radar", "sensor",
+    "内装", "車内", "車室", "座席", "シート", "コックピット", "インパネ",
+    "ディスプレイ", "インフォテインメント", "快適", "素材", "センサー",
+]
+SHEET2_AUTO_TERMS = [
+    "car", "cars", "vehicle", "vehicles", "auto", "automotive", "ev",
+    "electric", "hybrid", "suv", "sedan", "mpv", "pickup", "van", "model",
+    "toyota", "honda", "nissan", "mazda", "subaru", "suzuki", "hyundai",
+    "kia", "byd", "tesla", "nio", "xpeng", "volkswagen", "vw", "audi",
+    "bmw", "mercedes", "jaguar", "jeep", "land rover", "mitsubishi",
+    "自動車", "車", "EV", "ハイブリッド", "SUV", "セダン", "ミニバン",
+]
+SHEET2_LOW_VALUE_TERMS = [
+    "crocs", "forza", "solar roof", "residential solar", "congressional",
+    "representative", "debt", "f1 crocs", "game", "gaming",
+]
+
 # NewsAPI
 NEWSAPI_ENDPOINT = "https://newsapi.org/v2/everything"
 
@@ -1785,6 +1807,40 @@ def load_existing_data(path):
     except Exception:
         return pd.DataFrame()
 
+def sheet2_candidate_sort_score(row, title_col, title_jp_col, content_col, content_jp_col, url_col, interior_col, related_col):
+    """Score fallback candidates so quota backfill stays automotive/interior-first."""
+    def numeric(value):
+        try:
+            if value is None or str(value).strip() == "":
+                return None
+            val = float(value)
+            if math.isnan(val):
+                return None
+            return val
+        except Exception:
+            return None
+
+    interior_score = numeric(row.get(interior_col, ""))
+    related_score = numeric(row.get(related_col, ""))
+    score = 0.0
+    if interior_score is not None:
+        score += interior_score * 10.0
+    if related_score is not None:
+        score += related_score * 100.0
+
+    text = " ".join(
+        str(row.get(col, "") or "") for col in (title_jp_col, title_col, content_jp_col, content_col, url_col)
+    ).lower()
+    interior_hits = sum(1 for term in SHEET2_INTERIOR_TERMS if term.lower() in text)
+    auto_hits = sum(1 for term in SHEET2_AUTO_TERMS if term.lower() in text)
+    low_value_hits = sum(1 for term in SHEET2_LOW_VALUE_TERMS if term.lower() in text)
+    score += min(interior_hits, 8) * 18.0
+    score += min(auto_hits, 8) * 6.0
+    score -= low_value_hits * 80.0
+    if interior_hits == 0 and auto_hits == 0:
+        score -= 120.0
+    return score
+
 def build_sheet2_and_csv(df, excel_path, target_dates):
     """LLM判定対象・画像URLあり・対象日付の一覧をSheet2とCSVに出力"""
     if df is None or df.empty:
@@ -1837,33 +1893,43 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         filtered[score_col] = pd.to_numeric(filtered[score_col], errors="coerce")
     if interior_sort_col in filtered.columns:
         filtered[interior_sort_col] = pd.to_numeric(filtered[interior_sort_col], errors="coerce")
+    filtered["_sheet2_sort_score"] = filtered.apply(
+        lambda row: sheet2_candidate_sort_score(
+            row,
+            col_title,
+            col_title_jp,
+            col_content,
+            col_content_jp,
+            col_url,
+            interior_sort_col,
+            score_col,
+        ),
+        axis=1,
+    )
     filtered["_order"] = range(len(filtered))
     llm_flag = filtered[col_llm].astype(str).str.strip()
     result_groups = []
     for country_name, group in filtered.groupby(col_country, sort=False):
-        if interior_sort_col in group.columns and group[interior_sort_col].notna().any():
-            sort_cols = [interior_sort_col]
-            ascending = [False]
-            if score_col in group.columns:
-                sort_cols.append(score_col)
-                ascending.append(False)
-            sort_cols.append("_order")
-            ascending.append(True)
-            group = group.sort_values(sort_cols, ascending=ascending)
-        elif score_col in group.columns:
-            group = group.sort_values([score_col, "_order"], ascending=[False, True])
-        else:
-            group = group.sort_values("_order")
+        sort_cols = ["_sheet2_sort_score"]
+        ascending = [False]
+        if interior_sort_col in group.columns:
+            sort_cols.append(interior_sort_col)
+            ascending.append(False)
+        if score_col in group.columns:
+            sort_cols.append(score_col)
+            ascending.append(False)
+        sort_cols.append("_order")
+        ascending.append(True)
+        group = group.sort_values(sort_cols, ascending=ascending)
         if str(country_name).strip() in ("\u8ad6\u6587", "paper", "papers"):
             # PubMed RSS is curated for this project; do not gate papers by LLM relevance.
             target_group = group
             extras = group.iloc[0:0]
         else:
             target_group = group[llm_flag.loc[group.index] == "\u5bfe\u8c61"]
-            # Do not fill the daily dashboard with non-target articles. If LLM
-            # relevance failed and no rows are marked as target, leave the
-            # country short/empty instead of backfilling weak generic auto news.
-            extras = group.iloc[0:0]
+            # Keep the country quota at 10. Prefer LLM targets, then backfill
+            # with the best remaining candidates from the expanded source pool.
+            extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
         selected = []
         selected_idx = set()
         selected_texts = []
@@ -1896,6 +1962,10 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                     return
 
         add_rows(target_group, allow_similar=False)
+        if limit is not None and len(selected) < limit:
+            add_rows(extras, allow_similar=False)
+        if limit is not None and len(selected) < limit:
+            add_rows(pd.concat([target_group, extras], ignore_index=False), allow_similar=True)
 
         if selected:
             result_groups.append(pd.DataFrame(selected))
@@ -1904,7 +1974,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     else:
         filtered = filtered.iloc[0:0]
     filtered = filtered.sort_values("_order")
-    filtered = filtered.drop(columns=["_order"], errors="ignore")
+    filtered = filtered.drop(columns=["_order", "_sheet2_sort_score"], errors="ignore")
 
     # Sheet2に載るスキップ済み（日本語未補完）を補完
     if not filtered.empty:
@@ -1913,7 +1983,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             title_jp = str(row.get(col_title_jp, "")).strip()
             content_jp = str(row.get(col_content_jp, "")).strip()
             llm_post = str(row.get(col_llm_post, "")).strip()
-            if not title_jp or not content_jp or llm_post == "スキップ":
+            combined_jp = f"{title_jp} {content_jp}".strip()
+            if not title_jp or not content_jp or llm_post == "スキップ" or not has_japanese_kana(combined_jp):
                 need_indices.append(idx)
         if need_indices:
             print(f"  Sheet2補完: {len(need_indices)}件")
@@ -1922,7 +1993,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 summary_title, summary_body = summarize_article(
                     str(row.get(col_title, "")),
                     str(row.get(col_content, "")),
-                    str(row.get(col_url, "")),
+                    "",
                     str(row.get(col_country, "")),
                 )
                 if summary_title:
