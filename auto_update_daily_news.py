@@ -875,7 +875,7 @@ def main():
 
         if idx_llm is not None and llm_val and "対象" not in llm_val:
             continue
-        if idx_img判定 is not None and img_val and "あり" not in img_val and (interior_score is None or interior_score < 70):
+        if idx_img判定 is not None and img_val and "あり" not in img_val and (interior_score is None or interior_score < 55):
             continue
         if not img:
             continue

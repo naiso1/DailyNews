@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-15 00:37";
+window.NEWS_UPDATED_AT = "2026-05-15 08:56";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -55358,6 +55358,23 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--9lpoDQLV--/t_rss_image_w_845/v1778752267/autoexpress/2026/05/android-auto-update-2.jpg",
+        note: ""
+    },
+    // 2026-05-14 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "in891",
+        title: "2026年ホンダ・シティのフルモデルチェンジ：外観・内装・装備の大幅変更",
+        desc: "2026年5月22日発売のホンダ・シティは、外観にハニカムグリルやLEDヘッドランプ、内装に10.25インチの独立型インフォテインメント、パワーシートや360度カメラ、レベル2 ADASなど快適装備を大幅に強化する。",
+        url: "https://www.autocarindia.com/auto-features/what-to-expect-from-2026-honda-city-facelift-440488",
+        source: "Autocar India - All",
+        date: "2026-05-14",
+        tags: ["コネクテッド", "シート", "安全"],
+    
+        interiorScore: 61,
+        interiorReason: "interior refresh and HMI details",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260514_072822_2ea62575.jpg",
         note: ""
     },
 ];
