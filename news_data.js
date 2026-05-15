@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-15 08:56";
+window.NEWS_UPDATED_AT = "2026-05-15 11:25";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -55375,6 +55375,584 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "in",
         img: "https://asset.autocarindia.com/static/features/images/20260514_072822_2ea62575.jpg",
+        note: ""
+    },
+    // 2026-05-14 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "us839",
+        title: "2027年モデルのVW ID. Buzzが新仕様に",
+        desc: "2027年モデルのVW ID. Buzzは、キャンピング仕様の「Tourer」追加や、真のワンペダル運転機能の採用など内装・装備が強化される。",
+        url: "https://insideevs.com/news/795883/2027-volkswagen-id-buzz-returns-to-the-us/",
+        source: "InsideEVs",
+        date: "2026-05-14",
+        tags: [],
+    
+        interiorScore: 80,
+        interiorReason: "flagship cabin refresh with new trims and interior upgrades (camping mode, one-p",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/ko4go4/s3/2025-volkswagen-id.-buzz.jpg",
+        note: ""
+    },
+    {
+        id: "us840",
+        title: "ホンダ、EV撤退で70年ぶり赤字、ハイブリッドへ転換",
+        desc: "ホンダはEV計画を断念し、70年ぶりの年間赤字を記録した。損失額は90億ドル。現在はハイブリッドSUVやセダンに注力し、EV開発を縮小する方針を明らかにした。",
+        url: "https://insideevs.com/news/795846/honda-loss-hybrids/",
+        source: "InsideEVs",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/g4ONgN/s3/acura-hybrid-suv-prototype.jpg",
+        note: ""
+    },
+    {
+        id: "us841",
+        title: "テスラ、FSD介入時にドライバーにフィードバック必須化",
+        desc: "テスラはFSD（完全自動運転）介入時にドライバーがフィードバックを必須化。以前は数秒で消えたプロンプトが、理由選択や音声メモ入力まで画面表示を継続する変更を実施。",
+        url: "https://electrek.co/2026/05/14/tesla-forces-fsd-intervention-feedback-mandatory/",
+        source: "Electrek",
+        date: "2026-05-14",
+        tags: ["AI"],
+    
+        interiorScore: 90,
+        interiorReason: "HMI interaction flow and driver feedback UI",
+        imageInterior: true,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/05/Tesla-full-self-driving-intervention-feedback.jpeg?quality=82&#038;strip=all&#038;w=1482",
+        note: ""
+    },
+    {
+        id: "us842",
+        title: "中国、日本式KカーモデルでEV市場拡大を呼びかけ",
+        desc: "中国大手自動車産業団体が、日本Kカーを模した標準化された低価格EVカテゴリ創設を提案。国内販売低迷解消とEV市場拡大を目指す。",
+        url: "https://electrek.co/2026/05/14/china-wants-to-build-electric-kei-car-industry-boost-ev-sales/",
+        source: "Electrek",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/02/BYD-first-kei-car-EV.jpeg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "us843",
+        title: "Hyundai IONIQ 9 2026：3列EVで家族向けにE-GMPプラットフォーム採用",
+        desc: "Hyundai IONIQ 9はE-GMPプラットフォームを採用し、600km走行でシート品質や室内空間がクラス最高水準。ただしソフトウェア層のギャップが残る。",
+        url: "https://electrek.co/2026/05/14/hyundai-ioniq-9-2026-review/",
+        source: "Electrek",
+        date: "2026-05-14",
+        tags: ["AI", "シート", "EV"],
+    
+        interiorScore: 61,
+        interiorReason: "seat quality and cabin space mentioned in text, but image is exterior only",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/05/IMG_3791-e1778766301124.jpeg?quality=82&#038;strip=all&#038;w=1600",
+        note: ""
+    },
+    {
+        id: "eu806",
+        title: "ルーマニアのRompetrol、EV・eトラック向け急速充電網整備計画",
+        desc: "RompetrolはルーマニアでEVおよびeトラック向けに30基の急速充電ステーション（26か所）を建設し、2027年末までに運用開始を目指す。EU資金が支援する。",
+        url: "https://www.electrive.com/2026/05/14/romania-rompetrol-rolls-out-fast-charging-network-for-evs-and-e-trucks/",
+        source: "Electrive",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/05/rompetrol-ladestation-charging-station-rumaenien-romania-2026-01-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu807",
+        title: "Kia、日本EVバン市場に本格参入、国内ブランドの隙間を狙う",
+        desc: "Kiaは日本市場でEVバン分野に本格参入し、国内ブランドが軽視した隙間を狙う。ただし、補助金制度の点で課題が残る。",
+        url: "https://www.automotiveworld.com/news/466934/",
+        source: "Automotive World",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/14084637/Screenshot-2026-05-14-at-2.45.18-PM-1024x607.png",
+        note: ""
+    },
+    {
+        id: "eu808",
+        title: "三菱自動車、FPTジャパンとソフトウェア連携協定",
+        desc: "三菱自動車とFPTジャパンは、ソフトウェア・デジタル連携を研究し、合弁会社の検討も進める。",
+        url: "https://www.automotiveworld.com/news/mitsubishi-motors-signs-software-mou-with-fpt-japan/",
+        source: "Automotive World",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/14093227/mitsubishi-motors-fpt.jpg",
+        note: ""
+    },
+    {
+        id: "eu809",
+        title: "2026年トヨタ・ヒルックスEV英国発売、ディーゼルハイブリッドも",
+        desc: "2026年発売のトヨタ・ヒルックスは、英国で電気自動車（EV）モデルとディーゼル48Vハイブリッドがラインナップされる。新車は安全装備やデジタル機能も向上し、英国での価格と仕様情報が発表された。",
+        url: "https://electriccarsreport.com/2026/05/toyota-hilux-electric-pickup-uk-pricing-specs-and-release-date/",
+        source: "Electric Cars Report",
+        date: "2026-05-14",
+        tags: ["EV", "安全"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Toyota-Hilux-Electric.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu810",
+        title: "BYD ATTO 2 DM-i UK 価格2万6995ポンドから発表",
+        desc: "BYDは英国市場向けATTO 2 DM-iの価格を2万6995ポンドから発表。超小型SUVとして、ハイブリッド技術と電気走行距離などの仕様も確認された。",
+        url: "https://electriccarsreport.com/2026/05/byd-atto-2-dm-i-uk-pricing-and-specs-confirmed-from-26995/",
+        source: "Electric Cars Report",
+        date: "2026-05-14",
+        tags: ["バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/BYD-ATTO-2-DM-i.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu811",
+        title: "ジープ・アベンジャー電気自動車、英国補助金対象価格2万8499ポンドに",
+        desc: "ジープ・アベンジャー電気自動車は英国の電気自動車補助金（1500ポンド）対象となり、価格が2万8499ポンドに引き下げられた。",
+        url: "https://electriccarsreport.com/2026/05/jeep-avenger-electric-now-eligible-for-uk-electric-car-grant-prices-drop-to-28499/",
+        source: "Electric Cars Report",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Jeep-Avenger-Charging.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in892",
+        title: "トヨタbZ4X Touring、性能・空間・航続距離向上",
+        desc: "トヨタは家族向け電気SUV「bZ4X Touring」を発表。より大きなサイズと高出力化により、快適装備や室内空間が拡大され、アウトドアアドベンチャーにも対応する。",
+        url: "https://indianautosblog.com/toyota-bz4x-touring-revealed-with-more-power-space-and-range-p328467",
+        source: "IndianAutosBlog",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "in",
+        img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    {
+        id: "jp1030",
+        title: "アウディ初のフルサイズSUV「Q9」が2026年夏にワールドプレミア「自動開閉ドアを初採用」",
+        desc: "アウディ初のフルサイズSUV「Q9」は2026年夏にワールドプレミアされ、自動開閉ドアや電動調整独立シート、透過度切り替え可能なパノラミックサンルーフを備える。",
+        url: "https://news.yahoo.co.jp/articles/21964d4c09c419c5e19dfc381af1be5289865f47?source=rss",
+        source: "MotorFan",
+        date: "2026-05-14",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 92,
+        interiorReason: "flagship cabin refresh with clear interior image showing seats, door opening mec",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01483244-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1031",
+        title: "4年ぶり大刷新のBMW新型7シリーズ、31.3インチスクリーンとAIアシスタント採用",
+        desc: "2026年4月公開の新型BMW 7シリーズは、後席に31.3インチ8Kスクリーンを標準搭載。助手席にも14.6インチ画面を初採用し、AIアシスタントやデュアルフィニッシュ塗装など、内装・コックピットに大幅進化を果たすフラッグシップセダンです。",
+        url: "https://news.yahoo.co.jp/articles/c7751169eb52890ff257cc02f72ae9b57bcc47a0?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-14",
+        tags: ["ディスプレイ", "AI", "コックピット"],
+    
+        interiorScore: 82,
+        interiorReason: "flagship cabin refresh with specific interior details like 31.3-inch rear screen",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01056437-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1032",
+        title: "トヨタ「カローラツーリング」一部改良、新色ブラック採用と運転利便性向上",
+        desc: "トヨタは2026年5月12日、誕生60周年の「カローラツーリング」を一部改良。新色「ブラック」採用に加え、インテリアの薄型化や安全機能の標準化など、運転時の利便性と快適装備が向上した。",
+        url: "https://news.yahoo.co.jp/articles/c59845b8fb9829aec61a6655138d092ae87af43c?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-14",
+        tags: ["安全"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image shows dashboard, steering wheel, center console, and seats clearl",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260514-01056680-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us844",
+        title: "2028年発売、ホンダはハイブリッドに注力",
+        desc: "2028年発売予定の楔型セダンとSUVで、ホンダはハイブリッド化を推進。セダンはホンダブランド、SUVはアキュララインナップに配置される。",
+        url: "https://www.motor1.com/news/795825/honda-sedan-acura-suv-hybrid-prototypes/",
+        source: "Motor1",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/ojJNPl/s3/honda-hybrid-sedan-prototype.jpg",
+        note: ""
+    },
+    {
+        id: "us845",
+        title: "トヨタ、2万8500ドルのランドクルーザーFJを日本へ投入",
+        desc: "トヨタは日本市場向けに、ランドクルーザーFJを1台1台に1エンジン、1グレードで販売。価格はRAV4と同額だが、サイズは異なる。",
+        url: "https://www.carscoops.com/2026/05/toyota-land-cruiser-fj-japan-pricing/",
+        source: "CarScoops",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Toyota-Land-Cruiser-FJ-Japan-1-copys-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us846",
+        title: "マイケル・ジョーダン名義の1993年ZR-1がコルベット博物館へ",
+        desc: "1993年、マイケル・ジョーダン名義のZR-1は、コルベット博物館へ展示される。この車は、1993年に世界を凌駕する性能を持つ車を作れることを示す力強いパフォーマンスカーだった。",
+        url: "https://www.jalopnik.com/2172391/michael-jordan-c4-chevrolet-corvette-zr-1-going-to-corvette-museum/",
+        source: "Jalopnik",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/his-airness-michael-jordans-1993-zr-1-is-going-to-the-corvette-museum/l-intro-1778703913.jpg",
+        note: ""
+    },
+    {
+        id: "us847",
+        title: "2026年ポルシェ911 GT3マントイのインテリア写真公開",
+        desc: "2026年ポルシェ911 GT3マントイのインテリアを全方位から確認可能。コックピットやシートなどの内装詳細が公開されている。",
+        url: "https://www.caranddriver.com/photos/g71221387/2026-porsche-911-gt3-manthey-drive-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-05-14",
+        tags: ["シート", "コックピット"],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/ed8f445d-60b6-4200-be7c-96cbedf54cfe.jpg",
+        note: ""
+    },
+    {
+        id: "us848",
+        title: "クラシックスタイルと現代技術で快適な10台のカフェレーサー",
+        desc: "1960年代の夢のような外観を持ちつつ、現代技術と快適なライディングポジションを備えた10台のカフェレーサー。",
+        url: "https://www.topspeed.com/cafe-racers-classic-styling-everyday-comfort/",
+        source: "Top Speed",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/12/2026-triumph-thruxton-400-action-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu812",
+        title: "ホンダ、2年以内に量産するハイブリッドファストバックコンセプトを公開",
+        desc: "ホンダは年間赤字からの回復に向け、EVを減らしハイブリッドに注力。2年以内に量産する「Honda Hybrid Sedan Prototype」というコンセプトカーを公開し、大型ハイブリッドファストバックの方向性を示した。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/striking-new-fastback-previews-hondas-renewed-focus-hybrids",
+        source: "AUTOCAR UK",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/honda-hybrid-sedan-prototype.jpg?itok=SiT6BxzW",
+        note: ""
+    },
+    {
+        id: "eu813",
+        title: "2018年発売のLamborghini UrusはVW系プラットフォーム採用だが、VW価格ではない",
+        desc: "2018年発売のLamborghini UrusはV8エンジン搭載で高性能なラグジュアリーSUV。VW系プラットフォームを共有する点に驚きもあったが、価格はVWより高く設定されている。",
+        url: "https://www.autocar.co.uk/car-news/used-cars-used-car-buying-guides/used-lamborghini-urus-surprisingly-sound-financial",
+        source: "AUTOCAR UK",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/1-lamborghini_urus.jpg?itok=HecVDccu",
+        note: ""
+    },
+    {
+        id: "cn851",
+        title: "MG4は中国で10万台の販売を達成し、月間1万台を維持しています",
+        desc: "MG4は中国においてMG販売の80%を占め、累計10万台を達成。月間1万台以上の販売を維持し、中国市場で大きな成功を収めている。",
+        url: "https://carnewschina.com/2026/05/14/mg4-urban-hits-100000-units-sustaining-10000-monthly-china-sales/",
+        source: "CarNewsChina - All",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/mg4_a.jpg",
+        note: ""
+    },
+    {
+        id: "cn852",
+        title: "中国の純リチウム、500MWhの生産を達成、ソリッドステート電池の商用化が拡大",
+        desc: "中国の国営系スタートアップ「純リチウム」は、切断試験後も動作するソリッドステート電池の生産を500MWhに達し、蓄電・バッテリースワップ市場での商用化を拡大している。",
+        url: "https://carnewschina.com/2026/05/14/pure-lithium-solid-state-battery-keeps-running-after-cut-test-as-startup-hits-500-mwh-output/",
+        source: "CarNewsChina - All",
+        date: "2026-05-14",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e7949fe68890e794b5e58aa8e6b1bde8bda6e59bbae68081e794b5e6b1a0e59bbee78987-1_webhook_1000x600_q85_1778748455.jpg",
+        note: ""
+    },
+    {
+        id: "cn853",
+        title: "BYDのデナザB5/B8は、ファーウェイの支援により新モデルを発売",
+        desc: "BYDのデナザB5とB8には、雲年P超懸架システムとファーウェイ支援の運転支援システムが搭載されています。中国では4万3900ドルから販売を開始します。",
+        url: "https://carnewschina.com/2026/05/14/byds-denza-b5-b8-flash-charge-editions-launched-with-yunnian-p-ultra-suspension-from-43900-usd-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-05-14",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e8bdace9ab98e6b885e5b9b6e9998de4bd8ee5afb9e6af94e5baa6-2-scaled_webhook_1500x900_q85_1778727348.jpg",
+        note: ""
+    },
+    {
+        id: "cn854",
+        title: "北京での成功を受け、深セン国際自動車ショーが5月29日から開催されます",
+        desc: "北京国際自動車ショーの記録的な来場者数を踏まえ、深セン国際自動車ショーは5月29日から6月7日まで開催されます。詳細はCnEVPostでご確認ください。",
+        url: "https://cnevpost.com/2026/05/14/china-next-major-auto-show-approaches-shenzhen/",
+        source: "CnEVPost - All",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051406105059.jpg",
+        note: ""
+    },
+    {
+        id: "cn855",
+        title: "ニオ・ファイフライはモーター出力を強化し、5 世代の充電ステーションに対応しました。",
+        desc: "ニオの電気自動車「ファイフライ」は、既存車両のモーター最大出力を120キロワットに向上させるソフトウェアアップデートを実施する。これにより、最新モデルと同等の性能を確保するとともに、第5世代の充電ステーションとの互換性も確保される。",
+        url: "https://cnevpost.com/2026/05/14/nio-firefly-gets-system-update-boost-motor-power-prepare-5th-gen-swap-stations/",
+        source: "CnEVPost - All",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051405514786.jpg",
+        note: ""
+    },
+    {
+        id: "cn856",
+        title: "4月、中国のEV輸出がトップに。BYDが13万台、テスラが1万3千台",
+        desc: "4月の中国新エネルギー車輸出において、BYDは13万42台を輸出しシェア32.0%、テスラは1万3200台で13.2%を占めた。中国メーカーの輸出が主導している。",
+        url: "https://cnevpost.com/2026/05/14/top-automakers-china-nev-exports-apr-2026/",
+        source: "CnEVPost - All",
+        date: "2026-05-14",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051403265425.jpg",
+        note: ""
+    },
+    {
+        id: "cn857",
+        title: "中国の新車販売は、5 月 10 日時点で前月比 27% 増加しました",
+        desc: "北京モーターショーと労働祭後の需要回復により、中国のEV小売販売は5 月 10 日時点で前月比 27% 増加した。年間減少傾向は続いているが、5 月初旬の販売は 4 月の底から回復している。詳細は CnEVPost を参照してください。",
+        url: "https://cnevpost.com/2026/05/14/china-early-may-nev-sales-rebound-from-april-lows/",
+        source: "CnEVPost - All",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051402194343.jpg",
+        note: ""
+    },
+    {
+        id: "cn858",
+        title: "BYD、ファーウェイと東風汽車が中国で新型シャークピックアップを発表しました",
+        desc: "BYDは中国市場向けに、ファング・チェン・バオラインナップにシャークピックアップを追加しました。メキシコで先行発売した2024年5月モデルを中国へ展開します。",
+        url: "https://cnevpost.com/2026/05/14/byd-to-introduce-shark-to-fang-cheng-bao-lineup-2026/",
+        source: "CnEVPost - All",
+        date: "2026-05-14",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051400553380.jpg",
+        note: ""
+    },
+    {
+        id: "in893",
+        title: "ホンダ、インドでデジタルサービス子会社設立、AI連携で顧客接点拡大",
+        desc: "ホンダはインドにデジタルサービス子会社を設立し、AIエコシステムやデジタル人材と連携。自動車内装やコックピットに関する具体的な製品情報や数値は記載されていないため、記事全体の要約とした。",
+        url: "https://auto.economictimes.indiatimes.com/news/auto-technology/honda-sets-up-new-digital-services-subsidiary-in-india-to-expand-customer-touchpoints/131086835",
+        source: "ETAuto - Auto Technology",
+        date: "2026-05-14",
+        tags: ["AI", "コックピット"],
+    
+        country: "in",
+        img: "https://etimg.etb2bimg.com/thumb/img-size-47024/131086835.cms",
+        note: ""
+    },
+    {
+        id: "in894",
+        title: "BMW R 12 nineTは1,170cc boxerエンジン搭載の220kgバイク",
+        desc: "BMW R 12 nineTは1,170cc空冷水平対向2気筒エンジンで109馬力を発生。シート高795mm、フルタンク16リットル、重量220kg。6速変速機を備えたネオレトロロードスター。",
+        url: "https://www.autocarindia.com/auto-images/bmw-r-12-ninet-image-gallery-440281",
+        source: "Autocar India - All",
+        date: "2026-05-14",
+        tags: ["シート"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260514_120810_f3e8f359.jpg",
+        note: ""
+    },
+    {
+        id: "in895",
+        title: "VW、Golf EVは2028年まで発売せず",
+        desc: "VWのCEOトーマス・シャファーは、同社のラインナップに問題がないため、Golf EVの発売を2028年まで延期すると発表した。",
+        url: "https://www.autocarindia.com/car-news/volkswagen-rules-out-golf-ev-until-at-least-the-decades-end-439731",
+        source: "Autocar India - All",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260514_083528_05ba7695.jpg",
+        note: ""
+    },
+    {
+        id: "in896",
+        title: "インドでEV購入の障壁をBaaSで解消、JSW-MGなど4社対応",
+        desc: "インド市場でEVの価格障壁を解消するため、JSW-MG、マルチ・スズキ、キアなどがバッテリー・アズ・サービス（BaaS）を導入。バッテリー購入費を月払いにすることで、初期費用を下げ、ICE車との価格差を縮小する。",
+        url: "https://www.autocarindia.com/auto-features/all-evs-available-with-baas-battery-rental-scheme-listed-440264",
+        source: "Autocar India - All",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260514_091619_c866d42b.jpg",
+        note: ""
+    },
+    {
+        id: "in897",
+        title: "ホンダ、インド向け新開発アプローチを発表",
+        desc: "ホンダは日本でのグローバル金融記者会見で、インド向けに開発アプローチを変更すると発表した。従来のグローバル標準車開発から、地域ごとの仕様対応へ移行する。",
+        url: "https://www.autocarindia.com/car-news/honda-announce-new-product-development-approach-for-india-439730",
+        source: "Autocar India - All",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260514_070126_6b575754.jpeg",
+        note: ""
+    },
+    {
+        id: "in898",
+        title: "マルチ・スズキ、2027年までに2台のMPV投入計画",
+        desc: "マルチ・スズキは2027年までに2台のMPV（ガソリン・電気）を投入し、インド市場シェア50%回復を目指す。",
+        url: "https://www.indiacarnews.com/news/2-new-maruti-family-mpvs-arriving-by-2027-petrol-electric-67849/",
+        source: "IndiaCarNews",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2024/01/New-Maruti-mini-MPV.jpg",
+        note: ""
+    },
+    {
+        id: "in899",
+        title: "ホンダ、2028年よりインド市場向け新SUV・ハイブリッド戦略発表",
+        desc: "ホンダは2028年よりインド市場向け新SUVや次世代ハイブリッド、ADASなどを導入。まず2028年より4m未満とミドルサイズで戦略モデルを投入。",
+        url: "https://www.indiacarnews.com/news/honda-confirms-new-suv-next-gen-hybrid-adas-digital-services-67848/",
+        source: "IndiaCarNews",
+        date: "2026-05-14",
+        tags: ["安全"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2025/05/Upcoming-Honda-SUVs-In-India.webp",
+        note: ""
+    },
+    {
+        id: "in900",
+        title: "インドハイブリッド車市場でトヨタが82%シェア維持",
+        desc: "FY2026にインドでハイブリッド車販売が1.23万台増え、PV市場2.7%シェア。トヨタキロスカーが82%シェアで首位、マルチが2位。",
+        url: "https://www.indiacarnews.com/news/upcoming-hybrid-cars-in-india-5-big-carmakers-reveal-their-plans-67845/",
+        source: "IndiaCarNews",
+        date: "2026-05-14",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2025/10/Maruti-to-Tata_2_.webp",
+        note: ""
+    },
+    // 2026-05-14 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "eu814",
+        title: "JLR CEO Balaji 確認、ランドローバー・ディスカバリー刷新へ",
+        desc: "JLR CEOのP.B. Balajiは、ランドローバー・ディスカバリーを刷新する計画を明かした。Defenderの成功により顧客が流出しているため、ディスカバリーをより手頃な価格で提供し、ブランドポートフォリオを再定義する方針を示した。",
+        url: "https://www.autoexpress.co.uk/land-rover/discovery/369596/new-land-rover-discovery-track-brand-seeks-redefine-model",
+        source: "Auto Express",
+        date: "2026-05-14",
+        tags: [],
+    
+        interiorScore: 43,
+        interiorReason: "brand repositioning and price strategy with no interior detail",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--CAgWHtdx--/t_rss_image_w_845/v1778766909/autoexpress/2026/05/Land%20Rover%20Discovery%20badge_ta6xls.jpg",
+        note: ""
+    },
+    {
+        id: "cn859",
+        title: "中国の裁判所は、Xiaomi SU7 Ultra の導管フード詐欺請求を却下し、2940ドルの返金命",
+        desc: "中国山東省済南の裁判所は、Xiaomi SU7 Ultra の導管フードに関する詐欺請求を却下し、20000元（約2940ドル）の返金命令を出した。裁判所は広告内容が誇張されたが事実捏造ではないと判断。Xiaomiは契約解除と返金、加えて未納車への標準フード無料交換を履行する。",
+        url: "https://carnewschina.com/2026/05/14/xiaomi-su7-ultra-ducted-hood-saga-court-rejects-fraud-claim-orders-2940-usd-refund/",
+        source: "CarNewsChina - All",
+        date: "2026-05-14",
+        tags: [],
+    
+        interiorScore: 31,
+        interiorReason: "exterior-only image and text focuses on hood fraud/refund with no interior produ",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e8bdace9ab98e6b885e5b9b6e9998de4bd8ee5afb9e6af94e5baa6_webhook_1500x900_q85_1778730838.jpg",
+        note: ""
+    },
+    {
+        id: "cn860",
+        title: "小鹏が欧州のVW工場を購入。生産能力不足により欧州での拡大は困難に",
+        desc: "中国のEVメーカーである小鹏は、欧州のVW工場買収交渉を進めている。オーストリアのマグナ・シュタイア工場では生産能力不足のため、VWは2030年まで年間75万台の減産計画を立てている。一方、小鹏は4月に6,006台の輸出を記録し、過去最高を更新した。",
+        url: "https://cnevpost.com/2026/05/14/xpeng-in-talks-buy-vw-plant-europe-expansion/",
+        source: "CnEVPost - All",
+        date: "2026-05-14",
+        tags: ["EV"],
+    
+        interiorScore: 13,
+        interiorReason: "company expansion and factory acquisition news with almost no cabin detail",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026051401343358.jpg",
+        note: ""
+    },
+    {
+        id: "paper125",
+        title: "移動測定で商業施設室内VOC排出と室外濃度関連性を解明",
+        desc: "英国ヨーク大が、移動測定とガウス煙羽モデルで、レストランや自動車修理店など数百の商業施設室内VOC排出が室外に与える影響を解明。m/z 102（ブタノン）が自動車修理、m/z 59（アセトン）が美容室、m/z 68（イソプレン）がレストランと特定。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42131219/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260514111228&v=2.20.0",
+        source: "PubMed - Search",
+        date: "2026-05-14",
+        tags: [],
+    
+        interiorScore: 8,
+        interiorReason: "The article discusses indoor VOC emissions from commercial sources like restaura",
+        imageInterior: false,
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
         note: ""
     },
 ];

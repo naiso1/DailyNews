@@ -558,6 +558,14 @@ def fix_idea_ref_prefix(text: str, country_prefix: str) -> str:
     return re.sub(r"\[([a-z]{2}\d+(?:,[a-z]{2}\d+)*)\]", _fix, text, flags=re.IGNORECASE)
 
 
+def strip_idea_refs(text: str) -> str:
+    """Idea descriptions are standalone concepts; remove news-id reference marks."""
+    if not text:
+        return text
+    text = re.sub(r"\s*\[[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]", "", text, flags=re.IGNORECASE)
+    return re.sub(r"\s{2,}", " ", text).strip()
+
+
 def analysis_ref_coverage_ok(text: str):
     parts = [p.strip() for p in re.findall(r"[^。！？!?]+[。！？!?]?", text or "") if p.strip()]
     if not parts:
@@ -873,9 +881,18 @@ def main():
             if ("対象" in llm_val) or interior_score is not None:
                 rows_with_relevance_signal += 1
 
-        if idx_llm is not None and llm_val and "対象" not in llm_val:
-            continue
-        if idx_img判定 is not None and img_val and "あり" not in img_val and (interior_score is None or interior_score < 55):
+        llm_is_target = llm_val.strip() == "対象"
+        # sheet2_llm_targets.csv is the final country-quota selection. Do not
+        # drop selected target/paper rows only because the thumbnail itself was
+        # judged as non-interior; the article can still be relevant.
+        if (
+            idx_img判定 is not None
+            and img_val
+            and "あり" not in img_val
+            and not llm_is_target
+            and country != "paper"
+            and (interior_score is None or interior_score < 55)
+        ):
             continue
         if not img:
             continue
@@ -1108,7 +1125,7 @@ def main():
                     for idea in idea_list[:2]:
                         max_id += 1
                         title = js_escape(idea.get("title", ""))
-                        desc = js_escape(fix_idea_ref_prefix(idea.get("desc", ""), key))
+                        desc = js_escape(strip_idea_refs(fix_idea_ref_prefix(idea.get("desc", ""), key)))
                         image_prompt = js_escape(idea.get("imagePrompt", ""))
                         entry_lines.append(
                             f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\" }},"
