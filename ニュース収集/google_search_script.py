@@ -122,6 +122,9 @@ SUMMARY_HTML_CHARS = 8000
 
 # Feature flags
 ENABLE_GOOGLE_NEWS = True
+GOOGLE_NEWS_KEYWORD_LIMIT = int(os.environ.get("GOOGLE_NEWS_KEYWORD_LIMIT", "10"))
+DUCKDUCKGO_KEYWORD_LIMIT = int(os.environ.get("DUCKDUCKGO_KEYWORD_LIMIT", "16"))
+NEWSAPI_KEYWORD_LIMIT = int(os.environ.get("NEWSAPI_KEYWORD_LIMIT", "4"))
 USE_PLAYWRIGHT = True
 FETCH_MISSING_IMAGES = True
 ENRICH_ONLY = False
@@ -1829,13 +1832,25 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     filtered = filtered.copy()
     # related_sort_applied
     score_col = "\u95a2\u9023\u5ea6\u30b9\u30b3\u30a2"
+    interior_sort_col = col_interior_score
     if score_col in filtered.columns:
         filtered[score_col] = pd.to_numeric(filtered[score_col], errors="coerce")
+    if interior_sort_col in filtered.columns:
+        filtered[interior_sort_col] = pd.to_numeric(filtered[interior_sort_col], errors="coerce")
     filtered["_order"] = range(len(filtered))
     llm_flag = filtered[col_llm].astype(str).str.strip()
     result_groups = []
     for country_name, group in filtered.groupby(col_country, sort=False):
-        if score_col in group.columns:
+        if interior_sort_col in group.columns and group[interior_sort_col].notna().any():
+            sort_cols = [interior_sort_col]
+            ascending = [False]
+            if score_col in group.columns:
+                sort_cols.append(score_col)
+                ascending.append(False)
+            sort_cols.append("_order")
+            ascending.append(True)
+            group = group.sort_values(sort_cols, ascending=ascending)
+        elif score_col in group.columns:
             group = group.sort_values([score_col, "_order"], ascending=[False, True])
         else:
             group = group.sort_values("_order")
@@ -2234,7 +2249,7 @@ def fetch_from_duckduckgo(target_dates):
         for country, settings in COUNTRY_SETTINGS.items():
             region = region_map.get(country, "wt-wt")
             # 各国から代表キーワードを拡大して検索件数を増やす
-            keywords = settings["keywords"][:10]
+            keywords = settings["keywords"][:DUCKDUCKGO_KEYWORD_LIMIT]
             
             print(f"  [{country}] 検索中...")
             country_count = 0
@@ -2311,11 +2326,14 @@ def fetch_from_google_news(target_dates):
     
     google_news_regions = {
         "日本": {"hl": "ja", "gl": "JP", "ceid": "JP:ja"},
-        "中国": {"hl": "zh-CN", "gl": "CN", "ceid": "CN:zh-Hans"}
+        "米国": {"hl": "en-US", "gl": "US", "ceid": "US:en"},
+        "欧州": {"hl": "en-GB", "gl": "GB", "ceid": "GB:en"},
+        "中国": {"hl": "zh-CN", "gl": "CN", "ceid": "CN:zh-Hans"},
+        "インド": {"hl": "en-IN", "gl": "IN", "ceid": "IN:en"},
     }
     
     for country, region_params in google_news_regions.items():
-        keywords = COUNTRY_SETTINGS.get(country, {}).get("keywords", [])[:3]
+        keywords = COUNTRY_SETTINGS.get(country, {}).get("keywords", [])[:GOOGLE_NEWS_KEYWORD_LIMIT]
         print(f"  [{country}] 検索中...")
         country_count = 0
         
@@ -2406,7 +2424,7 @@ def fetch_from_newsapi(target_dates):
     keywords_to_search = []
     for country, settings in COUNTRY_SETTINGS.items():
         lang = settings["lang"]
-        for kw in settings["keywords"][:2]:
+        for kw in settings["keywords"][:NEWSAPI_KEYWORD_LIMIT]:
             keywords_to_search.append((kw, lang, country))
     
     for keyword, lang, country in keywords_to_search:

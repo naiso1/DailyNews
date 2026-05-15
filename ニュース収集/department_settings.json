@@ -335,6 +335,51 @@
         "name": "PubMed - Search",
         "url": "https://pubmed.ncbi.nlm.nih.gov/rss/search/1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF/?limit=100&utm_campaign=pubmed-2&fc=20260127232539",
         "country": "論文"
+      },
+      {
+        "name": "InsideEVs",
+        "url": "https://insideevs.com/rss/news/all/",
+        "country": "米国"
+      },
+      {
+        "name": "Green Car Reports",
+        "url": "https://feeds.highgearmedia.com/?sites=GreenCarReports&type=all",
+        "country": "米国"
+      },
+      {
+        "name": "Electrek",
+        "url": "https://electrek.co/feed/",
+        "country": "米国"
+      },
+      {
+        "name": "Electrive",
+        "url": "https://www.electrive.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "Just Auto",
+        "url": "https://www.just-auto.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "Automotive World",
+        "url": "https://www.automotiveworld.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "Electric Cars Report",
+        "url": "https://electriccarsreport.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "IndianAutosBlog",
+        "url": "https://indianautosblog.com/feed",
+        "country": "インド"
+      },
+      {
+        "name": "MotorBeam",
+        "url": "https://www.motorbeam.com/feed/",
+        "country": "インド"
       }
     ],
     "country_settings": {
