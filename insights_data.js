@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-17",
+        analysis: {
+            jp: "日本市場ではコネクテッド機能[jp1033]や新素材[jp1034][jp1035]の採用が加速。ユーザー体験向上[jp1035]や高級感演出[jp1042]がトレンド。特にシート快適性[jp1039]やガラスルーフ[jp1038]から、車内環境の質感・開放性への関心が高まっている。AI技術[jp1037]もHMI進化を後押し。",
+            cn: "中国市場では**次世代電池技術**[cn862]の競争激化と**急速充電需要**[cn864]による供給制約が**EV**[cn861]開発を後押ししている。特に**コックピット**[cn863]の快適性向上と**抗菌・空質**[cn867]への関心が高まっている。また、**AI**[cn868]技術の活用やサスペンション[cn865]など**健康・ウェルネス**要素への注目が顕著。",
+            in: "インド市場はEV移行加速とPHEV拡大[in902]で技術トレンドが顕著。HMI向上[in904]やAI自動運転[in905]が消費者期待を高める。新車引き渡し前点検[in907]で内装品質管理が重要。日産やホンダなど日系もEV戦略[in908]を強化。",
+            us: "米国市場では中国製部品依存からの脱却とEV化が進み、[us849]アナログメーターへの回帰やデジタル嗅覚等新感覚への関心も高ま、[us850][us858]。しかしシートヒーター訴訟やバックカメラ欠陥に代表されるように、[us853][us854]EV化による熱管理や安全規制の強化が課題。特にEV GTIのようなクラシックデザインと最新技術の融合や、[us857]スイッチ映写機能などコネクテッド体験の拡張がトレンド。自社はEV専用内装設計とアップサイクル素材を両立すべき。",
+            eu: "EU自動車内装ニュース10件からトレンド抽出[eu815,eu816,eu817]。BMWアルピナコンセプトが高級感を追求[eu819,eu822]、VW ID Polo GTIがEV時代のホットハッチを確立[eu820,eu823]、英国で中国EVブランドが浸透[eu817,eu821]、BMW充電割引でPlug & Charge普及[eu822]。高級感とEV化の両立が課題[eu818,eu824]。素材革新と除菌機能で差別化[eu815,eu821]。",
+        },
+        ideas: {
+            jp: [
+                { id: 926, img: "images/idea_926.png", title: "香り付き通気性シートカバー", desc: "天然木の温かみと3Dメッシュを組み合わせ、天然精油香りで車内をリフレッシュ。熱帯夜でもムレず、触覚・嗅覚で快適さを五感で享受できるシートカバーを提案。", imagePrompt: "Luxury car interior with premium ventilation seat cover made of 3D mesh fabric, natural wood trim accents, subtle aromatic mist floating around seat, warm ambient lighting, photorealistic render" },
+                { id: 927, img: "images/idea_927.png", title: "小型ワイヤレス充電ホルダ", desc: "既存小型ワイヤレス充電ホルダをベースに、車中泊向けガラスルーフの開放感から、星空観賞でもスマホ充電が可能な設計。コンパクトで夜間使用時の操作性も考慮。", imagePrompt: "Compact wireless charging holder mounted near dashboard in premium vehicle interior, night driving scene with starlight visible through panoramic roof, soft blue LED indicator, photorealistic automotive rendering" },
+            ],
+            cn: [
+                { id: 928, img: "images/idea_928.png", title: "抗菌消臭コンソールボックス", desc: "次世代電池搭載EV向けに、車内空気を浄化する抗菌消臭コンソールボックスを開発。リバーシブルアームレストで広々収納を実現。長距離走行中の疲労を解消し、清浄な空気でリラックスできる喜びを提供。", imagePrompt: "Premium EV interior with integrated console box featuring air purification technology, antibacterial surfaces, ambient soft lighting, clean and fresh atmosphere, luxury materials like polished wood and soft-touch leather, photorealistic 3D render, 4K quality" },
+                { id: 929, img: "images/idea_929.png", title: "広々収納リバーシブルコンソール", desc: "EVフラットフロアを活かした広々収納コンソールボックスで、ワイヤレス充電とリバーシブルアームレストを装備。長距離走行時の荷物を整理し、快適なドライブ体験を向上。清涼感のある空間で走行中のストレスを解消。", imagePrompt: "Modern EV interior showcasing spacious console box with wireless charging pad, reversible armrest, flat floor design, clean and spacious layout, soft ambient lighting, premium materials, photorealistic 3D render, professional automotive visualization" },
+            ],
+            in: [
+                { id: 930, img: "images/idea_930.png", title: "インパネ樹脂化自動化ライン", desc: "鉄製インパネリンフォースを骨格樹脂化し軽量化。自動化ライン導入で歩留まり向上、コスト削減。生産現場が効率化でうれしい！", imagePrompt: "Automated manufacturing line for resin reinforced interior panels, robotic arms assembling lightweight components, industrial modern factory setting, clean white and blue lighting, high precision manufacturing, photorealistic 3D render, automotive production facility" },
+                { id: 931, img: "images/idea_931.png", title: "赤カーボンインパネアクセント", desc: "01 Zagatoの赤カーボンをインパネトリムに採用。高級感と個性を兼ね備え、EVモデルとの相性が抜群。オーナーが特別感でうれしい！", imagePrompt: "Premium car interior with red carbon fiber trim on dashboard, luxury vehicle cockpit design, vibrant red accents on center console, ambient lighting highlighting material texture, photorealistic automotive render, high detail 4K quality" },
+            ],
+            us: [
+                { id: 932, img: "images/idea_932.png", title: "EVフロアヒーターモジュール", desc: "EVのバッテリー熱を直接利用し、床下ヒーターとして配置。足元を温かく保ちながら、バッテリー効率も向上。運転中に足元が温かくなる幸せ。", imagePrompt: "EV vehicle interior showing integrated floor heating module beneath the floor, warm glowing orange heat lines, premium materials, driver's perspective showing comfortable feet, modern dashboard with digital display, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 933, img: "images/idea_933.png", title: "アップサイクルエコバッグ", desc: "廃棄エアバッグ生地を再利用したエコバッグ。車内でも使えて、環境に優しい素材。持ち主がエコ意識を高める幸せ。", imagePrompt: "Eco-friendly bag made from recycled airbag fabric displayed in a luxury car interior, soft texture with subtle pattern, natural lighting, minimalist design, high-end materials, photorealistic 3D render, warm ambient glow, premium automotive design" },
+            ],
+            eu: [
+                { id: 934, img: "images/idea_934.png", title: "バイオレザールーム", desc: "再生材製バイオレザールをセンターコンソールに配置。BMWアルピナのような高級感を維持しつつ、触った瞬間の自然な温もりを愉しむ。EV車ならではの静かな空間で、自然素材の香りが心地よく漂う。", imagePrompt: "Premium automotive interior design featuring sustainable bio-leather console panel, luxury BMW Alpina style cockpit, warm ambient lighting, natural wood accents, brushed aluminum trim, photorealistic 3D render, cinematic lighting" },
+                { id: 935, img: "images/idea_935.png", title: "UV-C除菌スマートコンソール", desc: "UV-C LED内装除菌システムをセンターコンソール統合。VW ID. Polo GTIのEVスポーツカーのような先進技術で、日常使いでも安心。家族の健康を守りながら、EVドライブの静寂を愉しむ。", imagePrompt: "Modern EV vehicle interior with integrated UV-C LED disinfection system in center console, futuristic cockpit design, Volkswagen ID Polo GTI style, blue accent lighting, premium materials, photorealistic automotive visualization" },
+            ],
+        }
+    },
+{
         date: "2026-05-14",
         analysis: {
             jp: "日本市場では、梅雨時の結露対策[jp1023]や福祉車両の介助負担軽減[jp1027]など、環境適応性とインクルーシブな利便性が重視されている。一方、BMWのAIアシスタント採用[jp1031]やアウディのHMI進化[jp1024]から、コックピットの高度化はグローバルトレンド[jp1031]として定着しつつある。特に高級車では、カロッツェリアの音響技術[jp1026]や専用照明[jp1029]が、質感向上に寄与している。これらの知見は、日本特有の気候と、世界基準の技術革新を両立させるヒントとなる[jp1024][jp1031]。",
