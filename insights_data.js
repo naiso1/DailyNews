@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-18",
+        analysis: {
+            jp: "2026年夏モデルの「サイバーナビ」は高音質化でコネクテッド [jp1043]、プロスタッフはイルミ [jp1044] で車内体験を向上。スパルコやブリッドはシート [jp1045]、[jp1046] で新素材を採用し、高級感を追求。RAV4 [jp1047] やタント [jp1049] は内装一体感と機能性を重視。N-VAN [jp1048] は広大空間を、エルグランド [jp1051] やレクサスTZ [jp1052] はEVや3列シートで高級ミニバン・SUV領域に進出。静粛性や熱管理、バッテリー技術が注目されており、電動化対応やフロア活用が重要視されている。",
+            cn: "中国電池メーカーは設備投資へ転換[cn877]し、安全性が内装に影響[cn872]。高級訴求として、マエストロS800のグランドデザインや30万ドルセダン[cn874]、リープモーターD99の回転式シート内装[cn876]が公開された。EV化進展に伴い、コックピット機能化とバッテリー冷却技術が重要視される[cn879]。",
+            in: "インド市場ではナトリウムイオン電池の炭素排出削減やAI活用による収益向上がトレンド[in911,in912]。ホンダ・シティの大型インフォテインメントや黒色新色から内装の高級感向上が示唆される[in913,in916]。安全基準の強化やEV子ブランド開発が競争力を示す[in914,in919]。トヨタのハイブリッド減速やホンダのEV戦略再考から、内装で差別化を図る必要性が浮き彫り[in918,in920]。",
+            us: "米国自動車内装市場では、テスラCEOの完全自律走行車急増見込み[us864]やテカタリコール[us861]から、ディスプレイ削減と安全対策がトレンド。EV化[us859][us866]と高性能プラスチック市場拡大[us867]も進行中。Nissan Clipper Vanのリフレッシュ[us860]やBMWのNeue Klasseプラットフォーム[us866]から、EVでも実用性を重視する方向性が示唆される。",
+            eu: "欧州市場はEV移行加速とサプライチェーン再構築が焦点 [eu825,eu829]。ガソリン価格高騰でEV関心は高いが [eu831]、価格と充電インフラが障壁 [eu831]。フランス政府は中国部品調達抑制を要請し [eu830]、欧州サプライチェーン強化が課題 [eu826]。Nioは900V技術と85kWhバッテリーで高性能EVを実現 [eu832]。KiaはアクセシブルEVで車椅子ユーザーの移動自由を実現 [eu833]。これらの動向から、欧州市場ではEV化とサステナビリティを両立した内装製品が求められる。",
+        },
+        ideas: {
+            jp: [
+                { id: 936, img: "images/idea_936.png", title: "EVフロア活用香りディフューザー", desc: "EV車用のフロア空間を活用し、香りと照明で車内を演出。後部座席でも香りを楽しめる。静粛性が高いEV車との相性が良く、乗客がリラックスできる空間に。", imagePrompt: "" },
+                { id: 937, img: "images/idea_937.png", title: "メテオコートEV専用パネル", desc: "メテオコート加飾パネルをEV車に最適化。バッテリー熱管理と一体化し、車体デザインと調和。型内塗装で凹凸感を保ち、EVの先進性を強調。", imagePrompt: "" },
+            ],
+            cn: [
+                { id: 938, img: "images/idea_938.png", title: "製造効率化型内装モジュール", desc: "自動組立ラインで効率よく生産。歩留まり向上とコスト削減を実現。品質管理が徹底され、製造工程の透明性向上で環境負荷も低減。", imagePrompt: "Automotive interior manufacturing line, automated assembly robot arms, modular interior components being assembled, factory setting with clean lighting, efficiency focused, industrial design, high quality manufacturing process visualization, photorealistic render" },
+                { id: 939, img: "images/idea_939.png", title: "シームレス高級ダッシュボード", desc: "インモールドコート技術を活かし、ガラス面との一体感を実現。高級感と耐久性を兼ね備え、ドライバーが毎日喜びを感じるデザイン。", imagePrompt: "Premium car dashboard with seamless glass integration, interior coated finish, luxury materials, elegant lighting, close-up view of dashboard surface, automotive interior design concept, photorealistic render" },
+            ],
+            in: [
+                { id: 940, img: "images/idea_940.png", title: "衝突後緊急脱出アシストシート", desc: "側面衝突時の乗員移動を抑制するシート構造を採用。衝突直後、シートが自動的に解放モードへ移行し、緊急脱出を助けます。子どもや高齢者の安心感を提供。安全基準への適合を先取りした革新的安全シートです。", imagePrompt: "Safety seat interior concept for Indian market, side impact protection design, emergency ejection mechanism visible, child safety restraint system, warm amber emergency lighting, brushed aluminum accents, premium leather texture, photorealistic automotive visualization, cinematic interior shot, high detail 4K quality" },
+                { id: 941, img: "images/idea_941.png", title: "メテオコート加飾パネル", desc: "後塗装不要の独自テクスチャーコートで、型内塗装による凹凸のある加飾パネルを実現。黒色新色や大型インフォテインメントとの調和を図り、高級感と機能性を両立。内装の差別化とコスト削減を同時に達成。", imagePrompt: "Seamless decorative panel with textured coating technology, black interior color scheme, integrated trim design, modern automotive cockpit, subtle ambient lighting, premium material finish, photorealistic 3D render, professional product visualization, high detail automotive interior design" },
+            ],
+            us: [
+                { id: 942, img: "images/idea_942.png", title: "ARナビゲーション付きスマートコンソール", desc: "ディスプレイ削減時代にARで道路情報を表示。運転中にスマホ操作不要で、ナビや音楽を安全に享受。テスラのような自律走行車増を受け、運転者もリラックスして楽しめる。", imagePrompt: "Smart console with AR navigation display in modern vehicle interior, augmented reality road information projected on windshield, sleek minimalist dashboard design, ambient lighting, premium materials like aluminum and wood, photorealistic 3D render, cinematic lighting, automotive cockpit" },
+                { id: 943, img: "images/idea_943.png", title: "型内塗装調の凹凸加飾パネル", desc: "後塗装不要のシームレス加飾パネルで、テカタリコールの安全ニーズも考慮。メテオコート技術で独自テクスチャーを実現。高級感と安全性を両立した内装で、オーナーが満足。", imagePrompt: "Textured interior panel with seamless coating in luxury car, unique tactile surface pattern, brushed aluminum and soft-touch materials, ambient lighting effects, automotive interior design detail, photorealistic render, premium quality finish" },
+            ],
+            eu: [
+                { id: 944, img: "images/idea_944.png", title: "欧州EV向け現地調達型コックピットモジュール", desc: "中国部品調達抑制に対応した欧州内製モジュール。軽量化樹脂インパネリンフォースを組み合わせ、現地サプライチェーン強化でコスト削減と信頼性向上。欧州顧客は「地元製造の安心感」をうれしく感じる。", imagePrompt: "European automotive interior cockpit module, local sourcing materials, lightweight resin dashboard reinforcement, sustainable European manufacturing setting, modern workshop background, clean white and blue color scheme, high resolution product photography, photorealistic rendering" },
+                { id: 945, img: "images/idea_945.png", title: "900V対応高出力EV用インパネ骨格", desc: "Nioの900V技術に対応した高強度樹脂インパネリンフォース。高負荷EVの振動・熱に耐える設計で、欧州EVオーナーは「安全で静かな乗り心地」をうれしく感じ。", imagePrompt: "High performance automotive interior dashboard skeleton, 900V electrical system compatible, resin composite material, advanced automotive engineering concept, technical blue lighting, precision manufacturing detail, photorealistic 3D render, premium automotive quality" },
+            ],
+        }
+    },
+{
         date: "2026-05-15〜2026-05-17",
         analysis: {
             jp: "日本市場ではコネクテッド機能[jp1033]や新素材[jp1034][jp1035]の採用が加速。ユーザー体験向上[jp1035]や高級感演出[jp1042]がトレンド。特にシート快適性[jp1039]やガラスルーフ[jp1038]から、車内環境の質感・開放性への関心が高まっている。AI技術[jp1037]もHMI進化を後押し。",
