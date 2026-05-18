@@ -250,7 +250,7 @@ def append_news_items(js_text: str, items_by_date):
 
 
 def update_new_date_range(html_text: str, start: str, end: str):
-    pattern = r"const NEW_DATE_RANGE_OVERRIDE = \{ start: \"[^\"]*\", end: \"[^\"]*\" \};"
+    pattern = r"const NEW_DATE_RANGE_OVERRIDE = \{ start: (?:\"[^\"]*\"|null), end: (?:\"[^\"]*\"|null) \};"
     repl = f"const NEW_DATE_RANGE_OVERRIDE = {{ start: \"{start}\", end: \"{end}\" }};"
     return re.sub(pattern, repl, html_text, count=1)
 
@@ -1024,11 +1024,23 @@ def main():
     # Insights generation
     if not args.skip_insights:
         insights_text = read_text_any(INSIGHTS_PATH)
-        latest_date = max(new_dates) if new_dates else (all_dates[-1] if all_dates else None)
-        insight_exists = has_insight_for_date(insights_text, latest_date) if latest_date else False
-        if latest_date and insight_exists and not args.replace_insights:
-            print(f"Insights for {latest_date} already exists. Use --replace-insights to overwrite.")
-        elif latest_date:
+        insight_dates = new_dates if new_dates else all_dates
+        insight_start = min(insight_dates) if insight_dates else None
+        latest_date = max(insight_dates) if insight_dates else None
+        insight_date_label = (
+            f"{insight_start}〜{latest_date}"
+            if insight_start and latest_date and insight_start != latest_date
+            else latest_date
+        )
+        insight_exists = (
+            has_insight_for_date(insights_text, insight_date_label)
+            or has_insight_for_date(insights_text, latest_date)
+            if latest_date
+            else False
+        )
+        if insight_date_label and insight_exists and not args.replace_insights:
+            print(f"Insights for {insight_date_label} already exists. Use --replace-insights to overwrite.")
+        elif insight_date_label:
             grouped = {"jp": [], "cn": [], "in": [], "us": [], "eu": []}
             for it in items:
                 if it["country"] in grouped:
@@ -1044,7 +1056,7 @@ def main():
                 attempted_insight_countries += 1
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
                 prompt = make_country_prompt(
-                    latest_date,
+                    insight_date_label,
                     key,
                     grouped[key],
                     prompt_template,
@@ -1083,7 +1095,7 @@ def main():
                     deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
                     if len(deduped) < 2:
                         retry_prompt = make_country_prompt(
-                            latest_date,
+                            insight_date_label,
                             key,
                             grouped[key],
                             prompt_template,
@@ -1110,7 +1122,7 @@ def main():
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
             if analysis_out or ideas_out:
                 max_id = parse_insights_max_id(insights_text)
-                entry_lines = ["    {", f"        date: \"{latest_date}\",", "        analysis: {"]
+                entry_lines = ["    {", f"        date: \"{insight_date_label}\",", "        analysis: {"]
                 for key in ["jp", "cn", "in", "us", "eu"]:
                     val = analysis_out.get(key, "")
                     if val:
@@ -1136,16 +1148,19 @@ def main():
                 new_entry = "\n".join(entry_lines)
                 updated_insights = insights_text
                 if args.replace_insights and insight_exists:
-                    updated_insights = remove_insight_by_date(updated_insights, latest_date)
+                    updated_insights = remove_insight_by_date(updated_insights, insight_date_label)
+                    if latest_date and latest_date != insight_date_label:
+                        updated_insights = remove_insight_by_date(updated_insights, latest_date)
                 updated_insights = insert_insight(updated_insights, new_entry)
                 if not args.dry_run:
                     INSIGHTS_PATH.write_text(updated_insights, encoding="utf-8")
             elif attempted_insight_countries:
                 raise RuntimeError(
-                    f"Insights generation failed for {latest_date}: no valid LLM output for any country."
+                    f"Insights generation failed for {insight_date_label}: no valid LLM output for any country."
                 )
             if draft_parts:
-                draft_path = ROOT / f"insights_draft_{latest_date}.txt"
+                draft_key = str(insight_date_label).replace("〜", "_").replace("～", "_").replace("~", "_")
+                draft_path = ROOT / f"insights_draft_{draft_key}.txt"
                 if not args.dry_run:
                     draft_path.write_text("\n".join(draft_parts), encoding="utf-8")
                 print(f"Insights draft saved: {draft_path}")
