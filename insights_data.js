@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-19",
+        analysis: {
+            jp: "日本市場の自動車内装ニュースから、デジタルミラー[jp1055]やスマホ充電[jp1056]などHMI進化、安全リコール[jp1054]、カスタマイズ[jp1059][jp1061]のトレンドが浮き彫り。特に安全と快適性の両立が重要[jp1057]。また、植物由来素材への関心[jp1059][jp1061]が顕著。",
+            cn: "中国市場のEV競争激化で、高性能バッテリーと高速充電が必須[cn883][cn890]。高級車LivisでAR HUD[cn882]や29インチディスプレイが主流[cn882]。ニュルブルクリンクでのSUV記録[cn884][cn889]は、ドライバビリティ重視のトレンド。Radar Auto買収[cn885]やカナダ輸出解禁[cn888]は、グローバル展開と現地調達の重要性が浮き彫り。高級内装と快適性の両立が鍵[cn886]。自社では、グローバル戦略と既存製品展開の2軸で対応必要。",
+            in: "インド市場ではEV拡大とバッテリーサプライチェーン再編が急務[in921]。Uno Mindaの1200億ルピー投資とCATLとの交渉から、EVパワートレインと蓄電部材の統合がトレンド[in923]。一方、ZFの人員削減やステランティスのE-Carは廉価化とコスト競争力の強化を示唆[in922]。トヨタの30万台販売は信頼性が求められ[in930]、メルセデス新店舗はプレミアム体験への注視[in927]。消費者は高級感と機能性の両立を求めている[in921]。",
+            us: "[us869] アメリカ市場ではテスラが価格改定でエントリー層への配慮を示、[us870] 高級車Maextroが金装飾とHuawei ADSAで差別化、[us871] トヨタ・グランドハイランダーが広大空間と燃費を両立、[us872] Kia Seltosが全方位ディスプレイとAWDを強化、[us874] VW Atlasが3列シートの荷室容量をアピール、[us878] スバルがEV開発延期でガソリン・ハイブリッドへ転換と、高級化と燃費効率のバランスが重要。[us875] 消費者は健康志向で空気質向上とリラクゼーション機能を求めつつ、リサイクル材の活用も期待されている。",
+            eu: "EU市場でEV普及と多様化が進展する[eu843,eu840]。KiaやVolkswagenは廉価EV強化、物理ボタン回帰や車椅子対応など機能性向上[eu835,eu839]。BYDの7人乗りPHEVやフォードの商用車戦略から、家族向け・商用向けセグメント拡大が顕著[eu837,eu841]。Itala復活はブランド価値再定義の試み[eu836]。内装ではEV軽量化、アクセントカラーによる高級感演出、ステアリング操作直感性向上が課題[eu834]。自社はEV化に伴うダッシュボードデザイン自由度活用と、高齢者・障がい者対応のアクセシビリティ向上に注力すべき[eu839,eu843]。",
+        },
+        ideas: {
+            jp: [
+                { id: 946, img: "images/idea_946.png", title: "緊急脱出用窓開けアシスト", desc: "デジタルミラーのカメラ画像を活用、車内温度上昇時や事故時、窓が閉まっている状態でもボタンで電動式窓開けを補助。子どもや高齢者が救急時に助けを求めやすい。安全で安心！", imagePrompt: "Emergency window assist system concept, digital camera interface showing rear view, button activation mechanism, emergency lighting, child and elderly person silhouette, safety technology visualization, automotive cockpit, photorealistic 3D render, dramatic lighting" },
+                { id: 947, img: "images/idea_947.png", title: "アンティーク調シートカバー", desc: "アンティークレザーやコーデュロイのトレンドを踏まえ、植物由来素材を組み合わせ。ヴィンテージ感あるシートカバーで車中泊やカスタマイズが楽しめる。個性と環境配慮の両立！", imagePrompt: "Vintage leather seat cover concept, antique brown and corduroy texture, plant-based material texture, custom interior design, vintage car interior, warm lighting, high detail, photorealistic 3D render, automotive luxury" },
+            ],
+            cn: [
+                { id: 948, img: "images/idea_948.png", title: "グローバル展開向けEVコンソール", desc: "中国市場のEVフラットフロアを活かし、海外展開時の現地調達やグローバル戦略に対応。多機能収納とワイヤレス充電を標準搭載。海外ユーザーは便利さで喜ぶ。", imagePrompt: "Center console in luxury EV, flat floor design, wireless charging pad, multi-function storage compartments, brushed aluminum and premium leather materials, subtle ambient lighting, warm glow, photorealistic 3D render, premium automotive design" },
+                { id: 949, img: "images/idea_949.png", title: "AR HUD連携コンソール", desc: "理想L9のARHUD対応で、ナビ情報やADAS警告をコンソールに投影。ドライバーは安心感で喜ぶ。高級車Livisのトレンドを反映。", imagePrompt: "Augmented reality head-up display integrated with center console, holographic interface floating above dashboard, navigation info and ADAS warnings displayed, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render" },
+            ],
+            in: [
+                { id: 950, img: "images/idea_950.png", title: "EV充電ステーション統合内装", desc: "センターコンソールにEV充電ステーションを内蔵。充電状況を表示し、スマートフォンと連動。ドライバーが充電を待つ間も、音楽やナビゲーションを楽しみ、快適なドライブ体験を享受。", imagePrompt: "" },
+                { id: 951, img: "images/idea_951.png", title: "グリップセンサ付きHMIステアリング", desc: "豊田合成のグリップセンサ付きHMIステアリングをベースに、インド市場向けに改良。EVの充電ステーション情報やナビゲーションをステアリングから直接表示。手放し検知で安全運転をサポート。ドライバーが安心し、便利に感じる。", imagePrompt: "" },
+            ],
+            us: [
+                { id: 952, img: "images/idea_952.png", title: "抗菌消臭コックピットシステム", desc: "車内空気を清浄化し、抗菌・消臭・芳香で快適な空間を創出。ドライバーが深呼吸のようにリラックスできるウェルネス空間を実現。健康意識の高い家族連れやビジネスパーソンが、毎日の通勤をリフレッシュの時間に変える。", imagePrompt: "Antibacterial air purification system integrated into car dashboard, glowing blue and green LED indicators showing air quality, fresh mint and lavender scent diffusion mist, clean modern vehicle cockpit, premium materials like brushed aluminum and soft-touch leather, photorealistic 3D render, cinematic lighting with soft ambient glow, high detail 4K quality" },
+                { id: 953, img: "images/idea_953.png", title: "リサイクル内装パネル", desc: "廃車由来プラスチックを50%配合した高強度リサイクル材で、環境配慮とコスト削減を実現。持続可能な素材使用で、環境意識の高い消費者が「地球に優しい車」にうれしさを覚える。", imagePrompt: "Recycled high-strength interior panel made from 50% recycled materials, textured surface showing sustainable grain pattern, warm natural lighting, premium quality finish with subtle metallic accents, photorealistic automotive interior design, professional product visualization, modern vehicle cockpit, high detail 4K quality" },
+            ],
+            eu: [
+                { id: 954, img: "images/idea_954.png", title: "リッチナイトブルー調光コンソール", desc: "EV特有の暗いコックピットに、コンソールに埋め込むLED調光パネルで、夜間運転時の足元照明と、リラックスモードのブルー照明を演出。運転中の疲労軽減と、高級感あふれる内装空間の提供。", imagePrompt: "Luxury EV interior at night, center console with embedded RGB LED lighting panel, soft blue ambient glow, brushed aluminum trim, leather accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 955, img: "images/idea_955.png", title: "ステアリングHMI拡張パッド", desc: "グリップセンサ付きHMIステアリングを基に、EVのタッチパネル操作が難しい状況でも、ステアリング上部に付加する物理ボタンパッドで音声アシストやナビ操作を直感的に可能にする。運転中のストレス軽減。", imagePrompt: "Modern EV steering wheel with integrated touchpad and physical button pad, hands-free operation concept, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, high detail" },
+            ],
+        }
+    },
+{
         date: "2026-05-18",
         analysis: {
             jp: "2026年夏モデルの「サイバーナビ」は高音質化でコネクテッド [jp1043]、プロスタッフはイルミ [jp1044] で車内体験を向上。スパルコやブリッドはシート [jp1045]、[jp1046] で新素材を採用し、高級感を追求。RAV4 [jp1047] やタント [jp1049] は内装一体感と機能性を重視。N-VAN [jp1048] は広大空間を、エルグランド [jp1051] やレクサスTZ [jp1052] はEVや3列シートで高級ミニバン・SUV領域に進出。静粛性や熱管理、バッテリー技術が注目されており、電動化対応やフロア活用が重要視されている。",
