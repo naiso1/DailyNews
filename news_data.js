@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-20 01:14";
+window.NEWS_UPDATED_AT = "2026-05-21 01:29";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -58093,6 +58093,723 @@ window.LOADED_NEWS_DATA = [
     
         country: "in",
         img: "https://www.motorbeam.com/wp-content/uploads/Toyota-Innova-HyCross-Exclusive-Edition.jpg",
+        note: ""
+    },
+    // 2026-05-20 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1063",
+        title: "トヨタRAV4後付けアクセサリー販売開始、KINTO運営",
+        desc: "トヨタの新型RAV4向け純正アクセサリーを後付け販売開始。KINTOが運営する「トヨタ アップグレード ファクトリー」で、フードディフレクターやサイドストレージランタンなどアウトドア・生活便利アイテムを提供。セット選択も可能で、期間限定ステッカープレゼントも実施する。",
+        url: "https://news.yahoo.co.jp/articles/9b9c0564603e0c0bc6f3cefb954e3219c60af43c?source=rss",
+        source: "レスポンス",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 90,
+        interiorReason: "rear-view mirror and hood deflector plus cabin image; interior accessory/product",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-00000014-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1064",
+        title: "ジムニー用ステアリング：レアル製は安全性も重視",
+        desc: "スズキ・ジムニー用ステアリングのレアル製は、純正エアバッグ交換タイプで、天然本木や本物カーボンを使用。ソフトDシェイプは全6色、オールウッドは2色あり、内部はウッドチップ圧縮材で事故時のケガ防止も図られている。",
+        url: "https://news.yahoo.co.jp/articles/6ca6346608113e197037195f625a4a1dd2a7a0c1?source=rss",
+        source: "MotorFan",
+        date: "2026-05-20",
+        tags: ["安全"],
+    
+        interiorScore: 93,
+        interiorReason: "steering wheel material and design plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-01484125-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1065",
+        title: "新型RAV4専用アクセ登場、純正品並みフィッティング",
+        desc: "カーメイトが新型RAV4専用アクセ4品を発売。ドリンクホルダー（実勢価格4880円）やティシューケース（8980円）は内装に溶け込むデザインで、ETCカバー（2180円）も盗難リスク軽減。",
+        url: "https://news.yahoo.co.jp/articles/75a164cede6d3b03abe2c77ab3ea053ae9f165f4?source=rss",
+        source: "MotorFan",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-01484278-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1066",
+        title: "4000台限定、パイオニア本気の極上サウンド! 音が別次元すぎる『サイバーナビ』が爆誕",
+        desc: "6月発売予定のカロッツェリア『サイバーナビ』限定モデル4000台登場。史上最高音質を達成し、実勢価格29万円前後から。マスターサウンド・アーキテクチャーで高音質パーツを採用し、サウンドエンジニアが高度なチューニングを施す。ボディには限定カラー「ルナリスブルー」を採用。",
+        url: "https://news.yahoo.co.jp/articles/8b1ca7519f75e19c180568ad002c7b565ac8e46d?source=rss",
+        source: "MotorFan",
+        date: "2026-05-20",
+        tags: ["コネクテッド"],
+    
+        interiorScore: 82,
+        interiorReason: "high-end audio system and HMI display details",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-01489824-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1067",
+        title: "三菱トッポBJ、1990年登場でトールワゴンジャンル切り開く",
+        desc: "1990年登場の三菱トッポBJは、トールワゴンジャンルの元祖。全高1740mmで室内空間広大。希薄燃焼方式エンジン搭載など画期的な仕様で、トールワゴン市場を確立した。",
+        url: "https://news.yahoo.co.jp/articles/d307e3cbb9765e7fdece1e67ef53d366a6f81317?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "historic cabin space and tall roofline concept relevant for interior volume plan",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-00000017-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1068",
+        title: "三金商事「SPEEDER ヘッドレストダブルファン/HDF02」が話題に",
+        desc: "三金商事の車載ファン「SPEEDER ヘッドレストダブルファン/HDF02」が、後席の暑さ対策として注目されている。左右独立ファンで風量を別々に設定可能で、フレキシブルアームにより後席の子どもやペットへピンポイント送風できる。",
+        url: "https://news.yahoo.co.jp/articles/23221f7d39bb3be2860b9ca59376fc6de88495d9?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-00000016-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1069",
+        title: "スバル車の「ドアオープン連動シート後退機能」初期設定オフ",
+        desc: "スバル車の運転席には、ドア開け時にシートが自動で後退する「ドアオープン連動シート後退機能」があるが、初期設定でオフになっている。ドライバーモニタリングシステム設定でオンにすると、乗降がラクになる。ただし、車種やシートポジションメモリー登録時など作動しない場合がある。",
+        url: "https://news.yahoo.co.jp/articles/4b8ddc578368b67e0a7c7d4b88d419652767f936?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-20",
+        tags: ["センシング", "シート"],
+    
+        interiorScore: 82,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-00000013-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1070",
+        title: "スバル縦型モニター「エアコンボタン」カスタム可能、5機能から選べる",
+        desc: "スバル車の11.6インチ縦型ディスプレイには、右下のスイッチがカスタマイズ可能。フォレスターなど既存車種で、A/C・MAX A/C・AUTO・内外気・SYNCの5機能から設定可能。最も使う機能を割り当てて使いやすくできる裏設定だ。",
+        url: "https://news.yahoo.co.jp/articles/677da69a624889965f28e7e783611234b59abd4c?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-20",
+        tags: ["ディスプレイ", "カスタマイズ"],
+    
+        interiorScore: 89,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-00000011-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1071",
+        title: "日産新型エルグランド、Uberプレミアム採用で静粛性・快適装備を強化",
+        desc: "日産新型エルグランドが2026年夏発売予定で、Uberプレミアムに採用される。リニアモーターカーコンセプトの静粛性に加え、14.3インチディスプレイやBOSE 22スピーカー、テーラーフィットシートなど高級インテリアを備える。",
+        url: "https://news.yahoo.co.jp/articles/1041b529df7c26cadcbeb8bf7605c4b240913f42?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-20",
+        tags: ["ディスプレイ", "シート", "音響"],
+    
+        interiorScore: 72,
+        interiorReason: "flagship cabin refresh with concrete interior features like 14.3-inch display, B",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-01060208-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1072",
+        title: "スズキ「エブリイ」改良モデル発売！ブラックフェイス＆9インチナビ搭載",
+        desc: "スズキは2026年5月8日、軽商用車「エブリイ」の一部仕様変更モデルを発売。フロントフェイス刷新やブラック基調インテリア、9インチ「全方位モニター付メモリーナビゲーション」搭載など内装を一新。安全装備も強化され、価格は134万3100円から192万9400円。",
+        url: "https://news.yahoo.co.jp/articles/d7a6711fae59e0f92bcbf8272e2c3ae32e321598?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-20",
+        tags: ["ディスプレイ", "コネクテッド", "安全"],
+    
+        interiorScore: 90,
+        interiorReason: "interior refresh and 9-inch nav mentioned in text, but image shows only exterior",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260520-01060466-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us879",
+        title: "メルセデスAMG、1000馬力超えも開発継続",
+        desc: "メルセデスAMGのCEOは、最新モデルが1000馬力を超えても開発は終わらないと語った。高性能車やSUVのラインアップ強化を継続する意向を示している。",
+        url: "https://www.thedrive.com/news/mercedes-amg-ceo-says-the-horsepower-war-isnt-over-yet",
+        source: "The Drive",
+        date: "2026-05-20",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/05/26C0129_030-e1779139864288.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us880",
+        title: "2027 Volvo EX60：スマートで派手ではない高級EV SUV",
+        desc: "2027 Volvo EX60はSPA3プラットフォームの中大型EV SUV。P6は80kWhバッテリーで307マイル、P10は91kWhで503馬力。タブレットHMIとアッシュ調加飾、BOSEまたはBowers & Wilkinsオーディオを搭載する。",
+        url: "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review",
+        source: "The Drive",
+        date: "2026-05-20",
+        tags: ["HMI", "EV", "音響"],
+    
+        interiorScore: 61,
+        interiorReason: "Japanese summary mentions tablet HMI, ash-tone trim, and premium audio (BOSE/B&W",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/05/IMG_2795.jpeg?quality=85",
+        note: ""
+    },
+    {
+        id: "us881",
+        title: "ステラントとJLR、米国で製品開発協力へ合意",
+        desc: "ステラントとジャガー・ランドローバーは、米国での製品開発協力に関する覚書に署名した。両社はプラットフォームや技術の共有、生産施設の共有など「シナジー」を模索しており、JLRの米国生産拡大やコスト削減が期待される。",
+        url: "https://www.motor1.com/news/796442/stellantis-jlr-collaborate-product-technology-development/",
+        source: "Motor1",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 11,
+        interiorReason: "partnership and product development collaboration with no specific interior deta",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/P3BNpG/s3/stellantis-jlr-partnership.jpg",
+        note: ""
+    },
+    {
+        id: "us882",
+        title: "BYD Ti7が英国市場でランドローバー・ディフェンダーに挑戦",
+        desc: "BYDは英国市場向けに7人乗り、600馬力以上の新車Ti7を投入。ランドローバー・ディフェンダーやランドクルーザーをターゲットに、高級SUV市場での存在感を強化する戦略を推進する。",
+        url: "https://www.carscoops.com/2026/05/byd-ti7-launch-uk-europe/",
+        source: "CarScoops",
+        date: "2026-05-20",
+        tags: ["バッテリー"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/BYD-TI7-0415-2-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us883",
+        title: "Italdesign、米国に2000万ドル投資し、米大手3社と連携拡大",
+        desc: "Italdesignは米国に2000万ドルを投資し、GM、Ford、Stellantisなど米大手3社と設計から生産まで幅広く連携する。2025年1月にデトロイトに新本社を開設し、米国顧客への対応を強化する。",
+        url: "https://www.carscoops.com/2026/05/italdesign-michigan-expansion/",
+        source: "CarScoops",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 23,
+        interiorReason: "company expansion and partnership news with no interior product details",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/grevbf-vc-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us884",
+        title: "2027年AMG GT 4-Door Coupe EV、1153馬力でEV性能の限界を示す",
+        desc: "2027年発売のAMG GT 4-Door Coupe EVは、アクシャルフラックスモーターと600kW充電機能を搭載。1153馬力という高出力に加え、走行性能のカスタマイズ性も大幅に向上した電気自動車である。",
+        url: "https://www.jalopnik.com/2176819/2027-mercedes-amg-gt-4door-coupe-ev-reveal-design-specs-details/",
+        source: "Jalopnik",
+        date: "2026-05-20",
+        tags: ["EV", "カスタマイズ"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/2027-mercedes-amg-gt-4door-coupe-ev-reveal-design-specs-details/l-intro-1779267281.jpg",
+        note: ""
+    },
+    {
+        id: "us885",
+        title: "2027 Volvo EX60 内装はミニマリストで、Android系HMI搭載",
+        desc: "2027 Volvo EX60はミニマリストな内装で、物理ボタンは少なく中央タッチスクリーンで調整。新ステアリングホイールや快適なフロントシート、標準ガラスルーフが特徴。AndroidベースのHMIにはGemini AIチャットボットも統合。",
+        url: "https://www.caranddriver.com/photos/g71296815/2027-volvo-ex60-drive-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-05-20",
+        tags: ["HMI", "ディスプレイ", "AI", "シート"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/8979c98d-371e-4214-b673-58c33ca69d51.jpg",
+        note: ""
+    },
+    {
+        id: "us886",
+        title: "2027 Volvo EX60は、Google/Nvidia連携のHuginCoreとSPA3搭載電",
+        desc: "2027 Volvo EX60は、Google/Nvidia連携のHuginCoreとSPA3搭載電気SUVです。P6は369馬力、P10は503馬力で、800Vアーキテクチャにより10分で160マイル回復可能です。",
+        url: "https://www.caranddriver.com/reviews/a71317567/2027-volvo-ex60-drive/",
+        source: "Car and Driver",
+        date: "2026-05-20",
+        tags: [],
+    
+        interiorScore: 38,
+        interiorReason: "Title and snippet mention 'coddling refinement' and 'Scandinavian minimalism' wh",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/fd27de4b-595e-4705-89d2-d3e384af9a7b.jpg",
+        note: ""
+    },
+    {
+        id: "us887",
+        title: "2027年メルセデスAMG GT 4ドアEV、1153馬力で2.0秒0-60マイル",
+        desc: "2027年モデルのメルセデスAMG GT 4ドアはガソリンからEVへ完全転換。GT63は3モーターで1153馬力、0-60マイルを2.0秒で走行。バッテリー容量は310-400マイル、充電速度は600kW。",
+        url: "https://www.caranddriver.com/mercedes-amg/gt-4-door-ev-2027",
+        source: "Car and Driver",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        interiorScore: 31,
+        interiorReason: "exterior-only image and text focuses on powertrain specs",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/3251c975-ddea-44cd-9ce5-c7f822cb9d09.jpg",
+        note: ""
+    },
+    {
+        id: "eu844",
+        title: "Stellantis、中国の東風と欧州EV生産提携",
+        desc: "Stellantisは中国の東風汽車と欧州でのEV生産提携を締結。過去に中国メーカーが外国企業と組むことで市場アクセスと利益を得たが、現在は逆転する動きが続いている。",
+        url: "https://www.autocar.co.uk/car-news/business-corporate/global-car-makers-lean-china-fight-stay-competitive",
+        source: "AUTOCAR UK",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/voyah.jpg?itok=vJYxuSz6",
+        note: ""
+    },
+    {
+        id: "eu845",
+        title: "Volvo EX60、BMW iX3とMercedes GLCに挑む新プラットフォームSUV",
+        desc: "Volvoは新プラットフォームで開発したEX60を投入。BMW iX3やMercedes GLCなど競合モデルに挑み、400マイル以上の航続距離を備えた大型SUVとして市場に登場した。",
+        url: "https://www.autocar.co.uk/car-review/volvo/ex60",
+        source: "AUTOCAR UK",
+        date: "2026-05-20",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/01-volvo-ex60-autocar-road-test-review-front-driving.jpg?itok=X6y6_G_o",
+        note: ""
+    },
+    {
+        id: "eu846",
+        title: "1169馬力AMG GTクーペ、EV化で800Vプラットフォーム搭載",
+        desc: "新AMG GTクーペプロトタイプは800Vプラットフォームとアクシャルフラックスモーターを備え、1169馬力を発揮。V8シミュレーション機能も搭載し、EV化で高出力を維持。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/new-level-ev-feedback-i-drove-wild-1169bhp-amg-gt",
+        source: "AUTOCAR UK",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/mercedes-amg-prototype-2026-015.jpg?itok=WoD_LW5O",
+        note: ""
+    },
+    {
+        id: "eu847",
+        title: "中国のPHEVインセンティブ終了で販売減少、EVは成長",
+        desc: "中国がPHEV・EVの補助金を削減。PHEV販売は減少したがEVは成長。英国では中国車によるPHEV販売増加が鈍化。",
+        url: "https://www.autocar.co.uk/opinion/business-electric-vehicles/are-plug-hybrids-reaching-end-road",
+        source: "AUTOCAR UK",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/phev-group-2026-jh-2a.jpg?itok=xuM0tSdx",
+        note: ""
+    },
+    {
+        id: "eu848",
+        title: "メルセデス・AMG GT 4ドアクーペ、EV化で1169馬力搭載",
+        desc: "メルセデス・AMG GT 4ドアクーペは、同ブランド初の専用EVモデルとして9月に英国で約15万ポンドから販売予定。1169馬力とV8のエンジン音を再現するサウンド、シミュレートされたギアボックスなど、ドライバーエンゲージメントを重視した高性能EVである。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/revealed-mercedes-amg-gt-goes-ev-1169bhp-and-v8-rumble",
+        source: "AUTOCAR UK",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/mercedes-amg-gt-4-door-coupe-034.jpg?itok=2uh224LM",
+        note: ""
+    },
+    {
+        id: "cn891",
+        title: "シャオミ YU7 GT が中国で発売され、5色のカラーバリエーションを用意。",
+        desc: "シャオミ YU7 GT は 5 月 21 日に中国で発売され、990 馬力と 705km の航続距離を備えた高性能 SUV です。5 色のボディカラーが用意され、CarNewsChina.com で発表されました。",
+        url: "https://carnewschina.com/2026/05/20/xiaomi-yu7-gt-performance-suv-to-enter-china-with-five-body-color-options/",
+        source: "CarNewsChina - All",
+        date: "2026-05-20",
+        tags: ["AR"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/xiaomi_yu7_gt-5-1-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn892",
+        title: "BYD、ブレードバッテリー2.0の生産を増やし、方城包の販売が40万を突破",
+        desc: "BYDは供給不足の解消のため、ブレードバッテリー2.0の生産を拡大する。方城包の累計販売台数は40万台を突破し、電気自動車向けの内装や快適装備の需要に対応する。",
+        url: "https://carnewschina.com/2026/05/20/byd-ramps-up-blade-battery-2-0-production-as-fang-cheng-bao-sales-top-400000/",
+        source: "CarNewsChina - All",
+        date: "2026-05-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e8bdace9ab98e6b885-3_webhook_1200x720_q85_1779261377.jpg",
+        note: ""
+    },
+    {
+        id: "cn893",
+        title: "ステラントISバックのリープモーターC16ロングホイールベース版をスパイショットで確認",
+        desc: "ステラントISが支援するリープモーターのC16ロングホイールベース版がスパイショットで確認された。オーストラリアではC16とD19 SUVの導入を検討しており、同モデルも輸出の可能性が示唆されている。",
+        url: "https://carnewschina.com/2026/05/20/stellantis-backed-leapmotors-c16-long-wheelbase-variant-revealed-in-spy-shots/",
+        source: "CarNewsChina - All",
+        date: "2026-05-20",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/c16_f.jpg",
+        note: ""
+    },
+    {
+        id: "cn894",
+        title: "BYDシーロウ8とQ2をフラッグシップモデルとして発売",
+        desc: "BYDシーロ8は、第2四半期にEVおよびプラグインハイブリッドモデルで発売されます。フラッシュ充電機能と後輪ステアリングを採用しています。",
+        url: "https://carnewschina.com/2026/05/20/byds-seal-08-flagship-sedan-brings-flash-charging-and-rear-wheel-steering-to-q2-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-05-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e8bdace9ab98e6b885-2-scaled_webhook_1350x810_q85_1779258999.jpg",
+        note: ""
+    },
+    {
+        id: "cn895",
+        title: "テスラが中国の9都市でスマートドライブの採用を拡大し、FSD（完全自動運転）の承認が期待されている",
+        desc: "テスラは中国の9都市でスマートドライブ技術の採用を拡大し、FSD（完全自動運転）の承認を期待させる動きだ。採用対象は運転支援システムやコックピット関連のエンジニアで、中国市場での自動運転技術の展開を強化する方針を示している。",
+        url: "https://carnewschina.com/2026/05/20/tesla-ramps-up-smart-driving-recruitment-across-9-cities-in-china-fueling-hopes-for-fsd-approval/",
+        source: "CarNewsChina - All",
+        date: "2026-05-20",
+        tags: ["コックピット"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-107.png",
+        note: ""
+    },
+    {
+        id: "cn896",
+        title: "2026年、Zeekr 009が中国で900V架構搭載のMPVとして発売される",
+        desc: "ゼークルは2026年モデルの009 MPVを中国で発売します。900V高電圧架構と強化されたインテリジェンス機能を搭載しており、価格は6万4700ドルからです。",
+        url: "https://carnewschina.com/2026/05/20/2026-zeekr-009-launches-with900v-architecture-in-china-starting-from-64700-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-05-20",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-103-e1779239047110-1500x841.png",
+        note: ""
+    },
+    {
+        id: "cn897",
+        title: "Xpeng Gが、NIO ES8と同程度の価格で発売される",
+        desc: "小鹏GXは発売前にニオES8と同じ価格設定でしたが、実際にはオンボL90と同じ価格で販売されます。これは中国EV市場での競争力強化を狙った戦略的な価格設定です。",
+        url: "https://cnevpost.com/2026/05/20/xpeng-gx-hits-market-pricing-comparable-to-onvo-l90/",
+        source: "CnEVPost - All",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052014114692.jpg",
+        note: ""
+    },
+    {
+        id: "cn898",
+        title: "SAIC Audiは、AUDI E7X SUVを5月29日に発売し、価格を引き下げます。",
+        desc: "SAIC AudiはAUDI E7X SUVを5月29日に発売し、5月8日から28万9800元で先行販売を開始した。価格は当初の計画より大幅に低く設定され、高級車市場での競争力を強化する戦略である。",
+        url: "https://cnevpost.com/2026/05/20/saic-audi-sets-may-29-launch-for-audi-e7x/",
+        source: "CnEVPost - All",
+        date: "2026-05-20",
+        tags: ["AI"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052010012985.jpg",
+        note: ""
+    },
+    {
+        id: "cn899",
+        title: "ニオは、2035年までに1台あたりの車両から排出される炭素量を43%削減する目標を公表した。",
+        desc: "ニオは2035年までに1台あたりの炭素排出量を43%削減する目標を公表し、経営陣の報酬をESG指標と連動させた。2026年2月に1億回達成したバッテリー交換ネットワークを活用し、2025年に1,100台のEVをリサイクルした。",
+        url: "https://cnevpost.com/2026/05/20/nio-discloses-first-carbon-reduction-target-esg-report/",
+        source: "CnEVPost - All",
+        date: "2026-05-20",
+        tags: ["新素材", "EV"],
+    
+        interiorScore: 9,
+        interiorReason: "ESG/carbon target news with no interior product detail",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052009425264.jpg",
+        note: ""
+    },
+    {
+        id: "cn900",
+        title: "ファーウェイ後援のアイテックが、5 月 27 日に M9 SUV を発売しました",
+        desc: "ファーウェイ後援のAITOは5月27日に新型モデルM9 SUVを発売し、5万台の予約を確保した。発売はニオのフラッグシップEV ES9の展開と同時に行われた。",
+        url: "https://cnevpost.com/2026/05/20/aito-to-launch-updated-m9-may-27/",
+        source: "CnEVPost - All",
+        date: "2026-05-20",
+        tags: ["AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052002340894.jpg",
+        note: ""
+    },
+    {
+        id: "in931",
+        title: "2028年発売の次世代BMW 1シリーズはICE、EV、PHEVの3動力方式を備える",
+        desc: "BMWは2028年発売の4代目1シリーズを準備中。Autocar UKによると、電気自動車、ガソリン車、プラグインハイブリッドの3動力方式を備え、ハッチバック形状を維持する予定。",
+        url: "https://www.autocarindia.com/car-news/next-gen-bmw-1-series-due-in-2028-to-get-ev-hybrid-powertrains-439774",
+        source: "Autocar India - All",
+        date: "2026-05-20",
+        tags: ["AR", "EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260520_082004_bb902af0.jpg",
+        note: ""
+    },
+    {
+        id: "in932",
+        title: "ス柯达Octavia、海外でハイブリッドとPHEV導入",
+        desc: "ス柯达はOctaviaにハイブリッドとプラグインハイブリッドを追加する。技術開発責任者のヨハネス・ネフト氏は、電気化オプションの拡大を明言。",
+        url: "https://www.autocarindia.com/car-news/skoda-octavia-to-get-hybrid-and-phev-powertrains-abroad-439773",
+        source: "Autocar India - All",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260520_071730_d4751497.jpg",
+        note: ""
+    },
+    {
+        id: "in933",
+        title: "マラチ・スズキなど4社、27年中盤にインドで7人乗りEV投入",
+        desc: "マラチ・スズキ、ヴィンファスト他4社が2027年中盤までにインドで7人乗りEVを投入予定。バッテリー技術向上や高速道路充電インフラ整備により、大型3列シートEVの顧客受け入れが進む。",
+        url: "https://gaadiwaadi.com/4-new-7-seater-electric-cars-to-be-launched-in-india-soon/",
+        source: "GaadiWaadi",
+        date: "2026-05-20",
+        tags: ["シート", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/Maruti-Suzuki-YMC-Brezza-Facelift-Baleno-Facelift-Spied.jpg",
+        note: ""
+    },
+    {
+        id: "in934",
+        title: "2026年5月28日、タタ・ティアゴのフェイスリフトがインドで発表",
+        desc: "2026年5月28日にインドで発表されるタタ・ティアゴのフェイスリフトは、ICEおよびEVの両モデルで外観とインテリアを大幅に刷新し、新機能を追加する。",
+        url: "https://gaadiwaadi.com/2026-tata-tiago-facelift-to-launch-in-india-on-may-28-all-key-changes/",
+        source: "GaadiWaadi",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        interiorScore: 63,
+        interiorReason: "interior refresh mentioned but no specific interior details or image evidence",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2022/09/tata-tiago-electric_-11.jpg",
+        note: ""
+    },
+    {
+        id: "in935",
+        title: "Skoda Epiq、440km航続・475L荷室の電気SUV発表",
+        desc: "Skodaはエントリーモデル電気SUV「Epiq」を公開。航続距離440km、荷室容量475リットル、双方向充電機能を備え、ブランド初のモダンソリッドデザインを採用。",
+        url: "https://gaadiwaadi.com/skoda-epiq-entry-level-electric-suv-revealed-with-440-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/Skoda-Epiq.jpg",
+        note: ""
+    },
+    {
+        id: "in936",
+        title: "インドEV市場で7人乗り車展開、タタ・マルチ・トヨタが参入",
+        desc: "インドEV市場拡大に向け、タタ・サファリEVやマルチYMC、トヨタEV MPVなど7人乗り車種を投入。自動車内装やインテリアに関する詳細は未発表だが、各社がポートフォリオ強化を計画している。",
+        url: "https://www.indiacarnews.com/news/3-upcoming-7-seater-electric-cars-tata-safari-ev-maruti-ymc-toyota-ev-mpv-67886/",
+        source: "IndiaCarNews",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2025/07/Tata-Safari-EV-Launch.webp",
+        note: ""
+    },
+    {
+        id: "in937",
+        title: "Hyundai India FY2027にミドルサイズSUV投入、Cretaより下位に位置",
+        desc: "Hyundai Motor IndiaはFY2027にミドルサイズSUVと小型EVを投入予定。SUVはCretaより下位に位置し、内装や快適装備の詳細は未発表。",
+        url: "https://www.indiacarnews.com/news/new-hyundai-midsize-suv-launch-in-fy2027-to-sit-below-creta-67883/",
+        source: "IndiaCarNews",
+        date: "2026-05-20",
+        tags: ["AI", "EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/04/Untitled-design.webp",
+        note: ""
+    },
+    {
+        id: "in938",
+        title: "欧州2025年自動車販売でVWグループが首位、中国EVメーカーが市場を再編",
+        desc: "2025年欧州自動車市場でVWグループが販売台数首位を維持。中国EVメーカーの台頭により市場構造が変化し、伝統メーカーは需要減と中国EV競争に直面している。",
+        url: "https://www.autopunditz.com/post/europe-car-sales-by-brand-2025",
+        source: "Auto Punditz",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_3ed731aa4a814f2eb28e4e4db94c4a63~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us888",
+        title: "Volvo EX60搭載カメラでGoogle Gemini AIと対話可能に",
+        desc: "Volvo EX60は、搭載カメラとGoogle Gemini AIを連携させ、建物や標識を分析・翻訳できる。プライバシー配慮で顔はぼかし、2027年モデルに搭載予定。",
+        url: "https://insideevs.com/news/796383/volvo-ex60-google-gemini-context-cameras/",
+        source: "InsideEVs",
+        date: "2026-05-20",
+        tags: ["AI"],
+    
+        interiorScore: 92,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/Mkgb2X/s3/gemini-ai-analyzing-a-street-sign-in-the-volvo-ex60.jpg",
+        note: ""
+    },
+    {
+        id: "eu849",
+        title: "自動車シート製造：自動化で複雑なメカトロニクス対応",
+        desc: "車両シートは複雑なメカトロニクスシステム化し、OEMは生産効率化に自動化不可欠。JR Automationのリック・モア氏によると、ロボット誘導組立でサイクルタイム40%改善、ラインサイドキット化でバリエーション対応。早期協力により設計段階から自動化最適化可能。",
+        url: "https://www.automotiveworld.com/topics/manufacturing/from-mechanical-to-mechatronic-how-automation-is-reshaping-seat-manufacturing/",
+        source: "Automotive World",
+        date: "2026-05-20",
+        tags: ["シート"],
+    
+        interiorScore: 81,
+        interiorReason: "seat manufacturing automation and mechatronic evolution directly informs interio",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/19124423/AdobeStock_114574631-scaled.jpeg",
+        note: ""
+    },
+    {
+        id: "eu850",
+        title: "2026年発売のAudi A2 e-tron、インゴルシュタットで生産",
+        desc: "Audiは2026年発売の新型A2 e-tronを正式に確認。インゴルシュタット工場で生産され、高級EVの普及を目指す。",
+        url: "https://electriccarsreport.com/2026/05/audi-a2-e-tron-confirmed-for-2026-as-new-entry-level-electric-car/",
+        source: "Electric Cars Report",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Audi-A2-e-tron-testing.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu851",
+        title: "ステラントIS、2028年イタリアで小型EV生産開始",
+        desc: "ステラントISは2028年よりイタリアで小型EVの生産を開始し、欧州の低価格EV需要に対応する。",
+        url: "https://electriccarsreport.com/2026/05/stellantis-confirms-affordable-small-ev-project-for-europe-production-starts-in-2028/",
+        source: "Electric Cars Report",
+        date: "2026-05-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2021/07/Stellantis.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu852",
+        title: "BYD、英国向けTi7 7人乗りPHEV SUVを正式発表",
+        desc: "BYDは英国市場向けにTi7という大型7人乗りプラグインハイブリッドSUVを正式に発表した。最大79マイルの電気走行距離とAWD性能を備え、革新的なインテリアデザインを採用する。",
+        url: "https://electriccarsreport.com/2026/05/byd-confirms-ti7-seven-seat-plug-in-hybrid-suv-for-uk-market/",
+        source: "Electric Cars Report",
+        date: "2026-05-20",
+        tags: ["新素材", "EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/BYD-Ti7.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu853",
+        title: "メルセデス・AMG GT 4ドアクーペ、1169馬力で2.1秒で100km/h到達",
+        desc: "メルセデス・AMG GT 4ドアクーペは、1169馬力の電動モーターと600キロワット急速充電を備える。0から100キロメートル毎時は2.1秒で達成され、革命的回転磁束モーターを採用している。",
+        url: "https://electriccarsreport.com/2026/05/mercedes-amg-gt-4-door-coupe-debuts-with-1169-hp-and-revolutionary-axial-flux-motors/",
+        source: "Electric Cars Report",
+        date: "2026-05-20",
+        tags: ["新素材", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Mercedes-AMG-GT-4-Door-Coupe.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in939",
+        title: "車内装マット：5大ブランドのスタイルと耐久性を比較",
+        desc: "車内装マットは汚れや雪から車を守り、スタイルも表現できる。WeatherTechやLloyd Matsは高級素材で耐久性に優れ、Car Mats Customsはロゴ刺繍などカスタマイズ可能。",
+        url: "https://indianautosblog.com/top-5-car-mat-brands-that-combine-style-and-durability-p328485",
+        source: "IndianAutosBlog",
+        date: "2026-05-20",
+        tags: ["AR", "新素材", "カスタマイズ"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://img.indianautosblog.com/crop/620x324/no-image.jpg",
+        note: ""
+    },
+    {
+        id: "in940",
+        title: "Volvo、Googleと連携しEX60でGemini AI搭載",
+        desc: "VolvoはGoogleと連携し、EX60にGemini AIを世界初搭載。車外カメラで周囲を認識し、駐車制限などを説明。Google Mapsの3Dナビも導入予定。",
+        url: "https://indianautosblog.com/volvo-google-gemini-ai-debuts-ex60-can-see-and-explain-the-world-around-you-p328484",
+        source: "IndianAutosBlog",
+        date: "2026-05-20",
+        tags: ["コネクテッド", "AI"],
+    
+        interiorScore: 57,
+        interiorReason: "HMI and display integration is central to the story, but the image is a generic",
+        imageInterior: false,
+        country: "in",
+        img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
         note: ""
     },
 ];

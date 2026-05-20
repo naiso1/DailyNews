@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-20",
+        analysis: {
+            jp: "日本の自動車内装関連ニュース10件を分析した。アウトドア志向アクセサリー[jp1063][jp1065]や、事故時ケガ防止のウッド素材[jp1064]は、サステナビリティと安全性の両立がトレンド。また、高級車グレード化[jp1071]や静粛性強化[jp1071]、カスタマイズ機能[jp1070]は、ユーザー体験向上へのニーズが明確。後席快適化[jp1068]やディスプレイカスタマイズ[jp1070]は、車内空間の最適化が重要。音響技術[jp1066][jp1071]は、コネクテッド要素との連携が鍵。これらを踏まえ、環境配慮型内装と音響制御技術の統合が自社の開発課題である",
+            cn: "中国EV市場はシャオミ YU7 GT が中国で発売され、5色のカラーバリエーションを用意[cn891]、2026年Zeekr 009が中国で900V架構搭載のMPVとして発売される[cn896]という高性能化と高電圧化がトレンドだ。BYD、ブレードバッテリー2.0の生産を増やし、方城包の販売が40万を突破[cn892]やテスラが中国の9都市でスマートドライブの採用を拡大し、FSD（完全自動運転）の承認が期待されている[cn895]は、BYDシーロウ8とQ2をフラッグシップモデルとして発売[cn894]のコックピット機能とEV内装の需要拡大を示唆。",
+            in: "インド市場ではEVの多様化と家族志向が顕著で、タタやマラチ・スズキが7人乗りEVを投入[in933]。Skoda Epiqの発表から、大型EVでも実用性を重視する傾向[in935]。VolvoのGemini AI搭載や車内装マットの高級化は、AIとパーソナライゼーションの融合を示唆[in940][in939]。健康面での抗菌やリラクゼーション需要が高まり、車内環境の質化がトレンド[in939]。",
+            us: "米国自動車内装のEV移行と高級化が加速[us884]。特にVolvoはミニマリスト内装[us885]とAndroid HMI[us880]でAIチャットボット[us888]を統合。AMGはEV化[us879]で1153馬力[us887]の極限性能を追求。ステラントとJLRの米国提携[us881]でコスト削減と技術共有が進む。高級SUV市場でBYDがランドローバー[us882]に挑戦しバッテリー性能を強化。Italdesignは米大手3社と連携し設計から生産[us883]まで拡大。消費者は高級感と最先端技術の両立を求める傾向が明確。",
+            eu: "欧州EV化加速で800Vプラットフォーム[eu846]や自動化生産がトレンド。PHEVインセンティブ終了によりEV専用設計の重要性が浮き彫り[eu847]。高級EV[eu850]でもEVならではの熱管理やフロア活用が求められる。内装材の軽量化・高強度化と植物由来素材の導入が競争優位性を生む。",
+        },
+        ideas: {
+            jp: [
+                { id: 956, img: "images/idea_956.png", title: "リサイクル素材製サステナブルインテリア", desc: "ペットボトルやタイヤリサイクル素材を使用した内装パネル。軽量でCO2削減効果あり。運転席と助手席のドアトリムに採用。エコ意識の高い若年層が「地球に優しい車内」を実感し、満足感を得る。", imagePrompt: "Sustainable car interior panel made from recycled plastic bottles and tire rubber, light weight material, eco-friendly texture, modern dashboard design, soft ambient lighting, natural color palette, photorealistic 3D render, premium automotive design, high detail" },
+                { id: 957, img: "images/idea_957.png", title: "アコースティックデザイン音響制御シート", desc: "音の可視化技術を応用したシート。振動を低減し、静寂性を高める。高級車のような静粛性と、スポーツカーの迫力を両立。ドライバーが「音の質」を可視化して、運転の愉しさを倍増させる。", imagePrompt: "Acoustic design sound control seat with visible sound wave patterns, vibration damping technology, luxury car interior, premium leather material, cinematic lighting, blue accent lighting, photorealistic render, high detail" },
+            ],
+            cn: [
+                { id: 958, img: "images/idea_958.png", title: "癒やし系香りディフューザー", desc: "BYDの生産拡大でEV内装需要が伸びる中、長距離運転時のストレス軽減に貢献。芳香成分をゆっくり放出し、運転中に心地よい癒やしを感じられる。高級感のある木目調パネルに内蔵し、自然の匂いを愉しめる。", imagePrompt: "Luxury EV interior with integrated aromatherapy diffuser in center console, releasing gentle mist from wood grain panel, soft amber lighting, calming natural scent visualization, premium materials, photorealistic 3D render, cinematic lighting" },
+                { id: 959, img: "images/idea_959.png", title: "陰影イルミネーション・プロジェクター", desc: "テスラのFSD採用やAITOのAI連携の潮流を受け、AIアシスタントと連携。LED陰影イルミネーション技術を光学パターンに発展させ、空間演出で癒やしを提供。可変陰影で気分転換やリラックスを支援。", imagePrompt: "Advanced augmented reality head-up display in premium vehicle, holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render" },
+            ],
+            in: [
+                { id: 960, img: "images/idea_960.png", title: "ハーブ香りの抗菌シート", desc: "7人乗りEV専用抗菌シートに、ラベンダーやユーカリの自然香りを内蔵。車内空気を清浄し、家族や同乗者の健康を守ります。特に長時間移動でも疲労感を軽減し、快適な空間を演出。家族全員が安心する、健康な車内環境です。", imagePrompt: "Family of five sitting comfortably in luxury Indian electric SUV interior, natural herbal aroma diffusing from seat fabric, lavender and eucalyptus scent visualization as subtle glowing mist, antibacterial technology indicators on seat edges, warm ambient lighting, photorealistic 3D render, premium automotive design" },
+                { id: 961, img: "images/idea_961.png", title: "UV-C LED除菌ダッシュ", desc: "UV-C LED内装除菌システムをダッシュボードに統合。車内の空気と表面を毎日自動除菌し、ウイルスや細菌を不活化。特にインドの高温多湿環境で効果を発揮。家族全員が清潔な車内で過ごせ、健康な移動環境を提供。", imagePrompt: "Modern Indian electric vehicle interior with integrated UV-C LED disinfection system on dashboard, blue UV light visualization gently illuminating cabin air, germ-free environment indicators, premium materials like leather and brushed metal, cinematic lighting, high detail 4K quality" },
+            ],
+            us: [
+                { id: 962, img: "images/idea_962.png", title: "リサイクル素材内装パネル", desc: "EV車体の軽量化とサステナビリティを実現。リサイクルプラスチックと再生アスベストを混用した高級インパネ。環境配慮で消費者がうれしい。", imagePrompt: "Premium automotive interior center console made from recycled materials with brushed aluminum and sustainable fabric, soft ambient lighting, modern luxury car cabin, photorealistic 3D render, warm atmosphere, high detail, 4K quality" },
+                { id: 963, img: "images/idea_963.png", title: "軽量化樹脂インパネ骨格", desc: "鉄製インパネを高強度樹脂に置き換えた骨格。EVの軽量化と安全性を両立。ドライバーが乗り心地を喜んでくれる。", imagePrompt: "Advanced lightweight resin dashboard structure in premium vehicle, modern automotive interior design, brushed metal and soft-touch materials, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 964, img: "images/idea_964.png", title: "EVフロア熱管理モジュール", desc: "EVバッテリー下の熱管理システムで、足元温度を最適化する。EVユーザーが暖かい足元で快適に運転できる喜びを提供。", imagePrompt: "EV vehicle interior with integrated floor heating system beneath battery pack, warm glowing ambient light, luxury cabin materials, modern automotive design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 965, img: "images/idea_965.png", title: "セルロースナノファイバーEV専用パネル", desc: "植物由来素材でEVの軽量化と高級感を両立。EVドライバーがエコでラグジュアリーな内装を楽しむ喜びを提供。", imagePrompt: "Premium car interior panel made of plant-based cellulose nanofiber, sustainable materials, sleek texture, EV interior concept, photorealistic rendering, modern vehicle cockpit, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-05-19",
         analysis: {
             jp: "日本市場の自動車内装ニュースから、デジタルミラー[jp1055]やスマホ充電[jp1056]などHMI進化、安全リコール[jp1054]、カスタマイズ[jp1059][jp1061]のトレンドが浮き彫り。特に安全と快適性の両立が重要[jp1057]。また、植物由来素材への関心[jp1059][jp1061]が顕著。",
