@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-21",
+        analysis: {
+            jp: "日本の自動内装トレンドは**HMI**や**AI**の進化が顕著[jp1079][jp1082]。特に**ディスプレイ**の大型化[jp1074][jp1080]と**デジタルミラー**の普及[jp1075]が進行中だが、これら高機能化の背景には**静粛性**や**質感**の向上が求められている[jp1076]。EV化に伴い**熱管理**や**香り**への関心も高まっている[jp1077]。さらに**新素材**や**高級感**の追求[jp1074]は、内装の**高級感**を高める方向性で、**フィット感**や**静粛性**を損なわない設計が鍵となる。",
+            cn: "中国EV業界はバッテリー技術の革新[cn907][cn908]と、全自動運転への移行[cn906]が加速。高受注率のSUVモデル[cn902]では高級内装が差別化要因。BYDのバッテリー交換コスト[cn901]やシャオミの価格競争[cn903]は、軽量化とリサイクル設計によるサステナビリティへの関心の高まりを示唆。ニオの黒化[cn904]はサプライチェーン効率化の重要性を浮き彫りにする。",
+            in: "インド市場では高級SUVのナイトエディションでダークインテリアと新素材が注目され[in943]、EV技術への投資も加速している[in941]。E25燃料のような環境規制対応や、ゲート付きシフターのような運転体験向上の技術トレンドが明確[in945]。市場価値上位15社という競争環境下[in949]、製造プロセスの自動化や歩留まり向上がコスト競争力に直結し、高付加価値化の鍵となる。",
+            us: "米国市場ではEV普及と低価格化が同時に進行しており、内装もコスト削減と高機能化の両立が課題です。高級感はディスプレイやコネクテッド機能で維持しつつ、省エネなヒーター技術も注目。EV販売では試乗体験が重要、内装は試乗時の驚きを設計すべきです。 ステランティスは2030年までに9台の4万ドル以下新車投入[us889]、ステラントISは3万ドル以下の車新プラットフォームで展開[us892]。メルセデスAMG CEOはEV販売の鍵は「試乗」[us891]と示唆しています。",
+            eu: "欧州市場では、極限性能の体験が日常感を相対化し、健康志向のウェルネス需要が浮上している[eu854]。ステアリング物理化やAI統合は、信頼性向上とデジタル体験の融合を示唆[eu855][eu860]。プラットフォーム共通化やEV化は、省エネ技術の標準化を加速[eu856]。さらに、PHEVの実使用パターンは、エネルギー効率の最適化が重要であることを裏付け[eu862]。AIプラットフォームは、車載システムの自律化を後押し[eu861]。これらのトレンドは、内装が単なる機能ではなく、ウェルネスと省エネの両立を目指すべきことを示している[eu857]。",
+        },
+        ideas: {
+            jp: [
+                { id: 966, img: "images/idea_966.png", title: "高級感×静粛性インパネ", desc: "大型ディスプレイ搭載時に、静粛性を損なわない高級感ある薄型インパネ。ナッパレザーの温もりを再現し、ドライバーに癒やしと高級感を提供。", imagePrompt: "" },
+                { id: 967, img: "images/idea_967.png", title: "香り付きデジタルミラー", desc: "デジタルミラーに香り機能を付加。芳香剤効果で車内を癒やしたて、高級感を演出。", imagePrompt: "" },
+            ],
+            cn: [
+                { id: 968, img: "images/idea_968.png", title: "リサイクル素材内装モジュール", desc: "バッテリー廃棄物を再利用した高級内装パネル。脱炭素で環境貢献、リサイクル素材の質感が新しさを演出。乗員が地球に優しく、コストパフォーマンスにうれしい。", imagePrompt: "Luxury car interior module made from recycled battery materials, brushed titanium texture and soft matte finish, natural lighting highlighting sustainable craftsmanship, premium automotive design, photorealistic render, eco-friendly materials, modern cockpit, warm ambient glow, high detail" },
+                { id: 969, img: "images/idea_969.png", title: "LED安全通知イルミネーションシステム", desc: "車内の危険状況をLED光で直感的に伝える安全システム。緊急時でも視認性が高く、乗員が安心。既存技術の進化で、安全で快適なドライブがうれしい。", imagePrompt: "Automotive LED safety notification illumination system in dashboard, soft blue and amber warning lights integrated into interior trim, night driving scene, clear visual hierarchy, premium vehicle cockpit, photorealistic render, modern technology, cinematic lighting, high detail" },
+            ],
+            in: [
+                { id: 970, img: "images/idea_970.png", title: "骨格樹脂インパネリンフォース", desc: "樹脂インパネリンフォースを自動生産ラインで加工。メーカは軽量化とコスト削減を同時に実現。生産効率向上で開発スピードが早まり、新車開発が楽しくなる。", imagePrompt: "Premium car interior with resin dashboard frame skeleton, automated manufacturing line with robotic arms, dark carbon fiber materials, warm industrial lighting, photorealistic 3D render, high detail" },
+                { id: 971, img: "images/idea_971.png", title: "EVゲート付きマニュアルシフター", desc: "EV車にゲート付きシフターを新設。運転者は手動操作の快感とAIアシスタントの利便性を両立。ドライブの楽しさを高め、市場価値向上に貢献。", imagePrompt: "Electric vehicle dashboard with manual gear shifter integrated into center console, futuristic interface with holographic display, blue accent lighting, premium leather interior, cinematic automotive photography" },
+            ],
+            us: [
+                { id: 972, img: "images/idea_972.png", title: "EV試乗向けARナビゲーションコンソール", desc: "EV試乗時の興奮を最大化するARコンソール。ダッシュボードに浮遊する3Dナビで、EV特有の静音性を音響効果で補完。試乗客に新しい世界観を提供し、購入欲求を高めます。", imagePrompt: "AR navigation display floating above center console of EV vehicle, holographic 3D map projection, interactive touch interface showing battery status and range, sleek futuristic design, dark interior with ambient blue lighting, premium materials like carbon fiber and brushed metal, photorealistic automotive interior render" },
+                { id: 973, img: "images/idea_973.png", title: "省エネヒーター内蔵アームレスト", desc: "EV向け省エネを実現するヒーター内蔵アームレスト。面状発熱技術で消費電力50%削減、EVの航続距離維持に貢献。冷房・暖房効率向上で、快適性を損なわず、EVのメリットを最大限に活かします。", imagePrompt: "Ergonomic armrest with built-in heating elements, sleek surface with subtle heating indicator lights, modern vehicle interior setting, warm ambient lighting highlighting the armrest's premium material, close-up detail shot showing texture and finish, high-resolution product photography style" },
+            ],
+            eu: [
+                { id: 974, img: "images/idea_974.png", title: "抗菌消臭アロマコンソール", desc: "抗菌素材で車内空気を清浄に保ち、リラクゼーション用アロマが自動調整。通勤後の疲労を癒やし、家族の健康を守れる安心感をお届け。", imagePrompt: "Luxury car center console with integrated aromatherapy diffuser, antimicrobial material surface, soft ambient lighting, lavender and eucalyptus scent visualization, premium wood and brushed metal, clean cabin interior, photorealistic 3D render, 4K quality" },
+                { id: 975, img: "images/idea_975.png", title: "ヒーターアームレストEV版", desc: "面状発熱ヒーターで電力を半減。欧州の寒さでも足元を温め、長距離走行でも疲れを軽減。省エネで快適なドライブ体験を提供。", imagePrompt: "Automotive heated armrest with embedded flat heating element, electric vehicle interior, warm ambient glow, premium black leather and carbon fiber, minimalist design, night driving scene, photorealistic render, cinematic lighting" },
+            ],
+        }
+    },
+{
         date: "2026-05-20",
         analysis: {
             jp: "日本の自動車内装関連ニュース10件を分析した。アウトドア志向アクセサリー[jp1063][jp1065]や、事故時ケガ防止のウッド素材[jp1064]は、サステナビリティと安全性の両立がトレンド。また、高級車グレード化[jp1071]や静粛性強化[jp1071]、カスタマイズ機能[jp1070]は、ユーザー体験向上へのニーズが明確。後席快適化[jp1068]やディスプレイカスタマイズ[jp1070]は、車内空間の最適化が重要。音響技術[jp1066][jp1071]は、コネクテッド要素との連携が鍵。これらを踏まえ、環境配慮型内装と音響制御技術の統合が自社の開発課題である",

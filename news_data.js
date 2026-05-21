@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-21 01:29";
+window.NEWS_UPDATED_AT = "2026-05-22 01:12";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -58808,6 +58808,708 @@ window.LOADED_NEWS_DATA = [
         interiorScore: 57,
         interiorReason: "HMI and display integration is central to the story, but the image is a generic",
         imageInterior: false,
+        country: "in",
+        img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    // 2026-05-21 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1073",
+        title: "カーナビアプリ「COCCHi」がカロッツェリアブランドへ、天気機能強化",
+        desc: "パイオニアのカーナビアプリ「COCCHi」が5月下旬にカロッツェリアブランドへ変更。プレミアムプランでピンポイント天気表示や熱中症リスク通知など4つの新機能が追加され、アメダス降雨情報も車載ディスプレイ対応となる。基本プランは月額400円、プレミアムプランは月額600円。",
+        url: "https://news.yahoo.co.jp/articles/3deabb15eb0120d07dd635a34c45aa829b6262c3?source=rss",
+        source: "レスポンス",
+        date: "2026-05-21",
+        tags: ["ディスプレイ", "コネクテッド"],
+    
+        interiorScore: 79,
+        interiorReason: "HMI and display interface update with specific UI functions (weather, heatstroke",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-00000012-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1074",
+        title: "スバル新型BEV「トレイルシーカー」発表。",
+        desc: "スバルは2026年4月9日、新型BEV「トレイルシーカー」を発表。トヨタ「bZ4Xツーリング」と兄弟車関係で、e-スバルグローバルプラットフォームを採用。全長4845mmのワゴンスタイルに14インチディスプレイやナッパレザー本革シートを備え、バッテリー容量74.",
+        url: "https://news.yahoo.co.jp/articles/38fb54188a0e6a0e6637893b2fefd507550c0375?source=rss",
+        source: "carview!",
+        date: "2026-05-21",
+        tags: ["ディスプレイ", "シート", "新素材", "EV"],
+    
+        interiorScore: 60,
+        interiorReason: "interior features like 14-inch display and Nappa leather seats are mentioned in",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1075",
+        title: "カロッツェリア新型デジタルミラーMSD-DM300登場",
+        desc: "カロッツェリアの新型デジタルミラー「MSD-DM300」は、2026年6月発売予定。高感度フルHDカメラと11V型IPS液晶を採用し、昼夜を問わずクリアな後方視界を提供する。ドラレコ不要派向けの「視界特化型」モデルで、ミニバンやキャンピングカーのユーザーに注目を集める。",
+        url: "https://news.yahoo.co.jp/articles/402e037d14e8e134c448126b16a0ab53d2130012?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-21",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 93,
+        interiorReason: "rear-view mirror replacement with 11-inch IPS display and HD camera is a direct",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-00000024-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1076",
+        title: "最高気温25℃超で生ぬるい風の原因と対策｜エアコンガス充填費用も",
+        desc: "最高気温25℃超でエアコン風が生ぬるい原因は、冷媒ガス不足やコンプレッサー故障など。フィルター交換費用は工賃込み約4000〜6000円。エアミックスダンパー故障も。夏本番前にメンテを。",
+        url: "https://news.yahoo.co.jp/articles/b0d923e685834290548cf7218c56436637cd46b4?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-21",
+        tags: [],
+    
+        interiorScore: 82,
+        interiorReason: "air conditioning system maintenance, cabin comfort, and HVAC vent design",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-00000013-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1077",
+        title: "ホンダ新型EV「スーパーワン」発表、2026年5月発売予定",
+        desc: "ホンダは2026年5月21日に新型EV「スーパーワン」を発表し、翌22日に発売。N-ONE e：のプラットフォームをベースに、車両重量1090kgでWLTC航続距離274kmを達成。ホンダアクセスから「BULLDOG STYLE」デカールやV2H充放電器など純正アクセサリーも同日発売予定。",
+        url: "https://news.yahoo.co.jp/articles/2a891ee5908eec668145ad345b3501d59443777d?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        interiorScore: 90,
+        interiorReason: "exterior decal and accessory news with no interior detail; interior accessory/pr",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-01061748-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1078",
+        title: "スズキ「エブリイ」仕様変更でPAグレード何が変わった？",
+        desc: "2026年5月8日、スズキ「エブリイ」が一部仕様変更。PAグレードはブラック基調インテリアやデジタルスピードメーター搭載。",
+        url: "https://news.yahoo.co.jp/articles/557e5347f156dcd1018e12c223d5754e19a7aeab?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-21",
+        tags: [],
+    
+        interiorScore: 79,
+        interiorReason: "interior image shows dashboard, steering wheel, and center console clearly; text",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-01060532-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1079",
+        title: "9年ぶり全面刷新！マツダ新型CX-5発売、後席115mm拡大＆グーグル搭載",
+        desc: "2026年5月21日発売の3代目マツダCX-5は、後席を115mm拡大した広々とした空間と、メーカー初のグーグル搭載HMIを備えた上質内装が魅力。新グリルと特徴的なヘッドライトで“精悍顔”を形成し、プラットフォーム設計からインテリア思想まで見直された9年ぶりのフルモデルチェンジです。",
+        url: "https://news.yahoo.co.jp/articles/0ce39b113edf5c60800aa358d116fd77728ab210?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-21",
+        tags: ["HMI"],
+    
+        interiorScore: 83,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-01061266-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1080",
+        title: "トヨタ「ノア」一部改良、S-Xで燃費23.8km/L・7インチディスプレイ標準",
+        desc: "トヨタ「ノア」一部改良モデル発売。全車ハイブリッド化でWLTC燃費23.8km/L。S-Xグレードはピアノブラック加飾や7インチマルチインフォメーションディスプレイ採用。価格326万1500円から。",
+        url: "https://news.yahoo.co.jp/articles/77df92749a2d4fd257b65eec723982678b1f4615?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-21",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 62,
+        interiorReason: "interior display and trim details",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-01059581-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1081",
+        title: "プジョー408GTハイブリッド、iコクピットと10インチスクリーンで人中心設計",
+        desc: "プジョー408GTハイブリッドは、メーターを高い位置に配置したiコクピットを採用し、ドライバーの視線移動を減らす。センターには10インチタッチスクリーンとiトグルが備わり、アップル・カープレイ接続も可能。",
+        url: "https://news.yahoo.co.jp/articles/f89e23bb22773b07d9ea5490022ba603b1d803a9?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-05-21",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 89,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-01245305-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1082",
+        title: "Gemini搭載ボルボEX60でサンルーフ制御やビル認識を実演",
+        desc: "Google I/Oで披露されたGemini車載機能は、ボルボEX60などで年内順次提供される。音声でサンルーフを暗くしたり、前方のトランスアメリカ・ピラミッドを認識して解説したり、DoorDash経由でフィッシュタコス注文など、運転中の作業を代行する。",
+        url: "https://news.yahoo.co.jp/articles/68f2c108bef3c9bdeb09bf8bfbcd9a2d94e6a749?source=rss",
+        source: "CNET Japan",
+        date: "2026-05-21",
+        tags: ["AI"],
+    
+        interiorScore: 89,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260521-35247779-cnetj-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us889",
+        title: "ステランティス、2030年までに9台の4万ドル以下新車投入",
+        desc: "平均新車価格4万8千ドル超の現在、ステランティスは2030年までに11モデルを投入。そのうち2モデルは3万ドル以下で、低価格帯新車市場への参入を強化する。",
+        url: "https://www.thedrive.com/news/stellantis-is-launching-9-new-vehicles-under-40000",
+        source: "The Drive",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2025/02/Dodge-Demon-Concept-Hero-1.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us890",
+        title: "ステラントイス、北米で11の新車投入、クライスラー重視",
+        desc: "ステラントイスは北米で11台の新車投入を計画し、特にクライスラーに注力する。新車は4万ドル以下の価格帯で、自動車内装やシートなどの詳細は未発表。",
+        url: "https://www.motor1.com/news/796592/stellantis-plan-new-cars-under-40000/",
+        source: "Motor1",
+        date: "2026-05-21",
+        tags: ["シート"],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/BXZVy6/s3/ram-teaser.jpg",
+        note: ""
+    },
+    {
+        id: "us891",
+        title: "メルセデスAMG CEO、EV販売の鍵は「試乗」",
+        desc: "メルセデスAMG CEOマイケル・シェーベは、EVの性能車販売で成功の鍵は「試乗」にあると語る。AMGはEVの性能を体験させることで、顧客の興奮を高め、EV市場での存在感を確立する計画を明らかにした。",
+        url: "https://www.motor1.com/news/796482/mercedes-amg-ceo-interview-selling-electric-cars/",
+        source: "Motor1",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/W8KvBN/s3/mercedes-amg-ceo-interview.jpg",
+        note: ""
+    },
+    {
+        id: "us892",
+        title: "ステラントIS、3万ドル以下の車新プラットフォームで展開",
+        desc: "ステラントISは新グローバルプラットフォームで、3万ドル以下の安価な車7モデルを投入。自動車内装やシートに関する具体的な情報は本文に含まれていないため、製品戦略全体を要約した。",
+        url: "https://www.carscoops.com/2026/05/stellantis-affordable-cars-strategy/",
+        source: "CarScoops",
+        date: "2026-05-21",
+        tags: ["シート"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Stell-lead-plan-May2126808-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us893",
+        title: "Brabus、Aston Martin Vanquishをベースに1000馬力のBodoを発売",
+        desc: "BrabusはAston Martin Vanquishをベースに、1000馬力のスタンドアローン車「Bodo」を発売。車内装は高級素材で仕上げられ、快適装備を備えた豪奢なインテリアが特徴。",
+        url: "https://www.jalopnik.com/2178426/brabus-bodo-first-standalone-car-aston-martin-vanquish-underneath/",
+        source: "Jalopnik",
+        date: "2026-05-21",
+        tags: ["HMI", "AR", "新素材"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/brabus-first-standalone-car-is-a-1000-hp-brute-named-bodo-thats-an-aston-vanquish-underneath/l-intro-1779368697.jpg",
+        note: ""
+    },
+    {
+        id: "us894",
+        title: "ステラントIS、2030年までに60新車・50刷新モデルをグローバル展開",
+        desc: "ステラントISは2030年までに60以上の新車と50の刷新モデルをグローバル展開する。EVやプラグインハイブリッドの増加も計画され、JeepやRamが主導する5年計画の一環である。",
+        url: "https://www.caranddriver.com/news/a71372597/stellantis-five-year-plan-jeep-ram-details-revealed/",
+        source: "Car and Driver",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/c76e96fb-f3bf-4cce-80a1-48dd94ccff33.png",
+        note: ""
+    },
+    {
+        id: "us895",
+        title: "BMW K 1600 GTLがゴールドウイングに挑戦",
+        desc: "BMW K 1600 GTLは高級ツーリング分野でゴールドウイングに挑戦し、快適性とパフォーマンスを両立。現代ライダーにアピールするモデルです。",
+        url: "https://www.topspeed.com/touring-bike-has-gold-wing-owners-reconsidering/",
+        source: "Top Speed",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/05/bmw-k-1600-gtl-headlight.jpg",
+        note: ""
+    },
+    {
+        id: "us896",
+        title: "2025年リンコン・ナビゲーター、ロールスロイス並の高級感",
+        desc: "2025年式リンコン・ナビゲーターは、ロールスロイス・カリアンに匹敵する高級感を8万4555ドルで提供。48インチのパンラミックスクリーン、マッサージ機能付きシート、400馬力のV6エンジンなどを搭載。",
+        url: "https://www.topspeed.com/long-lasting-american-luxury-suv-feels-like-rolls-royce-inside/",
+        source: "Top Speed",
+        date: "2026-05-21",
+        tags: ["ディスプレイ", "コネクテッド", "シート"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/sharedimages/2026/04/2025-lincoln-navigator-jet-package-grey-mist-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu854",
+        title: "400bhpのワイルドなトラックカーで、普通のパフォーマンスクーペが簡単だった",
+        desc: "極限のトラックカーを体験後、通常の性能クーペが簡単だと感じた。400bhpという数値が示すほどの過激なマシンで、感覚が麻痺するほどのオーバーロード状態になった。",
+        url: "https://www.autocar.co.uk/opinion/new-cars/sensory-overload-how-wild-track-car-made-400bhp-feel-slow",
+        source: "AUTOCAR UK",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/opinion-fast_vs_power.jpg?itok=J_nsmRXo",
+        note: ""
+    },
+    {
+        id: "eu855",
+        title: "Polestar、オーナーフィードバックで物理ボタン復活へ",
+        desc: "Polestarはオーナーの要望を受け、2026年モデルの3 SUVからステアリングのタッチパッドを物理ボタンに置き換える。ソフトウェア不具合の修正やADASの改善も進める。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/polestar-will-do-buttons-it-tunes-owner-feedback",
+        source: "AUTOCAR UK",
+        date: "2026-05-21",
+        tags: ["AR", "安全"],
+    
+        interiorScore: 68,
+        interiorReason: "seat and display plus cabin image; defect/recall cap",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/polestar-3-lt-hello-2025-jh-45.jpg?itok=OeB_I4dp",
+        note: ""
+    },
+    {
+        id: "eu856",
+        title: "ステラントIS STLA Oneプラットフォーム、シトロエンなど110車種に採用",
+        desc: "ステラントISは、シトロエン、プジョー、フィアット、ボクスホールなど110台の新型車に採用する次世代プラットフォーム「STLA One」を公開した。",
+        url: "https://www.autoexpress.co.uk/news/369639/stellantis-stla-one-platform-revealed-basis-110-new-cars-citroen-peugeot-fiat-vauxhall",
+        source: "Auto Express",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--4FYVmREw--/t_rss_image_w_845/v1779368356/autoexpress/2026/05/Stellantis%20STLA%20One%20platform.jpg",
+        note: ""
+    },
+    {
+        id: "eu857",
+        title: "新欧州CEO、SmartのEV SUV強化とマイクロカー復活を掲げる",
+        desc: "新欧州CEOのヴォルフガング・ユーファーは、Smartの全電気SUV販売拡大とマイクロカーの復活を推進する。ただしハイブリッド車は排除する方針だ。",
+        url: "https://www.autoexpress.co.uk/smart/369635/future-smart-new-boss-banks-city-car-icons-return-bans-hybrid",
+        source: "Auto Express",
+        date: "2026-05-21",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--TUSTqoPc--/t_rss_image_w_845/v1776804488/autoexpress/2026/04/Smart%202%20concept%20-13.jpg",
+        note: ""
+    },
+    {
+        id: "eu858",
+        title: "Fiat、Pandaの大型SUV「Grizzly」を欧州Cセグメントで投入",
+        desc: "Fiatは欧州Cセグメント向けに、Pandaの大型版となる「Grizzly」クロスオーバーを発売。クーペとSUVの2ボディタイプで、Dacia Dusterライバルとして展開する。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/first-look-new-fiat-grizzly-suv-pandas-affordable-big-brother",
+        source: "Autocar Reviews",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/screenshot_2026-05-21_at_14.40.07.jpg?itok=rM2CNpYo",
+        note: ""
+    },
+    {
+        id: "cn901",
+        title: "BYD ブレードバッテリー2.0 の交換費用は、中国で1万1600ドル以下です。",
+        desc: "中国で販売されているBYD ブレードバッテリー2.0を搭載したDenza Z9 GT EVが車下損傷を受け、122.5kWhのLFPバッテリー交換の見積もりが1万1600ドル以下であると報じられた。",
+        url: "https://carnewschina.com/2026/05/21/byd-blade-battery-2-0-replacement-less-than-11600-usd-in-china-says-denza-z9-gt-ev-owner/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/z9gt_a.jpg",
+        note: ""
+    },
+    {
+        id: "cn902",
+        title: "シャオミが中国でYU7 GT スポーツ SUV を発売、価格は 5 万 7300 ドルから",
+        desc: "シャオミは中国市場でYU7 GTというパフォーマンスSUVを発売した。価格は5万7300ドルからで、カーニュース・チャイナが報道している。",
+        url: "https://carnewschina.com/2026/05/21/xiaomi-launches-yu7-gt-in-china-a-performance-suv-starting-at-57300-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-130-1200x900.png",
+        note: ""
+    },
+    {
+        id: "cn903",
+        title: "Xiaomi YU7標準版が3万4千ドルで、テスラModel Yに挑戦",
+        desc: "シャオミは中国市場向けにYU7 SUVの標準版を3万4千ドルで発売し、テスラModel Yと競合する。新モデルはエントリーグレードとしてラインナップを刷新した。",
+        url: "https://carnewschina.com/2026/05/21/xiaomi-launches-new-yu7-standard-edition-at-34300-usd-to-challenge-tesla-model-y-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-128-675x900.png",
+        note: ""
+    },
+    {
+        id: "cn904",
+        title: "ニオは、2026年第1四半期に連続黒字を達成する見込みです。",
+        desc: "ニオは2026年第1四半期で2期連続の黒字を達成した。自動車内装やシートに関する具体的な製品情報は記載されていないため、財務実績のみを要約する。",
+        url: "https://carnewschina.com/2026/05/21/nio-secures-second-consecutive-profitable-quarter-in-a-challenging-2026-q1/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: ["シート"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-127-e1779359908213_webhook_1500x900_q85_1779360183.jpg",
+        note: ""
+    },
+    {
+        id: "cn905",
+        title: "小鹏G X の発売から 12 時間で確定注文が 2 万 4,863 台に達しました",
+        desc: "小鹏GXは発売から12時間で2万4863台の確定注文を記録した。中国メディアのCarNewsChina.comが報じた。",
+        url: "https://carnewschina.com/2026/05/21/xpeng-gx-got-25000-firm-orders-in-12-hours-after-launching/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: ["AR"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-115-scaled-e1779330678547_webhook_1350x810_q85_1779331184.jpg",
+        note: ""
+    },
+    {
+        id: "cn906",
+        title: "テスラ、中国市場向けFSD（自動運転）機能の正式承認",
+        desc: "テスラは中国市場向けにFSD（完全自動運転）機能を正式に承認した。同機能は自動運転技術であり、中国国内での利用が開始される。",
+        url: "https://carnewschina.com/2026/05/21/tesla-officially-confirms-fsd-supervised-support-for-china-market/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-114-e1779329804275.png",
+        note: ""
+    },
+    {
+        id: "cn907",
+        title: "長安後援のガンフェンが、全固体電池で1100サイクルの達成に成功",
+        desc: "長安汽車の後援企業であるガンフェン・リチウムは、リチウム金属とシリコン技術を用いた全固体電池の開発を進めており、400Wh/kgで1100サイクルに達する性能を達成し、500Wh/kgの量産モデルも開発中である。",
+        url: "https://carnewschina.com/2026/05/21/changan-backed-ganfengs-solid-state-battery-hits-1100-cycles-with-400-wh-kg-and-500-wh-kg-in-production/",
+        source: "CarNewsChina - All",
+        date: "2026-05-21",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e4bfaee694b9e59bbee78987e981bfe5858de78988e69d83_webhook_1200x720_q85_1779326612.jpg",
+        note: ""
+    },
+    {
+        id: "cn908",
+        title: "BYDがインドネシアにDMハイブリッド技術を導入",
+        desc: "BYD はインドネシアで DM ハイブリッド技術を展開し、M6 DM MPV を初採用車種として発表した。同技術は自動車の内装やコックピットなど快適装備にも応用される。",
+        url: "https://cnevpost.com/2026/05/21/byd-expands-indonesia-lineup-dm-hybrid-tech/",
+        source: "CnEVPost - All",
+        date: "2026-05-21",
+        tags: ["コックピット", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052108032496.jpg",
+        note: ""
+    },
+    {
+        id: "cn909",
+        title: "小鹏汽車のCEOは、LiDAR 不要論を表明し、純粋なビジョン戦略を維持する意向を示した",
+        desc: "小鹏汽車のCEOは、LiDARは他の産業では必要だが、自動車業界では不要だと主張した。純粋なビジョン戦略を堅持し、自動運転技術の方向性を明確に示した。",
+        url: "https://cnevpost.com/2026/05/21/xpeng-defends-pure-vision-strategy-says-lidar-no-longer-necessary/",
+        source: "CnEVPost - All",
+        date: "2026-05-21",
+        tags: ["AR"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052105543380.jpg",
+        note: ""
+    },
+    {
+        id: "cn910",
+        title: "小鹏汽車のGXモデルが発売から12時間で2万4863台の受注を記録し、上位モデルの受注が全体の8割を",
+        desc: "小鹏GXは発売から12時間で2万4863台の確定受注を記録した。上位モデルであるUltra Flagshipが初受注の80%以上を占める。中国のEV業界に展開するXpengが展開するSUVで、高級内装やHMIなどの快適装備を備える。",
+        url: "https://cnevpost.com/2026/05/21/xpeng-gx-secures-24863-firm-orders-12-hours/",
+        source: "CnEVPost - All",
+        date: "2026-05-21",
+        tags: ["HMI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052102564150.jpg",
+        note: ""
+    },
+    {
+        id: "in941",
+        title: "Vinfast、2代目VF8電気SUVをベトナムで発表",
+        desc: "Vinfastは2代目VF8電気SUVをベトナムで発表。新世代モデルとしてラインナップ初となるが、小型化されバッテリー容量も減少。18hpの出力向上は維持される。",
+        url: "https://www.autocarindia.com/car-news/vinfast-reveals-second-generation-vf8-electric-suv-439784",
+        source: "Autocar India - All",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260521_131615_3b927932.jpg",
+        note: ""
+    },
+    {
+        id: "in942",
+        title: "タタ・ティアゴEVのフェイスリフト：外観変更と新装備",
+        desc: "タタは5月28日発売のティアゴEVフェイスリフトを公開。ヘッドライトやバンパー、アルミホイールを刷新し、インテリアにも新装備を追加した。",
+        url: "https://www.autocarindia.com/auto-features/tata-tiago-ev-new-vs-old-differences-and-similarities-explained-440560",
+        source: "Autocar India - All",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260521_104513_573f7556.jpg",
+        note: ""
+    },
+    {
+        id: "in943",
+        title: "メルセデス・ベンツ、インドでGLE/GLS「ナイトエディション」発売",
+        desc: "メルセデス・ベンツはインド市場向けに、GLEとGLSの「ナイトエディション」を限定発売。価格はGLEが1.05千万ルピー、GLSが1.41千万ルピー（税別）。ダークテーマのインテリアにNappaレザーやヘッドアップディスプレイ、GLEではエアサスペンションを標準装備。",
+        url: "https://www.autocarindia.com/car-news/mercedes-launches-gle-and-gls-night-edition-models-439782",
+        source: "Autocar India - All",
+        date: "2026-05-21",
+        tags: ["HUD", "ディスプレイ", "新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "night edition interior theme and nappa leather plus head-up display",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260521_103647_371cbcff.jpg",
+        note: ""
+    },
+    {
+        id: "in944",
+        title: "インド政府、ARAIにE25燃料の影響評価を指示",
+        desc: "インド政府は、E25燃料（25%エタノール混合）が既存車両に与える影響を、Automotive Research Association of India（ARAI）に調査させるよう指示した。E20燃料の普及後、E25燃料の導入に伴う車両への影響を評価する詳細な研究を命じた。",
+        url: "https://www.autocarindia.com/car-news/govt-tasks-arai-to-evaluate-how-e25-affects-e10-e20-compliant-cars-439778",
+        source: "Autocar India - All",
+        date: "2026-05-21",
+        tags: ["AR", "AI"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260521_063749_d8d1a38a.jpg",
+        note: ""
+    },
+    {
+        id: "in945",
+        title: "現代自動車、スポーツカー風ゲート付きマニュアルシフターを特許申請",
+        desc: "現代自動車はEVとICE両車種向けにゲート付きマニュアルシフターを特許申請。シフトバイワイヤー技術を採用し、自動モードへの切り替えも可能。ICE搭載時はコスト増となるが、EVでの採用が有力とされる。",
+        url: "https://www.rushlane.com/hyundai-patents-sports-car-like-gear-lever-for-mass-market-cars-12547044.html",
+        source: "RushLane",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        interiorScore: 89,
+        interiorReason: "gear lever and console image plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/05/hyundai-gated-manual-automatic-gearbox-patented.jpg",
+        note: ""
+    },
+    {
+        id: "in946",
+        title: "ニッサン・テクトン、7月9日インドでデビュー予定",
+        desc: "ニッサン・テクトンは7月9日にインドでデビューする。レノル・ドゥスターと共通プラットフォームを採用し、後部LEDライトバーやパトロールにインスパイアされたデザインが特徴。",
+        url: "https://gaadiwaadi.com/all-new-nissan-tekton-hybrid-suv-to-debut-in-india-on-july-19/",
+        source: "GaadiWaadi",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2025/10/Nissan-Tekton-2.jpg",
+        note: ""
+    },
+    {
+        id: "in947",
+        title: "メルセデスGLE/GLS Night Edition発売、価格1.05億ルピーから",
+        desc: "メルセデスGLEとGLSのNight Editionがインドで発売。外観はObsidian Black、内装は黒ナパレザーとアンサライトオーク木調。価格はGLE Night Edition 300d 4MATICが1.05億ルピーから。",
+        url: "https://www.indiacarnews.com/news/mercedes-gle-gls-night-editions-launched-prices-start-at-rs-1-05-cr-67898/",
+        source: "IndiaCarNews",
+        date: "2026-05-21",
+        tags: ["新素材"],
+    
+        interiorScore: 63,
+        interiorReason: "interior material and trim details (black Nappa leather, unsalaite oak wood trim",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/05/2-6.webp",
+        note: ""
+    },
+    {
+        id: "in948",
+        title: "2026年Tata Tiago/Facelift発表、360カメラ搭載",
+        desc: "Tata Motorsは2026年5月28日発売予定のTiago/Faceliftを公開。外観は大幅変更だが、内装や動力の詳細は未発表。360度カメラが新装備として確認された。",
+        url: "https://www.indiacarnews.com/news/2026-tata-tiago-tiago-ev-facelifts-revealed-360-camera-new-look-more-67890/",
+        source: "IndiaCarNews",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/05/1-3.webp",
+        note: ""
+    },
+    {
+        id: "in949",
+        title: "世界最大自動車メーカー：テスラが市場価値で首位、マールティ・マヒンドラも上位15",
+        desc: "自動車業界の評価は販売台数だけでなく、EVやAI技術への期待も反映される。市場価値で世界最大はテスラで、マールティ・マヒンドラも上位15社にランクインした。",
+        url: "https://www.autopunditz.com/post/world-s-largest-automakers-by-market-capitalization-tesla-leads-toyota-follows-byd-strengthens-it",
+        source: "Auto Punditz",
+        date: "2026-05-21",
+        tags: ["AI", "EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_1371012f2d074f84a74e572464a9d6ce~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us897",
+        title: "内務省、風力発電阻止のため10億ドルの石油会社への賄賂決定",
+        desc: "内務省は、法的根拠を捏造する前に、10億ドルの税金資金で外国石油会社を賄賂で offshore wind 開発停止に合意した。",
+        url: "https://electrek.co/2026/05/21/interior-dept-decided-on-its-1b-oil-bribe-to-stop-wind-power-before-it-had-a-reason/",
+        source: "Electrek",
+        date: "2026-05-21",
+        tags: [],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2022/08/SSE-Renewables-TotalEnergies_first-power-generation-from-the-Seagreen-offshore-wind-farm-1024x660-1.jpg?quality=82&#038;strip=all&#038;w=1200",
+        note: ""
+    },
+    {
+        id: "us898",
+        title: "V2H対応EVで停電時にも家庭電力を確保可能",
+        desc: "V2H（Vehicle-to-Home）技術搭載のEVは、停電時に家庭電力を供給できる。ただし、対応車種は限定的で、各メーカーの仕様を確認する必要がある。",
+        url: "https://electrek.co/2026/05/20/yes-an-ev-really-can-power-your-home-if-its-one-of-these/",
+        source: "Electrek",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/02/gm-energy-1-5.webp?w=1600",
+        note: ""
+    },
+    {
+        id: "eu859",
+        title: "NioのOnvo、大型5人乗りSUV「L80」を中国で発売",
+        desc: "Nioのオンボブランドは中国で3モデル目となる大型EV SUV「L80」を発売。車長約5.15m、85kWhバッテリー搭載でCLTC航続距離は最大605km。L90と同様のデザインだが3列から2列シートに変更。",
+        url: "https://www.electrive.com/2026/05/21/onvo-launches-large-five-seater-suv-l80/",
+        source: "Electrive",
+        date: "2026-05-21",
+        tags: ["シート", "EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/05/onvo-l80-2026-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu860",
+        title: "Volvo、Google Gemini AIカメラ統合で車内体験革新",
+        desc: "VolvoはGoogleと協力し、EX60などでGoogle Gemini AIカメラ統合を実演。車外環境のリアルタイム理解やGoogle Mapsの没入型ナビゲーション導入により、文脈認識型運転体験を創出する。",
+        url: "https://www.just-auto.com/news/volvo-cars-aims-for-google-gemini-ai-based-camera-integration/",
+        source: "Just Auto",
+        date: "2026-05-21",
+        tags: ["コネクテッド", "AI", "新素材"],
+    
+        interiorScore: 88,
+        interiorReason: "The article focuses on Google Gemini AI camera integration for in-cabin experien",
+        imageInterior: true,
+        country: "eu",
+        img: "https://www.just-auto.com/wp-content/uploads/sites/30/2026/05/VolvoGemini.webp",
+        note: ""
+    },
+    {
+        id: "eu861",
+        title: "Astemoと日立、SDV向けAI開発プラットフォーム共同構築",
+        desc: "Astemoと日立は、ソフトウェア定義車両向けにAI開発プラットフォームを共同で構築する。2027年3月までに開発環境を確立し、実走行データとデジタルツインシミュレーションを組み合わせる。両社は車両統合制御・AI能力とデジタルツイン環境を提供し、他社向けオープンシステム化を目指す。",
+        url: "https://www.automotiveworld.com/news/astemo-hitachi-team-up-on-ai-platform-for-sdvs/",
+        source: "Automotive World",
+        date: "2026-05-21",
+        tags: ["AI"],
+    
+        interiorScore: 7,
+        interiorReason: "partnership and AI platform news with no concrete interior product details",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/21122411/astemo-hitatchi-news.jpg",
+        note: ""
+    },
+    {
+        id: "eu862",
+        title: "トヨタ調査、PHEV所有者は充電を頻繁に行う実態を明らかに",
+        desc: "トヨタ支援の調査で、PHEV所有者の多くが定期充電を実施し、効率性に関する誤解が解明された。",
+        url: "https://electriccarsreport.com/2026/05/do-plug-in-hybrids-really-work-toyota-study-says-yes/",
+        source: "Electric Cars Report",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2025/10/2026-Toyota-RAV4-PHEV.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu863",
+        title: "DS N°7電動SUV、フランスで4万6990ユーロから発売",
+        desc: "DS N°7電動SUVは、WLTP航続距離740km、375馬力、高速充電機能を備え、フランスで4万6990ユーロから発売される。高級車ブランドDS Automobilesのフラッグシップモデルであり、プレミアム技術とラグジュアリーな快適性を備える。",
+        url: "https://electriccarsreport.com/2026/05/ds-n7-electric-suv-flagship-priced-from-e46990-in-france/",
+        source: "Electric Cars Report",
+        date: "2026-05-21",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/03/DS-N07.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in950",
+        title: "メルセデスGLE・GLS、インドで限定版「ナイトエディション」発売",
+        desc: "メルセデスベンツはインド市場向けに、高級SUVのGLEとGLSの限定モデル「ナイトエディション」を発売した。価格は1.05 Cr（ルピー）からで、グローバルシリーズの一部。",
+        url: "https://indianautosblog.com/mercedes-gle-gls-night-editions-launched-in-india-from-rs-105-cr-p328489",
+        source: "IndianAutosBlog",
+        date: "2026-05-21",
+        tags: [],
+    
         country: "in",
         img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
         note: ""
