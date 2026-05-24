@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-22〜2026-05-24",
+        analysis: {
+            jp: "日本の自動車内装トレンドを分析すると、新素材採用やカスタマイズ需要が拡大している[jp1083,jp1086,jp1090]。シートベルトストッパーや車体保護カバーなど、機能性とデザイン性の両立が重視される[jp1086]。モーターショーでの美容技術応用や有機EL、Dolby Atmos対応など[jp1084,jp1085,jp1089]、コネクテッド技術と音響進化も進む[jp1089]。HMI変化や1985年式車の修復事例から[jp1088,jp1091]、古愛着と新技術の融合が不可欠[jp1091]。サステナビリティと機能性両立、既存技術進化が今後の開発軸となる[jp1090]。",
+            cn: "中国市場では**コックピット**の高度化が顕著です（cn912）。EV航続距離310kmのBYDがDiPilot 300 LiDARをオプション化し（cn912）、Huawei技術搭載のVoyahは**AI**機能でコックピットを革新しています（cn917）。フォルクスワーゲンもCEAアーキテクチャでコックピットを強化し（cn916）、ID.UNYX 07 を新発売しています（cn918）。高級車ではBYDとシャネルの限定車、カンヌで81万ドルで落札されました（cn913）。森林酸素バーなど**素材**の健康志向も進出しています（cn915）。",
+            in: "インド市場における【ジャストインケース】への在庫戦略転換は、in951 によるサプライチェーンの強靭化への警鐘です。EV化とコネクテッド化の並行進展に伴い、安全性と快適性の両立が鍵となります。in953 または in957 における新素材や触感向上による差別化が求められています。",
+            us: "米国内装ニュースから**健康・ウェルネス**と**物理操作**のトレンドが浮き彫り[us902]。バックカメラ不具合[us899]やタッチスクリーンフリーズは、運転中の安全性向上への要請を示唆[us900]。一方、レクサスGX 550 Overtrail[us905]やSubaru SUV[us906]から、**高品質素材**や**快適性**への関心の高まりを確認[us906]。HEPAフィルターの課題を解消し[us902]、空気質向上と空調効率の両立が鍵[us902]。これらを踏まえ、健康志向と信頼性向上を両立する製品開発が必要[us903]。",
+            eu: "欧州内装向けニュース10件から開発示唆を抽出する。安全規制強化eu864とZ世代価値観変化eu869が鍵となる。HMI/AI技術eu870は新車競争eu872で差別化必須である。AdientのGM連続受賞eu868やステラントイスのAI提携eu873はサプライチェーン効率化を示唆する。EV充電インフラeu867と高級SUV需要eu865から、高級感と機能性の両立eu864が重要である。",
+        },
+        ideas: {
+            jp: [
+                { id: 976, img: "images/idea_976.png", title: "リサイクル素材でカスタム内装", desc: "廃棄されたカーペットやタイヤをリサイクルした素材を使った内装カスタマイズキット。車体保護やドレスアップのニーズに応えつつ、環境負荷も軽減。車主は自分の車にしか見えない、ecoで個性的な内装を楽しめる。うれしいのは、愛車への愛着が深まること。", imagePrompt: "Recycled car carpet and tire fragments transformed into premium interior trim pieces for a Japanese domestic sedan, brushed aluminum accents, soft ambient lighting from under-seat storage compartments, sustainable material texture visible in close-up, photorealistic automotive interior design, cinematic lighting with natural daylight, high detail, 4K quality" },
+                { id: 977, img: "images/idea_977.png", title: "ヒータ付きアームレスト進化版", desc: "豊田合成のヒータ付きアームレストをベースに、有機ELで温度を可視化。冷房時は青、暖房時は赤で表示し、車内温度管理を直感的に。BEVの省エネと連動し、スマホで設定も可能。運転手が寒い冬でも手が温まり、快適性が向上する。", imagePrompt: "Advanced armrest with integrated heating element and OLED temperature display in a futuristic Japanese vehicle cockpit, blue ambient lighting for cooling mode, red for heating mode, brushed aluminum trim, premium leather surface, holographic temperature indicators floating above, photorealistic automotive interior design, cinematic lighting with soft reflections, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 978, img: "images/idea_978.png", title: "スマートアイ・コックピット", desc: "BYDのDiPilot 300 LiDARやHuawei AI技術を基盤に、自動運転時でも運転者をサポートするスマートアイ機能を搭載したコックピットを提案します。運転中の安全を確保し、リラックスしたドライブを楽しめます。", imagePrompt: "Premium automotive interior cockpit with advanced smart eye tracking system, AI assistant interface floating on dashboard, LiDAR sensor integration, modern Chinese automotive design, dark luxury interior with blue ambient lighting, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 979, img: "images/idea_979.png", title: "LED陰影・森の息吹", desc: "豊田合成のLED陰影イルミネーション技術を応用し、森林酸素バーの空気清浄イメージを投影する照明システムを提案します。自然の息吹を感じながら、リラックスした空間を演出します。", imagePrompt: "Automotive interior with LED shadow illumination system projecting forest leaf patterns on ceiling and walls, nature-inspired green and brown lighting, oxygen bar concept with subtle mist effect, luxury materials like brushed aluminum and sustainable fabric, photorealistic 3D render, soft cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 980, img: "images/idea_980.png", title: "バイオ素材コンソール", desc: "再生材コンソールと天然素材調の触感で、サステナブルな高級感を実現。通気性を兼ね備えた新素材シートと組み合わせ、環境に配慮した内装で乗員が心地よく過ごせる喜びを提供。", imagePrompt: "Eco-friendly car interior concept, sustainable console made of recycled bamboo and natural fiber textures, warm beige and sage green color palette, ambient soft lighting, premium sustainable automotive design, photorealistic rendering, high detail, 4K quality" },
+                { id: 981, img: "images/idea_981.png", title: "LED安全イルミ拡張", desc: "タタの360度カメラやADAS機能と連携したLED通知システム。衝突前や歩行者検知時に、足元やドアトリに安全色の光で警告。ドライバーと乗員の安心感と安心を光で可視化。", imagePrompt: "Automotive safety illumination concept, LED strips integrated into door trim and floor mat, soft amber and cool blue light patterns, warning indicators projected on footwell, night driving scene, modern vehicle cockpit, photorealistic 3D render, cinematic lighting, high detail" },
+            ],
+            us: [
+                { id: 982, img: "images/idea_982.png", title: "抗菌・清浄コックピットシステム", desc: "HEPAフィルターの空調効率低下を解消。抗菌素材と光触媒を内装に統合し、花粉・ウイルスを99.97%除去。運転中に清潔で安心な空間を演出。家族連れやアレルギー持ちが快適に過ごせる。", imagePrompt: "Premium car interior with integrated air purification system in dashboard, HEPA filter visible, clean white and soft green lighting, mist effect from vents, antimicrobial material texture, photorealistic 3D render, modern automotive design, 4K quality" },
+                { id: 983, img: "images/idea_983.png", title: "陰影投影式コンソールイルミネーション", desc: "既存のLED陰影イルミネーションを進化。コンソール表面に自然な木目や幾何学模様を投影。物理ボタンの質感と調和。運転中に癒やされる空間を創出。高級感と機能性を両立。", imagePrompt: "Luxury car center console with dynamic shadow projection system, wood grain patterns on surface, soft warm LED lighting, physical button integration, brushed metal and leather materials, cinematic lighting, photorealistic automotive interior, 4K detail" },
+            ],
+            eu: [
+                { id: 984, img: "images/idea_984.png", title: "自動化内装組立ライン", desc: "ADASセンサー装着やシートベルト確認機能対応の自動組立ラインを導入。人手不足解消と品質均一化で生産効率向上。コスト削減で価格競争力強化。生産現場の負担軽減で、熟練工の定着率もアップします。", imagePrompt: "Automated automotive interior assembly line with robotic arms installing ADAS sensors and seatbelt sensors, clean modern factory environment, sleek metallic and white materials, bright industrial LED lighting, photorealistic rendering, high detail, 4K quality" },
+                { id: 985, img: "images/idea_985.png", title: "AIグリップステアリング", desc: "グリップセンサ付きHMIステアリングをEV用に進化。手放し検知と多機能スイッチを統合。Z世代が求める安全装備とAI技術を組み合わせて、運転中もスマホ操作を可能にし、車内エンターテインメントを享受できる体験を提供。", imagePrompt: "Advanced AI-enabled steering wheel with integrated grip sensors and multifunction buttons, premium black leather with silver accents, modern vehicle interior at night, holographic interface elements on dashboard, ambient lighting with blue and purple glow, photorealistic 3D render, cinematic lighting" },
+            ],
+        }
+    },
+{
         date: "2026-05-21",
         analysis: {
             jp: "日本の自動内装トレンドは**HMI**や**AI**の進化が顕著[jp1079][jp1082]。特に**ディスプレイ**の大型化[jp1074][jp1080]と**デジタルミラー**の普及[jp1075]が進行中だが、これら高機能化の背景には**静粛性**や**質感**の向上が求められている[jp1076]。EV化に伴い**熱管理**や**香り**への関心も高まっている[jp1077]。さらに**新素材**や**高級感**の追求[jp1074]は、内装の**高級感**を高める方向性で、**フィット感**や**静粛性**を損なわない設計が鍵となる。",

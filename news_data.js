@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-22 01:12";
+window.NEWS_UPDATED_AT = "2026-05-25 02:08";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -59512,6 +59512,751 @@ window.LOADED_NEWS_DATA = [
     
         country: "in",
         img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    // 2026-05-22 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1084",
+        title: "MTG・レクサス・アイシンが北京モーターショー2026で「リファ ハイドレイド」車載コンセプトを発表",
+        desc: "MTG、レクサス、アイシンは北京モーターショー2026で「リファ ハイドレイド」技術を車載コンセプトとして発表した。美容機器で採用された世界最小水粒子生成技術を排ガス処理触媒構造に応用し、車内空間に美容テクノロジーを実装する。",
+        url: "https://news.yahoo.co.jp/articles/80762def336e27a7fbf3f6602dd88cb203fa6eb6?source=rss",
+        source: "carview!",
+        date: "2026-05-22",
+        tags: [],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260522-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1088",
+        title: "マツダ新型CX-5、エアコンスイッチをディスプレイに集約した理由と開発の舞台裏",
+        desc: "マツダ新型CX-5は、センターディスプレイを拡大し物理スイッチを減らした。開発コンセプトは「新世代エモーショナル・デイリーコンフォート」。空調操作はデザイン性を優先し、開発チームは意見が分かれた。今後、空調ウィジェット常時表示や物理スイッチ追加パーツを検討中。",
+        url: "https://news.yahoo.co.jp/articles/63131d0d35f4d8afe78a804ceeff589afdd060e2?source=rss",
+        source: "VAGUE",
+        date: "2026-05-22",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 97,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260522-10426586-vague-000-3-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1089",
+        title: "カロッツェリア「DMH-SF1000」、業界初Dolby Atmos対応で4スピーカーで立体音響",
+        desc: "パイオニア発売のカロッツェリア「DMH-SF1000」は、国内市販カーAV業界初となるDolby Atmos対応ディスプレイオーディオ。パイオニア独自の技術により、一般的な4スピーカー環境でも立体音響を楽しめる。",
+        url: "https://news.yahoo.co.jp/articles/7c4e87d3396b681dce96c25547682720c03ad732?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-22",
+        tags: ["ディスプレイ", "音響"],
+    
+        interiorScore: 93,
+        interiorReason: "interior audio system and HMI interface",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260522-00000021-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1091",
+        title: "1985年式日産サニーカリフォルニアの剥離ステアリングを純正を活かす方法",
+        desc: "1985年式B11型日産サニーカリフォルニアのステアリングホイールはウレタン剥離と日焼けで劣化。純正交換は困難なため、革巻きやカバー装着による修復を検討。",
+        url: "https://news.yahoo.co.jp/articles/3b5ca898c58acbb9d2dd0c73920ecf9374eca077?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-05-22",
+        tags: ["新素材"],
+    
+        interiorScore: 90,
+        interiorReason: "steering wheel restoration and dashboard instrument cluster details; interior ac",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260522-01245514-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us900",
+        title: "Polestar、顧客要望でタッチスクリーンから物理ボタンへ方針転換",
+        desc: "Polestar CEOのMichael Lohschellerは、顧客要望によりタッチスクリーン中心の戦略を見直し、2026年発売のPolestar 3で物理ボタンを復活させる予定。欧州NCAPや中国MIITの安全基準強化も物理制御の導入を後押ししている。",
+        url: "https://www.motor1.com/news/796726/polestar-more-buttons-future-models/",
+        source: "Motor1",
+        date: "2026-05-22",
+        tags: ["AR", "ディスプレイ", "安全"],
+    
+        interiorScore: 93,
+        interiorReason: "HMI strategy shift from touchscreen to physical buttons, dashboard layout, and c",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/rKJ1jO/s3/polestar-3-interior.jpg",
+        note: ""
+    },
+    {
+        id: "us903",
+        title: "2026年マツダCX-5、運転支援・情報システムに不具合",
+        desc: "2026年式マツダCX-5は、運転支援システムと情報システムに不具合が発生。アダプティブクルーズコントロールの警告表示や、タッチスクリーン操作のフリーズが確認された。",
+        url: "https://www.caranddriver.com/reviews/a71271745/2026-mazda-cx-5-premium-plus-reliability-maintenance/",
+        source: "Car and Driver",
+        date: "2026-05-22",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 53,
+        interiorReason: "infotainment and driver-assistance HMI glitches are relevant to interior UX plan",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/994b5d77-b5cd-4597-817b-4d3636fd97df.jpg",
+        note: ""
+    },
+    {
+        id: "us904",
+        title: "2027年式メルセデス・ベンツEQE SUVのレビューと仕様",
+        desc: "2027年式メルセデス・ベンツEQE SUVは、MSRP$67,000〜$73,000で、84〜98MPGeの走行距離を誇る。12.8インチタッチスクリーンやBurmesterオーディオを備え、後部座席は7個のキャリーオンスーツケースを積める。",
+        url: "https://www.caranddriver.com/mercedes-benz/eqe-suv-2027",
+        source: "Car and Driver",
+        date: "2026-05-22",
+        tags: ["ディスプレイ", "シート", "音響"],
+    
+        interiorScore: 60,
+        interiorReason: "12.8-inch touchscreen and Burmester audio mentioned in text; rear seat luggage c",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/2026-mercedes-benz-eqe-320148-695d20d50d4ec.jpg",
+        note: ""
+    },
+    {
+        id: "us905",
+        title: "2026 Lexus GX 550 Overtrail：夢のファミリーSUV",
+        desc: "2026年式レクサスGX 550 Overtrailは、双ターボV6エンジン（349馬力）とフルタイム4WDを備えた夢のファミリーSUV。内装には統合型インフォテインメントスクリーンやヒーター付きシート、USB-Cポートが搭載され、オフロード性能も高い。",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/dream-family-suv-2026-lexus-gx-550-overtrail-45135364?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-05-22",
+        tags: ["ディスプレイ", "コネクテッド", "AI", "シート"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/05/22/11381/dream-family-suv-2026-lexus-gx-550-overtrail.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "eu864",
+        title: "Euro NCAP、ADASテスト見直しで実世界活用と適応技術推進",
+        desc: "欧州安全機関Euro NCAPは、ADASテストを現実世界でのシステム利用へ見直し、ドライバー個人への適応技術導入を促す。2022年より義務化されたAEBやISAなど、2026年5月時点での課題として、ドライバーの意図を判別する監視カメラや、シートベルト装着確認機能の強化が挙げられる。",
+        url: "https://www.autocar.co.uk/car-news/consumer/end-bings-and-bongs-euro-ncap-overhauls-adas-testing",
+        source: "AUTOCAR UK",
+        date: "2026-05-22",
+        tags: ["シート", "安全"],
+    
+        interiorScore: 72,
+        interiorReason: "ADAS testing overhaul with focus on driver monitoring and seatbelt confirmation",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/fiat-600e-rt-2024-22.jpg?itok=0WcydlVN",
+        note: ""
+    },
+    {
+        id: "eu865",
+        title: "5代目ランドローバーディスカバリー、10周年を迎える高級SUV",
+        desc: "2016年発表の5代目ランドローバーディスカバリーは、7人乗りプレミアムSUVとして10周年を迎える。英国市場では2017年初頭に発売され、長寿命なモデルとして定着している。",
+        url: "https://www.autocar.co.uk/car-review/land-rover/discovery",
+        source: "AUTOCAR UK",
+        date: "2026-05-22",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/land-rover-discovery-tempest-review-2026-001.jpg?itok=Kr-LsvVH",
+        note: ""
+    },
+    {
+        id: "cn917",
+        title: "Voyah Taishan X8、中国で発売開始、Huawei 技術搭載",
+        desc: "Voyah Taishan X8は中国で5人乗りSUVとして発売され、4万3100ドルから販売を開始する。Huaweiの技術や800V電圧架構を採用し、車内インテリアやコックピットに先進的な機能を備える。",
+        url: "https://carnewschina.com/2026/05/22/voyah-taishan-x8-five-seater-suv-officially-launches-in-china-starting-from-43100-usd/",
+        source: "CarNewsChina - EV",
+        date: "2026-05-22",
+        tags: ["AI", "コックピット"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-145-e1779441604302_webhook_1500x900_q85_1779442095.jpg",
+        note: ""
+    },
+    {
+        id: "cn919",
+        title: "シャオミEVは深圳モーターショーでYU7シリーズの全ラインナップを展示",
+        desc: "2026 年 5 月 29 日に開幕する深圳モーターショーで、シャオミ EV は YU7 標準版（23 万 3500 元）と YU7 GT（38 万 9900 元）を含む全ラインナップを展示する。同社は、テスラ モデル Y との販売競争を強化する狙いである。",
+        url: "https://cnevpost.com/2026/05/22/xiaomi-to-showcase-full-lineup-shenzhen-auto-show/",
+        source: "CnEVPost - All",
+        date: "2026-05-22",
+        tags: ["EV"],
+    
+        interiorScore: 30,
+        interiorReason: "company event announcement with no interior product details",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052210275193.jpg",
+        note: ""
+    },
+    {
+        id: "cn920",
+        title: "Voyah、ファーウェイ技術搭載のTaishan X8 SUVを発売",
+        desc: "VoyahはファーウェイのLiDAR技術を採用した泰山X8 SUVを発売し、PHEVとBEVの両動力システムを提供する。",
+        url: "https://cnevpost.com/2026/05/22/voyah-launches-taishan-x8-5-seat-suv/",
+        source: "CnEVPost - All",
+        date: "2026-05-22",
+        tags: ["AR", "AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052209572534.jpg",
+        note: ""
+    },
+    {
+        id: "in951",
+        title: "インド自動車メーカー、在庫戦略を「ジャストインタイム」から「ジャストインケース」へ転換",
+        desc: "インドの自動車メーカーは、地政学リスクや半導体不足などを背景に、重要部品の在庫期間を30〜45日から3〜6ヶ月へ延長する「ジャストインケース」戦略へ移行している。マヒンドラやタタ・モーターズ、マルチ・スズキなどがサプライチェーンの強靭化を進める中、輸入部品やレアアースへの依存リスクも懸念される。",
+        url: "https://auto.economictimes.indiatimes.com/news/auto-components/automakers-remodel-supply-chain-strategy/131255071",
+        source: "ETAuto - Auto Components",
+        date: "2026-05-22",
+        tags: [],
+    
+        interiorScore: 12,
+        interiorReason: "supply chain strategy shift (just-in-time to just-in-case) with no interior prod",
+        imageInterior: false,
+        country: "in",
+        img: "https://etimg.etb2bimg.com/thumb/img-size-171174/131255071.cms",
+        note: ""
+    },
+    {
+        id: "in955",
+        title: "2026 Honda City Facelift: デリで発表、HMI画面拡大とハイブリッド搭載",
+        desc: "2026年式ホンダ・シティがインドで発表された。外観を刷新し、HMI画面を拡大。自然吸気エンジンとハイブリッドの2種類をラインナップする。",
+        url: "https://www.indiacarnews.com/news/2026-honda-city-facelift-launched-in-india-new-look-bigger-screen-hybrid-67902/",
+        source: "IndiaCarNews",
+        date: "2026-05-22",
+        tags: ["HMI"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/05/3-1.webp",
+        note: ""
+    },
+    {
+        id: "in958",
+        title: "タタ・モーターズ、ケープタウンで最大規模の商用車展示会を開催",
+        desc: "タタ・モーターズは南アフリカのケープタウンで、電気トラックやバスを含む11台の商用車ポートフォリオを展示。アフリカ市場への拡大を強調した。",
+        url: "https://www.autopunditz.com/post/tata-motors-commercial-vehicle-portfolio-cape-town",
+        source: "Auto Punditz",
+        date: "2026-05-22",
+        tags: [],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_f81b26dea0bf4d1aa14ff90a519b3db0~mv2.jpg/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us908",
+        title: "2027年Chevy Equinox EVとBlazer EVにアップデート",
+        desc: "2027年モデルのChevy Equinox EVとBlazer EVは、既存モデルの不満点の解消を目的としたアップデートを受ける予定である。",
+        url: "https://electrek.co/2026/05/22/chevy-equinox-blazer-evs-gain-few-key-updates-2027/",
+        source: "Electrek",
+        date: "2026-05-22",
+        tags: ["HMI", "EV"],
+    
+        interiorScore: 28,
+        interiorReason: "The article mentions updates to fix complaints but lacks specific interior detai",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2025/03/Chevys-Blazer-EV-SS-1.jpeg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "eu867",
+        title: "NY州がEVグリッド統合プロジェクトに600万ドルを交付",
+        desc: "NY州はEV充電の柔軟性向上やコスト削減を目的し、7プロジェクトに600万ドルを交付。廃棄物収集車や無線充電、熱エネルギー貯蔵など多様な車両・システムを対象とする。",
+        url: "https://www.electrive.com/2026/05/22/new-york-awards-6-million-for-vehicle-grid-integration-projects/",
+        source: "Electrive",
+        date: "2026-05-22",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2024/03/gravity-newyork-manhattan-2024-e1709638908294-400x266.jpeg",
+        note: ""
+    },
+    {
+        id: "eu868",
+        title: "Adient、5年連続GMサプライヤー・オブ・ザ・イヤー受賞",
+        desc: "Adientは、GMとの1987年からの長年続くパートナーシップにより、5年連続でGMサプライヤー・オブ・ザ・イヤー（シートのカテゴリー）を受賞した。",
+        url: "https://www.automotiveworld.com/news/adient-wins-fifth-straight-gm-supplier-of-year-award/",
+        source: "Automotive World",
+        date: "2026-05-22",
+        tags: ["シート"],
+    
+        interiorScore: 40,
+        interiorReason: "seat supplier award with no interior image",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/22182935/adient-gm-supplier-of-the-year-2026.jpg",
+        note: ""
+    },
+    {
+        id: "eu869",
+        title: "マツダ調査、Z世代69%が車より家を選ぶ",
+        desc: "マツダの調査で、Z世代の69%が新車購入を家購入より優先すると回答。安全装備（94%）や車内技術（93%）が重視され、オーディオシステムは64%が車両評価の指標と見ている。",
+        url: "https://www.automotiveworld.com/news/mazda-finds-69-of-gen-z-choose-car-over-home/",
+        source: "Automotive World",
+        date: "2026-05-22",
+        tags: ["安全", "音響"],
+    
+        interiorScore: 78,
+        interiorReason: "The article focuses on Gen Z consumer priorities, specifically highlighting 'cab",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/22174437/mazda-supporting-stat_v2-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu870",
+        title: "Candera CGI Studio 3.16で自動車HMIテンプレート追加",
+        desc: "CanderaはHMI開発プラットフォームCGI Studio 3.16をリリースし、自動車計器クラスターや車載情報エンターテインメントのテンプレート、Infineon Traveo II Body MCUなどへの対応を追加した。",
+        url: "https://www.automotiveworld.com/news/candera-cgi-studio-3-16-adds-automotive-hmi-templates/",
+        source: "Automotive World",
+        date: "2026-05-22",
+        tags: ["HMI"],
+    
+        interiorScore: 82,
+        interiorReason: "HMI development platform update with automotive templates for instrument cluster",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/22122050/candera-cgi-studio-3-16-news.jpg",
+        note: ""
+    },
+    {
+        id: "eu873",
+        title: "ステラントイスとクアルコム、次世代EV向け技術提携を強化",
+        desc: "ステラントイスとクアルコムは、次世代EV向けにSnapdragon Digital Chassisプラットフォームを統合し、AI・ADAS機能強化を推進。aiMotiveの統合も検討。",
+        url: "https://electriccarsreport.com/2026/05/stellantis-expands-qualcomm-partnership-to-power-next-generation-evs/",
+        source: "Electric Cars Report",
+        date: "2026-05-22",
+        tags: ["AI", "EV", "安全"],
+    
+        interiorScore: 8,
+        interiorReason: "partnership and platform news with no interior product detail",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Stellantis-Qualcomm.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in959",
+        title: "2026年ホンダ・シティのインド発売：新機能と安全装備強化",
+        desc: "2026年ホンダ・シティがインドで発売。10.1インチタッチスクリーンやデジタルメーター、6エアバッグ、360度カメラ、レベル2ADASなど新機能と安全装備が強化され、1.5Lエンジンも継続。",
+        url: "https://indianautosblog.com/2026-honda-city-facelift-launched-in-india-from-12-lakh-p328492",
+        source: "IndianAutosBlog",
+        date: "2026-05-22",
+        tags: ["ディスプレイ", "安全"],
+    
+        interiorScore: 61,
+        interiorReason: "10.1-inch touchscreen and digital meter mentioned in text provide some HMI/cockp",
+        imageInterior: false,
+        country: "in",
+        img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    {
+        id: "in960",
+        title: "2026年ホンダ・シティ、インドでフェイスリフト。通風シート搭載",
+        desc: "2026年ホンダ・シティはインドで2度目のフェイスリフトを実施。1.5L NA/Hybrid搭載で、通風シートやアンビエントライティングなど快適装備を強化。",
+        url: "https://paultan.org/2026/05/22/2026-honda-city-facelift-debuts-in-india/",
+        source: "Paul Tan's Automotive News",
+        date: "2026-05-22",
+        tags: ["シート", "イルミ"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://paultan.org/image/2026/05/2026-Honda-City-facelift-India-launch-event-35-1200x628.jpg",
+        note: ""
+    },
+    // 2026-05-23 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1086",
+        title: "スズキ・スーパーキャリイのキャビン背面下部を保護するカバー",
+        desc: "RT商会がスズキ・スーパーキャリイ向けに、キャビン背面下部を保護するカバーを発売。6点構成で国内生産のステンレス・アルミ素材を採用し、キズ防止とドレスアップを両立。取り付けも簡単で、軽トラの荷台カスタマイズに最適だ。",
+        url: "https://news.yahoo.co.jp/articles/f24cae543fd0056490c4d55771e4d9dc9217a6f9?source=rss",
+        source: "MotorFan",
+        date: "2026-05-23",
+        tags: ["新素材", "カスタマイズ"],
+    
+        interiorScore: 93,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260523-01458817-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1087",
+        title: "ダブルエイトがトヨタ「ランドクルーザー250」専用パーツを多数発表",
+        desc: "四駆カスタムブランド「ダブルエイト」が、2024年登場のトヨタ「ランドクルーザー250」向けに専用パーツをラインアップ。組み合わせは250通り以上で、フロントバンパーカバーや車検対応のオーバーフェンダーなど、外観を刷新するアイテムが多数用意されている。",
+        url: "https://news.yahoo.co.jp/articles/813198f91e443cf16dc693650d3f086b974a3187?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-05-23",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 90,
+        interiorReason: "exterior-only parts (bumpers, fenders, grille) with no interior product details;",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260523-00010003-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1090",
+        title: "クラフトプラスがトヨタ「タウンエース」を「超豪華」車中泊カスタム！",
+        desc: "クラフトプラスは、トヨタ「タウンエース」を「超豪華」車中泊カスタムカーに改造。全面ウッド内装や大人2人が寝られるベッドキットを「匠の職人」が仕上げ。2026年5月の「FIELD STYLE TOKYO」で展示された。",
+        url: "https://news.yahoo.co.jp/articles/355d91971447f9833e986495773b31bac9ef143b?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-23",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 93,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260523-01062292-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us899",
+        title: "ホンダ、バックカメラ不具合で6万台のSUVを回収",
+        desc: "ホンダは、2024年式アキュラZDXおよび2024〜2025年式ホンダプロローグ計5万9887台を回収。バックカメラハウジングの接着不良により水分浸入が起き、画面が白くなる不具合を解消するため、カメラを交換する。",
+        url: "https://www.motor1.com/news/796769/honda-recalls-suvs-backup-cameara-failures/",
+        source: "Motor1",
+        date: "2026-05-23",
+        tags: [],
+    
+        interiorScore: 60,
+        interiorReason: "seat and display plus cabin image; defect/recall cap",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/rKJ1lY/s3/2024-honda-porlogue.jpg",
+        note: ""
+    },
+    {
+        id: "us902",
+        title: "HEPAカーボンフィルターのメリット・デメリットとコスト",
+        desc: "HEPAフィルターは花粉やウイルスを99.97%除去するが、空気抵抗で空調性能が低下し、交換コストは標準より高い。",
+        url: "https://www.jalopnik.com/2172797/pros-and-cons-hepa-car-cabin-air-filter/",
+        source: "Jalopnik",
+        date: "2026-05-23",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/what-are-the-pros-and-cons-of-hepa-cabin-air-filters/l-intro-1778764214.jpg",
+        note: ""
+    },
+    {
+        id: "cn915",
+        title: "BYD、300万台で事故率を1/6に削減",
+        desc: "BYDは支援運転システムを300万台に展開し、テストシナリオでの重大事故発生率を1/6に削減した。",
+        url: "https://carnewschina.com/2026/05/23/byd-assisted-driving-slashes-severe-accident-rate-to-one-sixth-across-3-million-vehicles/",
+        source: "CarNewsChina - All",
+        date: "2026-05-23",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e8bdace9ab98e6b885-1-2_webhook_1350x810_q85_1779569031.jpg",
+        note: ""
+    },
+    {
+        id: "cn916",
+        title: "フォルクスワーゲンが中国で小鹏汽車と共同開発した ID.UNYX 07 を発売",
+        desc: "フォルクスワーゲンが中国市場向けに、XPeng と共同開発した EV「ID.UNYX 07」を発売しました。起価は 1 万 6200 ドルで、航続距離は 558 キロです。内装はコックピットデザインに注力しており、快適装備を備えています。",
+        url: "https://carnewschina.com/2026/05/23/volkswagen-launches-id-unyx-07-in-china-co-developed-with-xpeng-starting-at-16200-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-05-23",
+        tags: ["コックピット", "EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-168-e1779522106448.png",
+        note: ""
+    },
+    {
+        id: "cn918",
+        title: "VW は中国での EV ラインアップを拡大。ID.UNYX 07 と 06 を新発売",
+        desc: "VWは中国向けのEVラインアップを拡大し、CEAアーキテクチャを採用したID.UNYX 07 セダン（109,900元）とアップグレード版のID.UNYX 06 SUVを発売しました。",
+        url: "https://cnevpost.com/2026/05/23/vw-launches-id-unyx-07-06-china/",
+        source: "CnEVPost - All",
+        date: "2026-05-23",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052313185796.jpg",
+        note: ""
+    },
+    {
+        id: "in954",
+        title: "新クレタにPleos Connect搭載、技術的優位性確立",
+        desc: "新ハイアンディクレタにPleos Connect先進情報システムが搭載され、運転支援やナビゲーション機能を統合した大型中央スクリーンを採用。ソフトウェア定義車両（SDV）化によりOTA更新で機能拡張が可能で、ハイブリッド化やAWD、レベル2+ ADASなど快適装備も強化される。",
+        url: "https://www.rushlane.com/new-hyundai-creta-spied-with-pleos-screen-in-india-12547230.html",
+        source: "RushLane",
+        date: "2026-05-23",
+        tags: ["ディスプレイ", "コネクテッド", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "infotainment screen and cockpit system mentioned in text plus interior image sho",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/05/3rd-gen-hyundai-creta-spied-testing-cover.jpg",
+        note: ""
+    },
+    {
+        id: "in956",
+        title: "タタとステラントが新Jeep SUVを共同開発、インドでプラットフォーム設計",
+        desc: "タタ・モーターズとステラントは2006年の提携を深め、2028年発売予定の新Jeep SUVをインドでプラットフォーム設計・組み立てする。ランジャンガオン工場は2017年からJeepコンパス生産を開始し、2026年に20周年を迎えた。",
+        url: "https://www.autopunditz.com/post/tata-stellantis-global-jeep-suv-india",
+        source: "Auto Punditz",
+        date: "2026-05-23",
+        tags: [],
+    
+        interiorScore: 12,
+        interiorReason: "partnership and platform development news with no specific interior product deta",
+        imageInterior: false,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_55b22ec9d695475aaa44528aab3eb30d~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in957",
+        title: "2026年タタ・ティアゴのインテリア一新：デジタルクラスタと360度カメラ搭載",
+        desc: "タタ・モーターズは2026年ティアゴのフェイスリフトで、デジタルインストルメントクラスター、10.25インチタッチスクリーン、後部ACベンチレーター、Type-Cポート、360度カメラなどを搭載。価格発表は2026年5月28日予定。",
+        url: "https://www.autopunditz.com/post/2026-tata-tiago-facelift-interior-features",
+        source: "Auto Punditz",
+        date: "2026-05-23",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 92,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_5d287e7e836c4fb2a26fa260e7332d8e~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu872",
+        title: "トヨタハイランダーEVとレクサスTZが参入、3列EV SUV競争激化",
+        desc: "3列EV SUV市場でKia EV9やHyundai Ioniq 9が基準を設ける中、2027年発売のトヨタハイランダーEVが参入。さらに高級モデルのレクサスTZも新登場し、競争が激化している。",
+        url: "https://electriccarsreport.com/2026/05/three-row-electric-suv-showdown-toyota-highlander-ev-vs-kia-ev9-vs-hyundai-ioniq-9-vs-lexus-tz/",
+        source: "Electric Cars Report",
+        date: "2026-05-23",
+        tags: ["AI", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Three-row-suv-comparation-2026.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    // 2026-05-24 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1083",
+        title: "デザイン重視のシートベルトストッパー5選をピックアップ",
+        desc: "シートベルトの圧迫感から解放される「シートベルトストッパー」をデザイン重視で5選紹介。SEIWAのカーボン調やEXEAのカッパー色など、車内インテリアに馴染む素材やロック機構を備えた製品を掲載。",
+        url: "https://news.yahoo.co.jp/articles/9c33a8d5737b0c8cf7092ada45479969f59a7d92?source=rss",
+        source: "レスポンス",
+        date: "2026-05-24",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 92,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260524-00000020-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1085",
+        title: "パナソニック「ストラーダF1X PREMIUM10」10型有機EL搭載",
+        desc: "スズキ・ジムニー向けパナソニック「ストラーダF1X PREMIUM10」は、10型有機ELディスプレイとDYNABIGスイングディスプレイを採用し、YouTubeやTVerなどの動画配信サービス視聴やApple CarPlay/Android Auto対応で、エンタメ機能とスマホ連携を強化したナビゲ",
+        url: "https://news.yahoo.co.jp/articles/cf67949203dcf970dada8ae0e090a423934323d0?source=rss",
+        source: "MotorFan",
+        date: "2026-05-24",
+        tags: ["AR", "ディスプレイ", "コネクテッド"],
+    
+        interiorScore: 87,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260524-01485322-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us901",
+        title: "2026年Skoda Elroq 60：EVの硬派面は優秀だが、シートやペダル操作は未熟",
+        desc: "2026年Skoda Elroq 60は、リアドライブと165kW DC充電で効率性・走行性能に優れるが、マニュアルシートやワンペダル走行の欠如が課題。価格AU$49,990で、Kia EV3やGeely EX5と競合する欧州EV SUV。",
+        url: "https://www.carscoops.com/2026/05/skoda-elroq-60-review/",
+        source: "CarScoops",
+        date: "2026-05-24",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 38,
+        interiorReason: "review mentions seat and pedal operation issues but lacks specific interior prod",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/tfgewvd-c-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us906",
+        title: "2026年Subaru SUV 7モデルの内装空間比較",
+        desc: "2026年Subaru SUV 7モデルの内装空間を比較。Ascentはブラウンナパレザー、CrosstrekはStarTexアップホリステリ、SolterraはHarman Kardonオーディオ、Trailseekerは放射式足元暖房など、各車の特徴的な内装装備や空間容量が記載されている。",
+        url: "https://www.topspeed.com/every-subaru-suv-ranked-interior-space/",
+        source: "Top Speed",
+        date: "2026-05-24",
+        tags: ["AR", "AI", "新素材", "音響"],
+    
+        interiorScore: 93,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2023/11/screenshot-s7d1-scene7-com-2023-10-31-20_32_09.jpg",
+        note: ""
+    },
+    {
+        id: "us907",
+        title: "Kia 太陽ルーフ訴訟、12 年間の裁判後に却下",
+        desc: "Kia 太陽ルーフ訴訟は、2011-2015 年モデルのソレント、スポータージュ、オプティマ（ハイブリッド含む）など対象車両の訴訟が却下された。裁判所は、NHTSA が調査し欠陥を認めなかったことや、原告が具体的な欠陥証拠を提示しなかったため、訴訟を却下した。",
+        url: "https://www.carcomplaints.com/news/2026/kia-exploded-sunroof-lawsuit-dismissed.shtml",
+        source: "CarComplaints",
+        date: "2026-05-24",
+        tags: [],
+    
+        interiorScore: 59,
+        interiorReason: "sunroof glass breakage and trim frame detail",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.carcomplaints.com/news/images/kia-exploding-sunroof-lawsuit-dismissed.jpg",
+        note: ""
+    },
+    {
+        id: "eu866",
+        title: "3万ポンド以下で3車：Vauxhall Insignia、Fiat 124 Spider、Hyund",
+        desc: "新車価格高騰に対し、Kia Sportageより安価な3車（Vauxhall Insignia、Fiat 124 Spider、Hyundai Ioniq Electric）を3万ポンド以下で提案。",
+        url: "https://www.autoexpress.co.uk/features/369651/three-car-garage-vauxhall-insignia-fiat-124-spider-and-hyundai-ioniq-electric-ps30k",
+        source: "Auto Express",
+        date: "2026-05-24",
+        tags: ["HMI", "AI"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--bv3BRmw2--/t_rss_image_w_845/v1779459101/autoexpress/2026/05/Three%20car%20garage%20for%20%C2%A330k%20-%20header%20image.jpg",
+        note: ""
+    },
+    {
+        id: "cn911",
+        title: "奇瑞オモダC9が刷新され、ICE/PHEVモデルで1万8400ドルから発売",
+        desc: "奇瑞のオモダブランドから、中国国内では2027年式C9 SUVが「Exeed Yaoguang」として刷新され、1万8400ドルから販売を開始します。車内は「森林酸素バー」を謳い、ホルムアルデヒドなどの4つのゼロを達成。",
+        url: "https://carnewschina.com/2026/05/24/cherys-omoda-launches-c9-suv-refresh-ice-phev-starting-at-18400-usd-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-05-24",
+        tags: ["EV"],
+    
+        interiorScore: 63,
+        interiorReason: "cabin air quality and safety refresh",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/yaoguang_h.jpg",
+        note: ""
+    },
+    {
+        id: "cn912",
+        title: "BYDシーロン06 DM-i が発売前に到着。EV航続距離は310kmで、新装備が追加されています。",
+        desc: "BYDのセーリオン06 DM-iが、5月26日の発売前に中国のディーラーに到着した。CLTC航続距離305km、DiPilot 300 LiDARオプション、15.6インチのDiLinkコックピット、ダイナウイオ12スピーカー、ゼログラビティシートなど、内装が強化された。",
+        url: "https://carnewschina.com/2026/05/24/byd-sealion-06-dm-i-arrives-at-dealerships-ahead-of-26-may-launch-with-up-to-310-km-ev-range/",
+        source: "CarNewsChina - All",
+        date: "2026-05-24",
+        tags: ["AR", "シート", "コックピット", "EV", "バッテリー", "音響"],
+    
+        interiorScore: 59,
+        interiorReason: "The article mentions specific interior upgrades like the 15.6-inch DiLink cockpi",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987e5a484e79086-scaled_webhook_1200x720_q85_1779594834.jpg",
+        note: ""
+    },
+    {
+        id: "cn913",
+        title: "BYD とシャネルの限定車、カンヌで81 万ドルで落札",
+        desc: "BYD とシャネルが共同開発したデナ Z9GT は、カンヌの amfAR ギャラで 70 万ユーロで売却され、エイズ研究資金に充てられた。これは BYD のデナブランド史上最も高額なモデルであり、高級車内装や特別仕様を備える。",
+        url: "https://carnewschina.com/2026/05/24/byds-denza-z9-gt-chopard-edition-sold-for-811000-usd-most-expensive-denza-ever/",
+        source: "CarNewsChina - All",
+        date: "2026-05-24",
+        tags: ["AR", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59088e68890e6b1bde8bda6e59bbee78987e5b9b6e68da2e8838ce699af_webhook_1350x810_q85_1779591717.jpg",
+        note: ""
+    },
+    {
+        id: "cn914",
+        title: "長安はCS75 PlusとEadoでハイブリッド車を発表する",
+        desc: "長安汽車はCS75 PlusとEadoにBlueCoreハイブリッド技術を搭載し、中国市場で展開して効率性をアピールする。",
+        url: "https://carnewschina.com/2026/05/24/changan-joins-chinas-hev-push-with-cs75-plus-and-eado-bluecore-hybrid-launches/",
+        source: "CarNewsChina - All",
+        date: "2026-05-24",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59088e68890e6b1bde8bda6e59bbee78987e5b9b6e68da2e8838ce699af-1_webhook_1350x810_q85_1779589544.jpg",
+        note: ""
+    },
+    {
+        id: "in952",
+        title: "タタが2026年ティアゴEVのインテリアを公開、5月28日発売予定",
+        desc: "タタ・モーターズは2026年ティアゴEVのインテリアを公開。2トーン配色のシートやダッシュボードに「Tata EV」ロゴ、6スピーカーオーディオ、360度カメラ、リアACダクトなどを搭載。2026年5月28日に発売予定。",
+        url: "https://www.autocarindia.com/car-news/tata-reveals-interior-of-the-2026-tiago-ev-facelift-439801",
+        source: "Autocar India - All",
+        date: "2026-05-24",
+        tags: ["シート", "コックピット", "EV", "音響"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260524_122850_147b1986.jpg",
+        note: ""
+    },
+    {
+        id: "in953",
+        title: "2026年タタ・ティアゴEV、新ダッシュボードと360カメラ搭載",
+        desc: "タタ・モーターズは2026年5月28日発売のティアゴEVで、新ダッシュボード、タブレット型インフォテインメント、デジタルメーター、360カメラ、回転式ドライブセレクターなどを採用。価格は8〜11.15万ルピー（ex-sh）。",
+        url: "https://www.rushlane.com/2026-tata-tiago-ev-interiors-new-dashboard-twin-screens-360-camera-12547352.html",
+        source: "RushLane",
+        date: "2026-05-24",
+        tags: ["コネクテッド", "コックピット", "EV"],
+    
+        interiorScore: 92,
+        interiorReason: "flagship cabin refresh with clear interior image showing dashboard, twin screens",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/05/tata-tiago-ev-interiors.jpeg",
+        note: ""
+    },
+    {
+        id: "eu871",
+        title: "ステランティス、AI定義型車両開発加速へApplied Intuitionと提携拡大",
+        desc: "ステランティスは、Applied Intuitionとの提携を拡大し、STLA Brainプラットフォームの進化とAI定義型車両のソフトウェア開発・展開を加速させる。",
+        url: "https://electriccarsreport.com/2026/05/stellantis-expands-applied-intuition-partnership-to-accelerate-ai-defined-vehicles/",
+        source: "Electric Cars Report",
+        date: "2026-05-24",
+        tags: ["HMI", "AI"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Stellantis-Applied-Intuition.jpg?a3781e&amp;a3781e",
         note: ""
     },
 ];
