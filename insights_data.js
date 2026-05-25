@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-25",
+        analysis: {
+            jp: "日本市場ではデジタルミラー[jp1099]や垂直ダッシュボード[jp1096]でコックピットの視認性向上が進み、シート[jp1094][jp1095][jp1100]やインテリア素材[jp1094][jp1100]に質感向上のトレンドが顕著だ。AUTECH LINE[jp1101]の3層戦略や新型CX-5[jp1100]の広びろインテリアから、高級感と実用性の両立が求められている。計測ソリューション[jp1092]やアシストカメラ[jp1093]の普及で、ドライバー支援機能の高度化も期待される。",
+            cn: "中国市場は、EV・バッテリー技術革新[cn921][cn922]とサステナビリティ[cn924][cn925]が顕著なトレンド。全固体電池の量産化[cn924]やBaaS普及[cn928]が軽量化・環境負荷低減を促しており、内装素材のリサイクル化[cn925]が競争優位に。また、フラッグシップSUVの安全アピール[cn926]や、高級感と環境配慮の両立[cn929]が消費者の新しい「うれしさ」に変換されつつある。",
+            in: "インド市場のEV移行加速に伴い、タタ・ティアゴEVのバッテリー拡大に合わせたコックピット刷新[in964]や、ホンダ、Kiaなどの内装改良[in965][in968]が進む。MG「Majestor」生産開始やジャガーランドローバー全電気式Range Rover発表[in962][in970]も、EV市場拡大を示唆する[in962][in970]。これら動向から、EV化に伴うコックピット刷新や、EV特有の乗り心地・快適性への関心の高まりが伺える[in969]。燃料効率や安価なハイブリッド車への関心も[in961]。",
+            us: "米国市場のEV普及によりHMIの重要性が高まっています[us909]。高級セダンの耐久性や日本製内装への注目が集まる一方、音響システムは快適性向上に寄与し、ヤマハクルーザーも優れた快適性を示しました[us916]。しかしソフトウェア不具合が信頼性課題となっており、LucidはAirの買い戻しと全額返金を実施しています[us918]。環境規制ではメタン排出が気候変動に悪影響を与え、自動車CO2との比較が議論されています[us913]。また非対称タイヤは性能向上に寄与し、ミシュランは1965年に世界初のアシメトリックタイヤトレッドを開発した歴史があります[us912]。",
+            eu: "EU市場では高級車オーナーのデジタル体験需要増や、EV・PHEVの普及拡大が顕著[eu878]。特にエッジ工学による低遅延制御[eu879]や、プラットフォーム10年変更なしの耐久性追求[eu876]がトレンド。Lagondaセダンの革新的試み[eu875]や、新素材採用が注目され、BYDやXiaomiの中国市場進出からもモジュール設計の重要性が浮き彫り[eu874]。BMWの水素制御ユニット生産[eu883]は、多エネルギー対応のサプライチェーン強化を示唆[eu880]。",
+        },
+        ideas: {
+            jp: [
+                { id: 986, img: "images/idea_986.png", title: "静音高級感コンソール", desc: "合成皮革とアルミ調の質感を備えたコンソールに、微振動を吸収する静音構造を採用。運転中の静寂感と高級感を同時に体感できる。", imagePrompt: "luxury car center console with premium leather and brushed aluminum finish, quiet vibration absorbing structure, ambient warm lighting, minimalist design, high-end automotive interior, photorealistic 3D render, cinematic atmosphere, 4K quality" },
+                { id: 987, img: "images/idea_987.png", title: "シームレスインモールドコート", desc: "ガラス面と一体化した型内塗装技術を応用。ダッシュボードやドアトリムにシームレスな高級塗装を施し、視覚的広がりと洗練された空間を演出する。", imagePrompt: "seamless interior painted dashboard with glass-like finish, integrated door trim, premium automotive interior design, glossy smooth surface, modern luxury cockpit, soft lighting, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 988, img: "images/idea_988.png", title: "リサイクルリクライニングシート", desc: "廃棄エアバッグ生地でリクライニング機能を強化したシート。軽量化とリサイクル素材を組み合わせ、環境配慮で満足感。乗降しやすく、快適性向上でユーザーが嬉しい！", imagePrompt: "Luxury car interior with premium recycled fabric seats, ergonomic reclining mechanism, sustainable green and beige color palette, brushed aluminum accents, soft ambient lighting, photorealistic 3D render, high detail automotive product visualization" },
+                { id: 989, img: "images/idea_989.png", title: "アップサイクルステアリング", desc: "廃ステアリング革を再利用し、高級感のあるステアリングコーティング。サステナビリティと高級感を両立、環境意識が高く、握り心地の良さとデザインでユーザーが嬉しい！", imagePrompt: "Premium car steering wheel with sustainable leather texture, upcycled material details, dark brown and cream color scheme, modern dashboard integration, cinematic lighting, photorealistic automotive interior render, high quality product visualization" },
+            ],
+            in: [
+                { id: 990, img: "images/idea_990.png", title: "香り付きコックピット", desc: "タタ・ティアゴEVの刷新を踏まえ、中心コンソールに香りディフューザーを内蔵。運転中のストレスを和らげ、リラックスした空間を提供。香りの変化で気分をリセットできる「うれしさ」を体験できる。", imagePrompt: "Luxury car interior center console with integrated aromatherapy diffuser, gentle mist release, ambient lighting effects, brushed aluminum and leather materials, warm ambient glow, photorealistic 3D render, premium automotive design" },
+                { id: 991, img: "images/idea_991.png", title: "ウェルネスコックピット", desc: "ウェルネスコックピットをベースに、インド市場のEVやコックピット刷新を反映。ミリ波レーダーで乗員の状態を検知し、香りや温度を自動調整。健康で快適なドライブ体験を創造。", imagePrompt: "Advanced augmented reality head-up display in premium vehicle, holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render" },
+            ],
+            us: [
+                { id: 992, img: "images/idea_992.png", title: "量産型モジュールコンソール", desc: "小鹏技術のコスト効率を活かし、内装モジュールを共通化する。部品削減で価格競争力を高め、一般層にもEV内装が楽しみ", imagePrompt: "center console with modular design, shared parts structure, cost-effective manufacturing, modern EV interior, brushed aluminum and soft-touch materials, warm ambient lighting, photorealistic 3D render, automotive interior design concept" },
+                { id: 993, img: "images/idea_993.png", title: "音可視化トリムパネル", desc: "既存音可視化技術をEVに適用。ノイズを視覚化し、静粛性をアピール。高級感と機能性で乗客の心地よさを向上", imagePrompt: "dashboard trim with acoustic visualization, sound wave patterns on surface, luxury car interior, night driving scene, blue accent lighting, holographic display elements, photorealistic render, premium automotive design" },
+            ],
+            eu: [
+                { id: 994, img: "images/idea_994.png", title: "モジュール共通化シートシステム", desc: "EV/PHEVプラットフォーム向けに、シート構造を量産モジュール化。欧州高級車のデジタル体験需要に合わせ、シート位置自動調整機能を標準搭載。量産コスト30%削減で、高級感と経済性の両立を実現。", imagePrompt: "Luxury European car interior, center console with integrated seat adjustment controls, brushed aluminum trim, ambient blue LED lighting, premium leather seats, photorealistic 3D render, high detail, cinematic lighting, modern automotive design" },
+                { id: 995, img: "images/idea_995.png", title: "植物由来セルロースナノファイバー内装パネル", desc: "豊田合成のセルロースナノファイバー素材を応用。EV車向けに軽量高強度パネルを提案。石油系素材依存を減らし、サステナビリティと高級感を両立。欧州環境規制に対応。", imagePrompt: "Automotive interior dashboard made from natural plant-based cellulose nanofiber, light wood grain texture, warm beige color, soft natural lighting, sustainable luxury material, premium finish, photorealistic render, high detail, eco-friendly automotive design" },
+            ],
+        }
+    },
+{
         date: "2026-05-22〜2026-05-24",
         analysis: {
             jp: "日本の自動車内装トレンドを分析すると、新素材採用やカスタマイズ需要が拡大している[jp1083,jp1086,jp1090]。シートベルトストッパーや車体保護カバーなど、機能性とデザイン性の両立が重視される[jp1086]。モーターショーでの美容技術応用や有機EL、Dolby Atmos対応など[jp1084,jp1085,jp1089]、コネクテッド技術と音響進化も進む[jp1089]。HMI変化や1985年式車の修復事例から[jp1088,jp1091]、古愛着と新技術の融合が不可欠[jp1091]。サステナビリティと機能性両立、既存技術進化が今後の開発軸となる[jp1090]。",
