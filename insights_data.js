@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-26",
+        analysis: {
+            jp: "日本市場で**EV化**と**内装素材**の進化が加速[jp1104][jp1110]。AI活用による**開発効率**向上[jp1106]と、**コックピット**体験の高度化[jp1103]がトレンド。家族層向け**リアシート**機能化[jp1107][jp1109]も重要。欧州車感の**デザイン**[jp1105]や高音質**オーディオ**[jp1102]も消費者ニーズ。[jp1108]では**リアクーラー**が家族車の快適性向上に寄与。",
+            cn: "中国市場のEV・ハイブリッド動向から、内装開発への示唆を抽出する。XiaomiやBYDのEV販売拡大[cn934]は、価格競争力重視の傾向を示す。ファーウェイの「タウスケーリング法則」[cn935]は、半導体技術革新が内装部品への波及を促す。安全技術や自動運転[cn938]の進化は、コックピット機能向上に直結。低価格化[cn936]は、コスト効率の良い素材選定が重要。内装はEV化・高級化の両立が課題。",
+            in: "インド市場ではEV化と高級化が加速中[in971][in974][in979]。物理操作の回帰とデジタルの融合がトレンド[in971][in973]。安全基準や衝突テストの強化も[in975]。高級感と耐久性を両立する内装が求められている[in977][in980]",
+            us: "フェラーリEV「ルチェ」のOLED採用[us927]は、三星技術の革新性が内装のデジタル化を加速。フォードの電動ガラスルーフ[us920]やポルシェのペピタ柄シートは、高級感と機能性の融合がトレンド。マツダの「間」コンセプト[us924]は、日本文化の価値が欧州市場に浸透。マツダの水平ラインデザインは、広がりを感じさせるコックピット設計が重要。AC循環モード[us923]は、燃費向上と快適性の両立が課題。",
+            eu: "EU市場ではEV化と高級化が進み、EVプラットフォーム[eu891][eu892]や高級EV[eu893]の台頭が顕著。Porscheの高出力EV[eu885]や、BYDの宝石装飾EV[eu893]が高級感を強調。マツダは新素材[eu889]で耐久性を追求。一方で、ハードウェアとソフトウェア連携[eu886]が自動運転の鍵に。また、サプライチェーン格差や中国投資拡大[eu888]が競争を激化。安全性や衝突安全[eu884]は依然として重要。これらのトレンドから、子供安全や緊急脱出など、EVの安全性向上と高級感を両立した内装開発[eu889]が求められる。",
+        },
+        ideas: {
+            jp: [
+                { id: 996, img: "images/idea_996.png", title: "EVフロア活用型収納ボックス", desc: "EVフラットフロアを最大限活用した広々収納ボックス。リバーシブルアームレスト付きで、子供用ベビーシートも楽々。ワイヤレス充電面付きで、スマホや電気牙刷の充電も同時に。家族全員が便利に使える設計で、毎日の出掛ける荷物をスッキリ収納。", imagePrompt: "Premium EV vehicle interior with spacious flat floor storage box, convertible armrest, wireless charging pad surface, warm beige leather and brushed aluminum materials, family-friendly atmosphere, soft ambient lighting, photorealistic 3D render" },
+                { id: 997, img: "images/idea_997.png", title: "AI搭載ARコックピット体験型", desc: "生成AIを活用した次世代コックピット体験。アンリアルエンジン搭載HMIで、運転者の好みに応じてコックピット環境をカスタマイズ。走行中のナビゲーションやエンターテインメントもAIアシスタントで自然な対話が可能。未来のドライブ体験を今すぐ楽しめます。", imagePrompt: "Futuristic vehicle cockpit with AR head-up display and AI assistant interface, holographic navigation elements, warm blue accent lighting, sleek modern design, photorealistic 3D render, cinematic lighting" },
+            ],
+            cn: [
+                { id: 998, img: "images/idea_998.png", title: "香り付きソフトローダーシート", desc: "PHEVのソフトローダー機能をシート内に組み込み、天然素材の柔らかさと癒やしの香り付き。運転中に緊張を解き、疲れを忘れる心地よさ。乗り心地と癒やしを両立。", imagePrompt: "PHEV soft loader seat with integrated aromatherapy, natural fabric texture, soft lighting, warm beige and dark wood trim, cozy interior atmosphere, photorealistic 3D render, premium automotive design" },
+                { id: 999, img: "images/idea_999.png", title: "発光ミリ波レーダー透過エンブレム", desc: "ミリ波レーダー信号を透過しながらイルミネーション発光するエンブレム。EVのADAS機能を内装に統合。夜間の安全性と先進技術の美しさを同時に表現。", imagePrompt: "Illuminated emblem with millimeter wave radar transparency, futuristic car interior, blue LED lighting, night driving scene, sleek dashboard, photorealistic render, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 1000, img: "images/idea_1000.png", title: "バイオ再生素材コンソールパネル", desc: "フェラーリルチェの物理スイッチコンセプトを参考し、再生プラスチックやバインダー素材で高級感のある凹凸表面を実現。手触りの良さや温かみでドライバーが愉しみ、環境配慮もアピールできる。", imagePrompt: "Ferrari-style luxury car interior, center console with textured bio-based material, brushed aluminum accents, warm ambient lighting, physical analog switches, photorealistic 3D render, premium automotive design, cinematic lighting" },
+                { id: 1001, img: "images/idea_1001.png", title: "メテオコート加飾パネル", desc: "メテオコート技術で型内塗装した凹凸テクスチャーパネル。デジタル画面の多いコックピットに物理的な質感を追加し、高級感と操作性を両立。汚れも拭き取りやすく、実用性も高い。", imagePrompt: "Advanced automotive interior with seamless textured panel, Mercedes S-Class Superscreen display, brushed aluminum trim, night driving scene, blue ambient lighting, photorealistic 3D render, premium luxury car interior" },
+            ],
+            us: [
+                { id: 1002, img: "images/idea_1002.png", title: "自動化内装組立ライン構築", desc: "フェラーリEV「ルチェ」の精密なカスタマイズを見据え、自動化設備を導入。35色のボディカラーやカーボンアクセントの組み立てを効率化。製造コストを30%削減し、歩留まりを98%に向上。生産部門が新技術で生産性向上に成功し、収益増大の喜びを味わう。", imagePrompt: "Automated assembly line for luxury car interior, robotic arms installing carbon fiber and 35-color body panels, high-tech manufacturing facility, Samsung OLED display integration, sleek metal machinery, cinematic lighting, photorealistic 3D render, premium automotive production, 4K quality" },
+                { id: 1003, img: "images/idea_1003.png", title: "水平リサイクル内装部品のEV採用", desc: "水平リサイクル内装部品（ELV材50%含有）をフェラーリEV「ルチェ」に採用。廃車由来プラスチックを50%配合した世界初の高強度リサイクル材で、サステナビリティと高級感を両立。環境意識の高い欧州顧客が、地球に優しい高級車に乗れる喜びを味わう。", imagePrompt: "Luxury EV interior with horizontal recycled materials, sustainable dashboard with 50% recycled plastic, premium leather and brushed aluminum accents, natural lighting, eco-friendly automotive design, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+            ],
+            eu: [
+                { id: 1004, img: "images/idea_1004.png", title: "安全なEVコックピット", desc: "衝突時や緊急時に子供が安全に脱出できるEVコックピット。緊急脱出用シートベルトを内蔵し、ドアが自動的に開く仕組み。子供が安心し、親も安心。", imagePrompt: "EV car interior with a child safety seat belt system built into the seats, automatic door opening mechanism visible, luxury materials like brushed aluminum and soft-touch leather, emergency exit lighting in soft amber color, photorealistic rendering, high detail, cinematic lighting, premium automotive design" },
+                { id: 1005, img: "images/idea_1005.png", title: "インモールドコートEVドアパネル", desc: "EVドアパネルにインモールドコート技術を採用。型内塗装でシームレスな高級感を実現。タッチスクリーンとスピーカーが一体化し、音楽やナビゲーションがスムーズ。", imagePrompt: "EV car door panel with seamless in-mold coating technology, integrated touch screen and speaker, premium materials like carbon fiber and soft-touch leather, ambient lighting in soft blue color, photorealistic rendering, high detail, cinematic lighting, premium automotive design" },
+            ],
+        }
+    },
+{
         date: "2026-05-25",
         analysis: {
             jp: "日本市場ではデジタルミラー[jp1099]や垂直ダッシュボード[jp1096]でコックピットの視認性向上が進み、シート[jp1094][jp1095][jp1100]やインテリア素材[jp1094][jp1100]に質感向上のトレンドが顕著だ。AUTECH LINE[jp1101]の3層戦略や新型CX-5[jp1100]の広びろインテリアから、高級感と実用性の両立が求められている。計測ソリューション[jp1092]やアシストカメラ[jp1093]の普及で、ドライバー支援機能の高度化も期待される。",

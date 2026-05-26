@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-26 01:30";
+window.NEWS_UPDATED_AT = "2026-05-27 01:31";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -60959,6 +60959,755 @@ window.LOADED_NEWS_DATA = [
     
         country: "in",
         img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    // 2026-05-26 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1102",
+        title: "大塚さん、BRZでディーラーオプション不満足。プロショップで高音質化",
+        desc: "音楽好きの大塚さんは、スバル『BRZ』購入時にディーラーオプションに不満足し、サウンドステーション SUBLIME で高音質化。カロッツェリアのTS-V174 とザプコのST-4XP SQIII を採用し、特に高域の伸びに満足した。",
+        url: "https://news.yahoo.co.jp/articles/2c1c2a974ffc1546ab3d954f403ecc1efca39337?source=rss",
+        source: "レスポンス",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 65,
+        interiorReason: "audio equipment and interior image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-00000032-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1103",
+        title: "Epic Games Japan、アンリアルエンジンで未来コックピット体験を提示",
+        desc: "Epic Games Japanは5/27～29にパシフィコ横浜で開催される「人とくるまのテクノロジー展2026」で出展し、アンリアルエンジン搭載車載HMI講演を行う。ゼネラルモーターズやロータスなど大手自動車メーカーの採用事例を提示し、次世代コックピット体験の実現を目指す。",
+        url: "https://news.yahoo.co.jp/articles/4dc54107687626f616ad45648bc6514c8232bf26?source=rss",
+        source: "レスポンス",
+        date: "2026-05-26",
+        tags: ["HMI", "コックピット"],
+    
+        interiorScore: 90,
+        interiorReason: "HMI and cockpit UX focus with clear interior image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-00000031-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1104",
+        title: "レクサス新型TZ、3列シートBEVで世界初公開。2026年冬発売予定",
+        desc: "2026年5月7日、レクサスは3列シートBEV新型SUV「TZ」を世界初公開。全長5100mmで11色のボディカラーや竹材加飾を採用。最高出力407.8psのモーターと95.82kWhバッテリー搭載で620km走行。2026年冬発売予定。",
+        url: "https://news.yahoo.co.jp/articles/9e264242ff7cbea2380e038b9835badc4642385e?source=rss",
+        source: "carview!",
+        date: "2026-05-26",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 61,
+        interiorReason: "3-row seating and bamboo trim are concrete interior details, but the image is ex",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1105",
+        title: "欧州車感のバンディエラが、クラウンクロスオーバーに新装",
+        desc: "イタリアンデザインのバンディエラが、クラウンクロスオーバー向けにグリルガーニッシュとインテリアパネルを提案。欧州車のようなメッシュグリルや、ピアノブラックパネルにゴールドステッチを施すことで、欧州車感と上級グレード感を演出する。",
+        url: "https://news.yahoo.co.jp/articles/9f304518d0deecb82c9a4eda4041d651f6a00474?source=rss",
+        source: "MotorFan",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 62,
+        interiorReason: "interior panel and grille garnish details",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-01495452-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1106",
+        title: "ホンダ、生成AIでデザイン開発4割短縮・歩行者保護適合検証",
+        desc: "ホンダは生成AIを活用し、デザイン開発時間を約4割短縮。AIとの対話で歩行者保護適合の3D造形を複数提案し、開発効率化と安全性向上を実現。2025年社長賞受賞の技術開発で、AI×人が新たな価値を生む事例。",
+        url: "https://news.yahoo.co.jp/articles/66a64fa3723a631c9a3bae3330bb4174ff3d2b58?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-05-26",
+        tags: ["AI", "安全"],
+    
+        interiorScore: 57,
+        interiorReason: "AI-driven exterior design process and pedestrian safety validation are relevant",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-00010002-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1107",
+        title: "ホイールベース延長でリアシート拡大、社内で大ブーイングも",
+        desc: "マツダ新型CX-5はホイールベースを115mm延長し、リアシート足元を64mm、ラゲッジスペースを45mm拡大。社内でホイールベース延長に大ブーイングがあったが、走りの軽快感を維持した。",
+        url: "https://news.yahoo.co.jp/articles/4b5f9104366b4ffac338b7c9bd0b6f5d7cef8726?source=rss",
+        source: "VAGUE",
+        date: "2026-05-26",
+        tags: ["シート"],
+    
+        interiorScore: 90,
+        interiorReason: "rear seat legroom and cargo space expansion with interior image showing rear sea",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-10427102-vague-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1108",
+        title: "ホンダフリードのリアクーラーは家族車に必須か？後席快適性を左右する重要装備をチェック!!",
+        desc: "ホンダフリードは全タイプにフルオートエアコンとリアヒーターダクトを標準だが、夏場の冷房では後席が冷えない場合がある。リアクーラーは2列目・3列目の快適性を向上させ、特にAIR EX以上やCROSSTAR系に設定がある。家族4人以上で使うならリアクーラー付きグレードを強くおすすめしたい。",
+        url: "https://news.yahoo.co.jp/articles/e6f7bce2024aef4444ff2212c9e7b9dc2d1824ee?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-26",
+        tags: ["AR", "AI"],
+    
+        interiorScore: 87,
+        interiorReason: "rear cooler comfort equipment and cabin UX planning",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-00000014-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1109",
+        title: "日産新型エルグランド内装：2グレード違いは画面・2列目機能",
+        desc: "日産新型エルグランドは16年ぶりのフルモデルチェンジで発売。2グレードの違いはセンターモニターサイズと2列目シートの機能（電動スライド、ヒーターなど）にある。ベースグレードでも質感は同等で、3列目USBポートや助手席カップホルダーなど快適装備にこだわりを見せる。",
+        url: "https://news.yahoo.co.jp/articles/5e5e7c04113cfa9b944d4092756c56eb501a0f58?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260526-00000009-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us919",
+        title: "フェラーリLuce EV、35色のボディカラーと2種のホイールでカスタマイズ可能",
+        desc: "フェラーリ初のEV「Luce」は、既存の configurator で35色のボディカラー（Giallo Ambraなど）と2種のホイールデザインを選べる。加えてカーボンアクセントやデボースドロゴなど、内装や外装の細部までカスタマイズ可能で、価格は€550,000から。",
+        url: "https://www.motor1.com/news/796918/ferrari-luce-ev-colors-configurator/",
+        source: "Motor1",
+        date: "2026-05-26",
+        tags: ["EV", "カスタマイズ"],
+    
+        interiorScore: 58,
+        interiorReason: "exterior color configurator with limited interior detail (carbon accents, deboss",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/jlWLe6/s3/ferrari-luce-configurator.jpg",
+        note: ""
+    },
+    {
+        id: "us920",
+        title: "フォード、ブロンコに電動ガラスルーフの 특허申請",
+        desc: "フォードはブロンコに電動ガラスルーフの 특허申請を行い、既存の取り外し式ルーフパネルの課題を解決する。これにより、ルーフレール装着車でも開放感を得られ、快適装備の利便性が向上する可能性がある。",
+        url: "https://www.carscoops.com/2026/05/ford-bronco-glass-roof-patent/",
+        source: "CarScoops",
+        date: "2026-05-26",
+        tags: ["EV"],
+    
+        interiorScore: 83,
+        interiorReason: "Ford patent for electric glass roof panels directly impacts interior cabin UX, h",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Bronco-Silver-Lake-Dunes-Project-Vehicle_08-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us921",
+        title: "2026 ポルシェ・カヤンNEクーペのインテリア写真",
+        desc: "2026年ポルシェ・カヤンNEクーペのインテリアは、12.3インチOLEDタッチスクリーンやガラスルーフを標準装備。シートにはクラシックなペピタ柄のオプションあり。",
+        url: "https://www.caranddriver.com/photos/g71386492/2026-porsche-cayenne-ev-coupe-drive-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "シート"],
+    
+        interiorScore: 100,
+        interiorReason: "flagship cabin refresh with OLED display, glass roof, and seat pattern details",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/6d9b4dc3-10c4-40fe-86e6-25c39ba3c35e.jpg",
+        note: ""
+    },
+    {
+        id: "eu884",
+        title: "世界最長寿命の車：10年以上変更なし",
+        desc: "多くの車は10年以内にプラットフォーム変更されるが、Survivorsは長年変更されない。素材や安全技術の進化を反映せず、車名板が永続する例は稀。",
+        url: "https://www.autocar.co.uk/car-news/slideshow/survivors-world%E2%80%99s-longest-living-cars-0",
+        source: "AUTOCAR UK",
+        date: "2026-05-26",
+        tags: ["新素材", "安全"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_mini-intro-ac_0_0_1_0_0_0_1_2_0_0_0_0_0_0_0_0_0_1_0_0_0.jpg?itok=EIPxYJoH",
+        note: ""
+    },
+    {
+        id: "eu885",
+        title: "Porsche Cayenne 4代目EV、英国で1140馬力発表",
+        desc: "Porsche Cayenne 4代目は全電気自動車となり、英国市場で1140馬力の高出力を実現。夏までにAutocarによるベンチマーク測定が予定されている。",
+        url: "https://www.autocar.co.uk/car-review/porsche/cayenne-electric",
+        source: "AUTOCAR UK",
+        date: "2026-05-26",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/porsche-cayenne-electric-coupe-5_0.jpg?itok=IjQRwqBZ",
+        note: ""
+    },
+    {
+        id: "cn931",
+        title: "2026年第1四半期、XiaomiはEV販売台数8万8856台で、1台当たり5600ドルの営業損失を",
+        desc: "Xiaomiは2026年第1四半期にEVを8万8856台販売し、1台当たり5600ドルの営業損失を計上した。CarNewsChina.comが報じたこのデータは、同社の電気自動車事業の現状を示している。",
+        url: "https://carnewschina.com/2026/05/26/xiaomi-loses-5600-usd-for-every-car-sold-in-the-first-quarter-of-2026/",
+        source: "CarNewsChina - All",
+        date: "2026-05-26",
+        tags: ["AR", "EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-185-e1779795177535.png",
+        note: ""
+    },
+    {
+        id: "cn932",
+        title: "BYD Dolphin G DM-i 欧州向けプラグインハイブリッドハッチ",
+        desc: "BYD Dolphin G DM-iは欧州向けプラグインハイブリッドハッチバックとして発表され、6月に価格が発表される。中国のBYD社製で、欧州市場展開を前にした新モデルである。",
+        url: "https://carnewschina.com/2026/05/26/byd-dolphin-g-plug-in-hybrid-hatchback-broke-cover-ahead-of-european-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-05-26",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/byd_dolphin_g_dm-i-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn933",
+        title: "中国で発見、次世代Nissan NV200のスパイショット",
+        desc: "中国で次世代のニッサン NV200 のスパイショットが確認され、PHEV「ソフトローダー」MPV として再登場することが明らかになった。最新デザインとオフロードハイブリッド技術を備え、自動車内装や快適装備にも進化が期待される。",
+        url: "https://carnewschina.com/2026/05/26/reborn-with-off-road-hybrid-tech-next-gen-nissan-nv200-spotted-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-05-26",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/nv200_g.jpg",
+        note: ""
+    },
+    {
+        id: "cn934",
+        title: "BYD、2026年式シーリオン06 DM-iを発売、5世代ハイブリッド技術を搭載",
+        desc: "BYDは2026年式シーリオン06 DM-iを発売し、4グレードをラインナップします。価格は12万9900元（約1万9100ドル）から15万9900元（約2万3500ドル）です。5世代DM技術を採用し、EV航続距離310kmを確保しています。",
+        url: "https://carnewschina.com/2026/05/26/byd-launches-2026-sealion-06-dm-i-with-its-fifth-gen-hybrid-tech-and-310-km-ev-range/",
+        source: "CarNewsChina - All",
+        date: "2026-05-26",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-179-313x900.png",
+        note: ""
+    },
+    {
+        id: "cn935",
+        title: "ファーウェイ、ムーアの法則に代わる「タウスケーリングの法則」を発表",
+        desc: "ファーウェイは半導体技術の新たな道筋として「タウスケーリング法則」を発表した。従来の幾何学的スケーリングに代わり、時間スケーリングを重視する。自動車内装やインテリアに関する具体的な情報は含まれていないため、半導体技術の発表内容に焦点を当てた。",
+        url: "https://carnewschina.com/2026/05/26/huawei-unveils-tau-scaling-law-a-new-semiconductor-roadmap-to-succeed-moores-law/",
+        source: "CarNewsChina - All",
+        date: "2026-05-26",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-177-e1779770928240.png",
+        note: ""
+    },
+    {
+        id: "cn936",
+        title: "低価格のXiaomi YU7標準版が、中国で3万4660ドルから納車を開始しました。",
+        desc: "Xiaomi YU7標準版は、中国で3万4660ドルから納車を開始し、前モデルより2945ドル安価です。自動車内装やコックピットに関する詳細な情報は提供されていないため、価格設定と発売状況のみを事実ベースで要約しました。",
+        url: "https://carnewschina.com/2026/05/26/low-cost-xiaomi-yu7-trim-started-deliveries-in-china-at-34660-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-05-26",
+        tags: ["コックピット"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/xiaomi_yu7_standard-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn937",
+        title: "ニオは、ES9 の安全技術を CCTV でアピールする",
+        desc: "ニオは国営放送CCTVでES9 SUVの安全試験を実施。自動運転技術や衝突安全性をアピールし、高級SUV市場での技術力を示した。",
+        url: "https://cnevpost.com/2026/05/26/nio-highlights-es9-safety-cctv/",
+        source: "CnEVPost - All",
+        date: "2026-05-26",
+        tags: ["安全"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052614102694.jpg",
+        note: ""
+    },
+    {
+        id: "cn938",
+        title: "シャオミEVがAI世界モデルを導入し、自動運転技術を向上させる",
+        desc: "シャオミEVは、NIOに続きAI世界モデルを採用した。自動運転技術の向上を目的に、シャオミEVが世界モデルを発表した。詳細はCnEVPostを参照。",
+        url: "https://cnevpost.com/2026/05/26/xiaomi-ev-introduces-world-model/",
+        source: "CnEVPost - All",
+        date: "2026-05-26",
+        tags: ["AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052606470929.jpg",
+        note: ""
+    },
+    {
+        id: "cn939",
+        title: "BYDは2026年にセーリオン06 DM-iを投入し、PHEVラインナップを強化する",
+        desc: "BYDは2026年にセーリオン06 DM-i SUVを発売し、12万9900元で販売を開始します。最大1845kmの走行距離を備え、プラグインハイブリッド車ラインナップを強化します。",
+        url: "https://cnevpost.com/2026/05/26/byd-launches-2026-sealion-06-dm-i/",
+        source: "CnEVPost - All",
+        date: "2026-05-26",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052604575582.jpg",
+        note: ""
+    },
+    {
+        id: "cn940",
+        title: "Xiaomi YU7標準版が発売され、Teslaに対抗する",
+        desc: "Xiaomiは3年前に計画し、発売直前に中止していたYU7標準版を発売する。価格は安価で、Teslaと競合する。",
+        url: "https://cnevpost.com/2026/05/26/xiaomi-begins-deliveries-cheaper-yu7-standard/",
+        source: "CnEVPost - All",
+        date: "2026-05-26",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052602482875.jpg",
+        note: ""
+    },
+    {
+        id: "in971",
+        title: "フェラーリ初のEV「ルチェ」、Apple元チーフとの内装協業で物理操作重視のデザインを披露",
+        desc: "フェラーリ初のEV「ルチェ」は、Apple元チーフJony Ive率いるLoveFromとの内装協業により、2026年2月に発表された。12.5インチOLEDディスプレイや10インチタッチスクリーンに加え、アナログ調の計器類や物理スイッチを多数配置し、コックピットをクラシックなフェラーリに回帰させた。",
+        url: "https://www.autocarindia.com/auto-images/ferrari-luce-ev-interior-image-gallery-440076",
+        source: "Autocar India - All",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 100,
+        interiorReason: "flagship cabin refresh with clear interior image showing HMI, display, steering",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260210_054525_756ef4c2.jpg",
+        note: ""
+    },
+    {
+        id: "in972",
+        title: "ホンダ・シティV MT、ADAS搭載で133万円で発売開始",
+        desc: "ホンダ・シティの新型V MTが133万円で発売開始。1.5L NAエンジンと6速マニュアル、Honda Sensing Level-2 ADASを標準装備。内装は8インチディスプレイと自動エアコンを備え、LEDヘッドライトや15インチアルミホイールを採用。",
+        url: "https://www.rushlane.com/new-honda-city-v-variant-reach-showrooms-2nd-base-adas-vfm-trim-12547480.html",
+        source: "RushLane",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "EV", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "interior and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/05/new-honda-city-v-variant-reach-showrooms-2.jpg",
+        note: ""
+    },
+    {
+        id: "in973",
+        title: "2026年タタ・ティアゴCNG、セグメント初装備で内装刷新",
+        desc: "2026年タタ・ティアゴCNGは、回転式シフトセレクターやパドルシフター、デュアルワイヤレス充電器、360°カメラなどセグメント初装備を備えた新内装を披露。デジタルインストルメントクラスターや浮き表示タッチスクリーンも採用され、快適装備が強化される。",
+        url: "https://www.rushlane.com/new-tata-tiago-cng-interiors-revealed-with-segment-first-features-12547440.html",
+        source: "RushLane",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "EV"],
+    
+        interiorScore: 91,
+        interiorReason: "interior image shows dashboard, infotainment, steering wheel, and trunk; text li",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/05/new-tata-tiago-cng-interiors-revealed-cover.jpg",
+        note: ""
+    },
+    {
+        id: "in974",
+        title: "2026年メルセデスSクラス、6月15日インドでPHEVとSuperscreen搭載",
+        desc: "2026年6月15日、インドで2026 Sクラスが発表される。新モデルはPHEV（S450e）に加え、Superscreen（14.4インチタッチスクリーンなど）やMB.OS、Burmesterオーディオ、リクライニング後部座席などの内装・快適装備が強化される。",
+        url: "https://www.indiacarnews.com/news/2026-mercedes-benz-s-class-launch-on-june-15-phev-superscreen-more-67937/",
+        source: "IndiaCarNews",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "シート", "EV", "音響"],
+    
+        interiorScore: 82,
+        interiorReason: "Superscreen, MB.OS, Burmester audio, reclining rear seats, and flagship cabin re",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/05/2-12.webp",
+        note: ""
+    },
+    {
+        id: "eu886",
+        title: "自動車業界でハードウェアとソフトウェアの連携が重要",
+        desc: "自動運転の実現に向け、自動車業界ではハードウェアとソフトウェアの連携が不可欠。特に自動運転能力の達成において、両者の統合が重要視されている。",
+        url: "https://www.just-auto.com/interview/hardware-vs-software-the-road-to-autonomous-driving/",
+        source: "Just Auto",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 7,
+        interiorReason: "The article discusses the general industry trend of hardware/software integratio",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.just-auto.com/wp-content/uploads/sites/30/2026/05/Elad-Hofstetter-CBO-Innoviz-Credit-David-Garb.jpg",
+        note: ""
+    },
+    {
+        id: "eu887",
+        title: "ボッシュとTSFグループ、商用車エアシステムJV設立",
+        desc: "ボッシュとTSFグループ（BIPL、WIL）は、商用車向け電子制御エアシステム開発JVを設立。チエンナイ登録で2026年末までに操業開始予定。",
+        url: "https://www.just-auto.com/news/bosch-tsf-group-commercial-vehicle-air-systems-jv/",
+        source: "Just Auto",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 11,
+        interiorReason: "commercial vehicle air systems JV with no interior product detail",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.just-auto.com/wp-content/uploads/sites/30/2026/05/220719_bosch_stagevisual_nfz-ausschnitt_img_w1600.jpg",
+        note: ""
+    },
+    {
+        id: "eu888",
+        title: "CLEPA：EU-China 自動車サプライヤー投資格差拡大、EV 移行リスク",
+        desc: "CLEPA は、2021-2026 年間でEU 自動車サプライヤー投資は約420 億ドルで停滞し、中国は57% 増の約1150 億ドルに達したと指摘。投資対売上比率もEU は12%→10%、中国は9%→11% となり、中国市場は1 兆ドル超でEU の2.5 倍に拡大した。",
+        url: "https://www.just-auto.com/news/eu-china-competitive-gap-for-suppliers-is-widening-clepa/",
+        source: "Just Auto",
+        date: "2026-05-26",
+        tags: ["EV"],
+    
+        interiorScore: 11,
+        interiorReason: "company news with almost no cabin detail",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.just-auto.com/wp-content/uploads/sites/30/2026/03/CLEPA2.jpg",
+        note: ""
+    },
+    {
+        id: "eu889",
+        title: "マツダ、欧州開発のEV「CX-6e」内装を公開",
+        desc: "マツダは専用EVプラットフォームの「CX-6e」内装を公開。欧州開発チームが「間（ま）」の概念を取り入れ、耐久性のある合成素材「Maztex」を採用。水平ダッシュボードと全景ルーフで開放感を実現。",
+        url: "https://www.automotiveworld.com/news/mazda-details-cx-6e-interior-with-european-input/",
+        source: "Automotive World",
+        date: "2026-05-26",
+        tags: ["コックピット", "新素材", "EV"],
+    
+        interiorScore: 97,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/26111032/mazda-cx-6e-interior-1-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "in975",
+        title: "吉利Starray EM-i フランスで規制超え衝突テスト実施",
+        desc: "吉利Starray EM-iはフランスUTAC施設で、60km/hでの側面衝突後にポールへの二次衝突を再現する独自テストを通過。カビンの無傷、エアバッグ作動、バッテリー保護が確認された。",
+        url: "https://indianautosblog.com/geely-starray-em-i-put-through-extreme-crash-test-in-europe-p328498",
+        source: "IndianAutosBlog",
+        date: "2026-05-26",
+        tags: ["AR", "EV", "安全"],
+    
+        interiorScore: 64,
+        interiorReason: "seat and display plus cabin image; defect/recall cap",
+        imageInterior: true,
+        country: "in",
+        img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    {
+        id: "jp1110",
+        title: "自動車内装材市場、2024年629.8億米ドルで2033年912.0億米ドルへCAGR 4.",
+        desc: "自動車内装材市場は2024年629.8億米ドルで、2033年912.0億米ドルへCAGR 4.20%成長。快適性や持続可能性への需要、SUVのダッシュボードスキン採用、EVのノイズ吸収ファブリックなど内装関連トレンドが牽引。",
+        url: "https://www.atpress.ne.jp/news/5125898",
+        source: "アットプレス",
+        date: "2026-05-26",
+        tags: ["コックピット", "EV"],
+    
+        interiorScore: 62,
+        interiorReason: "market size and growth forecast for interior materials (62.98B USD in 2024, 91.2",
+        imageInterior: false,
+        country: "jp",
+        img: "https://www.atpress.ne.jp/attachments/P2uzYIhhl3FGVPqYjQxs.jpg",
+        note: ""
+    },
+    {
+        id: "us922",
+        title: "フェラーリ、ジョニー・アイブ設計の電気スーパーカー「Luce」を64万9千ドルで発表",
+        desc: "フェラーリは、ジョニー・アイブ率いるLoveFromと協力し、初の全電気スーパーカー「Luce」を64万9千ドルで発表。CNC加工アルミニウムや物理スイッチを採用し、1,035bhpの4モーターで2.5秒加速を実現。",
+        url: "https://www.thenews.com.pk/latest/1403866-ferrari-unveils-649k-luce-inside-specs-innovations-of-jony-ive-designed-electric-supercar",
+        source: "The News International",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 69,
+        interiorReason: "flagship cabin refresh and interior material/trim details (CNC aluminum, physica",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thenews.com.pk/assets/uploads/2026-05-26/1403866_104836_updates.jpg",
+        note: ""
+    },
+    {
+        id: "us923",
+        title: "車内ACの循環モードで冷却加速と燃費向上",
+        desc: "車内ACの循環モードは、外気ではなく車内空気を循環させることで、35℃の外気から25℃の車内空気を冷却し、冷却速度を向上させます。これによりコンプレッサーの負荷が減り、燃費が向上します。ただし、CO2濃度上昇に注意が必要です。",
+        url: "https://www.moneycontrol.com/technology/how-a-simple-recirculation-button-in-your-car-ac-can-help-faster-cooling-and-help-you-fight-fuel-cost-article-13931464.html",
+        source: "Moneycontrol",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "AC recirculation button and cabin cooling UX",
+        imageInterior: true,
+        country: "us",
+        img: "https://images.moneycontrol.com/static-mcnews/2026/05/20260526075703_e621d08d-75da-4192-a21a-22b7f3476e44.png",
+        note: ""
+    },
+    {
+        id: "us924",
+        title: "マツダCX-6eは日本デザイン概念「間」で内装を表現",
+        desc: "マツダCX-6eは日本文化の「間」をコンセプトに、ダッシュボードの水平ラインや全景ガラスルーフで広がりを感じさせる。欧州デザインも取り入れ、3色のインテリア（Warm beige/Black Maztex/Two-tone Amethyst）で和の調和を表現する。",
+        url: "https://www.completecar.ie/car-news/article/14926/Mazda-CX-6e-cabin-draws-on-Japanese-design",
+        source: "CompleteCar.ie",
+        date: "2026-05-26",
+        tags: ["AR", "コックピット"],
+    
+        interiorScore: 97,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.completecar.ie/img/news/14926_large.jpg?t=1779795265",
+        note: ""
+    },
+    {
+        id: "us925",
+        title: "フェラーリ、初のEV「Luce」発表。三星と元アップルデザイナーが関与",
+        desc: "フェラーリは初のEV「Luce」を発表。コックピットは三星のOLED技術を採用し、元アップルデザイナーのジョニー・アイブがデザインに携わった。",
+        url: "https://www.msn.com/en-in/money/technology/ferrari-just-launched-its-first-ev-ex-apple-design-guru-is-behind-it-and-so-is-samsung/ar-AA244FdD",
+        source: "India Today",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 71,
+        interiorReason: "OLED cockpit and HMI design by Jony Ive is highly relevant for interior UX and d",
+        imageInterior: false,
+        country: "us",
+        img: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202605/ferrari-26595783-16x9_0.jpg?VersionId=xfay7ohQWddPFSqJC.kYXbwdagqsuJCX",
+        note: ""
+    },
+    {
+        id: "us926",
+        title: "Kia Seltos HTX A：12.3インチデジタルディスプレイとレベル2 ADAS搭載の高級感",
+        desc: "Kia Seltos HTX Aは、HTXより12.3インチデジタルドライバーディスプレイ、レベル2 ADAS、360度カメラ、BOSEサウンドシステムを追加。価格は16.69〜19.59万ルピー（ex-showroom）。",
+        url: "https://www.cardekho.com/india-car-news/kia-seltos-htx-a-variant-explained-should-you-stretch-your-budget-for-this-featureloaded-trim-36058.htm",
+        source: "CarDekho",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "安全"],
+    
+        interiorScore: 63,
+        interiorReason: "interior features like 12.3-inch digital driver display and Bose sound system ar",
+        imageInterior: false,
+        country: "us",
+        img: "https://stimg2.cardekho.com/images/carNewsimages/userimages/36057/1779800593176/GeneralNew.jpg",
+        note: ""
+    },
+    {
+        id: "us927",
+        title: "フェラーリ・ルチェ、サムスン製OLEDで画期的なダッシュボードを披露",
+        desc: "フェラーリ・ルチェはサムスン製OLEDパネルで内装を構成。ドライバーのクラスターには世界初のレイヤー型ディスプレイを採用し、物理的な機械式時計針を配置。サムスンのHIAA技術により、100mmの開口部を確保しながら画質を維持している。",
+        url: "https://www.digitaltrends.com/cars/samsungs-oled-tech-gives-the-ferrari-luce-a-dashboard-unlike-anything-in-a-car-before/",
+        source: "Digital Trends",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        interiorScore: 88,
+        interiorReason: "dashboard and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.digitaltrends.com/tachyon/2026/05/DT-2026-05-26T034146.360.jpg?resize=1200%2C630",
+        note: ""
+    },
+    {
+        id: "us928",
+        title: "Apple元デザイナーが設計したフェラーリ初のEV「ルチェ」は4ドア",
+        desc: "フェラーリの初EV「ルチェ」は、元Appleデザイナーが設計した4ドアモデル。従来のスポーツカーとは異なるデザインで、インテリアやコックピットも特徴的。",
+        url: "https://www.msn.com/en-us/autos/other/ferrari-s-luce-is-a-four-door-ev-designed-by-the-iphone-guy/ar-AA242wBX",
+        source: "Carscoops",
+        date: "2026-05-26",
+        tags: ["コックピット", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "interior and cockpit image plus design influence",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/The-Ferrari-Luce-Reveg35tvbfre-vb-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu890",
+        title: "イタリアのゾンビ車ブランド、中国車で欧州へ復活",
+        desc: "GACがイタリアの歴史的ブランドを復活させ、赤い本革シートと新グリルを備えた中国製車として欧州に展開する。",
+        url: "https://www.carexpert.com.au/car-news/zombie-car-brands-are-launching-in-europe-selling-chinese-cars",
+        source: "CarExpert",
+        date: "2026-05-26",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.carexpert.com.au/crop/1200/630/cms/v1/media/itala-35-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu891",
+        title: "全電気マツダCX-6e、日本遺産に着想した内装を新解釈",
+        desc: "全電気マツダCX-6eは、日本美学とEVアーキテクチャを融合した内装を採用。日本画家・千住博の作品から着想した色彩や、Ma（間）の概念に基づく開放的な空間、欧州開発による直感的なコックピットが特徴。",
+        url: "https://www.insidemazda.co.uk/2026/05/26/the-all-new-mazda-cx‑6e-interior-craftsmanship-inspired-by-japanese-heritage/",
+        source: "Inside Mazda",
+        date: "2026-05-26",
+        tags: ["コックピット", "EV"],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://www.insidemazda.co.uk/wp-content/uploads/2026/05/Mazda_CX_6e_Germany-int-5.jpg",
+        note: ""
+    },
+    {
+        id: "eu892",
+        title: "フェラーリ、Jony Ive 氏と共同開発のEV「Luce」を発売",
+        desc: "フェラーリの初EV「Luce」は、Jony Ive 氏の LoveFrom と共同開発され、シートやインテリアに Apple 由来のデザインが採用。4 モーターで 1,036hp、122kWh バッテリーを備え、価格は 55 万ユーロから。",
+        url: "https://thenextweb.com/news/ferrari-luce-five-seat-electric-car-launch",
+        source: "The Next Web",
+        date: "2026-05-26",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 75,
+        interiorReason: "Ferrari Luce EV cabin co-designed by Jony Ive's LoveFrom with Apple-derived desi",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.thenextweb.com/2026/05/Ferrari-Luce.avif",
+        note: ""
+    },
+    {
+        id: "eu893",
+        title: "BYDの高級EV、スイス製ジュエリー化で80万ドルで販売",
+        desc: "Denza Z9 GT Chopard Editionは、金装飾や希少宝石を備え、BYDのフラッシュ充電システムを搭載。Ferrari株はEV批判で6%下落。",
+        url: "https://electrek.co/2026/05/25/byd-turns-luxury-ev-into-swiss-piece-of-jewelry-sells-for-record-800k/",
+        source: "Electrek",
+        date: "2026-05-26",
+        tags: ["AR", "EV", "バッテリー"],
+    
+        interiorScore: 77,
+        interiorReason: "interior luxury materials and gold accents plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://i0.wp.com/electrek.co/wp-content/uploads/sites/3/2026/05/BYD-DENZA-Chopard-Z9GT-Swiss-luxury-EV.jpeg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+        note: ""
+    },
+    {
+        id: "in976",
+        title: "2026年新型ホンダ・シティのエクステリアとインテリアを解説",
+        desc: "2026年新型ホンダ・シティは、エクステリアとインテリアの最新ファシリテートアップデートを含む詳細なウォークアラウンドが公開された。",
+        url: "https://www.india.com/car-and-bike/new-honda-city-2026-first-look-exterior-interior-tour-8426618/",
+        source: "India.com",
+        date: "2026-05-26",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "interior tour and facelift updates",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.india.com/wp-content/uploads/2026/05/maxresdefault-16.jpg",
+        note: ""
+    },
+    {
+        id: "in977",
+        title: "ボルボXC90の映画のような高級内装と落ち着いた雰囲気",
+        desc: "ボルボXC90の内装は映画のセットのような完璧な高級感があり、夜間のアンビエントライティングは非常に心地よい。",
+        url: "https://auto.hindustantimes.com/new-cars/volvo/xc90/user-reviews/cinematic-interiors-69f3211d187e4ef2b49ff502",
+        source: "HT Auto",
+        date: "2026-05-26",
+        tags: ["イルミ"],
+    
+        interiorScore: 58,
+        interiorReason: "ambient lighting and high-end interior feel",
+        imageInterior: false,
+        country: "in",
+        img: "https://images.hindustantimes.com/auto/auto-images/default/default-1600x900.jpg",
+        note: ""
+    },
+    {
+        id: "in978",
+        title: "2026年6月15日、インドでハイブリッド搭載Sクラスが新装投入",
+        desc: "2026年6月15日、インド市場向けに新装Sクラスが投入される。Superscreenコックピット、14.4インチタッチスクリーン、AI音声アシスタントを搭載。プラグインハイブリッド（S 450e）は3.0Lターボエンジンと22kWhバッテリーで、EV走行距離100km、出力435hp。",
+        url: "https://www.motoroids.com/news/new-mercedes-s-class-facelift-india-launch-confirmed/",
+        source: "Motoroids",
+        date: "2026-05-26",
+        tags: ["ディスプレイ", "AI", "コックピット", "EV"],
+    
+        interiorScore: 82,
+        interiorReason: "Superscreen cabin, 14.4-inch touchscreen, AI voice assistant, hybrid tech, and E",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.motoroids.com/wp-content/uploads/2026/05/2027-S-SEDAN-FMG-010-1UP.jpg",
+        note: ""
+    },
+    {
+        id: "in979",
+        title: "フェラーリ初のEV「ルチェ」、64万ドルで発売",
+        desc: "フェラーリ初のEV「ルチェ」は、4モーター駆動と64万ドルの価格設定を特徴とする。インテリアは高級素材で仕上げられ、HMIやコックピットデザインも次世代技術を融合させた洗練された空間を演出している。",
+        url: "https://indianexpress.com/article/technology/tech-news-technology/ferraris-first-ev-is-here-5-things-to-know-about-luce-10708257/",
+        source: "The Indian Express",
+        date: "2026-05-26",
+        tags: ["HMI", "コックピット", "新素材", "EV"],
+    
+        interiorScore: 60,
+        interiorReason: "flagship cabin refresh and luxury interior materials mentioned in Japanese summa",
+        imageInterior: false,
+        country: "in",
+        img: "https://images.indianexpress.com/2026/05/stress-1.jpg",
+        note: ""
+    },
+    {
+        id: "in980",
+        title: "ボルボXC90の耐久性に優れた内装",
+        desc: "ボルボXC90のリアシートは、犬の飛び跳ねにも耐える耐久性があり、素材の質が高く汚れも拭き取りやすい。",
+        url: "https://auto.hindustantimes.com/new-cars/volvo/xc90/user-reviews/durable-interior-69f3211d187e4ef2b49ff4ed",
+        source: "HT Auto",
+        date: "2026-05-26",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 57,
+        interiorReason: "seat material durability and cleanability user feedback",
+        imageInterior: false,
+        country: "in",
+        img: "https://images.hindustantimes.com/auto/auto-images/default/default-1600x900.jpg",
         note: ""
     },
 ];
