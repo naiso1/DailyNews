@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-27 01:31";
+window.NEWS_UPDATED_AT = "2026-05-28 01:21";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -61708,6 +61708,689 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "in",
         img: "https://images.hindustantimes.com/auto/auto-images/default/default-1600x900.jpg",
+        note: ""
+    },
+    // 2026-05-27 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1111",
+        title: "クロスオーバー調整のキモは「位相」！ そのコツを解説［イン・カー・リスニング学…チューニング編］",
+        desc: "レスポンス連載「イン・カー・リスニング学」で、サブウーファー導入時のクロスオーバー調整を解説。位相合わせで低音を前方定位させ、スロープ操作も活用して音波タイミングを調整する。",
+        url: "https://news.yahoo.co.jp/articles/7e30e291f8fb90447a1c7765d0d61ace90506aee?source=rss",
+        source: "レスポンス",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 83,
+        interiorReason: "audio system tuning and crossover adjustment details plus clear interior image s",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00000041-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1112",
+        title: "トヨタ紡織、リサイクルシートや面発光ドアトリムを初出展",
+        desc: "トヨタ紡織は5月27日から29日、パシフィコ横浜で開催される自動車技術展「人とくるまのテクノロジー展2026」に出展する。リサイクル性を高めた多機能ブロックシートや、多彩なアニメーション表現で車室空間を演出する面発光ドアトリムなど、レクサス新型ESに初採用される製品を展示する。",
+        url: "https://news.yahoo.co.jp/articles/f2709363aa7b8994b20c6fd195bd89c37f09c3d0?source=rss",
+        source: "レスポンス",
+        date: "2026-05-27",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00000036-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1113",
+        title: "マグナ、ADASやシーティングなど最新技術を展示…人とくるまのテクノロジー展 2026",
+        desc: "自動車部品大手サプライヤーのマグナ・インターナショナルは、人とくるまのテクノロジー展 2026に出展する。同社はエンジニアリング、電子技術、シーティング、先進運転支援システム（ADAS）などフルシステム能力を披露し、日本のOEMに対してコンセプト設計から量産まで一貫した開発支援を提供する。",
+        url: "https://news.yahoo.co.jp/articles/4a7af3b94f4154faddc7d9a0e458476481db6870?source=rss",
+        source: "レスポンス",
+        date: "2026-05-27",
+        tags: ["安全"],
+    
+        interiorScore: 81,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00000027-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1114",
+        title: "日立ソリューションズ、車載ソフト向けバリアント管理ツール「Pure Variants」提供開始",
+        desc: "日立ソリューションズは5月26日、PTCジャパンのバリアント管理ツール「Pure Variants」を提供開始した。SDV普及に伴う仕様増大に対し、人的ミス防止や開発工数削減を支援する。",
+        url: "https://news.yahoo.co.jp/articles/002da4463dd95cae06b951057b514b9789c7e26d?source=rss",
+        source: "レスポンス",
+        date: "2026-05-27",
+        tags: ["AR"],
+    
+        interiorScore: 73,
+        interiorReason: "The article discusses a software tool for managing vehicle variants (SDV), which",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00000020-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1115",
+        title: "ホンダ「N-BOX」、グーグルビルトイン導入でインフォテインメント進化か",
+        desc: "ホンダ「N-BOX」のマイナーチェンジで、エクステリア刷新とホンダ軽初となる「グーグルビルトイン」搭載が噂される。2023年登場の現行3代目に対し、ハード面は維持しつつデジタル領域にリソースを集中させるアップデートとみられる。",
+        url: "https://news.yahoo.co.jp/articles/71db7b9cdefdadb26c36b291f0ebd289233e480a?source=rss",
+        source: "carview!",
+        date: "2026-05-27",
+        tags: ["コネクテッド"],
+    
+        interiorScore: 63,
+        interiorReason: "interior infotainment and cabin UX focus",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00010009-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1116",
+        title: "新型「エルグランドオーテック」に上品なインテリアや最新技術への期待",
+        desc: "日産NMCは2026年夏発売予定の新型「エルグランド」ベースカスタムカー「エルグランドオーテック」を先行公開。第3世代「e-POWER」や「e-4ORCE」搭載で、ブルーをアイコニックカラーとしたプレミアムミニバンとして、インテリアの高級感やデザインへの期待が寄せられている。",
+        url: "https://news.yahoo.co.jp/articles/5d045a7419a5f9738f8e4bc8ad3a21674e4407f5?source=rss",
+        source: "carview!",
+        date: "2026-05-27",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 78,
+        interiorReason: "interior and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00010008-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1117",
+        title: "パイオニア、2026夏カロッツェリア新商品体験会を秋葉原で開催",
+        desc: "パイオニアが6月12・13日にベルサール秋葉原で「2026夏カロッツェリア新商品体験会」を開催する。最新サイバーナビや空間オーディオ対応ディスプレイオーディオの展示・デモカー試聴に加え、40周年記念の歴代モデル展示や開発担当者トークセッションも実施される。",
+        url: "https://news.yahoo.co.jp/articles/7e7f5284feeba196285ee8be27a4d399360a52e5?source=rss",
+        source: "MotorFan",
+        date: "2026-05-27",
+        tags: ["ディスプレイ", "コネクテッド", "音響"],
+    
+        interiorScore: 91,
+        interiorReason: "HMI and audio system product planning",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-01498435-motorfan-000-2-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1118",
+        title: "D.A.Dがジムニーノマドに高級内装を施す極上カスタム",
+        desc: "D.A.D（ギャルソン）が5ドアのジムニーノマドに高級感あふれる内装を提案。マルビーレのパーツでオフローダー感を演出し、ヴァーロンホイールを装着。ハイブランドのようなクリスタル内装と無骨な外観のギャップが魅力。",
+        url: "https://news.yahoo.co.jp/articles/34cd50b58a3073cbf0c8ed8d131e1d7d05ad10a2?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-05-27",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 87,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00010004-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1119",
+        title: "トヨタルーミー後席独立スライド最大70度リクライニングで長距離ドライブ快適性調査",
+        desc: "トヨタルーミーは後席独立スライド機構（最大240mm）と最大70度リクライニング機能により、室内長2,180mmの広さを活かした長距離ドライブの快適性を確保する。",
+        url: "https://news.yahoo.co.jp/articles/84d37ff5b4ad61de537e68e736c0606539b31053?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-00000009-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1120",
+        title: "トヨタ「ランクル70」カスタム仕様「Urban Heritage Style」を展示",
+        desc: "トヨタは東京ビッグサイトで開催の「FIELD STYLE TOKYO 2026」で、ランクル70周年記念の「Urban Heritage Style」を初公開した。ボディは保護フィルムを施したベージュで、室内は黒のシートカバーを採用。2026年5月9日と10日の2日間展示された。",
+        url: "https://news.yahoo.co.jp/articles/da76293ce45ae766e04b7d240b91c30a3045ecfc?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-27",
+        tags: ["シート", "カスタマイズ"],
+    
+        interiorScore: 90,
+        interiorReason: "seat cover and flagship cabin refresh; interior accessory/product",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260527-01063471-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us929",
+        title: "2026年レクサスES、EV・ハイブリッドで快適性重視の高級セダン",
+        desc: "2026年レクサスESは8世代目となり、ガソリン車からハイブリッド（ES350h）とEV（ES350e/ES500e）にプラットフォームを統一。14インチタッチスクリーンやデジタルドアロックを採用。ES350e LuxuryのExecutive Packageは後席をファーストクラスに。",
+        url: "https://www.thedrive.com/car-reviews/2026-lexus-es-first-drive-review-an-honest-luxury-sedan-now-in-ev-and-hybrid-flavors",
+        source: "The Drive",
+        date: "2026-05-27",
+        tags: ["HMI", "ディスプレイ", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/05/Lexus-ES-Lede.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us930",
+        title: "2026年レクサスES、ハイブリッドまたはEVでアクセスしやすいラグジュアリーを提供",
+        desc: "2026年レクサスESは、快適で効率的かつ広大な空間を備えたラグジュアリーセダン。既存ファンや新規購入者にもアピールする。",
+        url: "https://www.jalopnik.com/2181753/2026-lexus-es-hybrid-ev-sedan-first-drive-review/",
+        source: "Jalopnik",
+        date: "2026-05-27",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/2026-lexus-es-whether-hybrid-or-ev-offers-accessible-luxury-with-few-drawbacks/l-intro-1779836917.jpg",
+        note: ""
+    },
+    {
+        id: "us931",
+        title: "テスラ、車内冷却効率向上のための新特許を申請",
+        desc: "テスラは、パノラマガラスルーフを空調システムの一部として活用する新特許を申請。通気ガラスと通常のガラスをサンドイッチ構造とし、冷気を拡散させ熱気を排出する仕組みを採用。これによりエアコン負荷を減らし航続距離を向上させる可能性がある。",
+        url: "https://www.caranddriver.com/news/a71393499/tesla-evs-climate-management-system-patent/",
+        source: "Car and Driver",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 92,
+        interiorReason: "Tesla patent for integrating panoramic glass roof into AC system offers high-val",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/2024-tesla-model-3-long-range-rwd-101-66feb72765eed.jpg",
+        note: ""
+    },
+    {
+        id: "us932",
+        title: "2026年式レクサスESハイブリッド、内装刷新でサイズ拡大",
+        desc: "2026年式レクサスESハイブリッドは、車輪ベース116.1インチの拡大と14.0インチタッチスクリーン搭載など内装を刷新。2.5Lエンジンとモーターの組み合わせで244馬力を発揮し、46mpgの燃費を維持する。",
+        url: "https://www.caranddriver.com/reviews/a71341884/2026-lexus-es-hybrid-drive/",
+        source: "Car and Driver",
+        date: "2026-05-27",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 58,
+        interiorReason: "interior refresh and 14-inch touchscreen mentioned in text, but image is exterio",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/f93d436c-540d-4b74-ae3a-f62fa0907a95.jpg",
+        note: ""
+    },
+    {
+        id: "us933",
+        title: "2027 Lexus ES：クロスオーバー特性と静寂性で高級セダンを再定義",
+        desc: "2027年式Lexus ESは、TNGA-Kプラットフォームを採用し、ハイブリッド化で46MPGを実現。NVH性能を向上させ、静寂なコックピットを確保。室内空間はRXクロスオーバーに匹敵する広さを備え、高級セダンの快適装備を維持する。",
+        url: "https://www.topspeed.com/2027-lexus-es-first-drive/",
+        source: "Top Speed",
+        date: "2026-05-27",
+        tags: ["コックピット"],
+    
+        interiorScore: 63,
+        interiorReason: "NVH and cabin space mentioned in text, but image is exterior only",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/wm/2026/05/2026-lexus-es-1-1.jpg",
+        note: ""
+    },
+    {
+        id: "us934",
+        title: "2027 Ferrari Luce：Jony Ive設計のEVクーペ、1036馬力・4ドア5席",
+        desc: "Ferrariが初のEV「Luce」を公開。Jony IveのLoveFromが設計し、1036馬力・4ドア5席。コックピットはSamsung DisplayのOLEDパネルやCorning Gorilla Glassキー、Alcantara素材を採用。",
+        url: "https://www.topspeed.com/2027-ferrari-luce-interior-and-exterior-picture-gallery/",
+        source: "Top Speed",
+        date: "2026-05-27",
+        tags: ["AR", "ディスプレイ", "コックピット", "新素材", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "flagship EV interior refresh with concrete material and HMI details (OLED, Goril",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/05/2027-ferrari-luce-15.jpg",
+        note: ""
+    },
+    {
+        id: "eu894",
+        title: "自動車業界、サイバー攻撃常態化、基本対策強化要請",
+        desc: "Idax SoftwareのCEO Mark Rodbertは、自動車業界を「攻撃対象」と呼び、ハッキングが「日常業務」化したと指摘。基本対策の徹底と機密データ保護を強調。",
+        url: "https://www.autocar.co.uk/car-news/business/cyber-attacks-become-business-usual-automotive-firms",
+        source: "AUTOCAR UK",
+        date: "2026-05-27",
+        tags: ["AR"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/man-notes-macbook-computer_0.jpg?itok=O_iiToxW",
+        note: ""
+    },
+    {
+        id: "eu895",
+        title: "失敗したはずの車と意外なヒット車の考察",
+        desc: "デザインが魅力的な車は成功するはずだが、必ずしもそうとは限らない。記事では、期待外れだった車と意外なヒット車を振り返る。",
+        url: "https://www.autocar.co.uk/car-news/slideshow/cars-should-have-been-stars-werent",
+        source: "AUTOCAR UK",
+        date: "2026-05-27",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_0-intro-gt430-1430_ac_1_0.jpg?itok=gLO5hH3s",
+        note: ""
+    },
+    {
+        id: "eu896",
+        title: "新レクサスES 2026年モデル、BMW i5やAudi A6に挑む電気自動車",
+        desc: "新レクサスES 2026年モデルは全電気化され、英国で6万ポンドで発売予定。BMW i5やAudi A6といった高級セダンライバルに挑戦するEVとして、2026年5月27日にAuto Expressが報道した。",
+        url: "https://www.autoexpress.co.uk/lexus/es/369663/new-lexus-es-2026-pictures",
+        source: "Auto Express",
+        date: "2026-05-27",
+        tags: ["EV"],
+    
+        interiorScore: 42,
+        interiorReason: "flagship cabin refresh",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--M86HJqOS--/t_rss_image_w_845/v1779867758/autoexpress/2026/05/Lexus%20ES%202026-23.jpg",
+        note: ""
+    },
+    {
+        id: "eu897",
+        title: "2026年ベストエアコンクリーナー6製品比較レビュー",
+        desc: "2026年5月、6つのエアコンクリーナーを6台の車（トヨタヤリス、ランドローバーレンジローバーなど）でテスト。メギアーズが最も効果的で、オートグリムは殺菌機能あり。",
+        url: "https://www.autoexpress.co.uk/product-group-tests/369666/best-air-con-cleaners",
+        source: "Auto Express",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 67,
+        interiorReason: "air-con cleaning products and cabin air quality maintenance",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--mlyKd5hN--/t_rss_image_w_845/v1779877166/autoexpress/2026/05/Air%20con%20cleaner%20header%20image.jpg",
+        note: ""
+    },
+    {
+        id: "eu898",
+        title: "エアコンクリーナーの画像比較：Auto Express 2026年5月",
+        desc: "Auto Expressが2026年5月に発表したエアコンクリーナーの画像ギャラリーで、製品群テストの視覚的比較を提供。",
+        url: "https://www.autoexpress.co.uk/product-group-tests/369665/best-air-con-cleaners-pictures",
+        source: "Auto Express",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 67,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--mlyKd5hN--/t_rss_image_w_845/v1779877166/autoexpress/2026/05/Air%20con%20cleaner%20header%20image.jpg",
+        note: ""
+    },
+    {
+        id: "cn941",
+        title: "フェラーリ、ルチェで中国市場の再獲得を狙う",
+        desc: "フェラーリは、リフトバックセダンのルチェで中国市場の再獲得を目指しています。中国の自動車市場では高級車ブランド間の競争が激化しており、フェラーリは中国の顧客ニーズに応える戦略を講じています。",
+        url: "https://carnewschina.com/2026/05/27/think-ferrari-luce-is-ugly-ferrari-built-it-to-win-back-china-not-you/",
+        source: "CarNewsChina - All",
+        date: "2026-05-27",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/ferrari-luce-china.png",
+        note: ""
+    },
+    {
+        id: "cn942",
+        title: "MGは中国で、液態・固態電池を搭載したEV SUV「MG 4X」を発売しました。",
+        desc: "MGは中国市場向けに、液状・固体電池技術を搭載したコンパクトEV SUV「MG 4X」を発売。価格は1万3600ドルから。",
+        url: "https://carnewschina.com/2026/05/27/mg-launches-compact-electric-suv-mg-4x-in-china-starting-from-13600-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-05-27",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-190-e1779870159692.png",
+        note: ""
+    },
+    {
+        id: "cn943",
+        title: "ロータスが、Emira 420 Sportを新車として発表した。性能向上と軽量化が実現されている。",
+        desc: "ロータスは、Emira 420 Sportを新車として発表し、出力向上と軽量化を実現した。CarNewsChina.comが報じたこのモデルは、既存のEmiraをベースにパフォーマンスアップと重量削減を施した特別仕様車である。",
+        url: "https://carnewschina.com/2026/05/27/lotus-emira-420-sport-debuts-with-performance-upgrades-and-weight-reduction/",
+        source: "CarNewsChina - All",
+        date: "2026-05-27",
+        tags: ["AR"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-186-e1779860933879.png",
+        note: ""
+    },
+    {
+        id: "cn944",
+        title: "中国のNEVは5月24日時点で販売が11%減少し、浸透率は62.5%に達した",
+        desc: "中国の新エネルギー自動車は、5月1日から24日までの期間で販売が11%減少しましたが、市場浸透率は62.5%に達しており、NEVが市場を主導しています。CnEVPostによると、NEVは乗用車市場を支配しており、中国自動車業界の電動化は進展しています。",
+        url: "https://cnevpost.com/2026/05/27/china-nev-retail-sales-drop-first-24-days-may/",
+        source: "CnEVPost - All",
+        date: "2026-05-27",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052711033948.jpg",
+        note: ""
+    },
+    {
+        id: "cn945",
+        title: "ファーウェイ傘下のAITO社が新モデルのM9 SUVを高級層向けに価格設定しています。",
+        desc: "ファーウェイ支援のAito社が高級車M9 SUVを発売した。標準価格は47万9800元、特別版は64万9800元。内装には高級素材が採用され、プレミアム層をターゲットにしている。",
+        url: "https://cnevpost.com/2026/05/27/huawei-backed-aito-launches-updated-m9-suv/",
+        source: "CnEVPost - All",
+        date: "2026-05-27",
+        tags: ["AI", "新素材"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052710424036.jpg",
+        note: ""
+    },
+    {
+        id: "cn946",
+        title: "ニオ氏をバスケット界の姚明氏に任命し、ES9の首席体験責任者として就任させる",
+        desc: "ニオは旗艦SUV「ES9」の発売を控え、NBA殿堂入り選手の姚明氏を首席体験責任者に起用。自動車内装やコックピット体験の向上を期待し、グローバルな影響力を活用する。",
+        url: "https://cnevpost.com/2026/05/27/nio-taps-basketball-legend-yao-ming-as-es9-chief-experience-officer/",
+        source: "CnEVPost - All",
+        date: "2026-05-27",
+        tags: ["コックピット"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052704085725.jpg",
+        note: ""
+    },
+    {
+        id: "in981",
+        title: "Pricol、FY27に700億ルピー投資で生産能力拡大",
+        desc: "PricolはFY27に700億ルピーの設備投資を実施。自動車制御や運転者情報システムなど、自動車内装・コックピット関連分野の生産能力拡大と新製品開発を推進する。",
+        url: "https://auto.economictimes.indiatimes.com/news/auto-components/pricol-announces-700-crore-investment-plan-amid-automotive-sector-challenges/131340793",
+        source: "ETAuto - Auto Components",
+        date: "2026-05-27",
+        tags: ["コックピット"],
+    
+        interiorScore: 39,
+        interiorReason: "company investment in automotive controls and driver information systems hints a",
+        imageInterior: false,
+        country: "in",
+        img: "https://etimg.etb2bimg.com/thumb/img-size-101466/131340793.cms",
+        note: ""
+    },
+    {
+        id: "in982",
+        title: "マレリ中国広州工場30周年、Mini-LED/MicroLED技術でグローバルイノベーション拠点へ",
+        desc: "マレリは中国広州工場で30周年を記念し、Mini-LEDやMicroLEDなど次世代ディスプレイ技術のグローバルイノベーション拠点へ。同工場は1996年設立で現在は約1,000人の従業員と66の生産ラインを擁し、デジタルコックピットやECUなど自動車電子機器の製造・開発を担っている。",
+        url: "https://auto.economictimes.indiatimes.com/news/auto-technology/marelli-marks-30-years-of-guangzhou-electronics-plant-expands-global-innovation-role/131351795",
+        source: "ETAuto - Auto Technology",
+        date: "2026-05-27",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        interiorScore: 78,
+        interiorReason: "Marelli Guangzhou plant anniversary highlights Mini-LED/MicroLED display tech fo",
+        imageInterior: true,
+        country: "in",
+        img: "https://etimg.etb2bimg.com/thumb/img-size-118620/131351795.cms",
+        note: ""
+    },
+    {
+        id: "in983",
+        title: "2026 Triumph Bonneville Bobber、14リットルタンクへ大更新",
+        desc: "2026年式Triumph Bonneville Bobberは、14リットル燃料タンクやLEDヘッドライト、ワイド化フロートシートなど内装・加飾面で大幅更新。",
+        url: "https://www.autocarindia.com/auto-images/2026-triumph-bonneville-bobber-image-gallery-440306",
+        source: "Autocar India - All",
+        date: "2026-05-27",
+        tags: ["シート", "EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260527_110256_920c520f.jpg",
+        note: ""
+    },
+    {
+        id: "in984",
+        title: "MG MajestorがGlosterの後継に、Fortunerとの比較",
+        desc: "MG MajestorはGlosterの後継で、大型化と機能拡充を遂げたICEモデル。Toyota Fortunerとの比較で、高級SUV市場での価値を問うている。",
+        url: "https://www.autocarindia.com/auto-features/mg-majestor-vs-toyota-fortuner-whose-top-model-offers-more-value-440219",
+        source: "Autocar India - All",
+        date: "2026-05-27",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260213_132041_aa484ee3.jpg",
+        note: ""
+    },
+    {
+        id: "in985",
+        title: "2026 Honda City faceliftは外観・内装を刷新、メカニカルは変更なし",
+        desc: "Honda Cars Indiaは2026年式Cityのフェイスリフトを発表。外観とインテリア（シート・加飾）を刷新し、メカニカルは変更なし。価格はRs. 12 lakhからSV、V、ZX、ZXの4グレードで設定。",
+        url: "https://gaadiwaadi.com/2026-honda-city-facelift-variant-wise-features-specs-mileage-prices-detailed/",
+        source: "GaadiWaadi",
+        date: "2026-05-27",
+        tags: ["AR", "シート"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/2026-honda-city-facelift-4.jpg",
+        note: ""
+    },
+    {
+        id: "in986",
+        title: "MG Majestor 4×4 SUV、インドで発売、価格4099万ルピー",
+        desc: "MG Majestorはインドで発売された全長5m超の4×4 SUV。2.0Lツインターボディーゼルエンジン（215.5PS/478.5Nm）を搭載し、3重ロック付き、マッサージ機能付きフロントシートを備える。",
+        url: "https://gaadiwaadi.com/mg-majestor-4x4-suv-launched-in-india-at-rs-40-99-lakh/",
+        source: "GaadiWaadi",
+        date: "2026-05-27",
+        tags: ["シート"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/02/MG-Majestor2.jpg",
+        note: ""
+    },
+    {
+        id: "in987",
+        title: "2026年タタ・ティアゴ、インドでICE/CNG/電動化モデルのフェイスリフト発表",
+        desc: "タタ・モーターズは2026年ティアゴを5月28日に発表予定。新バッテリーパックやCNG用パドルシフターなど、内装・コックピットに多数のアップデートが施される。",
+        url: "https://gaadiwaadi.com/2026-tata-tiago-ice-cng-electric-facelifts-launching-in-india-tomorrow/",
+        source: "GaadiWaadi",
+        date: "2026-05-27",
+        tags: ["コックピット", "EV"],
+    
+        interiorScore: 59,
+        interiorReason: "interior updates mentioned (cockpit/dashboard updates) but image is exterior-onl",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/2026-Tata-Tiago-ICE-And-Electric-Facelift-.jpg",
+        note: ""
+    },
+    {
+        id: "in988",
+        title: "MG Majestor 発売、最高グレード44.99万ルピー",
+        desc: "MG Majestorがインドで発売。4X2自動6・7人乗りは40.99万ルピー、4X4自動7人乗りは44.99万ルピー（税抜）で、トヨタ・フォーターナーやス柯达・コディアックと対抗する。",
+        url: "https://www.indiacarnews.com/news/mg-majestor-fortuner-rival-expected-price-ahead-of-launch-67950/",
+        source: "IndiaCarNews",
+        date: "2026-05-27",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/02/Untitled-design_2_.webp",
+        note: ""
+    },
+    {
+        id: "in989",
+        title: "2026年タタ・ティアゴ、外観・内装を刷新しインドで発売",
+        desc: "タタ・モーターズは2026年ティアゴとティアゴEVのフェイスリフトを発表。外観に加え、インテリアやコックピットのデザインを刷新し、快適装備も強化される。",
+        url: "https://www.indiacarnews.com/news/new-2026-tata-tiago-tiago-ev-launching-tomorrow-top-changes-you-need-to-know-67949/",
+        source: "IndiaCarNews",
+        date: "2026-05-27",
+        tags: ["コックピット", "EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/05/1-3.webp",
+        note: ""
+    },
+    {
+        id: "in990",
+        title: "トヨタ、ベンガルール近郊に300エーカーの技術・製造ハブを設立",
+        desc: "トヨタキロスカー・モーターはカルナータカ州政府と覚書を締結し、ベンガルール近郊のKWIN Cityに300エーカーのTKM Bizintel Hubを建設する。同施設はモビリティ技術のテストやデジタル統合、インテリジェント製造に注力し、初期投資は約1,200コルルで200件の雇用創出が予定されている。",
+        url: "https://www.autopunditz.com/post/toyota-300-acre-technology-manufacturing-hub-bengaluru",
+        source: "Auto Punditz",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 8,
+        interiorReason: "The article focuses on a new manufacturing hub and technology center, which is c",
+        imageInterior: false,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_161ad605ae4c4edbaeeccfaee0679155~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us935",
+        title: "米国で中国製車技術禁止だが、ボルボは特別許可で継続販売可能",
+        desc: "米国商務省の中国製車技術禁止措置に対し、中国の吉利傘下で中国で組立するXC60やXC40を含むボルボは、特別許可を得て2027年モデル以降も米国で接続車機能付き車両の輸入・販売を継続できる。",
+        url: "https://insideevs.com/news/797035/volvo-chinese-connected-car-ban-exemption/",
+        source: "InsideEVs",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 38,
+        interiorReason: "regulatory exemption for connected car tech with no interior product detail",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/pb9NG1/s3/volvo-ex60-2026.jpg",
+        note: ""
+    },
+    {
+        id: "eu899",
+        title: "Volvo、中国技術で米国市場維持に成功",
+        desc: "吉利傘下のVolvoは、中国の先進技術を活用し、米国市場での接続型車両販売を維持した。",
+        url: "https://www.just-auto.com/news/volvo-cars-secures-us-nod-to-sell-connected-vehicles/",
+        source: "Just Auto",
+        date: "2026-05-27",
+        tags: [],
+    
+        country: "eu",
+        img: "https://www.just-auto.com/wp-content/uploads/sites/30/2026/05/shutterstock_1982590340.jpg",
+        note: ""
+    },
+    {
+        id: "eu900",
+        title: "VisteonとSmart Eye、LCD背面にDMSカメラ搭載",
+        desc: "VisteonとSmart Eyeは、LCD背面にDMSカメラを配置した計器盤を開発。Smart Eyeのソフトウェアは400万台以上で採用され、2026年5月27-29日のJSAEで展示予定。",
+        url: "https://www.automotiveworld.com/news/visteon-smart-eye-place-dms-camera-behind-lcd-display/",
+        source: "Automotive World",
+        date: "2026-05-27",
+        tags: ["AR", "ディスプレイ"],
+    
+        interiorScore: 88,
+        interiorReason: "DMS camera placement behind LCD display is a specific interior design and HMI in",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/27141933/smart-eye-in-car-screen-display.jpg",
+        note: ""
+    },
+    {
+        id: "eu901",
+        title: "日産、高山市と連携し塗料廃棄物から建築用シートを商品化",
+        desc: "日産は高山市と連携し、栃木・大和工場の塗料ブースから回収した炭酸カルシウムを建築用防音シート「TS-12」「TS-20」に活用。年間1,200トン廃棄物削減と約2,500万円コスト削減を達成。",
+        url: "https://www.automotiveworld.com/news/nissan-takayama-launch-building-sheets-from-paint-waste/",
+        source: "Automotive World",
+        date: "2026-05-27",
+        tags: ["シート"],
+    
+        interiorScore: 12,
+        interiorReason: "The article focuses on paint shop waste recycling into building sheets, which is",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/27135825/nissan-and-takayama-group-recycled-paint-shop-byproducts-1-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu902",
+        title: "Qorix、インドでSDV中間件販売強化へ",
+        desc: "QorixはベンガルールのSupremologyをインドのSDV中間件販売代理店に任命。AUTOSARプラットフォームやQorix Performanceなど、SDV移行を支援する技術ポートフォリオをインドのOEM・ティア1向けに展開する。",
+        url: "https://www.automotiveworld.com/news/qorix-grows-india-software-defined-vehicle-reach/",
+        source: "Automotive World",
+        date: "2026-05-27",
+        tags: ["AR"],
+    
+        interiorScore: 28,
+        interiorReason: "company partnership and software-defined vehicle middleware news with no interio",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/05/27091225/qorix-supremology.jpg",
+        note: ""
+    },
+    {
+        id: "eu903",
+        title: "スカニア、重電トラックでV2G技術実証",
+        desc: "スカニアは、メガワット充電システム（MCS）を用いて重電トラックの車網連携（V2G）技術を実証。グリッド支援やエネルギー貯蔵、コスト削減を実現。",
+        url: "https://electriccarsreport.com/2026/05/scania-demonstrates-vehicle-to-grid-technology-for-heavy-electric-trucks-using-mcs/",
+        source: "Electric Cars Report",
+        date: "2026-05-27",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Scania-MCS-charging.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "us936",
+        title: "E Ink、BMWと共催で変色電子ペーパーコンセプトカーを COMPUTEX 2026 に初公開",
+        desc: "E Ink は COMPUTEX 2026 で BMW と共催し、E Ink Prism™技術を採用した変色電子ペーパーコンセプトカーを初公開する。BMW iX3 フローエディションのフードも展示され、電子ペーパーが曲面への適用やスマートサーフェス化の可能性を示す。",
+        url: "https://markets.businessinsider.com/news/stocks/color-changing-epaper-concept-car-to-make-its-debut-at-computex-2026-1036198661",
+        source: "Markets Insider",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "ePaper technology for vehicle surfaces and smart cabin UX potential",
+        imageInterior: true,
+        country: "us",
+        img: "https://ml.globenewswire.com/Resource/Download/40cd0745-9b2c-49b4-8d51-813b4fc78656/color-changing-car-image.png",
+        note: ""
+    },
+    {
+        id: "us937",
+        title: "熱波中の車内をACなしで冷却する科学的方法が紹介された",
+        desc: "数学者のハンナ・フライ氏によると、車内を冷却するには、窓を降ろし運転席ドアを素早く開閉することで熱気を排出できる。この方法は熱力学の原理に基づき、2〜3 回で車内を涼しくできるという。",
+        url: "https://www.express.co.uk/news/weather/2210149/car-cool-fast-hot-weather",
+        source: "Daily Express",
+        date: "2026-05-27",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.images.express.co.uk/img/dynamic/153/1200x630/6943908.jpg",
+        note: ""
+    },
+    {
+        id: "us938",
+        title: "米国の高級車メーカーで最も安価な2026年モデルのランキング",
+        desc: "2026年、米国で販売される高級車メーカーの最も安価なモデルをランキング。各社が提供する低価格な新車モデルを比較し、購入を検討する際の参考となる。",
+        url: "https://carbuzz.com/luxury-car-brands-cheapest-model/",
+        source: "CarBuzz",
+        date: "2026-05-27",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2026/05/bmw-2-series-gc-main.png?w=1600&h=900&fit=crop",
         note: ""
     },
 ];

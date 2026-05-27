@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-27",
+        analysis: {
+            jp: "日本の自動車内装業界は音質[jp1111]、新素材[jp1112]、コネクテッド[jp1115]、カスタマイズ[jp1116]の多様なトレンドが展開中である。特に高級感を追求する傾向が顕著で、トヨタ紡織の面発光ドアトリム[jp1112]やD.A.Dのギャップ演出[jp1118]がそれを示唆する。また、日産やトヨタのシート[jp1119][jp1120]の機能向上は、静粛性を前提とした高級感への需要を裏付けている。さらに、日立ソリューションズのAR[jp1114]やパイオニアのディスプレイオーディオ[jp1117]は、デジタル領域での高級感向上への試みとして注目される。",
+            cn: "中国市場では高級車競争の激化とEVの浸透率62.5%[cn944]が示すように、高級感と電動化の両立が重要。ファーウェイ傘下AITOのM9 SUVは高級素材を採用し、ニオ氏をバスケット界の姚明氏に任命しES9の首席体験責任者として就任させる[cn946]姚明氏のコックピット体験向上が示す通り、体験価値が競争の鍵。またMG 4XのEV SUV販売[cn942]とEmira 420 Sportのパフォーマンス向上[cn943]は、EVでもスポーツ性を求めるニーズがあることを示唆。これらを踏まえ、製造プロセスの自動化やリサイクル材活用でコスト削減とサステナビリティを両立する製品開発が求められる。",
+            in: "インド市場では、デジタルコックピット[in982]・EV 化[in989]が加速。高級車に加え、4×4 SUV[in986]でもマッサージ機能シート[in986]など快適装備が重視されている。トヨタの技術ハブ設立[in990]は、インテリジェント製造[in990]とデジタル統合[in990]への投資が顕著。Pricol の生産能力拡大[in981]は、コックピット[in981]分野での開発競争を反映。消費者は高級感と機能性の両立を求め、静粛性や素材の質感への価値が向上している。",
+            us: "米国市場ではEV普及に伴い**熱管理**技術が注目 [us931,us937]。高級車も**EV化**でプラットフォーム統合が進み、**コックピット**の静寂性や**HMI**進化が重要 [us933]。中国技術制限や**電子ペーパー**応用もトレンド [us936]。高級車でも**コスト競争力**が鍵 [us938]。自社開発ではEV専用設計と軽量化**樹脂**技術の活用が示唆される [us929,us932]。",
+            eu: "EU市場では、自動車業界のセキュリティ強化とエネルギー連携が必須である[eu894][eu903]。機能拡張とコスト削減の両立が進展しており、内装カメラ搭載など技術革新が進む[eu901][eu900]。EV化競争は激化し、失敗した車と意外なヒット車の考察が示す[eu895]ように戦略が重要だ。空調クリーナー効果は品質向上への関心が示唆され[eu894]、Volvoの中国技術活用はサプライチェーン多角化のトレンドを象徴する[eu894]。内装開発はコスト競争力と技術革新の両面で推進すべきだ。",
+        },
+        ideas: {
+            jp: [
+                { id: 1006, img: "images/idea_1006.png", title: "位相同期型調光パネル", desc: "位相調整技術を応用し、内装パネルの発光タイミングを車外環境音に同期させる。静寂な空間で淡い光が舞う心地よさ、音に反応する光の美しさ。高級感ある調光を体験し、静粛性がより一層心地よさを増幅する。", imagePrompt: "Premium car interior, center console with integrated lighting panel, subtle soft glow synchronized with ambient sound waves, warm atmosphere, brushed aluminum texture, dark leather interior, cinematic lighting, photorealistic rendering, high detail, 4K quality" },
+                { id: 1007, img: "images/idea_1007.png", title: "発光ミリ波透過エンブレム", desc: "豊田合成の発光ミリ波レーダー透過エンブレムをドアトリムに展開。ADAS信号を透過しながらイルミネーションを発光。ドライバーの安心感を視覚化し、安全技術が高級感を演出するうれしさを体験できる。", imagePrompt: "Car door trim with integrated emblem, holographic light effect visible through the emblem, night driving scene, blue accent lighting, premium material texture, futuristic cockpit design, photorealistic render, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 1008, img: "images/idea_1008.png", title: "自動化内装組立ユニット", desc: "廃車由来プラスチックを50%含むリサイクル材を採用し、高強度なコックピット部品を自動化ラインで組立。コスト削減で価格競争力を維持しつつ、環境意識の高い顧客にサステナビリティのうれしさを提供。生産効率が向上し、市場投入スピードも加速する。", imagePrompt: "Automated assembly line for car interior parts, robotic arms assembling recycled high-strength plastic components, clean industrial setting, bright overhead lighting, blue and white color scheme, photorealistic 3D render, high detail, premium manufacturing facility" },
+                { id: 1009, img: "images/idea_1009.png", title: "高級EVスポーツシリアル", desc: "液態・固態電池技術と高級素材を組み合わせたEVスポーツモデル。姚明氏のコックピット体験向上を反映し、運転者の興奮を高める先進的なディスプレイと、スポーツカーらしい軽量設計を実現。高性能EVでも運転の愉しさを維持できる。", imagePrompt: "Luxury electric sports car interior, holographic display floating above dashboard, AI assistant interface, night driving scene, blue accent lighting, brushed aluminum and leather materials, premium quality, photorealistic render, cinematic lighting" },
+            ],
+            in: [
+                { id: 1010, img: "images/idea_1010.png", title: "静寂空間コックピット", desc: "EVの騒音低減と高級感を追求。静粛性向上で癒やし空間を創出。マッサージ機能付きシートと連携し、移動中もリラックスできる静寂を体験。", imagePrompt: "Luxury car interior at night, ultra-quiet cabin with sound-absorbing materials, soft ambient lighting, premium leather seats with subtle massage texture, calm atmosphere, photorealistic 3D render" },
+                { id: 1011, img: "images/idea_1011.png", title: "スマート充電コンソール", desc: "小型ワイヤレス充電ホルダの進化型。スマホとEVバッテリーを同時充電可能。スマートフォンの充電を最適化。センターコンソールに統合し、便利でスタイリッシュな充電体験を実現。", imagePrompt: "Modern car center console with integrated wireless charging pad and EV battery indicator, sleek design with blue LED lights, smartphone wireless charging in action, premium materials, photorealistic automotive interior concept" },
+            ],
+            us: [
+                { id: 1012, img: "images/idea_1012.png", title: "EV専用フロア熱管理ユニット", desc: "EV専用設計のフロア下に熱交換ユニットを配置し、バッテリー冷却効率を最大化。AC負荷削減で航続距離向上。EVオーナーには快適な寒さ、エコドライブの喜びを実感できる。", imagePrompt: "Electric vehicle floor console with integrated thermal management unit, advanced cooling pipes, sleek modern automotive interior, brushed aluminum and dark carbon fiber materials, cool blue ambient lighting, photorealistic 3D render, premium EV cockpit design" },
+                { id: 1013, img: "images/idea_1013.png", title: "樹脂インパネリンフォース搭載コックピット", desc: "鉄製インパネリンフォースを高強度樹脂に置き換え、重量を大幅削減。EV対応で床下空間を有効活用。ドライバーには軽快な操縦感、乗員には広々とした足元の空間を味わえる。", imagePrompt: "Automotive interior dashboard with high-strength resin reinforcement structure, lightweight design concept, luxury car cockpit, soft warm lighting, premium materials like Alcantara and wood grain, photorealistic 3D render, modern automotive design" },
+            ],
+            eu: [
+                { id: 1014, img: "images/idea_1014.png", title: "V2G対応スマートパネル", desc: "トラック用V2G技術を車載パネルに採用。蓄電池連携機能で電気代削減を実現。運転者がエネルギー管理アプリと連動し、EV充電コストを最適化。環境配慮と経済性の両立で、車主の満足度向上に寄与。コスト競争力が高く、量産設計も可能。", imagePrompt: "Smart interior panel integrated with V2G charging system, sleek modern dashboard design, glowing energy indicators on digital display, sustainable materials with eco-friendly textures, warm ambient lighting, photorealistic automotive interior render, 4K quality" },
+                { id: 1015, img: "images/idea_1015.png", title: "メテオコート加飾パネル", desc: "型内塗装のメテオコート技術を活用し、EV車向け高級感ある加飾パネルを提案。凹凸テクスチャーで質感を向上。塗装工程削減でコスト競争力高め。後塗装不要で工期短縮。環境配慮型素材で、EVオーナーの持続可能性への満足感向上。", imagePrompt: "Premium textured interior panel with seamless decorative coating, brushed metal and soft-touch materials, elegant automotive cabin interior, subtle ambient lighting highlighting texture details, photorealistic product visualization, modern luxury car design" },
+            ],
+        }
+    },
+{
         date: "2026-05-26",
         analysis: {
             jp: "日本市場で**EV化**と**内装素材**の進化が加速[jp1104][jp1110]。AI活用による**開発効率**向上[jp1106]と、**コックピット**体験の高度化[jp1103]がトレンド。家族層向け**リアシート**機能化[jp1107][jp1109]も重要。欧州車感の**デザイン**[jp1105]や高音質**オーディオ**[jp1102]も消費者ニーズ。[jp1108]では**リアクーラー**が家族車の快適性向上に寄与。",
