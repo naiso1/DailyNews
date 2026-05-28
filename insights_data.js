@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-28",
+        analysis: {
+            jp: "日本の自動車内装市場では、**DMS統合化**[jp1121]や**EVクーペ**[jp1122]の出現で、**ディスプレイ**[jp1121]と**音響**[jp1123]の統合がトレンド。レクサスES[jp1124]やボルボXC40[jp1126]が**コネクテッド**技術で性能向上、GRヤリス[jp1125]は**新素材**で小型化を実現。デリカD:5[jp1127]のように**シート**アレンジでアウトドア需要に対応。",
+            cn: "中国市場では、**バッテリー技術**[cn947][cn949][cn950][cn954]と**自動運転**[cn947][cn955]への投資が加速しており、EV化とインテリジェンスの両輪で進化している。特に**フラッシュ充電**[cn950]や**4nmチップ**[cn947]の登場は、ユーザー体験を**劇的に向上**させる方向性を示唆している。また、高級車市場での**競争激化**[cn952][cn953]は、差別化要因としての**素材革新**や**ウェルネス機能**の重要性を高めている。サプライチェーンの強化[cn949][cn954]も、持続可能な開発への意識を裏付ける。",
+            in: "インド市場の2026年モデルではEV化とタッチスクリーンの普及が加速[in992]。特にタタのティアゴEVはデジタルメーターとコネクテッド機能を標準化し[in999]、安全装備も強化している[in995]。マルチ・スズキのサービス記録増はアフターサービスの重要性を示唆[in999]。消費者はコスパと最新技術を両立する製品を求める[in998]。",
+            us: "ランボルギーニCEOはEV延期を正当化し、EV遅延は戦略的選択 [us939] としている。フォードは商用EVで収益転換成功 [us940] と報じられている。トヨタ・ランドクルーザー計9万台のリコールでHMI表示問題が顕在化 [us948] している。ニオES9は47スピーカーや48インチダッシュボードで快適性を極限 [us944] としている。ミツオカ・ビュートは8インチディスプレイ追加でコネクテッド化 [us941] している。Buick EnvistaはBMW X1より高級感で低価格 [us947] と比較されている。",
+            eu: "欧州市場におけるEV効率性への関心の高まり[eu906]と、レクサスESの14インチディスプレイや高級オーディオ[eu912]、ジャクー9の歩行者安全対策[eu907]など、各メーカーのEV戦略や新技術の進化がAutocarなどのメディアでも報じられている[eu904]。SDVプロジェクト[eu910]や半固体電池[eu913]、Seat/CupraのEV路線[eu906]、BMW/Volvo比較[eu911]、フェラーリ・ルチェのデザイン重視[eu905]など、多角的な視点からEV市場の動向が整理されている。",
+        },
+        ideas: {
+            jp: [
+                { id: 1016, img: "images/idea_1016.png", title: "量産向けDMS統合メーターモジュール", desc: "アンダーディスプレイカメラ方式を採用し、光学スタック最適化で画像品質と表示品質を両立。量産コストを下げつつ、スマートアイ・ビステオンのようなDMS統合液晶メーター開発を支援。開発工程の効率化で、低価格でも高品質な内装製品を実現。量産化によるコスト競争力強化で、製造工程の負担軽減と品質向上の双璧を達成できる。", imagePrompt: "Automotive interior close-up view, integrated DMS camera module under the display, sleek brushed metal frame, premium black leather trim, soft ambient blue lighting from display edges, photorealistic 3D render, high detail, cinematic lighting, 4K quality" },
+                { id: 1017, img: "images/idea_1017.png", title: "植物系セルロースナノファイバー内装パネル", desc: "豊田合成のセルロースナノファイバー配合内装材をベースに、レクサスNXのイルミネーション演出やデリカD:5のシートアレンジと組み合わせ。植物由来素材で環境負荷を低減し、軽量高強度を実現。自然素材の温かさと現代的デザインが融合し、環境に配慮した高級感あふれる内装空間を創出。消費者のサステナブル志向と高級感を両立できる。", imagePrompt: "Premium car interior dashboard close-up, plant-based cellulose nanofiber material with natural wood grain texture, soft warm ambient lighting, subtle green accent glow, high gloss finish, luxury leather stitching, photorealistic 3D render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 1018, img: "images/idea_1018.png", title: "抗菌消臭コンソール", desc: "中心コンソールに抗菌・消臭・空気清浄機能を統合。天然素材の香りと、車内CO2濃度センサーによる自動換気システムを備える。長時間ドライブでも新鮮な空気と清潔感を楽しみ、家族全員が健康で快適な空間を共有できるうれしい体験を提供。", imagePrompt: "Premium car interior center console with integrated health technology, natural wood grain texture, soft ambient lighting, fresh green air mist visualization, antimicrobial LED indicators, luxury leather trim, photorealistic 3D render, warm golden hour lighting, high detail" },
+                { id: 1019, img: "images/idea_1019.png", title: "植物繊維強化ダッシュボード", desc: "セルロースナノファイバー配合素材で、衝撃吸収性と軽量化を実現したダッシュボード。植物由来の自然な香り付きで、車内温度変化に強い。環境意識の高いドライバーが、サステナブルで高品質な内装を誇りに思ううれしい感覚を演出。", imagePrompt: "Modern car dashboard made of plant fiber composite material, natural wood and bamboo texture, soft earthy color tones, subtle green lighting accent, sustainable material close-up, photorealistic render, soft diffused lighting, high detail, eco-friendly automotive interior design" },
+            ],
+            in: [
+                { id: 1020, img: "images/idea_1020.png", title: "スマートコックピット統合システム", desc: "10.25インチスクリーンにAIアシスタントを統合。音声で目的地を指定すると、ナビが自動設定。乗員は「安心感」を感じ、運転から解放されます。", imagePrompt: "Premium car interior with integrated 10.25 inch touchscreen displaying AI assistant interface, modern dashboard with ambient lighting, Indian market style design, digital instrument cluster showing navigation, photorealistic 3D render, cinematic lighting, warm ambient glow, high detail, 4K quality" },
+                { id: 1021, img: "images/idea_1021.png", title: "LED安全通知イルミネーションシステム", desc: "既存のLED通知イルミネーションをEV向けに再設計。危険時や警告情報をダッシュボードに光で表示。乗員は「安心感」を直感的に実感し、安全運転が促進されます。", imagePrompt: "Car dashboard with integrated LED notification illumination system, subtle colored LED lights displaying safety warnings, premium vehicle cockpit, brushed aluminum and leather materials, modern vehicle interior, photorealistic rendering, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 1022, img: "images/idea_1022.png", title: "EV遅延の市場参入戦略", desc: "ランボルギーニのEV遅延対応を模範とし、高級EV市場へ参入する際、信頼性確保と高級感維持を両立。EV遅延への対応姿勢は、顧客に安心感とブランドへの信頼を醸成し、高級車市場での参入障壁を下げることが可能。", imagePrompt: "Luxury electric vehicle interior cockpit, Lamborghini style design language, carbon fiber trim with brushed metal accents, premium leather seats with ambient lighting, futuristic dashboard with large curved display, night scene with blue accent lighting, photorealistic 3D render, high detail automotive interior design" },
+                { id: 1023, img: "images/idea_1023.png", title: "ELV材50%リサイクルコンソール", desc: "トヨタのHMI不点灯リコール対応から学ばれ、廃車由来プラスチックを50%配合した世界初の高強度リサイクル材でコンソールを製造。環境配慮とコスト削減を両立し、社会貢献と経済効率を同時に実現できる。", imagePrompt: "Automotive interior center console made from recycled plastic composite, brushed aluminum finish with eco-friendly green accents, modern vehicle cockpit design, sustainable materials showcase, photorealistic rendering with soft natural lighting, premium quality automotive interior visualization" },
+            ],
+            eu: [
+                { id: 1024, img: "images/idea_1024.png", title: "欧州市場でのEV効率性への関心", desc: "EV効率性への関心がEU全体で高まっている。", imagePrompt: "欧州市街地のEV充電ステーションと緑豊かな環境" },
+                { id: 1025, img: "images/idea_1025.png", title: "レクサスESの新機能", desc: "レクサスESには14インチディスプレイや高級オーディオが搭載されている。", imagePrompt: "レクサスESのインテリア、大きなディスプレイとオーディオシステム" },
+            ],
+        }
+    },
+{
         date: "2026-05-27",
         analysis: {
             jp: "日本の自動車内装業界は音質[jp1111]、新素材[jp1112]、コネクテッド[jp1115]、カスタマイズ[jp1116]の多様なトレンドが展開中である。特に高級感を追求する傾向が顕著で、トヨタ紡織の面発光ドアトリム[jp1112]やD.A.Dのギャップ演出[jp1118]がそれを示唆する。また、日産やトヨタのシート[jp1119][jp1120]の機能向上は、静粛性を前提とした高級感への需要を裏付けている。さらに、日立ソリューションズのAR[jp1114]やパイオニアのディスプレイオーディオ[jp1117]は、デジタル領域での高級感向上への試みとして注目される。",

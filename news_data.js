@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-05-28 01:21";
+window.NEWS_UPDATED_AT = "2026-05-29 01:20";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -62391,6 +62391,726 @@ window.LOADED_NEWS_DATA = [
     
         country: "us",
         img: "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2026/05/bmw-2-series-gc-main.png?w=1600&h=900&fit=crop",
+        note: ""
+    },
+    // 2026-05-28 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1121",
+        title: "スマートアイとビステオン、DMS統合液晶メーター公開",
+        desc: "スマートアイとビステオンは5月27日、DMS統合LCDメータークラスターを共同開発し、パシフィコ横浜で展示する。アンダーディスプレイカメラ方式で、光学スタック最適化により画像品質と表示品質を両立した。",
+        url: "https://news.yahoo.co.jp/articles/f26c44294fb662df94b9413f4bfa1fff4b02db0b?source=rss",
+        source: "レスポンス",
+        date: "2026-05-28",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 83,
+        interiorReason: "DMS-integrated LCD meter cluster is a core interior/HMI component; image shows d",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00000018-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1122",
+        title: "フェラーリ初のEVクーペ『ルーチェ』、デザインと内装で話題",
+        desc: "フェラーリは5月25日、初のEVクーペ『ルーチェ』を公開した。最高出力1050馬力、0-100km/h加速2.5秒に加え、デジタルディスプレイや高品質オーディオなど快適装備に注力。元Appleのジョニー・アイブらがデザインを担当し、ガラスハウスやヘイロー型テールライトが特徴。",
+        url: "https://news.yahoo.co.jp/articles/b19963d494eeb672a93594789a059a156f5757e7?source=rss",
+        source: "レスポンス",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "EV", "音響"],
+    
+        interiorScore: 78,
+        interiorReason: "flagship cabin refresh and interior features like digital display and high-quali",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00000016-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1123",
+        title: "カロッツェリア新商品体験会、秋葉原で業界初の空間オーディオ対応モデルも",
+        desc: "6月12・13日、ベルサール秋葉原で「2026夏 カロッツェリア新商品体験会」開催。業界初の空間オーディオ対応ディスプレイオーディオやサイバーナビ LIMITED EDITIONを搭載したデモカーで音質を体験可能。",
+        url: "https://news.yahoo.co.jp/articles/fb4038ff8e8b2c0f0590232321185cd4e3414b72?source=rss",
+        source: "レスポンス",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "コネクテッド", "音響"],
+    
+        interiorScore: 78,
+        interiorReason: "audio system and display interface details",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00000009-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1124",
+        title: "新型レクサスES、14インチタッチスクリーンと新インフォテインメントシステムを採用",
+        desc: "新型レクサスESは全長5140mmと大型化し、14インチタッチスクリーンに新世代インフォテインメントシステムを採用。タブレット感覚で操作でき、音声アシスタントでは男女の声を選べる。",
+        url: "https://news.yahoo.co.jp/articles/3eaefde80907083e294efbba80853fd63e51969b?source=rss",
+        source: "carview!",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "コネクテッド", "AI"],
+    
+        interiorScore: 90,
+        interiorReason: "14-inch infotainment screen refresh, voice assistant customization, and clear in",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1125",
+        title: "GRヤリス向け純正交換ステアリングで操作性アップ",
+        desc: "レアルのGRヤリス専用ステアリングは、純正エアバッグ・スイッチを維持しつつステアリング径を約10mm小径化。ガングリップ形状やDシェイブデザインで操作性を向上。ブラックカーボン（6万3800円）など多彩な素材・カラー展開があり、コクピット質感も高めている。",
+        url: "https://news.yahoo.co.jp/articles/fef71a1c1a9de15a5cbfe9c93e370bcc84788a2b?source=rss",
+        source: "MotorFan",
+        date: "2026-05-28",
+        tags: ["新素材", "安全"],
+    
+        interiorScore: 90,
+        interiorReason: "steering wheel accessory product launch with clear interior image showing materi",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-01477227-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1126",
+        title: "ボルボXC40、インフォテインメントシステム大幅アップデートで処理速度約2倍に",
+        desc: "ボルボXC40はデビュー8年目で大幅アップデート。Qualcomm社のSnapdragon Cockpit Platform搭載により、インフォテインメントシステムの処理速度が約2倍、グラフィック性能が約10倍に向上。スマホ感覚の操作性とOTA自動更新機能で快適性が進化。",
+        url: "https://news.yahoo.co.jp/articles/c2a02fe468436ec0d42148b1f321c609680c70c7?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-05-28",
+        tags: ["コネクテッド"],
+    
+        interiorScore: 78,
+        interiorReason: "HMI and cockpit platform update with clear interior image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00010004-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1127",
+        title: "三菱デリカD:5の8人乗りはキャンプで効くシートアレンジの実力",
+        desc: "三菱デリカD:5の8人乗りは発売19年目で過去最高販売を記録。全長4800mmの室内長2980mmに6:4分割ベンチシートを採用し、リクライニングやフラットモードで家族キャンプやアウトドア需要に最適化されたシートアレンジが特徴だ。",
+        url: "https://news.yahoo.co.jp/articles/58b9d00158e06989c62c1a69aad0d6aaeb12af2e?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-28",
+        tags: ["シート"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00000017-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1128",
+        title: "広汽トヨタ、無人タクシー仕様のbZ4Xを2026年中に1000台生産予定",
+        desc: "中国の広汽トヨタは、ポニーaiと提携し、レベル4自動運転仕様のトヨタ「bZ4X」を2026年中に1000台生産する。34個のセンサー搭載で、車内音声対話や空調管理などの快適装備を備えた無人タクシーとして量産される。",
+        url: "https://news.yahoo.co.jp/articles/421a217827246afc2116fcd75aa00dd4544815bd?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-05-28",
+        tags: ["AI", "センシング"],
+    
+        interiorScore: 61,
+        interiorReason: "The article discusses a Level 4 autonomous taxi (Toyota bZ4X) with specific inte",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-00000004-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1129",
+        title: "KINTOがレクサス「NX」向けイルミネーションアップグレード提供開始",
+        desc: "KINTOは2026年5月27日、レクサス「NX」向けに「イルミネーションアップグレード（MellowGlow）」を発売。14テーマカラーで光のゆらぎ演出を施し、価格は8万8000円。インテリアイルミパッケージ装着車限定で、全国の対象販売店で施工可能。",
+        url: "https://news.yahoo.co.jp/articles/ad1859c18678d108f3dc5d85fc204f6a209b7371?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-28",
+        tags: ["イルミ"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-01063950-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1130",
+        title: "デンソー、人テクで「マイクロジェット」を初公開",
+        desc: "デンソーは2026年5月27日、パシフィコ横浜で開催された「人とくるまのテクノロジー展2026 YOKOHAMA」で、薄型空調レジスタ向け気流制御技術「マイクロジェット」を初展示した。",
+        url: "https://news.yahoo.co.jp/articles/a98d491c085853aa28cf7019a0246e76f487992e?source=rss",
+        source: "くるまのニュース",
+        date: "2026-05-28",
+        tags: [],
+    
+        interiorScore: 92,
+        interiorReason: "microjet airflow control for thin air vents is a direct interior comfort/ventila",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260528-01065238-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us939",
+        title: "ランボルギーニCEO、EV遅延は正しい選択と語る",
+        desc: "ランボルギーニCEOのシュテファン・ヴィンケルマンは、同社の初EV発売延期について後悔していないと語った。",
+        url: "https://www.motor1.com/news/797144/lamborghini-boss-delaying-ev-right-way-to-go/",
+        source: "Motor1",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/6ZQrAk/s3/lamborghini-lanzador-concept.jpg",
+        note: ""
+    },
+    {
+        id: "us940",
+        title: "フォード、EVトラック用バッテリーを商用用途へ転用",
+        desc: "フォードはEVトラック向けに開発したバッテリーを、電気自動車よりも収益性の高い商用用途に転用する。この戦略により、同社のEV事業は195億ドルの損失から回復し、株価は28%上昇した。",
+        url: "https://www.carscoops.com/2026/05/ford-energy-storage/",
+        source: "CarScoops",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/cqdam.web_.2400-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us941",
+        title: "ミツオカ・ビュートストーリー2026年モデル、ジャガー風デザイン維持でインフォテインメント拡大",
+        desc: "ミツオカ・ビュートストーリーは2026年モデルで、ヤリスベースのインテリアに8インチディスプレイを追加。ただし、1.0Lエンジン廃止により価格が上昇し、ハイブリッド版は3万1000ドルまで値上がりした。",
+        url: "https://www.carscoops.com/2026/05/mitsuoka-viewt-update/",
+        source: "CarScoops",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "コネクテッド"],
+    
+        interiorScore: 79,
+        interiorReason: "infotainment display upgrade and interior refresh details",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Mitsuoka-Viewt-Story-main-final-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us942",
+        title: "テスラ、カメラにワイパーと洗浄液搭載の設計を特許申請",
+        desc: "テスラは、ロボットタクシーのカメラを汚れから守るため、小型ワイパーと洗浄液タンクを搭載する設計の特許を申請した。しかし、コスト増や故障リスクというトレードオフがある。",
+        url: "https://www.carscoops.com/2026/05/tesla-self-cleaning-camera-patent/",
+        source: "CarScoops",
+        date: "2026-05-28",
+        tags: [],
+    
+        interiorScore: 33,
+        interiorReason: "exterior camera system and wiper mechanism, no interior cabin/seat/material/HMI",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Model3Performance_51-copy-1024x575.jpg",
+        note: ""
+    },
+    {
+        id: "us943",
+        title: "トヨタ・ヒルックスにGRとModellistaでアップグレード",
+        desc: "トヨタはヒルックスにGRとModellistaのアップグレードを新発売。GRパーツカタログも確認可能で、都市型オフロードスタイルを追求できる。",
+        url: "https://www.carscoops.com/2026/05/toyota-hilux-japan-launch/",
+        source: "CarScoops",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Untitled-1-copy-5-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us944",
+        title: "ニオのフラッグシップSUV「ES9」が3分でバッテリー交換可能、47スピーカー搭載",
+        desc: "ニオのフラッグシップSUV「ES9」は、CATL製102kWhバッテリーを3分で交換可能。47スピーカーや48インチダッシュボード、42点マッサージシステムなど快適装備を備え、中国で5万7千ドルから販売開始。",
+        url: "https://www.carscoops.com/2026/05/nio-es9-launch/",
+        source: "CarScoops",
+        date: "2026-05-28",
+        tags: ["シート", "コックピット", "EV", "バッテリー", "音響"],
+    
+        interiorScore: 59,
+        interiorReason: "flagship cabin refresh with 47-speaker audio, 48-inch dashboard, 42-point massag",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Nio-ES9-39-1-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us945",
+        title: "VW Tiguanのトリム別コストパフォーマンス比較",
+        desc: "VW Tiguan SUVのトリム別購入推奨を解説。コストパフォーマンスを重視する場合は、適切なグレード選択が重要。",
+        url: "https://www.caranddriver.com/shopping-advice/a71422319/volkswagen-tiguan-what-to-buy/",
+        source: "Car and Driver",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/2026-volkswagen-tiguan-sel-r-line-turbo-avocado-pr-101-67fe9bc5f0f89.jpg",
+        note: ""
+    },
+    {
+        id: "us946",
+        title: "カワサキのエントリーアドベンチャーバイク、多用途・制御・長距離快適性に優れる",
+        desc: "カワサキのアドベンチャーバイクは、エントリーモデルながら多用途性、制御性、長距離快適性に優れ、ライダーの夢を実現する。市場で誤解されやすいが、究極の汎用性を備えている。",
+        url: "https://www.topspeed.com/entry-level-adventure-bike-nails-versatility-control-comfort/",
+        source: "Top Speed",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/03/kawasaki-kle500.jpg",
+        note: ""
+    },
+    {
+        id: "us947",
+        title: "2026 Buick EnvistaはBMW X1より高級感で1万ドル安",
+        desc: "2026 Buick EnvistaはBMW X1より1万ドル以上安価ながら、182.6インチの長尺ボディや11インチタッチスクリーン、ソフトタッチ素材など高級内装を備え、コスパに優れたクロスオーバーを提供する。",
+        url: "https://www.topspeed.com/american-crossover-feels-more-luxurious-than-bmw-x1-10000-less/",
+        source: "Top Speed",
+        date: "2026-05-28",
+        tags: ["HMI", "ディスプレイ", "新素材"],
+    
+        interiorScore: 58,
+        interiorReason: "interior features like 11-inch touchscreen and soft-touch materials mentioned in",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/wm/2024/12/2024-buick-envista-avenir-exterior-headlight-detail.jpg",
+        note: ""
+    },
+    {
+        id: "us948",
+        title: "トヨタ、12.3インチメーター表示不点灯で9万台リコール",
+        desc: "トヨタは2024-2025年式ランドクルーザー、ミライ、レクサスUX、GXなど約9万台をリコール。12.3インチコンビネーションメーター表示が白く点灯せず警告表示が出ない恐れがあるため、ソフトウェア更新が必要。",
+        url: "https://www.carcomplaints.com/news/2026/toyota-recalls-123-inch-combination-meter-displays.shtml",
+        source: "CarComplaints",
+        date: "2026-05-28",
+        tags: ["HMI"],
+    
+        interiorScore: 68,
+        interiorReason: "seat and display plus cabin image; defect/recall cap",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.carcomplaints.com/news/images/toyota-combination-meter-recall.jpg",
+        note: ""
+    },
+    {
+        id: "eu904",
+        title: "Autocarは1928年より自動車テストを実施",
+        desc: "Autocarは1928年から自動車テストを実施し、1928年のAustin Sevenから数千台をテスト。各車に5点満点でスコアを付与する。",
+        url: "https://www.autocar.co.uk/car-news/slideshow/best-cars-weve-tested-2015-83",
+        source: "AUTOCAR UK",
+        date: "2026-05-28",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_0-intro-p90332329_highres_the-all-new-bmw-320d_bmw_1_0_83.jpg?itok=zbnIjZwS",
+        note: ""
+    },
+    {
+        id: "eu905",
+        title: "フェラーリ・ルチェの非効率なEV形状は中国前時代のデザイン",
+        desc: "フェラーリ・ルチェは122kWhバッテリーで329マイル走行可能だが、1マイルあたり2.7kWhの非効率なEV形状を採用。高級EV市場では効率性よりデザイン性を重視する傾向がある。",
+        url: "https://www.autocar.co.uk/car-news/business/luxury-ev-dilemma-ferrari-luces-slippery-shape-pre-china-era",
+        source: "AUTOCAR UK",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/luce_26rtv4_lightson_6000x3375_0.jpg?itok=YGSK6Kkh",
+        note: ""
+    },
+    {
+        id: "eu906",
+        title: "Seat、Cupraと別個ラインナップでEV戦略を明確化",
+        desc: "CEOはSeatがCupraモデルを単に簡素化して再ブランド化しない方針を示した。両ブランドは完全な別個ラインナップを構築し、コスト低下時にEVを導入する。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/new-seat-cars-horizon-brand-diverges-cupra",
+        source: "AUTOCAR UK",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/new_seat_ibiza_arona_packshot_01.jpg?itok=qmdivofr",
+        note: ""
+    },
+    {
+        id: "eu907",
+        title: "英国で車内死亡減少だが、歩行者など弱者の事故増",
+        desc: "英国政府統計によると、乗員死亡は減少しているが、歩行者など脆弱な道路利用者の死者は増加している。自動車内装やシートなど快適装備に関する具体的な数値や企業名は記載されていない。",
+        url: "https://www.autoexpress.co.uk/news/369681/cars-are-getting-safer-uks-roads-are-more-dangerous-everyone-else",
+        source: "Auto Express",
+        date: "2026-05-28",
+        tags: ["シート"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--18XS_vQ5--/t_rss_image_w_845/v1723113161/autoexpress/2024/08/Cyclist.jpg",
+        note: ""
+    },
+    {
+        id: "eu908",
+        title: "新車ジャクー9 SUVが英国で登場、レンジローバーに対抗",
+        desc: "新 Jaecoo 9 は 6 座席 SUV で、奇瑞フルウィン T11 ベース。英国市場投入され、レンジローバーをターゲットとする。",
+        url: "https://www.autoexpress.co.uk/jaecoo/369674/new-jaecoo-9-flagship-suv-coming-uk-target-range-rover",
+        source: "Auto Express",
+        date: "2026-05-28",
+        tags: ["シート"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--XFHP3CGc--/t_rss_image_w_845/v1779961634/autoexpress/2026/05/Chery%20Fullwin%20T11%202026-2.jpg",
+        note: ""
+    },
+    {
+        id: "cn947",
+        title: "BYDは、事故ゼロの交通を実現するため、自社開発の4nmチップ「玄機A3」を発売しました。",
+        desc: "BYDは事故ゼロ交通の実現を目指し、自社が開発した4nmプロセスを採用した「Xuanji A3」というADASチップを発売した。このチップはL3およびL4レベルの自動運転機能を搭載しており、自動車安全技術の向上に寄与する。",
+        url: "https://carnewschina.com/2026/05/28/byd-released-xuanji-a3-adas-chip-as-it-aims-at-accident-free-traffic/",
+        source: "CarNewsChina - All",
+        date: "2026-05-28",
+        tags: ["バッテリー", "安全"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/byd_xuanji_a3-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn948",
+        title: "吉利几何X行悦EVの航続距離が480kmに刷新されました",
+        desc: "吉利几何X行悦（Geome Xingyuan）EVが刷新して再発売され、航続距離は480kmに向上しました。中国で販売台数がトップクラスのこのモデルは、今回のアップデートで電動航続性能を強化し、市場での地位をさらに固めました。",
+        url: "https://carnewschina.com/2026/05/28/chinas-best-selling-car-geely-geome-xingyuan-ex2-ev-refreshed-with-enhanced-range/",
+        source: "CarNewsChina - All",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-207-e1779967006756.png",
+        note: ""
+    },
+    {
+        id: "cn949",
+        title: "CATL、厦門に世界最大級のエネルギー貯蔵テストベッドを開設",
+        desc: "CATLは中国厦門に世界最大規模のエネルギー貯蔵テストベッドを開設した。この施設はバッテリー技術開発と実証実験を強化し、自動車産業のサプライチェーン向上に寄与する。",
+        url: "https://carnewschina.com/2026/05/28/battery-giant-catl-unveils-worlds-largest-energy-storage-testbed-in-xiamen-china/",
+        source: "CarNewsChina - All",
+        date: "2026-05-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/58819242.jpg",
+        note: ""
+    },
+    {
+        id: "cn950",
+        title: "BYD 初となるフラッシュ充電搭載モデル「Denza Z9 GT」が、発売から 2 ヶ月半で 1 万",
+        desc: "BYD 初のフラッシュ充電モデル「Denza Z9 GT」は発売後 75 日で 1 万台の販売を達成しました。中国市場で販売されており、BYD グループ傘下の高級ブランドである Denza のフラッグシップモデルとして注目を集めています。",
+        url: "https://carnewschina.com/2026/05/28/byds-first-flash-charging-model-denza-z9-gt-surpasses-10000-deliveries-in-2-5-months/",
+        source: "CarNewsChina - All",
+        date: "2026-05-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-205-1500x844.png",
+        note: ""
+    },
+    {
+        id: "cn951",
+        title: "奇瑞の合弁企業は、2027年に日本市場にKモデルを投入し、BYDのラッコ車種と対抗する予定だ。",
+        desc: "奇瑞の合弁企業EMTは2027年、中国製Kカー「Emta」を日本に投入する。Gotionバッテリーを採用し、BYDの「Racco」と競合する計画だ。",
+        url: "https://carnewschina.com/2026/05/28/chery-joint-venture-to-launch-k-car-in-japan-to-compete-with-byd-racco/",
+        source: "CarNewsChina - All",
+        date: "2026-05-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/chery_emta-1-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn952",
+        title: "HIMAが中国でM9 SUVを発売、最高出力890馬力、価格7万6千ドルから",
+        desc: "ヒマは中国でAITO M9というフラッグシップSUVを発売した。最大890馬力の性能と高度なインテリジェンスを備え、価格は7万6千ドルからとなる。",
+        url: "https://carnewschina.com/2026/05/28/hima-launches-new-m9-in-china-up-to-890-hp-starting-from-70600-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-05-28",
+        tags: ["AI"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/05/e59bbee78987-196-e1779930418394-1500x846.png",
+        note: ""
+    },
+    {
+        id: "cn953",
+        title: "ニオは中国でフラッグシップモデルであるES9 SUVの全国納車を開始した",
+        desc: "ニオは中国国内でフラッグシップSUV「ES9」の全国納車を開始した。高級グレードの注文比率が予想を上回った。",
+        url: "https://cnevpost.com/2026/05/28/nio-starts-deliveries-es9-china/",
+        source: "CnEVPost - All",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052814290986.jpg",
+        note: ""
+    },
+    {
+        id: "cn954",
+        title: "CATLはグリッド遅延対策のため、30億元規模の施設を稼働させました",
+        desc: "CATL は 30 億元（約 4 億 4000 万ドル）のエネルギー貯蔵テストベッドを開設し、大規模プロジェクトの投資リスクを低減します。全シナリオでの実証試験により、グリッド接続の遅延問題を解決します。",
+        url: "https://cnevpost.com/2026/05/28/catl-launches-massive-energy-storage-testbed/",
+        source: "CnEVPost - All",
+        date: "2026-05-28",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052813520481.jpg",
+        note: ""
+    },
+    {
+        id: "cn955",
+        title: "BYD、4nm スマートドライブチップを発表、垂直統合を深化",
+        desc: "BYDは4nmプロセスの玄機A3チップを発表した。同チップはL3・L4自動運転を支援し、BYDはアシスト運転のフルチェーン制御を実現した。",
+        url: "https://cnevpost.com/2026/05/28/byd-unveils-4nm-smart-driving-chip-xuanji-a3/",
+        source: "CnEVPost - All",
+        date: "2026-05-28",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052813004754.jpg",
+        note: ""
+    },
+    {
+        id: "cn956",
+        title: "ニオ、オンボL60の更新モデルが5月29日から予約開始",
+        desc: "ニオは5月29日より、オンボL60の更新モデルを予約開始する。新モデルには、LiDARと自社のシャンジNX9031半導体搭載バージョンが用意される。",
+        url: "https://cnevpost.com/2026/05/28/nio-onvo-to-start-pre-sales-updated-l60-may-29/",
+        source: "CnEVPost - All",
+        date: "2026-05-28",
+        tags: ["AR"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/05/2026052806154397.jpg",
+        note: ""
+    },
+    {
+        id: "in991",
+        title: "2026年タタ・ティアゴEV、インドで6.99ラジーから発売開始",
+        desc: "タタ・ティアゴEVはインドで6.99ラジー（税別）から発売。インテリアは内燃機関モデルを踏襲しつつ、10.25インチタッチスクリーンや自動エアコン、6エアバッグなど快適装備と安全機能を強化。",
+        url: "https://www.autocarindia.com/auto-images/2026-tata-tiago-ev-interior-image-gallery-440311",
+        source: "Autocar India - All",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "EV", "安全"],
+    
+        interiorScore: 88,
+        interiorReason: "interior image plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260528_131028_3d3c0045.jpg",
+        note: ""
+    },
+    {
+        id: "in992",
+        title: "タタ・ティアゴEVのマイナーチェンジで新機能追加、価格も低下",
+        desc: "タタ・ティアゴEVは2026年式でマイナーチェンジ。インテリアに8インチタッチスクリーンや360度カメラ、ESPなど快適装備が強化され、価格も最大1.15万ルピー安くなった。",
+        url: "https://www.autocarindia.com/auto-features/which-tata-tiago-ev-variant-should-you-buy-440592",
+        source: "Autocar India - All",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "EV"],
+    
+        interiorScore: 59,
+        interiorReason: "interior refresh with 8-inch touchscreen and 360 camera mentioned in text, but i",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260528_092442_25a06a68.jpg",
+        note: ""
+    },
+    {
+        id: "in993",
+        title: "2026年タタ・ティアゴ、外観・インテリア大更新で新仕様発表",
+        desc: "2026年式タタ・ティアゴは外観とインテリアを大幅に刷新。価格は4.69〜8.55ルピー（インドルピー）で、6グレード展開。1.2Lエンジン（ガソリン/天然ガス）に加え、EVもラインナップ。",
+        url: "https://www.autocarindia.com/auto-features/which-variant-of-the-2026-tata-tiago-should-you-buy-440594",
+        source: "Autocar India - All",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        interiorScore: 62,
+        interiorReason: "interior refresh and variant list",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260528_104010_880bf526.jpg",
+        note: ""
+    },
+    {
+        id: "in994",
+        title: "2026年タタ・ティアゴ、外観・内装一新、安全装備強化",
+        desc: "タタ・ティアゴ2026年モデルは、LEDヘッドライトや新デザインバンパーで外観を刷新。内装は2トーン配色となり、デジタルメーターや6エアバッグ（旧2個）など快適・安全装備が向上。価格はRs 4.69 lakhから。",
+        url: "https://www.autocarindia.com/auto-features/tata-tiago-new-vs-old-differences-and-similarities-explained-440558",
+        source: "Autocar India - All",
+        date: "2026-05-28",
+        tags: ["安全"],
+    
+        interiorScore: 78,
+        interiorReason: "interior refresh and two-tone cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260521_075710_411b7102.jpg",
+        note: ""
+    },
+    {
+        id: "in995",
+        title: "2026年タタ・ティアゴ、完全新設計のインテリアと安全装備を強化",
+        desc: "タタ・モーターズは2026年ティアゴをガソリン、iCNG、EVで新発売。インテリアは完全リビジョンされ、デジタルインストルメントクラスターや20.32cmタッチスクリーン、360度カメラなど新装備をラインナップ。安全面ではロールケージ強化や熱事象保護システムを採用。",
+        url: "https://www.rushlane.com/2026-tata-tiago-petrol-and-cng-variant-wise-features-list-colours-prices-12547722.html",
+        source: "RushLane",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "EV", "安全"],
+    
+        interiorScore: 59,
+        interiorReason: "flagship cabin refresh with concrete interior features like digital instrument c",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/05/new-tata-tiago-facelift-cng-horizontal.jpg",
+        note: ""
+    },
+    {
+        id: "in996",
+        title: "2026年タタ・ティアゴ、Rs.4.69万円で新モデル発表",
+        desc: "タタ・モーターズは2026年型ティアゴをRs.4.69万円で発売。6気筒エアバッグ、パドルシフター、デュアルデジタルディスプレイ、リビジョンされたエクステリア、コネクテッドテールランプなど、内装・技術面で大幅なアップデートを実施。",
+        url: "https://gaadiwaadi.com/2026-tata-tiago-launched-at-rs-4-69-lakh-with-big-updates/",
+        source: "GaadiWaadi",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "コネクテッド", "安全"],
+    
+        interiorScore: 61,
+        interiorReason: "dual digital displays and paddle shifters mentioned in text; image shows exterio",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/Tata-Tiago-CNG.jpg",
+        note: ""
+    },
+    {
+        id: "in997",
+        title: "2027年までに4台の新車投入、インド市場で展開",
+        desc: "2025年10月、現代自動車はインドで2027年までに4台の新車、2030年までに26台の発売を計画。サブ4mと4m以上の車種を両備え、2代目Venueも含まれる。",
+        url: "https://gaadiwaadi.com/hyundai-to-likely-launch-4-all-new-cars-by-2027/",
+        source: "GaadiWaadi",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/01/New-Hyundai-SUV-4.jpg",
+        note: ""
+    },
+    {
+        id: "in998",
+        title: "2026年タタ・ティアゴ、ティアゴEVのフェイスリフト発売、価格発表",
+        desc: "インドで2026年型タタ・ティアゴとティアゴEVのフェイスリフトが販売開始。ティアゴは6グレード11バリエーションで4.69〜7.99万ルピー、EVは6.99〜9.99万ルピー（展示場外価格）で発売。",
+        url: "https://www.indiacarnews.com/news/2026-tata-tiago-tiago-ev-facelifts-launched-prices-more-features-lifetime-battery-warranty-67959/",
+        source: "IndiaCarNews",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/05/2_1.webp",
+        note: ""
+    },
+    {
+        id: "in999",
+        title: "マルチ・スズキ、FY26で2.84億台のサービス記録達成",
+        desc: "インド最大自動車メーカーのマルチ・スズキはFY2025-26に2.84億台の車両をサービスし、史上最多の記録を達成した。毎日約7.8万台がサービスベイを通過する。",
+        url: "https://www.autopunditz.com/post/maruti-suzuki-services-2-84-crore-vehicles-fy26",
+        source: "Auto Punditz",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_908d2a5c728846f1ac7e38d329cab48d~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1000",
+        title: "米国新車販売2025年、2019年以来最高水準へ",
+        desc: "米国新車市場は2025年、軽自動車販売が約1620万台と2019年以来最高水準に達した。ピックアップトラックやSUVが引き続き市場を支配し、在庫改善が寄与した。",
+        url: "https://www.autopunditz.com/post/usa-car-sales-2025-best-selling-cars",
+        source: "Auto Punditz",
+        date: "2026-05-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_a807284564ea49ebac2e7a94cabccea3~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu909",
+        title: "オランダ、2027年よりEV非搭載車リースに課税強化",
+        desc: "オランダ政府は2027年1月より、電気自動車非搭載の商用車リース契約に新たな課税（malus）を導入。内燃機関車やハイブリッド車のリース費用を大幅に増額し、EV普及を加速させる方針を明らかにした。",
+        url: "https://www.electrive.com/2026/05/28/netherlands-plans-malus-scheme-for-combustion-engine-company-cars/",
+        source: "Electrive",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/02/bmw-niederlande-bev-fuhrpark-ix3-2026-1-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu910",
+        title: "現代モビス、Eclipse SDVプロジェクトに加入しコンテナソリューションをオープンソース化",
+        desc: "現代モビスはEclipse FoundationのSDV Working GroupとS-Coreプロジェクトに参加し、コンテナソリューションのコードを公開。Linux環境で10倍以上高速化し、ASIL-B基準を満たす。",
+        url: "https://www.automotiveworld.com/news/hyundai-mobis-joins-eclipse-sdv-open-source-effort/",
+        source: "Automotive World",
+        date: "2026-05-28",
+        tags: ["HMI"],
+    
+        interiorScore: 9,
+        interiorReason: "company partnership and open-source software initiative with no interior product",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2025/02/10184856/AdobeStock_388465650_Editorial_Use_Only-scaled-e1744108944651.jpeg",
+        note: ""
+    },
+    {
+        id: "eu911",
+        title: "BMW iX3とVolvo EX60の比較：価格・航続距離・充電速度",
+        desc: "BMW iX3とVolvo EX60の比較記事。航続距離、充電速度、価格、性能を分析し、プレミアムEV SUVの購入判断を支援する。",
+        url: "https://electriccarsreport.com/2026/05/bmw-ix3-vs-volvo-ex60-which-premium-electric-suv-should-you-buy/",
+        source: "Electric Cars Report",
+        date: "2026-05-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2025/09/BMW-iX3.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu912",
+        title: "2026年レクサスES、欧州でEV・ハイブリッド新モデル登場、インテリア刷新",
+        desc: "2026年レクサスESは欧州で新世代モデルを投入。車体長は5,140mmに拡大し、LF-ZCコンセプトを基にしたデザインで洗練された外観を実現。インテリアは14インチディスプレイやリクライニングシート、マークレビンソンオーディオなど快適装備を強化。",
+        url: "https://electriccarsreport.com/2026/05/2026-lexus-es-debuts-in-europe-with-electric-and-hybrid-power-new-luxury-tech-and-more-space/",
+        source: "Electric Cars Report",
+        date: "2026-05-28",
+        tags: ["ディスプレイ", "シート", "EV", "音響"],
+    
+        interiorScore: 58,
+        interiorReason: "interior refresh and luxury tech details like 14-inch display, reclining seats,",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/Lexus-ES.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu913",
+        title: "MG 4Xが中国で発売、最大610km航続距離と半固体電池搭載",
+        desc: "SAICは中国でMG 4X電気SUVを発売。後輪駆動、最大610km航続距離、半固体電池技術、先進運転支援システムを備える。",
+        url: "https://electriccarsreport.com/2026/05/mg-4x-launches-in-china-with-up-to-610-km-range-and-semi-solid-state-battery/",
+        source: "Electric Cars Report",
+        date: "2026-05-28",
+        tags: ["AI", "バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/05/MG-4X.jpg?a3781e&amp;a3781e",
         note: ""
     },
 ];
