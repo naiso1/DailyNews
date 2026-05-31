@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-05-29〜2026-05-31",
+        analysis: {
+            jp: "日本市場ではEV化と**快適性**が加速しており[jp1132][jp1134][jp1137]、**新素材**への関心も高まっています。特に**静寂性**や**高級感**を追求する**コックピット**環境[jp1135][jp1139]や、車中泊など**多機能性**へのニーズ[jp1138]が顕著です。また、**EVフラットフロア**を活かした**収納**や**ワイヤレス充電**といった実用性も重要です[jp1132]。",
+            cn: "中国市場ではEVの普及が加速し、コックピット機能の強化も顕著な傾向にあります[cn962,cn959]。高級車においてもHMIの進化を重視する動きが見られます[cn961]。eVTOLやLiDARといった技術は、次世代交通システムと密接に連動しています[cn963]。子供に対する安全対策や緊急脱出への関心も高まっている状況です[cn966]。省エネや素材革新も現在のトレンドとなっています[cn957]。自社開発においては、安全・セーフティと省エネの両立が鍵となります[cn958,cn960]。",
+            in: "インド市場ではEV化とコネクテッド技術の両輪が進化[in1001]。特にLGのSnapdragonプラットフォームはマルチディスプレイ制御で内装のデジタル化を加速[in1010]。一方、マヒンドラの特許やマルチ・スズキの7人乗り開発から、スペース効率とデザイン性が重視されている[in1004][in1001]。ハリヤーナ州のEV製造ハブ化はサプライチェーンの革新性を示唆[in1007]。トヨタ・ヒルックスのグローバルシェアは実用性と信頼性の重要性を裏付ける[in1009]。米国でのSUV離れはセダン回帰の兆しで、内装の機能性を再考する契機[in1006]。",
+            us: "米国ではAI搭載HMIによるスマホミラーリング代替[us958]と、サステナブル素材への関心が顕著。安全面では女性乗員リスク対応やシートセンサー不具合から信頼性向上が急務。高級車では音響・マッサージ機能の標準化がトレンド。軽量化・リサイクル設計への関心が高まり、脱炭素対策が進む。既存のグリップセンサ技術を応用し、手放し検知と多機能スイッチを統合したHMIハンドルを提案。AI音声アシスタントと連動し、CarPlay不要の完全自律型車内体験を実現する[us949]。",
+            eu: "欧州市場ではEV普及加速とAI技術の車載化が顕著[eu914][eu921]。充電案内機能やLiDAR搭載など、AIとEVの融合が新トレンド[eu920][eu921]。安全重視の子供用品やサステナビリティも重要[eu915][eu923]。競合はEV航続距離向上とコックピットコネクテッド化を強化[eu919][eu923]。欧州ではEV専用設計と熱管理技術が鍵[eu917][eu920]。省エネと安全性の両立が自社開発の示唆[eu914][eu919]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1026, img: "images/idea_1026.png", title: "バイオ素材調和コンソール", desc: "再生素材でエコを実現。EVフラットフロアにリバーシブルアームレストを装備。広々収納とワイヤレス充電で、静寂な車内を快適に。", imagePrompt: "Eco-friendly console box made from sustainable bamboo and woven natural fibers, integrated into a spacious electric vehicle flat floor, reversible armrest in warm beige leather, ambient warm lighting, minimalist Japanese design, photorealistic 3D render, high detail, 4K quality" },
+                { id: 1027, img: "images/idea_1027.png", title: "マルチコンソールボックス", desc: "EVフラットフロアを活かし、広々収納とリバーシブルアームレストを標準。ワイヤレス充電とUSBポートを充実。静寂な車内を快適に。", imagePrompt: "Multi-functional console box with deep storage compartments, reversible armrest in premium black leather, wireless charging pad with blue LED indicator, integrated USB ports, sleek modern design, interior night scene, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 1028, img: "images/idea_1028.png", title: "緊急脱出支援コックピット", desc: "衝突時や火災時に子供や高齢者が簡単に脱出できる仕組み。ニュースの統合コントローラー技術を応用。緊急時にドアロック解除や窓開閉を自動制御。家族全員が安心し、緊急時に命を守れる。", imagePrompt: "Emergency escape cockpit with integrated controller, child safety features, automatic window opening mechanism, emergency lighting red and amber glow, LiDAR sensor array, sleek modern dashboard, photorealistic automotive interior render" },
+                { id: 1029, img: "images/idea_1029.png", title: "ヒータ付きアームレスト進化型", desc: "ニュースの省エネ技術を応用。面状発熱ヒーター内蔵で50%電力削減。冬場の手元を暖かく保ち、EV航続距離延伸。子供が触りやすい位置に配置。寒さから守られ、快適にドライブを楽しめる。", imagePrompt: "Heated armrest with surface heating technology, modern EV interior, sleek design, warm ambient lighting, premium materials like leather and brushed metal, cozy winter driving scene, photorealistic automotive product visualization" },
+            ],
+            in: [
+                { id: 1030, img: "images/idea_1030.png", title: "バイオ素材ステアリングホイール", desc: "天然由来素材で包まれたステアリングホイール。触覚が柔らかく温かみのある感触。EV車種との相性が良く、環境志向の若年層が「ecoで高級感がある」と感じやすい。", imagePrompt: "Steering wheel made from natural biodegradable material, soft textured surface, warm ambient lighting, luxury EV interior, sustainable automotive design, photorealistic rendering, premium quality, detailed craftsmanship, modern vehicle cockpit, cinematic lighting, high detail, 4K quality" },
+                { id: 1031, img: "images/idea_1031.png", title: "インモールドコート式ディスプレイ", desc: "型内塗装技術でシームレスな大型ディスプレイ。運転者がナビを直感的に操作し、助手席も映画鑑賞を楽しめる。家族全員が「まるで映画館のように」と喜び、空間の一体感が際立つ。", imagePrompt: "Large seamless display embedded in dashboard, integrated interior coating technology, glass-like surface, modern vehicle cockpit, blue accent lighting, photorealistic render, AI assistant visualization, futuristic cockpit design, night driving scene, premium quality, cinematic lighting, high detail, 4K quality" },
+            ],
+            us: [
+                { id: 1032, img: "images/idea_1032.png", title: "サステナブルAI HMIハンドル", desc: "リサイクル素材とAI音声アシスタントを統合したHMIハンドル。手放し検知機能で運転集中を支援し、ステアリング操作でカープレイを不要に。環境配慮と高機能性を両立し、エコ意識の高い層も喜びます。", imagePrompt: "Recycled sustainable steering wheel with integrated AI HMI interface, holographic display floating above, brushed aluminum and eco-friendly materials, soft ambient lighting, futuristic cockpit design, photorealistic 3D render, premium automotive interior" },
+                { id: 1033, img: "images/idea_1033.png", title: "リサイクル素材AIコンソール", desc: "再生素材を使用したAI搭載コンソール。手元検知と音声アシスタントで操作を簡素化し、CarPlayを不要に。環境負荷低減と高機能性を両立し、サステナビリティを重視する層も喜びます。", imagePrompt: "Eco-friendly center console with integrated AI assistant, recycled sustainable materials, holographic interface elements, warm ambient lighting, modern vehicle interior, photorealistic render, premium quality finish" },
+            ],
+            eu: [
+                { id: 1034, img: "images/idea_1034.png", title: "EV熱管理アームレスト", desc: "面状ヒーターと冷却ファンを内蔵。EVのバッテリー熱管理と連動し、夏は涼しく冬は温かいアームレスト。電力消費50%削減。EVオーナーは快適な手触りに大満足。", imagePrompt: "Luxury electric car armrest with integrated heating and cooling system, sleek brushed aluminum finish, subtle LED ambient lighting, modern dashboard integration, photorealistic 3D render, warm interior lighting, premium automotive design, high detail" },
+                { id: 1035, img: "images/idea_1035.png", title: "AI充電案内HUD", desc: "AR HUDに充電ステーション情報を表示。走行中にも直感的に充電場所を案内。AIアシスタントと連携し、最適な充電タイミングを提案。EVドライバーはストレスなく充電できる。", imagePrompt: "Augmented reality head-up display in electric vehicle cockpit, holographic navigation interface showing charging station icons, futuristic dashboard design, night driving scene, blue accent lighting, photorealistic render, premium automotive interior, high detail" },
+            ],
+        }
+    },
+{
         date: "2026-05-28",
         analysis: {
             jp: "日本の自動車内装市場では、**DMS統合化**[jp1121]や**EVクーペ**[jp1122]の出現で、**ディスプレイ**[jp1121]と**音響**[jp1123]の統合がトレンド。レクサスES[jp1124]やボルボXC40[jp1126]が**コネクテッド**技術で性能向上、GRヤリス[jp1125]は**新素材**で小型化を実現。デリカD:5[jp1127]のように**シート**アレンジでアウトドア需要に対応。",
