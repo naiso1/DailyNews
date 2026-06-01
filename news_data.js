@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-06-01 02:16";
+window.NEWS_UPDATED_AT = "2026-06-02 01:05";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -63866,6 +63866,702 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "in",
         img: "https://static.wixstatic.com/media/1da610_cc0de85e5fbd4d3aaa91d1df3e18d1f2~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    // 2026-06-01 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1141",
+        title: "レクサス「LM」一部改良：後席USB-Cポート60W充電対応など",
+        desc: "2026年3月12日、レクサス「LM」の一部改良が発表された。後席USB-CポートはPC給電可能な60W急速充電に対応。アルファードとの違いは、4人乗り仕様の「エグゼクティブ」で前席と後席を仕切るパーティションが車体全体の捻れを抑える構造物として機能し、静粛性を高める点にある。",
+        url: "https://news.yahoo.co.jp/articles/d007942b40f2643ca6278352f5e61d53caa57111?source=rss",
+        source: "carview!",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        interiorScore: 100,
+        interiorReason: "luxury cabin refresh with specific interior details like welcome illumination, f",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-00010000-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1142",
+        title: "IPF、ランドクルーザー250向けルーフストレージパネル登場",
+        desc: "IPFはランドクルーザー250向けに、ラゲッジ上方空間を有効活用するスチール製のルーフストレージパネルを発売。価格は2万8600円で、角穴や丸穴によるモールシステム対応、M8アイナット固定、マグネット製品取り付けが可能。前後5cmずつずらして装着でき、サイドストレージパネルとの併用も可能だ。",
+        url: "https://news.yahoo.co.jp/articles/73c8f6318296b2af745b3e8f87409ef8a9356015?source=rss",
+        source: "MotorFan",
+        date: "2026-06-01",
+        tags: [],
+    
+        interiorScore: 91,
+        interiorReason: "IPF roof storage panel for Land Cruiser 250 is a concrete interior accessory pro",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-01489814-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1143",
+        title: "パイオニアDEQ-2000Aで純正オーディオサウンドが激変",
+        desc: "パイオニアのデジタルサウンドプロセッサ『DEQ-2000A』は、車種別データをアプリで呼び出せるDSPで、純正オーディオのサウンドを改善。80W×4の出力とタイムアライメント機能により、ボーカルが目の前で歌うように音像を整える。",
+        url: "https://news.yahoo.co.jp/articles/322ba931788ab55a52f9898f801b7346ea048b53?source=rss",
+        source: "MotorFan",
+        date: "2026-06-01",
+        tags: ["音響"],
+    
+        interiorScore: 90,
+        interiorReason: "audio DSP product detail and cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-01462293-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1144",
+        title: "1980年代、レパードとソアラが繰り広げたデジパネ開発競争を振り返る",
+        desc: "1980年代、日産・レパードとトヨタ・ソアラが競い合い、蛍光管から液晶、虚像投影へと進化。ソアラの『エレクトロ・マルチビジョン』やレパードの『スペースビジョンメーター』など、当時の高級車メーターの歴史を解説。",
+        url: "https://news.yahoo.co.jp/articles/fd5ad660871b3d40ab03ad4dc49192e217cb8e99?source=rss",
+        source: "MotorFan",
+        date: "2026-06-01",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-01502481-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1145",
+        title: "プジョー、2027年採用の四角ハンドル「HyperSquare」で常識覆す",
+        desc: "プジョーは2027年より四角いステアリング「HyperSquare」を一般車に採用予定。物理シャフト非接続で電子制御し、低速域の操舵性を向上。四隅のリングで車両操作を可能にし、自動運転時はダッシュボード内に格納される。",
+        url: "https://news.yahoo.co.jp/articles/7f9cc88ee2325f7fc89e9d3b10f11d6f3ed18898?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-06-01",
+        tags: ["AR", "コックピット"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1146",
+        title: "ティファニーブルー内装のトヨタGR86を愛する女性オーナーが語るカスタムカーの魅力",
+        desc: "愛知県国際展示場で開催された「オートメッセ in 愛知」に登場した、オレンジのトヨタGR86。オーナーの「るんちゃん」さんは、SPEC!製のオリジナルエアロやティファニーブルーの内装など、自分の「好き」を形にしたシンプルでかっこいいスタイルを追求した1台だ。",
+        url: "https://news.yahoo.co.jp/articles/283c46c9ad1dc12b7c73767474046ec539249975?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-06-01",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 78,
+        interiorReason: "interior color and custom seat/trim details",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-00010004-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1147",
+        title: "最廉価Zプレミアでも豪華。ナッパ本革や10スピーカー標準",
+        desc: "ヴェルファイア最廉価グレード「Z プレミア」は670万円だが、プレミアムナッパ本革シートや10スピーカー、14インチHDディスプレイオーディオPlusなど高級装備を標準搭載。",
+        url: "https://news.yahoo.co.jp/articles/083b4ad6de1aa1e724abbafba82e87ed40faf4b6?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-06-01",
+        tags: ["ディスプレイ", "シート", "新素材", "音響"],
+    
+        interiorScore: 81,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-00000017-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1148",
+        title: "「くるくるハンドル」消えた理由と懐かしむ声",
+        desc: "パワーウインドウ普及で手動式「くるくるハンドル」は消えたが、故障リスク低・水没時脱出可能などのメリットあり。懐かしむ声やアナログ操作感への関心が SNS で高まっている。",
+        url: "https://news.yahoo.co.jp/articles/64cc5b05b6c3825cf86402bea74f0056368c061b?source=rss",
+        source: "くるまのニュース",
+        date: "2026-06-01",
+        tags: [],
+    
+        interiorScore: 81,
+        interiorReason: "manual window crank (interior trim/handling) plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-01066337-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1149",
+        title: "トヨタ紡織、レクサスES採用多機能ブロックシート「TBlocks」を人テク展で紹介",
+        desc: "トヨタ紡織は、レクサス新型ES（海外仕様）に採用する多機能ブロックシート「TBlocks」を人テク展2026で展示。従来のシートを3ブロックに分割する構造で、解体時間を約20％短縮し、ウレタン使用量を約20％削減する環境性能向上を実現した。",
+        url: "https://news.yahoo.co.jp/articles/b6280c136795e784b456b6670be0742eb12e58da?source=rss",
+        source: "くるまのニュース",
+        date: "2026-06-01",
+        tags: ["シート"],
+    
+        interiorScore: 97,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-01066786-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1150",
+        title: "フェラーリ・ルーチェ、インテリアは世界一だが外観はもっと美しくなるはずだった？",
+        desc: "フェラーリ・ルーチェのインテリアは世界一と評価されるが、外観デザインには物議を醸す。元アップルデザイナーのマーク・ニューソン氏が率いるLoveFromが設計し、50万ポンド（約1億円）のEVとして技術革新性も期待されるが、その本来の姿はもっと美しくなるはずだったと指摘されている。",
+        url: "https://news.yahoo.co.jp/articles/48e6e457813790d7e7d18acd1c9da8380a1a8288?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-06-01",
+        tags: ["新素材", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "interior and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260601-01247619-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us959",
+        title: "中国最高額車、ロシアで44万ドルで販売",
+        desc: "HongqiのGuoyaがロシアで44万5千ドルで販売され、中国国内価格の約2倍に。高級車内装やコックピット装備が特徴。",
+        url: "https://www.carscoops.com/2026/06/hongqi-guoya-russia-pricing/",
+        source: "CarScoops",
+        date: "2026-06-01",
+        tags: ["コックピット"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/06/708999689_1301285635539904_3502240008244811009_n-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us960",
+        title: "アップル製iPhone社が468馬力EV SUVを製造",
+        desc: "アップル製iPhoneの製造元であるテスラが、468馬力の電気自動車SUV「Cavira Emerge Long-Range Edition」を発売。航続距離は578km（359マイル）に達する。",
+        url: "https://www.carscoops.com/2026/06/foxtron-cavira-reveal/",
+        source: "CarScoops",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/05/Foxtron-Cavira-1kk-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us961",
+        title: "マセラティ、レーシングカラーで新車発表",
+        desc: "マセラティは、レーシングチームの歴史的カラーを再現した新車を発表した。赤と黄色のカラーリングは、同社の最高峰レース時代を象徴するデザインであり、最新モデルのエクストリームなロードカーに採用された。",
+        url: "https://www.carscoops.com/2026/06/maseratis-special-gt2-stradale-celebrates-an-f1-icon/",
+        source: "CarScoops",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/06/GT2MONZA_250FLivery_GT2_GT2Stradale-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us962",
+        title: "トランプ氏、米国製車はより米国製を望む",
+        desc: "トランプ氏は米国製車の国内生産率向上を要望。一方、GMの軸受サプライヤーでUAW組合員がスト、BYDが連敗を脱し、ホンダがエアバッグ問題で約10万台を回収する。",
+        url: "https://www.jalopnik.com/2184783/trump-american-made-cars/",
+        source: "Jalopnik",
+        date: "2026-06-01",
+        tags: ["バッテリー", "安全"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/trump-wants-american-made-cars-to-be-more-american-made/l-intro-1780323654.jpg",
+        note: ""
+    },
+    {
+        id: "us963",
+        title: "Polestar 5 スペイン・モロッコ横断GTテスト、421マイル航続",
+        desc: "Polestar 5は、スウェーデンからモロッコ砂漠へ約4,000マイルのGT横断テストを実施。スペインのシテジェスからバレンシアを走行し、200.3インチの車長を持つ大型EVとして、超車のようなプラットフォームとデザインを備える。",
+        url: "https://www.jalopnik.com/2184606/polestar-5-ev-first-drive-review-grand-touring-across-spain/",
+        source: "Jalopnik",
+        date: "2026-06-01",
+        tags: ["AR", "EV"],
+    
+        interiorScore: 61,
+        interiorReason: "exterior shot only, no interior image; text mentions 'design' and 'spaceship' fe",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/polestar-5-ev-first-drive-review-grand-touring-across-spain/l-intro-1780319332.jpg",
+        note: ""
+    },
+    {
+        id: "us964",
+        title: "TuxMatの3層構造カスタムフロアマットは内装を向上",
+        desc: "TuxMatは3Dレーザースキャンで設計された3層構造フロアマットを提供。外層はカーボンファイバー調の耐水ビニール、内層はEVA、底層は滑り止め設計。Car and Driverの2025年テストで「Best Premium」に選出され、従来のマットより2.5倍の広範囲をカバーする。",
+        url: "https://www.caranddriver.com/sponsored/a71336165/tuxmat-is-the-ultra-premium-floor-mat-your-vehicle-deserves-1779107399/",
+        source: "Car and Driver",
+        date: "2026-06-01",
+        tags: ["HMI", "AR", "EV", "カスタマイズ"],
+    
+        interiorScore: 91,
+        interiorReason: "floor mat product detail plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/tuxmat-water-around-mat-web-680ba20e7f0f9.jpg",
+        note: ""
+    },
+    {
+        id: "us965",
+        title: "警告灯の意味を理解して車両を適切に管理する",
+        desc: "警告灯は車両の異常を知らせる重要な機能です。各警告灯の意味を理解し、車両の適切な管理に役立ててください。",
+        url: "https://www.caranddriver.com/features/a35865614/dashboard-warning-lights-explained/",
+        source: "Car and Driver",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/adobestock-121798525-1616195640.jpeg",
+        note: ""
+    },
+    {
+        id: "us966",
+        title: "2026年ハーレー・デイヴィッドソンローライダーSは、ミルウォーキー・エイト117 V-Twin搭載",
+        desc: "2026年ハーレー・デイヴィッドソンローライダーSは、ミルウォーキー・エイト117 V-Twinエンジン搭載。",
+        url: "https://www.topspeed.com/power-cruiser-balances-muscle-comfort-rideability/",
+        source: "Top Speed",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/05/250902-26-fxlrs-riding-0334-ab2jc-1.jpg",
+        note: ""
+    },
+    {
+        id: "us967",
+        title: "Kia Telluride 12.3インチデジタルインストルメントパネル不具合訴訟",
+        desc: "2023-2025年式Kia Tellurideの12.3インチデジタルインストルメントパネルが黒く表示され不具合を起こす問題で、カリフォルニア連邦地方裁判所に集団訴訟が提起された。",
+        url: "https://www.carcomplaints.com/news/2026/lawsuit-kia-telluride-instrument-panel-cluster-not-working.shtml",
+        source: "CarComplaints",
+        date: "2026-06-01",
+        tags: [],
+    
+        interiorScore: 68,
+        interiorReason: "dashboard and display plus cabin image; defect/recall cap",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.carcomplaints.com/news/images/kia-telluride-instrument-cluster-not-working-lawsuit.jpg",
+        note: ""
+    },
+    {
+        id: "eu924",
+        title: "Vauxhall Corsaは2021年英国で売れ筋車に",
+        desc: "Vauxhall Corsaは2021年に英国で最も売れた車となり、30年以上の試行を経て成功した。現在もトップ5に定着しており、ガソリン、ディーゼル、ハイブリッド、EVなど多様な動力を選択可能。",
+        url: "https://www.autocar.co.uk/car-news/features/vauxhall-corsa-used-buying-guide-make-sure-you-buy-right-one",
+        source: "AUTOCAR UK",
+        date: "2026-06-01",
+        tags: ["HMI", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/vauxhall-corsa-front-quarter-tracking.jpg?itok=sKl95YWe",
+        note: ""
+    },
+    {
+        id: "eu925",
+        title: "Kia EV4、英国政府補助でEV3より安価に",
+        desc: "Kia EV4はスロバキア生産のため英国政府から£3750の補助を受け、EV3より£30,995から販売開始。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/kia-ev4-hatch-now-cheaper-smaller-ev3-due-upgraded-grant",
+        source: "AUTOCAR UK",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/kia-ev4-front-quarter-tracking.jpg?itok=xoiPA6Vj",
+        note: ""
+    },
+    {
+        id: "eu926",
+        title: "Seat IbizaとAronaの比較：内装と特徴の違い",
+        desc: "スペイン系ブランドSeatのスーパーミニIbizaとクロスカーAronaを比較。両車は外観も内装も似ており、特にシートやインテリア素材は共通する部分が多い。ただし、Aronaはクロスカードームのデザインで、Ibizaはよりスポーティなコックピットを備えている。",
+        url: "https://www.autocar.co.uk/car-news/features/supermini-vs-suv-my-seat-ibiza-better-its-arona-sibling",
+        source: "AUTOCAR UK",
+        date: "2026-06-01",
+        tags: ["AR", "シート", "コックピット", "新素材"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/seat-ibiza-vs-arona.jpg?itok=X4k6E_Vp",
+        note: ""
+    },
+    {
+        id: "eu927",
+        title: "Polestar 5は英国系EVで、737bhpから871bhpの出力を持つ超サルーン",
+        desc: "Polestar 5は、Lotus精神の独自プラットフォームを採用し、737bhpから871bhpの出力を誇る超サルーン。価格は£89,500からで、112kWhバッテリーと800V電気アーキテクチャを備える。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/polestar-5-driven-british-bred-ev-epic-everyday-super-saloon",
+        source: "AUTOCAR UK",
+        date: "2026-06-01",
+        tags: ["AR", "EV"],
+    
+        interiorScore: 73,
+        interiorReason: "flagship cabin refresh and interior design-led focus",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/polestar-5-review-2026-079.jpg?itok=7mItW9cx",
+        note: ""
+    },
+    {
+        id: "eu928",
+        title: "欧州自動車メーカー、PHEV導入で意見割れ",
+        desc: "欧州メーカーは大型車後継にプラグインハイブリッド（PHEV）を設けるか否かで分かれている。一部はEVのみで、他はPHEVも検討中。",
+        url: "https://www.autocar.co.uk/car-news/business/two-engines-one-solution-european-car-makers-divided-phev-and-rex-tech",
+        source: "AUTOCAR UK",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/c10reevcgi.jpg?itok=932guOCM",
+        note: ""
+    },
+    {
+        id: "eu929",
+        title: "New Polestar 5 2026：Porsche Taycanに挑む高級EVクーペ",
+        desc: "New Polestar 5は、高級EVクーペとしてPorsche Taycanに挑戦するモデル。2026年発売予定で、北欧デザインと高性能を兼ね備えたEVクーペとして注目されている。",
+        url: "https://www.autoexpress.co.uk/polestar/5/369696/new-polestar-5-2026-pictures",
+        source: "Auto Express",
+        date: "2026-06-01",
+        tags: ["AR", "EV"],
+    
+        interiorScore: 29,
+        interiorReason: "exterior-only image and text lacks interior details",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--4nxeJ2rq--/t_rss_image_w_845/v1780058786/autoexpress/2026/05/Polestar%205%202026-8.jpg",
+        note: ""
+    },
+    {
+        id: "cn967",
+        title: "2026 年 5 月の中国における電気自動車（EV）の販売状況：リーパモーターが新記録を達成、BYD",
+        desc: "2026 年 5 月の中国における EV 販売台数では、BYD が 37 万 6990 台で首位に立ち、SAIC と吉利が続いた。奇瑞は 2 年連続で 10 万台を超え、Leapmotor と極氪も好調で、Leapmotor が歴代最高販売台数を記録した。",
+        url: "https://carnewschina.com/2026/06/01/china-ev-global-sales-in-may-2026-leapmotor-new-historical-record-byd-stopped-falling-yoy/",
+        source: "CarNewsChina - All",
+        date: "2026-06-01",
+        tags: ["AI", "EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/06/screenshot-2026-06-01-at-22-01-55-daily-updated-database-of-chinese-evs-and-sales-data-data-carnewschina-com-e1780322564501.png",
+        note: ""
+    },
+    {
+        id: "cn968",
+        title: "中国の自動車メーカー、5 月の出荷が回復",
+        desc: "東風、BYDなど主要メーカーが5月の出荷を回復。オフシーズンからの回復傾向で、中国市場の需要が改善している。詳細はCnEVPostを参照。",
+        url: "https://cnevpost.com/2026/06/01/china-auto-deliveries-may-2026/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060103343786.jpg",
+        note: ""
+    },
+    {
+        id: "cn969",
+        title: "GWM は 5 月の販売が微減したが、海外では 47% 増加",
+        desc: "GWM は 5 月の販売台数が前年比 1.79% 減の 10 万 3999 台だが、海外販売が全体の半分以上を占めた。",
+        url: "https://cnevpost.com/2026/06/01/gwm-may-2026-sales/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060113541060.jpg",
+        note: ""
+    },
+    {
+        id: "cn970",
+        title: "理想汽車の5月における納車台数の減少は、新型SUVの販売で回復が期待されています。",
+        desc: "理想汽車は1 月～5 月で16 万2,577 台を販売し、前年比3.03%減となりました。5 月単月では18%減となりましたが、5 人乗りフラッグシップSUVの発売により販売回復を期待しています。",
+        url: "https://cnevpost.com/2026/06/01/li-auto-may-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060108433792.jpg",
+        note: ""
+    },
+    {
+        id: "cn971",
+        title: "ジーカー、5月販売で過去最高を更新",
+        desc: "ジーカーは5月に3万4377台を販売し、前年比81.81%増の過去最高を記録した。高級モデルが成長を牽引し、中国EV市場で注目を集めている。",
+        url: "https://cnevpost.com/2026/06/01/zeekrs-may-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060107300789.jpg",
+        note: ""
+    },
+    {
+        id: "cn972",
+        title: "リープモーターは、5月の出荷台数が8万1569台となり、2カ月連続で新記録を更新しました。",
+        desc: "リープモーターは5月に8万1569台を販売し、2カ月連続で月間最高記録を更新した。中国メーカーのリープモーターは、自動車内装やコックピット設計にも注力している。",
+        url: "https://cnevpost.com/2026/06/01/leapmotor-may-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: ["コックピット"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060106583912.jpg",
+        note: ""
+    },
+    {
+        id: "cn973",
+        title: "小鹏汽車は5月に3万2千台を納車したが、新GX SUVの貢献は限定的だった",
+        desc: "小鹏汽车は5月に3万2158台を納車し、前年同月比4%の減少となりました。新型GX SUVは5月20日に発売され、大規模な納車は6月まで延期されました。納車データはCnEVPostの報道に基づいています。",
+        url: "https://cnevpost.com/2026/06/01/xpeng-deliveries-may-2026/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060104230965.jpg",
+        note: ""
+    },
+    {
+        id: "cn974",
+        title: "ニオは5月に3万7705台を納入し、8月には1万台を超える納入を達成しました。",
+        desc: "ニオは5月に3万7705台を納入し、年間最高を更新した。ES8の月間納入は1万台を超え、オンボL80が同ブランドの成長に貢献した。",
+        url: "https://cnevpost.com/2026/06/01/nio-deliveries-may-2026/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060104100268.jpg",
+        note: ""
+    },
+    {
+        id: "cn975",
+        title: "ファーウェイHIMAは、5月に4万6千台を販売し、2ヶ月連続で増収となりました。",
+        desc: "ファーウェイHIMAは5月に4万6122台を納入し、2ヶ月連続で増産した。年初5カ月の累計は19万2千台で、前年比26.5%増となった。",
+        url: "https://cnevpost.com/2026/06/01/huawei-hima-delivers-46122-vehicles-may-2026/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060102364689.jpg",
+        note: ""
+    },
+    {
+        id: "cn976",
+        title: "Xiaomi EVは5月に3万台以上を販売し、ラインナップを拡大しました。",
+        desc: "Xiaomi EVは5月に廉価版のYU7と高性能版のYU7 GTを新発売し、市場の需要を刺激しました。中国市場では3万台以上の販売実績を達成し、車種ラインナップを拡大させました。",
+        url: "https://cnevpost.com/2026/06/01/xiaomi-ev-delivers-over-30000-cars-may-2026/",
+        source: "CnEVPost - All",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/06/2026060101194531.jpg",
+        note: ""
+    },
+    {
+        id: "in1011",
+        title: "2026年5月インド車販売：タタがマヒンドラを2位で上回る",
+        desc: "2026年5月、インド乗用車市場は成長を続けた。マルチ・スズキが1位を維持し、タタ・モーターズがマヒンドラを2位で上回った。",
+        url: "https://www.autocarindia.com/industry/may-2026-car-sales-tata-retains-second-place-over-mahindra-439853",
+        source: "Autocar India - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260601_131657_ee0a5c73.jpg",
+        note: ""
+    },
+    {
+        id: "in1012",
+        title: "2026年タタ・ティアゴ、外観・内装一新で価格発表",
+        desc: "タタ・モーターは2026年モデルのティアゴを大幅に刷新。外観デザインとコックピットレイアウトを一新し、安全装備を追加。ガソリン・CNGエンジンとマニュアル・AMTは維持され、インド主要都市で価格が発表された。",
+        url: "https://www.autocarindia.com/auto-features/2026-tata-tiago-on-road-prices-listed-in-top-indian-cities-440618",
+        source: "Autocar India - All",
+        date: "2026-06-01",
+        tags: ["コックピット", "安全"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260601_132811_2e5c3b6b.jpg",
+        note: ""
+    },
+    {
+        id: "in1013",
+        title: "2026 Honda City インドでフェイスリフト、新グレードZX+追加",
+        desc: "ホンダはインドで5世代目City Sedanを2度目のフェイスリフト。外観一新、新機能搭載、トップグレードZX+を追加。1.5L自然吸気エンジン維持。",
+        url: "https://www.autocarindia.com/auto-features/2026-honda-city-on-road-prices-listed-in-top-indian-cities-440615",
+        source: "Autocar India - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260601_110055_bea5f128.jpg",
+        note: ""
+    },
+    {
+        id: "in1014",
+        title: "マハティ・スズキ、6月4日にインド初フレックス燃料車展示",
+        desc: "マハティ・スズキは6月4日、世界環境デー直前にデリー・タジパレスでインド初フレックス燃料車を展示。交通大臣ニティン・ガドカリ氏も出席予定。",
+        url: "https://www.autocarindia.com/car-news/maruti-confirms-showcase-of-indias-first-flex-fuel-car-on-june-4-439850",
+        source: "Autocar India - All",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260601_091524_5d6d08d3.jpg",
+        note: ""
+    },
+    {
+        id: "in1015",
+        title: "Hyundai VenueとMaruti FronxのガソリンMT実燃費比較",
+        desc: "両車はNA・ターボエンジンとMT/ATが用意されるが、NAエンジンが人気。ターボ車はNA車より高価で、実燃費も異なる。",
+        url: "https://www.autocarindia.com/auto-features/hyundai-venue-vs-maruti-fronx-petrol-mt-real-world-mileage-compared-440611",
+        source: "Autocar India - All",
+        date: "2026-06-01",
+        tags: ["AR", "AI"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260601_082334_41cfc0a2.jpg",
+        note: ""
+    },
+    {
+        id: "in1016",
+        title: "現代自動車、2026年5月国内販売9.1%増で4万7837台",
+        desc: "現代自動車は2026年5月に国内で4万7837台を販売し、前年同月比9.1%増を記録した。HMILは2ヶ月で約10万台を販売し、FY27に向けた好調なスタートを切った。",
+        url: "https://gaadiwaadi.com/hyundai-domestic-sales-up-9-1-with-nearly-48000-units-in-may-2026/",
+        source: "GaadiWaadi",
+        date: "2026-06-01",
+        tags: ["HMI"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/04/Hyundai-Grand-i10-Nios-Vibe-edition.jpg",
+        note: ""
+    },
+    {
+        id: "in1017",
+        title: "マツダ、日産、トヨタなど自動車メーカーの5月販売実績",
+        desc: "2026年5月、マツダは国内で24万2,688台を販売し、過去最高を更新。日産は19万3,535台、トヨタは7,239台を販売した。",
+        url: "https://www.indiacarnews.com/news/cars-sales-may-2026-maruti-hyundai-tata-mahindra-more-67991/",
+        source: "IndiaCarNews",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/01/Detailed-Sales-Report.webp",
+        note: ""
+    },
+    {
+        id: "in1018",
+        title: "マヒンドラ、2台の新型SUVでテスト中、年内発売予定",
+        desc: "マヒンドラは5年間で16台の新型車投入を計画。そのうち2台の新型SUV（7人乗りと5人乗り）でテストを実施中。10台はICE、6台はEVで構成されるラインアップを拡大する。",
+        url: "https://www.indiacarnews.com/news/2-new-mahindra-suvs-7-5-seater-testing-underway-launch-soon-67986/",
+        source: "IndiaCarNews",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2025/08/Untitled-design-12.webp",
+        note: ""
+    },
+    {
+        id: "in1019",
+        title: "欧州2025年販売台数トップ10、ダキア・サンデロが2年連続首位",
+        desc: "欧州2025年乗用車市場で、ダキア・サンデロが2年連続販売台数首位を維持。2位はルノー・クリオ、3位はフォルクスワーゲン・T-ROC。安価で実用的な車とコンパクトSUVが購買動機として引き続き重視されている。",
+        url: "https://www.autopunditz.com/post/top-10-best-selling-cars-in-europe-in-2025-dacia-sandero-leads-again-vw-suvs-surge",
+        source: "Auto Punditz",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_96f100f0b32448eba2e84535643da772~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu930",
+        title: "メルセデス、電気GLCに2新モデル追加で小型バッテリー採用",
+        desc: "メルセデス・ベンツは電気GLCに小型バッテリー搭載の2新モデルを追加。既存の360kW全輪駆動モデル（94kWhバッテリー）に加え、来月注文受付を開始する。",
+        url: "https://www.electrive.com/2026/06/01/mercedes-expands-electric-glc-line-up-with-two-new-variants/",
+        source: "Electrive",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/06/mercedes-benz-glc-400-4matic-eq-202601-400x252.jpg",
+        note: ""
+    },
+    {
+        id: "eu931",
+        title: "BYD、海外需要増で2026年5月販売回復",
+        desc: "BYDは2026年5月にNEV販売38万3453台を記録し、8か月の減少を止めた。海外出荷は80%増で、中国国内の弱さを補った。",
+        url: "https://electriccarsreport.com/2026/06/byd-may-2026-sales-rise-as-overseas-demand-reaches-new-record/",
+        source: "Electric Cars Report",
+        date: "2026-06-01",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/04/BYD-SEAL-08.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu932",
+        title: "新Opel AstraはEV・PHEV・ディーゼルで最大454km WLTP航続",
+        desc: "新Opel AstraはEVモデルでWLTP航続距離454km、PHEVモデルで都市EV航続100km超を達成。",
+        url: "https://electriccarsreport.com/2026/06/new-opel-astra-range-includes-electric-hybrid-and-efficient-diesel-models/",
+        source: "Electric Cars Report",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2025/12/New-Opel-Astra-Electric_5.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu933",
+        title: "小鹏汽车5月の交付台数は32,158台とさらに減少し、新GX SUVの発売が成長見通しを改善する",
+        desc: "小鹏汽车は5月に32,158台を納車し、前年同月比で連続して減少しました。しかし、新型GX SUVの需要が堅調であることや、ロボタクシーの進展により、反発が期待されます。",
+        url: "https://electriccarsreport.com/2026/06/xpeng-deliveries-fall-again-in-may-but-new-gx-suv-sparks-growth-expectations/",
+        source: "Electric Cars Report",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/06/XPeng-GX.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in1020",
+        title: "スキャンIA、インテュース2026で初のEVクルーキャブ発表",
+        desc: "スキャンIAはインテュース2026で初のバッテリーEVクルーキャブを披露。緊急車両向けクリーンなソリューションを推進する。",
+        url: "https://indianautosblog.com/scania-unveils-first-electric-crewcab-ahead-of-interschutz-2026-p328511",
+        source: "IndianAutosBlog",
+        date: "2026-06-01",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://img.indianautosblog.com/resize/750x-/no-image.jpg",
+        note: ""
+    },
+    {
+        id: "us968",
+        title: "中国自動車部品メーカー、ロボット事業へ本格参入",
+        desc: "中国自動車内装部品メーカーの南通超達設備は、財務・人材を投入しロボット事業を本格的に展開すると、陳存ユー会長が投資家に語った。",
+        url: "https://www.yicaiglobal.com/news/chinese-auto-parts-suppliers-foray-into-robotics-business",
+        source: "Yicai Global",
+        date: "2026-06-01",
+        tags: [],
+    
+        country: "us",
+        img: "https://img.yicaiglobal.com/src/image/2026/06/121131299524293.jpg",
         note: ""
     },
 ];

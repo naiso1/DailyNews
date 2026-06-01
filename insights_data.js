@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-01",
+        analysis: {
+            jp: "日本市場では高級車後席の60W充電[jp1141]や多機能ブロックシート[jp1149]など、機能性と環境配慮の両立が進んでいる。音響[jp1143]、ディスプレイ[jp1144]、カスタマイズ[jp1146]など消費者の多様な要望に対応。EV[jp1141]、四角ハンドル[jp1145]、新素材[jp1150]など次世代技術も注目。製造効率[jp1149]の改善ニーズも顕在化しており、コスト削減と品質向上のバランスが重要。",
+            cn: "中国EV市場は5月にBYDの37万6990台で首位、リーパモーターの記録更新など好調だが、小鹏汽車のGX SUV延期や理想汽車の減少で競争激化が浮き彫り。 [cn967] 中国の自動車メーカー、5 月の出荷が回復 [cn972] 海外展開のGWMやファーウェイHIMAの増収、小米EVのラインナップ拡大から、**量産効率化**と**多機種対応**が**コスト競争力**に直結。 [cn969] [cn975] [cn976] 特に高級モデルのジーカーの成長は**高級内装の普及**を示唆しており、**素材の高級化**と**設計の標準化**を両立する必要がある。 [cn971]",
+            in: "インド市場ではEV化とフレックス燃料技術の両立が加速中[in1014][in1018]。また、安全性向上とコックピットのHMI革新[in1016]がトレンド。ユーザーの香りや触感など五感への配慮も注目。競争激化で差別化が急務[in1011]。",
+            us: "米国市場ではEV化・高機能化が加速しており[us960,us963]、テスラCaviraやPolestar 5の航続距離延伸がEV性能の重要度を示す[us963]。またトランプ氏の国内生産要請はサプライチェーン強化を促し[us962]、中国メーカーのロボット参入は部品量産化の効率化を意味する[us968]。Kiaのインストパネル不具合はHMI信頼性の重要性を浮き彫りにし[us967]、警告灯の理解は情報伝達の最適化が必要[us965]。高級車内装やPolestarのGTデザインはプレミアム質感への需要向上を示唆[us961,us964]。",
+            eu: "欧州市場ではEV化と多様な動力選択肢が定着している[eu925][eu932]。特に内装素材の共通化やコックピットのデザイン差異化が顕著だ。高級EVクーペや高性能EVの登場[eu929]により、乗り心地や音の質への関心が高まっている。また、PHEV導入の議論は、過渡期における柔軟な内装設計の必要性を浮き彫りにしている[eu928]。バッテリー技術の進化は、EV航続距離の向上とセットで、快適性向上に寄与する[eu930]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1036, img: "images/idea_1036.png", title: "自動組立ブロックシート", desc: "ブロック化シートの自動組立ライン開発。TBlocksの組み立て工数を30%削減。生産効率化で価格競争力向上。量産化でコスト削減を実現。車内品質向上と製造効率の両立で、製造部門がうれしい。", imagePrompt: "Automated assembly line for modular car seats, robotic arms assembling seat blocks, clean factory environment, brushed steel and aluminum materials, bright LED lighting, photorealistic 3D render, industrial design, high detail quality" },
+                { id: 1037, img: "images/idea_1037.png", title: "UV-C LED空気清浄シート", desc: "UV-C LEDをシートに組み込んだ除菌シート。ウイルス不活化で車内空気清浄。健康志向のドライバーにアピール。家族の安心感を演出。除菌効果で快適な車内環境を維持。衛生管理部門がうれしい。", imagePrompt: "UV-C LED integrated into car interior seat, glowing blue UV light effect, clean white leather seat surface, modern automotive interior, soft ambient lighting, photorealistic 3D render, premium quality, automotive product visualization" },
+            ],
+            cn: [
+                { id: 1038, img: "images/idea_1038.png", title: "モジュール統合型コックピット", desc: "センターコンソールに統合された香りディフューザーと環境センサーを組み合わせ、EV特有の静粛性を活かした五感体験を提供。量産化可能な標準モジュールを採用し、コスト削減を実現。ユーザーは高級感と経済性の両立をうれしく感じる。", imagePrompt: "Modern electric vehicle center console with integrated aromatherapy diffuser and environmental sensors, sleek brushed aluminum and matte black finish, ambient lighting strips, luxury cabin interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 1039, img: "images/idea_1039.png", title: "新漆黒めっき加飾部品", desc: "光を反射しない深みのある漆黒色を実現する新めっき技術で、インパネやセンターパネルを高級感に演出。EVの高級化トレンドに合わせ、コスト競争力を維持しつつ、差別化を追求。ユーザーは独自性と高級感を同時に楽しめる。", imagePrompt: "Premium vehicle dashboard with deep matte black finish, non-reflective surface, high-quality embossed texture, subtle ambient lighting, luxury interior design, photorealistic render, professional product visualization, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 1040, img: "images/idea_1040.png", title: "五感×フレックス燃料の香りシステム", desc: "フレックス燃料車用香りディフューザー。自然な木香がEVの乾いた空気感を和らげ、フレックス燃料車の排気臭も消す。運転中も家族も心地よい空間を。", imagePrompt: "Interior of a futuristic Indian car, center console with integrated wood-grain aroma diffuser, soft mist coming out, warm ambient lighting, flex-fuel engine visible under hood, photorealistic 3D render" },
+                { id: 1041, img: "images/idea_1041.png", title: "UV-C LED除菌×フレックス燃料の空気清浄", desc: "フレックス燃料車の排気やEVの静寂に対応。UV-C LEDで車内除菌。花粉やウイルスを除去し、清潔な空気を感じて健康に。家族全員が安心する。", imagePrompt: "Close-up of advanced UV-C LED air purifier inside car, glowing blue light, clean air particles, modern dashboard, premium materials, photorealistic automotive interior design" },
+            ],
+            us: [
+                { id: 1042, img: "images/idea_1042.png", title: "EVバッテリー冷却モジュール", desc: "テスラCaviraの高性能EVを想定。バッテリー冷却システムを標準装備し、長距離走行でも快適に保つ。ユーザーは熱暴走を気にせず、安心して高速走行を楽しめる。", imagePrompt: "Premium electric vehicle interior with sleek battery cooling module integrated into center console, ambient blue LED glow, brushed aluminum accents, dark carbon fiber trim, photorealistic automotive design render, high-end luxury materials, modern cockpit layout, cinematic lighting, 4K quality" },
+                { id: 1043, img: "images/idea_1043.png", title: "植物系軽量パネル内装", desc: "セルロースナノファイバー配合パネルをEVに採用。テスラCaviraの軽量設計に合わせ、石油系素材不使用で環境負荷低減。ユーザーは自然素材の温かさと軽量化を両立、エコ意識を満たせる。", imagePrompt: "Sustainable automotive interior design with plant-based nano fiber panels, light wood grain texture, soft beige and green color palette, natural lighting, eco-friendly materials showcase, photorealistic product visualization, clean modern cockpit, premium sustainable luxury, 4K quality" },
+            ],
+            eu: [
+                { id: 1044, img: "images/idea_1044.png", title: "香り付きウェザーストリップ", desc: "センターコンソールのウェザーストリップに天然精油を配合。車内を心地よい香りに包み、疲れを癒やす。長時間のドライブでも癒やしを感じる。", imagePrompt: "Luxury car interior closeup, center console with fabric weather strip emitting soft mist, natural oil droplets visible, warm amber lighting, premium leather textures, photorealistic render, cinematic lighting, high detail, 4K quality" },
+                { id: 1045, img: "images/idea_1045.png", title: "音波可視化トリム", desc: "車内の振動を内装トリムに光で表現。エンジン音や風音の質感を可視化。音の美しさを五感で味わい、ドライブの楽しさを高めてくれる。", imagePrompt: "Automotive interior dashboard, sound waves visualized as blue light patterns on wood trim, holographic acoustic visualization, futuristic cockpit, night driving scene, blue accent lighting, photorealistic render, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-05-29〜2026-05-31",
         analysis: {
             jp: "日本市場ではEV化と**快適性**が加速しており[jp1132][jp1134][jp1137]、**新素材**への関心も高まっています。特に**静寂性**や**高級感**を追求する**コックピット**環境[jp1135][jp1139]や、車中泊など**多機能性**へのニーズ[jp1138]が顕著です。また、**EVフラットフロア**を活かした**収納**や**ワイヤレス充電**といった実用性も重要です[jp1132]。",
