@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-02",
+        analysis: {
+            jp: "日本市場では**コネクテッドカー**の普及と**EV化**が加速しており、内装品開発の転換期を迎えている。特に**ディスプレイオーディオ**や**スマートインパネ**の薄型化・軽量化が必須[jp1157]。また、**シート**の機能向上や**音響**の最適化が重視されている[jp1152]。一方で、**自動化**や**コスト削減**の製造プロセス改善も重要[jp1160]。",
+            cn: "中国EV市場は5月、NEV販売が136万台（前年比12増[cn981]）と拡大し、テスラも8万5982台の最高記録[cn982]。しかし、ポプラ綿火災でEV20台焼失や、1.8トン超スポーツカー批判[cn977]など、**安全性**と**軽量化**の重要性が浮き彫り。また、CATL・BYDがバッテリーシェアトップ[cn986]と、TikTok×Seresのコックピット開発[cn980]など、**素材革新**と**AI連携**がトレンド。これらの課題を解決し、消費者の安心感と先進性を両立させる内装が求められている[cn981]。",
+            in: "インド市場はEV普及が加速中、充電インフラ整備が重要[in1029]。EV専用設計や熱管理技術の活用が必要[in1030]。また音響制御技術は、EV化で静寂化が進む中で新たな価値を提供できる[in1022]。Victura CEO就任で照明技術も注目[in1021]。",
+            us: "米国のEV独占輸入枠や山火事防止のニュースから、**EV専用設計**と**熱管理**の重要性が浮き彫り[us971,us975]。テスラワイパー特許は**自律走行**信頼性の鍵[us978]。GRMN Corollaの軽量化は**2ペダル**化がトレンド[us976,us970]。さらに、フォードの駐車要請から**安全性**向上の必要性が明確[us973]。新素材やHMIの進化も**高級感**向上に寄与[us969]。自社はEV熱対策と**リサイクル素材**アップサイクルで差別化[us972]。",
+            eu: "EU市場のEV普及率が98%に達し、高級車でも竹素材や軽量樹脂化が進む[eu939]。ロールス・ロイスの照明演出やMGのスペイン投資から、サステナブル素材と高技術の融合がトレンド[eu942][eu943]。ミニのデザイン刷新やKiaの価格戦略が示すように、欧州では「高級感×機能性」の両立が重要[eu936][eu942]。自社は軽量化技術とデザイン性を活かし、EV時代のプレミアム内装を提案すべき[eu939]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1046, img: "images/idea_1046.png", title: "自動組立対応薄型インパネ", desc: "大型ディスプレイを骨格樹脂化し、組立ラインの自動化で歩留まり99%に。コスト削減と生産性向上を実現。作業員の負担軽減でうれしさが生まれる。", imagePrompt: "Modern automotive interior showing a slim instrument panel with large integrated display, automated robotic assembly line in background, brushed aluminum and matte black materials, industrial lighting, high detail, photorealistic rendering, 4K quality" },
+                { id: 1047, img: "images/idea_1047.png", title: "コネクテッドシートモジュール", desc: "後席向けコネクテッドシートモジュールで、後部座席から車外情報を確認可能に。プライバシー保護と快適性を両立。うれしさを体験できる。", imagePrompt: "Premium car interior focusing on rear seat with integrated display module, luxury leather materials, ambient blue lighting, night scene, photorealistic rendering, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 1048, img: "images/idea_1048.png", title: "バイオ系衝撃吸収シート", desc: "ポプラ綿火災の教訓を踏まえ、難燃性バイオ素材と衝撃吸収構造を融合。シート表面触感を維持しつつ、火災時の毒性ガス発生抑制に寄与。ドライバーは「安心感」で、家族は「安全で柔らかい座り心地」を味わう。", imagePrompt: "Car interior with eco-friendly bio-based fabric seat, integrated flame-retardant structure, soft texture, warm ambient lighting, safety certification badge on door panel, photorealistic render, high detail, cinematic lighting, 4K quality" },
+                { id: 1049, img: "images/idea_1049.png", title: "発光ミリ波透過エンブレム", desc: "発光ミリ波レーダー透過エンブレム技術を応用。コックピット隅に配置し、ADASレーダー干渉を回避しながら、車外からの識別性を高めます。ドライバーは「安全運転支援」と、周囲は「個性的な車外アピール」の両方を楽しめます。", imagePrompt: "Automotive emblem with integrated illuminated millimeter wave radar transparency, sleek design, premium vehicle exterior, night scene, blue accent lighting, photorealistic render, futuristic cockpit hint, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 1050, img: "images/idea_1050.png", title: "EV専用フロア熱管理パネル", desc: "EVバッテリー熱管理とフロア空間活用を統合した新パネル。静かな走行環境を維持しつつ、足元を温かく保ち、夏のインドでも快適に過ごせる喜びを提供", imagePrompt: "EV floor panel with integrated thermal management system, warm glowing underfloor heating elements, brushed aluminum trim, dark carbon fiber texture, night interior scene, soft ambient lighting, photorealistic 3D render, automotive premium quality" },
+                { id: 1051, img: "images/idea_1051.png", title: "静寂空間音響可視化システム", desc: "EVの静寂性を生かした空間音響制御技術。車内音質を可視化し、音楽や会話の明瞭度を最適化。音楽愛好家や乗客が、静かな空間で豊かな音体験を楽しめる喜び", imagePrompt: "Acoustic visualization display in car interior, holographic sound wave patterns floating above dashboard, warm blue accent lighting, premium materials like wood and leather, night driving scene, photorealistic 3D render, cinematic lighting, high detail" },
+            ],
+            us: [
+                { id: 1052, img: "images/idea_1052.png", title: "EV専用フロアヒーターモジュール", desc: "EVバッテリーの熱管理と足元暖房を統合。廃棄エアバッグ生地をアップサイクルした保温素材を採用。運転中の冷たさから温かさへ、足元を包む安心感を提供します。", imagePrompt: "Cutaway view of modern EV car floor showing integrated battery thermal management system and floor heating module, recycled fabric insulation material, warm golden glow from heating elements, blue energy flow visualization, premium automotive interior, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 1053, img: "images/idea_1053.png", title: "アップサイクルステアリングホビーバッグ", desc: "廃ステアリング革をアップサイクルした高機能ホビーバッグ。小型EVの足元収納活用と、軽量で耐久性のある素材を組み合わせ。EVオーナーがステータスを演出し、おしゃれなドライブを体験できます。", imagePrompt: "Luxury car interior with recycled leather accessory bag mounted on center console, premium EV steering wheel in background, warm amber lighting, high-end materials like brushed aluminum and textured recycled leather, photorealistic automotive product visualization, professional studio lighting, 4K quality" },
+            ],
+            eu: [
+                { id: 1054, img: "images/idea_1054.png", title: "竹調光ダッシュボード", desc: "竹素材とLEDイルミネーションを組み合わせたダッシュボード。自然光が部屋を照らすように、走行中に車内が優しく輝く体験を。高級EVオーナーが「自然と技術の調和」を感じながら、リラックスしてドライブできる幸せを。", imagePrompt: "Luxury electric car dashboard made of bamboo with integrated LED lighting strips, soft warm glow illuminating the cabin, night driving scene, premium interior materials like brushed aluminum accents, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 1055, img: "images/idea_1055.png", title: "軽量樹脂インパネ骨格", desc: "鉄製から高強度樹脂に置き換えたインパネ骨格。EVの軽量化とバッテリー効率向上を両立し、オーナーは「より長い航続距離」を体感。維持費削減と環境配慮から、社会貢献への満足感と経済的メリットを同時に享受できる。", imagePrompt: "Automotive interior with lightweight resin dashboard frame, transparent resin structural components visible through cutaway view, modern EV cockpit design, blue ambient lighting, clean minimalist aesthetic, photorealistic engineering visualization, professional product render" },
+            ],
+        }
+    },
+{
         date: "2026-06-01",
         analysis: {
             jp: "日本市場では高級車後席の60W充電[jp1141]や多機能ブロックシート[jp1149]など、機能性と環境配慮の両立が進んでいる。音響[jp1143]、ディスプレイ[jp1144]、カスタマイズ[jp1146]など消費者の多様な要望に対応。EV[jp1141]、四角ハンドル[jp1145]、新素材[jp1150]など次世代技術も注目。製造効率[jp1149]の改善ニーズも顕在化しており、コスト削減と品質向上のバランスが重要。",
