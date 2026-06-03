@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-03",
+        analysis: {
+            jp: "日本市場では静粛性向上への関心が高い[jp1161][jp1167]。高級感の追求とEV化の進展[jp1166][jp1168]が顕著。日産ルークスの高機能化[jp1169]やトヨタハリアーの高級装備拡充[jp1170]も示唆しており、消費者は音質や質感など「五感」の満足度を重視。特にEV化に伴う静粛性向上[jp1166]や、LEDコンソールボックスのような便利機能[jp1167]への需要が明確。また、レベライザーのような伝統的機能の再評価[jp1165]も、ドライバーの安心感へのニーズを示唆する。",
+            cn: "中国市場のNEV販売減を踏まえ、サステナビリティと軽量化への関心が浮上[cn993]。BYDの充電連携や新素材開発から、リサイクル素材と省エネルギー設計が必須[cn994]。また東風の水素技術やCATLの次世代バッテリーは脱炭素の象徴[cn991][cn992]。これらを内装に統合し、環境負荷低減と高級感を両立させる方向性が示唆される。",
+            in: "インド市場ではEV化とコネクテッド化が進み、特に健康・ウェルネス志向が高まっている[in1037]。抗菌・消臭機能はEV内装の密閉空間で重要[in1032]。また、高級感の追求とリサイクル素材の活用がトレンド[in1040]。部品業界は利益率圧迫だが、EV需要は堅調[in1031]。",
+            us: "米国市場ではEVとコネクテッド化が加速する中、中国製品輸入制限や大型SUVの価格競争が進行[us983]。フォードのシートベルト回収は安全規制強化の示唆[us980]。トヨタとBYDの新型内装は高級感とコストパフォーマンスの両立を重視[us981][us979]。BMWのM 1000 XRのような快適性重視もトレンド[us985]。キャンパー機能強化はアウトドア需要の高まりを反映[us979]。",
+            eu: "欧州の自動車内装トレンドは、ルクセンブルク充電拠点を欧州間移動の要所へ[eu948]とするEV・自動運転への慎重な姿勢と、高級車から実用車まで幅広い層への対応が特徴だ。Volvo、欧州EV販売強調。EX30・EX40・新EX60が牽引[eu950]。サステナビリティと軽量化のニーズが欧州で特に強い。安全評価の高さも重要。Subaruの電気自動車UnchartedとE-Outbackが5つ星安全評価獲得[eu951]。高級車メーカーは伝統と革新のバランスを重視する傾向がある。",
+        },
+        ideas: {
+            jp: [
+                { id: 1056, img: "images/idea_1056.png", title: "静寂空間型香りコンソール", desc: "EV化で静かになった車内に、静寂を演出する香りディフューザーとLEDイルミを統合。コンソールボックスのように工具不要で設置可能。高級感ある香りと光で、帰宅後のリラックスタイムを愉しめる。", imagePrompt: "Luxury car center console with integrated aromatherapy diffuser and soft ambient LED lighting, brushed aluminum and matte black materials, subtle mist effect inside the console, warm glowing light reflecting on interior surfaces, photorealistic 3D render, premium automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 1057, img: "images/idea_1057.png", title: "シームレスインテリアコート", desc: "インモールドコート技術を応用し、ガラス面と一体化したシームレスな内装を実現。高級感のあるブロンズスパッタリングと組み合わせ、音響性能向上を考慮した内装デザインで、触り心地の良い質感と音の一体感を愉しめる。", imagePrompt: "Premium vehicle interior with seamless glass and integrated coating, bronze spatter finish, high-quality acoustic materials, soft ambient lighting, photorealistic render of dashboard and center console, luxury car design, cinematic lighting, high detail, 4K quality" },
+            ],
+            cn: [
+                { id: 1058, img: "images/idea_1058.png", title: "リサイクル素材コックピット", desc: "東風の水素技術とBYDの充電連携を踏まえ、リサイクルプラスチックとセルロースナノファイバーを配合したコックピットを設計。脱炭素への貢献と、触り心地の良さで環境意識の高いユーザーに「地球に優しい高級車」の喜びを提供する。", imagePrompt: "Interior of a luxury EV with sustainable materials, recycled plastic dashboard with wood grain texture, cellulose nano-fiber seats in beige tone, soft natural lighting from windows, minimalist design, eco-friendly technology indicators in subtle green, photorealistic 3D render, premium automotive design" },
+                { id: 1059, img: "images/idea_1059.png", title: "植物系吸音内装パネル", desc: "SAIC MGの欧州工場とBYDの充電連携をヒントに、植物由来の吸音材で静粛なコックピットを実現。NEVの市場競争力を高めるだけでなく、自然素材の温かみで「癒やし」を感じられる空間を創造。環境配慮と快適性の両立がうれしい。", imagePrompt: "Luxury car interior with plant-based sound-absorbing panels, natural wood texture and soft beige fabric seats, ambient lighting with warm glow, minimalist dashboard with subtle green accents, photorealistic 3D render, premium automotive design, serene atmosphere" },
+            ],
+            in: [
+                { id: 1060, img: "images/idea_1060.png", title: "抗菌・消臭機能付きリクライニングシート", desc: "EV車内特有の密閉空間で、UV照射による抗菌処理と活性炭フィルタをシートに内蔵。長距離ドライブ時の疲労回復を支援し、家族全員が清潔でリラックスした空間を楽しむ。", imagePrompt: "Interior view of luxury electric vehicle, focus on driver seat with integrated UV cleaning system, visible air quality sensor, soft ambient lighting, leather and recycled fabric materials, healthy atmosphere, photorealistic render" },
+                { id: 1061, img: "images/idea_1061.png", title: "EV用リサイクル素材コンソール", desc: "廃車由来プラスチックを50%使用した高強度リサイクル素材でコンソールを製造。高級感あるデザインと環境配慮を両立し、社会貢献を実感できる空間を創造。", imagePrompt: "Close-up of car center console made from recycled materials, brushed aluminum texture, premium finish, soft glow from ambient lighting, sustainable design concept, photorealistic 3D render" },
+            ],
+            us: [
+                { id: 1062, img: "images/idea_1062.png", title: "自動搬送ロボット搭載内装ライン", desc: "製造ラインに自動搬送ロボットを導入し、シートやダッシュボードの組み立てを自動化。歩留まり向上でコスト削減を実現。従業員は危険作業から解放され、より創造的な設計に集中。生産効率と安全性を両立、現場が喜びます。", imagePrompt: "Automated assembly line for automotive interior components, modern factory interior with robotic arms handling dashboard panels and seat frames, clean white and blue industrial lighting, organized production workspace, human operators monitoring robotic systems, high-tech manufacturing environment, photorealistic 3D render, premium quality automotive manufacturing visualization" },
+                { id: 1063, img: "images/idea_1063.png", title: "小型ワイヤレス充電ホルダ", desc: "センターコンソールに収まる小型ワイヤレス充電ホルダ。スマートフォンを置くだけで自然充電、コンパクト設計で空間を有効活用。USBポート不足を解消し、ドライバーがスマホを気にせずナビ操作に集中。スマホユーザーの負担を減らし、快適なドライブを享受できます。", imagePrompt: "Compact wireless charging holder integrated into automotive center console, smartphone charging on car interior dashboard, sleek modern car interior design, warm ambient lighting with soft glow, premium materials like matte black and soft-touch surfaces, realistic smartphone placement, photorealistic automotive product visualization, high detail interior render" },
+            ],
+            eu: [
+                { id: 1064, img: "images/idea_1064.png", title: "リサイクル素材で軽量化EV内装", desc: "欧州EV需要の高さを受けて、リサイクル樹脂と再生アルミを組み合わせた超軽量インパネを提案。サステナビリティと軽量化の両立で、EUの脱炭素目標に貢献。乗り手は環境に優しい素材の質感と軽快な加速感覚を同時に体験できる。", imagePrompt: "Luxury car interior with dashboard made of recycled materials, brushed aluminum trim, light weight composite panels, sustainable design concept, European EV style, clean modern lines, warm ambient lighting, photorealistic 3D render, premium automotive design" },
+                { id: 1065, img: "images/idea_1065.png", title: "薄型インパネモジュール化設計", desc: "豊田合成の薄型インパネ技術を発展させ、大型ディスプレイをモジュール化して軽量化。欧州のEV需要に合わせながら、安全評価を維持した設計。ドライバーは大型画面の便利さと、従来の質感を両立できる。", imagePrompt: "Thin instrument panel with large display module, modular design, premium vehicle interior, European EV style, sleek dashboard layout, advanced safety technology features, cinematic lighting, high detail, photorealistic render" },
+            ],
+        }
+    },
+{
         date: "2026-06-02",
         analysis: {
             jp: "日本市場では**コネクテッドカー**の普及と**EV化**が加速しており、内装品開発の転換期を迎えている。特に**ディスプレイオーディオ**や**スマートインパネ**の薄型化・軽量化が必須[jp1157]。また、**シート**の機能向上や**音響**の最適化が重視されている[jp1152]。一方で、**自動化**や**コスト削減**の製造プロセス改善も重要[jp1160]。",
