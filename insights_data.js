@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-04",
+        analysis: {
+            jp: "日本の自動車内装市場では、**静粛性**と**質感**を重視した高級感の追求[jp1177]が顕著。カスタマイズによる音質向上やシンプルさへの志向[jp1173]から、**素材の高級感**と**フィット感**が重要。一方、**リサイクル素材**を用いたアップサイクル[jp1174]や、AI技術との融合[jp1180]もトレンド。EV化で**静音性**がさらに重要視[jp1179]され、安全装備の標準化[jp1178]が進む。消費者は高級感と環境配慮の両立を期待。",
+            cn: "中国自動車内装市場は**高画質コックピット**と**軽量化素材**の進化が加速している[cn999][cn997]。EV専用プラットフォームの採用や**800Vシステム**の標準化が、コックピットの電気化を促進する[cn999]。また、**リサイクル素材**や**新素材**の活用が、環境配慮とコスト削減の両立として注目されている[cn997][cn998]。消費者は**高級感**と**機能性**を同時に求める[cn999]。豊田合成の**ELV材50%含有**技術は、**サステナビリティ**と**強度**の両立で差別化できる[cn998]。",
+            in: "インド市場では**EV戦略**強化と**新素材**採用が進む[in1043][in1042]。高級車では**イルミ**や**竹素材**で高級感向上[in1049]。MPV需要旺盛で**シート**や**コックピット**刷新がトレンド[in1042][in1047]。EV航続距離延伸と**子供安全**意識の高まりが課題[in1048]。",
+            us: "EV移行加速に伴い、VW[us989]やジョージア工場[us993]でEV専用プラットフォームの採用が確認され、レクサスRX[us991]ではHMIの据え置き化が進んでいる。新素材はFord Bronco Filson[us992]やフォレスター[us997]のリコール対策で耐久性が重視される。価格戦略もWRX[us990]でエントリーモデルが重要で、シート[us996]やシートベルト[us998]での安全性も課題だ。自社の内装製品開発では、EV専用プラットフォーム向けにモジュール化した新素材の耐久性をグローバル戦略と現地化で差別化を図るべき。",
+            eu: "欧州EV市場は急速に拡大し、7人乗りや大型SUVの需要が高まっている[eu962][eu960]。同時に、F1チームのEVトラック導入やマートレールでの生産開始など、サステナビリティと電動化の両輪が進む[eu958]。また、Vodafoneとの連携や三菱電機のSiC-MOSFET採用など、コネクテッド技術と航続距離延伸が鍵[eu959]。新漆黒めっきの採用は、EVの高級感と環境配慮の両立に寄与する可能性がある。",
+        },
+        ideas: {
+            jp: [
+                { id: 1066, img: "images/idea_1066.png", title: "静寂調和内装パネル", desc: "廃棄エアバッグ生地から再生したソフトタッチ素材をパネルに使用。カスタムインストールによる音質向上を想起させ、静かな空間で高音質オーディオを愉しむ。高級感と環境配慮の両立で、静寂な車内空間を楽しむ。", imagePrompt: "Premium car interior with soft-touch recycled fabric panels in dark brown and copper tones, ambient lighting highlighting texture details, sound wave visualization on dashboard, luxurious minimalist design, photorealistic 3D render, cinematic lighting" },
+                { id: 1067, img: "images/idea_1067.png", title: "アップサイクルステアリングカバー", desc: "廃ステアリング革をアップサイクルした高級感あるステアリングカバー。シンプルカスタムの美学を取り入れ、手触りと視覚的質感を向上。ドライバーが運転の質を高めることで、静粛な車内空間を愉しむ体験を提供。", imagePrompt: "Luxury steering wheel wrapped in premium recycled leather with subtle stitching, copper and black color scheme, detailed texture close-up, soft studio lighting, automotive product photography, high resolution" },
+            ],
+            cn: [
+                { id: 1068, img: "images/idea_1068.png", title: "香り調和シート", desc: "車内全体に天然木由来の香りを放出するシート。運転中のストレス軽減とリラックスを同時に実現。中国ドライバーに癒やしを提供する体験型内装", imagePrompt: "Luxury car interior with natural wood aroma diffuser integrated into the seat fabric, soft warm lighting, mist effect around the seat, premium leather and sustainable materials, photorealistic 3D render, cinematic composition" },
+                { id: 1069, img: "images/idea_1069.png", title: "ELVリサイクルダッシュボード", desc: "廃車由来プラスチック50%配合の高強度リサイクル素材で製造。環境配慮と高級感を両立。中国市場のサステナビリティ意識に応える革新的コックピット", imagePrompt: "Dashboard made from recycled materials with visible texture patterns, brushed aluminum accents, ambient lighting, premium automotive interior, photorealistic 4K render, eco-friendly design" },
+            ],
+            in: [
+                { id: 1070, img: "images/idea_1070.png", title: "緊急脱出専用窓枠", desc: "EVバッテリー火災時の緊急脱出を支援する専用窓枠。衝突時自動開閉と子供用脱出ハンドルを内蔵。で示されたEV・シートトレンドと安全を両立。子供や高齢者のうれしさを確保。", imagePrompt: "Emergency escape window built into car door frame, automatic pop-out mechanism, child-friendly handle design, fire safety lighting, EV battery compartment visible in background, dramatic red emergency lighting, photorealistic automotive safety concept, high detail 4K render" },
+                { id: 1071, img: "images/idea_1071.png", title: "ELV内装パネル", desc: "廃車由来プラスチック50%配合の水平リサイクル内装パネル。の新素材トレンドに対応。ダークブラウン×ブラック2トーンでシート調デザイン。環境貢献でうれしさ。", imagePrompt: "Premium automotive interior door panel made from recycled materials, dual-tone dark brown and black finish, brushed texture surface, sustainable material labeling, soft ambient lighting, luxury car cabin context, photorealistic 3D render" },
+            ],
+            us: [
+                { id: 1072, img: "images/idea_1072.png", title: "EVプラットフォーム対応モジュール", desc: "EVフラットフロアを活かした広々収納とリバーシブルアームレスト。ワイヤレス充電機能と、EV専用プラットフォーム向けに最適化された軽量素材を採用。EVオーナーの「スペースの自由さ」を最大限に活かした、未来のEV内装体験を提供します。", imagePrompt: "EV platform interior concept, flat floor layout, spacious storage compartments, reversible armrest, wireless charging pad, lightweight premium materials, sleek modern design, warm ambient lighting, photorealistic 3D render, automotive cockpit visualization" },
+                { id: 1073, img: "images/idea_1073.png", title: "耐久性重視マルチコンソール", desc: "既存の多機能コンソールをベースに、EVフラットフロアの広さを活かした大容量収納と、耐久性のあるクイルテッドレザーを採用。リバーシブルアームレストで多機能性を確保し、EVオーナーの「快適な移動空間」を実現。", imagePrompt: "" },
+            ],
+            eu: [
+                { id: 1074, img: "images/idea_1074.png", title: "リサイクル素材をふんだんに使った7人乗りSUV", desc: "リサイクルプラスチックとバイオベース素材を多用した7人乗りEV。家族全員が安心する環境配慮と広々空間を両立。", imagePrompt: "7-seater electric SUV interior, sustainable materials with recycled plastic textures and bio-based fabrics, spacious seating arrangement, soft natural lighting, eco-friendly color palette with green accents, photorealistic 3D render, premium automotive design concept" },
+                { id: 1075, img: "images/idea_1075.png", title: "漆黒めっきによる高級感と安心感のあるセンターコンソール", desc: "光を反射しない深みのある漆黒メッキで仕上げたセンターコンソール。EVの高級感を演出し、家族全員が落ち着く空間を創る。", imagePrompt: "Luxury car center console, deep black PVD coated metal finish with non-reflective matte texture, ambient warm lighting, premium leather and sustainable wood accents, modern dashboard design, photorealistic automotive interior render, cinematic lighting" },
+            ],
+        }
+    },
+{
         date: "2026-06-03",
         analysis: {
             jp: "日本市場では静粛性向上への関心が高い[jp1161][jp1167]。高級感の追求とEV化の進展[jp1166][jp1168]が顕著。日産ルークスの高機能化[jp1169]やトヨタハリアーの高級装備拡充[jp1170]も示唆しており、消費者は音質や質感など「五感」の満足度を重視。特にEV化に伴う静粛性向上[jp1166]や、LEDコンソールボックスのような便利機能[jp1167]への需要が明確。また、レベライザーのような伝統的機能の再評価[jp1165]も、ドライバーの安心感へのニーズを示唆する。",
