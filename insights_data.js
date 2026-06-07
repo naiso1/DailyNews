@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-05〜2026-06-07",
+        analysis: {
+            jp: "日本の自動車内装トレンドから、車中泊市場の拡大[jp1189]とHMIの進化[jp1186]が顕著。特に車載カメラやモニター小型化[jp1183]は安全面での需要増を示唆。また、未塗装樹脂劣化対策[jp1190]や新素材採用[jp1187]から、耐久性と環境適応性が重視される傾向が読み取れる。これらの動向を踏まえ、コスト効率と機能性の両立が鍵となる。",
+            cn: "中国のEV化と高級化トレンドから、内装の健康機能化が必須。[cn1013] 全固体電池の普及により、車内環境制御の高度化が加速。[cn1010] 特にエレビッド市場の拡大に伴い、EVの静音性と空間の質を高める「ウェルネス内装」が注目。[cn1014] AIスマートコックピット開発と連動し、車内を癒しの空間化する技術が求められ、抗菌・消臭・空気の質改善は、高級車の差別化にも寄与。[cn1009]",
+            in: "インド市場の自動車内装動向を分析。Garrett Motionの人事異動は、技術交流の深化を示唆[in1051]。規制強化で安全装備や電子機器の需要拡大[in1052]。Basemarkとの連携はHMI開発加速のトレンド[in1053]。タタ・ティアゴの内装刷新は、タッチスクリーンやUSB-C充電の標準化[in1054]。7車種の発表や7人乗りSUV参入は、セグメント拡大の兆し[in1055][in1056]。Audi Q7の3画面HMIはデジタルファーストの進化[in1057]。NuvolariのAR技術は高級車でのAR活用[in1058]。",
+            us: "米国EV化と規制強化が内装トレンドを牽引[us1000]。AMOLED小画面需増はコックピットHMI進化の証[us1007]。シートベルト不具合回収はセンサー精度向上の要[us1002]。OEDRO防水マットはEV車内湿度対策に[us999]。日本軽バンの安全装備はグローバル基準向上を示唆[us1000]。歴史的建物破損事故は自動運転の安全課題[us1006]。高級超跑の多軸モーター化はEVと内燃機関融合[us1005]。中古市場安価ファミリーバンの広がりはコスト競争力重視[us1004]。高級車シート素材は高級感維持。新素材と防水性はEV車内環境対策に。",
+            eu: "EU市場の自動車内装トレンドは、EVスポーツカーの仮想ギアボックスなど**デジタル・コックピット**の進化[eu964]と、欧州議会のEV社用車規制強化が顕著[eu971]。特にLotusやAudi Nuvolariの特別仕様が示すように、**コックピット体験**の差別化[eu970]が重要。一方、失敗車事例から**信頼性**の重視が読み取れ、商用車EVの拡大も内装の多様化を促す[eu973]。また、UV-C LED除菌システムのような**衛生技術**は、欧州の厳格な安全基準と親和性が高い[eu965]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1076, img: "images/idea_1076.png", title: "自動組立用樹脂部品プレカット装置", desc: "既存未塗装樹脂パーツの加工工程を自動化する装置。部品形状を事前にデジタル設計し、自動切削・接着で生産効率を30%向上。熟練工の負担軽減と歩留まり改善で、中小工場も高品質内装パーツを低コストで製造できる。生産現場の負担が劇的に減り、作業者が笑顔になる。", imagePrompt: "Automated resin part pre-cutting machine in modern automotive interior manufacturing facility, robotic arms cutting black plastic components, digital blueprint interface showing pre-designed shapes, clean industrial lighting, stainless steel surfaces, organized workflow, high-tech manufacturing environment, photorealistic 3D render, premium quality automotive production line" },
+                { id: 1077, img: "images/idea_1077.png", title: "UV-C LED搭載車載空気清浄ユニット", desc: "UV-C帯LEDをコンソール内に埋め込み、車内空気と表面を24時間除菌するシステム。子供やペットのいる家庭向けに、抗菌素材と連動。車内環境が常に清潔で安心。特に車中泊時にウイルス対策が強化され、家族全員が健康的に過ごせる。車内が常に清々しく、安心感で心が軽くなる。", imagePrompt: "UV-C LED air purification unit integrated into car center console, automotive interior design concept, glowing blue LED strips inside sleek black plastic housing, modern vehicle cockpit, clean and sterile atmosphere, subtle ambient lighting, premium materials, photorealistic render, automotive product visualization" },
+            ],
+            cn: [
+                { id: 1078, img: "images/idea_1078.png", title: "ウェルネスエアフロー", desc: "車内を天然温泉のようになじやかに包む空気循環システム。抗菌・消臭機能で健康を保ちながら、香りでリフレッシュ。高級車や大型車のオーナーが、長距離走行でも疲れを癒やし、心地よい空間を楽しむ。", imagePrompt: "Luxury car interior center console with integrated air purification system, gentle mist-like air flow visualization, warm amber lighting, premium materials like brushed aluminum and soft leather, soothing atmosphere, photorealistic 3D render, cinematic lighting, high detail, 4K quality" },
+                { id: 1079, img: "images/idea_1079.png", title: "インテリジェント陰影イルミネーション", desc: "LED陰影イルミネーションをEVの静寂性と組み合わせ、車内を幻想的な空間に。光学設計で陰影パターンを投影し、高級車のオーナーが癒やされる演出。夜間走行時のリラックス効果を最大化。", imagePrompt: "Premium vehicle dashboard with holographic shadow projection system, intricate geometric patterns floating above dark interior, deep blue ambient lighting, high-tech LED elements, luxury materials, photorealistic render, cinematic lighting, high detail, 4K quality" },
+            ],
+            in: [
+                { id: 1080, img: "images/idea_1080.png", title: "インド向けHMI統合コックピット", desc: "デジタルファーストな3画面HMIを備えたコックピットをインド市場向けに開発。タッチスクリーンやUSB-C充電を標準化し、安全性も向上。ドライバーがスムーズに操作できることで、運転の楽しさが増す。", imagePrompt: "Luxury car interior in India market, digital-first cockpit with three large touchscreens, driver interface with USB-C charging ports, copper tone bezels, dark tone leather seats, warm ambient lighting, photorealistic rendering, high detail, cinematic lighting, 4K quality" },
+                { id: 1081, img: "images/idea_1081.png", title: "発光ミリ波透過エンブレム", desc: "発光ミリ波レーダー透過エンブレムをインド市場向けに開発。ADAS・自動運転との連携を強化し、安全性も向上。ドライバーがスムーズに操作できることで、運転の楽しさが増す。", imagePrompt: "Advanced augmented reality head-up display in premium vehicle, holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render" },
+            ],
+            us: [
+                { id: 1082, img: "images/idea_1082.png", title: "EV車内防水内装製造ライン", desc: "TPE防水素材の自動貼り付けライン開発。OEDRO防水マットの知見を活かし、工場で製造プロセスを自動化。歩留まり向上とコスト削減を実現。生産効率化で開発コストを下げ、新車価格競争力を高める。製造現場の自動化により、労働環境改善と品質安定化も同時に達成できる。工場全体で効率化が進み、社員の負担軽減も実現する。", imagePrompt: "Automated manufacturing line assembling TPE waterproof floor mats inside luxury vehicle, robotic arms applying adhesive precisely, clean modern factory interior, brushed stainless steel machinery, bright LED lighting, high speed conveyor belt, photorealistic industrial design, 4K quality" },
+                { id: 1083, img: "images/idea_1083.png", title: "発光ミリ波透過エンブレムEV用", desc: "トヨタ合成の発光ミリ波レーダー透過エンブレムをEV車に最適化。ミリ波信号を透過しながらイルミネーション発光。EV車特有の静電気対策も施し、安全確保。EVオーナーは車外からでもブランドロゴを光らせて、高級感と安全性を同時に享受。車載カメラと連動し、自動運転時にも安全に発光制御。EVの高級イメージを強化し、EVオーナーの満足度向上を実現。", imagePrompt: "Luxury EV front emblem with holographic LED illumination, transparent radar sensor integrated seamlessly, night driving scene, soft blue ambient light glowing from emblem, sleek car exterior, photorealistic automotive design, premium material texture, cinematic lighting, 4K quality" },
+            ],
+            eu: [
+                { id: 1084, img: "images/idea_1084.png", title: "AI運転支援コックピット", desc: "EVスポーツカー向け仮想ギアボックスと連動、AIが運転状態を感知してコックピット表示を最適化。運転者の疲れをAIが察知し、休憩を促す演出も。スポーツカーファンは、AIが運転をアシストしてくれる喜びを味わうでしょう。", imagePrompt: "Futuristic EV sports car cockpit interior, augmented reality display showing AI interface, virtual gear box visualization, sleek dashboard with ambient lighting, driver wearing smart glasses, night driving scene, premium materials like brushed carbon fiber and leather, cinematic lighting, photorealistic 3D render, high detail, 4K quality" },
+                { id: 1085, img: "images/idea_1085.png", title: "UV-C除菌スマートダッシュ", desc: "UV-C LED内装除菌システムをダッシュボードと連動。EV商用車PV5のように衛生面を重視する環境向け。乗降時や長距離走行中、常に清潔な車内空間を維持。家族連れや営業ドライバーは、子供や同僚の健康を守れる安心感を味わうでしょう。", imagePrompt: "Modern EV car interior with UV-C LED integrated into dashboard, invisible sterilization light beams visible as subtle blue glow, clean and hygienic atmosphere, premium white and light gray materials, sleek design, professional automotive photography, soft lighting, photorealistic render, high detail, 4K quality" },
+            ],
+        }
+    },
+{
         date: "2026-06-04",
         analysis: {
             jp: "日本の自動車内装市場では、**静粛性**と**質感**を重視した高級感の追求[jp1177]が顕著。カスタマイズによる音質向上やシンプルさへの志向[jp1173]から、**素材の高級感**と**フィット感**が重要。一方、**リサイクル素材**を用いたアップサイクル[jp1174]や、AI技術との融合[jp1180]もトレンド。EV化で**静音性**がさらに重要視[jp1179]され、安全装備の標準化[jp1178]が進む。消費者は高級感と環境配慮の両立を期待。",
