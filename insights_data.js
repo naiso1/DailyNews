@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-08",
+        analysis: {
+            jp: "日本市場ではEVバン物流活用[jp1191]やステアバイワイヤ技術[jp1196]でコネクテッドと安全が進展中。レクサスESの狭額縁ディスプレイ[jp1193]やホンダの撥水コーティング[jp1194]から、デジタル・スマートコックピットと素材機能性の両輪で競争優位性を築くべき。ミニバンやSUVの高級化[jp1195][jp1198]で音響やシートも重要視される。特に豊田合成の音の可視化技術[jp1192]を起点に、内装トリムの設計から音質を制御する可視化アプローチが、コネクテッド技術と連携すれば新体験を創出できる。",
+            cn: "中国のEV市場は急速に成熟し、バッテリー技術の革新が加速している[cn1020]。特に固体電池やナトリウムイオン電池の採用により、航続距離と低温性能が向上し、コックピットの快適性が重視される傾向にある[cn1017]。また、AI技術の導入により、コックピットの自動化と生産効率化が進んでいる[cn1023]。この動きは、ユーザー体験の向上と高級感の両立を追求する方向性を示している[cn1024]。",
+            in: "インド市場ではEV化とAI化の加速が顕著で、BaaSモデルやARナビゲーションが注目を集めています[in1065]。小型ハッチバックのデザイン革新やイルミネーション演出が競争の鍵になりつつあります[in1067]。これに対し、加飾や照明演出で差別化を図るべきです[in1064]。",
+            us: "米国EV市場での充電効率性向上と、2035年までのガソリン車需要減示唆から脱炭素技術強化必要[us1010]。物理ボタン廃止化とAI音声アシスタント採用拡大により、HMIの革新性が重要[us1011]。高級EV市場への参入強化はサステナビリティとの両立が課題[us1016]。EV充電ポート維持や超急速充電技術はユーザー体験向上に直結[us1009][us1017]。",
+            eu: "欧州市場ではEV移行への懸念とCO2規制堅持が並行して進む中、AIカメラによるコスト削減やスタートアップ連携など技術革新が加速 [eu974,eu978]。特に安全分野では、AIカメラ1台で15機能を担うAOCシステムが示唆通り、衝突安全や緊急脱出の新たな解決策となり得る [eu980]。EV航続距離競争が激化する中、子供安全や緊急時の脱出性を高める内装デザインが求められ、既存のメテオコート加飾パネルをEV専用安全シェルとして進化させる [eu982]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1086, img: "images/idea_1086.png", title: "デジタル音質制御トリム", desc: "車室内の音質を可視化し、ユーザーが好みの音響空間をカスタマイズできるトリムを採用。レクサスやホンダの高級感を追求する層にうれしさを提供。", imagePrompt: "Luxury car interior with customizable acoustic trim panels, holographic sound wave visualization on dashboard, premium materials like brushed aluminum and soft leather, warm ambient lighting, photorealistic 3D render, cinematic composition, high detail 4K quality" },
+                { id: 1087, img: "images/idea_1087.png", title: "スマートコックピットHUD", desc: "運転中にリアルタイムにEVバッテリーや充電ステーション情報を表示するHUDシステム。マツダのコネクテッド技術と連携し、安全を確保しながらデジタル体験を向上させる。", imagePrompt: "Advanced augmented reality head-up display in premium vehicle, holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, photorealistic 3D render, premium automotive design" },
+            ],
+            cn: [
+                { id: 1088, img: "images/idea_1088.png", title: "芳香調和型インナーパネル", desc: "固体電池の温度制御技術を活かし、車内温度変化に反応して香りを調整するパネル。BYDのフラッシュ充電技術のように、短時間で充電されるEVの需要に応え、乗降時の香り変化を楽しむ体験を提供。高級感を演出し、乗客が「癒やされる」感覚を覚えます。", imagePrompt: "Luxury car interior concept, center console with integrated aroma diffuser, subtle mist effect, warm ambient lighting, brushed aluminum and leather materials, temperature-sensitive color-changing elements, high detail, photorealistic rendering, 4K quality" },
+                { id: 1089, img: "images/idea_1089.png", title: "軽量樹脂インパネリンフォース", desc: "BYDのフラッグシップモデルに見られる高級感を実現し、鉄製を樹脂に置き換える骨格軽量化。Exeed ESのような先進的なコックピットデザインと相性抜群。乗降時の衝撃を吸収し、乗り心地を向上させながら「軽快で安心」な走りを提供。", imagePrompt: "Premium vehicle dashboard concept, lightweight resin reinforcement structure, modern aerodynamic design, soft touch materials, blue accent lighting, night driving scene, photorealistic 3D render, high detail automotive interior visualization" },
+            ],
+            in: [
+                { id: 1090, img: "images/idea_1090.png", title: "光るセンターコンソール香りディフューザー", desc: "センターコンソールに埋め込み式香りディフューザーとLED照明を統合。車内の香りと光でリラックス空間を演出し、ドライバーの疲労を軽減。安全走行にも寄与し、乗員の幸福感を高めます。", imagePrompt: "Integrated aromatherapy diffuser with LED lighting in center console, luxury car interior, warm ambient glow, brushed aluminum and soft leather materials, subtle mist effect, night driving scene, photorealistic 3D render, premium automotive design" },
+                { id: 1091, img: "images/idea_1091.png", title: "LED通知イルミネーション安全システム", desc: "危険・注意情報をLEDイルミネーションで直感的に伝達。前方車両追従や歩行者検知時に、足元やダッシュボードに色変化で警告。視界を遮らずに安全情報を提供し、運転者の安心感と信頼を深めます。", imagePrompt: "Advanced LED illumination warning system in vehicle dashboard, holographic safety interface, dynamic color changes for hazard alerts, footwell lighting effects, futuristic cockpit design, night driving scene, blue and amber accent lighting, photorealistic render" },
+            ],
+            us: [
+                { id: 1092, img: "images/idea_1092.png", title: "リサイクル素材採用EV充電ステーション", desc: "充電時感電問題を解決し、EV充電効率向上を実現。リサイクル素材で製造した充電パネルを採用。環境配慮型充電ステーションは、サステナビリティ志向のEVオーナーに安心感とエコ意識の高揚をもたらす。", imagePrompt: "Recycled material EV charging station interior, sustainable automotive design, brushed aluminum and bamboo composite surfaces, soft ambient green lighting, modern vehicle cockpit, photorealistic 3D render, premium eco-friendly automotive design, cinematic lighting, high detail, 4K quality" },
+                { id: 1093, img: "images/idea_1093.png", title: "グリップセンサ統合型AI HMIステアリング", desc: "物理ボタン廃止化のトレンドに対応。手放し検知グリップセンサと多機能スイッチを統合したHMIハンドル。AI音声アシスタントと連動し、ステアリング操作で気候制御やナビゲーション操作を可能に。", imagePrompt: "Advanced augmented reality head-up display in premium vehicle, holographic interface floating above dashboard, AI assistant visualization, futuristic cockpit design, night driving scene, blue accent lighting, photorealistic render, integrated grip sensor on steering wheel, modern vehicle interior" },
+            ],
+            eu: [
+                { id: 1094, img: "images/idea_1094.png", title: "AI緊急脱出シート", desc: "AIカメラが子供を検知し、緊急時は自動でシートベルトを緩め、ドアを開ける。衝突時でも子供を優先する安全シェル。EVドライバーに安心感を与える新機能。", imagePrompt: "Emergency escape seat with AI safety shell, child detection sensor, automatic seatbelt release, European luxury EV interior, warm amber emergency lighting, safety blue accent, photorealistic 3D render, premium automotive design, cinematic lighting" },
+                { id: 1095, img: "images/idea_1095.png", title: "メテオコート安全パネル", desc: "後塗装不要のシームレス加飾パネルをEV専用安全シェルに。EV充電時でも安全な凹凸テクスチャ。子供触っても安心の滑らかさ。欧州EVオーナーに嬉しい機能性。", imagePrompt: "Seamless Meteo coated safety panel, textured surface for EV charging safety, child-friendly smooth touch, European EV interior, brushed aluminum and leather materials, soft ambient lighting, photorealistic 3D render, premium automotive design" },
+            ],
+        }
+    },
+{
         date: "2026-06-05〜2026-06-07",
         analysis: {
             jp: "日本の自動車内装トレンドから、車中泊市場の拡大[jp1189]とHMIの進化[jp1186]が顕著。特に車載カメラやモニター小型化[jp1183]は安全面での需要増を示唆。また、未塗装樹脂劣化対策[jp1190]や新素材採用[jp1187]から、耐久性と環境適応性が重視される傾向が読み取れる。これらの動向を踏まえ、コスト効率と機能性の両立が鍵となる。",
