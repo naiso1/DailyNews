@@ -52,7 +52,7 @@ def extract_latest_block(text: str) -> str:
 def extract_ideas(block: str):
     ideas = []
     pattern = re.compile(
-        r"\{\s*id:\s*(\d+)\s*,\s*img:\s*\"([^\"]*)\"\s*,\s*title:\s*\"([^\"]*)\"\s*,\s*desc:\s*\"([^\"]*)\"(?:\s*,\s*imagePrompt:\s*\"([^\"]*)\")?\s*\}",
+        r"\{\s*id:\s*(\d+)\s*,\s*img:\s*\"([^\"]*)\"\s*,\s*title:\s*\"([^\"]*)\"\s*,\s*desc:\s*\"([^\"]*)\"(?:\s*,\s*imagePrompt:\s*\"([^\"]*)\")?(?:\s*,\s*sourceNewsIds:\s*\[[^\]]*\])?\s*\}",
         re.DOTALL,
     )
     for m in pattern.finditer(block):

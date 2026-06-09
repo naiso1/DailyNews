@@ -471,14 +471,29 @@ def _clean_idea_field(text: str, max_len: int = 400) -> str:
 def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
     picked = []
     picked_texts = []
+    history_texts = [f"{x.get('title','')} {x.get('desc','')}" for x in history_ideas or []]
     for idea in raw_ideas or []:
         title = _clean_idea_field(str((idea or {}).get("title", "")), max_len=40)
         desc = _clean_idea_field(str((idea or {}).get("desc", "")), max_len=400)
         image_prompt = str((idea or {}).get("imagePrompt", "")).strip()
+        source_ids = idea.get("sourceNewsIds") or idea.get("sourceIds") or idea.get("newsIds") or []
+        if isinstance(source_ids, str):
+            source_ids = re.findall(r"[a-z]{2,5}\d+", source_ids, flags=re.IGNORECASE)
+        if not isinstance(source_ids, list):
+            source_ids = []
+        source_ids = [
+            str(x).strip().lower()
+            for x in source_ids
+            if re.fullmatch(r"[a-z]{2,5}\d+", str(x).strip(), flags=re.IGNORECASE)
+        ]
         if not title or not desc:
             continue
         cand = f"{title} {desc}"
         duplicate = False
+        for ht in history_texts:
+            if _similarity(cand, ht) >= 0.58:
+                duplicate = True
+                break
         if not duplicate:
             for pt in picked_texts:
                 if _similarity(cand, pt) >= 0.78:
@@ -486,7 +501,7 @@ def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
                     break
         if duplicate:
             continue
-        picked.append({"title": title, "desc": desc, "imagePrompt": image_prompt})
+        picked.append({"title": title, "desc": desc, "imagePrompt": image_prompt, "sourceNewsIds": source_ids})
         picked_texts.append(cand)
         if len(picked) >= limit:
             break
@@ -753,6 +768,59 @@ def load_tg_products() -> list[dict]:
         return []
 
 
+def _item_for_prompt(it: dict) -> str:
+    news_id = it.get("newsId", "")
+    id_text = f"id={news_id} / " if news_id else ""
+    score = it.get("interiorScore")
+    score_text = f" / interiorScore={int(score)}" if score is not None else ""
+    title = str(it.get("title", ""))[:80]
+    desc = str(it.get("desc", ""))[:140]
+    tags = it.get("tags", "")
+    if isinstance(tags, list):
+        tags = ",".join(tags[:5])
+    else:
+        tags = str(tags)[:80]
+    return f"- {id_text}{title} / {desc} / {tags}{score_text}"
+
+
+def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dict]]:
+    def _score(it: dict):
+        tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
+        interior_score = it.get("interiorScore")
+        interior_score = float(interior_score) if interior_score is not None else 0.0
+        blob = f"{it.get('title', '')} {it.get('desc', '')} {tags}".lower()
+        keyword_bonus = 0
+        for kw in ["シート", "ディスプレイ", "HMI", "コックピット", "コンソール", "ステア", "イルミ", "安全", "新素材", "音響"]:
+            if kw.lower() in blob:
+                keyword_bonus += 5
+        image_bonus = 8 if it.get("imageInterior") is True else 0
+        weak_penalty = 0
+        for kw in ["不正", "調査", "投資", "株", "補助金", "市場需要", "販売台数"]:
+            if kw.lower() in blob:
+                weak_penalty += 12
+        return (interior_score + keyword_bonus + image_bonus - weak_penalty, len(it.get("desc", "")))
+
+    candidates = [
+        it for it in items
+        if it.get("newsId")
+        and it.get("title")
+        and it.get("desc")
+        and (it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 65)
+    ]
+    if not candidates:
+        candidates = [it for it in items if it.get("newsId") and it.get("title") and it.get("desc")]
+    candidates.sort(key=_score, reverse=True)
+    if not candidates:
+        return []
+    groups = []
+    used = set()
+    for _ in range(max(1, need_count)):
+        primary = next((it for it in candidates if it.get("newsId") not in used), candidates[0])
+        used.add(primary.get("newsId"))
+        groups.append([primary])
+    return groups
+
+
 def make_country_prompt(
     date_key: str,
     country: str,
@@ -760,13 +828,23 @@ def make_country_prompt(
     prompt_template: str,
     history_ideas: list | None = None,
     need_count: int = 2,
+    idea_anchor_groups: list[list[dict]] | None = None,
 ):
     summary_lines = [f"[{country}] 件数: {len(items)}"]
-    for it in items[:10]:
-        news_id = it.get("newsId", "")
-        id_text = f"id={news_id} / " if news_id else ""
-        summary_lines.append(f"- {id_text}{it['title']} / {it['desc']} / {it.get('tags', '')}")
+    for it in items[:5]:
+        summary_lines.append(_item_for_prompt(it))
     summary = "\n".join(summary_lines)
+    idea_anchor_groups = idea_anchor_groups or select_idea_anchor_groups(items, need_count=need_count)
+    anchor_lines = []
+    for idx, group in enumerate(idea_anchor_groups[:need_count], start=1):
+        ids = ",".join([it.get("newsId", "") for it in group if it.get("newsId")])
+        anchor_lines.append(f"ideas[{idx - 1}] anchor IDs: {ids}")
+        for it in group[:2]:
+            anchor_lines.append(_item_for_prompt(it))
+    anchors_text = "\n".join(anchor_lines) if anchor_lines else "なし"
+    if anchor_lines:
+        summary = anchors_text
+    duplicate_guard = build_duplicate_guard_text(history_ideas or [], max_items=12)
     angles = load_idea_angles()
     angle = random.choice(angles) if angles else ""
     angle_instruction = f"    - 【今回の発想切り口】1件目は「{angle}」の視点で発想すること（ただしニュース内容と関連させること）\n" if angle else ""
@@ -783,20 +861,27 @@ def make_country_prompt(
     【対象国】{country}
     【ニュース概要】
     {summary}
+    【アイデア用アンカーニュース】
+    {anchors_text}
+    {duplicate_guard}
     出力は必ずJSONのみで返してください。
     JSON以外の文字や説明、コードフェンスは一切出力しないでください。
     形式:
     {{
       "analysis": "...",
       "ideas": [
-        {{"title": "...", "desc": "(120〜180文字・うれしさを含む)", "imagePrompt": "..."}},
-        {{"title": "...", "desc": "(120〜180文字・うれしさを含む)", "imagePrompt": "..."}}
+        {{"title": "...", "desc": "(120〜180文字・うれしさを含む)", "imagePrompt": "...", "sourceNewsIds": ["..."]}},
+        {{"title": "...", "desc": "(120〜180文字・うれしさを含む)", "imagePrompt": "...", "sourceNewsIds": ["..."]}}
       ]
     }}
 
     制約:
     - {need_count}件提案
 {angle_instruction}{tg_constraint}    - 過去アイデアの言い換え・焼き直しは禁止
+    - 各ideasは、対応する【アイデア用アンカーニュース】だけを根拠にする
+    - 1つのideasが参照してよいニュースは最大2件まで。アンカー外のニュースや市場全体の一般論を根拠にしない
+    - 各ideasのdescには、アンカーニュース固有の車名・部品名・技術名・数値のいずれかを必ず1つ以上入れる
+    - sourceNewsIdsには、対応するanchor IDsのみを入れる
     - うれしさを必ず明記
     - titleは日本語を基本に20文字以内の短い名称のみ（英語のみは禁止、説明・括弧書き・句点を含めない）
     - descは120〜180文字程度。長い背景説明ではなく、何を作るか・誰がうれしいかを端的に書く
@@ -807,10 +892,10 @@ def make_country_prompt(
     - 参照は文末にまとめず、関連語の直後に入れる
     - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）
     - id: という文字は書かない
-    - ideasのdescにはID参照を書かない
+    - ideasのdesc末尾にはsourceNewsIdsと同じID参照を [jp123] の形式で付ける
     - analysisに説明・解説・注釈・思考過程を含めない。考察文のみ出力する
     """)
-    return prompt_template + "\n" + extra
+    return extra
 
 
 def main():
@@ -1055,6 +1140,7 @@ def main():
                     continue
                 attempted_insight_countries += 1
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
+                idea_anchor_groups = select_idea_anchor_groups(grouped[key], need_count=2)
                 prompt = make_country_prompt(
                     insight_date_label,
                     key,
@@ -1062,6 +1148,7 @@ def main():
                     prompt_template,
                     history_ideas=history_ideas,
                     need_count=2,
+                    idea_anchor_groups=idea_anchor_groups,
                 )
                 llm_text = ""
                 try:
@@ -1101,6 +1188,7 @@ def main():
                             prompt_template,
                             history_ideas=(history_ideas + deduped),
                             need_count=(2 - len(deduped)),
+                            idea_anchor_groups=idea_anchor_groups[len(deduped):],
                         )
                         try:
                             retry_text = call_llm(args.llm_endpoint, args.llm_model, retry_prompt)
@@ -1117,6 +1205,20 @@ def main():
                                 limit=(2 - len(deduped)),
                             )
                             deduped.extend(add_ideas)
+                    allowed_ids = build_allowed_news_ids(grouped[key])
+                    for i, idea in enumerate(deduped[:2]):
+                        anchor_ids = []
+                        if i < len(idea_anchor_groups):
+                            anchor_ids = [x.get("newsId", "").lower() for x in idea_anchor_groups[i] if x.get("newsId")]
+                        raw_ids = [
+                            str(x).strip().lower()
+                            for x in (idea.get("sourceNewsIds") or [])
+                            if str(x).strip().lower() in allowed_ids
+                        ]
+                        source_ids = raw_ids[:2] if raw_ids else anchor_ids[:2]
+                        idea["sourceNewsIds"] = source_ids
+                        if source_ids and not re.search(r"\[[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]", idea.get("desc", ""), flags=re.IGNORECASE):
+                            idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
                     ideas_out[key] = deduped[:2]
                 else:
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
@@ -1137,10 +1239,19 @@ def main():
                     for idea in idea_list[:2]:
                         max_id += 1
                         title = js_escape(idea.get("title", ""))
-                        desc = js_escape(strip_idea_refs(fix_idea_ref_prefix(idea.get("desc", ""), key)))
+                        source_ids = [
+                            str(x).strip().lower()
+                            for x in (idea.get("sourceNewsIds") or [])
+                            if re.fullmatch(r"[a-z]{2,5}\d+", str(x).strip(), flags=re.IGNORECASE)
+                        ][:2]
+                        desc_text = strip_idea_refs(fix_idea_ref_prefix(idea.get("desc", ""), key))
+                        if source_ids:
+                            desc_text = f"{desc_text} [{','.join(source_ids)}]"
+                        desc = js_escape(desc_text)
                         image_prompt = js_escape(idea.get("imagePrompt", ""))
+                        source_ids_js = json.dumps(source_ids, ensure_ascii=False)
                         entry_lines.append(
-                            f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\" }},"
+                            f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\", sourceNewsIds: {source_ids_js} }},"
                         )
                     entry_lines.append("            ],")
                 entry_lines.append("        }")
