@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-10",
+        analysis: {
+            jp: "トヨタノア・ヴォクシー[jp1211]のナビ背面に置くダッシュボードトレイを、再生素材で製造し環境に優しいデザインに。ジープコマンダー[jp1216]の高級シートやサンルーフを、自然素材調で表現し開放感あふれる内装を表現。",
+            cn: "TCLは東風と85%の自動化工場を立ち上げ、ファーウェイに挑戦する[cn1038]。",
+            in: "ニュース[in1085]の3rd Gen Audi Q7はQ9の高級インテリアを流用し、V8/600PSの強力な動力を備える[in1085]。これにバイオ素材を採用することで、高級感と環境配慮を両立できる。さらに発光ミリ波レーダー透過エンブレムを組み合わせれば、ADAS機能とイルミネーションを統合した新たな高級感を実現できる。",
+            us: "2027 Eclipse Sportback EVのNissan LEAF 基盤共有を前提に、プラットフォーム共通化による部品コスト削減を内装に反映した量産型モジュールを提案[us1038]。読者が嫌う垂直型インフォテインメントを避けつつ、既存技術を活用した効率的設計が実現可能[us1031]。豊田合成の発光ミリ波レーダー透過エンブレム技術を応用し、ミリ波信号透過とイルミネーションを両立するエンブレム内装パーツをEVフラットフロアに搭載する[us1035]。これにより、LEAFとの部品共通化コスト削減とADAS連携の二重価値を生み出す[us1036]。",
+            eu: "ニュースeu996のドライバーは車内AIに会話不要、複雑なコックピットに不満という現状を踏まえ、グローバル市場向けにシンプルなコックピット設計を提案する。複雑なインターフェースは欧州市場での参入障壁となり、直感的な操作が欧州ドライバーの喜ぶポイントになる。豊田合成のセルロースナノファイバーは欧州リサイクル規制に合致し、自然素材の温かみでEU市場の環境意識に訴える。",
+        },
+        ideas: {
+            jp: [
+                { id: 1126, img: "images/idea_1126.png", title: "リサイクルダッシュボードトレイ", desc: "トヨタノア・ヴォクシーのナビ背面に置く専用トレイ。再生ABS樹脂とシリコンゴムで製造。2980円で、エコに配慮した車内空間が実現。車主が環境貢献と収納の両立でうれしさを感じられる。 [jp1211]", imagePrompt: "A minimalist dashboard tray made from recycled light blue ABS resin and soft silicone rubber, placed on a dark dashboard of a Toyota Noa. Natural soft lighting highlights the eco-friendly texture. A smartphone sits on the 18cm wide stand, showing a green nature wallpaper.", sourceNewsIds: ["jp1211"] },
+                { id: 1127, img: "images/idea_1127.png", title: "アップサイクルオーバーランドシート", desc: "ジープコマンダーの最上級グレード「オーバーランド」専用シート。合成皮革「テュペロブラウン」に自然風光を演出。644万円の高級感と、サンルーフからの自然光が、高級車内体験を愉しませてくれる。 [jp1216]", imagePrompt: "Luxurious Jeep Commander interior featuring a dual-pain panoramic sunroof. Seats are upholstered in Typero Brown synthetic leather with a textured natural finish. Warm sunlight streams through the sunroof, illuminating the high-end cabin space.", sourceNewsIds: ["jp1216"] },
+            ],
+            cn: [
+                { id: 1128, img: "images/idea_1128.png", title: "量産型スマートコックピット", desc: "TCLと東風汽車の85%自動化工場で生産。マジックスクリーンやインストルメントクラスターを低コストで量産。HuaweiやXiaomiと競合しつつ、車内体験の革新を喜び。 [cn1038]", imagePrompt: "A futuristic car interior featuring a seamless Magic Screen dashboard and instrument cluster. The screen is modular, showing TCL branding. Sleek, highly automated factory background elements visible through windows.", sourceNewsIds: ["cn1038"] },
+                { id: 1129, img: "images/idea_1129.png", title: "グリップ統合HMIハンドル", desc: "豊田合成のグリップセンサ付きHMIステアリングをベースに、TCLの自動化工場生産を組み合わせる。マジックスクリーンとの連携で、手放し検知と多機能スイッチを統合。 [cn1038]", imagePrompt: "A close-up of a futuristic steering wheel with integrated grip sensors and HMI buttons. The steering wheel displays TCL and Toyota Tsusho logos. The background shows a smart cockpit with a large Magic Screen.", sourceNewsIds: ["cn1038"] },
+            ],
+            in: [
+                { id: 1130, img: "images/idea_1130.png", title: "バイオV8インテリアパネル", desc: "Audi Q7にQ9の高級感を引き継ぎ、植物由来のバイオ素材でV8/600PSの力強さを包み込む。OLEDディスプレイと調和し、自然の温かさと先進技術を愉しめる。 [in1085]", imagePrompt: "Luxurious car interior with Audi Q7 dashboard, V8 engine badge, organic wood grain texture, OLED display screen, bioplastic panels, warm ambient lighting, high-end luxury atmosphere, photorealistic", sourceNewsIds: ["in1085"] },
+                { id: 1131, img: "images/idea_1131.png", title: "発光エンブレムQ7パッケージ", desc: "Q9インテリア流用のQ7に、ミリ波レーダー透過エンブレムを搭載。600PSのV8動力と調和し、路面投影機能で周囲に光る。ADAS連携で安全も愉しめる。 [in1085]", imagePrompt: "Audi Q7 front view with illuminated emblem, millimeter wave radar transparency, LED matrix headlights, V8 badge, road projection light beam, night driving scene, futuristic technology", sourceNewsIds: ["in1085"] },
+            ],
+            us: [
+                { id: 1132, img: "images/idea_1132.png", title: "LEAF共用内装モジュール", desc: "Nissan LEAF アーキテクチャを活かした内装モジュール。電気式ドアハンドルや薄タイヤなど読者が嫌うトレンドを避けつつ、既存部品を活用。コスト競争力向上で量産化をスムーズにし、開発チームも部品共通化で安泰。うれしい！ [us1038]", imagePrompt: "A clean EV interior dashboard featuring a sleek flat panel display, minimalist wood trim, and a subtle illuminated emblem. The design emphasizes modular components with shared architecture from Nissan LEAF, showcasing efficient manufacturing and cost-effective materials. Soft ambient lighting highlights the premium yet practical interior.", sourceNewsIds: ["us1038"] },
+                { id: 1133, img: "images/idea_1133.png", title: "透過発光エンブレム内装", desc: "豊田合成の発光ミリ波レーダー透過エンブレムをEV用内装に最適化。ミリ波信号透過とイルミネーションを両立し、ADAS連携を内装から実現。読者が嫌う無意味なスポーツバッジを避け、機能美を追求。開発者も技術革新で嬉しい。 [us1031]", imagePrompt: "A close-up view of an EV emblem embedded in the rear pillar, emitting soft blue light while allowing millimeter wave radar signals to pass through. The emblem features a sleek geometric design with integrated LED lighting that doesn't obstruct sensor signals, showcasing advanced automotive technology.", sourceNewsIds: ["us1031"] },
+            ],
+            eu: [
+                { id: 1134, img: "images/idea_1134.png", title: "欧州向けシンプルコックピット", desc: "複雑なタッチパネルを物理ボタンに置き換える欧州専用コックピット。ドライバーが喜ぶのは、操作の簡単さと安心感。Auto Expressの調査結果が根拠となる。 [eu996]", imagePrompt: "European driver smiling at a car interior with minimal physical buttons and no complex screens, warm natural lighting, cozy atmosphere, high-quality interior materials", sourceNewsIds: ["eu996"] },
+                { id: 1135, img: "images/idea_1135.png", title: "植物内装で安心感UP", desc: "セルロースナノファイバーの植物素材内装で、欧州ドライバーが喜ぶ自然の温かみを実現。リサイクル素材の活用で環境意識の高いEU市場に響く。 [eu996]", imagePrompt: "Close-up of car interior panel made of natural plant cellulose fibers, soft warm lighting, sustainable texture, European style luxury cabin, green accents", sourceNewsIds: ["eu996"] },
+            ],
+        }
+    },
+{
         date: "2026-06-09",
         analysis: {
             jp: "フェラーリEV『ルーチェ'][jp1203]の多層バイナクル構造を採用。再生素材でパネルを構成すれば、環境負荷低減と軽量化を両立し、サステナビリティ向上[jp1203]。トヨタ『ハイエース』200系専用ダッシュボードトレイ[jp1201]をベースに、メテオコート加飾パネル[jp1201]技術を応用。スマホスタンドと一体化し、質感を向上させる[jp1201]。",
