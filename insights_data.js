@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-11",
+        analysis: {
+            jp: "メルセデスの大刷新とベントレーのラグジュアリーを踏まえ、[jp1229]のSクラスで採用されるMBUXスーパースクリーンを、再生バイオ素材で覆った「触覚型ディスプレイカバー」に発展。[jp1225]のフライングスパーの高級音響「Naim for Mulliner」を活かし、再生木材で仕上げたスピーカー格納部の「温もりの音響ケース」を提案。[jp1229]の1598万円クラスや[jp1225]の1962年ヘッドライトの歴史と、自然素材の組み合わせが心地よい。",
+            cn: "BYDのデニーズZ、発売前に1582馬力発表[cn1052]という圧倒的な性能が、静寂なEV環境で如何に静かに力を発揮するかを想像。吉利星艦7 EVが1万4千ドルで発売され[cn1056]、予算型EV SUV市場に参入し低価格[cn1056]でコストパフォーマンスの高い快適空間へのアクセスを実現。過去アイデアの重複を避け、各ニュース固有の要素を組み合わせる。",
+            in: "国：in 今回の2026年FIFAワールドカップでの次世代Hyundai i20デビューに合わせて、インド市場のグローバル戦略と省エネ技術の融合を追求する[ideas]。まずインド市場参入と現地化[ideas]を軸に、次世代i20のVenue風内装をベースに、インド特有の高温環境を考慮した熱対策を施す[ideas]。次に豊田合成のヒータ付きアームレスト[ideas]の技術を活かし、インドのEV普及促進と省エネ意識に合わせたヒートアイランド対策を提案する[ideas]。",
+            us: "VolvoのXC40マイナーチェンジ[us1042]とフォードのリコール[us1039]を起点に発想。XC40の縦型画面[us1042]をEVプラットフォームで横型に展開し、コネクテッド機能向上[us1042]を実現。フォードのセンターコンソールリスク[us1039]から、音響可視化技術で内装素材の安全性を可視化する。両社技術の融合で、安全かつ先進的なコックピットを構築。ユーザーは新しい操作性と安心感を[us1042][us1039]で享受。",
+            eu: "トヨタゴセイがレクサスESへ供給する新部品は、深さ25%増やしたエアバッグとリサイクル素材25%配合の外装部品で欧州の安全規制と脱炭素を両立する[eu1011]。の振動吸収ガラスは欧州の環境基準に合致し、内装の音質も向上する[eu1011]。豊田合成のインモールドコート技術を応用してリサイクル素材とシームレスな外観を実現する[eu1011]。のエンジニアリング賞受賞は技術革新への評価を示す[eu1011]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1136, img: "images/idea_1136.png", title: "バイオ再生スーパースクリーン", desc: "メルセデスSクラスに搭載されるMBUXスーパースクリーンを、再生農業廃棄物由来のバイオ複合材で覆う。触り心地が柔らかく、高級感ある質感で、環境への配慮も感じながら、1598万円のSクラスオーナーが「新しい車に幸せ」を覚える。 [jp1229]", imagePrompt: "Close-up shot of a luxury car dashboard featuring a massive curved super-screen display. The bezel and screen surface are covered in a matte, textured material made from compressed plant fibers resembling light wood grain. Soft warm ambient lighting highlights the natural grain texture.", sourceNewsIds: ["jp1229"] },
+                { id: 1137, img: "images/idea_1137.png", title: "歴史音響再生ウッドケース", desc: "ベントレーフライングスパーの「Naim for Mulliner」オーディオを、1962年ヘッドライトのレトロな雰囲気と調和する再生マホガニーケースに収納する。21基のスピーカーから響く音が、アップサイクル材の温もりで包まれ、ラグジュアリーな空間を楽しむ。 [jp1225]", imagePrompt: "Interior view of a luxury car showing a high-end speaker system. The speaker grilles are embedded in a dark polished wood panel made from recycled mahogany. A vintage single-front headlight silhouette glows softly in the background, blending old and new.", sourceNewsIds: ["jp1225"] },
+            ],
+            cn: [
+                { id: 1138, img: "images/idea_1138.png", title: "超静寂力覚醒座席", desc: "BYD Denza Zの1582馬力という巨大な動力を、シート振動制御で静かに吸収。乗員が感じるのは力強く、まるで力強い風が背中を押し、心地よい静寂と速さの両立を楽しめる。 [cn1052]", imagePrompt: "A futuristic car interior with a high-performance sports car seat, showing subtle vibration waves absorbed by the material. The seat is made of advanced composite fabric, glowing with soft blue ambient light to indicate high-tech comfort. The background is a dark, quiet tunnel to emphasize the silence.", sourceNewsIds: ["cn1052"] },
+                { id: 1139, img: "images/idea_1139.png", title: "HMI光輪ステアリング", desc: "吉利星艦7 EVのHMI技術をLED陰影イルミネーションと融合。ステアリング握ると手元が優しく光る輪になり、安価な車でも高級感ある光の演出で、運転の喜びを毎日感じられる。 [cn1056,cn1052]", imagePrompt: "A close-up view of a modern car steering wheel with integrated LED light strips forming a glowing ring around the grip. The wheel is held by a hand, and the light reflects softly on the dashboard. The interior has a premium feel with warm lighting.", sourceNewsIds: ["cn1056", "cn1052"] },
+            ],
+            in: [
+                { id: 1140, img: "images/idea_1140.png", title: "インド発熱対策i20", desc: "次世代Hyundai i20のVenue風12.3インチスクリーンをインド向けに再設計。高温環境でも快適な内装素材を採用し、インド市場でのワールドカップ開催を祝う[ideas[0]]。 [in1096,in1098]", imagePrompt: "Hyundai i20 interior with 12.3-inch touchscreen dashboard in warm Indian sunlight, beige leather seats, lush green plants visible through windows, joyful passengers enjoying the car", sourceNewsIds: ["in1096", "in1098"] },
+                { id: 1141, img: "images/idea_1141.png", title: "インドEV省エネアームレスト", desc: "豊田合成のヒータ付きアームレスト技術をインドEV向けに改良。次世代i20の12.3インチディスプレイと連携し、インド市場の省エネ目標を達成する[ideas[1]]。 [in1098]", imagePrompt: "Close-up of heated armrest with glowing heating elements inside Hyundai i20, soft amber light, sleek dark interior, modern digital display interface showing energy savings", sourceNewsIds: ["in1098"] },
+            ],
+            us: [
+                { id: 1142, img: "images/idea_1142.png", title: "EV横型縦画面ハイブリッドコックピット", desc: "Volvo XC40の縦型画面をEV横型に再設計。コネクテッド機能を強化し、ユーザーは直感的なデジタルコックピットで、新しい操作性の楽しさを体験。 [us1042]", imagePrompt: "Modern EV interior cockpit featuring a wide horizontal OLED touchscreen integrated into the dashboard, with sleek Volvo-style vertical screen elements floating holographically above the instrument cluster showing navigation and connectivity maps, soft ambient lighting, futuristic materials, clean composition, photorealistic, 8k", sourceNewsIds: ["us1042"] },
+                { id: 1143, img: "images/idea_1143.png", title: "安全内装音響可視化トリム", desc: "フォードのリコールから学んだ安全性を、豊田合成音響可視化技術で内装トリムに拡張。剥離リスクを可視化し、ユーザーは安心して、安全で心地よい車内空間をで楽しむ。 [us1039]", imagePrompt: "Close-up of car interior trim panel with glowing acoustic visualization patterns embedded in the material, showing stress points in blue and safe zones in green, realistic texture of soft-touch vinyl, studio lighting, high detail, safety focus, photorealistic render", sourceNewsIds: ["us1039"] },
+            ],
+            eu: [
+                { id: 1144, img: "images/idea_1144.png", title: "環境対応レクサスES内装", desc: "深さ25%増やした円筒型エアバッグと、リサイクル素材25%配合の外装部品を採用したレクサスES内装。安全規制と脱炭素を両立し、欧州ドライバーが環境貢献に喜び、音質も向上する。 [eu1011]", imagePrompt: "Interior view of Lexus ES cabin with visible airbag deployment animation. Dashboard and door panels made from recycled materials with a 25% blend. Cylindrical airbag structure with 25% depth increase. High-tech lighting and green ambient color scheme. Japanese driver smiling.", sourceNewsIds: ["eu1011"] },
+                { id: 1145, img: "images/idea_1145.png", title: "シームレスリサイクル外装", desc: "豊田合成のインモールドコート技術で、リサイクル素材25%配合の外装部品とシームレスなガラス面を実現。レクサスESの環境性能を高め、欧州ドライバーがデザインとサステナビリティに喜び、音質も向上する。 [eu1011]", imagePrompt: "Close-up shot of Lexus ES exterior panel with seamless finish. Recycled material texture visible on door panel and fender. In-mold coating technology applied. Green and blue lighting reflecting on the smooth surface. European driver admiring the car.", sourceNewsIds: ["eu1011"] },
+            ],
+        }
+    },
+{
         date: "2026-06-10",
         analysis: {
             jp: "トヨタノア・ヴォクシー[jp1211]のナビ背面に置くダッシュボードトレイを、再生素材で製造し環境に優しいデザインに。ジープコマンダー[jp1216]の高級シートやサンルーフを、自然素材調で表現し開放感あふれる内装を表現。",
