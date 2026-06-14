@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-12〜2026-06-14",
+        analysis: {
+            jp: "AUMOVIO[jp1240]の「サーフェスプロジェクション」技術を活用し、ダッシュボードやドアトリムに映像を投影する体験で、高級感ある静寂空間を演出するアイデアを提案する。BMW 7シリーズ[jp1233]の先進HMIを組み合わせ、車内全体を没入型エンターテインメント空間に変える。また、メテオコート加飾パネル[jp1233]のような独自テクスチャーと合わせ、質感を高めることで、静粛性やフィット感を向上させ、静寂の中で映像を楽しむ愉しさを最大化する。",
+            cn: "ニュース[cn1065] は偽造NOMI機器が「車内弾丸」になる危険性を示しており、衝突安全の視点が重要 [cn1065]。豊田合成の樹脂インパネリンフォース技術はこのリスクを解消する。偽造品除去と本物認証で安心空間を創出。安全な車内環境を実現する。は浙江・広州・上海の訴訟事例からも重要性が浮き彫り。",
+            in: "2026年6月12日から14日のインダストリーでは、Genesis Magma GT Conceptの高級素材とHyundai i20のプレミアムコックピットを、健康・ウェルネスとアップサイクル素材で再解釈する[in1102]。Magma GTのクイルッドレザーを抗菌機能付き素材に転換し、i20のダークトーンダッシュボードを癒やしの照明と統合する[in1107]。Re-Sブランドのアップサイクル技術を車内小物に適用し、環境配慮と快適性を両立させるアイデアを生成する[in1110]。",
+            us: "まず、ジェネシスのMagma GTコンセプトニュースus1052から、大画面回避やタッチ操作重視の設計を基に、物理スイッチとの融合コックピットを提案します。次に、ステラントスCEOのクライスラー批判ニュースus1050から、高品質なコックピット体験を基に、音響可視化技術で質感向上を提案します。",
+            eu: "アウディのステアリング円形化方針eu1014を根幹に、廃タイヤ素材eu1018を組み合わせる。 再生素材でステアリングの円形美を強化し、環境負荷を下げつつデザイン統一感を高める。 ヒータ付きアームレストを起点に、再生素材でアームレストを温感化。 省エネと触感の両立で、欧州ユーザーが安心するコックピットを構築する。",
+        },
+        ideas: {
+            jp: [
+                { id: 1146, img: "images/idea_1146.png", title: "静寂映像壁投影", desc: "AUMOVIOのサーフェスプロジェクションで車内壁面に映像を投影。BMW 7シリーズの先進HMIと連動し、助手席ディスプレイの映像をダッシュボードやドアにも拡張。メテオコートの質感と合わせ、静寂の中で映像が美しく映る愉しみを体験できる。 [jp1240,jp1233]", imagePrompt: "Luxury car interior night scene, dashboard and door panels projecting holographic landscape images, BMW 7 Series interior, high resolution, cinematic lighting, serene atmosphere, no physical screens, AUMOVIO technology, 8k detailed", sourceNewsIds: ["jp1240", "jp1233"] },
+                { id: 1147, img: "images/idea_1147.png", title: "質感映像トリム", desc: "AUMOVIOのサーフェスプロジェクションでドアトリムに映像を投影。BMW 7シリーズの高級インテリアと合わせ、メテオコートの独自テクスチャーが映像を柔らかく包み込む。静寂な空間で映像の美しさを存分に楽しめ、車内全体の質感が向上する愉しさを提供する。 [jp1240,jp1233]", imagePrompt: "Close up of car door trim, surface projection of nature patterns, BMW 7 Series luxury interior, Meteo Coat texture visible, soft lighting, high detail, no screens, immersive experience, 8k realistic", sourceNewsIds: ["jp1240", "jp1233"] },
+            ],
+            cn: [
+                { id: 1148, img: "images/idea_1148.png", title: "NOMI安全ロックドア", desc: "衝突時脱落防止で偽造NOMI[id=cn1065]を固定。浙江・広州・上海訴訟解決に。エアバッグ妨害ゼロで家族も安心。安全な車内空間を創出する技術で、ドライバーが本当にうれしい体験を。 [cn1065]", imagePrompt: "Interior safety view showing a genuine Nomi device securely mounted in a car dashboard with a special locking mechanism. The device is glowing with a soft blue light indicating safety status. A realistic car interior with clean lines and premium materials, highlighting the secure attachment point.", sourceNewsIds: ["cn1065"] },
+                { id: 1149, img: "images/idea_1149.png", title: "骨格樹脂インパネ", desc: "豊田合成樹脂インパネリンフォース[id=cn1065]で偽造物防御。浙江・広州・上海訴訟対応。衝突時高強度で「車内弾丸」回避。軽量化と安全を両立。家族全員が笑顔になる安全な車内空間を。 [cn1065]", imagePrompt: "Close-up view of a modern car dashboard made from high-strength resin material. The resin has a smooth, glossy finish with embedded safety sensors. A genuine Nomi interface is integrated seamlessly into the dashboard design. Soft ambient lighting highlights the safety features.", sourceNewsIds: ["cn1065"] },
+            ],
+            in: [
+                { id: 1150, img: "images/idea_1150.png", title: "抗菌クイルッドレザーパネル", desc: "Genesis Magma GT Conceptのクイルッドレザーをベースに、抗菌処理と消臭機能を組み込んだウェルネスインテリアパネルを作る。2人乗りの静寂をより高め、アナログ風メーターの奥に癒やしの香りを漂う。車内がクリーンでリラックスできる空間を創り、乗客が心地よく過ごせる喜びを届ける。 [in1102]", imagePrompt: "Luxurious car interior with cured leather seats featuring subtle glowing green anti-bacterial lines, analog round meters illuminated by warm ambient light, dark alcantara accents, calm atmosphere, high detail, photorealistic, 8k resolution", sourceNewsIds: ["in1102"] },
+                { id: 1151, img: "images/idea_1151.png", title: "アップサイクル癒やしコックピット", desc: "Hyundai i20のダークトーンダッシュボードに、Re-Sブランドのアップサイクル素材を小物として搭載。廃棄ステアリング革をリサイクルしたポーチをインテリアに配置し、大型パノラマカーブディスプレイの輝きを柔らかく包み込む。環境に優しい車内空間で、ドライブがより愛おしくなる体験を。 [in1107]", imagePrompt: "Modern car dashboard with dark tone finish, recycled leather pouches made from upcycled steering wheel materials placed on center console, large panoramic curved display glowing softly, ambient lighting, sustainable design, high quality, photorealistic, 8k", sourceNewsIds: ["in1107"] },
+            ],
+            us: [
+                { id: 1152, img: "images/idea_1152.png", title: "物理スイッチ融合コックピット", desc: "ジェネシスMagma GTのタッチ操作と物理スイッチを融合し、クイルドワルナットブラウンレザーで高級感を出します。ドライバーエンゲージメントを高め、大画面を避けながら操作性も確保。運転中に楽しめる体験を全員が喜びます [us1052]", imagePrompt: "A luxurious car interior with dark quilted walnut brown leather, minimal large screens, physical tactile switches on the center console, warm ambient lighting, driver's hands on a steering wheel, high engagement atmosphere, photorealistic", sourceNewsIds: ["us1052"] },
+                { id: 1153, img: "images/idea_1153.png", title: "音響可視化コックピット", desc: "ステラントスの高品質コックピットから、音響可視化技術でトリムデザインを最適化。2004年型アウディA4のような質感を再現し、UXデザイナーを増やしたコックピット体験を向上。運転中に心地よい音と視覚で喜びます [us1050]", imagePrompt: "Car interior with high-quality acoustic visualization display on the dashboard, sound waves visible in the air, premium wood and leather materials, warm lighting, focus on cockpit experience, detailed craftsmanship, photorealistic", sourceNewsIds: ["us1050"] },
+            ],
+            eu: [
+                { id: 1154, img: "images/idea_1154.png", title: "円形ステアリング再生素材化", desc: "アウディの円形ステアリングeu1014を廃タイヤ粒子eu1018で覆う。再生素材が触れるたびに円い安心感を生む。欧州ユーザーが環境とデザインで嬉しくなる。 [eu1014]", imagePrompt: "Modern car steering wheel made from recycled black rubber particles, circular shape, Audi interior design, soft warm lighting, sustainable eco texture, close-up shot, minimalist luxury, clean background, high resolution", sourceNewsIds: ["eu1014"] },
+                { id: 1155, img: "images/idea_1155.png", title: "省エネ再生アームレスト", desc: "ヒータ付きアームレストeu1018に廃タイヤ粒子eu1018を組み合わせる。電力50%削減eu1018で温かさを維持。欧州ユーザーが省エネで快適な座席環境に喜ぶ。 [eu1018]", imagePrompt: "Car interior armrest with integrated heating element, recycled tire particle surface texture, modern EV interior, warm ambient lighting, cozy atmosphere, close-up detail, sustainable materials, elegant design, high quality photography", sourceNewsIds: ["eu1018"] },
+            ],
+        }
+    },
+{
         date: "2026-06-11",
         analysis: {
             jp: "メルセデスの大刷新とベントレーのラグジュアリーを踏まえ、[jp1229]のSクラスで採用されるMBUXスーパースクリーンを、再生バイオ素材で覆った「触覚型ディスプレイカバー」に発展。[jp1225]のフライングスパーの高級音響「Naim for Mulliner」を活かし、再生木材で仕上げたスピーカー格納部の「温もりの音響ケース」を提案。[jp1229]の1598万円クラスや[jp1225]の1962年ヘッドライトの歴史と、自然素材の組み合わせが心地よい。",
