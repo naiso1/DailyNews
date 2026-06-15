@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-15",
+        analysis: {
+            jp: "ジムニー5型[jp1245]の安全装備進化と柔軟座席[jp1247]の好みを活用。デジタルコックピットで安全装備を視覚化し、柔らか座席と連携して運転者の安心感と快適性を両立する。植物系素材とデジタル体験を融合させ、安全で楽しい車内空間を創出する。",
+            cn: "ORA 7 ワゴンのBMW提携生産は、品質向上で欧州市場進出への信頼を確立 [cn1076]。吉利李書福の低コスト批判は、高級ブランド維持の重要性を強調 [cn1073]。新漆黒めっき加飾部品をORA 7のインテリアに採用し、深みのある漆黒で高級感を演出。BMW基準の品質管理と組み合わせ、欧州でも愛される実用・高級車を創造。",
+            in: "2026年Sクラスのインド市場投入を背景に、グローバル戦略視点で高級内装の現地調達モデルを提案[in1113,in1120]。MBUX SuperscreenやBurmester 4D音響を再現する素材開発を視野に、インドの伝統素材と融合する新ブランド構築を目指す[in1114]。プラグインハイブリッド化に伴うEV走行距離の確保を、インド発の再生素材パネルで補完し、環境配慮と高品位を両立[in1113]。2.20億ルピーという高価格帯を狙い、現地の富裕層が求める「インド製でグローバル仕様」の体験価値を創出[in1120]。",
+            us: "Hyundai新i20のデジタルコックピット[us1061]からEV専用熱管理モジュールを着想。フォードのダッシュボード空白問題[us1059]を教訓に、熱管理でEVバッテリー効率を最大化するデザインを追求。",
+            eu: "Hyundai i20は新世代モデルとしてブラジルで発表され、インテリア空間の拡大とデザインが刷新されています。特に後部座席の空間拡大を健康の視点から展開し、車内をより快適な環境にするアプローチが特徴です。トヨタの2026年モデルでは、ヒルックスがBEVやハイブリッド、水素で新世代へ進化し、多様なパワートレインが用意されています。さらに、ランドクルーザーの参考デザインもウェルネス要素に昇華され、高級感と機能性が融合しています。両者のインテリア技術を組み合わせることで、車内を癒しの空間に変える提案が実現され、次世代のモビリティ体験を約束します。",
+        },
+        ideas: {
+            jp: [
+                { id: 1156, img: "images/idea_1156.png", title: "安全映像ナビゲーション", desc: "ジムニー5型のクリアランスソナーやミリ波レーダーデータを、Alpine DA7Zのディスプレイで拡大表示。柔らか座席の快適性と連携し、運転中の安全確認を楽しく、視覚的にサポートする。 [jp1245,jp1247]", imagePrompt: "Low angle shot of a compact SUV dashboard featuring a large curved digital display showing 3D sonar radar visualization in neon blue lines against a dark interior. A soft plush beige seat cushion is visible in the foreground with warm lighting highlighting the high-tech safety interface.", sourceNewsIds: ["jp1245", "jp1247"] },
+                { id: 1157, img: "images/idea_1157.png", title: "再生セルロースエンタメ", desc: "セルロースナノファイバー内装材に、ジムニー5型の安全警報音の自然な波形を刻印。柔らか座席の温かみと合わせ、安全装備の音を心地よい音楽のように感じさせ、運転中の緊張をほぐす。 [jp1245,jp1247]", imagePrompt: "Close-up texture shot of a car door panel made from light beige plant-based cellulose fiber material. The surface has subtle engraved wave patterns resembling sound ripples in soft golden light. The background shows the edge of a soft upholstered seat in matching warm tones.", sourceNewsIds: ["jp1245", "jp1247"] },
+            ],
+            cn: [
+                { id: 1158, img: "images/idea_1158.png", title: "BMW品質実用ワゴン", desc: "BMW基準品質管理で実用性を高めるORA 7ワゴン。猫デザインから脱却し、LiDAR搭載で最高時速180kmを実現。欧州市場への参入戦略で、信頼性のある高級実用車を創造し、欧州ユーザーも喜びます。 [cn1076]", imagePrompt: "Elegant SUV interior with BMW quality standards lighting, showing a driver enjoying real-world utility features, sleek dashboard with LiDAR sensor glow, high-speed display on 180km/h, luxury materials, spotlight automotive factory background, warm golden light, professional automotive photography style", sourceNewsIds: ["cn1076"] },
+                { id: 1159, img: "images/idea_1159.png", title: "漆黒高級インテリア", desc: "新漆黒めっき加飾部品で深みのある漆黒インテリアをORA 7に採用。吉利李書福が批判する低コスト生産から脱却し、ブランド価値を維持。光を反射しない深みのある漆黒で高級感を演出し、ユーザーが喜びます。 [cn1073]", imagePrompt: "Dark luxury car interior with deep black gloss finish, new plating technology showing matte black reflectionless surface, high-end materials on dashboard and center console, spotlight automotive quality, elegant lighting, premium atmosphere, close-up detail shot of black texture, moody cinematic lighting", sourceNewsIds: ["cn1073"] },
+            ],
+            in: [
+                { id: 1160, img: "images/idea_1160.png", title: "インド発Superscreenパッケージ", desc: "2026年Sクラスインド投入のMBUX Superscreenをインドの伝統木目素材で再解釈。Burmester 4D音響と融合した高級感で、現地富裕層が「グローバルで地続き」な体験を喜びます。 [in1114]", imagePrompt: "Luxury Mercedes-Benz S-Class interior with India-inspired wood grain dashboard, MBUX Superscreen displaying Indian cultural patterns, Burmester 4D speakers integrated with golden accents, warm ambient lighting, close-up shot of premium materials", sourceNewsIds: ["in1114"] },
+                { id: 1161, img: "images/idea_1161.png", title: "PHEV省エネアームレスト", desc: "2026年SクラスプラグインハイブリッドのEV走行距離115kmを、豊田合成ヒータ付きアームレスト技術で補完。2.20億ルピーの高級感と、省エネで快適なインドの日常を両立し、オーナーが喜びます。 [in1113]", imagePrompt: "Mercedes-Benz S-Class interior with heated armrest featuring Toyota Synthesis technology, PHEV dashboard display showing 115km EV range, warm ambient lighting with Indian spice market-inspired color palette, luxury materials", sourceNewsIds: ["in1113"] },
+            ],
+            us: [
+                { id: 1162, img: "images/idea_1162.png", title: "EV熱管理コックピット", desc: "Hyundai新i20の12.3インチデジタルコックピット技術をEV専用に転用。熱管理システムでバッテリー効率を最大2割上げ、EVオーナーが毎日の走行距離をうれしく増やせます。 [us1061]", imagePrompt: "Futuristic EV cockpit interior with glowing 12.3 inch digital display showing battery thermal management interface, sleek dashboard materials, soft ambient lighting, clean modern design, high quality render", sourceNewsIds: ["us1061"] },
+                { id: 1163, img: "images/idea_1163.png", title: "シームレスEV加飾パネル", desc: "フォードのダッシュボード空白問題を解決。メテオコート加飾パネルでEVフロアスペースを最大活用し、リサイクル素材で内装をうれしく彩り、環境意識の高いユーザーが満足します。 [us1059]", imagePrompt: "Close-up of EV interior dashboard with seamless textured panel coating, metallic accents, sustainable material finish, no visible seams, warm lighting highlighting the premium texture, photorealistic", sourceNewsIds: ["us1059"] },
+            ],
+            eu: [
+                { id: 1164, img: "images/idea_1164.png", title: "抗菌空間i20", desc: "Hyundai i20の12.3inディスプレイをセンサー化し、後部座席空間拡大を活かした抗菌フィルターを配置。家族が車内で安心し、健康でうれしい空間に。 [eu1026]", imagePrompt: "Interior view of Hyundai i20 with a large 12.3 inch digital display showing air quality metrics, clean white seats, and a subtle glowing filter system in the rear area, bright natural lighting, minimalist design", sourceNewsIds: ["eu1026"] },
+                { id: 1165, img: "images/idea_1165.png", title: "漆黒癒やしヒルックス", desc: "トヨタヒルックスの12.3インチディスプレイを深みのある漆黒めっき加飾部品で囲み、ランドクルーザー参考デザインの高級感でドライバーをリラックスさせ、うれしい癒やし空間。 [eu1033]", imagePrompt: "Close-up of a Toyota Hilux dashboard featuring a dark glossy finish on the 12.3 inch display bezel, rich black metallic texture reflecting ambient light, luxurious interior, warm golden lighting accents", sourceNewsIds: ["eu1033"] },
+            ],
+        }
+    },
+{
         date: "2026-06-12〜2026-06-14",
         analysis: {
             jp: "AUMOVIO[jp1240]の「サーフェスプロジェクション」技術を活用し、ダッシュボードやドアトリムに映像を投影する体験で、高級感ある静寂空間を演出するアイデアを提案する。BMW 7シリーズ[jp1233]の先進HMIを組み合わせ、車内全体を没入型エンターテインメント空間に変える。また、メテオコート加飾パネル[jp1233]のような独自テクスチャーと合わせ、質感を高めることで、静粛性やフィット感を向上させ、静寂の中で映像を楽しむ愉しさを最大化する。",
