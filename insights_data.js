@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-16",
+        analysis: {
+            jp: "インテリアのデザイン・加飾視点[jp1254]と小型ワイヤレス充電ホルダの進化[jp1255]を軸に発想する。シートベルトバックルの光る演出[jp1254]をインテリア演出に昇華し、充電ホルダ[jp1255]を音響空間に最適化する。これにより視覚的・聴覚的快楽を両立させ、ユーザーの喜びを最大化する。[jp1254]は発光演出の視覚的快楽を、[jp1255]は音響体験の聴覚的快楽をそれぞれ補完する。",
+            cn: "ニュースcn1085のAITO M6 SUVは、Giant WhaleバッテリーとLiDAR搭載でEV技術の高さを示す[cn1085]。ニュースcn1080のCATLとBYDがパナソニックに挑戦する22億ドル市場は、エネルギー供給の革新性[cn1080]。グローバル展開で中国のEV技術を取り込む際、バッテリーと自動運転センサーの融合が重要。ファーウェイ後援のAITO社、M6 SUV新モデルを低価格で発売[cn1085]。安全通知イルミネーションを組み合わせることで、海外市場でも安心感。中国メーカーの製造規模と日本の安全技術を融合させ、世界市場で勝ち。",
+            in: "タタ・モーターズの物理操作系復活ニュース[in1122]を基に、触感重視のデザイン提案を2点作成。1件目はHVACの物理スイッチ配置を「温かみのある木目調パネル」に組み合わせ、触覚で安心感を高めるデザイン。2件目はステアリングの物理ボタンを「発光ミリ波レーダー透過エンブレム」技術で昇華し、安全運転の視認性を光で演出するインテリア。両案とも顧客要望に応える喜びを表現。",
+            us: "シボレー・シルバードの16.3インチタッチスクリーン搭載内装刷新[us1075]は、EV共通モジュール化による量産コスト競争力向上が期待できる[us1075]。また、2027年式Jeep Grand CherokeeのTrailhawk・Overland復活[us1069]は、ウェルネスコックピットWelpit技術をNappaレザーやオフロード環境と連携させ、運転者の状態を認識して自動で癒やせるコックピットを実現する[us1069]。これにより、高級感と機能性を両立した新しいEV内装を提案できる。",
+            eu: "EU市場向けEV戦略[eu1036]とBMWのNeue Klasse受賞[eu1036]から、欧州顧客の「EV進化とブランド愛」の両立をテーマにする。メルセデスVLE[eu1038]の800V充電技術を応用し、欧州EVユーザーの利便性向上を提案する。メテオコートで質感向上し、欧州市場への定着を支援。各アイデアはアンカーニュースに即し、うれしさを実感させる。",
+        },
+        ideas: {
+            jp: [
+                { id: 1166, img: "images/idea_1166.png", title: "発光バックルインテリア", desc: "ヴァレンティのシートベルトバックルイルミネーションをインテリア演出に活用。赤から青へ変化する光が、高級内装にダイナミックなアクセントを。装着確認とドレスアップの両立で、運転手が毎日のドライブを楽しく感じる。 [jp1254]", imagePrompt: "Luxury car interior with illuminated seatbelt buckle changing from red to blue light, elegant ambient lighting, high-quality materials, sophisticated dashboard details, soft glow effect, cinematic composition", sourceNewsIds: ["jp1254"] },
+                { id: 1167, img: "images/idea_1167.png", title: "音響充電ホルダ空間", desc: "小型ワイヤレス充電ホルダにOTOTEN2026の音響空間技術を融合。ALPHARD MODELLISTA CONCEPTのような高品質オーディオを、スマホ充電時に自動で起動。音楽を聴きながら充電する喜びを、日常の小さな幸せに。 [jp1255]", imagePrompt: "Smartphone wireless charging dock integrated into luxury car interior, glowing ambient lights, high-end audio system speakers visible, elegant dashboard, modern technology aesthetic, warm lighting atmosphere", sourceNewsIds: ["jp1255"] },
+            ],
+            cn: [
+                { id: 1168, img: "images/idea_1168.png", title: "グローバルEV新戦略", desc: "ファーウェイ後援AITOのM6 SUVはGiant WhaleバッテリーとLiDAR搭載でEV技術を世界へ。CATLとBYDの22億ドルエネルギー市場の知見を取り入れ、海外で安心して運転できるEVを。中国の製造規模と日本の安全技術で勝ち。 [cn1085,cn1080]", imagePrompt: "A modern luxury SUV parked in a futuristic global cityscape at dusk. The car features a sleek black body with glowing blue LED strips indicating safety notifications on the dashboard. LiDAR sensors are visible on the roof. The background shows a mix of Chinese and Western architectural styles with soft ambient lighting.", sourceNewsIds: ["cn1085", "cn1080"] },
+                { id: 1169, img: "images/idea_1169.png", title: "安全光イルミネーション", desc: "豊田合成のLED通知イルミネーションをAITO M6に搭載。Giant Whaleバッテリーの車内と、CATLとBYDのエネルギー市場から得た安全性を光で知らせる。海外展開でも安心感でうれし。 [cn1085,cn1080]", imagePrompt: "Interior view of a luxury SUV dashboard at night. The instrument panel displays soft blue LED safety notification lights. The steering wheel has subtle illuminated rings. Outside the window, rain reflects the city lights, creating a calm and secure atmosphere inside the car.", sourceNewsIds: ["cn1085", "cn1080"] },
+            ],
+            in: [
+                { id: 1170, img: "images/idea_1170.png", title: "温触覚HVACパネル", desc: "タタの物理スイッチ復活を、暖かい木目調パネルに配置。HVAC制御ボタンに温もりを添え、顧客要望に応える喜びを演出。タッチ操作も維持したハイブリッドなアプローチで、安心感と楽しさを両立。 [in1122]", imagePrompt: "Close-up of a luxury car interior dashboard featuring warm wood grain texture. Physical tactile buttons for HVAC controls are embedded in a wooden panel, contrasting with sleek touch-sensitive areas. Soft ambient lighting highlights the natural wood grain and metallic button edges, conveying warmth and customer satisfaction.", sourceNewsIds: ["in1122"] },
+                { id: 1171, img: "images/idea_1171.png", title: "光るステアリングボタン", desc: "ステアリングボタンの物理操作を、発光ミリ波レーダー透過エンブレム技術でアップグレード。HVACや重要機能への配置を光演出で強調し、安全運転の喜びを視覚化。顧客要望に応える喜びを光で表現。 [in1122]", imagePrompt: "Close-up of a high-tech steering wheel with physical buttons on the spokes. The buttons emit a subtle soft glow, mimicking the look of a premium illuminated emblem. The dashboard background is dark, making the glowing physical controls the focal point, emphasizing safety and joy.", sourceNewsIds: ["in1122"] },
+            ],
+            us: [
+                { id: 1172, img: "images/idea_1172.png", title: "量産EV共通スクリーンモジュール", desc: "シボレーシルバードの16.3インチセンタースクリーンとデジタルメーターをEV用標準モジュール化。量産部品共通化でコスト削減し、生産ライン効率を上げます。量産化により価格競争力を高め、より多くの消費者に最新技術を味わっていただけます。 [us1075]", imagePrompt: "Modern EV dashboard with a large 16.3 inch floating touchscreen and a digital instrument cluster. Sleek minimalist design with soft ambient lighting. Silver and black color scheme. High resolution 4k image showing clean lines and premium materials.", sourceNewsIds: ["us1075"] },
+                { id: 1173, img: "images/idea_1173.png", title: "ウェルネスコックピットWelpit", desc: "Jeep Grand CherokeeのTrailhawkモデルをベースに、Welpit技術を搭載。ミリ波レーダーで運転者の気分を察知し、Nappaレザーシートや11.4インチの接地高さに合わせて、香りや温度を最適化。オフロードでも癒やされるコックピットに。 [us1069]", imagePrompt: "Jeep Grand Cherokee interior with Nappa leather seats and a futuristic wellness cockpit system. Soft warm lighting and a 11.4 inch screen displaying health metrics. The driver looks relaxed and happy with a serene smile. Off-road rugged exterior visible through windows.", sourceNewsIds: ["us1069"] },
+            ],
+            eu: [
+                { id: 1174, img: "images/idea_1174.png", title: "欧州EV愛着応援コンセプト", desc: "BMW Neue Klasseの受賞をきっかけに、欧州ドライバーがEV時代のBMWらしさを愉しむ内装。メテオコートで質感を高め、欧州市場での愛着を深める。うれしさ [eu1036]", imagePrompt: "European driver smiling in a BMW Neue Klasse interior, warm ambient lighting, premium materials, Meteo Coat texture visible on dashboard, European countryside view through windshield, high detail, photorealistic", sourceNewsIds: ["eu1036"] },
+                { id: 1175, img: "images/idea_1175.png", title: "欧州EV超速充電体験", desc: "メルセデスVLEの800V充電技術を欧州EVユーザー向けに展開。15分充電で350km移動可能で、欧州EVドライバーの移動ストレスを解消。うれしさ [eu1038]", imagePrompt: "European electric vehicle charging station at dusk, 800V architecture interface glowing, Mercedes VLE interior visible through glass, happy driver waiting, modern European city background, cinematic lighting", sourceNewsIds: ["eu1038"] },
+            ],
+        }
+    },
+{
         date: "2026-06-15",
         analysis: {
             jp: "ジムニー5型[jp1245]の安全装備進化と柔軟座席[jp1247]の好みを活用。デジタルコックピットで安全装備を視覚化し、柔らか座席と連携して運転者の安心感と快適性を両立する。植物系素材とデジタル体験を融合させ、安全で楽しい車内空間を創出する。",
