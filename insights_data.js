@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-17",
+        analysis: {
+            jp: "第1案はトヨタ紡織のレクサスES新型採用新構造シート[jp1265]と面発光ドアトリム[jp1265]を「グローバル戦略」視点が。海外市場向けにCO2削減素材で現地調達をアピールし、体圧分散性で快適さを訴求する。第2案は豊田合成の発光ミリ波レーダー透過エンブレムを起点に、トヨタ紡織のTBlocksシート[jp1265]やカロッツェリアのDolby Atmos音響[jp1268]を融合。海外展開時に高級感と技術性を同時に示し、現地ファンが喜びを感じる。両案ともニュースIDを根拠に、車名や技術名を明確に含め、重複を避けた新規発想を提案する。[jp1265][jp1268]",
+            cn: "BYD唐が、XiaomiのIoT戦略を模倣し、磁気スマートボタンを搭載[cn1089]。音声操作不要の安心感と950km航続距離の信頼性を組み合わせる[cn1094]。漆黒めっき加飾部品をインパネに採用し、NFCチップとの相乗効果で深みのある質感を演出。ユーザーはボタン操作時の触感と静寂を愉しむ。",
+            in: "シトロエンeC3XのLEDヘッドライトやJBLオーディオといった最新装備を、植物由来のバイオ素材で内装パネルを覆うことで、EVの清潔感と高級感を向上させる[in1133]。シボレーシルバードの16.3インチタッチスクリーンとWelpit技術を融合させ、ドライバーの気分を感知して自動で内装を彩る[in1140]。",
+            us: "テスラの16.0インチスクリーンとマツダの大型ディスプレイ安全論を基に、抗菌消臭でウェルネス化、骨格樹脂化で軽量化を提案[us1083]。テスラはシートサポートと合わせ健康[us1079]、マツダは安全と快適を両立[us1080]。どちらも内装の進化でユーザーが喜ぶ[us1084]。",
+            eu: "ポルシェ・タイカンのアップデートからE-Shiftの振動や低抵抗タイヤの航続距離増強を体験価値に昇華[eu1044]。レノワール・Twingoの愛らしい内装を都市部の小回し走行で楽しむコックピット感覚に繋げる[eu1045]。豊田合成の多機能コンソールボックスをEVフラットフロアで最適化し、ニュースのEV要素と融合させることで、欧州ユーザーに新鮮な乗り心地と利便性を実感させるコンセプトを構築する[eu1049]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1176, img: "images/idea_1176.png", title: "海外展開用CO2シート", desc: "レクサスES新型のTBlocksシートを採用し、海外市場向けにCO2削減素材で現地調達をアピール。体圧分散性で快適さを訴求し、グローバル戦略で現地ファンが喜びを覚える。 [jp1265]", imagePrompt: "Luxurious Lexus ES interior with TBlocks seat material showcasing sustainable recycled texture and ambient door trim illumination, emphasizing global eco-friendly strategy and premium comfort for international markets", sourceNewsIds: ["jp1265"] },
+                { id: 1177, img: "images/idea_1177.png", title: "ハイテクエンブレム音響", desc: "豊田合成の発光ミリ波レーダー透過エンブレムを起点に、レクサスES新型のTBlocksシートとカロッツェリアDolby Atmos音響を融合。海外展開時に高級感と技術性を示し、現地ファンが喜びを感じる。 [jp1265,jp1268]", imagePrompt: "Cutaway view of Lexus ES emblem with integrated millimeter wave radar transparency and glowing light, connected to Dolby Atmos audio system and TBlocks seat material, highlighting advanced technology for global markets", sourceNewsIds: ["jp1265", "jp1268"] },
+            ],
+            cn: [
+                { id: 1178, img: "images/idea_1178.png", title: "磁気ボタン静寂体験", desc: "BYD唐のNFC磁気スマートボタンで20機能操作をタップのみで愉しむ。950km航続距離の安心感が漆黒めっき加飾部品の深みのある質感と相まって、車内静寂と触感の愉しみを最大化する。 [cn1089]", imagePrompt: "Close-up shot of a luxurious car interior with glossy black dashboard featuring a magnetic smart button, glowing softly with NFC chip technology, ambient lighting highlighting deep black plating texture, warm golden light from dashboard screens, serene atmosphere, ultra-high resolution photography", sourceNewsIds: ["cn1089"] },
+                { id: 1179, img: "images/idea_1179.png", title: "深黒インパネ触感", desc: "BYD唐のNFC磁気ボタンと漆黒めっき加飾部品を融合させ、深みのある黒インパネで触感愉しみを向上。950km航続距離の安心感と磁気ボタンの20機能操作が、車内の静寂と愉しみを引き立てる。 [cn1089]", imagePrompt: "Interior view of premium sedan showcasing magnetic smart button on deep black dashboard, glossy black plating texture, NFC chip glowing subtly, ambient warm lighting, luxurious materials, serene cabin atmosphere, cinematic composition, 8k resolution", sourceNewsIds: ["cn1089"] },
+            ],
+            in: [
+                { id: 1180, img: "images/idea_1180.png", title: "バイオJBL内装パッケージ", desc: "シトロエンeC3XのJBLスピーカーとLEDヘッドライトを囲むように、再生プラスチック製のバイオ素材パネルを配置。自然の温かみでEVの冷たさを補い、乗員が癒やされつつ音楽を愉しみながら愉しむ。 [in1133]", imagePrompt: "Interior shot of Citroen eC3X cabin featuring JBL speaker system, LED headlights, and dashboard wrapped in textured beige bio-based recycled material panels. Soft natural lighting highlights the premium eco-touch of the new interior surfaces.", sourceNewsIds: ["in1133"] },
+                { id: 1181, img: "images/idea_1181.png", title: "Welpitシルバード特別仕様", desc: "シボレーシルバードの16.3インチタッチスクリーンとSuper Cruiseを、Welpitウェルネスコックピット技術で統合。ミリ波レーダーがドライバーの疲労を検知して、車内照明や香りが自動で変化し、走行を愉しむ。 [in1140]", imagePrompt: "Chevrolet Silverado interior cockpit view showing a large 16.3-inch touchscreen display, with ambient lighting changing color from blue to warm orange. Subtle glowing indicators suggest sensor technology monitoring driver wellbeing.", sourceNewsIds: ["in1140"] },
+            ],
+            us: [
+                { id: 1182, img: "images/idea_1182.png", title: "ウェルネスEVコックピット", desc: "テスラモデルYの16.0インチスクリーンに抗菌消臭機能。シートサイドボラーリングと大腿部サポートに空気清浄。運転者がリラックスして幸せ。マツダCX-5の15.6インチスクリーンに消臭。物理ボタン削減で集中力がUP。 [us1083]", imagePrompt: "A futuristic Tesla Model Y performance interior with a large 16-inch dashboard touchscreen displaying a calming nature scene. The seats feature integrated side bolsters and thigh support with subtle air vents emitting a gentle blue glow. Soft ambient lighting highlights the premium leather texture.", sourceNewsIds: ["us1083"] },
+                { id: 1183, img: "images/idea_1183.png", title: "骨格樹脂インパネ", desc: "豊田合成樹脂インパネリンフォース技術で軽量化。テスラ後部スクリーンを樹脂インパネに適合。マツダCX-5の15.6インチスクリーンも樹脂インパネに。運転者が快適で安全。 [us1080]", imagePrompt: "A sleek Mazda CX-5 interior dashboard featuring a large 15.6-inch touchscreen. The dashboard is made of a high-strength, lightweight resin material with a smooth matte finish. Warm interior lighting emphasizes the modern material texture and ergonomic design.", sourceNewsIds: ["us1080"] },
+            ],
+            eu: [
+                { id: 1184, img: "images/idea_1184.png", title: "振動で愉しむタイカン", desc: "ポルシェ・タイカンに現代車式バーチャルギアボックスE-Shiftを追加。シフト時の微細な振動を愉しみ、低抵抗タイヤで最大12マイル増えた航続距離も喜ばれる。内装も最新世代へ更新され、コネクテッド機能で欧州ドライバーがワクワクする体験を創出する。 [eu1044]", imagePrompt: "A sleek Porsche Taycan interior with a driver smiling while shifting gears, subtle vibration lines emanating from the gear stalk, modern digital dashboard glowing, warm ambient lighting, high fidelity texture, cinematic composition, photorealistic, 8k resolution, focus on driver's joyful expression", sourceNewsIds: ["eu1044"] },
+                { id: 1185, img: "images/idea_1185.png", title: "Twingoの愛らしいコックピット", desc: "レノワール・Twingoの英国発売を記念し、2万ポンド未満の都市用EVとして再評価。予算重視でも退屈ではない内装とコックピットで愛らしいデザインを堪能。EV三冠を達成した信頼性と欧州の狭い路地での走行愉悦を融合させる。 [eu1045]", imagePrompt: "A compact Renault Twingo city car interior, playful and colorful dashboard, driver enjoying a narrow street corner, sunlight streaming through windows, detailed stitching on seats, vibrant atmosphere, photorealistic rendering, 8k resolution, focus on the charming cockpit design", sourceNewsIds: ["eu1045"] },
+            ],
+        }
+    },
+{
         date: "2026-06-16",
         analysis: {
             jp: "インテリアのデザイン・加飾視点[jp1254]と小型ワイヤレス充電ホルダの進化[jp1255]を軸に発想する。シートベルトバックルの光る演出[jp1254]をインテリア演出に昇華し、充電ホルダ[jp1255]を音響空間に最適化する。これにより視覚的・聴覚的快楽を両立させ、ユーザーの喜びを最大化する。[jp1254]は発光演出の視覚的快楽を、[jp1255]は音響体験の聴覚的快楽をそれぞれ補完する。",
