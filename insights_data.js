@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-18",
+        analysis: {
+            jp: "トヨタノア/ヴォクシーのダッシュボードトレイ[jp1277]は、海外展開で重視される「現地調達」の視点を組み込み、海外工場生産によるコスト削減と環境配慮をアピール。スズキクロスビー向けナビジャンパー[jp1272]は、地域ごとのナビシステム統合を支援し、販売網の拡大に貢献する。豊田合成のUV-C LED技術を組み合わせることで、グローバル基準を満たす衛生管理ソリューションを可能にする。両案とも、既存ニュースを基に市場参入戦略を強化する。",
+            cn: "ニュースcn1105のNWMソフトウェア更新とOnvo Coconut+リリースを安全視点で再構成。NiOの70万台更新により、衝突時緊急脱出を支援する「自動ドアロック解除」機能を実装[cn1105]。子供用安全座席の固定を強化し、NVIDIA Orin-Xチップの演算力で瞬時に判断する。ニュースcn1101の奇瑞PHEVは、BYDシャークとの競合を背景に、安全なPHEVプラットフォームを共有[cn1101]。2.5リッターターボと170km電気走行のハイブリッド技術を、豊田合成多機能コンソールに連携させる。",
+            in: "1件目はインド自動車部品大手10社の内装・安全装備牽引[in1148]を、高級感の視点で捉えコックピットの静寂と質感を強調します。2件目は豊田合成音の可視化技術[in1142]とPorsche Taycanの仮想エンジン音を組み合わせ、視覚と聴覚の両方で楽しさを提供します。",
+            us: "マツダのCX-5でHVACをタッチスクリーンへ移行する動きは、海外市場での現地化戦略を強化する好機だ[us1090]。BASFの3D繊維アームレストはアパレル技術の導入で軽量化・リサイクル性を高め[us1098]、グローバルサプライチェーンの効率化に寄与する。これらを組み合わせることで、欧州や北米市場での環境規制対応や、高級感あふれる内装設計を両立できる。豊田合成の技術とマツダのプラットフォームを掛け合わせ、海外工場生産を視野に入れた内装革新を推進する[us1097]。",
+            eu: "マセラティのMCXtremaプラットフォーム刷新ニュース[eu1056]に基づき、V6の582bhp出力やEVの航続距離335マイルなど、高性能な要素を「運転の愉しみ」として捉えます。金属製シフトスイッチの質感や、MCXtremaの剛性から生まれる乗り心地を「触れる喜び」に焦点を当てます。豊田合成のUV-C LED技術を内装空間に活用し、除菌機能と快適性を融合させます。",
+        },
+        ideas: {
+            jp: [
+                { id: 1186, img: "images/idea_1186.png", title: "グローバルダッシュボード", desc: "トヨタノア/ヴォクシーのナビ背面スペースを海外市場向けに活用。ABS樹脂で海外工場生産を想定し、スマホスタンド機能で現地需要に対応。工具不要で約30秒装着の簡易性は、現地販売網拡大に有利で、海外展開をうれしくする。 [jp1277]", imagePrompt: "A modern car dashboard interior view focusing on a sleek black ABS dashboard tray mounted behind a navigation screen. Soft natural light from outside highlights the tray's heat-resistant material. A smartphone rests securely on the built-in stand, and sunglasses are placed beside it, emphasizing practical organization in a global market setting.", sourceNewsIds: ["jp1277"] },
+                { id: 1187, img: "images/idea_1187.png", title: "クロスビーナビジャンパー", desc: "スズキクロスビー向けナビジャンパーで、海外市場へのナビシステム統合を支援。走行中テレビ視聴やナビ操作を可能にし、税込み2万7280円の価格で販売網拡大を促す。現地適応技術で海外展開をうれしくし、地域ごとのナビ統合を支援。 [jp1272]", imagePrompt: "A close-up of a Suzuki Crosby dashboard with a TV-NAVI Jumper device installed behind the navigation screen. The device features a sleek black finish with a visible TV switch button. Soft ambient lighting highlights the device's connection points, emphasizing its role in integrating navigation systems across different markets.", sourceNewsIds: ["jp1272"] },
+            ],
+            cn: [
+                { id: 1188, img: "images/idea_dummy.svg", title: "緊急脱出アシスト", desc: "NiOのNWM更新で衝突時自動ドアロック解除を実現。70万台に展開されるNVIDIA Orin-Xチップの演算力を活用し、子供安全座席の固定を強化。緊急時でも家族が安全に脱出できる喜びを体験できます。 [cn1105]", imagePrompt: "A NiO vehicle interior at dusk, emergency red light flashing on the dashboard, a child safety seat securely locked with a digital display showing 'Emergency Unlock Ready', warm safety glow on the seats, NVIDIA Orin-X chip visible on the center console, cinematic lighting.", sourceNewsIds: ["cn1105"] },
+                { id: 1189, img: "images/idea_1189.png", title: "PHEVスマートコンソール", desc: "奇瑞PHEVの2.5リッターターボと170km電気走行技術を豊田合成多機能コンソールに連携。BYDシャークとの競合を勝ち抜く安全なPHEVプラットフォームを共有。ワイヤレス充電とリバーシブルアームレストで、ドライブの幸せを満喫できます。 [cn1101]", imagePrompt: "A luxury car interior featuring a Toyota Motor Corporation multi-function console, a BYD Shark competitor vehicle in the background, a 2.5 liter turbo engine visible, a 170km electric range display, wireless charging pad lit, a reversible armrest with warm LED lights.", sourceNewsIds: ["cn1101"] },
+            ],
+            in: [
+                { id: 1190, img: "images/idea_1190.png", title: "インド高級コックピット", desc: "Samvardhana Mothersonの配線ハーネス技術を応用し、Boschのブレーキシステムと同レベルの安全装備を備えたコックピットを打造。静粛性と高級な内装のフィット感を重視し、乗客が安全で落ち着いた空間を愉しめるパッケージを提案します。 [in1148]", imagePrompt: "Luxury car cockpit interior with premium materials, detailed wiring harness visible as artistic element, soft ambient lighting, Bosch brake system components subtly integrated, high-end finish", sourceNewsIds: ["in1148"] },
+                { id: 1191, img: "images/idea_1191.png", title: "可視化EVサウンド", desc: "Porsche Taycanの仮想エンジン音とE-Shiftシステムを組み合わせ、豊田合成の音の可視化技術でギアチェンジの感覚を視覚的に表現。乗客が車両の動きと音を同時に愉しみ、インタラクティブなドライブ体験を新創します。 [in1142]", imagePrompt: "Porsche Taycan digital cluster showing gear indicator visualization, acoustic waveforms overlaid on dashboard, glowing E-Shift system interface, futuristic lighting effects", sourceNewsIds: ["in1142"] },
+            ],
+            us: [
+                { id: 1192, img: "images/idea_1192.png", title: "グローバルHVACタッチコックピット", desc: "マツダCX-5のタッチスクリーンHVAC技術を欧州車向けに移植。物理ボタン15個から視線低下を最小化し、運転中の視認性UP。海外市場参入時に「視線を奪わない先進技術」で欧州ドライバーに喜んでもらう。 [us1090]", imagePrompt: "European driver's hands lightly touching a sleek curved glass screen inside a modern car cockpit, sunlight reflecting off the dashboard, minimalist design with soft ambient lighting, focusing on the ease of use and high visibility", sourceNewsIds: ["us1090"] },
+                { id: 1193, img: "images/idea_1193.png", title: "リサイクルアームレストモジュール", desc: "BASFとWacoalの3D繊維アームレスト技術を北米EVに採用。モノマテリアル設計で軽量化とリサイクル性を高め、環境意識の高い米国市場で「サステナブルな豪華さ」に満足感。 [us1098]", imagePrompt: "Close-up of a 3D woven fabric armrest in a car interior, showcasing the texture of BASF Elastollan TPU material, soft warm lighting highlighting the material's eco-friendly nature and premium feel", sourceNewsIds: ["us1098"] },
+            ],
+            eu: [
+                { id: 1194, img: "images/idea_1194.png", title: "金属シフトの愉しむ空間", desc: "マセラティのMCXtremaプラットフォームの剛性と、金属製シフトスイッチ[jp eu1056]の質感を活かし、V6の582bhpのパワーで走る時の心地よさを体感できる内装空間を設計します。 [eu1056]", imagePrompt: "Luxurious interior of a Maserati concept car with a metallic gear shift lever glowing softly, driver's hand touching the metal switch, sunlight streaming through windows highlighting the premium texture, warm and inviting atmosphere", sourceNewsIds: ["eu1056"] },
+                { id: 1195, img: "images/idea_1195.png", title: "UV-C LEDの清潔なコックピット", desc: "マセラティのEVモデルの335マイル航続距離[jp eu1056]を実現する内装空間に、豊田合成のUV-C LED内装除菌システムを導入し、長時間のドライブでも清潔で快適な空間を維持します。 [eu1056]", imagePrompt: "Clean and bright EV interior with subtle blue UV-C LED lighting embedded in dashboard vents and door panels, fresh air visualization, Maserati GT styling cues, futuristic and hygienic design", sourceNewsIds: ["eu1056"] },
+            ],
+        }
+    },
+{
         date: "2026-06-17",
         analysis: {
             jp: "第1案はトヨタ紡織のレクサスES新型採用新構造シート[jp1265]と面発光ドアトリム[jp1265]を「グローバル戦略」視点が。海外市場向けにCO2削減素材で現地調達をアピールし、体圧分散性で快適さを訴求する。第2案は豊田合成の発光ミリ波レーダー透過エンブレムを起点に、トヨタ紡織のTBlocksシート[jp1265]やカロッツェリアのDolby Atmos音響[jp1268]を融合。海外展開時に高級感と技術性を同時に示し、現地ファンが喜びを感じる。両案ともニュースIDを根拠に、車名や技術名を明確に含め、重複を避けた新規発想を提案する。[jp1265][jp1268]",
