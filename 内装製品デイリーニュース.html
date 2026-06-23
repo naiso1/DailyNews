@@ -3299,6 +3299,9 @@ h1 {
 
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
+            const ignoreInsightDateFilter = isShowingDefaultNewRange();
+            const insightFrom = ignoreInsightDateFilter ? "" : from;
+            const insightTo = ignoreInsightDateFilter ? "" : to;
             const searchText = document.getElementById("searchInput").value.toLowerCase();
 
             const insightsData = window.DAILY_INSIGHTS || [];
@@ -3327,8 +3330,8 @@ h1 {
                         rangeEnd = parts[1];
                     }
                 }
-                if (from && rangeEnd < from) return false;
-                if (to && rangeStart > to) return false;
+                if (insightFrom && rangeEnd < insightFrom) return false;
+                if (insightTo && rangeStart > insightTo) return false;
 
                 // Active Countries Logic
                 const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
@@ -3560,7 +3563,7 @@ h1 {
                 const loadMoreDiv = document.createElement("div");
                 loadMoreDiv.style.cssText = "text-align:center; margin-top:20px;";
                 loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;">
-                    📚 もっと見る (あと ${filteredInsights.length - insightsVisibleLimit} 件)
+                    📚 もっと見る（過去の考察・アイデア例も表示 / あと ${filteredInsights.length - insightsVisibleLimit} 件）
                 </button>`;
                 container.appendChild(loadMoreDiv);
             }

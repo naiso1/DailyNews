@@ -22,7 +22,7 @@ IDEA_ANGLES_PATH = ROOT / "ニュース収集" / "idea_angles.json"
 TG_PRODUCTS_PATH = ROOT / "ニュース収集" / "tg_products.json"
 
 ENCODINGS = ["utf-8-sig", "utf-8", "cp932", "utf-16"]
-ANALYSIS_CHAR_LIMIT = 300
+ANALYSIS_CHAR_LIMIT = 420
 
 COUNTRY_MAP = {
     "日本": "jp",
@@ -640,6 +640,28 @@ def filter_analysis_refs_to_allowed(text: str, allowed_ids: set[str]):
     return out
 
 
+def analysis_unique_refs(text: str) -> set[str]:
+    ids = set()
+    for block in re.findall(r"\[([^\]]+)\]", text or ""):
+        for x in re.findall(r"[a-z]{2,}\d+", block, flags=re.IGNORECASE):
+            ids.add(x.lower())
+    return ids
+
+
+def bracket_bare_allowed_ids(text: str, allowed_ids: set[str]) -> str:
+    """Convert bare news ids like eu1069 to [eu1069] so the HTML can link them."""
+    if not text or not allowed_ids:
+        return text
+    out = text
+    for nid in sorted(allowed_ids, key=len, reverse=True):
+        # Python \w treats Japanese characters as word chars, so an ID next to
+        # Japanese text (例: 技術cn123の進化) would not be detected. Restrict
+        # boundaries to ASCII id characters instead.
+        pat = re.compile(rf"(?<![\[A-Za-z0-9_]){re.escape(nid)}(?![\]A-Za-z0-9_])", flags=re.IGNORECASE)
+        out = pat.sub(f"[{nid}]", out)
+    return out
+
+
 def rewrite_analysis_with_refs(endpoint: str, model: str, country: str, analysis_text: str, source_items: list):
     id_lines = []
     for it in source_items[:12]:
@@ -674,6 +696,83 @@ def rewrite_analysis_with_refs(endpoint: str, model: str, country: str, analysis
         return out if out else analysis_text
     except Exception:
         return analysis_text
+
+
+def ensure_analysis_ref_quality(
+    endpoint: str,
+    model: str,
+    country: str,
+    analysis_text: str,
+    source_items: list,
+    min_unique_refs: int = 4,
+) -> str:
+    if not analysis_text:
+        return analysis_text
+    allowed_ids = build_allowed_news_ids(source_items)
+    selected_items = select_analysis_items(source_items, limit=6)
+    selected_ids = [it.get("newsId", "").strip().lower() for it in selected_items if it.get("newsId")]
+    required_unique = min(min_unique_refs, len(selected_ids))
+
+    def _clean_candidate(value: str) -> str:
+        value = re.sub(r"^```(?:json)?\s*|\s*```$", "", (value or "").strip(), flags=re.IGNORECASE | re.MULTILINE)
+        value = re.split(r"\s*---\s*", value)[0].strip()
+        value = re.sub(r"\[\d+\]", "", value).strip()
+        value = bracket_bare_allowed_ids(value, allowed_ids)
+        return filter_analysis_refs_to_allowed(normalize_analysis_refs_per_sentence(value), allowed_ids)
+
+    def _quality_ok(value: str) -> bool:
+        return analysis_ref_coverage_ok(value) and len(analysis_unique_refs(value)) >= required_unique
+
+    text = _clean_candidate(analysis_text)
+    if _quality_ok(text):
+        return text
+    if not selected_items:
+        return text
+
+    id_lines = "\n".join(
+        f"- {it.get('newsId')}: {it.get('title', '')} / {it.get('desc', '')[:90]}"
+        for it in selected_items
+        if it.get("newsId")
+    )
+    prompt = (
+        "次の考察を、豊田合成の内装開発室向けの示唆として書き直してください。\n"
+        "目的はニュース要約ではなく、その国のトレンド・そこから考えられること・求められる内装部品/素材/操作体験を明確にすることです。\n"
+        "重要ルール:\n"
+        f"1) 参照IDは必ず [jp123] 形式。裸のIDは禁止。国は {country}。\n"
+        f"2) 可能な限り次の候補から{required_unique}件以上の異なるIDを使う。ただし文と直接関係するIDのみ使う。\n"
+        "3) 各文に1〜3件のIDを関連語の直後に入れる。文末に大量にまとめない。\n"
+        "4) 300〜420字程度。わかりやすい日本語。説明・注釈・コードフェンスは禁止。\n\n"
+        f"候補ニュース:\n{id_lines}\n\n"
+        f"元の考察:\n{analysis_text}\n"
+    )
+    try:
+        repaired = call_llm(endpoint, model, prompt)
+        repaired = _clean_candidate(repaired)
+        if repaired:
+            text = repaired
+    except Exception:
+        pass
+    if _quality_ok(text):
+        return text
+
+    strict_prompt = (
+        "以下の候補ニュースだけを根拠に、考察を最初から作り直してください。\n"
+        "絶対条件:\n"
+        f"- {required_unique}件以上の異なる候補IDを必ず使う\n"
+        "- すべての参照は [jp123] 形式のみ。裸ID、id:、番号参照は禁止\n"
+        "- 各文に1〜3件のIDを入れる。IDのない文は禁止\n"
+        "- 300〜420字程度。豊田合成の内装開発室向けに、トレンド・示唆・求められる内装部品/素材/操作体験を書く\n"
+        "- 考察文のみ返す\n\n"
+        f"国: {country}\n"
+        f"候補ニュース:\n{id_lines}\n"
+    )
+    try:
+        repaired = _clean_candidate(call_llm(endpoint, model, strict_prompt))
+        if repaired:
+            text = repaired
+    except Exception:
+        pass
+    return text
 
 
 def shorten_analysis_with_llm(endpoint: str, model: str, analysis_text: str, limit: int = ANALYSIS_CHAR_LIMIT) -> str:
@@ -799,6 +898,39 @@ def _item_for_prompt(it: dict) -> str:
     return f"- {id_text}{title} / {desc} / {tags}{score_text}"
 
 
+def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
+    def _score(it: dict):
+        tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
+        interior_score = it.get("interiorScore")
+        interior_score = float(interior_score) if interior_score is not None else 0.0
+        blob = f"{it.get('title', '')} {it.get('desc', '')} {tags}".lower()
+        keyword_bonus = 0
+        for kw in ["シート", "ディスプレイ", "HMI", "HUD", "コックピット", "コンソール", "ステア", "イルミ", "安全", "新素材", "音響", "快適", "操作"]:
+            if kw.lower() in blob:
+                keyword_bonus += 4
+        image_bonus = 10 if it.get("imageInterior") is True else 0
+        weak_penalty = 0
+        for kw in ["不正", "調査", "投資", "株", "補助金", "販売台数", "工場", "生産台数"]:
+            if kw.lower() in blob:
+                weak_penalty += 10
+        return (interior_score + keyword_bonus + image_bonus - weak_penalty, len(it.get("desc", "")))
+
+    candidates = [
+        it for it in items
+        if it.get("newsId") and it.get("title") and it.get("desc")
+    ]
+    preferred = [
+        it for it in candidates
+        if it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 55
+    ]
+    # Prefer strong interior signals, but do not stop at 1-2 items. Country
+    # analysis needs enough source breadth to explain a market trend.
+    preferred.sort(key=_score, reverse=True)
+    fallback = [it for it in candidates if it not in preferred]
+    fallback.sort(key=_score, reverse=True)
+    return (preferred + fallback)[:limit]
+
+
 def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dict]]:
     def _score(it: dict):
         tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
@@ -847,7 +979,8 @@ def make_country_prompt(
     idea_anchor_groups: list[list[dict]] | None = None,
 ):
     summary_lines = [f"[{country}] 件数: {len(items)}"]
-    for it in items[:5]:
+    analysis_items = select_analysis_items(items, limit=6)
+    for it in analysis_items:
         summary_lines.append(_item_for_prompt(it))
     summary = "\n".join(summary_lines)
     idea_anchor_groups = idea_anchor_groups or select_idea_anchor_groups(items, need_count=need_count)
@@ -858,8 +991,7 @@ def make_country_prompt(
         for it in group[:2]:
             anchor_lines.append(_item_for_prompt(it))
     anchors_text = "\n".join(anchor_lines) if anchor_lines else "なし"
-    if anchor_lines:
-        summary = anchors_text
+    analysis_ids = [it.get("newsId", "") for it in analysis_items if it.get("newsId")]
     duplicate_guard = build_duplicate_guard_text(history_ideas or [], max_items=12)
     angles = load_idea_angles()
     angle = random.choice(angles) if angles else ""
@@ -904,7 +1036,11 @@ def make_country_prompt(
     - imagePromptは必須。英語で、1枚の画像として何を見せるかを具体化する
     - imagePromptはアイデアごとに構図・対象物・素材・光・色を変え、似た画像にならないようにする
     - titleとdescにマークダウン記法（**太字**等）を使用しない
-    - analysisは300字以内（厳守）。文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
+    - analysisは300〜420字程度。単なるニュース要約ではなく、豊田合成の内装開発室向けの示唆として書く
+    - analysisは「その国で何がトレンドか」「そこから何が考えられるか」「今後どんな内装部品・素材・操作体験が求められるか」を、わかりやすい言葉で書く
+    - analysisでは具体ニュースをできるだけ幅広く使う。利用可能なら4〜6件の異なるニュースIDを取り上げる。候補ID: {",".join(analysis_ids) or "なし"}
+    - analysisは開発者が次に検討できる言葉にする（例: 低価格EV向けの触感品質、後席快適、物理操作と大画面の両立、環境材、照明、安全表示など）
+    - analysisは文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
     - 参照は文末にまとめず、関連語の直後に入れる
     - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）
     - id: という文字は書かない
@@ -1187,12 +1323,25 @@ def main():
                             analysis_text,
                             grouped[key],
                         )
+                    analysis_text = ensure_analysis_ref_quality(
+                        args.llm_endpoint,
+                        args.llm_model,
+                        key,
+                        analysis_text,
+                        grouped[key],
+                    )
                     analysis_final = filter_analysis_refs_to_allowed(
                         normalize_analysis_refs_per_sentence(analysis_text),
                         allowed_ids,
                     )
                     analysis_final = shorten_analysis_with_llm(
                         args.llm_endpoint, args.llm_model, analysis_final
+                    )
+                    analysis_final = filter_analysis_refs_to_allowed(
+                        normalize_analysis_refs_per_sentence(
+                            bracket_bare_allowed_ids(analysis_final, allowed_ids)
+                        ),
+                        allowed_ids,
                     )
                     analysis_out[key] = analysis_final
                     deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
