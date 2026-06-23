@@ -115,6 +115,22 @@ LLM_IMAGE_MAX_BYTES = 3_000_000
 LLM_IMAGE_MAX_SIZE = 768
 LLM_IMAGE_FORMAT = "JPEG"
 
+
+def _is_loopback_url(url):
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return False
+    return host in {"127.0.0.1", "localhost", "::1"}
+
+
+def _post_llm(**kwargs):
+    if _is_loopback_url(LLM_ENDPOINT):
+        session = requests.Session()
+        session.trust_env = False
+        return session.post(LLM_ENDPOINT, **kwargs)
+    return requests.post(LLM_ENDPOINT, **kwargs)
+
 # Summary limits
 SUMMARY_TITLE_LIMIT = 50
 SUMMARY_CONTENT_LIMIT = 150
@@ -874,11 +890,11 @@ def call_llm_classify(title, content, image_url="", mode="both"):
             ],
             "temperature": 0.2,
         }
-        resp = requests.post(LLM_ENDPOINT, json=payload, timeout=LLM_TIMEOUT)
+        resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200:
             if isinstance(content_payload, list):
                 payload["messages"][0]["content"] = prompt
-                resp = requests.post(LLM_ENDPOINT, json=payload, timeout=LLM_TIMEOUT)
+                resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
             if resp.status_code != 200:
                 if not LLM_ERROR_LOGGED:
                     print(f"  ✗ LLM呼び出しエラー: HTTP {resp.status_code}")
@@ -1070,10 +1086,10 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         "temperature": 0.1,
     }
     try:
-        resp = requests.post(LLM_ENDPOINT, json=payload, timeout=LLM_TIMEOUT)
+        resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200 and used_image:
             payload["messages"][0]["content"] = prompt
-            resp = requests.post(LLM_ENDPOINT, json=payload, timeout=LLM_TIMEOUT)
+            resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200:
             if not LLM_ERROR_LOGGED:
                 print(f"  LLM interior assessment error: HTTP {resp.status_code}")
@@ -1446,7 +1462,7 @@ def call_llm_text(prompt):
         "temperature": 0.2,
     }
     try:
-        resp = requests.post(LLM_ENDPOINT, json=payload, timeout=LLM_TIMEOUT)
+        resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200:
             return ""
         return resp.json().get("choices", [{}])[0].get("message", {}).get("content", "")

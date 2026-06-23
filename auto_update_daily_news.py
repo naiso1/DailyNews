@@ -294,9 +294,25 @@ def _models_endpoint(endpoint: str):
     return base + "/models"
 
 
+def _is_loopback_url(url: str):
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return False
+    return host in {"127.0.0.1", "localhost", "::1"}
+
+
+def _request_llm(method: str, url: str, **kwargs):
+    if _is_loopback_url(url):
+        session = requests.Session()
+        session.trust_env = False
+        return session.request(method, url, **kwargs)
+    return requests.request(method, url, **kwargs)
+
+
 def _pick_model(endpoint: str, fallback: str):
     try:
-        resp = requests.get(_models_endpoint(endpoint), timeout=15)
+        resp = _request_llm("GET", _models_endpoint(endpoint), timeout=15)
         resp.raise_for_status()
         data = resp.json()
         if isinstance(data, dict) and "data" in data and data["data"]:
@@ -319,13 +335,13 @@ def call_llm(endpoint, model, prompt):
         "temperature": 0.7,
         "max_tokens": 1200,
     }
-    resp = requests.post(endpoint, json=payload, timeout=180)
+    resp = _request_llm("POST", endpoint, json=payload, timeout=180)
     if resp.status_code >= 400:
         # retry with auto-selected model
         alt_model = _pick_model(endpoint, chosen_model)
         if alt_model and alt_model != chosen_model:
             payload["model"] = alt_model
-            resp = requests.post(endpoint, json=payload, timeout=180)
+            resp = _request_llm("POST", endpoint, json=payload, timeout=180)
     if resp.status_code >= 400:
         # Try /v1/responses as fallback
         responses_endpoint = re.sub(r"/chat/completions$", "/responses", endpoint)
@@ -335,7 +351,7 @@ def call_llm(endpoint, model, prompt):
             "temperature": 0.7,
             "max_output_tokens": 1200,
         }
-        resp = requests.post(responses_endpoint, json=responses_payload, timeout=180)
+        resp = _request_llm("POST", responses_endpoint, json=responses_payload, timeout=180)
     if resp.status_code >= 400:
         raise requests.HTTPError(f"{resp.status_code} {resp.text}", response=resp)
     data = resp.json()

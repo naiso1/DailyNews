@@ -22,6 +22,22 @@ LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
+LOOPBACK_NO_PROXY = ("127.0.0.1", "localhost", "::1")
+
+
+def configure_loopback_no_proxy():
+    """Prevent local LM Studio calls from being routed through a system proxy."""
+    for key in ("NO_PROXY", "no_proxy"):
+        existing = os.environ.get(key, "")
+        parts = [p.strip() for p in existing.split(",") if p.strip()]
+        lowered = {p.lower() for p in parts}
+        for host in LOOPBACK_NO_PROXY:
+            if host.lower() not in lowered:
+                parts.append(host)
+        os.environ[key] = ",".join(parts)
+
+
+configure_loopback_no_proxy()
 
 
 def log(msg):
@@ -53,6 +69,7 @@ def _model_loaded(host):
 
 
 def ensure_lm_studio():
+    configure_loopback_no_proxy()
     host = _llm_host()
     model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL)
 
@@ -251,6 +268,7 @@ def run_cmd(cmd, label, log_file, cwd=None):
     log(f"[RUN] {label}: {' '.join(cmd)}")
     proc = None
     try:
+        configure_loopback_no_proxy()
         env = os.environ.copy()
         env["PYTHONUNBUFFERED"] = "1"
         try:

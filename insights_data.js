@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-22",
+        analysis: {
+            jp: "1件目はトヨタシエンタJUNOの取り外し家具[jp1282]を起点に、高級感ある静寂空間を演出するインテリアを提案する。2件目は日産キックスのソフトマテリアルとディスプレイ[jp1283]と、豊田合成の発光エンブレム技術を融合させ、静寂な高級感と光の演出を組み合わせる。両案とも既存素材の革新性で、ユーザーが喜ぶ体験を提供する。",
+            cn: "吉利の830kW PHEV SUV[cn1109]とスマート#2コンセプト[cn1108]の二つのニュースを安全・ウェルネス視点で再構築する。PHEVの高出力化に伴う衝突時安全確保と、スマート#2の都市安全システムを組み合わせることで、緊急脱出時の安心感を強化する。さらに、スマート#2のコンパクトアーキテクチャとバッテリー容量[cn1108]を基に、Welpitウェルネスコックピットと統合し、乗員状態に応じた快適環境を創出する。こうすることで、安全と癒やしの両面からユーザーに喜ばれる新体験を提供できる。",
+            in: "第1案はインド市場向けのSlaviaフェイスリフト[in1152]を踏まえ、EV化に伴う熱管理を強化した「スリム型ヒートポンプアームレスト」を提案する[in1155]。ダッシュボードに配置し、インドの高温環境下でも快適性を確保する。第2案は豊田合成の「新漆黒めっき加飾部品」を応用し、Slaviaのダークトーンインテリアと連携する「深光漆黒ダッシュボード」を考案する[in1156]。両案ともコックピットのデザイン変更を背景に、内装の質感や機能的な新しさを同時に実現する[in1158]。",
+            us: "マツダCX-5の15.9インチ画面とトヨタカローラクロスなどの7台のSUV[us1102][us1099]を軸に、EV化に向けた熱管理と内装モジュール化の2方向で着想します。CX-5の高級内装をEV用熱管理パネルへ。SUVの快適性をEV専用フロア熱管理に転用[us1099]。双方でEV特有のメリットを最大化し、ユーザーが新車購入で得られる満足感を強調します[us1103]。",
+            eu: "今回の発想は、インフィニオンとAWSが自動車MCU開発を仮想化するクラウドMCUプラットフォーム[eu1069]と、BYDが英国でピックアップ販売を開始した「Shark」[eu1065]を素材革新視点で再解釈する。インフィニオンとAWSの技術は、ソフトウェア定義車両の素材最適化に寄与[eu1069]する。BYDのシャークは、英国市場で展開されるEVプラットフォーム[eu1065]である。過去アイデアの焼き直しを避け、アンカーニュース固有の技術名をdescに必須で記載する。2件目の豊田合成樹脂インパネリンフォースを、仮想化技術に関連するMCU開発[eu1069]と組み合わせる。",
+        },
+        ideas: {
+            jp: [
+                { id: 1196, img: "images/idea_1196.png", title: "静寂家具空間", desc: "トヨタシエンタJUNOの取り外し家具モジュールをインテリア化し、専用フロアで高級感ある静寂空間を創出。後席撤去の開放性を活かし、家具配置で個々の好みに合わせた静寂な空間を楽しめる。ユーザーが新しさで喜ぶ。 [jp1282]", imagePrompt: "Minimalist interior of a car cabin with a removable furniture module placed on a custom floor, featuring soft lighting and high-end materials, showcasing a tranquil luxury atmosphere, 2-person seating layout, detailed texture of furniture", sourceNewsIds: ["jp1282"] },
+                { id: 1197, img: "images/idea_1197.png", title: "発光エンブレム静寂", desc: "日産キックスのソフトマテリアルインテリアに豊田合成の発光ミリ波レーダー透過エンブレムを組み合わせ、静寂な高級感と光の演出で快適性を向上。e-POWER搭載車に搭載し、走行中も美しい光でユーザーが喜ぶ。 [jp1283]", imagePrompt: "Interior of Nissan Kicks with soft materials and a glowing emblem that allows millimeter wave radar signals to pass through, featuring a 12.3-inch dual display, e-POWER technology, ambient lighting, and a serene luxury atmosphere", sourceNewsIds: ["jp1283"] },
+            ],
+            cn: [
+                { id: 1198, img: "images/idea_1198.png", title: "緊急脱出安心席", desc: "吉利Galaxy Cruiser 830kW PHEVの衝突時自動ロック解除技術をWelpitウェルネスコックピットと融合。衝突直後にシートが自動解放され、830kWという高出力も安全に制御。家族連れが緊急時に安心し、子供も怖がらずに避難できる。安全でうれしい体験を提供する。 [cn1109]", imagePrompt: "A futuristic SUV interior during an emergency evacuation. Emergency lights glow soft amber, car doors unlocked automatically, a child and adult exiting safely through open doors. Dynamic lighting showing safety sensors active, high-tech dashboard with Welpit wellness interface. Clean composition with warm emergency lighting, high contrast between dark interior and bright exit path.", sourceNewsIds: ["cn1109"] },
+                { id: 1199, img: "images/idea_1199.png", title: "ウェルネス安心座席", desc: "スマート#2コンセプトの都市向け安全システムにWelpitウェルネスコックピットを統合。35.7kWhバッテリー搭載のEVで、ミリ波レーダーが乗員の気分を検知。疲れた時自動で温度や香りを調整し、都市通勤でもリラックスして過ごせる。安全でうれしい日常を創出する。 [cn1108]", imagePrompt: "Modern compact EV interior with Welpit wellness technology active. Soft blue ambient lighting, fresh lavender scent particles visible in air, driver looking relaxed and smiling. Dashboard shows wellness interface with heart rate monitoring, compact architecture optimized for urban use. Clean composition with soft natural light, warm tones, showing peaceful driving experience.", sourceNewsIds: ["cn1108"] },
+            ],
+            in: [
+                { id: 1200, img: "images/idea_1200.png", title: "スリム熱管理アームレスト", desc: "インドのSlaviaフェイスリフト用EVアームレストを新設計。ダッシュボードのヒートポンプ技術を統合し、高温環境でも冷感維持。運転者の暑さ対策にうれしさをもたらす。 [in1152]", imagePrompt: "A futuristic car armrest with built-in slim heat pump technology, sleek black finish, glowing cool blue ambient light, Indian market context, high-end interior detail, studio lighting", sourceNewsIds: ["in1152"] },
+                { id: 1201, img: "images/idea_1201.png", title: "深光漆黒インテリア", desc: "Slaviaのダークトーンダッシュボードに豊田合成新漆黒めっきを適用。光を反射しない深みのある漆黒で、高級感あるコックピットを実現。乗客の視覚的愉しさを届ける。 [in1155]", imagePrompt: "Luxurious car interior with deep black matte dashboard, no light reflection, rich texture, dark ambient lighting, Indian market aesthetic, high detail photography", sourceNewsIds: ["in1155"] },
+            ],
+            us: [
+                { id: 1202, img: "images/idea_1202.png", title: "EV熱管理コックピット", desc: "マツダCX-5の15.9インチ画面をEV専用熱管理パネルへ進化。BOSEオーディオで静寂を維持しながら、バッテリー冷却を可視化。高級感とEVの安心感を同時に体験できる、ユーザーがうれしくなるデザインです。 [us1102]", imagePrompt: "Interior view of a modern electric vehicle cockpit featuring a large 15.9 inch curved touchscreen display with a sleek dashboard. Soft ambient lighting highlights the premium Bose audio system and a subtle digital overlay showing battery thermal management graphics on the screen. Warm interior tones with high-quality materials.", sourceNewsIds: ["us1102"] },
+                { id: 1203, img: "images/idea_1203.png", title: "EVフロア熱管理モジュール", desc: "トヨタカローラクロスや現代テucsonの7台SUVの快適性技術をEVフロアに移植。足元の余熱をリサイクルしてバッテリー加熱に活用。価格以上のプレミアム体験とEV効率向上を両立し、所有者がうれしくなる画期的ソリューションです。 [us1103]", imagePrompt: "Close-up view of the floor area inside an electric SUV showing a sleek integrated thermal management panel beneath the seats. Warm glowing elements indicate recycled heat being circulated. Premium carpet textures and ambient lighting suggest a high-tech wellness environment with visible energy efficiency indicators.", sourceNewsIds: ["us1103"] },
+            ],
+            eu: [
+                { id: 1204, img: "images/idea_1204.png", title: "クラウド最適化再生内装", desc: "インフィニオンとAWSのクラウドMCUプラットフォーム[jp eu1069]を活用し、自動車内装やコックピット開発の効率化を実現。再生素材を最適配置し、ソフトウェア定義車両時代の素材革新を愉しむ。[jp eu1069] [eu1069]", imagePrompt: "A futuristic car cockpit interior with a dashboard made of translucent recycled bio-material that glows softly. The interface displays holographic data streams from AWS cloud, showing real-time material optimization maps. Soft blue ambient lighting, clean minimalist design, high-tech atmosphere.", sourceNewsIds: ["eu1069"] },
+                { id: 1205, img: "images/idea_1205.png", title: "骨格樹脂EVピックアップ", desc: "BYDのシャーク[jp eu1065]に豊田合成の骨格樹脂技術を適用。英国市場向けのEVピックアップで、鉄製インパネを樹脂化し軽量化。フォードランジャー対抗のARバッテリーを愉しむ。[jp eu1065] [eu1065]", imagePrompt: "A rugged pickup truck Shark 6 in the British countryside, featuring a glossy dark resin interior panel. The truck bed displays an AR overlay showing battery status. Golden hour lighting, natural textures, dynamic composition showing motion.", sourceNewsIds: ["eu1065"] },
+            ],
+        }
+    },
+{
         date: "2026-06-18",
         analysis: {
             jp: "トヨタノア/ヴォクシーのダッシュボードトレイ[jp1277]は、海外展開で重視される「現地調達」の視点を組み込み、海外工場生産によるコスト削減と環境配慮をアピール。スズキクロスビー向けナビジャンパー[jp1272]は、地域ごとのナビシステム統合を支援し、販売網の拡大に貢献する。豊田合成のUV-C LED技術を組み合わせることで、グローバル基準を満たす衛生管理ソリューションを可能にする。両案とも、既存ニュースを基に市場参入戦略を強化する。",
