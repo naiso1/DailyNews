@@ -1,5 +1,37 @@
-﻿window.DAILY_INSIGHTS = [
+window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-24",
+        analysis: {
+            jp: "2026年ユーロNCAP基準や高齢化社会への対応から、[jp1309]のように物理ボタンとのデジタル融合が必須になり、[jp1304]の上質な和製ミニ風内装体験も求められます。キャビン静粛性は[jp1303]のテスラ事例で示唆され、防水シートやアウトドア機能も[jp1305]のエクストレイルで確認できます。市場規模は[jp1310]で2031年15億6600万米ドルへ拡大し、端部装飾材の需要増が見られます。フォルクスワーゲンの[jp1308]キャンピングカー事例より、車中泊特化の空調制御も開発室課題です。",
+            cn: "中国ではバッテリー技術革新が内装設計を牽引している[cn1129]。CATLは厚みのあるバッテリーパックを採用し低床EVを実現する特許を取得した[cn1129]。これによりコックピット空間が確保され、内装の自由度が高まる[cn1129]。また全固体電池の商用化が4段階遅れているが[cn1127][cn1134]、ナトリウムイオン電池では今年1万台以上を目標に量産化を進める[cn1133]。さらに理想汽車L8は5Cバッテリーを搭載し[cn1130]、EMB技術で内装を新世代化する[cn1130]。CATLとGalbotは人型ロボットで電池工場を拡大し[cn1131]、具現知能ロボットを工場に導入する[cn1131]。これらの技術進歩は、内装素材や触感体験に新たな要求を投げかけている[cn1130]。低床化で後席の足元空間が増え[cn1129]、リサイクル素材との相性が問われる[cn1133]。",
+            in: "豊田合成開発室向けに内装開発トレンドを考察する。[in1176]よりパノラマサンルーフや大型ディスプレイがスパイショットで確認され、[in1174]のシトロエンはシート素材にレザーエッテを採用し、[in1179]のレンジローバーはコックピット進化でラグジュアリー基準を確立する。[in1173]のSkoda Peaqは91kWhバッテリーと7人乗りシートレイアウトで機能性を追求し、[in1175]のMGは2026年PHEVで新エネルギー車へ移行する。[in1180]のポルシェはハイブリッド化を継続し性能重視の設計を維持する。これらから、内装では高級感と機能性を両立する素材選択が重要で、EV化に伴いバッテリー搭載空間の最適化や、7人乗りなど多機能なシート配置が必要になる。また、ディスプレイの大型化やサンルーフとの連携で没入感あるコックピット体験を設計すべきだ。",
+            us: "北米市場では、軍事遺産を称えるデザイン[us1124]や高級SUVの最新HMI[us1123]がトレンドとなり、ストーリー性のある内装とデジタル体験が重視されています。トヨタがPHEVやデジタルキーを強化[us1122]する一方、欧州ではEVがガソリン車を上回る[us1121]状況で、バッテリーEV用の熱管理が急務です。これに対し、スレート社の簡素化[us1120]は物理操作の再定義を示唆しています。開発者は高級感と機能性の両立を課題としますが、V4ナードバイクの長距離走行性[us1126]から、軽量化技術の応用も有効です。物理操作とデジタルの融合[us1123]、素材と操作体験の再定義、EV用熱管理[us1121]を統合した内装部品開発が求められます。",
+            eu: "豊田合成内装開発室の技術考察です。まず車内衛生面では、現代・キアのFar-UVC除菌システムは乗車中動作可能な空気清浄技術として注目され[eu1089]、素材抗菌性や空気循環設計と連動し次世代内装の必須要素となります[eu1089]。次に、CariadのベルリンAI拠点では分散開発から単一プラットフォームへの移行が進み[eu1088]、内装制御の音声アシストやインテリジェントスピードアシストの精度向上に直結します[eu1085]。さらに、シェルの小型EV効率化コンセプトはバッテリー冷却技術の突破を示唆し[eu1084]、内装部品の熱管理機能や断熱素材の革新性が求められます[eu1084]。最後に、CATLのナトリウムイオン蓄電システムは2027年以降のエネルギー変革を意味し[eu1093]、内装の持続可能性や再生可能素材選択にも影響します[eu1093]。これらグローバルトレンドを内装開発室が注視すべきです[eu1093]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1226, img: "images/idea_1226.png", title: "EVフロア静寂空間", desc: "テスラ6人乗りモデルの静かなキャビンを再現。バッテリー下置きのEVフロアに吸音材を配置し、高齢者も安心する物理ボタンを統合。運転中も静かで安全な空間を創出。 [jp1309]", imagePrompt: "Modern EV interior with a spacious flat floor covered in acoustic foam panels, a physical silver control button cluster on the center console, soft ambient blue lighting, and a quiet minimalist dashboard with large display screen, viewed from the driver's seat perspective with natural daylight", sourceNewsIds: ["jp1309"] },
+                { id: 1227, img: "images/idea_1227.png", title: "軽量樹脂インパネ", desc: "豊田合成の樹脂インパネリンフォースで鉄製インパネを代替。ノートの上質な内装やフォルクスワーゲンのキャンピングカーのように、高級感と軽量化を両立。積立も楽で静かな空間を体験。 [jp1303]", imagePrompt: "High-end car interior dashboard made of glossy resin material with seamless molding technique, integrated with a physical button interface for safety, featuring tweed fabric texture accents, soft warm lighting, and a spacious cabin view with sliding door mechanism visible", sourceNewsIds: ["jp1303"] },
+            ],
+            cn: [
+                { id: 1228, img: "images/idea_1228.png", title: "再生素材低床コックピット", desc: "CATLが低床EVを実現する厚み削減技術を応用し、廃車由来プラスチック50%配合のELV材で内装を一新。空間確保で後席の足元広がりを実感。リサイクル材の質感向上で環境配慮と豪華さを両立し、開発者も消費者もうれしくなる [cn1129,cn1127]", imagePrompt: "A modern low-floor EV interior cockpit with light beige recycled plastic dashboard and door panels, soft ambient lighting, spacious footwell space for rear passengers, clean minimalist design, high quality texture close-up shot, natural daylight, photorealistic", sourceNewsIds: ["cn1129", "cn1127"] },
+                { id: 1229, img: "images/idea_1229.png", title: "ナトリウム電池触感内装", desc: "CATLがナトリウムイオン電池を1万台以上EVに採用する技術を内装開発に転用。5Cバッテリー搭載の理想L8のように高頻度充放電に耐えるリサイクル素材を、触感向上で高品質化。環境配慮と耐久性を兼ね備え、乗員も開発者もうれしくなる [cn1133,cn1130]", imagePrompt: "A close-up view of a car interior console made from textured recycled materials, warm lighting highlighting the tactile surface, a smartphone showing battery charging speed 5C, clean modern design, vibrant colors, high resolution, photorealistic", sourceNewsIds: ["cn1133", "cn1130"] },
+            ],
+            in: [
+                { id: 1230, img: "images/idea_1230.png", title: "サステナブルEVアームレスト", desc: "Skoda Peaqの91kWhバッテリー搭載EV SUV向けに、リサイクル素材を使用したアームレストを提案。パノラマサンルーフやADASを備えたマヒンドラ・スコルピオNのような高級感ある内装も視野に入れ、環境配慮と快適性を両立させたデザインで、ユーザーが地球に優しい車を選べる喜びを提供する。 [in1173,in1176]", imagePrompt: "A futuristic interior armrest made of recycled materials, glowing with soft green ambient light, placed in a modern EV SUV cabin with a panoramic sunroof, high-end textures, sustainable design concept, clean composition, 8k resolution", sourceNewsIds: ["in1173", "in1176"] },
+                { id: 1231, img: "images/idea_1231.png", title: "音の可視化シートトリム", desc: "シトロエンのAircross Comfort Editionに採用するレザーエッテシートと、豊田合成の音の可視化技術を組み合わせる。EV走行時の静寂性を演出しつつ、内装トリムが音の波を可視化する視覚的体験を提供し、安全装備のADASや大型ディスプレイと調和した、視覚と聴覚を愉しむ新しい内装体験を創出する。 [in1174,in1176]", imagePrompt: "Close-up view of a car interior seat trim made of leatherette, with a subtle holographic visualization of sound waves flowing across the surface, warm lighting, high-tech acoustic design, luxury feel, sharp focus, 8k resolution", sourceNewsIds: ["in1174", "in1176"] },
+            ],
+            us: [
+                { id: 1232, img: "images/idea_1232.png", title: "デジタル遺産コックピット", desc: "Jeep Wrangler Sargeの軍事遺産デザインを基に、デジタルキーとAR技術で乗降時の物語を演出。クラウンのデジタルキーをJeepに移植し、乗車時に歴史が映る。ユーザーは愛車の歴史を愛せる [us1124,us1122]", imagePrompt: "Interior of a 2027 Jeep Wrangler Sarge with military heritage design. Digital key projection on dashboard. AR overlay showing historical photos. Warm lighting.", sourceNewsIds: ["us1124", "us1122"] },
+                { id: 1233, img: "images/idea_1233.png", title: "骨格樹脂インパネモジュール", desc: "豊田合成樹脂インパネリンフォース技術で、スレート社の簡素モデルの空いたスペースを軽量で安全な骨格樹脂で埋める。EV用熱管理と組み合わせ、低価格でも高級感を保つ。開発者は軽量化を得意とする [us1120,us1122]", imagePrompt: "Lightweight resin dashboard panel on a budget EV. Honeycomb structure visible. Soft ambient lighting. Clean lines. Minimalist interior design.", sourceNewsIds: ["us1120", "us1122"] },
+            ],
+            eu: [
+                { id: 1234, img: "images/idea_1234.png", title: "健康内装低コスト化", desc: "キアPV5のFar-UVC除菌eu1089]技術を内装部材へ移植。乗車中も清潔な空間を提供し、家族全員が安全に楽しめるコックピット作りを愉しむ。 [eu1089]", imagePrompt: "Modern car interior with glowing blue UV-C lights embedded in the dashboard and ceiling, clean minimalist design, soft ambient lighting, healthy atmosphere", sourceNewsIds: ["eu1089"] },
+                { id: 1235, img: "images/idea_1235.png", title: "除菌スマートコックピット", desc: "乗車中にFar-UVC除菌システム[jp eu1089]で空気を清浄化。後席のウイルス対策にうれしさ。内装ディスプレイをセンサー化し、除菌進行状況を可視化。Plasma Care UVC[jp eu1089]の技術で安心感。 [eu1089]", imagePrompt: "Modern car interior with glowing blue Far-UVC air purification beams flowing through the cabin, digital dashboard display showing virus removal progress bar, clean white and blue lighting atmosphere, high-tech sterile environment, sleek materials, soft ambient light", sourceNewsIds: ["eu1089"] },
+            ],
+        }
+    },
+{
         date: "2026-06-23",
         analysis: {
             jp: "豊田合成内装開発室向けトレンド考察では、環境対応素材の需要増は[jp1298]の積水化学事例から、低臭性高性能な接着剤や裏地素材開発を要示する。熱環境対策として、[jp1295]自動送風シートは座面温度管理の重要指標であり、蒸れ対策進化はヒートアイランド現象踏まえ空調効率相乗効果検証不可欠。AI技術連携も注目で、[jp1294]画像ライセンス提携事例から内装デザイン生成や仮想試作へAI活用加速。[jp1296]限定車「クルール」同様、個性的カラーリングや素材組み合わせをAI提案プラットフォーム構築検討余地あり。さらに[jp1291]防水シート事例はアウトドア需要多様化反映し、水濡れ対策耐久性を兼ね備えた複合素材必要性示唆。最後に[jp1297]セダン選好は定年後層快適性追求意味し、静音性柔らかさ内装素材採用が高級感演出鍵となる。",
