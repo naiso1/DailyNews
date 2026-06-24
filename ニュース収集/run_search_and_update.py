@@ -24,6 +24,8 @@ LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
+DEFAULT_LLM_CONTEXT_LENGTH = "8192"
+DEFAULT_LLM_PARALLEL = "4"
 LOOPBACK_NO_PROXY = ("127.0.0.1", "localhost", "::1")
 DEFAULT_PROXY = "http://202.15.64.202:8080"
 
@@ -111,6 +113,8 @@ def ensure_lm_studio():
     configure_loopback_no_proxy()
     host = _llm_host()
     model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL)
+    context_length = os.environ.get("LLM_CONTEXT_LENGTH", DEFAULT_LLM_CONTEXT_LENGTH)
+    parallel = os.environ.get("LLM_PARALLEL", DEFAULT_LLM_PARALLEL)
 
     if _server_up(host) and _model_loaded(host):
         log("[LM Studio] Server and model are already ready.")
@@ -141,10 +145,19 @@ def ensure_lm_studio():
             return
 
     if not _model_loaded(host):
-        log(f"[LM Studio] Loading model: {model}")
+        log(f"[LM Studio] Loading model: {model} context={context_length} parallel={parallel}")
         try:
             Popen(
-                [str(LMS_EXE), "load", model],
+                [
+                    str(LMS_EXE),
+                    "load",
+                    model,
+                    "--context-length",
+                    context_length,
+                    "--parallel",
+                    parallel,
+                    "--yes",
+                ],
                 creationflags=CREATE_NEW_PROCESS_GROUP,
                 stdout=PIPE,
                 stderr=STDOUT,
