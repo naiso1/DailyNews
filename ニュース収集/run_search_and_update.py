@@ -1,4 +1,5 @@
 import argparse
+import csv
 import datetime
 import json
 import os
@@ -8,6 +9,7 @@ import subprocess
 import sys
 import time
 import urllib.request
+import winreg
 from pathlib import Path
 from subprocess import CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT, CalledProcessError, Popen
 
@@ -23,6 +25,7 @@ LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
 LOOPBACK_NO_PROXY = ("127.0.0.1", "localhost", "::1")
+DEFAULT_PROXY = "http://202.15.64.202:8080"
 
 
 def configure_loopback_no_proxy():
@@ -37,7 +40,43 @@ def configure_loopback_no_proxy():
         os.environ[key] = ",".join(parts)
 
 
+def _windows_proxy_server():
+    try:
+        key = winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER,
+            r"Software\Microsoft\Windows\CurrentVersion\Internet Settings",
+        )
+        enabled = winreg.QueryValueEx(key, "ProxyEnable")[0]
+        if not enabled:
+            return ""
+        server = str(winreg.QueryValueEx(key, "ProxyServer")[0]).strip()
+        if not server:
+            return ""
+        if "=" in server:
+            parts = {}
+            for chunk in server.split(";"):
+                if "=" in chunk:
+                    k, v = chunk.split("=", 1)
+                    parts[k.strip().lower()] = v.strip()
+            server = parts.get("https") or parts.get("http") or next(iter(parts.values()), "")
+        if server and not re.match(r"^https?://", server, flags=re.IGNORECASE):
+            server = "http://" + server
+        return server
+    except Exception:
+        return ""
+
+
+def configure_external_proxy():
+    """requests does not automatically use the Windows IE proxy; pass it via env."""
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY") or _windows_proxy_server() or DEFAULT_PROXY
+    if not proxy:
+        return
+    for key in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"):
+        os.environ.setdefault(key, proxy)
+
+
 configure_loopback_no_proxy()
+configure_external_proxy()
 
 
 def log(msg):
@@ -310,6 +349,72 @@ def run_cmd(cmd, label, log_file, cwd=None):
         raise
 
 
+def count_sheet_targets(sheet_path: Path, target_dates: set[str] | None = None):
+    if not sheet_path.exists():
+        return 0
+    for enc in ("utf-8-sig", "utf-8", "cp932"):
+        try:
+            with sheet_path.open("r", encoding=enc, newline="") as f:
+                rows = list(csv.DictReader(f))
+            break
+        except Exception:
+            rows = []
+    else:
+        return 0
+    if target_dates:
+        rows = [r for r in rows if (r.get("日付") or "").strip() in target_dates]
+    return len(rows)
+
+
+def restore_file_from_head(path: Path):
+    rel = path.relative_to(ROOT).as_posix()
+    cp = subprocess.run(
+        ["git", "show", f"HEAD:{rel}"],
+        cwd=str(ROOT),
+        capture_output=True,
+    )
+    if cp.returncode == 0 and cp.stdout:
+        path.write_bytes(cp.stdout)
+        log(f"[INFO] Restored {rel} from HEAD because current run produced no rows.")
+
+
+def _https_remote_from_origin():
+    cp = subprocess.run(
+        ["git", "remote", "get-url", "origin"],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if cp.returncode != 0:
+        return ""
+    remote = cp.stdout.strip()
+    m = re.match(r"git@github\.com:(.+?)(?:\.git)?$", remote)
+    if m:
+        return f"https://github.com/{m.group(1)}.git"
+    if remote.startswith("https://"):
+        return remote
+    return ""
+
+
+def run_git_push(branch: str, log_file):
+    try:
+        run_cmd(["git", "push", "origin", branch], "git_push", log_file, cwd=ROOT)
+        return
+    except CalledProcessError as e:
+        log(f"[WARN] git push via origin failed; trying HTTPS remote: {e}")
+    https_remote = _https_remote_from_origin()
+    if not https_remote:
+        raise RuntimeError("Cannot determine HTTPS remote for git push fallback.")
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY") or ""
+    cmd = ["git"]
+    if proxy:
+        cmd += ["-c", f"http.proxy={proxy}", "-c", f"https.proxy={proxy}"]
+    cmd += ["push", https_remote, branch]
+    run_cmd(cmd, "git_push_https", log_file, cwd=ROOT)
+
+
 def run_git_sync(log_file):
     if os.environ.get("AUTO_GIT_SYNC", "1").strip().lower() in {"0", "false", "no"}:
         log("[INFO] AUTO_GIT_SYNC disabled; skip git commit/push.")
@@ -390,7 +495,7 @@ def run_git_sync(log_file):
     branch = branch_cp.stdout.strip() or "main"
     msg = f"Auto update daily news ({datetime.date.today().isoformat()})"
     run_cmd(["git", "commit", "-m", msg], "git_commit", log_file, cwd=ROOT)
-    run_cmd(["git", "push", "origin", branch], "git_push", log_file, cwd=ROOT)
+    run_git_push(branch, log_file)
 
 
 def main():
@@ -423,6 +528,15 @@ def main():
             ensure_lm_studio()
             google_search_script = get_google_search_entrypoint()
             run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
+            sheet2_path = SCRIPT_DIR / "sheet2_llm_targets.csv"
+            sheet_rows = count_sheet_targets(sheet2_path, set(dates))
+            if sheet_rows <= 0:
+                restore_file_from_head(sheet2_path)
+                raise RuntimeError(
+                    f"google_search_script produced 0 sheet2 rows for {dates_arg}; "
+                    "skip update/git to avoid publishing an empty result."
+                )
+            log(f"[INFO] sheet2 target rows for {dates_arg}: {sheet_rows}")
             ensure_lm_studio()
             run_cmd(
                 [

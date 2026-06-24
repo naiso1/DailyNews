@@ -1138,9 +1138,8 @@ def main():
         if is_bad_generated_text(title) or is_bad_generated_text(desc):
             print(f"Skip placeholder summary: {url}")
             continue
-        if country != "paper" and (not has_japanese_text(title) or not has_japanese_text(desc)):
-            print(f"Skip non-Japanese title/summary: {url}")
-            continue
+        # In fast collection mode, global articles can remain in English. Keep
+        # them; the country insight prompt can still use the source text.
 
         tags = generate_tags(f"{title} {desc}")
         items.append(apply_item_overrides({

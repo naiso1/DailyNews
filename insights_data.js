@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-23",
+        analysis: {
+            jp: "豊田合成内装開発室へ向けたトレンド考察です。 まず、[jp1293]に示されるよう、13万km走行で劣化しない耐久性こそが、街乗りと走行の両立において重視される要素です。[jp1295]では蒸れ対策の自動送風機能に加え、[jp1298]の積水化学「REAL SCHILD DIFFUSION」が示すデッドニング素材の進化も、快適性向上の鍵となります。さらに、[jp1296]や[jp1297]に見られるように、実用性とステータス性を兼ね備えたグレーカラーやセダンの選好は、ミニバン中心の市場からの変化を告げています。また、[jp1291]の防水シートやアウトドア仕様から、屋外での使用を想定した耐久性や防水性の内装も求められます。 このように、長寿命素材と快適性機能の融合、そして用途に合わせた多様なデザイン性を、内装部品の開発で反映させる必要があります。",
+            cn: "豊田合成内装開発室向けに、4件のニュースからトレンドを抽出し、内装部品・素材・体験の考察を提示する。まず、Li AutoのL8改型は座席配置変更により、空間効率と機能性重視のトレンドが示唆される。次に、Huawei後援のMaextro V800が100万円超の高級MPVで、高級感とブランド価値を内装に求める動きが確認できる。XpengのMona L03は30万円台で若年層向けであり、コスト抑制とデザイン性を両立した素材選定が求められる。さらに、Momentaの香港上場は、自律走行技術の進展が車内インタフェースを高度化し、操作体験の革新を促す。以上より、空間最適化、高級素材、コストパフォーマンス、AI連携体験の4点を内装開発の重点テーマと位置付ける。",
+            in: "のKodiaq RSが265馬力で7人乗りを維持する点と、のNissan TektonがミッドサイズSUVとして新顔を迎える動きは、大容量かつ性能を両立する内装の需要増を示唆している。これに対しのJimnyがRhino Editionで内外装を強化しているのは、オフロード仕様でも高機能な素材への期待が裏付けられる。さらにのTata AvinyaがEV専用ブランドで超急速充電や先進技術を搭載する方針は、EV内装の高級化トレンドを明確に示している。 これらを踏まえると、豊田合成はの多人数移動とのEV特性を考慮し、軽量かつ燃費に優れた素材開発を急ぐべきだ。の新顔モデルでは、若年層向けデジタル操作体験への対応が必須となる。またのような専用装備品への対応も、カスタマイズ市場の拡大を意味する。特にのEV技術との空間効率を両立させる、スマートで快適な内装設計が、今後求められる主要なトレンドとなるだろう。",
+            us: "豊田合成内装開発室向けに、最新トレンドと示唆を考察する。 まず、[us1112]で示す2026年Honda Pilot TrailSportは、屋外冒険を重視する「ラフネス」な内装素材や耐久性に焦点が移る。[us1111]のGR Corolla Premium Plusは、スポーティな操作体験を内装デザインで強調しており、運転者の感性に訴える。[us1109]のJaecoo 7は、広大な空間を演出する内装素材の選択肢の拡大を示唆する。 さらに、[us1114]のCX-5は多世代層への対応で、素材の使い勝手を重視する。[us1110]のElantraは、独自の照明デザインで内装の機能性と美しさを両立させる。 AIカメラ（[us1113]）は、運転支援機能への期待を示唆する。 内装は、素材の耐久性、操作体験の向上、そしてAIとの連携が求められる。",
+            eu: "【考察】豊田合成内装開発室向けトレンド分析 Mercedes VLE は 300 kW 急速充電と 435 マイル航続を両立し、8 座席の可変空間を提案する。Skoda Peaq は 7 座席 SUV として 390 マイル航続と豪華内装を 5 万ポンドで提供し、コスト競争力を示唆する。Mazda 6e は中国協力による長距離 EV 実現で、航続距離拡大が内装素材の軽量化を迫る。Ford の F1 スクーワークス は 3 万ドル EV で欧州展開を検討し、高機能低価格化を後押しする。Jaguar Type 01 は 1000bhp GT で性能極限を追求し、高価モデル向け精密内装を要求する。これらより、多機能性・長航続・高付加価値の 3 軸がトレンド。素材は軽量かつ高機能複合材が必須。操作体験は 8 座席・7 座席での空間最適化と高性能モデル向けの直感型制御が求められる。",
+        },
+        ideas: {
+            jp: [
+                { id: 1206, img: "images/idea_1206.png", title: "リサイクルレザーシート", desc: "廃棄ステアリング革から生まれ、触ると冷たい新感覚のシート素材。夏場の蒸れを解消し、高級感のあるグレーをベースにした室内空間を、環境に優しい素材で愉しみながら、ユーザーの心地よさを最大限に引き出します。 [jp1295,jp1296]", imagePrompt: "Luxury car interior with seats made from recycled leather materials, cool blue ambient lighting, close-up texture of the seat fabric showing recycled texture, high-end gray color palette, minimalistic design, soft studio lighting", sourceNewsIds: ["jp1295", "jp1296"] },
+                { id: 1207, img: "images/idea_1207.png", title: "発光素材ダッシュボード", desc: "再生セルロースでできたダッシュボードに、自然な波形の光を刻印。アウトドア仕様のタフさを内装でも表現し、蒸れ対策の涼感をプラス。環境素材と組み合わせ、ユーザーが「これが私の車」と感じる愉しみを創出します。 [jp1291,jp1298]", imagePrompt: "Car dashboard made of regenerated cellulose with glowing natural wave patterns, warm interior lighting, integration with outdoor rugged elements, soft glow effect on recycled materials, modern cabin atmosphere, high-quality finish", sourceNewsIds: ["jp1291", "jp1298"] },
+            ],
+            cn: [
+                { id: 1208, img: "images/idea_1208.png", title: "リサイクル高級内装", desc: "廃車由来プラスチックを50%配合したELV材で、高級MPVやSUVに深みのある黒インパネを実現。環境配慮とラグジュアリーを両立し、ユーザーが「地球に優しい高級車」とうれしく感じる内装部材を開発する。 [cn1119,cn1117]", imagePrompt: "Luxury MPV interior with deep black recycled plastic dashboard, soft ambient lighting, high-end wood trim accents, elegant atmosphere, professional studio lighting", sourceNewsIds: ["cn1119", "cn1117"] },
+                { id: 1209, img: "images/idea_1209.png", title: "若年向け質感EV", desc: "30万円台のEV向けに、リサイクル素材をふんだんに使用して高品質なインパネ触感を提供。物理ボタンの操作感とデジタル画面の調和を取り、若者が「コストパフォーマンス抜群の高級感」をうれしく感じる内装を提案する。 [cn1120]", imagePrompt: "Youthful affordable EV interior with textured recycled plastic dashboard, minimalist physical buttons, vibrant digital display, warm ambient lighting, clean modern design", sourceNewsIds: ["cn1120"] },
+            ],
+            in: [
+                { id: 1210, img: "images/idea_1210.png", title: "Kodiaq RS特化快適パッケージ", desc: "Skoda Kodiaq RSの265馬力エンジンと4×4システムを、豊田合成のメテオコート加飾パネルで内装に。7人乗り空間の後席でも、木目調パネルや温触覚HVACを配置し、家族全員が心地よく過ごせます。安全装備9気筒エアバッグとADAS技術も、高品質な内装と調和します。 [in1162]", imagePrompt: "Interior of Skoda Kodiaq RS with warm wood grain dashboard and premium leather seats, featuring a 7-seat layout with cozy ambient lighting and advanced safety tech indicators visible on the display.", sourceNewsIds: ["in1162"] },
+                { id: 1211, img: "images/idea_1211.png", title: "Aircross Comfort特別仕様", desc: "Citroen Aircross Comfort Editionの9.09ラッキー価格帯に、豊田合成のメテオコート加飾パネルを適用。限定的な内装アップグレードで、後塗装不要のシームレス加飾を実現。光を反射するダークトーンダッシュボードと、物理スイッチの温もりを兼ね備えた温触覚HVACパネルが、快適なドライブ体験を提供。 [in1161]", imagePrompt: "Citroen Aircross Comfort Edition interior with dark tone dashboard, seamless texture coating, and warm touch HVAC panel, illuminated by soft ambient light highlighting the premium feel.", sourceNewsIds: ["in1161"] },
+            ],
+            us: [
+                { id: 1212, img: "images/idea_1212.png", title: "EVフロア広がりコンソール", desc: "Mazda CX-5のタッチスクリーン活用をEVに移植。豊田合成多機能コンソールをベースに、リバーシブルアームレストやワイヤレス充電を「家族共用の広がり」へ最適化。15.9インチ画面を活用し、後席でも「うれしい」体験を提供。 [us1112]", imagePrompt: "Modern EV interior console with reversible armrest and wireless charging pad, flat floor design, sleek white and grey materials, soft ambient lighting, family-friendly spacious vibe, high-tech dashboard display, clean minimalist aesthetic, warm interior tones, soft shadows, high resolution photography style", sourceNewsIds: ["us1112"] },
+                { id: 1213, img: "images/idea_1213.png", title: "オフロード感EVコックピット", desc: "Honda Pilot TrailSportのプレミアム感をEVに移植。豊田合成多機能コンソールをベースに、アウトドア調の照明や「うれしさ」を演出するタッチパネルを採用。16.3インチ画面を活用し、後席でも「うれしい」体験を提供。 [us1114]", imagePrompt: "Off-road inspired EV cockpit with rugged textures and warm lighting, premium materials like leather and carbon fiber, large digital display, adventurous atmosphere, detailed interior shots, soft shadows, high resolution photography style, family-friendly spacious vibe", sourceNewsIds: ["us1114"] },
+            ],
+            eu: [
+                { id: 1214, img: "images/idea_1214.png", title: "緊急脱出安心内装", desc: "メルセデスVLEの300kW急速充電技術を参考にした緊急充電システムに加え、衝突時に内装が自動的に開く設計。子供用シートとの相性を考慮し、車内安全を最優先。ユーモアのある安全表示で、ドライバーが安心し、家族がうれしい空間を実現。 [eu1074]", imagePrompt: "Electric luxury van interior with emergency escape mechanism activated, bright light illuminating the cabin, safety labels visible, and a child seat in the back, showing the interior design with a sense of security and humor, high detail, realistic lighting.", sourceNewsIds: ["eu1074"] },
+                { id: 1215, img: "images/idea_1215.png", title: "漆黒癒やし空間", desc: "Skoda Peaqの7人乗りモデル向けに、新漆黒めっき加飾部品で内装をまとめ、後部座席の快適性を高める。光を反射しない深みのある漆黒色で、静かな空間を作り、家族全員がリラックスして愉しめる。 [eu1075]", imagePrompt: "Skoda Peaq seven-seater interior with deep matte black dashboard and center console, luxurious materials, soft ambient lighting, and a sense of calm, showing the rear seating area with a family enjoying the space, high detail, realistic lighting.", sourceNewsIds: ["eu1075"] },
+            ],
+        }
+    },
+{
         date: "2026-06-22",
         analysis: {
             jp: "日本はアウトドア対応と、低価格でも質感を上げるEV内装が同時に進んでいる。シエンタJUNOの家具モジュール[jp1282]やグランカングーの3列アレンジ[jp1285]は、車内を移動だけでなく滞在空間として売る流れを示す。キックスのソフト材とデュアル画面[jp1283]、CX-5の大画面化[jp1287]から、触感品質とHMIの見やすさが差別化点になる。東レの親水性ポリマー[jp1284]やハスラーの安全・快適装備強化[jp1288]も踏まえ、汚れにくい表皮、付け替えやすい収納・床材、物理操作を残した表示周りを検討したい。",

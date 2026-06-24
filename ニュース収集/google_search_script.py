@@ -98,18 +98,18 @@ SUSPICIOUS_IMAGE_MARKERS = [
 ]
 
 # LLM defaults
-USE_LLM = True
+USE_LLM = os.environ.get("USE_LLM", "1").strip().lower() not in {"0", "false", "no"}
 LLM_ONLY = False
 RESUME_LLM = False
 PROCESS_LLM_SKIPPED = False
 LLM_ENDPOINT = os.environ.get("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions")
 LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
-LLM_TIMEOUT = 300
+LLM_TIMEOUT = int(os.environ.get("LLM_TIMEOUT", "300"))
 LLM_SAVE_INTERVAL = 0
 LLM_CACHE = {}
 LLM_IMAGE_CACHE = {}
 LLM_ERROR_LOGGED = False
-LLM_IMAGE_INPUT = True
+LLM_IMAGE_INPUT = os.environ.get("LLM_IMAGE_INPUT", "1").strip().lower() not in {"0", "false", "no"}
 LLM_IMAGE_TIMEOUT = 12
 LLM_IMAGE_MAX_BYTES = 3_000_000
 LLM_IMAGE_MAX_SIZE = 768
@@ -330,6 +330,54 @@ def is_same_topic_text(text1, text2):
 def is_interior_related(title, content=""):
     text = (str(title) + " " + str(content)).lower()
     return any(kw.lower() in text for kw in INTERIOR_KEYWORDS)
+
+
+def prefilter_results_for_enrichment(items, per_country_limit=None):
+    """Limit expensive LLM processing to the strongest candidates per country."""
+    if per_country_limit is None:
+        try:
+            per_country_limit = int(os.getenv("MAX_ENRICH_PER_COUNTRY", "30"))
+        except Exception:
+            per_country_limit = 30
+    if not per_country_limit or per_country_limit <= 0:
+        return items
+
+    def score_item(item):
+        title = item.get("タイトル", "")
+        content = item.get("内容", "")
+        rel_score, _, hits = compute_relevance(title, content)
+        text = f"{title} {content}".lower()
+        interior_hits = sum(1 for kw in INTERIOR_KEYWORDS_LOWER if kw and kw in text)
+        source = str(item.get("ソース", ""))
+        image = str(item.get("画像URL", ""))
+        score = rel_score * 100.0 + min(interior_hits, 8) * 20.0 + len(hits) * 10.0
+        if source and source != "GoogleNews":
+            score += 25.0
+        if image and not is_missing_url(image) and not is_suspicious_image_url(image):
+            score += 15.0
+        if len(str(content)) >= 80:
+            score += 8.0
+        weak_words = ["recall", "lawsuit", "stock", "sales", "工場", "販売台数", "株", "訴訟", "リコール"]
+        if any(w.lower() in text for w in weak_words):
+            score -= 25.0
+        return score
+
+    grouped = {}
+    for order, item in enumerate(items):
+        item["_prefilter_order"] = order
+        item["_prefilter_score"] = score_item(item)
+        grouped.setdefault(item.get("国", ""), []).append(item)
+
+    picked = []
+    for _, group in grouped.items():
+        group.sort(key=lambda x: (x.get("_prefilter_score", 0), -x.get("_prefilter_order", 0)), reverse=True)
+        picked.extend(group[:per_country_limit])
+    picked.sort(key=lambda x: x.get("_prefilter_order", 0))
+    for item in picked:
+        item.pop("_prefilter_order", None)
+        item.pop("_prefilter_score", None)
+    return picked
+
 
 def parse_date(date_str):
     if not date_str:
@@ -2060,6 +2108,11 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
 
     # CSV出力（リンク誤結合/改行対策）
     csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
+    if sheet2_df.empty:
+        print(f"  Sheet2/CSV: 0件のため既存CSVを保持します: {csv_path}")
+        if OUTPUT_PAPERS_SHEET2:
+            build_papers_sheet2(work, excel_path, target_dates)
+        return
     sheet2_csv = sheet2_df.copy()
     for col in sheet2_csv.columns:
         if sheet2_csv[col].dtype == object:
@@ -2591,6 +2644,13 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         country = item.get("国", "")
         source = item.get("ソース", "")
         url_value = item.get("URL")
+        if not USE_LLM:
+            heuristic_target = bool(hits) or is_interior_related(title, content) or score >= 0.25
+            item["LLM判定"] = "対象" if heuristic_target else "非対象"
+            item["内装関連度"] = int(max(0, min(100, round(score * 100))))
+            item["内装判定理由"] = "キーワード関連度による高速判定"
+            if not is_missing_url(item.get("画像URL")):
+                item["画像判定"] = "あり"
         # LLM判定（関連性のみ）を先に実施
         llm_relevance = ""
         is_paper_item = str(country).strip() in ("\u8ad6\u6587", "paper", "papers")
@@ -3064,6 +3124,12 @@ def main():
         print(f"  最終内訳（国別）: {dict(cty_counter_final)}")
     
     if unique_results:
+        before_enrich = len(unique_results)
+        unique_results = prefilter_results_for_enrichment(unique_results)
+        if len(unique_results) != before_enrich:
+            cty_counter_prefilter = Counter([item.get("国", "") for item in unique_results if item.get("国")])
+            print(f"  LLM前候補絞り込み: {before_enrich}件 -> {len(unique_results)}件")
+            print(f"  LLM前内訳（国別）: {dict(cty_counter_prefilter)}")
         unique_results = enrich_results(unique_results, label="新規", existing_df=df_existing, save_path=EXCEL_FILE)
         df_new = pd.DataFrame(unique_results)
         
