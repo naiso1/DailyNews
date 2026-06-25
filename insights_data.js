@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-25",
+        analysis: {
+            jp: "内装の進化は、単なる機能追加から「移動の場から快適空間へ」の転換点にある[jp1311]。Google搭載車との連携でスマホ不要な直接視聴が可能になり、収納や充電もLEDコンソールボックスの最適化で強化される[jp1317]。特にハイエースのように実用性を重視する層は、3列シートSUVの天井低さや長時間着座の課題に対し、ミニバン並みの空間性を求める[jp1316]。欧州ではアウディA3の大型パノラマディスプレイや運転支援拡充がトレンドだが、フォルクスワーゲンでのデジタルメーター不具合リコールが品質管理を厳格化している[jp1312]。プジョー408ハイブリッドなど、内装質感の向上が車両価値に直結する[jp1320]。 豊田合成開発室は、USB-A/Cポートやドリンクホルダー配置の最適化に加え、大型パノラマディスプレイとの連携、デジタルメーター起動安定性の確保、そしてSUVの天井高さを活かした広がり内装を提案すべきだ。",
+            cn: "豊田合成の内装開発室向けに、6月～9月のEV市場動向を分析する。BYDは海洋シリーズのフラッグシップ「シーラ08」を強化し、コックピットと快適装備に注力[cn1146]。これに対し、ファーウェイ系Maextroはメルセデス・ベンツ・マイバッハを凌駕する「S800 Grand Design」で超高級内装をアピール[cn1142]。高級化はMPV分野でもリンホイM9で実証され、商用車向け設計が注目[cn1138]。さらに、バッテリー技術革新がCATLのナトリウムイオン搭載計画や液状固体電池の進展を後押し[cn1140][cn1139]。EVは電力調整資源としても活用され、蓄電市場の拡大が内装の耐久性要件を高める[cn1144]。",
+            in: "豪雨時の洪水や電気故障を防ぐ防水HMIと、水濡れに強いシート素材が求められる。インド市場ではタタ・モーターズがEVとICEの両輪で新車展開を加速し、2026年以降にEV刷新モデルを多数発表する。これらは多様な用途に対応するプラットフォーム開発を意味する。インドのEVスクーター市場が急成長する中、ホンダやMGのハイブリッドSUVも参入しており、環境負荷低減がトレンド。さらにRiver Indieのスクーター販売増は、都市部での移動手段としてのEV普及を裏付ける。内装開発室には、防水機能性と耐久性を両立する素材開発が最優先課題となる。",
+            us: "米国市場では、健康志向とテクノロジーの融合が顕著に[us1130]。Hyundaiの肺炎菌殺菌照明のように、車内空気質の向上や衛生面への関心が[us1135]の高級車でも[us1136]のファミリー層でも広がっている。さらに[us1133]や[us1138]から分かるように、古さや価格だけでなく、EV充電や駐車といったライフスタイルも内装体験に影響する。豊田合成は、健康機能と省エネヒーター[us1136]を組み合わせ、車内を「癒やしの場」に変える内装部品開発が求められる。特に、物理ボタンとデジタル画面の共存[us1135]や、家族の多様なニーズ[us1136]に応える、柔軟な内装設計が鍵となる。",
+            eu: "豊田合成内装開発室へ向けたトレンド考察を提示する。 まず、[eu1100]と[eu1099]で示唆される安全とサステナビリティの融合が鍵となる。[eu1100]では2028年量産の4気嚢システムで submarining 防止が、[eu1099]ではBMW X5のライフサイクルCO₂e削減で平鋼やドアアルミの再生素材採用が確認される。 これらを組み合わせた[eu1100]と[eu1099]の検討に加え、[eu1098]の豊田市EMC研究所開設は高電圧・高速回転試験能力を持つことを意味する。 さらに[eu1097]のSlateの低コストEV戦略から、機能最小化でも維持される安全性が[eu1100]の気嚢配置と相乗効果を生む。 また[eu1098]と[eu1100]の相関から、高電圧環境下でのシート構造強度が重要だ。 結局、[eu1099]の再生素材[eu1100]の4気嚢[eu1098]のEMC対策を統合した内装が求められる。",
+        },
+        ideas: {
+            jp: [
+                { id: 1236, img: "images/idea_1236.png", title: "LED光る収納ボックス", desc: "トヨタハイエース専用LEDコンソールボックスを基点に、ボルト固定式でドリンクホルダー最適化。USBポート搭載で充電も可能に。車内を照らす光で、小さな収納も高級感ある演出を。使い心地の良い設計で、誰もがうれしい。 [jp1317]", imagePrompt: "Interior view of a Toyota Hiace showing a modern LED illuminated console box mounted with bolts. The box glows with soft white light, revealing optimized drink holders and USB ports. High quality interior texture, ambient lighting, clean design.", sourceNewsIds: ["jp1317"] },
+                { id: 1237, img: "images/idea_1237.png", title: "静寂音響ディスプレイ", desc: "U-NEXT Google対応車と音の可視化技術を融合。車載ディスプレイで動画を見ながら、外部ノイズを遮断する静寂空間を。AAOS搭載車のスマホ不要環境で、快適な視聴体験を。誰にでもうれしい。 [jp1311]", imagePrompt: "Google Android Automotive dashboard displaying U-NEXT movie on a large panoramic display. The cabin is dark and silent with acoustic treatment visible on door panels. Soft blue ambient light highlights the acoustic technology, creating a calm luxury atmosphere.", sourceNewsIds: ["jp1311"] },
+            ],
+            cn: [
+                { id: 1238, img: "images/idea_1238.png", title: "静寂コックピット体験", desc: "第2世代ブレードバッテリーcn1146の振動抑制技術を内装に転用し、BYDシーラ08cn1146のような高級EVで、静寂空間を実現。UV-C LED内装除菌システムcn1139を組み合わせ、健康と静寂を同時に愉しむ体験を提供します。 [cn1146]", imagePrompt: "Luxurious EV interior cockpit with floating headliner, dark matte finish, soft ambient blue lighting, and a visible silent battery system glowing subtly under the dashboard, conveying deep tranquility and premium silence.", sourceNewsIds: ["cn1146"] },
+                { id: 1239, img: "images/idea_1239.png", title: "UV-C 除菌静寂座席", desc: "UV-C LED内装除菌システムを、BYD海洋シリーズcn1146のフラッグシップコックピットに搭載。CATLの588Ah電池cn1139と連携し、空気清浄と静寂を融合。健康で静かな空間を愉しむ。 [cn1139]", imagePrompt: "Close-up of a premium EV seat with integrated UV-C LED strips in the headrest, soft purple glow, surrounded by high-quality leather, emphasizing cleanliness, silence, and advanced technology.", sourceNewsIds: ["cn1139"] },
+            ],
+            in: [
+                { id: 1240, img: "images/idea_1240.png", title: "防水強化EVコンソール", desc: "豪雨時でも安心の防水コンソールボックスをEV新車に。タタ・モーターズのSierra EVやSafari EVに採用し、シートやHMIの防水と合わせ、水濡れを気にせず使える車内空間を創る。ユーザーは安心と喜びを満喫する。 [in1181,in1184]", imagePrompt: "EV SUVのコンソールボックスを開いた状態。防水コーティングが施された素材で、水に濡れた手を触れても安全な光沢感。背景はインドの都市風景で、豪雨後の街並みと調和する明るい照明。", sourceNewsIds: ["in1181", "in1184"] },
+                { id: 1241, img: "images/idea_1241.png", title: "自動化製造EVアームレスト", desc: "タタ・アヴィニャやティゴEVの生産ラインで自動化製造を採用。歩留まり95%向上とコスト削減を実現し、低価格EVでも高品質アームレストを供給。開発者は生産効率アップの喜びを味わう。 [in1184,in1187]", imagePrompt: "自動化工場内のアームレスト製造ライン。ロボットアームがリサイクル素材を精密に組み立てる様子。清潔な白を基調とした空間に、緑色のLED照明が効率的な製造を強調。", sourceNewsIds: ["in1184", "in1187"] },
+            ],
+            us: [
+                { id: 1242, img: "images/idea_1242.png", title: "プラズマウェルネスコックピット", desc: "HyundaiのUVC照明技術を内装化し、肺炎菌を30秒で99.9%殺菌。16.3インチモーター化スクリーンと連動し、抗菌照明が上昇収納時に点灯。家族やドライバーが笑顔で車内に戻る。 [us1130,us1135]", imagePrompt: "A futuristic car interior cockpit featuring a 16.3 inch motorized center touchscreen rising from a dashboard, revealing a hidden storage compartment. The ceiling has glowing Far-UVC lighting panels that emit a soft blueish-white light, indicating active air sterilization. The overall atmosphere is clean, sterile, and high-tech with a focus on health and wellness.", sourceNewsIds: ["us1130", "us1135"] },
+                { id: 1243, img: "images/idea_1243.png", title: "ヒーターアームレストウェルネス", desc: "豊田合成のヒータ付きアームレストをEVに最適化。50%省エネで、シエンナの11.6インチディスプレイと連動し、温かい内装空間を演出。運転者がリラックスして笑顔でドライブを楽しめる。 [us1136]", imagePrompt: "A close-up view of a luxurious car armrest with a built-in surface heater. The armrest is made of soft, warm-toned leather in a beige color. A subtle glowing indicator light shows the heating function is active. The armrest is positioned next to a sleek 11.6 inch entertainment display screen.", sourceNewsIds: ["us1136"] },
+            ],
+            eu: [
+                { id: 1244, img: "images/idea_1244.png", title: "安全装備のデザイン化", desc: "ZF Lifetecの4気嚢システム[jp eu1100]を内装デザインに活用。シートラップやフットウェルへの配置を意匠化し、安全装備が内装のアクセントに。リクライニング時の submarining 防止技術[jp eu1100]を視覚化し、乗客が安心感を愉しむ内装を創造。安全と美しさが一体となったコックピットを実現し、乗客が愉しく感じる空間を演出 [eu1100]", imagePrompt: "Interior shot of luxury car cockpit with glowing safety airbag elements integrated into seat wrap and footwell trim, soft ambient lighting highlighting the 4 airbag system layout, reclining posture showing submarining prevention design, dark matte finish with subtle LED accents, premium materials texture visible", sourceNewsIds: ["eu1100"] },
+                { id: 1245, img: "images/idea_1245.png", title: "漆黒内装の安全演出", desc: "新漆黒めっき加飾部品[jp eu1100]をZF Lifetecの4気嚢システム[jp eu1100]と組み合わせ。深みのある漆黒インパネに安全装備の配置を照明演出で表現し、乗客が安心感を愉しみながら内装美を堪能。リクライニング時の submarining 防止技術[jp eu1100]を視覚的アクセントに昇華させ、安全装備が内装デザインの要となる新感覚コックピットを創造 [eu1100]", imagePrompt: "Close-up of dashboard with deep black plated finish reflecting subtle safety airbag positioning lights, reclining seat showing submarining prevention design elements, ambient lighting tracing airbag placement paths, premium black texture with safety indicator glow, elegant interior composition", sourceNewsIds: ["eu1100"] },
+            ],
+        }
+    },
+{
         date: "2026-06-24",
         analysis: {
             jp: "2026年ユーロNCAP基準や高齢化社会への対応から、[jp1309]のように物理ボタンとのデジタル融合が必須になり、[jp1304]の上質な和製ミニ風内装体験も求められます。キャビン静粛性は[jp1303]のテスラ事例で示唆され、防水シートやアウトドア機能も[jp1305]のエクストレイルで確認できます。市場規模は[jp1310]で2031年15億6600万米ドルへ拡大し、端部装飾材の需要増が見られます。フォルクスワーゲンの[jp1308]キャンピングカー事例より、車中泊特化の空調制御も開発室課題です。",
