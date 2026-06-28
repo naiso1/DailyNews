@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-06-26〜2026-06-28",
+        analysis: {
+            jp: "豊田合成の内装開発室が直面するトレンドは、機能性と快適性の両立にある。三菱電機のGOT3000 [jp1330] が示すように、Webブラウザ化によるPCレス化は、内装パネルの制御系でも求められる。これと合わせ、OZ RACINGのシートガードエプロン [jp1325] から読み取れる素材耐久性は、アウトドア利用の増加に対応するべき示唆だ。 シトロエンC5エアクロスの「魔法の絨毯」乗り心地 [jp1324] は、プログレッシブハイドローリッククッション技術の継承で、内装の振動吸収性向上が課題となる。さらにトヨタヴェルファイアのExecutive Lounge内装変更 [jp1328] は、ブロンズスパイラルの加飾が高級感演出に寄与し、素材選定に影響する。 ハイラックス向けアンダーカバー [jp1326] の空力技術融合は、内装部品の耐久性向上にも波及する。",
+            cn: "豊田合成の内装開発室向けに、中国市場のトレンドと示唆を考察します。まず、小鹏モナL03ではソフトタッチ素材比率が72%を超え、天井にはベルベット、UV遮断率99.9%のサンルーフを採用しており、高質感素材の普及が顕著です。この傾向は、日経が中国メーカーが日本を上回る内燃機関技術を有すると報じた点も相俟ち、技術競争が激化しています。同時に、理想汽車がマカオに進出するなど海外展開が加速しており、右ハンドル仕様への対応も視野に入れる必要があります。また、BYDの名誉毀損訴訟勝訴は、ブランド保護の重要性を示唆しています。さらに、CATLのエネルギー貯蔵セル販売やナトリウム電池のコスト削減は、コスト競争力が内装の価格設定にも影響します。したがって、内装部品では触覚性と機能性を両立した複合素材や、UV遮断率を高めつつデザイン性を保つガラス素材、コスト効率を考慮した高機能な樹脂素材の開発が求められます。",
+            in: "インダストリーは、[in1194]と[in1195]に見られるように、10インチクラスのタッチスクリーン搭載が2026年モデルで標準化する流れだ。[in1200]のホンダ「0 Alpha」が2027年に大型スクリーンとデジタルメーターを併用し始めるが、これは[in1198]のDolby Atmos主流化と相まって、単なる情報表示から没入型エンターテインメント体験へシフトしている。通気シートやベンチレーテッドシートの追加（[in1194]）は、[in1196]のMaruti Suzuki Brezzaの通気シート採用と整合し、熱帯気候下での快適性が絶対条件となる。7人乗りモデルの増加（[in1192]）に伴い、[in1200]のデジタルコックピットは狭い空間でも見やすく、[in1198]の高級車採用が下位車種に波及し、コストパフォーマンスと機能性を両立する素材開発が求められる。",
+            us: "BentleyのBarnatoが示す曲線型ディスプレイと高級素材は、に見られるように未来的だが温かみのある体験を追求するトレンドである。これに対し、で米国市場で再注目されるフロントベンチシートは、利便性と開放性を重視した実用性への回帰を示唆している。さらに、のUV除菌技術は、車内衛生管理の高度化を求められていることを意味する。一方で、のAndroid系HMIは、操作性と接続性の重要性を強調している。これらを総合すると、内装開発では高級感と実用性のバランスが重要であり、除菌機能や簡易なシート構成、直感的な操作インターフェースが求められると判断できる。",
+            eu: "豊田合成内装開発室へ、2027年Android Automotive搭載車向けParkPay（[eu1109]）の決済体験と、Zoox内装改善（[eu1110]）の快適性向上が融合する未来を構想すべきです。",
+        },
+        ideas: {
+            jp: [
+                { id: 1246, img: "images/idea_1246.png", title: "ブロンズスパットシートカバー", desc: "トヨタヴェルファイアのExecutive Lounge内装加飾を再現し、ブロンズスパッタリングで高級感を演出。スポーツ走行後のシート汚れもOZ RACINGシートガードのように保護しつつ、スポーティなデザインで車内を演出。運転者と後席乗客がともに愉しめる [jp1328,jp1325]", imagePrompt: "Luxury minivan interior with bronze spatter dashboard accents, driver wearing racing gloves holding steering wheel, OZ Racing seat guard cover visible on passenger seat, warm ambient lighting reflecting off bronze trim, high-end leather texture", sourceNewsIds: ["jp1328", "jp1325"] },
+                { id: 1247, img: "images/idea_1247.png", title: "Webブラウザインパネ", desc: "三菱電機GOT3000のWebブラウザ機能を車載インパネへ搭載。豊田合成樹脂インパネリンフォースで鉄製を軽量化し、PCレスでネットワーク機器設定やエラー確認可能。OPC UA対応ゲートウェイ機能で車載システムを統合。運転者はデジタル操作を愉しみながら [jp1330]", imagePrompt: "Modern car dashboard with integrated web browser interface, Toyota resin infopane material texture, OPC UA gateway icons on screen, sleek bronze accents, driver interacting with touch interface, ambient blue lighting", sourceNewsIds: ["jp1330"] },
+            ],
+            cn: [
+                { id: 1248, img: "images/idea_1248.png", title: "ソフトタッチ調和充電席", desc: "小鹏モナL03のソフトタッチ素材比率72%インテリアに合わせ、小型ワイヤレス充電ホルダをセンターコンソールに搭載。触覚的な質感で充電体験を愉しみ、高質感を維持しながら安心安全も確保。開発者がうれしい [cn1151]", imagePrompt: "A luxury car interior with soft-touch dark brown dashboard materials. A compact wireless charging pad is embedded in the center console, glowing with a soft blue light. The texture of the dashboard is velvety and warm. Sunlight streams through a panoramic sunroof with 99.9% UV protection, illuminating the high-quality materials. The mood is calm and premium.", sourceNewsIds: ["cn1151"] },
+                { id: 1249, img: "images/idea_1249.png", title: "磁気ボタン充電アシスト", desc: "小型ワイヤレス充電ホルダを、理想汽車のi6やi8 SUVのような海外展開車種にも採用。BYDの訴訟勝訴で高まるブランド信頼を踏まえ、物理ボタンとの調和で安心感。開発者がうれしい [cn1148,cn1150]", imagePrompt: "A modern car interior with a sleek black dashboard. A compact wireless charging holder is mounted on the center console, featuring a magnetic button interface. Soft ambient LED strips line the ceiling, creating a futuristic atmosphere. The design blends high-tech screens with tactile controls, emphasizing safety and ease of use.", sourceNewsIds: ["cn1148", "cn1150"] },
+            ],
+            in: [
+                { id: 1250, img: "images/idea_1250.png", title: "モジュール式コックピット", desc: "大型スクリーンとデジタルメーターを標準モジュール化し、低価格EVでもコックピット品質を上げます。量産部品の共通化でコスト下がり、家族は高級感を楽しめます。 [in1200,in1196]", imagePrompt: "A futuristic EV interior cockpit with a large central touchscreen and digital instrument cluster, modular design highlighted by visible connection points between components, clean white and grey industrial lighting, photorealistic render", sourceNewsIds: ["in1200", "in1196"] },
+                { id: 1251, img: "images/idea_1251.png", title: "アップサイクルシートトリム", desc: "廃棄エアバッグ生地をリサイクル素材シートに活用し、通気性と環境配慮を両立します。低価格EVでも高級感があり、家族は地球に優しい内装を楽しめます。 [in1196]", imagePrompt: "Close-up of car seat interior showing fabric texture made from recycled materials, warm ambient lighting highlighting the sustainable material grain, soft focus on ventilation holes, eco-friendly green and beige tones", sourceNewsIds: ["in1196"] },
+            ],
+            us: [
+                { id: 1252, img: "images/idea_1252.png", title: "曲線ディスプレイコックピット", desc: "Bentley Barnatoの曲線型ディスプレイや12.9インチAndroidシステムを参考し、木製トリムと金属アクセントで高級感を演出。ベンチシートも採用し、乗客が癒やされ、デジタル体験でワクワクするコックピットを創造。 [us1147,us1144]", imagePrompt: "Interior view of a luxury EV with a curved glass display spanning the dashboard, wood trim, metal accents, and a wide bench seat. Soft ambient lighting highlights the premium materials, creating a warm and inviting atmosphere for passengers.", sourceNewsIds: ["us1147", "us1144"] },
+                { id: 1253, img: "images/idea_1253.png", title: "UV-C除菌ウェルネス内装", desc: "HyundaiのUVC除菌技術を内装に組み込み、車内空気を清浄に保つ。UV-C帯LEDをインパネや天井に配置し、乗車中もウイルスを96.8%削減。乗客が安心し、健康で快適なドライブ空間を愉しめる。 [us1140]", imagePrompt: "Close-up view of a car interior with integrated UV-C LED strips along the dashboard and ceiling. A digital display shows '96.8% Virus Reduction' in green light, creating a clean and healthy atmosphere. Soft white lighting enhances the sterile yet warm feel.", sourceNewsIds: ["us1140"] },
+            ],
+            eu: [
+                { id: 1254, img: "images/idea_1254.png", title: "リサイクルPETシート", desc: "BMW iX5 60 xDriveの100%リサイクルPETヘッドライナーを後席に採用。再生エネルギー工場生産で環境配慮と安価な質感を実現。乗客がリサイクル素材の柔らかさと高級感を同時に楽しめる。 [eu1112]", imagePrompt: "Interior shot of a modern EV SUV cabin with soft recycled PET headliner material, natural light streaming through windows, showing texture of sustainable fabric, warm ambient lighting, high-end clean aesthetic", sourceNewsIds: ["eu1112"] },
+                { id: 1255, img: "images/idea_1255.png", title: "メテオコート加飾パネル", desc: "Zooxのカリフォルニア工場生産向けにメテオコート加飾パネルを後席採用。型内塗装で凹凸のある独自テクスチャーを実現。乗客がシームレスな高級感と安全装備のデザイン化を同時に楽しめる。 [eu1110]", imagePrompt: "Close-up view of a car interior panel with textured finish, seamless metal coating, soft shadow play from interior lighting, showing tactile surface detail, modern automotive design aesthetic, warm metallic tones", sourceNewsIds: ["eu1110"] },
+            ],
+        }
+    },
+{
         date: "2026-06-25",
         analysis: {
             jp: "内装の進化は、単なる機能追加から「移動の場から快適空間へ」の転換点にある[jp1311]。Google搭載車との連携でスマホ不要な直接視聴が可能になり、収納や充電もLEDコンソールボックスの最適化で強化される[jp1317]。特にハイエースのように実用性を重視する層は、3列シートSUVの天井低さや長時間着座の課題に対し、ミニバン並みの空間性を求める[jp1316]。欧州ではアウディA3の大型パノラマディスプレイや運転支援拡充がトレンドだが、フォルクスワーゲンでのデジタルメーター不具合リコールが品質管理を厳格化している[jp1312]。プジョー408ハイブリッドなど、内装質感の向上が車両価値に直結する[jp1320]。 豊田合成開発室は、USB-A/Cポートやドリンクホルダー配置の最適化に加え、大型パノラマディスプレイとの連携、デジタルメーター起動安定性の確保、そしてSUVの天井高さを活かした広がり内装を提案すべきだ。",
