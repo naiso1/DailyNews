@@ -1097,7 +1097,9 @@ h1 {
         // Global interactions data for sorting
         window.interactionsData = {};
         window.useLocalInteractions = false;
+        window.firebaseInteractionsReady = false;
         let localInteractionsCache = null;
+        let interactionsCollectionUnsubscribe = null;
         const LOCAL_ACCESS_KEY = "local_access_stats";
         const LOCAL_INTERACTIONS_KEY = "local_interactions";
         const LOCAL_READS_KEY = "local_article_reads";
@@ -1416,6 +1418,16 @@ h1 {
             renderAllRankings();
         }
 
+        function mergeInteractionData(itemId, data) {
+            const comments = Array.isArray(data.comments) ? data.comments : [];
+            const previous = window.interactionsData[itemId] || {};
+            window.interactionsData[itemId] = {
+                likes: data.likes || 0,
+                comments: comments.length,
+                reads: (typeof data.reads === "number") ? data.reads : (previous.reads || 0)
+            };
+        }
+
         async function loadInteractions() {
             if (!db) {
                 enableLocalInteractions();
@@ -1425,15 +1437,27 @@ h1 {
                 const snapshot = await getDocs(collection(db, "interactions"));
                 snapshot.forEach(docSnap => {
                     const data = docSnap.data();
-                    window.interactionsData[docSnap.id] = {
-                        likes: data.likes || 0,
-                        comments: (data.comments || []).length,
-                        reads: data.reads || 0
-                    };
+                    mergeInteractionData(docSnap.id, data);
                 });
+                window.firebaseInteractionsReady = true;
                 console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
                 renderAllRankings();
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+                if (!interactionsCollectionUnsubscribe) {
+                    interactionsCollectionUnsubscribe = onSnapshot(collection(db, "interactions"), (liveSnapshot) => {
+                        liveSnapshot.docChanges().forEach(change => {
+                            if (change.type === "removed") {
+                                delete window.interactionsData[change.doc.id];
+                                return;
+                            }
+                            mergeInteractionData(change.doc.id, change.doc.data());
+                        });
+                        if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+                        if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
+                    }, (error) => {
+                        console.error("Interactions live sync failed:", error);
+                    });
+                }
             } catch (e) {
                 console.error("Failed to load interactions:", e);
                 enableLocalInteractions();
@@ -1683,10 +1707,7 @@ h1 {
                         </div>
                      `).join('');
             }
-            window.interactionsData[itemId] = {
-                likes: data.likes || 0,
-                comments: (data.comments || []).length
-            };
+            mergeInteractionData(itemId, data);
             if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
         };
 
@@ -1723,6 +1744,8 @@ h1 {
                     liveElements[itemId].lastData = { likes: 0, comments: [] };
                     renderItem(itemId);
                 }
+            }, (error) => {
+                console.error(`Item live sync failed: ${itemId}`, error);
             });
         };
         window.toggleLike = async (itemId, btn) => {
@@ -1763,10 +1786,15 @@ h1 {
                 });
             } catch (e) {
                 console.error("Like Error", e);
-                window.useLocalInteractions = true;
-                const local = getLocalInteractionData(itemId);
-                local.likes = nextCount;
-                setLocalInteractionData(itemId, local);
+                alert("いいねの保存に失敗しました。通信状態を確認して再度お試しください。");
+                btn.classList.toggle('liked');
+                countSpan.textContent = currentCount;
+                if (isLiked) localStorage.setItem(storageKey, "true");
+                else localStorage.removeItem(storageKey);
+                const existing = window.interactionsData[itemId] || {};
+                existing.likes = currentCount;
+                window.interactionsData[itemId] = existing;
+                if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
             }
         };
 
@@ -1817,15 +1845,7 @@ h1 {
                 });
             } catch (e) {
                 console.error("Comment Error", e);
-                window.useLocalInteractions = true;
-                const local = getLocalInteractionData(itemId);
-                local.comments = local.comments || [];
-                local.comments.push(newComment);
-                setLocalInteractionData(itemId, local);
-                if (liveElements[itemId]) {
-                    liveElements[itemId].lastData = local;
-                    renderItem(itemId);
-                }
+                alert("コメントの保存に失敗しました。通信状態を確認して再度お試しください。");
             }
         };
 
@@ -1864,18 +1884,28 @@ h1 {
         setTimeout(() => {
             document.querySelectorAll('.card, .idea-card').forEach(el => observer.observe(el));
 
-            // Also observe new elements added later (Load More)
-            const grid = document.getElementById('newsGrid');
-            if (grid) {
+            // Also observe new elements added later (filters / Load More / insights)
+            const observeContainer = (container) => {
+                if (!container || container.__interactionMutationBound) return;
+                container.__interactionMutationBound = true;
                 const mutObserver = new MutationObserver((muts) => {
                     muts.forEach(m => {
                         m.addedNodes.forEach(n => {
-                            if (n.nodeType === 1) observer.observe(n);
+                            if (n.nodeType !== 1) return;
+                            if (n.matches && (n.matches('.card') || n.matches('.idea-card'))) {
+                                observer.observe(n);
+                            }
+                            if (n.querySelectorAll) {
+                                n.querySelectorAll('.card, .idea-card').forEach(el => observer.observe(el));
+                            }
                         });
                     });
                 });
-                mutObserver.observe(grid, { childList: true });
-            }
+                mutObserver.observe(container, { childList: true, subtree: true });
+            };
+            observeContainer(document.getElementById('newsGrid'));
+            observeContainer(document.getElementById('ideasContainer'));
+            observeContainer(document.getElementById('insightsContainer'));
         }, 1000);
 
     </script>
