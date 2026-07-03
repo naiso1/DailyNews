@@ -4,6 +4,7 @@ exclude:
   - ".vscode/"
   - "__pycache__/"
   - "archive/"
+  - "images/"
   - "ニュース収集/"
   - "画像生成APIテスト/"
   - "*.py"
