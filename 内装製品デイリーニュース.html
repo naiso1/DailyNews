@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -203,11 +203,11 @@ h1 {
 }
 .flag-icon[class*="flag-"] { width: 24px; height: 16px; background-size: cover; background-repeat: no-repeat; background-position: center; }
 .paper-icon { width: 24px; height: 16px; display: inline-flex; align-items: center; justify-content: center; margin-right: 6px; font-size: 14px; line-height: 1; }
-.flag-jp { background-image: url('images/icon_jp.png'); }
-.flag-cn { background-image: url('images/icon_cn.png'); }
-.flag-in { background-image: url('images/icon_in.png'); }
-.flag-us { background-image: url('images/icon_us.png'); }
-.flag-eu { background-image: url('images/icon_eu.png'); }
+.flag-jp { background-image: url('page_images/icon_jp.png'); }
+.flag-cn { background-image: url('page_images/icon_cn.png'); }
+.flag-in { background-image: url('page_images/icon_in.png'); }
+.flag-us { background-image: url('page_images/icon_us.png'); }
+.flag-eu { background-image: url('page_images/icon_eu.png'); }
 
 /* ── Date / Stats ────────────────────────── */
 .date-inputs { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
@@ -893,7 +893,7 @@ h1 {
 
 <body>
     <header id="top" class="jump-anchor">
-        <h1><img id="titleIcon" class="title-globe-icon" src="images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
+        <h1><img id="titleIcon" class="title-globe-icon" src="page_images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
         <p class="lead">生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け</p>
         <div class="access-counter"
             style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px; flex-wrap:wrap;">
@@ -910,7 +910,7 @@ h1 {
         <div class="filter-row">
             <span class="filter-label">🌐 地域</span>
             <div class="filter-chips" id="countryFilters">
-                <span class="chip country-world active" data-country="world"><img src="images/icon_world.png"
+                <span class="chip country-world active" data-country="world"><img src="page_images/icon_world.png"
                         class="flag-icon" alt="World"> 世界版<span class="new-count" data-country="world"></span></span>
                 <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本<span
                         class="new-count" data-country="jp"></span></span>
@@ -2431,13 +2431,13 @@ h1 {
             return src;
         }
         const TITLE_ICONS = {
-            world: "images/icon_world.png",
-            jp: "images/icon_jp.png",
-            cn: "images/icon_cn.png",
-            in: "images/icon_in.png",
-            us: "images/icon_us.png",
-            eu: "images/icon_eu.png",
-            paper: "images/icon_world.png"
+            world: "page_images/icon_world.png",
+            jp: "page_images/icon_jp.png",
+            cn: "page_images/icon_cn.png",
+            in: "page_images/icon_in.png",
+            us: "page_images/icon_us.png",
+            eu: "page_images/icon_eu.png",
+            paper: "page_images/icon_world.png"
         };
 
         // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
