@@ -1,5 +1,37 @@
-﻿window.DAILY_INSIGHTS = [
+window.DAILY_INSIGHTS = [
     {
+        date: "2026-07-03〜2026-07-05",
+        analysis: {
+            jp: "サンバーのノスタルジック内装（[jp1375]）は、レトロな温もりと機能性を両立する素材への回帰を示唆している。アウディQ3のコラムシフト（[jp1377]）やレクサスの特別仕様車（[jp1379]）が物理スイッチや新加飾を標準化するのは、安全性と高級感を重視するトレンドである。ダイハツコペンの調音シート（[jp1378]）はルーフパネル裏貼りだけで音質改善し、マツダCX-5の全面液晶化（[jp1373]）はデジタル化の加速を象徴する。薄型サブウーファーの登場（[jp1376]）も空間効率を重視する内装部品の進化を意味する。内装開発室では、レトロ素材と先進デジタルのハイブリッド、物理操作の安全性、高機能薄型音響が求められる。",
+            cn: "豊田合成の内装開発室向けトレンドと示唆を、指定された候補ニュースを根拠に考察する。まず、中国EV市場では[cn1199]のようにハイブリッド化が加速し、[cn1200]でも550kW出力のシステムが採用される。この高出力化は[cn1198]の受注急増にも繋がり、内装耐久性が求められる。一方で[cn1197]の不具合は、ガラスルーフや充電ポートの水没リスクを明示している。海外展開の[cn1203]で中国技術が課題とされ、国内では[cn1204]の2027年税制改正が商用車市場を縮小させる。内装開発では、[cn1200]の連続スクリーン採用のように、[cn1199]の物理スイッチ併用を模索し、[cn1197]の水没対策を[cn1203]の海外基準に合わせる。税制改正で[cn1198]のような高級セダン需要が高まるが、内装素材は[cn1204]の商用車削減を考慮し、[cn1200]のDevialet連携で高級感を維持すべき。",
+            in: "[in1250]で示された2026年式XL7のプレミアム内装は、[in1246]のKia India BEV戦略や[in1242]のシエラEV高級仕様に呼応し、デジタルインストルメントクラスターの進化が内装体験の要となる。[in1247]のルノー・キッド簡素化は、[in1245]のEV割引施策と合わせ、コスト最適化された素材選択が重要になる。[in1241]のターボ比較から、燃費性能向上は内装軽量化や再生素材採用と連動すべき。豊田合成は、高機能デジタルパネル素材と、再生プラスチックを多用した軽量インテリアパネルの両軸で、プレミアム感と安価さを両立する操作体験を提案すべき。",
+            us: "統合型HMIが主流となる中、高級セダンの内装素材は長期的価値維持に寄与する。より、高級感のある素材はコックピットの快適装備と相まって「隠れた宝石」として評価される。さらに、Corolla Cross新モデルでは高級素材が採用され、ランクルのグリルバッジとの相乗効果が期待される。ただし、フォード・エクスプローラーのトリム比較やM3のシート不自然さを踏まえ、内装設計の合理性も重要である。セダン価格の上昇により、内装部品の価値向上は必須。DIN規格廃れを考慮し、HMI統合と高級素材の両立が求められる。未来の内装は、高級感と機能的信頼性を両立するデザインがトレンドとなる。",
+            eu: "[eu1159][eu1163][eu1155]のトレンドから、内装開発室はAIアシスタント統合とコンパクトEV向けモジュール化を急務とすべきである。[eu1154][eu1158]の示唆から、素材耐久性と運転体験の両立が求められる。[eu1157]の体験から、スポーツカーの広がりを持たせつつ、[eu1155]の2人乗りEVのように軽量かつ高機能な内装体験を構築する必要がある。長寿命設計と、最新AIを織り交ぜた操作体験の両立が、欧州市場での差別化要因となる。",
+        },
+        ideas: {
+            jp: [
+                { id: 1296, img: "images/idea_1296.png", title: "ノスタルジック触感シートカバー", desc: "ロシアUAZをモチーフにしたサンバーの内装コンセプトを応用。ブラウンとアイボリーのオリジナルシートカバーを汎用車に採用し、サイドブレーキやシフトブーツにも自作レザーを施す。旧車風の落ち着いた内装で、運転中に心地よい触覚と温かさを保つ体験を提供。 [jp1375]", imagePrompt: "A vintage-style car interior featuring a brown and ivory leather custom seat cover on a compact hatchback. The dashboard has a side brake lever and a shift boot made of handmade leather. The lighting is warm and nostalgic, highlighting the texture of the materials.", sourceNewsIds: ["jp1375"] },
+                { id: 1297, img: "images/idea_1297.png", title: "ウェルネス音響シートシステム", desc: "レクサスUX300hの特別仕様車のベンチレーションシートヒーターと、A4サイズ超薄型サブウーファーの音響技術を融合。シート下への超薄型スピーカー設置で低音を強化し、ベンチレーション機能で快適な温度管理を実現。ウェルネスコックピットのように自動最適化で、乗員の気分を考慮した内装体験を創出。 [jp1376]", imagePrompt: "A modern luxury car interior showing a high-end seat with a built-in ventilation heater and a slim speaker installed under the seat. The lighting is soft and high-tech, highlighting the advanced materials. The overall impression is one of comfort and wellness technology.", sourceNewsIds: ["jp1376"] },
+            ],
+            cn: [
+                { id: 1298, img: "images/idea_1298.png", title: "静寂感アップサイクルシート", desc: "BYD Ti9 の連続スクリーン環境で、廃棄エアバッグ生地をリサイクルしたアップサイクル素材でシートを張ります。Devialet オーディオの音質をより良く響かせ、静かな空間で癒やされる喜びをユーザーに。 [cn1200]", imagePrompt: "A luxury car interior with a BYD Ti9 SUV. The seats are covered in a textured, eco-friendly fabric made from recycled airbag material, glowing softly under ambient lighting. A large continuous screen spans the dashboard. A Devialet audio speaker is visible near the door. The scene is calm, with soft natural light filtering through the glass roof.", sourceNewsIds: ["cn1200"] },
+                { id: 1299, img: "images/idea_1299.png", title: "安心感リサイクルインパネ", desc: "吉利銀河巡洋艦700 の物理スイッチやアルミダイヤルを重視するユーザー向けに、廃ステアリング革をアップサイクルしたインパネ素材を提案します。高級感と安心感を兼ね備え、操作への喜びを。 [cn1199]", imagePrompt: "A close-up view of a luxury SUV interior dashboard. The dashboard surface is made of rich, dark leather with a subtle grain texture, derived from recycled steering wheel material. Physical aluminum dials and switches are embedded. Soft, warm LED lighting highlights the texture. The scene conveys a sense of craftsmanship and safety.", sourceNewsIds: ["cn1199"] },
+            ],
+            in: [
+                { id: 1300, img: "images/idea_1300.png", title: "自動組立XL7メーター", desc: "2026年式Suzuki XL7のデジタルインストルメントクラスターを型内塗装技術で自動化製造。生産コストが下がり、プレミアム内装の普及がうれしさで広がります。 [in1250]", imagePrompt: "automated manufacturing line for digital instrument cluster on a Suzuki XL7 dashboard, high-tech robotics assembling sleek black screens with LED lighting, clean industrial environment", sourceNewsIds: ["in1250"] },
+                { id: 1301, img: "images/idea_1301.png", title: "漆黒EVコンソール", desc: "タタ・シエラEVの高級仕様を新漆黒めっき加飾部品で実現。光を反射しない深みのある漆黒インパネが、低価格EV市場の質感向上にうれしさをもたらします。 [in1245]", imagePrompt: "luxury black EV console panel with deep matte finish, new plating technology reflecting light softly, sleek modern interior design with subtle ambient lighting", sourceNewsIds: ["in1245"] },
+            ],
+            us: [
+                { id: 1302, img: "images/idea_1302.png", title: "植物系HMIパネル", desc: "統合型HMIへの移行でアップグレードが難しい旧車に、植物由来セルロースナノファイバーを配合した軽量高強度パネルを装着。DIN規格廃止後の車種でも快適コックピットを実現し、環境負荷低減で開発者と消費者がうれしくなる。 [us1195,us1198]", imagePrompt: "Modern car interior showing a high-tech integrated HMI screen with a natural plant-based texture panel made of cellulose nanofiber. The dashboard has a soft organic finish, warm ambient lighting, and a sleek minimalist design. The screen displays a nature-inspired interface with green accents. Soft natural light from outside illuminates the cabin, highlighting the sustainable materials. High detail, photorealistic, 4k, interior design concept.", sourceNewsIds: ["us1195", "us1198"] },
+                { id: 1303, img: "images/idea_1303.png", title: "リサイクルトリムHMI", desc: "統合型HMI主流化でアップグレードが困難な車に、リサイクル素材で高強度内装パネルを新設。高級セダンやCorolla Crossのような価値維持を実現。開発者と消費者が環境配慮でうれしくなる。 [us1195,us1193]", imagePrompt: "Car interior featuring a recycled material trim panel integrated with a large integrated HMI screen. The panel has a unique textured finish made from sustainable recycled composites. Soft warm lighting highlights the eco-friendly texture. The dashboard looks modern and luxurious. Photorealistic, high detail, 4k, interior design concept.", sourceNewsIds: ["us1195", "us1193"] },
+            ],
+            eu: [
+                { id: 1304, img: "images/idea_1304.png", title: "AIアシスト熱管理アームレスト", desc: "ルノーのGoogle Gemini連携ナビで自動充電ルートを設定時、アームレストが車内温度を快適に保ち、AIが最適な湿度を制御。ドライバーが充電待ちでもリラックスできる幸せを提供。 [eu1159,eu1163]", imagePrompt: "Luxury car interior armrest with glowing AI interface, soft blue ambient lighting, climate control sensors embedded, sleek modern design, high-end materials, futuristic technology integration, European luxury car aesthetic", sourceNewsIds: ["eu1159", "eu1163"] },
+                { id: 1305, img: "images/idea_1305.png", title: "発光ミリ波安全パネル", desc: "豊田合成の発光ミリ波レーダー透過エンブレムをパネルに採用。吉利EX2のようなEVで、安全装備をデザイン要素に。ミリ波が透過し、ADAS機能と内装照明を両立。ドライバーが安心し、乗客が快適に移動する幸せ。 [eu1163]", imagePrompt: "EV interior panel with advanced lighting, integrated radar sensors for ADAS, sleek modern design with glowing elements, high-tech materials, European EV interior aesthetic, seamless integration of safety and luxury", sourceNewsIds: ["eu1163"] },
+            ],
+        }
+    },
+{
         date: "2026-07-02",
         analysis: {
             jp: "豊田合成内装開発室向けに、4 件の候補ID [jp1367][jp1368][jp1363][jp1366][jp1364][jp1370] を根拠に考察します。着座検知による自動送風、紫外線対策、温度低下は [jp1367][jp1368] から即効性のある快適性が重視され、[jp1363] の新型BMW X5 の天然石「スレート」や [jp1366] のメルセデス・ベンツ新型Sクラスにおける自然言語対話機能、フィジカルAI との相乗から、素材と AI を組み合わせた環境制御の融合が必須です。さらに [jp1364] のスマートフォンホルダーに冷却ファンや Qi2 規格搭載、[jp1370] のシートガードエプロンの汚れ摩耗防止素材からは、耐久性と機能性の両立が要請されます。結論として、内装では触感を重視しつつ、センサー制御による空調、AI 対話、部品冷却・防汚機能を統合した、自律的で高機能な室内環境の構築が求められます。",
