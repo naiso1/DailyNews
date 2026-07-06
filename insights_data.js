@@ -1,5 +1,37 @@
-﻿window.DAILY_INSIGHTS = [
+window.DAILY_INSIGHTS = [
     {
+        date: "2026-07-06",
+        analysis: {
+            jp: "群馬パーツショーでトヨタカスタマイジング＆ディベロップメントがアルファードの五感体験を強化する[jp1381]動きや、東洋シートがソフトトップの軽量化と歴史を背負った[jp1385]展示は、内装素材への期待感を示唆する。東洋シートの14.6kg軽量化[jp1385]は、EV化に伴うエネルギー効率向上への貢献を意味する。これにトイファクトリーのハイエースキャンピングカー受注変更[jp1382]から、顧客主導の架装需要が表面化している点が示唆する。KW車高調のロール抑制[jp1384]やマツダ新型CX-5のしなやかな走性[jp1383]は、物理的な走行安定性と内装の質感が連動する。EV「モンスタースポーツ007」[jp1387]の公開は、海外EVから得られる新素材の適用可能性を開く。これらのトレンドから、再生素材や新触感素材で快適性を追求し、LED通知イルミネーション[jp1381]の安全視認性を活用した内装が求められる。",
+            cn: "豊田合成の内装開発室向けに、4件以上の異なる候補IDを必須条件とし、トレンド・示唆・求められる内装部品・素材・操作体験について考察を構築します。シャオミのTitan Alloy 2.0が示す再生アルミ素材を用いた軽量化と環境配慮は、欧州規制への対抗策として内装の軽量化やサステナブル素材採用が必須となります。MG 07のSnapdragon 8295P搭載は、高負荷処理可能なAI内装モジュールにより、複雑なHMIや多言語翻訳など高度な操作体験を要求し、その分、高速なデータ処理が可能な制御システムが必要です。理想L6のコスト増やテスラ Model Y Lの高価格から、材料費高騰下で価値を維持する高機能内装が求められ、CATLの8Cバッテリーのような高負荷充電技術は、車載電源容量の確保と熱管理内装システムの強化を意味します。物流不足の課題も考慮すると、軽量化素材と同時、耐久性を担保した設計が重要となります。 関連画像: [cn1213] [cn1211] [cn1214]",
+            in: "インド市場で見られる新車インテリアのトレンドは、高級感と機能性の両立にある[in1251]。マヒンドラのVision Sはピアノブラック調素材や大画面を[in1260]、トヨタのヒルックスはコックピット全体のリニューアルで対応[in1259]。これらは低価格車でも高級感を演出する素材選択と、型内塗装技術によるコスト削減を可能にする[in1252]。また、データ増大に対応したフラッシュストレージや[in1251]、EV化に伴うマルチエネルギー対応も重要[in1258]。開発者は物理ボタンとデジタル表示のバランス[in1253]、通気性と安全面の配慮[in1254]、そして環境配慮素材の活用を検討すべき[in1255]。",
+            us: "マツダCX-90のナパレザーやボーズオーディオは、実用性と高級感を両立する内装の方向性を示唆する[us1208]。フォードのプロトタイプEVトラックは大型タッチスクリーンと実用ドアハンドルを組み合わせ、操作性とモダンなHMIの融合がトレンドになる[us1199]。Kia SportageはAndroid系HMIを採用し、物理ボタンを残すことで直感的な操作体験を追求する[us1201]。一方、カデラックVistiq EVの3列目シート回収問題は、自動機能の信頼性向上が必須であることを強調する[us1200]。高級感のある内装は、愛国心テーマなど個性化された素材やデザインで差別化が鍵となる[us1202]。安全な閉じ込め防止機能や、多世代対応の快適なシート設計が求められる[us1200]。",
+            eu: "EU市場でレンジローバー次期モデルはセダン後継を名乗るクロスオーバーへ進化[eu1168]し、プレミアムオフロード定義を再確認[eu1164]する。アウディはSSPプラットフォームで高ボリュームEV投入[eu1169]、小鹏は長距離航続BEV/EREV発売[eu1172]を計画。ベンツはBentley EV SUV公開[eu1165]、企業車は税金対策模索[eu1167]中。内装開発者は「物理操作の温かみ」と「デジタル快適性」両立に迫られる。高級車では歴史の重み[eu1164]を現代的に継承し、EVでは静寂中の触覚操作[eu1172]が重要。低価格帯でもリサイクル素材[eu1168]や省エネ技術[eu1165]採用は必須。開発者はセグメントをまたぐデザイン[eu1168]や高強度植物由来素材[eu1164]を組み合わせ、デジタルと物理の境界を曖昧にする体験設計が求められている。",
+        },
+        ideas: {
+            jp: [
+                { id: 1316, img: "images/idea_1316.png", title: "バイオ再生素材アルファードシート", desc: "トヨタカスタマイジング＆ディベロップメントがアルファードで展示するモデリスタコンセプトから、シート表皮にバイオ系再生素材を組み合わせ、音響空間を五感で体験できる乗車イベントで、エコと快適さの両立を愉しむ。 [jp1381]", imagePrompt: "Interior shot of Toyota Alphard concept seat with brown and ivory bio-regenerated leather texture, ambient LED lighting strips under seat edges, warm ambient glow, high quality interior material texture detail", sourceNewsIds: ["jp1381"] },
+                { id: 1317, img: "images/idea_1317.png", title: "LED安全通知イルミネーションソフトトップ", desc: "東洋シートのロードスターソフトトップ軽量化技術に、豊田合成LED通知イルミネーションを内張りパネルに統合し、安全注意を光で伝える。軽量化と視認性の両立で愉しむ。 [jp1385]", imagePrompt: "Soft top convertible interior with LED notification illumination strips integrated into the headliner, warm amber safety light patterns on fabric, lightweight carbon fiber texture visible on seat frame, evening lighting atmosphere", sourceNewsIds: ["jp1385"] },
+            ],
+            cn: [
+                { id: 1318, img: "images/idea_1318.png", title: "再生アルミ・型内塗装コンソール", desc: "シャオミの再生アルミウムとCATLの8Cバッテリーを組み合わせ、MG 07のAI内装と同様に型内塗装でシームレスな質感を。環境配慮と高機能さを両立し、ユーザーがエコを嬉しく感じる設計です。 [cn1214,cn1207]", imagePrompt: "Modern EV interior console made of recycled aluminum with seamless interior painting, featuring integrated wireless charging pads and AI climate control interface, soft warm lighting highlights sustainable texture", sourceNewsIds: ["cn1214", "cn1207"] },
+                { id: 1319, img: "images/idea_1319.png", title: "AI防水リバーシブルコンソール", desc: "吉利銀河巡洋艦700の防水技術を継承し、MG 07のSnapdragon 8295Pと理想L6のコスト効率を考慮。リバーシブル構造で物理スイッチとAI操作を両立し、後部座席が快適で嬉しくなる設計です。 [cn1213,cn1211]", imagePrompt: "Waterproof reversible console with physical toggle switches and AI touch panel, showing modular design with sustainable materials, soft ambient lighting highlights dual-functionality for passengers", sourceNewsIds: ["cn1213", "cn1211"] },
+            ],
+            in: [
+                { id: 1320, img: "images/idea_1320.png", title: "コスト削減型ピアノブラック", desc: "マヒンドラのVision Sに採用されているピアノブラック調高級素材を、型内塗装技術で低価格車向けに再現。製造工程を自動化し歩留まりを向上させることでコストを削減。開発者も生産ラインも効率化され、より安く高級感のある車内を実現できる喜びを味わえるでしょう。 [in1260]", imagePrompt: "Interior of a compact SUV showing a dashboard with high-gloss piano black finish material, large curved touchscreen display, and physical buttons. Industrial manufacturing background with robotic arms applying coating inside a car frame, clean white lighting highlighting the glossy texture.", sourceNewsIds: ["in1260"] },
+                { id: 1321, img: "images/idea_1321.png", title: "小型充電ホルダ搭載コックピット", desc: "豊田合成の小型ワイヤレス充電ホルダを、マヒンドラBE 6のステアリングやThar Roxxのダッシュボード要素に統合。スマホ充電が簡単になり、後席USBポートも搭載。乗客もドライバーも快適で、最新コックピット技術で安全かつスタイリッシュなドライブを楽しめます。 [in1253]", imagePrompt: "Close-up view of a modern car cockpit featuring a wireless charging pad on the center console, BE6 style steering wheel, and Thar Roxx inspired dashboard. Vertical AC vents with LED ambient lighting, smartphone charging in progress, warm interior lighting.", sourceNewsIds: ["in1253"] },
+            ],
+            us: [
+                { id: 1322, img: "images/idea_1322.png", title: "EV専用熱管理フロアパネル", desc: "フォードのEVトラックやカデラックのVistiq EV回収を参考に、EV専用設計でフロアにヒートポンプを配置。運転席と後席の冷暖房を最適化し、低価格EVでも快適な車内環境を。熱管理が向上し、運転者も後席の家族もうれしくなる。 [us1199,us1200]", imagePrompt: "EV専用設計のフロアパネルで、ヒートポンプユニットが透明なパネルの下に配置されている。運転席と後席の温度センサーがフロアに埋め込まれており、冷暖房の効率が向上している様子が写っている。", sourceNewsIds: ["us1199", "us1200"] },
+                { id: 1323, img: "images/idea_1323.png", title: "セルロースナノファイバーシート", desc: "マツダCX-90の高級内装を参考に、セルロースナノファイバーをシートに配合。ナパレザーのような質感と抗菌消臭機能を兼ね備え、環境素材で高級感を。家族全員が車内を清浄に保て、運転者と後席の家族もうれしくなる。 [us1208]", imagePrompt: "マツダCX-90[jp1208]のような高級感のあるシートに、セルロースナノファイバーが配合された素材が使用されている。ナパレザーのような質感で、抗菌消臭の機能が効いている様子が写っている。", sourceNewsIds: ["us1208"] },
+            ],
+            eu: [
+                { id: 1324, img: "images/idea_1324.png", title: "セグメントレスデジタルアームレスト", desc: "レンジローバーの次期クロスオーバー[jp eu1168]のようにセグメントを無視したデザインを、アームレストのHMIにも適用。デジタルと物理の操作体験を融合し、高級感[jp eu1164]を維持しつつ、EVの静寂[jp eu1172]を愉しめる。開発者がうれしいのは、素材の歴史と未来を同時に表現できる点。[jp eu1164] [eu1168]", imagePrompt: "Futuristic interior armrest with sleek digital touch interface glowing softly, blending premium leather texture with metallic accents, positioned in a luxury SUV cabin with ambient lighting, close-up shot focusing on the seamless transition between physical and digital controls.", sourceNewsIds: ["eu1168"] },
+                { id: 1325, img: "images/idea_1325.png", title: "植物由来再生パネルアームレスト", desc: "セルロースナノファイバー配合内装材[jp eu1164]をアームレストに採用し、小鹏の長距離航続[jp eu1172]を想定した省エネヒーター機能を内蔵。ベンツのEV SUV[jp eu1165]のような高級感と、アウディの高ボリュームEV[jp eu1169]の普及性を両立。開発者がうれしいのは、環境配慮と機能性の両立。[jp eu1164] [jp eu1172] [jp eu1169] [eu1164]", imagePrompt: "Eco-friendly armrest panel made from natural fiber materials with a subtle wood grain texture, integrated with a compact heating element, displayed in a clean EV interior with soft natural lighting highlighting the sustainable material quality and technological integration.", sourceNewsIds: ["eu1164"] },
+            ],
+        }
+    },
+{
         date: "2026-07-03〜2026-07-05",
         analysis: {
             jp: "サンバーのノスタルジック内装[jp1375]のように、クラシックな素材感を取り入れるトレンドが定着しつつある。物理スイッチの安全性を重視する動き[jp1377]も、タッチパネル全盛の現代における盲操作の安心感を示唆する。この安全志向は、レクサスの新色「蒼」やレイヤーグリッド加飾[jp1379]に見られる高級感とも共鳴する。さらに、メーター全面液晶化[jp1373]が進む中、音質向上を目指す調音シート[jp1378]や、超薄型サブウーファー[jp1376]といった音響機能への投資も重要だ。運転者が視覚情報を頼りにせず、触覚と聴覚に頼る体験を、内装の質感と機能性で支えることが求められている。",
