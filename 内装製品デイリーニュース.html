@@ -678,8 +678,8 @@ h1 {
 /* ── Analysis Grid / Cards ───────────────── */
 .analysis-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 18px;
     margin-top: 24px;
 }
 .analysis-cards {
@@ -690,14 +690,17 @@ h1 {
 }
 
 .analysis-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 24px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+        radial-gradient(circle at top right, rgba(125, 241, 194, 0.08), transparent 34%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 0;
 }
 .analysis-card:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
 .analysis-card.region-jp { border-top: 3px solid #ff4d4d; }
@@ -706,13 +709,76 @@ h1 {
 .analysis-card.region-us { border-top: 3px solid #3c3b6e; }
 .analysis-card.region-eu { border-top: 3px solid #003399; }
 
-.flag-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px; }
+.flag-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; }
 .flag-emoji { font-size: 32px; line-height: 1; }
 .country-label { font-size: 18px; font-weight: 700; color: var(--text); opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
-.analysis-text-body { font-size: 15px; line-height: 1.8; color: #d0d0d0; text-align: justify; }
+.analysis-text-body {
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: #d8deea;
+    text-align: justify;
+    letter-spacing: 0.01em;
+}
 .analysis-text-body strong { color: #fff; background: rgba(125, 241, 194, 0.15); padding: 0 4px; border-radius: 4px; font-weight: 600; }
-.analysis-ref-group { display: inline; margin-top: 0; font-size: 11px; color: var(--muted); white-space: normal; overflow-wrap: anywhere; word-break: break-word; line-height: 1.6; }
-.analysis-ref-link { color: #8ec5ff; font-size: 11px; text-decoration: underline; text-underline-offset: 2px; }
+.analysis-text-body p { margin: 0 0 0.72em; }
+.analysis-text-body p:last-child { margin-bottom: 0; }
+.analysis-ref-link {
+    color: #8ec5ff;
+    font-size: 10px;
+    text-decoration: none;
+    text-underline-offset: 2px;
+    padding: 1px 4px;
+    border-radius: 999px;
+    background: rgba(142, 197, 255, 0.12);
+    white-space: nowrap;
+}
+.analysis-ref-link:hover { text-decoration: underline; }
+.analysis-source-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 8px;
+    margin-top: 2px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.analysis-source-card {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.18);
+    color: var(--text);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    cursor: pointer;
+    min-width: 0;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.analysis-source-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(125, 241, 194, 0.55);
+}
+.analysis-source-card img {
+    width: 100%;
+    height: 58px;
+    object-fit: cover;
+    display: block;
+    background: #17202e;
+}
+.analysis-source-title {
+    display: block;
+    padding: 6px 7px 7px;
+    font-size: 10.5px;
+    line-height: 1.35;
+    color: #cfd8e7;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.analysis-source-empty {
+    font-size: 11px;
+    color: var(--muted);
+    padding: 8px 0 0;
+}
 
 /* ── Social Actions ──────────────────────── */
 .social-actions {
@@ -844,13 +910,7 @@ h1 {
 }
 
         /* ── Citation Thumbnail ──────────────────── */
-        .analysis-ref-group {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            vertical-align: middle;
-            margin: 0 2px;
-        }
+        .analysis-ref-group { display: inline; }
         /* クリッカブルなサムネイルカード */
         .ref-card {
             display: inline-block;
@@ -2601,24 +2661,61 @@ h1 {
                 .replace(/\n\s*(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])/gi, " $1")
                 .replace(/(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])\s*\n/gi, "$1 ")
                 .replace(/\n{2,}/g, "\n");
-            const html = formatRichText(normalized);
+            const html = formatRichText(normalized)
+                .split(/<br\s*\/?>/i)
+                .map(part => part.trim())
+                .filter(Boolean)
+                .map(part => `<p>${part}</p>`)
+                .join("");
             return html.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
                 const ids = String(rawIds)
                     .split(",")
                     .map(s => s.trim())
                     .filter(Boolean);
                 if (!ids.length) return all;
-                const cards = ids.map(id => {
+                const links = ids.map(id => {
                     const n = newsById.get(id);
-                    if (!n) return '';
+                    if (!n) return "";
                     const titleAttr = escapeHtml(n.title || id);
-                    if (n.img) {
-                        return `<button class="ref-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}"><img class="ref-thumb" src="${escapeHtml(getDisplayImageUrl(n.img))}" alt="" loading="lazy" onerror="this.closest('.ref-card').style.display='none'"></button>`;
-                    }
-                    return `<button class="ref-card ref-card-noimg" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}">${escapeHtml(id)}</button>`;
+                    return `<button class="analysis-ref-link" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}">${escapeHtml(id)}</button>`;
                 }).filter(Boolean);
-                return cards.length ? `<span class="analysis-ref-group">${cards.join('')}</span>` : '';
+                return links.length ? `<span class="analysis-ref-group">${links.join('')}</span>` : "";
             });
+        }
+
+        function extractAnalysisRefIds(value, newsById, limit = 6) {
+            const ids = [];
+            const seen = new Set();
+            const normalized = normalizeAnalysisRefs(value);
+            normalized.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
+                String(rawIds).split(",").map(s => s.trim()).filter(Boolean).forEach(id => {
+                    const n = newsById.get(id);
+                    if (!seen.has(id) && n && n.img) {
+                        seen.add(id);
+                        ids.push(id);
+                    }
+                });
+                return all;
+            });
+            return ids.slice(0, limit);
+        }
+
+        function renderAnalysisSources(value, newsById) {
+            const ids = extractAnalysisRefIds(value, newsById, 6);
+            if (!ids.length) {
+                return `<div class="analysis-source-empty">関連画像が見つかりません。次回生成時に画像付きニュースを優先します。</div>`;
+            }
+            const cards = ids.map(id => {
+                const n = newsById.get(id);
+                const title = escapeHtml(n.title || id);
+                const img = escapeHtml(getDisplayImageUrl(n.img));
+                return `
+                    <button class="analysis-source-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
+                        <img src="${img}" alt="" loading="lazy" onerror="this.closest('.analysis-source-card').style.display='none'">
+                        <span class="analysis-source-title">${title}</span>
+                    </button>`;
+            }).join("");
+            return `<div class="analysis-source-strip">${cards}</div>`;
         }
 
         function buildIdeaIndex() {
@@ -3452,6 +3549,7 @@ h1 {
                             <span class="country-label">JAPAN</span>
                         </div>
                         <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.jp, newsById)}</div>
+                        ${renderAnalysisSources(day.analysis.jp, newsById)}
                     </div>`;
 
                 if (showCn) analysisHTML += `
@@ -3461,6 +3559,7 @@ h1 {
                             <span class="country-label">CHINA</span>
                         </div>
                         <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.cn, newsById)}</div>
+                        ${renderAnalysisSources(day.analysis.cn, newsById)}
                     </div>`;
 
                 if (showIn) analysisHTML += `
@@ -3470,6 +3569,7 @@ h1 {
                             <span class="country-label">INDIA</span>
                         </div>
                         <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.in, newsById)}</div>
+                        ${renderAnalysisSources(day.analysis.in, newsById)}
                     </div>`;
 
                 if (showUs) analysisHTML += `
@@ -3479,6 +3579,7 @@ h1 {
                             <span class="country-label">USA</span>
                         </div>
                         <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.us, newsById)}</div>
+                        ${renderAnalysisSources(day.analysis.us, newsById)}
                     </div>`;
 
                 if (showEu) analysisHTML += `
@@ -3488,6 +3589,7 @@ h1 {
                             <span class="country-label">EUROPE</span>
                         </div>
                         <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.eu, newsById)}</div>
+                        ${renderAnalysisSources(day.analysis.eu, newsById)}
                     </div>`;
 
                 analysisHTML += `</div></section>`;

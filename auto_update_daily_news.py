@@ -648,6 +648,31 @@ def analysis_unique_refs(text: str) -> set[str]:
     return ids
 
 
+def ensure_analysis_image_refs(text: str, source_items: list, min_image_refs: int = 3) -> str:
+    """Ensure analysis references include enough image-backed news for the UI source strip."""
+    if not text:
+        return text
+    image_ids = [
+        (it.get("newsId", "") or "").strip().lower()
+        for it in select_analysis_items(source_items, limit=8)
+        if (it.get("newsId", "") or "").strip() and it.get("img")
+    ]
+    if not image_ids:
+        return text
+    existing = analysis_unique_refs(text)
+    have = [nid for nid in image_ids if nid in existing]
+    need = min(min_image_refs, len(image_ids))
+    if len(have) >= need:
+        return text
+    missing = [nid for nid in image_ids if nid not in existing][: need - len(have)]
+    if not missing:
+        return text
+    suffix = " 関連画像: " + " ".join(f"[{nid}]" for nid in missing)
+    if text.endswith(("。", "！", "？", "!", "?")):
+        return text + suffix
+    return text + "。" + suffix
+
+
 def bracket_bare_allowed_ids(text: str, allowed_ids: set[str]) -> str:
     """Convert bare news ids like eu1069 to [eu1069] so the HTML can link them."""
     if not text or not allowed_ids:
@@ -895,7 +920,12 @@ def _item_for_prompt(it: dict) -> str:
         tags = ",".join(tags[:5])
     else:
         tags = str(tags)[:80]
-    return f"- {id_text}{title} / {desc} / {tags}{score_text}"
+    img_text = " / image=available" if it.get("img") else " / image=missing"
+    if it.get("imageInterior") is True:
+        img_text += "/interior"
+    elif it.get("imageInterior") is False:
+        img_text += "/not-interior"
+    return f"- {id_text}{title} / {desc} / {tags}{score_text}{img_text}"
 
 
 def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
@@ -908,7 +938,7 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
         for kw in ["シート", "ディスプレイ", "HMI", "HUD", "コックピット", "コンソール", "ステア", "イルミ", "安全", "新素材", "音響", "快適", "操作"]:
             if kw.lower() in blob:
                 keyword_bonus += 4
-        image_bonus = 10 if it.get("imageInterior") is True else 0
+        image_bonus = 18 if it.get("imageInterior") is True else (8 if it.get("img") else -20)
         weak_penalty = 0
         for kw in ["不正", "調査", "投資", "株", "補助金", "販売台数", "工場", "生産台数"]:
             if kw.lower() in blob:
@@ -919,6 +949,10 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
         it for it in items
         if it.get("newsId") and it.get("title") and it.get("desc")
     ]
+    image_candidates = [
+        it for it in candidates
+        if it.get("img")
+    ]
     preferred = [
         it for it in candidates
         if it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 55
@@ -926,9 +960,11 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
     # Prefer strong interior signals, but do not stop at 1-2 items. Country
     # analysis needs enough source breadth to explain a market trend.
     preferred.sort(key=_score, reverse=True)
-    fallback = [it for it in candidates if it not in preferred]
+    fallback = [it for it in image_candidates if it not in preferred]
+    last_resort = [it for it in candidates if it not in preferred and it not in fallback]
     fallback.sort(key=_score, reverse=True)
-    return (preferred + fallback)[:limit]
+    last_resort.sort(key=_score, reverse=True)
+    return (preferred + fallback + last_resort)[:limit]
 
 
 def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dict]]:
@@ -992,6 +1028,7 @@ def make_country_prompt(
             anchor_lines.append(_item_for_prompt(it))
     anchors_text = "\n".join(anchor_lines) if anchor_lines else "なし"
     analysis_ids = [it.get("newsId", "") for it in analysis_items if it.get("newsId")]
+    analysis_image_ids = [it.get("newsId", "") for it in analysis_items if it.get("newsId") and it.get("img")]
     duplicate_guard = build_duplicate_guard_text(history_ideas or [], max_items=12)
     angles = load_idea_angles()
     angle = random.choice(angles) if angles else ""
@@ -1037,13 +1074,19 @@ def make_country_prompt(
     - imagePromptはアイデアごとに構図・対象物・素材・光・色を変え、似た画像にならないようにする
     - titleとdescにマークダウン記法（**太字**等）を使用しない
     - analysisは300〜420字程度。単なるニュース要約ではなく、豊田合成の内装開発室向けの示唆として書く
+    - analysisは新聞の短い解説記事のように、見出しのある材料をつなぎ、読みやすい自然な文章にする
+    - analysisに「以下に提示します」「考察を提示します」「豊田合成内装開発室向けのトレンド考察」などの前置き・メタ説明は禁止
     - analysisは「その国で何がトレンドか」「そこから何が考えられるか」「今後どんな内装部品・素材・操作体験が求められるか」を、わかりやすい言葉で書く
     - analysisでは具体ニュースをできるだけ幅広く使う。利用可能なら4〜6件の異なるニュースIDを取り上げる。候補ID: {",".join(analysis_ids) or "なし"}
+    - analysisの参照IDは、できるだけ画像がある候補IDから選ぶ。画像あり候補ID: {",".join(analysis_image_ids) or "なし"}
+    - 画像がある候補IDが3件以上ある場合、analysisでは最低3件以上の画像あり候補IDを参照する
     - analysisは開発者が次に検討できる言葉にする（例: 低価格EV向けの触感品質、後席快適、物理操作と大画面の両立、環境材、照明、安全表示など）
     - analysisは文ごとに関連ニュースID参照を付ける（例: ...素材[jp123]...）
     - 参照は文末にまとめず、関連語の直後に入れる
     - 参照IDはその文に直接関係するIDのみ（1文あたり1〜3件）
     - id: という文字は書かない
+    - 「画像のように」「写真の通り」「上の画像」など、画像だけに依存する表現は禁止。必ず何が写っているか、何が示唆かを文章で説明する
+    - 中国・インドなど海外ニュースでも、画像だけで説明せず、車内の部品・素材・表示・操作体験を文章で具体化する
     - ideasのdesc末尾にはsourceNewsIdsと同じID参照を [jp123] の形式で付ける
     - analysisに説明・解説・注釈・思考過程を含めない。考察文のみ出力する
     """)
@@ -1339,6 +1382,12 @@ def main():
                     analysis_final = filter_analysis_refs_to_allowed(
                         normalize_analysis_refs_per_sentence(
                             bracket_bare_allowed_ids(analysis_final, allowed_ids)
+                        ),
+                        allowed_ids,
+                    )
+                    analysis_final = filter_analysis_refs_to_allowed(
+                        normalize_analysis_refs_per_sentence(
+                            ensure_analysis_image_refs(analysis_final, grouped[key])
                         ),
                         allowed_ids,
                     )
