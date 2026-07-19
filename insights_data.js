@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-07-17〜2026-07-19",
+        analysis: {
+            jp: "[jp1478]のワイヤレス化は、[jp1479]の車中泊仕様と相まって、車内での没入型マルチタスク環境の標準化を示唆する。[jp1471]の専用インテリアパネルは、[jp1473]のドッグエディション同様、個体差を許容するカスタマイズ性が市場で重要視されている。[jp1477]の遮熱カバーは、[jp1480]のトランク容量確保と並行し、高温環境下での機能維持と荷室の広さを両立する素材開発が急務となる。[jp1478]のCarPlay連携は、[jp1479]のモニター活用を補完し、[jp1471]の素材選択と共に、視覚情報と触覚素材の調和が内装開発の鍵となる。[jp1473]の滑り止め素材は、[jp1477]の装着性向上と連動し、[jp1480]のスポーツシートとは対照的に、汎用性のある安全な素材選定が求められる。",
+            cn: "豊田合成の内装開発室向けに、トレンド・示唆・求められる内装部品/素材/操作体験を考察します。 まず、[cn1298]に示された合成スエード素材の採用は、[cn1293]の原材料費高騰下でもコスト制御しつつ高級感を維持する解法として重要です。[cn1291]で公開されたフルLCDメーターやLiDAR搭載は、[cn1297]のNX9031U具現知能チップと連携し、都市自動運転のシームレスなHMI体験を可能にします。 さらに、[cn1295]のBYDタングEVや[cn1294]のZ9Sで示された超高速度・長航続距離は、内装の剛性強化や熱管理素材への要求を高めると示唆されます。",
+            in: "豊田合成内装開発室へ向けたトレンド考察を提示します。 まず、インダストリー全体で「EVポートフォリオ強化」が加速しており、マルチ・ヒュンダイ・タタらが異なる顧客層へ新車を開発する計画が進んでいます。これに伴い、インド市場ではMGが2027年8月にADAPTプラットフォーム初採用の3列EV SUVを投入予定で、既存のエンジンオプション維持も見込み。 さらに、マツダと現代は2026年までにMPVやPunch EVなど新車を発表し、特殊素材サプライヤーの役割が重要になる。 この文脈下で、内装アップデートの可能性も高まり、鋼線ワイヤーや特殊素材といったバックボーン技術が、7人乗りSUVの3列シートEVにも求められる。 要するに、プラットフォーム初採用のEVに求められる内装素材は、航続距離600kmを備えるXEV 9Sライバルに匹敵する耐久性と、ローカライゼーションへの適応性が鍵となる。 関連画像: [in1343] [in1349] [in1346]",
+            us: "豊田合成内装開発室向けトレンド考察です。高級MPV分野では、[us1289]の示唆通り、価格対比で「同等の高級感」を維持しつつコスト最適化が求められます。[us1294][2014年ポルシェ・パナメーラにヤッチングマホガニー採用]は木材加工高度化を示唆し、[us1297][フェラーリにAlcantaraレザー採用]と合わせ、素材質感向上は依然重要です。しかし[us1293][フォード・リンカーンシート回収問題]から、耐久性や安全性を担保する構造設計も不可欠です。車載AI領域では、[us1290][BMWがChatGPT連携で車設定可能]の発表は、より自然な対話インターフェースへの移行加速を示唆します。1990年代高級セダン比較[us1291]で示された「静寂と質感」の定義は、AI導入後も維持すべき基本価値です。木材や高級皮革の組み合わせを維持しつつ、AIによるパーソナライゼーション体験を内包する新世代内装の構築を推奨します。",
+            eu: "豊田合成の内装開発室は、欧州市場動向を踏まえ、高級感と機能性の融合を追求すべきだ。[eu1257]のエルグランドハイブリッドが示すように、日本市場でも14.3インチ大画面ディスプレイが標準化されつつある。これを踏まえ、[eu1255]のGenesis GV90が採用するロールス・ロイス風コーチドアや木製フロアなど、ラグジュアリー素材の実用化がトレンドだ。さらに[eu1261]のプリウスPHEVで標準化されるデュアルゾーン空調や、[eu1258]でVWグループが推進する太陽光発電のように、環境配慮型素材と省エネ機能の併設も必須となる。内装部品の選定では、[eu1253]で明らかになった車検証「フリービー」の実態を考慮し、多様な顧客層に対応できる汎用性のある設計が求められる。",
+        },
+        ideas: {
+            jp: [
+                { id: 1406, img: "images/idea_1406.png", title: "リサイクル素材で犬との空間", desc: "E-5008ドッグエディション の犬目線から、廃棄木材をリサイクルしたバイオ再生皮革で犬が安心する座席を作る。ブルー基調の車内 は滑りにくい素材も採用し、犬が乗せるウインドウヘッドレストと専用マットレス を組み合わせる。車内を愛犬と共有する幸せな空間実現 [jp1473]", imagePrompt: "Interior view of a car cabin with blue base tone upholstery made of recycled wood-derived bio-regenerated leather. A golden retriever dog is comfortably lying on a custom mattress next to a window headrest. The lighting is soft and warm, emphasizing the eco-friendly texture and the happy atmosphere.", sourceNewsIds: ["jp1473"] },
+                { id: 1407, img: "images/idea_1407.png", title: "省エネ発熱アームレスト", desc: "ヒータ付きアームレスト の面状発熱ヒーター技術を活かし、低価格EVでも快適な足元温度管理を実現する。24Vシートクーラーモジュール と組み合わせ、電力消費50%削減を実現。運転席にポジションメモリー 付きベンチレーション機能も搭載し、快適空間を確保 [jp1480]", imagePrompt: "Close-up shot of a car armrest with integrated heating elements and ventilation. The armrest features a sleek design with visible heating coils under a leather cover. Soft blue ambient lighting surrounds the armrest to indicate eco-friendly energy efficiency and comfort for the driver.", sourceNewsIds: ["jp1480"] },
+            ],
+            cn: [
+                { id: 1408, img: "images/idea_1408.png", title: "スエード触る喜び", desc: "合成スエード素材でピンクオフホワイト2トーン内装を実現。2026年販売目標100万台維持に貢献し、ユーザーが触るたびに幸せを感じる体験を創出。 [cn1298]", imagePrompt: "Interior of a modern car with pink and off-white two-tone synthetic suede seats and dashboard. Soft lighting highlights the texture of the material. A person is smiling while touching the seat.", sourceNewsIds: ["cn1298"] },
+                { id: 1409, img: "images/idea_1409.png", title: "安全イルミ内装", desc: "LED通知イルミネーションシステムを内装に統合。リープの自動運転機能やBYDの高性能EVと連携し、危険を光で直感的に伝える安全体験を届け。 [cn1291,cn1295]", imagePrompt: "Car interior with LED notification lights glowing on the dashboard and door panels. The lights are soft and colorful, indicating safety status. A driver is looking at the display with a calm expression.", sourceNewsIds: ["cn1291", "cn1295"] },
+            ],
+            in: [
+                { id: 1410, img: "images/idea_1410.png", title: "フロア熱管理EV内装", desc: "トヨタ・イノバ・ハイクロスのインテリアアップデートを活かし、EVの熱管理をフロア下に配置。植物由来のセルロースナノファイバーで軽量高強度を実現。後部座席も快適で、低価格EVでも高品質な触覚を維持。開発者がうれしい！ [in1343,in1349]", imagePrompt: "Interior view of Toyota Innova Hybrid Cros with a sleek EV battery pack visible under the floor, integrated with plant-based cellulose nanofiber panels. The floor area shows thermal management systems and a clean, modern design with soft, warm lighting.", sourceNewsIds: ["in1343", "in1349"] },
+                { id: 1411, img: "images/idea_1411.png", title: "後席安全発光トリム", desc: "MGの3列EV SUVの後席に発光安全エンブレムを配置。音振動可視化技術で振動パターンをトリムに発光表示。多様な顧客層に受け入れられ、安全運転を促す体験。開発者がうれしい！ [in1346,in1349]", imagePrompt: "Rear seat interior of a 3-row EV SUV with glowing safety emblems on the seat backs. The trim features visible vibration patterns illuminated by soft light, with a modern, safe, and inviting atmosphere.", sourceNewsIds: ["in1346", "in1349"] },
+            ],
+            us: [
+                { id: 1412, img: "images/idea_1412.png", title: "EV熱管理フロア快適化モジュール", desc: "GAC M8 PHEVの2列目キャプテンシート comforts と BMWの会話型設定を合わせ、EVバッテリー熱管理フロアに小型ワイヤレス充電ホルダを統合。低価格EVでも高級座席の感触を味わいながら、スマホ充電も楽々。開発者もユーザーもうれしい。 [us1289,us1290]", imagePrompt: "Luxury EV interior view showing a spacious second-row captain seat with massage function, piano black dashboard, and a sleek floor panel with integrated wireless charging coil. Warm ambient lighting highlights the premium leather texture and digital display glow.", sourceNewsIds: ["us1289", "us1290"] },
+                { id: 1413, img: "images/idea_1413.png", title: "高級感維持用触覚素材パネル", desc: "Ferrari PurosangueのBordeauxレザーやポルシェのヤッチングマホガニーを模倣し、EVの熱管理フロアに高耐久リサイクルシートを採用。1993年高級セダンの基準を超える触覚体験を提供。開発者もユーザーもうれしい。 [us1297,us1294]", imagePrompt: "Close-up of premium EV interior materials showing rich Bordeaux leather on seats and walnut wood grain dashboard trim. Soft sunlight illuminates the texture of the materials and the reflection on the digital instrument cluster.", sourceNewsIds: ["us1297", "us1294"] },
+            ],
+            eu: [
+                { id: 1414, img: "images/idea_1414.png", title: "シネマモードアームレスト", desc: "Genesis GV90のシネマスクリーンeu1255やNissanのボーズ22スピーカーeu1257を参考。アームレストに埋め込む小型ディスプレイと音響センサーで、車内を映画館に変える。運転中にリラックスして楽しめる。 [eu1257]", imagePrompt: "Luxury car interior, armrest with embedded 4K mini-display showing movie scene, high-end wood texture, soft ambient lighting, cinematic mood, close-up shot, photorealistic", sourceNewsIds: ["eu1257"] },
+                { id: 1415, img: "images/idea_1415.png", title: "安心LEDアームレスト", desc: "トヨタプリウスPHEVの安全装備eu1261やVWの環境配慮eu1258を参考。アームレストにLEDイルミネーションと物理ボタンを配置。事故時や緊急時に赤色点滅で安全を知らせ、触覚で操作可能。 [eu1255]", imagePrompt: "Car interior armrest, glowing red LED safety indicator, physical tactile buttons, high-strength resin texture, emergency lighting, close-up detail, realistic material rendering", sourceNewsIds: ["eu1255"] },
+            ],
+        }
+    },
+{
         date: "2026-07-16",
         analysis: {
             jp: "日本の内装市場では、商用車から乗用車まで幅広い車両プラットフォームで部品共通化が進んでいる[jp1465][jp1467]。CRAFTWORKSが24Vモデルを追加しトラック対応を拡大した点や、エブリイに専用トレイを展開する動きは、低コストEVや商用車でも高級感ある触感品質を低価格で提供できる模範ケースだ[jp1465]。また、排気音シミュレーション[jp1469]や芳香剤不使用の香り対策[jp1462]など、ユーザー体験を細かく設計する姿勢も、豊田合成の省エネアームレスト[jp1466]と相乗効果を生む。特に、シートクーラーやダッシュボードアクセサリなど、小規模モジュールで機能を追加・交換できる設計は、後発EVの差別化に有効だ[jp1467]。さらに、特別仕様車での専用外装・内装採用[jp1466]は、ユーザーが「特別感」を得る体験設計の好例であり、内装開発の方向性を示唆する[jp1461]。",
