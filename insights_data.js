@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-07-22",
+        analysis: {
+            jp: "豊田合成の内装開発室向けに、最新トレンドと示唆を考察する。日産新型エルグランド[jp1510]は、e-POWERとe-4ORCE搭載で快適空間を両立し、プレミアムツーリングミニバンをコンセプトに室内をプライベートラウンジイメージ化している。これは高級SUVジェネシスGV90[jp1509]の観音開きドアやラグジュアリー性の追求と相まって、高級車内空間の拡張性がトレンドとなっている。一方、日産リーフNISMO[jp1505]の専用エアロやRECAROシート採用は、スポーツEVの専用内装体験の重要性を示唆する。ルノーメガーヌE-テック[jp1501]のコックピット進化も、EVの運転体験向上への関心の高まりを反映している。さらに、スズキエブリイ[jp1504]の黒内装で商用車感消滅は、実用車でも高級感を求める層の拡大を示す。",
+            cn: "中国市場ではBYDの「Qin Max」[cn1327]や「秦・マックス」[cn1320]が、低彩度の「Dawn Purple」や浮遊型ディスプレイを採り入れ、量産モデルでも高級感を追求するトレンドが顕著です。GWMのOra 5も[cn1321]素材変更で差別化を図っており、内装の質感向上は必須要件です。また、VWと地平線ロボティクス[cn1323]やSeyond買収[cn1328]は、自動運転化を前提とした内装設計への転換を促します。さらにBYDの海外採用拡大[cn1319]は、グローバル品質基準との調和が求められます。豊田合成は、浮遊型ディスプレイやピアノブラック調加飾[cn1327]を低価格帯でも実現する設計や、ワイヤレス充電ホルダの小型化技術を応用し、高付加価値とコスト競争力の両立を図るべきです。",
+            in: "インド市場では、家族向けデザインとプラットフォーム進化による空間拡大が明確なトレンド[in1378]です。3列EVの登場や新車投入競争が激化し、低価格帯でも高品質な居住空間の確保[in1371]が求められています。燃料品質課題の解決も信頼向上に直結するため[in1373]、EV化と室内快適性の両立が不可欠[in1376]です。広々としたフロア活用は、後席空間確保と低価格EVの価値向上に寄与します[in1377]。豊田合成は、EV熱管理をフロアに統合した部材や高強度リサイクル材でコストと品質のバランスを実現し、家族の実用性と広がりある空間印象を先取りする内装部品開発を推進すべきです[in1379]。",
+            us: "[us1320][us1327]で示されるEVグランドツーラーの登場は、コックピット革新を牽引するトレンドだ。ジャガーType 01のデザインに類似する[us1320]や、驚くほど革新的な内装変化の[us1327]が指向する体験は、単なるデザインではなく機能性への転換を示唆する。シートベルトバックルの不具合でリコール対象となる[us1325]の事例は、安全基準がさらに厳格化される中で、素材の耐久性や構造強度を要求される背景にある。また[us1319]が伝統を破る低車高設計を採用している点は、車内空間の再定義を意味し、HMIや快適装備の統合を促す。さらに[us1324]の3列シートや航続距離の確保は、家族向けEVの要件であり、[us1322]の赤シート内装比較から、ドライバーや乗員が共有するドライブ体験のカスタマイズが重要になる。つまり、EV化や低重心化は内装の機能統合と、安全かつ快適な共有体験を両立させる素材開発を迫る。",
+            eu: "EU市場では、オモダ9のCDCダンパーや電動調整シートなど、乗り心地と高級感を両立するシャシー最適化[eu1287]がトレンドに。また、Vauxhall Mokka GSEのパワフルな電気性能[eu1286]やLotus Emiraの最軽量設計[eu1283]から、低価格帯でも「スポーツ感」と「高級感」の併せ持ちは必須。さらに、ZFのステアバイワイヤー1億台達成[eu1292]やメルセデスGLCの800Vアーキテクチャ[eu1289]は、EV化と高電圧化が内装耐久性を左右する。豊田合成は、植物由来のセルロースナノファイバー素材をEV向けに最適化し、低価格EVでも高級な触感[eu1287]を提供。また、ステアバイワイヤー技術の普及[eu1292]に伴い、ハンドルの物理操作感とデジタル表示の融合体験[eu1289]を内装に埋め込む。",
+        },
+        ideas: {
+            jp: [
+                { id: 1436, img: "images/idea_1436.png", title: "バイオ再生シートラグジュアリー", desc: "日産新型エルグランドのゼログラビティシートをベースに、廃棄木材から作る植物セルロースシートを採用。64色のアンビエントライトと調和し、自然な温かみと高級感を両立。乗客に心地よい空間を提供。 [jp1510]", imagePrompt: "A luxury minivan interior featuring a premium passenger seat upholstered in a soft, beige bio-regenerated cellulose material with visible natural fiber texture. The seat is illuminated by a soft 64-color ambient light strip underneath, creating a warm and cozy atmosphere. The background is a blurred view of a modern lounge environment.", sourceNewsIds: ["jp1510"] },
+                { id: 1437, img: "images/idea_1437.png", title: "多機能コンソールボックス進化", desc: "豊田合成の多機能コンソールボックスを基に、日産新型リーフNISMOのRECAROシートやエルグランドの照明技術を応用。車内コンセントと連携し、EVでも家電利用を快適に。収納と充電を両立。 [jp1505,jp1510]", imagePrompt: "A close-up shot of a sleek, futuristic center console box inside an EV. The console features a built-in 100V power outlet with a glowing indicator, a wireless charging pad, and a reversible armrest. The surrounding interior has ambient lighting and high-quality materials, suggesting a premium feel.", sourceNewsIds: ["jp1505", "jp1510"] },
+            ],
+            cn: [
+                { id: 1438, img: "images/idea_1438.png", title: "浮遊型ディスプレイ対応軽量インパネ", desc: "BYDのQin Maxで採用された浮遊型ディスプレイとピアノブラック調加飾を、中国市場向けに低価格モデルでも実現できる軽量インパネを提案。量産効率化と高級感を両立し、開発チームの自信を呼びます [cn1327]", imagePrompt: "Interior view of a modern car cabin with a floating rectangular display screen hovering above a sleek dashboard made of light-weight materials, piano black trim accents, and a soft purple ambient lighting in the background.", sourceNewsIds: ["cn1327"] },
+                { id: 1439, img: "images/idea_1439.png", title: "小型ワイヤレス充電ホルダ搭載内装", desc: "豊田合成の小型ワイヤレス充電ホルダ技術を、BYDのQin Maxや秦・マックスに搭載し、スマートフォン充電を簡単にする内装を提案。ユーザーの利便性向上と、開発者の技術革新への喜びを両立します [cn1320]", imagePrompt: "Close-up shot of a smartphone wirelessly charging on a compact, sleek wireless charging pad integrated into the center console of a car interior, with soft lighting highlighting the charging indicator and premium materials.", sourceNewsIds: ["cn1320"] },
+            ],
+            in: [
+                { id: 1440, img: "images/idea_1440.png", title: "EVフロア熱管理モジュール", desc: "K3プラットフォーム採用と広々シートを活かし、EVの熱を効率的に管理する新フロアモジュール。低価格EVでも快適な室内を実現。家族がうれしくなる、涼しい空間づくり。 [in1378,in1379]", imagePrompt: "Modern EV interior with a sleek, high-tech floor panel featuring integrated cooling vents and glowing ambient lighting, viewed from a low angle to emphasize spaciousness and comfort.", sourceNewsIds: ["in1378", "in1379"] },
+                { id: 1441, img: "images/idea_1441.png", title: "高強度リサイクルコックピット", desc: "水平リサイクル内装部品[jpELV]と広々空間を組み合わせた、環境に優しい新コックピット。廃材50%配合でコスト削減。家族がうれしく、地球もうれしい。 [in1378]", imagePrompt: "Close-up of a car dashboard made from high-strength recycled materials with a sleek finish, showing a blend of natural textures and modern technology in a bright, airy interior.", sourceNewsIds: ["in1378"] },
+            ],
+            us: [
+                { id: 1442, img: "images/idea_1442.png", title: "リサイクル素材の安全シートベルト", desc: "リコール対応のバックルを模範に、環境配慮型リサイクル素材で強度を保つシートベルトを開発。消費者が安心感を持ち、地球にも優しい選択肢を選べることをうれしく感じる。 [us1325]", imagePrompt: "Close-up view of a high-strength recycled fabric seatbelt buckle with a metallic finish, showing durability and safety certification, set against a blurred modern car interior background, cinematic lighting.", sourceNewsIds: ["us1325"] },
+                { id: 1443, img: "images/idea_1443.png", title: "LED陰影でEV内装を彩る", desc: "ランローバーGTの革新的コックピットを参考にして、LED陰影イルミネーションでEV内装を個性的に演出。乗客が独特の空間美を楽しむことで、ドライブ体験をより幸せに昇華させられる。 [us1320]", imagePrompt: "Interior shot of a futuristic EV grand tourer cockpit, featuring dynamic LED shadow patterns projected on the dashboard and seats, soft ambient glow, sleek design, high-tech atmosphere.", sourceNewsIds: ["us1320"] },
+            ],
+            eu: [
+                { id: 1444, img: "images/idea_1444.png", title: "CDCダンパーアームレスト", desc: "オモダ9のCDCダンパー[jp eu1287]技術をアームレスト振動制御に適用。路面衝撃を自動で消し、高級な乗り心地を維持。低価格EVでも乗り心地を愉しむと、ドライバーがうれしくなる。 [eu1287]", imagePrompt: "Interior shot of a luxury SUV armrest made of black suede cloth, with a subtle CDC damper mechanism visible as a sleek metallic strip. Soft ambient lighting highlights the smooth texture and the motion of the armrest absorbing vibration.", sourceNewsIds: ["eu1287"] },
+                { id: 1445, img: "images/idea_1445.png", title: "セルロースナノファイバーアームレスト", desc: "豊田合成の植物由来セルロースナノファイバー素材[jp eu1287]をEV向けに採用。メルセデスGLCの800Vアーキテクチャ[jp eu1289]環境でも耐久性確保。環境に優しく、高級感ある触感で、ドライバーと乗客がうれしくなる。 [eu1287,eu1289]", imagePrompt: "Close-up of a car interior armrest made from plant-based cellulose nanofiber composite, showing a matte black finish with a subtle woven texture. Soft studio lighting emphasizes the eco-friendly material's premium feel and durability.", sourceNewsIds: ["eu1287", "eu1289"] },
+            ],
+        }
+    },
+{
         date: "2026-07-21",
         analysis: {
             jp: "テスラGrokの車両内装化が示す文脈重視の対話体験は、単なる音声認識を超えた自然なナビ操作を内装開発の必須要件とする。日産エルグランドのゼログラビティシートやBOSEサウンドシステムに加え、トヨタハイエースの専用パネルキットが示すように、素材感とフィット性を両立する高質感内装が商用車でも求められている。また、ダイハツタント福祉車両の標準装備が示すアクセシビリティは、家族移動の快適性向上に直結し、Bレンジ機能のような下り坂での負荷軽減も、EV化に伴う回生ブレーキ不足を補う必須要素となる。内装開発室は、AI対話の深掘り、素材の高級感、アクセシビリティの標準化を統合した、静粛性ある次世代内装体験の構築を急務とする。 関連画像: [jp1491] [jp1494] [jp1500]",
