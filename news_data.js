@@ -91373,8 +91373,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "cn1340",
-        title: "フリーランダー8は、46.",
-        desc: "奇瑞とJLRのFreelander 8は、46.3インチのパノラマディスプレイとSnapdragon 8397プロセッサ、Huawei ADS技術を搭載しています。インテリアにはナッパレザーや開孔実木調の装飾、22リットルのセンターコンソール、7.",
+        title: "フリーランダー8は、46.3インチパノラマディスプレイとSnapdragon 8397搭載",
+        desc: "奇瑞・ジャガー・ランドローバーの「フリーランダー8」は、8月発売に向けて内装の詳細が明らかになった。46.3インチのパノラマディスプレイに加え、Snapdragon 8397プロセッサやファーウェイADS技術を採用している。",
         url: "https://carnewschina.com/2026/07/26/freelander-8-interior-preview-goes-beyond-the-46-inch-display-with-snapdragon-8397-passcode-gloveboxfreelander-8-interior-preview-goes-beyond-46-inch-display-with-snapdragon-8397-ahead-of-august-launc/",
         source: "CarNewsChina - All",
         date: "2026-07-26",

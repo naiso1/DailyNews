@@ -133,6 +133,7 @@ def _post_llm(**kwargs):
 
 # Summary limits
 SUMMARY_TITLE_LIMIT = 50
+SUMMARY_TITLE_TARGET = 38
 SUMMARY_CONTENT_LIMIT = 150
 SUMMARY_HTML_CHARS = 8000
 
@@ -1367,6 +1368,15 @@ def compute_relevance(title, content=""):
 def normalize_text(text):
     return re.sub(r"\s+", " ", str(text or "")).strip()
 
+
+def normalize_japanese_spacing(text):
+    s = normalize_text(text)
+    japanese = r"\u3040-\u30ff\u3400-\u9fff"
+    s = re.sub(rf"(?<=[{japanese}])\s+(?=[A-Za-z0-9])", "", s)
+    s = re.sub(rf"(?<=[A-Za-z0-9])\s+(?=[{japanese}])", "", s)
+    return s
+
+
 def has_japanese_kana(text):
     return re.search(r"[ぁ-ゟァ-ヿ]", str(text or "")) is not None
 
@@ -1488,17 +1498,62 @@ def trim_to_sentence(text, limit):
     s = normalize_text(text)
     if len(s) <= limit:
         return s
-    boundaries = ["。", "！", "？", ".", "!", "?"]
     best = ""
-    for b in boundaries:
-        idx = s.rfind(b, 0, limit + 1)
-        if idx != -1:
-            cand = s[: idx + 1].strip()
-            if len(cand) > len(best):
-                best = cand
+    closing_chars = "」』）】］\"'"
+    for idx, char in enumerate(s[:limit]):
+        if char in "。！？!?":
+            best = s[: idx + 1].strip()
+            continue
+        if char != ".":
+            continue
+        prev_char = s[idx - 1] if idx > 0 else ""
+        next_char = s[idx + 1] if idx + 1 < len(s) else ""
+        # Decimal points such as 46.3 and 7.5 are not sentence boundaries.
+        if prev_char.isdigit() and next_char.isdigit():
+            continue
+        if next_char and not (next_char.isspace() or next_char in closing_chars):
+            continue
+        best = s[: idx + 1].strip()
     if best:
         return best
     return s[:limit].strip()
+
+
+def trim_title_safely(text, limit):
+    s = normalize_text(text)
+    if len(s) <= limit:
+        return s
+    sentence = trim_to_sentence(s, limit)
+    if (
+        len(sentence) < len(s)
+        and len(sentence) >= max(15, limit // 2)
+        and sentence.endswith(("。", "！", "？", "!", "?"))
+    ):
+        return sentence.rstrip("。")
+    for separator in ("、", "：", ":", "／", "/", " - ", " "):
+        idx = s.rfind(separator, max(12, limit // 2), limit)
+        if idx != -1:
+            return s[:idx].rstrip("、,：:／/- ").strip()
+    return s[:limit].rstrip("、,：:／/- ").strip()
+
+
+def has_suspicious_truncation(text):
+    s = normalize_text(text)
+    if not s:
+        return True
+    if re.search(r"\d\.$", s):
+        return True
+    return s.endswith(("、", ",", "：", ":", "／", "/", "・"))
+
+
+def title_looks_incomplete(text):
+    s = normalize_text(text)
+    if has_suspicious_truncation(s):
+        return True
+    if s.endswith(("には", "では", "とは", "から", "より", "および", "及び", "の", "と", "や", "を", "が", "は", "に", "へ", "で")):
+        return True
+    return bool(re.search(r"(?:と|や|および|及び)\s*[A-Za-z0-9][A-Za-z0-9 .+/_-]*$", s))
+
 
 def call_llm_text(prompt):
     payload = {
@@ -1516,6 +1571,79 @@ def call_llm_text(prompt):
         return resp.json().get("choices", [{}])[0].get("message", {}).get("content", "")
     except Exception:
         return ""
+
+
+def compact_title_with_llm(source_title, source_content, current_title):
+    for attempt in range(2):
+        prompt = (
+            "Create exactly one complete, natural Japanese news headline for the source below.\n"
+            f"Hard requirements: Japanese only, target 30 to {SUMMARY_TITLE_TARGET} Japanese characters, "
+            f"never exceed {SUMMARY_TITLE_LIMIT} characters, no JSON, no quotes, no period, "
+            "no explanation, and no polite desu/masu ending. Keep decimal numbers intact.\n"
+            "Focus on the subject and one most important automotive-interior feature. "
+            "The headline must end with a complete action or noun phrase such as '搭載', '採用', or '公開'. "
+            "Never end with a conjunction, particle, or a bare feature name.\n\n"
+            f"Source title: {source_title}\n"
+            f"Source content: {source_content}\n"
+            f"Current Japanese title: {current_title}\n"
+            f"Retry number: {attempt + 1}\n"
+        )
+        output = call_llm_text(prompt).strip()
+        candidate = parse_json_field(output, "title")
+        if not candidate:
+            candidate = re.sub(r"^```(?:json|text)?\s*", "", output, flags=re.IGNORECASE)
+            candidate = re.sub(r"\s*```$", "", candidate).strip()
+            candidate = candidate.splitlines()[0].strip() if candidate else ""
+            candidate = normalize_text(candidate.strip("\"'「」"))
+        if (
+            candidate
+            and len(candidate) <= SUMMARY_TITLE_LIMIT
+            and _is_valid_japanese(candidate)
+            and not title_looks_incomplete(candidate)
+        ):
+            return candidate.rstrip("。")
+    return ""
+
+
+def compact_summary_with_llm(source_title, source_content, current_summary):
+    best_candidate = ""
+    for attempt in range(2):
+        prompt = (
+            "Create exactly one natural Japanese automotive news summary for the source below.\n"
+            "Write exactly two complete sentences. Each sentence must be 45 to 65 Japanese characters. "
+            f"The total must be 100 to 140 characters and never exceed {SUMMARY_CONTENT_LIMIT} characters.\n"
+            "Output Japanese summary text only: no JSON, no quotes, no heading, no explanation. "
+            "Use a concise neutral news style and end both sentences with a Japanese full stop. "
+            "Keep decimal numbers intact.\n"
+            "Focus on automotive-interior facts and retain two or three concrete features. Do not invent facts.\n\n"
+            f"Source title: {source_title}\n"
+            f"Source content: {source_content}\n"
+            f"Current Japanese summary: {current_summary}\n"
+            f"Retry number: {attempt + 1}\n"
+        )
+        output = call_llm_text(prompt).strip()
+        candidate = parse_json_field(output, "summary")
+        if not candidate:
+            candidate = re.sub(r"^```(?:json|text)?\s*", "", output, flags=re.IGNORECASE)
+            candidate = re.sub(r"\s*```$", "", candidate).strip()
+            candidate = normalize_text(candidate.strip("\"'「」"))
+        if len(candidate) > SUMMARY_CONTENT_LIMIT:
+            candidate = trim_to_sentence(candidate, SUMMARY_CONTENT_LIMIT)
+        if candidate and not ends_with_sentence(candidate) and len(candidate) < SUMMARY_CONTENT_LIMIT:
+            candidate += "。"
+        if (
+            candidate
+            and len(candidate) <= SUMMARY_CONTENT_LIMIT
+            and _is_valid_japanese(candidate)
+            and ends_with_sentence(candidate)
+            and not has_suspicious_truncation(candidate)
+        ):
+            if len(candidate) > len(best_candidate):
+                best_candidate = candidate
+            if len(candidate) >= 80 and candidate.count("。") >= 2:
+                return candidate
+    return best_candidate
+
 
 def parse_json_field(text, key):
     try:
@@ -1651,8 +1779,8 @@ def summarize_article(title, content, url, country=""):
     currency_rule = "Currency rule: Keep original currency/units; do not convert to JPY or invent amounts.\\n"
     prompt = (
         "以下の情報を統合して、日本語で要約してください。\\n"
-        f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内（文を途中で切らない）。\\n"
-        f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内（文を途中で切らない）。\\n"
+        f"条件1: タイトルは{SUMMARY_TITLE_TARGET}字程度、最大{SUMMARY_TITLE_LIMIT}字の自然なニュース見出し。です・ます調や句点を避け、途中で切らない。\\n"
+        f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内の自然な常体（だ・である調）。文を途中で切らない。\\n"
         "条件3: 事実ベースで簡潔に。\\n"
         "条件4: 可能なら固有名詞/数値/企業名など本文の具体情報を1つ以上含める。\\n"
         "条件5: 内容は必ず句点で終える。\\n"
@@ -1668,8 +1796,8 @@ def summarize_article(title, content, url, country=""):
             "以下の情報を統合して、日本語で要約してください。\n"
             "IMPORTANT: Output must be entirely in Japanese. Do NOT output Chinese characters as the main language. "
             "All text in title and summary must be Japanese (kanji+kana mix).\n"
-            f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内、文を途中で切らない。\n"
-            f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内、文を途中で切らない。\n"
+            f"条件1: タイトルは{SUMMARY_TITLE_TARGET}字程度、最大{SUMMARY_TITLE_LIMIT}字の自然なニュース見出し。です・ます調や句点を避け、途中で切らない。\n"
+            f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内の自然な常体（だ・である調）。文を途中で切らない。\n"
             "条件3: 事実ベースで簡潔に。\n"
             "条件4: 可能なら固有名詞/数値/企業名など具体情報を2つ以上含める。\n"
             "条件5: 内容は必ず句点で終える。\n"
@@ -1693,8 +1821,8 @@ def summarize_article(title, content, url, country=""):
         refine_prompt = (
             f"次のJSONのtitleとsummaryを条件内に収めて書き直してください。\\n"
             "条件0: 必ず日本語で出力する（中国語・英語・その他言語は禁止）。\\n"
-            f"条件1: タイトルは{SUMMARY_TITLE_LIMIT}字以内（文を途中で切らない）。\\n"
-            f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内（文を途中で切らない）。\\n"
+            f"条件1: タイトルは{SUMMARY_TITLE_TARGET}字程度、最大{SUMMARY_TITLE_LIMIT}字のニュース見出し。です・ます調や句点を避け、途中で切らない。\\n"
+            f"条件2: 内容は{SUMMARY_CONTENT_LIMIT}字以内の常体（だ・である調）。文を途中で切らない。\\n"
             "条件3: 内容は必ず句点で終える。\\n"
             "出力はJSONのみ。\\n\\n"
             f'{{"title":"{summary_title}","summary":"{summary_body}"}}'
@@ -1782,10 +1910,36 @@ def summarize_article(title, content, url, country=""):
         if fixed_body:
             summary_body = fixed_body
 
+    needs_final_repair = (
+        len(summary_title) > SUMMARY_TITLE_LIMIT
+        or len(summary_body) > SUMMARY_CONTENT_LIMIT
+        or has_suspicious_truncation(summary_title)
+        or has_suspicious_truncation(summary_body)
+    )
+    if needs_final_repair:
+        print(
+            "  [SUMMARY_FINAL_REPAIR] "
+            f"title_len={len(summary_title)} body_len={len(summary_body)}: {title[:50]}"
+        )
+
+    if len(summary_title) > SUMMARY_TITLE_LIMIT or has_suspicious_truncation(summary_title):
+        compact_title = compact_title_with_llm(title, f"{content} {html_text}", summary_title)
+        if compact_title:
+            summary_title = compact_title
+
+    if len(summary_body) > SUMMARY_CONTENT_LIMIT or has_suspicious_truncation(summary_body):
+        compact_body = compact_summary_with_llm(title, f"{content} {html_text}", summary_body)
+        if compact_body:
+            summary_body = compact_body
+
     if len(summary_title) > SUMMARY_TITLE_LIMIT:
-        summary_title = trim_to_sentence(summary_title, SUMMARY_TITLE_LIMIT)
+        summary_title = trim_title_safely(summary_title, SUMMARY_TITLE_LIMIT)
     if len(summary_body) > SUMMARY_CONTENT_LIMIT:
         summary_body = trim_to_sentence(summary_body, SUMMARY_CONTENT_LIMIT)
+    if has_suspicious_truncation(summary_title):
+        summary_title = summary_title.rstrip(".,、,：:／/・ ").strip()
+    if has_suspicious_truncation(summary_body):
+        summary_body = summary_body.rstrip(".,、,：:／/・ ").strip()
     if summary_body and not ends_with_sentence(summary_body):
         if len(summary_body) < SUMMARY_CONTENT_LIMIT:
             summary_body = summary_body + "。"
@@ -1818,6 +1972,8 @@ def summarize_article(title, content, url, country=""):
         if is_chinese_text(summary_title) or is_chinese_text(summary_body):
             print(f"  [CHINESE_PERSIST] 翻訳失敗、中国語のまま残存: {(summary_title or summary_body)[:40]}")
 
+    summary_title = normalize_japanese_spacing(summary_title)
+    summary_body = normalize_japanese_spacing(summary_body)
     _summary_cache[cache_key] = (summary_title, summary_body)
     return summary_title, summary_body
 

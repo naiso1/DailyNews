@@ -100,13 +100,21 @@ def _server_up(host):
         return False
 
 
-def _model_loaded(host):
+def _loaded_model_ids(host):
     try:
         with urllib.request.urlopen(f"{host}/v1/models", timeout=5) as r:
             data = json.loads(r.read())
-            return len(data.get("data", [])) > 0
+            return {
+                str(item.get("id", "")).strip()
+                for item in data.get("data", [])
+                if str(item.get("id", "")).strip()
+            }
     except Exception:
-        return False
+        return set()
+
+
+def _model_loaded(host, model):
+    return model in _loaded_model_ids(host)
 
 
 def ensure_lm_studio():
@@ -116,8 +124,8 @@ def ensure_lm_studio():
     context_length = os.environ.get("LLM_CONTEXT_LENGTH", DEFAULT_LLM_CONTEXT_LENGTH)
     parallel = os.environ.get("LLM_PARALLEL", DEFAULT_LLM_PARALLEL)
 
-    if _server_up(host) and _model_loaded(host):
-        log("[LM Studio] Server and model are already ready.")
+    if _server_up(host) and _model_loaded(host, model):
+        log(f"[LM Studio] Server and requested model are ready: {model}")
         return
 
     if not _server_up(host):
@@ -144,7 +152,13 @@ def ensure_lm_studio():
             log("[WARN] LM Studio server did not become ready within 120s.")
             return
 
-    if not _model_loaded(host):
+    if not _model_loaded(host, model):
+        loaded_models = sorted(_loaded_model_ids(host))
+        if loaded_models:
+            log(
+                f"[LM Studio] Requested model is not loaded: {model}; "
+                f"currently loaded={loaded_models}"
+            )
         log(f"[LM Studio] Loading model: {model} context={context_length} parallel={parallel}")
         try:
             Popen(
@@ -166,7 +180,7 @@ def ensure_lm_studio():
             log(f"[WARN] lms load failed: {e}")
         for i in range(30):
             time.sleep(10)
-            if _model_loaded(host):
+            if _model_loaded(host, model):
                 log(f"[LM Studio] Model became ready after {(i + 1) * 10}s.")
                 break
         else:
