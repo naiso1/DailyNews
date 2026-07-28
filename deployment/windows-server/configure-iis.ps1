@@ -146,14 +146,23 @@ New-WebBinding `
     -HostHeader $hostName `
     -SslFlags 1
 
-$sslBinding = "IIS:\SslBindings\0.0.0.0!443!$hostName"
-if (Test-Path $sslBinding) {
-    Remove-Item $sslBinding -Force
+$existingSslBinding = Get-ChildItem IIS:\SslBindings |
+    Where-Object {
+        $_.Port -eq 443 -and
+        $_.Host -eq $hostName
+    } |
+    Select-Object -First 1
+if ($existingSslBinding -and
+    $existingSslBinding.Thumbprint -ne $certificate.Thumbprint) {
+    Remove-Item -LiteralPath $existingSslBinding.PSPath -Force
+    $existingSslBinding = $null
 }
-New-Item `
-    -Path $sslBinding `
-    -Thumbprint $certificate.Thumbprint `
-    -SSLFlags 1 | Out-Null
+if (-not $existingSslBinding) {
+    New-Item `
+        -Path "IIS:\SslBindings\0.0.0.0!443!$hostName" `
+        -Thumbprint $certificate.Thumbprint `
+        -SSLFlags 1 | Out-Null
+}
 
 Export-Certificate `
     -Cert $certificate `
