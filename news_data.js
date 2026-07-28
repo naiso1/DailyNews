@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-07-28 00:42";
+window.NEWS_UPDATED_AT = "2026-07-29 00:55";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -92131,6 +92131,755 @@ window.LOADED_NEWS_DATA = [
     
         country: "eu",
         img: "https://electriccarsreport.com/wp-content/uploads/2026/07/Nissan-Europe-Lineup.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    // 2026-07-28 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1541",
+        title: "トヨタRAV4が10位で6990台、燃費22.9km/LのミドルSUV比較の最適解とは？",
+        desc: "2026年6月の登録車販売ランキングで、トヨタ「RAV4」が10位に6990台と前年比280％増で人気を集めた。燃費22.9km/Lを誇るRAV4は、330万円以上のCX-5や機動力No.1のフォレスターと比較され、ミドルSUV市場の最適解として注目を集めている。",
+        url: "https://news.yahoo.co.jp/articles/3c3c49566bd34685259f6cd5a6c20b95b7771cb7?source=rss",
+        source: "carview!",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-00010005-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1542",
+        title: "ペントルーフZ32、1.6トン車重を忘れさせる670馬力ストリート仕様の破壊力",
+        desc: "ペントルーフはZ32の1.6トン車重を軽量化で克服。3.1L VG30DETTとGT2530ツインターボを組み合わせ、670馬力を発揮するストリート仕様の破壊力を披露した。",
+        url: "https://news.yahoo.co.jp/articles/c6612c1369a052cef09749344e74ce1ffae954c5?source=rss",
+        source: "MotorFan",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-01579398-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1543",
+        title: "補助金含め200万円切りBYD新型軽EVラッコ発表NBOX牙城崩すか",
+        desc: "2026年7月28日、BYD Auto Japanは新型軽EV「ラッコ」を発表した。補助金込みで200万円切りとなる価格は、N-BOXやサクラの牙城を崩す可能性がある。",
+        url: "https://news.yahoo.co.jp/articles/7be554d6dc0dcba485047d751f3d6d8d7b453336?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-07-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-00010008-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1544",
+        title: "トヨタハイエース200系専用インテリアパネルキット、貼るだけで高級感向上",
+        desc: "トヨタハイエース200系向けにカーショップコネクトが「インテリアパネルキット」を発売。3Dスキャンによる専用設計でダッシュボードやドアトリムへ貼り付けるだけで、穴開け不要の自然なフィット感と高級な内装を実現する。",
+        url: "https://news.yahoo.co.jp/articles/4277d199fd2d1b9a470c78e8ec13f074ca754cd5?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-07-28",
+        tags: ["コックピット"],
+    
+        interiorScore: 90,
+        interiorReason: "interior panel kit for Toyota Hiace 200 series, 3D scan design, dashboard and do",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-00000022-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1545",
+        title: "ハイエース200系DX専用LEDルームランプ、3色調光と5段階明るさ調整で快適空間実現",
+        desc: "Fun Standard株式会社の「CRAFTWORKS(クラフトワークス)」から、ハイエース200系DX専用LEDルームランプが発売された。タッチ操作で3色の色味切り替えと5段階調光に対応し、仕事から車中泊まで幅広いシーンで快適な車内空間を実現する。",
+        url: "https://news.yahoo.co.jp/articles/fae6732fdfdcb435c265a42b9bba9630c6a8e85e?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-07-28",
+        tags: ["AR"],
+    
+        interiorScore: 90,
+        interiorReason: "interior lighting accessory with clear image showing touch interface and cabin a",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-00000012-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1546",
+        title: "日産セレナマルチボックスは5人乗りで大容量収納の車中泊ミニバン",
+        desc: "日産のセレナカスタムモデル「マルチボックス」は、乗車定員5名の3列シートに加え、リアに大容量収納ボックスを備える。ベンチやテーブル、ベッド付車ではフラットな寝床にも早変わりする。価格はガソリン2WDのハイウェイスターVベースで375万7600円、ベッド付車は397万8700円。",
+        url: "https://news.yahoo.co.jp/articles/e55f20e145144691a0ffd0e8281c5b7154005765?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-07-28",
+        tags: ["シート", "カスタマイズ"],
+    
+        interiorScore: 87,
+        interiorReason: "rear cargo area and interior layout plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-00000009-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1547",
+        title: "BYD初の軽EVラッコ発売、専用設計でスライドドアと3グレード展開",
+        desc: "BYDオートジャパンは7月28日、日本向け軽EV『ラッコ』を発売した。専用設計で両側スライドドアを備え、内装はブラックファブリックからレザーまで3グレード展開。価格は214万5000円からで、WLTC航続距離は210〜320km。",
+        url: "https://news.yahoo.co.jp/articles/59a936a419ec38d226f6c8e46b463ef8d0ff3a5d?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-07-28",
+        tags: ["新素材", "EV", "バッテリー"],
+    
+        interiorScore: 90,
+        interiorReason: "interior material options and cabin layout details; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-01265033-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1548",
+        title: "日産サクラ国内販売10万台超達成、EV牽引の軽自動車",
+        desc: "日産は7月、軽自動車EV「サクラ」の国内累計販売が2022年発売から約4年で10万台を超えたことを発表した。EV市場を牽引する同車は、発売以来ユーザーから高い支持を得ている。",
+        url: "https://news.yahoo.co.jp/articles/1a1f0cff59e7a56961ec8574257d04547fb70647?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260728-01264654-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1359",
+        title: "VWグループは部品を90%削減し、高級車はシートバリエーションを半減",
+        desc: "VWグループはコスト削減のため、高級ブランドのシートバリエーションを90%削減し、ホイール選択肢も半分にする計画を明らかにした。",
+        url: "https://www.motor1.com/news/802925/how-vw-group-simplify-parts-bin/",
+        source: "Motor1",
+        date: "2026-07-28",
+        tags: ["シート"],
+    
+        interiorScore: 68,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/7ZE06q/s3/2026-vw-id.-polo.jpg",
+        note: ""
+    },
+    {
+        id: "us1360",
+        title: "Audi BMWメルセデス中国で車作り、中国車は輸出1000万台",
+        desc: "中国市場で売れ行きが鈍化するAudi、BMW、メルセデスだが、中国メーカーは輸出を1000万台に伸ばし、海外工場建設を加速。",
+        url: "https://www.carscoops.com/2026/07/german-plants-china-utilization/",
+        source: "CarScoops",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/07/A260748_large-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1361",
+        title: "BMW、2028年発売予定の電気式i4コンバーチブルを製造中",
+        desc: "BMWは2028年発売予定の電気式i4コンバーチブルを製造中。Neue Klasseプラットフォームを採用し、i3セダンと同様のパノラマ式iDriveや、最大440マイル（EPA基準）の航続距離を可能にする108.7kWhバッテリーを搭載する。",
+        url: "https://www.carscoops.com/2026/07/bmw-i4-convertible-spied/",
+        source: "CarScoops",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        interiorScore: 59,
+        interiorReason: "soft-top convertible interior room and panoramic iDrive mentioned",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/07/SB22465-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1362",
+        title: "ホンダ・バモス、リヤシート下にエンジン搭載の1999年式小型バン",
+        desc: "1999年式ホンダ・バモスは、後部シート下にエンジンを搭載した1万4000マイル走行の小型バンで、モモ製サンセットラップを施したカスタム仕様となっている。",
+        url: "https://www.carscoops.com/2026/07/honda-vamos-kei-van/",
+        source: "CarScoops",
+        date: "2026-07-28",
+        tags: ["シート", "カスタマイズ"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/07/TC_04011-copy-2026-07-21-7tw-59459-copy-1024x576.webp",
+        note: ""
+    },
+    {
+        id: "us1363",
+        title: "メルセデス・ベンツ、新型キャンピングバン「マルコ・ポロ」を欧州で発売",
+        desc: "メルセデス・ベンツは新型キャンピングバン「マルコ・ポロ」を欧州で発売。ポップアップルーフの採用により後部で370mmの頭上空間を確保し、LEDアンビエントライティングや磁気カーテンなどの快適装備を強化。12.3インチディスプレイやガスバーナー付きキッチンも搭載。",
+        url: "https://www.carscoops.com/2026/07/mercedes-updated-marco-polo/",
+        source: "CarScoops",
+        date: "2026-07-28",
+        tags: ["ディスプレイ", "イルミ"],
+    
+        interiorScore: 100,
+        interiorReason: "pop top headroom, ambient lighting, 12.3-inch display, magnetic curtains, kitche",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/07/Mercedes-Marco-Polo-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1364",
+        title: "2027年メルセデスCクラスEV、800Vアーキテクチャで483馬力と快適装備を強化",
+        desc: "2027年メルセデスCクラスEVはGLCと共通の800V MB.EAアーキテクチャを採用し、C400 4Maticで483馬力を発揮する。インテリアでは162個のLED内蔵Sky Controlパノラマルーフや39.1インチHyperscreen、物理ボタンと音量ローラーで快適装備を充実させた。",
+        url: "https://www.jalopnik.com/2224565/2027-mercedes-benz-c-class-ev-electric-sedan-first-drive-review/",
+        source: "Jalopnik",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        interiorScore: 62,
+        interiorReason: "interior features like 39.1-inch Hyperscreen, Sky Control panoramic roof, and ph",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/2027-mercedes-benz-c-class-ev-is-99-good-clean-luxury-and-1-ai-slop/l-intro-1785185743.jpg",
+        note: ""
+    },
+    {
+        id: "us1365",
+        title: "2027年メルセデスCクラスEV、専用EVプラットフォームとHyperscreen採用",
+        desc: "2027年米国発売のメルセデスCクラスEVは、GLC EVと共用の専用EVプラットフォームを採用。Hyperscreenというフル幅ダッシュボードディスプレイや、ガラスルーフに星が光るオプション、483馬力のデュアルモーター駆動など、内装と快適装備に特徴がある。",
+        url: "https://www.caranddriver.com/photos/g71943490/2027-mercedes-benz-c-class-ev-drive-gallery/",
+        source: "Car and Driver",
+        date: "2026-07-28",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 83,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/3d44eeb1-c908-47bf-a4a1-82e2d43bc8c5.jpg",
+        note: ""
+    },
+    {
+        id: "us1366",
+        title: "米上院商工委法案でメルセデスとボルボの米国販売に懸念",
+        desc: "米上院商工務委員会は先週、米国市場での販売を脅かす新法案を承認した。これにより、メルセデス・ベンツとボルボ・カーズは、従来最大の市場である米国での販売に大きな影響を受ける可能性があり、両社は苦しい立場に置かれている。",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/congress-places-mercedes-benz-and-volvo-in-awkward-position-45135907?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/07/27/18131/congress-places-mercedes-benz-and-volvo-in-awkward-position.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us1367",
+        title: "ロータス・エミラ、AMGやトヨタのエンジン搭載で最終内燃機関スポーツカー",
+        desc: "ロータス・エミラはAMGまたはトヨタのエンジン、油圧ステアリングを備え、最終内燃機関スポーツカーとして確かな存在感を示す。",
+        url: "https://www.topspeed.com/lotus-emira-inside-the-last-combustion-lotus-sports-car/",
+        source: "Top Speed",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/01/image-07-01-2026-at-20-56-2-3.png",
+        note: ""
+    },
+    {
+        id: "eu1323",
+        title: "BMW新型i4クーペの電気化、i3技術採用でオープントップ化へ",
+        desc: "BMWは新型i4クーペを電気化し、i3セダンの技術を流用する。新プロトタイプでオープントップモデルの実現が確認され、4シリーズカブリオレの電動化が進む。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/new-bmw-i4-cabriolet-takes-shape-first-neue-klasse-open-top",
+        source: "AUTOCAR UK",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/_sb22463.jpg?itok=JR7VVO8n",
+        note: ""
+    },
+    {
+        id: "eu1324",
+        title: "マナ社の新ミラーにカメラ搭載、運転者の居眠りや分心を検知",
+        desc: "欧州メーカー向けに開発されたマナ社の新システムは、リアビューミラーにカメラを内蔵し、運転者の居眠りや分心、疲労を検知する。欧州メーカー向けに開発されたマナ社の新システムは、リアビューミラーにカメラを内蔵し、運転者の居眠りや分心、疲労を検知する。",
+        url: "https://www.autocar.co.uk/car-news/technology/new-driver-monitoring-tech-means-your-mirrors-look-back-you",
+        source: "AUTOCAR UK",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 92,
+        interiorReason: "driver monitoring camera in rearview mirror is a concrete interior HMI/safety fe",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/dms_explode_still_white_background_2.jpg?itok=QldpSQEI",
+        note: ""
+    },
+    {
+        id: "eu1325",
+        title: "中国初のミッドシップEVスポーツカーが英国へ、4月2027年輸入開始",
+        desc: "中国発のSC01はランチャ・ストラトスにインスパイアされた2シーターEVで、専用スペースフレームを採用。輸入業者は「ロータスが作るべき車」と称し、英国では2027年4月より5万ポンドで販売される予定。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/exclusive-chinas-stratos-uk-bound-%C2%A350000-ev-sports-car",
+        source: "AUTOCAR UK",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/sc01_7.jpg?itok=5AGpkneG",
+        note: ""
+    },
+    {
+        id: "cn1359",
+        title: "カーニュース・チャイナ、読者向けスマートニュースレターの新機能を導入",
+        desc: "カーニュースチャイナは、読者個人向けのニュースレター新機能を導入した。関心分野のレポートをメールで配信し、自動車内装やシートに関する情報も提供予定。",
+        url: "https://carnewschina.com/2026/07/28/carnewschina-introduces-smart-newsletter-for-its-readers-new-cnc-feature/",
+        source: "CarNewsChina - All",
+        date: "2026-07-28",
+        tags: ["シート"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/07/newsletter-1_webhook_1500x900_q85_1785232331.jpg",
+        note: ""
+    },
+    {
+        id: "cn1360",
+        title: "シャオミ スカイノマッドEREV燃費5.7L 416馬力7月30日発売",
+        desc: "Xiaomi Autoは、Skynomad KunlunのEREV仕様を公開しました。92無鉛ガソリンで5.7リットル/100kmの燃費と416馬力を発揮し、7月30日に発売予定となっています。",
+        url: "https://carnewschina.com/2026/07/28/xiaomi-unveils-skynomad-kunlun-erev-specs-92-octane-gas-and-5-7l-fuel-economy-ahead-of-july-30-debut/",
+        source: "CarNewsChina - All",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/07/weixin-image_20260728134248_63_2.jpg",
+        note: ""
+    },
+    {
+        id: "cn1361",
+        title: "中国で発売されるゼーグル9Xの5人乗りモデルは、6万9千ドルから販売を開始する",
+        desc: "中国市場で五座モデルのゼーグル9Xが6万9千ドルで発売された。70kWhバッテリーを備え、最大1030kWの高出力を実現する。",
+        url: "https://carnewschina.com/2026/07/28/five-seat-zeekr-9x-flagship-suv-launched-at-69745-usd-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/07/zeekr_9x_five-seat_launch-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1362",
+        title: "BYDが日本初となる航続距離320kmのKカー「ラッコ」を発売、価格は1万3100ドルから",
+        desc: "BYDは日本市場向けに電気自動車「ラッコ」を発売した。WLTC航続距離は320kmで、バッテリー容量は2種類用意される。価格は1万3100ドルからとなる。",
+        url: "https://carnewschina.com/2026/07/28/japans-first-320-km-electric-k-car-isnt-japanese-byd-racco-launches-from-14200-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-07-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/07/feature_pc_01a-1.jpg",
+        note: ""
+    },
+    {
+        id: "cn1363",
+        title: "ファーウェイ東風紅旗超高速充電技術10%から70%まで3分41秒で完了",
+        desc: "ファーウェイ、東風、紅旗は、バッテリーを10%から97%まで8分3秒で充電可能と発表した。自動車内装やシートに関する詳細な情報は含まれていないため、充電性能に関する事実のみを簡潔にまとめた。",
+        url: "https://cnevpost.com/2026/07/28/faw-hongqi-battery-charges-10-70-3-mins-41-secs/",
+        source: "CnEVPost - All",
+        date: "2026-07-28",
+        tags: ["シート", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/07/2026072814093694.jpg",
+        note: ""
+    },
+    {
+        id: "cn1364",
+        title: "GAC AionのRayシリーズ初モデルであるRay 7を発売し",
+        desc: "GAC Aionは、若年層向けの中型EVセダン「Ray 7」をRayシリーズとして初公開した。同車は若年層をターゲットにした新モデルであり、詳細はCnEVPostで確認できる。",
+        url: "https://cnevpost.com/2026/07/28/gac-aion-launches-new-ray-series/",
+        source: "CnEVPost - All",
+        date: "2026-07-28",
+        tags: ["AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/07/2026072813174746.jpg",
+        note: ""
+    },
+    {
+        id: "cn1365",
+        title: "ゼーグル5人乗り9Xは、6人乗りよりも安価で販売を開始しました。",
+        desc: "ゼークルは5人乗りSUVの9Xを発売し、6人乗りモデルより45万1900元で販売を開始した。中国市場での高級SUV販売を維持する狙いだ。",
+        url: "https://cnevpost.com/2026/07/28/zeekr-launches-5-seat-9x/",
+        source: "CnEVPost - All",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/07/2026072803513499.jpg",
+        note: ""
+    },
+    {
+        id: "cn1366",
+        title: "BYDが日本市場でトヨタやホンダに挑戦する全電気車「ラッコ」",
+        desc: "BYDは日本市場でトヨタやホンダに挑戦する全電気Kカー「ラッコ」を発売する。価格は214万5千円からで、補助金適用後200万円台になる。",
+        url: "https://cnevpost.com/2026/07/28/byd-launches-k-car-racco-japan/",
+        source: "CnEVPost - All",
+        date: "2026-07-28",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/07/2026072803094827.jpg",
+        note: ""
+    },
+    {
+        id: "in1411",
+        title: "トヨタ、2026年モデルのヒルックスをインドで発売、価格は31.99ラークからスタート",
+        desc: "トヨタはインド市場で9世代目となるピックアップトラック「ヒルックス」を発売し、価格は31.99ラーク（税抜）からスタートする。",
+        url: "https://www.autocarindia.com/car-news/2026-toyota-hilux-launched-at-rs-32-lakh-440323",
+        source: "Autocar India - All",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 42,
+        interiorReason: "headline and text mention redesigned cabin but lack specific interior details; i",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260728_145112_31886928.jpg",
+        note: ""
+    },
+    {
+        id: "in1412",
+        title: "マヒンドラ・スコルピオNのフェイスリフト、内装に10.25インチ画面追加",
+        desc: "マヒンドラ・スコルピオNのフェイスリフトがスパイショットで判明。外装はホイール変更のみだが、内装はThar Roxxのような10.25インチの独立型インフォテインメントシステムやデジタルメーターを採用。ソニーサウンドシステムやパンラミックサンルーフも継続する。",
+        url: "https://www.autocarindia.com/car-news/mahindra-scorpio-n-facelift-interior-exterior-spied-440317",
+        source: "Autocar India - All",
+        date: "2026-07-28",
+        tags: ["AR", "コネクテッド"],
+    
+        interiorScore: 60,
+        interiorReason: "interior image is exterior-only but text mentions 10.25-inch display, digital me",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260728_122228_7f4a3be2.jpg",
+        note: ""
+    },
+    {
+        id: "in1413",
+        title: "2026年トヨタ・ヒルックス、インドで新デザインと内装を刷新して発売",
+        desc: "トヨタ・ヒルックス9世代がインドで発売され、外観とインテリアを大幅に刷新。2.8リットルディーゼルエンジン（204PS）を維持し、12.3インチデジタルメーターや360度カメラ、ADAS機能を搭載。価格は31.99万ルピーから。",
+        url: "https://www.rushlane.com/2026-toyota-hilux-launch-price-rs-31-99-l-major-exterior-interior-upgrade-12551657.html",
+        source: "RushLane",
+        date: "2026-07-28",
+        tags: ["安全"],
+    
+        interiorScore: 62,
+        interiorReason: "headline and snippet mention interior upgrade and 12.3-inch digital meter; Japan",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/07/new-toyota-hilux-india-launch-9th-gen-model-7.jpg",
+        note: ""
+    },
+    {
+        id: "in1414",
+        title: "2026年マヒンドラ・スコルピオNフェイスリフト、8月14日発売予定で内装確認",
+        desc: "2026年8月14日発売予定のマヒンドラ・スコルピオNフェイスリフトは、10.25インチタッチスクリーンとデジタルメーターを備えた新内装を採用。パノラマサンルーフや360度カメラ、通気性シートなどの快適装備も追加される。",
+        url: "https://www.rushlane.com/2026-mahindra-scorpio-n-facelift-interiors-spied-launch-exp-14-aug-12551632.html",
+        source: "RushLane",
+        date: "2026-07-28",
+        tags: ["ディスプレイ", "シート"],
+    
+        interiorScore: 91,
+        interiorReason: "interior image plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/07/2026-mahindra-scorpio-n-interiors-spied-new-2.jpeg",
+        note: ""
+    },
+    {
+        id: "in1415",
+        title: "トヨタ、インドで新世代ヒルックス発売3199万ルピーから搭載",
+        desc: "トヨタはインドで新世代ヒルックスを発売した。外観を刷新し、技術搭載のインテリアを備えたディーゼルモデルで、価格は3199万ルピーからとなる。",
+        url: "https://gaadiwaadi.com/new-gen-toyota-hilux-launched-in-india-at-rs-31-99-lakh/",
+        source: "GaadiWaadi",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/07/new-gen-toyota-hilux-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1416",
+        title: "インド向けBMW X5ロングホイールベースとiX5ロングホイールベースが発表",
+        desc: "BMWはインド市場でロングホイールベース車の人気を踏まえ、新モデルX5とiX5のロングホイールベース版をインド向けに発表。中国限定だったロングホイールベース車は近年インドで成功しており、より広々とした室内空間を提供する。",
+        url: "https://gaadiwaadi.com/india-bound-bmw-x5-lwb-and-ix5-lwb-unveiled/",
+        source: "GaadiWaadi",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/07/BMW-X5-LWB1.jpg",
+        note: ""
+    },
+    {
+        id: "in1417",
+        title: "2026年マヒンドラ・スコルピオNの新型内装、デジタルディスプレイと大型タッチスクリーンが確認",
+        desc: "2026年式マヒンドラ・スコルピオNのフェイスリフトで、運転席のデジタルディスプレイと大型フロート型インフォテインメント画面が採用される内装のスパイショットが公開された。",
+        url: "https://gaadiwaadi.com/2026-mahindra-scorpio-n-facelift-interior-spied-undisguised-new-details/",
+        source: "GaadiWaadi",
+        date: "2026-07-28",
+        tags: ["ディスプレイ", "コネクテッド"],
+    
+        interiorScore: 90,
+        interiorReason: "clear interior image showing dashboard, infotainment screen, and digital driver",
+        imageInterior: true,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/07/2026-Mahindra-Scorpio-N-Facelift-Interior.jpg",
+        note: ""
+    },
+    {
+        id: "in1418",
+        title: "ス柯达Slaviaフェイスリフト8月18日発売、内外装変更と1.0L・1.5Lターボ継続",
+        desc: "ス柯达Slaviaのフェイスリフトモデルが8月18日に正式に発売される。内外装を刷新する一方、1.0Lと1.5Lのターボガソリンエンジンは維持される。",
+        url: "https://gaadiwaadi.com/skoda-slavia-facelift-to-officially-launch-on-august-18-all-key-details/",
+        source: "GaadiWaadi",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "interior revisions mentioned but no specific details; image shows exterior and p",
+        imageInterior: true,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2022/04/skoda-slavia-4.jpg",
+        note: ""
+    },
+    {
+        id: "in1419",
+        title: "2026年8月18日発売のSkoda Slaviaフェイスリフト、新8速ATと内装アップ",
+        desc: "Škodaは2026年8月18日にSlaviaのフェイスリフトを発表。新8速AT搭載の1.0 TSIエンジンやデジタルメーター、LEDヘッドランプなど内外装を刷新し、VernaやVirtusとの競争力を強化する。",
+        url: "https://www.autopunditz.com/post/2026-skoda-slavia-facelift-launch-august-18",
+        source: "Auto Punditz",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 83,
+        interiorReason: "interior and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_80bae91afd4f4ebc8d14d9411faca9ef~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "paper138",
+        title: "農村大気中の重金属濃度と季節変動に関するメタ分析",
+        desc: "化石燃料燃焼や自動車排気由来の重金属が農村大気汚染の要因となる。鉛は中国農村で500ng/m³超、冬季は石炭燃焼で濃度上昇、春季は砂塵が主因とされる。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42516545/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260728110735&v=2.20.0",
+        source: "PubMed - Search",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 12,
+        interiorReason: "The article is a scientific study on air pollution and heavy metals in rural are",
+        imageInterior: false,
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
+        note: ""
+    },
+    {
+        id: "paper139",
+        title: "Lシステインエチルエステルがモルヒネの呼吸抑制を克服するメカニズム解明",
+        desc: "モルヒネによる呼吸抑制を克服するLシステインエチルエステル（L-CYSee）の作用機序が解明された。マウス実験で、ムスカリン性受容体の活性化が呼吸機能回復に寄与し、アトロピン投与で効果が抑制された。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42515806/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260728110735&v=2.20.0",
+        source: "PubMed - Search",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 13,
+        interiorReason: "no interior detail",
+        imageInterior: false,
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
+        note: ""
+    },
+    {
+        id: "paper140",
+        title: "自動車用動力系部品向けCFRP複合材の性能と耐久性に関する包括的レビュー",
+        desc: "自動車動力系部品の軽量化と効率化に向け、CFRP複合材が金属代替材として注目されている。CF/PEEKやCF/PPSなど高性能熱可塑性系と熱硬化性系の比較に加え、250℃付近での引張強度1400-1600MPaやクリープ疲労による寿命低下40-60%などの耐久性データが示された。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42514812/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260728110735&v=2.20.0",
+        source: "PubMed - Search",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 12,
+        interiorReason: "The article discusses CFRP composites for powertrain components (engine, transmi",
+        imageInterior: false,
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
+        note: ""
+    },
+    {
+        id: "paper141",
+        title: "オーストラリアの野生生物保護、猫管理に焦点が偏る問題点",
+        desc: "オーストラリアではペット猫が野生生物減少の要因として注目されがちだが、他の予防可能な原因が見過ごされるリスクがある。",
+        url: "https://pubmed.ncbi.nlm.nih.gov/42511053/?utm_source=Chrome&utm_medium=rss&utm_campaign=pubmed-2&utm_content=1BmJTbU5jL0av9T4Khv68l9Szy9DBfMeC5fs57GWu0vnoYd1mF&fc=20260127232539&ff=20260728110735&v=2.20.0",
+        source: "PubMed - Search",
+        date: "2026-07-28",
+        tags: [],
+    
+        interiorScore: 30,
+        interiorReason: "no interior detail",
+        imageInterior: false,
+        country: "paper",
+        img: "https://cdn.ncbi.nlm.nih.gov/pubmed/persistent/pubmed-meta-image-v2.jpg",
+        note: ""
+    },
+    {
+        id: "us1368",
+        title: "SANY SKT145Ei電気無人運搬車、運転席なしレーダー搭載",
+        desc: "SANYは運転席を廃した全電気重運搬車SKT145Eiを発表。ミリ波レーダー搭載のセンサーシステムにより無人運転を実現し、自律走行能力を備える。",
+        url: "https://electrek.co/2026/07/28/e-quipment-highlight-sany-skt145ei-cabless-autonomous-haul-truck-video/",
+        source: "Electrek",
+        date: "2026-07-28",
+        tags: ["センシング"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/07/SANY_autonomous.jpg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "eu1326",
+        title: "ドイツカッセル近郊にメガワットトラック充電拠点完成",
+        desc: "ESG-Solarはドイツカッセル近郊ニエストェタルに電気トラック用充電拠点を開設した。A7高速道路近くでMCS充電技術と自家発電太陽光発電所、蓄電システムを組み合わせ、電気自動車も充電可能。",
+        url: "https://www.electrive.com/2026/07/28/esg-solar-opens-megawatt-truck-charging-hub-in-germany/",
+        source: "Electrive",
+        date: "2026-07-28",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/07/esg-solar-ladepark-niestetal-03-400x266.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1327",
+        title: "BMW、中国向けiX5ロングホイールベース版を新発売、後部座席快適性向上",
+        desc: "BMWは中国市場向けに、ホイールベースを130ミリ延長した電気自動車iX5のロングホイールベース版を発表した。このモデルは中国市場の高級車層向けに、後部座席の空間と快適性を強化した専用仕様であり、BMWの中国でのポートフォリオ拡大の一環となる。",
+        url: "https://www.electrive.com/2026/07/28/bmw-unveils-long-wheelbase-version-of-the-new-ix5-for-china/",
+        source: "Electrive",
+        date: "2026-07-28",
+        tags: ["シート", "EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/07/bmw-ix5-langversion-china-2026-13-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1328",
+        title: "メルセデス・ベンツEV Cクラス、ライフサイクル排出量2/3削減独立監査",
+        desc: "メルセデス・ベンツはEV Cクラスのライフサイクル排出量が内燃機関モデルより2/3低いことを独立監査で確認。アルミの約2/3は再生可能エネルギー由来、リサイクル熱可塑性素材は49kgに増大。ケケシュメート工場では太陽光発電で年間エネルギー需要の25%を賄う。",
+        url: "https://www.automotiveworld.com/news/mercedes-benz-audits-electric-c-class-carbon-footprint/",
+        source: "Automotive World",
+        date: "2026-07-28",
+        tags: ["新素材", "EV"],
+    
+        interiorScore: 57,
+        interiorReason: "materials sourcing and recycled plastic content details are useful for interior",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/07/28152209/mercedes-benz-electric-c-class-300-components-with-recycled-material-content-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1329",
+        title: "ロータス・テック、車両購入でデジタル資産決済導入検討",
+        desc: "ロータス・テックは、自動車購入時の決済手段としてデジタル資産（暗号資産）の受入を検討している。過去に自動車メーカーが試験的に導入したが、静かに撤退した事例がある。",
+        url: "https://www.automotiveworld.com/news/lotus-tech-eyes-digital-asset-payments-for-vehicles/",
+        source: "Automotive World",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/07/28112714/finloop-lotus-fomopay-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1330",
+        title: "LG、風防に統合したHMDとバーチャルコックピットで2026年PACEパイロット賞候補に",
+        desc: "LGは風防に統合したHMDとバーチャルコックピットを単一光学ユニットに統合。欧州NCAPの2026年基準で視線移動を減らす設計が評価され、2026年自動車ニュースPACEパイロット賞候補に選定された。",
+        url: "https://www.automotiveworld.com/news/lg-merges-head-up-display-and-virtual-cockpit-screen/",
+        source: "Automotive World",
+        date: "2026-07-28",
+        tags: ["コックピット"],
+    
+        interiorScore: 87,
+        interiorReason: "HMI and display integration with clear interior image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/07/28101903/lg-electronics-hud-pace-pilot-award-2.jpg",
+        note: ""
+    },
+    {
+        id: "eu1331",
+        title: "DENZA BAO 5英国発売価格544PS電動走行距離62マイルで発表",
+        desc: "DENZAは英国市場向けBAO 5プラグインハイブリッドSUVの価格と仕様を正式に発表した。価格は6万9500ポンドからで、最大544PSの出力と62マイルのEV走行距離を備える。",
+        url: "https://electriccarsreport.com/2026/07/denza-bao-5-uk-price-specs-and-range-confirmed/",
+        source: "Electric Cars Report",
+        date: "2026-07-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/07/DENZA-BAO-5.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1332",
+        title: "BMW iX3ロングホイールベース版、919km航続距離とNeue Klasse技術搭載",
+        desc: "BMWは中国向けにiX3ロングホイールベース版を発表。CLTC航続距離919km、800V架構、477馬力、超急速充電、AI搭載のNeue Klasse技術を備える。",
+        url: "https://electriccarsreport.com/2026/07/bmw-ix3-long-wheelbase-will-come-with-919-km-cltc-range-and-neue-klasse-technology/",
+        source: "Electric Cars Report",
+        date: "2026-07-28",
+        tags: ["AI", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/06/BMW-iX3-Long-Wheelbase_2.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in1420",
+        title: "マヒンドラ・スコルピオNの新型内装が確認され、8月14日発売前にプレミアム感向上",
+        desc: "マヒンドラ・スコルピオNのフェイスリフトが8月14日発売前に確認され、10.25インチタッチスクリーンやデジタルメーター、パノラマサンルーフなど内装が刷新され、よりプレミアムな印象に。",
+        url: "https://www.motorbeam.com/mahindra-scorpio-n-updated-interiors-spied-before-14-august-launch/",
+        source: "MotorBeam",
+        date: "2026-07-28",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 71,
+        interiorReason: "interior refresh details (10.25-inch touchscreen, digital meter, panoramic sunro",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.motorbeam.com/wp-content/uploads/2026-Mahindra-Scorpio-N-Spotted.jpg",
+        note: ""
+    },
+    {
+        id: "jp1549",
+        title: "プジョー5008GTハイブリッド、7人乗りSUVで実用性重視のインテリア採用",
+        desc: "プジョーは2017年に登場した5008を、3008と同じプラットフォームで7人乗りSUVに再定義。フランス車の歴史を踏襲し、3列シート構成で実用性を重視したインテリア設計を採用している。",
+        url: "https://dime.jp/genre/2139257/",
+        source: "@DIME アットダイム",
+        date: "2026-07-28",
+        tags: ["シート"],
+    
+        country: "jp",
+        img: "https://dime.jp/wp-content/uploads/2026/07/B87X0064-770x513.jpg",
+        note: ""
+    },
+    {
+        id: "jp1550",
+        title: "マツダロードスターNC型にパワーリトラクタブルハードトップ搭載",
+        desc: "マツダ・ロードスターNC型にラインアップされたパワーリトラクタブルハードトップ（RHT）は、ルーフが変身するように収納される様子を写真で解説する。",
+        url: "https://jafmate.jp/car/oldcardrive_20260728_2.html",
+        source: "jafmate",
+        date: "2026-07-28",
+        tags: [],
+    
+        country: "jp",
+        img: "https://jafmate.jp/car/__icsFiles/afieldfile/2026/06/26/1A3A9833_1785_1.JPG",
         note: ""
     },
 ];
