@@ -969,6 +969,7 @@ h1 {
             <span>📊 総アクセス数: <strong id="totalVisits" style="color:var(--accent);">-</strong></span>
             <span>📅 本日: <strong id="todayVisits" style="color:var(--accent-2);">-</strong></span>
             <span>🗓️ 昨日: <strong id="yesterdayVisits" style="color:var(--accent-3);">-</strong></span>
+            <span>🔄 計測: <strong id="accessCounterStatus" style="color:var(--accent-4);">確認中</strong></span>
             <span>🕒 更新日時: <strong id="lastUpdated" style="color:var(--accent-4);">-</strong></span>
             <button class="analysis-toggle" id="analysisToggle" type="button" aria-expanded="false">アクセス推移</button>
         </div>
@@ -1138,7 +1139,7 @@ h1 {
     <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, runTransaction, doc, getDoc, setDoc, updateDoc, arrayUnion, onSnapshot, increment, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, runTransaction, doc, getDoc, setDoc, updateDoc, arrayUnion, onSnapshot, increment, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEKRdUl_mOYjBGLKY35IFWLAHEyDH3Og8",
@@ -1172,7 +1173,7 @@ h1 {
         const LOCAL_ACCESS_KEY = "local_access_stats";
         const LOCAL_INTERACTIONS_KEY = "local_interactions";
         const LOCAL_READS_KEY = "local_article_reads";
-        const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date";
+        const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date_v2";
         let accessStatsCache = null;
 
         function loadLocalAccessStats() {
@@ -1189,6 +1190,13 @@ h1 {
             } catch {
                 // Ignore storage errors
             }
+        }
+
+        function setAccessCounterStatus(label, isLocal = false) {
+            const el = document.getElementById("accessCounterStatus");
+            if (!el) return;
+            el.textContent = label;
+            el.style.color = isLocal ? "var(--accent-3)" : "var(--accent-2)";
         }
 
         const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
@@ -1493,44 +1501,48 @@ h1 {
             window.interactionsData[itemId] = {
                 likes: data.likes || 0,
                 comments: comments.length,
+                commentItems: comments,
                 reads: (typeof data.reads === "number") ? data.reads : (previous.reads || 0)
             };
         }
 
-        async function loadInteractions() {
+        function getInteractionRenderData(itemId) {
+            const data = window.interactionsData[itemId] || {};
+            return {
+                likes: data.likes || 0,
+                comments: Array.isArray(data.commentItems) ? data.commentItems : [],
+                reads: data.reads || 0
+            };
+        }
+
+        function loadInteractions() {
             if (!db) {
                 enableLocalInteractions();
                 return;
             }
-            try {
-                const snapshot = await getDocs(collection(db, "interactions"));
-                snapshot.forEach(docSnap => {
-                    const data = docSnap.data();
-                    mergeInteractionData(docSnap.id, data);
+            if (interactionsCollectionUnsubscribe) return;
+            interactionsCollectionUnsubscribe = onSnapshot(collection(db, "interactions"), (liveSnapshot) => {
+                liveSnapshot.docChanges().forEach(change => {
+                    const itemId = change.doc.id;
+                    if (change.type === "removed") {
+                        delete window.interactionsData[itemId];
+                        return;
+                    }
+                    mergeInteractionData(itemId, change.doc.data());
+                    if (liveElements[itemId]) {
+                        liveElements[itemId].lastData = getInteractionRenderData(itemId);
+                        renderItem(itemId);
+                    }
                 });
                 window.firebaseInteractionsReady = true;
-                console.log("Interactions loaded:", Object.keys(window.interactionsData).length);
-                renderAllRankings();
+                window.useLocalInteractions = false;
+                console.log("Interactions synced:", Object.keys(window.interactionsData).length);
                 if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-                if (!interactionsCollectionUnsubscribe) {
-                    interactionsCollectionUnsubscribe = onSnapshot(collection(db, "interactions"), (liveSnapshot) => {
-                        liveSnapshot.docChanges().forEach(change => {
-                            if (change.type === "removed") {
-                                delete window.interactionsData[change.doc.id];
-                                return;
-                            }
-                            mergeInteractionData(change.doc.id, change.doc.data());
-                        });
-                        if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-                        if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
-                    }, (error) => {
-                        console.error("Interactions live sync failed:", error);
-                    });
-                }
-            } catch (e) {
-                console.error("Failed to load interactions:", e);
+                if (window.scheduleRankingUpdate) window.scheduleRankingUpdate();
+            }, (error) => {
+                console.error("Interactions live sync failed:", error);
                 enableLocalInteractions();
-            }
+            });
         }
 
         // アクセスカウンター（Firebase連携）
@@ -1546,13 +1558,14 @@ h1 {
                     const snapshot = await getDoc(counterRef);
                     if (snapshot.exists()) {
                         renderAccessStats(snapshot.data());
+                        setAccessCounterStatus("クラウド同期");
                     } else {
                         renderAccessStats(loadLocalAccessStats());
+                        setAccessCounterStatus("端末内", true);
                     }
                     window.__accessCounterCounted = true;
                     return;
                 }
-                markAccessCountedToday();
 
                 // トランザクションでカウンターをインクリメント
                 await runTransaction(db, async (transaction) => {
@@ -1589,13 +1602,16 @@ h1 {
                 if (snapshot.exists()) {
                     renderAccessStats(snapshot.data());
                 }
+                markAccessCountedToday();
                 window.__accessCounterCounted = true;
+                setAccessCounterStatus("クラウド同期");
                 console.log("Access counter updated");
             } catch (error) {
-                console.log("Access counter fallback:", error.message);
+                console.warn("Access counter fallback:", error.code || error.message);
                 const data = bumpLocalAccessStats();
                 renderAccessStats(data);
                 window.__accessCounterCounted = true;
+                setAccessCounterStatus("端末内（Firebase一時停止）", true);
             } finally {
                 window.__accessCounterInFlight = false;
             }
@@ -1803,19 +1819,8 @@ h1 {
                 renderItem(itemId);
             }
 
-            if (unsubscribes[itemId]) return;
-
-            unsubscribes[itemId] = onSnapshot(getItemRef(itemId), (docSnap) => {
-                if (docSnap.exists()) {
-                    liveElements[itemId].lastData = docSnap.data();
-                    renderItem(itemId);
-                } else {
-                    liveElements[itemId].lastData = { likes: 0, comments: [] };
-                    renderItem(itemId);
-                }
-            }, (error) => {
-                console.error(`Item live sync failed: ${itemId}`, error);
-            });
+            liveElements[itemId].lastData = getInteractionRenderData(itemId);
+            renderItem(itemId);
         };
         window.toggleLike = async (itemId, btn) => {
             // Check Local State for "Liked by me" visual (Local Storage)

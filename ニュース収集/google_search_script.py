@@ -134,6 +134,7 @@ def _post_llm(**kwargs):
 # Summary limits
 SUMMARY_TITLE_LIMIT = 50
 SUMMARY_TITLE_TARGET = 38
+SUMMARY_COMPACT_TITLE_LIMIT = 44
 SUMMARY_CONTENT_LIMIT = 150
 SUMMARY_HTML_CHARS = 8000
 
@@ -1552,6 +1553,10 @@ def title_looks_incomplete(text):
         return True
     if s.endswith(("には", "では", "とは", "から", "より", "および", "及び", "の", "と", "や", "を", "が", "は", "に", "へ", "で")):
         return True
+    if re.search(r"[ぁ-ん][ァ-ヶー]$", s):
+        return True
+    if re.search(r"(?:搭載|採用|刷新|実現|公開|廃止)し[ぁ-んァ-ヶーA-Za-z]?$", s):
+        return True
     return bool(re.search(r"(?:と|や|および|及び)\s*[A-Za-z0-9][A-Za-z0-9 .+/_-]*$", s))
 
 
@@ -1578,7 +1583,7 @@ def compact_title_with_llm(source_title, source_content, current_title):
         prompt = (
             "Create exactly one complete, natural Japanese news headline for the source below.\n"
             f"Hard requirements: Japanese only, target 30 to {SUMMARY_TITLE_TARGET} Japanese characters, "
-            f"never exceed {SUMMARY_TITLE_LIMIT} characters, no JSON, no quotes, no period, "
+            f"never exceed {SUMMARY_COMPACT_TITLE_LIMIT} characters, no JSON, no quotes, no period, "
             "no explanation, and no polite desu/masu ending. Keep decimal numbers intact.\n"
             "Focus on the subject and one most important automotive-interior feature. "
             "The headline must end with a complete action or noun phrase such as '搭載', '採用', or '公開'. "
@@ -1597,7 +1602,7 @@ def compact_title_with_llm(source_title, source_content, current_title):
             candidate = normalize_text(candidate.strip("\"'「」"))
         if (
             candidate
-            and len(candidate) <= SUMMARY_TITLE_LIMIT
+            and len(candidate) <= SUMMARY_COMPACT_TITLE_LIMIT
             and _is_valid_japanese(candidate)
             and not title_looks_incomplete(candidate)
         ):
@@ -1922,7 +1927,10 @@ def summarize_article(title, content, url, country=""):
             f"title_len={len(summary_title)} body_len={len(summary_body)}: {title[:50]}"
         )
 
-    if len(summary_title) > SUMMARY_TITLE_LIMIT or has_suspicious_truncation(summary_title):
+    if (
+        len(summary_title) > SUMMARY_COMPACT_TITLE_LIMIT
+        or title_looks_incomplete(summary_title)
+    ):
         compact_title = compact_title_with_llm(title, f"{content} {html_text}", summary_title)
         if compact_title:
             summary_title = compact_title
