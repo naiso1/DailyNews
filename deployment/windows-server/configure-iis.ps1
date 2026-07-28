@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string[]]$AllowedClients = @("172.29.41.0/24", "202.15.67.0/24")
+    [string[]]$AllowedClients = @("172.29.0.0/16", "202.15.67.0/24")
 )
 
 $ErrorActionPreference = "Stop"
@@ -76,13 +76,6 @@ $webConfig = @'
   <system.webServer>
     <rewrite>
       <rules>
-        <rule name="DailyNews HTTPS redirect" stopProcessing="true">
-          <match url="(.*)" />
-          <conditions>
-            <add input="{HTTPS}" pattern="off" ignoreCase="true" />
-          </conditions>
-          <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" redirectType="Permanent" />
-        </rule>
         <rule name="DailyNews reverse proxy" stopProcessing="true">
           <match url="(.*)" />
           <action type="Rewrite" url="http://202.15.67.132:8082/{R:1}" />
@@ -192,6 +185,6 @@ New-NetFirewallRule `
 
 Start-Website -Name $siteName
 Write-Host "DailyNews IIS proxy configured."
-Write-Host "HTTP:  http://$hostName/ (redirects to HTTPS)"
+Write-Host "HTTP:  http://$hostName/"
 Write-Host "HTTPS: https://$hostName/"
 Write-Host "Certificate: $certificateExport"

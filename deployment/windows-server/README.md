@@ -17,9 +17,10 @@ C:\Users\Administrator\Desktop\DailyNews
   active-release.txt
 ```
 
-The Node.js server listens on `202.15.67.132:8082`. IIS publishes
-`https://IEWEB01/` and redirects port 80 to HTTPS. The application and
-DailyNews firewall rules allow `172.29.41.0/24` and `202.15.67.0/24`.
+The Node.js server listens on `202.15.67.132:8082`. IIS publishes both
+`http://IEWEB01/` and `https://IEWEB01/`. The application and DailyNews
+firewall rules allow the internal networks `172.29.0.0/16` and
+`202.15.67.0/24`.
 
 Interaction data is stored in `data\dailynews.sqlite`. The
 `DailyNewsBackup` task creates a consistent backup every day at 04:30 and

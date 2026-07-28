@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string[]]$AllowedClients = @("172.29.41.0/24", "202.15.67.0/24")
+    [string[]]$AllowedClients = @("172.29.0.0/16", "202.15.67.0/24")
 )
 
 $ErrorActionPreference = "Stop"

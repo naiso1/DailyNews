@@ -15,7 +15,7 @@ const HOST = process.env.DAILYNEWS_HOST || "202.15.67.132";
 const PORT = Number(process.env.DAILYNEWS_PORT || 8082);
 const ALLOWED_CLIENTS = (
   process.env.DAILYNEWS_ALLOWED_CLIENTS ||
-  "127.0.0.1,::1,202.15.67.0/24,172.29.41.0/24"
+  "127.0.0.1,::1,202.15.67.0/24,172.29.0.0/16"
 )
   .split(",")
   .map((value) => value.trim())
@@ -214,7 +214,11 @@ function log(message) {
 }
 
 function normalizeAddress(address) {
-  return String(address || "").replace(/^::ffff:/, "");
+  const normalized = String(address || "").trim().replace(/^::ffff:/, "");
+  const bracketedIpv6 = normalized.match(/^\[([^\]]+)\](?::\d+)?$/);
+  if (bracketedIpv6) return bracketedIpv6[1];
+  const ipv4WithPort = normalized.match(/^(\d{1,3}(?:\.\d{1,3}){3}):\d+$/);
+  return ipv4WithPort ? ipv4WithPort[1] : normalized;
 }
 
 function ipv4ToInt(address) {
