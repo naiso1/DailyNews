@@ -59,11 +59,7 @@ finally {
 $sshOptions = @("-i", $IdentityFile, "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes")
 $remoteArchive = "Desktop/DailyNews/incoming/$releaseId.tar"
 
-$prepareCommand = @"
-New-Item -ItemType Directory `
-    -Path 'C:\Users\Administrator\Desktop\DailyNews\incoming' `
-    -Force | Out-Null
-"@
+$prepareCommand = "New-Item -ItemType Directory -Path 'C:\Users\Administrator\Desktop\DailyNews\incoming' -Force | Out-Null"
 $prepareEncoded = [Convert]::ToBase64String(
     [Text.Encoding]::Unicode.GetBytes($prepareCommand)
 )
@@ -80,11 +76,7 @@ if ($LASTEXITCODE -ne 0) {
 
 $activate = "C:\Users\Administrator\Desktop\DailyNews\app\activate-release.ps1"
 $remoteArchivePath = "C:\Users\Administrator\Desktop\DailyNews\incoming\$releaseId.tar"
-$activateCommand = @"
-& '$activate' `
-    -ArchivePath '$remoteArchivePath' `
-    -ReleaseId '$releaseId'
-"@
+$activateCommand = "& '$activate' -ArchivePath '$remoteArchivePath' -ReleaseId '$releaseId'"
 $activateEncoded = [Convert]::ToBase64String(
     [Text.Encoding]::Unicode.GetBytes($activateCommand)
 )
