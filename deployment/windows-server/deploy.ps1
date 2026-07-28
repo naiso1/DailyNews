@@ -38,6 +38,18 @@ if ($publicChanges.Count -gt 0) {
     throw "Public files must be committed before deployment:`n$($publicChanges -join [Environment]::NewLine)"
 }
 
+$healthUrl = "http://IEWEB01:8082/health"
+try {
+    $currentHealth = Invoke-RestMethod $healthUrl -TimeoutSec 5
+    if ($currentHealth.status -eq "ok" -and $currentHealth.release -eq $releaseId) {
+        Write-Host "DailyNews is already current: $releaseId" -ForegroundColor Green
+        return
+    }
+}
+catch {
+    Write-Host "DailyNews health check is unavailable; continuing deployment."
+}
+
 $temporaryDirectory = Join-Path $env:TEMP "DailyNewsDeploy"
 New-Item -ItemType Directory -Path $temporaryDirectory -Force | Out-Null
 $archive = Join-Path $temporaryDirectory "$releaseId.tar"
@@ -86,7 +98,7 @@ if ($LASTEXITCODE -ne 0) {
     throw "Failed to activate the release."
 }
 
-$health = Invoke-RestMethod "http://IEWEB01:8082/health" -TimeoutSec 15
+$health = Invoke-RestMethod $healthUrl -TimeoutSec 15
 if ($health.status -ne "ok" -or $health.release -ne $releaseId) {
     throw "DailyNews health check did not return the expected release."
 }

@@ -525,6 +525,30 @@ def run_git_sync(log_file):
     run_git_push(branch, log_file)
 
 
+def run_server_deploy(log_file):
+    if os.environ.get("AUTO_SERVER_DEPLOY", "1").strip().lower() in {"0", "false", "no"}:
+        log("[INFO] AUTO_SERVER_DEPLOY disabled; skip IEWEB01 deployment.")
+        return
+
+    deploy_script = ROOT / "deployment" / "windows-server" / "deploy.ps1"
+    if not deploy_script.exists():
+        raise RuntimeError(f"Server deployment script was not found: {deploy_script}")
+
+    run_cmd(
+        [
+            "powershell.exe",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(deploy_script),
+        ],
+        "deploy_ieweb01",
+        log_file,
+        cwd=ROOT,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-sleep", action="store_true", help="Do not suspend after processing.")
@@ -599,6 +623,7 @@ def main():
             else:
                 log("[WARN] GEMINI_API_KEY not set; skip Gemini image generation.")
             run_git_sync(LOG_FILE)
+            run_server_deploy(LOG_FILE)
         except KeyboardInterrupt:
             log("[INFO] Interrupted by user.")
             return
