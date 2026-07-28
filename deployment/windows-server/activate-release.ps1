@@ -17,6 +17,11 @@ $activeFile = Join-Path $root "active-release.txt"
 $releasePath = Join-Path $releases $ReleaseId
 $archive = [IO.Path]::GetFullPath($ArchivePath)
 $incomingPrefix = [IO.Path]::GetFullPath($incoming) + [IO.Path]::DirectorySeparatorChar
+$entryHtmlName = [Text.Encoding]::UTF8.GetString(
+    [Convert]::FromBase64String(
+        "5YaF6KOF6KO95ZOB44OH44Kk44Oq44O844OL44Ol44O844K5Lmh0bWw="
+    )
+)
 
 if (-not $archive.StartsWith($incomingPrefix, [StringComparison]::OrdinalIgnoreCase)) {
     throw "Archive must be located under $incoming"
@@ -37,7 +42,7 @@ if (-not (Test-Path -LiteralPath $releasePath)) {
             throw "tar.exe failed with exit code $LASTEXITCODE"
         }
 
-        $sourceHtml = Join-Path $staging "内装製品デイリーニュース.html"
+        $sourceHtml = Join-Path $staging $entryHtmlName
         $required = @(
             $sourceHtml,
             (Join-Path $staging "news_data.js"),

@@ -12,8 +12,13 @@ if ($LASTEXITCODE -ne 0 -or $releaseId -notmatch "^[0-9a-f]{40}$") {
     throw "Could not determine the Git commit ID."
 }
 
+$entryHtmlName = [Text.Encoding]::UTF8.GetString(
+    [Convert]::FromBase64String(
+        "5YaF6KOF6KO95ZOB44OH44Kk44Oq44O844OL44Ol44O844K5Lmh0bWw="
+    )
+)
 $required = @(
-    "内装製品デイリーニュース.html",
+    $entryHtmlName,
     "news_data.js",
     "insights_data.js",
     "images",
