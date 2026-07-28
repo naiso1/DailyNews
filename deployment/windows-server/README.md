@@ -2,7 +2,8 @@
 
 This deployment serves an explicit release package instead of exposing the
 repository root. Collection scripts, logs, API keys, and Git metadata are never
-reachable from the web server.
+reachable from the web server. A same-origin SQLite API stores access counts,
+likes, article reads, and comments.
 
 ## Server layout
 
@@ -16,9 +17,13 @@ C:\Users\Administrator\Desktop\DailyNews
   active-release.txt
 ```
 
-The Node.js server listens on `202.15.67.132:8082`. Initially, both the
-application and Windows Firewall only allow the DailyNews workstation at
-`172.29.41.49`.
+The Node.js server listens on `202.15.67.132:8082`. IIS publishes
+`https://IEWEB01/` and redirects port 80 to HTTPS. The application and
+DailyNews firewall rules allow `172.29.41.0/24` and `202.15.67.0/24`.
+
+Interaction data is stored in `data\dailynews.sqlite`. The
+`DailyNewsBackup` task creates a consistent backup every day at 04:30 and
+retains 35 days under `data\backups`.
 
 ## Deployment
 
@@ -33,6 +38,7 @@ The script packages only:
 - `内装製品デイリーニュース.html`
 - `news_data.js`
 - `insights_data.js`
+- `dailynews_client.js`
 - `images/`
 - `page_images/`
 

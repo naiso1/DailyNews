@@ -21,6 +21,7 @@ $required = @(
     $entryHtmlName,
     "news_data.js",
     "insights_data.js",
+    "dailynews_client.js",
     "images",
     "page_images"
 )
@@ -70,8 +71,12 @@ finally {
 
 $sshOptions = @("-i", $IdentityFile, "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes")
 $remoteArchive = "Desktop/DailyNews/incoming/$releaseId.tar"
+$remoteApp = "Desktop/DailyNews/app"
 
-$prepareCommand = "New-Item -ItemType Directory -Path 'C:\Users\Administrator\Desktop\DailyNews\incoming' -Force | Out-Null"
+$prepareCommand = @"
+New-Item -ItemType Directory -Path 'C:\Users\Administrator\Desktop\DailyNews\incoming' -Force | Out-Null
+New-Item -ItemType Directory -Path 'C:\Users\Administrator\Desktop\DailyNews\app' -Force | Out-Null
+"@
 $prepareEncoded = [Convert]::ToBase64String(
     [Text.Encoding]::Unicode.GetBytes($prepareCommand)
 )
@@ -79,6 +84,22 @@ $prepareEncoded = [Convert]::ToBase64String(
     "powershell.exe -NoProfile -NonInteractive -EncodedCommand $prepareEncoded"
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to prepare the server incoming directory."
+}
+
+$appFiles = @(
+    "server.js",
+    "backup.js",
+    "import_legacy.js",
+    "activate-release.ps1",
+    "install.ps1",
+    "configure-iis.ps1"
+)
+foreach ($appFile in $appFiles) {
+    $localAppFile = Join-Path $PSScriptRoot $appFile
+    & scp @sshOptions $localAppFile "${Server}:${remoteApp}/$appFile"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed to upload server application file: $appFile"
+    }
 }
 
 & scp @sshOptions $archive "${Server}:$remoteArchive"
@@ -98,7 +119,31 @@ if ($LASTEXITCODE -ne 0) {
     throw "Failed to activate the release."
 }
 
-$health = Invoke-RestMethod $healthUrl -TimeoutSec 15
+$restartCommand = @"
+Stop-ScheduledTask -TaskName 'DailyNewsServer' -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 1
+Start-ScheduledTask -TaskName 'DailyNewsServer'
+"@
+$restartEncoded = [Convert]::ToBase64String(
+    [Text.Encoding]::Unicode.GetBytes($restartCommand)
+)
+& ssh @sshOptions $Server `
+    "powershell.exe -NoProfile -NonInteractive -EncodedCommand $restartEncoded"
+if ($LASTEXITCODE -ne 0) {
+    throw "Failed to restart the DailyNews server."
+}
+
+$health = $null
+$deadline = (Get-Date).AddSeconds(30)
+do {
+    try {
+        $health = Invoke-RestMethod $healthUrl -TimeoutSec 5
+    }
+    catch {
+        Start-Sleep -Seconds 1
+    }
+} until ($health -or (Get-Date) -ge $deadline)
+
 if ($health.status -ne "ok" -or $health.release -ne $releaseId) {
     throw "DailyNews health check did not return the expected release."
 }

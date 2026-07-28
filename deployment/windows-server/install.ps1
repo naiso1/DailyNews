@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$AllowedClient = "172.29.41.49"
+    [string[]]$AllowedClients = @("172.29.41.0/24", "202.15.67.0/24")
 )
 
 $ErrorActionPreference = "Stop"
@@ -10,6 +10,8 @@ $appDir = Join-Path $root "app"
 $serverScript = Join-Path $appDir "server.js"
 $node = "C:\Program Files\nodejs\node.exe"
 $taskName = "DailyNewsServer"
+$backupTaskName = "DailyNewsBackup"
+$backupScript = Join-Path $appDir "backup.js"
 $firewallName = "DailyNews TCP 8082"
 
 foreach ($directory in @(
@@ -30,14 +32,27 @@ if (-not (Test-Path -LiteralPath $node -PathType Leaf)) {
 if (-not (Test-Path -LiteralPath $serverScript -PathType Leaf)) {
     throw "DailyNews server script was not found: $serverScript"
 }
-if (Get-NetTCPConnection -LocalPort 8082 -State Listen -ErrorAction SilentlyContinue) {
-    throw "TCP port 8082 is already in use."
+if (-not (Test-Path -LiteralPath $backupScript -PathType Leaf)) {
+    throw "DailyNews backup script was not found: $backupScript"
 }
 
 $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 if ($existingTask) {
     Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+}
+$stopDeadline = (Get-Date).AddSeconds(15)
+do {
+    $existingListener = Get-NetTCPConnection `
+        -LocalPort 8082 `
+        -State Listen `
+        -ErrorAction SilentlyContinue
+    if ($existingListener) {
+        Start-Sleep -Milliseconds 500
+    }
+} until (-not $existingListener -or (Get-Date) -ge $stopDeadline)
+if ($existingListener) {
+    throw "TCP port 8082 is still in use after stopping the existing task."
 }
 
 $action = New-ScheduledTaskAction `
@@ -65,6 +80,29 @@ Register-ScheduledTask `
     -Description "Serves approved DailyNews releases on TCP port 8082." `
     -Force | Out-Null
 
+$existingBackupTask = Get-ScheduledTask -TaskName $backupTaskName -ErrorAction SilentlyContinue
+if ($existingBackupTask) {
+    Unregister-ScheduledTask -TaskName $backupTaskName -Confirm:$false
+}
+$backupAction = New-ScheduledTaskAction `
+    -Execute $node `
+    -Argument ('"' + $backupScript + '"') `
+    -WorkingDirectory $appDir
+$backupTrigger = New-ScheduledTaskTrigger -Daily -At "04:30"
+$backupSettings = New-ScheduledTaskSettingsSet `
+    -AllowStartIfOnBatteries `
+    -DontStopIfGoingOnBatteries `
+    -ExecutionTimeLimit (New-TimeSpan -Hours 1) `
+    -StartWhenAvailable
+Register-ScheduledTask `
+    -TaskName $backupTaskName `
+    -Action $backupAction `
+    -Trigger $backupTrigger `
+    -Principal $principal `
+    -Settings $backupSettings `
+    -Description "Creates a consistent DailyNews SQLite backup and retains 35 days." `
+    -Force | Out-Null
+
 Get-NetFirewallRule -DisplayName $firewallName -ErrorAction SilentlyContinue |
     Remove-NetFirewallRule
 New-NetFirewallRule `
@@ -74,7 +112,7 @@ New-NetFirewallRule `
     -Protocol TCP `
     -LocalAddress "202.15.67.132" `
     -LocalPort 8082 `
-    -RemoteAddress $AllowedClient `
+    -RemoteAddress $AllowedClients `
     -Profile Any | Out-Null
 
 Start-ScheduledTask -TaskName $taskName

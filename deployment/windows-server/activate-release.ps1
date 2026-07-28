@@ -47,6 +47,7 @@ if (-not (Test-Path -LiteralPath $releasePath)) {
             $sourceHtml,
             (Join-Path $staging "news_data.js"),
             (Join-Path $staging "insights_data.js"),
+            (Join-Path $staging "dailynews_client.js"),
             (Join-Path $staging "images"),
             (Join-Path $staging "page_images")
         )
