@@ -59,8 +59,16 @@ finally {
 $sshOptions = @("-i", $IdentityFile, "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes")
 $remoteArchive = "Desktop/DailyNews/incoming/$releaseId.tar"
 
+$prepareCommand = @"
+New-Item -ItemType Directory `
+    -Path 'C:\Users\Administrator\Desktop\DailyNews\incoming' `
+    -Force | Out-Null
+"@
+$prepareEncoded = [Convert]::ToBase64String(
+    [Text.Encoding]::Unicode.GetBytes($prepareCommand)
+)
 & ssh @sshOptions $Server `
-    'powershell -NoProfile -Command "New-Item -ItemType Directory -Path C:\Users\Administrator\Desktop\DailyNews\incoming -Force | Out-Null"'
+    "powershell.exe -NoProfile -NonInteractive -EncodedCommand $prepareEncoded"
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to prepare the server incoming directory."
 }
@@ -72,8 +80,16 @@ if ($LASTEXITCODE -ne 0) {
 
 $activate = "C:\Users\Administrator\Desktop\DailyNews\app\activate-release.ps1"
 $remoteArchivePath = "C:\Users\Administrator\Desktop\DailyNews\incoming\$releaseId.tar"
+$activateCommand = @"
+& '$activate' `
+    -ArchivePath '$remoteArchivePath' `
+    -ReleaseId '$releaseId'
+"@
+$activateEncoded = [Convert]::ToBase64String(
+    [Text.Encoding]::Unicode.GetBytes($activateCommand)
+)
 & ssh @sshOptions $Server `
-    "powershell -NoProfile -ExecutionPolicy Bypass -File `"$activate`" -ArchivePath `"$remoteArchivePath`" -ReleaseId `"$releaseId`""
+    "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand $activateEncoded"
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to activate the release."
 }
