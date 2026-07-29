@@ -327,6 +327,7 @@ def call_llm(endpoint, model, prompt):
     # Prefer chat completions first
     payload = {
         "model": chosen_model,
+        "reasoning_effort": os.getenv("LLM_REASONING_EFFORT", "none"),
         "messages": [
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
@@ -1102,7 +1103,7 @@ def main():
     ap.add_argument("--replace-insights", action="store_true")
     ap.add_argument("--fix-existing", action="store_true", help="Fix url/source for existing entries using CSV rows")
     ap.add_argument("--llm-endpoint", default=os.getenv("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions"))
-    ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.5-9b"))
+    ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.6-35b-a3b"))
     args = ap.parse_args()
 
     sheet_path = Path(args.sheet)

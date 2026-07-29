@@ -103,7 +103,8 @@ LLM_ONLY = False
 RESUME_LLM = False
 PROCESS_LLM_SKIPPED = False
 LLM_ENDPOINT = os.environ.get("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions")
-LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
+LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.6-35b-a3b")
+LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "none")
 LLM_TIMEOUT = int(os.environ.get("LLM_TIMEOUT", "300"))
 LLM_SAVE_INTERVAL = 0
 LLM_CACHE = {}
@@ -934,6 +935,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
                 ]
         payload = {
             "model": LLM_MODEL,
+            "reasoning_effort": LLM_REASONING_EFFORT,
             "messages": [
                 {"role": "user", "content": content_payload},
                 {"role": "assistant", "content": "<think>\n</think>\n"},
@@ -1129,6 +1131,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             ]
     payload = {
         "model": LLM_MODEL,
+        "reasoning_effort": LLM_REASONING_EFFORT,
         "messages": [
             {"role": "user", "content": content_payload},
             {"role": "assistant", "content": "{\"score\":"},
@@ -1563,6 +1566,7 @@ def title_looks_incomplete(text):
 def call_llm_text(prompt):
     payload = {
         "model": LLM_MODEL,
+        "reasoning_effort": LLM_REASONING_EFFORT,
         "messages": [
             {"role": "user", "content": prompt},
             {"role": "assistant", "content": "<think>\n</think>\n"},
