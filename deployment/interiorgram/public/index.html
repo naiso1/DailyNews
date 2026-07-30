@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interiorgram</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: "Yu Gothic UI", "Noto Sans JP", sans-serif;
+            background: #0b0d0f;
+            color: #f4f1ea;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px;
+            place-items: center;
+            background:
+                linear-gradient(125deg, rgba(222, 125, 75, 0.14), transparent 38%),
+                radial-gradient(circle at 84% 18%, rgba(114, 164, 148, 0.17), transparent 32%),
+                #0b0d0f;
+        }
+
+        main {
+            width: min(920px, 100%);
+            padding: clamp(34px, 8vw, 88px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(19, 22, 24, 0.9);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.48);
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #e89b72;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+        }
+
+        .eyebrow::before {
+            width: 42px;
+            height: 2px;
+            background: currentColor;
+            content: "";
+        }
+
+        h1 {
+            margin: 24px 0 18px;
+            font-family: Georgia, "Yu Mincho", serif;
+            font-size: clamp(44px, 10vw, 96px);
+            font-weight: 400;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+        }
+
+        .lead {
+            max-width: 620px;
+            margin: 0;
+            color: #bcb8b0;
+            font-size: clamp(16px, 2.4vw, 20px);
+            line-height: 1.9;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 42px;
+            padding: 10px 14px;
+            border: 1px solid rgba(114, 164, 148, 0.42);
+            color: #9fd0bf;
+            font-size: 13px;
+        }
+
+        .status::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #72a494;
+            box-shadow: 0 0 16px #72a494;
+            content: "";
+        }
+
+        .url {
+            display: block;
+            margin-top: 16px;
+            color: #777d7d;
+            font-family: Consolas, monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="eyebrow">INTERIOR DEVELOPMENT ARCHIVE</div>
+        <h1>Interiorgram</h1>
+        <p class="lead">
+            車室内デザイン、素材、仕立て、ユーザー体験のアイデアを蓄積し、
+            チームで共有するための新しい場所を準備しています。
+        </p>
+        <div class="status">サーバー準備完了・コンテンツ構築中</div>
+        <span class="url">http://IEWEB01/interiorgram/</span>
+    </main>
+</body>
+</html>

@@ -193,6 +193,12 @@ New-NetFirewallRule `
     -Profile Any | Out-Null
 
 Start-Website -Name $siteName
+
+$interiorgramInstaller = "C:\Users\Administrator\Desktop\Interiorgram\app\install.ps1"
+if (Test-Path -LiteralPath $interiorgramInstaller -PathType Leaf) {
+    & $interiorgramInstaller
+}
+
 Write-Host "DailyNews IIS proxy configured."
 Write-Host "HTTP:  http://$hostName/"
 Write-Host "HTTPS: https://$hostName/"
