@@ -1,35 +1,43 @@
-# Interiorgram
+# Interiorgram deployment
 
-車室内装の企画アイデアと生成画像を蓄積・共有する社内向けWebアプリです。
+既存の「溢れ出す企画アイデア画像」プロジェクトを、社内サーバーのIIS配下へ公開します。画面・アイデアデータ・画像は既存プロジェクトを原本とし、DailyNews側では公開処理とサーバーAPIだけを管理します。
 
+- 原本: `C:\Users\demo\Desktop\中村\溢れ出す企画アイデア画像`
+- 原本GitHub: `naiso1/Idea-Image-Instagram`
 - 公開URL: `http://IEWEB01/interiorgram/`
 - サーバー配置先: `C:\Users\Administrator\Desktop\Interiorgram`
 - Web: IIS子アプリケーションから `127.0.0.1:8083` へリバースプロキシ
-- API: Node.js標準機能
-- データ: SQLite (`data\interiorgram.sqlite`)
-- コンテンツ原本: `content\posts.json`
-- 画像原本: `content\images`
+
+## 公開する内容
+
+- 既存の `index.html`、`style.css`、`script.js`
+- `data.js` に登録されている全アイデア
+- `images` フォルダー内の画像
+- 既存の検索、フィルター、モーダル、複数画像表示
+- 社内LAN利用者間で共有される、いいね数とコメント
+
+公開時に `data.js` からサーバーAPI用の `data.json` を自動生成します。旧 `data.json` と内容がずれていても、画面と同じ `data.js` が基準になります。参照画像が欠けている場合は公開を中止します。
 
 ## Antigravityから追加
 
-Antigravityでは `.agents/workflows/interiorgram.md` の手順を使用します。企画文と画像を生成した後、次を実行すると、ローカルのコンテンツ更新からIEWEB01への再配置まで自動で行います。
+Antigravityでは、原本プロジェクトの `.agent\workflows` にある既存ワークフローを使います。企画文・画像・`data.js` の更新後、ワークフローから次のスクリプトを実行します。
 
 ```powershell
-python -u .\deployment\interiorgram\tools\add_post.py `
-  --manifest "生成したJSONのパス" `
-  --image "生成した画像のパス"
+& "C:\Users\demo\Desktop\中村\溢れ出す企画アイデア画像\publish_to_ieweb01.ps1"
 ```
 
-JSONの項目は `content\post-template.json` を参照してください。同じIDを修正して再公開する場合は `--replace` を付けます。サーバーへ公開せずローカルだけ更新する場合は `--no-publish` を付けます。
+これにより、89件の既存コンテンツを含む最新状態がIEWEB01へ自動反映されます。
 
 ## 手動公開
+
+DailyNews側から直接実行する場合:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
   -File .\deployment\interiorgram\publish.ps1
 ```
 
-配置後は画面とヘルスチェックを確認します。
+確認:
 
 ```powershell
 Invoke-WebRequest -UseBasicParsing http://IEWEB01/interiorgram/ |
@@ -41,9 +49,10 @@ Invoke-RestMethod http://IEWEB01/interiorgram/health
 ## サーバー運用
 
 - `InteriorgramServer`: Windows起動時にNodeサーバーを起動
-- `InteriorgramBackup`: 毎日4:40にSQLiteをバックアップ
+- `InteriorgramBackup`: 毎日4:40にアイデアデータと反応データをバックアップ
+- 反応データ: `C:\Users\Administrator\Desktop\Interiorgram\data\reactions.json`
 - バックアップ先: `C:\Users\Administrator\Desktop\Interiorgram\backups`
 - 保持期間: 35日
 - サーバーログ: `C:\Users\Administrator\Desktop\Interiorgram\logs\server.log`
 
-コンテンツとプログラムの更新時も、SQLiteの反応データとバックアップは上書きしません。
+サーバーへの再公開時も、いいねとコメントは上書きしません。

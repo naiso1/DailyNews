@@ -22,8 +22,6 @@ foreach ($directory in @(
         $Root,
         $appDirectory,
         $publicDirectory,
-        (Join-Path $Root "content"),
-        (Join-Path $Root "content\images"),
         (Join-Path $Root "data"),
         (Join-Path $Root "backups"),
         (Join-Path $Root "logs"),
@@ -175,5 +173,5 @@ if ($health.status -ne "ok") {
 }
 
 Write-Host "Interiorgram application installed."
-Write-Host "Posts: $($health.posts)"
+Write-Host "Ideas: $($health.ideas)"
 Write-Host "URL: http://IEWEB01/$Alias/"
