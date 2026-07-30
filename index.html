@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>内装製品デイリーニュース | 移行のお知らせ</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: "Yu Gothic UI", "Noto Sans JP", sans-serif;
+            background: #050a12;
+            color: #e9edf5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px;
+            place-items: center;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(125, 241, 194, 0.16), transparent 32%),
+                radial-gradient(circle at 85% 90%, rgba(111, 167, 255, 0.18), transparent 34%),
+                #050a12;
+        }
+
+        main {
+            width: min(720px, 100%);
+            padding: clamp(32px, 7vw, 72px);
+            border: 1px solid rgba(125, 241, 194, 0.26);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(22, 31, 46, 0.96), rgba(10, 16, 27, 0.98));
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
+        }
+
+        .kicker {
+            display: inline-flex;
+            margin-bottom: 22px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(125, 241, 194, 0.12);
+            color: #7df1c2;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: clamp(30px, 7vw, 52px);
+            line-height: 1.25;
+        }
+
+        p {
+            margin: 0;
+            color: #c1c9d8;
+            font-size: clamp(15px, 2.5vw, 18px);
+            line-height: 1.9;
+        }
+
+        .note {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-left: 3px solid #6fa7ff;
+            background: rgba(111, 167, 255, 0.08);
+            color: #aebbd0;
+            font-size: 14px;
+        }
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            margin-top: 30px;
+            padding: 0 24px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #7df1c2, #6fa7ff);
+            box-shadow: 0 14px 34px rgba(111, 167, 255, 0.2);
+            color: #07111d;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        code {
+            display: block;
+            margin-top: 14px;
+            color: #7f8ca3;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <span class="kicker">PUBLICATION MOVED</span>
+        <h1>社内サーバーへ<br>移行しました</h1>
+        <p>
+            内装製品デイリーニュースは、GitHub Pagesから社内サーバーへ移行しました。
+            今後は社内LANに接続したPCから、新しいサイトをご利用ください。
+        </p>
+        <p class="note">
+            移行により、社外回線や社内LANに接続していないスマートフォンからはアクセスできません。
+            ブックマークの変更もお願いします。
+        </p>
+        <a href="http://IEWEB01/">社内サーバーで開く →</a>
+        <code>http://IEWEB01/</code>
+    </main>
+</body>
+</html>

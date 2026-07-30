@@ -9,6 +9,11 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <script>
+        if (location.hostname.toLowerCase().endsWith(".github.io")) {
+            document.documentElement.classList.add("github-pages-migration");
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -958,9 +963,116 @@ h1 {
             line-height: 1.3;
         }
     </style>
+    <style>
+        #githubPagesMigration {
+            display: none;
+        }
+
+        html.github-pages-migration body {
+            min-height: 100vh;
+            padding: 24px;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(125, 241, 194, 0.16), transparent 32%),
+                radial-gradient(circle at 85% 90%, rgba(111, 167, 255, 0.18), transparent 34%),
+                #050a12;
+        }
+
+        html.github-pages-migration body > :not(#githubPagesMigration) {
+            display: none !important;
+        }
+
+        html.github-pages-migration #githubPagesMigration {
+            display: grid;
+            place-items: center;
+            min-height: calc(100vh - 48px);
+        }
+
+        .migration-card {
+            width: min(720px, 100%);
+            padding: clamp(32px, 7vw, 72px);
+            border: 1px solid rgba(125, 241, 194, 0.26);
+            border-radius: 28px;
+            background:
+                linear-gradient(145deg, rgba(22, 31, 46, 0.96), rgba(10, 16, 27, 0.98));
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
+        }
+
+        .migration-kicker {
+            display: inline-flex;
+            margin-bottom: 22px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(125, 241, 194, 0.12);
+            color: #7df1c2;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .migration-card h1 {
+            margin-bottom: 20px;
+            font-size: clamp(30px, 7vw, 52px);
+            line-height: 1.25;
+        }
+
+        .migration-card p {
+            color: #c1c9d8;
+            font-size: clamp(15px, 2.5vw, 18px);
+            line-height: 1.9;
+        }
+
+        .migration-note {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-left: 3px solid #6fa7ff;
+            background: rgba(111, 167, 255, 0.08);
+            color: #aebbd0 !important;
+            font-size: 14px !important;
+        }
+
+        .migration-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            margin-top: 30px;
+            padding: 0 24px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #7df1c2, #6fa7ff);
+            color: #07111d;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 14px 34px rgba(111, 167, 255, 0.2);
+        }
+
+        .migration-url {
+            display: block;
+            margin-top: 14px;
+            color: #7f8ca3;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+    </style>
 </head>
 
 <body>
+    <main id="githubPagesMigration" aria-labelledby="migrationTitle">
+        <section class="migration-card">
+            <span class="migration-kicker">PUBLICATION MOVED</span>
+            <h1 id="migrationTitle">社内サーバーへ<br>移行しました</h1>
+            <p>
+                内装製品デイリーニュースは、GitHub Pagesから社内サーバーへ移行しました。
+                今後は社内LANに接続したPCから、新しいサイトをご利用ください。
+            </p>
+            <p class="migration-note">
+                移行により、社外回線や社内LANに接続していないスマートフォンからはアクセスできません。
+                ブックマークの変更もお願いします。
+            </p>
+            <a class="migration-link" href="http://IEWEB01/">社内サーバーで開く →</a>
+            <span class="migration-url">http://IEWEB01/</span>
+        </section>
+    </main>
     <header id="top" class="jump-anchor">
         <h1><img id="titleIcon" class="title-globe-icon" src="page_images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
         <p class="lead">生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け</p>
