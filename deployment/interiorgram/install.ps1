@@ -2,6 +2,7 @@
 param(
     [string]$Root = "C:\Users\Administrator\Desktop\Interiorgram",
     [string]$ParentSite = "DailyNews",
+    [string[]]$AdditionalParentSites = @("Default Web Site"),
     [string]$Alias = "interiorgram"
 )
 
@@ -35,8 +36,13 @@ foreach ($file in @($node, $serverScript, $backupScript, (Join-Path $publicDirec
         throw "Required Interiorgram file was not found: $file"
     }
 }
-if (-not (Test-Path "IIS:\Sites\$ParentSite")) {
-    throw "Parent IIS site was not found: $ParentSite"
+$parentSites = @($ParentSite) + @($AdditionalParentSites) |
+    Where-Object { $_ } |
+    Select-Object -Unique
+foreach ($site in $parentSites) {
+    if (-not (Test-Path "IIS:\Sites\$site")) {
+        throw "Parent IIS site was not found: $site"
+    }
 }
 
 if (-not (Test-Path "IIS:\AppPools\$applicationPool")) {
@@ -47,30 +53,32 @@ Set-ItemProperty "IIS:\AppPools\$applicationPool" -Name processModel.identityTyp
 Set-ItemProperty "IIS:\AppPools\$applicationPool" -Name startMode -Value "AlwaysRunning"
 
 $applicationPath = "/$Alias"
-$existingApplication = Get-WebApplication -Site $ParentSite |
-    Where-Object { $_.Path -eq $applicationPath }
-if ($existingApplication) {
-    Set-ItemProperty "IIS:\Sites\$ParentSite\$Alias" `
-        -Name physicalPath `
-        -Value $publicDirectory
-    Set-ItemProperty "IIS:\Sites\$ParentSite\$Alias" `
-        -Name applicationPool `
-        -Value $applicationPool
-}
-else {
-    New-WebApplication `
-        -Site $ParentSite `
-        -Name $Alias `
-        -PhysicalPath $publicDirectory `
-        -ApplicationPool $applicationPool | Out-Null
-}
+foreach ($site in $parentSites) {
+    $existingApplication = Get-WebApplication -Site $site |
+        Where-Object { $_.Path -eq $applicationPath }
+    if ($existingApplication) {
+        Set-ItemProperty "IIS:\Sites\$site\$Alias" `
+            -Name physicalPath `
+            -Value $publicDirectory
+        Set-ItemProperty "IIS:\Sites\$site\$Alias" `
+            -Name applicationPool `
+            -Value $applicationPool
+    }
+    else {
+        New-WebApplication `
+            -Site $site `
+            -Name $Alias `
+            -PhysicalPath $publicDirectory `
+            -ApplicationPool $applicationPool | Out-Null
+    }
 
-Set-WebConfigurationProperty `
-    -PSPath "IIS:\" `
-    -Location "$ParentSite/$Alias" `
-    -Filter "system.webServer/security/authentication/anonymousAuthentication" `
-    -Name "userName" `
-    -Value ""
+    Set-WebConfigurationProperty `
+        -PSPath "IIS:\" `
+        -Location "$site/$Alias" `
+        -Filter "system.webServer/security/authentication/anonymousAuthentication" `
+        -Name "userName" `
+        -Value ""
+}
 
 $applicationIdentity = "IIS AppPool\$applicationPool"
 $traverseDirectories = @(
