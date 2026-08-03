@@ -44,7 +44,14 @@ foreach ($required in @(
         throw "Required Interiorgram deployment file was not found: $required"
     }
 }
-foreach ($required in @("index.html", "style.css", "script.js", "data.js", "images")) {
+foreach ($required in @(
+        "index.html",
+        "style.css",
+        "script.js",
+        "data.js",
+        "vendor\sortable.min.js",
+        "images"
+    )) {
     if (-not (Test-Path -LiteralPath (Join-Path $ContentSource $required))) {
         throw "Required existing Interiorgram source was not found: $required"
     }

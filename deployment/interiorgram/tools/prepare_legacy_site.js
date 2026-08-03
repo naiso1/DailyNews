@@ -16,7 +16,13 @@ if (!sourceArgument || !destinationArgument || !webConfigArgument) {
 const source = path.resolve(sourceArgument);
 const destination = path.resolve(destinationArgument);
 const webConfig = path.resolve(webConfigArgument);
-const requiredFiles = ["index.html", "style.css", "script.js", "data.js"];
+const requiredFiles = [
+  "index.html",
+  "style.css",
+  "script.js",
+  "data.js",
+  path.join("vendor", "sortable.min.js"),
+];
 
 for (const relativePath of requiredFiles) {
   const file = path.join(source, relativePath);
@@ -33,6 +39,9 @@ if (!fs.statSync(webConfig).isFile()) {
 
 fs.mkdirSync(destination, { recursive: true });
 for (const relativePath of requiredFiles) {
+  fs.mkdirSync(path.dirname(path.join(destination, relativePath)), {
+    recursive: true,
+  });
   fs.copyFileSync(
     path.join(source, relativePath),
     path.join(destination, relativePath),
