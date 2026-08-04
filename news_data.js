@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-04 01:28";
+window.NEWS_UPDATED_AT = "2026-08-05 01:24";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -95821,6 +95821,726 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "jp",
         img: "https://kuruma-news.jp/wp-content/uploads/2027/05/20260512_voxy_mu00.jpg?v=1778565952",
+        note: ""
+    },
+    // 2026-08-04 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1591",
+        title: "河西工業がフェアレディZ内装端材のアップサイクル製品を公式ライセンスで発売",
+        desc: "河西工業は自動車内装部品の製造過程で発生する端材を活用したアップサイクルブランド「doacara」の初となる公式ライセンス商品「フェアレディZシリーズ」を発売した。日産スポーツカーの内装材を再利用し、高品質な質感と機能性を備えた製品を公式ECサイトで販売開始する。",
+        url: "https://news.yahoo.co.jp/articles/017feda40af7428ad5104c7e3cf8e7933134f589?source=rss",
+        source: "レスポンス",
+        date: "2026-08-04",
+        tags: ["AR"],
+    
+        interiorScore: 78,
+        interiorReason: "Interior accessory product launch using cabin materials; image shows interior co",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-00000017-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1592",
+        title: "トヨタカローラスポーツ60周年記念特別仕様車発売",
+        desc: "トヨタはカローラシリーズ60周年を記念し、特別仕様車「カローラ スポーツG “Zアクティブエレガンス”」を発売した。専用インテリアと2トーンカラーが特徴で、価格は343万8000円である。",
+        url: "https://news.yahoo.co.jp/articles/db099917c5bb5406370c0ce00745b04d0fd7ce06?source=rss",
+        source: "carview!",
+        date: "2026-08-04",
+        tags: [],
+    
+        interiorScore: 40,
+        interiorReason: "interior mentioned as 'high quality' but image is exterior only",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-00010005-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1593",
+        title: "エアコンの酸っぱい臭い対策 到着3分前の送風乾燥でカビ予防",
+        desc: "夏場のエアコン異臭はエバポレーター結露がカビ繁殖の原因となる。カビ胞子拡散でアレルギーや呼吸器系トラブルの懸念がある。 到着3分前にA/Cオフで送風乾燥し水分を除去する。この工夫でカビ抑制し爽やかで衛生的な車内環境を維持できる。",
+        url: "https://news.yahoo.co.jp/articles/259400e46682cf9267b62d92ebd8bf133f6556c8?source=rss",
+        source: "MotorFan",
+        date: "2026-08-04",
+        tags: [],
+    
+        interiorScore: 42,
+        interiorReason: "topic is HVAC and cabin air quality which is relevant to interior comfort, but t",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-01578409-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1594",
+        title: "ボルボEX90試乗静粛性加速安全性に優れた新フラッグシップEVの実力",
+        desc: "ボルボのフラッグシップEV「EX90」は、680馬力と870Nmのトルクを誇る高性能ながら、静粛性に優れる。新シャシーと二重合わせガラスにより室内の静寂性を追求。0-100km/h加速4.2秒の瞬発力と骨太な足回りで、重さ2.7トンの巨体でも正確な操縦を実現する。",
+        url: "https://news.yahoo.co.jp/articles/c3f3ce38882f30bdccabae5e66f4bc193a16bc5d?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-04",
+        tags: ["EV", "安全"],
+    
+        interiorScore: 39,
+        interiorReason: "interior features mentioned in text but image is exterior",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1595",
+        title: "トヨタハイエースの最新盗難防止アイテムでCANインベーダーやリレーアタックに対抗",
+        desc: "データシステムが販売する先進アイテムは、トヨタハイエースの快適性と安全性を劇的に高める。車内を動くリビングに変えるエンタメ拡張キットから、大切な愛車を最新の手口から防衛する強固な盗難防止装置まで、多様な製品が提供されている。",
+        url: "https://news.yahoo.co.jp/articles/caf6ee0183aeda32b5b2d854804f9cbd07f0d192?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-08-04",
+        tags: ["安全"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-00010006-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1596",
+        title: "マセラティグレカーレモデナV6エアサス搭載で快適とスポーティ両立",
+        desc: "マセラティが発表したグレカーレの新型モデナV6は、ソフト志向のエアサスを採用し快適性を追求。トロフェオと同様に電動化技術は搭載せず、最高出力は390psに抑えられている。0-100km/h加速は4.9秒で、スポーティなブランドイメージを体現する。",
+        url: "https://news.yahoo.co.jp/articles/dd00f2bb25dfeae154fa46385904557b6cf4f456?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-01265393-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1597",
+        title: "フォルクスワーゲンがRB大宮アルディージャとパートナーシップ強化し電気自動車ID",
+        desc: "フォルクスワーゲンは8月29日、RB大宮アルディージャとのパートナーシップ強化を目的としたイベントを開催した。スタジアム内では電気自動車「ID. Buzz」と、広々とした室内空間を持つ「Passat」が展示された。",
+        url: "https://news.yahoo.co.jp/articles/d0b658675d584599ba54db2be0ab91c63fb1e748?source=rss",
+        source: "AUTO BILD JAPAN Web",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260804-00010003-autobild-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1409",
+        title: "トヨタGRGTスーパーカー屋根取り外し可能90年代名復活",
+        desc: "トヨタのGR GTスーパーカーがルーフ取り外し機能を備え、80〜90年代のSUPRA Aero Topを復活させる可能性があると報じられた。これは自動車内装の快適装備やインテリアデザインに関連する情報である。",
+        url: "https://www.carscoops.com/2026/08/toyota-gr-gt-convertible/",
+        source: "CarScoops",
+        date: "2026-08-04",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Toyota-GR-GT-Aero-Top-2s-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1410",
+        title: "パナソニック製ANC搭載新型エルグランで車内静粛性向上",
+        desc: "日産は新型エルグランにパナソニック製のアクティブノイズキャンセリングシステムを搭載した。加速度センサーで検知した振動に基づき、道路騒音とハイブリッドパワートレインの騒音を同時に低減する。既存システムは主に道路騒音対策だが、本システムは両方を制御し、快適装備としての静粛性を強化する。",
+        url: "https://www.carscoops.com/2026/08/nissan-elgrand-noise-cancellation/",
+        source: "CarScoops",
+        date: "2026-08-04",
+        tags: ["センシング"],
+    
+        interiorScore: 57,
+        interiorReason: "active noise cancellation is a cabin comfort feature relevant to interior produc",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/HNVmvgQW4AAiKqg-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1411",
+        title: "マツダ最古小型車販売急伸SUV減退",
+        desc: "マツダの最古参乗用車である小型車の販売が急伸している。一方、SUVの販売は減少傾向にある。この動向は、将来のモデルチェンジや戦略転換を示唆する噂と重なっている。",
+        url: "https://www.carscoops.com/2026/08/mazda3-sales-surge/",
+        source: "CarScoops",
+        date: "2026-08-04",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/2020_Mazda3_3-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1412",
+        title: "サモアが2009年に左側通行へ移行した理由",
+        desc: "2009年、サモアは右側通行から左側通行へ道路の通行側を変更した。この変更の主な理由は、安価な中古車の流入によるものであった。日本やイギリスなどの左側通行国からの輸出車が多く、コストを抑えるためにこの移行が決定された。",
+        url: "https://www.jalopnik.com/2229382/samoa-switch-to-driving-on-the-left-2009-used-car-imports/",
+        source: "Jalopnik",
+        date: "2026-08-04",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/why-did-samoa-switch-to-driving-on-the-left-in-2009-it-came-down-to-cheap-used-cars/l-intro-1785783034.jpg",
+        note: ""
+    },
+    {
+        id: "us1413",
+        title: "2027年型キア・テラライドXプロのインテリア詳細",
+        desc: "2027年型キア・テラライドXプロSXプレステージのインテリアが公開された。キャプテンズチェアを採用し、シートバック上部とヘッドライナーにはマイクロスエード素材、ヘッドレストにはメッシュ素材が使用されている。コンソールには2つの充電パッドと広大な収納スペースが設けられている。",
+        url: "https://www.caranddriver.com/photos/g73295456/2027-kia-telluride-x-pro-sx-prestige-test-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-08-04",
+        tags: ["シート", "センターコンソール", "新素材", "EV"],
+    
+        interiorScore: 91,
+        interiorReason: "flagship cabin refresh with specific material details (microsuede, mesh) and lay",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/bea22c13-7c1e-45c9-8228-f30257645af5.jpg",
+        note: ""
+    },
+    {
+        id: "us1414",
+        title: "メルセデスCEOタッチスクリーン戦略見直し物理ボタン復活示唆",
+        desc: "メルセデス・ベンツのCEOはタッチスクリーン中心の戦略を見直し、物理ボンの復活を示唆した。大型ディスプレイは操作性や安全性への懸念から批判を集めていた。顧客の声を踏まえ、実用性を重視した内装設計への転換を図る方針だ。",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/mercedes-ceo-addresses-the-touchscreen-question-45135976?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-08-04",
+        tags: ["ディスプレイ", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "CEO statement on touchscreen strategy and physical button return directly impact",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/08/03/17551/mercedes-ceo-addresses-the-touchscreen-question.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us1415",
+        title: "2026ジェネシスG80がアウディA6を凌駕する快適性と所有コストの優位性",
+        desc: "2026年型ジェネシスG80は、アウディA6と比較して、5年/6万マイルの包括保証と10年/10万マイルのパワートレイン保証により、長期的な所有コストで優位性を示す。静粛性に優れたインテリアと27インチディスプレイを備え、初期価格も低く抑えられている。",
+        url: "https://www.topspeed.com/comfort-first-luxury-sedan-outperforms-audi-a6/",
+        source: "Top Speed",
+        date: "2026-08-04",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 92,
+        interiorReason: "The article highlights the G80's 'quietness' (NVH) and 'comfort' as key differen",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/07/2026-genesis-g80-rear-seats-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu1373",
+        title: "BMW新型X5の生産段階でCO2排出量40%削減 内装素材に再生PET活用",
+        desc: "BMWは新型iX5の生産工程におけるCO2排出量を約40%削減した。車体の約半分を再生鋼材とし、内装のヘッドライナーには再生PETを100%使用。iX5の総重量の約3分の1を二次素材で構成し、環境負荷低減に貢献している。",
+        url: "https://www.autocar.co.uk/car-news/technology/how-bmw-cut-x5s-emissions-40-%E2%80%93-turning-wheel",
+        source: "AUTOCAR UK",
+        date: "2026-08-04",
+        tags: ["新素材"],
+    
+        interiorScore: 37,
+        interiorReason: "recycled interior material (headliner) and cabin image",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/p90647648_highres_bmw-group-plant-spar.jpg?itok=YiaSffnV",
+        note: ""
+    },
+    {
+        id: "eu1374",
+        title: "Smart新型EV「#2」デザイン公開 内装ベンチシートで空間を最大化",
+        desc: "SmartはFortwo後継EV「#2」のデザインを公開した。全長2792mmの超小型ボディで、専用EVプラットフォームを採用し、内装はベンチシートを採用して空間を最大化する。素材にはレザーや透過素材を使用し、高級感を演出する。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/smart-2-fortwo-successors-design-outed-ahead-october-debut",
+        source: "AUTOCAR UK",
+        date: "2026-08-04",
+        tags: ["AR", "シート", "新素材", "EV"],
+    
+        interiorScore: 58,
+        interiorReason: "Japanese summary explicitly details interior strategy: bench seat for space maxi",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/7.dynamic_artist_georgia_laurie_brings_the_vehicle_to_life_in_an_immersive_mural_in_melbourne.jpg?itok=Jrmyl4op",
+        note: ""
+    },
+    {
+        id: "eu1375",
+        title: "フォルクスワーゲンID.バズカーゴに新型バッテリーとモーター搭載",
+        desc: "フォルクスワーゲンは電気バン「ID.バズカーゴ」に新型バッテリーとモーターを搭載し、商用車としての性能を向上させた。これにより、競合のキアPV5などに対抗する競争力を強化している。",
+        url: "https://www.autoexpress.co.uk/volkswagen/id-buzz/370139/volkswagen-id-buzz-cargo-gets-new-battery-and-motor-see-kia-pv5",
+        source: "Auto Express",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--JP259d7b--/t_rss_image_w_845/v1669892404/autoexpress/2022/11/Volkswagen%20ID.%20Buzz%20Cargo.jpg",
+        note: ""
+    },
+    {
+        id: "cn1405",
+        title: "スマート新型EV2号車、中国で異例の販促展開",
+        desc: "Smartは2026年10月のグローバル発売を見据え、中国市場で新型EV「2号車」の異例の販促キャンペーンを開始した。この取り組みは、同車の世界初公開を前に展開されている。",
+        url: "https://carnewschina.com/2026/08/04/smart-launched-an-unusual-marketing-campaign-for-the-2-ev/",
+        source: "CarNewsChina - All",
+        date: "2026-08-04",
+        tags: ["AR", "EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/smart_2_mural-2_webhook_1500x900_q85_1785831716.jpg",
+        note: ""
+    },
+    {
+        id: "cn1406",
+        title: "リープモーターが国際版A05を発売。A10の成功を受け",
+        desc: "リープモーターは、市場で成功を収めたA10に続き、8月10日にコンパクトEVの国際モデルA05を発売する。同社の国際展開を強化する新車として注目されている。",
+        url: "https://carnewschina.com/2026/08/04/leapmotor-to-launch-international-model-a05-following-the-market-success-of-a10/",
+        source: "CarNewsChina - All",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-4-e1785813855257_webhook_1500x900_q85_1785814083.jpg",
+        note: ""
+    },
+    {
+        id: "cn1407",
+        title: "XPeng G9Lが広大な2列シート空間を誇るグローバル向け内装を公開",
+        desc: "XPeng G9Lは広大な2列目空間を特徴とする5人乗りSUVです。5.1平方メートルの有効面積と12.5リットルの冷蔵庫を備えます。",
+        url: "https://carnewschina.com/2026/08/04/the-xpeng-g9l-revealed-interior-with-the-widest-second-row-space/",
+        source: "CarNewsChina - All",
+        date: "2026-08-04",
+        tags: ["シート"],
+    
+        interiorScore: 78,
+        interiorReason: "interior reveal with specific second-row space metrics and visible seat design",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/xpeng_g9l_interior_webhook_1500x900_q85_1785813698.jpg",
+        note: ""
+    },
+    {
+        id: "cn1408",
+        title: "BYD系Denza Z9Sの予約が開始され、CLTC基準で航続距離が1100kmを超え",
+        desc: "BYD傘下のDenzaが電気セダン「Z9S」の予約販売を開始した。0-100km/h加速は2.68秒。CLTC基準で最大1100kmの航続距離を実現し、超高速充電にも対応する。",
+        url: "https://carnewschina.com/2026/08/04/byds-denza-z9s-opens-pre-sales-with-cltc-range-up-to-1100km-and-flash-charging/",
+        source: "CarNewsChina - All",
+        date: "2026-08-04",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-e1785804736879_webhook_1500x900_q85_1785805029.jpg",
+        note: ""
+    },
+    {
+        id: "cn1409",
+        title: "小鵬汽車、第2四半期の販売台数が65％増。8月24日に決算発表",
+        desc: "小鵬汽車は第2四半期の販売台数が10万3295台となり、前期比65％増となった。この実績は前期の予測範囲内であり、8月24日に第2四半期決算を発表する。",
+        url: "https://cnevpost.com/2026/08/04/xpeng-sets-aug-24-q2-earnings/",
+        source: "CnEVPost - All",
+        date: "2026-08-04",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026080409535698.jpg",
+        note: ""
+    },
+    {
+        id: "cn1410",
+        title: "中国、L3・L4自動運転の統一安全基準を策定",
+        desc: "中国工業情報化省は、L3およびL4の自動運転システムに関する統一された安全基準を策定した。2027年7月の施行を予定しており、システムは熟練運転者並みの安全性を確保する必要がある。L3レベルでは運転者の準備状態の監視が義務付けられ、長安汽車や北京汽車の車両に適用される。",
+        url: "https://cnevpost.com/2026/08/04/china-sets-safety-baseline-l3-l4-autonomous-driving/",
+        source: "CnEVPost - All",
+        date: "2026-08-04",
+        tags: ["安全"],
+    
+        interiorScore: 63,
+        interiorReason: "regulatory policy for L3/L4 with driver monitoring requirement; image shows stee",
+        imageInterior: true,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026080408595263.jpg",
+        note: ""
+    },
+    {
+        id: "cn1411",
+        title: "BYD Racco、日本初週に700件超の注文 販売動向",
+        desc: "BYDの小型EV「ラッコ」は日本市場で初週に700件を超える注文を集めた。7月の登録台数は125台で、大半はディーラーのデモカーとされる。この結果は、日本におけるBYDの自動車販売戦略の初期段階での反応を示している。",
+        url: "https://cnevpost.com/2026/08/04/byd-racco-700-orders-first-week-japan/",
+        source: "CnEVPost - All",
+        date: "2026-08-04",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026080406121667.jpg",
+        note: ""
+    },
+    {
+        id: "cn1412",
+        title: "蔚来ES8、中国EVでオーナー忠誠度トップ、高NPS値搭載",
+        desc: "中国のEV市場において、蔚来ES8がオーナーの忠誠度で首位となった。純粋な推奨度は85.3で、全EVの中で最も高く、ブランドの推奨スコアを支えている。購入者が他社製品と比較する平均数はわずか1社で、競合に対する明確な優位性を示している。",
+        url: "https://cnevpost.com/2026/08/04/nio-es8-leads-china-ev-owner-loyalty-survey/",
+        source: "CnEVPost - All",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026080404290284.jpg",
+        note: ""
+    },
+    {
+        id: "cn1413",
+        title: "XPeng G9Lの「ファーストクラス」内装を公開88インチAR-HUDを搭載",
+        desc: "XPengはSUV「G9L」のインテリア詳細を公開した。88インチAR-HUDと21.4インチ後席モニター、ゼログラビティシートを採用し、5.1平方メートルの広々としたキャビンを提供する。",
+        url: "https://cnevpost.com/2026/08/04/xpeng-details-g9l-interior/",
+        source: "CnEVPost - All",
+        date: "2026-08-04",
+        tags: ["HUD", "AR", "ディスプレイ", "シート"],
+    
+        interiorScore: 87,
+        interiorReason: "highly relevant interior product planning content with specific HMI and cabin de",
+        imageInterior: true,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026080402521058.jpg",
+        note: ""
+    },
+    {
+        id: "cn1414",
+        title: "NIOのフラッグシップSUV「ES9」の累計納車台数が2万台に迫る",
+        desc: "中国のEVメーカー、NIOの旗艦SUV「ES9」が、約6週間で累計納車2万台を達成する見通しとなった。同車は高級な内装と先進のHMIシステムを備え、快適装備にも注力している。この急速な販売拡大は、市場での高い人気を示している。",
+        url: "https://cnevpost.com/2026/08/04/nio-es9-to-reach-20000th-delivery-this-week/",
+        source: "CnEVPost - All",
+        date: "2026-08-04",
+        tags: ["HMI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026080402385530.jpg",
+        note: ""
+    },
+    {
+        id: "in1461",
+        title: "アウディA2e-tronがブランド史上最効率の量産EVにWLTP128kWh",
+        desc: "アウディは次期A2e-tronのプロトタイプを公開し、WLTP基準で12.8kWh/100kmという同ブランド史上最も効率的な量産EVであることを確認した。空力設計と最適化された駆動系により達成。61kWhバッテリー搭載のベースモデルは約453kmの航続距離を想定し、2026年秋にデビュー予定だ。",
+        url: "https://www.autocarindia.com/car-news/audi-a2-e-tron-to-be-the-brands-most-efficient-production-car-yet-440395",
+        source: "Autocar India - All",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        interiorScore: 11,
+        interiorReason: "battery efficiency and exterior prototype only",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260804_093945_f2c901b9.jpeg",
+        note: ""
+    },
+    {
+        id: "in1462",
+        title: "BYD高級ブランドデンザのインド進出D9ミニバンで2026年開業予定",
+        desc: "世界最大手のEVメーカーBYDは、高級ブランド「デンザ」をインド市場へ展開する。主力車種はD9という高級ミニバンで、2026年のディワーリ祭頃の発売を目標としている。ただし、スケジュールは変更の可能性もある。",
+        url: "https://www.autocarindia.com/car-news/scoop-byd-to-bring-its-denza-luxury-brand-to-india-with-launch-of-d9-mpv-440385",
+        source: "Autocar India - All",
+        date: "2026-08-04",
+        tags: ["EV", "バッテリー"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260804_062546_7df8bf65.png",
+        note: ""
+    },
+    {
+        id: "in1463",
+        title: "インドEV販売トップ5社7月実績タタMGマヒンドラなど3万2千台",
+        desc: "インドの電気自動車市場は2026年7月も安定した販売を維持した。トップ5メーカーの合計販売台数は3万2214台で、タタ・モーターズ、MGモーター、マヒンドラ、ヴィンファスト、マ鲁ティ・スズキが首位を争っている。",
+        url: "https://www.rushlane.com/top-5-electric-car-oems-july-2026-tata-mg-mahindra-vinfast-maruti-12552357.html",
+        source: "RushLane",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/07/mg-windsor-ev.jpg",
+        note: ""
+    },
+    {
+        id: "in1464",
+        title: "現代クレタEVがインドで3年または4万5千kmで60%の買取保証プログラム導入",
+        desc: "現代自動車インドはCreta Electricに対し、3年または走行距離4万5千km whichever comes firstの条件で60%の買取保証プログラムを導入した。これは中古車市場での価値維持を支援する施策であり、EV購入の心理的ハードルを低下させる狙いがある。",
+        url: "https://gaadiwaadi.com/hyundai-creta-electric-gets-60-assured-buyback-value-in-india/",
+        source: "GaadiWaadi",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/hyundai-creta-assured-buyback.jpg",
+        note: ""
+    },
+    {
+        id: "in1465",
+        title: "キア、インド市場で新型EV・ハイブリッド・CNG車開発へ",
+        desc: "キアはインド市場向けに、セトスの強Hybrid版や新型EV、CNG車を開発中だ。2030年までの電動化計画の一環として、既存モデルの電動化と新規CNG車の追加を進める。これにより、環境規制への対応と市場での競争力強化を図る。",
+        url: "https://gaadiwaadi.com/kia-working-on-new-electric-hybrid-cng-cars-for-india-key-info/",
+        source: "GaadiWaadi",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/Kia-Sorento-.jpg",
+        note: ""
+    },
+    {
+        id: "in1466",
+        title: "マヒンドラ・スコピオN新型内装公開8月15日発売へ",
+        desc: "マヒンドラ・スコピオNの2026年型フェイスリフトモデルのディーラー出荷動画が流出し、8月15日の公式発表に先駆けて内外装の変更点が明らかになった。新型車は全国で出荷を開始しており、既存のデザインを刷新した新内装が特徴。",
+        url: "https://gaadiwaadi.com/2026-mahindra-scorpio-n-facelift-leaks-fully-ahead-of-launch-this-month/",
+        source: "GaadiWaadi",
+        date: "2026-08-04",
+        tags: [],
+    
+        interiorScore: 63,
+        interiorReason: "interior refresh news with no interior image",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/2026-Mahindra-Scorpio-N-Facelift.jpg",
+        note: ""
+    },
+    {
+        id: "in1467",
+        title: "タタモーターズが8月限定で最大33万5000ルピーの割引キャンペーンを実施",
+        desc: "タタモーターズは2026年8月、ICEおよびEVモデルを対象に最大33万5000ルピーの割引を提供する。現金割引や車体交換特典が含まれ、パチ、ネクソン、ティアゴなどの車種が対象となる。このキャンペーンにより、購入コストを大幅に削減できる。",
+        url: "https://www.indiacarnews.com/news/save-up-to-rs-3-35-lakh-on-tata-cars-in-august-punch-nexon-tiago-evs-68585/",
+        source: "IndiaCarNews",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/06/New-Tata-Nexon-2027-Launch.webp",
+        note: ""
+    },
+    {
+        id: "in1468",
+        title: "現代自動車インド、CRETA EVの60%買取保証プログラム導入",
+        desc: "現代自動車インドはCRETA Electric向けに3年または4万5千kmまで60%の買取保証を行うプログラムを開始した。これはEV購入時の残価リスクを軽減し、所有コストを抑制する施策である。",
+        url: "https://www.indiacarnews.com/news/hyundai-creta-electric-gets-60-buyback-baas-lowers-ownership-cost-68576/",
+        source: "IndiaCarNews",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2025/01/Hyundai-Creta-Electric-Features.webp",
+        note: ""
+    },
+    {
+        id: "in1469",
+        title: "インドEV市場でMGウィンドウスが首位維持マヒンドラXEV9Sが急上昇",
+        desc: "2026年上半期のインド電気自動車市場で、MGウィンドウスが販売首位を維持した。一方、新規投入されたマヒンドラXEV9Sが2位に急浮上し、既存EVに迫る勢いを見せた。市場の再編が進む中、上位20車種の動向が注目されている。",
+        url: "https://www.autopunditz.com/post/best-selling-electric-cars-india-h1-2026",
+        source: "Auto Punditz",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_80f5706a175b4a3eba209bb2137bf13f~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1470",
+        title: "インドが2028年10月より全新車にV2V通信義務化を提案",
+        desc: "インド政府は2028年10月1日より、全新車にV2V通信システムを義務化する方針を提案した。車両間でのリアルタイム情報交換により、見通し外の危険を警告し、事故を未然に防ぐ。既存の受動的安全装置からネットワーク型能動安全へ転換し、自動車の安全生態系に大きな変化をもたらす。",
+        url: "https://www.autopunditz.com/post/india-v2v-safety-system-cars-bikes-2028",
+        source: "Auto Punditz",
+        date: "2026-08-04",
+        tags: ["コネクテッド", "安全"],
+    
+        interiorScore: 38,
+        interiorReason: "regulatory policy for exterior V2V tech; no interior product details or cabin im",
+        imageInterior: false,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_dd61a50a3f3d4907817592ed3bd3af68~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1416",
+        title: "アウディ新型A2 e-tron、史上最効率EVとして公開",
+        desc: "アウディは新型A2 e-tronを、同社史上最も効率的なEVとして発表した。オプションの効率パッケージ装着時、WLTP基準で4.85マイル/kWhの効率を達成。LFPバッテリーと空力最適化により、ドラッグ係数0.24を実現。価格は3万8200ユーロからで、アウディの最安EVとなる。",
+        url: "https://insideevs.com/news/803647/audi-a2-ev-efficiency-official/",
+        source: "InsideEVs",
+        date: "2026-08-04",
+        tags: ["EV", "バッテリー"],
+    
+        interiorScore: 9,
+        interiorReason: "battery efficiency and exterior focus; no interior details",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/9m816X/s3/2027-audi-a2-e-tron-camouflaged-prototype.jpg",
+        note: ""
+    },
+    {
+        id: "us1417",
+        title: "アウディが新EV A2を発表史上最も効率的な低価格車",
+        desc: "アウディは新EV「A2」を発表した。これは同社の最安値EVであり、同時に史上最も効率的な車種となる。 debutは目前に控えており、詳細が公開されている。",
+        url: "https://electrek.co/2026/08/04/audis-cheapest-ev-also-most-efficient-car-all-time/",
+        source: "Electrek",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        interiorScore: 18,
+        interiorReason: "focus on efficiency and pricing; image is exterior only",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/Audi-A2-e-tron-efficiency.jpeg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "us1418",
+        title: "吉利银河700三电机1113馬力の豪華なハードコアSUV",
+        desc: "吉利がレンジローバーやランドクルーザーに対抗する大型SUV「Galaxy 700」を公開した。三基のモーターを搭載し最大1113馬力を発揮する。外観はイタリアのエキゾチックカーを思わせる箱型デザインで、高級感あふれる内装が特徴的だ。",
+        url: "https://electrek.co/2026/08/03/geely-galaxy-battleship-700-tri-motor-stuffs-1113-hp-in-a-high-luxe-boxy-package/",
+        source: "Electrek",
+        date: "2026-08-04",
+        tags: [],
+    
+        interiorScore: 41,
+        interiorReason: "interior mentioned as 'high-luxe' but image is exterior only",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/geely_GALAXY_BATTLESHIP.png?w=1600",
+        note: ""
+    },
+    {
+        id: "eu1376",
+        title: "現代コナEVが英国電気自動車助成金の最高額対象に認定",
+        desc: "現代自動車のコナEVが英国の電気自動車助成金制度において最高額帯に分類され、3,750ポンドの助成金対象となった。これは環境サプライチェーンの審査結果によるもので、同車種の市場での競争力強化が期待される。",
+        url: "https://www.electrive.com/2026/08/04/hyundai-kona-electric-now-qualifies-for-full-uk-electric-car-grant/",
+        source: "Electrive",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/hyundai-kona-electric-uk-2026-cropped-400x266.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1377",
+        title: "デンマークの新車登録でEVが97%を占めノルウェーに迫る",
+        desc: "デンマークで7月の新車登録に占める電気自動車（EV）の割合が、個人向けで97%に達した。これにより、EVの普及率がほぼ100%に達したノルウェーに次ぐ記録となり、欧州におけるEVシフトの加速を示している。",
+        url: "https://www.electrive.com/2026/08/04/denmark-evs-account-for-almost-all-new-car-registrations-in-july/",
+        source: "Electrive",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2025/05/volkswagen-id7-tourer-pro-s-fahrbericht-daniel-boennighausen-ladestation-charging-station-ccs-2025-01-min-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1378",
+        title: "米墨関税50％導入も中国車販売減らずH1登録数増加",
+        desc: "2026年上半期のメキシコでは、年初に50%関税が導入されたにもかかわらず、中国車登録数が上昇した。この結果は、米墨の関税政策が中国車販売の抑制に失敗したことを示している。",
+        url: "https://www.automotiveworld.com/analysis/us-mexico-tariff-push-fails-to-slow-chinese-car-sales/",
+        source: "Automotive World",
+        date: "2026-08-04",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2025/05/22130703/byd-dolphin-surf-exterior-01-l-scaled.webp",
+        note: ""
+    },
+    {
+        id: "eu1379",
+        title: "三菱、ラダーフレームの新型パジェロクロスカントリーSUVを発表",
+        desc: "三菱自動車はラダーフレームを採用した新型パジェロクロスカントリーSUVを発表した。新シャシーとS-AWC技術により、快適性を重視したオフロード走行性能を強化している。",
+        url: "https://www.automotiveworld.com/news/mitsubishi-reveals-ladder-frame-pajero-cross-country-suv/",
+        source: "Automotive World",
+        date: "2026-08-04",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/04084215/mitsubishi-pajero-teaser-2.jpg",
+        note: ""
+    },
+    {
+        id: "eu1380",
+        title: "フォードマスタングマッハE窓装飾剥離で8万6千台リコール",
+        desc: "フォードは米国で8万6543台のマスタングマッハEをリコールする。後部側面窓の装飾部品が剥離し、飛来する危険性があるため。製造工程の接着剤硬化不足が原因。ディーラーで無償点検・交換を行う。",
+        url: "https://electriccarsreport.com/2026/08/86000-ford-mustang-mach-e-evs-recalled-after-window-trim-may-detach/",
+        source: "Electric Cars Report",
+        date: "2026-08-04",
+        tags: [],
+    
+        interiorScore: 37,
+        interiorReason: "recalled window trim is interior part, but image is exterior only; defect/recall",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2024/10/2025-Mustang-Mach-E.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1381",
+        title: "零跑汽車が月間EV販売10万台を突破し世界展開を加速",
+        desc: "零跑汽車は2026年7月のEV販売台数が10万1267台となり、月間販売で過去最高を記録した。同社は新モデルの投入と海外生産の拡大により、グローバル市場での存在感を強めている。",
+        url: "https://electriccarsreport.com/2026/08/leapmotor-surpasses-100000-monthly-ev-deliveries-for-the-first-time/",
+        source: "Electric Cars Report",
+        date: "2026-08-04",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/02/Leapmotor.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1382",
+        title: "日産EV英国で累計30億マイル突破LEAFARIYAが貢献",
+        desc: "日産自動車の英国におけるEV累計走行距離が30億マイルを超えた。リーフやアリア、マイクラなどのEV戦略が貢献し、環境負荷低減とモビリティの普及に大きく寄与した。",
+        url: "https://electriccarsreport.com/2026/08/nissan-ev-owners-surpass-3-billion-electric-miles-in-the-uk/",
+        source: "Electric Cars Report",
+        date: "2026-08-04",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2025/10/New-Nissan-Leaf_1.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "jp1598",
+        title: "新型エルグランド対応クリアARフィルム発売 反射抑え艶維持",
+        desc: "ディーフは新型エルグランドなどに対応した車載ディスプレイ保護フィルム「クリアAR」を発売した。アンチグレア加工を使わず多層AR設計で反射を抑え、ピアノブラックの艶を維持する。8月3日より全11型番を展開し、後席モニター用は新型セレナにも適合する。",
+        url: "https://www.oricon.co.jp/pressrelease/2930052/",
+        source: "ORICON NEWS",
+        date: "2026-08-04",
+        tags: ["AR", "ディスプレイ"],
+    
+        interiorScore: 88,
+        interiorReason: "product launch for automotive display protection film with specific cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://prtimes.jp/img/150682/20/thumb/d150682-20-74ec8d96a10dd27da31e-0.jpg",
+        note: ""
+    },
+    {
+        id: "jp1599",
+        title: "ホンダ新型フィットe:HEV RSのブラックアウトインテリアとスエードシート",
+        desc: "ホンダ新型フィットe:HEV RSは、ブラックアウトされた室内空間にレッドステッチを施したスポーティなインテリアが特徴だ。専用スエードコンビシートは厚みとホールド感があり、シートヒーターも標準装備。センタータンクレイアウトによる広大な居住空間と、物理ダイヤル式のエアコン操作パネルも評価される。",
+        url: "https://www.gqjapan.jp/article/20260804-honda-fit-e-hev-rs-vol1",
+        source: "GQ JAPAN",
+        date: "2026-08-04",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 57,
+        interiorReason: "Japanese summary explicitly details interior features: blacked-out interior, red",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.gqjapan.jp/photos/6a706367a16897f713dda2b4/16:9/w_1280,c_limit/honda-fit-rs-ehev-1.jpg",
+        note: ""
+    },
+    {
+        id: "jp1600",
+        title: "デリカミニ専用アイドリングストップキャンセラー発売で快適な運転を実現",
+        desc: "Fun Standard株式会社のブランドCRAFTWORKSは、三菱デリカミニ専用アイドリングストップキャンセラーを発売した。アイドリングストップを常にオフにすることで、発進時のもたつきや振動を解消し、エアコンの効きも維持する。純正配線への接続で簡単取り付け可能だ。",
+        url: "https://mantan-web.jp/prtimes/article/20260804prt00m200000864a.html",
+        source: "MANTANWEB（まんたんウェブ）",
+        date: "2026-08-04",
+        tags: ["AR"],
+    
+        interiorScore: 90,
+        interiorReason: "interior accessory (idle stop canceller) with clear image of cabin switch and wi",
+        imageInterior: true,
+        country: "jp",
+        img: "https://prtimes.jp/img/79792/1090/resize/d79792-1090-f484f983162d0fe14819-16.jpg",
         note: ""
     },
 ];
