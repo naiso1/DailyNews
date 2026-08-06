@@ -22,6 +22,7 @@ WORKFLOW = ROOT / "image_flux2_klein_text_to_image (1).json"
 LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
+SCHEDULE_PAUSE_CONFIG = SCRIPT_DIR / "scheduled_pauses.json"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.6-35b-a3b"
 DEFAULT_LLM_CONTEXT_LENGTH = "8192"
@@ -84,6 +85,26 @@ configure_external_proxy()
 def log(msg):
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(msg + "\n")
+
+
+def active_schedule_pause(day=None):
+    day = day or datetime.date.today()
+    if not SCHEDULE_PAUSE_CONFIG.exists():
+        return None
+    try:
+        data = json.loads(SCHEDULE_PAUSE_CONFIG.read_text(encoding="utf-8"))
+        for window in data.get("windows", []):
+            start = datetime.date.fromisoformat(window["start"])
+            end = datetime.date.fromisoformat(window["end"])
+            if start <= day <= end:
+                return {
+                    "name": window.get("name", "scheduled pause"),
+                    "start": start,
+                    "end": end,
+                }
+    except Exception as e:
+        log(f"[WARN] Could not read scheduled pause config: {type(e).__name__}: {e}")
+    return None
 
 
 def _llm_host():
@@ -552,10 +573,25 @@ def run_server_deploy(log_file):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-sleep", action="store_true", help="Do not suspend after processing.")
+    parser.add_argument(
+        "--ignore-schedule-pause",
+        action="store_true",
+        help="Run even when the current date is in a configured pause window.",
+    )
     args = parser.parse_args()
 
     log("==================================================")
     log(f"[START] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
+
+    pause = None if args.ignore_schedule_pause else active_schedule_pause()
+    if pause:
+        log(
+            f"[PAUSE] {pause['name']}: {pause['start']} to {pause['end']}. "
+            "RSS, LLM, image generation, git sync, deployment, email, and sleep are skipped."
+        )
+        log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
+        log("==================================================")
+        return
 
     latest = latest_news_date()
     if latest:
