@@ -31,6 +31,17 @@ LOOPBACK_NO_PROXY = ("127.0.0.1", "localhost", "::1")
 DEFAULT_PROXY = "http://202.15.64.202:8080"
 
 
+def configure_console_encoding():
+    """Keep redirected/task-scheduler output from falling back to CP932."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
+
 def configure_loopback_no_proxy():
     """Prevent local LM Studio calls from being routed through a system proxy."""
     for key in ("NO_PROXY", "no_proxy"):
@@ -80,6 +91,7 @@ def configure_external_proxy():
 
 configure_loopback_no_proxy()
 configure_external_proxy()
+configure_console_encoding()
 
 
 def log(msg):
@@ -381,6 +393,7 @@ def run_cmd(cmd, label, log_file, cwd=None):
         configure_loopback_no_proxy()
         env = os.environ.copy()
         env["PYTHONUNBUFFERED"] = "1"
+        env["PYTHONIOENCODING"] = "utf-8"
         try:
             proc = Popen(
                 cmd,
