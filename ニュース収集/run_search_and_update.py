@@ -87,24 +87,47 @@ def log(msg):
         f.write(msg + "\n")
 
 
-def active_schedule_pause(day=None):
-    day = day or datetime.date.today()
+def schedule_pause_windows():
     if not SCHEDULE_PAUSE_CONFIG.exists():
-        return None
+        return []
     try:
         data = json.loads(SCHEDULE_PAUSE_CONFIG.read_text(encoding="utf-8"))
+        windows = []
         for window in data.get("windows", []):
             start = datetime.date.fromisoformat(window["start"])
             end = datetime.date.fromisoformat(window["end"])
-            if start <= day <= end:
-                return {
+            windows.append(
+                {
                     "name": window.get("name", "scheduled pause"),
                     "start": start,
                     "end": end,
+                    "catch_up": bool(window.get("catch_up", False)),
                 }
+            )
+        return windows
     except Exception as e:
         log(f"[WARN] Could not read scheduled pause config: {type(e).__name__}: {e}")
+        return []
+
+
+def active_schedule_pause(day=None):
+    day = day or datetime.date.today()
+    for window in schedule_pause_windows():
+        if window["start"] <= day <= window["end"]:
+            return window
     return None
+
+
+def resume_floor_after_pauses(day=None):
+    day = day or datetime.date.today()
+    completed = [
+        window
+        for window in schedule_pause_windows()
+        if not window["catch_up"] and window["end"] < day
+    ]
+    if not completed:
+        return None
+    return max(window["end"] for window in completed) + datetime.timedelta(days=1)
 
 
 def _llm_host():
@@ -599,6 +622,14 @@ def main():
     else:
         start = datetime.date.today() - datetime.timedelta(days=1)
     end = datetime.date.today() - datetime.timedelta(days=1)
+
+    resume_floor = resume_floor_after_pauses()
+    if resume_floor and start < resume_floor:
+        log(
+            f"[INFO] Excluding paused dates through {resume_floor - datetime.timedelta(days=1)}; "
+            f"resume target processing from {resume_floor}."
+        )
+        start = resume_floor
 
     log(f"[INFO] Target range: {start} to {end}")
 
