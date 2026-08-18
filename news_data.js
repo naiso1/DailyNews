@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-07 01:48";
+window.NEWS_UPDATED_AT = "2026-08-18 16:11";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -98005,6 +98005,807 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "in",
         img: "https://stimg2.cardekho.com/images/carNewsimages/userimages/36453/1785995247068/GeneralNew.jpg",
+        note: ""
+    },
+    // 2026-08-11 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "eu1405",
+        title: "新世代アウディQ7はより高度な技術とラグジュアリー、実用性を追求",
+        desc: "アウディQ7の第3世代は、PPCプラットフォームを採用し、技術・ラグジュアリー・実用性を向上させた。内装は14.5インチの曲面スクリーンと12.3インチのパッセンジャー画面を標準装備。温度調整は画面内だが、AI音声制御で対応可能。ファン方向の操作も画面内となり、物理ボタンを排除した。",
+        url: "https://www.autocar.co.uk/car-review/audi/q7",
+        source: "AUTOCAR UK",
+        date: "2026-08-11",
+        tags: ["ディスプレイ", "AI"],
+    
+        interiorScore: 73,
+        interiorReason: "Japanese summary details specific interior tech (14.5-inch screen, passenger dis",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/audi-q7-2026-001.jpg?itok=LQCGcHVa",
+        note: ""
+    },
+    {
+        id: "us1440",
+        title: "ジャガー次期EV Type 01インテリア公開 未来志向の豪華デザイン",
+        desc: "ジャガー次期EV Type 01のインテリアが公開された。ミニマルなデザインで、垂直型コントロールセンターと中央スパイン構造が特徴だ。 物理ボタンを排除し、プレミアム素材のシートとパノラミックガラスルーフを備える。2026年10月のフル公開に向け完成した。",
+        url: "https://www.evo.co.uk/jaguar/gt/207614/jaguar-type-01-interior-revealed-futuristic-and-luxurious-to-make-german-cars-look",
+        source: "evo",
+        date: "2026-08-11",
+        tags: ["シート", "新素材", "EV"],
+    
+        interiorScore: 88,
+        interiorReason: "flagship cabin reveal with clear interior image showing dashboard, steering whee",
+        imageInterior: true,
+        country: "us",
+        img: "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1786454982/evo/2026/08 August/Jaguar Type 01 interior 01_xezqb0.jpg",
+        note: ""
+    },
+    {
+        id: "in1497",
+        title: "マヒンドラBE6スポーツクに3画面キャビンと新インテリアテーマ採用",
+        desc: "マヒンドラはEV「BE6」の新型「BE6 Sporteq」を発表した。同車は3画面構成のキャビンと新しいインテリアテーマを採用し、最新の機能を搭載してアップデートされた。価格は公開されていないが、2026年8月に発売が予定されている。",
+        url: "https://www.zigwheels.com/news-features/general-news/mahindra-be-6-sporteq-gets-three-screen-cabin-new-interior-theme/58166/",
+        source: "ZigWheels",
+        date: "2026-08-11",
+        tags: ["EV"],
+    
+        interiorScore: 40,
+        interiorReason: "title indicates interior relevance (3-screen cabin), but image is exterior and t",
+        imageInterior: false,
+        country: "in",
+        img: "https://media.zigcdn.com/media/content/2026/Aug/cover_6a7ada0dc80f1.jpg",
+        note: ""
+    },
+    {
+        id: "in1499",
+        title: "マヒンドラ電気SUVBE6SPORTEQがタンインテリと3画面で登場",
+        desc: "マヒンドラは電気SUV「BE6 SPORTEQ」のティーザーを公開した。ブラウン調シートとタンカラーのインテリアを採用し、12.3インチの3画面構成を採用する。",
+        url: "https://www.cardekho.com/india-car-news/2026-mahindra-be-6-sporteq-teased-with-tan-interiors-and-three-screens-36482.htm",
+        source: "CarDekho",
+        date: "2026-08-11",
+        tags: ["シート"],
+    
+        interiorScore: 87,
+        interiorReason: "Tan interior color, 3-screen HMI layout, Harman Kardon audio, and ventilated sea",
+        imageInterior: true,
+        country: "in",
+        img: "https://stimg2.cardekho.com/images/carNewsimages/userimages/36481/1786435004721/GeneralNew.jpg",
+        note: ""
+    },
+    // 2026-08-12 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1624",
+        title: "新型エルグランド内装評価1000km走行で過去最高レベルと判明",
+        desc: "日産新型エルグランドを1000km以上走行した結果、前席と2列目のシートクッションがモチモチとして快適で、広大なダッシュボードと良好な視界が相まって、長距離移動の疲労を軽減する。ハザードスイッチの操作性やAピラーの死角など課題はあるものの、インテリアの使い勝手と快適性は過去最高レベルと評価できる。",
+        url: "https://news.yahoo.co.jp/articles/85c3f2e99452443c177911bccfa17c39544d0988?source=rss",
+        source: "くるまのニュース",
+        date: "2026-08-12",
+        tags: ["シート", "コックピット"],
+    
+        interiorScore: 72,
+        interiorReason: "interior review with specific seat comfort and dashboard UX details",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260812-01097422-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1625",
+        title: "BMW新型X5でCO2排出量40％削減 内装に再生PET使用し脱炭素化推進",
+        desc: "BMWは新型X5の製造において、ライフサイクル全体でのCO2排出量を約40％削減した。車体や内装にリサイクル材を多用し、特にヘッドライナーには再生PETを100％採用。車両重量の約3分の1に相当する940kgが二次材料で構成され、再生可能エネルギーによる生産で脱炭素化を推進している。",
+        url: "https://news.yahoo.co.jp/articles/612490e931de8d57fea4bdd04d17742548a03f35?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-12",
+        tags: ["新素材"],
+    
+        interiorScore: 90,
+        interiorReason: "text mentions recycled PET for headliner and seat covers, but image is exterior/",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260812-01267030-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "eu1403",
+        title: "ジャガー新型Type01、高級感あふれる新世代インテリアを採用",
+        desc: "ジャガーの新型Type01のインテリア画像が公開され、その高級で豊かな装飾がブランドの新たなラグジュアリーを象徴している。既存の「コピーしない」方針を堅持しつつ、洗練されたデザインと素材の選択により、伝統的なラグジュアリーとは異なる新しい価値観を提示している。",
+        url: "https://www.autocar.co.uk/opinion/electric-cars/jaguars-next-gen-interior-stays-true-copy-nothing-promise",
+        source: "AUTOCAR UK",
+        date: "2026-08-12",
+        tags: ["新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "article focuses on interior design philosophy and luxury materials of the new Ja",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/type01_gl_front_seat_16x9_0.jpg?itok=ll7Nku6r",
+        note: ""
+    },
+    {
+        id: "eu1404",
+        title: "ジャガー新型電気GT Type 01の豪華な内装デザインを公開",
+        desc: "ジャガーは新型電気GT「Type 01」の内装を公開した。4人乗りで、中央に走る「スパイン」が特徴。ドライバー前方には大型ディスプレイを搭載し、従来のリアミラーはデジタルカメラに置き換えられている。10月にフルモデル公開予定。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/jaguar-type-01-interior-revealed-luxury-gt-majors-hidden-tech",
+        source: "AUTOCAR UK",
+        date: "2026-08-12",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 93,
+        interiorReason: "interior reveal with clear image showing dashboard, steering wheel, and center c",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/type01_front_cabin_16x9.jpg?itok=QowhrMF5",
+        note: ""
+    },
+    {
+        id: "jp1628",
+        title: "アンティーク調インテリアと4分割ベッドで仕事も車中泊もこなすハイエースカスタム",
+        desc: "カズキオートがプロデュースするトヨタハイエースベースのコンプリートカー「ラギッドスペシャル」は、無骨なオフスタイル外装とアンティーク調のレザー調シートカバーやインテリアパネルで統一された温かみのある室内を併せ持つ。",
+        url: "https://www.automesseweb.jp/2026/08/13/1978232",
+        source: "AUTO MESSE WEB",
+        date: "2026-08-12",
+        tags: ["シート", "新素材", "カスタマイズ"],
+    
+        interiorScore: 90,
+        interiorReason: "article focuses on a complete custom vehicle featuring specific interior details",
+        imageInterior: false,
+        country: "jp",
+        img: "https://image-automesseweb.com/wp-content/uploads/2026/08/01_AMW_260810_toyota-hiace-kazuki_.jpeg",
+        note: ""
+    },
+    {
+        id: "jp1629",
+        title: "スペーシア専用ダッシュボードトレイスマホスタンド搭載発売",
+        desc: "スペーシア専用ダッシュボードトレイが8月発売。整備士検証のピッタリ設計でステー固定。 滑り止めマットと大容量収納で小物整理。スマホスタンド機能も備え、参考価格3180円。",
+        url: "https://mainichi.jp/articles/20260812/pr2/00m/020/443000c",
+        source: "毎日新聞デジタル",
+        date: "2026-08-12",
+        tags: ["コックピット"],
+    
+        interiorScore: 78,
+        interiorReason: "specific interior accessory (dashboard tray) with clear image showing storage an",
+        imageInterior: true,
+        country: "jp",
+        img: "https://cdn.mainichi.jp/vol1/2026/08/12/20260812pr200m020443000p/0c10.jpg?1",
+        note: ""
+    },
+    {
+        id: "us1448",
+        title: "ジャガー新型EVのラジカルな内装デザインとデジタルコックピット",
+        desc: "ジャガーの新型EVは外装と同様に革新的な内装を採用。ドライバー前方に大型デジタルインストルメントクラスターを配置し、ダッシュボード中央には気候制御やサウンドシステムの音量調整用の小型タッチスクリーンを設ける。コンセプトモデルでは情報娯楽システム用のタッチスクリーンが折りたたみ式で確認された。",
+        url: "https://www.carexpert.com.au/car-news/jaguars-new-ev-has-an-interior-just-as-radical-as-its-exterior",
+        source: "CarExpert",
+        date: "2026-08-12",
+        tags: ["ディスプレイ", "コックピット", "新素材", "EV"],
+    
+        interiorScore: 89,
+        interiorReason: "radical interior design with specific HMI details (digital cluster, small climat",
+        imageInterior: true,
+        country: "us",
+        img: "https://images.carexpert.com.au/crop/1200/630/cms/v1/media/jaguar-type-00-interior-1.jpg",
+        note: ""
+    },
+    {
+        id: "cn1439",
+        title: "新型BMW i3のインテリアが成都モーターショーで初公開",
+        desc: "新型BMW i3のインテリアは成都モーターショーで初お披露目されます。新車はBMWのデザイン理念を継承し、17.9インチのセンターディスプレイとパノラミックディスプレイシステムを搭載し、車載システムには現地の大規模言語モデルが導入されます。",
+        url: "https://auto.ifeng.com/c/8vWZbTkz1Od",
+        source: "凤凰网汽车",
+        date: "2026-08-12",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 73,
+        interiorReason: "article is mainly interior accessory, material, seat cover, cockpit, dashboard,",
+        imageInterior: false,
+        country: "cn",
+        img: "https://x0.ifengimg.com/res/2026/1745D84EE2B9E17B84B2A6CD393558E74A8021F8_size141_w1365_h910.jpg",
+        note: ""
+    },
+    // 2026-08-13 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "cn1438",
+        title: "ルクシードRX、8月20日予約開始。4基LiDAR搭載で自動運転性能強化",
+        desc: "ルクシードRXは8月20日に予約販売を開始する。4基のLiDARセンサーと次世代バッテリープラットフォームを搭載する。",
+        url: "https://cnevpost.com/2026/08/13/luxeed-rx-open-pre-orders-aug-20/",
+        source: "CnEVPost - All",
+        date: "2026-08-13",
+        tags: ["AR", "センシング", "EV"],
+    
+        interiorScore: 14,
+        interiorReason: "article focuses on pre-order launch, LiDAR sensors, and battery platform; no int",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081307480173.jpg",
+        note: ""
+    },
+    {
+        id: "in1493",
+        title: "シトロエン新型C5 Aircrossのインテリアは高級感と機能性を両立",
+        desc: "シトロエンが新型C5 Aircrossを発表。内装は高級感と機能性を両立し、快適なドライブを提供する。",
+        url: "https://www.carblogindia.com/skoda-kodiaq-rs-review-the-performance-suv-that-does-it-all/",
+        source: "Car Blog India",
+        date: "2026-08-13",
+        tags: ["AI"],
+    
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/08/skoda-kodiaq-rs-review-front-rear-profile.jpg",
+        note: ""
+    },
+    {
+        id: "us1445",
+        title: "プレミアムと大衆車のシート品質格差縮小",
+        desc: "JDパワーの2026年米国シート品質調査によると、全体的な品質は100台当たり10.0件の不具合となり改善した。プレミアムと大衆車の品質格差は1.3から0.7に縮小。大衆車への複雑なシート機能の統合が満足度向上に寄与し、大衆車ブランドがシート満足度でプレミアムを逆転した。",
+        url: "https://finance.yahoo.com/technology/articles/luxury-auto-seating-goes-mass-120000420.html",
+        source: "Yahoo Finance",
+        date: "2026-08-13",
+        tags: ["シート"],
+    
+        interiorScore: 68,
+        interiorReason: "seat quality trends and feature integration directly inform interior product pla",
+        imageInterior: false,
+        country: "us",
+        img: "https://s.yimg.com/lo/mysterio/api/F93F43BF2791804AF2EC582FB0B1A65F5081BBB16914082F2854C5FEB88743EC/subgraphmysterio/resizefill_w1200_h179;quality_80;format_webp/https:%2F%2Fmedia.zenfs.com%2Fen%2Fbusiness-wire.com%2F3bee9cf522571321159fba9fd3986d11.jpg",
+        note: ""
+    },
+    {
+        id: "cn1442",
+        title: "タッチセンサー式ボタンは自動車メーカーによって廃止される見込み",
+        desc: "スケール拡大によるコスト増大、大型画面の差別化が困難。自動車メーカーはタッチ操作を見直し、ボタンやノブへ回帰してブランドの独自性を確立する可能性がある。",
+        url: "https://news.qq.com/rain/a/20260813A0135U00",
+        source: "腾讯网",
+        date: "2026-08-13",
+        tags: ["センシング"],
+    
+        interiorScore: 82,
+        interiorReason: "The article discusses the strategic shift in HMI design from touchscreens back t",
+        imageInterior: true,
+        country: "cn",
+        img: "https://inews.gtimg.com/om_ls/Oxivllm4e3voTHoRFEJAJdS-EbRe1QT1WpukMzowcIsyoAA_640330/0",
+        note: ""
+    },
+    {
+        id: "in1495",
+        title: "27四半期連続成長の無借金自動車部品メーカーが外資投資家の注目を集める",
+        desc: "大型タッチスクリーンやプレミアムインテリアなど、自動車内装の付加価値向上が市場を牽引している。この傾向を受け、無借金体質で業界平均を上回る27四半期連続成長を遂げた自動車部品メーカーに対し、外国機関投資家がquietly投資比率を拡大させている。",
+        url: "https://www.financialexpress.com/market/stock-insights/meet-the-zero-debt-auto-stock-that-has-outgrown-the-industry-for-27-straight-quarters/4317509/",
+        source: "The Financial Express",
+        date: "2026-08-13",
+        tags: ["HMI", "ディスプレイ"],
+    
+        interiorScore: 78,
+        interiorReason: "The article discusses the strategic shift toward premium interiors, touchscreens",
+        imageInterior: true,
+        country: "in",
+        img: "https://images.financialexpressdigital.com/2026/08/re45e5egbb113330.jpg",
+        note: ""
+    },
+    {
+        id: "in1496",
+        title: "マヒンドラBE6スポーツeqのインテリア詳細が初公開",
+        desc: "マヒンドラBE6の新型スポーツeqのインテリアが公開された。3画面構成や黒とタン色の配色が特徴。ダッシュボードの再設計でカップホルダーが追加され、ワイヤレス充電器やUSBポートの操作性も改善された。8月15日に正式発表予定。",
+        url: "https://www.autocarindia.com/car-news/mahindra-be-6-sporteq-interior-leaked-440471",
+        source: "Autocar India",
+        date: "2026-08-13",
+        tags: ["コックピット", "EV"],
+    
+        interiorScore: 91,
+        interiorReason: "interior leak with clear image of dashboard, screens, console, and trim details",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260813_071010_c7926a84.png",
+        note: ""
+    },
+    // 2026-08-14 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1623",
+        title: "純正ナビ不要で音質劇的向上DSPアンプが注目の理由",
+        desc: "純正ナビ交換不可車向けDSPアンプが注目を集める。カプラーオン装着で数万円、音質を劇的に向上させる。",
+        url: "https://news.yahoo.co.jp/articles/4dfdcbd3b620bb53169b89a8703845fa67243d08?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-08-14",
+        tags: ["コネクテッド"],
+    
+        interiorScore: 90,
+        interiorReason: "article focuses on aftermarket DSP audio upgrade for OEM head units, relevant to",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260814-00010006-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "cn1437",
+        title: "Smart #2の大型スクリーン搭載インテリアが特許画像で公開",
+        desc: "スマート #2のインテリアが中国特許庁の画像で明らかになった。大型タッチスクリーン、円形のエアコンベント、2つのワイヤレス充電パッドを備える。メルセデス・ベンツがデザインし、吉利のプラットフォームを採用している。",
+        url: "https://carnewschina.com/2026/08/14/smart-2-interior-exposed-in-patent-image-with-a-large-screen/",
+        source: "CarNewsChina - EV",
+        date: "2026-08-14",
+        tags: ["AR", "ディスプレイ", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "interior patent image and screen details",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/smart_2_interior-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "in1492",
+        title: "スコーダスラヴィアフェイスリフト8月18日発売 内装にシートマッサージ機能",
+        desc: "スコーダ・オート・インディアは2026年8月18日、スラヴィアのフェイスリフトモデルを発売する。外観はグリルやバンパーを微調整し、1.0Lエンジンに8速ATを追加。内装はレイアウトを維持しつつ、10.25インチデジタルメーターやリアシートマッサージ機能、新型シート表皮などを新設する。",
+        url: "https://www.indiacarnews.com/news/popular-rs-10-lakh-skoda-car-getting-a-big-upgrade-in-3-days-68693/",
+        source: "IndiaCarNews",
+        date: "2026-08-14",
+        tags: ["シート"],
+    
+        interiorScore: 79,
+        interiorReason: "Japanese summary explicitly lists interior product details: 10.25-inch digital m",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/2026-Skoda-Slavia-launch-date.webp",
+        note: ""
+    },
+    {
+        id: "jp1627",
+        title: "ホイールベース延長で後席と荷室を大幅拡大した新型マツダCX-5の実用性",
+        desc: "新型マツダCX-5はホイールベースを115mm延長し、後席膝前空間を45mm、荷室容量を466Lに拡大した。15.6インチセンターディスプレイとGoogleビルトインを採用し、Googleビルトインによる自然発話音声認識や静電式ステアリングスイッチで操作性を向上させた。",
+        url: "https://motor-fan.jp/article/1590124/",
+        source: "Motor-Fan",
+        date: "2026-08-14",
+        tags: ["ディスプレイ", "AI"],
+    
+        interiorScore: 93,
+        interiorReason: "detailed cabin UX analysis with clear interior image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://motor-fan.jp/wp-content/uploads/2026/08/MAZDA_CX_5_20260807_6.jpeg?v=1786086075",
+        note: ""
+    },
+    {
+        id: "us1447",
+        title: "RUF Ehraのブラウン一色の内装とカーボンファイバーパネルが際立つ",
+        desc: "RUFが発表した新型Ehraは、カーボンファイバーモノコックシャシーを採用。内装はブラウンレatherが全面を覆い、シートにはチェック柄が施される。ペダルはチタン製で、5つの計器類には緑の文字が特徴的。3.6リッターツインターボエンジンで650馬力を発揮し、モントレーカーウィークで公開される。",
+        url: "https://www.motortrend.com/news/first-look-ruf-ehra-porsche-911",
+        source: "Motor Trend",
+        date: "2026-08-14",
+        tags: ["シート"],
+    
+        interiorScore: 68,
+        interiorReason: "Title and text focus on a flagship cabin refresh with specific interior details",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/38d575a7-8daf-4243-b209-65a8b9b494cf.jpg",
+        note: ""
+    },
+    {
+        id: "eu1410",
+        title: "極氪9Xスーパーハイブリッドが欧州へ885馬力で参入",
+        desc: "極氪の大型SUV「9Xスーパーハイブリッド」が欧州市場へ投入される。885馬力の高出力と100マイル超のEV航続距離を備え、ラグジュアリーなインテリアと先進技術を搭載する。この新車はレンジローバーなどの既存高級SUVに挑戦する存在となる。",
+        url: "https://www.msn.com/en-gb/cars/news/is-the-zeekr-9x-super-hybrid-the-new-luxury-suv-to-beat/ar-AA2a6KuM",
+        source: "City A.M.",
+        date: "2026-08-14",
+        tags: ["EV"],
+    
+        interiorScore: 40,
+        interiorReason: "text mentions 'cabin packed with luxury tech' and 'luxury interior' but provides",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.cityam.com/wp-content/uploads/2026/08/Zeekr-x9.jpg?w=824&h=463&crop=1",
+        note: ""
+    },
+    {
+        id: "eu1411",
+        title: "メルセデス・ベンツヴィンテージ車に出生証明書発行",
+        desc: "メルセデス・ベンツは創業140周年を記念し、ヴィンテージ車に出生証明書を発行する取り組みを開始した。一方、シートに施されたブランドバッジが日光で焼付く問題など、祝賀行事の陰で訴訟リスクも浮上している。",
+        url: "https://www.irishtimes.com/world/europe/2026/08/14/mercedes-benz-issues-birth-certs-for-vintage-cars-leaving-itself-open-to-some-crude-jibes/",
+        source: "The Irish Times",
+        date: "2026-08-14",
+        tags: ["シート"],
+    
+        country: "eu",
+        img: "https://www.irishtimes.com/resizer/v2/GXYCBFAW6Q6F74BO4HSLKVX4Z4.jpg?smart=true&auth=ca95fb9c42205bd2c85a92d1ae61cca1926a692fcac34275aff97f610ba9c677&width=1200&height=630",
+        note: ""
+    },
+    {
+        id: "cn1443",
+        title: "コスト半分の大屏化で物理キー復活の背景は安全基準と分层交互",
+        desc: "タッチコストは物理キーの半分だが、安全基準強化で物理キーが復活している。アウディやメルセデスが新車で再導入し、Euro NCAP評価も影響している。大型画面はナビやエンタメ表示に特化し、物理キーは頻繁操作を担当する。",
+        url: "https://www.nbd.com.cn/articles/2026-08-14/4542162.html",
+        source: "每经网",
+        date: "2026-08-14",
+        tags: ["コネクテッド", "安全"],
+    
+        interiorScore: 93,
+        interiorReason: "highly relevant to HMI and cabin UX planning; discusses the strategic balance be",
+        imageInterior: true,
+        country: "cn",
+        img: "https://smcos.cdmgiml.com/tx/others/upload/2c00f8d824612efc3d4803d985ac4312-1773297690101.jpg",
+        note: ""
+    },
+    // 2026-08-15 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1630",
+        title: "日産ロッククリーク新型キックスベースカスタム車今夏発表防水シート採用",
+        desc: "日産モータースポーツ＆カスタマイズは新型キックスをベースにしたカスタム車ロッククリークの情報を先行公開した。今夏に正式発表し今冬に発売予定。高性能ハイブリッド4WDを搭載し斬新な3スロットグリルと防水シートを採用する。新車価格は約400万円程度となる。",
+        url: "https://www.msn.com/ja-jp/autos/news/新車約400万円-日産-新型キックス-ゴツ仕様-間もなく発表-高性能ハイブリッド4wd-に斬新-3スロットグリル-と防水シート採用-カスタムカー-ロッククリーク-今夏発表/ar-AA2aaxQZ",
+        source: "くるまのニュース",
+        date: "2026-08-15",
+        tags: ["シート", "カスタマイズ"],
+    
+        interiorScore: 87,
+        interiorReason: "The article explicitly mentions 'waterproof seats' as a key interior feature, an",
+        imageInterior: true,
+        country: "jp",
+        img: "https://kuruma-news.jp/wp-content/uploads/2027/08/20260812_nissan_kicks_rockcreek_000.jpg?v=1786519555",
+        note: ""
+    },
+    {
+        id: "us1442",
+        title: "高齢者の運転支援5つの車内改造で快適性と安全性を向上",
+        desc: "高齢ドライバーの運転支援を目的とした5つの車内改造が紹介される。視界の改善、乗降の容易化、快適性の向上などが主な内容だ。具体的な改造例として、ミラーの調整やシートの変更、インフォテインメントシステムの簡素化などが挙げられる。これらの改造により、高齢者の運転自信と安全性が向上する可能性がある。",
+        url: "https://www.msn.com/en-us/money/other/5-car-mods-that-can-improve-driving-for-older-people/ar-AA2acnJ0",
+        source: "Jalopnik",
+        date: "2026-08-15",
+        tags: ["コネクテッド", "シート", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "article focuses on interior modifications for older drivers (seats, infotainment",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/5-car-mods-that-can-improve-driving-for-older-people/l-intro-1786549856.jpg",
+        note: ""
+    },
+    {
+        id: "eu1409",
+        title: "2026年コンパクトSUV快適性ランキング1位ブイックエンヴィジョンの静寂と快適性",
+        desc: "2026年ブイアクエンヴィジョンはJ.D.Powerの信頼性ランキングでコンパクトSUV1位を獲得した。アクティブノイズキャンセリングと遮音ガラスにより高級車並みの静粛性を実現。2.0Lターボエンジンと快適サスペンションtuningが特徴だが、航続距離や残価率では競合に劣る。",
+        url: "https://www.topspeed.com/surprisingly-comfortable-suv-buyers-ignore/",
+        source: "Top Speed",
+        date: "2026-08-15",
+        tags: [],
+    
+        interiorScore: 43,
+        interiorReason: "interior comfort features (ANC, glass) mentioned but image is exterior only",
+        imageInterior: false,
+        country: "eu",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/2026-buick-envision-front-grille.avif?w=1600&h=900&fit=crop",
+        note: ""
+    },
+    {
+        id: "in1494",
+        title: "マヒンドラBE6スポーツク発売3画面コックピットとAI搭載特別仕様",
+        desc: "マヒンドラBE6スポーツクは3画面コックピットとGoogle Gemini搭載AIを特徴とする。特別仕様は黒とオレンジのインテリアを採用し、114万5000ルピーから提供される。",
+        url: "https://www.timesnownews.com/auto/car-news/mahindra-be-6-sporteq-formula-e-edition-facelift-india-launch-live-updates-15-august-independence-day-2026-price-variants-range-features-liveblog-155650470",
+        source: "Times Now",
+        date: "2026-08-15",
+        tags: ["AI", "コックピット"],
+    
+        interiorScore: 78,
+        interiorReason: "The article highlights a 'three-screen cockpit' and 'special editions' with spec",
+        imageInterior: true,
+        country: "in",
+        img: "https://images.timesnownews.com/thumb/msid-155650470,thumbsize-41676,width-1280,height-720,resizemode-75/155650470.jpg",
+        note: ""
+    },
+    {
+        id: "in1498",
+        title: "マヒンドラBE6スポーツテックがインドで1945万ルピーで発売",
+        desc: "マヒンドラは電気自動車「BE6」の最上位モデル「BE6スポーツテック」をインドで発売した。価格は1945万ルピー。主な特徴は12.3インチディスプレイ3基を採用した新しいダッシュボードと、黒とタン色のインテリアテーマ。TEQ_MeやTEQ_Talkなどの新テック機能も追加された。",
+        url: "https://www.newsbytesapp.com/news/auto/mahindra-launches-be-6-sporteq-with-triple-screen-layout/story",
+        source: "NewsBytes",
+        date: "2026-08-15",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 72,
+        interiorReason: "triple-screen dashboard and interior theme details",
+        imageInterior: false,
+        country: "in",
+        img: "https://i.cdn.newsbytesapp.com/images/l81720260815110326.jpeg",
+        note: ""
+    },
+    // 2026-08-16 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1621",
+        title: "世界初小型ディスプレイ搭載ワイヤレスCarPlayアダプターCarPlay Clip発売",
+        desc: "OTTOCASTは有線CarPlay車向けワイヤレスアダプター「CarPlay Clip」を発売した。世界初の円形小型ディスプレイを搭載し、専用アプリで時計やアルバムカバー表示をカスタマイズ可能。",
+        url: "https://news.yahoo.co.jp/articles/c456c8de896caa3dab2835d360780a951d417cfe?source=rss",
+        source: "レスポンス",
+        date: "2026-08-16",
+        tags: ["AR", "ディスプレイ", "カスタマイズ"],
+    
+        interiorScore: 78,
+        interiorReason: "Aftermarket accessory with a clear interior image showing dashboard integration",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260816-00000006-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "cn1436",
+        title: "BYDシーガル新型車内、大型センターコンソールと大型ディスプレイを搭載",
+        desc: "BYDシーガルの新型内装が公開された。大型の二層式センターコンソールを採用し、下部に大容量の収納スペースを確保した。ドライバーディスプレイは統合され、大型のセンターインフォテインメントディスプレイのみとなる。シートには赤いアクセントが追加され、デザインが刷新された。",
+        url: "https://carnewschina.com/2026/08/16/new-byd-seagull-interior-exposed-with-a-large-center-console-and-one-big-screen/",
+        source: "CarNewsChina - All",
+        date: "2026-08-16",
+        tags: ["ディスプレイ", "コネクテッド", "シート", "センターコンソール", "バッテリー"],
+    
+        interiorScore: 89,
+        interiorReason: "interior exposed with large center console and screen",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/seagull_b-1500x843.jpg",
+        note: ""
+    },
+    {
+        id: "eu1408",
+        title: "2027年Rivian R1SとR1Tがキャプテンシート導入で快適性とトリム簡素化を実現",
+        desc: "2027年R1Sは2列目キャプテンシートで6人乗りに対応し、R1Tは20インチアドベンチャータイヤを追加した。トリム名を簡素化し、Esker Silverと新インテリアテーマも導入した。",
+        url: "https://electriccarsreport.com/2026/08/2027-rivian-r1s-and-r1t-get-more-comfort-capability-and-simpler-trims/",
+        source: "Electric Cars Report",
+        date: "2026-08-16",
+        tags: ["コネクテッド", "シート"],
+    
+        interiorScore: 63,
+        interiorReason: "captain's chairs and new interior themes are relevant to seat and trim planning,",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/2027-Rivian-R1S.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "cn1441",
+        title: "BYDのオオミミのインテリアが公開されました",
+        desc: "BYDの新型「シーガル」のインテリアのスパイショットが公開され、傾斜したセンターコンソールとフラットスクリーンディスプレイを採用。装備はスーパーカーに匹敵し、全方位でのアップデートを実現した。",
+        url: "https://finance.sina.com.cn/tech/discovery/2026-08-16/doc-ininpfmi1281424.shtml",
+        source: "新浪财经",
+        date: "2026-08-16",
+        tags: ["ディスプレイ", "センターコンソール", "バッテリー"],
+    
+        interiorScore: 87,
+        interiorReason: "spy shots of a complete cabin refresh with clear details on the center console,",
+        imageInterior: true,
+        country: "cn",
+        img: "https://n.sinaimg.cn/spider20260816/183/w600h383/20260816/83ad-c133b4e8dbebb37f89a60d3a09deca7e.png",
+        note: ""
+    },
+    // 2026-08-17 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1622",
+        title: "夏の車内快適化に防水シートカバーやファン付きクッションなど3選",
+        desc: "MotorFanは夏のレジャー向け車内インテリアアイテム3選を紹介する。TomboyのTPU加工防水シートカバーは泥砂汚れを防ぐ。徐光慶監修のドライブドクターシリーズは体圧分散で腰痛を軽減。ボンフォームのエアーブロー12Vダブルクッションは内蔵ファンで蒸れを解消し、快適なドライブを実現する。",
+        url: "https://news.yahoo.co.jp/articles/1bab114283ee25431fddd43e20ecb27b16e53dff?source=rss",
+        source: "MotorFan",
+        date: "2026-08-17",
+        tags: ["シート"],
+    
+        interiorScore: 90,
+        interiorReason: "article focuses on seat covers and cushions for cabin comfort, with a clear inte",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260817-01573363-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1626",
+        title: "アウディ初Q9全長5.31m超大型ラグジュアリーSUV登場",
+        desc: "アウディは全長5.31mの超大型SUV「Q9」を投入する。電動開閉式ドアやイルミネーション付きXXLガラスルーフ、オプションの2列目ビジネスシートなど快適性を重視した内装が特徴だ。2026年11月からドイツで販売され、価格は10万8400ユーロからとなる。",
+        url: "https://news.yahoo.co.jp/articles/8618ae576264cf60ae443c4449d82e8800b7585f?source=rss",
+        source: "AUTO BILD JAPAN Web",
+        date: "2026-08-17",
+        tags: ["シート", "イルミ", "EV"],
+    
+        interiorScore: 63,
+        interiorReason: "mentions business seats and illuminated glass roof, but image is exterior only",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00010000-autobild-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1439",
+        title: "読者が量産化を望むコンセプトカー内装の傑作たち",
+        desc: "読者が量産化を望むコンセプトカーの内装デザインが紹介された。アウディの操縦席風、ブイックの高級木目調、日産のすっきり計器類などが挙げられた。実用性や安全基準の壁で実現しなかったが、自動車内装の革新性を示す例として記憶に残っている。",
+        url: "https://www.jalopnik.com/2237287/concept-car-interiors-worthy-of-production-reader-answers/",
+        source: "Jalopnik",
+        date: "2026-08-17",
+        tags: ["新素材", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "highly relevant interior design showcase with clear image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/these-concept-car-interiors-should-have-gone-into-production-according-to-our-readers/l-intro-1786730396.jpg",
+        note: ""
+    },
+    {
+        id: "cn1435",
+        title: "CATL、主力事業の二酸化炭素排出実質ゼロ達成へ2035",
+        desc: "電池大手のCATLは、2025年末までに主力事業の二酸化炭素排出実質ゼロを達成した。主力事業における再生可能エネルギーの使用率は100%に達し、20の工場がゼロカーボン工場として認証された。また、2035年までにバリューチェーン全体のカーボンニュートラル実現を目指す方針を示した。",
+        url: "https://carnewschina.com/2026/08/17/catl-goes-100-zero-carbon-electricity-in-core-operations-targets-value-chain-carbon-neutrality-by-2035/",
+        source: "CarNewsChina - All",
+        date: "2026-08-17",
+        tags: ["バッテリー"],
+    
+        interiorScore: 10,
+        interiorReason: "battery company sustainability news, no interior details",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-103-e1786961324167.png",
+        note: ""
+    },
+    {
+        id: "in1491",
+        title: "2026年式シュコダ・スラビアのフェイスリフトモデルが内装変更を公開し明日発売",
+        desc: "シュコダは2026年式スラビアのフェイスリフトモデルのteaserを公開した。外観の詳細に加え、内装の改訂が行われることが示唆されている。パワートレインは既存の1.0Lと1.5Lターボガソリンエンジンを継続採用する。このモデルは明日インド市場で発売予定である。",
+        url: "https://gaadiwaadi.com/2026-skoda-slavia-facelift-teased-again-with-new-details-launch-tomorrow/",
+        source: "GaadiWaadi",
+        date: "2026-08-17",
+        tags: [],
+    
+        interiorScore: 42,
+        interiorReason: "interior revisions mentioned but no details or image",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/2026-skoda-slavia-facelift-teased-2.jpg",
+        note: ""
+    },
+    {
+        id: "eu1406",
+        title: "ベンリー トルカルが責任ある羊毛基準認証取得のメリノウール内装を採用",
+        desc: "ベンリー トルカルはフォックスブラザーズと共同開発した世界初の100%メリノウール自動車用生地を採用した。この生地は高級車の耐久性基準を満たし、責任ある羊毛基準認証を取得した初の自動車用羊毛素材である。グラデーションのオムブレベニアやサンバーストアルミニウム仕上げも追加され、内装の選択肢が拡大した。",
+        url: "https://www.automotiveworld.com/news/bentley-torcal-brings-merino-wool-to-automotive-interiors/",
+        source: "Automotive World",
+        date: "2026-08-17",
+        tags: ["新素材"],
+    
+        interiorScore: 89,
+        interiorReason: "Merino wool interior material and cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/17152336/bentley-torcal-interior-materials-palette-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1407",
+        title: "ジャガー初EV Type01のインテリア公開 縦長スパインで空間を区切る新デザイン",
+        desc: "ジャガーは初量産EV「Type 01」のインテリアを公開した。縦長の中央スパインがキャビンを4つの個別空間に分ける設計で、トラスチーノ石や職人織物を意識した素材感が特徴。インフォテインメントは建築構造に統合され、デジタルリアビューディスプレイが風防下部に配置される。",
+        url: "https://www.automotiveworld.com/news/jaguar-type-01-interior-revealed-for-the-first-time/",
+        source: "Automotive World",
+        date: "2026-08-17",
+        tags: ["ディスプレイ", "コネクテッド", "新素材", "EV"],
+    
+        interiorScore: 100,
+        interiorReason: "flagship cabin reveal with clear longitudinal spine architecture, material detai",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/17181438/jaguar-type-01-front-cabin-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "us1441",
+        title: "テスラModel Yシート下トレイ40ドルにオーナー怒りTemuで安価代替品提案",
+        desc: "テスラはModel Y用シート下収納トレイを40ドルで販売した。オーナーはTemuで4個セットが35ドルと指摘し、価格に不満を表明した。",
+        url: "https://www.torquenews.com/1/tesla-model-y-owners-resent-40-underseat-storage-saying-it-should-come-50k-car-and-one-paying-35",
+        source: "Torque News",
+        date: "2026-08-17",
+        tags: ["シート"],
+    
+        interiorScore: 67,
+        interiorReason: "underseat storage tray and seat detail",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.torquenews.com/sites/default/files/styles/hero_standard/public/images/tesla%27s-%2440-underseat-tray-storage.jpeg",
+        note: ""
+    },
+    {
+        id: "us1443",
+        title: "ベンレー初のEVで100%メリノ羊毛を内装材に採用",
+        desc: "ベンレーは初のEV「トルカル」のインテリアオプションとして、従来の皮革に代わる100%メリノ羊毛素材を提供する。この羊毛は環境に配慮した持続可能な素材として選定され、高級車らしい快適性と独特の質感を内装に提供する。",
+        url: "https://www.msn.com/en-us/autos/luxury/who-needs-leather-bentley-s-first-ev-will-offer-100-merino-wool-as-an-interior-trim-option/ar-AA2ajchq",
+        source: "Road & Track",
+        date: "2026-08-17",
+        tags: ["新素材", "EV"],
+    
+        interiorScore: 87,
+        interiorReason: "article focuses on a specific sustainable interior material (merino wool) for a",
+        imageInterior: true,
+        country: "us",
+        img: "https://s.yimg.com/lo/mysterio/api/a99586a62680136e8c52f911e57096514a92ac3c0edfc51b77f1915f4f891158/lightyear_networkapi/resizefill_w1200;quality_80;format_jpg/https://media.zenfs.com/en/road_track_223/eaeec7b416bc677bfb0052b61ef8108e.jpg",
+        note: ""
+    },
+    {
+        id: "us1444",
+        title: "ベンレー初のEVトルカルにメリノウールシート採用",
+        desc: "ベンレー初のEVトルカルはメリノウールとリサイクル木材を使用。Fox Brothersと共同開発した100%メリノウールはRWS認証を取得。",
+        url: "https://insideevs.com/news/805231/bentley-torcal-sustainable-merino-wool/",
+        source: "YAHOO!",
+        date: "2026-08-17",
+        tags: ["シート", "新素材", "EV"],
+    
+        interiorScore: 90,
+        interiorReason: "Merino wool seat material and recycled wood trim details with clear interior ima",
+        imageInterior: true,
+        country: "us",
+        img: "https://s.yimg.com/lo/mysterio/api/39354fbdc980379790d5b48029b18f391bc96537c8a28eb289b94adf3d46d74a/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Finsideevs_articles_320%2F5b70c1c0d5b3a71fda03e27770faef01.jpg",
+        note: ""
+    },
+    {
+        id: "us1446",
+        title: "MergeScreensシボレーシルバラード用大型縦型タッチスクリーンアップデート",
+        desc: "MergeScreensはシボレーシルバラード用大型縦型ディスプレイを更新した。13.8インチから17.2インチの画面を提供し、Apple CarPlayとAndroid Autoに対応する。",
+        url: "https://www.usatoday.com/press-release/story/40362/mergescreens-updates-chevrolet-silverado-tesla-style-screen-lineup-with-compatibility-through-2026-models/",
+        source: "USA TODAY",
+        date: "2026-08-17",
+        tags: ["AR", "ディスプレイ"],
+    
+        interiorScore: 83,
+        interiorReason: "aftermarket large-format vertical display update for Silverado, specific screen",
+        imageInterior: true,
+        country: "us",
+        img: "https://pix.xpr.media/p/eyJzIjoiOTBlNmZmODAtZDVmZS00YjY5LTljM2ItNjVmYzNmMjYzNjg1IiwiYyI6ImMzNGY2NWRlLTdiZjUtNDVkYi1iYWMzLTljZmM4MDdhMTExZCIsInYiOjF9.9Em3_CY3xaQRUX5WDMm6iwSxSssfYOgnax49rhLXrU8.gif",
+        note: ""
+    },
+    {
+        id: "eu1412",
+        title: "中国の自動車産業進化の最前線XPengの高級SUVとAI戦略",
+        desc: "中国の自動車産業は急速に進化しており、XPengは高級SUV「G9L」の発売とAI技術の活用によりプレミアム市場での地位向上を図っている。同社の戦略は、先進的な技術と高級感を融合させ、グローバルな競争力を強化するものである。",
+        url: "https://www.cityam.com/from-china-with-love-xpengs-luxury-ambition/",
+        source: "City A.M.",
+        date: "2026-08-17",
+        tags: ["AI"],
+    
+        interiorScore: 42,
+        interiorReason: "article discusses luxury SUV and premium cabin ambition but lacks specific inter",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.cityam.com/wp-content/uploads/2026/08/Tim-Barnes-Clay-with-new-Xpeng-G9L-in-China-1.jpg",
+        note: ""
+    },
+    {
+        id: "cn1440",
+        title: "自動車内装デザインの是正",
+        desc: "2026年、享界G9などの車種が物理ボタンを復活させ、大型画面が正義という常識に別れを告げ、自動車インテリアデザインが一斉に是正されつつある。",
+        url: "https://www.sohu.com/a/1063861823_379605",
+        source: "搜狐",
+        date: "2026-08-17",
+        tags: [],
+    
+        interiorScore: 68,
+        interiorReason: "article focuses on interior design trend (physical buttons vs screens) and cabin",
+        imageInterior: false,
+        country: "cn",
+        img: "https://photo.pic.sohu.com/images/oldblog/person/11111.gif",
+        note: ""
+    },
+    {
+        id: "in1500",
+        title: "マヒンドラ スコピオ ライフスタイラー2027年発売 内装はプレミアム仕様",
+        desc: "マヒンドラは2027年4月の発売を予定するグローバルライフスタイルピックアップトラック「スコピオ ライフスタイラー」を発表した。価格は1979万ルピー以下を想定。外観は剛健なデザインだが、内装は大型縦型タッチスクリーンやデジタルメーターを備え、SUVライクな快適性とプレミアム感を追求している。",
+        url: "https://www.thehansindia.com/auto/auto-news/mahindra-to-launch-lifestyler-expected-price-below-rs-1979-lakh-showroom-1110585",
+        source: "The Hans India",
+        date: "2026-08-17",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 58,
+        interiorReason: "Japanese summary explicitly mentions premium interior, large vertical touchscree",
+        imageInterior: false,
+        country: "in",
+        img: "https://assets.thehansindia.com/h-upload/2026/08/17/1690562-mahindra.jpg",
+        note: ""
+    },
+    {
+        id: "cn1444",
+        title: "新型国産BMW X3の公式画像が公開されました",
+        desc: "BMWが2027年モデルのX3の公式画像を公開し、成都モーターショーで初披露、9月に納車を開始。中期改良型のスポーツアップグレード版で、ダストグレーの車体を採用。",
+        url: "https://www.cnbeta.com.tw/articles/tech/1573568.htm",
+        source: "Cnbeta.com.tw",
+        date: "2026-08-17",
+        tags: [],
+    
+        interiorScore: 41,
+        interiorReason: "interior details mentioned in text but image is exterior only",
+        imageInterior: false,
+        country: "cn",
+        img: "https://static.cnbetacdn.com/article/2026/0817/4b9ebcfab78b99c.jpg",
         note: ""
     },
 ];
