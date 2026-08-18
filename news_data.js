@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-18 16:11";
+window.NEWS_UPDATED_AT = "2026-08-19 01:18";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -98806,6 +98806,714 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "cn",
         img: "https://static.cnbetacdn.com/article/2026/0817/4b9ebcfab78b99c.jpg",
+        note: ""
+    },
+    // 2026-08-18 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1631",
+        title: "クラフトワークス製ジムニー専用助手席トレイマット発売工具不要設置丸洗い可能",
+        desc: "カー用品ブランドクラフトワークスがジムニーシリーズ専用助手席オープントレイマットを発売した。自動車整備士が設計したシリコンゴム製で、凹凸滑り止め加工と仕切り付き設計により小物のズレや落下を防ぐ。工具不要で設置でき、防水・防汚仕様のため丸洗い可能だ。参考販売価格は税込み2180円より。",
+        url: "https://news.yahoo.co.jp/articles/d00027c3c1bfd0508dbabd182dd100c00e166c6a?source=rss",
+        source: "レスポンス",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 68,
+        interiorReason: "Interior accessory product (passenger tray mat) with specific material details (",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00000029-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1632",
+        title: "車内ティッシュ収納に最適新作3選で快適空間",
+        desc: "車内用ティッシュ収納新作3種を紹介。EXEAのケースはヘッドレスト取り付けで視界を確保。SEIWAのカバーはダッシュボードでの滑り止めが特徴。EXEAのホルダーはサンバイザー固定に対応。いずれも実用性とインテリアへの馴染みを重視した設計となっている。",
+        url: "https://news.yahoo.co.jp/articles/68ac953ff1c41c5d62d0441da2d2f3d89d985167?source=rss",
+        source: "レスポンス",
+        date: "2026-08-18",
+        tags: ["コックピット"],
+    
+        interiorScore: 78,
+        interiorReason: "article focuses on aftermarket interior accessories (tissue holders) with specif",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00000025-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1633",
+        title: "ジムニーシエラにフォーカルスピーカー装着狭い室内で高音質化",
+        desc: "ジムニーシエラにフォーカル「ユートピアM」3ウェイをWarpsが装着。Aピラーとドアミラー裏を活用し高音質システムを完成させた。",
+        url: "https://news.yahoo.co.jp/articles/5a35ac9392fdce9aaee57ddb0989d8991bc27dff?source=rss",
+        source: "レスポンス",
+        date: "2026-08-18",
+        tags: ["AR", "音響"],
+    
+        interiorScore: 37,
+        interiorReason: "article focuses on aftermarket car audio installation in a small cabin, relevant",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00000012-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1634",
+        title: "BMW X1とボルボXC40の比較で500万円台の輸入コンパクトSUVの違いを解説",
+        desc: "BMWの最小SUV「X1」とボルボのコンパクトクロスオーバー「XC40」を比較した。豊富なパワートレインを展開するX1とXC40のスペックの違いを解説し、500万円台で購入可能な手頃なサイズの輸入コンパクトSUVの特徴や違いを明らかにした。",
+        url: "https://news.yahoo.co.jp/articles/92a9a46d9cc754d2c9dc55d842fedf60b6c87789?source=rss",
+        source: "MotorFan",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-01593721-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1635",
+        title: "サメ肌テクで空気抵抗低減 水泳禁止技術がクルマ空力最前線",
+        desc: "サメのザラザラした皮膚構造をクルマの塗装に応用し、空気抵抗を劇的に低減する技術が注目されている。Cd値の低減は燃費向上に直結するが、揚力とのトレードオフも課題だ。現行プリウスが0.27のCd値を達成するなど、自動車メーカーは空力最適化に全力を注いでいる。",
+        url: "https://news.yahoo.co.jp/articles/9c59b3a52396b246fb73fb7f4aae487c85a98a2f?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 9,
+        interiorReason: "focuses on exterior aerodynamics and shark-skin coating technology; no interior",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00010006-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1636",
+        title: "新型Q3は後席快適6年ぶりにフルモデルチェンジで居住性向上",
+        desc: "アウディ新型Q3は後席を前後スライドさせ、背もたれ角度も調整可能だ。これにより、乗員空間と荷室スペースのバランスを柔軟に最適化できる。",
+        url: "https://news.yahoo.co.jp/articles/cbcaeaf471c6d4930e96c3ac42b2189bf0fbf489?source=rss",
+        source: "VAGUE",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 57,
+        interiorReason: "article discusses rear seat adjustability and cargo space optimization, which ar",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-10449034-vague-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1637",
+        title: "新型キックスに今冬ロッククリーク追加2WDも選択可能で歴代特別仕様車よりおしゃれ",
+        desc: "新型キックスに今冬、特別仕様「ロッククリーク」が追加される。シルバー加飾とラバレッドが個性的で、2WDも選択可能だ。",
+        url: "https://news.yahoo.co.jp/articles/2230744cbc4beeee9301635600ff4aef94e9694d?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 37,
+        interiorReason: "interior trim and cabin image",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00000015-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1638",
+        title: "三菱自動車鴻海OEM調達新型EVASXVR-e2026年内オセアニア発売",
+        desc: "三菱自動車は8月17日、豪州とニュージーランドで新型EV「ASX VR-e」を2026年内に発売すると発表した。鴻海精密工業傘下の鴻華先進科技からOEM調達する。同車は三菱のSUV「ASX」のEV版で、内装には最新のHMIや快適装備を採用し、コックピットデザインも刷新される。",
+        url: "https://news.yahoo.co.jp/articles/1c4d06c5cc2bb72a5023bfc7200bf1edf537a688?source=rss",
+        source: "日刊自動車新聞",
+        date: "2026-08-18",
+        tags: ["HMI", "コックピット", "EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-00689381-netdenjd-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1639",
+        title: "三菱新型BEV ASX VR-e年内オセアニア投入 フォックスコンOEM",
+        desc: "三菱自動車は台湾フォックスコングループのOEM供給により開発した新型電気自動車「ASX VR-e」を、オーストラリアとニュージーランド市場へ年内に投入すると発表した。同車はスモールSUVクラスに位置付けられ、既存のガソリンモデル「ASX」の電気自動車版として展開される。",
+        url: "https://news.yahoo.co.jp/articles/9ce9272a90d495766c6fedec73e50939863ed83b?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-01270352-autocar-000-1-view.png",
+        note: ""
+    },
+    {
+        id: "jp1640",
+        title: "スズキジムニーノマドの機能美とブランド構築の役割",
+        desc: "スズキは本格クロスカントリー軽自動車ジムニーの5ドア版「ジムニーノマド」を発売した。拡幅版のジムニーシエラをベースにホイールベースを延長し、実用性を大幅に向上させた。本モデルは、ジムニーブランドのイメージを築く上で重要な役割を果たす。",
+        url: "https://news.yahoo.co.jp/articles/ceae3c4ff8fd62e5742106238b72ee07fdcf4525?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260818-01269959-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1449",
+        title: "高級車に採用される新素材の車内インテリアが公開",
+        desc: "購入を検討しているが価格が高騰し手が出せない車種について、市場の需給バランスが是正され価格が下落するのを待つべきか議論されている。特に人気モデルや供給不足が続く車種において、適切なタイミングでの購入判断が重要視される。",
+        url: "https://www.jalopnik.com/2238760/which-car-needs-to-depreciate-faster-reader-question/",
+        source: "Jalopnik",
+        date: "2026-08-18",
+        tags: ["新素材"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/which-car-needs-to-hurry-up-and-depreciate-faster/l-intro-1787006985.jpg",
+        note: ""
+    },
+    {
+        id: "us1450",
+        title: "2021ボルボXC90リチャージの5年depreciation価格下落幅",
+        desc: "2021年型ボルボXC90リチャージはオプションなしで約7万ドルの価格帯にあったが、5年間の減価償却により、400馬力のハイブリッドラグジュアリーSUVとして手頃な価格になっている。",
+        url: "https://www.jalopnik.com/2237023/2021-volvo-xc90-recharge-5-year-depreciation/",
+        source: "Jalopnik",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/heres-how-much-a-2021-volvo-xc90-recharge-has-depreciated-in-5-years/l-intro-1786715946.jpg",
+        note: ""
+    },
+    {
+        id: "us1451",
+        title: "2027メルセデスベンツCクラス内装刷新",
+        desc: "メルセデスベンツは2027年モデルのCクラスの内装を刷新した。本記事では、刷新されたインテリアの詳細を写真ギャラリーで公開している。",
+        url: "https://www.caranddriver.com/photos/a73463031/2027-mercedes-benz-c-class-refresh-revealed-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 91,
+        interiorReason: "flagship cabin refresh with clear interior image showing dashboard, display, tri",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/570814f5-0a94-4b45-b419-a89a30eee267.jpg",
+        note: ""
+    },
+    {
+        id: "us1452",
+        title: "トヨタシーホークとタンドラにトレイルハンターオプションパッケージ追加",
+        desc: "トヨタは2027年モデルのシーホークとタンドラに対し、SR5グレードに追加可能なトレイルハンターオプションパッケージを発表した。これは上位グレードではなく既存グレードへの追加オプションとして提供され、オフロード性能や快適装備を強化する内容となっている。",
+        url: "https://www.caranddriver.com/reviews/a73447484/2027-toyota-sequoia-tundra-trailhunter-prototype-drive/",
+        source: "Car and Driver",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/13da9314-b15b-40e4-9b96-84d50792054c.jpg",
+        note: ""
+    },
+    {
+        id: "us1453",
+        title: "新車中古車ともに高止まりする自動車価格の現状とインフレの影響",
+        desc: "自動車価格は過去数年間のインフレにより新車・中古車ともに高止まりしている。データは中古車の供給不足や価格上昇を示しており、消費者の負担増が懸念される。",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/another-study-shows-that-car-prices-remain-wild-45136120?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/08/17/15501/another-study-shows-that-car-prices-remain-wild.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us1454",
+        title: "2027 VWアトラス加飾充実5万3795カナダドルから発売",
+        desc: "2027年型フォルクスワーゲンアトラスは282馬力エンジンと本木目調内装を全車標準装備する。価格は5万3795カナダドルからで、10色アンビエントライトも全車に採用される。",
+        url: "https://www.topspeed.com/2027-volkswagen-atlas-282-hp-three-trims-more-luxurious-cabin/",
+        source: "Top Speed",
+        date: "2026-08-18",
+        tags: ["イルミ"],
+    
+        interiorScore: 60,
+        interiorReason: "text mentions real wood interior and ambient lighting, but image is exterior onl",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/06/image1-11.jpeg",
+        note: ""
+    },
+    {
+        id: "us1455",
+        title: "3輪で快適なクロスカントリーを可能にするCan-Amトライクの静かな支配",
+        desc: "Can-Amの3輪車は、広大な収納スペースと快適性を備え、砂浜から高地の峠まで容易に走行できる。このトライクは、多様な地形に対応する能力を持ち、静かにクロスカントリー旅行をマスターしている。",
+        url: "https://www.topspeed.com/three-wheeler-quietly-masters-cross-country-travel/",
+        source: "Top Speed",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/05/rider-and-passenger-on-a-2025-can-am-spyder-rt-sea-to-sky.jpg",
+        note: ""
+    },
+    {
+        id: "us1456",
+        title: "フォードエクスプローラー警察車両一酸化炭素訴訟で連邦控訴裁判所が再審請求を却下",
+        desc: "フォード・エクスプローラーの排気ガス漏れ訴訟で、連邦控訴裁判所は車両欠陥を否定し再審請求を却下した。元警察官の妻が提起した一酸化炭素中毒による損害賠償請求は、最終的に棄却された。",
+        url: "https://www.carcomplaints.com/news/2026/no-new-ford-explorer-police-suv-carbon-monoxide-trial.shtml",
+        source: "CarComplaints",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 43,
+        interiorReason: "carbon monoxide defect story; no interior image",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.carcomplaints.com/news/images/ford-explorer-carbon-monoxide-lawsuit-appeal.jpg",
+        note: ""
+    },
+    {
+        id: "eu1413",
+        title: "英国政府、EV目標の緩和を迫られるニッサンSunderland工場の危機",
+        desc: "英国政府はゼロエミッション車（ZEV）義務化の諮問を進めるが、変更の必要性は明白で緊急を要する。ニッサンのサウンダーランド工場は主要なEV拠点だが、現在の取引環境が脅威となっている。自動車産業保護のため、政府は目標緩和を検討すべきである。",
+        url: "https://www.autocar.co.uk/opinion/electric-cars/government-must-ease-electric-car-targets-protect-uk-automotive",
+        source: "AUTOCAR UK",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/leaf_production_3.jpg?itok=I8yuaK4e",
+        note: ""
+    },
+    {
+        id: "eu1414",
+        title: "BYD高級車デンスア欧州向けデザイン強化ミラノスタジオ設立",
+        desc: "BYDは高級車ブランドデンスアの欧州向けデザイン強化のため、ミラノにスタジオを設立した。同スタジオは欧州の嗜好やトレンドを反映したデザインや素材の開発を担い、ポルシェやBMWなどの既存高級車ブランドとの競争力を高める。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/byd-designer-egger-milan-studio-help-denza-chase-audi-bmw",
+        source: "AUTOCAR UK",
+        date: "2026-08-18",
+        tags: ["新素材", "バッテリー"],
+    
+        interiorScore: 20,
+        interiorReason: "focus on design studio and brand positioning; no cabin details or interior image",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/denza-gt-2026-jh-10_0.jpg?itok=DqeFksgf",
+        note: ""
+    },
+    {
+        id: "eu1415",
+        title: "EVバッテリーのLFPとNMCの違いと製造プロセス",
+        desc: "EVの心臓部であるバッテリーは、LFPとNMCの2種類が主流だ。両者ともリチウムイオン電池だが、材料や特性に違いがある。LFPは安全性と寿命に優れ、NMCはエネルギー密度が高い。製造プロセスは複雑で、素材選定が性能を左右する。消費者は技術的な詳細よりも、航続距離やコストを重視する傾向がある。",
+        url: "https://www.autocar.co.uk/car-news/technology/lfp-or-nmc-how-my-electric-cars-battery-made-and-do-i-care",
+        source: "AUTOCAR UK",
+        date: "2026-08-18",
+        tags: ["新素材", "EV", "バッテリー", "安全"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/future_cmf-b_ev_platform_electric_renault_5_prototypes.jpg?itok=xa1e1fo8",
+        note: ""
+    },
+    {
+        id: "eu1416",
+        title: "3万ポンドで3台の車、レンジローバーEvoque BMW i3シトロエンC4 Cactus",
+        desc: "3万ポンドでレンジローバーEvoque、BMW i3、シトロエンC4 Cactusの3台が揃う。スタイリッシュなデザインを重視する層向けの実用的な選択肢として紹介されている。",
+        url: "https://www.autoexpress.co.uk/features/370241/three-car-garage-used-bmw-i3-citroen-c4-cactus-range-rover-evoque-ps30k",
+        source: "Auto Express",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--cZ_fb58o--/t_rss_image_w_845/v1787051698/autoexpress/2026/08/3-car%20garage%20for%2030%2C000_pwruar.jpg",
+        note: ""
+    },
+    {
+        id: "cn1445",
+        title: "BYDの「Fang Cheng Bao Ti 7 DM」ロングレンジ版が発売",
+        desc: "BYDの「Fang Cheng Bao Ti 7 DM」長距離版が発売された。50kWhのバッテリーを搭載し、CLTC基準でEV航続距離315kmを実現する。価格は2万8800ドルからとなっている。",
+        url: "https://carnewschina.com/2026/08/18/byds-fang-cheng-bao-launches-ti-7-dm-long-range-edition-with-50-kwh-battery-and-315-km-ev-range/",
+        source: "CarNewsChina - All",
+        date: "2026-08-18",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-105-e1787064314710_webhook_1200x720_q85_1787064764.jpg",
+        note: ""
+    },
+    {
+        id: "cn1446",
+        title: "吉利のE2電気ハッチバックが9月11日にベネルクス諸国で発売",
+        desc: "吉利のE2電気ハッチバックが9月11日、ベネルクス地域で発売される。全長4.1メートルの都市型ドライバーとして提供され、航続距離は最大345kmを誇る。",
+        url: "https://carnewschina.com/2026/08/18/geely-e2-to-arrive-at-benelux-dealers-on-september-11-12/",
+        source: "CarNewsChina - All",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/geely_e2_europe-1_webhook_1500x900_q85_1787052381.jpg",
+        note: ""
+    },
+    {
+        id: "cn1447",
+        title: "華為のexecがAito M9の高級車市場での支配力を強調",
+        desc: "華為の執行役員であるリチャード・ユー氏は、890馬力の「Aito M9」が中国の高級車市場で首位を走っていると表明した。7万ドル以上の車種で最高販売台数を記録し、平均取引価格は9万ドルに達している。",
+        url: "https://carnewschina.com/2026/08/18/himas-890-hp-aito-m9-suv-dominates-chinas-luxury-car-segment-says-huawei-executive/",
+        source: "CarNewsChina - All",
+        date: "2026-08-18",
+        tags: ["AI"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/aito_m9_e-1500x833.jpg",
+        note: ""
+    },
+    {
+        id: "cn1448",
+        title: "吉利、2027年に500Wh/kgの全固体電池の実証導入へ",
+        desc: "吉利控股は2027年、実証検証を経て全固体電池の実証導入を開始する。エネルギー密度500Wh/kgの電池を各ブランドで展開し、次世代EVの航続距離向上と安全性向上を目指す。",
+        url: "https://carnewschina.com/2026/08/18/geely-to-start-pilot-deployment-of-500-wh-kg-solid-state-batteries/",
+        source: "CarNewsChina - All",
+        date: "2026-08-18",
+        tags: ["EV", "バッテリー", "安全"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/geely_sold-state_battery-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1449",
+        title: "元フェラーリデザイナーの設計による奇瑞・ルーキードRXの予約が開始されました",
+        desc: "奇瑞と華為技術の合弁ブランド「ルーキード」のEV「RX」が8月20日より予約開始。元フェラーリデザイナーのヴェルナー・グルーバーがデザインを手掛けた。出力は437kW、最高時速250km/hを達成。6ピストンブレーキを装備し、高性能EVとして注目を集めている。",
+        url: "https://carnewschina.com/2026/08/18/cherys-luxeed-rx-from-ex-ferrari-designer-586-hp-to-start-pre-orders-on-august-20/",
+        source: "CarNewsChina - All",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/61bc040c88db2ba88abc51b6a1142656.jpg",
+        note: ""
+    },
+    {
+        id: "cn1450",
+        title: "リープモーターがアルゼンチン市場に参入、BYDの89％シェアに挑む",
+        desc: "ステランティスの支援を受けたリープモーターがアルゼンチン市場へ参入した。同国EV市場の89%を支配するBYDに対抗する戦略だ。2026年時点で圧倒的なシェアを誇る現地の競合他社に対し、新参者が市場参入を果たした。",
+        url: "https://carnewschina.com/2026/08/18/leapmotor-enters-argentina-to-oppose-byd-that-holds-89-of-the-local-ev-market/",
+        source: "CarNewsChina - All",
+        date: "2026-08-18",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/leapmotor_argentina-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1451",
+        title: "IMモーターズ新型L6予約開始 ジミー・チュウ限定版850km航続",
+        desc: "新型EVセダン「L6」の予約が開始されました。通常版3種とジミー・チュウ監修の限定版2種が用意されています。限定版はダイアナ妃の青サテンをイメージした内装が特徴です。最大航続距離は850kmで800V対応です。",
+        url: "https://cnevpost.com/2026/08/18/im-motors-pre-sales-revamped-l6/",
+        source: "CnEVPost - All",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        interiorScore: 57,
+        interiorReason: "The article describes a specific interior design theme (Diana's blue satin) for",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081814071496.jpg",
+        note: ""
+    },
+    {
+        id: "cn1452",
+        title: "BYDの大型SUV「豹5」が成都モーターショーで世界初公開",
+        desc: "豹の大型6人乗りPHEV SUV「泰9」が成都ショーで初公開された。全長5,270mmで同ブランド最大級だ。 1.5Lエンジンと前後モーターを組み合わせ、LFPバッテリー66.48kWhを搭載する。EV航続310kmを実現する。",
+        url: "https://cnevpost.com/2026/08/18/byd-fang-cheng-bao-to-debut-tai-9-chengdu-show/",
+        source: "CnEVPost - All",
+        date: "2026-08-18",
+        tags: ["EV", "バッテリー"],
+    
+        interiorScore: 21,
+        interiorReason: "article focuses on exterior dimensions, powertrain specs, and sales debut; no in",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081813285368.jpg",
+        note: ""
+    },
+    {
+        id: "cn1453",
+        title: "BYDの新型SUV「唐」が成都モーターショーで初公開",
+        desc: "BYDは成都モーターショーで新型「唐」SUVを初公開した。全長5,045mmの5人乗りで、第2世代ブレードバッテリーとフラッシュ充電技術を搭載。最大航続距離は850kmに達し、DiSus-Aインテリジェントボディコントロールシステムも装備する。",
+        url: "https://cnevpost.com/2026/08/18/byd-3rd-gen-tang-debut-chengdu-auto-show-aug-21/",
+        source: "CnEVPost - All",
+        date: "2026-08-18",
+        tags: ["EV", "バッテリー"],
+    
+        interiorScore: 21,
+        interiorReason: "article focuses on exterior debut, range, and battery tech; no interior details",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081809282040.jpg",
+        note: ""
+    },
+    {
+        id: "cn1454",
+        title: "小鵬自動車、フランスで累計6000台の納車を達成。海外販売記録を更新",
+        desc: "中国のEVメーカーである小鵬汽車（XPENG）はフランス市場で累計6000台の納車数を達成し、海外販売で過去最高を記録しました。最新納車されたのはP7+セダンで、顧客は39歳の生成AI専門家です。この実績は欧州でのブランド認知度向上を示しています。",
+        url: "https://cnevpost.com/2026/08/18/xpeng-6000-delivery-milestone-france/",
+        source: "CnEVPost - All",
+        date: "2026-08-18",
+        tags: ["AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081805225145.jpg",
+        note: ""
+    },
+    {
+        id: "in1501",
+        title: "スコダスラビア改良型、内装にベージュレザーシートと10.25インチデジタルメーター採用",
+        desc: "スコダの中型セダン「スラビア」の改良型が公開された。外観はグリルやヘッドランプを刷新し、360度カメラなどを追加。内装はベージュのレザーシートと、大型の10.25インチデジタルメーターを採用。インフォテインメントシステムはGoogleクラウド搭載のAIアシスタントに対応し、快適装備が強化された。",
+        url: "https://www.autocarindia.com/auto-images/skoda-slavia-facelift-image-gallery-440431",
+        source: "Autocar India - All",
+        date: "2026-08-18",
+        tags: ["コネクテッド", "AI", "シート", "新素材"],
+    
+        interiorScore: 58,
+        interiorReason: "Japanese summary details specific interior features (beige leather seats, 10.25-",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260818_135339_7bf69ead.jpg",
+        note: ""
+    },
+    {
+        id: "in1502",
+        title: "スコダ新型スーパーブディーゼルをインドで先行公開2027年発売予定",
+        desc: "チェコの自動車メーカー、スコダはフラッグシップモデルの第4世代スーパーブをインドで先行公開した。2027年上半期の発売を見据え、最高グレードのラウリンアンドクレメント（L&K）仕様を完全組み立て品（CBU）として輸入する。顧客は予約登録が可能となっている。",
+        url: "https://www.autocarindia.com/car-news/skoda-superb-diesel-revealed-in-india-ahead-of-2027-launch-440523",
+        source: "Autocar India - All",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260818_150307_311dd3b5.jpg",
+        note: ""
+    },
+    {
+        id: "in1503",
+        title: "インドのKiaディーラーが1日で150台のEV新車納車を記録",
+        desc: "インドのKiaディーラー「Incheon Kia」は8月17日、コチで新型EV「Syros EV」150台を同日納車し、単一モデルの1日納車数としてインド国内記録を樹立した。",
+        url: "https://www.autocarindia.com/car-news/kia-dealer-sets-national-record-delivering-150-syros-evs-in-one-day-440525",
+        source: "Autocar India - All",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260818_120348_2125529b.jpeg",
+        note: ""
+    },
+    {
+        id: "in1504",
+        title: "ヤマハ125ccスクーター新型カラーとテック装備で2026年モデル刷新",
+        desc: "ヤマハはインド向け125ccスクーターを更新し、RayZRにカラーTFTディスプレイとナビゲーションを追加した。両車種は新カラーを採用し、内装素材の変更は明記されていない。",
+        url: "https://gaadiwaadi.com/2026-yamaha-rayzr-125-fi-fascino-125-fi-hybrid-get-new-colours-tech-updates/",
+        source: "GaadiWaadi",
+        date: "2026-08-18",
+        tags: ["ディスプレイ", "コネクテッド", "新素材"],
+    
+        interiorScore: 40,
+        interiorReason: "scooter interior tech update with TFT display and navigation, relevant for HMI a",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/Fascino-S-Metallic-Orangish-Gray-SPL-2026-Yamaha.jpg",
+        note: ""
+    },
+    {
+        id: "in1505",
+        title: "新型プルスアル125にナビ機能付きTFTコンソールを搭載",
+        desc: "バジャージ・オートが新型プルスアル125の試作車を公開した。TFTインスツルメントクラスター、再設計されたフレーム、新開発のエンジンが特徴だ。既存モデルではLEDヘッドランプや新カラーリングを採用しており、市場投入に向けて準備を進めている。",
+        url: "https://gaadiwaadi.com/new-gen-bajaj-pulsar-125-spotted-with-tft-console-ride-modes-navigation/",
+        source: "GaadiWaadi",
+        date: "2026-08-18",
+        tags: ["コネクテッド", "センターコンソール"],
+    
+        interiorScore: 37,
+        interiorReason: "motorcycle TFT console and navigation features are relevant to HMI and display p",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/new-Bajaj-pulsar-125-spied.-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1506",
+        title: "2026年以降に登場する7人乗りハイブリッドSUV4車種注目",
+        desc: "MG、Kia、Renault、Nissanが中心となり、2026年から2027年にかけて7人乗りハイブリッドSUVが相次いで投入される。家族向け3列シートモデルの市場が拡大しており、各社が快適な内装と実用性を重視した新車を準備している。",
+        url: "https://gaadiwaadi.com/upcoming-7-seater-hybrid-suvs-in-2026-27-4-new-models-to-watch/",
+        source: "GaadiWaadi",
+        date: "2026-08-18",
+        tags: ["シート"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2025/07/Renault-Boreal-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1507",
+        title: "7人乗りSUV2車種が間もなく発売 価格と主要詳細公開",
+        desc: "MG Motor Indiaが中国仕様Wuling Starlight 560をベースにしたHector Tomahawk、およびKia Sorentoの2台の新型7人乗りSUVが間もなくインドで発売される。両車とも公式予約が開始されており、広々とした室内空間と快適なシート配置を特徴とする。",
+        url: "https://www.indiacarnews.com/news/2-new-7-seater-suvs-launching-within-days-price-key-details-68732/",
+        source: "IndiaCarNews",
+        date: "2026-08-18",
+        tags: ["AR", "シート"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/Kia-Sorento-Bookings.webp",
+        note: ""
+    },
+    {
+        id: "in1508",
+        title: "ジープがコンパス特別版をインドで85台限定発売",
+        desc: "ジープは創業85周年を記念し、インド市場でコンパスの特別版「85th Anniversary Edition」を発売した。最高位モデルS(O)をベースに、限定85台をRs26.70ラークから販売する。",
+        url: "https://www.indiacarnews.com/news/only-85-units-new-special-edition-suv-launched-in-india-68728/",
+        source: "IndiaCarNews",
+        date: "2026-08-18",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/New-Jeep-Compass.webp",
+        note: ""
+    },
+    {
+        id: "in1509",
+        title: "2026年式シュコダ・スラビアフェイスリフトでリアシートマッサージ機能や8速ATを採用",
+        desc: "インドで発表された2026年式シュコダ・スラビアのフェイスリフトモデルは、1.0リッターエンジンに8速ATを採用し、360度カメラや10.25インチデジタルメーターなどを追加した。特筆すべきは、同クラスでは珍なリアシートマッサージ機能の搭載で、快適装備を強化し競合車との差別化を図っている。",
+        url: "https://www.autopunditz.com/post/2026-skoda-slavia-facelift-unveiled-features-variants",
+        source: "Auto Punditz",
+        date: "2026-08-18",
+        tags: ["シート"],
+    
+        interiorScore: 82,
+        interiorReason: "rear massage seats and digital cluster details; image shows cabin interior and i",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_2c08f10fb8864e39a9ed648732ece7d4~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1457",
+        title: "カリフォルニアEV10%で9GW供給 蓄電機能搭載",
+        desc: "カリフォルニア州では駐車中のEVを大規模なエネルギー貯蔵源として活用する可能性がある。ただし、EV所有者が参加しやすくするためには、電力会社による参加プロセスの大幅な簡素化が課題となっている。",
+        url: "https://electrek.co/2026/08/18/just-10-percent-of-californias-evs-could-provide-9-gw-of-grid-power/",
+        source: "Electrek",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2025/11/2026_LEAF-image.jpg?quality=82&#038;strip=all&#038;w=1500",
+        note: ""
+    },
+    {
+        id: "us1458",
+        title: "ステアレステスラサイバーキャブ間もなく公開",
+        desc: "テスラはオースティンでステアリングホイールとペダルを備えない初の車両、サイバーキャブの一般公開を今月中に準備していると従業員に伝えた。この車両は同社が製造した中で最も刺激的さに欠ける存在と見なされている。",
+        url: "https://electrek.co/2026/08/17/tesla-cybercab-launch-least-exciting-vehicle-ever/",
+        source: "Electrek",
+        date: "2026-08-18",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "steering-wheel-free cabin concept with visible interior layout and display",
+        imageInterior: true,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/02/Tesla-Cybercab-hero.jpg?quality=82&#038;strip=all&#038;w=1600",
+        note: ""
+    },
+    {
+        id: "eu1417",
+        title: "GMが2027年モデルより全EVでテスラのNACS充電ポートへ移行",
+        desc: "GMは2027年モデル以降、キャデラック、シボレー、GMCの全EVにおいてテスラのNACS充電規格へ統一する。これにより、アダプターなしでNACS充電スタンドでの充電が可能になる。",
+        url: "https://www.electrive.com/2026/08/18/gm-to-switch-to-native-nacs-charging-ports-for-the-2027-model-year/",
+        source: "Electrive",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/general-motors-gm-nacs-ladeport-usa-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1418",
+        title: "フェラーリ初EVルチェがオークションで4000万ドルの記録的落札価格を樹立",
+        desc: "フェラーリが発表した初の電気自動車「ルチェ」が、モンテレーでのオークションで4000万ドルで落札された。これは当初の見積もり額の36倍以上に相当し、デビュー時に大きな批判を浴びたにもかかわらず、記録的な価格を樹立した。",
+        url: "https://www.electrive.com/2026/08/18/ferraris-debut-ev-breaks-auction-records/",
+        source: "Electrive",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/05/ferrari-luce-2026-17-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1419",
+        title: "ルシッドが欧州向け電気SUVグラビティを新仕様で発売",
+        desc: "ルシッドは欧州市場向け電気SUV「グラビティ」の新仕様を発表した。ベース価格を5000ユーロ引き下げたグラビティ・ツーリングは9万4900ユーロから提供される。2つのモーター仕様を含む4つの装備ラインが用意され、内装や装備の選択肢が拡大した。",
+        url: "https://www.electrive.com/2026/08/18/lucid-gravity-new-trim-logic-with-a-e94900-price-tag/",
+        source: "Electrive",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2025/09/lucid-gravity-2025-016-min-400x266.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1420",
+        title: "吉利2028年よりボルボ工場での高級車生産開始",
+        desc: "吉利は2028年から欧州のボルボ工場にて高級車種の生産を開始する計画である。これは中国の自動車メーカーが、ボルボの生産ネットワークをグループ他ブランドへ開放する取り組みを強化するものである。生産対象となる具体的なモデルの詳細は未定である。",
+        url: "https://www.electrive.com/2026/08/18/geely-to-produce-vehicles-in-volvo-plants-from-2028/",
+        source: "Electrive",
+        date: "2026-08-18",
+        tags: [],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/zeekr-geely-werk-electrive-400x225.webp",
+        note: ""
+    },
+    {
+        id: "eu1421",
+        title: "新型ヒュンダイアイオニックスUK発売価格22245ポンドから308マイル航続",
+        desc: "ヒュンダイが新型アイオニックスを英国で発売した。価格は22245ポンドからで、61kWhバッテリーを搭載し最大308マイルの航続距離を実現する。N Line Evoスタイルを採用し、モダンなテクノロジーを備える。",
+        url: "https://electriccarsreport.com/2026/08/new-hyundai-ioniq-3-arrives-in-the-uk-from-22245-with-up-to-308-miles-of-range/",
+        source: "Electric Cars Report",
+        date: "2026-08-18",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Hyundai-IONIQ-3.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1422",
+        title: "CATL、主要20工場でのカーボンニュートラル達成、2035年バリューチェーン全体で目標",
+        desc: "CATLは主要な20の電池工場においてカーボンニュートラルを達成した。同社は2035年までにバリューチェーン全体のカーボンニュートラル化を目指している。この取り組みは、自動車業界における環境配慮の強化を示す。",
+        url: "https://electriccarsreport.com/2026/08/catl-achieves-carbon-neutrality-across-core-operations-targets-full-value-chain-by-2035/",
+        source: "Electric Cars Report",
+        date: "2026-08-18",
+        tags: ["バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/CATL.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in1510",
+        title: "インドSUV市場で内装装備の標準化が進み購入者の期待値が上昇",
+        desc: "インド市場ではハイブリッドSUVの普及により、通気性シートやパノラミックサンルーフ、360度カメラなどの装備が標準化し、購入者の期待値が上昇している。ヒュンダイ・クレタやキア・セルトスなどの中規模SUVが基準となり、安全機能もオプションから必須へ移行。",
+        url: "https://www.motorbeam.com/modern-suvs-changed-indian-car-buyers-expectations/",
+        source: "MotorBeam",
+        date: "2026-08-18",
+        tags: ["シート", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "article discusses interior feature standardization (ventilated seats, panoramic",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.motorbeam.com/wp-content/uploads/Cars24-SUV.jpg",
         note: ""
     },
 ];
