@@ -1292,6 +1292,14 @@ h1 {
         let NEWS_DATA = [];
         let visibleLimit = 30;
 
+        function getTodayKey() {
+            const jst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+            const year = jst.getUTCFullYear();
+            const month = String(jst.getUTCMonth() + 1).padStart(2, "0");
+            const day = String(jst.getUTCDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        }
+
         let NEW_DATE_RANGE = { start: null, end: null };
         const NEW_DATE_RANGE_OVERRIDE = { start: "2026-08-18", end: "2026-08-18" };
         const ONE_DAY_NEW_DATE_RANGE_OVERRIDES = {
