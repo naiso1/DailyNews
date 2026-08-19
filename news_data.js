@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-19 01:18";
+window.NEWS_UPDATED_AT = "2026-08-20 01:26";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -99514,6 +99514,720 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "in",
         img: "https://www.motorbeam.com/wp-content/uploads/Cars24-SUV.jpg",
+        note: ""
+    },
+    // 2026-08-19 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1641",
+        title: "fcl.が耐荷重30kgの折りたたみトランク収納ボックス発売",
+        desc: "車・バイク用カスタムパーツブランドfcl.は、トランク内の荷崩れを防ぐ大容量の折りたたみトランク収納ボックスの販売を開始した。同製品は走行中のカーブでも荷物が散らからない設計で、耐荷重は30kg。車種を選ばないブラックデザインが特徴であり、ラゲッジスペースの整理整頓に役立つアイテムとして提供される。",
+        url: "https://news.yahoo.co.jp/articles/e022c518234494f661e37c6cdb0073cb801824e8?source=rss",
+        source: "レスポンス",
+        date: "2026-08-19",
+        tags: ["カスタマイズ"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00000029-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1642",
+        title: "キャデラック電動SUVエスカレードIQ米国で新カスタマイズプログラム発表",
+        desc: "キャデラックは電動SUV「エスカレードIQ」向けに、手作業による高品質仕上げと専任コンシェルジュによるサポートを提供する新カスタマイズプログラムを米国で発表した。160色超の外装色と44色の内装カラーから選べ、車両には固有のビルダーズバッジが付与される。",
+        url: "https://news.yahoo.co.jp/articles/f5170080d23187d915ae2cf96447b9f3e30566ad?source=rss",
+        source: "レスポンス",
+        date: "2026-08-19",
+        tags: ["EV", "カスタマイズ"],
+    
+        interiorScore: 42,
+        interiorReason: "interior color options mentioned but image is exterior only",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00000021-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1643",
+        title: "次期トヨタシエンタに新1.5Lハイブリッド採用で2028年フルモデルチェンジ予定",
+        desc: "トヨタはコンパクトミニバン「シエンタ」の次期モデルを2028年頃にフルモデルチェンジする予定。新開発の1.5Lハイブリッドシステムを採用し、走行性能の向上が期待される。2022年モデルチェンジ以来の実用性と燃費性能の良さを維持しつつ、内装や快適装備も進化させる方針。",
+        url: "https://news.yahoo.co.jp/articles/77e3daaf95b0787f336de17faa8c906a0c025c20?source=rss",
+        source: "carview!",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00010010-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1644",
+        title: "日産フェアレディZマイチェンで歴代ZのDNAを復活させる内外装の進化",
+        desc: "日産はフェアレディZのマイナーチェンジモデルを日本市場で発売する。フロントグリルに初代S30型を、新ホイールにZ31型をオマージュしたデザインを採用し、歴代Zへの敬意を示す。内装や加飾にも歴代モデルの要素を取り入れ、スポーツクーペとしてのアイデンティティを強化している。",
+        url: "https://news.yahoo.co.jp/articles/5e653d98be42f7501284a2abb2463fdb1fc04daa?source=rss",
+        source: "carview!",
+        date: "2026-08-19",
+        tags: [],
+    
+        interiorScore: 60,
+        interiorReason: "article discusses interior design updates and trim changes for the Fairlady Z, b",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00010009-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1645",
+        title: "日産が中国市場向け新型PHEVSUVNX7を世界初公開",
+        desc: "日産自動車は中国市場向けの新型電動SUV「NX7」を正式発表した。東風日産の新エネルギー車ラインアップを拡充するモデルで、先に公開された上級SUV「NX8」の下位に位置する。エクストレイル級のサイズを備え、日本市場への導入有無も注目されている。",
+        url: "https://news.yahoo.co.jp/articles/dedde9faf5887f778943250128fc878bf5a787cf?source=rss",
+        source: "carview!",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00010004-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1646",
+        title: "新車価格3倍で取引されるE46型M3 CSLがMの真骨頂と称される理由",
+        desc: "BMWのMバッジがSUVやEVまで広がり便利アイコン化している現状に対し、筆者はE46型M3 CSLをMの真骨頂と評価する。新車価格の3倍で取引されるこのモデルは、野蛮とも思える走りへの執着を示し、現代のM車とは異なる本質的な性能と魅力を体現している。",
+        url: "https://news.yahoo.co.jp/articles/859b849a51e74bf42d6045abdc2524ef3e2e18ed?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00010005-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1647",
+        title: "スペーシア専用ダッシュボードトレイ発売スマホスタンド機能付き",
+        desc: "スズキ・スペーシア向けにCRAFTWORKSが専用ダッシュボードシリコントレイを2026年8月に発売する。価格は3180円からで、専用設計によりフィット感と収納力を両立。ABS樹脂とシリコンゴム製で滑り止めマット付き。スマホスタンド機能やケーブルホルダーも備え、小物の散乱防止に役立つ。",
+        url: "https://news.yahoo.co.jp/articles/b7aaf64d4f86c5e9a8ddab3256c4d34037f31a40?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-19",
+        tags: ["コックピット"],
+    
+        interiorScore: 90,
+        interiorReason: "Aftermarket accessory for dashboard storage, but provides specific material (ABS",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-00000019-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1648",
+        title: "ベントレー初EVトルカル世界初メリノウール採用持続可能ラグジュアリー",
+        desc: "ベントレー初EVトルカルは9月23日にロンドンで世界初公開される。世界初の100%メリノウール素材と新ウッドパネルを採用し、持続可能なラグジュアリーを提示する。",
+        url: "https://news.yahoo.co.jp/articles/c826157c03024869e3e8fd06fbf6d63b8f213856?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-19",
+        tags: ["新素材", "EV"],
+    
+        interiorScore: 88,
+        interiorReason: "interior teaser image showing door panel, wood trim, ambient lighting, and wool",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-01270507-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1649",
+        title: "メルセデスCクラスマイナーチェンジEV統一デザインと新ステアリング採用",
+        desc: "メルセデス・ベンツはCクラスのマイナーチェンジモデルを発表した。EV版とICE版のデザインを統一し、新しいステアリングホイールを採用した。これにより、内外装の質感が向上し、先進技術も強化された。",
+        url: "https://news.yahoo.co.jp/articles/c2a3303630ae46e1334f98b4d95a3ac231b1c72c?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        interiorScore: 57,
+        interiorReason: "article mentions new steering wheel and infotainment update, but image is exteri",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260819-01270389-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1459",
+        title: "BMW X3 13台がステアリング不具合でリコール 操舵力不足の恐れ",
+        desc: "BMWは米国市場のX3 13台をリコールする。ステアリングスピンドルとコラムの接続が仕様外となり、操舵力が不足する恐れがある。2024-2026年式のsDrive30i、30 xDrive、M50 xDriveが対象。事故報告はないが、ディーラーで点検・交換が行われる。",
+        url: "https://www.carscoops.com/2026/08/bmw-x3-recall-steering/",
+        source: "CarScoops",
+        date: "2026-08-19",
+        tags: [],
+    
+        interiorScore: 67,
+        interiorReason: "steering column defect recall with clear interior image showing steering wheel a",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/BMW-X3-steering-wheel-recall-1-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1460",
+        title: "愛おしいほど憎たらしい車たち トヨタが多数登場",
+        desc: "読者からの質問に対し、トヨタ車が多く挙げられた。自動車内装やシートに関する具体的な情報は記載されていないため、記事全体の傾向を要約した。",
+        url: "https://www.jalopnik.com/2239599/cars-you-hate-to-love-reader-answer/",
+        source: "Jalopnik",
+        date: "2026-08-19",
+        tags: ["シート"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/these-are-the-cars-you-hate-to-love/l-intro-1787088209.jpg",
+        note: ""
+    },
+    {
+        id: "us1461",
+        title: "中古車価格高騰で3年落ち平均価格が2019年比9000ドル超上昇",
+        desc: "2019年から3年落ち中古車の平均価格が9000ドル以上上昇した背景には、サプライチェーンの混乱や半導体不足による新車供給減がある。この傾向は購入予算を2万ドル以下に抑える層に大きな負担を強いている。市場の需給逼迫が続く中、中古車価格の高止まりは一般消費者の自動車購入意欲を抑制する要因となっている。",
+        url: "https://www.jalopnik.com/2239937/average-price-3-year-old-used-cars-9000/",
+        source: "Jalopnik",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/the-average-price-of-3-year-old-used-cars-has-increased-by-over-9000-since-2019-because-we-live-in-hell/l-intro-1787148453.jpg",
+        note: ""
+    },
+    {
+        id: "us1462",
+        title: "自動車に第3軸を追加する必要がある車はどれか",
+        desc: "自動車に第3軸を追加する可能性について議論されている。第3軸は前部、後部、または中央に配置できる。これは、車両の性能や機能性を向上させるためのアイデアとして提案されている。",
+        url: "https://www.jalopnik.com/2239836/car-needs-another-axle-reader-question/",
+        source: "Jalopnik",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/what-car-needs-to-gain-another-axle/l-intro-1787143144.jpg",
+        note: ""
+    },
+    {
+        id: "us1463",
+        title: "電子ドアハンドル故障時の脱出方法と安全対策",
+        desc: "電子ドアハンドルは事故時に機能しないリスクがある。BMWやC8 Corvetteなど車種によりマニュアルリリースの位置が異なるため、所有者マニュアルで事前に確認することが重要だ。",
+        url: "https://www.jalopnik.com/2237712/electronic-door-handle-failure-how-to-escape-car/",
+        source: "Jalopnik",
+        date: "2026-08-19",
+        tags: ["安全"],
+    
+        interiorScore: 70,
+        interiorReason: "The article addresses a critical safety and UX failure mode (electronic door han",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/so-your-electronic-door-handles-failed-and-you-want-out-of-your-car-heres-what-to-do/l-intro-1786830565.jpg",
+        note: ""
+    },
+    {
+        id: "us1464",
+        title: "SCCA規定で1965年Shelby GT350のリアシート撤去が採用",
+        desc: "SCCAはレース参戦車両の基準が厳格であり、1965年Shelby GT350のリアシート撤去を義務付けた。これにより車両の重量配分や安全性が調整され、競技規定への適合が図られた。",
+        url: "https://www.jalopnik.com/2238074/shelby-gt350-1965-no-back-seat-scca-two-seater-rule/",
+        source: "Jalopnik",
+        date: "2026-08-19",
+        tags: ["シート", "安全"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/why-the-scca-made-the-1965-shelby-gt350-get-rid-of-its-back-seat/l-intro-1786973584.jpg",
+        note: ""
+    },
+    {
+        id: "us1465",
+        title: "Flockカメラの誤認識を誘発する車体ラップの出現",
+        desc: "Flockが運用するナンバープレート読み取りカメラの誤認識や誤検知を誘発する車体ラップが話題となっている。同カメラは法執行の精度向上を目的として展開されたが、誤作動や監視への反発が指摘されており、このラップは監視回避の手段として注目されている。",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/fooling-flock-the-car-wrap-that-blinds-plate-cameras-45136129?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/06/15/16271/report-denver-shuts-down-flock-cameras-auto-theft-declines.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us1466",
+        title: "2万ドル以下で手に入るBMW E46 M3の液压ステアリングと直6エンジン",
+        desc: "BMW E46 M3は、3.2リッター直列6気筒エンジンと油圧ステアリングを備え、現代のBMW M車よりも優れた操舵性を実現する。中古車市場では価値が上昇しており、2万ドル以下で購入可能だ。",
+        url: "https://www.topspeed.com/german-sports-coupe-out-steers-modern-m-cars-under-20000/",
+        source: "Top Speed",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2023/12/resize_download-8-1.jpeg",
+        note: ""
+    },
+    {
+        id: "us1467",
+        title: "1万7千ドル以下で快適なアメリカンVツインクルーザー",
+        desc: "1万7千ドル以下の価格帯で提供されるアメリカンVツインクルーザーは、快適性と装備を兼ね備えている。この車種は、手頃な価格でありながら、長距離走行にも耐えうる快適なシートや充実した機能を提供し、コストパフォーマンスに優れている。",
+        url: "https://www.topspeed.com/luxury-cruiser-nails-sweet-spot-between-affordability-and-comfort/",
+        source: "Top Speed",
+        date: "2026-08-19",
+        tags: ["シート"],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2024/04/2025-super-scout-headlight-close-up-detail.jpg",
+        note: ""
+    },
+    {
+        id: "eu1423",
+        title: "新型2027年ヒュンダイ・トゥソン、大型タッチスクリーンを搭載し内装一新",
+        desc: "現代自動車がベストセラーSUV「タクソン」の5世代目を発表した。新デザイン言語「Art of Steel」を採用し、4x4風の力強い外観へ変更した。全長が180mm延長されDセグメントへ移行。車内はミニマルなインテリアに刷新され、大型タッチスクリーンとデジタルメーターを配置。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/bold-new-look-reinvented-2027-hyundai-tucson",
+        source: "AUTOCAR UK",
+        date: "2026-08-19",
+        tags: ["AR", "ディスプレイ"],
+    
+        interiorScore: 61,
+        interiorReason: "Japanese summary confirms major interior refresh with large touchscreen and digi",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/hyundai-tucson-front-three-quarters.jpg?itok=1TOisWei",
+        note: ""
+    },
+    {
+        id: "eu1424",
+        title: "Voltempoが自動運転トラックのキャブ撤去で容量15%増のスマートトレーラー開発",
+        desc: "Voltempoはキャブ撤去型自動運転トラックを開発し、重量軽減と積載量15%向上を実現する。全長15.6mのスマートトレーラーは英国でテストされ、物流効率改善が期待される。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/uk-firms-self-driving-lorry-ditches-cab-more-capacity-less-weight",
+        source: "AUTOCAR UK",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/voltempo-prototype.jpg?itok=Jyzj0Dxm",
+        note: ""
+    },
+    {
+        id: "eu1425",
+        title: "JLR元デザイン責任者マクゴヴァン氏、離脱後の展望と自動車デザインへの情熱を語る",
+        desc: "ジャガー・ランドローバーの元デザイン責任者ジェリー・マクゴヴァン氏が、離脱に関する誤情報について言及し、今後の活動について語った。彼は自動車デザインへの情熱を強調し、素材やコックピット設計などの詳細な議論を展開した。",
+        url: "https://www.autocar.co.uk/car-news/features/you-havent-seen-peak-yet-gerry-mcgovern-life-after-jlr",
+        source: "AUTOCAR UK",
+        date: "2026-08-19",
+        tags: ["コックピット", "新素材"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/sjp01688a.jpg?itok=IhlakD4e",
+        note: ""
+    },
+    {
+        id: "eu1426",
+        title: "実用派日産Qashqaiに1万1000ポンド値引き",
+        desc: "人気クロスオーバーSUVの日産Qashqaiに最大1万1000ポンドの値引きキャンペーンが実施されている。価格改定により実用性とコストパフォーマンスが向上し、購入検討層に魅力的なオファーとなっている。",
+        url: "https://www.autoexpress.co.uk/nissan/qashqai/370249/car-deal-alert-ps11k-practical-nissan-qashqai",
+        source: "Auto Express",
+        date: "2026-08-19",
+        tags: ["AI"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--uyaIIUtX--/t_rss_image_w_845/v1723741427/Nissan%20Qashqai%20N%20Design%20e-Power-13.jpg",
+        note: ""
+    },
+    {
+        id: "cn1455",
+        title: "ブイックが新型EV「Electra L7」を中国で発売。航続距離は702km",
+        desc: "ブイックは新型EV「Electra L7」を中国市場で発売した。価格は2万6500ドルから。Momenta R6モデルを搭載し、航続距離は702kmを達成。",
+        url: "https://carnewschina.com/2026/08/19/buick-electra-l7-ev-officially-launched-in-china-starting-from-26500-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-124_webhook_1350x810_q85_1787145813.jpg",
+        note: ""
+    },
+    {
+        id: "cn1456",
+        title: "世界最長EV航続505kmのSkynomad N70 Max車内公開",
+        desc: "小米は増程車「Skynomad N70 Max」の車内を公開した。最大乗員空間1410mm、最大積載量2425Lの広々とした室内が特徴。76kWhバッテリーでCLTC基準505kmのEV航続を実現し、世界最長を記録する。価格は25万9900元。",
+        url: "https://carnewschina.com/2026/08/19/xiaomi-skynomad-n70-max-erev-with-worlds-longest-ev-range-has-its-interior-revealed/",
+        source: "CarNewsChina - All",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        interiorScore: 89,
+        interiorReason: "interior reveal with clear cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/20260715-e58c97e4baac-e5b08fe7b1b3e6be8ee7a88be59381e989b43064-e68bb7e8b49d-1349x900.jpg",
+        note: ""
+    },
+    {
+        id: "cn1457",
+        title: "蔚来のバッテリー交換資産が国有企業へ譲渡され、政府が支援を表明",
+        desc: "蔚来（NIO）が電池交換ステーションの資産を国有企業へ譲渡した。これにより政府の支援が明確化された。自動車内装やシート関連の情報はないため、記事全体を要約した。",
+        url: "https://carnewschina.com/2026/08/19/nio-secures-government-support-as-battery-swap-assets-transfer-to-state-owned-enterprise/",
+        source: "CarNewsChina - All",
+        date: "2026-08-19",
+        tags: ["シート", "EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-121.png",
+        note: ""
+    },
+    {
+        id: "cn1458",
+        title: "Epicland X9 EREVの予約開始。価格は4万4100ドル。CATL製バッテリーを搭載。",
+        desc: "Epicland X9の予約販売が開始された。価格は4万4100ドル。CATL製の74kWhバッテリーを搭載し、EVの航続距離は465km。Huawei HarmonySpaceコックピットを備え、車内インフラと快適装備が強化されている。",
+        url: "https://carnewschina.com/2026/08/19/epicland-x9-erev-pre-sales-begin-at-44100-usd-featuring-74-kwh-catl-battery-and-465-km-ev-range/",
+        source: "CarNewsChina - All",
+        date: "2026-08-19",
+        tags: ["AR", "コックピット", "EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-113-1378x900.png",
+        note: ""
+    },
+    {
+        id: "cn1459",
+        title: "NIO ET5ツーリング改良型のテスト走行、12月の武漢でのNIO Dayで発表か",
+        desc: "ニオは改良型ET5ツーリングのテスト走行画像を公開した。7月の販売台数は前年比64.7%減の1561台と低迷しており、12月に湖北武漢で開催される「Nio Day」での発表が期待されている。",
+        url: "https://cnevpost.com/2026/08/19/facelifted-nio-et5-touring-road-tests/",
+        source: "CnEVPost - All",
+        date: "2026-08-19",
+        tags: [],
+    
+        interiorScore: 8,
+        interiorReason: "article is about a facelifted exterior and sales context; no interior details or",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081913571462.jpg",
+        note: ""
+    },
+    {
+        id: "cn1460",
+        title: "奇瑞のロボット部門「アイモガ」がIPO準備 来年1万台納車目標",
+        desc: "奇瑞汽車のロボット部門「アイモガ」がIPOを目指し、複数の上場先と協議中。来年の納車台数目標は1万台。詳細はCnEVPostで確認できる。",
+        url: "https://cnevpost.com/2026/08/19/chery-aimoga-prepares-ipo/",
+        source: "CnEVPost - All",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081912293259.jpg",
+        note: ""
+    },
+    {
+        id: "cn1461",
+        title: "セルスは、部品の価格高騰と資産の減損により、上半期に損失を計上した。",
+        desc: "セルスは上半期に損失を計上した。電池用リチウム炭酸塩の平均日価は132.2%上昇し、半導体も構造的不足と価格急騰に見舞われたことが要因だ。",
+        url: "https://cnevpost.com/2026/08/19/seres-swings-to-loss-h1-2026/",
+        source: "CnEVPost - All",
+        date: "2026-08-19",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081911504570.jpg",
+        note: ""
+    },
+    {
+        id: "cn1462",
+        title: "ブイックEV「Electra L7」800Vプラットフォーム搭載で中国発売",
+        desc: "ブイックは中国市場向けにEV「Electra L7」を発売した。800Vプラットフォームを採用し、10分の急速充電で450kmの航続距離を追加可能。価格は2万5000ドルからで、航続距離は702kmを達成。",
+        url: "https://cnevpost.com/2026/08/19/buick-launches-electra-l7-bev-china/",
+        source: "CnEVPost - All",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081909140616.jpg",
+        note: ""
+    },
+    {
+        id: "cn1463",
+        title: "VW安徽工場が10万台目のEV生産を達成、XPengと共同開発のID.UNYX08",
+        desc: "フォルクスワーゲン安徽工場で、XPengと共同開発したEV「ID.UNYX」の10万台目が生産されました。2年余りの生産期間を経て達成しました。",
+        url: "https://cnevpost.com/2026/08/19/vw-anhui-rolls-out-100000th-ev/",
+        source: "CnEVPost - All",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081904132684.jpg",
+        note: ""
+    },
+    {
+        id: "cn1464",
+        title: "フリーランダー8サイトが一時、ニオES8の車体構造画像を掲載",
+        desc: "自動車情報サイト「フリーランダー8」のWebページが、一時にニオES8の車体構造図を掲載した。掲載は約1時間で削除された。",
+        url: "https://cnevpost.com/2026/08/19/freelander-8-briefly-used-nio-es8-body-structure-image/",
+        source: "CnEVPost - All",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026081903245496.jpg",
+        note: ""
+    },
+    {
+        id: "in1511",
+        title: "マヒンドラXEV9Sにキャプテンシート6席オプション搭載2525万ルピー",
+        desc: "マヒンドラはXEV9Sに6シートオプションを追加した。価格は2525万ルピーから。キャプテンシートは2列目に配置され、3列目へのアクセスや足元のスペースが改善される。同セグメントで6席と7席の両方を設定する車は他社ではキアのみ。",
+        url: "https://www.autocarindia.com/car-news/mahindra-xev-9s-6-seat-option-launched-at-rs-2525-lakh-440534",
+        source: "Autocar India - All",
+        date: "2026-08-19",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 38,
+        interiorReason: "The article focuses on a new 6-seat configuration (captain seats) which is a sig",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260819_123956_31d168c5.jpeg",
+        note: ""
+    },
+    {
+        id: "in1512",
+        title: "シコダスラビアフェイスリフトにリアシートマッサージ機能と10.25インチディスプレイ搭載",
+        desc: "シコダスラビアのフェイスリフトモデルが、リアシートマッサージ機能、10.25インチデジタルインストルメントクラスター、360度カメラ、Google Cloud搭載AIアシスタントなどを追加。1.0Lエンジンに8速ATを採用し、エアコン性能も向上した。",
+        url: "https://www.autocarindia.com/auto-features/7-improvements-skoda-slavia-facelift-gets-over-its-predecessor-440933",
+        source: "Autocar India - All",
+        date: "2026-08-19",
+        tags: ["ディスプレイ", "AI", "シート"],
+    
+        interiorScore: 82,
+        interiorReason: "facelift interior refresh with specific HMI and comfort details (10.25-inch disp",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260819_112922_62ea70df.jpg",
+        note: ""
+    },
+    {
+        id: "in1513",
+        title: "2027ヒュンダイ・トゥーソン内装公開大型スクリーンとプレミアム装備で高級感強化",
+        desc: "2027年型ヒュンダイ・トゥーソンが内外装デザインを公開した。車体は全長60mm、全幅40mm拡大し、ホイールベースも30mm延長された。",
+        url: "https://www.autocarindia.com/auto-images/2027-hyundai-tucson-image-gallery-440434",
+        source: "Autocar India - All",
+        date: "2026-08-19",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 59,
+        interiorReason: "text mentions interior design and large screen, but image is exterior only",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260819_094704_35c8e6cb.jpg",
+        note: ""
+    },
+    {
+        id: "in1514",
+        title: "マヒンドラXEV9Sに2列キャプテンシート追加6人乗り設定で快適性向上",
+        desc: "マヒンドラは電気SUV「XEV 9S」に2列に個別キャプテンシートを採用した6人乗り設定を追加した。これにより、従来7人乗り中心だったラインナップにプレミアムな快適性を加え、特に上級グレードで提供される。既存の3列シート機能も維持しつつ、後席の快適性を重視した構成となっている。",
+        url: "https://www.rushlane.com/mahindra-xev-9s-gets-new-6-seater-option-captain-seats-added-12553682.html",
+        source: "RushLane",
+        date: "2026-08-19",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 38,
+        interiorReason: "interior configuration change (captain seats) but no interior image",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/03/mahindra-xev-9s-delivery.jpeg",
+        note: ""
+    },
+    {
+        id: "in1515",
+        title: "マヒンドラXEV9Sがインドで6人乗りキャプテンシートを採用",
+        desc: "マヒンドラはインド市場の電気SUV「XEV 9S」において、2列目のキャプテンシート配置を「Pack Two Above」以上のグレードで導入した。これにより、同車は6人乗り構成となり、個別のシートが提供されるようになった。",
+        url: "https://gaadiwaadi.com/mahindra-xev-9s-finally-gets-six-seater-configuration-in-india/",
+        source: "GaadiWaadi",
+        date: "2026-08-19",
+        tags: ["シート", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/mahindra-xev-9s-six-seater-captain-seats.jpg",
+        note: ""
+    },
+    {
+        id: "in1516",
+        title: "2026年式シュコダ・スラビアフェイスリフト、新内装デザインを採用",
+        desc: "2026年式シュコダ・スラビアのフェイスリフトモデルが、クラシックからモンテカルロまで6つのバリエーションで発売される。新技術、安全キット、内外装のアップデートに加え、カラーオプションが追加された。特に内装では、コックピットとシート素材の改善が図られ、快適装備も強化されている。",
+        url: "https://gaadiwaadi.com/2026-skoda-slavia-facelift-key-variant-wise-features-specs-colours/",
+        source: "GaadiWaadi",
+        date: "2026-08-19",
+        tags: ["シート", "コックピット", "新素材", "安全"],
+    
+        interiorScore: 61,
+        interiorReason: "interior updates and cockpit/seat material improvements mentioned in text; image",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/2026-Skoda-Slavia-Facelift-3.jpg",
+        note: ""
+    },
+    {
+        id: "in1517",
+        title: "新型ヒュンダイ・トゥーサン、広々としたプレミアムなインテリアで登場",
+        desc: "ヒュンダイは新型SUV「トゥーサン」の5世代目を発表し、ラディカルなデザインと広々としたキャビン、プレミアムな装備を特徴とする。既存モデルから6年ぶりのフルモデルチェンジで、内装の快適性と素材の質が向上している。",
+        url: "https://gaadiwaadi.com/all-new-hyundai-tucson-suv-debuts-with-radical-design-packed-interior/",
+        source: "GaadiWaadi",
+        date: "2026-08-19",
+        tags: ["新素材"],
+    
+        interiorScore: 59,
+        interiorReason: "article focuses on a full cabin refresh with interior relevance, but the image i",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/2027-Hyundai-Tucson-New.jpg",
+        note: ""
+    },
+    {
+        id: "in1518",
+        title: "BMW新型7シリーズとi7インドで9月11日発売新インテリアと8Kリアシートモニター搭載",
+        desc: "BMWは7シリーズとi7の改良型を2026年9月11日にインドで発売する。新型キャビンインターフェースと8Kリアシートモニターが特徴だ。",
+        url: "https://gaadiwaadi.com/new-bmw-7-series-i7-to-launch-in-india-on-september-11-all-key-details/",
+        source: "GaadiWaadi",
+        date: "2026-08-19",
+        tags: ["HMI", "ディスプレイ", "シート"],
+    
+        interiorScore: 82,
+        interiorReason: "text highlights new cabin interface and 8K rear-seat screen, which are high-valu",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/04/2026-BMW-7-Series-Facelift-India-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1519",
+        title: "次世代ヒュンダイ・トゥーソン、大型タッチスクリーン搭載の先進コックピットを公開",
+        desc: "次世代ヒュンダイ・トゥーソンの内装は大型中央タッチスクリーンと2本スポークステアリングを採用した。オレンジ色のアクセントが先進的なコックピットを演出し、技術重視の設計が特徴である。",
+        url: "https://www.autopunditz.com/post/2027-hyundai-tucson-revealed-new-design-interior-hybrid",
+        source: "Auto Punditz",
+        date: "2026-08-19",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        interiorScore: 84,
+        interiorReason: "The article and image focus on a 'futuristic cabin' with specific interior detai",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_9745238e444e4683aff3b0655c262240~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1468",
+        title: "新型ヒュンダイ・トゥーサン内外装初公開 大幅アップグレード",
+        desc: "ヒュンダイが新型トゥーサンの内外装デザインを初公開した。既存モデルから大幅にアップグレードされたデザインが特徴で、内外装の品質向上が期待される。",
+        url: "https://electrek.co/2026/08/19/hyundai-unveils-new-tucson-design-first-time-images/",
+        source: "Electrek",
+        date: "2026-08-19",
+        tags: [],
+    
+        interiorScore: 63,
+        interiorReason: "interior design reveal with exterior image",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/Hyundai-new-Tucson.jpeg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "eu1427",
+        title: "LGエナジーソリューションがミシガンランシングで新電池工場生産開始",
+        desc: "LGエナジーソリューションは米国ミシガン州ランシングの新電池工場での生産を開始した。元はGMとの合弁事業だったが、現在は同社が完全保有。テスラの家庭用蓄電池向けLFPセルなど生産を拡大している。",
+        url: "https://www.electrive.com/2026/08/19/lg-energy-solution-launches-battery-production-in-lansing/",
+        source: "Electrive",
+        date: "2026-08-19",
+        tags: ["バッテリー"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/lges-lansing-michigan-batteriefabrik-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1428",
+        title: "テスラ、ステアレスCybercabをオースティンで公開",
+        desc: "ステアリング不要の専用車両を今月公開し、従業員向け公道テストを経てRobotaxiサービスへ組み込む。連邦承認なしで展開可能だが、競合に比べ累積走行距離は依然として少ない。",
+        url: "https://www.automotiveworld.com/news/tesla-preps-cybercabs-austin-launch-as-soon-as-this-month/",
+        source: "Automotive World",
+        date: "2026-08-19",
+        tags: [],
+    
+        interiorScore: 37,
+        interiorReason: "The article discusses the Cybercab launch, which is a vehicle with a unique inte",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/07/22092828/tesla-cybercab-closeup-stock-generic-abc-robotaxi-scaled-e1784708932452.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1429",
+        title: "GMが2027年型EVにNACS充電ポート標準装備へ",
+        desc: "GMは2027年型EVにNACS充電ポートを標準装備すると発表した。2026年モデルのシボレー、キャデラック、GMCの一部車種はアダプターが必要だが、2027年型からはネイティブ対応となる。これにより充電の利便性が向上する。",
+        url: "https://electriccarsreport.com/2026/08/gm-evs-get-native-nacs-charging-ports-for-2027-model-year/",
+        source: "Electric Cars Report",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2025/03/2026-GMC-Sierra-EV.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1430",
+        title: "小米SU7累計50万台突破EV事業拡大の勢い",
+        desc: "小米はSU7の累計納車台数が28ヶ月で50万台を突破した。YU7 SUVやSkyNomadシリーズ、欧州展開などEV事業の拡大が進んでいる。",
+        url: "https://electriccarsreport.com/2026/08/xiaomi-su7-passes-500000-deliveries-as-ev-ambitions-expand/",
+        source: "Electric Cars Report",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/03/Xiaomi-SU7.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1431",
+        title: "吉利、2028年から欧州ボルボ工場で高級EV生産へ",
+        desc: "中国の吉利は2028年から欧州のボルボ工場で高級EVの生産を開始する。これにより、現地のEV生産拡大と欧州戦略の強化が進む。",
+        url: "https://electriccarsreport.com/2026/08/geely-to-build-higher-priced-evs-at-volvo-plants-in-europe-from-2028/",
+        source: "Electric Cars Report",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/01/Zeekr-7GT.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1432",
+        title: "ヒュンダイ、トルコでIONIQ3生産開始2億5000万ユーロ投資",
+        desc: "ヒュンダイモーターは、トルコのイズミット工場での電気自動車（EV）製造への転換に2億5000万ユーロを投資し、全電動車「IONIQ 3」の生産を開始した。同工場はEV生産体制へ移行し、欧州市場向けの新車供給を強化する。",
+        url: "https://electriccarsreport.com/2026/08/hyundai-ioniq-3-production-begins-in-turkiye-after-e250-million-investment/",
+        source: "Electric Cars Report",
+        date: "2026-08-19",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Hyundai-Ioniq-3-production-Turkiye.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in1520",
+        title: "2027年型ヒュンダイ・トゥーソン、内装刷新と大型化で快適性向上",
+        desc: "ヒュンダイは次世代トゥーソンの外観と内装を公開した。全長が約60mm拡大され、後席頭部空間が29mm増加するなど居住性が向上する。内装は新Pleosインフォテインメントシステムを採用し、本革調のステアリングやウッド調トリム、アンビエントライトを配置。2027年に国際市場へ投入予定だ。",
+        url: "https://www.motorbeam.com/2027-hyundai-tucson-preview-new-design-interior/",
+        source: "MotorBeam",
+        date: "2026-08-19",
+        tags: ["コネクテッド", "イルミ", "新素材"],
+    
+        interiorScore: 70,
+        interiorReason: "Japanese summary provides concrete interior details (Pleos infotainment, wood tr",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.motorbeam.com/wp-content/uploads/2027-Hyundai-Tucson.jpg",
+        note: ""
+    },
+    {
+        id: "jp1650",
+        title: "限定1383台のBMW E46 M3 CSLが新車価格3倍で取引される理由",
+        desc: "2003年に世界1383台限定で登場したBMW E46 M3 CSLは、CFRP製ルーフや快適装備の省略により車重を1385kgに削減した特別モデルである。360馬力の直6エンジンと軽量化によりサーキット直系の精神を現代に蘇らせ、現在では新車価格の約3倍で取引されている。",
+        url: "https://www.webcartop.jp/2026/08/1869701/",
+        source: "WEB CARTOP",
+        date: "2026-08-19",
+        tags: [],
+    
+        country: "jp",
+        img: "https://cdn-webcartop.com/wp-content/uploads/2026/08/260818_M3_CSL_046.jpg",
         note: ""
     },
 ];
