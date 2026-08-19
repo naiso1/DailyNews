@@ -2580,13 +2580,18 @@ h1 {
             filteredData.sort((a, b) => {
                 const aNew = isNewContent(a);
                 const bNew = isNewContent(b);
-                if (aNew !== bNew) return aNew ? -1 : 1;
                 if (sortOrder === "relevance-desc") {
                     const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
                     const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
                     if (scoreB !== scoreA) return scoreB - scoreA;
+                    if (aNew !== bNew) return aNew ? -1 : 1;
                     return b.date.localeCompare(a.date);
-                } else if (sortOrder === "date-asc") {
+                }
+
+                // Keep NEW items prominent for non-relevance sorts. Relevance sort must
+                // remain a true score order even when the selected range spans many days.
+                if (aNew !== bNew) return aNew ? -1 : 1;
+                if (sortOrder === "date-asc") {
                     return a.date.localeCompare(b.date);
                 } else if (sortOrder === "country") {
                     // First by country (jp -> cn -> in), then by date desc within same country
