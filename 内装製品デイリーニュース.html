@@ -1294,6 +1294,9 @@ h1 {
 
         let NEW_DATE_RANGE = { start: null, end: null };
         const NEW_DATE_RANGE_OVERRIDE = { start: "2026-08-18", end: "2026-08-18" };
+        const INITIAL_DATE_RANGE_OVERRIDES = {
+            "2026-08-19": { start: "2026-08-07", end: "2026-08-18" }
+        };
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
@@ -2379,8 +2382,9 @@ h1 {
                 if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
                 if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
                 if (!params.toString()) {
-                    const initialStart = NEW_DATE_RANGE.start || latestDate || getTodayKey();
-                    const initialEnd = NEW_DATE_RANGE.end || latestDate || getTodayKey();
+                    const oneDayOverride = INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
+                    const initialStart = oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey();
+                    const initialEnd = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
                     document.getElementById("searchInput").value = "";
                     document.getElementById("dateFrom").value = initialStart;
                     document.getElementById("dateTo").value = initialEnd;
