@@ -1834,6 +1834,7 @@ h1 {
         const FAVORITES_STORAGE_KEY = "favorites_v1";
         let favoriteIds = new Set();
         let favoritesOnly = false;
+        let newOnly = false;
         let selectedFavoriteKeys = new Set();
         let activeCountries = new Set(["world"]);
         let activeTags = new Set(["all"]);
@@ -2255,7 +2256,8 @@ h1 {
                 sortOrder: document.getElementById("sortOrder").value,
                 countries: new Set(activeCountries),
                 tags: new Set(activeTags),
-                favoritesOnly
+                favoritesOnly,
+                newOnly
             };
         }
 
@@ -2269,6 +2271,7 @@ h1 {
             activeCountries = new Set(rankingBackState.countries || ["world"]);
             activeTags = new Set(rankingBackState.tags || ["all"]);
             favoritesOnly = Boolean(rankingBackState.favoritesOnly);
+            newOnly = Boolean(rankingBackState.newOnly);
             updateFavoritesToggle();
             updateCountryChips();
             updateTagChips();
@@ -2364,6 +2367,7 @@ h1 {
                 updateNewCountBadges();
 
                 const params = new URLSearchParams(window.location.search);
+                newOnly = !params.toString() || params.get("new") === "1";
                 const latestDate = getLatestDate(NEWS_DATA);
                 const dateToInput = document.getElementById("dateTo");
                 if (!params.has("to")) {
@@ -2400,8 +2404,13 @@ h1 {
 
                 document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
                 document.getElementById("tagFilters").addEventListener("click", handleTagClick);
-                document.getElementById("dateFrom").addEventListener("change", applyFilters);
-                document.getElementById("dateTo").addEventListener("change", applyFilters);
+                const applyManualDateFilter = () => {
+                    newOnly = false;
+                    applyFilters();
+                    updateURL();
+                };
+                document.getElementById("dateFrom").addEventListener("change", applyManualDateFilter);
+                document.getElementById("dateTo").addEventListener("change", applyManualDateFilter);
                 document.getElementById("searchInput").addEventListener("input", applyFilters);
                 document.getElementById("sortOrder").addEventListener("change", () => {
                     applyFilters();
@@ -2555,6 +2564,7 @@ h1 {
                 // Country Filter
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
                 if (favoritesOnly && !isFavorite(n.id)) return false;
+                if (newOnly && !isNewContent(n)) return false;
 
                 const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ")).toLowerCase();
 
@@ -2574,7 +2584,7 @@ h1 {
                 return true;
             });
 
-            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly);
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly || newOnly);
             if (!hasActiveFilter && filteredData.length === 0 && NEWS_DATA.length > 0) {
                 filteredData = [...NEWS_DATA];
             }
@@ -2719,6 +2729,7 @@ h1 {
         }
 
         function loadMore() {
+            newOnly = false;
             if (isShowingDefaultNewRange()) {
                 document.getElementById("dateFrom").value = "";
                 updateURL();
@@ -2732,6 +2743,7 @@ h1 {
             const params = new URLSearchParams();
             if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
             if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
+            if (newOnly) params.set("new", "1");
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             if (from) params.set("from", from);
