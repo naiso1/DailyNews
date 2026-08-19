@@ -1303,15 +1303,11 @@ h1 {
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
-            if (itemOrDate && typeof itemOrDate === "object") {
-                if (itemOrDate.isNew === true) return true;
-                if (itemOrDate.isNew === false) return false;
-                const dateStr = itemOrDate.date;
-                if (!dateStr || !NEW_DATE_RANGE.start) return false;
-                return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
-            }
-            const dateStr = itemOrDate;
-            if (!dateStr || !NEW_DATE_RANGE.start) return false;
+            const dateStr = itemOrDate && typeof itemOrDate === "object"
+                ? itemOrDate.date
+                : itemOrDate;
+            if (typeof dateStr !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+            if (!NEW_DATE_RANGE.start || !NEW_DATE_RANGE.end) return false;
             return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
         }
 
@@ -2386,13 +2382,13 @@ h1 {
                 if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
                 if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
                 if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
-                if (!params.toString()) {
+                if (!params.has("from") && !params.has("to")) {
                     const oneDayOverride = INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
-                    const initialStart = oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey();
-                    const initialEnd = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
+                    document.getElementById("dateFrom").value = oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey();
+                    document.getElementById("dateTo").value = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
+                }
+                if (!params.toString()) {
                     document.getElementById("searchInput").value = "";
-                    document.getElementById("dateFrom").value = initialStart;
-                    document.getElementById("dateTo").value = initialEnd;
                     document.getElementById("sortOrder").value = "relevance-desc";
                     activeCountries = new Set(["world"]);
                     activeTags = new Set(["all"]);
