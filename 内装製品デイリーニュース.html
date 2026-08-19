@@ -1294,6 +1294,9 @@ h1 {
 
         let NEW_DATE_RANGE = { start: null, end: null };
         const NEW_DATE_RANGE_OVERRIDE = { start: "2026-08-18", end: "2026-08-18" };
+        const ONE_DAY_NEW_DATE_RANGE_OVERRIDES = {
+            "2026-08-19": { start: "2026-08-07", end: "2026-08-18" }
+        };
         const INITIAL_DATE_RANGE_OVERRIDES = {
             "2026-08-19": { start: "2026-08-07", end: "2026-08-18" }
         };
@@ -1360,8 +1363,10 @@ h1 {
         }
 
         function setNewDateRangeFromNews(data) {
-            if (NEW_DATE_RANGE_OVERRIDE?.start && NEW_DATE_RANGE_OVERRIDE?.end) {
-                NEW_DATE_RANGE = { start: NEW_DATE_RANGE_OVERRIDE.start, end: NEW_DATE_RANGE_OVERRIDE.end };
+            const oneDayOverride = ONE_DAY_NEW_DATE_RANGE_OVERRIDES[getTodayKey()];
+            const rangeOverride = oneDayOverride || NEW_DATE_RANGE_OVERRIDE;
+            if (rangeOverride?.start && rangeOverride?.end) {
+                NEW_DATE_RANGE = { start: rangeOverride.start, end: rangeOverride.end };
                 return;
             }
             const latest = getLatestDate(data);
@@ -2584,17 +2589,14 @@ h1 {
             filteredData.sort((a, b) => {
                 const aNew = isNewContent(a);
                 const bNew = isNewContent(b);
+                if (aNew !== bNew) return aNew ? -1 : 1;
                 if (sortOrder === "relevance-desc") {
                     const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
                     const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
                     if (scoreB !== scoreA) return scoreB - scoreA;
-                    if (aNew !== bNew) return aNew ? -1 : 1;
                     return b.date.localeCompare(a.date);
                 }
 
-                // Keep NEW items prominent for non-relevance sorts. Relevance sort must
-                // remain a true score order even when the selected range spans many days.
-                if (aNew !== bNew) return aNew ? -1 : 1;
                 if (sortOrder === "date-asc") {
                     return a.date.localeCompare(b.date);
                 } else if (sortOrder === "country") {
