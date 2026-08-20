@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-20 01:26";
+window.NEWS_UPDATED_AT = "2026-08-21 01:33";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -100228,6 +100228,726 @@ window.LOADED_NEWS_DATA = [
     
         country: "jp",
         img: "https://cdn-webcartop.com/wp-content/uploads/2026/08/260818_M3_CSL_046.jpg",
+        note: ""
+    },
+    // 2026-08-20 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1651",
+        title: "アルパインがアルファード専用ワイヤレスDSPをオートバックスで先行販売",
+        desc: "アルパインマーケティングはトヨタ アルファードおよびヴェルファイア専用のワイヤレス接続DSPを9月上旬よりオートバックス店舗と公式通販で先行販売する。USB給電とBluetooth接続で純正オーディオの音質を改善し初期モデルの価格は税込み3万5200円である。",
+        url: "https://news.yahoo.co.jp/articles/481ea689da34f506718a2fd6c241f2b0b555bf35?source=rss",
+        source: "レスポンス",
+        date: "2026-08-20",
+        tags: ["音響"],
+    
+        interiorScore: 90,
+        interiorReason: "specific aftermarket audio product for center console integration; interior acce",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00000026-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1652",
+        title: "スズキスペーシアカスタム対応テイン車高調発売",
+        desc: "サスペンション専門メーカーのテインが、スズキのスペーシアカスタムに対応したフルスペック車高調「フレックスZ」を発売した。既存の適合車種に加え、MK53S型の2017年12月から2023年10月までの4WDモデルが対象となる。これにより、車両の車高調整と快適性の向上が可能になる。",
+        url: "https://news.yahoo.co.jp/articles/d921c3936c2e54931054b14475b1ec6d66c84553?source=rss",
+        source: "レスポンス",
+        date: "2026-08-20",
+        tags: ["カスタマイズ"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00000016-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1653",
+        title: "BYD軽EVラッコXパック搭載航続320km空間確保",
+        desc: "BYDは軽スーパーハイトワゴンBEV「ラッコ」を発売した。駆動系をバッテリー内に統合した「Xパック」で室内空間と安全性を両立させた。",
+        url: "https://news.yahoo.co.jp/articles/623824d738cf7c429e3f343acd5a25e00d4c8777?source=rss",
+        source: "carview!",
+        date: "2026-08-20",
+        tags: ["EV", "バッテリー", "安全"],
+    
+        interiorScore: 90,
+        interiorReason: "focuses on chassis packaging and battery integration (X-pack) to enable interior",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00010008-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1654",
+        title: "日産新型キックスにアウトドア仕様ロッククリーク12月発売防水シート装備",
+        desc: "日産は新型キックスをベースにアウトドアイメージを強調したカスタムカー「ロック クリーク」を12月23日に発売する。専用内外装パーツや防水シートを装備し、ラバレッドアクセントが施されたインテリアが特徴だ。価格は348万5900円から430万9800円で、4WD車とFWD車を設定する。",
+        url: "https://news.yahoo.co.jp/articles/32c1d3e59b37be3cead764d06d3acff255192cf7?source=rss",
+        source: "MotorFan",
+        date: "2026-08-20",
+        tags: ["シート", "カスタマイズ"],
+    
+        interiorScore: 62,
+        interiorReason: "text mentions waterproof seats and interior accents, but image is exterior only",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-01601112-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1655",
+        title: "アナログ極めるヘネシー新型ハイパーカーブラックバード3億7500万円で発売",
+        desc: "米国ヘネシーの新型ハイパーカー「ブラックバード」は、液晶パネルを一切排除したアナログコクピットが特徴。6速MTと6.2リッターV8エンジン、3億7500万円の価格で71台限定。",
+        url: "https://news.yahoo.co.jp/articles/8ae39cccdcf31610c67a86c9d20b4dbdaf90aec2?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-20",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 57,
+        interiorReason: "The article describes a specific 'analog cockpit' design philosophy (no screens,",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1656",
+        title: "トヨタ純正パネル装着型2ポートUSBチャージャーMAXWINが発売",
+        desc: "MAXWINはトヨタ車用USBチャージャーを発売した。純正パネルに装着できシガーソケットを占有しない。 2ポートでPDとQC3.0に対応し最大5.6Aの急速充電が可能だ。LED電圧計も搭載した。",
+        url: "https://news.yahoo.co.jp/articles/b6afcee40aa749eec780710a436851b39d57ce9d?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        interiorScore: 90,
+        interiorReason: "The article describes a specific aftermarket interior accessory (USB charger) de",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00000019-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1657",
+        title: "新型キックス最上級Gがお買い得中堅グレードとの価格差わずか約35万円",
+        desc: "新型キックスの最上級「G」は中堅グレードとの価格差が約35万円と予想を大きく下回る安価である。専用外装や快適装備が標準またはオプションで提供されコストパフォーマンスに優れる。この小さな価格差から最上級モデルの購入が特に推奨されるお買い得な選択肢となっている。",
+        url: "https://news.yahoo.co.jp/articles/406ab0047eb2eee091c1c782ef950faf9f1eb485?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-20",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00000017-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1658",
+        title: "AIMBANがシート背面保護と収納機能付きキックガードLITEをMakuakeで先行販売",
+        desc: "AIMBANはキックガードLITEをMakuakeで先行販売し、シート背面を保護する。Cカーブ設計で靴跡を防ぎ、3つの収納ポケットも備える。",
+        url: "https://news.yahoo.co.jp/articles/8f72c17e431bbf6cd7fa89367f40ea02f4419e1d?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-20",
+        tags: ["AI", "シート"],
+    
+        interiorScore: 78,
+        interiorReason: "The article focuses on a specific interior accessory (kick guard) designed to pr",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-00000013-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1659",
+        title: "タンデムシート採用のハイパーカー新型21Cスパイダー初公開",
+        desc: "米国のハイパーカーメーカーCzingerは、既存モデルのコンバーチブル仕様である新型「21Cスパイダー」を公開した。タンデムシートを採用したオープントップモデルで、1267psの高出力エンジンと革新的なブレーキシステムを備える。",
+        url: "https://news.yahoo.co.jp/articles/c32901bbe1501eb664b262595be40b7cced1a959?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-20",
+        tags: ["シート", "新素材"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-01270438-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1660",
+        title: "ステランティスが新型C3エアクロス発表3列7人乗りでシトロエンのブランド価値を強調",
+        desc: "ステランティス・ジャパンは新型C3エアクロスの発表会で、FaSTLAne2030計画に基づくマルチエネルギー戦略と地域権限移譲を説明した。小川隼平氏はシトロエンの価値観として「ケア」「クレバー」「クリエイティブ」を挙げ、数値化が難しいフランスブランドの独自性を強調した。",
+        url: "https://news.yahoo.co.jp/articles/d404328b26c3d33016b5978e51446544bdc90746?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-20",
+        tags: [],
+    
+        interiorScore: 43,
+        interiorReason: "The article focuses on brand strategy and the 3-row seating layout of the C3 Air",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260820-01270917-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1469",
+        title: "中国が西側メーカーに国内生産支援を提案し業界の構図が逆転",
+        desc: "中国メーカーが欧米の既存自動車メーカーに対し、自国での生産効率化を支援する方針を示した。従来は中国企業が中国で技術を習得していたが、逆の状況が生まれている。この動きは、グローバルな自動車産業のサプライチェーンや技術移転の新たな潮流を反映しており、西側メーカーの競争力強化に寄与する可能性がある。",
+        url: "https://www.thedrive.com/news/china-flips-the-script-offering-to-help-western-automakers-build-cars-faster-at-home-tds",
+        source: "The Drive",
+        date: "2026-08-20",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/GettyImages-2286642354.jpg?quality=85&w=2048",
+        note: ""
+    },
+    {
+        id: "us1470",
+        title: "テスラCybercab一般公開 運転席なし",
+        desc: "テスラはテキサス州オースティンで自律走行車「Cybercab」の一般公開を今月中に開始する。まず従業員向けに試乗を実施し、消防士らへの緊急対応訓練も完了した。既存のModel Yロボットタクシー186台に加え、Cybercabの導入によりサービスが拡大する。",
+        url: "https://www.carscoops.com/2026/08/tesla-cybercab-launch-austin/",
+        source: "CarScoops",
+        date: "2026-08-20",
+        tags: [],
+    
+        interiorScore: 71,
+        interiorReason: "The article discusses the Cybercab, a vehicle with a unique interior configurati",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Tesla-Cybercab-Austin-12-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1471",
+        title: "マツダ、ロータリーエンジン再興の壁を破る新特許を米国で出願",
+        desc: "マツダは米国で新特許を出願し、ロータリーエンジンの再興を阻んできた排気ガス問題の解決を図る。この特許は長年コンセプトカーの段階で止まっていたロータリーエンジンの実用化に向けた重要な一歩となる。",
+        url: "https://www.carscoops.com/2026/08/mazda-rotary-engine-patent/",
+        source: "CarScoops",
+        date: "2026-08-20",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/053_20250324_museum3242_l-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1472",
+        title: "ジェネシス新型GV90ロールスロイス級豪華内装でBMWに挑む",
+        desc: "ジェネシスの新型電気SUVGV90は657馬力と大容量バッテリーを搭載し、BMWやメルセデスへの挑戦を開始する。最高級モデルNeolunはBピラーレスのコーチドアや回転シートでラウンジ空間を実現。25インチHUDや高級サウンドシステムなど、高級感あふれるインテリアが特徴だ。",
+        url: "https://www.carscoops.com/2026/08/genesis-gv90-flagship/",
+        source: "CarScoops",
+        date: "2026-08-20",
+        tags: ["HUD", "シート", "EV"],
+    
+        interiorScore: 87,
+        interiorReason: "flagship cabin refresh with coach-door and rotating seats",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/6.-Coach_EX_01_43-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1473",
+        title: "GV90 Neolunがヒートウッドフロアとコッチドアを搭載し豪華内装を公開",
+        desc: "ジェネシスの新型電気SUV「GV90 Neolun」は、Bピラーレスのコッチドアやヒートウッドフロア、回転シート、全周エアバッグなどを搭載。657馬力のフラッグシップモデルで、カシミアやストーントリムを施した豪華なインテリアが特徴。",
+        url: "https://www.jalopnik.com/2240446/2027-genesis-gv90-neolun-electric-flagship-suv-design-specs-reveal/",
+        source: "Jalopnik",
+        date: "2026-08-20",
+        tags: ["シート", "安全"],
+    
+        interiorScore: 88,
+        interiorReason: "flagship cabin refresh with coach doors, heated wood floors, swiveling seats, ca",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/2027-genesis-gv90-neolun-electric-flagship-suv-design-specs-reveal/l-intro-1787204808.jpg",
+        note: ""
+    },
+    {
+        id: "us1474",
+        title: "Car and Driverが13車種で150mph加速減速テスト実施",
+        desc: "Car and Driverが13台の車両を用いて時速150マイルまでの加速と減速性能を評価するテストを実施した。高速域での制御性能と安全性を重視した評価が行われた。",
+        url: "https://www.caranddriver.com/features/a73414330/0-150-0-speed-test-2026/",
+        source: "Car and Driver",
+        date: "2026-08-20",
+        tags: ["AR", "安全"],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/6d867530-81c0-4cea-9ef9-fff7633d9c07.jpg",
+        note: ""
+    },
+    {
+        id: "us1475",
+        title: "2027ジェネシスGV90ネオルン版の豪華なリアシートと回転シートを公開",
+        desc: "ジェネシスが高級EV SUV「GV90」を公開した。標準7人乗りと、6席または4席の超豪華版「Neolun」が設定される。NeolunはVIP用リアシートを備え、停車時にフロントシートを180度回転させてラウンジ空間を創出する。",
+        url: "https://www.caranddriver.com/photos/a73466409/2027-genesis-gv90-revealed-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-08-20",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 89,
+        interiorReason: "flagship cabin refresh with clear interior image showing luxury rear seats, mate",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/5db449f8-88dd-42f1-91f5-05e859ed8f00.jpg",
+        note: ""
+    },
+    {
+        id: "us1476",
+        title: "ジェネシス新EV GV90ネオルン公開 コーチドアとVIPシートで高級感",
+        desc: "ジェネシスは新EVフラッグシップSUV「GV90」を公開した。特別仕様「GV90ネオルン」はコーチドアとVIP仕様の4シートを採用。フロントシートが180度回転するラウンジ機能を備え、657馬力の電動パワートレインと310マイルの航続距離を実現する。高級感あふれる内装が特徴だ。",
+        url: "https://www.caranddriver.com/news/a73465349/2027-genesis-gv90-revealed/",
+        source: "Car and Driver",
+        date: "2026-08-20",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 87,
+        interiorReason: "Flagship cabin refresh with specific interior features (coach doors, VIP seats,",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/0aafb0d7-fdfa-4fb6-9b2a-e1ceb32d2d42.jpg",
+        note: ""
+    },
+    {
+        id: "eu1433",
+        title: "吉利が英国に大型PHEV SUVモンジャロを投入",
+        desc: "中国の吉利が英国市場へ大型PHEV SUV「モンジャロ」を投入する。ボクササイズで、プジョー5008やシュコダコディアックと競合する。本拠地では星越Lとして販売済みで、車長は4770mmのクロスオーバーだ。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/geely-monjaro-coming-uk-big-phev-family-suv",
+        source: "AUTOCAR UK",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/green_2.jpg?itok=y9Vm4Jim",
+        note: ""
+    },
+    {
+        id: "eu1434",
+        title: "MG ZRラリーカーが14年後もアフリカ縦断ラリーで健在",
+        desc: "2012年にロンドンからケープタウンまで約1万6千マイルのラリーを完走したMG ZRが、14年後も現役で活躍している。参加者から注目を集めるこのハッチバックは、過酷な環境でも耐久性を発揮し、ラリーカーとしての強さを証明している。",
+        url: "https://www.autocar.co.uk/car-news/features/cape-crusader-mg-zr-rally-car-conquered-africa-and-wont-quit",
+        source: "AUTOCAR UK",
+        date: "2026-08-20",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/mg_rally_car_edward.jpg?itok=fayG726d",
+        note: ""
+    },
+    {
+        id: "eu1435",
+        title: "中国車が英国市場で五分之一のシェア獲得",
+        desc: "中国メーカーの安価な電動車が英国で急成長し、7月の登録台数の約五分の一を占めた。Omoda JaecooとBYDは相次いで英国での累計販売台数が十万台を達成した。既存メーカーの競争力低下が背景にある。",
+        url: "https://www.autocar.co.uk/car-news/business-car-sales/chinese-car-makers-take-fifth-uk-market-%E2%80%93-can-they-keep-growing",
+        source: "AUTOCAR UK",
+        date: "2026-08-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/4._jaecoo_range_on_road.jpg?itok=d6hg_Qt1",
+        note: ""
+    },
+    {
+        id: "eu1436",
+        title: "ジェネシスGV90発表ロールスロイス対抗欧州最大EVで高級内装を披露",
+        desc: "ジェネシスGV90は全長約5.3mの欧州最大EVだ。3245mmホイールベースとフラットフロアで広々とした空間を実現した。柱のない逆開きドアと回転シートを備える。本石やカシミアウールなど高級素材を内装に使用した。25スピーカーのB&Oサウンドシステムも搭載する。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/genesis-gv90-revealed-rolls-royce-rival-europes-largest-ev",
+        source: "AUTOCAR UK",
+        date: "2026-08-20",
+        tags: ["シート", "新素材", "EV", "音響"],
+    
+        interiorScore: 100,
+        interiorReason: "flagship cabin refresh with high-quality interior image showing luxury materials",
+        imageInterior: true,
+        country: "eu",
+        img: "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/photo_7_gv90_neolun_interior.jpg?itok=JGvGeil3",
+        note: ""
+    },
+    {
+        id: "eu1437",
+        title: "アストンマーティン新型バンテージSが放つ狂気的な魅力と迫力のスポーツカー",
+        desc: "新型アストンマーティンバンテージSは、荒々しく個性的な性格と激しい走りで、非常にスリリングなスポーツカーとして評価されている。",
+        url: "https://www.autoexpress.co.uk/aston-martin/vantage/370261/new-aston-martin-vantage-s-review-wonderfully-ferocious-sports-car",
+        source: "Auto Express",
+        date: "2026-08-20",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--CIqGnkjd--/t_rss_image_w_845/v1787222161/autoexpress/2026/08/Aston%20Martin%20Vantage%20S%202026%20001_plr4dp.jpg",
+        note: ""
+    },
+    {
+        id: "cn1465",
+        title: "中国の電池メーカーが2027年に全固体電池の量産へ。BYD、CATL、吉利も参画",
+        desc: "中国の電池メーカー各社は、2027年に全固体電池の実証生産を開始することを目標に掲げている。BYDやCATL、吉利に加え、CALBやGotion、EVEなどの主要企業も、小規模なEVの公道試験を並行して計画している。次世代EVをめぐる競争が激化している。",
+        url: "https://carnewschina.com/2026/08/20/chinas-battery-makers-target-2027-solid-state-cell-trial-production-alongside-byd-catl-geely/",
+        source: "CarNewsChina - All",
+        date: "2026-08-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/battery_a-1-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1466",
+        title: "BYD豹5シリーズ 中国で予約開始 成都ショー前に搭載",
+        desc: "BYDの「方成宝（ファンチェンバオ）」シリーズ、Formula SリフトバックとFormula S GTワゴンが中国で予約販売を開始した。 Chengdu Auto Show 2026に先駆けて予約を受け付けている。",
+        url: "https://carnewschina.com/2026/08/20/byds-fang-cheng-bao-formula-s-lineup-started-taking-pre-orders-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-08-20",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/fcb_formula_s-2-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1467",
+        title: "AI技術の進化がもたらす未来社会の変革と課題",
+        desc: "人工知能の急速な発展は、産業構造や日常生活に大きな影響を与えている。自動化の進展により効率性が向上する一方、雇用への懸念や倫理的な課題も浮上している。政府や企業はこれらの問題に対処するため、規制の整備や教育制度改革を進めている。技術の進歩と社会の適応が今後の鍵となる。",
+        url: "https://carnewschina.com/2026/08/20/gac-aion-targets-xiaomi-su7-with-new-ray-7-features-huaweis-edrive-and-emb-technology/",
+        source: "CarNewsChina - All",
+        date: "2026-08-20",
+        tags: ["AI", "新素材"],
+    
+        interiorScore: 42,
+        interiorReason: "mentions EMB (electromechanical braking) technology which is relevant to interio",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/gac_aion_ray_7-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1468",
+        title: "FAW紅旗がBYD第2世代ブレードバッテリーとフラッシュ充電を採用",
+        desc: "FAW紅旗がBYDの第2世代ブレードバッテリーとフラッシュ充電技術を採用。これにより、紅旗はBYD以外で初めて同バッテリーを搭載するブランドとなる。",
+        url: "https://carnewschina.com/2026/08/20/faws-hongqi-to-be-first-non-byd-brand-to-feature-second-gen-blade-battery-and-flash-charging/",
+        source: "CarNewsChina - All",
+        date: "2026-08-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-125-e1787193219225.png",
+        note: ""
+    },
+    {
+        id: "cn1469",
+        title: "吉利の衛星IoT実証、中国で商業利用承認",
+        desc: "吉利の衛星通信事業「Geespace」は、中国で商業用衛星IoTの実証実験を承認された。軌道上の64基のGeeSAT衛星が極域を除く全球をカバーし、日約3億4000万件の通信リクエストを処理している。",
+        url: "https://cnevpost.com/2026/08/20/geely-geespace-approval-commercial-satellite-iot-trial/",
+        source: "CnEVPost - All",
+        date: "2026-08-20",
+        tags: ["コネクテッド"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082012552873.jpg",
+        note: ""
+    },
+    {
+        id: "cn1470",
+        title: "ステラトG9が高級オフロードSUVとして双シート冷蔵庫を搭載",
+        desc: "華為と北汽の合弁ブランド「Stelato」は、高級オフロードSUV「G9」を発売した。価格は42万9800元から。BEVとEREVの2種類があり、最大航続距離は728km。内装にはデュアルゼロ重力シートや車載冷蔵庫を標準装備。華為の自動運転技術も搭載。",
+        url: "https://cnevpost.com/2026/08/20/stelato-launches-g9/",
+        source: "CnEVPost - All",
+        date: "2026-08-20",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 58,
+        interiorReason: "interior features (zero-gravity seats, fridge) are central to the product launch",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082010283445.jpg",
+        note: ""
+    },
+    {
+        id: "cn1471",
+        title: "ニオの第2四半期決算は9月1日に発表されます。利益の継続が注目されています。",
+        desc: "中国のEVメーカー、ニオは9月1日に第2四半期の決算を発表する。累計販売台数は10万7,658台で前年比49.4%増となったが、目標範囲を下回った。市場は、非IFRS基準での連続黒字継続、高利益率SUV「ES8」「ES9」の貢献度、そして第3四半期の見通しに注目している。",
+        url: "https://cnevpost.com/2026/08/20/nio-to-report-q2-2026-earnings-sept-1/",
+        source: "CnEVPost - All",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        interiorScore: 11,
+        interiorReason: "sales volume and earnings report; no interior details or image",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082009423890.jpg",
+        note: ""
+    },
+    {
+        id: "cn1472",
+        title: "華為の支援を受けたLuxeedがRXクーペSUVの予約を開始。小米のYU7を狙う",
+        desc: "華為の支援を受けるLuxeedがRXクーペSUVの予約を開始しました。価格は29万9800元からです。サイズは小米のYU7に近く、ターゲット顧客層も重なります。",
+        url: "https://cnevpost.com/2026/08/20/luxeed-opens-pre-orders-rx-suv/",
+        source: "CnEVPost - All",
+        date: "2026-08-20",
+        tags: ["HMI"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082009225827.jpg",
+        note: ""
+    },
+    {
+        id: "cn1473",
+        title: "Chery H1の利益が減少する一方、海外収益は51%急増",
+        desc: "奇瑞汽車は上半期の海外売上高が51%増え、総売上の69%を占めた。しかし、為替利益の減少により利益が下落した。",
+        url: "https://cnevpost.com/2026/08/20/chery-h1-2026-earnings/",
+        source: "CnEVPost - All",
+        date: "2026-08-20",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082007171912.jpg",
+        note: ""
+    },
+    {
+        id: "cn1474",
+        title: "吉利、初のグローバルハイブリッドD-SUV「モンジャロEM-i」をエジプトで披露",
+        desc: "吉利はGEA Evoプラットフォームを採用した初の海外向けモデル「モンジャロEM-i」を8月下旬にエジプトでデビューさせる。e-AWD四輪駆動システムを搭載し、グローバル市場向けに展開する。",
+        url: "https://cnevpost.com/2026/08/20/geely-teases-monjaro-em-i-egypt-debut-late-aug/",
+        source: "CnEVPost - All",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082006120852.jpg",
+        note: ""
+    },
+    {
+        id: "in1521",
+        title: "BYD Sealion 7廉価版Dynamic仕様発売419万ルピー",
+        desc: "BYDはEV「Sealion 7」の廉価版Dynamic仕様を発売した。既存のPremium仕様（499万ルピー）に代わりベースモデルとなり、価格は419万ルピーで約80万ルピー安い。小型バッテリーを搭載し、価格を下げたことでより多くの消費者にアクセスしやすくなった。",
+        url: "https://www.autocarindia.com/car-news/entry-level-byd-sealion-7-dynamic-trim-launched-at-rs-41-90-lakh-440544",
+        source: "Autocar India - All",
+        date: "2026-08-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260820_110040_ad60011f.jpg",
+        note: ""
+    },
+    {
+        id: "in1522",
+        title: "インド仕様新型ソレント9月4日発売ハイブリッドとディーゼル搭載",
+        desc: "現代自動車がインド市場向け新型ソレントを公開した。9月4日に発売予定で、3列シートを備える同ブランドの最新ICE車となる。パワートレインは強ハイブリッドとディーゼルが用意され、ハイブリッド版も提供されることが確認された。",
+        url: "https://www.autocarindia.com/car-news/kia-reveals-india-spec-sorento-ahead-of-september-4-launch-440546",
+        source: "Autocar India - All",
+        date: "2026-08-20",
+        tags: ["シート"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260820_112553_90b11b59.jpg",
+        note: ""
+    },
+    {
+        id: "in1523",
+        title: "ジェネシス旗艦SUV GV90内装に23.6インチディスプレイと4シート仕様公開",
+        desc: "ジェネシスが旗艦SUV「GV90」の量産型を公開した。全長5,285mmの大型EVで、最大123.5kWhバッテリーと544馬力モーターを備える。内装は23.6インチのインフォテインメントディスプレイを採用し、4シート仕様「Neolun」では前後席が180度回転する。",
+        url: "https://www.autocarindia.com/auto-images/genesis-gv90-exterior-and-interior-design-image-gallery-440435",
+        source: "Autocar India - All",
+        date: "2026-08-20",
+        tags: ["ディスプレイ", "コネクテッド", "シート", "EV"],
+    
+        interiorScore: 82,
+        interiorReason: "flagship cabin refresh with specific interior details (23.6-inch display, 4-seat",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260820_100728_ebe06a84.jpg",
+        note: ""
+    },
+    {
+        id: "in1524",
+        title: "インド現地生産スコダEV、2028年発売で高級内装を採用",
+        desc: "チェコの自動車メーカー スコダは、インド市場でのガソリン車依存を脱し、2028年にインド現地生産の電気自動車（EV）を投入する計画である。これにより、同社のラインナップは多様化し、インドの急速に変化する市場での競争力強化が期待される。",
+        url: "https://www.autocarindia.com/car-news/first-india-made-skoda-ev-expected-in-2028-440545",
+        source: "Autocar India - All",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260820_093351_b51442e0.jpeg",
+        note: ""
+    },
+    {
+        id: "in1525",
+        title: "ジェネシスGV90世界初ルーフエアバッグ搭載でラグジュアリーEV登場",
+        desc: "ジェネシスは大型EV SUV「GV90」を発売した。世界初のルーフエアバッグや25スピーカーのB&Oサウンドシステム、123.5kWhバッテリーを搭載する。最高級仕様「Neolun」では回転シートやスマートビジョンルーフを採用し、ラグジュアリーな室内空間を実現している。",
+        url: "https://www.rushlane.com/hyundai-genesis-gv90-esuv-debuts-roof-airbag-25-speakers-12553726.html",
+        source: "RushLane",
+        date: "2026-08-20",
+        tags: ["シート", "EV", "安全", "音響"],
+    
+        interiorScore: 78,
+        interiorReason: "high relevance due to specific interior features (25 speakers, roof airbag, rota",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/new-hyundai-genesis-gv-90-electric-launch-price-24.jpg",
+        note: ""
+    },
+    {
+        id: "in1526",
+        title: "2027年型ヒュンダイクレタ、タスコン風デザインと新世代キャビン技術で登場予定",
+        desc: "2027年初頭にインドで発売予定の次世代ヒュンダイクレタは、タスコンの「Art of Steel」デザインを継承する。外観に加え、新世代のキャビン技術を採用し、ハイブリッドオプションも期待される。",
+        url: "https://www.rushlane.com/2027-hyundai-creta-rendered-with-tucson-inspired-art-of-steel-design-12553705.html",
+        source: "RushLane",
+        date: "2026-08-20",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/2027-hyundai-creta-sx3-kona-render-spied-6.jpg",
+        note: ""
+    },
+    {
+        id: "in1527",
+        title: "ジェネシス新型EV大型SUV GV90 500km航続でインド市場参入",
+        desc: "ジェネシスは新型EV大型SUV「GV90」を公開した。コックピットやシートを含む内装は高級感を重視。航続距離は500kmで、レンジローバーEVに対抗する。来年インド市場へ投入予定。",
+        url: "https://gaadiwaadi.com/all-electric-genesis-gv90-with-coach-doors-500-km-range-unveiled/",
+        source: "GaadiWaadi",
+        date: "2026-08-20",
+        tags: ["シート", "コックピット", "EV"],
+    
+        interiorScore: 82,
+        interiorReason: "interior mentioned as luxury focus but no concrete details or interior image; fl",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/genesis-GV90-SUV-10.jpg",
+        note: ""
+    },
+    {
+        id: "in1528",
+        title: "BMW新型X1長軸モデル、後席快適性と高級装備を両立",
+        desc: "BMW新型X1長軸モデルは、後席の脚部スペースを101mm延長し快適性を向上させた。アイボリーやタン色の内装にアルミ加飾を施し、ハーマンカードンサウンドシステムや曲面ディスプレイを装備。トランク容量540リッターも確保し、高級SUVとしての快適性と実用性を両立させている。",
+        url: "https://www.carblogindia.com/new-bmw-x1-lwb-review-price-feature-launch/",
+        source: "Car Blog India",
+        date: "2026-08-20",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 57,
+        interiorReason: "Japanese summary provides specific interior details (101mm legroom, ivory/tan tr",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/08/bmw-x1-lwb-front-three-quarters.jpg",
+        note: ""
+    },
+    {
+        id: "in1529",
+        title: "トヨタ ルミオンV MTのレビュー実用性重視のファミリー向けMPV",
+        desc: "トヨタ ルミオンV MTのレビュー。マツダ エルティガの姉妹車として実用性を重視したファミリー向けMPV。マニュアルトランスミッションの操作性や内装の快適性、コックピットの設計など、自動車内装とシートに関する特徴を評価。",
+        url: "https://www.carblogindia.com/toyota-rumion-v-mt-review-with-pros-and-cons/",
+        source: "Car Blog India",
+        date: "2026-08-20",
+        tags: ["シート", "コックピット"],
+    
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/08/Toyota-Rumion-Long-Term-Review-Front-THree-Quarters-Blue-Colour.jpg",
+        note: ""
+    },
+    {
+        id: "in1530",
+        title: "バジャジ・チェタック、ケララ州で5万台突破、103拠点に拡大",
+        desc: "インドの2輪車メーカー、バジャジ・オートモーティブの電動スクーター「チェタック」が、ケララ州での累計販売台数が5万台を突破した。同社は同州において販売およびサービス網を103拠点にまで拡大させ、地域市場におけるEVブランドの浸透を強化している。",
+        url: "https://www.autopunditz.com/post/bajaj-chetak-50000-customers-kerala-103-touchpoints",
+        source: "Auto Punditz",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_63dd47258048417d911f497d68f3e784~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1477",
+        title: "ウェイモが中国製Zeekr Ojaiを全米で一般開放",
+        desc: "ウェイモはサンフランシスコ、ロサンゼルス、フェニックスで中国製Zeekr Ojaiの一般利用を開始した。同車は自動運転ロボタクシー向けに設計され、米国では購入できない中国製EVとして注目を集めている。",
+        url: "https://electrek.co/2026/08/20/waymo-zeekr-ojai-chinese-ev-robotaxi-all-riders/",
+        source: "Electrek",
+        date: "2026-08-20",
+        tags: ["AI", "EV"],
+    
+        interiorScore: 39,
+        interiorReason: "robotaxi platform with no interior image or cabin details",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/waymo-ojai-exterior.jpg?quality=82&#038;strip=all&#038;w=1600",
+        note: ""
+    },
+    {
+        id: "us1478",
+        title: "ジェネシスGV90がコーチドアと豪華装備で高級SUVの新たな基準を提示",
+        desc: "ジェネシスは初となるフルサイズフラッグシップSUV「GV90」を公開した。電動SUVであるGV90は、コーチドア、内蔵冷蔵庫、大型デジタルスクリーン、エアサスペンションなど、極上の豪華装備を多数搭載し、高級車の新たな基準を示している。",
+        url: "https://electrek.co/2026/08/19/genesis-gv90-luxury-coach-doors-images/",
+        source: "Electrek",
+        date: "2026-08-20",
+        tags: ["ディスプレイ", "EV"],
+    
+        interiorScore: 83,
+        interiorReason: "flagship cabin refresh with coach doors and interior image; flagship interior re",
+        imageInterior: true,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/Genesis-GV90-Coach-Doors-debut.jpeg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "eu1438",
+        title: "ファーシオンがインドネシアで初現地生産の電気バンV8Eを発売",
+        desc: "吉利傘下の商用EVメーカーファーシオンは、インドネシアで電気バンV8Eの現地生産を開始した。PTハンダル・インドネシア・モーターと提携し、貨物版の組立生産を行う。",
+        url: "https://www.electrive.com/2026/08/20/farizon-introduces-its-first-locally-assembled-electric-van-in-indonesia/",
+        source: "Electrive",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/farizon-v8e-assembly-handal-plant-indonesia-cropped-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1439",
+        title: "奇瑞、ドイツで4車種同時発売へ。ハイブリッドSUVの高級内装が注目",
+        desc: "中国の自動車メーカー奇瑞は、輸出世界一の実績を持つがドイツ市場での存在感が乏しかった。同社は2027年上半期に4つのハイブリッドSUVをドイツで同時発売し、純電気自動車も投入する計画だ。これにより、ドイツでのブランド認知度向上と販売網の強化が期待される。",
+        url: "https://www.electrive.com/2026/08/20/chery-makes-its-german-market-debut-with-four-hybrids/",
+        source: "Electrive",
+        date: "2026-08-20",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/chery-tiggo-4-tiggo-7-tiggo-8-tiggo-9-hev-phev-2026-1-hintergrund-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1440",
+        title: "ジェネシスGV90旗艦EV SUV発表123.5kWh電池と豪華内装を備える",
+        desc: "ジェネシスは旗艦EV大型SUV「GV90」を発表した。123.5kWh電池を搭載し、最大出力490kWを発揮する。内装は23.6型OLEDディスプレイと25型HUDを備え、Neolun Arch Gateや回転シートなど豪華な空間を演出する。",
+        url: "https://www.automotiveworld.com/news/genesis-gv90-flagship-suv-unveiled-with-123-5-kw-h-battery/",
+        source: "Automotive World",
+        date: "2026-08-20",
+        tags: ["HUD", "AR", "ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        interiorScore: 82,
+        interiorReason: "flagship cabin refresh with specific interior details (23.6-inch OLED, 25-inch H",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/20100419/genesis-unveils-gv90-flagship-suv-1-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1441",
+        title: "電池容量130kWhで航続1003kmのDenza N8 EV SUV",
+        desc: "Denzaが新型EV SUV「N8」を発表した。130.15kWhの大容量バッテリーを搭載し、CLTC基準で最大1003kmの航続距離を実現する。3基のモーターにより890kWの高出力を発揮する。",
+        url: "https://electriccarsreport.com/2026/08/denza-n8-gets-1003-km-range-with-huge-130-kwh-battery/",
+        source: "Electric Cars Report",
+        date: "2026-08-20",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Denza-N8.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1442",
+        title: "奇瑞英国研发中心2026年開設EVとADASの英国向け調整",
+        desc: "奇瑞は2026年、UTACミルベックに英国向けEV、ADAS、サスペンションの調整用R&Dセンターを開設する。英国の道路とドライバーに特化した開発を行う。",
+        url: "https://electriccarsreport.com/2026/08/chery-opens-new-uk-rd-centre-to-develop-evs-for-british-roads/",
+        source: "Electric Cars Report",
+        date: "2026-08-20",
+        tags: ["EV", "安全"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Chery-Auto-UK.jpg?a3781e&amp;a3781e",
         note: ""
     },
 ];
