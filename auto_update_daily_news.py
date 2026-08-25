@@ -485,8 +485,8 @@ def _clean_idea_field(text: str, max_len: int = 400) -> str:
     return text[:max_len]
 
 
-def _is_out_of_scope_seat_product(text: str) -> bool:
-    """Return True when an idea is primarily a seat product, which is out of scope."""
+def _is_out_of_scope_idea(text: str) -> bool:
+    """Return True for seating or exterior products outside the interior team's scope."""
     normalized = re.sub(r"\s+", " ", str(text or "")).lower()
     # Seat belts are safety products rather than seating products, so do not
     # reject an otherwise valid idea only because that term appears.
@@ -503,7 +503,12 @@ def _is_out_of_scope_seat_product(text: str) -> bool:
         ]
     ):
         return True
-    return bool(re.search(r"\b(?:seat|seats|seating|headrest|headrests|backrest|backrests)\b", normalized))
+    if re.search(r"\b(?:seat|seats|seating|headrest|headrests|backrest|backrests)\b", normalized):
+        return True
+    return any(
+        term in normalized
+        for term in ["フロントグリル", "バンパー", "フェンダー", "外装部品", "外装パネル", "エクステリア製品"]
+    )
 
 
 def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
@@ -527,7 +532,7 @@ def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
         if not title or not desc:
             continue
         cand = f"{title} {desc}"
-        if _is_out_of_scope_seat_product(cand):
+        if _is_out_of_scope_idea(cand):
             continue
         duplicate = False
         for ht in history_texts:
@@ -618,6 +623,14 @@ def strip_idea_refs(text: str) -> str:
     if not text:
         return text
     text = re.sub(r"\s*\[[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]", "", text, flags=re.IGNORECASE)
+    # Remove malformed LLM variants such as "[jp eu1462]" before appending
+    # the validated sourceNewsIds block.
+    text = re.sub(
+        r"\s*\[(?:[a-z]{2,5}\s+)?[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
     return re.sub(r"\s{2,}", " ", text).strip()
 
 
@@ -907,6 +920,40 @@ def has_insight_for_date(js_text: str, date_key: str):
     return re.search(rf'\bdate:\s*"{re.escape(date_key)}"', js_text) is not None
 
 
+def extract_insight_object_section(js_text: str, date_key: str, section_name: str) -> str:
+    """Return a raw braced section such as analysis from one dated insight entry."""
+    marker = f'date: "{date_key}"'
+    date_pos = js_text.find(marker)
+    if date_pos == -1:
+        return ""
+    section_match = re.search(rf'\b{re.escape(section_name)}\s*:\s*\{{', js_text[date_pos:])
+    if not section_match:
+        return ""
+    start = date_pos + section_match.end() - 1
+    depth = 0
+    in_str = False
+    esc = False
+    for i in range(start, len(js_text)):
+        ch = js_text[i]
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return js_text[start : i + 1]
+    return ""
+
+
 def js_escape(value: str):
     s = str(value or "")
     s = s.replace("\u2028", " ").replace("\u2029", " ")
@@ -1025,23 +1072,25 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
                 weak_penalty += 12
         return (interior_score + keyword_bonus + image_bonus - weak_penalty, len(it.get("desc", "")))
 
-    candidates = [
+    all_candidates = [
         it for it in items
         if it.get("newsId")
         and it.get("title")
         and it.get("desc")
         and not _non_passenger_vehicle_kind(it)
-        and not _is_out_of_scope_seat_product(f"{it.get('title', '')} {it.get('desc', '')}")
-        and (it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 65)
+        and not _is_out_of_scope_idea(f"{it.get('title', '')} {it.get('desc', '')}")
     ]
-    if not candidates:
-        candidates = [
-            it for it in items
-            if it.get("newsId") and it.get("title") and it.get("desc")
-            and not _non_passenger_vehicle_kind(it)
-            and not _is_out_of_scope_seat_product(f"{it.get('title', '')} {it.get('desc', '')}")
-        ]
-    candidates.sort(key=_score, reverse=True)
+    preferred = [
+        it
+        for it in all_candidates
+        if it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 65
+    ]
+    fallback = [it for it in all_candidates if it not in preferred]
+    preferred.sort(key=_score, reverse=True)
+    fallback.sort(key=_score, reverse=True)
+    # Keep lower-scoring interior news available for the second idea rather
+    # than assigning the same anchor twice when only one strong item exists.
+    candidates = preferred + fallback
     if not candidates:
         return []
     groups = []
@@ -1084,7 +1133,7 @@ def make_country_prompt(
     tg_products = [
         product
         for product in load_tg_products()
-        if not _is_out_of_scope_seat_product(f"{product.get('name', '')} {product.get('desc', '')}")
+        if not _is_out_of_scope_idea(f"{product.get('name', '')} {product.get('desc', '')}")
     ]
     tg_product = random.choice(tg_products) if tg_products else None
     tg_constraint = ""
@@ -1119,8 +1168,10 @@ def make_country_prompt(
     - 1つのideasが参照してよいニュースは最大2件まで。アンカー外のニュースや市場全体の一般論を根拠にしない
     - アンカーニュースの主題となる部品・材料・操作上の課題を企画の中核にする。無関係な技術を足して別ジャンルの製品へ飛躍しない
     - 各ideasのdescには、アンカーニュース固有の車名・部品名・技術名・数値のいずれかを必ず1つ以上入れる
+    - descの第1文で、対応するアンカーニュース固有の車名または技術名を明記する
     - sourceNewsIdsには、対応するanchor IDsのみを入れる
     - シート、座席、座面、背もたれ、ヘッドレストなどの座席製品は企画対象外。ニュースに含まれていてもideasでは提案しない
+    - フロントグリル、バンパー、フェンダーなどの外装製品も企画対象外
     - 企画対象はインパネ、センターコンソール、ドアトリム、ステアリング/HMI、照明、安全表示、内装加飾・材料、音響・静粛、ウェザーストリップ等を優先する
     - うれしさを必ず明記
     - titleは日本語を基本に20文字以内の短い名称のみ（英語のみは禁止、説明・括弧書き・句点を含めない）
@@ -1155,6 +1206,11 @@ def main():
     ap.add_argument("--skip-html", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--replace-insights", action="store_true")
+    ap.add_argument(
+        "--replace-ideas-only",
+        action="store_true",
+        help="Regenerate ideas for the target date while preserving its existing analysis",
+    )
     ap.add_argument("--fix-existing", action="store_true", help="Fix url/source for existing entries using CSV rows")
     ap.add_argument("--llm-endpoint", default=os.getenv("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions"))
     ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.6-35b-a3b"))
@@ -1372,9 +1428,20 @@ def main():
             if latest_date
             else False
         )
-        if insight_date_label and insight_exists and not args.replace_insights:
+        if insight_date_label and insight_exists and not (args.replace_insights or args.replace_ideas_only):
             print(f"Insights for {insight_date_label} already exists. Use --replace-insights to overwrite.")
         elif insight_date_label:
+            preserved_analysis = ""
+            if args.replace_ideas_only:
+                preserved_analysis = extract_insight_object_section(
+                    insights_text,
+                    insight_date_label,
+                    "analysis",
+                )
+                if not preserved_analysis:
+                    raise RuntimeError(
+                        f"Cannot replace ideas only: analysis for {insight_date_label} was not found."
+                    )
             grouped = {"jp": [], "cn": [], "in": [], "us": [], "eu": []}
             for it in items:
                 if it["country"] in grouped:
@@ -1399,6 +1466,12 @@ def main():
                     need_count=2,
                     idea_anchor_groups=idea_anchor_groups,
                 )
+                if args.replace_ideas_only:
+                    prompt += (
+                        "\n【最優先】今回は既存の考察を保持してideasだけを差し替える。"
+                        "analysisは空文字にし、ideasの生成にのみ集中すること。\n"
+                    )
+                print(f"[IDEAS] {key}: generating with {args.llm_model}...")
                 llm_text = ""
                 try:
                     llm_text = call_llm(args.llm_endpoint, args.llm_model, prompt)
@@ -1409,44 +1482,45 @@ def main():
                     data = None
                     print(f"LLM error ({key}): {e}")
                 if data and isinstance(data, dict):
-                    analysis_text = normalize_analysis_refs_per_sentence(data.get("analysis", ""))
-                    allowed_ids = build_allowed_news_ids(grouped[key])
-                    analysis_text = filter_analysis_refs_to_allowed(analysis_text, allowed_ids)
-                    if analysis_text and not analysis_ref_coverage_ok(analysis_text):
-                        analysis_text = rewrite_analysis_with_refs(
+                    if not args.replace_ideas_only:
+                        analysis_text = normalize_analysis_refs_per_sentence(data.get("analysis", ""))
+                        allowed_ids = build_allowed_news_ids(grouped[key])
+                        analysis_text = filter_analysis_refs_to_allowed(analysis_text, allowed_ids)
+                        if analysis_text and not analysis_ref_coverage_ok(analysis_text):
+                            analysis_text = rewrite_analysis_with_refs(
+                                args.llm_endpoint,
+                                args.llm_model,
+                                key,
+                                analysis_text,
+                                grouped[key],
+                            )
+                        analysis_text = ensure_analysis_ref_quality(
                             args.llm_endpoint,
                             args.llm_model,
                             key,
                             analysis_text,
                             grouped[key],
                         )
-                    analysis_text = ensure_analysis_ref_quality(
-                        args.llm_endpoint,
-                        args.llm_model,
-                        key,
-                        analysis_text,
-                        grouped[key],
-                    )
-                    analysis_final = filter_analysis_refs_to_allowed(
-                        normalize_analysis_refs_per_sentence(analysis_text),
-                        allowed_ids,
-                    )
-                    analysis_final = shorten_analysis_with_llm(
-                        args.llm_endpoint, args.llm_model, analysis_final
-                    )
-                    analysis_final = filter_analysis_refs_to_allowed(
-                        normalize_analysis_refs_per_sentence(
-                            bracket_bare_allowed_ids(analysis_final, allowed_ids)
-                        ),
-                        allowed_ids,
-                    )
-                    analysis_final = filter_analysis_refs_to_allowed(
-                        normalize_analysis_refs_per_sentence(
-                            ensure_analysis_image_refs(analysis_final, grouped[key])
-                        ),
-                        allowed_ids,
-                    )
-                    analysis_out[key] = analysis_final
+                        analysis_final = filter_analysis_refs_to_allowed(
+                            normalize_analysis_refs_per_sentence(analysis_text),
+                            allowed_ids,
+                        )
+                        analysis_final = shorten_analysis_with_llm(
+                            args.llm_endpoint, args.llm_model, analysis_final
+                        )
+                        analysis_final = filter_analysis_refs_to_allowed(
+                            normalize_analysis_refs_per_sentence(
+                                bracket_bare_allowed_ids(analysis_final, allowed_ids)
+                            ),
+                            allowed_ids,
+                        )
+                        analysis_final = filter_analysis_refs_to_allowed(
+                            normalize_analysis_refs_per_sentence(
+                                ensure_analysis_image_refs(analysis_final, grouped[key])
+                            ),
+                            allowed_ids,
+                        )
+                        analysis_out[key] = analysis_final
                     deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
                     if len(deduped) < 2:
                         retry_prompt = make_country_prompt(
@@ -1458,6 +1532,10 @@ def main():
                             need_count=(2 - len(deduped)),
                             idea_anchor_groups=idea_anchor_groups[len(deduped):],
                         )
+                        if args.replace_ideas_only:
+                            retry_prompt += (
+                                "\n【最優先】analysisは空文字にし、不足しているideasだけを生成すること。\n"
+                            )
                         try:
                             retry_text = call_llm(args.llm_endpoint, args.llm_model, retry_prompt)
                             retry_data = extract_json_block(retry_text)
@@ -1481,23 +1559,39 @@ def main():
                         raw_ids = [
                             str(x).strip().lower()
                             for x in (idea.get("sourceNewsIds") or [])
-                            if str(x).strip().lower() in allowed_ids
+                            if str(x).strip().lower() in anchor_ids
                         ]
                         source_ids = raw_ids[:2] if raw_ids else anchor_ids[:2]
                         idea["sourceNewsIds"] = source_ids
                         if source_ids and not re.search(r"\[[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]", idea.get("desc", ""), flags=re.IGNORECASE):
                             idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
                     ideas_out[key] = deduped[:2]
+                    print(f"[IDEAS] {key}: accepted {len(ideas_out[key])}/2")
                 else:
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
+            if args.replace_ideas_only:
+                missing_ideas = [
+                    key
+                    for key in ["jp", "cn", "in", "us", "eu"]
+                    if grouped.get(key) and len(ideas_out.get(key, [])) < 2
+                ]
+                if missing_ideas:
+                    raise RuntimeError(
+                        "Ideas-only replacement aborted; fewer than two ideas were generated for: "
+                        + ", ".join(missing_ideas)
+                    )
             if analysis_out or ideas_out:
                 max_id = parse_insights_max_id(insights_text)
-                entry_lines = ["    {", f"        date: \"{insight_date_label}\",", "        analysis: {"]
-                for key in ["jp", "cn", "in", "us", "eu"]:
-                    val = analysis_out.get(key, "")
-                    if val:
-                        entry_lines.append(f"            {key}: \"{js_escape(val)}\",")
-                entry_lines.append("        },")
+                entry_lines = ["    {", f"        date: \"{insight_date_label}\","]
+                if preserved_analysis:
+                    entry_lines.append(f"        analysis: {preserved_analysis},")
+                else:
+                    entry_lines.append("        analysis: {")
+                    for key in ["jp", "cn", "in", "us", "eu"]:
+                        val = analysis_out.get(key, "")
+                        if val:
+                            entry_lines.append(f"            {key}: \"{js_escape(val)}\",")
+                    entry_lines.append("        },")
                 entry_lines.append("        ideas: {")
                 for key in ["jp", "cn", "in", "us", "eu"]:
                     idea_list = ideas_out.get(key, [])
@@ -1526,7 +1620,7 @@ def main():
                 entry_lines.append("    },")
                 new_entry = "\n".join(entry_lines)
                 updated_insights = insights_text
-                if args.replace_insights and insight_exists:
+                if (args.replace_insights or args.replace_ideas_only) and insight_exists:
                     updated_insights = remove_insight_by_date(updated_insights, insight_date_label)
                     if latest_date and latest_date != insight_date_label:
                         updated_insights = remove_insight_by_date(updated_insights, latest_date)

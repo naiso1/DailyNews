@@ -156,7 +156,10 @@ def download_reference_image(item: dict, timeout: int = 60) -> tuple[str, bytes]
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
         ),
-        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        # Request formats Pillow can normalize. Some CDNs return AVIF even for
+        # .jpg URLs when AVIF is advertised, and the local Pillow build does
+        # not include an AVIF decoder.
+        "Accept": "image/webp,image/jpeg,image/png,image/*;q=0.8,*/*;q=0.5",
     }
     if item.get("url"):
         headers["Referer"] = item["url"]
