@@ -211,18 +211,47 @@ function renderAccessChart(data) {
     range.textContent = `${series[0].key.replace(/-/g, "/")}〜${series.at(-1).key.replace(/-/g, "/")} (${series.length}日)`;
   }
   const max = Math.max(...series.map((item) => item.value), 1);
-  chart.innerHTML = series
-    .map((item) => {
-      const height = Math.max(8, Math.round((item.value / max) * 100));
-      return `
-        <div class="chart-bar">
-          <div class="bar" style="height:${height}%"></div>
-          <div class="bar-value">${item.value}</div>
-          <div class="bar-label">${item.label}</div>
-          <div class="bar-dow">${item.dow}</div>
-        </div>`;
-    })
-    .join("");
+  const width = Math.max(760, (series.length - 1) * 26 + 72);
+  const height = 220;
+  const padding = { top: 18, right: 18, bottom: 38, left: 42 };
+  const plotWidth = width - padding.left - padding.right;
+  const plotHeight = height - padding.top - padding.bottom;
+  const xFor = (index) => padding.left + (series.length === 1 ? plotWidth / 2 : (index / (series.length - 1)) * plotWidth);
+  const yFor = (value) => padding.top + plotHeight - (value / max) * plotHeight;
+  const points = series.map((item, index) => `${xFor(index).toFixed(1)},${yFor(item.value).toFixed(1)}`).join(" ");
+  const areaPoints = `${padding.left},${padding.top + plotHeight} ${points} ${padding.left + plotWidth},${padding.top + plotHeight}`;
+  const labelStep = Math.max(1, Math.ceil(series.length / 10));
+
+  const gridLines = [0, 0.25, 0.5, 0.75, 1].map((ratio) => {
+    const y = padding.top + plotHeight - ratio * plotHeight;
+    return `<line class="access-line-grid" x1="${padding.left}" y1="${y}" x2="${padding.left + plotWidth}" y2="${y}"></line>
+      <text class="access-line-axis-label" x="${padding.left - 8}" y="${y + 3}" text-anchor="end">${Math.round(max * ratio)}</text>`;
+  }).join("");
+
+  const xLabels = series.map((item, index) => {
+    if (index % labelStep !== 0 && index !== series.length - 1) return "";
+    return `<text class="access-line-axis-label" x="${xFor(index)}" y="${height - 12}" text-anchor="middle">${item.label}</text>`;
+  }).join("");
+
+  const pointNodes = series.map((item, index) => `
+    <circle class="access-line-point" cx="${xFor(index)}" cy="${yFor(item.value)}" r="4" tabindex="0">
+      <title>${item.key}: ${item.value}</title>
+    </circle>`).join("");
+
+  chart.innerHTML = `
+    <svg class="access-line-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="日別アクセス数の折れ線グラフ">
+      <defs>
+        <linearGradient id="accessAreaGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7df1c2" stop-opacity="0.32"></stop>
+          <stop offset="100%" stop-color="#7df1c2" stop-opacity="0.02"></stop>
+        </linearGradient>
+      </defs>
+      ${gridLines}
+      <polygon class="access-line-area" points="${areaPoints}"></polygon>
+      <polyline class="access-line-path" points="${points}"></polyline>
+      ${pointNodes}
+      ${xLabels}
+    </svg>`;
 }
 
 function loadLocalInteractions() {

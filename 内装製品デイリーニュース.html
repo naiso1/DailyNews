@@ -255,18 +255,14 @@ h1 {
 .analysis-panel-title { font-size: 16px; font-weight: 700; }
 .analysis-panel-sub { font-size: 12px; color: var(--muted); }
 
-.analysis-chart { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 12px; align-items: end; min-height: 160px; }
-.chart-bar { display: grid; grid-template-rows: 1fr auto auto auto; align-items: end; justify-items: center; height: 160px; gap: 6px; }
-.chart-bar .bar {
-    width: 100%; max-width: 36px;
-    border-radius: 10px 10px 6px 6px;
-    background: linear-gradient(180deg, rgba(125, 241, 194, 0.95), rgba(125, 241, 194, 0.2));
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
-    transition: height 0.2s ease;
-}
-.chart-bar .bar-value { font-size: 12px; font-weight: 600; color: var(--text); }
-.chart-bar .bar-label { font-size: 11px; color: var(--muted); }
-.chart-bar .bar-dow   { font-size: 10px; color: rgba(154, 164, 184, 0.8); }
+.analysis-chart { display: block; min-height: 220px; overflow-x: auto; overflow-y: hidden; }
+.access-line-chart { display: block; width: 100%; min-width: 760px; height: 220px; }
+.access-line-grid { stroke: rgba(154, 164, 184, 0.16); stroke-width: 1; }
+.access-line-axis-label { fill: var(--muted); font-size: 10px; }
+.access-line-area { fill: url(#accessAreaGradient); }
+.access-line-path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 4px 7px rgba(125, 241, 194, 0.28)); }
+.access-line-point { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
+.access-line-point:hover { fill: var(--accent); }
 .chart-empty { font-size: 13px; color: var(--muted); }
 
 /* ── Jump Anchor ─────────────────────────── */
@@ -1112,7 +1108,7 @@ h1 {
             <span class="filter-label">🏷️ ジャンル</span>
             <div class="tag-filter-container">
                 <div class="filter-chips tag-chips" id="tagFilters">
-                    <span class="chip active" data-tag="all">すべて</span>
+                    <span class="chip active" data-tag="all">すべて<span class="new-count" data-tag="all"></span></span>
                 </div>
                 <button class="chip tag-toggle" id="tagToggle" type="button" aria-expanded="false">もっと見る</button>
             </div>
@@ -1348,6 +1344,19 @@ h1 {
                     el.classList.add("hidden");
                 }
             });
+
+            const tagCounts = { all: counts.world };
+            NEWS_DATA.forEach(item => {
+                if (!isNewContent(item)) return;
+                [...new Set(item.tags || [])].forEach(tag => {
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            });
+            document.querySelectorAll("#tagFilters .new-count").forEach(el => {
+                const count = tagCounts[el.dataset.tag] || 0;
+                el.textContent = count > 0 ? `New ${count}` : "";
+                el.classList.toggle("hidden", count === 0);
+            });
         }
 
         function updateTitleIcon() {
@@ -1427,6 +1436,7 @@ h1 {
             document.getElementById("searchInput").value = itemId;
             document.getElementById("dateFrom").value = "";
             document.getElementById("dateTo").value = "";
+            newOnly = false;
             activeCountries = new Set(["world"]);
             activeTags = new Set(["all"]);
             updateCountryChips();
@@ -2358,7 +2368,11 @@ h1 {
                     const chip = document.createElement("span");
                     chip.className = "chip";
                     chip.dataset.tag = tag;
-                    chip.textContent = tag;
+                    chip.appendChild(document.createTextNode(tag));
+                    const newCount = document.createElement("span");
+                    newCount.className = "new-count hidden";
+                    newCount.dataset.tag = tag;
+                    chip.appendChild(newCount);
                     tagFilters.appendChild(chip);
                 });
 
@@ -2427,6 +2441,7 @@ h1 {
                 const favoritesToggle = document.getElementById("favoritesToggle");
                 if (favoritesToggle) {
                     favoritesToggle.addEventListener("click", () => {
+                        newOnly = false;
                         favoritesOnly = !favoritesOnly;
                         if (!favoritesOnly) clearFavoriteSelections();
                         updateFavoritesToggle();
@@ -2506,6 +2521,7 @@ h1 {
         function handleCountryClick(e) {
             const chip = e.target.closest(".chip");
             if (!chip || !chip.dataset.country) return;
+            newOnly = false;
             const country = chip.dataset.country;
             if (country === "world") {
                 activeCountries = new Set(["world"]);
@@ -2520,8 +2536,10 @@ h1 {
         }
 
         function handleTagClick(e) {
-            if (!e.target.classList.contains("chip")) return;
-            const tag = e.target.dataset.tag;
+            const chip = e.target.closest(".chip");
+            if (!chip || !chip.dataset.tag) return;
+            newOnly = false;
+            const tag = chip.dataset.tag;
             if (tag === "all") {
                 activeTags = new Set(["all"]);
             } else {
@@ -2552,6 +2570,7 @@ h1 {
 
         // タグクリックで検索
         function searchByTag(tag) {
+            newOnly = false;
             document.getElementById("searchInput").value = tag;
             applyFilters();
         }
@@ -2605,6 +2624,7 @@ h1 {
                 const bNew = isNewContent(b);
                 if (aNew !== bNew) return aNew ? -1 : 1;
                 if (sortOrder === "relevance-desc") {
+                    if (!aNew && !bNew) return b.date.localeCompare(a.date);
                     const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
                     const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
                     if (scoreB !== scoreA) return scoreB - scoreA;
