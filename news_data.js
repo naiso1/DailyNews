@@ -101867,11 +101867,11 @@ window.LOADED_NEWS_DATA = [
         date: "2026-08-24",
         tags: ["シート", "新素材"],
     
-        interiorScore: 68,
-        interiorReason: "Jimmy Choo collaboration on IM L6 interior: blue leather, crystal badges, embroi",
-        imageInterior: false,
+        interiorScore: 78,
+        interiorReason: "blue-and-white cabin image shows dashboard, console, steering wheel, and trim",
+        imageInterior: true,
         country: "us",
-        img: "https://www.carscoops.com/wp-content/uploads/2026/08/PJCxIM_8-copy4gvrftg-v-1024x576.jpg",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Jimmy-Choo-IM-L6-new.jpg",
         note: ""
     },
     {
