@@ -1603,7 +1603,7 @@ h1 {
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${getDisplayImageUrl(item.img) || FALLBACK_SRC}" loading="lazy" alt="${item.title || 'news image'}"
+                            <img src="${getDisplayImageUrl(item.img) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
                                 onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
                         </div>
                         <div class="ranking-title-text">${item.title}</div>
@@ -1678,7 +1678,7 @@ h1 {
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${getDisplayImageUrl(item.img) || FALLBACK_SRC}" loading="lazy" alt="${item.title || 'paper image'}"
+                            <img src="${getDisplayImageUrl(item.img) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'paper image'}"
                                 onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
                         </div>
                         <div class="ranking-title-text">${item.title}</div>
@@ -2014,7 +2014,7 @@ h1 {
                 const img = escapeHtml(getDisplayImageUrl(n.img));
                 return `
                     <button class="analysis-float-source" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
-                        <img src="${img}" alt="" loading="lazy" onerror="this.closest('.analysis-float-source').style.display='none'">
+                        <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-float-source').style.display='none'">
                         <span class="analysis-float-title">${title}</span>
                     </button>`;
             };
@@ -2058,7 +2058,7 @@ h1 {
                 const img = escapeHtml(getDisplayImageUrl(n.img));
                 return `
                     <button class="analysis-source-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
-                        <img src="${img}" alt="" loading="lazy" onerror="this.closest('.analysis-source-card').style.display='none'">
+                        <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-source-card').style.display='none'">
                         <span class="analysis-source-title">${title}</span>
                     </button>`;
             }).join("");
@@ -2687,7 +2687,7 @@ h1 {
                 const displayImg = getDisplayImageUrl(n.img || "");
                 card.innerHTML = `
             <div class="thumb">
-                <img src="${displayImg}" alt="${n.title}" loading="lazy" class="img-with-fallback">
+                <img src="${displayImg}" alt="${n.title}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback">
                 <div class="fallback-overlay">イメージ画像</div>
                 ${isNew ? '<span class="new-badge">New</span>' : ''}
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
