@@ -929,6 +929,20 @@ def _item_for_prompt(it: dict) -> str:
     return f"- {id_text}{title} / {desc} / {tags}{score_text}{img_text}"
 
 
+def _non_passenger_vehicle_kind(item: dict) -> str:
+    tags = " ".join(item.get("tags", []) if isinstance(item.get("tags"), list) else [str(item.get("tags", ""))])
+    blob = f"{item.get('title', '')} {item.get('desc', '')} {tags}".lower()
+    if any(term in blob for term in ["\u30d0\u30a4\u30af", "\u30aa\u30fc\u30c8\u30d0\u30a4", "\u4e8c\u8f2a\u8eca", "\u30b9\u30af\u30fc\u30bf\u30fc", "motorcycle", "motorbike", "two-wheeler"]):
+        return "motorcycle"
+    if any(term in blob for term in ["\u8def\u7dda\u30d0\u30b9", "\u89b3\u5149\u30d0\u30b9", "\u9ad8\u901f\u30d0\u30b9", "\u30b9\u30af\u30fc\u30eb\u30d0\u30b9"]):
+        return "bus"
+    if re.search(r"\b(?:buses|bus|coaches|coach)\b", blob) or ("\u30d0\u30b9" in blob and "\u30d0\u30b9\u30b1\u30c3\u30c8" not in blob):
+        return "bus"
+    if re.search(r"\b(?:trucks?|lorries|lorry)\b", blob) or ("\u30c8\u30e9\u30c3\u30af" in blob and "\u30b5\u30a6\u30f3\u30c9\u30c8\u30e9\u30c3\u30af" not in blob):
+        return "truck"
+    return ""
+
+
 def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
     def _score(it: dict):
         tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
@@ -944,6 +958,8 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
         for kw in ["不正", "調査", "投資", "株", "補助金", "販売台数", "工場", "生産台数"]:
             if kw.lower() in blob:
                 weak_penalty += 10
+        if _non_passenger_vehicle_kind(it):
+            weak_penalty += 80
         return (interior_score + keyword_bonus + image_bonus - weak_penalty, len(it.get("desc", "")))
 
     candidates = [
@@ -956,7 +972,8 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
     ]
     preferred = [
         it for it in candidates
-        if it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 55
+        if not _non_passenger_vehicle_kind(it)
+        and (it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 55)
     ]
     # Prefer strong interior signals, but do not stop at 1-2 items. Country
     # analysis needs enough source breadth to explain a market trend.
@@ -990,10 +1007,15 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
         if it.get("newsId")
         and it.get("title")
         and it.get("desc")
+        and not _non_passenger_vehicle_kind(it)
         and (it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 65)
     ]
     if not candidates:
-        candidates = [it for it in items if it.get("newsId") and it.get("title") and it.get("desc")]
+        candidates = [
+            it for it in items
+            if it.get("newsId") and it.get("title") and it.get("desc")
+            and not _non_passenger_vehicle_kind(it)
+        ]
     candidates.sort(key=_score, reverse=True)
     if not candidates:
         return []

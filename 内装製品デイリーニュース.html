@@ -1800,12 +1800,31 @@ h1 {
             return Math.max(0, Math.min(100, Math.round(score)));
         }
 
+        function getNonPassengerVehicleScoreCap(item) {
+            const blob = ` ${getSearchBlob(item)} `;
+            if (/バイク|オートバイ|二輪車|スクーター|\bmotorcycles?\b|\bmotorbikes?\b|\btwo[- ]wheeler\b/.test(blob)) {
+                return 18;
+            }
+            if (/路線バス|観光バス|高速バス|スクールバス|大型バス|中型バス|小型バス|\bbus(?:es)?\b|\bcoaches?\b/.test(blob)
+                || (blob.includes("バス") && !blob.includes("バスケット"))) {
+                return 28;
+            }
+            if ((blob.includes("トラック") && !blob.includes("サウンドトラック")) || /\btrucks?\b|\blorr(?:y|ies)\b/.test(blob)) {
+                return 35;
+            }
+            return null;
+        }
+
         function enhanceNewsItem(item) {
             const localTags = deriveLocalTags(item);
             const storedScore = Number(item.interiorScore);
-            const interiorScore = Number.isFinite(storedScore)
+            const baseInteriorScore = Number.isFinite(storedScore)
                 ? Math.max(0, Math.min(100, Math.round(storedScore)))
                 : computeInteriorRelevance({ ...item, localTags });
+            const vehicleScoreCap = getNonPassengerVehicleScoreCap({ ...item, localTags });
+            const interiorScore = vehicleScoreCap === null
+                ? baseInteriorScore
+                : Math.min(baseInteriorScore, vehicleScoreCap);
             return {
                 ...item,
                 tags: localTags,

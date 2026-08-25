@@ -101732,8 +101732,8 @@ window.LOADED_NEWS_DATA = [
         date: "2026-08-24",
         tags: ["ディスプレイ", "安全"],
     
-        interiorScore: 78,
-        interiorReason: "interior image shows cabin layout and driver display",
+        interiorScore: 28,
+        interiorReason: "non-passenger vehicle cap: bus",
         imageInterior: true,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260824-00000006-rps-000-1-view.jpg",
@@ -101900,7 +101900,7 @@ window.LOADED_NEWS_DATA = [
         interiorReason: "interior gallery of 2026 Mazda CX-5 showing dashboard, center console, and seats",
         imageInterior: true,
         country: "us",
-        img: "https://hips.hearstapps.com/hmg-prod/images/8f5eb318-33ae-4922-baeb-57bc3cb10b61.jpg",
+        img: "https://hips.hearstapps.com/hmg-prod/images/fbba5572-d24d-41df-8bdd-2b950bbffc02.jpg",
         note: ""
     },
     {

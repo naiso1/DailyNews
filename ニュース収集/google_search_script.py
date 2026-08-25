@@ -1027,6 +1027,28 @@ def _contains_any(text, words):
     return any(word in text for word in words)
 
 
+def non_passenger_vehicle_cap(text):
+    """Return a conservative relevance cap for vehicles outside passenger cars."""
+    text = str(text or "").lower()
+    motorcycle_terms = [
+        "\u30d0\u30a4\u30af", "\u30aa\u30fc\u30c8\u30d0\u30a4", "\u4e8c\u8f2a\u8eca", "\u30b9\u30af\u30fc\u30bf\u30fc",
+        "motorcycle", "motorbike", "two-wheeler", "two wheeler",
+    ]
+    bus_terms = [
+        "\u8def\u7dda\u30d0\u30b9", "\u89b3\u5149\u30d0\u30b9", "\u9ad8\u901f\u30d0\u30b9", "\u30b9\u30af\u30fc\u30eb\u30d0\u30b9",
+        "\u5927\u578b\u30d0\u30b9", "\u4e2d\u578b\u30d0\u30b9", "\u5c0f\u578b\u30d0\u30b9",
+    ]
+    if _contains_any(text, motorcycle_terms) or re.search(r"\b(?:motorcycles?|motorbikes?|scooters?)\b", text):
+        return "motorcycle", 18
+    if _contains_any(text, bus_terms) or re.search(r"\b(?:buses|bus|coaches|coach)\b", text):
+        return "bus", 28
+    if "\u30d0\u30b9" in text and "\u30d0\u30b9\u30b1\u30c3\u30c8" not in text:
+        return "bus", 28
+    if ("\u30c8\u30e9\u30c3\u30af" in text and "\u30b5\u30a6\u30f3\u30c9\u30c8\u30e9\u30c3\u30af" not in text) or re.search(r"\b(?:trucks?|lorries|lorry)\b", text):
+        return "truck", 35
+    return "", None
+
+
 def calibrate_interior_score(score, title="", content="", summary="", image_interior=None):
     """Tune LLM score toward usefulness for interior product planning."""
     score = normalize_interior_score(score)
@@ -1080,6 +1102,11 @@ def calibrate_interior_score(score, title="", content="", summary="", image_inte
         score = min(score, 68)
         reason = "defect/recall cap"
 
+    vehicle_class, vehicle_cap = non_passenger_vehicle_cap(text)
+    if vehicle_cap is not None and score > vehicle_cap:
+        score = vehicle_cap
+        reason = f"non-passenger vehicle cap: {vehicle_class}"
+
     return int(max(0, min(100, score))), reason
 
 def call_llm_interior_assessment(title, content, image_url="", url="", summary=""):
@@ -1112,6 +1139,9 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         "Battery deployment/share/capacity => 0-18 unless cabin products or a clear cabin image are present.\n"
         "Sales/factory/partnership/pricing campaign => 0-28 unless interior features are central.\n"
         "ADAS/LiDAR general is not interior unless in-cabin HMI/driver monitoring/display is central.\n"
+        "Buses/coaches are outside the passenger-car interior scope and must score 28 or lower.\n"
+        "Motorcycles/motorbikes/scooters are outside the cabin scope and must score 18 or lower.\n"
+        "Trucks/lorries are secondary to passenger-car interior planning and must score 35 or lower.\n"
         "If two items have similar text relevance, rank the one with a clear interior image higher.\n"
         "Use semantic judgment, not keyword matching.\n"
         f"Title: {title}\n"
