@@ -1127,6 +1127,7 @@ h1 {
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; width: 240px;">
             <select id="sortOrder"
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
+                <option value="new-first" style="background: #1e222d; color: #fff;">New</option>
                 <option value="relevance-desc" style="background: #1e222d; color: #fff;">内装関連度順</option>
                 <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
                 <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
@@ -2285,7 +2286,7 @@ h1 {
             document.getElementById("searchInput").value = rankingBackState.search || "";
             document.getElementById("dateFrom").value = rankingBackState.dateFrom || "";
             document.getElementById("dateTo").value = rankingBackState.dateTo || "";
-            document.getElementById("sortOrder").value = rankingBackState.sortOrder || "relevance-desc";
+            document.getElementById("sortOrder").value = rankingBackState.sortOrder || "new-first";
             activeCountries = new Set(rankingBackState.countries || ["world"]);
             activeTags = new Set(rankingBackState.tags || ["all"]);
             favoritesOnly = Boolean(rankingBackState.favoritesOnly);
@@ -2415,7 +2416,7 @@ h1 {
                 }
                 if (!params.toString()) {
                     document.getElementById("searchInput").value = "";
-                    document.getElementById("sortOrder").value = "relevance-desc";
+                    document.getElementById("sortOrder").value = "new-first";
                     activeCountries = new Set(["world"]);
                     activeTags = new Set(["all"]);
                     favoritesOnly = false;
@@ -2622,16 +2623,20 @@ h1 {
             filteredData.sort((a, b) => {
                 const aNew = isNewContent(a);
                 const bNew = isNewContent(b);
-                if (aNew !== bNew) return aNew ? -1 : 1;
-                if (sortOrder === "relevance-desc") {
-                    if (!aNew && !bNew) return b.date.localeCompare(a.date);
+                if (sortOrder === "new-first") {
+                    if (aNew !== bNew) return aNew ? -1 : 1;
+                    if (aNew && bNew) {
+                        const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
+                        const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
+                        if (scoreB !== scoreA) return scoreB - scoreA;
+                    }
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "relevance-desc") {
                     const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
                     const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
                     if (scoreB !== scoreA) return scoreB - scoreA;
                     return b.date.localeCompare(a.date);
-                }
-
-                if (sortOrder === "date-asc") {
+                } else if (sortOrder === "date-asc") {
                     return a.date.localeCompare(b.date);
                 } else if (sortOrder === "country") {
                     // First by country (jp -> cn -> in), then by date desc within same country
@@ -2777,7 +2782,7 @@ h1 {
             if (from) params.set("from", from);
             if (to) params.set("to", to);
             const sortOrder = document.getElementById("sortOrder").value;
-            if (sortOrder && sortOrder !== "relevance-desc") params.set("sort", sortOrder);
+            if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);
             const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
             history.replaceState(null, "", newURL);
         }
