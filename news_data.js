@@ -102355,7 +102355,7 @@ window.LOADED_NEWS_DATA = [
         interiorReason: "Japanese summary confirms interior details (31 speakers, wood trim) which adds p",
         imageInterior: true,
         country: "eu",
-        img: "images/eu1460.jpg",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/BYD-Da-Han_4.jpg?a3781e&a3781e",
         note: ""
     },
     {
@@ -102368,7 +102368,7 @@ window.LOADED_NEWS_DATA = [
         tags: ["EV"],
         imageInterior: true,
         country: "eu",
-        img: "images/eu1461.jpg",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Volkswagen-ID-Era-5S_2.jpg?a3781e&a3781e",
         note: ""
     },
     {
@@ -102384,7 +102384,7 @@ window.LOADED_NEWS_DATA = [
         interiorReason: "article mentions 27-inch 4K display and AI cabin tech; image clearly shows wide",
         imageInterior: true,
         country: "eu",
-        img: "images/eu1462.jpg",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/04/Hyundai-Ioniq-V_4.jpg?a3781e&a3781e",
         note: ""
     },
     {
