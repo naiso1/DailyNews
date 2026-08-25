@@ -1816,6 +1816,9 @@ h1 {
 
         function getDisplayImageUrl(src) {
             if (!src) return src;
+            // RSS/CSV values may retain an HTML entity. Normalize it before
+            // inserting the URL so analysis cards do not double-escape it.
+            src = src.replace(/&amp;/gi, "&");
             if (src.includes("images.cdn.autocar.co.uk") && src.includes("/styles/car_review_image_190/public/")) {
                 return src.replace("/styles/car_review_image_190/public/", "/").split("?")[0];
             }
