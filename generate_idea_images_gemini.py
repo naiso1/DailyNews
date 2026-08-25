@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 import argparse
 import base64
+import io
 import os
 import re
 from pathlib import Path
 
 import requests
+from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parent
 INSIGHTS_PATH = ROOT / "insights_data.js"
+NEWS_PATH = ROOT / "news_data.js"
 IMAGES_DIR = ROOT / "images"
 IMAGES_DIR.mkdir(exist_ok=True)
 
@@ -16,6 +19,45 @@ DEFAULT_MODEL = "gemini-3.1-flash-image-preview"
 DEFAULT_ASPECT_RATIO = "1:1"
 DEFAULT_IMAGE_SIZE = "512px"  # 0.5K tier
 DEFAULT_API_VERSION = "v1beta"
+DEFAULT_PROXY = "http://202.15.64.202:8080"
+
+
+def _windows_proxy_server() -> str:
+    if os.name != "nt":
+        return ""
+    try:
+        import winreg
+
+        path = r"Software\Microsoft\Windows\CurrentVersion\Internet Settings"
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, path) as key:
+            enabled = int(winreg.QueryValueEx(key, "ProxyEnable")[0])
+            value = str(winreg.QueryValueEx(key, "ProxyServer")[0]).strip()
+        if not enabled or not value:
+            return ""
+        if ";" in value or "=" in value:
+            entries = {}
+            for part in value.split(";"):
+                if "=" in part:
+                    name, server = part.split("=", 1)
+                    entries[name.strip().lower()] = server.strip()
+            value = entries.get("https") or entries.get("http") or ""
+        if value and "://" not in value:
+            value = f"http://{value}"
+        return value
+    except Exception:
+        return ""
+
+
+def configure_external_proxy() -> str:
+    proxy = (
+        os.environ.get("HTTPS_PROXY")
+        or os.environ.get("HTTP_PROXY")
+        or _windows_proxy_server()
+        or DEFAULT_PROXY
+    )
+    for name in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"):
+        os.environ.setdefault(name, proxy)
+    return proxy
 
 
 def extract_latest_block(text: str) -> str:
@@ -52,7 +94,7 @@ def extract_latest_block(text: str) -> str:
 def extract_ideas(block: str):
     ideas = []
     pattern = re.compile(
-        r"\{\s*id:\s*(\d+)\s*,\s*img:\s*\"([^\"]*)\"\s*,\s*title:\s*\"([^\"]*)\"\s*,\s*desc:\s*\"([^\"]*)\"(?:\s*,\s*imagePrompt:\s*\"([^\"]*)\")?(?:\s*,\s*sourceNewsIds:\s*\[[^\]]*\])?\s*\}",
+        r"\{\s*id:\s*(\d+)\s*,\s*img:\s*\"([^\"]*)\"\s*,\s*title:\s*\"([^\"]*)\"\s*,\s*desc:\s*\"([^\"]*)\"(?:\s*,\s*imagePrompt:\s*\"([^\"]*)\")?(?:\s*,\s*sourceNewsIds:\s*\[([^\]]*)\])?\s*\}",
         re.DOTALL,
     )
     for m in pattern.finditer(block):
@@ -63,6 +105,7 @@ def extract_ideas(block: str):
                 "title": m.group(3),
                 "desc": m.group(4),
                 "imagePrompt": m.group(5) or "",
+                "sourceNewsIds": re.findall(r"[a-z]{2,5}\d+", m.group(6) or "", flags=re.IGNORECASE),
             }
         )
     return ideas
@@ -73,25 +116,114 @@ def extract_date(block: str) -> str:
     return m.group(1) if m else ""
 
 
-def build_prompt(title: str, desc: str, image_prompt: str = "", api_key: str = "", model: str = "", idea_id: int = 0) -> str:
-    """画像生成プロンプトを返す。
-    imagePrompt が設定済みならそれを使用。
-    それ以外は日本語タイトル+説明をそのまま渡す（Geminiは日本語直接対応）。
-    """
-    if image_prompt:
-        return image_prompt
+def extract_news_reference_map(text: str) -> dict[str, dict]:
+    """Extract the fields needed to download an idea's source-news images."""
+    result = {}
+    object_pattern = re.compile(
+        r'\{\s*id:\s*"(?P<id>[a-z]{2,5}\d+)"(?P<body>.*?)\n\s*\}',
+        re.DOTALL | re.IGNORECASE,
+    )
+    for match in object_pattern.finditer(text):
+        body = match.group("body")
+        item = {"id": match.group("id").lower()}
+        for field in ("title", "url", "img"):
+            value = re.search(rf'{field}:\s*"((?:\\.|[^"\\])*)"', body, flags=re.DOTALL)
+            item[field] = (value.group(1) if value else "").replace("\\/", "/").replace('\\"', '"')
+        result[item["id"]] = item
+    return result
+
+
+def _prepare_inline_image(raw: bytes) -> tuple[str, bytes]:
+    """Normalize a downloaded image so Gemini receives a compact supported file."""
+    with Image.open(io.BytesIO(raw)) as source:
+        image = ImageOps.exif_transpose(source)
+        image.thumbnail((1280, 1280), Image.Resampling.LANCZOS)
+        has_alpha = image.mode in ("RGBA", "LA") or "transparency" in image.info
+        output = io.BytesIO()
+        if has_alpha:
+            image.convert("RGBA").save(output, format="PNG", optimize=True)
+            return "image/png", output.getvalue()
+        image.convert("RGB").save(output, format="JPEG", quality=86, optimize=True)
+        return "image/jpeg", output.getvalue()
+
+
+def download_reference_image(item: dict, timeout: int = 60) -> tuple[str, bytes]:
+    image_url = (item.get("img") or "").strip()
+    if not image_url:
+        raise ValueError("news item has no image URL")
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+        ),
+        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    }
+    if item.get("url"):
+        headers["Referer"] = item["url"]
+    response = requests.get(image_url, headers=headers, timeout=timeout)
+    response.raise_for_status()
+    if not response.content:
+        raise ValueError("empty image response")
+    return _prepare_inline_image(response.content)
+
+
+def build_reference_parts(idea: dict, news_map: dict[str, dict], max_images: int = 2) -> list[dict]:
+    parts = []
+    seen_urls = set()
+    for news_id in idea.get("sourceNewsIds", []):
+        if len(parts) // 2 >= max_images:
+            break
+        item = news_map.get(str(news_id).lower())
+        if not item:
+            print(f"[REF_SKIP] {idea['id']}: {news_id} not found in news_data.js")
+            continue
+        image_url = (item.get("img") or "").strip()
+        if not image_url or image_url in seen_urls:
+            continue
+        try:
+            mime_type, image_bytes = download_reference_image(item)
+        except Exception as exc:
+            print(f"[REF_FAIL] {idea['id']}: {news_id}: {exc}")
+            continue
+        seen_urls.add(image_url)
+        parts.append({"text": f"Reference news image ({news_id})."})
+        parts.append(
+            {
+                "inline_data": {
+                    "mime_type": mime_type,
+                    "data": base64.b64encode(image_bytes).decode("ascii"),
+                }
+            }
+        )
+        print(f"[REF] {idea['id']}: {news_id} ({len(image_bytes) // 1024} KB)")
+    return parts
+
+
+def build_prompt(title: str, desc: str, image_prompt: str = "", has_references: bool = False) -> str:
+    """Build an image brief and explain how any attached news photos should be used."""
     import re as _re
     clean_title = _re.sub(r'\*+', '', title).strip()
     clean_desc = _re.sub(r'\*+', '', desc).strip()
     clean_desc = _re.sub(r'\[[a-z]{2,5}\d+\]', '', clean_desc)
     clean_desc = _re.sub(r'\s+', ' ', clean_desc)[:700]
+    concept_visual = image_prompt.strip() if image_prompt else clean_desc
+    reference_instruction = (
+        "The following image or images are source-news references. Use only their relevant physical design, "
+        "material, packaging, and cabin-context cues. Do not copy their composition, branding, logos, text, "
+        "people, or the complete vehicle. Transform the cues into the distinct concept described below."
+        if has_references
+        else ""
+    )
     return (
         "Create one square photorealistic concept render of an automotive interior product. "
         "Do not include any text, labels, logos, captions, UI words, watermarks, or people. "
-        "Show the physical object clearly in a modern vehicle cabin with premium materials, "
-        "realistic lighting, detailed surfaces, and production-ready industrial design.\n\n"
+        "Do not design a seat, seat cushion, seat frame, seat cover, headrest, or seating product. "
+        "Show the physical product clearly in a modern passenger-vehicle cabin with premium materials, "
+        "realistic lighting, detailed surfaces, and production-feasible industrial design.\n"
+        f"{reference_instruction}\n\n"
         f"Concept name: {clean_title}\n"
-        f"Design brief: {clean_desc}"
+        f"Design brief: {clean_desc}\n"
+        f"Requested visual direction: {concept_visual}"
     )
 
 
@@ -124,7 +256,10 @@ def main():
     ap.add_argument("--aspect-ratio", default=os.environ.get("GEMINI_IMAGE_ASPECT_RATIO", DEFAULT_ASPECT_RATIO))
     ap.add_argument("--image-size", default=os.environ.get("GEMINI_IMAGE_SIZE", DEFAULT_IMAGE_SIZE))
     ap.add_argument("--api-version", default=os.environ.get("GEMINI_API_VERSION", DEFAULT_API_VERSION))
+    ap.add_argument("--no-reference-images", action="store_true", help="Do not attach source-news images")
+    ap.add_argument("--max-reference-images", type=int, default=2)
     args = ap.parse_args()
+    configure_external_proxy()
 
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -143,6 +278,10 @@ def main():
     if not ideas:
         print("No ideas found in latest block.")
         return
+
+    news_map = {}
+    if not args.no_reference_images:
+        news_map = extract_news_reference_map(NEWS_PATH.read_text(encoding="utf-8"))
 
     updated = text
     count = 0
@@ -174,9 +313,20 @@ def main():
             updated = update_image_path(updated, idea["id"], f"images/{dest_path.name}")
             continue
 
-        prompt_text = build_prompt(idea["title"], idea["desc"], idea.get("imagePrompt", ""))
+        reference_parts = build_reference_parts(
+            idea,
+            news_map,
+            max_images=max(0, args.max_reference_images),
+        ) if news_map else []
+        prompt_text = build_prompt(
+            idea["title"],
+            idea["desc"],
+            idea.get("imagePrompt", ""),
+            has_references=bool(reference_parts),
+        )
+        request_parts = [{"text": prompt_text}, *reference_parts]
         payload = {
-            "contents": [{"parts": [{"text": prompt_text}]}],
+            "contents": [{"parts": request_parts}],
             "generationConfig": {
                 "responseModalities": ["IMAGE"],
                 "imageConfig": {

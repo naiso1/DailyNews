@@ -485,6 +485,27 @@ def _clean_idea_field(text: str, max_len: int = 400) -> str:
     return text[:max_len]
 
 
+def _is_out_of_scope_seat_product(text: str) -> bool:
+    """Return True when an idea is primarily a seat product, which is out of scope."""
+    normalized = re.sub(r"\s+", " ", str(text or "")).lower()
+    # Seat belts are safety products rather than seating products, so do not
+    # reject an otherwise valid idea only because that term appears.
+    normalized = normalized.replace("シートベルト", "").replace("seat belt", "").replace("seatbelt", "")
+    if any(
+        term in normalized
+        for term in [
+            "シート",
+            "座席",
+            "座面",
+            "背もたれ",
+            "ヘッドレスト",
+            "ランバーサポート",
+        ]
+    ):
+        return True
+    return bool(re.search(r"\b(?:seat|seats|seating|headrest|headrests|backrest|backrests)\b", normalized))
+
+
 def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
     picked = []
     picked_texts = []
@@ -506,6 +527,8 @@ def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
         if not title or not desc:
             continue
         cand = f"{title} {desc}"
+        if _is_out_of_scope_seat_product(cand):
+            continue
         duplicate = False
         for ht in history_texts:
             if _similarity(cand, ht) >= 0.58:
@@ -992,7 +1015,7 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
         interior_score = float(interior_score) if interior_score is not None else 0.0
         blob = f"{it.get('title', '')} {it.get('desc', '')} {tags}".lower()
         keyword_bonus = 0
-        for kw in ["シート", "ディスプレイ", "HMI", "コックピット", "コンソール", "ステア", "イルミ", "安全", "新素材", "音響"]:
+        for kw in ["ディスプレイ", "HMI", "HUD", "コックピット", "コンソール", "ステア", "イルミ", "安全", "新素材", "音響", "ドアトリム", "インパネ"]:
             if kw.lower() in blob:
                 keyword_bonus += 5
         image_bonus = 8 if it.get("imageInterior") is True else 0
@@ -1008,6 +1031,7 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
         and it.get("title")
         and it.get("desc")
         and not _non_passenger_vehicle_kind(it)
+        and not _is_out_of_scope_seat_product(f"{it.get('title', '')} {it.get('desc', '')}")
         and (it.get("imageInterior") is True or (it.get("interiorScore") or 0) >= 65)
     ]
     if not candidates:
@@ -1015,6 +1039,7 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
             it for it in items
             if it.get("newsId") and it.get("title") and it.get("desc")
             and not _non_passenger_vehicle_kind(it)
+            and not _is_out_of_scope_seat_product(f"{it.get('title', '')} {it.get('desc', '')}")
         ]
     candidates.sort(key=_score, reverse=True)
     if not candidates:
@@ -1056,7 +1081,11 @@ def make_country_prompt(
     angles = load_idea_angles()
     angle = random.choice(angles) if angles else ""
     angle_instruction = f"    - 【今回の発想切り口】1件目は「{angle}」の視点で発想すること（ただしニュース内容と関連させること）\n" if angle else ""
-    tg_products = load_tg_products()
+    tg_products = [
+        product
+        for product in load_tg_products()
+        if not _is_out_of_scope_seat_product(f"{product.get('name', '')} {product.get('desc', '')}")
+    ]
     tg_product = random.choice(tg_products) if tg_products else None
     tg_constraint = ""
     if tg_product:
@@ -1088,8 +1117,11 @@ def make_country_prompt(
 {angle_instruction}{tg_constraint}    - 過去アイデアの言い換え・焼き直しは禁止
     - 各ideasは、対応する【アイデア用アンカーニュース】だけを根拠にする
     - 1つのideasが参照してよいニュースは最大2件まで。アンカー外のニュースや市場全体の一般論を根拠にしない
+    - アンカーニュースの主題となる部品・材料・操作上の課題を企画の中核にする。無関係な技術を足して別ジャンルの製品へ飛躍しない
     - 各ideasのdescには、アンカーニュース固有の車名・部品名・技術名・数値のいずれかを必ず1つ以上入れる
     - sourceNewsIdsには、対応するanchor IDsのみを入れる
+    - シート、座席、座面、背もたれ、ヘッドレストなどの座席製品は企画対象外。ニュースに含まれていてもideasでは提案しない
+    - 企画対象はインパネ、センターコンソール、ドアトリム、ステアリング/HMI、照明、安全表示、内装加飾・材料、音響・静粛、ウェザーストリップ等を優先する
     - うれしさを必ず明記
     - titleは日本語を基本に20文字以内の短い名称のみ（英語のみは禁止、説明・括弧書き・句点を含めない）
     - descは120〜180文字程度。長い背景説明ではなく、何を作るか・誰がうれしいかを端的に書く
