@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-26 01:41";
+window.NEWS_UPDATED_AT = "2026-08-27 01:51";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -103130,6 +103130,708 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "jp",
         img: "https://prtimes.jp/img/79792/1125/resize/d79792-1125-ff29da2f88a5b18164b8-18.jpg",
+        note: ""
+    },
+    // 2026-08-26 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1691",
+        title: "オートバックス、小型3輪EV『Lean3』受注開始。エアコン付きキャビン搭載",
+        desc: "オートバックスセブンは8月26日、リーンモビリティ製都市型小型EV「Lean3」の受注を開始した。全長2480mmのコンパクトな車体にエアコン付きキャビンを備え、最高速度60km/h、航続距離約100kmを実現する。価格は169万8000円からで、納車は2026年10月以降を予定している。",
+        url: "https://news.yahoo.co.jp/articles/545678da41df6e8a7e33c1552a34e0fa51e0ca63?source=rss",
+        source: "レスポンス",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        interiorScore: 11,
+        interiorReason: "vehicle is a 3-wheeler (Lean3), which falls outside the standard passenger-car i",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00000021-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1692",
+        title: "サンコール竹炭新素材KYO BAMBLACKをものづくりフォーラムで提案",
+        desc: "サンコールは9月11日、大阪で開催されるものづくりパートナーフォーラム2026に出展する。京都ブランド「KYO BAMBLACK」を紹介し、竹害対策で伐採した竹を原料とした新素材の特性や活用方法を提案する。同素材は消臭効果や漆黒性を持ち、環境配慮型製品開発を目指す企業向けに相談に応じる。",
+        url: "https://news.yahoo.co.jp/articles/1252b572b81a5ec09ed5d56599dd26a8ba4a2918?source=rss",
+        source: "レスポンス",
+        date: "2026-08-26",
+        tags: ["新素材"],
+    
+        interiorScore: 43,
+        interiorReason: "bamboo charcoal material proposal for interior applications",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00000016-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1693",
+        title: "日産ノートAUTECH LINE仕様変更助手席回転シート選択肢拡大",
+        desc: "日産はノートAUTECH LINEのフロントバンパーフィニッシャーをボディ同色に変更し、ステアリングを合成皮革素材のテーラーフィットへ切り替えた。またノートオーラ特装車にシートヒーターを標準装備し、黒テーマの新グレードBlack Editionをベースに助手席回転シートを新たに設定した。",
+        url: "https://news.yahoo.co.jp/articles/57d364ef1b841d1c3118452337d3e69beb071287?source=rss",
+        source: "レスポンス",
+        date: "2026-08-26",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 63,
+        interiorReason: "interior features: rotating passenger seat, leather steering wheel, seat heater,",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00000008-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1694",
+        title: "日産新型キックス北米と日本でのパワートレイン違いとe-POWER採用の背景",
+        desc: "日産新型キックスは地域によりパワートレインを変える。北米は2.0Lガソリン、日本はe-POWERのみだ。各国の需要に応じた戦略である。",
+        url: "https://news.yahoo.co.jp/articles/e3463f36fe78ec99889ee4332fa3fd612d95380b?source=rss",
+        source: "carview!",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1695",
+        title: "日本車のフロントグリルがメッキからブラックへ移行する背景と理由",
+        desc: "1960年代から高級車はメッキ、スポーツカーはブラックと区分けされてきた日本車のフロントグリルだが、近年はブラック加飾やボディ同色へ移行している。この変化は、デザインの一貫性や空力性能の向上、そして高級感の表現方法が変化したことが背景にある。",
+        url: "https://news.yahoo.co.jp/articles/36534f02863e361759dabbfd6dd291f7f6b385c8?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00010008-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1696",
+        title: "ホンダUNIBOXの透明ボディと6輪構造がNBOXフリードの原点",
+        desc: "透明パネルと6輪構造が特徴のUNIBOXは、ウッドフロアと可動式シートで開放的な室内空間を実現した。この大空間コンパクト思想は後のN-BOXやフリードに受け継がれた。",
+        url: "https://news.yahoo.co.jp/articles/9528ab7da0a889d6b0c0a78c3046b0d73f67c451?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-26",
+        tags: ["シート"],
+    
+        interiorScore: 78,
+        interiorReason: "historical concept car with visible interior layout and wood floor, but low dire",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1697",
+        title: "電動パーキングブレーキの利点と故障時の高額修理費用に注意",
+        desc: "ホンダN-BOXやダイハツタントなど新型車で普及した電動パーキングブレーキは、オートブレーキホールドと連動し運転負担を軽減する。しかしユニットが複雑なため故障時は修理費用が高額になるリスクがあり、万能装備ではない点に注意が必要だ。",
+        url: "https://news.yahoo.co.jp/articles/66db656e48981e05e2b0c76cc226d33d677a2639?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        interiorScore: 78,
+        interiorReason: "focus on EPB switch usability and maintenance costs, with clear interior image o",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00010003-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1698",
+        title: "モデリスタがクラウンエステートにアーバンパラディンコンセプトのエアロとメッキ加飾を提案",
+        desc: "トヨタ「クラウン エステート」に対し、モデリスタが「アーバンパラディン」をテーマにしたカスタマイズプログラムを提供する。エアロパーツセットとメッキ加飾、21インチホイールを組み合わせ、実用性を損なわずに存在感を高める。",
+        url: "https://news.yahoo.co.jp/articles/b4412e249f135cd7c593e3cf913736fd633809a6?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-08-26",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 18,
+        interiorReason: "focuses on exterior aerodynamic parts and chrome trim; no interior details or ca",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00010009-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1699",
+        title: "中免で乗れる軽量アドベンチャーバイク3選ダートも高速も疲れ知らず",
+        desc: "日本のバイク市場で支持される軽量アドベンチャーモデルは、オフロードの走破性とオンロードの快適性を両立。アップライトな乗車姿勢により、高速道路からダートまで長時間の走行でも疲れにくく、中免資格で乗車可能な3車種が紹介されている。",
+        url: "https://news.yahoo.co.jp/articles/d52f21678ff263ddabfeb3c803380d204ba9da9b?source=rss",
+        source: "VAGUE",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-10450834-vague-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1700",
+        title: "ジムニーノマド2型内装大幅進化メーターカラー化と9インチディスプレイオーディオ追加",
+        desc: "ジムニーノマド2型の内装が大幅に進化し、メーターパネルのマルチインフォメーションディスプレイがカラー表示へ変更された。アナログ燃料計の追加やステアリングスイッチへのハンズフリーボタン設置も特徴である。",
+        url: "https://news.yahoo.co.jp/articles/3d134c4913f4107c9b8aab78c008ebfd0daabace?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-26",
+        tags: ["ディスプレイ", "音響"],
+    
+        interiorScore: 72,
+        interiorReason: "Title and summary explicitly describe a major interior refresh (color meter, 9-i",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260826-00000008-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1509",
+        title: "ヒュンダイ、Nラインより上位の新スポーツカーラインに高性能エンジン搭載",
+        desc: "ヒュンダイは既存のNラインをさらに上回る、本格的なスポーツカーラインを計画している。これは既存のNモデルより下位だが、外観のみの変更にとどまるNラインよりも性能を重視した車両となる。",
+        url: "https://www.thedrive.com/news/hyundai-is-going-all-in-on-volume-high-performance-cars-tds",
+        source: "The Drive",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/GettyImages-2224806284.jpg?quality=85&w=2048",
+        note: ""
+    },
+    {
+        id: "us1510",
+        title: "EVでスーパーカーを席巻したリマックがガソリンの未来を語る",
+        desc: "Mate RimacはEV技術で名声を築いたが、将来の富裕層はエンジンや職人技、個性を重視すると指摘。自動車内装や素材の進化よりも、動力源としてのガソリンの価値を再評価する立場を示した。",
+        url: "https://www.carscoops.com/2026/08/bugatti-rimac-combustion-future/",
+        source: "CarScoops",
+        date: "2026-08-26",
+        tags: ["新素材", "EV"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Mate-Rimac-Bugatti-Aug26261-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1511",
+        title: "ウェイモ自動運転車重大事故16回減少 ミュンヘン導入は2027年まで待機",
+        desc: "ウェイモは自動車の重大事故率が人間より16倍少ないと主張する。ミュンヘンのロボットタクシーは2027年末まで有料乗客を待機する。",
+        url: "https://www.carscoops.com/2026/08/waymo-germany-launch/",
+        source: "CarScoops",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Waymo-Germany-plan-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1512",
+        title: "クラシックカーの燃料ポンプ選定で機械式と電動式の特性比較",
+        desc: "キャブレター搭載のクラシックカー修復では機械式燃料ポンプが適し、現代の新車では電動式が標準となる。両者の特性と選択基準を比較する。",
+        url: "https://www.jalopnik.com/2242637/mechanical-vs-electric-fuel-pump-differences-pros-cons/",
+        source: "Jalopnik",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/mechanical-vs-electric-fuel-pump-pros-cons-and-differences-between-them/l-intro-1787581653.jpg",
+        note: ""
+    },
+    {
+        id: "us1513",
+        title: "1976年ジープCJ-5とCJ-7レネゲードのインテリア公開",
+        desc: "1976年モデルのジープCJ-5およびCJ-7レネゲードの内外装を多角的に撮影した写真が公開された。本記事では、車両のデザインや装備の詳細を視覚的に確認できる。",
+        url: "https://www.caranddriver.com/photos/a73524142/1976-jeep-cj-5-and-cj-7-renegade-archive-test-gallery/",
+        source: "Car and Driver",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/5566f3a4-85d0-4a62-b1dc-42c34a9e9ab9.jpg",
+        note: ""
+    },
+    {
+        id: "us1514",
+        title: "ヒュンダイNパフォーマンス部門が拡大へN Liteモデルで性能と外観の格差を埋める",
+        desc: "ヒュンダイの高性能部門Nは、N Lineの外観パッケージと本格的なNパフォーマンス車の間に位置する「N Lite」モデルシリーズを展開することで事業を拡大する。これにより、外観と性能の中間層をターゲットとした新たなラインナップが提供される。",
+        url: "https://www.caranddriver.com/news/a73528959/hyundai-n-performance-division-expansion-plan/",
+        source: "Car and Driver",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/6ce9d94c-0d5f-41a3-a312-8c04eb062427.jpg",
+        note: ""
+    },
+    {
+        id: "us1515",
+        title: "ホンダアコードクーペ消滅の背景と代替車種",
+        desc: "ホンダアコードの2ドアモデルは約10年前に生産終了した。現在、同様のクーペスタイルを求める消費者向けに、代替となる車種がいくつか存在する。市場のSUV志向や燃費規制の厳格化が、2ドア車の衰退要因として挙げられる。",
+        url: "https://www.caranddriver.com/shopping-advice/a73456080/honda-accord-coupe-history-alternatives/",
+        source: "Car and Driver",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/wp-content/uploads/2015/09/2016-Honda-Accord-V-6-coupe-101.jpg",
+        note: ""
+    },
+    {
+        id: "us1516",
+        title: "ポルシェ911ベースの低価格レーシングカー911チャレンジを初公開",
+        desc: "ポルシェは911 GT3をベースにしたエントリーレベルのレーシングカー「911 Challenge」を世界初公開した。価格は27万5000ドルで、公道走行可能な同型車の実勢価格を下回る可能性がある。この車両はモータースポーツへの参入障壁を下げ、より多くのドライバーがレースに挑戦できる環境を提供する。",
+        url: "https://www.caranddriver.com/news/a73525722/porsche-911-challenge-race-car-revealed/",
+        source: "Car and Driver",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/9b6bae0b-9d90-4e2f-8feb-91a038f54bb4.jpg",
+        note: ""
+    },
+    {
+        id: "us1517",
+        title: "2027年型テラライドがプレミアムSUVの代替として注目を集める理由",
+        desc: "2027年型キア・テラライドは、329馬力のハイブリッドエンジンと洗練された内装でプレミアムSUVに迫る価値を提供する。12.3インチディスプレイやメルディアンサウンドシステムを備え、高級車並みの快適装備を標準またはオプションで実現。",
+        url: "https://www.topspeed.com/kia-suv-quietly-became-premium-alternative/",
+        source: "Top Speed",
+        date: "2026-08-26",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 63,
+        interiorReason: "article discusses interior refinement, displays, and audio, but image is exterio",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/11/batch_5rqec802.jpg",
+        note: ""
+    },
+    {
+        id: "us1518",
+        title: "馬力よりトルクと快適性を両立したスポーツカーの真価",
+        desc: "Speed Twinは馬力数値の追求を避け、実用的なトルクと快適性を重視した設計となっている。このアプローチにより、日常使いでも本格的な走行体験を楽しめるバランスの取れたスポーツカーを実現している。",
+        url: "https://www.topspeed.com/roadster-nails-balance-between-comfort-performance/",
+        source: "Top Speed",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/triumph-speed-twin-1200_4.jpg",
+        note: ""
+    },
+    {
+        id: "eu1473",
+        title: "現代とジェネシスが2030年までに欧州で41車種を投入",
+        desc: "現代自動車はプレミアムブランドのジェネシスを含め、2030年までに欧州市場で41台の新車または改良車を投入すると発表した。これは中国勢の台頭で欧州を後回しにする他アジア系ブランドとは対照的な戦略だ。欧州専用小型SUVや新型i20などが含まれる。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/hyundai-and-genesis-launch-41-new-cars-europe-2030",
+        source: "AUTOCAR UK",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/image_4_0.jpg?itok=maBPN_FC",
+        note: ""
+    },
+    {
+        id: "eu1474",
+        title: "ボルボ新車EX60EX90ES90が動物やサイクリストを他車に警告する新機能搭載",
+        desc: "ボルボのEX60、EX90、ES90に新たなソフトウェアアップデートが適用され、車両のセンサーとカメラで道路脇の大型動物を検知し、クラウド経由で近傍の接続済みボルボ車に危険情報を送信する機能が追加された。これにより、他のボルボのドライバーは動物やサイクリストの存在を事前に警告され、安全性が向上する。",
+        url: "https://www.autocar.co.uk/car-news/technology/new-volvos-now-able-warn-other-cars-animals-cyclists-road",
+        source: "AUTOCAR UK",
+        date: "2026-08-26",
+        tags: ["センシング", "安全"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/volvo-es90-2026-jh-2.jpg?itok=b05s1HeX",
+        note: ""
+    },
+    {
+        id: "eu1475",
+        title: "英国のZEV義務見直しでハイブリッド車が救済か自動車内装業界に波及",
+        desc: "英国のゼロエミッション車義務の見直しにより、トヨタやBMWミニ、日産などの工場がハイブリッド車の生産を維持できる可能性が高まっている。これにより、欧州で高騰する製造コストの課題に対し、内装材やコックピット関連のサプライチェーンが安定する見込みだ。",
+        url: "https://www.autocar.co.uk/opinion/business-manufacturing/zev-mandate-review-could-give-hybrid-lifeline-uk-car-factories",
+        source: "AUTOCAR UK",
+        date: "2026-08-26",
+        tags: ["コックピット", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/nissan-qashqai-production-sunderland_2_0.jpg?itok=zZ5oO8V7",
+        note: ""
+    },
+    {
+        id: "eu1476",
+        title: "BMW iX3で家族旅行1400マイルのEV実態",
+        desc: "BMW iX3を用いた1400マイルの家族旅行実証で、EVの長距離移動における充電頻度と実用性が検証された。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/truth-about-electric-car-holidays-1400-miles-bmw-ix3",
+        source: "AUTOCAR UK",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/img_7032.jpg?itok=sniDhnw5",
+        note: ""
+    },
+    {
+        id: "eu1477",
+        title: "駐車場なしでも充電可能アパート住まいのEV所有者向け充電ソリューション",
+        desc: "自宅に駐車スペースがなくても電気自動車の充電は可能である。アパートやマンション住まいのEV所有者向けに、充電設備の設置方法や公共充電器の活用など、具体的な解決策が提示されている。これにより、充電環境の不安を解消し、EV購入の障壁を下げている。",
+        url: "https://www.autocar.co.uk/car-news/advice-electric-cars/how-charge-electric-car-apartment-or-flat",
+        source: "AUTOCAR UK",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/night-charging-feature-3.jpg?itok=kBEgcnCi",
+        note: ""
+    },
+    {
+        id: "eu1478",
+        title: "ヒュンダイNパフォーマンスティックが7車種投入へ",
+        desc: "ヒュンダイの高性能部門Nが、将来の7車種投入と販売目標を表明した。Nブランドの成長が期待され、特にRWDスポーツカーなど新モデルの展開が注目されている。",
+        url: "https://www.autoexpress.co.uk/hyundai/370314/hyundai-n-rwd-sports-car-and-lots-more-due-brands-performance-division",
+        source: "Auto Express",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--NPFhnPJ9--/t_rss_image_w_845/v1787740745/autoexpress/2026/08/Hyundai%20ELANTRA%20N%20TCR%20Edition_lsaet6.jpg",
+        note: ""
+    },
+    {
+        id: "eu1479",
+        title: "ボルボ新型コネクテッドセーフティでV2V通信による歩行者や工事警告を他車に提供",
+        desc: "ボルボは電気車向けコネクテッドセーフティをアップグレードし、V2V通信で歩行者や工事、事故情報を他車に警告する機能を追加する。EX60やEX90などが対象で、英国で順次提供される。これにより、ドライバーは早期に危険を察知し、事故回避に貢献する。",
+        url: "https://www.autoexpress.co.uk/volvo/370306/new-volvo-connected-car-tech-can-warn-other-cars-pedestrians-roadworks-and-more",
+        source: "Auto Express",
+        date: "2026-08-26",
+        tags: ["コネクテッド", "安全"],
+    
+        interiorScore: 22,
+        interiorReason: "V2V external communication technology; image is exterior only",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--dSeu3_ms--/t_rss_image_w_845/v1734365451/autoexpress/2024/12/Volvo%20EX90-25.jpg",
+        note: ""
+    },
+    {
+        id: "eu1480",
+        title: "販売中のEVワースト21車種ランキング発表",
+        desc: "販売中の電気自動車（EV）を総合的に評価し、最下位21車種をランキング形式で発表した。評価基準は信頼性、維持費、性能などを基にしている。このリストは購入検討者にとって参考となる情報源であり、各車種の具体的な弱点や改善すべき点も示されている。",
+        url: "https://www.autoexpress.co.uk/features/370268/21-worst-electric-cars-sale",
+        source: "Auto Express",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--xVmVYOYH--/t_rss_image_w_845/v1787237655/autoexpress/2026/08/161%20best%20and%20worst%20EVs.jpg",
+        note: ""
+    },
+    {
+        id: "cn1504",
+        title: "吉利傘下のLynk&Coが新型02のインテリアを公開。紫と金の配色が特徴的。",
+        desc: "更新型Lynk & Co 02の内装が公開された。紫と白のインテリアに金色のスピーカーカバーが採用され、50Wワイヤレス充電器を備える。",
+        url: "https://carnewschina.com/2026/08/26/updated-lynk-co-02-with-16-in-1-electric-drive-reveals-interior-ahead-of-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-08-26",
+        tags: ["EV", "音響"],
+    
+        interiorScore: 83,
+        interiorReason: "interior reveal with specific details (purple/gold trim, 50W charger, speaker co",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/geely_lynk_co_02-4-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1505",
+        title: "BYD揚王U7のバッテリー劣化テスト結果",
+        desc: "BYDの高級車「揚王U7」が3万km走行と9日間で350回以上の急速充電を実施した耐久テストの結果、バッテリー容量は初期値から1.3%低下し98.7%を維持した。このデータは、同車のバッテリー耐久性と急速充電への耐性が極めて高いことを示している。",
+        url: "https://carnewschina.com/2026/08/26/byds-yangwang-u7-battery-capacity-dips-1-3-after-30000-km-and-350-flash-charges-in-9-days/",
+        source: "CarNewsChina - All",
+        date: "2026-08-26",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-170-scaled-e1787724787119_webhook_1500x900_q85_1787725372.jpg",
+        note: ""
+    },
+    {
+        id: "cn1506",
+        title: "小米、中国初の3nm自律走行用AIチップ「Xring D100」を発表",
+        desc: "小米は中国初となる3nmプロセスの自律走行用AIチップ「Xring D100」を発表した。このチップは自動運転システムの高度化を目的としており、小米の自動車事業における技術力強化を示すものとなる。",
+        url: "https://carnewschina.com/2026/08/26/xiaomi-unveils-chinas-first-3nm-self-developed-intelligent-driving-chip/",
+        source: "CarNewsChina - All",
+        date: "2026-08-26",
+        tags: ["AI"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-168-675x900.png",
+        note: ""
+    },
+    {
+        id: "cn1507",
+        title: "セレス新ブランドAivaがCATL電池交換技術を採用",
+        desc: "AITOの親会社であるセレスが展開する新ブランド「Aiva」は、CATLの電池交換技術を採用する。これにより、EVの充電時間短縮と利便性向上が期待される。",
+        url: "https://carnewschina.com/2026/08/26/aito-maker-seres-new-aiva-brand-to-feature-catl-battery-swapping/",
+        source: "CarNewsChina - All",
+        date: "2026-08-26",
+        tags: ["AI", "EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-167-e1787705921434.png",
+        note: ""
+    },
+    {
+        id: "cn1508",
+        title: "極狐アルファT7の予約が開始され、価格は13万7800元から。華為技術のADASを搭載。",
+        desc: "北京汽車の極狐アルファT7が予約販売を開始した。価格は13万7800元からで、華為技術のADS 5 Proや17.3インチ3Kスクリーンを装備。BEVは最大715kmの航続距離を実現し、CATL製バッテリーを採用する。",
+        url: "https://cnevpost.com/2026/08/26/arcfox-alpha-t7-opens-pre-sales/",
+        source: "CnEVPost - All",
+        date: "2026-08-26",
+        tags: ["ディスプレイ", "EV", "バッテリー", "安全"],
+    
+        interiorScore: 40,
+        interiorReason: "Japanese summary mentions a 17.3-inch 3K screen, which is a specific HMI detail",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082613445442.jpg",
+        note: ""
+    },
+    {
+        id: "cn1509",
+        title: "テスラの中国でのFSD撤退に関する噂を否定、上海のデータセンターは正常に稼働中",
+        desc: "テスラ中国は上海のデータセンターが正常に稼働していることを明らかにし、FSD（完全自動運転）の撤退に関するオンライン上の噂を警察に通報したと発表した。ただし、中国における完全自動運転機能の展開時期については、依然として不透明な状況が続いている。",
+        url: "https://cnevpost.com/2026/08/26/tesla-denies-rumors-china-fsd-pullout/",
+        source: "CnEVPost - All",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082612592866.jpg",
+        note: ""
+    },
+    {
+        id: "cn1510",
+        title: "Xiaomi Auto、2027年欧州進出へグローバルサイト公開",
+        desc: "Xiaomi Autoの国際ウェブサイトによると、同ブランドは2027年に欧州市場に正式に進出する予定であり、ディーラーおよび流通パートナーシップに関する問い合わせを受け付けています。詳細はCnEVPost（cnev.co）をご覧ください。",
+        url: "https://cnevpost.com/2026/08/26/xiaomi-auto-launches-global-website-social-channels/",
+        source: "CnEVPost - All",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082610211438.jpg",
+        note: ""
+    },
+    {
+        id: "cn1511",
+        title: "トヨタ新型bZ5発売 中国市場向け運転支援強化と値下げで販売回復狙う",
+        desc: "FAWトヨタは新型bZ5を発売した。運転支援システムをMomenta 6.0にアップグレードし、限定価格を10万9800元から提供。内装には15.6インチタッチスクリーンとJBLスピーカーを搭載。中国市場での販売低迷を打破するため、技術強化と価格競争力を両立させる戦略だ。",
+        url: "https://cnevpost.com/2026/08/26/toyota-launches-refreshed-bz5-china/",
+        source: "CnEVPost - All",
+        date: "2026-08-26",
+        tags: ["ディスプレイ", "音響"],
+    
+        interiorScore: 40,
+        interiorReason: "interior details in text but image is exterior",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082606312540.jpg",
+        note: ""
+    },
+    {
+        id: "cn1512",
+        title: "中国、未検証の自動車の市場参入を禁止へ",
+        desc: "中国工業情報化省は、品質や自動運転の安全リスクを理由に、十分な試験検証を行っていない自動車製品の市場参入を禁止する方針を明らかにした。東風汽車などのメーカーに対し、市場参入審査の強化と生産適合検査の徹底を求めている。",
+        url: "https://cnevpost.com/2026/08/26/china-to-bar-inadequately-tested-auto-products-from-market/",
+        source: "CnEVPost - All",
+        date: "2026-08-26",
+        tags: ["安全"],
+    
+        interiorScore: 8,
+        interiorReason: "regulatory policy regarding validation processes; no interior product details",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082605324268.jpg",
+        note: ""
+    },
+    {
+        id: "cn1513",
+        title: "理想汽車の次世代「Mega」が9月2日に発売。内装を一新し、知覚ハードウェアを強化。",
+        desc: "理想汽車は9月2日、次世代Megaを発売する。車内は他モデルと異なる独自デザインとし、リビングモードで後部座席全体を照らすメインライトを追加。知覚面ではLiDARを1基から4基に増強。販売不振の立て直しを図る。",
+        url: "https://cnevpost.com/2026/08/26/li-auto-launch-next-gen-mega-sept-2/",
+        source: "CnEVPost - All",
+        date: "2026-08-26",
+        tags: ["AR", "シート"],
+    
+        interiorScore: 57,
+        interiorReason: "interior refresh and cabin lighting details",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082602533078.jpg",
+        note: ""
+    },
+    {
+        id: "in1561",
+        title: "MG Hector Tomahawk EVとPHEVの内装・シート構成の違いを解説",
+        desc: "Hector TomahawkのEVとPHEVは基本設計を共有するが、内装色とシート構成に差異がある。EVはベージュインテリアで5席も選択可能だが、PHEVはブラウンインテリアで7席固定である。",
+        url: "https://www.autocarindia.com/auto-features/mg-hector-tomahawk-ev-vs-phev-differences-explained-440972",
+        source: "Autocar India - All",
+        date: "2026-08-26",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 39,
+        interiorReason: "interior differences (seats, color) mentioned in text but image is exterior only",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260826_120045_89c695eb.jpeg",
+        note: ""
+    },
+    {
+        id: "in1562",
+        title: "MG Hector Tomahawk EV 7人乗りが競合車種と価格スペック比較",
+        desc: "MGのHector Tomahawk EV 7人乗りが、Mahindra XEV 9SやKia Carens Clavis EVなどの競合車種に対して価格やスペックを比較された。3列シートEV市場への参入により、実用性と競争力が注目されている。",
+        url: "https://www.autocarindia.com/auto-features/mg-hector-tomahawk-ev-7-seater-vs-rivals-price-specs-compared-440973",
+        source: "Autocar India - All",
+        date: "2026-08-26",
+        tags: ["AR", "シート", "EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260826_122449_671e8993.jpg",
+        note: ""
+    },
+    {
+        id: "in1563",
+        title: "MG Hector Tomahawk PHEVの内外装画像ギャラリー公開",
+        desc: "JSW MG MotorはHector TomahawkのPHEV版を発売した。1.5リッターエンジンとモーターを組み合わせ、最大1100kmの航続を実現する。内装はダークブラウンとブラックのテーマで、7シート構成。",
+        url: "https://www.autocarindia.com/auto-images/mg-hector-tomahawk-phev-exterior-and-interior-image-gallery-440442",
+        source: "Autocar India - All",
+        date: "2026-08-26",
+        tags: ["シート", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image present but low text detail",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260826_130601_01e0bbe0.jpg",
+        note: ""
+    },
+    {
+        id: "in1564",
+        title: "MG Hector Tomahawk EVの3つのグレード違いと内装装備の比較",
+        desc: "MG Hector Tomahawk EVは3列SUVで、Excite、Exclusive、Essenceの3グレードが用意されている。全車で同一のバッテリーとモーターを採用し、主な違いは装備内容とシートレイアウトにある。",
+        url: "https://www.autocarindia.com/auto-features/which-variant-of-the-mg-hector-tomahawk-ev-should-you-buy-440968",
+        source: "Autocar India - All",
+        date: "2026-08-26",
+        tags: ["シート", "EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260826_105822_d2bd6a30.jpg",
+        note: ""
+    },
+    {
+        id: "in1565",
+        title: "MG Hector Tomahawk EV発売価格1950万ルピー 航続距離517km",
+        desc: "MGがSUV「Hector Tomahawk EV」を発売した。最安値のExcite 7Sは1950万ルピー、最高位のEssenceは2350万ルピー。航続距離は517km。",
+        url: "https://www.rushlane.com/mg-hector-tomahawk-ev-launch-price-rs-19-50-lakh-517-km-range-12554226.html",
+        source: "RushLane",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/MG-Hector-Tomahawk-EV-launch-price-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1566",
+        title: "MG Hector Tomahawk EV発売517km航続7人乗り1949万ルピーから",
+        desc: "JSW MG Motor Indiaはインド市場向けEV SUV「Hector Tomahawk EV」を発売した。55.2kWhバッテリーを搭載し、航続距離は最大517km。5人乗りと7人乗りが用意され、7人乗りモデルの価格は1949万ルピーからとなっている。",
+        url: "https://gaadiwaadi.com/mg-hector-tomahawk-ev-launched-at-rs-13-99-lakh-517-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/MG-Hector-Tomahawk-EV.jpg",
+        note: ""
+    },
+    {
+        id: "in1567",
+        title: "新世代アウディQ3インドで10月発売 内装大幅変更",
+        desc: "アウディはインド市場向け新世代Q3を10月に発売すると発表した。外観デザインに加え、コックピットやインテリアの大幅な変更が特徴だ。コンパクトなラグジュアリーSUVとして、高級感と機能性を兼ね備えた内装が採用され、快適装備も強化されている。",
+        url: "https://gaadiwaadi.com/new-gen-audi-q3-breaks-cover-in-india-ahead-of-launch-this-october/",
+        source: "GaadiWaadi",
+        date: "2026-08-26",
+        tags: ["コックピット"],
+    
+        interiorScore: 82,
+        interiorReason: "article mentions substantial interior redesign and cockpit changes, but the imag",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/Audi-Q3.jpg",
+        note: ""
+    },
+    {
+        id: "in1568",
+        title: "KiaやRenaultが7人乗りハイブリッドSUVを相次ぎ投入",
+        desc: "Kia、MG、Renault、Nissanなどが7人乗りハイブリッドSUVを相次ぎ投入する。特にKiaとRenaultの新モデルが注目されており、次世代の家族向け移動手段として市場が活性化すると見られる。",
+        url: "https://gaadiwaadi.com/multiple-new-7-seater-hybrid-suvs-arriving-soon-kia-to-renault/",
+        source: "GaadiWaadi",
+        date: "2026-08-26",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2025/07/renault-boreal.jpg",
+        note: ""
+    },
+    {
+        id: "in1569",
+        title: "MGインドで7人乗りSUV Hector Tomahawk PHEVとEVを発売",
+        desc: "JSW MG Motor Indiaは7人乗りSUV「Hector Tomahawk PHEV」と「Tomahawk EV」を発売した。PHEVは航続距離1,100kmを達成し、EVは194万9000ルピーから提供される。",
+        url: "https://www.indiacarnews.com/news/new-7-seater-suv-offers-1100km-range-prices-revealed-68792/",
+        source: "IndiaCarNews",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/FotoJet-2.webp",
+        note: ""
+    },
+    {
+        id: "in1570",
+        title: "MG Hector Tomahawk EV 7人乗り採用 航続517km",
+        desc: "JSW MG Motor IndiaはHector Tomahawk EVを19.49ラフから発売した。69.2kWh電池を搭載し、517kmの航続距離を実現。5席と7席のレイアウトが選択可能だ。また、PHEVモデルも25.69ラフから提供される。",
+        url: "https://www.autopunditz.com/post/mg-hector-tomahawk-ev-launched-price-range-phev",
+        source: "Auto Punditz",
+        date: "2026-08-26",
+        tags: ["EV", "バッテリー"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_0529004385104b70ae627581f7dde733~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1481",
+        title: "現代自動車、初EREVに高級内装を採",
+        desc: "現代自動車は2030年までの成長戦略を発表し、年間販売台数555万台、そのうち電動車両を60%とする目標を掲げた。2025年にはレンジエクステンダーEV（EREV）の初モデルを投入する計画である。",
+        url: "https://www.electrive.com/2026/08/26/hyundai-invests-in-product-offensive-with-first-erev-models/",
+        source: "Electrive",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/hyundai-genesis-ceo-investor-day-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1482",
+        title: "掃除機メーカーDreame、高級EV事業計画を中止か",
+        desc: "中国の掃除機メーカーDreame Technologyは1年前、高級電気自動車市場への参入を表明していた。しかしメディアの報道によると、同様の経緯をたどった別の掃除機メーカーの例に倣い、このプロジェクトは終了する可能性が高い。",
+        url: "https://www.electrive.com/2026/08/26/dreame-electric-car-plans-abandoned/",
+        source: "Electrive",
+        date: "2026-08-26",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/04/dreame-nebula-next-01-jet-edition-2026-1-400x267.jpg",
         note: ""
     },
 ];
