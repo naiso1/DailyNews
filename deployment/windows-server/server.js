@@ -29,6 +29,7 @@ const AUTH_ATTEMPT_LIMIT = 12;
 const authAttempts = new Map();
 
 const MIME_TYPES = new Map([
+  [".cer", "application/pkix-cert"],
   [".css", "text/css; charset=utf-8"],
   [".gif", "image/gif"],
   [".html", "text/html; charset=utf-8"],
@@ -38,6 +39,7 @@ const MIME_TYPES = new Map([
   [".js", "text/javascript; charset=utf-8"],
   [".json", "application/json; charset=utf-8"],
   [".png", "image/png"],
+  [".ps1", "text/plain; charset=utf-8"],
   [".svg", "image/svg+xml"],
   [".webp", "image/webp"],
 ]);
