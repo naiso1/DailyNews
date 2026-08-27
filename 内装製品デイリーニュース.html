@@ -54,27 +54,149 @@ body {
 }
 
 /* ── Header ─────────────────────────────── */
-header {
+header.site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px 24px;
     max-width: 1400px;
     margin: 0 auto 20px;
-    padding: 24px;
+    padding: 22px 26px;
     border: 1px solid var(--border);
     background: linear-gradient(120deg, rgba(125, 241, 194, 0.06), rgba(111, 167, 255, 0.06));
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
 
-h1 {
+.header-brand {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-header h1 {
     font-family: 'Manrope', 'Noto Sans JP', sans-serif;
-    font-size: clamp(22px, 3.5vw, 32px);
-    margin-bottom: 6px;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.25;
     background: linear-gradient(135deg, var(--text), var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.lead { color: var(--muted); font-size: 14px; }
+.header-top-actions {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.header-sync-status {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    overflow: hidden;
+    border: 1px solid rgba(125, 241, 194, 0.18);
+    border-radius: 999px;
+    color: #aebbd0;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.header-sync-dot {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(125, 241, 194, 0.8);
+}
+
+.header-summary-row {
+    display: flex;
+    grid-column: 1 / -1;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.site-header .lead {
+    min-width: 220px;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.compact-access-counter {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.access-metric {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: baseline;
+    gap: 5px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #8795aa;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.access-metric strong { color: var(--accent); font-size: 13px; }
+.access-metric.today strong { color: var(--accent-2); }
+.access-metric.yesterday strong { color: var(--accent-3); }
+
+@media (max-width: 860px) {
+    header.site-header { grid-template-columns: 1fr; padding: 20px; }
+    .header-top-actions {
+        display: grid;
+        grid-row: 2;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) auto;
+        width: 100%;
+    }
+    .header-summary-row { grid-row: 3; flex-direction: column; align-items: stretch; gap: 11px; }
+    .compact-access-counter {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+    }
+    .compact-access-counter::-webkit-scrollbar { display: none; }
+}
+
+@media (max-width: 520px) {
+    body { overflow-x: hidden; }
+    header.site-header { width: 100%; max-width: 100%; gap: 12px; padding: 16px; overflow: hidden; border-radius: 15px; }
+    .site-header h1 { font-size: 21px; }
+    .header-top-actions { grid-template-columns: minmax(0, 1fr); }
+    #accountHeaderSlot { justify-self: start; }
+    .header-sync-status { padding: 6px 8px; font-size: 10px; }
+    .site-header .lead { min-width: 0; font-size: 12px; }
+}
 
 /* ── Filters ─────────────────────────────── */
 .filters {
@@ -231,12 +353,16 @@ h1 {
 .author-line { margin-top: 8px; font-size: 12px; color: var(--muted); }
 
 .analysis-toggle {
-    padding: 4px 10px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.04);
-    color: var(--muted);
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(111, 167, 255, 0.24);
+    background: rgba(111, 167, 255, 0.08);
+    color: #a9c8ff;
     font-size: 11px;
+    font-weight: 700;
     cursor: pointer;
 }
 .analysis-toggle:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); }
@@ -1069,19 +1195,30 @@ h1 {
             <span class="migration-url">http://IEWEB01/</span>
         </section>
     </main>
-    <header id="top" class="jump-anchor">
-        <h1><img id="titleIcon" class="title-globe-icon" src="page_images/icon_world.png" alt="地域">内装製品デイリーニュース</h1>
-        <p class="lead">生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け</p>
-        <div class="access-counter"
-            style="margin-top:12px; font-size:12px; color:var(--muted); display:flex; gap:20px; flex-wrap:wrap;">
-            <span>📊 総アクセス数: <strong id="totalVisits" style="color:var(--accent);">-</strong></span>
-            <span>📅 本日: <strong id="todayVisits" style="color:var(--accent-2);">-</strong></span>
-            <span>🗓️ 昨日: <strong id="yesterdayVisits" style="color:var(--accent-3);">-</strong></span>
-            <span>🔄 計測: <strong id="accessCounterStatus" style="color:var(--accent-4);">確認中</strong></span>
-            <span>🕒 更新日時: <strong id="lastUpdated" style="color:var(--accent-4);">-</strong></span>
-            <button class="analysis-toggle" id="analysisToggle" type="button" aria-expanded="false">アクセス推移</button>
+    <header id="top" class="site-header jump-anchor">
+        <div class="header-brand">
+            <img id="titleIcon" class="title-globe-icon" src="page_images/icon_world.png" alt="地域">
+            <h1>内装製品デイリーニュース</h1>
         </div>
-        <div class="author-line">作成者：IE開発　内装開発室　中村</div>
+        <div class="header-top-actions">
+            <span class="header-sync-status">
+                <i class="header-sync-dot" aria-hidden="true"></i>
+                <strong id="accessCounterStatus">確認中</strong>
+                <span aria-hidden="true">・</span>
+                <strong id="lastUpdated">-</strong>
+            </span>
+            <div id="accountHeaderSlot"></div>
+        </div>
+        <div class="header-summary-row">
+            <p class="lead">生成AIによる内装ニュースの収集・分析・企画アイデア</p>
+            <div class="compact-access-counter" aria-label="アクセス情報">
+                <span class="access-metric">総アクセス <strong id="totalVisits">-</strong></span>
+                <span class="access-metric today">今日 <strong id="todayVisits">-</strong></span>
+                <span class="access-metric yesterday">昨日 <strong id="yesterdayVisits">-</strong></span>
+                <button class="analysis-toggle" id="analysisToggle" type="button" aria-expanded="false"
+                    title="アクセス推移" aria-label="アクセス推移">↗</button>
+            </div>
+        </div>
     </header>
 
     <div class="filters">

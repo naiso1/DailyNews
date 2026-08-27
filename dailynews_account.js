@@ -68,8 +68,8 @@ function escapeAccountHtml(value) {
 function accountStyles() {
   const style = document.createElement("style");
   style.textContent = `
-    .account-bar { display:flex; justify-content:flex-end; margin:12px 0 0; }
-    .account-button { border:1px solid rgba(125,241,194,.38); border-radius:999px; padding:8px 14px; background:rgba(125,241,194,.08); color:#dffbef; font-weight:700; cursor:pointer; }
+    .account-bar { display:flex; justify-content:flex-end; margin:0; }
+    .account-button { min-height:36px; border:1px solid rgba(125,241,194,.38); border-radius:999px; padding:0 14px; background:rgba(125,241,194,.08); color:#dffbef; font-weight:700; white-space:nowrap; cursor:pointer; }
     .account-button:hover { background:rgba(125,241,194,.16); }
     .account-overlay { position:fixed; inset:0; z-index:10020; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(2,6,12,.78); backdrop-filter:blur(8px); }
     .account-overlay.open { display:flex; }
@@ -111,10 +111,11 @@ function accountStyles() {
 function injectAccountUi() {
   accountStyles();
   const header = document.querySelector("header#top") || document.body;
+  const slot = document.getElementById("accountHeaderSlot") || header;
   const bar = document.createElement("div");
   bar.className = "account-bar";
   bar.innerHTML = '<button class="account-button" id="accountOpenButton" type="button">ログイン / 登録</button>';
-  header.appendChild(bar);
+  slot.appendChild(bar);
 
   const overlay = document.createElement("div");
   overlay.id = "accountOverlay";
@@ -390,8 +391,9 @@ function updateAccountButton() {
   const button = document.getElementById("accountOpenButton");
   if (!button) return;
   button.textContent = accountState.user
-    ? `${accountState.user.displayName} / マイページ`
+    ? `${accountState.user.displayName} ▾`
     : "ログイン / 登録";
+  button.title = accountState.user ? "マイページ" : "ログイン / 登録";
 }
 
 function openAccount(mode, message = "") {
