@@ -19,6 +19,7 @@ $entryHtmlName = [Text.Encoding]::UTF8.GetString(
 )
 $required = @(
     $entryHtmlName,
+    "header-layout-test.html",
     "news_data.js",
     "insights_data.js",
     "dailynews_client.js",

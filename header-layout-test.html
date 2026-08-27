@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DailyNews コンパクトヘッダー案</title>
+  <style>
+    :root {
+      --bg: #050a12;
+      --panel: rgba(16, 22, 35, 0.9);
+      --muted: #9aa4b8;
+      --text: #e9edf5;
+      --accent: #7df1c2;
+      --accent-2: #6fa7ff;
+      --accent-3: #ff8f6f;
+      --border: rgba(255, 255, 255, 0.09);
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px 20px 80px;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(125, 241, 194, 0.06), transparent 30%),
+        radial-gradient(circle at 82% 8%, rgba(111, 167, 255, 0.08), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans JP", "Yu Gothic UI", sans-serif;
+    }
+    .preview-note {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1400px, 100%);
+      margin: 0 auto 10px;
+      color: #718096;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+    .preview-note a { color: #8cb9ff; text-decoration: none; }
+    .compact-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px 24px;
+      width: min(1400px, 100%);
+      margin: 0 auto 20px;
+      padding: 22px 26px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(120deg, rgba(125, 241, 194, 0.06), rgba(111, 167, 255, 0.07));
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+    }
+    .brand {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand img { width: 32px; height: 32px; object-fit: contain; }
+    h1 {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--text), var(--accent-2));
+      background-clip: text;
+      color: transparent;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .top-actions, .summary-row, .metrics { display: flex; align-items: center; }
+    .top-actions { justify-content: flex-end; gap: 10px; }
+    .sync-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border: 1px solid rgba(125, 241, 194, 0.18);
+      border-radius: 999px;
+      color: #aebbd0;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .sync-status { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(125, 241, 194, 0.8);
+    }
+    .account-button, .chart-button {
+      min-height: 36px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .account-button {
+      padding: 0 15px;
+      border: 1px solid rgba(125, 241, 194, 0.38);
+      background: rgba(125, 241, 194, 0.08);
+      color: #dffbef;
+    }
+    .summary-row {
+      grid-column: 1 / -1;
+      justify-content: space-between;
+      gap: 20px;
+      min-width: 0;
+      padding-top: 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .lead {
+      min-width: 220px;
+      margin: 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 13px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .metrics { flex: 0 0 auto; gap: 8px; }
+    .metric {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.025);
+      color: #8795aa;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .metric strong { color: var(--accent); font-size: 13px; }
+    .metric.today strong { color: var(--accent-2); }
+    .metric.yesterday strong { color: var(--accent-3); }
+    .chart-button {
+      width: 36px;
+      padding: 0;
+      border: 1px solid rgba(111, 167, 255, 0.24);
+      background: rgba(111, 167, 255, 0.08);
+      color: #a9c8ff;
+    }
+    .content-preview {
+      width: min(1400px, 100%);
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+    .filter-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .filter-label { margin-right: 6px; color: var(--muted); font-size: 12px; }
+    .chip { padding: 7px 12px; border: 1px solid var(--border); border-radius: 999px; color: #aab5c7; font-size: 12px; }
+    .chip.active { border-color: transparent; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #07111d; font-weight: 800; }
+    @media (max-width: 860px) {
+      .compact-header { grid-template-columns: 1fr; padding: 20px; }
+      .top-actions { display: grid; grid-row: 2; grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) auto; width: 100%; }
+      .account-button { justify-self: end; }
+      .summary-row { grid-row: 3; flex-direction: column; align-items: stretch; gap: 11px; }
+      .metrics { flex: 1 1 auto; width: 100%; min-width: 0; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+      .metrics::-webkit-scrollbar { display: none; }
+    }
+    @media (max-width: 520px) {
+      body { overflow-x: hidden; padding: 12px 10px 50px; }
+      .preview-note a { display: none; }
+      .compact-header { width: 100%; max-width: 100%; gap: 12px; padding: 16px; overflow: hidden; border-radius: 15px; }
+      .brand img { width: 27px; height: 27px; }
+      h1 { font-size: 21px; }
+      .sync-status { padding: 6px 8px; font-size: 10px; }
+      .account-button { min-height: 32px; padding: 0 11px; }
+      .lead { min-width: 0; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-note">
+    <span>HEADER TEST / COMPACT TWO-ROW</span>
+    <a href="http://IEWEB01/">本番ページへ戻る</a>
+  </div>
+  <header class="compact-header">
+    <div class="brand">
+      <img src="page_images/icon_world.png" alt="地域">
+      <h1>内装製品デイリーニュース</h1>
+    </div>
+    <div class="top-actions">
+      <span class="sync-status"><i class="sync-dot"></i>同期済・8/27 01:51</span>
+      <button class="account-button" type="button">中村 ▾</button>
+    </div>
+    <div class="summary-row">
+      <p class="lead">生成AIによる内装ニュースの収集・分析・企画アイデア</p>
+      <div class="metrics" aria-label="アクセス情報">
+        <span class="metric">総アクセス <strong>2,158</strong></span>
+        <span class="metric today">今日 <strong>25</strong></span>
+        <span class="metric yesterday">昨日 <strong>15</strong></span>
+        <button class="chart-button" type="button" title="アクセス推移" aria-label="アクセス推移">↗</button>
+      </div>
+    </div>
+  </header>
+  <section class="content-preview" aria-label="本番コンテンツの開始位置">
+    <div class="filter-line">
+      <span class="filter-label">地域</span>
+      <span class="chip active">世界版</span>
+      <span class="chip">日本</span>
+      <span class="chip">中国</span>
+      <span class="chip">インド</span>
+      <span class="chip">米国</span>
+      <span class="chip">欧州</span>
+    </div>
+  </section>
+</body>
+</html>

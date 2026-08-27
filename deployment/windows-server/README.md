@@ -47,6 +47,7 @@ powershell -ExecutionPolicy Bypass -File .\deployment\windows-server\deploy.ps1
 The script packages only:
 
 - `内装製品デイリーニュース.html`
+- `header-layout-test.html`
 - `news_data.js`
 - `insights_data.js`
 - `dailynews_client.js`
