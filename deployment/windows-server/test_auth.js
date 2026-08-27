@@ -22,6 +22,7 @@ const child = spawn(process.execPath, [path.join(appDir, "server.js")], {
     ...process.env,
     DAILYNEWS_HOST: "127.0.0.1",
     DAILYNEWS_PORT: String(port),
+    DAILYNEWS_ADMIN_EMAILS: "test.user@example.com",
   },
   stdio: ["ignore", "pipe", "pipe"],
 });
@@ -84,6 +85,7 @@ async function main() {
   const me = await request("/api/auth/me");
   assert.equal(me.user.email, "test.user@example.com");
   assert.equal(me.user.displayName, "Test User");
+  assert.equal(me.user.isAdmin, true);
 
   const like = await request("/api/interactions/jp1/like", {
     method: "PUT",
@@ -120,6 +122,12 @@ async function main() {
   assert.deepEqual(activity.likes, ["jp1"]);
   assert.equal(activity.comments.length, 1);
   assert.equal(activity.feedback.length, 1);
+
+  const admin = await request("/api/admin/overview");
+  assert.equal(admin.totals.users, 1);
+  assert.equal(admin.users[0].email, "test.user@example.com");
+  assert.equal(admin.users[0].isAdmin, true);
+  assert.equal(admin.feedback.length, 1);
   process.stdout.write("DailyNews auth integration test passed.\n");
 }
 

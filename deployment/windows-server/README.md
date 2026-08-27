@@ -52,9 +52,17 @@ The script packages only:
 - `insights_data.js`
 - `dailynews_client.js`
 - `dailynews_account.js`
+- `release_history.js`
 - `setup/` (IEWEB01 certificate and per-user trust installer)
 - `images/`
 - `page_images/`
 
 Each package is stored by Git commit ID and activated through
 `active-release.txt`.
+
+Functional UI changes should also add a short entry to `release_history.js`
+so users can see what changed from the header's update-history button.
+
+The administrator account list is configured with the
+`DAILYNEWS_ADMIN_EMAILS` environment variable (comma-separated). If it is not
+set, `yuki.nakamura@toyoda-gosei.co.jp` is treated as the administrator.

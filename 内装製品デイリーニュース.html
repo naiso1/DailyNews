@@ -1385,6 +1385,7 @@ header.site-header {
     <!-- DailyNews Server API -->
     <script type="module" src="dailynews_client.js"></script>
     <script type="module" src="dailynews_account.js"></script>
+    <script type="module" src="release_history.js"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
@@ -1415,13 +1416,6 @@ header.site-header {
             sources.forEach((src) => loadScript(src, true));
         });
 
-        // BFcache対策: ページが戻るボタンで表示された場合リロード
-        window.addEventListener('pageshow', (event) => {
-            if (event.persisted) {
-                // BFcacheから復元された場合、強制リロード
-                window.location.reload();
-            }
-        });
     </script>
     <script>
         let NEWS_DATA = [];
@@ -1565,13 +1559,19 @@ header.site-header {
             el.textContent = formatDateTime(new Date());
         }
 
-        function showNewsItem(itemId, fromRanking = false) {
+        function beginInternalNavigation(scrollTarget = null, returnToAccount = false) {
+            if (rankingBackState) return;
+            rankingBackState = captureFilterState();
+            rankingBackState.scrollTarget = scrollTarget;
+            rankingBackState.returnToAccount = returnToAccount;
+            history.pushState({ dailyNewsDetail: true }, "", location.href);
+            setRankingBackVisibility(true);
+        }
+
+        function showNewsItem(itemId, fromRanking = false, returnToAccount = false) {
             const target = NEWS_DATA.find(n => n.id === itemId);
             if (!target) return;
-            if (fromRanking && !rankingBackState) {
-                rankingBackState = captureFilterState();
-                setRankingBackVisibility(true);
-            }
+            beginInternalNavigation(fromRanking ? "analysisSection" : null, returnToAccount);
             document.getElementById("searchInput").value = itemId;
             document.getElementById("dateFrom").value = "";
             document.getElementById("dateTo").value = "";
@@ -2439,8 +2439,7 @@ header.site-header {
         function setRankingBackVisibility(visible) {
             const wrapper = document.getElementById("rankingBack");
             if (!wrapper) return;
-            const shouldShow = visible && !favoritesOnly;
-            wrapper.classList.toggle("hidden", !shouldShow);
+            wrapper.classList.toggle("hidden", !visible);
         }
 
         function captureFilterState() {
@@ -2452,21 +2451,31 @@ header.site-header {
                 countries: new Set(activeCountries),
                 tags: new Set(activeTags),
                 favoritesOnly,
-                newOnly
+                newOnly,
+                visibleLimit,
+                insightsVisibleLimit,
+                scrollY: window.scrollY
             };
         }
 
-        function restoreRankingState() {
+        function restoreRankingState(options = {}) {
             if (!rankingBackState) return;
-            const scrollTarget = rankingBackState.scrollTarget || null;
-            document.getElementById("searchInput").value = rankingBackState.search || "";
-            document.getElementById("dateFrom").value = rankingBackState.dateFrom || "";
-            document.getElementById("dateTo").value = rankingBackState.dateTo || "";
-            document.getElementById("sortOrder").value = rankingBackState.sortOrder || "new-first";
-            activeCountries = new Set(rankingBackState.countries || ["world"]);
-            activeTags = new Set(rankingBackState.tags || ["all"]);
-            favoritesOnly = Boolean(rankingBackState.favoritesOnly);
-            newOnly = Boolean(rankingBackState.newOnly);
+            if (!options.fromPopState && history.state?.dailyNewsDetail) {
+                history.back();
+                return;
+            }
+            const state = rankingBackState;
+            const scrollTarget = state.scrollTarget || null;
+            document.getElementById("searchInput").value = state.search || "";
+            document.getElementById("dateFrom").value = state.dateFrom || "";
+            document.getElementById("dateTo").value = state.dateTo || "";
+            document.getElementById("sortOrder").value = state.sortOrder || "new-first";
+            activeCountries = new Set(state.countries || ["world"]);
+            activeTags = new Set(state.tags || ["all"]);
+            favoritesOnly = Boolean(state.favoritesOnly);
+            newOnly = Boolean(state.newOnly);
+            visibleLimit = Number(state.visibleLimit || 30);
+            insightsVisibleLimit = Number(state.insightsVisibleLimit || 1);
             updateFavoritesToggle();
             updateCountryChips();
             updateTagChips();
@@ -2474,9 +2483,14 @@ header.site-header {
             updateURL();
             rankingBackState = null;
             setRankingBackVisibility(false);
+            if (state.returnToAccount) {
+                setTimeout(() => window.dailyNewsAccount?.open(), 180);
+            }
             if (scrollTarget) {
                 const el = document.getElementById(scrollTarget);
                 if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+            } else {
+                setTimeout(() => window.scrollTo({ top: Number(state.scrollY || 0), behavior: "smooth" }), 120);
             }
         }
 
@@ -2487,6 +2501,41 @@ header.site-header {
                 rankingBackState.scrollTarget = "analysisSection";
             }
         }
+
+        function showIdeaItem(ideaId, returnToAccount = false) {
+            const targetId = String(ideaId).replace(/^idea-/, "");
+            const day = (window.DAILY_INSIGHTS || []).find(entry =>
+                ["jp", "cn", "in", "us", "eu"].some(region =>
+                    (entry.ideas?.[region] || []).some(idea => String(idea.id) === targetId)
+                )
+            );
+            if (!day) return;
+            beginInternalNavigation(returnToAccount ? null : "ideasSection", returnToAccount);
+            document.getElementById("searchInput").value = "";
+            document.getElementById("dateFrom").value = day.date;
+            document.getElementById("dateTo").value = day.date;
+            newOnly = false;
+            favoritesOnly = false;
+            activeCountries = new Set(["world"]);
+            activeTags = new Set(["all"]);
+            insightsVisibleLimit = Math.max(insightsVisibleLimit, (window.DAILY_INSIGHTS || []).length);
+            updateFavoritesToggle();
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            setTimeout(() => {
+                const card = document.getElementById(`idea-card-${targetId}`);
+                if (!card) return;
+                card.scrollIntoView({ behavior: "smooth", block: "center" });
+                card.classList.add("card-highlight");
+                setTimeout(() => card.classList.remove("card-highlight"), 1500);
+            }, 120);
+        }
+
+        window.showNewsItem = showNewsItem;
+        window.showNewsItemFromRef = showNewsItemFromRef;
+        window.showIdeaItem = showIdeaItem;
 
         function setupRankingToggle(toggleId, bodyId, listId) {
             const toggle = document.getElementById(toggleId);
@@ -2669,6 +2718,9 @@ header.site-header {
 
                 const rankingBackBtn = document.getElementById("rankingBackBtn");
                 if (rankingBackBtn) rankingBackBtn.addEventListener("click", restoreRankingState);
+                window.addEventListener("popstate", () => {
+                    if (rankingBackState) restoreRankingState({ fromPopState: true });
+                });
                 if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
                 if (window.initDailyNewsApi) window.initDailyNewsApi();
                 setupRankingToggle("rankingToggle", "rankingBody", "rankingList");
@@ -2960,7 +3012,7 @@ header.site-header {
             const sortOrder = document.getElementById("sortOrder").value;
             if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);
             const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
-            history.replaceState(null, "", newURL);
+            history.replaceState(history.state, "", newURL);
         }
 
 
@@ -3169,7 +3221,7 @@ header.site-header {
                             const favActive = isFavorite(ideaKey);
                             const favSelected = favoritesOnly && selectedFavoriteKeys.has(ideaKey);
                             ideasHTML += `
-                                <div class="idea-card">
+                                <div class="idea-card" id="idea-card-${idea.id}">
                                     <div class="idea-header">
                                         <span class="idea-number">${idea.id}</span>
                                         <span class="idea-title">${idea.title}</span>

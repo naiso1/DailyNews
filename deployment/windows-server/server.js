@@ -27,6 +27,12 @@ const SESSION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60;
 const AUTH_ATTEMPT_WINDOW_MS = 10 * 60 * 1000;
 const AUTH_ATTEMPT_LIMIT = 12;
 const authAttempts = new Map();
+const ADMIN_EMAILS = new Set(
+  (process.env.DAILYNEWS_ADMIN_EMAILS || "yuki.nakamura@toyoda-gosei.co.jp")
+    .split(",")
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean),
+);
 
 const MIME_TYPES = new Map([
   [".cer", "application/pkix-cert"],
@@ -182,6 +188,7 @@ function ensureColumn(tableName, columnName, definition) {
 }
 
 ensureColumn("comments", "user_id", "INTEGER REFERENCES users(id)");
+ensureColumn("users", "is_admin", "INTEGER NOT NULL DEFAULT 0");
 db.exec(`
   CREATE INDEX IF NOT EXISTS comments_user_id_idx
     ON comments(user_id, id DESC);
@@ -298,11 +305,11 @@ const statements = {
     WHERE setting_key = 'total_visits'
   `),
   userByEmail: db.prepare(`
-    SELECT id, email, display_name, password_hash, password_salt, email_verified
+    SELECT id, email, display_name, password_hash, password_salt, email_verified, is_admin
     FROM users WHERE email = ?
   `),
   userById: db.prepare(`
-    SELECT id, email, display_name, email_verified
+    SELECT id, email, display_name, email_verified, is_admin
     FROM users WHERE id = ?
   `),
   insertUser: db.prepare(`
@@ -322,7 +329,7 @@ const statements = {
     VALUES (?, ?, ?)
   `),
   sessionUser: db.prepare(`
-    SELECT u.id, u.email, u.display_name, u.email_verified, s.expires_at
+    SELECT u.id, u.email, u.display_name, u.email_verified, u.is_admin, s.expires_at
     FROM sessions s
     JOIN users u ON u.id = s.user_id
     WHERE s.token_hash = ? AND s.expires_at > ?
@@ -377,7 +384,46 @@ const statements = {
     SELECT id, category, message, item_id, page_url, status, created_at
     FROM feedback WHERE user_id = ? ORDER BY id DESC LIMIT 100
   `),
+  markAdmin: db.prepare(`
+    UPDATE users SET is_admin = 1 WHERE email = ?
+  `),
+  adminUsers: db.prepare(`
+    SELECT
+      u.id,
+      u.email,
+      u.display_name,
+      u.is_admin,
+      u.created_at,
+      u.updated_at,
+      MAX(s.last_seen_at) AS last_seen_at,
+      (SELECT COUNT(*) FROM user_favorites f WHERE f.user_id = u.id) AS favorites,
+      (SELECT COUNT(*) FROM user_likes l WHERE l.user_id = u.id) AS likes,
+      (SELECT COUNT(*) FROM comments c WHERE c.user_id = u.id) AS comments,
+      (SELECT COUNT(*) FROM feedback fb WHERE fb.user_id = u.id) AS feedback
+    FROM users u
+    LEFT JOIN sessions s ON s.user_id = u.id
+    GROUP BY u.id
+    ORDER BY u.created_at DESC
+  `),
+  adminFeedback: db.prepare(`
+    SELECT
+      f.id,
+      f.category,
+      f.message,
+      f.item_id,
+      f.page_url,
+      f.status,
+      f.created_at,
+      u.display_name,
+      u.email
+    FROM feedback f
+    JOIN users u ON u.id = f.user_id
+    ORDER BY f.id DESC
+    LIMIT 100
+  `),
 };
+
+for (const email of ADMIN_EMAILS) statements.markAdmin.run(email);
 
 function log(message) {
   const line = `${new Date().toISOString()} ${message}\n`;
@@ -599,6 +645,7 @@ function publicUser(row) {
     email: row.email,
     displayName: row.display_name,
     emailVerified: Boolean(row.email_verified),
+    isAdmin: Boolean(row.is_admin),
   };
 }
 
@@ -620,6 +667,16 @@ function requireUser(request, response) {
   const user = authenticatedUser(request);
   if (!user) {
     apiError(response, 401, "authentication_required", "Login is required.");
+    return null;
+  }
+  return user;
+}
+
+function requireAdmin(request, response) {
+  const user = requireUser(request, response);
+  if (!user) return null;
+  if (!user.isAdmin) {
+    apiError(response, 403, "administrator_required", "Administrator access is required.");
     return null;
   }
   return user;
@@ -831,6 +888,7 @@ async function handleApi(request, response, requestUrl) {
       }
       throw error;
     }
+    if (ADMIN_EMAILS.has(email)) statements.markAdmin.run(email);
     const user = publicUser(statements.userById.get(userId));
     claimClientActivity(user, body.clientId, favorites);
     createSession(userId, request, response);
@@ -1145,6 +1203,48 @@ async function handleApi(request, response, requestUrl) {
         status: row.status,
         createdAt: row.created_at,
       })),
+    });
+    return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/admin/overview") {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    const users = statements.adminUsers.all().map((row) => ({
+      id: Number(row.id),
+      email: row.email,
+      displayName: row.display_name,
+      isAdmin: Boolean(row.is_admin),
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      lastSeenAt: row.last_seen_at,
+      favorites: Number(row.favorites || 0),
+      likes: Number(row.likes || 0),
+      comments: Number(row.comments || 0),
+      feedback: Number(row.feedback || 0),
+    }));
+    const feedback = statements.adminFeedback.all().map((row) => ({
+      id: Number(row.id),
+      category: row.category,
+      message: row.message,
+      itemId: row.item_id,
+      pageUrl: row.page_url,
+      status: row.status,
+      createdAt: row.created_at,
+      displayName: row.display_name,
+      email: row.email,
+    }));
+    sendJson(response, 200, {
+      totals: {
+        users: users.length,
+        activeUsers: users.filter((user) => user.lastSeenAt).length,
+        favorites: users.reduce((sum, user) => sum + user.favorites, 0),
+        likes: users.reduce((sum, user) => sum + user.likes, 0),
+        comments: users.reduce((sum, user) => sum + user.comments, 0),
+        feedback: users.reduce((sum, user) => sum + user.feedback, 0),
+      },
+      users,
+      feedback,
     });
     return;
   }
