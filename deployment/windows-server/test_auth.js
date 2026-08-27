@@ -92,6 +92,10 @@ async function main() {
     body: { clientId: "abcdefghijklmnop1234", liked: true },
   });
   assert.equal(like.liked, true);
+  assert.deepEqual(like.likedBy, ["Test User"]);
+
+  const interactions = await request("/api/interactions");
+  assert.deepEqual(interactions.interactions.jp1.likedBy, ["Test User"]);
 
   const comment = await request("/api/interactions/jp1/comments", {
     method: "POST",

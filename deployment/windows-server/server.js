@@ -240,6 +240,19 @@ const statements = {
   hasUserLike: db.prepare(`
     SELECT 1 AS found FROM user_likes WHERE item_id = ? AND user_id = ?
   `),
+  likeUsers: db.prepare(`
+    SELECT u.display_name
+    FROM user_likes l
+    JOIN users u ON u.id = l.user_id
+    WHERE l.item_id = ?
+    ORDER BY l.created_at, u.id
+  `),
+  allLikeUsers: db.prepare(`
+    SELECT l.item_id, u.display_name
+    FROM user_likes l
+    JOIN users u ON u.id = l.user_id
+    ORDER BY l.item_id, l.created_at, u.id
+  `),
   insertUserLike: db.prepare(`
     INSERT OR IGNORE INTO user_likes(item_id, user_id) VALUES (?, ?)
   `),
@@ -787,6 +800,7 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
       : validClientId(clientId)
         ? Boolean(statements.hasLike.get(itemId, clientId))
         : false,
+    likedBy: statements.likeUsers.all(itemId).map((row) => row.display_name),
   };
   if (includeComments) {
     value.commentItems = commentsFor(itemId, clientId, user);
@@ -801,7 +815,11 @@ function allInteractions() {
       likes: Number(row.likes || 0),
       comments: Number(row.comments || 0),
       reads: Number(row.reads || 0),
+      likedBy: [],
     };
+  }
+  for (const row of statements.allLikeUsers.all()) {
+    if (result[row.item_id]) result[row.item_id].likedBy.push(row.display_name);
   }
   return result;
 }

@@ -350,6 +350,7 @@ function mergeInteractionData(itemId, data) {
         ? data.reads
         : Number(previous.reads || 0),
     liked: typeof data.liked === "boolean" ? data.liked : previous.liked,
+    likedBy: Array.isArray(data.likedBy) ? data.likedBy : previous.likedBy || [],
   };
 }
 
@@ -360,24 +361,43 @@ function getInteractionRenderData(itemId) {
     comments: data.commentItems || [],
     reads: data.reads || 0,
     liked: Boolean(data.liked),
+    likedBy: data.likedBy || [],
   };
+}
+
+function likeTooltipText(data = {}) {
+  const names = [...new Set((data.likedBy || []).filter(Boolean))];
+  const total = Number(data.likes || 0);
+  const unnamed = Math.max(0, total - names.length);
+  if (!total) return "まだいいねはありません";
+  if (!names.length) return `いいね ${total}件（登録前または未ログインの反応）`;
+  return `いいねした人: ${names.join("、")}${unnamed ? `、ほか${unnamed}人` : ""}`;
+}
+
+function updateLikeTooltip(button, data) {
+  if (!button) return;
+  const label = likeTooltipText(data);
+  button.title = label;
+  button.setAttribute("aria-label", label);
 }
 
 function refreshInteractionCounts() {
   const interactions = window.interactionsData || {};
-  document.querySelectorAll(".card").forEach((card) => {
-    if (!card.id?.startsWith("card-")) return;
-    const itemId = card.id.slice(5);
+  document.querySelectorAll(".card, .idea-card").forEach((card) => {
+    const likeButton = card.querySelector('.action-btn[onclick*="toggleLike"]');
+    const itemId = card.id?.startsWith("card-")
+      ? card.id.slice(5)
+      : likeButton?.getAttribute("onclick")?.match(/'([^']+)'/)?.[1];
+    if (!itemId) return;
     const data = interactions[itemId];
     if (!data) return;
-    const likeCount = card.querySelector(
-      '.action-btn[onclick*="toggleLike"] .count',
-    );
+    const likeCount = likeButton?.querySelector(".count");
     const commentCount = card.querySelector(".btn-comment .count");
     const readCount = card.querySelector(".read-count");
     if (likeCount) likeCount.textContent = data.likes || 0;
     if (commentCount) commentCount.textContent = data.comments || 0;
     if (readCount) readCount.textContent = `閲覧 ${data.reads || 0}`;
+    updateLikeTooltip(likeButton, data);
   });
 }
 window.refreshInteractionCounts = refreshInteractionCounts;
@@ -399,6 +419,9 @@ function enableLocalInteractions() {
 
 async function loadInteractions() {
   try {
+    const previousReactions = Object.entries(window.interactionsData || {})
+      .map(([id, value]) => `${id}:${value.likes || 0}:${value.comments || 0}`)
+      .join("|");
     const payload = await apiRequest("/interactions");
     Object.entries(payload.interactions || {}).forEach(([itemId, value]) => {
       mergeInteractionData(itemId, value);
@@ -406,6 +429,10 @@ async function loadInteractions() {
     window.firebaseInteractionsReady = true;
     window.useLocalInteractions = false;
     updateRankings();
+    const currentReactions = Object.entries(window.interactionsData || {})
+      .map(([id, value]) => `${id}:${value.likes || 0}:${value.comments || 0}`)
+      .join("|");
+    if (currentReactions !== previousReactions) window.refreshNewsReactionSort?.();
     return true;
   } catch (error) {
     console.warn("DailyNews API sync failed:", error.message);
@@ -570,6 +597,7 @@ function renderItem(itemId) {
     const count = elements.btnLike.querySelector(".count");
     if (count) count.textContent = data.likes || 0;
     elements.btnLike.classList.toggle("liked", data.liked);
+    updateLikeTooltip(elements.btnLike, data);
   }
   if (elements.btnComment) {
     const count = elements.btnComment.querySelector(".count");
@@ -598,6 +626,7 @@ function renderItem(itemId) {
     reads: data.reads,
     commentItems: data.comments,
     comments: data.comments.length,
+    likedBy: data.likedBy,
   });
   updateRankings();
 }
@@ -654,6 +683,7 @@ window.toggleLike = async (itemId, button) => {
     const local = getLocalInteractionData(itemId);
     local.likes = optimisticCount;
     setLocalInteractionData(itemId, local);
+    window.refreshNewsReactionSort?.();
     return;
   }
 
@@ -671,6 +701,7 @@ window.toggleLike = async (itemId, button) => {
     else localStorage.removeItem(storageKey);
     if (count) count.textContent = data.likes || 0;
     updateRankings();
+    window.refreshNewsReactionSort?.();
   } catch (error) {
     console.error("Like save failed:", error);
     button.classList.toggle("liked", wasLiked);

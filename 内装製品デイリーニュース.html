@@ -98,28 +98,19 @@ header.site-header {
     gap: 10px;
 }
 
-.header-sync-status {
+.header-update-status {
     display: inline-flex;
     min-width: 0;
     align-items: center;
     gap: 6px;
     padding: 7px 10px;
     overflow: hidden;
-    border: 1px solid rgba(125, 241, 194, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.11);
     border-radius: 999px;
     color: #aebbd0;
     font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-.header-sync-dot {
-    width: 7px;
-    height: 7px;
-    flex: 0 0 auto;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 10px rgba(125, 241, 194, 0.8);
 }
 
 .header-summary-row {
@@ -135,11 +126,10 @@ header.site-header {
 
 .site-header .lead {
     min-width: 220px;
-    overflow: hidden;
+    max-width: 820px;
     color: var(--muted);
     font-size: 13px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.55;
 }
 
 .compact-access-counter {
@@ -194,7 +184,7 @@ header.site-header {
     .site-header h1 { font-size: 21px; }
     .header-top-actions { grid-template-columns: minmax(0, 1fr); }
     #accountHeaderSlot { justify-self: start; }
-    .header-sync-status { padding: 6px 8px; font-size: 10px; }
+    .header-update-status { padding: 6px 8px; font-size: 10px; }
     .site-header .lead { min-width: 0; font-size: 12px; }
 }
 
@@ -1201,16 +1191,14 @@ header.site-header {
             <h1>内装製品デイリーニュース</h1>
         </div>
         <div class="header-top-actions">
-            <span class="header-sync-status">
-                <i class="header-sync-dot" aria-hidden="true"></i>
-                <strong id="accessCounterStatus">確認中</strong>
-                <span aria-hidden="true">・</span>
+            <span class="header-update-status">
+                <span>更新</span>
                 <strong id="lastUpdated">-</strong>
             </span>
             <div id="accountHeaderSlot"></div>
         </div>
         <div class="header-summary-row">
-            <p class="lead">生成AIによる内装ニュースの収集・分析・企画アイデア</p>
+            <p class="lead">国内外の自動車内装ニュースを生成AIで毎日収集・日本語要約。市場トレンドを考察し、豊田合成の内装開発につながる企画アイデアとイメージを提案します。</p>
             <div class="compact-access-counter" aria-label="アクセス情報">
                 <span class="access-metric">総アクセス <strong id="totalVisits">-</strong></span>
                 <span class="access-metric today">今日 <strong id="todayVisits">-</strong></span>
@@ -1264,7 +1252,7 @@ header.site-header {
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; width: 240px;">
             <select id="sortOrder"
                 style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
-                <option value="new-first" style="background: #1e222d; color: #fff;">New</option>
+                <option value="new-first" style="background: #1e222d; color: #fff;">New・反響順</option>
                 <option value="relevance-desc" style="background: #1e222d; color: #fff;">内装関連度順</option>
                 <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
                 <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
@@ -2854,6 +2842,9 @@ header.site-header {
                 if (sortOrder === "new-first") {
                     if (aNew !== bNew) return aNew ? -1 : 1;
                     if (aNew && bNew) {
+                        const reactionA = (interactions[a.id]?.likes || 0) + (interactions[a.id]?.comments || 0) * 2;
+                        const reactionB = (interactions[b.id]?.likes || 0) + (interactions[b.id]?.comments || 0) * 2;
+                        if (reactionB !== reactionA) return reactionB - reactionA;
                         const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
                         const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
                         if (scoreB !== scoreA) return scoreB - scoreA;
@@ -2998,6 +2989,10 @@ header.site-header {
             visibleLimit += 30;
             applyFilters();
         }
+
+        window.refreshNewsReactionSort = () => {
+            if (document.getElementById("sortOrder")?.value === "new-first") applyFilters();
+        };
 
 
         function updateURL() {
