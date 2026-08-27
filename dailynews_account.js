@@ -74,6 +74,8 @@ function accountStyles() {
     .account-button:hover { background:rgba(125,241,194,.16); }
     .account-overlay { position:fixed; inset:0; z-index:10020; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(2,6,12,.78); backdrop-filter:blur(8px); }
     .account-overlay.open { display:flex; }
+    .account-overlay.auth-required { background:#07111b; backdrop-filter:none; }
+    .account-overlay.auth-required .account-close { display:none; }
     .account-dialog { width:min(980px,100%); max-height:min(88vh,900px); overflow:auto; border:1px solid rgba(125,241,194,.28); border-radius:22px; background:linear-gradient(145deg,#151f2c,#0c131f); color:#eef4fb; box-shadow:0 30px 90px rgba(0,0,0,.55); }
     .account-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 20px; border-bottom:1px solid rgba(255,255,255,.1); background:rgba(15,23,35,.96); }
     .account-head h2 { margin:0; font-size:20px; }
@@ -115,13 +117,6 @@ function accountStyles() {
     .account-profile { display:grid; grid-template-columns:1fr auto; gap:14px; align-items:end; margin-bottom:18px; }
     .account-email { color:#8ea0b6; font-size:12px; overflow-wrap:anywhere; }
     .account-feedback-status { color:#7df1c2; font-size:12px; }
-    .registration-prompt { display:none; max-width:1400px; margin:-8px auto 18px; padding:12px 16px; align-items:center; justify-content:space-between; gap:14px; border:1px solid rgba(111,167,255,.24); border-radius:14px; background:linear-gradient(100deg,rgba(111,167,255,.09),rgba(125,241,194,.07)); color:#c9d6e5; font-size:12px; }
-    .registration-prompt.show { display:flex; }
-    .registration-prompt strong { color:#f2f8ff; }
-    .registration-actions { display:flex; flex:0 0 auto; gap:8px; }
-    .registration-actions button { min-height:32px; padding:0 11px; border-radius:999px; font-weight:800; cursor:pointer; }
-    .registration-register { border:0; background:#7df1c2; color:#07111d; }
-    .registration-login,.registration-dismiss { border:1px solid rgba(255,255,255,.14); background:transparent; color:#dce7f3; }
     .admin-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:18px; }
     .admin-kpi { padding:13px; border:1px solid rgba(255,255,255,.09); border-radius:13px; background:rgba(255,255,255,.03); color:#91a2b7; font-size:11px; }
     .admin-kpi strong { display:block; margin-top:3px; color:#7df1c2; font-size:22px; }
@@ -133,7 +128,7 @@ function accountStyles() {
     .comment-actions { display:flex; align-items:center; gap:8px; margin-top:8px; }
     .comment-like-btn { border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:3px 8px; background:transparent; color:#9fb0c5; font-size:11px; cursor:pointer; }
     .comment-like-btn.liked { border-color:rgba(125,241,194,.45); background:rgba(125,241,194,.12); color:#7df1c2; }
-    @media(max-width:720px) { .account-profile { grid-template-columns:1fr; } .account-dialog { max-height:94vh; } .account-card-grid { grid-template-columns:1fr; } .account-activity-card { grid-template-columns:96px minmax(0,1fr); } .account-card-image,.account-card-image-fallback { width:96px; } .registration-prompt.show { align-items:flex-start; flex-direction:column; } .admin-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:720px) { .account-profile { grid-template-columns:1fr; } .account-dialog { max-height:94vh; } .account-card-grid { grid-template-columns:1fr; } .account-activity-card { grid-template-columns:96px minmax(0,1fr); } .account-card-image,.account-card-image-fallback { width:96px; } .admin-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
   `;
   document.head.appendChild(style);
 }
@@ -157,38 +152,28 @@ function injectAccountUi() {
     </section>`;
   document.body.appendChild(overlay);
 
-  const prompt = document.createElement("aside");
-  prompt.id = "registrationPrompt";
-  prompt.className = "registration-prompt";
-  prompt.innerHTML = `
-    <div><strong>無料登録で、気になる情報をまとめて確認</strong><br>お気に入り・いいね・コメントを、端末が変わってもマイページで確認できます。</div>
-    <div class="registration-actions">
-      <button class="registration-register" type="button" data-registration-action="register">登録する</button>
-      <button class="registration-login" type="button" data-registration-action="login">ログイン</button>
-      <button class="registration-dismiss" type="button" data-registration-action="dismiss" aria-label="閉じる">×</button>
-    </div>`;
-  header.insertAdjacentElement("afterend", prompt);
-
   bar.querySelector("button").addEventListener("click", () => openAccount());
-  overlay.querySelector(".account-close").addEventListener("click", closeAccount);
-  overlay.addEventListener("click", (event) => {
-    if (event.target === overlay) closeAccount();
+  overlay.querySelector(".account-close").addEventListener("click", () => {
+    if (accountState.user) closeAccount();
   });
-  prompt.addEventListener("click", (event) => {
-    const action = event.target.closest("[data-registration-action]")?.dataset.registrationAction;
-    if (action === "register" || action === "login") openAccount(action);
-    if (action === "dismiss") {
-      sessionStorage.setItem("dailynews_registration_prompt_dismissed", "1");
-      updateRegistrationPrompt();
-    }
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay && accountState.user) closeAccount();
   });
 }
 
 function updateRegistrationPrompt() {
-  const prompt = document.getElementById("registrationPrompt");
-  if (!prompt) return;
-  const dismissed = sessionStorage.getItem("dailynews_registration_prompt_dismissed") === "1";
-  prompt.classList.toggle("show", !accountState.user && !dismissed);
+  const overlay = document.getElementById("accountOverlay");
+  if (!overlay) return;
+  const required = !accountState.user;
+  overlay.classList.toggle("auth-required", required);
+  if (required) {
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    renderAuth(accountState.mode, "このサイトの利用には、ユーザー登録またはログインが必要です。");
+  } else if (overlay.classList.contains("open")) {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
 }
 
 function setAccountError(message) {
@@ -248,7 +233,7 @@ async function submitAuth(event) {
     );
     accountState.user = result.user;
     await afterAuthentication();
-    renderAccountHome();
+    location.reload();
   } catch (error) {
     setAccountError(authErrorMessage(error));
   } finally {
@@ -541,6 +526,7 @@ function openAccount(mode, message = "") {
 }
 
 function closeAccount() {
+  if (!accountState.user) return;
   document.getElementById("accountOverlay")?.classList.remove("open");
   document.body.style.overflow = "";
 }
@@ -548,6 +534,7 @@ function closeAccount() {
 async function initializeAccount() {
   if (document.documentElement.classList.contains("github-pages-migration")) return;
   injectAccountUi();
+  updateRegistrationPrompt();
   try {
     const result = await accountApi("/auth/me");
     accountState.user = result.user || null;

@@ -1463,6 +1463,20 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
+  const protectedContent =
+    requestUrl.pathname === "/news_data.js" ||
+    requestUrl.pathname === "/insights_data.js" ||
+    requestUrl.pathname.startsWith("/images/");
+  if (protectedContent && !authenticatedUser(request)) {
+    send(
+      response,
+      401,
+      "Login is required to access DailyNews content.",
+      "text/plain; charset=utf-8",
+    );
+    return;
+  }
+
   serveFile(request, response, release.releaseDir, requestUrl.pathname);
 });
 

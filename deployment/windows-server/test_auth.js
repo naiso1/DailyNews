@@ -15,6 +15,7 @@ fs.mkdirSync(releaseDir, { recursive: true });
 fs.copyFileSync(path.join(__dirname, "server.js"), path.join(appDir, "server.js"));
 fs.writeFileSync(path.join(root, "active-release.txt"), "abcdef1\n", "ascii");
 fs.writeFileSync(path.join(releaseDir, "index.html"), "<!doctype html><title>test</title>");
+fs.writeFileSync(path.join(releaseDir, "news_data.js"), "window.LOADED_NEWS_DATA=[];");
 
 const child = spawn(process.execPath, [path.join(appDir, "server.js")], {
   cwd: appDir,
@@ -70,6 +71,9 @@ async function waitForServer() {
 
 async function main() {
   await waitForServer();
+  const protectedBeforeLogin = await fetch(`${base}/news_data.js`);
+  assert.equal(protectedBeforeLogin.status, 401);
+
   const registration = await request("/api/auth/register", {
     method: "POST",
     body: {
@@ -86,6 +90,11 @@ async function main() {
   assert.equal(me.user.email, "test.user@example.com");
   assert.equal(me.user.displayName, "Test User");
   assert.equal(me.user.isAdmin, true);
+
+  const protectedAfterLogin = await fetch(`${base}/news_data.js`, {
+    headers: { Cookie: cookie },
+  });
+  assert.equal(protectedAfterLogin.status, 200);
 
   const like = await request("/api/interactions/jp1/like", {
     method: "PUT",
