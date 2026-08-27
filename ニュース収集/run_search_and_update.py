@@ -608,7 +608,14 @@ def run_server_deploy(log_file):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--no-sleep", action="store_true", help="Do not suspend after processing.")
+    sleep_group = parser.add_mutually_exclusive_group()
+    sleep_group.add_argument(
+        "--sleep-after-run",
+        action="store_true",
+        help="Suspend the PC after processing (disabled by default).",
+    )
+    # Keep accepting the former option so existing shortcuts and scheduled tasks do not fail.
+    sleep_group.add_argument("--no-sleep", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument(
         "--ignore-schedule-pause",
         action="store_true",
@@ -715,8 +722,10 @@ def main():
     log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     log("==================================================")
     send_review_email()
-    if not args.no_sleep:
+    if args.sleep_after_run:
         sleep_computer()
+    else:
+        log("[INFO] Automatic suspend is disabled. The PC will remain awake.")
 
 
 if __name__ == "__main__":
