@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-27 01:51";
+window.NEWS_UPDATED_AT = "2026-08-28 01:35";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -103832,6 +103832,714 @@ window.LOADED_NEWS_DATA = [
     
         country: "eu",
         img: "https://www.electrive.com/media/2026/04/dreame-nebula-next-01-jet-edition-2026-1-400x267.jpg",
+        note: ""
+    },
+    // 2026-08-27 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1701",
+        title: "日産フェアレディZ改良新型発売フロントエンブレム復活新色雲龍グリーン採用",
+        desc: "日産自動車は8月27日、スポーツカー「フェアレディZ」をマイナーチェンジし発売した。価格は573万7600円から。フロントグリルにZエンブレムが復活し、新色「雲龍グリーン」を採用した。",
+        url: "https://news.yahoo.co.jp/articles/205f6252cc3f2a93d83676778b8ef5329d1609ba?source=rss",
+        source: "レスポンス",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00000030-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1702",
+        title: "XCR第5戦全クラスヨコハマタイヤジオランダーが制覇XC2は29秒差圧勝",
+        desc: "北海道厚真町で開催されたクロスカントリーSUVレース「XCRスプリントカップ」第5戦で、全5クラスでヨコハマタイヤの「ジオランダー」が制覇した。XC2クラスでは番場彬選手が29.2秒差で圧勝した。",
+        url: "https://news.yahoo.co.jp/articles/e4341ba5aba605abce0d7c4785522c9b2e71c2ce?source=rss",
+        source: "レスポンス",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00000029-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1703",
+        title: "クラフトワークスがRAV4 60系専用ダッシュボードトレイ発売",
+        desc: "カー用品ブランドのクラフトワークスは、トヨタRAV4 60系専用のダッシュボードトレイを発売した。ABS樹脂とシリコンゴム製で、3Dスキャンによる専用設計。マグネット式ホルダー2個と収納スペースを備え、ナビ背面への両面テープ装着で工具不要。参考価格は3780円。",
+        url: "https://news.yahoo.co.jp/articles/303420264567aab72674b49c73ebef83c767502c?source=rss",
+        source: "レスポンス",
+        date: "2026-08-27",
+        tags: ["コネクテッド", "コックピット"],
+    
+        interiorScore: 90,
+        interiorReason: "dashboard tray accessory with clear interior image showing storage layout and mo",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00000024-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1704",
+        title: "ダイハツ「ミラ イース」改良、シートヒーター搭載で快適性向上",
+        desc: "ミラ イースは燃費を約8％向上させ、衝突回避支援ブレーキの検知機能を強化した。新グレードではシートヒーターやプッシュボタンスタートを装備し、109万6700円から発売される。",
+        url: "https://news.yahoo.co.jp/articles/60da0f7ca938e331b2b44bcde72f9eb97420b464?source=rss",
+        source: "レスポンス",
+        date: "2026-08-27",
+        tags: ["シート", "安全"],
+    
+        interiorScore: 39,
+        interiorReason: "The article describes a facelift of a kei car that introduces specific interior",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00000016-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1705",
+        title: "新型BMW iX3の先進コックピットと航続906kmの快適EV空間",
+        desc: "新型BMW iX3はノイエ・クラッセ第1弾で、航続距離906kmを達成。43.3インチのBMWパノラミック・ビジョンと17.9インチセンターディスプレイを採用し、物理ボタンを削減した先進的なコックピットが特徴。リア駆動主体のドライブフィールと、デジタル操作への慣れが必要なインターフェースが印象的だ。",
+        url: "https://news.yahoo.co.jp/articles/e1846a1ccc7e336f65951877a2c75d2fef5db27d?source=rss",
+        source: "carview!",
+        date: "2026-08-27",
+        tags: ["HMI", "ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 62,
+        interiorReason: "text discusses cockpit, display, and UX; image is exterior only",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00010009-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1706",
+        title: "日産セレナ6代目ePOWER搭載で乗り心地好評も競合激化で販売正念場",
+        desc: "日産のファミリーミニバン「セレナ」は、2022年12月に発売された6代目でePOWERを搭載。広い室内空間と乗り物酔い抑制機能により「走り」と「快適性」で高評価を得ている。総合評価4.6点と高い支持を集める一方、競合車種の軒並み前年超えにより販売は正念場にある。",
+        url: "https://news.yahoo.co.jp/articles/68083526fc14849a66782cab37603a3f47d0d8b7?source=rss",
+        source: "carview!",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00010008-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1707",
+        title: "ランドクルーザー300の9月改良とハイブリッド追加は販売店も否定",
+        desc: "トヨタのランドクルーザー300について、9月の改良モデルやハイブリッド車の追加に関する噂が浮上している。しかし、販売店側はこれらの情報について否定しており、具体的な発売時期や詳細は未定である。",
+        url: "https://news.yahoo.co.jp/articles/98b51eaef01a59f818bb706eb22d574394fc352d?source=rss",
+        source: "carview!",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1708",
+        title: "トヨタシエンタとホンダフリードのコンパクトミニバン比較",
+        desc: "トヨタのシエンタとホンダのフリードは、コンパクトサイズでありながら3列シートを備える人気ミニバンだ。両車とも運転しやすく、ハイブリッドモデルも選択可能で、コストパフォーマンスと乗降性の違いからニーズに応える。",
+        url: "https://news.yahoo.co.jp/articles/c32b1941a0c072d6dda16f3b5212680347d724d2?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-27",
+        tags: ["シート"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-00000006-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1709",
+        title: "DS No8の洗練された快適性とアクティブスキャンサスの乗り心地",
+        desc: "DS No8は洗練された快適性を追求するクロスオーバーEVです。アクティブスキャンサスがカメラデータで減衰力を最適化します。",
+        url: "https://news.yahoo.co.jp/articles/6180d09f22d1405c3214816de1c56e9069f7d69c?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        interiorScore: 41,
+        interiorReason: "interior comfort theme but no cabin image",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-01270621-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1710",
+        title: "新型メルセデスベンツCLA発表最新技術と安全機能電動パワートレインソフトウエアを解説",
+        desc: "新型メルセデスベンツCLAの日本仕様発表会が7月29日に開催された。内燃機関モデルのCLA180とCLA220は7月9日に先行発表され、安全技術や電動パワートレイン、ソフトウェアの最新機能が解説された。",
+        url: "https://news.yahoo.co.jp/articles/0704ac03be7eefc95ae25b9833d1b004fa18e151?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-27",
+        tags: ["EV", "安全"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260827-01272370-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1519",
+        title: "ベンツEV初試乗 高級感とEV独特の音響を追求",
+        desc: "ベンツの初EV試乗レポート。ポルシェカイエンとプラットフォームを共有し、840馬力超のパワーを発揮する。EVながら「ベンツートーン」の追求が特徴で、生楽器の演奏を模した推進音を搭載。モーター負荷に連動して深みのある音響を再現する。後席モニターを搭載せず、運転者向けの高級感重視の設計思想がうかがえる。",
+        url: "https://www.thedrive.com/car-reviews/2028-bentley-torcal-first-ride-a-luxury-ev-that-moves-to-a-different-beat",
+        source: "The Drive",
+        date: "2026-08-27",
+        tags: ["ディスプレイ", "EV", "音響"],
+    
+        interiorScore: 40,
+        interiorReason: "Japanese summary mentions specific interior design philosophy (no rear monitor,",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/Torcal-2.jpg?quality=85&w=2048",
+        note: ""
+    },
+    {
+        id: "us1520",
+        title: "ラムがブラジル向けにTRX風特別版ランパゲを限定400台発売",
+        desc: "ラムはブラジル向けにランパゲ特別版を限定400台で発売した。TRX風デザインに加え、ブラックレザーとスエードのシート、青ステッチのステアリングを装備する。太平洋ブルーの専用塗装が特徴で、価格はガソリン車から約4万8800ドル、ディーゼル車から約5万2600ドルとなっている。",
+        url: "https://www.carscoops.com/2026/08/ram-rampage-rebel-ignition/",
+        source: "CarScoops",
+        date: "2026-08-27",
+        tags: ["シート", "新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image and text mention specific cabin materials (black leather, suede s",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Ram-Rampage-Rebel-Ignition-Limited-Special-Edition-Brazil-main-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1521",
+        title: "ランボルギーニが4999ドルのベビーカーを発売",
+        desc: "ランボルギーニが4999ドルのベビーカーを発売。ブランドロゴ、鮮やかな黄色のステッチ、レザーパイピングを施し、高級感を演出する。",
+        url: "https://www.carscoops.com/2026/08/lamborghini-silver-cross-newbaby-stroller/",
+        source: "CarScoops",
+        date: "2026-08-27",
+        tags: ["新素材"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Lamborghini-Stroller-new-a-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1522",
+        title: "ホンダ前カメラ故障で高額修理費請求訴訟",
+        desc: "ホンダの運転支援システム「ホンダセンシング」の前面カメラ故障で訴訟。修理費約三千ドルを請求。 自動ブレーキや車線維持機能に不可欠なセンサー。信頼性問題が浮き彫りとなった。",
+        url: "https://www.carscoops.com/2026/08/honda-front-sensor-lawsuit/",
+        source: "CarScoops",
+        date: "2026-08-27",
+        tags: ["センシング"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/IMG_3564-2-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1523",
+        title: "中国が車内品質向上へリコール推進を要請",
+        desc: "中国当局は自動車品質維持のためリコールを推進している。フォルクスワーゲンは人員整理を進める。ウェイモはミュンヘンで実証実験を開始した。オランダの規制当局はテスラのリコールを調査中である。",
+        url: "https://www.jalopnik.com/2245433/china-pushes-recalls-car-quality-up/",
+        source: "Jalopnik",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/china-pushes-for-recalls-to-keep-car-quality-up/l-intro-1787841786.jpg",
+        note: ""
+    },
+    {
+        id: "us1524",
+        title: "マイクロカーのファンが選ぶお気に入りの小型車トップ5",
+        desc: "マイクロカー愛好家が選ぶお気に入りの小型車トップ5を紹介する。交通渋滞がアイスクリームに散りばめられたカラフルなsprinklesのようであれば、それほど嫌ではないという著者の視点から、コンパクトで個性的な車両の魅力に焦点を当てる。",
+        url: "https://www.jalopnik.com/2245325/favorite-micro-car-reader-answers/",
+        source: "Jalopnik",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/these-are-your-favorite-micro-cars/l-intro-1787833272.jpg",
+        note: ""
+    },
+    {
+        id: "us1525",
+        title: "日本未輸入のレアスバルインプレッサカサブランカ9900ドルで出品",
+        desc: "米国で販売されなかった希少な2000年式スバル・インプレッサ「カサブランカ」が約9900ドルで出品されている。独特なフェイスデザインが特徴で、地元のカースタンドで最もレアなスバルとなる可能性がある。この価格が妥当かどうかは議論の的となっている。",
+        url: "https://www.jalopnik.com/2244652/2000-subaru-impreza-casa-blanca-for-sale-9900/",
+        source: "Jalopnik",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/at-9900-is-this-2000-subaru-impreza-casa-blanca-a-jdm-jewel/l-intro-1787757397.jpg",
+        note: ""
+    },
+    {
+        id: "us1526",
+        title: "ベンレー初EV SUVトーカル試乗で判明した内装と性能の鍵",
+        desc: "ベンレー初EV SUV「トーカル」はポルシェカイエンEVを基盤とし、119インチホイールベースを共有する。内装は5人乗りで後席に加熱・通気機能を備え、曲面タッチスクリーンを採用する。",
+        url: "https://www.caranddriver.com/reviews/a73520706/2028-bentley-torcal-prototype-ride/",
+        source: "Car and Driver",
+        date: "2026-08-27",
+        tags: ["ディスプレイ", "EV"],
+    
+        interiorScore: 58,
+        interiorReason: "Japanese summary provides specific interior details (5-seater, heated/ventilated",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/ffebd810-e6a0-437d-9510-335aa0dfbb7b.jpg",
+        note: ""
+    },
+    {
+        id: "us1527",
+        title: "資産価値を損なわない日本製高級SUVの設計思想と長期的所有の価値",
+        desc: "日本製の高級SUVが、長期的な所有を前提とした設計思想で開発されている。資産価値を損なわないよう、耐久性と信頼性を重視した構造が採用され、購入後の維持コストや再販価値の低下を防ぐ工夫が施されている。このアプローチにより、オーナーは長期間にわたり安心かつ快適に車両を利用できる。",
+        url: "https://www.topspeed.com/luxury-suv-doesnt-become-financial-regret/",
+        source: "Top Speed",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/03/img_2025-03-25-204244483.jpeg",
+        note: ""
+    },
+    {
+        id: "us1528",
+        title: "27インチOLED搭載でアウディQ5を凌駕するジェネシスGV70のラグジュアリーな内装",
+        desc: "2026年型ジェネシスGV70は、27インチOLEDワイドスクリーンと標準300馬力エンジン、10年10万マイルパワートレイン保証を備え、アウディQ5を上回るラグジュアリーと所有価値を提供する。",
+        url: "https://www.topspeed.com/family-suv-feels-more-luxurious-than-audi-q5/",
+        source: "Top Speed",
+        date: "2026-08-27",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 69,
+        interiorReason: "article focuses on the GV70's luxury interior and 27-inch OLED display, which is",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/wm/2026/01/2026-genesis-gv70-3-5t-sport-prestige-awd-exterior-right-front-tire-and-wheel-detail.jpg",
+        note: ""
+    },
+    {
+        id: "eu1483",
+        title: "ベンレーのEV初号機トルカルで高級車並りの静寂と快適な後部座席空間を体験",
+        desc: "ベンレーが来月発売するEV「トルカル」の試乗レポート。CEOは107年の歴史で最も配慮された車と称する。後部座席のドアが自動で静かに閉まり、高級車並りの快適な内装空間が実現している。",
+        url: "https://www.autocar.co.uk/car-news/features/feels-bentley-road-370-mile-torcal-ev",
+        source: "AUTOCAR UK",
+        date: "2026-08-27",
+        tags: ["シート", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/bentley-torcal-ride-along-review-2026-024.jpg?itok=PoM2kSHd",
+        note: ""
+    },
+    {
+        id: "eu1484",
+        title: "中国新興Lepasが英国にEV SUV L6を投入VW ID4対抗の標準装備重視",
+        desc: "中国新興ブランドLepasは英国市場向け初EV SUV「L6」の販売を開始する。65kWhバッテリーを搭載し、航続距離は279マイル。VW ID4やHyundai Ioniq5を競合と位置付け、標準装備の充実と広大な室内空間を強調している。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/lepas-l6-coming-uk-214bhp-279-mile-vw-id-4-rival",
+        source: "AUTOCAR UK",
+        date: "2026-08-27",
+        tags: ["AI", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/lepas_l6_ev_exterior_-_dynamic.jpg?itok=V-smqyyX",
+        note: ""
+    },
+    {
+        id: "eu1485",
+        title: "現代車内装の悩みの種静電容量式ボタンの実態と顧客視点の欠如",
+        desc: "現代の車内装で問題となる静電容量式ボタンは、顧客の声を無視し、エンジニアリングの誇りやコスト削減が優先された結果である。アマゾンのジェフ・ベゾスが顧客の視点を象徴する空の椅子を会議席に置いたように、意思決定には顧客視点の反映が不可欠である。",
+        url: "https://www.autocar.co.uk/opinion/technology/who-signed-truth-about-infuriating-capacitive-buttons",
+        source: "AUTOCAR UK",
+        date: "2026-08-27",
+        tags: [],
+    
+        interiorScore: 83,
+        interiorReason: "direct analysis of capacitive button UX failure in steering wheel, supported by",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/vw-id3-2024-details-7.jpg?itok=GvhElFG9",
+        note: ""
+    },
+    {
+        id: "eu1486",
+        title: "ベンリー初のEVトルカル内装レビュー静寂と快適性重視の英国ラグジュアリー",
+        desc: "ベンリー初のEV「トルカル」のプロトタイプ試乗レポート。シートは広々とした空間と静粛性を確保し、HMIには肘の動きに合わせた曲面スクリーンを採用。コックピットは乗員ディスプレイを省略し素材の質感を強調。800Vアーキテクチャによるアクティブエアサスで乗り心地を向上。2027年春に発売予定。",
+        url: "https://www.autoexpress.co.uk/bentley/370310/new-bentley-torcal-ride-review-brands-first-ev-has-british-luxury-dna",
+        source: "Auto Express",
+        date: "2026-08-27",
+        tags: ["HMI", "ディスプレイ", "シート", "コックピット", "新素材", "EV"],
+    
+        interiorScore: 69,
+        interiorReason: "Japanese summary provides specific interior details: HMI with elbow-movement cur",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--Cv7dOMmR--/t_rss_image_w_845/v1787733717/autoexpress/2026/08/Bentley%20Torcal%20prototype-5.jpg",
+        note: ""
+    },
+    {
+        id: "cn1514",
+        title: "FAW紅旗が業界初ペロブスカイト太陽光サンルーフを搭載",
+        desc: "FAW紅旗は電動SUV「Hongqi EHS7」にペロブスカイト太陽光サンルーフを搭載した。年間400kWhの発電が可能で、空調などの低電圧負荷を賄う。今後はボンネット等への展開で1日80kmの航続延伸を目指す。",
+        url: "https://carnewschina.com/2026/08/27/faw-hongqi-made-the-industry-first-solar-sunroof-that-produces-400-kwh-annually/",
+        source: "CarNewsChina - All",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        interiorScore: 71,
+        interiorReason: "solar sunroof technology and cabin integration",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/hongqi_solar_roof-3-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1515",
+        title: "BYDとSinopec、超高速充電ステーション1万基達成",
+        desc: "BYDは中国国内で1,500kWの超高速充電ステーションを1万基設置し、2026年までに2万基への拡大を目指す。中国の石油大手Sinopecと提携し、急速充電インフラの整備を加速させる。",
+        url: "https://carnewschina.com/2026/08/27/byd-hits-10000-flash-charging-stations-targets-20000-in-2026-with-chinas-oil-giant-sinopec/",
+        source: "CarNewsChina - All",
+        date: "2026-08-27",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/image-conversion-watermark-removal-scaled_webhook_1000x600_q85_1787826677.jpg",
+        note: ""
+    },
+    {
+        id: "cn1516",
+        title: "中国、エネルギー密度600Wh/kg超のリチウム金属電池を開発",
+        desc: "中国の研究チームが、エネルギー密度600Wh/kgに達する高安定性のリチウム金属パウチセルの開発に成功した。この電池は自動車用バッテリーとして期待され、航続距離の延伸や充電時間の短縮に貢献する可能性がある。",
+        url: "https://carnewschina.com/2026/08/27/chinese-researchers-unveil-high-stability-lithium-metal-battery-with-energy-density-exceeding-600-wh-kg/",
+        source: "CarNewsChina - All",
+        date: "2026-08-27",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-181.png",
+        note: ""
+    },
+    {
+        id: "cn1517",
+        title: "BMW iX3、中国で予約殺到 納車待ちと展示不足が課題",
+        desc: "BMWの電気自動車「iX3」は中国市場で予約開始直後から高い需要を示している。しかし、実車の展示不足や納車までの長期待機が課題となっている。この状況は、消費者の関心の高さを示す一方で、供給体制や販売戦略における課題も浮き彫りにしている。",
+        url: "https://carnewschina.com/2026/08/27/bmw-ix3-ev-sees-strong-pre-order-debut-in-china-while-facing-delivery-and-display-hurdles-report-says/",
+        source: "CarNewsChina - All",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-179-e1787799213144_webhook_1500x900_q85_1787799549.jpg",
+        note: ""
+    },
+    {
+        id: "cn1518",
+        title: "奇瑞が中国で「Fulwin T7」を発売 グローバル版「Lepas L6」の国内仕様",
+        desc: "奇瑞は中国市場向けに「Fulwin T7」を発売した。これはグローバルモデル「Lepas L6」の国内仕様車であり、価格は1万4300ドルからとなっている。",
+        url: "https://carnewschina.com/2026/08/27/chery-launches-fulwin-t7-in-china-domestic-version-of-global-lepas-l6-starts-at-14300-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-173_webhook_1500x900_q85_1787795729.jpg",
+        note: ""
+    },
+    {
+        id: "cn1519",
+        title: "BYD、ブラジルで宋プラスプラットフォームのMako PHEVピックアップトラックを初披露",
+        desc: "BYDはブラジル市場向けに中型PHEVピックアップトラック「マコ」を発売した。本モデルはSUV「宋プラス」のプラットフォームを流用し、既存の技術を活用してコストを抑えつつ、地域需要に合わせた実用性を追求している。",
+        url: "https://carnewschina.com/2026/08/27/byd-debuts-mako-phev-pickup-in-brazil-based-on-song-plus-platform/",
+        source: "CarNewsChina - All",
+        date: "2026-08-27",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-172-e1787792985771_webhook_1500x900_q85_1787793387.jpg",
+        note: ""
+    },
+    {
+        id: "cn1520",
+        title: "中国がスマートコネクテッドカーの安全性と生産適合性を重点とした全国一斉検査を1年間実施",
+        desc: "中国の工業情報化部など4省庁は、スマートコネクテッドカーの安全性や設計・生産能力、製品適合性を確認する全国一斉検査を1年間実施すると発表した。対象はGACアオンや小鵬汽車など主要メーカーで、過剰なOTA更新の禁止や安全基準の厳格化が進む。",
+        url: "https://cnevpost.com/2026/08/27/china-launches-yearlong-auto-quality-campaign/",
+        source: "CnEVPost - All",
+        date: "2026-08-27",
+        tags: ["コネクテッド", "安全"],
+    
+        interiorScore: 20,
+        interiorReason: "regulatory policy with no interior details",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082709380972.jpg",
+        note: ""
+    },
+    {
+        id: "cn1521",
+        title: "嵐図H1純利3億8900万元赤字へ原材料高が響く",
+        desc: "嵐図は上半期に純利3億8900万元の純損失を計上した。前年同期は黒字だったが、原材料価格の高騰が利益を圧迫した。売上高は増加したものの、コスト増により利益転換が実現しなかった。",
+        url: "https://cnevpost.com/2026/08/27/voyah-swings-to-h1-2026-loss/",
+        source: "CnEVPost - All",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082706512125.jpg",
+        note: ""
+    },
+    {
+        id: "cn1522",
+        title: "奇瑞が1万5000ドル以下の電動SUV「Fulwin T7」を発売",
+        desc: "奇瑞は小型電動SUV「Fulwin T7」を発売した。航続距離は600km。中国市場向けに期間限定で9万4900元（約1万4000ドル）から販売し、手頃な価格帯を攻める。",
+        url: "https://cnevpost.com/2026/08/27/chery-launches-fulwin-t7-electric-suv/",
+        source: "CnEVPost - All",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082702540171.jpg",
+        note: ""
+    },
+    {
+        id: "cn1523",
+        title: "理想汽車が欧州と中東へ新車展開EV SUVリーリー6とリーリー9",
+        desc: "理想汽車は欧州市場向けEV SUV「リーリー6」を第4四半期に、中東ドバイ向け大型SUV「リーリー9」を9月に販売開始する。海外市場への本格進出を加速させる。",
+        url: "https://cnevpost.com/2026/08/27/li-auto-maps-overseas-push-i6-europe-l9-dubai/",
+        source: "CnEVPost - All",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082702290744.jpg",
+        note: ""
+    },
+    {
+        id: "in1571",
+        title: "タタモーターズが乗用車事業の顧客向けブランド名をタタドットカーズに統一",
+        desc: "タタモーターズは乗用車事業の顧客向けブランド名を「Tata.cars」に統一した。小売、デジタル、サービス業務を統合し、ディーラーやショールーム、アフターサービスなどでの一貫したブランド体験を実現する。",
+        url: "https://www.autocarindia.com/car-news/tata-motors-adopts-tata-cars-as-new-identity-for-pv-business-440599",
+        source: "Autocar India - All",
+        date: "2026-08-27",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260827_145024_abe2028b.png",
+        note: ""
+    },
+    {
+        id: "in1572",
+        title: "ベントレー初EV SUV「Torcal」試乗 伝統と革新が融合する静寂とV8音の体験",
+        desc: "ベントレー初EV SUV「Torcal」は伝統と新世代の融合を目指す。内装にはメリノウールに結晶モチーフのアンビエントライトを採用。実物のクリスタル光を映像化したデジタルメーターも特徴。EVでありながらV8エンジンの音を再現した音響システムも搭載。",
+        url: "https://www.autocarindia.com/auto-features/2027-bentley-torcal-preview-riding-along-in-crewes-first-ev-440979",
+        source: "Autocar India - All",
+        date: "2026-08-27",
+        tags: ["イルミ", "新素材", "EV", "音響"],
+    
+        interiorScore: 61,
+        interiorReason: "Japanese summary provides specific interior details (Merino wool, crystal motif",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260827_140921_5f411f10.jpg",
+        note: ""
+    },
+    {
+        id: "in1573",
+        title: "MGインドで新型PHEV発表1.5Lエンジンと大容量バッテリーで環境性能向上",
+        desc: "MGはインド市場向けにHector Tomahawk PHEVを発表した。1.5Lエンジンと20.5kWhバッテリーを組み合わせ、総出力198馬力、最大トルク230Nmのパワートレインを搭載する。量産車初のプラグインハイブリッドモデルとして、環境性能と走行性能の両立を実現した。",
+        url: "https://www.autocarindia.com/auto-images/mg-hector-tomahawk-phev-colours-gallery-440444",
+        source: "Autocar India - All",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260827_111814_74c45ec0.jpg",
+        note: ""
+    },
+    {
+        id: "in1574",
+        title: "2027年ルノー・クイドブラジル仕様新型内装とデュアルスクリーン搭載",
+        desc: "ルノーはブラジルで2027年型クイドのフェイスリフト車を発売した。外観はフロントバンパーやグリルを刷新し、内装は7インチデジタルメーターと10.1インチタッチスクリーンを備えた新型ダッシュボードを採用。基本グレードのエボリューションはBRL71,090から。",
+        url: "https://www.rushlane.com/2027-renault-kwid-facelift-launch-price-brazil-brl-71k-rs-13-lakh-12554378.html",
+        source: "RushLane",
+        date: "2026-08-27",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        interiorScore: 57,
+        interiorReason: "The article describes a specific interior refresh (new dashboard, 7-inch meter,",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/2027-renault-kwid-facelift-launch-price-12.jpg",
+        note: ""
+    },
+    {
+        id: "in1575",
+        title: "ジャワオールスターズ42FJインドで20万ルピーから発売",
+        desc: "ジャワ・イエズィ・モーターサイクルズはインド国内市場にオールスターズ42FJを発売した。価格は20万2000ルピーからで、クロームエディションを含む6色の塗装オプションが用意されている。機械的な変更は加えられていない。",
+        url: "https://gaadiwaadi.com/jawa-all-stars-42-fj-launched-at-rs-2-02-lakh-in-india/",
+        source: "GaadiWaadi",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/Jawa-All-Stars-42-FJ.jpg",
+        note: ""
+    },
+    {
+        id: "in1576",
+        title: "ヒュンダイパリスエードにロールスロイス風天井材搭載のハイロフト版登場",
+        desc: "ヒュンダイパリスエードにロールスロイス風天井材を採用したハイロフト版が追加された。広々としたキャビン空間で高級感あるインテリアが実現し、快適性が向上した。",
+        url: "https://gaadiwaadi.com/hyundai-palisade-gains-high-roof-version-with-rolls-royce-inspired-headliner/",
+        source: "GaadiWaadi",
+        date: "2026-08-27",
+        tags: [],
+    
+        interiorScore: 72,
+        interiorReason: "high roof and headliner material are direct interior product planning details",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/Hyundai-palisade-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1577",
+        title: "トヨタ イノバ ハイクロス2027年 大規模改良 大型タッチスクリーン搭載",
+        desc: "トヨタ・イノバハイクロスは2027年に改良され、換気付きシートと大型タッチスクリーンを採用する。内装はパノラミックサンルーフで快適性を高め、既存の2.0Lエンジンとハイブリッドを継続する。",
+        url: "https://www.indiacarnews.com/news/toyotas-best-selling-family-car-set-for-a-major-2027-update-68816/",
+        source: "IndiaCarNews",
+        date: "2026-08-27",
+        tags: ["ディスプレイ", "シート"],
+    
+        interiorScore: 57,
+        interiorReason: "Japanese summary explicitly mentions interior updates (large touchscreen, ventil",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/Whats-Changing.webp",
+        note: ""
+    },
+    {
+        id: "in1578",
+        title: "MG Hector Tomahawk EVがインド高級EV SUV市場に参入",
+        desc: "MG Hector Tomahawk EVは69.2kWhバッテリーと517km航続距離を備え、7人乗りも選択可能だ。価格194.9万ルピーから始まり、BaaSで初期費用を抑え、競合に挑む。",
+        url: "https://www.autopunditz.com/post/mg-hector-tomahawk-ev-vs-harrier-ev-xev-9e-xev-9s",
+        source: "Auto Punditz",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        interiorScore: 43,
+        interiorReason: "comparison of electric SUVs focusing on price, battery, range, and seating confi",
+        imageInterior: false,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_23758308c2064b14a6ebfd6ed59d574e~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1579",
+        title: "ヤマハ新型YZF-R2インドで発売265馬力149kg",
+        desc: "ヤマハはインドで新型YZF-R2を発売した。204ccエンジンで26.5PS、149kgの軽量ボディ。走行モードやトラクションコントロール、TFTディスプレイを搭載。オプションで双方向クイックシフターも選択可能。最上位モデルR2Mは25万3000ルピー。",
+        url: "https://www.autopunditz.com/post/yamaha-r2-launched-india-price-r2m-specs-features",
+        source: "Auto Punditz",
+        date: "2026-08-27",
+        tags: ["ディスプレイ"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_5aff8608ae34417db9f4f80086d4820f~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1580",
+        title: "JSW MG Hector Tomahawk PHEV発売",
+        desc: "JSW MG Motor Indiaは7人乗りPHEV「Hector Tomahawk」を発売した。1.5リッターエンジンと20.5kWhバッテリーを組み合わせ、EV航続115km、総航続1100km超を実現。価格は256.9万ルピーから。",
+        url: "https://www.autopunditz.com/post/mg-hector-tomahawk-phev-launched-price-range-features",
+        source: "Auto Punditz",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_cab4232f4c7d42b998b9a887ce30a409~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1487",
+        title: "現代自動車グループがKiaアプリにスマート充電制御を統合",
+        desc: "現代自動車グループはKaluzaと提携し、Kiaアプリにスマート充電制御を統合する。EVドライバーは電力料金が安い時間帯に充電できる。",
+        url: "https://www.electrive.com/2026/08/27/hyundai-group-integrates-smart-charging-control-from-kaluza/",
+        source: "Electrive",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/07/hyundai-kia-alldayenergy-smart-charging-bidirektionales-laden-v2g-v2h-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1488",
+        title: "レアアース不使用電動機開発のAEMが大型商用車向け新モーターをIAAで公開",
+        desc: "英国のAEMはレアアース不使用の大型商用車向け電動機をIAAで公開する。最大トルクを誇る新モーターのサンプル供給も計画されている。",
+        url: "https://www.electrive.com/2026/08/27/aem-unveils-new-electric-motor-for-heavy-duty-commercial-vehicles/",
+        source: "Electrive",
+        date: "2026-08-27",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/advanced-electric-machines-aem-e-motor-e-lkw-hdrm-hdrm150-hdmr300c-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1489",
+        title: "中国がコネクテッドカーの安全対策としてソフトウェア構成の事前凍結を含む全国一斉検査キャンペーンを開始",
+        desc: "中国はコネクテッドカーの安全性向上のため、販売前のソフトウェア構成凍結とOTA更新禁止を柱とする1年間の全国キャンペーンを開始した。この施策は、消費者エレクトロニクス由来の「出荷後修正」サイクルを拒否し、市場アクセス前の厳格な検証を義務付けるもの。",
+        url: "https://www.automotiveworld.com/news/china-launches-yearlong-campaign-on-connected-car-safety/",
+        source: "Automotive World",
+        date: "2026-08-27",
+        tags: ["コネクテッド", "安全"],
+    
+        interiorScore: 12,
+        interiorReason: "regulatory policy on OTA updates with no interior image",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/27142633/connected-car-software-defined-vehicle-sdv-generic-scaled.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1490",
+        title: "2027年型Kiaニロ、米国で2万9890ドルから発売",
+        desc: "refreshed 2027 Kia Niroはハイブリッド専業モデルとなり、新Sグレードと更新された運転支援技術を搭載。米国での価格は2万9890ドルから。",
+        url: "https://www.automotiveworld.com/news/kia-prices-2027-niro-hybrid-from-us29890-in-the-us/",
+        source: "Automotive World",
+        date: "2026-08-27",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/27151318/Kia-2027-Niro-scaled-e1787839986503.jpg",
+        note: ""
+    },
+    {
+        id: "eu1491",
+        title: "コンチネンタルEV用タイヤZEvRA43%再生素材採用",
+        desc: "コンチネンタルがEV用タイヤ「ZEvRA」コンセプトを発表した。再生ゴムやPETなど43%の再生素材を使用し、サステナブルな生産プロセスを示す。",
+        url: "https://electriccarsreport.com/2026/08/this-new-continental-ev-tire-is-made-with-43-recycled-materials/",
+        source: "Electric Cars Report",
+        date: "2026-08-27",
+        tags: ["新素材", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Continental.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1492",
+        title: "ボルボEX90とEX60にコネクテッドセーフティと空間オーディオ追加",
+        desc: "ボルボはEX90とEX60に4つのコネクテッドセーフティアラートとApple CarPlayの空間オーディオを追加した。大型動物や工事現場などを検知する新機能により、車両間通信で危険を早期警告する。",
+        url: "https://electriccarsreport.com/2026/08/volvo-adds-new-connected-safety-features-to-ex60-and-ex90/",
+        source: "Electric Cars Report",
+        date: "2026-08-27",
+        tags: ["AR", "コネクテッド", "安全", "音響"],
+    
+        interiorScore: 70,
+        interiorReason: "article focuses on software updates and audio features, but the image provides a",
+        imageInterior: true,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Volvo-Safety-Features.jpg?a3781e&amp;a3781e",
         note: ""
     },
 ];
