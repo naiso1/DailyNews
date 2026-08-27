@@ -23,6 +23,7 @@ $required = @(
     "insights_data.js",
     "dailynews_client.js",
     "dailynews_account.js",
+    "setup",
     "images",
     "page_images"
 )

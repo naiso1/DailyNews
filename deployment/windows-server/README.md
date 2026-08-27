@@ -48,6 +48,7 @@ The script packages only:
 - `insights_data.js`
 - `dailynews_client.js`
 - `dailynews_account.js`
+- `setup/` (IEWEB01 certificate and per-user trust installer)
 - `images/`
 - `page_images/`
 
