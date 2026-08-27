@@ -19,8 +19,9 @@ C:\Users\Administrator\Desktop\DailyNews
   active-release.txt
 ```
 
-The Node.js server listens on `202.15.67.132:8082`. IIS publishes both
-`http://IEWEB01/` and `https://IEWEB01/`. The application and DailyNews
+The Node.js server listens on `202.15.67.132:8082`. The canonical internal URL
+is `http://IEWEB01/`. IIS also retains the existing HTTPS binding as an optional
+fallback, but the application does not direct users to it. The application and DailyNews
 firewall rules allow the internal networks `172.29.0.0/16` and
 `202.15.67.0/24`.
 
@@ -29,7 +30,9 @@ Interaction data is stored in `data\dailynews.sqlite`. The
 retains 35 days under `data\backups`.
 
 User sessions use an HttpOnly, SameSite cookie and remain valid for up to 180
-days. Use the IIS HTTPS endpoint whenever credentials are entered. Email
+days. The site is intentionally operated over HTTP to match the existing
+internal web environment. Users must not reuse their Windows or other corporate
+passwords for this site. Email
 addresses are login identifiers and are not displayed with comments; comments
 use the user-selected display name.
 
