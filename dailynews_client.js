@@ -38,6 +38,7 @@ function getClientId() {
     return window.__dailyNewsClientId;
   }
 }
+window.getDailyNewsClientId = getClientId;
 
 async function apiRequest(path, options = {}) {
   const request = {
@@ -358,6 +359,7 @@ function getInteractionRenderData(itemId) {
     likes: data.likes || 0,
     comments: data.commentItems || [],
     reads: data.reads || 0,
+    liked: Boolean(data.liked),
   };
 }
 
@@ -567,6 +569,7 @@ function renderItem(itemId) {
   if (elements.btnLike) {
     const count = elements.btnLike.querySelector(".count");
     if (count) count.textContent = data.likes || 0;
+    elements.btnLike.classList.toggle("liked", data.liked);
   }
   if (elements.btnComment) {
     const count = elements.btnComment.querySelector(".count");
@@ -581,7 +584,10 @@ function renderItem(itemId) {
               <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${escapeHtml(comment.date || "")}</span>
             </div>
             <div class="comment-text">${escapeHtml(comment.text || "")}</div>
-            ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">×</button>`}
+            <div class="comment-actions">
+              ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
+              ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">&#21066;&#38500;</button>`}
+            </div>
           </div>`,
       )
       .join("");
@@ -625,7 +631,11 @@ window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
 
 window.toggleLike = async (itemId, button) => {
   const storageKey = `liked_${itemId}`;
-  const wasLiked = Boolean(localStorage.getItem(storageKey));
+  const wasLiked = Boolean(
+    window.interactionsData[itemId]?.liked ||
+    button.classList.contains("liked") ||
+    localStorage.getItem(storageKey),
+  );
   const desiredLiked = !wasLiked;
   const count = button.querySelector(".count");
   const previousCount = Number.parseInt(count?.textContent || "0", 10) || 0;
@@ -671,6 +681,13 @@ window.toggleLike = async (itemId, button) => {
       ...(window.interactionsData[itemId] || {}),
       likes: previousCount,
     });
+    if (error.status === 401) {
+      window.dailyNewsAccount?.openAuth(
+        "login",
+        "いいねを保存するにはログインしてください。",
+      );
+      return;
+    }
     alert("いいねの保存に失敗しました。通信状態を確認してください。");
   }
 };
@@ -691,19 +708,8 @@ window.submitComment = async (itemId, input) => {
   input.value = "";
 
   if (window.useLocalInteractions) {
-    const local = getLocalInteractionData(itemId);
-    local.comments = Array.isArray(local.comments) ? local.comments : [];
-    local.comments.push({
-      user: "Guest",
-      text,
-      date: new Date().toLocaleDateString("ja-JP"),
-      canDelete: true,
-    });
-    setLocalInteractionData(itemId, local);
-    if (liveElements[itemId]) {
-      liveElements[itemId].lastData = getInteractionRenderData(itemId);
-      renderItem(itemId);
-    }
+    input.value = text;
+    alert("サーバーに接続できないため、コメントを保存できません。時間をおいて再度お試しください。");
     return;
   }
 
@@ -723,9 +729,48 @@ window.submitComment = async (itemId, input) => {
   } catch (error) {
     console.error("Comment save failed:", error);
     input.value = text;
+    if (error.status === 401) {
+      window.dailyNewsAccount?.openAuth(
+        "login",
+        "コメントを投稿するにはログインしてください。",
+      );
+      return;
+    }
     alert("コメントの保存に失敗しました。通信状態を確認してください。");
   }
 };
+
+window.toggleCommentLike = async (itemId, commentId, liked) => {
+  try {
+    const data = await apiRequest(
+      `/interactions/${encodeURIComponent(itemId)}/comments/${commentId}/like`,
+      {
+        method: "PUT",
+        body: { clientId: getClientId(), liked: Boolean(liked) },
+      },
+    );
+    mergeInteractionData(itemId, data);
+    if (liveElements[itemId]) {
+      liveElements[itemId].lastData = getInteractionRenderData(itemId);
+      renderItem(itemId);
+    }
+  } catch (error) {
+    if (error.status === 401) {
+      window.dailyNewsAccount?.openAuth(
+        "login",
+        "コメントにいいねするにはログインしてください。",
+      );
+      return;
+    }
+    console.error("Comment like failed:", error);
+  }
+};
+
+window.addEventListener("dailynews:account-changed", () => {
+  Object.keys(liveElements).forEach((itemId) => {
+    fetchInteractionDetail(itemId).catch(() => {});
+  });
+});
 
 window.deleteComment = async (itemId, commentIndex) => {
   if (!confirm("コメントを削除しますか？")) return;

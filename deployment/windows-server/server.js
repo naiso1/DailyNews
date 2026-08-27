@@ -3,6 +3,7 @@
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
+const crypto = require("crypto");
 const { DatabaseSync } = require("node:sqlite");
 
 const ROOT = path.resolve(__dirname, "..");
@@ -21,6 +22,11 @@ const ALLOWED_CLIENTS = (
   .map((value) => value.trim())
   .filter(Boolean);
 const TRUSTED_PROXIES = ["127.0.0.1", "::1", "202.15.67.132"];
+const SESSION_COOKIE = "dailynews_session";
+const SESSION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60;
+const AUTH_ATTEMPT_WINDOW_MS = 10 * 60 * 1000;
+const AUTH_ATTEMPT_LIMIT = 12;
+const authAttempts = new Map();
 
 const MIME_TYPES = new Map([
   [".css", "text/css; charset=utf-8"],
@@ -100,6 +106,83 @@ db.exec(`
 
   INSERT OR IGNORE INTO settings(setting_key, setting_value)
     VALUES ('total_visits', '0');
+
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    display_name TEXT NOT NULL,
+    password_hash TEXT NOT NULL,
+    password_salt TEXT NOT NULL,
+    email_verified INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
+
+  CREATE TABLE IF NOT EXISTS sessions (
+    token_hash TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    expires_at TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_seen_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
+  CREATE INDEX IF NOT EXISTS sessions_user_id_idx
+    ON sessions(user_id, expires_at);
+
+  CREATE TABLE IF NOT EXISTS user_likes (
+    item_id TEXT NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (item_id, user_id),
+    FOREIGN KEY (item_id) REFERENCES interactions(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE IF NOT EXISTS user_favorites (
+    item_id TEXT NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (item_id, user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE IF NOT EXISTS comment_likes (
+    comment_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (comment_id, user_id),
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE IF NOT EXISTS feedback (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    category TEXT NOT NULL,
+    message TEXT NOT NULL,
+    item_id TEXT,
+    page_url TEXT,
+    status TEXT NOT NULL DEFAULT 'new',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
+  CREATE INDEX IF NOT EXISTS feedback_user_id_idx
+    ON feedback(user_id, id DESC);
+`);
+
+function ensureColumn(tableName, columnName, definition) {
+  const columns = db.prepare(`PRAGMA table_info(${tableName})`).all();
+  if (!columns.some((column) => column.name === columnName)) {
+    db.exec(`ALTER TABLE ${tableName} ADD COLUMN ${columnName} ${definition}`);
+  }
+}
+
+ensureColumn("comments", "user_id", "INTEGER REFERENCES users(id)");
+db.exec(`
+  CREATE INDEX IF NOT EXISTS comments_user_id_idx
+    ON comments(user_id, id DESC);
 `);
 
 const statements = {
@@ -128,7 +211,7 @@ const statements = {
     GROUP BY i.item_id
   `),
   comments: db.prepare(`
-    SELECT id, user_name, comment_text, client_id, created_at
+    SELECT id, user_name, comment_text, client_id, user_id, created_at
     FROM comments
     WHERE item_id = ?
     ORDER BY id
@@ -142,17 +225,29 @@ const statements = {
   deleteLike: db.prepare(`
     DELETE FROM client_likes WHERE item_id = ? AND client_id = ?
   `),
+  clientLikes: db.prepare(`
+    SELECT item_id FROM client_likes WHERE client_id = ?
+  `),
+  hasUserLike: db.prepare(`
+    SELECT 1 AS found FROM user_likes WHERE item_id = ? AND user_id = ?
+  `),
+  insertUserLike: db.prepare(`
+    INSERT OR IGNORE INTO user_likes(item_id, user_id) VALUES (?, ?)
+  `),
+  deleteUserLike: db.prepare(`
+    DELETE FROM user_likes WHERE item_id = ? AND user_id = ?
+  `),
   changeLikes: db.prepare(`
     UPDATE interactions
     SET likes = MAX(0, likes + ?), updated_at = CURRENT_TIMESTAMP
     WHERE item_id = ?
   `),
   insertComment: db.prepare(`
-    INSERT INTO comments(item_id, user_name, comment_text, client_id)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO comments(item_id, user_name, comment_text, client_id, user_id)
+    VALUES (?, ?, ?, ?, ?)
   `),
   findComment: db.prepare(`
-    SELECT id, item_id, client_id FROM comments WHERE id = ? AND item_id = ?
+    SELECT id, item_id, client_id, user_id FROM comments WHERE id = ? AND item_id = ?
   `),
   deleteComment: db.prepare(`
     DELETE FROM comments WHERE id = ? AND item_id = ?
@@ -199,6 +294,86 @@ const statements = {
     UPDATE settings
     SET setting_value = CAST(MAX(0, CAST(setting_value AS INTEGER) - ?) AS TEXT)
     WHERE setting_key = 'total_visits'
+  `),
+  userByEmail: db.prepare(`
+    SELECT id, email, display_name, password_hash, password_salt, email_verified
+    FROM users WHERE email = ?
+  `),
+  userById: db.prepare(`
+    SELECT id, email, display_name, email_verified
+    FROM users WHERE id = ?
+  `),
+  insertUser: db.prepare(`
+    INSERT INTO users(email, display_name, password_hash, password_salt)
+    VALUES (?, ?, ?, ?)
+  `),
+  updateUserName: db.prepare(`
+    UPDATE users
+    SET display_name = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `),
+  updateCommentNames: db.prepare(`
+    UPDATE comments SET user_name = ? WHERE user_id = ?
+  `),
+  insertSession: db.prepare(`
+    INSERT INTO sessions(token_hash, user_id, expires_at)
+    VALUES (?, ?, ?)
+  `),
+  sessionUser: db.prepare(`
+    SELECT u.id, u.email, u.display_name, u.email_verified, s.expires_at
+    FROM sessions s
+    JOIN users u ON u.id = s.user_id
+    WHERE s.token_hash = ? AND s.expires_at > ?
+  `),
+  touchSession: db.prepare(`
+    UPDATE sessions SET last_seen_at = CURRENT_TIMESTAMP WHERE token_hash = ?
+  `),
+  deleteSession: db.prepare(`
+    DELETE FROM sessions WHERE token_hash = ?
+  `),
+  deleteExpiredSessions: db.prepare(`
+    DELETE FROM sessions WHERE expires_at <= ?
+  `),
+  insertFavorite: db.prepare(`
+    INSERT OR IGNORE INTO user_favorites(item_id, user_id) VALUES (?, ?)
+  `),
+  deleteFavorite: db.prepare(`
+    DELETE FROM user_favorites WHERE item_id = ? AND user_id = ?
+  `),
+  userFavorites: db.prepare(`
+    SELECT item_id FROM user_favorites WHERE user_id = ? ORDER BY created_at DESC
+  `),
+  userLikes: db.prepare(`
+    SELECT item_id FROM user_likes WHERE user_id = ? ORDER BY created_at DESC
+  `),
+  userComments: db.prepare(`
+    SELECT id, item_id, comment_text, created_at
+    FROM comments WHERE user_id = ? ORDER BY id DESC
+  `),
+  claimComments: db.prepare(`
+    UPDATE comments
+    SET user_id = ?, user_name = ?
+    WHERE client_id = ? AND user_id IS NULL
+  `),
+  commentLikeCount: db.prepare(`
+    SELECT COUNT(*) AS count FROM comment_likes WHERE comment_id = ?
+  `),
+  hasCommentLike: db.prepare(`
+    SELECT 1 AS found FROM comment_likes WHERE comment_id = ? AND user_id = ?
+  `),
+  insertCommentLike: db.prepare(`
+    INSERT OR IGNORE INTO comment_likes(comment_id, user_id) VALUES (?, ?)
+  `),
+  deleteCommentLike: db.prepare(`
+    DELETE FROM comment_likes WHERE comment_id = ? AND user_id = ?
+  `),
+  insertFeedback: db.prepare(`
+    INSERT INTO feedback(user_id, category, message, item_id, page_url)
+    VALUES (?, ?, ?, ?, ?)
+  `),
+  userFeedback: db.prepare(`
+    SELECT id, category, message, item_id, page_url, status, created_at
+    FROM feedback WHERE user_id = ? ORDER BY id DESC LIMIT 100
   `),
 };
 
@@ -334,6 +509,159 @@ function validClientId(value) {
   return typeof value === "string" && /^[A-Za-z0-9_-]{16,100}$/.test(value);
 }
 
+function normalizeEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function validEmail(value) {
+  return (
+    value.length >= 5 &&
+    value.length <= 254 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  );
+}
+
+function validDisplayName(value) {
+  return (
+    typeof value === "string" &&
+    value.trim().length >= 1 &&
+    value.trim().length <= 40 &&
+    !/[\u0000-\u001f\u007f]/.test(value)
+  );
+}
+
+function validPassword(value) {
+  return typeof value === "string" && value.length >= 8 && value.length <= 128;
+}
+
+function hashPassword(password, salt = crypto.randomBytes(16).toString("base64")) {
+  return {
+    salt,
+    hash: crypto.scryptSync(password, salt, 64).toString("base64"),
+  };
+}
+
+function verifyPassword(password, salt, expectedHash) {
+  try {
+    const actual = Buffer.from(hashPassword(password, salt).hash, "base64");
+    const expected = Buffer.from(expectedHash, "base64");
+    return actual.length === expected.length && crypto.timingSafeEqual(actual, expected);
+  } catch (_) {
+    return false;
+  }
+}
+
+function tokenHash(token) {
+  return crypto.createHash("sha256").update(token).digest("hex");
+}
+
+function parseCookies(request) {
+  const result = {};
+  for (const part of String(request.headers.cookie || "").split(";")) {
+    const separator = part.indexOf("=");
+    if (separator < 1) continue;
+    const name = part.slice(0, separator).trim();
+    const value = part.slice(separator + 1).trim();
+    try {
+      result[name] = decodeURIComponent(value);
+    } catch (_) {
+      result[name] = value;
+    }
+  }
+  return result;
+}
+
+function requestUsesHttps(request) {
+  return (
+    request.socket.encrypted ||
+    String(request.headers["x-forwarded-proto"] || "").toLowerCase() === "https" ||
+    Boolean(request.headers["x-arr-ssl"])
+  );
+}
+
+function sessionCookie(token, request, maxAge = SESSION_MAX_AGE_SECONDS) {
+  const attributes = [
+    `${SESSION_COOKIE}=${encodeURIComponent(token)}`,
+    "Path=/",
+    "HttpOnly",
+    "SameSite=Lax",
+    `Max-Age=${maxAge}`,
+  ];
+  if (requestUsesHttps(request)) attributes.push("Secure");
+  return attributes.join("; ");
+}
+
+function publicUser(row) {
+  return {
+    id: Number(row.id),
+    email: row.email,
+    displayName: row.display_name,
+    emailVerified: Boolean(row.email_verified),
+  };
+}
+
+function authenticatedUser(request) {
+  if (request.authChecked) return request.authUser || null;
+  request.authChecked = true;
+  const token = parseCookies(request)[SESSION_COOKIE];
+  if (!token || token.length > 256) return null;
+  const hash = tokenHash(token);
+  const row = statements.sessionUser.get(hash, new Date().toISOString());
+  if (!row) return null;
+  statements.touchSession.run(hash);
+  request.authTokenHash = hash;
+  request.authUser = publicUser(row);
+  return request.authUser;
+}
+
+function requireUser(request, response) {
+  const user = authenticatedUser(request);
+  if (!user) {
+    apiError(response, 401, "authentication_required", "Login is required.");
+    return null;
+  }
+  return user;
+}
+
+function createSession(userId, request, response) {
+  const token = crypto.randomBytes(32).toString("base64url");
+  const expiresAt = new Date(
+    Date.now() + SESSION_MAX_AGE_SECONDS * 1000,
+  ).toISOString();
+  statements.deleteExpiredSessions.run(new Date().toISOString());
+  statements.insertSession.run(tokenHash(token), userId, expiresAt);
+  response.setHeader("Set-Cookie", sessionCookie(token, request));
+}
+
+function authRateLimited(request, action) {
+  const key = `${action}:${clientAddress(request)}`;
+  const now = Date.now();
+  const previous = authAttempts.get(key) || [];
+  const recent = previous.filter((timestamp) => now - timestamp < AUTH_ATTEMPT_WINDOW_MS);
+  recent.push(now);
+  authAttempts.set(key, recent);
+  return recent.length > AUTH_ATTEMPT_LIMIT;
+}
+
+function claimClientActivity(user, clientId, favoriteIds = []) {
+  if (!validClientId(clientId)) return;
+  withTransaction(() => {
+    for (const row of statements.clientLikes.all(clientId)) {
+      statements.ensureInteraction.run(row.item_id);
+      const alreadyLiked = Boolean(
+        statements.hasUserLike.get(row.item_id, user.id),
+      );
+      if (alreadyLiked) statements.changeLikes.run(-1, row.item_id);
+      else statements.insertUserLike.run(row.item_id, user.id);
+      statements.deleteLike.run(row.item_id, clientId);
+    }
+    statements.claimComments.run(user.id, user.displayName, clientId);
+    for (const itemId of favoriteIds) {
+      if (validItemId(itemId)) statements.insertFavorite.run(itemId, user.id);
+    }
+  });
+}
+
 function readJson(request, maxBytes = 16 * 1024) {
   return new Promise((resolve, reject) => {
     let body = "";
@@ -368,7 +696,7 @@ function withTransaction(action) {
   }
 }
 
-function commentsFor(itemId, clientId) {
+function commentsFor(itemId, clientId, user = null) {
   return statements.comments.all(itemId).map((comment) => ({
     id: Number(comment.id),
     user: comment.user_name,
@@ -378,23 +706,31 @@ function commentsFor(itemId, clientId) {
         ? comment.created_at
         : `${String(comment.created_at).replace(" ", "T")}Z`,
     ).toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }),
-    canDelete: !comment.client_id || comment.client_id === clientId,
+    likes: Number(statements.commentLikeCount.get(comment.id)?.count || 0),
+    liked: Boolean(
+      user && statements.hasCommentLike.get(comment.id, user.id),
+    ),
+    canDelete: user
+      ? Number(comment.user_id) === user.id
+      : !comment.user_id && (!comment.client_id || comment.client_id === clientId),
   }));
 }
 
-function interactionFor(itemId, clientId, includeComments = true) {
+function interactionFor(itemId, clientId, includeComments = true, user = null) {
   statements.ensureInteraction.run(itemId);
   const row = statements.interaction.get(itemId);
   const value = {
     likes: Number(row?.likes || 0),
     comments: Number(row?.comments || 0),
     reads: Number(row?.reads || 0),
-    liked: validClientId(clientId)
-      ? Boolean(statements.hasLike.get(itemId, clientId))
-      : false,
+    liked: user
+      ? Boolean(statements.hasUserLike.get(itemId, user.id))
+      : validClientId(clientId)
+        ? Boolean(statements.hasLike.get(itemId, clientId))
+        : false,
   };
   if (includeComments) {
-    value.commentItems = commentsFor(itemId, clientId);
+    value.commentItems = commentsFor(itemId, clientId, user);
   }
   return value;
 }
@@ -446,6 +782,119 @@ async function handleApi(request, response, requestUrl) {
     return;
   }
 
+  if (request.method === "GET" && requestUrl.pathname === "/api/auth/me") {
+    const user = authenticatedUser(request);
+    sendJson(response, 200, {
+      authenticated: Boolean(user),
+      user,
+    });
+    return;
+  }
+
+  if (!assertSameOrigin(request, response)) return;
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/auth/register") {
+    if (authRateLimited(request, "register")) {
+      apiError(response, 429, "too_many_attempts", "Please wait before trying again.");
+      return;
+    }
+    const body = await readJson(request);
+    const email = normalizeEmail(body.email);
+    const displayName = String(body.displayName || "").trim();
+    const password = String(body.password || "");
+    const favorites = Array.isArray(body.favorites) ? body.favorites.slice(0, 5000) : [];
+    if (!validEmail(email) || !validDisplayName(displayName) || !validPassword(password)) {
+      apiError(response, 400, "invalid_registration", "Invalid registration details.");
+      return;
+    }
+    if (statements.userByEmail.get(email)) {
+      apiError(response, 409, "email_in_use", "This email address is already registered.");
+      return;
+    }
+    const passwordData = hashPassword(password);
+    let userId;
+    try {
+      userId = Number(
+        statements.insertUser.run(
+          email,
+          displayName,
+          passwordData.hash,
+          passwordData.salt,
+        ).lastInsertRowid,
+      );
+    } catch (error) {
+      if (String(error.message).includes("UNIQUE")) {
+        apiError(response, 409, "email_in_use", "This email address is already registered.");
+        return;
+      }
+      throw error;
+    }
+    const user = publicUser(statements.userById.get(userId));
+    claimClientActivity(user, body.clientId, favorites);
+    createSession(userId, request, response);
+    sendJson(response, 201, { authenticated: true, user });
+    return;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/auth/login") {
+    if (authRateLimited(request, "login")) {
+      apiError(response, 429, "too_many_attempts", "Please wait before trying again.");
+      return;
+    }
+    const body = await readJson(request);
+    const email = normalizeEmail(body.email);
+    const password = String(body.password || "");
+    const row = statements.userByEmail.get(email);
+    if (!row || !verifyPassword(password, row.password_salt, row.password_hash)) {
+      apiError(response, 401, "invalid_credentials", "Email address or password is incorrect.");
+      return;
+    }
+    const user = publicUser(row);
+    const favorites = Array.isArray(body.favorites) ? body.favorites.slice(0, 5000) : [];
+    claimClientActivity(user, body.clientId, favorites);
+    createSession(user.id, request, response);
+    sendJson(response, 200, { authenticated: true, user });
+    return;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/auth/logout") {
+    authenticatedUser(request);
+    if (request.authTokenHash) statements.deleteSession.run(request.authTokenHash);
+    response.setHeader("Set-Cookie", sessionCookie("", request, 0));
+    sendJson(response, 200, { authenticated: false, user: null });
+    return;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/auth/claim") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const body = await readJson(request);
+    const favorites = Array.isArray(body.favorites) ? body.favorites.slice(0, 5000) : [];
+    claimClientActivity(user, body.clientId, favorites);
+    sendJson(response, 200, { authenticated: true, user });
+    return;
+  }
+
+  if (request.method === "PUT" && requestUrl.pathname === "/api/auth/profile") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const body = await readJson(request);
+    const displayName = String(body.displayName || "").trim();
+    if (!validDisplayName(displayName)) {
+      apiError(response, 400, "invalid_display_name", "Invalid display name.");
+      return;
+    }
+    withTransaction(() => {
+      statements.updateUserName.run(displayName, user.id);
+      statements.updateCommentNames.run(displayName, user.id);
+    });
+    sendJson(response, 200, {
+      authenticated: true,
+      user: publicUser(statements.userById.get(user.id)),
+    });
+    return;
+  }
+
   if (request.method === "GET" && requestUrl.pathname === "/api/interactions") {
     sendJson(response, 200, { interactions: allInteractions() });
     return;
@@ -465,7 +914,12 @@ async function handleApi(request, response, requestUrl) {
     sendJson(
       response,
       200,
-      interactionFor(itemId, requestUrl.searchParams.get("clientId")),
+      interactionFor(
+        itemId,
+        requestUrl.searchParams.get("clientId"),
+        true,
+        authenticatedUser(request),
+      ),
     );
     return;
   }
@@ -474,8 +928,6 @@ async function handleApi(request, response, requestUrl) {
     sendJson(response, 200, accessStats());
     return;
   }
-
-  if (!assertSameOrigin(request, response)) return;
 
   if (request.method === "POST" && requestUrl.pathname === "/api/access") {
     const body = await readJson(request);
@@ -521,23 +973,25 @@ async function handleApi(request, response, requestUrl) {
   ) {
     const itemId = decodeURIComponent(segments[2]);
     const body = await readJson(request);
-    if (!validItemId(itemId) || !validClientId(body.clientId)) {
-      apiError(response, 400, "invalid_request", "Invalid item or client ID.");
+    const user = requireUser(request, response);
+    if (!user) return;
+    if (!validItemId(itemId)) {
+      apiError(response, 400, "invalid_request", "Invalid item ID.");
       return;
     }
     const liked = Boolean(body.liked);
     withTransaction(() => {
       statements.ensureInteraction.run(itemId);
-      const current = Boolean(statements.hasLike.get(itemId, body.clientId));
+      const current = Boolean(statements.hasUserLike.get(itemId, user.id));
       if (liked && !current) {
-        statements.insertLike.run(itemId, body.clientId);
+        statements.insertUserLike.run(itemId, user.id);
         statements.changeLikes.run(1, itemId);
       } else if (!liked && current) {
-        statements.deleteLike.run(itemId, body.clientId);
+        statements.deleteUserLike.run(itemId, user.id);
         statements.changeLikes.run(-1, itemId);
       }
     });
-    sendJson(response, 200, interactionFor(itemId, body.clientId));
+    sendJson(response, 200, interactionFor(itemId, body.clientId, true, user));
     return;
   }
 
@@ -551,10 +1005,10 @@ async function handleApi(request, response, requestUrl) {
     const itemId = decodeURIComponent(segments[2]);
     const body = await readJson(request);
     const text = String(body.text || "").trim();
-    const user = String(body.user || "Guest").trim().slice(0, 40) || "Guest";
+    const user = requireUser(request, response);
+    if (!user) return;
     if (
       !validItemId(itemId) ||
-      !validClientId(body.clientId) ||
       !text ||
       text.length > 500
     ) {
@@ -563,9 +1017,15 @@ async function handleApi(request, response, requestUrl) {
     }
     withTransaction(() => {
       statements.ensureInteraction.run(itemId);
-      statements.insertComment.run(itemId, user, text, body.clientId);
+      statements.insertComment.run(
+        itemId,
+        user.displayName,
+        text,
+        validClientId(body.clientId) ? body.clientId : null,
+        user.id,
+      );
     });
-    sendJson(response, 201, interactionFor(itemId, body.clientId));
+    sendJson(response, 201, interactionFor(itemId, body.clientId, true, user));
     return;
   }
 
@@ -579,10 +1039,11 @@ async function handleApi(request, response, requestUrl) {
     const itemId = decodeURIComponent(segments[2]);
     const commentId = Number(segments[4]);
     const clientId = requestUrl.searchParams.get("clientId");
+    const user = authenticatedUser(request);
     if (
       !validItemId(itemId) ||
       !Number.isSafeInteger(commentId) ||
-      !validClientId(clientId)
+      (!user && !validClientId(clientId))
     ) {
       apiError(response, 400, "invalid_request", "Invalid delete request.");
       return;
@@ -592,12 +1053,127 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 404, "comment_not_found", "Comment was not found.");
       return;
     }
-    if (comment.client_id && comment.client_id !== clientId) {
+    const ownsComment = user
+      ? Number(comment.user_id) === user.id
+      : !comment.user_id && (!comment.client_id || comment.client_id === clientId);
+    if (!ownsComment) {
       apiError(response, 403, "comment_owner_required", "Only the author can delete this comment.");
       return;
     }
     statements.deleteComment.run(commentId, itemId);
-    sendJson(response, 200, interactionFor(itemId, clientId));
+    sendJson(response, 200, interactionFor(itemId, clientId, true, user));
+    return;
+  }
+
+  if (
+    request.method === "PUT" &&
+    segments.length === 6 &&
+    segments[0] === "api" &&
+    segments[1] === "interactions" &&
+    segments[3] === "comments" &&
+    segments[5] === "like"
+  ) {
+    const itemId = decodeURIComponent(segments[2]);
+    const commentId = Number(segments[4]);
+    const user = requireUser(request, response);
+    if (!user) return;
+    const body = await readJson(request);
+    if (!validItemId(itemId) || !Number.isSafeInteger(commentId)) {
+      apiError(response, 400, "invalid_request", "Invalid comment like request.");
+      return;
+    }
+    const comment = statements.findComment.get(commentId, itemId);
+    if (!comment) {
+      apiError(response, 404, "comment_not_found", "Comment was not found.");
+      return;
+    }
+    if (Boolean(body.liked)) {
+      statements.insertCommentLike.run(commentId, user.id);
+    } else {
+      statements.deleteCommentLike.run(commentId, user.id);
+    }
+    sendJson(
+      response,
+      200,
+      interactionFor(itemId, body.clientId, true, user),
+    );
+    return;
+  }
+
+  if (
+    (request.method === "PUT" || request.method === "DELETE") &&
+    segments.length === 3 &&
+    segments[0] === "api" &&
+    segments[1] === "favorites"
+  ) {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const itemId = decodeURIComponent(segments[2]);
+    if (!validItemId(itemId)) {
+      apiError(response, 400, "invalid_item_id", "Invalid favorite item ID.");
+      return;
+    }
+    if (request.method === "PUT") statements.insertFavorite.run(itemId, user.id);
+    else statements.deleteFavorite.run(itemId, user.id);
+    sendJson(response, 200, {
+      favorites: statements.userFavorites.all(user.id).map((row) => row.item_id),
+    });
+    return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/me/activity") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    sendJson(response, 200, {
+      user,
+      favorites: statements.userFavorites.all(user.id).map((row) => row.item_id),
+      likes: statements.userLikes.all(user.id).map((row) => row.item_id),
+      comments: statements.userComments.all(user.id).map((row) => ({
+        id: Number(row.id),
+        itemId: row.item_id,
+        text: row.comment_text,
+        createdAt: row.created_at,
+      })),
+      feedback: statements.userFeedback.all(user.id).map((row) => ({
+        id: Number(row.id),
+        category: row.category,
+        message: row.message,
+        itemId: row.item_id,
+        pageUrl: row.page_url,
+        status: row.status,
+        createdAt: row.created_at,
+      })),
+    });
+    return;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/feedback") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const body = await readJson(request);
+    const allowedCategories = new Set([
+      "improvement",
+      "bug",
+      "article",
+      "idea",
+      "other",
+    ]);
+    const category = String(body.category || "other");
+    const message = String(body.message || "").trim();
+    const itemId = validItemId(body.itemId) ? body.itemId : null;
+    const pageUrl = String(body.pageUrl || "").slice(0, 500) || null;
+    if (!allowedCategories.has(category) || !message || message.length > 2000) {
+      apiError(response, 400, "invalid_feedback", "Invalid feedback.");
+      return;
+    }
+    const result = statements.insertFeedback.run(
+      user.id,
+      category,
+      message,
+      itemId,
+      pageUrl,
+    );
+    sendJson(response, 201, { id: Number(result.lastInsertRowid), status: "new" });
     return;
   }
 
@@ -625,7 +1201,11 @@ async function handleApi(request, response, requestUrl) {
         statements.incrementReads.run(itemId);
       }
     });
-    sendJson(response, 200, interactionFor(itemId, body.clientId, false));
+    sendJson(
+      response,
+      200,
+      interactionFor(itemId, body.clientId, false, authenticatedUser(request)),
+    );
     return;
   }
 

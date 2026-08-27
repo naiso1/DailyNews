@@ -1247,6 +1247,7 @@ h1 {
 
     <!-- DailyNews Server API -->
     <script type="module" src="dailynews_client.js"></script>
+    <script type="module" src="dailynews_account.js"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
@@ -1900,6 +1901,19 @@ h1 {
             }
         }
 
+        window.applyServerFavorites = (itemIds) => {
+            if (!Array.isArray(itemIds)) return;
+            favoriteIds = new Set(itemIds);
+            saveFavorites();
+            document.querySelectorAll(".favorite-btn").forEach(btn => {
+                const match = btn.getAttribute("onclick")?.match(/toggleFavorite\('([^']+)'/);
+                if (match) updateFavoriteButton(btn, favoriteIds.has(match[1]));
+            });
+            updateFavoritesToggle();
+            updateFavoritesActionsState();
+            if (favoritesOnly) applyFilters();
+        };
+
         function isFavorite(itemId) {
             return favoriteIds.has(itemId);
         }
@@ -2279,6 +2293,9 @@ h1 {
             updateFavoriteButton(btn, favoriteIds.has(itemId));
             updateFavoritesToggle();
             updateFavoritesActionsState();
+            window.dailyNewsAccount?.setFavorite(itemId, favoriteIds.has(itemId)).catch(error => {
+                console.warn("Favorite sync failed:", error.message);
+            });
             if (favoritesOnly) applyFilters();
         };
 

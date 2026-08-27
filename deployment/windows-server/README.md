@@ -2,8 +2,10 @@
 
 This deployment serves an explicit release package instead of exposing the
 repository root. Collection scripts, logs, API keys, and Git metadata are never
-reachable from the web server. A same-origin SQLite API stores access counts,
-likes, article reads, and comments.
+reachable from the web server. A same-origin SQLite API stores accounts,
+persistent sessions, favorites, likes, article reads, comments, comment likes,
+and user feedback. Passwords are stored as scrypt hashes; plaintext passwords
+are never stored.
 
 ## Server layout
 
@@ -26,6 +28,11 @@ Interaction data is stored in `data\dailynews.sqlite`. The
 `DailyNewsBackup` task creates a consistent backup every day at 04:30 and
 retains 35 days under `data\backups`.
 
+User sessions use an HttpOnly, SameSite cookie and remain valid for up to 180
+days. Use the IIS HTTPS endpoint whenever credentials are entered. Email
+addresses are login identifiers and are not displayed with comments; comments
+use the user-selected display name.
+
 ## Deployment
 
 Run from the repository root on the DailyNews workstation:
@@ -40,6 +47,7 @@ The script packages only:
 - `news_data.js`
 - `insights_data.js`
 - `dailynews_client.js`
+- `dailynews_account.js`
 - `images/`
 - `page_images/`
 
