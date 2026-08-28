@@ -2602,55 +2602,24 @@ header.site-header {
                 document.getElementById("totalCount").textContent = NEWS_DATA.length;
                 updateNewCountBadges();
 
-                const params = new URLSearchParams(window.location.search);
-                newOnly = !params.toString() || params.get("new") === "1";
-                const latestDate = getLatestDate(NEWS_DATA);
-                const dateToInput = document.getElementById("dateTo");
-                if (!params.has("to")) {
-                    dateToInput.value = latestDate || getTodayKey();
-                }
-
-                if (params.has("countries")) {
-                    activeCountries = new Set(params.get("countries").split(","));
-                    updateCountryChips();
-                }
-                if (params.has("tags")) {
-                    const t = params.get("tags").split(",");
-                    activeTags = new Set(t.includes("all") ? ["all"] : t);
-                    updateTagChips();
-                }
-                if (params.has("from")) document.getElementById("dateFrom").value = params.get("from");
-                if (params.has("to")) document.getElementById("dateTo").value = params.get("to");
-                if (params.has("sort")) document.getElementById("sortOrder").value = params.get("sort");
-                if (!params.has("from") && !params.has("to")) {
-                    const oneDayOverride = INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
-                    document.getElementById("dateFrom").value = oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey();
-                    document.getElementById("dateTo").value = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
-                }
-                if (!params.toString()) {
-                    document.getElementById("searchInput").value = "";
-                    document.getElementById("sortOrder").value = "new-first";
-                    activeCountries = new Set(["world"]);
-                    activeTags = new Set(["all"]);
-                    favoritesOnly = false;
-                    updateCountryChips();
-                    updateTagChips();
-                    updateFavoritesToggle();
-                }
+                restoreFilterStateFromURL({ render: false });
+                history.replaceState({ ...(history.state || {}), dailyNewsFilter: true }, "", location.href);
 
                 document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
                 document.getElementById("tagFilters").addEventListener("click", handleTagClick);
                 const applyManualDateFilter = () => {
                     newOnly = false;
                     applyFilters();
-                    updateURL();
+                    updateURL("push");
                 };
                 document.getElementById("dateFrom").addEventListener("change", applyManualDateFilter);
                 document.getElementById("dateTo").addEventListener("change", applyManualDateFilter);
-                document.getElementById("searchInput").addEventListener("input", applyFilters);
+                const searchInput = document.getElementById("searchInput");
+                searchInput.addEventListener("input", applyFilters);
+                searchInput.addEventListener("change", () => updateURL("push"));
                 document.getElementById("sortOrder").addEventListener("change", () => {
                     applyFilters();
-                    updateURL();
+                    updateURL("push");
                 });
                 const favoritesToggle = document.getElementById("favoritesToggle");
                 if (favoritesToggle) {
@@ -2661,6 +2630,7 @@ header.site-header {
                         updateFavoritesToggle();
                         updateFavoritesActionsVisibility();
                         applyFilters();
+                        updateURL("push");
                     });
                 }
 
@@ -2707,7 +2677,11 @@ header.site-header {
                 const rankingBackBtn = document.getElementById("rankingBackBtn");
                 if (rankingBackBtn) rankingBackBtn.addEventListener("click", restoreRankingState);
                 window.addEventListener("popstate", () => {
-                    if (rankingBackState) restoreRankingState({ fromPopState: true });
+                    if (rankingBackState) {
+                        restoreRankingState({ fromPopState: true });
+                        return;
+                    }
+                    restoreFilterStateFromURL();
                 });
                 if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
                 if (window.initDailyNewsApi) window.initDailyNewsApi();
@@ -2749,7 +2723,7 @@ header.site-header {
             updateCountryChips();
             applyFilters();
             scheduleRankingUpdate();
-            updateURL();
+            updateURL("push");
         }
 
         function handleTagClick(e) {
@@ -2767,7 +2741,7 @@ header.site-header {
             }
             updateTagChips();
             applyFilters();
-            updateURL();
+            updateURL("push");
         }
 
         function updateCountryChips() {
@@ -2790,6 +2764,7 @@ header.site-header {
             newOnly = false;
             document.getElementById("searchInput").value = tag;
             applyFilters();
+            updateURL("push");
         }
         function applyFilters() {
             const from = document.getElementById("dateFrom").value;
@@ -2984,10 +2959,10 @@ header.site-header {
             newOnly = false;
             if (isShowingDefaultNewRange()) {
                 document.getElementById("dateFrom").value = "";
-                updateURL();
             }
             visibleLimit += 30;
             applyFilters();
+            updateURL("push");
         }
 
         window.refreshNewsReactionSort = () => {
@@ -2995,19 +2970,71 @@ header.site-header {
         };
 
 
-        function updateURL() {
+        function restoreFilterStateFromURL(options = {}) {
+            const params = new URLSearchParams(window.location.search);
+            const latestDate = getLatestDate(NEWS_DATA);
+            const oneDayOverride = INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
+            const defaultFrom = oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey();
+            const defaultTo = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
+
+            newOnly = !params.toString() || params.get("new") === "1";
+            favoritesOnly = params.get("favorites") === "1";
+            activeCountries = params.has("countries")
+                ? new Set(params.get("countries").split(",").filter(Boolean))
+                : new Set(["world"]);
+            const requestedTags = params.has("tags")
+                ? params.get("tags").split(",").filter(Boolean)
+                : ["all"];
+            activeTags = new Set(requestedTags.includes("all") || requestedTags.length === 0 ? ["all"] : requestedTags);
+
+            document.getElementById("searchInput").value = params.get("q") || "";
+            document.getElementById("dateFrom").value = params.has("from") ? params.get("from") : defaultFrom;
+            document.getElementById("dateTo").value = params.has("to") ? params.get("to") : defaultTo;
+            document.getElementById("sortOrder").value = params.get("sort") || "new-first";
+
+            const requestedLimit = Number(params.get("limit"));
+            const requestedInsightsLimit = Number(params.get("insights"));
+            visibleLimit = Number.isFinite(requestedLimit) && requestedLimit >= 30
+                ? requestedLimit
+                : Math.max(30, newOnly ? getNewCounts(NEWS_DATA).world : 30);
+            insightsVisibleLimit = Number.isFinite(requestedInsightsLimit) && requestedInsightsLimit >= 1
+                ? requestedInsightsLimit
+                : 1;
+
+            updateCountryChips();
+            updateTagChips();
+            updateFavoritesToggle();
+            updateFavoritesActionsVisibility();
+            if (options.render !== false) {
+                applyFilters();
+                window.scrollTo({ top: 0, behavior: "auto" });
+            }
+        }
+
+        function updateURL(mode = "replace") {
             const params = new URLSearchParams();
             if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
             if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
             if (newOnly) params.set("new", "1");
+            if (favoritesOnly) params.set("favorites", "1");
+            const query = document.getElementById("searchInput").value.trim();
+            if (query) params.set("q", query);
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             if (from) params.set("from", from);
             if (to) params.set("to", to);
             const sortOrder = document.getElementById("sortOrder").value;
             if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);
+            if (visibleLimit > 30) params.set("limit", String(visibleLimit));
+            if (insightsVisibleLimit > 1) params.set("insights", String(insightsVisibleLimit));
             const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
-            history.replaceState(history.state, "", newURL);
+            const currentURL = `${location.pathname}${location.search}`;
+            const nextState = { ...(history.state || {}), dailyNewsFilter: true };
+            if (mode === "push" && newURL !== currentURL) {
+                history.pushState(nextState, "", newURL);
+            } else {
+                history.replaceState(nextState, "", newURL);
+            }
         }
 
 
@@ -3296,6 +3323,7 @@ header.site-header {
         function loadMoreInsights() {
             insightsVisibleLimit += 3;
             renderInsights();
+            updateURL("push");
         }
 
         function wireImageFallbacks(scope = document) {
