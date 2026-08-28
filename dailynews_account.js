@@ -66,6 +66,30 @@ function escapeAccountHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function formatAccountDateTime(value) {
+  if (!value) return "-";
+  const text = String(value).trim();
+  let normalized = text.replace(" ", "T");
+  // SQLite CURRENT_TIMESTAMP is UTC but does not include a timezone suffix.
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?$/.test(normalized)) {
+    normalized += "Z";
+  }
+  const date = new Date(normalized);
+  if (Number.isNaN(date.getTime())) return text;
+  const parts = new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+  const part = (type) => parts.find((entry) => entry.type === type)?.value || "";
+  return `${part("year")}-${part("month")}-${part("day")} ${part("hour")}:${part("minute")}:${part("second")}`;
+}
+
 function accountStyles() {
   const style = document.createElement("style");
   style.textContent = `
@@ -370,7 +394,7 @@ function activityCard(entry) {
   return `<button class="account-activity-card" type="button" data-item-id="${escapeAccountHtml(entry.activityId || entry.id)}">
     ${image}
     <span class="account-card-copy">
-      <span class="account-card-meta"><span class="account-card-kind ${entry.type === "idea" ? "idea" : ""}">${entry.type === "idea" ? "企画アイデア" : "ニュース"}</span><span>${escapeAccountHtml(entry.country || "")}</span><span>${escapeAccountHtml(entry.date || entry.activityDate || "")}</span></span>
+      <span class="account-card-meta"><span class="account-card-kind ${entry.type === "idea" ? "idea" : ""}">${entry.type === "idea" ? "企画アイデア" : "ニュース"}</span><span>${escapeAccountHtml(entry.country || "")}</span><span>${escapeAccountHtml(entry.date || formatAccountDateTime(entry.activityDate))}</span></span>
       <span class="account-card-title">${escapeAccountHtml(entry.title)}</span>
       <span class="account-card-desc">${escapeAccountHtml(entry.description || "")}</span>
       ${comment}
@@ -458,11 +482,11 @@ async function renderAdminPanel() {
   list.innerHTML = `
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
     <h3 class="account-section-title">ユーザー登録状況</h3>
-    <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日</th><th>最終利用</th><th>活動</th></tr></thead><tbody>
-      ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(user.createdAt || "-")}</td><td>${escapeAccountHtml(user.lastSeenAt || "-")}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
+    <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日時（JST）</th><th>最終利用（JST）</th><th>活動</th></tr></thead><tbody>
+      ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
     </tbody></table></div>
     <h3 class="account-section-title">最近のご意見 <span class="account-section-count">${feedback.length}</span></h3>
-    <div class="account-list">${feedback.length ? feedback.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.displayName)} / ${escapeAccountHtml(item.email)} / ${escapeAccountHtml(item.createdAt)} / ${escapeAccountHtml(item.status)}</span></div>`).join("") : '<div class="account-empty">ご意見はまだありません。</div>'}</div>`;
+    <div class="account-list">${feedback.length ? feedback.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.displayName)} / ${escapeAccountHtml(item.email)} / ${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("") : '<div class="account-empty">ご意見はまだありません。</div>'}</div>`;
 }
 
 function renderFeedbackForm() {
@@ -475,7 +499,7 @@ function renderFeedbackForm() {
       <button class="account-primary" type="submit">送信する</button>
       <div class="account-feedback-status" id="accountFeedbackStatus"></div>
     </form>
-    ${previous.length ? `<div style="margin-top:22px"><strong>送信履歴</strong><div class="account-list" style="margin-top:10px">${previous.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.createdAt)} / ${escapeAccountHtml(item.status)}</span></div>`).join("")}</div></div>` : ""}`;
+    ${previous.length ? `<div style="margin-top:22px"><strong>送信履歴</strong><div class="account-list" style="margin-top:10px">${previous.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("")}</div></div>` : ""}`;
   list.querySelector("#accountFeedbackForm").addEventListener("submit", submitFeedback);
 }
 
