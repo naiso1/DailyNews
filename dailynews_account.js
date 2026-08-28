@@ -8,7 +8,7 @@ const ACCOUNT_FAVORITES_OWNER_KEY = "dailynews_favorites_owner_v1";
 const accountState = {
   user: null,
   activity: null,
-  mode: "login",
+  mode: "welcome",
   activityTab: "favorites",
   admin: null,
 };
@@ -90,6 +90,20 @@ function accountStyles() {
     .account-secondary { border:1px solid rgba(255,255,255,.16); border-radius:11px; min-height:40px; padding:0 14px; background:rgba(255,255,255,.04); color:#e5edf7; font-weight:700; cursor:pointer; }
     .account-switch { margin-top:14px; color:#9fb1c7; font-size:13px; text-align:center; }
     .account-link { border:0; padding:0; background:none; color:#7df1c2; text-decoration:underline; cursor:pointer; }
+    .account-welcome { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr); gap:24px; align-items:stretch; }
+    .account-welcome-copy { padding:8px 4px; }
+    .account-welcome-eyebrow { display:inline-flex; align-items:center; gap:7px; margin-bottom:13px; color:#7df1c2; font-size:12px; font-weight:900; letter-spacing:.08em; }
+    .account-welcome-title { margin:0 0 14px; color:#f3f8fd; font-size:clamp(23px,3vw,34px); line-height:1.35; }
+    .account-welcome-lead { margin:0; color:#b7c6d8; font-size:14px; line-height:1.9; }
+    .account-welcome-points { display:grid; gap:10px; margin:21px 0 0; padding:0; list-style:none; }
+    .account-welcome-points li { display:flex; gap:10px; align-items:flex-start; color:#d8e4ef; font-size:13px; line-height:1.65; }
+    .account-welcome-points li::before { content:"✓"; display:grid; flex:0 0 22px; height:22px; place-items:center; border-radius:50%; background:rgba(125,241,194,.12); color:#7df1c2; font-weight:900; }
+    .account-welcome-actions { display:grid; gap:12px; align-content:center; padding:20px; border:1px solid rgba(125,241,194,.18); border-radius:17px; background:rgba(6,13,23,.54); }
+    .account-welcome-action { display:grid; gap:8px; padding:15px; border:1px solid rgba(255,255,255,.09); border-radius:14px; background:rgba(255,255,255,.025); }
+    .account-welcome-action strong { color:#eef6fd; font-size:14px; }
+    .account-welcome-action span { color:#8fa1b6; font-size:11px; line-height:1.55; }
+    .account-welcome-actions .account-primary,.account-welcome-actions .account-secondary { width:100%; }
+    .account-privacy-note { margin:3px 0 0; color:#74869c; font-size:10px; line-height:1.6; text-align:center; }
     .account-error { display:none; margin:0 0 13px; padding:10px 12px; border-radius:10px; background:rgba(255,92,112,.12); color:#ffb5c0; font-size:13px; }
     .account-error.show { display:block; }
     .account-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
@@ -128,7 +142,7 @@ function accountStyles() {
     .comment-actions { display:flex; align-items:center; gap:8px; margin-top:8px; }
     .comment-like-btn { border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:3px 8px; background:transparent; color:#9fb0c5; font-size:11px; cursor:pointer; }
     .comment-like-btn.liked { border-color:rgba(125,241,194,.45); background:rgba(125,241,194,.12); color:#7df1c2; }
-    @media(max-width:720px) { .account-profile { grid-template-columns:1fr; } .account-dialog { max-height:94vh; } .account-card-grid { grid-template-columns:1fr; } .account-activity-card { grid-template-columns:96px minmax(0,1fr); } .account-card-image,.account-card-image-fallback { width:96px; } .admin-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:720px) { .account-profile { grid-template-columns:1fr; } .account-dialog { max-height:94vh; } .account-card-grid { grid-template-columns:1fr; } .account-activity-card { grid-template-columns:96px minmax(0,1fr); } .account-card-image,.account-card-image-fallback { width:96px; } .admin-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } .account-welcome { grid-template-columns:1fr; gap:14px; } .account-welcome-actions { padding:14px; } }
   `;
   document.head.appendChild(style);
 }
@@ -169,7 +183,7 @@ function updateRegistrationPrompt() {
   if (required) {
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
-    renderAuth(accountState.mode, "このサイトの利用には、ユーザー登録またはログインが必要です。");
+    renderAuth("welcome");
   } else if (overlay.classList.contains("open")) {
     overlay.classList.remove("open");
     document.body.style.overflow = "";
@@ -194,10 +208,42 @@ function authErrorMessage(error) {
 function renderAuth(mode = accountState.mode, message = "") {
   accountState.mode = mode;
   const body = document.getElementById("accountBody");
+  if (mode === "welcome") {
+    document.getElementById("accountTitle").textContent = "デイリーニュースをご利用の方へ";
+    body.innerHTML = `
+      <div class="account-welcome">
+        <section class="account-welcome-copy">
+          <div class="account-welcome-eyebrow">TG社員向けサービス</div>
+          <h3 class="account-welcome-title">より良いサービスづくりのため、<br>ログイン方式に変更しました</h3>
+          <p class="account-welcome-lead">サービス向上と利用状況の把握に活用し、ニュース・考察・企画アイデアをより役立つ内容へ改善していきます。TG社員であれば、どなたでも登録してご利用いただけます。</p>
+          <ul class="account-welcome-points">
+            <li>登録は、表示名・メールアドレス・パスワードの入力だけで完了します。</li>
+            <li>お気に入り・いいね・コメントを、端末が変わっても確認できます。</li>
+            <li>ログイン状態はこの端末で維持されるため、通常は次回から入力不要です。</li>
+          </ul>
+        </section>
+        <aside class="account-welcome-actions">
+          <div class="account-welcome-action">
+            <strong>まだ登録していない方</strong>
+            <span>簡単なユーザー登録をお願いします。</span>
+            <button class="account-primary" id="accountStartRegister" type="button">ユーザー登録へ</button>
+          </div>
+          <div class="account-welcome-action">
+            <strong>すでに登録済みの方</strong>
+            <span>登録したメールアドレスとパスワードでお進みください。</span>
+            <button class="account-secondary" id="accountStartLogin" type="button">ログインへ</button>
+          </div>
+          <p class="account-privacy-note">メールアドレスはログインIDとして使用し、コメント欄などには公開されません。</p>
+        </aside>
+      </div>`;
+    body.querySelector("#accountStartRegister").addEventListener("click", () => renderAuth("register"));
+    body.querySelector("#accountStartLogin").addEventListener("click", () => renderAuth("login"));
+    return;
+  }
   const isRegister = mode === "register";
   document.getElementById("accountTitle").textContent = isRegister ? "新規登録" : "ログイン";
   body.innerHTML = `
-    <p class="account-note">メールアドレスをログインIDとして使用します。コメントには表示名だけが表示され、メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。パスワードは必ずこのサービス専用のものを設定してください。</p>
+    <p class="account-note">${isRegister ? "TG社員であれば、どなたでも登録できます。" : "登録済みの方は、登録した情報を入力してください。"} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。パスワードは必ずこのサービス専用のものを設定してください。</p>
     <div class="account-error${message ? " show" : ""}" id="accountError">${escapeAccountHtml(message)}</div>
     <form class="account-form" id="accountAuthForm">
       ${isRegister ? '<label class="account-field">表示名<input name="displayName" maxlength="40" autocomplete="name" required placeholder="コメントに表示する名前"></label>' : ""}
