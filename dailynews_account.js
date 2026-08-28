@@ -267,7 +267,7 @@ function renderAuth(mode = accountState.mode, message = "") {
   const isRegister = mode === "register";
   document.getElementById("accountTitle").textContent = isRegister ? "新規登録" : "ログイン";
   body.innerHTML = `
-    <p class="account-note">${isRegister ? "TG社員であれば、どなたでも登録できます。" : "登録済みの方は、登録した情報を入力してください。"} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。パスワードは必ずこのサービス専用のものを設定してください。</p>
+    <p class="account-note">${isRegister ? "TG社員であれば、どなたでも登録できます。" : "登録済みの方は、登録した情報を入力してください。"} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
     <div class="account-error${message ? " show" : ""}" id="accountError">${escapeAccountHtml(message)}</div>
     <form class="account-form" id="accountAuthForm">
       ${isRegister ? '<label class="account-field">表示名<input name="displayName" maxlength="40" autocomplete="name" required placeholder="コメントに表示する名前"></label>' : ""}
