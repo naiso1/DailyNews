@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-28 01:35";
+window.NEWS_UPDATED_AT = "2026-08-31 14:06";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -104540,6 +104540,665 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "eu",
         img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Volvo-Safety-Features.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    // 2026-08-28 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1713",
+        title: "ランドクルーザーFJ純正インテリア維持で高音質化BEWITH Lucent Duo165採用",
+        desc: "ランドクルーザーFJの車内快適性向上に向け、純正インテリアを維持したまま高音質化を実現するBEWITH Lucent Duo165のスピーカー交換が注目されている。16.5cmウーファーと2cmツイーターを純正位置に装着し、見た目を損なわず音楽環境を格上げできる。",
+        url: "https://news.yahoo.co.jp/articles/31e58f2da9a82e84e53fde87cf19d553b1276972",
+        source: "レスポンス",
+        date: "2026-08-28",
+        tags: ["音響"],
+    
+        interiorScore: 90,
+        interiorReason: "speaker swap and interior comfort upgrade for Land Cruiser FJ, but image is exte",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260828-00000025-rps-000-2-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "jp1715",
+        title: "ダイハツミライース一部改良、デジタルメーター廃止で針式へ価格も上昇",
+        desc: "2026年8月27日発売のダイハツ「ミライース」は一部改良され、最廉価グレード廃止で100万円以下新車消滅。メーターはデジタルから初となる針式アナログへ変更され、ホイールも全車14インチスチールへ統一された。",
+        url: "https://news.yahoo.co.jp/articles/af86c4d272307d00224bfabe4ad54a0361e3918e",
+        source: "carview!",
+        date: "2026-08-28",
+        tags: [],
+    
+        interiorScore: 53,
+        interiorReason: "needle gauge meter change is a concrete interior HMI/cockpit detail, but the ima",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260829-00010001-carv-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "jp1719",
+        title: "テスラModel Yで夏キャンプ、エアコンONで15%減も快適睡眠",
+        desc: "YouTuberのカズッシュ氏は、静岡県富士宮市で開催された「EV SUMMER CAMP 2026」に出席し、テスラModel YのエアコンをONにして一晩過ごした。薪やガスを使わないオール電化イベントで、バッテリーは15% しか減らず快適な睡眠ができた。",
+        url: "https://news.yahoo.co.jp/articles/2160c1a35e112ce7051a04be73f466f37d9cf29c",
+        source: "THE EV TIMES",
+        date: "2026-08-28",
+        tags: ["EV"],
+    
+        interiorScore: 42,
+        interiorReason: "EV camping comfort and battery drain with AC on is relevant to cabin UX and ther",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260828-00010001-evtimes-000-2-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "us1531",
+        title: "現代自動車、新型ピックアップはガソリンエンジンなしで投入も",
+        desc: "現代自動車は投資家向けイベントでボディーオンフレームの新型ピックアップを正式に発表し、ガソリンエンジンではなく電気化やハイブリッド化など動力源の革新が注目されている。",
+        url: "https://www.carscoops.com/2026/08/hyundai-pickup-truck-powertrain/",
+        source: "CarScoops",
+        date: "2026-08-28",
+        tags: ["新素材"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/Hyundai-pickup-midsize-1024x576.webp",
+        note: ""
+    },
+    {
+        id: "eu1495",
+        title: "76年式プレート導入前にディーラーが在庫車に大幅値引き",
+        desc: "9月の76年式プレート導入を前にディーラーが新車販売に注力するため、在庫車に二桁の値引きなど大幅な割引を提示する。",
+        url: "https://www.autocar.co.uk/opinion/consumer/beat-76-plate-discounts-save-big-nearly-new-car",
+        source: "AUTOCAR UK",
+        date: "2026-08-28",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/motorpoint-used-cars-jh-14.jpg?itok=M2v1Q8y2",
+        note: ""
+    },
+    {
+        id: "eu1496",
+        title: "新メルセデスAMG CLA45はC63並み出力で3万4千ポンド安、セダンかステーションワゴンか選べる",
+        desc: "新メルセデスAMG CLA45は、前型C63と同等の高出力を発揮しながら、プラグインハイブリッドスーパーサルーンの価格が3万4千ポンド安くなる。セダンまたはエステートを選べる416マイルの航続距離を持つ。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/new-mercedes-amg-cla-packs-c63-power-%C2%A334k-less",
+        source: "AUTOCAR UK",
+        date: "2026-08-28",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/mercedes-amg-cla-45-fos-2026-jh-5.jpg?itok=7bRZPWl0",
+        note: ""
+    },
+    {
+        id: "cn1526",
+        title: "吉利、Zhanjian 700にAI制御オフロード技術を搭載",
+        desc: "吉利はZhanjian 700にAI制御オフロード技術を初搭載する。この技術は車内装やコックピット制御に活用され、オフロード走行時の快適装備を向上させる。",
+        url: "https://carnewschina.com/2026/08/28/geely-unveils-ai-powers-off-road-technology-which-will-debut-in-geely-zhanjian-700/",
+        source: "CarNewsChina - All",
+        date: "2026-08-28",
+        tags: ["AI", "コックピット"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-183-1500x844.png",
+        note: ""
+    },
+    {
+        id: "cn1527",
+        title: "BYDが6ヶ月で充電ステーション1万回を達成",
+        desc: "BYDは6ヶ月で中国の325の都市に1万基のフラッシュ充電ステーションを開設しました。登録ユーザーは183万人を超え、そのうち約3割がBYD以外の車両を利用しています。",
+        url: "https://carnewschina.com/2026/08/28/byd-hits-10000-flash-charging-stations-in-6-months-with-1-83m-users-and-33-non-byd/",
+        source: "CarNewsChina - All",
+        date: "2026-08-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/790870c0-d666-4a57-bafd-728e9a4cbb6e-large-1500x771.jpeg",
+        note: ""
+    },
+    {
+        id: "cn1528",
+        title: "IMモーターズが新型L6セダンを発売。テスラやシャオミに挑戦する",
+        desc: "IMモーターズは新型L6セダンを発表し、テスラや小米と競合する。価格は19万9900元で、航続距離はCLTC基準で850km。",
+        url: "https://cnevpost.com/2026/08/28/im-motors-launches-all-new-l6/",
+        source: "CnEVPost - All",
+        date: "2026-08-28",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082813014346.jpg",
+        note: ""
+    },
+    {
+        id: "cn1529",
+        title: "吉利星愿と比亚迪秦L、中国の品質検査で適合性問題が指摘された",
+        desc: "吉利の星縁と比亞迪の秦L DM-iが中国で品質検査に不合格となった。星縁はホイールベースの許容誤差1% を超え、秦Lは燃費が公表値より高かった。",
+        url: "https://cnevpost.com/2026/08/28/geely-xingyuan-byd-qin-l-flagged-china-quality-review/",
+        source: "CnEVPost - All",
+        date: "2026-08-28",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082812170539.jpg",
+        note: ""
+    },
+    {
+        id: "cn1530",
+        title: "BYD海外利益18.85% 達成 中国低迷相殺ならず20.5% 減 採用",
+        desc: "BYDの上半期利益は20.5% 減少した。海外展開により粗利は18.85% に改善したが、新エネルギー車販売の弱さと為替損失が影響した。詳細はCnEVPostで確認可能。",
+        url: "https://cnevpost.com/2026/08/28/byd-h1-2026-earnings/",
+        source: "CnEVPost - All",
+        date: "2026-08-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082811164593.jpg",
+        note: ""
+    },
+    {
+        id: "cn1531",
+        title: "GWMのOraがガソリン車投入、Ora 5 GTとSportで7万1800元から",
+        desc: "GWMのEVブランド「オラ」は、Ora 5 GTとSportを発売し、バッテリーEV、ハイブリッド、ガソリンの3種類を搭載する。両モデルは限定価格で7万1800元（約1万ドル）から販売される。",
+        url: "https://cnevpost.com/2026/08/28/gwm-ora-launches-ora-5-gt-sport/",
+        source: "CnEVPost - All",
+        date: "2026-08-28",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082810165146.jpg",
+        note: ""
+    },
+    {
+        id: "cn1532",
+        title: "BYD、超急速充電網で1万基を達成、年間目標の半ば",
+        desc: "BYDは5ヶ月で超急速充電網を倍増させ、1万基を達成した。年間目標の達成には平均して毎日80基の増設が必要で、中国の充電インフラの拡大が続いている。",
+        url: "https://cnevpost.com/2026/08/28/byd-flash-charging-10000-stations/",
+        source: "CnEVPost - All",
+        date: "2026-08-28",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026082801592763.jpg",
+        note: ""
+    },
+    {
+        id: "in1584",
+        title: "インド7月輸出トップはヒュンダイバーナ、マルチジムニーとフロックスが続く",
+        desc: "2026年7月のインド自動車輸出でヒュンダイのVernaが首位を記録し、マルチのJimnyとFronxが2位、3位を占めた。Top 30車種リストにはi10やAura、Dzire、Magnite、Swift、Virtusも含まれている。",
+        url: "https://www.rushlane.com/top-30-car-exports-july-2026-verna-jimny-fronx-i10-aura-12554440.html",
+        source: "RushLane",
+        date: "2026-08-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/03/new-verna-v1.jpg",
+        note: ""
+    },
+    {
+        id: "us1537",
+        title: "米国K12学校10800校で太陽光発電導入、7人に1人が利用",
+        desc: "米国では10800校以上のK12学校で太陽光発電が導入され、生徒の7人に1人が太陽光で電力供給される学校に通っているが、蓄電池の普及はまだ進んでいない。",
+        url: "https://electrek.co/2026/08/28/1-in-7-us-students-now-goes-to-a-solar-powered-school/",
+        source: "Electrek",
+        date: "2026-08-28",
+        tags: ["バッテリー"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/Mountain-Middle-School-Durango-CO-Shaw-Solar.jpg?quality=82&#038;strip=all&#038;w=1536",
+        note: ""
+    },
+    {
+        id: "us1538",
+        title: "テスラ、9月3日オースティンでサイバーキャブ発売イベント開催",
+        desc: "テスラは9月3日にオースティンでサイバーキャブの発売イベントを開催する。同車はステアリングホイールと安全モニターを備えた自律走行タクシーとして、過去2024年10月の発表と同様のスタイルで登場する見込みだ。",
+        url: "https://electrek.co/2026/08/28/tesla-cybercab-launch-predictions/",
+        source: "Electrek",
+        date: "2026-08-28",
+        tags: ["ディスプレイ", "安全"],
+    
+        interiorScore: 73,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/02/Tesla-Cybercab-hero.jpg?quality=82&strip=all&resize=1200,628",
+        note: ""
+    },
+    {
+        id: "eu1497",
+        title: "VW、2027年発売小型EV「ID. Up」を2万ユーロで販売予定",
+        desc: "VWは2027年発売予定の小型EVを「ID. Up」と命名し、2万ユーロで販売する計画を固めた。ID.1ではなくID. Upとなる。",
+        url: "https://www.electrive.com/2026/08/28/vws-e20000-electric-car-likely-to-be-named-id-up/",
+        source: "Electrive",
+        date: "2026-08-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2025/03/volkswagen-id-every1-2025-05-min-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1498",
+        title: "日本精工、デンソーHUD事業買収で27年2月完了へ",
+        desc: "日本精工はデンソーのHUD事業を27年2月完了予定で買収。26年210万ユニット生産し、中国メーカー牽引で2035年2100万ユニット市場拡大を背景に、コスト競争力強化と2030年4兆円売上目標を掲げる。",
+        url: "https://www.automotiveworld.com/news/nippon-seiki-to-absorb-densos-global-hud-division/",
+        source: "Automotive World",
+        date: "2026-08-28",
+        tags: ["HUD"],
+    
+        interiorScore: 92,
+        interiorReason: "HUD acquisition is a core interior HMI/display component; image clearly shows co",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/28182900/nippon-seiki-denso-hud.jpg",
+        note: ""
+    },
+    {
+        id: "eu1499",
+        title: "LGインノテックがZoox向けカメラ供給でロボットタクシー量産を支援",
+        desc: "LGインノテックはZooxのロボットタクシー量産向けにカメラを供給し、AVセンサーサプライチェーンの成熟を示した。これは自動車内装やコックピット装備の供給網が確立されつつあることを意味する。",
+        url: "https://www.automotiveworld.com/news/lg-innotek-zoox-camera-deal-supplies-robotaxi-production/",
+        source: "Automotive World",
+        date: "2026-08-28",
+        tags: ["センシング", "コックピット"],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/28174853/lg-innotek-automotive-cameras-zoox-driverless-robotaxi.jpg",
+        note: ""
+    },
+    {
+        id: "eu1500",
+        title: "EnvaliorとSECARA、自動車向け循環型PA6開発でMOU署名",
+        desc: "EnvaliorとSECARAは、欧州ELV規制対応に向け循環型PA6開発で合意。SECARAの触媒分解技術で廃車プラスチックからキャプロラクタムを回収し、既存設備変更なしに生産可能。",
+        url: "https://www.automotiveworld.com/news/envalior-secara-join-on-circular-pa6-for-elv-compliance/",
+        source: "Automotive World",
+        date: "2026-08-28",
+        tags: ["AR"],
+    
+        interiorScore: 70,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/28154027/envalior-automotive-circular-pa6.jpg",
+        note: ""
+    },
+    {
+        id: "eu1501",
+        title: "カーボン・トラッカー、商用車EV化はOEM予測より早期に実現",
+        desc: "カーボン・トラッカーは、商用車両のEV化がOEMの予測より早期に実現すると示唆。トラック分野でEVと化石燃料の炭素排出量同等（パリティ）は2030年代初頭に来るとの見解を示している。",
+        url: "https://www.automotiveworld.com/topics/commercial-vehicle/carbon-tracker-trucking-ev-parity-coming-in-early-2030s/",
+        source: "Automotive World",
+        date: "2026-08-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/28143455/carbon-tracker.jpg",
+        note: ""
+    },
+    {
+        id: "eu1502",
+        title: "ヒュンダイ、カリウザと提携しキア・ヒュンダイアプリにスマートEV充電機能導入",
+        desc: "ヒュンダイ・モーター・グループはカリウザと提携し、キアとヒュンダイのアプリにスマートEV充電機能を搭載する。英国とオーストラリアでは2026年、V2Gは2027年からの導入を計画している。",
+        url: "https://electriccarsreport.com/2026/08/hyundai-partners-with-kaluza-to-bring-smart-ev-charging-to-kia-and-hyundai-apps/",
+        source: "Electric Cars Report",
+        date: "2026-08-28",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/Hyundai-Kaluza.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "jp1720",
+        title: "スズキ「eスカイ」はEV感を薄め、ガソリン車から違和感なく乗り換えられる軽乗用EV",
+        desc: "スズキ初の軽乗用EV「eスカイ」は、ガソリン車からの乗り換えハードルを下げ、「イージートゥスイッチ」をコンセプトにEV感を薄めたデザインを採用。室内にはソファー調のシートや、メーターを独立配置した10.1インチディスプレイを備え、運転時の見やすさを優先した実用的なインテリアを備えている。",
+        url: "https://carview.yahoo.co.jp/article/detail/9391983c5216f55a5489b08ce46363a2603b8964/",
+        source: "carview",
+        date: "2026-08-28",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://autos-pctr.c.yimg.jp/dzF9o7ZTfctyx6yoKaI795FZYsW7L9LUKLnYi2MyqyQFj1nM_tk9owuPHYNxiujAjAD27ATlDnoSbcqTRZX4S-zQI9Sw_sQN6aNI--_NIIaq2xNevLljYMYwO5FqCLEJZLXZRHASBbnowkGbOOsc1w==",
+        note: ""
+    },
+    // 2026-08-29 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1712",
+        title: "日産フェアレディZマイナーチェンジ後向けNISMOフロアマット発売",
+        desc: "日産モータースポーツはマイナーチェンジ後のフェアレディZ全車対応のNISMOフロアマットを発売した。ブラックスレッド生地にロゴプレートが配され裏面にはズレ防止の樹脂スパイクピンが採用されている。",
+        url: "https://news.yahoo.co.jp/articles/41b056672a8bb3858bd437a36881bb2fd296a4bd",
+        source: "レスポンス",
+        date: "2026-08-29",
+        tags: [],
+    
+        interiorScore: 93,
+        interiorReason: "floor mat product launch with clear interior image showing material, logo, and a",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260829-00000004-rps-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "jp1717",
+        title: "スズキジムニー専用トレイで収納不足解消、サンシェードも登場",
+        desc: "スズキジムニーの車内収納不足を解消する星光産業の専用トレイが3280円で登場。シフトレバー横のスペースを有効活用し、サングラスや電子タバコなどの小物整理に最適。MT車対応のシンプルタイプやドリンクホルダー付きモデルなど、車種専用設計で装着感に優れ、柔らかな素材で収納物を傷つけにくい。",
+        url: "https://news.yahoo.co.jp/articles/0dd600ec4b374bf913af811c80bed2bee334c9d3",
+        source: "MotorFan",
+        date: "2026-08-29",
+        tags: ["新素材"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260829-01573370-motorfan-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "us1530",
+        title: "1960年式6×6フォード軍用両用車、アルミボディ採用で陸軍却下",
+        desc: "1960年頃の6×6フォード軍用両用車はアルミボディを採用したが、米国陸軍は従来型を維持するため却下した。",
+        url: "https://www.thedrive.com/news/for-sale-6x6-ford-truck-developed-as-an-amphibious-military-prototype-circa-1960",
+        source: "The Drive",
+        date: "2026-08-29",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/1960_ford_xm434e2_20260820_153617-60757-scaled-1.jpeg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1533",
+        title: "ホームデポで入手可能な自動車部品や車内装関連アイテムの紹介",
+        desc: "ホームデポはホームセンターだが、実は自動車用品も販売している。車内装やシート、インテリア関連の部品や消耗品を入手できるため、ハンマーを買う場所でも車の整備や内装用品が揃う。",
+        url: "https://www.jalopnik.com/2244024/auto-parts-section-items-you-can-get-home-depot/",
+        source: "Jalopnik",
+        date: "2026-08-29",
+        tags: ["シート"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/8-things-you-can-find-in-the-auto-parts-section-of-home-depot/l-intro-1786452626.jpg",
+        note: ""
+    },
+    {
+        id: "eu1493",
+        title: "テスラモデルY、煩わしい警告音なしでADASを適切に運用",
+        desc: "テスラモデルYは、過剰な警告音を出さず、ドライバーの安全技術が有効であることを実証した。",
+        url: "https://www.autocar.co.uk/car-news/features/era-annoying-bongs-my-tesla-model-y-does-adas-right",
+        source: "AUTOCAR UK",
+        date: "2026-08-29",
+        tags: ["安全"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/tesla-model-y-lt-2026-jh-31.jpg?itok=OUrfbYEo",
+        note: ""
+    },
+    {
+        id: "eu1494",
+        title: "世界不況下で愛用すべき「一生車」30選、永く愛せる理由とは",
+        desc: "経済不透明感の中で信頼できる「一生車」を模索する人向けに、永く愛用できるトップ30台を厳選。耐久性と満足感を兼ね備えたモデルを紹介し、長期的な所有価値を追求する。",
+        url: "https://www.autocar.co.uk/car-news/used-cars/never-sell-again-top-30-used-cars-you-can-keep-forever",
+        source: "AUTOCAR UK",
+        date: "2026-08-29",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/2forever_cars_text.jpg?itok=WuaC6hkZ",
+        note: ""
+    },
+    {
+        id: "cn1524",
+        title: "米中貿易摩擦により関税引き上げが行われ、市場は混乱を招く恐れがある",
+        desc: "米国は中国製品への関税引き上げを決定した。これにより市場は混乱し、株価が下落する可能性が高い。経済界は対応策を急いでいる。",
+        url: "https://carnewschina.com/2026/08/29/byd-reveals-interior-of-sealion-08-five-seat-version-ahead-of-september-2-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-08-29",
+        tags: [],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-185-scaled_webhook_1350x810_q85_1787969565.jpg",
+        note: ""
+    },
+    {
+        id: "cn1525",
+        title: "BYDは輸出が急増しているが、2026年第1四半期には2",
+        desc: "BYDは輸出が急増する中、2026年第1四半期の販売低迷を2次世代ブレード電池の供給制約に起因すると説明している。同社は電池容量の制約が販売に悪影響を及ぼしたと見解を示している。",
+        url: "https://carnewschina.com/2026/08/29/byd-sees-export-surge-yet-h1-2026-sales-hit-by-second-gen-blade-battery-shortages/",
+        source: "CarNewsChina - All",
+        date: "2026-08-29",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/e59bbee78987-184-scaled-e1787966141395_webhook_1500x900_q85_1787966247.jpg",
+        note: ""
+    },
+    {
+        id: "in1586",
+        title: "マヒンドラXUV7XO、発売7カ月で7万台販売達成",
+        desc: "マヒンドラはインドで発売から7カ月でXUV7XOの累計販売台数を7万台に達した。同車はターボガソリン・ディーゼルエンジン、6・7人乗り、AWDなど多様な内装構成と装備を備えている。",
+        url: "https://gaadiwaadi.com/mahindra-xuv-7xo-achieves-70000-unit-sales-in-just-7-months-since-launch/",
+        source: "GaadiWaadi",
+        date: "2026-08-29",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/Mahindra-XUV-7XO-Sales.jpg",
+        note: ""
+    },
+    {
+        id: "in1587",
+        title: "中国車欧州シェア26年上半期9.2%にMGがBYDに迫る",
+        desc: "26年上半期欧州で中国車登録は66万3千台で前年比107%増。シェアは9.2%に達し、MGがBYDを僅差で抜けた。",
+        url: "https://www.autopunditz.com/post/chinese-car-brands-europe-sales-h1-2026-mg-byd",
+        source: "Auto Punditz",
+        date: "2026-08-29",
+        tags: ["バッテリー"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_32c0dfc5fd4a45d1af2e35955e2d46d7~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1536",
+        title: "ニオ、666台限定のファイフライ特別仕様車を発表 価格13%アップ",
+        desc: "中国のEVメーカーニオは、666台限定の「ファイフライ」特別仕様車を発売し、通常価格より13%高値で販売する。このモデルは、車名に由来する数字666と13という不吉な数字を避けつつ、限定生産ならではの特別感と希少性を兼ね備えた内装やデザインを備えている。",
+        url: "https://electrek.co/2026/08/29/666-il-marchio-della-spiaggia-lucciola-elettrica-con-un-ricarico-del-13-percento/",
+        source: "Electrek",
+        date: "2026-08-29",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/spiaggia.jpg?quality=82&#038;strip=all&#038;w=1600",
+        note: ""
+    },
+    {
+        id: "cn1533",
+        title: "Anthropic、1300億ドル調達でIPO計画、SpaceXを上回る規模",
+        desc: "Anthropicが招股書を公開し、1300億ドルの資金調達を予定。これによりSpaceXを上回る見込み。一方、テンセントはHY4 previewモデルを公開。また、コロンゲーム展で複数の展示ブースが盗難に遭った。",
+        url: "http://www.geekpark.net/news/369549",
+        source: "Geekpark.net",
+        date: "2026-08-29",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://imgslim.geekpark.net/uploads/image/file/c3/e5/c3e5768f94a06b972fcceea1e8b3f4da.jpg",
+        note: ""
+    },
+    // 2026-08-30 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1711",
+        title: "フェラーリ296 GTSで体感！エンジン音は残してノイズを消す「調音施工」",
+        desc: "BEWITHの調音施工は、フェラーリ296 GTSへの施工で実証。ホイールハウスなどに吸音・遮音シートを貼り、路面音や小石の音を抑えつつ、エンジンのサウンドは残す。高級車だけでなくスーパーカーの日常使いを快適にする技術だ。",
+        url: "https://news.yahoo.co.jp/articles/6113c9a6619833f6ee1cd4ff28df9a9ff378c2eb",
+        source: "レスポンス",
+        date: "2026-08-30",
+        tags: ["シート"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260830-00000014-rps-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "jp1714",
+        title: "新型メルセデスCLA、物理ボタン復活とパノラミックルーフで上質感",
+        desc: "新型メルセデス・ベンツCLAは、ステアリングの物理ボタン復活や遮熱ガラス採用など、内装の「良いもの感」を追求。全長4725mmの現実的サイズと物理スイッチの安心感を備え、Apple CarPlayなどナビ機能は月額1680円から利用可能。",
+        url: "https://news.yahoo.co.jp/articles/5a1be5850789c56a3efb5d4fd89c67e1c5e19b73",
+        source: "carview!",
+        date: "2026-08-30",
+        tags: ["AR", "コネクテッド"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260830-00010000-carv-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "jp1716",
+        title: "GReddy純正交換ステアリングでシビック操作性アップ、本革や本物カーボン2タイプ",
+        desc: "トラストが現行シビック向け純正交換ステアリングを発売。純正エアバッグやスイッチを活かしながら、約7mm小径化やソフトDシェイプで操作性を向上。本革と本物カーボンの2タイプから選べる。",
+        url: "https://news.yahoo.co.jp/articles/e21dab01f573becca5a0f71bb453874b609b5862",
+        source: "MotorFan",
+        date: "2026-08-30",
+        tags: ["新素材", "安全"],
+    
+        interiorScore: 90,
+        interiorReason: "steering wheel interior accessory with material (leather/carbon) and ergonomic d",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260830-01602109-motorfan-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "jp1718",
+        title: "災害時の車内避難を快適にするシートアレンジ術と必須アイテム",
+        desc: "令和熊本地震で車中泊が相次ぎ、車内はプライバシーと空調が利くシェルターとなる。エコノミークラス症候群対策として、スズキ・ハスラーで全長2040mmのフラットスペースやトヨタ・クラウンエステートで2mの空間を確保し、真っすぐ横になる工夫が重要だ。",
+        url: "https://news.yahoo.co.jp/articles/c295f4af1650e76df7a9c3f27b3b896e00ea67bb",
+        source: "WEB CARTOP",
+        date: "2026-08-30",
+        tags: ["シート"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260830-00010007-wcartop-000-1-view.jpg?exp=10800",
+        note: ""
+    },
+    {
+        id: "us1529",
+        title: "40ドルで買えるモデルカーでV8とマニュアルの仕組みを学べる",
+        desc: "40ドルという手頃な価格で入手可能なモデルカーは、レゴセットよりも低コストながら教育目的に最適。V8エンジンやマニュアルミッションの仕組みを学ぶことで、自動車内装やコックピットの構造理解を深められる。",
+        url: "https://www.thedrive.com/news/teach-your-kids-how-v8s-and-stick-shifts-work-with-this-40-model-car",
+        source: "The Drive",
+        date: "2026-08-30",
+        tags: ["コックピット"],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/Screenshot-2026-08-28-at-1.11.26-PM.jpeg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1532",
+        title: "車椅子利用者の乗り降りを楽にする9台の使い勝手の良い中古車",
+        desc: "車椅子利用者でも乗り降りが容易な9台の車を紹介。大型SUVでなくても、シート高さやドア開口部の設計により、移動制限のある人でも負担なく乗降できる実用的なモデルが存在する。",
+        url: "https://www.jalopnik.com/2244029/used-cars-easier-access-people-with-mobility-issues/",
+        source: "Jalopnik",
+        date: "2026-08-30",
+        tags: ["シート"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/9-used-cars-that-offer-easier-access-for-people-with-mobility-issues/l-intro-1787147296.jpg",
+        note: ""
+    },
+    {
+        id: "us1534",
+        title: "2026年レクサスUX300h、43MPGでBMW X1やアウディQ3を価格で下回る",
+        desc: "2026年式レクサスUX300hは、BMW X1やアウディQ3、ボルボXC40を価格面で凌駕する。価格は3万8450ドルからで、総合燃費は43MPGに達する。",
+        url: "https://www.topspeed.com/surprisingly-efficient-suv-people-overlook/",
+        source: "Top Speed",
+        date: "2026-08-30",
+        tags: ["HMI"],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/2026-lexus-ux-rear-roof-area.jpg",
+        note: ""
+    },
+    {
+        id: "us1535",
+        title: "トヨタハイランダーより安くなる高級SUV、使用済みアウディQ7が持つ魅力",
+        desc: "使用済みアウディQ7は、新車トヨタハイランダーより低価格で高級感と洗練された走行性能を提供する。高級SUV市場において、コストパフォーマンスに優れた選択肢として注目されている。",
+        url: "https://www.topspeed.com/luxury-suv-now-costs-less-than-loaded-highlander/",
+        source: "Top Speed",
+        date: "2026-08-30",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/01/todayz159nf0l.jpg",
+        note: ""
+    },
+    {
+        id: "in1581",
+        title: "ブルガチ・ベイロン・ラ・マゾン・プル・サン20周年特別復元車発表",
+        desc: "ブルガチは、フランスの復元部門「ラ・マゾン・プル・サン」が20周年を記念して復元した1台限定の超高性能車「ベイロン・ラ・マゾン・プル・サン20周年」を発表した。所有者の意向を反映した特別仕様で、20年前の初登場から20年が経過した記念すべきモデルである。",
+        url: "https://www.autocarindia.com/auto-images/bugatti-veyron-la-maison-pur-sang-20-years-image-gallery-440448",
+        source: "Autocar India - All",
+        date: "2026-08-30",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260830_075731_616f6159.jpg",
+        note: ""
+    },
+    {
+        id: "in1582",
+        title: "ヒュンダイオーラ、内装質感と運転性で評価されるが空間狭さ欠点",
+        desc: "ヒュンダイオーラは、銅色調のダッシュボードや革巻きステアリングなど内装の質感が高く、1.2L 4気筒エンジンと軽快なステアリングで運転しやすく、都市部での走行に適している。ただし、後部座席の幅が狭く、フロントシートも硬く、サンルーフや360度カメラなどの快適装備が不足している。",
+        url: "https://www.autocarindia.com/auto-features/3-reasons-to-buy-the-hyundai-aura-2-reasons-not-to-440967",
+        source: "Autocar India - All",
+        date: "2026-08-30",
+        tags: ["シート", "コックピット", "新素材"],
+    
+        interiorScore: 39,
+        interiorReason: "interior quality and comfort features mentioned, but image is exterior only",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260826_072743_99176caa.jpg",
+        note: ""
+    },
+    {
+        id: "in1583",
+        title: "シトロエンや次世代フォートナーなど、プレミアムMPV市場や新車情報に焦点",
+        desc: "「Ask Autocar Anything」第9回では、シトロエンや次世代フォートナー、プレミアムMPV市場など自動車業界の最新動向について、専門家が読者の質問に答える。",
+        url: "https://www.autocarindia.com/auto-videos/ask-autocar-anything-episode-9-440164",
+        source: "Autocar India - All",
+        date: "2026-08-30",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260830_063258_43ed07bd.jpg",
+        note: ""
+    },
+    {
+        id: "in1585",
+        title: "ルノー、インドで新車4モデル投入へ、次世代Kiger含む多様なセグメントをカバー",
+        desc: "ルノーはインド市場で静寂期を経て再加速し、来年内に新車4モデルを投入する。Kigerの次世代モデルを含む多様なセグメントと動力源を網羅し、ブランド初の製品もラインナップする。",
+        url: "https://gaadiwaadi.com/4-new-renault-cars-waiting-to-hit-indian-roads-key-details/",
+        source: "GaadiWaadi",
+        date: "2026-08-30",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/03/Renault-Bridger-Concept-1-1.jpg",
         note: ""
     },
 ];

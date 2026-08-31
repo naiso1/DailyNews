@@ -24,9 +24,10 @@ LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
 SCHEDULE_PAUSE_CONFIG = SCRIPT_DIR / "scheduled_pauses.json"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
-DEFAULT_LLM_MODEL = "qwen/qwen3.6-35b-a3b"
+DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
 DEFAULT_LLM_CONTEXT_LENGTH = "8192"
-DEFAULT_LLM_PARALLEL = "4"
+DEFAULT_LLM_PARALLEL = "1"
+DEFAULT_LLM_TTL_SECONDS = "900"
 LOOPBACK_NO_PROXY = ("127.0.0.1", "localhost", "::1")
 DEFAULT_PROXY = "http://202.15.64.202:8080"
 
@@ -179,6 +180,7 @@ def ensure_lm_studio():
     model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL)
     context_length = os.environ.get("LLM_CONTEXT_LENGTH", DEFAULT_LLM_CONTEXT_LENGTH)
     parallel = os.environ.get("LLM_PARALLEL", DEFAULT_LLM_PARALLEL)
+    ttl_seconds = os.environ.get("LLM_TTL_SECONDS", DEFAULT_LLM_TTL_SECONDS)
 
     if _server_up(host) and _model_loaded(host, model):
         log(f"[LM Studio] Server and requested model are ready: {model}")
@@ -215,7 +217,10 @@ def ensure_lm_studio():
                 f"[LM Studio] Requested model is not loaded: {model}; "
                 f"currently loaded={loaded_models}"
             )
-        log(f"[LM Studio] Loading model: {model} context={context_length} parallel={parallel}")
+        log(
+            f"[LM Studio] Loading model: {model} context={context_length} "
+            f"parallel={parallel} ttl={ttl_seconds}s"
+        )
         try:
             Popen(
                 [
@@ -226,6 +231,8 @@ def ensure_lm_studio():
                     context_length,
                     "--parallel",
                     parallel,
+                    "--ttl",
+                    ttl_seconds,
                     "--yes",
                 ],
                 creationflags=CREATE_NEW_PROCESS_GROUP,

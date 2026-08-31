@@ -20,6 +20,8 @@ import math
 import re
 import base64
 import hashlib
+import subprocess
+import threading
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from io import BytesIO
@@ -103,7 +105,7 @@ LLM_ONLY = False
 RESUME_LLM = False
 PROCESS_LLM_SKIPPED = False
 LLM_ENDPOINT = os.environ.get("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions")
-LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.6-35b-a3b")
+LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
 LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "none")
 LLM_TIMEOUT = int(os.environ.get("LLM_TIMEOUT", "300"))
 LLM_SAVE_INTERVAL = 0
@@ -115,6 +117,12 @@ LLM_IMAGE_TIMEOUT = 12
 LLM_IMAGE_MAX_BYTES = 3_000_000
 LLM_IMAGE_MAX_SIZE = 768
 LLM_IMAGE_FORMAT = "JPEG"
+LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
+LLM_CONTEXT_LENGTH = os.environ.get("LLM_CONTEXT_LENGTH", "8192")
+LLM_PARALLEL = os.environ.get("LLM_PARALLEL", "1")
+LLM_TTL_SECONDS = os.environ.get("LLM_TTL_SECONDS", "900")
+LLM_RELOAD_TIMEOUT = int(os.environ.get("LLM_RELOAD_TIMEOUT", "300"))
+_LLM_RELOAD_LOCK = threading.Lock()
 
 
 def _is_loopback_url(url):
@@ -125,12 +133,103 @@ def _is_loopback_url(url):
     return host in {"127.0.0.1", "localhost", "::1"}
 
 
+def _llm_models_url():
+    marker = "/v1/"
+    if marker in LLM_ENDPOINT:
+        return LLM_ENDPOINT.split(marker, 1)[0] + "/v1/models"
+    return LLM_ENDPOINT.rstrip("/") + "/models"
+
+
+def _loaded_llm_model_ids():
+    try:
+        session = requests.Session()
+        if _is_loopback_url(LLM_ENDPOINT):
+            session.trust_env = False
+        resp = session.get(_llm_models_url(), timeout=5)
+        if resp.status_code != 200:
+            return set()
+        return {
+            str(item.get("id", "")).strip()
+            for item in resp.json().get("data", [])
+            if str(item.get("id", "")).strip()
+        }
+    except Exception:
+        return set()
+
+
+def _ensure_llm_model_loaded():
+    """Reload an idle-evicted LM Studio model before retrying the request."""
+    if LLM_MODEL in _loaded_llm_model_ids():
+        return True
+    if not LMS_EXE.exists():
+        print(f"  ✗ LM Studio再ロード不可: lms.exeがありません: {LMS_EXE}")
+        return False
+    with _LLM_RELOAD_LOCK:
+        if LLM_MODEL in _loaded_llm_model_ids():
+            return True
+        print(
+            f"  [LM Studio] モデルが未ロードのため再ロード: {LLM_MODEL} "
+            f"(ttl={LLM_TTL_SECONDS}s)"
+        )
+        try:
+            creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
+            subprocess.Popen(
+                [
+                    str(LMS_EXE),
+                    "load",
+                    LLM_MODEL,
+                    "--context-length",
+                    LLM_CONTEXT_LENGTH,
+                    "--parallel",
+                    LLM_PARALLEL,
+                    "--ttl",
+                    LLM_TTL_SECONDS,
+                    "--yes",
+                ],
+                creationflags=creationflags,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT,
+            )
+        except Exception as exc:
+            print(f"  ✗ LM Studioモデル再ロード失敗: {exc}")
+            return False
+        deadline = time.monotonic() + LLM_RELOAD_TIMEOUT
+        while time.monotonic() < deadline:
+            time.sleep(5)
+            if LLM_MODEL in _loaded_llm_model_ids():
+                print("  [LM Studio] モデル再ロード完了。LLM処理を再試行します。")
+                return True
+        print(f"  ✗ LM Studioモデル再ロードが{LLM_RELOAD_TIMEOUT}秒以内に完了しませんでした。")
+        return False
+
+
+def _response_needs_model_reload(resp):
+    if resp.status_code not in (400, 404, 503):
+        return False
+    detail = (resp.text or "").lower()
+    return any(
+        marker in detail
+        for marker in (
+            "no models loaded",
+            "model_not_found",
+            "invalid model identifier",
+            "model is not loaded",
+        )
+    )
+
+
 def _post_llm(**kwargs):
     if _is_loopback_url(LLM_ENDPOINT):
         session = requests.Session()
         session.trust_env = False
-        return session.post(LLM_ENDPOINT, **kwargs)
-    return requests.post(LLM_ENDPOINT, **kwargs)
+        resp = session.post(LLM_ENDPOINT, **kwargs)
+    else:
+        resp = requests.post(LLM_ENDPOINT, **kwargs)
+    if _response_needs_model_reload(resp) and _ensure_llm_model_loaded():
+        if _is_loopback_url(LLM_ENDPOINT):
+            return session.post(LLM_ENDPOINT, **kwargs)
+        return requests.post(LLM_ENDPOINT, **kwargs)
+    return resp
 
 # Summary limits
 SUMMARY_TITLE_LIMIT = 50
@@ -2891,7 +2990,8 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         # 画像の健全性チェック
         if not is_missing_url(item.get("画像URL")):
             if not check_url_ok(item.get("画像URL"), is_image=True):
-                item["画像URL"] = ""
+                # 社内プロキシや一時的な回線障害で既存画像URLを失わない。
+                print(f"  [IMAGE_CHECK_WARN] 既存画像URLを保持: {str(item.get('画像URL'))[:120]}")
         # まだ news.google.com のままなら無効として空欄
         if source == "GoogleNews" and isinstance(item.get("URL"), str) and "news.google.com" in item.get("URL"):
             item["HTML取得"] = "×"
@@ -3085,7 +3185,8 @@ def enrich_existing_df(df):
         # 画像の健全性チェック
         if not is_missing_url(row.get("画像URL")):
             if not check_url_ok(row.get("画像URL"), is_image=True):
-                row["画像URL"] = ""
+                # 疎通失敗と恒久的なURL無効を判別できないため保持する。
+                print(f"  [IMAGE_CHECK_WARN] 既存画像URLを保持: {str(row.get('画像URL'))[:120]}")
         # まだ news.google.com のままなら無効として空欄
         if source == "GoogleNews" and isinstance(row.get("URL"), str) and "news.google.com" in row.get("URL"):
             row["HTML取得"] = "×"
@@ -3166,6 +3267,10 @@ def enrich_existing_df(df):
 
 def main():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    repair_target_dates = "--repair-target-dates" in sys.argv
+    repair_sheet2_only = "--repair-sheet2-only" in sys.argv
+    repair_relevance_only = "--repair-relevance-only" in sys.argv
+    repair_llm_targets_only = "--repair-llm-targets-only" in sys.argv
     if "--dept" in sys.argv:
         try:
             idx = sys.argv.index("--dept")
@@ -3231,6 +3336,89 @@ def main():
         if ENRICH_ONLY or ENRICH_EXISTING:
             df_existing = enrich_existing_df(df_existing)
             print(f"既存データ: {len(df_existing)} 件")
+
+    # RSS/searchをやり直さず、指定日の既存行だけをLLMで復旧する。
+    if repair_target_dates:
+        if df_existing.empty:
+            print("既存データがありません。復旧処理を終了します。")
+            return
+        if not target_dates:
+            raise RuntimeError("--repair-target-dates には --dates の指定が必要です。")
+        date_values = pd.to_datetime(df_existing.get("日付"), errors="coerce").dt.strftime("%Y-%m-%d")
+        repair_indices = df_existing.index[date_values.isin(set(target_dates))]
+        if repair_relevance_only:
+            total = len(repair_indices)
+            changed = 0
+            print(f"  [復旧] 指定日の関連判定 {total}件を確認します。")
+            for count, idx in enumerate(repair_indices, 1):
+                country = str(df_existing.at[idx, "国"] or "").strip()
+                current = str(df_existing.at[idx, "LLM判定"] or "").strip()
+                if country == "論文":
+                    df_existing.at[idx, "LLM判定"] = "対象"
+                elif not current:
+                    result, _ = call_llm_classify(
+                        str(df_existing.at[idx, "タイトル"] or ""),
+                        str(df_existing.at[idx, "内容"] or ""),
+                        "",
+                        mode="relevance",
+                    )
+                    if result:
+                        df_existing.at[idx, "LLM判定"] = result
+                        if result == "非対象":
+                            df_existing.at[idx, "LLM後処理"] = "スキップ"
+                        changed += 1
+                if count == 1 or count % PROGRESS_EVERY == 0 or count == total:
+                    print(f"    関連判定進捗: {count}/{total}（新規判定: {changed}）")
+            for col in OUTPUT_COLUMNS:
+                if col not in df_existing.columns:
+                    df_existing[col] = ""
+            extra_cols = [c for c in df_existing.columns if c not in OUTPUT_COLUMNS]
+            save_with_hyperlinks(df_existing[OUTPUT_COLUMNS + extra_cols], EXCEL_FILE)
+            print(f"\n✅ 関連判定復旧完了！ 新規判定: {changed}件")
+            return
+        if repair_llm_targets_only:
+            llm_values = df_existing.get("LLM判定", pd.Series(dtype=str)).astype(str).str.strip()
+            country_values = df_existing.get("国", pd.Series(dtype=str)).astype(str).str.strip()
+            target_indices = df_existing.index[(llm_values == "対象") | (country_values == "論文")]
+            repair_indices = repair_indices[repair_indices.isin(target_indices)]
+        elif repair_sheet2_only:
+            sheet2_path = Path(EXCEL_FILE).with_name("sheet2_llm_targets.csv")
+            if not sheet2_path.exists():
+                raise RuntimeError(f"Sheet2 CSVがありません: {sheet2_path}")
+            sheet2_current = pd.read_csv(sheet2_path, encoding="utf-8-sig")
+            target_urls = {
+                str(value).strip()
+                for value in sheet2_current.get("URL", pd.Series(dtype=str)).tolist()
+                if str(value).strip()
+            }
+            sheet2_indices = df_existing.index[
+                df_existing.get("URL", pd.Series(dtype=str)).astype(str).str.strip().isin(target_urls)
+            ]
+            repair_indices = repair_indices[repair_indices.isin(sheet2_indices)]
+        if len(repair_indices) == 0:
+            print(f"指定日の既存データがありません: {', '.join(target_dates)}")
+            return
+        if repair_llm_targets_only:
+            scope = "LLM対象記事"
+        elif repair_sheet2_only:
+            scope = "Sheet2公開候補"
+        else:
+            scope = "指定日の既存データ"
+        print(f"  [復旧] {scope} {len(repair_indices)}件を再判定します。")
+        repaired = enrich_existing_df(df_existing.loc[repair_indices].copy())
+        for col in repaired.columns:
+            if col not in df_existing.columns:
+                df_existing[col] = ""
+            df_existing.loc[repair_indices, col] = repaired.loc[repair_indices, col]
+        for col in OUTPUT_COLUMNS:
+            if col not in df_existing.columns:
+                df_existing[col] = ""
+        extra_cols = [c for c in df_existing.columns if c not in OUTPUT_COLUMNS]
+        df_final = df_existing[OUTPUT_COLUMNS + extra_cols]
+        save_with_hyperlinks(df_final, EXCEL_FILE)
+        build_sheet2_and_csv(df_final, EXCEL_FILE, target_dates)
+        print(f"\n✅ 復旧完了！ 指定日の既存 {len(repair_indices)}件を再判定しました。")
+        return
 
     # 既存のみ再計算モード
     if ENRICH_ONLY:
