@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-08-31",
+        analysis: {
+            jp: "レクサス新型NXの革張り内装やスバルのエントリーグレード本革標準化が、高級感と素材価値の底上げを示唆する。ダイハツタントトールのTFT追加は、コスト意識下でのデジタル表示器需要増を意味する。これらにYFOREのODMS システムのような安全性向上技術が統合されれば、内装開発室は「高機能シート」や「安全コックピット」を必須アイテムとして捉える必要がある。ジープ・コマンダーのアウトドア限定車やGR86 のスポーティ内装から、ユーザーは単なる機能だけでなく、ライフスタイルに即したデザイン体験を強く求めることが判る。よって、次期内装部品戦略では、高級素材とデジタル表示を融合させた「安全で個性豊かなコックピット」を軸に、素材の高級感とデジタルの視認性を両立する新コンセプトが求められよう。 関連画像: [in1597] [jp1722] [in1597]",
+            cn: "豊田合成の内装開発室へ。[in1597][cn1534] による BYD 騰勢 N8 の新内装が、30 インチ PHUD と 1.1 メートル巨幕を備えた広大なコックピットを提示し、運転回帰と没入感を両立する新基準を示唆しています。また [in1597] で比較された MG07 などのスマート座席競争から、HMI 機能や 5G 車載通信の高度化が必須であることが浮き彫りとなり、操作体験の向上が求められています。さらに [in1597] での E クラスや S90 の照明事例が示すように、64 色の雰囲気ライトなどの環境配慮型キャビンも、乗員の情緒的安らぎに寄与するため、次期内装では多機能な照明制御と素材の質感調和を優先すべきです。",
+            in: "豊田合成内装開発室向けトレンド考察： よりKiaソレントの高級感あるダッシュボード素材が、の7人乗り需要と連動し、のトヨタ・フォートナー同様、次期モデルで大幅刷新が進む。特にのトヨタ・イノバハイクロスが示すシャープなグリルや照明システムは、のタタ・ネクソンの次世代内装も参照する2027年向けトレンド。さらにのハインドラXUV3XOはコンパクトSUVで日常使いを重視し、の車内動画公開のように、シートやコックピットのデザインが重視されている。3列目やデュアルスクリーンコックピット機能、ハイブリッド化による静粛性向上が求められ、快適性確保は必須。 関連画像: [in1594] [in1597] [in1588]",
+            us: "豊田合成の内装開発室は、アウディQ9が示す劇的なインテリア刷新や高級感再定義に注目すべき[us1539]。特にコックピット領域の素材選定やHMI進化は、2027年レクサスNXの豪州市場向け大改装[us1541]と相俟って、次世代高級車の基準を再定義する[us1539]。また、北米限定の特別仕様車戦略[us1539]は、限定カラーや鍛造ホイールによる高級感訴求のヒントとなる[us1541]。さらに、テスラによる車載Grok Bot統合で自律型AIエージェントが業務フローを管理する動き[us1541]は、既存音声アシスタントを超えたクラウド連携や自動注文実行を内装体験に統合すべき示唆[us1539]。Tata Nexonの内装スパイ写真や画像情報も、開発中の内装トレンドや素材感把握に寄与する[us1541]。 関連画像: [in1597]",
+            eu: "コックピット MCU 需要拡大 に伴い、内装制御の高度化が必須 となる。電気自動車充電費用変動 を考慮したエネルギー管理システムとの連動内装が求められる。2026 年新型 SUV 投入 で長距離走行快適性向上が焦点 となるため、疲労軽減素材の採用が急務 だ。中国市場向け電気 SUV 予約 の背景にある家族向け需要増 を踏まえ、安全性と耐久性を両立する素材選定が必要 。一方、マニュアルモデルの楽しさ を再現する制御アルゴリズム開発も重要 である。 関連画像: [in1597] [in1597] [eu1503]",
+        },
+        ideas: {
+            jp: [
+                { id: 1666, img: "images/idea_1666.png", title: "ODMS連動・安心ステアリング", desc: "YFOREのODMSシステムが検知した乗員の位置や動作を、ステアリングのホーンリングに発光で表示する。事故時の保護支援を視覚化し、運転中に常に安心感を味わえる安全ステアリングを創造する [in1597]", imagePrompt: "Close-up of a luxury car steering wheel featuring a soft blue LED ring on the horn. The ring glows gently to indicate system status based on occupant detection. The background is a blurred, high-quality dark interior cockpit with a large dashboard display visible in the distance.", sourceNewsIds: ["in1597"] },
+                { id: 1667, img: "images/idea_1667.png", title: "フィールド調光・アウトドアインパネ", desc: "ジープコマンダーのタープやテントパッケージのアウトドア感をインパネ照明に反映。自然光に似た柔らかい光で車内を照らし、キャンプや野外での使用を愉しむ特別な車内空間を作る [jp1724]", imagePrompt: "Interior dashboard view of an SUV at dusk. The ambient lighting strips along the top of the dashboard glow with a warm, soft yellow light resembling a sunset. The center console is dark but illuminated by subtle, nature-inspired light patterns.", sourceNewsIds: ["jp1724"] },
+            ],
+            cn: [
+                { id: 1668, img: "images/idea_1668.png", title: "リサイクル天際パネル", desc: "BYD 騰勢 N8[1597]の「天際屏」や巨幕スクリーンを模した天井パネルに、リサイクル樹脂と植物由来素材を採用。広大な画面を囲む枠を薄型化し、軽量化で CO2 を削減。ユーザーは環境に優しい高級内装をうれしく感じる。[1597] [in1597]", imagePrompt: "A futuristic car interior ceiling panel made of recycled plastic and plant-based materials, featuring a large screen borderless design with a soft glow, natural light streaming in, and a minimalist aesthetic with earthy tones.", sourceNewsIds: ["in1597"] },
+                { id: 1669, img: "images/idea_1669.png", title: "ウェルネスインパネ", desc: "BYD 騰勢N8 の巨大画面を背景に、その向こう側から清浄な空気を循環させるフィルターを内蔵。抗菌・消臭機能付きで、デジタルの輝きと、身体への安心感の両立を叶える。 [cn1534]", imagePrompt: "A close-up view of a car interior dashboard, featuring a large sleek black screen. The screen is integrated into a panel that has a subtle, glowing green tint indicating air quality, with visible fine mesh filters behind the screen material. The lighting is soft and warm, highlighting the clean, healthy atmosphere.", sourceNewsIds: ["cn1534"] },
+            ],
+            in: [
+                { id: 1670, img: "images/idea_1670.png", title: "型内塗装3列目アメニティ", desc: "Kiaソレントの3列目専用アメニティを再現し、海洋プラスチックリサイクル素材で高級感のあるパネルを作成。型内塗装技術により凹凸を表現し、後席乗員が喜びます。 [in1594]", imagePrompt: "Interior shot of a luxury SUV rear seat area featuring a side panel with a textured, matte-finish surface resembling recycled ocean plastic, integrated with a sleek, recessed storage compartment for amenities.", sourceNewsIds: ["in1594"] },
+                { id: 1671, img: "images/idea_1671.png", title: "シームレス加飾コンソール", desc: "トヨタ・フォートナーのインテリア刷新をヒントに、メテオコート加飾パネルを採用。型内塗装で凹凸を表現し、センターコンソールの質感を向上させます。 [in1588]", imagePrompt: "Close-up view of a car center console featuring a unique, textured surface with subtle, seamless patterns created by a metallic coating, emphasizing a high-quality, tactile finish.", sourceNewsIds: ["in1588"] },
+            ],
+            us: [
+                { id: 1672, img: "images/idea_1672.png", title: "質感照明インパネ", desc: "アウディQ9のコックピット領域の高級感再現を目指し、インパネ表面に微細な凹凸を設け、間接照明で木目調の質感と静粛性を両立。運転中に高級感と癒やしを感じて、日々のドライブを特別なものにしてくれる。 [in1597]", imagePrompt: "Close-up of a luxurious car interior dashboard featuring a wood-grain texture illuminated by subtle ambient lighting, highlighting fine micro-embossing details on the panel surface, warm golden glow, high-end material finish, cinematic lighting, photorealistic 8k", sourceNewsIds: ["in1597"] },
+                { id: 1673, img: "images/idea_1673.png", title: "AI統合安全ステアリング", desc: "テスラGrok Botの車載AI技術を活用し、ステアリングに安全モニターを統合。自律走行時の外部状況表示と、ドライバーの視線データ連携で、安全かつ快適な運転体験を可能にする。 [us1539]", imagePrompt: "Futuristic car steering wheel with an integrated transparent safety display screen, showing AI-generated hazard alerts and navigation info, sleek dark carbon fiber material, holographic interface elements, modern tech aesthetic, clean composition", sourceNewsIds: ["us1539"] },
+            ],
+            eu: [
+                { id: 1674, img: "images/idea_1674.png", title: "再生リネン調光コンソール", desc: "Volvo EX60 の先進技術を、再生リネン調光コンソールで実現。触れる温もりと光の変化が、充電コストへの不安を和らげ、家族の団らんを愉しませる。 [in1597]", imagePrompt: "Interior shot of a Volvo EX60 center console made of textured recycled linen fabric illuminated by soft, warm ambient lighting that changes color subtly, emphasizing the tactile quality and sustainability.", sourceNewsIds: ["in1597"] },
+                { id: 1675, img: "images/idea_1675.png", title: "ヒータ付きアームレスト", desc: "BEV 向けの省エネヒータ付きアームレストを、BMW iX3 の先進技術と相性。冷たい車内でも温かみのある空間を創り、ドライバーの心地よさを愉しませる。 [eu1503]", imagePrompt: "Close-up view of a heated armrest in a BMW iX3 interior, showing the sleek surface and the subtle glow of the integrated heating element, conveying warmth and comfort.", sourceNewsIds: ["eu1503"] },
+            ],
+        }
+    },
+{
         date: "2026-08-28〜2026-08-30",
         analysis: {
             jp: "内装開発の趨勢は、純正交換パーツの細部カスタマイズから、車種専用収納やインテリア維持型高音質化へと多岐に広がっている[jp1716][jp1712][jp1713]。シビック向けステアリングでは小径化やソフトシェイプによる操作性向上、本革やカーボン素材の提供が強調される[jp1716]。ジムニーへの専用トレイ導入は収納不足解消と実用性ニーズを示唆し、マット裏面スパイクやロゴプレートも重要視される[jp1712]。ランドクルーザー FJ は純正インテリア維持型高音質化で車内快適性を向上させる[jp1713]。軽乗用 EV「e スカイ」は EV 感を薄め乗り換えハードルを下げ、ソファー調シートやメーターデザインで親和性を高める[jp1720]。災害時車中泊想定はシェルター環境構築を意味し、シートアレンジやプライバシー確保、空調・フラットスペース確保が不可欠とされる[jp1718]。",

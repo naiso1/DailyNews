@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-08-31 14:06";
+window.NEWS_UPDATED_AT = "2026-09-01 00:39";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -105199,6 +105199,762 @@ window.LOADED_NEWS_DATA = [
     
         country: "in",
         img: "https://gaadiwaadi.com/wp-content/uploads/2026/03/Renault-Bridger-Concept-1-1.jpg",
+        note: ""
+    },
+    // 2026-08-31 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1721",
+        title: "レクサス「NX」純ガソリン車全廃、279psターボも消滅しハイブリッドへ集約",
+        desc: "レクサスの主力SUV「NX」から純ガソリン車が姿を消した。2.4Lターボ搭載の「NX350」や自然吸気の「NX250」が販売終了となり、日本仕様はハイブリッドの「NX350h」とプラグインハイブリッドの「NX450h+」のみで構成される。",
+        url: "https://news.yahoo.co.jp/articles/05ee58ffa4d81266f693d48c02a15ef49125eecb?source=rss",
+        source: "carview!",
+        date: "2026-08-31",
+        tags: [],
+    
+        interiorScore: 20,
+        interiorReason: "pure ICE discontinuation news with no interior/product details",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-00010005-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1722",
+        title: "ダイハツタントトール一部改良で安全装備快適性向上、特別仕様車も",
+        desc: "ダイハツは8月31日発売のタントとトール一部改良で、スマートアシストの対歩行者作動速度を80km/hに引き上げ、トールXグレードにシートリフターやTFTディスプレイを追加。特別仕様車「デイリーツール」も設定した。",
+        url: "https://news.yahoo.co.jp/articles/7e77ae098a5d8941e24ca06a8b92cab3982b094c?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-31",
+        tags: ["ディスプレイ", "シート", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-00010008-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1723",
+        title: "ピナレロ、2027年モデルでDOGMA Xをフルブラッシュアップ 速さと快適性を両立",
+        desc: "ピナレロは2027年モデルでハイエンドエンデュランスロード「DOGMA X」をフルブラッシュアップし、フレームセット価格は127.6万円。長距離走行における「速さ」と「快適性」の向上を追求した新モデルが発表された。",
+        url: "https://news.yahoo.co.jp/articles/d3379677a10e42f84c4f63352bb9f62d26382329?source=rss",
+        source: "くるまのニュース",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-01102045-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1724",
+        title: "ジープ・コマンダーにアウトドア限定車登場、タープとテント選べる2タイプ",
+        desc: "ステランティス・ジャパンは9月12日より100台限定でジープ・コマンダーの「フィールドスタイルエディション」を発売し、専用デカールやデジタルミラーを標準装備する。ボディカラーは2色で、2パッケージから選べるが前者はタープ、後者はスノーピークのルーフトップテントを備える。",
+        url: "https://news.yahoo.co.jp/articles/6a73756ff1016e4d22a9dcf6356e57dec3dd0faa?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-31",
+        tags: [],
+    
+        interiorScore: 72,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-01273132-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1539",
+        title: "2027年式レクサスIS、限定350台の特別仕様車登場",
+        desc: "2027年式レクサスISに特別仕様車が登場し、北米限定で350台のみ生産される。特徴は「Envious Green」の専用カラー、BBS鍛造ホイール、Fスポーツボディキット、高級感あふれる内装、3.5L V6自然吸気エンジン搭載など。",
+        url: "https://www.carscoops.com/2026/08/2027-lexus-is-envious-green-limited-edition/",
+        source: "CarScoops",
+        date: "2026-08-31",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/08/2027_Lexus-IS_Special-Appearance-Package_003-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1540",
+        title: "Junkyard Find: 1948 Plymouth Special De Luxe Four-Door Sedan",
+        desc: "What kind of vehicle from the 1940-1955 period is easiest to find in Western Ewe Pullet -style car graveyards? Four-door sedans made by the Chrysler Corp., no doubt about it. Here's one that I spotted in a northeastern Colorado yard a few weeks ago.",
+        url: "https://www.thetruthaboutcars.com/cars/news-blog/junkyard-find-1948-plymouth-special-de-luxe-4-door-sedan-45136264?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-08-31",
+        tags: ["HMI", "AR"],
+    
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/08/28/14521/junkyard-find-1948-plymouth-special-de-luxe-4-door-sedan.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us1541",
+        title: "テスラ、車載Grok Bot統合で他社AI戦略に圧力",
+        desc: "テスラは車載OSにGrok Botを統合し、自律型AIエージェントによる業務フロー管理を可能化。既存の音声アシスタントを超え、外部アプリ連携や自動注文実行などクラウド仮想マシン上での多段階タスク処理を車内で実現する。",
+        url: "https://www.topspeed.com/tesla-grok-bot-in-car-ai/",
+        source: "Top Speed",
+        date: "2026-08-31",
+        tags: ["AI"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/06/tesla-cybertruck-interior.jpg",
+        note: ""
+    },
+    {
+        id: "eu1503",
+        title: "How much does it cost to charge an electric car?",
+        desc: "Electricity prices are a lot more variable than liquid fuels – here’s what you need to know If you’re thinking of switching to an electric car, then chances are you’ll have heard some very different figures about how much it will cost to charge. There’s a good reason for that. Most forecourt fue.",
+        url: "https://www.autocar.co.uk/car-news/advice-electric-cars/how-much-does-it-cost-charge-electric-car",
+        source: "AUTOCAR UK",
+        date: "2026-08-31",
+        tags: ["HMI", "AR"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/ev-handling-test-2023-158.jpg?itok=YZ8mB_xO",
+        note: ""
+    },
+    {
+        id: "eu1504",
+        title: "BMW iX3とVolvo EX60など、2026年新型SUVが長距離と技術を強化",
+        desc: "BMW、メルセデス、ボルボは2026年、長距離走行と先進技術を備えた新型ファミリーSUVを投入。BMW iX3やVolvo EX60、Mercedes GLCなど、各社が新時代を切り開く試金石となるモデルで、自動車の進化を問う大規模な比較テストが行われる。",
+        url: "https://www.autocar.co.uk/car-news/features/biggest-test-2026-bmw-ix3-vs-volvo-ex60-vs-mercedes-glc",
+        source: "AUTOCAR UK",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/bmw_ix3_vs_merc_glc_ev_vs_volvo_ex60_group_test_lead.jpg?itok=u9YGSc13",
+        note: ""
+    },
+    {
+        id: "eu1505",
+        title: "マツダCX-5とポルシェボクスターなど3台で7万ポンドのガレージ",
+        desc: "マツダCX-5、ポルシェボクスター、ルノーメーガンRSの3台を7万ポンドで購入。フェラーリ不要で6速マニュアルモデルの楽しさを味わえるガレージ構成だ。",
+        url: "https://www.autoexpress.co.uk/features/370338/three-car-garage-used-mazda-cx-5-porsche-boxster-and-renault-megane-rs-ps70k",
+        source: "Auto Express",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--FJ73U7Aa--/t_rss_image_w_845/v1787918163/autoexpress/2026/08/3-car%20garage%201%2C941.jpg",
+        note: ""
+    },
+    {
+        id: "cn1534",
+        title: "BYDデナザN8内装公開1.1メートルディスプレイ搭載 航続距離1008km",
+        desc: "BYDの新型デナザN8は中国で内装が公開され、1.1メートルのフロントディスプレイと30インチのタッチスクリーンを備える。130.15kWhのLFPバッテリーでCLTC航続距離1003kmを達成し、前後席の加熱・通風・マッサージ機能も搭載する。",
+        url: "https://carnewschina.com/2026/08/31/byds-new-denza-n8-suv-with-1008-km-ev-range-revealed-interior-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-08-31",
+        tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        interiorScore: 97,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/denza_n8_interior_webhook_1500x900_q85_1788167795.jpg",
+        note: ""
+    },
+    {
+        id: "in1588",
+        title: "Next Gen Tata Nexon Interiors Leaked – Launch Likely In 2027",
+        desc: "Tata is updating the Nexon and the next generation model has been spied and the interiors show suggest development is in early stages The post Next Gen Tata Nexon Interiors Leaked – Launch Likely In 2027 appeared first on RushLane.",
+        url: "https://www.rushlane.com/next-gen-tata-nexon-interiors-leaked-launch-likely-in-2027-12554635.html",
+        source: "RushLane",
+        date: "2026-08-31",
+        tags: ["AR", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image shows dashboard and steering wheel, but text is vague and early-s",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/next-gen-nexon-interiors-spied-cover.jpg",
+        note: ""
+    },
+    {
+        id: "in1589",
+        title: "MG Hector PHEV発売直後トヨタがハイブリッド30年史を強調",
+        desc: "MG Hector Tomahawk PHEV発売翌日、トヨタはハイブリッド技術30年の歴史を強調する全ページ広告を掲載し、その実績をアピールした。",
+        url: "https://www.rushlane.com/toyota-steps-up-hybrid-campaign-after-mg-hector-tomahawk-phev-launch-12554538.html",
+        source: "RushLane",
+        date: "2026-08-31",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/toyota-trolls-mg-hybrid-innova-hycross-hector-tomahawk-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1590",
+        title: "マヒンドラXUV3XOは日常使いに最適なコンパクトSUVか",
+        desc: "マヒンドラXUV3XOは、ハッチバックやコンパクトセダンからSUVへの乗り換えで、より大きな存在感、強力な性能、追加の快適性を確保しつつ、日常の運転を難しくしないことを目指している。",
+        url: "https://www.rushlane.com/mahindra-xuv-3xo-is-a-compact-suv-the-right-upgrade-12554636.html",
+        source: "RushLane",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2024/05/mahindra-xuv-3xo-review-test-drive-11.jpg",
+        note: ""
+    },
+    {
+        id: "in1591",
+        title: "Upcoming 2027 Toyota Innova Hycross Facelift – Key Details We Know So Far",
+        desc: "GaadiWaadi - 2027 Toyota Innova Hycross gets a sharper grille and lighting system along with a host of changes inside the cabin The facelifted Toyota Innova Hycross has been under development for a few months now going by the spy images floating across the interweb and is expected to debut sometime.",
+        url: "https://gaadiwaadi.com/production-spec-2027-toyota-innova-hycross-facelift-rendered/",
+        source: "GaadiWaadi",
+        date: "2026-08-31",
+        tags: ["AR", "AI", "EV"],
+    
+        interiorScore: 41,
+        interiorReason: "interior changes mentioned but image is exterior only",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/07/Toyota-Innova-Hycross-Facelift-Spied.jpg",
+        note: ""
+    },
+    {
+        id: "in1592",
+        title: "次世代トヨタ・フォートナーは年内にも発表され、ハイブリッド化やインテリアの大幅な刷新が予定されている",
+        desc: "トヨタは来期FY2026-27までに次世代フォートナーを世界デビューさせる計画である。新車はメカニカルな強化に加え、ハイブリッド化の可能性があり、特にインテリアは大幅にアップデートされる見込みだ。",
+        url: "https://gaadiwaadi.com/next-gen-toyota-fortuner-to-likely-debut-in-the-coming-months/",
+        source: "GaadiWaadi",
+        date: "2026-08-31",
+        tags: [],
+    
+        interiorScore: 39,
+        interiorReason: "interior refresh mentioned but no concrete details; image is exterior only",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/02/Next-Gen-Toyota-Fortuner-Rendered.jpg",
+        note: ""
+    },
+    {
+        id: "in1593",
+        title: "2 New 7-Seater SUVs Launching Soon With Hybrid & EV Power",
+        desc: "If you’re planning to buy a three-row SUV with hybrid or electric powertrain options, it might be worth waiting a little longer as two new models are set to hit roads soon. Kia India has confirmed that the Sorento premium three-row SUV will go on sale on September 4, while Tata Motors will introduce.",
+        url: "https://www.indiacarnews.com/news/2-new-7-seater-suvs-launching-soon-with-hybrid-ev-power-68846/",
+        source: "IndiaCarNews",
+        date: "2026-08-31",
+        tags: ["AR", "AI", "EV"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/Untitled-design-10.webp",
+        note: ""
+    },
+    {
+        id: "in1594",
+        title: "インド市場向けKiaソレントディーゼル7人乗りが9月発売前にディーラーに到着",
+        desc: "インド市場向けKiaソレントのディーゼル版が9月4日発売前にディーラーに到着した。2.2リットル8速DCT搭載の7人乗りモデルは、高級感のあるデュアルスクリーンコックピットや3列目専用アメニティ、電動トールゲートなど快適装備を備えている。",
+        url: "https://www.autopunditz.com/post/kia-sorento-diesel-8-dct-dealers-india-launch",
+        source: "Auto Punditz",
+        date: "2026-08-31",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 89,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_3bebe62cf7e44fc4b4bfea269c429f43~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1506",
+        title: "フォルクスワーゲン中国市場向け電気SUV ID Aura T6予約開始",
+        desc: "FAWフォルクスワーゲンが中国で現地生産する家族向けスマートカー「ID Aura T6」の予約を開始した。5人乗りの中級SUVで、価格は1万7400ユーロから2万1800ユーロの4種類が用意されている。",
+        url: "https://www.electrive.com/2026/08/31/id-aura-t6-volkswagens-electric-suv-for-the-chinese-smart-car-market/",
+        source: "Electrive",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/faw-volkswagen-id-aura-t6-china-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1507",
+        title: "Yfore、ジョージアで米国初工場開設しデジタルキー生産開始",
+        desc: "Yforeはジョージア州に米国初の製造拠点を開設し、デジタルキーの現地生産を開始した。ソフトウェアに隣接するハードウェアが米国での生産性を維持できるか検証する試みであり、自動車内装分野への展開も期待される。",
+        url: "https://www.automotiveworld.com/news/yfore-launches-first-us-manufacturing-site-in-georgia/",
+        source: "Automotive World",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/31131217/yfore-manufacturing-factory-atlanta-us.jpg",
+        note: ""
+    },
+    {
+        id: "eu1508",
+        title: "タタ・モーターズ、乗用車ブランドをTATA.CARSに再定義",
+        desc: "タタ・モーターズは乗用車ブランドをTATA.CARSと命名し、従来の戦略と逆の方向性でグローバルブランドを確立する。",
+        url: "https://www.automotiveworld.com/news/tata-motors-brands-passenger-vehicle-range-tata-cars/",
+        source: "Automotive World",
+        date: "2026-08-31",
+        tags: ["AR"],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/08/31125817/tata-cars-range-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1509",
+        title: "BYD中国で閃速充電ステーション1万基達成、2026年2万基目標は難航",
+        desc: "BYDは中国325都市で閃速充電ステーション1万基を達成したが、2026年の2万基目標は1500kW充電器の普及拡大が課題となっている。",
+        url: "https://electriccarsreport.com/2026/08/byd-reaches-10000-flash-charging-stations-in-china-but-20000-target-is-getting-tough/",
+        source: "Electric Cars Report",
+        date: "2026-08-31",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/06/BYD-Flash-Charging.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "jp1725",
+        title: "レクサス新型NX、革張り内装と大型ディスプレイで高級感を演出",
+        desc: "レクサス新型NXは「L」エンブレムを廃止し、革張り内装や大型ディスプレイを備える。高級SUVとして登場するこのモデルは、コックピットや加飾を一新し、快適装備も強化される。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["ディスプレイ", "コックピット", "新素材"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "jp1726",
+        title: "スバル新型ステーションワゴン、エントリーグレードに本革シート標準",
+        desc: "スバル新型ステーションワゴンでは、エントリーグレードでもシックな本革シートが標準装備される。高性能4WDモデルのレイバックPremium Black S：HEV EXはリッター19kmの燃費を達成する。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート", "新素材", "EV"],
+    
+        interiorScore: 70,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "jp1727",
+        title: "YFORE、コックピット安全性向上の車内センシングシステムODMSを発表",
+        desc: "YFOREは、コックピットの安全性を高める車内センシングシステム「ODMS」を発表した。このシステムは、乗員の位置や動作を検知し、事故時の保護や緊急時の対応を支援する機能を持つ。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["コックピット", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "jp1728",
+        title: "車載センサーレスBluetoothキー市場規模と成長予測2026-2032年",
+        desc: "QYResearchは、2026年から2032年までの車載センサーレスBluetoothキーの世界市場規模、シェア、成長率に関する調査レポートを公開した。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR", "センシング"],
+    
+        interiorScore: 14,
+        interiorReason: "market research on sensorless Bluetooth keys (accessory/entry tech) with no inte",
+        imageInterior: false,
+        country: "jp",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "jp1729",
+        title: "自動車シートメーカーのテイ・エス・テックが世界従業員の知恵を結集",
+        desc: "自動車シートメーカーのテイ・エス・テックは、世界中の従業員が持つ知見やアイデアを最大限に活用する体制を構築している。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート"],
+    
+        interiorScore: 68,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "jp1730",
+        title: "トヨタ新型FRスポーツカーGR86受付開始 カーボン柄GRロゴスポーティ内装採用",
+        desc: "トヨタは新型FRスポーツカー「GR86」の受付を開始した。内装はカーボン柄とGRロゴを施したスポーティなデザインを採用し、高級感のあるシートも装備する。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1542",
+        title: "2027年レクサスNX、豪州で売れ筋の車内大改装",
+        desc: "2027年モデルのレクサスNXは、豪州市場で売れ筋の車種として、インテリアを大幅に刷新する。シートやコックピットを含む内装デザインと素材が一新され、快適装備も向上する。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート", "コックピット", "新素材"],
+    
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1543",
+        title: "Next-Gen Tata Nexon Interior Spied During Testing - Cartoq",
+        desc: "Next-Gen Tata Nexon Interior Spied During Testing Cartoq.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR"],
+    
+        interiorScore: 78,
+        interiorReason: "interior spy shot with dashboard and seat visible",
+        imageInterior: true,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1544",
+        title: "新学期向け自動車内装カスタムシートカバーShearComfort導入支援",
+        desc: "ShearComfortは新学期を控え、自動車内装向けカスタムシートカバーを提供。素材や加飾をカスタマイズし、コックピットの快適装備を向上させる。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR", "シート", "コックピット", "新素材", "カスタマイズ"],
+    
+        interiorScore: 40,
+        interiorReason: "interior accessories, seat covers, console/cup-holder products, trim/material ch",
+        imageInterior: false,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1545",
+        title: "アウディQ9世界初公開、劇的なインテリア刷新で高級感を再定義",
+        desc: "アウディQ9は世界初公開で、高級感を再定義する劇的なインテリア刷新を遂げた。特にコックピット領域に焦点を当てたデザイン変更や、素材の選定、HMIの進化など、内装の快適装備と加飾が大幅に向上している。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["HMI", "コックピット", "新素材"],
+    
+        interiorScore: 100,
+        interiorReason: "flagship interior redesign with cockpit focus, material selection, HMI evolution",
+        imageInterior: true,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1546",
+        title: "Tata Nexon Interior Images and Photos - CarDekho",
+        desc: "Tata Nexon Interior Images and Photos CarDekho.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR"],
+    
+        interiorScore: 78,
+        interiorReason: "interior images present but no specific interior product details in text",
+        imageInterior: true,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1547",
+        title: "2033年自動車シート市場規模820億ドルに達する見通し",
+        desc: "MarketsandMarkets社は、2033年までに自動車シート市場が820億3千万ドルに達すると予測している。内装分野の成長は、高級車や商用車を含む全セグメントで加速する見込みだ。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR", "シート"],
+    
+        interiorScore: 38,
+        interiorReason: "market size and growth forecast for automotive seats, no interior image, no spec",
+        imageInterior: false,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "us1548",
+        title: "Toyota's 7 Upcoming Seven Seaters: Innova Crysta Facelift To All New Fortuner - Cartoq",
+        desc: "Toyota's 7 Upcoming Seven Seaters: Innova Crysta Facelift To All New Fortuner Cartoq.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR", "EV"],
+    
+        interiorScore: 32,
+        interiorReason: "title mentions facelift but text snippet is empty; no interior details or cabin",
+        imageInterior: false,
+        country: "us",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "eu1510",
+        title: "China Tianrui Automotive Interiors Co., LTD Reports Earnings Results for the Half Year Ended June 30, 2026 - marketscreener.com",
+        desc: "China Tianrui Automotive Interiors Co., LTD Reports Earnings Results for the Half Year Ended June 30, 2026 marketscreener.com.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["HMI", "AR"],
+    
+        interiorScore: 12,
+        interiorReason: "company earnings report with no interior product details or cabin image",
+        imageInterior: false,
+        country: "eu",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "eu1511",
+        title: "自動車コックピットMCU市場分析、オープンPRで公開",
+        desc: "自動車コックピット用マイクロコントローラ市場の分析レポートが公開された。コックピットやインテリアの電子化進展に伴い、HMIやコックピット制御に不可欠なMCU需要が拡大する見込みである。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["HMI", "コックピット"],
+    
+        interiorScore: 45,
+        interiorReason: "market analysis of cockpit MCU, relevant to interior electronics but lacks concr",
+        imageInterior: false,
+        country: "eu",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "eu1512",
+        title: "Xpeng、欧州で高級MPV新潮流を牽引",
+        desc: "Xpengは欧州市場向けに高級MPVを投入し、欧州の高級車市場に新たな潮流を創出することを意図している。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: [],
+    
+        country: "eu",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1535",
+        title: "BYD K-Car「海獭」日本専用インテリア公式画像公開、250万円で販売",
+        desc: "BYD K-Car「海獭」のインテリア公式画像が公開されました。日本市場向け専用モデルで、価格は250万日元です。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR", "バッテリー"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image plus price and market info",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1536",
+        title: "30インチPHUD天际屏搭載の全新騰勢N8官図公開、太平洋汽車",
+        desc: "全新騰勢N8は、30インチのPHUD（ピクセル・ヘッド・アップ・ディスプレイ）と「天際屏」を備えた公式画像を公開した。太平洋汽車が伝えたところによると、この内装は広大な画面によるHMIと快適装備を特徴としている。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["HMI", "HUD", "ディスプレイ"],
+    
+        interiorScore: 93,
+        interiorReason: "PHUD sky screen and 30-inch center console display are concrete interior HMI det",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1537",
+        title: "簡易版テスラModel 3が香港で登場し、20.5万香港ドルで販売される",
+        desc: "香港市場に登場した「丐版」のテスラModel 3は、布製シートと雰囲気照明を装備しない仕様で、価格は20.5万香港ドルである。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート", "イルミ"],
+    
+        interiorScore: 69,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1538",
+        title: "腾势N8的前排座舱曝光，这次真把驾驶还给了驾驶者 - 汽车之家",
+        desc: "腾势N8的前排座舱曝光，这次真把驾驶还给了驾驶者 汽车之家.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: [],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1539",
+        title: "夜間保育士がEクラスで64色照明を採用しS90環境配慮型座舱に迷う",
+        desc: "夜間で子供を預かりながらE級車に乗る場合、64色の雰囲気ライトが後部座席を温かくしますが、S90の環境配慮型キャビンが私をためらわせます - 汽车之家。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート", "イルミ"],
+    
+        interiorScore: 80,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1540",
+        title: "BYDデンザN8新世代インテリア披露 天際スクリーンと巨幕スクリーン搭載",
+        desc: "网通社によると、BYD騰勢N8の新世代インテリアが公開された。車内には「天際屏」と「巨幕屏」を備えたスマート座艙が搭載され、コックピット領域のデザインや快適装備が一新されている。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["ディスプレイ", "コックピット", "バッテリー"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1541",
+        title: "サイドゥME7偽装車 知的座席が本当に競合製品をリードできるのか？ - 汽车之家",
+        desc: "サイドゥME7偽装車 知的座席が本当に競合をリードできるのか？ 汽车之家。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート"],
+    
+        interiorScore: 68,
+        interiorReason: "smart cabin and interior UX focus with some interior image evidence",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1542",
+        title: "カローラ後部座席で3人が乗っても窮屈ではない。シビックのハッチバック形状の空間は本当に十分か？",
+        desc: "トヨタ・カローラの後部座席は3人乗りでも窮屈ではありません。ホンダ・シビックのハッチバックデザインは本当に実用的でしょうか？スマートコックピットの差は何でしょうか？自動車評論サイト「汽车之家」。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート", "コックピット"],
+    
+        interiorScore: 71,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "cn1543",
+        title: "5G車載横評、名爵MG07他4車スマート座席競争",
+        desc: "5G車機交互横評で、名爵MG07を含む4台のスマート座舱が比較された。新浪網が発表した記事では、各車のコックピットやHMI機能の性能が評価された。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["HMI", "シート", "コックピット"],
+    
+        interiorScore: 81,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "in1595",
+        title: "India’s Luxury Car Market: SUVs, EVs, and New Cities Fuel Demand - Indian Retailer",
+        desc: "India’s Luxury Car Market: SUVs, EVs, and New Cities Fuel Demand Indian Retailer.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["HMI", "AR", "AI", "EV"],
+    
+        country: "in",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "in1596",
+        title: "Kia Sorento販売開始 車内動画でインテリアやコックピットが確認可能",
+        desc: "Kia Sorentoが販売店に到着し、車内を撮影した動画が公開された。動画にはシートやダッシュボードなどのインテリア、コックピットのデザイン、加飾素材などが確認できる。",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["シート", "コックピット", "新素材"],
+    
+        interiorScore: 87,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
+        note: ""
+    },
+    {
+        id: "in1597",
+        title: "Thieves smash car window, snatch phone from Brazil woman's dashboard. That's not all - India Today",
+        desc: "Thieves smash car window, snatch phone from Brazil woman's dashboard. That's not all India Today.",
+        url: "https://www.g",
+        source: "news.google.com",
+        date: "2026-08-31",
+        tags: ["AR", "EV"],
+    
+        country: "in",
+        img: "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300-rw",
         note: ""
     },
 ];
