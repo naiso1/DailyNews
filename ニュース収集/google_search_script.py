@@ -1553,6 +1553,35 @@ def extract_cjk_keywords(text, limit=8):
     counts = Counter(tokens)
     return [t for t, _ in counts.most_common(limit)]
 
+def extract_latin_source_anchors(text, limit=8):
+    """Extract brand/model identifiers that should survive an English-source summary."""
+    generic = {
+        "about", "ahead", "all", "and", "appeared", "article", "auto", "automotive",
+        "car", "cars", "china", "content", "first", "five", "interior", "launch",
+        "model", "news", "post", "revealed", "reveals", "seat", "seater", "the",
+        "this", "version", "vehicle", "with", "from", "will", "new", "suv", "ev",
+        "bev", "phev", "ice", "ai", "adas",
+    }
+    tokens = re.findall(r"\b[A-Za-z][A-Za-z0-9.+-]{1,}\b", str(text or ""))
+    counts = Counter(token.casefold() for token in tokens)
+    originals = {}
+    for token in tokens:
+        originals.setdefault(token.casefold(), token)
+
+    anchors = []
+    for key, count in counts.most_common():
+        token = originals[key]
+        if key in generic:
+            continue
+        is_acronym = token.isupper() and 2 <= len(token) <= 12
+        is_model_code = any(ch.isdigit() for ch in token)
+        is_repeated_name = count >= 2 and len(token) >= 4
+        if is_acronym or is_model_code or is_repeated_name:
+            anchors.append(token)
+        if len(anchors) >= limit:
+            break
+    return anchors
+
 def summary_matches_source(summary, source, title=""):
     """要約がソース（タイトル+本文）と内容的に一致するか確認。
     漢字語句とカタカナ固有名詞（3字以上）の両方でチェック。
@@ -1560,10 +1589,12 @@ def summary_matches_source(summary, source, title=""):
     check_text = (title + " " + source).strip() if title else source
     kanji_keys = extract_cjk_keywords(check_text)
     kata_keys = re.findall(r'[\u30a1-\u30f6\u30fc]{3,}', check_text)
-    all_keys = list(set(kanji_keys + kata_keys))
+    latin_keys = extract_latin_source_anchors(check_text)
+    all_keys = list(set(kanji_keys + kata_keys + latin_keys))
     if not all_keys:
         return True
-    return any(k in summary for k in all_keys)
+    folded_summary = str(summary or "").casefold()
+    return any(k.casefold() in folded_summary for k in all_keys)
 
 def enforce_kanji_text(text):
     if not text or not USE_LLM:
@@ -1985,14 +2016,17 @@ def summarize_article(title, content, url, country=""):
         print(f"  [SUMMARY_MISMATCH] タイトル不一致のためリトライ: {title[:50]}")
         if country == "中国":
             keywords = ", ".join(extract_cjk_keywords(source_text))
+            identifiers = ", ".join(extract_latin_source_anchors(source_text))
             retry_prompt = (
                 "Summarize strictly based on the provided title/content. Avoid generic AI boilerplate.\n"
                 f"Title limit: {SUMMARY_TITLE_LIMIT} chars. Summary limit: {SUMMARY_CONTENT_LIMIT} chars.\n"
-                "Include at least one keyword from the list if possible.\n"
+                "Retain at least one required brand/model identifier exactly when provided.\n"
                 "Output JSON only: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
                 f"Title: {title}\n"
                 f"Content: {content}\n"
                 f"Keywords: {keywords}\n"
+                f"Required identifiers: {identifiers}\n"
+                f"Article text: {html_text}\n"
             )
         else:
             retry_prompt = (
@@ -2115,6 +2149,16 @@ def summarize_article(title, content, url, country=""):
 
     summary_title = normalize_japanese_spacing(summary_title)
     summary_body = normalize_japanese_spacing(summary_body)
+    final_source_text = f"{title} {content} {html_text}"
+    if not summary_matches_source(
+        f"{summary_title} {summary_body}", final_source_text, title=title
+    ):
+        # An English source is preferable to a fluent but unrelated hallucination.
+        print(f"  [SUMMARY_REJECTED] 元記事と一致しないため原文へ戻す: {title[:50]}")
+        summary_title = normalize_text(title)
+        summary_body = normalize_text(content)
+        if summary_body and not ends_with_sentence(summary_body):
+            summary_body += "."
     _summary_cache[cache_key] = (summary_title, summary_body)
     return summary_title, summary_body
 

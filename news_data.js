@@ -104950,8 +104950,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "cn1524",
-        title: "米中貿易摩擦により関税引き上げが行われ、市場は混乱を招く恐れがある",
-        desc: "米国は中国製品への関税引き上げを決定した。これにより市場は混乱し、株価が下落する可能性が高い。経済界は対応策を急いでいる。",
+        title: "BYD「Sealion 08」5人乗り内装公開、9月2日発売",
+        desc: "BYDは9月2日発売予定の大型SUV「Sealion 08」5人乗り仕様の内装を公開した。明るいベージュの革張り、可変アンビエント照明、物理ボタン付きセンターコンソールを採用し、後席外側にはレッグレスト、中央席下には収納を備える。",
         url: "https://carnewschina.com/2026/08/29/byd-reveals-interior-of-sealion-08-five-seat-version-ahead-of-september-2-launch/",
         source: "CarNewsChina - All",
         date: "2026-08-29",
