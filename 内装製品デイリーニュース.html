@@ -465,6 +465,12 @@ header.site-header {
     display: flex;
     flex-direction: column;
 }
+.card.reorder-moving {
+    position: relative;
+    z-index: 4;
+    will-change: transform;
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(125, 241, 194, 0.22);
+}
 .card:hover { transform: translateY(-3px); border-color: rgba(125, 241, 194, 0.3); }
 .card.hidden { display: none; }
 
@@ -2766,6 +2772,49 @@ header.site-header {
             applyFilters();
             updateURL("push");
         }
+
+        function captureNewsCardLayout(grid) {
+            const layout = new Map();
+            grid?.querySelectorAll(":scope > .card[id]").forEach(card => {
+                layout.set(card.id, card.getBoundingClientRect());
+            });
+            return layout;
+        }
+
+        function animateNewsCardReorder(grid, previousLayout) {
+            if (!grid || !previousLayout?.size) return;
+            if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
+
+            requestAnimationFrame(() => {
+                grid.querySelectorAll(":scope > .card[id]").forEach(card => {
+                    const previous = previousLayout.get(card.id);
+                    if (!previous || !card.isConnected || typeof card.animate !== "function") return;
+                    const current = card.getBoundingClientRect();
+                    const deltaX = previous.left - current.left;
+                    const deltaY = previous.top - current.top;
+                    const distance = Math.hypot(deltaX, deltaY);
+                    if (distance < 4) return;
+
+                    const duration = Math.min(1100, 700 + distance * 0.16);
+                    card.classList.add("reorder-moving");
+                    const animation = card.animate(
+                        [
+                            { transform: `translate(${deltaX}px, ${deltaY}px)`, opacity: 0.82 },
+                            { transform: "translate(0, 0)", opacity: 1 },
+                        ],
+                        {
+                            duration,
+                            easing: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+                            fill: "none",
+                        }
+                    );
+                    const cleanup = () => card.classList.remove("reorder-moving");
+                    animation.addEventListener("finish", cleanup, { once: true });
+                    animation.addEventListener("cancel", cleanup, { once: true });
+                });
+            });
+        }
+
         function applyFilters() {
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
@@ -2856,6 +2905,7 @@ header.site-header {
 
             // 3. Render (Pagination)
             const grid = document.getElementById("newsGrid");
+            const previousCardLayout = captureNewsCardLayout(grid);
             grid.innerHTML = "";
 
             const itemsToShow = filteredData.slice(0, visibleLimit);
@@ -2929,6 +2979,7 @@ header.site-header {
             </div>`;
                 grid.appendChild(card);
             });
+            animateNewsCardReorder(grid, previousCardLayout);
 
             // Update Counts
             document.getElementById("visibleCount").textContent = itemsToShow.length;
