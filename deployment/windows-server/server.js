@@ -1373,7 +1373,7 @@ function serveFile(request, response, releaseDir, pathname) {
 
   const cacheControl =
     extension === ".html" || extension === ".js" || extension === ".json"
-      ? "no-cache"
+      ? "no-store, max-age=0, must-revalidate"
       : "public, max-age=86400";
 
   response.writeHead(200, {
