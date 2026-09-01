@@ -1232,7 +1232,7 @@ def main():
     )
     ap.add_argument("--fix-existing", action="store_true", help="Fix url/source for existing entries using CSV rows")
     ap.add_argument("--llm-endpoint", default=os.getenv("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions"))
-    ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.6-35b-a3b"))
+    ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.5-9b"))
     args = ap.parse_args()
 
     sheet_path = Path(args.sheet)

@@ -5,7 +5,7 @@ import json, os, re, requests
 from bs4 import BeautifulSoup
 
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
-LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.6-35b-a3b")
+LLM_MODEL = os.environ.get("LLM_MODEL", "qwen/qwen3.5-9b")
 LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "none")
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 

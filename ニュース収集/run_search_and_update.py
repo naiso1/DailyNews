@@ -170,37 +170,65 @@ def _loaded_model_ids(host):
         return set()
 
 
-def _model_loaded(host, model):
-    return model in _loaded_model_ids(host)
+def _unload_all_lm_studio_models(host):
+    loaded_models = sorted(_loaded_model_ids(host))
+    if not loaded_models:
+        return True
+    log(f"[LM Studio] Unloading models before switching: {loaded_models}")
+    try:
+        result = subprocess.run(
+            [str(LMS_EXE), "unload", "--all"],
+            creationflags=CREATE_NEW_PROCESS_GROUP,
+            stdout=PIPE,
+            stderr=STDOUT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=120,
+        )
+    except Exception as e:
+        log(f"[WARN] lms unload failed: {type(e).__name__}: {e}")
+        return False
+    if result.returncode != 0:
+        detail = (result.stdout or "").strip()
+        log(f"[WARN] lms unload returned {result.returncode}: {detail}")
+        return False
+    for _ in range(30):
+        if not _loaded_model_ids(host):
+            log("[LM Studio] All previously loaded models were unloaded.")
+            return True
+        time.sleep(2)
+    log(f"[WARN] Models are still loaded after unload: {sorted(_loaded_model_ids(host))}")
+    return False
 
 
 def ensure_lm_studio():
     configure_loopback_no_proxy()
     host = _llm_host()
-    model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL)
+    model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL).strip() or DEFAULT_LLM_MODEL
     context_length = os.environ.get("LLM_CONTEXT_LENGTH", DEFAULT_LLM_CONTEXT_LENGTH)
     parallel = os.environ.get("LLM_PARALLEL", DEFAULT_LLM_PARALLEL)
     ttl_seconds = os.environ.get("LLM_TTL_SECONDS", DEFAULT_LLM_TTL_SECONDS)
 
-    if _server_up(host) and _model_loaded(host, model):
-        log(f"[LM Studio] Server and requested model are ready: {model}")
-        return
+    if _server_up(host) and _loaded_model_ids(host) == {model}:
+        log(f"[LM Studio] Server and only requested model are ready: {model}")
+        return True
 
     if not _server_up(host):
         if not LMS_EXE.exists():
             log(f"[WARN] lms.exe not found: {LMS_EXE}")
-            return
+            return False
         log("[LM Studio] Starting server...")
         try:
             Popen(
                 [str(LMS_EXE), "server", "start"],
                 creationflags=CREATE_NEW_PROCESS_GROUP,
-                stdout=PIPE,
+                stdout=subprocess.DEVNULL,
                 stderr=STDOUT,
             )
         except Exception as e:
             log(f"[WARN] lms server start failed: {e}")
-            return
+            return False
         for i in range(24):
             time.sleep(5)
             if _server_up(host):
@@ -208,21 +236,19 @@ def ensure_lm_studio():
                 break
         else:
             log("[WARN] LM Studio server did not become ready within 120s.")
-            return
+            return False
 
-    if not _model_loaded(host, model):
-        loaded_models = sorted(_loaded_model_ids(host))
-        if loaded_models:
-            log(
-                f"[LM Studio] Requested model is not loaded: {model}; "
-                f"currently loaded={loaded_models}"
-            )
+    loaded_models = sorted(_loaded_model_ids(host))
+    if loaded_models != [model]:
+        if loaded_models and not _unload_all_lm_studio_models(host):
+            log("[ERROR] Refusing to load another model while an existing model remains loaded.")
+            return False
         log(
             f"[LM Studio] Loading model: {model} context={context_length} "
             f"parallel={parallel} ttl={ttl_seconds}s"
         )
         try:
-            Popen(
+            load_proc = Popen(
                 [
                     str(LMS_EXE),
                     "load",
@@ -236,18 +262,28 @@ def ensure_lm_studio():
                     "--yes",
                 ],
                 creationflags=CREATE_NEW_PROCESS_GROUP,
-                stdout=PIPE,
+                stdout=subprocess.DEVNULL,
                 stderr=STDOUT,
             )
         except Exception as e:
             log(f"[WARN] lms load failed: {e}")
+            return False
         for i in range(30):
             time.sleep(10)
-            if _model_loaded(host, model):
+            current_models = _loaded_model_ids(host)
+            if current_models == {model}:
                 log(f"[LM Studio] Model became ready after {(i + 1) * 10}s.")
-                break
+                return True
+            if load_proc.poll() not in (None, 0):
+                log(f"[WARN] lms load exited with code {load_proc.returncode}.")
+                return False
         else:
-            log("[WARN] Model did not become ready within 300s.")
+            log(
+                f"[WARN] Model did not become ready within 300s; "
+                f"currently loaded={sorted(_loaded_model_ids(host))}"
+            )
+            return False
+    return _loaded_model_ids(host) == {model}
 
 
 def _next_wake_datetime(now=None):
@@ -670,7 +706,8 @@ def main():
             cur += datetime.timedelta(days=1)
         dates_arg = ",".join(dates)
         try:
-            ensure_lm_studio()
+            if not ensure_lm_studio():
+                raise RuntimeError("LM Studio could not prepare the single requested model.")
             google_search_script = get_google_search_entrypoint()
             run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
             sheet2_path = SCRIPT_DIR / "sheet2_llm_targets.csv"
@@ -682,7 +719,8 @@ def main():
                     "skip update/git to avoid publishing an empty result."
                 )
             log(f"[INFO] sheet2 target rows for {dates_arg}: {sheet_rows}")
-            ensure_lm_studio()
+            if not ensure_lm_studio():
+                raise RuntimeError("LM Studio lost the requested model before news update.")
             run_cmd(
                 [
                     sys.executable,

@@ -160,16 +160,49 @@ def _loaded_llm_model_ids():
         return set()
 
 
+def _unload_all_llm_models():
+    loaded_models = sorted(_loaded_llm_model_ids())
+    if not loaded_models:
+        return True
+    print(f"  [LM Studio] 別モデルを先にアンロード: {loaded_models}")
+    try:
+        result = subprocess.run(
+            [str(LMS_EXE), "unload", "--all"],
+            creationflags=(subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0),
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
+            timeout=120,
+        )
+    except Exception as exc:
+        print(f"  ✗ LM Studioモデルのアンロード失敗: {exc}")
+        return False
+    if result.returncode != 0:
+        print(f"  ✗ LM Studioモデルのアンロード終了コード: {result.returncode}")
+        return False
+    deadline = time.monotonic() + 60
+    while time.monotonic() < deadline:
+        if not _loaded_llm_model_ids():
+            print("  [LM Studio] 既存モデルのアンロード完了。")
+            return True
+        time.sleep(2)
+    print(f"  ✗ アンロード後もモデルが残っています: {sorted(_loaded_llm_model_ids())}")
+    return False
+
+
 def _ensure_llm_model_loaded():
     """Reload an idle-evicted LM Studio model before retrying the request."""
-    if LLM_MODEL in _loaded_llm_model_ids():
+    if _loaded_llm_model_ids() == {LLM_MODEL}:
         return True
     if not LMS_EXE.exists():
         print(f"  ✗ LM Studio再ロード不可: lms.exeがありません: {LMS_EXE}")
         return False
     with _LLM_RELOAD_LOCK:
-        if LLM_MODEL in _loaded_llm_model_ids():
+        loaded_models = _loaded_llm_model_ids()
+        if loaded_models == {LLM_MODEL}:
             return True
+        if loaded_models and not _unload_all_llm_models():
+            print("  ✗ 別モデルが残っているため、追加ロードを中止します。")
+            return False
         print(
             f"  [LM Studio] モデルが未ロードのため再ロード: {LLM_MODEL} "
             f"(ttl={LLM_TTL_SECONDS}s)"
