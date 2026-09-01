@@ -631,6 +631,66 @@ header.site-header {
 .action-btn:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
 .action-btn.liked { color: #ff4d4d; background: rgba(255, 77, 77, 0.1); }
 .action-btn.active-comment { color: #4facfe; background: rgba(79, 172, 254, 0.1); }
+.action-btn.relevance-feedback-btn { position: relative; }
+.action-btn.relevance-feedback-btn.marked-irrelevant {
+    color: #ffad73;
+    background: rgba(255, 139, 76, 0.14);
+    border-color: rgba(255, 157, 102, 0.42);
+}
+.action-btn.relevance-feedback-btn[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 10px);
+    z-index: 2300;
+    width: min(300px, 78vw);
+    padding: 9px 11px;
+    border: 1px solid rgba(255, 173, 115, 0.32);
+    border-radius: 10px;
+    background: #172231;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
+    color: #dce7f4;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.55;
+    text-align: left;
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+    pointer-events: none;
+}
+.action-btn.relevance-feedback-btn[data-tooltip]:hover::after,
+.action-btn.relevance-feedback-btn[data-tooltip]:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.comment-hover-bubble {
+    position: fixed;
+    z-index: 2250;
+    width: min(340px, calc(100vw - 24px));
+    max-height: 280px;
+    overflow: hidden;
+    padding: 13px 14px;
+    border: 1px solid rgba(111, 167, 255, 0.35);
+    border-radius: 15px;
+    background: rgba(14, 24, 37, 0.98);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.46);
+    color: #e6edf7;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+    pointer-events: none;
+}
+.comment-hover-bubble.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.comment-hover-title { margin-bottom: 8px; color: #a9caff; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; }
+.comment-hover-item + .comment-hover-item { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.08); }
+.comment-hover-user { color: #7df1c2; font-size: 10px; font-weight: 800; }
+.comment-hover-text { margin-top: 2px; color: #dce5f0; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+.comment-hover-more { margin-top: 8px; color: #8496aa; font-size: 10px; }
 
 .action-btn.favorite-btn.active {
     color: #ffd540;
@@ -1377,9 +1437,9 @@ header.site-header {
 
 
     <!-- DailyNews Server API -->
-    <script type="module" src="dailynews_client.js?v=20260831-1"></script>
-    <script type="module" src="dailynews_account.js?v=20260831-1"></script>
-    <script type="module" src="release_history.js?v=20260831-1"></script>
+    <script type="module" src="dailynews_client.js?v=20260901-2"></script>
+    <script type="module" src="dailynews_account.js?v=20260901-2"></script>
+    <script type="module" src="release_history.js?v=20260901-2"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
@@ -1705,11 +1765,13 @@ header.site-header {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
+                const irrelevant = data.irrelevant || 0;
+                const markedIrrelevant = Boolean(data.markedIrrelevant);
                 const reads = (typeof data.reads === "number")
                     ? data.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
                 const score = likes * 3 + comments * 2 + reads;
-                return { ...item, likes, comments, reads, score };
+                return { ...item, likes, comments, irrelevant, markedIrrelevant, reads, score };
             });
 
             if (scope === "weekly" && latest) {
@@ -1731,7 +1793,7 @@ header.site-header {
                 return;
             }
             list.innerHTML = top.map((item, idx) => `
-                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
+                <div class="ranking-item" data-news-id="${item.id}" onclick="showNewsItem('${item.id}', true)">
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
@@ -1749,6 +1811,9 @@ header.site-header {
                         </button>
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                        <button class="action-btn relevance-feedback-btn${item.markedIrrelevant ? ' marked-irrelevant' : ''}" data-tooltip="この記事が内装開発と関係ない場合に押してください。今後の関連度判定の精度向上に活用します。" onclick="toggleIrrelevant('${item.id}', this); event.stopPropagation();">
+                            <span>👎</span> <span class="count">${item.irrelevant}</span>
                         </button>
                     </div>
                 </div>
@@ -1776,11 +1841,13 @@ header.site-header {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
+                const irrelevant = data.irrelevant || 0;
+                const markedIrrelevant = Boolean(data.markedIrrelevant);
                 const reads = (typeof data.reads === "number")
                     ? data.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
                 const score = likes * 3 + comments * 2 + reads;
-                return { ...item, likes, comments, reads, score };
+                return { ...item, likes, comments, irrelevant, markedIrrelevant, reads, score };
             });
 
             if ((scope === "weekly" || scope === "6m") && latest) {
@@ -1806,7 +1873,7 @@ header.site-header {
                 return;
             }
             list.innerHTML = top.map((item, idx) => `
-                <div class="ranking-item" onclick="showNewsItem('${item.id}', true)">
+                <div class="ranking-item" data-news-id="${item.id}" onclick="showNewsItem('${item.id}', true)">
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
@@ -1824,6 +1891,9 @@ header.site-header {
                         </button>
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                        <button class="action-btn relevance-feedback-btn${item.markedIrrelevant ? ' marked-irrelevant' : ''}" data-tooltip="この記事が内装開発と関係ない場合に押してください。今後の関連度判定の精度向上に活用します。" onclick="toggleIrrelevant('${item.id}', this); event.stopPropagation();">
+                            <span>👎</span> <span class="count">${item.irrelevant}</span>
                         </button>
                     </div>
                 </div>
@@ -2914,6 +2984,8 @@ header.site-header {
                 const interaction = window.interactionsData?.[n.id] || {};
                 const likeCount = interaction.likes || 0;
                 const commentCount = interaction.comments || 0;
+                const irrelevantCount = interaction.irrelevant || 0;
+                const markedIrrelevant = Boolean(interaction.markedIrrelevant);
                 const readCount = (typeof interaction.reads === "number")
                     ? interaction.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
@@ -2922,6 +2994,7 @@ header.site-header {
                 const card = document.createElement("article");
                 card.className = "card";
                 card.id = `card-${n.id}`;
+                card.dataset.newsId = n.id;
                 const isNew = isNewContent(n);
                 const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
                 const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
@@ -2958,6 +3031,9 @@ header.site-header {
                     </button>
                     <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
                         <span>💬</span> <span class="count">${commentCount}</span>
+                    </button>
+                    <button class="action-btn relevance-feedback-btn${markedIrrelevant ? ' marked-irrelevant' : ''}" data-tooltip="この記事が内装開発と関係ない場合に押してください。今後の関連度判定の精度向上に活用します。" onclick="toggleIrrelevant('${n.id}', this)">
+                        <span>👎</span> <span class="count">${irrelevantCount}</span>
                     </button>
 
                     <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>

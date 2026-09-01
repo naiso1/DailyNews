@@ -7,10 +7,15 @@ const LOCAL_INTERACTIONS_KEY = "local_interactions";
 const LOCAL_READS_KEY = "local_article_reads";
 const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date_v3";
 const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+const IRRELEVANT_TOOLTIP =
+  "この記事が内装開発と関係ない場合に押してください。今後の関連度判定の精度向上に活用します。";
 
 let accessStatsCache = null;
 let localInteractionsCache = null;
 let interactionPollTimer = null;
+let hoverCommentTimer = null;
+let hoverCommentTarget = null;
+const hoverCommentCache = new Map();
 
 window.interactionsData = {};
 window.useLocalInteractions = false;
@@ -280,6 +285,8 @@ function getLocalInteractionData(itemId) {
     likes: 0,
     comments: [],
     reads: getLocalReadCount(itemId),
+    irrelevant: 0,
+    markedIrrelevant: false,
   };
 }
 
@@ -351,6 +358,14 @@ function mergeInteractionData(itemId, data) {
         : Number(previous.reads || 0),
     liked: typeof data.liked === "boolean" ? data.liked : previous.liked,
     likedBy: Array.isArray(data.likedBy) ? data.likedBy : previous.likedBy || [],
+    irrelevant:
+      typeof data.irrelevant === "number"
+        ? data.irrelevant
+        : Number(previous.irrelevant || 0),
+    markedIrrelevant:
+      typeof data.markedIrrelevant === "boolean"
+        ? data.markedIrrelevant
+        : Boolean(previous.markedIrrelevant),
   };
 }
 
@@ -359,9 +374,15 @@ function getInteractionRenderData(itemId) {
   return {
     likes: data.likes || 0,
     comments: data.commentItems || [],
+    commentCount:
+      typeof data.comments === "number"
+        ? data.comments
+        : (data.commentItems || []).length,
     reads: data.reads || 0,
     liked: Boolean(data.liked),
     likedBy: data.likedBy || [],
+    irrelevant: data.irrelevant || 0,
+    markedIrrelevant: Boolean(data.markedIrrelevant),
   };
 }
 
@@ -381,24 +402,42 @@ function updateLikeTooltip(button, data) {
   button.setAttribute("aria-label", label);
 }
 
+function updateIrrelevantButton(button, data = {}) {
+  if (!button) return;
+  const count = button.querySelector(".count");
+  if (count) count.textContent = Number(data.irrelevant || 0);
+  button.classList.toggle("marked-irrelevant", Boolean(data.markedIrrelevant));
+  button.dataset.tooltip = IRRELEVANT_TOOLTIP;
+  button.title = IRRELEVANT_TOOLTIP;
+  button.setAttribute("aria-label", IRRELEVANT_TOOLTIP);
+}
+
 function refreshInteractionCounts() {
   const interactions = window.interactionsData || {};
-  document.querySelectorAll(".card, .idea-card").forEach((card) => {
-    const likeButton = card.querySelector('.action-btn[onclick*="toggleLike"]');
-    const itemId = card.id?.startsWith("card-")
-      ? card.id.slice(5)
-      : likeButton?.getAttribute("onclick")?.match(/'([^']+)'/)?.[1];
-    if (!itemId) return;
-    const data = interactions[itemId];
-    if (!data) return;
-    const likeCount = likeButton?.querySelector(".count");
-    const commentCount = card.querySelector(".btn-comment .count");
-    const readCount = card.querySelector(".read-count");
-    if (likeCount) likeCount.textContent = data.likes || 0;
-    if (commentCount) commentCount.textContent = data.comments || 0;
-    if (readCount) readCount.textContent = `閲覧 ${data.reads || 0}`;
-    updateLikeTooltip(likeButton, data);
-  });
+  document
+    .querySelectorAll(".card, .idea-card, .ranking-item[data-news-id]")
+    .forEach((card) => {
+      const likeButton = card.querySelector(
+        '.action-btn[onclick*="toggleLike"]',
+      );
+      const itemId =
+        card.dataset.newsId ||
+        (card.id?.startsWith("card-")
+          ? card.id.slice(5)
+          : likeButton?.getAttribute("onclick")?.match(/'([^']+)'/)?.[1]);
+      if (!itemId) return;
+      const data = interactions[itemId];
+      if (!data) return;
+      const likeCount = likeButton?.querySelector(".count");
+      const commentCount = card.querySelector(".btn-comment .count");
+      const irrelevantButton = card.querySelector(".relevance-feedback-btn");
+      const readCount = card.querySelector(".read-count");
+      if (likeCount) likeCount.textContent = data.likes || 0;
+      if (commentCount) commentCount.textContent = data.comments || 0;
+      if (readCount) readCount.textContent = `閲覧 ${data.reads || 0}`;
+      updateLikeTooltip(likeButton, data);
+      updateIrrelevantButton(irrelevantButton, data);
+    });
 }
 window.refreshInteractionCounts = refreshInteractionCounts;
 
@@ -420,7 +459,10 @@ function enableLocalInteractions() {
 async function loadInteractions() {
   try {
     const previousReactions = Object.entries(window.interactionsData || {})
-      .map(([id, value]) => `${id}:${value.likes || 0}:${value.comments || 0}`)
+      .map(
+        ([id, value]) =>
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}`,
+      )
       .join("|");
     const payload = await apiRequest("/interactions");
     Object.entries(payload.interactions || {}).forEach(([itemId, value]) => {
@@ -430,7 +472,10 @@ async function loadInteractions() {
     window.useLocalInteractions = false;
     updateRankings();
     const currentReactions = Object.entries(window.interactionsData || {})
-      .map(([id, value]) => `${id}:${value.likes || 0}:${value.comments || 0}`)
+      .map(
+        ([id, value]) =>
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}`,
+      )
       .join("|");
     if (currentReactions !== previousReactions) window.refreshNewsReactionSort?.();
     return true;
@@ -601,8 +646,9 @@ function renderItem(itemId) {
   }
   if (elements.btnComment) {
     const count = elements.btnComment.querySelector(".count");
-    if (count) count.textContent = (data.comments || []).length;
+    if (count) count.textContent = data.commentCount || 0;
   }
+  updateIrrelevantButton(elements.btnIrrelevant, data);
   if (elements.commentList) {
     elements.commentList.innerHTML = (data.comments || [])
       .map(
@@ -625,8 +671,10 @@ function renderItem(itemId) {
     likes: data.likes,
     reads: data.reads,
     commentItems: data.comments,
-    comments: data.comments.length,
+    comments: data.commentCount,
     likedBy: data.likedBy,
+    irrelevant: data.irrelevant,
+    markedIrrelevant: data.markedIrrelevant,
   });
   updateRankings();
 }
@@ -643,11 +691,127 @@ async function fetchInteractionDetail(itemId) {
   return detail;
 }
 
-window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
+function getCommentHoverBubble() {
+  let bubble = document.getElementById("commentHoverBubble");
+  if (bubble) return bubble;
+  bubble = document.createElement("aside");
+  bubble.id = "commentHoverBubble";
+  bubble.className = "comment-hover-bubble";
+  bubble.setAttribute("role", "status");
+  bubble.setAttribute("aria-live", "polite");
+  document.body.appendChild(bubble);
+  return bubble;
+}
+
+function positionCommentHoverBubble(target, bubble) {
+  const rect = target.getBoundingClientRect();
+  const margin = 12;
+  const left = Math.min(
+    Math.max(margin, rect.left + 18),
+    window.innerWidth - bubble.offsetWidth - margin,
+  );
+  let top = rect.top - bubble.offsetHeight - margin;
+  if (top < margin) top = rect.bottom + margin;
+  top = Math.min(top, window.innerHeight - bubble.offsetHeight - margin);
+  bubble.style.left = `${left}px`;
+  bubble.style.top = `${Math.max(margin, top)}px`;
+}
+
+function hideCommentHoverBubble() {
+  const bubble = document.getElementById("commentHoverBubble");
+  bubble?.classList.remove("visible");
+  hoverCommentTarget = null;
+}
+
+function renderCommentHoverBubble(target, itemId, data) {
+  if (hoverCommentTarget !== target || !document.contains(target)) {
+    hideCommentHoverBubble();
+    return;
+  }
+  const comments = Array.isArray(data?.commentItems) ? data.commentItems : [];
+  const total = Number(data?.comments || comments.length || 0);
+  if (!total || !comments.length) {
+    hideCommentHoverBubble();
+    return;
+  }
+  const shown = comments.slice(-3).reverse();
+  const bubble = getCommentHoverBubble();
+  bubble.innerHTML = `
+    <div class="comment-hover-title">💬 コメント ${total}件</div>
+    ${shown
+      .map(
+        (comment) => `<div class="comment-hover-item">
+          <div class="comment-hover-user">${escapeHtml(comment.user || "Guest")}${comment.date ? ` · ${escapeHtml(comment.date)}` : ""}</div>
+          <div class="comment-hover-text">${escapeHtml(comment.text || "")}</div>
+        </div>`,
+      )
+      .join("")}
+    ${total > shown.length ? `<div class="comment-hover-more">ほか ${total - shown.length}件。💬ボタンからすべて表示できます。</div>` : ""}`;
+  bubble.classList.add("visible");
+  positionCommentHoverBubble(target, bubble);
+}
+
+async function showCommentHoverBubble(target, itemId) {
+  const summary = window.interactionsData[itemId] || {};
+  if (Number(summary.comments || 0) <= 0) return;
+  hoverCommentTarget = target;
+  if (hoverCommentCache.has(itemId)) {
+    renderCommentHoverBubble(target, itemId, hoverCommentCache.get(itemId));
+    return;
+  }
+  const bubble = getCommentHoverBubble();
+  bubble.innerHTML = '<div class="comment-hover-title">💬 コメントを読み込み中...</div>';
+  bubble.classList.add("visible");
+  positionCommentHoverBubble(target, bubble);
+  try {
+    const detail = await fetchInteractionDetail(itemId);
+    hoverCommentCache.set(itemId, detail);
+    renderCommentHoverBubble(target, itemId, detail);
+  } catch (error) {
+    console.warn(`Comment preview failed for ${itemId}:`, error.message);
+    hideCommentHoverBubble();
+  }
+}
+
+function setupCommentHoverPreview() {
+  if (document.documentElement.dataset.commentHoverBound) return;
+  document.documentElement.dataset.commentHoverBound = "true";
+  const selector = ".card[data-news-id], .ranking-item[data-news-id]";
+  document.addEventListener("mouseover", (event) => {
+    if (event.target.closest(".relevance-feedback-btn")) {
+      clearTimeout(hoverCommentTimer);
+      hideCommentHoverBubble();
+      return;
+    }
+    const target = event.target.closest(selector);
+    if (!target || target.contains(event.relatedTarget)) return;
+    clearTimeout(hoverCommentTimer);
+    hoverCommentTimer = setTimeout(() => {
+      showCommentHoverBubble(target, target.dataset.newsId);
+    }, 350);
+  });
+  document.addEventListener("mouseout", (event) => {
+    const target = event.target.closest(selector);
+    if (!target || target.contains(event.relatedTarget)) return;
+    clearTimeout(hoverCommentTimer);
+    if (hoverCommentTarget === target) hideCommentHoverBubble();
+  });
+  window.addEventListener("scroll", hideCommentHoverBubble, { passive: true });
+  window.addEventListener("resize", hideCommentHoverBubble);
+}
+
+window.subscribeItem = (
+  itemId,
+  btnLike,
+  btnComment,
+  commentList,
+  btnIrrelevant,
+) => {
   if (!liveElements[itemId]) liveElements[itemId] = {};
   if (btnLike) liveElements[itemId].btnLike = btnLike;
   if (btnComment) liveElements[itemId].btnComment = btnComment;
   if (commentList) liveElements[itemId].commentList = commentList;
+  if (btnIrrelevant) liveElements[itemId].btnIrrelevant = btnIrrelevant;
   liveElements[itemId].lastData = getInteractionRenderData(itemId);
   renderItem(itemId);
 
@@ -655,6 +819,67 @@ window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
     fetchInteractionDetail(itemId).catch((error) => {
       console.warn(`Interaction detail failed for ${itemId}:`, error.message);
     });
+  }
+};
+
+window.toggleIrrelevant = async (itemId, button) => {
+  if (window.useLocalInteractions) {
+    alert(
+      "サーバーに接続できないため、関連なしの評価を保存できません。時間をおいて再度お試しください。",
+    );
+    return;
+  }
+
+  const previous = window.interactionsData[itemId] || {};
+  const wasMarked = Boolean(
+    previous.markedIrrelevant || button.classList.contains("marked-irrelevant"),
+  );
+  const desiredMarked = !wasMarked;
+  const previousCount = Number(previous.irrelevant || 0);
+  const optimisticCount = Math.max(
+    0,
+    previousCount + (desiredMarked ? 1 : -1),
+  );
+  mergeInteractionData(itemId, {
+    ...previous,
+    irrelevant: optimisticCount,
+    markedIrrelevant: desiredMarked,
+  });
+  updateIrrelevantButton(button, window.interactionsData[itemId]);
+  updateRankings();
+
+  try {
+    const data = await apiRequest(
+      `/interactions/${encodeURIComponent(itemId)}/irrelevant`,
+      {
+        method: "PUT",
+        body: {
+          clientId: getClientId(),
+          markedIrrelevant: desiredMarked,
+        },
+      },
+    );
+    mergeInteractionData(itemId, data);
+    hoverCommentCache.delete(itemId);
+    updateIrrelevantButton(button, data);
+    updateRankings();
+  } catch (error) {
+    console.error("Irrelevant feedback save failed:", error);
+    mergeInteractionData(itemId, {
+      ...previous,
+      irrelevant: previousCount,
+      markedIrrelevant: wasMarked,
+    });
+    updateIrrelevantButton(button, window.interactionsData[itemId]);
+    updateRankings();
+    if (error.status === 401) {
+      window.dailyNewsAccount?.openAuth(
+        "login",
+        "関連なしの評価を保存するにはログインしてください。",
+      );
+      return;
+    }
+    alert("関連なしの評価を保存できませんでした。通信状態を確認してください。");
   }
 };
 
@@ -696,6 +921,7 @@ window.toggleLike = async (itemId, button) => {
       },
     );
     mergeInteractionData(itemId, data);
+    hoverCommentCache.delete(itemId);
     button.classList.toggle("liked", data.liked);
     if (data.liked) localStorage.setItem(storageKey, "true");
     else localStorage.removeItem(storageKey);
@@ -753,6 +979,7 @@ window.submitComment = async (itemId, input) => {
       },
     );
     mergeInteractionData(itemId, data);
+    hoverCommentCache.delete(itemId);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
@@ -781,6 +1008,7 @@ window.toggleCommentLike = async (itemId, commentId, liked) => {
       },
     );
     mergeInteractionData(itemId, data);
+    hoverCommentCache.delete(itemId);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
@@ -829,6 +1057,7 @@ window.deleteComment = async (itemId, commentIndex) => {
       { method: "DELETE" },
     );
     mergeInteractionData(itemId, data);
+    hoverCommentCache.delete(itemId);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
@@ -861,6 +1090,7 @@ const interactionObserver = new IntersectionObserver(
           likeButton,
           card.querySelector(".btn-comment"),
           null,
+          card.querySelector(".relevance-feedback-btn"),
         );
         likeButton.classList.toggle(
           "liked",
@@ -879,6 +1109,7 @@ function observeInteractionCards(root = document) {
   });
 }
 
+setupCommentHoverPreview();
 setTimeout(() => observeInteractionCards(), 1000);
 new MutationObserver((records) => {
   records.forEach((record) => {

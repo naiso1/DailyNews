@@ -103,8 +103,17 @@ async function main() {
   assert.equal(like.liked, true);
   assert.deepEqual(like.likedBy, ["Test User"]);
 
+  const irrelevant = await request("/api/interactions/jp1/irrelevant", {
+    method: "PUT",
+    body: { clientId: "abcdefghijklmnop1234", markedIrrelevant: true },
+  });
+  assert.equal(irrelevant.markedIrrelevant, true);
+  assert.equal(irrelevant.irrelevant, 1);
+
   const interactions = await request("/api/interactions");
   assert.deepEqual(interactions.interactions.jp1.likedBy, ["Test User"]);
+  assert.equal(interactions.interactions.jp1.markedIrrelevant, true);
+  assert.equal(interactions.interactions.jp1.irrelevant, 1);
 
   const comment = await request("/api/interactions/jp1/comments", {
     method: "POST",
@@ -133,6 +142,7 @@ async function main() {
   const activity = await request("/api/me/activity");
   assert.deepEqual(activity.favorites, ["jp1"]);
   assert.deepEqual(activity.likes, ["jp1"]);
+  assert.deepEqual(activity.irrelevant, ["jp1"]);
   assert.equal(activity.comments.length, 1);
   assert.equal(activity.feedback.length, 1);
 
@@ -140,6 +150,8 @@ async function main() {
   assert.equal(admin.totals.users, 1);
   assert.equal(admin.users[0].email, "test.user@example.com");
   assert.equal(admin.users[0].isAdmin, true);
+  assert.equal(admin.users[0].irrelevant, 1);
+  assert.equal(admin.totals.irrelevant, 1);
   assert.equal(admin.feedback.length, 1);
   process.stdout.write("DailyNews auth integration test passed.\n");
 }

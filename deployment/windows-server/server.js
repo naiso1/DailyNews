@@ -147,6 +147,15 @@ db.exec(`
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   );
 
+  CREATE TABLE IF NOT EXISTS user_irrelevant (
+    item_id TEXT NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (item_id, user_id),
+    FOREIGN KEY (item_id) REFERENCES interactions(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
   CREATE TABLE IF NOT EXISTS user_favorites (
     item_id TEXT NOT NULL,
     user_id INTEGER NOT NULL,
@@ -259,6 +268,21 @@ const statements = {
   deleteUserLike: db.prepare(`
     DELETE FROM user_likes WHERE item_id = ? AND user_id = ?
   `),
+  hasUserIrrelevant: db.prepare(`
+    SELECT 1 AS found FROM user_irrelevant WHERE item_id = ? AND user_id = ?
+  `),
+  insertUserIrrelevant: db.prepare(`
+    INSERT OR IGNORE INTO user_irrelevant(item_id, user_id) VALUES (?, ?)
+  `),
+  deleteUserIrrelevant: db.prepare(`
+    DELETE FROM user_irrelevant WHERE item_id = ? AND user_id = ?
+  `),
+  irrelevantCount: db.prepare(`
+    SELECT COUNT(*) AS count FROM user_irrelevant WHERE item_id = ?
+  `),
+  allIrrelevantCounts: db.prepare(`
+    SELECT item_id, COUNT(*) AS count FROM user_irrelevant GROUP BY item_id
+  `),
   changeLikes: db.prepare(`
     UPDATE interactions
     SET likes = MAX(0, likes + ?), updated_at = CURRENT_TIMESTAMP
@@ -368,6 +392,9 @@ const statements = {
   userLikes: db.prepare(`
     SELECT item_id FROM user_likes WHERE user_id = ? ORDER BY created_at DESC
   `),
+  userIrrelevant: db.prepare(`
+    SELECT item_id FROM user_irrelevant WHERE user_id = ? ORDER BY created_at DESC
+  `),
   userComments: db.prepare(`
     SELECT id, item_id, comment_text, created_at
     FROM comments WHERE user_id = ? ORDER BY id DESC
@@ -411,6 +438,7 @@ const statements = {
       MAX(s.last_seen_at) AS last_seen_at,
       (SELECT COUNT(*) FROM user_favorites f WHERE f.user_id = u.id) AS favorites,
       (SELECT COUNT(*) FROM user_likes l WHERE l.user_id = u.id) AS likes,
+      (SELECT COUNT(*) FROM user_irrelevant r WHERE r.user_id = u.id) AS irrelevant,
       (SELECT COUNT(*) FROM comments c WHERE c.user_id = u.id) AS comments,
       (SELECT COUNT(*) FROM feedback fb WHERE fb.user_id = u.id) AS feedback
     FROM users u
@@ -801,6 +829,10 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
         ? Boolean(statements.hasLike.get(itemId, clientId))
         : false,
     likedBy: statements.likeUsers.all(itemId).map((row) => row.display_name),
+    irrelevant: Number(statements.irrelevantCount.get(itemId)?.count || 0),
+    markedIrrelevant: Boolean(
+      user && statements.hasUserIrrelevant.get(itemId, user.id),
+    ),
   };
   if (includeComments) {
     value.commentItems = commentsFor(itemId, clientId, user);
@@ -808,7 +840,7 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
   return value;
 }
 
-function allInteractions() {
+function allInteractions(user = null) {
   const result = {};
   for (const row of statements.interactions.all()) {
     result[row.item_id] = {
@@ -816,10 +848,20 @@ function allInteractions() {
       comments: Number(row.comments || 0),
       reads: Number(row.reads || 0),
       likedBy: [],
+      irrelevant: 0,
+      markedIrrelevant: false,
     };
   }
   for (const row of statements.allLikeUsers.all()) {
     if (result[row.item_id]) result[row.item_id].likedBy.push(row.display_name);
+  }
+  for (const row of statements.allIrrelevantCounts.all()) {
+    if (result[row.item_id]) result[row.item_id].irrelevant = Number(row.count || 0);
+  }
+  if (user) {
+    for (const row of statements.userIrrelevant.all(user.id)) {
+      if (result[row.item_id]) result[row.item_id].markedIrrelevant = true;
+    }
   }
   return result;
 }
@@ -974,7 +1016,9 @@ async function handleApi(request, response, requestUrl) {
   }
 
   if (request.method === "GET" && requestUrl.pathname === "/api/interactions") {
-    sendJson(response, 200, { interactions: allInteractions() });
+    sendJson(response, 200, {
+      interactions: allInteractions(authenticatedUser(request)),
+    });
     return;
   }
 
@@ -1039,6 +1083,34 @@ async function handleApi(request, response, requestUrl) {
       statements.changeAccessTotal.run(previous);
     });
     sendJson(response, 200, accessStats());
+    return;
+  }
+
+  if (
+    request.method === "PUT" &&
+    segments.length === 4 &&
+    segments[0] === "api" &&
+    segments[1] === "interactions" &&
+    segments[3] === "irrelevant"
+  ) {
+    const itemId = decodeURIComponent(segments[2]);
+    const body = await readJson(request);
+    const user = requireUser(request, response);
+    if (!user) return;
+    if (!validItemId(itemId)) {
+      apiError(response, 400, "invalid_request", "Invalid item ID.");
+      return;
+    }
+    const markedIrrelevant = Boolean(body.markedIrrelevant);
+    withTransaction(() => {
+      statements.ensureInteraction.run(itemId);
+      if (markedIrrelevant) {
+        statements.insertUserIrrelevant.run(itemId, user.id);
+      } else {
+        statements.deleteUserIrrelevant.run(itemId, user.id);
+      }
+    });
+    sendJson(response, 200, interactionFor(itemId, body.clientId, true, user));
     return;
   }
 
@@ -1206,6 +1278,7 @@ async function handleApi(request, response, requestUrl) {
       user,
       favorites: statements.userFavorites.all(user.id).map((row) => row.item_id),
       likes: statements.userLikes.all(user.id).map((row) => row.item_id),
+      irrelevant: statements.userIrrelevant.all(user.id).map((row) => row.item_id),
       comments: statements.userComments.all(user.id).map((row) => ({
         id: Number(row.id),
         itemId: row.item_id,
@@ -1238,6 +1311,7 @@ async function handleApi(request, response, requestUrl) {
       lastSeenAt: row.last_seen_at,
       favorites: Number(row.favorites || 0),
       likes: Number(row.likes || 0),
+      irrelevant: Number(row.irrelevant || 0),
       comments: Number(row.comments || 0),
       feedback: Number(row.feedback || 0),
     }));
@@ -1258,6 +1332,7 @@ async function handleApi(request, response, requestUrl) {
         activeUsers: users.filter((user) => user.lastSeenAt).length,
         favorites: users.reduce((sum, user) => sum + user.favorites, 0),
         likes: users.reduce((sum, user) => sum + user.likes, 0),
+        irrelevant: users.reduce((sum, user) => sum + user.irrelevant, 0),
         comments: users.reduce((sum, user) => sum + user.comments, 0),
         feedback: users.reduce((sum, user) => sum + user.feedback, 0),
       },

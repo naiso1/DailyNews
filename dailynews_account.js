@@ -476,6 +476,7 @@ async function renderAdminPanel() {
     ["利用履歴あり", totals.activeUsers],
     ["お気に入り", totals.favorites],
     ["いいね", totals.likes],
+    ["関連なし", totals.irrelevant],
     ["コメント", totals.comments],
     ["ご意見", totals.feedback],
   ];
@@ -483,7 +484,7 @@ async function renderAdminPanel() {
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
     <h3 class="account-section-title">ユーザー登録状況</h3>
     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日時（JST）</th><th>最終利用（JST）</th><th>活動</th></tr></thead><tbody>
-      ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
+      ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 👎 ${user.irrelevant} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
     </tbody></table></div>
     <h3 class="account-section-title">最近のご意見 <span class="account-section-count">${feedback.length}</span></h3>
     <div class="account-list">${feedback.length ? feedback.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.displayName)} / ${escapeAccountHtml(item.email)} / ${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("") : '<div class="account-empty">ご意見はまだありません。</div>'}</div>`;
