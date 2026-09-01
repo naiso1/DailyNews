@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-01 00:39";
+window.NEWS_UPDATED_AT = "2026-09-01 12:45";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -105210,7 +105210,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-08-31",
         tags: [],
-    
+
         interiorScore: 20,
         interiorReason: "pure ICE discontinuation news with no interior/product details",
         imageInterior: false,
@@ -105226,7 +105226,7 @@ window.LOADED_NEWS_DATA = [
         source: "WEB CARTOP",
         date: "2026-08-31",
         tags: ["ディスプレイ", "シート", "安全"],
-    
+
         interiorScore: 78,
         interiorReason: "seat and display plus cabin image",
         imageInterior: true,
@@ -105242,7 +105242,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-08-31",
         tags: [],
-    
+
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-01102045-kurumans-000-1-view.jpg",
         note: ""
@@ -105255,7 +105255,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR JAPAN",
         date: "2026-08-31",
         tags: [],
-    
+
         interiorScore: 72,
         interiorReason: "seat and display plus cabin image",
         imageInterior: true,
@@ -105271,7 +105271,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-08-31",
         tags: [],
-    
+
         interiorScore: 78,
         interiorReason: "seat and display plus cabin image",
         imageInterior: true,
@@ -105281,13 +105281,13 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "us1540",
-        title: "Junkyard Find: 1948 Plymouth Special De Luxe Four-Door Sedan",
-        desc: "What kind of vehicle from the 1940-1955 period is easiest to find in Western Ewe Pullet -style car graveyards? Four-door sedans made by the Chrysler Corp., no doubt about it. Here's one that I spotted in a northeastern Colorado yard a few weeks ago.",
+        title: "廃車場で見つけた 1948 年 Plymouth Special De Luxe 4 ドアセダン",
+        desc: "1940 年から 1955 年にかけての車両で、西部の車 Graveyard で最も見やすいのは間違いなくクライスラー社製の 4 ドアセダンです。数週間前にネブラスカ州東部の廃車場で発見したのがこちらです。?",
         url: "https://www.thetruthaboutcars.com/cars/news-blog/junkyard-find-1948-plymouth-special-de-luxe-4-door-sedan-45136264?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
         source: "The Truth About Cars",
         date: "2026-08-31",
         tags: ["HMI", "AR"],
-    
+
         country: "us",
         img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/08/28/14521/junkyard-find-1948-plymouth-special-de-luxe-4-door-sedan.jpg?size=720x845&nocrop=1",
         note: ""
@@ -105300,7 +105300,7 @@ window.LOADED_NEWS_DATA = [
         source: "Top Speed",
         date: "2026-08-31",
         tags: ["AI"],
-    
+
         interiorScore: 78,
         interiorReason: "seat and display plus cabin image",
         imageInterior: true,
@@ -105310,13 +105310,13 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "eu1503",
-        title: "How much does it cost to charge an electric car?",
-        desc: "Electricity prices are a lot more variable than liquid fuels – here’s what you need to know If you’re thinking of switching to an electric car, then chances are you’ll have heard some very different figures about how much it will cost to charge. There’s a good reason for that. Most forecourt fue.",
+        title: "電気自動車の充電コストはいくら？",
+        desc: "電気自動車の充電費用は液体燃料より変動が大きく、切り替えを検討する前に知っておくべき重要なポイントがあります。?",
         url: "https://www.autocar.co.uk/car-news/advice-electric-cars/how-much-does-it-cost-charge-electric-car",
         source: "AUTOCAR UK",
         date: "2026-08-31",
         tags: ["HMI", "AR"],
-    
+
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/ev-handling-test-2023-158.jpg?itok=YZ8mB_xO",
         note: ""
@@ -105329,7 +105329,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-08-31",
         tags: [],
-    
+
         country: "eu",
         img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/bmw_ix3_vs_merc_glc_ev_vs_volvo_ex60_group_test_lead.jpg?itok=u9YGSc13",
         note: ""
@@ -105342,7 +105342,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-08-31",
         tags: [],
-    
+
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--FJ73U7Aa--/t_rss_image_w_845/v1787918163/autoexpress/2026/08/3-car%20garage%201%2C941.jpg",
         note: ""
@@ -105355,7 +105355,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-08-31",
         tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
-    
+
         interiorScore: 97,
         interiorReason: "seat and display plus cabin image",
         imageInterior: true,
@@ -105365,13 +105365,13 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in1588",
-        title: "Next Gen Tata Nexon Interiors Leaked – Launch Likely In 2027",
-        desc: "Tata is updating the Nexon and the next generation model has been spied and the interiors show suggest development is in early stages The post Next Gen Tata Nexon Interiors Leaked – Launch Likely In 2027 appeared first on RushLane.",
+        title: "次世代タタ・ネクソンのインテリアリーク、2027 年発売の可能性",
+        desc: "タタはネクソンのアップデートを進めており、次世代モデルがスパイ撮影され、インテリアから開発が初期段階にあることが示唆されています。?",
         url: "https://www.rushlane.com/next-gen-tata-nexon-interiors-leaked-launch-likely-in-2027-12554635.html",
         source: "RushLane",
         date: "2026-08-31",
         tags: ["AR", "EV"],
-    
+
         interiorScore: 78,
         interiorReason: "interior image shows dashboard and steering wheel, but text is vague and early-s",
         imageInterior: true,
@@ -105387,7 +105387,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-08-31",
         tags: ["EV"],
-    
+
         country: "in",
         img: "https://www.rushlane.com/wp-content/uploads/2026/08/toyota-trolls-mg-hybrid-innova-hycross-hector-tomahawk-1.jpg",
         note: ""
@@ -105400,20 +105400,20 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-08-31",
         tags: [],
-    
+
         country: "in",
         img: "https://www.rushlane.com/wp-content/uploads/2024/05/mahindra-xuv-3xo-review-test-drive-11.jpg",
         note: ""
     },
     {
         id: "in1591",
-        title: "Upcoming 2027 Toyota Innova Hycross Facelift – Key Details We Know So Far",
-        desc: "GaadiWaadi - 2027 Toyota Innova Hycross gets a sharper grille and lighting system along with a host of changes inside the cabin The facelifted Toyota Innova Hycross has been under development for a few months now going by the spy images floating across the interweb and is expected to debut sometime.",
+        title: "2027 トヨタ・イノバハイクロスフェイスリフト、詳細情報",
+        desc: "ガディワディによると、2027 年トヨタ・イノバハイクロスはシャープなグリルと照明システム、そしてインテリアの多数の変更を備えたフェイスリフトモデルが、スパイ画像から数ヶ月の開発を経て近日発表される見込みです。?",
         url: "https://gaadiwaadi.com/production-spec-2027-toyota-innova-hycross-facelift-rendered/",
         source: "GaadiWaadi",
         date: "2026-08-31",
         tags: ["AR", "AI", "EV"],
-    
+
         interiorScore: 41,
         interiorReason: "interior changes mentioned but image is exterior only",
         imageInterior: false,
@@ -105429,7 +105429,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-08-31",
         tags: [],
-    
+
         interiorScore: 39,
         interiorReason: "interior refresh mentioned but no concrete details; image is exterior only",
         imageInterior: false,
@@ -105439,13 +105439,13 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in1593",
-        title: "2 New 7-Seater SUVs Launching Soon With Hybrid & EV Power",
-        desc: "If you’re planning to buy a three-row SUV with hybrid or electric powertrain options, it might be worth waiting a little longer as two new models are set to hit roads soon. Kia India has confirmed that the Sorento premium three-row SUV will go on sale on September 4, while Tata Motors will introduce.",
+        title: "ハイブリッド・EV 搭載の 2 台の 7 人乗り SUV が間もなく発売",
+        desc: "3 列シート SUV でハイブリッドまたは EV を検討中なら、Kia India が 9 月 4 日に発売するソレントや、Tata Motors が導入する 2 台の新型モデルが間もなく登場する。?",
         url: "https://www.indiacarnews.com/news/2-new-7-seater-suvs-launching-soon-with-hybrid-ev-power-68846/",
         source: "IndiaCarNews",
         date: "2026-08-31",
         tags: ["AR", "AI", "EV"],
-    
+
         country: "in",
         img: "https://www.indiacarnews.com/wp-content/uploads/2026/08/Untitled-design-10.webp",
         note: ""
@@ -105458,7 +105458,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-08-31",
         tags: ["ディスプレイ", "コックピット", "EV"],
-    
+
         interiorScore: 89,
         interiorReason: "seat and display plus cabin image",
         imageInterior: true,
@@ -105474,7 +105474,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-08-31",
         tags: [],
-    
+
         country: "eu",
         img: "https://www.electrive.com/media/2026/08/faw-volkswagen-id-aura-t6-china-2026-400x267.jpg",
         note: ""
@@ -105487,7 +105487,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-08-31",
         tags: [],
-    
+
         country: "eu",
         img: "https://media.automotiveworld.com/app/uploads/2026/08/31131217/yfore-manufacturing-factory-atlanta-us.jpg",
         note: ""
@@ -105500,7 +105500,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-08-31",
         tags: ["AR"],
-    
+
         country: "eu",
         img: "https://media.automotiveworld.com/app/uploads/2026/08/31125817/tata-cars-range-scaled.jpg",
         note: ""
@@ -105513,9 +105513,380 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-08-31",
         tags: ["EV", "バッテリー"],
-    
+
         country: "eu",
         img: "https://electriccarsreport.com/wp-content/uploads/2026/06/BYD-Flash-Charging.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    // 2026-08-31 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1725",
+        title: "アストンマーティン新型ヴァレン、850psのフロントV12を搭載",
+        desc: "アストンマーティンは8月14日、新型スーパーカー「ヴァレン」を発表した。世界限定150台で生産され、最初の納車は2027年第2四半期を予定している。ヴァレンは、ビスポークサービス「Q。",
+        url: "https://news.yahoo.co.jp/articles/46d807d9ce88f15220772a9dcc16166e6021db33?source=rss",
+        source: "carview!",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-00010000-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1726",
+        title: "アクシスにKN企画製アルミホイール採用のシンプルカスタム",
+        desc: "1990年発売のアクシスに、KN企画製の12インチアルミディッシュホイールを前後に採用したカスタマイズ車両が公開された。ヘッドライトとウインカーをスモーク仕様に変更し、フロントフェイスを引き締めたシンプルでセンスの良いデザインが特徴である。",
+        url: "https://news.yahoo.co.jp/articles/6844cc1a30071960cdf4e99fa0d4ad7655aeaa78?source=rss",
+        source: "MotorFan",
+        date: "2026-08-31",
+        tags: ["カスタマイズ"],
+
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-01604720-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1727",
+        title: "移動式オービス大挙投入の可能性と生活道路30km制限の警察本気度",
+        desc: "9月1日より生活道路の速度制限が30km/hに統一される。これに合わせ警察が移動式オービスを住宅街に大挙投入する可能性が示唆されている。ドライバーは速度標識やメーターへの注意がこれまで以上に求められる状況だ。",
+        url: "https://news.yahoo.co.jp/articles/e61f56ed3fd1f53f671bb29b00ebd9a0a26e797f?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-00010005-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1728",
+        title: "ランクル250専用ルーフキャリア搭載で収納力とスタイル向上",
+        desc: "ランクル250用の専用ルーフキャリアがAmazonで15%OFFセール中だ。車体加工不要の専用設計で、キャンプなどのレジャー時に積載力を高め、外観のスタイルも向上させる。",
+        url: "https://news.yahoo.co.jp/articles/6f307816030a7d3ad706be63718e8e71a8ec9f6e?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-00000018-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1729",
+        title: "日産サクラ対BYDラッコ比較後編 内装と価格の競争力",
+        desc: "BYDラッコのキャビンでは機能とデザインの融合が評価される。新型日産サクラとの比較では、中国製EVの価格競争力と日本製EVの高級感が焦点となる。両車の内装品質や装備を比較し、コンパクトEV市場での優位性を検証する。",
+        url: "https://news.yahoo.co.jp/articles/7643277502be114d24ee2c8ca300d8d354f09c17?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-31",
+        tags: ["EV", "バッテリー"],
+
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-01273461-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1730",
+        title: "新型日産サクラとBYDラッコの軽EV競争が軽自動車市場を活性化",
+        desc: "日本独自の軽自動車規格に準拠するEV市場が活発化している。2009年に三菱自動車が発表したi-MiEVを皮切りに、新型日産サクラと中国のBYDラッコが参入し、軽EVの競争が激化している。両車の比較は、日本の自動車産業の新たな展開を示している。",
+        url: "https://news.yahoo.co.jp/articles/e509f58096c5da28bc142515040a16ee8fe7eb0b?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-08-31",
+        tags: ["EV", "バッテリー"],
+
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260831-01273460-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1542",
+        title: "VW米市場で指導部交代の噂Jeep Cherokee Trailhawk発表",
+        desc: "VWが米国市場で指導部交代の可能性があるとの報道がある。また、JeepがCherokee Trailhawkを予告しており、フロントパッセンジャー用タッチスクリーンの使用率が低いことが示唆されている。",
+        url: "https://www.thedrive.com/news/vw-poised-for-us-leadership-shakeup-report-claims-tds",
+        source: "The Drive",
+        date: "2026-08-31",
+        tags: ["ディスプレイ", "AI"],
+
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/GettyImages-2269304586.jpg?quality=85&w=2048",
+        note: ""
+    },
+    {
+        id: "us1543",
+        title: "1991年型アキュラNSXの運転が涙を誘った理由",
+        desc: "自動車ジャーナリストはフィアットやフェラーリなど多数の車両を運転してきたが、初代アキュラNSXの運転体験は他と異なり、深い感動を覚えた。この車両の運転は著者に強い感情的影響を与え、涙を流すほどだった。",
+        url: "https://www.thedrive.com/news/driving-a-1991-acura-nsx-made-me-cry",
+        source: "The Drive",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/08/1991-acura-nsx-jerry-perez-6.jpeg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1544",
+        title: "ポルシェモデルは価値を維持するが、これらの車は最も価値が下落した",
+        desc: "ポルシェは価値を維持することで知られているが、ドイツブランドの高性能モデルで傾向に反し所有者に損失をもたらすのはどの車か？?",
+        url: "https://www.jalopnik.com/2245428/porsche-models-depreciated-fastest/",
+        source: "Jalopnik",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/porsche-models-hold-their-value-well-but-these-cars-depreciated-the-fastest/l-intro-1787841179.jpg",
+        note: ""
+    },
+    {
+        id: "us1545",
+        title: "レアライド・アイコン：フォード・タウラス、家族輸送の近代化（第 2 部）",
+        desc: "70 年代後半から 80 年代にかけて、フォードは国内乗用車と財務面で苦境にあり、フォード、マーキュリー、リンカーン全体をカバーするプラットフォームはわずか 3 つしかなかった。80 年代初頭の家族向けミドルサイズ車は後輪駆動の LTD であった。?",
+        url: "https://www.thetruthaboutcars.com/cars/rare-rides/rare-rides-icons-the-ford-taurus-modernizing-family-transportation-part-ii-45136267?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
+        source: "The Truth About Cars",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "us",
+        img: "https://cdn-fastly.thetruthaboutcars.com/media/2026/08/28/18351/post.jpg?size=720x845&nocrop=1",
+        note: ""
+    },
+    {
+        id: "us1546",
+        title: "メルセデス G クラスに競り勝る 10 台の高級 SUV",
+        desc: "G クラスの王座は価格に見合うほど安全ではない；これら 10 台のライバルはそれぞれ、その特別さを構成する異なる部分を攻撃する。?",
+        url: "https://www.topspeed.com/luxury-suvs-give-mercedes-g-class-run-for-its-money/",
+        source: "Top Speed",
+        date: "2026-08-31",
+        tags: ["安全"],
+
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2024/06/2024-mercedes-amg-g63-6.jpg",
+        note: ""
+    },
+    {
+        id: "us1547",
+        title: "BMWがサスペンションでドリフト制御特許取得 ドライバー支援の未来",
+        desc: "BMWがリアアクスルを跳ね上げてグリップを低下させるサスペンションベースのドリフト開始システムの特許を取得した。この技術はスポーツカーの定義やドライバー支援の在り方を見直す可能性を秘めている。",
+        url: "https://www.topspeed.com/bmw-drift-patent-driver-aids-sports-cars/",
+        source: "Top Speed",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2024/07/2025-bmw-m4-competition-4.jpg",
+        note: ""
+    },
+    {
+        id: "eu1510",
+        title: "スズキスイフトが月164ポンドの特別価格で提供される",
+        desc: "スズキのスーパーミニカー「スイフト」が、8月31日の特別オファーとして月164ポンドで提供される。この車両は楽しさと燃費の良さを兼ね備えており、銀行休業日のbargainsとして注目されている。",
+        url: "https://www.autoexpress.co.uk/suzuki/swift/368622/car-deal-day-suzuki-swift-ps164-month-bank-holiday-bargain",
+        source: "Auto Express Car News",
+        date: "2026-08-31",
+        tags: ["AR", "AI"],
+
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1714633754/autoexpress/2024/04/Suzuki Swift 2024-13.jpg",
+        note: ""
+    },
+    {
+        id: "cn1535",
+        title: "BYD製の電動4座スポーツカー「騰勢Z」が中国の販売店に先行配備",
+        desc: "BYDの電動4座スポーツカー「騰勢Z」が、2026年第4四半期の国内発売に先駆けて中国の販売店へ配備された。この車両は高級内装と先進のHMIシステムを特徴とし、コックピットの快適装備にも注目が集まっている。",
+        url: "https://carnewschina.com/2026/08/31/the-denza-z-arrived-at-dealers-in-china-ahead-of-domestic-launch-scheduled-for-q4-2026/",
+        source: "CarNewsChina - All",
+        date: "2026-08-31",
+        tags: ["HMI", "コックピット", "EV", "バッテリー"],
+
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/denza_z_dealers-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1536",
+        title: "理想汽車の創業者が次世代Megaを初代iPhoneに例え、MPV市場の転換点を示唆",
+        desc: "理想汽車の創業者である李想氏は、次世代のMega EVミニバンを初代iPhoneに例え、MPV市場が転換点に達したと述べた。この発言は、同社の新型車両が市場に与える影響の大きさを示唆している。",
+        url: "https://carnewschina.com/2026/08/31/li-auto-founder-compared-next-gen-mega-mpv-with-first-iphone/",
+        source: "CarNewsChina - All",
+        date: "2026-08-31",
+        tags: ["EV"],
+
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/li_mega_second_gen-1-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1537",
+        title: "小米のSkyNadN90Maxが上海から北京へ1230kmの長距離走行に成功",
+        desc: "Xiaomiの大型EREVクロスオーバーSUV「SkyNadN90Max」が、バッテリー満充電とフルタンクで上海から北京まで1230kmの長距離走行を達成した。実証テストは、航続性能の高さを示す結果となった。",
+        url: "https://carnewschina.com/2026/08/31/xiaomi-skynomad-n90-max-erev-suv-drove-1230-km-during-real-world-test/",
+        source: "CarNewsChina - All",
+        date: "2026-08-31",
+        tags: ["EV"],
+
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/08/skynomad_n90_max_range_webhook_1500x900_q85_1788149387.jpg",
+        note: ""
+    },
+    {
+        id: "cn1538",
+        title: "BYD、PaXiniと戦略提携し、自動車工場でロボットの活用を拡大します",
+        desc: "BYDはPaXiniと戦略提携し、自動車製造現場におけるロボット実証を推進します。BYDは工場データを提供し、PaXiniは触覚センサー技術を供与します。両社は産業用ロボットの展開を強化し、実用化に向けたモデル改善を目指します。",
+        url: "https://cnevpost.com/2026/08/31/byd-paxini-ties-auto-factories-robots/",
+        source: "CnEVPost - All",
+        date: "2026-08-31",
+        tags: ["センシング", "バッテリー"],
+
+        interiorScore: 22,
+        interiorReason: "factory partnership and robot deployment news with no interior product detail; i",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026083112283410.jpg",
+        note: ""
+    },
+    {
+        id: "cn1539",
+        title: "吉利、エジプトで中型SUV「モンジャロEM-i」を発売 グローバル展開始まる",
+        desc: "吉利はエジプトで中型SUV「モンジャロEM-i」の販売を開始した。全長4.8メートルの車体を備え、全輪駆動モデルの0-100km/h加速は5.83秒。同車は吉利初のハイブリッドDセグメントSUVとして、グローバル展開の第一弾となる。",
+        url: "https://cnevpost.com/2026/08/31/geely-launches-monjaro-em-i-egypt/",
+        source: "CnEVPost - All",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026083108022583.jpg",
+        note: ""
+    },
+    {
+        id: "cn1540",
+        title: "XPeng GX、発売から3ヶ月で累計2万台の納車達成",
+        desc: "XPengのGX SUVは発売から3ヶ月余りで累計2万台の納車数を達成した。8月の納車数は5,837台で、前月の81.8%に相当する。この急速な販売拡大は、同社の市場での人気を示している。",
+        url: "https://cnevpost.com/2026/08/31/xpeng-gx-20000-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026083106445984.jpg",
+        note: ""
+    },
+    {
+        id: "cn1541",
+        title: "GACとファーウェイのAIステーションがGX7 SUVの予約販売を開始",
+        desc: "GACとファーウェイの合弁企業であるAistalandは、9月4日にGX7 SUVの予約販売を開始する。GX7は同社の2番目のモデルで、32都市の60店舗で展示車両が公開済み。詳細はCnEVPostで確認できる。",
+        url: "https://cnevpost.com/2026/08/31/aistaland-pre-sales-gx7-sept-4/",
+        source: "CnEVPost - All",
+        date: "2026-08-31",
+        tags: ["AI", "EV"],
+
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026083105543176.jpg",
+        note: ""
+    },
+    {
+        id: "cn1542",
+        title: "中国、自動運転センサーの設計制約を緩和",
+        desc: "中国当局は、レーダーやカメラ、V2Xアンテナのサイズ制限を緩和する新規則を導入した。これにより、自動運転や車路協調システムのハードウェア設計に新たな自由度が生まれる。",
+        url: "https://cnevpost.com/2026/08/31/china-new-rules-smart-vehicle-sensors-more-design-freedom/",
+        source: "CnEVPost - All",
+        date: "2026-08-31",
+        tags: ["センシング"],
+
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026083104094888.jpg",
+        note: ""
+    },
+    {
+        id: "cn1543",
+        title: "BYDはX-PACKを欧州展開し小型EVに採用",
+        desc: "BYDは、日本専用Kカー「Racco」に採用したX-PACKバッテリー技術を欧州へ展開し、小型EVの開発を進める。欧州では2026年以降、ハンガリー工場での生産を予定しており、EUの補助金対象となる4.2メートル以下の新カテゴリーに対応する。",
+        url: "https://cnevpost.com/2026/08/31/byd-to-take-racco-k-car-tech-global/",
+        source: "CnEVPost - All",
+        date: "2026-08-31",
+        tags: ["EV", "バッテリー"],
+
+        interiorScore: 61,
+        interiorReason: "small EV cabin image shows interior layout and seating, but text is about batter",
+        imageInterior: true,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/08/2026083103064867.jpg",
+        note: ""
+    },
+    {
+        id: "in1595",
+        title: "新型キア・ソレントディーゼル7人乗りがインド販売店に到着",
+        desc: "新型キア・ソレントが9月4日にインドで発売される。先行して非カモフラージュ車両が販売店に到着し、内外装が確認された。ディーゼルエンジンとDCTトランスミッションを搭載する7人乗りSUVで、シート配置やインテリア仕様も公開されている。",
+        url: "https://www.rushlane.com/new-kia-sorento-diesel-dct-7-seater-suv-arrives-at-dealer-12554546.html",
+        source: "RushLane",
+        date: "2026-08-31",
+        tags: ["シート"],
+
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/08/new-kia-sorento-white-colour-petrol-dct-spied-4.jpg",
+        note: ""
+    },
+    {
+        id: "in1596",
+        title: "独占：キア・カーニバルハイブリッド、9 月 4 日インドで発売",
+        desc: "ガディワディによると、キア・カーニバルハイブリッドは 1.6 リットルターボガソリンエンジンと 54 kW 電気モーター、6 速自動変速機を搭載し、2026 年 9 月 4 日にインドで発売される。?",
+        url: "https://gaadiwaadi.com/exclusive-kia-carnival-hybrid-to-launch-in-india-on-september-4/",
+        source: "GaadiWaadi",
+        date: "2026-08-31",
+        tags: [],
+
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2023/10/2024-kia-carnival-3.jpg",
+        note: ""
+    },
+    {
+        id: "in1597",
+        title: "MG Hector Tomahawk EVとマヒンドラXEV 9Sの7人乗りEV比較",
+        desc: "MG Hector Tomahawk EVとマヒンドラXEV 9Sは、7人乗りSUVとして3列シートと大容量バッテリーを備える。XEV 9Sは航続距離で優位だが、Tomahawk EVは価格面で競争力を持つ。両車とも豊富なテクノロジーを搭載し、実用性と快適性を追求している。",
+        url: "https://gaadiwaadi.com/mg-hector-tomahawk-ev-vs-mahindra-xev-9s-which-is-better/",
+        source: "GaadiWaadi",
+        date: "2026-08-31",
+        tags: ["シート", "EV"],
+
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/MG-Hector-Tomahawk-EV-VS-Mahindra-XEV-9S.jpg",
+        note: ""
+    },
+    {
+        id: "us1548",
+        title: "EV実走行距離とEPA推定値の差をRedditユーザーが共有",
+        desc: "米RedditではEVユーザーが実走行距離とEPA推定値の差を共有。気候や運転習慣が航続に与える影響が浮き彫り。",
+        url: "https://electrek.co/2026/08/31/epa-estimates-vs-real-world-data-ev-drivers-share-some-surprising-experiences/",
+        source: "Electrek",
+        date: "2026-08-31",
+        tags: ["EV"],
+
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/08/2015-VW_E-Golf-Photo-01.jpg?quality=82&#038;strip=all&#038;w=1600",
+        note: ""
+    },
+    {
+        id: "eu1511",
+        title: "Switch Mobility、インドで650台の電気バス供給契約を締結",
+        desc: "Switch Mobilityはインド政府のPM E-Drive計画に基づき、650台の9メートル級電気バスを供給する契約を獲得した。同社は電気バスおよび軽商用車の製造メーカーとして知られ、インドの公共交通機関の電動化を推進する。",
+        url: "https://www.electrive.com/2026/08/31/switch-mobility-wins-tender-for-650-electric-buses-in-india/",
+        source: "Electrive",
+        date: "2026-08-31",
+        tags: ["EV"],
+
+        country: "eu",
+        img: "https://www.youtube.com/embed/3nBErH2cuZQ",
+        note: ""
+    },
+    {
+        id: "eu1512",
+        title: "エネルギー転換の解決策は長らくガレージに眠っていた",
+        desc: "干ばつ、変動する電気料金、地政学的依存が欧州エネルギー供給の脆弱性を示す。モビリティ・ハウスの創業者兼 CEO のトーマス・ライフェイナー氏によれば、解決策の重要な部分は長らく道路にあり、数百万台の電気自動車のバッテリーにあった。?",
+        url: "https://www.electrive.com/2026/08/31/the-solution-for-the-energy-transition-has-long-been-sitting-in-our-garages/",
+        source: "Electrive",
+        date: "2026-08-31",
+        tags: ["EV"],
+
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/bidirketionales-laden-bidi-home-energy-solution-v2h-v2g-the-mobility-hintergrund-background-400x267.jpg",
         note: ""
     },
 ];

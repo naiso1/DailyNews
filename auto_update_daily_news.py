@@ -259,22 +259,41 @@ def fix_existing_entries(js_text: str, items: list):
     updated = js_text
     for it in items:
         title = it.get("title", "")
+        desc = it.get("desc", "")
         img = it.get("img", "")
         url = it.get("url", "")
         source = derive_source(url, it.get("source", ""))
-        if not title or not img or not url:
+        if not title or not url:
             continue
-        esc_title = re.escape(title)
-        # Fix url within the entry that matches title
-        pattern_url = rf'(title:\s*"{esc_title}"[\s\S]*?url:\s*")([^"]*)(")'
-        def repl_url(m):
-            return f'{m.group(1)}{url}{m.group(3)}'
-        updated = re.sub(pattern_url, repl_url, updated, count=1)
-        # Fix source within the same entry
-        pattern_source = rf'(title:\s*"{esc_title}"[\s\S]*?source:\s*")([^"]*)(")'
-        def repl_source(m):
-            return f'{m.group(1)}{source}{m.group(3)}'
-        updated = re.sub(pattern_source, repl_source, updated, count=1)
+
+        # Match by URL so corrected titles/summaries can update already-published rows.
+        # Locate object boundaries explicitly; a broad regex could cross adjacent entries.
+        url_marker = f'url: "{js_escape(url)}"'
+        url_pos = updated.find(url_marker)
+        if url_pos < 0:
+            continue
+        entry_start = updated.rfind("\n    {", 0, url_pos)
+        entry_end = updated.find("\n    },", url_pos)
+        if entry_start < 0 or entry_end < 0:
+            continue
+        entry_end += len("\n    },")
+        block = updated[entry_start:entry_end]
+        replacements = {
+            "title": title,
+            "desc": desc,
+            "source": source,
+            "img": img,
+        }
+        for field, value in replacements.items():
+            if value:
+                escaped_value = js_escape(value)
+                block = re.sub(
+                    rf'({field}:\s*")((?:\\.|[^"\\])*)(")',
+                    lambda m, v=escaped_value: f'{m.group(1)}{v}{m.group(3)}',
+                    block,
+                    count=1,
+                )
+        updated = updated[:entry_start] + block + updated[entry_end:]
     return updated
 
 
