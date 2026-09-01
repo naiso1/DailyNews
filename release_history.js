@@ -2,6 +2,15 @@
 
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
+    date: "2026-09-01",
+    title: "ニュースURLとサムネイルの誤結合を修正",
+    items: [
+      "Google Newsの転送先が正しく取得できなかった記事を公開対象から除外",
+      "途中で切れたURLとGoogle Newsの共通画像を次回以降は自動で除外",
+      "本日の考察・企画アイデアから無効なニュース参照を削除",
+    ],
+  },
+  {
     date: "2026-08-31",
     title: "ニュースの並び替えを見やすく改善",
     items: [

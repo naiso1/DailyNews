@@ -97,6 +97,9 @@ SUSPICIOUS_IMAGE_MARKERS = [
     "topbar_app_qrcode", "topbar_miniprogram_qrcode", "/shared_files/ssl/images/logo.png",
     "/logo.svg", "/images/t_", "/images/facebook", "/images/twitter", "/images/google",
     "/images/pinterest",
+    # Google News fallback thumbnail. This is not the article image and was
+    # previously reused for every item when destination resolution failed.
+    "j6_cofbogxhri9im864nl_ligxvsqp2aupskei7z0cnnfdvgumwuy20nuuhkreqyrpy4beeibuc",
 ]
 
 # LLM defaults
@@ -641,6 +644,30 @@ def is_suspicious_image_url(url: str) -> bool:
     return False
 
 
+def is_valid_article_url(url: str, allow_google_news: bool = True) -> bool:
+    """Reject malformed/truncated URLs before they reach the published data."""
+    if not url or not isinstance(url, str):
+        return False
+    value = url.strip()
+    if any(ch.isspace() for ch in value):
+        return False
+    try:
+        parsed = urlparse(value)
+    except Exception:
+        return False
+    host = (parsed.hostname or "").strip(".").lower()
+    if parsed.scheme not in ("http", "https") or not host or "." not in host:
+        return False
+    if host in {"www.g", "g"} or len(host) < 4:
+        return False
+    if host.endswith("googleusercontent.com") or host.endswith("gstatic.com"):
+        return False
+    if not allow_google_news:
+        if host == "google.com" or host.endswith(".google.com") or ".google." in host:
+            return False
+    return True
+
+
 def choose_best_yimg_variant(url: str) -> str:
     """Try sibling Yahoo image variants and pick a non-placeholder one."""
     if not url or "yimg.jp" not in str(url).lower():
@@ -856,14 +883,16 @@ def resolve_final_url(url, timeout=5):
         qs = parse_qs(parsed.query)
         if parsed.netloc.endswith("news.google.com"):
             if "url" in qs and qs["url"]:
-                return qs["url"][0]
+                candidate = qs["url"][0]
+                if is_valid_article_url(candidate, allow_google_news=False):
+                    return candidate
             # base64相当のペイロードからURLを抽出
             try:
                 payload = parsed.path.split("/")[-1].split("?")[0]
                 pad = "=" * (-len(payload) % 4)
                 decoded = base64.urlsafe_b64decode(payload + pad).decode("utf-8", errors="ignore")
                 m = re.search(r"https?://[^\s'\"]+", decoded)
-                if m:
+                if m and is_valid_article_url(m.group(0), allow_google_news=False):
                     return m.group(0)
             except Exception:
                 pass
@@ -882,7 +911,9 @@ def resolve_final_url(url, timeout=5):
                         final_url = og.get("content")
             except Exception:
                 pass
-        return final_url
+        if is_valid_article_url(final_url):
+            return final_url
+        return url
     except Exception:
         return url
 
@@ -895,13 +926,15 @@ def resolve_with_playwright(url, timeout_ms=15000):
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
             page.goto(url, wait_until="load", timeout=timeout_ms)
-            final_url = page.url
+            original_host = (urlparse(url).hostname or "").lower()
+            original_is_google_news = original_host.endswith("news.google.com")
+            final_url = page.url if is_valid_article_url(page.url) else ""
             image_url = ""
             # canonical
             canonical = page.locator("link[rel=canonical]").first
             if canonical.count() > 0:
                 href = canonical.get_attribute("href")
-                if href:
+                if href and is_valid_article_url(href):
                     final_url = href
             # og:image
             og_image = page.locator("meta[property='og:image'], meta[name='og:image'], meta[name='twitter:image'], meta[property='twitter:image']").first
@@ -910,15 +943,19 @@ def resolve_with_playwright(url, timeout_ms=15000):
                 if content:
                     image_url = content
             # ページ中の外部リンクをサーチ（非google）
-            if "news.google.com" in (final_url or ""):
+            if original_is_google_news and not is_valid_article_url(final_url, allow_google_news=False):
                 html = page.content()
                 links = re.findall(r"https?://[^\"'\\s<>]+", html)
                 for l in links:
-                    if ("google" not in l) and ("gstatic" not in l) and ("youtube" not in l):
+                    if is_valid_article_url(l, allow_google_news=False) and "youtube" not in l.lower():
                         final_url = l
                         break
             browser.close()
-            return final_url, image_url
+            if original_is_google_news and not is_valid_article_url(final_url, allow_google_news=False):
+                return None, None
+            if image_url and is_suspicious_image_url(image_url):
+                image_url = ""
+            return final_url or None, image_url or None
     except Exception:
         return None, None
 
@@ -932,7 +969,7 @@ def search_article_url(title, country=""):
             results = ddgs.text(query, region=None, safesearch="off", max_results=3)
             for r in results:
                 url = r.get("href") or r.get("url")
-                if url and url.startswith("http"):
+                if url and is_valid_article_url(url, allow_google_news=False):
                     return url
     except Exception:
         return ""
@@ -2286,8 +2323,16 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             max_date = dt.max().date()
             filtered = filtered[dt.dt.date == max_date]
 
-    # 画像URLあり（論文は例外で許容）
-    filtered = filtered[(~filtered[col_image].apply(is_missing_url)) | (filtered[col_country] == "論文")]
+    # URLと画像URLが有効なものだけを公開候補にする。Google Newsの
+    # 未解決リンクや途中で切れたURLは、本文・画像の誤結合につながる。
+    filtered = filtered[filtered[col_url].apply(lambda value: is_valid_article_url(value, allow_google_news=False))]
+
+    # 画像URLあり（論文は例外で許容）。ロゴやGoogle Newsの共通画像は
+    # 記事サムネイルとして扱わない。
+    valid_image = (~filtered[col_image].apply(is_missing_url)) & (
+        ~filtered[col_image].astype(str).apply(is_suspicious_image_url)
+    )
+    filtered = filtered[valid_image | (filtered[col_country] == "論文")]
 
     # 国別にLLM判定=対象を優先し、10件未満なら非対象も追加（類似は極力除外）
     filtered = filtered.copy()
@@ -3004,30 +3049,39 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         # GoogleNewsのURLは強制的に解決を試みる
         if source == "GoogleNews" and isinstance(url_value, str) and "news.google.com" in url_value:
             resolved_pw, image_pw = resolve_with_playwright(url_value)
-            if resolved_pw:
+            if resolved_pw and is_valid_article_url(resolved_pw, allow_google_news=False):
                 item["URL"] = resolved_pw
-            if image_pw and is_missing_url(item.get("????RL")):
+            if image_pw and is_missing_url(item.get("画像URL")):
                 item["画像URL"] = image_pw
             url_value = item.get("URL")
         # なお残る news.google.com や空欄はタイトル検索で補完
         if source == "GoogleNews" and (not item.get("URL") or (isinstance(item.get("URL"), str) and "news.google.com" in item.get("URL"))):
             guessed = search_article_url(title, country)
-            if guessed:
+            if guessed and is_valid_article_url(guessed, allow_google_news=False):
                 item["URL"] = guessed
-                if is_missing_url(item.get("画像URL")):
-                    item["画像URL"] = fetch_image_from_page(guessed)
+                if is_missing_url(item.get("画像URL")) or is_suspicious_image_url(str(item.get("画像URL", ""))):
+                    guessed_image = fetch_image_from_page(guessed)
+                    if guessed_image and not is_suspicious_image_url(guessed_image):
+                        item["画像URL"] = guessed_image
         if FETCH_MISSING_IMAGES and item.get("URL") and (
             is_missing_url(item.get("画像URL")) or is_suspicious_image_url(str(item.get("画像URL", "")))
         ):
             resolved = resolve_final_url(item.get("URL"))
             item["URL"] = resolved
             missing_img_urls.append(resolved)
-            if is_missing_url(item.get("画像URL")):
+            if is_missing_url(item.get("画像URL")) or is_suspicious_image_url(str(item.get("画像URL", ""))):
                 resolved_pw, image_pw = resolve_with_playwright(resolved)
-                if resolved_pw:
+                if resolved_pw and is_valid_article_url(resolved_pw, allow_google_news=False):
                     item["URL"] = resolved_pw
-                if image_pw:
+                if image_pw and not is_suspicious_image_url(image_pw):
                     item["画像URL"] = image_pw
+        # Google Newsは実記事URLまで解決できたものだけを採用する。
+        if source == "GoogleNews" and not is_valid_article_url(item.get("URL"), allow_google_news=False):
+            item["HTML取得"] = "×"
+            item["URL"] = ""
+            item["画像URL"] = ""
+            item["LLM判定"] = "非対象"
+            item["LLM後処理"] = "スキップ"
         # URL健全性チェック（記事）
         if not check_url_ok(item.get("URL"), is_image=False):
             item["HTML取得"] = "×"
@@ -3200,9 +3254,9 @@ def enrich_existing_df(df):
         # GoogleNewsのURLは強制的に解決を試みる
         if source == "GoogleNews" and isinstance(url_value, str) and "news.google.com" in url_value:
             resolved_pw, image_pw = resolve_with_playwright(url_value)
-            if resolved_pw:
+            if resolved_pw and is_valid_article_url(resolved_pw, allow_google_news=False):
                 row["URL"] = resolved_pw
-            if image_pw and is_missing_url(row.get("????RL")):
+            if image_pw and is_missing_url(row.get("画像URL")):
                 row["画像URL"] = image_pw
         if FETCH_MISSING_IMAGES and row.get("URL") and (
             is_missing_url(row.get("画像URL")) or is_suspicious_image_url(str(row.get("画像URL", "")))
@@ -3210,19 +3264,28 @@ def enrich_existing_df(df):
             resolved = resolve_final_url(row.get("URL"))
             row["URL"] = resolved
             missing_img_urls.append(resolved)
-            if is_missing_url(row.get("画像URL")):
+            if is_missing_url(row.get("画像URL")) or is_suspicious_image_url(str(row.get("画像URL", ""))):
                 resolved_pw, image_pw = resolve_with_playwright(resolved)
-                if resolved_pw:
+                if resolved_pw and is_valid_article_url(resolved_pw, allow_google_news=False):
                     row["URL"] = resolved_pw
-                if image_pw:
+                if image_pw and not is_suspicious_image_url(image_pw):
                     row["画像URL"] = image_pw
         # なお残る news.google.com や空欄はタイトル検索で補完
         if source == "GoogleNews" and (not row.get("URL") or (isinstance(row.get("URL"), str) and "news.google.com" in row.get("URL"))):
             guessed = search_article_url(title, row.get("国", ""))
-            if guessed:
+            if guessed and is_valid_article_url(guessed, allow_google_news=False):
                 row["URL"] = guessed
-                if is_missing_url(row.get("画像URL")):
-                    row["画像URL"] = fetch_image_from_page(guessed)
+                if is_missing_url(row.get("画像URL")) or is_suspicious_image_url(str(row.get("画像URL", ""))):
+                    guessed_image = fetch_image_from_page(guessed)
+                    if guessed_image and not is_suspicious_image_url(guessed_image):
+                        row["画像URL"] = guessed_image
+        # Google Newsは実記事URLまで解決できたものだけを採用する。
+        if source == "GoogleNews" and not is_valid_article_url(row.get("URL"), allow_google_news=False):
+            row["HTML取得"] = "×"
+            row["URL"] = ""
+            row["画像URL"] = ""
+            row["LLM判定"] = "非対象"
+            row["LLM後処理"] = "スキップ"
         # URL健全性チェック（記事）
         if not check_url_ok(row.get("URL"), is_image=False):
             row["HTML取得"] = "×"
@@ -3569,7 +3632,10 @@ def main():
         df_new = df_new[OUTPUT_COLUMNS]
         
         df_new["ステータス"] = "OK"
-        df_new["HTML取得"] = "可能"
+        if "HTML取得" not in df_new.columns:
+            df_new["HTML取得"] = ""
+        html_blank = df_new["HTML取得"].astype(str).str.strip().eq("")
+        df_new.loc[html_blank, "HTML取得"] = "可能"
         
         if not df_existing.empty:
             for col in df_new.columns:
