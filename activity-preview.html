@@ -112,6 +112,51 @@
     .header-summary p { margin:0; color:var(--muted); font-size:13px; }
     .status { color:#788ba3; font-size:11px; white-space:nowrap; }
     .status strong { color:var(--accent); }
+    .demo-strip {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-top:18px;
+      padding:15px 18px;
+      border:1px solid rgba(199,157,255,.24);
+      border-radius:16px;
+      background:linear-gradient(100deg,rgba(199,157,255,.1),rgba(111,167,255,.055));
+    }
+    .demo-copy { display:flex; align-items:center; gap:12px; }
+    .demo-number { display:grid; flex:0 0 auto; width:34px; height:34px; place-items:center; border-radius:11px; background:rgba(199,157,255,.13); color:#e2cfff; font-weight:800; }
+    .demo-copy strong { display:block; font-size:13px; }
+    .demo-copy span { display:block; margin-top:2px; color:#91a0b5; font-size:11px; }
+    .demo-button {
+      flex:0 0 auto;
+      min-height:38px;
+      border:0;
+      border-radius:999px;
+      padding:0 17px;
+      background:linear-gradient(135deg,var(--purple),var(--blue));
+      color:#08111e;
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 8px 24px rgba(111,167,255,.2);
+      cursor:pointer;
+    }
+    .demo-button:disabled { opacity:.65; cursor:wait; }
+    .filters-preview {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:18px;
+      padding:14px 17px;
+      overflow-x:auto;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:var(--panel);
+      scrollbar-width:none;
+    }
+    .filters-preview::-webkit-scrollbar { display:none; }
+    .filter-label { flex:0 0 auto; color:#76889f; font-size:10px; font-weight:800; letter-spacing:.08em; }
+    .filter-chip { flex:0 0 auto; border:1px solid var(--border); border-radius:999px; padding:7px 11px; background:transparent; color:#99a8ba; font-size:11px; }
+    .filter-chip.active { border-color:rgba(125,241,194,.3); background:rgba(125,241,194,.09); color:var(--accent); font-weight:800; }
     .activity-rail {
       margin-top:18px;
       padding:18px;
@@ -138,6 +183,10 @@
       transition:.2s ease;
     }
     .activity-card:hover { transform:translateY(-2px); border-color:rgba(111,167,255,.35); background:rgba(111,167,255,.06); }
+    .activity-card.arriving { border-color:rgba(125,241,194,.5); animation:arrive .65s cubic-bezier(.2,.8,.2,1); box-shadow:0 0 0 1px rgba(125,241,194,.08),0 12px 28px rgba(0,0,0,.3); }
+    @keyframes arrive { from { opacity:0; transform:translateY(-16px) scale(.97); } to { opacity:1; transform:none; } }
+    .bell.attention { animation:ring .85s ease 2; }
+    @keyframes ring { 0%,100% { transform:rotate(0); } 25% { transform:rotate(-12deg) scale(1.08); } 70% { transform:rotate(10deg) scale(1.08); } }
     .activity-thumb { width:74px; height:74px; object-fit:cover; border-radius:10px; background:#1a2635; }
     .activity-meta { margin-bottom:3px; color:#87a0bc; font-size:10px; }
     .activity-meta strong { color:var(--accent); }
@@ -195,6 +244,47 @@
     .side-icon { display:grid; flex:0 0 auto; width:30px; height:30px; place-items:center; border-radius:9px; background:rgba(111,167,255,.1); }
     .side-item strong { display:block; margin-bottom:2px; font-size:11px; }
     .side-item span { color:#8495a9; font-size:10px; line-height:1.5; }
+    .full-section {
+      margin-top:18px;
+      padding:20px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:var(--panel);
+    }
+    .full-section-head { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:15px; }
+    .full-section-head h2 { margin:0; font-size:18px; }
+    .full-section-head span { color:#7e90a7; font-size:10px; }
+    .past-article {
+      display:grid;
+      grid-template-columns:190px minmax(0,1fr) 290px;
+      gap:18px;
+      align-items:stretch;
+      padding:14px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:15px;
+      background:rgba(255,255,255,.025);
+      transition:.45s ease;
+      scroll-margin-top:22px;
+    }
+    .past-article.spotlight { border-color:rgba(125,241,194,.55); box-shadow:0 0 0 4px rgba(125,241,194,.07),0 18px 50px rgba(0,0,0,.3); }
+    .past-article>img { width:190px; height:132px; object-fit:cover; border-radius:12px; background:#1b2634; }
+    .past-copy h3 { margin:0 0 7px; font-size:15px; }
+    .past-copy p { margin:0; color:#95a6b9; font-size:11px; line-height:1.65; }
+    .past-label { display:inline-block; margin-bottom:7px; border-radius:6px; padding:3px 7px; background:rgba(255,155,114,.11); color:var(--orange); font-size:9px; font-weight:800; }
+    .comment-focus { padding:13px; border-left:2px solid var(--accent); border-radius:0 11px 11px 0; background:rgba(125,241,194,.06); }
+    .comment-focus strong { display:block; color:var(--accent); font-size:11px; }
+    .comment-focus p { margin:6px 0; color:#c0ccda; font-size:11px; line-height:1.6; }
+    .comment-focus span { color:#71839a; font-size:9px; }
+    .analysis-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+    .analysis-card { min-height:126px; padding:15px; border:1px solid rgba(255,255,255,.07); border-radius:14px; background:rgba(255,255,255,.02); }
+    .analysis-card b { display:block; margin-bottom:8px; color:#a9c8ff; font-size:11px; }
+    .analysis-card p { margin:0; color:#aab8c9; font-size:11px; line-height:1.75; }
+    .idea-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .idea-card { overflow:hidden; border:1px solid rgba(255,255,255,.08); border-radius:15px; background:#0d1622; }
+    .idea-card img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#1b2634; }
+    .idea-card div { padding:13px; }
+    .idea-card h3 { margin:0 0 5px; font-size:13px; }
+    .idea-card p { margin:0; color:#8fa0b5; font-size:10px; line-height:1.6; }
     .drawer-backdrop { position:fixed; inset:0; z-index:20; visibility:hidden; background:rgba(1,4,9,.5); opacity:0; transition:.25s; }
     .drawer-backdrop.open { visibility:visible; opacity:1; }
     .drawer {
@@ -240,6 +330,9 @@
       .workspace { grid-template-columns:1fr; }
       .side-panel { display:grid; grid-template-columns:repeat(3,1fr); }
       .side-title { grid-column:1/-1; }
+      .past-article { grid-template-columns:150px minmax(0,1fr); }
+      .past-article>img { width:150px; height:112px; }
+      .comment-focus { grid-column:1/-1; }
     }
     @media(max-width:680px) {
       body { padding:10px 9px 60px; }
@@ -256,6 +349,12 @@
       .conversation time { grid-column:2; text-align:left; }
       .side-panel { grid-template-columns:1fr; }
       .side-title { grid-column:auto; }
+      .demo-strip { align-items:flex-start; flex-direction:column; }
+      .demo-button { width:100%; }
+      .past-article { grid-template-columns:1fr; }
+      .past-article>img { width:100%; height:180px; }
+      .comment-focus { grid-column:auto; }
+      .analysis-grid,.idea-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -281,21 +380,33 @@
       </div>
     </header>
 
+    <section class="demo-strip" aria-label="動作デモ">
+      <div class="demo-copy">
+        <span class="demo-number">▶</span>
+        <div><strong>コメントが届いたときの動きを確認</strong><span>通知が増え、過去記事が「みんなの動き」に現れ、コメント位置へ移動します。</span></div>
+      </div>
+      <button class="demo-button" id="playDemo" type="button">動きを再生する</button>
+    </section>
+
+    <nav class="filters-preview" aria-label="画面全体のフィルター例">
+      <span class="filter-label">地域</span><button class="filter-chip active" type="button">🌐 世界版 50</button><button class="filter-chip" type="button">🇯🇵 日本 10</button><button class="filter-chip" type="button">🇨🇳 中国 10</button><button class="filter-chip" type="button">🇮🇳 インド 10</button><button class="filter-chip" type="button">🇺🇸 米国 10</button><button class="filter-chip" type="button">🇪🇺 欧州 10</button><span class="filter-label">並び順</span><button class="filter-chip" type="button">New・反響順</button>
+    </nav>
+
     <section class="activity-rail">
       <div class="section-head">
         <div><span class="eyebrow">RECENT ACTIVITY</span><h2>みんなの動き</h2></div>
-        <p>過去記事の新しい会話を、ニュースを邪魔しない範囲で3件だけ表示</p>
+        <p id="activityHint">過去記事の新しい会話を、ニュースを邪魔しない範囲で3件だけ表示</p>
       </div>
-      <div class="activity-grid">
-        <article class="activity-card" data-message="該当記事とコメント位置を開く想定です">
+      <div class="activity-grid" id="activityGrid">
+        <article class="activity-card" data-target="pastArticle">
           <img class="activity-thumb" src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車載カメラ" onerror="this.src='images/idea_1685.png'">
           <div><div class="activity-meta"><strong>田中さん</strong>がコメント・12分前</div><h3 class="activity-title">ミラーカメラとレーダー融合で全車室監視</h3><p class="activity-comment">「後席まで含めた検知範囲が面白いです」</p></div>
         </article>
-        <article class="activity-card" data-message="参加中の記事を開く想定です">
+        <article class="activity-card" data-target="pastArticle">
           <img class="activity-thumb" src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
           <div><div class="activity-meta"><strong>鈴木さんほか2名</strong>が返信・34分前</div><h3 class="activity-title">マツダCX-6e、デジタルコックピットを採用</h3><p class="activity-comment">あなたのコメントに新しい返信があります</p></div>
         </article>
-        <article class="activity-card" data-message="コメント一覧を開く想定です">
+        <article class="activity-card" data-target="pastArticle">
           <img class="activity-thumb" src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
           <div><div class="activity-meta"><strong>開発企画グループ</strong>で反響・1時間前</div><h3 class="activity-title">日産とホンダ、次世代SDVを共同開発</h3><p class="activity-comment">コメント5件・いいね8件に増えました</p></div>
         </article>
@@ -355,15 +466,44 @@
         <div class="side-item"><span class="side-icon">🔔</span><div><strong>自分に関係する通知</strong><span>返信・参加記事・コメントへの反応を優先します。</span></div></div>
       </aside>
     </div>
+
+    <section class="full-section" id="pastSection">
+      <div class="full-section-head"><h2>過去記事・続いている会話</h2><span>新着一覧とは分離しているため、ニュースの並びは変わりません</span></div>
+      <article class="past-article" id="pastArticle">
+        <img src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車室監視システム" onerror="this.src='images/idea_1685.png'">
+        <div class="past-copy"><span class="past-label">8月27日の記事・コメントで再浮上</span><h3>ミラーカメラとレーダー融合で全車室監視システム発表</h3><p>車室内カメラとレーダーを組み合わせ、乗員の状態や後席を含む車内環境を把握するシステム。過去の記事でも新しいコメントが付くと、この欄から再び確認できます。</p></div>
+        <div class="comment-focus"><strong id="focusUser">田中さん・12分前</strong><p id="focusComment">後席まで含めた検知範囲が面白いです。内装部品側からセンサーを隠す工夫も検討できそうです。</p><span>👍 3　返信 1</span></div>
+      </article>
+    </section>
+
+    <section class="full-section">
+      <div class="full-section-head"><h2>各地域の考察</h2><span>本番ページではこの後に市場トレンドが続きます</span></div>
+      <div class="analysis-grid">
+        <article class="analysis-card"><b>🇯🇵 JAPAN</b><p>安全機能を目立たせず内装へ組み込む技術が重要になります。センサー配置と表皮・加飾を一体で検討する必要があります。</p></article>
+        <article class="analysis-card"><b>🇨🇳 CHINA</b><p>大型画面だけでなく、家族利用に合わせた後席体験やパーソナライズへの期待が高まっています。</p></article>
+        <article class="analysis-card"><b>🇪🇺 EUROPE</b><p>環境対応素材とソフトウェア更新に対応できる、長く使える内装設計が求められます。</p></article>
+      </div>
+    </section>
+
+    <section class="full-section">
+      <div class="full-section-head"><h2>企画アイデア例</h2><span>ニュースと考察をもとにした車室内装製品の提案</span></div>
+      <div class="idea-grid">
+        <article class="idea-card"><img src="images/idea_1685.png" alt="企画アイデア"><div><h3>見えない乗員見守りトリム</h3><p>レーダーとカメラを加飾部品に自然に組み込み、後席まで見守ります。</p></div></article>
+        <article class="idea-card"><img src="images/idea_1684.png" alt="企画アイデア"><div><h3>視線移動を減らす情報レイヤー</h3><p>必要な情報だけを運転状況に合わせて表示するコックピットです。</p></div></article>
+        <article class="idea-card"><img src="images/idea_1683.png" alt="企画アイデア"><div><h3>更新できるモジュラー内装</h3><p>ソフトウェアと部品を段階的に更新し、長期間使える内装を目指します。</p></div></article>
+      </div>
+    </section>
   </div>
 
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="drawer" id="noticeDrawer" aria-label="通知一覧">
     <div class="drawer-head"><h2>通知</h2><button class="text-button" id="markRead" type="button">すべて既読にする</button></div>
-    <article class="notice unread"><span class="side-icon">↩</span><div><p><strong>鈴木さん</strong>が「マツダCX-6e」のあなたのコメントに返信しました。</p><time>34分前</time></div></article>
-    <article class="notice unread"><span class="side-icon">💬</span><div><p>参加中の「全車室監視システム」に<strong>新しいコメント</strong>があります。</p><time>42分前</time></div></article>
-    <article class="notice unread"><span class="side-icon">👍</span><div><p><strong>3人</strong>があなたのコメントにいいねしました。</p><time>1時間前</time></div></article>
-    <article class="notice"><span class="side-icon">★</span><div><p>お気に入り記事に新しいコメントが追加されました。</p><time>昨日 16:20</time></div></article>
+    <div id="noticeList">
+      <article class="notice unread"><span class="side-icon">↩</span><div><p><strong>鈴木さん</strong>が「マツダCX-6e」のあなたのコメントに返信しました。</p><time>34分前</time></div></article>
+      <article class="notice unread"><span class="side-icon">💬</span><div><p>参加中の「全車室監視システム」に<strong>新しいコメント</strong>があります。</p><time>42分前</time></div></article>
+      <article class="notice unread"><span class="side-icon">👍</span><div><p><strong>3人</strong>があなたのコメントにいいねしました。</p><time>1時間前</time></div></article>
+      <article class="notice"><span class="side-icon">★</span><div><p>お気に入り記事に新しいコメントが追加されました。</p><time>昨日 16:20</time></div></article>
+    </div>
     <p class="drawer-note">通知を増やしすぎないよう、単純ないいねはまとめて表示します。本番ではユーザーごとの未読状態をサーバーに保存する想定です。</p>
   </aside>
   <div class="toast" id="toast"></div>
@@ -373,6 +513,8 @@
     const backdrop = document.getElementById("drawerBackdrop");
     const unreadCount = document.getElementById("unreadCount");
     const toast = document.getElementById("toast");
+    const activityGrid = document.getElementById("activityGrid");
+    const initialActivity = activityGrid.innerHTML;
     const setDrawer = (open) => {
       drawer.classList.toggle("open", open);
       backdrop.classList.toggle("open", open);
@@ -399,11 +541,68 @@
         document.getElementById(`view-${button.dataset.view}`).classList.add("active");
       });
     });
-    document.querySelectorAll(".activity-card").forEach((card) => card.addEventListener("click", () => showToast(card.dataset.message)));
+    const openActivity = (card) => {
+      const target = document.getElementById(card.dataset.target || "pastArticle");
+      if (!target) return;
+      setDrawer(false);
+      target.scrollIntoView({ behavior:"smooth", block:"center" });
+      target.classList.add("spotlight");
+      setTimeout(() => target.classList.remove("spotlight"), 2600);
+      showToast("該当記事の新しいコメントへ移動しました");
+    };
+    activityGrid.addEventListener("click", (event) => {
+      const card = event.target.closest(".activity-card");
+      if (card) openActivity(card);
+    });
     document.getElementById("myPageButton").addEventListener("click", () => {
       document.querySelector('[data-view="mine"]').click();
       document.querySelector(".feed-panel").scrollIntoView({ behavior:"smooth", block:"start" });
       showToast("マイページの「参加した記事」を表示しました");
+    });
+    document.getElementById("playDemo").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      button.disabled = true;
+      button.textContent = "コメントを受信中…";
+      activityGrid.innerHTML = initialActivity;
+      document.getElementById("activityHint").textContent = "新しいコメントを受信しています…";
+      unreadCount.hidden = false;
+      unreadCount.textContent = "3";
+      document.getElementById("noticeList").querySelector(".demo-notice")?.remove();
+      document.querySelector(".activity-rail").scrollIntoView({ behavior:"smooth", block:"center" });
+      await new Promise((resolve) => setTimeout(resolve, 900));
+
+      const previousCards = [...activityGrid.children];
+      const previousRects = new Map(previousCards.map((card) => [card, card.getBoundingClientRect()]));
+      const incoming = document.createElement("article");
+      incoming.className = "activity-card arriving";
+      incoming.dataset.target = "pastArticle";
+      incoming.innerHTML = `<img class="activity-thumb" src="images/idea_1685.png" alt="新しいコメント"><div><div class="activity-meta"><strong>山田さん</strong>がコメント・たった今</div><h3 class="activity-title">8月27日の全車室監視システムの記事</h3><p class="activity-comment">「表皮とセンサーの組み合わせを試したいです」</p></div>`;
+      activityGrid.prepend(incoming);
+      previousCards.at(-1)?.remove();
+      previousCards.slice(0,-1).forEach((card) => {
+        const before = previousRects.get(card);
+        const after = card.getBoundingClientRect();
+        card.animate(
+          [{ transform:`translate(${before.left-after.left}px,${before.top-after.top}px)` },{ transform:"translate(0,0)" }],
+          { duration:650, easing:"cubic-bezier(.2,.8,.2,1)" }
+        );
+      });
+      unreadCount.textContent = "4";
+      document.getElementById("noticeButton").classList.add("attention");
+      document.getElementById("activityHint").textContent = "8月27日の記事に新しいコメントが届き、先頭へ再浮上しました";
+      document.getElementById("focusUser").textContent = "山田さん・たった今";
+      document.getElementById("focusComment").textContent = "表皮とセンサーの組み合わせを試したいです。試作段階で検知性能も比較できるとよいと思います。";
+
+      const notice = document.createElement("article");
+      notice.className = "notice unread demo-notice";
+      notice.style.cursor = "pointer";
+      notice.innerHTML = `<span class="side-icon">💬</span><div><p><strong>山田さん</strong>が8月27日の記事にコメントしました。</p><time>たった今</time></div>`;
+      notice.addEventListener("click", () => openActivity(incoming));
+      document.getElementById("noticeList").prepend(notice);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setDrawer(true);
+      button.disabled = false;
+      button.textContent = "もう一度再生する";
     });
     document.addEventListener("keydown", (event) => { if (event.key === "Escape") setDrawer(false); });
   </script>
