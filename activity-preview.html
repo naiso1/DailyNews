@@ -3,608 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>交流機能プレビュー | 内装製品デイリーニュース</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>交流機能・本番画面プレビュー</title>
   <style>
-    :root {
-      --bg:#050a12;
-      --panel:rgba(16,22,35,.92);
-      --panel-2:#111b28;
-      --text:#e9edf5;
-      --muted:#91a0b5;
-      --accent:#7df1c2;
-      --blue:#6fa7ff;
-      --orange:#ff9b72;
-      --purple:#c79dff;
-      --border:rgba(255,255,255,.09);
-      --shadow:0 20px 60px rgba(0,0,0,.42);
-    }
     * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      min-height:100vh;
-      margin:0;
-      padding:20px 18px 80px;
-      background:
-        radial-gradient(circle at 12% 5%,rgba(125,241,194,.07),transparent 25%),
-        radial-gradient(circle at 88% 9%,rgba(111,167,255,.09),transparent 28%),
-        var(--bg);
-      color:var(--text);
-      font-family:"Manrope","Noto Sans JP",sans-serif;
-    }
-    button { font:inherit; }
-    .shell { width:min(1400px,100%); margin:auto; }
-    .preview-bar {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:10px;
-      color:#75869d;
-      font-size:11px;
-      letter-spacing:.08em;
-    }
-    .preview-bar strong { color:var(--accent); }
-    .preview-bar a { color:#9ebeff; text-decoration:none; }
-    .site-header {
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:14px 24px;
-      padding:22px 26px;
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:linear-gradient(120deg,rgba(125,241,194,.06),rgba(111,167,255,.07));
-      box-shadow:var(--shadow);
-    }
-    .brand { display:flex; min-width:0; align-items:center; gap:12px; }
-    .brand img { width:32px; height:32px; }
-    .brand h1 {
-      margin:0;
-      overflow:hidden;
-      background:linear-gradient(135deg,var(--text),var(--blue));
-      background-clip:text;
-      color:transparent;
-      font-size:clamp(23px,3vw,34px);
-      line-height:1.25;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .header-actions { display:flex; align-items:center; justify-content:flex-end; gap:9px; }
-    .header-button {
-      position:relative;
-      min-height:38px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:0 14px;
-      background:rgba(255,255,255,.035);
-      color:#d9e3ef;
-      font-weight:700;
-      cursor:pointer;
-    }
-    .header-button:hover { border-color:rgba(125,241,194,.4); background:rgba(125,241,194,.08); }
-    .bell { width:42px; padding:0; font-size:17px; }
-    .unread-count {
-      position:absolute;
-      top:-5px;
-      right:-3px;
-      display:grid;
-      min-width:19px;
-      height:19px;
-      place-items:center;
-      border:2px solid #101925;
-      border-radius:10px;
-      background:#ff6473;
-      color:white;
-      font-size:10px;
-      font-weight:800;
-    }
-    .header-summary {
-      display:flex;
-      grid-column:1/-1;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      padding-top:13px;
-      border-top:1px solid rgba(255,255,255,.07);
-    }
-    .header-summary p { margin:0; color:var(--muted); font-size:13px; }
-    .status { color:#788ba3; font-size:11px; white-space:nowrap; }
-    .status strong { color:var(--accent); }
-    .demo-strip {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      margin-top:18px;
-      padding:15px 18px;
-      border:1px solid rgba(199,157,255,.24);
-      border-radius:16px;
-      background:linear-gradient(100deg,rgba(199,157,255,.1),rgba(111,167,255,.055));
-    }
-    .demo-copy { display:flex; align-items:center; gap:12px; }
-    .demo-number { display:grid; flex:0 0 auto; width:34px; height:34px; place-items:center; border-radius:11px; background:rgba(199,157,255,.13); color:#e2cfff; font-weight:800; }
-    .demo-copy strong { display:block; font-size:13px; }
-    .demo-copy span { display:block; margin-top:2px; color:#91a0b5; font-size:11px; }
-    .demo-button {
-      flex:0 0 auto;
-      min-height:38px;
-      border:0;
-      border-radius:999px;
-      padding:0 17px;
-      background:linear-gradient(135deg,var(--purple),var(--blue));
-      color:#08111e;
-      font-size:12px;
-      font-weight:800;
-      box-shadow:0 8px 24px rgba(111,167,255,.2);
-      cursor:pointer;
-    }
-    .demo-button:disabled { opacity:.65; cursor:wait; }
-    .filters-preview {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-top:18px;
-      padding:14px 17px;
-      overflow-x:auto;
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:var(--panel);
-      scrollbar-width:none;
-    }
-    .filters-preview::-webkit-scrollbar { display:none; }
-    .filter-label { flex:0 0 auto; color:#76889f; font-size:10px; font-weight:800; letter-spacing:.08em; }
-    .filter-chip { flex:0 0 auto; border:1px solid var(--border); border-radius:999px; padding:7px 11px; background:transparent; color:#99a8ba; font-size:11px; }
-    .filter-chip.active { border-color:rgba(125,241,194,.3); background:rgba(125,241,194,.09); color:var(--accent); font-weight:800; }
-    .activity-rail {
-      margin-top:18px;
-      padding:18px;
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:var(--panel);
-      box-shadow:0 12px 35px rgba(0,0,0,.25);
-    }
-    .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:13px; }
-    .eyebrow { color:var(--accent); font-size:10px; font-weight:800; letter-spacing:.15em; }
-    .section-head h2 { margin:3px 0 0; font-size:18px; }
-    .section-head p { margin:0; color:var(--muted); font-size:11px; }
-    .activity-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-    .activity-card {
-      display:grid;
-      grid-template-columns:74px minmax(0,1fr);
-      gap:12px;
-      min-width:0;
-      padding:10px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;
-      background:rgba(255,255,255,.025);
-      cursor:pointer;
-      transition:.2s ease;
-    }
-    .activity-card:hover { transform:translateY(-2px); border-color:rgba(111,167,255,.35); background:rgba(111,167,255,.06); }
-    .activity-card.arriving { border-color:rgba(125,241,194,.5); animation:arrive .65s cubic-bezier(.2,.8,.2,1); box-shadow:0 0 0 1px rgba(125,241,194,.08),0 12px 28px rgba(0,0,0,.3); }
-    @keyframes arrive { from { opacity:0; transform:translateY(-16px) scale(.97); } to { opacity:1; transform:none; } }
-    .bell.attention { animation:ring .85s ease 2; }
-    @keyframes ring { 0%,100% { transform:rotate(0); } 25% { transform:rotate(-12deg) scale(1.08); } 70% { transform:rotate(10deg) scale(1.08); } }
-    .activity-thumb { width:74px; height:74px; object-fit:cover; border-radius:10px; background:#1a2635; }
-    .activity-meta { margin-bottom:3px; color:#87a0bc; font-size:10px; }
-    .activity-meta strong { color:var(--accent); }
-    .activity-title { margin:0; overflow:hidden; font-size:12px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
-    .activity-comment { margin:5px 0 0; overflow:hidden; color:#aebdce; font-size:11px; line-height:1.45; text-overflow:ellipsis; white-space:nowrap; }
-    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:18px; margin-top:18px; }
-    .feed-panel,.side-panel { border:1px solid var(--border); border-radius:18px; background:var(--panel); }
-    .feed-panel { padding:18px; }
-    .tabs { display:flex; gap:7px; margin-bottom:16px; overflow:auto; }
-    .tab {
-      flex:0 0 auto;
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:8px 13px;
-      background:transparent;
-      color:#9faec1;
-      font-size:12px;
-      cursor:pointer;
-    }
-    .tab.active { border-color:transparent; background:linear-gradient(135deg,var(--accent),var(--blue)); color:#07111d; font-weight:800; }
-    .feed-view { display:none; }
-    .feed-view.active { display:block; animation:fade .25s ease; }
-    @keyframes fade { from { opacity:0; transform:translateY(5px); } }
-    .news-row {
-      display:grid;
-      grid-template-columns:150px minmax(0,1fr) auto;
-      gap:15px;
-      align-items:center;
-      padding:12px;
-      border-top:1px solid rgba(255,255,255,.075);
-    }
-    .news-row:first-child { border-top:0; }
-    .news-row img { width:150px; height:92px; object-fit:cover; border-radius:11px; background:#1b2634; }
-    .news-row h3 { margin:0 0 5px; font-size:14px; line-height:1.5; }
-    .news-row p { margin:0; color:#97a8bb; font-size:11px; line-height:1.6; }
-    .reaction { display:flex; flex-direction:column; gap:5px; color:#8798ad; font-size:10px; text-align:right; white-space:nowrap; }
-    .reaction strong { color:#dbe5f0; }
-    .conversation {
-      display:grid;
-      grid-template-columns:42px minmax(0,1fr) 112px;
-      gap:12px;
-      align-items:start;
-      padding:14px 8px;
-      border-top:1px solid rgba(255,255,255,.075);
-    }
-    .conversation:first-child { border-top:0; }
-    .avatar { display:grid; width:38px; height:38px; place-items:center; border-radius:12px; background:linear-gradient(145deg,#24405a,#162331); color:var(--accent); font-size:12px; font-weight:800; }
-    .conversation h3 { margin:0; font-size:13px; }
-    .conversation p { margin:5px 0 0; color:#b4c1d1; font-size:12px; line-height:1.6; }
-    .conversation time { color:#72839a; font-size:10px; text-align:right; }
-    .side-panel { align-self:start; overflow:hidden; }
-    .side-title { padding:16px 17px 12px; border-bottom:1px solid var(--border); font-size:14px; font-weight:800; }
-    .side-item { display:flex; gap:10px; padding:13px 16px; border-bottom:1px solid rgba(255,255,255,.06); }
-    .side-item:last-child { border-bottom:0; }
-    .side-icon { display:grid; flex:0 0 auto; width:30px; height:30px; place-items:center; border-radius:9px; background:rgba(111,167,255,.1); }
-    .side-item strong { display:block; margin-bottom:2px; font-size:11px; }
-    .side-item span { color:#8495a9; font-size:10px; line-height:1.5; }
-    .full-section {
-      margin-top:18px;
-      padding:20px;
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:var(--panel);
-    }
-    .full-section-head { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:15px; }
-    .full-section-head h2 { margin:0; font-size:18px; }
-    .full-section-head span { color:#7e90a7; font-size:10px; }
-    .past-article {
-      display:grid;
-      grid-template-columns:190px minmax(0,1fr) 290px;
-      gap:18px;
-      align-items:stretch;
-      padding:14px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:15px;
-      background:rgba(255,255,255,.025);
-      transition:.45s ease;
-      scroll-margin-top:22px;
-    }
-    .past-article.spotlight { border-color:rgba(125,241,194,.55); box-shadow:0 0 0 4px rgba(125,241,194,.07),0 18px 50px rgba(0,0,0,.3); }
-    .past-article>img { width:190px; height:132px; object-fit:cover; border-radius:12px; background:#1b2634; }
-    .past-copy h3 { margin:0 0 7px; font-size:15px; }
-    .past-copy p { margin:0; color:#95a6b9; font-size:11px; line-height:1.65; }
-    .past-label { display:inline-block; margin-bottom:7px; border-radius:6px; padding:3px 7px; background:rgba(255,155,114,.11); color:var(--orange); font-size:9px; font-weight:800; }
-    .comment-focus { padding:13px; border-left:2px solid var(--accent); border-radius:0 11px 11px 0; background:rgba(125,241,194,.06); }
-    .comment-focus strong { display:block; color:var(--accent); font-size:11px; }
-    .comment-focus p { margin:6px 0; color:#c0ccda; font-size:11px; line-height:1.6; }
-    .comment-focus span { color:#71839a; font-size:9px; }
-    .analysis-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
-    .analysis-card { min-height:126px; padding:15px; border:1px solid rgba(255,255,255,.07); border-radius:14px; background:rgba(255,255,255,.02); }
-    .analysis-card b { display:block; margin-bottom:8px; color:#a9c8ff; font-size:11px; }
-    .analysis-card p { margin:0; color:#aab8c9; font-size:11px; line-height:1.75; }
-    .idea-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-    .idea-card { overflow:hidden; border:1px solid rgba(255,255,255,.08); border-radius:15px; background:#0d1622; }
-    .idea-card img { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; background:#1b2634; }
-    .idea-card div { padding:13px; }
-    .idea-card h3 { margin:0 0 5px; font-size:13px; }
-    .idea-card p { margin:0; color:#8fa0b5; font-size:10px; line-height:1.6; }
-    .drawer-backdrop { position:fixed; inset:0; z-index:20; visibility:hidden; background:rgba(1,4,9,.5); opacity:0; transition:.25s; }
-    .drawer-backdrop.open { visibility:visible; opacity:1; }
-    .drawer {
-      position:fixed;
-      top:0;
-      right:0;
-      z-index:21;
-      width:min(420px,94vw);
-      height:100vh;
-      padding:20px;
-      overflow:auto;
-      border-left:1px solid rgba(111,167,255,.23);
-      background:#0c1420;
-      box-shadow:-25px 0 70px rgba(0,0,0,.55);
-      transform:translateX(105%);
-      transition:.3s cubic-bezier(.22,.75,.25,1);
-    }
-    .drawer.open { transform:translateX(0); }
-    .drawer-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
-    .drawer-head h2 { margin:0; font-size:18px; }
-    .text-button { border:0; background:none; color:#8fb9ff; font-size:11px; cursor:pointer; }
-    .notice {
-      position:relative;
-      display:grid;
-      grid-template-columns:38px minmax(0,1fr);
-      gap:11px;
-      margin-bottom:8px;
-      padding:13px;
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:13px;
-      background:rgba(255,255,255,.025);
-    }
-    .notice.unread { border-color:rgba(111,167,255,.24); background:rgba(111,167,255,.07); }
-    .notice.unread::after { position:absolute; top:15px; right:12px; width:6px; height:6px; border-radius:50%; background:var(--blue); content:""; }
-    .notice p { margin:0; padding-right:10px; color:#c7d2df; font-size:12px; line-height:1.55; }
-    .notice p strong { color:white; }
-    .notice time { display:block; margin-top:5px; color:#6f8198; font-size:9px; }
-    .drawer-note { margin:18px 2px; color:#687b92; font-size:10px; line-height:1.6; }
-    .toast { position:fixed; left:50%; bottom:24px; z-index:30; padding:10px 16px; border:1px solid rgba(125,241,194,.25); border-radius:999px; background:#14251f; color:#dffbf0; font-size:12px; opacity:0; transform:translate(-50%,15px); pointer-events:none; transition:.25s; }
-    .toast.show { opacity:1; transform:translate(-50%,0); }
-    @media(max-width:980px) {
-      .activity-grid { grid-template-columns:1fr; }
-      .workspace { grid-template-columns:1fr; }
-      .side-panel { display:grid; grid-template-columns:repeat(3,1fr); }
-      .side-title { grid-column:1/-1; }
-      .past-article { grid-template-columns:150px minmax(0,1fr); }
-      .past-article>img { width:150px; height:112px; }
-      .comment-focus { grid-column:1/-1; }
-    }
-    @media(max-width:680px) {
-      body { padding:10px 9px 60px; }
-      .site-header { grid-template-columns:1fr; gap:12px; padding:16px; }
-      .header-actions { justify-content:flex-start; }
-      .header-summary { flex-direction:column; align-items:flex-start; gap:7px; }
-      .preview-bar span:last-child { display:none; }
-      .activity-rail,.feed-panel { padding:14px; }
-      .section-head { align-items:flex-start; flex-direction:column; gap:5px; }
-      .news-row { grid-template-columns:92px minmax(0,1fr); gap:11px; }
-      .news-row img { width:92px; height:72px; }
-      .reaction { grid-column:2; flex-direction:row; text-align:left; }
-      .conversation { grid-template-columns:36px minmax(0,1fr); }
-      .conversation time { grid-column:2; text-align:left; }
-      .side-panel { grid-template-columns:1fr; }
-      .side-title { grid-column:auto; }
-      .demo-strip { align-items:flex-start; flex-direction:column; }
-      .demo-button { width:100%; }
-      .past-article { grid-template-columns:1fr; }
-      .past-article>img { width:100%; height:180px; }
-      .comment-focus { grid-column:auto; }
-      .analysis-grid,.idea-grid { grid-template-columns:1fr; }
-    }
+    html,body { width:100%; height:100%; margin:0; overflow:hidden; background:#050a12; font-family:"Noto Sans JP","Yu Gothic UI",sans-serif; }
+    .prototype-toolbar { position:fixed; inset:0 0 auto; z-index:10; display:flex; height:58px; align-items:center; justify-content:space-between; gap:18px; padding:0 18px; border-bottom:1px solid rgba(199,157,255,.3); background:linear-gradient(100deg,#171426,#0d1c2b); color:#eef3fa; box-shadow:0 12px 35px rgba(0,0,0,.38); }
+    .prototype-copy { min-width:0; }
+    .prototype-copy strong { display:block; font-size:13px; }
+    .prototype-copy span { display:block; margin-top:2px; overflow:hidden; color:#9ba9bb; font-size:10px; text-overflow:ellipsis; white-space:nowrap; }
+    .prototype-actions { display:flex; flex:0 0 auto; align-items:center; gap:8px; }
+    .prototype-button,.back-link { min-height:34px; border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:0 13px; background:rgba(255,255,255,.045); color:#dbe4ef; font-size:11px; font-weight:700; text-decoration:none; cursor:pointer; }
+    .prototype-button { border:0; background:linear-gradient(135deg,#c79dff,#6fa7ff); color:#09111d; }
+    .prototype-button:disabled { opacity:.58; cursor:wait; }
+    #productionFrame { position:fixed; inset:58px 0 0; width:100%; height:calc(100% - 58px); border:0; background:#050a12; }
+    .loading { position:fixed; inset:58px 0 0; z-index:5; display:grid; place-items:center; background:#050a12; color:#8191a7; font-size:12px; }
+    .loading.hidden { display:none; }
+    .parent-toast { position:fixed; left:50%; bottom:22px; z-index:20; padding:10px 16px; border:1px solid rgba(125,241,194,.3); border-radius:999px; background:#14251f; color:#dffbef; font-size:12px; opacity:0; transform:translate(-50%,15px); pointer-events:none; transition:.25s; }
+    .parent-toast.show { opacity:1; transform:translate(-50%,0); }
+    @media(max-width:680px) { .prototype-toolbar{height:66px;padding:0 10px}.prototype-copy span{max-width:44vw}.back-link{display:none}#productionFrame,.loading{inset-block-start:66px;height:calc(100% - 66px)}.prototype-button{padding:0 10px} }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <div class="preview-bar">
-      <span><strong>UI PROTOTYPE</strong> / サンプルデータで表示しています</span>
-      <span>本番機能には影響しません　<a href="http://IEWEB01/">本番ページへ戻る</a></span>
-    </div>
-
-    <header class="site-header">
-      <div class="brand">
-        <img src="page_images/icon_world.png" alt="地域">
-        <h1>内装製品デイリーニュース</h1>
-      </div>
-      <div class="header-actions">
-        <button class="header-button bell" id="noticeButton" type="button" aria-label="通知">🔔<span class="unread-count" id="unreadCount">3</span></button>
-        <button class="header-button" id="myPageButton" type="button">中村 / マイページ</button>
-      </div>
-      <div class="header-summary">
-        <p>国内外の自動車内装ニュースを生成AIで毎日収集・分析し、企画アイデアにつなげます。</p>
-        <span class="status">更新 <strong>2026-09-02 10:32</strong></span>
-      </div>
-    </header>
-
-    <section class="demo-strip" aria-label="動作デモ">
-      <div class="demo-copy">
-        <span class="demo-number">▶</span>
-        <div><strong>コメントが届いたときの動きを確認</strong><span>通知が増え、過去記事が「みんなの動き」に現れ、コメント位置へ移動します。</span></div>
-      </div>
-      <button class="demo-button" id="playDemo" type="button">動きを再生する</button>
-    </section>
-
-    <nav class="filters-preview" aria-label="画面全体のフィルター例">
-      <span class="filter-label">地域</span><button class="filter-chip active" type="button">🌐 世界版 50</button><button class="filter-chip" type="button">🇯🇵 日本 10</button><button class="filter-chip" type="button">🇨🇳 中国 10</button><button class="filter-chip" type="button">🇮🇳 インド 10</button><button class="filter-chip" type="button">🇺🇸 米国 10</button><button class="filter-chip" type="button">🇪🇺 欧州 10</button><span class="filter-label">並び順</span><button class="filter-chip" type="button">New・反響順</button>
-    </nav>
-
-    <section class="activity-rail">
-      <div class="section-head">
-        <div><span class="eyebrow">RECENT ACTIVITY</span><h2>みんなの動き</h2></div>
-        <p id="activityHint">過去記事の新しい会話を、ニュースを邪魔しない範囲で3件だけ表示</p>
-      </div>
-      <div class="activity-grid" id="activityGrid">
-        <article class="activity-card" data-target="pastArticle">
-          <img class="activity-thumb" src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車載カメラ" onerror="this.src='images/idea_1685.png'">
-          <div><div class="activity-meta"><strong>田中さん</strong>がコメント・12分前</div><h3 class="activity-title">ミラーカメラとレーダー融合で全車室監視</h3><p class="activity-comment">「後席まで含めた検知範囲が面白いです」</p></div>
-        </article>
-        <article class="activity-card" data-target="pastArticle">
-          <img class="activity-thumb" src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
-          <div><div class="activity-meta"><strong>鈴木さんほか2名</strong>が返信・34分前</div><h3 class="activity-title">マツダCX-6e、デジタルコックピットを採用</h3><p class="activity-comment">あなたのコメントに新しい返信があります</p></div>
-        </article>
-        <article class="activity-card" data-target="pastArticle">
-          <img class="activity-thumb" src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
-          <div><div class="activity-meta"><strong>開発企画グループ</strong>で反響・1時間前</div><h3 class="activity-title">日産とホンダ、次世代SDVを共同開発</h3><p class="activity-comment">コメント5件・いいね8件に増えました</p></div>
-        </article>
-      </div>
-    </section>
-
-    <div class="workspace">
-      <main class="feed-panel">
-        <div class="tabs" role="tablist">
-          <button class="tab active" data-view="new" type="button">新着ニュース</button>
-          <button class="tab" data-view="talk" type="button">会話が続いている記事 <strong>3</strong></button>
-          <button class="tab" data-view="mine" type="button">参加した記事</button>
-        </div>
-
-        <section class="feed-view active" id="view-new">
-          <article class="news-row">
-            <img src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
-            <div><h3>マツダCX-6e英国発売、航続300マイルと充実装備</h3><p>2026-09-01　欧州　Electric Cars Report</p></div>
-            <div class="reaction"><span>👍 <strong>4</strong></span><span>💬 <strong>2</strong></span></div>
-          </article>
-          <article class="news-row">
-            <img src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車載カメラ" onerror="this.src='images/idea_1685.png'">
-            <div><h3>Yfore、ミラーカメラとレーダー融合で全車室監視システム発表</h3><p>2026-09-01　欧州　Automotive World</p></div>
-            <div class="reaction"><span>👍 <strong>7</strong></span><span>💬 <strong>4</strong></span></div>
-          </article>
-          <article class="news-row">
-            <img src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
-            <div><h3>日産とホンダ、2029年以降のSDV技術を共同開発</h3><p>2026-09-01　欧州　Electric Cars Report</p></div>
-            <div class="reaction"><span>👍 <strong>8</strong></span><span>💬 <strong>5</strong></span></div>
-          </article>
-        </section>
-
-        <section class="feed-view" id="view-talk">
-          <article class="conversation"><span class="avatar">田</span><div><h3>全車室監視システムの記事</h3><p><strong>田中さん：</strong>後席まで含めた検知範囲が面白いです。内装部品側からセンサーを隠す工夫も検討できそうです。</p></div><time>12分前<br>コメント4件</time></article>
-          <article class="conversation"><span class="avatar">鈴</span><div><h3>マツダCX-6eの記事</h3><p><strong>鈴木さん：</strong>大型画面だけでなく、視線移動を減らす配置まで比較したいです。</p></div><time>34分前<br>コメント2件</time></article>
-          <article class="conversation"><span class="avatar">佐</span><div><h3>次世代SDV共同開発の記事</h3><p><strong>佐藤さん：</strong>内装ハードを後から更新できる考え方につながるでしょうか。</p></div><time>1時間前<br>コメント5件</time></article>
-        </section>
-
-        <section class="feed-view" id="view-mine">
-          <article class="news-row">
-            <img src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
-            <div><h3>マツダCX-6e英国発売、航続300マイルと充実装備</h3><p>あなたのコメントに返信2件・未読あり</p></div>
-            <div class="reaction"><span style="color:var(--blue)">● 未読</span></div>
-          </article>
-          <article class="news-row">
-            <img src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
-            <div><h3>日産とホンダ、2029年以降のSDV技術を共同開発</h3><p>あなたがいいねしました・コメント5件</p></div>
-            <div class="reaction"><span>最終更新 1時間前</span></div>
-          </article>
-        </section>
-      </main>
-
-      <aside class="side-panel">
-        <div class="side-title">この案のポイント</div>
-        <div class="side-item"><span class="side-icon">📰</span><div><strong>新着はそのまま</strong><span>過去記事を混ぜず、ニュースの時系列を維持します。</span></div></div>
-        <div class="side-item"><span class="side-icon">💬</span><div><strong>会話だけ再浮上</strong><span>コメントが付いた記事は専用欄で見つけやすくします。</span></div></div>
-        <div class="side-item"><span class="side-icon">🔔</span><div><strong>自分に関係する通知</strong><span>返信・参加記事・コメントへの反応を優先します。</span></div></div>
-      </aside>
-    </div>
-
-    <section class="full-section" id="pastSection">
-      <div class="full-section-head"><h2>過去記事・続いている会話</h2><span>新着一覧とは分離しているため、ニュースの並びは変わりません</span></div>
-      <article class="past-article" id="pastArticle">
-        <img src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車室監視システム" onerror="this.src='images/idea_1685.png'">
-        <div class="past-copy"><span class="past-label">8月27日の記事・コメントで再浮上</span><h3>ミラーカメラとレーダー融合で全車室監視システム発表</h3><p>車室内カメラとレーダーを組み合わせ、乗員の状態や後席を含む車内環境を把握するシステム。過去の記事でも新しいコメントが付くと、この欄から再び確認できます。</p></div>
-        <div class="comment-focus"><strong id="focusUser">田中さん・12分前</strong><p id="focusComment">後席まで含めた検知範囲が面白いです。内装部品側からセンサーを隠す工夫も検討できそうです。</p><span>👍 3　返信 1</span></div>
-      </article>
-    </section>
-
-    <section class="full-section">
-      <div class="full-section-head"><h2>各地域の考察</h2><span>本番ページではこの後に市場トレンドが続きます</span></div>
-      <div class="analysis-grid">
-        <article class="analysis-card"><b>🇯🇵 JAPAN</b><p>安全機能を目立たせず内装へ組み込む技術が重要になります。センサー配置と表皮・加飾を一体で検討する必要があります。</p></article>
-        <article class="analysis-card"><b>🇨🇳 CHINA</b><p>大型画面だけでなく、家族利用に合わせた後席体験やパーソナライズへの期待が高まっています。</p></article>
-        <article class="analysis-card"><b>🇪🇺 EUROPE</b><p>環境対応素材とソフトウェア更新に対応できる、長く使える内装設計が求められます。</p></article>
-      </div>
-    </section>
-
-    <section class="full-section">
-      <div class="full-section-head"><h2>企画アイデア例</h2><span>ニュースと考察をもとにした車室内装製品の提案</span></div>
-      <div class="idea-grid">
-        <article class="idea-card"><img src="images/idea_1685.png" alt="企画アイデア"><div><h3>見えない乗員見守りトリム</h3><p>レーダーとカメラを加飾部品に自然に組み込み、後席まで見守ります。</p></div></article>
-        <article class="idea-card"><img src="images/idea_1684.png" alt="企画アイデア"><div><h3>視線移動を減らす情報レイヤー</h3><p>必要な情報だけを運転状況に合わせて表示するコックピットです。</p></div></article>
-        <article class="idea-card"><img src="images/idea_1683.png" alt="企画アイデア"><div><h3>更新できるモジュラー内装</h3><p>ソフトウェアと部品を段階的に更新し、長期間使える内装を目指します。</p></div></article>
-      </div>
-    </section>
-  </div>
-
-  <div class="drawer-backdrop" id="drawerBackdrop"></div>
-  <aside class="drawer" id="noticeDrawer" aria-label="通知一覧">
-    <div class="drawer-head"><h2>通知</h2><button class="text-button" id="markRead" type="button">すべて既読にする</button></div>
-    <div id="noticeList">
-      <article class="notice unread"><span class="side-icon">↩</span><div><p><strong>鈴木さん</strong>が「マツダCX-6e」のあなたのコメントに返信しました。</p><time>34分前</time></div></article>
-      <article class="notice unread"><span class="side-icon">💬</span><div><p>参加中の「全車室監視システム」に<strong>新しいコメント</strong>があります。</p><time>42分前</time></div></article>
-      <article class="notice unread"><span class="side-icon">👍</span><div><p><strong>3人</strong>があなたのコメントにいいねしました。</p><time>1時間前</time></div></article>
-      <article class="notice"><span class="side-icon">★</span><div><p>お気に入り記事に新しいコメントが追加されました。</p><time>昨日 16:20</time></div></article>
-    </div>
-    <p class="drawer-note">通知を増やしすぎないよう、単純ないいねはまとめて表示します。本番ではユーザーごとの未読状態をサーバーに保存する想定です。</p>
-  </aside>
-  <div class="toast" id="toast"></div>
-
+  <header class="prototype-toolbar">
+    <div class="prototype-copy"><strong>本番画面＋交流機能の完成イメージ</strong><span id="prototypeStatus">現行ページを一切省略せず、その上に新機能だけを重ねています。</span></div>
+    <div class="prototype-actions"><button class="prototype-button" id="playDemo" type="button">コメント到着を再生</button><a class="back-link" href="http://IEWEB01/">本番へ戻る</a></div>
+  </header>
+  <div class="loading" id="loading">現行ページを読み込んでいます…</div>
+  <iframe id="productionFrame" src="./?activity-preview-frame=1" title="内装製品デイリーニュース本番画面"></iframe>
+  <div class="parent-toast" id="parentToast"></div>
   <script>
-    const drawer = document.getElementById("noticeDrawer");
-    const backdrop = document.getElementById("drawerBackdrop");
-    const unreadCount = document.getElementById("unreadCount");
-    const toast = document.getElementById("toast");
-    const activityGrid = document.getElementById("activityGrid");
-    const initialActivity = activityGrid.innerHTML;
-    const setDrawer = (open) => {
-      drawer.classList.toggle("open", open);
-      backdrop.classList.toggle("open", open);
-      document.body.style.overflow = open ? "hidden" : "";
-    };
-    const showToast = (message) => {
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(window.previewToastTimer);
-      window.previewToastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
-    };
-    document.getElementById("noticeButton").addEventListener("click", () => setDrawer(true));
-    backdrop.addEventListener("click", () => setDrawer(false));
-    document.getElementById("markRead").addEventListener("click", () => {
-      drawer.querySelectorAll(".notice.unread").forEach((item) => item.classList.remove("unread"));
-      unreadCount.hidden = true;
-      showToast("すべて既読にしました");
-    });
-    document.querySelectorAll(".tab").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
-        document.querySelectorAll(".feed-view").forEach((view) => view.classList.remove("active"));
-        button.classList.add("active");
-        document.getElementById(`view-${button.dataset.view}`).classList.add("active");
-      });
-    });
-    const openActivity = (card) => {
-      const target = document.getElementById(card.dataset.target || "pastArticle");
-      if (!target) return;
-      setDrawer(false);
-      target.scrollIntoView({ behavior:"smooth", block:"center" });
-      target.classList.add("spotlight");
-      setTimeout(() => target.classList.remove("spotlight"), 2600);
-      showToast("該当記事の新しいコメントへ移動しました");
-    };
-    activityGrid.addEventListener("click", (event) => {
-      const card = event.target.closest(".activity-card");
-      if (card) openActivity(card);
-    });
-    document.getElementById("myPageButton").addEventListener("click", () => {
-      document.querySelector('[data-view="mine"]').click();
-      document.querySelector(".feed-panel").scrollIntoView({ behavior:"smooth", block:"start" });
-      showToast("マイページの「参加した記事」を表示しました");
-    });
-    document.getElementById("playDemo").addEventListener("click", async (event) => {
-      const button = event.currentTarget;
-      button.disabled = true;
-      button.textContent = "コメントを受信中…";
-      activityGrid.innerHTML = initialActivity;
-      document.getElementById("activityHint").textContent = "新しいコメントを受信しています…";
-      unreadCount.hidden = false;
-      unreadCount.textContent = "3";
-      document.getElementById("noticeList").querySelector(".demo-notice")?.remove();
-      document.querySelector(".activity-rail").scrollIntoView({ behavior:"smooth", block:"center" });
-      await new Promise((resolve) => setTimeout(resolve, 900));
+    const frame=document.getElementById("productionFrame");
+    const loading=document.getElementById("loading");
+    const playButton=document.getElementById("playDemo");
+    const statusText=document.getElementById("prototypeStatus");
+    const parentToast=document.getElementById("parentToast");
+    let previewApi=null;
 
-      const previousCards = [...activityGrid.children];
-      const previousRects = new Map(previousCards.map((card) => [card, card.getBoundingClientRect()]));
-      const incoming = document.createElement("article");
-      incoming.className = "activity-card arriving";
-      incoming.dataset.target = "pastArticle";
-      incoming.innerHTML = `<img class="activity-thumb" src="images/idea_1685.png" alt="新しいコメント"><div><div class="activity-meta"><strong>山田さん</strong>がコメント・たった今</div><h3 class="activity-title">8月27日の全車室監視システムの記事</h3><p class="activity-comment">「表皮とセンサーの組み合わせを試したいです」</p></div>`;
-      activityGrid.prepend(incoming);
-      previousCards.at(-1)?.remove();
-      previousCards.slice(0,-1).forEach((card) => {
-        const before = previousRects.get(card);
-        const after = card.getBoundingClientRect();
-        card.animate(
-          [{ transform:`translate(${before.left-after.left}px,${before.top-after.top}px)` },{ transform:"translate(0,0)" }],
-          { duration:650, easing:"cubic-bezier(.2,.8,.2,1)" }
-        );
-      });
-      unreadCount.textContent = "4";
-      document.getElementById("noticeButton").classList.add("attention");
-      document.getElementById("activityHint").textContent = "8月27日の記事に新しいコメントが届き、先頭へ再浮上しました";
-      document.getElementById("focusUser").textContent = "山田さん・たった今";
-      document.getElementById("focusComment").textContent = "表皮とセンサーの組み合わせを試したいです。試作段階で検知性能も比較できるとよいと思います。";
+    function showParentToast(message){parentToast.textContent=message;parentToast.classList.add("show");clearTimeout(window.parentToastTimer);window.parentToastTimer=setTimeout(()=>parentToast.classList.remove("show"),2300)}
+    function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,(character)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[character])}
+    function waitForPage(doc,selector,timeout=20000){return new Promise((resolve,reject)=>{const found=doc.querySelector(selector);if(found)return resolve(found);const observer=new MutationObserver(()=>{const element=doc.querySelector(selector);if(!element)return;observer.disconnect();resolve(element)});observer.observe(doc.documentElement,{childList:true,subtree:true});setTimeout(()=>{observer.disconnect();reject(new Error(`Timed out waiting for ${selector}`))},timeout)})}
 
-      const notice = document.createElement("article");
-      notice.className = "notice unread demo-notice";
-      notice.style.cursor = "pointer";
-      notice.innerHTML = `<span class="side-icon">💬</span><div><p><strong>山田さん</strong>が8月27日の記事にコメントしました。</p><time>たった今</time></div>`;
-      notice.addEventListener("click", () => openActivity(incoming));
-      document.getElementById("noticeList").prepend(notice);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setDrawer(true);
-      button.disabled = false;
-      button.textContent = "もう一度再生する";
-    });
-    document.addEventListener("keydown", (event) => { if (event.key === "Escape") setDrawer(false); });
+    function addPreviewStyles(doc){
+      const style=doc.createElement("style");style.id="activityPreviewStyles";style.textContent=`
+        .activity-preview-bell{position:relative;display:grid;width:38px;height:38px;place-items:center;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.035);color:#e5edf6;font-size:16px;cursor:pointer}
+        .activity-preview-count{position:absolute;top:-5px;right:-4px;display:grid;min-width:19px;height:19px;place-items:center;border:2px solid #101925;border-radius:10px;background:#ff6473;color:#fff;font-size:9px;font-weight:800}
+        .activity-preview-bell.ring{animation:previewRing .8s ease 2}@keyframes previewRing{0%,100%{transform:rotate(0)}28%{transform:rotate(-13deg) scale(1.08)}70%{transform:rotate(11deg) scale(1.08)}}
+        .activity-preview-rail{max-width:1400px;margin:0 auto 20px;padding:17px 18px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(16,22,35,.9);box-shadow:0 15px 40px rgba(0,0,0,.25)}
+        .activity-preview-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:12px}.activity-preview-kicker{color:#7df1c2;font-size:9px;font-weight:800;letter-spacing:.14em}.activity-preview-head h2{margin:2px 0 0;color:#e9edf5;font-size:17px}.activity-preview-head p{margin:0;color:#8191a7;font-size:10px}
+        .activity-preview-mine{border:1px solid rgba(111,167,255,.28);border-radius:999px;padding:6px 10px;background:rgba(111,167,255,.07);color:#a9c8ff;font-size:10px;cursor:pointer}.activity-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+        .activity-preview-card{display:grid;grid-template-columns:68px minmax(0,1fr);gap:10px;min-width:0;padding:9px;border:1px solid rgba(255,255,255,.075);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer;transition:.2s ease}.activity-preview-card:hover{transform:translateY(-2px);border-color:rgba(111,167,255,.38);background:rgba(111,167,255,.055)}.activity-preview-card.arrive{border-color:rgba(125,241,194,.5);animation:previewArrive .65s cubic-bezier(.2,.8,.2,1)}@keyframes previewArrive{from{opacity:0;transform:translateY(-13px) scale(.97)}to{opacity:1;transform:none}}
+        .activity-preview-card img{width:68px;height:68px;object-fit:cover;border-radius:9px;background:#1a2635}.activity-preview-meta{margin-bottom:2px;color:#8197b0;font-size:9px}.activity-preview-meta strong{color:#7df1c2}.activity-preview-card h3{margin:0;overflow:hidden;color:#eef3f8;font-size:11px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.activity-preview-card p{margin:4px 0 0;overflow:hidden;color:#a7b5c6;font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+        .activity-preview-drawer-bg{position:fixed;inset:0;z-index:10040;visibility:hidden;background:rgba(1,4,9,.54);opacity:0;transition:.25s}.activity-preview-drawer-bg.open{visibility:visible;opacity:1}.activity-preview-drawer{position:fixed;top:0;right:0;z-index:10041;width:min(410px,94vw);height:100vh;padding:19px;overflow:auto;border-left:1px solid rgba(111,167,255,.25);background:#0c1420;color:#e9edf5;box-shadow:-25px 0 70px rgba(0,0,0,.55);transform:translateX(105%);transition:.3s cubic-bezier(.22,.75,.25,1)}.activity-preview-drawer.open{transform:translateX(0)}
+        .activity-preview-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.activity-preview-drawer h2{margin:0;font-size:18px}.activity-preview-read{border:0;background:none;color:#8fb9ff;font-size:10px;cursor:pointer}.activity-preview-notice{position:relative;display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;margin-bottom:8px;padding:12px;border:1px solid rgba(111,167,255,.2);border-radius:12px;background:rgba(111,167,255,.065);cursor:pointer}.activity-preview-notice::after{position:absolute;top:14px;right:11px;width:6px;height:6px;border-radius:50%;background:#6fa7ff;content:""}.activity-preview-icon{display:grid;width:30px;height:30px;place-items:center;border-radius:9px;background:rgba(111,167,255,.1)}.activity-preview-notice p{margin:0;padding-right:8px;color:#c5d0de;font-size:11px;line-height:1.55}.activity-preview-notice time{display:block;margin-top:4px;color:#718299;font-size:9px}.activity-preview-note{color:#687b92;font-size:10px;line-height:1.6}
+        .activity-preview-modal-bg{position:fixed;inset:0;z-index:10042;display:none;place-items:center;padding:18px;background:rgba(1,4,9,.72)}.activity-preview-modal-bg.open{display:grid}.activity-preview-modal{width:min(820px,100%);max-height:84vh;padding:20px;overflow:auto;border:1px solid rgba(111,167,255,.28);border-radius:18px;background:#101a27;color:#e9edf5;box-shadow:0 30px 90px rgba(0,0,0,.6)}.activity-preview-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.activity-preview-modal h2{margin:0;font-size:18px}.activity-preview-close{border:0;background:none;color:#aab6c5;font-size:24px;cursor:pointer}.activity-preview-tabs{display:flex;gap:7px;margin-bottom:14px;overflow:auto}.activity-preview-tab{flex:0 0 auto;border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:7px 11px;background:transparent;color:#98a7ba;font-size:10px}.activity-preview-tab.active{border-color:transparent;background:linear-gradient(135deg,#7df1c2,#6fa7ff);color:#07111d;font-weight:800}.activity-preview-row{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid rgba(255,255,255,.07);cursor:pointer}.activity-preview-row img{width:92px;height:62px;object-fit:cover;border-radius:9px;background:#1a2635}.activity-preview-row h3{margin:0 0 4px;font-size:12px}.activity-preview-row p{margin:0;color:#8fa0b4;font-size:9px}.activity-preview-unread{color:#7df1c2;font-size:9px;white-space:nowrap}.activity-preview-highlight{animation:previewHighlight 2.6s ease}@keyframes previewHighlight{0%,100%{box-shadow:none}20%,70%{box-shadow:0 0 0 4px rgba(125,241,194,.24),0 20px 50px rgba(0,0,0,.3)}}
+        @media(max-width:760px){.activity-preview-grid{grid-template-columns:1fr}.activity-preview-head{align-items:flex-start;flex-direction:column}.activity-preview-head p{display:none}.activity-preview-card:nth-child(n+3){display:none}}
+      `;doc.head.appendChild(style)
+    }
+
+    function selectItems(win){const all=Array.isArray(win.LOADED_NEWS_DATA)?win.LOADED_NEWS_DATA:[];const preferred=["eu1519","eu1520","eu1522"].map((id)=>all.find((item)=>item.id===id)).filter(Boolean);const withImages=[...all].reverse().filter((item)=>item.img&&item.title);return [...preferred,...withImages.filter((item)=>!preferred.includes(item))].slice(0,3)}
+    function imageUrl(item){return String(item.img||"").replace(/&amp;/g,"&")}
+    function createCard(doc,item,person,action,comment,arriving=false){const card=doc.createElement("article");card.className=`activity-preview-card${arriving?" arrive":""}`;card.dataset.itemId=item.id;card.innerHTML=`<img src="${escapeHtml(imageUrl(item))}" alt=""><div><div class="activity-preview-meta"><strong>${escapeHtml(person)}</strong>${escapeHtml(action)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(comment)}</p></div>`;card.querySelector("img").addEventListener("error",(event)=>{event.currentTarget.src="images/idea_1685.png"},{once:true});return card}
+
+    function installPreview(doc,win,filters){
+      addPreviewStyles(doc);const items=selectItems(win);if(!items.length)throw new Error("News data is not available.");
+      const bell=doc.createElement("button");bell.className="activity-preview-bell";bell.type="button";bell.innerHTML=`🔔<span class="activity-preview-count">3</span>`;const accountSlot=doc.getElementById("accountHeaderSlot");(accountSlot?.parentElement||doc.querySelector(".header-top-actions"))?.insertBefore(bell,accountSlot||null);
+      const rail=doc.createElement("section");rail.className="activity-preview-rail";rail.innerHTML=`<div class="activity-preview-head"><div><span class="activity-preview-kicker">RECENT ACTIVITY</span><h2>みんなの動き</h2></div><p>コメントが付いた過去記事を3件だけ表示。新着ニュースの並びは変えません。</p><button class="activity-preview-mine" type="button">参加した記事を見る</button></div><div class="activity-preview-grid"></div>`;filters.insertAdjacentElement("afterend",rail);
+      const grid=rail.querySelector(".activity-preview-grid"),people=["田中さん","鈴木さんほか2名","開発企画グループ"],actions=["がコメント・12分前","が返信・34分前","で反響・1時間前"],comments=["後席まで含めた検知範囲が面白いです","あなたのコメントに新しい返信があります","コメント5件・いいね8件に増えました"];items.forEach((item,index)=>grid.appendChild(createCard(doc,item,people[index],actions[index],comments[index])));
+      const drawerBg=doc.createElement("div");drawerBg.className="activity-preview-drawer-bg";const drawer=doc.createElement("aside");drawer.className="activity-preview-drawer";drawer.innerHTML=`<div class="activity-preview-drawer-head"><h2>通知</h2><button class="activity-preview-read" type="button">すべて既読にする</button></div><div class="activity-preview-notices"><article class="activity-preview-notice" data-item-id="${escapeHtml(items[1]?.id||items[0].id)}"><span class="activity-preview-icon">↩</span><div><p><strong>鈴木さん</strong>があなたのコメントに返信しました。</p><time>34分前</time></div></article><article class="activity-preview-notice" data-item-id="${escapeHtml(items[0].id)}"><span class="activity-preview-icon">💬</span><div><p>参加中の記事に<strong>新しいコメント</strong>があります。</p><time>42分前</time></div></article><article class="activity-preview-notice" data-item-id="${escapeHtml(items[2]?.id||items[0].id)}"><span class="activity-preview-icon">👍</span><div><p><strong>3人</strong>があなたのコメントにいいねしました。</p><time>1時間前</time></div></article></div><p class="activity-preview-note">自分への返信、参加中の記事、コメントへの反応を優先します。単純ないいねはまとめて表示します。</p>`;doc.body.append(drawerBg,drawer);
+      const modalBg=doc.createElement("div");modalBg.className="activity-preview-modal-bg";modalBg.innerHTML=`<section class="activity-preview-modal"><div class="activity-preview-modal-head"><h2>中村 / マイページ</h2><button class="activity-preview-close" type="button">&times;</button></div><div class="activity-preview-tabs"><button class="activity-preview-tab active">参加した記事</button><button class="activity-preview-tab">返信があった記事</button><button class="activity-preview-tab">自分のコメント</button><button class="activity-preview-tab">お気に入り</button></div><div class="activity-preview-rows"></div></section>`;doc.body.appendChild(modalBg);
+      const rows=modalBg.querySelector(".activity-preview-rows");items.forEach((item,index)=>{const row=doc.createElement("article");row.className="activity-preview-row";row.dataset.itemId=item.id;row.innerHTML=`<img src="${escapeHtml(imageUrl(item))}" alt=""><div><h3>${escapeHtml(item.title)}</h3><p>${index===0?"あなたのコメントに返信があります":"あなたがコメント・いいねした記事"}</p></div><span class="activity-preview-unread">${index===0?"● 未読":"更新あり"}</span>`;rows.appendChild(row)});
+      const setDrawer=(open)=>{drawer.classList.toggle("open",open);drawerBg.classList.toggle("open",open)};
+      const openItem=(itemId)=>{setDrawer(false);modalBg.classList.remove("open");if(typeof win.showNewsItem==="function")win.showNewsItem(itemId,true);setTimeout(()=>{const card=doc.getElementById(`card-${itemId}`)||doc.querySelector(`[data-news-id="${CSS.escape(itemId)}"]`);card?.scrollIntoView({behavior:"smooth",block:"center"});card?.classList.add("activity-preview-highlight");setTimeout(()=>card?.classList.remove("activity-preview-highlight"),2700)},250)};
+      bell.addEventListener("click",()=>setDrawer(true));drawerBg.addEventListener("click",()=>setDrawer(false));drawer.querySelector(".activity-preview-read").addEventListener("click",()=>{drawer.querySelectorAll(".activity-preview-notice").forEach((notice)=>notice.style.background="rgba(255,255,255,.025)");bell.querySelector(".activity-preview-count").hidden=true});drawer.addEventListener("click",(event)=>{const notice=event.target.closest(".activity-preview-notice");if(notice)openItem(notice.dataset.itemId)});grid.addEventListener("click",(event)=>{const card=event.target.closest(".activity-preview-card");if(card)openItem(card.dataset.itemId)});rail.querySelector(".activity-preview-mine").addEventListener("click",()=>modalBg.classList.add("open"));modalBg.querySelector(".activity-preview-close").addEventListener("click",()=>modalBg.classList.remove("open"));modalBg.addEventListener("click",(event)=>{if(event.target===modalBg)modalBg.classList.remove("open")});rows.addEventListener("click",(event)=>{const row=event.target.closest(".activity-preview-row");if(row)openItem(row.dataset.itemId)});
+      doc.addEventListener("click",(event)=>{const writeControl=event.target.closest('[onclick*="toggleLike"],[onclick*="toggleFavorite"],[onclick*="toggleIrrelevant"],.comment-submit,.comment-like-btn,.delete-btn');if(!writeControl)return;event.preventDefault();event.stopImmediatePropagation();showParentToast("テスト画面のため、いいね・コメントなどの書き込みは無効です")},true);
+      return {runDemo:async()=>{const count=bell.querySelector(".activity-preview-count");count.hidden=false;count.textContent="4";bell.classList.remove("ring");void bell.offsetWidth;bell.classList.add("ring");const oldCards=[...grid.children],oldRects=new Map(oldCards.map((card)=>[card,card.getBoundingClientRect()]));const incoming=createCard(doc,items[0],"山田さん","がコメント・たった今","表皮とセンサーの組み合わせを試したいです",true);grid.prepend(incoming);oldCards.at(-1)?.remove();oldCards.slice(0,-1).forEach((card)=>{const before=oldRects.get(card),after=card.getBoundingClientRect();card.animate([{transform:`translate(${before.left-after.left}px,${before.top-after.top}px)`},{transform:"translate(0,0)"}],{duration:650,easing:"cubic-bezier(.2,.8,.2,1)"})});rail.querySelector(".activity-preview-head p").textContent="過去記事に新しいコメントが届き、先頭へ再浮上しました。";const notice=doc.createElement("article");notice.className="activity-preview-notice";notice.dataset.itemId=items[0].id;notice.innerHTML=`<span class="activity-preview-icon">💬</span><div><p><strong>山田さん</strong>が過去記事にコメントしました。</p><time>たった今</time></div>`;drawer.querySelector(".activity-preview-notices").prepend(notice);rail.scrollIntoView({behavior:"smooth",block:"center"});await new Promise((resolve)=>setTimeout(resolve,1500));setDrawer(true)}}
+    }
+
+    frame.addEventListener("load",async()=>{try{const doc=frame.contentDocument,win=frame.contentWindow,filters=await waitForPage(doc,".filters");previewApi=installPreview(doc,win,filters);loading.classList.add("hidden");statusText.textContent="現行のランキング・ニュース・考察・企画を残したまま、新機能だけを追加しています。"}catch(error){loading.textContent="本番ページへのログイン後、再読み込みしてください。";console.error(error)}});
+    playButton.addEventListener("click",async()=>{if(!previewApi)return showParentToast("画面の読み込み完了までお待ちください");playButton.disabled=true;playButton.textContent="再生中…";statusText.textContent="新しいコメントを受信 → 過去記事を再浮上 → 通知を表示します。";await previewApi.runDemo();playButton.disabled=false;playButton.textContent="もう一度再生";statusText.textContent="通知内の記事を押すと、本番と同じニュースカードへ移動します。"});
   </script>
 </body>
 </html>
