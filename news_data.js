@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-02 10:32";
+window.NEWS_UPDATED_AT = "2026-09-03 00:45";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -106586,6 +106586,705 @@ window.LOADED_NEWS_DATA = [
     
         country: "eu",
         img: "https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    // 2026-09-02 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1741",
+        title: "トヨタアルファードヴェルファイア40系専用ダッシュボードトレイ発売",
+        desc: "カー用品ブランドクラフトワークスから、トヨタアルファードヴェルファイア40系専用のダッシュボードトレイが新発売。ナビ上部設置でスマホホルダーと小物収納を一体化し、高級感を損なわないデザインを採用。",
+        url: "https://news.yahoo.co.jp/articles/fc3280ff97ef1a5582b995666a2bfc79495e149e?source=rss",
+        source: "レスポンス",
+        date: "2026-09-02",
+        tags: ["コネクテッド", "コックピット"],
+    
+        interiorScore: 88,
+        interiorReason: "dashboard tray accessory with clear interior image showing storage, material, an",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00000027-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1742",
+        title: "7年ぶり復活新型パジェロ、2.4Lディーゼルと8速ATでラグジュアリーな車内",
+        desc: "2026年9月2日に登場する新型三菱パジェロは、トライトンのラダーフレームを採用した本格派4WDでありながらラグジュアリーな車内を備える。心臓部には2.4Lクリーンディーゼルエンジンと8速ATが組み合わせられ、最高出力150kW、最大トルク480N・mを発揮する。",
+        url: "https://news.yahoo.co.jp/articles/877639e1d0b3dc1ca2e4ff21896bdadbad496cbf?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-09-02",
+        tags: [],
+    
+        interiorScore: 82,
+        interiorReason: "seat and display plus cabin image; flagship interior refresh",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00010004-wcartop-000-3-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1743",
+        title: "カバナが展開するロードスター用シートカバー、初代NAテイストを現代へ移す",
+        desc: "輸入車実績を持つカバナが、マツダロードスター向けにネオクラシックをキーワードに内装プログラムを展開している。縫製ノウハウを活かし、初代NAの雰囲気を現代風にアレンジしたシートカバーを提供する。",
+        url: "https://news.yahoo.co.jp/articles/2457af18c1a21d7306e9cc588c38e040707567eb?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-09-02",
+        tags: ["シート"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00010005-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1744",
+        title: "2026年型デリカD:5は8インチ液晶メーターを標準化しS-AWC表示やUSB",
+        desc: "2026年改良のデリカD:5は8インチ液晶メーターを標準化しS-AWCやAYCの制御状態を視覚化してドライブモード連動演出も追加。インパネは金属調アクセントでギア感を強調し最上級Pでは撥水スエード調シートやアルミペダルを装備。",
+        url: "https://news.yahoo.co.jp/articles/070624f10a09e5aa37076273931eacb66f0df495?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-02",
+        tags: ["ディスプレイ", "シート", "コックピット"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00000023-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1745",
+        title: "新型パジェロ3列目シートは床下収納進化、頭上高も歴代トップレベル確保",
+        desc: "新型パジェロは全グレード3列シートで、3列目シートの床下収納がヘッドレスト付のまま可能に。謎スペース廃止とコード集約により頭上高が歴代トップレベルとなり、居住性が大幅に向上した。",
+        url: "https://news.yahoo.co.jp/articles/0cb83a14bc954ae9f9a6a46f21a9bdceffbccbee?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-02",
+        tags: ["シート"],
+    
+        interiorScore: 82,
+        interiorReason: "seat and storage plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00000019-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1746",
+        title: "新型パジェロ内装は画面2種で物理スイッチ残るが往年のデカさは減った",
+        desc: "新型パジェロの内装は14.3インチと12.3インチの2種類があり、全グレードにモニターが標準装備される。ハザードや空調の物理ボタン、音量ダイヤルは残っているが、エアコン系のボタンが小ぶりとなり往年のデカいスイッチというパジェロらしさは減った。",
+        url: "https://news.yahoo.co.jp/articles/52cb47942356c2e0ceceb399edf83addf51087f7?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-02",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00000014-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1747",
+        title: "マツダCX-30の25Lは341万円の本革シートと快適装備で買い得か検証",
+        desc: "2026年型CX-30の最上級グレード25Lは341万円。2.5Lマイルドハイブリッドに加え、本革シートや運転席10Wayパワーシート、シートベンチレーション、360°ビューモニターなど充実した快適・安全装備を標準搭載する。",
+        url: "https://news.yahoo.co.jp/articles/74dd727340adc3ddf0c6c88e16d0b2ae6c0dfd55?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-02",
+        tags: ["ディスプレイ", "シート", "新素材", "安全"],
+    
+        interiorScore: 80,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00000009-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1748",
+        title: "レクサスUX300h新グレード追加 上質な新内装と新色を採用",
+        desc: "2026年9月1日発売のレクサスUX300h新グレード「Shining Essence」は、ドアスイッチやコンソールパネルに初となるレイヤーグリッド加飾を採用。シートにはベンチレーション機能付きL texを標準装備し、パノラミックビューモニターやカラーヘッドアップディスプレイも標準で備わる。",
+        url: "https://news.yahoo.co.jp/articles/c3df3ed3eef7e33e933f029bfb1eecba93345226?source=rss",
+        source: "くるまのニュース",
+        date: "2026-09-02",
+        tags: ["HMI", "HUD", "ディスプレイ", "シート", "センターコンソール"],
+    
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-01105997-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1559",
+        title: "荷物を満載したトヨタ・ヒルックスが、ほぼ垂直の泥の壁を引いてキャンピングトレーラーを引っ張る映像",
+        desc: "重荷を背負ったままでも、オーストラリア・クイーンズランドのオフロードコースで最も困難な障害物の一つを克服することに成功した、改造されたデュアルキャブピックアップトラックだ。",
+        url: "https://www.carscoops.com/2026/09/toyota-hilux-gunshot-creek-descent/",
+        source: "CarScoops",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Toyota-Hilux-Ghost-X-main-2-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1560",
+        title: "英国で復活したブリストル、未完のV10ファイター5台を修復",
+        desc: "英国のブリストル・カーズが事業再開し、未完のまま残されたダッジ・バイパーのV10搭載ファイター5台を修復する。同社はこれに続き、将来的には高級カスタムカーの製作にも着手する予定だ。",
+        url: "https://www.carscoops.com/2026/09/bristol-fighter-revival/",
+        source: "CarScoops",
+        date: "2026-09-02",
+        tags: ["カスタマイズ"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Bristol-Fighter-reboot-Sep126lead1-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1561",
+        title: "トヨタ、シエンナ冷蔵庫で販売86ドルアイスクリームサンドイッチ",
+        desc: "トヨタはグラーター社と提携し、86ドルの塩キャラメルチップホイールをオンライン販売する。このコラボは、シエンナプラチナ搭載の冷蔵庫ボックス「FridgeBox」の機能を実証するためのもので、冷凍モードでアイスクリーム保存が可能だ。",
+        url: "https://www.carscoops.com/2026/09/toyota-seinna-ice-cream/",
+        source: "CarScoops",
+        date: "2026-09-02",
+        tags: [],
+    
+        interiorScore: 67,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Toyota-Sienna-Ice-Cream-1024x578.jpg",
+        note: ""
+    },
+    {
+        id: "us1562",
+        title: "5000ドルで買える現実的な車とは？",
+        desc: "多くの回答者は、5000 ドルは信頼性の高い乗り物を手に入れるための手段であり、車庫にさらにミータを追加するものではないと述べている。",
+        url: "https://www.jalopnik.com/2249105/cars-readers-would-buy-for-5000-dollars-right-now/",
+        source: "Jalopnik",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/these-are-the-cars-you-would-buy-for-5000-right-now/l-intro-1788299330.jpg",
+        note: ""
+    },
+    {
+        id: "us1563",
+        title: "車のバッテリーで、バッテリー切れのバイクをジャンプスタートできますか？",
+        desc: "オートバイのバッテリーが放電してしまった場合、本当に車でジャンプスタートできるのでしょうか？それとも、両車の電気系統に多大な損傷を招いてしまうのでしょうか？",
+        url: "https://www.jalopnik.com/2247271/jump-start-motorcycle-with-dead-battery/",
+        source: "Jalopnik",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/can-you-jump-start-a-dead-motorcycle-with-a-car-battery/l-intro-1788169673.jpg",
+        note: ""
+    },
+    {
+        id: "us1564",
+        title: "2027年三菱パジェロがトヨタランドクルーザーに挑む",
+        desc: "2027年、三菱パジェロが復活し、トヨタランドクルーザーに挑戦する。ラダーフレーム構造で7人乗り、オフロード向けハードウェアを搭載する。",
+        url: "https://www.caranddriver.com/news/a73592111/2027-mitsubishi-pajero-revealed/",
+        source: "Car and Driver",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/157886f7-f7ab-45c8-b547-367bc73c8a72.jpg",
+        note: ""
+    },
+    {
+        id: "us1565",
+        title: "2025年VWトゥアレグ、BMW X5より高級感ある内装と静粛性",
+        desc: "2025年VWトゥアレグはBMW X5を凌駕する高級感を内装で実現。12インチデジタルコックピットと大型タッチスクリーンを備えつつ、物理ボタンを重視した落ち着いたデザインと、高級感あるレザーシートやマッサージ機能で快適性を高めている。",
+        url: "https://www.topspeed.com/volkswagen-that-feels-more-luxurious-than-bmw/",
+        source: "Top Speed",
+        date: "2026-09-02",
+        tags: ["ディスプレイ", "シート", "コックピット", "新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/01/editedzp1xlg0c.jpg",
+        note: ""
+    },
+    {
+        id: "us1566",
+        title: "ホンダシビックツーリング、高級感でアウディA3を凌駕",
+        desc: "ホンダシビックツーリングは高級装備と先進技術を備え、エントリークラスラグジュアリーカーのアウディA3と対抗する魅力的な選択肢となっている。",
+        url: "https://www.topspeed.com/loaded-civic-touring-now-rivals-base-audi-a3/",
+        source: "Top Speed",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/image-78-5.jpeg",
+        note: ""
+    },
+    {
+        id: "us1567",
+        title: "2026年マツダCX-90、BMW X7など高級車に価格で勝る",
+        desc: "2026年式マツダCX-90は3万9900ドルからで、BMW X7やアキュラMDXと競合する。高級車市場で静かに支持を集めている。",
+        url: "https://www.topspeed.com/japanese-suv-quietly-winning-over-luxury-buyers/",
+        source: "Top Speed",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/2026-mazda-cx-90-rear-taillight.jpg",
+        note: ""
+    },
+    {
+        id: "eu1523",
+        title: "中古電気自動車の購入方法",
+        desc: "電気自動車への切り替えを検討しているなら、中古車も素晴らしい選択肢の一つです。しかし、何を注意すべきでしょうか？自動車業界には「すべての中古車はかつて新車だった」という古くからの格言があります。近年、電気自動車が販売店を次々と離れ、供給が。",
+        url: "https://www.autocar.co.uk/car-news/advice-electric-cars/how-buy-used-electric-car",
+        source: "AUTOCAR UK",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/electric-vehicle-experts-2024-jb20241114_6883.jpg?itok=S1INzxcu",
+        note: ""
+    },
+    {
+        id: "eu1524",
+        title: "三菱パジェロがディーゼル搭載のランドクルーザーライバルとして復活",
+        desc: "新フラッグシップはボディオンフレームシャーシを採用し、角ばったデザインと7人乗りを特徴とする。三菱パジェロは、トヨタランドクルーザーに挑むハードコアな4×4として復活した。英国では以前「ショガン」と呼ばれていたこの新モデルは、先行モデル同様、全地形走行能力を最優先する姿勢を維持している。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/mitsubishi-pajero-returns-diesel-powered-land-cruiser-rival",
+        source: "AUTOCAR UK",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/2026-mitsubishi-pajero-2.jpg?itok=YgVklG7e",
+        note: ""
+    },
+    {
+        id: "eu1525",
+        title: "Polestar 4 SUV、実用性と価格でクーペを凌駕",
+        desc: "Polestarはベストセラーモデルの成功をさらに拡大するため、Polestar 4のSUV版を発表した。後部窓の復活やバッテリー容量の増大による航続距離向上、そしてクーペ版より2000ポンド安い価格設定が特徴だ。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/new-polestar-4-suv-more-practical-and-%C2%A32k-cheaper-coupe",
+        source: "AUTOCAR UK",
+        date: "2026-09-02",
+        tags: ["AR", "EV"],
+    
+        interiorScore: 42,
+        interiorReason: "interior tech mentioned but no specific interior details; image shows exterior o",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/dsc_2276.jpg?itok=ipAdrlVH",
+        note: ""
+    },
+    {
+        id: "eu1526",
+        title: "なぜ英国はEV規制を見直す必要があるのか（そして中国のハイブリッド車から学ぶべきか）",
+        desc: "大容量バッテリー搭載のレンジエクステンダーは、顧客が乗り換えに自信を持てるよう必要な柔軟性を提供します。今年初め、ステラントス後援のリープモーターは中国で、同社が世界最大のバッテリーを搭載したプラグインハイブリッドモデルを発売しました。この車はまた、内燃機関でも駆動可能です。",
+        url: "https://www.autocar.co.uk/opinion/business-electric-vehicles/why-uk-must-rethink-its-ev-rules-and-learn-chinas-hybrids",
+        source: "AUTOCAR UK",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/d19_gibbs.jpg?itok=86V8ILvU",
+        note: ""
+    },
+    {
+        id: "eu1527",
+        title: "ラグジュアリーEV市場の冷ややかな中、レンジローバーは成功できるか",
+        desc: "ラグジュアリーEV市場が冷えていた時期に電気版レンジローバーが発表された。JLRは半年前に6万件の関心表明を受けたと主張したが、その商業的見通しは不透明である。",
+        url: "https://www.autocar.co.uk/opinion/electric-cars/can-range-rover-succeed-where-other-luxury-evs-are-failing",
+        source: "AUTOCAR UK",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/range-rover-electric-2026-059_0.jpg?itok=57fb9Fa3",
+        note: ""
+    },
+    {
+        id: "eu1528",
+        title: "ジープランドローバー初EV、372マイル航続と2885kgでICE車に匹敵",
+        desc: "ジャガーランドローバーは、外観を維持しつつ新開発のデュアルモーターEVを搭載した初の電気自動車「Range Rover Electric」を発表した。同車は航続距離372マイル、重量2885kgを誇り、内燃機関車に匹敵する「wholly credible」な代替手段として位置づけられる。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/range-rover-goes-electric-%C2%A3154k-372-miles-range-and-2885kg",
+        source: "AUTOCAR UK",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/range-rover-electric-2026-065.jpg?itok=gqlL_a4b",
+        note: ""
+    },
+    {
+        id: "cn1554",
+        title: "中国は、国内の試作ラインを拡大する中で、世界向けの全固体電池搭載EVの標準化を推進している",
+        desc: "中国は、国内サプライヤーが 20〜60Ah の EV 電池を進展させる中、0.5% の全固体電池の閾値を国際標準へと押し進めている。中国が世界向けの全固体 EV 標準を推進するとして、国内パイロットラインの拡大が報じられた。",
+        url: "https://carnewschina.com/2026/09/02/china-pushes-global-solid-state-ev-standard-as-domestic-pilot-lines-scale/",
+        source: "CarNewsChina - All",
+        date: "2026-09-02",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/image-3.png",
+        note: ""
+    },
+    {
+        id: "cn1555",
+        title: "理想汽車が中国で、2代目モデルのメガを7万5千ドルで発売",
+        desc: "理想汽車は中国市場向けに、2代目「MEGA」を7万5千ドルで発売した。新車はインテリアの加飾や快適装備を強化し、高級感あふれるコックピットを備える。",
+        url: "https://carnewschina.com/2026/09/02/li-auto-launches-second-gen-mega-in-china-at-75000-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-09-02",
+        tags: ["コックピット"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-34-e1788354148926.png",
+        note: ""
+    },
+    {
+        id: "cn1556",
+        title: "BYDシーレオン08が中国で発売され、2代目ブレードバッテリーを搭載します。",
+        desc: "BYDの新型SUVシーレオン08が中国市場に登場した。価格は3万3800ドルからで、PHEVとEVの両モデルに2代目ブレードバッテリーを採用する。",
+        url: "https://carnewschina.com/2026/09/02/byd-sealion-08-launches-in-china-second-gen-blade-battery-on-both-phev-and-ev-models/",
+        source: "CarNewsChina - All",
+        date: "2026-09-02",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-27-e1788342414835.png",
+        note: ""
+    },
+    {
+        id: "cn1557",
+        title: "BYDがブラジルで、月600kWhの太陽光発電キットを3800ドルで販売",
+        desc: "BYDはブラジルでディーラー網を通じて太陽光発電キットを販売している。月間600kWhの発電が可能で、価格は3800ドル。同社はカーニュースチャイナが報じた。",
+        url: "https://carnewschina.com/2026/09/02/byd-offers-600-kwh-month-solar-kits-via-its-brazil-dealer-network-priced-at-3800-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-09-02",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-24-e1788333408470.png",
+        note: ""
+    },
+    {
+        id: "cn1558",
+        title: "ハンガリーにおけるCATLとBYDの生産遅延は、環境規制の強化が要因である",
+        desc: "CATLとBYDのハンガリー工場での生産が、新政府による環境規制の強化で停滞している。自動車内装やコックピット設計を含む生産計画に影響が出ており、欧州での展開が遅れる可能性が懸念される状況だ。",
+        url: "https://carnewschina.com/2026/09/02/strict-environmental-oversight-and-political-shift-delay-catl-and-byd-production-in-hungary/",
+        source: "CarNewsChina - All",
+        date: "2026-09-02",
+        tags: ["コックピット", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-21.png",
+        note: ""
+    },
+    {
+        id: "cn1559",
+        title: "中国の8月におけるEV販売台数は、BYDが43万3844台",
+        desc: "中国の8月のEV販売台数は、BYDが43万3844台、吉利が17万5877台、Leapmotorが10万3129台、Xpengが3万9107台と発表された。一方、HIMAは初めての前年比減少を記録した。",
+        url: "https://carnewschina.com/2026/09/02/china-ev-global-sales-in-august-2026-byds-export-volumes-catching-up-with-cherys/",
+        source: "CarNewsChina - All",
+        date: "2026-09-02",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/screenshot-2026-09-02-at-09-51-51-daily-updated-database-of-chinese-evs-and-sales-data-data-carnewschina-com-e1788313984327.png",
+        note: ""
+    },
+    {
+        id: "cn1560",
+        title: "BYDシーリオン08 SUVは、BEVとPHEVの2つのモデルで",
+        desc: "BYDはシーリオン08 SUVを発売し、海洋シリーズのフラッグシップ強化を図る。BEVとPHEVの2形態で、急速充電対応とCLTC基準900kmの航続距離を備える。",
+        url: "https://cnevpost.com/2026/09/02/byd-launches-sealion-08-suv/",
+        source: "CnEVPost - All",
+        date: "2026-09-02",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090209551011.jpg",
+        note: ""
+    },
+    {
+        id: "cn1561",
+        title: "BYD、新型4Dレーダーチップの量産を開始し、独自開発を強化",
+        desc: "BYDは自研のXuanji A3チップを基盤とした新4Dレーダーチップの量産を開始した。同製品はレベル2から4の自動運転システムに対応し、車載感知技術の強化を意味する。",
+        url: "https://cnevpost.com/2026/09/02/byd-mass-production-new-4d-radar-chip/",
+        source: "CnEVPost - All",
+        date: "2026-09-02",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090209030858.jpg",
+        note: ""
+    },
+    {
+        id: "cn1562",
+        title: "奇瑞自動車は 8 月の販売台数が 14% 増加し、輸出が 70% を超えた",
+        desc: "奇瑞汽車は 8 月に 262,990 台の車両を販売し、そのうち 187,154 台が輸出で、全体のおよそ 71.2% を占めました。詳細については CnEVPost（cnev.co）をご覧ください。",
+        url: "https://cnevpost.com/2026/09/02/chery-auto-aug-2026-sales/",
+        source: "CnEVPost - All",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090206201236.jpg",
+        note: ""
+    },
+    {
+        id: "cn1563",
+        title: "吉利の 8 月の販売は 8% 増加し、記録的な輸出が国内の低迷を相殺した",
+        desc: "吉利汽車は 8 月に 110,094 台の車両を輸出し、前年同期比 205% の増加となり、総販売台数の 41% を占めました。詳細は CnEVPost（cnev.co）をご覧ください。",
+        url: "https://cnevpost.com/2026/09/02/geely-aug-2026-sales/",
+        source: "CnEVPost - All",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090202250020.jpg",
+        note: ""
+    },
+    {
+        id: "in1608",
+        title: "Simple Wave、快適で実用的なファミリー向けスクーター",
+        desc: "Simple Waveは、快適性と実用性を約束するブランド初のファミリー向けスクーターです。個性的なデザイン、広範な航続距離、優れたパフォーマンスを備え、実用性を兼ね備えています。",
+        url: "https://www.autocarindia.com/auto-videos/simple-wave-walk-around-440168",
+        source: "Autocar India - All",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260902_125118_feece34c.jpg",
+        note: ""
+    },
+    {
+        id: "in1609",
+        title: "JLR、2026年9月2日生産仕様レンジローバーエレクトリック発表",
+        desc: "JLRは2026年9月2日、生産仕様のレンジローバーエレクトリックを公開した。同車は内燃機関モデルと同じMLA-Flexプラットフォームを採用しており、インテリアやコックピット設計も既存モデルと共通する。",
+        url: "https://www.autocarindia.com/auto-images/range-rover-electric-image-gallery-440449",
+        source: "Autocar India - All",
+        date: "2026-09-02",
+        tags: ["コックピット"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20260902_090529_059274d2.jpg",
+        note: ""
+    },
+    {
+        id: "in1610",
+        title: "車内3画面化、乗客表示は利用率低 簡素技術が評価",
+        desc: "JDパワー調査で、車内3画面化は普及しつつあるが、乗客用表示は利用率が低い。複雑なシステムより背景で動作する簡素技術の方が満足度が高く、自動運転も従来型が評価される。",
+        url: "https://www.rushlane.com/triple-screen-in-cars-only-6-use-passenger-display-every-drive-12554747.html",
+        source: "RushLane",
+        date: "2026-09-02",
+        tags: [],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/triple-screen-study-reveals-not-many-use-it.jpg",
+        note: ""
+    },
+    {
+        id: "in1611",
+        title: "Simple Waveインド発売 最高243km航続70リットル収納",
+        desc: "Simple Energyはインドで電気スクーター「Simple Wave」を発売した。最高時速90kmph、最大243kmの航続距離を備え、バッテリー容量5kWhで70リットルの収納空間を確保する。",
+        url: "https://gaadiwaadi.com/simple-wave-launched-in-india-at-rs-1-09-lakh-with-up-to-243-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/Simple-Wave-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1612",
+        title: "新世代三菱パジェロが内外で大きな変更を披露",
+        desc: "ガディワディ - ミツビシ・パジェロは、2021年にグローバル市場から姿を消した後に、再び第五世代として復活しました。このモデルは、より大型のラダーフレームオフローダーであり、トランジットと共通のシャシーとディーゼルエンジンを採用しています。",
+        url: "https://gaadiwaadi.com/new-gen-mitsubishi-pajero-breaks-cover-with-big-changes-inside-out/",
+        source: "GaadiWaadi",
+        date: "2026-09-02",
+        tags: [],
+    
+        interiorScore: 41,
+        interiorReason: "interior mentioned but no concrete details; image shows only exterior",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/new-gen-2027-mitsubishi-pajero.jpg",
+        note: ""
+    },
+    {
+        id: "in1613",
+        title: "新ハヤンデSUV、対ビクトリスで「BRING IT ON」メッセージ",
+        desc: "2026年ディワリ発売予定のハヤンデ中型SUVは、対ビクトリスを想定した開発が進む。最新試作車には「BRING IT ON」や「Companion」などのメッセージが描かれたカモフラージュが施されており、インテリアやコックピットのデザイン変更が示唆されている。",
+        url: "https://www.indiacarnews.com/news/new-hyundai-suv-victoris-rival-spied-with-a-secret-on-message-68873/",
+        source: "IndiaCarNews",
+        date: "2026-09-02",
+        tags: ["コックピット"],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/New-Hyundai-Bayon-SUV-1.webp",
+        note: ""
+    },
+    {
+        id: "in1614",
+        title: "タタのベストセラーSUVが、2027年に大規模なアップデートを受ける",
+        desc: "次世代のタタ・ネクソンは、2027 年頃の正式発売を前に、初期テスト段階に入りました。内部コードネームは「ガルド」と呼ばれ、サブコンパクト SUV は大幅なデザイン変更、機能向上、新技術の搭載が期待されています。エンジン設定については、。",
+        url: "https://www.indiacarnews.com/news/tatas-best-selling-suv-to-get-a-major-upgrade-in-2027-68871/",
+        source: "IndiaCarNews",
+        date: "2026-09-02",
+        tags: [],
+    
+        interiorScore: 30,
+        interiorReason: "flagship cabin refresh",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2025/09/2025-Tata-Nexon-Prices-GST.webp",
+        note: ""
+    },
+    {
+        id: "in1615",
+        title: "2026 年 8 月のトップ 5 自動車メーカー – タタがマヒンドラをリードし差を広げる",
+        desc: "2026 年 8 月は、インドの自動車業界にとって好調な月で、多くの OEM が健全な販売成長を記録しました。現代とキアは史上最高の国内月間販売を達成し、タタ・モーターズはマヒンドラ・マヒンドラとの販売差を大幅に拡大させました。ここでは、その詳細を詳しく見ていきます。",
+        url: "https://www.indiacarnews.com/news/top-5-car-brands-in-august-2026-tata-widens-lead-over-mahindra-68866/",
+        source: "IndiaCarNews",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/06/New-Tata-Nexon-2027-Launch.webp",
+        note: ""
+    },
+    {
+        id: "in1616",
+        title: "Simple Energy、家族向け電動スクーターWaveを10万9千9百99ルピーで発売",
+        desc: "Simple Energyは家族向け電動スクーターWaveを発売した。導入価格は10万9千9百99ルピーで、4種類のバッテリーオプションから選べ、最大243kmの航続距離と70リットルの総収納容量を備える。",
+        url: "https://www.autopunditz.com/post/simple-wave-electric-scooter-launch-price-range-features",
+        source: "Auto Punditz",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_c8d17ad5917f408a91d1539ca1f7c723~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1568",
+        title: "レンジローバー初のEV SUVが14万ドルから販売開始、V8並みの性能",
+        desc: "レンジローバー初の電気自動車SUVが14万ドルから販売を開始した。価格は高いが、静かで洗練された走行性能を備え、V8エンジン並みの力強さを誇る。",
+        url: "https://electrek.co/2026/09/02/range-rover-electric-launches-140k-v8-power-images/",
+        source: "Electrek",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/09/Range-Rover-Electric-price.jpeg?quality=82&#038;strip=all&#038;w=1400",
+        note: ""
+    },
+    {
+        id: "eu1529",
+        title: "オッペル、IAA2026でMovanoやVivaroなど4モデルを展示し欧州商用車市場の多様化を示す",
+        desc: "オッペルはIAA2026でMovano、Vivaro、Rocksの4モデルを展示し、欧州の軽商用車(LCV)需要がマイクロEVから貨物バンまで多様化していることを示した。",
+        url: "https://www.automotiveworld.com/news/opel-displays-movano-vivaro-and-rocks-at-iaa-2026/",
+        source: "Automotive World",
+        date: "2026-09-02",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/02094836/opel-combo-vivaro-movano-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1530",
+        title: "ポレスター4、最大391マイル航続と544馬力で英国発売開始",
+        desc: "ポレスター4は英国で5万4750ポンドから発売され、最大391マイルの航続距離と544馬力を備える。V2Lやキャンプモードなど快適装備を備えたSUVである。",
+        url: "https://electriccarsreport.com/2026/09/polestar-4-suv-launches-with-up-to-391-miles-of-range-and-and-544-hp/",
+        source: "Electric Cars Report",
+        date: "2026-09-02",
+        tags: [],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Polestar-4.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1531",
+        title: "ノルウェー、EV 新車販売 98.7% 達成",
+        desc: "ノルウェーでは 2026 年 8 月、新車登録の 98.7% が電気自動車となった。Volkswagen が首位で、Tesla は 7 位に後退した。Electric Cars Report が報じた。",
+        url: "https://electriccarsreport.com/2026/09/electric-cars-reach-98-7-of-new-car-sales-in-norway-in-august/",
+        source: "Electric Cars Report",
+        date: "2026-09-02",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/XPeng-L03.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1532",
+        title: "BYD、26年8月海外EV需要増で新記録44万2933台販売",
+        desc: "BYDは2026年8月に新記録となる44万2933台のNEVを販売した。海外販売は134%増で、バッテリーEVの月間出荷も新高を記録した。",
+        url: "https://electriccarsreport.com/2026/09/byd-august-2026-sales-hit-record-as-overseas-ev-demand-surges/",
+        source: "Electric Cars Report",
+        date: "2026-09-02",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/BYD-Da-Han_3.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "in1617",
+        title: "VinFast、インド向けEV開発と工場拡張を承認",
+        desc: "VinFastはインド市場向けに専用EVを開発し、製造と調達基盤を強化する。同社はインドでの工場拡張を承認され、現地生産体制を拡大する計画である。",
+        url: "https://www.motorbeam.com/vinfast-india-new-electric-cars/",
+        source: "MotorBeam",
+        date: "2026-09-02",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://dvps8uz7lyvra.cloudfront.net/wp-content/uploads/VinFast-Green-SM.jpg",
+        note: ""
+    },
+    {
+        id: "jp1749",
+        title: "三菱新型パジェロ世界初披露14.3インチモノリスと3列7名を備える",
+        desc: "三菱自動車が新型パジェロを世界初披露。14.3インチモノリスディスプレイや3列7名の室内を備え、2.4Lクリーンディーゼルとスーパーセレクト4WD-IIを搭載する。",
+        url: "https://autoc-one.jp/mitsubishi/pajero/newmodel-5043962/",
+        source: "MOTA（モータ）",
+        date: "2026-09-02",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://cdn.autoc-one.jp/images/article/202609/01114320771_6b64.jpg",
+        note: ""
+    },
+    {
+        id: "jp1750",
+        title: "広汽トヨタが2026年3月に中国投入のフラッグシップBEVセダンボージ7は全長",
+        desc: "広汽トヨタは2026年3月に中国市場へ全長5.1mの後輪駆動フラッグシップBEVセダンボージ7を投入する。282馬力と710kmの航続距離に加え、AIを活用した超ハイテクな豪華内装を備える。",
+        url: "https://www.msn.com/ja-jp/news/other/新車407万円-トヨタ新型-最上級-セダン-が凄い-クラウン-超える-全長51m-大型ボディ採用-282馬力-710km走れる-後輪駆動モデル-ai-活用した超ハイテク-豪華内装-の-ボージ7-中国モデルとは/ar-AA2bmXta",
+        source: "くるまのニュース",
+        date: "2026-09-02",
+        tags: ["AI", "EV"],
+    
+        interiorScore: 49,
+        interiorReason: "flagship cabin refresh with AI luxury interior mentioned; image shows exterior o",
+        imageInterior: false,
+        country: "jp",
+        img: "https://kuruma-news.jp/wp-content/uploads/2026/12/7b2bcbdd7179ee514387e8dcacbac90b.jpg?v=1766460015",
         note: ""
     },
 ];
