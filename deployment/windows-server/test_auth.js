@@ -146,11 +146,68 @@ async function main() {
   assert.equal(activity.comments.length, 1);
   assert.equal(activity.feedback.length, 1);
 
+  const firstUserCookie = cookie;
+  const secondRegistration = await request("/api/auth/register", {
+    method: "POST",
+    body: {
+      email: "second.user@example.com",
+      displayName: "Second User",
+      password: "correct-horse-456",
+      clientId: "secondclientidentifier1234",
+      favorites: [],
+    },
+  });
+  assert.equal(secondRegistration.authenticated, true);
+
+  const reply = await request("/api/interactions/jp1/comments", {
+    method: "POST",
+    body: {
+      clientId: "secondclientidentifier1234",
+      text: "test reply",
+      parentCommentId: comment.commentItems[0].id,
+    },
+  });
+  assert.equal(reply.commentItems[1].parentId, comment.commentItems[0].id);
+
+  await request(
+    `/api/interactions/jp1/comments/${comment.commentItems[0].id}/like`,
+    {
+      method: "PUT",
+      body: { clientId: "secondclientidentifier1234", liked: true },
+    },
+  );
+
+  const secondActivity = await request("/api/me/activity");
+  assert.equal(secondActivity.participated[0].itemId, "jp1");
+
+  cookie = firstUserCookie;
+  const notifications = await request("/api/notifications");
+  assert.equal(notifications.unreadCount, 2);
+  assert.deepEqual(
+    new Set(notifications.notifications.map((entry) => entry.type)),
+    new Set(["comment_reply", "comment_like"]),
+  );
+
+  const recent = await request("/api/activity/recent?limit=3");
+  assert.equal(recent.activity[0].itemId, "jp1");
+  assert.equal(recent.activity[0].type, "comment_reply");
+
+  const markedRead = await request("/api/notifications/read", {
+    method: "PUT",
+    body: { ids: [notifications.notifications[0].id] },
+  });
+  assert.equal(markedRead.unreadCount, 1);
+  const allRead = await request("/api/notifications/read", {
+    method: "PUT",
+    body: { all: true },
+  });
+  assert.equal(allRead.unreadCount, 0);
+
   const admin = await request("/api/admin/overview");
-  assert.equal(admin.totals.users, 1);
-  assert.equal(admin.users[0].email, "test.user@example.com");
-  assert.equal(admin.users[0].isAdmin, true);
-  assert.equal(admin.users[0].irrelevant, 1);
+  assert.equal(admin.totals.users, 2);
+  const adminUser = admin.users.find((user) => user.email === "test.user@example.com");
+  assert.equal(adminUser.isAdmin, true);
+  assert.equal(adminUser.irrelevant, 1);
   assert.equal(admin.totals.irrelevant, 1);
   assert.equal(admin.feedback.length, 1);
   process.stdout.write("DailyNews auth integration test passed.\n");

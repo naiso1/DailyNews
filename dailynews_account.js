@@ -142,12 +142,14 @@ function accountStyles() {
     .account-card-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .account-activity-card { display:grid; grid-template-columns:128px minmax(0,1fr); min-height:110px; overflow:hidden; border:1px solid rgba(255,255,255,.1); border-radius:15px; background:rgba(255,255,255,.035); color:#e8eef7; text-align:left; cursor:pointer; }
     .account-activity-card:hover { border-color:rgba(125,241,194,.42); transform:translateY(-1px); }
+    .account-activity-card.account-card-unread { border-color:rgba(111,167,255,.38); background:rgba(111,167,255,.07); }
     .account-card-image { width:128px; height:100%; min-height:110px; object-fit:cover; background:linear-gradient(135deg,#223248,#101925); }
     .account-card-image-fallback { display:grid; width:128px; min-height:110px; place-items:center; background:linear-gradient(135deg,#223248,#101925); color:#70839a; font-size:23px; }
     .account-card-copy { min-width:0; padding:12px; }
     .account-card-meta { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:6px; color:#8fa1b7; font-size:10px; }
     .account-card-kind { padding:2px 6px; border-radius:999px; background:rgba(111,167,255,.14); color:#a8c9ff; font-weight:800; }
     .account-card-kind.idea { background:rgba(255,174,87,.14); color:#ffd19d; }
+    .account-unread-label { padding:2px 6px; border-radius:999px; background:#6fa7ff; color:#07111d; font-weight:900; }
     .account-card-title { display:-webkit-box; overflow:hidden; color:#f2f7fc; font-size:13px; font-weight:800; line-height:1.45; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
     .account-card-desc { display:-webkit-box; overflow:hidden; margin-top:5px; color:#93a2b5; font-size:11px; line-height:1.5; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
     .account-card-comment { margin-top:7px; padding:6px 8px; border-left:2px solid #7df1c2; background:rgba(125,241,194,.06); color:#bed0df; font-size:11px; line-height:1.45; }
@@ -351,6 +353,25 @@ function accountItemIndex() {
 function activityEntries(tab) {
   const activity = accountState.activity || {};
   const index = accountItemIndex();
+  if (tab === "updates") {
+    return (activity.notifications || []).map((notification) => {
+      const item = index.get(String(notification.itemId));
+      const actions = {
+        comment_reply: `${notification.actorName}さんがあなたのコメントに返信しました。`,
+        comment_like: `${notification.actorName}さんがあなたのコメントにいいねしました。`,
+        article_comment: `参加中の記事に${notification.actorName}さんがコメントしました。`,
+      };
+      return {
+        ...(item || { id: String(notification.itemId), targetId: String(notification.itemId), type: "news" }),
+        activityId: String(notification.itemId),
+        title: item?.title || notification.itemId,
+        comment: actions[notification.type] || "記事に新しい動きがあります。",
+        activityDate: notification.createdAt,
+        unread: !notification.read,
+        notificationId: Number(notification.id),
+      };
+    });
+  }
   if (tab === "comments") {
     return (activity.comments || []).map((comment) => {
       const item = index.get(String(comment.itemId));
@@ -360,6 +381,18 @@ function activityEntries(tab) {
         title: item?.title || comment.itemId,
         comment: comment.text,
         activityDate: comment.createdAt,
+      };
+    });
+  }
+  if (tab === "participation") {
+    return (activity.participated || []).map((participation) => {
+      const itemId = String(participation.itemId);
+      const item = index.get(itemId);
+      return {
+        ...(item || { id: itemId, targetId: itemId, type: "news" }),
+        activityId: itemId,
+        title: item?.title || itemId,
+        activityDate: participation.activityAt,
       };
     });
   }
@@ -391,10 +424,10 @@ function activityCard(entry) {
   const comment = entry.comment
     ? `<div class="account-card-comment">${escapeAccountHtml(entry.comment)}</div>`
     : "";
-  return `<button class="account-activity-card" type="button" data-item-id="${escapeAccountHtml(entry.activityId || entry.id)}">
+  return `<button class="account-activity-card${entry.unread ? " account-card-unread" : ""}" type="button" data-item-id="${escapeAccountHtml(entry.activityId || entry.id)}"${entry.notificationId ? ` data-notification-id="${entry.notificationId}"` : ""}>
     ${image}
     <span class="account-card-copy">
-      <span class="account-card-meta"><span class="account-card-kind ${entry.type === "idea" ? "idea" : ""}">${entry.type === "idea" ? "企画アイデア" : "ニュース"}</span><span>${escapeAccountHtml(entry.country || "")}</span><span>${escapeAccountHtml(entry.date || formatAccountDateTime(entry.activityDate))}</span></span>
+      <span class="account-card-meta"><span class="account-card-kind ${entry.type === "idea" ? "idea" : ""}">${entry.type === "idea" ? "企画アイデア" : "ニュース"}</span><span>${escapeAccountHtml(entry.country || "")}</span><span>${escapeAccountHtml(entry.date || formatAccountDateTime(entry.activityDate))}</span>${entry.unread ? '<span class="account-unread-label">未読</span>' : ""}</span>
       <span class="account-card-title">${escapeAccountHtml(entry.title)}</span>
       <span class="account-card-desc">${escapeAccountHtml(entry.description || "")}</span>
       ${comment}
@@ -417,7 +450,15 @@ function renderActivityList() {
     : "";
   list.innerHTML = section("企画アイデア", ideas) + section("ニュース", news);
   list.querySelectorAll("[data-item-id]").forEach((button) => {
-    button.addEventListener("click", () => openActivityItem(button.dataset.itemId));
+    button.addEventListener("click", () => {
+      if (button.dataset.notificationId) {
+        accountApi("/notifications/read", {
+          method: "PUT",
+          body: { ids: [Number(button.dataset.notificationId)] },
+        }).catch(() => {});
+      }
+      openActivityItem(button.dataset.itemId);
+    });
   });
 }
 
@@ -435,6 +476,8 @@ function renderAccountHome() {
       <button class="account-secondary" type="submit">表示名を更新</button>
     </form>
     <div class="account-tabs">
+      <button class="account-tab" data-tab="participation" type="button">参加した記事</button>
+      <button class="account-tab" data-tab="updates" type="button">返信・更新${Number(accountState.activity?.unreadNotifications || 0) ? ` (${Number(accountState.activity.unreadNotifications)})` : ""}</button>
       <button class="account-tab" data-tab="favorites" type="button">お気に入り</button>
       <button class="account-tab" data-tab="likes" type="button">いいね</button>
       <button class="account-tab" data-tab="comments" type="button">自分のコメント</button>
@@ -596,6 +639,15 @@ function openAccount(mode, message = "") {
   else renderAuth(mode || accountState.mode, message);
 }
 
+function openAccountTab(tab) {
+  if (!accountState.user) {
+    openAccount("login", "この機能を利用するにはログインしてください。");
+    return;
+  }
+  accountState.activityTab = tab;
+  openAccount();
+}
+
 function closeAccount() {
   if (!accountState.user) return;
   document.getElementById("accountOverlay")?.classList.remove("open");
@@ -622,6 +674,7 @@ window.dailyNewsAccount = {
     return accountState.user;
   },
   open: openAccount,
+  openTab: openAccountTab,
   openAuth(mode = "login", message = "") {
     openAccount(mode, message || "この操作にはログインが必要です。");
   },
@@ -635,6 +688,7 @@ window.dailyNewsAccount = {
     });
     accountState.activity = accountState.activity || {};
     accountState.activity.favorites = result.favorites || [];
+    window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
     return true;
   },
   async refreshActivity() {
@@ -643,4 +697,7 @@ window.dailyNewsAccount = {
   },
 };
 
+window.addEventListener("dailynews:activity-updated", () => {
+  if (accountState.user) refreshActivity().catch(() => {});
+});
 document.addEventListener("DOMContentLoaded", initializeAccount);

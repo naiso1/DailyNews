@@ -653,13 +653,15 @@ function renderItem(itemId) {
     elements.commentList.innerHTML = (data.comments || [])
       .map(
         (comment, index) => `
-          <div class="comment-item">
+          <div class="comment-item${comment.parentId ? " reply-comment" : ""}" data-comment-id="${Number(comment.id || 0)}">
             <div class="comment-user">${escapeHtml(comment.user || "Guest")}
               <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${escapeHtml(comment.date || "")}</span>
+              ${comment.parentId ? '<span class="comment-reply-label">返信</span>' : ""}
             </div>
             <div class="comment-text">${escapeHtml(comment.text || "")}</div>
             <div class="comment-actions">
               ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
+              ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
               ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">&#21066;&#38500;</button>`}
             </div>
           </div>`,
@@ -928,6 +930,7 @@ window.toggleLike = async (itemId, button) => {
     if (count) count.textContent = data.likes || 0;
     updateRankings();
     window.refreshNewsReactionSort?.();
+    window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
   } catch (error) {
     console.error("Like save failed:", error);
     button.classList.toggle("liked", wasLiked);
@@ -959,13 +962,12 @@ window.toggleComments = (itemId, button) => {
   if (isOpen) window.subscribeItem(itemId, null, button, commentList);
 };
 
-window.submitComment = async (itemId, input) => {
-  const text = input.value.trim();
+async function saveComment(itemId, text, parentCommentId = null, input = null) {
   if (!text) return;
-  input.value = "";
+  if (input) input.value = "";
 
   if (window.useLocalInteractions) {
-    input.value = text;
+    if (input) input.value = text;
     alert("サーバーに接続できないため、コメントを保存できません。時間をおいて再度お試しください。");
     return;
   }
@@ -975,7 +977,7 @@ window.submitComment = async (itemId, input) => {
       `/interactions/${encodeURIComponent(itemId)}/comments`,
       {
         method: "POST",
-        body: { clientId: getClientId(), user: "Guest", text },
+        body: { clientId: getClientId(), text, parentCommentId },
       },
     );
     mergeInteractionData(itemId, data);
@@ -984,9 +986,10 @@ window.submitComment = async (itemId, input) => {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
     }
+    window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
   } catch (error) {
     console.error("Comment save failed:", error);
-    input.value = text;
+    if (input) input.value = text;
     if (error.status === 401) {
       window.dailyNewsAccount?.openAuth(
         "login",
@@ -996,6 +999,17 @@ window.submitComment = async (itemId, input) => {
     }
     alert("コメントの保存に失敗しました。通信状態を確認してください。");
   }
+}
+
+window.submitComment = async (itemId, input) => {
+  const text = input.value.trim();
+  await saveComment(itemId, text, null, input);
+};
+
+window.replyToComment = async (itemId, commentId) => {
+  const text = window.prompt("返信を入力してください。");
+  if (!text?.trim()) return;
+  await saveComment(itemId, text.trim(), commentId);
 };
 
 window.toggleCommentLike = async (itemId, commentId, liked) => {
@@ -1013,6 +1027,7 @@ window.toggleCommentLike = async (itemId, commentId, liked) => {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
     }
+    window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
   } catch (error) {
     if (error.status === 401) {
       window.dailyNewsAccount?.openAuth(
@@ -1062,6 +1077,7 @@ window.deleteComment = async (itemId, commentIndex) => {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
     }
+    window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
   } catch (error) {
     console.error("Comment delete failed:", error);
     alert(

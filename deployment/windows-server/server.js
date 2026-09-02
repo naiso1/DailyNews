@@ -197,10 +197,32 @@ function ensureColumn(tableName, columnName, definition) {
 }
 
 ensureColumn("comments", "user_id", "INTEGER REFERENCES users(id)");
+ensureColumn("comments", "parent_comment_id", "INTEGER REFERENCES comments(id)");
 ensureColumn("users", "is_admin", "INTEGER NOT NULL DEFAULT 0");
 db.exec(`
   CREATE INDEX IF NOT EXISTS comments_user_id_idx
     ON comments(user_id, id DESC);
+  CREATE INDEX IF NOT EXISTS comments_parent_id_idx
+    ON comments(parent_comment_id, id);
+
+  CREATE TABLE IF NOT EXISTS notifications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    actor_user_id INTEGER,
+    notification_type TEXT NOT NULL,
+    item_id TEXT NOT NULL,
+    comment_id INTEGER,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    read_at TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (actor_user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE
+  );
+
+  CREATE INDEX IF NOT EXISTS notifications_user_idx
+    ON notifications(user_id, read_at, id DESC);
+  CREATE INDEX IF NOT EXISTS notifications_comment_idx
+    ON notifications(comment_id, notification_type, actor_user_id);
 `);
 
 const statements = {
@@ -229,7 +251,7 @@ const statements = {
     GROUP BY i.item_id
   `),
   comments: db.prepare(`
-    SELECT id, user_name, comment_text, client_id, user_id, created_at
+    SELECT id, user_name, comment_text, client_id, user_id, parent_comment_id, created_at
     FROM comments
     WHERE item_id = ?
     ORDER BY id
@@ -289,14 +311,18 @@ const statements = {
     WHERE item_id = ?
   `),
   insertComment: db.prepare(`
-    INSERT INTO comments(item_id, user_name, comment_text, client_id, user_id)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO comments(item_id, user_name, comment_text, client_id, user_id, parent_comment_id)
+    VALUES (?, ?, ?, ?, ?, ?)
   `),
   findComment: db.prepare(`
-    SELECT id, item_id, client_id, user_id FROM comments WHERE id = ? AND item_id = ?
+    SELECT id, item_id, user_name, comment_text, client_id, user_id, parent_comment_id
+    FROM comments WHERE id = ? AND item_id = ?
   `),
   deleteComment: db.prepare(`
     DELETE FROM comments WHERE id = ? AND item_id = ?
+  `),
+  detachCommentReplies: db.prepare(`
+    UPDATE comments SET parent_comment_id = NULL WHERE parent_comment_id = ?
   `),
   insertRead: db.prepare(`
     INSERT OR IGNORE INTO article_reads(item_id, client_id, date_key)
@@ -415,6 +441,75 @@ const statements = {
   `),
   deleteCommentLike: db.prepare(`
     DELETE FROM comment_likes WHERE comment_id = ? AND user_id = ?
+  `),
+  participantUsers: db.prepare(`
+    SELECT user_id FROM comments WHERE item_id = ? AND user_id IS NOT NULL
+    UNION SELECT user_id FROM user_favorites WHERE item_id = ?
+    UNION SELECT user_id FROM user_likes WHERE item_id = ?
+  `),
+  insertNotification: db.prepare(`
+    INSERT INTO notifications(user_id, actor_user_id, notification_type, item_id, comment_id)
+    VALUES (?, ?, ?, ?, ?)
+  `),
+  deleteCommentLikeNotification: db.prepare(`
+    DELETE FROM notifications
+    WHERE notification_type = 'comment_like' AND comment_id = ? AND actor_user_id = ?
+  `),
+  notifications: db.prepare(`
+    SELECT
+      n.id,
+      n.notification_type,
+      n.item_id,
+      n.comment_id,
+      n.created_at,
+      n.read_at,
+      actor.display_name AS actor_name,
+      c.comment_text
+    FROM notifications n
+    LEFT JOIN users actor ON actor.id = n.actor_user_id
+    LEFT JOIN comments c ON c.id = n.comment_id
+    WHERE n.user_id = ?
+    ORDER BY n.id DESC
+    LIMIT ?
+  `),
+  unreadNotificationCount: db.prepare(`
+    SELECT COUNT(*) AS count FROM notifications WHERE user_id = ? AND read_at IS NULL
+  `),
+  markNotificationRead: db.prepare(`
+    UPDATE notifications SET read_at = COALESCE(read_at, CURRENT_TIMESTAMP)
+    WHERE id = ? AND user_id = ?
+  `),
+  markAllNotificationsRead: db.prepare(`
+    UPDATE notifications SET read_at = COALESCE(read_at, CURRENT_TIMESTAMP)
+    WHERE user_id = ?
+  `),
+  recentActivity: db.prepare(`
+    SELECT
+      c.id,
+      c.item_id,
+      c.comment_text,
+      c.parent_comment_id,
+      c.created_at,
+      u.display_name,
+      (SELECT COUNT(*) FROM comments all_comments WHERE all_comments.item_id = c.item_id) AS comment_count,
+      (SELECT likes FROM interactions i WHERE i.item_id = c.item_id) AS like_count
+    FROM comments c
+    JOIN users u ON u.id = c.user_id
+    ORDER BY c.id DESC
+    LIMIT ?
+  `),
+  userParticipation: db.prepare(`
+    SELECT item_id, MAX(activity_at) AS activity_at
+    FROM (
+      SELECT item_id, created_at AS activity_at FROM comments WHERE user_id = ?
+      UNION ALL
+      SELECT item_id, created_at AS activity_at FROM user_likes WHERE user_id = ?
+      UNION ALL
+      SELECT item_id, created_at AS activity_at FROM user_favorites WHERE user_id = ?
+    )
+    GROUP BY item_id
+    ORDER BY activity_at DESC
+    LIMIT 200
   `),
   insertFeedback: db.prepare(`
     INSERT INTO feedback(user_id, category, message, item_id, page_url)
@@ -799,8 +894,10 @@ function withTransaction(action) {
 function commentsFor(itemId, clientId, user = null) {
   return statements.comments.all(itemId).map((comment) => ({
     id: Number(comment.id),
+    parentId: comment.parent_comment_id ? Number(comment.parent_comment_id) : null,
     user: comment.user_name,
     text: comment.comment_text,
+    createdAt: comment.created_at,
     date: new Date(
       String(comment.created_at).includes("T")
         ? comment.created_at
@@ -814,6 +911,56 @@ function commentsFor(itemId, clientId, user = null) {
       ? Number(comment.user_id) === user.id
       : !comment.user_id && (!comment.client_id || comment.client_id === clientId),
   }));
+}
+
+function notificationPayload(userId, limit = 30) {
+  const safeLimit = Math.max(1, Math.min(100, Number(limit) || 30));
+  return {
+    unreadCount: Number(
+      statements.unreadNotificationCount.get(userId)?.count || 0,
+    ),
+    notifications: statements.notifications.all(userId, safeLimit).map((row) => ({
+      id: Number(row.id),
+      type: row.notification_type,
+      itemId: row.item_id,
+      commentId: row.comment_id ? Number(row.comment_id) : null,
+      actorName: row.actor_name || "ユーザー",
+      text: row.comment_text || "",
+      createdAt: row.created_at,
+      read: Boolean(row.read_at),
+    })),
+  };
+}
+
+function notifyCommentParticipants(itemId, commentId, actor, parentComment) {
+  const recipients = new Set(
+    statements.participantUsers
+      .all(itemId, itemId, itemId)
+      .map((row) => Number(row.user_id))
+      .filter((userId) => userId && userId !== actor.id),
+  );
+
+  const parentUserId = Number(parentComment?.user_id || 0);
+  if (parentUserId && parentUserId !== actor.id) {
+    statements.insertNotification.run(
+      parentUserId,
+      actor.id,
+      "comment_reply",
+      itemId,
+      commentId,
+    );
+    recipients.delete(parentUserId);
+  }
+
+  for (const userId of recipients) {
+    statements.insertNotification.run(
+      userId,
+      actor.id,
+      "article_comment",
+      itemId,
+      commentId,
+    );
+  }
 }
 
 function interactionFor(itemId, clientId, includeComments = true, user = null) {
@@ -1165,14 +1312,33 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 400, "invalid_comment", "Invalid comment.");
       return;
     }
+    const parentCommentId = body.parentCommentId == null
+      ? null
+      : Number(body.parentCommentId);
+    const parentComment = parentCommentId == null
+      ? null
+      : statements.findComment.get(parentCommentId, itemId);
+    if (parentCommentId != null && (
+      !Number.isSafeInteger(parentCommentId) || !parentComment
+    )) {
+      apiError(response, 400, "invalid_parent_comment", "Reply target was not found.");
+      return;
+    }
     withTransaction(() => {
       statements.ensureInteraction.run(itemId);
-      statements.insertComment.run(
+      const inserted = statements.insertComment.run(
         itemId,
         user.displayName,
         text,
         validClientId(body.clientId) ? body.clientId : null,
         user.id,
+        parentCommentId,
+      );
+      notifyCommentParticipants(
+        itemId,
+        Number(inserted.lastInsertRowid),
+        user,
+        parentComment,
       );
     });
     sendJson(response, 201, interactionFor(itemId, body.clientId, true, user));
@@ -1210,7 +1376,10 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 403, "comment_owner_required", "Only the author can delete this comment.");
       return;
     }
-    statements.deleteComment.run(commentId, itemId);
+    withTransaction(() => {
+      statements.detachCommentReplies.run(commentId);
+      statements.deleteComment.run(commentId, itemId);
+    });
     sendJson(response, 200, interactionFor(itemId, clientId, true, user));
     return;
   }
@@ -1237,11 +1406,23 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 404, "comment_not_found", "Comment was not found.");
       return;
     }
-    if (Boolean(body.liked)) {
-      statements.insertCommentLike.run(commentId, user.id);
-    } else {
-      statements.deleteCommentLike.run(commentId, user.id);
-    }
+    withTransaction(() => {
+      if (Boolean(body.liked)) {
+        const inserted = statements.insertCommentLike.run(commentId, user.id);
+        if (Number(inserted.changes) === 1 && comment.user_id && Number(comment.user_id) !== user.id) {
+          statements.insertNotification.run(
+            Number(comment.user_id),
+            user.id,
+            "comment_like",
+            itemId,
+            commentId,
+          );
+        }
+      } else {
+        statements.deleteCommentLike.run(commentId, user.id);
+        statements.deleteCommentLikeNotification.run(commentId, user.id);
+      }
+    });
     sendJson(
       response,
       200,
@@ -1274,6 +1455,7 @@ async function handleApi(request, response, requestUrl) {
   if (request.method === "GET" && requestUrl.pathname === "/api/me/activity") {
     const user = requireUser(request, response);
     if (!user) return;
+    const notifications = notificationPayload(user.id, 100);
     sendJson(response, 200, {
       user,
       favorites: statements.userFavorites.all(user.id).map((row) => row.item_id),
@@ -1285,6 +1467,14 @@ async function handleApi(request, response, requestUrl) {
         text: row.comment_text,
         createdAt: row.created_at,
       })),
+      participated: statements.userParticipation
+        .all(user.id, user.id, user.id)
+        .map((row) => ({
+          itemId: row.item_id,
+          activityAt: row.activity_at,
+        })),
+      notifications: notifications.notifications,
+      unreadNotifications: notifications.unreadCount,
       feedback: statements.userFeedback.all(user.id).map((row) => ({
         id: Number(row.id),
         category: row.category,
@@ -1295,6 +1485,55 @@ async function handleApi(request, response, requestUrl) {
         createdAt: row.created_at,
       })),
     });
+    return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/activity/recent") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const limit = Math.max(
+      1,
+      Math.min(12, Number(requestUrl.searchParams.get("limit")) || 6),
+    );
+    sendJson(response, 200, {
+      activity: statements.recentActivity.all(limit).map((row) => ({
+        commentId: Number(row.id),
+        itemId: row.item_id,
+        user: row.display_name,
+        text: row.comment_text,
+        type: row.parent_comment_id ? "comment_reply" : "article_comment",
+        createdAt: row.created_at,
+        comments: Number(row.comment_count || 0),
+        likes: Number(row.like_count || 0),
+      })),
+    });
+    return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/notifications") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    sendJson(
+      response,
+      200,
+      notificationPayload(user.id, requestUrl.searchParams.get("limit")),
+    );
+    return;
+  }
+
+  if (request.method === "PUT" && requestUrl.pathname === "/api/notifications/read") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const body = await readJson(request);
+    if (body.all) {
+      statements.markAllNotificationsRead.run(user.id);
+    } else {
+      const ids = Array.isArray(body.ids)
+        ? [...new Set(body.ids.map(Number).filter(Number.isSafeInteger))].slice(0, 100)
+        : [];
+      for (const id of ids) statements.markNotificationRead.run(id, user.id);
+    }
+    sendJson(response, 200, notificationPayload(user.id, 30));
     return;
   }
 
