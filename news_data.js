@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-01 12:45";
+window.NEWS_UPDATED_AT = "2026-09-02 10:32";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -105887,6 +105887,705 @@ window.LOADED_NEWS_DATA = [
 
         country: "eu",
         img: "https://www.electrive.com/media/2026/08/bidirketionales-laden-bidi-home-energy-solution-v2h-v2g-the-mobility-hintergrund-background-400x267.jpg",
+        note: ""
+    },
+    // 2026-09-01 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1731",
+        title: "トヨタプリウスは消えず、電動化技術の役割を再定義へ搭載",
+        desc: "トヨタのプリウスは消滅せず、2025年にPHEV特別仕様車を設定。ハイブリッドが主流となった現在、次世代では新開発の1.5LエンジンやEV走行距離延伸など、電動化技術の先駆けとしての役割を再定義する転換期を迎えている。",
+        url: "https://news.yahoo.co.jp/articles/3e9a50897c174349aab7dea73cb660c276245873?source=rss",
+        source: "レスポンス",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        interiorScore: 41,
+        interiorReason: "headline and summary focus on the Prius model’s lifecycle and electrification st",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00000009-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1732",
+        title: "スバル改良型BRZ、MTシフト構造刷新でレース知見を量産へ搭載",
+        desc: "スバルは2026年7月30日に発表する改良型「BRZ」で、MT車用のアイサイト進化に加え、スーパー耐久シリーズの知見を活かしたシフトレバー構造を刷新する。外観は変わらないが、レース直系のスムーズなシフトフィールを追求する。",
+        url: "https://news.yahoo.co.jp/articles/71074cc09f0647fcbfac7b03f9246ed1dc20ed19?source=rss",
+        source: "carview!",
+        date: "2026-09-01",
+        tags: [],
+    
+        interiorScore: 40,
+        interiorReason: "MT shift feel and i-Sight camera placement are interior-relevant, but the image",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00010010-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1733",
+        title: "スズキ新型軽EV「eスカイ」、8月24日先行情報公開でハイトワゴンスタイル",
+        desc: "スズキは8月24日、新型軽EV「eスカイ」の先行情報を公開した。背の高い4ドアハイトワゴンスタイルを採用し、航続距離や価格競争力を強化する「フツーの軽」を200万円以下で実現する。",
+        url: "https://news.yahoo.co.jp/articles/f272628fd997d9af18314406fb259bd5798ec0e6?source=rss",
+        source: "carview!",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00010009-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1734",
+        title: "トヨタルーミー一部改良、交差点事故回避支援強化と電動パーキング標準化",
+        desc: "トヨタは8月31日、ミニバン「ルーミー」を一部改良し発売した。予防安全機能「スマートアシスト」の検知性能を強化し、交差点右折時の対向車や横断歩行者への対応を新設。また、電動パーキングブレーキを「G-T」「G」に標準装備。さらに全車に9インチディスプレイオーディオを標準化し、新色も追加した。",
+        url: "https://news.yahoo.co.jp/articles/6e58c0aa7c7fc93b81fab4c95ccb633e7b47fc97?source=rss",
+        source: "carview!",
+        date: "2026-09-01",
+        tags: ["ディスプレイ", "EV", "安全", "音響"],
+    
+        interiorScore: 38,
+        interiorReason: "9-inch display audio standardization is interior HMI detail, but image is exteri",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00010008-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1735",
+        title: "BYD「ラッコ」登場でBEV注目度高まるが不安も残る全固体電池はゲームチェンジャーか",
+        desc: "BYD「ラッコ」の登場により電気自動車への関心が集まる中、航続距離や充電時間への不安は解消されていない。一方、全固体電池の実用化は期待されるが、リチウムイオン電池で十分との声も根強い。",
+        url: "https://news.yahoo.co.jp/articles/f470d6720d8b618c92dd048d1e9a0fbd684483c4?source=rss",
+        source: "carview!",
+        date: "2026-09-01",
+        tags: ["EV", "バッテリー"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00010005-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1736",
+        title: "15分充電420km新型BMW iX3、内装操作系も一新",
+        desc: "新型BMW iX3は15分で420km走行可能な充電能力を備える。内装面ではインパネ画面の増加や操作ボタンの削減など、コックピットとHMIのデザインが一新され、従来の驚きとは異なる新しさを実感できる。",
+        url: "https://news.yahoo.co.jp/articles/09ebe74f393b76fc4cb7f5509a8c611883dee86e?source=rss",
+        source: "MotorFan",
+        date: "2026-09-01",
+        tags: ["HMI", "コックピット", "EV"],
+    
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-01611640-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1737",
+        title: "地図更新料数万円かかる純正ナビは不要か、Googleマップや車載Googleが主流の現代カーナビ事情",
+        desc: "純正ナビは地図更新費用が高く、データも古くなりがち。トヨタの自動更新パックは年額9860円、日産のGoogle搭載システムは年額1万980円かかる。対照的にスマホ連携のGoogleマップは無料かつ最新データで、輸入車や試乗車でも目的地設定の不便さを解消する。",
+        url: "https://news.yahoo.co.jp/articles/b9b8947145f472bc2c02f7d0f77caac98cada98b?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-09-01",
+        tags: ["コネクテッド"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00010003-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1738",
+        title: "マツダ現行車内装・走行性評価、ロードスターはエンジン弱",
+        desc: "マツダ現行モデルの内装と走行性を岡本幸一郎氏が評価。ロードスターは人馬一体の走りだが1.5Lエンジンが非力で、CX-5は2.5LマイルドHEVのみが課題。MAZDA3はMT選べるが視界に欠点、MAZDA2は基本設計の古さが弱点と指摘された。",
+        url: "https://news.yahoo.co.jp/articles/32eb95489303bfaa15bd78e3011b306b8a310ce3?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        interiorScore: 78,
+        interiorReason: "interior and cockpit image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260902-00000003-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1739",
+        title: "新型エルグランド、2つの14.3インチで約27インチ級コックピット",
+        desc: "新型日産エルグランドは、メーターとセンターディスプレイを14.3インチ2面でシームレスに接続し、約27インチ級の大画面を実現。高精細液晶とGoogle音声操作で使いやすさを追求した新世代の高級ミニバンコックピットだ。",
+        url: "https://news.yahoo.co.jp/articles/1549466d1e6d49735115f91d7ba602a0674e19de?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-01",
+        tags: ["ディスプレイ", "AI", "コックピット"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00000017-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1740",
+        title: "パイオニア、音声カーナビNP1販売終了後継なし",
+        desc: "パイオニアは8月31日に音声カーナビ「NP1」の新規販売と契約更新を停止し、2027年2月25日にサービス提供を終了する。後継機や代替サービスの予定はない。",
+        url: "https://news.yahoo.co.jp/articles/a79b5f18ddd11c66156d1f4bc3728855d72ff0c1?source=rss",
+        source: "日刊自動車新聞",
+        date: "2026-09-01",
+        tags: ["コネクテッド", "AI"],
+    
+        interiorScore: 59,
+        interiorReason: "voice navigation and dashcam accessory relevance",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260901-00692490-netdenjd-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1549",
+        title: "Nissan Waves To The Renault Twingo With New Entry-Level EV",
+        desc: "Based on the Twingo, the 2027 Nissan Wave is an electric city car that could cost less than €20,000.",
+        url: "https://www.carscoops.com/2026/09/2027-nissan-wave-spied/",
+        source: "CarScoops",
+        date: "2026-09-01",
+        tags: ["AR", "EV"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/2027-Nissan-Wave-1024x578.jpg",
+        note: ""
+    },
+    {
+        id: "us1550",
+        title: "2027年レクサスNX、新フェイスとハイブリッド技術向上で登場",
+        desc: "2027年登場のレクサスNXは、14インチタッチスクリーンとハプティック操作ボタンを備えた新ダッシュボードを採用。また、6世代目ハイブリッド技術によりPHEVのEV走行距離がWLTPで100kmに向上し、充電ドアも新設された。",
+        url: "https://www.carscoops.com/2026/09/lexus-nx-debut/",
+        source: "CarScoops",
+        date: "2026-09-01",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        interiorScore: 91,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/2027-Lexus-NX-Global-Debut-main-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1551",
+        title: "2027年レクサスNXはハイブリッド専用で14インチタッチスクリーン標準化",
+        desc: "2027年式レクサスNXはハイブリッド専用となり、標準装備の14インチタッチスクリーンや「センサリーコンシェルジュ」機能で快適装備が強化される。",
+        url: "https://www.jalopnik.com/2248681/2027-lexus-nx-facelift-hybrid-only-bigger-touchscreen-reveal/",
+        source: "Jalopnik",
+        date: "2026-09-01",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 58,
+        interiorReason: "14-inch standard touchscreen and 'Sensory Concierge' cabin UX feature are interi",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/2027-lexus-nx-goes-hybrid-only-gets-bigger-standard-touchscreen-and-a-sensory-concierge/l-intro-1788279398.jpg",
+        note: ""
+    },
+    {
+        id: "us1552",
+        title: "What Are Your Rights If You're The Victim Of Bait-And-Switch Pricing Or Hidden Fees?",
+        desc: "We consulted attorney Gillian Friedman, a Partner at Chudnovsky Law, on best practices to avoid becoming a victim of bait-and-switch car dealership tactics.",
+        url: "https://www.jalopnik.com/2247001/what-are-rights-victim-bait-and-switch-pricing-hidden-fees-dealer-seller/",
+        source: "Jalopnik",
+        date: "2026-09-01",
+        tags: ["HUD", "AR", "AI"],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/what-are-your-rights-if-youre-the-victim-of-bait-and-switch-pricing-or-hidden-fees/l-intro-1788032108.jpg",
+        note: ""
+    },
+    {
+        id: "us1553",
+        title: "View Interior Photos of the 2027 Land Rover Range Rover Electric",
+        desc: "See the 2027 Land Rover Range Rover Electric from every interior angle.",
+        url: "https://www.caranddriver.com/photos/a73571112/2027-land-rover-range-rover-electric-revealed-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/31f553a3-b7ec-42b3-b6a7-3de06b934ce2.jpg",
+        note: ""
+    },
+    {
+        id: "us1554",
+        title: "Instrument Clusters Are Now Paid Extras in Two Hyundai Models",
+        desc: "The base Ioniq 3 doesn’t seem to offer an instrument cluster at all.",
+        url: "https://www.caranddriver.com/news/a73583741/hyundai-instrument-cluster-paid-option/",
+        source: "Car and Driver",
+        date: "2026-09-01",
+        tags: ["AR", "AI"],
+    
+        interiorScore: 91,
+        interiorReason: "instrument cluster availability as a paid option is a direct interior HMI/cockpi",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/2fa717dc-2eea-4e9c-9606-239dc6d770d0.jpg",
+        note: ""
+    },
+    {
+        id: "us1555",
+        title: "2027年レクサスNXハイブリッド、内装刷新で高級感向上",
+        desc: "2027年式レクサスNXハイブリッドは外観刷新に加え、インテリアも一新された。高級感あふれる新内装を多角的に確認できるギャラリーが公開され、コックピットや加飾の進化が示された。",
+        url: "https://www.caranddriver.com/photos/a73581461/2027-lexus-nx-hybrid-revealed-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-09-01",
+        tags: ["コックピット"],
+    
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/091468c7-9f97-4361-8e0b-28f59fd2213c.jpg",
+        note: ""
+    },
+    {
+        id: "us1556",
+        title: "2027年レクサスNXはハイブリッド専用で内装刷新",
+        desc: "2027年式レクサスNXは外観を刷新し、内装では14インチタッチスクリーンやデジタルメーターを採用。動力はNX350hとNX450h+のハイブリッド専用となり、PHEVは電気走行距離が40マイルに向上した。",
+        url: "https://www.caranddriver.com/news/a73581369/2027-lexus-nx-hybrid-refresh-revealed/",
+        source: "Car and Driver",
+        date: "2026-09-01",
+        tags: ["ディスプレイ", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/8d3cc19c-4e37-44c0-bfdf-a493fe964c3f.jpg",
+        note: ""
+    },
+    {
+        id: "us1557",
+        title: "Maximum-Strength Dose: 2026 Porsche 911 Turbo S Cabriolet Tested",
+        desc: "A 701-hp four-seat convertible is a contradictory machine, but don’t overthink it.",
+        url: "https://www.caranddriver.com/reviews/a73546673/2026-porsche-911-turbo-s-cabriolet-test/",
+        source: "Car and Driver",
+        date: "2026-09-01",
+        tags: [],
+    
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/b6e9c6d9-1853-421d-990c-6648395e6353.jpg",
+        note: ""
+    },
+    {
+        id: "us1558",
+        title: "2027年レクサスNXはフル電気化で14インチ画面標準化",
+        desc: "2027年レクサスNXは新e-Axle搭載でフル電気化され、標準14インチ画面や加香システム「Sensory Concierge」を備える。",
+        url: "https://www.topspeed.com/2027-lexus-nx-interior-and-exterior-picture-gallery/",
+        source: "Top Speed",
+        date: "2026-09-01",
+        tags: [],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/09/2027-lexus-nx-2.jpg",
+        note: ""
+    },
+    {
+        id: "eu1513",
+        title: "Vauxhall Corsa GSE、277bhpとリミテッドスリップデフ搭載",
+        desc: "Vauxhallは長年ぶりとなる高性能モデルCorsa GSEを発売し、277bhpの出力とリミテッドスリップデフを備えたEVとして、小型電気自動車市場の拡大に対応する。",
+        url: "https://www.autocar.co.uk/car-review/vauxhall/corsa-gse",
+        source: "AUTOCAR UK",
+        date: "2026-09-01",
+        tags: ["HMI", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/vauxhall-corsa-gse-review-2026-001094.jpg?itok=VDAJTQ3c",
+        note: ""
+    },
+    {
+        id: "eu1514",
+        title: "Used Car Hunter: 7-seater SUVs for £40,000",
+        desc: "Our Car Hunter has £40,000 for a large SUV with seven seats, and the options are very attractive.",
+        url: "https://www.autoexpress.co.uk/car-hunter/370345/used-car-hunter-7-seater-suvs-ps40000",
+        source: "Auto Express",
+        date: "2026-09-01",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--sO1v5kaJ--/t_rss_image_w_845/v1788265472/autoexpress/2026/09/Car%20Hunter%201%2C939.jpg",
+        note: ""
+    },
+    {
+        id: "cn1544",
+        title: "BYDとファーウェイの公式S GTステーションワゴンが、中国で発売前に到着した",
+        desc: "BYDのファング・チェンバオ公式S GT電気ステーションワゴンが中国のディーラーに到着した。9月の販売開始を前にしたもので、車内装やインテリアに関する詳細は現時点で確認できない。",
+        url: "https://carnewschina.com/2026/09/01/byd-fang-cheng-bao-formula-s-gt-station-wagon-arrived-at-dealers-ahead-of-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-09-01",
+        tags: ["バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/byd_fang_cheng_bao_formula_s_gt-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1545",
+        title: "Tesla Model Y L reportedly faces surge of owner complaints over rear suspension collapse in China",
+        desc: "Tesla Model Y L owners report widespread rear suspension collapse issues. The post Tesla Model Y L reportedly faces surge of owner complaints over rear suspension collapse in China appeared first on CarNewsChina.com.",
+        url: "https://carnewschina.com/2026/09/01/tesla-model-y-l-reportedly-faces-surge-of-owner-complaints-over-rear-suspension-collapse-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-09-01",
+        tags: ["AR", "AI"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-15-e1788243696696.png",
+        note: ""
+    },
+    {
+        id: "cn1546",
+        title: "SAIC MGのMG 07は発売10日で3万1千台受注し納車開始",
+        desc: "SAIC MGは新車MG 07の発売から10日で受注3万1千台を達成し、納車を開始した。同社は半額Xiaomi SU7に匹敵する価格戦略を強調しており、自動車内装やコックピット設計にも注力している。",
+        url: "https://carnewschina.com/2026/09/01/saic-mg-commences-delivery-of-mg-07-following-31000-firm-orders-in-10-days-after-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-09-01",
+        tags: ["AI", "コックピット"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-13-e1788229876294.png",
+        note: ""
+    },
+    {
+        id: "cn1547",
+        title: "ロータスが中国でエミラ420スポーツとエメア/エレトレ900ゴールドを発売し",
+        desc: "ロータスは中国市場向けに、内燃機関搭載のEmira 420 SportとEVモデルのEmeya/Eletre 900 Goldを発売した。価格は13万5千ドルからで、高級スポーツカーとしての内装やコックピット設計が特徴だ。",
+        url: "https://carnewschina.com/2026/09/01/lotus-launches-ice-emira-420-sport-and-ev-emeya-eletre-900-gold-in-china-starting-from-135000-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-09-01",
+        tags: ["コックピット", "EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-1500x844.png",
+        note: ""
+    },
+    {
+        id: "cn1548",
+        title: "Roundup: August 2026 deliveries by major Chinese automakers",
+        desc: "Leapmotor and Zeekr continued to set records, while Xpeng and Li Auto returned to sequential growth. For details, please visit CnEVPost (cnev.co).",
+        url: "https://cnevpost.com/2026/09/01/roundup-aug-2026-deliveries-chinese-automakers/",
+        source: "CnEVPost - All",
+        date: "2026-09-01",
+        tags: ["AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090106151969.jpg",
+        note: ""
+    },
+    {
+        id: "cn1549",
+        title: "ニオES8が3世代で累計15万台の販売を達成。需要は依然として旺盛だ。",
+        desc: "ニオの3世代目ES8は今月で15万台の納車数を達成し、需要は依然として非常に強い。同社はQ2 2026の決算通話でこの成果を報告しており、CnEVPostが詳細を掲載している。",
+        url: "https://cnevpost.com/2026/09/01/nio-q2-2026-earnings-call-live/",
+        source: "CnEVPost - All",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        interiorScore: 63,
+        interiorReason: "earnings call with no interior product details; image shows showroom seating and",
+        imageInterior: true,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090112165241.jpg",
+        note: ""
+    },
+    {
+        id: "cn1550",
+        title: "Zeekrは8月の納入台数を記録更新しました",
+        desc: "Zeekrは8月に36,981台の車両を納車し、5連続の月間新記録を更新しました。納車台数は前年同月比109.8%、前月比3.19% と大幅に増加しました。",
+        url: "https://cnevpost.com/2026/09/01/zeekr-aug-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-09-01",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090107411584.jpg",
+        note: ""
+    },
+    {
+        id: "cn1551",
+        title: "Xpeng delivers 39,107 vehicles in August, second-highest this year",
+        desc: "Xpeng's August deliveries rose 2.84% from July, reaching their second-highest monthly level this year after 40,126 vehicles in June. For details, please visit CnEVPost (cnev.co).",
+        url: "https://cnevpost.com/2026/09/01/xpeng-aug-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-09-01",
+        tags: ["AR", "AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090104562266.jpg",
+        note: ""
+    },
+    {
+        id: "cn1552",
+        title: "Nio August deliveries rise 14.5% as namesake brand offsets Onvo slump",
+        desc: "Nio Inc delivered 35,836 vehicles in August, topping 35,000 for the fourth consecutive month despite a slight sequential decline. For details, please visit CnEVPost (cnev.co).",
+        url: "https://cnevpost.com/2026/09/01/nio-aug-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-09-01",
+        tags: ["AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090104274446.jpg",
+        note: ""
+    },
+    {
+        id: "cn1553",
+        title: "Li Auto August deliveries rise 32%, ending 3-month decline",
+        desc: "Li Auto delivered 37,679 vehicles in August, marking its highest year-on-year growth rate in two years. For details, please visit CnEVPost (cnev.co).",
+        url: "https://cnevpost.com/2026/09/01/li-auto-aug-2026-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-09-01",
+        tags: ["AR", "AI", "EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090104144645.jpg",
+        note: ""
+    },
+    {
+        id: "in1598",
+        title: "August 2026 car sales: Tata widens lead over Mahindra",
+        desc: "India’s passenger vehicle market remained on a strong growth path in August 2026, with most carmakers reporting higher sales year on year (YoY). Maruti Suzuki retained the top spot, while Tata Motors remained in second place but widened its lead over Mahindra. Hyundai stayed fourth, and Kia overtook.",
+        url: "https://www.autocarindia.com/industry/august-2026-car-sales-tata-widens-monthly-lead-over-mahindra-440627",
+        source: "Autocar India - All",
+        date: "2026-09-01",
+        tags: ["AR", "AI"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260901_122338_018dd0d7.jpeg",
+        note: ""
+    },
+    {
+        id: "in1599",
+        title: "レクサスNXのマイナーチェンジでボタン削減とEV航続向上",
+        desc: "レクサスは2026年式NXのマイナーチェンジを発表し、デザインや動力系を刷新した。特に内装ではボタン類を削減し、電気式シフトレバーを採用。インド市場では2026年発売予定だが、具体的な販売時期は未定である。",
+        url: "https://www.autocarindia.com/car-news/2026-lexus-nx-facelift-revealed-440624",
+        source: "Autocar India - All",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260901_081224_09d98235.png",
+        note: ""
+    },
+    {
+        id: "in1600",
+        title: "Nissan, Honda team up to standardise ECUs, software for next-gen vehicles",
+        desc: "Nissan Motor Corporation and Honda Motor Co have announced a joint development agreement to standardise multiple electronic control units (ECUs) and software for their next-generation software-defined vehicles (SDVs), aiming to reduce development costs and improve R&D efficiency. Under the agreement.",
+        url: "https://www.autocarindia.com/car-news/nissan-honda-team-up-to-standardise-ecus-software-for-next-gen-vehicles-440621",
+        source: "Autocar India - All",
+        date: "2026-09-01",
+        tags: ["AR", "AI", "EV"],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260901_071419_501fdc89.jpg",
+        note: ""
+    },
+    {
+        id: "in1601",
+        title: "ロイヤルエンフィールド、Himalayan 440の生産版画像流出",
+        desc: "ロイヤルエンフィールドのHimalayan 440は、Scram 440と共用のエンジン搭載で、約25万ルピー（税別）での価格設定が予想される。リーク画像には、丸型アナログメーターとデジタル表示を備えたコックピット内装のデザインが確認された。",
+        url: "https://gaadiwaadi.com/production-version-of-re-himalayan-440-leaked-ahead-of-launch/",
+        source: "GaadiWaadi",
+        date: "2026-09-01",
+        tags: ["コックピット"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/Production-Spec-Royal-Enfield-Himalayan-440-Leaked.jpg",
+        note: ""
+    },
+    {
+        id: "in1602",
+        title: "Hyundai Records Highest Ever August Domestic Sales Of 54,000+ Units",
+        desc: "GaadiWaadi - Hyundai has posted its highest ever August domestic sales as total volume reaches 65,796 units despite export disruption from the West Asia conflict Hyundai Motor India Limited (HMIL) has recorded its highest ever domestic sales for an August month in 2026 by selling 54,396 vehicles in.",
+        url: "https://gaadiwaadi.com/hyundai-records-highest-ever-august-domestic-sales-of-54000-units/",
+        source: "GaadiWaadi",
+        date: "2026-09-01",
+        tags: ["HMI", "AI", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/02/Hyundai-Venue-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1603",
+        title: "インドで新世代アウディQ3の予約開始、10月発売前に外観内装刷新",
+        desc: "アウディ・インディアは10月の発売前に新世代Q3の予約を開始した。コンパクトラグジュアリーSUVは外観に加え、インテリアやコックピットに大幅な変更を施し、快適装備も一新する。",
+        url: "https://gaadiwaadi.com/new-gen-audi-q3-bookings-officially-open-in-india-ahead-of-launch/",
+        source: "GaadiWaadi",
+        date: "2026-09-01",
+        tags: ["コックピット"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/New-Gen-Audi-Q3.jpg",
+        note: ""
+    },
+    {
+        id: "in1604",
+        title: "JSW、2026年ディワリに新エネルギー車投入、奇瑞と提携",
+        desc: "JSWモーターズは2026年ディワリにインド市場進出を計画し、奇瑞自動車との提携で新エネルギー車を発表する。同社は独立したブランドでの初乗用車として、奇瑞が提供する製品基盤と技術を活用する。",
+        url: "https://www.indiacarnews.com/news/125kmpl-mileage-new-jsw-suv-launching-this-diwali-68862/",
+        source: "IndiaCarNews",
+        date: "2026-09-01",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Untitled-design.webp",
+        note: ""
+    },
+    {
+        id: "in1605",
+        title: "Beyond Sales Numbers: What the Rise of SUVs Reveals About Consumer Priorities",
+        desc: "India's car market is changing, and the growing popularity of SUVs in the last couple of years is one of the clearest signs. A few years ago, hatchbacks and sedans were the more common choices for many families. Today, from compact SUVs used in busy cities to larger models chosen for family travel,.",
+        url: "https://www.autopunditz.com/post/beyond-sales-numbers-what-the-rise-of-suvs-reveals-about-consumer-priorities",
+        source: "Auto Punditz",
+        date: "2026-09-01",
+        tags: ["AR", "EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_b002d479df994ffa80909661533e34b9~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1606",
+        title: "インドで新Q3受注開始、10月に価格発表、デジタルコックピット搭載",
+        desc: "アウディはインド市場で3世代目Q3の受注を開始し、10月に価格を正式発表予定。新デザインとデジタルコックピット、204馬力のターボガソリンエンジン、クアトロAWDを備える。",
+        url: "https://www.autopunditz.com/post/new-audi-q3-india-bookings-open-launch-price-features",
+        source: "Auto Punditz",
+        date: "2026-09-01",
+        tags: ["コックピット"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_25472f404bc64605a72fe8919a5418b3~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1607",
+        title: "JSWモーターズ、27年1月インド販売開始、新エネルギー車4モデル投入計画",
+        desc: "JSWモーターズは2027年1月にインドで小売販売を開始し、同年10月までにPHEVやバッテリーEVなど新エネルギー車4モデルを投入する。",
+        url: "https://www.autopunditz.com/post/jsw-motors-india-launch-2027-new-energy-cars",
+        source: "Auto Punditz",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_627b13b640dc4367b712cdb51f1b164e~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1515",
+        title: "Electric cars reach record 98.7 percent share in Norway",
+        desc: "The market share of electric cars in Norway rose to a record 98.7 per cent in August. While the overall passenger car market declined slightly, six of the ten largest brands saw growth. Volkswagen led the brand ranking, followed by Toyota and Xpeng.",
+        url: "https://www.electrive.com/2026/09/01/electric-cars-reach-record-98-7-percent-share-in-norway/",
+        source: "Electrive",
+        date: "2026-09-01",
+        tags: ["AR"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/202608-vw-id-4-norwegen-ofv-zulassung-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1516",
+        title: "ベトナムVinFastがXe Nhanh Viet Nam向けにEV 3000台を供給",
+        desc: "ベトナムの自動車メーカーVinFastは、国内の輸送事業者Xe Nhanh Viet Nam向けに電気自動車3000台の供給契約を結んだ。同社は2027年までにこれらのEVをGreen SMプラットフォームで運用する予定である。",
+        url: "https://www.electrive.com/2026/09/01/vietnam-vinfast-to-supply-3000-electric-cars-for-green-sm/",
+        source: "Electrive",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/vinfast-3000-ev-order-xe-nhanh-viet-nam-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1517",
+        title: "LGエネルギー、米国から10年分のリチウム供給契約を結ぶ",
+        desc: "LGエネルギーソリューションは、米国アーカンソー州のスマコバーリチウム社と長期供給契約を締結した。2029年より年産8000トンのリチウム炭酸塩を調達し、米国でのEV用バッテリー生産を拡大する計画だ。",
+        url: "https://www.electrive.com/2026/09/01/lg-energy-solution-secures-us-lithium-supply-for-ten-years/",
+        source: "Electrive",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2022/04/lg-energy-solution-2022-01-min-e1702385159773-400x267.png",
+        note: ""
+    },
+    {
+        id: "eu1518",
+        title: "レクサスNX世界初披露、シリコンカーバイドインバーターでハイブリッド効率向上",
+        desc: "レクサスNXは世界初となるシリコンカーバイドインバーターを採用し、ハイブリッドシステムの効率化を実現。これにより、従来の妥協点を超えた性能向上を達成した。",
+        url: "https://www.automotiveworld.com/news/lexus-nx-world-premiere-brings-sic-phev-hybrid-tech/",
+        source: "Automotive World",
+        date: "2026-09-01",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/01105914/lexus-nx-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1519",
+        title: "Yfore、ミラーカメラとレーダー融合で全車室監視システム発表",
+        desc: "Yforeはジョージア工場開業でODMSを発表。ミラーカメラと車載レーダーを融合させ、シートバックやフットウェルでの死角を解消。疲労やシートベルト、車内生命体検知など7機能を実現し、欧州NCAP 5星基準に対応する統合アーキテクチャを提示した。",
+        url: "https://www.automotiveworld.com/news/yfore-odms-fuses-mirror-camera-with-radar-for-full-cabin-cover/",
+        source: "Automotive World",
+        date: "2026-09-01",
+        tags: ["シート"],
+    
+        interiorScore: 93,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg",
+        note: ""
+    },
+    {
+        id: "eu1520",
+        title: "マツダCX-6e英国発売価格4万2990ポンドから、航続300マイルと充実装備",
+        desc: "マツダの新型電気自動車CX-6eが英国で4万2990ポンドから発売される。航続距離は300マイル、充電出力200kWを備え、コックピットや快適装備を含む充実した標準装備をラインナップする。",
+        url: "https://electriccarsreport.com/2026/09/mazda-cx-6e-uk-price-revealed-new-electric-suv-starts-at-42990/",
+        source: "Electric Cars Report",
+        date: "2026-09-01",
+        tags: ["コックピット", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1521",
+        title: "XPengとNIO、2026年8月EV納入台数で強成長",
+        desc: "XPengは8月3万9107台、NIOは3万5836台をEV納入した。新車種やバッテリー交換、自動運転技術の進捗も報じられる。",
+        url: "https://electriccarsreport.com/2026/09/xpeng-and-nio-august-2026-ev-deliveries-show-strong-growth/",
+        source: "Electric Cars Report",
+        date: "2026-09-01",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/07/XPeng-Mona-L03.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1522",
+        title: "Nissan and Honda Team Up on Software-Defined Vehicle Technology",
+        desc: "Nissan and Honda will jointly develop ECUs, operating systems and vehicle software for next-generation software-defined vehicles planned from 2029.The post Nissan and Honda Team Up on Software-Defined Vehicle Technology appeared first on Electric Cars Report.",
+        url: "https://electriccarsreport.com/2026/09/nissan-and-honda-team-up-on-software-defined-vehicle-technology/",
+        source: "Electric Cars Report",
+        date: "2026-09-01",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg?a3781e&amp;a3781e",
         note: ""
     },
 ];
