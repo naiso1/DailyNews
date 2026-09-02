@@ -1580,6 +1580,21 @@ def normalize_japanese_spacing(text):
     return s
 
 
+def normalize_known_brand_names(text):
+    """機械翻訳で起きやすい自動車ブランド名の誤訳だけを補正する。"""
+    s = str(text or "")
+    replacements = {
+        "レノワール・トゥインゴ": "ルノー・トゥインゴ",
+        "マツダ・スズキ": "マルチ・スズキ",
+        "日産と本田": "日産とホンダ",
+        "現代の 2 つのモデル": "ヒョンデの2モデル",
+        "現代の2つのモデル": "ヒョンデの2モデル",
+    }
+    for wrong, correct in replacements.items():
+        s = s.replace(wrong, correct)
+    return s
+
+
 def has_japanese_kana(text):
     return re.search(r"[ぁ-ゟァ-ヿ]", str(text or "")) is not None
 
@@ -1631,6 +1646,8 @@ def extract_latin_source_anchors(text, limit=8):
         "model", "news", "post", "revealed", "reveals", "seat", "seater", "the",
         "this", "version", "vehicle", "with", "from", "will", "new", "suv", "ev",
         "bev", "phev", "ice", "ai", "adas",
+        "january", "february", "march", "april", "may", "june", "july", "august",
+        "september", "october", "november", "december",
     }
     tokens = re.findall(r"\b[A-Za-z][A-Za-z0-9.+-]{1,}\b", str(text or ""))
     counts = Counter(token.casefold() for token in tokens)
@@ -1961,6 +1978,61 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
         _translation_cache[key] = translated
     return translated
 
+
+def build_source_faithful_japanese_summary(title, content, html_text=""):
+    """英語原文へ戻さず、原文の事実だけを使った日本語要約へ復旧する。"""
+    source_title = normalize_text(title)
+    source_content = normalize_text(content)
+    article_excerpt = normalize_text(html_text)[:2500]
+    anchors = extract_latin_source_anchors(f"{source_title} {source_content}", limit=5)
+    required = ", ".join(anchors) if anchors else "なし"
+
+    for attempt in range(3):
+        prompt = (
+            "次の記事を、原文に書かれている事実だけを使って自然な日本語にしてください。\n"
+            "推測、一般論、外部知識、原文にない企業名・製品名・数値を追加してはいけません。\n"
+            "英語の文をそのまま残さず、固有名詞と型式のみ英字表記を許可します。\n"
+            "ブランド名は日本で一般的な表記を使い、逐語訳しないでください。\n"
+            f"titleは{SUMMARY_TITLE_LIMIT}字以内の見出しで、途中で切らないでください。\n"
+            f"summaryは{SUMMARY_CONTENT_LIMIT}字以内の常体で、必ず句点で終えてください。\n"
+            "指定識別子がある場合は、そのうち少なくとも1つを綴りを変えずに残してください。\n"
+            "JSON以外は出力しないでください。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
+            f"原文タイトル: {source_title}\n"
+            f"原文内容: {source_content}\n"
+            f"本文抜粋: {article_excerpt}\n"
+            f"指定識別子: {required}\n"
+            f"再試行回数: {attempt + 1}"
+        )
+        output = call_llm_text(prompt)
+        candidate_title = normalize_text(parse_json_field(output, "title"))
+        candidate_body = normalize_text(parse_json_field(output, "summary"))
+        if not (_is_valid_japanese(candidate_title) and _is_valid_japanese(candidate_body)):
+            continue
+        if anchors:
+            folded = f"{candidate_title} {candidate_body}".casefold()
+            if not any(anchor.casefold() in folded for anchor in anchors):
+                continue
+        candidate_title = trim_title_safely(candidate_title, SUMMARY_TITLE_LIMIT)
+        candidate_body = trim_to_sentence(candidate_body, SUMMARY_CONTENT_LIMIT)
+        if candidate_body and not ends_with_sentence(candidate_body):
+            candidate_body += "。"
+        return candidate_title, candidate_body
+
+    # JSON要約に失敗した場合も、原文を個別翻訳して英語へは戻さない。
+    translated_title = translate_text(
+        source_title, target_lang="ja", force_japanese=True, require_kanji=True
+    )
+    translated_body = translate_text(
+        source_content, target_lang="ja", force_japanese=True, require_kanji=True
+    )
+    if _is_valid_japanese(translated_title) and _is_valid_japanese(translated_body):
+        translated_title = trim_title_safely(translated_title, SUMMARY_TITLE_LIMIT)
+        translated_body = trim_to_sentence(translated_body, SUMMARY_CONTENT_LIMIT)
+        if translated_body and not ends_with_sentence(translated_body):
+            translated_body += "。"
+        return translated_title, translated_body
+    return "", ""
+
 def fetch_article_text(url):
     if not url or not isinstance(url, str) or not url.startswith("http"):
         return ""
@@ -2223,12 +2295,22 @@ def summarize_article(title, content, url, country=""):
     if not summary_matches_source(
         f"{summary_title} {summary_body}", final_source_text, title=title
     ):
-        # An English source is preferable to a fluent but unrelated hallucination.
-        print(f"  [SUMMARY_REJECTED] 元記事と一致しないため原文へ戻す: {title[:50]}")
-        summary_title = normalize_text(title)
-        summary_body = normalize_text(content)
-        if summary_body and not ends_with_sentence(summary_body):
-            summary_body += "."
+        print(f"  [SUMMARY_REJECTED] 元記事と一致しないため厳密な日本語要約へ復旧: {title[:50]}")
+        repaired_title, repaired_body = build_source_faithful_japanese_summary(
+            title, content, html_text
+        )
+        if repaired_title and repaired_body:
+            summary_title = repaired_title
+            summary_body = repaired_body
+        else:
+            # LLMが完全に利用不能な場合だけ原文を保持し、次回の復旧対象に残す。
+            print(f"  [SUMMARY_REPAIR_FAILED] 日本語化失敗、次回復旧対象として保持: {title[:50]}")
+            summary_title = normalize_text(title)
+            summary_body = normalize_text(content)
+            if summary_body and not ends_with_sentence(summary_body):
+                summary_body += "."
+    summary_title = normalize_known_brand_names(summary_title)
+    summary_body = normalize_known_brand_names(summary_body)
     _summary_cache[cache_key] = (summary_title, summary_body)
     return summary_title, summary_body
 
@@ -3411,6 +3493,7 @@ def main():
     repair_sheet2_only = "--repair-sheet2-only" in sys.argv
     repair_relevance_only = "--repair-relevance-only" in sys.argv
     repair_llm_targets_only = "--repair-llm-targets-only" in sys.argv
+    repair_japanese_only = "--repair-japanese-only" in sys.argv
     if "--dept" in sys.argv:
         try:
             idx = sys.argv.index("--dept")
@@ -3535,6 +3618,16 @@ def main():
                 df_existing.get("URL", pd.Series(dtype=str)).astype(str).str.strip().isin(target_urls)
             ]
             repair_indices = repair_indices[repair_indices.isin(sheet2_indices)]
+        if repair_japanese_only:
+            title_values = df_existing.get(
+                "タイトル（日本語）", pd.Series("", index=df_existing.index)
+            ).fillna("").astype(str)
+            body_values = df_existing.get(
+                "内容（日本語）", pd.Series("", index=df_existing.index)
+            ).fillna("").astype(str)
+            japanese_mask = title_values.apply(has_japanese_kana) & body_values.apply(has_japanese_kana)
+            japanese_repair_indices = df_existing.index[~japanese_mask]
+            repair_indices = repair_indices[repair_indices.isin(japanese_repair_indices)]
         if len(repair_indices) == 0:
             print(f"指定日の既存データがありません: {', '.join(target_dates)}")
             return
@@ -3544,8 +3637,27 @@ def main():
             scope = "Sheet2公開候補"
         else:
             scope = "指定日の既存データ"
+        if repair_japanese_only:
+            scope += "の日本語未変換記事"
         print(f"  [復旧] {scope} {len(repair_indices)}件を再判定します。")
-        repaired = enrich_existing_df(df_existing.loc[repair_indices].copy())
+        if repair_japanese_only:
+            repaired = df_existing.loc[repair_indices].copy()
+            total = len(repaired)
+            for count, (row_idx, row) in enumerate(repaired.iterrows(), 1):
+                summary_title, summary_body = summarize_article(
+                    str(row.get("タイトル", "") or ""),
+                    str(row.get("内容", "") or ""),
+                    str(row.get("URL", "") or ""),
+                    str(row.get("国", "") or ""),
+                )
+                if summary_title:
+                    repaired.at[row_idx, "タイトル（日本語）"] = summary_title
+                if summary_body:
+                    repaired.at[row_idx, "内容（日本語）"] = summary_body
+                if count == 1 or count % PROGRESS_EVERY == 0 or count == total:
+                    print(f"    日本語復旧進捗: {count}/{total}")
+        else:
+            repaired = enrich_existing_df(df_existing.loc[repair_indices].copy())
         for col in repaired.columns:
             if col not in df_existing.columns:
                 df_existing[col] = ""
