@@ -22,6 +22,7 @@ WORKFLOW = ROOT / "image_flux2_klein_text_to_image (1).json"
 LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
+RUN_STATUS_PATH = LOG_DIR / "latest_run_status.json"
 SCHEDULE_PAUSE_CONFIG = SCRIPT_DIR / "scheduled_pauses.json"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
@@ -98,6 +99,67 @@ configure_console_encoding()
 def log(msg):
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(msg + "\n")
+
+
+def _power_automate_status_path():
+    configured = os.environ.get("DAILYNEWS_POWER_AUTOMATE_STATUS", "").strip()
+    if configured:
+        return Path(configured).expanduser()
+    # Only use a business OneDrive folder that Windows has actually registered.
+    # The generic OneDrive environment variable can point to an empty local
+    # placeholder even when no cloud account is signed in.
+    try:
+        key = winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER,
+            r"Software\Microsoft\OneDrive\Accounts\Business1",
+        )
+        user_folder = str(winreg.QueryValueEx(key, "UserFolder")[0]).strip()
+        if user_folder:
+            return Path(user_folder) / "DailyNewsAutomation" / "latest_run_status.json"
+    except Exception:
+        pass
+    return None
+
+
+def _write_json_atomic(path: Path, payload):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_suffix(path.suffix + ".tmp")
+    temp_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    os.replace(temp_path, path)
+
+
+def write_run_status(status, **details):
+    """Write a dated result that an 08:00 Power Automate flow can evaluate."""
+    payload = {
+        "schema_version": 1,
+        "service": "DailyNews",
+        "status": status,
+        "updated_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+        "run_date": datetime.date.today().isoformat(),
+        "log_file": str(LOG_FILE),
+    }
+    payload.update(details)
+    destinations = [RUN_STATUS_PATH]
+    power_automate_path = _power_automate_status_path()
+    if power_automate_path and power_automate_path not in destinations:
+        destinations.append(power_automate_path)
+    errors = []
+    for destination in destinations:
+        try:
+            _write_json_atomic(destination, payload)
+        except Exception as exc:
+            errors.append(f"{destination}: {type(exc).__name__}: {exc}")
+    if errors:
+        log(f"[WARN] Run status write failed: {'; '.join(errors)}")
+    else:
+        log(
+            "[INFO] Run status updated: "
+            f"{status} -> {', '.join(str(path) for path in destinations)}"
+        )
+    return payload
 
 
 def schedule_pause_windows():
@@ -666,18 +728,25 @@ def main():
     )
     args = parser.parse_args()
 
+    started_at = datetime.datetime.now().astimezone()
     log("==================================================")
     log(f"[START] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
 
     pause = None if args.ignore_schedule_pause else active_schedule_pause()
     if pause:
+        write_run_status(
+            "paused",
+            started_at=started_at.isoformat(timespec="seconds"),
+            completed_at=datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+            message=f"{pause['name']}: {pause['start']} to {pause['end']}",
+        )
         log(
             f"[PAUSE] {pause['name']}: {pause['start']} to {pause['end']}. "
             "RSS, LLM, image generation, git sync, deployment, email, and sleep are skipped."
         )
         log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
         log("==================================================")
-        return
+        return 0
 
     latest = latest_news_date()
     if latest:
@@ -696,22 +765,36 @@ def main():
 
     log(f"[INFO] Target range: {start} to {end}")
 
-    if start > end:
-        log("[INFO] No new dates to process.")
-    else:
-        dates = []
+    target_dates = []
+    if start <= end:
         cur = start
         while cur <= end:
-            dates.append(cur.strftime("%Y-%m-%d"))
+            target_dates.append(cur.strftime("%Y-%m-%d"))
             cur += datetime.timedelta(days=1)
-        dates_arg = ",".join(dates)
+    status_base = {
+        "started_at": started_at.isoformat(timespec="seconds"),
+        "expected_news_date": end.isoformat(),
+        "target_dates": target_dates,
+    }
+    write_run_status("running", **status_base)
+
+    run_succeeded = False
+    updated = False
+    sheet_rows = 0
+    failure_message = ""
+
+    if start > end:
+        log("[INFO] No new dates to process.")
+        run_succeeded = True
+    else:
+        dates_arg = ",".join(target_dates)
         try:
             if not ensure_lm_studio():
                 raise RuntimeError("LM Studio could not prepare the single requested model.")
             google_search_script = get_google_search_entrypoint()
             run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
             sheet2_path = SCRIPT_DIR / "sheet2_llm_targets.csv"
-            sheet_rows = count_sheet_targets(sheet2_path, set(dates))
+            sheet_rows = count_sheet_targets(sheet2_path, set(target_dates))
             if sheet_rows <= 0:
                 restore_file_from_head(sheet2_path)
                 raise RuntimeError(
@@ -756,22 +839,78 @@ def main():
                 log("[WARN] GEMINI_API_KEY not set; skip Gemini image generation.")
             run_git_sync(LOG_FILE)
             run_server_deploy(LOG_FILE)
+            run_succeeded = True
+            updated = True
         except KeyboardInterrupt:
             log("[INFO] Interrupted by user.")
-            return
+            failure_message = "Interrupted by user."
         except CalledProcessError as e:
             log(f"[ERROR] Command failed: {e}")
+            failure_message = f"Command failed: {e}"
         except Exception as e:
             log(f"[ERROR] Unexpected error: {type(e).__name__}: {e}")
+            failure_message = f"Unexpected error: {type(e).__name__}: {e}"
+
+    published_news_date = latest_news_date() or ""
+    if run_succeeded and (
+        not published_news_date
+        or datetime.date.fromisoformat(published_news_date) < end
+    ):
+        run_succeeded = False
+        failure_message = (
+            f"Published news date {published_news_date or 'none'} is older than "
+            f"the expected date {end.isoformat()}."
+        )
+        log(f"[ERROR] {failure_message}")
+
+    completed_at = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+    release = ""
+    if run_succeeded:
+        try:
+            release = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=str(ROOT),
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                check=True,
+            ).stdout.strip()
+        except Exception:
+            release = ""
+        write_run_status(
+            "success",
+            **status_base,
+            completed_at=completed_at,
+            updated=updated,
+            published_news_date=published_news_date,
+            sheet_rows=sheet_rows,
+            release=release,
+            site_url="http://IEWEB01/",
+            message="DailyNews update and server publication completed.",
+        )
+    else:
+        write_run_status(
+            "failed",
+            **status_base,
+            completed_at=completed_at,
+            updated=False,
+            published_news_date=published_news_date,
+            sheet_rows=sheet_rows,
+            error=failure_message or "The process did not complete.",
+            site_url="http://IEWEB01/",
+        )
 
     log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     log("==================================================")
-    send_review_email()
-    if args.sleep_after_run:
+    # The 08:00 Power Automate flow sends mail only after checking the status file.
+    # Direct SMTP is intentionally not called here.
+    if args.sleep_after_run and run_succeeded:
         sleep_computer()
     else:
         log("[INFO] Automatic suspend is disabled. The PC will remain awake.")
+    return 0 if run_succeeded else 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
