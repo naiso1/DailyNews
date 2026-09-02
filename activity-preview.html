@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>交流機能プレビュー | 内装製品デイリーニュース</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#050a12;
+      --panel:rgba(16,22,35,.92);
+      --panel-2:#111b28;
+      --text:#e9edf5;
+      --muted:#91a0b5;
+      --accent:#7df1c2;
+      --blue:#6fa7ff;
+      --orange:#ff9b72;
+      --purple:#c79dff;
+      --border:rgba(255,255,255,.09);
+      --shadow:0 20px 60px rgba(0,0,0,.42);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      min-height:100vh;
+      margin:0;
+      padding:20px 18px 80px;
+      background:
+        radial-gradient(circle at 12% 5%,rgba(125,241,194,.07),transparent 25%),
+        radial-gradient(circle at 88% 9%,rgba(111,167,255,.09),transparent 28%),
+        var(--bg);
+      color:var(--text);
+      font-family:"Manrope","Noto Sans JP",sans-serif;
+    }
+    button { font:inherit; }
+    .shell { width:min(1400px,100%); margin:auto; }
+    .preview-bar {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:10px;
+      color:#75869d;
+      font-size:11px;
+      letter-spacing:.08em;
+    }
+    .preview-bar strong { color:var(--accent); }
+    .preview-bar a { color:#9ebeff; text-decoration:none; }
+    .site-header {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:14px 24px;
+      padding:22px 26px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(120deg,rgba(125,241,194,.06),rgba(111,167,255,.07));
+      box-shadow:var(--shadow);
+    }
+    .brand { display:flex; min-width:0; align-items:center; gap:12px; }
+    .brand img { width:32px; height:32px; }
+    .brand h1 {
+      margin:0;
+      overflow:hidden;
+      background:linear-gradient(135deg,var(--text),var(--blue));
+      background-clip:text;
+      color:transparent;
+      font-size:clamp(23px,3vw,34px);
+      line-height:1.25;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .header-actions { display:flex; align-items:center; justify-content:flex-end; gap:9px; }
+    .header-button {
+      position:relative;
+      min-height:38px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:0 14px;
+      background:rgba(255,255,255,.035);
+      color:#d9e3ef;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .header-button:hover { border-color:rgba(125,241,194,.4); background:rgba(125,241,194,.08); }
+    .bell { width:42px; padding:0; font-size:17px; }
+    .unread-count {
+      position:absolute;
+      top:-5px;
+      right:-3px;
+      display:grid;
+      min-width:19px;
+      height:19px;
+      place-items:center;
+      border:2px solid #101925;
+      border-radius:10px;
+      background:#ff6473;
+      color:white;
+      font-size:10px;
+      font-weight:800;
+    }
+    .header-summary {
+      display:flex;
+      grid-column:1/-1;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding-top:13px;
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+    .header-summary p { margin:0; color:var(--muted); font-size:13px; }
+    .status { color:#788ba3; font-size:11px; white-space:nowrap; }
+    .status strong { color:var(--accent); }
+    .activity-rail {
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:var(--panel);
+      box-shadow:0 12px 35px rgba(0,0,0,.25);
+    }
+    .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:13px; }
+    .eyebrow { color:var(--accent); font-size:10px; font-weight:800; letter-spacing:.15em; }
+    .section-head h2 { margin:3px 0 0; font-size:18px; }
+    .section-head p { margin:0; color:var(--muted); font-size:11px; }
+    .activity-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .activity-card {
+      display:grid;
+      grid-template-columns:74px minmax(0,1fr);
+      gap:12px;
+      min-width:0;
+      padding:10px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.025);
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .activity-card:hover { transform:translateY(-2px); border-color:rgba(111,167,255,.35); background:rgba(111,167,255,.06); }
+    .activity-thumb { width:74px; height:74px; object-fit:cover; border-radius:10px; background:#1a2635; }
+    .activity-meta { margin-bottom:3px; color:#87a0bc; font-size:10px; }
+    .activity-meta strong { color:var(--accent); }
+    .activity-title { margin:0; overflow:hidden; font-size:12px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+    .activity-comment { margin:5px 0 0; overflow:hidden; color:#aebdce; font-size:11px; line-height:1.45; text-overflow:ellipsis; white-space:nowrap; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:18px; margin-top:18px; }
+    .feed-panel,.side-panel { border:1px solid var(--border); border-radius:18px; background:var(--panel); }
+    .feed-panel { padding:18px; }
+    .tabs { display:flex; gap:7px; margin-bottom:16px; overflow:auto; }
+    .tab {
+      flex:0 0 auto;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:8px 13px;
+      background:transparent;
+      color:#9faec1;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .tab.active { border-color:transparent; background:linear-gradient(135deg,var(--accent),var(--blue)); color:#07111d; font-weight:800; }
+    .feed-view { display:none; }
+    .feed-view.active { display:block; animation:fade .25s ease; }
+    @keyframes fade { from { opacity:0; transform:translateY(5px); } }
+    .news-row {
+      display:grid;
+      grid-template-columns:150px minmax(0,1fr) auto;
+      gap:15px;
+      align-items:center;
+      padding:12px;
+      border-top:1px solid rgba(255,255,255,.075);
+    }
+    .news-row:first-child { border-top:0; }
+    .news-row img { width:150px; height:92px; object-fit:cover; border-radius:11px; background:#1b2634; }
+    .news-row h3 { margin:0 0 5px; font-size:14px; line-height:1.5; }
+    .news-row p { margin:0; color:#97a8bb; font-size:11px; line-height:1.6; }
+    .reaction { display:flex; flex-direction:column; gap:5px; color:#8798ad; font-size:10px; text-align:right; white-space:nowrap; }
+    .reaction strong { color:#dbe5f0; }
+    .conversation {
+      display:grid;
+      grid-template-columns:42px minmax(0,1fr) 112px;
+      gap:12px;
+      align-items:start;
+      padding:14px 8px;
+      border-top:1px solid rgba(255,255,255,.075);
+    }
+    .conversation:first-child { border-top:0; }
+    .avatar { display:grid; width:38px; height:38px; place-items:center; border-radius:12px; background:linear-gradient(145deg,#24405a,#162331); color:var(--accent); font-size:12px; font-weight:800; }
+    .conversation h3 { margin:0; font-size:13px; }
+    .conversation p { margin:5px 0 0; color:#b4c1d1; font-size:12px; line-height:1.6; }
+    .conversation time { color:#72839a; font-size:10px; text-align:right; }
+    .side-panel { align-self:start; overflow:hidden; }
+    .side-title { padding:16px 17px 12px; border-bottom:1px solid var(--border); font-size:14px; font-weight:800; }
+    .side-item { display:flex; gap:10px; padding:13px 16px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .side-item:last-child { border-bottom:0; }
+    .side-icon { display:grid; flex:0 0 auto; width:30px; height:30px; place-items:center; border-radius:9px; background:rgba(111,167,255,.1); }
+    .side-item strong { display:block; margin-bottom:2px; font-size:11px; }
+    .side-item span { color:#8495a9; font-size:10px; line-height:1.5; }
+    .drawer-backdrop { position:fixed; inset:0; z-index:20; visibility:hidden; background:rgba(1,4,9,.5); opacity:0; transition:.25s; }
+    .drawer-backdrop.open { visibility:visible; opacity:1; }
+    .drawer {
+      position:fixed;
+      top:0;
+      right:0;
+      z-index:21;
+      width:min(420px,94vw);
+      height:100vh;
+      padding:20px;
+      overflow:auto;
+      border-left:1px solid rgba(111,167,255,.23);
+      background:#0c1420;
+      box-shadow:-25px 0 70px rgba(0,0,0,.55);
+      transform:translateX(105%);
+      transition:.3s cubic-bezier(.22,.75,.25,1);
+    }
+    .drawer.open { transform:translateX(0); }
+    .drawer-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+    .drawer-head h2 { margin:0; font-size:18px; }
+    .text-button { border:0; background:none; color:#8fb9ff; font-size:11px; cursor:pointer; }
+    .notice {
+      position:relative;
+      display:grid;
+      grid-template-columns:38px minmax(0,1fr);
+      gap:11px;
+      margin-bottom:8px;
+      padding:13px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:13px;
+      background:rgba(255,255,255,.025);
+    }
+    .notice.unread { border-color:rgba(111,167,255,.24); background:rgba(111,167,255,.07); }
+    .notice.unread::after { position:absolute; top:15px; right:12px; width:6px; height:6px; border-radius:50%; background:var(--blue); content:""; }
+    .notice p { margin:0; padding-right:10px; color:#c7d2df; font-size:12px; line-height:1.55; }
+    .notice p strong { color:white; }
+    .notice time { display:block; margin-top:5px; color:#6f8198; font-size:9px; }
+    .drawer-note { margin:18px 2px; color:#687b92; font-size:10px; line-height:1.6; }
+    .toast { position:fixed; left:50%; bottom:24px; z-index:30; padding:10px 16px; border:1px solid rgba(125,241,194,.25); border-radius:999px; background:#14251f; color:#dffbf0; font-size:12px; opacity:0; transform:translate(-50%,15px); pointer-events:none; transition:.25s; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media(max-width:980px) {
+      .activity-grid { grid-template-columns:1fr; }
+      .workspace { grid-template-columns:1fr; }
+      .side-panel { display:grid; grid-template-columns:repeat(3,1fr); }
+      .side-title { grid-column:1/-1; }
+    }
+    @media(max-width:680px) {
+      body { padding:10px 9px 60px; }
+      .site-header { grid-template-columns:1fr; gap:12px; padding:16px; }
+      .header-actions { justify-content:flex-start; }
+      .header-summary { flex-direction:column; align-items:flex-start; gap:7px; }
+      .preview-bar span:last-child { display:none; }
+      .activity-rail,.feed-panel { padding:14px; }
+      .section-head { align-items:flex-start; flex-direction:column; gap:5px; }
+      .news-row { grid-template-columns:92px minmax(0,1fr); gap:11px; }
+      .news-row img { width:92px; height:72px; }
+      .reaction { grid-column:2; flex-direction:row; text-align:left; }
+      .conversation { grid-template-columns:36px minmax(0,1fr); }
+      .conversation time { grid-column:2; text-align:left; }
+      .side-panel { grid-template-columns:1fr; }
+      .side-title { grid-column:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="preview-bar">
+      <span><strong>UI PROTOTYPE</strong> / サンプルデータで表示しています</span>
+      <span>本番機能には影響しません　<a href="http://IEWEB01/">本番ページへ戻る</a></span>
+    </div>
+
+    <header class="site-header">
+      <div class="brand">
+        <img src="page_images/icon_world.png" alt="地域">
+        <h1>内装製品デイリーニュース</h1>
+      </div>
+      <div class="header-actions">
+        <button class="header-button bell" id="noticeButton" type="button" aria-label="通知">🔔<span class="unread-count" id="unreadCount">3</span></button>
+        <button class="header-button" id="myPageButton" type="button">中村 / マイページ</button>
+      </div>
+      <div class="header-summary">
+        <p>国内外の自動車内装ニュースを生成AIで毎日収集・分析し、企画アイデアにつなげます。</p>
+        <span class="status">更新 <strong>2026-09-02 10:32</strong></span>
+      </div>
+    </header>
+
+    <section class="activity-rail">
+      <div class="section-head">
+        <div><span class="eyebrow">RECENT ACTIVITY</span><h2>みんなの動き</h2></div>
+        <p>過去記事の新しい会話を、ニュースを邪魔しない範囲で3件だけ表示</p>
+      </div>
+      <div class="activity-grid">
+        <article class="activity-card" data-message="該当記事とコメント位置を開く想定です">
+          <img class="activity-thumb" src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車載カメラ" onerror="this.src='images/idea_1685.png'">
+          <div><div class="activity-meta"><strong>田中さん</strong>がコメント・12分前</div><h3 class="activity-title">ミラーカメラとレーダー融合で全車室監視</h3><p class="activity-comment">「後席まで含めた検知範囲が面白いです」</p></div>
+        </article>
+        <article class="activity-card" data-message="参加中の記事を開く想定です">
+          <img class="activity-thumb" src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
+          <div><div class="activity-meta"><strong>鈴木さんほか2名</strong>が返信・34分前</div><h3 class="activity-title">マツダCX-6e、デジタルコックピットを採用</h3><p class="activity-comment">あなたのコメントに新しい返信があります</p></div>
+        </article>
+        <article class="activity-card" data-message="コメント一覧を開く想定です">
+          <img class="activity-thumb" src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
+          <div><div class="activity-meta"><strong>開発企画グループ</strong>で反響・1時間前</div><h3 class="activity-title">日産とホンダ、次世代SDVを共同開発</h3><p class="activity-comment">コメント5件・いいね8件に増えました</p></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <main class="feed-panel">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-view="new" type="button">新着ニュース</button>
+          <button class="tab" data-view="talk" type="button">会話が続いている記事 <strong>3</strong></button>
+          <button class="tab" data-view="mine" type="button">参加した記事</button>
+        </div>
+
+        <section class="feed-view active" id="view-new">
+          <article class="news-row">
+            <img src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
+            <div><h3>マツダCX-6e英国発売、航続300マイルと充実装備</h3><p>2026-09-01　欧州　Electric Cars Report</p></div>
+            <div class="reaction"><span>👍 <strong>4</strong></span><span>💬 <strong>2</strong></span></div>
+          </article>
+          <article class="news-row">
+            <img src="https://media.automotiveworld.com/app/uploads/2026/09/01081508/yfore-adas.jpg" alt="車載カメラ" onerror="this.src='images/idea_1685.png'">
+            <div><h3>Yfore、ミラーカメラとレーダー融合で全車室監視システム発表</h3><p>2026-09-01　欧州　Automotive World</p></div>
+            <div class="reaction"><span>👍 <strong>7</strong></span><span>💬 <strong>4</strong></span></div>
+          </article>
+          <article class="news-row">
+            <img src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
+            <div><h3>日産とホンダ、2029年以降のSDV技術を共同開発</h3><p>2026-09-01　欧州　Electric Cars Report</p></div>
+            <div class="reaction"><span>👍 <strong>8</strong></span><span>💬 <strong>5</strong></span></div>
+          </article>
+        </section>
+
+        <section class="feed-view" id="view-talk">
+          <article class="conversation"><span class="avatar">田</span><div><h3>全車室監視システムの記事</h3><p><strong>田中さん：</strong>後席まで含めた検知範囲が面白いです。内装部品側からセンサーを隠す工夫も検討できそうです。</p></div><time>12分前<br>コメント4件</time></article>
+          <article class="conversation"><span class="avatar">鈴</span><div><h3>マツダCX-6eの記事</h3><p><strong>鈴木さん：</strong>大型画面だけでなく、視線移動を減らす配置まで比較したいです。</p></div><time>34分前<br>コメント2件</time></article>
+          <article class="conversation"><span class="avatar">佐</span><div><h3>次世代SDV共同開発の記事</h3><p><strong>佐藤さん：</strong>内装ハードを後から更新できる考え方につながるでしょうか。</p></div><time>1時間前<br>コメント5件</time></article>
+        </section>
+
+        <section class="feed-view" id="view-mine">
+          <article class="news-row">
+            <img src="https://electriccarsreport.com/wp-content/uploads/2026/09/Mazda-CX-6e.jpg" alt="マツダCX-6e" onerror="this.src='images/idea_1684.png'">
+            <div><h3>マツダCX-6e英国発売、航続300マイルと充実装備</h3><p>あなたのコメントに返信2件・未読あり</p></div>
+            <div class="reaction"><span style="color:var(--blue)">● 未読</span></div>
+          </article>
+          <article class="news-row">
+            <img src="https://electriccarsreport.com/wp-content/uploads/2025/02/Nissan-Honda.jpg" alt="日産とホンダ" onerror="this.src='images/idea_1683.png'">
+            <div><h3>日産とホンダ、2029年以降のSDV技術を共同開発</h3><p>あなたがいいねしました・コメント5件</p></div>
+            <div class="reaction"><span>最終更新 1時間前</span></div>
+          </article>
+        </section>
+      </main>
+
+      <aside class="side-panel">
+        <div class="side-title">この案のポイント</div>
+        <div class="side-item"><span class="side-icon">📰</span><div><strong>新着はそのまま</strong><span>過去記事を混ぜず、ニュースの時系列を維持します。</span></div></div>
+        <div class="side-item"><span class="side-icon">💬</span><div><strong>会話だけ再浮上</strong><span>コメントが付いた記事は専用欄で見つけやすくします。</span></div></div>
+        <div class="side-item"><span class="side-icon">🔔</span><div><strong>自分に関係する通知</strong><span>返信・参加記事・コメントへの反応を優先します。</span></div></div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="drawer" id="noticeDrawer" aria-label="通知一覧">
+    <div class="drawer-head"><h2>通知</h2><button class="text-button" id="markRead" type="button">すべて既読にする</button></div>
+    <article class="notice unread"><span class="side-icon">↩</span><div><p><strong>鈴木さん</strong>が「マツダCX-6e」のあなたのコメントに返信しました。</p><time>34分前</time></div></article>
+    <article class="notice unread"><span class="side-icon">💬</span><div><p>参加中の「全車室監視システム」に<strong>新しいコメント</strong>があります。</p><time>42分前</time></div></article>
+    <article class="notice unread"><span class="side-icon">👍</span><div><p><strong>3人</strong>があなたのコメントにいいねしました。</p><time>1時間前</time></div></article>
+    <article class="notice"><span class="side-icon">★</span><div><p>お気に入り記事に新しいコメントが追加されました。</p><time>昨日 16:20</time></div></article>
+    <p class="drawer-note">通知を増やしすぎないよう、単純ないいねはまとめて表示します。本番ではユーザーごとの未読状態をサーバーに保存する想定です。</p>
+  </aside>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const drawer = document.getElementById("noticeDrawer");
+    const backdrop = document.getElementById("drawerBackdrop");
+    const unreadCount = document.getElementById("unreadCount");
+    const toast = document.getElementById("toast");
+    const setDrawer = (open) => {
+      drawer.classList.toggle("open", open);
+      backdrop.classList.toggle("open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(window.previewToastTimer);
+      window.previewToastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    };
+    document.getElementById("noticeButton").addEventListener("click", () => setDrawer(true));
+    backdrop.addEventListener("click", () => setDrawer(false));
+    document.getElementById("markRead").addEventListener("click", () => {
+      drawer.querySelectorAll(".notice.unread").forEach((item) => item.classList.remove("unread"));
+      unreadCount.hidden = true;
+      showToast("すべて既読にしました");
+    });
+    document.querySelectorAll(".tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
+        document.querySelectorAll(".feed-view").forEach((view) => view.classList.remove("active"));
+        button.classList.add("active");
+        document.getElementById(`view-${button.dataset.view}`).classList.add("active");
+      });
+    });
+    document.querySelectorAll(".activity-card").forEach((card) => card.addEventListener("click", () => showToast(card.dataset.message)));
+    document.getElementById("myPageButton").addEventListener("click", () => {
+      document.querySelector('[data-view="mine"]').click();
+      document.querySelector(".feed-panel").scrollIntoView({ behavior:"smooth", block:"start" });
+      showToast("マイページの「参加した記事」を表示しました");
+    });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") setDrawer(false); });
+  </script>
+</body>
+</html>
