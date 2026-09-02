@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>情報源一覧・本番画面プレビュー</title>
+  <script src="source_list_data.js"></script>
+  <style>
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#050a12;font-family:"Noto Sans JP","Yu Gothic UI",sans-serif}.prototype-toolbar{position:fixed;inset:0 0 auto;z-index:10;display:flex;height:58px;align-items:center;justify-content:space-between;gap:18px;padding:0 18px;border-bottom:1px solid rgba(125,241,194,.25);background:linear-gradient(100deg,#101d24,#0d1c2b);color:#eef3fa;box-shadow:0 12px 35px rgba(0,0,0,.38)}.prototype-copy{min-width:0}.prototype-copy strong{display:block;font-size:13px}.prototype-copy span{display:block;margin-top:2px;overflow:hidden;color:#9ba9bb;font-size:10px;text-overflow:ellipsis;white-space:nowrap}.prototype-actions{display:flex;flex:0 0 auto;align-items:center;gap:8px}.prototype-button,.back-link{min-height:34px;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:0 13px;background:rgba(255,255,255,.045);color:#dbe4ef;font-size:11px;font-weight:700;text-decoration:none;cursor:pointer}.prototype-button{border:0;background:linear-gradient(135deg,#7df1c2,#6fa7ff);color:#09111d}#productionFrame{position:fixed;inset:58px 0 0;width:100%;height:calc(100% - 58px);border:0;background:#050a12}.loading{position:fixed;inset:58px 0 0;z-index:5;display:grid;place-items:center;background:#050a12;color:#8191a7;font-size:12px}.loading.hidden{display:none}@media(max-width:680px){.prototype-toolbar{height:66px;padding:0 10px}.prototype-copy span{max-width:44vw}.back-link{display:none}#productionFrame,.loading{inset-block-start:66px;height:calc(100% - 66px)}.prototype-button{padding:0 10px}}
+  </style>
+</head>
+<body>
+  <header class="prototype-toolbar">
+    <div class="prototype-copy"><strong>本番画面＋情報源一覧のサンプル</strong><span>現行ページのヘッダーから、収集RSSと掲載実績を確認する案です。</span></div>
+    <div class="prototype-actions"><button class="prototype-button" id="openPreview" type="button">情報源一覧を開く</button><a class="back-link" href="http://IEWEB01/">本番へ戻る</a></div>
+  </header>
+  <div class="loading" id="loading">現行ページと情報源を読み込んでいます…</div>
+  <iframe id="productionFrame" src="./?source-list-preview-frame=1" title="内装製品デイリーニュース本番画面"></iframe>
+
+  <script>
+    const frame=document.getElementById("productionFrame");
+    const loading=document.getElementById("loading");
+    const openButton=document.getElementById("openPreview");
+    const configuredSources=window.DAILYNEWS_CONFIGURED_SOURCES||[];
+    let previewApi=null;
+
+    const COUNTRY_META={all:{label:"すべて",icon:"🌐"},jp:{label:"日本",icon:"🇯🇵"},cn:{label:"中国",icon:"🇨🇳"},in:{label:"インド",icon:"🇮🇳"},us:{label:"米国",icon:"🇺🇸"},eu:{label:"欧州",icon:"🇪🇺"},paper:{label:"論文",icon:"📄"}};
+    const COUNTRY_CODE={日本:"jp",中国:"cn",インド:"in",米国:"us",欧州:"eu",論文:"paper"};
+    function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,(char)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[char])}
+    function normalizeSource(value){return String(value||"").toLowerCase().replace(/[\s\-_–—・!！()（）.]/g,"")}
+    function waitForPage(doc,selector,timeout=20000){return new Promise((resolve,reject)=>{const found=doc.querySelector(selector);if(found)return resolve(found);const observer=new MutationObserver(()=>{const element=doc.querySelector(selector);if(!element)return;observer.disconnect();resolve(element)});observer.observe(doc.documentElement,{childList:true,subtree:true});setTimeout(()=>{observer.disconnect();reject(new Error(`Timed out waiting for ${selector}`))},timeout)})}
+    function hostName(url){try{return new URL(url).hostname.replace(/^www\./,"")}catch{return ""}}
+
+    function buildSourceData(win){
+      const news=Array.isArray(win.LOADED_NEWS_DATA)?win.LOADED_NEWS_DATA:[];
+      const publishedMap=new Map();
+      for(const item of news){
+        const source=String(item.source||"不明").trim()||"不明";
+        const country=String(item.country||"all");
+        const key=`${country}|${normalizeSource(source)}`;
+        const current=publishedMap.get(key)||{country,name:source,count:0,latest:"",url:""};
+        current.count+=1;
+        if(String(item.date||"")>=current.latest){current.latest=String(item.date||"");current.url=String(item.url||"")}
+        publishedMap.set(key,current);
+      }
+      const published=[...publishedMap.values()].sort((a,b)=>b.latest.localeCompare(a.latest)||b.count-a.count||a.name.localeCompare(b.name,"ja"));
+      const feeds=configuredSources.map((feed)=>{
+        const country=COUNTRY_CODE[feed.country]||"all";
+        const normalized=normalizeSource(feed.name);
+        const matches=published.filter((item)=>item.country===country&&(normalizeSource(item.name)===normalized||normalizeSource(item.name).startsWith(normalized)||normalized.startsWith(normalizeSource(item.name))));
+        return {...feed,country,count:matches.reduce((sum,item)=>sum+item.count,0),latest:matches.reduce((latest,item)=>item.latest>latest?item.latest:latest,""),articleUrl:matches.find((item)=>item.url)?.url||""};
+      });
+      return {news,feeds,published};
+    }
+
+    function addPreviewStyles(doc){
+      const style=doc.createElement("style");style.id="sourceListPreviewStyles";style.textContent=`
+        .source-preview-button{display:inline-flex;min-height:38px;align-items:center;gap:7px;border:1px solid rgba(125,241,194,.27);border-radius:999px;padding:0 12px;background:rgba(125,241,194,.06);color:#dffbef;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}.source-preview-button:hover{background:rgba(125,241,194,.13)}.source-preview-count{display:grid;min-width:19px;height:19px;padding:0 4px;place-items:center;border-radius:999px;background:rgba(125,241,194,.17);color:#7df1c2;font-size:9px}
+        .source-preview-overlay{position:fixed;inset:0;z-index:10060;display:none;place-items:center;padding:22px;background:rgba(1,5,10,.78);backdrop-filter:blur(7px)}.source-preview-overlay.open{display:grid}.source-preview-dialog{display:grid;width:min(1120px,100%);max-height:min(88vh,920px);grid-template-rows:auto auto auto minmax(0,1fr);overflow:hidden;border:1px solid rgba(125,241,194,.25);border-radius:22px;background:linear-gradient(145deg,#131e2b,#0b131f);color:#eaf1f8;box-shadow:0 35px 100px rgba(0,0,0,.62)}
+        .source-preview-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:22px 24px 16px}.source-preview-kicker{color:#7df1c2;font-size:9px;font-weight:900;letter-spacing:.16em}.source-preview-title{margin:4px 0 5px;font-size:24px}.source-preview-description{max-width:700px;margin:0;color:#93a3b6;font-size:11px;line-height:1.7}.source-preview-close{border:0;background:transparent;color:#aebbc9;font-size:28px;cursor:pointer}
+        .source-preview-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding:0 24px 16px}.source-preview-stat{padding:11px 13px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.025);color:#8192a8;font-size:9px}.source-preview-stat strong{display:block;margin-top:2px;color:#eef5fb;font-size:17px}.source-preview-stat.accent strong{color:#7df1c2}
+        .source-preview-tools{display:grid;grid-template-columns:auto minmax(180px,1fr) auto;gap:12px;align-items:center;padding:12px 24px;border-block:1px solid rgba(255,255,255,.075);background:rgba(4,10,18,.34)}.source-preview-tabs,.source-preview-countries{display:flex;gap:6px;overflow:auto}.source-preview-tab,.source-preview-country{flex:0 0 auto;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:7px 11px;background:transparent;color:#9aa9bb;font-size:10px;cursor:pointer}.source-preview-tab.active{border-color:transparent;background:linear-gradient(135deg,#7df1c2,#6fa7ff);color:#07111d;font-weight:900}.source-preview-country.active{border-color:rgba(125,241,194,.45);background:rgba(125,241,194,.1);color:#e9fff6}.source-preview-search{width:220px;border:1px solid rgba(255,255,255,.11);border-radius:10px;padding:8px 11px;background:#09111c;color:#eef5fb;font-size:11px}
+        .source-preview-content{min-height:0;overflow:auto;padding:0 24px 22px}.source-preview-table{width:100%;border-collapse:collapse;font-size:11px}.source-preview-table th{position:sticky;top:0;z-index:1;padding:11px 9px;border-bottom:1px solid rgba(255,255,255,.1);background:#101a27;color:#8192a8;text-align:left;font-size:9px;letter-spacing:.05em}.source-preview-table td{padding:11px 9px;border-bottom:1px solid rgba(255,255,255,.065);vertical-align:middle}.source-preview-source{font-weight:800;color:#edf4fb}.source-preview-sub{display:block;margin-top:3px;color:#718197;font-size:9px}.source-preview-method{display:inline-flex;border-radius:999px;padding:3px 7px;background:rgba(125,241,194,.1);color:#7df1c2;font-size:9px;font-weight:800}.source-preview-method.search{background:rgba(111,167,255,.1);color:#9dc0ff}.source-preview-link{display:inline-flex;border:1px solid rgba(111,167,255,.22);border-radius:8px;padding:5px 8px;color:#a9c8ff;text-decoration:none;white-space:nowrap}.source-preview-link:hover{background:rgba(111,167,255,.1)}.source-preview-none{padding:40px;color:#8192a8;text-align:center}
+        @media(max-width:860px){.source-preview-overlay{padding:8px}.source-preview-dialog{max-height:95vh}.source-preview-summary{grid-template-columns:repeat(2,minmax(0,1fr));padding-inline:14px}.source-preview-head{padding-inline:14px}.source-preview-tools{grid-template-columns:1fr;padding-inline:14px}.source-preview-search{width:100%}.source-preview-content{padding-inline:14px}.source-preview-table thead{display:none}.source-preview-table,.source-preview-table tbody,.source-preview-table tr,.source-preview-table td{display:block}.source-preview-table tr{position:relative;padding:12px 88px 12px 0;border-bottom:1px solid rgba(255,255,255,.08)}.source-preview-table td{padding:2px 0;border:0}.source-preview-table td:last-child{position:absolute;top:14px;right:0}.source-preview-button{padding-inline:9px}.source-preview-button-label{display:none}}
+      `;doc.head.appendChild(style)
+    }
+
+    function installPreview(doc,win){
+      const data=buildSourceData(win);addPreviewStyles(doc);
+      const accountSlot=doc.getElementById("accountHeaderSlot");const actionArea=accountSlot?.parentElement||doc.querySelector(".header-top-actions");
+      const trigger=doc.createElement("button");trigger.className="source-preview-button";trigger.type="button";trigger.innerHTML=`<span aria-hidden="true">◎</span><span class="source-preview-button-label">情報源</span><span class="source-preview-count">${data.feeds.length}</span>`;trigger.title="情報源一覧を開く";actionArea?.insertBefore(trigger,accountSlot||null);
+      const overlay=doc.createElement("div");overlay.className="source-preview-overlay";overlay.innerHTML=`<section class="source-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="sourcePreviewTitle"><header class="source-preview-head"><div><span class="source-preview-kicker">SOURCES & COVERAGE</span><h2 class="source-preview-title" id="sourcePreviewTitle">情報源一覧</h2><p class="source-preview-description">定期収集しているRSSと、デイリーニュースに実際に掲載された媒体を確認できます。収集後に内装関連度の判定、日本語要約、画像確認を行っています。</p></div><button class="source-preview-close" type="button" aria-label="閉じる">&times;</button></header><div class="source-preview-summary" id="sourcePreviewSummary"></div><div class="source-preview-tools"><div class="source-preview-tabs"><button class="source-preview-tab active" data-mode="feeds" type="button">定期収集RSS</button><button class="source-preview-tab" data-mode="published" type="button">掲載実績</button></div><div class="source-preview-countries" id="sourcePreviewCountries"></div><input class="source-preview-search" id="sourcePreviewSearch" type="search" placeholder="媒体名・ドメインを検索…"></div><div class="source-preview-content" id="sourcePreviewContent"></div></section>`;doc.body.appendChild(overlay);
+      const state={mode:"feeds",country:"all",query:""};
+      const summary=overlay.querySelector("#sourcePreviewSummary");const latest=data.news.reduce((value,item)=>String(item.date||"")>value?String(item.date):value,"");summary.innerHTML=`<div class="source-preview-stat accent">定期収集RSS<strong>${data.feeds.length}</strong></div><div class="source-preview-stat">掲載媒体<strong>${data.published.length}</strong></div><div class="source-preview-stat">掲載記事<strong>${data.news.length.toLocaleString()}</strong></div><div class="source-preview-stat">最終掲載日<strong>${escapeHtml(latest||"-")}</strong></div>`;
+      const countries=overlay.querySelector("#sourcePreviewCountries");countries.innerHTML=Object.entries(COUNTRY_META).map(([key,value])=>`<button class="source-preview-country${key==="all"?" active":""}" data-country="${key}" type="button">${value.icon} ${value.label}</button>`).join("");
+      function render(){
+        const query=normalizeSource(state.query);let rows=state.mode==="feeds"?data.feeds:data.published;rows=rows.filter((row)=>(state.country==="all"||row.country===state.country)&&(!query||normalizeSource(`${row.name} ${row.rssUrl||row.url||""}`).includes(query)));
+        const body=rows.map((row)=>{const meta=COUNTRY_META[row.country]||COUNTRY_META.all;if(state.mode==="feeds"){return `<tr><td><span class="source-preview-source">${escapeHtml(row.name)}</span><span class="source-preview-sub">${escapeHtml(hostName(row.rssUrl))}</span></td><td>${meta.icon} ${meta.label}</td><td><span class="source-preview-method">RSS</span></td><td>${row.count?`${row.count.toLocaleString()}件 / 最新 ${escapeHtml(row.latest)}`:"掲載実績なし"}</td><td><a class="source-preview-link" href="${escapeHtml(row.rssUrl)}" target="_blank" rel="noopener">RSSを開く ↗</a></td></tr>`}const registered=data.feeds.some((feed)=>feed.country===row.country&&(normalizeSource(feed.name)===normalizeSource(row.name)||normalizeSource(row.name).startsWith(normalizeSource(feed.name))));return `<tr><td><span class="source-preview-source">${escapeHtml(row.name)}</span><span class="source-preview-sub">${escapeHtml(hostName(row.url))}</span></td><td>${meta.icon} ${meta.label}</td><td><span class="source-preview-method ${registered?"":" search"}">${registered?"RSS登録":"検索・その他"}</span></td><td>${row.count.toLocaleString()}件 / 最新 ${escapeHtml(row.latest||"-")}</td><td>${row.url?`<a class="source-preview-link" href="${escapeHtml(row.url)}" target="_blank" rel="noopener">記事例 ↗</a>`:"-"}</td></tr>`}).join("");
+        overlay.querySelector("#sourcePreviewContent").innerHTML=body?`<table class="source-preview-table"><thead><tr><th>媒体名</th><th>地域</th><th>取得方法</th><th>掲載状況</th><th>リンク</th></tr></thead><tbody>${body}</tbody></table>`:'<div class="source-preview-none">条件に一致する情報源はありません。</div>';
+      }
+      function open(){overlay.classList.add("open");doc.body.dataset.sourcePreviewOverflow=doc.body.style.overflow;doc.body.style.overflow="hidden"}function close(){overlay.classList.remove("open");doc.body.style.overflow=doc.body.dataset.sourcePreviewOverflow||""}
+      trigger.addEventListener("click",open);overlay.querySelector(".source-preview-close").addEventListener("click",close);overlay.addEventListener("click",event=>{if(event.target===overlay)close()});overlay.querySelectorAll("[data-mode]").forEach(button=>button.addEventListener("click",()=>{state.mode=button.dataset.mode;overlay.querySelectorAll("[data-mode]").forEach(item=>item.classList.toggle("active",item===button));render()}));countries.addEventListener("click",event=>{const button=event.target.closest("[data-country]");if(!button)return;state.country=button.dataset.country;countries.querySelectorAll("[data-country]").forEach(item=>item.classList.toggle("active",item===button));render()});overlay.querySelector("#sourcePreviewSearch").addEventListener("input",event=>{state.query=event.target.value;render()});doc.addEventListener("keydown",event=>{if(event.key==="Escape")close()});render();return{open};
+    }
+
+    frame.addEventListener("load",async()=>{try{const doc=frame.contentDocument,win=frame.contentWindow;await waitForPage(doc,".header-top-actions");if(win.__dataScriptsReady)await win.__dataScriptsReady;previewApi=installPreview(doc,win);loading.classList.add("hidden");setTimeout(()=>previewApi.open(),500)}catch(error){loading.textContent="本番ページへのログイン後、再読み込みしてください。";console.error(error)}});
+    openButton.addEventListener("click",()=>previewApi?.open());
+  </script>
+</body>
+</html>

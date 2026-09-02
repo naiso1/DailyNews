@@ -49,6 +49,8 @@ if (-not (Test-Path -LiteralPath $releasePath)) {
         $sourceHtml = Join-Path $staging $entryHtmlName
         $required = @(
             $sourceHtml,
+            (Join-Path $staging "source-list-preview.html"),
+            (Join-Path $staging "source_list_data.js"),
             (Join-Path $staging "news_data.js"),
             (Join-Path $staging "insights_data.js"),
             (Join-Path $staging "dailynews_client.js"),
