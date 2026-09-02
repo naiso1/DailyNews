@@ -5,7 +5,10 @@ param(
 
     [Parameter(Mandatory = $true)]
     [ValidatePattern("^[0-9a-fA-F]{7,40}$")]
-    [string]$ReleaseId
+    [string]$ReleaseId,
+
+    [ValidateRange(1, 20)]
+    [int]$RetainReleases = 3
 )
 
 $ErrorActionPreference = "Stop"
@@ -17,6 +20,7 @@ $activeFile = Join-Path $root "active-release.txt"
 $releasePath = Join-Path $releases $ReleaseId
 $archive = [IO.Path]::GetFullPath($ArchivePath)
 $incomingPrefix = [IO.Path]::GetFullPath($incoming) + [IO.Path]::DirectorySeparatorChar
+$releasesPrefix = [IO.Path]::GetFullPath($releases) + [IO.Path]::DirectorySeparatorChar
 $entryHtmlName = [Text.Encoding]::UTF8.GetString(
     [Convert]::FromBase64String(
         "5YaF6KOF6KO95ZOB44OH44Kk44Oq44O844OL44Ol44O844K5Lmh0bWw="
@@ -86,5 +90,44 @@ $temporaryActiveFile = "$activeFile.tmp"
 )
 Move-Item -LiteralPath $temporaryActiveFile -Destination $activeFile -Force
 Remove-Item -LiteralPath $archive -Force
+
+# Every release contains the complete image set, so retain only rollback-ready generations.
+$releaseDirectories = @(
+    Get-ChildItem -LiteralPath $releases -Directory -Force |
+        Where-Object { $_.Name -match "^[0-9a-fA-F]{40}$" } |
+        Sort-Object LastWriteTimeUtc -Descending
+)
+$retained = New-Object "System.Collections.Generic.HashSet[string]" (
+    [StringComparer]::OrdinalIgnoreCase
+)
+[void]$retained.Add($ReleaseId)
+foreach ($directory in $releaseDirectories) {
+    if ($retained.Count -ge $RetainReleases) {
+        break
+    }
+    [void]$retained.Add($directory.Name)
+}
+
+foreach ($directory in $releaseDirectories) {
+    if ($retained.Contains($directory.Name)) {
+        continue
+    }
+
+    $candidate = [IO.Path]::GetFullPath($directory.FullName)
+    if (-not $candidate.StartsWith(
+            $releasesPrefix,
+            [StringComparison]::OrdinalIgnoreCase
+        )) {
+        throw "Refusing to remove a release outside $releases"
+    }
+
+    try {
+        Remove-Item -LiteralPath $candidate -Recurse -Force
+        Write-Host "Removed expired DailyNews release: $($directory.Name)"
+    }
+    catch {
+        Write-Warning "Could not remove expired release $($directory.Name): $_"
+    }
+}
 
 Write-Host "Activated DailyNews release: $ReleaseId"
