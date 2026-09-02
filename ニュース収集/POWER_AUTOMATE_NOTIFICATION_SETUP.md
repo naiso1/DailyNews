@@ -7,6 +7,7 @@ DailyNewsは処理開始時に`running`、全工程の完了後にだけ`success
 
 - ローカル: `ニュース収集/logs/latest_run_status.json`
 - 業務用OneDrive: `DailyNewsAutomation/latest_run_status.json`
+- Power Automate判定用RSS: `https://naiso1.github.io/DailyNews/automation_status.xml`
 
 OneDriveへ出力するには、このPCのOneDriveへ業務アカウントでサインインしている必要があります。
 未設定の場合はローカルだけへ出力し、ログにOneDriveのパスは表示されません。
@@ -15,24 +16,23 @@ OneDriveへ出力するには、このPCのOneDriveへ業務アカウントで�
 `status`が`success`になります。電源断や強制終了では`running`または前日以前の
 ファイルが残るため、成功扱いにはなりません。
 
+Power Automate判定用RSSには成否、実行日、公開対象日だけを含め、ログのパスや
+メールアドレスなどは公開しません。処理失敗時もRSSの更新を試みます。PC停止や
+GitHub通信障害で更新できなかった場合は前日のRSSが残り、日付不一致により失敗扱いになります。
+
 ## 8:00のフロー
 
 1. タイムゾーンを`Tokyo Standard Time`にして毎日8:00に実行する。
-2. OneDrive for Businessの「ファイル コンテンツの取得」で
-   `DailyNewsAutomation/latest_run_status.json`を読む。
-3. 「JSONの解析」を追加する。
-4. 次の全条件を満たす場合だけ、関係者向けメールを送信する。
-   - `status`が`success`
-   - `run_date`が東京時間の本日
-   - `expected_news_date`が東京時間の昨日
-   - `published_news_date`が`expected_news_date`以上
-5. 条件を満たさない場合は管理者だけへ異常メールを送信する。
-6. `status`が`paused`の場合は、どちらのメールも送らない。
+2. RSSの「すべてのRSSフィード項目を一覧表示する」で判定用RSSを読む。
+3. RSS本文に`DailyNews success <東京時間の本日>`が含まれる場合だけ、関係者向けメールを送信する。
+4. 成功表記がない、`failed`である、日付が古い、RSSを取得できない場合は管理者だけへ異常メールを送信する。
 
 成功メールの宛先には別途作成するメーリングリストを設定します。失敗メールの宛先は
 `yuki.nakamura@toyoda-gosei.co.jp`だけにします。
 
 既存の無条件送信アクションは削除するか、成功側の分岐内へ移動してください。
+
+業務用OneDriveのJSONは、障害調査用の詳細情報として引き続き保存します。
 
 ## JSON解析スキーマ
 

@@ -10,8 +10,10 @@ import sys
 import time
 import urllib.request
 import winreg
+from email.utils import format_datetime
 from pathlib import Path
 from subprocess import CREATE_NEW_PROCESS_GROUP, PIPE, STDOUT, CalledProcessError, Popen
+from xml.sax.saxutils import escape
 
 import py_compile
 
@@ -23,6 +25,7 @@ LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
 RUN_STATUS_PATH = LOG_DIR / "latest_run_status.json"
+AUTOMATION_STATUS_FEED = ROOT / "automation_status.xml"
 SCHEDULE_PAUSE_CONFIG = SCRIPT_DIR / "scheduled_pauses.json"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
@@ -160,6 +163,84 @@ def write_run_status(status, **details):
             f"{status} -> {', '.join(str(path) for path in destinations)}"
         )
     return payload
+
+
+def write_automation_status_feed(payload):
+    """Write a public, non-sensitive status marker for the 08:00 cloud flow."""
+    status = str(payload.get("status", "unknown")).strip().lower() or "unknown"
+    run_date = str(payload.get("run_date", "")).strip()
+    updated_at = str(payload.get("updated_at", "")).strip()
+    published_news_date = str(payload.get("published_news_date", "")).strip()
+    title = f"DailyNews {status} {run_date}"
+    description = json.dumps(
+        {
+            "status": status,
+            "run_date": run_date,
+            "expected_news_date": payload.get("expected_news_date", ""),
+            "published_news_date": published_news_date,
+            "updated_at": updated_at,
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+    now = datetime.datetime.now().astimezone()
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>DailyNews automation status</title>
+    <link>http://IEWEB01/</link>
+    <description>DailyNews publication status for Power Automate</description>
+    <lastBuildDate>{escape(format_datetime(now))}</lastBuildDate>
+    <item>
+      <title>{escape(title)}</title>
+      <link>http://IEWEB01/</link>
+      <guid isPermaLink="false">DailyNews-{escape(run_date)}-{escape(status)}</guid>
+      <pubDate>{escape(format_datetime(now))}</pubDate>
+      <description>{escape(description)}</description>
+    </item>
+  </channel>
+</rss>
+"""
+    AUTOMATION_STATUS_FEED.write_text(xml, encoding="utf-8")
+    log(f"[INFO] Automation status feed updated: {status} {run_date}")
+
+
+def publish_automation_status_feed(payload, log_file):
+    """Commit only the status feed so failed runs cannot publish partial content."""
+    if os.environ.get("AUTO_GIT_SYNC", "1").strip().lower() in {"0", "false", "no"}:
+        raise RuntimeError("AUTO_GIT_SYNC is disabled; notification status cannot be published.")
+
+    write_automation_status_feed(payload)
+    rel = AUTOMATION_STATUS_FEED.relative_to(ROOT).as_posix()
+    run_cmd(["git", "add", "--", rel], "status_feed_git_add", log_file, cwd=ROOT)
+    diff_rc = subprocess.run(
+        ["git", "diff", "--cached", "--quiet", "--", rel],
+        cwd=str(ROOT),
+    ).returncode
+    if diff_rc == 0:
+        log("[INFO] Automation status feed is already current.")
+        return
+    if diff_rc != 1:
+        raise CalledProcessError(diff_rc, ["git", "diff", "--cached", "--quiet", "--", rel])
+
+    branch = subprocess.run(
+        ["git", "branch", "--show-current"],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=True,
+    ).stdout.strip() or "main"
+    status = str(payload.get("status", "unknown"))
+    run_date = str(payload.get("run_date", datetime.date.today().isoformat()))
+    run_cmd(
+        ["git", "commit", "-m", f"DailyNews notification status ({run_date}: {status})", "--", rel],
+        "status_feed_git_commit",
+        log_file,
+        cwd=ROOT,
+    )
+    run_git_push(branch, log_file)
 
 
 def schedule_pause_windows():
@@ -878,7 +959,7 @@ def main():
             ).stdout.strip()
         except Exception:
             release = ""
-        write_run_status(
+        success_payload = write_run_status(
             "success",
             **status_base,
             completed_at=completed_at,
@@ -889,8 +970,18 @@ def main():
             site_url="http://IEWEB01/",
             message="DailyNews update and server publication completed.",
         )
-    else:
-        write_run_status(
+        try:
+            publish_automation_status_feed(success_payload, LOG_FILE)
+        except Exception as e:
+            run_succeeded = False
+            failure_message = (
+                "Content was published, but the Power Automate status feed could not be published: "
+                f"{type(e).__name__}: {e}"
+            )
+            log(f"[ERROR] {failure_message}")
+
+    if not run_succeeded:
+        failed_payload = write_run_status(
             "failed",
             **status_base,
             completed_at=completed_at,
@@ -900,6 +991,15 @@ def main():
             error=failure_message or "The process did not complete.",
             site_url="http://IEWEB01/",
         )
+        try:
+            publish_automation_status_feed(failed_payload, LOG_FILE)
+        except Exception as e:
+            # A stale public status also evaluates as failure at 08:00, so keep
+            # the original processing error and only record this secondary one.
+            log(
+                "[WARN] Failed status feed could not be published: "
+                f"{type(e).__name__}: {e}"
+            )
 
     log(f"[END] {datetime.datetime.now():%Y-%m-%d %H:%M:%S}")
     log("==================================================")
