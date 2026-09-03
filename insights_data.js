@@ -1,5 +1,37 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-09-03",
+        analysis: {
+            jp: "2026年9月の日本車市場は、高級感と機能性の両立がキーワード[jp1754]。三菱新型パジェロの高級ラウンジ内装[jp1754]や、レクサスの光る物理ボタン[jp1759]、ボルボEX90のEV 安全技術と高級内装[jp1760]が示す通り、スクエアな車体にソフトな素材や調光UI を組み合わせる動きが加速している。特に助手席のソフトパッド[jp1754]や、Bowers＆Wilkins オーディオ[jp1760]、光るボタン[jp1759]といった要素は、単なる機能追加ではなく、車内の「居心地」を再定義する設計思想だ。また、ノア・ヴォクシーのダッシュボードトレイ[jp1755]や、クロストレックの標準装備[jp1758]から、実用性を損なわないコックピット設計の重要性も浮き彫り。",
+            cn: "豊田合成の内装開発室向けに、2027 年に向けた内装部品・素材・操作体験に関する考察を提示します。 まず [cn1569] と [cn1567] から、2027 年モデルへの大容量バッテリーと全固体電池の導入が確実視されるため、重量増に耐える高剛性かつ吸音性の高い複合素材内装が必須となります。さらに [cn1570] の低価格帯 EREV SUV 市場拡大に伴い、コスト抑制と高級感の両立を可能にする再生可能素材や、汚れに強いコーティング技術の採用が求められます。 また [cn1568] のような高性能 PHEV におけるオフロード性能向上は、車内空間の振動吸収性を高めるマウント構造や、衝撃に強いダッシュボード設計を要示します。最後に [cn1571] と [cn1564] で示される欧州進出加速は、多様な気候に対応できる耐候性素材や、欧州基準に準拠した安全基準を満たす防火内装の選定が不可欠です。",
+            in: "インド市場では Bharat NCAP 2.0 の強化基準（jp1618）により、2027 年以降は安全性が内装選定の絶対条件となる。その上で、フェイスリフトや新オプション投入（jp1621）が求められ、SUV 分野では 7 人乗りモデルの普及（jp1625）や EV 化（jp1624）が加速する。さらに、頭金なしローン普及（jp1622）は若年層の購買力を高め、価格競争力（jp1626）も重要になる。豊田合成は、高強度素材による衝突安全性向上、EV 化への対応、そして家族向け大空間かつ安価な内装を、2027 年までの開発サイクルで徹底して設計する必要がある。 関連画像: [in1618] [in1621] [in1626]",
+            us: "2026 年米国市場の車内トレンドは、GM の OTA 更新で車内カメラ機能を USB 保存可能にする [us1570] や、2003 年新型メルセデス・マイバッハの高級維持 [us1574] を示すように、プライバシー配慮とラグジュアリー体験の両立が鍵。ベントレー EV SUV「トルカル」の高出力 [us1571] や、ロータス・エリスの中央シート搭載 [us1569] は、EV フラットフロアを活かした広々収納やリバーシブルアームレストへの拡張を示唆。VW のシートブランド廃止 [us1573] とレクサスの価値維持 [us1575] は、環境対応と長寿命化の重要性を裏付ける。",
+            eu: "欧州EV市場では、ゲーム要素を取り入れた実車体験や、大型タッチスクリーンを備えた新コックピットがトレンドだ[eu1539][eu1540]。また、バッテリーから外部機器へ電力を供給するV2L機能や、AI搭載スマートコックピットも注目を集めている[eu1542]。ユーザーは単なる移動手段ではなく、没入感のあるデジタル空間や、生活インフラとしての車内を求めている[eu1533]。これらは、物理ボタンを減らしつつ、触覚的な安心感や視覚的広がり、そして環境負荷の少ない素材を組み合わせたコックピットデザインが鍵となる[eu1539]。特に、仮想ギアボックスによる没入感と、物理的な香りや質感のバランスが、高級感と親しみやすさを両立させる[eu1535][eu1533]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1696, img: "images/idea_1696.png", title: "調光物理ボタンインパネ", desc: "新型パジェロのソフトパッドを参考にして、レクサスの光る物理ボタン技術をインパネに。高級感あるツートーン仕立ての中に、手をかざすと光るボタンを配置し、ドライバーの操作意欲を高め、毎日の運転がより楽しくなることを実現します。 [jp1754]", imagePrompt: "Close-up shot of a high-end car interior dashboard featuring camel-colored soft padded panels and black accents. A row of physical buttons embedded in the center console glows softly with ambient light when a hand hovers over them, creating a luxurious lounge atmosphere. The lighting is warm and inviting, highlighting the contrast between the black trim and the camel panels.", sourceNewsIds: ["jp1754"] },
+                { id: 1697, img: "images/idea_1697.png", title: "EV 安全調光コンソール", desc: "ボルボEX90 の天然素材とリサイクル素材を活かし、センターコンソールに安全技術と調光照明を融合。EV の静粛性と Bowers＆Wilkins オーディオの音響特性を考慮し、コンソール表面が安全警告やナビ情報に応じて優しく光る、安心感のある高級内装を創出します。 [jp1760]", imagePrompt: "Interior view of a luxury EV SUV focusing on the center console. The console is made of natural and recycled materials with a Nordic design. The surface of the console gently glows with soft, ambient light that reacts to safety notifications displayed on the 14.5-inch vertical display. The lighting is subtle and elegant, emphasizing the high-end safety technology and Bowers＆Wilkins audio integration.", sourceNewsIds: ["jp1760"] },
+            ],
+            cn: [
+                { id: 1698, img: "images/idea_1698.png", title: "リサイクルカーボンインパネ", desc: "Zeekr 7Xの85kWhバッテリー搭載で増える重量に対し、再生プラスチックを主原料としたインパネを開発。カーボンファイバーの凹凸テクスチャーで高級感を保ちながら、軽量化とリサイクルのサイクルを愉しむ。 [cn1569]", imagePrompt: "Interior shot of a luxury car dashboard made of textured recycled carbon fiber, warm lighting, sustainable green accent, high-end texture details", sourceNewsIds: ["cn1569"] },
+                { id: 1699, img: "images/idea_1699.png", title: "メテオコート加飾パネル", desc: "Geelyの4920 Nmトルクを吸収する剛性インパネに、メテオコート加飾パネルを採用。型内塗装による凹凸テクスチャーでシームレス加工を実現し、オフロードでの振動も愉しく感じられる。 [cn1568]", imagePrompt: "Close-up of a car dashboard panel with unique 3D texture coating, seamless finish, metallic silver and deep blue tones, studio lighting", sourceNewsIds: ["cn1568"] },
+            ],
+            in: [
+                { id: 1700, img: "images/idea_1700.png", title: "安心空気に変える抗菌ダッシュボード", desc: "Kia Sorentoの7人乗りスペース でも、Bharat NCAP 2.0の安全基準 に沿い、抗菌加工と芳香消臭を施したダッシュボードを提案。家族全員が安心して乗れる空間を、低価格モデルでも実現し、ユーザーが笑顔になる [in1618]", imagePrompt: "Interior view of a compact SUV dashboard with a wooden texture panel embedded with subtle glowing green air purification indicators, showing a happy Indian family inside, soft natural sunlight streaming through windows, high resolution", sourceNewsIds: ["in1618"] },
+                { id: 1701, img: "images/idea_1701.png", title: "静寂な光の陰影で癒やすコンソール", desc: "MG Hector Tomahawk EVの静かな車内 を活用し、豊田合成のLED陰影イルミネーション技術 を取り入れたコンソールを提案。光の陰影で空間を演出し、EVの静寂性を最大限に活かし、乗員が心地よさを感じてくれる [in1621]", imagePrompt: "Close up of a center console with soft blue and purple LED light patterns projected onto the surface, creating a calming ambiance, showing the texture of the material and the glowing light patterns, dark interior environment, cinematic lighting", sourceNewsIds: ["in1621"] },
+            ],
+            us: [
+                { id: 1702, img: "images/idea_1702.png", title: "プライバシー保護型 USB 保存コンソール", desc: "GM の車内カメラ機能追加 を参考、コンソールに USB 保存ポートを標準搭載。ドライバが外部カメラ映像を簡単に保存でき、プライバシー管理が容易でうれしくなります。 [us1570]", imagePrompt: "Close-up of a luxury car center console featuring a sleek USB port and a small display screen showing a camera icon, with soft ambient lighting highlighting the metallic finish.", sourceNewsIds: ["us1570"] },
+                { id: 1703, img: "images/idea_1703.png", title: "高級感維持型 EV 収納ボックス", desc: "ベントレートルカル の EV フラットフロアを活かし、コンソールボックスをリバーシブルに設計。EV 特有の広さを活かし、高級ラグジュアリー感を損なわずにうれしく収納できます。 [us1574]", imagePrompt: "Interior view of a high-end EV with a flat floor, showing a reversible console box in the center, with soft lighting emphasizing the premium materials and spacious storage.", sourceNewsIds: ["us1574"] },
+            ],
+            eu: [
+                { id: 1704, img: "images/idea_1704.png", title: "グローバル調光コンソール", desc: "ハイウンダイオニク5Nのゲームギアボックスを参考にした、地域ごとの文化や季節に合わせて光の表情が変わるコンソール。海外市場でも、車内の居心地を高める光の演出で、現地のユーザーにうれしい満足感を与える。 [eu1538]", imagePrompt: "Futuristic car interior console with dynamic lighting that changes color and pattern based on user's location and time, inspired by gaming aesthetics, sleek matte finish, ambient glow", sourceNewsIds: ["eu1538"] },
+                { id: 1705, img: "images/idea_1705.png", title: "発光ミリ波エンブレム調光パネル", desc: "発光ミリ波レーダー透過エンブレム技術を応用し、BMW 5シリーズツーリングのPanoramic iDriveのように、コンソール表面が周囲のデジタルコックピットと連動して発光。EV化が進む欧州市場で、安全なADAS機能と内装の調和を実現し、ドライバーが安心する。 [eu1539]", imagePrompt: "Modern car interior console with transparent emblem that emits light and integrates with a large panoramic digital display, sleek dark grey material, soft ambient lighting", sourceNewsIds: ["eu1539"] },
+            ],
+        }
+    },
+{
         date: "2026-09-02",
         analysis: {
             jp: "2026 年型デリカ D:5 は 8 インチメーター標準化で S-AWC 表示やドライブモード演出を強化し、金属調アクセントでギア感を高めている [jp1744]。レクサス UX300h の新グレードはレイヤーグリッド加飾で上質感を追求 [jp1748]。マツダ CX-30 最上級は本革シートやベンチレーションで快適性を担保 [jp1747]。ロードスター用ネオクラシックシートは初代 NA テイストを現代風アレンジ [jp1743]。アルファード専用ダッシュボードトレイは高級感を損なわない収納を提案 [jp1741]。パジェロは 3 列目シートの床下収納進化で居住性向上 [jp1745]。内装は機能性に加え、運転状況可視化やネオクラシック等情緒的要素、高級感維持の収納設計が重要だ。",
