@@ -159,6 +159,9 @@ async function main() {
   });
   assert.equal(secondRegistration.authenticated, true);
 
+  const mentionCandidates = await request("/api/users/mentions");
+  assert.deepEqual(mentionCandidates.users, [{ displayName: "Test User" }]);
+
   const mention = await request("/api/interactions/jp1/comments", {
     method: "POST",
     body: {

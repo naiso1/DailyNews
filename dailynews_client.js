@@ -13,6 +13,8 @@ const IRRELEVANT_TOOLTIP =
 let accessStatsCache = null;
 let localInteractionsCache = null;
 let interactionPollTimer = null;
+let mentionUsersCache = null;
+let mentionUsersPromise = null;
 
 window.interactionsData = {};
 window.useLocalInteractions = false;
@@ -77,6 +79,113 @@ function getJstDateKey(offsetDays = 0) {
   const month = String(target.getUTCMonth() + 1).padStart(2, "0");
   const day = String(target.getUTCDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+async function loadMentionUsers() {
+  if (mentionUsersCache) return mentionUsersCache;
+  if (mentionUsersPromise) return mentionUsersPromise;
+  mentionUsersPromise = apiRequest("/users/mentions")
+    .then((payload) => {
+      mentionUsersCache = Array.isArray(payload.users) ? payload.users : [];
+      return mentionUsersCache;
+    })
+    .finally(() => {
+      mentionUsersPromise = null;
+    });
+  return mentionUsersPromise;
+}
+
+function activeMentionQuery(input) {
+  const caret = input.selectionStart ?? input.value.length;
+  const match = input.value.slice(0, caret).match(/(?:^|\s)@([^\s@]*)$/);
+  if (!match) return null;
+  return {
+    query: match[1].toLocaleLowerCase("ja"),
+    start: caret - match[1].length - 1,
+    end: caret,
+  };
+}
+
+function closeMentionMenus(except = null) {
+  document.querySelectorAll(".comment-mention-menu.open").forEach((menu) => {
+    if (menu !== except) menu.classList.remove("open");
+  });
+}
+
+async function showMentionCandidates(input, showAll = false) {
+  const area = input.closest(".comment-input-area");
+  const menu = area?.querySelector(".comment-mention-menu");
+  if (!menu) return;
+  let users;
+  try {
+    users = await loadMentionUsers();
+  } catch (error) {
+    if (error.status === 401) {
+      window.dailyNewsAccount?.openAuth(
+        "login",
+        "メンション候補を表示するにはログインしてください。",
+      );
+    }
+    return;
+  }
+  const active = activeMentionQuery(input);
+  if (!showAll && !active) {
+    menu.classList.remove("open");
+    return;
+  }
+  const query = active?.query || "";
+  const candidates = users.filter((user) => (
+    !query || String(user.displayName || "").toLocaleLowerCase("ja").includes(query)
+  ));
+  menu.innerHTML = candidates.length
+    ? candidates.map((user, index) => `<button class="comment-mention-option" type="button" data-mention-index="${index}"><span>@</span>${escapeHtml(user.displayName)}</button>`).join("")
+    : '<span class="comment-mention-empty">一致するユーザーがいません。</span>';
+  menu._mentionCandidates = candidates;
+  closeMentionMenus(menu);
+  menu.classList.add("open");
+}
+
+function insertMention(input, displayName) {
+  const active = activeMentionQuery(input);
+  const caret = input.selectionStart ?? input.value.length;
+  const start = active?.start ?? caret;
+  const end = active?.end ?? caret;
+  input.setRangeText(`@${displayName} `, start, end, "end");
+  input.focus();
+  closeMentionMenus();
+}
+
+function setupMentionInputs(root = document) {
+  root.querySelectorAll?.(".comment-input:not([data-mention-ready])").forEach((input) => {
+    const area = input.closest(".comment-input-area");
+    if (!area) return;
+    input.dataset.mentionReady = "true";
+    input.placeholder = "コメントを入力（@でメンション）...";
+    const trigger = document.createElement("button");
+    trigger.className = "comment-mention-trigger";
+    trigger.type = "button";
+    trigger.textContent = "@";
+    trigger.title = "登録ユーザーをメンション";
+    trigger.setAttribute("aria-label", "登録ユーザーをメンション");
+    area.insertBefore(trigger, input);
+    const menu = document.createElement("div");
+    menu.className = "comment-mention-menu";
+    menu.setAttribute("role", "listbox");
+    area.appendChild(menu);
+
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showMentionCandidates(input, true);
+    });
+    input.addEventListener("input", () => showMentionCandidates(input));
+    input.addEventListener("click", (event) => event.stopPropagation());
+    menu.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const option = event.target.closest("[data-mention-index]");
+      const user = menu._mentionCandidates?.[Number(option?.dataset.mentionIndex)];
+      if (user) insertMention(input, user.displayName);
+    });
+  });
 }
 
 function getTodayKey() {
@@ -659,7 +768,6 @@ function renderItem(itemId) {
             <div class="comment-actions">
               ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
               ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
-              ${comment.id ? `<button class="comment-mention-btn" type="button" onclick="mentionCommentUser('${escapeHtml(itemId)}', ${index})">@メンション</button>` : ""}
               ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">&#21066;&#38500;</button>`}
             </div>
           </div>`,
@@ -898,18 +1006,6 @@ window.replyToComment = async (itemId, commentId) => {
   await saveComment(itemId, text.trim(), commentId);
 };
 
-window.mentionCommentUser = (itemId, commentIndex) => {
-  const data = liveElements[itemId]?.lastData || getInteractionRenderData(itemId);
-  const displayName = data.comments?.[commentIndex]?.user;
-  const section = liveElements[itemId]?.commentList?.closest(".comment-section");
-  const input = section?.querySelector(".comment-input");
-  if (!displayName || !input) return;
-  const mention = `@${displayName} `;
-  if (!input.value.includes(mention)) input.value = `${mention}${input.value}`;
-  input.focus();
-  input.setSelectionRange(input.value.length, input.value.length);
-};
-
 window.toggleCommentLike = async (itemId, commentId, liked) => {
   try {
     const data = await apiRequest(
@@ -938,6 +1034,7 @@ window.toggleCommentLike = async (itemId, commentId, liked) => {
 };
 
 window.addEventListener("dailynews:account-changed", () => {
+  mentionUsersCache = null;
   Object.keys(liveElements).forEach((itemId) => {
     fetchInteractionDetail(itemId).catch(() => {});
   });
@@ -1016,11 +1113,13 @@ const interactionObserver = new IntersectionObserver(
 );
 
 function observeInteractionCards(root = document) {
+  setupMentionInputs(root);
   root.querySelectorAll?.(".card, .idea-card").forEach((element) => {
     interactionObserver.observe(element);
   });
 }
 
+document.addEventListener("click", () => closeMentionMenus());
 setTimeout(() => observeInteractionCards(), 1000);
 new MutationObserver((records) => {
   records.forEach((record) => {

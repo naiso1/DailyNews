@@ -1196,6 +1196,18 @@ async function handleApi(request, response, requestUrl) {
     return;
   }
 
+  if (request.method === "GET" && requestUrl.pathname === "/api/users/mentions") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    sendJson(response, 200, {
+      users: statements.mentionableUsers
+        .all()
+        .filter((row) => Number(row.id) !== user.id)
+        .map((row) => ({ displayName: row.display_name })),
+    });
+    return;
+  }
+
   if (request.method === "GET" && requestUrl.pathname === "/api/interactions") {
     sendJson(response, 200, {
       interactions: allInteractions(authenticatedUser(request)),

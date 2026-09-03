@@ -738,12 +738,53 @@ header.site-header {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-.comment-list { max-height: 200px; overflow-y: auto; margin-bottom: 12px; font-size: 13px; }
+.comment-list { max-height: none; overflow: visible; margin-bottom: 12px; font-size: 13px; }
 .comment-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; }
 .comment-user { font-weight: bold; color: var(--accent); font-size: 11px; margin-bottom: 2px; }
-.comment-text { color: #ddd; line-height: 1.4; }
+.comment-text { color: #ddd; line-height: 1.4; overflow-wrap: anywhere; }
 
-.comment-input-area { display: flex; gap: 8px; }
+.comment-input-area { position: relative; display: flex; gap: 8px; }
+.comment-mention-trigger {
+    flex: 0 0 38px;
+    border: 1px solid rgba(111, 167, 255, 0.35);
+    border-radius: 8px;
+    background: rgba(111, 167, 255, 0.1);
+    color: #a9c8ff;
+    font-weight: 800;
+    cursor: pointer;
+}
+.comment-mention-trigger:hover { background: rgba(111, 167, 255, 0.2); }
+.comment-mention-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 7px);
+    z-index: 20;
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 5px;
+    padding: 8px;
+    border: 1px solid rgba(111, 167, 255, 0.35);
+    border-radius: 12px;
+    background: #111b29;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+}
+.comment-mention-menu.open { display: grid; }
+.comment-mention-option {
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 7px 9px;
+    overflow-wrap: anywhere;
+    background: rgba(255, 255, 255, 0.035);
+    color: #dce8f5;
+    font-size: 11px;
+    text-align: left;
+    cursor: pointer;
+}
+.comment-mention-option span { margin-right: 4px; color: var(--accent-2); font-weight: 900; }
+.comment-mention-option:hover { border-color: rgba(125, 241, 194, 0.35); background: rgba(125, 241, 194, 0.08); }
+.comment-mention-empty { grid-column: 1 / -1; padding: 8px; color: #8496aa; font-size: 11px; }
 .comment-input {
     flex: 1;
     background: rgba(255, 255, 255, 0.05);
@@ -1414,12 +1455,12 @@ header.site-header {
 
 
     <!-- DailyNews Server API -->
-    <script src="source_list_data.js?v=20260903-1"></script>
-    <script type="module" src="dailynews_client.js?v=20260903-1"></script>
-    <script type="module" src="dailynews_account.js?v=20260903-1"></script>
-    <script type="module" src="dailynews_activity.js?v=20260903-1"></script>
-    <script type="module" src="dailynews_sources.js?v=20260903-1"></script>
-    <script type="module" src="release_history.js?v=20260903-1"></script>
+    <script src="source_list_data.js?v=20260903-2"></script>
+    <script type="module" src="dailynews_client.js?v=20260903-2"></script>
+    <script type="module" src="dailynews_account.js?v=20260903-2"></script>
+    <script type="module" src="dailynews_activity.js?v=20260903-2"></script>
+    <script type="module" src="dailynews_sources.js?v=20260903-2"></script>
+    <script type="module" src="release_history.js?v=20260903-2"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
