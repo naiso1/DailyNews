@@ -375,6 +375,9 @@ const statements = {
     SELECT id, email, display_name, email_verified, is_admin
     FROM users WHERE id = ?
   `),
+  mentionableUsers: db.prepare(`
+    SELECT id, display_name FROM users ORDER BY id
+  `),
   insertUser: db.prepare(`
     INSERT INTO users(email, display_name, password_hash, password_salt)
     VALUES (?, ?, ?, ?)
@@ -932,13 +935,29 @@ function notificationPayload(userId, limit = 30) {
   };
 }
 
-function notifyCommentParticipants(itemId, commentId, actor, parentComment) {
+function mentionedUserIds(text, actorId) {
+  const body = String(text || "");
+  return statements.mentionableUsers
+    .all()
+    .filter((row) => Number(row.id) !== actorId)
+    .filter((row) => body.includes(`@${row.display_name}`))
+    .map((row) => Number(row.id));
+}
+
+function notifyCommentParticipants(
+  itemId,
+  commentId,
+  actor,
+  parentComment,
+  mentionUserIds = [],
+) {
   const recipients = new Set(
     statements.participantUsers
       .all(itemId, itemId, itemId)
       .map((row) => Number(row.user_id))
       .filter((userId) => userId && userId !== actor.id),
   );
+  const notified = new Set();
 
   const parentUserId = Number(parentComment?.user_id || 0);
   if (parentUserId && parentUserId !== actor.id) {
@@ -949,10 +968,25 @@ function notifyCommentParticipants(itemId, commentId, actor, parentComment) {
       itemId,
       commentId,
     );
+    notified.add(parentUserId);
     recipients.delete(parentUserId);
   }
 
+  for (const userId of new Set(mentionUserIds)) {
+    if (!userId || userId === actor.id || notified.has(userId)) continue;
+    statements.insertNotification.run(
+      userId,
+      actor.id,
+      "mention",
+      itemId,
+      commentId,
+    );
+    notified.add(userId);
+    recipients.delete(userId);
+  }
+
   for (const userId of recipients) {
+    if (notified.has(userId)) continue;
     statements.insertNotification.run(
       userId,
       actor.id,
@@ -1339,6 +1373,7 @@ async function handleApi(request, response, requestUrl) {
         Number(inserted.lastInsertRowid),
         user,
         parentComment,
+        mentionedUserIds(text, user.id),
       );
     });
     sendJson(response, 201, interactionFor(itemId, body.clientId, true, user));

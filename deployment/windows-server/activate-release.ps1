@@ -56,6 +56,7 @@ if (-not (Test-Path -LiteralPath $releasePath)) {
             (Join-Path $staging "dailynews_client.js"),
             (Join-Path $staging "dailynews_account.js"),
             (Join-Path $staging "dailynews_activity.js"),
+            (Join-Path $staging "dailynews_sources.js"),
             (Join-Path $staging "release_history.js"),
             (Join-Path $staging "images"),
             (Join-Path $staging "page_images")

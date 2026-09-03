@@ -13,9 +13,6 @@ const IRRELEVANT_TOOLTIP =
 let accessStatsCache = null;
 let localInteractionsCache = null;
 let interactionPollTimer = null;
-let hoverCommentTimer = null;
-let hoverCommentTarget = null;
-const hoverCommentCache = new Map();
 
 window.interactionsData = {};
 window.useLocalInteractions = false;
@@ -662,6 +659,7 @@ function renderItem(itemId) {
             <div class="comment-actions">
               ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
               ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
+              ${comment.id ? `<button class="comment-mention-btn" type="button" onclick="mentionCommentUser('${escapeHtml(itemId)}', ${index})">@メンション</button>` : ""}
               ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">&#21066;&#38500;</button>`}
             </div>
           </div>`,
@@ -691,115 +689,6 @@ async function fetchInteractionDetail(itemId) {
     renderItem(itemId);
   }
   return detail;
-}
-
-function getCommentHoverBubble() {
-  let bubble = document.getElementById("commentHoverBubble");
-  if (bubble) return bubble;
-  bubble = document.createElement("aside");
-  bubble.id = "commentHoverBubble";
-  bubble.className = "comment-hover-bubble";
-  bubble.setAttribute("role", "status");
-  bubble.setAttribute("aria-live", "polite");
-  document.body.appendChild(bubble);
-  return bubble;
-}
-
-function positionCommentHoverBubble(target, bubble) {
-  const rect = target.getBoundingClientRect();
-  const margin = 12;
-  const left = Math.min(
-    Math.max(margin, rect.left + 18),
-    window.innerWidth - bubble.offsetWidth - margin,
-  );
-  let top = rect.top - bubble.offsetHeight - margin;
-  if (top < margin) top = rect.bottom + margin;
-  top = Math.min(top, window.innerHeight - bubble.offsetHeight - margin);
-  bubble.style.left = `${left}px`;
-  bubble.style.top = `${Math.max(margin, top)}px`;
-}
-
-function hideCommentHoverBubble() {
-  const bubble = document.getElementById("commentHoverBubble");
-  bubble?.classList.remove("visible");
-  hoverCommentTarget = null;
-}
-
-function renderCommentHoverBubble(target, itemId, data) {
-  if (hoverCommentTarget !== target || !document.contains(target)) {
-    hideCommentHoverBubble();
-    return;
-  }
-  const comments = Array.isArray(data?.commentItems) ? data.commentItems : [];
-  const total = Number(data?.comments || comments.length || 0);
-  if (!total || !comments.length) {
-    hideCommentHoverBubble();
-    return;
-  }
-  const shown = comments.slice(-3).reverse();
-  const bubble = getCommentHoverBubble();
-  bubble.innerHTML = `
-    <div class="comment-hover-title">💬 コメント ${total}件</div>
-    ${shown
-      .map(
-        (comment) => `<div class="comment-hover-item">
-          <div class="comment-hover-user">${escapeHtml(comment.user || "Guest")}${comment.date ? ` · ${escapeHtml(comment.date)}` : ""}</div>
-          <div class="comment-hover-text">${escapeHtml(comment.text || "")}</div>
-        </div>`,
-      )
-      .join("")}
-    ${total > shown.length ? `<div class="comment-hover-more">ほか ${total - shown.length}件。💬ボタンからすべて表示できます。</div>` : ""}`;
-  bubble.classList.add("visible");
-  positionCommentHoverBubble(target, bubble);
-}
-
-async function showCommentHoverBubble(target, itemId) {
-  const summary = window.interactionsData[itemId] || {};
-  if (Number(summary.comments || 0) <= 0) return;
-  hoverCommentTarget = target;
-  if (hoverCommentCache.has(itemId)) {
-    renderCommentHoverBubble(target, itemId, hoverCommentCache.get(itemId));
-    return;
-  }
-  const bubble = getCommentHoverBubble();
-  bubble.innerHTML = '<div class="comment-hover-title">💬 コメントを読み込み中...</div>';
-  bubble.classList.add("visible");
-  positionCommentHoverBubble(target, bubble);
-  try {
-    const detail = await fetchInteractionDetail(itemId);
-    hoverCommentCache.set(itemId, detail);
-    renderCommentHoverBubble(target, itemId, detail);
-  } catch (error) {
-    console.warn(`Comment preview failed for ${itemId}:`, error.message);
-    hideCommentHoverBubble();
-  }
-}
-
-function setupCommentHoverPreview() {
-  if (document.documentElement.dataset.commentHoverBound) return;
-  document.documentElement.dataset.commentHoverBound = "true";
-  const selector = ".card[data-news-id], .ranking-item[data-news-id]";
-  document.addEventListener("mouseover", (event) => {
-    if (event.target.closest(".relevance-feedback-btn")) {
-      clearTimeout(hoverCommentTimer);
-      hideCommentHoverBubble();
-      return;
-    }
-    const target = event.target.closest(selector);
-    if (!target || target.contains(event.relatedTarget)) return;
-    clearTimeout(hoverCommentTimer);
-    hoverCommentTimer = setTimeout(() => {
-      showCommentHoverBubble(target, target.dataset.newsId);
-    }, 350);
-  });
-  document.addEventListener("mouseout", (event) => {
-    const target = event.target.closest(selector);
-    if (!target || target.contains(event.relatedTarget)) return;
-    clearTimeout(hoverCommentTimer);
-    if (hoverCommentTarget === target) hideCommentHoverBubble();
-  });
-  window.addEventListener("scroll", hideCommentHoverBubble, { passive: true });
-  window.addEventListener("resize", hideCommentHoverBubble);
 }
 
 window.subscribeItem = (
@@ -862,7 +751,6 @@ window.toggleIrrelevant = async (itemId, button) => {
       },
     );
     mergeInteractionData(itemId, data);
-    hoverCommentCache.delete(itemId);
     updateIrrelevantButton(button, data);
     updateRankings();
   } catch (error) {
@@ -923,7 +811,6 @@ window.toggleLike = async (itemId, button) => {
       },
     );
     mergeInteractionData(itemId, data);
-    hoverCommentCache.delete(itemId);
     button.classList.toggle("liked", data.liked);
     if (data.liked) localStorage.setItem(storageKey, "true");
     else localStorage.removeItem(storageKey);
@@ -981,7 +868,6 @@ async function saveComment(itemId, text, parentCommentId = null, input = null) {
       },
     );
     mergeInteractionData(itemId, data);
-    hoverCommentCache.delete(itemId);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
@@ -1012,6 +898,18 @@ window.replyToComment = async (itemId, commentId) => {
   await saveComment(itemId, text.trim(), commentId);
 };
 
+window.mentionCommentUser = (itemId, commentIndex) => {
+  const data = liveElements[itemId]?.lastData || getInteractionRenderData(itemId);
+  const displayName = data.comments?.[commentIndex]?.user;
+  const section = liveElements[itemId]?.commentList?.closest(".comment-section");
+  const input = section?.querySelector(".comment-input");
+  if (!displayName || !input) return;
+  const mention = `@${displayName} `;
+  if (!input.value.includes(mention)) input.value = `${mention}${input.value}`;
+  input.focus();
+  input.setSelectionRange(input.value.length, input.value.length);
+};
+
 window.toggleCommentLike = async (itemId, commentId, liked) => {
   try {
     const data = await apiRequest(
@@ -1022,7 +920,6 @@ window.toggleCommentLike = async (itemId, commentId, liked) => {
       },
     );
     mergeInteractionData(itemId, data);
-    hoverCommentCache.delete(itemId);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
@@ -1072,7 +969,6 @@ window.deleteComment = async (itemId, commentIndex) => {
       { method: "DELETE" },
     );
     mergeInteractionData(itemId, data);
-    hoverCommentCache.delete(itemId);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
@@ -1125,7 +1021,6 @@ function observeInteractionCards(root = document) {
   });
 }
 
-setupCommentHoverPreview();
 setTimeout(() => observeInteractionCards(), 1000);
 new MutationObserver((records) => {
   records.forEach((record) => {

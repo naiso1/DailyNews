@@ -94,9 +94,9 @@ function injectActivityStyles() {
     .activity-card img,.activity-image-fallback{width:68px;height:68px;border-radius:9px;background:linear-gradient(135deg,#223248,#101925)}.activity-card img{object-fit:cover}.activity-image-fallback{display:grid;place-items:center;color:#70839a;font-size:20px}.activity-meta{margin-bottom:2px;color:#8197b0;font-size:9px}.activity-meta strong{color:#7df1c2}.activity-card h3{margin:0;overflow:hidden;color:#eef3f8;font-size:11px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.activity-card p{margin:4px 0 0;overflow:hidden;color:#a7b5c6;font-size:9px;text-overflow:ellipsis;white-space:nowrap}.activity-empty{grid-column:1/-1;padding:12px;color:#8191a7;font-size:11px;text-align:center}
     .activity-drawer-bg{position:fixed;inset:0;z-index:10040;visibility:hidden;background:rgba(1,4,9,.54);opacity:0;transition:.25s}.activity-drawer-bg.open{visibility:visible;opacity:1}.activity-drawer{position:fixed;top:0;right:0;z-index:10041;width:min(410px,94vw);height:100vh;padding:19px;overflow:auto;border-left:1px solid rgba(111,167,255,.25);background:#0c1420;color:#e9edf5;box-shadow:-25px 0 70px rgba(0,0,0,.55);transform:translateX(105%);transition:.3s cubic-bezier(.22,.75,.25,1)}.activity-drawer.open{transform:translateX(0)}
     .activity-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.activity-drawer h2{margin:0;font-size:18px}.activity-read-all{border:0;background:none;color:#8fb9ff;font-size:10px;cursor:pointer}.activity-notice{position:relative;display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;width:100%;margin-bottom:8px;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.025);color:inherit;text-align:left;cursor:pointer}.activity-notice.unread{border-color:rgba(111,167,255,.2);background:rgba(111,167,255,.065)}.activity-notice.unread::after{position:absolute;top:14px;right:11px;width:6px;height:6px;border-radius:50%;background:#6fa7ff;content:""}.activity-notice-icon{display:grid;width:30px;height:30px;place-items:center;border-radius:9px;background:rgba(111,167,255,.1)}.activity-notice p{margin:0;padding-right:8px;color:#c5d0de;font-size:11px;line-height:1.55}.activity-notice time{display:block;margin-top:4px;color:#718299;font-size:9px}.activity-drawer-note{color:#687b92;font-size:10px;line-height:1.6}.activity-highlight{animation:activityHighlight 2.6s ease}@keyframes activityHighlight{0%,100%{box-shadow:none}20%,70%{box-shadow:0 0 0 4px rgba(125,241,194,.24),0 20px 50px rgba(0,0,0,.3)}}
-    .comment-item.reply-comment{margin-left:18px;border-left:2px solid rgba(111,167,255,.35);padding-left:10px}.comment-reply-label{margin-left:6px;padding:1px 5px;border-radius:999px;background:rgba(111,167,255,.12);color:#9fc3ff;font-size:9px}.comment-reply-btn{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 8px;background:transparent;color:#9fb0c5;font-size:11px;cursor:pointer}.comment-reply-btn:hover{border-color:rgba(111,167,255,.45);color:#b9d3ff}
-    @media(max-width:860px){.header-top-actions{grid-template-columns:minmax(0,1fr) auto auto!important;column-gap:7px}.activity-grid{grid-template-columns:1fr}.activity-head{align-items:flex-start;flex-direction:column}.activity-head p{display:none}.activity-card:nth-child(n+3){display:none}.activity-rail{margin-inline:10px}}
-    @media(max-width:520px){.header-top-actions{grid-template-columns:auto minmax(0,1fr)!important}.header-update-status{grid-column:1/-1}.activity-bell{grid-column:1}#accountHeaderSlot{grid-column:2;min-width:0}.account-button{max-width:100%;overflow:hidden;text-overflow:ellipsis}}
+    .comment-item.reply-comment{margin-left:18px;border-left:2px solid rgba(111,167,255,.35);padding-left:10px}.comment-reply-label{margin-left:6px;padding:1px 5px;border-radius:999px;background:rgba(111,167,255,.12);color:#9fc3ff;font-size:9px}.comment-reply-btn,.comment-mention-btn{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 8px;background:transparent;color:#9fb0c5;font-size:11px;cursor:pointer}.comment-reply-btn:hover,.comment-mention-btn:hover{border-color:rgba(111,167,255,.45);color:#b9d3ff}
+    @media(max-width:860px){.header-top-actions{grid-template-columns:minmax(0,1fr) auto auto auto!important;column-gap:7px}.activity-grid{grid-template-columns:1fr}.activity-head{align-items:flex-start;flex-direction:column}.activity-head p{display:none}.activity-card:nth-child(n+3){display:none}.activity-rail{margin-inline:10px}}
+    @media(max-width:520px){.header-top-actions{grid-template-columns:auto auto minmax(0,1fr)!important}.header-update-status{grid-column:1/-1}.activity-bell{grid-column:1}.source-list-button{grid-column:2}#accountHeaderSlot{grid-column:3;min-width:0}.account-button{max-width:100%;overflow:hidden;text-overflow:ellipsis}}
   `;
   document.head.appendChild(style);
 }
@@ -150,7 +150,7 @@ function injectActivityUi() {
   drawer.innerHTML = `
     <div class="activity-drawer-head"><h2>通知</h2><button class="activity-read-all" id="activityReadAll" type="button">すべて既読にする</button></div>
     <div id="activityNotices"></div>
-    <p class="activity-drawer-note">自分への返信、参加中の記事、コメントへの反応を優先して表示します。</p>`;
+    <p class="activity-drawer-note">自分への返信・メンション、参加中の記事、コメントへの反応を優先して表示します。</p>`;
   document.body.append(backdrop, drawer);
   backdrop.addEventListener("click", () => setActivityDrawer(false));
   drawer.querySelector("#activityReadAll")?.addEventListener("click", markAllActivityRead);
@@ -194,6 +194,7 @@ function renderRecentActivity() {
 function notificationMessage(notification) {
   const actor = `<strong>${activityEscape(notification.actorName)}</strong>`;
   if (notification.type === "comment_reply") return `${actor}さんがあなたのコメントに返信しました。`;
+  if (notification.type === "mention") return `${actor}さんがコメントであなたをメンションしました。`;
   if (notification.type === "comment_like") return `${actor}さんがあなたのコメントにいいねしました。`;
   return `参加中の記事に${actor}さんがコメントしました。`;
 }
@@ -210,7 +211,7 @@ function renderNotifications() {
     list.innerHTML = '<div class="activity-empty">通知はまだありません。</div>';
     return;
   }
-  const icons = { comment_reply: "↩", comment_like: "👍", article_comment: "💬" };
+  const icons = { comment_reply: "↩", mention: "@", comment_like: "👍", article_comment: "💬" };
   list.innerHTML = activityState.notifications.map((notification) => `
     <button class="activity-notice${notification.read ? "" : " unread"}" type="button" data-notification-id="${notification.id}" data-item-id="${activityEscape(notification.itemId)}">
       <span class="activity-notice-icon">${icons[notification.type] || "●"}</span>

@@ -20,6 +20,8 @@ import py_compile
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 NEWS_JS = ROOT / "news_data.js"
+SOURCE_LIST_JS = ROOT / "source_list_data.js"
+RSS_FEED_LIST = SCRIPT_DIR / "rss_feed_list.csv"
 WORKFLOW = ROOT / "image_flux2_klein_text_to_image (1).json"
 LOG_DIR = SCRIPT_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
@@ -102,6 +104,26 @@ configure_console_encoding()
 def log(msg):
     with LOG_FILE.open("a", encoding="utf-8") as f:
         f.write(msg + "\n")
+
+
+def generate_source_list_data():
+    """Publish the configured RSS list for the in-page source directory."""
+    rows = []
+    with RSS_FEED_LIST.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            country = str(row.get("国") or "").strip()
+            name = str(row.get("出展サイト") or "").strip()
+            rss_url = str(row.get("RSS URL") or "").strip()
+            if country and name and rss_url:
+                rows.append({"country": country, "name": name, "rssUrl": rss_url})
+    payload = json.dumps(rows, ensure_ascii=False, indent=2)
+    SOURCE_LIST_JS.write_text(
+        '"use strict";\n\n'
+        "// Generated from ニュース収集/rss_feed_list.csv. Do not edit manually.\n"
+        f"window.DAILYNEWS_CONFIGURED_SOURCES = {payload};\n",
+        encoding="utf-8",
+    )
+    log(f"[SOURCE_LIST] Published {len(rows)} configured RSS feeds.")
 
 
 def _power_automate_status_path():
@@ -918,6 +940,7 @@ def main():
                 )
             else:
                 log("[WARN] GEMINI_API_KEY not set; skip Gemini image generation.")
+            generate_source_list_data()
             run_git_sync(LOG_FILE)
             run_server_deploy(LOG_FILE)
             run_succeeded = True

@@ -1,6 +1,6 @@
 "use strict";
 
-// Generated from the configured RSS feed list for the source-list preview.
+// Generated from ニュース収集/rss_feed_list.csv. Do not edit manually.
 window.DAILYNEWS_CONFIGURED_SOURCES = [
   {
     "country": "日本",

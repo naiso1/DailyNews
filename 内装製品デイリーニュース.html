@@ -667,31 +667,6 @@ header.site-header {
     visibility: visible;
     transform: translateY(0);
 }
-.comment-hover-bubble {
-    position: fixed;
-    z-index: 2250;
-    width: min(340px, calc(100vw - 24px));
-    max-height: 280px;
-    overflow: hidden;
-    padding: 13px 14px;
-    border: 1px solid rgba(111, 167, 255, 0.35);
-    border-radius: 15px;
-    background: rgba(14, 24, 37, 0.98);
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.46);
-    color: #e6edf7;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(6px);
-    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
-    pointer-events: none;
-}
-.comment-hover-bubble.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-.comment-hover-title { margin-bottom: 8px; color: #a9caff; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; }
-.comment-hover-item + .comment-hover-item { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.08); }
-.comment-hover-user { color: #7df1c2; font-size: 10px; font-weight: 800; }
-.comment-hover-text { margin-top: 2px; color: #dce5f0; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
-.comment-hover-more { margin-top: 8px; color: #8496aa; font-size: 10px; }
-
 .action-btn.favorite-btn.active {
     color: #ffd540;
     background: rgba(255, 213, 64, 0.18);
@@ -1362,6 +1337,7 @@ header.site-header {
                 <div class="ranking-controls">
                     <label class="ranking-sort-label" for="rankingScope">期間</label>
                     <select id="rankingScope" class="ranking-sort">
+                        <option value="today">1日（本日）</option>
                         <option value="weekly">1週間以内</option>
                         <option value="all">今まで</option>
                     </select>
@@ -1391,6 +1367,7 @@ header.site-header {
                 <div class="ranking-controls">
                     <label class="ranking-sort-label" for="paperRankingScope">期間</label>
                     <select id="paperRankingScope" class="ranking-sort">
+                        <option value="today">1日（本日）</option>
                         <option value="6m">6か月以内</option>
                         <option value="weekly">1週間以内</option>
                         <option value="all">今まで</option>
@@ -1437,10 +1414,12 @@ header.site-header {
 
 
     <!-- DailyNews Server API -->
-    <script type="module" src="dailynews_client.js?v=20260902-1"></script>
-    <script type="module" src="dailynews_account.js?v=20260902-1"></script>
-    <script type="module" src="dailynews_activity.js?v=20260902-1"></script>
-    <script type="module" src="release_history.js?v=20260902-1"></script>
+    <script src="source_list_data.js?v=20260903-1"></script>
+    <script type="module" src="dailynews_client.js?v=20260903-1"></script>
+    <script type="module" src="dailynews_account.js?v=20260903-1"></script>
+    <script type="module" src="dailynews_activity.js?v=20260903-1"></script>
+    <script type="module" src="dailynews_sources.js?v=20260903-1"></script>
+    <script type="module" src="release_history.js?v=20260903-1"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
@@ -1693,7 +1672,7 @@ header.site-header {
 
         function getRankingScopeValue() {
             const select = document.getElementById("rankingScope");
-            return select ? select.value : "weekly";
+            return select ? select.value : "today";
         }
 
         function getRankingSortKey() {
@@ -1703,7 +1682,7 @@ header.site-header {
 
         function getPaperRankingScopeValue() {
             const select = document.getElementById("paperRankingScope");
-            return select ? select.value : "weekly";
+            return select ? select.value : "today";
         }
 
         function getPaperRankingSortKey() {
@@ -1742,6 +1721,7 @@ header.site-header {
         function getRankingEmptyMessage(scope, key) {
             const labelMap = { score: "総合", reads: "閲覧", likes: "いいね", comments: "コメント" };
             const label = labelMap[key] || "閲覧";
+            if (scope === "today") return `本日の${label}がまだありません。`;
             if (scope === "weekly") return `1週間以内の${label}がまだありません。`;
             if (scope === "6m") return `6か月以内の${label}がまだありません。`;
             return `${label}がまだありません。`;
@@ -1756,7 +1736,7 @@ header.site-header {
             const scope = getRankingScopeValue();
             const latest = getLatestDate(NEWS_DATA);
 
-            if (scope === "weekly" && !latest) {
+            if ((scope === "today" || scope === "weekly") && !latest) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
                 updateRankingHeight(body, list);
                 return;
@@ -1775,7 +1755,9 @@ header.site-header {
                 return { ...item, likes, comments, irrelevant, markedIrrelevant, reads, score };
             });
 
-            if (scope === "weekly" && latest) {
+            if (scope === "today" && latest) {
+                ranked = ranked.filter(item => item.date === latest);
+            } else if (scope === "weekly" && latest) {
                 const endDate = new Date(`${latest}T00:00:00`);
                 const startDate = new Date(endDate);
                 startDate.setDate(startDate.getDate() - 6);
@@ -1831,8 +1813,9 @@ header.site-header {
             const scope = getPaperRankingScopeValue();
             const papers = NEWS_DATA.filter(item => item.country === "paper");
             const latest = getLatestDate(papers);
+            const today = getLatestDate(NEWS_DATA);
 
-            if (scope === "weekly" && !latest) {
+            if ((scope === "today" && !today) || ((scope === "weekly" || scope === "6m") && !latest)) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
                 updateRankingHeight(body, list);
                 return;
@@ -1851,7 +1834,9 @@ header.site-header {
                 return { ...item, likes, comments, irrelevant, markedIrrelevant, reads, score };
             });
 
-            if ((scope === "weekly" || scope === "6m") && latest) {
+            if (scope === "today" && today) {
+                ranked = ranked.filter(item => item.date === today);
+            } else if ((scope === "weekly" || scope === "6m") && latest) {
                 const endDate = new Date(`${latest}T00:00:00`);
                 const startDate = new Date(endDate);
                 if (scope === "6m") {

@@ -358,6 +358,7 @@ function activityEntries(tab) {
       const item = index.get(String(notification.itemId));
       const actions = {
         comment_reply: `${notification.actorName}さんがあなたのコメントに返信しました。`,
+        mention: `${notification.actorName}さんがコメントであなたをメンションしました。`,
         comment_like: `${notification.actorName}さんがあなたのコメントにいいねしました。`,
         article_comment: `参加中の記事に${notification.actorName}さんがコメントしました。`,
       };

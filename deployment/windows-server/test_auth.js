@@ -159,6 +159,18 @@ async function main() {
   });
   assert.equal(secondRegistration.authenticated, true);
 
+  const mention = await request("/api/interactions/jp1/comments", {
+    method: "POST",
+    body: {
+      clientId: "secondclientidentifier1234",
+      text: "@Test User mention test",
+    },
+  });
+  assert.equal(
+    mention.commentItems.find((entry) => entry.text === "@Test User mention test")?.user,
+    "Second User",
+  );
+
   const reply = await request("/api/interactions/jp1/comments", {
     method: "POST",
     body: {
@@ -167,7 +179,10 @@ async function main() {
       parentCommentId: comment.commentItems[0].id,
     },
   });
-  assert.equal(reply.commentItems[1].parentId, comment.commentItems[0].id);
+  assert.equal(
+    reply.commentItems.find((entry) => entry.text === "test reply")?.parentId,
+    comment.commentItems[0].id,
+  );
 
   await request(
     `/api/interactions/jp1/comments/${comment.commentItems[0].id}/like`,
@@ -182,10 +197,10 @@ async function main() {
 
   cookie = firstUserCookie;
   const notifications = await request("/api/notifications");
-  assert.equal(notifications.unreadCount, 2);
+  assert.equal(notifications.unreadCount, 3);
   assert.deepEqual(
     new Set(notifications.notifications.map((entry) => entry.type)),
-    new Set(["comment_reply", "comment_like"]),
+    new Set(["mention", "comment_reply", "comment_like"]),
   );
 
   const recent = await request("/api/activity/recent?limit=3");
@@ -196,7 +211,7 @@ async function main() {
     method: "PUT",
     body: { ids: [notifications.notifications[0].id] },
   });
-  assert.equal(markedRead.unreadCount, 1);
+  assert.equal(markedRead.unreadCount, 2);
   const allRead = await request("/api/notifications/read", {
     method: "PUT",
     body: { all: true },
