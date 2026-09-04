@@ -126,6 +126,22 @@ db.exec(`
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
 
+  CREATE TABLE IF NOT EXISTS mail_subscriptions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    display_name TEXT,
+    user_id INTEGER UNIQUE,
+    enabled INTEGER NOT NULL DEFAULT 1,
+    source TEXT NOT NULL DEFAULT 'manual'
+      CHECK (source IN ('manual', 'registered_user')),
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+  );
+
+  CREATE INDEX IF NOT EXISTS mail_subscriptions_enabled_idx
+    ON mail_subscriptions(enabled, email);
+
   CREATE TABLE IF NOT EXISTS sessions (
     token_hash TEXT PRIMARY KEY,
     user_id INTEGER NOT NULL,
@@ -382,6 +398,18 @@ const statements = {
     INSERT INTO users(email, display_name, password_hash, password_salt)
     VALUES (?, ?, ?, ?)
   `),
+  subscribeRegisteredUser: db.prepare(`
+    INSERT INTO mail_subscriptions(email, display_name, user_id, source)
+    VALUES (?, ?, ?, 'registered_user')
+    ON CONFLICT(email) DO UPDATE SET
+      display_name = excluded.display_name,
+      user_id = excluded.user_id,
+      source = 'registered_user',
+      updated_at = CURRENT_TIMESTAMP
+  `),
+  usersForMailSeed: db.prepare(`
+    SELECT id, email, display_name FROM users ORDER BY id
+  `),
   updateUserName: db.prepare(`
     UPDATE users
     SET display_name = ?, updated_at = CURRENT_TIMESTAMP
@@ -560,9 +588,39 @@ const statements = {
     ORDER BY f.id DESC
     LIMIT 100
   `),
+  mailingList: db.prepare(`
+    SELECT id, email, display_name, user_id, enabled, source, created_at, updated_at
+    FROM mail_subscriptions
+    ORDER BY enabled DESC, source DESC, email
+  `),
+  activeMailingList: db.prepare(`
+    SELECT email, display_name, source
+    FROM mail_subscriptions
+    WHERE enabled = 1
+    ORDER BY email
+  `),
+  mailingSubscriptionByEmail: db.prepare(`
+    SELECT id FROM mail_subscriptions WHERE email = ?
+  `),
+  insertManualMailSubscription: db.prepare(`
+    INSERT INTO mail_subscriptions(email, display_name, source)
+    VALUES (?, ?, 'manual')
+  `),
+  setMailSubscriptionEnabled: db.prepare(`
+    UPDATE mail_subscriptions
+    SET enabled = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `),
+  deleteManualMailSubscription: db.prepare(`
+    DELETE FROM mail_subscriptions
+    WHERE id = ? AND source = 'manual' AND user_id IS NULL
+  `),
 };
 
 for (const email of ADMIN_EMAILS) statements.markAdmin.run(email);
+for (const user of statements.usersForMailSeed.all()) {
+  statements.subscribeRegisteredUser.run(user.email, user.display_name, user.id);
+}
 
 function log(message) {
   const line = `${new Date().toISOString()} ${message}\n`;
@@ -715,6 +773,23 @@ function validDisplayName(value) {
     value.trim().length <= 40 &&
     !/[\u0000-\u001f\u007f]/.test(value)
   );
+}
+
+function mailingListPayload() {
+  const recipients = statements.mailingList.all().map((row) => ({
+    id: Number(row.id),
+    email: row.email,
+    displayName: row.display_name || "",
+    userId: row.user_id == null ? null : Number(row.user_id),
+    enabled: Boolean(row.enabled),
+    source: row.source,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  }));
+  return {
+    activeCount: recipients.filter((recipient) => recipient.enabled).length,
+    recipients,
+  };
 }
 
 function validPassword(value) {
@@ -1130,6 +1205,7 @@ async function handleApi(request, response, requestUrl) {
       throw error;
     }
     if (ADMIN_EMAILS.has(email)) statements.markAdmin.run(email);
+    statements.subscribeRegisteredUser.run(email, displayName, userId);
     const user = publicUser(statements.userById.get(userId));
     claimClientActivity(user, body.clientId, favorites);
     createSession(userId, request, response);
@@ -1621,10 +1697,85 @@ async function handleApi(request, response, requestUrl) {
         irrelevant: users.reduce((sum, user) => sum + user.irrelevant, 0),
         comments: users.reduce((sum, user) => sum + user.comments, 0),
         feedback: users.reduce((sum, user) => sum + user.feedback, 0),
+        mailRecipients: mailingListPayload().activeCount,
       },
       users,
       feedback,
+      mailingList: mailingListPayload().recipients,
     });
+    return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/admin/mailing-list") {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    sendJson(response, 200, mailingListPayload());
+    return;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/admin/mailing-list") {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    const body = await readJson(request);
+    const email = normalizeEmail(body.email);
+    const displayName = String(body.displayName || "").trim();
+    if (!validEmail(email) || (displayName && !validDisplayName(displayName))) {
+      apiError(response, 400, "invalid_recipient", "Invalid recipient details.");
+      return;
+    }
+    if (statements.mailingSubscriptionByEmail.get(email)) {
+      apiError(response, 409, "recipient_exists", "This email address is already registered.");
+      return;
+    }
+    statements.insertManualMailSubscription.run(email, displayName || null);
+    sendJson(response, 201, mailingListPayload());
+    return;
+  }
+
+  if (
+    request.method === "PUT" &&
+    segments.length === 4 &&
+    segments[0] === "api" &&
+    segments[1] === "admin" &&
+    segments[2] === "mailing-list"
+  ) {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    const id = Number(segments[3]);
+    const body = await readJson(request);
+    if (!Number.isSafeInteger(id) || id < 1 || typeof body.enabled !== "boolean") {
+      apiError(response, 400, "invalid_recipient", "Invalid recipient update.");
+      return;
+    }
+    const result = statements.setMailSubscriptionEnabled.run(body.enabled ? 1 : 0, id);
+    if (!result.changes) {
+      apiError(response, 404, "recipient_not_found", "Recipient was not found.");
+      return;
+    }
+    sendJson(response, 200, mailingListPayload());
+    return;
+  }
+
+  if (
+    request.method === "DELETE" &&
+    segments.length === 4 &&
+    segments[0] === "api" &&
+    segments[1] === "admin" &&
+    segments[2] === "mailing-list"
+  ) {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    const id = Number(segments[3]);
+    if (!Number.isSafeInteger(id) || id < 1) {
+      apiError(response, 400, "invalid_recipient", "Invalid recipient ID.");
+      return;
+    }
+    const result = statements.deleteManualMailSubscription.run(id);
+    if (!result.changes) {
+      apiError(response, 400, "recipient_not_deletable", "Registered users can only be disabled.");
+      return;
+    }
+    sendJson(response, 200, mailingListPayload());
     return;
   }
 

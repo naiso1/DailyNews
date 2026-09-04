@@ -165,10 +165,17 @@ function accountStyles() {
     .admin-table th,.admin-table td { padding:10px; border-bottom:1px solid rgba(255,255,255,.07); text-align:left; vertical-align:top; }
     .admin-table th { color:#91a2b7; font-weight:700; }
     .admin-table td { color:#dce6f1; }
+    .admin-mail-form { display:grid; grid-template-columns:minmax(180px,.7fr) minmax(240px,1fr) auto; gap:10px; align-items:end; margin:10px 0 12px; padding:14px; border:1px solid rgba(125,241,194,.18); border-radius:14px; background:rgba(125,241,194,.035); }
+    .admin-mail-form .account-field { min-width:0; }
+    .admin-mail-note { margin:7px 0 12px; color:#91a2b7; font-size:11px; line-height:1.6; }
+    .admin-mail-actions { display:flex; align-items:center; gap:8px; }
+    .admin-mail-toggle { display:inline-flex; align-items:center; gap:6px; color:#cbd5e1; font-size:11px; white-space:nowrap; }
+    .admin-mail-delete { border:0; padding:3px 0; background:transparent; color:#ff9baa; font-size:11px; cursor:pointer; }
+    .admin-mail-source { display:inline-block; margin-top:4px; padding:2px 6px; border-radius:999px; background:rgba(111,167,255,.12); color:#a8c9ff; font-size:10px; }
     .comment-actions { display:flex; align-items:center; gap:8px; margin-top:8px; }
     .comment-like-btn { border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:3px 8px; background:transparent; color:#9fb0c5; font-size:11px; cursor:pointer; }
     .comment-like-btn.liked { border-color:rgba(125,241,194,.45); background:rgba(125,241,194,.12); color:#7df1c2; }
-    @media(max-width:720px) { .account-profile { grid-template-columns:1fr; } .account-dialog { max-height:94vh; } .account-card-grid { grid-template-columns:1fr; } .account-activity-card { grid-template-columns:96px minmax(0,1fr); } .account-card-image,.account-card-image-fallback { width:96px; } .admin-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } .account-welcome { grid-template-columns:1fr; gap:14px; } .account-welcome-actions { padding:14px; } }
+    @media(max-width:720px) { .account-profile { grid-template-columns:1fr; } .account-dialog { max-height:94vh; } .account-card-grid { grid-template-columns:1fr; } .account-activity-card { grid-template-columns:96px minmax(0,1fr); } .account-card-image,.account-card-image-fallback { width:96px; } .admin-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } .admin-mail-form { grid-template-columns:1fr; } .account-welcome { grid-template-columns:1fr; gap:14px; } .account-welcome-actions { padding:14px; } }
   `;
   document.head.appendChild(style);
 }
@@ -269,7 +276,7 @@ function renderAuth(mode = accountState.mode, message = "") {
   const isRegister = mode === "register";
   document.getElementById("accountTitle").textContent = isRegister ? "新規登録" : "ログイン";
   body.innerHTML = `
-    <p class="account-note">${isRegister ? "TG社員であれば、どなたでも登録できます。" : "登録済みの方は、登録した情報を入力してください。"} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
+    <p class="account-note">${isRegister ? "TG社員であれば、どなたでも登録できます。登録したメールアドレスには、更新成功時の朝8時にデイリーニュースをご案内します。" : "登録済みの方は、登録した情報を入力してください。"} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
     <div class="account-error${message ? " show" : ""}" id="accountError">${escapeAccountHtml(message)}</div>
     <form class="account-form" id="accountAuthForm">
       ${isRegister ? '<label class="account-field">表示名<input name="displayName" maxlength="40" autocomplete="name" required placeholder="コメントに表示する名前"></label>' : ""}
@@ -514,9 +521,10 @@ async function renderAdminPanel() {
     list.innerHTML = `<div class="account-error show">管理情報を取得できませんでした。${escapeAccountHtml(error.message)}</div>`;
     return;
   }
-  const { totals = {}, users = [], feedback = [] } = accountState.admin;
+  const { totals = {}, users = [], feedback = [], mailingList = [] } = accountState.admin;
   const kpis = [
     ["登録ユーザー", totals.users],
+    ["メール配信先", totals.mailRecipients],
     ["利用履歴あり", totals.activeUsers],
     ["お気に入り", totals.favorites],
     ["いいね", totals.likes],
@@ -526,12 +534,77 @@ async function renderAdminPanel() {
   ];
   list.innerHTML = `
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
+    <h3 class="account-section-title">朝8時のメール配信先 <span class="account-section-count">${mailingList.filter((item) => item.enabled).length}</span></h3>
+    <p class="admin-mail-note">新しくユーザー登録した方は自動で追加されます。従来の配信先など、ユーザー登録していない方はここから追加できます。停止した宛先には次回から送信しません。</p>
+    <form class="admin-mail-form" id="adminMailForm">
+      <label class="account-field">表示名（任意）<input name="displayName" maxlength="40" placeholder="氏名・部署など"></label>
+      <label class="account-field">メールアドレス<input name="email" type="email" maxlength="254" required placeholder="name@example.com"></label>
+      <button class="account-primary" type="submit">配信先に追加</button>
+    </form>
+    <div class="account-feedback-status" id="adminMailStatus"></div>
+    <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>配信先</th><th>登録方法</th><th>配信</th><th>操作</th></tr></thead><tbody>
+      ${mailingList.map((recipient) => `<tr><td><strong>${escapeAccountHtml(recipient.displayName || "名称未設定")}</strong><br><span class="account-email">${escapeAccountHtml(recipient.email)}</span></td><td><span class="admin-mail-source">${recipient.source === "registered_user" ? "ユーザー登録" : "手動追加"}</span></td><td><label class="admin-mail-toggle"><input type="checkbox" data-mail-toggle="${recipient.id}" ${recipient.enabled ? "checked" : ""}>${recipient.enabled ? "配信中" : "停止中"}</label></td><td>${recipient.source === "manual" && recipient.userId == null ? `<button class="admin-mail-delete" data-mail-delete="${recipient.id}" type="button">削除</button>` : "-"}</td></tr>`).join("")}
+    </tbody></table></div>
     <h3 class="account-section-title">ユーザー登録状況</h3>
     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日時（JST）</th><th>最終利用（JST）</th><th>活動</th></tr></thead><tbody>
       ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 👎 ${user.irrelevant} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
     </tbody></table></div>
     <h3 class="account-section-title">最近のご意見 <span class="account-section-count">${feedback.length}</span></h3>
     <div class="account-list">${feedback.length ? feedback.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.displayName)} / ${escapeAccountHtml(item.email)} / ${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("") : '<div class="account-empty">ご意見はまだありません。</div>'}</div>`;
+  list.querySelector("#adminMailForm").addEventListener("submit", addMailRecipient);
+  list.querySelectorAll("[data-mail-toggle]").forEach((input) => {
+    input.addEventListener("change", () => setMailRecipientEnabled(input));
+  });
+  list.querySelectorAll("[data-mail-delete]").forEach((button) => {
+    button.addEventListener("click", () => deleteMailRecipient(button));
+  });
+}
+
+async function addMailRecipient(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const values = new FormData(form);
+  const button = form.querySelector("button[type=submit]");
+  button.disabled = true;
+  try {
+    await accountApi("/admin/mailing-list", {
+      method: "POST",
+      body: { email: values.get("email"), displayName: values.get("displayName") },
+    });
+    accountState.admin = null;
+    await renderAdminPanel();
+  } catch (error) {
+    const status = document.getElementById("adminMailStatus");
+    if (status) status.textContent = error.code === "recipient_exists" ? "このメールアドレスは登録済みです。" : "配信先を追加できませんでした。";
+    button.disabled = false;
+  }
+}
+
+async function setMailRecipientEnabled(input) {
+  input.disabled = true;
+  try {
+    await accountApi(`/admin/mailing-list/${input.dataset.mailToggle}`, {
+      method: "PUT",
+      body: { enabled: input.checked },
+    });
+    accountState.admin = null;
+    await renderAdminPanel();
+  } catch (_) {
+    input.checked = !input.checked;
+    input.disabled = false;
+  }
+}
+
+async function deleteMailRecipient(button) {
+  if (!confirm("このメールアドレスを配信先から削除しますか？")) return;
+  button.disabled = true;
+  try {
+    await accountApi(`/admin/mailing-list/${button.dataset.mailDelete}`, { method: "DELETE" });
+    accountState.admin = null;
+    await renderAdminPanel();
+  } catch (_) {
+    button.disabled = false;
+  }
 }
 
 function renderFeedbackForm() {

@@ -7,6 +7,7 @@ DailyNewsは処理開始時に`running`、全工程の完了後にだけ`success
 
 - ローカル: `ニュース収集/logs/latest_run_status.json`
 - 業務用OneDrive: `DailyNewsAutomation/latest_run_status.json`
+- 業務用OneDrive: `DailyNewsAutomation/mailing_list.json`（有効な配信先一覧）
 - Power Automate判定用RSS: `https://naiso1.github.io/DailyNews/automation_status.xml`
 
 OneDriveへ出力するには、このPCのOneDriveへ業務アカウントでサインインしている必要があります。
@@ -24,11 +25,19 @@ GitHub通信障害で更新できなかった場合は前日のRSSが残り、�
 
 1. タイムゾーンを`Tokyo Standard Time`にして毎日8:00に実行する。
 2. RSSの「すべてのRSSフィード項目を一覧表示する」で判定用RSSを読む。
-3. RSS本文に`DailyNews success <東京時間の本日>`が含まれる場合だけ、関係者向けメールを送信する。
+3. RSS本文に`DailyNews success <東京時間の本日>`が含まれる場合だけ、OneDriveの`mailing_list.json`から有効な宛先を取得して関係者向けメールを送信する。
 4. 成功表記がない、`failed`である、日付が古い、RSSを取得できない場合は管理者だけへ異常メールを送信する。
 
-成功メールの宛先には別途作成するメーリングリストを設定します。失敗メールの宛先は
-`yuki.nakamura@toyoda-gosei.co.jp`だけにします。
+成功メールの宛先はDailyNewsの管理画面で管理します。新規ユーザー登録時は自動で
+配信対象になり、従来の宛先は管理者が手動配信先として維持できます。失敗メールの
+宛先は`yuki.nakamura@toyoda-gosei.co.jp`だけにします。メールアドレスは公開RSSや
+GitHubへ保存せず、IEWEB01のSQLiteと業務用OneDrive内だけで扱います。
+
+Power Automateへ動的配信先を設定する初回のみ、次を実行します。
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\ニュース収集\configure_power_automate_mailing_list.ps1"
+```
 
 既存の無条件送信アクションは削除するか、成功側の分岐内へ移動してください。
 

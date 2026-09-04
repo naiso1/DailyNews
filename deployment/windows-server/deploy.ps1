@@ -98,6 +98,7 @@ if ($LASTEXITCODE -ne 0) {
 $appFiles = @(
     "server.js",
     "backup.js",
+    "manage-mailing-list.js",
     "import_legacy.js",
     "activate-release.ps1",
     "install.ps1",

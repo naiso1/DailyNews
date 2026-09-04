@@ -4,7 +4,7 @@ This deployment serves an explicit release package instead of exposing the
 repository root. Collection scripts, logs, API keys, and Git metadata are never
 reachable from the web server. A same-origin SQLite API stores accounts,
 persistent sessions, favorites, likes, article reads, comments, comment likes,
-and user feedback. Passwords are stored as scrypt hashes; plaintext passwords
+user feedback, and mail subscriptions. Passwords are stored as scrypt hashes; plaintext passwords
 are never stored.
 
 ## Server layout
@@ -66,3 +66,8 @@ so users can see what changed from the header's update-history button.
 The administrator account list is configured with the
 `DAILYNEWS_ADMIN_EMAILS` environment variable (comma-separated). If it is not
 set, `yuki.nakamura@toyoda-gosei.co.jp` is treated as the administrator.
+The administrator panel manages the 08:00 mail recipients. Registered users are
+subscribed automatically; manual recipients can be added, disabled, or removed.
+The recipient list remains in SQLite and is exported to the signed-in business
+OneDrive by `ニュース収集/run_search_and_update.py`; it is never published with
+the public release.

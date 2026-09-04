@@ -228,6 +228,31 @@ async function main() {
   assert.equal(adminUser.irrelevant, 1);
   assert.equal(admin.totals.irrelevant, 1);
   assert.equal(admin.feedback.length, 1);
+  assert.equal(admin.totals.mailRecipients, 2);
+  assert.equal(admin.mailingList.length, 2);
+  assert.ok(admin.mailingList.every((recipient) => recipient.source === "registered_user"));
+
+  const withManualRecipient = await request("/api/admin/mailing-list", {
+    method: "POST",
+    body: { email: "manual@example.com", displayName: "Manual Recipient" },
+  });
+  assert.equal(withManualRecipient.activeCount, 3);
+  const manualRecipient = withManualRecipient.recipients.find(
+    (recipient) => recipient.email === "manual@example.com",
+  );
+  assert.equal(manualRecipient.source, "manual");
+
+  const disabledRecipient = await request(
+    `/api/admin/mailing-list/${manualRecipient.id}`,
+    { method: "PUT", body: { enabled: false } },
+  );
+  assert.equal(disabledRecipient.activeCount, 2);
+
+  const deletedRecipient = await request(
+    `/api/admin/mailing-list/${manualRecipient.id}`,
+    { method: "DELETE" },
+  );
+  assert.equal(deletedRecipient.recipients.length, 2);
   process.stdout.write("DailyNews auth integration test passed.\n");
 }
 

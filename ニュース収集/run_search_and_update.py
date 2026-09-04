@@ -146,6 +146,14 @@ def _power_automate_status_path():
     return None
 
 
+def _power_automate_mailing_list_path():
+    configured = os.environ.get("DAILYNEWS_POWER_AUTOMATE_MAILING_LIST", "").strip()
+    if configured:
+        return Path(configured).expanduser()
+    status_path = _power_automate_status_path()
+    return status_path.with_name("mailing_list.json") if status_path else None
+
+
 def _write_json_atomic(path: Path, payload):
     path.parent.mkdir(parents=True, exist_ok=True)
     temp_path = path.with_suffix(path.suffix + ".tmp")
@@ -185,6 +193,57 @@ def write_run_status(status, **details):
             f"{status} -> {', '.join(str(path) for path in destinations)}"
         )
     return payload
+
+
+def sync_power_automate_mailing_list():
+    """Copy the private server-side recipient list into the business OneDrive."""
+    destination = _power_automate_mailing_list_path()
+    if destination is None:
+        raise RuntimeError("Business OneDrive is not configured for the mailing list export.")
+    identity = Path(
+        os.environ.get(
+            "DAILYNEWS_SERVER_IDENTITY",
+            str(Path.home() / ".ssh" / "dailynews_ieweb01"),
+        )
+    ).expanduser()
+    server = os.environ.get("DAILYNEWS_SERVER_SSH", "Administrator@IEWEB01").strip()
+    remote_script = (
+        r'C:\Users\Administrator\Desktop\DailyNews\app\manage-mailing-list.js'
+    )
+    command = [
+        "ssh",
+        "-i",
+        str(identity),
+        "-o",
+        "IdentitiesOnly=yes",
+        "-o",
+        "BatchMode=yes",
+        server,
+        f'node "{remote_script}" export-json',
+    ]
+    result = subprocess.run(
+        command,
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=60,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            "Mailing list export failed: " + (result.stderr.strip() or f"exit {result.returncode}")
+        )
+    try:
+        payload = json.loads(result.stdout.strip())
+    except json.JSONDecodeError as exc:
+        raise RuntimeError("Mailing list export returned invalid JSON.") from exc
+    count = int(payload.get("recipientCount") or 0)
+    if count < 1 or not str(payload.get("to") or "").strip():
+        raise RuntimeError("Mailing list export contained no active recipients.")
+    _write_json_atomic(destination, payload)
+    log(f"[INFO] Power Automate mailing list updated: {count} recipients -> {destination}")
+    return count
 
 
 def write_automation_status_feed(payload):
@@ -885,6 +944,7 @@ def main():
     updated = False
     sheet_rows = 0
     failure_message = ""
+    mail_recipient_count = 0
 
     if start > end:
         log("[INFO] No new dates to process.")
@@ -955,6 +1015,14 @@ def main():
             log(f"[ERROR] Unexpected error: {type(e).__name__}: {e}")
             failure_message = f"Unexpected error: {type(e).__name__}: {e}"
 
+    if run_succeeded:
+        try:
+            mail_recipient_count = sync_power_automate_mailing_list()
+        except Exception as e:
+            run_succeeded = False
+            failure_message = f"Mailing list sync failed: {type(e).__name__}: {e}"
+            log(f"[ERROR] {failure_message}")
+
     published_news_date = latest_news_date() or ""
     if run_succeeded and (
         not published_news_date
@@ -990,6 +1058,7 @@ def main():
             published_news_date=published_news_date,
             sheet_rows=sheet_rows,
             release=release,
+            mail_recipient_count=mail_recipient_count,
             site_url="http://IEWEB01/",
             message="DailyNews update and server publication completed.",
         )
