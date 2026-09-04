@@ -1395,14 +1395,16 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         <option value="comments">コメント</option>
                         <option value="reads">閲覧数</option>
                     </select>
-                    <button class="chip ranking-toggle" id="rankingToggle" type="button"
-                        aria-expanded="false">開く</button>
                 </div>
             </div>
             <div class="ranking-body collapsed" id="rankingBody">
                 <div class="ranking-list" id="rankingList">
                     <div class="ranking-empty">ランキングを計算中...</div>
                 </div>
+            </div>
+            <div class="ranking-footer">
+                <button class="chip ranking-toggle" id="rankingToggle" type="button"
+                    aria-expanded="false">開く</button>
             </div>
         </section>
     </div>
@@ -1464,9 +1466,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     <script src="source_list_data.js?v=20260903-2"></script>
     <script type="module" src="dailynews_client.js?v=20260904-3"></script>
     <script type="module" src="dailynews_account.js?v=20260904-3"></script>
-    <script type="module" src="dailynews_activity.js?v=20260904-5"></script>
+    <script type="module" src="dailynews_activity.js?v=20260904-6"></script>
     <script type="module" src="dailynews_sources.js?v=20260903-2"></script>
-    <script type="module" src="release_history.js?v=20260904-4"></script>
+    <script type="module" src="release_history.js?v=20260904-5"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
