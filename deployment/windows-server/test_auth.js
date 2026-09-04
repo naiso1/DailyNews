@@ -159,6 +159,18 @@ async function main() {
   });
   assert.equal(secondRegistration.authenticated, true);
 
+  const nonAdminImageUpdate = await fetch(`${base}/api/admin/items/jp1/image`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Cookie: cookie,
+      Origin: base,
+    },
+    body: JSON.stringify({ imageUrl: "https://example.com/not-allowed.jpg" }),
+  });
+  assert.equal(nonAdminImageUpdate.status, 403);
+
   const mentionCandidates = await request("/api/users/mentions");
   assert.deepEqual(mentionCandidates.users, [{ displayName: "Test User" }]);
 
@@ -280,6 +292,19 @@ async function main() {
   assert.equal(restored.restored, true);
   const interactionsAfterRestore = await request("/api/interactions");
   assert.equal(interactionsAfterRestore.interactions.jp1.hidden, false);
+
+  const imageOverride = await request("/api/admin/items/jp1/image", {
+    method: "PUT",
+    body: { imageUrl: "https://example.com/replacement.jpg" },
+  });
+  assert.equal(imageOverride.imageUrlOverride, "https://example.com/replacement.jpg");
+  const interactionsWithImage = await request("/api/interactions");
+  assert.equal(
+    interactionsWithImage.interactions.jp1.imageUrlOverride,
+    "https://example.com/replacement.jpg",
+  );
+  const resetImage = await request("/api/admin/items/jp1/image", { method: "DELETE" });
+  assert.equal(resetImage.imageUrlOverride, "");
   process.stdout.write("DailyNews auth integration test passed.\n");
 }
 

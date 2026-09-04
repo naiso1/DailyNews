@@ -340,7 +340,7 @@ function accountItemIndex(options = {}) {
       title: item.title,
       date: item.date,
       type: "news",
-      image: item.img || "",
+      image: window.getNewsImageUrl?.(item) || item.img || "",
       description: item.desc || item.summary || "",
       country: countryNames[item.country] || item.country || "",
     });
@@ -744,6 +744,10 @@ async function logoutAccount() {
 
 function updateAccountButton() {
   const button = document.getElementById("accountOpenButton");
+  document.documentElement.classList.toggle(
+    "dailynews-admin",
+    Boolean(accountState.user?.isAdmin),
+  );
   if (!button) return;
   button.disabled = !accountState.authResolved;
   button.textContent = !accountState.authResolved

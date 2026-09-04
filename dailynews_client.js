@@ -483,6 +483,10 @@ function mergeInteractionData(itemId, data) {
       typeof data.hiddenBy === "string" ? data.hiddenBy : previous.hiddenBy || "",
     hiddenAt:
       typeof data.hiddenAt === "string" ? data.hiddenAt : previous.hiddenAt || "",
+    imageUrlOverride:
+      typeof data.imageUrlOverride === "string"
+        ? data.imageUrlOverride
+        : previous.imageUrlOverride || "",
   };
 }
 
@@ -502,6 +506,7 @@ function getInteractionRenderData(itemId) {
     markedIrrelevant: Boolean(data.markedIrrelevant),
     hidden: Boolean(data.hidden),
     hiddenReason: data.hiddenReason || "",
+    imageUrlOverride: data.imageUrlOverride || "",
   };
 }
 
@@ -568,7 +573,7 @@ async function loadInteractions() {
     const previousReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
-          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}`,
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${value.imageUrlOverride || ""}`,
       )
       .join("|");
     const payload = await apiRequest("/interactions");
@@ -581,7 +586,7 @@ async function loadInteractions() {
     const currentReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
-          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}`,
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${value.imageUrlOverride || ""}`,
       )
       .join("|");
     if (currentReactions !== previousReactions) {
@@ -798,6 +803,7 @@ function renderItem(itemId) {
     markedIrrelevant: data.markedIrrelevant,
     hidden: data.hidden,
     hiddenReason: data.hiddenReason,
+    imageUrlOverride: data.imageUrlOverride,
   });
   updateRankings();
 }
@@ -920,6 +926,136 @@ window.requestArticleRemoval = (itemId) => {
   overlay.classList.add("open");
   document.body.style.overflow = "hidden";
   window.setTimeout(() => overlay.querySelector("#articleRemovalReason")?.focus(), 0);
+};
+
+function ensureImageEditorDialog() {
+  let overlay = document.getElementById("imageUrlEditorOverlay");
+  if (overlay) return overlay;
+  const style = document.createElement("style");
+  style.textContent = `
+    .image-editor-overlay{position:fixed;inset:0;z-index:10060;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,12,.8);backdrop-filter:blur(8px)}.image-editor-overlay.open{display:flex}
+    .image-editor-dialog{width:min(680px,100%);overflow:hidden;border:1px solid rgba(111,167,255,.34);border-radius:20px;background:linear-gradient(145deg,#17212e,#0b121d);color:#eef4fb;box-shadow:0 30px 90px rgba(0,0,0,.58)}
+    .image-editor-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 19px;border-bottom:1px solid rgba(255,255,255,.09)}.image-editor-head h2{margin:0;font-size:18px}.image-editor-close{border:0;background:transparent;color:#c5cfdb;font-size:25px;cursor:pointer}
+    .image-editor-body{padding:18px}.image-editor-title{margin:0 0 12px;color:#f0f5fb;font-size:13px;font-weight:800;line-height:1.55}.image-editor-preview{display:grid;height:240px;margin-bottom:14px;place-items:center;overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:13px;background:#08111d}.image-editor-preview img{width:100%;height:100%;object-fit:contain}.image-editor-preview span{display:none;color:#8191a7;font-size:12px}.image-editor-preview.failed img{display:none}.image-editor-preview.failed span{display:block}
+    .image-editor-label{display:grid;gap:6px;color:#cbd5e1;font-size:12px;font-weight:800}.image-editor-url{width:100%;border:1px solid rgba(255,255,255,.15);border-radius:11px;padding:11px 12px;background:#09111c;color:#f8fafc;font:inherit}.image-editor-note{margin:7px 0 0;color:#8495aa;font-size:10px;line-height:1.55}.image-editor-error{min-height:20px;margin-top:6px;color:#ff9baa;font-size:11px}
+    .image-editor-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:12px}.image-editor-actions button{min-height:40px;border-radius:11px;padding:0 15px;font-weight:800;cursor:pointer}.image-editor-cancel,.image-editor-reset{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#e5edf7}.image-editor-save{border:0;background:linear-gradient(135deg,#7df1c2,#6fa7ff);color:#07111d}.image-editor-actions button:disabled{opacity:.6;cursor:wait}
+  `;
+  document.head.appendChild(style);
+  overlay = document.createElement("div");
+  overlay.id = "imageUrlEditorOverlay";
+  overlay.className = "image-editor-overlay";
+  overlay.innerHTML = `
+    <section class="image-editor-dialog" role="dialog" aria-modal="true" aria-labelledby="imageEditorTitle">
+      <div class="image-editor-head"><h2 id="imageEditorTitle">画像URLを変更</h2><button class="image-editor-close" type="button" aria-label="閉じる">&times;</button></div>
+      <form class="image-editor-body" id="imageEditorForm">
+        <p class="image-editor-title" id="imageEditorItemTitle"></p>
+        <div class="image-editor-preview" id="imageEditorPreview"><img alt="画像プレビュー" referrerpolicy="no-referrer"><span>画像をプレビューできません。</span></div>
+        <label class="image-editor-label">新しい画像URL<input class="image-editor-url" id="imageEditorUrl" type="url" maxlength="2048" required placeholder="https://example.com/image.jpg"></label>
+        <p class="image-editor-note">HTTPまたはHTTPSの画像URLを指定してください。保存すると全ユーザーの画面へ反映されます。</p>
+        <div class="image-editor-error" id="imageEditorError"></div>
+        <div class="image-editor-actions"><button class="image-editor-reset" type="button">元画像に戻す</button><button class="image-editor-cancel" type="button">キャンセル</button><button class="image-editor-save" type="submit">保存する</button></div>
+      </form>
+    </section>`;
+  document.body.appendChild(overlay);
+  const close = () => {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+  const updatePreview = () => {
+    const preview = overlay.querySelector("#imageEditorPreview");
+    const image = preview.querySelector("img");
+    preview.classList.remove("failed");
+    image.src = overlay.querySelector("#imageEditorUrl").value.trim();
+  };
+  overlay.querySelector(".image-editor-close").addEventListener("click", close);
+  overlay.querySelector(".image-editor-cancel").addEventListener("click", close);
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) close();
+  });
+  overlay.querySelector("#imageEditorUrl").addEventListener("change", updatePreview);
+  overlay.querySelector("#imageEditorPreview img").addEventListener("error", () => {
+    overlay.querySelector("#imageEditorPreview").classList.add("failed");
+  });
+  overlay.querySelector("#imageEditorForm").addEventListener("submit", saveImageUrlOverride);
+  overlay.querySelector(".image-editor-reset").addEventListener("click", resetImageUrlOverride);
+  overlay._closeImageEditor = close;
+  overlay._updateImagePreview = updatePreview;
+  return overlay;
+}
+
+function imageEditorItem(itemId) {
+  return (window.LOADED_NEWS_DATA || window.NEWS_DATA || []).find(
+    (entry) => String(entry.id) === String(itemId),
+  );
+}
+
+function finishImageUrlChange(overlay, itemId, data) {
+  mergeInteractionData(itemId, data);
+  overlay._closeImageEditor?.();
+  window.refreshNewsVisibility?.();
+  window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
+}
+
+async function saveImageUrlOverride(event) {
+  event.preventDefault();
+  const overlay = event.currentTarget.closest(".image-editor-overlay");
+  const itemId = overlay.dataset.itemId;
+  const imageUrl = overlay.querySelector("#imageEditorUrl").value.trim();
+  const errorElement = overlay.querySelector("#imageEditorError");
+  const saveButton = overlay.querySelector(".image-editor-save");
+  errorElement.textContent = "";
+  saveButton.disabled = true;
+  try {
+    const data = await apiRequest(`/admin/items/${encodeURIComponent(itemId)}/image`, {
+      method: "PUT",
+      body: { imageUrl },
+    });
+    finishImageUrlChange(overlay, itemId, data);
+  } catch (error) {
+    errorElement.textContent = error.status === 403
+      ? "管理者のみ変更できます。"
+      : "画像URLを保存できませんでした。URLと通信状態を確認してください。";
+  } finally {
+    saveButton.disabled = false;
+  }
+}
+
+async function resetImageUrlOverride(event) {
+  const overlay = event.currentTarget.closest(".image-editor-overlay");
+  const itemId = overlay.dataset.itemId;
+  if (!overlay.dataset.hasOverride || !confirm("登録した画像URLを削除して元画像へ戻しますか？")) return;
+  event.currentTarget.disabled = true;
+  try {
+    const data = await apiRequest(`/admin/items/${encodeURIComponent(itemId)}/image`, {
+      method: "DELETE",
+    });
+    finishImageUrlChange(overlay, itemId, data);
+  } catch (_) {
+    overlay.querySelector("#imageEditorError").textContent = "元画像へ戻せませんでした。";
+  } finally {
+    event.currentTarget.disabled = false;
+  }
+}
+
+window.requestImageUrlChange = (itemId) => {
+  if (!window.dailyNewsAccount?.user?.isAdmin) {
+    alert("画像URLを変更できるのは管理者のみです。");
+    return;
+  }
+  const item = imageEditorItem(itemId);
+  if (!item) return;
+  const overlay = ensureImageEditorDialog();
+  const override = window.interactionsData?.[itemId]?.imageUrlOverride || "";
+  overlay.dataset.itemId = itemId;
+  overlay.dataset.hasOverride = override ? "1" : "";
+  overlay.querySelector("#imageEditorItemTitle").textContent = item.title || itemId;
+  overlay.querySelector("#imageEditorUrl").value = override || item.img || "";
+  overlay.querySelector("#imageEditorError").textContent = "";
+  overlay.querySelector(".image-editor-reset").hidden = !override;
+  overlay._updateImagePreview?.();
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  window.setTimeout(() => overlay.querySelector("#imageEditorUrl")?.focus(), 0);
 };
 
 window.toggleLike = async (itemId, button) => {

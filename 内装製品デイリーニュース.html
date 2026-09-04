@@ -655,6 +655,9 @@ header.site-header {
 .action-btn.active-comment { color: #4facfe; background: rgba(79, 172, 254, 0.1); }
 .action-btn.remove-news-btn { color: #aeb9c8; }
 .action-btn.remove-news-btn:hover { color: #ff9baa; border-color: rgba(255, 107, 126, 0.4); background: rgba(255, 92, 112, 0.1); }
+.action-btn.admin-image-edit-btn { display: none; color: #9fc3ff; }
+html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
+.action-btn.admin-image-edit-btn:hover { color: #c7dcff; border-color: rgba(111, 167, 255, 0.42); background: rgba(111, 167, 255, 0.11); }
 .action-btn.favorite-btn.active {
     color: #ffd540;
     background: rgba(255, 213, 64, 0.18);
@@ -1459,11 +1462,11 @@ header.site-header {
 
     <!-- DailyNews Server API -->
     <script src="source_list_data.js?v=20260903-2"></script>
-    <script type="module" src="dailynews_client.js?v=20260904-2"></script>
-    <script type="module" src="dailynews_account.js?v=20260904-2"></script>
-    <script type="module" src="dailynews_activity.js?v=20260904-4"></script>
+    <script type="module" src="dailynews_client.js?v=20260904-3"></script>
+    <script type="module" src="dailynews_account.js?v=20260904-3"></script>
+    <script type="module" src="dailynews_activity.js?v=20260904-5"></script>
     <script type="module" src="dailynews_sources.js?v=20260903-2"></script>
-    <script type="module" src="release_history.js?v=20260904-3"></script>
+    <script type="module" src="release_history.js?v=20260904-4"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
@@ -1833,7 +1836,7 @@ header.site-header {
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${getDisplayImageUrl(item.img) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
+                            <img src="${getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
                                 onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
                         </div>
                         <div class="ranking-title-text">${item.title}</div>
@@ -1914,7 +1917,7 @@ header.site-header {
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${getDisplayImageUrl(item.img) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'paper image'}"
+                            <img src="${getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'paper image'}"
                                 onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
                         </div>
                         <div class="ranking-title-text">${item.title}</div>
@@ -2085,6 +2088,12 @@ header.site-header {
             }
             return src;
         }
+
+        function getNewsImageUrl(item) {
+            if (!item) return "";
+            return window.interactionsData?.[item.id]?.imageUrlOverride || item.img || "";
+        }
+        window.getNewsImageUrl = getNewsImageUrl;
         const TITLE_ICONS = {
             world: "page_images/icon_world.png",
             jp: "page_images/icon_jp.png",
@@ -2276,13 +2285,13 @@ header.site-header {
                 });
                 const id = ids.find(x => {
                     const n = newsById.get(x);
-                    return n && n.img && !usedImageIds.has(x);
+                    return n && getNewsImageUrl(n) && !usedImageIds.has(x);
                 });
                 if (!id) return "";
                 usedImageIds.add(id);
                 const n = newsById.get(id);
                 const title = escapeHtml(n.title || id);
-                const img = escapeHtml(getDisplayImageUrl(n.img));
+                const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
                 return `
                     <button class="analysis-float-source" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
                         <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-float-source').style.display='none'">
@@ -2308,7 +2317,7 @@ header.site-header {
             normalized.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
                 String(rawIds).split(",").map(s => s.trim()).filter(Boolean).forEach(id => {
                     const n = newsById.get(id);
-                    if (!seen.has(id) && n && n.img) {
+                    if (!seen.has(id) && n && getNewsImageUrl(n)) {
                         seen.add(id);
                         ids.push(id);
                     }
@@ -2326,7 +2335,7 @@ header.site-header {
             const cards = ids.map(id => {
                 const n = newsById.get(id);
                 const title = escapeHtml(n.title || id);
-                const img = escapeHtml(getDisplayImageUrl(n.img));
+                const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
                 return `
                     <button class="analysis-source-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
                         <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-source-card').style.display='none'">
@@ -2377,7 +2386,7 @@ header.site-header {
                         id: n.id,
                         title: n.title,
                         desc: n.desc,
-                        img: n.img,
+                        img: getNewsImageUrl(n),
                         date: n.date,
                         country: n.country,
                         url: n.url,
@@ -3035,7 +3044,8 @@ header.site-header {
                 const isNew = isNewContent(n);
                 const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
                 const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
-                const displayImg = getDisplayImageUrl(n.img || "");
+                const resolvedImage = getNewsImageUrl(n);
+                const displayImg = getDisplayImageUrl(resolvedImage);
                 card.innerHTML = `
             <div class="thumb">
                 <img src="${displayImg}" alt="${n.title}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback">
@@ -3071,6 +3081,9 @@ header.site-header {
                     </button>
                     <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${n.id}', this)">
                         <span>🗑️</span>
+                    </button>
+                    <button class="action-btn admin-image-edit-btn" title="画像URLを変更" aria-label="画像URLを変更" onclick="requestImageUrlChange('${n.id}', this)">
+                        <span>🖼️</span>
                     </button>
 
                     <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>

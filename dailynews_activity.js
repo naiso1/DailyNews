@@ -50,7 +50,7 @@ function activityItemIndex() {
       targetId: String(item.id),
       type: "news",
       title: item.title || String(item.id),
-      image: String(item.img || "").replace(/&amp;/g, "&"),
+      image: String(window.getNewsImageUrl?.(item) || item.img || "").replace(/&amp;/g, "&"),
     });
   }
   for (const day of window.DAILY_INSIGHTS || []) {

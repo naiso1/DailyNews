@@ -182,6 +182,16 @@ db.exec(`
     FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
   );
 
+  CREATE TABLE IF NOT EXISTS item_image_overrides (
+    item_id TEXT PRIMARY KEY,
+    image_url TEXT NOT NULL,
+    updated_by INTEGER,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (item_id) REFERENCES interactions(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+  );
+
   CREATE TABLE IF NOT EXISTS user_favorites (
     item_id TEXT NOT NULL,
     user_id INTEGER NOT NULL,
@@ -355,6 +365,25 @@ const statements = {
   `),
   restoreHiddenItem: db.prepare(`
     DELETE FROM hidden_items WHERE item_id = ?
+  `),
+  itemImageOverride: db.prepare(`
+    SELECT item_id, image_url, updated_by, created_at, updated_at
+    FROM item_image_overrides WHERE item_id = ?
+  `),
+  allItemImageOverrides: db.prepare(`
+    SELECT item_id, image_url, updated_by, created_at, updated_at
+    FROM item_image_overrides ORDER BY updated_at DESC
+  `),
+  upsertItemImageOverride: db.prepare(`
+    INSERT INTO item_image_overrides(item_id, image_url, updated_by)
+    VALUES (?, ?, ?)
+    ON CONFLICT(item_id) DO UPDATE SET
+      image_url = excluded.image_url,
+      updated_by = excluded.updated_by,
+      updated_at = CURRENT_TIMESTAMP
+  `),
+  deleteItemImageOverride: db.prepare(`
+    DELETE FROM item_image_overrides WHERE item_id = ?
   `),
   changeLikes: db.prepare(`
     UPDATE interactions
@@ -809,6 +838,20 @@ function validItemId(value) {
   return typeof value === "string" && /^[A-Za-z0-9_-]{1,100}$/.test(value);
 }
 
+function validImageUrl(value) {
+  if (typeof value !== "string" || value.length < 8 || value.length > 2048) return false;
+  try {
+    const url = new URL(value);
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      !url.username &&
+      !url.password
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
 function validClientId(value) {
   return typeof value === "string" && /^[A-Za-z0-9_-]{16,100}$/.test(value);
 }
@@ -1135,6 +1178,7 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
   statements.ensureInteraction.run(itemId);
   const row = statements.interaction.get(itemId);
   const hidden = statements.hiddenItem.get(itemId);
+  const imageOverride = statements.itemImageOverride.get(itemId);
   const value = {
     likes: Number(row?.likes || 0),
     comments: Number(row?.comments || 0),
@@ -1153,6 +1197,7 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
     hiddenReason: hidden?.reason || "",
     hiddenBy: hidden?.created_by_name || "",
     hiddenAt: hidden?.updated_at || "",
+    imageUrlOverride: imageOverride?.image_url || "",
   };
   if (includeComments) {
     value.commentItems = commentsFor(itemId, clientId, user);
@@ -1174,6 +1219,7 @@ function allInteractions(user = null) {
       hiddenReason: "",
       hiddenBy: "",
       hiddenAt: "",
+      imageUrlOverride: "",
     };
   }
   for (const row of statements.allLikeUsers.all()) {
@@ -1188,6 +1234,9 @@ function allInteractions(user = null) {
     result[row.item_id].hiddenReason = row.reason;
     result[row.item_id].hiddenBy = row.created_by_name;
     result[row.item_id].hiddenAt = row.updated_at;
+  }
+  for (const row of statements.allItemImageOverrides.all()) {
+    if (result[row.item_id]) result[row.item_id].imageUrlOverride = row.image_url;
   }
   if (user) {
     for (const row of statements.userIrrelevant.all(user.id)) {
@@ -1756,6 +1805,38 @@ async function handleApi(request, response, requestUrl) {
       for (const id of ids) statements.markNotificationRead.run(id, user.id);
     }
     sendJson(response, 200, notificationPayload(user.id, 30));
+    return;
+  }
+
+  if (
+    (request.method === "PUT" || request.method === "DELETE") &&
+    segments.length === 5 &&
+    segments[0] === "api" &&
+    segments[1] === "admin" &&
+    segments[2] === "items" &&
+    segments[4] === "image"
+  ) {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    const itemId = decodeURIComponent(segments[3]);
+    if (!validItemId(itemId)) {
+      apiError(response, 400, "invalid_item_id", "Invalid item ID.");
+      return;
+    }
+    statements.ensureInteraction.run(itemId);
+    if (request.method === "DELETE") {
+      statements.deleteItemImageOverride.run(itemId);
+      sendJson(response, 200, interactionFor(itemId, "", true, admin));
+      return;
+    }
+    const body = await readJson(request);
+    const imageUrl = String(body.imageUrl || "").trim();
+    if (!validImageUrl(imageUrl)) {
+      apiError(response, 400, "invalid_image_url", "A valid HTTP or HTTPS image URL is required.");
+      return;
+    }
+    statements.upsertItemImageOverride.run(itemId, imageUrl, admin.id);
+    sendJson(response, 200, interactionFor(itemId, "", true, admin));
     return;
   }
 
