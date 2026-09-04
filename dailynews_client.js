@@ -7,9 +7,6 @@ const LOCAL_INTERACTIONS_KEY = "local_interactions";
 const LOCAL_READS_KEY = "local_article_reads";
 const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date_v3";
 const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
-const IRRELEVANT_TOOLTIP =
-  "この記事が内装開発と関係ない場合に押してください。今後の関連度判定の精度向上に活用します。";
-
 let accessStatsCache = null;
 let localInteractionsCache = null;
 let interactionPollTimer = null;
@@ -267,13 +264,18 @@ function renderAccessStats(data) {
   const total = document.getElementById("totalVisits");
   const todayElement = document.getElementById("todayVisits");
   const yesterdayElement = document.getElementById("yesterdayVisits");
-  if (total) total.textContent = (data.total || 0).toLocaleString();
-  if (todayElement) {
-    todayElement.textContent = ((data.daily && data.daily[today]) || 0).toLocaleString();
-  }
-  if (yesterdayElement) {
-    yesterdayElement.textContent = ((data.daily && data.daily[yesterday]) || 0).toLocaleString();
-  }
+  const modalTotal = document.getElementById("accessModalTotal");
+  const modalToday = document.getElementById("accessModalToday");
+  const modalYesterday = document.getElementById("accessModalYesterday");
+  const totalValue = (data.total || 0).toLocaleString();
+  const todayValue = ((data.daily && data.daily[today]) || 0).toLocaleString();
+  const yesterdayValue = ((data.daily && data.daily[yesterday]) || 0).toLocaleString();
+  if (total) total.textContent = totalValue;
+  if (todayElement) todayElement.textContent = todayValue;
+  if (yesterdayElement) yesterdayElement.textContent = yesterdayValue;
+  if (modalTotal) modalTotal.textContent = totalValue;
+  if (modalToday) modalToday.textContent = todayValue;
+  if (modalYesterday) modalYesterday.textContent = yesterdayValue;
   accessStatsCache = data;
   window.accessStatsCache = data;
   renderAccessChart(data);
@@ -472,6 +474,15 @@ function mergeInteractionData(itemId, data) {
       typeof data.markedIrrelevant === "boolean"
         ? data.markedIrrelevant
         : Boolean(previous.markedIrrelevant),
+    hidden: typeof data.hidden === "boolean" ? data.hidden : Boolean(previous.hidden),
+    hiddenReason:
+      typeof data.hiddenReason === "string"
+        ? data.hiddenReason
+        : previous.hiddenReason || "",
+    hiddenBy:
+      typeof data.hiddenBy === "string" ? data.hiddenBy : previous.hiddenBy || "",
+    hiddenAt:
+      typeof data.hiddenAt === "string" ? data.hiddenAt : previous.hiddenAt || "",
   };
 }
 
@@ -489,6 +500,8 @@ function getInteractionRenderData(itemId) {
     likedBy: data.likedBy || [],
     irrelevant: data.irrelevant || 0,
     markedIrrelevant: Boolean(data.markedIrrelevant),
+    hidden: Boolean(data.hidden),
+    hiddenReason: data.hiddenReason || "",
   };
 }
 
@@ -506,16 +519,6 @@ function updateLikeTooltip(button, data) {
   const label = likeTooltipText(data);
   button.title = label;
   button.setAttribute("aria-label", label);
-}
-
-function updateIrrelevantButton(button, data = {}) {
-  if (!button) return;
-  const count = button.querySelector(".count");
-  if (count) count.textContent = Number(data.irrelevant || 0);
-  button.classList.toggle("marked-irrelevant", Boolean(data.markedIrrelevant));
-  button.dataset.tooltip = IRRELEVANT_TOOLTIP;
-  button.title = IRRELEVANT_TOOLTIP;
-  button.setAttribute("aria-label", IRRELEVANT_TOOLTIP);
 }
 
 function refreshInteractionCounts() {
@@ -536,13 +539,11 @@ function refreshInteractionCounts() {
       if (!data) return;
       const likeCount = likeButton?.querySelector(".count");
       const commentCount = card.querySelector(".btn-comment .count");
-      const irrelevantButton = card.querySelector(".relevance-feedback-btn");
       const readCount = card.querySelector(".read-count");
       if (likeCount) likeCount.textContent = data.likes || 0;
       if (commentCount) commentCount.textContent = data.comments || 0;
       if (readCount) readCount.textContent = `閲覧 ${data.reads || 0}`;
       updateLikeTooltip(likeButton, data);
-      updateIrrelevantButton(irrelevantButton, data);
     });
 }
 window.refreshInteractionCounts = refreshInteractionCounts;
@@ -567,7 +568,7 @@ async function loadInteractions() {
     const previousReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
-          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}`,
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}`,
       )
       .join("|");
     const payload = await apiRequest("/interactions");
@@ -580,10 +581,13 @@ async function loadInteractions() {
     const currentReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
-          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}`,
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}`,
       )
       .join("|");
-    if (currentReactions !== previousReactions) window.refreshNewsReactionSort?.();
+    if (currentReactions !== previousReactions) {
+      window.refreshNewsReactionSort?.();
+      window.refreshNewsVisibility?.();
+    }
     return true;
   } catch (error) {
     console.warn("DailyNews API sync failed:", error.message);
@@ -659,16 +663,26 @@ window.resetTodayAccessCount = resetTodayAccessCount;
 function setupAccessAnalyticsToggle() {
   const toggle = document.getElementById("analysisToggle");
   const panel = document.getElementById("accessAnalytics");
+  const close = document.getElementById("accessAnalyticsClose");
   if (!toggle || !panel || toggle.__dailyNewsBound) return;
   toggle.__dailyNewsBound = true;
-  toggle.addEventListener("click", () => {
-    const willShow = panel.classList.contains("hidden");
-    panel.classList.toggle("hidden", !willShow);
-    toggle.textContent = willShow ? "閉じる" : "アクセス推移";
-    toggle.setAttribute("aria-expanded", willShow ? "true" : "false");
-    if (willShow) {
+  const setOpen = (open) => {
+    panel.classList.toggle("hidden", !open);
+    panel.setAttribute("aria-hidden", open ? "false" : "true");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
       renderAccessChart(accessStatsCache || loadLocalAccessStats());
+      close?.focus();
     }
+  };
+  toggle.addEventListener("click", () => setOpen(true));
+  close?.addEventListener("click", () => setOpen(false));
+  panel.addEventListener("click", (event) => {
+    if (event.target === panel) setOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !panel.classList.contains("hidden")) setOpen(false);
   });
 }
 window.setupAccessAnalyticsToggle = setupAccessAnalyticsToggle;
@@ -754,7 +768,6 @@ function renderItem(itemId) {
     const count = elements.btnComment.querySelector(".count");
     if (count) count.textContent = data.commentCount || 0;
   }
-  updateIrrelevantButton(elements.btnIrrelevant, data);
   if (elements.commentList) {
     elements.commentList.innerHTML = (data.comments || [])
       .map(
@@ -783,6 +796,8 @@ function renderItem(itemId) {
     likedBy: data.likedBy,
     irrelevant: data.irrelevant,
     markedIrrelevant: data.markedIrrelevant,
+    hidden: data.hidden,
+    hiddenReason: data.hiddenReason,
   });
   updateRankings();
 }
@@ -799,18 +814,11 @@ async function fetchInteractionDetail(itemId) {
   return detail;
 }
 
-window.subscribeItem = (
-  itemId,
-  btnLike,
-  btnComment,
-  commentList,
-  btnIrrelevant,
-) => {
+window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
   if (!liveElements[itemId]) liveElements[itemId] = {};
   if (btnLike) liveElements[itemId].btnLike = btnLike;
   if (btnComment) liveElements[itemId].btnComment = btnComment;
   if (commentList) liveElements[itemId].commentList = commentList;
-  if (btnIrrelevant) liveElements[itemId].btnIrrelevant = btnIrrelevant;
   liveElements[itemId].lastData = getInteractionRenderData(itemId);
   renderItem(itemId);
 
@@ -821,64 +829,97 @@ window.subscribeItem = (
   }
 };
 
-window.toggleIrrelevant = async (itemId, button) => {
-  if (window.useLocalInteractions) {
-    alert(
-      "サーバーに接続できないため、関連なしの評価を保存できません。時間をおいて再度お試しください。",
-    );
+function ensureRemovalDialog() {
+  let overlay = document.getElementById("articleRemovalOverlay");
+  if (overlay) return overlay;
+  const style = document.createElement("style");
+  style.textContent = `
+    .article-removal-overlay{position:fixed;inset:0;z-index:10060;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,12,.8);backdrop-filter:blur(8px)}
+    .article-removal-overlay.open{display:flex}.article-removal-dialog{width:min(560px,100%);overflow:hidden;border:1px solid rgba(255,107,126,.3);border-radius:20px;background:linear-gradient(145deg,#17212e,#0b121d);color:#eef4fb;box-shadow:0 30px 90px rgba(0,0,0,.58)}
+    .article-removal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 19px;border-bottom:1px solid rgba(255,255,255,.09)}.article-removal-head h2{margin:0;font-size:18px}.article-removal-close{border:0;background:transparent;color:#c5cfdb;font-size:25px;cursor:pointer}
+    .article-removal-body{padding:18px}.article-removal-title{margin:0 0 12px;color:#f0f5fb;font-size:13px;font-weight:800;line-height:1.55}.article-removal-note{margin:0 0 13px;color:#aab8ca;font-size:12px;line-height:1.65}.article-removal-reason{width:100%;min-height:110px;resize:vertical;border:1px solid rgba(255,255,255,.15);border-radius:11px;padding:11px 12px;background:#09111c;color:#f8fafc;font:inherit}.article-removal-error{min-height:20px;margin-top:6px;color:#ff9baa;font-size:11px}
+    .article-removal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:12px}.article-removal-actions button{min-height:40px;border-radius:11px;padding:0 15px;font-weight:800;cursor:pointer}.article-removal-cancel{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#e5edf7}.article-removal-submit{border:0;background:linear-gradient(135deg,#ff8b9b,#ff6479);color:#26070d}.article-removal-submit:disabled{opacity:.6;cursor:wait}
+  `;
+  document.head.appendChild(style);
+  overlay = document.createElement("div");
+  overlay.id = "articleRemovalOverlay";
+  overlay.className = "article-removal-overlay";
+  overlay.innerHTML = `
+    <section class="article-removal-dialog" role="dialog" aria-modal="true" aria-labelledby="articleRemovalTitle">
+      <div class="article-removal-head"><h2 id="articleRemovalTitle">記事を一覧から削除</h2><button class="article-removal-close" type="button" aria-label="閉じる">&times;</button></div>
+      <form class="article-removal-body" id="articleRemovalForm">
+        <p class="article-removal-title" id="articleRemovalItemTitle"></p>
+        <p class="article-removal-note">削除すると全ユーザーのニュース一覧・New件数・ランキングから非表示になります。管理者は後から復元できます。</p>
+        <textarea class="article-removal-reason" id="articleRemovalReason" minlength="2" maxlength="500" required placeholder="削除する理由を入力してください（例：自動車内装と関係がない、URLが誤っている）"></textarea>
+        <div class="article-removal-error" id="articleRemovalError"></div>
+        <div class="article-removal-actions"><button class="article-removal-cancel" type="button">キャンセル</button><button class="article-removal-submit" type="submit">削除する</button></div>
+      </form>
+    </section>`;
+  document.body.appendChild(overlay);
+  const close = () => {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+  overlay.querySelector(".article-removal-close").addEventListener("click", close);
+  overlay.querySelector(".article-removal-cancel").addEventListener("click", close);
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) close();
+  });
+  overlay.querySelector("#articleRemovalForm").addEventListener("submit", submitArticleRemoval);
+  overlay._closeRemovalDialog = close;
+  return overlay;
+}
+
+async function submitArticleRemoval(event) {
+  event.preventDefault();
+  const overlay = event.currentTarget.closest(".article-removal-overlay");
+  const reason = overlay.querySelector("#articleRemovalReason").value.trim();
+  const errorElement = overlay.querySelector("#articleRemovalError");
+  const submit = overlay.querySelector(".article-removal-submit");
+  if (reason.length < 2) {
+    errorElement.textContent = "削除理由を2文字以上で入力してください。";
     return;
   }
-
-  const previous = window.interactionsData[itemId] || {};
-  const wasMarked = Boolean(
-    previous.markedIrrelevant || button.classList.contains("marked-irrelevant"),
-  );
-  const desiredMarked = !wasMarked;
-  const previousCount = Number(previous.irrelevant || 0);
-  const optimisticCount = Math.max(
-    0,
-    previousCount + (desiredMarked ? 1 : -1),
-  );
-  mergeInteractionData(itemId, {
-    ...previous,
-    irrelevant: optimisticCount,
-    markedIrrelevant: desiredMarked,
-  });
-  updateIrrelevantButton(button, window.interactionsData[itemId]);
-  updateRankings();
-
+  submit.disabled = true;
+  errorElement.textContent = "";
   try {
-    const data = await apiRequest(
-      `/interactions/${encodeURIComponent(itemId)}/irrelevant`,
-      {
-        method: "PUT",
-        body: {
-          clientId: getClientId(),
-          markedIrrelevant: desiredMarked,
-        },
-      },
-    );
-    mergeInteractionData(itemId, data);
-    updateIrrelevantButton(button, data);
-    updateRankings();
-  } catch (error) {
-    console.error("Irrelevant feedback save failed:", error);
-    mergeInteractionData(itemId, {
-      ...previous,
-      irrelevant: previousCount,
-      markedIrrelevant: wasMarked,
+    const itemId = overlay.dataset.itemId;
+    const data = await apiRequest(`/interactions/${encodeURIComponent(itemId)}/hidden`, {
+      method: "PUT",
+      body: { clientId: getClientId(), reason },
     });
-    updateIrrelevantButton(button, window.interactionsData[itemId]);
-    updateRankings();
+    mergeInteractionData(itemId, data);
+    overlay._closeRemovalDialog?.();
+    window.refreshNewsVisibility?.();
+    window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
+  } catch (error) {
     if (error.status === 401) {
-      window.dailyNewsAccount?.openAuth(
-        "login",
-        "関連なしの評価を保存するにはログインしてください。",
-      );
+      overlay._closeRemovalDialog?.();
+      window.dailyNewsAccount?.openAuth("login", "記事を削除するにはログインしてください。");
       return;
     }
-    alert("関連なしの評価を保存できませんでした。通信状態を確認してください。");
+    errorElement.textContent = "削除できませんでした。通信状態を確認してください。";
+  } finally {
+    submit.disabled = false;
   }
+}
+
+window.requestArticleRemoval = (itemId) => {
+  if (window.useLocalInteractions) {
+    alert("サーバーに接続できないため記事を削除できません。時間をおいて再度お試しください。");
+    return;
+  }
+  const overlay = ensureRemovalDialog();
+  const item = (window.LOADED_NEWS_DATA || window.NEWS_DATA || []).find(
+    (entry) => String(entry.id) === String(itemId),
+  );
+  overlay.dataset.itemId = itemId;
+  overlay.querySelector("#articleRemovalItemTitle").textContent = item?.title || itemId;
+  overlay.querySelector("#articleRemovalReason").value = "";
+  overlay.querySelector("#articleRemovalError").textContent = "";
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  window.setTimeout(() => overlay.querySelector("#articleRemovalReason")?.focus(), 0);
 };
 
 window.toggleLike = async (itemId, button) => {
@@ -1099,7 +1140,6 @@ const interactionObserver = new IntersectionObserver(
           likeButton,
           card.querySelector(".btn-comment"),
           null,
-          card.querySelector(".relevance-feedback-btn"),
         );
         likeButton.classList.toggle(
           "liked",

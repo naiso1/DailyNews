@@ -173,6 +173,11 @@ function accountStyles() {
     .admin-mail-actions { display:flex; align-items:center; gap:8px; }
     .admin-mail-toggle { display:inline-flex; align-items:center; gap:6px; color:#cbd5e1; font-size:11px; white-space:nowrap; }
     .admin-mail-delete { border:0; padding:3px 0; background:transparent; color:#ff9baa; font-size:11px; cursor:pointer; }
+    .admin-hidden-list { display:grid; gap:9px; margin-top:10px; }
+    .admin-hidden-item { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; padding:12px 14px; border:1px solid rgba(255,107,126,.18); border-radius:13px; background:rgba(255,92,112,.035); }
+    .admin-hidden-title { color:#edf3fa; font-size:12px; font-weight:800; line-height:1.5; }
+    .admin-hidden-meta { margin-top:4px; color:#8fa1b6; font-size:10px; line-height:1.55; overflow-wrap:anywhere; }
+    .admin-hidden-restore { border:1px solid rgba(125,241,194,.35); border-radius:10px; min-height:36px; padding:0 12px; background:rgba(125,241,194,.08); color:#bff6df; font-size:11px; font-weight:800; cursor:pointer; }
     .admin-mail-source { display:inline-block; margin-top:4px; padding:2px 6px; border-radius:999px; background:rgba(111,167,255,.12); color:#a8c9ff; font-size:10px; }
     .comment-actions { display:flex; align-items:center; gap:8px; margin-top:8px; }
     .comment-like-btn { border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:3px 8px; background:transparent; color:#9fb0c5; font-size:11px; cursor:pointer; }
@@ -323,10 +328,12 @@ async function submitAuth(event) {
   }
 }
 
-function accountItemIndex() {
+function accountItemIndex(options = {}) {
   const index = new Map();
+  const includeHidden = Boolean(options.includeHidden);
   const countryNames = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
   for (const item of window.LOADED_NEWS_DATA || window.NEWS_DATA || []) {
+    if (!includeHidden && window.interactionsData?.[String(item.id)]?.hidden) continue;
     index.set(String(item.id), {
       id: String(item.id),
       targetId: String(item.id),
@@ -364,7 +371,9 @@ function activityEntries(tab) {
   const activity = accountState.activity || {};
   const index = accountItemIndex();
   if (tab === "updates") {
-    return (activity.notifications || []).map((notification) => {
+    return (activity.notifications || []).filter(
+      (notification) => !window.interactionsData?.[String(notification.itemId)]?.hidden,
+    ).map((notification) => {
       const item = index.get(String(notification.itemId));
       const actions = {
         comment_reply: `${notification.actorName}さんがあなたのコメントに返信しました。`,
@@ -384,7 +393,9 @@ function activityEntries(tab) {
     });
   }
   if (tab === "comments") {
-    return (activity.comments || []).map((comment) => {
+    return (activity.comments || []).filter(
+      (comment) => !window.interactionsData?.[String(comment.itemId)]?.hidden,
+    ).map((comment) => {
       const item = index.get(String(comment.itemId));
       return {
         ...(item || { id: String(comment.itemId), targetId: String(comment.itemId), type: "news" }),
@@ -396,7 +407,9 @@ function activityEntries(tab) {
     });
   }
   if (tab === "participation") {
-    return (activity.participated || []).map((participation) => {
+    return (activity.participated || []).filter(
+      (participation) => !window.interactionsData?.[String(participation.itemId)]?.hidden,
+    ).map((participation) => {
       const itemId = String(participation.itemId);
       const item = index.get(itemId);
       return {
@@ -408,7 +421,7 @@ function activityEntries(tab) {
     });
   }
   const ids = tab === "likes" ? activity.likes || [] : activity.favorites || [];
-  return ids.map((id) => {
+  return ids.filter((id) => !window.interactionsData?.[String(id)]?.hidden).map((id) => {
     const item = index.get(String(id));
     return {
       ...(item || { id: String(id), targetId: String(id), type: "news" }),
@@ -524,7 +537,8 @@ async function renderAdminPanel() {
     list.innerHTML = `<div class="account-error show">管理情報を取得できませんでした。${escapeAccountHtml(error.message)}</div>`;
     return;
   }
-  const { totals = {}, users = [], feedback = [], mailingList = [] } = accountState.admin;
+  const { totals = {}, users = [], feedback = [], mailingList = [], hiddenItems = [] } = accountState.admin;
+  const completeItemIndex = accountItemIndex({ includeHidden: true });
   const kpis = [
     ["登録ユーザー", totals.users],
     ["メール配信先", totals.mailRecipients],
@@ -532,6 +546,7 @@ async function renderAdminPanel() {
     ["お気に入り", totals.favorites],
     ["いいね", totals.likes],
     ["関連なし", totals.irrelevant],
+    ["削除記事", totals.hiddenItems],
     ["コメント", totals.comments],
     ["ご意見", totals.feedback],
   ];
@@ -552,6 +567,12 @@ async function renderAdminPanel() {
     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日時（JST）</th><th>最終利用（JST）</th><th>活動</th></tr></thead><tbody>
       ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 👎 ${user.irrelevant} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
     </tbody></table></div>
+    <h3 class="account-section-title">削除された記事 <span class="account-section-count">${hiddenItems.length}</span></h3>
+    <p class="admin-mail-note">ゴミ箱から削除された記事です。復元すると全ユーザーの一覧・New件数・ランキングへ再表示されます。</p>
+    <div class="admin-hidden-list">${hiddenItems.length ? hiddenItems.map((hidden) => {
+      const item = completeItemIndex.get(String(hidden.itemId));
+      return `<div class="admin-hidden-item"><div><div class="admin-hidden-title">${escapeAccountHtml(item?.title || hidden.itemId)}</div><div class="admin-hidden-meta">${escapeAccountHtml(hidden.itemId)} / 理由: ${escapeAccountHtml(hidden.reason)}<br>${escapeAccountHtml(hidden.createdByName || hidden.createdByEmail || "ユーザー不明")} / ${escapeAccountHtml(formatAccountDateTime(hidden.updatedAt))} JST</div></div><button class="admin-hidden-restore" data-hidden-restore="${escapeAccountHtml(hidden.itemId)}" type="button">復元</button></div>`;
+    }).join("") : '<div class="account-empty">削除された記事はありません。</div>'}</div>
     <h3 class="account-section-title">最近のご意見 <span class="account-section-count">${feedback.length}</span></h3>
     <div class="account-list">${feedback.length ? feedback.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.displayName)} / ${escapeAccountHtml(item.email)} / ${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("") : '<div class="account-empty">ご意見はまだありません。</div>'}</div>`;
   list.querySelector("#adminMailForm").addEventListener("submit", addMailRecipient);
@@ -561,6 +582,28 @@ async function renderAdminPanel() {
   list.querySelectorAll("[data-mail-delete]").forEach((button) => {
     button.addEventListener("click", () => deleteMailRecipient(button));
   });
+  list.querySelectorAll("[data-hidden-restore]").forEach((button) => {
+    button.addEventListener("click", () => restoreHiddenItem(button));
+  });
+}
+
+async function restoreHiddenItem(button) {
+  if (!confirm("この記事を全ユーザーの一覧へ復元しますか？")) return;
+  button.disabled = true;
+  try {
+    const itemId = button.dataset.hiddenRestore;
+    await accountApi(`/admin/hidden-items/${encodeURIComponent(itemId)}`, { method: "DELETE" });
+    if (window.interactionsData?.[itemId]) {
+      window.interactionsData[itemId].hidden = false;
+      window.interactionsData[itemId].hiddenReason = "";
+    }
+    accountState.admin = null;
+    window.refreshNewsVisibility?.();
+    await renderAdminPanel();
+  } catch (_) {
+    alert("記事を復元できませんでした。");
+    button.disabled = false;
+  }
 }
 
 async function addMailRecipient(event) {

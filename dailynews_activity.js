@@ -44,6 +44,7 @@ async function activityApi(path, options = {}) {
 function activityItemIndex() {
   const index = new Map();
   for (const item of window.LOADED_NEWS_DATA || window.NEWS_DATA || []) {
+    if (window.interactionsData?.[String(item.id)]?.hidden) continue;
     index.set(String(item.id), {
       id: String(item.id),
       targetId: String(item.id),
@@ -89,6 +90,7 @@ function injectActivityStyles() {
   style.textContent = `
     .activity-bell{position:relative;display:grid;width:38px;height:38px;place-items:center;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.035);color:#e5edf6;font-size:16px;cursor:pointer;flex:0 0 auto}.activity-bell:hover{border-color:rgba(125,241,194,.38);background:rgba(125,241,194,.09)}
     .activity-count{position:absolute;top:-5px;right:-4px;display:grid;min-width:19px;height:19px;padding:0 4px;place-items:center;border:2px solid #101925;border-radius:10px;background:#ff6473;color:#fff;font-size:9px;font-weight:800}.activity-count[hidden]{display:none}
+    .engagement-row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:start;gap:16px;max-width:1400px;margin:0 auto 20px}.engagement-row>.activity-rail,.engagement-row>.ranking-wrapper{min-width:0;margin:0}.engagement-row .activity-grid{grid-template-columns:1fr}.engagement-row .ranking-item{grid-template-columns:minmax(0,1fr)}.engagement-row .ranking-meta{padding-left:40px}.engagement-row .ranking-actions{justify-self:start;padding-left:40px}
     .activity-rail{max-width:1400px;margin:0 auto 20px;padding:17px 18px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(16,22,35,.9);box-shadow:0 15px 40px rgba(0,0,0,.25)}
     .activity-head{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:12px}.activity-kicker{color:#7df1c2;font-size:9px;font-weight:800;letter-spacing:.14em}.activity-head h2{margin:2px 0 0;color:#e9edf5;font-size:17px}.activity-mine{border:1px solid rgba(111,167,255,.28);border-radius:999px;padding:6px 10px;background:rgba(111,167,255,.07);color:#a9c8ff;font-size:10px;cursor:pointer;white-space:nowrap}
     .activity-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:9px}.activity-card{display:grid;grid-template-columns:68px minmax(0,1fr);gap:10px;min-width:0;padding:9px;border:1px solid rgba(255,255,255,.075);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer;transition:.2s ease}.activity-card:hover{transform:translateY(-2px);border-color:rgba(111,167,255,.38);background:rgba(111,167,255,.055)}
@@ -96,7 +98,8 @@ function injectActivityStyles() {
     .activity-drawer-bg{position:fixed;inset:0;z-index:10040;visibility:hidden;background:rgba(1,4,9,.54);opacity:0;transition:.25s}.activity-drawer-bg.open{visibility:visible;opacity:1}.activity-drawer{position:fixed;top:0;right:0;z-index:10041;width:min(410px,94vw);height:100vh;padding:19px;overflow:auto;border-left:1px solid rgba(111,167,255,.25);background:#0c1420;color:#e9edf5;box-shadow:-25px 0 70px rgba(0,0,0,.55);transform:translateX(105%);transition:.3s cubic-bezier(.22,.75,.25,1)}.activity-drawer.open{transform:translateX(0)}
     .activity-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.activity-drawer h2{margin:0;font-size:18px}.activity-read-all{border:0;background:none;color:#8fb9ff;font-size:10px;cursor:pointer}.activity-notice{position:relative;display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;width:100%;margin-bottom:8px;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.025);color:inherit;text-align:left;cursor:pointer}.activity-notice.unread{border-color:rgba(111,167,255,.2);background:rgba(111,167,255,.065)}.activity-notice.unread::after{position:absolute;top:14px;right:11px;width:6px;height:6px;border-radius:50%;background:#6fa7ff;content:""}.activity-notice-icon{display:grid;width:30px;height:30px;place-items:center;border-radius:9px;background:rgba(111,167,255,.1)}.activity-notice p{margin:0;padding-right:8px;color:#c5d0de;font-size:11px;line-height:1.55}.activity-notice time{display:block;margin-top:4px;color:#718299;font-size:9px}.activity-drawer-note{color:#687b92;font-size:10px;line-height:1.6}.activity-highlight{animation:activityHighlight 2.6s ease}@keyframes activityHighlight{0%,100%{box-shadow:none}20%,70%{box-shadow:0 0 0 4px rgba(125,241,194,.24),0 20px 50px rgba(0,0,0,.3)}}
     .comment-item.reply-comment{margin-left:18px;border-left:2px solid rgba(111,167,255,.35);padding-left:10px}.comment-reply-label{margin-left:6px;padding:1px 5px;border-radius:999px;background:rgba(111,167,255,.12);color:#9fc3ff;font-size:9px}.comment-reply-btn{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 8px;background:transparent;color:#9fb0c5;font-size:11px;cursor:pointer}.comment-reply-btn:hover{border-color:rgba(111,167,255,.45);color:#b9d3ff}
-    @media(max-width:860px){.header-top-actions{grid-template-columns:minmax(0,1fr) auto auto auto!important;column-gap:7px}.activity-grid{grid-template-columns:1fr}.activity-head{align-items:flex-start;flex-direction:column}.activity-rail{margin-inline:10px}}
+    @media(max-width:1000px){.engagement-row{grid-template-columns:1fr;margin-inline:10px}.engagement-row>.activity-rail,.engagement-row>.ranking-wrapper{margin:0}}
+    @media(max-width:860px){.header-top-actions{grid-template-columns:minmax(0,1fr) auto auto auto!important;column-gap:7px}.activity-grid{grid-template-columns:1fr}.activity-head{align-items:flex-start;flex-direction:column}.activity-rail{margin-inline:10px}.engagement-row .activity-rail{margin-inline:0}}
     @media(max-width:520px){.header-top-actions{grid-template-columns:auto auto minmax(0,1fr)!important}.header-update-status{grid-column:1/-1}.activity-bell{grid-column:1}.source-list-button{grid-column:2}#accountHeaderSlot{grid-column:3;min-width:0}.account-button{max-width:100%;overflow:hidden;text-overflow:ellipsis}}
   `;
   document.head.appendChild(style);
@@ -121,6 +124,11 @@ function injectActivityUi() {
 
   const filters = document.querySelector(".filters");
   if (filters) {
+    const ranking = document.getElementById("rankingWrapper");
+    const engagementRow = document.createElement("div");
+    engagementRow.id = "engagementRow";
+    engagementRow.className = "engagement-row";
+    filters.insertAdjacentElement("afterend", engagementRow);
     const rail = document.createElement("section");
     rail.id = "activityRail";
     rail.className = "activity-rail";
@@ -131,7 +139,8 @@ function injectActivityUi() {
       </div>
       <div class="activity-grid" id="activityGrid"><div class="activity-empty">動きを読み込み中...</div></div>
       <div class="activity-more-row"><button class="activity-more" id="activityMore" type="button" hidden>過去の動きを見る</button></div>`;
-    filters.insertAdjacentElement("afterend", rail);
+    engagementRow.appendChild(rail);
+    if (ranking) engagementRow.appendChild(ranking);
     rail.querySelector("#activityMine")?.addEventListener("click", () => {
       window.dailyNewsAccount?.openTab?.("participation");
     });

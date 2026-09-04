@@ -172,6 +172,16 @@ db.exec(`
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   );
 
+  CREATE TABLE IF NOT EXISTS hidden_items (
+    item_id TEXT PRIMARY KEY,
+    reason TEXT NOT NULL,
+    created_by INTEGER,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (item_id) REFERENCES interactions(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+  );
+
   CREATE TABLE IF NOT EXISTS user_favorites (
     item_id TEXT NOT NULL,
     user_id INTEGER NOT NULL,
@@ -321,6 +331,31 @@ const statements = {
   allIrrelevantCounts: db.prepare(`
     SELECT item_id, COUNT(*) AS count FROM user_irrelevant GROUP BY item_id
   `),
+  hiddenItem: db.prepare(`
+    SELECT h.item_id, h.reason, h.created_by, h.created_at, h.updated_at,
+           COALESCE(u.display_name, '') AS created_by_name
+    FROM hidden_items h
+    LEFT JOIN users u ON u.id = h.created_by
+    WHERE h.item_id = ?
+  `),
+  allHiddenItems: db.prepare(`
+    SELECT h.item_id, h.reason, h.created_by, h.created_at, h.updated_at,
+           COALESCE(u.display_name, '') AS created_by_name
+    FROM hidden_items h
+    LEFT JOIN users u ON u.id = h.created_by
+    ORDER BY h.updated_at DESC
+  `),
+  hideItem: db.prepare(`
+    INSERT INTO hidden_items(item_id, reason, created_by)
+    VALUES (?, ?, ?)
+    ON CONFLICT(item_id) DO UPDATE SET
+      reason = excluded.reason,
+      created_by = excluded.created_by,
+      updated_at = CURRENT_TIMESTAMP
+  `),
+  restoreHiddenItem: db.prepare(`
+    DELETE FROM hidden_items WHERE item_id = ?
+  `),
   changeLikes: db.prepare(`
     UPDATE interactions
     SET likes = MAX(0, likes + ?), updated_at = CURRENT_TIMESTAMP
@@ -444,17 +479,26 @@ const statements = {
     DELETE FROM user_favorites WHERE item_id = ? AND user_id = ?
   `),
   userFavorites: db.prepare(`
-    SELECT item_id FROM user_favorites WHERE user_id = ? ORDER BY created_at DESC
+    SELECT f.item_id FROM user_favorites f
+    WHERE f.user_id = ?
+      AND NOT EXISTS (SELECT 1 FROM hidden_items h WHERE h.item_id = f.item_id)
+    ORDER BY f.created_at DESC
   `),
   userLikes: db.prepare(`
-    SELECT item_id FROM user_likes WHERE user_id = ? ORDER BY created_at DESC
+    SELECT l.item_id FROM user_likes l
+    WHERE l.user_id = ?
+      AND NOT EXISTS (SELECT 1 FROM hidden_items h WHERE h.item_id = l.item_id)
+    ORDER BY l.created_at DESC
   `),
   userIrrelevant: db.prepare(`
     SELECT item_id FROM user_irrelevant WHERE user_id = ? ORDER BY created_at DESC
   `),
   userComments: db.prepare(`
-    SELECT id, item_id, comment_text, created_at
-    FROM comments WHERE user_id = ? ORDER BY id DESC
+    SELECT c.id, c.item_id, c.comment_text, c.created_at
+    FROM comments c
+    WHERE c.user_id = ?
+      AND NOT EXISTS (SELECT 1 FROM hidden_items h WHERE h.item_id = c.item_id)
+    ORDER BY c.id DESC
   `),
   claimComments: db.prepare(`
     UPDATE comments
@@ -500,11 +544,14 @@ const statements = {
     LEFT JOIN users actor ON actor.id = n.actor_user_id
     LEFT JOIN comments c ON c.id = n.comment_id
     WHERE n.user_id = ?
+      AND NOT EXISTS (SELECT 1 FROM hidden_items h WHERE h.item_id = n.item_id)
     ORDER BY n.id DESC
     LIMIT ?
   `),
   unreadNotificationCount: db.prepare(`
-    SELECT COUNT(*) AS count FROM notifications WHERE user_id = ? AND read_at IS NULL
+    SELECT COUNT(*) AS count FROM notifications n
+    WHERE n.user_id = ? AND n.read_at IS NULL
+      AND NOT EXISTS (SELECT 1 FROM hidden_items h WHERE h.item_id = n.item_id)
   `),
   markNotificationRead: db.prepare(`
     UPDATE notifications SET read_at = COALESCE(read_at, CURRENT_TIMESTAMP)
@@ -526,6 +573,9 @@ const statements = {
       (SELECT likes FROM interactions i WHERE i.item_id = c.item_id) AS like_count
     FROM comments c
     JOIN users u ON u.id = c.user_id
+    WHERE NOT EXISTS (
+      SELECT 1 FROM hidden_items h WHERE h.item_id = c.item_id
+    )
     ORDER BY c.id DESC
     LIMIT ?
   `),
@@ -537,8 +587,9 @@ const statements = {
       SELECT item_id, created_at AS activity_at FROM user_likes WHERE user_id = ?
       UNION ALL
       SELECT item_id, created_at AS activity_at FROM user_favorites WHERE user_id = ?
-    )
-    GROUP BY item_id
+    ) activity
+    WHERE NOT EXISTS (SELECT 1 FROM hidden_items h WHERE h.item_id = activity.item_id)
+    GROUP BY activity.item_id
     ORDER BY activity_at DESC
     LIMIT 200
   `),
@@ -587,6 +638,14 @@ const statements = {
     JOIN users u ON u.id = f.user_id
     ORDER BY f.id DESC
     LIMIT 100
+  `),
+  adminHiddenItems: db.prepare(`
+    SELECT h.item_id, h.reason, h.created_at, h.updated_at,
+           COALESCE(u.display_name, '') AS created_by_name,
+           COALESCE(u.email, '') AS created_by_email
+    FROM hidden_items h
+    LEFT JOIN users u ON u.id = h.created_by
+    ORDER BY h.updated_at DESC
   `),
   mailingList: db.prepare(`
     SELECT id, email, display_name, user_id, enabled, source, created_at, updated_at
@@ -1075,6 +1134,7 @@ function notifyCommentParticipants(
 function interactionFor(itemId, clientId, includeComments = true, user = null) {
   statements.ensureInteraction.run(itemId);
   const row = statements.interaction.get(itemId);
+  const hidden = statements.hiddenItem.get(itemId);
   const value = {
     likes: Number(row?.likes || 0),
     comments: Number(row?.comments || 0),
@@ -1089,6 +1149,10 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
     markedIrrelevant: Boolean(
       user && statements.hasUserIrrelevant.get(itemId, user.id),
     ),
+    hidden: Boolean(hidden),
+    hiddenReason: hidden?.reason || "",
+    hiddenBy: hidden?.created_by_name || "",
+    hiddenAt: hidden?.updated_at || "",
   };
   if (includeComments) {
     value.commentItems = commentsFor(itemId, clientId, user);
@@ -1106,6 +1170,10 @@ function allInteractions(user = null) {
       likedBy: [],
       irrelevant: 0,
       markedIrrelevant: false,
+      hidden: false,
+      hiddenReason: "",
+      hiddenBy: "",
+      hiddenAt: "",
     };
   }
   for (const row of statements.allLikeUsers.all()) {
@@ -1113,6 +1181,13 @@ function allInteractions(user = null) {
   }
   for (const row of statements.allIrrelevantCounts.all()) {
     if (result[row.item_id]) result[row.item_id].irrelevant = Number(row.count || 0);
+  }
+  for (const row of statements.allHiddenItems.all()) {
+    if (!result[row.item_id]) continue;
+    result[row.item_id].hidden = true;
+    result[row.item_id].hiddenReason = row.reason;
+    result[row.item_id].hiddenBy = row.created_by_name;
+    result[row.item_id].hiddenAt = row.updated_at;
   }
   if (user) {
     for (const row of statements.userIrrelevant.all(user.id)) {
@@ -1378,6 +1453,30 @@ async function handleApi(request, response, requestUrl) {
       } else {
         statements.deleteUserIrrelevant.run(itemId, user.id);
       }
+    });
+    sendJson(response, 200, interactionFor(itemId, body.clientId, true, user));
+    return;
+  }
+
+  if (
+    request.method === "PUT" &&
+    segments.length === 4 &&
+    segments[0] === "api" &&
+    segments[1] === "interactions" &&
+    segments[3] === "hidden"
+  ) {
+    const itemId = decodeURIComponent(segments[2]);
+    const user = requireUser(request, response);
+    if (!user) return;
+    const body = await readJson(request);
+    const reason = String(body.reason || "").trim();
+    if (!validItemId(itemId) || reason.length < 2 || reason.length > 500) {
+      apiError(response, 400, "invalid_removal", "A removal reason between 2 and 500 characters is required.");
+      return;
+    }
+    withTransaction(() => {
+      statements.ensureInteraction.run(itemId);
+      statements.hideItem.run(itemId, reason, user.id);
     });
     sendJson(response, 200, interactionFor(itemId, body.clientId, true, user));
     return;
@@ -1688,6 +1787,14 @@ async function handleApi(request, response, requestUrl) {
       displayName: row.display_name,
       email: row.email,
     }));
+    const hiddenItems = statements.adminHiddenItems.all().map((row) => ({
+      itemId: row.item_id,
+      reason: row.reason,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      createdByName: row.created_by_name,
+      createdByEmail: row.created_by_email,
+    }));
     sendJson(response, 200, {
       totals: {
         users: users.length,
@@ -1698,11 +1805,36 @@ async function handleApi(request, response, requestUrl) {
         comments: users.reduce((sum, user) => sum + user.comments, 0),
         feedback: users.reduce((sum, user) => sum + user.feedback, 0),
         mailRecipients: mailingListPayload().activeCount,
+        hiddenItems: hiddenItems.length,
       },
       users,
       feedback,
       mailingList: mailingListPayload().recipients,
+      hiddenItems,
     });
+    return;
+  }
+
+  if (
+    request.method === "DELETE" &&
+    segments.length === 4 &&
+    segments[0] === "api" &&
+    segments[1] === "admin" &&
+    segments[2] === "hidden-items"
+  ) {
+    const admin = requireAdmin(request, response);
+    if (!admin) return;
+    const itemId = decodeURIComponent(segments[3]);
+    if (!validItemId(itemId)) {
+      apiError(response, 400, "invalid_item_id", "Invalid item ID.");
+      return;
+    }
+    const result = statements.restoreHiddenItem.run(itemId);
+    if (!result.changes) {
+      apiError(response, 404, "hidden_item_not_found", "Removed item was not found.");
+      return;
+    }
+    sendJson(response, 200, { restored: true, itemId });
     return;
   }
 

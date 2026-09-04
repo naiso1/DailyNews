@@ -221,6 +221,25 @@ async function main() {
   });
   assert.equal(allRead.unreadCount, 0);
 
+  const hidden = await request("/api/interactions/jp1/hidden", {
+    method: "PUT",
+    body: {
+      clientId: "abcdefghijklmnop1234",
+      reason: "Not relevant to automotive interiors",
+    },
+  });
+  assert.equal(hidden.hidden, true);
+  assert.equal(hidden.hiddenReason, "Not relevant to automotive interiors");
+  const interactionsAfterHide = await request("/api/interactions");
+  assert.equal(interactionsAfterHide.interactions.jp1.hidden, true);
+  const recentAfterHide = await request("/api/activity/recent?limit=3");
+  assert.equal(recentAfterHide.activity.some((entry) => entry.itemId === "jp1"), false);
+  const activityAfterHide = await request("/api/me/activity");
+  assert.equal(activityAfterHide.favorites.includes("jp1"), false);
+  assert.equal(activityAfterHide.likes.includes("jp1"), false);
+  assert.equal(activityAfterHide.comments.some((entry) => entry.itemId === "jp1"), false);
+  assert.equal(activityAfterHide.participated.some((entry) => entry.itemId === "jp1"), false);
+
   const admin = await request("/api/admin/overview");
   assert.equal(admin.totals.users, 2);
   const adminUser = admin.users.find((user) => user.email === "test.user@example.com");
@@ -229,7 +248,10 @@ async function main() {
   assert.equal(admin.totals.irrelevant, 1);
   assert.equal(admin.feedback.length, 1);
   assert.equal(admin.totals.mailRecipients, 2);
+  assert.equal(admin.totals.hiddenItems, 1);
   assert.equal(admin.mailingList.length, 2);
+  assert.equal(admin.hiddenItems[0].itemId, "jp1");
+  assert.equal(admin.hiddenItems[0].reason, "Not relevant to automotive interiors");
   assert.ok(admin.mailingList.every((recipient) => recipient.source === "registered_user"));
 
   const withManualRecipient = await request("/api/admin/mailing-list", {
@@ -253,6 +275,11 @@ async function main() {
     { method: "DELETE" },
   );
   assert.equal(deletedRecipient.recipients.length, 2);
+
+  const restored = await request("/api/admin/hidden-items/jp1", { method: "DELETE" });
+  assert.equal(restored.restored, true);
+  const interactionsAfterRestore = await request("/api/interactions");
+  assert.equal(interactionsAfterRestore.interactions.jp1.hidden, false);
   process.stdout.write("DailyNews auth integration test passed.\n");
 }
 
