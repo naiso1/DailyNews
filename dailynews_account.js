@@ -11,6 +11,7 @@ const accountState = {
   mode: "welcome",
   activityTab: "favorites",
   admin: null,
+  authResolved: false,
 };
 
 function accountClientId() {
@@ -96,6 +97,7 @@ function accountStyles() {
     .account-bar { display:flex; justify-content:flex-end; margin:0; }
     .account-button { min-height:36px; border:1px solid rgba(125,241,194,.38); border-radius:999px; padding:0 14px; background:rgba(125,241,194,.08); color:#dffbef; font-weight:700; white-space:nowrap; cursor:pointer; }
     .account-button:hover { background:rgba(125,241,194,.16); }
+    .account-button:disabled { opacity:.65; cursor:wait; }
     .account-overlay { position:fixed; inset:0; z-index:10020; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(2,6,12,.78); backdrop-filter:blur(8px); }
     .account-overlay.open { display:flex; }
     .account-overlay.auth-required { background:#07111b; backdrop-filter:none; }
@@ -186,7 +188,7 @@ function injectAccountUi() {
   const slot = document.getElementById("accountHeaderSlot") || header;
   const bar = document.createElement("div");
   bar.className = "account-bar";
-  bar.innerHTML = '<button class="account-button" id="accountOpenButton" type="button">ログイン / 登録</button>';
+  bar.innerHTML = '<button class="account-button" id="accountOpenButton" type="button" disabled>確認中...</button>';
   slot.appendChild(bar);
 
   const overlay = document.createElement("div");
@@ -209,6 +211,7 @@ function injectAccountUi() {
 }
 
 function updateRegistrationPrompt() {
+  if (!accountState.authResolved) return;
   const overlay = document.getElementById("accountOverlay");
   if (!overlay) return;
   const required = !accountState.user;
@@ -699,9 +702,12 @@ async function logoutAccount() {
 function updateAccountButton() {
   const button = document.getElementById("accountOpenButton");
   if (!button) return;
-  button.textContent = accountState.user
-    ? `${accountState.user.displayName} ▾`
-    : "ログイン / 登録";
+  button.disabled = !accountState.authResolved;
+  button.textContent = !accountState.authResolved
+    ? "確認中..."
+    : accountState.user
+      ? `${accountState.user.displayName} ▾`
+      : "ログイン / 登録";
   button.title = accountState.user ? "マイページ" : "ログイン / 登録";
 }
 
@@ -739,6 +745,7 @@ async function initializeAccount() {
   } catch (error) {
     console.warn("Account initialization failed:", error.message);
   }
+  accountState.authResolved = true;
   updateAccountButton();
   updateRegistrationPrompt();
 }
