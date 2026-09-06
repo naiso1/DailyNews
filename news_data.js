@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-04 00:41";
+window.NEWS_UPDATED_AT = "2026-09-07 01:05";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -107987,6 +107987,725 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "jp",
         img: "https://serai.jp/wp-content/uploads/2026/08/B87X0018.jpg",
+        note: ""
+    },
+    // 2026-09-04 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1762",
+        title: "日産エクストレイル仕様変更、AUTECHやロッククリークも対象",
+        desc: "日産は2026年9月3日、SUV「エクストレイル」の仕様変更と販売開始を発表した。「G」グレードには幾何学的な切削パターンの19インチホイールを標準化し、ルーフレールやドアミラーを黒色化。さらにリモコンオートバックドアも標準装備された。",
+        url: "https://news.yahoo.co.jp/articles/619ac457862c83e51698b21ee9f8f7230b451591?source=rss",
+        source: "webCG",
+        date: "2026-09-04",
+        tags: [],
+    
+        interiorScore: 62,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260905-00010000-webcg-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1764",
+        title: "ポルシェ色ラッピングとGRMN内装移植で魅せるGRヤリスRS",
+        desc: "茨城のカスタムショップ72Factory代表夫人が所有する1.5L FF GRヤリスRSは、ポルシェ純正フローズンブルーのフルラッピングと多メーカーパーツをミックスした迫力あるエアロを装着。さらにGRMN内装を移植し、2名乗車公認の快適装備を備えたカスタム車として注目を集めている。",
+        url: "https://news.yahoo.co.jp/articles/0d4bf92bc6865670469cdfa940a44bb3467fd2a2?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-09-04",
+        tags: ["カスタマイズ"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260905-00010001-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1766",
+        title: "トヨタノアヴォクシー90系専用ラバーマットでテーブルズレ傷防止",
+        desc: "トヨタ・ノア/ヴォクシー90系専用「2列目テーブルラバーマット」が販売開始。シリコンゴム製でズレ・傷・ホコリ防止に加え、約15秒ではめ込む手軽さや防水防汚仕様も魅力。適合車種は2022年4月以降の7人乗りモデルのみ。",
+        url: "https://news.yahoo.co.jp/articles/2a35e28a6fcd1704ef298db9b39e4769277fabc5?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-04",
+        tags: [],
+    
+        interiorScore: 100,
+        interiorReason: "interior accessory and cabin UX",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260904-00000020-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1767",
+        title: "CRAFTWORKSのサングラスクリップでサンバイザーに4機能収納",
+        desc: "CRAFTWORKSのサングラスクリップはサンバイザーに挟むだけで、サングラス、カード、ペン、グラスの4機能を収納可能。マイクロファイバーレザー素材で980円から販売され、車内小物の整理に便利だ。",
+        url: "https://news.yahoo.co.jp/articles/4bb090b54efee153785238c11acc2df4a071ab22?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-04",
+        tags: ["新素材"],
+    
+        interiorScore: 91,
+        interiorReason: "sun visor accessory with interior image showing material, mounting, and cabin st",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260904-00000012-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1579",
+        title: "Tesla Cybercab、ステアリングもブレーキラインもなしで低コスト化",
+        desc: "Tesla Cybercabは運転席にステアリングもブレーキラインも設置せず、見えない部分でコスト削減を図る。完全自動運転を前提とした斬新な設計により、製造・保守コストを大幅に下げる画期的な車両である。",
+        url: "https://www.thedrive.com/news/tesla-cybercab-isnt-just-missing-a-steering-wheel-it-doesnt-even-have-brake-lines",
+        source: "The Drive",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/cybercab-hero.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1580",
+        title: "独立BMWメカニックがBMWより優れたデジタルダッシュボードを独自開発",
+        desc: "フロリダのUsual Suspects Garage所属でBMW専門のJean氏がE28およびE30モデル向けに独自開発したデジタル計器クラスターを公開。",
+        url: "https://www.thedrive.com/news/this-independent-bmw-mechanic-built-a-cooler-digital-dash-than-bmw-itself",
+        source: "The Drive",
+        date: "2026-09-04",
+        tags: ["AR", "コックピット"],
+    
+        interiorScore: 82,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/image0.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1583",
+        title: "Teslaの無ペダル車、連邦当局が調査開始",
+        desc: "テスラは運転操作機器を備えないサイバーキャブを運行中だが、NHTSAが安全性基準の適合性を調査。車両は自己認証制だが、運転者向け規制の適用除外が焦点で、技術データ検証が進む。",
+        url: "https://www.carscoops.com/2026/09/tesla-cybercab-nhtsa-audit/",
+        source: "CarScoops",
+        date: "2026-09-04",
+        tags: ["安全"],
+    
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/The-Future-Has-Arrived-_-Cybercab-0-37-screenshot-1-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "eu1545",
+        title: "VWグループ、モデルライン半減と5万人解雇を決定",
+        desc: "VWグループはモデルラインを半減し、技術的複雑性を削減する計画を承認した。これにより、約5万人の解雇と最大4つの工場閉鎖、歴史的なシートのブランド廃止が決定された。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/confirmed-vw-group-plans-halve-model-range-part-huge-cuts",
+        source: "AUTOCAR UK",
+        date: "2026-09-04",
+        tags: ["シート"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/vw_group_cuts.jpg?itok=K4-Wqn1q",
+        note: ""
+    },
+    {
+        id: "eu1546",
+        title: "Dacia、2027年第三Cセグメントモデル発売計画断念",
+        desc: "DaciaはBigsterとStrikerの後に第三のC-segmentモデルを発売する計画を断念し、次世代Sanderoを含む新EVライン開発に注力する。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/dacia-scraps-plan-launch-third-c-segment-model-2027",
+        source: "AUTOCAR UK",
+        date: "2026-09-04",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/striker-4x4cadriencortesi-4_0.jpg?itok=ig9MNHrF",
+        note: ""
+    },
+    {
+        id: "eu1547",
+        title: "JensenとBristolの復活、TVRの罠を回避できるか？",
+        desc: "JensenやBristolといった英国のレジェンドブランドが再始動し、魅力的なドライバー向け計画を打ち出している。しかし、過去の失敗例であるTVRの罠に陥らず、実用性と市場での成功を収めることができるかが焦点となっている。",
+        url: "https://www.autocar.co.uk/opinion/new-cars/jensen-bristol-marcos-brit-legends-are-back-will-they-work",
+        source: "AUTOCAR UK",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/gtx-7.jpg?itok=8USDK_zt",
+        note: ""
+    },
+    {
+        id: "cn1578",
+        title: "吉利、リーパモーター、GAC AIONが欧州NCAPで5つ星の安全評価を獲得",
+        desc: "吉利、Leapmotor、GAC AionのEVモデルが、最新の欧州NCAP 2026基準で5つ星の安全評価を取得しました。中国製EVの安全性が国際的に認められ、自動車の安全性向上に貢献しています。",
+        url: "https://carnewschina.com/2026/09/04/geely-leapmotor-and-gac-aion-models-achieve-five-star-euro-ncap-safety-ratings/",
+        source: "CarNewsChina - All",
+        date: "2026-09-04",
+        tags: ["AI", "EV", "安全"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-47-1500x791.png",
+        note: ""
+    },
+    {
+        id: "cn1579",
+        title: "CATL、中国のEV急増に伴いバッテリー不良を警告",
+        desc: "CATLの曾毓群会長は、中国で一日3台のEV新車投入ペースが、バッテリー不良を招いていると警告した。CATLは中国最大のリチウムイオン電池メーカーであり、東風汽車など多数の自動車メーカーに供給している。",
+        url: "https://carnewschina.com/2026/09/04/china-is-launching-nearly-3-new-evs-a-day-catl-warns-of-batch-battery-failures/",
+        source: "CarNewsChina - All",
+        date: "2026-09-04",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/convert-to-hd-1-scaled_webhook_1200x720_q85_1788499223.jpg",
+        note: ""
+    },
+    {
+        id: "cn1580",
+        title: "ジャガー・フリーランダー8は、中国での発売から12時間で5000台の注文を達成しました。",
+        desc: "ジャガー・フリーランダー8は中国で発売後12時間で5000台の確定注文を獲得し、ファーウェイの競合車種を上回った。818馬力のフルサイズEREV SUVとして、高級車市場で大きな注目を集めている。",
+        url: "https://carnewschina.com/2026/09/04/the-freelander-8-got-5000-firm-orders-in-12-hours-after-the-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-09-04",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/freelander_8_orders_webhook_1500x900_q85_1788494138.jpg",
+        note: ""
+    },
+    {
+        id: "cn1581",
+        title: "理想汽車がUAEでL9の新型車を発売し、中東への進出を強化する",
+        desc: "理想汽車は、UAEで新車L9を約8万7100ドルで発売し、現地の気候やユーザーの好みに適応した内装を備えた。これは中東市場での展開を強化する重要なステップとなる。",
+        url: "https://cnevpost.com/2026/09/04/li-auto-launches-new-l9-uae/",
+        source: "CnEVPost - All",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090413532785.jpg",
+        note: ""
+    },
+    {
+        id: "cn1582",
+        title: "テスラ、Cybercab 米国で稼働開始 中国は 9 月中旬に初登場",
+        desc: "テスラは Cybercab が北京や上海を含む都市で展示されることを発表し、米国では稼働を開始した。中国では販売や商用運用は予定されていない。詳細は CnEVPost を参照のこと。",
+        url: "https://cnevpost.com/2026/09/04/tesla-cybercab-begins-us-operations-china-debut-sept/",
+        source: "CnEVPost - All",
+        date: "2026-09-04",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026090401532064.jpg",
+        note: ""
+    },
+    {
+        id: "in1632",
+        title: "Kia、インドでCNG車投入へ。7人乗りカーニバルが25km/kg走行可能か",
+        desc: "Kia IndiaはSorento発表会場でCNG車導入を発表。7人乗りMPVカーニバルがハイブリッド車と共有する動力系を採用し、25km/kgの燃費性能を期待される。",
+        url: "https://www.indiacarnews.com/news/kias-first-cng-cars-coming-soon-7-seater-25km-kg-mileage-68908/",
+        source: "IndiaCarNews",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Details-Revealed.webp",
+        note: ""
+    },
+    {
+        id: "in1633",
+        title: "Kia、インドで7人乗りハイブリッドSUVの発売を予定",
+        desc: "Kia Indiaは7人乗りSUV「ソレント」のハイブリッド版を投入し、さらにミニバン「ケアレンス」シリーズのCNG仕様も発表している。",
+        url: "https://www.indiacarnews.com/news/new-kia-7-seater-hybrid-family-car-confirmed-launch-soon-68905/",
+        source: "IndiaCarNews",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/1.webp",
+        note: ""
+    },
+    {
+        id: "in1634",
+        title: "インド市場で販売開始のKia Sorento、7グレードと価格帯を明かす",
+        desc: "韓国系自動車メーカーKiaがインド市場にSorento SUVを投入し、HTEからBlack-lineまでの7グレードで27.99万ルピーから40.19万ルピーで販売を開始した。",
+        url: "https://www.indiacarnews.com/news/kia-sorento-7-seater-suv-prices-diesel-hybrid-awd-adas-more-68897/",
+        source: "IndiaCarNews",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Untitled-design-3.webp",
+        note: ""
+    },
+    {
+        id: "in1637",
+        title: "インド市場で2026年式Kia Sorento発売、ハイブリッドやディーゼル搭載",
+        desc: "Kiaはインド市場向けに2026年式Sorentoを発売した。価格は27.99万ルピーからで、1.6リットルハイブリッドや2.2リットルディーゼルエンジン、6〜7人乗りレイアウト、AWD、レベル2+ ADASを備える。",
+        url: "https://www.autopunditz.com/post/2026-kia-sorento-launched-in-india-at-27-99-lakh-hybrid-diesel-awd-variant-wise-prices",
+        source: "Auto Punditz",
+        date: "2026-09-04",
+        tags: ["安全"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_ecdb19a13ddc49129f9321189635c10d~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1586",
+        title: "テスラ・サイバーキャブにはブレーキラインやブレーキフルードがありません",
+        desc: "2 人乗りモデルにはステアリングやペダルがありません。そのため、ブレーキとステアリングの制御方法を見直す必要がありました。",
+        url: "https://insideevs.com/news/807121/tesla-cybercab-brakes-no-fluid/",
+        source: "InsideEVs",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/OoZvLB/s3/tesla-cybercab-robotaxi.jpg",
+        note: ""
+    },
+    {
+        id: "us1587",
+        title: "テスラ、オースティンで有料ロボタクシー運行開始",
+        desc: "テスラはオースティンで2 人乗り EV「Cybercab」の有料ロボタクシー運行を開始した。ペダルやステアリングのない車は、エロン・マスクが不在のイベントで一般公開され、金曜午後から利用可能となった。",
+        url: "https://insideevs.com/news/807100/tesla-cybercab-robotaxi-public-rides-austin-official/",
+        source: "InsideEVs",
+        date: "2026-09-04",
+        tags: ["EV"],
+    
+        interiorScore: 43,
+        interiorReason: "The article focuses on the Cybercab robotaxi launch, mentioning it is a two-seat",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/ko8YbR/s3/tesla-cybercab-robotaxi.jpg",
+        note: ""
+    },
+    {
+        id: "eu1549",
+        title: "Tesla、ステアリングのないCybercabを自動運転で運行開始",
+        desc: "テスラは、ステアリングやペダルを備えないCybercabを自動運転のライドシェアサービスに導入した。テキサス州オースティンでは、同社の電気自動車による完全無人の乗車サービスが正式に開始された。",
+        url: "https://www.electrive.com/2026/09/04/tesla-debuts-cybercab-autonomous-rides/",
+        source: "Electrive",
+        date: "2026-09-04",
+        tags: ["EV"],
+    
+        interiorScore: 40,
+        interiorReason: "The article describes a radical interior redesign (removal of steering wheel/ped",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.youtube.com/embed/noalr6NcsVY",
+        note: ""
+    },
+    {
+        id: "eu1550",
+        title: "ACEAと欧州アルミ、EUカーボンルールで鋼鉄とアルミ平等扱いを要請",
+        desc: "ACEAと欧州アルミニウム連盟は、EUのCO2規制で低炭素鋼鉄とアルミニウムを同等扱いするよう立法者に要請している。",
+        url: "https://www.automotiveworld.com/news/acea-and-european-aluminium-seek-eu-material-credits/",
+        source: "Automotive World",
+        date: "2026-09-04",
+        tags: [],
+    
+        interiorScore: 12,
+        interiorReason: "policy and material-credit news with no interior product detail; image shows onl",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/04054747/acea-european-aluminium.jpg",
+        note: ""
+    },
+    {
+        id: "eu1551",
+        title: "LGエネルジ・ソリューション、米国から年間8000トンのリチウム供給契約を結ぶ",
+        desc: "LGエネルジ・ソリューションは、2029年より米国スマックオーバー・リチウムから年間8000トンのリチウム炭酸塩を10年間調達する契約を結んだ。この供給は電気自動車やエネルギー貯蔵用バッテリーの製造に活用される予定だ。",
+        url: "https://electriccarsreport.com/2026/09/lg-energy-solution-secures-10-year-u-s-lithium-supply-deal/",
+        source: "Electric Cars Report",
+        date: "2026-09-04",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/08/LG-Energy-Solutions.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1552",
+        title: "Hyundai Mobis スロバキアでEVパワートレインシステム量産開始",
+        desc: "Hyundai Mobis はスロバキアでEVパワートレインシステムの量産を開始した。新工場は年間28万基のシステム生産能力を有する。",
+        url: "https://electriccarsreport.com/2026/09/hyundai-mobis-starts-mass-production-of-ev-powertrain-systems-in-slovakia/",
+        source: "Electric Cars Report",
+        date: "2026-09-04",
+        tags: ["AI", "EV"],
+    
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Hyundai-Mobis-Slovakia.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "jp1769",
+        title: "BOOMIEのカーティッシュホルダーで車内生活感を向上",
+        desc: "BOOMIEはキッチン用品で知られるが、車用収納グッズも展開している。特にカーティッシュホルダーは、車内の生活感を高め、快適なインテリアを演出するアイテムとして注目を集めている。",
+        url: "https://nlab.itmedia.co.jp/research/articles/4002838/",
+        source: "ねとらぼ",
+        date: "2026-09-04",
+        tags: [],
+    
+        country: "jp",
+        img: "https://research.image.itmedia.co.jp/wp-content/uploads/2026/08/1788505751_pixta_92054184_M.jpg",
+        note: ""
+    },
+    {
+        id: "jp1770",
+        title: "ホンダN-BOX専用ダッシュボードトレイ再入荷、耐熱ABSと滑り止め採用",
+        desc: "Fun Standard株式会社が展開するクラフトワークスは、ホンダN-BOX JF5/JF6専用ダッシュボードトレイを2026年9月に再入荷した。耐熱性に優れたABS樹脂と滑り止めマットを採用し、スマホや小物の置き場所不足を解消する大容量収納を実現。",
+        url: "https://www.sankei.com/pressrelease/prtimes/7TLVTAMMMZIMRNQRRMCJMMX7XE/",
+        source: "産経ニュース",
+        date: "2026-09-04",
+        tags: ["AR", "コックピット"],
+    
+        interiorScore: 79,
+        interiorReason: "Honda N-BOX dedicated dashboard tray with heat-resistant ABS material, anti-slip",
+        imageInterior: true,
+        country: "jp",
+        img: "https://www.sankei.com/resizer/v2/https://dpgdieoe6npux.cloudfront.net/prtimes/UK2BESD5OBIO7MZ56CFHZQLB6Q?auth=39aa2a59b555512aa0e2e540d498f1a50f0585206e31581bc98286a3651adaf8&quality=50&smart=true&width=1200&height=675",
+        note: ""
+    },
+    {
+        id: "us1588",
+        title: "10,000 マイル走行の 2022 年式 ポルシェ・パナメーラ・ターボ・S エグゼクティブ",
+        desc: "2022年のポルシェ・パナメーラ・ターボS エグゼクティブは、アベンチュリン・グリーンメタリックのボディに、ルクソール・ベージュとサドル・ブラウンのレザーインテリアを組み合わせ、オプションで約3万4千ドル相当の装備をオーダーしました。",
+        url: "https://bringatrailer.com/listing/2022-porsche-panamera-turbo-s-executive/",
+        source: "Bringatrailer.com",
+        date: "2026-09-04",
+        tags: ["新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "interior color and leather mention plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://bringatrailer.com/wp-content/uploads/2026/08/DSC_5290-scaled-88655-copy-2026-09-02-lje-66506.jpg",
+        note: ""
+    },
+    {
+        id: "cn1583",
+        title: "テスラ無人車、路上で接客中に周囲からブーイング",
+        desc: "テスラは量産版Cybercabを発表し、FSDによる完全自動運転を謳う。しかし、乗客が路中央で接客中に周囲からブーイングを受けたという報告がある。",
+        url: "https://www.cnbeta.com.tw/articles/tech/1576402.htm",
+        source: "Cnbeta.com.tw",
+        date: "2026-09-04",
+        tags: [],
+    
+        interiorScore: 67,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "cn",
+        img: "https://static.cnbetacdn.com/article/2026/0904/17015932f0615f3.jpg",
+        note: ""
+    },
+    // 2026-09-05 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1765",
+        title: "三菱新型パジェロ後席は広々 2列目にはこぶし3個分のゆとり",
+        desc: "三菱自動車が2026年9月2日に世界初公開した新型パジェロは、全長4920mmの3列シート7人乗りクロスカントリーSUV。2列目シートには前席からこぶし3個分のゆとりがあり、150mmスライド機構で空間配分を自在に調整できる。",
+        url: "https://news.yahoo.co.jp/articles/1269e47d41054cadf168035a56d4b048bb45688d?source=rss",
+        source: "VAGUE",
+        date: "2026-09-05",
+        tags: ["シート"],
+    
+        interiorScore: 81,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260905-10454006-vague-000-2-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1581",
+        title: "2026 GMC Yukon Denali Ultimateは11万2千ドルでV8とスーパークルーズ",
+        desc: "2026 GMC Yukon Denali Ultimateは11万2千ドルでV8エンジンとスーパークルーズを備え高級感を演出するが、より廉価な3列シートSUVとの比較において、車内快適装備やシート素材などインテリア面で不十分な点が課題となっている。",
+        url: "https://www.carscoops.com/2026/09/gmc-yukon-denali-ultimate-review/",
+        source: "CarScoops",
+        date: "2026-09-05",
+        tags: ["シート", "新素材"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/f4rcvewd-c--1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1582",
+        title: "欧州で登場した現代の9人乗りEVバンはVWより安価で大型",
+        desc: "欧州市場向けに登場した現代の9人乗りEVバンは、VW ID. Buzzより価格が低く、サイズも大型化している。80%充電に20分を要する高速充電機能も備える。",
+        url: "https://www.carscoops.com/2026/09/hyundai-staria-electric-europe/",
+        source: "CarScoops",
+        date: "2026-09-05",
+        tags: ["EV"],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Hyundai-Staria-Electric-Europe-main-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1584",
+        title: "EV、ハイブリッド、ガソリン車の比較写真",
+        desc: "2026年式テスラモデル3、ホンダアコード・ターリングハイブリッド、フォルクスワーゲン・ジェッタGLIの内外装をあらゆる角度から確認できる。",
+        url: "https://www.caranddriver.com/photos/a73571805/ev-vs-hybrid-vs-gas-best-road-trip-car-gallery/",
+        source: "Car and Driver",
+        date: "2026-09-05",
+        tags: ["EV"],
+    
+        interiorScore: 33,
+        interiorReason: "gallery title mentions interior but image is exterior-only; no concrete interior",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/21f722f6-a48c-4650-ad5b-a9432810c3c1.jpg",
+        note: ""
+    },
+    {
+        id: "us1585",
+        title: "RivianOS2アップデートでR1のインテリアとHMIがR2に近づく",
+        desc: "RivianはR1SとR1T向けにR2搭載のRivianOS2をOTA更新で導入。Google Mapsルート警告やAI音声アシスタント、設定画面の再設計に加え、R2同様のデザイン言語をインテリアに適用。ただし、旧R1はUnreal Engine4でグラフィック性能が劣る点に注意。",
+        url: "https://www.caranddriver.com/news/a73619057/rivianos-2-rolls-out-to-all-r1-models/",
+        source: "Car and Driver",
+        date: "2026-09-05",
+        tags: ["HMI", "コネクテッド", "AI"],
+    
+        interiorScore: 81,
+        interiorReason: "HMI update with interior design language refresh and specific UI function detail",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/53ed9e2c-c71f-4cf6-a922-c6664c98bd28.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1543",
+        title: "デンザ、欧州でポルシェに挑む1500馬力EV超跑投入",
+        desc: "デンザは欧州市場向けに、ポルシェ・パナメーラを標的にしたGTと、ランドローバー・ディフェンダー110に匹敵する4x4を次々と投入する。中国系メーカーが欧州の高級車市場に参入し、超高性能EVで競合を脅かす動きが加速している。",
+        url: "https://www.autocar.co.uk/opinion/new-cars/why-supercar-elite-arent-scared-chinas-1500bhp-evs",
+        source: "AUTOCAR UK",
+        date: "2026-09-05",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/denza-z-19.jpg?itok=SJ5omcpJ",
+        note: ""
+    },
+    {
+        id: "eu1544",
+        title: "ポルシェ・カヤンEV、高級SUV市場でBMWやPolestarに挑むか",
+        desc: "ポルシェ・カヤンEVは、内燃機関モデルで確立した高級SUV市場において、BMWやPolestarなど競合他社と対峙する。電気自動車としての性能と高級感を兼ね備え、オーナー層の期待に応えるか注目が集まっている。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/super-suv-showdown-porsche-cayenne-ev-vs-polestar-and-bmw",
+        source: "AUTOCAR UK",
+        date: "2026-09-05",
+        tags: ["AR", "EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/porsche-cayenne-triple-test-2026-001.jpg?itok=7gke-QTX",
+        note: ""
+    },
+    {
+        id: "cn1575",
+        title: "BYDデネザN8Lが9月14日発売、130.15kWhバッテリー搭載",
+        desc: "BYDのデネザN8L EVは9月14日に発売され、130.15kWhのLFPバッテリーと960kmのCLTC航続距離を備える。370kWモーター搭載に加え、208リットルの洗浄可能なフラットも特徴だ。",
+        url: "https://carnewschina.com/2026/09/05/byds-denza-n8l-ev-to-launch-september-14-with-130-kwh-battery-960-km-range-and-208l-frunk/",
+        source: "CarNewsChina - All",
+        date: "2026-09-05",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/remove-writing-and-white-frame-around-car_webhook_1500x900_q85_1788615968.jpg",
+        note: ""
+    },
+    {
+        id: "cn1576",
+        title: "長安ネボQ06は、800Vプラットフォームを搭載し、6Cの急速充電に対応",
+        desc: "長安汽車のネボQ06は800Vプラットフォームを採用し、6Cの急速充電機能を備える。中国市場で2万ドルから予約販売を開始しており、電気自動車市場への参入を強化する戦略の一環と見られる。",
+        url: "https://carnewschina.com/2026/09/05/changan-nevo-q06-800v-platform-with-6c-charging-pre-sales-price-starting-at-22000-usd-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-09-05",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-50-1200x900.png",
+        note: ""
+    },
+    {
+        id: "cn1577",
+        title: "シャオミがドラゴンスケール電池をCALBとサンウォダと共同開発し搭載",
+        desc: "シャオミは、CALBとサンウォダ と共同開発した「ドラゴンスケールEVバッテリー」を発表し、中国の基準を優越すると明かした。新バッテリーは、スカイノマッドSUVラインアップと同時デビューし、火災発生時に同車種を無料提供するキャンペーンも実施する。",
+        url: "https://carnewschina.com/2026/09/05/xiaomi-unveils-dragonscale-ev-battery-with-calb-sunwoda-offers-free-skynomad-suv-in-case-of-fire/",
+        source: "CarNewsChina - All",
+        date: "2026-09-05",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/xiaomi_c-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "in1629",
+        title: "2027 Toyota Innova Hycross Facelift 内装スパイ写真",
+        desc: "2027年式 Toyota Innova Hycross Facelift の内装がスパイ写真で確認された。ダッシュボードやセンターコンソールは既存モデルとほぼ同様だが、インフォテインメントのタッチスクリーンはファイルで隠されており、変更の有無は不明。",
+        url: "https://www.rushlane.com/2027-toyota-innova-hycross-facelift-interior-spied-touchscreen-hidden-12555122.html",
+        source: "RushLane",
+        date: "2026-09-05",
+        tags: ["ディスプレイ", "コネクテッド", "コックピット", "センターコンソール"],
+    
+        interiorScore: 78,
+        interiorReason: "interior image shows dashboard and console layout, but touchscreen is hidden; te",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/toyota-innova-hycross-facelift-hybrid-interiors-spied.jpeg",
+        note: ""
+    },
+    {
+        id: "in1630",
+        title: "新マルチ・スズキ・バレーノが 60.9 万ルピーで発売されました",
+        desc: "GaadiWaadi - 新型マルチ・スズキ・バレーノは、シャープなデザイン、通気性のあるシート、アクティブ冷却式ワイヤレス充電、レベル2 ADAS を搭載。1.2L Z シリーズエンジンで駆動。",
+        url: "https://gaadiwaadi.com/new-maruti-suzuki-baleno-launched-at-rs-6-09-lakh/",
+        source: "GaadiWaadi",
+        date: "2026-09-05",
+        tags: ["シート", "EV", "安全"],
+    
+        interiorScore: 58,
+        interiorReason: "ventilated seats and wireless charging are concrete interior features, but the i",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/new-maruti-suzuki-baleno-facelift.jpg",
+        note: ""
+    },
+    {
+        id: "in1631",
+        title: "2026年マルチ・バレンノ、通気性シートとレベル2ADAS搭載で登場",
+        desc: "2026年式マルチ・バレンノがインド市場で発売され、Rs 6.10 lakhから販売開始。新モデルは通気性フロントシートやレベル2ADAS、10.1インチタッチスクリーンなど快適装備を強化。",
+        url: "https://www.indiacarnews.com/news/rs-6-10-lakh-new-maruti-car-gets-level-2-adas-ventilated-seats-68917/",
+        source: "IndiaCarNews",
+        date: "2026-09-05",
+        tags: ["ディスプレイ", "シート", "安全"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Untitled-design-4.webp",
+        note: ""
+    },
+    {
+        id: "in1635",
+        title: "2026 Maruti Baleno Facelift、₹6.10 Lakh での発売",
+        desc: "Maruti Suzuki は 2026 Maruti Baleno Facelift を発売した。導入価格は₹6.10 Lakh であり、Level 2 ADAS や通風シート、CNG-AMT 搭載など新機能が付与されている。",
+        url: "https://www.autopunditz.com/post/2026-maruti-baleno-facelift-launched-at-6-10-lakh-gets-level-2-adas-ventilated-seats-and-cng-amt",
+        source: "Auto Punditz",
+        date: "2026-09-05",
+        tags: ["AR", "シート", "EV", "安全"],
+    
+        interiorScore: 81,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_93352029707d4b27bbaf18f52a263372~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1636",
+        title: "Kia、CarensとCarens Clavisの工場で搭載CNGモデルを10月発売予定",
+        desc: "Kiaは7人乗りMPVのCarensとCarens Clavisに、工場で搭載するCNGモデルを早期10月2026年に発売すると発表した。両車は1.5リットルエンジンと60リットルタンク、6速マニュアルトランスミッションを備える。",
+        url: "https://www.autopunditz.com/post/kia-carens-clavis-factory-fitted-cng-launch",
+        source: "Auto Punditz",
+        date: "2026-09-05",
+        tags: ["AR"],
+    
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_5892ba982d3245d5ae97649db0989d15~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "jp1768",
+        title: "三菱ふそうスーパーグレートなど最新大型トラックは電動パーキングクーラー搭載",
+        desc: "三菱ふそうのスーパーグレートなど最新大型トラックは、エンジン停止時でも使える電動クーラーやAC100V電源、リクライニングベッドを採用。これによりドライバーの休息環境が改善され、労働環境向上や人手不足解消に寄与する「走るIoTオフィス兼カプセルホテル」として注目されている。",
+        url: "https://www.webcartop.jp/2026/09/1874842/",
+        source: "WEB CARTOP",
+        date: "2026-09-05",
+        tags: ["EV"],
+    
+        interiorScore: 35,
+        interiorReason: "interior image shows cabin layout, overhead storage, dashboard, seats, and steer",
+        imageInterior: true,
+        country: "jp",
+        img: "https://cdn-webcartop.com/wp-content/uploads/2026/09/260903_truck_z009.jpg",
+        note: ""
+    },
+    // 2026-09-06 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1761",
+        title: "トヨタアルファード用シートカバー「アストレア・レリーフ」立体ダイヤキルト採用",
+        desc: "カーショップコネクトは、トヨタ・アルファード専用シートカバー「アストレア・レリーフ」を発売した。立体ダイヤキルトと防水防汚のシリコンレザレットを採用し、機能性とデザイン性を両立させた。9色のカラー展開で、車種専用設計により浮きやたるみを抑えた自然な一体感を実現している。",
+        url: "https://news.yahoo.co.jp/articles/b87ad90b0d99f5b8ffc9362e0efb344f132c1f42?source=rss",
+        source: "レスポンス",
+        date: "2026-09-06",
+        tags: ["シート"],
+    
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260906-00000008-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1763",
+        title: "ヴァレンティ、ハイエース等向け車種別サンシェード発売",
+        desc: "ヴァレンティは9月6日、ハンドル熱やダッシュボード劣化を防ぐ車種別サンシェードを発売した。トヨタハイエース200系専用サイズに加え、S・M・Lの汎用タイプを展開。遮光素材で紫外線をカットし、内装保護と車内温度上昇抑制に貢献する。",
+        url: "https://news.yahoo.co.jp/articles/d16a06fb38cdd6a63322c0128198ca0a8311bac9?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-09-06",
+        tags: ["コックピット", "新素材"],
+    
+        interiorScore: 78,
+        interiorReason: "interior accessory (sunshade) with dashboard protection and UV-blocking material",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260906-00010007-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "eu1548",
+        title: "9月6日限定：VW T-Crossが£174/月で入手可能",
+        desc: "VW T-Crossは9月6日のデイール・オブ・ザ・デイとして、月額£174という手頃な価格で提供される。このスマートで経済的なSUVは、大衆に愛されるVWの伝統を継承したモデルだ。",
+        url: "https://www.autoexpress.co.uk/volkswagen/t-cross/370383/car-deal-day-volkswagen-t-cross-true-peoples-car-ps174-month",
+        source: "Auto Express",
+        date: "2026-09-06",
+        tags: [],
+    
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--N5O0KtWz--/t_rss_image_w_845/v1713973969/Volkswagen%20T-Cross%20R-Line%20Rubber%20Ducky%20Yellow-17.jpg",
+        note: ""
+    },
+    {
+        id: "cn1574",
+        title: "メルセデス支援のProLogiumが381Wh/kgの全固体電池の量産を開始",
+        desc: "メルセデス・ベンツが支援するプロロジウムは、381Wh/kgの全固体電池を量産に踏み切った。しかし、0.5GWh規模の桃園工場では、まだ主流EV用バッテリーパックの供給には程遠い状況だ。",
+        url: "https://carnewschina.com/2026/09/06/mercedes-backed-prologium-starts-381-wh-kg-solid-state-production-as-carmakers-watch-from-sidelines/",
+        source: "CarNewsChina - All",
+        date: "2026-09-06",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/morrow-lfp_-battery-pack-and-cells-2048x1366-1-large-1352x900.jpeg",
+        note: ""
+    },
+    {
+        id: "in1628",
+        title: "Kia Sorento：インド市場向けフラッグシップSUVの概要",
+        desc: "Kiaはインド市場向けに、Sorentoというフラッグシップガソリン車を提供している。この車はハイブリッドやディーゼルエンジン、前後輪駆動、6〜7人乗りなど多様なラインナップを備えている。",
+        url: "https://www.autocarindia.com/auto-features/all-you-need-to-know-about-the-kia-sorento-441016",
+        source: "Autocar India - All",
+        date: "2026-09-06",
+        tags: [],
+    
+        country: "in",
+        img: "https://cdn-s3.autocarindia.com/Kia/sorento/Kia%252520Sorento.jpg",
         note: ""
     },
 ];
