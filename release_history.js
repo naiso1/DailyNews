@@ -2,6 +2,13 @@
 
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
+    date: "2026-09-07",
+    title: "Interiorgramへのリンクを追加",
+    items: [
+      "ページ上部のタイトル横から、社内のInteriorgramへ直接移動できるようにしました。",
+    ],
+  },
+  {
     date: "2026-09-04",
     title: "トップ画面の左右配置を再調整",
     items: [
