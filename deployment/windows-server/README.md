@@ -48,6 +48,9 @@ The script packages only:
 
 - `内装製品デイリーニュース.html`
 - `header-layout-test.html`
+- `activity-preview.html`
+- `source-list-preview.html`
+- `currency-conversion-preview.html`
 - `news_data.js`
 - `insights_data.js`
 - `dailynews_client.js`

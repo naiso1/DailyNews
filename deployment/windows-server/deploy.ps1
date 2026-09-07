@@ -22,6 +22,7 @@ $required = @(
     "header-layout-test.html",
     "activity-preview.html",
     "source-list-preview.html",
+    "currency-conversion-preview.html",
     "source_list_data.js",
     "news_data.js",
     "insights_data.js",
