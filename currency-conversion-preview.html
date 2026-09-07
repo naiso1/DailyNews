@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>外貨の円換算表示 - DailyNews試作</title>
+  <style>
+    :root {
+      --bg: #07111b;
+      --panel: #101a2a;
+      --panel-soft: #142132;
+      --border: rgba(174, 196, 225, 0.15);
+      --text: #edf5ff;
+      --muted: #a4b4c9;
+      --accent: #68e8c0;
+      --accent-2: #6fa7ff;
+      --money: #ffd67c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 28px 18px 64px;
+      background:
+        radial-gradient(circle at 15% 5%, rgba(104, 232, 192, 0.09), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(111, 167, 255, 0.1), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Yu Gothic UI", "Noto Sans JP", sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .preview-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      line-height: 1.25;
+    }
+
+    .preview-head p {
+      max-width: 570px;
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .back-link {
+      flex: 0 0 auto;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #c8d7eb;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 560px) minmax(300px, 1fr);
+      align-items: start;
+      gap: 26px;
+    }
+
+    .news-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .thumb {
+      position: relative;
+      aspect-ratio: 1.85 / 1;
+      overflow: hidden;
+      background: #dfe4e8;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .country,
+    .score,
+    .new-badge {
+      position: absolute;
+      z-index: 2;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .country { top: 10px; left: 10px; padding: 7px 11px; background: rgba(6, 13, 21, 0.82); }
+    .score { top: 10px; right: 10px; padding: 8px 11px; background: rgba(6, 13, 21, 0.82); }
+    .new-badge { bottom: 10px; left: 10px; padding: 7px 11px; background: #ff5f67; }
+
+    .content { padding: 20px; }
+
+    .title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .desc {
+      margin: 11px 0 0;
+      color: #c0cee0;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .foreign-price {
+      color: #fff3cb;
+      font-weight: 800;
+      text-decoration: underline dotted rgba(255, 214, 124, 0.7);
+      text-underline-offset: 4px;
+    }
+
+    .conversion {
+      margin-top: 15px;
+      border: 1px solid rgba(255, 214, 124, 0.22);
+      border-radius: 13px;
+      background: linear-gradient(135deg, rgba(255, 214, 124, 0.09), rgba(104, 232, 192, 0.05));
+    }
+
+    .conversion-toggle {
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .conversion-label {
+      padding: 4px 7px;
+      border-radius: 6px;
+      background: rgba(255, 214, 124, 0.15);
+      color: var(--money);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .conversion-value { color: #fff4d3; font-size: 16px; font-weight: 900; }
+    .conversion-original { color: var(--muted); font-size: 11px; }
+    .conversion-arrow { margin-left: auto; color: var(--money); transition: transform 0.2s ease; }
+    .conversion.open .conversion-arrow { transform: rotate(180deg); }
+
+    .conversion-detail {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+      margin: 0 12px 12px;
+      padding: 11px 12px;
+      border-top: 1px solid rgba(255, 214, 124, 0.16);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .conversion.open .conversion-detail { display: grid; }
+    .conversion-detail strong { color: #dae7f7; font-weight: 700; }
+    .conversion-note { grid-column: 1 / -1; color: #8495ab; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .tag { padding: 5px 9px; border: 1px solid rgba(104, 232, 192, 0.22); border-radius: 7px; background: rgba(104, 232, 192, 0.09); color: var(--accent); font-size: 11px; }
+
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 20px; }
+    .read { padding: 10px 14px; border-radius: 11px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #08131d; font-size: 12px; font-weight: 800; }
+    .action { padding: 9px 12px; border: 1px solid var(--border); border-radius: 999px; color: #b7c6da; font-size: 12px; }
+
+    .guide {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(16, 26, 42, 0.78);
+    }
+
+    .guide h2 { margin: 0 0 14px; font-size: 19px; }
+    .guide ol { display: grid; gap: 12px; margin: 0; padding-left: 22px; color: #c3d0e1; font-size: 13px; line-height: 1.65; }
+    .guide strong { color: var(--text); }
+
+    .rate-examples {
+      display: grid;
+      gap: 8px;
+      margin-top: 19px;
+      padding-top: 17px;
+      border-top: 1px solid var(--border);
+    }
+
+    .rate-example {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 11px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 12px;
+    }
+
+    .rate-example span { color: var(--muted); }
+    .rate-example strong { color: var(--money); }
+
+    .prototype-note {
+      margin: 17px 0 0;
+      color: #7f91a8;
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 820px) {
+      .preview-head { align-items: flex-start; }
+      .preview-grid { grid-template-columns: 1fr; }
+      .news-card { max-width: 580px; }
+    }
+
+    @media (max-width: 540px) {
+      body { padding: 18px 12px 44px; }
+      .preview-head { align-items: stretch; flex-direction: column; gap: 12px; }
+      .back-link { align-self: flex-start; }
+      .content { padding: 16px; }
+      .conversion-detail { grid-template-columns: 1fr; }
+      .conversion-note { grid-column: auto; }
+      .conversion-original { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="preview-head">
+      <div>
+        <p class="eyebrow">PROTOTYPE / CURRENCY CONVERSION</p>
+        <h1>外貨の日本円換算 表示案</h1>
+        <p>元の価格表記は変更せず、記事カード内に参考の円換算を追加する試作です。本番ページにはまだ反映していません。</p>
+      </div>
+      <a class="back-link" href="/">デイリーニュースへ戻る</a>
+    </header>
+
+    <div class="preview-grid">
+      <article class="news-card">
+        <div class="thumb">
+          <img src="https://static.wixstatic.com/media/1da610_93352029707d4b27bbaf18f52a263372~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png" alt="2026 Maruti Baleno Facelift">
+          <span class="country">🇮🇳 インド</span>
+          <span class="score">関連度 81%</span>
+          <span class="new-badge">NEW</span>
+        </div>
+        <div class="content">
+          <h2 class="title">2026 Maruti Baleno Facelift、<span class="foreign-price">₹6.10 Lakh</span> での発売</h2>
+          <p class="desc">Maruti Suzuki は 2026 Maruti Baleno Facelift を発売した。導入価格は<span class="foreign-price">₹6.10 Lakh</span>であり、Level 2 ADAS や通風シート、CNG-AMT 搭載など新機能が付与されている。</p>
+
+          <section class="conversion" id="conversionBox">
+            <button class="conversion-toggle" id="conversionToggle" type="button" aria-expanded="false" aria-controls="conversionDetail">
+              <span class="conversion-label">円換算</span>
+              <span class="conversion-value">約105万円</span>
+              <span class="conversion-original">₹6.10 Lakh</span>
+              <span class="conversion-arrow" aria-hidden="true">⌄</span>
+            </button>
+            <div class="conversion-detail" id="conversionDetail">
+              <span>現地価格 <strong>610,000 INR</strong></span>
+              <span>参考レート <strong>1 INR = 1.72円</strong></span>
+              <span>換算結果 <strong>1,049,200円</strong></span>
+              <span>レート基準日 <strong>2026-09-05（例）</strong></span>
+              <span class="conversion-note">価格比較用の概算です。税金・輸送費・日本での販売価格は含みません。</span>
+            </div>
+          </section>
+
+          <div class="tags"><span class="tag">AR</span><span class="tag">シート</span><span class="tag">EV</span><span class="tag">安全</span></div>
+          <div class="actions"><span class="read">記事を読む</span><span class="action">☆ お気に入り</span><span class="action">👍 1</span><span class="action">💬 0</span></div>
+        </div>
+      </article>
+
+      <aside class="guide">
+        <h2>本番化する場合の仕組み</h2>
+        <ol>
+          <li><strong>記事の金額を自動検出</strong><br>ドル・ユーロ・人民元・ルピーに加え、LakhやCroreなどの単位も判定します。</li>
+          <li><strong>為替レートは1日1回だけ取得</strong><br>収集PC側でレートを保存し、閲覧のたびに外部APIへ接続しない構成にします。</li>
+          <li><strong>常に概算と明記</strong><br>換算日と計算根拠を開いて確認できるため、固定価格との誤解を防ぎます。</li>
+        </ol>
+
+        <div class="rate-examples" aria-label="対応イメージ">
+          <div class="rate-example"><span>$42,000</span><strong>約657万円</strong></div>
+          <div class="rate-example"><span>€38,500</span><strong>約663万円</strong></div>
+          <div class="rate-example"><span>29.98万元</span><strong>約624万円</strong></div>
+        </div>
+        <p class="prototype-note">このページのレートは表示確認用の仮値です。本番では取得日付きの共通レートファイルを使用します。</p>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const box = document.getElementById("conversionBox");
+    const toggle = document.getElementById("conversionToggle");
+    toggle.addEventListener("click", () => {
+      const open = box.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+  </script>
+</body>
+</html>
