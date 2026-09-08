@@ -26,7 +26,7 @@ def main():
             browser = pw.chromium.launch()
             context = browser.new_context(viewport={'width': 1400, 'height': 1000})
             context.route('https://**', lambda r: r.abort())
-            for name in ['dailynews_client.js', 'dailynews_account.js', 'dailynews_sources.js']:
+            for name in ['dailynews_client.js', 'dailynews_account.js']:
                 stub = "window.accountOpenCount=0;window.dailyNewsAccount={user:{id:'test'},open:()=>window.accountOpenCount++};" if name == 'dailynews_account.js' else ''
                 context.route('**/' + name + '*', lambda r, req, stub=stub: r.fulfill(body=stub, content_type='application/javascript'))
 
@@ -42,6 +42,13 @@ def main():
             page.on('pageerror', lambda e: errors.append(str(e)))
             page.goto(f'http://127.0.0.1:{server.server_port}/' + quote('内装製品デイリーニュース.html') + '?countries=cn&sort=relevance-desc&from=2026-09-01&to=2026-09-07', wait_until='domcontentloaded')
             page.locator('.activity-card').wait_for()
+
+            assert page.locator('.source-list-count').inner_text() == str(page.evaluate('window.DAILYNEWS_CONFIGURED_SOURCES.length'))
+            page.locator('#sourceListButton').click()
+            for source in ['Automotive Interiors World', 'Auto & Design', 'BMWBLOG', 'ル・ボラン']:
+                page.locator('#sourceListSearch').fill(source)
+                assert page.locator('.source-list-source').all_text_contents() == [source]
+            page.locator('.source-list-close').click()
 
             def assert_restored(expected_account_count):
                 page.wait_for_function("document.getElementById('rankingBack').classList.contains('hidden')")
@@ -88,7 +95,7 @@ def main():
             page.locator('#rankingBackBtn').click()
             assert_restored(1)
             assert not errors, errors
-            print('PASS: activity news/idea returns, button/browser back, account-only return, restored filters, cn1585 content')
+            print('PASS: source directory, activity news/idea returns, button/browser back, account-only return, restored filters, cn1585 content')
             browser.close()
     finally:
         server.shutdown()

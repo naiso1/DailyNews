@@ -380,6 +380,26 @@
         "name": "MotorBeam",
         "url": "https://www.motorbeam.com/feed/",
         "country": "インド"
+      },
+      {
+        "name": "Automotive Interiors World",
+        "url": "https://www.automotiveinteriorsworld.com/feed",
+        "country": "欧州"
+      },
+      {
+        "name": "Auto & Design",
+        "url": "https://autodesignmagazine.com/en/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "BMWBLOG",
+        "url": "https://www.bmwblog.com/feed/",
+        "country": "米国"
+      },
+      {
+        "name": "ル・ボラン",
+        "url": "https://levolant.jp/feed/",
+        "country": "日本"
       }
     ],
     "country_settings": {

@@ -2066,7 +2066,14 @@ def fetch_article_text(url):
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
-    main = soup.find("article") or soup.find("main") or soup.body or soup
+    if (urlparse(url).hostname or "").lower().removeprefix("www.") == "automotiveinteriorsworld.com":
+        # This site's navigation contains <article> cards before the actual story.
+        main = soup.select_one("article.type-post .entry-content") or soup.select_one("article.type-post")
+        if main is None:
+            print(f"  [FETCH_SHORT] Article body not found: {url}")
+            return ""
+    else:
+        main = soup.find("article") or soup.find("main") or soup.body or soup
     text = " ".join(main.stripped_strings)
     text = normalize_text(text)
     if len(text) > SUMMARY_HTML_CHARS:

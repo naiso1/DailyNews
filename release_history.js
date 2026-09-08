@@ -3,6 +3,15 @@
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
     date: "2026-09-08",
+    title: "画像付きRSSを4媒体追加",
+    items: [
+      "Automotive Interiors World、Auto & Design、BMWBLOG、ル・ボランを定期収集先に追加しました。",
+      "各媒体5記事で本文取得とRSS画像の表示を確認。画像は外部URLのまま利用します。",
+      "Automotive Interiors Worldでメニューの記事を本文と誤認しないよう、本文の取得位置を調整しました。情報源一覧にも追加媒体を反映しています。",
+    ],
+  },
+  {
+    date: "2026-09-08",
     title: "記事からの戻り先を修正・cn1585の内装情報を補足",
     items: [
       "みんなの動きや通知から記事を開いた後、マイページではなく元の一覧へ戻るよう修正しました。マイページ経由の場合は従来どおりマイページへ戻ります。",

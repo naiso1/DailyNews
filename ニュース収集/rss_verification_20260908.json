@@ -1,0 +1,387 @@
+{
+  "checked_at": "2026-09-08T06:48:24.385632+00:00",
+  "scope": "RSS parsing, sample article extraction and image decoding only",
+  "samples_per_feed": 5,
+  "feeds": [
+    {
+      "name": "Automotive Interiors World",
+      "url": "https://www.automotiveinteriorsworld.com/feed",
+      "passed": true,
+      "samples": [
+        {
+          "title": "Alps Alpine develops 48V detector switch for automotive features",
+          "article_url": "https://www.automotiveinteriorsworld.com/news/ev/alps-alpine-develops-48v-detector-switch-for-automotive-features.html",
+          "date": "2026-09-03",
+          "rss_image_url": "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/Screenshot-2026-09-03-at-15.58.21.png",
+          "article_chars": 1674,
+          "image_status": 200,
+          "image_size": [
+            2175,
+            1218
+          ],
+          "image_format": "PNG",
+          "image_bytes": 528672,
+          "image_variation": 66.74,
+          "passed": true
+        },
+        {
+          "title": "Skoda Peaq features vertically mounted display and Sonos premium sound system",
+          "article_url": "https://www.automotiveinteriorsworld.com/news/infotainment/skoda-peaq-features-vertically-mounted-display-and-sonos-premium-sound-system.html",
+          "date": "2026-09-03",
+          "rss_image_url": "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/020_Skoda_Peaq_3b600b4f-1440x960-1.jpg",
+          "article_chars": 2887,
+          "image_status": 200,
+          "image_size": [
+            2175,
+            1218
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 219892,
+          "image_variation": 84.43,
+          "passed": true
+        },
+        {
+          "title": "Polyblend invests €4m in production of compounds based on recycled plastics",
+          "article_url": "https://www.automotiveinteriorsworld.com/news/materials/polyblend-invests-e4m-in-production-of-compounds-based-on-recycled-plastics.html",
+          "date": "2026-09-03",
+          "rss_image_url": "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/c9a0450-hdr.webp",
+          "article_chars": 1632,
+          "image_status": 200,
+          "image_size": [
+            2175,
+            1218
+          ],
+          "image_format": "WEBP",
+          "image_bytes": 95606,
+          "image_variation": 50.12,
+          "passed": true
+        },
+        {
+          "title": "Yfore debuts integrated occupant and driver monitoring system",
+          "article_url": "https://www.automotiveinteriorsworld.com/news/sensors/yfore-debuts-integrated-occupant-and-driver-monitoring-system.html",
+          "date": "2026-09-03",
+          "rss_image_url": "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/20260828042926EDT_image_1.jpg",
+          "article_chars": 1917,
+          "image_status": 200,
+          "image_size": [
+            2175,
+            1218
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 153523,
+          "image_variation": 50.0,
+          "passed": true
+        },
+        {
+          "title": "E-Con Systems earns IATF 16949: 2016 certification",
+          "article_url": "https://www.automotiveinteriorsworld.com/news/adas/e-con-systems-earns-iatf-16949-2016-certification.html",
+          "date": "2026-09-01",
+          "rss_image_url": "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/e-con-Systems-Is-Now-IATF-16949-Certified-2048x1147-1.jpg",
+          "article_chars": 2167,
+          "image_status": 200,
+          "image_size": [
+            2048,
+            1147
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 215953,
+          "image_variation": 77.68,
+          "passed": true
+        }
+      ],
+      "status": 200,
+      "final_url": "https://www.automotiveinteriorsworld.com/feed",
+      "version": "rss20",
+      "entry_count": 10,
+      "malformed": false
+    },
+    {
+      "name": "Auto & Design",
+      "url": "https://autodesignmagazine.com/en/feed/",
+      "passed": true,
+      "samples": [
+        {
+          "title": "SEEDS OF LIGHT: A JOURNEY THROUGH HOMO FABER 2026",
+          "article_url": "https://autodesignmagazine.com/en/2026/09/seeds-of-light-a-journey-through-homo-faber-2026/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://autodesignmagazine.com/wp-content/uploads/2026/09/Mazda_HomoFaber_2.jpg?x34198",
+          "article_chars": 4614,
+          "image_status": 200,
+          "image_size": [
+            973,
+            728
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 365722,
+          "image_variation": 46.57,
+          "passed": true
+        },
+        {
+          "title": "AUDI A2: FOCUS ON EFFICIENCY",
+          "article_url": "https://autodesignmagazine.com/en/2026/09/audi-a2-focus-on-efficiency/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://autodesignmagazine.com/wp-content/uploads/2026/09/A264390_large.jpg?x34198",
+          "article_chars": 3978,
+          "image_status": 200,
+          "image_size": [
+            1170,
+            877
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 126218,
+          "image_variation": 79.11,
+          "passed": true
+        },
+        {
+          "title": "MITSUBISHI PAJERO: THE REBIRTH OF AN ICON",
+          "article_url": "https://autodesignmagazine.com/en/2026/09/mitsubishi-pajero-the-rebirth-of-an-icon/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://autodesignmagazine.com/wp-content/uploads/2026/09/20260902_1_02.jpg?x34198",
+          "article_chars": 3147,
+          "image_status": 200,
+          "image_size": [
+            1170,
+            780
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 148122,
+          "image_variation": 67.97,
+          "passed": true
+        },
+        {
+          "title": "RANGE ROVER ELECTRIC: IDENTITY COMES FIRST",
+          "article_url": "https://autodesignmagazine.com/en/2026/09/range-rover-electric-identity-comes-first/",
+          "date": "2026-09-05",
+          "rss_image_url": "https://autodesignmagazine.com/wp-content/uploads/2026/09/RANGE-ROVER-ELECTRIC01-02_09_26.jpg?x34198",
+          "article_chars": 2706,
+          "image_status": 200,
+          "image_size": [
+            1170,
+            780
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 77912,
+          "image_variation": 67.46,
+          "passed": true
+        },
+        {
+          "title": "ICONA, BEYOND THE BOUNDARIES OF DESIGN",
+          "article_url": "https://autodesignmagazine.com/en/2026/09/icon-beyond-the-boundaries-of-design/",
+          "date": "2026-09-04",
+          "rss_image_url": "https://autodesignmagazine.com/wp-content/uploads/2026/09/HiPhi-Shuttle.jpg?x34198",
+          "article_chars": 8000,
+          "image_status": 200,
+          "image_size": [
+            1170,
+            777
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 139832,
+          "image_variation": 69.63,
+          "passed": true
+        }
+      ],
+      "status": 200,
+      "final_url": "https://autodesignmagazine.com/en/feed/",
+      "version": "rss20",
+      "entry_count": 10,
+      "malformed": false
+    },
+    {
+      "name": "BMWBLOG",
+      "url": "https://www.bmwblog.com/feed/",
+      "passed": true,
+      "samples": [
+        {
+          "title": "BMW’s New 3 Series Borrows Its EV Brain for a Gas Engine",
+          "article_url": "https://www.bmwblog.com/2026/09/07/bmw-3-series-m350-xdrive-chassis-specs/",
+          "date": "2026-09-08",
+          "rss_image_url": "https://cdn.bmwblog.com/wp-content/uploads/2026/09/2027-bmw-m350-review-32-830x553.jpg",
+          "article_chars": 7917,
+          "image_status": 200,
+          "image_size": [
+            830,
+            553
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 64169,
+          "image_variation": 63.72,
+          "passed": true
+        },
+        {
+          "title": "This BMW M350 Might Be Better Than the M340i Ever Was – First Drive Review",
+          "article_url": "https://www.bmwblog.com/2026/09/07/bmw-m350-xdrive-prototype-first-drive-review/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://cdn.bmwblog.com/wp-content/uploads/2026/09/2027-bmw-m350-review-57-830x553.jpg",
+          "article_chars": 8000,
+          "image_status": 200,
+          "image_size": [
+            830,
+            553
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 44937,
+          "image_variation": 75.13,
+          "passed": true
+        },
+        {
+          "title": "2028 BMW M5 Hides It Neue Face During High-Speed Test: Video",
+          "article_url": "https://www.bmwblog.com/2026/09/07/2028-bmw-m5-lci-spy-video/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://cdn.bmwblog.com/wp-content/uploads/2026/06/2027-bmw-m5-facelift-spotted-00-830x553.jpg",
+          "article_chars": 3831,
+          "image_status": 200,
+          "image_size": [
+            830,
+            553
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 59181,
+          "image_variation": 47.16,
+          "passed": true
+        },
+        {
+          "title": "2028 BMW iX1 Spotted Up Close Hiding Baby iX3 Design",
+          "article_url": "https://www.bmwblog.com/2026/09/07/2028-bmw-ix1-spied-up-close/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://cdn.bmwblog.com/wp-content/uploads/2026/09/2028-BMW-iX1-spy-photo-830x830.jpg",
+          "article_chars": 4995,
+          "image_status": 200,
+          "image_size": [
+            830,
+            830
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 112668,
+          "image_variation": 53.24,
+          "passed": true
+        },
+        {
+          "title": "The Audi A2 Is Back, And BMW Doesn’t Have A Rival (Yet)",
+          "article_url": "https://www.bmwblog.com/2026/09/07/audi-a2-e-tron-details-specs-photos/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://cdn.bmwblog.com/wp-content/uploads/2026/09/2027-Audi-A2-E-Tron-1-830x500.jpg",
+          "article_chars": 5168,
+          "image_status": 200,
+          "image_size": [
+            830,
+            500
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 37503,
+          "image_variation": 87.59,
+          "passed": true
+        }
+      ],
+      "status": 200,
+      "final_url": "https://www.bmwblog.com/feed/",
+      "version": "rss20",
+      "entry_count": 15,
+      "malformed": false
+    },
+    {
+      "name": "ル・ボラン",
+      "url": "https://levolant.jp/feed/",
+      "passed": true,
+      "samples": [
+        {
+          "title": "【次期BMW 3シリーズ】直6は不滅。M350 xDriveの南仏テスト公開、新機能「ドリフト・モーメント」が呼び覚ますFRの真髄",
+          "article_url": "https://levolant.jp/2026/09/08/452973/",
+          "date": "2026-09-08",
+          "rss_image_url": "https://levolant.jp/wp-content/uploads/2026/09/17_LV_260908_BMW_3series.jpg",
+          "article_chars": 2759,
+          "image_status": 200,
+          "image_size": [
+            1280,
+            853
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 236878,
+          "image_variation": 82.66,
+          "passed": true
+        },
+        {
+          "title": "【画像30枚】アウディ本気の戦略EV「A2 e-tron」全容公開。本国3.8万ユーロ〜、航続646kmが示すプレミアムの解答",
+          "article_url": "https://levolant.jp/2026/09/08/452939/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://levolant.jp/wp-content/uploads/2026/09/14_LV_260908_audi_a2_e-tron.jpg",
+          "article_chars": 2828,
+          "image_status": 200,
+          "image_size": [
+            1280,
+            853
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 140115,
+          "image_variation": 86.34,
+          "passed": true
+        },
+        {
+          "title": "納車後も深化する安全哲学。ボルボ「EX90」等へ危険先読みと空間オーディオを導入",
+          "article_url": "https://levolant.jp/2026/09/07/451575/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://levolant.jp/wp-content/uploads/2026/08/260827_Volvo_ConnectedSafety_03.jpg",
+          "article_chars": 2015,
+          "image_status": 200,
+          "image_size": [
+            1280,
+            853
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 71730,
+          "image_variation": 28.27,
+          "passed": true
+        },
+        {
+          "title": "名車マークVIの哲学を現代へ。ベントレー、クルー工場80周年を祝う世界に一台の「コンチネンタルGTアズール」",
+          "article_url": "https://levolant.jp/2026/09/07/451709/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://levolant.jp/wp-content/uploads/2026/08/260828_RR_Bentley_80th_04.jpg",
+          "article_chars": 2359,
+          "image_status": 200,
+          "image_size": [
+            1280,
+            853
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 352020,
+          "image_variation": 54.14,
+          "passed": true
+        },
+        {
+          "title": "【ポルシェ・マカン】極限の闘争から静寂の森へ。元世界女王がフルEVに見出した「内燃機関なき」ポルシェの歓び",
+          "article_url": "https://levolant.jp/2026/09/07/452206/",
+          "date": "2026-09-07",
+          "rss_image_url": "https://levolant.jp/wp-content/uploads/2026/09/260901_Macan_in_Estonia_01.jpg",
+          "article_chars": 2279,
+          "image_status": 200,
+          "image_size": [
+            1280,
+            853
+          ],
+          "image_format": "JPEG",
+          "image_bytes": 257192,
+          "image_variation": 49.96,
+          "passed": true
+        }
+      ],
+      "status": 200,
+      "final_url": "https://levolant.jp/feed/",
+      "version": "rss20",
+      "entry_count": 10,
+      "malformed": false
+    }
+  ],
+  "browser_image_check": {
+    "browser": "141.0.7390.37",
+    "referrer_policy": "no-referrer",
+    "tested": 20,
+    "passed": 20
+  },
+  "notes": [
+    "Five recent samples per feed; not a guarantee for future articles.",
+    "Article previews were manually checked against their own stories.",
+    "20 images were visually checked in Chromium using the original RSS URLs.",
+    "No collection, LLM, content regeneration or mail was run."
+  ]
+}

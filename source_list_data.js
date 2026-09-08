@@ -381,5 +381,25 @@ window.DAILYNEWS_CONFIGURED_SOURCES = [
     "country": "インド",
     "name": "MotorBeam",
     "rssUrl": "https://www.motorbeam.com/feed/"
+  },
+  {
+    "country": "欧州",
+    "name": "Automotive Interiors World",
+    "rssUrl": "https://www.automotiveinteriorsworld.com/feed"
+  },
+  {
+    "country": "欧州",
+    "name": "Auto & Design",
+    "rssUrl": "https://autodesignmagazine.com/en/feed/"
+  },
+  {
+    "country": "米国",
+    "name": "BMWBLOG",
+    "rssUrl": "https://www.bmwblog.com/feed/"
+  },
+  {
+    "country": "日本",
+    "name": "ル・ボラン",
+    "rssUrl": "https://levolant.jp/feed/"
   }
 ];
