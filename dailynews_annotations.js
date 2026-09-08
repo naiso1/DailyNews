@@ -107,17 +107,19 @@
     }).join("");
   }
 
-  function sourceLink(item) {
-    if (!item.sourceExcerpt) return "";
+  function articleUrl(item) {
     try {
       const url = new URL(item.url);
       if (!/^https?:$/.test(url.protocol)) return "";
-      const encode = text => encodeURIComponent(text).replace(/-/g, "%2D");
-      url.hash = `:~:text=${encode(item.sourceExcerpt)}${item.sourceExcerptEnd ? `,${encode(item.sourceExcerptEnd)}` : ""}`;
-      return `<a class="source-excerpt-link" href="${escape(url.href)}" target="_blank" rel="noopener" title="対応ブラウザでは原文の該当箇所を強調表示します">原文の該当箇所 ↗</a>`;
+      // Only verified source excerpts are eligible; never infer a quote from the summary.
+      if (item.sourceExcerpt) {
+        const encode = text => encodeURIComponent(text).replace(/-/g, "%2D");
+        url.hash = `:~:text=${encode(item.sourceExcerpt)}${item.sourceExcerptEnd ? `,${encode(item.sourceExcerptEnd)}` : ""}`;
+      }
+      return url.href;
     } catch (_) { return ""; }
   }
 
-  root.DailyNewsAnnotations = { extractPrices, formatYen, renderCurrency, sourceLink };
+  root.DailyNewsAnnotations = { extractPrices, formatYen, renderCurrency, articleUrl };
   if (typeof module !== "undefined") module.exports = root.DailyNewsAnnotations;
 })(typeof window === "undefined" ? globalThis : window);

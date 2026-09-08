@@ -1,6 +1,6 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
-const { extractPrices, renderCurrency, sourceLink } = require("../dailynews_annotations.js");
+const { extractPrices, renderCurrency, articleUrl } = require("../dailynews_annotations.js");
 
 test("Indian scales, grouping, ranges, and duplicate title/description prices", () => {
   assert.equal(extractPrices("₹6.10 Lakh", "in")[0].amount, 610000);
@@ -50,9 +50,18 @@ test("rate age, missing rates, exact conversion, and escaped output", () => {
 });
 
 test("verified text fragment preserves query and encodes delimiter characters", () => {
-  const html = sourceLink({url:"https://example.com/article?page=2#old", sourceExcerpt:"table-a, & b", sourceExcerptEnd:"欲しかった。"});
-  assert.match(html, /page=2#:~:text=table%2Da%2C%20%26%20b,/);
-  assert.match(html, /rel="noopener"/);
-  assert.equal(sourceLink({url:"javascript:alert(1)", sourceExcerpt:"x"}), "");
-  assert.equal(sourceLink({url:"https://example.com"}), "");
+  const item = {url:"https://example.com/article?page=2#old", sourceExcerpt:"table-a, & b", sourceExcerptEnd:"欲しかった。"};
+  const href = articleUrl(item);
+  assert.equal(href, "https://example.com/article?page=2#:~:text=table%2Da%2C%20%26%20b," + encodeURIComponent(item.sourceExcerptEnd));
+  assert.equal(item.url, "https://example.com/article?page=2#old");
+  assert.equal(articleUrl({url:"https://example.com/a", sourceExcerpt:"exact quote"}), "https://example.com/a#:~:text=exact%20quote");
+});
+
+test("ordinary article URLs are unchanged and unsafe URLs are rejected", () => {
+  const url = "https://example.com/article?source=rss&page=2#section";
+  assert.equal(articleUrl({url}), url);
+  assert.equal(articleUrl({url, sourceExcerpt:""}), url);
+  for (const url of ["javascript:alert(1)", "data:text/html,test", "file:///C:/test", "not a URL", undefined]) {
+    assert.equal(articleUrl({url, sourceExcerpt:"x"}), "");
+  }
 });

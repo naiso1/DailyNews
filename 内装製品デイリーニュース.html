@@ -650,10 +650,9 @@ header.site-header {
 .currency-label { color: #ffd67c; font-size: 10px; margin-right: 8px; }
 .currency-original { color: var(--muted); font-size: 10px; margin-left: 8px; }
 .currency-detail { display: grid; gap: 6px; margin: 0 12px; padding: 10px 0 12px; border-top: 1px solid rgba(255,214,124,0.16); color: var(--muted); font-size: 11px; line-height: 1.6; overflow-wrap: anywhere; }
-.currency-detail a, .source-excerpt-link { color: #9ccaff; }
+.currency-detail a { color: #9ccaff; }
 .currency-detail small { font-size: 10px; }
 .currency-unavailable { color: var(--muted); font-size: 11px; }
-.source-excerpt-link { align-self: flex-start; font-size: 11px; text-underline-offset: 3px; }
 
 .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .card-tag {
@@ -1525,11 +1524,11 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     <script src="source_list_data.js?v=20260903-2"></script>
     <script type="module" src="dailynews_client.js?v=20260904-3"></script>
     <script type="module" src="dailynews_account.js?v=20260904-3"></script>
-    <script type="module" src="dailynews_activity.js?v=20260904-6"></script>
+    <script type="module" src="dailynews_activity.js?v=20260908-2"></script>
     <script type="module" src="dailynews_sources.js?v=20260903-2"></script>
-    <script type="module" src="release_history.js?v=20260908-1"></script>
+    <script type="module" src="release_history.js?v=20260908-2"></script>
     <script src="exchange_rates.js?v=20260908-1"></script>
-    <script src="dailynews_annotations.js?v=20260908-1"></script>
+    <script src="dailynews_annotations.js?v=20260908-2"></script>
 
     <script>
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
@@ -2715,6 +2714,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const body = document.getElementById(bodyId);
             const list = document.getElementById(listId);
             if (!toggle || !body) return;
+            // Recompute the three-card preview after wrapping or font sizes change.
+            if (list && typeof ResizeObserver !== "undefined") {
+                new ResizeObserver(() => updateRankingHeight(body, list)).observe(list);
+            }
             toggle.addEventListener("click", () => {
                 const isCollapsed = body.classList.toggle("collapsed");
                 toggle.textContent = isCollapsed ? "開く" : "閉じる";
@@ -3121,7 +3124,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             <div class="content">
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
-                ${window.DailyNewsAnnotations?.sourceLink(n) || ""}
                 ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
                 ${n.summary ? `
                 <div class="summary-wrapper">
@@ -3132,7 +3134,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                 
                 <div class="actions">
-                    <a class="btn" href="${n.url}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
+                    <a class="btn" href="${escapeHtml(window.DailyNewsAnnotations?.articleUrl(n) ?? n.url)}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
                     
                     ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
                     <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
