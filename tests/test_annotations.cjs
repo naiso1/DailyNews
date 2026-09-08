@@ -1,0 +1,58 @@
+const { test } = require("node:test");
+const assert = require("node:assert/strict");
+const { extractPrices, renderCurrency, sourceLink } = require("../dailynews_annotations.js");
+
+test("Indian scales, grouping, ranges, and duplicate title/description prices", () => {
+  assert.equal(extractPrices("₹6.10 Lakh", "in")[0].amount, 610000);
+  assert.equal(extractPrices("INR 1.2 crore", "in")[0].amount, 12000000);
+  assert.equal(extractPrices("₹6,10,000", "in")[0].amount, 610000);
+  assert.equal(extractPrices("10万ルピー", "in")[0].amount, 100000);
+  for (const raw of ["₹10.66〜18.49Lakh", "₹10.66 - ₹18.49 Lakhs", "10.66〜18.49万ルピー"]) {
+    const p = extractPrices(raw, "in")[0];
+    const scale = raw.includes("万") ? 1e4 : 1e5;
+    assert.equal(p.amount, 10.66 * scale, raw);
+    assert.equal(p.end, 18.49 * scale, raw);
+  }
+  assert.equal(extractPrices("₹6.10 Lakh。価格は₹6.10 Lakh。", "in").length, 1);
+});
+
+test("explicit currencies and regional ambiguity", () => {
+  for (const [raw, code, amount] of [
+    ["29.98万元", "CNY", 299800], ["USD 42,000", "USD", 42000],
+    ["€38,500", "EUR", 38500], ["£100", "GBP", 100],
+    ["2億ウォン", "KRW", 2e8], ["A$35,000", "AUD", 35000],
+    ["1.5 million USD", "USD", 1.5e6], ["US$100", "USD", 100],
+  ]) {
+    assert.equal(extractPrices(raw)[0]?.code, code, raw);
+    assert.equal(extractPrices(raw)[0]?.amount, amount, raw);
+  }
+  assert.equal(extractPrices("$100", "us")[0].inferred, true);
+  for (const raw of ["$100", "10ドル", "¥100", "￥100", "100円", "Rs 100", "ルピー100", "C$100と$200", "2次元", "€1.234,56", "€1,2", "ABCUSD123", "₹2 lakhsabc"]) {
+    assert.ok(!extractPrices(raw, "jp").some(p => p.code === "USD" || p.code === "INR" || p.code === "EUR" || p.code === "JPY" || p.code === "CNY"), raw);
+  }
+  assert.equal(extractPrices("USD 100〜EUR 200").length, 0);
+  for (const raw of ["-100ドル", "1億2000万ドル", "1 234ドル", "Rs 12,34", "€1.234"]) {
+    assert.equal(extractPrices(raw, raw.startsWith("Rs") ? "in" : "us").length, 0, raw);
+  }
+});
+
+test("rate age, missing rates, exact conversion, and escaped output", () => {
+  const snapshot = { base: "JPY", date: "2026-09-07", rates: { INR: 1.72 } };
+  const item = { title: "₹6.10 Lakh", country: "in" };
+  const output = renderCurrency(item, snapshot, new Date("2026-09-08T12:00:00+09:00"));
+  assert.match(output, /104\.9万円/);
+  assert.match(output, /1,049,200円/);
+  assert.match(output, /2026-09-07/);
+  assert.match(renderCurrency(item, snapshot, new Date("2026-09-20")), /取得できていません/);
+  assert.equal(renderCurrency({ title: "100円" }, snapshot), "");
+  assert.match(renderCurrency(item, undefined), /取得できていません/);
+  assert.equal(renderCurrency({title:"USD 100"}, snapshot, new Date("2026-09-08")), "");
+});
+
+test("verified text fragment preserves query and encodes delimiter characters", () => {
+  const html = sourceLink({url:"https://example.com/article?page=2#old", sourceExcerpt:"table-a, & b", sourceExcerptEnd:"欲しかった。"});
+  assert.match(html, /page=2#:~:text=table%2Da%2C%20%26%20b,/);
+  assert.match(html, /rel="noopener"/);
+  assert.equal(sourceLink({url:"javascript:alert(1)", sourceExcerpt:"x"}), "");
+  assert.equal(sourceLink({url:"https://example.com"}), "");
+});

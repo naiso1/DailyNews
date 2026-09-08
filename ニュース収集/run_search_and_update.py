@@ -1001,6 +1001,10 @@ def main():
             else:
                 log("[WARN] GEMINI_API_KEY not set; skip Gemini image generation.")
             generate_source_list_data()
+            run_cmd(
+                [sys.executable, "-u", str(ROOT / "update_exchange_rates.py")],
+                "update_exchange_rates", LOG_FILE,
+            )
             run_git_sync(LOG_FILE)
             run_server_deploy(LOG_FILE)
             run_succeeded = True

@@ -71,6 +71,12 @@ TAG_RULES = [
 PLACEHOLDER_IMG = "images/idea_dummy.svg"
 
 ITEM_OVERRIDES = {
+    "https://news.yahoo.co.jp/articles/fac5ea53b286b35b74c62279370f5b24f40916c3?source=rss": {
+        "title": "新型エルグランド、伝統工芸を思わせる内装と後席の細部への評価",
+        "desc": "新型日産エルグランドのGグレードは、刺子を思わせる菱形ステッチをシートやドアトリムに配し、人工レザーのテーラーフィットを採用する。一方、筆者は後席まわりの見栄えをアルファード／ヴェルファイアと比較し、テーブルやスイッチ、室内灯などの細部には、最上位ミニバンとしてさらにこだわりが欲しかったと指摘している。",
+        "sourceExcerpt": "センターテーブルやスイッチ類、室内灯などのディテールにも、",
+        "sourceExcerptEnd": "こだわりが欲しかったようには思う。",
+    },
     "https://www.sohu.com/a/994292210_122645970": {
         "title": "起亜EV9コンセプト、海をモチーフにしたサステナブル内装",
         "desc": "起亜のEV9コンセプトは、広大な海を着想源にしたエクステリアと、静かな空の青を取り入れた車内空間を組み合わせ、自然に近い安らぎを演出する。廃漁網由来の床材や再生PETボトル由来のシート・ドア加飾など、持続可能素材の活用も特徴。",
@@ -1361,6 +1367,9 @@ def main():
         if any(k in it["img"] for k in ["unsplash", "placeholder", "thumb_default"]):
             note = "※イメージ画像"
         extra_lines = []
+        for field in ("sourceExcerpt", "sourceExcerptEnd"):
+            if it.get(field):
+                extra_lines.append(f'                {field}: "{js_escape(it[field])}",')
         if it.get("interiorScore") is not None:
             extra_lines.append(f'                interiorScore: {int(it["interiorScore"])},')
         if it.get("interiorReason"):

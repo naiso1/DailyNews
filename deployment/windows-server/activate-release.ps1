@@ -51,6 +51,8 @@ if (-not (Test-Path -LiteralPath $releasePath)) {
             $sourceHtml,
             (Join-Path $staging "source-list-preview.html"),
             (Join-Path $staging "currency-conversion-preview.html"),
+            (Join-Path $staging "exchange_rates.js"),
+            (Join-Path $staging "dailynews_annotations.js"),
             (Join-Path $staging "source_list_data.js"),
             (Join-Path $staging "news_data.js"),
             (Join-Path $staging "insights_data.js"),

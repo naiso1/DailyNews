@@ -1811,10 +1811,13 @@ def title_looks_incomplete(text):
 
 
 def call_llm_text(prompt):
+    from summary_grounding import SUMMARY_GROUNDING_RULES
+
     payload = {
         "model": LLM_MODEL,
         "reasoning_effort": LLM_REASONING_EFFORT,
         "messages": [
+            {"role": "system", "content": SUMMARY_GROUNDING_RULES},
             {"role": "user", "content": prompt},
             {"role": "assistant", "content": "<think>\n</think>\n"},
         ],
@@ -2292,6 +2295,8 @@ def summarize_article(title, content, url, country=""):
     summary_title = normalize_japanese_spacing(summary_title)
     summary_body = normalize_japanese_spacing(summary_body)
     final_source_text = f"{title} {content} {html_text}"
+    from summary_grounding import reverses_equipment_criticism
+
     if not summary_matches_source(
         f"{summary_title} {summary_body}", final_source_text, title=title
     ):
@@ -2309,6 +2314,17 @@ def summarize_article(title, content, url, country=""):
             summary_body = normalize_text(content)
             if summary_body and not ends_with_sentence(summary_body):
                 summary_body += "."
+    if reverses_equipment_criticism(f"{summary_title}。{summary_body}", final_source_text):
+        print(f"  [SUMMARY_POLARITY_REJECTED] 装備への批評が肯定へ反転: {title[:50]}")
+        repaired_title, repaired_body = build_source_faithful_japanese_summary(title, content, html_text)
+        if repaired_title and repaired_body and not reverses_equipment_criticism(
+            f"{repaired_title}。{repaired_body}", final_source_text
+        ):
+            summary_title, summary_body = repaired_title, repaired_body
+        else:
+            # Keep grounded source text when a rewrite still reverses the criticism.
+            summary_title = trim_title_safely(normalize_text(title), SUMMARY_TITLE_LIMIT)
+            summary_body = trim_to_sentence(normalize_text(content), SUMMARY_CONTENT_LIMIT)
     summary_title = normalize_known_brand_names(summary_title)
     summary_body = normalize_known_brand_names(summary_body)
     _summary_cache[cache_key] = (summary_title, summary_body)
