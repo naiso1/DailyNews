@@ -1781,11 +1781,9 @@ def trim_title_safely(text, limit):
         and sentence.endswith(("。", "！", "？", "!", "?"))
     ):
         return sentence.rstrip("。")
-    for separator in ("、", "：", ":", "／", "/", " - ", " "):
-        idx = s.rfind(separator, max(12, limit // 2), limit)
-        if idx != -1:
-            return s[:idx].rstrip("、,：:／/- ").strip()
-    return s[:limit].rstrip("、,：:／/- ").strip()
+    # A slightly long complete headline is safer than slicing a date or model name.
+    # LLM compaction, not character slicing, enforces the preferred title length.
+    return s
 
 
 def has_suspicious_truncation(text):
@@ -1800,6 +1798,8 @@ def has_suspicious_truncation(text):
 def title_looks_incomplete(text):
     s = normalize_text(text)
     if has_suspicious_truncation(s):
+        return True
+    if re.search(r"\d{1,2}月\d{1,2}$", s):
         return True
     if s.endswith(("には", "では", "とは", "から", "より", "および", "及び", "の", "と", "や", "を", "が", "は", "に", "へ", "で")):
         return True
@@ -1865,6 +1865,8 @@ def compact_title_with_llm(source_title, source_content, current_title):
 
 
 def compact_summary_with_llm(source_title, source_content, current_summary):
+    from summary_grounding import summary_omits_interior_details
+
     best_candidate = ""
     for attempt in range(2):
         prompt = (
@@ -1896,6 +1898,7 @@ def compact_summary_with_llm(source_title, source_content, current_summary):
             and _is_valid_japanese(candidate)
             and ends_with_sentence(candidate)
             and not has_suspicious_truncation(candidate)
+            and not summary_omits_interior_details(candidate, source_content)
         ):
             if len(candidate) > len(best_candidate):
                 best_candidate = candidate
@@ -1984,6 +1987,8 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
 
 def build_source_faithful_japanese_summary(title, content, html_text=""):
     """英語原文へ戻さず、原文の事実だけを使った日本語要約へ復旧する。"""
+    from summary_grounding import summary_omits_interior_details
+
     source_title = normalize_text(title)
     source_content = normalize_text(content)
     article_excerpt = normalize_text(html_text)[:2500]
@@ -2017,6 +2022,10 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
                 continue
         candidate_title = trim_title_safely(candidate_title, SUMMARY_TITLE_LIMIT)
         candidate_body = trim_to_sentence(candidate_body, SUMMARY_CONTENT_LIMIT)
+        if title_looks_incomplete(candidate_title) or summary_omits_interior_details(
+            candidate_body, f"{source_content} {article_excerpt}"
+        ):
+            continue
         if candidate_body and not ends_with_sentence(candidate_body):
             candidate_body += "。"
         return candidate_title, candidate_body
@@ -2031,6 +2040,10 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
     if _is_valid_japanese(translated_title) and _is_valid_japanese(translated_body):
         translated_title = trim_title_safely(translated_title, SUMMARY_TITLE_LIMIT)
         translated_body = trim_to_sentence(translated_body, SUMMARY_CONTENT_LIMIT)
+        if title_looks_incomplete(translated_title) or summary_omits_interior_details(
+            translated_body, f"{source_content} {article_excerpt}"
+        ):
+            return "", ""
         if translated_body and not ends_with_sentence(translated_body):
             translated_body += "。"
         return translated_title, translated_body
@@ -2074,7 +2087,7 @@ def summarize_article(title, content, url, country=""):
     if not USE_LLM:
         fallback_title = normalize_text(title)
         fallback_body = normalize_text(content)
-        fallback_title = trim_to_sentence(fallback_title, SUMMARY_TITLE_LIMIT)
+        fallback_title = trim_title_safely(fallback_title, SUMMARY_TITLE_LIMIT)
         fallback_body = trim_to_sentence(fallback_body, SUMMARY_CONTENT_LIMIT)
         if fallback_body and not ends_with_sentence(fallback_body):
             fallback_body = fallback_body + "。"
@@ -2247,15 +2260,23 @@ def summarize_article(title, content, url, country=""):
         if compact_title:
             summary_title = compact_title
 
-    if len(summary_body) > SUMMARY_CONTENT_LIMIT or has_suspicious_truncation(summary_body):
+    from summary_grounding import summary_omits_interior_details
+
+    missing_interior = summary_omits_interior_details(summary_body, source_text)
+    if len(summary_body) > SUMMARY_CONTENT_LIMIT or has_suspicious_truncation(summary_body) or missing_interior:
         compact_body = compact_summary_with_llm(title, f"{content} {html_text}", summary_body)
         if compact_body:
             summary_body = compact_body
+        elif missing_interior:
+            print(f"  [SUMMARY_INTERIOR_REPAIR_FAILED] 内装の具体情報を補う再要約に失敗: {title[:50]}")
 
     if len(summary_title) > SUMMARY_TITLE_LIMIT:
         summary_title = trim_title_safely(summary_title, SUMMARY_TITLE_LIMIT)
     if len(summary_body) > SUMMARY_CONTENT_LIMIT:
-        summary_body = trim_to_sentence(summary_body, SUMMARY_CONTENT_LIMIT)
+        shortened = trim_to_sentence(summary_body, SUMMARY_CONTENT_LIMIT)
+        # Keep the complete summary if a length-only cut would discard interior facts.
+        if not summary_omits_interior_details(shortened, source_text):
+            summary_body = shortened
     if has_suspicious_truncation(summary_title):
         summary_title = summary_title.rstrip(".,、,：:／/・ ").strip()
     if has_suspicious_truncation(summary_body):

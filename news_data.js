@@ -108991,12 +108991,14 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "cn1585",
-        title: "Xiaomiは、電動ポップアップルーフを備えたSkynomad N90 Maxを9月7",
-        desc: "Xiaomiは9月7日にSkynomad N90 Maxを発売し、39,700ドルから販売を開始します。",
+        title: "小米Skynomad N90 Max発表、可動式コンソールと車中泊仕様",
+        desc: "小米の7人乗りEREV「Skynomad N90 Max」は、レール上を移動するセンターコンソールに9L冷蔵庫を内蔵。車内は3色展開で、16.1インチ画面とHyperOSを採用し、2＋2＋3席で11通りの空間レイアウトに対応する。前席・2列目にはマッサージ、通風、ヒーター機能を備えたゼログラビティシートの選択肢も用意。標準Maxは26.99万元、電動ポップアップルーフを備えるExplorer Editionは29.99万元。",
         url: "https://carnewschina.com/2026/09/07/xiaomi-launches-skynomad-n90-max-featuring-a-native-electric-pop-up-roof-cabin/",
+        sourceExcerpt: "The central island is a movable, rail-mounted unit",
+        sourceExcerptEnd: "multiple ecological expansion interfaces.",
         source: "CarNewsChina - All",
         date: "2026-09-07",
-        tags: ["EV"],
+        tags: ["HMI", "ディスプレイ", "センターコンソール", "シート", "EV"],
     
         interiorScore: 78,
         interiorReason: "electric pop-up roof cabin is a major interior/UX feature; image shows the cabin",

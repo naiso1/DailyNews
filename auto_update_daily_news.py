@@ -71,6 +71,13 @@ TAG_RULES = [
 PLACEHOLDER_IMG = "images/idea_dummy.svg"
 
 ITEM_OVERRIDES = {
+    "https://carnewschina.com/2026/09/07/xiaomi-launches-skynomad-n90-max-featuring-a-native-electric-pop-up-roof-cabin/": {
+        "title": "小米Skynomad N90 Max発表、可動式コンソールと車中泊仕様",
+        "desc": "小米の7人乗りEREV「Skynomad N90 Max」は、レール上を移動するセンターコンソールに9L冷蔵庫を内蔵。車内は3色展開で、16.1インチ画面とHyperOSを採用し、2＋2＋3席で11通りの空間レイアウトに対応する。前席・2列目にはマッサージ、通風、ヒーター機能を備えたゼログラビティシートの選択肢も用意。標準Maxは26.99万元、電動ポップアップルーフを備えるExplorer Editionは29.99万元。",
+        "tags": ["HMI", "ディスプレイ", "センターコンソール", "シート", "EV"],
+        "sourceExcerpt": "The central island is a movable, rail-mounted unit",
+        "sourceExcerptEnd": "multiple ecological expansion interfaces.",
+    },
     "https://news.yahoo.co.jp/articles/fac5ea53b286b35b74c62279370f5b24f40916c3?source=rss": {
         "title": "新型エルグランド、伝統工芸を思わせる内装と後席の細部への評価",
         "desc": "新型日産エルグランドのGグレードは、刺子を思わせる菱形ステッチをシートやドアトリムに配し、人工レザーのテーラーフィットを採用する。一方、筆者は後席まわりの見栄えをアルファード／ヴェルファイアと比較し、テーブルやスイッチ、室内灯などの細部には、最上位ミニバンとしてさらにこだわりが欲しかったと指摘している。",

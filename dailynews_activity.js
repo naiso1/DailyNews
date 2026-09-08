@@ -318,9 +318,9 @@ function openActivityTarget(itemId) {
   setActivityDrawer(false);
   const item = activityItemIndex().get(String(itemId));
   if (item?.type === "idea" && window.showIdeaItem) {
-    window.showIdeaItem(item.targetId, true);
+    window.showIdeaItem(item.targetId);
   } else if (window.showNewsItem) {
-    window.showNewsItem(item?.targetId || itemId, false, true);
+    window.showNewsItem(item?.targetId || itemId);
   }
   window.setTimeout(() => {
     const card = document.getElementById(`card-${item?.targetId || itemId}`)
