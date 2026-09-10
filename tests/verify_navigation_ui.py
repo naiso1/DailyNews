@@ -106,6 +106,8 @@ def main():
                 card.wait_for()
                 assert title_term in card.locator('.title').inner_text()
                 assert summary_term in card.locator('.desc').inner_text()
+                assert '#:~:text=' in card.locator('a.btn').get_attribute('href')
+                assert card.locator('a.btn').inner_text() == '記事を読む'
                 page.locator('#rankingBackBtn').click()
                 assert_restored(1)
             assert not errors, errors

@@ -1385,6 +1385,13 @@ def main():
     news_text = read_text_any(NEWS_PATH)
     existing_urls, max_ids = parse_existing_news(news_text)
 
+    if not args.dry_run:
+        from ニュース収集.source_highlights import enrich_items
+        # Only newly published rows: never re-fetch the entire news archive.
+        highlight_targets = [it for it in items if it["url"] not in existing_urls]
+        if highlight_targets:
+            enrich_items(highlight_targets)
+
     new_items = []
     for it in items:
         if it["url"] in existing_urls:

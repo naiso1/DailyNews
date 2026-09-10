@@ -48,6 +48,21 @@ python -u google_search_script.py
 - `sheet2_llm_targets.csv` : LLM判定済み + 画像URLありの抽出結果
 - `rss_feed_list.csv` : RSS一覧の確認用
 
+## 原文の該当箇所へのリンク
+
+- 通常の `run_search_and_update.py` 実行では、`auto_update_daily_news.py` の公開前処理で新規記事だけを確認します。収集スクリプト単体では公開用リンクはまだ作りません。
+- 原文の表示用本文から、要約と共通する内装分野・固有名詞などを持つ短い箇所を選び、`sourceExcerpt` / `sourceExcerptEnd` を保存します。日本語要約を逆翻訳して引用することはありません。全要約文の意味的な裏付けを保証する処理ではありません。
+- ボタンの名前は「記事を読む」のままです。ブラウザのテキストフラグメント機能を使用するため、リンク先の更新やJavaScript、ブラウザ側の制約で表示されない場合があります。
+- 本文を取得できない記事、動画のみの記事、対応箇所を確認できない記事は通常リンクを残します。記事や国別件数を減らしません。
+- 追加のLLM・画像生成は行いません。取得は1記事3MiB以内、短いタイムアウト付きで、確認結果のみ `source_highlights.json` に保存して再利用します。HTML・画像そのものは保存しません。`--dry-run` の公開処理では通信も保存もしません。
+- 過去分は対象の記事日付を指定して確認できます。実行日とは異なり、9月10日の実行分は記事日付が9月9日です。以下はニュースの再収集・要約再生成・メール配信を行いません。
+
+```powershell
+python -B -u ニュース収集/backfill_source_highlights.py --date 2026-09-09 --windows-proxy --report ニュース収集/logs/source-highlights-check.json
+```
+
+公開用の `news_data.js` に反映する場合のみ `--apply` を付けます。その後は通常のコミット・サーバー配信で公開してください。既に指定済みの記事は上書きしません。
+
 ## RSS追加前の取得テスト
 
 `tests/verify_rss_sources.py` で候補のRSS・記事本文・画像を少数だけ確認できます。

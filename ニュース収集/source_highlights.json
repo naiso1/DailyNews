@@ -1,0 +1,405 @@
+{
+  "https://news.yahoo.co.jp/articles/264e1ce5c4be7bb56043f9d9f11519d444064d3f?source=rss": {
+    "fingerprint": "799cffac2dadabfdfc100267be2954de49ff9f6dc043477609a0489e6c28cb1e",
+    "checkedAt": "2026-09-10T00:55:06.448775+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/264e1ce5c4be7bb56043f9d9f11519d444064d3f?source=rss",
+    "sourceExcerpt": "というのもディスプレイオーディオはAV一体型ナビと比べてリーズナブルであることもアイデンティティとしていて、当初は地デジチューナーが組み込まれたモデルもあったが、価格がこなれていることの方が優先され、次第に地デジチューナーも省かれるようになっていく。"
+  },
+  "https://news.yahoo.co.jp/articles/895ed3787c97483e0c09e76eb7017f76368fbbdd?source=rss": {
+    "fingerprint": "1f383383a0eb62dd12dfb0920fcd2c2aab36c4a93704b425b948173f5a084cf4",
+    "checkedAt": "2026-09-10T00:55:06.891372+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/895ed3787c97483e0c09e76eb7017f76368fbbdd?source=rss",
+    "sourceExcerpt": "さらに10.5インチのToyota Audio Multimediaディスプレイも標準装備されます。"
+  },
+  "https://news.yahoo.co.jp/articles/07458bc983bcdf7a2b9c16beb2e86c96afbc8d15?source=rss": {
+    "fingerprint": "945229768091dd6ec9d6258d703ba5e6fc0873983d815173f211cbd3dc8491dc",
+    "checkedAt": "2026-09-10T00:55:07.157873+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/07458bc983bcdf7a2b9c16beb2e86c96afbc8d15?source=rss",
+    "sourceExcerpt": "カーメイトから収納ネットをはじめとする『ランドクルーザーFJ専用設計アクセサリー』が各種新登場。"
+  },
+  "https://news.yahoo.co.jp/articles/b2b601d8d606597fa065f7f46af9cd64625d099f?source=rss": {
+    "fingerprint": "ea1beb70a38688c64642d24490b73be8548dd5063f9d6d643960858aceb03888",
+    "checkedAt": "2026-09-10T00:55:07.447448+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/b2b601d8d606597fa065f7f46af9cd64625d099f?source=rss",
+    "sourceExcerpt": "どちらも実車に触れてみたが、座り心地や質感は申し分なく、オールブラック内装も強く勧められる仕上がりであった。"
+  },
+  "https://news.yahoo.co.jp/articles/0fdbde1954aef667d5e78311a1fc4e6c1aa47a8e?source=rss": {
+    "fingerprint": "52dc814a2331087999e7ab529a3737e26c62659aea166c7cf1da8d7f8ff7d10a",
+    "checkedAt": "2026-09-10T00:55:07.754202+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/0fdbde1954aef667d5e78311a1fc4e6c1aa47a8e?source=rss",
+    "sourceExcerpt": "さらに「AUTECH e-4ORCE」では、「NissanConnectインフォテインメントシステム」を標準装備とし、利便性を向上させました。"
+  },
+  "https://www.topspeed.com/honda-suv-makes-luxury-feel-optional/": {
+    "fingerprint": "e667cd3da00fd34e85f49ceb83989c732e578cab79de198e5ff8b2ae65d01791",
+    "checkedAt": "2026-09-10T00:55:08.014647+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.topspeed.com/honda-suv-makes-luxury-feel-optional/",
+    "sourceExcerpt": "Meanwhile, luxury pricing has kept climbing, pushed by financing costs, feature bundling,",
+    "sourceExcerptEnd": "that turn a $50,000 sticker into a $65,000 out-the-door number."
+  },
+  "https://www.autocar.co.uk/car-news/consumer/top-tips-happy-ev-ownership-electric-car-veteran": {
+    "fingerprint": "ae5cc402d3dcd838f6a635a4aafb95a5ee43ee9bf15ae759ea7d7c7dff05d0d3",
+    "checkedAt": "2026-09-10T00:55:09.150579+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/consumer/top-tips-happy-ev-ownership-electric-car-veteran",
+    "sourceExcerpt": "Depending on your 'use case', you don’t necessarily need an EV with",
+    "sourceExcerptEnd": "diesel to do long trips, just a decent charging network."
+  },
+  "https://www.autoexpress.co.uk/opinion/370399/audi-renault-and-vw-have-all-launched-retro-secret-weapons-ev-arms-race-phil-mcnamara": {
+    "fingerprint": "4287d5aac619c416cc10b7a509df8073b7fc655c1ef4b61fed36b69a76865eac",
+    "checkedAt": "2026-09-10T00:55:09.563295+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/opinion/370399/audi-renault-and-vw-have-all-launched-retro-secret-weapons-ev-arms-race-phil-mcnamara",
+    "sourceExcerpt": "Two famous German cars with divergent histories – the Volkswagen Polo and Audi A2 – are back, both reborn as electric cars."
+  },
+  "https://carnewschina.com/2026/09/09/top-10-best-selling-cars-in-china-in-august-bev-takes-nine-and-half-spots-gas-cars-disappear/": {
+    "fingerprint": "e2b6208772d613449e10cc87f923c0c028ef9036346c43ace912ff71d2ce506d",
+    "checkedAt": "2026-09-10T00:55:09.949401+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/09/top-10-best-selling-cars-in-china-in-august-bev-takes-nine-and-half-spots-gas-cars-disappear/",
+    "sourceExcerpt": "The only exception was BYD’s Fang Cheng Bao Ti7, which, unlike the",
+    "sourceExcerptEnd": "BEV and PHEV variants. 55% of Ti7 sales were BEV."
+  },
+  "https://carnewschina.com/2026/09/09/li-auto-announces-its-new-flagship-electric-suv-i9-set-for-september-16-debut/": {
+    "fingerprint": "03d23885c850a415afaa777d65c9381d503187d6fe0113d0285af27d47ef0731",
+    "checkedAt": "2026-09-10T00:55:10.235901+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/09/li-auto-announces-its-new-flagship-electric-suv-i9-set-for-september-16-debut/",
+    "sourceExcerpt": "Li Auto CEO Li Xiang shared a glimpse of the i9’s interior, highlighting a rotating seat configuration that enables face-to-face seating."
+  },
+  "https://carnewschina.com/2026/09/09/gwms-5-4-meter-tank-700-surfaces-with-6-seats-to-challenge-yangwang-u8/": {
+    "fingerprint": "eae5e3dcf251621ae07f40023a5bfbcf97f2606dc77ee399da593048290c0766",
+    "checkedAt": "2026-09-10T00:55:10.386222+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/09/gwms-5-4-meter-tank-700-surfaces-with-6-seats-to-challenge-yangwang-u8/",
+    "sourceExcerpt": "It incorporates a 59.05 kWh ternary lithium battery pack from Svolt and has a pure-electric range of 190 km under the WLTC test cycle."
+  },
+  "https://carnewschina.com/2026/09/09/denza-z9-gt-adds-1140-hp-tri-motor-ev-trim-at-49200-usd-6000-usd-below-performance-version/": {
+    "fingerprint": "d8d2d6e82efe6d448a79864a89557876d87aee5760229f77249e3699eb88f7bf",
+    "checkedAt": "2026-09-10T00:55:10.535703+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/09/denza-z9-gt-adds-1140-hp-tri-motor-ev-trim-at-49200-usd-6000-usd-below-performance-version/",
+    "sourceExcerpt": "BYD’s Denza has launched a lower-priced tri-motor Z9 GT in China, pricing its 850 kW (1,140 hp) electric powertrain at 329,800 yuan (49,170 USD)."
+  },
+  "https://carnewschina.com/2026/09/09/2027-zeekr-7x-revealed-in-chinese-filings-with-496-hp-motor-and-new-lfp-battery/": {
+    "fingerprint": "fdeed18cdc6cee3bba50258049acf3e13f66c44e3c4b20f60ec6f491a21776a4",
+    "checkedAt": "2026-09-10T00:55:10.668948+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/09/2027-zeekr-7x-revealed-in-chinese-filings-with-496-hp-motor-and-new-lfp-battery/",
+    "sourceExcerpt": "China’s Ministry of Industry and Information Technology has approved a new LFP",
+    "sourceExcerptEnd": "85 kWh Golden Brick battery variant will arrive in Q4."
+  },
+  "https://cnevpost.com/2026/09/09/li-auto-to-launch-i9-sept-16-2026/": {
+    "fingerprint": "d1d67b961d37a8240e5284d80b51823b6e495fa31d447f327e6178676ebf7ba8",
+    "checkedAt": "2026-09-10T00:55:10.815512+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/09/li-auto-to-launch-i9-sept-16-2026/",
+    "sourceExcerpt": "Li Auto founder, chairman and CEO Li Xiang today showcased the Li",
+    "sourceExcerptEnd": "zero-gravity seats that allow occupants to sit facing each other."
+  },
+  "https://www.autocarindia.com/car-news/chery-icaur-03-spied-in-india-440704": {
+    "fingerprint": "1a7737fc78af031873927eb6cdfd87bfd83acf2c35de1da8ddeafd797dedcab9",
+    "checkedAt": "2026-09-10T00:55:11.021938+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/car-news/chery-icaur-03-spied-in-india-440704",
+    "sourceExcerpt": "This model is likely to be launched under the JSW Motors nameplate,",
+    "sourceExcerptEnd": "03 was uncamouflaged and being transported on a flatbed truck."
+  },
+  "https://gaadiwaadi.com/xiaomi-skynomad-n70-n90-suvs-introduced-with-over-1700-km-range/": {
+    "fingerprint": "c280a84066b81756f9f38b4f910b69408735d5a31c370d19506c5a666eea260c",
+    "checkedAt": "2026-09-10T00:55:11.485667+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "ValueError"
+  },
+  "https://electrek.co/2026/09/09/byd-cuts-denza-z9-gt-ev-prices-new-50000-premium-trim/": {
+    "fingerprint": "0f8c0d351bbbe0507116abc97e133bbec44efb561b9db674cfe0db9eb477bb83",
+    "checkedAt": "2026-09-10T00:55:13.377366+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electrek.co/2026/09/09/byd-cuts-denza-z9-gt-ev-prices-new-50000-premium-trim/",
+    "sourceExcerpt": "BYD launched the new Denza Z9 GT e3 Premium, a lower-priced version of its top-selling electric luxury GT, starting at about $50,000."
+  },
+  "https://electriccarsreport.com/2026/09/xiaomi-launches-skynomad-erev-suvs-in-china/": {
+    "fingerprint": "d55c74798dc1229bee5bde0d21c0dd855da8f95ce4bb0cc7bab0d31cf750aa3c",
+    "checkedAt": "2026-09-10T00:55:13.547203+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/xiaomi-launches-skynomad-erev-suvs-in-china/",
+    "sourceExcerpt": "The SkyNomad range initially consists of the five-seat N70 Pro, five-seat N70 Max, seven-seat N90 Max and N90 Max Explorer/Studio edition."
+  },
+  "https://autodesignmagazine.com/en/2026/09/what-ai-cant-copy/": {
+    "fingerprint": "7bd27ddab9ad6db733394061a5912fe3d60cbd2d609c7e98895111e377c6b4c1",
+    "checkedAt": "2026-09-10T00:55:14.370168+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://autodesignmagazine.com/en/2026/09/what-ai-cant-copy/",
+    "sourceExcerpt": "For Maeda, “the gesture is the movement of the hand and the body, the rhythm of someone working with a material."
+  },
+  "https://mantan-web.jp/prtimes/article/20260909prt00m200000907a.html": {
+    "fingerprint": "a21f16a04168a11a89a41a3caf74c1dbc9021563a39963c4a218e24df7c1cea7",
+    "checkedAt": "2026-09-10T00:55:15.999795+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://mantan-web.jp/prtimes/article/20260909prt00m200000907a.html",
+    "sourceExcerpt": "ハイエース 200系専用 ダッシュボードトレイ この度、Fun Standard株式会社（株式会社RKB毎日ホールディングス グループ、本社",
+    "sourceExcerptEnd": "S（クラフトワークス）は、発売からすぐに完売していた「ハイエース 200系専用 ダッシュボードトレイ」を再入荷しました。"
+  },
+  "https://www.msn.com/ja-jp/autos/performance-cars/ダイハツ-タフトがマイナーチェンジ-レジャー要素を強めた2種類の特別仕様車を設定/ar-AA2bRzpO": {
+    "fingerprint": "5356d183b7c433d6a31e3957e798045cd3758b7105521d15a348daab665ca9a5",
+    "checkedAt": "2026-09-10T00:55:16.385417+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/ja-jp/autos/performance-cars/ダイハツ-タフトがマイナーチェンジ-レジャー要素を強めた2種類の特別仕様車を設定/ar-AA2bRzpO"
+  },
+  "https://www.motomegane.com/car_news/news_flash/info_sw_maxwin-da-ad02-pro1_20260909": {
+    "fingerprint": "0807fe9ee183c60d92fe4732f6c3d7981ed897e024393e649e92dbaaf68d48a9",
+    "checkedAt": "2026-09-10T00:55:16.605627+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motomegane.com/car_news/news_flash/info_sw_maxwin-da-ad02-pro1_20260909",
+    "sourceExcerpt": "本製品は、ディスプレイオーディオを搭載する自動車において、Amazon Fire TV Stickの再生、Apple CarPlay（アップル カープレイ）やAndroid Auto（アンドロイド オート）のワイヤレス化、さらにはHDMI機器の接続を可能にする。"
+  },
+  "https://car.watch.impress.co.jp/docs/news/2139507.html": {
+    "fingerprint": "7a10c257edec51f482fec6c5b2a017f1f3bc724f453b794ca60c6ae131cac288",
+    "checkedAt": "2026-09-10T00:55:16.978581+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://car.watch.impress.co.jp/docs/news/2139507.html",
+    "sourceExcerpt": "自動車カスタマイズ用シートを開発・製造・販売しているブリッドは9月7日、フルバケットシートの標準モデルでは少し窮屈に感じるユーザーに向け、体",
+    "sourceExcerptEnd": "NUGRAIN（ヌグレ）”をシート表皮に採用した「NURMAN NUGRAIN（ニュルマン・ヌグレ）」の受注を開始した。"
+  },
+  "https://www.msn.com/ja-jp/news/other/新車536万円-全長47m級の日産-新型-スポーティsuv-発売-google搭載の-大画面-採用-シックな黒-青内装もカッコいい-エクストレイルautech-登場/ar-AA2bRkD6": {
+    "fingerprint": "bfacc09731af53345b0f2120e24a2415daf2662cac428355b31e1dac130dc5ae",
+    "checkedAt": "2026-09-10T00:55:17.185208+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/ja-jp/news/other/新車536万円-全長47m級の日産-新型-スポーティsuv-発売-google搭載の-大画面-採用-シックな黒-青内装もカッコいい-エクストレイルautech-登場/ar-AA2bRkD6"
+  },
+  "https://www.wjtv.com/automotive/2026-toyota-tacoma-spans-32545-to-64750-which-trim-fits/": {
+    "fingerprint": "d3f9efb41ca1e5aad1468f3b4080ef204267cdbf5952f3a0b1821753c1032c4c",
+    "checkedAt": "2026-09-10T00:55:17.288466+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.msn.com/en-us/news/other/car-companies-didnt-replace-buttons-with-screens-to-help-you-they-did-it-to-save-money-its-cheaper/vi-AA26qh6o": {
+    "fingerprint": "f05017398953a709465bc82227d24d6f94338e1a960684d27c966bca50ccde3d",
+    "checkedAt": "2026-09-10T00:55:17.424910+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/en-us/news/other/car-companies-didnt-replace-buttons-with-screens-to-help-you-they-did-it-to-save-money-its-cheaper/vi-AA26qh6o"
+  },
+  "https://www.msn.com/en-us/news/other/this-new-tech-could-turn-your-windshield-into-a-screen-like-display/ar-AA2bTc8O": {
+    "fingerprint": "12d9734c9e7aab3411212654e6b244903497135a62ffa91d5f1be1cfd27da22f",
+    "checkedAt": "2026-09-10T00:55:17.544929+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/en-us/news/other/this-new-tech-could-turn-your-windshield-into-a-screen-like-display/ar-AA2bTc8O"
+  },
+  "https://topauto.co.za/new-models/163237/new-hyundai-staria-goes-on-sale-in-south-africa-pricing-and-features/": {
+    "fingerprint": "58d9219cd0e7cbc8a433db20526b41377182353fbaa44d19c56a4d09d3bec278",
+    "checkedAt": "2026-09-10T00:55:17.654811+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://autos.yahoo.com/new-vehicles-and-reviews/articles/dartz-makes-gta-wildest-suv-123042586.html": {
+    "fingerprint": "93122964b526f5e137f6662f201c9bcbbb3f92657249df2a4cea3ef090480ac4",
+    "checkedAt": "2026-09-10T00:55:17.763062+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://autos.yahoo.com/new-vehicles-and-reviews/articles/dartz-makes-gta-wildest-suv-123042586.html",
+    "sourceExcerpt": "The centerpiece of the interior is a former fighter jet ejection seat mounted in the middle of the cabin, according to The Supercar Blog."
+  },
+  "https://www.msn.com/en-za/cars/general/the-car-packed-with-gadgets-and-clever-technology/vi-AA2bQZVv": {
+    "fingerprint": "0d2c353d5a4578bbb7cdf3ab2321a6e00e8a440b7e23f087fecded9e98fd542b",
+    "checkedAt": "2026-09-10T00:55:18.614114+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/en-za/cars/general/the-car-packed-with-gadgets-and-clever-technology/vi-AA2bQZVv"
+  },
+  "https://finance.yahoo.com/technology/articles/bring-ultrawide-displays-dashboard-garmin-105900430.html": {
+    "fingerprint": "1d21195483c9e35738293e5c7d0efd4f7d7bababd35d918566e806d56f44779d",
+    "checkedAt": "2026-09-10T00:55:18.720714+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://finance.yahoo.com/technology/articles/bring-ultrawide-displays-dashboard-garmin-105900430.html",
+    "sourceExcerpt": "Boasting a unique, high-resolution ultrawide display in two sizes – 7.1- or",
+    "sourceExcerptEnd": "built to be unobtrusive to the driver's line of sight."
+  },
+  "https://www.msn.com/en-us/autos/luxury/comparing-ultimate-luxury-between-two-iconic-flagship-sedans/vi-AA2bSxov": {
+    "fingerprint": "1d6bcbf5d77f8c59a7e0fbef0a5ac011bf8e51528f0e2e5b4a7d619d070ed50a",
+    "checkedAt": "2026-09-10T00:55:19.640171+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/en-us/autos/luxury/comparing-ultimate-luxury-between-two-iconic-flagship-sedans/vi-AA2bSxov"
+  },
+  "https://www.forbes.ro/chinezii-au-investit-32-mil-euro-intr-o-fabrica-de-componente-auto-langa-plovdiv-519804": {
+    "fingerprint": "343c86e715e9dd4a8a535023b5ffd01731c2966964b9e50f975ec87c9f9553b9",
+    "checkedAt": "2026-09-10T00:55:19.783576+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.forbes.ro/chinezii-au-investit-32-mil-euro-intr-o-fabrica-de-componente-auto-langa-plovdiv-519804",
+    "sourceExcerpt": "Premierul Bulgariei, Rumen Radev, a inaugurat oficial noua fabrică chineză de componente",
+    "sourceExcerptEnd": "doua investiţie chineză de acest tip din zona industrială Trakia."
+  },
+  "https://uk.news.yahoo.com/volkswagen-id-polo-review-vw-100000795.html": {
+    "fingerprint": "48b8238c21bd3184dc97cb1cc20ee3a53a154941c42361c4db972de4af69babb",
+    "checkedAt": "2026-09-10T00:55:23.927882+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://uk.news.yahoo.com/volkswagen-id-polo-review-vw-100000795.html",
+    "sourceExcerpt": "On the evidence of my drive, the Polo's strongest cards are its",
+    "sourceExcerptEnd": "it still manages to feel exactly like a Volkswagen Polo."
+  },
+  "https://www.parkers.co.uk/car-news/mg3-safety-performance/": {
+    "fingerprint": "f90b78e6f3fea0831c952fca9b4b6792d2e57cf3b793761beaad2af56667df0d",
+    "checkedAt": "2026-09-10T00:55:25.049725+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.parkers.co.uk/car-news/mg3-safety-performance/",
+    "sourceExcerpt": "The MG3 suffers a rare seat failure during safety testing and has",
+    "sourceExcerptEnd": "concerns for buyers, and advising buyers to avoid this car."
+  },
+  "https://compoundsemiconductor.net/article/125328/Nichia_shows_new_automotive_lighting_at_SIA_Vision_2026": {
+    "fingerprint": "99c065db478bb63d1ad7be26b00d54c1e128e90502cb9b2a6a669b5297cc9879",
+    "checkedAt": "2026-09-10T00:55:26.510743+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://compoundsemiconductor.net/article/125328/Nichia_shows_new_automotive_lighting_at_SIA_Vision_2026",
+    "sourceExcerpt": "LED and laser diode company Nichia will present its portfolio of automotive",
+    "sourceExcerptEnd": "on September 23–24 at Les Pyramides in Le Port-Marly, France."
+  },
+  "https://news.europawire.eu/forvia-hella-and-distance-technologies-form-strategic-partnership-to-develop-mirrorless-3d-ar-head-up-displays-for-next-generation-automotive-cockpits/eu-press-release/2026/09/09/13/32/00/180462/": {
+    "fingerprint": "3ed5f640285a6e449a22a5088ca9a3294bacc5af36c76485e45baeb09b817d43",
+    "checkedAt": "2026-09-10T00:55:27.422696+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.europawire.eu/forvia-hella-and-distance-technologies-form-strategic-partnership-to-develop-mirrorless-3d-ar-head-up-displays-for-next-generation-automotive-cockpits/eu-press-release/2026/09/09/13/32/00/180462/",
+    "sourceExcerpt": "(IN BRIEF) FORVIA HELLA and Finnish start-up Distance Technologies have entered into",
+    "sourceExcerptEnd": "a mirrorless 3D augmented reality Head-Up Display for automotive applications."
+  },
+  "https://www.eweek.com/newsletter/daily-tech-insider/2026-09-09/": {
+    "fingerprint": "9ec94b8ec548eaa2da72956784d404b6b823c1d03e646b34756cdc4197d71674",
+    "checkedAt": "2026-09-10T00:55:29.493602+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.sohu.com/a/1073858302_123000635": {
+    "fingerprint": "958ca64f7b6afd28779ed3f3fddb7182fcd6ee44eec699ec81b3cee91205f515",
+    "checkedAt": "2026-09-10T00:55:29.779985+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.sohu.com/a/1073858302_123000635",
+    "sourceExcerpt": "开了五六年的车，座椅边缘开始出现褶皱，坐垫明显塌陷，方向盘握把处也磨得发亮——这些细节每天都在提醒，座舱的舒适感已大不如前。"
+  },
+  "https://www.sohu.com/a/1073778338_122066676": {
+    "fingerprint": "0deda53794af859bc95ab239d0cb72407955bc9f58570ca9312ac0fd939aa63f",
+    "checkedAt": "2026-09-10T00:55:29.994914+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.sohu.com/a/1073778338_122066676",
+    "sourceExcerpt": "理想i9的内饰采用高端材质，注重每一个细节，旨在为用户创造一个奢华的驾驶体验。"
+  },
+  "https://finance.sina.com.cn/tech/roll/2026-09-09/doc-inirfqcs5741074.shtml": {
+    "fingerprint": "0b48046733380e23e1a800c29474b191dfc0e42d0ebe15dfa2bda007103f62a0",
+    "checkedAt": "2026-09-10T00:55:30.056973+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://finance.sina.com.cn/tech/roll/2026-09-09/doc-inirfqcs5741074.shtml",
+    "sourceExcerpt": "据谍照来看，内饰走的是科技简约的设计路线，内嵌式全液晶仪表搭配悬浮式大尺寸中控屏，再加上平底三辐多功能方向盘，构建起车内的智能交互核心。"
+  },
+  "https://www.chinanews.com.cn/cj/2026/09-09/10693310.shtml": {
+    "fingerprint": "cbe846fc6b086ddfa9e209ca5ae2814fa5e7890163cd31c158faf018a724fed4",
+    "checkedAt": "2026-09-10T00:55:30.752817+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.chinanews.com.cn/cj/2026/09-09/10693310.shtml",
+    "sourceExcerpt": "本届大会以“全域AI·主动交互——智能体定义下一代座舱新生态”为主题，围绕产业生态构建、核心技术攻关与标准路径等议题展开深度研讨，共探智能座舱产业升级方向。"
+  },
+  "https://www.timesnownews.com/auto/car-news/honda-elevate-facelift-india-launch-on-october-6-what-to-expect-article-156125753": {
+    "fingerprint": "18975b383bc46a49a2222d05e69b4a13ca81db69ba9b371070ad84983dd56838",
+    "checkedAt": "2026-09-10T00:55:31.056924+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.thehindu.com/life-and-style/motoring/volvo-ex90-review-india-drive-performance-range-and-everything-you-need-to-know/article71441796.ece": {
+    "fingerprint": "d8df4fd90757c73538f0bd951cc5e3d49a83ad2f1c8488a5600b732b8f5a5441",
+    "checkedAt": "2026-09-10T00:55:31.318953+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.thehindu.com/life-and-style/motoring/volvo-ex90-review-india-drive-performance-range-and-everything-you-need-to-know/article71441796.ece",
+    "sourceExcerpt": "At the touch of a button on the centre display, the glass",
+    "sourceExcerptEnd": "the cabin without the need for a conventional powered blind."
+  },
+  "https://www.msn.com/en-in/autos/news/honda-elevate-facelift-to-be-launched-in-india-on-6-october/ar-AA2bRzeL": {
+    "fingerprint": "0a7807ba690ad80e729fef3924a0c8ba8569b01cad410280d03814e22bae452d",
+    "checkedAt": "2026-09-10T00:55:32.021159+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.msn.com/en-in/autos/news/honda-elevate-facelift-to-be-launched-in-india-on-6-october/ar-AA2bRzeL"
+  },
+  "https://www.oneindia.com/in-the-news/auxbeam-india-switch-panels-emergency-offroad-marine-vehicles-lineup-012-8200157.html": {
+    "fingerprint": "c6b434a815483b56d9573a2cfd6b792bd1d2373b7f6e4aecad6c34b7f03e4eb3",
+    "checkedAt": "2026-09-10T00:55:32.175859+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.oneindia.com/in-the-news/auxbeam-india-switch-panels-emergency-offroad-marine-vehicles-lineup-012-8200157.html",
+    "sourceExcerpt": "KS-80 Knob Series: the Auxbeam KS-80 RGB Knob Switch Panel 120A with",
+    "sourceExcerptEnd": "8-gang panel with rotary knob control and backlit mode selection"
+  },
+  "https://tech-ish.com/2026/09/09/the-screens-in-your-next-car-will-almost-certainly-be-chinese/": {
+    "fingerprint": "678d5365bafc335ed39ad7a19a466e441dd7df0fe4499d9fbc5385d56b198c2c",
+    "checkedAt": "2026-09-10T00:55:32.642313+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://tech-ish.com/2026/09/09/the-screens-in-your-next-car-will-almost-certainly-be-chinese/",
+    "sourceExcerpt": "Panel makers in mainland China will account for 65.2% of the world’s",
+    "sourceExcerptEnd": "half of 2026, according to Omdia’s latest automotive display forecast."
+  },
+  "https://auto.economictimes.indiatimes.com/news/newsletters/from-make-in-india-to-create-in-india-the-next-auto-tech-leap/133958545": {
+    "fingerprint": "8cf617dad9cbff64f9583533ff93ed74dba302ebe1daccd9fe7477010fa9148e",
+    "checkedAt": "2026-09-10T00:55:33.115304+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.timesnownews.com/auto/car-news/kia-sorento-vs-toyota-innova-hycross-price-engine-and-features-compared-article-156123502": {
+    "fingerprint": "ef9c28af7b7bb7acfabfd5882554f3e7b1054a9a8b10190e4b66d6219bcf779d",
+    "checkedAt": "2026-09-10T00:55:33.272008+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.autocarindia.com/auto-features/3-reasons-to-buy-the-2026-maruti-baleno-and-2-to-skip-it-441029": {
+    "fingerprint": "f0ad113e190aa1a092d9a923277125a30d7c13c37d275067cbacd17f25803f34",
+    "checkedAt": "2026-09-10T00:55:33.371877+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-features/3-reasons-to-buy-the-2026-maruti-baleno-and-2-to-skip-it-441029",
+    "sourceExcerpt": "Maruti Suzuki recently updated the Baleno with new features, cosmetic changes and, most significantly, a new 1.2-litre three-cylinder petrol engine."
+  }
+}
