@@ -110242,8 +110242,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "eu1573",
-        title: "Top tips for happy EV ownership - from an electric car veteran",
-        desc: "What to buy, what to avoid – and how to make money from solar panels. What years of EV motoring have taught me EV ownership is a way of life for some but a mystery to others. I took the plunge five years ago and I'm a certified convert: not only does electrification make for a plesant (and comple.",
+        title: "EV歴5年の筆者が紹介、電池容量と充電計画の選び方",
+        desc: "EVを5年間利用してきた筆者が、快適に乗り続けるための工夫を紹介。必要以上に大きい電池を選ばず、用途と急速充電網に合わせて容量を決める考え方を示す。残量20％を下回る前の充電や、ナビを使った経路上の充電器の確認、自宅での夜間の割安な電力の利用など、実体験に基づく助言を挙げる。",
         url: "https://www.autocar.co.uk/car-news/consumer/top-tips-happy-ev-ownership-electric-car-veteran",
         source: "AUTOCAR UK",
         date: "2026-09-09",
@@ -110410,8 +110410,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "eu1576",
-        title: "WHAT AI CAN’T COPY",
-        desc: "“AI can generate almost anything with a click, but it cannot copy the gesture,” says Ikuo Maeda, Executive Fellow at Mazda Corporation, during a round table in Venice. A great admirer of Italy, the Japanese designer and racing driver joined us to open Homo Faber, the international biennial dedicated.",
+        title: "マツダ前田育男氏、AIに模倣できない手仕事の価値を語る",
+        desc: "マツダの前田育男氏らが、ヴェネツィアの工芸展「Homo Faber」でAI時代の手仕事の価値を議論。前田氏は、素材と向き合う手や身体の動きはAIでは再現できないと語る。絹や墨を使った灯籠、金継ぎなどの展示・体験を通じ、日本と欧州の工芸文化の融合や、人の感情を造形に込める意義を示した。",
         url: "https://autodesignmagazine.com/en/2026/09/what-ai-cant-copy/",
         source: "Auto & Design",
         date: "2026-09-09",

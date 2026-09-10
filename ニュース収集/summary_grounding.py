@@ -3,6 +3,29 @@
 import re
 
 
+BRAND_ALIASES = {
+    "mazda": ("マツダ",), "toyota": ("トヨタ",), "honda": ("ホンダ",),
+    "nissan": ("日産",), "lexus": ("レクサス",), "subaru": ("スバル",),
+    "suzuki": ("スズキ",), "mitsubishi": ("三菱",), "audi": ("アウディ",),
+    "volkswagen": ("フォルクスワーゲン",), "renault": ("ルノー",),
+    "volvo": ("ボルボ",), "ford": ("フォード",), "tesla": ("テスラ",),
+    "hyundai": ("ヒョンデ",), "kia": ("起亜", "キア"),
+    "mercedes-benz": ("メルセデス・ベンツ", "メルセデスベンツ"),
+}
+
+
+def source_identifiers_match(summary, identifiers):
+    """Accept verified brand spellings, without translating arbitrary identifiers."""
+    folded = str(summary or "").casefold()
+    for identifier in identifiers:
+        key = identifier.casefold()
+        if re.search(r"(?<![a-z0-9])" + re.escape(key) + r"(?![a-z0-9])", folded):
+            return True
+        if any(alias in folded for alias in BRAND_ALIASES.get(key, ())):
+            return True
+    return False
+
+
 SUMMARY_GROUNDING_RULES = (
     "原文にある事実・評価だけを使い、原文にない装備を補ってはいけません。\n"
     "筆者の要望・批評・否定・仮定を維持してください。『こだわりが欲しかった』は"

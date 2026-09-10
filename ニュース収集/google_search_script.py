@@ -1640,12 +1640,17 @@ def extract_cjk_keywords(text, limit=8):
 
 def extract_latin_source_anchors(text, limit=8):
     """Extract brand/model identifiers that should survive an English-source summary."""
+    from summary_grounding import BRAND_ALIASES
+
     generic = {
         "about", "ahead", "all", "and", "appeared", "article", "auto", "automotive",
         "car", "cars", "china", "content", "first", "five", "interior", "launch",
         "model", "news", "post", "revealed", "reveals", "seat", "seater", "the",
         "this", "version", "vehicle", "with", "from", "will", "new", "suv", "ev",
         "bev", "phev", "ice", "ai", "adas",
+        "what", "why", "how", "can", "cannot", "copy", "could", "should", "would",
+        "tips", "happy", "ownership", "electric", "veteran", "buy", "avoid", "your",
+        "next", "almost", "anything", "have", "been", "that", "more", "than",
         "january", "february", "march", "april", "may", "june", "july", "august",
         "september", "october", "november", "december",
     }
@@ -1662,8 +1667,8 @@ def extract_latin_source_anchors(text, limit=8):
             continue
         is_acronym = token.isupper() and 2 <= len(token) <= 12
         is_model_code = any(ch.isdigit() for ch in token)
-        is_repeated_name = count >= 2 and len(token) >= 4
-        if is_acronym or is_model_code or is_repeated_name:
+        is_repeated_name = count >= 2 and len(token) >= 4 and token[0].isupper()
+        if is_acronym or is_model_code or is_repeated_name or key in BRAND_ALIASES:
             anchors.append(token)
         if len(anchors) >= limit:
             break
@@ -1680,8 +1685,10 @@ def summary_matches_source(summary, source, title=""):
     all_keys = list(set(kanji_keys + kata_keys + latin_keys))
     if not all_keys:
         return True
+    from summary_grounding import source_identifiers_match
+
     folded_summary = str(summary or "").casefold()
-    return any(k.casefold() in folded_summary for k in all_keys)
+    return any(k.casefold() in folded_summary for k in kanji_keys + kata_keys) or source_identifiers_match(summary, latin_keys)
 
 def enforce_kanji_text(text):
     if not text or not USE_LLM:
@@ -1987,7 +1994,7 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
 
 def build_source_faithful_japanese_summary(title, content, html_text=""):
     """英語原文へ戻さず、原文の事実だけを使った日本語要約へ復旧する。"""
-    from summary_grounding import summary_omits_interior_details
+    from summary_grounding import summary_omits_interior_details, source_identifiers_match
 
     source_title = normalize_text(title)
     source_content = normalize_text(content)
@@ -2003,7 +2010,7 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
             "ブランド名は日本で一般的な表記を使い、逐語訳しないでください。\n"
             f"titleは{SUMMARY_TITLE_LIMIT}字以内の見出しで、途中で切らないでください。\n"
             f"summaryは{SUMMARY_CONTENT_LIMIT}字以内の常体で、必ず句点で終えてください。\n"
-            "指定識別子がある場合は、そのうち少なくとも1つを綴りを変えずに残してください。\n"
+            "指定識別子がある場合は、そのうち少なくとも1つを原文の綴り、または一般的な日本語ブランド名で残してください。\n"
             "JSON以外は出力しないでください。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
             f"原文タイトル: {source_title}\n"
             f"原文内容: {source_content}\n"
@@ -2016,10 +2023,8 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
         candidate_body = normalize_text(parse_json_field(output, "summary"))
         if not (_is_valid_japanese(candidate_title) and _is_valid_japanese(candidate_body)):
             continue
-        if anchors:
-            folded = f"{candidate_title} {candidate_body}".casefold()
-            if not any(anchor.casefold() in folded for anchor in anchors):
-                continue
+        if anchors and not source_identifiers_match(f"{candidate_title} {candidate_body}", anchors):
+            continue
         candidate_title = trim_title_safely(candidate_title, SUMMARY_TITLE_LIMIT)
         candidate_body = trim_to_sentence(candidate_body, SUMMARY_CONTENT_LIMIT)
         if title_looks_incomplete(candidate_title) or summary_omits_interior_details(
@@ -2066,9 +2071,20 @@ def fetch_article_text(url):
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
-    if (urlparse(url).hostname or "").lower().removeprefix("www.") == "automotiveinteriorsworld.com":
+    host = (urlparse(url).hostname or "").lower().removeprefix("www.")
+    if host == "automotiveinteriorsworld.com":
         # This site's navigation contains <article> cards before the actual story.
         main = soup.select_one("article.type-post .entry-content") or soup.select_one("article.type-post")
+        if main is None:
+            print(f"  [FETCH_SHORT] Article body not found: {url}")
+            return ""
+    elif host == "autodesignmagazine.com":
+        main = soup.select_one("article .post-content") or soup.select_one(".post-content")
+        if main is None:
+            print(f"  [FETCH_SHORT] Article body not found: {url}")
+            return ""
+    elif host == "autocar.co.uk":
+        main = soup.select_one(".field-name-body")
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
             return ""
@@ -2355,7 +2371,10 @@ def summarize_article(title, content, url, country=""):
             summary_body = trim_to_sentence(normalize_text(content), SUMMARY_CONTENT_LIMIT)
     summary_title = normalize_known_brand_names(summary_title)
     summary_body = normalize_known_brand_names(summary_body)
-    _summary_cache[cache_key] = (summary_title, summary_body)
+    if _is_valid_japanese(summary_title) and _is_valid_japanese(summary_body):
+        _summary_cache[cache_key] = (summary_title, summary_body)
+    else:
+        print(f"  [SUMMARY_LANGUAGE_FAILED] 日本語化未完了（再試行用に原文を保持）: {title[:50]}")
     return summary_title, summary_body
 
 def save_with_hyperlinks(df, filename):
@@ -2592,8 +2611,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             title_jp = str(row.get(col_title_jp, "")).strip()
             content_jp = str(row.get(col_content_jp, "")).strip()
             llm_post = str(row.get(col_llm_post, "")).strip()
-            combined_jp = f"{title_jp} {content_jp}".strip()
-            if not title_jp or not content_jp or llm_post == "スキップ" or not has_japanese_kana(combined_jp):
+            if not _is_valid_japanese(title_jp) or not _is_valid_japanese(content_jp) or llm_post == "スキップ":
                 need_indices.append(idx)
         if need_indices:
             print(f"  Sheet2補完: {len(need_indices)}件")
@@ -2602,7 +2620,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 summary_title, summary_body = summarize_article(
                     str(row.get(col_title, "")),
                     str(row.get(col_content, "")),
-                    "",
+                    str(row.get(col_url, "")),
                     str(row.get(col_country, "")),
                 )
                 if summary_title:
@@ -2611,7 +2629,10 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 if summary_body:
                     work.at[idx, col_content_jp] = summary_body
                     filtered.at[idx, col_content_jp] = summary_body
-                if str(row.get(col_llm_post, "")).strip() == "スキップ":
+                if not (_is_valid_japanese(summary_title) and _is_valid_japanese(summary_body)):
+                    work.at[idx, col_llm_post] = "日本語化失敗"
+                    filtered.at[idx, col_llm_post] = "日本語化失敗"
+                elif str(row.get(col_llm_post, "")).strip() in {"スキップ", "日本語化失敗"}:
                     work.at[idx, col_llm_post] = "補完"
                     filtered.at[idx, col_llm_post] = "補完"
                 if n == 1 or n % PROGRESS_EVERY == 0 or n == len(need_indices):

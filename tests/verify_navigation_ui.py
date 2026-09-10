@@ -31,7 +31,9 @@ def main():
                 context.route('**/' + name + '*', lambda r, req, stub=stub: r.fulfill(body=stub, content_type='application/javascript'))
 
             def api(route):
-                assert urlparse(route.request.url).hostname == '127.0.0.1'
+                if urlparse(route.request.url).hostname != '127.0.0.1':
+                    route.abort()
+                    return
                 assert route.request.method == 'GET'
                 data = {'activity': activity} if '/activity/recent' in route.request.url else {'notifications': [], 'unreadCount': 0}
                 route.fulfill(json=data)
@@ -94,8 +96,20 @@ def main():
             page.wait_for_timeout(400)
             page.locator('#rankingBackBtn').click()
             assert_restored(1)
+
+            for item_id, title_term, summary_term in [
+                ('eu1573', 'EV歴5年', '残量20％'),
+                ('eu1576', 'マツダ前田育男氏', '金継ぎ'),
+            ]:
+                page.evaluate('(id) => showNewsItem(id)', item_id)
+                card = page.locator('#card-' + item_id)
+                card.wait_for()
+                assert title_term in card.locator('.title').inner_text()
+                assert summary_term in card.locator('.desc').inner_text()
+                page.locator('#rankingBackBtn').click()
+                assert_restored(1)
             assert not errors, errors
-            print('PASS: source directory, activity news/idea returns, button/browser back, account-only return, restored filters, cn1585 content')
+            print('PASS: source directory, activity news/idea returns, button/browser back, account-only return, restored filters, cn1585/eu1573/eu1576 content')
             browser.close()
     finally:
         server.shutdown()

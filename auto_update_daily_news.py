@@ -71,6 +71,14 @@ TAG_RULES = [
 PLACEHOLDER_IMG = "images/idea_dummy.svg"
 
 ITEM_OVERRIDES = {
+    "https://autodesignmagazine.com/en/2026/09/what-ai-cant-copy/": {
+        "title": "マツダ前田育男氏、AIに模倣できない手仕事の価値を語る",
+        "desc": "マツダの前田育男氏らが、ヴェネツィアの工芸展「Homo Faber」でAI時代の手仕事の価値を議論。前田氏は、素材と向き合う手や身体の動きはAIでは再現できないと語る。絹や墨を使った灯籠、金継ぎなどの展示・体験を通じ、日本と欧州の工芸文化の融合や、人の感情を造形に込める意義を示した。",
+    },
+    "https://www.autocar.co.uk/car-news/consumer/top-tips-happy-ev-ownership-electric-car-veteran": {
+        "title": "EV歴5年の筆者が紹介、電池容量と充電計画の選び方",
+        "desc": "EVを5年間利用してきた筆者が、快適に乗り続けるための工夫を紹介。必要以上に大きい電池を選ばず、用途と急速充電網に合わせて容量を決める考え方を示す。残量20％を下回る前の充電や、ナビを使った経路上の充電器の確認、自宅での夜間の割安な電力の利用など、実体験に基づく助言を挙げる。",
+    },
     "https://carnewschina.com/2026/09/07/xiaomi-launches-skynomad-n90-max-featuring-a-native-electric-pop-up-roof-cabin/": {
         "title": "小米Skynomad N90 Max発表、可動式コンソールと車中泊仕様",
         "desc": "小米の7人乗りEREV「Skynomad N90 Max」は、レール上を移動するセンターコンソールに9L冷蔵庫を内蔵。車内は3色展開で、16.1インチ画面とHyperOSを採用し、2＋2＋3席で11通りの空間レイアウトに対応する。前席・2列目にはマッサージ、通風、ヒーター機能を備えたゼログラビティシートの選択肢も用意。標準Maxは26.99万元、電動ポップアップルーフを備えるExplorer Editionは29.99万元。",
@@ -203,6 +211,25 @@ def generate_tags(text: str):
 
 def has_japanese_text(text: str):
     return bool(re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", str(text or "")))
+
+
+def validate_japanese_news_items(items):
+    """Do not publish untranslated fallbacks or silently reduce the country quota."""
+    pending = []
+    for item in items:
+        # Preserve the curated paper feed's existing inclusion policy.
+        if item.get("country") == "paper":
+            continue
+        title = str(item.get("title") or "")
+        body = str(item.get("desc") or "")
+        if not re.search(r"[\u3041-\u3096\u30a1-\u30fa\u4e00-\u9fff]", title) or not re.search(r"[\u3041-\u3096\u30a1-\u30fa]", body):
+            pending.append(str(item.get("url") or title))
+    if pending:
+        raise RuntimeError(
+            f"Japanese summary validation failed ({len(pending)} articles). "
+            "No news or insights have been updated. Repair these source rows first: "
+            + ", ".join(pending)
+        )
 
 
 BAD_SUMMARY_PATTERNS = [
@@ -1324,9 +1351,6 @@ def main():
         if is_bad_generated_text(title) or is_bad_generated_text(desc):
             print(f"Skip placeholder summary: {url}")
             continue
-        # In fast collection mode, global articles can remain in English. Keep
-        # them; the country insight prompt can still use the source text.
-
         tags = generate_tags(f"{title} {desc}")
         items.append(apply_item_overrides({
             "country": country,
@@ -1341,6 +1365,8 @@ def main():
             "interiorReason": interior_reason,
             "imageInterior": True if img_val and "あり" in img_val else (False if img_val and "なし" in img_val else None),
         }))
+
+    validate_japanese_news_items(items)
 
     if non_paper_rows and idx_llm is not None and rows_with_relevance_signal == 0:
         raise RuntimeError(
