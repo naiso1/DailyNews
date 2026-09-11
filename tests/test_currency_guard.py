@@ -56,6 +56,12 @@ class CurrencyGuardTests(unittest.TestCase):
         fixed, _ = repair_indian_price_units(text, "Rs 19.22 lakh", "in")
         self.assertTrue(fixed.startswith("11.6-inch display, 2026 edition, "))
 
+    def test_lakh_with_a_different_currency_is_not_rupees(self):
+        for source in ["USD 2 lakh", "$2 lakh", "2 lakh USD", "2 lakh dollars", "2 lakh euros"]:
+            text = "2" + RUPEES
+            self.assertEqual(repair_indian_price_units(text, source, "in"), (text, []))
+            self.assertEqual(repair_indian_price_units(source, "Rs 2 crore", "in"), (source, []))
+
     def test_ambiguous_scale_fails_closed_instead_of_guessing(self):
         with self.assertRaises(CurrencyUnitError):
             repair_indian_price_units("2" + RUPEES, "2 lakh or 2 crore rupees", "in")

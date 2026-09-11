@@ -22,6 +22,11 @@ INDIAN_SCALES = {
     "\u30e9\u30c3\u30af": 100000, "\u30e9\u30af": 100000, "\u30af\u30ed\u30fc\u30eb": 10000000,
 }
 SCALES = {**INDIAN_SCALES, "\u4e07": 10000, "\u5104": 100000000, "\u5343": 1000}
+OTHER_CURRENCY = (
+    r"(?:US\$|[A-Z]{0,2}\$|USD|EUR|GBP|AUD|CAD|HKD|SGD|CNY|RMB|JPY|KRW|"
+    r"dollars?|euros?|pounds?|\u20ac|\u00a3|\u00a5|\uffe5|\u20a9|"
+    r"\u7c73?\u30c9\u30eb|\u30e6\u30fc\u30ed|\u5186|\u5143)"
+)
 CURRENCY_RULES = (
     "Preserve the source currency and magnitude. Never convert prices to JPY. "
     "Keep Lakh/Crore explicitly: 1 lakh = 100000 INR (10\u4e07\u30eb\u30d4\u30fc), "
@@ -52,6 +57,14 @@ def _parts(match):
     return parts
 
 
+def _foreign_context(match):
+    # Lakh is a count, not a currency: "$2 lakh" is not an INR source price.
+    before = match.string[:match.start()].rstrip()
+    after = match.string[match.end():].lstrip()
+    return bool(re.search(OTHER_CURRENCY + r"$", before, re.I)
+                or re.match(OTHER_CURRENCY, after, re.I))
+
+
 def repair_indian_price_units(text, source, country):
     """Return (text, corrections). Unknown amounts are not guessed or multiplied.
 
@@ -60,11 +73,14 @@ def repair_indian_price_units(text, source, country):
     """
     if str(country).lower() not in ("in", "india", "\u30a4\u30f3\u30c9"):
         return text, []
-    source_parts = [part for match in MONEY.finditer(str(source or "")) for part in _parts(match)]
+    source_parts = [part for match in MONEY.finditer(str(source or ""))
+                    if not _foreign_context(match) for part in _parts(match)]
     known_values = {value for _, _, value in source_parts}
     changes = []
 
     def replace(match):
+        if _foreign_context(match):
+            return match[0]
         parts = _parts(match)
         if not parts:
             return match[0]
