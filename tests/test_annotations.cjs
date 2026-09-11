@@ -31,9 +31,37 @@ test("explicit currencies and regional ambiguity", () => {
     assert.ok(!extractPrices(raw, "jp").some(p => p.code === "USD" || p.code === "INR" || p.code === "EUR" || p.code === "JPY" || p.code === "CNY"), raw);
   }
   assert.equal(extractPrices("USD 100〜EUR 200").length, 0);
-  for (const raw of ["-100ドル", "1億2000万ドル", "1 234ドル", "Rs 12,34", "€1.234"]) {
+  for (const raw of ["-100ドル", "1 234ドル", "Rs 12,34", "€1.234"]) {
     assert.equal(extractPrices(raw, raw.startsWith("Rs") ? "in" : "us").length, 0, raw);
   }
+});
+
+test("compound Japanese money, complete ranges and invalid unit order", () => {
+  for (const [raw, amount] of [
+    ["31万3千ドル", 313000], ["３１万３千ドル", 313000],
+    ["1億2000万ドル", 120000000], ["USD 31万3000", 313000],
+    ["31万3千500米ドル", 313500], ["1億2万3千ドル", 100023000],
+  ]) assert.equal(extractPrices(raw, "us")[0]?.amount, amount, raw);
+  const range = extractPrices("31万3千〜32万ドル", "us")[0];
+  assert.equal(range.amount, 313000);
+  assert.equal(range.end, 320000);
+  for (const raw of ["1千2万ドル", "1万2万ドル", "1.5万3千ドル", "1万10000ドル", "31万3千円", "31万3千", "31万3 thousandドル"]) {
+    assert.equal(extractPrices(raw, "us").length, 0, raw);
+  }
+  assert.equal(extractPrices("31万3千ドル", "jp").length, 0);
+});
+
+test("September 11 INR corrections and us1620 yen conversion", () => {
+  const snapshot = { base: "JPY", date: "2026-09-10", rates: { INR: 1.61539537, USD: 154.1752754821 } };
+  const now = new Date("2026-09-11T12:00:00+09:00");
+  for (const [amount, expected] of [["192.2", 1922000], ["192.1", 1921000], ["244.9", 2449000]]) {
+    const item = { desc: `価格は${amount}万ルピーから。`, country: "in" };
+    assert.equal(extractPrices(item.desc, "in")[0]?.amount, expected);
+    assert.match(renderCurrency(item, snapshot, now), /円換算/);
+  }
+  const html = renderCurrency({ desc: "価格は31万3千ドル。", country: "us" }, snapshot, now);
+  assert.match(html, /4,825\.7万円/);
+  assert.match(html, /313,000 USD/);
 });
 
 test("rate age, missing rates, exact conversion, and escaped output", () => {

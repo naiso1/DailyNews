@@ -15,13 +15,33 @@
     billion: 1e9, million: 1e6, thousand: 1e3 };
   const currency = "US\\$|U\\.S\\.\\$|A\\$|C\\$|HK\\$|S\\$|NT\\$|USD|EUR|GBP|CNY|RMB|INR|KRW|AUD|CAD|HKD|SGD|TWD|CHF|Rs\\.?|₹|€|£|₩|\\$|米ドル|米国ドル|人民元|中国元|インドルピー|ルピー|ユーロ|英ポンド|ポンド|韓国ウォン|ウォン|豪ドル|豪州ドル|カナダドル|香港ドル|台湾ドル|シンガポールドル|スイスフラン|ドル|元";
   const number = "(?:\\d{1,3}(?:,\\d{3})+|\\d{1,2}(?:,\\d{2})*,\\d{3}|\\d+)(?:\\.\\d+)?";
+  const quantity = `${number}(?:\\s*[億万千]\\s*${number})*`;
   const scale = "billion|million|thousand|lakhs?|lacs?|crores?|クロール|ラック|ラク|百万|千|万|億";
   const pricePattern = new RegExp(
-    `(?:(?<prefix>${currency})\\s*)?(?<first>${number})\\s*(?<scale1>${scale})?` +
+    `(?:(?<prefix>${currency})\\s*)?(?<first>${quantity})\\s*(?<scale1>${scale})?` +
     `(?:\\s*(?<mid>${currency}))?` +
-    `(?:\\s*(?:[~〜～–—-]|to|から)\\s*(?:(?<prefix2>${currency})\\s*)?(?<second>${number})\\s*(?<scale2>${scale})?)?` +
+    `(?:\\s*(?:[~〜～–—-]|to|から)\\s*(?:(?<prefix2>${currency})\\s*)?(?<second>${quantity})\\s*(?<scale2>${scale})?)?` +
     `(?:\\s*(?<suffix>${currency}))?`, "gi",
   );
+
+  function quantityValue(raw, ownScale, sharedScale) {
+    if (!/[億万千]/.test(raw)) {
+      return Number(raw.replaceAll(",", "")) * (units[(ownScale || sharedScale || "").toLowerCase()] || 1);
+    }
+    // Compound Japanese amounts are sums, not one number times its last unit.
+    if (ownScale && !/^[億万千]$/.test(ownScale)) return NaN;
+    const parts = [...`${raw}${ownScale || ""}`.matchAll(new RegExp(`(${number})\\s*([億万千])?`, "g"))];
+    let total = 0, previousUnit = Infinity;
+    for (const [index, part] of parts.entries()) {
+      const factor = units[part[2]] || 1;
+      const value = Number(part[1].replaceAll(",", ""));
+      if (factor >= previousUnit || (index < parts.length - 1 && !Number.isInteger(value))) return NaN;
+      if (index > 0 && value * factor >= previousUnit) return NaN;
+      total += value * factor;
+      previousUnit = factor;
+    }
+    return total;
+  }
 
   function currencyCode(token, country, text) {
     if (!token) return null;
@@ -61,10 +81,8 @@
         currencies = [{ code: "INR", inferred: true }];
       }
       if (!currencies.length || currencies.some(c => !c) || new Set(currencies.map(c => c.code)).size !== 1) continue;
-      const factor1 = units[(g.scale1 || g.scale2 || "").toLowerCase()] || 1;
-      const factor2 = units[(g.scale2 || g.scale1 || "").toLowerCase()] || 1;
-      const amount = Number(g.first.replaceAll(",", "")) * factor1;
-      const end = g.second ? Number(g.second.replaceAll(",", "")) * factor2 : null;
+      const amount = quantityValue(g.first, g.scale1, g.scale2);
+      const end = g.second ? quantityValue(g.second, g.scale2, g.scale1) : null;
       if (!Number.isFinite(amount) || amount < 0 || (end !== null && (!Number.isFinite(end) || end < amount))) continue;
       const code = currencies[0].code;
       // A European decimal point with three trailing digits can be a thousands separator.

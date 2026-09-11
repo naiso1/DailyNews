@@ -2,6 +2,8 @@
 
 import re
 
+from currency_guard import CURRENCY_RULES
+
 
 BRAND_ALIASES = {
     "mazda": ("マツダ",), "toyota": ("トヨタ",), "honda": ("ホンダ",),
@@ -36,6 +38,7 @@ SUMMARY_GROUNDING_RULES = (
     "筆者の感想は『筆者は〜と評価／指摘』として事実と区別し、根拠が曖昧な装備は省いてください。\n"
     "内装の具体情報が複数ある記事の要約では、そのうち2〜3点を残してください。"
     "発売日と価格だけの要約にせず、原文に内装情報がない場合は補ってはいけません。\n"
+    + CURRENCY_RULES
 )
 CRITICISM = re.compile(r"欲しかった|欲しい|ほしかった|ほしい|物足り|もの足り|惜しい|改善の余地|改善を求め|期待したい")
 QUALIFIED = re.compile(r"指摘|批評|求め|評価|課題|不足|改善|要望|不満|欲し|ほし|期待|望ま|物足り|もの足り|惜しい")

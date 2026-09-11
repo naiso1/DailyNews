@@ -2117,6 +2117,8 @@ def fetch_article_text(url):
 
 def summarize_article(title, content, url, country=""):
     """URL本文 + 既存タイトル/本文から日本語要約を生成"""
+    from currency_guard import CURRENCY_RULES, repair_indian_price_units
+
     cache_key = (url or "", title or "", content or "")
     if cache_key in _summary_cache:
         return _summary_cache[cache_key]
@@ -2139,7 +2141,7 @@ def summarize_article(title, content, url, country=""):
     keep_terms = ""
     if cn_keywords:
         keep_terms = "Use these terms as-is (do not translate): " + ", ".join(cn_keywords[:6]) + "\\n"
-    currency_rule = "Currency rule: Keep original currency/units; do not convert to JPY or invent amounts.\\n"
+    currency_rule = CURRENCY_RULES
     prompt = (
         "以下の情報を統合して、日本語で要約してください。\\n"
         f"条件1: タイトルは{SUMMARY_TITLE_TARGET}字程度、最大{SUMMARY_TITLE_LIMIT}字の自然なニュース見出し。です・ます調や句点を避け、途中で切らない。\\n"
@@ -2384,6 +2386,11 @@ def summarize_article(title, content, url, country=""):
             summary_body = trim_to_sentence(normalize_text(content), SUMMARY_CONTENT_LIMIT)
     summary_title = normalize_known_brand_names(summary_title)
     summary_body = normalize_known_brand_names(summary_body)
+    # Run after every LLM rewrite so later compaction cannot drop the scale again.
+    summary_title, title_prices = repair_indian_price_units(summary_title, final_source_text, country)
+    summary_body, body_prices = repair_indian_price_units(summary_body, final_source_text, country)
+    for before, after in title_prices + body_prices:
+        print(f"  [CURRENCY_UNIT_FIXED] {before} -> {after}: {url}")
     if _is_valid_japanese(summary_title) and _is_valid_japanese(summary_body):
         _summary_cache[cache_key] = (summary_title, summary_body)
     else:
@@ -2655,7 +2662,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             except Exception:
                 pass
 
-    sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason]
+    # Retain source prices for validation when publication resumes without the LLM.
+    sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
     sheet2_df = filtered[sheet_cols].copy()
     if col_date in sheet2_df.columns:
         sheet2_df[col_date] = pd.to_datetime(sheet2_df[col_date], errors="coerce").dt.strftime("%Y-%m-%d")

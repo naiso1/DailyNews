@@ -111528,7 +111528,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "in1670",
         title: "Hyundai、Lounge Edition Creta/Alcazar/Electric発売、後部エンタメ11.6インチ搭載",
-        desc: "HyundaiはCreta、Alcazar、Creta ElectricのLounge Editionを発売。後部座席向けに11.6インチエンタメシステム、BOSE 8スピーカー、シームレスな内装加飾を備える。Alcazarは5人乗り化し、Creta Electricはダッシュカメラとワイヤレス充電器を追加。価格はCretaで19.22ルピーから。",
+        desc: "HyundaiはCreta、Alcazar、Creta ElectricのLounge Editionを発売。後部座席向けに11.6インチエンタメシステム、BOSE 8スピーカー、シームレスな内装加飾を備える。Alcazarは5人乗り化し、Creta Electricはダッシュカメラとワイヤレス充電器を追加。価格はCretaで192.2万ルピーから。",
         url: "https://www.rushlane.com/new-hyundai-lounge-edition-creta-ev-5-seat-alcazar-launched-12555523.html",
         source: "RushLane",
         date: "2026-09-10",
@@ -111542,8 +111542,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in1671",
-        title: "Hyundai Creta Alcazar Creta EV Lounge Edition発売19.21万ルピーから",
-        desc: "Hyundai Motor IndiaはCreta、Alcazar、Creta EVのLounge Editionを発売した。価格は19.21万ルピーからで、後部座席用11.6インチエンタテインメントスクリーン、専用インテリアトリム、黒色エクステリアデテールを備える。",
+        title: "Hyundai Creta Alcazar Creta EV Lounge Edition発売192.1万ルピーから",
+        desc: "Hyundai Motor IndiaはCreta、Alcazar、Creta EVのLounge Editionを発売した。価格は192.1万ルピーからで、後部座席用11.6インチエンタテインメントスクリーン、専用インテリアトリム、黒色エクステリアデテールを備える。",
         url: "https://gaadiwaadi.com/hyundai-creta-alcazar-creta-ev-lounge-editions-launched-at-rs-19-21-lakh/",
         source: "GaadiWaadi",
         date: "2026-09-10",
@@ -111559,7 +111559,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "in1672",
         title: "新クレタ・アルカザールームエディション11.6インチスクリーン搭載",
-        desc: "Hyundai IndiaはCreta ElectricとAlcazarに「Lounge Edition」を追加。11.6インチのリアエンタテインメントシステムや、銀色インサート付き黒ダッシュボード、月白色アンビエントライトを備える。Cretaは1.5L排気量エンジン、Alcazarは1.5LディーゼルAT搭載で、Creta Electricは24.49万ルピーから販売される。",
+        desc: "Hyundai IndiaはCreta ElectricとAlcazarに「Lounge Edition」を追加。11.6インチのリアエンタテインメントシステムや、銀色インサート付き黒ダッシュボード、月白色アンビエントライトを備える。Cretaは1.5L排気量エンジン、Alcazarは1.5LディーゼルAT搭載で、Creta Electricは244.9万ルピーから販売される。",
         url: "https://www.indiacarnews.com/news/new-hyundai-suv-special-edition-at-rs-19-21-lakh-11-6-inch-screen-more-68980/",
         source: "IndiaCarNews",
         date: "2026-09-10",

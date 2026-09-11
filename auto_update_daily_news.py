@@ -12,6 +12,8 @@ import json
 import textwrap
 import requests
 
+from ニュース収集.currency_guard import repair_indian_price_units
+
 ROOT = Path(__file__).resolve().parent
 NEWS_PATH = ROOT / "news_data.js"
 INSIGHTS_PATH = ROOT / "insights_data.js"
@@ -1316,6 +1318,8 @@ def main():
     idx_img判定 = find_col(header, "画像判定")
     idx_interior_score = find_col(header, "内装関連度", "関連度スコア")
     idx_interior_reason = find_col(header, "内装判定理由")
+    idx_original_title = find_col_exact(header, "タイトル")
+    idx_original_desc = find_col_exact(header, "内容")
 
     def get(row, idx):
         if idx is None:
@@ -1338,6 +1342,12 @@ def main():
         interior_score = parse_score_0_100(get(row, idx_interior_score))
         interior_reason = get(row, idx_interior_reason)
         country = map_country(country_raw) or "jp"
+        # Also guard resumed CSV publication, which does not run the summarizer.
+        original = f"{get(row, idx_original_title)} {get(row, idx_original_desc)}"
+        title, title_prices = repair_indian_price_units(title, original, country)
+        desc, desc_prices = repair_indian_price_units(desc, original, country)
+        for before, after in title_prices + desc_prices:
+            print(f"[CURRENCY_UNIT_FIXED] {before} -> {after}: {url}")
         if country != "paper":
             non_paper_rows += 1
             if ("対象" in llm_val) or interior_score is not None:
