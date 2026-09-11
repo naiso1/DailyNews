@@ -46,6 +46,14 @@ class SourceAnchorTests(unittest.TestCase):
         self.assertFalse(source_identifiers_match("N900を発表。", ["N90"]))
         self.assertFalse(source_identifiers_match("別のブランドの新車。", ["Skynomad"]))
 
+    def test_translated_budget_car_names_and_mixed_case_brand(self):
+        helpers = anchor_helpers()
+        source = "No Screen, No Problem: Europe's New Budget EV Goes Back To Basics. The new Dacia Spring skips the center screen."
+        self.assertTrue(helpers["summary_matches_source"]("ダチアのスプリングは中央画面を省く。", source))
+        source = "New SUV Spotted in India. Called the iCaur 03, it is coming to India."
+        self.assertEqual(helpers["extract_latin_source_anchors"](source), ["iCaur"])
+        self.assertTrue(source_identifiers_match("マルチ・スズキのバレーノ。", ["Maruti"]))
+
 
 class ArticleBodyTests(unittest.TestCase):
     def setUp(self):
@@ -60,6 +68,20 @@ class ArticleBodyTests(unittest.TestCase):
     def test_autocar_extracts_available_body_not_navigation(self):
         self.response.text = '<body><nav>MENU AND REVIEWS</nav><div class="field-name-body">EV charging advice.</div></body>'
         self.assertEqual(self.env["fetch_article_text"]("https://www.autocar.co.uk/car-news/test"), "EV charging advice.")
+
+    def test_motor1_and_indiacarnews_exclude_related_stories(self):
+        for url, markup in [
+            ("https://www.motor1.com/news/test/", '<article><div class="postBody">Dacia phone holder.</div><aside>OTHER SEATS</aside></article>'),
+            ("https://www.indiacarnews.com/news/test/", '<article><div class="tdb_single_content"><div class="tdb-block-inner">Baleno touchscreen.</div></div><aside>OTHER BRANDS</aside></article>'),
+        ]:
+            self.response.text = markup
+            text = self.env["fetch_article_text"](url)
+            self.assertNotIn("OTHER", text)
+            self.assertTrue(text)
+
+    def test_missing_site_specific_body_does_not_use_navigation(self):
+        self.response.text = '<article><nav>OTHER BRANDS</nav></article>'
+        self.assertEqual(self.env["fetch_article_text"]("https://www.motor1.com/news/missing/"), "")
 
 
 class PublicationTests(unittest.TestCase):

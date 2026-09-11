@@ -10,6 +10,8 @@ BRAND_ALIASES = {
     "volkswagen": ("フォルクスワーゲン",), "renault": ("ルノー",),
     "volvo": ("ボルボ",), "ford": ("フォード",), "tesla": ("テスラ",),
     "hyundai": ("ヒョンデ",), "kia": ("起亜", "キア"),
+    "dacia": ("ダチア",), "maruti": ("マルチ", "マルティ"),
+    "icaur": (),
     "mercedes-benz": ("メルセデス・ベンツ", "メルセデスベンツ"),
 }
 

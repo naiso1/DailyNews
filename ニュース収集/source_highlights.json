@@ -401,5 +401,408 @@
     "status": "verified",
     "finalUrl": "https://www.autocarindia.com/auto-features/3-reasons-to-buy-the-2026-maruti-baleno-and-2-to-skip-it-441029",
     "sourceExcerpt": "Maruti Suzuki recently updated the Baleno with new features, cosmetic changes and, most significantly, a new 1.2-litre three-cylinder petrol engine."
+  },
+  "https://news.yahoo.co.jp/articles/99cd749921a2b93482bc00237b8deac58dc19a4b?source=rss": {
+    "fingerprint": "1a2cf9b327be4811d95e3fedb0583c61336ccd09879fd332ad89e14a40cb3469",
+    "checkedAt": "2026-09-10T23:57:45.018172+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/99cd749921a2b93482bc00237b8deac58dc19a4b?source=rss",
+    "sourceExcerpt": "パイオニアの最高級モデル「TS-X9」は、アルミダイキャスト製の完全密閉型キャビネットを採用。"
+  },
+  "https://news.yahoo.co.jp/articles/24647d85512abb8992b12af8c76ea4c01b7df1f2?source=rss": {
+    "fingerprint": "8c719818e89a20f86373d11b2a85d6b66132478d8e95a39442db1b3d8e1912de",
+    "checkedAt": "2026-09-10T23:57:45.380288+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/24647d85512abb8992b12af8c76ea4c01b7df1f2?source=rss",
+    "sourceExcerpt": "車内には運転席・助手席という区分がなく、横一列のベンチ的なシート配置とし、大型の横長ディスプレイからドアやシート、空調、音楽まで一括操作できる仕様だ。"
+  },
+  "https://news.yahoo.co.jp/articles/8bff11a72bc78ad99828ff41c9dc676d98aae06b?source=rss": {
+    "fingerprint": "8689ff684b368d657883ee1f78cbfa79273a92bf20606e7ba9c605959c8d1bd3",
+    "checkedAt": "2026-09-10T23:57:45.617130+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/8bff11a72bc78ad99828ff41c9dc676d98aae06b?source=rss",
+    "sourceExcerpt": "リアサスペンションブレースとラゲッジブレースには、熱硬化樹脂を塗布して焼き付けることによるレスポンス向上減衰構造「REDS（Response-Enhancing Damping Structure）」を用いることで、高周波振動の低減を図っている。"
+  },
+  "https://news.yahoo.co.jp/articles/0cf02223c92e0bab0f4be914f01c854e95af2b06?source=rss": {
+    "fingerprint": "346f45430674f4100a40100636dc8181469fe5fe2a3fd7ecb5be826924c05166",
+    "checkedAt": "2026-09-10T23:57:46.004150+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/0cf02223c92e0bab0f4be914f01c854e95af2b06?source=rss",
+    "sourceExcerpt": "ブリッド株式会社（愛知県東海市、代表取締役社長：高瀬 嶺生）は、フルバケットシート（背もたれの角度調整機構を持たず、体を包み込む形状のシート）の新シリーズNURMANを2026年9月7日より受注開始した。"
+  },
+  "https://news.yahoo.co.jp/articles/159a7f8953f9f1a34ea1850033c4190d4dd7a26e?source=rss": {
+    "fingerprint": "158df8a0c1267882f14f3e2f2c8b7769f56d8bbf0ca978072bf0a33b4c22d60a",
+    "checkedAt": "2026-09-10T23:57:46.373363+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/159a7f8953f9f1a34ea1850033c4190d4dd7a26e?source=rss",
+    "sourceExcerpt": "CRAFTWORKSの専用ダッシュボードトレイは、スマホホルダーと小物収納をひとつにまとめた車種専用設計だ。"
+  },
+  "https://news.yahoo.co.jp/articles/e0f36edf39b6899f204b6d01afc89b64159bf114?source=rss": {
+    "fingerprint": "22c15dd7153022ecd5b0cda0ebca767a8b2e7596b3952ac24b2c01a621442b46",
+    "checkedAt": "2026-09-10T23:57:46.639502+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/e0f36edf39b6899f204b6d01afc89b64159bf114?source=rss",
+    "sourceExcerpt": "力強く存在感のあるエクステリアデザインに加え、日本の伝統工芸に着想を得たインテリアを採用するなど、細部に至るまでこだわりが詰め込まれています。"
+  },
+  "https://news.yahoo.co.jp/articles/75c6451ebbce373f74425775a7379e0f702f2a20?source=rss": {
+    "fingerprint": "d9424d8e1ff6942536a742346f2ca7dd1f53a7b76519d27d331a39401eba96b5",
+    "checkedAt": "2026-09-10T23:57:47.003673+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/75c6451ebbce373f74425775a7379e0f702f2a20?source=rss",
+    "sourceExcerpt": "ポルシェ・カイエン・エレクトリックとBMW iX xドライブ60 Mスポーツも、タッチモニターは大きいが、必要最低限の物理スイッチは残されている。"
+  },
+  "https://news.yahoo.co.jp/articles/deb340a550d20d103ca160372d5dd97d99bd5c76?source=rss": {
+    "fingerprint": "9436794b14df9fca7329ad230bef9906763dfd9578638db2748ae493c4343db7",
+    "checkedAt": "2026-09-10T23:57:47.269161+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/deb340a550d20d103ca160372d5dd97d99bd5c76?source=rss",
+    "sourceExcerpt": "さらに、リヤサスペンションブレースとラゲッジブレースに熱硬化樹脂を塗布して焼き付けるレスポンス向上減衰構造『レスポンス・エンハンシング・ダンプニング・ストラクチャー（REDS）』を採用し、高周波振動を低減させた。"
+  },
+  "https://news.yahoo.co.jp/articles/e202b19aec842c6f6281ea07d99c643700fe3b2e?source=rss": {
+    "fingerprint": "637ac6000c9335694f77a49c8fdc9ba1837a826996b8cfa582b242d1feee38f2",
+    "checkedAt": "2026-09-10T23:57:47.542664+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/e202b19aec842c6f6281ea07d99c643700fe3b2e?source=rss",
+    "sourceExcerpt": "フィアットの欧州責任者ガエターノ・トレル氏とグランデパンダ"
+  },
+  "https://news.yahoo.co.jp/articles/f3e158716f9b24fdd713659c2fad50c3ce6cb95f?source=rss": {
+    "fingerprint": "969d7915131ff6b950ea906d3bb87e2ca057514a5ea1de2419b774b2b23d7a6a",
+    "checkedAt": "2026-09-10T23:57:47.872511+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/f3e158716f9b24fdd713659c2fad50c3ce6cb95f?source=rss",
+    "sourceExcerpt": "さらに、高性能遮音ガラスや吸音材、遮音材を配して車室外からのあらゆる音を徹底して遮る『高遮音ボディ』、第3世代 eパワーの低振動化などにより、全開加速時の騒音はライバル車より5dB低い。"
+  },
+  "https://www.motor1.com/news/807811/audi-ev-lease-buyout-incentive/": {
+    "fingerprint": "c6a678de02b8bd4c9ead848187b88670125d0cff2a43b56712f78a6d1b95c728",
+    "checkedAt": "2026-09-10T23:57:48.189942+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/807811/audi-ev-lease-buyout-incentive/",
+    "sourceExcerpt": "The E-Tron GT gets the largest cut at $10,000 off the buyout",
+    "sourceExcerptEnd": "and the sedan's steeper depreciation curve among Audi's electric lineup."
+  },
+  "https://www.motor1.com/news/807805/mclaren-new-models/": {
+    "fingerprint": "c0f05a14d01114adaae6c6789e7b4f2be746f12edac2aecd51ea7be61e368c04",
+    "checkedAt": "2026-09-10T23:57:49.004748+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/807805/mclaren-new-models/",
+    "sourceExcerpt": "Longer than the Artura, it may cost from $313,000 and feature a",
+    "sourceExcerptEnd": "leather interior and a tempered-glass engine cover atop the V6."
+  },
+  "https://www.motor1.com/news/807777/tesla-cybercab-hidden-joystick-robotaxi/": {
+    "fingerprint": "f112c6b1cc11227db268b180bb0d7ee663470bedff53c5ee1b718e6df9471eec",
+    "checkedAt": "2026-09-10T23:57:49.384929+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/807777/tesla-cybercab-hidden-joystick-robotaxi/",
+    "sourceExcerpt": "Chair Robyn Denholm has acknowledged a fallback plan: \"If we have to",
+    "sourceExcerptEnd": "now that a control interface has turned up on screen."
+  },
+  "https://www.motor1.com/news/807764/new-dacia-spring-no-screen/": {
+    "fingerprint": "93dfaa462d80281c65b9c534d88b030f06759aefaca6a839e5329962cb24790c",
+    "checkedAt": "2026-09-10T23:57:49.764340+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/807764/new-dacia-spring-no-screen/",
+    "sourceExcerpt": "There’s a dedicated spot on the dashboard to hold the phone, while",
+    "sourceExcerptEnd": "you operate key functions without constantly poking at the device."
+  },
+  "https://www.motor1.com/news/807699/2028-volvo-xc40-details-specs/": {
+    "fingerprint": "05abc4e1fa1988ed602ce1d86d69688e5a8c4c37cf2f62fc38e2fca337018af2",
+    "checkedAt": "2026-09-10T23:57:50.174084+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/807699/2028-volvo-xc40-details-specs/",
+    "sourceExcerpt": "An updated cabin features Volvo's new 11.2-inch screen, as well as optional leather seats"
+  },
+  "https://www.jalopnik.com/2253344/2028-volvo-xc40-refresh-design-specs-details-reveal/": {
+    "fingerprint": "6016c3375116fe1d2a604abf0c1a0e6bcdc61b3a116d1198bb8148d391128286",
+    "checkedAt": "2026-09-10T23:57:50.533882+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.jalopnik.com/2253344/2028-volvo-xc40-refresh-design-specs-details-reveal/",
+    "sourceExcerpt": "New sculpted sheetmetal on the outside still keeps the funky and fun",
+    "sourceExcerptEnd": "better headlights and a more advanced suite of driver-safety features."
+  },
+  "https://www.caranddriver.com/photos/a73643388/2026-dodge-durango-rt-test-interior-gallery/": {
+    "fingerprint": "882994e3c3267a257c619105bcb9a24e0ceb59dcf64d047cfaa027ffa071ab1f",
+    "checkedAt": "2026-09-10T23:57:50.890294+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.caranddriver.com/photos/a73643388/2026-dodge-durango-rt-test-interior-gallery/",
+    "sourceExcerpt": "The cabin features a nicely sized infotainment touchscreen and a proper shift lever—no rotary knobs here."
+  },
+  "https://www.caranddriver.com/news/a73647209/2028-volvo-xc40-refresh-revealed/": {
+    "fingerprint": "df8a6aff182171db35db61abcd5af5d77be2507372aa5b589151a9d247c62336",
+    "checkedAt": "2026-09-10T23:57:51.539989+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.caranddriver.com/news/a73647209/2028-volvo-xc40-refresh-revealed/",
+    "sourceExcerpt": "Volvo also gives the XC40 ambient interior lighting for the first time, and it pairs nicely with the new cabin materials."
+  },
+  "https://www.caranddriver.com/photos/a73647145/2028-volvo-xc40-exterior-gallery/": {
+    "fingerprint": "b892da8b7c288e0d2557357d1951a09bb8b5aa9101c23754807e6ddb3450f251",
+    "checkedAt": "2026-09-10T23:57:51.686462+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.caranddriver.com/photos/a73647145/2028-volvo-xc40-exterior-gallery/",
+    "sourceExcerpt": "Volvo gave its subcompact luxury SUV another makeover, with the 2028 XC40 adopting a more sophisticated look."
+  },
+  "https://www.topspeed.com/cheap-used-luxury-cars-today/": {
+    "fingerprint": "32a23a09db1e3a2fecbc8ecc07c2b7b3b69113b503d70442d85539fc6174a62b",
+    "checkedAt": "2026-09-10T23:57:51.889744+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.topspeed.com/cheap-used-luxury-cars-today/",
+    "sourceExcerpt": "Maintenance and repair costs on luxury vehicles can be eye-watering, and they don't disappear just because the purchase price did."
+  },
+  "https://www.autocar.co.uk/car-news/new-cars/new-look-volvo-xc40-after-nine-years-sale": {
+    "fingerprint": "2b404e8e49c511553db44329a994c117a56a555013fdcf949b77ddf702cdb2b4",
+    "checkedAt": "2026-09-10T23:57:53.629834+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/new-cars/new-look-volvo-xc40-after-nine-years-sale",
+    "sourceExcerpt": "Inside, a larger (11.2in) touchscreen arrives featuring Volvo’s latest infotainment system, as featured in its most recent EVs."
+  },
+  "https://www.autocar.co.uk/opinion/new-cars/bombshell-quotes-and-broken-promises-inside-seats-15-year-downfall": {
+    "fingerprint": "aaf9ceab2ac123bd24b6a49c2354b6a4a153bf062eb3d12f9e530c4f5aab0723",
+    "checkedAt": "2026-09-10T23:57:55.301360+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/opinion/new-cars/bombshell-quotes-and-broken-promises-inside-seats-15-year-downfall",
+    "sourceExcerpt": "'Seat faces final survival bid,' read an Autocar headline in May 2010."
+  },
+  "https://www.autocar.co.uk/car-news/business-manufacturing/ingenium-electric-jlrs-engine-factory-now-ev-powerhouse": {
+    "fingerprint": "a2b63654b2a73d2454ba74ff695ae96b280a188d8c1353a44d84bedac7aaeaf0",
+    "checkedAt": "2026-09-10T23:57:55.747283+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/business-manufacturing/ingenium-electric-jlrs-engine-factory-now-ev-powerhouse",
+    "sourceExcerpt": "JLR’s former Engine Manufacturing Centre in Wolverhampton changed its name to the",
+    "sourceExcerptEnd": "investment to build electric motor/gearbox units and assemble battery packs."
+  },
+  "https://www.autoexpress.co.uk/volvo/xc40/370398/new-volvo-xc40-facelift-popular-suv-gets-range-rover-esque-makeover": {
+    "fingerprint": "d2d439effae10ccd4acc1cbd8ead07c22ed200b3874f16006c0a639e97cebe7c",
+    "checkedAt": "2026-09-10T23:57:56.177060+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/volvo/xc40/370398/new-volvo-xc40-facelift-popular-suv-gets-range-rover-esque-makeover",
+    "sourceExcerpt": "Elsewhere, indirect ambient lighting on the dashboard similar to what we’ve seen",
+    "sourceExcerptEnd": "there are new, more premium materials available throughout the interior."
+  },
+  "https://www.autoexpress.co.uk/mitsubishi/l200/370406/new-mitsubishi-l200-commercial-gives-pick-truck-more-cargo-space-and-less": {
+    "fingerprint": "77c035ba053fec961ce1e8e5f3c558761a17e129a090a90421cbddef9384bfa5",
+    "checkedAt": "2026-09-10T23:57:56.646801+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/mitsubishi/l200/370406/new-mitsubishi-l200-commercial-gives-pick-truck-more-cargo-space-and-less",
+    "sourceExcerpt": "The new L200 Commercial removes the rear seats from a double-cab truck",
+    "sourceExcerptEnd": "down large items in the newly created internal load area."
+  },
+  "https://cnevpost.com/2026/09/10/geely-launches-galaxy-tt-sedan/": {
+    "fingerprint": "3d68a2c9001a13efc79cc827c053b4dbfb05b30d4185b5f159a6c4781c2cbca4",
+    "checkedAt": "2026-09-10T23:57:56.860010+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/10/geely-launches-galaxy-tt-sedan/",
+    "sourceExcerpt": "The cabin features the Flyme Auto 2 system and Super Eva AI",
+    "sourceExcerptEnd": "15.4-inch central touchscreen and a 25.6-inch augmented-reality head-up display (AR-HUD)."
+  },
+  "https://cnevpost.com/2026/09/10/im-motors-pre-sales-new-ls6/": {
+    "fingerprint": "cdcd8de5441e699cb1ef4d85097364728e47b143d9fb16aa627dd96ed50fa6b9",
+    "checkedAt": "2026-09-10T23:57:57.269732+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/10/im-motors-pre-sales-new-ls6/",
+    "sourceExcerpt": "Inside the cabin, IM Motors is offering a B&O sound system, a",
+    "sourceExcerptEnd": "and dual-side access as free upgrades for a limited time."
+  },
+  "https://cnevpost.com/2026/09/10/li-auto-kicks-off-european-push-names-overseas-i6-li-6/": {
+    "fingerprint": "0fd8998f46bf65d2c88c9d44948ef5d51a79e3e63e63b0ab9ff289f234576ece",
+    "checkedAt": "2026-09-10T23:57:57.420443+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/10/li-auto-kicks-off-european-push-names-overseas-i6-li-6/"
+  },
+  "https://cnevpost.com/2026/09/10/geely-taps-volvo-european-network-lynk-co/": {
+    "fingerprint": "d45572099427966153711706cb88a4d96d38b9f6f8fb34194e97209c634bbda5",
+    "checkedAt": "2026-09-10T23:57:57.542970+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/10/geely-taps-volvo-european-network-lynk-co/"
+  },
+  "https://cnevpost.com/2026/09/10/china-nev-retail-first-week-sept-2026/": {
+    "fingerprint": "e21197a36a923c8fc3310b1499ca3ceceb3c5309a25a701aae8f9de20c7a57da",
+    "checkedAt": "2026-09-10T23:57:57.680255+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/10/china-nev-retail-first-week-sept-2026/",
+    "sourceExcerpt": "China's new energy vehicle (NEV) retail sales picked up at the start",
+    "sourceExcerptEnd": "last month, though the broader auto market remained under pressure."
+  },
+  "https://cnevpost.com/2026/09/10/china-nev-sales-aug-2026-caam/": {
+    "fingerprint": "5ee9764a7a76eb681f5fa0e34eef9a793eb5fc96746ac5d17217c9ac1f0f4b98",
+    "checkedAt": "2026-09-10T23:57:57.809441+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/10/china-nev-sales-aug-2026-caam/",
+    "sourceExcerpt": "CAAM's NEV wholesale figures cover passenger and commercial vehicles, ",
+    "sourceExcerptEnd": "-in hybrid electric vehicles (PHEVs) and fuel-cell vehicles."
+  },
+  "https://cnevpost.com/2026/09/10/byd-fang-cheng-bao-launch-formula-s-sept-16/": {
+    "fingerprint": "56935332abf2769be6fca0ca2d9c62a98a9cc354a4b7e2ba03f4b8ade8e94552",
+    "checkedAt": "2026-09-10T23:57:57.993332+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/10/byd-fang-cheng-bao-launch-formula-s-sept-16/",
+    "sourceExcerpt": "The entire lineup features BYD's second-generation Blade Battery and supports flash charging."
+  },
+  "https://cnevpost.com/2026/09/10/zotye-eyes-comeback-new-ev-trial-production/": {
+    "fingerprint": "30b3c01bd4e3b15bb255350216475432e94a33c2cfe5892d91203aac045067d6",
+    "checkedAt": "2026-09-10T23:57:58.144641+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/10/zotye-eyes-comeback-new-ev-trial-production/"
+  },
+  "https://cnevpost.com/2026/09/10/nio-backs-ev-journey-20000-km-eurasia/": {
+    "fingerprint": "f9900a96cac18630ae04e99f11ab27b5a58f25438efd50c1aaf3679df56cf644",
+    "checkedAt": "2026-09-10T23:57:58.272840+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/10/nio-backs-ev-journey-20000-km-eurasia/"
+  },
+  "https://www.autocarindia.com/car-news/2026-maruti-baleno-on-road-price-listed-for-top-cities-440713": {
+    "fingerprint": "aad7b1baa2c44f3680e2dda208038f76e71a6040c0f0febdd2d7dfe74c7270c7",
+    "checkedAt": "2026-09-10T23:57:58.399475+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/car-news/2026-maruti-baleno-on-road-price-listed-for-top-cities-440713",
+    "sourceExcerpt": "Maruti Suzuki has revealed the full price list of the 2026 Baleno."
+  },
+  "https://www.autocarindia.com/auto-features/all-flex-fuel-cars-showcased-in-india-so-far-440636": {
+    "fingerprint": "ea3cb1a9062dfcc3b461c6fcdde7273cda369bd45945ed0459bd1e514a32b232",
+    "checkedAt": "2026-09-10T23:57:59.202440+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-features/all-flex-fuel-cars-showcased-in-india-so-far-440636",
+    "sourceExcerpt": "Infact, Maruti Suzuki was the first carmaker to begin production and launch a flex -fuel vehicle with the Wagon R Bioflex."
+  },
+  "https://www.rushlane.com/new-hyundai-lounge-edition-creta-ev-5-seat-alcazar-launched-12555523.html": {
+    "fingerprint": "1416cb411d299864de8ba023593be4e57e0a1d1b5f84e70ec07c6cedb86356cb",
+    "checkedAt": "2026-09-10T23:57:59.801518+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.rushlane.com/new-hyundai-lounge-edition-creta-ev-5-seat-alcazar-launched-12555523.html",
+    "sourceExcerpt": "Positioned towards buyers looking for a more premium rear-seat experience, all three",
+    "sourceExcerptEnd": "Seat Entertainment System along with exclusive interior and exterior treatments."
+  },
+  "https://gaadiwaadi.com/hyundai-creta-alcazar-creta-ev-lounge-editions-launched-at-rs-19-21-lakh/": {
+    "fingerprint": "5895a02e37025ca7982f9f2b761d75a262b2426e5a901170563c8a64a2890677",
+    "checkedAt": "2026-09-10T23:58:01.370638+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "ValueError"
+  },
+  "https://www.indiacarnews.com/news/new-hyundai-suv-special-edition-at-rs-19-21-lakh-11-6-inch-screen-more-68980/": {
+    "fingerprint": "e04c7326818962f813817c71531641f07e1863e092beef74a94d5fcb2aed7e65",
+    "checkedAt": "2026-09-10T23:58:03.032852+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.indiacarnews.com/news/new-hyundai-suv-special-edition-at-rs-19-21-lakh-11-6-inch-screen-more-68980/",
+    "sourceExcerpt": "Hyundai Motor India has introduced the new Lounge Edition of the Creta,",
+    "sourceExcerptEnd": "lakh, Rs 24.49 lakh and Rs 21,80 lakh, respectively (ex-showroom)."
+  },
+  "https://www.indiacarnews.com/news/new-4wd-electric-suv-spotted-in-india-harrier-ev-rival-68976/": {
+    "fingerprint": "7bbaa131ed4c994999560c44316cbeb7bc0af091525cdba680b8b33b6e0a5c2a",
+    "checkedAt": "2026-09-10T23:58:04.745311+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.indiacarnews.com/news/new-4wd-electric-suv-spotted-in-india-harrier-ev-rival-68976/",
+    "sourceExcerpt": "The iCaur 03 comes packed with several advanced features such as a",
+    "sourceExcerptEnd": "audio system, 50W wireless charger, Level 2 ADAS and more."
+  },
+  "https://www.indiacarnews.com/news/new-maruti-baleno-price-list-out-5-variants-rs-5-99-lakh-rs-9-99-lakh-68972/": {
+    "fingerprint": "e09a268630a08659d46567a2a203d15a95874fa115c1107ef6ad9c1b78a7221d",
+    "checkedAt": "2026-09-10T23:58:05.921177+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.indiacarnews.com/news/new-maruti-baleno-price-list-out-5-variants-rs-5-99-lakh-rs-9-99-lakh-68972/",
+    "sourceExcerpt": "Other key features include a 9-inch touchscreen infotainment system, wireless Android Auto",
+    "sourceExcerptEnd": "parking sensors, Isofix child seat anchors and hill hold assist."
+  },
+  "https://www.carblogindia.com/hyundai-lounge-edition-creta-alcazar-creta-electric-launched/": {
+    "fingerprint": "2e8542d6737888e4ce86ea8b54c550dfdd368da0488372b919cd2a59a3b38078",
+    "checkedAt": "2026-09-10T23:58:07.077346+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.carblogindia.com/hyundai-lounge-edition-creta-alcazar-creta-electric-launched/",
+    "sourceExcerpt": "The main attractions of these SUVs include a new integrated 11.6-inch Rear",
+    "sourceExcerptEnd": "lounge-like seating configuration, voice-enabled smart panoramic sunroof and much more."
+  },
+  "https://www.autopunditz.com/post/hyundai-lounge-edition-creta-alcazar-creta-electric-price-features": {
+    "fingerprint": "e6205006e54f5ee8ae52d811298c496271fcdbda921c671a43fd17a55bcb0af0",
+    "checkedAt": "2026-09-10T23:58:08.000549+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autopunditz.com/post/hyundai-lounge-edition-creta-alcazar-creta-electric-price-features",
+    "sourceExcerpt": "The rear entertainment screen gives the Lounge Edition a clear identity, but the five-seat Alcazar is the more strategically interesting addition."
+  },
+  "https://www.autopunditz.com/post/classic-350-vs-meteor-350-hness-cb350-cb350rs-ronin-jawa-42": {
+    "fingerprint": "358dff8236b5598949c4de932100ac9094d88e6a70df6ea0a022639f79ad16a9",
+    "checkedAt": "2026-09-10T23:58:08.639981+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autopunditz.com/post/classic-350-vs-meteor-350-hness-cb350-cb350rs-ronin-jawa-42",
+    "sourceExcerpt": "The Royal Enfield Classic 350 and Meteor 350 dominate the category in",
+    "sourceExcerptEnd": "Honda H’ness CB350 and CB350RS focus on refinement and equipment."
+  },
+  "https://www.electrive.com/2026/09/10/waning-interest-in-battery-electric-cars-clepa-survey-reveals-surprising-results/": {
+    "fingerprint": "081ccc9d31b779f9f04a682a39be82670e9b91b2929889d3fdd744cf1242db33",
+    "checkedAt": "2026-09-10T23:58:09.136290+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.electrive.com/2026/09/10/bam-identifies-lithium-isotopes-as-diagnostic-tool-for-battery-ageing/": {
+    "fingerprint": "437d82d5187bbb7cffc305de68766c900f652c9d060fc46948f1aa1dba77aa45",
+    "checkedAt": "2026-09-10T23:58:09.402422+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.electrive.com/2026/09/10/mitsubishi-eclipse-cross-new-battery-options-deliver-up-to-650-km-range/": {
+    "fingerprint": "c6df67570dfe5cbc7b10ad85cb85a40253272af573c647f934395ef9f08cf152",
+    "checkedAt": "2026-09-10T23:58:09.476135+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://electriccarsreport.com/2026/09/toyota-recalls-10000-c-hr-evs-over-sudden-power-loss-risk/": {
+    "fingerprint": "40b3b47f06bee2b333fbdc0bcb1eac459d14792180ac5c010e2f634b579ae141",
+    "checkedAt": "2026-09-10T23:58:09.566178+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/toyota-recalls-10000-c-hr-evs-over-sudden-power-loss-risk/",
+    "sourceExcerpt": "The issue is particularly relevant when the battery has a high state of charge or is fully charged."
+  },
+  "https://electriccarsreport.com/2026/09/lg-energy-solution-advances-lmr-battery-technology-for-electric-vehicles/": {
+    "fingerprint": "8e2a0ce03337c3435048214bd1f015e0cd68b6e9651b44e17f79f17542332efc",
+    "checkedAt": "2026-09-10T23:58:10.818241+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/lg-energy-solution-advances-lmr-battery-technology-for-electric-vehicles/",
+    "sourceExcerpt": "The research, conducted with Professor Jongwoo Lim and his team in the",
+    "sourceExcerptEnd": "gas generation and capacity degradation during repeated charging and discharging."
   }
 }

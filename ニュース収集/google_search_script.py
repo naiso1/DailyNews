@@ -1651,6 +1651,9 @@ def extract_latin_source_anchors(text, limit=8):
         "what", "why", "how", "can", "cannot", "copy", "could", "should", "would",
         "tips", "happy", "ownership", "electric", "veteran", "buy", "avoid", "your",
         "next", "almost", "anything", "have", "been", "that", "more", "than",
+        "india", "europe", "screen", "problem", "budget", "goes", "back", "basics",
+        "spotted", "rival", "price", "prices", "list", "out", "variants", "lakh",
+        "read", "photo", "setup", "battery", "range", "charging", "features",
         "january", "february", "march", "april", "may", "june", "july", "august",
         "september", "october", "november", "december",
     }
@@ -1994,7 +1997,7 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
 
 def build_source_faithful_japanese_summary(title, content, html_text=""):
     """英語原文へ戻さず、原文の事実だけを使った日本語要約へ復旧する。"""
-    from summary_grounding import summary_omits_interior_details, source_identifiers_match
+    from summary_grounding import SUMMARY_GROUNDING_RULES, summary_omits_interior_details, source_identifiers_match
 
     source_title = normalize_text(title)
     source_content = normalize_text(content)
@@ -2008,6 +2011,7 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
             "推測、一般論、外部知識、原文にない企業名・製品名・数値を追加してはいけません。\n"
             "英語の文をそのまま残さず、固有名詞と型式のみ英字表記を許可します。\n"
             "ブランド名は日本で一般的な表記を使い、逐語訳しないでください。\n"
+            f"{SUMMARY_GROUNDING_RULES}\n"
             f"titleは{SUMMARY_TITLE_LIMIT}字以内の見出しで、途中で切らないでください。\n"
             f"summaryは{SUMMARY_CONTENT_LIMIT}字以内の常体で、必ず句点で終えてください。\n"
             "指定識別子がある場合は、そのうち少なくとも1つを原文の綴り、または一般的な日本語ブランド名で残してください。\n"
@@ -2022,14 +2026,17 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
         candidate_title = normalize_text(parse_json_field(output, "title"))
         candidate_body = normalize_text(parse_json_field(output, "summary"))
         if not (_is_valid_japanese(candidate_title) and _is_valid_japanese(candidate_body)):
+            print(f"  [SUMMARY_REPAIR_RETRY] attempt={attempt + 1} reason=invalid_japanese")
             continue
         if anchors and not source_identifiers_match(f"{candidate_title} {candidate_body}", anchors):
+            print(f"  [SUMMARY_REPAIR_RETRY] attempt={attempt + 1} reason=source_identifier_mismatch")
             continue
         candidate_title = trim_title_safely(candidate_title, SUMMARY_TITLE_LIMIT)
         candidate_body = trim_to_sentence(candidate_body, SUMMARY_CONTENT_LIMIT)
         if title_looks_incomplete(candidate_title) or summary_omits_interior_details(
             candidate_body, f"{source_content} {article_excerpt}"
         ):
+            print(f"  [SUMMARY_REPAIR_RETRY] attempt={attempt + 1} reason=incomplete_title_or_missing_interior")
             continue
         if candidate_body and not ends_with_sentence(candidate_body):
             candidate_body += "。"
@@ -2085,6 +2092,12 @@ def fetch_article_text(url):
             return ""
     elif host == "autocar.co.uk":
         main = soup.select_one(".field-name-body")
+        if main is None:
+            print(f"  [FETCH_SHORT] Article body not found: {url}")
+            return ""
+    elif host in ("motor1.com", "indiacarnews.com"):
+        selector = "article .postBody" if host == "motor1.com" else ".tdb_single_content .tdb-block-inner"
+        main = soup.select_one(selector)
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
             return ""

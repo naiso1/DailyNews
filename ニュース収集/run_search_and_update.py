@@ -717,6 +717,20 @@ def count_sheet_targets(sheet_path: Path, target_dates: set[str] | None = None):
     return len(rows)
 
 
+def validate_resume_sheet(sheet_path: Path, target_dates: list[str]):
+    """Do not resume publication from an empty, stale or mixed-date export."""
+    if not target_dates:
+        raise ValueError("No unpublished target dates; cannot resume from sheet.")
+    with sheet_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    dates = {(row.get("日付") or "").strip() for row in rows}
+    if not rows or dates != set(target_dates):
+        raise ValueError(
+            f"Resume sheet dates {sorted(dates)} do not match target dates {target_dates}."
+        )
+    return len(rows)
+
+
 def restore_file_from_head(path: Path):
     rel = path.relative_to(ROOT).as_posix()
     cp = subprocess.run(
@@ -888,6 +902,11 @@ def main():
         action="store_true",
         help="Run even when the current date is in a configured pause window.",
     )
+    parser.add_argument(
+        "--resume-from-sheet",
+        action="store_true",
+        help="Skip collection and resume publication from a date-validated existing sheet2 CSV.",
+    )
     args = parser.parse_args()
 
     started_at = datetime.datetime.now().astimezone()
@@ -938,6 +957,11 @@ def main():
         "expected_news_date": end.isoformat(),
         "target_dates": target_dates,
     }
+    if args.resume_from_sheet:
+        try:
+            validate_resume_sheet(SCRIPT_DIR / "sheet2_llm_targets.csv", target_dates)
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
     write_run_status("running", **status_base)
 
     run_succeeded = False
@@ -952,14 +976,18 @@ def main():
     else:
         dates_arg = ",".join(target_dates)
         try:
-            if not ensure_lm_studio():
-                raise RuntimeError("LM Studio could not prepare the single requested model.")
-            google_search_script = get_google_search_entrypoint()
-            run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
+            if args.resume_from_sheet:
+                log(f"[RESUME] Reusing sheet2 for {dates_arg}; RSS/search collection is skipped.")
+            else:
+                if not ensure_lm_studio():
+                    raise RuntimeError("LM Studio could not prepare the single requested model.")
+                google_search_script = get_google_search_entrypoint()
+                run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
             sheet2_path = SCRIPT_DIR / "sheet2_llm_targets.csv"
             sheet_rows = count_sheet_targets(sheet2_path, set(target_dates))
             if sheet_rows <= 0:
-                restore_file_from_head(sheet2_path)
+                if not args.resume_from_sheet:
+                    restore_file_from_head(sheet2_path)
                 raise RuntimeError(
                     f"google_search_script produced 0 sheet2 rows for {dates_arg}; "
                     "skip update/git to avoid publishing an empty result."

@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-10 01:07";
+window.NEWS_UPDATED_AT = "2026-09-11 08:58";
 window.LOADED_NEWS_DATA = [
     // 2025-12-22 日本ニュース
     {
@@ -110956,6 +110956,767 @@ window.LOADED_NEWS_DATA = [
     
         country: "in",
         img: "https://asset.autocarindia.com/static/features/images/20260908_123521_5b320699.jpg",
+        note: ""
+    },
+    // 2026-09-10 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1801",
+        title: "昭和カーオーディオカタログ、カセットからCDへ進化",
+        desc: "昭和のカーオーディオはカセットテープから始まり、ロンサムカーボーイやパイオニアTS-X9などの高級モデルが登場した。CD普及後はチェンジャーやサブウーファーが加わり、ナビ進化でAVも発展した。",
+        url: "https://news.yahoo.co.jp/articles/99cd749921a2b93482bc00237b8deac58dc19a4b?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-09-10",
+        tags: ["コネクテッド", "音響"],
+    
+        sourceExcerpt: "パイオニアの最高級モデル「TS-X9」は、アルミダイキャスト製の完全密閉型キャビネットを採用。",
+        interiorScore: 73,
+        interiorReason: "retro car audio catalog with clear interior audio product image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-00010009-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1802",
+        title: "テスラ「サイバーキャブ」日本初公開、ハンドルペダルなし2人乗り",
+        desc: "テスラジャパンは9月5日、ハンドルもペダルもない2人乗りの専用車両「Cybercab」を日本初公開した。上方開きバタフライドアやテスラ史上最大センタータッチスクリーン、横一列ベンチシートと大型横長ディスプレイを備える。",
+        url: "https://news.yahoo.co.jp/articles/24647d85512abb8992b12af8c76ea4c01b7df1f2?source=rss",
+        source: "WEB CARTOP",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "車内には運転席・助手席という区分がなく、横一列のベンチ的なシート配置とし、大型の横長ディスプレイからドアやシート、空調、音楽まで一括操作できる仕様だ。",
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-00010002-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1803",
+        title: "トヨタ、レクサスLS一部改良で乗り心地向上",
+        desc: "トヨタは2026年9月10日、レクサスLSを一部改良し販売開始した。フロント・リア・センタートンネルの補強に加え、熱硬化樹脂塗布のレスポンス向上減衰構造「REDS」や電子制御サスペンション「AVS」を採用。パノラマルーフを全車オプション化し、メッシュディフレクターで風切り音を抑制。",
+        url: "https://news.yahoo.co.jp/articles/8bff11a72bc78ad99828ff41c9dc676d98aae06b?source=rss",
+        source: "webCG",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "リアサスペンションブレースとラゲッジブレースには、熱硬化樹脂を塗布して焼き付けることによるレスポンス向上減衰構造「REDS（Response-Enhancing Damping Structure）」を用いることで、高周波振動の低減を図っている。",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-00010000-webcg-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1804",
+        title: "2026年9月受注開始、ZETA IVより20mm広い「NURMAN」が標準レール装着可能",
+        desc: "ブリッドは2026年9月7日、ZETA IVをベースに腰まわりを約20mm広げた新フルバケットシート「NURMAN」を発売する。マツダロードスター（ND）など車内がタイトな車種でも、ZETA IVと同じ標準レールで装着可能。背面はバックレストハーフカバー仕様で安全性も考慮している。",
+        url: "https://news.yahoo.co.jp/articles/0cf02223c92e0bab0f4be914f01c854e95af2b06?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-09-10",
+        tags: ["シート", "安全"],
+    
+        sourceExcerpt: "ブリッド株式会社（愛知県東海市、代表取締役社長：高瀬 嶺生）は、フルバケットシート（背もたれの角度調整機構を持たず、体を包み込む形状のシート）の新シリーズNURMANを2026年9月7日より受注開始した。",
+        interiorScore: 100,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-00010005-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1805",
+        title: "CRAFTWORKS 40系アルファード専用トレイがナビ裏に登場",
+        desc: "CRAFTWORKSから発売される40系アルファード/ヴェルファイア専用ダッシュボードトレイは、ナビ裏のデッドスペースを活用しスマホホルダーと小物収納を一体化した車種専用設計だ。2026年9月より3280円から販売され、ABS樹脂とシリコンゴムを採用。取り付けは3分で完了し、高級感を損なわずにスマホやサングラスの定位置化を実現する。",
+        url: "https://news.yahoo.co.jp/articles/159a7f8953f9f1a34ea1850033c4190d4dd7a26e?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-10",
+        tags: ["コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "CRAFTWORKSの専用ダッシュボードトレイは、スマホホルダーと小物収納をひとつにまとめた車種専用設計だ。",
+        interiorScore: 90,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-00000016-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1806",
+        title: "三菱新型パジェロ、伝統工芸内装とS-AWC搭載でブランド強化へ",
+        desc: "2026年9月2日、東京都内で新型パジェロが世界初公開され、悪路走破性と信頼性を継承しつつ、日本の伝統工芸に着想を得たインテリアや専用開発の2.4リッターディーゼルエンジン、S-AWC、スーパーセレクト4WD-IIを備え、全方位で進化を遂げた。",
+        url: "https://news.yahoo.co.jp/articles/e0f36edf39b6899f204b6d01afc89b64159bf114?source=rss",
+        source: "くるまのニュース",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "力強く存在感のあるエクステリアデザインに加え、日本の伝統工芸に着想を得たインテリアを採用するなど、細部に至るまでこだわりが詰め込まれています。",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-01110013-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1807",
+        title: "ポルシェカイエンEV、物理スイッチ残し使い勝手優位、BMW iXやポールスター3に劣る",
+        desc: "ポルシェ・カイエン・エレクトリックは大型タッチモニターだが必要最低限の物理スイッチを備え、BMW iXやポールスター3の全タッチ操作に比べ使い勝手が優れている。特にカイエンはライバル以上の能力の幅を持ち、多様な条件下で運転体験を変化させる。",
+        url: "https://news.yahoo.co.jp/articles/75c6451ebbce373f74425775a7379e0f702f2a20?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "ポルシェ・カイエン・エレクトリックとBMW iX xドライブ60 Mスポーツも、タッチモニターは大きいが、必要最低限の物理スイッチは残されている。",
+        interiorScore: 67,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-01272753-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1808",
+        title: "レクサスLS一部改良、ボディ剛性向上と新技術で乗り味を磨く",
+        desc: "レクサスはフラッグシップセダン『LS』を一部改良し、9月10日に発売した。ボディ剛性向上のためセンタートンネルを補強し、高周波振動低減構造『REDS』やサスペンションチューニングで乗り味を向上させた。",
+        url: "https://news.yahoo.co.jp/articles/deb340a550d20d103ca160372d5dd97d99bd5c76?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "さらに、リヤサスペンションブレースとラゲッジブレースに熱硬化樹脂を塗布して焼き付けるレスポンス向上減衰構造『レスポンス・エンハンシング・ダンプニング・ストラクチャー（REDS）』を採用し、高周波振動を低減させた。",
+        interiorScore: 82,
+        interiorReason: "flagship cabin refresh with interior image; flagship interior refresh",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-01276533-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1809",
+        title: "フィアットは小型車に注力再出発、欧州責任者語るグリズリーとパンダ後継の課題",
+        desc: "フィアットは小型車に注力し再出発を果たす。欧州責任者ガエターノ・トレル氏は、グランデパンダがB2C販売を牽引し、欧州で5位に復帰したと語る。また、グリズリーやパンダ後継車の開発も課題として挙げている。",
+        url: "https://news.yahoo.co.jp/articles/e202b19aec842c6f6281ea07d99c643700fe3b2e?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "フィアットの欧州責任者ガエターノ・トレル氏とグランデパンダ",
+        interiorScore: 65,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-01275634-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1810",
+        title: "新型日産エルグランドはインテリジェントダイナミックサスペンションとアクティブノイズコントロールでプレミアムミニバンを達成",
+        desc: "新型日産エルグランドはインテリジェントダイナミックサスペンションで路面振動を抑制しアクティブノイズコントロールと高遮音ボディによりライバルより5dB低い静粛性を確保した。コーナリング時はリアモーターのトルク活用と外側減衰力制御で旋回性能を高めプレミアムミニバンらしい快適性と走りを両立している。",
+        url: "https://news.yahoo.co.jp/articles/f3e158716f9b24fdd713659c2fad50c3ce6cb95f?source=rss",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "さらに、高性能遮音ガラスや吸音材、遮音材を配して車室外からのあらゆる音を徹底して遮る『高遮音ボディ』、第3世代 eパワーの低振動化などにより、全開加速時の騒音はライバル車より5dB低い。",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260910-01276443-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1619",
+        title: "アウディEVリース終了時、最大1万ドルで買い取り価格割引",
+        desc: "アウディはEVリース契約終了時に車両を買い取る際、最大1万ドルの価格引き下げを適用する。E-Tron GTは1万ドル、Q4 E-Tronは5千ドル、Q8 E-Tronは4千ドルの割引が設定されている。",
+        url: "https://www.motor1.com/news/807811/audi-ev-lease-buyout-incentive/",
+        source: "Motor1",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The E-Tron GT gets the largest cut at $10,000 off the buyout",
+        sourceExcerptEnd: "and the sedan's steeper depreciation curve among Audi's electric lineup.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/RqKV3w/s3/audi-e-tron-gt-quattro-2025.jpg",
+        note: ""
+    },
+    {
+        id: "us1620",
+        title: "マクラーレン、2027年V6ハイブリッドスーパーカーと2028年SUVを投入",
+        desc: "マクラーレンは2027年にP34と呼ばれるV6ターボハイブリッドスーパーカーを発売予定で、価格は31万3千ドル。内装にはF1を思わせるデザインと本革シート、V6エンジンカバーを備える。さらに2028年にはP47という4ドア5人乗りSUVも登場し、ポルシェ・カニエン・ターボGTより大型で24インチホイールを採用する。",
+        url: "https://www.motor1.com/news/807805/mclaren-new-models/",
+        source: "Motor1",
+        date: "2026-09-10",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "Longer than the Artura, it may cost from $313,000 and feature a",
+        sourceExcerptEnd: "leather interior and a tempered-glass engine cover atop the V6.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/6ZebzZ/s3/mclaren-p47-suv-rendering-by-motor1.jpg",
+        note: ""
+    },
+    {
+        id: "us1621",
+        title: "テスラサイバーキャブに隠された仮想ジョイスティックが安全懸念を招く",
+        desc: "テスラ製サイバーキャブのタッチスクリーンに、ステアリングやペダルを備えない車両ながら運転操作可能な仮想ジョイスティックが埋め込まれたまま公開された。これは乗客の安全やロボットタクシー戦略に疑問を投げかけ、NHTSAが約1000台の車両を調査中である。",
+        url: "https://www.motor1.com/news/807777/tesla-cybercab-hidden-joystick-robotaxi/",
+        source: "Motor1",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "安全"],
+    
+        sourceExcerpt: "Chair Robyn Denholm has acknowledged a fallback plan: \"If we have to",
+        sourceExcerptEnd: "now that a control interface has turned up on screen.",
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/YAbAyr/s3/tesla-cybercab-virtual-joystick.jpg",
+        note: ""
+    },
+    {
+        id: "us1622",
+        title: "ダチア新型スプリング、廉価版は中央画面を省きスマホで操作",
+        desc: "ダチアの新型スプリングは、廉価版の中央画面を省き、ダッシュボードに固定したスマホをナビや音楽再生に使う。ステアリングのスイッチで主要機能を操作でき、7インチのデジタルメーターは標準装備。フランスでの価格は1万7900ユーロからで、1500ユーロ高い上位仕様には10インチ画面や後退用カメラなどを備える。前席ヒーターはオプションとなる。",
+        url: "https://www.motor1.com/news/807764/new-dacia-spring-no-screen/",
+        source: "Motor1",
+        date: "2026-09-10",
+        tags: ["コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "There’s a dedicated spot on the dashboard to hold the phone, while",
+        sourceExcerptEnd: "you operate key functions without constantly poking at the device.",
+        interiorScore: 79,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/2N9NoB/s3/2027-dacia-spring-base-model.jpg",
+        note: ""
+    },
+    {
+        id: "us1623",
+        title: "2028年式Volvo XC40、新フェイスとミルドハイブリッド化で登場",
+        desc: "2028年式Volvo XC40は、新Thor's Hammerヘッドライトと11.2インチタッチスクリーン搭載の最新OSを備える。ピアノブラックプラスチック削減やオプションレザーシート、ブラウンアッシュウッドアクセントも採用。",
+        url: "https://www.motor1.com/news/807699/2028-volvo-xc40-details-specs/",
+        source: "Motor1",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "シート", "新素材"],
+    
+        sourceExcerpt: "An updated cabin features Volvo's new 11.2-inch screen, as well as optional leather seats",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/wlklPo/s3/2028-volvo-xc40.jpg",
+        note: ""
+    },
+    {
+        id: "us1624",
+        title: "2028年式Volvo XC40、内装刷新でAIアシスタント搭載",
+        desc: "2028年式Volvo XC40は内装を刷新し、11.2インチの大型インフォテインメント画面とGoogle Gemini AIアシスタントを備える。シート素材にはArianne CardamomレザーやBrown Ashウッドが採用され、環境照明もBlack Ashやアルミトリムに対応する。",
+        url: "https://www.jalopnik.com/2253344/2028-volvo-xc40-refresh-design-specs-details-reveal/",
+        source: "Jalopnik",
+        date: "2026-09-10",
+        tags: ["AR", "コネクテッド", "AI", "シート", "イルミ", "新素材"],
+    
+        sourceExcerpt: "New sculpted sheetmetal on the outside still keeps the funky and fun",
+        sourceExcerptEnd: "better headlights and a more advanced suite of driver-safety features.",
+        interiorScore: 79,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/2028-volvo-xc40-refresh-is-slightly-more-chiseled-charming-and-smarter-inside/l-intro-1788902807.jpg",
+        note: ""
+    },
+    {
+        id: "us1625",
+        title: "2026年式ドッジ・デュランゴR/T内装は旧式だがタッチスクリーンとシフトレバーを備える",
+        desc: "2026 Dodge Durango R/Tの内装は年式が古く見られるが、10.1インチのタッチスクリーンとシフトレバーを備える。",
+        url: "https://www.caranddriver.com/photos/a73643388/2026-dodge-durango-rt-test-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-09-10",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "The cabin features a nicely sized infotainment touchscreen and a proper shift lever—no rotary knobs here.",
+        interiorScore: 87,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/5579a58c-d2e3-4bb4-bdd4-ceb99bbec53c.jpg",
+        note: ""
+    },
+    {
+        id: "us1626",
+        title: "2028 Volvo XC40刷新で新内装と安全装備強化",
+        desc: "2028年式Volvo XC40は、Aピラー前の新ボディパネルやスリム化されたグリル、マトリックスLEDヘッドライトを備える。",
+        url: "https://www.caranddriver.com/news/a73647209/2028-volvo-xc40-refresh-revealed/",
+        source: "Car and Driver",
+        date: "2026-09-10",
+        tags: ["安全"],
+    
+        sourceExcerpt: "Volvo also gives the XC40 ambient interior lighting for the first time, and it pairs nicely with the new cabin materials.",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/622a5ae0-b38b-4c27-be29-98d2f4adf1a7.jpg",
+        note: ""
+    },
+    {
+        id: "us1627",
+        title: "2028年式ボルボXC40、新デザインとマトリックスヘッドライトを備える",
+        desc: "2028年式ボルボXC40は、より洗練された外観と新デザインのホイールを採用。全車に全輪駆動と247馬力のターボ4気筒を搭載し、米国仕様初となるマトリックスヘッドライトを備える。",
+        url: "https://www.caranddriver.com/photos/a73647145/2028-volvo-xc40-exterior-gallery/",
+        source: "Car and Driver",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "Volvo gave its subcompact luxury SUV another makeover, with the 2028 XC40 adopting a more sophisticated look.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/8820166b-dfdc-4d05-8057-c42a3dea674d.jpg",
+        note: ""
+    },
+    {
+        id: "us1628",
+        title: "2026 年の中古市場で手頃な価格で買える 10 台の高級車",
+        desc: "中古市場を恐れないなら、2 万ドル未満で高級車の夢乗車を体験できる。",
+        url: "https://www.topspeed.com/cheap-used-luxury-cars-today/",
+        source: "Top Speed",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "Maintenance and repair costs on luxury vehicles can be eye-watering, and they don't disappear just because the purchase price did.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2024/05/2011_porsche_panamera_s_15787065347dff9f98764dadsc08888-ezgif-com-webp-to-jpg-converter-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu1583",
+        title: "ボルボXC40、9年ぶりフェイスリフトで新内装と11.2インチタッチスクリーン",
+        desc: "ボルボは9年ぶりにXC40および姉妹車にフェイスリフトを発表した。新車は「再考案された」フロントエンドデザインと、最新EVに採用された11.2インチのタッチスクリーンを備える。これにより、全車種で統一されたインフォテインメントシステムが導入され、顧客が操作を再学習する必要がなくなった。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/new-look-volvo-xc40-after-nine-years-sale",
+        source: "AUTOCAR UK",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "コネクテッド", "EV"],
+    
+        sourceExcerpt: "Inside, a larger (11.2in) touchscreen arrives featuring Volvo’s latest infotainment system, as featured in its most recent EVs.",
+        interiorScore: 83,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/the_new_volvo_xc40_full-ste.jpg?itok=zatuSZkR",
+        note: ""
+    },
+    {
+        id: "eu1584",
+        title: "Seatの15年間の衰退と計画された閉鎖の衝撃",
+        desc: "SeatのCEOジェームズ・ミュアは2010年5月に同社の存続をかけた最後の試みと位置づけたが、スペインブランドの計画閉鎖は長年の構図を裏付けた。",
+        url: "https://www.autocar.co.uk/opinion/new-cars/bombshell-quotes-and-broken-promises-inside-seats-15-year-downfall",
+        source: "AUTOCAR UK",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "'Seat faces final survival bid,' read an Autocar headline in May 2010.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/seat_4.jpg?itok=lg53vsS3",
+        note: ""
+    },
+    {
+        id: "eu1585",
+        title: "JLR、ウーリハム工場3億5600万ポンド投資でEV生産加速",
+        desc: "JLRはウーリハム工場を3億5600万ポンド投資し、2024年にエンジン製造センターをEV推進製造センターに改名。モーターやギアボックスユニットの製造、バッテリーパックの組み立て能力を強化し、生産速度の向上をアピールしている。",
+        url: "https://www.autocar.co.uk/car-news/business-manufacturing/ingenium-electric-jlrs-engine-factory-now-ev-powerhouse",
+        source: "AUTOCAR UK",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "JLR’s former Engine Manufacturing Centre in Wolverhampton changed its name to the",
+        sourceExcerptEnd: "investment to build electric motor/gearbox units and assemble battery packs.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/propulsion_full_layout_0.jpg?itok=Nlr9PYwV",
+        note: ""
+    },
+    {
+        id: "eu1586",
+        title: "Volvo XC40大改款、レンジローバー風内装と11.2インチタッチスクリーン搭載",
+        desc: "Volvo XC40は10周年を控え、フロントグリルやリアライトを刷新。内装ではGoogle製11.2インチタッチスクリーンとダッシュボードの間接照明、アリアンヌ・カードモムレザーシートを採用。安全システムもカメラやレーダーを強化し、ドア開閉時の歩行者検知機能を新設した。",
+        url: "https://www.autoexpress.co.uk/volvo/xc40/370398/new-volvo-xc40-facelift-popular-suv-gets-range-rover-esque-makeover",
+        source: "Auto Express",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "シート", "コックピット", "イルミ", "新素材", "安全"],
+    
+        sourceExcerpt: "Elsewhere, indirect ambient lighting on the dashboard similar to what we’ve seen",
+        sourceExcerptEnd: "there are new, more premium materials available throughout the interior.",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--uQmaJIdM--/t_rss_image_w_845/v1789036213/autoexpress/2026/09/Volvo%20XC40%20-%20Ellis%20Hyde-2.jpg",
+        note: ""
+    },
+    {
+        id: "eu1587",
+        title: "三菱L200商用版後部シート撤去で荷室拡大、フェノール製床板とDリング装備",
+        desc: "三菱L200の商用版は後部シートを撤去し、フェノール製床板と4つのDリングを備えた荷室を新設した。プライバシーガラスやコックピット後部の鋼製仕切りも採用され、2.4リッターターボディーゼルエンジンと6速オートマチックを備える。",
+        url: "https://www.autoexpress.co.uk/mitsubishi/l200/370406/new-mitsubishi-l200-commercial-gives-pick-truck-more-cargo-space-and-less",
+        source: "Auto Express",
+        date: "2026-09-10",
+        tags: ["シート", "コックピット"],
+    
+        sourceExcerpt: "The new L200 Commercial removes the rear seats from a double-cab truck",
+        sourceExcerptEnd: "down large items in the newly created internal load area.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--nngcYE9c--/t_rss_image_w_845/v1789043781/autoexpress/2026/09/New%202026%20Mitsubishi%20L200%20Commercial_j2krym.jpg",
+        note: ""
+    },
+    {
+        id: "cn1614",
+        title: "吉利銀河TTが発売され、CATL製バッテリーと800Vプラットフォームを標準搭載する",
+        desc: "吉利は9月10日、中国市場向け電気自動車「吉利銀河TT」を発売した。価格は12万9900元からで、CATL製バッテリーと800Vプラットフォームが全車種標準。内装にはFlyme Auto 2システム、25.6インチAR-HUD、23スピーカーオーディオ、シートマッサージ機能などが備わる。",
+        url: "https://cnevpost.com/2026/09/10/geely-launches-galaxy-tt-sedan/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["HUD", "AR", "シート", "EV", "バッテリー", "音響"],
+    
+        sourceExcerpt: "The cabin features the Flyme Auto 2 system and Super Eva AI",
+        sourceExcerptEnd: "15.4-inch central touchscreen and a 25.6-inch augmented-reality head-up display (AR-HUD).",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091014294268.jpg",
+        note: ""
+    },
+    {
+        id: "cn1615",
+        title: "IM LS6のプリセールスオープンモデルとテスラ モデルYの比較",
+        desc: "IMモーターズは、テスラ モデルYの購入者をターゲットにした新型SUV「LS6」の予約販売を開始した。価格は209,900元からで、800ボルトプラットフォーム、ステアリング・バイ・ワイヤーシャシー、IM Claw AIを搭載する。内装にはB&Oオーディオシステム、4Dマッサージ機能付き運転席、15.6インチの助手席ディスプレイ、冷蔵庫が備わる。3つの全電化モデルで、CLTC走行距離は最大782 kmを誇る。",
+        url: "https://cnevpost.com/2026/09/10/im-motors-pre-sales-new-ls6/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["ディスプレイ", "AI", "シート", "音響"],
+    
+        sourceExcerpt: "Inside the cabin, IM Motors is offering a B&O sound system, a",
+        sourceExcerptEnd: "and dual-side access as free upgrades for a limited time.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091013414242.jpg",
+        note: ""
+    },
+    {
+        id: "cn1616",
+        title: "リー・オート、欧州進出でゴルフ大会パートナーに欧州名はLi 6",
+        desc: "リー・オートはソルハイムカップパートナーとして欧州進出を本格化させ、パリモーターショーでLi 6としてLi i6を発表する。同社は欧州でBEVを優先展開し、20台の車両を大会輸送に供与してグローバルラインナップを明らかにする。",
+        url: "https://cnevpost.com/2026/09/10/li-auto-kicks-off-european-push-names-overseas-i6-li-6/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091012475763.jpg",
+        note: ""
+    },
+    {
+        id: "cn1617",
+        title: "2027年1月より、ボルボがリンクアンドコ欧州販売網を担う",
+        desc: "2027年1月よりボルボカーズがリンクアンドコ（Link & Co）の欧州商業運営を担う。リンクアンドコは2024年8月に1万7027台と販売が減少したが、吉利は輸出で8% 増の27万1944台を記録した。",
+        url: "https://cnevpost.com/2026/09/10/geely-taps-volvo-european-network-lynk-co/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091012054383.jpg",
+        note: ""
+    },
+    {
+        id: "cn1618",
+        title: "中国新車販売減少だが新エネルギー車比率71.5% 達した",
+        desc: "中国の乗用車小売販売は、9月1週から6週にかけて19% 減少し、21万台に落ち込んだ。新エネルギー車（NEV）は小売販売の71.5% を占め、BYDとTeslaが主要メーカーとして市場シェアを争っている。",
+        url: "https://cnevpost.com/2026/09/10/china-nev-retail-first-week-sept-2026/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "China's new energy vehicle (NEV) retail sales picked up at the start",
+        sourceExcerptEnd: "last month, though the broader auto market remained under pressure.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091009084368.jpg",
+        note: ""
+    },
+    {
+        id: "cn1619",
+        title: "中国新車販売8月17.8%増NEV市場シェア60.6% 記録",
+        desc: "中国自動車工業協会（CAAM）によると、8月の新エネルギー車販売は164万3000台で市場シェアが60.6% となり過去最高を更新した。バッテリー電気車は116万1000台で27.8% 増、プラグインハイブリッド車は48万2000台で0.9% 減だった。",
+        url: "https://cnevpost.com/2026/09/10/china-nev-sales-aug-2026-caam/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "CAAM's NEV wholesale figures cover passenger and commercial vehicles, ",
+        sourceExcerptEnd: "-in hybrid electric vehicles (PHEVs) and fuel-cell vehicles.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091007205441.jpg",
+        note: ""
+    },
+    {
+        id: "cn1620",
+        title: "BYDのファングチェンパオが、9月16日に初のセダン「フォーミュラS」を発売する",
+        desc: "BYDの子ブランドであるファングチェンパオは、9月16日に初となるセダン「フォーミュラS」シリーズを発売する。価格は23万元から28万元で、DiSus-M磁気流変性サスペンションや2次世代ブレードバッテリーを備える。",
+        url: "https://cnevpost.com/2026/09/10/byd-fang-cheng-bao-launch-formula-s-sept-16/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "The entire lineup features BYD's second-generation Blade Battery and supports flash charging.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091003551318.jpg",
+        note: ""
+    },
+    {
+        id: "cn1621",
+        title: "中国のZotyeが、輸出向けのEV「Wink Y01」の試作生産を開始する予定である",
+        desc: "Zotyeは輸出向けのEV「Wink Y01」の試作生産を開始し、生産再開に向けた一歩を踏み出した。同車はSプラットフォームを採用しており、全長3,912mmの都市移動用モデルだが、価格や動力性能は未発表である。株価は上昇基調にあるが、資金調達や海外認証の確立が今後の課題となっている。",
+        url: "https://cnevpost.com/2026/09/10/zotye-eyes-comeback-new-ev-trial-production/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091003202245.jpg",
+        note: ""
+    },
+    {
+        id: "cn1622",
+        title: "ニオが2万キロのユーラシアEV旅を支援",
+        desc: "ニオは9月16日に西安から始まるシルクロードチャレンジ2026にES8、ES6、ET5ツーリング、オンボL90、L80の14台を投入する。中国区間ではバッテリー交換に完全依存し、3,605kmのルートと33のステーションで11カ国の長距離性能を検証する。",
+        url: "https://cnevpost.com/2026/09/10/nio-backs-ev-journey-20000-km-eurasia/",
+        source: "CnEVPost - All",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091002200383.jpg",
+        note: ""
+    },
+    {
+        id: "in1668",
+        title: "2026年マルチ・バレーノのオンロード価格と新装備発表",
+        desc: "マルチ・スズキは2026年モデルのバレーノの価格表を公開した。排気量3気筒の自然吸気エンジンやファシアの更新、レベル2 ADAなどの新機能、フロントシート通気機能などを備える。5グレードで、最高級は新設のAlpha (O)でレベル2 ADAを備える。",
+        url: "https://www.autocarindia.com/car-news/2026-maruti-baleno-on-road-price-listed-for-top-cities-440713",
+        source: "Autocar India - All",
+        date: "2026-09-10",
+        tags: ["シート"],
+    
+        sourceExcerpt: "Maruti Suzuki has revealed the full price list of the 2026 Baleno.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260910_094436_eb1d21d5.jpg",
+        note: ""
+    },
+    {
+        id: "in1669",
+        title: "インド市場に登場した全フレックス燃料車とE85対応技術の概要",
+        desc: "当局がエタノール混和ガソリンの普及を推進する中、マルチ・スズキのワゴンRバイオフレックスやトヨタ・カローラハイブリッド、タタ・パンチ、現代・クレタ、キア・シロスFFVコンセプトなど、E100またはE85燃料に対応する車種がインドで披露された。",
+        url: "https://www.autocarindia.com/auto-features/all-flex-fuel-cars-showcased-in-india-so-far-440636",
+        source: "Autocar India - All",
+        date: "2026-09-10",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "Infact, Maruti Suzuki was the first carmaker to begin production and launch a flex -fuel vehicle with the Wagon R Bioflex.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260605_124035_e1b0d707.jpg",
+        note: ""
+    },
+    {
+        id: "in1670",
+        title: "Hyundai、Lounge Edition Creta/Alcazar/Electric発売、後部エンタメ11.6インチ搭載",
+        desc: "HyundaiはCreta、Alcazar、Creta ElectricのLounge Editionを発売。後部座席向けに11.6インチエンタメシステム、BOSE 8スピーカー、シームレスな内装加飾を備える。Alcazarは5人乗り化し、Creta Electricはダッシュカメラとワイヤレス充電器を追加。価格はCretaで19.22ルピーから。",
+        url: "https://www.rushlane.com/new-hyundai-lounge-edition-creta-ev-5-seat-alcazar-launched-12555523.html",
+        source: "RushLane",
+        date: "2026-09-10",
+        tags: ["AR", "AI", "シート", "EV", "音響"],
+    
+        sourceExcerpt: "Positioned towards buyers looking for a more premium rear-seat experience, all three",
+        sourceExcerptEnd: "Seat Entertainment System along with exclusive interior and exterior treatments.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/new-hyundai-alcazar-creta-lounge-edition-launch-prices.jpeg",
+        note: ""
+    },
+    {
+        id: "in1671",
+        title: "Hyundai Creta Alcazar Creta EV Lounge Edition発売19.21万ルピーから",
+        desc: "Hyundai Motor IndiaはCreta、Alcazar、Creta EVのLounge Editionを発売した。価格は19.21万ルピーからで、後部座席用11.6インチエンタテインメントスクリーン、専用インテリアトリム、黒色エクステリアデテールを備える。",
+        url: "https://gaadiwaadi.com/hyundai-creta-alcazar-creta-ev-lounge-editions-launched-at-rs-19-21-lakh/",
+        source: "GaadiWaadi",
+        date: "2026-09-10",
+        tags: ["AR", "ディスプレイ", "AI", "シート", "EV"],
+    
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/Hyundai-Creta-Alcazar-Creta-EV-Lounge-Edition.jpg",
+        note: ""
+    },
+    {
+        id: "in1672",
+        title: "新クレタ・アルカザールームエディション11.6インチスクリーン搭載",
+        desc: "Hyundai IndiaはCreta ElectricとAlcazarに「Lounge Edition」を追加。11.6インチのリアエンタテインメントシステムや、銀色インサート付き黒ダッシュボード、月白色アンビエントライトを備える。Cretaは1.5L排気量エンジン、Alcazarは1.5LディーゼルAT搭載で、Creta Electricは24.49万ルピーから販売される。",
+        url: "https://www.indiacarnews.com/news/new-hyundai-suv-special-edition-at-rs-19-21-lakh-11-6-inch-screen-more-68980/",
+        source: "IndiaCarNews",
+        date: "2026-09-10",
+        tags: ["AR", "ディスプレイ", "AI", "コックピット", "イルミ"],
+    
+        sourceExcerpt: "Hyundai Motor India has introduced the new Lounge Edition of the Creta,",
+        sourceExcerptEnd: "lakh, Rs 24.49 lakh and Rs 21,80 lakh, respectively (ex-showroom).",
+        interiorScore: 78,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Hyundai-Lounge-Price-List.webp",
+        note: ""
+    },
+    {
+        id: "in1673",
+        title: "iCaur 03をインドで目撃、15.6インチ画面と前後席の通風機能",
+        desc: "5人乗り電動SUVのiCaur 03が、インドで輸送される姿を目撃された。JSWと奇瑞の提携による導入準備とみられるが、発売時期は未確定。記事では15.6インチの中央画面、9.2インチのメーター、電動調整式前席、前後席の通風機能、アンビエント照明、50Wワイヤレス充電などを紹介している。インド向けの最終仕様として確定した内容ではない。",
+        url: "https://www.indiacarnews.com/news/new-4wd-electric-suv-spotted-in-india-harrier-ev-rival-68976/",
+        source: "IndiaCarNews",
+        date: "2026-09-10",
+        tags: ["イルミ", "EV"],
+    
+        sourceExcerpt: "The iCaur 03 comes packed with several advanced features such as a",
+        sourceExcerptEnd: "audio system, 50W wireless charger, Level 2 ADAS and more.",
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/2-2.webp",
+        note: ""
+    },
+    {
+        id: "in1674",
+        title: "マルチ・スズキ新型バレーノ、全5グレードの価格と快適装備を紹介",
+        desc: "マルチ・スズキが新型バレーノの価格を公開。全5グレードで、導入時の車両価格は59.9万〜99.9万ルピー。記事はクラリオン製音響、前席通風機能、ワイヤレス充電、レベル2運転支援の追加を紹介する。9インチ中央画面、無線接続のスマホ連携、オートエアコン、HUDなども挙げているが、各装備のグレード別設定は本文では明示されていない。",
+        url: "https://www.indiacarnews.com/news/new-maruti-baleno-price-list-out-5-variants-rs-5-99-lakh-rs-9-99-lakh-68972/",
+        source: "IndiaCarNews",
+        date: "2026-09-10",
+        tags: ["HUD", "EV", "音響"],
+    
+        sourceExcerpt: "Other key features include a 9-inch touchscreen infotainment system, wireless Android Auto",
+        sourceExcerptEnd: "parking sensors, Isofix child seat anchors and hill hold assist.",
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Untitled-design-10.webp",
+        note: ""
+    },
+    {
+        id: "in1675",
+        title: "Hyundai、インド市場向けCreta他にLounge Edition追加",
+        desc: "インド市場向けにCreta、Alcazar、Creta ElectricにLounge Editionを追加。11.6インチ後部エンタテインメントシステムやムーンホワイトのアンビエントライティング、プレミアムシートデザインを備える。",
+        url: "https://www.carblogindia.com/hyundai-lounge-edition-creta-alcazar-creta-electric-launched/",
+        source: "Car Blog India",
+        date: "2026-09-10",
+        tags: ["AR", "AI", "シート", "イルミ"],
+    
+        sourceExcerpt: "The main attractions of these SUVs include a new integrated 11.6-inch Rear",
+        sourceExcerptEnd: "lounge-like seating configuration, voice-enabled smart panoramic sunroof and much more.",
+        interiorScore: 88,
+        interiorReason: "seat and display plus cabin image",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/09/hyundai-lounge-edition-creta-alcazar-creta-electric.jpg",
+        note: ""
+    },
+    {
+        id: "in1676",
+        title: "Hyundai、Creta・Alcazar・Creta ElectricにLounge Edition投入、後部座席エンタメ搭載",
+        desc: "HyundaiはCreta、Creta Electric、AlcazarにLounge Editionを新設し、後部座席用11.6インチエンタメ画面や専用インテリアを備える。特にAlcazarは3列目を撤去した5人乗り仕様となり、ラゲッジスペース拡大を実現する。",
+        url: "https://www.autopunditz.com/post/hyundai-lounge-edition-creta-alcazar-creta-electric-price-features",
+        source: "Auto Punditz",
+        date: "2026-09-10",
+        tags: ["AR", "AI", "シート"],
+    
+        sourceExcerpt: "The rear entertainment screen gives the Lounge Edition a clear identity, but the five-seat Alcazar is the more strategically interesting addition.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_281d9fec4543414890f3582a3e0a151b~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1677",
+        title: "Royal Enfield Classic 350とMeteor 350の比較、Honda H'ness CB350とCB350RS、TVS Ronin、Jawa 42の特徴を解説",
+        desc: "Royal Enfield Classic 350は195kgの重量と伝統的なデザイン、Meteor 350は15リットルのタンクと低座高765mmで巡航に最適。",
+        url: "https://www.autopunditz.com/post/classic-350-vs-meteor-350-hness-cb350-cb350rs-ronin-jawa-42",
+        source: "Auto Punditz",
+        date: "2026-09-10",
+        tags: [],
+    
+        sourceExcerpt: "The Royal Enfield Classic 350 and Meteor 350 dominate the category in",
+        sourceExcerptEnd: "Honda H’ness CB350 and CB350RS focus on refinement and equipment.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_804f59c378014bb8b0de4bdb95f9ca63~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1588",
+        title: "欧州5カ国調査でEV購入意欲8%に低下 電池EVへの関心薄れるか",
+        desc: "欧州自動車サプライヤー協会CLEPAがEUの5カ国で実施した調査では、次車購入時に電気自動車を選ぶ意向はわずか8%にとどまった。この結果は、電池EVへの関心が薄れている可能性を示唆している。",
+        url: "https://www.electrive.com/2026/09/10/waning-interest-in-battery-electric-cars-clepa-survey-reveals-surprising-results/",
+        source: "Electrive",
+        date: "2026-09-10",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/monta-typ-2-stecker-2025-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1589",
+        title: "BAM、リチウム同位体分布を電池劣化診断ツールに搭載",
+        desc: "ドイツ材料研究所BAMは、リチウム同位体の分布が電池劣化と直接関連することを発見した。この同位体分布は劣化プロセスの指紋となり、電池の経年劣化メカニズムの理解を深める診断ツールとして活用される。",
+        url: "https://www.electrive.com/2026/09/10/bam-identifies-lithium-isotopes-as-diagnostic-tool-for-battery-ageing/",
+        source: "Electrive",
+        date: "2026-09-10",
+        tags: ["バッテリー"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/stellantis-sustainera-wiederaufbereitete-hochvoltbatterie-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1590",
+        title: "三菱Eclipse Crossに新バッテリー導入、航続距離最大650kmへ",
+        desc: "三菱モーター欧州はEclipse Crossに89kWhのNMCバッテリーと67kWhのLFPバッテリーを新設し、航続距離を最大650kmまで向上させた。",
+        url: "https://www.electrive.com/2026/09/10/mitsubishi-eclipse-cross-new-battery-options-deliver-up-to-650-km-range/",
+        source: "Electrive",
+        date: "2026-09-10",
+        tags: ["EV", "バッテリー"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/mitsubishi-eclipse-cross-my27-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1591",
+        title: "トヨタ、2026年式C-HR EV約1万台を急停止リスクでリコール",
+        desc: "トヨタは2026年式C-HR EV約1万台のリコールを発表した。再生可能ブレーキシステムのソフトウェア不具合により、バッテリー過充電時に駆動系が停止し急停止するリスクがある。2026年9月10日発表で、2026年11月初旬から通知開始予定。",
+        url: "https://electriccarsreport.com/2026/09/toyota-recalls-10000-c-hr-evs-over-sudden-power-loss-risk/",
+        source: "Electric Cars Report",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The issue is particularly relevant when the battery has a high state of charge or is fully charged.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/02/Toyota-C-HR.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1592",
+        title: "LGエネルジ・ソリューション、LMRバッテリーの安定性向上で40Ah大形セル開発",
+        desc: "LGエネルジ・ソリューシヨンとソウル大は、40Ah大形セルで883サイクル後に初期エネルギーの92.2% を維持した。充電電圧4.3V化や放電電圧2.0V化、低温形成プロセスの最適化により、大型化障壁を克服した。",
+        url: "https://electriccarsreport.com/2026/09/lg-energy-solution-advances-lmr-battery-technology-for-electric-vehicles/",
+        source: "Electric Cars Report",
+        date: "2026-09-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The research, conducted with Professor Jongwoo Lim and his team in the",
+        sourceExcerptEnd: "gas generation and capacity degradation during repeated charging and discharging.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/LG-Energy-Solutions-LMR.jpg?a3781e&amp;a3781e",
         note: ""
     },
 ];

@@ -48,6 +48,18 @@ python -u google_search_script.py
 - `sheet2_llm_targets.csv` : LLM判定済み + 画像URLありの抽出結果
 - `rss_feed_list.csv` : RSS一覧の確認用
 
+## 収集後に公開前チェックで停止した場合
+
+`sheet2_llm_targets.csv` に対象日の記事が残っている場合、問題のタイトル・要約を原文と照合して修正した後、ニュースの再収集をせずに再開できます。
+
+```powershell
+python -B -u ニュース収集/run_search_and_update.py --resume-from-sheet
+```
+
+- CSVの日付が未公開の対象期間と完全に一致する場合のみ実行します。空のCSVや古い日付の混在は拒否します。
+- 通常と同じ日本語チェック、考察・画像生成、コミット・サーバー公開、成功／失敗ステータス更新を行います。チェックを無効化して公開するオプションではありません。
+- 既にニュース更新まで済んでいる場合や、別の実行が動作中の場合には使わないでください。Power Automateの8時のメールを臨時に再送する処理ではありません。
+
 ## 原文の該当箇所へのリンク
 
 - 通常の `run_search_and_update.py` 実行では、`auto_update_daily_news.py` の公開前処理で新規記事だけを確認します。収集スクリプト単体では公開用リンクはまだ作りません。
