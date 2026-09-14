@@ -1,7 +1,22 @@
 """Native LM Studio load-state checks shared by startup and idle reload."""
 import json
+import os
 from urllib.parse import urlsplit
 import urllib.request
+
+
+def gpu_load_args():
+    value = os.environ.get("LLM_GPU_OFFLOAD", "").strip().lower()
+    if value in {"", "auto"}:
+        return []
+    if value not in {"off", "max"}:
+        try:
+            valid = 0 <= float(value) <= 1
+        except ValueError:
+            valid = False
+        if not valid:
+            raise ValueError("LLM_GPU_OFFLOAD must be auto, off, max, or a ratio from 0 to 1")
+    return ["--gpu", value]
 
 
 def loaded_model_ids(host, opener=None):

@@ -5,6 +5,7 @@ import datetime as dt
 import json
 import msvcrt
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -31,6 +32,9 @@ def prepare(config):
         raise RuntimeError("This workstation is not the configured processing host")
     if ROOT != Path(config["repository"]).resolve():
         raise RuntimeError("Unexpected repository location")
+    model = str(config.get("llmModel") or "qwen/qwen3.5-9b").strip()
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:/@-]*", model):
+        raise ValueError("Invalid configured LM Studio model identifier")
     # Task Scheduler can inherit an environment older than the User settings.
     with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment") as key:
         for name in ("GEMINI_API_KEY", "NEWSAPI_KEY", "LM_API_TOKEN"):
@@ -47,7 +51,8 @@ def prepare(config):
         NO_PROXY="localhost,127.0.0.1,::1,IEWEB01,ieweb01,202.15.67.132",
         no_proxy="localhost,127.0.0.1,::1,IEWEB01,ieweb01,202.15.67.132",
         LLM_ENDPOINT="http://127.0.0.1:1234/v1/chat/completions",
-        LLM_MODEL="qwen/qwen3.5-9b", LLM_CONTEXT_LENGTH="8192", LLM_PARALLEL="1",
+        LLM_MODEL=model, LLM_CONTEXT_LENGTH="8192", LLM_PARALLEL="1",
+        LLM_GPU_OFFLOAD=str(config.get("gpuOffload", "")),
         LLM_TTL_SECONDS="900", LLM_REASONING_EFFORT="none", USE_LLM="1",
         GEMINI_IMAGE_MODEL="gemini-3.1-flash-image-preview", GEMINI_IMAGE_SIZE="512px",
         GEMINI_IMAGE_ASPECT_RATIO="1:1", GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="Never",
@@ -105,7 +110,8 @@ def check(config, proxies):
     from lm_studio_state import loaded_model_ids
     loaded = loaded_model_ids("http://127.0.0.1:1234")
     return {"hostname": host, "mailRecipientCount": count, "release": health.get("release"),
-            "loadedModels": sorted(loaded), "githubPushDryRun": "passed",
+            "loadedModels": sorted(loaded), "configuredModel": os.environ["LLM_MODEL"],
+            "gpuOffload": os.environ["LLM_GPU_OFFLOAD"], "githubPushDryRun": "passed",
             "checkedAt": dt.datetime.now().astimezone().isoformat(), "productionFilesChanged": False}
 
 

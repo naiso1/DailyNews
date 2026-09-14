@@ -181,6 +181,8 @@ def _unload_all_llm_models():
 
 def _ensure_llm_model_loaded():
     """Reload an idle-evicted LM Studio model before retrying the request."""
+    from lm_studio_state import gpu_load_args
+
     if _loaded_llm_model_ids() == {LLM_MODEL}:
         return True
     if not LMS_EXE.exists():
@@ -210,6 +212,7 @@ def _ensure_llm_model_loaded():
                     LLM_PARALLEL,
                     "--ttl",
                     LLM_TTL_SECONDS,
+                    *gpu_load_args(),
                     "--yes",
                 ],
                 creationflags=creationflags,

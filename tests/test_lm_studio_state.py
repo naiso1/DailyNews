@@ -1,6 +1,7 @@
 """Offline memory-state checks; never import or run the scheduled collector."""
 import ast
 import io
+import os
 import json
 import importlib.util
 import sys
@@ -59,6 +60,16 @@ class LoadedModelTests(unittest.TestCase):
         self.env["_ensure_lm_studio"] = Mock(side_effect=RuntimeError("unknown state"))
         self.assertFalse(self.env["ensure_lm_studio"]())
         self.env["log"].assert_called_once()
+
+    def test_gpu_load_ratio_is_optional_and_validated(self):
+        for setting, expected in (("", []), ("auto", []), ("0.7", ["--gpu", "0.7"]),
+                                  ("off", ["--gpu", "off"]), ("max", ["--gpu", "max"])):
+            with self.subTest(setting=setting), patch.dict(os.environ, {"LLM_GPU_OFFLOAD": setting}):
+                self.assertEqual(self.module.gpu_load_args(), expected)
+        for setting in ("-0.1", "1.1", "nan", "unknown"):
+            with self.subTest(setting=setting), patch.dict(os.environ, {"LLM_GPU_OFFLOAD": setting}):
+                with self.assertRaises(ValueError):
+                    self.module.gpu_load_args()
 
     def test_startup_and_collector_share_the_same_native_state_reader(self):
         reader = Mock(return_value={"qwen"})

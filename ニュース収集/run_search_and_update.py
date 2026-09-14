@@ -428,6 +428,8 @@ def ensure_lm_studio():
 
 
 def _ensure_lm_studio():
+    from lm_studio_state import gpu_load_args
+
     configure_loopback_no_proxy()
     host = _llm_host()
     model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL).strip() or DEFAULT_LLM_MODEL
@@ -484,6 +486,7 @@ def _ensure_lm_studio():
                     parallel,
                     "--ttl",
                     ttl_seconds,
+                    *gpu_load_args(),
                     "--yes",
                 ],
                 creationflags=CREATE_NEW_PROCESS_GROUP,

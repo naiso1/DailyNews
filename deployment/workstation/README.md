@@ -12,7 +12,10 @@ to DESKTOP-97FRPLP, under the Owner account.
 - Owner must remain signed in. Locking the screen is OK; signing out is not.
   After a reboot, sign in as Owner. This is not a logged-off service.
 - Overlapping invocations are rejected by Task Scheduler and a process lock.
-- Keep Qwen3.5 9B, context 8192, parallel 1. The launcher starts LM Studio's
+- Model comes from the private `llmModel` setting; context 8192, parallel 1.
+  Optional `gpuOffload` controls the GPU layer ratio (for example `0.7`),
+  leaving room for context and vision on a 16 GiB GPU. No value means automatic.
+  The launcher starts LM Studio's
   daemon; the collector prepares the requested model without overlapping loads.
 - No post-run sleep. Sleep is inhibited during the process only.
 - Gemini image generation remains Standard 512px / 1:1.
@@ -22,7 +25,10 @@ to DESKTOP-97FRPLP, under the Owner account.
 ## Private configuration
 
 `%LOCALAPPDATA%\DailyNewsRuntime\workstation.json` contains `hostname`,
-`repository`, `oneDriveAccount`, and boolean `enabled`. It contains no API key.
+`repository`, `oneDriveAccount`, boolean `enabled`, optional `llmModel` and
+`gpuOffload`. Without a model override the fallback remains Qwen3.5 9B.
+Qwen3.8-27B also needs its matching mmproj GGUF for image input; validate both
+text and vision after any model change. The configuration contains no API key.
 The Gemini API key comes from Owner's User environment. Proxy settings apply
 only to the launcher and its children; other applications are not reconfigured.
 
