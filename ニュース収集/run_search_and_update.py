@@ -382,16 +382,9 @@ def _server_up(host):
 
 
 def _loaded_model_ids(host):
-    try:
-        with urllib.request.urlopen(f"{host}/v1/models", timeout=5) as r:
-            data = json.loads(r.read())
-            return {
-                str(item.get("id", "")).strip()
-                for item in data.get("data", [])
-                if str(item.get("id", "")).strip()
-            }
-    except Exception:
-        return set()
+    from lm_studio_state import loaded_model_ids
+
+    return loaded_model_ids(host)
 
 
 def _unload_all_lm_studio_models(host):
@@ -427,6 +420,14 @@ def _unload_all_lm_studio_models(host):
 
 
 def ensure_lm_studio():
+    try:
+        return _ensure_lm_studio()
+    except RuntimeError as exc:
+        log(f"[ERROR] {exc}")
+        return False
+
+
+def _ensure_lm_studio():
     configure_loopback_no_proxy()
     host = _llm_host()
     model = os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL).strip() or DEFAULT_LLM_MODEL

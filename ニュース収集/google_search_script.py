@@ -144,20 +144,10 @@ def _llm_models_url():
 
 
 def _loaded_llm_model_ids():
-    try:
-        session = requests.Session()
-        if _is_loopback_url(LLM_ENDPOINT):
-            session.trust_env = False
-        resp = session.get(_llm_models_url(), timeout=5)
-        if resp.status_code != 200:
-            return set()
-        return {
-            str(item.get("id", "")).strip()
-            for item in resp.json().get("data", [])
-            if str(item.get("id", "")).strip()
-        }
-    except Exception:
-        return set()
+    from lm_studio_state import loaded_model_ids
+
+    host = LLM_ENDPOINT.split("/v1/", 1)[0].rstrip("/")
+    return loaded_model_ids(host)
 
 
 def _unload_all_llm_models():
@@ -232,7 +222,7 @@ def _ensure_llm_model_loaded():
         deadline = time.monotonic() + LLM_RELOAD_TIMEOUT
         while time.monotonic() < deadline:
             time.sleep(5)
-            if LLM_MODEL in _loaded_llm_model_ids():
+            if _loaded_llm_model_ids() == {LLM_MODEL}:
                 print("  [LM Studio] モデル再ロード完了。LLM処理を再試行します。")
                 return True
         print(f"  ✗ LM Studioモデル再ロードが{LLM_RELOAD_TIMEOUT}秒以内に完了しませんでした。")
