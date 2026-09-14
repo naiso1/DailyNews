@@ -12,6 +12,11 @@ to DESKTOP-97FRPLP, under the Owner account.
 - Owner must remain signed in. Locking the screen is OK; signing out is not.
   After a reboot, sign in as Owner. This is not a logged-off service.
 - Overlapping invocations are rejected by Task Scheduler and a process lock.
+- `processing_host.json` selects the sole active processing host. The scheduled
+  runner checks this before log/status writes, network requests or subprocesses.
+  On other hosts it exits without collecting, publishing or touching mail status.
+  Missing/malformed policy fails closed. `run_search_and_update.py
+  --check-processing-host` prints the decision and exits without running a pipeline.
 - Model comes from the private `llmModel` setting; context 8192, parallel 1.
   Optional `gpuOffload` controls the GPU layer ratio (for example `0.7`),
   leaving room for context and vision on a 16 GiB GPU. No value means automatic.
@@ -46,7 +51,10 @@ test does not guarantee every future article will translate successfully.
 Disable the NEW task first and wait for any running pipeline to stop safely.
 Set the new private configuration's `enabled` to false. Bring the OLD
 repository up to date (including generated content and status) before enabling
-its task again. Never enable both schedules. Keep the original machine and
+its processing again. Change `processing_host.json` to the OLD hostname on both
+copies only after NEW is stopped. The OLD task may still be enabled in Windows
+when its protected task settings cannot be edited; the host policy then makes
+it a no-op. Do not describe this as a disabled Windows task. Keep the original machine and
 migration archives until the first scheduled production run has been verified.
 
 Do not run `google_search_script.py --help` for inspection: it has historical

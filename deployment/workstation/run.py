@@ -32,6 +32,11 @@ def prepare(config):
         raise RuntimeError("This workstation is not the configured processing host")
     if ROOT != Path(config["repository"]).resolve():
         raise RuntimeError("Unexpected repository location")
+    collection = next(ROOT.glob("*/processing_host.py")).parent
+    sys.path.insert(0, str(collection))
+    from processing_host import processing_host_status
+    if not processing_host_status(ROOT)["allowed"]:
+        raise RuntimeError("This is not the active processing workstation")
     model = str(config.get("llmModel") or "qwen/qwen3.5-9b").strip()
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:/@-]*", model):
         raise ValueError("Invalid configured LM Studio model identifier")

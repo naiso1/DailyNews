@@ -17,6 +17,14 @@ from xml.sax.saxutils import escape
 
 import py_compile
 
+if __name__ == "__main__":
+    from processing_host import enforce_processing_host
+
+    enforce_processing_host(
+        Path(__file__).resolve().parent.parent,
+        check_only="--check-processing-host" in sys.argv[1:],
+    )
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 NEWS_JS = ROOT / "news_data.js"
