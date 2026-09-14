@@ -804,5 +804,412 @@
     "finalUrl": "https://electriccarsreport.com/2026/09/lg-energy-solution-advances-lmr-battery-technology-for-electric-vehicles/",
     "sourceExcerpt": "The research, conducted with Professor Jongwoo Lim and his team in the",
     "sourceExcerptEnd": "gas generation and capacity degradation during repeated charging and discharging."
+  },
+  "https://news.yahoo.co.jp/articles/0ee68327c772e31811b5c0015f86575fc06f4f55?source=rss": {
+    "fingerprint": "12e9775d38e4a76b2b49b3ae4b1d15398a740a4b267549135fbbf5c3bfac95a8",
+    "checkedAt": "2026-09-14T01:02:57.448435+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/0ee68327c772e31811b5c0015f86575fc06f4f55?source=rss",
+    "sourceExcerpt": "自動車レース用シートの老舗・BRIDE（ブリッド）は、クラシカルデザインの新スポーツシート「ZIEGⅣ Classic（ジーグフォー・クラシック）／ZIEGⅣ WIDE Classic（ジーグフォー・ワイド・クラシック）」を発売。"
+  },
+  "https://news.yahoo.co.jp/articles/693541e0150bf6721ab806744bc78dcef75898ce?source=rss": {
+    "fingerprint": "b1b3f2d0b09b29b7f5f01ec414acde7a1f3094f7a42b704fec3ac0a884ad7630",
+    "checkedAt": "2026-09-14T01:02:45.999755+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/693541e0150bf6721ab806744bc78dcef75898ce?source=rss",
+    "sourceExcerpt": "BEWITH（ビーウィズ）の「調音施工」は専用素材を使って走行中の不快な音を抑え、車内を快適にする静粛化プログラムだ。"
+  },
+  "https://news.yahoo.co.jp/articles/5d38191871b1eff59aa39b9dee494be01424bcc2?source=rss": {
+    "fingerprint": "9fd6fa972c970f6f398afa5af28f0677b28c64dd43df9d8199527d941e185ee1",
+    "checkedAt": "2026-09-14T01:02:46.465418+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/5d38191871b1eff59aa39b9dee494be01424bcc2?source=rss",
+    "sourceExcerpt": "レクサス「RX」史上最強となる可能性を秘めたハイパフォーマンスSUVが、いよいよ“聖地”ニュルブルクリンクで本格的な高速テストを開始しました。"
+  },
+  "https://news.yahoo.co.jp/articles/9ef4da1e5d9ce54838a6f56725c4ec7bce2a6ffa?source=rss": {
+    "fingerprint": "5c5d916e8480b328c4708445e60cb67851a8579e06631dab38689a6bcb986968",
+    "checkedAt": "2026-09-14T01:02:46.777621+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/9ef4da1e5d9ce54838a6f56725c4ec7bce2a6ffa?source=rss",
+    "sourceExcerpt": "300km/hまで刻まれたメーターは、高性能を想起させ満足感を演出する。"
+  },
+  "https://news.yahoo.co.jp/articles/daa526ec66bc1688a303d17672a6f225ff87fd5c?source=rss": {
+    "fingerprint": "2dcf2e2cc52743d75da7b8a6e3de840ca63af90705269ab712dfc08d877a21a6",
+    "checkedAt": "2026-09-14T01:03:08.089042+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/daa526ec66bc1688a303d17672a6f225ff87fd5c?source=rss",
+    "sourceExcerpt": "NEOPLOT フットレストバーNEO：平面とは異なるバー形状を採用し左足を置いた瞬間にグリップ感が伝わり身体を支える軸足として機能する"
+  },
+  "https://news.yahoo.co.jp/articles/1f2ed51e708240e32510d76c89a09d9e58cac66b?source=rss": {
+    "fingerprint": "dddc65f3d81928505dc206b9df73e1567497b995113dd997ebbb80538b5b4c1f",
+    "checkedAt": "2026-09-14T01:02:58.235078+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/1f2ed51e708240e32510d76c89a09d9e58cac66b?source=rss",
+    "sourceExcerpt": "そこに、徹底した遮音とヤマハ共同開発のオーディオが支える上質な車内が加わります"
+  },
+  "https://news.yahoo.co.jp/articles/1b820cd9717d8cc9c1b9af6f969d24628c03b382?source=rss": {
+    "fingerprint": "30369d958160531cf952c91b0c6c1ac55d83e5a0907f5c6036db31ecdccb1f96",
+    "checkedAt": "2026-09-14T01:03:08.848659+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/1b820cd9717d8cc9c1b9af6f969d24628c03b382?source=rss",
+    "sourceExcerpt": "カスタムモデルでは、AUTECHとROCK CREEKに後席ヒーター付きシート、ステアリングヒーター、リモコンオートバックドアなどを標準装備した。"
+  },
+  "https://news.yahoo.co.jp/articles/8eb10737806d87deb4f7852531f1e1eec4a1f21b?source=rss": {
+    "fingerprint": "fd6ac7d47e6e258cc4a444a34dfa2d862a6f78ad10bfd32e1c1a4dda7ee8239b",
+    "checkedAt": "2026-09-14T01:02:47.044826+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/8eb10737806d87deb4f7852531f1e1eec4a1f21b?source=rss",
+    "sourceExcerpt": "新型エルグランドのスライドアップシート仕様は現時点では参考出品だが、市販化されれば、乗り降りのしやすさと高級ミニバンならではの快適性を両立する新たな選択肢となりそうだ。"
+  },
+  "https://news.yahoo.co.jp/articles/b9e998a848e7a5f9c57799708e67aa382dc6bf4b?source=rss": {
+    "fingerprint": "87fab72143b228bbf9192245e16fd1589ec5927bdd6e2aaa9dd025fd0bf7dc71",
+    "checkedAt": "2026-09-14T01:03:09.445038+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/b9e998a848e7a5f9c57799708e67aa382dc6bf4b?source=rss",
+    "sourceExcerpt": "AUTOCARのイチオシはレンジローバー・スポーツだ。"
+  },
+  "https://news.yahoo.co.jp/articles/3806f2008de40f686cdf560d98b220e8d539ac07?source=rss": {
+    "fingerprint": "c443a5128a130ad2369fb6164d39ef432bd42a4541fcef9e3422987b5ba819f0",
+    "checkedAt": "2026-09-14T01:02:47.481617+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/3806f2008de40f686cdf560d98b220e8d539ac07?source=rss",
+    "sourceExcerpt": "そういえばと、これもマクラーレン750Sから採用された、センターコンソール上にあるマクラーレンのスピードマークが描かれたスイッチは何なのだろうと調べてみた。"
+  },
+  "https://www.carscoops.com/2026/09/buick-2006-envista-st-review/": {
+    "fingerprint": "d7fe5b09dc5801bd7163f251ec5444439bc9a0048671145fc2eb21dd675946e6",
+    "checkedAt": "2026-09-14T01:02:58.601122+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.carscoops.com/2026/09/buick-2006-envista-st-review/",
+    "sourceExcerpt": "The dashboard wraps its 8-inch digital gauge cluster and 11-inch infotainment screen",
+    "sourceExcerptEnd": "trim, and textured inserts break up the otherwise dark cabin."
+  },
+  "https://www.jalopnik.com/2254391/genesis-gv60-glowing-orb-crystal-sphere-shifter-design-love/": {
+    "fingerprint": "64858c8ceceed6af53a196231b8092d300d67da59ada2a80039f3e9d1e3b241e",
+    "checkedAt": "2026-09-14T01:03:10.064427+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.jalopnik.com/2254391/genesis-gv60-glowing-orb-crystal-sphere-shifter-design-love/",
+    "sourceExcerpt": "For some people, design is luxury, and in that regard, the GV60",
+    "sourceExcerptEnd": "— and even the high-performance Magma version is pretty cheap."
+  },
+  "https://www.jalopnik.com/2256143/mit-study-improving-av-talking-car/": {
+    "fingerprint": "2d611c55de8facb1978e8d25db9032a3509d9fb2820219bf918adcca78a85d07",
+    "checkedAt": "2026-09-14T01:02:59.077426+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.jalopnik.com/2256143/mit-study-improving-av-talking-car/",
+    "sourceExcerpt": "To do this, MIT and Motional created a system called the \"Concept-Wrapper Network\" or CW-Net."
+  },
+  "https://www.thetruthaboutcars.com/cars/news-blog/britain-taxes-evs-by-the-mile-america-is-next-45136390?utm_medium=auto&utm_source=rss&utm_campaign=all_full": {
+    "fingerprint": "fd87e78ee6abcf858189c4b6be136edac648297270f5288225b7ca2f7390187f",
+    "checkedAt": "2026-09-14T01:04:58.435546+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.thetruthaboutcars.com/cars/news-blog/britain-taxes-evs-by-the-mile-america-is-next-45136390?utm_medium=auto&utm_source=rss&utm_campaign=all_full"
+  },
+  "https://www.thetruthaboutcars.com/cars/features/rare-rides-icons-the-ford-taurus-modernizing-family-transportation-part-iv-45136375?utm_medium=auto&utm_source=rss&utm_campaign=all_full": {
+    "fingerprint": "4a2fadfdba5e55ff070668b581b962667c5b7155b1f3670915841ac09436c8f5",
+    "checkedAt": "2026-09-14T01:04:46.173307+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.thetruthaboutcars.com/cars/features/rare-rides-icons-the-ford-taurus-modernizing-family-transportation-part-iv-45136375?utm_medium=auto&utm_source=rss&utm_campaign=all_full"
+  },
+  "https://www.thetruthaboutcars.com/cars/news-blog/when-the-screen-is-the-problem-cars-software-crisis-45136366?utm_medium=auto&utm_source=rss&utm_campaign=all_full": {
+    "fingerprint": "f36823bc89f44caeba39fc43ecd2f16213b4e7a6e01cc7031ccfa9fb0c4b727a",
+    "checkedAt": "2026-09-14T01:04:46.904781+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.thetruthaboutcars.com/cars/news-blog/when-the-screen-is-the-problem-cars-software-crisis-45136366?utm_medium=auto&utm_source=rss&utm_campaign=all_full"
+  },
+  "https://www.autocar.co.uk/car-review/seat/long-term-reviews/long-goodbye-10000-glorious-miles-endangered-seat-ibiza": {
+    "fingerprint": "b48a3d189728f167bb6f015bb0001f7713c0f7b84a3bc7173abb344bcc52bde6",
+    "checkedAt": "2026-09-14T01:05:05.125143+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-review/seat/long-term-reviews/long-goodbye-10000-glorious-miles-endangered-seat-ibiza",
+    "sourceExcerpt": "Yes, the front end is a bit more substantial and the interior is more modern-looking, but that’s about it."
+  },
+  "https://www.autocar.co.uk/car-news/features/renault-4-plein-sud-should-you-spec-suv-convertible": {
+    "fingerprint": "04af0fdc594958f39fe15a04d6b6c4bf512beda104c3850d04031228103d77e6",
+    "checkedAt": "2026-09-14T01:04:58.891848+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/features/renault-4-plein-sud-should-you-spec-suv-convertible",
+    "sourceExcerpt": "This, then, is the Plein Sud (that’s ‘Due South’ for any Francophobes)",
+    "sourceExcerptEnd": "since the demise of the surprisingly successful Volkswagen T-Roc Cabriolet."
+  },
+  "https://www.autocar.co.uk/car-review/audi/rs5": {
+    "fingerprint": "f56d96e1016c0fcf7cbe0e78dc00be3e854960f5320e4944de5fdfe455ae1782",
+    "checkedAt": "2026-09-14T01:05:00.098200+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.autocar.co.uk/car-review/audi/rs5"
+  },
+  "https://www.autocar.co.uk/car-news/new-cars/new-bovensiepen-spider-revealed-%C2%A399k-bmw-z4-429bhp": {
+    "fingerprint": "1aeee813a859f8f38971ae20bce62a1e2bc2f0f245cd2fe6cd6330fa60c8c5da",
+    "checkedAt": "2026-09-14T01:04:47.358925+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/new-cars/new-bovensiepen-spider-revealed-%C2%A399k-bmw-z4-429bhp",
+    "sourceExcerpt": "In characteristic Alpina/Bovensiepen fashion, the Z4's interior has been retained but retrimmed",
+    "sourceExcerptEnd": "for the steering wheel and Alcantara for the windscreen surround."
+  },
+  "https://www.autoexpress.co.uk/bmw/z4/370421/miss-bmw-z4-new-bovensiepen-spider-gives-roadster-one-last-hurrah": {
+    "fingerprint": "c49ffa6ae5c7de98a0329d140dd9b78e77bcb45c739cd20a207426eba2cf4375",
+    "checkedAt": "2026-09-14T01:02:48.817457+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/bmw/z4/370421/miss-bmw-z4-new-bovensiepen-spider-gives-roadster-one-last-hurrah",
+    "sourceExcerpt": "Meanwhile, the rest of the interior has been retrimmed in more luxurious full-grain leather and Alcantara."
+  },
+  "https://www.autoexpress.co.uk/leapmotor/b03x/370408/new-leapmotor-b03x-2026-review-spacious-infuriating": {
+    "fingerprint": "ce7012702c3c45f6c160421f5f8e5cc54344b7898ea37b77ebcac5f01c1ee91d",
+    "checkedAt": "2026-09-14T01:02:50.192851+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/leapmotor/b03x/370408/new-leapmotor-b03x-2026-review-spacious-infuriating",
+    "sourceExcerpt": "The only differentiators are the Morse Code-esque pattern across the dashboard and",
+    "sourceExcerptEnd": "effort to inject some playfulness into the otherwise plain cabin."
+  },
+  "https://www.autoexpress.co.uk/chery/370411/future-chery-fast-growing-chinese-brand-plans-four-new-cars": {
+    "fingerprint": "99db839e0c3cfe012f9f6559d9901ac46ffbddf2f993bb1c48699e3dc49d3464",
+    "checkedAt": "2026-09-14T01:02:50.512676+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/chery/370411/future-chery-fast-growing-chinese-brand-plans-four-new-cars",
+    "sourceExcerpt": "Chinese brand Chery plans to accelerate its remarkable growth with a pure",
+    "sourceExcerptEnd": "models, as well as tuning its cars for British tastes."
+  },
+  "https://carnewschina.com/2026/09/13/byd-to-put-solid-state-battery-technology-into-a-vehicle-next-year-executive-confirms/": {
+    "fingerprint": "c216a0c3a0aedd16080c801fb4ae617a60b70a4d7056018bd4ad1028e801d1e3",
+    "checkedAt": "2026-09-14T01:03:10.317779+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/13/byd-to-put-solid-state-battery-technology-into-a-vehicle-next-year-executive-confirms/",
+    "sourceExcerpt": "BYD is also developing its solid-state technology within China’s All-Solid-State Battery Collaborative",
+    "sourceExcerptEnd": "linked to an estimated 830 million USD state R&D program."
+  },
+  "https://carnewschina.com/2026/09/13/the-xpeng-gx-was-turned-into-the-range-rover-in-china/": {
+    "fingerprint": "812cfa365cd9736cb1c7a6b3d48af6c02e6c23c71dfad6bf0b943342fe5e6c68",
+    "checkedAt": "2026-09-14T01:03:10.544290+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/13/the-xpeng-gx-was-turned-into-the-range-rover-in-china/",
+    "sourceExcerpt": "The interior is even funnier with the Range Rover inscription on the two-spoke steering wheel."
+  },
+  "https://carnewschina.com/2026/09/13/the-new-geely-ex5-reveals-a-huge-front-trunk-in-china-ahead-of-launch-in-sept/": {
+    "fingerprint": "be2e314d6647cf78de1b6e2d15de6f7ef00b37ce632d9c0441b63e4c6775bbf4",
+    "checkedAt": "2026-09-14T01:03:11.003585+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/13/the-new-geely-ex5-reveals-a-huge-front-trunk-in-china-ahead-of-launch-in-sept/",
+    "sourceExcerpt": "The all-new Geely EX5 was unveiled with a huge front trunk (frunk) in China ahead of the launch scheduled for September 21."
+  },
+  "https://carnewschina.com/2026/09/13/xiaomi-skynomad-erev-suv-begins-deliveries-in-china-ceo-lei-jun-hands-over-keys-to-owners/": {
+    "fingerprint": "65bececb1fcc2324f091f3b9a7368a25ff7c6e3d2eae4498bcfa801d8ce36dec",
+    "checkedAt": "2026-09-14T01:03:11.540562+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/13/xiaomi-skynomad-erev-suv-begins-deliveries-in-china-ceo-lei-jun-hands-over-keys-to-owners/",
+    "sourceExcerpt": "Xiaomi says the Skynomad lineup uses multiple sliding rails for its seats and centre consoles, achieving a “SUV shape with an MPV cabin”."
+  },
+  "https://carnewschina.com/2026/09/13/lynk-co-900-catches-fire-dealer-claims-a-pedestrian-kicked-a-power-bank-under-it/": {
+    "fingerprint": "e7c1bd80ab5337e3a50fd9c1886a2aee307523cdaf6f711303059c1166e60a3b",
+    "checkedAt": "2026-09-14T01:03:12.040268+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/13/lynk-co-900-catches-fire-dealer-claims-a-pedestrian-kicked-a-power-bank-under-it/",
+    "sourceExcerpt": "A curbside fire involving a Lynk & Co 900 in Hangzhou, China,",
+    "sourceExcerptEnd": "that the plug-in hybrid SUV suffered a high-voltage battery fire."
+  },
+  "https://carnewschina.com/2026/09/12/byds-yangwang-developing-rolls-royce-fighters-phantom-and-cullinan-rivals-spotted-in-china/": {
+    "fingerprint": "fa5ff9f1df095f41db5375d57601193c23c0d4f5d070c6e202248ed64a0c8c26",
+    "checkedAt": "2026-09-14T01:03:00.493253+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/12/byds-yangwang-developing-rolls-royce-fighters-phantom-and-cullinan-rivals-spotted-in-china/",
+    "sourceExcerpt": "BYD’s flagship luxury marque, Yangwang, has made a name for itself with the floating, tank-turning U8 SUV and the record-breaking U9 Xtreme supercar."
+  },
+  "https://carnewschina.com/2026/09/11/byd-orders-10-more-vessels-with-capacity-for-9200-cars-each-report-says/": {
+    "fingerprint": "0d9026123639a0c658893f1ad3b185a3c3e17b1cce2eb69a3bede0eb22f46af8",
+    "checkedAt": "2026-09-14T01:02:50.805999+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/11/byd-orders-10-more-vessels-with-capacity-for-9200-cars-each-report-says/",
+    "sourceExcerpt": "BYD has reportedly ordered 10 additional car carriers, each with a capacity",
+    "sourceExcerptEnd": "to maritime publications New Ships and shipping platform Robin Assasfina."
+  },
+  "https://carnewschina.com/2026/09/11/mg-07-passes-42000-locked-orders-in-china-after-20-days/": {
+    "fingerprint": "5680d4691a4a0be96921ceda64a3a895d496056d40f69d12e0b0c22e24cafccd",
+    "checkedAt": "2026-09-14T01:02:51.202374+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/11/mg-07-passes-42000-locked-orders-in-china-after-20-days/",
+    "sourceExcerpt": "The BYD Seal 06 DM-i starts at 99,800 yuan (14,880 USD) and competes primarily on lower entry pricing and plug-in hybrid efficiency."
+  },
+  "https://cnevpost.com/2026/09/11/xpeng-first-right-hand-drive-g9l-roll-off-line/": {
+    "fingerprint": "36b3603723dcf9f507c7cce860e077ad7d06e31baf12a5d94fb22ce6a65cdfe5",
+    "checkedAt": "2026-09-14T01:04:49.225111+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/11/xpeng-first-right-hand-drive-g9l-roll-off-line/"
+  },
+  "https://cnevpost.com/2026/09/11/china-unveils-five-year-nev-plan/": {
+    "fingerprint": "60e6e0b55caff7ee293394d37f11d2c236c6ff2a4534b5241bf15277cc3d67f8",
+    "checkedAt": "2026-09-14T01:02:51.892170+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/11/china-unveils-five-year-nev-plan/",
+    "sourceExcerpt": "It also seeks further improvements in battery safety, charging rates and low-temperature performance."
+  },
+  "https://www.autocarindia.com/auto-images/2026-bmw-7-series-facelift-image-gallery-440461": {
+    "fingerprint": "ec4ad3df624523e2c8d530c9e3255b107e905e98e15cdee04b1c690a774a2f85",
+    "checkedAt": "2026-09-14T01:03:12.393220+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-images/2026-bmw-7-series-facelift-image-gallery-440461",
+    "sourceExcerpt": "The rear cabin gets BMW’s large 31.3-inch 8K Theatre Screen, along with touch controls integrated into the doors."
+  },
+  "https://www.autocarindia.com/auto-images/aprilia-tuono-457-special-edition-image-gallery-440460": {
+    "fingerprint": "c8634950ac8b6dafc8ccf9ab6b0d8c962f9d4342e1ea6b4e79eee9ab636d9cec",
+    "checkedAt": "2026-09-14T01:03:13.532613+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-images/aprilia-tuono-457-special-edition-image-gallery-440460",
+    "sourceExcerpt": "Aprilia India has launched the Tuono 457 Special Edition, introducing a range of ergonomic and comfort-focused upgrades over the standard Tuono 457."
+  },
+  "https://www.autocarindia.com/auto-features/3-reasons-to-buy-the-innova-crysta-and-2-to-skip-it-441042": {
+    "fingerprint": "afb810df7a0f8b7183441a068affafcf4211db459285d4572236ee25c989e8fa",
+    "checkedAt": "2026-09-14T01:03:15.914319+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-features/3-reasons-to-buy-the-innova-crysta-and-2-to-skip-it-441042",
+    "sourceExcerpt": "It remains spacious and comfortable, but the interior has plenty of hard plastics and the infotainment system feels dated compared with newer MPVs."
+  },
+  "https://gaadiwaadi.com/pure-electric-cars-outsell-hybrids-by-more-than-two-to-one-in-h1-2026/": {
+    "fingerprint": "0104de500dbd09ca3923aca8a6b5d0c1d0346c57b8145effaa237db73a0c2854",
+    "checkedAt": "2026-09-14T01:05:01.857016+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "ValueError"
+  },
+  "https://www.indiacarnews.com/news/new-german-luxury-sedan-gets-728km-range-8k-screen-more-68996/": {
+    "fingerprint": "f1895b2733ab7512a8c00926c0d9d7b8c3f8243b2780d204a48a404710059f56",
+    "checkedAt": "2026-09-14T01:05:03.839427+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.indiacarnews.com/news/new-german-luxury-sedan-gets-728km-range-8k-screen-more-68996/",
+    "sourceExcerpt": "The sedan now offers a dashboard integrated 17.9-inch touchscreen infotainment system, a",
+    "sourceExcerptEnd": "positioned on top of the dashboard for the instrument functions."
+  },
+  "https://www.indiacarnews.com/news/4-new-high-mileage-cng-suvs-mpvs-launching-soon-68992/": {
+    "fingerprint": "9f107367738eeb843d2b04686a65e0d5ae967418cc772b3079f3e75d03a33a4d",
+    "checkedAt": "2026-09-14T01:04:50.273604+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.indiacarnews.com/news/4-new-high-mileage-cng-suvs-mpvs-launching-soon-68992/",
+    "sourceExcerpt": "Considering the growing demand for CNG vehicles, carmakers such as Kia, Hyundai",
+    "sourceExcerptEnd": "to launch CNG MPVs and SUVs in the coming months."
+  },
+  "https://www.indiacarnews.com/news/new-car-feature-helps-prevent-theft-even-after-key-cloning-68990/": {
+    "fingerprint": "e8bda74310673d5a2a4c0de0710a3a48e1eb1ea974533bc10dd8dd413722c5f4",
+    "checkedAt": "2026-09-14T01:04:52.962695+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.indiacarnews.com/news/new-car-feature-helps-prevent-theft-even-after-key-cloning-68990/",
+    "sourceExcerpt": "This update is now available in the connected-car-Navigation-Cockpit (ccNC) equipped HX10 and N10 variants of the Hyundai VENUE and VENUE N Line, respectively."
+  },
+  "https://www.autopunditz.com/post/jsw-combat-jetour-t2-india-launch-price-specs": {
+    "fingerprint": "356ce4bc287d5e30e6eb9cb7d1594d8f428bcae015a1a36a2be824d7c5b81fda",
+    "checkedAt": "2026-09-14T01:03:17.116922+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autopunditz.com/post/jsw-combat-jetour-t2-india-launch-price-specs",
+    "sourceExcerpt": "A five-seat SUV combining 360hp-class plug-in hybrid performance, around 90km of electric",
+    "sourceExcerptEnd": "Motors a product with very few direct rivals in India."
+  },
+  "https://www.autopunditz.com/post/bmw-india-30-percent-ev-penetration-h2-2026": {
+    "fingerprint": "5515d44d90dfd22c034bdc976d642062ce55889ef2b193bdc0b1bb746c4f09dd",
+    "checkedAt": "2026-09-14T01:03:05.710067+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autopunditz.com/post/bmw-india-30-percent-ev-penetration-h2-2026",
+    "sourceExcerpt": "The availability of products such as the BMW iX1, i5, i7 and",
+    "sourceExcerptEnd": "gives BMW exposure across multiple premium price bands as well."
+  },
+  "https://electrek.co/2026/09/12/tesla-roadster-october-1-reveal-teaser/": {
+    "fingerprint": "0700b0b773d418eb9024b92d9c9913b52d74d16a0ac9e94027c8bae993feec76",
+    "checkedAt": "2026-09-14T01:03:07.589422+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electrek.co/2026/09/12/tesla-roadster-october-1-reveal-teaser/",
+    "sourceExcerpt": "The company posted a “Go for launch” teaser image Friday showing the",
+    "sourceExcerptEnd": "in rocket-launch lighting, with the date “10.01” stamped across it."
+  },
+  "https://electrek.co/2026/09/11/tesla-cybercab-steering-wheel-assembly-first-look/": {
+    "fingerprint": "61754f7d6cbc7086b988c59a2403d1833fcbaa9ccbc6a03b75a301d8650c25ad",
+    "checkedAt": "2026-09-14T01:02:53.969891+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electrek.co/2026/09/11/tesla-cybercab-steering-wheel-assembly-first-look/",
+    "sourceExcerpt": "The photos, shared with Electrek by reader Adam Machacek, show a Cybertruck",
+    "sourceExcerptEnd": "steering column that has been bolted into the two-seat robotaxi."
+  },
+  "https://www.electrive.com/2026/09/11/r3-lithium-launches-lithium-recycling-facility-in-georgia/": {
+    "fingerprint": "01852a23d3a9a79a4b9e0dbb0b62ba05515bd5247fb43ff6fc4d2c1404f53d1c",
+    "checkedAt": "2026-09-14T01:04:54.411174+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "HTTPError"
+  },
+  "https://www.automotiveworld.com/news/nissan-names-its-new-a-segment-all-electric-city-car-pixo/": {
+    "fingerprint": "ca1e5eafeb5f8daeee0428ebdebfb8bab02b54814c3aa076e093a8b83d0b7695",
+    "checkedAt": "2026-09-14T01:04:55.002758+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.automotiveworld.com/news/nissan-names-its-new-a-segment-all-electric-city-car-pixo/",
+    "sourceExcerpt": "The 23 September event is expected to confirm powertrain details, battery range, pricing and positioning within Nissan’s European dealer network."
+  },
+  "https://www.automotiveworld.com/news/ford-commits-us1bn-to-new-kentucky-truck-plant-paint-shop/": {
+    "fingerprint": "8c133f8602292908a06d8f5ff35ebafd16a457e106cce43577a38f4e3d0a11fa",
+    "checkedAt": "2026-09-14T01:04:56.397254+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.automotiveworld.com/news/ford-commits-us1bn-to-new-kentucky-truck-plant-paint-shop/",
+    "sourceExcerpt": "Ford Motor Company has announced a US$1bn investment for a new Kentucky Truck Plant paint shop in Louisville."
+  },
+  "https://www.motorbeam.com/new-volvo-xc40-ex40-ec40-updates/": {
+    "fingerprint": "abe5e5ec0cebba25bac520ac1181d4b2968a993c0db07db9447a4352ad92f048",
+    "checkedAt": "2026-09-14T01:04:57.373411+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.motorbeam.com/new-volvo-xc40-ex40-ec40-updates/"
+  },
+  "https://www.bmwblog.com/2026/09/11/bmw-z22-concept-1999-screen-cabin-digital-mirror/": {
+    "fingerprint": "21661c327ce5d4ba75d7f3e8e7a4577d77b78e922d0282b3c7632c2af2c8a29e",
+    "checkedAt": "2026-09-14T01:02:56.535948+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.bmwblog.com/2026/09/11/bmw-z22-concept-1999-screen-cabin-digital-mirror/",
+    "sourceExcerpt": "BMW’s research car put a screen in charge of the cabin and",
+    "sourceExcerptEnd": "years before the Tesla Model S reached its first customers."
+  },
+  "https://theartfulage.com/ap-thirty-six-and-a-half-seconds-after-apollo-12-left-the-pad-on-14-november-1969-lightning-travelled-through-the-saturn-v-and-its-exhaust-trail-and-fifteen-and-a-half-seconds-later-a-second-strike/": {
+    "fingerprint": "8f6cbe1249a785bb29a2d432fc8f3ecbe1879bc3da9bbb5e64bad3f7d59372c5",
+    "checkedAt": "2026-09-14T01:04:58.155637+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://theartfulage.com/ap-thirty-six-and-a-half-seconds-after-apollo-12-left-the-pad-on-14-november-1969-lightning-travelled-through-the-saturn-v-and-its-exhaust-trail-and-fifteen-and-a-half-seconds-later-a-second-strike/"
   }
 }

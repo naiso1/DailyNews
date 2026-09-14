@@ -6,6 +6,7 @@ import csv
 import importlib.util
 from pathlib import Path
 import re
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -83,8 +84,30 @@ class ArticleBodyTests(unittest.TestCase):
         self.response.text = '<article><nav>OTHER BRANDS</nav></article>'
         self.assertEqual(self.env["fetch_article_text"]("https://www.motor1.com/news/missing/"), "")
 
+    def test_ttac_excludes_top_stories_and_reader_comments(self):
+        self.response.text = '<main><nav>Ford unrelated headline</nav><div class="js-activity-body">Infotainment and physical buttons.</div><section>Reader comments about seats.</section></main>'
+        self.assertEqual(self.env["fetch_article_text"]("https://www.thetruthaboutcars.com/cars/test/"), "Infotainment and physical buttons.")
+
+    def test_ttac_missing_body_does_not_use_other_stories(self):
+        self.response.text = '<main>Top stories about seats.</main>'
+        self.assertEqual(self.env["fetch_article_text"]("https://www.thetruthaboutcars.com/cars/missing/"), "")
+
 
 class PublicationTests(unittest.TestCase):
+    def test_package_import_works_without_collection_on_sys_path(self):
+        code = (
+            f"import sys; sys.path.insert(0, {str(ROOT)!r}); "
+            "from ニュース収集.source_highlights import enrich_items; "
+            "from ニュース収集.summary_grounding import SUMMARY_GROUNDING_RULES; "
+            "assert SUMMARY_GROUNDING_RULES"
+        )
+        result = subprocess.run(
+            [sys.executable, "-I", "-B", "-c", code], cwd=ROOT,
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+            timeout=30,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     @classmethod
     def setUpClass(cls):
         spec = importlib.util.spec_from_file_location("publisher_under_test", ROOT / "auto_update_daily_news.py")

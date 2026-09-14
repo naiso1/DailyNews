@@ -18,6 +18,13 @@ from backfill_source_highlights import add_highlight_fields
 
 
 class SelectionTests(unittest.TestCase):
+    def test_chinese_interior_topics_keep_their_original_pairing(self):
+        for index, term in enumerate(["中控台", "显示屏", "座椅", "冰箱", "门板", "氛围灯"]):
+            self.assertTrue(highlights.TOPICS[index].search(term))
+        self.assertTrue(highlights.TOPICS[2].search("seats"))
+        self.assertTrue(highlights.TOPICS[3].search("冷蔵庫"))
+        self.assertTrue(highlights.TOPICS[5].search("ambient lighting"))
+
     def test_only_visible_article_not_related_or_hidden_json(self):
         html = '''<nav><p>Buy a new steering wheel with leather.</p></nav>
         <article><div class="entry-content">

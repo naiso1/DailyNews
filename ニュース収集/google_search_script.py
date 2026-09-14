@@ -2001,7 +2001,7 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
 
     source_title = normalize_text(title)
     source_content = normalize_text(content)
-    article_excerpt = normalize_text(html_text)[:2500]
+    article_excerpt = normalize_text(html_text)[:SUMMARY_HTML_CHARS]
     anchors = extract_latin_source_anchors(f"{source_title} {source_content}", limit=5)
     required = ", ".join(anchors) if anchors else "なし"
 
@@ -2092,6 +2092,12 @@ def fetch_article_text(url):
             return ""
     elif host == "autocar.co.uk":
         main = soup.select_one(".field-name-body")
+        if main is None:
+            print(f"  [FETCH_SHORT] Article body not found: {url}")
+            return ""
+    elif host == "thetruthaboutcars.com":
+        # The surrounding <main> also includes unrelated headlines and comments.
+        main = soup.select_one(".js-activity-body")
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
             return ""

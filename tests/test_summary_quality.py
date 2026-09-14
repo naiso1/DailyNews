@@ -23,7 +23,7 @@ def helpers():
     }
     selected = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names]
     assert len(selected) == len(names)
-    env = {"re": re, "json": json, "SUMMARY_TITLE_LIMIT": 50, "SUMMARY_CONTENT_LIMIT": 150,
+    env = {"re": re, "json": json, "SUMMARY_TITLE_LIMIT": 50, "SUMMARY_CONTENT_LIMIT": 150, "SUMMARY_HTML_CHARS": 8000,
            "_is_valid_japanese": lambda text: bool(re.search(r"[ぁ-んァ-ヶ]", text)),
            "extract_latin_source_anchors": lambda *args, **kwargs: ["Skynomad"]}
     exec(compile(ast.Module(body=selected, type_ignores=[]), "summary-helpers", "exec"), env)
@@ -65,6 +65,20 @@ class SummaryQualityTests(unittest.TestCase):
         self.env["call_llm_text"] = llm
         self.assertEqual(self.env["compact_summary_with_llm"]("Skynomad", SOURCE, BAD), GOOD)
         self.assertEqual(llm.call_count, 2)
+
+    def test_screen_and_physical_controls_count_as_distinct_interior_details(self):
+        source = "Screens are frustrating. Seats improved, but physical buttons enhance usability."
+        self.assertFalse(summary_omits_interior_details("画面と物理ボタンの併用が操作性を高める。", source))
+        self.assertTrue(summary_omits_interior_details("画面の不満が多い。", source))
+        self.assertTrue(summary_omits_interior_details("画面と物理ボタンを採用。", "Seats and a screen are fitted."))
+
+    def test_repair_receives_interior_details_after_the_old_excerpt_limit(self):
+        self.env["call_llm_text"] = Mock(return_value=json.dumps(
+            {"title": "小米Skynomadの内装を公開", "summary": GOOD}, ensure_ascii=False
+        ))
+        article = "Introductory background. " * 120 + SOURCE
+        self.env["build_source_faithful_japanese_summary"]("Skynomad", "New model.", article)
+        self.assertIn(SOURCE, self.env["call_llm_text"].call_args.args[0])
 
     def test_failed_compaction_does_not_accept_lost_interior_details(self):
         self.env["call_llm_text"] = Mock(return_value=BAD)

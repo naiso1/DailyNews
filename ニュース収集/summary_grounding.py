@@ -2,7 +2,10 @@
 
 import re
 
-from currency_guard import CURRENCY_RULES
+if __package__:
+    from .currency_guard import CURRENCY_RULES
+else:
+    from currency_guard import CURRENCY_RULES
 
 
 BRAND_ALIASES = {
@@ -47,11 +50,12 @@ EQUIPMENT = re.compile(r"(?:センター)?テーブル|スイッチ(?:類)?|室�
 
 INTERIOR_TOPICS = tuple(re.compile(pattern, re.I) for pattern in (
     r"センターコンソール|中央コンソール|可動式コンソール|センターアイランド|\b(?:central|cent(?:er|re))[ -](?:console|island)\b",
-    r"ディスプレイ|画面|スクリーン|インフォテインメント|\b(?:display|screen|infotainment)\b",
+    r"ディスプレイ|画面|スクリーン|インフォテインメント|\b(?:displays?|screens?|infotainment)\b",
     r"シート|座席|[23]列目|[23]列シート|\b(?:seats?|seating|zero.gravity)\b",
     r"冷蔵庫|冷温庫|収納|荷室|\b(?:refrigerator|fridge|storage)\b",
     r"ドアトリム|加飾|表皮|内張|\b(?:door[ -]trim|upholstery)\b",
     r"室内灯|間接照明|アンビエント|\bambient[ -]light(?:ing|s)?\b",
+    r"物理(?:ボタン|スイッチ|操作)|操作(?:ボタン|スイッチ|ノブ)|空調操作|\b(?:physical[ -](?:buttons?|controls?|switches?)|mechanical[ -](?:knobs?|switches?)|climate[ -]controls?)\b",
 ))
 
 
