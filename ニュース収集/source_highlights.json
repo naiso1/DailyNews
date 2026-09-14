@@ -1211,5 +1211,416 @@
     "method": "literal-topic-match-v3",
     "status": "no_matching_passage",
     "finalUrl": "https://theartfulage.com/ap-thirty-six-and-a-half-seconds-after-apollo-12-left-the-pad-on-14-november-1969-lightning-travelled-through-the-saturn-v-and-its-exhaust-trail-and-fifteen-and-a-half-seconds-later-a-second-strike/"
+  },
+  "https://news.yahoo.co.jp/articles/04e7915f3eb02345a77c890b5536ca82e6b2395f?source=rss": {
+    "fingerprint": "68790db37eac8addde488391e90fe107de3a72a46994bf0404f51633439a8b7b",
+    "checkedAt": "2026-09-14T16:08:54.232188+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/04e7915f3eb02345a77c890b5536ca82e6b2395f?source=rss",
+    "sourceExcerpt": "インテリアには、初代を意識したタンの内装色を一部グレードで設定したほか、12.3インチのフルカラー液晶メーターに、歴代モデルのシルエットが登場するオープニングムービーを採用しました。"
+  },
+  "https://news.yahoo.co.jp/articles/378f8801cb1361667ccda414f49421ef4bf26603?source=rss": {
+    "fingerprint": "bdff052963407a91126237d549a10db3ad4dcafd74edac2a24b58701a2fa9879",
+    "checkedAt": "2026-09-14T16:08:54.547591+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/378f8801cb1361667ccda414f49421ef4bf26603?source=rss",
+    "sourceExcerpt": "とくにLEDヘッドランプは内部が一体化されていたり、デザインが複雑だったりするから、国産車でも片側10万円を超えるものは珍しくない。"
+  },
+  "https://news.yahoo.co.jp/articles/67306eefce10cf68ac892e462c80424e525a3090?source=rss": {
+    "fingerprint": "527555cd9c762f645843a1c2168b117b940259adb24ec63e2c61980057383308",
+    "checkedAt": "2026-09-14T16:08:54.829909+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/67306eefce10cf68ac892e462c80424e525a3090?source=rss",
+    "sourceExcerpt": "しかし、今主流ではないからこそ、ステアリングカスタムをすることで目立つこと請け合い! ブリッツから新たに登場した「BLITZ OMP STEERING WHEELφ350」は、世界のモータースポーツシーンでも名の知れたOMPと、日本を代表するカスタムブランドのブリッツがコラボした、注目のアイテムである。"
+  },
+  "https://news.yahoo.co.jp/articles/fc4f3147e9554720079d7c31cb5980a25140b0e2?source=rss": {
+    "fingerprint": "ce8f821357c39a4295ad97926f7b937de94bfb550ab9ae33b1c7a7f2c67fec46",
+    "checkedAt": "2026-09-14T16:08:55.144226+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/fc4f3147e9554720079d7c31cb5980a25140b0e2?source=rss",
+    "sourceExcerpt": "万が一、走行中に画面を注視して危険を生じさせた場合は携帯電話使用等（交通の危険）と見なされ、1年以下の懲役または30万円以下の罰金という罰則が科されるほか、違反点数6点が加算され、一発で免許停止処分の対象となるおそれがある。"
+  },
+  "https://news.yahoo.co.jp/articles/cff0d85d81362a0c08152abaa3425943de55b17c?source=rss": {
+    "fingerprint": "a75ee803cce1d57bdd2dc35a4daa7613626b1967f2a402af1c436cb1a9d17e94",
+    "checkedAt": "2026-09-14T16:08:55.428731+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/cff0d85d81362a0c08152abaa3425943de55b17c?source=rss",
+    "sourceExcerpt": "さて、装着が義務づけられるほど安全に対して有効に働くESCだが、ダッシュボードやその周辺に、ESCやTCS、またはVSCのオン／オフスイッチが設けられていることに気付く。"
+  },
+  "https://news.yahoo.co.jp/articles/5a1db716b08d1f5e4f07a885746ab5c86b2abac1?source=rss": {
+    "fingerprint": "b21c358bd43fcf5520a5b4a0db0ecaf627bca0fb9117a7b6375118196887952e",
+    "checkedAt": "2026-09-14T16:08:55.724548+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/5a1db716b08d1f5e4f07a885746ab5c86b2abac1?source=rss",
+    "sourceExcerpt": "ワールド・ステアリング：画像はグラントのステアリングに「グラント／ムーンアイズ用ヴィンテージホーンリングキットを装着したもの"
+  },
+  "https://news.yahoo.co.jp/articles/7eecfce5607ebe907c625ddcd8247d86369e6cb8?source=rss": {
+    "fingerprint": "c6b0c88b4dfae31e05bce8e2d29853023c11202171df52f3e6b93d8df6983ff0",
+    "checkedAt": "2026-09-14T16:08:55.970750+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/7eecfce5607ebe907c625ddcd8247d86369e6cb8?source=rss",
+    "sourceExcerpt": "7人乗りは、2列目に左右独立したキャプテンシートを採用する。"
+  },
+  "https://news.yahoo.co.jp/articles/317ff421482f7b35fd6ad2db5bf2792a93bce7a6?source=rss": {
+    "fingerprint": "596fcfb8e31e6edba2a5a638b6c6ff72bf3352190d151ad8eb3fbde527ec72ce",
+    "checkedAt": "2026-09-14T16:08:56.220231+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://news.yahoo.co.jp/articles/317ff421482f7b35fd6ad2db5bf2792a93bce7a6?source=rss",
+    "sourceExcerpt": "欧州仕様は、英国サンダーランド工場で生産される手はずだったものの、駆動用バッテリーを作る工場の都合で遅れていた。"
+  },
+  "https://www.motor1.com/news/808200/range-rover-making-smaller-screens-interior/": {
+    "fingerprint": "861f3f1d4c1ad9b329467fd2a337445b7914eee4d62f0a64611aad7d176f3113",
+    "checkedAt": "2026-09-14T16:08:56.437269+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/808200/range-rover-making-smaller-screens-interior/",
+    "sourceExcerpt": "So rather than covering the dashboard of the new GT massive displays,",
+    "sourceExcerptEnd": "centrally mounted touchscreen that sits relatively low in the cabin."
+  },
+  "https://www.motor1.com/news/808178/bmw-maps-3d-view-integrates/": {
+    "fingerprint": "a118825ffc4beb5e5c8723b634036340c970432bd8e74ca09fbf6a3cfff225e8",
+    "checkedAt": "2026-09-14T16:08:57.501148+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/808178/bmw-maps-3d-view-integrates/",
+    "sourceExcerpt": "BMW Maps with Driver Assistance combines navigation and active-safety visuals into a single 3D map display."
+  },
+  "https://www.motor1.com/news/808096/jeep-wrangler-jl-2a-retro/": {
+    "fingerprint": "41132f447ee5a5254a6eb9b2f903b00fe29e9730cf9a3384fffb5af982500bc9",
+    "checkedAt": "2026-09-14T16:08:57.739787+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.motor1.com/news/808096/jeep-wrangler-jl-2a-retro/",
+    "sourceExcerpt": "The JL-2A leaves performance alone and focuses on paint, trim and cabin materials instead."
+  },
+  "https://www.carscoops.com/2026/09/__trashed-10/": {
+    "fingerprint": "c5bcd79d6699414a3d4d7edaa3957306746cec33cf1831e756751f91d61c22c7",
+    "checkedAt": "2026-09-14T16:08:57.962327+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.carscoops.com/2026/09/__trashed-10/",
+    "sourceExcerpt": "And inside, there’s no infotainment screen or even speakers, the idea being",
+    "sourceExcerptEnd": "the same job.Will VW put the Mission Efficiency on sale?"
+  },
+  "https://www.caranddriver.com/photos/a73688013/1998-audi-cadillac-lexus-mazda-mercedes-benz-saab-volvo-luxury-sedan-archive-comparison-test-gallery/": {
+    "fingerprint": "108ec95c7e48f7f988eda4676ae041c85666a2878408fb064828f09f4535a1d7",
+    "checkedAt": "2026-09-14T16:08:58.324656+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.caranddriver.com/photos/a73688013/1998-audi-cadillac-lexus-mazda-mercedes-benz-saab-volvo-luxury-sedan-archive-comparison-test-gallery/",
+    "sourceExcerpt": "In 1998, with the economy humming, we gathered seven medium-high-rolling luxury sedans",
+    "sourceExcerptEnd": "Mazda, Mercedes-Benz, Saab, and Volvo to see which was best."
+  },
+  "https://www.caranddriver.com/reviews/a73644049/1998-audi-cadillac-lexus-mazda-mercedes-benz-saab-volvo-luxury-sedan-archive-comparison-test/": {
+    "fingerprint": "cf87d0e53f2feba55f333714f7d479622a2095b39156ad5d59f06674fd6bf01d",
+    "checkedAt": "2026-09-14T16:08:58.733815+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.caranddriver.com/reviews/a73644049/1998-audi-cadillac-lexus-mazda-mercedes-benz-saab-volvo-luxury-sedan-archive-comparison-test/",
+    "sourceExcerpt": "HIGHS: Tempestuous teapot-sized engine, feline agility, sensational steering.LOWS: 37 grand for a",
+    "sourceExcerptEnd": "smallish, spartan interior?!VERDICT: Low-profile luxury­—maybe a bit too low profile."
+  },
+  "https://www.carcomplaints.com/news/2026/tesla-autopilot-lawsuit-death-william-hensley.shtml": {
+    "fingerprint": "61ca60e7b0840d705516682786a096eee98dba3d5c56cf0815e609e18263445e",
+    "checkedAt": "2026-09-14T16:08:59.039161+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.carcomplaints.com/news/2026/tesla-autopilot-lawsuit-death-william-hensley.shtml",
+    "sourceExcerpt": "September 14, 2026 — A Tesla Autopilot crash lawsuit claims a 2016",
+    "sourceExcerptEnd": "prevent the vehicle from making a curve in the road."
+  },
+  "https://www.autocar.co.uk/car-news/new-cars-vans/new-kia-pv7-targets-ford-e-transit-custom-286-mile-range": {
+    "fingerprint": "414812a7108b5978065e24c9cd20e7b436af474383551101e37c3d5e67794b4a",
+    "checkedAt": "2026-09-14T16:09:00.469282+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/new-cars-vans/new-kia-pv7-targets-ford-e-transit-custom-286-mile-range",
+    "sourceExcerpt": "Inside, it is similar to the PV5, with a squared-off steering wheel and an emphasis on digital screens."
+  },
+  "https://www.autocar.co.uk/car-news/electric-cars/tesla-roadster-be-revealed-jet-power-1-october": {
+    "fingerprint": "f2ecbb5099e8d95aec80049e419ffebadfe44bc21cc1999dec47b5e930ce673f",
+    "checkedAt": "2026-09-14T16:09:00.898654+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/electric-cars/tesla-roadster-be-revealed-jet-power-1-october",
+    "sourceExcerpt": "The teaser image published by Tesla gives little away beyond the exhaust",
+    "sourceExcerptEnd": "promised thrusters, claimed to have been developed by Musk-owned SpaceX."
+  },
+  "https://www.autocar.co.uk/car-news/electric-cars/volkswagen-channels-xl1-ev-hatchback-capable-9mpkwh": {
+    "fingerprint": "6b3634a5fb2907856d70ae70f0372ac53517a54c4ae5892f5ba006cdd455056b",
+    "checkedAt": "2026-09-14T16:09:01.058792+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocar.co.uk/car-news/electric-cars/volkswagen-channels-xl1-ev-hatchback-capable-9mpkwh",
+    "sourceExcerpt": "During the test run, the Mission Efficiency achieved a 406-mile real-world range",
+    "sourceExcerptEnd": "increase of 124 miles on the ID Polo's WLTP range."
+  },
+  "https://www.autoexpress.co.uk/kia/370424/new-kia-pv7-nine-seats-and-350kw-charging-pv5s-big-brother": {
+    "fingerprint": "8cf84558506f90e69528fcb226936a140de97c7b78b2be4d07a38196b4156ce0",
+    "checkedAt": "2026-09-14T16:09:01.250282+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autoexpress.co.uk/kia/370424/new-kia-pv7-nine-seats-and-350kw-charging-pv5s-big-brother",
+    "sourceExcerpt": "These sit in a more plush cabin than that of the PV5, with an upholstered dashboard and new ambient lighting."
+  },
+  "https://carnewschina.com/2026/09/14/denza-n8l-bev-launches-with-130-kwh-battery-that-can-be-fully-charged-in-9-minutes/": {
+    "fingerprint": "fb46b30c2c0f9c04ec643731f947753c23b18f105c94d75a306c889321e1a73e",
+    "checkedAt": "2026-09-14T16:09:01.709039+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/14/denza-n8l-bev-launches-with-130-kwh-battery-that-can-be-fully-charged-in-9-minutes/",
+    "sourceExcerpt": "Inside, the cabin features a six-screen linkage layout, including an instrument cluster,",
+    "sourceExcerptEnd": "entertainment screens, an AR-HUD, and a streaming media rearview mirror."
+  },
+  "https://carnewschina.com/2026/09/14/carnewschina-introduces-a-new-1-minute-video-car-review-series/": {
+    "fingerprint": "cae1f86a9e11c50eef1e21e0d07e7de5a9e70f11bbad9aa84e50b5d96a7a714c",
+    "checkedAt": "2026-09-14T16:09:02.162020+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/14/carnewschina-introduces-a-new-1-minute-video-car-review-series/",
+    "sourceExcerpt": "Feel free to check out the first video, dedicated to the Geely",
+    "sourceExcerptEnd": "likely turn into a global model in the near future."
+  },
+  "https://carnewschina.com/2026/09/14/beijing-initiates-soe-automaker-consolidation-faw-and-gac-lead-the-way/": {
+    "fingerprint": "6deaba76d52be8e412b09833a6297ac2a7f13e6a5772c7f6f5c4aa4c378a560f",
+    "checkedAt": "2026-09-14T16:09:02.250087+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://carnewschina.com/2026/09/14/beijing-initiates-soe-automaker-consolidation-faw-and-gac-lead-the-way/",
+    "sourceExcerpt": "China’s FAW Group is advancing plans to acquire a stake in GAC",
+    "sourceExcerptEnd": "suddenly announce a trading suspension before the market opened today."
+  },
+  "https://cnevpost.com/2026/09/14/byd-denza-launches-all-electric-n8l/": {
+    "fingerprint": "29637114feab6522e1ed4bc0f399ef6bb80206c051fd80cf43ba112989aeff03",
+    "checkedAt": "2026-09-14T16:09:02.343162+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/14/byd-denza-launches-all-electric-n8l/",
+    "sourceExcerpt": "It supports BYD's flash charging technology and offers a CLTC range of 960 kilometers."
+  },
+  "https://cnevpost.com/2026/09/14/gac-buy-auto-jv-stake-faw-share-deal/": {
+    "fingerprint": "47f2d6f79acb6e98f08fda6d02ba4079917c84bc78cf0bb36525149d50195b8e",
+    "checkedAt": "2026-09-14T16:09:02.676601+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/14/gac-buy-auto-jv-stake-faw-share-deal/"
+  },
+  "https://cnevpost.com/2026/09/14/tesla-to-display-cybercab-beijing-shanghai-this-week/": {
+    "fingerprint": "34e8186ea19538b7316db6d92f4526b0ea77ecc1fc7be246fc103dc67d32548d",
+    "checkedAt": "2026-09-14T16:09:02.756457+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/14/tesla-to-display-cybercab-beijing-shanghai-this-week/",
+    "sourceExcerpt": "Tesla (NASDAQ: TSLA) will begin displaying Cybercab in Beijing and Shanghai this",
+    "sourceExcerptEnd": "of its driverless taxi without a steering wheel or pedals."
+  },
+  "https://cnevpost.com/2026/09/14/leapmotor-plans-overseas-phev-launch-2027/": {
+    "fingerprint": "100594f28925f9dee8f9b6cc003edb6572f57aa122ac4a0e8dba06c478fe8c71",
+    "checkedAt": "2026-09-14T16:09:02.869094+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/14/leapmotor-plans-overseas-phev-launch-2027/",
+    "sourceExcerpt": "Leapmotor's current lineup consists of battery electric vehicles (BEVs) and extended-range electric vehicles (EREVs)."
+  },
+  "https://cnevpost.com/2026/09/14/nio-150000-deliveries-3rd-gen-es8-this-week/": {
+    "fingerprint": "23a5fc0131950b234187af414ef35531892b966b739dddbb415102f754dface3",
+    "checkedAt": "2026-09-14T16:09:02.946489+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/14/nio-150000-deliveries-3rd-gen-es8-this-week/"
+  },
+  "https://cnevpost.com/2026/09/14/gac-shares-halted-faw-tie-up-rumors/": {
+    "fingerprint": "08ba6a521d1cf87aae3a0826f8e6e5a8b051fb0cab37ac5dfa34bad6d36766d8",
+    "checkedAt": "2026-09-14T16:09:03.057362+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://cnevpost.com/2026/09/14/gac-shares-halted-faw-tie-up-rumors/",
+    "sourceExcerpt": "The halt followed growing speculation over the weekend about cooperation between GAC and FAW."
+  },
+  "https://cnevpost.com/2026/09/14/xpeng-g9l-china-launch-sept-17/": {
+    "fingerprint": "862055c041fe97a3d704ac73d18a71cbc9461991684744794eafb7d65a455f9b",
+    "checkedAt": "2026-09-14T16:09:03.139781+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://cnevpost.com/2026/09/14/xpeng-g9l-china-launch-sept-17/"
+  },
+  "https://www.autocarindia.com/auto-images/amb-002-roadster-image-gallery-440462": {
+    "fingerprint": "47dcc8abfd48102e561d3cfe0d64944798428966b136faa6dcdddfb474c5cce3",
+    "checkedAt": "2026-09-14T16:09:03.239749+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.autocarindia.com/auto-images/amb-002-roadster-image-gallery-440462"
+  },
+  "https://www.autocarindia.com/auto-features/exploring-norway-on-two-wheels-and-four-norway-our-way-441043": {
+    "fingerprint": "a6be2c5338de95540abbff7676c4c0f0b914661925ff98149fd0da312fdd2bc8",
+    "checkedAt": "2026-09-14T16:09:04.664138+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-features/exploring-norway-on-two-wheels-and-four-norway-our-way-441043",
+    "sourceExcerpt": "However, on this journey, they combined the two formats into a single",
+    "sourceExcerptEnd": "of BMW motorcycles, along with a group of 26 travellers."
+  },
+  "https://www.autocarindia.com/motor-sports-news/2026-f1-antonelli-fends-off-verstappen-norris-to-win-spanish-gp-440739": {
+    "fingerprint": "e870cf382d83296a12bb29102b683a145cbec6d2ea4ac35ff0d6514e68da4204",
+    "checkedAt": "2026-09-14T16:09:04.950977+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "no_matching_passage",
+    "finalUrl": "https://www.autocarindia.com/motor-sports-news/2026-f1-antonelli-fends-off-verstappen-norris-to-win-spanish-gp-440739"
+  },
+  "https://www.autocarindia.com/auto-features/tata-punch-cng-amt-real-world-fuel-economy-tested-explained-441048": {
+    "fingerprint": "799cf7e402d538ec6fa39f3b37ea89e5affff63df1239ec8706edd3d62c1c231",
+    "checkedAt": "2026-09-14T16:09:05.424600+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autocarindia.com/auto-features/tata-punch-cng-amt-real-world-fuel-economy-tested-explained-441048",
+    "sourceExcerpt": "The 2026 Tata Punch facelift expands its powertrain line-up with two new",
+    "sourceExcerptEnd": "an automated manual transmission (AMT) option for its CNG variant."
+  },
+  "https://www.rushlane.com/no-petrol-cars-in-chinas-top-10-9-bev-1-phev-12555825.html": {
+    "fingerprint": "09a72be2f26ac410bd55547450305113395885ebf53348c4617f8f84b9712cca",
+    "checkedAt": "2026-09-14T16:09:05.726784+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.rushlane.com/no-petrol-cars-in-chinas-top-10-9-bev-1-phev-12555825.html",
+    "sourceExcerpt": "It is another relatively affordable BEV, priced at around 66k-87k yuan, or approximately Rs 9.4 lakh-Rs 12.4 lakh."
+  },
+  "https://gaadiwaadi.com/combat-to-be-the-name-of-jsws-first-phev-suv-for-india-launch-soon/": {
+    "fingerprint": "3fc5f043ac4743442b8d0d221143b907ab82be92855f8baef6d59411d9fa2b87",
+    "checkedAt": "2026-09-14T16:09:06.553333+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "ValueError"
+  },
+  "https://gaadiwaadi.com/hyundai-developing-multiple-new-suvs-for-india-ev-hybrid-ice/": {
+    "fingerprint": "e884e25cce664770bb5ea4fd347493f9d4df1774d4eff3b9d45cdc0daecc4dcf",
+    "checkedAt": "2026-09-14T16:09:08.333248+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "ValueError"
+  },
+  "https://gaadiwaadi.com/jsw-to-launch-multiple-new-electric-cars-in-india-heres-what-we-know/": {
+    "fingerprint": "d0e62473c79a2185677c661aeb1cf5f6baf76bb5589719b44006712e0b859a5b",
+    "checkedAt": "2026-09-14T16:09:09.884712+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "fetch_failed",
+    "error": "ValueError"
+  },
+  "https://www.autopunditz.com/post/bmw-india-fourth-price-hike-2026": {
+    "fingerprint": "93587de57fff3af934fb0693f9262d424c891b5e019493f9e414baa20bcb940a",
+    "checkedAt": "2026-09-14T16:09:11.428210+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autopunditz.com/post/bmw-india-fourth-price-hike-2026",
+    "sourceExcerpt": "BMW Group India is preparing for another price revision in 2026, potentially",
+    "sourceExcerptEnd": "a weaker rupee, rising commodity prices and higher logistics costs."
+  },
+  "https://www.autopunditz.com/post/hyundai-bayon-name-finalised-for-india": {
+    "fingerprint": "9ba912124fc9749efbae7f92cf58ed6c930c1fbcd60e9a561648f82fb5ea10c3",
+    "checkedAt": "2026-09-14T16:09:11.968811+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.autopunditz.com/post/hyundai-bayon-name-finalised-for-india",
+    "sourceExcerpt": "Recent spy shots have indicated that the cabin will follow Hyundai's n",
+    "sourceExcerptEnd": "han simply reproducing the current European Bayon dashboard."
+  },
+  "https://insideevs.com/news/808190/evs-are-getting-cheaper-august/": {
+    "fingerprint": "fbb3ef5d99977ef45d58d0c07adb1fd0164fb06646e53aac60be481aa60a65ae",
+    "checkedAt": "2026-09-14T16:09:12.127757+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://insideevs.com/news/808190/evs-are-getting-cheaper-august/",
+    "sourceExcerpt": "Tesla helped bring the average EV price down in August."
+  },
+  "https://electrek.co/2026/09/14/volkswagen-mission-efficiency-the-xl1-comes-back-as-1000-mile-range-electric-car/": {
+    "fingerprint": "3b4fb7f42a90ab65935f9d2d0bc7590c13acc90b7668ce1ebf38ad3cefcb8c42",
+    "checkedAt": "2026-09-14T16:09:12.970718+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electrek.co/2026/09/14/volkswagen-mission-efficiency-the-xl1-comes-back-as-1000-mile-range-electric-car/",
+    "sourceExcerpt": "Volkswagen just unveiled the Mission Efficiency, a concept it’s calling the world’s",
+    "sourceExcerptEnd": "my all-time favorite cars, finally done as a proper EV."
+  },
+  "https://www.electrive.com/2026/09/14/new-generation-man-etgx-unveiled-with-720-km-range/": {
+    "fingerprint": "ecbca7914f5c4d1a6118d0168f3b541be8ce0496ac08cdeedf53c2f4d033e6b7",
+    "checkedAt": "2026-09-14T16:09:13.256831+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.electrive.com/2026/09/14/new-generation-man-etgx-unveiled-with-720-km-range/",
+    "sourceExcerpt": "According to the manufacturer, the new MAN eTGX 6×2 tractor unit, with",
+    "sourceExcerptEnd": "range under everyday long-haul conditions realistically achievable,” as MAN states."
+  },
+  "https://electriccarsreport.com/2026/09/volkswagen-mission-efficiency-sets-new-benchmark-for-ev-efficiency/": {
+    "fingerprint": "1369cb0971b430f5dbfd4a0ad359147fc8470c202ee2a74a429036adafc58445",
+    "checkedAt": "2026-09-14T16:09:14.540108+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/volkswagen-mission-efficiency-sets-new-benchmark-for-ev-efficiency/",
+    "sourceExcerpt": "Volkswagen also uses a “bring your own device” approach, allowing a smartphone or tablet to serve in place of a dedicated infotainment display."
+  },
+  "https://electriccarsreport.com/2026/09/leapmotor-b03x-arrives-in-europe-with-e24900-starting-price/": {
+    "fingerprint": "54004f27849bbb7211a6db227ec30095559cb8aa71da7dd8181f24407afeca09",
+    "checkedAt": "2026-09-14T16:09:15.271675+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/leapmotor-b03x-arrives-in-europe-with-e24900-starting-price/",
+    "sourceExcerpt": "The B03X follows a minimalist interior design approach, with a horizontal dashboard intended to create a more open feeling."
+  },
+  "https://electriccarsreport.com/2026/09/updated-volvo-ex40-gets-new-design-more-power-and-smarter-safety-tech/": {
+    "fingerprint": "474ec04c8aebbf2f617a62cb01136b667a24f86de2ea9b891725be22f8027e57",
+    "checkedAt": "2026-09-14T16:09:15.478087+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/updated-volvo-ex40-gets-new-design-more-power-and-smarter-safety-tech/",
+    "sourceExcerpt": "Volvo is giving its popular electric compact SUV a significant update, bringing",
+    "sourceExcerptEnd": "and a larger infotainment display to the refreshed Volvo EX40."
+  },
+  "https://electriccarsreport.com/2026/09/dpd-orders-341-mercedes-benz-esprinter-electric-vans-ahead-of-christmas-peak/": {
+    "fingerprint": "43e4d005d17f518bdb2dbb97146a89c77d2b6a97abd232fb035a6f5ff13a1cf0",
+    "checkedAt": "2026-09-14T16:09:15.684902+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://electriccarsreport.com/2026/09/dpd-orders-341-mercedes-benz-esprinter-electric-vans-ahead-of-christmas-peak/",
+    "sourceExcerpt": "DPD is expanding its electric delivery fleet with 341 Mercedes-Benz eSprinter electric",
+    "sourceExcerptEnd": "transition toward lower-emission operations ahead of the busy Christmas season."
+  },
+  "https://www.automotiveinteriorsworld.com/features/interview-material-innovation.html": {
+    "fingerprint": "1464e2a87b5327dadbd3a4a35b34d267fc7ebfe147f1101ebf56bd5cbc1ea55b",
+    "checkedAt": "2026-09-14T16:09:15.894554+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.automotiveinteriorsworld.com/features/interview-material-innovation.html",
+    "sourceExcerpt": "Historically, achieving a premium interior often required multiple materials, multiple processing steps or added complexity throughout the manufacturing chain."
+  },
+  "https://www.bmwblog.com/2026/09/14/new-bmw-maps-version/": {
+    "fingerprint": "9e4c550d0c9694a23be095531c1aed678bc0344419835f1d092d95e68809032c",
+    "checkedAt": "2026-09-14T16:09:17.404249+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://www.bmwblog.com/2026/09/14/new-bmw-maps-version/",
+    "sourceExcerpt": "The latest BMW Maps brings navigation, the vehicle’s surroundings, and driver assistance information together on the central display."
+  },
+  "https://bestcarweb.jp/feature/column/1630719": {
+    "fingerprint": "27006873f80843c2850f1ff41c6fde590fdbc2c978accf9182383d8865f8ed1f",
+    "checkedAt": "2026-09-14T16:09:17.574856+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://bestcarweb.jp/feature/column/1630719",
+    "sourceExcerpt": "T型にデザインされたインパネはセンターコンソールを除く全面にソフトパッド加工を施すことで、高級感あるものに。"
+  },
+  "https://levolant.jp/2026/09/14/454262/": {
+    "fingerprint": "20792516086cbf9a205d3eaf4e3f55dd1ce411ffa2a7dc315867c1d3c68b9285",
+    "checkedAt": "2026-09-14T16:09:17.733114+00:00",
+    "method": "literal-topic-match-v3",
+    "status": "verified",
+    "finalUrl": "https://levolant.jp/2026/09/14/454262/",
+    "sourceExcerpt": "センターコンソールには電子制御式のe-シフターが採用され、すっきりとした現代的な空間を演出するとともに、最大48色から選べるアンビエントライティングが上質な移動時間を彩る。"
   }
 }
