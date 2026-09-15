@@ -13,7 +13,7 @@
 
 ## 配信開始の進捗
 
-2026-09-15 時点で外装専用のPower Automateフローを作成し、表示名・本文の文字化けを修復済み。フローIDは `21cc618b-ffb2-46d9-830f-9ba0444cfbef`。現在は `Stopped`（停止中）で、サイト公開、成功RSS、外装宛先JSONの確認後に有効化する。
+2026-09-15 に外装専用のPower Automateフローを作成し、サイト公開、成功RSS、外装宛先JSONと配信条件を確認して有効化済み。フローIDは `21cc618b-ffb2-46d9-830f-9ba0444cfbef`、現在は `Started`（稼働中）。実際のメール受信は次回の定時配信で確認する。
 
 購読者同期用の `deployment/workstation/sync-mailing-list.py` と2分周期の同期タスクを登録済み。同期を実行し、外装の宛先JSONと初期配信先1名を確認済み。設定と開始手順は[外装メール配信の設定と運用](../deployment/notifications/README.md)を参照。
 
