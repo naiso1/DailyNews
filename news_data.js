@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-15 01:09";
+window.NEWS_UPDATED_AT = "2026-09-16 01:11";
 
 window.LOADED_NEWS_DATA = [
 
@@ -225741,6 +225741,696 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://levolant.jp/wp-content/uploads/2026/09/260911_RENAULT_NIAGARA_93.jpg",
+        note: ""
+    },
+    // 2026-09-15 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1831",
+        title: "ハイエースベースのキャンピングカー、40型スクリーンとポップアップルーフでレンタル開始",
+        desc: "Carstayは9月15日、『ハイエース』をベースに改装したキャンピングカー「SAny.VANポップアップルーム」のレンタルを開始した。車内には長さ180cmのソファーベッドや40型スクリーン、プロジェクターが備わり、ポップアップルーフで車内高を最大約2.4mまで拡張できる。",
+        url: "https://news.yahoo.co.jp/articles/a05b05528e4a9a3a866617e70f3946c53677793f?source=rss",
+        source: "レスポンス",
+        date: "2026-09-15",
+        tags: ["AR", "ディスプレイ"],
+    
+        sourceExcerpt: "Carstay（カーステイ）は9月15日、キャンピングカー「SAny.VAN ポップアップルーム」のレンタルを開始した。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000020-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1832",
+        title: "東海理化「THINK SCRAP」が代官山蔦屋書店でPOP UP出店",
+        desc: "愛知県の自動車部品メーカー・東海理化のアップサイクルブランド「THINK SCRAP」は、シートベルト端材を素材にバッグや小物を製造している。同ブランドは2026年9月15日から30日まで代官山蔦屋書店でPOP UP出店し、サコッシュの新色グレージュとアッシュグレーなどを販売する予定だ。",
+        url: "https://news.yahoo.co.jp/articles/5cbe315dffe13e0bc645065e7714fce1c3ff20cb?source=rss",
+        source: "レスポンス",
+        date: "2026-09-15",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "■シートベルトの端材を日常使いのバッグへ THINK SCRAPは、愛知県の自動車部品メーカー・東海理化の工場で発生するシートベルトの端材に新たな価値を見いだし、バッグや小物へと生まれ変わらせるアップサイクルブランドだ。",
+        interiorScore: 26,
+        interiorReason: "The article discusses an upcycling brand using seatbelt scrap material for bags.",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000016-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1833",
+        title: "日産ムラーノ新グレードダークアーマー追加、2027年型米国発売",
+        desc: "日産はSUV『ムラーノ』の2027年モデルを米国で発売し、新グレード「ダークアーマー」を追加した。価格は4万3990ドルからで、インテリアはグラファイト（濃灰色）のみ設定される。また、12.3インチディスプレイやフロントシートのマッサージ機能など快適装備も備える。",
+        url: "https://news.yahoo.co.jp/articles/777ed179289d309d8c299e740cbee6e0c67d1eb2?source=rss",
+        source: "レスポンス",
+        date: "2026-09-15",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "主な装備として、高速道路でのハンズオフ走行を可能にする「プロパイロット アシスト2.1」、Google Maps・Google Play S",
+        sourceExcerptEnd: "トディスプレイ、フロントシートのマッサージ機能、3D表示対応のインテリジェント アラウンドビューモニターなどを用意する。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000007-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1834",
+        title: "メルセデスAMG CLE 646がV8ツインターボと後輪駆動を組み合わせ発表",
+        desc: "メルセデスAMGは9月11日、「CLE 646 Spezialanfertigung」を発表した。現行CLE 53をベースに、リヤシートや防音材を撤去し約170kgの軽量化を実現した“ミトス”シリーズ第2弾で、世界限定30台が完売している。",
+        url: "https://news.yahoo.co.jp/articles/9c6d7d9159fb5b1784ac0989458fa0bc9e3e4361?source=rss",
+        source: "carview!",
+        date: "2026-09-15",
+        tags: ["シート"],
+    
+        sourceExcerpt: "メルセデスAMGは9月11日、「メルセデスAMG CLE 646 Spezialanfertigung（スペツィアルアンフェアティグング）」を発表した。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1835",
+        title: "BRIDE新シートNURMAN、腰腿内寸拡大で大柄な人にも快適",
+        desc: "BRIDEの新シリーズ「NURMAN」は、標準モデルより腰部分約20mm、腿部分約10mmの内寸を拡大し、大柄なユーザーの窮屈さを軽減するフルバケットシートである。日本製で難燃生地を採用し、カーボンシェル仕様は23万3200円から24万4200円で提供されている。",
+        url: "https://news.yahoo.co.jp/articles/efc1f2b036af77e9365879d19586ae080b12fe8f?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-15",
+        tags: ["シート"],
+    
+        sourceExcerpt: "フルバケットシートに興味はあるものの、「窮屈そう」と感じている人に注目の新モデルが登場した。",
+        interiorScore: 92,
+        interiorReason: "Detailed seat product launch with specific ergonomic dimensions (waist/legroom e",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000019-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1836",
+        title: "スズキエブリイ大幅改良、デジタルメーターと9インチナビ採用",
+        desc: "スズキは2026年5月、軽商用車エブリイと乗用モデルのエブリイワゴンを大幅改良した。室内では黒を基調とした落ち着いたデザインに変更し、速度を数字で大きく表示するデジタルスピードメーターを採用した。さらにPCやJOINターボなど特定のグレードには、全方位モニター付き9インチメモリーナビが20万1300円で用意され、軽バンとは思えないほど現代的なインパネを実現している。",
+        url: "https://news.yahoo.co.jp/articles/6f97815390f76516b503380dbae1856fc33f3c46?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-15",
+        tags: ["ディスプレイ", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "スズキコネクトにも対応し、軽バンのインパネとは思えないほど現代的になった。",
+        interiorScore: 57,
+        interiorReason: "Article details specific interior updates including a digital speedometer, black",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000018-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1837",
+        title: "N-BOX専用ダッシュボードトレイ再入荷、スマホホルダー一体で収納力拡張",
+        desc: "CRAFT WORKSのN-BOX JF5/JF6専用ダッシュボードトレイが再入荷した。ABS樹脂製で耐熱性を備え、ナビ背面に両面テープで30秒設置できる。スマホホルダーと滑り止めマットを一体化し、小物の定位置確保や視認性向上を実現する実用的な内装パーツである。",
+        url: "https://news.yahoo.co.jp/articles/bc0e1de795dcf22407f61c0f10fe710c5f473bb1?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-15",
+        tags: ["コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "そんな現行N-BOXの収納に関する悩みに着目したのが、CRAFT WORKS(クラフトワークス)の「N-BOX JF5/JF6専用 ダッシュボードトレイ」である。",
+        interiorScore: 98,
+        interiorReason: "The article details a specific interior accessory (dashboard tray) that addresse",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000016-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1838",
+        title: "ハイエース200系専用ダッシュボードトレイ再入荷",
+        desc: "Fun StandardのCRAFT WORKSが展開するハイエース200系専用ダッシュボードトレイが再入荷した。ABS樹脂製でスマホスタンドやカード・コイン置き場を備え、ナビ背面に両面テープで30秒設置できる設計だ。参考価格は2880円からで、H200系1〜9型のスーパーGL・GL・DXに対応する。",
+        url: "https://news.yahoo.co.jp/articles/a9a922e61698b838f4b7a657c12201e3ab60d916?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-15",
+        tags: ["AR", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "そんなハイエース200系の車内収納に着目したのが、Fun Standardが展開するカーグッズブランド「CRAFT WORKS(クラフトワークス)」の「ハイエース 200系専用 ダッシュボードトレイ」だ。",
+        interiorScore: 88,
+        interiorReason: "Specific dashboard accessory product with material (ABS), installation method, a",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000011-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1839",
+        title: "岡山県初、宇野バス全路線でタッチ決済「クレカ乗車」が開始",
+        desc: "宇野自動車は2026年10月8日、全45台の路線バスで三井住友カードの「stera transit」を活用したタッチ決済による「クレカ乗車」を開始する。現金やチャージ不要でスムーズに乗降でき、訪日外国人など多様なニーズに対応し利便性を高める。",
+        url: "https://news.yahoo.co.jp/articles/af91decc55618831cc3503116c697b432debe678?source=rss",
+        source: "ベストカーWeb",
+        date: "2026-09-15",
+        tags: [],
+    
+        sourceExcerpt: "なおクレカ乗車は、三井住友カードの公共交通機関向けソリューション「stera transit」を活用した、タッチ決済対応のカード(クレジット・デビット・プリペイド)や、カードが設定されたスマートフォン等による乗車サービスである。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00000007-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1840",
+        title: "日産デイズ一部改良、上質なシートと見やすいメーターパネル採用",
+        desc: "日産は2026年7月27日に軽ハイトワゴン「デイズ」の一部改良モデルを発表した。内装では上質なシートや見やすいメーターパネルを採用し、快適な空間を追求している。さらに豊富な収納スペースを配置するなど、毎日の使い勝手に配慮したレイアウトも特徴とされている。",
+        url: "https://news.yahoo.co.jp/articles/85d3f9bcab4b9e33b0a7d1d63ef27b33e5c20ecf?source=rss",
+        source: "くるまのニュース",
+        date: "2026-09-15",
+        tags: ["シート"],
+    
+        sourceExcerpt: "内装は、上質なシートや見やすいメーターパネルを採用し、快適な空間を追求しました。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-01111337-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1649",
+        title: "GMがCarPlayとAndroid Autoを統合し新インフォテインメントシステム導入へ",
+        desc: "GMは新インフォテインメントシステムでApple CarPlayとAndroid Autoを統合し、トラックから展開する。UIは白文字黒背景のシンプル設計でクイックアクセス機能を強化。スマホ画面はネイティブアプリと並ぶ大型カード形式で表示され、フルスクリーン化は不可だが両立を実現した。",
+        url: "https://www.thedrive.com/news/gm-finally-gave-up-the-fight-against-carplay-and-android-auto-tds",
+        source: "The Drive",
+        date: "2026-09-15",
+        tags: ["HMI", "AR", "ディスプレイ", "コネクテッド"],
+    
+        sourceExcerpt: "🍎 General Motors is revamping its infotainment interface, and this big update",
+        sourceExcerptEnd: "with higher contrast—plain white text on a stark black background.",
+        interiorScore: 35,
+        interiorReason: "The article focuses on a major HMI and infotainment update (CarPlay/Android Auto",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/MY27_Chevrolet_Silverado_High-Country_Interior-6335_33a5cb.jpg?quality=85&w=2048",
+        note: ""
+    },
+    {
+        id: "us1650",
+        title: "2027フォードF-150 Carharttパッケージツートーンシート採用",
+        desc: "2027年型Ford F-150のCarharttパッケージは、シグネチャーのツートーンシート材と全天候型フロアマットを備え、XLT SuperCrewベースで4,195ドルの追加費用となる。",
+        url: "https://www.thedrive.com/news/the-2027-ford-f-150-offers-a-v8-on-every-trim-for-the-first-time-since-2023",
+        source: "The Drive",
+        date: "2026-09-15",
+        tags: ["AR", "シート"],
+    
+        sourceExcerpt: "The 2027 Ford F-150 is available to order now, but Ford cautions that Carhartt deliveries won’t begin until early 2027.",
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/superhero.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1651",
+        title: "iSeeCars調査でトヨタシークアが42.3%の高耐久率を記録",
+        desc: "iSeeCarsの調査では、25万マイル到達確率が最も高いのはトヨタシークアの42.3%であり、レクサスLSやトヨタ4ランナーが続く。業界平均は5.4%だが、トヨタとホンダが上位を占め、耐久性への企業哲学が示唆されている。",
+        url: "https://www.motor1.com/news/808362/car-models-most-likely-reach-250000-miles/",
+        source: "Motor1",
+        date: "2026-09-15",
+        tags: ["AR"],
+    
+        sourceExcerpt: "According to iSeeCars’ latest study, the Toyota Sequoia has a 42.3 percent",
+        sourceExcerptEnd: "ahead of the Lexus LS (38.8%) and Toyota 4Runner (33.1%).",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/bgPrPn/s3/2027-toyota-sequoia-trd-pro.jpg",
+        note: ""
+    },
+    {
+        id: "us1652",
+        title: "GM、デンバー企業と提携し次世代ナトリウムイオン電池の国内供給網を構築",
+        desc: "GMはデンバーのPeak Energyと提携し、エネルギー貯蔵システム向けに低コストなナトリウムイオン電池を開発する。これによりリチウムや硫酸鉄への依存を減らし、2029年頃の展開を目指して国内供給網を強化する方針である。",
+        url: "https://www.carscoops.com/2026/09/gm-battery-production-usa/",
+        source: "CarScoops",
+        date: "2026-09-15",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "By comparison, GM is working with Denver firm Peak Energy on advanced sodium-ion battery cells for energy storage.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Chevy-EV-supply-chain-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1653",
+        title: "2027年型フォードF-150カーハートエディション内外装写真公開",
+        desc: "フォードは2027年型F-150のカーハートエディションを発表し、外装と内装をあらゆる角度から捉えた公式写真を公開した。",
+        url: "https://www.caranddriver.com/photos/a73726316/2027-ford-f-150-carhartt-edition-details-gallery/",
+        source: "Car and Driver",
+        date: "2026-09-15",
+        tags: [],
+    
+        sourceExcerpt: "View Interior Photos of the 2028 Volvo XC60",
+        interiorScore: 48,
+        interiorReason: "The article is a photo gallery for the F-150 Carhartt Edition that explicitly in",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/d2204f41-62a9-43c0-a504-0fbc6a435819.jpg",
+        note: ""
+    },
+    {
+        id: "us1654",
+        title: "2014年型フェラーリカリフォルニアV8、65,500ドルで入札中",
+        desc: "走行18,300マイルの自然吸気V8モデルが65,500ドルで出品。DCTセンサー未交換と内装樹脂の粘着が懸念点だが、4.3L V8（483hp）の音質はターボ後継車にない魅力と評価されている。",
+        url: "https://www.topspeed.com/2014-ferrari-california-v8-auction-guide/",
+        source: "Top Speed",
+        date: "2026-09-15",
+        tags: ["センシング"],
+    
+        sourceExcerpt: "The second issue is the sticky interior trim finish.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/09/ferrari-california-3.jpg",
+        note: ""
+    },
+    {
+        id: "us1655",
+        title: "2026マツダ3ハッチバック、価格以上の高級感",
+        desc: "2026年型マツダ3ハッチバックは2万5,650ドルから3万8,090ドルで提供され、プレミアムグレードには10.25インチディスプレイやBOSEオーディオが備わる。筆者は試乗し、静粛性と質感が高く、価格以上の高級感があると評価した。",
+        url: "https://www.topspeed.com/hatchback-more-luxurious-than-cars-twice-its-price/",
+        source: "Top Speed",
+        date: "2026-09-15",
+        tags: ["ディスプレイ", "音響"],
+    
+        sourceExcerpt: "Then there is the new Kia K4 Hatchback GT-Line Turbo, which takes",
+        sourceExcerptEnd: "with 29.6 inches of digital displays, and a power sunroof.",
+        interiorScore: 62,
+        interiorReason: "Review highlights specific interior features like the 10.25-inch display and Bos",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/image-52.jpeg",
+        note: ""
+    },
+    {
+        id: "us1656",
+        title: "GM、27年型SilveradoとSierraに新UI採用",
+        desc: "GMは2027年型Chevrolet SilveradoとGMC Sierra向けに、アプリランチャーを廃止しGoogle Mapsとウィジェットを並べる分割ビューのホーム画面を導入する。メータークラスターにはSuper Cruise対応の3Dセンサー可視化機能を備え、牽引時はトレーラープロファイルが自動検出され高度制限などを考慮したルート検索が可能になる。",
+        url: "https://www.topspeed.com/2027-silverado-sierra-gm-infotainment-redesign/",
+        source: "Top Speed",
+        date: "2026-09-15",
+        tags: ["HMI", "センシング", "EV"],
+    
+        sourceExcerpt: "GM announced a completely redesigned in-vehicle software platform debuting on the 2027",
+        sourceExcerptEnd: "from how truck infotainment has worked for the past decade.",
+        interiorScore: 94,
+        interiorReason: "Focuses on infotainment UI redesign (split-view home screen) and HMI features li",
+        imageInterior: true,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/06/2027-chevrolet-silverado-1500-15.jpg",
+        note: ""
+    },
+    {
+        id: "us1657",
+        title: "ジープ・チェロキーハイブリッドLaredo、0%金利でベースグレードより4千ドル安",
+        desc: "ステランティスは2026年型ジープ・チェロキーハイブリッドLaredoに72ヶ月間0%金利を適用し、ベースグレードより4,000ドル以上安価にしている。同車はAWDと37mpgのハイブリッド動力を標準装備する。",
+        url: "https://www.topspeed.com/2026-jeep-cherokee-hybrid-0-apr-laredo/",
+        source: "Top Speed",
+        date: "2026-09-15",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The 37-mpg hybrid powertrain and standard AWD give the Cherokee Hybrid real",
+        sourceExcerptEnd: "this isn't a financing gimmick propping up a weak product.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/09/2026-jeep-cherokee-hybrid-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu1613",
+        title: "ボルボXC60 PHEV、EV航続124マイルで英国PHEV最長",
+        desc: "ボルボはXC60とXC90に新プラグインハイブリッドシステムを導入し、特にXC60 T6のEVモード航続距離を124マイル（約200km）まで拡大した。これは現行英国販売PHEV中最長であり、競合他社を上回る。また、大容量バッテリー化に伴いトランク容量は468リットルを維持する設計となっている。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/new-look-volvo-xc60-phev-brings-124-miles-electric-range",
+        source: "AUTOCAR UK",
+        date: "2026-09-15",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The new big-battery versions of the XC60 and XC90 come as part",
+        sourceExcerptEnd: "plans to totally electrify its cars in the coming years.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/untitled-1_18.jpg?itok=Ufa25b5U",
+        note: ""
+    },
+    {
+        id: "eu1614",
+        title: "追跡システムで盗難車回収率95%超、OEM純正の弱点",
+        desc: "イングランド・ウェールズ調査では、2025年3月までの1年間の盗難車の約4分の3が未回収。一方、専門監視型追跡システム搭載車は95〜99%の回収率を記録し、OEM純正システムの弱点が浮き彫りになった。",
+        url: "https://www.autocar.co.uk/car-news/consumer/aftermarket-trackers-key-stolen-car-recovery-factory-tech-fails",
+        source: "AUTOCAR UK",
+        date: "2026-09-15",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/generic2.jpg?itok=JiZZUf4N",
+        note: ""
+    },
+    {
+        id: "eu1615",
+        title: "Audi Nuvolariレビュー、Lamborghini基盤のハイブリッド超高性能車",
+        desc: "Audi NuvolariはLamborghini Temerarioとプラットフォームを共有する限定499台で約50万ポンド。内装はミニマルなコックピットが特徴で小型メーター、傾斜のあるセンターコンソール、Alcantaraトリム付きスリムステアリングホイールを採用している。",
+        url: "https://www.autoexpress.co.uk/audi/370440/new-audi-nuvolari-review-stunning-ps500k-supercar-makes-r8-seem-slow",
+        source: "Auto Express",
+        date: "2026-09-15",
+        tags: ["AR", "コックピット", "センターコンソール"],
+    
+        sourceExcerpt: "Inside, the sober, minimalist cockpit – featuring small dials and an angled centre console – won’t be to all tastes.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--JSb14Gns--/t_rss_image_w_845/v1789478002/autoexpress/2026/09/8a95b013-ed9e-43ec-b6b7-f921aa2708d3_HR_4c_yjfvn9.jpg",
+        note: ""
+    },
+    {
+        id: "eu1616",
+        title: "ロールスロイス・ファントム、アバロン貝marquetry初採用",
+        desc: "ロールスロイスはプライベートオフィス・ドバイが手がけたワンオフ「Phantom Hummingbird」を発表した。本車は同社初のアバロン貝marquetryを採用し、ピクニックテーブルには53枚の貝殻と真珠母貝を組み合わせたハチドリモチーフを施している。",
+        url: "https://www.autoexpress.co.uk/rolls-royce/phantom/370437/rolls-royce-phantom-hummingbird-one-worth-shelling-out",
+        source: "Auto Express",
+        date: "2026-09-15",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The Phantom Hummingbird is the first Rolls-Royce car to feature abalone shell marquetry.",
+        interiorScore: 62,
+        interiorReason: "High relevance for luxury material innovation (abalone shell marquetry) and besp",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--Fn_j4dwK--/t_rss_image_w_845/v1789469425/autoexpress/2026/09/Rolls-Royce%20Phantom%20Hummingbird-7.jpg",
+        note: ""
+    },
+    {
+        id: "eu1617",
+        title: "JLR、ステランティスと協力し米向けDefenderピックアップ開発を検討",
+        desc: "JLRはステランティスとの提携により、米国市場向けのDefenderピックアップトラックの開発を検討している。同車は関税回避のため米国で生産される見込みだが、既存のDefenderアーキテクチャかステランティスのプラットフォームを採用するかは未定である。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/report-jlr-collaborating-stellantis-defender-pick",
+        source: "Autocar Reviews",
+        date: "2026-09-15",
+        tags: [],
+    
+        sourceExcerpt: "JLR is considering building a Defender pick-up as part of its new alliance with Stellantis, according to a report in The Times.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/land_rover_defender_crew_1_1.jpg?itok=qyvuFzaN",
+        note: ""
+    },
+    {
+        id: "cn1643",
+        title: "CATLがIAAで商用車向け次世代バッテリー「Tectrans II」を発表",
+        desc: "CATLはIAA Transportation 2026で商用車向けバッテリーTectrans IIを発表し、8C充電と最大1,000km航続を備えた。さらにDHLグループと欧州のグリーン・フレイト・コリドー開発に関する覚書に署名した。",
+        url: "https://carnewschina.com/2026/09/15/catl-unveils-tectrans-%e2%85%b1-at-iaa-transportation-2026-megawatt-charging-for-commercial-vehicles/",
+        source: "CarNewsChina - All",
+        date: "2026-09-15",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "CATL officially launched Tectrans Ⅱ, its next-generation battery solution for commercial vehicles, at IAA Transportation 2026 in Hannover.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/tectrans-e285b1-battery-2-1500x715.jpg",
+        note: ""
+    },
+    {
+        id: "cn1644",
+        title: "Voyah Dream 9がHarmonySpace6コックピット採用で9月22日発売",
+        desc: "東風のVoyah Dream 9はHarmonySpace6コックピットシステムを搭載し、9月22日に発売される。2列目にはゼログラビティモードや機械式マッサージ機能を備えた航空グレードシートが設定され、折りたたみスクリーンや冷蔵庫も標準装備されている。",
+        url: "https://carnewschina.com/2026/09/15/voyah-dream-9-flagship-mpv-with-701-km-range-set-to-launch-on-september-22/",
+        source: "CarNewsChina - All",
+        date: "2026-09-15",
+        tags: ["AR", "ディスプレイ", "シート", "コックピット"],
+    
+        sourceExcerpt: "Passengers also benefit from a built-in refrigerator, folding screens, and tray tables.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-110-e1789454207654.png",
+        note: ""
+    },
+    {
+        id: "cn1645",
+        title: "Freelander 8に46.3インチ全景ディスプレイとK9級クリスタルノブ搭載",
+        desc: "Chery Jaguar Land RoverのEREV「Freelander 8」は2026年9月19日に中国で納車開始する。内装には46.3インチのパノラマディスプレイ、15.6インチのLEDセンターコントロール画面、K9グレードの光学クリスタルノブが採用されている。",
+        url: "https://carnewschina.com/2026/09/15/freelander-8-china-deliveries-to-begin-september-19/",
+        source: "CarNewsChina - All",
+        date: "2026-09-15",
+        tags: ["AR", "ディスプレイ", "EV"],
+    
+        sourceExcerpt: "InteriorInside, the Freelander 8 features a 46.3-inch panoramic display and a 15.6-inch LED central control screen.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-109-e1789435232593_webhook_1500x900_q85_1789435476.jpg",
+        note: ""
+    },
+    {
+        id: "cn1646",
+        title: "NIO、Onvoの欧州進出を2028〜2029年に確認",
+        desc: "William LiはNIOの欧州におけるコミットメントを再確認し、販売店モデルへの移行を発表した。同ブランドは特定の市場では引き続き直接運営を行う一方、急速な拡大よりも持続可能な成長を優先する方針を示している。",
+        url: "https://cnevpost.com/2026/09/15/nio-reaffirms-europe-commitment-william-li-meets-users/",
+        source: "CnEVPost - All",
+        date: "2026-09-15",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091514125347.jpg",
+        note: ""
+    },
+    {
+        id: "cn1647",
+        title: "CATLがTectrans II商用車向けバッテリーを発表",
+        desc: "CATLはIAA Transportation 2026で商用車向けバッテリー「Tectrans II」を発表しました。重貨物トラック向けに最高1,000kmの航続距離と、メガワット級急速充電による25分での80%充電を実現します。",
+        url: "https://cnevpost.com/2026/09/15/catl-launches-tectrans-ii-commercial-vehicle-battery/",
+        source: "CnEVPost - All",
+        date: "2026-09-15",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "The Chinese battery maker introduced the solution at IAA Transportation 2026 in",
+        sourceExcerptEnd: "targeting range, charging and operating cost requirements for long-haul transport.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091513461649.jpg",
+        note: ""
+    },
+    {
+        id: "cn1648",
+        title: "ファーウェイはAITOの運営をSERESへ移管し、独自の販売ネットワークを構築した。",
+        desc: "HIMAはAitoの製品定義やマーケティング、販売・サービスをSeresが主導する体制へ変更した。これによりAitoは独立した販売ネットワークを構築し、一部の店舗をSeresに移管して専売化する。ファーウェイは他の4ブランド運営に注力し、既存顧客へのサービス影響はないと説明している。",
+        url: "https://cnevpost.com/2026/09/15/huawei-reshapes-aito-partnership-seres-takes-lead/",
+        source: "CnEVPost - All",
+        date: "2026-09-15",
+        tags: ["AI"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026091512351997.jpg",
+        note: ""
+    },
+    {
+        id: "in1698",
+        title: "ボルボXC60、ダッシュボード刷新で11.2インチ画面を一体化",
+        desc: "ボルボはXC60のインテリアを更新し、ダッシュボードに11.2インチのインフォテインメント画面をより統合した。この新Car UXソフトウェアはXC90にも適用されるが、既存のデザインは維持される。",
+        url: "https://www.autocarindia.com/car-news/volvo-xc60-xc90-facelifts-debut-with-upgraded-phev-variants-440756",
+        source: "Autocar India - All",
+        date: "2026-09-15",
+        tags: ["HMI", "AR", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "The 11.2-inch infotainment screen no longer looks like an aftermarket addition and",
+        sourceExcerptEnd: "into the dashboard, thanks to the redesigned centre AC vents.",
+        interiorScore: 61,
+        interiorReason: "The article details a specific interior refresh for the XC60 involving an integr",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260915_112915_beff6411.jpg",
+        note: ""
+    },
+    {
+        id: "in1699",
+        title: "フェラーリ296 GT Modificata、レーシングバケットシート搭載で公開",
+        desc: "フェラーリはGT3 EvoをベースにFIA規制のないサーキット専用車296 GT Modificataを発表した。内装はレース用バケットシートとハーネス、スイッチ類が並ぶミニマルなダッシュボード、モータースポーツ仕様のステアリングホイールを採用し、2席構成でインターコムシステムを備える。",
+        url: "https://www.autocarindia.com/car-news/ferrari-296-gt-modificata-debuts-as-supercars-most-extreme-version-yet-440754",
+        source: "Autocar India - All",
+        date: "2026-09-15",
+        tags: ["シート", "コックピット", "EV"],
+    
+        sourceExcerpt: "Inside, the 296 GT Modificata is expectedly designed around track use, so",
+        sourceExcerptEnd: "full of switches and buttons and a motorsport-derived steering wheel.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260915_111105_dd098842.jpg",
+        note: ""
+    },
+    {
+        id: "in1700",
+        title: "Kia PV7 EVバン内装に14.6インチ画面とAndroid OS採用",
+        desc: "KiaはPV7のインテリアに、Android Automotive OS搭載の14.6インチインフォテインメントシステムと細身のデジタルメーターを採用した。さらにダッシュボードにはアンビエントライティングを備え、後部座席にはUSB-Cポートや天井設置エアコン吹き出し口が配置されている。",
+        url: "https://www.autocarindia.com/car-news/kia-reveals-pv7-as-its-second-electric-van-440745",
+        source: "Autocar India - All",
+        date: "2026-09-15",
+        tags: ["コネクテッド", "シート", "コックピット", "イルミ", "EV"],
+    
+        sourceExcerpt: "The Kia PV7’s interior is similar to the PV5, with a squared-off",
+        sourceExcerptEnd: "on Android Automotive OS that “delivers a smartphone-like in-vehicle experience”.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260915_064738_8a509f64.jpg",
+        note: ""
+    },
+    {
+        id: "in1701",
+        title: "BMW i5 LWBレビュー 後席快適性とインテリア評価",
+        desc: "BMW i5 LWBは796万ルピーから販売され、後席には4ゾーンエアコンやBowers & Wilkins 17スピーカーが備わる一方、筆者は電動リクライニングや後席換気シートなどより充実した快適装備を期待していた。",
+        url: "https://www.rushlane.com/bmw-i5-lwb-review-spacious-fast-and-surprisingly-fun-12555908.html",
+        source: "RushLane",
+        date: "2026-09-15",
+        tags: ["シート", "EV", "音響"],
+    
+        sourceExcerpt: "With its extended wheelbase, premium positioning and electric powertra",
+        sourceExcerptEnd: "xury with BMW’s traditional focus on the driving experience.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/bmw-i5-lwb-review-cover.jpg",
+        note: ""
+    },
+    {
+        id: "in1702",
+        title: "Kia PV7電動バン公開、Pleos ConnectとAI音声アシスタント搭載",
+        desc: "KiaはPV7電動バンを発表し、12.9インチおよび14.6インチのディスプレイを備えたPleos Connectインフォテインメントシステムを搭載した。さらにGleo AI音声アシスタントやOTA更新機能も採用し、商用車市場での利便性を高めている。",
+        url: "https://www.rushlane.com/new-kia-pv7-electric-van-debuts-9-seater-5-35m-long-12555853.html",
+        source: "RushLane",
+        date: "2026-09-15",
+        tags: ["ディスプレイ", "コネクテッド", "AI", "EV"],
+    
+        sourceExcerpt: "Kia PV7 has advanced equipment such as Pleos Connect infotainment system.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/new-kia-pv7-electric-van-launch-price-29.jpg",
+        note: ""
+    },
+    {
+        id: "in1703",
+        title: "TVS iQube MillionR特別版、プーネで100台超を単日納車",
+        desc: "TVSモーターはiQubeの累計顧客数100万人達成を記念し、プーネで100台以上の特別版を単日に納車した。このモデルには専用スタイリングに加え、収納スペースの拡大とType-C充電ポートが備わる。",
+        url: "https://gaadiwaadi.com/100-tvs-iqube-millionr-special-edition-delivered-in-pune-in-a-single-day/",
+        source: "GaadiWaadi",
+        date: "2026-09-15",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/TVS-iQube-Million-R-Edition.jpg",
+        note: ""
+    },
+    {
+        id: "in1704",
+        title: "Kia PV7電動バン公開、460km航続と800V充電対応",
+        desc: "Kiaは新型PBV「PV7」を公開し、WLTPモードで460km超の航続距離と350kW DC急速充電に対応する800V電圧アーキテクチャを採用した。バッテリーは2種類から選択可能で、最大出力200kWを実現し、乗用車仕様と貨物仕様の2構成を提供する。",
+        url: "https://gaadiwaadi.com/kia-pv7-electric-van-unveiled-with-460-km-range-800v-charging/",
+        source: "GaadiWaadi",
+        date: "2026-09-15",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/Kia-PV7-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1705",
+        title: "タタモーターズ、Avinyaスポーツバックで上位EV市場へ進出",
+        desc: "タタモーターズはSafari EVやTigor EVの更新版など4車種を投入し、Avinyaファミリーで2027年中盤から上級市場への参入を目指す。",
+        url: "https://gaadiwaadi.com/tata-working-on-4-new-electric-cars-fo-india-key-launch-details/",
+        source: "GaadiWaadi",
+        date: "2026-09-15",
+        tags: ["AR", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/04/Tata-Safari-EV-Rendering.jpg",
+        note: ""
+    },
+    {
+        id: "in1706",
+        title: "Kia PV7電動バン、9人乗りとAndroid基盤コックピット採用",
+        desc: "KiaはIAA Transportation 2026でPV7を公開し、最大9名乗車可能なパッセンジャー版を提供する。内装にはAndroid Automotive OS搭載のPleos Connectや音声アシスタントGleo AI、100W出力のUSB-Cポートなどを備え、快適性と操作性を高めたコックピットを実現している。",
+        url: "https://www.autopunditz.com/post/kia-pv7-electric-van-9-seater-range-specifications",
+        source: "Auto Punditz",
+        date: "2026-09-15",
+        tags: ["AI", "コックピット", "EV"],
+    
+        sourceExcerpt: "The PV7 will feature Kia’s Pleos Connect infotainment system, based on Android Automotive OS.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_507133214a424e05b30a8bb4acaa1e24~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1707",
+        title: "インド7シーター市場86703台で前年比27.7%増、Ertiga首位",
+        desc: "2026年8月のインド7シーター市場は86,703台と前年比27.7%成長し、Maruti Suzuki Ertigaが18,516台で首位を維持した。Mahindra Scorpioは58.3%増の15,576台となり、XUV700系も72.3%増と好調だった。",
+        url: "https://www.autopunditz.com/post/best-selling-7-seater-cars-august-2026",
+        source: "Auto Punditz",
+        date: "2026-09-15",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The Maruti Suzuki Ertiga retained its position as India’s best-selling 7-seater, while Mahindra occupied four positions within the top seven.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_21c2e1a4e8ed45e6a75a395694037496~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1658",
+        title: "Segway MUXI Pro、自動変速と回生ブレーキ搭載で最高速度向上",
+        desc: "Segwayはコンパクトなユーティリティ型電動アシストバイク「MUXI」のアップグレード版としてMUXI Proを発表した。同車には電子式自動変速システムやフロントサスペンションが追加され、Class 3仕様の最高速度28マイル/時（約45km/h）に対応する。",
+        url: "https://electrek.co/2026/09/15/segways-new-28-mph-muxi-pro-cargo-e-bike-gets-automatic-shifting-and-regen-braking/",
+        source: "Electrek",
+        date: "2026-09-15",
+        tags: ["HMI", "EV"],
+    
+        sourceExcerpt: "Segway is giving its compact MUXI utility e-bike a fairly significant upgrade,",
+        sourceExcerptEnd: "to front suspension and a higher Class 3 top speed.",
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/09/segway-muxi-pro-cargo-e-bike-header.jpg?quality=82&#038;strip=all&#038;w=1600",
+        note: ""
+    },
+    {
+        id: "eu1618",
+        title: "Electreon、駐車場向け最大11kW無線充電システムLite DOTを発表",
+        desc: "Electreonは駐車場向け定置型無線充電「Lite DOT」を発表し、地上パッドで最大11kWの電力を伝送する仕様とした。車両側受信機と自動検知機能を備え、-30℃から+50℃の環境下でもフリート運用や自動運転車に対応可能である。",
+        url: "https://www.electrive.com/2026/09/15/electreon-introduces-wireless-charging-solution-for-parking-spaces/",
+        source: "Electrive",
+        date: "2026-09-15",
+        tags: ["EV"],
+    
+        sourceExcerpt: "With Lite DOT, Electreon is specifically expanding its portfolio towards stationary charging for passenger cars and light commercial vehicles.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/electreon-stellt-auf-der-iaa-transportation-2026-eine-neue-ladel-sung-vor-mit-lite-dot-kabelloses-la-400x266.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1619",
+        title: "GACがIAAで電動トラクターT9と新ブランドMontx初公開",
+        desc: "GAC Commercial VehicleはIAA Transportationで電動トラクターT9や新ブランドMontxのコンセプト車P10・V10を展示した。T9 RobotruckにはLiDAR9基とカメラ13台が備わり、バッテリー交換は3〜5分で完了する仕様となっている。",
+        url: "https://www.electrive.com/2026/09/15/gac-showcases-electric-vans-and-trucks-at-iaa/",
+        source: "Electrive",
+        date: "2026-09-15",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Chinese manufacturer GAC is celebrating its trade fair premiere at the IAA Transportation in Hanover with its subsidiary GAC Commercial Vehicle.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/gac-commercial-vehicle-montx-iaa-transportation-2026-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1620",
+        title: "ボルボXC60とXC90、長距離PHEVに木目調やNappaレザー採用",
+        desc: "ボルボはXC60とXC90の新型プラグインハイブリッドを発表した。内装では、木目調トリム、CardamomベンチレーションNappaレザー、アップグレードされたアンビエントライティングを採用し、スカンディナヴィアンのプレミアム感を強調している。",
+        url: "https://electriccarsreport.com/2026/09/volvo-xc60-and-xc90-get-long-range-plug-in-hybrid-power-with-up-to-78-miles-of-ev-range/",
+        source: "Electric Cars Report",
+        date: "2026-09-15",
+        tags: ["AR", "シート", "イルミ", "新素材", "EV"],
+    
+        sourceExcerpt: "Inside, the cabin receives a redesigned dashboard and door panels, along with wood trim, Cardamom ventilated Nappa leather and upgraded ambient lighting.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Volvo-XC60.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1621",
+        title: "ルノーTrafic E-Tech、80ECUを2台に集約しGoogle連携OS採用",
+        desc: "新Trafic Van E-Tech electricは80個のECUを2つのスーパーコンピューターに統合し、AndroidベースのCAR OSを実装している。この構成でGoogle連携による定期的な機能追加や予測メンテナンスが可能となり、商用車としての稼働率向上と残存価値維持を狙う。",
+        url: "https://electriccarsreport.com/2026/09/new-renault-trafic-van-e-tech-electric-brings-470-km-range-and-800v-charging/",
+        source: "Electric Cars Report",
+        date: "2026-09-15",
+        tags: ["AR"],
+    
+        sourceExcerpt: "Renault is taking its electric commercial vehicle strategy to the next level",
+        sourceExcerptEnd: "LCV offensive at the 2026 IAA Transportation show in Hanover.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Renault-Trafic-Van-E-Tech.jpg?a3781e&amp;a3781e",
+        note: ""
+    },
+    {
+        id: "eu1622",
+        title: "TADA 2026、中国車のデザイン革新を称える",
+        desc: "第2回TADAでは、Lepas L6やGWM Ora 5が内装部門で受賞し、中国メーカーのインテリア設計における進化と独自言語の確立が評価された。",
+        url: "https://autodesignmagazine.com/en/2026/09/tada-2026-turin-rewards-the-design-of-chinese-cars/",
+        source: "Auto & Design",
+        date: "2026-09-15",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "In the Family Car category, the Best Exterior Design went to the",
+        sourceExcerptEnd: "and the award for technology to the Chery Tiggo 9.",
+        interiorScore: 58,
+        interiorReason: "The article highlights a design award specifically for interior design (Lepas L6",
+        imageInterior: false,
+        country: "eu",
+        img: "https://autodesignmagazine.com/wp-content/uploads/2026/09/2026091402_TadaGeely26.jpg?x17940",
         note: ""
     },
 ];
