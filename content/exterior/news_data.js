@@ -36,4 +36,41 @@ window.LOADED_NEWS_DATA = [
         img: "https://www.carscoops.com/wp-content/uploads/2026/09/2027-BMW-X5-M-Performace-Pa-1024x578.jpg",
         note: ""
     },
+    // 2026-09-15 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2",
+        title: "ケンスタイルEIK、NDロードスター用フロントスポイラーとチタンマフラー",
+        desc: "ケンスタイルのエアロブランド「EIK」は、マツダ「ロードスター（ND）」用デモカーに純正面構成を崩さず低さを強調するフロントハーフスポイラー1点のみを採用した。リアにはフジツボ製チタンマフラー「オーソライズRM」と専用ディフューザーを組み、ブルーに発色した4本出しテールパイプが鮮やかなアクセントとなっている。",
+        url: "https://news.yahoo.co.jp/articles/5003ae23c7e440ec545e3adff5659fdfccc8ca1e?source=rss",
+        source: "Auto Messe Web",
+        date: "2026-09-15",
+        tags: [],
+    
+        edition: "exterior", productScore: 65, exteriorScore: 65,
+        sourceExcerpt: "ケンスタイルのエアロブランド「EIK」が選んだ答えは、オリジナルエアロをフロントハーフスポイラー1点に絞り、リアはフジツボ製チタンマフラーと専用ディフューザーのセットに任せる潔い構成だ。",
+        interiorScore: 65,
+        interiorReason: "NDロードスター用のフロントハーフスポイラーという具体的な外装エアロパーツの採用と、純正雰囲気を損なわないデザイン意図が記載されている。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00010008-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us2",
+        title: "AMG GT Black Series、フロントフェンダー上のアクティブベント採用",
+        desc: "AMG GT Black Seriesは、フロントフェンダー上部に搭載されたアクティブフラップやドアパネル横の通気口、スワンネックピロンを持つ大型リアスポイラーなどを備えている。",
+        url: "https://www.carscoops.com/2026/09/amg-gt-black-series-looks-like-its-smashed-the-ring-record-before-its-even-hit-the-track/",
+        source: "CarScoops",
+        date: "2026-09-15",
+        tags: [],
+    
+        edition: "exterior", productScore: 85, exteriorScore: 85,
+        sourceExcerpt: "Extensive aero package includes giant rear wing and 8-inch deep diffuser veins.",
+        interiorScore: 85,
+        interiorReason: "フロントフェンダーのアクティブベントやリアスポイラーなど、空力性能を高める具体的な外装コンポーネント技術が記載されている。",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/AMG-Black-scoop-Sep2614111-1024x576.jpg",
+        note: ""
+    },
 ];
