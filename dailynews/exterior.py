@@ -83,7 +83,7 @@ def select_items(items, limit=6):
 def make_country_prompt(date_key, country, items, template, history, need_count, anchors, format_item):
     selected = select_items(items)
     ids = [item["newsId"] for item in selected]
-    anchors = anchors or [[item] for item in selected[:need_count]]
+    anchors = anchors or ([[selected[i % len(selected)]] for i in range(max(0, need_count))] if selected else [])
     anchor_text = "\n".join(f"ideas[{i}] anchor IDs: {','.join(item['newsId'] for item in group)}\n" + "\n".join(format_item(item) for item in group) for i, group in enumerate(anchors[:need_count]))
     return f"""{template}
 対象日: {date_key} / 対象地域: {country}

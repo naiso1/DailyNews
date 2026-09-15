@@ -1154,7 +1154,8 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
 def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dict]]:
     if EDITION.id == "exterior":
         candidates = [item for item in exterior_rules.select_items(items, limit=len(items)) if not _is_out_of_scope_idea(f"{item.get('title', '')} {item.get('desc', '')}")]
-        return [[item] for item in candidates[:need_count]]
+        # Different concepts may share the only available source article.
+        return [[candidates[i % len(candidates)]] for i in range(max(0, need_count))] if candidates else []
     def _score(it: dict):
         tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
         interior_score = it.get("interiorScore")
@@ -1199,6 +1200,31 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
         used.add(primary.get("newsId"))
         groups.append([primary])
     return groups
+
+
+def prepare_exterior_idea_sources(ideas: list, source_items: list) -> list:
+    """Keep valid citations per idea, including citations shared by other ideas."""
+    allowed_ids = build_allowed_news_ids(source_items)
+    anchor_groups = select_idea_anchor_groups(source_items, need_count=len(ideas))
+    prepared = []
+    for index, original in enumerate(ideas):
+        idea = dict(original)
+        raw_ids = idea.get("sourceNewsIds") or []
+        if not isinstance(raw_ids, list):
+            raise RuntimeError("Exterior idea sourceNewsIds must be a list")
+        source_ids = list(dict.fromkeys(str(value).strip().lower() for value in raw_ids))
+        unknown = [value for value in source_ids if value not in allowed_ids]
+        if unknown:
+            raise RuntimeError("Exterior idea references unknown news IDs: " + ", ".join(unknown))
+        if not source_ids and index < len(anchor_groups):
+            source_ids = [item["newsId"].strip().lower() for item in anchor_groups[index]
+                          if item.get("newsId", "").strip().lower() in allowed_ids]
+        if not source_ids:
+            raise RuntimeError("Exterior idea has no valid source article")
+        idea["sourceNewsIds"] = source_ids[:2]
+        idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(idea['sourceNewsIds'])}]"
+        prepared.append(idea)
+    return prepared
 
 
 def make_country_prompt(
@@ -1666,10 +1692,15 @@ def main():
                     if (previous.get("fingerprint") == exterior_checkpoint_fingerprint(insight_date_label, grouped[key])
                             and exterior_analysis_complete(previous.get("analysis"), grouped[key])
                             and isinstance(previous.get("ideas"), list)):
-                        analysis_out[key] = previous["analysis"]
-                        ideas_out[key] = previous["ideas"]
-                        print(f"[IDEAS] {key}: reused completed exterior checkpoint")
-                        continue
+                        try:
+                            previous_ideas = prepare_exterior_idea_sources(previous["ideas"], grouped[key])
+                        except RuntimeError as error:
+                            print(f"[IDEAS] {key}: invalid checkpoint citations; regenerate: {error}")
+                        else:
+                            analysis_out[key] = previous["analysis"]
+                            ideas_out[key] = previous_ideas
+                            print(f"[IDEAS] {key}: reused completed exterior checkpoint")
+                            continue
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
                 idea_anchor_groups = select_idea_anchor_groups(grouped[key], need_count=2)
                 prompt = make_country_prompt(
@@ -1767,19 +1798,22 @@ def main():
                             )
                             deduped.extend(add_ideas)
                     allowed_ids = build_allowed_news_ids(grouped[key])
-                    for i, idea in enumerate(deduped[:2]):
-                        anchor_ids = []
-                        if i < len(idea_anchor_groups):
-                            anchor_ids = [x.get("newsId", "").lower() for x in idea_anchor_groups[i] if x.get("newsId")]
-                        raw_ids = [
-                            str(x).strip().lower()
-                            for x in (idea.get("sourceNewsIds") or [])
-                            if str(x).strip().lower() in anchor_ids
-                        ]
-                        source_ids = raw_ids[:2] if raw_ids else anchor_ids[:2]
-                        idea["sourceNewsIds"] = source_ids
-                        if source_ids and not re.search(r"\[[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]", idea.get("desc", ""), flags=re.IGNORECASE):
-                            idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
+                    if EDITION.id == "exterior":
+                        deduped = prepare_exterior_idea_sources(deduped[:2], grouped[key])
+                    else:
+                        for i, idea in enumerate(deduped[:2]):
+                            anchor_ids = []
+                            if i < len(idea_anchor_groups):
+                                anchor_ids = [x.get("newsId", "").lower() for x in idea_anchor_groups[i] if x.get("newsId")]
+                            raw_ids = [
+                                str(x).strip().lower()
+                                for x in (idea.get("sourceNewsIds") or [])
+                                if str(x).strip().lower() in anchor_ids
+                            ]
+                            source_ids = raw_ids[:2] if raw_ids else anchor_ids[:2]
+                            idea["sourceNewsIds"] = source_ids
+                            if source_ids and not re.search(r"\[[a-z]{2,5}\d+(?:\s*,\s*[a-z]{2,5}\d+)*\]", idea.get("desc", ""), flags=re.IGNORECASE):
+                                idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
                     ideas_out[key] = deduped[:2]
                     print(f"[IDEAS] {key}: accepted {len(ideas_out[key])}/2")
                     if use_checkpoint and exterior_analysis_complete(analysis_out.get(key), grouped[key]):
@@ -1836,6 +1870,8 @@ def main():
                             for x in (idea.get("sourceNewsIds") or [])
                             if re.fullmatch(r"[a-z]{2,5}\d+", str(x).strip(), flags=re.IGNORECASE)
                         ][:2]
+                        if EDITION.id == "exterior" and (not source_ids or not set(source_ids).issubset(build_allowed_news_ids(grouped[key]))):
+                            raise RuntimeError(f"Exterior idea cannot be published without valid source articles: {key}")
                         desc_text = strip_idea_refs(fix_idea_ref_prefix(idea.get("desc", ""), key))
                         if source_ids:
                             desc_text = f"{desc_text} [{','.join(source_ids)}]"

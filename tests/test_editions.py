@@ -109,6 +109,31 @@ class EditionTests(unittest.TestCase):
         self.assertIn(result["sourceExcerpt"], paragraph)
         self.assertNotEqual(fingerprint(item), fingerprint({**item, "edition": "interior"}))
 
+    def test_exterior_two_ideas_can_share_one_source(self):
+        item = {"newsId": "jp1", "title": "発光グリル", "desc": "発光グリルの設計を公開した。", "exteriorScore": 80}
+        groups = updater.select_idea_anchor_groups([item], need_count=2)
+        self.assertEqual([[entry["newsId"] for entry in group] for group in groups], [["jp1"], ["jp1"]])
+        prompt = updater.make_country_prompt("2026-09-14", "jp", [item], "外装開発", need_count=2)
+        self.assertIn("ideas[0] anchor IDs: jp1", prompt)
+        self.assertIn("ideas[1] anchor IDs: jp1", prompt)
+        ideas = [{"title": "案一", "desc": "グリルを提案する。 [jp1]", "sourceNewsIds": ["jp1"]},
+                 {"title": "案二", "desc": "グリルの補修部品を提案する。 [jp1]", "sourceNewsIds": ["jp1"]}]
+        result = updater.prepare_exterior_idea_sources(ideas, [item])
+        self.assertEqual([idea["sourceNewsIds"] for idea in result], [["jp1"], ["jp1"]])
+        self.assertTrue(all(idea["desc"].endswith("[jp1]") for idea in result))
+        # Repair legacy checkpoints whose second citation was removed by the old anchor loop.
+        ideas[1]["sourceNewsIds"] = []
+        result = updater.prepare_exterior_idea_sources(ideas, [item])
+        self.assertEqual(result[1]["sourceNewsIds"], ["jp1"])
+
+    def test_exterior_idea_rejects_unknown_or_unavailable_sources(self):
+        item = {"newsId": "jp1", "title": "発光グリル", "desc": "発光グリルの設計を公開した。"}
+        for ids in (["jp999"], ["jp1", "jp999"], ["cn1"]):
+            with self.subTest(ids=ids), self.assertRaisesRegex(RuntimeError, "unknown news IDs"):
+                updater.prepare_exterior_idea_sources([{"desc": "グリル案", "sourceNewsIds": ids}], [item])
+        with self.assertRaisesRegex(RuntimeError, "no valid source article"):
+            updater.prepare_exterior_idea_sources([{"desc": "グリル案", "sourceNewsIds": []}], [])
+
     def test_empty_publication_requires_collection_receipt(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
@@ -171,6 +196,9 @@ class EditionTests(unittest.TestCase):
                 self.assertEqual(insights.read_text(encoding="utf-8"), original_insights)
                 checkpoint = updater.read_exterior_checkpoint("2026-09-14")
                 self.assertEqual(set(checkpoint["countries"]), {"jp"})
+                self.assertEqual([idea["sourceNewsIds"] for idea in checkpoint["countries"]["jp"]["ideas"]], [["jp1"], ["jp1"]])
+                checkpoint["countries"]["jp"]["ideas"][1]["sourceNewsIds"] = []
+                updater.write_exterior_checkpoint("2026-09-14", checkpoint)
                 failed.clear()
                 llm.reset_mock()
                 updater.main()
@@ -178,6 +206,10 @@ class EditionTests(unittest.TestCase):
                 self.assertEqual(json.loads(marker.read_text(encoding="utf-8"))["status"], "published")
                 self.assertIn('jp: "', insights.read_text(encoding="utf-8"))
                 self.assertIn('cn: "', insights.read_text(encoding="utf-8"))
+                output = insights.read_text(encoding="utf-8")
+                self.assertEqual(output.count('sourceNewsIds: ["jp1"]'), 2)
+                self.assertEqual(output.count('sourceNewsIds: ["cn1"]'), 2)
+                self.assertNotIn('sourceNewsIds: []', output)
 
 
 class CollectorEditionTests(unittest.TestCase):
