@@ -164,6 +164,69 @@ class CollectorEditionTests(unittest.TestCase):
         self.assertFalse(collector._summary_cache)
         self.assertEqual(Path(collector.EXCEL_FILE).parent, get_edition("exterior").runtime_dir)
 
+    @staticmethod
+    def llm_response(content, status=200):
+        return Mock(status_code=status, text="test response", json=Mock(return_value={"choices": [{"message": {"content": content}}]}))
+
+    def test_invalid_required_relevance_is_not_cached_or_reused(self):
+        key = ("grille", "", "", "relevance")
+        collector.LLM_CACHE[key] = ("", "")
+        responses = [self.llm_response('{}'), self.llm_response('{"relevance":false}')]
+        with patch.multiple(collector, USE_LLM=True, PROMPT_TEXT="test prompt", LLM_ERROR_LOGGED=False), patch.object(collector, "_post_llm", side_effect=responses) as request, redirect_stdout(io.StringIO()):
+            self.assertEqual(collector.call_llm_classify("grille", "", mode="relevance"), ("", ""))
+            self.assertNotIn(key, collector.LLM_CACHE)
+            self.assertEqual(collector.EXTERIOR_REQUIRED_LLM_ERRORS["relevance"], 1)
+            self.assertEqual(collector.call_llm_classify("grille", "", mode="relevance"), ("非対象", ""))
+            self.assertEqual(request.call_count, 2)
+            self.assertEqual(collector.EXTERIOR_REQUIRED_LLM_ERRORS["relevance"], 1)
+
+    def test_invalid_required_score_is_not_cached_or_reused(self):
+        key = ("exterior", "product_assessment", "grille", "", "", "", "")
+        collector.LLM_CACHE[key] = {"score": None}
+        responses = [self.llm_response('{}'), self.llm_response('{"score":20,"reason":"weak relevance"}')]
+        with patch.multiple(collector, USE_LLM=True, LLM_IMAGE_INPUT=False, LLM_ERROR_LOGGED=False), patch.object(collector, "_post_llm", side_effect=responses) as request, redirect_stdout(io.StringIO()):
+            self.assertIsNone(collector.call_llm_interior_assessment("grille", ""))
+            self.assertNotIn(key, collector.LLM_CACHE)
+            self.assertEqual(collector.EXTERIOR_REQUIRED_LLM_ERRORS["score"], 1)
+            self.assertEqual(collector.call_llm_interior_assessment("grille", "")["score"], 20)
+            self.assertEqual(request.call_count, 2)
+            self.assertEqual(collector.EXTERIOR_REQUIRED_LLM_ERRORS["score"], 1)
+
+    def test_optional_photo_errors_do_not_count_as_required_failures(self):
+        with patch.multiple(collector, USE_LLM=True, PROMPT_TEXT="test prompt", LLM_IMAGE_INPUT=False, LLM_ERROR_LOGGED=False), patch.object(collector, "_post_llm", return_value=self.llm_response('{}', 503)), redirect_stdout(io.StringIO()):
+            collector.call_llm_classify("grille", "", mode="photo")
+            self.assertTrue(collector.LLM_ERROR_LOGGED)
+            self.assertEqual(sum(collector.EXTERIOR_REQUIRED_LLM_ERRORS.values()), 0)
+
+    def test_required_http_and_connection_failures_are_counted(self):
+        failures = [self.llm_response('{}', 503), ConnectionError("model unavailable")]
+        with patch.multiple(collector, USE_LLM=True, PROMPT_TEXT="test prompt", LLM_IMAGE_INPUT=False, LLM_ERROR_LOGGED=False), patch.object(collector, "_post_llm", side_effect=failures), redirect_stdout(io.StringIO()):
+            self.assertEqual(collector.call_llm_classify("grille", "", mode="relevance"), ("", ""))
+            self.assertIsNone(collector.call_llm_interior_assessment("grille", ""))
+            self.assertEqual(collector.EXTERIOR_REQUIRED_LLM_ERRORS, {"relevance": 1, "score": 1})
+
+    def test_zero_collection_fails_for_required_errors_but_partial_selection_is_recorded(self):
+        with tempfile.TemporaryDirectory() as directory:
+            context = get_edition("exterior", directory)
+            context.runtime_dir.mkdir(parents=True)
+            receipt = context.runtime_dir / "collection_result.json"
+            with patch.multiple(collector, EDITION=context, SOURCE_FETCH_COUNTS={"attempted": 1, "succeeded": 1}, TARGET_DATES_RUN=["2026-09-14"], SHEET2_RESULT={"selected_count": 0, "candidate_count": 3}, LLM_ERROR_LOGGED=True), patch.object(collector, "_main"):
+                # Optional photo failures may have set the logging flag, but no
+                # required decisions failed: a valid no-match day remains valid.
+                collector.main()
+                self.assertTrue(json.loads(receipt.read_text(encoding="utf-8"))["completed"])
+                collector.EXTERIOR_REQUIRED_LLM_ERRORS["relevance"] = 1
+                receipt.write_text('{"completed": false}', encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "LLM processing failed"):
+                    collector.main()
+                self.assertFalse(json.loads(receipt.read_text(encoding="utf-8"))["completed"])
+                collector.SHEET2_RESULT["selected_count"] = 1
+                collector.main()
+                result = json.loads(receipt.read_text(encoding="utf-8"))
+                self.assertEqual(result["selected_count"], 1)
+                self.assertEqual(result["llm_required_error_count"], 1)
+                self.assertEqual(result["llm_required_errors"], {"relevance": 1, "score": 0})
+
     def test_bing_processes_each_result_and_skips_only_wrong_dates(self):
         entries = [
             {"title": "First grille", "link": "https://example.com/one", "published": "2026-09-14", "summary": "First body"},

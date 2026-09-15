@@ -126,6 +126,7 @@ LLM_SAVE_INTERVAL = 0
 LLM_CACHE = {}
 LLM_IMAGE_CACHE = {}
 LLM_ERROR_LOGGED = False
+EXTERIOR_REQUIRED_LLM_ERRORS = {"relevance": 0, "score": 0}
 LLM_IMAGE_INPUT = os.environ.get("LLM_IMAGE_INPUT", "1").strip().lower() not in {"0", "false", "no"}
 LLM_IMAGE_TIMEOUT = 12
 LLM_IMAGE_MAX_BYTES = 3_000_000
@@ -427,7 +428,14 @@ def configure_edition(edition_id=None):
     # Caches contain editorial decisions; never share them between editions.
     for cache in (LLM_CACHE, LLM_IMAGE_CACHE, _summary_cache, _translation_cache, _article_text_cache):
         cache.clear()
+    EXTERIOR_REQUIRED_LLM_ERRORS.update(relevance=0, score=0)
     return EDITION
+
+
+def record_exterior_llm_failure(kind, reason):
+    if EDITION.id == "exterior" and kind in EXTERIOR_REQUIRED_LLM_ERRORS:
+        EXTERIOR_REQUIRED_LLM_ERRORS[kind] += 1
+        print(f"  [LLM_REQUIRED_FAILED] {kind}: {reason}")
 
 
 def get_domain(url):
@@ -1083,13 +1091,20 @@ def call_llm_classify(title, content, image_url="", mode="both"):
     if not PROMPT_TEXT:
         PROMPT_TEXT = load_prompt_text()
     if not PROMPT_TEXT:
+        if mode in ("both", "relevance"):
+            record_exterior_llm_failure("relevance", "classification prompt unavailable")
         if not LLM_ERROR_LOGGED:
             print("  ✗ プロンプト.md を読み込めませんでした（エンコード/パス確認）")
             LLM_ERROR_LOGGED = True
         return "", ""
     cache_key = (title, content, image_url, mode)
     if cache_key in LLM_CACHE:
-        return LLM_CACHE[cache_key]
+        cached = LLM_CACHE[cache_key]
+        if EDITION.id != "exterior" or (isinstance(cached, (tuple, list)) and len(cached) == 2
+                and (mode not in ("both", "relevance") or cached[0] in ("対象", "非対象"))
+                and (mode not in ("both", "photo") or cached[1] in ("あり", "なし"))):
+            return cached
+        LLM_CACHE.pop(cache_key, None)
     if not USE_LLM:
         return "", ""
     if mode == "relevance":
@@ -1138,6 +1153,8 @@ def call_llm_classify(title, content, image_url="", mode="both"):
                 payload["messages"][0]["content"] = prompt
                 resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
             if resp.status_code != 200:
+                if mode in ("both", "relevance"):
+                    record_exterior_llm_failure("relevance", f"HTTP {resp.status_code}")
                 if not LLM_ERROR_LOGGED:
                     print(f"  ✗ LLM呼び出しエラー: HTTP {resp.status_code}")
                     print(resp.text[:200])
@@ -1157,10 +1174,16 @@ def call_llm_classify(title, content, image_url="", mode="both"):
                     photo = "あり" if m2.group(1).lower() == "true" else "なし"
         except Exception:
             pass
+        if mode in ("both", "relevance") and not rel:
+            record_exterior_llm_failure("relevance", "response has no valid relevance boolean")
         result = (rel, photo)
-        LLM_CACHE[cache_key] = result
+        if EDITION.id != "exterior" or ((mode not in ("both", "relevance") or rel)
+                and (mode not in ("both", "photo") or photo)):
+            LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
+        if mode in ("both", "relevance"):
+            record_exterior_llm_failure("relevance", type(e).__name__)
         if not LLM_ERROR_LOGGED:
             print(f"  LLM error: {e}")
             LLM_ERROR_LOGGED = True
@@ -1308,7 +1331,10 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         return None
     cache_key = (EDITION.id, "product_assessment", title, content, image_url, url, summary)
     if cache_key in LLM_CACHE:
-        return LLM_CACHE[cache_key]
+        cached = LLM_CACHE[cache_key]
+        if EDITION.id != "exterior" or (isinstance(cached, dict) and isinstance(cached.get("score"), int) and 0 <= cached["score"] <= 100):
+            return cached
+        LLM_CACHE.pop(cache_key, None)
     prompt = (
         "Classify this automotive news item for usefulness to vehicle interior product planning.\n"
         "Continue from the provided JSON prefix. Use real values, for example: 87,\"reason\":\"seat and display plus cabin image\",\"image_interior\":true}\n"
@@ -1368,6 +1394,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             payload["messages"][0]["content"] = prompt
             resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200:
+            record_exterior_llm_failure("score", f"HTTP {resp.status_code}")
             if not LLM_ERROR_LOGGED:
                 print(f"  LLM interior assessment error: HTTP {resp.status_code}")
                 print(resp.text[:200])
@@ -1386,6 +1413,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             m = re.search(r'^\s*"?\s*([0-9.]+)\s*"?,\s*"?reason"?\s*:', txt)
             score = normalize_interior_score(m.group(1)) if m else None
         if score is None:
+            record_exterior_llm_failure("score", "response has no valid product score")
             return None
         image_interior = data.get("image_interior")
         if isinstance(image_interior, str):
@@ -1417,6 +1445,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
+        record_exterior_llm_failure("score", type(e).__name__)
         if not LLM_ERROR_LOGGED:
             print(f"  LLM interior assessment error: {e}")
             LLM_ERROR_LOGGED = True
@@ -3963,7 +3992,8 @@ def main():
         raise RuntimeError("All exterior RSS source requests failed; not a valid no-news day")
     if not SHEET2_RESULT["selected_count"] and not SOURCE_FETCH_COUNTS["succeeded"]:
         raise RuntimeError("Empty exterior selection requires a successful source collection")
-    if not SHEET2_RESULT["selected_count"] and LLM_ERROR_LOGGED:
+    required_llm_error_count = sum(EXTERIOR_REQUIRED_LLM_ERRORS.values())
+    if not SHEET2_RESULT["selected_count"] and required_llm_error_count:
         raise RuntimeError("Exterior LLM processing failed; not a valid no-news day")
     result = {
         "edition_id": EDITION.id,
@@ -3972,6 +4002,8 @@ def main():
         "completed_at": datetime.now().astimezone().isoformat(),
         "source_count": SOURCE_FETCH_COUNTS["succeeded"],
         "source_attempt_count": SOURCE_FETCH_COUNTS["attempted"],
+        "llm_required_errors": dict(EXTERIOR_REQUIRED_LLM_ERRORS),
+        "llm_required_error_count": required_llm_error_count,
         **SHEET2_RESULT,
     }
     (EDITION.runtime_dir / "collection_result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
