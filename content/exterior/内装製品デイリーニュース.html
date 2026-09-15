@@ -1,0 +1,3744 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内装製品デイリーニュース [v2]</title>
+    <meta name="description" content="生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け。">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script src="dailynews_config.js?v=20260915-editions-1"></script>
+    <script>
+        const exteriorPath = /^\/exterior(?:\/|$)/.test(location.pathname);
+        window.DAILYNEWS_CONFIG = window.DAILYNEWS_CONFIG || { id: exteriorPath ? "exterior" : "interior", name: exteriorPath ? "外装製品デイリーニュース" : "内装製品デイリーニュース", basePath: exteriorPath ? "/exterior" : "", apiBase: exteriorPath ? "/exterior/api" : "/api", allowGuestRead: exteriorPath, imageGenerationEnabled: !exteriorPath };
+        window.dailyNewsStorageKey = (key) => window.DAILYNEWS_CONFIG.id === "exterior" ? `dailynews_exterior:${key}` : key;
+        document.documentElement.dataset.edition = window.DAILYNEWS_CONFIG.id;
+        document.title = `${window.DAILYNEWS_CONFIG.name} [v2]`;
+        if (location.hostname.toLowerCase().endsWith(".github.io")) {
+            document.documentElement.classList.add("github-pages-migration");
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+[data-edition="exterior"] .interiorgram-link { display:none; }
+.edition-links { display:flex; grid-column:1 / -1; flex-wrap:wrap; gap:8px; align-items:center; margin:0; }
+.edition-links a,.edition-links button { color:var(--text); border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:12px; background:rgba(255,255,255,.04); text-decoration:none; cursor:pointer; }
+.edition-links a[aria-current="page"] { color:var(--accent-2); border-color:var(--accent-2); }
+.publication-status { grid-column:1 / -1; margin:0; padding:10px 13px; border:1px solid rgba(111,167,255,.22); border-radius:10px; background:rgba(111,167,255,.06); color:var(--muted); font-size:12px; line-height:1.7; }
+.publication-status[hidden] { display:none; }
+/* ============================================================
+   Atelier Interior Theme v2 — v1カラー + ランキングホバー + 参照サムネイル
+   ============================================================ */
+
+:root {
+    --bg: #050a12;
+    --panel: rgba(16, 22, 35, 0.88);
+    --muted: #9aa4b8;
+    --text: #e9edf5;
+    --accent: #7df1c2;
+    --accent-2: #6fa7ff;
+    --accent-3: #ff8f6f;
+    --accent-4: #c79dff;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+    --radius: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(125, 241, 194, 0.06), transparent 30%),
+        radial-gradient(circle at 82% 8%,  rgba(111, 167, 255, 0.08), transparent 35%),
+        radial-gradient(circle at 50% 95%, rgba(199, 157, 255, 0.05), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 24px 20px 100px;
+}
+
+/* ── Header ─────────────────────────────── */
+header.site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px 24px;
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 22px 26px;
+    border: 1px solid var(--border);
+    background: linear-gradient(120deg, rgba(125, 241, 194, 0.06), rgba(111, 167, 255, 0.06));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.header-brand {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-header h1 {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.25;
+    background: linear-gradient(135deg, var(--text), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.interiorgram-link {
+    display: inline-flex;
+    flex: 0 0 auto;
+    min-height: 36px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-left: auto;
+    padding: 0 13px;
+    border: 1px solid rgba(255, 135, 195, 0.34);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255, 171, 82, 0.12), rgba(222, 70, 180, 0.13));
+    color: #ffd7ec;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.interiorgram-link:hover {
+    border-color: rgba(255, 154, 205, 0.72);
+    background: linear-gradient(135deg, rgba(255, 171, 82, 0.2), rgba(222, 70, 180, 0.22));
+    transform: translateY(-1px);
+}
+
+.interiorgram-link:focus-visible {
+    outline: 2px solid #ff9acd;
+    outline-offset: 3px;
+}
+
+.interiorgram-link-short { display: none; }
+
+.header-top-actions {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.header-update-status {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 999px;
+    color: #aebbd0;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.header-summary-row {
+    display: flex;
+    grid-column: 1 / -1;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.site-header .lead {
+    min-width: 220px;
+    max-width: 820px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.compact-access-counter {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.access-metric {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: baseline;
+    gap: 5px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #8795aa;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.access-metric strong { color: var(--accent); font-size: 13px; }
+.access-metric.today strong { color: var(--accent-2); }
+.access-metric.yesterday strong { color: var(--accent-3); }
+
+@media (max-width: 860px) {
+    header.site-header { grid-template-columns: 1fr; padding: 20px; }
+    .header-top-actions {
+        display: grid;
+        grid-row: 2;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) auto;
+        width: 100%;
+    }
+    .header-summary-row { grid-row: 3; flex-direction: column; align-items: stretch; gap: 11px; }
+    .compact-access-counter {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+    }
+    .compact-access-counter::-webkit-scrollbar { display: none; }
+}
+
+@media (max-width: 520px) {
+    body { overflow-x: hidden; }
+    header.site-header { width: 100%; max-width: 100%; gap: 12px; padding: 16px; overflow: hidden; border-radius: 15px; }
+    .site-header h1 { font-size: 21px; }
+    .interiorgram-link { min-width: 38px; padding: 0 9px; }
+    .interiorgram-link-label { display: none; }
+    .interiorgram-link-short { display: inline; }
+    .header-top-actions { grid-template-columns: minmax(0, 1fr); }
+    #accountHeaderSlot { justify-self: start; }
+    .header-update-status { padding: 6px 8px; font-size: 10px; }
+    .site-header .lead { min-width: 0; font-size: 12px; }
+}
+
+/* ── Filters ─────────────────────────────── */
+.filters {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+.filter-row:last-child { margin-bottom: 0; }
+
+.filter-label { font-size: 13px; font-weight: 600; color: var(--muted); min-width: 80px; }
+
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+
+.tag-filter-container { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+
+.tag-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: 34px;
+    scrollbar-width: none;
+    min-width: 0;
+}
+.tag-chips::-webkit-scrollbar { display: none; }
+.tag-chips.expanded { flex-wrap: wrap; max-height: none; overflow: visible; }
+.tag-toggle { white-space: nowrap; flex: 0 0 auto; }
+.tag-chips .chip { flex: 0 0 auto; white-space: nowrap; }
+
+@media (max-width: 768px) {
+    .tag-filter-container { flex-direction: column; align-items: stretch; }
+    .tag-chips { flex-wrap: wrap; overflow-x: hidden; max-height: 120px; }
+    .tag-chips.expanded { max-height: none; }
+    .tag-toggle { align-self: flex-start; }
+}
+
+/* ── Region Badge ────────────────────────── */
+.region-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    margin-right: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    vertical-align: middle;
+}
+.region-badge.world { background: linear-gradient(135deg, #7df1c2, #6fa7ff); color: #0c1224; }
+.region-badge.jp    { background: linear-gradient(135deg, #ff6b6b, #ffd93d); color: #0c1224; }
+.region-badge.cn    { background: linear-gradient(135deg, #de2910, #ffde00); color: #fff; }
+.region-badge.in    { background: linear-gradient(135deg, #ff9933, #138808); color: #fff; }
+.region-badge.us    { background: linear-gradient(135deg, #3c3b6e, #b22234); color: #fff; }
+.region-badge.eu    { background: linear-gradient(135deg, #003399, #ffcc00); color: #fff; }
+
+/* ── Icons ───────────────────────────────── */
+.globe-icon {
+    display: inline-block;
+    width: 18px; height: 18px;
+    background: url('images/globe_icon.png') no-repeat center center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.title-globe-icon {
+    height: 32px; width: auto;
+    vertical-align: middle;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+/* ── Chips ───────────────────────────────── */
+.chip {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--muted);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+.chip:hover { background: rgba(255, 255, 255, 0.08); }
+.chip.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0c1224;
+    border-color: transparent;
+}
+
+.chip .new-count {
+    margin-left: 6px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    border: 1px solid rgba(255, 120, 120, 0.6);
+    color: #ff8a8a;
+    background: rgba(255, 120, 120, 0.12);
+}
+.chip .new-count.hidden { display: none; }
+.chip.active .new-count { color: #0c1224; background: rgba(255, 255, 255, 0.7); border-color: transparent; }
+
+.chip.country-jp.active  { background: linear-gradient(135deg, #ff6b6b, #ffd93d); }
+.chip.country-cn.active  { background: linear-gradient(135deg, #7df1c2, #6fa7ff); }
+.chip.country-in.active  { background: linear-gradient(135deg, #ff9933, #138808); }
+.chip.country-us.active  { background: linear-gradient(135deg, #3c3b6e, #b22234); }
+.chip.country-eu.active  { background: linear-gradient(135deg, #003399, #ffcc00); }
+.chip.country-world.active { background: linear-gradient(135deg, #c79dff, #6fa7ff); }
+
+/* ── Flag Icons ──────────────────────────── */
+.flag-icon {
+    height: 18px; width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    object-fit: contain;
+    border-radius: 2px;
+}
+.flag-icon[class*="flag-"] { width: 24px; height: 16px; background-size: cover; background-repeat: no-repeat; background-position: center; }
+.paper-icon { width: 24px; height: 16px; display: inline-flex; align-items: center; justify-content: center; margin-right: 6px; font-size: 14px; line-height: 1; }
+.flag-jp { background-image: url('page_images/icon_jp.png'); }
+.flag-cn { background-image: url('page_images/icon_cn.png'); }
+.flag-in { background-image: url('page_images/icon_in.png'); }
+.flag-us { background-image: url('page_images/icon_us.png'); }
+.flag-eu { background-image: url('page_images/icon_eu.png'); }
+
+/* ── Date / Stats ────────────────────────── */
+.date-inputs { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.date-inputs input {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 13px;
+}
+.date-inputs span { color: var(--muted); font-size: 13px; }
+
+.stats { font-size: 13px; color: var(--muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.stats strong { color: var(--accent); }
+.author-line { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+.analysis-toggle {
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(111, 167, 255, 0.24);
+    background: rgba(111, 167, 255, 0.08);
+    color: #a9c8ff;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.analysis-toggle:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); }
+
+/* ── Access Analytics Modal ──────────────── */
+.analysis-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 10030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(2, 6, 12, 0.78);
+    backdrop-filter: blur(8px);
+}
+.analysis-panel.hidden { display: none; }
+.analysis-dialog {
+    width: min(1040px, 100%);
+    max-height: min(88vh, 820px);
+    overflow: auto;
+    border: 1px solid rgba(125, 241, 194, 0.28);
+    border-radius: 22px;
+    background: linear-gradient(145deg, #151f2c, #0c131f);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+}
+.analysis-panel-header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; border-bottom: 1px solid var(--border); background: rgba(15, 23, 35, 0.96); }
+.analysis-panel-title { font-size: 20px; font-weight: 800; }
+.analysis-panel-sub { margin-top: 3px; font-size: 12px; color: var(--muted); }
+.analysis-close { width: 38px; height: 38px; border: 0; background: transparent; color: #c5cfdb; font-size: 27px; cursor: pointer; }
+.analysis-content { padding: 20px; }
+.analysis-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+.analysis-summary-card { padding: 13px 15px; border: 1px solid var(--border); border-radius: 13px; background: rgba(255, 255, 255, 0.03); color: var(--muted); font-size: 11px; }
+.analysis-summary-card strong { display: block; margin-top: 3px; color: var(--accent); font-size: 24px; }
+
+.analysis-chart { display: block; min-height: 220px; overflow-x: auto; overflow-y: hidden; }
+.access-line-chart { display: block; width: 100%; min-width: 760px; height: 220px; }
+.access-line-grid { stroke: rgba(154, 164, 184, 0.16); stroke-width: 1; }
+.access-line-axis-label { fill: var(--muted); font-size: 10px; }
+.access-line-area { fill: url(#accessAreaGradient); }
+.access-line-path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 4px 7px rgba(125, 241, 194, 0.28)); }
+.access-line-point { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
+.access-line-point:hover { fill: var(--accent); }
+.chart-empty { font-size: 13px; color: var(--muted); }
+@media (max-width: 620px) {
+    .analysis-panel { padding: 10px; }
+    .analysis-dialog { max-height: 94vh; }
+    .analysis-summary { grid-template-columns: 1fr; }
+}
+
+/* ── Jump Anchor ─────────────────────────── */
+.jump-anchor { scroll-margin-top: 90px; }
+
+/* ── Ranking ─────────────────────────────── */
+.ranking-back { max-width: 1400px; margin: 0 auto 20px; display: flex; justify-content: flex-end; }
+.ranking-back.hidden { display: none; }
+.ranking-wrapper { max-width: 1400px; margin: 0 auto 20px; display: block; gap: 16px; }
+.ranking-wrapper.hidden { display: none; }
+.ranking-section { margin: 0; padding: 20px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); }
+.ranking-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.ranking-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.ranking-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ranking-sort-label { font-size: 11px; color: var(--muted); }
+.ranking-sort { padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.04); color: var(--text); font-size: 11px; }
+.ranking-sort:focus { outline: 2px solid rgba(125, 241, 194, 0.6); outline-offset: 2px; }
+.ranking-sort option { background: #0f1726; color: #e6edf7; }
+.ranking-body.collapsed { overflow: hidden; }
+.ranking-body { transition: max-height 0.25s ease; }
+.ranking-list { display: grid; gap: 10px; }
+.ranking-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+}
+.ranking-left { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.ranking-thumb { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(135deg, #1a2332, #0d1520); flex: 0 0 44px; }
+.ranking-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ranking-rank { width: 28px; text-align: center; font-weight: 800; color: var(--accent); }
+.ranking-title-text { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ranking-meta { font-size: 11px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-start; min-width: 0; }
+.ranking-stat { font-size: 11px; color: var(--muted); }
+.ranking-actions { display: flex; gap: 8px; align-items: center; justify-self: end; }
+.ranking-actions .action-btn { height: 30px; font-size: 11px; padding: 4px 10px; }
+.ranking-item:hover { border-color: rgba(125, 241, 194, 0.35); background: rgba(125, 241, 194, 0.04); }
+.card-highlight { outline: 2px solid rgba(125, 241, 194, 0.6); box-shadow: 0 0 0 3px rgba(125, 241, 194, 0.15); }
+.ranking-empty { color: var(--muted); font-size: 13px; }
+
+/* ── Quick Nav ───────────────────────────── */
+.quick-nav { position: fixed; right: 24px; bottom: 24px; display: flex; flex-direction: column; gap: 8px; z-index: 60; }
+.quick-nav a {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: rgba(15, 22, 32, 0.92);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+.quick-nav a:hover { border-color: rgba(125, 241, 194, 0.6); color: var(--accent); }
+
+@media (max-width: 1100px) { .ranking-wrapper { grid-template-columns: 1fr; } }
+@media (max-width: 800px) {
+    .quick-nav { right: 12px; bottom: 12px; }
+    .ranking-thumb { width: 40px; height: 40px; flex-basis: 40px; }
+}
+
+/* ── News Grid ───────────────────────────── */
+.grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.card.reorder-moving {
+    position: relative;
+    z-index: 4;
+    will-change: transform;
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(125, 241, 194, 0.22);
+}
+.card:hover { transform: translateY(-3px); border-color: rgba(125, 241, 194, 0.3); }
+.card.hidden { display: none; }
+
+.thumb { position: relative; padding-top: 52%; overflow: hidden; background: linear-gradient(135deg, #1a2332, #0d1520); }
+.thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
+.card:hover .thumb img { opacity: 1; }
+
+.fallback-overlay {
+    position: absolute; inset: 0;
+    display: none; align-items: center; justify-content: center;
+    color: #e3e9f4; font-weight: 800; font-size: 16px;
+    background: linear-gradient(135deg, rgba(76, 195, 255, 0.14), rgba(13, 21, 32, 0.9));
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.country-badge {
+    position: absolute; top: 6px; left: 6px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    font-size: 11px; font-weight: 600; color: #fff;
+    z-index: 2; display: flex; align-items: center; gap: 4px;
+}
+
+.image-note {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: #fff; font-size: 14px; font-weight: 700;
+    padding: 8px 16px; text-align: center;
+    border-radius: 8px; pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; z-index: 2;
+}
+
+/* ── New Badge ───────────────────────────── */
+.new-badge {
+    position: absolute; left: 8px; bottom: 8px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+    border-radius: 8px;
+    font-size: 11px; font-weight: 700; color: #fff;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255, 77, 77, 0.4);
+    animation: pulse 2s infinite;
+    z-index: 4;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.05); }
+}
+
+.idea-new-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+    border-radius: 6px;
+    font-size: 10px; font-weight: 700; color: #fff;
+    margin-left: 10px; text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+.relevance-badge {
+    position: absolute; top: 10px; right: 10px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    font-size: 11px; color: #fff;
+    font-weight: 800;
+    border: 1px solid rgba(125, 241, 194, 0.28);
+}
+
+.id-badge-thumb { display: none; }
+.id-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(125, 241, 194, 0.15);
+    border: 1px solid rgba(125, 241, 194, 0.3);
+    border-radius: 6px;
+    font-size: 10px; font-weight: 600; color: var(--muted);
+    font-family: monospace;
+}
+
+/* ── Card Content ────────────────────────── */
+.content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.title {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.desc { color: #b8c4d6; font-size: 13px; line-height: 1.6; }
+
+.currency-conversion {
+    border: 1px solid rgba(255, 214, 124, 0.22);
+    border-radius: 11px;
+    background: linear-gradient(135deg, rgba(255, 214, 124, 0.08), rgba(125, 241, 194, 0.04));
+    color: #fff4d3;
+    font-size: 12px;
+}
+.currency-conversion summary { padding: 10px 12px; cursor: pointer; overflow-wrap: anywhere; line-height: 1.8; }
+.currency-conversion summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 10px; }
+.currency-label { color: #ffd67c; font-size: 10px; margin-right: 8px; }
+.currency-original { color: var(--muted); font-size: 10px; margin-left: 8px; }
+.currency-detail { display: grid; gap: 6px; margin: 0 12px; padding: 10px 0 12px; border-top: 1px solid rgba(255,214,124,0.16); color: var(--muted); font-size: 11px; line-height: 1.6; overflow-wrap: anywhere; }
+.currency-detail a { color: #9ccaff; }
+.currency-detail small { font-size: 10px; }
+.currency-unavailable { color: var(--muted); font-size: 11px; }
+
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.card-tag {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    background: rgba(125, 241, 194, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(125, 241, 194, 0.2);
+}
+
+/* ── Actions (like/comment row) — 元の設計に忠実 ── */
+.actions {
+    margin-top: auto;
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 12px;
+    color: #0c1224;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 6px 20px rgba(125, 241, 194, 0.2);
+    transition: transform 0.15s ease;
+    white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: #b0b8c4;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+}
+.action-btn:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+.action-btn.liked { color: #ff4d4d; background: rgba(255, 77, 77, 0.1); }
+.action-btn.active-comment { color: #4facfe; background: rgba(79, 172, 254, 0.1); }
+.action-btn.remove-news-btn { color: #aeb9c8; }
+.action-btn.remove-news-btn:hover { color: #ff9baa; border-color: rgba(255, 107, 126, 0.4); background: rgba(255, 92, 112, 0.1); }
+.action-btn.admin-image-edit-btn { display: none; color: #9fc3ff; }
+html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
+.action-btn.admin-image-edit-btn:hover { color: #c7dcff; border-color: rgba(111, 167, 255, 0.42); background: rgba(111, 167, 255, 0.11); }
+.action-btn.favorite-btn.active {
+    color: #ffd540;
+    background: rgba(255, 213, 64, 0.18);
+    border: 1px solid rgba(255, 213, 64, 0.45);
+}
+.favorite-toggle.active {
+    color: #ffd540;
+    border: 1px solid rgba(255, 213, 64, 0.45);
+    background: rgba(255, 213, 64, 0.18);
+}
+
+.source {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: #666;
+}
+.card-date-meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+.read-count { font-size: 11px; color: var(--muted); }
+
+/* ── Empty State ─────────────────────────── */
+.empty-state { max-width: 1400px; margin: 60px auto; text-align: center; color: var(--muted); }
+.empty-state h3 { font-size: 20px; margin-bottom: 10px; color: var(--text); }
+
+@media (max-width: 700px) {
+    body { padding: 16px 12px 80px; }
+    .filter-row { flex-direction: column; align-items: flex-start; }
+    .filter-label { min-width: auto; margin-bottom: 4px; }
+    .grid { grid-template-columns: 1fr; }
+    .ranking-item { grid-template-columns: 1fr; align-items: flex-start; }
+    .ranking-title-text { -webkit-line-clamp: 3; }
+    .ranking-actions { width: 100%; justify-self: flex-start; }
+}
+
+/* ── Favorites ───────────────────────────── */
+.favorites-actions {
+    margin: 12px 0 20px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.favorites-actions.hidden { display: none; }
+.favorites-actions-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+.favorites-actions-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.favorite-select-wrap { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.favorite-select { accent-color: #ffd540; }
+
+/* ── Comments ────────────────────────────── */
+.comment-section {
+    display: none;
+    margin-top: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+}
+.comment-section.open { display: block; animation: slideDown 0.3s ease-out; }
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.comment-list { max-height: none; overflow: visible; margin-bottom: 12px; font-size: 13px; }
+.comment-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative; }
+.comment-user { font-weight: bold; color: var(--accent); font-size: 11px; margin-bottom: 2px; }
+.comment-text { color: #ddd; line-height: 1.4; overflow-wrap: anywhere; }
+
+.comment-input-area { position: relative; display: flex; gap: 8px; }
+.comment-mention-trigger {
+    flex: 0 0 38px;
+    border: 1px solid rgba(111, 167, 255, 0.35);
+    border-radius: 8px;
+    background: rgba(111, 167, 255, 0.1);
+    color: #a9c8ff;
+    font-weight: 800;
+    cursor: pointer;
+}
+.comment-mention-trigger:hover { background: rgba(111, 167, 255, 0.2); }
+.comment-mention-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 7px);
+    z-index: 20;
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 5px;
+    padding: 8px;
+    border: 1px solid rgba(111, 167, 255, 0.35);
+    border-radius: 12px;
+    background: #111b29;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+}
+.comment-mention-menu.open { display: grid; }
+.comment-mention-option {
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 7px 9px;
+    overflow-wrap: anywhere;
+    background: rgba(255, 255, 255, 0.035);
+    color: #dce8f5;
+    font-size: 11px;
+    text-align: left;
+    cursor: pointer;
+}
+.comment-mention-option span { margin-right: 4px; color: var(--accent-2); font-weight: 900; }
+.comment-mention-option:hover { border-color: rgba(125, 241, 194, 0.35); background: rgba(125, 241, 194, 0.08); }
+.comment-mention-empty { grid-column: 1 / -1; padding: 8px; color: #8496aa; font-size: 11px; }
+.comment-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    color: #fff;
+    font-size: 13px;
+}
+.comment-submit {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-btn { position: absolute; right: 0; top: 0; background: none; border: none; color: #666; cursor: pointer; font-size: 14px; padding: 4px; }
+.delete-btn:hover { color: #ff4d4d; }
+
+/* ── Analysis & Ideas Sections ───────────── */
+.analysis-section {
+    max-width: 1400px;
+    margin: 48px auto 0;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(125, 241, 194, 0.05), rgba(111, 167, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+}
+.section-icon { font-size: 24px; }
+.analysis-text { color: #cfd6e3; font-size: 15px; line-height: 1.8; }
+
+.ideas-section {
+    max-width: 1400px;
+    margin: 32px auto 60px;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(199, 157, 255, 0.04), rgba(111, 167, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+}
+
+/* ── Target Badge ────────────────────────── */
+.target-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(125, 241, 194, 0.15);
+    border: 1px solid rgba(125, 241, 194, 0.3);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+/* ── Summary Toggle ──────────────────────── */
+.summary-wrapper { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.summary-btn {
+    background: none; border: none;
+    color: var(--accent); cursor: pointer;
+    font-size: 0.85rem; padding: 0;
+    display: flex; align-items: center; gap: 0.25rem;
+    transition: color 0.2s;
+}
+.summary-btn:hover { text-decoration: underline; }
+.summary-btn::after { content: '▼'; font-size: 0.7em; transition: transform 0.3s; }
+.summary-btn.open::after { transform: rotate(180deg); }
+.summary-content {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    font-size: 0.9rem; line-height: 1.6;
+    margin-top: 0; opacity: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+.summary-content.open { margin-top: 0.5rem; padding: 0.75rem; opacity: 1; }
+
+/* ── Analysis Grid / Cards ───────────────── */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+.analysis-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.analysis-card {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+        radial-gradient(circle at top right, rgba(125, 241, 194, 0.08), transparent 34%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 0;
+}
+.analysis-card:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
+.analysis-card.region-jp { border-top: 3px solid #ff4d4d; }
+.analysis-card.region-cn { border-top: 3px solid #ffcc00; }
+.analysis-card.region-in { border-top: 3px solid #ff9933; }
+.analysis-card.region-us { border-top: 3px solid #3c3b6e; }
+.analysis-card.region-eu { border-top: 3px solid #003399; }
+
+.flag-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; }
+.flag-emoji { font-size: 32px; line-height: 1; }
+.country-label { font-size: 18px; font-weight: 700; color: var(--text); opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+.analysis-text-body {
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: #d8deea;
+    text-align: justify;
+    letter-spacing: 0.01em;
+}
+.analysis-text-body strong { color: #fff; background: rgba(125, 241, 194, 0.15); padding: 0 4px; border-radius: 4px; font-weight: 600; }
+.analysis-text-body p {
+    margin: 0 0 0.72em;
+    min-height: 0;
+}
+.analysis-text-body p:last-child { margin-bottom: 0; }
+.analysis-ref-link {
+    color: #8ec5ff;
+    font-size: 10px;
+    text-decoration: none;
+    text-underline-offset: 2px;
+    padding: 1px 4px;
+    border-radius: 999px;
+    background: rgba(142, 197, 255, 0.12);
+    white-space: nowrap;
+}
+.analysis-ref-link:hover { text-decoration: underline; }
+.analysis-float-source {
+    float: right;
+    width: 132px;
+    margin: 0.18em 0 0.42em 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.22);
+    color: var(--text);
+    border-radius: 9px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    shape-margin: 10px;
+    break-inside: avoid;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.analysis-float-source:hover {
+    transform: translateY(-2px);
+    border-color: rgba(125, 241, 194, 0.55);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+.analysis-float-source img {
+    width: 100%;
+    height: 78px;
+    object-fit: cover;
+    display: block;
+    background: #17202e;
+}
+.analysis-float-title {
+    display: block;
+    padding: 6px 7px;
+    font-size: 10px;
+    line-height: 1.35;
+    color: #cfd8e7;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.analysis-text-body::after { content: ""; display: block; clear: both; }
+
+@media (max-width: 720px) {
+    .analysis-float-source {
+        float: none;
+        width: 100%;
+        margin: 0 0 8px;
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        align-items: stretch;
+    }
+    .analysis-float-source img { height: 70px; }
+    .analysis-float-title { -webkit-line-clamp: 3; }
+}
+
+/* ── Social Actions ──────────────────────── */
+.social-actions {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 16px; padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Region Section (Ideas) ──────────────── */
+.region-section {
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.region-section.jp { border-left: 4px solid #ff4d4d; background: linear-gradient(90deg, rgba(255, 77, 77, 0.05), transparent); }
+.region-section.cn { border-left: 4px solid #ffcc00; background: linear-gradient(90deg, rgba(255, 204, 0, 0.05), transparent); }
+.region-section.in { border-left: 4px solid #ff9933; background: linear-gradient(90deg, rgba(255, 153, 51, 0.05), transparent); }
+.region-section.us { border-left: 4px solid #3c3b6e; background: linear-gradient(90deg, rgba(60, 59, 110, 0.05), transparent); }
+.region-section.eu { border-left: 4px solid #003399; background: linear-gradient(90deg, rgba(0, 51, 153, 0.05), transparent); }
+
+.region-title-wrapper { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.region-title-text {
+    font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.05em;
+}
+
+/* ── Ideas Grid ──────────────────────────── */
+.ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+/* カードは縦方向に積む: [タイトル行] → [画像｜本文] */
+.idea-card {
+    background: rgba(30, 34, 45, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    align-items: stretch;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.idea-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(30, 34, 45, 0.8);
+}
+
+/* タイトル行: 番号バッジ + タイトルテキスト（横並び） */
+.idea-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* コンテンツ行: 画像 | 説明文（横並び） */
+.idea-body {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.idea-image-wrapper {
+    width: 45%;
+    min-width: 220px;
+    position: relative;
+    min-height: 220px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #000;
+    overflow: hidden;
+}
+.idea-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.idea-card:hover .idea-img { transform: scale(1.03); }
+
+.idea-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+}
+
+.idea-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--accent), #4facfe);
+    color: #000; font-weight: 900;
+    border-radius: 10px;
+    width: 32px; height: 32px; font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(125, 241, 194, 0.3);
+}
+.idea-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+    margin-top: 0;
+    writing-mode: horizontal-tb;
+}
+.idea-desc { color: #b0b8c4; font-size: 14px; line-height: 1.8; margin: 0; }
+.idea-refs { font-size: 11px; color: var(--muted); margin-top: 8px; }
+.idea-ref-link { color: #8ec5ff; text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 900px) {
+    .ideas-grid { grid-template-columns: 1fr; }
+    .idea-body { flex-direction: column; }
+    .idea-card { flex-direction: column; }
+    .idea-image-wrapper { width: 100%; height: 240px; min-width: 0; max-width: none; }
+    .idea-content { padding: 0; }
+    .idea-title { font-size: 1.2rem; }
+}
+
+        /* ── Citation Thumbnail ──────────────────── */
+        .analysis-ref-group { display: inline; }
+        /* クリッカブルなサムネイルカード */
+        .ref-card {
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0;
+            border-radius: 7px;
+            overflow: hidden;
+            vertical-align: middle;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+            line-height: 0;
+        }
+        .ref-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            border-color: rgba(125, 241, 194, 0.5);
+        }
+        .ref-thumb {
+            width: 88px;
+            height: 58px;
+            object-fit: cover;
+            display: block;
+        }
+        /* 画像なし記事の代替表示 */
+        .ref-card-noimg {
+            width: 88px;
+            height: 58px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--muted);
+            text-align: center;
+            padding: 4px;
+            line-height: 1.3;
+        }
+    </style>
+    <style>
+        #githubPagesMigration {
+            display: none;
+        }
+
+        html.github-pages-migration body {
+            min-height: 100vh;
+            padding: 24px;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(125, 241, 194, 0.16), transparent 32%),
+                radial-gradient(circle at 85% 90%, rgba(111, 167, 255, 0.18), transparent 34%),
+                #050a12;
+        }
+
+        html.github-pages-migration body > :not(#githubPagesMigration) {
+            display: none !important;
+        }
+
+        html.github-pages-migration #githubPagesMigration {
+            display: grid;
+            place-items: center;
+            min-height: calc(100vh - 48px);
+        }
+
+        .migration-card {
+            width: min(720px, 100%);
+            padding: clamp(32px, 7vw, 72px);
+            border: 1px solid rgba(125, 241, 194, 0.26);
+            border-radius: 28px;
+            background:
+                linear-gradient(145deg, rgba(22, 31, 46, 0.96), rgba(10, 16, 27, 0.98));
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
+        }
+
+        .migration-kicker {
+            display: inline-flex;
+            margin-bottom: 22px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(125, 241, 194, 0.12);
+            color: #7df1c2;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .migration-card h1 {
+            margin-bottom: 20px;
+            font-size: clamp(30px, 7vw, 52px);
+            line-height: 1.25;
+        }
+
+        .migration-card p {
+            color: #c1c9d8;
+            font-size: clamp(15px, 2.5vw, 18px);
+            line-height: 1.9;
+        }
+
+        .migration-note {
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-left: 3px solid #6fa7ff;
+            background: rgba(111, 167, 255, 0.08);
+            color: #aebbd0 !important;
+            font-size: 14px !important;
+        }
+
+        .migration-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            margin-top: 30px;
+            padding: 0 24px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #7df1c2, #6fa7ff);
+            color: #07111d;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 14px 34px rgba(111, 167, 255, 0.2);
+        }
+
+        .migration-url {
+            display: block;
+            margin-top: 14px;
+            color: #7f8ca3;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+    <main id="githubPagesMigration" aria-labelledby="migrationTitle">
+        <section class="migration-card">
+            <span class="migration-kicker">PUBLICATION MOVED</span>
+            <h1 id="migrationTitle">社内サーバーへ<br>移行しました</h1>
+            <p>
+                内装製品デイリーニュースは、GitHub Pagesから社内サーバーへ移行しました。
+                今後は社内LANに接続したPCから、新しいサイトをご利用ください。
+            </p>
+            <p class="migration-note">
+                移行により、社外回線や社内LANに接続していないスマートフォンからはアクセスできません。
+                ブックマークの変更もお願いします。
+            </p>
+            <a class="migration-link" href="http://IEWEB01/">社内サーバーで開く →</a>
+            <span class="migration-url">http://IEWEB01/</span>
+        </section>
+    </main>
+    <header id="top" class="site-header jump-anchor">
+        <div class="header-brand">
+            <img id="titleIcon" class="title-globe-icon" src="page_images/icon_world.png" alt="地域">
+            <h1>内装製品デイリーニュース</h1>
+            <a class="interiorgram-link" href="/interiorgram/" title="Interiorgramを開く">
+                <span aria-hidden="true">💡</span>
+                <span class="interiorgram-link-label">Interiorgram</span>
+                <span class="interiorgram-link-short" aria-hidden="true">IG</span>
+            </a>
+        </div>
+        <div class="header-top-actions">
+            <span class="header-update-status">
+                <span id="lastUpdatedLabel">更新</span>
+                <strong id="lastUpdated">-</strong>
+            </span>
+            <div id="accountHeaderSlot"></div>
+        </div>
+        <div class="header-summary-row">
+            <p class="lead">国内外の自動車内装ニュースを生成AIで毎日収集・日本語要約。市場トレンドを考察し、豊田合成の内装開発につながる企画アイデアとイメージを提案します。</p>
+            <div class="compact-access-counter" aria-label="アクセス情報">
+                <span class="access-metric">総アクセス <strong id="totalVisits">-</strong></span>
+                <span class="access-metric today">今日 <strong id="todayVisits">-</strong></span>
+                <span class="access-metric yesterday">昨日 <strong id="yesterdayVisits">-</strong></span>
+                <button class="analysis-toggle" id="analysisToggle" type="button" aria-expanded="false"
+                    title="アクセス推移" aria-label="アクセス推移">↗</button>
+            </div>
+        </div>
+        <nav class="edition-links" aria-label="ニュースの版">
+            <a href="/" data-edition-link="interior">内装版</a>
+            <a href="/exterior/" data-edition-link="exterior">外装版</a>
+            <button type="button" id="editionMailSettings" hidden>外装版のメール受信設定</button>
+        </nav>
+        <p class="publication-status" id="exteriorPublicationStatus" role="status" hidden></p>
+    </header>
+
+    <div class="filters">
+        <div class="filter-row">
+            <span class="filter-label">🌐 地域</span>
+            <div class="filter-chips" id="countryFilters">
+                <span class="chip country-world active" data-country="world"><img src="page_images/icon_world.png"
+                        class="flag-icon" alt="World"> 世界版<span class="new-count" data-country="world"></span></span>
+                <span class="chip country-jp" data-country="jp"><span class="flag-icon flag-jp"></span>日本<span
+                        class="new-count" data-country="jp"></span></span>
+                <span class="chip country-cn" data-country="cn"><span class="flag-icon flag-cn"></span>中国<span
+                        class="new-count" data-country="cn"></span></span>
+                <span class="chip country-in" data-country="in"><span class="flag-icon flag-in"></span>インド<span
+                        class="new-count" data-country="in"></span></span>
+                <span class="chip country-us" data-country="us"><span class="flag-icon flag-us"></span>米国<span
+                        class="new-count" data-country="us"></span></span>
+                <span class="chip country-eu" data-country="eu"><span class="flag-icon flag-eu"></span>欧州<span
+                        class="new-count" data-country="eu"></span></span>
+                <span class="chip country-paper" data-country="paper"><span class="paper-icon">📄</span>論文<span
+                        class="new-count" data-country="paper"></span></span>
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">🏷️ ジャンル</span>
+            <div class="tag-filter-container">
+                <div class="filter-chips tag-chips" id="tagFilters">
+                    <span class="chip active" data-tag="all">すべて<span class="new-count" data-tag="all"></span></span>
+                </div>
+                <button class="chip tag-toggle" id="tagToggle" type="button" aria-expanded="false">もっと見る</button>
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">📅 日付</span>
+            <div class="date-inputs">
+                <input type="date" id="dateFrom" value="">
+                <span>〜</span>
+                <input type="date" id="dateTo" value="">
+            </div>
+        </div>
+        <div class="filter-row">
+            <span class="filter-label">🔍 検索</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="キーワード検索..."
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.05); color: var(--text); font-size: 13px; width: 240px;">
+            <select id="sortOrder"
+                style="padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #1e222d; color: var(--text); font-size: 13px; margin-left: 12px;">
+                <option value="new-first" style="background: #1e222d; color: #fff;">New・反響順</option>
+                <option value="relevance-desc" style="background: #1e222d; color: #fff;">内装関連度順</option>
+                <option value="date-desc" style="background: #1e222d; color: #fff;">新しい順</option>
+                <option value="date-asc" style="background: #1e222d; color: #fff;">古い順</option>
+                <option value="country" style="background: #1e222d; color: #fff;">国順（日本→中国→インド→米国→欧州→論文）</option>
+                <option value="likes-desc" style="background: #1e222d; color: #fff;">いいね順</option>
+                <option value="comments-desc" style="background: #1e222d; color: #fff;">コメント数順</option>
+            </select>
+            <button id="favoritesToggle" class="chip favorite-toggle" type="button" aria-pressed="false"
+                style="margin-left: 12px;">★ お気に入り</button>
+        </div>
+        <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
+    </div>
+
+    <section class="favorites-actions hidden" id="favoritesActions">
+        <div class="favorites-actions-title">★ お気に入り共有</div>
+        <div class="favorites-actions-controls">
+            <span id="favoritesSelectedCount">選択: 0</span>
+            <button class="chip" id="favoritesSelectAll" type="button">全選択</button>
+            <button class="chip" id="favoritesClearSelection" type="button">全解除</button>
+            <button class="chip" id="favoritesExportCsv" type="button">CSV出力（選択）</button>
+            <button class="chip" id="favoritesExportCsvAll" type="button">CSV出力（全て）</button>
+            <button class="chip" id="favoritesEmailShare" type="button">メール共有（選択）</button>
+            <button class="chip" id="favoritesEmailShareAll" type="button">メール共有（全て）</button>
+        </div>
+    </section>
+
+    <section class="analysis-panel hidden" id="accessAnalytics" aria-hidden="true">
+        <div class="analysis-dialog" role="dialog" aria-modal="true" aria-labelledby="accessAnalyticsTitle">
+            <div class="analysis-panel-header">
+                <div>
+                    <div class="analysis-panel-title" id="accessAnalyticsTitle">日別アクセス分析</div>
+                    <div class="analysis-panel-sub" id="accessChartRange">データ範囲</div>
+                </div>
+                <button class="analysis-close" id="accessAnalyticsClose" type="button" aria-label="閉じる">&times;</button>
+            </div>
+            <div class="analysis-content">
+                <div class="analysis-summary">
+                    <div class="analysis-summary-card">総アクセス<strong id="accessModalTotal">-</strong></div>
+                    <div class="analysis-summary-card">今日<strong id="accessModalToday">-</strong></div>
+                    <div class="analysis-summary-card">昨日<strong id="accessModalYesterday">-</strong></div>
+                </div>
+                <div class="analysis-chart" id="accessChart">
+                    <div class="chart-empty">データを取得中...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ranking-wrapper" id="rankingWrapper">
+        <section class="ranking-section" id="rankingSection">
+            <div class="ranking-header">
+                <div class="ranking-heading">
+                    <span class="ranking-kicker">POPULAR NEWS</span>
+                    <div class="ranking-title">🏆 人気ニュースランキング</div>
+                </div>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="rankingScope">期間</label>
+                    <select id="rankingScope" class="ranking-sort">
+                        <option value="today">1日（本日）</option>
+                        <option value="weekly">1週間以内</option>
+                        <option value="all">今まで</option>
+                    </select>
+                    <label class="ranking-sort-label" for="rankingSort">並び替え</label>
+                    <select id="rankingSort" class="ranking-sort">
+                        <option value="score">総合</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                        <option value="reads">閲覧数</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ranking-body collapsed" id="rankingBody">
+                <div class="ranking-list" id="rankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+            <div class="ranking-footer">
+                <button class="chip ranking-toggle" id="rankingToggle" type="button"
+                    aria-expanded="false">開く</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="ranking-wrapper" id="paperRankingWrapper">
+        <section class="ranking-section" id="paperRankingSection">
+            <div class="ranking-header">
+                <div class="ranking-title">📚 人気論文ランキング</div>
+                <div class="ranking-controls">
+                    <label class="ranking-sort-label" for="paperRankingScope">期間</label>
+                    <select id="paperRankingScope" class="ranking-sort">
+                        <option value="today">1日（本日）</option>
+                        <option value="6m">6か月以内</option>
+                        <option value="weekly">1週間以内</option>
+                        <option value="all">今まで</option>
+                    </select>
+                    <label class="ranking-sort-label" for="paperRankingSort">並び替え</label>
+                    <select id="paperRankingSort" class="ranking-sort">
+                        <option value="score">総合</option>
+                        <option value="likes">いいね</option>
+                        <option value="comments">コメント</option>
+                        <option value="reads">閲覧数</option>
+                    </select>
+                    <button class="chip ranking-toggle" id="paperRankingToggle" type="button"
+                        aria-expanded="false">開く</button>
+                </div>
+            </div>
+            <div class="ranking-body collapsed" id="paperRankingBody">
+                <div class="ranking-list" id="paperRankingList">
+                    <div class="ranking-empty">ランキングを計算中...</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="ranking-back hidden" id="rankingBack">
+        <button class="chip" id="rankingBackBtn" type="button">← 前の表示に戻る</button>
+    </div>
+
+    <div id="newsSection" class="jump-anchor"></div>
+    <section class="grid" id="newsGrid"></section>
+    <div style="text-align: center; margin: 2rem 0;">
+        <button id="loadMoreBtn" onclick="loadMore()" class="btn" style="display: none;">もっと見る</button>
+    </div>
+
+
+
+    <div id="insightsContainer"></div>
+
+    <nav class="quick-nav" aria-label="ページ内ナビゲーション">
+        <a href="#top">トップ</a>
+        <a href="#newsSection">ニュース</a>
+        <a href="#analysisSection">考察</a>
+        <a href="#ideasSection">企画</a>
+    </nav>
+
+
+    <!-- DailyNews Server API -->
+    <script src="source_list_data.js?v=20260908-4"></script>
+    <script type="module" src="dailynews_client.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_account.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_activity.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_sources.js?v=20260915-editions-1"></script>
+    <script type="module" src="release_history.js?v=20260915-editions-1"></script>
+    <script src="exchange_rates.js?v=20260908-1"></script>
+    <script src="dailynews_annotations.js?v=20260911-2"></script>
+
+    <script>
+        function normalizeExteriorPublication(payload) {
+            if (payload?.edition_id === "exterior" && payload.status === "building" && payload.processed_through === "") {
+                return { edition_id: "exterior", status: "building", processed_through: "", target_dates: [], selected_count: 0 };
+            }
+            const validDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
+                && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+            if (!payload || payload.edition_id !== "exterior" || !validDate(payload.processed_through)
+                || !["published", "no_matching_news"].includes(payload.status)
+                || !Number.isSafeInteger(payload.selected_count) || payload.selected_count < 0
+                || !Array.isArray(payload.target_dates) || !payload.target_dates.length
+                || !payload.target_dates.every(validDate)) return null;
+            const dates = [...new Set(payload.target_dates)].sort();
+            if (dates[dates.length - 1] !== payload.processed_through
+                || (payload.status === "no_matching_news") !== (payload.selected_count === 0)) return null;
+            return { ...payload, target_dates: dates };
+        }
+
+        function describeExteriorPublication(payload, news) {
+            if (!payload) return "収集状況を確認できませんでした。掲載済みの記事を表示しています。";
+            if (payload.status === "building") return "初回ニュースを作成中です。公開後、このURLからご覧いただけます。";
+            const dates = payload.target_dates;
+            const through = payload.processed_through;
+            const range = dates.length === 1 ? dates[0] : `${dates[0]}〜${through}`;
+            if (payload.status === "no_matching_news") {
+                return `${through}まで収集・選定済み。今回の対象期間（${range}）は条件に合う記事がありませんでした。掲載済みの記事は引き続き閲覧できます。`;
+            }
+            let message = `${through}まで収集・選定済み。今回の対象期間（${range}）の採用は${payload.selected_count}件です。`;
+            if (Array.isArray(news) && news.length && !news.some((item) => item.date === through)) {
+                message += ` ${through}付の新しい掲載記事はありません。`;
+            }
+            return message;
+        }
+
+        window.EXTERIOR_PUBLICATION_STATUS = null;
+        window.__publicationStatusReady = window.DAILYNEWS_CONFIG.id === "exterior"
+            ? fetch("publication_status.json", { cache: "no-store", credentials: "same-origin", signal: AbortSignal.timeout(5000) })
+                .then((response) => response.ok ? response.json() : null)
+                .then((payload) => { window.EXTERIOR_PUBLICATION_STATUS = normalizeExteriorPublication(payload); })
+                .catch(() => {})
+            : Promise.resolve();
+    </script>
+    <script>
+        const editionConfig = window.DAILYNEWS_CONFIG;
+        document.querySelector("header h1").textContent = editionConfig.name;
+        document.querySelector(`[data-edition-link="${editionConfig.id}"]`)?.setAttribute("aria-current", "page");
+        if (editionConfig.id === "exterior") {
+            document.querySelector("header .lead").textContent = "国内外の自動車外装ニュースを生成AIで収集・日本語要約。グリル・バンパー・加飾・照明・センサー対応などを取り上げ、外装開発につながる考察と企画アイデアを提案します。";
+            document.querySelector('meta[name="description"]').content = "外装製品のニュース・考察・企画アイデアをお届け。登録せずに閲覧でき、メールは希望者のみ受信できます。";
+            document.querySelector('option[value="relevance-desc"]').textContent = "外装関連度順";
+            const mailSettings = document.getElementById("editionMailSettings");
+            mailSettings.hidden = false;
+            mailSettings.addEventListener("click", () => window.dailyNewsAccount?.open("register"));
+        }
+        // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
+        const CACHE_BUSTER = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+        window.__dataScriptsReady = new Promise((resolve) => {
+            const sources = ["news_data.js", "insights_data.js"];
+            let loaded = 0;
+            const loadScript = (src, useCacheBuster) => {
+                const script = document.createElement("script");
+                script.src = useCacheBuster ? `${src}?v=${CACHE_BUSTER}` : src;
+                script.async = false;
+                script.onload = () => {
+                    loaded += 1;
+                    if (loaded === sources.length) resolve();
+                };
+                script.onerror = () => {
+                    if (useCacheBuster) {
+                        loadScript(src, false);
+                        return;
+                    }
+                    console.warn(`Failed to load ${src}`);
+                    loaded += 1;
+                    if (loaded === sources.length) resolve();
+                };
+                document.head.appendChild(script);
+            };
+            sources.forEach((src) => loadScript(src, true));
+        });
+
+    </script>
+    <script>
+        let NEWS_DATA = [];
+        let visibleLimit = 30;
+
+        function getTodayKey() {
+            const jst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+            const year = jst.getUTCFullYear();
+            const month = String(jst.getUTCMonth() + 1).padStart(2, "0");
+            const day = String(jst.getUTCDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        }
+
+        let NEW_DATE_RANGE = { start: null, end: null };
+        const NEW_DATE_RANGE_OVERRIDE = { start: "2026-09-14", end: "2026-09-14" };
+        const ONE_DAY_NEW_DATE_RANGE_OVERRIDES = {
+            "2026-08-19": { start: "2026-08-07", end: "2026-08-18" }
+        };
+        const INITIAL_DATE_RANGE_OVERRIDES = {
+            "2026-08-19": { start: "2026-08-07", end: "2026-08-18" }
+        };
+
+        // New????????????New?????
+        function isNewContent(itemOrDate) {
+            const dateStr = itemOrDate && typeof itemOrDate === "object"
+                ? itemOrDate.date
+                : itemOrDate;
+            if (typeof dateStr !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+            if (!NEW_DATE_RANGE.start || !NEW_DATE_RANGE.end) return false;
+            return dateStr >= NEW_DATE_RANGE.start && dateStr <= NEW_DATE_RANGE.end;
+        }
+
+        function isNewInsightDate(dateLabel) {
+            if (!dateLabel || !NEW_DATE_RANGE.start) return false;
+            return dateLabel.includes(NEW_DATE_RANGE.start) || dateLabel.includes(NEW_DATE_RANGE.end);
+        }
+
+        function isGloballyHidden(itemOrId) {
+            const itemId = typeof itemOrId === "object" ? itemOrId?.id : itemOrId;
+            return Boolean(itemId && window.interactionsData?.[itemId]?.hidden);
+        }
+
+        function visibleNewsData() {
+            return NEWS_DATA.filter(item => !isGloballyHidden(item));
+        }
+
+        function getNewCounts(data) {
+            const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0, paper: 0 };
+            if (!data) return counts;
+            data.forEach(item => {
+                if (isGloballyHidden(item)) return;
+                if (!isNewContent(item)) return;
+                counts.world += 1;
+                if (counts[item.country] !== undefined) counts[item.country] += 1;
+            });
+            return counts;
+        }
+
+        function updateNewCountBadges() {
+            const counts = getNewCounts(NEWS_DATA);
+            document.querySelectorAll("#countryFilters .new-count").forEach(el => {
+                const country = el.dataset.country;
+                const count = counts[country] || 0;
+                if (count > 0) {
+                    el.textContent = `New ${count}`;
+                    el.classList.remove("hidden");
+                } else {
+                    el.textContent = "";
+                    el.classList.add("hidden");
+                }
+            });
+
+            const tagCounts = { all: counts.world };
+            NEWS_DATA.forEach(item => {
+                if (isGloballyHidden(item)) return;
+                if (!isNewContent(item)) return;
+                [...new Set(item.tags || [])].forEach(tag => {
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            });
+            document.querySelectorAll("#tagFilters .new-count").forEach(el => {
+                const count = tagCounts[el.dataset.tag] || 0;
+                el.textContent = count > 0 ? `New ${count}` : "";
+                el.classList.toggle("hidden", count === 0);
+            });
+        }
+
+        function updateTitleIcon() {
+            const iconEl = document.getElementById("titleIcon");
+            if (!iconEl) return;
+            let key = "world";
+            if (!activeCountries.has("world") && activeCountries.size === 1) {
+                const selected = [...activeCountries][0];
+                if (selected) key = selected;
+            }
+            iconEl.src = TITLE_ICONS[key] || TITLE_ICONS.world;
+        }
+
+        function getLatestDate(data) {
+            if (!data || data.length === 0) return null;
+            return data.reduce((max, item) => item.date > max ? item.date : max, data[0].date);
+        }
+
+        function setNewDateRangeFromNews(data) {
+            if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                NEW_DATE_RANGE = publication?.target_dates.length
+                    ? { start: publication.target_dates[0], end: publication.processed_through }
+                    : { start: null, end: null };
+                return;
+            }
+            const oneDayOverride = ONE_DAY_NEW_DATE_RANGE_OVERRIDES[getTodayKey()];
+            const rangeOverride = window.DAILYNEWS_CONFIG.id === "exterior" ? null : (oneDayOverride || NEW_DATE_RANGE_OVERRIDE);
+            if (rangeOverride?.start && rangeOverride?.end) {
+                NEW_DATE_RANGE = { start: rangeOverride.start, end: rangeOverride.end };
+                return;
+            }
+            const latest = getLatestDate(data);
+            if (latest) {
+                NEW_DATE_RANGE = { start: latest, end: latest };
+            }
+        }
+
+        function normalizeIsNewFlags(data) {
+            if (!data || !NEW_DATE_RANGE.start) return;
+            data.forEach(item => {
+                if (!item.date) {
+                    item.isNew = false;
+                    return;
+                }
+                item.isNew = item.date >= NEW_DATE_RANGE.start && item.date <= NEW_DATE_RANGE.end;
+            });
+        }
+
+        function isShowingDefaultNewRange() {
+            const fromEl = document.getElementById("dateFrom");
+            const toEl = document.getElementById("dateTo");
+            if (!fromEl || !toEl || !NEW_DATE_RANGE.start || !NEW_DATE_RANGE.end) return false;
+            return fromEl.value === NEW_DATE_RANGE.start && toEl.value === NEW_DATE_RANGE.end;
+        }
+
+        function formatDateTime(date) {
+            const pad = (n) => String(n).padStart(2, "0");
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+        }
+
+        function updateUpdatedAt() {
+            const el = document.getElementById("lastUpdated");
+            if (!el) return;
+            if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                if (publication?.status === "building") {
+                    document.getElementById("lastUpdatedLabel").textContent = "準備状況";
+                    el.textContent = "作成中";
+                    return;
+                }
+                document.getElementById("lastUpdatedLabel").textContent = publication ? "収集確認" : "記事更新";
+                if (publication) {
+                    el.textContent = `${publication.processed_through}まで`;
+                    el.title = "この日付までの記事を収集・選定済み";
+                    return;
+                }
+            }
+            if (window.NEWS_UPDATED_AT) {
+                el.textContent = window.NEWS_UPDATED_AT;
+                return;
+            }
+            const latest = getLatestDate(NEWS_DATA);
+            if (latest) {
+                el.textContent = latest;
+                return;
+            }
+            el.textContent = window.DAILYNEWS_CONFIG.id === "exterior" ? "確認できません" : formatDateTime(new Date());
+        }
+
+        function beginInternalNavigation(scrollTarget = null, returnToAccount = false) {
+            if (rankingBackState) return;
+            rankingBackState = captureFilterState();
+            rankingBackState.scrollTarget = scrollTarget;
+            rankingBackState.returnToAccount = returnToAccount;
+            history.pushState({ dailyNewsDetail: true }, "", location.href);
+            setRankingBackVisibility(true);
+        }
+
+        function showNewsItem(itemId, fromRanking = false, returnToAccount = false) {
+            const target = NEWS_DATA.find(n => n.id === itemId);
+            if (!target || isGloballyHidden(target)) return;
+            beginInternalNavigation(fromRanking ? "rankingSection" : null, returnToAccount);
+            document.getElementById("searchInput").value = itemId;
+            document.getElementById("dateFrom").value = "";
+            document.getElementById("dateTo").value = "";
+            newOnly = false;
+            activeCountries = new Set(["world"]);
+            activeTags = new Set(["all"]);
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            setTimeout(() => {
+                const card = document.getElementById(`card-${itemId}`);
+                if (!card) return;
+                card.scrollIntoView({ behavior: "smooth", block: "center" });
+                card.classList.add("card-highlight");
+                setTimeout(() => card.classList.remove("card-highlight"), 1500);
+            }, 100);
+        }
+
+        function openCommentsFor(itemId) {
+            showNewsItem(itemId);
+            setTimeout(() => {
+                const card = document.getElementById(`card-${itemId}`);
+                if (!card) return;
+                const btn = card.querySelector(".btn-comment");
+                if (btn) toggleComments(itemId, btn);
+            }, 250);
+        }
+
+        let rankingUpdateTimer = null;
+        const RANKING_PREVIEW_COUNT = 3;
+
+        function applyRankingPreview(bodyEl, listEl) {
+            if (!bodyEl || !listEl) return;
+            const items = Array.from(listEl.querySelectorAll(".ranking-item"));
+            if (items.length === 0) {
+                bodyEl.style.maxHeight = `${bodyEl.scrollHeight}px`;
+                return;
+            }
+            bodyEl.style.maxHeight = "none";
+            const targetIndex = Math.min(RANKING_PREVIEW_COUNT, items.length) - 1;
+            const target = items[targetIndex];
+            const listRect = listEl.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const height = Math.ceil(targetRect.bottom - listRect.top);
+            bodyEl.style.maxHeight = `${height}px`;
+        }
+
+        function updateRankingHeight(bodyEl, listEl) {
+            if (!bodyEl) return;
+            if (bodyEl.classList.contains("collapsed")) {
+                applyRankingPreview(bodyEl, listEl);
+            } else {
+                bodyEl.style.maxHeight = `${bodyEl.scrollHeight}px`;
+            }
+        }
+
+        function scheduleRankingUpdate() {
+            if (rankingUpdateTimer) clearTimeout(rankingUpdateTimer);
+            rankingUpdateTimer = setTimeout(() => {
+                renderAllRankings();
+            }, 150);
+        }
+
+        function getRankingScopeValue() {
+            const select = document.getElementById("rankingScope");
+            return select ? select.value : "today";
+        }
+
+        function getRankingSortKey() {
+            const select = document.getElementById("rankingSort");
+            return select ? select.value : "score";
+        }
+
+        function getPaperRankingScopeValue() {
+            const select = document.getElementById("paperRankingScope");
+            return select ? select.value : "today";
+        }
+
+        function getPaperRankingSortKey() {
+            const select = document.getElementById("paperRankingSort");
+            return select ? select.value : "score";
+        }
+
+        function getRankingMetricValue(item, key) {
+            if (key === "score") return item.score || 0;
+            if (key === "likes") return item.likes || 0;
+            if (key === "comments") return item.comments || 0;
+            return item.reads || 0;
+        }
+
+        function filterRankingByCountry(items) {
+            if (activeCountries.has("world")) return items;
+            const allowed = new Set(activeCountries);
+            return items.filter(item => allowed.has(item.country));
+        }
+
+        function compareRankingItems(a, b, key) {
+            const order = key === "score"
+                ? ["score", "likes", "comments", "reads"]
+                : key === "likes"
+                    ? ["likes", "comments", "reads"]
+                    : key === "comments"
+                        ? ["comments", "likes", "reads"]
+                        : ["reads", "likes", "comments"];
+            for (const k of order) {
+                const diff = (b[k] || 0) - (a[k] || 0);
+                if (diff !== 0) return diff;
+            }
+            return b.date.localeCompare(a.date);
+        }
+
+        function getRankingEmptyMessage(scope, key) {
+            const labelMap = { score: "総合", reads: "閲覧", likes: "いいね", comments: "コメント" };
+            const label = labelMap[key] || "閲覧";
+            if (scope === "today") return `本日の${label}がまだありません。`;
+            if (scope === "weekly") return `1週間以内の${label}がまだありません。`;
+            if (scope === "6m") return `6か月以内の${label}がまだありません。`;
+            return `${label}がまだありません。`;
+        }
+
+        function renderRanking() {
+            const list = document.getElementById("rankingList");
+            const body = document.getElementById("rankingBody");
+            if (!list || !body) return;
+            const interactions = window.interactionsData || {};
+            const sortKey = getRankingSortKey();
+            const scope = getRankingScopeValue();
+            const latest = getLatestDate(visibleNewsData());
+
+            if ((scope === "today" || scope === "weekly") && !latest) {
+                list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                updateRankingHeight(body, list);
+                return;
+            }
+
+            let ranked = filterRankingByCountry(visibleNewsData().filter(item => item.country !== "paper")).map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                const score = likes * 3 + comments * 2 + reads;
+                return { ...item, likes, comments, reads, score };
+            });
+
+            if (scope === "today" && latest) {
+                ranked = ranked.filter(item => item.date === latest);
+            } else if (scope === "weekly" && latest) {
+                const endDate = new Date(`${latest}T00:00:00`);
+                const startDate = new Date(endDate);
+                startDate.setDate(startDate.getDate() - 6);
+                ranked = ranked.filter(item => {
+                    if (!item.date) return false;
+                    const d = new Date(`${item.date}T00:00:00`);
+                    return d >= startDate && d <= endDate;
+                });
+            }
+
+            ranked.sort((a, b) => compareRankingItems(a, b, sortKey));
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage(scope, sortKey)}</div>`;
+                updateRankingHeight(body, list);
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item" data-news-id="${item.id}" onclick="showNewsItem('${item.id}', true)">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-thumb">
+                            <img src="${getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
+                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                        </div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
+                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
+                            <span>👍</span> <span class="count">${item.likes}</span>
+                        </button>
+                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
+                            <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                        <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${item.id}', this); event.stopPropagation();">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+            updateRankingHeight(body, list);
+        }
+
+        function renderPaperRanking() {
+            const list = document.getElementById("paperRankingList");
+            const body = document.getElementById("paperRankingBody");
+            if (!list || !body) return;
+            const interactions = window.interactionsData || {};
+            const sortKey = getPaperRankingSortKey();
+            const scope = getPaperRankingScopeValue();
+            const papers = visibleNewsData().filter(item => item.country === "paper");
+            const latest = getLatestDate(papers);
+            const today = getLatestDate(visibleNewsData());
+
+            if ((scope === "today" && !today) || ((scope === "weekly" || scope === "6m") && !latest)) {
+                list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
+                updateRankingHeight(body, list);
+                return;
+            }
+
+            let ranked = papers.map(item => {
+                const data = interactions[item.id] || {};
+                const likes = data.likes || 0;
+                const comments = data.comments || 0;
+                const reads = (typeof data.reads === "number")
+                    ? data.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
+                const score = likes * 3 + comments * 2 + reads;
+                return { ...item, likes, comments, reads, score };
+            });
+
+            if (scope === "today" && today) {
+                ranked = ranked.filter(item => item.date === today);
+            } else if ((scope === "weekly" || scope === "6m") && latest) {
+                const endDate = new Date(`${latest}T00:00:00`);
+                const startDate = new Date(endDate);
+                if (scope === "6m") {
+                    startDate.setMonth(startDate.getMonth() - 6);
+                } else {
+                    startDate.setDate(startDate.getDate() - 6);
+                }
+                ranked = ranked.filter(item => {
+                    if (!item.date) return false;
+                    const d = new Date(`${item.date}T00:00:00`);
+                    return d >= startDate && d <= endDate;
+                });
+            }
+
+            ranked.sort((a, b) => compareRankingItems(a, b, sortKey));
+            const top = ranked.filter(item => getRankingMetricValue(item, sortKey) > 0).slice(0, 10);
+            if (top.length === 0) {
+                list.innerHTML = `<div class="ranking-empty">${getRankingEmptyMessage(scope, sortKey)}</div>`;
+                updateRankingHeight(body, list);
+                return;
+            }
+            list.innerHTML = top.map((item, idx) => `
+                <div class="ranking-item" data-news-id="${item.id}" onclick="showNewsItem('${item.id}', true)">
+                    <div class="ranking-left">
+                        <div class="ranking-rank">${idx + 1}</div>
+                        <div class="ranking-thumb">
+                            <img src="${getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'paper image'}"
+                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                        </div>
+                        <div class="ranking-title-text">${item.title}</div>
+                    </div>
+                    <div class="ranking-meta">
+                        <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
+                        <span>${item.date}</span>
+                        <span class="ranking-stat">👀 ${item.reads}</span>
+                        <button class="action-btn" onclick="toggleLike('${item.id}', this); event.stopPropagation();">
+                            <span>👍</span> <span class="count">${item.likes}</span>
+                        </button>
+                        <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
+                            <span>💬</span> <span class="count">${item.comments}</span>
+                        </button>
+                        <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${item.id}', this); event.stopPropagation();">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+            updateRankingHeight(body, list);
+        }
+
+        function renderWeeklyRanking() {
+            renderAllRankings();
+        }
+
+        function renderAllTimeRanking() {
+            renderAllRankings();
+        }
+
+        function renderAllRankings() {
+            renderRanking();
+            renderPaperRanking();
+        }
+        const ALL_TAGS = [
+            "センターコンソール", "インパネ", "加飾", "新素材", "新材料", "イルミ", "熱マネ", "ワイヤレス充電", "インタラクティブ", "快適", "センシング", "HMI", "先進技術", "カスタマイズ",
+            "品質", "アフター", "OS", "商用車", "スマートホーム連携", "ゼログラビティ", "サステナビリティ", "半導体", "サプライチェーン", "ラグジュアリー", "インフラ",
+            "居住性", "物理キー", "3列シート", "ファミリー", "デザイン", "アクセサリ", "リサイクル", "LCA", "DX", "ショーファー", "見守り", "ガジェット", "コンパクト", "質感", "レトロモダン", "大画面HMI",
+            "シート", "SUV", "ミニバン", "ワゴン", "パッケージ", "トレンド", "電動化", "EV", "バッテリー", "荷室",
+            "AI", "エージェント", "自動運転", "R&D", "軽量化", "音響", "後席", "インフォテインメント", "性能", "期待値", "通信", "規格", "UX", "安全"
+        ];
+        const COUNTRY_FLAGS = {
+            jp: "<span class='flag-icon flag-jp'></span>",
+            cn: "<span class='flag-icon flag-cn'></span>",
+            in: "<span class='flag-icon flag-in'></span>",
+            us: "<span class='flag-icon flag-us'></span>",
+            eu: "<span class='flag-icon flag-eu'></span>",
+            paper: "<span class='paper-icon'>📄</span>"
+        };
+        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
+
+        const LOCAL_TAG_RULES = [
+            { tag: "HMI", words: ["hmi", "ui", "ux", "インターフェース", "操作", "インフォテインメント"] },
+            { tag: "HUD", words: ["hud", "ヘッドアップ"] },
+            { tag: "AR", words: [" ar", "拡張現実", "ar "] },
+            { tag: "ディスプレイ", words: ["ディスプレイ", "スクリーン", "モニター", "液晶", "oled", "lcd", "画面"] },
+            { tag: "コネクテッド", words: ["ナビ", "通信", "コネクテッド", "carplay", "android auto"] },
+            { tag: "AI", words: ["ai", "人工知能", "音声", "ジェスチャー", "対話", "エージェント"] },
+            { tag: "センシング", words: ["センサー", "モニタリング", "ドライバー監視", "ミリ波"] },
+            { tag: "シート", words: ["シート", "座席", "seat", "オットマン", "ベンチレーション", "マッサージ"] },
+            { tag: "コックピット", words: ["ダッシュボード", "インパネ", "コックピット", "ステアリング", "メーター"] },
+            { tag: "センターコンソール", words: ["センターコンソール", "コンソール"] },
+            { tag: "イルミ", words: ["イルミ", "照明", "アンビエント", "発光", "led"] },
+            { tag: "新素材", words: ["素材", "レザー", "革", "竹", "バイオ", "リサイクル", "サステナ", "樹脂", "トリム"] },
+            { tag: "EV", words: ["ev", "bev", "電動", "電気自動車", "充電", "e-power"] },
+            { tag: "バッテリー", words: ["バッテリー", "電池", "lfp", "三元", "catl", "gwh"] },
+            { tag: "安全", words: ["安全", "エアバッグ", "adas", "衝突", "セーフティ", "自動回避"] },
+            { tag: "音響", words: ["音響", "スピーカー", "オーディオ", "静粛"] },
+            { tag: "カスタマイズ", words: ["カスタム", "カスタマイズ", "パーソナル"] },
+            { tag: "3列シート", words: ["3列", "7人乗り", "6人乗り"] },
+            { tag: "後席", words: ["後席", "リアシート", "ショーファー"] },
+            { tag: "軽量化", words: ["軽量", "軽量化"] },
+            { tag: "サプライチェーン", words: ["サプライチェーン", "生産拠点", "工場", "輸出"] }
+        ];
+        const INTERIOR_SCORE_RULES = [
+            { points: 18, words: ["内装", "車内", "室内", "キャビン", "cockpit", "interior"] },
+            { points: 16, words: ["シート", "座席", "ダッシュボード", "インパネ", "コンソール", "トリム", "ドアトリム", "ステアリング"] },
+            { points: 12, words: ["hmi", "ui", "ux", "ディスプレイ", "スクリーン", "ナビ", "インフォテインメント", "hud", "メーター"] },
+            { points: 10, words: ["素材", "レザー", "革", "樹脂", "竹", "リサイクル", "サステナ", "加飾", "質感"] },
+            { points: 8, words: ["照明", "イルミ", "アンビエント", "音響", "オーディオ", "静粛", "快適", "空調", "香り"] },
+            { points: 6, words: ["安全", "adas", "センサー", "エアバッグ", "見守り"] },
+            { points: 3, words: ["ev", "電動", "充電", "バッテリー", "suv", "mpv", "ミニバン"] }
+        ];
+        const EXTERIOR_TAG_RULES = [
+            { tag: "グリル", words: ["グリル", "grille", "フロントパネル", "フロントモジュール"] },
+            { tag: "バンパー", words: ["バンパー", "bumper", "fascia"] },
+            { tag: "加飾", words: ["加飾", "塗装", "めっき", "クロム", "エンブレム", "emblem", "decorat"] },
+            { tag: "照明・発光", words: ["照明", "発光", "ライト", "lighting", "illumin", "led"] },
+            { tag: "センサー対応", words: ["センサー", "レーダー", "ライダー", "lidar", "radar", "adas", "透過"] },
+            { tag: "空力", words: ["空力", "エアロ", "aerodynamic", "シャッター", "shutter", "スポイラー"] },
+            { tag: "新素材", words: ["樹脂", "材料", "成形", "新素材", "polymer", "molding"] },
+            { tag: "サステナビリティ", words: ["リサイクル", "再生", "バイオ", "recycl", "sustainab"] },
+            { tag: "軽量化", words: ["軽量", "lightweight"] },
+            { tag: "サプライチェーン", words: ["工場", "生産拠点", "サプライチェーン", "factory", "plant"] }
+        ];
+        const EXTERIOR_SCORE_RULES = [
+            { points: 18, words: ["外装", "exterior", "フロントモジュール", "フロントパネル"] },
+            { points: 18, words: ["グリル", "grille", "バンパー", "bumper", "fascia", "エンブレム"] },
+            { points: 12, words: ["加飾", "塗装", "めっき", "発光", "照明", "lighting", "illumin"] },
+            { points: 12, words: ["レーダー", "ミリ波", "透過", "radar", "lidar", "センサー"] },
+            { points: 10, words: ["空力", "シャッター", "aerodynamic", "shutter", "歩行者保護"] },
+            { points: 8, words: ["樹脂", "リサイクル", "軽量", "成形", "recycl", "lightweight"] }
+        ];
+
+        function getSearchBlob(item) {
+            return `${item?.title || ""} ${item?.desc || ""} ${item?.summary || ""} ${(item?.tags || []).join(" ")}`.toLowerCase();
+        }
+
+        function deriveLocalTags(item) {
+            const blob = ` ${getSearchBlob(item)} `;
+            const tags = [];
+            (window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES : LOCAL_TAG_RULES).forEach(rule => {
+                if (rule.words.some(word => blob.includes(word.toLowerCase())) && !tags.includes(rule.tag)) {
+                    tags.push(rule.tag);
+                }
+            });
+            return tags.slice(0, 8);
+        }
+
+        function computeInteriorRelevance(item) {
+            const blob = ` ${getSearchBlob(item)} `;
+            let score = 0;
+            (window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_SCORE_RULES : INTERIOR_SCORE_RULES).forEach(rule => {
+                const hitCount = rule.words.filter(word => blob.includes(word.toLowerCase())).length;
+                if (hitCount > 0) score += rule.points + Math.min(hitCount - 1, 2) * 3;
+            });
+            const localTags = item?.localTags || deriveLocalTags(item);
+            if (localTags.length >= 3) score += 6;
+            if (window.DAILYNEWS_CONFIG.id !== "exterior" && /専用グッズ|専用設計|純正|ドリンクホルダー|ティシューケース|etcカバー|シートカバー|accessor/.test(blob)) {
+                score = Math.max(score, 90);
+            }
+            if (window.DAILYNEWS_CONFIG.id !== "exterior" && /(sクラス|s-class|フラッグシップ|高級セダン|ラグジュアリー)/.test(blob) && /(大刷新|刷新|改良|初公開|facelift|refresh|revealed|unveiled)/.test(blob)) {
+                score = Math.max(score, 78);
+            }
+            if (/リコール|不具合|衝突試験|修理部品|未完了|recall|defect|failure|crash test/.test(blob)) {
+                score = Math.min(score, 68);
+            }
+            if (/販売台数|生産台数|搭載量|株価|決算|補助金|価格だけ|エンジン|排気|タイヤ|バッテリー市場/.test(blob) && score < 45) {
+                score = Math.max(5, score - 12);
+            }
+            return Math.max(0, Math.min(100, Math.round(score)));
+        }
+
+        function getNonPassengerVehicleScoreCap(item) {
+            const blob = ` ${getSearchBlob(item)} `;
+            if (/バイク|オートバイ|二輪車|スクーター|\bmotorcycles?\b|\bmotorbikes?\b|\btwo[- ]wheeler\b/.test(blob)) {
+                return 18;
+            }
+            if (/路線バス|観光バス|高速バス|スクールバス|大型バス|中型バス|小型バス|\bbus(?:es)?\b|\bcoaches?\b/.test(blob)
+                || (blob.includes("バス") && !blob.includes("バスケット"))) {
+                return 28;
+            }
+            if ((blob.includes("トラック") && !blob.includes("サウンドトラック")) || /\btrucks?\b|\blorr(?:y|ies)\b/.test(blob)) {
+                return 35;
+            }
+            return null;
+        }
+
+        function enhanceNewsItem(item) {
+            const localTags = deriveLocalTags(item);
+            const storedScore = Number(window.DAILYNEWS_CONFIG.id === "exterior" ? item.exteriorScore ?? item.relevanceScore : item.interiorScore);
+            const baseInteriorScore = Number.isFinite(storedScore)
+                ? Math.max(0, Math.min(100, Math.round(storedScore)))
+                : computeInteriorRelevance({ ...item, localTags });
+            const vehicleScoreCap = getNonPassengerVehicleScoreCap({ ...item, localTags });
+            const interiorScore = vehicleScoreCap === null
+                ? baseInteriorScore
+                : Math.min(baseInteriorScore, vehicleScoreCap);
+            return {
+                ...item,
+                tags: localTags,
+                localTags,
+                interiorScore
+            };
+        }
+
+        function getDisplayImageUrl(src) {
+            if (!src) return src;
+            // RSS/CSV values may retain an HTML entity. Normalize it before
+            // inserting the URL so analysis cards do not double-escape it.
+            src = src.replace(/&amp;/gi, "&");
+            if (src.includes("images.cdn.autocar.co.uk") && src.includes("/styles/car_review_image_190/public/")) {
+                return src.replace("/styles/car_review_image_190/public/", "/").split("?")[0];
+            }
+            if (src.includes("media.autoexpress.co.uk") && src.includes("/t_rss_image_w_845/")) {
+                return src.replace("/t_rss_image_w_845/", "/f_auto,t_content-image-full-desktop@1/");
+            }
+            return src;
+        }
+
+        function getNewsImageUrl(item) {
+            if (!item) return "";
+            return window.interactionsData?.[item.id]?.imageUrlOverride || item.img || "";
+        }
+        window.getNewsImageUrl = getNewsImageUrl;
+        const TITLE_ICONS = {
+            world: "page_images/icon_world.png",
+            jp: "page_images/icon_jp.png",
+            cn: "page_images/icon_cn.png",
+            in: "page_images/icon_in.png",
+            us: "page_images/icon_us.png",
+            eu: "page_images/icon_eu.png",
+            paper: "page_images/icon_world.png"
+        };
+
+        // 画像フォールバック（読み込み不可時に中央へ「イメージ画像」を表示）
+        const FALLBACK_SRC = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#1b2735"/>
+                  <stop offset="100%" stop-color="#0d1520"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="450" fill="url(#g)" />
+              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                fill="#cdd7e6" font-family="Inter, 'Noto Sans JP', sans-serif"
+                font-size="40" font-weight="700">イメージ画像</text>
+            </svg>
+        `);
+
+        const FAVORITES_STORAGE_KEY = window.dailyNewsStorageKey("favorites_v1");
+        let favoriteIds = new Set();
+        let favoritesOnly = false;
+        let newOnly = false;
+        let selectedFavoriteKeys = new Set();
+        let activeCountries = new Set(["world"]);
+        let activeTags = new Set(["all"]);
+        let rankingBackState = null;
+
+        function loadFavorites() {
+            try {
+                const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+                if (!raw) return;
+                const list = JSON.parse(raw);
+                if (Array.isArray(list)) favoriteIds = new Set(list);
+            } catch (e) {
+                console.warn("Failed to load favorites:", e);
+            }
+        }
+
+        function saveFavorites() {
+            try {
+                localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([...favoriteIds]));
+            } catch (e) {
+                console.warn("Failed to save favorites:", e);
+            }
+        }
+
+        window.applyServerFavorites = (itemIds) => {
+            if (!Array.isArray(itemIds)) return;
+            favoriteIds = new Set(itemIds);
+            saveFavorites();
+            document.querySelectorAll(".favorite-btn").forEach(btn => {
+                const match = btn.getAttribute("onclick")?.match(/toggleFavorite\('([^']+)'/);
+                if (match) updateFavoriteButton(btn, favoriteIds.has(match[1]));
+            });
+            updateFavoritesToggle();
+            updateFavoritesActionsState();
+            if (favoritesOnly) applyFilters();
+        };
+
+        function isFavorite(itemId) {
+            return favoriteIds.has(itemId);
+        }
+
+        function updateFavoriteButton(btn, isFav) {
+            if (!btn) return;
+            btn.classList.toggle("active", isFav);
+            const icon = btn.querySelector(".fav-icon");
+            if (icon) icon.textContent = isFav ? "★" : "☆";
+        }
+
+        function updateFavoritesToggle() {
+            const btn = document.getElementById("favoritesToggle");
+            if (!btn) return;
+            const count = favoriteIds.size;
+            btn.textContent = `★ お気に入り${count ? ` (${count})` : ""}`;
+            btn.classList.toggle("active", favoritesOnly);
+            btn.setAttribute("aria-pressed", favoritesOnly ? "true" : "false");
+            updateRankingVisibility();
+        }
+
+        function updateFavoritesActionsVisibility() {
+            const panel = document.getElementById("favoritesActions");
+            if (!panel) return;
+            panel.classList.toggle("hidden", !favoritesOnly);
+        }
+
+        function updateRankingVisibility() {
+            const wrapper = document.getElementById("rankingWrapper");
+            const paperWrapper = document.getElementById("paperRankingWrapper");
+            const paperActive = activeCountries.has("paper");
+            if (wrapper) wrapper.classList.toggle("hidden", favoritesOnly || paperActive);
+            if (paperWrapper) paperWrapper.classList.toggle("hidden", favoritesOnly || !paperActive);
+            setRankingBackVisibility(Boolean(rankingBackState) && !paperActive);
+        }
+
+        function updateFavoritesActionsState() {
+            const countEl = document.getElementById("favoritesSelectedCount");
+            const selectedCount = selectedFavoriteKeys.size;
+            if (countEl) countEl.textContent = `選択: ${selectedCount}`;
+            const disableSelected = selectedCount === 0;
+            const btnCsv = document.getElementById("favoritesExportCsv");
+            const btnMail = document.getElementById("favoritesEmailShare");
+            if (btnCsv) btnCsv.disabled = disableSelected;
+            if (btnMail) btnMail.disabled = disableSelected;
+        }
+
+        function clearFavoriteSelections() {
+            selectedFavoriteKeys.clear();
+            document.querySelectorAll(".favorite-select").forEach(el => {
+                el.checked = false;
+            });
+            updateFavoritesActionsState();
+        }
+
+        function escapeCsv(value) {
+            const str = String(value ?? "");
+            return `"${str.replace(/\"/g, '\"\"')}"`;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatRichText(value) {
+            const escaped = escapeHtml(value ?? "");
+            return escaped
+                .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
+        }
+
+        function normalizeAnalysisRefs(value) {
+            const text = String(value ?? "");
+            return text.replace(/\[id:\s*([^\]]+)\]/gi, "[$1]");
+        }
+
+        function makeAnalysisRefLinks(htmlText, newsById) {
+            return htmlText.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
+                const ids = String(rawIds)
+                    .split(",")
+                    .map(s => s.trim())
+                    .filter(Boolean);
+                if (!ids.length) return all;
+                const links = ids.map(id => {
+                    const n = newsById.get(id);
+                    if (!n) return "";
+                    const titleAttr = escapeHtml(n.title || id);
+                    return `<button class="analysis-ref-link" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}">${escapeHtml(id)}</button>`;
+                }).filter(Boolean);
+                return links.length ? `<span class="analysis-ref-group">${links.join('')}</span>` : "";
+            });
+        }
+
+        function formatInlineTextWithRefs(value, newsById) {
+            const normalized = normalizeAnalysisRefs(value)
+                .replace(/\r\n/g, "\n")
+                .replace(/\n\s*(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])/gi, " $1")
+                .replace(/(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])\s*\n/gi, "$1 ")
+                .replace(/\n{2,}/g, "\n");
+            return makeAnalysisRefLinks(formatRichText(normalized), newsById);
+        }
+
+        function formatAnalysisTextWithRefs(value, newsById) {
+            const normalized = normalizeAnalysisRefs(value)
+                .replace(/\r\n/g, "\n")
+                // Keep refs on the same line as the sentence.
+                .replace(/\n\s*(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])/gi, " $1")
+                .replace(/(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])\s*\n/gi, "$1 ")
+                .replace(/\n{2,}/g, "\n");
+            const usedImageIds = new Set();
+
+            const makeFloatSource = (rawText) => {
+                const ids = [];
+                rawText.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
+                    String(rawIds).split(",").map(s => s.trim()).filter(Boolean).forEach(id => ids.push(id));
+                    return all;
+                });
+                const id = ids.find(x => {
+                    const n = newsById.get(x);
+                    return n && getNewsImageUrl(n) && !usedImageIds.has(x);
+                });
+                if (!id) return "";
+                usedImageIds.add(id);
+                const n = newsById.get(id);
+                const title = escapeHtml(n.title || id);
+                const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
+                return `
+                    <button class="analysis-float-source" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
+                        <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-float-source').style.display='none'">
+                        <span class="analysis-float-title">${title}</span>
+                    </button>`;
+            };
+
+            const sentences = normalized
+                .replace(/\n+/g, " ")
+                .match(/[^。！？!?]+[。！？!?]?/g) || [normalized];
+
+            return sentences
+                .map(s => s.trim())
+                .filter(Boolean)
+                .map(sentence => `<p>${makeFloatSource(sentence)}${makeAnalysisRefLinks(formatRichText(sentence), newsById)}</p>`)
+                .join("");
+        }
+
+        function extractAnalysisRefIds(value, newsById, limit = 6) {
+            const ids = [];
+            const seen = new Set();
+            const normalized = normalizeAnalysisRefs(value);
+            normalized.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
+                String(rawIds).split(",").map(s => s.trim()).filter(Boolean).forEach(id => {
+                    const n = newsById.get(id);
+                    if (!seen.has(id) && n && getNewsImageUrl(n)) {
+                        seen.add(id);
+                        ids.push(id);
+                    }
+                });
+                return all;
+            });
+            return ids.slice(0, limit);
+        }
+
+        function renderAnalysisSources(value, newsById) {
+            const ids = extractAnalysisRefIds(value, newsById, 6);
+            if (!ids.length) {
+                return `<div class="analysis-source-empty">関連画像が見つかりません。次回生成時に画像付きニュースを優先します。</div>`;
+            }
+            const cards = ids.map(id => {
+                const n = newsById.get(id);
+                const title = escapeHtml(n.title || id);
+                const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
+                return `
+                    <button class="analysis-source-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
+                        <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-source-card').style.display='none'">
+                        <span class="analysis-source-title">${title}</span>
+                    </button>`;
+            }).join("");
+            return `<div class="analysis-source-strip">${cards}</div>`;
+        }
+
+        function buildIdeaIndex() {
+            const ideas = new Map();
+            const insights = window.DAILY_INSIGHTS || [];
+            insights.forEach(day => {
+                const regions = ["jp", "cn", "in", "us", "eu"];
+                regions.forEach(region => {
+                    const list = (day.ideas && day.ideas[region]) ? day.ideas[region] : [];
+                    list.forEach(idea => {
+                        const key = `idea-${idea.id}`;
+                        if (!ideas.has(key)) {
+                            ideas.set(key, {
+                                type: "idea",
+                                key,
+                                id: idea.id,
+                                title: idea.title,
+                                desc: idea.desc,
+                                img: idea.img || "",
+                                date: day.date,
+                                country: region
+                            });
+                        }
+                    });
+                });
+            });
+            return ideas;
+        }
+
+        function getFavoriteItems(keys = null) {
+            const targetKeys = keys && keys.length ? keys : [...favoriteIds];
+            const items = [];
+            const newsMap = new Map(NEWS_DATA.map(n => [n.id, n]));
+            const ideaMap = buildIdeaIndex();
+            targetKeys.forEach(key => {
+                if (newsMap.has(key)) {
+                    const n = newsMap.get(key);
+                    items.push({
+                        type: "news",
+                        key,
+                        id: n.id,
+                        title: n.title,
+                        desc: n.desc,
+                        img: getNewsImageUrl(n),
+                        date: n.date,
+                        country: n.country,
+                        url: n.url,
+                        source: n.source
+                    });
+                } else if (ideaMap.has(key)) {
+                    items.push(ideaMap.get(key));
+                }
+            });
+            return items;
+        }
+
+        function downloadFavoritesCsv(keys = null) {
+            const items = getFavoriteItems(keys);
+            if (!items.length) return;
+            const header = ["type", "id", "title", "date", "country", "url", "image", "description"];
+            const rows = items.map(item => [
+                item.type,
+                item.id,
+                item.title,
+                item.date || "",
+                item.country || "",
+                item.url || "",
+                item.img || "",
+                item.desc || ""
+            ]);
+            const csv = [header, ...rows]
+                .map(row => row.map(escapeCsv).join(","))
+                .join("\r\n");
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            const stamp = getTodayKey().replace(/-/g, "");
+            link.download = `favorites_${stamp}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        function buildFavoritesEmailHtml(items) {
+            const cards = items.map(item => {
+                const title = escapeHtml(item.title);
+                const desc = escapeHtml(item.desc).replace(/\n/g, "<br>");
+                const img = item.img ? `<img src="${item.img}" alt="${title}" style="max-width:100%; border-radius:12px; margin:8px 0;">` : "";
+                const url = item.url ? `<div><a href="${item.url}" target="_blank" rel="noopener">${item.url}</a></div>` : "";
+                const meta = `<div style="color:#667085;font-size:12px;">${item.type === "idea" ? "アイデア" : "記事"} / ${item.date || "-"} / ${COUNTRY_NAMES[item.country] || item.country || "-"}</div>`;
+                return `
+                    <div style="border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin:12px 0;background:#f9fafb;">
+                        <div style="font-weight:700;font-size:16px;color:#111827;">${title}</div>
+                        ${meta}
+                        ${img}
+                        <div style="font-size:14px;color:#111827;line-height:1.6;">${desc}</div>
+                        ${url}
+                    </div>`;
+            }).join("");
+            return `
+                <div style="font-family:'Noto Sans JP', Arial, sans-serif;background:#ffffff;color:#111827;padding:16px;">
+                    <h2 style="margin:0 0 12px;">お気に入り共有</h2>
+                    ${cards}
+                </div>`;
+        }
+
+        function buildFavoritesPlainText(items) {
+            return items.map((item, idx) => {
+                return [
+                    `[${idx + 1}] ${item.title}`,
+                    item.desc || "",
+                    item.url || "",
+                    `(${item.type === "idea" ? "アイデア" : "記事"} / ${item.date || "-"} / ${COUNTRY_NAMES[item.country] || item.country || "-"})`
+                ].filter(Boolean).join("\n");
+            }).join("\n\n");
+        }
+
+        function toBase64Utf8(str) {
+            const bytes = new TextEncoder().encode(str);
+            let binary = "";
+            bytes.forEach(b => binary += String.fromCharCode(b));
+            return btoa(binary);
+        }
+
+        function chunkBase64(str, size = 76) {
+            return (str.match(new RegExp(`.{1,${size}}`, "g")) || []).join("\r\n");
+        }
+
+        function downloadFavoritesEml(subject, html, plainText) {
+            const boundary = `----=_Part_${Math.random().toString(36).slice(2)}`;
+            const htmlBase64 = chunkBase64(toBase64Utf8(html));
+            const eml = [
+                `Subject: ${subject}`,
+                "MIME-Version: 1.0",
+                `Content-Type: multipart/alternative; boundary=\"${boundary}\"`,
+                "",
+                `--${boundary}`,
+                "Content-Type: text/plain; charset=UTF-8",
+                "Content-Transfer-Encoding: 7bit",
+                "",
+                plainText,
+                `--${boundary}`,
+                "Content-Type: text/html; charset=UTF-8",
+                "Content-Transfer-Encoding: base64",
+                "",
+                htmlBase64,
+                `--${boundary}--`,
+                ""
+            ].join("\r\n");
+            const blob = new Blob([eml], { type: "message/rfc822" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            const stamp = getTodayKey().replace(/-/g, "");
+            link.download = `favorites_${stamp}.eml`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        async function shareFavoritesByEmail(keys = null) {
+            const items = getFavoriteItems(keys);
+            if (!items.length) return;
+            const subject = items.length === 1 ? items[0].title : `お気に入り共有 (${items.length}件)`;
+            const html = buildFavoritesEmailHtml(items);
+            const plain = buildFavoritesPlainText(items);
+            if (navigator.clipboard && window.ClipboardItem) {
+                try {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            "text/html": new Blob([html], { type: "text/html" }),
+                            "text/plain": new Blob([plain], { type: "text/plain" })
+                        })
+                    ]);
+                } catch (e) {
+                    console.warn("Clipboard copy failed:", e);
+                }
+            }
+            const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(plain)}`;
+            window.open(mailto, "_blank");
+            downloadFavoritesEml(subject, html, plain);
+            alert("テキストメールを開きました。HTML表示は.emlを開くとレンダリングされます。");
+        }
+
+        window.toggleFavorite = (itemId, btn) => {
+            if (!itemId) return;
+            if (favoriteIds.has(itemId)) {
+                favoriteIds.delete(itemId);
+                selectedFavoriteKeys.delete(itemId);
+            } else {
+                favoriteIds.add(itemId);
+            }
+            saveFavorites();
+            updateFavoriteButton(btn, favoriteIds.has(itemId));
+            updateFavoritesToggle();
+            updateFavoritesActionsState();
+            window.dailyNewsAccount?.setFavorite(itemId, favoriteIds.has(itemId)).catch(error => {
+                console.warn("Favorite sync failed:", error.message);
+            });
+            if (favoritesOnly) applyFilters();
+        };
+
+        function setRankingBackVisibility(visible) {
+            const wrapper = document.getElementById("rankingBack");
+            if (!wrapper) return;
+            wrapper.classList.toggle("hidden", !visible);
+        }
+
+        function captureFilterState() {
+            return {
+                search: document.getElementById("searchInput").value,
+                dateFrom: document.getElementById("dateFrom").value,
+                dateTo: document.getElementById("dateTo").value,
+                sortOrder: document.getElementById("sortOrder").value,
+                countries: new Set(activeCountries),
+                tags: new Set(activeTags),
+                favoritesOnly,
+                newOnly,
+                visibleLimit,
+                insightsVisibleLimit,
+                scrollY: window.scrollY
+            };
+        }
+
+        function restoreRankingState(options = {}) {
+            if (!rankingBackState) return;
+            if (!options.fromPopState && history.state?.dailyNewsDetail) {
+                history.back();
+                return;
+            }
+            const state = rankingBackState;
+            const scrollTarget = state.scrollTarget || null;
+            document.getElementById("searchInput").value = state.search || "";
+            document.getElementById("dateFrom").value = state.dateFrom || "";
+            document.getElementById("dateTo").value = state.dateTo || "";
+            document.getElementById("sortOrder").value = state.sortOrder || "new-first";
+            activeCountries = new Set(state.countries || ["world"]);
+            activeTags = new Set(state.tags || ["all"]);
+            favoritesOnly = Boolean(state.favoritesOnly);
+            newOnly = Boolean(state.newOnly);
+            visibleLimit = Number(state.visibleLimit || 30);
+            insightsVisibleLimit = Number(state.insightsVisibleLimit || 1);
+            updateFavoritesToggle();
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            rankingBackState = null;
+            setRankingBackVisibility(false);
+            if (state.returnToAccount) {
+                setTimeout(() => window.dailyNewsAccount?.open(), 180);
+            }
+            if (scrollTarget) {
+                const el = document.getElementById(scrollTarget);
+                if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+            } else {
+                setTimeout(() => window.scrollTo({ top: Number(state.scrollY || 0), behavior: "smooth" }), 120);
+            }
+        }
+
+        /* 考察の参照サムネイル用: 戻り先を analysisSection に指定 */
+        function showNewsItemFromRef(itemId) {
+            showNewsItem(itemId, true);
+            if (rankingBackState) {
+                rankingBackState.scrollTarget = "analysisSection";
+            }
+        }
+
+        function showIdeaItem(ideaId, returnToAccount = false) {
+            const targetId = String(ideaId).replace(/^idea-/, "");
+            const day = (window.DAILY_INSIGHTS || []).find(entry =>
+                ["jp", "cn", "in", "us", "eu"].some(region =>
+                    (entry.ideas?.[region] || []).some(idea => String(idea.id) === targetId)
+                )
+            );
+            if (!day) return;
+            beginInternalNavigation(null, returnToAccount);
+            document.getElementById("searchInput").value = "";
+            document.getElementById("dateFrom").value = day.date;
+            document.getElementById("dateTo").value = day.date;
+            newOnly = false;
+            favoritesOnly = false;
+            activeCountries = new Set(["world"]);
+            activeTags = new Set(["all"]);
+            insightsVisibleLimit = Math.max(insightsVisibleLimit, (window.DAILY_INSIGHTS || []).length);
+            updateFavoritesToggle();
+            updateCountryChips();
+            updateTagChips();
+            applyFilters();
+            updateURL();
+            setTimeout(() => {
+                const card = document.getElementById(`idea-card-${targetId}`);
+                if (!card) return;
+                card.scrollIntoView({ behavior: "smooth", block: "center" });
+                card.classList.add("card-highlight");
+                setTimeout(() => card.classList.remove("card-highlight"), 1500);
+            }, 120);
+        }
+
+        window.showNewsItem = showNewsItem;
+        window.showNewsItemFromRef = showNewsItemFromRef;
+        window.showIdeaItem = showIdeaItem;
+
+        function setupRankingToggle(toggleId, bodyId, listId) {
+            const toggle = document.getElementById(toggleId);
+            const body = document.getElementById(bodyId);
+            const list = document.getElementById(listId);
+            if (!toggle || !body) return;
+            // Recompute the three-card preview after wrapping or font sizes change.
+            if (list && typeof ResizeObserver !== "undefined") {
+                new ResizeObserver(() => updateRankingHeight(body, list)).observe(list);
+            }
+            toggle.addEventListener("click", () => {
+                const isCollapsed = body.classList.toggle("collapsed");
+                toggle.textContent = isCollapsed ? "開く" : "閉じる";
+                toggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+                updateRankingHeight(body, list);
+            });
+        }
+
+        async function init() {
+            try {
+                if (window.__dataScriptsReady) {
+                    try {
+                        await window.__dataScriptsReady;
+                    } catch (e) {
+                        console.warn("Data scripts failed to load", e);
+                    }
+                }
+                if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                    await window.__publicationStatusReady;
+                    const statusLine = document.getElementById("exteriorPublicationStatus");
+                    statusLine.hidden = false;
+                    statusLine.textContent = describeExteriorPublication(window.EXTERIOR_PUBLICATION_STATUS, window.LOADED_NEWS_DATA);
+                    updateUpdatedAt();
+                }
+                if (window.LOADED_NEWS_DATA) {
+                    NEWS_DATA = window.LOADED_NEWS_DATA.map(enhanceNewsItem);
+                    console.log("News data loaded:", NEWS_DATA.length, "items");
+                    setNewDateRangeFromNews(NEWS_DATA);
+                    normalizeIsNewFlags(NEWS_DATA);
+                    loadFavorites();
+                    if (favoriteIds.size) {
+                        const validNews = new Set(NEWS_DATA.map(n => n.id));
+                        const validIdeas = new Set(buildIdeaIndex().keys());
+                        const filtered = [...favoriteIds].filter(id => validNews.has(id) || validIdeas.has(id));
+                        favoriteIds = new Set(filtered);
+                        saveFavorites();
+                    }
+                    updateFavoritesToggle();
+                    document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                    updateNewCountBadges();
+                    const newCounts = getNewCounts(NEWS_DATA);
+                    if (newCounts.world > visibleLimit) {
+                        visibleLimit = newCounts.world;
+                    }
+                    updateTitleIcon();
+                    updateUpdatedAt();
+                    // 初期ランキング描画（interactionsデータなし）
+                    // loadInteractions完了後に再描画される
+                    renderAllRankings();
+                } else {
+                    console.error("News data not loaded from JS file");
+                }
+
+                const tagFilters = document.getElementById("tagFilters");
+                const baseTags = window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES.map(rule => rule.tag) : ALL_TAGS;
+                const displayTags = [...new Set([...baseTags, ...NEWS_DATA.flatMap(n => n.tags || [])])];
+                displayTags.forEach(tag => {
+                    const chip = document.createElement("span");
+                    chip.className = "chip";
+                    chip.dataset.tag = tag;
+                    chip.appendChild(document.createTextNode(tag));
+                    const newCount = document.createElement("span");
+                    newCount.className = "new-count hidden";
+                    newCount.dataset.tag = tag;
+                    chip.appendChild(newCount);
+                    tagFilters.appendChild(chip);
+                });
+
+                const tagToggle = document.getElementById("tagToggle");
+                if (tagToggle) {
+                    tagToggle.addEventListener("click", () => {
+                        const expanded = tagFilters.classList.toggle("expanded");
+                        tagToggle.textContent = expanded ? "閉じる" : "もっと見る";
+                        tagToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+                    });
+                }
+
+                document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                updateNewCountBadges();
+
+                restoreFilterStateFromURL({ render: false });
+                history.replaceState({ ...(history.state || {}), dailyNewsFilter: true }, "", location.href);
+
+                document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
+                document.getElementById("tagFilters").addEventListener("click", handleTagClick);
+                const applyManualDateFilter = () => {
+                    newOnly = false;
+                    applyFilters();
+                    updateURL("push");
+                };
+                document.getElementById("dateFrom").addEventListener("change", applyManualDateFilter);
+                document.getElementById("dateTo").addEventListener("change", applyManualDateFilter);
+                const searchInput = document.getElementById("searchInput");
+                searchInput.addEventListener("input", applyFilters);
+                searchInput.addEventListener("change", () => updateURL("push"));
+                document.getElementById("sortOrder").addEventListener("change", () => {
+                    applyFilters();
+                    updateURL("push");
+                });
+                const favoritesToggle = document.getElementById("favoritesToggle");
+                if (favoritesToggle) {
+                    favoritesToggle.addEventListener("click", () => {
+                        newOnly = false;
+                        favoritesOnly = !favoritesOnly;
+                        if (!favoritesOnly) clearFavoriteSelections();
+                        updateFavoritesToggle();
+                        updateFavoritesActionsVisibility();
+                        applyFilters();
+                        updateURL("push");
+                    });
+                }
+
+                const selectAllBtn = document.getElementById("favoritesSelectAll");
+                if (selectAllBtn) {
+                    selectAllBtn.addEventListener("click", () => {
+                        document.querySelectorAll(".favorite-select").forEach(el => {
+                            el.checked = true;
+                            selectedFavoriteKeys.add(el.dataset.favKey);
+                        });
+                        updateFavoritesActionsState();
+                    });
+                }
+
+                const clearSelectBtn = document.getElementById("favoritesClearSelection");
+                if (clearSelectBtn) clearSelectBtn.addEventListener("click", clearFavoriteSelections);
+
+                const exportCsvBtn = document.getElementById("favoritesExportCsv");
+                if (exportCsvBtn) exportCsvBtn.addEventListener("click", () => {
+                    downloadFavoritesCsv([...selectedFavoriteKeys]);
+                });
+                const exportCsvAllBtn = document.getElementById("favoritesExportCsvAll");
+                if (exportCsvAllBtn) exportCsvAllBtn.addEventListener("click", () => {
+                    downloadFavoritesCsv();
+                });
+                const emailBtn = document.getElementById("favoritesEmailShare");
+                if (emailBtn) emailBtn.addEventListener("click", () => {
+                    shareFavoritesByEmail([...selectedFavoriteKeys]);
+                });
+                const emailAllBtn = document.getElementById("favoritesEmailShareAll");
+                if (emailAllBtn) emailAllBtn.addEventListener("click", () => {
+                    shareFavoritesByEmail();
+                });
+
+                document.addEventListener("change", (event) => {
+                    const target = event.target;
+                    if (!target || !target.classList.contains("favorite-select")) return;
+                    const key = target.dataset.favKey;
+                    if (target.checked) selectedFavoriteKeys.add(key);
+                    else selectedFavoriteKeys.delete(key);
+                    updateFavoritesActionsState();
+                });
+
+                const rankingBackBtn = document.getElementById("rankingBackBtn");
+                if (rankingBackBtn) rankingBackBtn.addEventListener("click", restoreRankingState);
+                window.addEventListener("popstate", () => {
+                    if (rankingBackState) {
+                        restoreRankingState({ fromPopState: true });
+                        return;
+                    }
+                    restoreFilterStateFromURL();
+                });
+                if (window.setupAccessAnalyticsToggle) window.setupAccessAnalyticsToggle();
+                if (window.initDailyNewsApi) window.initDailyNewsApi();
+                setupRankingToggle("rankingToggle", "rankingBody", "rankingList");
+                setupRankingToggle("paperRankingToggle", "paperRankingBody", "paperRankingList");
+                const rankingSort = document.getElementById("rankingSort");
+                if (rankingSort) rankingSort.addEventListener("change", renderAllRankings);
+                const rankingScope = document.getElementById("rankingScope");
+                if (rankingScope) rankingScope.addEventListener("change", renderAllRankings);
+                const paperRankingSort = document.getElementById("paperRankingSort");
+                if (paperRankingSort) paperRankingSort.addEventListener("change", renderPaperRanking);
+                const paperRankingScope = document.getElementById("paperRankingScope");
+                if (paperRankingScope) paperRankingScope.addEventListener("change", renderPaperRanking);
+            } catch (e) {
+                console.error("Init failed:", e);
+            }
+
+            applyFilters();
+            if (window.setupHoverReadTracking) window.setupHoverReadTracking();
+
+            // アクセスカウンター更新
+            if (window.updateAccessCounter) window.updateAccessCounter();
+            updateFavoritesActionsVisibility();
+            updateFavoritesActionsState();
+            updateRankingVisibility();
+        }
+
+        function handleCountryClick(e) {
+            const chip = e.target.closest(".chip");
+            if (!chip || !chip.dataset.country) return;
+            newOnly = false;
+            const country = chip.dataset.country;
+            if (country === "world") {
+                activeCountries = new Set(["world"]);
+            } else {
+                // 単一選択に変更：選択した国のみをアクティブに
+                activeCountries = new Set([country]);
+            }
+            updateCountryChips();
+            applyFilters();
+            scheduleRankingUpdate();
+            updateURL("push");
+        }
+
+        function handleTagClick(e) {
+            const chip = e.target.closest(".chip");
+            if (!chip || !chip.dataset.tag) return;
+            newOnly = false;
+            const tag = chip.dataset.tag;
+            if (tag === "all") {
+                activeTags = new Set(["all"]);
+            } else {
+                activeTags.delete("all");
+                if (activeTags.has(tag)) activeTags.delete(tag);
+                else activeTags.add(tag);
+                if (activeTags.size === 0) activeTags.add("all");
+            }
+            updateTagChips();
+            applyFilters();
+            updateURL("push");
+        }
+
+        function updateCountryChips() {
+            document.querySelectorAll("#countryFilters .chip").forEach(c => {
+                c.classList.toggle("active", activeCountries.has(c.dataset.country));
+            });
+            updateTitleIcon();
+        }
+
+        function updateTagChips() {
+            document.querySelectorAll("#tagFilters .chip").forEach(c => {
+                c.classList.toggle("active", activeTags.has(c.dataset.tag));
+            });
+        }
+
+
+
+        // タグクリックで検索
+        function searchByTag(tag) {
+            newOnly = false;
+            document.getElementById("searchInput").value = tag;
+            applyFilters();
+            updateURL("push");
+        }
+
+        function captureNewsCardLayout(grid) {
+            const layout = new Map();
+            grid?.querySelectorAll(":scope > .card[id]").forEach(card => {
+                layout.set(card.id, card.getBoundingClientRect());
+            });
+            return layout;
+        }
+
+        function animateNewsCardReorder(grid, previousLayout) {
+            if (!grid || !previousLayout?.size) return;
+            if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
+
+            requestAnimationFrame(() => {
+                grid.querySelectorAll(":scope > .card[id]").forEach(card => {
+                    const previous = previousLayout.get(card.id);
+                    if (!previous || !card.isConnected || typeof card.animate !== "function") return;
+                    const current = card.getBoundingClientRect();
+                    const deltaX = previous.left - current.left;
+                    const deltaY = previous.top - current.top;
+                    const distance = Math.hypot(deltaX, deltaY);
+                    if (distance < 4) return;
+
+                    const duration = Math.min(1100, 700 + distance * 0.16);
+                    card.classList.add("reorder-moving");
+                    const animation = card.animate(
+                        [
+                            { transform: `translate(${deltaX}px, ${deltaY}px)`, opacity: 0.82 },
+                            { transform: "translate(0, 0)", opacity: 1 },
+                        ],
+                        {
+                            duration,
+                            easing: "cubic-bezier(0.22, 0.61, 0.36, 1)",
+                            fill: "none",
+                        }
+                    );
+                    const cleanup = () => card.classList.remove("reorder-moving");
+                    animation.addEventListener("finish", cleanup, { once: true });
+                    animation.addEventListener("cancel", cleanup, { once: true });
+                });
+            });
+        }
+
+        function applyFilters() {
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
+            const sortOrder = document.getElementById("sortOrder").value;
+
+            if (activeTags.size === 0) activeTags = new Set(["all"]);
+            if (activeCountries.size === 0) activeCountries = new Set(["world"]);
+            if (from && to && from > to) {
+                document.getElementById("dateFrom").value = "";
+            }
+
+            // 1. Filter
+            let filteredData = NEWS_DATA.filter(n => {
+                if (isGloballyHidden(n)) return false;
+                // Country Filter
+                if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
+                if (favoritesOnly && !isFavorite(n.id)) return false;
+                if (newOnly && !isNewContent(n)) return false;
+
+                const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ")).toLowerCase();
+
+                // Tag Filter (tag text can match title/desc as well)
+                if (!activeTags.has("all")) {
+                    const tagMatches = [...activeTags].some(tag => searchable.includes(tag.toLowerCase()));
+                    if (!tagMatches) return false;
+                }
+
+                // Date Filter (YYYY-MM-DD string comparison works)
+                if (from && n.date < from) return false;
+                if (to && n.date > to) return false;
+
+                // Text Search
+                if (searchText && !searchable.includes(searchText)) return false;
+
+                return true;
+            });
+
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly || newOnly);
+            const availableNews = visibleNewsData();
+            if (!hasActiveFilter && filteredData.length === 0 && availableNews.length > 0) {
+                filteredData = [...availableNews];
+            }
+
+            // 2. Sort
+            const countryOrder = { jp: 0, cn: 1, in: 2, us: 3, eu: 4, paper: 5 };
+            const interactions = window.interactionsData || {};
+            filteredData.sort((a, b) => {
+                const aNew = isNewContent(a);
+                const bNew = isNewContent(b);
+                if (sortOrder === "new-first") {
+                    if (aNew !== bNew) return aNew ? -1 : 1;
+                    if (aNew && bNew) {
+                        const reactionA = (interactions[a.id]?.likes || 0) + (interactions[a.id]?.comments || 0) * 2;
+                        const reactionB = (interactions[b.id]?.likes || 0) + (interactions[b.id]?.comments || 0) * 2;
+                        if (reactionB !== reactionA) return reactionB - reactionA;
+                        const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
+                        const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
+                        if (scoreB !== scoreA) return scoreB - scoreA;
+                    }
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "relevance-desc") {
+                    const scoreA = typeof a.interiorScore === "number" ? a.interiorScore : computeInteriorRelevance(a);
+                    const scoreB = typeof b.interiorScore === "number" ? b.interiorScore : computeInteriorRelevance(b);
+                    if (scoreB !== scoreA) return scoreB - scoreA;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "date-asc") {
+                    return a.date.localeCompare(b.date);
+                } else if (sortOrder === "country") {
+                    // First by country (jp -> cn -> in), then by date desc within same country
+                    const countryDiff = (countryOrder[a.country] ?? 99) - (countryOrder[b.country] ?? 99);
+                    if (countryDiff !== 0) return countryDiff;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "likes-desc") {
+                    // Sort by likes (descending), then by date desc
+                    const likesA = interactions[a.id]?.likes || 0;
+                    const likesB = interactions[b.id]?.likes || 0;
+                    if (likesB !== likesA) return likesB - likesA;
+                    return b.date.localeCompare(a.date);
+                } else if (sortOrder === "comments-desc") {
+                    // Sort by comment count (descending), then by date desc
+                    const commentsA = interactions[a.id]?.comments || 0;
+                    const commentsB = interactions[b.id]?.comments || 0;
+                    if (commentsB !== commentsA) return commentsB - commentsA;
+                    return b.date.localeCompare(a.date);
+                } else {
+                    return b.date.localeCompare(a.date);
+                }
+            });
+
+            // 3. Render (Pagination)
+            const grid = document.getElementById("newsGrid");
+            const previousCardLayout = captureNewsCardLayout(grid);
+            grid.innerHTML = "";
+
+            const itemsToShow = filteredData.slice(0, visibleLimit);
+
+            itemsToShow.forEach(n => {
+                const interaction = window.interactionsData?.[n.id] || {};
+                const likeCount = interaction.likes || 0;
+                const commentCount = interaction.comments || 0;
+                const readCount = (typeof interaction.reads === "number")
+                    ? interaction.reads
+                    : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
+                const favActive = isFavorite(n.id);
+                const favSelected = favoritesOnly && selectedFavoriteKeys.has(n.id);
+                const card = document.createElement("article");
+                card.className = "card";
+                card.id = `card-${n.id}`;
+                card.dataset.newsId = n.id;
+                const isNew = isNewContent(n);
+                const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
+                const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
+                const resolvedImage = getNewsImageUrl(n);
+                const displayImg = getDisplayImageUrl(resolvedImage);
+                card.innerHTML = `
+            <div class="thumb">
+                <img src="${displayImg}" alt="${n.title}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback">
+                <div class="fallback-overlay">イメージ画像</div>
+                ${isNew ? '<span class="new-badge">New</span>' : ''}
+                <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
+                <span class="relevance-badge"${relevanceReason}>関連度 ${relevance}%</span>
+                ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
+            </div>
+            <div class="content">
+                <div class="title">${n.title}</div>
+                <p class="desc">${n.desc}</p>
+                ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
+                ${n.summary ? `
+                <div class="summary-wrapper">
+                    <button class="summary-btn" onclick="toggleSummary(this)">詳細要約を見る</button>
+                    <div class="summary-content">${n.summary}</div>
+                </div>` : ''}
+                <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
+
+                
+                <div class="actions">
+                    <a class="btn" href="${escapeHtml(window.DailyNewsAnnotations?.articleUrl(n) ?? n.url)}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
+                    
+                    ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                    <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
+                        <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                    </button>
+                    <button class="action-btn" onclick="toggleLike('${n.id}', this)">
+                        <span>👍</span> <span class="count">${likeCount}</span>
+                    </button>
+                    <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
+                        <span>💬</span> <span class="count">${commentCount}</span>
+                    </button>
+                    <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${n.id}', this)">
+                        <span>🗑️</span>
+                    </button>
+                    <button class="action-btn admin-image-edit-btn" title="画像URLを変更" aria-label="画像URLを変更" onclick="requestImageUrlChange('${n.id}', this)">
+                        <span>🖼️</span>
+                    </button>
+
+                    <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
+                    <span class="source">${n.source}</span>
+                    <span class="card-date-meta">${n.date}</span>
+                    <span class="id-badge">${n.id}</span>
+                </div>
+    
+                <div class="comment-section">
+                    <div class="comment-list">
+                        <!-- Demo Comments -->
+                    </div>
+                    <div class="comment-input-area">
+                        <input type="text" class="comment-input" placeholder="コメントを入力..." onkeypress="if(event.key==='Enter') submitComment('${n.id}', this)">
+                        <button class="comment-submit" onclick="submitComment('${n.id}', this.previousElementSibling)">送信</button>
+                    </div>
+                </div>
+    
+            </div>`;
+                grid.appendChild(card);
+            });
+            animateNewsCardReorder(grid, previousCardLayout);
+
+            // Update Counts
+            document.getElementById("visibleCount").textContent = itemsToShow.length;
+
+            // Load More Button Visibility
+            const loadMoreBtn = document.getElementById("loadMoreBtn");
+            if (loadMoreBtn) {
+                if (filteredData.length > visibleLimit) {
+                    loadMoreBtn.style.display = "inline-block";
+                    loadMoreBtn.textContent = `もっと見る (あと ${filteredData.length - visibleLimit} 件)`;
+                } else if (isShowingDefaultNewRange() && availableNews.some(item => item.date < NEW_DATE_RANGE.start)) {
+                    loadMoreBtn.style.display = "inline-block";
+                    loadMoreBtn.textContent = "もっと見る（過去の記事も表示）";
+                } else {
+                    loadMoreBtn.style.display = "none";
+                }
+            }
+
+            // Empty state removed
+            wireImageFallbacks(document);
+            if (window.refreshInteractionCounts) window.refreshInteractionCounts();
+            renderInsights();
+            updateRankingVisibility();
+            scheduleRankingUpdate();
+        }
+
+        function loadMore() {
+            newOnly = false;
+            if (isShowingDefaultNewRange()) {
+                document.getElementById("dateFrom").value = "";
+            }
+            visibleLimit += 30;
+            applyFilters();
+            updateURL("push");
+        }
+
+        window.refreshNewsReactionSort = () => {
+            if (document.getElementById("sortOrder")?.value === "new-first") applyFilters();
+        };
+
+        window.refreshNewsVisibility = () => {
+            document.getElementById("totalCount").textContent = visibleNewsData().length;
+            updateNewCountBadges();
+            applyFilters();
+        };
+
+
+        function restoreFilterStateFromURL(options = {}) {
+            const params = new URLSearchParams(window.location.search);
+            const latestDate = getLatestDate(NEWS_DATA);
+            const exteriorNoNew = window.DAILYNEWS_CONFIG.id === "exterior"
+                && (!window.EXTERIOR_PUBLICATION_STATUS || window.EXTERIOR_PUBLICATION_STATUS.selected_count === 0);
+            const oneDayOverride = window.DAILYNEWS_CONFIG.id === "exterior" ? null : INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
+            const defaultFrom = exteriorNoNew ? "" : (oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey());
+            const defaultTo = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
+
+            newOnly = (!params.toString() && !exteriorNoNew) || params.get("new") === "1";
+            favoritesOnly = params.get("favorites") === "1";
+            activeCountries = params.has("countries")
+                ? new Set(params.get("countries").split(",").filter(Boolean))
+                : new Set(["world"]);
+            const requestedTags = params.has("tags")
+                ? params.get("tags").split(",").filter(Boolean)
+                : ["all"];
+            activeTags = new Set(requestedTags.includes("all") || requestedTags.length === 0 ? ["all"] : requestedTags);
+
+            document.getElementById("searchInput").value = params.get("q") || "";
+            document.getElementById("dateFrom").value = params.has("from") ? params.get("from") : defaultFrom;
+            document.getElementById("dateTo").value = params.has("to") ? params.get("to") : defaultTo;
+            document.getElementById("sortOrder").value = params.get("sort") || "new-first";
+
+            const requestedLimit = Number(params.get("limit"));
+            const requestedInsightsLimit = Number(params.get("insights"));
+            visibleLimit = Number.isFinite(requestedLimit) && requestedLimit >= 30
+                ? requestedLimit
+                : Math.max(30, newOnly ? getNewCounts(NEWS_DATA).world : 30);
+            insightsVisibleLimit = Number.isFinite(requestedInsightsLimit) && requestedInsightsLimit >= 1
+                ? requestedInsightsLimit
+                : 1;
+
+            updateCountryChips();
+            updateTagChips();
+            updateFavoritesToggle();
+            updateFavoritesActionsVisibility();
+            if (options.render !== false) {
+                applyFilters();
+                window.scrollTo({ top: 0, behavior: "auto" });
+            }
+        }
+
+        function updateURL(mode = "replace") {
+            const params = new URLSearchParams();
+            if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
+            if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
+            if (newOnly) params.set("new", "1");
+            if (favoritesOnly) params.set("favorites", "1");
+            const query = document.getElementById("searchInput").value.trim();
+            if (query) params.set("q", query);
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            if (from) params.set("from", from);
+            if (to) params.set("to", to);
+            const sortOrder = document.getElementById("sortOrder").value;
+            if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);
+            if (visibleLimit > 30) params.set("limit", String(visibleLimit));
+            if (insightsVisibleLimit > 1) params.set("insights", String(insightsVisibleLimit));
+            const newURL = params.toString() ? `${location.pathname}?${params}` : location.pathname;
+            const currentURL = `${location.pathname}${location.search}`;
+            const nextState = { ...(history.state || {}), dailyNewsFilter: true };
+            if (mode === "push" && newURL !== currentURL) {
+                history.pushState(nextState, "", newURL);
+            } else {
+                history.replaceState(nextState, "", newURL);
+            }
+        }
+
+
+
+        let insightsVisibleLimit = 1;  // 初期表示は最新のみ
+
+        function renderInsights() {
+            const container = document.getElementById("insightsContainer");
+            container.innerHTML = "";
+            const newsById = new Map((NEWS_DATA || []).map(n => [n.id, n]));
+
+            const from = document.getElementById("dateFrom").value;
+            const to = document.getElementById("dateTo").value;
+            const ignoreInsightDateFilter = isShowingDefaultNewRange();
+            const insightFrom = ignoreInsightDateFilter ? "" : from;
+            const insightTo = ignoreInsightDateFilter ? "" : to;
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
+
+            const insightsData = window.DAILY_INSIGHTS || [];
+            // 最新のインサイト日付を取得
+            const latestInsightDate = insightsData.length > 0 ? insightsData[0].date : null;
+            const ideaTextForSearch = (ideas) => {
+                return (ideas || [])
+                    .filter(idea => !favoritesOnly || isFavorite(`idea-${idea.id}`))
+                    .map(idea => `${idea.title} ${idea.desc}`)
+                    .join(" ");
+            };
+
+            let visibleCount = 0;
+            let analysisAnchorInserted = false;
+            let ideasAnchorInserted = false;
+            const filteredInsights = insightsData.filter(day => {
+                // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
+                const isNewInsight = isNewInsightDate(day.date);
+                // Date Filter (supports single date or range like YYYY-MM-DD〜YYYY-MM-DD)
+                let rangeStart = day.date;
+                let rangeEnd = day.date;
+                if (day.date.includes("〜") || day.date.includes("～") || day.date.includes("~")) {
+                    const parts = day.date.split(/[〜～~]/).map(s => s.trim()).filter(Boolean);
+                    if (parts.length >= 2) {
+                        rangeStart = parts[0];
+                        rangeEnd = parts[1];
+                    }
+                }
+                if (insightFrom && rangeEnd < insightFrom) return false;
+                if (insightTo && rangeStart > insightTo) return false;
+
+                // Active Countries Logic
+                const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
+                const showCn = (activeCountries.has("world") || activeCountries.has("cn")) && day.analysis.cn;
+                const showIn = (activeCountries.has("world") || activeCountries.has("in")) && day.analysis.in;
+                const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
+                const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
+
+                const jpIdeas = day.ideas?.jp || [];
+                const cnIdeas = day.ideas?.cn || [];
+                const inIdeas = day.ideas?.in || [];
+                const usIdeas = day.ideas?.us || [];
+                const euIdeas = day.ideas?.eu || [];
+                const hasFavJp = showJp && jpIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavCn = showCn && cnIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavIn = showIn && inIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavUs = showUs && usIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasFavEu = showEu && euIdeas.some(idea => isFavorite(`idea-${idea.id}`));
+                const hasAnyFavIdeas = hasFavJp || hasFavCn || hasFavIn || hasFavUs || hasFavEu;
+
+                // Text Search Check
+                let hasMatch = false;
+                if (!searchText) {
+                    hasMatch = true;
+                } else {
+                    const allText = [
+                        day.date,
+                        !favoritesOnly && showJp ? day.analysis.jp : "",
+                        !favoritesOnly && showCn ? day.analysis.cn : "",
+                        !favoritesOnly && showIn ? day.analysis.in : "",
+                        !favoritesOnly && showUs ? day.analysis.us : "",
+                        !favoritesOnly && showEu ? day.analysis.eu : "",
+                        showJp ? ideaTextForSearch(jpIdeas) : "",
+                        showCn ? ideaTextForSearch(cnIdeas) : "",
+                        showIn ? ideaTextForSearch(inIdeas) : "",
+                        showUs ? ideaTextForSearch(usIdeas) : "",
+                        showEu ? ideaTextForSearch(euIdeas) : ""
+                    ].join(" ").toLowerCase();
+                    if (allText.includes(searchText)) hasMatch = true;
+                }
+
+                if (!hasMatch) return false;
+
+                if (favoritesOnly && !hasAnyFavIdeas) return false;
+
+                // Only render if there is content to show for active countries
+                if (!showJp && !showCn && !showIn && !showUs && !showEu) return false;
+                return true;
+            });
+
+            // 表示するインサイトを制限
+            const insightsToShow = favoritesOnly
+                ? filteredInsights
+                : filteredInsights.slice(0, insightsVisibleLimit);
+
+            insightsToShow.forEach(day => {
+                // この日付が最新かどうかを判定（2026-01-06を含む日付のみNew）
+                const isNewInsight = isNewInsightDate(day.date);
+
+                // 国別表示フラグを再計算
+                const showJp = (activeCountries.has("world") || activeCountries.has("jp")) && day.analysis.jp;
+                const showCn = (activeCountries.has("world") || activeCountries.has("cn")) && day.analysis.cn;
+                const showIn = (activeCountries.has("world") || activeCountries.has("in")) && day.analysis.in;
+                const showUs = (activeCountries.has("world") || activeCountries.has("us")) && day.analysis.us;
+                const showEu = (activeCountries.has("world") || activeCountries.has("eu")) && day.analysis.eu;
+
+                // Create Wrapper
+                const wrapper = document.createElement("div");
+                wrapper.className = "daily-insight-group";
+
+                // Analysis Section
+                let analysisHTML = "";
+                if (!analysisAnchorInserted) {
+                    analysisHTML += `<div id="analysisSection" class="jump-anchor"></div>`;
+                    analysisAnchorInserted = true;
+                }
+                if (!favoritesOnly) {
+                    analysisHTML += `
+                    <section class="analysis-section" style="margin-top: 48px;">
+                        <h2 class="section-title"><span class="section-icon">💡</span> 考察 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
+                        <div class="analysis-grid">
+                `;
+
+                if (showJp) analysisHTML += `
+                    <div class="analysis-card region-jp">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-jp" style="width:32px; height:22px;"></span>
+                            <span class="country-label">JAPAN</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.jp, newsById)}</div>
+                    </div>`;
+
+                if (showCn) analysisHTML += `
+                    <div class="analysis-card region-cn">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-cn" style="width:32px; height:22px;"></span>
+                            <span class="country-label">CHINA</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.cn, newsById)}</div>
+                    </div>`;
+
+                if (showIn) analysisHTML += `
+                    <div class="analysis-card region-in">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-in" style="width:32px; height:22px;"></span>
+                            <span class="country-label">INDIA</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.in, newsById)}</div>
+                    </div>`;
+
+                if (showUs) analysisHTML += `
+                    <div class="analysis-card region-us">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-us" style="width:32px; height:22px;"></span>
+                            <span class="country-label">USA</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.us, newsById)}</div>
+                    </div>`;
+
+                if (showEu) analysisHTML += `
+                    <div class="analysis-card region-eu">
+                        <div class="flag-header">
+                            <span class="flag-icon flag-eu" style="width:32px; height:22px;"></span>
+                            <span class="country-label">EUROPE</span>
+                        </div>
+                        <div class="analysis-text-body">${formatAnalysisTextWithRefs(day.analysis.eu, newsById)}</div>
+                    </div>`;
+
+                analysisHTML += `</div></section>`;
+                }
+
+
+                // Ideas Section
+                let ideasHTML = "";
+                if (!ideasAnchorInserted) {
+                    ideasHTML += `<div id="ideasSection" class="jump-anchor"></div>`;
+                    ideasAnchorInserted = true;
+                }
+                ideasHTML += `
+                    <section class="ideas-section">
+                        <h2 class="section-title"><span class="section-icon">🚀</span> 企画アイデア例 (${day.date})${isNewInsight ? '<span class="idea-new-badge">New</span>' : ''}</h2>
+                `;
+
+                const renderIdeas = (ideas, regionName, regionClass, flagIcon) => {
+                    const visibleIdeas = favoritesOnly
+                        ? ideas.filter(idea => isFavorite(`idea-${idea.id}`))
+                        : ideas;
+                    if (visibleIdeas.length > 0) {
+                        ideasHTML += `
+                            <div class="region-section ${regionClass}">
+                                <div class="region-title-wrapper">
+                                    ${flagIcon}
+                                    <span class="region-title-text">${regionName}</span>
+                                </div>
+                                <div class="ideas-grid">
+                        `;
+
+                        visibleIdeas.forEach(idea => {
+                            const ideaKey = `idea-${idea.id}`;
+                            const favActive = isFavorite(ideaKey);
+                            const favSelected = favoritesOnly && selectedFavoriteKeys.has(ideaKey);
+                            ideasHTML += `
+                                <div class="idea-card" id="idea-card-${idea.id}">
+                                    <div class="idea-header">
+                                        <span class="idea-number">${idea.id}</span>
+                                        <span class="idea-title">${idea.title}</span>
+                                    </div>
+                                    <div class="idea-body">
+                                        ${idea.img && window.DAILYNEWS_CONFIG.imageGenerationEnabled ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
+                                        <div class="idea-content">
+                                            <p class="idea-desc">${formatInlineTextWithRefs(idea.desc, newsById)}</p>
+                                            <div class="actions">
+                                                ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${ideaKey}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                                                <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${ideaKey}', this)">
+                                                    <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                                                </button>
+                                                <button class="action-btn" onclick="toggleLike('${idea.id}', this)">
+                                                    <span>👍</span> <span class="count">0</span>
+                                                </button>
+                                                <button class="action-btn btn-comment" onclick="toggleComments('${idea.id}', this)">
+                                                    <span>💬</span> <span class="count">0</span>
+                                                </button>
+                                            </div>
+                                            <div class="comment-section">
+                                                <div class="comment-list"></div>
+                                                <div class="comment-input-area">
+                                                    <input type="text" class="comment-input" placeholder="コメント..." onkeypress="if(event.key==='Enter') submitComment('${idea.id}', this)">
+                                                    <button class="comment-submit" onclick="submitComment('${idea.id}', this.previousElementSibling)">送信</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        ideasHTML += `</div></div>`;
+                    }
+                };
+
+                // Note: removed single quotes around font-size style in Python string to avoid conflict
+                if (showJp) renderIdeas(day.ideas.jp || [], '日本市場向け', 'jp', '<span class="flag-icon flag-jp" style="width:28px; height:18px;"></span>');
+                if (showCn) renderIdeas(day.ideas.cn || [], '中国市場向け', 'cn', '<span class="flag-icon flag-cn" style="width:28px; height:18px;"></span>');
+                if (showIn) renderIdeas(day.ideas.in || [], 'インド市場向け', 'in', '<span class="flag-icon flag-in" style="width:28px; height:18px;"></span>');
+                if (showUs) renderIdeas(day.ideas.us || [], '米国市場向け', 'us', '<span class="flag-icon flag-us" style="width:28px; height:18px;"></span>');
+                if (showEu) renderIdeas(day.ideas.eu || [], '欧州市場向け', 'eu', '<span class="flag-icon flag-eu" style="width:28px; height:18px;"></span>');
+
+                ideasHTML += `</section>`;
+
+                wrapper.innerHTML = analysisHTML + ideasHTML;
+                container.appendChild(wrapper);
+            });
+            if (!analysisAnchorInserted) {
+                const anchor = document.createElement("div");
+                anchor.id = "analysisSection";
+                anchor.className = "jump-anchor";
+                container.appendChild(anchor);
+            }
+            if (!ideasAnchorInserted) {
+                const anchor = document.createElement("div");
+                anchor.id = "ideasSection";
+                anchor.className = "jump-anchor";
+                container.appendChild(anchor);
+            }
+            wireImageFallbacks(container);
+
+            // もっと見るボタン（インサイト用）
+            if (!favoritesOnly && filteredInsights.length > insightsVisibleLimit) {
+                const loadMoreDiv = document.createElement("div");
+                loadMoreDiv.style.cssText = "text-align:center; margin-top:20px;";
+                loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;">
+                    📚 もっと見る（過去の考察・アイデア例も表示 / あと ${filteredInsights.length - insightsVisibleLimit} 件）
+                </button>`;
+                container.appendChild(loadMoreDiv);
+            }
+            updateFavoritesActionsVisibility();
+            updateFavoritesActionsState();
+        }
+
+        function loadMoreInsights() {
+            insightsVisibleLimit += 3;
+            renderInsights();
+            updateURL("push");
+        }
+
+        function wireImageFallbacks(scope = document) {
+            scope.querySelectorAll("img.img-with-fallback").forEach(img => {
+                if (img.dataset.fallbackWired) return;
+                img.dataset.fallbackWired = "1";
+                img.addEventListener("load", () => {
+                    const overlay = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".fallback-overlay");
+                    if (overlay) overlay.style.display = "none";
+                    const src = img.currentSrc || img.src || "";
+                    const isPlaceholder = src.includes("placeholder") || src.includes("unsplash") || src.includes("thumb_default.png");
+                    if (!isPlaceholder) {
+                        const note = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".image-note");
+                        if (note) note.style.display = "none";
+                    }
+                });
+                img.addEventListener("error", () => {
+                    if (img.dataset.failed) return;
+                    img.dataset.failed = "1";
+                    img.src = FALLBACK_SRC;
+                    img.style.objectFit = "contain";
+                    const overlay = (img.closest(".thumb") || img.closest(".idea-image-wrapper"))?.querySelector(".fallback-overlay");
+                    if (overlay) overlay.style.display = "flex";
+                });
+            });
+        }
+
+        function toggleSummary(btn) {
+            const content = btn.nextElementSibling;
+            btn.classList.toggle('open');
+            content.classList.toggle('open');
+
+            if (content.classList.contains('open')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                btn.textContent = "詳細要約を閉じる";
+            } else {
+                content.style.maxHeight = null;
+                btn.textContent = "詳細要約を見る";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+
+</html>
