@@ -145,7 +145,10 @@ def article_paragraphs(html):
 
 
 def fingerprint(item):
-    value = json.dumps([VERSION, item.get("url"), item.get("title"), item.get("desc")], ensure_ascii=False)
+    fields = [VERSION, item.get("url"), item.get("title"), item.get("desc")]
+    if item.get("edition") == "exterior":
+        fields.insert(1, "exterior")
+    value = json.dumps(fields, ensure_ascii=False)
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
@@ -154,7 +157,11 @@ def choose_excerpt(item, paragraphs):
     summary = plain(f"{item.get('title', '')} {item.get('desc', '')}")
     folded = summary.casefold()
     # Prefer specific cabin/HMI/material evidence over generic price and range facts.
-    topics = [(p, 7 if n < 11 or n in {22, 23} else 4) for n, p in enumerate(TOPICS) if p.search(summary)]
+    active_topics = TOPICS
+    if item.get("edition") == "exterior":
+        from dailynews.exterior import TOPICS as EXTERIOR_TOPICS
+        active_topics = EXTERIOR_TOPICS
+    topics = [(p, 7 if n < 11 or n in {22, 23} else 4) for n, p in enumerate(active_topics) if p.search(summary)]
     terms = {w.casefold() for w in re.findall(r"[A-Za-z][A-Za-z0-9-]{2,}", summary) if w.casefold() not in STOP_WORDS}
     for brand, aliases in BRAND_ALIASES.items():
         if brand in folded or any(a in summary for a in aliases):

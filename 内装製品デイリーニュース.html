@@ -9,7 +9,13 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <script src="dailynews_config.js?v=20260915-editions-1"></script>
     <script>
+        const exteriorPath = /^\/exterior(?:\/|$)/.test(location.pathname);
+        window.DAILYNEWS_CONFIG = window.DAILYNEWS_CONFIG || { id: exteriorPath ? "exterior" : "interior", name: exteriorPath ? "外装製品デイリーニュース" : "内装製品デイリーニュース", basePath: exteriorPath ? "/exterior" : "", apiBase: exteriorPath ? "/exterior/api" : "/api", allowGuestRead: exteriorPath, imageGenerationEnabled: !exteriorPath };
+        window.dailyNewsStorageKey = (key) => window.DAILYNEWS_CONFIG.id === "exterior" ? `dailynews_exterior:${key}` : key;
+        document.documentElement.dataset.edition = window.DAILYNEWS_CONFIG.id;
+        document.title = `${window.DAILYNEWS_CONFIG.name} [v2]`;
         if (location.hostname.toLowerCase().endsWith(".github.io")) {
             document.documentElement.classList.add("github-pages-migration");
         }
@@ -20,6 +26,12 @@
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
         rel="stylesheet">
     <style>
+[data-edition="exterior"] .interiorgram-link { display:none; }
+.edition-links { display:flex; grid-column:1 / -1; flex-wrap:wrap; gap:8px; align-items:center; margin:0; }
+.edition-links a,.edition-links button { color:var(--text); border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:12px; background:rgba(255,255,255,.04); text-decoration:none; cursor:pointer; }
+.edition-links a[aria-current="page"] { color:var(--accent-2); border-color:var(--accent-2); }
+.publication-status { grid-column:1 / -1; margin:0; padding:10px 13px; border:1px solid rgba(111,167,255,.22); border-radius:10px; background:rgba(111,167,255,.06); color:var(--muted); font-size:12px; line-height:1.7; }
+.publication-status[hidden] { display:none; }
 /* ============================================================
    Atelier Interior Theme v2 — v1カラー + ランキングホバー + 参照サムネイル
    ============================================================ */
@@ -1323,7 +1335,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         </div>
         <div class="header-top-actions">
             <span class="header-update-status">
-                <span>更新</span>
+                <span id="lastUpdatedLabel">更新</span>
                 <strong id="lastUpdated">-</strong>
             </span>
             <div id="accountHeaderSlot"></div>
@@ -1338,6 +1350,12 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     title="アクセス推移" aria-label="アクセス推移">↗</button>
             </div>
         </div>
+        <nav class="edition-links" aria-label="ニュースの版">
+            <a href="/" data-edition-link="interior">内装版</a>
+            <a href="/exterior/" data-edition-link="exterior">外装版</a>
+            <button type="button" id="editionMailSettings" hidden>外装版のメール受信設定</button>
+        </nav>
+        <p class="publication-status" id="exteriorPublicationStatus" role="status" hidden></p>
     </header>
 
     <div class="filters">
@@ -1522,15 +1540,68 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
     <!-- DailyNews Server API -->
     <script src="source_list_data.js?v=20260908-4"></script>
-    <script type="module" src="dailynews_client.js?v=20260904-3"></script>
-    <script type="module" src="dailynews_account.js?v=20260904-3"></script>
-    <script type="module" src="dailynews_activity.js?v=20260908-3"></script>
-    <script type="module" src="dailynews_sources.js?v=20260903-2"></script>
-    <script type="module" src="release_history.js?v=20260914-1"></script>
+    <script type="module" src="dailynews_client.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_account.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_activity.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_sources.js?v=20260915-editions-1"></script>
+    <script type="module" src="release_history.js?v=20260915-editions-1"></script>
     <script src="exchange_rates.js?v=20260908-1"></script>
     <script src="dailynews_annotations.js?v=20260911-2"></script>
 
     <script>
+        function normalizeExteriorPublication(payload) {
+            if (payload?.edition_id === "exterior" && payload.status === "building" && payload.processed_through === "") {
+                return { edition_id: "exterior", status: "building", processed_through: "", target_dates: [], selected_count: 0 };
+            }
+            const validDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
+                && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+            if (!payload || payload.edition_id !== "exterior" || !validDate(payload.processed_through)
+                || !["published", "no_matching_news"].includes(payload.status)
+                || !Number.isSafeInteger(payload.selected_count) || payload.selected_count < 0
+                || !Array.isArray(payload.target_dates) || !payload.target_dates.length
+                || !payload.target_dates.every(validDate)) return null;
+            const dates = [...new Set(payload.target_dates)].sort();
+            if (dates[dates.length - 1] !== payload.processed_through
+                || (payload.status === "no_matching_news") !== (payload.selected_count === 0)) return null;
+            return { ...payload, target_dates: dates };
+        }
+
+        function describeExteriorPublication(payload, news) {
+            if (!payload) return "収集状況を確認できませんでした。掲載済みの記事を表示しています。";
+            if (payload.status === "building") return "初回ニュースを作成中です。公開後、このURLからご覧いただけます。";
+            const dates = payload.target_dates;
+            const through = payload.processed_through;
+            const range = dates.length === 1 ? dates[0] : `${dates[0]}〜${through}`;
+            if (payload.status === "no_matching_news") {
+                return `${through}まで収集・選定済み。今回の対象期間（${range}）は条件に合う記事がありませんでした。掲載済みの記事は引き続き閲覧できます。`;
+            }
+            let message = `${through}まで収集・選定済み。今回の対象期間（${range}）の採用は${payload.selected_count}件です。`;
+            if (Array.isArray(news) && news.length && !news.some((item) => item.date === through)) {
+                message += ` ${through}付の新しい掲載記事はありません。`;
+            }
+            return message;
+        }
+
+        window.EXTERIOR_PUBLICATION_STATUS = null;
+        window.__publicationStatusReady = window.DAILYNEWS_CONFIG.id === "exterior"
+            ? fetch("publication_status.json", { cache: "no-store", credentials: "same-origin", signal: AbortSignal.timeout(5000) })
+                .then((response) => response.ok ? response.json() : null)
+                .then((payload) => { window.EXTERIOR_PUBLICATION_STATUS = normalizeExteriorPublication(payload); })
+                .catch(() => {})
+            : Promise.resolve();
+    </script>
+    <script>
+        const editionConfig = window.DAILYNEWS_CONFIG;
+        document.querySelector("header h1").textContent = editionConfig.name;
+        document.querySelector(`[data-edition-link="${editionConfig.id}"]`)?.setAttribute("aria-current", "page");
+        if (editionConfig.id === "exterior") {
+            document.querySelector("header .lead").textContent = "国内外の自動車外装ニュースを生成AIで収集・日本語要約。グリル・バンパー・加飾・照明・センサー対応などを取り上げ、外装開発につながる考察と企画アイデアを提案します。";
+            document.querySelector('meta[name="description"]').content = "外装製品のニュース・考察・企画アイデアをお届け。登録せずに閲覧でき、メールは希望者のみ受信できます。";
+            document.querySelector('option[value="relevance-desc"]').textContent = "外装関連度順";
+            const mailSettings = document.getElementById("editionMailSettings");
+            mailSettings.hidden = false;
+            mailSettings.addEventListener("click", () => window.dailyNewsAccount?.open("register"));
+        }
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
         const CACHE_BUSTER = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
 
@@ -1663,8 +1734,15 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
 
         function setNewDateRangeFromNews(data) {
+            if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                NEW_DATE_RANGE = publication?.target_dates.length
+                    ? { start: publication.target_dates[0], end: publication.processed_through }
+                    : { start: null, end: null };
+                return;
+            }
             const oneDayOverride = ONE_DAY_NEW_DATE_RANGE_OVERRIDES[getTodayKey()];
-            const rangeOverride = oneDayOverride || NEW_DATE_RANGE_OVERRIDE;
+            const rangeOverride = window.DAILYNEWS_CONFIG.id === "exterior" ? null : (oneDayOverride || NEW_DATE_RANGE_OVERRIDE);
             if (rangeOverride?.start && rangeOverride?.end) {
                 NEW_DATE_RANGE = { start: rangeOverride.start, end: rangeOverride.end };
                 return;
@@ -1701,6 +1779,20 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function updateUpdatedAt() {
             const el = document.getElementById("lastUpdated");
             if (!el) return;
+            if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                if (publication?.status === "building") {
+                    document.getElementById("lastUpdatedLabel").textContent = "準備状況";
+                    el.textContent = "作成中";
+                    return;
+                }
+                document.getElementById("lastUpdatedLabel").textContent = publication ? "収集確認" : "記事更新";
+                if (publication) {
+                    el.textContent = `${publication.processed_through}まで`;
+                    el.title = "この日付までの記事を収集・選定済み";
+                    return;
+                }
+            }
             if (window.NEWS_UPDATED_AT) {
                 el.textContent = window.NEWS_UPDATED_AT;
                 return;
@@ -1710,7 +1802,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 el.textContent = latest;
                 return;
             }
-            el.textContent = formatDateTime(new Date());
+            el.textContent = window.DAILYNEWS_CONFIG.id === "exterior" ? "確認できません" : formatDateTime(new Date());
         }
 
         function beginInternalNavigation(scrollTarget = null, returnToAccount = false) {
@@ -2064,6 +2156,26 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             { points: 6, words: ["安全", "adas", "センサー", "エアバッグ", "見守り"] },
             { points: 3, words: ["ev", "電動", "充電", "バッテリー", "suv", "mpv", "ミニバン"] }
         ];
+        const EXTERIOR_TAG_RULES = [
+            { tag: "グリル", words: ["グリル", "grille", "フロントパネル", "フロントモジュール"] },
+            { tag: "バンパー", words: ["バンパー", "bumper", "fascia"] },
+            { tag: "加飾", words: ["加飾", "塗装", "めっき", "クロム", "エンブレム", "emblem", "decorat"] },
+            { tag: "照明・発光", words: ["照明", "発光", "ライト", "lighting", "illumin", "led"] },
+            { tag: "センサー対応", words: ["センサー", "レーダー", "ライダー", "lidar", "radar", "adas", "透過"] },
+            { tag: "空力", words: ["空力", "エアロ", "aerodynamic", "シャッター", "shutter", "スポイラー"] },
+            { tag: "新素材", words: ["樹脂", "材料", "成形", "新素材", "polymer", "molding"] },
+            { tag: "サステナビリティ", words: ["リサイクル", "再生", "バイオ", "recycl", "sustainab"] },
+            { tag: "軽量化", words: ["軽量", "lightweight"] },
+            { tag: "サプライチェーン", words: ["工場", "生産拠点", "サプライチェーン", "factory", "plant"] }
+        ];
+        const EXTERIOR_SCORE_RULES = [
+            { points: 18, words: ["外装", "exterior", "フロントモジュール", "フロントパネル"] },
+            { points: 18, words: ["グリル", "grille", "バンパー", "bumper", "fascia", "エンブレム"] },
+            { points: 12, words: ["加飾", "塗装", "めっき", "発光", "照明", "lighting", "illumin"] },
+            { points: 12, words: ["レーダー", "ミリ波", "透過", "radar", "lidar", "センサー"] },
+            { points: 10, words: ["空力", "シャッター", "aerodynamic", "shutter", "歩行者保護"] },
+            { points: 8, words: ["樹脂", "リサイクル", "軽量", "成形", "recycl", "lightweight"] }
+        ];
 
         function getSearchBlob(item) {
             return `${item?.title || ""} ${item?.desc || ""} ${item?.summary || ""} ${(item?.tags || []).join(" ")}`.toLowerCase();
@@ -2072,7 +2184,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function deriveLocalTags(item) {
             const blob = ` ${getSearchBlob(item)} `;
             const tags = [];
-            LOCAL_TAG_RULES.forEach(rule => {
+            (window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES : LOCAL_TAG_RULES).forEach(rule => {
                 if (rule.words.some(word => blob.includes(word.toLowerCase())) && !tags.includes(rule.tag)) {
                     tags.push(rule.tag);
                 }
@@ -2083,16 +2195,16 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function computeInteriorRelevance(item) {
             const blob = ` ${getSearchBlob(item)} `;
             let score = 0;
-            INTERIOR_SCORE_RULES.forEach(rule => {
+            (window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_SCORE_RULES : INTERIOR_SCORE_RULES).forEach(rule => {
                 const hitCount = rule.words.filter(word => blob.includes(word.toLowerCase())).length;
                 if (hitCount > 0) score += rule.points + Math.min(hitCount - 1, 2) * 3;
             });
             const localTags = item?.localTags || deriveLocalTags(item);
             if (localTags.length >= 3) score += 6;
-            if (/専用グッズ|専用設計|純正|ドリンクホルダー|ティシューケース|etcカバー|シートカバー|accessor/.test(blob)) {
+            if (window.DAILYNEWS_CONFIG.id !== "exterior" && /専用グッズ|専用設計|純正|ドリンクホルダー|ティシューケース|etcカバー|シートカバー|accessor/.test(blob)) {
                 score = Math.max(score, 90);
             }
-            if (/(sクラス|s-class|フラッグシップ|高級セダン|ラグジュアリー)/.test(blob) && /(大刷新|刷新|改良|初公開|facelift|refresh|revealed|unveiled)/.test(blob)) {
+            if (window.DAILYNEWS_CONFIG.id !== "exterior" && /(sクラス|s-class|フラッグシップ|高級セダン|ラグジュアリー)/.test(blob) && /(大刷新|刷新|改良|初公開|facelift|refresh|revealed|unveiled)/.test(blob)) {
                 score = Math.max(score, 78);
             }
             if (/リコール|不具合|衝突試験|修理部品|未完了|recall|defect|failure|crash test/.test(blob)) {
@@ -2121,7 +2233,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
         function enhanceNewsItem(item) {
             const localTags = deriveLocalTags(item);
-            const storedScore = Number(item.interiorScore);
+            const storedScore = Number(window.DAILYNEWS_CONFIG.id === "exterior" ? item.exteriorScore ?? item.relevanceScore : item.interiorScore);
             const baseInteriorScore = Number.isFinite(storedScore)
                 ? Math.max(0, Math.min(100, Math.round(storedScore)))
                 : computeInteriorRelevance({ ...item, localTags });
@@ -2182,7 +2294,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             </svg>
         `);
 
-        const FAVORITES_STORAGE_KEY = "favorites_v1";
+        const FAVORITES_STORAGE_KEY = window.dailyNewsStorageKey("favorites_v1");
         let favoriteIds = new Set();
         let favoritesOnly = false;
         let newOnly = false;
@@ -2735,6 +2847,13 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         console.warn("Data scripts failed to load", e);
                     }
                 }
+                if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                    await window.__publicationStatusReady;
+                    const statusLine = document.getElementById("exteriorPublicationStatus");
+                    statusLine.hidden = false;
+                    statusLine.textContent = describeExteriorPublication(window.EXTERIOR_PUBLICATION_STATUS, window.LOADED_NEWS_DATA);
+                    updateUpdatedAt();
+                }
                 if (window.LOADED_NEWS_DATA) {
                     NEWS_DATA = window.LOADED_NEWS_DATA.map(enhanceNewsItem);
                     console.log("News data loaded:", NEWS_DATA.length, "items");
@@ -2765,7 +2884,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 }
 
                 const tagFilters = document.getElementById("tagFilters");
-                const displayTags = [...new Set([...ALL_TAGS, ...NEWS_DATA.flatMap(n => n.tags || [])])];
+                const baseTags = window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES.map(rule => rule.tag) : ALL_TAGS;
+                const displayTags = [...new Set([...baseTags, ...NEWS_DATA.flatMap(n => n.tags || [])])];
                 displayTags.forEach(tag => {
                     const chip = document.createElement("span");
                     chip.className = "chip";
@@ -3223,11 +3343,13 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function restoreFilterStateFromURL(options = {}) {
             const params = new URLSearchParams(window.location.search);
             const latestDate = getLatestDate(NEWS_DATA);
-            const oneDayOverride = INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
-            const defaultFrom = oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey();
+            const exteriorNoNew = window.DAILYNEWS_CONFIG.id === "exterior"
+                && (!window.EXTERIOR_PUBLICATION_STATUS || window.EXTERIOR_PUBLICATION_STATUS.selected_count === 0);
+            const oneDayOverride = window.DAILYNEWS_CONFIG.id === "exterior" ? null : INITIAL_DATE_RANGE_OVERRIDES[getTodayKey()];
+            const defaultFrom = exteriorNoNew ? "" : (oneDayOverride?.start || NEW_DATE_RANGE.start || latestDate || getTodayKey());
             const defaultTo = oneDayOverride?.end || NEW_DATE_RANGE.end || latestDate || getTodayKey();
 
-            newOnly = !params.toString() || params.get("new") === "1";
+            newOnly = (!params.toString() && !exteriorNoNew) || params.get("new") === "1";
             favoritesOnly = params.get("favorites") === "1";
             activeCountries = params.has("countries")
                 ? new Set(params.get("countries").split(",").filter(Boolean))
@@ -3499,7 +3621,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                                         <span class="idea-title">${idea.title}</span>
                                     </div>
                                     <div class="idea-body">
-                                        ${idea.img ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
+                                        ${idea.img && window.DAILYNEWS_CONFIG.imageGenerationEnabled ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
                                         <div class="idea-content">
                                             <p class="idea-desc">${formatInlineTextWithRefs(idea.desc, newsById)}</p>
                                             <div class="actions">

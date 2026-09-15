@@ -2,6 +2,9 @@
 
 import re
 
+from dailynews.editions import get_edition
+from dailynews import exterior as exterior_rules
+
 if __package__:
     from .currency_guard import CURRENCY_RULES
 else:
@@ -43,6 +46,12 @@ SUMMARY_GROUNDING_RULES = (
     "発売日と価格だけの要約にせず、原文に内装情報がない場合は補ってはいけません。\n"
     + CURRENCY_RULES
 )
+
+
+def summary_grounding_rules():
+    if get_edition().id == "exterior":
+        return exterior_rules.SUMMARY_RULES + CURRENCY_RULES
+    return SUMMARY_GROUNDING_RULES
 CRITICISM = re.compile(r"欲しかった|欲しい|ほしかった|ほしい|物足り|もの足り|惜しい|改善の余地|改善を求め|期待したい")
 QUALIFIED = re.compile(r"指摘|批評|求め|評価|課題|不足|改善|要望|不満|欲し|ほし|期待|望ま|物足り|もの足り|惜しい")
 POSITIVE = re.compile(r"備わ|備え|採用|搭載|装備|充実|こだわり|高級|上質|優れ")
@@ -61,6 +70,8 @@ INTERIOR_TOPICS = tuple(re.compile(pattern, re.I) for pattern in (
 
 def summary_omits_interior_details(summary, source):
     """Only require detail when the source itself covers multiple interior topics."""
+    if get_edition().id == "exterior":
+        return exterior_rules.summary_omits_details(summary, source)
     source_topics = [pattern for pattern in INTERIOR_TOPICS if pattern.search(str(source or ""))]
     if len(source_topics) < 2:
         return False

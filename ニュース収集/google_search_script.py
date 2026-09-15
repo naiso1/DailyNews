@@ -26,10 +26,18 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from io import BytesIO
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from dailynews.editions import get_edition
+from dailynews import exterior as exterior_rules
+
+EDITION = get_edition()
+
 # --- Settings paths ---
-API_KEYS_PATH = Path("api_keys.json")
-DEPT_SETTINGS_PATH = Path("department_settings.json")
-PROMPT_PATH = Path("\u30d7\u30ed\u30f3\u30d7\u30c8.md")
+API_KEYS_PATH = ROOT / "ニュース収集" / "api_keys.json"
+DEPT_SETTINGS_PATH = EDITION.collection_settings_path
+PROMPT_PATH = EDITION.collection_prompt_path
 PROMPT_TEXT = ""
 
 # Defaults (can be overridden by department_settings.json)
@@ -40,12 +48,15 @@ INTERIOR_KEYWORDS_LOWER = []
 SYNONYM_GROUPS = []
 SUBJECT_NAME = "\u5185\u88c5"
 PHOTO_TARGET_LABEL = "\u8eca\u5185\u88c5"
-DEPARTMENT = os.environ.get("DEPARTMENT", "")
+DEPARTMENT = os.environ.get("DAILYNEWS_EDITION", os.environ.get("DEPARTMENT", "interior"))
 TARGET_DATE_ONLY_YESTERDAY = True
 
 # Output files
-EXCEL_FILE = "search_results.csv"
-LEGACY_EXCEL_FILE = "search_results.xlsx"
+EXCEL_FILE = str(EDITION.runtime_dir / "search_results.csv")
+LEGACY_EXCEL_FILE = str(EDITION.runtime_dir / "search_results.xlsx")
+SOURCE_FETCH_COUNTS = {"attempted": 0, "succeeded": 0}
+TARGET_DATES_RUN = []
+SHEET2_RESULT = None
 
 # Output columns
 OUTPUT_COLUMNS = [
@@ -371,14 +382,13 @@ NEWSAPI_KEY = load_api_keys(API_KEYS_PATH) or NEWSAPI_KEY
 
 def apply_department_settings(dept, settings_path):
     """Override RSS_FEEDS/COUNTRY_SETTINGS/INTERIOR_KEYWORDS by department settings."""
-    if not dept:
-        return
+    get_edition(dept)
     data = load_json_file(settings_path)
     if not data:
-        return
+        raise ValueError(f"Missing edition settings: {settings_path}")
     dept_cfg = data.get(dept) if isinstance(data, dict) else None
     if not isinstance(dept_cfg, dict):
-        return
+        raise ValueError(f"Missing edition {dept!r} in {settings_path}")
     global RSS_FEEDS, COUNTRY_SETTINGS, INTERIOR_KEYWORDS, INTERIOR_KEYWORDS_LOWER
     if isinstance(dept_cfg.get("rss_feeds"), list):
         RSS_FEEDS = dept_cfg["rss_feeds"]
@@ -398,8 +408,26 @@ def apply_department_settings(dept, settings_path):
         PHOTO_TARGET_LABEL = dept_cfg.get("photo_target_label")
     if isinstance(dept_cfg.get("prompt_path"), str) and dept_cfg.get("prompt_path"):
         global PROMPT_PATH, PROMPT_TEXT
-        PROMPT_PATH = Path(dept_cfg.get("prompt_path"))
+        configured_prompt = Path(dept_cfg.get("prompt_path"))
+        PROMPT_PATH = configured_prompt if configured_prompt.is_absolute() else Path(settings_path).resolve().parent / configured_prompt
         PROMPT_TEXT = ""
+
+
+def configure_edition(edition_id=None):
+    global EDITION, DEPARTMENT, DEPT_SETTINGS_PATH, EXCEL_FILE, LEGACY_EXCEL_FILE, SHEET2_INTERIOR_TERMS
+    EDITION = get_edition(edition_id)
+    DEPARTMENT = EDITION.id
+    os.environ["DAILYNEWS_EDITION"] = EDITION.id
+    DEPT_SETTINGS_PATH = EDITION.collection_settings_path
+    EXCEL_FILE = str(EDITION.runtime_dir / "search_results.csv")
+    LEGACY_EXCEL_FILE = str(EDITION.runtime_dir / "search_results.xlsx")
+    apply_department_settings(EDITION.id, DEPT_SETTINGS_PATH)
+    if EDITION.id == "exterior":
+        SHEET2_INTERIOR_TERMS = list(exterior_rules.PRODUCT_TERMS)
+    # Caches contain editorial decisions; never share them between editions.
+    for cache in (LLM_CACHE, LLM_IMAGE_CACHE, _summary_cache, _translation_cache, _article_text_cache):
+        cache.clear()
+    return EDITION
 
 
 def get_domain(url):
@@ -1216,6 +1244,8 @@ def calibrate_interior_score(score, title="", content="", summary="", image_inte
     score = normalize_interior_score(score)
     if score is None:
         return None, ""
+    if EDITION.id == "exterior":
+        return exterior_rules.calibrate_score(score, title, content, summary)
     text = f"{title} {content} {summary}".lower()
 
     product_terms = [
@@ -1276,7 +1306,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
     global LLM_ERROR_LOGGED
     if not USE_LLM:
         return None
-    cache_key = ("interior_assessment", title, content, image_url, url, summary)
+    cache_key = (EDITION.id, "product_assessment", title, content, image_url, url, summary)
     if cache_key in LLM_CACHE:
         return LLM_CACHE[cache_key]
     prompt = (
@@ -1311,6 +1341,8 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         f"Japanese summary if available: {summary}\n"
         f"URL: {url}\n"
     )
+    if EDITION.id == "exterior":
+        prompt = exterior_rules.assessment_prompt(title, content, url, summary)
     content_payload = prompt
     used_image = False
     if LLM_IMAGE_INPUT and isinstance(image_url, str) and image_url.startswith("http"):
@@ -1376,7 +1408,8 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             if m:
                 raw = m.group(1).lower()
                 image_interior = True if raw == "true" else (False if raw == "false" else None)
-        score = spread_interior_score(score, title, url, image_interior)
+        if EDITION.id == "interior":
+            score = spread_interior_score(score, title, url, image_interior)
         score, calibration_reason = calibrate_interior_score(score, title, content, summary, image_interior)
         if calibration_reason:
             reason = (reason + "; " + calibration_reason).strip("; ")[:80]
@@ -1814,13 +1847,13 @@ def title_looks_incomplete(text):
 
 
 def call_llm_text(prompt):
-    from summary_grounding import SUMMARY_GROUNDING_RULES
+    from summary_grounding import summary_grounding_rules
 
     payload = {
         "model": LLM_MODEL,
         "reasoning_effort": LLM_REASONING_EFFORT,
         "messages": [
-            {"role": "system", "content": SUMMARY_GROUNDING_RULES},
+            {"role": "system", "content": summary_grounding_rules()},
             {"role": "user", "content": prompt},
             {"role": "assistant", "content": "<think>\n</think>\n"},
         ],
@@ -1869,6 +1902,7 @@ def compact_title_with_llm(source_title, source_content, current_title):
 
 def compact_summary_with_llm(source_title, source_content, current_summary):
     from summary_grounding import summary_omits_interior_details
+    from dailynews.editions import get_edition
 
     best_candidate = ""
     for attempt in range(2):
@@ -1879,7 +1913,7 @@ def compact_summary_with_llm(source_title, source_content, current_summary):
             "Output Japanese summary text only: no JSON, no quotes, no heading, no explanation. "
             "Use a concise neutral news style and end both sentences with a Japanese full stop. "
             "Keep decimal numbers intact.\n"
-            "Focus on automotive-interior facts and retain two or three concrete features. Do not invent facts.\n\n"
+            f"Focus on automotive {get_edition().id} facts and retain two or three concrete features. Do not invent facts.\n\n"
             f"Source title: {source_title}\n"
             f"Source content: {source_content}\n"
             f"Current Japanese summary: {current_summary}\n"
@@ -1990,7 +2024,7 @@ def translate_text(text, target_lang="ja", force_japanese=False, require_kanji=F
 
 def build_source_faithful_japanese_summary(title, content, html_text=""):
     """英語原文へ戻さず、原文の事実だけを使った日本語要約へ復旧する。"""
-    from summary_grounding import SUMMARY_GROUNDING_RULES, summary_omits_interior_details, source_identifiers_match
+    from summary_grounding import summary_grounding_rules, summary_omits_interior_details, source_identifiers_match
 
     source_title = normalize_text(title)
     source_content = normalize_text(content)
@@ -2004,7 +2038,7 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
             "推測、一般論、外部知識、原文にない企業名・製品名・数値を追加してはいけません。\n"
             "英語の文をそのまま残さず、固有名詞と型式のみ英字表記を許可します。\n"
             "ブランド名は日本で一般的な表記を使い、逐語訳しないでください。\n"
-            f"{SUMMARY_GROUNDING_RULES}\n"
+            f"{summary_grounding_rules()}\n"
             f"titleは{SUMMARY_TITLE_LIMIT}字以内の見出しで、途中で切らないでください。\n"
             f"summaryは{SUMMARY_CONTENT_LIMIT}字以内の常体で、必ず句点で終えてください。\n"
             "指定識別子がある場合は、そのうち少なくとも1つを原文の綴り、または一般的な日本語ブランド名で残してください。\n"
@@ -2174,6 +2208,8 @@ def summarize_article(title, content, url, country=""):
             f"本文HTML抽出: {html_text}\n"
             f"URL: {url}"
         )
+    if EDITION.id == "exterior":
+        prompt = prompt.replace("自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。", exterior_rules.SUMMARY_FOCUS)
     if keep_terms:
         prompt = prompt + "\n" + keep_terms
     prompt = prompt + "\n" + currency_rule
@@ -2482,7 +2518,12 @@ def sheet2_candidate_sort_score(row, title_col, title_jp_col, content_col, conte
 
 def build_sheet2_and_csv(df, excel_path, target_dates):
     """LLM判定対象・画像URLあり・対象日付の一覧をSheet2とCSVに出力"""
+    global SHEET2_RESULT
     if df is None or df.empty:
+        if EDITION.id == "exterior":
+            csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
+            pd.DataFrame(columns=OUTPUT_COLUMNS).to_csv(csv_path, index=False, encoding="utf-8")
+            SHEET2_RESULT = {"selected_count": 0, "candidate_count": 0}
         print("  Sheet2/CSV: 対象データなし")
         return
     col_country = "国"
@@ -2522,14 +2563,16 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
 
     # URLと画像URLが有効なものだけを公開候補にする。Google Newsの
     # 未解決リンクや途中で切れたURLは、本文・画像の誤結合につながる。
-    filtered = filtered[filtered[col_url].apply(lambda value: is_valid_article_url(value, allow_google_news=False))]
+    url_mask = filtered[col_url].apply(lambda value: is_valid_article_url(value, allow_google_news=False)).astype(bool)
+    filtered = filtered.loc[url_mask]
 
     # 画像URLあり（論文は例外で許容）。ロゴやGoogle Newsの共通画像は
     # 記事サムネイルとして扱わない。
-    valid_image = (~filtered[col_image].apply(is_missing_url)) & (
-        ~filtered[col_image].astype(str).apply(is_suspicious_image_url)
+    valid_image = (~filtered[col_image].apply(is_missing_url).astype(bool)) & (
+        ~filtered[col_image].astype(str).apply(is_suspicious_image_url).astype(bool)
     )
-    filtered = filtered[valid_image | (filtered[col_country] == "論文")]
+    if EDITION.config.get("selection", {}).get("require_original_image", True):
+        filtered = filtered[valid_image | (filtered[col_country] == "論文")]
 
     # 国別にLLM判定=対象を優先し、10件未満なら非対象も追加（類似は極力除外）
     filtered = filtered.copy()
@@ -2540,21 +2583,26 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         filtered[score_col] = pd.to_numeric(filtered[score_col], errors="coerce")
     if interior_sort_col in filtered.columns:
         filtered[interior_sort_col] = pd.to_numeric(filtered[interior_sort_col], errors="coerce")
-    filtered["_sheet2_sort_score"] = filtered.apply(
-        lambda row: sheet2_candidate_sort_score(
-            row,
-            col_title,
-            col_title_jp,
-            col_content,
-            col_content_jp,
-            col_url,
-            interior_sort_col,
-            score_col,
-        ),
-        axis=1,
-    )
+    if filtered.empty:
+        filtered["_sheet2_sort_score"] = pd.Series(dtype=float)
+    else:
+        filtered["_sheet2_sort_score"] = filtered.apply(
+            lambda row: sheet2_candidate_sort_score(
+                row,
+                col_title,
+                col_title_jp,
+                col_content,
+                col_content_jp,
+                col_url,
+                interior_sort_col,
+                score_col,
+            ),
+            axis=1,
+        )
     filtered["_order"] = range(len(filtered))
     llm_flag = filtered[col_llm].astype(str).str.strip()
+    strict_selection = EDITION.id == "exterior"
+    selection = EDITION.config.get("selection", {})
     result_groups = []
     for country_name, group in filtered.groupby(col_country, sort=False):
         sort_cols = ["_sheet2_sort_score"]
@@ -2577,10 +2625,13 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             # Keep the country quota at 10. Prefer LLM targets, then backfill
             # with the best remaining candidates from the expanded source pool.
             extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
+            if strict_selection:
+                target_group = target_group[pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("minimum_score", 60)]
+                extras = group.iloc[0:0]
         selected = []
         selected_idx = set()
         selected_texts = []
-        limit = None if country_name == "論文" else 10
+        limit = None if country_name == "論文" else selection.get("maximum_per_country", 10)
 
         def text_key(row):
             return f"{row.get(col_title_jp, '')} {row.get(col_content_jp, '')}".strip()
@@ -2611,7 +2662,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         add_rows(target_group, allow_similar=False)
         if limit is not None and len(selected) < limit:
             add_rows(extras, allow_similar=False)
-        if limit is not None and len(selected) < limit:
+        if not strict_selection and limit is not None and len(selected) < limit:
             add_rows(pd.concat([target_group, extras], ignore_index=False), allow_similar=True)
 
         if selected:
@@ -2694,7 +2745,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
 
     # CSV出力（リンク誤結合/改行対策）
     csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
-    if sheet2_df.empty:
+    if sheet2_df.empty and EDITION.id == "interior":
         print(f"  Sheet2/CSV: 0件のため既存CSVを保持します: {csv_path}")
         if OUTPUT_PAPERS_SHEET2:
             build_papers_sheet2(work, excel_path, target_dates)
@@ -2706,6 +2757,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             sheet2_csv[col] = sheet2_csv[col].str.replace("\n", " ", regex=False)
             sheet2_csv[col] = sheet2_csv[col].str.replace("\r", " ", regex=False)
     sheet2_csv.to_csv(csv_path, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8", lineterminator="\n")
+    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(work)}
 
     if OUTPUT_PAPERS_SHEET2:
         build_papers_sheet2(work, excel_path, target_dates)
@@ -2769,7 +2821,8 @@ def build_papers_sheet2(df, excel_path, target_dates):
     papers_df.to_csv(papers_path, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8-sig", lineterminator="\n")
     print(f"  Papers/CSV output: {len(papers_df)} rows, {papers_path}")
 
-def build_rss_feed_list(path="rss_feed_list.csv"):
+def build_rss_feed_list(path=None):
+    path = path or EDITION.runtime_dir / "rss_feed_list.csv"
     """Write current RSS_FEEDS to csv."""
     rows = []
     for feed in RSS_FEEDS:
@@ -2792,6 +2845,7 @@ def fetch_from_rss(target_dates):
         name = feed_info["name"]
         url = feed_info["url"]
         country = feed_info["country"]
+        SOURCE_FETCH_COUNTS["attempted"] += 1
         
         try:
             timeout = 10
@@ -2807,6 +2861,8 @@ def fetch_from_rss(target_dates):
             
             if response and response.status_code == 200:
                 feed = feedparser.parse(response.content)
+                if getattr(feed, "version", ""):
+                    SOURCE_FETCH_COUNTS["succeeded"] += 1
                 rss_item_image_map = extract_item_image_map_from_rss_xml(response.content)
                 count = 0
                 
@@ -2911,31 +2967,31 @@ def fetch_from_bing_search(target_dates):
                         link = entry.get("link", "")
                         published = entry.get("published", "")
                         
-                    pub_date = parse_date(published)
-                    if not pub_date:
-                        continue
-                    if not is_target_date(pub_date, target_dates):
-                        continue
-                    
-                    desc = BeautifulSoup(entry.get("summary", ""), "html.parser").get_text()
-                    image_url = extract_image_from_rss(entry)
-                    # Bingリンクが msn/bing の場合も最終URLを解決して画像再取得
-                    resolved_link = resolve_final_url(link)
-                    if resolved_link and is_missing_url(image_url):
-                        image_url = fetch_image_from_page(resolved_link)
-                    
-                    results.append({
-                        "国": country,
-                        "検索ワード": keyword,
-                        "タイトル": title,
-                        "日付": pub_date,
-                        "内容": desc[:300],
-                        "出展サイト": get_domain(link),
-                        "画像URL": image_url,
-                        "URL": resolved_link or link,
-                        "ソース": "Bing検索"
-                    })
-                    country_count += 1
+                        pub_date = parse_date(published)
+                        if not pub_date:
+                            continue
+                        if not is_target_date(pub_date, target_dates):
+                            continue
+
+                        desc = BeautifulSoup(entry.get("summary", ""), "html.parser").get_text()
+                        image_url = extract_image_from_rss(entry)
+                        # Bingリンクが msn/bing の場合も最終URLを解決して画像再取得
+                        resolved_link = resolve_final_url(link)
+                        if resolved_link and is_missing_url(image_url):
+                            image_url = fetch_image_from_page(resolved_link)
+
+                        results.append({
+                            "国": country,
+                            "検索ワード": keyword,
+                            "タイトル": title,
+                            "日付": pub_date,
+                            "内容": desc[:300],
+                            "出展サイト": get_domain(link),
+                            "画像URL": image_url,
+                            "URL": resolved_link or link,
+                            "ソース": "Bing検索"
+                        })
+                        country_count += 1
                         
             except:
                 pass
@@ -3572,7 +3628,7 @@ def enrich_existing_df(df):
         print(f"    画像URL未取得: {empty_after}件（補完試行: {len(missing_img_urls)}件）")
     return df_out
 
-def main():
+def _main():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     repair_target_dates = "--repair-target-dates" in sys.argv
     repair_sheet2_only = "--repair-sheet2-only" in sys.argv
@@ -3587,12 +3643,14 @@ def main():
                 DEPARTMENT = sys.argv[idx + 1]
         except Exception:
             pass
-    if not DEPARTMENT and Path(DEPT_SETTINGS_PATH).exists():
-        DEPARTMENT = "interior"
-    apply_department_settings(DEPARTMENT, DEPT_SETTINGS_PATH)
+    configure_edition(DEPARTMENT)
+    EDITION.ensure_directories()
+    if EDITION.id == "exterior":
+        (EDITION.runtime_dir / "collection_result.json").write_text(json.dumps({"edition_id": EDITION.id, "completed": False, "started_at": datetime.now().astimezone().isoformat()}, ensure_ascii=False), encoding="utf-8")
 
 
 
+    global TARGET_DATES_RUN
     today = datetime.now()
     yesterday = today - timedelta(days=1)
     target_dates = []
@@ -3610,6 +3668,7 @@ def main():
 
     if ONLY_PAPERS_RSS and not target_dates:
         target_dates = []
+    TARGET_DATES_RUN = target_dates
     
     print("=" * 60)
     print(f"  {SUBJECT_NAME}ニュース収集スクリプト（検証済みRSS版）")
@@ -3890,6 +3949,32 @@ def main():
                 build_sheet2_and_csv(df_existing, EXCEL_FILE, target_dates)
             except Exception:
                 pass
+        elif EDITION.id == "exterior":
+            build_sheet2_and_csv(pd.DataFrame(), EXCEL_FILE, target_dates)
+
+
+def main():
+    _main()
+    if EDITION.id != "exterior":
+        return
+    if SHEET2_RESULT is None:
+        raise RuntimeError("Exterior collection did not produce a fresh selection CSV")
+    if SOURCE_FETCH_COUNTS["attempted"] and not SOURCE_FETCH_COUNTS["succeeded"]:
+        raise RuntimeError("All exterior RSS source requests failed; not a valid no-news day")
+    if not SHEET2_RESULT["selected_count"] and not SOURCE_FETCH_COUNTS["succeeded"]:
+        raise RuntimeError("Empty exterior selection requires a successful source collection")
+    if not SHEET2_RESULT["selected_count"] and LLM_ERROR_LOGGED:
+        raise RuntimeError("Exterior LLM processing failed; not a valid no-news day")
+    result = {
+        "edition_id": EDITION.id,
+        "target_dates": TARGET_DATES_RUN,
+        "completed": True,
+        "completed_at": datetime.now().astimezone().isoformat(),
+        "source_count": SOURCE_FETCH_COUNTS["succeeded"],
+        "source_attempt_count": SOURCE_FETCH_COUNTS["attempted"],
+        **SHEET2_RESULT,
+    }
+    (EDITION.runtime_dir / "collection_result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
     main()

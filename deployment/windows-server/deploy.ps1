@@ -1,10 +1,16 @@
 [CmdletBinding()]
 param(
+    [ValidateSet("interior", "exterior")][string]$Edition = "interior",
     [string]$Server = "Administrator@IEWEB01",
     [string]$IdentityFile = "$env:USERPROFILE\.ssh\dailynews_ieweb01"
 )
 
 $ErrorActionPreference = "Stop"
+if ($Edition -eq "exterior") {
+    & (Join-Path $PSScriptRoot "deploy-exterior.ps1") -Server $Server -IdentityFile $IdentityFile
+    if (-not $?) { throw "Exterior deployment failed." }
+    return
+}
 
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\.."))
 $releaseId = (& git -C $repo rev-parse HEAD).Trim()
@@ -29,6 +35,7 @@ $required = @(
     "news_data.js",
     "insights_data.js",
     "dailynews_client.js",
+    "dailynews_config.js",
     "dailynews_account.js",
     "dailynews_activity.js",
     "dailynews_sources.js",

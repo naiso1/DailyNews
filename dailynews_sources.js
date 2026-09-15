@@ -140,7 +140,7 @@ function initializeSources() {
   overlay.className = "source-list-overlay";
   overlay.innerHTML = `
     <section class="source-list-dialog" role="dialog" aria-modal="true" aria-labelledby="sourceListTitle">
-      <header class="source-list-head"><div><span class="source-list-kicker">SOURCES & COVERAGE</span><h2 class="source-list-title" id="sourceListTitle">情報源一覧</h2><p class="source-list-description">定期収集しているRSSと、デイリーニュースに実際に掲載された媒体を確認できます。収集後に内装関連度の判定、日本語要約、画像確認を行っています。</p></div><button class="source-list-close" type="button" aria-label="閉じる">&times;</button></header>
+      <header class="source-list-head"><div><span class="source-list-kicker">SOURCES & COVERAGE</span><h2 class="source-list-title" id="sourceListTitle">情報源一覧</h2><p class="source-list-description">定期収集しているRSSと、デイリーニュースに実際に掲載された媒体を確認できます。収集後に${window.DAILYNEWS_CONFIG?.id === "exterior" ? "外装" : "内装"}関連度の判定、日本語要約、出典確認を行っています。</p></div><button class="source-list-close" type="button" aria-label="閉じる">&times;</button></header>
       <div class="source-list-summary" id="sourceListSummary"></div>
       <div class="source-list-tools"><div class="source-list-tabs"><button class="source-list-tab active" data-source-mode="feeds" type="button">定期収集RSS</button><button class="source-list-tab" data-source-mode="published" type="button">掲載実績</button></div><div class="source-list-countries" id="sourceListCountries"></div><input class="source-list-search" id="sourceListSearch" type="search" placeholder="媒体名・ドメインを検索…"></div>
       <div class="source-list-content" id="sourceListContent"></div>

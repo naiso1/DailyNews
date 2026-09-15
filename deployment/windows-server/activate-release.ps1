@@ -9,11 +9,13 @@ param(
 
     [ValidateRange(1, 20)]
     [int]$RetainReleases = 3
+    ,
+    [string]$Root = "C:\Users\Administrator\Desktop\DailyNews"
 )
 
 $ErrorActionPreference = "Stop"
 
-$root = "C:\Users\Administrator\Desktop\DailyNews"
+$root = [IO.Path]::GetFullPath($Root)
 $incoming = Join-Path $root "incoming"
 $releases = Join-Path $root "releases"
 $activeFile = Join-Path $root "active-release.txt"
@@ -39,6 +41,10 @@ New-Item -ItemType Directory -Path $releases -Force | Out-Null
 if (-not (Test-Path -LiteralPath $releasePath)) {
     $staging = Join-Path $releases (".staging_" + $ReleaseId + "_" + [guid]::NewGuid().ToString("N"))
     New-Item -ItemType Directory -Path $staging | Out-Null
+    if (-not ([IO.Path]::GetFullPath($staging)).StartsWith($releasesPrefix, [StringComparison]::OrdinalIgnoreCase) -or
+        -not ([IO.Path]::GetFullPath($releasePath)).StartsWith($releasesPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Staging and release must remain inside the releases directory."
+    }
 
     try {
         & tar.exe -xf $archive -C $staging

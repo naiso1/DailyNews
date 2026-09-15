@@ -1,5 +1,6 @@
 ﻿import argparse
 import csv
+import hashlib
 import os
 import random
 import re
@@ -13,15 +14,28 @@ import textwrap
 import requests
 
 from ニュース収集.currency_guard import repair_indian_price_units
+from dailynews.editions import get_edition
+from dailynews import exterior as exterior_rules
 
 ROOT = Path(__file__).resolve().parent
-NEWS_PATH = ROOT / "news_data.js"
-INSIGHTS_PATH = ROOT / "insights_data.js"
-HTML_PATH = ROOT / "内装製品デイリーニュース.html"
-PROMPT_PATH = ROOT / ".agent" / "prompts" / "insights_generation_prompt.md"
-DEFAULT_SHEET = ROOT / "ニュース収集" / "sheet2_llm_targets.csv"
-IDEA_ANGLES_PATH = ROOT / "ニュース収集" / "idea_angles.json"
-TG_PRODUCTS_PATH = ROOT / "ニュース収集" / "tg_products.json"
+EDITION = get_edition()
+
+
+def configure_edition(edition_id=None):
+    global EDITION, NEWS_PATH, INSIGHTS_PATH, HTML_PATH, PROMPT_PATH, DEFAULT_SHEET, IDEA_ANGLES_PATH, TG_PRODUCTS_PATH
+    EDITION = get_edition(edition_id)
+    os.environ["DAILYNEWS_EDITION"] = EDITION.id
+    NEWS_PATH = EDITION.content_dir / "news_data.js"
+    INSIGHTS_PATH = EDITION.content_dir / "insights_data.js"
+    HTML_PATH = EDITION.content_dir / "内装製品デイリーニュース.html"
+    PROMPT_PATH = EDITION.insights_prompt_path
+    DEFAULT_SHEET = EDITION.runtime_dir / "sheet2_llm_targets.csv"
+    IDEA_ANGLES_PATH = EDITION.idea_angles_path
+    TG_PRODUCTS_PATH = EDITION.products_path
+    return EDITION
+
+
+configure_edition(EDITION.id)
 
 ENCODINGS = ["utf-8-sig", "utf-8", "cp932", "utf-16"]
 ANALYSIS_CHAR_LIMIT = 420
@@ -204,6 +218,8 @@ def derive_source(url, fallback=""):
 
 
 def apply_item_overrides(item: dict):
+    if EDITION.id == "exterior":
+        return item
     override = ITEM_OVERRIDES.get(item.get("url", ""))
     if not override:
         return item
@@ -215,6 +231,9 @@ def apply_item_overrides(item: dict):
 
 
 def generate_tags(text: str):
+    if EDITION.id == "exterior":
+        rules = [(r"グリル|格栅|grille", "グリル"), (r"バンパー|保险杠|bumper", "バンパー"), (r"エンブレム|车标|emblem", "エンブレム"), (r"レーダー|透過|レドーム|radome|radar", "センサー透過"), (r"発光|照明|ランプ|ライト|lighting|headlamp|taillamp", "照明・発光"), (r"加飾|塗装|モール|coating|trim", "外装加飾"), (r"ウェザーストリップ|ウエザーストリップ|シール|weatherstrip|sealing", "シール"), (r"素材|樹脂|リサイクル|material|resin|recycl", "材料"), (r"空力|aerodynamic", "空力")]
+        return [tag for pattern, tag in rules if re.search(pattern, text, re.IGNORECASE)][:6]
     tags = []
     for pattern, tag in TAG_RULES:
         if re.search(pattern, text, flags=re.IGNORECASE):
@@ -560,6 +579,8 @@ def _clean_idea_field(text: str, max_len: int = 400) -> str:
 
 def _is_out_of_scope_idea(text: str) -> bool:
     """Return True for seating or exterior products outside the interior team's scope."""
+    if EDITION.id == "exterior":
+        return exterior_rules.out_of_scope_idea(text)
     normalized = re.sub(r"\s+", " ", str(text or "")).lower()
     # Seat belts are safety products rather than seating products, so do not
     # reject an otherwise valid idea only because that term appears.
@@ -870,8 +891,8 @@ def ensure_analysis_ref_quality(
         if it.get("newsId")
     )
     prompt = (
-        "次の考察を、豊田合成の内装開発室向けの示唆として書き直してください。\n"
-        "目的はニュース要約ではなく、その国のトレンド・そこから考えられること・求められる内装部品/素材/操作体験を明確にすることです。\n"
+        f"次の考察を、豊田合成の{EDITION.subject_name}開発向けの示唆として書き直してください。\n"
+        f"目的はニュース要約ではなく、その国のトレンド・そこから考えられること・求められる{EDITION.subject_name}部品/素材/製品価値を明確にすることです。\n"
         "重要ルール:\n"
         f"1) 参照IDは必ず [jp123] 形式。裸のIDは禁止。国は {country}。\n"
         f"2) 可能な限り次の候補から{required_unique}件以上の異なるIDを使う。ただし文と直接関係するIDのみ使う。\n"
@@ -896,7 +917,7 @@ def ensure_analysis_ref_quality(
         f"- {required_unique}件以上の異なる候補IDを必ず使う\n"
         "- すべての参照は [jp123] 形式のみ。裸ID、id:、番号参照は禁止\n"
         "- 各文に1〜3件のIDを入れる。IDのない文は禁止\n"
-        "- 300〜420字程度。豊田合成の内装開発室向けに、トレンド・示唆・求められる内装部品/素材/操作体験を書く\n"
+        f"- 300〜420字程度。豊田合成の{EDITION.subject_name}開発向けに、トレンド・示唆・求められる{EDITION.subject_name}部品/素材/製品価値を書く。ニュースが少ない日は短くし一般化しない\n"
         "- 考察文のみ返す\n\n"
         f"国: {country}\n"
         f"候補ニュース:\n{id_lines}\n"
@@ -1056,7 +1077,7 @@ def _item_for_prompt(it: dict) -> str:
     news_id = it.get("newsId", "")
     id_text = f"id={news_id} / " if news_id else ""
     score = it.get("interiorScore")
-    score_text = f" / interiorScore={int(score)}" if score is not None else ""
+    score_text = f" / productScore={int(score)}" if score is not None else ""
     title = str(it.get("title", ""))[:80]
     desc = str(it.get("desc", ""))[:140]
     tags = it.get("tags", "")
@@ -1066,9 +1087,9 @@ def _item_for_prompt(it: dict) -> str:
         tags = str(tags)[:80]
     img_text = " / image=available" if it.get("img") else " / image=missing"
     if it.get("imageInterior") is True:
-        img_text += "/interior"
+        img_text += f"/{EDITION.id}"
     elif it.get("imageInterior") is False:
-        img_text += "/not-interior"
+        img_text += "/not-target"
     return f"- {id_text}{title} / {desc} / {tags}{score_text}{img_text}"
 
 
@@ -1087,6 +1108,8 @@ def _non_passenger_vehicle_kind(item: dict) -> str:
 
 
 def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
+    if EDITION.id == "exterior":
+        return exterior_rules.select_items(items, limit)
     def _score(it: dict):
         tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
         interior_score = it.get("interiorScore")
@@ -1129,6 +1152,9 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
 
 
 def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dict]]:
+    if EDITION.id == "exterior":
+        candidates = [item for item in exterior_rules.select_items(items, limit=len(items)) if not _is_out_of_scope_idea(f"{item.get('title', '')} {item.get('desc', '')}")]
+        return [[item] for item in candidates[:need_count]]
     def _score(it: dict):
         tags = " ".join(it.get("tags", []) if isinstance(it.get("tags"), list) else [str(it.get("tags", ""))])
         interior_score = it.get("interiorScore")
@@ -1184,6 +1210,8 @@ def make_country_prompt(
     need_count: int = 2,
     idea_anchor_groups: list[list[dict]] | None = None,
 ):
+    if EDITION.id == "exterior":
+        return exterior_rules.make_country_prompt(date_key, country, items, prompt_template, history_ideas, need_count, idea_anchor_groups, _item_for_prompt)
     summary_lines = [f"[{country}] 件数: {len(items)}"]
     analysis_items = select_analysis_items(items, limit=6)
     for it in analysis_items:
@@ -1272,9 +1300,78 @@ def make_country_prompt(
     return extra
 
 
+def write_exterior_publication_status(items, dry_run=False, require_empty_collection=False):
+    """Publish a zero count only with a matching, completed collection receipt."""
+    if EDITION.id != "exterior":
+        return
+    dates = sorted({str(item.get("date", "")) for item in items if item.get("date")})
+    receipt_path = EDITION.runtime_dir / "collection_result.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else {}
+    expected_dates = [date.strip() for date in os.environ.get("TARGET_DATES", "").split(",") if date.strip()]
+    receipt_dates = receipt.get("target_dates", [])
+    receipt_matches = (receipt.get("edition_id") == "exterior" and receipt.get("completed") is True
+                       and bool(receipt_dates) and (not expected_dates or sorted(receipt_dates) == sorted(expected_dates)))
+    if require_empty_collection:
+        if not receipt_matches or receipt.get("selected_count") != 0 or not receipt.get("source_count"):
+            raise RuntimeError("Empty exterior publication has no matching completed zero-news collection receipt")
+        dates = receipt_dates
+    elif receipt_matches and set(dates).issubset(set(receipt_dates)) and receipt.get("selected_count") == len(items):
+        # A completed collection may have no matching articles on its final date.
+        dates = receipt_dates
+    if not dates:
+        raise RuntimeError("Exterior publication has no processed date")
+    status = {"edition_id": "exterior", "processed_through": max(dates), "target_dates": dates,
+              "selected_count": len(items), "updated_at": datetime.now().astimezone().isoformat(),
+              "status": "no_matching_news" if not items else "published"}
+    if dry_run:
+        return status
+    for target, initial in ((NEWS_PATH, 'window.NEWS_UPDATED_AT = "";\nwindow.LOADED_NEWS_DATA = [\n];\n'),
+                            (INSIGHTS_PATH, 'window.DAILY_INSIGHTS = [\n];\n')):
+        if not target.exists():
+            target.write_text(initial, encoding="utf-8")
+    (EDITION.content_dir / "publication_status.json").write_text(json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return status
+
+
+def exterior_analysis_complete(analysis, source_items):
+    """A completed region must have Japanese analysis tied to its own articles."""
+    text = str(analysis or "").strip()
+    return bool(text and has_japanese_text(text) and analysis_ref_coverage_ok(text)
+                and analysis_unique_refs(text) & build_allowed_news_ids(source_items))
+
+
+def exterior_checkpoint_fingerprint(date_key, source_items):
+    fields = [{key: item.get(key) for key in ("newsId", "url", "date", "title", "desc")} for item in source_items]
+    payload = json.dumps(["exterior", date_key, fields], ensure_ascii=False, sort_keys=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def exterior_checkpoint_path(date_key):
+    safe_date = re.sub(r"[^0-9_-]", "_", str(date_key))
+    return EDITION.runtime_dir / f"insights_checkpoint_{safe_date}.json"
+
+
+def read_exterior_checkpoint(date_key):
+    try:
+        data = json.loads(exterior_checkpoint_path(date_key).read_text(encoding="utf-8"))
+        if data.get("edition_id") == "exterior" and data.get("date") == date_key and isinstance(data.get("countries"), dict):
+            return data
+    except (OSError, ValueError, TypeError, AttributeError):
+        pass
+    return {"edition_id": "exterior", "date": date_key, "countries": {}}
+
+
+def write_exterior_checkpoint(date_key, checkpoint):
+    target = exterior_checkpoint_path(date_key)
+    temporary = target.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(temporary, target)
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sheet", default=str(DEFAULT_SHEET))
+    ap.add_argument("--edition", choices=("interior", "exterior"), default=EDITION.id)
+    ap.add_argument("--sheet", default=None)
     ap.add_argument("--skip-insights", action="store_true")
     ap.add_argument("--skip-html", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
@@ -1288,8 +1385,14 @@ def main():
     ap.add_argument("--llm-endpoint", default=os.getenv("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions"))
     ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.5-9b"))
     args = ap.parse_args()
+    if args.edition != EDITION.id:
+        configure_edition(args.edition)
+    if not args.dry_run:
+        EDITION.ensure_directories()
 
-    sheet_path = Path(args.sheet)
+    sheet_path = Path(args.sheet) if args.sheet else DEFAULT_SHEET
+    if EDITION.id == "exterior" and sheet_path.resolve().parent != EDITION.runtime_dir.resolve():
+        raise ValueError("Exterior publication CSV must be inside runtime/exterior; refusing an interior or shared input")
     if not sheet_path.exists():
         print(f"sheet not found: {sheet_path}")
         sys.exit(1)
@@ -1316,8 +1419,8 @@ def main():
         idx_source = find_col(header, "出典サイト", "出展サイト")
     idx_llm = find_col(header, "LLM判定")
     idx_img判定 = find_col(header, "画像判定")
-    idx_interior_score = find_col(header, "内装関連度", "関連度スコア")
-    idx_interior_reason = find_col(header, "内装判定理由")
+    idx_interior_score = find_col(header, "製品関連度", "外装関連度", "内装関連度", "関連度スコア")
+    idx_interior_reason = find_col(header, "製品判定理由", "外装判定理由", "内装判定理由")
     idx_original_title = find_col_exact(header, "タイトル")
     idx_original_desc = find_col_exact(header, "内容")
 
@@ -1354,6 +1457,8 @@ def main():
                 rows_with_relevance_signal += 1
 
         llm_is_target = llm_val.strip() == "対象"
+        if EDITION.id == "exterior" and (not llm_is_target or interior_score is None or interior_score < EDITION.config.get("selection", {}).get("minimum_score", 60)):
+            continue
         # sheet2_llm_targets.csv is the final country-quota selection. Do not
         # drop selected target/paper rows only because the thumbnail itself was
         # judged as non-interior; the article can still be relevant.
@@ -1366,7 +1471,7 @@ def main():
             and (interior_score is None or interior_score < 55)
         ):
             continue
-        if not img:
+        if not img and EDITION.id == "interior":
             continue
         if not title or not url:
             continue
@@ -1375,6 +1480,7 @@ def main():
             continue
         tags = generate_tags(f"{title} {desc}")
         items.append(apply_item_overrides({
+            "edition": EDITION.id,
             "country": country,
             "date": date_val,
             "title": title,
@@ -1396,6 +1502,8 @@ def main():
         )
 
     if not items:
+        if EDITION.id == "exterior":
+            write_exterior_publication_status([], args.dry_run, require_empty_collection=True)
         print("No items to append after filtering.")
         return
     dates_in_items = sorted({it.get("date") for it in items if it.get("date")})
@@ -1404,7 +1512,7 @@ def main():
     else:
         print(f"Loaded {len(items)} items from sheet: {sheet_path} (date: unknown)")
 
-    news_text = read_text_any(NEWS_PATH)
+    news_text = read_text_any(NEWS_PATH) if NEWS_PATH.exists() else 'window.NEWS_UPDATED_AT = "";\nwindow.LOADED_NEWS_DATA = [\n];\n'
     existing_urls, max_ids = parse_existing_news(news_text)
 
     if not args.dry_run:
@@ -1412,7 +1520,10 @@ def main():
         # Only newly published rows: never re-fetch the entire news archive.
         highlight_targets = [it for it in items if it["url"] not in existing_urls]
         if highlight_targets:
-            enrich_items(highlight_targets)
+            if EDITION.id == "exterior":
+                enrich_items(highlight_targets, cache_path=EDITION.runtime_dir / "source_highlights.json")
+            else:
+                enrich_items(highlight_targets)
 
     new_items = []
     for it in items:
@@ -1429,6 +1540,8 @@ def main():
         if any(k in it["img"] for k in ["unsplash", "placeholder", "thumb_default"]):
             note = "※イメージ画像"
         extra_lines = []
+        if EDITION.id == "exterior":
+            extra_lines.append(f'                edition: "exterior", productScore: {int(it["interiorScore"])}, exteriorScore: {int(it["interiorScore"])},')
         for field in ("sourceExcerpt", "sourceExcerptEnd"):
             if it.get(field):
                 extra_lines.append(f'                {field}: "{js_escape(it[field])}",')
@@ -1493,7 +1606,7 @@ def main():
 
     # Update NEW date range
     if not args.skip_html:
-        html_text = read_text_any(HTML_PATH)
+        html_text = read_text_any(HTML_PATH if HTML_PATH.exists() else ROOT / "内装製品デイリーニュース.html")
         if new_dates:
             start = min(new_dates)
             end = max(new_dates)
@@ -1503,7 +1616,7 @@ def main():
 
     # Insights generation
     if not args.skip_insights:
-        insights_text = read_text_any(INSIGHTS_PATH)
+        insights_text = read_text_any(INSIGHTS_PATH) if INSIGHTS_PATH.exists() else 'window.DAILY_INSIGHTS = [\n];\n'
         insight_dates = new_dates if new_dates else all_dates
         insight_start = min(insight_dates) if insight_dates else None
         latest_date = max(insight_dates) if insight_dates else None
@@ -1541,10 +1654,22 @@ def main():
             ideas_out = {}
             draft_parts = []
             attempted_insight_countries = 0
+            use_checkpoint = EDITION.id == "exterior" and not args.replace_ideas_only
+            checkpoint = (read_exterior_checkpoint(insight_date_label) if use_checkpoint and not args.replace_insights
+                          else {"edition_id": "exterior", "date": insight_date_label, "countries": {}})
             for key in ["jp", "cn", "in", "us", "eu"]:
                 if not grouped.get(key):
                     continue
                 attempted_insight_countries += 1
+                if use_checkpoint:
+                    previous = checkpoint["countries"].get(key, {})
+                    if (previous.get("fingerprint") == exterior_checkpoint_fingerprint(insight_date_label, grouped[key])
+                            and exterior_analysis_complete(previous.get("analysis"), grouped[key])
+                            and isinstance(previous.get("ideas"), list)):
+                        analysis_out[key] = previous["analysis"]
+                        ideas_out[key] = previous["ideas"]
+                        print(f"[IDEAS] {key}: reused completed exterior checkpoint")
+                        continue
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
                 idea_anchor_groups = select_idea_anchor_groups(grouped[key], need_count=2)
                 prompt = make_country_prompt(
@@ -1657,8 +1782,23 @@ def main():
                             idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
                     ideas_out[key] = deduped[:2]
                     print(f"[IDEAS] {key}: accepted {len(ideas_out[key])}/2")
+                    if use_checkpoint and exterior_analysis_complete(analysis_out.get(key), grouped[key]):
+                        checkpoint["countries"][key] = {
+                            "fingerprint": exterior_checkpoint_fingerprint(insight_date_label, grouped[key]),
+                            "analysis": analysis_out[key], "ideas": ideas_out[key],
+                        }
+                        if not args.dry_run:
+                            write_exterior_checkpoint(insight_date_label, checkpoint)
                 else:
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
+            if use_checkpoint:
+                incomplete = [key for key, source_items in grouped.items()
+                              if source_items and not exterior_analysis_complete(analysis_out.get(key), source_items)]
+                if incomplete:
+                    raise RuntimeError(
+                        "Exterior insights incomplete for: " + ", ".join(incomplete)
+                        + "; completed regions are checkpointed, publication marker was not advanced."
+                    )
             if args.replace_ideas_only:
                 missing_ideas = [
                     key
@@ -1702,9 +1842,12 @@ def main():
                         desc = js_escape(desc_text)
                         image_prompt = js_escape(idea.get("imagePrompt", ""))
                         source_ids_js = json.dumps(source_ids, ensure_ascii=False)
-                        entry_lines.append(
-                            f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\", sourceNewsIds: {source_ids_js} }},"
-                        )
+                        if EDITION.id == "exterior":
+                            entry_lines.append(f'                {{ id: {max_id}, img: "", title: "{title}", desc: "{desc}", sourceNewsIds: {source_ids_js} }},')
+                        else:
+                            entry_lines.append(
+                                f"                {{ id: {max_id}, img: \"{PLACEHOLDER_IMG}\", title: \"{title}\", desc: \"{desc}\", imagePrompt: \"{image_prompt}\", sourceNewsIds: {source_ids_js} }},"
+                            )
                     entry_lines.append("            ],")
                 entry_lines.append("        }")
                 entry_lines.append("    },")
@@ -1723,11 +1866,15 @@ def main():
                 )
             if draft_parts:
                 draft_key = str(insight_date_label).replace("〜", "_").replace("～", "_").replace("~", "_")
-                draft_path = ROOT / f"insights_draft_{draft_key}.txt"
+                draft_path = (EDITION.runtime_dir if EDITION.id == "exterior" else ROOT) / f"insights_draft_{draft_key}.txt"
                 if not args.dry_run:
                     draft_path.write_text("\n".join(draft_parts), encoding="utf-8")
                 print(f"Insights draft saved: {draft_path}")
 
+    if EDITION.id == "exterior":
+        if not args.dry_run and not INSIGHTS_PATH.exists():
+            INSIGHTS_PATH.write_text('window.DAILY_INSIGHTS = [\n];\n', encoding="utf-8")
+        write_exterior_publication_status(items, args.dry_run)
     print("Done.")
 
 

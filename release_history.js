@@ -3,6 +3,15 @@
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
     date: "2026-09-15",
+    title: "外装製品デイリーニュースの試用版を追加",
+    items: [
+      "画面上部の「外装版」から外装ニュースを閲覧できます。外装のニュース・アクセス数・お気に入り・メール購読は内装版と分けて管理します。",
+      "外装版はログインせずに閲覧できます。メールを希望する場合は外装版で登録し、マイページの「外装版のメールを受信する」をオンにしてください。",
+      "外装版は対象製品との関連性を優先し、各地域最大10件を掲載します。考察と企画アイデアは文章で掲載し、企画画像の生成は行いません。",
+    ],
+  },
+  {
+    date: "2026-09-15",
     title: "ニュース生成を新PCへ移行・初回の自動更新が完了",
     items: [
       "ニュース収集・日本語要約・考察・アイデア作成を、高性能なデスクトップPCで実行する運用へ移行しました。閲覧URLと画面の操作方法は従来どおりです。",
@@ -267,6 +276,7 @@ function escapeReleaseHtml(value) {
 }
 
 function initializeReleaseHistory() {
+  if (window.DAILYNEWS_CONFIG?.id === "exterior") return;
   if (document.documentElement.classList.contains("github-pages-migration")) return;
   const actions = document.querySelector(".header-top-actions");
   if (!actions || document.getElementById("releaseHistoryButton")) return;

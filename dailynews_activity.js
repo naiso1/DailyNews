@@ -1,6 +1,6 @@
 "use strict";
 
-const ACTIVITY_API_BASE = "/api";
+const ACTIVITY_API_BASE = window.DAILYNEWS_CONFIG?.apiBase || "/api";
 const ACTIVITY_POLL_MS = 30000;
 
 const activityState = {
@@ -210,6 +210,10 @@ function injectActivityUi() {
 }
 
 function setActivityDrawer(open) {
+  if (open && !window.dailyNewsAccount?.user) {
+    window.dailyNewsAccount?.openAuth("login", "自分への通知を見るにはログインしてください。");
+    return;
+  }
   document.getElementById("activityDrawer")?.classList.toggle("open", open);
   document.getElementById("activityDrawerBackdrop")?.classList.toggle("open", open);
 }
@@ -274,11 +278,12 @@ function renderNotifications() {
 }
 
 async function loadActivity() {
-  if (!window.dailyNewsAccount?.user) return;
+  const signedIn = Boolean(window.dailyNewsAccount?.user);
+  if (!signedIn && !window.DAILYNEWS_CONFIG?.allowGuestRead) return;
   try {
     const [recent, notices] = await Promise.all([
       activityApi("/activity/recent?limit=12"),
-      activityApi("/notifications?limit=30"),
+      signedIn ? activityApi("/notifications?limit=30") : Promise.resolve({ notifications: [], unreadCount: 0 }),
     ]);
     activityState.recent = recent.activity || [];
     activityState.notifications = notices.notifications || [];

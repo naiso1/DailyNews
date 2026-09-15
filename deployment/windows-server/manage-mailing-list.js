@@ -65,8 +65,8 @@ try {
     const values = Array.isArray(parsed) ? parsed : parsed.recipients;
     if (!Array.isArray(values)) throw new Error("The import file must contain an array of recipients.");
     const insert = db.prepare(`
-      INSERT OR IGNORE INTO mail_subscriptions(email, display_name, source)
-      VALUES (?, ?, 'manual')
+      INSERT OR IGNORE INTO mail_subscriptions(email, display_name, source, enabled)
+      VALUES (?, ?, 'manual', 1)
     `);
     let added = 0;
     db.exec("BEGIN IMMEDIATE");

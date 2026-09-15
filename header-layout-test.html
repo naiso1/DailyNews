@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DailyNews コンパクトヘッダー案</title>
+  <script src="dailynews_config.js?v=20260915-editions-1"></script>
   <style>
     :root {
       --bg: #050a12;
@@ -179,7 +180,7 @@
 <body>
   <div class="preview-note">
     <span>HEADER TEST / COMPACT TWO-ROW</span>
-    <a href="http://IEWEB01/">本番ページへ戻る</a>
+    <a href="./">本番ページへ戻る</a>
   </div>
   <header class="compact-header">
     <div class="brand">
@@ -211,5 +212,9 @@
       <span class="chip">欧州</span>
     </div>
   </section>
+<script>
+    document.querySelector("h1").textContent = window.DAILYNEWS_CONFIG?.name || "内装製品デイリーニュース";
+    if (window.DAILYNEWS_CONFIG?.id === "exterior") document.querySelector(".lead").textContent = "生成AIによる外装ニュースの収集・分析・企画アイデア";
+  </script>
 </body>
 </html>

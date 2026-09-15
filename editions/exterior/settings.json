@@ -1,0 +1,548 @@
+{
+  "exterior": {
+    "subject_name": "外装",
+    "photo_target_label": "自動車外装部品",
+    "rss_feeds": [
+      {
+        "name": "レスポンス",
+        "url": "https://news.yahoo.co.jp/rss/media/rps/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "carview!",
+        "url": "https://news.yahoo.co.jp/rss/media/carv/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "MotorFan",
+        "url": "https://news.yahoo.co.jp/rss/media/motorfan/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "WEB CARTOP",
+        "url": "https://news.yahoo.co.jp/rss/media/wcartop/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "webCG",
+        "url": "https://news.yahoo.co.jp/rss/media/webcg/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "Auto Messe Web",
+        "url": "https://news.yahoo.co.jp/rss/media/amweb/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "VAGUE",
+        "url": "https://news.yahoo.co.jp/rss/media/vague/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "ベストカーWeb",
+        "url": "https://news.yahoo.co.jp/rss/media/bestcar/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "くるまのニュース",
+        "url": "https://news.yahoo.co.jp/rss/media/kurumans/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "日刊自動車新聞",
+        "url": "https://news.yahoo.co.jp/rss/media/netdenjd/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "THE EV TIMES",
+        "url": "https://news.yahoo.co.jp/rss/media/evtimes/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "AUTOCAR JAPAN",
+        "url": "https://news.yahoo.co.jp/rss/media/autocar/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "AUTO BILD JAPAN Web",
+        "url": "https://news.yahoo.co.jp/rss/media/autobild/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "ドライバーWeb",
+        "url": "https://news.yahoo.co.jp/rss/media/driverweb/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "MONOist",
+        "url": "https://news.yahoo.co.jp/rss/media/it_monoist/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "EE Times Japan",
+        "url": "https://news.yahoo.co.jp/rss/media/it_eetimes/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "Impress Watch",
+        "url": "https://news.yahoo.co.jp/rss/media/impress/all.xml",
+        "country": "日本"
+      },
+      {
+        "name": "The Drive",
+        "url": "https://www.thedrive.com/rss/all",
+        "country": "米国"
+      },
+      {
+        "name": "Motor1",
+        "url": "https://www.motor1.com/rss/news/all/",
+        "country": "米国"
+      },
+      {
+        "name": "CarScoops",
+        "url": "https://www.carscoops.com/feed/",
+        "country": "米国"
+      },
+      {
+        "name": "Jalopnik",
+        "url": "https://jalopnik.com/rss",
+        "country": "米国"
+      },
+      {
+        "name": "Car and Driver",
+        "url": "https://www.caranddriver.com/rss/all.xml/",
+        "country": "米国"
+      },
+      {
+        "name": "The Car Connection",
+        "url": "https://feeds.highgearmedia.com/?sites=TheCarConnection&type=all",
+        "country": "米国"
+      },
+      {
+        "name": "The Truth About Cars",
+        "url": "https://www.thetruthaboutcars.com/rss/feed/all",
+        "country": "米国"
+      },
+      {
+        "name": "The Torque Report",
+        "url": "https://www.thetorquereport.com/feed",
+        "country": "米国"
+      },
+      {
+        "name": "Top Speed",
+        "url": "https://www.topspeed.com/feed",
+        "country": "米国"
+      },
+      {
+        "name": "CarComplaints",
+        "url": "https://www.carcomplaints.com/news/feed.xml",
+        "country": "米国"
+      },
+      {
+        "name": "AUTOCAR UK",
+        "url": "https://www.autocar.co.uk/rss",
+        "country": "欧州"
+      },
+      {
+        "name": "Auto Express",
+        "url": "https://www.autoexpress.co.uk/feed/all",
+        "country": "欧州"
+      },
+      {
+        "name": "Autocar Reviews",
+        "url": "https://www.autocar.co.uk/rss/reviews",
+        "country": "欧州"
+      },
+      {
+        "name": "Auto Express Car News",
+        "url": "https://www.autoexpress.co.uk/car-news/feed",
+        "country": "欧州"
+      },
+      {
+        "name": "Autohome (CN)",
+        "url": "https://www.autohome.com.cn/rss/news.xml",
+        "country": "中国"
+      },
+      {
+        "name": "PCauto (CN)",
+        "url": "https://www.pcauto.com.cn/rss/news.xml",
+        "country": "中国"
+      },
+      {
+        "name": "CarNewsChina - All",
+        "url": "https://carnewschina.com/feed/",
+        "country": "中国"
+      },
+      {
+        "name": "CarNewsChina - EV",
+        "url": "https://carnewschina.com/category/electric-vehicles/feed/",
+        "country": "中国"
+      },
+      {
+        "name": "CarNewsChina - ICE",
+        "url": "https://carnewschina.com/category/internal-combustion-engine-vehicles/feed/",
+        "country": "中国"
+      },
+      {
+        "name": "CnEVPost - All",
+        "url": "https://cnevpost.com/feed/",
+        "country": "中国"
+      },
+      {
+        "name": "CnEVPost - Huawei",
+        "url": "https://cnevpost.com/huawei/feed",
+        "country": "中国"
+      },
+      {
+        "name": "CnEVPost - Xiaomi",
+        "url": "https://cnevpost.com/xiaomi/feed",
+        "country": "中国"
+      },
+      {
+        "name": "CnEVPost - Self-driving",
+        "url": "https://cnevpost.com/self-driving/feed",
+        "country": "中国"
+      },
+      {
+        "name": "CnEVPost - Industry",
+        "url": "https://cnevpost.com/industry/feed",
+        "country": "中国"
+      },
+      {
+        "name": "CnEVPost - Policy",
+        "url": "https://cnevpost.com/policy/feed",
+        "country": "中国"
+      },
+      {
+        "name": "Inside China Auto - All",
+        "url": "https://insidechinaauto.com/feed",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 107",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=107",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 108",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=108",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 109",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=109",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 110",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=110",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 409",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=409",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 601",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=601",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 501",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=501",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 103",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=103",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 901",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=901",
+        "country": "中国"
+      },
+      {
+        "name": "Gasgoo CN - Class 112",
+        "url": "https://auto.gasgoo.com/Rss/ClassRss.aspx?ClassId=112",
+        "country": "中国"
+      },
+      {
+        "name": "ETAuto - Auto Components",
+        "url": "https://auto.economictimes.indiatimes.com/rss/auto-components",
+        "country": "インド"
+      },
+      {
+        "name": "ETAuto - Auto Technology",
+        "url": "https://auto.economictimes.indiatimes.com/rss/auto-technology",
+        "country": "インド"
+      },
+      {
+        "name": "Autocar India - All",
+        "url": "https://www.autocarindia.com/rss/all",
+        "country": "インド"
+      },
+      {
+        "name": "RushLane",
+        "url": "https://www.rushlane.com/feed",
+        "country": "インド"
+      },
+      {
+        "name": "GaadiWaadi",
+        "url": "https://gaadiwaadi.com/feed",
+        "country": "インド"
+      },
+      {
+        "name": "IndiaCarNews",
+        "url": "https://www.indiacarnews.com/news/feed",
+        "country": "インド"
+      },
+      {
+        "name": "Car Blog India",
+        "url": "https://www.carblogindia.com/feed",
+        "country": "インド"
+      },
+      {
+        "name": "Auto Punditz",
+        "url": "https://www.autopunditz.com/blog-feed.xml",
+        "country": "インド"
+      },
+      {
+        "name": "InsideEVs",
+        "url": "https://insideevs.com/rss/news/all/",
+        "country": "米国"
+      },
+      {
+        "name": "Green Car Reports",
+        "url": "https://feeds.highgearmedia.com/?sites=GreenCarReports&type=all",
+        "country": "米国"
+      },
+      {
+        "name": "Electrek",
+        "url": "https://electrek.co/feed/",
+        "country": "米国"
+      },
+      {
+        "name": "Electrive",
+        "url": "https://www.electrive.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "Just Auto",
+        "url": "https://www.just-auto.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "Automotive World",
+        "url": "https://www.automotiveworld.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "Electric Cars Report",
+        "url": "https://electriccarsreport.com/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "IndianAutosBlog",
+        "url": "https://indianautosblog.com/feed",
+        "country": "インド"
+      },
+      {
+        "name": "MotorBeam",
+        "url": "https://www.motorbeam.com/feed/",
+        "country": "インド"
+      },
+      {
+        "name": "Auto & Design",
+        "url": "https://autodesignmagazine.com/en/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "BMWBLOG",
+        "url": "https://www.bmwblog.com/feed/",
+        "country": "米国"
+      },
+      {
+        "name": "ル・ボラン",
+        "url": "https://levolant.jp/feed/",
+        "country": "日本"
+      }
+    ],
+    "country_settings": {
+      "日本": {
+        "lang": "ja",
+        "bing_market": "ja-JP",
+        "keywords": [
+          "自動車 外装 新製品",
+          "自動車 グリル 発光",
+          "自動車 バンパー 樹脂",
+          "車 エンブレム レーダー 透過",
+          "自動車 外装 加飾",
+          "自動車 ウェザーストリップ",
+          "自動車 センサー カバー",
+          "自動車 ヘッドランプ 技術",
+          "自動車 外装 リサイクル 材料",
+          "自動車 空力 グリル シャッター"
+        ]
+      },
+      "米国": {
+        "lang": "en",
+        "bing_market": "en-US",
+        "keywords": [
+          "automotive exterior product technology",
+          "automotive illuminated grille emblem",
+          "automotive bumper recycled resin",
+          "automotive radar transparent radome",
+          "automotive exterior trim coating",
+          "automotive weatherstrip body sealing",
+          "automotive sensor cover cleaning",
+          "automotive headlamp lighting technology",
+          "automotive exterior sustainable materials",
+          "automotive active grille aerodynamics"
+        ]
+      },
+      "欧州": {
+        "lang": "en",
+        "bing_market": "en-GB",
+        "keywords": [
+          "automotive exterior product technology Europe",
+          "automotive illuminated grille emblem Europe",
+          "automotive bumper recycled resin Europe",
+          "automotive radar transparent radome Europe",
+          "automotive exterior trim coating Europe",
+          "automotive weatherstrip body sealing Europe",
+          "automotive sensor cover cleaning Europe",
+          "automotive headlamp lighting technology Europe",
+          "automotive exterior sustainable materials Europe",
+          "automotive active grille aerodynamics Europe"
+        ]
+      },
+      "中国": {
+        "lang": "zh",
+        "bing_market": "zh-CN",
+        "keywords": [
+          "汽车 外饰 新技术",
+          "汽车 发光 格栅 车标",
+          "汽车 保险杠 再生材料",
+          "汽车 毫米波 雷达 透波罩",
+          "汽车 外饰 表面 装饰",
+          "汽车 密封条 技术",
+          "汽车 传感器 外罩 清洁",
+          "汽车 前大灯 尾灯 技术",
+          "汽车 外饰 塑料 回收",
+          "汽车 主动 进气格栅 空气动力"
+        ]
+      },
+      "インド": {
+        "lang": "en",
+        "bing_market": "en-IN",
+        "keywords": [
+          "automotive exterior product technology India",
+          "automotive illuminated grille emblem India",
+          "automotive bumper recycled resin India",
+          "automotive radar transparent radome India",
+          "automotive exterior trim coating India",
+          "automotive weatherstrip body sealing India",
+          "automotive sensor cover cleaning India",
+          "automotive headlamp lighting technology India",
+          "automotive exterior sustainable materials India",
+          "automotive active grille aerodynamics India"
+        ]
+      }
+    },
+    "keywords": [
+      "グリル",
+      "バンパー",
+      "フェンダー",
+      "エンブレム",
+      "外装",
+      "エクステリア",
+      "レドーム",
+      "レーダー透過",
+      "ミリ波透過",
+      "センサー透過",
+      "ウェザーストリップ",
+      "ウエザーストリップ",
+      "シール材",
+      "ヘッドランプ",
+      "テールランプ",
+      "ヘッドライト",
+      "テールライト",
+      "デイタイムランニング",
+      "発光エンブレム",
+      "ボディ加飾",
+      "モールディング",
+      "grille",
+      "bumper",
+      "fender",
+      "emblem",
+      "exterior",
+      "radome",
+      "radar transparent",
+      "radar-transparent",
+      "weatherstrip",
+      "weather strip",
+      "body sealing",
+      "headlamp",
+      "headlight",
+      "taillamp",
+      "taillight",
+      "tail lamp",
+      "tail light",
+      "daytime running",
+      "body trim",
+      "车外",
+      "外饰",
+      "格栅",
+      "保险杠",
+      "翼子板",
+      "车标",
+      "透波",
+      "密封条",
+      "前大灯",
+      "尾灯"
+    ],
+    "synonym_groups": [
+      [
+        "exterior",
+        "外装",
+        "外饰"
+      ],
+      [
+        "grille",
+        "グリル",
+        "格栅"
+      ],
+      [
+        "bumper",
+        "バンパー",
+        "保险杠"
+      ],
+      [
+        "emblem",
+        "エンブレム",
+        "车标"
+      ],
+      [
+        "weatherstrip",
+        "ウェザーストリップ",
+        "密封条"
+      ]
+    ],
+    "prompt_path": "prompts/collection.md",
+    "selection": {
+      "minimum_score": 60,
+      "maximum_per_country": 10,
+      "fill_quota_with_rejected": false,
+      "require_original_image": false,
+      "papers_enabled": false
+    },
+    "image_generation": {
+      "enabled": false,
+      "provider": "none",
+      "future_provider": "exabase"
+    },
+    "initial_scope_note": "外装メンバーへのヒヤリング前の仮設定。製品対象・記事例・採用条件を確認して調整する。"
+  }
+}

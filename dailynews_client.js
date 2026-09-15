@@ -1,11 +1,12 @@
 "use strict";
 
-const API_BASE = "/api";
-const CLIENT_ID_KEY = "dailynews_client_id_v1";
-const LOCAL_ACCESS_KEY = "local_access_stats";
-const LOCAL_INTERACTIONS_KEY = "local_interactions";
-const LOCAL_READS_KEY = "local_article_reads";
-const LOCAL_ACCESS_MARK_KEY = "local_access_mark_date_v3";
+const API_BASE = window.DAILYNEWS_CONFIG?.apiBase || "/api";
+const clientStorageKey = (key) => window.dailyNewsStorageKey?.(key) || key;
+const CLIENT_ID_KEY = clientStorageKey("dailynews_client_id_v1");
+const LOCAL_ACCESS_KEY = clientStorageKey("local_access_stats");
+const LOCAL_INTERACTIONS_KEY = clientStorageKey("local_interactions");
+const LOCAL_READS_KEY = clientStorageKey("local_article_reads");
+const LOCAL_ACCESS_MARK_KEY = clientStorageKey("local_access_mark_date_v3");
 const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
 let accessStatsCache = null;
 let localInteractionsCache = null;
@@ -1059,7 +1060,7 @@ window.requestImageUrlChange = (itemId) => {
 };
 
 window.toggleLike = async (itemId, button) => {
-  const storageKey = `liked_${itemId}`;
+  const storageKey = clientStorageKey(`liked_${itemId}`);
   const wasLiked = Boolean(
     window.interactionsData[itemId]?.liked ||
     button.classList.contains("liked") ||
@@ -1279,7 +1280,7 @@ const interactionObserver = new IntersectionObserver(
         );
         likeButton.classList.toggle(
           "liked",
-          Boolean(localStorage.getItem(`liked_${itemId}`)),
+          Boolean(localStorage.getItem(clientStorageKey(`liked_${itemId}`))),
         );
       }
       interactionObserver.unobserve(card);

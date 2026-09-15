@@ -6,7 +6,20 @@ const path = require("path");
 const crypto = require("crypto");
 const { DatabaseSync } = require("node:sqlite");
 
-const ROOT = path.resolve(__dirname, "..");
+const EDITION = process.env.DAILYNEWS_EDITION || "interior";
+if (!["interior", "exterior"].includes(EDITION)) throw new Error("Unknown DAILYNEWS_EDITION");
+const IS_EXTERIOR = EDITION === "exterior";
+const BASE_PATH = IS_EXTERIOR ? "/exterior" : "";
+const PUBLIC_CONFIG = Object.freeze({
+  id: EDITION,
+  name: IS_EXTERIOR ? "外装製品デイリーニュース" : "内装製品デイリーニュース",
+  basePath: BASE_PATH,
+  apiBase: `${BASE_PATH}/api`,
+  allowGuestRead: IS_EXTERIOR,
+  imageGenerationEnabled: !IS_EXTERIOR,
+});
+// An exterior process must never open the legacy interior database by default.
+const ROOT = path.resolve(process.env.DAILYNEWS_ROOT || path.join(__dirname, "..", ...(IS_EXTERIOR ? ["exterior"] : [])));
 const RELEASES_DIR = path.join(ROOT, "releases");
 const ACTIVE_RELEASE_FILE = path.join(ROOT, "active-release.txt");
 const DATA_DIR = path.join(ROOT, "data");
@@ -22,7 +35,7 @@ const ALLOWED_CLIENTS = (
   .map((value) => value.trim())
   .filter(Boolean);
 const TRUSTED_PROXIES = ["127.0.0.1", "::1", "202.15.67.132"];
-const SESSION_COOKIE = "dailynews_session";
+const SESSION_COOKIE = IS_EXTERIOR ? "dailynews_exterior_session" : "dailynews_session";
 const SESSION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60;
 const AUTH_ATTEMPT_WINDOW_MS = 10 * 60 * 1000;
 const AUTH_ATTEMPT_LIMIT = 12;
@@ -131,7 +144,7 @@ db.exec(`
     email TEXT NOT NULL UNIQUE,
     display_name TEXT,
     user_id INTEGER UNIQUE,
-    enabled INTEGER NOT NULL DEFAULT 1,
+    enabled INTEGER NOT NULL DEFAULT ${IS_EXTERIOR ? 0 : 1},
     source TEXT NOT NULL DEFAULT 'manual'
       CHECK (source IN ('manual', 'registered_user')),
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -463,8 +476,8 @@ const statements = {
     VALUES (?, ?, ?, ?)
   `),
   subscribeRegisteredUser: db.prepare(`
-    INSERT INTO mail_subscriptions(email, display_name, user_id, source)
-    VALUES (?, ?, ?, 'registered_user')
+    INSERT INTO mail_subscriptions(email, display_name, user_id, enabled, source)
+    VALUES (?, ?, ?, ?, 'registered_user')
     ON CONFLICT(email) DO UPDATE SET
       display_name = excluded.display_name,
       user_id = excluded.user_id,
@@ -688,11 +701,11 @@ const statements = {
     ORDER BY email
   `),
   mailingSubscriptionByEmail: db.prepare(`
-    SELECT id FROM mail_subscriptions WHERE email = ?
+    SELECT id, enabled FROM mail_subscriptions WHERE email = ?
   `),
   insertManualMailSubscription: db.prepare(`
-    INSERT INTO mail_subscriptions(email, display_name, source)
-    VALUES (?, ?, 'manual')
+    INSERT INTO mail_subscriptions(email, display_name, enabled, source)
+    VALUES (?, ?, 1, 'manual')
   `),
   setMailSubscriptionEnabled: db.prepare(`
     UPDATE mail_subscriptions
@@ -707,7 +720,7 @@ const statements = {
 
 for (const email of ADMIN_EMAILS) statements.markAdmin.run(email);
 for (const user of statements.usersForMailSeed.all()) {
-  statements.subscribeRegisteredUser.run(user.email, user.display_name, user.id);
+  statements.subscribeRegisteredUser.run(user.email, user.display_name, user.id, IS_EXTERIOR ? 0 : 1);
 }
 
 function log(message) {
@@ -946,7 +959,7 @@ function requestUsesHttps(request) {
 function sessionCookie(token, request, maxAge = SESSION_MAX_AGE_SECONDS) {
   const attributes = [
     `${SESSION_COOKIE}=${encodeURIComponent(token)}`,
-    "Path=/",
+    `Path=${BASE_PATH}/`,
     "HttpOnly",
     "SameSite=Lax",
     `Max-Age=${maxAge}`,
@@ -962,6 +975,7 @@ function publicUser(row) {
     displayName: row.display_name,
     emailVerified: Boolean(row.email_verified),
     isAdmin: Boolean(row.is_admin),
+    mailSubscribed: Boolean(statements.mailingSubscriptionByEmail.get(row.email)?.enabled),
   };
 }
 
@@ -1272,6 +1286,11 @@ function assertSameOrigin(request, response) {
 async function handleApi(request, response, requestUrl) {
   const segments = requestUrl.pathname.split("/").filter(Boolean);
 
+  if (request.method === "GET" && requestUrl.pathname === "/api/config") {
+    sendJson(response, 200, PUBLIC_CONFIG);
+    return;
+  }
+
   if (request.method === "GET" && requestUrl.pathname === "/api/status") {
     sendJson(response, 200, {
       status: "ok",
@@ -1329,7 +1348,12 @@ async function handleApi(request, response, requestUrl) {
       throw error;
     }
     if (ADMIN_EMAILS.has(email)) statements.markAdmin.run(email);
-    statements.subscribeRegisteredUser.run(email, displayName, userId);
+    statements.subscribeRegisteredUser.run(email, displayName, userId, IS_EXTERIOR ? 0 : 1);
+    // Existing manual recipients keep their setting unless the user explicitly chooses one.
+    if (typeof body.mailSubscribed === "boolean") {
+      const subscription = statements.mailingSubscriptionByEmail.get(email);
+      statements.setMailSubscriptionEnabled.run(body.mailSubscribed ? 1 : 0, subscription.id);
+    }
     const user = publicUser(statements.userById.get(userId));
     claimClientActivity(user, body.clientId, favorites);
     createSession(userId, request, response);
@@ -1392,6 +1416,26 @@ async function handleApi(request, response, requestUrl) {
     sendJson(response, 200, {
       authenticated: true,
       user: publicUser(statements.userById.get(user.id)),
+    });
+    return;
+  }
+
+  if (["GET", "PUT"].includes(request.method) && requestUrl.pathname === "/api/me/subscription") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    if (request.method === "PUT") {
+      const body = await readJson(request);
+      if (typeof body.enabled !== "boolean") {
+        apiError(response, 400, "invalid_subscription", "enabled must be a boolean.");
+        return;
+      }
+      statements.subscribeRegisteredUser.run(user.email, user.displayName, user.id, 0);
+      const subscription = statements.mailingSubscriptionByEmail.get(user.email);
+      statements.setMailSubscriptionEnabled.run(body.enabled ? 1 : 0, subscription.id);
+    }
+    sendJson(response, 200, {
+      edition: EDITION,
+      enabled: Boolean(statements.mailingSubscriptionByEmail.get(user.email)?.enabled),
     });
     return;
   }
@@ -1466,6 +1510,7 @@ async function handleApi(request, response, requestUrl) {
     request.method === "POST" &&
     requestUrl.pathname === "/api/access/reset-today"
   ) {
+    if (!requireAdmin(request, response)) return;
     const dateKey = jstDateKey();
     withTransaction(() => {
       const previous = Number(
@@ -1626,7 +1671,8 @@ async function handleApi(request, response, requestUrl) {
     const itemId = decodeURIComponent(segments[2]);
     const commentId = Number(segments[4]);
     const clientId = requestUrl.searchParams.get("clientId");
-    const user = authenticatedUser(request);
+    const user = IS_EXTERIOR ? requireUser(request, response) : authenticatedUser(request);
+    if (IS_EXTERIOR && !user) return;
     if (
       !validItemId(itemId) ||
       !Number.isSafeInteger(commentId) ||
@@ -1760,8 +1806,7 @@ async function handleApi(request, response, requestUrl) {
   }
 
   if (request.method === "GET" && requestUrl.pathname === "/api/activity/recent") {
-    const user = requireUser(request, response);
-    if (!user) return;
+    if (!PUBLIC_CONFIG.allowGuestRead && !requireUser(request, response)) return;
     const limit = Math.max(
       1,
       Math.min(12, Number(requestUrl.searchParams.get("limit")) || 6),
@@ -2138,6 +2183,18 @@ const server = http.createServer(async (request, response) => {
     request.url,
     `http://${request.headers.host || "localhost"}`,
   );
+  if (BASE_PATH && requestUrl.pathname === BASE_PATH) {
+    send(response, 308, "", "text/plain; charset=utf-8", { Location: `${BASE_PATH}/${requestUrl.search}` });
+    return;
+  }
+  // IIS may preserve or strip the application prefix; support either upstream form.
+  if (BASE_PATH && requestUrl.pathname.startsWith(`${BASE_PATH}/`)) {
+    requestUrl.pathname = requestUrl.pathname.slice(BASE_PATH.length);
+  }
+  if (requestUrl.pathname === "/dailynews_config.js" && ["GET", "HEAD"].includes(request.method)) {
+    send(response, 200, request.method === "HEAD" ? "" : `window.DAILYNEWS_CONFIG = ${JSON.stringify(PUBLIC_CONFIG)};\n`, "text/javascript; charset=utf-8", { "Cache-Control": "no-store" });
+    return;
+  }
   const release = activeRelease();
 
   if (requestUrl.pathname === "/health") {
@@ -2192,7 +2249,7 @@ const server = http.createServer(async (request, response) => {
     requestUrl.pathname === "/news_data.js" ||
     requestUrl.pathname === "/insights_data.js" ||
     requestUrl.pathname.startsWith("/images/");
-  if (protectedContent && !authenticatedUser(request)) {
+  if (protectedContent && !PUBLIC_CONFIG.allowGuestRead && !authenticatedUser(request)) {
     send(
       response,
       401,
@@ -2211,7 +2268,7 @@ server.on("error", (error) => {
 });
 
 server.listen(PORT, HOST, () => {
-  log(`DailyNews listening on http://${HOST}:${PORT}`);
+  log(`DailyNews listening on http://${HOST}:${server.address().port}`);
 });
 
 function shutdown(signal) {

@@ -8,6 +8,7 @@ import signal
 import subprocess
 import sys
 import time
+import uuid
 import urllib.request
 import winreg
 from email.utils import format_datetime
@@ -27,15 +28,30 @@ if __name__ == "__main__":
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
-NEWS_JS = ROOT / "news_data.js"
-SOURCE_LIST_JS = ROOT / "source_list_data.js"
-RSS_FEED_LIST = SCRIPT_DIR / "rss_feed_list.csv"
+sys.path.insert(0, str(ROOT))
+from dailynews.editions import get_edition
+
+_edition_parser = argparse.ArgumentParser(add_help=False)
+_edition_parser.add_argument("--edition", choices=["interior", "exterior"])
+_edition_args, _ = _edition_parser.parse_known_args()
+EDITION = get_edition(_edition_args.edition)
+os.environ["DAILYNEWS_EDITION"] = EDITION.id
+os.environ["DEPARTMENT"] = EDITION.id
+EDITION.ensure_directories()
+CONTENT_DIR = EDITION.content_dir
+WORK_DIR = EDITION.runtime_dir
+NEWS_JS = CONTENT_DIR / "news_data.js"
+SOURCE_LIST_JS = CONTENT_DIR / "source_list_data.js"
+RSS_FEED_LIST = WORK_DIR / "rss_feed_list.csv"
 WORKFLOW = ROOT / "image_flux2_klein_text_to_image (1).json"
-LOG_DIR = SCRIPT_DIR / "logs"
+LOG_DIR = WORK_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / f"run_search_and_update_{datetime.date.today().strftime('%Y%m%d')}.log"
 RUN_STATUS_PATH = LOG_DIR / "latest_run_status.json"
-AUTOMATION_STATUS_FEED = ROOT / "automation_status.xml"
+AUTOMATION_STATUS_FEED = CONTENT_DIR / "automation_status.xml"
+SITE_URL = "http://IEWEB01/" + ("exterior/" if EDITION.id == "exterior" else "")
+REMOTE_FOLDER = "DailyNewsExterior" if EDITION.id == "exterior" else "DailyNews"
+RUN_ID = str(uuid.uuid4())
 SCHEDULE_PAUSE_CONFIG = SCRIPT_DIR / "scheduled_pauses.json"
 LMS_EXE = Path.home() / ".lmstudio" / "bin" / "lms.exe"
 DEFAULT_LLM_MODEL = "qwen/qwen3.5-9b"
@@ -148,7 +164,10 @@ def _power_automate_status_path():
         )
         user_folder = str(winreg.QueryValueEx(key, "UserFolder")[0]).strip()
         if user_folder:
-            return Path(user_folder) / "DailyNewsAutomation" / "latest_run_status.json"
+            folder = Path(user_folder) / "DailyNewsAutomation"
+            if EDITION.id != "interior":
+                folder /= EDITION.id
+            return folder / "latest_run_status.json"
     except Exception:
         pass
     return None
@@ -177,6 +196,8 @@ def write_run_status(status, **details):
     payload = {
         "schema_version": 1,
         "service": "DailyNews",
+        "edition_id": EDITION.id,
+        "run_id": RUN_ID,
         "status": status,
         "updated_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
         "run_date": datetime.date.today().isoformat(),
@@ -215,9 +236,7 @@ def sync_power_automate_mailing_list():
         )
     ).expanduser()
     server = os.environ.get("DAILYNEWS_SERVER_SSH", "Administrator@IEWEB01").strip()
-    remote_script = (
-        r'C:\Users\Administrator\Desktop\DailyNews\app\manage-mailing-list.js'
-    )
+    remote_script = rf'C:\Users\Administrator\Desktop\{REMOTE_FOLDER}\app\manage-mailing-list.js'
     command = [
         "ssh",
         "-i",
@@ -247,8 +266,9 @@ def sync_power_automate_mailing_list():
     except json.JSONDecodeError as exc:
         raise RuntimeError("Mailing list export returned invalid JSON.") from exc
     count = int(payload.get("recipientCount") or 0)
-    if count < 1 or not str(payload.get("to") or "").strip():
+    if EDITION.id == "interior" and (count < 1 or not str(payload.get("to") or "").strip()):
         raise RuntimeError("Mailing list export contained no active recipients.")
+    payload["edition_id"] = EDITION.id
     _write_json_atomic(destination, payload)
     log(f"[INFO] Power Automate mailing list updated: {count} recipients -> {destination}")
     return count
@@ -260,7 +280,8 @@ def write_automation_status_feed(payload):
     run_date = str(payload.get("run_date", "")).strip()
     updated_at = str(payload.get("updated_at", "")).strip()
     published_news_date = str(payload.get("published_news_date", "")).strip()
-    title = f"DailyNews {status} {run_date}"
+    service_label = "DailyNews" if EDITION.id == "interior" else f"DailyNews {EDITION.id}"
+    title = f"{service_label} {status} {run_date}"
     description = json.dumps(
         {
             "status": status,
@@ -268,6 +289,8 @@ def write_automation_status_feed(payload):
             "expected_news_date": payload.get("expected_news_date", ""),
             "published_news_date": published_news_date,
             "updated_at": updated_at,
+            "edition_id": EDITION.id,
+            "run_id": payload.get("run_id", ""),
         },
         ensure_ascii=False,
         separators=(",", ":"),
@@ -277,13 +300,13 @@ def write_automation_status_feed(payload):
 <rss version="2.0">
   <channel>
     <title>DailyNews automation status</title>
-    <link>http://IEWEB01/</link>
+    <link>{escape(SITE_URL)}</link>
     <description>DailyNews publication status for Power Automate</description>
     <lastBuildDate>{escape(format_datetime(now))}</lastBuildDate>
     <item>
       <title>{escape(title)}</title>
-      <link>http://IEWEB01/</link>
-      <guid isPermaLink="false">DailyNews-{escape(run_date)}-{escape(status)}</guid>
+      <link>{escape(SITE_URL)}</link>
+      <guid isPermaLink="false">DailyNews-{EDITION.id}-{escape(run_date)}-{escape(status)}</guid>
       <pubDate>{escape(format_datetime(now))}</pubDate>
       <description>{escape(description)}</description>
     </item>
@@ -658,6 +681,23 @@ def get_google_search_entrypoint():
 
 
 def latest_news_date():
+    if EDITION.id == "exterior":
+        marker = CONTENT_DIR / "publication_status.json"
+        if marker.exists():
+            try:
+                data = json.loads(marker.read_text(encoding="utf-8-sig"))
+                through = data.get("processed_through", "")
+                if (data.get("edition_id") == "exterior"
+                        and data.get("status") in {"published", "no_matching_news"}
+                        and isinstance(through, str)
+                        and re.fullmatch(r"\d{4}-\d{2}-\d{2}", through)):
+                    datetime.date.fromisoformat(through)
+                    return through
+            except (OSError, ValueError, TypeError, AttributeError):
+                pass
+        # The updater saves article text before generating insights. A fresh
+        # article date alone can therefore belong to an interrupted first build.
+        return None
     if not NEWS_JS.exists():
         return None
     text = NEWS_JS.read_text(encoding="utf-8", errors="ignore")
@@ -797,12 +837,12 @@ def run_git_sync(log_file):
         log("[INFO] AUTO_GIT_SYNC disabled; skip git commit/push.")
         return
 
-    pathspecs = [
-        ".",
-        ":(exclude)ニュース収集/logs/*",
-        ":(exclude)ニュース収集/__pycache__/*",
-        ":(exclude)**/__pycache__/*",
-    ]
+    # Publication jobs must never stage unrelated source, credentials or another edition.
+    candidates = (["content/exterior"] if EDITION.id == "exterior" else [
+        "news_data.js", "insights_data.js", "内装製品デイリーニュース.html",
+        "source_list_data.js", "images", "page_images", "exchange_rates.js",
+    ])
+    pathspecs = [value for value in candidates if (ROOT / value).exists()]
 
     status_cmd = ["git", "status", "--porcelain", "--", *pathspecs]
     log(f"[RUN] git_status: {' '.join(status_cmd)}")
@@ -833,25 +873,8 @@ def run_git_sync(log_file):
         log("[INFO] No git changes to commit/push.")
         return
 
-    run_cmd(["git", "add", "-A", "--", "."], "git_add", log_file, cwd=ROOT)
-    reset_paths = [
-        "__pycache__",
-        "ニュース収集/__pycache__",
-        "ニュース収集/logs",
-    ]
-    reset_cmd = ["git", "restore", "--staged", "--", *reset_paths]
-    reset_cp = subprocess.run(
-        reset_cmd,
-        cwd=str(ROOT),
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-    )
-    if reset_cp.returncode not in (0, 1):
-        raise CalledProcessError(reset_cp.returncode, reset_cmd)
-
-    diff_cmd = ["git", "diff", "--cached", "--quiet"]
+    run_cmd(["git", "add", "-A", "--", *pathspecs], "git_add", log_file, cwd=ROOT)
+    diff_cmd = ["git", "diff", "--cached", "--quiet", "--", *pathspecs]
     diff_rc = subprocess.run(diff_cmd, cwd=str(ROOT)).returncode
     if diff_rc == 0:
         log("[INFO] No staged changes after filtered git add.")
@@ -871,14 +894,13 @@ def run_git_sync(log_file):
     )
     branch = branch_cp.stdout.strip() or "main"
     msg = f"Auto update daily news ({datetime.date.today().isoformat()})"
-    run_cmd(["git", "commit", "-m", msg], "git_commit", log_file, cwd=ROOT)
+    run_cmd(["git", "commit", "-m", msg, "--", *pathspecs], "git_commit", log_file, cwd=ROOT)
     run_git_push(branch, log_file)
 
 
 def run_server_deploy(log_file):
     if os.environ.get("AUTO_SERVER_DEPLOY", "1").strip().lower() in {"0", "false", "no"}:
-        log("[INFO] AUTO_SERVER_DEPLOY disabled; skip IEWEB01 deployment.")
-        return
+        raise RuntimeError("Server deployment is disabled; use --build-only for local preparation.")
 
     deploy_script = ROOT / "deployment" / "windows-server" / "deploy.ps1"
     if not deploy_script.exists():
@@ -892,15 +914,30 @@ def run_server_deploy(log_file):
             "Bypass",
             "-File",
             str(deploy_script),
+            "-Edition",
+            EDITION.id,
         ],
         "deploy_ieweb01",
         log_file,
         cwd=ROOT,
     )
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    with opener.open(SITE_URL + "health", timeout=15) as response:
+        health = json.load(response)
+    if health.get("status") != "ok" or not re.fullmatch(r"[0-9a-f]{40}", str(health.get("release", ""))):
+        raise RuntimeError("Published server release could not be verified.")
+    if EDITION.id == "exterior":
+        with opener.open(SITE_URL + "publication_status.json", timeout=15) as response:
+            remote_status = json.load(response)
+        if remote_status.get("edition_id") != "exterior" or remote_status.get("processed_through") != latest_news_date():
+            raise RuntimeError("Exterior published processing date does not match local content.")
+    return health["release"]
 
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--edition", choices=["interior", "exterior"], default=EDITION.id)
+    parser.add_argument("--build-only", action="store_true", help="Build content locally without deployment, Git push or notification state writes.")
     sleep_group = parser.add_mutually_exclusive_group()
     sleep_group.add_argument(
         "--sleep-after-run",
@@ -927,12 +964,13 @@ def main():
 
     pause = None if args.ignore_schedule_pause else active_schedule_pause()
     if pause:
-        write_run_status(
-            "paused",
-            started_at=started_at.isoformat(timespec="seconds"),
-            completed_at=datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
-            message=f"{pause['name']}: {pause['start']} to {pause['end']}",
-        )
+        if not args.build_only:
+            write_run_status(
+                "paused",
+                started_at=started_at.isoformat(timespec="seconds"),
+                completed_at=datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+                message=f"{pause['name']}: {pause['start']} to {pause['end']}",
+            )
         log(
             f"[PAUSE] {pause['name']}: {pause['start']} to {pause['end']}. "
             "RSS, LLM, image generation, git sync, deployment, email, and sleep are skipped."
@@ -971,12 +1009,14 @@ def main():
     }
     if args.resume_from_sheet:
         try:
-            validate_resume_sheet(SCRIPT_DIR / "sheet2_llm_targets.csv", target_dates)
+            validate_resume_sheet(WORK_DIR / "sheet2_llm_targets.csv", target_dates)
         except (OSError, ValueError) as exc:
             parser.error(str(exc))
-    write_run_status("running", **status_base)
+    if not args.build_only:
+        write_run_status("running", **status_base)
 
     run_succeeded = False
+    deployed_release = ""
     updated = False
     sheet_rows = 0
     failure_message = ""
@@ -994,10 +1034,19 @@ def main():
                 if not ensure_lm_studio():
                     raise RuntimeError("LM Studio could not prepare the single requested model.")
                 google_search_script = get_google_search_entrypoint()
-                run_cmd([sys.executable, "-u", str(google_search_script), "--dates", dates_arg], "google_search_script", LOG_FILE)
-            sheet2_path = SCRIPT_DIR / "sheet2_llm_targets.csv"
+                run_cmd([sys.executable, "-u", str(google_search_script), "--dept", EDITION.id, "--dates", dates_arg], "google_search_script", LOG_FILE)
+            sheet2_path = WORK_DIR / "sheet2_llm_targets.csv"
             sheet_rows = count_sheet_targets(sheet2_path, set(target_dates))
-            if sheet_rows <= 0:
+            valid_empty_exterior = False
+            if EDITION.id == "exterior" and sheet_rows == 0:
+                result_file = WORK_DIR / "collection_result.json"
+                result = json.loads(result_file.read_text(encoding="utf-8-sig")) if result_file.exists() else {}
+                valid_empty_exterior = (
+                    result.get("edition_id") == "exterior" and result.get("completed") is True
+                    and sorted(result.get("target_dates", [])) == sorted(target_dates)
+                    and result.get("selected_count") == 0 and result.get("source_count", 0) > 0
+                )
+            if sheet_rows <= 0 and not valid_empty_exterior:
                 if not args.resume_from_sheet:
                     restore_file_from_head(sheet2_path)
                 raise RuntimeError(
@@ -1012,13 +1061,17 @@ def main():
                     sys.executable,
                     "-u",
                     str(ROOT / "auto_update_daily_news.py"),
+                    "--edition",
+                    EDITION.id,
                     "--llm-model",
                     os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL),
                 ],
                 "auto_update_daily_news",
                 LOG_FILE,
             )
-            if os.environ.get("GEMINI_API_KEY"):
+            if (EDITION.image_generation.get("enabled", True)
+                    and EDITION.image_generation.get("provider", "gemini") == "gemini"
+                    and os.environ.get("GEMINI_API_KEY")):
                 gemini_model = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-preview").strip() or "gemini-3.1-flash-image-preview"
                 gemini_image_size = os.environ.get("GEMINI_IMAGE_SIZE", "512px").strip() or "512px"
                 gemini_aspect_ratio = os.environ.get("GEMINI_IMAGE_ASPECT_RATIO", "1:1").strip() or "1:1"
@@ -1039,14 +1092,13 @@ def main():
                     LOG_FILE,
                 )
             else:
-                log("[WARN] GEMINI_API_KEY not set; skip Gemini image generation.")
+                log(f"[INFO] Image generation disabled or unavailable for {EDITION.id}; no image API called.")
             generate_source_list_data()
-            run_cmd(
-                [sys.executable, "-u", str(ROOT / "update_exchange_rates.py")],
-                "update_exchange_rates", LOG_FILE,
-            )
-            run_git_sync(LOG_FILE)
-            run_server_deploy(LOG_FILE)
+            if EDITION.id == "interior":
+                run_cmd(
+                    [sys.executable, "-u", str(ROOT / "update_exchange_rates.py")],
+                    "update_exchange_rates", LOG_FILE,
+                )
             run_succeeded = True
             updated = True
         except KeyboardInterrupt:
@@ -1058,6 +1110,21 @@ def main():
         except Exception as e:
             log(f"[ERROR] Unexpected error: {type(e).__name__}: {e}")
             failure_message = f"Unexpected error: {type(e).__name__}: {e}"
+
+    if args.build_only:
+        log(f"[BUILD_ONLY] {EDITION.id}: {'built' if run_succeeded else 'failed'}; publication and mail status unchanged.")
+        return 0 if run_succeeded else 1
+
+    if run_succeeded:
+        try:
+            # Also runs after a build-only run or a previous deployment failure.
+            # A local date is never sufficient proof that the server is current.
+            run_git_sync(LOG_FILE)
+            deployed_release = run_server_deploy(LOG_FILE)
+        except Exception as e:
+            run_succeeded = False
+            failure_message = f"Publication failed: {type(e).__name__}: {e}"
+            log(f"[ERROR] {failure_message}")
 
     if run_succeeded:
         try:
@@ -1080,20 +1147,8 @@ def main():
         log(f"[ERROR] {failure_message}")
 
     completed_at = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
-    release = ""
+    release = deployed_release
     if run_succeeded:
-        try:
-            release = subprocess.run(
-                ["git", "rev-parse", "HEAD"],
-                cwd=str(ROOT),
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                check=True,
-            ).stdout.strip()
-        except Exception:
-            release = ""
         success_payload = write_run_status(
             "success",
             **status_base,
@@ -1103,7 +1158,7 @@ def main():
             sheet_rows=sheet_rows,
             release=release,
             mail_recipient_count=mail_recipient_count,
-            site_url="http://IEWEB01/",
+            site_url=SITE_URL,
             message="DailyNews update and server publication completed.",
         )
         try:
@@ -1125,7 +1180,7 @@ def main():
             published_news_date=published_news_date,
             sheet_rows=sheet_rows,
             error=failure_message or "The process did not complete.",
-            site_url="http://IEWEB01/",
+            site_url=SITE_URL,
         )
         try:
             publish_automation_status_feed(failed_payload, LOG_FILE)

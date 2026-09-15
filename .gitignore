@@ -3,3 +3,8 @@
 __pycache__/
 *.pyc
 ニュース収集/logs/
+runtime/
+artifacts/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

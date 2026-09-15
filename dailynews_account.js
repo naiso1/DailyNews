@@ -1,9 +1,12 @@
 "use strict";
 
-const ACCOUNT_API_BASE = "/api";
-const ACCOUNT_CLIENT_ID_KEY = "dailynews_client_id_v1";
-const ACCOUNT_FAVORITES_KEY = "favorites_v1";
-const ACCOUNT_FAVORITES_OWNER_KEY = "dailynews_favorites_owner_v1";
+const ACCOUNT_API_BASE = window.DAILYNEWS_CONFIG?.apiBase || "/api";
+const ACCOUNT_ALLOW_GUEST = Boolean(window.DAILYNEWS_CONFIG?.allowGuestRead);
+const ACCOUNT_EDITION_LABEL = window.DAILYNEWS_CONFIG?.id === "exterior" ? "外装版" : "内装版";
+const accountStorageKey = (key) => window.dailyNewsStorageKey?.(key) || key;
+const ACCOUNT_CLIENT_ID_KEY = accountStorageKey("dailynews_client_id_v1");
+const ACCOUNT_FAVORITES_KEY = accountStorageKey("favorites_v1");
+const ACCOUNT_FAVORITES_OWNER_KEY = accountStorageKey("dailynews_favorites_owner_v1");
 
 const accountState = {
   user: null,
@@ -208,10 +211,10 @@ function injectAccountUi() {
 
   bar.querySelector("button").addEventListener("click", () => openAccount());
   overlay.querySelector(".account-close").addEventListener("click", () => {
-    if (accountState.user) closeAccount();
+    if (accountState.user || ACCOUNT_ALLOW_GUEST) closeAccount();
   });
   overlay.addEventListener("click", (event) => {
-    if (event.target === overlay && accountState.user) closeAccount();
+    if (event.target === overlay && (accountState.user || ACCOUNT_ALLOW_GUEST)) closeAccount();
   });
 }
 
@@ -219,7 +222,7 @@ function updateRegistrationPrompt() {
   if (!accountState.authResolved) return;
   const overlay = document.getElementById("accountOverlay");
   if (!overlay) return;
-  const required = !accountState.user;
+  const required = !accountState.user && !ACCOUNT_ALLOW_GUEST;
   overlay.classList.toggle("auth-required", required);
   if (required) {
     overlay.classList.add("open");
@@ -255,8 +258,8 @@ function renderAuth(mode = accountState.mode, message = "") {
       <div class="account-welcome">
         <section class="account-welcome-copy">
           <div class="account-welcome-eyebrow">TG社員向けサービス</div>
-          <h3 class="account-welcome-title">より良いサービスづくりのため、<br>ログイン方式に変更しました</h3>
-          <p class="account-welcome-lead">サービス向上と利用状況の把握に活用し、ニュース・考察・企画アイデアをより役立つ内容へ改善していきます。TG社員であれば、どなたでも登録してご利用いただけます。</p>
+          <h3 class="account-welcome-title">${ACCOUNT_ALLOW_GUEST ? "外装版のメール受信・コメントをご利用の方へ" : "より良いサービスづくりのため、<br>ログイン方式に変更しました"}</h3>
+          <p class="account-welcome-lead">${ACCOUNT_ALLOW_GUEST ? "ニュースは登録せずに閲覧できます。メール受信やお気に入り・コメントには外装版のアカウントをご登録ください。内装版とは別のアカウントです。登録だけではメールは配信されません。" : "サービス向上と利用状況の把握に活用し、ニュース・考察・企画アイデアをより役立つ内容へ改善していきます。TG社員であれば、どなたでも登録してご利用いただけます。"}</p>
           <ul class="account-welcome-points">
             <li>登録は、表示名・メールアドレス・パスワードの入力だけで完了します。</li>
             <li>お気に入り・いいね・コメントを、端末が変わっても確認できます。</li>
@@ -284,12 +287,13 @@ function renderAuth(mode = accountState.mode, message = "") {
   const isRegister = mode === "register";
   document.getElementById("accountTitle").textContent = isRegister ? "新規登録" : "ログイン";
   body.innerHTML = `
-    <p class="account-note">${isRegister ? "TG社員であれば、どなたでも登録できます。登録したメールアドレスには、更新成功時の朝8時にデイリーニュースをご案内します。" : "登録済みの方は、登録した情報を入力してください。"} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
+    <p class="account-note">${isRegister ? (ACCOUNT_ALLOW_GUEST ? "外装版のアカウントを作成します。内装版とは別に登録してください。メールは受信を選んだ方にのみ配信します。" : "TG社員であれば、どなたでも登録できます。登録したメールアドレスには、更新成功時の朝8時にデイリーニュースをご案内します。") : (ACCOUNT_ALLOW_GUEST ? "外装版に登録した情報でログインしてください。" : "登録済みの方は、登録した情報を入力してください。")} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
     <div class="account-error${message ? " show" : ""}" id="accountError">${escapeAccountHtml(message)}</div>
     <form class="account-form" id="accountAuthForm">
       ${isRegister ? '<label class="account-field">表示名<input name="displayName" maxlength="40" autocomplete="name" required placeholder="コメントに表示する名前"></label>' : ""}
       <label class="account-field">メールアドレス<input name="email" type="email" maxlength="254" autocomplete="email" required placeholder="name@example.com"></label>
       <label class="account-field">パスワード<input name="password" type="password" minlength="8" maxlength="128" autocomplete="${isRegister ? "new-password" : "current-password"}" required></label>
+      ${isRegister && ACCOUNT_ALLOW_GUEST ? '<label class="account-note"><input name="mailSubscribed" type="checkbox"> 外装版のメールを受信する（任意・後から変更できます）</label>' : ""}
       <button class="account-primary" type="submit">${isRegister ? "登録して始める" : "ログイン"}</button>
     </form>
     <div class="account-switch">${isRegister ? "登録済みですか？" : "初めて利用しますか？"} <button class="account-link" id="accountModeSwitch" type="button">${isRegister ? "ログイン" : "新規登録"}</button></div>`;
@@ -313,6 +317,7 @@ async function submitAuth(event) {
     clientId: accountClientId(),
     favorites: [],
   };
+  if (accountState.mode === "register" && ACCOUNT_ALLOW_GUEST) body.mailSubscribed = values.get("mailSubscribed") === "on";
   try {
     const result = await accountApi(
       accountState.mode === "register" ? "/auth/register" : "/auth/login",
@@ -499,6 +504,11 @@ function renderAccountHome() {
       <label class="account-field">コメント表示名<input name="displayName" maxlength="40" value="${escapeAccountHtml(user.displayName)}" required></label>
       <button class="account-secondary" type="submit">表示名を更新</button>
     </form>
+    <form class="account-form" id="accountSubscriptionForm" style="margin-bottom:20px">
+      <label class="account-note"><input name="enabled" type="checkbox" ${user.mailSubscribed ? "checked" : ""}> ${ACCOUNT_EDITION_LABEL}のメールを受信する</label>
+      <button class="account-secondary" type="submit">メール受信設定を保存</button>
+      <p class="account-note" id="accountSubscriptionStatus" role="status">この版のメール配信だけに適用されます。</p>
+    </form>
     <div class="account-tabs">
       <button class="account-tab" data-tab="participation" type="button">参加した記事</button>
       <button class="account-tab" data-tab="updates" type="button">返信・更新${Number(accountState.activity?.unreadNotifications || 0) ? ` (${Number(accountState.activity.unreadNotifications)})` : ""}</button>
@@ -511,6 +521,7 @@ function renderAccountHome() {
     <div id="accountActivityList" class="account-list"></div>`;
   body.querySelector("#accountLogout").addEventListener("click", logoutAccount);
   body.querySelector("#accountProfileForm").addEventListener("submit", updateProfile);
+  body.querySelector("#accountSubscriptionForm").addEventListener("submit", updateSubscription);
   body.querySelectorAll("[data-tab]").forEach((button) => {
     button.addEventListener("click", () => selectAccountTab(button.dataset.tab));
   });
@@ -525,6 +536,26 @@ function selectAccountTab(tab) {
   if (tab === "feedback") renderFeedbackForm();
   else if (tab === "admin") renderAdminPanel();
   else renderActivityList();
+}
+
+async function updateSubscription(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const button = form.querySelector("button");
+  const status = document.getElementById("accountSubscriptionStatus");
+  button.disabled = true;
+  try {
+    const result = await accountApi("/me/subscription", {
+      method: "PUT",
+      body: { enabled: new FormData(form).get("enabled") === "on" },
+    });
+    accountState.user.mailSubscribed = result.enabled;
+    status.textContent = result.enabled ? `${ACCOUNT_EDITION_LABEL}のメール受信を開始しました。` : `${ACCOUNT_EDITION_LABEL}のメール配信を停止しました。`;
+  } catch (_) {
+    status.textContent = "設定を保存できませんでした。通信状態を確認して再度お試しください。";
+  } finally {
+    button.disabled = false;
+  }
 }
 
 async function renderAdminPanel() {
@@ -553,7 +584,7 @@ async function renderAdminPanel() {
   list.innerHTML = `
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
     <h3 class="account-section-title">朝8時のメール配信先 <span class="account-section-count">${mailingList.filter((item) => item.enabled).length}</span></h3>
-    <p class="admin-mail-note">新しくユーザー登録した方は自動で追加されます。従来の配信先など、ユーザー登録していない方はここから追加できます。停止した宛先には次回から送信しません。</p>
+    <p class="admin-mail-note">${ACCOUNT_ALLOW_GUEST ? "外装版は受信を選んだ方にのみ配信します。ユーザー登録だけでは受信は有効になりません。" : "新しくユーザー登録した方は自動で追加されます。"} ユーザー登録していない方はここから追加できます。停止した宛先には次回から送信しません。</p>
     <form class="admin-mail-form" id="adminMailForm">
       <label class="account-field">表示名（任意）<input name="displayName" maxlength="40" placeholder="氏名・部署など"></label>
       <label class="account-field">メールアドレス<input name="email" type="email" maxlength="254" required placeholder="name@example.com"></label>
@@ -733,7 +764,7 @@ async function logoutAccount() {
   localStorage.removeItem(ACCOUNT_FAVORITES_OWNER_KEY);
   localStorage.removeItem(ACCOUNT_FAVORITES_KEY);
   Object.keys(localStorage)
-    .filter((key) => key.startsWith("liked_"))
+    .filter((key) => key.startsWith(accountStorageKey("liked_")))
     .forEach((key) => localStorage.removeItem(key));
   window.applyServerFavorites?.([]);
   updateAccountButton();
@@ -776,7 +807,7 @@ function openAccountTab(tab) {
 }
 
 function closeAccount() {
-  if (!accountState.user) return;
+  if (!accountState.user && !ACCOUNT_ALLOW_GUEST) return;
   document.getElementById("accountOverlay")?.classList.remove("open");
   document.body.style.overflow = "";
 }
