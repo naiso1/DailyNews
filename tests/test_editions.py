@@ -65,6 +65,42 @@ class EditionTests(unittest.TestCase):
         item = {"url": known_url, "title": "外装に関する本文の要約"}
         self.assertEqual(updater.apply_item_overrides(item), item)
 
+    def test_exterior_material_and_aero_synonyms_preserve_two_topics(self):
+        # Paraphrased fixtures: the checks must work in both translation directions.
+        for source, summary in (
+            ("Carbon fiber grille inserts accompany a carbon-fiber splitter and an aramid diffuser.",
+             "カーボンファイバー製スプリッターとアラミド製ディフューザーを用意する。"),
+            ("A carbon fibre front splitter is available.", "炭素繊維製フロントスプリッタを設定する。"),
+            ("The painted rear spoiler is optional.", "塗装したリアスポイラーを選択できる。"),
+            ("エンブレムを変え、パノラマルーフのメッシュディフレクターで風切り音を抑える。",
+             "エンブレムを刷新し、メッシュディフレクタで風切り音を抑える。"),
+            ("炭素繊維製スプリッターとアラミド製ディフューザーを追加する。",
+             "Carbon-fibre splitters and aramid diffusers are offered."),
+        ):
+            with self.subTest(summary=summary):
+                self.assertFalse(summary_omits_interior_details(summary, source))
+
+    def test_exterior_synonyms_do_not_accept_missing_material_or_product_details(self):
+        source = "Carbon fiber grille inserts accompany an aramid diffuser and a front splitter."
+        for summary in (
+            "新型車の販売価格と発売時期を発表した。",
+            "ディフューザーとスプリッターを用意する。",  # Only the aero topic remains.
+            "カーボンファイバーとアラミドを使用する。",  # Only the material topic remains.
+            "空力性能を訴求し、炭素排出量を削減する。",  # Carbon emissions are not carbon fiber.
+        ):
+            with self.subTest(summary=summary):
+                self.assertTrue(summary_omits_interior_details(summary, source))
+
+    def test_exterior_aero_parts_are_in_product_and_collection_scope(self):
+        keywords = get_edition("exterior").config["keywords"]
+        for term in ("スポイラー", "ディフューザー", "スプリッター", "ディフレクター",
+                     "spoiler", "diffuser", "splitter", "deflector"):
+            with self.subTest(term=term):
+                self.assertTrue(exterior.has_product_details(term))
+                self.assertEqual(exterior.calibrate_score(80, term)[0], 80)
+                self.assertTrue(any(keyword.lower() in term.lower() for keyword in keywords))
+        self.assertFalse(exterior.has_product_details("carbon fiber material"))
+
     def test_exterior_source_quote_matches_exterior_parts(self):
         from ニュース収集.source_highlights import choose_excerpt, fingerprint
         item = {"edition": "exterior", "title": "新しいグリルとバンパー", "desc": "グリルとバンパーの設計を刷新した。"}

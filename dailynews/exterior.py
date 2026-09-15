@@ -7,9 +7,11 @@ PRODUCT_TERMS = (
     "レドーム", "レーダー透過", "ミリ波透過", "センサー透過", "ウェザーストリップ",
     "ウエザーストリップ", "シール材", "ヘッドランプ", "テールランプ", "ヘッドライト",
     "テールライト", "デイタイムランニング", "発光エンブレム", "ボディ加飾", "モールディング",
+    "スポイラー", "ディフューザ", "スプリッタ", "ディフレクタ",
     "grille", "bumper", "fender", "emblem", "exterior", "radome", "radar transparent",
     "radar-transparent", "weatherstrip", "weather strip", "body sealing", "headlamp", "headlight",
     "taillamp", "taillight", "tail lamp", "tail light", "daytime running", "body trim",
+    "spoiler", "diffuser", "splitter", "deflector",
     "车外", "外饰", "格栅", "保险杠", "翼子板", "车标", "透波", "密封条", "前大灯", "尾灯",
 )
 TECHNOLOGY_TERMS = ("材料", "樹脂", "加飾", "塗装", "成形", "発光", "照明", "透過", "空力", "耐候", "リサイクル", "軽量", "設計", "センサー", "material", "resin", "molding", "coating", "lighting", "sensor", "aerodynamic", "recycl", "lightweight", "design", "surface", "发光", "材料", "传感", "空气动力")
@@ -20,8 +22,8 @@ TOPICS = tuple(re.compile(pattern, re.I) for pattern in (
     r"レドーム|透過|透波|\bradomes?\b|radar.transparent",
     r"ヘッド(?:ランプ|ライト)|テール(?:ランプ|ライト)|照明|発光|灯|\b(?:headlights?|headlamps?|taillights?|taillamps?|lighting)\b",
     r"ウェザーストリップ|ウエザーストリップ|シール材|密封条|weather.?strip|body.seal",
-    r"加飾|モール|塗装|樹脂|材料|リサイクル|\b(?:trim|coating|resin|material|recycled)\b",
-    r"空力|エアロ|空气动力|\baerodynamic",
+    r"加飾|モール|塗装|樹脂|材料|リサイクル|カーボンファイバー?|炭素繊維|アラミド|\b(?:trim|coating|resin|material|recycled|paint(?:s|ed|ing)?|carbon[\s-]+fib(?:er|re)s?|aramid)\b",
+    r"空力|エアロ|空气动力|スポイラー|ディフューザー?|スプリッター?|ディフレクター?|\baerodynamic|\b(?:spoilers?|diffusers?|splitters?|deflectors?)\b",
 ))
 
 SUMMARY_RULES = (

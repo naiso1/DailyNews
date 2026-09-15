@@ -473,6 +473,10 @@
       "発光エンブレム",
       "ボディ加飾",
       "モールディング",
+      "スポイラー",
+      "ディフューザ",
+      "スプリッタ",
+      "ディフレクタ",
       "grille",
       "bumper",
       "fender",
@@ -492,6 +496,10 @@
       "tail light",
       "daytime running",
       "body trim",
+      "spoiler",
+      "diffuser",
+      "splitter",
+      "deflector",
       "车外",
       "外饰",
       "格栅",
@@ -528,6 +536,22 @@
         "weatherstrip",
         "ウェザーストリップ",
         "密封条"
+      ],
+      [
+        "spoiler",
+        "スポイラー"
+      ],
+      [
+        "diffuser",
+        "ディフューザ"
+      ],
+      [
+        "splitter",
+        "スプリッタ"
+      ],
+      [
+        "deflector",
+        "ディフレクタ"
       ]
     ],
     "prompt_path": "prompts/collection.md",
