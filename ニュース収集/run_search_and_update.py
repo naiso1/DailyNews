@@ -278,8 +278,12 @@ def sync_power_automate_mailing_list():
     except json.JSONDecodeError as exc:
         raise RuntimeError("Mailing list export returned invalid JSON.") from exc
     count = int(payload.get("recipientCount") or 0)
-    if EDITION.id == "interior" and (count < 1 or not str(payload.get("to") or "").strip()):
-        raise RuntimeError("Mailing list export contained no active recipients.")
+    recipients = payload.get("recipients")
+    if count < 0 or not isinstance(recipients, list) or len(recipients) != count:
+        raise RuntimeError("Mailing list export contained inconsistent recipient counts.")
+    if bool(str(payload.get("to") or "").strip()) != bool(count):
+        raise RuntimeError("Mailing list export contained inconsistent addresses.")
+    # Zero is a valid opt-out state. Publish it so an older list cannot keep sending.
     payload["edition_id"] = EDITION.id
     _write_json_atomic(destination, payload)
     log(f"[INFO] Power Automate mailing list updated: {count} recipients -> {destination}")
@@ -1104,7 +1108,7 @@ def main():
                     LOG_FILE,
                 )
             else:
-                log(f"[INFO] Image generation disabled or unavailable for {EDITION.id}; no image API called.")
+                log(f"[INFO] Gemini image generation skipped for {EDITION.id}; optional image providers are handled by the updater.")
             generate_source_list_data()
             if EDITION.id == "interior":
                 run_cmd(

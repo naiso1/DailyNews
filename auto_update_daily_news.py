@@ -1153,7 +1153,9 @@ def select_analysis_items(items: list, limit: int = 6) -> list[dict]:
 
 def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dict]]:
     if EDITION.id == "exterior":
-        candidates = [item for item in exterior_rules.select_items(items, limit=len(items)) if not _is_out_of_scope_idea(f"{item.get('title', '')} {item.get('desc', '')}")]
+        candidates = [item for item in exterior_rules.select_items(items, limit=len(items))
+                      if (item.get("contentCategory") == "trend" and item.get("trendTopic") in exterior_rules.TREND_TOPICS)
+                      or not _is_out_of_scope_idea(f"{item.get('title', '')} {item.get('desc', '')}")]
         # Different concepts may share the only available source article.
         return [[candidates[i % len(candidates)]] for i in range(max(0, need_count))] if candidates else []
     def _score(it: dict):
@@ -1449,6 +1451,8 @@ def main():
     idx_interior_reason = find_col(header, "製品判定理由", "外装判定理由", "内装判定理由")
     idx_original_title = find_col_exact(header, "タイトル")
     idx_original_desc = find_col_exact(header, "内容")
+    idx_content_category = find_col_exact(header, "記事区分")
+    idx_trend_topic = find_col_exact(header, "トレンド分類")
 
     def get(row, idx):
         if idx is None:
@@ -1470,6 +1474,11 @@ def main():
         img_val = get(row, idx_img判定)
         interior_score = parse_score_0_100(get(row, idx_interior_score))
         interior_reason = get(row, idx_interior_reason)
+        content_category = get(row, idx_content_category) or "product"
+        trend_topic = get(row, idx_trend_topic) if content_category == "trend" else ""
+        if EDITION.id == "exterior" and (content_category not in ("product", "trend")
+                                          or (content_category == "trend" and trend_topic not in exterior_rules.TREND_TOPICS)):
+            raise RuntimeError(f"Invalid exterior editorial category: {url}")
         country = map_country(country_raw) or "jp"
         # Also guard resumed CSV publication, which does not run the summarizer.
         original = f"{get(row, idx_original_title)} {get(row, idx_original_desc)}"
@@ -1484,6 +1493,8 @@ def main():
 
         llm_is_target = llm_val.strip() == "対象"
         if EDITION.id == "exterior" and (not llm_is_target or interior_score is None or interior_score < EDITION.config.get("selection", {}).get("minimum_score", 60)):
+            continue
+        if EDITION.id == "exterior" and content_category == "trend" and interior_score < EDITION.config.get("selection", {}).get("trend_minimum_score", 65):
             continue
         # sheet2_llm_targets.csv is the final country-quota selection. Do not
         # drop selected target/paper rows only because the thumbnail itself was
@@ -1515,6 +1526,8 @@ def main():
             "url": url,
             "source": source,
             "tags": tags,
+            "contentCategory": content_category,
+            "trendTopic": trend_topic,
             "interiorScore": interior_score,
             "interiorReason": interior_reason,
             "imageInterior": True if img_val and "あり" in img_val else (False if img_val and "なし" in img_val else None),
@@ -1568,6 +1581,7 @@ def main():
         extra_lines = []
         if EDITION.id == "exterior":
             extra_lines.append(f'                edition: "exterior", productScore: {int(it["interiorScore"])}, exteriorScore: {int(it["interiorScore"])},')
+            extra_lines.append(f'                contentCategory: "{js_escape(it["contentCategory"])}", trendTopic: "{js_escape(it["trendTopic"])}",')
         for field in ("sourceExcerpt", "sourceExcerptEnd"):
             if it.get(field):
                 extra_lines.append(f'                {field}: "{js_escape(it[field])}",')
@@ -1911,6 +1925,15 @@ def main():
         if not args.dry_run and not INSIGHTS_PATH.exists():
             INSIGHTS_PATH.write_text('window.DAILY_INSIGHTS = [\n];\n', encoding="utf-8")
         write_exterior_publication_status(items, args.dry_run)
+        if not args.dry_run:
+            from dailynews.exabase import optional_images
+            image_result = optional_images(EDITION)
+            print("[IMAGES] exterior: " + json.dumps({
+                "status": image_result["status"],
+                "generated": image_result.get("generated", 0),
+                "cached": image_result.get("cached", 0),
+                "errors": image_result.get("errors", []),
+            }, ensure_ascii=False))
     print("Done.")
 
 

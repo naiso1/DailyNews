@@ -31,7 +31,9 @@
 
 ## 画像生成
 
-`image_generation.enabled` は `false`、`provider` は `none` です。外装アイデアの画像と画像プロンプトは作成しません。`future_provider: exabase` は将来の検討先を示す記録で、接続や処理を有効にする設定ではありません。
+2026-09-16に1案の実機生成と画像内容を確認し、`image_generation.enabled: true`、`provider: exabase` で開始します。初期上限は最新日の先頭4案、1案420秒、全体900秒です。既に画像がある案は再生成せず、過去日へ遡りません。停止する場合は `enabled: false, provider: none` に戻します。
+
+任意のexaBase連携は `dailynews/exabase.py` と `deployment/workstation/exabase/` にあります。1案ごとの企画文・出典IDからプロンプトを組み立て、検証済み画像をその案だけに対応づけます。専用セッションで認証し、キャッシュ、時間制限、結果不明時の再送抑止を行います。画像生成APIへの代替呼び出しはありません。初回確認と有効化は[exaBase連携の運用手順](../../deployment/workstation/exabase/README.md)を参照してください。
 
 ## ゼロ件の日と処理失敗
 

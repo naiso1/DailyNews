@@ -109,8 +109,8 @@ def check(config, proxies, editions=None):
         recipients = json.loads(command(ssh + [
             f'node "C:/Users/Administrator/Desktop/{folder}/app/manage-mailing-list.js" export-json']))
         count = int(recipients.get("recipientCount", 0))
-        if edition_id == "interior" and (count <= 0 or not recipients.get("to")):
-            raise RuntimeError("No interior mail recipients exported by the server")
+        if count < 0 or bool(count) != bool(str(recipients.get("to") or "").strip()):
+            raise RuntimeError("Inconsistent mail recipients exported by the server")
         url = "http://IEWEB01/" + ("exterior/" if edition_id == "exterior" else "") + "health"
         with opener.open(url, timeout=10) as response:
             health = json.load(response)

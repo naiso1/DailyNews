@@ -14,16 +14,16 @@
 - 案内先: `http://IEWEB01/exterior/`
 - 異常通知: 設定済みの管理者1名
 
-初期配信先は管理者1名。ほかの利用者は社内ネットワークから外装URLを開くだけで閲覧でき、メール購読は必須ではない。外装アカウントの登録時も受信チェックは初期オフで、希望者だけが登録画面またはマイページから受信をオンにする。内装の購読設定・配信先とは独立して管理する。
+初期配信先は管理者1名。ほかの利用者は社内ネットワークから外装URLを開くだけで閲覧でき、メール購読は必須ではない。2026-09-16からログインは内装・外装共通とし、登録画面またはマイページのチェック欄で内装だけ・外装だけ・両方・受信なしを選ぶ。外装からの新規登録は両方オフ、既存の購読設定は維持する。配信名簿は引き続き版ごとに分ける。
 
 ## 購読変更の反映
 
-外装サイトの購読設定を正本とし、処理PCが有効な購読者を業務用OneDriveへ同期する。Power Automateは朝8時の実行時にこの宛先JSONを読み込む。
+Webの版別購読設定を正本とし、処理PCが内装・外装それぞれの有効な購読者を業務用OneDriveへ同期する。各Power Automateフローは朝8時の実行時に対応する宛先JSONを読み込む。
 
 - 同期処理: [`sync-mailing-list.py`](../workstation/sync-mailing-list.py)
 - タスク登録: [`install-mailing-list-sync.ps1`](../workstation/install-mailing-list-sync.ps1)
 - タスク名: `DailyNews_ExteriorMailingListSync`
-- 周期: 2分。ニュース収集やメール送信は行わず、外装の宛先だけを同期する。
+- 周期: 2分。ニュース収集やメール送信は行わず、内装・外装の宛先を各ファイルへ同期する。タスク名は重複登録を避けるため維持。
 - 同期結果: 処理PCの `%LOCALAPPDATA%\DailyNewsRuntime\mailing-list-sync.json`
 
 2026-09-15 に同期タスクを登録済み。同期処理を実行し、宛先JSONの `edition_id` が `exterior` であること、初期の有効宛先が管理者1名であることを確認済み。
@@ -48,6 +48,6 @@
 
 作成リクエストやフローIDの記録はGit対象外の `runtime/notifications/exterior` に保存する。購読者の氏名・メールアドレス、認証情報はこのREADMEや公開設定へ記載しない。内装フローIDは `94732731-b972-483b-b973-16dea2efa3fd`、環境は `Default-2113d5b5-fefb-4c1d-bc26-12d7f8c3581d`。
 
-画像生成は外装の配信開始条件に含めない。初版は `provider: "none"` で、exaBase連携は将来の追加機能として扱う。詳しくは[外装ニュースの試用手順](../../docs/exterior-pilot.md)を参照。
+画像生成は外装の配信成功条件に含めない。exaBase画像が作れない場合も文章を公開し、画像APIへ代替しない。詳しくは[外装ニュースの試用手順](../../docs/exterior-pilot.md)を参照。
 
 参考: [Microsoft公式 PowerShell手順](https://learn.microsoft.com/en-us/power-platform/admin/powerapps-powershell)、[RSSコネクタ](https://learn.microsoft.com/en-us/connectors/rss/)、[Power Automate Management](https://learn.microsoft.com/en-us/connectors/flowmanagement/)。

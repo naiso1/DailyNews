@@ -367,12 +367,39 @@
         "name": "ル・ボラン",
         "url": "https://levolant.jp/feed/",
         "country": "日本"
+      },
+      {
+        "name": "Best Selling Cars - Japan Market",
+        "url": "https://www.best-selling-cars.com/category/japan/feed/",
+        "country": "日本"
+      },
+      {
+        "name": "Best Selling Cars - US Market",
+        "url": "https://www.best-selling-cars.com/category/usa/feed/",
+        "country": "米国"
+      },
+      {
+        "name": "Best Selling Cars - Europe Market",
+        "url": "https://www.best-selling-cars.com/category/europe/feed/",
+        "country": "欧州"
+      },
+      {
+        "name": "CarNewsChina - Sales",
+        "url": "https://carnewschina.com/category/sales/feed/",
+        "country": "中国"
       }
     ],
     "country_settings": {
       "日本": {
         "lang": "ja",
         "bing_market": "ja-JP",
+        "trend_keywords": [
+          "乗用車 SUV 販売 シェア",
+          "自動車 デザイン コンセプト 新型",
+          "自動車 再生樹脂 塗装 材料",
+          "自動車 歩行者保護 照明 規制",
+          "自動車 メーカー 商品戦略 新車"
+        ],
         "keywords": [
           "自動車 外装 新製品",
           "自動車 グリル 発光",
@@ -389,6 +416,13 @@
       "米国": {
         "lang": "en",
         "bing_market": "en-US",
+        "trend_keywords": [
+          "US passenger car SUV sales market share",
+          "car exterior design concept launch",
+          "automotive recycled plastics coatings materials",
+          "vehicle pedestrian protection lighting regulations",
+          "automaker new model product strategy US"
+        ],
         "keywords": [
           "automotive exterior product technology",
           "automotive illuminated grille emblem",
@@ -405,6 +439,13 @@
       "欧州": {
         "lang": "en",
         "bing_market": "en-GB",
+        "trend_keywords": [
+          "Europe passenger car registrations market ACEA",
+          "car design concept Europe",
+          "automotive recycled plastics circular materials Europe",
+          "vehicle ELV pedestrian lighting regulation Europe",
+          "European automaker new model strategy"
+        ],
         "keywords": [
           "automotive exterior product technology Europe",
           "automotive illuminated grille emblem Europe",
@@ -421,6 +462,13 @@
       "中国": {
         "lang": "zh",
         "bing_market": "zh-CN",
+        "trend_keywords": [
+          "乘用车 SUV 销量 市场 份额",
+          "汽车 外观 设计 概念车",
+          "汽车 再生塑料 涂料 材料",
+          "汽车 行人保护 车灯 法规",
+          "汽车 新车型 产品 战略"
+        ],
         "keywords": [
           "汽车 外饰 新技术",
           "汽车 发光 格栅 车标",
@@ -437,6 +485,13 @@
       "インド": {
         "lang": "en",
         "bing_market": "en-IN",
+        "trend_keywords": [
+          "India passenger car SUV sales segment market share",
+          "India car design new model concept",
+          "India automotive recycled plastics materials",
+          "India vehicle pedestrian lighting safety regulation",
+          "India automaker new model strategy supplier"
+        ],
         "keywords": [
           "automotive exterior product technology India",
           "automotive illuminated grille emblem India",
@@ -557,16 +612,22 @@
     "prompt_path": "prompts/collection.md",
     "selection": {
       "minimum_score": 60,
+      "trend_minimum_score": 65,
+      "product_priority_count": 6,
+      "maximum_trends_per_country": 4,
       "maximum_per_country": 10,
       "fill_quota_with_rejected": false,
       "require_original_image": false,
       "papers_enabled": false
     },
     "image_generation": {
-      "enabled": false,
-      "provider": "none",
-      "future_provider": "exabase"
+      "enabled": true,
+      "provider": "exabase",
+      "max_images": 4,
+      "batch_seconds": 900,
+      "timeout_seconds": 420
     },
-    "initial_scope_note": "外装メンバーへのヒヤリング前の仮設定。製品対象・記事例・採用条件を確認して調整する。"
+    "date_timezone": "Asia/Tokyo",
+    "initial_scope_note": "外装メンバーへのヒヤリング前の仮設定。製品・技術とトレンド・マーケットを区別し、製品6件を優先、トレンド最大4件、合計最大10件/地域。非対象で穴埋めしない。"
   }
 }

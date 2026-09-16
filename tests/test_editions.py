@@ -37,7 +37,10 @@ class EditionTests(unittest.TestCase):
         self.assertEqual(interior.content_dir, ROOT)
         self.assertEqual(exterior_context.content_dir, ROOT / "content/exterior")
         self.assertEqual(exterior_context.runtime_dir, ROOT / "runtime/exterior")
-        self.assertFalse(exterior_context.image_generation["enabled"])
+        self.assertTrue(exterior_context.image_generation["enabled"])
+        self.assertEqual(exterior_context.image_generation["provider"], "exabase")
+        self.assertEqual(exterior_context.image_generation["max_images"], 4)
+        self.assertNotEqual(exterior_context.image_generation["provider"], "gemini")
         for value in ("", "exterir", "../interior"):
             with self.assertRaises(ValueError):
                 get_edition(value)

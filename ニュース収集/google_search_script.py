@@ -9,7 +9,7 @@ import feedparser
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, quote, urljoin, parse_qs
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from dateutil import parser
 import difflib
 import json
@@ -57,6 +57,8 @@ LEGACY_EXCEL_FILE = str(EDITION.runtime_dir / "search_results.xlsx")
 SOURCE_FETCH_COUNTS = {"attempted": 0, "succeeded": 0}
 TARGET_DATES_RUN = []
 SHEET2_RESULT = None
+COLLECTION_METRICS = {}
+JST = timezone(timedelta(hours=9))
 
 # Output columns
 OUTPUT_COLUMNS = [
@@ -82,6 +84,8 @@ OUTPUT_COLUMNS = [
     "LLM\u5f8c\u51e6\u7406",
     "\u30b9\u30c6\u30fc\u30bf\u30b9",
 ]
+BASE_OUTPUT_COLUMNS = list(OUTPUT_COLUMNS)
+EXTERIOR_EDITORIAL_COLUMNS = ["記事区分", "トレンド分類"]
 
 # Request defaults
 HEADERS = {
@@ -415,7 +419,7 @@ def apply_department_settings(dept, settings_path):
 
 
 def configure_edition(edition_id=None):
-    global EDITION, DEPARTMENT, DEPT_SETTINGS_PATH, EXCEL_FILE, LEGACY_EXCEL_FILE, SHEET2_INTERIOR_TERMS
+    global EDITION, DEPARTMENT, DEPT_SETTINGS_PATH, EXCEL_FILE, LEGACY_EXCEL_FILE, SHEET2_INTERIOR_TERMS, OUTPUT_COLUMNS
     EDITION = get_edition(edition_id)
     DEPARTMENT = EDITION.id
     os.environ["DAILYNEWS_EDITION"] = EDITION.id
@@ -423,6 +427,7 @@ def configure_edition(edition_id=None):
     EXCEL_FILE = str(EDITION.runtime_dir / "search_results.csv")
     LEGACY_EXCEL_FILE = str(EDITION.runtime_dir / "search_results.xlsx")
     apply_department_settings(EDITION.id, DEPT_SETTINGS_PATH)
+    OUTPUT_COLUMNS = BASE_OUTPUT_COLUMNS + (EXTERIOR_EDITORIAL_COLUMNS if EDITION.id == "exterior" else [])
     if EDITION.id == "exterior":
         SHEET2_INTERIOR_TERMS = list(exterior_rules.PRODUCT_TERMS)
     # Caches contain editorial decisions; never share them between editions.
@@ -525,6 +530,11 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
         if len(str(content)) >= 80:
             score += 8.0
         weak_words = ["recall", "lawsuit", "stock", "sales", "工場", "販売台数", "株", "訴訟", "リコール"]
+        if EDITION.id == "exterior":
+            # Market and regulation signals are useful in their own editorial lane.
+            weak_words = ["stock price", "株価", "celebrity", "芸能", "gaming"]
+            if exterior_rules.matching_trend_topics(text):
+                score += 60.0
         if any(w.lower() in text for w in weak_words):
             score -= 25.0
         return score
@@ -538,11 +548,22 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
     picked = []
     for _, group in grouped.items():
         group.sort(key=lambda x: (x.get("_prefilter_score", 0), -x.get("_prefilter_order", 0)), reverse=True)
-        picked.extend(group[:per_country_limit])
+        if EDITION.id == "exterior":
+            # Reserve review capacity for trends; a product keyword count must not
+            # crowd out a market report before the semantic LLM review.
+            required = [item for item in group if item.get("_previous_target")]
+            trends = [item for item in group if item not in required and exterior_rules.news_category(item.get("タイトル"), item.get("内容"))[0] == "trend"]
+            trend_slots = min(max(1, per_country_limit // 3), max(0, per_country_limit - len(required)))
+            chosen = required + trends[:trend_slots]
+            chosen.extend(item for item in group if item not in chosen)
+            picked.extend(chosen[:max(per_country_limit, len(required))])
+        else:
+            picked.extend(group[:per_country_limit])
     picked.sort(key=lambda x: x.get("_prefilter_order", 0))
     for item in picked:
         item.pop("_prefilter_order", None)
         item.pop("_prefilter_score", None)
+        item.pop("_previous_target", None)
     return picked
 
 
@@ -551,9 +572,55 @@ def parse_date(date_str):
         return None
     try:
         dt = parser.parse(str(date_str))
+        if EDITION.id == "exterior" and dt.tzinfo is not None:
+            dt = dt.astimezone(JST)
         return dt.strftime('%Y-%m-%d')
     except:
         return None
+
+
+def search_date_clause(target_dates):
+    """Search a wide enough window, then enforce exact JST dates on results."""
+    if EDITION.id != "exterior" or not target_dates:
+        return "when:1d"
+    earliest = min(datetime.strptime(value, "%Y-%m-%d").date() for value in target_dates)
+    days = max(2, (datetime.now(JST).date() - earliest).days + 2)
+    return f"when:{days}d"
+
+
+def edition_search_keywords(settings, limit=None):
+    products = list(settings.get("keywords", []))
+    if EDITION.id != "exterior":
+        return products[:limit] if limit else products
+    trends = list(settings.get("trend_keywords", []))
+    combined = []
+    for index in range(max(len(products), len(trends))):
+        for group in (products, trends):
+            if index < len(group) and group[index] not in combined:
+                combined.append(group[index])
+    return combined[:limit] if limit else combined
+
+
+def store_exterior_assessment(item, assessment):
+    if EDITION.id == "exterior":
+        inferred = exterior_rules.news_category(item.get("タイトル"), item.get("内容"))
+        item["記事区分"] = assessment.get("category", inferred[0])
+        item["トレンド分類"] = assessment.get("trend_topic", inferred[1])
+
+
+def split_exterior_reassessment(frame, target_dates):
+    """Re-review requested dates without losing other dates or forcing acceptance."""
+    if frame.empty:
+        return frame, []
+    dates = pd.to_datetime(frame.get("日付"), errors="coerce").dt.strftime("%Y-%m-%d")
+    mask = dates.isin(set(target_dates))
+    records = frame.loc[mask].fillna("").to_dict("records")
+    for item in records:
+        item["_previous_target"] = item.get("LLM判定") == "対象"
+        for field in ("LLM判定", "LLM後処理", "内装関連度", "内装判定理由", "記事区分", "トレンド分類",
+                      "タイトル（日本語）", "内容（日本語）"):
+            item[field] = ""
+    return frame.loc[~mask].copy(), records
 
 def extract_image_from_rss(entry):
     """RSS/Atom?????????URL???"""
@@ -1402,6 +1469,10 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             return None
         txt = resp.json().get("choices", [{}])[0].get("message", {}).get("content", "")
         data = extract_json_object(txt)
+        if EDITION.id == "exterior" and not data:
+            # Some local models continue the assistant's {"score": prefix.
+            # Recover the whole object so category fields survive alongside score.
+            data = extract_json_object('{"score":' + txt)
         score = normalize_interior_score(data.get("score", data.get("interior_score")))
         if score is None:
             m = re.search(r'"(?:score|interior_score)"\s*:\s*([0-9.]+)', txt)
@@ -1438,10 +1509,18 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
                 image_interior = True if raw == "true" else (False if raw == "false" else None)
         if EDITION.id == "interior":
             score = spread_interior_score(score, title, url, image_interior)
-        score, calibration_reason = calibrate_interior_score(score, title, content, summary, image_interior)
+        category, trend_topic = "", ""
+        if EDITION.id == "exterior":
+            category, trend_topic = exterior_rules.news_category(title, content, data.get("category"), data.get("trend_topic"))
+            score, calibration_reason = exterior_rules.calibrate_score(score, title, content, summary,
+                                                                       data.get("category"), data.get("trend_topic"))
+        else:
+            score, calibration_reason = calibrate_interior_score(score, title, content, summary, image_interior)
         if calibration_reason:
             reason = (reason + "; " + calibration_reason).strip("; ")[:80]
         result = {"score": score, "image_interior": image_interior, "reason": reason}
+        if EDITION.id == "exterior":
+            result.update(category=category, trend_topic=trend_topic)
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
@@ -2574,6 +2653,15 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     for col in [col_country, col_title, col_title_jp, col_content, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason, col_llm_post, col_date]:
         if col not in work.columns:
             work[col] = ""
+    if EDITION.id == "exterior":
+        for col in EXTERIOR_EDITORIAL_COLUMNS:
+            if col not in work.columns:
+                work[col] = ""
+        for index, row in work.iterrows():
+            category, topic = exterior_rules.news_category(row.get(col_title), row.get(col_content),
+                                                           row.get("記事区分"), row.get("トレンド分類"))
+            work.at[index, "記事区分"] = category
+            work.at[index, "トレンド分類"] = topic
 
     # 日本語欄が空なら原文で補完
     work[col_title_jp] = work[col_title_jp].where(work[col_title_jp].astype(str).str.strip().ne(""), work[col_title])
@@ -2589,6 +2677,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         if dt.notna().any():
             max_date = dt.max().date()
             filtered = filtered[dt.dt.date == max_date]
+    dated_candidates = filtered.copy()
 
     # URLと画像URLが有効なものだけを公開候補にする。Google Newsの
     # 未解決リンクや途中で切れたURLは、本文・画像の誤結合につながる。
@@ -2656,6 +2745,9 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
             if strict_selection:
                 target_group = target_group[pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("minimum_score", 60)]
+                target_group = target_group[target_group["記事区分"].isin(("product", "trend"))]
+                trend_mask = target_group["記事区分"].eq("trend")
+                target_group = target_group[~trend_mask | (pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("trend_minimum_score", 65))]
                 extras = group.iloc[0:0]
         selected = []
         selected_idx = set()
@@ -2673,22 +2765,33 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                     return True
             return False
 
-        def add_rows(df_rows, allow_similar=False):
+        def add_rows(df_rows, allow_similar=False, max_added=None):
             nonlocal selected, selected_idx, selected_texts
+            added = 0
             for idx, row in df_rows.iterrows():
+                if (limit is not None and len(selected) >= limit) or (max_added is not None and added >= max_added):
+                    return
                 if idx in selected_idx:
                     continue
                 text = text_key(row)
                 if not allow_similar and text and is_similar_text(text):
                     continue
                 selected.append(row)
+                added += 1
                 selected_idx.add(idx)
                 if text:
                     selected_texts.append(text)
                 if limit is not None and len(selected) >= limit:
                     return
 
-        add_rows(target_group, allow_similar=False)
+        if strict_selection:
+            products = target_group[target_group["記事区分"].eq("product")]
+            trends = target_group[target_group["記事区分"].eq("trend")]
+            add_rows(products, max_added=selection.get("product_priority_count", 6))
+            add_rows(trends, max_added=selection.get("maximum_trends_per_country", 4))
+            add_rows(products)
+        else:
+            add_rows(target_group, allow_similar=False)
         if limit is not None and len(selected) < limit:
             add_rows(extras, allow_similar=False)
         if not strict_selection and limit is not None and len(selected) < limit:
@@ -2743,6 +2846,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
 
     # Retain source prices for validation when publication resumes without the LLM.
     sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
+    if EDITION.id == "exterior":
+        sheet_cols.extend(EXTERIOR_EDITORIAL_COLUMNS)
     sheet2_df = filtered[sheet_cols].copy()
     if col_date in sheet2_df.columns:
         sheet2_df[col_date] = pd.to_datetime(sheet2_df[col_date], errors="coerce").dt.strftime("%Y-%m-%d")
@@ -2786,7 +2891,33 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             sheet2_csv[col] = sheet2_csv[col].str.replace("\n", " ", regex=False)
             sheet2_csv[col] = sheet2_csv[col].str.replace("\r", " ", regex=False)
     sheet2_csv.to_csv(csv_path, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8", lineterminator="\n")
-    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(work)}
+    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(dated_candidates)}
+    if EDITION.id == "exterior":
+        selected_urls = set(sheet2_csv[col_url].astype(str))
+        reasons = []
+        for _, row in dated_candidates.iterrows():
+            score = normalize_interior_score(row.get(col_interior_score))
+            threshold = selection.get("trend_minimum_score", 65) if row.get("記事区分") == "trend" else selection.get("minimum_score", 60)
+            if str(row.get(col_url)) in selected_urls:
+                reason = "selected"
+            elif not is_valid_article_url(row.get(col_url), allow_google_news=False):
+                reason = "invalid_url"
+            elif str(row.get(col_llm)).strip() != "対象":
+                reason = "not_relevant_or_unclassified"
+            elif score is None or score < threshold:
+                reason = "below_score_threshold"
+            elif row.get("記事区分") not in ("product", "trend"):
+                reason = "unsupported_category"
+            else:
+                reason = "similar_topic_or_category_limit"
+            reasons.append(reason)
+        review = dated_candidates[[col_country, col_date, col_title, col_title_jp, col_url, col_llm,
+                                   col_interior_score, col_interior_reason, *EXTERIOR_EDITORIAL_COLUMNS]].copy()
+        review["選別結果"] = reasons
+        review.to_csv(Path(excel_path).with_name("selection_review.csv"), index=False, encoding="utf-8-sig")
+        SHEET2_RESULT.update(selection_outcomes=dict(Counter(reasons)),
+                             selected_by_category=dict(Counter(sheet2_csv["記事区分"].tolist())),
+                             selected_by_country=dict(Counter(sheet2_csv[col_country].tolist())))
 
     if OUTPUT_PAPERS_SHEET2:
         build_papers_sheet2(work, excel_path, target_dates)
@@ -2966,7 +3097,7 @@ def fetch_from_bing_search(target_dates):
     
     for country, settings in COUNTRY_SETTINGS.items():
         market = settings["bing_market"]
-        keywords = settings["keywords"]
+        keywords = edition_search_keywords(settings)
         
         print(f"  [{country}] 検索中...")
         country_count = 0
@@ -2977,7 +3108,7 @@ def fetch_from_bing_search(target_dates):
                 break
             encoded_keyword = quote(keyword)
             # Bing側も日付を1日に絞るため when:1d を付与
-            rss_url = f"https://www.bing.com/news/search?q={encoded_keyword}%20when%3A1d&format=rss&mkt={market}"
+            rss_url = f"https://www.bing.com/news/search?q={encoded_keyword}%20{quote(search_date_clause(target_dates))}&format=rss&mkt={market}"
             
             try:
                 response = requests.get(rss_url, headers=HEADERS, timeout=10)
@@ -3060,7 +3191,7 @@ def fetch_from_duckduckgo(target_dates):
         for country, settings in COUNTRY_SETTINGS.items():
             region = region_map.get(country, "wt-wt")
             # 各国から代表キーワードを拡大して検索件数を増やす
-            keywords = settings["keywords"][:DUCKDUCKGO_KEYWORD_LIMIT]
+            keywords = edition_search_keywords(settings, DUCKDUCKGO_KEYWORD_LIMIT)
             
             print(f"  [{country}] 検索中...")
             country_count = 0
@@ -3090,7 +3221,7 @@ def fetch_from_duckduckgo(target_dates):
                             ts = item.get("timestamp")
                             if ts:
                                 try:
-                                    pub_date = datetime.fromtimestamp(int(ts)).strftime('%Y-%m-%d')
+                                    pub_date = datetime.fromtimestamp(int(ts), JST if EDITION.id == "exterior" else None).strftime('%Y-%m-%d')
                                 except:
                                     pass
                         # 明確に日付が判定できない場合はスキップして精度を担保
@@ -3144,14 +3275,14 @@ def fetch_from_google_news(target_dates):
     }
     
     for country, region_params in google_news_regions.items():
-        keywords = COUNTRY_SETTINGS.get(country, {}).get("keywords", [])[:GOOGLE_NEWS_KEYWORD_LIMIT]
+        keywords = edition_search_keywords(COUNTRY_SETTINGS.get(country, {}), GOOGLE_NEWS_KEYWORD_LIMIT)
         print(f"  [{country}] 検索中...")
         country_count = 0
         
         for keyword in keywords:
             encoded_keyword = quote(keyword)
             rss_url = (
-                f"https://news.google.com/rss/search?q={encoded_keyword}%20when:1d"
+                f"https://news.google.com/rss/search?q={encoded_keyword}%20{quote(search_date_clause(target_dates))}"
                 f"&hl={region_params['hl']}&gl={region_params['gl']}&ceid={region_params['ceid']}"
             )
             
@@ -3224,6 +3355,9 @@ def fetch_from_newsapi(target_dates):
             dates_dt = [datetime.strptime(d, "%Y-%m-%d") for d in target_dates]
             from_date = min(dates_dt).strftime("%Y-%m-%d")
             to_date = max(dates_dt).strftime("%Y-%m-%d")
+            if EDITION.id == "exterior":
+                from_date = (min(dates_dt) - timedelta(days=1)).strftime("%Y-%m-%d")
+                to_date = (max(dates_dt) + timedelta(days=1)).strftime("%Y-%m-%d")
         except Exception:
             from_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
             to_date = datetime.now().strftime('%Y-%m-%d')
@@ -3235,7 +3369,7 @@ def fetch_from_newsapi(target_dates):
     keywords_to_search = []
     for country, settings in COUNTRY_SETTINGS.items():
         lang = settings["lang"]
-        for kw in settings["keywords"][:NEWSAPI_KEYWORD_LIMIT]:
+        for kw in edition_search_keywords(settings, NEWSAPI_KEYWORD_LIMIT):
             keywords_to_search.append((kw, lang, country))
     
     for keyword, lang, country in keywords_to_search:
@@ -3258,7 +3392,7 @@ def fetch_from_newsapi(target_dates):
                 count = 0
                 
                 for article in articles:
-                    pub_date = article.get("publishedAt", "")[:10]
+                    pub_date = parse_date(article.get("publishedAt", "")) if EDITION.id == "exterior" else article.get("publishedAt", "")[:10]
                     if not is_target_date(pub_date, target_dates):
                         continue
                     image_url = article.get("urlToImage", "")
@@ -3327,7 +3461,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         is_paper_item = str(country).strip() in ("\u8ad6\u6587", "paper", "papers")
         if is_paper_item:
             item["LLM\u5224\u5b9a"] = "\u5bfe\u8c61"
-        elif USE_LLM:
+        elif USE_LLM and EDITION.id != "exterior":
             llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
             if llm_relevance:
                 item["LLM判定"] = llm_relevance
@@ -3367,6 +3501,16 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
             item["画像URL"] = ""
             item["LLM判定"] = "非対象"
             item["LLM後処理"] = "スキップ"
+        if EDITION.id == "exterior" and USE_LLM and is_valid_article_url(item.get("URL"), allow_google_news=False):
+            # RSS snippets often omit the very exterior details or market data
+            # needed for the first decision. Fetch once, reuse the summary cache.
+            article_text = fetch_article_text(item.get("URL"))
+            if len(article_text) >= 150:
+                content = article_text
+                item["内容"] = content
+            llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
+            if llm_relevance:
+                item["LLM判定"] = llm_relevance
         # URL健全性チェック（記事）
         if not check_url_ok(item.get("URL"), is_image=False):
             item["HTML取得"] = "×"
@@ -3405,6 +3549,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                 if assessment:
                     item["内装関連度"] = assessment["score"]
                     item["内装判定理由"] = assessment.get("reason", "")
+                    store_exterior_assessment(item, assessment)
                     if assessment.get("image_interior") is not None:
                         item["画像判定"] = "あり" if assessment.get("image_interior") else "なし"
             item["LLM後処理"] = "実施"
@@ -3517,6 +3662,7 @@ def enrich_existing_df(df):
                         if assessment:
                             row["内装関連度"] = assessment["score"]
                             row["内装判定理由"] = assessment.get("reason", "")
+                            store_exterior_assessment(row, assessment)
                             if assessment.get("image_interior") is not None:
                                 row["画像判定"] = "あり" if assessment.get("image_interior") else "なし"
                         row["LLM後処理"] = "実施"
@@ -3629,6 +3775,7 @@ def enrich_existing_df(df):
             if assessment:
                 row["内装関連度"] = assessment["score"]
                 row["内装判定理由"] = assessment.get("reason", "")
+                store_exterior_assessment(row, assessment)
                 if assessment.get("image_interior") is not None:
                     row["画像判定"] = "あり" if assessment.get("image_interior") else "なし"
             llm_calls += 1
@@ -3658,7 +3805,9 @@ def enrich_existing_df(df):
     return df_out
 
 def _main():
+    global TARGET_DATES_RUN, SHEET2_RESULT
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    reassess_target_dates = "--reassess-target-dates" in sys.argv
     repair_target_dates = "--repair-target-dates" in sys.argv
     repair_sheet2_only = "--repair-sheet2-only" in sys.argv
     repair_relevance_only = "--repair-relevance-only" in sys.argv
@@ -3673,14 +3822,18 @@ def _main():
         except Exception:
             pass
     configure_edition(DEPARTMENT)
+    if reassess_target_dates and EDITION.id != "exterior":
+        raise ValueError("--reassess-target-dates is available only for the exterior edition")
+    SHEET2_RESULT = None
+    COLLECTION_METRICS.clear()
+    SOURCE_FETCH_COUNTS.update(attempted=0, succeeded=0)
     EDITION.ensure_directories()
     if EDITION.id == "exterior":
         (EDITION.runtime_dir / "collection_result.json").write_text(json.dumps({"edition_id": EDITION.id, "completed": False, "started_at": datetime.now().astimezone().isoformat()}, ensure_ascii=False), encoding="utf-8")
 
 
 
-    global TARGET_DATES_RUN
-    today = datetime.now()
+    today = datetime.now(JST) if EDITION.id == "exterior" else datetime.now()
     yesterday = today - timedelta(days=1)
     target_dates = []
     if "--dates" in sys.argv:
@@ -3698,6 +3851,8 @@ def _main():
     if ONLY_PAPERS_RSS and not target_dates:
         target_dates = []
     TARGET_DATES_RUN = target_dates
+    if reassess_target_dates and not target_dates:
+        raise ValueError("--reassess-target-dates requires explicit target dates")
     
     print("=" * 60)
     print(f"  {SUBJECT_NAME}ニュース収集スクリプト（検証済みRSS版）")
@@ -3708,7 +3863,7 @@ def _main():
         print("対象日付: 制限なし（全期間）")
     print(f"RSSフィード: {len(RSS_FEEDS)}サイト（検証済み）")
     build_rss_feed_list()
-    print(f"Bing検索: 各国{len(COUNTRY_SETTINGS)}地域 × 16-18キーワード")
+    print(f"検索キーワード（国別）: { {country: len(edition_search_keywords(settings)) for country, settings in COUNTRY_SETTINGS.items()} }")
 
     # 既存データ読み込み
     existing_urls = set()
@@ -3719,6 +3874,11 @@ def _main():
         df_existing = load_existing_data(EXCEL_FILE)
     elif os.path.exists(LEGACY_EXCEL_FILE):
         df_existing = load_existing_data(LEGACY_EXCEL_FILE)
+    reassessment_items = []
+    if reassess_target_dates:
+        df_existing, reassessment_items = split_exterior_reassessment(df_existing, target_dates)
+        COLLECTION_METRICS["reassessed_existing_count"] = len(reassessment_items)
+        print(f"外装の指定日を新基準で再評価: 既存{len(reassessment_items)}件（既採用も再判定）")
 
     if not df_existing.empty:
         if "URL" in df_existing.columns:
@@ -3864,7 +4024,7 @@ def _main():
             print(f"\n❌ 保存エラー: {e}")
         return
 
-    all_results = []
+    all_results = list(reassessment_items)
 
     if ONLY_PAPERS_RSS:
         RSS_FEEDS[:] = [f for f in RSS_FEEDS if f.get("country") == "論文"]
@@ -3880,6 +4040,7 @@ def _main():
     
     print("\n" + "=" * 60)
     print(f"全ソース合計: {len(all_results)}件")
+    COLLECTION_METRICS["fetched_count"] = len(all_results) - len(reassessment_items)
     if all_results:
         src_counter = Counter([item.get("ソース", "") for item in all_results if item.get("ソース")])
         cty_counter = Counter([item.get("国", "") for item in all_results if item.get("国")])
@@ -3928,6 +4089,8 @@ def _main():
     if dup_by_reason:
         print(f"  重複理由内訳: {dict(dup_by_reason)}")
     print(f"  最終結果: {len(unique_results)}件")
+    COLLECTION_METRICS["deduplicated_count"] = len(unique_results)
+    COLLECTION_METRICS["duplicate_reasons"] = dict(dup_by_reason)
     if unique_results:
         src_counter_final = Counter([item.get("ソース", "") for item in unique_results if item.get("ソース")])
         cty_counter_final = Counter([item.get("国", "") for item in unique_results if item.get("国")])
@@ -3937,6 +4100,8 @@ def _main():
     if unique_results:
         before_enrich = len(unique_results)
         unique_results = prefilter_results_for_enrichment(unique_results)
+        COLLECTION_METRICS["reviewed_count"] = len(unique_results)
+        COLLECTION_METRICS["reviewed_by_country"] = dict(Counter(item.get("国", "") for item in unique_results))
         if len(unique_results) != before_enrich:
             cty_counter_prefilter = Counter([item.get("国", "") for item in unique_results if item.get("国")])
             print(f"  LLM前候補絞り込み: {before_enrich}件 -> {len(unique_results)}件")
@@ -4004,6 +4169,8 @@ def main():
         "source_attempt_count": SOURCE_FETCH_COUNTS["attempted"],
         "llm_required_errors": dict(EXTERIOR_REQUIRED_LLM_ERRORS),
         "llm_required_error_count": required_llm_error_count,
+        "date_timezone": "Asia/Tokyo",
+        "pipeline": dict(COLLECTION_METRICS),
         **SHEET2_RESULT,
     }
     (EDITION.runtime_dir / "collection_result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
