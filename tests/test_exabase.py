@@ -47,13 +47,13 @@ class ExaBaseTests(unittest.TestCase):
         exabase.atomic_json(directory / "phase.json", {"event": "done", "key": request["key"]})
         exabase.atomic_json(directory / "result.json", {"status": "DONE", "key": request["key"], "file": str(file)})
 
-    def test_disabled_and_interior_never_invoke_provider(self):
+    def test_disabled_and_unconfigured_interior_never_invoke_provider(self):
         worker = Mock(side_effect=AssertionError("Must not call provider"))
         self.assertEqual(exabase.generate_for_edition(self.edition, worker=worker)["status"], "disabled")
         interior = get_edition("interior", self.root)
         interior.config_dir.mkdir()
         interior.collection_settings_path.write_text('{"interior":{}}', encoding="utf-8")
-        self.assertEqual(exabase.generate_for_edition(interior, worker=worker)["status"], "not_applicable")
+        self.assertEqual(exabase.generate_for_edition(interior, worker=worker)["status"], "disabled")
         worker.assert_not_called()
 
     def test_parser_handles_escaped_quotes_braces_and_only_latest(self):
@@ -136,6 +136,8 @@ class ExaBaseTests(unittest.TestCase):
         self.assertTrue(ideas[0].image.startswith("images/exabase_exterior_5_"))
         self.assertEqual(ideas[1].image, "")
         self.assertEqual(ideas[0].sources, ("jp1",))
+        self.assertEqual(ideas[0].image_provider, "exabase")
+        self.assertEqual(ideas[0].image_model, "")
         manifest = exabase.read_json(Path(request["outputDir"]) / "manifest.json")
         self.assertEqual(manifest["sourceNewsIds"], ["jp1"])
         self.assertEqual(manifest["edition_id"], "exterior")
@@ -156,7 +158,10 @@ class ExaBaseTests(unittest.TestCase):
             self.worker(root, request, seconds)
             raise exabase.ImageJobError("WORKER_TIMEOUT")
         worker = Mock(side_effect=crash)
-        exabase.generate_for_edition(self.edition, pilot_idea_id=5, publish=False, worker=worker)
+        first = exabase.generate_for_edition(self.edition, pilot_idea_id=5, publish=False, worker=worker)
+        self.assertEqual(first["status"], "complete")
+        self.assertEqual(first["cached"], 1)
+        self.assertFalse(first["errors"])
         recovered = exabase.generate_for_edition(self.edition, pilot_idea_id=5, publish=False, worker=worker)
         self.assertEqual(recovered["cached"], 1)
         self.assertEqual(worker.call_count, 1)
@@ -177,6 +182,22 @@ class ExaBaseTests(unittest.TestCase):
         changed.putpixel((0, 0), (255, 255, 255)); changed.save(file, "JPEG", quality=75)
         with self.assertRaisesRegex(exabase.ImageJobError, "INVALID_IMAGE"):
             exabase.generate_one(self.edition, self.idea, self.sources, worker=Mock())
+
+    def test_interior_prompt_and_metadata_without_regenerating_exterior(self):
+        interior = get_edition("interior", self.root)
+        interior.config_dir.mkdir()
+        interior.collection_settings_path.write_text(json.dumps({"interior": {
+            "image_generation": {"enabled": True, "provider": "exabase", "max_images": 10}}}), encoding="utf-8")
+        (interior.content_dir / "insights_data.js").write_text(self.text, encoding="utf-8")
+        (interior.content_dir / "news_data.js").write_text('window.NEWS_DATA = [{id: "jp1", title: "内装", desc: "収納"}];', encoding="utf-8")
+        worker = Mock(side_effect=self.worker)
+        result = exabase.generate_for_edition(interior, worker=worker)
+        self.assertEqual(result["generated"], 2)
+        self.assertIn("内装部品", worker.call_args.args[1]["prompt"])
+        self.assertNotIn("外装部品", worker.call_args.args[1]["prompt"])
+        self.assertEqual(self.insights.read_text(encoding="utf-8"), self.text)
+        latest = exabase.select_ideas((interior.content_dir / "insights_data.js").read_text(encoding="utf-8"))
+        self.assertTrue(all(idea.image_provider == "exabase" for idea in latest))
 
 
 if __name__ == "__main__":

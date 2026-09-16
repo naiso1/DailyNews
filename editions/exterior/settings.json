@@ -628,8 +628,8 @@
     "image_generation": {
       "enabled": true,
       "provider": "exabase",
-      "max_images": 4,
-      "batch_seconds": 900,
+      "max_images": 10,
+      "batch_seconds": 6000,
       "timeout_seconds": 420
     },
     "date_timezone": "Asia/Tokyo",

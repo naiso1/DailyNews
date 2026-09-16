@@ -71,8 +71,13 @@ def prepare(config, editions=None):
                  "DAILYNEWS_POWER_AUTOMATE_MAILING_LIST"):
         os.environ.pop(name, None)
     os.environ["PATH"] = str(RUNTIME / "venv/Scripts") + os.pathsep + os.environ["PATH"]
-    if any(e.image_generation.get("enabled") and e.image_generation.get("provider") == "gemini" for e in contexts) and not os.environ.get("GEMINI_API_KEY", "").strip():
-        raise RuntimeError("GEMINI_API_KEY is missing for this Windows user")
+    if not os.environ.get("GEMINI_API_KEY", "").strip():
+        if any(e.id == "interior" and e.image_generation.get("enabled") and
+               e.image_generation.get("provider") == "gemini" for e in contexts):
+            raise RuntimeError("GEMINI_API_KEY is missing for this Windows user")
+        if any(e.id == "interior" and e.image_generation.get("enabled") and
+               e.image_generation.get("fallback_provider") == "gemini" for e in contexts):
+            print("[WARN] Interior API fallback key is unavailable; exaBase and text publication will continue.", flush=True)
     with winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\OneDrive\Accounts\Business1") as key:
         account = str(winreg.QueryValueEx(key, "UserEmail")[0]).casefold()
         folder = Path(winreg.QueryValueEx(key, "UserFolder")[0])

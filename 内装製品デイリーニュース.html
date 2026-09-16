@@ -1134,6 +1134,17 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     transition: transform 0.5s ease;
 }
 .idea-card:hover .idea-img { transform: scale(1.03); }
+.idea-image-label {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    max-width: calc(100% - 12px);
+    background: rgba(0, 0, 0, .7);
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-size: 11px;
+}
 
 .idea-content {
     flex: 1;
@@ -1596,7 +1607,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 return `${through}まで収集・選定済み。今回の対象期間（${range}）は条件に合う記事がありませんでした。掲載済みの記事は引き続き閲覧できます。`;
             }
             if (payload.issue_date) {
-                return `${payload.issue_date}号：${payload.selected_count}件（当日掲載${payload.selected_count - payload.supplemental_count}件、直近7日からの補充${payload.supplemental_count}件）。記事の日付は元の掲載日です。`;
+                return `${payload.issue_date}号：${payload.selected_count}件`;
             }
             let message = `${through}まで収集・選定済み。今回の対象期間（${range}）の採用は${payload.selected_count}件です。`;
             if (Array.isArray(news) && news.length && !news.some((item) => item.date === through)) {
@@ -2306,6 +2317,25 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             return window.interactionsData?.[item.id]?.imageUrlOverride || item.img || "";
         }
         window.getNewsImageUrl = getNewsImageUrl;
+
+        function ideaImageLabel(idea) {
+            const provider = String(idea?.imageProvider || "").toLowerCase();
+            if (provider === "exabase") return "AI生成イメージ（exaBase）";
+            if (provider === "api") return "AI生成イメージ（API）";
+            if (/^images\/exabase_(interior|exterior)_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea?.img || "")) {
+                return "AI生成イメージ（exaBase）";
+            }
+            return "AI生成イメージ";
+        }
+
+        function renderIdeaImage(idea) {
+            const config = window.DAILYNEWS_CONFIG;
+            const existingExteriorImage = config.id === "exterior"
+                && /^images\/exabase_exterior_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea?.img || "");
+            if (!idea?.img || !(config.imageGenerationEnabled || existingExteriorImage)) return "";
+            const label = ideaImageLabel(idea);
+            return `<div class="idea-image-wrapper"><img src="${escapeHtml(idea.img)}" alt="${escapeHtml(idea.title)}の${label}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div><span class="idea-image-label">${label}</span></div>`;
+        }
         const TITLE_ICONS = {
             world: "page_images/icon_world.png",
             jp: "page_images/icon_jp.png",
@@ -3290,7 +3320,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
-                ${window.DAILYNEWS_CONFIG.id === "exterior" ? `<div class="card-tags" style="margin-bottom:8px"><span class="card-tag">${newsCategoryLabel(n)}</span>${isNewContent(n) && n.date < window.EXTERIOR_PUBLICATION_STATUS?.issue_date ? '<span class="card-tag">直近7日から補充</span>' : ''}</div>` : ""}
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
                 ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
@@ -3673,7 +3702,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                                         <span class="idea-title">${idea.title}</span>
                                     </div>
                                     <div class="idea-body">
-                                        ${idea.img && (window.DAILYNEWS_CONFIG.imageGenerationEnabled || (window.DAILYNEWS_CONFIG.id === "exterior" && /^images\/exabase_exterior_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea.img))) ? `<div class="idea-image-wrapper"><img src="${escapeHtml(idea.img)}" alt="${escapeHtml(idea.title)}のAI生成イメージ" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div><span style="position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,.7);color:white;padding:3px 7px;border-radius:5px;font-size:11px">AI生成イメージ</span></div>` : ""}
+                                        ${renderIdeaImage(idea)}
                                         <div class="idea-content">
                                             <p class="idea-desc">${formatInlineTextWithRefs(idea.desc, newsById)}</p>
                                             <div class="actions">

@@ -643,6 +643,15 @@
     ],
     "prompt_path": "プロンプト.md",
     "subject_name": "内装",
-    "photo_target_label": "車内装"
+    "photo_target_label": "車内装",
+    "image_generation": {
+      "enabled": true,
+      "provider": "exabase",
+      "fallback_provider": "gemini",
+      "max_images": 10,
+      "batch_seconds": 6000,
+      "timeout_seconds": 420,
+      "start_after_date": "2026-09-15"
+    }
   }
 }

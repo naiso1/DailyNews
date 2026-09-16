@@ -535,22 +535,14 @@ def _similarity(a: str, b: str):
 
 
 def extract_recent_ideas_by_country(insights_text: str, country: str, limit: int = 40):
+    from dailynews.exabase import LEAF_OBJECT, array_fields, string_field
     ideas = []
-    pattern_country = re.compile(rf"{re.escape(country)}\s*:\s*\[(.*?)\]\s*,", flags=re.DOTALL)
-    pattern_idea = re.compile(
-        r'title:\s*"([^"]*)"\s*,\s*desc:\s*"([^"]*)"(?:\s*,\s*imagePrompt:\s*"([^"]*)")?',
-        flags=re.DOTALL,
-    )
-    for cm in pattern_country.finditer(insights_text):
-        block = cm.group(1)
-        for im in pattern_idea.finditer(block):
-            ideas.append(
-                {
-                    "title": (im.group(1) or "").strip(),
-                    "desc": (im.group(2) or "").strip(),
-                    "imagePrompt": (im.group(3) or "").strip(),
-                }
-            )
+    for block in array_fields(insights_text, country):
+        for match in LEAF_OBJECT.finditer(block):
+            idea = {field: string_field(match.group(), field)[0].strip() for field in ("title", "desc", "imagePrompt")}
+            if not idea["title"] or not idea["desc"]:
+                continue
+            ideas.append(idea)
             if len(ideas) >= limit:
                 return ideas
     return ideas
@@ -1693,16 +1685,16 @@ def main():
                 HTML_PATH.write_text(html_text, encoding="utf-8")
 
     # Insights generation
+    insight_dates = ([issue_context["issue_date"]] if issue_context else (new_dates if new_dates else all_dates))
+    insight_start = min(insight_dates) if insight_dates else None
+    latest_date = max(insight_dates) if insight_dates else None
+    insight_date_label = (
+        f"{insight_start}〜{latest_date}"
+        if insight_start and latest_date and insight_start != latest_date
+        else latest_date
+    )
     if not args.skip_insights:
         insights_text = read_text_any(INSIGHTS_PATH) if INSIGHTS_PATH.exists() else 'window.DAILY_INSIGHTS = [\n];\n'
-        insight_dates = ([issue_context["issue_date"]] if issue_context else (new_dates if new_dates else all_dates))
-        insight_start = min(insight_dates) if insight_dates else None
-        latest_date = max(insight_dates) if insight_dates else None
-        insight_date_label = (
-            f"{insight_start}〜{latest_date}"
-            if insight_start and latest_date and insight_start != latest_date
-            else latest_date
-        )
         insight_exists = (
             has_insight_for_date(insights_text, insight_date_label)
             or has_insight_for_date(insights_text, latest_date)
@@ -1966,15 +1958,16 @@ def main():
         if not args.dry_run and not INSIGHTS_PATH.exists():
             INSIGHTS_PATH.write_text('window.DAILY_INSIGHTS = [\n];\n', encoding="utf-8")
         write_exterior_publication_status(items, args.dry_run)
-        if not args.dry_run and not args.skip_images:
-            from dailynews.exabase import optional_images
-            image_result = optional_images(EDITION)
-            print("[IMAGES] exterior: " + json.dumps({
-                "status": image_result["status"],
-                "generated": image_result.get("generated", 0),
-                "cached": image_result.get("cached", 0),
-                "errors": image_result.get("errors", []),
-            }, ensure_ascii=False))
+    if not args.dry_run and not args.skip_images and insight_date_label:
+        from dailynews.idea_images import optional_images
+        image_result = optional_images(EDITION, issue_date=insight_date_label)
+        print(f"[IMAGES] {EDITION.id}: " + json.dumps({
+            "status": image_result["status"],
+            "generated": image_result.get("generated", 0),
+            "cached": image_result.get("cached", 0),
+            "providers": image_result.get("providers", {}),
+            "errors": image_result.get("errors", []),
+        }, ensure_ascii=False))
     print("Done.")
 
 

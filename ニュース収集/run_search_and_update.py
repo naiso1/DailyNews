@@ -1116,30 +1116,7 @@ def main():
                 "auto_update_daily_news",
                 LOG_FILE,
             )
-            if (EDITION.image_generation.get("enabled", True)
-                    and EDITION.image_generation.get("provider", "gemini") == "gemini"
-                    and os.environ.get("GEMINI_API_KEY")):
-                gemini_model = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-preview").strip() or "gemini-3.1-flash-image-preview"
-                gemini_image_size = os.environ.get("GEMINI_IMAGE_SIZE", "512px").strip() or "512px"
-                gemini_aspect_ratio = os.environ.get("GEMINI_IMAGE_ASPECT_RATIO", "1:1").strip() or "1:1"
-                run_cmd(
-                    [
-                        sys.executable,
-                        "-u",
-                        str(ROOT / "generate_idea_images_gemini.py"),
-                        "--only-missing",
-                        "--model",
-                        gemini_model,
-                        "--image-size",
-                        gemini_image_size,
-                        "--aspect-ratio",
-                        gemini_aspect_ratio,
-                    ],
-                    "generate_idea_images_gemini",
-                    LOG_FILE,
-                )
-            else:
-                log(f"[INFO] Gemini image generation skipped for {EDITION.id}; optional image providers are handled by the updater.")
+            log(f"[INFO] Image generation for {EDITION.id} is handled by the updater (primary/fallback, current issue only).")
             generate_source_list_data()
             if EDITION.id == "interior":
                 run_cmd(

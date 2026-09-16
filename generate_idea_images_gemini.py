@@ -92,23 +92,10 @@ def extract_latest_block(text: str) -> str:
 
 
 def extract_ideas(block: str):
-    ideas = []
-    pattern = re.compile(
-        r"\{\s*id:\s*(\d+)\s*,\s*img:\s*\"([^\"]*)\"\s*,\s*title:\s*\"([^\"]*)\"\s*,\s*desc:\s*\"([^\"]*)\"(?:\s*,\s*imagePrompt:\s*\"([^\"]*)\")?(?:\s*,\s*sourceNewsIds:\s*\[([^\]]*)\])?\s*\}",
-        re.DOTALL,
-    )
-    for m in pattern.finditer(block):
-        ideas.append(
-            {
-                "id": int(m.group(1)),
-                "img": m.group(2),
-                "title": m.group(3),
-                "desc": m.group(4),
-                "imagePrompt": m.group(5) or "",
-                "sourceNewsIds": re.findall(r"[a-z]{2,5}\d+", m.group(6) or "", flags=re.IGNORECASE),
-            }
-        )
-    return ideas
+    from dailynews.exabase import select_ideas
+    return [{"id": idea.id, "img": idea.image, "title": idea.title, "desc": idea.desc,
+             "imagePrompt": idea.image_prompt, "sourceNewsIds": list(idea.sources)}
+            for idea in select_ideas("window.DAILY_INSIGHTS = [" + block + "];")]
 
 
 def extract_date(block: str) -> str:
@@ -230,9 +217,18 @@ def build_prompt(title: str, desc: str, image_prompt: str = "", has_references: 
     )
 
 
-def update_image_path(js_text: str, idea_id: int, new_path: str) -> str:
-    pattern = rf'(id:\s*{idea_id}\s*,\s*img:\s*")([^"]*)(")'
-    return re.sub(pattern, rf"\1{new_path}\3", js_text, count=1)
+def update_image_path(js_text: str, idea_id: int, new_path: str, *, provider=None, model="") -> str:
+    from dailynews.exabase import image_fields, select_ideas
+    ideas = select_ideas(js_text, idea_id=idea_id)
+    if not ideas:
+        return js_text
+    fields = {"img": new_path}
+    if provider is not None:
+        fields.update(imageProvider=provider, imageModel=model)
+    elif ideas[0].image != new_path:
+        # An old standalone cached file has no provider receipt; do not guess its origin.
+        fields.update(imageProvider="", imageModel="")
+    return image_fields(js_text, ideas[0], **fields)
 
 
 def parse_first_image_bytes(resp_json: dict) -> bytes | None:
@@ -348,7 +344,7 @@ def main():
                 print(f"[FAIL] {idea['id']}: no image payload")
                 continue
             dest_path.write_bytes(image_bytes)
-            updated = update_image_path(updated, idea["id"], f"images/{dest_path.name}")
+            updated = update_image_path(updated, idea["id"], f"images/{dest_path.name}", provider="api", model=args.model)
             print(f"[OK] Saved {dest_path.name}")
             count += 1
         except Exception as e:

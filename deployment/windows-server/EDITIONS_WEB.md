@@ -51,13 +51,15 @@ CLI単体は `node migrate-shared-identity.js --interior-db <絶対パス> --ext
 
 ## 画面の設定
 
-`GET /api/config` と `GET /dailynews_config.js` は、版の `id`、`name`、`basePath`、`apiBase`、`allowGuestRead`、`imageGenerationEnabled`、`sharedIdentity` を返す。外装の画像生成はexaBaseを使い、最新号の既存画像を含めて最大4枚。有料画像APIへの代替は行わない。静的プレビュー用に `dailynews_config.js` も共通配布する。
+`GET /api/config` と `GET /dailynews_config.js` は、版の `id`、`name`、`basePath`、`apiBase`、`allowGuestRead`、`imageGenerationEnabled`、`sharedIdentity` を返す。外装の画像生成はexaBaseを使い、最新号の各地域2案、既存画像を含めて最大10枚。有料画像APIへの代替は行わない。内装は2026-09-15より後の最新号からexaBaseを優先し、失敗案だけ既存Gemini APIへ代替する。静的プレビュー用に `dailynews_config.js` も共通配布する。
+
+企画画像の `imageProvider`（`exabase` / `api`）をもとに「AI生成イメージ（exaBase）」または「AI生成イメージ（API）」を表示する。`imageModel` は任意の記録項目。生成元が不明な旧画像は「AI生成イメージ」とし、ファイル名から推測でAPI表記を付けない。既知のexaBase専用ファイル名は旧画像の表示を補完できる。
 
 共通HTMLが設定を読み、タイトル・リンク・検索の関連度・タグ・保存キーを切り替える。外装は記事・考察をURLから閲覧でき、いいね・コメント・お気に入り・自分への通知・メール設定には共通アカウントでログインする。お気に入り等のブラウザ保存キーとサーバー内の操作履歴は版別のまま。
 
 外装は公開された `publication_status.json` の処理済み対象日と採用件数を表示する。対象記事ゼロの日も収集完了日を明示し、過去記事を閲覧できる。複数日処理では最終日に記事がなくても処理済み期間を表示し、New表示に反映する。初回作成中は `status: "building", processed_through: ""` を表示し、収集成功として扱わない。状態ファイルを確認できないときはその旨を表示する。
 
-7日補完の号では `issue_date` が号の日付、`lookback_start` が収集範囲の先頭、`source_dates` が元記事の日付集合、`selected_news_ids` がその号の記事ID一覧となる。記事の `date` は原公開日を保持し、新規補充記事には `digestDate` を付ける。New記事と地域別件数はID一覧で判定し、過去記事を再掲扱いにしない。元記事日での絞り込みも継続する。考察のNew判定は号の日付だけを用いる。
+7日補完の号では `issue_date` が号の日付、`lookback_start` が収集範囲の先頭、`source_dates` が元記事の日付集合、`selected_news_ids` がその号の記事ID一覧となる。記事の `date` は原公開日を保持し、新規補充記事には `digestDate` を付ける。New記事と地域別件数はID一覧で判定し、過去記事を再掲扱いにしない。元記事日での絞り込みも継続する。考察のNew判定は号の日付だけを用いる。ヘッダーの表示は「号の日付：件数」とし、カード上の分類・補充の追加帯は表示しない。記事区分による絞り込みは維持する。
 
 ## メール受信設定・API
 

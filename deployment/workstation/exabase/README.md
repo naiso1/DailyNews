@@ -1,6 +1,10 @@
-# 外装アイデア画像：exaBase連携
+# 内装・外装アイデア画像：exaBase連携
 
-`dailynews/exabase.py` が外装アイデア1件からプロンプト1件を作り、`worker.js` が専用のEdgeコンテキストでexaBaseを操作します。共有ツールの `generateBatch(count: 1)` を利用し、画像をアイデアIDと `sourceNewsIds` に対応づけます。Geminiなどの画像APIへの代替呼び出しはありません。内装版の既存画像生成は変更しません。
+`dailynews/exabase.py` がアイデア1件からプロンプト1件を作り、`worker.js` が専用のEdgeコンテキストでexaBaseを操作します。共有ツールの `generateBatch(count: 1)` を利用し、画像を版・アイデアID・`sourceNewsIds` に対応づけます。
+
+- 外装はexaBaseのみ。最新号の5地域各2案、既存画像を含めて最大10枚を対象とし、有料画像APIへ代替しません。
+- 内装は2026-09-15より後の最新号からexaBaseを優先します。exaBaseで画像が得られなかった案だけ既存Gemini APIへ代替します。既存画像を含む上限は10枚です。
+- 両版とも既存画像を再生成せず、過去号の欠損画像を一括生成しません。画像が得られない場合もニュース本文・考察を公開します。
 
 ## 処理PCの準備
 
@@ -20,49 +24,65 @@ node deployment/workstation/exabase/worker.js --check-session
 
 ## 最初は1案だけ確認
 
-自動生成の設定が `enabled: false, provider: "none"` でも、日時とIDを明示した試験を1件だけ実行できます。IDと日付は対象の `content/exterior/insights_data.js` に合わせます。
+自動生成の設定が `enabled: false, provider: "none"` でも、日時とIDを明示した試験を1件だけ実行できます。IDと日付は対象版の `insights_data.js` に合わせます（外装は `content/exterior/`、内装はルート）。直接実行するCLIはexaBase単体の試験です。内装のAPI代替まで含む通常処理とは分けて確認します。
 
 ```powershell
 $runtimePython = Join-Path $env:LOCALAPPDATA 'DailyNewsRuntime\venv\Scripts\python.exe'
-& $runtimePython -B -m dailynews.exabase --pilot-idea-id 5 --date 2026-09-15
+& $runtimePython -B -m dailynews.exabase --edition exterior --pilot-idea-id 5 --date 2026-09-15
 ```
 
 この時点では作業フォルダに保存するだけです。`runtime/exterior/exabase-last-result.json` の画像を開き、企画との対応や生成結果を確認します。ローカル掲載データへ反映する場合は、同じ引数に `--publish` を追加します。
 
 ```powershell
-& $runtimePython -B -m dailynews.exabase --pilot-idea-id 5 --date 2026-09-15 --publish
+& $runtimePython -B -m dailynews.exabase --edition exterior --pilot-idea-id 5 --date 2026-09-15 --publish
 ```
 
-完了済み画像はキャッシュから再利用するため、再生成しません。公開先への配備は別の通常デプロイ手順で行います。掲載画像名は `images/exabase_exterior_<ideaID>_<hash16桁>.<拡張子>` です。画面では原記事の写真と区別できる「AI生成イメージ」の注記を付けます。
+完了済み画像はキャッシュから再利用するため、再生成しません。公開先への配備は別の通常デプロイ手順で行います。掲載画像名は `images/exabase_<版>_<ideaID>_<hash16桁>.<拡張子>` です。画像ごとに `imageProvider: "exabase"` または `"api"` を記録し、画面では「AI生成イメージ（exaBase）」または「AI生成イメージ（API）」と表示します。API画像には実際に使用したモデルを `imageModel` に保存します。exaBase側のモデル名は未確認のため空にします。生成元が確認できない旧画像は「AI生成イメージ」のみ表示します。
 
 ## 定時処理で有効にする条件
 
-認証・1枚生成・画像の内容・掲載表示を確認してから、`editions/exterior/settings.json` の `image_generation` を変更します。
+認証・1枚生成・画像の内容・掲載表示を確認してから、版ごとの `image_generation` を設定します。外装は `editions/exterior/settings.json` の `exterior`、内装は `ニュース収集/department_settings.json` の `interior` が対象です。
+
+外装の設定：
 
 ```json
 {
   "enabled": true,
   "provider": "exabase",
   "timeout_seconds": 420,
-  "batch_seconds": 900,
-  "max_images": 4
+  "batch_seconds": 6000,
+  "max_images": 10
 }
 ```
 
-最新日の既存画像を4枚の上限から差し引き、残りの枠だけ未生成の案を順番に処理します。同じ日の再実行やアイデアの並び替えでも上限を超えません。過去日の一括生成は行いません。1画像の待機と全体の時間予算を制限し、画像生成が失敗してもニュース本文・考察の公開を継続します。認証切れや実行環境の不足が判明したら残りの画像処理を中止します。`provider: "none"` の間は通常処理からexaBaseを呼びません。
+内装は同じ設定に以下を加えます：
+
+```json
+{
+  "fallback_provider": "gemini",
+  "start_after_date": "2026-09-15"
+}
+```
+
+最新号の既存画像を上限から差し引き、残りの枠だけ未生成の案を順番に処理します。同じ号の再実行やアイデアの並び替えでも上限を超えません。1画像の待機と全体の時間予算を制限し、認証切れや実行環境の不足が判明したら残りのexaBase処理を中止します。`provider: "none"` の間は通常処理からexaBaseを呼びません。
+
+内装はexaBase処理後、最新号の欠損案だけAPIで生成します。認証切れ・時間切れ・結果不明も代替の対象ですが、同じプロバイダーへの結果不明ジョブの自動再送は行いません。外装はAPI代替を設定しても実行しません。通常処理の `image-generation-last-result.json` で号の日付、生成元別の結果、未生成案、エラーを確認できます。内装の作業先は `ニュース収集/`、外装は `runtime/exterior/` です。
+
+exaBaseの最終応答に失敗しても、画像ファイルと完了記録が保存済みなら回収して利用し、APIへの代替を避けます。他の画像処理が進行中の `BUSY` はAPIへ代替せず保留します。APIの5xx・408など送信後の結果を確定できないエラーは `API_NEEDS_REVIEW` として自動再送を止め、明確に拒否された要求だけを再試行可能とします。
 
 ## 再実行と障害対応
 
 | 状態 | 対応 |
 | --- | --- |
 | `AUTH_REQUIRED` | 定時処理と同じユーザーで `--login`、続いて `--check-session` |
-| `BUSY` | ログインまたは画像生成が終了してから再実行 |
+| `BUSY` | APIへ代替せず保留。ログインまたは画像生成が終了してから再実行 |
 | `ENGINE_CHANGED` | 共有エンジン変更内容を確認。確認せずハッシュを置き換えない |
 | `NEEDS_REVIEW` | 送信開始後に完了を確認できない。exaBaseの履歴を人が確認するまで再送しない |
-| `INVALID_SOURCE_IDS` | アイデアの出典IDと外装記事データを確認 |
+| `INVALID_SOURCE_IDS` | アイデアの出典IDと対象版の記事データを確認 |
 | `CONTENT_CHANGED` | 生成中に企画が変更された。現行企画を確認してから実行 |
+| `API_NEEDS_REVIEW` | API送信後に結果を確認できない。自動再送せず、APIの処理記録を確認 |
 
-`runtime/exterior/exabase-jobs/<key>/` に、入力、状態、アイデアと出典ID、画像ダイジェスト、完了結果を保存します。生成完了後に処理が途切れても、完了記録と画像を確認して再利用します。送信済みか不明なジョブは自動再送しません。exaBase側の履歴を確認し、再生成が必要と判断した場合だけ、対象IDを明示して `--retry-uncertain` を追加します。これは新たな生成を実行する場合があります。
+対象版の作業先の `exabase-jobs/<key>/` に、入力、状態、アイデアと出典ID、画像ダイジェスト、完了結果を保存します。生成完了後に処理が途切れても、完了記録と画像を確認して再利用します。送信済みか不明なジョブはexaBaseへ自動再送しません。exaBase側の履歴を確認し、再生成が必要と判断した場合だけ、対象IDを明示して `--retry-uncertain` を追加します。これは新たな生成を実行する場合があります。
 
 ブラウザの原文エラー、プロンプト、認証値を通常ログに流さず、安全な状態コードのみを返します。ジョブの入力・画像・結果は非公開作業データであり、公開するのは検証済み画像と掲載データだけです。
 
@@ -71,4 +91,5 @@ $runtimePython = Join-Path $env:LOCALAPPDATA 'DailyNewsRuntime\venv\Scripts\pyth
 - 参照情報は企画文と元記事のタイトル・要約です。現行軽量エンジンには添付画像の引数がなく、元記事の写真は送信しません。
 - 専用セッション、1案単位の処理、キャッシュ、送信後の不明状態、出典ID照合、画像形式とダイジェスト検証を実装しています。
 - オフライン検証は `tests/test_exabase.py`。有料APIもexaBaseも呼ばず、無効化・対応関係・キャッシュ・異常終了後の復旧・認証失敗・キャッシュ改変を確認します。
-- 2026-09-16に専用セッションの保存・認証確認と、2026-09-15の企画ID5〜8に対応する4枚の実生成を確認しました。出典はID5・6が `jp2`、ID7・8が `us2`。各画像と企画の対応を目視確認済みです。自動生成の初期上限は最新日の既存画像を含めて最大4枚です。
+- 2026-09-16に専用セッションの保存・認証を確認し、2026-09-15号の外装企画ID5〜14、5地域各2枚の計10枚をexaBaseで実生成・目視確認しました。先に確認したID5〜8の4枚を保持し、欧州・中国・インドの6枚を追加しました。ID10は内容を確認して再生成し、最終画像を採用しています。今回の追加生成に画像APIは使用していません。
+- 内装の次号からのexaBase優先・API代替は設定とモック検証を完了しています。内装の新規実生成と代替経路の実動作は次回の定時処理で確認します。

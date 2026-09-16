@@ -5,6 +5,12 @@ __pycache__/
 ニュース収集/logs/
 runtime/
 artifacts/
+ニュース収集/exabase-jobs/
+ニュース収集/api-image-jobs/
+ニュース収集/exabase.lock
+ニュース収集/idea-images.lock
+ニュース収集/exabase-last-result.json
+ニュース収集/image-generation-last-result.json
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
