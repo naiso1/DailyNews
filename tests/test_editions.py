@@ -315,7 +315,7 @@ class CollectorEditionTests(unittest.TestCase):
             {"国": "日本", "日付": "2026-09-14", "タイトル（日本語）": "販売台数を公表", "内容（日本語）": "新車の販売台数を公表した。", "URL": "https://example.com/sales", "LLM判定": "非対象", "内装関連度": 90, "画像URL": "https://example.com/photo.jpg", "LLM後処理": "実施"},
             {"国": "日本", "日付": "2026-09-14", "タイトル（日本語）": "バンパーの外観を公開", "内容（日本語）": "外観写真のみ紹介する。", "URL": "https://example.com/photo-only", "LLM判定": "対象", "内装関連度": 35, "画像URL": "https://example.com/photo.jpg", "LLM後処理": "実施"},
         ]
-        with tempfile.TemporaryDirectory() as folder, patch.object(collector, "summarize_article", side_effect=AssertionError("Unexpected LLM call")):
+        with tempfile.TemporaryDirectory() as folder, patch.object(collector, "published_news", return_value=[]), patch.object(collector, "summarize_article", side_effect=AssertionError("Unexpected LLM call")):
             target = Path(folder) / "search_results.csv"
             collector.build_sheet2_and_csv(collector.pd.DataFrame(rows), target, ["2026-09-14"])
             selected = collector.pd.read_csv(target.with_name("sheet2_llm_targets.csv"))

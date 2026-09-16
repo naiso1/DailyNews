@@ -78,6 +78,43 @@ class ExaBaseTests(unittest.TestCase):
         self.assertEqual(worker.call_count, 1)
         self.assertEqual(exabase.select_ideas(self.insights.read_text(encoding="utf-8"), date="2026-09-14")[0].image, "")
 
+    def write_reordered_daily_ideas(self, existing_count):
+        self.edition.collection_settings_path.write_text(json.dumps({"exterior": {
+            "image_generation": {"enabled": True, "provider": "exabase", "max_images": 4}}}), encoding="utf-8")
+        # New empty ideas precede existing images after the issue was expanded.
+        rows = []
+        for index in range(10):
+            image = f"images/existing_{index}.jpg" if index >= 10-existing_count else ""
+            rows.append(f'{{ id: {index+10}, img: {json.dumps(image)}, title: "外装企画{index}", desc: "グリルの検討 [jp1]", sourceNewsIds: ["jp1"] }}')
+        self.insights.write_text('window.DAILY_INSIGHTS = [{date: "2026-09-15", ideas: {jp: [' + ','.join(rows) + ']}}];', encoding="utf-8")
+
+    def test_daily_cap_counts_four_existing_images_anywhere_in_issue(self):
+        self.write_reordered_daily_ideas(4)
+        worker = Mock(side_effect=AssertionError("Daily image capacity is already consumed"))
+        report = exabase.generate_for_edition(self.edition, worker=worker)
+        self.assertEqual(report["existing_images"], 4)
+        self.assertEqual(report["remaining_capacity"], 0)
+        self.assertEqual(report["generated"], 0)
+        worker.assert_not_called()
+
+    def test_one_existing_image_allows_only_three_new_images(self):
+        self.write_reordered_daily_ideas(1)
+        worker = Mock(side_effect=self.worker)
+        report = exabase.generate_for_edition(self.edition, worker=worker)
+        self.assertEqual(report["generated"], 3)
+        self.assertEqual(worker.call_count, 3)
+        self.assertEqual(sum(bool(idea.image) for idea in exabase.select_ideas(self.insights.read_text(encoding="utf-8"))), 4)
+        repeated = exabase.generate_for_edition(self.edition, worker=worker)
+        self.assertEqual(repeated["generated"], 0)
+        self.assertEqual(worker.call_count, 3)
+
+    def test_explicit_pilot_keeps_its_separate_one_idea_behavior(self):
+        self.write_reordered_daily_ideas(4)
+        worker = Mock(side_effect=self.worker)
+        report = exabase.generate_for_edition(self.edition, pilot_idea_id=10, worker=worker)
+        self.assertEqual(report["generated"], 1)
+        self.assertEqual(worker.call_count, 1)
+
     def test_missing_or_cross_edition_sources_refuse_generation(self):
         worker = Mock()
         with self.assertRaisesRegex(exabase.ImageJobError, "INVALID_SOURCE_IDS"):

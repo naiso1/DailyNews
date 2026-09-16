@@ -36,6 +36,7 @@ def collection_helpers(session):
         raise RuntimeError("Collection helpers changed; review the verifier before running.")
     from dateutil import parser
     env = {"re": re, "BeautifulSoup": BeautifulSoup, "parser": parser, "urlparse": urlparse,
+           "EDITION": SimpleNamespace(id="interior"),
            "requests": SimpleNamespace(get=lambda url, **kwargs: bounded_get(session, url)),
            "_article_text_cache": {}}
     constants = {"SUSPICIOUS_IMAGE_MARKERS", "HEADERS", "SUMMARY_HTML_CHARS"}

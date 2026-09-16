@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 
@@ -59,6 +60,7 @@ class SourceAnchorTests(unittest.TestCase):
 class ArticleBodyTests(unittest.TestCase):
     def setUp(self):
         self.env = collection_helpers(Mock())
+        self.env["EDITION"] = SimpleNamespace(id="interior")
         self.response = Mock(status_code=200)
         self.env["requests"].get = Mock(return_value=self.response)
 

@@ -1334,7 +1334,9 @@ def write_exterior_publication_status(items, dry_run=False, require_empty_collec
         return
     dates = sorted({str(item.get("date", "")) for item in items if item.get("date")})
     receipt_path = EDITION.runtime_dir / "collection_result.json"
-    receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else {}
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8-sig")) if receipt_path.exists() else {}
+    from dailynews.digest import validated_issue_context, selected_news_ids
+    issue_context = validated_issue_context(receipt, items)
     expected_dates = [date.strip() for date in os.environ.get("TARGET_DATES", "").split(",") if date.strip()]
     receipt_dates = receipt.get("target_dates", [])
     receipt_matches = (receipt.get("edition_id") == "exterior" and receipt.get("completed") is True
@@ -1342,6 +1344,10 @@ def write_exterior_publication_status(items, dry_run=False, require_empty_collec
     if require_empty_collection:
         if not receipt_matches or receipt.get("selected_count") != 0 or not receipt.get("source_count"):
             raise RuntimeError("Empty exterior publication has no matching completed zero-news collection receipt")
+        dates = receipt_dates
+    elif issue_context:
+        if not receipt_matches:
+            raise RuntimeError("Exterior issue does not match requested processing dates")
         dates = receipt_dates
     elif receipt_matches and set(dates).issubset(set(receipt_dates)) and receipt.get("selected_count") == len(items):
         # A completed collection may have no matching articles on its final date.
@@ -1351,6 +1357,8 @@ def write_exterior_publication_status(items, dry_run=False, require_empty_collec
     status = {"edition_id": "exterior", "processed_through": max(dates), "target_dates": dates,
               "selected_count": len(items), "updated_at": datetime.now().astimezone().isoformat(),
               "status": "no_matching_news" if not items else "published"}
+    if issue_context:
+        status.update(issue_context, selected_news_ids=selected_news_ids(items))
     if dry_run:
         return status
     for target, initial in ((NEWS_PATH, 'window.NEWS_UPDATED_AT = "";\nwindow.LOADED_NEWS_DATA = [\n];\n'),
@@ -1366,6 +1374,21 @@ def exterior_analysis_complete(analysis, source_items):
     text = str(analysis or "").strip()
     return bool(text and has_japanese_text(text) and analysis_ref_coverage_ok(text)
                 and analysis_unique_refs(text) & build_allowed_news_ids(source_items))
+
+
+def exterior_existing_insights_complete(insights_text, date_key, items):
+    """Never report a complete issue while an existing region lacks its two ideas."""
+    from dailynews.exabase import select_ideas, string_field
+    analysis = extract_insight_object_section(insights_text, date_key, "analysis")
+    ideas = select_ideas(insights_text, date_key)
+    for country in {item["country"] for item in items}:
+        sources = [item for item in items if item["country"] == country]
+        allowed = build_allowed_news_ids(sources)
+        text, _ = string_field(analysis, country)
+        valid_ideas = [idea for idea in ideas if idea.sources and set(idea.sources).issubset(allowed)]
+        if not exterior_analysis_complete(text, sources) or len(valid_ideas) != 2:
+            return False
+    return True
 
 
 def exterior_checkpoint_fingerprint(date_key, source_items):
@@ -1401,6 +1424,7 @@ def main():
     ap.add_argument("--edition", choices=("interior", "exterior"), default=EDITION.id)
     ap.add_argument("--sheet", default=None)
     ap.add_argument("--skip-insights", action="store_true")
+    ap.add_argument("--skip-images", action="store_true", help="Publish text without running optional image generation")
     ap.add_argument("--skip-html", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--replace-insights", action="store_true")
@@ -1534,6 +1558,18 @@ def main():
         }))
 
     validate_japanese_news_items(items)
+    issue_context = None
+    if EDITION.id == "exterior":
+        from dailynews.digest import validated_issue_context
+        receipt_path = EDITION.runtime_dir / "collection_result.json"
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8-sig")) if receipt_path.exists() else {}
+        issue_context = validated_issue_context(receipt, items)
+        if issue_context:
+            expected_dates = [value.strip() for value in os.environ.get("TARGET_DATES", "").split(",") if value.strip()]
+            if expected_dates and sorted(expected_dates) != sorted(receipt["target_dates"]):
+                raise RuntimeError("Exterior issue does not match requested processing dates")
+            for item in items:
+                item["digestDate"] = issue_context["issue_date"]
 
     if non_paper_rows and idx_llm is not None and rows_with_relevance_signal == 0:
         raise RuntimeError(
@@ -1581,6 +1617,8 @@ def main():
         extra_lines = []
         if EDITION.id == "exterior":
             extra_lines.append(f'                edition: "exterior", productScore: {int(it["interiorScore"])}, exteriorScore: {int(it["interiorScore"])},')
+            if it.get("digestDate"):
+                extra_lines.append(f'                digestDate: "{js_escape(it["digestDate"])}",')
             extra_lines.append(f'                contentCategory: "{js_escape(it["contentCategory"])}", trendTopic: "{js_escape(it["trendTopic"])}",')
         for field in ("sourceExcerpt", "sourceExcerptEnd"):
             if it.get(field):
@@ -1657,7 +1695,7 @@ def main():
     # Insights generation
     if not args.skip_insights:
         insights_text = read_text_any(INSIGHTS_PATH) if INSIGHTS_PATH.exists() else 'window.DAILY_INSIGHTS = [\n];\n'
-        insight_dates = new_dates if new_dates else all_dates
+        insight_dates = ([issue_context["issue_date"]] if issue_context else (new_dates if new_dates else all_dates))
         insight_start = min(insight_dates) if insight_dates else None
         latest_date = max(insight_dates) if insight_dates else None
         insight_date_label = (
@@ -1672,6 +1710,8 @@ def main():
             else False
         )
         if insight_date_label and insight_exists and not (args.replace_insights or args.replace_ideas_only):
+            if EDITION.id == "exterior" and not exterior_existing_insights_complete(insights_text, insight_date_label, items):
+                raise RuntimeError(f"Existing exterior insights for {insight_date_label} lack regional analysis or two sourced ideas. Use --replace-insights to rebuild the issue.")
             print(f"Insights for {insight_date_label} already exists. Use --replace-insights to overwrite.")
         elif insight_date_label:
             preserved_analysis = ""
@@ -1705,7 +1745,7 @@ def main():
                     previous = checkpoint["countries"].get(key, {})
                     if (previous.get("fingerprint") == exterior_checkpoint_fingerprint(insight_date_label, grouped[key])
                             and exterior_analysis_complete(previous.get("analysis"), grouped[key])
-                            and isinstance(previous.get("ideas"), list)):
+                            and isinstance(previous.get("ideas"), list) and len(previous["ideas"]) == 2):
                         try:
                             previous_ideas = prepare_exterior_idea_sources(previous["ideas"], grouped[key])
                         except RuntimeError as error:
@@ -1830,7 +1870,7 @@ def main():
                                 idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
                     ideas_out[key] = deduped[:2]
                     print(f"[IDEAS] {key}: accepted {len(ideas_out[key])}/2")
-                    if use_checkpoint and exterior_analysis_complete(analysis_out.get(key), grouped[key]):
+                    if use_checkpoint and exterior_analysis_complete(analysis_out.get(key), grouped[key]) and len(ideas_out.get(key, [])) == 2:
                         checkpoint["countries"][key] = {
                             "fingerprint": exterior_checkpoint_fingerprint(insight_date_label, grouped[key]),
                             "analysis": analysis_out[key], "ideas": ideas_out[key],
@@ -1841,7 +1881,8 @@ def main():
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
             if use_checkpoint:
                 incomplete = [key for key, source_items in grouped.items()
-                              if source_items and not exterior_analysis_complete(analysis_out.get(key), source_items)]
+                              if source_items and (not exterior_analysis_complete(analysis_out.get(key), source_items)
+                                                   or len(ideas_out.get(key, [])) != 2)]
                 if incomplete:
                     raise RuntimeError(
                         "Exterior insights incomplete for: " + ", ".join(incomplete)
@@ -1925,7 +1966,7 @@ def main():
         if not args.dry_run and not INSIGHTS_PATH.exists():
             INSIGHTS_PATH.write_text('window.DAILY_INSIGHTS = [\n];\n', encoding="utf-8")
         write_exterior_publication_status(items, args.dry_run)
-        if not args.dry_run:
+        if not args.dry_run and not args.skip_images:
             from dailynews.exabase import optional_images
             image_result = optional_images(EDITION)
             print("[IMAGES] exterior: " + json.dumps({

@@ -60,8 +60,11 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
     def setUp(self):
         collector.configure_edition("exterior")
         updater.configure_edition("exterior")
+        self.history_patch = patch.object(collector, "published_news", return_value=[])
+        self.history_patch.start()
 
     def tearDown(self):
+        self.history_patch.stop()
         collector.configure_edition("interior")
         updater.configure_edition("interior")
 
@@ -196,11 +199,11 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         return rows
 
     def test_balanced_selection_and_diagnostic_counts_do_not_backfill(self):
-        for products, trends, expected in ((8, 6, {"product": 6, "trend": 4}), (2, 8, {"product": 2, "trend": 4}), (8, 1, {"product": 8, "trend": 1})):
+        for products, trends, expected in ((8, 6, {"product": 6, "trend": 4}), (2, 8, {"product": 2, "trend": 8}), (8, 1, {"product": 8, "trend": 1})):
             with self.subTest(products=products, trends=trends), tempfile.TemporaryDirectory() as folder:
                 rows = self.rows(products, trends)
                 rows.append({**rows[0], "URL": "https://example.com/rejected", "LLM判定": "非対象", "内装関連度": 99})
-                rows.append({**rows[0], "URL": "https://example.com/old", "日付": "2026-09-14"})
+                rows.append({**rows[0], "URL": "https://example.com/old", "日付": "2026-09-07"})
                 target = Path(folder) / "search_results.csv"
                 with patch.object(collector, "is_same_topic_text", return_value=False), patch.object(collector, "SHEET2_SIMILARITY_THRESHOLD", 1.1), patch.object(collector, "summarize_article", side_effect=AssertionError("Unexpected LLM call")), redirect_stdout(io.StringIO()):
                     collector.build_sheet2_and_csv(collector.pd.DataFrame(rows), target, ["2026-09-15"])

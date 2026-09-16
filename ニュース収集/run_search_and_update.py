@@ -768,7 +768,28 @@ def run_cmd(cmd, label, log_file, cwd=None):
         raise
 
 
-def count_sheet_targets(sheet_path: Path, target_dates: set[str] | None = None):
+def validate_exterior_sheet_receipt(sheet_path: Path, target_dates, rows):
+    """Return the validated issue row count, or None for a legacy receipt."""
+    from dailynews.digest import validated_issue_context
+
+    receipt = json.loads(sheet_path.with_name("collection_result.json").read_text(encoding="utf-8-sig"))
+    if (receipt.get("edition_id") != "exterior" or receipt.get("completed") is not True
+            or sorted(receipt.get("target_dates", [])) != sorted(target_dates or [])
+            or receipt.get("selected_count") != len(rows)):
+        raise ValueError("Exterior sheet does not match its completed collection receipt")
+    if not receipt.get("issue_date"):
+        return None
+    countries = {"日本": "jp", "米国": "us", "欧州": "eu", "中国": "cn", "インド": "in"}
+    items = [{"date": (row.get("日付") or "").strip(), "url": (row.get("URL") or "").strip(),
+              "country": countries.get((row.get("国") or "").strip(), (row.get("国") or "").strip())}
+             for row in rows]
+    if any(not item["url"] for item in items):
+        raise ValueError("Exterior issue contains an empty article URL")
+    validated_issue_context(receipt, items)
+    return len(items)
+
+
+def count_sheet_targets(sheet_path: Path, target_dates: set[str] | None = None, *, edition_id="interior"):
     if not sheet_path.exists():
         return 0
     for enc in ("utf-8-sig", "utf-8", "cp932"):
@@ -780,17 +801,27 @@ def count_sheet_targets(sheet_path: Path, target_dates: set[str] | None = None):
             rows = []
     else:
         return 0
+    if edition_id == "exterior":
+        issue_count = validate_exterior_sheet_receipt(sheet_path, target_dates, rows)
+        if issue_count is not None:
+            return issue_count
     if target_dates:
         rows = [r for r in rows if (r.get("日付") or "").strip() in target_dates]
     return len(rows)
 
 
-def validate_resume_sheet(sheet_path: Path, target_dates: list[str]):
+def validate_resume_sheet(sheet_path: Path, target_dates: list[str], *, edition_id="interior"):
     """Do not resume publication from an empty, stale or mixed-date export."""
     if not target_dates:
         raise ValueError("No unpublished target dates; cannot resume from sheet.")
     with sheet_path.open("r", encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
+    if edition_id == "exterior":
+        issue_count = validate_exterior_sheet_receipt(sheet_path, target_dates, rows)
+        if issue_count is not None:
+            if not issue_count:
+                raise ValueError("Cannot resume publication from an empty exterior issue")
+            return issue_count
     dates = {(row.get("日付") or "").strip() for row in rows}
     if not rows or dates != set(target_dates):
         raise ValueError(
@@ -1025,7 +1056,7 @@ def main():
     }
     if args.resume_from_sheet:
         try:
-            validate_resume_sheet(WORK_DIR / "sheet2_llm_targets.csv", target_dates)
+            validate_resume_sheet(WORK_DIR / "sheet2_llm_targets.csv", target_dates, edition_id=EDITION.id)
         except (OSError, ValueError) as exc:
             parser.error(str(exc))
     if not args.build_only:
@@ -1052,7 +1083,7 @@ def main():
                 google_search_script = get_google_search_entrypoint()
                 run_cmd([sys.executable, "-u", str(google_search_script), "--dept", EDITION.id, "--dates", dates_arg], "google_search_script", LOG_FILE)
             sheet2_path = WORK_DIR / "sheet2_llm_targets.csv"
-            sheet_rows = count_sheet_targets(sheet2_path, set(target_dates))
+            sheet_rows = count_sheet_targets(sheet2_path, set(target_dates), edition_id=EDITION.id)
             valid_empty_exterior = False
             if EDITION.id == "exterior" and sheet_rows == 0:
                 result_file = WORK_DIR / "collection_result.json"

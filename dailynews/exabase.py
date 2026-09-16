@@ -317,10 +317,13 @@ def generate_for_edition(edition, *, pilot_idea_id=None, date=None, publish=True
         ideas = select_ideas(text, date, pilot_idea_id)
         if pilot_idea_id is not None and not ideas:
             raise ValueError("The requested idea/date was not found")
+        existing_images = sum(bool(idea.image) for idea in ideas)
+        remaining_capacity = limit if pilot_idea_id is not None else max(0, limit - existing_images)
+        pending_ideas = [idea for idea in ideas if not idea.image][:remaining_capacity]
+        report["existing_images"] = existing_images
+        report["remaining_capacity"] = remaining_capacity
         sources = source_articles((edition.content_dir / "news_data.js").read_text(encoding="utf-8"))
-        for idea in ideas[:limit]:
-            if idea.image:
-                continue
+        for idea in pending_ideas:
             remaining = int(deadline - time.monotonic()) - 110
             if remaining < 30:
                 report["errors"].append({"idea_id": idea.id, "code": "BATCH_TIME_BUDGET"}); break

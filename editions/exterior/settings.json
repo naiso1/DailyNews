@@ -611,14 +611,16 @@
     ],
     "prompt_path": "prompts/collection.md",
     "search": {
-      "google_news_keyword_limit": 15
+      "google_news_keyword_limit": 15,
+      "maximum_candidates_per_country": 60
     },
     "selection": {
       "minimum_score": 60,
       "trend_minimum_score": 65,
       "product_priority_count": 6,
-      "maximum_trends_per_country": 4,
+      "maximum_trends_per_country": 10,
       "maximum_per_country": 10,
+      "lookback_days": 7,
       "fill_quota_with_rejected": false,
       "require_original_image": false,
       "papers_enabled": false
@@ -631,6 +633,6 @@
       "timeout_seconds": 420
     },
     "date_timezone": "Asia/Tokyo",
-    "initial_scope_note": "外装メンバーへのヒヤリング前の仮設定。製品・技術とトレンド・マーケットを区別し、製品6件を優先、トレンド最大4件、合計最大10件/地域。非対象で穴埋めしない。"
+    "initial_scope_note": "外装メンバーへのヒヤリング前の仮設定。当日記事を優先し、直近7日以内の未掲載記事で最大10件/地域を目指す。製品6件を優先、トレンド4件を目安とし製品不足時は対象トレンドで補完する。元公開日を保持し、低点・非対象・他の号の既掲載記事で穴埋めしない。"
   }
 }

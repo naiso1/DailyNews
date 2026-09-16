@@ -1571,6 +1571,18 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const dates = [...new Set(payload.target_dates)].sort();
             if (dates[dates.length - 1] !== payload.processed_through
                 || (payload.status === "no_matching_news") !== (payload.selected_count === 0)) return null;
+            if (payload.issue_date) {
+                const days = (Date.parse(payload.issue_date) - Date.parse(payload.lookback_start)) / 86400000;
+                if (payload.issue_date !== payload.processed_through || !validDate(payload.lookback_start)
+                    || days < 0 || days > 6 || !Array.isArray(payload.source_dates)
+                    || !payload.source_dates.every(value => validDate(value) && value >= payload.lookback_start && value <= payload.issue_date)
+                    || !Array.isArray(payload.selected_news_ids)
+                    || payload.selected_news_ids.length !== payload.selected_count
+                    || new Set(payload.selected_news_ids).size !== payload.selected_count
+                    || !payload.selected_news_ids.every(value => typeof value === "string" && /^(jp|us|eu|cn|in)\d+$/.test(value))
+                    || !Number.isSafeInteger(payload.supplemental_count) || payload.supplemental_count < 0
+                    || payload.supplemental_count > payload.selected_count) return null;
+            }
             return { ...payload, target_dates: dates };
         }
 
@@ -1582,6 +1594,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const range = dates.length === 1 ? dates[0] : `${dates[0]}〜${through}`;
             if (payload.status === "no_matching_news") {
                 return `${through}まで収集・選定済み。今回の対象期間（${range}）は条件に合う記事がありませんでした。掲載済みの記事は引き続き閲覧できます。`;
+            }
+            if (payload.issue_date) {
+                return `${payload.issue_date}号：${payload.selected_count}件（当日掲載${payload.selected_count - payload.supplemental_count}件、直近7日からの補充${payload.supplemental_count}件）。記事の日付は元の掲載日です。`;
             }
             let message = `${through}まで収集・選定済み。今回の対象期間（${range}）の採用は${payload.selected_count}件です。`;
             if (Array.isArray(news) && news.length && !news.some((item) => item.date === through)) {
@@ -1663,6 +1678,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
+            if (window.DAILYNEWS_CONFIG.id === "exterior" && itemOrDate && typeof itemOrDate === "object"
+                && Array.isArray(window.EXTERIOR_PUBLICATION_STATUS?.selected_news_ids)) {
+                return window.EXTERIOR_PUBLICATION_STATUS.selected_news_ids.includes(itemOrDate.id);
+            }
             const dateStr = itemOrDate && typeof itemOrDate === "object"
                 ? itemOrDate.date
                 : itemOrDate;
@@ -1672,6 +1691,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
 
         function isNewInsightDate(dateLabel) {
+            if (window.DAILYNEWS_CONFIG.id === "exterior" && window.EXTERIOR_PUBLICATION_STATUS?.issue_date) {
+                return dateLabel === window.EXTERIOR_PUBLICATION_STATUS.issue_date;
+            }
             if (!dateLabel || !NEW_DATE_RANGE.start) return false;
             return dateLabel.includes(NEW_DATE_RANGE.start) || dateLabel.includes(NEW_DATE_RANGE.end);
         }
@@ -1746,7 +1768,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (window.DAILYNEWS_CONFIG.id === "exterior") {
                 const publication = window.EXTERIOR_PUBLICATION_STATUS;
                 NEW_DATE_RANGE = publication?.target_dates.length
-                    ? { start: publication.target_dates[0], end: publication.processed_through }
+                    ? { start: publication.lookback_start || publication.target_dates[0], end: publication.processed_through }
                     : { start: null, end: null };
                 return;
             }
@@ -1769,7 +1791,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     item.isNew = false;
                     return;
                 }
-                item.isNew = item.date >= NEW_DATE_RANGE.start && item.date <= NEW_DATE_RANGE.end;
+                item.isNew = isNewContent(item);
             });
         }
 
@@ -3268,7 +3290,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
-                ${window.DAILYNEWS_CONFIG.id === "exterior" ? `<div class="card-tags" style="margin-bottom:8px"><span class="card-tag">${newsCategoryLabel(n)}</span></div>` : ""}
+                ${window.DAILYNEWS_CONFIG.id === "exterior" ? `<div class="card-tags" style="margin-bottom:8px"><span class="card-tag">${newsCategoryLabel(n)}</span>${isNewContent(n) && n.date < window.EXTERIOR_PUBLICATION_STATUS?.issue_date ? '<span class="card-tag">直近7日から補充</span>' : ''}</div>` : ""}
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
                 ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
@@ -3302,7 +3324,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                     <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
                     <span class="source">${n.source}</span>
-                    <span class="card-date-meta">${n.date}</span>
+                    <span class="card-date-meta">${window.DAILYNEWS_CONFIG.id === "exterior" ? "掲載日 " : ""}${n.date}</span>
                     <span class="id-badge">${n.id}</span>
                 </div>
     

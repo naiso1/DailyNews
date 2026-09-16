@@ -3,6 +3,7 @@
 import csv
 import json
 from pathlib import Path
+from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock
 
@@ -17,6 +18,7 @@ COLLECTION = ROOT / "\u30cb\u30e5\u30fc\u30b9\u53ce\u96c6"
 class ArticleExtractionTests(unittest.TestCase):
     def setUp(self):
         self.env = collection_helpers(requests.Session())
+        self.env["EDITION"] = SimpleNamespace(id="interior")
         self.response = Mock(status_code=200)
         self.env["requests"].get = Mock(return_value=self.response)
 
