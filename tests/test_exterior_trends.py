@@ -65,6 +65,21 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         collector.configure_edition("interior")
         updater.configure_edition("interior")
 
+    def test_exterior_does_not_merge_jsw_and_bmw_on_generic_summary_words(self):
+        # Actual collection summaries: the shared words were only
+        # バッテリー / 発揮 / 同車 / 投入, despite covering independent vehicles.
+        jsw = "JSW Combat、初SUVにプラグインハイブリッド採用 JSW Motorsは、中国Cheryと提携し初のSUV「JSW Combat」をDiwali前後に投入する。同車はJetour T2を基盤とし、1.5Lターボエンジンと18.4kWhバッテリーで構成されるPHEVシステムを搭載し、総出力360bhpを発揮する見込みである。"
+        bmw = "BMW i5 LWB、インドで796万ルピーから発売開始 BMWはインド市場向けにi5 LWBを796万ルピー（車両価格）から投入した。同車は現行のインド市場における唯一のロングホイールベースEVセダンであり、Chennai工場で組立生産されている。外装にはIlluminated Kidney GrilleやM専用バンパーなどを採用し、81.6kWhバッテリーと268bhpモーターを搭載して最高出力を発揮する。"
+        self.assertFalse(collector.is_same_topic_text(jsw, bmw))
+        self.assertTrue(collector.is_same_topic_text(jsw, jsw + " 詳細を報じた。"))
+        collector.configure_edition("interior")
+        self.assertTrue(collector.is_same_topic_text(jsw, bmw))
+
+    def test_exterior_still_merges_distinct_reports_of_same_volvo_models(self):
+        european = "ボルボXC60とXC90に長距離PHEV追加、米市場で最大78マイルのEV航続 ボルボはXC60とXC90に長距離プラグインハイブリッドを追加し、米国向けにそれぞれ最大78マイル・73マイルのEV航続を確保した。XC60ではグリルやバンパー、ヘッドライトなど外装デザインも刷新されている。"
+        indian = "ボルボXC60・XC90フェイスリフト、41.2kWhバッテリー採用 ボルボは国際仕様のXC60とXC90のPHEVモデルを刷新し、両車に41.2kWhバッテリーを搭載した。XC60はT字型LED DRLや新グリルなど外装を更新し、WLTP基準で最大200kmのEV航続距離を実現している。"
+        self.assertTrue(collector.is_same_topic_text(european, indian))
+
     def test_jst_calendar_boundary_and_interior_compatibility(self):
         self.assertEqual(collector.parse_date("2026-09-14T21:10:00Z"), "2026-09-15")
         self.assertEqual(collector.parse_date("2026-09-15T14:59:59Z"), "2026-09-15")

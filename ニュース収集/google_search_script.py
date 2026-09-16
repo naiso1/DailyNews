@@ -496,7 +496,12 @@ def is_same_topic_text(text1, text2):
     if not tokens1 or not tokens2:
         return False
     overlap = tokens1 & tokens2
-    if len(overlap) >= 4:
+    # Exterior market coverage brings unrelated vehicles with common words such
+    # as battery/launch/output into the same pool. Four shared words alone are
+    # insufficient; preserve the legacy interior rule and the model-name rules
+    # below, but require substantial vocabulary agreement for this broad rule.
+    overlap_ratio = len(overlap) / len(tokens1 | tokens2)
+    if len(overlap) >= 4 and (EDITION.id != "exterior" or overlap_ratio >= 0.5):
         return True
     model_like_overlap = [tok for tok in overlap if re.search(r"\d|[-/]", tok)]
     if len(model_like_overlap) >= 2:
