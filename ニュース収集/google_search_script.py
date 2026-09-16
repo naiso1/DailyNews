@@ -33,6 +33,7 @@ from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
 from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text
 from dailynews.collection_digest import collection_window, published_news, published_issue, published_row
+from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
 
 EDITION = get_edition()
 
@@ -2903,13 +2904,14 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     filtered = filtered.drop(columns=["_order", "_sheet2_sort_score", "_already_in_issue"], errors="ignore")
 
     # Sheet2に載るスキップ済み（日本語未補完）を補完
+    need_indices = []
     if not filtered.empty:
-        need_indices = []
         for idx, row in filtered.iterrows():
             title_jp = str(row.get(col_title_jp, "")).strip()
             content_jp = str(row.get(col_content_jp, "")).strip()
             llm_post = str(row.get(col_llm_post, "")).strip()
-            if not _is_valid_japanese(title_jp) or not _is_valid_japanese(content_jp) or llm_post == "スキップ":
+            is_paper = str(row.get(col_country, "")).strip().lower() in {"論文", "paper", "papers"}
+            if summary_language_problem(row.get(col_country), title_jp, content_jp) or (llm_post == "スキップ" and not is_paper):
                 need_indices.append(idx)
         if need_indices:
             print(f"  Sheet2補完: {len(need_indices)}件")
@@ -2927,7 +2929,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 if summary_body:
                     work.at[idx, col_content_jp] = summary_body
                     filtered.at[idx, col_content_jp] = summary_body
-                if not (_is_valid_japanese(summary_title) and _is_valid_japanese(summary_body)):
+                if summary_language_problem(row.get(col_country), summary_title, summary_body):
                     work.at[idx, col_llm_post] = "日本語化失敗"
                     filtered.at[idx, col_llm_post] = "日本語化失敗"
                 elif str(row.get(col_llm_post, "")).strip() in {"スキップ", "日本語化失敗"}:
@@ -2935,10 +2937,55 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                     filtered.at[idx, col_llm_post] = "補完"
                 if n == 1 or n % PROGRESS_EVERY == 0 or n == len(need_indices):
                     print(f"    進捗: {n}/{len(need_indices)}")
-            try:
-                save_with_hyperlinks(work, excel_path)
-            except Exception:
-                pass
+
+    # Keep failed source rows for explicit repair, but never send an untranslated
+    # fallback to the publisher where it would stop all otherwise valid articles.
+    quarantined = []
+    failed_indices = []
+    resolved_failure = False
+    for idx, row in filtered.iterrows():
+        problem = summary_language_problem(row.get(col_country), row.get(col_title_jp), row.get(col_content_jp))
+        if problem:
+            work.at[idx, col_llm_post] = "日本語化失敗"
+            failed_indices.append(idx)
+            quarantined.append({"url": str(row.get(col_url, "")), "country": str(row.get(col_country, "")),
+                                "date": str(row.get(col_date, "")), "reason": problem})
+            print(f"  [SUMMARY_QUARANTINED] {problem}: {row.get(col_url, '')}")
+        elif str(row.get(col_llm_post, "")).strip() == "日本語化失敗":
+            # A manually repaired row no longer needs its stale failure marker.
+            work.at[idx, col_llm_post] = "補完"
+            filtered.at[idx, col_llm_post] = "補完"
+            resolved_failure = True
+    selected_before_quarantine = len(filtered)
+    filtered = filtered.drop(index=failed_indices)
+    quarantine_result = {"quarantined_count": len(quarantined),
+                         "quarantined_urls": [row["url"] for row in quarantined]}
+    if need_indices or quarantined or resolved_failure:
+        # Saving failed rows is part of successful partial publication, not an
+        # optional best-effort write. Do not lose the operator's repair input.
+        try:
+            save_with_hyperlinks(work, excel_path)
+        except Exception as error:
+            raise SummaryQuarantineError("Could not preserve source rows for summary repair") from error
+    quarantine_path = Path(excel_path).with_name("summary_quarantine.json")
+    quarantine_path.parent.mkdir(parents=True, exist_ok=True)
+    quarantine_receipt = {"edition_id": EDITION.id, "target_dates": list(target_dates or []),
+                          "updated_at": datetime.now().astimezone().isoformat(),
+                          "source_file": str(Path(excel_path).resolve()),
+                          "selected_before_quarantine": selected_before_quarantine,
+                          "selected_count": len(filtered), "articles": quarantined, **quarantine_result}
+    quarantine_temp = quarantine_path.with_suffix(".json.tmp")
+    try:
+        quarantine_temp.write_text(json.dumps(quarantine_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        os.replace(quarantine_temp, quarantine_path)
+    except OSError as error:
+        raise SummaryQuarantineError("Could not record quarantined summary selection") from error
+    if quarantined:
+        print(f"  [SUMMARY_QUARANTINE] 公開候補 {len(filtered)}件、未翻訳保留 {len(quarantined)}件（原文・失敗状態を保存）")
+    if quarantined and filtered.empty:
+        SHEET2_RESULT = {"selected_count": 0, "candidate_count": len(dated_candidates),
+                         "source_dates": [], **digest_window, **quarantine_result}
+        raise SummaryQuarantineError("All selected summaries are untranslated; original rows retained for manual repair")
 
     # Retain source prices for validation when publication resumes without the LLM.
     sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
@@ -2987,7 +3034,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             sheet2_csv[col] = sheet2_csv[col].str.replace("\n", " ", regex=False)
             sheet2_csv[col] = sheet2_csv[col].str.replace("\r", " ", regex=False)
     sheet2_csv.to_csv(csv_path, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8", lineterminator="\n")
-    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(dated_candidates)}
+    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(dated_candidates), **quarantine_result}
     if EDITION.id == "exterior":
         selected_urls = set(sheet2_csv[col_url].astype(str))
         reasons = []
@@ -2998,6 +3045,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 reason = "selected"
             elif str(row.get(col_url)) in published_elsewhere:
                 reason = "already_published_in_another_issue"
+            elif str(row.get(col_url)) in quarantine_result["quarantined_urls"]:
+                reason = "summary_language_failed"
             elif not is_valid_article_url(row.get(col_url), allow_google_news=False):
                 reason = "invalid_url"
             elif str(row.get(col_llm)).strip() != "対象":
@@ -4063,14 +4112,8 @@ def _main():
             ]
             repair_indices = repair_indices[repair_indices.isin(sheet2_indices)]
         if repair_japanese_only:
-            title_values = df_existing.get(
-                "タイトル（日本語）", pd.Series("", index=df_existing.index)
-            ).fillna("").astype(str)
-            body_values = df_existing.get(
-                "内容（日本語）", pd.Series("", index=df_existing.index)
-            ).fillna("").astype(str)
-            japanese_mask = title_values.apply(has_japanese_kana) & body_values.apply(has_japanese_kana)
-            japanese_repair_indices = df_existing.index[~japanese_mask]
+            japanese_repair_indices = df_existing.index[df_existing.apply(
+                lambda row: bool(summary_language_problem(row.get("国"), row.get("タイトル（日本語）"), row.get("内容（日本語）"))), axis=1)]
             repair_indices = repair_indices[repair_indices.isin(japanese_repair_indices)]
         if len(repair_indices) == 0:
             print(f"指定日の既存データがありません: {', '.join(target_dates)}")
@@ -4098,6 +4141,8 @@ def _main():
                     repaired.at[row_idx, "タイトル（日本語）"] = summary_title
                 if summary_body:
                     repaired.at[row_idx, "内容（日本語）"] = summary_body
+                problem = summary_language_problem(row.get("国"), repaired.loc[row_idx].get("タイトル（日本語）", ""), repaired.loc[row_idx].get("内容（日本語）", ""))
+                repaired.at[row_idx, "LLM後処理"] = "日本語化失敗" if problem else "補完"
                 if count == 1 or count % PROGRESS_EVERY == 0 or count == total:
                     print(f"    日本語復旧進捗: {count}/{total}")
         else:
@@ -4131,6 +4176,8 @@ def _main():
             print(f"\n✅ 完了！ 既存 {len(df_existing)} 件を再計算し保存しました。")
             print(f"   保存先: {os.path.abspath(EXCEL_FILE)}")
             build_sheet2_and_csv(df_final, EXCEL_FILE, target_dates)
+        except SummaryQuarantineError:
+            raise
         except Exception as e:
             print(f"\n❌ 保存エラー: {e}")
         return
@@ -4253,6 +4300,8 @@ def _main():
             print(f"   URLはハイパーリンク化済み")
             print(f"   保存先: {os.path.abspath(EXCEL_FILE)}")
             build_sheet2_and_csv(df_final, EXCEL_FILE, target_dates)
+        except SummaryQuarantineError:
+            raise
         except Exception as e:
             print(f"\n❌ 保存エラー: {e}")
     else:
@@ -4260,6 +4309,8 @@ def _main():
         if not df_existing.empty:
             try:
                 build_sheet2_and_csv(df_existing, EXCEL_FILE, target_dates)
+            except SummaryQuarantineError:
+                raise
             except Exception:
                 pass
         elif EDITION.id == "exterior":
@@ -4268,6 +4319,8 @@ def _main():
 
 def main():
     _main()
+    if SHEET2_RESULT and SHEET2_RESULT.get("quarantined_count") and not SHEET2_RESULT.get("selected_count"):
+        raise SummaryQuarantineError("All selected summaries are untranslated; not a valid no-news day")
     if EDITION.id != "exterior":
         return
     if SHEET2_RESULT is None:

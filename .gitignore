@@ -11,6 +11,7 @@ artifacts/
 ニュース収集/idea-images.lock
 ニュース収集/exabase-last-result.json
 ニュース収集/image-generation-last-result.json
+ニュース収集/summary_quarantine.json
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal

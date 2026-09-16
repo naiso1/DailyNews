@@ -42,4 +42,6 @@
 
 定期実行は既存タスクから私有 `workstation.json` の `editions` 順に実行します。1本のロックで同時GPU処理を防ぎ、片方が失敗しても次の版へ進みます。旧PCは再有効化しません。
 
+日本語化に失敗した記事は原文と失敗状態を保存して保留し、正常な記事の更新を続けます。全記事が未翻訳の場合は公開を止めます。[保留記事の確認・復旧手順](docs/summary-quarantine.md)を参照してください。
+
 詳細：[外装試用ガイド](docs/exterior-pilot.md)、[Webと購読](deployment/windows-server/EDITIONS_WEB.md)、[処理PC](deployment/workstation/README.md)。
