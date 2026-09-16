@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -97,6 +97,34 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         collector.configure_edition("exterior")
         with patch.dict(os.environ, {"GOOGLE_NEWS_KEYWORD_LIMIT": "3"}), patch.object(collector, "GOOGLE_NEWS_KEYWORD_LIMIT", 3):
             self.assertEqual(collector.google_news_keyword_limit(), 3)
+
+    def test_google_redirect_keeps_s_characters_and_rejects_image_urls(self):
+        source = "https://news.google.com/articles/test"
+        article = "https://news.example.com/news/exterior-styling"
+        manager = MagicMock()
+        page = manager.__enter__.return_value.chromium.launch.return_value.new_page.return_value
+        page.url = source
+        page.locator.return_value.first.count.return_value = 0
+        page.content.return_value = (
+            '<img src="https://lh3.googleusercontent.com/news-logo.svg">'
+            '<img src="https://images.example.com/automotive.jpg">'
+            '<script src="https://www.google-analytics.com/analytics.js"></script>'
+            '<script src="https://unrelated.example.com/ad-endpoint"></script>'
+            f'<a href="{article}">Exterior news</a>'
+        )
+        with patch.multiple(collector, PLAYWRIGHT_AVAILABLE=True, USE_PLAYWRIGHT=True), \
+                patch.object(collector, "sync_playwright", return_value=manager, create=True):
+            final_url, image = collector.resolve_with_playwright(source)
+        self.assertEqual(final_url, article)
+        self.assertIsNone(image)
+        self.assertFalse(collector.is_valid_article_url("https://lh3.googleu", allow_google_news=False))
+        self.assertFalse(collector.is_valid_article_url("https://cdn.example.com/news.png?size=large", allow_google_news=False))
+        self.assertFalse(collector.is_valid_article_url("https://cdn.example.com/analytics.js", allow_google_news=False))
+        self.assertTrue(collector.is_valid_article_url(article, allow_google_news=False))
+        page.content.return_value = '<script src="https://unrelated.example.com/ad-endpoint"></script><a href="https://cdn.example.com/logo.svg">Logo</a>'
+        with patch.multiple(collector, PLAYWRIGHT_AVAILABLE=True, USE_PLAYWRIGHT=True), \
+                patch.object(collector, "sync_playwright", return_value=manager, create=True):
+            self.assertEqual(collector.resolve_with_playwright(source), (None, None))
 
     def test_first_relevance_decision_sees_article_body(self):
         body = "Passenger car sales shifted toward SUVs in August, reaching 55 percent of registrations. " * 3

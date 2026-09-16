@@ -795,7 +795,9 @@ def is_valid_article_url(url: str, allow_google_news: bool = True) -> bool:
         return False
     if host in {"www.g", "g"} or len(host) < 4:
         return False
-    if host.endswith("googleusercontent.com") or host.endswith("gstatic.com"):
+    if host.endswith(("googleusercontent.com", "gstatic.com", "google-analytics.com", "googletagmanager.com")) or re.match(r"lh\d+\.google", host):
+        return False
+    if re.search(r"\.(?:jpe?g|png|gif|webp|svg|avif|ico|js|css|woff2?|ttf)$", parsed.path, re.IGNORECASE):
         return False
     if not allow_google_news:
         if host == "google.com" or host.endswith(".google.com") or ".google." in host:
@@ -1080,7 +1082,9 @@ def resolve_with_playwright(url, timeout_ms=15000):
             # ページ中の外部リンクをサーチ（非google）
             if original_is_google_news and not is_valid_article_url(final_url, allow_google_news=False):
                 html = page.content()
-                links = re.findall(r"https?://[^\"'\\s<>]+", html)
+                # Only navigable links can be article candidates. Raw HTML also
+                # contains image and analytics URLs, unrelated to the RSS article.
+                links = [anchor.get("href", "") for anchor in BeautifulSoup(html, "html.parser").find_all("a", href=True)]
                 for l in links:
                     if is_valid_article_url(l, allow_google_news=False) and "youtube" not in l.lower():
                         final_url = l
