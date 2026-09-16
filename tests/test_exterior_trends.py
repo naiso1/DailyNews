@@ -175,6 +175,35 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         self.assertTrue(all(item["_previous_target"] and item["LLM判定"] == "" for item in candidates))
         self.assertEqual({item["URL"] for item in candidates}, {row["URL"] for row in rows[:3]})
 
+    def test_corrected_next_day_candidate_survives_url_dedup_without_new_llm(self):
+        with tempfile.TemporaryDirectory() as directory:
+            context = get_edition("exterior", directory)
+            context.config_dir.mkdir(parents=True)
+            context.collection_settings_path.write_text(json.dumps({"exterior": {"selection": {"minimum_score": 60, "trend_minimum_score": 65, "require_original_image": False}}}), encoding="utf-8")
+            context.ensure_directories()
+            target = context.runtime_dir / "search_results.csv"
+            row = {**self.rows(1, 0)[0], "日付": "2026-09-16"}
+            collector.pd.DataFrame([row]).to_csv(target, encoding="utf-8-sig", index=False)
+            argv = ["collector", "--dept", "exterior", "--dates", "2026-09-16"]
+            log = io.StringIO()
+            with patch.object(collector, "configure_edition"), patch.object(collector.os, "chdir"), \
+                    patch.multiple(collector, EDITION=context, EXCEL_FILE=str(target), LEGACY_EXCEL_FILE=str(target.with_suffix(".xlsx")),
+                                   ENRICH_ONLY=False, ENRICH_EXISTING=False, ONLY_PAPERS_RSS=False, ENABLE_GOOGLE_NEWS=False), \
+                    patch.object(sys, "argv", argv), patch.object(collector, "build_rss_feed_list"), \
+                    patch.object(collector, "fetch_from_rss", return_value=[row.copy()]), \
+                    patch.object(collector, "fetch_from_bing_search", return_value=[]), \
+                    patch.object(collector, "fetch_from_duckduckgo", return_value=[]), \
+                    patch.object(collector, "fetch_from_newsapi", return_value=[]), \
+                    patch.object(collector, "enrich_results", side_effect=AssertionError("Duplicate URL must reuse its completed assessment")), \
+                    patch.object(collector, "summarize_article", side_effect=AssertionError("Stored summary must be reused")), redirect_stdout(log):
+                collector._main()
+            self.assertEqual(collector.COLLECTION_METRICS["duplicate_reasons"], {"既存URL": 1})
+            self.assertEqual(collector.SHEET2_RESULT["selected_count"], 1, log.getvalue() + str(collector.SHEET2_RESULT))
+            with target.with_name("sheet2_llm_targets.csv").open(encoding="utf-8-sig", newline="") as handle:
+                selected = list(csv.DictReader(handle))
+            self.assertEqual(selected[0]["URL"], row["URL"])
+            self.assertEqual(selected[0]["日付"], "2026-09-16")
+
     def test_market_items_have_citable_idea_anchors(self):
         item = {"newsId": "in7", "title": "乗用車の販売構成", "desc": "SUVの需要が増えた。", "contentCategory": "trend", "trendTopic": "market"}
         groups = updater.select_idea_anchor_groups([item], 2)
