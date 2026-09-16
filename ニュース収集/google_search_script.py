@@ -264,6 +264,12 @@ def _response_needs_model_reload(resp):
 
 
 def _post_llm(**kwargs):
+    if EDITION.id == "exterior" and "json" in kwargs:
+        from dailynews.llm_budget import budget_exterior_payload
+
+        # Apply to relevance, score, summary and repair prompts alike. A running
+        # collector retains its loaded function; this takes effect next run.
+        kwargs["json"] = budget_exterior_payload(kwargs["json"], LLM_CONTEXT_LENGTH)
     if _is_loopback_url(LLM_ENDPOINT):
         session = requests.Session()
         session.trust_env = False
