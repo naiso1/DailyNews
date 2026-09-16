@@ -108,6 +108,28 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         self.assertEqual(result[0]["記事区分"], "trend")
         self.assertEqual(result[0]["トレンド分類"], "market")
 
+    def test_compact_headline_preserves_trend_subject_without_interior_focus(self):
+        with patch.object(collector, "call_llm_text", return_value="SUVの販売構成比が55％に上昇") as model:
+            collector.compact_title_with_llm("Passenger car sales", "SUV share rose to 55% in August.", "乗用車市場の動向")
+        prompt = model.call_args.args[0]
+        self.assertIn("market", prompt)
+        self.assertIn("do not invent component details", prompt)
+        self.assertNotIn("automotive-interior", prompt)
+        collector.configure_edition("interior")
+        with patch.object(collector, "call_llm_text", return_value="新型車がシートの調整機構を採用") as model:
+            collector.compact_title_with_llm("New vehicle seat", "A seat adjustment mechanism was announced.", "新しい座席を発表")
+        self.assertIn("automotive-interior", model.call_args.args[0])
+
+    def test_summary_detail_dispatch_does_not_apply_interior_topics_to_exterior(self):
+        from summary_grounding import summary_omits_interior_details
+        source = "乗用車の市場シェアが変化した。シートとディスプレイを備える車種が対象。"
+        summary = "乗用車の市場シェアが変化した。"
+        self.assertFalse(summary_omits_interior_details(summary, source))
+        self.assertFalse(summary_omits_interior_details("SUVの販売構成比が55％に上昇した。", "Passenger car sales: SUV share rose to 55%."))
+        self.assertTrue(summary_omits_interior_details("新型グリルを採用した。", "グリルとバンパーの構造を変更した。"))
+        collector.configure_edition("interior")
+        self.assertTrue(summary_omits_interior_details(summary, source))
+
     def test_assistant_prefix_continuation_preserves_explicit_trend_category(self):
         response = Mock(status_code=200, json=Mock(return_value={"choices": [{"message": {"content":
             '78,"reason":"乗用車の需要構成","category":"trend","trend_topic":"market","image_interior":null}'}}]}))

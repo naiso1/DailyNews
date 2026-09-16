@@ -1983,13 +1983,20 @@ def call_llm_text(prompt):
 
 
 def compact_title_with_llm(source_title, source_content, current_title):
+    focus = "Focus on the subject and one most important automotive-interior feature. "
+    if EDITION.id == "exterior":
+        focus = (
+            "Focus on the source's main exterior-product fact or vehicle design, market, "
+            "regulation, materials or competitor trend. Preserve that subject and do not "
+            "invent component details for trend articles. "
+        )
     for attempt in range(2):
         prompt = (
             "Create exactly one complete, natural Japanese news headline for the source below.\n"
             f"Hard requirements: Japanese only, target 30 to {SUMMARY_TITLE_TARGET} Japanese characters, "
             f"never exceed {SUMMARY_COMPACT_TITLE_LIMIT} characters, no JSON, no quotes, no period, "
             "no explanation, and no polite desu/masu ending. Keep decimal numbers intact.\n"
-            "Focus on the subject and one most important automotive-interior feature. "
+            f"{focus}"
             "The headline must end with a complete action or noun phrase such as '搭載', '採用', or '公開'. "
             "Never end with a conjunction, particle, or a bare feature name.\n\n"
             f"Source title: {source_title}\n"
@@ -2455,7 +2462,7 @@ def summarize_article(title, content, url, country=""):
         if compact_body:
             summary_body = compact_body
         elif missing_interior:
-            print(f"  [SUMMARY_INTERIOR_REPAIR_FAILED] 内装の具体情報を補う再要約に失敗: {title[:50]}")
+            print(f"  [SUMMARY_{EDITION.id.upper()}_REPAIR_FAILED] {SUBJECT_NAME}の具体情報を補う再要約に失敗: {title[:50]}")
 
     if len(summary_title) > SUMMARY_TITLE_LIMIT:
         summary_title = trim_title_safely(summary_title, SUMMARY_TITLE_LIMIT)
