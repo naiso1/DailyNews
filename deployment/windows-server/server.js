@@ -10,6 +10,12 @@ const EDITION = process.env.DAILYNEWS_EDITION || "interior";
 if (!["interior", "exterior"].includes(EDITION)) throw new Error("Unknown DAILYNEWS_EDITION");
 const IS_EXTERIOR = EDITION === "exterior";
 const BASE_PATH = IS_EXTERIOR ? "/exterior" : "";
+const sharedConfigFile = path.join(__dirname, "shared-identity.json");
+const sharedConfig = fs.existsSync(sharedConfigFile) ? JSON.parse(fs.readFileSync(sharedConfigFile, "utf8").replace(/^\uFEFF/, "")) : {};
+const IDENTITY_DB_FILE = process.env.DAILYNEWS_IDENTITY_DB || sharedConfig.identityDb;
+const EXTERIOR_DB_FILE = process.env.DAILYNEWS_EXTERIOR_DB || sharedConfig.exteriorDb;
+const SHARED_IDENTITY = Boolean(IDENTITY_DB_FILE);
+if (Boolean(EXTERIOR_DB_FILE) !== SHARED_IDENTITY) throw new Error("Both shared identity database paths are required.");
 const PUBLIC_CONFIG = Object.freeze({
   id: EDITION,
   name: IS_EXTERIOR ? "外装製品デイリーニュース" : "内装製品デイリーニュース",
@@ -17,6 +23,7 @@ const PUBLIC_CONFIG = Object.freeze({
   apiBase: `${BASE_PATH}/api`,
   allowGuestRead: IS_EXTERIOR,
   imageGenerationEnabled: !IS_EXTERIOR,
+  sharedIdentity: SHARED_IDENTITY,
 });
 // An exterior process must never open the legacy interior database by default.
 const ROOT = path.resolve(process.env.DAILYNEWS_ROOT || path.join(__dirname, "..", ...(IS_EXTERIOR ? ["exterior"] : [])));
@@ -35,7 +42,7 @@ const ALLOWED_CLIENTS = (
   .map((value) => value.trim())
   .filter(Boolean);
 const TRUSTED_PROXIES = ["127.0.0.1", "::1", "202.15.67.132"];
-const SESSION_COOKIE = IS_EXTERIOR ? "dailynews_exterior_session" : "dailynews_session";
+const SESSION_COOKIE = !SHARED_IDENTITY && IS_EXTERIOR ? "dailynews_exterior_session" : "dailynews_session";
 const SESSION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60;
 const AUTH_ATTEMPT_WINDOW_MS = 10 * 60 * 1000;
 const AUTH_ATTEMPT_LIMIT = 12;
@@ -718,6 +725,9 @@ const statements = {
   `),
 };
 
+const sharedIdentity = SHARED_IDENTITY ? require("./shared-identity").openSharedIdentity({
+  identityDbFile: IDENTITY_DB_FILE, exteriorDbFile: EXTERIOR_DB_FILE, edition: EDITION, localDbFile: DB_FILE,
+}) : null;
 for (const email of ADMIN_EMAILS) statements.markAdmin.run(email);
 for (const user of statements.usersForMailSeed.all()) {
   statements.subscribeRegisteredUser.run(user.email, user.display_name, user.id, IS_EXTERIOR ? 0 : 1);
@@ -907,6 +917,12 @@ function mailingListPayload() {
   };
 }
 
+function validSubscriptionChoices(value) {
+  return value && typeof value === "object" && !Array.isArray(value)
+    && typeof value.interior === "boolean" && typeof value.exterior === "boolean"
+    && Object.keys(value).every((key) => ["interior", "exterior"].includes(key));
+}
+
 function validPassword(value) {
   return typeof value === "string" && value.length >= 8 && value.length <= 128;
 }
@@ -959,7 +975,7 @@ function requestUsesHttps(request) {
 function sessionCookie(token, request, maxAge = SESSION_MAX_AGE_SECONDS) {
   const attributes = [
     `${SESSION_COOKIE}=${encodeURIComponent(token)}`,
-    `Path=${BASE_PATH}/`,
+    `Path=${SHARED_IDENTITY ? "/" : `${BASE_PATH}/`}`,
     "HttpOnly",
     "SameSite=Lax",
     `Max-Age=${maxAge}`,
@@ -969,13 +985,16 @@ function sessionCookie(token, request, maxAge = SESSION_MAX_AGE_SECONDS) {
 }
 
 function publicUser(row) {
+  const identity = sharedIdentity?.byEmail(row.email);
+  const subscriptions = identity ? sharedIdentity.subscriptions(row.email) : null;
   return {
+    ...(identity ? { identityId: Number(identity.id), subscriptions } : {}),
     id: Number(row.id),
     email: row.email,
     displayName: row.display_name,
     emailVerified: Boolean(row.email_verified),
-    isAdmin: Boolean(row.is_admin),
-    mailSubscribed: Boolean(statements.mailingSubscriptionByEmail.get(row.email)?.enabled),
+    isAdmin: Boolean(identity ? identity.is_admin : row.is_admin),
+    mailSubscribed: subscriptions ? subscriptions[EDITION] : Boolean(statements.mailingSubscriptionByEmail.get(row.email)?.enabled),
   };
 }
 
@@ -985,9 +1004,11 @@ function authenticatedUser(request) {
   const token = parseCookies(request)[SESSION_COOKIE];
   if (!token || token.length > 256) return null;
   const hash = tokenHash(token);
-  const row = statements.sessionUser.get(hash, new Date().toISOString());
+  const identity = sharedIdentity?.sessionUser(hash, new Date().toISOString());
+  const row = sharedIdentity ? (identity && sharedIdentity.localUser(identity)) : statements.sessionUser.get(hash, new Date().toISOString());
   if (!row) return null;
-  statements.touchSession.run(hash);
+  if (sharedIdentity) sharedIdentity.touchSession(hash);
+  else statements.touchSession.run(hash);
   request.authTokenHash = hash;
   request.authUser = publicUser(row);
   return request.authUser;
@@ -1017,8 +1038,11 @@ function createSession(userId, request, response) {
   const expiresAt = new Date(
     Date.now() + SESSION_MAX_AGE_SECONDS * 1000,
   ).toISOString();
-  statements.deleteExpiredSessions.run(new Date().toISOString());
-  statements.insertSession.run(tokenHash(token), userId, expiresAt);
+  if (sharedIdentity) sharedIdentity.createSession(tokenHash(token), userId, expiresAt);
+  else {
+    statements.deleteExpiredSessions.run(new Date().toISOString());
+    statements.insertSession.run(tokenHash(token), userId, expiresAt);
+  }
   response.setHeader("Set-Cookie", sessionCookie(token, request));
 }
 
@@ -1325,21 +1349,31 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 400, "invalid_registration", "Invalid registration details.");
       return;
     }
-    if (statements.userByEmail.get(email)) {
+    if (sharedIdentity ? sharedIdentity.byEmail(email) : statements.userByEmail.get(email)) {
       apiError(response, 409, "email_in_use", "This email address is already registered.");
       return;
     }
+    if (sharedIdentity && body.subscriptions !== undefined && !validSubscriptionChoices(body.subscriptions)) {
+      apiError(response, 400, "invalid_subscription", "Both subscription choices must be boolean.");
+      return;
+    }
     const passwordData = hashPassword(password);
-    let userId;
+    let user;
     try {
-      userId = Number(
-        statements.insertUser.run(
-          email,
-          displayName,
-          passwordData.hash,
-          passwordData.salt,
-        ).lastInsertRowid,
-      );
+      if (sharedIdentity) {
+        const choices = body.subscriptions || (typeof body.mailSubscribed === "boolean" ? { [EDITION]: body.mailSubscribed } : {});
+        const identity = sharedIdentity.register({ email, displayName, ...passwordData, isAdmin: ADMIN_EMAILS.has(email), choices });
+        user = publicUser(sharedIdentity.localUser(identity));
+      } else {
+        const userId = Number(statements.insertUser.run(email, displayName, passwordData.hash, passwordData.salt).lastInsertRowid);
+        if (ADMIN_EMAILS.has(email)) statements.markAdmin.run(email);
+        statements.subscribeRegisteredUser.run(email, displayName, userId, IS_EXTERIOR ? 0 : 1);
+        if (typeof body.mailSubscribed === "boolean") {
+          const subscription = statements.mailingSubscriptionByEmail.get(email);
+          statements.setMailSubscriptionEnabled.run(body.mailSubscribed ? 1 : 0, subscription.id);
+        }
+        user = publicUser(statements.userById.get(userId));
+      }
     } catch (error) {
       if (String(error.message).includes("UNIQUE")) {
         apiError(response, 409, "email_in_use", "This email address is already registered.");
@@ -1347,16 +1381,8 @@ async function handleApi(request, response, requestUrl) {
       }
       throw error;
     }
-    if (ADMIN_EMAILS.has(email)) statements.markAdmin.run(email);
-    statements.subscribeRegisteredUser.run(email, displayName, userId, IS_EXTERIOR ? 0 : 1);
-    // Existing manual recipients keep their setting unless the user explicitly chooses one.
-    if (typeof body.mailSubscribed === "boolean") {
-      const subscription = statements.mailingSubscriptionByEmail.get(email);
-      statements.setMailSubscriptionEnabled.run(body.mailSubscribed ? 1 : 0, subscription.id);
-    }
-    const user = publicUser(statements.userById.get(userId));
     claimClientActivity(user, body.clientId, favorites);
-    createSession(userId, request, response);
+    createSession(user.identityId || user.id, request, response);
     sendJson(response, 201, { authenticated: true, user });
     return;
   }
@@ -1369,22 +1395,25 @@ async function handleApi(request, response, requestUrl) {
     const body = await readJson(request);
     const email = normalizeEmail(body.email);
     const password = String(body.password || "");
-    const row = statements.userByEmail.get(email);
+    const row = sharedIdentity ? sharedIdentity.byEmail(email) : statements.userByEmail.get(email);
     if (!row || !verifyPassword(password, row.password_salt, row.password_hash)) {
       apiError(response, 401, "invalid_credentials", "Email address or password is incorrect.");
       return;
     }
-    const user = publicUser(row);
+    const user = publicUser(sharedIdentity ? sharedIdentity.localUser(row) : row);
     const favorites = Array.isArray(body.favorites) ? body.favorites.slice(0, 5000) : [];
     claimClientActivity(user, body.clientId, favorites);
-    createSession(user.id, request, response);
+    createSession(user.identityId || user.id, request, response);
     sendJson(response, 200, { authenticated: true, user });
     return;
   }
 
   if (request.method === "POST" && requestUrl.pathname === "/api/auth/logout") {
     authenticatedUser(request);
-    if (request.authTokenHash) statements.deleteSession.run(request.authTokenHash);
+    if (request.authTokenHash) {
+      if (sharedIdentity) sharedIdentity.deleteSession(request.authTokenHash);
+      else statements.deleteSession.run(request.authTokenHash);
+    }
     response.setHeader("Set-Cookie", sessionCookie("", request, 0));
     sendJson(response, 200, { authenticated: false, user: null });
     return;
@@ -1409,7 +1438,8 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 400, "invalid_display_name", "Invalid display name.");
       return;
     }
-    withTransaction(() => {
+    if (sharedIdentity) sharedIdentity.profile(user.identityId, displayName);
+    else withTransaction(() => {
       statements.updateUserName.run(displayName, user.id);
       statements.updateCommentNames.run(displayName, user.id);
     });
@@ -1417,6 +1447,57 @@ async function handleApi(request, response, requestUrl) {
       authenticated: true,
       user: publicUser(statements.userById.get(user.id)),
     });
+    return;
+  }
+
+  if (sharedIdentity && request.method === "PUT" && requestUrl.pathname === "/api/auth/password") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    if (authRateLimited(request, "password")) {
+      apiError(response, 429, "too_many_attempts", "Please wait before trying again.");
+      return;
+    }
+    const body = await readJson(request);
+    const identity = sharedIdentity.byId(user.identityId);
+    if (!validPassword(body.currentPassword) || !verifyPassword(body.currentPassword, identity.password_salt, identity.password_hash)) {
+      apiError(response, 401, "invalid_current_password", "Current password is incorrect.");
+      return;
+    }
+    if (!validPassword(body.newPassword)) {
+      apiError(response, 400, "invalid_password", "Password must be between 8 and 128 characters.");
+      return;
+    }
+    const next = hashPassword(body.newPassword);
+    sharedIdentity.changePassword(user.identityId, next.hash, next.salt);
+    createSession(user.identityId, request, response);
+    sendJson(response, 200, { authenticated: true, user });
+    return;
+  }
+
+  if (sharedIdentity && ["GET", "PUT"].includes(request.method) && requestUrl.pathname === "/api/me/subscriptions") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    if (request.method === "PUT") {
+      const body = await readJson(request);
+      if (!validSubscriptionChoices(body.subscriptions)) {
+        apiError(response, 400, "invalid_subscription", "Both subscription choices must be boolean.");
+        return;
+      }
+      if (body.expectedSubscriptions !== undefined && !validSubscriptionChoices(body.expectedSubscriptions)) {
+        apiError(response, 400, "invalid_subscription", "Both expected subscription choices must be boolean.");
+        return;
+      }
+      try {
+        sharedIdentity.setSubscriptions(user.identityId, body.subscriptions, body.expectedSubscriptions);
+      } catch (error) {
+        if (error.code === "subscription_conflict") {
+          apiError(response, 409, error.code, error.message);
+          return;
+        }
+        throw error;
+      }
+    }
+    sendJson(response, 200, { subscriptions: sharedIdentity.subscriptions(user.email) });
     return;
   }
 
@@ -1429,9 +1510,12 @@ async function handleApi(request, response, requestUrl) {
         apiError(response, 400, "invalid_subscription", "enabled must be a boolean.");
         return;
       }
-      statements.subscribeRegisteredUser.run(user.email, user.displayName, user.id, 0);
-      const subscription = statements.mailingSubscriptionByEmail.get(user.email);
-      statements.setMailSubscriptionEnabled.run(body.enabled ? 1 : 0, subscription.id);
+      if (sharedIdentity) sharedIdentity.setSubscriptions(user.identityId, { [EDITION]: body.enabled });
+      else {
+        statements.subscribeRegisteredUser.run(user.email, user.displayName, user.id, 0);
+        const subscription = statements.mailingSubscriptionByEmail.get(user.email);
+        statements.setMailSubscriptionEnabled.run(body.enabled ? 1 : 0, subscription.id);
+      }
     }
     sendJson(response, 200, {
       edition: EDITION,
@@ -2274,6 +2358,7 @@ server.listen(PORT, HOST, () => {
 function shutdown(signal) {
   log(`Received ${signal}; shutting down`);
   server.close(() => {
+    sharedIdentity?.close();
     db.close();
     process.exit(0);
   });

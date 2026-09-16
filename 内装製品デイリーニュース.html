@@ -1378,6 +1378,14 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         class="new-count" data-country="paper"></span></span>
             </div>
         </div>
+        <div class="filter-row" id="contentCategoryRow" style="display:none">
+            <label class="filter-label" for="contentCategory">📰 記事区分</label>
+            <select id="contentCategory" class="search-input" style="max-width:340px">
+                <option value="all">すべて</option>
+                <option value="product">製品・技術</option>
+                <option value="trend">トレンド・マーケット</option>
+            </select>
+        </div>
         <div class="filter-row">
             <span class="filter-label">🏷️ ジャンル</span>
             <div class="tag-filter-container">
@@ -1595,7 +1603,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         document.querySelector("header h1").textContent = editionConfig.name;
         document.querySelector(`[data-edition-link="${editionConfig.id}"]`)?.setAttribute("aria-current", "page");
         if (editionConfig.id === "exterior") {
-            document.querySelector("header .lead").textContent = "国内外の自動車外装ニュースを生成AIで収集・日本語要約。グリル・バンパー・加飾・照明・センサー対応などを取り上げ、外装開発につながる考察と企画アイデアを提案します。";
+            document.querySelector("header .lead").textContent = "国内外の外装製品・技術に加え、デザイン・市場・規制・材料・競合の動きを収集して日本語要約。外装開発につながる考察と企画アイデアを提案します。";
+            document.getElementById("contentCategoryRow").style.display = "";
             document.querySelector('meta[name="description"]').content = "外装製品のニュース・考察・企画アイデアをお届け。登録せずに閲覧でき、メールは希望者のみ受信できます。";
             document.querySelector('option[value="relevance-desc"]').textContent = "外装関連度順";
             const mailSettings = document.getElementById("editionMailSettings");
@@ -1819,6 +1828,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (!target || isGloballyHidden(target)) return;
             beginInternalNavigation(fromRanking ? "rankingSection" : null, returnToAccount);
             document.getElementById("searchInput").value = itemId;
+            document.getElementById("contentCategory").value = "all";
             document.getElementById("dateFrom").value = "";
             document.getElementById("dateTo").value = "";
             newOnly = false;
@@ -2123,6 +2133,12 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             paper: "<span class='paper-icon'>📄</span>"
         };
         const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
+        const TREND_TOPIC_NAMES = { design: "デザイン", market: "市場", regulation: "規制", materials: "材料", competitor: "競合" };
+        function newsCategoryLabel(item) {
+            if (window.DAILYNEWS_CONFIG.id !== "exterior") return "";
+            if (item.contentCategory !== "trend") return "製品・技術";
+            return "トレンド・マーケット" + (TREND_TOPIC_NAMES[item.trendTopic] ? ` / ${TREND_TOPIC_NAMES[item.trendTopic]}` : "");
+        }
 
         const LOCAL_TAG_RULES = [
             { tag: "HMI", words: ["hmi", "ui", "ux", "インターフェース", "操作", "インフォテインメント"] },
@@ -2732,6 +2748,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 dateFrom: document.getElementById("dateFrom").value,
                 dateTo: document.getElementById("dateTo").value,
                 sortOrder: document.getElementById("sortOrder").value,
+                contentCategory: document.getElementById("contentCategory").value,
                 countries: new Set(activeCountries),
                 tags: new Set(activeTags),
                 favoritesOnly,
@@ -2754,6 +2771,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("dateFrom").value = state.dateFrom || "";
             document.getElementById("dateTo").value = state.dateTo || "";
             document.getElementById("sortOrder").value = state.sortOrder || "new-first";
+            document.getElementById("contentCategory").value = state.contentCategory || "all";
             activeCountries = new Set(state.countries || ["world"]);
             activeTags = new Set(state.tags || ["all"]);
             favoritesOnly = Boolean(state.favoritesOnly);
@@ -2797,6 +2815,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             beginInternalNavigation(null, returnToAccount);
             document.getElementById("searchInput").value = "";
             document.getElementById("dateFrom").value = day.date;
+            document.getElementById("contentCategory").value = "all";
             document.getElementById("dateTo").value = day.date;
             newOnly = false;
             favoritesOnly = false;
@@ -2915,6 +2934,11 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                 document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
                 document.getElementById("tagFilters").addEventListener("click", handleTagClick);
+                document.getElementById("contentCategory").addEventListener("change", () => {
+                    visibleLimit = 30;
+                    applyFilters();
+                    updateURL("push");
+                });
                 const applyManualDateFilter = () => {
                     newOnly = false;
                     applyFilters();
@@ -3122,6 +3146,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
             const sortOrder = document.getElementById("sortOrder").value;
+            const contentCategory = window.DAILYNEWS_CONFIG.id === "exterior" ? document.getElementById("contentCategory").value : "all";
 
             if (activeTags.size === 0) activeTags = new Set(["all"]);
             if (activeCountries.size === 0) activeCountries = new Set(["world"]);
@@ -3136,8 +3161,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
                 if (favoritesOnly && !isFavorite(n.id)) return false;
                 if (newOnly && !isNewContent(n)) return false;
+                if (contentCategory !== "all" && (n.contentCategory || "product") !== contentCategory) return false;
 
-                const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ")).toLowerCase();
+                const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ") + " " + newsCategoryLabel(n)).toLowerCase();
 
                 // Tag Filter (tag text can match title/desc as well)
                 if (!activeTags.has("all")) {
@@ -3155,7 +3181,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 return true;
             });
 
-            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly || newOnly);
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly || newOnly || contentCategory !== "all");
             const availableNews = visibleNewsData();
             if (!hasActiveFilter && filteredData.length === 0 && availableNews.length > 0) {
                 filteredData = [...availableNews];
@@ -3242,6 +3268,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
+                ${window.DAILYNEWS_CONFIG.id === "exterior" ? `<div class="card-tags" style="margin-bottom:8px"><span class="card-tag">${newsCategoryLabel(n)}</span></div>` : ""}
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
                 ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
@@ -3363,6 +3390,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("dateFrom").value = params.has("from") ? params.get("from") : defaultFrom;
             document.getElementById("dateTo").value = params.has("to") ? params.get("to") : defaultTo;
             document.getElementById("sortOrder").value = params.get("sort") || "new-first";
+            document.getElementById("contentCategory").value = ["product", "trend"].includes(params.get("category")) ? params.get("category") : "all";
 
             const requestedLimit = Number(params.get("limit"));
             const requestedInsightsLimit = Number(params.get("insights"));
@@ -3387,6 +3415,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const params = new URLSearchParams();
             if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
             if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
+            const contentCategory = document.getElementById("contentCategory").value;
+            if (window.DAILYNEWS_CONFIG.id === "exterior" && contentCategory !== "all") params.set("category", contentCategory);
             if (newOnly) params.set("new", "1");
             if (favoritesOnly) params.set("favorites", "1");
             const query = document.getElementById("searchInput").value.trim();
@@ -3621,7 +3651,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                                         <span class="idea-title">${idea.title}</span>
                                     </div>
                                     <div class="idea-body">
-                                        ${idea.img && window.DAILYNEWS_CONFIG.imageGenerationEnabled ? `<div class="idea-image-wrapper"><img src="${idea.img}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div></div>` : ""}
+                                        ${idea.img && (window.DAILYNEWS_CONFIG.imageGenerationEnabled || (window.DAILYNEWS_CONFIG.id === "exterior" && /^images\/exabase_exterior_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea.img))) ? `<div class="idea-image-wrapper"><img src="${escapeHtml(idea.img)}" alt="${escapeHtml(idea.title)}のAI生成イメージ" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div><span style="position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,.7);color:white;padding:3px 7px;border-radius:5px;font-size:11px">AI生成イメージ</span></div>` : ""}
                                         <div class="idea-content">
                                             <p class="idea-desc">${formatInlineTextWithRefs(idea.desc, newsById)}</p>
                                             <div class="actions">
@@ -3683,7 +3713,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (!favoritesOnly && filteredInsights.length > insightsVisibleLimit) {
                 const loadMoreDiv = document.createElement("div");
                 loadMoreDiv.style.cssText = "text-align:center; margin-top:20px;";
-                loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;">
+                loadMoreDiv.innerHTML = `<button onclick="loadMoreInsights()" class="btn" style="padding:12px 24px;max-width:100%;white-space:normal;">
                     📚 もっと見る（過去の考察・アイデア例も表示 / あと ${filteredInsights.length - insightsVisibleLimit} 件）
                 </button>`;
                 container.appendChild(loadMoreDiv);

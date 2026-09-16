@@ -107,6 +107,9 @@ if ($LASTEXITCODE -ne 0) {
 
 $appFiles = @(
     "server.js",
+    "shared-identity.js",
+    "migrate-shared-identity.js",
+    "enable-shared-identity.ps1",
     "backup.js",
     "manage-mailing-list.js",
     "import_legacy.js",

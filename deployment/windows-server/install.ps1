@@ -32,6 +32,11 @@ if (-not (Test-Path -LiteralPath $node -PathType Leaf)) {
 if (-not (Test-Path -LiteralPath $serverScript -PathType Leaf)) {
     throw "DailyNews server script was not found: $serverScript"
 }
+# Existing app/shared-identity.json is preserved and read by server.js on startup.
+if ((Test-Path -LiteralPath (Join-Path $appDir "shared-identity.json")) -and
+    !(Test-Path -LiteralPath (Join-Path $appDir "shared-identity.js"))) {
+    throw "Shared identity module is required for this installation."
+}
 if (-not (Test-Path -LiteralPath $backupScript -PathType Leaf)) {
     throw "DailyNews backup script was not found: $backupScript"
 }

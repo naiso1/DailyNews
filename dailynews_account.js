@@ -3,6 +3,8 @@
 const ACCOUNT_API_BASE = window.DAILYNEWS_CONFIG?.apiBase || "/api";
 const ACCOUNT_ALLOW_GUEST = Boolean(window.DAILYNEWS_CONFIG?.allowGuestRead);
 const ACCOUNT_EDITION_LABEL = window.DAILYNEWS_CONFIG?.id === "exterior" ? "外装版" : "内装版";
+const ACCOUNT_SHARED_IDENTITY = Boolean(window.DAILYNEWS_CONFIG?.sharedIdentity);
+const ACCOUNT_REVISION_KEY = "dailynews_account_revision_v1";
 const accountStorageKey = (key) => window.dailyNewsStorageKey?.(key) || key;
 const ACCOUNT_CLIENT_ID_KEY = accountStorageKey("dailynews_client_id_v1");
 const ACCOUNT_FAVORITES_KEY = accountStorageKey("favorites_v1");
@@ -15,6 +17,7 @@ const accountState = {
   activityTab: "favorites",
   admin: null,
   authResolved: false,
+  subscriptionBaseline: null,
 };
 
 function accountClientId() {
@@ -246,7 +249,26 @@ function authErrorMessage(error) {
   if (error.code === "invalid_credentials") return "メールアドレスまたはパスワードが違います。";
   if (error.code === "too_many_attempts") return "試行回数が多すぎます。10分ほど待ってからお試しください。";
   if (error.code === "invalid_registration") return "入力内容を確認してください。パスワードは8文字以上です。";
+  if (error.code === "invalid_password") return "現在のパスワードと、新しいパスワード（8文字以上）を確認してください。";
+  if (error.code === "invalid_current_password") return "現在のパスワードが違います。";
   return "処理に失敗しました。通信状態を確認して、もう一度お試しください。";
+}
+
+function subscriptionChoices(values = {}) {
+  return `<fieldset style="margin:0;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px">
+    <legend>メールで受信するニュース</legend>
+    <label style="display:block;padding:8px 0"><input name="subscriptionInterior" type="checkbox" ${values.interior ? "checked" : ""}> 内装製品デイリーニュース</label>
+    <label style="display:block;padding:8px 0"><input name="subscriptionExterior" type="checkbox" ${values.exterior ? "checked" : ""}> 外装製品デイリーニュース</label>
+    <p class="account-note" style="margin:6px 0 0">両方選ぶと両方を受信します。両方外すとメールを受信しません。後から変更できます。</p>
+  </fieldset>`;
+}
+
+function subscriptionsFromForm(values) {
+  return { interior: values.get("subscriptionInterior") === "on", exterior: values.get("subscriptionExterior") === "on" };
+}
+
+function notifyAccountChange() {
+  try { localStorage.setItem(ACCOUNT_REVISION_KEY, `${Date.now()}-${Math.random()}`); } catch (_) {}
 }
 
 function renderAuth(mode = accountState.mode, message = "") {
@@ -259,7 +281,7 @@ function renderAuth(mode = accountState.mode, message = "") {
         <section class="account-welcome-copy">
           <div class="account-welcome-eyebrow">TG社員向けサービス</div>
           <h3 class="account-welcome-title">${ACCOUNT_ALLOW_GUEST ? "外装版のメール受信・コメントをご利用の方へ" : "より良いサービスづくりのため、<br>ログイン方式に変更しました"}</h3>
-          <p class="account-welcome-lead">${ACCOUNT_ALLOW_GUEST ? "ニュースは登録せずに閲覧できます。メール受信やお気に入り・コメントには外装版のアカウントをご登録ください。内装版とは別のアカウントです。登録だけではメールは配信されません。" : "サービス向上と利用状況の把握に活用し、ニュース・考察・企画アイデアをより役立つ内容へ改善していきます。TG社員であれば、どなたでも登録してご利用いただけます。"}</p>
+          <p class="account-welcome-lead">${ACCOUNT_SHARED_IDENTITY ? "内装版・外装版は同じメールアドレスとパスワードで利用できます。内装版に登録済みの方は、そのままログインしてください。メールは内装・外装から受信したい版を選べます。" + (ACCOUNT_ALLOW_GUEST ? " 外装ニュースは登録せずに閲覧できます。" : "") : (ACCOUNT_ALLOW_GUEST ? "ニュースは登録せずに閲覧できます。メール受信やお気に入り・コメントには外装版のアカウントをご登録ください。登録だけではメールは配信されません。" : "TG社員であれば、どなたでも登録してご利用いただけます。")}</p>
           <ul class="account-welcome-points">
             <li>登録は、表示名・メールアドレス・パスワードの入力だけで完了します。</li>
             <li>お気に入り・いいね・コメントを、端末が変わっても確認できます。</li>
@@ -287,13 +309,13 @@ function renderAuth(mode = accountState.mode, message = "") {
   const isRegister = mode === "register";
   document.getElementById("accountTitle").textContent = isRegister ? "新規登録" : "ログイン";
   body.innerHTML = `
-    <p class="account-note">${isRegister ? (ACCOUNT_ALLOW_GUEST ? "外装版のアカウントを作成します。内装版とは別に登録してください。メールは受信を選んだ方にのみ配信します。" : "TG社員であれば、どなたでも登録できます。登録したメールアドレスには、更新成功時の朝8時にデイリーニュースをご案内します。") : (ACCOUNT_ALLOW_GUEST ? "外装版に登録した情報でログインしてください。" : "登録済みの方は、登録した情報を入力してください。")} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
+    <p class="account-note">${ACCOUNT_SHARED_IDENTITY ? (isRegister ? "内装・外装で共通のアカウントを作成します。すでに内装版に登録済みの方は、再登録せずログインしてください。" : "内装版と同じメールアドレス・パスワードでログインできます。以前両版に別々のパスワードを登録した場合は、内装版のパスワードを使ってください。") : (isRegister ? "TG社員であれば、どなたでも登録できます。" : "登録したメールアドレスとパスワードでログインしてください。")} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
     <div class="account-error${message ? " show" : ""}" id="accountError">${escapeAccountHtml(message)}</div>
     <form class="account-form" id="accountAuthForm">
       ${isRegister ? '<label class="account-field">表示名<input name="displayName" maxlength="40" autocomplete="name" required placeholder="コメントに表示する名前"></label>' : ""}
       <label class="account-field">メールアドレス<input name="email" type="email" maxlength="254" autocomplete="email" required placeholder="name@example.com"></label>
       <label class="account-field">パスワード<input name="password" type="password" minlength="8" maxlength="128" autocomplete="${isRegister ? "new-password" : "current-password"}" required></label>
-      ${isRegister && ACCOUNT_ALLOW_GUEST ? '<label class="account-note"><input name="mailSubscribed" type="checkbox"> 外装版のメールを受信する（任意・後から変更できます）</label>' : ""}
+      ${isRegister && ACCOUNT_SHARED_IDENTITY ? subscriptionChoices({ interior: !ACCOUNT_ALLOW_GUEST, exterior: false }) : (isRegister && ACCOUNT_ALLOW_GUEST ? '<label class="account-note"><input name="mailSubscribed" type="checkbox"> 外装版のメールを受信する（任意・後から変更できます）</label>' : "")}
       <button class="account-primary" type="submit">${isRegister ? "登録して始める" : "ログイン"}</button>
     </form>
     <div class="account-switch">${isRegister ? "登録済みですか？" : "初めて利用しますか？"} <button class="account-link" id="accountModeSwitch" type="button">${isRegister ? "ログイン" : "新規登録"}</button></div>`;
@@ -318,6 +340,7 @@ async function submitAuth(event) {
     favorites: [],
   };
   if (accountState.mode === "register" && ACCOUNT_ALLOW_GUEST) body.mailSubscribed = values.get("mailSubscribed") === "on";
+  if (accountState.mode === "register" && ACCOUNT_SHARED_IDENTITY) body.subscriptions = subscriptionsFromForm(values);
   try {
     const result = await accountApi(
       accountState.mode === "register" ? "/auth/register" : "/auth/login",
@@ -325,6 +348,7 @@ async function submitAuth(event) {
     );
     accountState.user = result.user;
     await afterAuthentication();
+    notifyAccountChange();
     location.reload();
   } catch (error) {
     setAccountError(authErrorMessage(error));
@@ -494,6 +518,7 @@ function renderActivityList() {
 function renderAccountHome() {
   const body = document.getElementById("accountBody");
   const user = accountState.user;
+  accountState.subscriptionBaseline = user.subscriptions ? { ...user.subscriptions } : null;
   document.getElementById("accountTitle").textContent = "マイページ";
   body.innerHTML = `
     <div class="account-profile">
@@ -505,10 +530,19 @@ function renderAccountHome() {
       <button class="account-secondary" type="submit">表示名を更新</button>
     </form>
     <form class="account-form" id="accountSubscriptionForm" style="margin-bottom:20px">
-      <label class="account-note"><input name="enabled" type="checkbox" ${user.mailSubscribed ? "checked" : ""}> ${ACCOUNT_EDITION_LABEL}のメールを受信する</label>
+      ${ACCOUNT_SHARED_IDENTITY ? subscriptionChoices(user.subscriptions) : `<label class="account-note"><input name="enabled" type="checkbox" ${user.mailSubscribed ? "checked" : ""}> ${ACCOUNT_EDITION_LABEL}のメールを受信する</label>`}
       <button class="account-secondary" type="submit">メール受信設定を保存</button>
-      <p class="account-note" id="accountSubscriptionStatus" role="status">この版のメール配信だけに適用されます。</p>
+      <p class="account-note" id="accountSubscriptionStatus" role="status">${ACCOUNT_SHARED_IDENTITY ? "平日朝8時に配信します。設定は通常約2分＋OneDrive同期時間で配信名簿へ反映されます。" : "この版のメール配信だけに適用されます。"}</p>
     </form>
+    ${ACCOUNT_SHARED_IDENTITY ? `<details style="margin-bottom:20px"><summary style="cursor:pointer">共通パスワードを変更</summary>
+      <form class="account-form" id="accountPasswordForm" style="margin-top:12px">
+        <label class="account-field">現在のパスワード<input name="currentPassword" type="password" autocomplete="current-password" required maxlength="128"></label>
+        <label class="account-field">新しいパスワード<input name="newPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required></label>
+        <label class="account-field">新しいパスワード（確認）<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required></label>
+        <p class="account-note">内装・外装の両方に適用されます。変更後、他の端末では再ログインが必要です。</p>
+        <button class="account-secondary" type="submit">パスワードを変更</button>
+        <p class="account-note" id="accountPasswordStatus" role="status"></p>
+      </form></details>` : ""}
     <div class="account-tabs">
       <button class="account-tab" data-tab="participation" type="button">参加した記事</button>
       <button class="account-tab" data-tab="updates" type="button">返信・更新${Number(accountState.activity?.unreadNotifications || 0) ? ` (${Number(accountState.activity.unreadNotifications)})` : ""}</button>
@@ -522,6 +556,7 @@ function renderAccountHome() {
   body.querySelector("#accountLogout").addEventListener("click", logoutAccount);
   body.querySelector("#accountProfileForm").addEventListener("submit", updateProfile);
   body.querySelector("#accountSubscriptionForm").addEventListener("submit", updateSubscription);
+  body.querySelector("#accountPasswordForm")?.addEventListener("submit", updatePassword);
   body.querySelectorAll("[data-tab]").forEach((button) => {
     button.addEventListener("click", () => selectAccountTab(button.dataset.tab));
   });
@@ -545,14 +580,61 @@ async function updateSubscription(event) {
   const status = document.getElementById("accountSubscriptionStatus");
   button.disabled = true;
   try {
-    const result = await accountApi("/me/subscription", {
+    const values = new FormData(form);
+    const result = await accountApi(ACCOUNT_SHARED_IDENTITY ? "/me/subscriptions" : "/me/subscription", {
       method: "PUT",
-      body: { enabled: new FormData(form).get("enabled") === "on" },
+      body: ACCOUNT_SHARED_IDENTITY ? { subscriptions: subscriptionsFromForm(values), expectedSubscriptions: accountState.subscriptionBaseline } : { enabled: values.get("enabled") === "on" },
     });
-    accountState.user.mailSubscribed = result.enabled;
-    status.textContent = result.enabled ? `${ACCOUNT_EDITION_LABEL}のメール受信を開始しました。` : `${ACCOUNT_EDITION_LABEL}のメール配信を停止しました。`;
-  } catch (_) {
-    status.textContent = "設定を保存できませんでした。通信状態を確認して再度お試しください。";
+    if (ACCOUNT_SHARED_IDENTITY) {
+      accountState.user.subscriptions = result.subscriptions;
+      accountState.subscriptionBaseline = { ...result.subscriptions };
+      accountState.user.mailSubscribed = result.subscriptions[window.DAILYNEWS_CONFIG.id];
+      const selected = [result.subscriptions.interior && "内装", result.subscriptions.exterior && "外装"].filter(Boolean);
+      status.textContent = selected.length ? `${selected.join("・")}のメール受信を保存しました。` : "内装・外装のメール配信を停止しました。";
+      notifyAccountChange();
+    } else {
+      accountState.user.mailSubscribed = result.enabled;
+      status.textContent = result.enabled ? `${ACCOUNT_EDITION_LABEL}のメール受信を開始しました。` : `${ACCOUNT_EDITION_LABEL}のメール配信を停止しました。`;
+    }
+  } catch (error) {
+    if (error.code === "subscription_conflict") {
+      try {
+        const latest = await accountApi("/me/subscriptions");
+        accountState.user.subscriptions = latest.subscriptions;
+        renderAccountHome();
+        document.getElementById("accountSubscriptionStatus").textContent = "別の画面で受信設定が変更されました。最新の設定を表示しています。変更したい項目を選び直してください。";
+      } catch (_) {
+        status.textContent = "別の画面で受信設定が変更されました。この画面を開き直してから設定してください。";
+      }
+    } else {
+      status.textContent = "設定を保存できませんでした。通信状態を確認して再度お試しください。";
+    }
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function updatePassword(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const values = new FormData(form);
+  const status = document.getElementById("accountPasswordStatus");
+  const button = form.querySelector("button");
+  if (values.get("newPassword") !== values.get("confirmPassword")) {
+    status.textContent = "新しいパスワードと確認用の入力が一致していません。";
+    return;
+  }
+  button.disabled = true;
+  try {
+    const result = await accountApi("/auth/password", { method: "PUT", body: {
+      currentPassword: values.get("currentPassword"), newPassword: values.get("newPassword"),
+    } });
+    accountState.user = result.user;
+    form.reset();
+    status.textContent = "内装・外装の共通パスワードを変更しました。";
+    notifyAccountChange();
+  } catch (error) {
+    status.textContent = authErrorMessage(error);
   } finally {
     button.disabled = false;
   }
@@ -728,7 +810,7 @@ async function updateProfile(event) {
       method: "PUT",
       body: { displayName },
     });
-    accountState.user = result.user;
+  accountState.user = result.user;
     updateAccountButton();
     renderAccountHome();
   } catch (_) {
@@ -757,7 +839,12 @@ async function afterAuthentication() {
 }
 
 async function logoutAccount() {
-  await accountApi("/auth/logout", { method: "POST", body: {} }).catch(() => {});
+  try {
+    await accountApi("/auth/logout", { method: "POST", body: {} });
+  } catch (_) {
+    alert("ログアウトできませんでした。通信状態を確認して再度お試しください。");
+    return;
+  }
   accountState.user = null;
   accountState.activity = null;
   accountState.admin = null;
@@ -771,6 +858,7 @@ async function logoutAccount() {
   updateRegistrationPrompt();
   closeAccount();
   window.dispatchEvent(new CustomEvent("dailynews:account-changed", { detail: null }));
+  notifyAccountChange();
 }
 
 function updateAccountButton() {
@@ -789,7 +877,17 @@ function updateAccountButton() {
   button.title = accountState.user ? "マイページ" : "ログイン / 登録";
 }
 
-function openAccount(mode, message = "") {
+async function openAccount(mode, message = "") {
+  if (ACCOUNT_SHARED_IDENTITY && accountState.user) {
+    try {
+      const result = await accountApi("/auth/me");
+      if (String(result.user?.id || "") !== String(accountState.user.id)) {
+        location.reload();
+        return;
+      }
+      accountState.user = result.user;
+    } catch (_) { /* Keep the existing form available during a temporary outage. */ }
+  }
   const overlay = document.getElementById("accountOverlay");
   overlay?.classList.add("open");
   document.body.style.overflow = "hidden";
@@ -860,3 +958,25 @@ window.addEventListener("dailynews:activity-updated", () => {
   if (accountState.user) refreshActivity().catch(() => {});
 });
 document.addEventListener("DOMContentLoaded", initializeAccount);
+
+let accountSessionCheck = null;
+async function refreshSharedSession() {
+  if (!ACCOUNT_SHARED_IDENTITY || !accountState.authResolved || accountSessionCheck) return;
+  accountSessionCheck = accountApi("/auth/me").then((result) => {
+    if (String(result.user?.id || "") !== String(accountState.user?.id || "")) {
+      // Reload protected content and edition-local activity after a shared login/logout.
+      location.reload();
+      return;
+    }
+    if (result.user) accountState.user = result.user;
+    updateAccountButton();
+  }).catch(() => {}).finally(() => { accountSessionCheck = null; });
+  await accountSessionCheck;
+}
+window.addEventListener("focus", refreshSharedSession);
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") refreshSharedSession();
+});
+window.addEventListener("storage", (event) => {
+  if (event.key === ACCOUNT_REVISION_KEY) refreshSharedSession();
+});

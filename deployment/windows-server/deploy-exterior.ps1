@@ -61,7 +61,7 @@ function Invoke-Remote([string]$Script) {
     if ($LASTEXITCODE -ne 0) { throw "Exterior remote operation failed." }
 }
 Invoke-Remote "foreach (`$part in @('app','incoming','data','logs','releases')) {New-Item -ItemType Directory -Path (Join-Path '$root' `$part) -Force | Out-Null}"
-foreach ($name in @("server.js","backup.js","manage-mailing-list.js","activate-release.ps1","install-exterior.ps1")) {
+foreach ($name in @("server.js","shared-identity.js","migrate-shared-identity.js","enable-shared-identity.ps1","backup.js","manage-mailing-list.js","activate-release.ps1","install-exterior.ps1")) {
     & scp @sshOptions (Join-Path $PSScriptRoot $name) "${Server}:Desktop/DailyNewsExterior/app/$name"
     if ($LASTEXITCODE -ne 0) { throw "Exterior application upload failed: $name" }
 }

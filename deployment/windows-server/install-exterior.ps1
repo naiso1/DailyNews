@@ -14,6 +14,11 @@ foreach ($part in @("app","data","data\backups","incoming","releases","logs")) {
 }
 if (!(Test-Path -LiteralPath $node)) { throw "Node.js is unavailable." }
 if (!(Test-Path -LiteralPath (Join-Path $app "server.js"))) { throw "server.js is unavailable." }
+# Do not overwrite app/shared-identity.json when refreshing the launcher.
+if ((Test-Path -LiteralPath (Join-Path $app "shared-identity.json")) -and
+    !(Test-Path -LiteralPath (Join-Path $app "shared-identity.js"))) {
+    throw "Shared identity module is required for this installation."
+}
 $launcher = @"
 `$ErrorActionPreference = 'Stop'
 `$env:DAILYNEWS_EDITION = 'exterior'
