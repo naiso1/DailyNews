@@ -366,5 +366,25 @@ window.DAILYNEWS_CONFIGURED_SOURCES = [
     "country": "日本",
     "name": "ル・ボラン",
     "rssUrl": "https://levolant.jp/feed/"
+  },
+  {
+    "country": "日本",
+    "name": "Best Selling Cars - Japan Market",
+    "rssUrl": "https://www.best-selling-cars.com/category/japan/feed/"
+  },
+  {
+    "country": "米国",
+    "name": "Best Selling Cars - US Market",
+    "rssUrl": "https://www.best-selling-cars.com/category/usa/feed/"
+  },
+  {
+    "country": "欧州",
+    "name": "Best Selling Cars - Europe Market",
+    "rssUrl": "https://www.best-selling-cars.com/category/europe/feed/"
+  },
+  {
+    "country": "中国",
+    "name": "CarNewsChina - Sales",
+    "rssUrl": "https://carnewschina.com/category/sales/feed/"
   }
 ];
