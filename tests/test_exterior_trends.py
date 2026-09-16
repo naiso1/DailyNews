@@ -18,6 +18,16 @@ from dailynews.editions import get_edition
 
 
 class ExteriorTrendRulesTests(unittest.TestCase):
+    def test_insight_context_contains_both_lanes_when_product_scores_are_higher(self):
+        products = [{"newsId": f"jp{index}", "title": "グリル", "desc": "製品の設計。", "interiorScore": 90,
+                     "contentCategory": "product"} for index in range(1, 7)]
+        trends = [{"newsId": f"jp{index}", "title": "乗用車市場", "desc": "需要の変化。", "interiorScore": 70,
+                   "contentCategory": "trend", "trendTopic": "market"} for index in range(7, 10)]
+        selected = exterior.select_items(products + trends, 6)
+        self.assertEqual(len(selected), 6)
+        self.assertEqual(sum(item["contentCategory"] == "trend" for item in selected), 2)
+        self.assertEqual(exterior.select_items(products, 6), products)
+
     def test_market_and_material_evidence_can_qualify_without_a_part_name(self):
         for title, text, topic in (
             ("India passenger car sales", "SUV segment share rose to 55% in August.", "market"),
@@ -73,6 +83,20 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         picked = collector.prefilter_results_for_enrichment(products + [trend], 6)
         self.assertEqual(len(picked), 6)
         self.assertIn(trend, picked)
+
+    def test_exterior_google_search_keeps_all_original_and_trend_queries(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(collector.google_news_keyword_limit(), 15)
+            for settings in collector.COUNTRY_SETTINGS.values():
+                queries = collector.edition_search_keywords(settings, collector.google_news_keyword_limit())
+                self.assertEqual(len(queries), 15)
+                self.assertTrue(set(settings["keywords"]).issubset(queries))
+                self.assertTrue(set(settings["trend_keywords"]).issubset(queries))
+            collector.configure_edition("interior")
+            self.assertEqual(collector.google_news_keyword_limit(), collector.GOOGLE_NEWS_KEYWORD_LIMIT)
+        collector.configure_edition("exterior")
+        with patch.dict(os.environ, {"GOOGLE_NEWS_KEYWORD_LIMIT": "3"}), patch.object(collector, "GOOGLE_NEWS_KEYWORD_LIMIT", 3):
+            self.assertEqual(collector.google_news_keyword_limit(), 3)
 
     def test_first_relevance_decision_sees_article_body(self):
         body = "Passenger car sales shifted toward SUVs in August, reaching 55 percent of registrations. " * 3
@@ -136,6 +160,31 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         prompt = updater.make_country_prompt("2026-09-15", "in", [item], "", idea_anchor_groups=groups)
         self.assertIn("trend/market", prompt)
         self.assertIn("仮説", prompt)
+
+    def test_csv_category_reaches_js_and_existing_url_keeps_its_id_across_dates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            context = get_edition("exterior", directory)
+            context.config_dir.mkdir(parents=True)
+            context.collection_settings_path.write_text(json.dumps({"exterior": {"selection": {"minimum_score": 60, "trend_minimum_score": 65}, "image_generation": {"enabled": False, "provider": "none"}}}), encoding="utf-8")
+            context.ensure_directories()
+            rows = self.rows(1, 1)
+            sheet = context.runtime_dir / "sheet2_llm_targets.csv"
+            with sheet.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+                writer.writeheader()
+                writer.writerows(rows)
+            news = context.content_dir / "news_data.js"
+            news.write_text('window.LOADED_NEWS_DATA = [\n{ id: "jp9", title: "既存のグリル", desc: "グリルを紹介する。", url: "https://example.com/product/0", date: "2026-09-14", country: "jp" },\n];\n', encoding="utf-8")
+            (context.runtime_dir / "collection_result.json").write_text(json.dumps({"edition_id": "exterior", "completed": True, "source_count": 1, "selected_count": 2, "target_dates": ["2026-09-15"]}), encoding="utf-8")
+            argv = ["publisher", "--edition", "exterior", "--sheet", str(sheet), "--skip-insights", "--skip-html"]
+            with patch.multiple(updater, EDITION=context, NEWS_PATH=news, INSIGHTS_PATH=context.content_dir / "insights_data.js"), patch.object(sys, "argv", argv), patch("ニュース収集.source_highlights.enrich_items"), redirect_stdout(io.StringIO()):
+                updater.main()
+            output = news.read_text(encoding="utf-8")
+            self.assertEqual(output.count('https://example.com/product/0'), 1)
+            self.assertIn('id: "jp9"', output)
+            self.assertIn('date: "2026-09-14"', output)
+            self.assertIn('id: "jp10"', output)
+            self.assertIn('contentCategory: "trend", trendTopic: "market"', output)
 
 
 if __name__ == "__main__":

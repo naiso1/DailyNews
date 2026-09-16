@@ -610,6 +610,9 @@
       ]
     ],
     "prompt_path": "prompts/collection.md",
+    "search": {
+      "google_news_keyword_limit": 15
+    },
     "selection": {
       "minimum_score": 60,
       "trend_minimum_score": 65,

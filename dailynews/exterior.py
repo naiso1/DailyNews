@@ -117,7 +117,15 @@ def out_of_scope_idea(text):
 
 def select_items(items, limit=6):
     candidates = [item for item in items if item.get("newsId") and item.get("title") and item.get("desc")]
-    return sorted(candidates, key=lambda item: (item.get("productScore", item.get("interiorScore")) or 0, len(item.get("desc", ""))), reverse=True)[:limit]
+    ranked = sorted(candidates, key=lambda item: (item.get("productScore", item.get("interiorScore")) or 0, len(item.get("desc", ""))), reverse=True)
+    if limit <= 0 or len(ranked) <= limit:
+        return ranked[:max(0, limit)]
+    trends = [item for item in ranked if item.get("contentCategory") == "trend"]
+    products = [item for item in ranked if item.get("contentCategory") != "trend"]
+    trend_slots = min(len(trends), 2, max(1, limit // 3))
+    selected = products[:limit - trend_slots] + trends[:trend_slots]
+    selected.extend(item for item in ranked if item not in selected)
+    return selected[:limit]
 
 
 def make_country_prompt(date_key, country, items, template, history, need_count, anchors, format_item):

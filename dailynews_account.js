@@ -532,7 +532,7 @@ function renderAccountHome() {
     <form class="account-form" id="accountSubscriptionForm" style="margin-bottom:20px">
       ${ACCOUNT_SHARED_IDENTITY ? subscriptionChoices(user.subscriptions) : `<label class="account-note"><input name="enabled" type="checkbox" ${user.mailSubscribed ? "checked" : ""}> ${ACCOUNT_EDITION_LABEL}のメールを受信する</label>`}
       <button class="account-secondary" type="submit">メール受信設定を保存</button>
-      <p class="account-note" id="accountSubscriptionStatus" role="status">${ACCOUNT_SHARED_IDENTITY ? "平日朝8時に配信します。設定は通常約2分＋OneDrive同期時間で配信名簿へ反映されます。" : "この版のメール配信だけに適用されます。"}</p>
+      <p class="account-note" id="accountSubscriptionStatus" role="status">${ACCOUNT_SHARED_IDENTITY ? "平日朝8時に配信します。設定の反映には数分かかります。配信直前の変更は当日分に間に合わない場合があります。" : "この版のメール配信だけに適用されます。"}</p>
     </form>
     ${ACCOUNT_SHARED_IDENTITY ? `<details style="margin-bottom:20px"><summary style="cursor:pointer">共通パスワードを変更</summary>
       <form class="account-form" id="accountPasswordForm" style="margin-top:12px">

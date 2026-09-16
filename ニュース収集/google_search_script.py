@@ -601,6 +601,12 @@ def edition_search_keywords(settings, limit=None):
     return combined[:limit] if limit else combined
 
 
+def google_news_keyword_limit():
+    if EDITION.id == "exterior" and "GOOGLE_NEWS_KEYWORD_LIMIT" not in os.environ:
+        return int(EDITION.config.get("search", {}).get("google_news_keyword_limit", GOOGLE_NEWS_KEYWORD_LIMIT))
+    return GOOGLE_NEWS_KEYWORD_LIMIT
+
+
 def store_exterior_assessment(item, assessment):
     if EDITION.id == "exterior":
         inferred = exterior_rules.news_category(item.get("タイトル"), item.get("内容"))
@@ -3275,7 +3281,7 @@ def fetch_from_google_news(target_dates):
     }
     
     for country, region_params in google_news_regions.items():
-        keywords = edition_search_keywords(COUNTRY_SETTINGS.get(country, {}), GOOGLE_NEWS_KEYWORD_LIMIT)
+        keywords = edition_search_keywords(COUNTRY_SETTINGS.get(country, {}), google_news_keyword_limit())
         print(f"  [{country}] 検索中...")
         country_count = 0
         

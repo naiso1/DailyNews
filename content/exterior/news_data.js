@@ -39,12 +39,12 @@ window.LOADED_NEWS_DATA = [
     // 2026-09-15 (google検索からExcel sheet2_llm_targets)
     {
         id: "jp2",
-        title: "ケンスタイルEIK、NDロードスター用フロントスポイラーとチタンマフラー",
-        desc: "ケンスタイルのエアロブランド「EIK」は、マツダ「ロードスター（ND）」用デモカーに純正面構成を崩さず低さを強調するフロントハーフスポイラー1点のみを採用した。リアにはフジツボ製チタンマフラー「オーソライズRM」と専用ディフューザーを組み、ブルーに発色した4本出しテールパイプが鮮やかなアクセントとなっている。",
+        title: "ケンスタイルEIK、NDロードスターのフロント加飾事例を紹介",
+        desc: "Auto Messe Webは2016年取材の事例として、ケンスタイル「EIK」のNDロードスターデモカーを紹介した。純正の雰囲気を生かすフロントハーフスポイラーに、リアはフジツボのオーソライズRMと専用ディフューザーを組み合わせる。マフラー本体はステンレス製で、青色のチタンテールを左右4本出しとした構成。",
         url: "https://news.yahoo.co.jp/articles/5003ae23c7e440ec545e3adff5659fdfccc8ca1e?source=rss",
         source: "Auto Messe Web",
         date: "2026-09-15",
-        tags: [],
+        tags: ["過去事例", "外装加飾"],
     
         edition: "exterior", productScore: 65, exteriorScore: 65,
         sourceExcerpt: "ケンスタイルのエアロブランド「EIK」が選んだ答えは、オリジナルエアロをフロントハーフスポイラー1点に絞り、リアはフジツボ製チタンマフラーと専用ディフューザーのセットに任せる潔い構成だ。",
@@ -53,24 +53,24 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260915-00010008-amweb-000-1-view.jpg",
-        note: ""
+        note: "2016年取材の事例紹介。掲載日と製品発表日は異なります。"
     },
     {
         id: "us2",
-        title: "AMG GT Black Series、フロントフェンダー上のアクティブベント採用",
-        desc: "AMG GT Black Seriesは、フロントフェンダー上部に搭載されたアクティブフラップやドアパネル横の通気口、スワンネックピロンを持つ大型リアスポイラーなどを備えている。",
+        title: "次期AMG GT Black Series開発車、フェンダー上部の可動フラップを報道",
+        desc: "CarScoopsは、ニュルブルクリンク近郊で撮影された次期AMG GT Black Seriesの開発車を紹介した。記事はフロントフェンダー上部の可動フラップ、ドア外板に沿って空気を流す側面ベント、スワンネック支柱の大型リアウイングを挙げる。フラップの開閉による圧力解放や空気抵抗低減は、記事筆者の推測として述べられている。",
         url: "https://www.carscoops.com/2026/09/amg-gt-black-series-looks-like-its-smashed-the-ring-record-before-its-even-hit-the-track/",
         source: "CarScoops",
         date: "2026-09-15",
-        tags: [],
+        tags: ["開発車", "空力"],
     
         edition: "exterior", productScore: 85, exteriorScore: 85,
-        sourceExcerpt: "Extensive aero package includes giant rear wing and 8-inch deep diffuser veins.",
+        sourceExcerpt: "sets of active flaps mounted in the top of each front fender",
         interiorScore: 85,
-        interiorReason: "フロントフェンダーのアクティブベントやリアスポイラーなど、空力性能を高める具体的な外装コンポーネント技術が記載されている。",
+        interiorReason: "開発車のフロントフェンダー上部の可動フラップや側面ベントなど、具体的な外装コンポーネントが報道されている。用途の一部は記者の推測であり、性能は未確認。",
         imageInterior: false,
         country: "us",
         img: "https://www.carscoops.com/wp-content/uploads/2026/09/AMG-Black-scoop-Sep2614111-1024x576.jpg",
-        note: ""
+        note: "開発車の写真に基づく報道。量産仕様・性能の確定情報ではありません。"
     },
 ];
