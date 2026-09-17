@@ -73,6 +73,16 @@ async function sessionState() {
   try { return JSON.parse((await dpapi(fs.readFileSync(AUTH), false)).toString('utf8')); }
   catch (_) { throw fail('AUTH_REQUIRED'); }
 }
+async function saveSessionState(state) {
+  const encrypted = await dpapi(Buffer.from(JSON.stringify(state), 'utf8'), true);
+  const temporary = `${AUTH}.${process.pid}.tmp`;
+  try {
+    fs.writeFileSync(temporary, encrypted);
+    fs.renameSync(temporary, AUTH);
+  } finally {
+    if (fs.existsSync(temporary)) fs.unlinkSync(temporary);
+  }
+}
 async function authenticated(page, engine) {
   return page.url().startsWith(URL) && Boolean(await engine._test.visibleChatInput(page));
 }
@@ -107,7 +117,13 @@ async function checkSession(dependencies, state) {
     await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
     const deadline = Date.now() + 15000;
     while (Date.now() < deadline) {
-      if (await authenticated(page, engine)) return;
+      if (await authenticated(page, engine)) {
+        // Navigation may refresh cookies or local storage. Persist only after
+        // the signed-in conversation is confirmed, and use this state below.
+        const refreshed = await context.storageState();
+        await saveSessionState(refreshed);
+        return refreshed;
+      }
       if (/login|signin|microsoftonline/i.test(page.url())) throw fail('AUTH_REQUIRED');
       await new Promise(resolve => setTimeout(resolve, 500));
     }
@@ -160,8 +176,7 @@ async function main() {
   const release = acquireLock();
   try {
     if (mode === '--login') return await login(dependencies);
-    const state = await sessionState();
-    await checkSession(dependencies, state);
+    const state = await checkSession(dependencies, await sessionState());
     if (mode === '--check-session') { emit({ status: 'AUTHENTICATED' }); return; }
     if (mode !== '--generate') throw fail('INVALID_MODE');
     await generate(dependencies, await readRequest(), state);

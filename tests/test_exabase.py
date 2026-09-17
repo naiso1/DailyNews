@@ -64,6 +64,32 @@ class ExaBaseTests(unittest.TestCase):
         start, end = ideas[0].image_span
         self.assertEqual(self.text[start:end], '""')
 
+    def test_js_literal_tab_and_escaped_tab_keep_content_and_spans(self):
+        for literal in ('"前半\t後半"', '"前半\\t後半"'):
+            text = '{ desc: ' + literal + ', title: "引用\\\"と{形状}" }'
+            value, span = exabase.string_field(text, "desc")
+            self.assertEqual(value, "前半\t後半")
+            self.assertEqual(text[span[0]:span[1]], literal)
+            self.assertEqual(exabase.string_field(text, "title")[0], '引用"と{形状}')
+
+    def test_legacy_archive_tab_does_not_block_current_image_prompt_or_provider(self):
+        path = self.edition.content_dir / "news_data.js"
+        news = '''window.NEWS_DATA = [
+{id: "jp138", date: "2026-01-03", title: "過去記事", desc: "過去の説明\t追加説明"},
+{id: "jp1", date: "2026-09-15", title: "グリル刷新", desc: "新しい外装形状を公開。"}
+];'''
+        path.write_text(news, encoding="utf-8")
+        sources = exabase.source_articles(news)
+        self.assertEqual(sources["jp138"]["desc"], "過去の説明\t追加説明")
+        prompt = exabase.image_prompt(self.idea, sources)
+        self.assertIn("新しい外装形状を公開。", prompt)
+        self.assertNotIn("過去の説明", prompt)
+        worker = Mock(side_effect=self.worker)
+        report = exabase.generate_for_edition(self.edition, pilot_idea_id=5, publish=False, worker=worker)
+        self.assertEqual(report["generated"], 1)
+        worker.assert_called_once()
+        self.assertEqual(path.read_text(encoding="utf-8"), news)
+
     def test_enabled_daily_run_skips_existing_images_and_archive(self):
         self.edition.collection_settings_path.write_text(json.dumps({"exterior": {
             "image_generation": {"enabled": True, "provider": "exabase", "max_images": 4}}}), encoding="utf-8")

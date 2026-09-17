@@ -77,7 +77,10 @@ def edition_lock(path: Path):
 
 def string_field(text: str, name: str):
     match = re.search(rf'\b{re.escape(name)}:\s*({JSON_STRING})', text)
-    return (json.loads(match.group(1)), match.span(1)) if match else ("", None)
+    # These files contain JavaScript string literals, including legacy literal
+    # TAB characters. Preserve those characters and original replacement spans;
+    # strict JSON decoding would reject an unrelated archived article.
+    return (json.loads(match.group(1), strict=False), match.span(1)) if match else ("", None)
 
 
 def array_fields(text: str, name: str):
