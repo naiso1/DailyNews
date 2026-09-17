@@ -268,6 +268,8 @@ def sync_power_automate_mailing_list():
         encoding="utf-8",
         errors="replace",
         timeout=60,
+        # Scheduled pythonw has no console; hide each edition's SSH child too.
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
     )
     if result.returncode != 0:
         raise RuntimeError(
