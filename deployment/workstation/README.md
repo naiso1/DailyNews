@@ -26,6 +26,10 @@ to DESKTOP-97FRPLP, under the Owner account.
 - Gemini image generation remains Standard 512px / 1:1.
 - OneDrive starts in Owner's session. Existing Power Automate weekday 08:00
   success/failure delivery and mailing-list management stay unchanged.
+- `DailyNews_ExaBaseSessionMaintenance` checks and refreshes exaBase authentication
+  at :10 and :40 while the user is signed in and the workstation is awake. It skips
+  while the news pipeline holds `run.lock` and does not generate images or send mail.
+  See [exaBase authentication maintenance](exabase/README.md#30分ごとの認証確認).
 
 ## Private configuration
 

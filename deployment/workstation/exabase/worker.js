@@ -83,6 +83,10 @@ async function saveSessionState(state) {
     if (fs.existsSync(temporary)) fs.unlinkSync(temporary);
   }
 }
+async function captureSessionState(context) {
+  // Supported by the pinned Playwright 1.55.0; tokens may also live in IndexedDB.
+  return context.storageState({ indexedDB: true });
+}
 async function authenticated(page, engine) {
   return page.url().startsWith(URL) && Boolean(await engine._test.visibleChatInput(page));
 }
@@ -98,8 +102,9 @@ async function login(dependencies) {
     while (Date.now() < deadline) {
       for (const candidate of context.pages()) {
         if (!candidate.isClosed() && await authenticated(candidate, engine)) {
-          const encrypted = await dpapi(Buffer.from(JSON.stringify(await context.storageState()), 'utf8'), true);
-          fs.writeFileSync(`${AUTH}.tmp`, encrypted); fs.renameSync(`${AUTH}.tmp`, AUTH);
+          const refreshed = await captureSessionState(context);
+          if (candidate.isClosed() || !await authenticated(candidate, engine)) throw fail('AUTH_REQUIRED');
+          await saveSessionState(refreshed);
           emit({ status: 'SESSION_SAVED' }); return;
         }
       }
@@ -120,7 +125,8 @@ async function checkSession(dependencies, state) {
       if (await authenticated(page, engine)) {
         // Navigation may refresh cookies or local storage. Persist only after
         // the signed-in conversation is confirmed, and use this state below.
-        const refreshed = await context.storageState();
+        const refreshed = await captureSessionState(context);
+        if (page.isClosed() || !await authenticated(page, engine)) throw fail('AUTH_REQUIRED');
         await saveSessionState(refreshed);
         return refreshed;
       }
@@ -139,14 +145,21 @@ async function generate(dependencies, request, state) {
   if (!/^[a-f0-9]{64}$/.test(request.key || '') || typeof request.prompt !== 'string'
       || !request.prompt.trim() || request.prompt.length > 12000 || !path.isAbsolute(request.outputDir || '')) throw fail('INVALID_REQUEST');
   fs.mkdirSync(request.outputDir, { recursive: true });
-  const authFile = path.join(RUNTIME, `session-${process.pid}.json`);
+  const { chromium, edge, engine } = dependencies;
+  let browser, context, page, stopWatching;
   let cancelled = false;
   const timeout = Math.max(30000, Math.min(Number(request.timeoutMs || 420000), 600000));
   const timer = setTimeout(() => { cancelled = true; }, timeout);
   try {
-    fs.writeFileSync(authFile, JSON.stringify(state), 'utf8');
-    const result = await dependencies.engine.generateBatch({
-      authFile, prompt: request.prompt, outputDir: request.outputDir, count: 1,
+    if (cancelled) throw fail('GENERATION_TIMEOUT');
+    // Own only the browser lifecycle; keep the pinned engine's generation flow.
+    browser = await chromium.launch({ executablePath: edge, headless: true });
+    stopWatching = engine._test.watchCancellation(browser, () => cancelled);
+    context = await browser.newContext({ storageState: state, viewport: { width: 1440, height: 1000 } });
+    page = await context.newPage();
+    await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    const result = await engine._test.generateOnPage(page, {
+      prompt: request.prompt, outputDir: request.outputDir, count: 1,
       timeoutMs: timeout, isCancelled: () => cancelled,
       onProgress: progress => {
         if (!['sending', 'submitted', 'done'].includes(progress.status)) return;
@@ -166,7 +179,20 @@ async function generate(dependencies, request, state) {
     throw error;
   } finally {
     clearTimeout(timer);
-    if (fs.existsSync(authFile)) fs.unlinkSync(authFile);
+    if (stopWatching) stopWatching();
+    try {
+      // A cancelled/closed/signed-out context must not replace the saved session.
+      if (!cancelled && context && page && !page.isClosed() && await authenticated(page, engine)) {
+        const refreshed = await captureSessionState(context);
+        if (!page.isClosed() && await authenticated(page, engine)) await saveSessionState(refreshed);
+      }
+    } catch (_) {
+      // The image and DONE receipt are already durable. Do not trigger a paid
+      // fallback because saving an otherwise usable session failed.
+      emit({ event: 'warning', code: 'SESSION_REFRESH_FAILED', key: request.key });
+    } finally {
+      if (browser) await browser.close().catch(() => {});
+    }
   }
 }
 async function main() {

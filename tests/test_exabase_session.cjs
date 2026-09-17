@@ -31,12 +31,17 @@ function fixture(options = {}) {
   };
   const page = {
     goto: async () => events.push('navigate'),
-    url: () => options.unauthenticated ? 'https://login.microsoftonline.com/test' : 'https://gai.exabase.ai/conversation',
+    url: () => options.unauthenticated || (options.signOutDuringSnapshot && storedSnapshots) ? 'https://login.microsoftonline.com/test' : 'https://gai.exabase.ai/conversation',
+    isClosed: () => false,
   };
   const browser = {
     newContext: async config => {
-      assert.equal(config.storageState, previous);
-      return { newPage: async () => page, storageState: async () => { storedSnapshots += 1; return refreshed; } };
+      if (options.mode === '--login') assert.equal(config, undefined);
+      else assert.equal(config.storageState, previous);
+      return { newPage: async () => page, pages: () => [page], storageState: async settings => {
+        assert.equal(settings.indexedDB, true);
+        storedSnapshots += 1; return refreshed;
+      } };
     },
     close: async () => { closed += 1; },
   };
@@ -100,6 +105,20 @@ test('check-session alone persists refreshed state without starting generation o
   assert.deepEqual(f.emitted.map(line => JSON.parse(line)), [{ status: 'AUTHENTICATED' }]);
 });
 
+test('manual login uses the same encrypted atomic save and includes IndexedDB', async () => {
+  const f = fixture({ mode: '--login' });
+  await vm.runInContext('main()', f.context);
+  assert.equal(f.files.get(f.auth).toString(), 'new-encrypted-test-state');
+  assert.equal(f.snapshots(), 1);
+  assert.equal(f.closed(), 1);
+  assert.equal(f.files.size, 1);
+  assert.equal(f.events.includes('generate'), false);
+  assert.equal(f.events.at(-1), 'unlock');
+  assert.deepEqual(f.emitted.map(line => JSON.parse(line)), [
+    { status: 'LOGIN_REQUIRED', timeoutSeconds: 600 }, { status: 'SESSION_SAVED' },
+  ]);
+});
+
 test('failed authentication keeps the old encrypted session and releases the lock', async () => {
   const f = fixture({ unauthenticated: true });
   await assert.rejects(vm.runInContext('main()', f.context), error => error.safeCode === 'AUTH_REQUIRED');
@@ -108,6 +127,16 @@ test('failed authentication keeps the old encrypted session and releases the loc
   assert.deepEqual(f.events, ['lock', 'navigate', 'unlock']);
   assert.equal(f.closed(), 1);
 });
+
+for (const mode of ['--login', '--check-session']) {
+  test(`${mode} does not replace saved auth if the page signs out during its snapshot`, async () => {
+    const f = fixture({ mode, signOutDuringSnapshot: true });
+    await assert.rejects(vm.runInContext('main()', f.context), error => error.safeCode === 'AUTH_REQUIRED');
+    assert.equal(f.files.get(f.auth).toString(), 'old-encrypted-test-state');
+    assert.equal(f.events.includes('encrypt'), false);
+    assert.equal(f.closed(), 1);
+  });
+}
 
 for (const failure of ['failEncryption', 'failRename']) {
   test(`${failure} preserves the original session and does not invoke generation`, async () => {
