@@ -956,6 +956,20 @@ def shorten_analysis_with_llm(endpoint: str, model: str, analysis_text: str, lim
     return result or analysis_text[:limit]
 
 
+def preserve_analysis_citations(before_shortening: str, final_text: str, allowed_ids: set[str], limit: int = ANALYSIS_CHAR_LIMIT) -> str:
+    """Keep a validated original if compression damaged citations; never invent refs."""
+    def valid(text):
+        refs = analysis_unique_refs(text)
+        return bool(text and has_japanese_text(text) and analysis_ref_coverage_ok(text)
+                    and refs and refs.issubset(allowed_ids))
+
+    if valid(before_shortening) and not valid(final_text):
+        print("[ANALYSIS] Shortened citation validation failed; retained the validated original "
+              f"({len(before_shortening)} characters, target {limit}, over_target={len(before_shortening) > limit}).")
+        return before_shortening
+    return final_text
+
+
 def insert_insight(js_text: str, new_entry: str):
     # insert after opening bracket
     return re.sub(r"window\.DAILY_INSIGHTS\s*=\s*\[\s*", f"window.DAILY_INSIGHTS = [\n{new_entry}\n", js_text, count=1)
@@ -1797,6 +1811,7 @@ def main():
                             normalize_analysis_refs_per_sentence(analysis_text),
                             allowed_ids,
                         )
+                        analysis_before_shortening = analysis_final
                         analysis_final = shorten_analysis_with_llm(
                             args.llm_endpoint, args.llm_model, analysis_final
                         )
@@ -1812,6 +1827,7 @@ def main():
                             ),
                             allowed_ids,
                         )
+                        analysis_final = preserve_analysis_citations(analysis_before_shortening, analysis_final, allowed_ids)
                         analysis_out[key] = analysis_final
                     deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
                     if len(deduped) < 2:
