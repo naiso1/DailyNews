@@ -1375,11 +1375,139 @@ def write_exterior_publication_status(items, dry_run=False, require_empty_collec
     return status
 
 
+def exterior_analysis_failure_reasons(analysis, source_items):
+    """Reference checks are structural; source support must still be reviewed."""
+    text = str(analysis or "").strip()
+    if not text:
+        return ["EMPTY_ANALYSIS"]
+    reasons = []
+    if not has_japanese_text(text):
+        reasons.append("NOT_JAPANESE")
+    if not analysis_ref_coverage_ok(text):
+        reasons.append("UNCITED_SENTENCES")
+    refs = analysis_unique_refs(text)
+    allowed = build_allowed_news_ids(source_items)
+    if not refs & allowed:
+        reasons.append("NO_VALID_CITATIONS")
+    if refs - allowed:
+        reasons.append("UNKNOWN_CITATIONS")
+    return reasons
+
+
 def exterior_analysis_complete(analysis, source_items):
     """A completed region must have Japanese analysis tied to its own articles."""
+    return not exterior_analysis_failure_reasons(analysis, source_items)
+
+
+def cited_exterior_analysis_prefix(analysis, source_items):
+    """Only omit an uncited closing inference, never a caveat or a middle sentence."""
     text = str(analysis or "").strip()
-    return bool(text and has_japanese_text(text) and analysis_ref_coverage_ok(text)
-                and analysis_unique_refs(text) & build_allowed_news_ids(source_items))
+    parts = [part.strip() for part in re.findall(r"[^。！？!?]+[。！？!?]?", text) if part.strip()]
+    # The UI's optional source strip is not a cited analytical sentence.
+    auxiliary = re.compile(r"^(?:関連画像|関連ニュース|参考(?:資料|記事)?|出典)\s*[:：]")
+    substantive = [part for part in parts if not auxiliary.match(part)]
+    uncited = [i for i, part in enumerate(substantive) if not analysis_unique_refs(part)]
+    if not uncited:
+        return ""
+    first = uncited[0]
+    if first < 2 or uncited != list(range(first, len(substantive))):
+        return ""
+    inference = re.compile(r"^(?:これら(?:から|を踏まえ|の動向から)|こうした(?:動向|変化|傾向)|"
+                           r"このことから|以上(?:から|を踏まえ)|豊田合成(?:の|として)|開発(?:上|では|には))")
+    caveat = re.compile(r"ただし|一方|しかし|なお|ものの|とは限ら|断定|未確認|不明|保証|注意|制約|例外")
+    if any(not inference.match(part) or caveat.search(part) for part in substantive[first:]):
+        return ""
+    kept = substantive[:first]
+    if not all(has_japanese_text(part) for part in kept):
+        return ""
+    result = "".join(kept)
+    allowed = build_allowed_news_ids(source_items)
+    if (not exterior_analysis_complete(result, source_items)
+            or len(analysis_unique_refs(result)) < min(3, len(allowed))):
+        return ""
+    return result
+
+
+def write_exterior_analysis_failure(date_key, country, source_items, candidates, repair_error=""):
+    """Keep failed generated text privately, without HTTP errors, prompts or secrets."""
+    def safe_text(value):
+        text = str(value or "")
+        for name, secret in os.environ.items():
+            if re.search(r"(?:API_KEY|TOKEN|SECRET|PASSWORD)", name, re.IGNORECASE) and len(secret) >= 8:
+                text = text.replace(secret, "[REDACTED]")
+        return text[:12000]
+
+    safe_date = re.sub(r"[^0-9_-]", "_", str(date_key))[:32]
+    safe_country = country if country in {"jp", "cn", "in", "us", "eu"} else "unknown"
+    target = EDITION.runtime_dir / f"insights_analysis_failure_{safe_date}_{safe_country}.json"
+    payload = {
+        "schema_version": 1, "edition_id": "exterior", "date": safe_date, "country": safe_country,
+        "source_ids": sorted(build_allowed_news_ids(source_items)),
+        "fingerprint": exterior_checkpoint_fingerprint(date_key, source_items),
+        "repair_error": repair_error if repair_error == "LLM_UNAVAILABLE" else "",
+        "candidates": [{"stage": stage, "text": safe_text(text),
+                        "reasons": exterior_analysis_failure_reasons(text, source_items)}
+                       for stage, text in candidates],
+    }
+    temporary = target.with_suffix(".json.tmp")
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        os.replace(temporary, target)
+    except OSError:
+        print(f"[ANALYSIS] {safe_country}: private diagnostic could not be saved.")
+
+
+def finalize_exterior_analysis(endpoint, model, country, date_key, analysis, source_items,
+                               prior_candidates=(), dry_run=False):
+    """One bounded repair, with conservative reuse; never invent citation IDs."""
+    if exterior_analysis_complete(analysis, source_items):
+        return analysis
+    candidates = [("final", analysis)] + [(f"prior_{i}", text) for i, text in enumerate(prior_candidates)]
+    for _, previous in reversed(candidates[1:]):
+        if exterior_analysis_complete(previous, source_items):
+            print(f"[ANALYSIS] {country}: retained an earlier citation-validated analysis.")
+            return previous
+    allowed = build_allowed_news_ids(source_items)
+    evidence = "\n".join(
+        f"- {str(item['newsId']).lower()}: {str(item.get('title', ''))[:180]} / {str(item.get('desc', ''))[:600]}"
+        for item in source_items if str(item.get("newsId", "")).lower() in allowed
+    )
+    prompt = (
+        "次の外装開発向け考察を、記事本文の要約に照らして最後に一度だけ修正してください。\n"
+        "各文（最後の示唆文も含む）に、その文を直接支える候補記事IDを [eu123] 形式で付ける。\n"
+        "引用を付けるためだけに無関係なIDを割り当てない。根拠のない主張は削除する。\n"
+        "事実と開発上の仮説を区別し、予測・開発車・市場の対象範囲や留保を維持する。\n"
+        "内装操作の話を外装部品の採用事実へ変えない。新しい数値・性能・採用実績を作らない。\n"
+        "300〜420字程度を目安とし、記事が少なければ短くする。根拠と引用の正確さを優先する。\n"
+        "日本語の考察本文だけを返す。各文の引用は句点より前に置く。説明・注釈・関連画像一覧は禁止。\n"
+        f"地域: {country}。使用可能ID: {','.join(sorted(allowed))}\n"
+        f"候補記事:\n{evidence}\n\n修正対象:\n{str(analysis or '')[:6000]}\n"
+    )
+    repair_error = ""
+    if allowed:
+        try:
+            repaired = call_llm(endpoint, model, prompt).strip()
+            repaired = re.sub(r"^```(?:text|markdown)?\s*|\s*```$", "", repaired, flags=re.IGNORECASE)
+            repaired = normalize_analysis_refs_per_sentence(bracket_bare_allowed_ids(repaired, allowed))
+            candidates.append(("final_repair", repaired))
+            if exterior_analysis_complete(repaired, source_items):
+                print(f"[ANALYSIS] {country}: final citation repair accepted.")
+                return repaired
+        except Exception:
+            repair_error = "LLM_UNAVAILABLE"
+    # Only reuse original text, never trim a failed repair that may have added claims.
+    for _, original in candidates[:1 + len(prior_candidates)]:
+        prefix = cited_exterior_analysis_prefix(original, source_items)
+        if prefix:
+            print(f"[ANALYSIS] {country}: omitted an uncited closing inference; "
+                  f"retained {len(analysis_unique_refs(prefix))} source references.")
+            return prefix
+    reasons = ",".join(exterior_analysis_failure_reasons(analysis, source_items))
+    print(f"[ANALYSIS] {country}: final validation failed ({reasons}).")
+    if not dry_run:
+        write_exterior_analysis_failure(date_key, country, source_items, candidates, repair_error)
+    return analysis
 
 
 def exterior_existing_insights_complete(insights_text, date_key, items):
@@ -1792,6 +1920,7 @@ def main():
                         analysis_text = normalize_analysis_refs_per_sentence(data.get("analysis", ""))
                         allowed_ids = build_allowed_news_ids(grouped[key])
                         analysis_text = filter_analysis_refs_to_allowed(analysis_text, allowed_ids)
+                        analysis_initial = analysis_text
                         if analysis_text and not analysis_ref_coverage_ok(analysis_text):
                             analysis_text = rewrite_analysis_with_refs(
                                 args.llm_endpoint,
@@ -1828,6 +1957,13 @@ def main():
                             allowed_ids,
                         )
                         analysis_final = preserve_analysis_citations(analysis_before_shortening, analysis_final, allowed_ids)
+                        if EDITION.id == "exterior":
+                            analysis_final = finalize_exterior_analysis(
+                                args.llm_endpoint, args.llm_model, key, insight_date_label,
+                                analysis_final, grouped[key],
+                                prior_candidates=(analysis_initial, analysis_before_shortening),
+                                dry_run=args.dry_run,
+                            )
                         analysis_out[key] = analysis_final
                     deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
                     if len(deduped) < 2:
