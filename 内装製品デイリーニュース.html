@@ -377,7 +377,7 @@ header.site-header {
 
 /* ── Date / Stats ────────────────────────── */
 .date-inputs { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.date-inputs input {
+.date-inputs input, .date-inputs select {
     padding: 8px 12px;
     border-radius: 10px;
     border: 1px solid var(--border);
@@ -386,6 +386,7 @@ header.site-header {
     font-size: 13px;
 }
 .date-inputs span { color: var(--muted); font-size: 13px; }
+.date-inputs select option { background: #0f1726; color: #e6edf7; }
 
 .stats { font-size: 13px; color: var(--muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
 .stats strong { color: var(--accent); }
@@ -515,6 +516,7 @@ header.site-header {
 @media (max-width: 800px) {
     .quick-nav { right: 12px; bottom: 12px; }
     .ranking-thumb { width: 40px; height: 40px; flex-basis: 40px; }
+    .date-inputs select { flex-basis: 100%; }
 }
 
 /* ── News Grid ───────────────────────────── */
@@ -1409,6 +1411,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         <div class="filter-row">
             <span class="filter-label">📅 日付</span>
             <div class="date-inputs">
+                <select id="dateBasis" aria-label="日付の基準" hidden>
+                    <option value="issue">配信号の日付</option>
+                    <option value="source">元記事の日付</option>
+                </select>
                 <input type="date" id="dateFrom" value="">
                 <span>〜</span>
                 <input type="date" id="dateTo" value="">
@@ -1778,8 +1784,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function setNewDateRangeFromNews(data) {
             if (window.DAILYNEWS_CONFIG.id === "exterior") {
                 const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                const issueDate = publication?.issue_date || publication?.processed_through;
                 NEW_DATE_RANGE = publication?.target_dates.length
-                    ? { start: publication.lookback_start || publication.target_dates[0], end: publication.processed_through }
+                    ? { start: issueDate, end: issueDate }
                     : { start: null, end: null };
                 return;
             }
@@ -1810,7 +1817,27 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const fromEl = document.getElementById("dateFrom");
             const toEl = document.getElementById("dateTo");
             if (!fromEl || !toEl || !NEW_DATE_RANGE.start || !NEW_DATE_RANGE.end) return false;
+            if (window.DAILYNEWS_CONFIG.id === "exterior" && getDateFilterBasis() !== "issue") return false;
             return fromEl.value === NEW_DATE_RANGE.start && toEl.value === NEW_DATE_RANGE.end;
+        }
+
+        function getDateFilterBasis() {
+            return window.DAILYNEWS_CONFIG.id === "exterior" && document.getElementById("dateBasis").value === "issue"
+                ? "issue" : "source";
+        }
+
+        function getNewsFilterDate(item) {
+            if (getDateFilterBasis() === "issue") {
+                const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                if (publication?.issue_date && publication.selected_news_ids?.includes(item.id)) return publication.issue_date;
+                if (/^\d{4}-\d{2}-\d{2}$/.test(item.digestDate || "")) return item.digestDate;
+            }
+            return item.date;
+        }
+
+        function matchesNewsDateRange(item, from, to) {
+            const date = getNewsFilterDate(item);
+            return (!from || date >= from) && (!to || date <= to);
         }
 
         function formatDateTime(date) {
@@ -2799,6 +2826,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 search: document.getElementById("searchInput").value,
                 dateFrom: document.getElementById("dateFrom").value,
                 dateTo: document.getElementById("dateTo").value,
+                dateBasis: getDateFilterBasis(),
                 sortOrder: document.getElementById("sortOrder").value,
                 contentCategory: document.getElementById("contentCategory").value,
                 countries: new Set(activeCountries),
@@ -2822,6 +2850,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("searchInput").value = state.search || "";
             document.getElementById("dateFrom").value = state.dateFrom || "";
             document.getElementById("dateTo").value = state.dateTo || "";
+            document.getElementById("dateBasis").value = state.dateBasis || "source";
             document.getElementById("sortOrder").value = state.sortOrder || "new-first";
             document.getElementById("contentCategory").value = state.contentCategory || "all";
             activeCountries = new Set(state.countries || ["world"]);
@@ -2869,6 +2898,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("dateFrom").value = day.date;
             document.getElementById("contentCategory").value = "all";
             document.getElementById("dateTo").value = day.date;
+            document.getElementById("dateBasis").value = window.DAILYNEWS_CONFIG.id === "exterior" ? "issue" : "source";
             newOnly = false;
             favoritesOnly = false;
             activeCountries = new Set(["world"]);
@@ -2998,6 +3028,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 };
                 document.getElementById("dateFrom").addEventListener("change", applyManualDateFilter);
                 document.getElementById("dateTo").addEventListener("change", applyManualDateFilter);
+                document.getElementById("dateBasis").addEventListener("change", applyManualDateFilter);
                 const searchInput = document.getElementById("searchInput");
                 searchInput.addEventListener("input", applyFilters);
                 searchInput.addEventListener("change", () => updateURL("push"));
@@ -3194,7 +3225,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
 
         function applyFilters() {
-            const from = document.getElementById("dateFrom").value;
+            let from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
             const sortOrder = document.getElementById("sortOrder").value;
@@ -3204,6 +3235,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (activeCountries.size === 0) activeCountries = new Set(["world"]);
             if (from && to && from > to) {
                 document.getElementById("dateFrom").value = "";
+                from = "";
             }
 
             // 1. Filter
@@ -3223,9 +3255,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     if (!tagMatches) return false;
                 }
 
-                // Date Filter (YYYY-MM-DD string comparison works)
-                if (from && n.date < from) return false;
-                if (to && n.date > to) return false;
+                if (!matchesNewsDateRange(n, from, to)) return false;
 
                 // Text Search
                 if (searchText && !searchable.includes(searchText)) return false;
@@ -3381,7 +3411,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 if (filteredData.length > visibleLimit) {
                     loadMoreBtn.style.display = "inline-block";
                     loadMoreBtn.textContent = `もっと見る (あと ${filteredData.length - visibleLimit} 件)`;
-                } else if (isShowingDefaultNewRange() && availableNews.some(item => item.date < NEW_DATE_RANGE.start)) {
+                } else if (isShowingDefaultNewRange() && availableNews.some(item => getNewsFilterDate(item) < NEW_DATE_RANGE.start)) {
                     loadMoreBtn.style.display = "inline-block";
                     loadMoreBtn.textContent = "もっと見る（過去の記事も表示）";
                 } else {
@@ -3440,6 +3470,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("searchInput").value = params.get("q") || "";
             document.getElementById("dateFrom").value = params.has("from") ? params.get("from") : defaultFrom;
             document.getElementById("dateTo").value = params.has("to") ? params.get("to") : defaultTo;
+            const dateBasis = document.getElementById("dateBasis");
+            dateBasis.hidden = window.DAILYNEWS_CONFIG.id !== "exterior";
+            dateBasis.value = !dateBasis.hidden && (params.get("dateBasis") === "issue"
+                || (!params.has("dateBasis") && !params.has("from") && !params.has("to"))) ? "issue" : "source";
             document.getElementById("sortOrder").value = params.get("sort") || "new-first";
             document.getElementById("contentCategory").value = ["product", "trend"].includes(params.get("category")) ? params.get("category") : "all";
 
@@ -3474,8 +3508,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (query) params.set("q", query);
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
-            if (from) params.set("from", from);
-            if (to) params.set("to", to);
+            if (from || window.DAILYNEWS_CONFIG.id === "exterior") params.set("from", from);
+            if (to || window.DAILYNEWS_CONFIG.id === "exterior") params.set("to", to);
+            if (window.DAILYNEWS_CONFIG.id === "exterior") params.set("dateBasis", getDateFilterBasis());
             const sortOrder = document.getElementById("sortOrder").value;
             if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);
             if (visibleLimit > 30) params.set("limit", String(visibleLimit));

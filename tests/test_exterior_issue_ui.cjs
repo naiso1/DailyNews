@@ -22,7 +22,8 @@ for (const change of [{selected_news_ids: ['jp2', 'jp2']}, {lookback_start: '202
 }
 context.window.EXTERIOR_PUBLICATION_STATUS = receipt;
 context.setNewDateRangeFromNews([]);
-assert.equal(context.NEW_DATE_RANGE.start, '2026-09-09');
+assert.equal(context.NEW_DATE_RANGE.start, '2026-09-15');
+assert.equal(context.NEW_DATE_RANGE.end, '2026-09-15');
 const news = [{id: 'jp2', date: '2026-09-15'}, {id: 'cn3', date: '2026-09-09'},
               {id: 'jp1', date: '2026-09-14'}];
 context.normalizeIsNewFlags(news);

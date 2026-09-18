@@ -48,10 +48,23 @@ SUMMARY_GROUNDING_RULES = (
 )
 
 
+SUMMARY_WRITING_RULES = (
+    "見出し・要約は、落ち着いた技術ニュースとして少し読みたくなる自然な日本語にする。事実の正確さを表現より優先する。\n"
+    "見出しは車名・企業名と、原文で確認できる特徴や変更点を一つ組み合わせ、何の話かすぐ分かるようにする。"
+    "記事に応じて特徴から始める形と主語から始める形を使い分け、毎回同じ語順や『発表』『採用』だけの型に揃えない。\n"
+    "要約は冒頭で具体的な変化・機能・使い方を伝え、続く文で仕様や対象範囲、比較条件などを補う。"
+    "見出しをそのまま繰り返さず、短い文を自然につなぐ。機能の利点は原文で説明されている範囲に限る。\n"
+    "市場記事は対象地域・期間・比較基準を残し、数字が示す変化を読み取りやすくする。"
+    "計画・予測・試作・報道段階を実績や確定仕様に変えない。原文にない因果関係や開発上の示唆を足さない。\n"
+    "疑問形の煽り、感嘆符、『驚き』『必見』『革命的』『圧倒的』などの強調を使わない。"
+    "『注目は』『ポイントは』『期待される』を定型の付け足しにせず、具体的な事実で関心を引く。\n"
+)
+
+
 def summary_grounding_rules():
-    if get_edition().id == "exterior":
-        return exterior_rules.SUMMARY_RULES + CURRENCY_RULES
-    return SUMMARY_GROUNDING_RULES
+    grounding = (exterior_rules.SUMMARY_RULES + CURRENCY_RULES
+                 if get_edition().id == "exterior" else SUMMARY_GROUNDING_RULES)
+    return grounding + SUMMARY_WRITING_RULES
 CRITICISM = re.compile(r"欲しかった|欲しい|ほしかった|ほしい|物足り|もの足り|惜しい|改善の余地|改善を求め|期待したい")
 QUALIFIED = re.compile(r"指摘|批評|求め|評価|課題|不足|改善|要望|不満|欲し|ほし|期待|望ま|物足り|もの足り|惜しい")
 POSITIVE = re.compile(r"備わ|備え|採用|搭載|装備|充実|こだわり|高級|上質|優れ")
