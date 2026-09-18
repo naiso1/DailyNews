@@ -53,8 +53,23 @@ if (-not $success -or -not $listAction) {
 }
 $listAction.inputs.parameters.path = '/DailyNewsAutomation/exterior/mailing_list.json'
 $success.inputs.parameters.'emailMessage/To' = "@json(string(body('Get_DailyNews_mailing_list')))?['to']"
-$success.inputs.parameters.'emailMessage/Subject' = '【外装製品デイリーニュース】@{formatDateTime(convertTimeZone(utcNow(),''UTC'',''Tokyo Standard Time''),''yyyy-MM-dd'')}'
-$success.inputs.parameters.'emailMessage/Body' = '<p>外装製品デイリーニュースを更新しました。</p><p><a href="http://IEWEB01/exterior/">外装製品デイリーニュースを開く</a></p><p>メール配信の登録・停止は外装サイトから設定できます。</p>'
+# Reuse the original mail wording/formatting. Only its newsletter name, scope and
+# destination change; the sender's affiliation (for example 内装開発室) stays intact.
+$sourceSuccess = $source.definition.actions.Check_DailyNews_success.actions.Send_success_mail
+if (-not $sourceSuccess) { $sourceSuccess = $source.definition.actions.Check_DailyNews_success.actions.Has_subscribers.actions.Send_success_mail }
+foreach ($key in @('emailMessage/Subject', 'emailMessage/Body')) {
+    $template = [string]$sourceSuccess.inputs.parameters.$key
+    if ([string]::IsNullOrWhiteSpace($template)) { throw "Source mail template is missing: $key" }
+    $template = $template.Replace('内装開発デイリーニュース', '外装開発デイリーニュース'
+    ).Replace('内装製品デイリーニュース', '外装製品デイリーニュース')
+    if ($key -eq 'emailMessage/Body') {
+        $template = $template.Replace('内装開発に関連する', '外装開発に関連する')
+        $template = [regex]::Replace($template, '(?i)http://ieweb01/?(?=["''<>\s?]|$)', 'http://IEWEB01/exterior/')
+        # Normalize an already-exterior URL without adding another path segment.
+        $template = [regex]::Replace($template, '(?i)http://ieweb01/exterior/', 'http://IEWEB01/exterior/')
+    }
+    $success.inputs.parameters.$key = $template
+}
 
 function Set-NotificationRecipients($Node) {
     if ($null -eq $Node -or $Node -is [string] -or $Node -is [ValueType]) { return }
