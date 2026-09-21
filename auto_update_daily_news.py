@@ -395,7 +395,10 @@ def validate_editorial_publication(items, existing_url_keys, snapshot, edition_i
     excluded = set(snapshot.get("excluded_urls", []))
     retained, pending = [], []
     for item in items:
-        if excluded.intersection(publication_item_url_keys(item)):
+        # The snapshot already expands a hidden representative to its aliases.
+        # Hiding only an alias must not suppress an unhidden representative that
+        # still mentions that URL as a related source (collector uses primary URL).
+        if normalize_article_url(item.get("url", "")) in excluded:
             print(f"[EDITORIAL_HIDDEN] {item.get('url', '')}")
             continue
         if (item.get("country") == "paper"

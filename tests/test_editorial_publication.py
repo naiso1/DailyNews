@@ -35,10 +35,12 @@ class EditorialPublicationTests(unittest.TestCase):
         self.assertEqual(self.validate([legacy], [legacy["url"]]), [legacy])
         self.assertEqual(self.validate([dict(legacy, country="paper")]), [dict(legacy, country="paper")])
 
-    def test_hidden_source_overrides_existing_and_related_aliases(self):
+    def test_hidden_source_overrides_existing_without_hiding_unhidden_representative(self):
         self.snapshot["excluded_urls"] = [self.good["url"]]
         self.assertEqual(self.validate([self.good], [self.good["url"]]), [])
         alias = dict(self.good, url="https://example.test/alias", relatedUrls=[self.good["url"]])
+        self.assertEqual(self.validate([alias], [alias["url"]]), [alias])
+        self.snapshot["excluded_urls"].append(alias["url"])
         self.assertEqual(self.validate([alias]), [])
 
     def test_exterior_keeps_its_own_policy(self):
