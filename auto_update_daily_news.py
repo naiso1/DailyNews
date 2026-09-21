@@ -16,6 +16,8 @@ import requests
 from ニュース収集.currency_guard import repair_indian_price_units
 from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
+from dailynews.collection_digest import parse_published_news
+from dailynews.deduplication import normalize_article_url
 
 ROOT = Path(__file__).resolve().parent
 EDITION = get_edition()
@@ -217,6 +219,140 @@ def derive_source(url, fallback=""):
         return fallback or ""
 
 
+def related_source_urls(value, primary_url=""):
+    """Keep valid additional sources without collapsing meaningful URL queries."""
+    if isinstance(value, str):
+        try:
+            value = json.loads(value) if value.strip() else []
+        except (ValueError, TypeError):
+            value = []
+    if not isinstance(value, list):
+        return []
+    seen = {normalize_article_url(primary_url)}
+    result = []
+    for url in value:
+        if not isinstance(url, str) or urlparse(url).scheme.lower() not in {"http", "https"} or not urlparse(url).netloc:
+            continue
+        key = normalize_article_url(url)
+        if key and key not in seen:
+            seen.add(key)
+            result.append(url)
+    return result
+
+
+def unique_publication_items(items):
+    """Last URL guard for direct CSV/resume publication, independent of collection."""
+    # Resolve the complete URL graph before choosing representatives: a later
+    # row can connect two earlier groups through their already trusted sources.
+    prepared = [{**item, "relatedUrls": related_source_urls(item.get("relatedUrls", []), item.get("url", ""))}
+                for item in items]
+    parents = list(range(len(prepared)))
+
+    def find(index):
+        while parents[index] != index:
+            parents[index] = parents[parents[index]]
+            index = parents[index]
+        return index
+
+    owners = {}
+    for index, item in enumerate(prepared):
+        for key in publication_item_url_keys(item):
+            if key in owners:
+                a, b = find(index), find(owners[key])
+                parents[max(a, b)] = min(a, b)
+            else:
+                owners[key] = index
+    unique, representatives = [], {}
+    for index, item in enumerate(prepared):
+        group = find(index)
+        if group not in representatives:
+            representatives[group] = item
+            unique.append(item)
+        else:
+            kept = representatives[group]
+            kept["relatedUrls"] = related_source_urls(
+                kept["relatedUrls"] + [item.get("url", "")] + item["relatedUrls"], kept.get("url", ""))
+    return unique
+
+
+def publication_item_url_keys(item):
+    return [normalize_article_url(url) for url in related_source_urls(
+        [item.get("url", ""), *related_source_urls(item.get("relatedUrls", []))])]
+
+
+def news_string_field(block, name):
+    """Read a quoted or unquoted JS property without changing its source text."""
+    from dailynews.exabase import JSON_STRING
+    match = re.search(rf'(?<![\w])"?{re.escape(name)}"?\s*:\s*({JSON_STRING})', block)
+    return json.loads(match.group(1), strict=False) if match else ""
+
+
+def publication_url_id_map(news_text):
+    """Original and related URLs resolve to existing IDs, including retained aliases."""
+    articles = parse_published_news(news_text)
+    by_id = {}
+    for article in articles:
+        by_id.setdefault(article["id"], article)
+    result = {}
+    for article in articles:
+        target = article
+        visited = set()
+        while target.get("duplicateOf"):
+            if target["id"] in visited or target["duplicateOf"] not in by_id:
+                target = None
+                break
+            visited.add(target["id"])
+            target = by_id[target["duplicateOf"]]
+        if not target:
+            continue
+        for url in [article["url"], *article.get("relatedUrls", [])]:
+            key = normalize_article_url(url)
+            if key:
+                result.setdefault(key, target["id"])
+    return result
+
+
+def merge_related_sources(news_text, items):
+    """Save newly discovered related sources on a same-issue retry as well."""
+    from dailynews.exabase import LEAF_OBJECT
+    canonical = publication_url_id_map(news_text)
+    additions = {}
+    for item in items:
+        target = next((canonical[key] for key in publication_item_url_keys(item) if key in canonical), None)
+        if target:
+            additions.setdefault(target, []).extend(
+                [item.get("url", ""), *related_source_urls(item.get("relatedUrls", []))])
+    if not additions:
+        return news_text
+    # Alias records stay intact for existing citations; their URLs are also
+    # discoverable on the representative's source list, including alias chains.
+    for article in parse_published_news(news_text):
+        target = canonical.get(normalize_article_url(article["url"]))
+        if target in additions:
+            additions[target].extend([article["url"], *article.get("relatedUrls", [])])
+    edits = []
+    for match in LEAF_OBJECT.finditer(news_text):
+        block = match.group()
+        url = news_string_field(block, "url")
+        extra = additions.get(news_string_field(block, "id"))
+        if not extra:
+            continue
+        existing = re.search(r'\brelatedUrls"?\s*:\s*(\[(?:\s*"(?:\\.|[^"\\])*"\s*,?)*\s*\])', block)
+        old = json.loads(existing.group(1), strict=False) if existing else []
+        merged = related_source_urls(old + extra, url)
+        if merged == old:
+            continue
+        encoded = json.dumps(merged, ensure_ascii=False)
+        if existing:
+            replacement = block[:existing.start(1)] + encoded + block[existing.end(1):]
+        else:
+            replacement = block.rstrip()[:-1].rstrip().rstrip(",") + f", relatedUrls: {encoded} }}"
+        edits.append((match.start(), match.end(), replacement))
+    for start, end, replacement in reversed(edits):
+        news_text = news_text[:start] + replacement + news_text[end:]
+    return news_text
+
+
 def apply_item_overrides(item: dict):
     if EDITION.id == "exterior":
         return item
@@ -329,44 +465,36 @@ def update_new_date_range(html_text: str, start: str, end: str):
 
 
 def fix_existing_entries(js_text: str, items: list):
-    updated = js_text
+    from dailynews.exabase import LEAF_OBJECT, JSON_STRING
+    corrections = {}
     for it in items:
-        title = it.get("title", "")
-        desc = it.get("desc", "")
-        img = it.get("img", "")
-        url = it.get("url", "")
-        source = derive_source(url, it.get("source", ""))
-        if not title or not url:
+        if it.get("title") and it.get("url"):
+            corrections.setdefault(normalize_article_url(it["url"]), it)
+    edits, corrected = [], set()
+    for match in LEAF_OBJECT.finditer(js_text):
+        block = match.group()
+        key = normalize_article_url(news_string_field(block, "url"))
+        if key not in corrections or key in corrected:
             continue
-
-        # Match by URL so corrected titles/summaries can update already-published rows.
-        # Locate object boundaries explicitly; a broad regex could cross adjacent entries.
-        url_marker = f'url: "{js_escape(url)}"'
-        url_pos = updated.find(url_marker)
-        if url_pos < 0:
-            continue
-        entry_start = updated.rfind("\n    {", 0, url_pos)
-        entry_end = updated.find("\n    },", url_pos)
-        if entry_start < 0 or entry_end < 0:
-            continue
-        entry_end += len("\n    },")
-        block = updated[entry_start:entry_end]
+        it = corrections[key]
+        # Correct only the matching primary article, not a different source
+        # resolved through relatedUrls. IDs/dates/URLs/aliases remain unchanged.
         replacements = {
-            "title": title,
-            "desc": desc,
-            "source": source,
-            "img": img,
+            "title": it.get("title", ""), "desc": it.get("desc", ""),
+            "source": derive_source(it["url"], it.get("source", "")), "img": it.get("img", ""),
         }
         for field, value in replacements.items():
             if value:
-                escaped_value = js_escape(value)
                 block = re.sub(
-                    rf'({field}:\s*")((?:\\.|[^"\\])*)(")',
-                    lambda m, v=escaped_value: f'{m.group(1)}{v}{m.group(3)}',
-                    block,
-                    count=1,
+                    rf'((?<![\w])"?{field}"?\s*:\s*)({JSON_STRING})',
+                    lambda m, v=value: m.group(1) + json.dumps(v, ensure_ascii=False),
+                    block, count=1,
                 )
-        updated = updated[:entry_start] + block + updated[entry_end:]
+        edits.append((match.start(), match.end(), block))
+        corrected.add(key)
+    updated = js_text
+    for start, end, block in reversed(edits):
+        updated = updated[:start] + block + updated[end:]
     return updated
 
 
@@ -1510,9 +1638,30 @@ def finalize_exterior_analysis(endpoint, model, country, date_key, analysis, sou
     return analysis
 
 
-def exterior_existing_insights_complete(insights_text, date_key, items):
+def exterior_existing_insights_complete(insights_text, date_key, items, published_articles=()):
     """Never report a complete issue while an existing region lacks its two ideas."""
     from dailynews.exabase import select_ideas, string_field
+    # Editorial consolidation retains alias records so already published
+    # analyses/images remain attributable. Only that issue's valid aliases
+    # can support existing insights; future generation still uses unique items.
+    items = list(items)
+    by_id = {article["id"]: article for article in reversed(list(published_articles))}
+    ids = {item.get("newsId") for item in items}
+    for article in published_articles:
+        if (not article.get("duplicateOf") or article.get("digestDate", article.get("date")) != date_key
+                or article.get("id") in ids):
+            continue
+        target = article
+        visited = set()
+        while target and target.get("duplicateOf"):
+            if target["id"] in visited:
+                target = None
+                break
+            visited.add(target["id"])
+            target = by_id.get(target["duplicateOf"])
+        if target and target.get("date", "9999") <= date_key:
+            items.append({**article, "newsId": article["id"]})
+            ids.add(article["id"])
     analysis = extract_insight_object_section(insights_text, date_key, "analysis")
     ideas = select_ideas(insights_text, date_key)
     for country in {item["country"] for item in items}:
@@ -1611,6 +1760,7 @@ def main():
     idx_original_desc = find_col_exact(header, "内容")
     idx_content_category = find_col_exact(header, "記事区分")
     idx_trend_topic = find_col_exact(header, "トレンド分類")
+    idx_related_urls = find_col_exact(header, "関連URL")
 
     def get(row, idx):
         if idx is None:
@@ -1686,11 +1836,13 @@ def main():
             "tags": tags,
             "contentCategory": content_category,
             "trendTopic": trend_topic,
+            "relatedUrls": related_source_urls(get(row, idx_related_urls), url),
             "interiorScore": interior_score,
             "interiorReason": interior_reason,
             "imageInterior": True if img_val and "あり" in img_val else (False if img_val and "なし" in img_val else None),
         }))
 
+    items = unique_publication_items(items)
     validate_japanese_news_items(items)
     issue_context = None
     if EDITION.id == "exterior":
@@ -1723,11 +1875,12 @@ def main():
 
     news_text = read_text_any(NEWS_PATH) if NEWS_PATH.exists() else 'window.NEWS_UPDATED_AT = "";\nwindow.LOADED_NEWS_DATA = [\n];\n'
     existing_urls, max_ids = parse_existing_news(news_text)
+    existing_url_keys = set(publication_url_id_map(news_text))
 
     if not args.dry_run:
         from ニュース収集.source_highlights import enrich_items
         # Only newly published rows: never re-fetch the entire news archive.
-        highlight_targets = [it for it in items if it["url"] not in existing_urls]
+        highlight_targets = [it for it in items if not existing_url_keys.intersection(publication_item_url_keys(it))]
         if highlight_targets:
             if EDITION.id == "exterior":
                 enrich_items(highlight_targets, cache_path=EDITION.runtime_dir / "source_highlights.json")
@@ -1736,7 +1889,7 @@ def main():
 
     new_items = []
     for it in items:
-        if it["url"] in existing_urls:
+        if existing_url_keys.intersection(publication_item_url_keys(it)):
             continue
         prefix = it["country"]
         next_id = max_ids.get(prefix, 0) + 1
@@ -1749,6 +1902,8 @@ def main():
         if any(k in it["img"] for k in ["unsplash", "placeholder", "thumb_default"]):
             note = "※イメージ画像"
         extra_lines = []
+        if it.get("relatedUrls"):
+            extra_lines.append(f'                relatedUrls: {json.dumps(it["relatedUrls"], ensure_ascii=False)},')
         if EDITION.id == "exterior":
             extra_lines.append(f'                edition: "exterior", productScore: {int(it["interiorScore"])}, exteriorScore: {int(it["interiorScore"])},')
             if it.get("digestDate"):
@@ -1782,6 +1937,7 @@ def main():
             }},
         """).strip("\n")
         new_items.append(item_block)
+        existing_url_keys.update(publication_item_url_keys(it))
 
     if not new_items and not args.fix_existing:
         print("No new items to append (all URLs exist). Continue for insights if enabled.")
@@ -1809,9 +1965,10 @@ def main():
         updated_news_text = append_news_items(updated_news_text, items_by_date)
     if args.fix_existing:
         updated_news_text = fix_existing_entries(updated_news_text, items)
-    news_id_map = parse_news_id_map(updated_news_text)
+    updated_news_text = merge_related_sources(updated_news_text, items)
+    news_id_map = publication_url_id_map(updated_news_text)
     for it in items:
-        it["newsId"] = news_id_map.get(it.get("url", ""), "")
+        it["newsId"] = news_id_map.get(normalize_article_url(it.get("url", "")), "")
 
     if not args.dry_run:
         NEWS_PATH.write_text(updated_news_text, encoding="utf-8")
@@ -1844,7 +2001,8 @@ def main():
             else False
         )
         if insight_date_label and insight_exists and not (args.replace_insights or args.replace_ideas_only):
-            if EDITION.id == "exterior" and not exterior_existing_insights_complete(insights_text, insight_date_label, items):
+            if EDITION.id == "exterior" and not exterior_existing_insights_complete(
+                    insights_text, insight_date_label, items, parse_published_news(updated_news_text)):
                 raise RuntimeError(f"Existing exterior insights for {insight_date_label} lack regional analysis or two sourced ideas. Use --replace-insights to rebuild the issue.")
             print(f"Insights for {insight_date_label} already exists. Use --replace-insights to overwrite.")
         elif insight_date_label:

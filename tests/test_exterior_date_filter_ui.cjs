@@ -25,6 +25,7 @@ const context = vm.createContext({
 for (const name of ['getTodayKey', 'getLatestDate', 'setNewDateRangeFromNews', 'getDateFilterBasis',
   'getNewsFilterDate', 'matchesNewsDateRange', 'isShowingDefaultNewRange', 'isNewContent',
   'isGloballyHidden', 'getNewCounts', 'applyFilters', 'restoreFilterStateFromURL', 'updateURL',
+  'isNewsListItem', 'getNewsLookup', 'resolveNewsItem',
   'captureFilterState', 'restoreRankingState', 'handleCountryClick', 'handleTagClick', 'loadMore']) {
   const start = html.indexOf(`        function ${name}(`);
   assert(start >= 0, name);

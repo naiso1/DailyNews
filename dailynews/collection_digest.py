@@ -19,7 +19,11 @@ def published_news(path):
     """Read generated JS data as literals; do not execute it or import updater."""
     if not path.exists():
         return []
-    text = path.read_text(encoding="utf-8-sig")
+    return parse_published_news(path.read_text(encoding="utf-8-sig"))
+
+
+def parse_published_news(text):
+    """Read flat article literals, including source aliases and legacy TABs."""
     marker = re.search(r"window\.LOADED_NEWS_DATA\s*=\s*\[", text)
     if not marker:
         raise ValueError("Cannot verify exterior publication history")
@@ -37,7 +41,11 @@ def published_news(path):
         elif value == "}":
             depth -= 1
             if depth == 0:
-                fields = {key: json.loads(raw) for key, raw in field.findall(text[start:match.end()])}
+                block = text[start:match.end()]
+                fields = {key: json.loads(raw, strict=False) for key, raw in field.findall(block)}
+                related = re.search(r'\brelatedUrls"?\s*:\s*(\[(?:\s*"(?:\\.|[^"\\])*"\s*,?)*\s*\])', block)
+                if related:
+                    fields["relatedUrls"] = json.loads(related.group(1), strict=False)
                 if not fields.get("id") or not fields.get("url") or not fields.get("date"):
                     raise ValueError("Exterior published article is missing its identity/date")
                 entries.append(fields)
@@ -62,4 +70,5 @@ def published_row(item):
         "内装関連度": item.get("exteriorScore", item.get("interiorScore", item.get("productScore", 0))),
         "内装判定理由": item.get("exteriorReason", item.get("interiorReason", "既公開記事を同じ号に保持")),
         "記事区分": item.get("contentCategory", "product"), "トレンド分類": item.get("trendTopic", ""),
+        "関連URL": json.dumps(item.get("relatedUrls", []), ensure_ascii=False),
     }

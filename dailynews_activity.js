@@ -45,12 +45,15 @@ function activityItemIndex() {
   const index = new Map();
   for (const item of window.LOADED_NEWS_DATA || window.NEWS_DATA || []) {
     if (window.interactionsData?.[String(item.id)]?.hidden) continue;
+    const resolved = window.resolveDailyNewsItem
+      ? window.resolveDailyNewsItem(item) : (item.duplicateOf ? null : item);
+    if (!resolved) continue;
     index.set(String(item.id), {
-      id: String(item.id),
-      targetId: String(item.id),
+      id: String(resolved.id),
+      targetId: String(resolved.id),
       type: "news",
-      title: item.title || String(item.id),
-      image: String(window.getNewsImageUrl?.(item) || item.img || "").replace(/&amp;/g, "&"),
+      title: resolved.title || String(resolved.id),
+      image: String(window.getNewsImageUrl?.(resolved) || resolved.img || "").replace(/&amp;/g, "&"),
     });
   }
   for (const day of window.DAILY_INSIGHTS || []) {
@@ -265,12 +268,14 @@ function renderNotifications() {
   }
   const list = document.getElementById("activityNotices");
   if (!list) return;
-  if (!activityState.notifications.length) {
+  const index = activityItemIndex();
+  const notifications = activityState.notifications.filter(notification => index.has(String(notification.itemId)));
+  if (!notifications.length) {
     list.innerHTML = '<div class="activity-empty">通知はまだありません。</div>';
     return;
   }
   const icons = { comment_reply: "↩", mention: "@", comment_like: "👍", article_comment: "💬" };
-  list.innerHTML = activityState.notifications.map((notification) => `
+  list.innerHTML = notifications.map((notification) => `
     <button class="activity-notice${notification.read ? "" : " unread"}" type="button" data-notification-id="${notification.id}" data-item-id="${activityEscape(notification.itemId)}">
       <span class="activity-notice-icon">${icons[notification.type] || "●"}</span>
       <span><p>${notificationMessage(notification)}</p><time>${activityEscape(relativeTime(notification.createdAt))}</time></span>

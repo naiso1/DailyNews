@@ -226370,8 +226370,7 @@ window.LOADED_NEWS_DATA = [
         sourceExcerpt: "With Lite DOT, Electreon is specifically expanding its portfolio towards stationary charging for passenger cars and light commercial vehicles.",
         country: "eu",
         img: "https://www.electrive.com/media/2026/09/electreon-stellt-auf-der-iaa-transportation-2026-eine-neue-ladel-sung-vor-mit-lite-dot-kabelloses-la-400x266.jpeg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://electriccarsreport.com/2026/09/electreon-lite-dot-makes-ev-charging-as-easy-as-parking/"] },
     {
         id: "eu1619",
         title: "GACがIAAで電動トラクターT9と新ブランドMontx初公開",
@@ -227555,8 +227554,7 @@ window.LOADED_NEWS_DATA = [
         sourceExcerptEnd: "DS autonomous driving system, and electric drive technology.",
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-134_webhook_1350x810_q85_1789614876.jpg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://www.motor1.com/news/808755/maserati-huawei-ev-gt-suv/"] },
     {
         id: "cn1661",
         title: "XPeng G9Lに前後ゼロ重力シートと21.4インチ後席スクリーン採用",
@@ -227874,8 +227872,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260919-00000001-rps-000-2-view.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "jp1869" },
     {
         id: "jp1865",
         title: "ウェイモ新型オーハイ、Bピラーレスと低床で乗り降りを改善",
@@ -227947,8 +227944,7 @@ window.LOADED_NEWS_DATA = [
         sourceExcerpt: "Huawei would supply its HarmonyOS Intelligent Mobility platform, Qiankun ADS driver assistance software and electric drive components.",
         country: "us",
         img: "https://cdn.motor1.com/images/mgl/2N4e1E/s3/maserati-grecale-2026.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "cn1660" },
     {
         id: "us1681",
         title: "アメリカの道路には最も危険な時間帯があるが、それは多くの人が想像している時間とは異なる",
@@ -228094,8 +228090,7 @@ window.LOADED_NEWS_DATA = [
         sourceExcerptEnd: "wireless EV charging a practical option for everyday parking spaces.",
         country: "eu",
         img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Electreon-Lite-Dot.jpg?a3781e&amp;a3781e",
-        note: ""
-    },
+        note: "", duplicateOf: "eu1618" },
     {
         id: "us1685",
         title: "BMWデブレツェン工場、今秋にNeue Klasseモデル2車種目を追加",
@@ -228268,8 +228263,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "jp",
         img: "https://response.jp/imgs/ogp_f/2242945.jpg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://news.yahoo.co.jp/articles/638af31ec199ddac352cf7d062688e6b69aafafc?source=rss"] },
     {
         id: "us1686",
         title: "キャデラックのエントリーレベルEVをドライブした",

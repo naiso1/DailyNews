@@ -745,6 +745,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     font-size: 0.82rem;
     color: var(--muted);
 }
+.related-news-sources { margin: 10px 0; color: var(--muted); font-size: 12px; }
+.related-news-sources summary { cursor: pointer; }
+.related-news-sources ul { padding-left: 20px; }
+.related-news-sources a { color: var(--accent); overflow-wrap: anywhere; }
 .read-count { font-size: 11px; color: var(--muted); }
 
 /* ── Empty State ─────────────────────────── */
@@ -1613,7 +1617,11 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 return `${through}まで収集・選定済み。今回の対象期間（${range}）は条件に合う記事がありませんでした。掲載済みの記事は引き続き閲覧できます。`;
             }
             if (payload.issue_date) {
-                return `${payload.issue_date}号：${payload.selected_count}件`;
+                const count = Array.isArray(news) && Array.isArray(payload.selected_news_ids)
+                    ? news.filter(item => payload.selected_news_ids.includes(item.id) && !item.duplicateOf
+                        && !window.interactionsData?.[item.id]?.hidden).length
+                    : payload.selected_count;
+                return `${payload.issue_date}号：${count}件`;
             }
             let message = `${through}まで収集・選定済み。今回の対象期間（${range}）の採用は${payload.selected_count}件です。`;
             if (Array.isArray(news) && news.length && !news.some((item) => item.date === through)) {
@@ -1695,6 +1703,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
         // New????????????New?????
         function isNewContent(itemOrDate) {
+            if (itemOrDate && typeof itemOrDate === "object" && itemOrDate.duplicateOf) return false;
             if (window.DAILYNEWS_CONFIG.id === "exterior" && itemOrDate && typeof itemOrDate === "object"
                 && Array.isArray(window.EXTERIOR_PUBLICATION_STATUS?.selected_news_ids)) {
                 return window.EXTERIOR_PUBLICATION_STATUS.selected_news_ids.includes(itemOrDate.id);
@@ -1720,15 +1729,44 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             return Boolean(itemId && window.interactionsData?.[itemId]?.hidden);
         }
 
+        function getNewsLookup(data = NEWS_DATA.length ? NEWS_DATA : (window.LOADED_NEWS_DATA || NEWS_DATA)) {
+            if (getNewsLookup.data !== data) {
+                getNewsLookup.data = data;
+                getNewsLookup.index = new Map(data.map(item => [String(item.id), item]));
+            }
+            return getNewsLookup.index;
+        }
+
+        function resolveNewsItem(itemOrId, newsById = getNewsLookup()) {
+            let item = typeof itemOrId === "object" ? itemOrId : newsById.get(String(itemOrId));
+            const paper = item?.country === "paper";
+            const seen = new Set();
+            while (item) {
+                const id = String(item.id);
+                if (seen.has(id) || isGloballyHidden(item) || (item.country === "paper") !== paper) return null;
+                seen.add(id);
+                if (!item.duplicateOf) return item;
+                if (typeof item.duplicateOf !== "string") return null;
+                item = newsById.get(item.duplicateOf);
+            }
+            return null;
+        }
+
+        window.resolveDailyNewsItem = (itemOrId) => resolveNewsItem(itemOrId);
+
+        function isNewsListItem(item) {
+            return Boolean(item && !item.duplicateOf && !isGloballyHidden(item));
+        }
+
         function visibleNewsData() {
-            return NEWS_DATA.filter(item => !isGloballyHidden(item));
+            return NEWS_DATA.filter(isNewsListItem);
         }
 
         function getNewCounts(data) {
             const counts = { world: 0, jp: 0, cn: 0, in: 0, us: 0, eu: 0, paper: 0 };
             if (!data) return counts;
             data.forEach(item => {
-                if (isGloballyHidden(item)) return;
+                if (!isNewsListItem(item)) return;
                 if (!isNewContent(item)) return;
                 counts.world += 1;
                 if (counts[item.country] !== undefined) counts[item.country] += 1;
@@ -1752,7 +1790,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
             const tagCounts = { all: counts.world };
             NEWS_DATA.forEach(item => {
-                if (isGloballyHidden(item)) return;
+                if (!isNewsListItem(item)) return;
                 if (!isNewContent(item)) return;
                 [...new Set(item.tags || [])].forEach(tag => {
                     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
@@ -1884,16 +1922,20 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
 
         function showNewsItem(itemId, fromRanking = false, returnToAccount = false) {
-            const target = NEWS_DATA.find(n => n.id === itemId);
-            if (!target || isGloballyHidden(target)) return;
+            const target = resolveNewsItem(itemId);
+            if (!target) return;
+            itemId = target.id;
             beginInternalNavigation(fromRanking ? "rankingSection" : null, returnToAccount);
             document.getElementById("searchInput").value = itemId;
             document.getElementById("contentCategory").value = "all";
             document.getElementById("dateFrom").value = "";
             document.getElementById("dateTo").value = "";
             newOnly = false;
+            favoritesOnly = false;
             activeCountries = new Set(["world"]);
             activeTags = new Set(["all"]);
+            updateFavoritesToggle();
+            updateFavoritesActionsVisibility();
             updateCountryChips();
             updateTagChips();
             applyFilters();
@@ -1908,6 +1950,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
 
         function openCommentsFor(itemId) {
+            const target = resolveNewsItem(itemId);
+            if (!target) return;
+            itemId = target.id;
             showNewsItem(itemId);
             setTimeout(() => {
                 const card = document.getElementById(`card-${itemId}`);
@@ -2345,6 +2390,36 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
         window.getNewsImageUrl = getNewsImageUrl;
 
+        function safeNewsSourceUrl(value) {
+            if (typeof value !== "string") return "";
+            try {
+                const url = new URL(value);
+                return ["http:", "https:"].includes(url.protocol) && !url.username && !url.password ? url.href : "";
+            } catch (_) {
+                return "";
+            }
+        }
+
+        function relatedNewsUrls(item) {
+            if (!isNewsListItem(item) || !Array.isArray(item.relatedUrls)) return [];
+            const blocked = new Set(NEWS_DATA.filter(n => !resolveNewsItem(n)).map(n => safeNewsSourceUrl(n.url)));
+            const seen = new Set([safeNewsSourceUrl(item.url)]);
+            return item.relatedUrls.flatMap(value => {
+                const url = safeNewsSourceUrl(value);
+                if (!url || blocked.has(url) || seen.has(url)) return [];
+                seen.add(url);
+                return [{ url, label: new URL(url).hostname }];
+            });
+        }
+
+        function renderRelatedNewsSources(item) {
+            const links = relatedNewsUrls(item);
+            if (!links.length) return "";
+            return `<details class="related-news-sources"><summary>関連出典（${links.length}件）</summary><ul>${links.map((link, i) =>
+                `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${i + 1}. ${escapeHtml(link.label)}</a></li>`
+            ).join("")}</ul></details>`;
+        }
+
         function ideaImageLabel(idea) {
             const provider = String(idea?.imageProvider || "").toLowerCase();
             if (provider === "exabase") return "AI生成イメージ（exaBase）";
@@ -2423,15 +2498,21 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             saveFavorites();
             document.querySelectorAll(".favorite-btn").forEach(btn => {
                 const match = btn.getAttribute("onclick")?.match(/toggleFavorite\('([^']+)'/);
-                if (match) updateFavoriteButton(btn, favoriteIds.has(match[1]));
+                if (match) updateFavoriteButton(btn, isFavorite(match[1]));
             });
             updateFavoritesToggle();
             updateFavoritesActionsState();
             if (favoritesOnly) applyFilters();
         };
 
+        function resolvedFavoriteKey(itemId) {
+            if (String(itemId).startsWith("idea-")) return itemId;
+            return resolveNewsItem(itemId)?.id || null;
+        }
+
         function isFavorite(itemId) {
-            return favoriteIds.has(itemId);
+            const target = resolvedFavoriteKey(itemId);
+            return Boolean(target && [...favoriteIds].some(key => resolvedFavoriteKey(key) === target));
         }
 
         function updateFavoriteButton(btn, isFav) {
@@ -2444,7 +2525,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function updateFavoritesToggle() {
             const btn = document.getElementById("favoritesToggle");
             if (!btn) return;
-            const count = favoriteIds.size;
+            const count = new Set([...favoriteIds].map(resolvedFavoriteKey).filter(Boolean)).size;
             btn.textContent = `★ お気に入り${count ? ` (${count})` : ""}`;
             btn.classList.toggle("active", favoritesOnly);
             btn.setAttribute("aria-pressed", favoritesOnly ? "true" : "false");
@@ -2519,7 +2600,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     .filter(Boolean);
                 if (!ids.length) return all;
                 const links = ids.map(id => {
-                    const n = newsById.get(id);
+                    const n = resolveNewsItem(id, newsById);
                     if (!n) return "";
                     const titleAttr = escapeHtml(n.title || id);
                     return `<button class="analysis-ref-link" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${titleAttr}">${escapeHtml(id)}</button>`;
@@ -2553,12 +2634,12 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     return all;
                 });
                 const id = ids.find(x => {
-                    const n = newsById.get(x);
-                    return n && getNewsImageUrl(n) && !usedImageIds.has(x);
+                    const n = resolveNewsItem(x, newsById);
+                    return n && getNewsImageUrl(n) && !usedImageIds.has(n.id);
                 });
                 if (!id) return "";
-                usedImageIds.add(id);
-                const n = newsById.get(id);
+                const n = resolveNewsItem(id, newsById);
+                usedImageIds.add(n.id);
                 const title = escapeHtml(n.title || id);
                 const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
                 return `
@@ -2585,10 +2666,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const normalized = normalizeAnalysisRefs(value);
             normalized.replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (all, rawIds) => {
                 String(rawIds).split(",").map(s => s.trim()).filter(Boolean).forEach(id => {
-                    const n = newsById.get(id);
-                    if (!seen.has(id) && n && getNewsImageUrl(n)) {
-                        seen.add(id);
-                        ids.push(id);
+                    const n = resolveNewsItem(id, newsById);
+                    if (n && !seen.has(n.id) && getNewsImageUrl(n)) {
+                        seen.add(n.id);
+                        ids.push(n.id);
                     }
                 });
                 return all;
@@ -2602,7 +2683,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 return `<div class="analysis-source-empty">関連画像が見つかりません。次回生成時に画像付きニュースを優先します。</div>`;
             }
             const cards = ids.map(id => {
-                const n = newsById.get(id);
+                const n = resolveNewsItem(id, newsById);
                 const title = escapeHtml(n.title || id);
                 const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
                 return `
@@ -2646,12 +2727,15 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const items = [];
             const newsMap = new Map(NEWS_DATA.map(n => [n.id, n]));
             const ideaMap = buildIdeaIndex();
+            const seen = new Set();
             targetKeys.forEach(key => {
                 if (newsMap.has(key)) {
-                    const n = newsMap.get(key);
+                    const n = resolveNewsItem(key, newsMap);
+                    if (!n || seen.has(n.id)) return;
+                    seen.add(n.id);
                     items.push({
                         type: "news",
-                        key,
+                        key: n.id,
                         id: n.id,
                         title: n.title,
                         desc: n.desc,
@@ -2797,21 +2881,31 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             alert("テキストメールを開きました。HTML表示は.emlを開くとレンダリングされます。");
         }
 
-        window.toggleFavorite = (itemId, btn) => {
-            if (!itemId) return;
-            if (favoriteIds.has(itemId)) {
-                favoriteIds.delete(itemId);
-                selectedFavoriteKeys.delete(itemId);
+        window.toggleFavorite = async (itemId, btn) => {
+            const target = resolvedFavoriteKey(itemId);
+            if (!target) return;
+            const existingKeys = [...favoriteIds].filter(key => resolvedFavoriteKey(key) === target);
+            if (existingKeys.length) {
+                existingKeys.forEach(key => {
+                    favoriteIds.delete(key);
+                    selectedFavoriteKeys.delete(key);
+                });
+                selectedFavoriteKeys.delete(target);
             } else {
-                favoriteIds.add(itemId);
+                favoriteIds.add(target);
             }
             saveFavorites();
-            updateFavoriteButton(btn, favoriteIds.has(itemId));
+            updateFavoriteButton(btn, isFavorite(target));
             updateFavoritesToggle();
             updateFavoritesActionsState();
-            window.dailyNewsAccount?.setFavorite(itemId, favoriteIds.has(itemId)).catch(error => {
-                console.warn("Favorite sync failed:", error.message);
-            });
+            const changedKeys = existingKeys.length ? existingKeys : [target];
+            for (const key of changedKeys) {
+                try {
+                    await window.dailyNewsAccount?.setFavorite(key, !existingKeys.length);
+                } catch (error) {
+                    console.warn("Favorite sync failed:", error.message);
+                }
+            }
             if (favoritesOnly) applyFilters();
         };
 
@@ -2969,7 +3063,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         saveFavorites();
                     }
                     updateFavoritesToggle();
-                    document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                    document.getElementById("totalCount").textContent = visibleNewsData().length;
                     updateNewCountBadges();
                     const newCounts = getNewCounts(NEWS_DATA);
                     if (newCounts.world > visibleLimit) {
@@ -3008,7 +3102,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     });
                 }
 
-                document.getElementById("totalCount").textContent = NEWS_DATA.length;
+                document.getElementById("totalCount").textContent = visibleNewsData().length;
                 updateNewCountBadges();
 
                 restoreFilterStateFromURL({ render: false });
@@ -3228,6 +3322,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             let from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
+            const searchedArticle = getNewsLookup().get(searchText);
+            const searchTarget = searchedArticle ? resolveNewsItem(searchedArticle) : null;
             const sortOrder = document.getElementById("sortOrder").value;
             const contentCategory = window.DAILYNEWS_CONFIG.id === "exterior" ? document.getElementById("contentCategory").value : "all";
 
@@ -3240,7 +3336,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
             // 1. Filter
             let filteredData = NEWS_DATA.filter(n => {
-                if (isGloballyHidden(n)) return false;
+                if (!isNewsListItem(n)) return false;
                 // Country Filter
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
                 if (favoritesOnly && !isFavorite(n.id)) return false;
@@ -3258,7 +3354,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 if (!matchesNewsDateRange(n, from, to)) return false;
 
                 // Text Search
-                if (searchText && !searchable.includes(searchText)) return false;
+                if (searchedArticle ? n.id !== searchTarget?.id : (searchText && !searchable.includes(searchText))) return false;
 
                 return true;
             });
@@ -3358,6 +3454,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     <button class="summary-btn" onclick="toggleSummary(this)">詳細要約を見る</button>
                     <div class="summary-content">${n.summary}</div>
                 </div>` : ''}
+                ${renderRelatedNewsSources(n)}
                 <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
 
                 
@@ -3444,6 +3541,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         window.refreshNewsVisibility = () => {
             document.getElementById("totalCount").textContent = visibleNewsData().length;
             updateNewCountBadges();
+            if (window.DAILYNEWS_CONFIG.id === "exterior") {
+                document.getElementById("exteriorPublicationStatus").textContent = describeExteriorPublication(window.EXTERIOR_PUBLICATION_STATUS, NEWS_DATA);
+            }
             applyFilters();
         };
 
@@ -3508,8 +3608,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (query) params.set("q", query);
             const from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
-            if (from || window.DAILYNEWS_CONFIG.id === "exterior") params.set("from", from);
-            if (to || window.DAILYNEWS_CONFIG.id === "exterior") params.set("to", to);
+            const articleSearch = getNewsLookup().has(query.toLowerCase());
+            if (from || window.DAILYNEWS_CONFIG.id === "exterior" || articleSearch) params.set("from", from);
+            if (to || window.DAILYNEWS_CONFIG.id === "exterior" || articleSearch) params.set("to", to);
             if (window.DAILYNEWS_CONFIG.id === "exterior") params.set("dateBasis", getDateFilterBasis());
             const sortOrder = document.getElementById("sortOrder").value;
             if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);

@@ -100,7 +100,7 @@ def main():
                 page.locator('.date-inputs').screenshot(path=str(output / f'{name}_date_controls.png'))
                 page.locator('.filters').screenshot(path=str(output / f'{name}_filters.png'))
                 original_dates = page.evaluate('''() => Object.fromEntries(window.LOADED_NEWS_DATA.map(n => [n.id, n.date]))''')
-                source_count = sum(date == issue_date for date in original_dates.values())
+                source_count = page.evaluate('(date) => window.LOADED_NEWS_DATA.filter(n => !n.duplicateOf && n.date === date).length', issue_date)
                 earlier_id = next(item_id for item_id in selected if original_dates[item_id] < issue_date)
                 assert page.locator(f'#card-{earlier_id} .card-date-meta').inner_text() == '掲載日 ' + original_dates[earlier_id]
                 observed['earlier_original_dates'] = sum(original_dates[item_id] < issue_date for item_id in selected)

@@ -1062,8 +1062,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260916-00000017-rps-000-2-view.jpg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://news.yahoo.co.jp/articles/ef1092f2c556ad91d3f603af09b111f1eac5477a?source=rss"] },
     {
         id: "jp13",
         title: "メルセデス・マイバッハSクラス改良新型発売、光るグリル採用で威風堂々",
@@ -2033,8 +2032,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "eu",
         img: "https://i.dailymail.com/1s/2026/09/16/09/111281577-0-image-m-37_1789548680734.jpg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://www.motor1.com/news/808469/nissan-kicks-power-confirmed-europe/", "https://www.autoexpress.co.uk/nissan/370445/nissan-kicks-new-life-sunderland-hybrid-suv-coming-uk"] },
     {
         id: "cn24",
         title: "吉利銀河E5、屋根にLiDAR・フェンダーにカメラを追加へ",
@@ -2884,8 +2882,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "us",
         img: "https://cdn.motor1.com/images/mgl/9m8GRp/s3/nissan-kicks-jdm.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "eu28" },
     {
         id: "eu39",
         title: "日産Kicks、英国Sunderland工場でe-Powerハイブリッド生産へ",
@@ -2904,8 +2901,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--Hdjb-cBs--/t_rss_image_w_845/v1789546210/autoexpress/2026/09/New%20Nissan%20Kicks%202026%20001.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "eu28" },
     // 2026-09-17 (google検索からExcel sheet2_llm_targets)
     {
         id: "us32",
@@ -2986,8 +2982,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "cn",
         img: "https://carnewschina.com/wp-content/uploads/2026/09/xpeng_g9l-3_webhook_1500x900_q85_1789724039.jpg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://www.automotiveworld.com/news/xpeng-g9l-set-for-october-launch-at-paris-motor-show/"] },
     {
         id: "eu34",
         title: "BMW、ハンガリーDebrecen工場でiX3を3シフト化",
@@ -3047,8 +3042,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "eu",
         img: "https://media.automotiveworld.com/app/uploads/2026/09/18141216/xpeng-g9l-paris-motor-show-1.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "cn26" },
     {
         id: "eu38",
         title: "オペル アストラGSEライン、Vizor下とバンパーに専用カラー追加し2027年春投入",
@@ -3088,8 +3082,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--HULVN5MP--/t_rss_image_w_845/v1789745447/autoexpress/2026/09/Renault%202026-Goodwood-Festival-of-Speed_ibbsmd.jpg",
-        note: ""
-    },
+        note: "", relatedUrls: ["https://www.autoexpress.co.uk/renault/370473/renaults-design-future-pictures"] },
     {
         id: "eu32",
         title: "ルノー新デザイン責任者、大胆な個性とプロポーションを掲げる",
@@ -3107,8 +3100,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "eu",
         img: "https://media.autoexpress.co.uk/image/private/s--HULVN5MP--/t_rss_image_w_845/v1789745447/autoexpress/2026/09/Renault%202026-Goodwood-Festival-of-Speed_ibbsmd.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "eu31" },
     {
         id: "in33",
         title: "タタ、Tigor後継車にAERIS商標出願",
@@ -3189,8 +3181,7 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260920-00000004-rps-000-1-view.jpg",
-        note: ""
-    },
+        note: "", duplicateOf: "jp12" },
     {
         id: "jp34",
         title: "トヨタ「クラウンスポーツ」改良、新HEV搭載でPHEV Z追加",

@@ -363,15 +363,18 @@ function accountItemIndex(options = {}) {
   const countryNames = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
   for (const item of window.LOADED_NEWS_DATA || window.NEWS_DATA || []) {
     if (!includeHidden && window.interactionsData?.[String(item.id)]?.hidden) continue;
+    const resolved = includeHidden ? item : (window.resolveDailyNewsItem
+      ? window.resolveDailyNewsItem(item) : (item.duplicateOf ? null : item));
+    if (!resolved) continue;
     index.set(String(item.id), {
-      id: String(item.id),
-      targetId: String(item.id),
-      title: item.title,
-      date: item.date,
+      id: String(resolved.id),
+      targetId: String(resolved.id),
+      title: resolved.title,
+      date: resolved.date,
       type: "news",
-      image: window.getNewsImageUrl?.(item) || item.img || "",
-      description: item.desc || item.summary || "",
-      country: countryNames[item.country] || item.country || "",
+      image: window.getNewsImageUrl?.(resolved) || resolved.img || "",
+      description: resolved.desc || resolved.summary || "",
+      country: countryNames[resolved.country] || resolved.country || "",
     });
   }
   for (const day of window.DAILY_INSIGHTS || []) {
@@ -401,7 +404,7 @@ function activityEntries(tab) {
   const index = accountItemIndex();
   if (tab === "updates") {
     return (activity.notifications || []).filter(
-      (notification) => !window.interactionsData?.[String(notification.itemId)]?.hidden,
+      (notification) => index.has(String(notification.itemId)),
     ).map((notification) => {
       const item = index.get(String(notification.itemId));
       const actions = {
@@ -423,7 +426,7 @@ function activityEntries(tab) {
   }
   if (tab === "comments") {
     return (activity.comments || []).filter(
-      (comment) => !window.interactionsData?.[String(comment.itemId)]?.hidden,
+      (comment) => index.has(String(comment.itemId)),
     ).map((comment) => {
       const item = index.get(String(comment.itemId));
       return {
@@ -437,7 +440,7 @@ function activityEntries(tab) {
   }
   if (tab === "participation") {
     return (activity.participated || []).filter(
-      (participation) => !window.interactionsData?.[String(participation.itemId)]?.hidden,
+      (participation) => index.has(String(participation.itemId)),
     ).map((participation) => {
       const itemId = String(participation.itemId);
       const item = index.get(itemId);
@@ -450,7 +453,13 @@ function activityEntries(tab) {
     });
   }
   const ids = tab === "likes" ? activity.likes || [] : activity.favorites || [];
-  return ids.filter((id) => !window.interactionsData?.[String(id)]?.hidden).map((id) => {
+  const seen = new Set();
+  return ids.filter((id) => {
+    const item = index.get(String(id));
+    if (!item || seen.has(item.id)) return false;
+    seen.add(item.id);
+    return true;
+  }).map((id) => {
     const item = index.get(String(id));
     return {
       ...(item || { id: String(id), targetId: String(id), type: "news" }),

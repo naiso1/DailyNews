@@ -34,6 +34,7 @@ from dailynews import exterior as exterior_rules
 from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text
 from dailynews.collection_digest import collection_window, published_news, published_issue, published_row
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
+from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
 
 EDITION = get_edition()
 
@@ -80,6 +81,7 @@ OUTPUT_COLUMNS = [
     "\u51fa\u5c55\u30b5\u30a4\u30c8",
     "\u753b\u50cfURL",
     "URL",
+    "関連URL",
     "\u30bd\u30fc\u30b9",
     "HTML\u53d6\u5f97",
     "LLM\u5224\u5b9a",
@@ -2650,6 +2652,82 @@ def load_existing_data(path):
     except Exception:
         return pd.DataFrame()
 
+def collector_article(row):
+    """Adapt CSV rows to the shared, source-aware duplicate comparison."""
+    def text(key):
+        value = row.get(key, "")
+        return "" if value is None or (isinstance(value, float) and math.isnan(value)) else str(value).strip()
+
+    related = row.get("関連URL", [])
+    if isinstance(related, str):
+        try:
+            related = json.loads(related) if related.strip() else []
+        except (ValueError, TypeError):
+            related = []
+    if not isinstance(related, list):
+        related = []
+    return {"country": text("国"), "date": text("日付"),
+            "url": normalize_article_url(text("URL")),
+            "title": text("タイトル（日本語）") or text("タイトル"),
+            "desc": text("内容（日本語）") or text("内容"),
+            "originalTitle": text("タイトル"), "originalDesc": text("内容"),
+            "relatedUrls": [normalize_article_url(url) for url in related if isinstance(url, str) and url.strip()]}
+
+
+def collection_history_articles(rows, limit=500):
+    """The checkpoint is newest-first: its tail is not recent title history."""
+    ordered = sorted(rows, key=lambda row: str(row.get("日付", "")), reverse=True)
+    titles = recent_title_history(ordered, limit=limit)
+    wanted = set(titles)
+    by_title = {}
+    for row in ordered:
+        title = str(row.get("タイトル", "")).strip()
+        if title in wanted and title not in by_title:
+            by_title[title] = collector_article(row)
+        if len(by_title) == len(wanted):
+            break
+    return [by_title[title] for title in titles if title in by_title]
+
+
+def deduplicate_fetched_articles(items, existing_rows):
+    """Normalize source URLs early; compare recent stories without token overlap."""
+    existing_rows = list(existing_rows)
+    seen_urls = {normalize_article_url(row.get("URL", "")) for row in existing_rows}
+    recent = collection_history_articles(existing_rows)
+    kept, decisions = [], []
+    for original in items:
+        item = dict(original)
+        item["URL"] = normalize_article_url(item.get("URL", ""))
+        article = collector_article(item)
+        if not article["url"] or not article["originalTitle"]:
+            continue
+        reason, representative = "", None
+        if article["url"] in seen_urls:
+            reason = "normalized_url"
+        else:
+            for previous in recent:
+                reason = same_story(article, previous)
+                if reason:
+                    representative = previous
+                    break
+        if reason:
+            decisions.append({"url": article["url"],
+                              "duplicate_of": representative["url"] if representative else article["url"],
+                              "reason": reason, "source": item.get("ソース", "不明")})
+            # Keep additional source links when the representative is in this batch.
+            for previous in kept:
+                if previous["URL"] == decisions[-1]["duplicate_of"]:
+                    links = collector_article(previous)["relatedUrls"]
+                    links.extend([article["url"], *article["relatedUrls"]])
+                    previous["関連URL"] = json.dumps(list(dict.fromkeys(url for url in links if url != previous["URL"])), ensure_ascii=False)
+                    break
+            continue
+        seen_urls.add(article["url"])
+        recent.append(article)
+        kept.append(item)
+    return kept, decisions
+
+
 def sheet2_candidate_sort_score(row, title_col, title_jp_col, content_col, content_jp_col, url_col, interior_col, related_col):
     """Score fallback candidates so quota backfill stays automotive/interior-first."""
     def numeric(value):
@@ -2688,34 +2766,47 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     """LLM判定対象・画像URLあり・対象日付の一覧をSheet2とCSVに出力"""
     global SHEET2_RESULT
     digest_window = {}
-    published = []
-    same_issue = {}
-    published_elsewhere = set()
     if EDITION.id == "exterior":
         digest_window = collection_window(target_dates, EDITION.config.get("selection", {}).get("lookback_days", 7))
-        published = published_news(EDITION.content_dir / "news_data.js")
-        same_issue = {item["url"]: item for item in published if published_issue(item) == digest_window["issue_date"]}
-        published_elsewhere = {item["url"] for item in published if published_issue(item) != digest_window["issue_date"]}
-        published_elsewhere.difference_update(same_issue)
-        # A retry keeps reviewed copy and IDs already issued that day, including
-        # a row absent from a collector checkpoint. Original source dates remain.
-        df = df.copy().astype(object) if df is not None else pd.DataFrame()
-        for url, item in same_issue.items():
-            source_row = published_row(item)
-            matching = df.index[df["URL"].eq(url)] if "URL" in df.columns else []
-            if len(matching):
-                for key, value in source_row.items():
-                    if key not in ("タイトル", "内容"):
-                        if key not in df.columns:
-                            df[key] = ""
-                        df.loc[matching, key] = value
-            else:
-                df = pd.concat([df, pd.DataFrame([source_row])], ignore_index=True)
+    issue_dates = {digest_window["issue_date"]} if digest_window else set(target_dates or [])
+    if not issue_dates and df is not None and not df.empty and "日付" in df.columns:
+        latest = pd.to_datetime(df["日付"], errors="coerce").max()
+        if pd.notna(latest):
+            issue_dates = {latest.strftime("%Y-%m-%d")}
+    published = [dict(item, url=normalize_article_url(item["url"]))
+                 for item in published_news(EDITION.content_dir / "news_data.js")]
+    published_by_id = {item.get("id"): item for item in published}
+    published_aliases = {item["url"] for item in published if item.get("duplicateOf")}
+    for item in published:
+        representative = published_by_id.get(item.get("duplicateOf"))
+        if representative is not None:
+            representative["relatedUrls"] = list(dict.fromkeys([
+                *representative.get("relatedUrls", []), item["url"], *item.get("relatedUrls", [])]))
+    published = [item for item in published if not item.get("duplicateOf")]
+    same_issue = {item["url"]: item for item in published if published_issue(item) in issue_dates}
+    published_elsewhere = {item["url"] for item in published if published_issue(item) not in issue_dates}
+    published_elsewhere.difference_update(same_issue)
+    # Retries keep reviewed representatives, including missing checkpoint rows.
+    # Alias records remain available via relatedUrls, never as new candidates.
+    df = df.copy().astype(object) if df is not None else pd.DataFrame()
+    if "URL" in df.columns:
+        df["URL"] = df["URL"].map(normalize_article_url)
+    for url, item in same_issue.items():
+        source_row = published_row(item)
+        source_row["関連URL"] = json.dumps(item.get("relatedUrls", []), ensure_ascii=False)
+        matching = df.index[df["URL"].eq(url)] if "URL" in df.columns else []
+        if len(matching):
+            for key, value in source_row.items():
+                if key not in ("タイトル", "内容"):
+                    if key not in df.columns:
+                        df[key] = ""
+                    df.loc[matching, key] = value
+        else:
+            df = pd.concat([df, pd.DataFrame([source_row])], ignore_index=True)
     if df is None or df.empty:
-        if EDITION.id == "exterior":
-            csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
-            pd.DataFrame(columns=OUTPUT_COLUMNS).to_csv(csv_path, index=False, encoding="utf-8")
-            SHEET2_RESULT = {"selected_count": 0, "candidate_count": 0, **digest_window, "source_dates": []}
+        csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
+        pd.DataFrame(columns=OUTPUT_COLUMNS).to_csv(csv_path, index=False, encoding="utf-8")
+        SHEET2_RESULT = {"selected_count": 0, "candidate_count": 0, **digest_window, "source_dates": []}
         print("  Sheet2/CSV: 対象データなし")
         return
     col_country = "国"
@@ -2734,7 +2825,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     col_date = "日付"
 
     work = df.copy()
-    for col in [col_country, col_title, col_title_jp, col_content, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason, col_llm_post, col_date]:
+    for col in [col_country, col_title, col_title_jp, col_content, col_content_jp, col_site, col_image, col_url, "関連URL", col_llm, col_image_judge, col_interior_score, col_interior_reason, col_llm_post, col_date]:
         if col not in work.columns:
             work[col] = ""
     if EDITION.id == "exterior":
@@ -2761,11 +2852,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         if dt.notna().any():
             max_date = dt.max().date()
             filtered = filtered[dt.dt.date == max_date]
-    if EDITION.id == "exterior":
-        filtered = filtered.drop_duplicates(subset=[col_url], keep="first")
     dated_candidates = filtered.copy()
-    if EDITION.id == "exterior":
-        filtered = filtered[~filtered[col_url].isin(published_elsewhere)]
+    filtered = filtered[~filtered[col_url].isin(published_elsewhere | published_aliases)]
 
     # URLと画像URLが有効なものだけを公開候補にする。Google Newsの
     # 未解決リンクや途中で切れたURLは、本文・画像の誤結合につながる。
@@ -2780,7 +2868,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     if EDITION.config.get("selection", {}).get("require_original_image", True):
         filtered = filtered[valid_image | (filtered[col_country] == "論文")]
 
-    # 国別にLLM判定=対象を優先し、10件未満なら非対象も追加（類似は極力除外）
+    # Rank across the full period per country; final cross-country story
+    # deduplication happens only after Japanese repair and language quarantine.
     filtered = filtered.copy()
     # related_sort_applied
     score_col = "\u95a2\u9023\u5ea6\u30b9\u30b3\u30a2"
@@ -2806,8 +2895,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             axis=1,
         )
     filtered["_order"] = range(len(filtered))
-    if EDITION.id == "exterior":
-        filtered["_already_in_issue"] = filtered[col_url].isin(same_issue)
+    filtered["_already_in_issue"] = filtered[col_url].isin(same_issue)
     llm_flag = filtered[col_llm].astype(str).str.strip()
     strict_selection = EDITION.id == "exterior"
     selection = EDITION.config.get("selection", {})
@@ -2844,41 +2932,24 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 extras = group.iloc[0:0]
         selected = []
         selected_idx = set()
-        selected_texts = []
         limit = None if country_name == "論文" else selection.get("maximum_per_country", 10)
 
-        def text_key(row):
-            return f"{row.get(col_title_jp, '')} {row.get(col_content_jp, '')}".strip()
-
-        def is_similar_text(text):
-            for s in selected_texts:
-                if difflib.SequenceMatcher(None, text, s).ratio() >= SHEET2_SIMILARITY_THRESHOLD:
-                    return True
-                if is_same_topic_text(text, s):
-                    return True
-            return False
-
-        def add_rows(df_rows, allow_similar=False, max_added=None):
-            nonlocal selected, selected_idx, selected_texts
+        def add_rows(df_rows, max_added=None):
+            nonlocal selected, selected_idx
             added = 0
             for idx, row in df_rows.iterrows():
                 if (limit is not None and len(selected) >= limit) or (max_added is not None and added >= max_added):
                     return
                 if idx in selected_idx:
                     continue
-                text = text_key(row)
-                if not allow_similar and text and is_similar_text(text):
-                    continue
                 selected.append(row)
                 added += 1
                 selected_idx.add(idx)
-                if text:
-                    selected_texts.append(text)
                 if limit is not None and len(selected) >= limit:
                     return
 
+        add_rows(group[group["_already_in_issue"]])
         if strict_selection:
-            add_rows(group[group["_already_in_issue"]], allow_similar=True)
             for day in sorted(target_group[col_date].astype(str).unique(), reverse=True):
                 daily = target_group[target_group[col_date].astype(str).eq(day)]
                 products = daily[daily["記事区分"].eq("product")]
@@ -2889,11 +2960,9 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 add_rows(trends, max_added=max(0, selection.get("maximum_trends_per_country", 10) - trend_count))
                 add_rows(products)
         else:
-            add_rows(target_group, allow_similar=False)
+            add_rows(target_group)
         if limit is not None and len(selected) < limit:
-            add_rows(extras, allow_similar=False)
-        if not strict_selection and limit is not None and len(selected) < limit:
-            add_rows(pd.concat([target_group, extras], ignore_index=False), allow_similar=True)
+            add_rows(extras)
 
         if selected:
             result_groups.append(pd.DataFrame(selected))
@@ -2902,7 +2971,6 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     else:
         filtered = filtered.iloc[0:0]
     filtered = filtered.sort_values("_order")
-    filtered = filtered.drop(columns=["_order", "_sheet2_sort_score", "_already_in_issue"], errors="ignore")
 
     # Sheet2に載るスキップ済み（日本語未補完）を補完
     need_indices = []
@@ -2959,9 +3027,35 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             resolved_failure = True
     selected_before_quarantine = len(filtered)
     filtered = filtered.drop(index=failed_indices)
+    all_summaries_failed = bool(quarantined) and filtered.empty
+    # The final identity check sees resolved URLs and finished Japanese text
+    # across every country. Never put discarded stories back to fill a quota.
+    priority_cols = ["_already_in_issue"] + ([col_date] if strict_selection else []) + ["_sheet2_sort_score", "_order"]
+    ranked = filtered.sort_values(priority_cols, ascending=[False] * (len(priority_cols) - 1) + [True])
+    candidates = [dict(collector_article(row), _collector_index=idx) for idx, row in ranked.iterrows()]
+    kept_articles, duplicate_decisions = deduplicate_articles(
+        candidates, published, issue_date=max(issue_dates) if issue_dates else None,
+        history_days=selection.get("duplicate_history_days", 14), protected_urls=same_issue)
+    filtered = filtered.loc[[item["_collector_index"] for item in kept_articles]].copy()
+    for item in kept_articles:
+        index = item["_collector_index"]
+        related_json = json.dumps(item.get("relatedUrls", []), ensure_ascii=False)
+        filtered.at[index, "関連URL"] = related_json
+        work.at[index, "関連URL"] = related_json
+    filtered = filtered.sort_values("_order")
+    filtered = filtered.drop(columns=["_order", "_sheet2_sort_score", "_already_in_issue"], errors="ignore")
+    deduplication_result = {"duplicate_count": len(duplicate_decisions),
+                            "duplicate_decisions": duplicate_decisions}
+    dedup_path = Path(excel_path).with_name("deduplication_review.json")
+    dedup_path.parent.mkdir(parents=True, exist_ok=True)
+    dedup_temp = dedup_path.with_suffix(".json.tmp")
+    dedup_temp.write_text(json.dumps({"edition_id": EDITION.id, "target_dates": list(target_dates or []),
+                                    "candidate_count": len(ranked), "selected_count": len(filtered),
+                                    **deduplication_result}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(dedup_temp, dedup_path)
     quarantine_result = {"quarantined_count": len(quarantined),
                          "quarantined_urls": [row["url"] for row in quarantined]}
-    if need_indices or quarantined or resolved_failure:
+    if need_indices or quarantined or resolved_failure or duplicate_decisions:
         # Saving failed rows is part of successful partial publication, not an
         # optional best-effort write. Do not lose the operator's repair input.
         try:
@@ -2974,7 +3068,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                           "updated_at": datetime.now().astimezone().isoformat(),
                           "source_file": str(Path(excel_path).resolve()),
                           "selected_before_quarantine": selected_before_quarantine,
-                          "selected_count": len(filtered), "articles": quarantined, **quarantine_result}
+                          "selected_count": len(filtered), "articles": quarantined,
+                          "duplicate_count": len(duplicate_decisions), **quarantine_result}
     quarantine_temp = quarantine_path.with_suffix(".json.tmp")
     try:
         quarantine_temp.write_text(json.dumps(quarantine_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -2983,13 +3078,13 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         raise SummaryQuarantineError("Could not record quarantined summary selection") from error
     if quarantined:
         print(f"  [SUMMARY_QUARANTINE] 公開候補 {len(filtered)}件、未翻訳保留 {len(quarantined)}件（原文・失敗状態を保存）")
-    if quarantined and filtered.empty:
+    if all_summaries_failed:
         SHEET2_RESULT = {"selected_count": 0, "candidate_count": len(dated_candidates),
                          "source_dates": [], **digest_window, **quarantine_result}
         raise SummaryQuarantineError("All selected summaries are untranslated; original rows retained for manual repair")
 
     # Retain source prices for validation when publication resumes without the LLM.
-    sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
+    sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, "関連URL", col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
     if EDITION.id == "exterior":
         sheet_cols.extend(EXTERIOR_EDITORIAL_COLUMNS)
     sheet2_df = filtered[sheet_cols].copy()
@@ -3023,11 +3118,6 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
 
     # CSV出力（リンク誤結合/改行対策）
     csv_path = Path(excel_path).with_name("sheet2_llm_targets.csv")
-    if sheet2_df.empty and EDITION.id == "interior":
-        print(f"  Sheet2/CSV: 0件のため既存CSVを保持します: {csv_path}")
-        if OUTPUT_PAPERS_SHEET2:
-            build_papers_sheet2(work, excel_path, target_dates)
-        return
     sheet2_csv = sheet2_df.copy()
     for col in sheet2_csv.columns:
         if sheet2_csv[col].dtype == object:
@@ -3035,17 +3125,25 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             sheet2_csv[col] = sheet2_csv[col].str.replace("\n", " ", regex=False)
             sheet2_csv[col] = sheet2_csv[col].str.replace("\r", " ", regex=False)
     sheet2_csv.to_csv(csv_path, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8", lineterminator="\n")
-    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(dated_candidates), **quarantine_result}
+    SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(dated_candidates),
+                     "selected_by_country": dict(Counter(sheet2_csv[col_country].tolist())),
+                     **quarantine_result, **deduplication_result}
     if EDITION.id == "exterior":
         selected_urls = set(sheet2_csv[col_url].astype(str))
+        selected_indices = set(filtered.index)
+        duplicate_urls = {item["url"] for item in duplicate_decisions}
         reasons = []
-        for _, row in dated_candidates.iterrows():
+        for index, row in dated_candidates.iterrows():
             score = normalize_interior_score(row.get(col_interior_score))
             threshold = selection.get("trend_minimum_score", 65) if row.get("記事区分") == "trend" else selection.get("minimum_score", 60)
-            if str(row.get(col_url)) in selected_urls:
+            if index in selected_indices:
                 reason = "selected"
             elif str(row.get(col_url)) in published_elsewhere:
                 reason = "already_published_in_another_issue"
+            elif str(row.get(col_url)) in published_aliases:
+                reason = "published_duplicate_alias"
+            elif str(row.get(col_url)) in duplicate_urls or str(row.get(col_url)) in selected_urls:
+                reason = "duplicate_story"
             elif str(row.get(col_url)) in quarantine_result["quarantined_urls"]:
                 reason = "summary_language_failed"
             elif not is_valid_article_url(row.get(col_url), allow_google_news=False):
@@ -3057,7 +3155,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             elif row.get("記事区分") not in ("product", "trend"):
                 reason = "unsupported_category"
             else:
-                reason = "similar_topic_or_category_limit"
+                reason = "country_or_category_limit"
             reasons.append(reason)
         review = dated_candidates[[col_country, col_date, col_title, col_title_jp, col_url, col_llm,
                                    col_interior_score, col_interior_reason, *EXTERIOR_EDITORIAL_COLUMNS]].copy()
@@ -3741,6 +3839,8 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                     item["画像URL"] = img_map.get(item.get("URL"), item.get("画像URL"))
             empty_after = sum(1 for it in items if is_missing_url(it.get("画像URL")))
             print(f"    画像URL未取得: {empty_after}件")
+    for item in items:
+        item["URL"] = normalize_article_url(item.get("URL", ""))
     return items
 
 def enrich_existing_df(df):
@@ -3960,6 +4060,8 @@ def enrich_existing_df(df):
                     df_out.at[r_idx, "画像URL"] = img_map.get(r.get("URL"), r.get("画像URL"))
         empty_after = sum(1 for _, r in df_out.iterrows() if is_missing_url(r.get("画像URL")))
         print(f"    画像URL未取得: {empty_after}件（補完試行: {len(missing_img_urls)}件）")
+    if "URL" in df_out.columns:
+        df_out["URL"] = df_out["URL"].map(normalize_article_url)
     return df_out
 
 def _main():
@@ -4027,8 +4129,6 @@ def _main():
     print(f"検索キーワード（国別）: { {country: len(edition_search_keywords(settings)) for country, settings in COUNTRY_SETTINGS.items()} }")
 
     # 既存データ読み込み
-    existing_urls = set()
-    collected_titles = []
     df_existing = pd.DataFrame()
 
     if os.path.exists(EXCEL_FILE):
@@ -4042,14 +4142,6 @@ def _main():
         print(f"外装の指定日を新基準で再評価: 既存{len(reassessment_items)}件（既採用も再判定）")
 
     if not df_existing.empty:
-        if "URL" in df_existing.columns:
-            existing_urls = set(
-                u for u in df_existing["URL"].tolist() if str(u).strip()
-            )
-        if "タイトル" in df_existing.columns:
-            collected_titles = [
-                str(t) for t in df_existing["タイトル"].tolist() if str(t).strip()
-            ]
         if ENRICH_ONLY or ENRICH_EXISTING:
             df_existing = enrich_existing_df(df_existing)
             print(f"既存データ: {len(df_existing)} 件")
@@ -4208,38 +4300,10 @@ def _main():
     
     # 重複除去
     print("\n=== 重複除去処理 ===")
-    unique_results = []
-    seen_urls = set(existing_urls)
-    seen_titles = list(collected_titles)
-    dup_by_source = Counter()
-    dup_by_reason = Counter()
-    
-    for item in all_results:
-        url = item.get("URL", "")
-        title = item.get("タイトル", "")
-        source_name = item.get("ソース", "不明")
-        
-        if not url or not title:
-            continue
-        
-        if url in seen_urls:
-            dup_by_source[source_name] += 1
-            dup_by_reason["既存URL"] += 1
-            continue
-        
-        is_dup = False
-        for t in seen_titles[-500:]:
-            if is_similar(title, t):
-                is_dup = True
-                break
-        if is_dup:
-            dup_by_source[source_name] += 1
-            dup_by_reason["タイトル類似"] += 1
-            continue
-        
-        seen_urls.add(url)
-        seen_titles.append(title)
-        unique_results.append(item)
+    unique_results, entry_duplicate_decisions = deduplicate_fetched_articles(all_results, df_existing.to_dict("records"))
+    dup_by_source = Counter(item["source"] for item in entry_duplicate_decisions)
+    dup_by_reason = Counter("既存URL" if item["reason"] == "normalized_url" else item["reason"]
+                            for item in entry_duplicate_decisions)
     
     removed = len(all_results) - len(unique_results)
     print(f"  重複除去: {removed}件")
@@ -4250,6 +4314,7 @@ def _main():
     print(f"  最終結果: {len(unique_results)}件")
     COLLECTION_METRICS["deduplicated_count"] = len(unique_results)
     COLLECTION_METRICS["duplicate_reasons"] = dict(dup_by_reason)
+    COLLECTION_METRICS["entry_duplicate_decisions"] = entry_duplicate_decisions
     if unique_results:
         src_counter_final = Counter([item.get("ソース", "") for item in unique_results if item.get("ソース")])
         cty_counter_final = Counter([item.get("国", "") for item in unique_results if item.get("国")])
