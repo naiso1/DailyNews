@@ -141,9 +141,11 @@ async function readRequest() {
   for await (const chunk of process.stdin) { size += chunk.length; if (size > 65536) throw fail('INVALID_REQUEST'); chunks.push(chunk); }
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch (_) { throw fail('INVALID_REQUEST'); }
 }
-async function generate(dependencies, request, state) {
+async function generate(dependencies, request, state, recoveryOnly = false) {
   if (!/^[a-f0-9]{64}$/.test(request.key || '') || typeof request.prompt !== 'string'
       || !request.prompt.trim() || request.prompt.length > 12000 || !path.isAbsolute(request.outputDir || '')) throw fail('INVALID_REQUEST');
+  if (recoveryOnly && (!request.referenceImage
+      || !/^\/conversation\/[a-f0-9-]{36}$/.test(request.conversationPath || ''))) throw fail('INVALID_REQUEST');
   fs.mkdirSync(request.outputDir, { recursive: true });
   const { chromium, edge, engine } = dependencies;
   let browser, context, page, stopWatching;
@@ -157,8 +159,13 @@ async function generate(dependencies, request, state) {
     stopWatching = engine._test.watchCancellation(browser, () => cancelled);
     context = await browser.newContext({ storageState: state, viewport: { width: 1440, height: 1000 } });
     page = await context.newPage();
-    await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    const result = await engine._test.generateOnPage(page, {
+    await page.goto(recoveryOnly ? 'https://gai.exabase.ai' + request.conversationPath : URL,
+      { waitUntil: 'domcontentloaded', timeout: 60000 });
+    if (recoveryOnly) await page.waitForFunction(text => {
+      const normalize = value => String(value || '').replace(/\s+/g, ' ').trim();
+      return normalize(document.body.innerText).includes(normalize(text));
+    }, request.prompt, { timeout: 30000 });
+    const settings = {
       prompt: request.prompt, outputDir: request.outputDir, count: 1,
       timeoutMs: timeout, isCancelled: () => cancelled,
       onProgress: progress => {
@@ -167,11 +174,16 @@ async function generate(dependencies, request, state) {
         atomicJson(path.join(request.outputDir, 'phase.json'), event);
         emit(event);
       },
-    });
+    };
+    const result = recoveryOnly
+      ? await require('./reference-generation').recoverReference(page, { ...settings, referenceImage: request.referenceImage }, engine)
+      : request.referenceImage
+      ? await require('./reference-generation').generateWithReference(page, { ...settings, referenceImage: request.referenceImage }, engine)
+      : await engine._test.generateOnPage(page, settings);
     if (result.files.length !== 1 || result.errors.length) throw fail('GENERATION_FAILED');
     const file = path.resolve(result.files[0]);
     if (path.dirname(file) !== path.resolve(request.outputDir)) throw fail('INVALID_IMAGE_PATH');
-    const receipt = { status: 'DONE', key: request.key, file };
+    const receipt = { status: 'DONE', key: request.key, file, ...(recoveryOnly ? { recoveredFromConversation: true } : {}) };
     atomicJson(path.join(request.outputDir, 'result.json'), receipt);
     emit(receipt);
   } catch (error) {
@@ -204,8 +216,8 @@ async function main() {
     if (mode === '--login') return await login(dependencies);
     const state = await checkSession(dependencies, await sessionState());
     if (mode === '--check-session') { emit({ status: 'AUTHENTICATED' }); return; }
-    if (mode !== '--generate') throw fail('INVALID_MODE');
-    await generate(dependencies, await readRequest(), state);
+    if (!['--generate', '--recover-reference'].includes(mode)) throw fail('INVALID_MODE');
+    await generate(dependencies, await readRequest(), state, mode === '--recover-reference');
   } finally { release(); }
 }
 if (require.main === module) main().catch(error => {
