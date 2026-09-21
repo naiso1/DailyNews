@@ -36,7 +36,7 @@ from dailynews.collection_digest import collection_window, published_news, publi
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
 from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
-                                        extract_evidence, assessment_instructions, exterior_scope_rules)
+                                        extract_evidence, assessment_prompt, exterior_scope_rules)
 from dailynews.feedback_snapshot import load_feedback_snapshot
 
 EDITION = get_edition()
@@ -1466,12 +1466,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
                 dict(source_article, evidence=cached.get("evidence"), reason=cached.get("reason")), rules)["decision"] == "keep"):
             return cached
         LLM_CACHE.pop(cache_key, None)
-    prompt = (assessment_instructions() +
-        f"Title: {title}\n"
-        f"Article/snippet: {content}\n"
-        f"Japanese summary if available: {summary}\n"
-        f"URL: {url}\n"
-    )
+    prompt = assessment_prompt(title, content, url)
     if EDITION.id == "exterior":
         prompt = exterior_rules.assessment_prompt(title, content, url, summary)
     content_payload = prompt
@@ -1493,6 +1488,11 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         ],
         "temperature": 0.1,
     }
+    if EDITION.id == "interior":
+        # A partial assistant JSON reply can make this model complete an empty
+        # template instead of assessing the source. The schema now defines the
+        # output format, so begin a normal user -> assistant exchange.
+        payload["messages"] = payload["messages"][:1]
     try:
         resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200 and used_image:

@@ -27,6 +27,20 @@ def useful_article():
 
 
 class EditorialPolicyTests(unittest.TestCase):
+    def test_real_local_responses_keep_material_exclude_seat_and_hold_summary_contamination(self):
+        fixture = json.loads((ROOT / "tests/fixtures/editorial_assessment_responses.json").read_text(encoding="utf-8"))
+        for case in fixture["cases"]:
+            with self.subTest(case=case["case"]):
+                assessed = dict(case["article"], evidence=case["assessment"].get("evidence"),
+                                reason=case["assessment"].get("reason"))
+                policy = apply_policy(assessed)
+                self.assertEqual(policy["decision"], case["expected_decision"])
+                if policy["decision"] == "keep":
+                    self.assertGreaterEqual(case["assessment"]["score"], 60)
+                    self.assertEqual(evidence_problems(assessed), [])
+                elif policy["decision"] == "hold":
+                    self.assertIn("source_quote_not_found", policy["reason"])
+
     def test_feedback_seven_removed_two_recurrences_and_two_useful_material_articles(self):
         fixture = json.loads((ROOT / "tests/fixtures/editorial_feedback_cases.json").read_text(encoding="utf-8"))
         self.assertEqual(len(fixture["cases"]), 11)
@@ -65,6 +79,16 @@ class EditorialPolicyTests(unittest.TestCase):
         del article["originalDesc"]
         article.update({"タイトル": "", "内容": ""})
         self.assertIn("source_quote_not_found", apply_policy(article)["reason"])
+
+    def test_quote_must_be_one_passage_within_either_title_or_body_and_at_most_240_characters(self):
+        article = useful_article()
+        article["evidence"]["source_quote"] = article["originalTitle"] + " " + article["originalDesc"]
+        self.assertIn("source_quote_not_found", apply_policy(article)["reason"])
+        article["originalDesc"] = "ドアトリムの表皮材" + "あ" * 240
+        article["evidence"]["source_quote"] = article["originalDesc"][:241]
+        self.assertIn("source_quote_not_found", apply_policy(article)["reason"])
+        article["evidence"]["source_quote"] = article["originalDesc"][:240]
+        self.assertEqual(evidence_problems(article), [])
 
     def test_lighting_classifies_installation_not_generic_illumination(self):
         cases = [(("室内のアンビエント照明", "ドアトリムにライトを配置"), "interior"),
@@ -251,6 +275,24 @@ class InteriorSelectionPolicyTests(unittest.TestCase):
         with patch.object(collector, "USE_LLM", True), patch.object(collector, "_post_llm", return_value=self.response('{}')) as request, redirect_stdout(io.StringIO()):
             self.assertIsNone(collector.call_llm_interior_assessment(article["title"], article["desc"]))
         request.assert_called_once()
+
+    def test_assessment_uses_original_source_without_generated_summary_or_prefilled_reply(self):
+        article = useful_article()
+        generated_summary = "要約だけが主張する未確認の燃費50パーセント改善"
+        valid = {"score": 83, "reason": "表皮一体操作部を比較できる", "evidence": article["evidence"], "image_interior": None}
+        with patch.object(collector, "USE_LLM", True), patch.object(collector, "_post_llm", return_value=self.response(json.dumps(valid))) as request, redirect_stdout(io.StringIO()):
+            result = collector.call_llm_interior_assessment(article["title"], article["desc"], summary=generated_summary)
+        self.assertEqual(result["policy_decision"], "keep")
+        messages = request.call_args.kwargs["json"]["messages"]
+        self.assertEqual([message["role"] for message in messages], ["user"])
+        prompt = messages[0]["content"]
+        self.assertNotIn(generated_summary, prompt)
+        self.assertIn(article["title"], prompt)
+        self.assertIn(article["desc"], prompt)
+        schema = json.loads(next(line for line in prompt.splitlines() if line.startswith('{"type":"object"')))
+        self.assertEqual(set(schema["properties"]["evidence"]["required"]), set(EVIDENCE_COLUMNS))
+        self.assertNotIn('"default"', json.dumps(schema))
+        self.assertNotIn('"examples"', json.dumps(schema))
 
 
 if __name__ == "__main__":

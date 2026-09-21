@@ -2,7 +2,7 @@
 import re
 import unicodedata
 
-POLICY_VERSION = "interior-development-value-v1"
+POLICY_VERSION = "interior-development-value-v2"
 EVIDENCE_COLUMNS = {
     "target_component": "採用根拠_対象部品",
     "new_information": "採用根拠_新情報",
@@ -118,7 +118,7 @@ def evidence_problems(article, evidence=None):
         return ["generic_or_template_evidence"]
     title, body = article_source(article)
     quote = _text(evidence["source_quote"])
-    if not 8 <= len(quote) <= 240 or quote.casefold() not in f"{title} {body}".casefold():
+    if not 8 <= len(quote) <= 240 or not any(quote.casefold() in part.casefold() for part in (title, body)):
         return ["source_quote_not_found"]
     if len(_text(evidence["new_information"])) < 8 or len(_text(evidence["development_reference"])) < 12:
         return ["insufficient_specificity"]
@@ -188,18 +188,49 @@ def apply_policy(article, rules=(), *, require_evidence=True):
 
 def assessment_instructions():
     return (
-        "Assess usefulness to passenger-car INTERIOR component development, not general automotive interest.\n"
-        "A standalone seat launch, dimensions, fitment or price is normally out of scope. Keep concrete transferable "
-        "upholstery, trim, sensing, HMI, material-process or cabin comfort engineering information.\n"
-        "Motorcycles/riding equipment, consumer loan procedures, tourism, space history and exterior-only lighting "
-        "are out of scope unless the source explicitly describes transferable cabin technology.\n"
-        "Return score (integer 0-100), reason, image_interior (boolean/null), and evidence object with four strings: "
-        "target_component, new_information, development_reference, source_quote.\n"
-        "target_component names the relevant interior part or technology. new_information describes what specifically changed. "
-        "development_reference explains the concrete comparison, material/process choice, design constraint or test that the "
-        "source can inform; describe proposed applications as hypotheses. source_quote is an 8-240 character exact passage copied from "
-        "the ORIGINAL title/article that supports the new information, including the component or technology.\n"
-        "Do not copy illustrative reasons or use generic claims such as useful for interior development. "
-        "If those fields cannot be grounded, leave them empty and score below 40; the article will be held or excluded. "
-        "An attractive cabin image never replaces textual evidence. Do not add benefits absent from the source.\n"
+        "乗用車の内装部品開発に役立つ記事か、以下の原文タイトルと原文本文・抜粋を読んで判定してください。\n"
+        "先に原文に現れる具体的な部品・素材名と特性を照合し、evidenceの根拠欄を作成してからscoreを決めてください。"
+        "裏付けのある情報だけを使い、次の優先順位で判定してください。\n"
+        "1. 自動車用（自動車レース用も含む）の表皮材・材料について、原文に具体的な素材名と特性"
+        "（触感、表面構造、清掃性など）がある場合は、まず素材比較の採用候補にしてください。"
+        "この条件に該当すれば、製品がシートでも『シート単体』として除外しません。"
+        "素材名と『高触感』『ヌバック風合成皮革』のような定性的な特性の組合せだけでも、この条件を満たします。"
+        "原文の素材名と特性をもとに比較・応用を今後の検討仮説として書けます。"
+        "採用候補はscoreを60以上とし、根拠4項目を実際の原文から作成してください。\n"
+        "2. 上の素材条件に該当しない場合も、加飾・センシング・HMI・材料工程・車室内の快適性などの"
+        "具体的な新情報があれば採用候補です。素材や機能の知見がなく、シート単体の発売・寸法・装着適合・"
+        "価格だけの記事は原則対象外です。原文にない性能や数値は作らないでください。\n"
+        "3. 二輪車・ライディング用品、購入ローン手続、観光、宇宙史、外装照明だけの記事は対象外です。"
+        "この段落の分野だけは、原文に乗用車内装への具体的な技術転用が明記される場合に例外を検討できます。"
+        "この例外条件を、1の自動車用素材記事に適用しないでください。"
+        "『自動車レース用』『car racing』『スポーツシート』『バケットシート』は自動車用として読み、"
+        "二輪用と推測しないでください。二輪の判定には原文の明示が必要です。\n"
+        "出力は記事を評価したJSONオブジェクトだけにしてください。次は型と必須キーを定義するJSON Schemaです。"
+        "完成例ではありません。schema自体を出力せず、原文を評価して各値を作成してください。\n"
+        '{"type":"object","required":["evidence","score","reason","image_interior"],'
+        '"additionalProperties":false,"properties":{"evidence":{"type":"object","required":["target_component","new_information",'
+        '"development_reference","source_quote"],"additionalProperties":false,"properties":{'
+        '"target_component":{"type":"string"},"new_information":{"type":"string"},'
+        '"development_reference":{"type":"string"},"source_quote":{"type":"string","maxLength":240}}},'
+        '"score":{"type":"integer","minimum":0,"maximum":100},"reason":{"type":"string","minLength":1},'
+        '"image_interior":{"type":["boolean","null"]}}}\n'
+        '入れ子のキーは必ず "evidence" とし、"evidence_object" に変更しないでください。'
+        "scoreは関連度0～100、reasonは採否の理由を日本語で書き、対象外でも空欄にしないでください。"
+        "画像未提供ならimage_interiorはnullです。\n"
+        "evidence.target_componentは具体的な対象部品・技術名、new_informationは原文で確認できる新情報、"
+        "development_referenceは材料比較・設計・試験など開発でどう参考にするかを、日本語で具体的に書いてください。"
+        "source_quoteは、その新情報と部品・技術を裏付ける原文タイトルまたは本文の連続した一節だけを、"
+        "8～240文字で原文のまま引用してください。入力の見出しラベル・URLや別の箇所をつなげないでください。"
+        "原文にない内容を採用根拠へ追加しないでください。"
+        "根拠が確認できる採用候補では4項目すべてを記入してください。根拠不足ならscoreを40未満とし、"
+        "裏付けられない根拠欄は空にしてください。『内装開発に役立つ』など汎用理由や例文のコピーを避けてください。"
+        "内装の画像だけでは本文の根拠を代用できません。\n"
     )
+
+
+def assessment_prompt(title, content, url=""):
+    """Keep generated summaries out of the evidence-only assessment input."""
+    return (assessment_instructions() + "\n以下だけが判定対象の原文資料です。\n"
+            f"<original_title>\n{title}\n</original_title>\n"
+            f"<original_body>\n{content}\n</original_body>\n"
+            f"記事URL: {url}\n")
