@@ -658,6 +658,24 @@ def store_exterior_assessment(item, assessment):
         item["トレンド分類"] = assessment.get("trend_topic", inferred[1])
 
 
+def interior_evidence_source(item):
+    """Keep the original article body used for assessment in the saved row."""
+    content = str(item.get("内容", "") or "").strip()
+    if EDITION.id != "interior" or not USE_LLM:
+        return content
+    url = item.get("URL", "")
+    if not is_valid_article_url(url, allow_google_news=False):
+        return content
+    article_text = fetch_article_text(url)
+    if (isinstance(article_text, str) and len(article_text) >= 150
+            and len(article_text) > len(content) and not unusable_text(article_text)):
+        # Summaries are generated text and must never become source evidence.
+        # Persist the same raw body that the evidence validator will inspect.
+        content = article_text
+        item["内容"] = content
+    return content
+
+
 def split_exterior_reassessment(frame, target_dates):
     """Re-review requested dates without losing other dates or forcing acceptance."""
     if frame.empty:
@@ -2844,6 +2862,13 @@ def apply_interior_selection_policy(work, candidates, protected_urls, rules):
             continue
         policy = apply_editorial_policy(article, rules)
         if policy["decision"] == "hold" and USE_LLM:
+            previous_content = row.get("内容", "")
+            interior_evidence_source(row)
+            if row.get("内容", "") != previous_content:
+                work.at[index, "内容"] = row["内容"]
+                candidates.at[index, "内容"] = row["内容"]
+                changed = True
+                article = collector_article(row)
             assessment = call_llm_interior_assessment(
                 article["originalTitle"], article["originalDesc"], url=article["url"],
                 summary=f"{article['title']} {article['desc']}")
@@ -3940,6 +3965,8 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         if USE_LLM and item.get("LLM判定") == "非対象":
             item["LLM後処理"] = "スキップ"
         else:
+            if EDITION.id == "interior" and not is_paper_item:
+                content = interior_evidence_source(item)
             # 要約（日本語）を生成
             summary_title, summary_body = summarize_article(title, content, item.get("URL", ""), country)
             if summary_title:
@@ -4170,6 +4197,8 @@ def enrich_existing_df(df):
                     except Exception:
                         pass
                 continue
+        if EDITION.id == "interior" and not is_paper_row:
+            content = interior_evidence_source(row)
         # 要約（日本語）を生成
         summary_title, summary_body = summarize_article(title, content, row.get("URL", ""), row.get("国", ""))
         if summary_title:

@@ -1389,9 +1389,8 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
 def prepare_exterior_idea_sources(ideas: list, source_items: list) -> list:
     """Keep valid citations per idea, including citations shared by other ideas."""
     allowed_ids = build_allowed_news_ids(source_items)
-    anchor_groups = select_idea_anchor_groups(source_items, need_count=len(ideas))
     prepared = []
-    for index, original in enumerate(ideas):
+    for original in ideas:
         idea = dict(original)
         raw_ids = idea.get("sourceNewsIds") or []
         if not isinstance(raw_ids, list):
@@ -1400,15 +1399,61 @@ def prepare_exterior_idea_sources(ideas: list, source_items: list) -> list:
         unknown = [value for value in source_ids if value not in allowed_ids]
         if unknown:
             raise RuntimeError("Exterior idea references unknown news IDs: " + ", ".join(unknown))
-        if not source_ids and index < len(anchor_groups):
-            source_ids = [item["newsId"].strip().lower() for item in anchor_groups[index]
-                          if item.get("newsId", "").strip().lower() in allowed_ids]
+        if not source_ids:
+            # Recover only references already written by the model. Assigning an
+            # arbitrary anchor here can disguise a genuinely unsourced idea.
+            source_ids = sorted(analysis_unique_refs(idea.get("desc", "")))
+            if set(source_ids) - allowed_ids:
+                raise RuntimeError("Exterior idea references unknown news IDs")
         if not source_ids:
             raise RuntimeError("Exterior idea has no valid source article")
+        if analysis_unique_refs(idea.get("desc", "")) - set(source_ids):
+            raise RuntimeError("Exterior idea description disagrees with sourceNewsIds")
         idea["sourceNewsIds"] = source_ids[:2]
-        idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(idea['sourceNewsIds'])}]"
+        desc = strip_idea_refs(idea.get("desc", ""))
+        numbers = {re.sub(r"^[a-z]+", "", value) for value in idea["sourceNewsIds"]}
+        # [50] is a malformed duplicate of the explicitly supplied jp50. Do not
+        # infer a country for unknown numeric references or remove measurements.
+        desc = re.sub(r"\[\s*(\d+)\s*\]", lambda m: "" if m.group(1) in numbers else m.group(0), desc)
+        if re.search(r"\[\s*\d+(?:\s*,\s*\d+)*\s*\]", desc):
+            raise RuntimeError("Exterior idea has an unresolved numeric news reference")
+        idea["desc"] = f"{desc.strip()} [{','.join(idea['sourceNewsIds'])}]"
         prepared.append(idea)
     return prepared
+
+
+def validated_exterior_ideas(raw_ideas, source_items, history_ideas=(), retained=()):
+    """Keep independent valid ideas when another generated idea is unusable."""
+    kept = list(retained)
+    for candidate in raw_ideas if isinstance(raw_ideas, list) else []:
+        if len(kept) >= 2:
+            break
+        if not isinstance(candidate, dict):
+            continue
+        picked = dedupe_ideas([candidate], list(history_ideas), limit=1)
+        if not picked or not all(has_japanese_text(picked[0].get(field, "")) for field in ("title", "desc")):
+            continue
+        text = f"{picked[0]['title']} {picked[0]['desc']}"
+        if any(_similarity(text, f"{idea.get('title', '')} {idea.get('desc', '')}") >= 0.78 for idea in kept):
+            continue
+        try:
+            kept.extend(prepare_exterior_idea_sources(picked, source_items))
+        except RuntimeError as error:
+            print(f"[IDEAS] rejected invalid source references: {error}")
+    return kept
+
+
+def checkpoint_exterior_progress(checkpoint, date_key, country, source_items, analysis, ideas, dry_run=False):
+    """Save accepted components before any further model call can fail."""
+    valid_analysis = analysis if exterior_analysis_complete(analysis, source_items) else ""
+    if not valid_analysis and not ideas:
+        return
+    checkpoint["countries"][country] = {
+        "fingerprint": exterior_checkpoint_fingerprint(date_key, source_items),
+        "analysis": valid_analysis, "ideas": ideas,
+    }
+    if not dry_run:
+        write_exterior_checkpoint(date_key, checkpoint)
 
 
 def make_country_prompt(
@@ -1635,8 +1680,8 @@ def write_exterior_analysis_failure(date_key, country, source_items, candidates,
 
 
 def finalize_exterior_analysis(endpoint, model, country, date_key, analysis, source_items,
-                               prior_candidates=(), dry_run=False):
-    """One bounded repair, with conservative reuse; never invent citation IDs."""
+                               prior_candidates=(), dry_run=False, max_attempts=1):
+    """Bounded repair with conservative reuse; never invent citation IDs."""
     if exterior_analysis_complete(analysis, source_items):
         return analysis
     candidates = [("final", analysis)] + [(f"prior_{i}", text) for i, text in enumerate(prior_candidates)]
@@ -1679,6 +1724,24 @@ def finalize_exterior_analysis(endpoint, model, country, date_key, analysis, sou
             print(f"[ANALYSIS] {country}: omitted an uncited closing inference; "
                   f"retained {len(analysis_unique_refs(prefix))} source references.")
             return prefix
+    # A second, shorter response is useful when the model keeps adding uncited
+    # conclusions. Revalidate the full text; never attach citations in code.
+    if allowed and max_attempts > 1 and repair_error != "LLM_UNAVAILABLE":
+        retry_prompt = prompt + (
+            "\n前回も引用のない文が残りました。今回は短い日本語3文以内とし、"
+            "各文を直接支える候補記事IDを必ず句点より前に付けてください。"
+            "根拠を示せない結論は書かない。事実と仮説の区別や留保は残す。\n"
+        )
+        try:
+            repaired = call_llm(endpoint, model, retry_prompt).strip()
+            repaired = re.sub(r"^```(?:text|markdown)?\s*|\s*```$", "", repaired, flags=re.IGNORECASE)
+            repaired = normalize_analysis_refs_per_sentence(bracket_bare_allowed_ids(repaired, allowed))
+            candidates.append(("final_repair_2", repaired))
+            if exterior_analysis_complete(repaired, source_items):
+                print(f"[ANALYSIS] {country}: second bounded citation repair accepted.")
+                return repaired
+        except Exception:
+            repair_error = "LLM_UNAVAILABLE"
     reasons = ",".join(exterior_analysis_failure_reasons(analysis, source_items))
     print(f"[ANALYSIS] {country}: final validation failed ({reasons}).")
     if not dry_run:
@@ -1745,6 +1808,7 @@ def read_exterior_checkpoint(date_key):
 
 def write_exterior_checkpoint(date_key, checkpoint):
     target = exterior_checkpoint_path(date_key)
+    target.parent.mkdir(parents=True, exist_ok=True)
     temporary = target.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     os.replace(temporary, target)
@@ -2086,20 +2150,24 @@ def main():
                 if not grouped.get(key):
                     continue
                 attempted_insight_countries += 1
+                retained_analysis = ""
+                retained_ideas = []
                 if use_checkpoint:
                     previous = checkpoint["countries"].get(key, {})
-                    if (previous.get("fingerprint") == exterior_checkpoint_fingerprint(insight_date_label, grouped[key])
-                            and exterior_analysis_complete(previous.get("analysis"), grouped[key])
-                            and isinstance(previous.get("ideas"), list) and len(previous["ideas"]) == 2):
-                        try:
-                            previous_ideas = prepare_exterior_idea_sources(previous["ideas"], grouped[key])
-                        except RuntimeError as error:
-                            print(f"[IDEAS] {key}: invalid checkpoint citations; regenerate: {error}")
-                        else:
-                            analysis_out[key] = previous["analysis"]
-                            ideas_out[key] = previous_ideas
+                    if (isinstance(previous, dict)
+                            and previous.get("fingerprint") == exterior_checkpoint_fingerprint(insight_date_label, grouped[key])):
+                        if exterior_analysis_complete(previous.get("analysis"), grouped[key]):
+                            retained_analysis = previous["analysis"]
+                        retained_ideas = validated_exterior_ideas(previous.get("ideas", []), grouped[key])
+                        analysis_out[key] = retained_analysis
+                        ideas_out[key] = retained_ideas
+                        checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
+                                                     retained_analysis, retained_ideas, args.dry_run)
+                        if retained_analysis and len(retained_ideas) == 2:
                             print(f"[IDEAS] {key}: reused completed exterior checkpoint")
                             continue
+                        print(f"[IDEAS] {key}: resumed partial checkpoint "
+                              f"(analysis={bool(retained_analysis)}, ideas={len(retained_ideas)}/2)")
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
                 idea_anchor_groups = select_idea_anchor_groups(grouped[key], need_count=2)
                 prompt = make_country_prompt(
@@ -2107,10 +2175,14 @@ def main():
                     key,
                     grouped[key],
                     prompt_template,
-                    history_ideas=history_ideas,
-                    need_count=2,
-                    idea_anchor_groups=idea_anchor_groups,
+                    history_ideas=history_ideas + retained_ideas,
+                    need_count=2 - len(retained_ideas),
+                    idea_anchor_groups=idea_anchor_groups[len(retained_ideas):],
                 )
+                if retained_analysis:
+                    prompt += "\n【最優先】考察は検証済みなのでanalysisは空文字。不足しているideasだけを生成すること。\n"
+                elif len(retained_ideas) == 2:
+                    prompt += "\n【最優先】2案は検証済みなのでideasは空配列。analysisだけを生成すること。\n"
                 if args.replace_ideas_only:
                     prompt += (
                         "\n【最優先】今回は既存の考察を保持してideasだけを差し替える。"
@@ -2127,7 +2199,12 @@ def main():
                     data = None
                     print(f"LLM error ({key}): {e}")
                 if data and isinstance(data, dict):
-                    if not args.replace_ideas_only:
+                    if use_checkpoint:
+                        deduped = validated_exterior_ideas(data.get("ideas", []), grouped[key], history_ideas, retained_ideas)
+                        initial_analysis = retained_analysis or normalize_analysis_refs_per_sentence(data.get("analysis", ""))
+                        checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
+                                                     initial_analysis, deduped, args.dry_run)
+                    if not args.replace_ideas_only and not retained_analysis:
                         analysis_text = normalize_analysis_refs_per_sentence(data.get("analysis", ""))
                         allowed_ids = build_allowed_news_ids(grouped[key])
                         analysis_text = filter_analysis_refs_to_allowed(analysis_text, allowed_ids)
@@ -2174,10 +2251,17 @@ def main():
                                 analysis_final, grouped[key],
                                 prior_candidates=(analysis_initial, analysis_before_shortening),
                                 dry_run=args.dry_run,
+                                max_attempts=2,
                             )
                         analysis_out[key] = analysis_final
-                    deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
-                    if len(deduped) < 2:
+                    if not use_checkpoint:
+                        deduped = dedupe_ideas(data.get("ideas", []), history_ideas, limit=2)
+                    else:
+                        checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
+                                                     analysis_out.get(key), deduped, args.dry_run)
+                    for retry_index in range(2 if use_checkpoint else 1):
+                        if len(deduped) >= 2:
+                            break
                         retry_prompt = make_country_prompt(
                             insight_date_label,
                             key,
@@ -2187,7 +2271,7 @@ def main():
                             need_count=(2 - len(deduped)),
                             idea_anchor_groups=idea_anchor_groups[len(deduped):],
                         )
-                        if args.replace_ideas_only:
+                        if args.replace_ideas_only or use_checkpoint:
                             retry_prompt += (
                                 "\n【最優先】analysisは空文字にし、不足しているideasだけを生成すること。\n"
                             )
@@ -2200,12 +2284,17 @@ def main():
                             retry_data = None
                             print(f"LLM retry error ({key}): {e}")
                         if retry_data and isinstance(retry_data, dict):
-                            add_ideas = dedupe_ideas(
-                                retry_data.get("ideas", []),
-                                history_ideas + deduped,
-                                limit=(2 - len(deduped)),
-                            )
-                            deduped.extend(add_ideas)
+                            if use_checkpoint:
+                                deduped = validated_exterior_ideas(retry_data.get("ideas", []), grouped[key], history_ideas, deduped)
+                                checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
+                                                             analysis_out.get(key), deduped, args.dry_run)
+                            else:
+                                add_ideas = dedupe_ideas(
+                                    retry_data.get("ideas", []),
+                                    history_ideas + deduped,
+                                    limit=(2 - len(deduped)),
+                                )
+                                deduped.extend(add_ideas)
                     allowed_ids = build_allowed_news_ids(grouped[key])
                     if EDITION.id == "exterior":
                         deduped = prepare_exterior_idea_sources(deduped[:2], grouped[key])
@@ -2225,13 +2314,9 @@ def main():
                                 idea["desc"] = f"{strip_idea_refs(idea.get('desc', ''))} [{','.join(source_ids)}]"
                     ideas_out[key] = deduped[:2]
                     print(f"[IDEAS] {key}: accepted {len(ideas_out[key])}/2")
-                    if use_checkpoint and exterior_analysis_complete(analysis_out.get(key), grouped[key]) and len(ideas_out.get(key, [])) == 2:
-                        checkpoint["countries"][key] = {
-                            "fingerprint": exterior_checkpoint_fingerprint(insight_date_label, grouped[key]),
-                            "analysis": analysis_out[key], "ideas": ideas_out[key],
-                        }
-                        if not args.dry_run:
-                            write_exterior_checkpoint(insight_date_label, checkpoint)
+                    if use_checkpoint:
+                        checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
+                                                     analysis_out.get(key), ideas_out[key], args.dry_run)
                 else:
                     draft_parts.append(f"[{key}]\n{llm_text.strip() if llm_text else 'LLM出力に失敗しました。'}\n")
             if use_checkpoint:
@@ -2241,7 +2326,7 @@ def main():
                 if incomplete:
                     raise RuntimeError(
                         "Exterior insights incomplete for: " + ", ".join(incomplete)
-                        + "; completed regions are checkpointed, publication marker was not advanced."
+                        + "; accepted regional components are checkpointed, publication marker was not advanced."
                     )
             if args.replace_ideas_only:
                 missing_ideas = [

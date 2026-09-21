@@ -141,6 +141,8 @@ def main():
     parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--edition", choices=["interior", "exterior"])
     parser.add_argument("--build-only", action="store_true")
+    parser.add_argument("--resume-from-sheet", action="store_true",
+                        help="Resume from the existing date-validated collection CSV without collecting again.")
     args = parser.parse_args()
     config = json.loads((RUNTIME / "workstation.json").read_text(encoding="utf-8-sig"))
     if not args.check_only and not config.get("enabled"):
@@ -178,6 +180,8 @@ def main():
             argv = [sys.executable.replace("pythonw.exe", "python.exe"), "-B", "-u", str(script), "--edition", edition_id]
             if args.build_only:
                 argv.append("--build-only")
+            if args.resume_from_sheet:
+                argv.append("--resume-from-sheet")
             print("EDITION START " + edition_id, flush=True)
             try:
                 result = subprocess.run(argv, cwd=script.parent, env=env,
