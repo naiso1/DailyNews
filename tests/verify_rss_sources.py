@@ -6,14 +6,14 @@ entries per feed are checked with the collection script's actual helpers.
 
 import argparse
 import ast
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from io import BytesIO
 import json
 from pathlib import Path
 import re
 import sys
 from types import SimpleNamespace
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 from urllib.request import getproxies
 
 from bs4 import BeautifulSoup
@@ -35,8 +35,14 @@ def collection_helpers(session):
     if len(nodes) != len(names):
         raise RuntimeError("Collection helpers changed; review the verifier before running.")
     from dateutil import parser
-    env = {"re": re, "BeautifulSoup": BeautifulSoup, "parser": parser, "urlparse": urlparse,
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text
+    env = {"re": re, "BeautifulSoup": BeautifulSoup, "parser": parser, "urlparse": urlparse, "urljoin": urljoin,
            "EDITION": SimpleNamespace(id="interior"),
+           "JST": timezone(timedelta(hours=9)),
+           "ARTICLE_TEXT_VERSION": ARTICLE_TEXT_VERSION, "decode_html": decode_html,
+           "is_error_page": is_error_page, "unusable_text": unusable_text,
            "requests": SimpleNamespace(get=lambda url, **kwargs: bounded_get(session, url)),
            "_article_text_cache": {}}
     constants = {"SUSPICIOUS_IMAGE_MARKERS", "HEADERS", "SUMMARY_HTML_CHARS"}
@@ -65,8 +71,9 @@ def bounded_get(session, url):
         return response
 
 
-def check_feed(name, url, count, session, helpers):
-    result = {"name": name, "url": url, "passed": False, "samples": []}
+def check_feed(name, url, count, session, helpers, *, min_width=600, min_height=300):
+    result = {"name": name, "url": url, "passed": False, "samples": [],
+              "minimum_image_size": [min_width, min_height]}
     try:
         response = bounded_get(session, url)
         result.update(status=response.status_code, final_url=response.url)
@@ -81,7 +88,7 @@ def check_feed(name, url, count, session, helpers):
             try:
                 published = entry.get("published") or entry.get("updated")
                 sample["date"] = helpers["parse_date"](published)
-                image_url = helpers["extract_image_from_rss"](entry)
+                image_url = helpers["extract_image_from_rss"](entry, base_url=response.url)
                 sample["rss_image_url"] = image_url
                 if not sample["date"] or not image_url:
                     raise ValueError("The production parser cannot extract a date or RSS image.")
@@ -101,7 +108,7 @@ def check_feed(name, url, count, session, helpers):
                                   image_bytes=len(image_response.content))
                     variation = max(ImageStat.Stat(image.convert("RGB").resize((64, 64))).stddev)
                     sample["image_variation"] = round(variation, 2)
-                    if image.width < 600 or image.height < 300 or variation < 4:
+                    if image.width < min_width or image.height < min_height or variation < 4:
                         raise ValueError("Image is too small or appears blank.")
                 sample["passed"] = True
             except Exception as exc:
@@ -117,10 +124,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--feed", nargs=2, action="append", required=True, metavar=("NAME", "URL"))
     parser.add_argument("--samples", type=int, choices=range(1, 6), default=5)
+    parser.add_argument("--min-width", type=int, default=600,
+                        help="Minimum decoded image width in pixels (default: 600).")
+    parser.add_argument("--min-height", type=int, default=300,
+                        help="Minimum decoded image height in pixels (default: 300).")
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--windows-proxy", action="store_true",
                         help="Use the saved Windows proxy instead of inherited proxy variables.")
     args = parser.parse_args()
+    if args.min_width < 1 or args.min_height < 1:
+        parser.error("--min-width and --min-height must be positive pixel counts.")
     session = requests.Session()
     # Read the existing proxy configuration; do not modify system/env settings.
     session.trust_env = False
@@ -133,10 +146,12 @@ def main():
     session.headers.update(helpers["HEADERS"])
     report = {"checked_at": datetime.now(timezone.utc).isoformat(),
               "scope": "RSS parsing, sample article extraction and image decoding only",
-              "samples_per_feed": args.samples, "feeds": []}
+              "samples_per_feed": args.samples, "minimum_image_size": [args.min_width, args.min_height],
+              "feeds": []}
     for name, url in args.feed:
         print(f"[FEED] {name}", flush=True)
-        result = check_feed(name, url, args.samples, session, helpers)
+        result = check_feed(name, url, args.samples, session, helpers,
+                            min_width=args.min_width, min_height=args.min_height)
         report["feeds"].append(result)
         print(f"[{'PASS' if result['passed'] else 'FAIL'}] {name}", flush=True)
     args.report.parent.mkdir(parents=True, exist_ok=True)

@@ -386,5 +386,45 @@ window.DAILYNEWS_CONFIGURED_SOURCES = [
     "country": "中国",
     "name": "CarNewsChina - Sales",
     "rssUrl": "https://carnewschina.com/category/sales/feed/"
+  },
+  {
+    "country": "日本",
+    "name": "AutoProve",
+    "rssUrl": "https://autoprove.net/feed/"
+  },
+  {
+    "country": "米国",
+    "name": "Ars Technica - Cars",
+    "rssUrl": "https://arstechnica.com/cars/feed/"
+  },
+  {
+    "country": "米国",
+    "name": "Plastics Engineering - Automotive & Transportation",
+    "rssUrl": "https://www.plasticsengineering.org/c/industry/automotive-transportation/feed/"
+  },
+  {
+    "country": "欧州",
+    "name": "Automotive Testing Technology International",
+    "rssUrl": "https://www.automotivetestingtechnologyinternational.com/feed"
+  },
+  {
+    "country": "中国",
+    "name": "ChinaEVHome",
+    "rssUrl": "https://chinaevhome.com/feed/"
+  },
+  {
+    "country": "インド",
+    "name": "Car India",
+    "rssUrl": "https://carindia.in/feed/"
+  },
+  {
+    "country": "インド",
+    "name": "MotorOctane",
+    "rssUrl": "https://motoroctane.com/feed"
+  },
+  {
+    "country": "インド",
+    "name": "Motoroids",
+    "rssUrl": "https://www.motoroids.com/feed/"
   }
 ];

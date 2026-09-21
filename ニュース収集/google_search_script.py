@@ -672,54 +672,95 @@ def split_exterior_reassessment(frame, target_dates):
             item[field] = ""
     return frame.loc[~mask].copy(), records
 
-def extract_image_from_rss(entry):
-    """RSS/Atom?????????URL???"""
+def extract_image_from_rss(entry, base_url=""):
+    """Return a usable image URL carried by an RSS/Atom entry itself."""
+    from html import unescape
+
     candidates = []
     try:
-        media = entry.get("media_content", [])
-        if media and isinstance(media, list):
-            for m in media:
-                url = m.get("url") or m.get("href")
-                if url:
-                    candidates.append(str(url))
-        thumbs = entry.get("media_thumbnail", [])
-        if thumbs and isinstance(thumbs, list):
-            for m in thumbs:
-                url = m.get("url") or m.get("href")
-                if url:
-                    candidates.append(str(url))
-        enclosures = entry.get("enclosures", [])
-        if enclosures:
-            for enc in enclosures:
-                url = enc.get("url")
-                if url and "image" in str(enc.get("type", "")).lower():
-                    candidates.append(str(url))
-        links = entry.get("links", [])
-        if links:
-            for lnk in links:
-                if lnk.get("rel") == "enclosure" and "image" in str(lnk.get("type", "")).lower():
-                    url = lnk.get("href") or lnk.get("url")
-                    if url:
-                        candidates.append(str(url))
-        # summary / content:encoded 内の <img src="..."> を抽出
-        for html_field in [entry.get("summary", ""), *[c.get("value", "") for c in entry.get("content", [])]]:
-            if not html_field:
+        base_url = urljoin(base_url, str(entry.get("link") or "")) or base_url
+    except ValueError:
+        base_url = ""
+    image_extensions = (".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".bmp")
+    non_image_extensions = (".mp4", ".m4v", ".mov", ".webm", ".mp3", ".m4a", ".wav", ".pdf", ".svg")
+
+    def add(candidate):
+        if not isinstance(candidate, str) or not candidate.strip():
+            return
+        candidate = unescape(candidate).strip()
+        if candidate.startswith("//"):
+            candidate = "https:" + candidate
+        try:
+            candidate = urljoin(base_url, candidate)
+            parsed = urlparse(candidate)
+            if parsed.scheme.lower() not in ("http", "https") or not parsed.hostname:
+                return
+            if parsed.username or parsed.password or parsed.path.lower().endswith(non_image_extensions):
+                return
+        except ValueError:
+            return
+        if not is_suspicious_image_url(candidate) and candidate not in candidates:
+            candidates.append(candidate)
+
+    def add_media(media, *, thumbnail=False):
+        for item in media if isinstance(media, (list, tuple)) else []:
+            if not isinstance(item, dict):
                 continue
-            for m in re.finditer(r'<img[^>]+src=["\']?(https?[^"\'> ]+)', html_field):
-                candidates.append(m.group(1))
-    except Exception:
-        pass
-    if not candidates:
-        return ""
-    uniq = []
-    seen = set()
-    for c in candidates:
-        if c in seen:
+            candidate = item.get("url") or item.get("href") or ""
+            mime = str(item.get("type") or "").lower().split(";", 1)[0].strip()
+            medium = str(item.get("medium") or "").lower()
+            # media:content may contain videos; an image thumbnail is separate.
+            if (mime and not mime.startswith("image/")) or medium in ("video", "audio", "document"):
+                continue
+            try:
+                image_extension = urlparse(str(candidate)).path.lower().endswith(image_extensions)
+            except ValueError:
+                continue
+            if thumbnail or mime.startswith("image/") or medium == "image" or image_extension:
+                add(candidate)
+
+    add_media(entry.get("media_content", []))
+    add_media(entry.get("media_thumbnail", []), thumbnail=True)
+    add_media(entry.get("enclosures", []))
+    links = entry.get("links", [])
+    add_media([item for item in links if isinstance(item, dict) and item.get("rel") == "enclosure"]
+              if isinstance(links, (list, tuple)) else [])
+    item_image = entry.get("image", "")
+    if isinstance(item_image, dict):
+        item_image = item_image.get("href") or item_image.get("url") or ""
+    add(item_image)
+    # BeautifulSoup also handles uppercase tags, lazy images and HTML entities.
+    content = entry.get("content", [])
+    content = content if isinstance(content, (list, tuple)) else []
+    fields = [entry.get("summary", ""), *[item.get("value", "") for item in content if isinstance(item, dict)]]
+    for html_field in fields:
+        if not isinstance(html_field, str) or not html_field:
             continue
-        seen.add(c)
-        uniq.append(c)
-    uniq.sort(key=rank_image_url, reverse=True)
-    return uniq[0]
+        for img in BeautifulSoup(html_field, "html.parser").find_all("img"):
+            for attr in ("srcset", "data-srcset"):
+                variants = []
+                remaining = str(img.get(attr) or "")
+                while remaining.strip(" ,\t\r\n"):
+                    remaining = remaining.lstrip(" ,\t\r\n")
+                    parts = remaining.split(None, 1)
+                    candidate = parts[0]
+                    remaining = parts[1] if len(parts) > 1 else ""
+                    descriptor = ""
+                    if candidate.endswith(","):
+                        candidate = candidate.rstrip(",")
+                    elif remaining:
+                        descriptor, separator, remaining = remaining.partition(",")
+                        if not separator:
+                            remaining = ""
+                    size = re.fullmatch(r"(\d+(?:\.\d+)?)[wx]", descriptor.strip())
+                    # Keep commas inside CDN query values (e.g. resize=1200,800).
+                    variants.append((float(size.group(1)) if size else 0, candidate))
+                for _, candidate in sorted(variants, key=lambda value: value[0], reverse=True):
+                    add(candidate)
+            for attr in ("data-src", "data-original", "src"):
+                add(img.get(attr))
+    candidates.sort(key=rank_image_url, reverse=True)
+    return candidates[0] if candidates else ""
 
 def strip_expiring_params(url):
     """yimg.jp のクエリパラメータをすべて除去する（exp=, pri=, w=, h= など）。
@@ -807,7 +848,16 @@ def is_suspicious_image_url(url: str) -> bool:
     lower = url.strip().lower()
     if not lower.startswith("http"):
         return True
-    if any(marker in lower for marker in SUSPICIOUS_IMAGE_MARKERS):
+    marker_text = lower
+    try:
+        parsed = urlparse(lower)
+        if parsed.hostname == "imagecn.gasgoo.com" and parsed.path.startswith("/moblogo/news/ueditor/"):
+            # Verified article-photo directory; "moblogo" is not a logo file.
+            # The filename, query and every other placeholder marker still apply.
+            marker_text = lower.replace("/moblogo/news/ueditor/", "/news/ueditor/", 1)
+    except ValueError:
+        return True
+    if any(marker in marker_text for marker in SUSPICIOUS_IMAGE_MARKERS):
         return True
     m = re.search(r"[/_-]w(\d{1,4})h(\d{1,4})[/_-]", lower)
     if m:
@@ -2251,10 +2301,13 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
 def fetch_article_text(url):
     if not url or not isinstance(url, str) or not url.startswith("http"):
         return ""
-    cache_key = (ARTICLE_TEXT_VERSION, url) if EDITION.id == "exterior" else url
+    host = (urlparse(url).hostname or "").lower().removeprefix("www.")
+    # Gasgoo omits an HTTP charset; requests.text otherwise corrupts its UTF-8.
+    strict_source = EDITION.id == "exterior" or host == "auto.gasgoo.com"
+    cache_key = (ARTICLE_TEXT_VERSION, url) if strict_source else url
     if cache_key in _article_text_cache:
         cached_text = _article_text_cache[cache_key]
-        if EDITION.id != "exterior" or not unusable_text(cached_text):
+        if not strict_source or not unusable_text(cached_text):
             return cached_text
         _article_text_cache.pop(cache_key, None)
     try:
@@ -2262,21 +2315,20 @@ def fetch_article_text(url):
         if resp.status_code != 200:
             print(f"  [FETCH_FAIL] HTTP {resp.status_code}: {url}")
             return ""
-        html = decode_html(resp.content, resp.headers.get("Content-Type", "")) if EDITION.id == "exterior" else resp.text
+        html = decode_html(resp.content, resp.headers.get("Content-Type", "")) if strict_source else resp.text
     except Exception as e:
         print(f"  [FETCH_FAIL] {type(e).__name__}: {url}")
         return ""
     soup = BeautifulSoup(html, "html.parser")
-    if EDITION.id == "exterior" and is_error_page(soup):
+    if strict_source and is_error_page(soup):
         print(f"  [FETCH_BLOCKED] Access/error page is not article evidence: {url}")
         return ""
     for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
-    if EDITION.id == "exterior":
+    if strict_source:
         for tag in soup.select("nav, [role='navigation']"):
             tag.decompose()
-    host = (urlparse(url).hostname or "").lower().removeprefix("www.")
-    if EDITION.id == "exterior" and host == "auto.gasgoo.com":
+    if host == "auto.gasgoo.com":
         main = soup.select_one("#ArticleContent")
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
@@ -2286,13 +2338,13 @@ def fetch_article_text(url):
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
             return ""
-    elif host == "automotiveinteriorsworld.com":
+    elif host in ("automotiveinteriorsworld.com", "automotivetestingtechnologyinternational.com"):
         # This site's navigation contains <article> cards before the actual story.
         main = soup.select_one("article.type-post .entry-content") or soup.select_one("article.type-post")
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
             return ""
-    elif host == "autodesignmagazine.com":
+    elif host in ("autodesignmagazine.com", "plasticsengineering.org"):
         main = soup.select_one("article .post-content") or soup.select_one(".post-content")
         if main is None:
             print(f"  [FETCH_SHORT] Article body not found: {url}")
@@ -2318,7 +2370,7 @@ def fetch_article_text(url):
         main = soup.find("article") or soup.find("main") or soup.body or soup
     text = " ".join(main.stripped_strings)
     text = normalize_text(text)
-    if EDITION.id == "exterior" and unusable_text(text):
+    if strict_source and unusable_text(text):
         print(f"  [FETCH_BLOCKED] Unusable article text: {url}")
         return ""
     if len(text) > SUMMARY_HTML_CHARS:
@@ -3365,6 +3417,7 @@ def fetch_from_rss(target_dates):
                     SOURCE_FETCH_COUNTS["succeeded"] += 1
                 rss_item_image_map = extract_item_image_map_from_rss_xml(response.content)
                 count = 0
+                skipped_feed_images = 0
                 
                 for entry in feed.entries:
                     title = entry.get("title", "")
@@ -3375,6 +3428,16 @@ def fetch_from_rss(target_dates):
                         continue
                     if not is_target_date(pub_date, target_dates):
                         continue
+                    # Newly approved feeds must carry an article image in the
+                    # feed itself. Do not turn an image-less entry into a match
+                    # through page scraping or browser fallback.
+                    image_url_from_item = extract_image_from_rss(
+                        {"link": link, "image": rss_item_image_map.get(link, "")}, base_url=url)
+                    image_url = image_url_from_item or extract_image_from_rss(entry, base_url=url)
+                    require_feed_image = feed_info.get("require_feed_image") is True
+                    if require_feed_image and not image_url:
+                        skipped_feed_images += 1
+                        continue
                     
                     desc = ""
                     if 'summary' in entry:
@@ -3384,8 +3447,6 @@ def fetch_from_rss(target_dates):
                     if not desc and resolved_link:
                         desc = fetch_meta_description(resolved_link)
                     # ??URL?RSS?????
-                    image_url_from_item = rss_item_image_map.get(link, "")
-                    image_url = image_url_from_item or extract_image_from_rss(entry)
                     if image_url and "yimg.jp" in str(image_url).lower():
                         image_url = choose_best_yimg_variant(image_url)
                     if is_missing_url(image_url):
@@ -3399,6 +3460,9 @@ def fetch_from_rss(target_dates):
                             image_url = image_pw
                     # Yahoo yimg placeholder: fallback to og:image
                     if image_url and is_yimg_placeholder(image_url):
+                        if require_feed_image:
+                            skipped_feed_images += 1
+                            continue
                         alt = fetch_image_from_page(resolved_link) if resolved_link else ""
                         if alt:
                             image_url = alt
@@ -3417,6 +3481,8 @@ def fetch_from_rss(target_dates):
                 
                 if count > 0:
                     print(f"  ✓ [{name}] {count}件")
+                if skipped_feed_images:
+                    print(f"  [RSS_IMAGE_REQUIRED] [{name}] RSS画像なし/プレースホルダー {skipped_feed_images}件を除外")
                     
         except KeyboardInterrupt:
             print("  ✗ RSS取得を中断しました。")
