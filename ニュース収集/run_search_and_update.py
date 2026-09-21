@@ -983,6 +983,23 @@ def run_server_deploy(log_file):
     return health["release"]
 
 
+def refresh_editorial_settings(edition, *, offline=False):
+    """Refresh reviewed switches before selection without exposing feedback prose."""
+    from dailynews.feedback_snapshot import load_feedback_snapshot, sync_feedback_snapshot
+    if not offline:
+        try:
+            result = sync_feedback_snapshot(edition)
+            log(f"[EDITORIAL] {edition.id}: reviewed settings synced; "
+                f"rules={result['rule_count']}, excluded URLs={result['excluded_url_count']}.")
+        except Exception as exc:
+            # Use the last successful snapshot; never echo remote/auth responses.
+            log(f"[WARN] Editorial settings sync failed ({type(exc).__name__}); using saved settings and built-in policy.")
+    snapshot = load_feedback_snapshot(edition)
+    if snapshot["status"] != "fresh":
+        log(f"[WARN] Editorial settings status={snapshot['status']}; built-in policy remains active.")
+    return snapshot
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--edition", choices=["interior", "exterior"], default=EDITION.id)
@@ -1077,6 +1094,7 @@ def main():
     else:
         dates_arg = ",".join(target_dates)
         try:
+            refresh_editorial_settings(EDITION, offline=args.build_only)
             if args.resume_from_sheet:
                 log(f"[RESUME] Reusing sheet2 for {dates_arg}; RSS/search collection is skipped.")
             else:

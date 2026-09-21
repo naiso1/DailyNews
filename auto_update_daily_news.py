@@ -18,6 +18,8 @@ from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
 from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
+from dailynews.editorial_policy import apply_policy, classify_lighting, exterior_scope_rules, EVIDENCE_COLUMNS
+from dailynews.feedback_snapshot import load_feedback_snapshot
 
 ROOT = Path(__file__).resolve().parent
 EDITION = get_edition()
@@ -372,10 +374,53 @@ def generate_tags(text: str):
         return [tag for pattern, tag in rules if re.search(pattern, text, re.IGNORECASE)][:6]
     tags = []
     for pattern, tag in TAG_RULES:
+        if tag == "イルミ" and classify_lighting(content=text) not in ("interior", "both"):
+            continue
         if re.search(pattern, text, flags=re.IGNORECASE):
             if tag not in tags:
                 tags.append(tag)
     return tags[:6]
+
+
+SELECTION_FIELDS = {
+    "target_component": "selectionTargetComponent",
+    "new_information": "selectionNewInformation",
+    "development_reference": "selectionDevelopmentReference",
+    "source_quote": "selectionSourceQuote",
+}
+
+
+def validate_editorial_publication(items, existing_url_keys, snapshot, edition_id):
+    """Defend direct/resumed CSV publication before enrichment or generation."""
+    excluded = set(snapshot.get("excluded_urls", []))
+    retained, pending = [], []
+    for item in items:
+        if excluded.intersection(publication_item_url_keys(item)):
+            print(f"[EDITORIAL_HIDDEN] {item.get('url', '')}")
+            continue
+        if (item.get("country") == "paper"
+                or normalize_article_url(item.get("url", "")) in existing_url_keys):
+            retained.append(item)
+            continue
+        if edition_id == "exterior":
+            result = apply_policy(item, exterior_scope_rules(snapshot.get("rules", [])), require_evidence=False)
+            if result["decision"] != "keep":
+                pending.append(f"{item.get('url', '')} ({result['reason']})")
+            else:
+                retained.append(item)
+            continue
+        result = apply_policy(item, snapshot.get("rules", []), require_evidence=True)
+        if item.get("llmDecision") != "対象" or result["decision"] != "keep":
+            reason = result["reason"] if result["decision"] != "keep" else "not_llm_target"
+            pending.append(f"{item.get('url', '')} ({reason})")
+            continue
+        item.update({field: result["evidence"].get(key, "") for key, field in SELECTION_FIELDS.items()})
+        item["selectionPolicyVersion"] = result["policy_version"]
+        retained.append(item)
+    if pending:
+        raise RuntimeError("Editorial validation failed; no news or insights have been updated. "
+                           "Reassess these new source rows: " + ", ".join(pending))
+    return retained
 
 
 def has_japanese_text(text: str):
@@ -1761,6 +1806,7 @@ def main():
     idx_content_category = find_col_exact(header, "記事区分")
     idx_trend_topic = find_col_exact(header, "トレンド分類")
     idx_related_urls = find_col_exact(header, "関連URL")
+    evidence_indices = {key: find_col_exact(header, column) for key, column in EVIDENCE_COLUMNS.items()}
 
     def get(row, idx):
         if idx is None:
@@ -1839,9 +1885,17 @@ def main():
             "relatedUrls": related_source_urls(get(row, idx_related_urls), url),
             "interiorScore": interior_score,
             "interiorReason": interior_reason,
+            "llmDecision": llm_val.strip(),
+            "originalTitle": get(row, idx_original_title),
+            "originalDesc": get(row, idx_original_desc),
+            "evidence": {key: get(row, idx) for key, idx in evidence_indices.items()},
             "imageInterior": True if img_val and "あり" in img_val else (False if img_val and "なし" in img_val else None),
         }))
 
+    news_text = read_text_any(NEWS_PATH) if NEWS_PATH.exists() else 'window.NEWS_UPDATED_AT = "";\nwindow.LOADED_NEWS_DATA = [\n];\n'
+    existing_urls, max_ids = parse_existing_news(news_text)
+    existing_url_keys = set(publication_url_id_map(news_text))
+    items = validate_editorial_publication(items, existing_url_keys, load_feedback_snapshot(EDITION), EDITION.id)
     items = unique_publication_items(items)
     validate_japanese_news_items(items)
     issue_context = None
@@ -1872,10 +1926,6 @@ def main():
         print(f"Loaded {len(items)} items from sheet: {sheet_path} (dates: {dates_in_items[0]} ~ {dates_in_items[-1]})")
     else:
         print(f"Loaded {len(items)} items from sheet: {sheet_path} (date: unknown)")
-
-    news_text = read_text_any(NEWS_PATH) if NEWS_PATH.exists() else 'window.NEWS_UPDATED_AT = "";\nwindow.LOADED_NEWS_DATA = [\n];\n'
-    existing_urls, max_ids = parse_existing_news(news_text)
-    existing_url_keys = set(publication_url_id_map(news_text))
 
     if not args.dry_run:
         from ニュース収集.source_highlights import enrich_items
@@ -1909,7 +1959,7 @@ def main():
             if it.get("digestDate"):
                 extra_lines.append(f'                digestDate: "{js_escape(it["digestDate"])}",')
             extra_lines.append(f'                contentCategory: "{js_escape(it["contentCategory"])}", trendTopic: "{js_escape(it["trendTopic"])}",')
-        for field in ("sourceExcerpt", "sourceExcerptEnd"):
+        for field in ("sourceExcerpt", "sourceExcerptEnd", *SELECTION_FIELDS.values(), "selectionPolicyVersion"):
             if it.get(field):
                 extra_lines.append(f'                {field}: "{js_escape(it[field])}",')
         if it.get("interiorScore") is not None:

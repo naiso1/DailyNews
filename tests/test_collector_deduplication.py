@@ -26,6 +26,9 @@ class CollectorDeduplicationTests(unittest.TestCase):
         self.stack = ExitStack()
         self.addCleanup(self.stack.close)
         self.stack.enter_context(patch.object(collector, "OUTPUT_PAPERS_SHEET2", False))
+        # These fixtures exercise identity/ranking; editorial value has its own suite.
+        self.stack.enter_context(patch.object(collector, "apply_editorial_policy",
+                                             return_value={"decision": "keep", "reason": "fixture", "evidence": {}}))
 
     def context(self, edition):
         context = get_edition(edition, Path(self.folder.name) / edition)

@@ -125,7 +125,7 @@ class EditionRunnerTests(unittest.TestCase):
         yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
         env = dict(argparse=argparse, datetime=datetime, EDITION=SimpleNamespace(id="exterior"),
                    LOG_FILE=Path("unused.log"), SITE_URL="http://example.test/exterior/",
-                   log=Mock(), active_schedule_pause=Mock(return_value=None),
+                   log=Mock(), active_schedule_pause=Mock(return_value=None), refresh_editorial_settings=Mock(),
                    latest_news_date=Mock(return_value=yesterday), resume_floor_after_pauses=Mock(return_value=None),
                    write_run_status=Mock(return_value={}), run_git_sync=Mock(),
                    run_server_deploy=Mock(return_value="a" * 40), sync_power_automate_mailing_list=Mock(return_value=1),

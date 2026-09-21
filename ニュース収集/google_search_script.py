@@ -35,6 +35,9 @@ from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_p
 from dailynews.collection_digest import collection_window, published_news, published_issue, published_row
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
+from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
+                                        extract_evidence, assessment_instructions, exterior_scope_rules)
+from dailynews.feedback_snapshot import load_feedback_snapshot
 
 EDITION = get_edition()
 
@@ -62,6 +65,7 @@ SOURCE_FETCH_COUNTS = {"attempted": 0, "succeeded": 0}
 TARGET_DATES_RUN = []
 SHEET2_RESULT = None
 COLLECTION_METRICS = {}
+EDITORIAL_FEEDBACK_CACHE = {}
 JST = timezone(timedelta(hours=9))
 
 # Output columns
@@ -82,6 +86,8 @@ OUTPUT_COLUMNS = [
     "\u753b\u50cfURL",
     "URL",
     "関連URL",
+    *EVIDENCE_COLUMNS.values(),
+    "採用根拠_状態",
     "\u30bd\u30fc\u30b9",
     "HTML\u53d6\u5f97",
     "LLM\u5224\u5b9a",
@@ -445,6 +451,7 @@ def configure_edition(edition_id=None):
     for cache in (LLM_CACHE, LLM_IMAGE_CACHE, _summary_cache, _translation_cache, _article_text_cache):
         cache.clear()
     EXTERIOR_REQUIRED_LLM_ERRORS.update(relevance=0, score=0)
+    EDITORIAL_FEEDBACK_CACHE.clear()
     return EDITION
 
 
@@ -628,7 +635,23 @@ def google_news_keyword_limit():
     return GOOGLE_NEWS_KEYWORD_LIMIT
 
 
+def editorial_feedback():
+    key = (EDITION.id, str(EDITION.content_dir))
+    if key not in EDITORIAL_FEEDBACK_CACHE:
+        snapshot = load_feedback_snapshot(EDITION)
+        EDITORIAL_FEEDBACK_CACHE[key] = snapshot
+        if snapshot.get("status") != "fresh":
+            print(f"  [EDITORIAL_POLICY_WARNING] snapshot={snapshot.get('status')}; 組込みの選定方針を使用")
+    return EDITORIAL_FEEDBACK_CACHE[key]
+
+
 def store_exterior_assessment(item, assessment):
+    # Keep the existing exterior call sites; interior now stores its rationale too.
+    if EDITION.id == "interior":
+        evidence = assessment.get("evidence", {})
+        for key, column in EVIDENCE_COLUMNS.items():
+            item[column] = evidence.get(key, "")
+        item["採用根拠_状態"] = {"keep": "検証済み", "exclude": "対象外"}.get(assessment.get("policy_decision"), "根拠不足")
     if EDITION.id == "exterior":
         inferred = exterior_rules.news_category(item.get("タイトル"), item.get("内容"))
         item["記事区分"] = assessment.get("category", inferred[0])
@@ -1427,39 +1450,23 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
     global LLM_ERROR_LOGGED
     if not USE_LLM:
         return None
+    source_article = {"title": title, "desc": content, "originalTitle": title, "originalDesc": content, "url": url}
+    rules = editorial_feedback().get("rules", []) if EDITION.id == "interior" else []
     cache_key = (EDITION.id, "product_assessment", title, content, image_url, url, summary)
+    if EDITION.id == "interior":
+        cache_key += (POLICY_VERSION, json.dumps(rules, sort_keys=True, ensure_ascii=False))
+        scope = apply_editorial_policy(source_article, rules, require_evidence=False)
+        if scope["decision"] == "exclude":
+            return {"score": 0, "reason": scope["reason"], "image_interior": None,
+                    "evidence": scope["evidence"], "policy_decision": "exclude"}
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
-        if EDITION.id != "exterior" or (isinstance(cached, dict) and isinstance(cached.get("score"), int) and 0 <= cached["score"] <= 100):
+        valid_score = isinstance(cached, dict) and isinstance(cached.get("score"), int) and 0 <= cached["score"] <= 100
+        if valid_score and (EDITION.id == "exterior" or apply_editorial_policy(
+                dict(source_article, evidence=cached.get("evidence"), reason=cached.get("reason")), rules)["decision"] == "keep"):
             return cached
         LLM_CACHE.pop(cache_key, None)
-    prompt = (
-        "Classify this automotive news item for usefulness to vehicle interior product planning.\n"
-        "Continue from the provided JSON prefix. Use real values, for example: 87,\"reason\":\"seat and display plus cabin image\",\"image_interior\":true}\n"
-        "score is an exact integer 0-100. image_interior is true, false, or null.\n"
-        "Avoid coarse buckets and avoid ending most scores in 0 or 5. Use the whole 0-100 range.\n\n"
-        "Scoring method:\n"
-        "Start with product-planning relevance: 0-75 based on how useful the item is for interior parts, materials, HMI, seat, console, trim, comfort, or cabin UX planning.\n"
-        "Add image evidence: +8 to +15 if the image clearly shows useful cabin/interior details; +3 to +7 if partly useful; +0 if exterior/logo/unclear/no image.\n"
-        "Then adjust 0-10 points for specificity: concrete product details, dimensions, materials, suppliers, UI functions, or user experience deserve more.\n\n"
-        "Text relevance guide:\n"
-        "70-75: article is mainly interior accessory, material, seat cover, cockpit, dashboard, HMI, display, center console, trim, ambient lighting, audio, comfort equipment, cabin UX, or a flagship cabin/interior refresh.\n"
-        "50-69: vehicle news/review where concrete interior features are important, or a seat/interior safety issue with limited product-design learning.\n"
-        "30-49: interior/HMI/cabin is present but secondary.\n"
-        "15-29: weak or indirect interior relevance.\n"
-        "0-14: battery, sales volume, production, factory, partnership, policy, exterior-only, price-only, charging, drivetrain, or company news with almost no cabin detail.\n\n"
-        "Strict rules:\n"
-        "No concrete cabin/interior/HMI/display/seat/material/audio/comfort detail in text and no interior image => score 35 or lower.\n"
-        "Interior accessories, seat covers, console/cup-holder products, trim/material changes, and flagship cabin refreshes should generally score higher than defect/recall-only stories.\n"
-        "Seat or dashboard recall/defect stories are relevant but usually cap around 55-68 unless the article explains reusable design, material, or UX lessons.\n"
-        "Battery deployment/share/capacity => 0-18 unless cabin products or a clear cabin image are present.\n"
-        "Sales/factory/partnership/pricing campaign => 0-28 unless interior features are central.\n"
-        "ADAS/LiDAR general is not interior unless in-cabin HMI/driver monitoring/display is central.\n"
-        "Buses/coaches are outside the passenger-car interior scope and must score 28 or lower.\n"
-        "Motorcycles/motorbikes/scooters are outside the cabin scope and must score 18 or lower.\n"
-        "Trucks/lorries are secondary to passenger-car interior planning and must score 35 or lower.\n"
-        "If two items have similar text relevance, rank the one with a clear interior image higher.\n"
-        "Use semantic judgment, not keyword matching.\n"
+    prompt = (assessment_instructions() +
         f"Title: {title}\n"
         f"Article/snippet: {content}\n"
         f"Japanese summary if available: {summary}\n"
@@ -1500,7 +1507,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             return None
         txt = resp.json().get("choices", [{}])[0].get("message", {}).get("content", "")
         data = extract_json_object(txt)
-        if EDITION.id == "exterior" and not data:
+        if not data:
             # Some local models continue the assistant's {"score": prefix.
             # Recover the whole object so category fields survive alongside score.
             data = extract_json_object('{"score":' + txt)
@@ -1552,6 +1559,12 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         result = {"score": score, "image_interior": image_interior, "reason": reason}
         if EDITION.id == "exterior":
             result.update(category=category, trend_topic=trend_topic)
+        else:
+            policy = apply_editorial_policy(dict(source_article, evidence=data.get("evidence"), reason=reason), rules)
+            if policy["decision"] != "keep":
+                print(f"  [EDITORIAL_EVIDENCE_HELD] {policy['reason']}: {url}")
+                return None
+            result.update(evidence=policy["evidence"], policy_decision="keep", policy_version=POLICY_VERSION)
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
@@ -2671,6 +2684,7 @@ def collector_article(row):
             "title": text("タイトル（日本語）") or text("タイトル"),
             "desc": text("内容（日本語）") or text("内容"),
             "originalTitle": text("タイトル"), "originalDesc": text("内容"),
+            "evidence": extract_evidence(row), "reason": text("内装判定理由"),
             "relatedUrls": [normalize_article_url(url) for url in related if isinstance(url, str) and url.strip()]}
 
 
@@ -2762,9 +2776,52 @@ def sheet2_candidate_sort_score(row, title_col, title_jp_col, content_col, conte
         score -= 120.0
     return score
 
+def apply_interior_selection_policy(work, candidates, protected_urls, rules):
+    """Repair missing rationale once, or hold it; never resurrect LLM rejects."""
+    retained, decisions = [], []
+    changed = False
+    for index, source_row in candidates.iterrows():
+        row = source_row.copy()
+        article = collector_article(row)
+        is_paper = article["country"].lower() in {"論文", "paper", "papers"}
+        if article["url"] in protected_urls or is_paper:
+            retained.append(index)
+            continue
+        if str(row.get("LLM判定", "")).strip() != "対象":
+            decisions.append({"url": article["url"], "decision": "exclude", "reason": "not_llm_target"})
+            continue
+        policy = apply_editorial_policy(article, rules)
+        if policy["decision"] == "hold" and USE_LLM:
+            assessment = call_llm_interior_assessment(
+                article["originalTitle"], article["originalDesc"], url=article["url"],
+                summary=f"{article['title']} {article['desc']}")
+            if assessment:
+                row["内装関連度"] = assessment["score"]
+                row["内装判定理由"] = assessment.get("reason", "")
+                store_exterior_assessment(row, assessment)
+                article = collector_article(row)
+                policy = apply_editorial_policy(article, rules)
+                for column in ["内装関連度", "内装判定理由", *EVIDENCE_COLUMNS.values()]:
+                    work.at[index, column] = row.get(column, "")
+                    candidates.at[index, column] = row.get(column, "")
+                changed = True
+        state = {"keep": "検証済み", "exclude": "対象外", "hold": "根拠不足"}[policy["decision"]]
+        if work.at[index, "採用根拠_状態"] != state:
+            work.at[index, "採用根拠_状態"] = state
+            candidates.at[index, "採用根拠_状態"] = state
+            changed = True
+        if policy["decision"] == "keep":
+            retained.append(index)
+        else:
+            decisions.append({"url": article["url"], "decision": policy["decision"], "reason": policy["reason"]})
+    return candidates.loc[retained].copy(), decisions, changed
+
+
 def build_sheet2_and_csv(df, excel_path, target_dates):
     """LLM判定対象・画像URLあり・対象日付の一覧をSheet2とCSVに出力"""
     global SHEET2_RESULT
+    feedback = editorial_feedback()
+    excluded_urls = set(feedback.get("excluded_urls", []))
     digest_window = {}
     if EDITION.id == "exterior":
         digest_window = collection_window(target_dates, EDITION.config.get("selection", {}).get("lookback_days", 7))
@@ -2774,7 +2831,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         if pd.notna(latest):
             issue_dates = {latest.strftime("%Y-%m-%d")}
     published = [dict(item, url=normalize_article_url(item["url"]))
-                 for item in published_news(EDITION.content_dir / "news_data.js")]
+                 for item in published_news(EDITION.content_dir / "news_data.js")
+                 if normalize_article_url(item["url"]) not in excluded_urls]
     published_by_id = {item.get("id"): item for item in published}
     published_aliases = {item["url"] for item in published if item.get("duplicateOf")}
     for item in published:
@@ -2794,6 +2852,10 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     for url, item in same_issue.items():
         source_row = published_row(item)
         source_row["関連URL"] = json.dumps(item.get("relatedUrls", []), ensure_ascii=False)
+        published_evidence = extract_evidence(item)
+        if any(published_evidence.values()):
+            source_row.update({column: published_evidence[key] for key, column in EVIDENCE_COLUMNS.items()})
+            source_row["採用根拠_状態"] = "検証済み"
         matching = df.index[df["URL"].eq(url)] if "URL" in df.columns else []
         if len(matching):
             for key, value in source_row.items():
@@ -2825,7 +2887,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     col_date = "日付"
 
     work = df.copy()
-    for col in [col_country, col_title, col_title_jp, col_content, col_content_jp, col_site, col_image, col_url, "関連URL", col_llm, col_image_judge, col_interior_score, col_interior_reason, col_llm_post, col_date]:
+    for col in [col_country, col_title, col_title_jp, col_content, col_content_jp, col_site, col_image, col_url, "関連URL", *EVIDENCE_COLUMNS.values(), "採用根拠_状態", col_llm, col_image_judge, col_interior_score, col_interior_reason, col_llm_post, col_date]:
         if col not in work.columns:
             work[col] = ""
     if EDITION.id == "exterior":
@@ -2853,7 +2915,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             max_date = dt.max().date()
             filtered = filtered[dt.dt.date == max_date]
     dated_candidates = filtered.copy()
-    filtered = filtered[~filtered[col_url].isin(published_elsewhere | published_aliases)]
+    filtered = filtered[~filtered[col_url].isin(published_elsewhere | published_aliases | excluded_urls)]
 
     # URLと画像URLが有効なものだけを公開候補にする。Google Newsの
     # 未解決リンクや途中で切れたURLは、本文・画像の誤結合につながる。
@@ -2867,6 +2929,33 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     )
     if EDITION.config.get("selection", {}).get("require_original_image", True):
         filtered = filtered[valid_image | (filtered[col_country] == "論文")]
+
+    policy_decisions, policy_changed = [], False
+    if EDITION.id == "interior":
+        filtered, policy_decisions, policy_changed = apply_interior_selection_policy(
+            work, filtered.copy(), same_issue, feedback.get("rules", []))
+    else:
+        approved_scope = exterior_scope_rules(feedback.get("rules", []))
+        keep_indices = []
+        for index, row in filtered.iterrows():
+            article = collector_article(row)
+            policy = apply_editorial_policy(article, approved_scope, require_evidence=False)
+            if article["url"] in same_issue or policy["decision"] == "keep":
+                keep_indices.append(index)
+            else:
+                policy_decisions.append({"url": article["url"], "decision": policy["decision"], "reason": policy["reason"]})
+        filtered = filtered.loc[keep_indices].copy()
+    policy_result = {"editorial_policy_status": feedback.get("status", "missing"),
+                     "editorial_held_count": sum(item["decision"] == "hold" for item in policy_decisions),
+                     "editorial_excluded_count": sum(item["decision"] == "exclude" for item in policy_decisions),
+                     "editorial_excluded_url_count": int(dated_candidates[col_url].isin(excluded_urls).sum())}
+    policy_path = Path(excel_path).with_name("editorial_policy_review.json")
+    policy_path.parent.mkdir(parents=True, exist_ok=True)
+    policy_temp = policy_path.with_suffix(".json.tmp")
+    policy_temp.write_text(json.dumps({"edition_id": EDITION.id, "policy_version": POLICY_VERSION,
+                                      "target_dates": list(target_dates or []), "decisions": policy_decisions,
+                                      **policy_result}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(policy_temp, policy_path)
 
     # Rank across the full period per country; final cross-country story
     # deduplication happens only after Japanese repair and language quarantine.
@@ -2921,9 +3010,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             extras = group.iloc[0:0]
         else:
             target_group = group[llm_flag.loc[group.index] == "\u5bfe\u8c61"]
-            # Keep the country quota at 10. Prefer LLM targets, then backfill
-            # with the best remaining candidates from the expanded source pool.
-            extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
+            # Ten is a ceiling, never a reason to publish an LLM rejection.
+            extras = group.iloc[0:0]
             if strict_selection:
                 target_group = target_group[pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("minimum_score", 60)]
                 target_group = target_group[target_group["記事区分"].isin(("product", "trend"))]
@@ -3055,7 +3143,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     os.replace(dedup_temp, dedup_path)
     quarantine_result = {"quarantined_count": len(quarantined),
                          "quarantined_urls": [row["url"] for row in quarantined]}
-    if need_indices or quarantined or resolved_failure or duplicate_decisions:
+    if need_indices or quarantined or resolved_failure or duplicate_decisions or policy_changed:
         # Saving failed rows is part of successful partial publication, not an
         # optional best-effort write. Do not lose the operator's repair input.
         try:
@@ -3084,7 +3172,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         raise SummaryQuarantineError("All selected summaries are untranslated; original rows retained for manual repair")
 
     # Retain source prices for validation when publication resumes without the LLM.
-    sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, "関連URL", col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
+    sheet_cols = [col_country, col_date, col_title_jp, col_content_jp, col_site, col_image, col_url, "関連URL", *EVIDENCE_COLUMNS.values(), "採用根拠_状態", col_llm, col_image_judge, col_interior_score, col_interior_reason, col_title, col_content]
     if EDITION.id == "exterior":
         sheet_cols.extend(EXTERIOR_EDITORIAL_COLUMNS)
     sheet2_df = filtered[sheet_cols].copy()
@@ -3127,7 +3215,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     sheet2_csv.to_csv(csv_path, index=False, quoting=csv.QUOTE_ALL, encoding="utf-8", lineterminator="\n")
     SHEET2_RESULT = {"selected_count": len(sheet2_csv), "candidate_count": len(dated_candidates),
                      "selected_by_country": dict(Counter(sheet2_csv[col_country].tolist())),
-                     **quarantine_result, **deduplication_result}
+                     **quarantine_result, **deduplication_result, **policy_result}
     if EDITION.id == "exterior":
         selected_urls = set(sheet2_csv[col_url].astype(str))
         selected_indices = set(filtered.index)
@@ -3142,6 +3230,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 reason = "already_published_in_another_issue"
             elif str(row.get(col_url)) in published_aliases:
                 reason = "published_duplicate_alias"
+            elif str(row.get(col_url)) in excluded_urls:
+                reason = "reviewed_hidden_url"
             elif str(row.get(col_url)) in duplicate_urls or str(row.get(col_url)) in selected_urls:
                 reason = "duplicate_story"
             elif str(row.get(col_url)) in quarantine_result["quarantined_urls"]:
@@ -3852,6 +3942,8 @@ def enrich_existing_df(df):
         ("関連度スコア", 0.0),
         ("内装関連度", ""),
         ("内装判定理由", ""),
+        *((column, "") for column in EVIDENCE_COLUMNS.values()),
+        ("採用根拠_状態", ""),
         ("関連キーワード", ""),
         ("タイトル（日本語）", ""),
         ("内容（日本語）", ""),

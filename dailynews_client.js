@@ -480,6 +480,7 @@ function mergeInteractionData(itemId, data) {
       typeof data.hiddenReason === "string"
         ? data.hiddenReason
         : previous.hiddenReason || "",
+    hiddenReasonCode: typeof data.hiddenReasonCode === "string" ? data.hiddenReasonCode : previous.hiddenReasonCode || "",
     hiddenBy:
       typeof data.hiddenBy === "string" ? data.hiddenBy : previous.hiddenBy || "",
     hiddenAt:
@@ -507,6 +508,7 @@ function getInteractionRenderData(itemId) {
     markedIrrelevant: Boolean(data.markedIrrelevant),
     hidden: Boolean(data.hidden),
     hiddenReason: data.hiddenReason || "",
+    hiddenReasonCode: data.hiddenReasonCode || "",
     imageUrlOverride: data.imageUrlOverride || "",
   };
 }
@@ -857,6 +859,9 @@ function ensureRemovalDialog() {
       <form class="article-removal-body" id="articleRemovalForm">
         <p class="article-removal-title" id="articleRemovalItemTitle"></p>
         <p class="article-removal-note">削除すると全ユーザーのニュース一覧・New件数・ランキングから非表示になります。管理者は後から復元できます。</p>
+        <label for="articleRemovalReasonCode">理由の分類</label>
+        <select class="article-removal-reason-code" id="articleRemovalReasonCode" style="display:block;width:100%;margin:6px 0 12px;padding:10px;background:#09111c;color:#f8fafc;border:1px solid #607080;border-radius:8px"><option value="out_of_scope">対象外</option><option value="duplicate">重複</option><option value="summary_error">誤要約</option><option value="image_mismatch">画像不一致</option><option value="broken_link">リンク不良</option><option value="other" selected>その他</option></select>
+        <label for="articleRemovalReason">補足（必須）</label>
         <textarea class="article-removal-reason" id="articleRemovalReason" minlength="2" maxlength="500" required placeholder="削除する理由を入力してください（例：自動車内装と関係がない、URLが誤っている）"></textarea>
         <div class="article-removal-error" id="articleRemovalError"></div>
         <div class="article-removal-actions"><button class="article-removal-cancel" type="button">キャンセル</button><button class="article-removal-submit" type="submit">削除する</button></div>
@@ -865,7 +870,7 @@ function ensureRemovalDialog() {
   document.body.appendChild(overlay);
   const close = () => {
     overlay.classList.remove("open");
-    document.body.style.overflow = "";
+    document.body.style.overflow = document.getElementById("accountOverlay")?.classList.contains("open") ? "hidden" : "";
   };
   overlay.querySelector(".article-removal-close").addEventListener("click", close);
   overlay.querySelector(".article-removal-cancel").addEventListener("click", close);
@@ -893,7 +898,8 @@ async function submitArticleRemoval(event) {
     const itemId = overlay.dataset.itemId;
     const data = await apiRequest(`/interactions/${encodeURIComponent(itemId)}/hidden`, {
       method: "PUT",
-      body: { clientId: getClientId(), reason },
+      body: { clientId: getClientId(), reason, reasonCode: overlay.querySelector("#articleRemovalReasonCode").value,
+        itemKind: overlay.dataset.itemKind, edition: window.DAILYNEWS_CONFIG?.id || "interior", sourceUrl: overlay.dataset.sourceUrl || "" },
     });
     mergeInteractionData(itemId, data);
     overlay._closeRemovalDialog?.();
@@ -911,18 +917,26 @@ async function submitArticleRemoval(event) {
   }
 }
 
-window.requestArticleRemoval = (itemId) => {
+window.requestArticleRemoval = (itemId, itemKind) => {
   if (window.useLocalInteractions) {
     alert("サーバーに接続できないため記事を削除できません。時間をおいて再度お試しください。");
     return;
   }
   const overlay = ensureRemovalDialog();
-  const item = (window.LOADED_NEWS_DATA || window.NEWS_DATA || []).find(
+  let item = (window.LOADED_NEWS_DATA || window.NEWS_DATA || []).find(
     (entry) => String(entry.id) === String(itemId),
   );
+  if (!item) {
+    item = (window.DAILY_INSIGHTS || []).flatMap(day => Object.values(day.ideas || {}).flat()).find(entry => String(entry.id) === String(itemId));
+    itemKind = "idea";
+  } else itemKind = "news";
   overlay.dataset.itemId = itemId;
+  overlay.dataset.itemKind = itemKind;
+  overlay.dataset.sourceUrl = itemKind === "news" ? item?.url || "" : "";
+  overlay.querySelector("#articleRemovalTitle").textContent = itemKind === "idea" ? "アイデアを一覧から削除" : "記事を一覧から削除";
   overlay.querySelector("#articleRemovalItemTitle").textContent = item?.title || itemId;
-  overlay.querySelector("#articleRemovalReason").value = "";
+  overlay.querySelector("#articleRemovalReason").value = window.interactionsData?.[itemId]?.hiddenReason || "";
+  overlay.querySelector("#articleRemovalReasonCode").value = window.interactionsData?.[itemId]?.hiddenReasonCode || "other";
   overlay.querySelector("#articleRemovalError").textContent = "";
   overlay.classList.add("open");
   document.body.style.overflow = "hidden";

@@ -2120,6 +2120,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
                         </button>
+                        <button class="action-btn" title="この記事へのご意見" onclick="window.dailyNewsAccount?.openFeedback('${item.id}', 'news'); event.stopPropagation();">ご意見</button>
                         <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${item.id}', this); event.stopPropagation();">
                             <span>🗑️</span>
                         </button>
@@ -2201,6 +2202,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
                         </button>
+                        <button class="action-btn" title="この記事へのご意見" onclick="window.dailyNewsAccount?.openFeedback('${item.id}', 'news'); event.stopPropagation();">ご意見</button>
                         <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${item.id}', this); event.stopPropagation();">
                             <span>🗑️</span>
                         </button>
@@ -2302,10 +2304,23 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             return `${item?.title || ""} ${item?.desc || ""} ${item?.summary || ""} ${(item?.tags || []).join(" ")}`.toLowerCase();
         }
 
+        // Mirrors dailynews.editorial_policy.classify_lighting. Tags are not evidence.
+        function classifyLighting(item) {
+            const text = `${item?.title || ""} ${item?.desc || ""} ${item?.summary || ""}`.normalize("NFKC").replace(/\s+/g, " ");
+            let interior = /室内灯|車内灯|ルームランプ|読書灯|フット(?:ランプ|ライト)|(?:車室内|車内|室内|インパネ|ドアトリム|コンソール)[^。.!?]{0,18}(?:照明|ライト|イルミ)|(?:interior|cabin|footwell|dashboard|door trim)[^。.!?]{0,24}(?:light|illumination)/i.test(text);
+            const exterior = /ヘッド(?:ライト|ランプ)|テール(?:ライト|ランプ)|前照灯|尾灯|デイタイム|(?:発光|照明|イルミネー[テト]ッド)[^。.!?]{0,12}(?:グリル|エンブレム)|(?:グリル|エンブレム|ボディー|外装)[^。.!?]{0,18}(?:発光|照明|ライト|イルミ)|\b(?:headlights?|headlamps?|taillights?|tail lamps?|DRL)\b|(?:illuminated|lighted)[^。.!?]{0,15}(?:grille|emblem)|exterior[^。.!?]{0,20}(?:light|illumination)/i.test(text);
+            if (/アンビエント(?:ライト|照明|ライティング)|\bambient lighting\b/i.test(text) && !/(?:外装|車外|exterior)[^。.!?]{0,12}(?:アンビエント|ambient)/i.test(text)) interior = true;
+            return interior && exterior ? "both" : interior ? "interior" : exterior ? "exterior" : "";
+        }
+
         function deriveLocalTags(item) {
             const blob = ` ${getSearchBlob(item)} `;
             const tags = [];
             (window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES : LOCAL_TAG_RULES).forEach(rule => {
+                if (window.DAILYNEWS_CONFIG.id !== "exterior" && rule.tag === "イルミ") {
+                    if (["interior", "both"].includes(classifyLighting(item))) tags.push(rule.tag);
+                    return;
+                }
                 if (rule.words.some(word => blob.includes(word.toLowerCase())) && !tags.includes(rule.tag)) {
                     tags.push(rule.tag);
                 }
@@ -2703,6 +2718,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 regions.forEach(region => {
                     const list = (day.ideas && day.ideas[region]) ? day.ideas[region] : [];
                     list.forEach(idea => {
+                        if (isGloballyHidden(idea.id) || isGloballyHidden(`idea-${idea.id}`)) return;
                         const key = `idea-${idea.id}`;
                         if (!ideas.has(key)) {
                             ideas.set(key, {
@@ -3347,7 +3363,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                 // Tag Filter (tag text can match title/desc as well)
                 if (!activeTags.has("all")) {
-                    const tagMatches = [...activeTags].some(tag => searchable.includes(tag.toLowerCase()));
+                    const tagMatches = [...activeTags].some(tag => tag === "イルミ" && window.DAILYNEWS_CONFIG.id !== "exterior" ? n.tags.includes(tag) : searchable.includes(tag.toLowerCase()));
                     if (!tagMatches) return false;
                 }
 
@@ -3471,7 +3487,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
                         <span>💬</span> <span class="count">${commentCount}</span>
                     </button>
-                    <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${n.id}', this)">
+                    <button class="action-btn" title="この記事へのご意見" onclick="window.dailyNewsAccount?.openFeedback('${n.id}', 'news'); event.stopPropagation();">ご意見</button>
+                        <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${n.id}', this)">
                         <span>🗑️</span>
                     </button>
                     <button class="action-btn admin-image-edit-btn" title="画像URLを変更" aria-label="画像URLを変更" onclick="requestImageUrlChange('${n.id}', this)">
@@ -3814,9 +3831,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 `;
 
                 const renderIdeas = (ideas, regionName, regionClass, flagIcon) => {
+                    const availableIdeas = ideas.filter(idea => !isGloballyHidden(idea.id) && !isGloballyHidden(`idea-${idea.id}`));
                     const visibleIdeas = favoritesOnly
-                        ? ideas.filter(idea => isFavorite(`idea-${idea.id}`))
-                        : ideas;
+                        ? availableIdeas.filter(idea => isFavorite(`idea-${idea.id}`))
+                        : availableIdeas;
                     if (visibleIdeas.length > 0) {
                         ideasHTML += `
                             <div class="region-section ${regionClass}">
@@ -3846,6 +3864,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                                                 <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${ideaKey}', this)">
                                                     <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
                                                 </button>
+                                                <button class="action-btn" onclick="window.dailyNewsAccount?.openFeedback('${idea.id}', 'idea')">ご意見</button>
+                                                <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="アイデアを一覧から削除" onclick="requestArticleRemoval('${idea.id}', 'idea')">🗑️</button>
                                                 <button class="action-btn" onclick="toggleLike('${idea.id}', this)">
                                                     <span>👍</span> <span class="count">0</span>
                                                 </button>

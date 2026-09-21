@@ -25,6 +25,22 @@ const PUBLIC_CONFIG = Object.freeze({
   imageGenerationEnabled: !IS_EXTERIOR,
   sharedIdentity: SHARED_IDENTITY,
 });
+const REMOVAL_REASONS = Object.freeze([
+  { key: "out_of_scope", label: "対象外" }, { key: "duplicate", label: "重複" },
+  { key: "summary_error", label: "誤要約" }, { key: "image_mismatch", label: "画像不一致" },
+  { key: "broken_link", label: "リンク不良" }, { key: "other", label: "その他" },
+]);
+const FEEDBACK_STATUSES = new Set(["new", "in_review", "resolved", "dismissed"]);
+const FEEDBACK_CATEGORIES = new Set(["improvement", "bug", "article", "idea", "other"]);
+const POLICY_PRESETS = Object.freeze([
+  { key: "exclude_non_passenger_vehicles", label: "乗用車以外を除外", description: "二輪車など乗用車向け開発の対象外となる記事を除外します。" },
+  { key: "exclude_off_topic", label: "自動車開発と無関係な記事を除外", description: "旅行・宇宙・ローン案内など、対象分野への具体的な関連がない記事を除外します。" },
+  ...(!IS_EXTERIOR ? [
+    { key: "seat_requires_transferable_value", label: "シート記事は応用できる知見を重視", description: "シート単体の商品紹介より、材料・構造・機能など他の内装にも応用できる情報を選びます。" },
+    { key: "interior_lighting_only", label: "照明記事は内装に関連するものを選定", description: "車室内の照明・表示・加飾に関係する情報を優先します。" },
+    { key: "require_development_value", label: "開発に役立つ具体情報を重視", description: "材料・構造・技術・使い方など、開発の検討に使える具体的な情報を選びます。" },
+  ] : []),
+]);
 // An exterior process must never open the legacy interior database by default.
 const ROOT = path.resolve(process.env.DAILYNEWS_ROOT || path.join(__dirname, "..", ...(IS_EXTERIOR ? ["exterior"] : [])));
 const RELEASES_DIR = path.join(ROOT, "releases");
@@ -255,6 +271,85 @@ function ensureColumn(tableName, columnName, definition) {
 ensureColumn("comments", "user_id", "INTEGER REFERENCES users(id)");
 ensureColumn("comments", "parent_comment_id", "INTEGER REFERENCES comments(id)");
 ensureColumn("users", "is_admin", "INTEGER NOT NULL DEFAULT 0");
+ensureColumn("hidden_items", "reason_code", "TEXT NOT NULL DEFAULT 'other'");
+ensureColumn("hidden_items", "item_kind", "TEXT NOT NULL DEFAULT 'news'");
+ensureColumn("hidden_items", "edition", `TEXT NOT NULL DEFAULT '${EDITION}'`);
+ensureColumn("hidden_items", "source_url", "TEXT NOT NULL DEFAULT ''");
+ensureColumn("feedback", "item_kind", "TEXT");
+ensureColumn("feedback", "edition", `TEXT NOT NULL DEFAULT '${EDITION}'`);
+ensureColumn("feedback", "admin_note", "TEXT NOT NULL DEFAULT ''");
+ensureColumn("feedback", "updated_at", "TEXT");
+ensureColumn("feedback", "updated_by", "INTEGER");
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS moderation_migrations (name TEXT PRIMARY KEY, completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+  CREATE TABLE IF NOT EXISTS moderation_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, edition TEXT NOT NULL, item_id TEXT NOT NULL,
+    item_kind TEXT NOT NULL, action TEXT NOT NULL CHECK(action IN ('hide','reason_changed','restore','legacy_snapshot')),
+    reason_code TEXT NOT NULL, reason TEXT NOT NULL, source_url TEXT NOT NULL DEFAULT '', actor_user_id INTEGER,
+    event_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, recorded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    legacy_created_at TEXT, legacy_updated_at TEXT
+  );
+  CREATE INDEX IF NOT EXISTS moderation_events_time_idx ON moderation_events(event_at, id);
+  CREATE INDEX IF NOT EXISTS moderation_events_item_idx ON moderation_events(item_id, id);
+  CREATE TABLE IF NOT EXISTS feedback_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, feedback_id INTEGER NOT NULL, status TEXT NOT NULL,
+    admin_note TEXT NOT NULL DEFAULT '', actor_user_id INTEGER, source TEXT NOT NULL,
+    event_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
+  CREATE INDEX IF NOT EXISTS feedback_events_item_idx ON feedback_events(feedback_id, id);
+  CREATE TABLE IF NOT EXISTS selection_policy_approvals (
+    policy_key TEXT PRIMARY KEY, enabled INTEGER NOT NULL DEFAULT 0 CHECK(enabled IN (0,1)),
+    review_status TEXT NOT NULL DEFAULT 'pending' CHECK(review_status IN ('approved','pending')),
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, version INTEGER NOT NULL DEFAULT 1,
+    source TEXT NOT NULL, approved_by INTEGER, admin_note TEXT NOT NULL DEFAULT ''
+  );
+  CREATE TABLE IF NOT EXISTS selection_policy_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, edition TEXT NOT NULL, policy_key TEXT NOT NULL,
+    enabled INTEGER NOT NULL, review_status TEXT NOT NULL, admin_note TEXT NOT NULL DEFAULT '',
+    actor_user_id INTEGER, source TEXT NOT NULL, version INTEGER NOT NULL,
+    event_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
+`);
+
+function classifyLegacyRemoval(reason) {
+  const text = String(reason || "");
+  if (/重複|同じ記事|二重掲載/.test(text)) return "duplicate";
+  if (/画像|写真/.test(text) && /違|誤|一致|関係/.test(text)) return "image_mismatch";
+  if (/URL|リンク/i.test(text) && /違|誤|切れ|開け|不良/.test(text)) return "broken_link";
+  if (/誤訳|誤要約|要約.*(?:違|誤)|内容.*誤/.test(text)) return "summary_error";
+  if (/対象外|関連(?:が)?(?:無|な)|関係(?:が)?(?:無|な)|バイクの記事|バイクは商権外|商圏でなく|(?:シート|内装).*(?:不要|いらない|参考に(?:も)?ならない)/.test(text)) return "out_of_scope";
+  return "other";
+}
+
+// Import only the state actually present at migration time. This is a snapshot,
+// not invented hide/restore events. Restarts never recreate removed history.
+withTransaction(() => {
+  if (!db.prepare("SELECT 1 FROM moderation_migrations WHERE name = ?").get("hidden_snapshot_v1")) {
+    for (const row of db.prepare("SELECT * FROM hidden_items").all()) {
+      const reasonCode = classifyLegacyRemoval(row.reason);
+      const kind = /^(?:idea-)?\d+$/.test(row.item_id) ? "idea" : "news";
+      db.prepare("UPDATE hidden_items SET reason_code=?,item_kind=?,edition=? WHERE item_id=?")
+        .run(reasonCode, kind, EDITION, row.item_id);
+      db.prepare(`INSERT INTO moderation_events(edition,item_id,item_kind,action,reason_code,reason,source_url,
+        actor_user_id,event_at,legacy_created_at,legacy_updated_at) VALUES(?,?,?,'legacy_snapshot',?,?,?,?,?,?,?)`)
+        .run(EDITION, row.item_id, kind, reasonCode, row.reason, row.source_url || "", row.created_by,
+          row.updated_at || row.created_at, row.created_at, row.updated_at);
+    }
+    db.prepare("INSERT INTO moderation_migrations(name) VALUES (?)").run("hidden_snapshot_v1");
+  }
+  for (const preset of POLICY_PRESETS) {
+    if (db.prepare("SELECT 1 FROM selection_policy_approvals WHERE policy_key=?").get(preset.key)) continue;
+    const enabled = IS_EXTERIOR ? 0 : 1;
+    const review = IS_EXTERIOR ? "pending" : "approved";
+    const source = IS_EXTERIOR ? "default_pending" : "initial_user_request";
+    const note = IS_EXTERIOR ? "外装版では管理者による確認後に有効化します。" : "改善方針をすべて対応するという利用者の依頼に基づく初期設定。個別管理者の操作ではありません。";
+    db.prepare(`INSERT INTO selection_policy_approvals(policy_key,enabled,review_status,source,approved_by,admin_note)
+      VALUES(?,?,?,?,NULL,?)`).run(preset.key, enabled, review, source, note);
+    db.prepare(`INSERT INTO selection_policy_events(edition,policy_key,enabled,review_status,admin_note,actor_user_id,source,version)
+      VALUES(?,?,?,?,?,NULL,?,1)`).run(EDITION, preset.key, enabled, review, note, source);
+  }
+});
 db.exec(`
   CREATE INDEX IF NOT EXISTS comments_user_id_idx
     ON comments(user_id, id DESC);
@@ -362,25 +457,29 @@ const statements = {
     SELECT item_id, COUNT(*) AS count FROM user_irrelevant GROUP BY item_id
   `),
   hiddenItem: db.prepare(`
-    SELECT h.item_id, h.reason, h.created_by, h.created_at, h.updated_at,
+    SELECT h.item_id, h.reason, h.reason_code, h.item_kind, h.edition, h.source_url, h.created_by, h.created_at, h.updated_at,
            COALESCE(u.display_name, '') AS created_by_name
     FROM hidden_items h
     LEFT JOIN users u ON u.id = h.created_by
     WHERE h.item_id = ?
   `),
   allHiddenItems: db.prepare(`
-    SELECT h.item_id, h.reason, h.created_by, h.created_at, h.updated_at,
+    SELECT h.item_id, h.reason, h.reason_code, h.item_kind, h.edition, h.source_url, h.created_by, h.created_at, h.updated_at,
            COALESCE(u.display_name, '') AS created_by_name
     FROM hidden_items h
     LEFT JOIN users u ON u.id = h.created_by
     ORDER BY h.updated_at DESC
   `),
   hideItem: db.prepare(`
-    INSERT INTO hidden_items(item_id, reason, created_by)
-    VALUES (?, ?, ?)
+    INSERT INTO hidden_items(item_id, reason, created_by, reason_code, item_kind, edition, source_url)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(item_id) DO UPDATE SET
       reason = excluded.reason,
       created_by = excluded.created_by,
+      reason_code = excluded.reason_code,
+      item_kind = excluded.item_kind,
+      edition = excluded.edition,
+      source_url = excluded.source_url,
       updated_at = CURRENT_TIMESTAMP
   `),
   restoreHiddenItem: db.prepare(`
@@ -643,11 +742,11 @@ const statements = {
     LIMIT 200
   `),
   insertFeedback: db.prepare(`
-    INSERT INTO feedback(user_id, category, message, item_id, page_url)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO feedback(user_id, category, message, item_id, page_url, item_kind, edition)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `),
   userFeedback: db.prepare(`
-    SELECT id, category, message, item_id, page_url, status, created_at
+    SELECT id, category, message, item_id, page_url, status, created_at, item_kind, edition, admin_note, updated_at
     FROM feedback WHERE user_id = ? ORDER BY id DESC LIMIT 100
   `),
   markAdmin: db.prepare(`
@@ -681,6 +780,7 @@ const statements = {
       f.page_url,
       f.status,
       f.created_at,
+      f.item_kind, f.edition, f.admin_note, f.updated_at,
       u.display_name,
       u.email
     FROM feedback f
@@ -689,12 +789,13 @@ const statements = {
     LIMIT 100
   `),
   adminHiddenItems: db.prepare(`
-    SELECT h.item_id, h.reason, h.created_at, h.updated_at,
+    SELECT h.item_id, h.reason, h.reason_code, h.item_kind, h.edition, h.source_url, h.created_at, h.updated_at,
            COALESCE(u.display_name, '') AS created_by_name,
            COALESCE(u.email, '') AS created_by_email
     FROM hidden_items h
     LEFT JOIN users u ON u.id = h.created_by
     ORDER BY h.updated_at DESC
+    LIMIT 100
   `),
   mailingList: db.prepare(`
     SELECT id, email, display_name, user_id, enabled, source, created_at, updated_at
@@ -1233,6 +1334,7 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
     ),
     hidden: Boolean(hidden),
     hiddenReason: hidden?.reason || "",
+    hiddenReasonCode: hidden?.reason_code || "",
     hiddenBy: hidden?.created_by_name || "",
     hiddenAt: hidden?.updated_at || "",
     imageUrlOverride: imageOverride?.image_url || "",
@@ -1270,6 +1372,7 @@ function allInteractions(user = null) {
     if (!result[row.item_id]) continue;
     result[row.item_id].hidden = true;
     result[row.item_id].hiddenReason = row.reason;
+    result[row.item_id].hiddenReasonCode = row.reason_code;
     result[row.item_id].hiddenBy = row.created_by_name;
     result[row.item_id].hiddenAt = row.updated_at;
   }
@@ -1307,8 +1410,166 @@ function assertSameOrigin(request, response) {
   return false;
 }
 
+function feedbackPayload(row) {
+  return {
+    id: Number(row.id), category: row.category, message: row.message,
+    itemId: row.item_id, itemKind: row.item_kind, edition: row.edition,
+    pageUrl: row.page_url, status: row.status, adminNote: row.admin_note || "",
+    createdAt: row.created_at, updatedAt: row.updated_at || row.created_at,
+    ...(row.display_name === undefined ? {} : { displayName: row.display_name }),
+  };
+}
+
+function hiddenPayload(row) {
+  return { itemId: row.item_id, itemKind: row.item_kind, edition: row.edition,
+    reasonCode: row.reason_code, reason: row.reason, sourceUrl: row.source_url || "",
+    createdAt: row.created_at, updatedAt: row.updated_at, createdByName: row.created_by_name || "" };
+}
+
+function boundedInteger(value, fallback, maximum) {
+  const number = Number(value);
+  return Number.isSafeInteger(number) && number >= 1 ? Math.min(number, maximum) : fallback;
+}
+
+function itemKindFor(itemId) {
+  return /^(?:idea-)?\d+$/.test(String(itemId)) ? "idea" : "news";
+}
+
+function appendModerationEvent(row, action, actorId) {
+  db.prepare(`INSERT INTO moderation_events
+    (edition,item_id,item_kind,action,reason_code,reason,source_url,actor_user_id)
+    VALUES (?,?,?,?,?,?,?,?)`).run(EDITION, row.item_id, row.item_kind, action,
+      row.reason_code, row.reason, row.source_url || "", actorId);
+}
+
+function selectionPoliciesPayload() {
+  const rows = new Map(db.prepare("SELECT * FROM selection_policy_approvals").all().map(row => [row.policy_key, row]));
+  return {
+    edition: EDITION,
+    policies: POLICY_PRESETS.map(preset => {
+      const row = rows.get(preset.key);
+      return { ...preset, enabled: Boolean(row.enabled), reviewStatus: row.review_status,
+        updatedAt: row.updated_at, version: Number(row.version), source: row.source, adminNote: row.admin_note };
+    }),
+    history: db.prepare(`SELECT e.*, u.display_name AS actor_name FROM selection_policy_events e
+      LEFT JOIN users u ON u.id=e.actor_user_id ORDER BY e.id DESC LIMIT 20`).all().map(row => ({
+        id: Number(row.id), key: row.policy_key, enabled: Boolean(row.enabled), reviewStatus: row.review_status,
+        adminNote: row.admin_note, actorName: row.actor_name || "", source: row.source, eventAt: row.event_at,
+      })),
+  };
+}
+
+function moderationPayload(params) {
+  const reasonCode = params.get("reasonCode") || "";
+  const where = reasonCode ? " WHERE h.reason_code = ?" : "";
+  const args = reasonCode ? [reasonCode] : [];
+  const pageSize = boundedInteger(params.get("pageSize"), 20, 50);
+  const hiddenPage = boundedInteger(params.get("hiddenPage"), 1, 100000);
+  const historyPage = boundedInteger(params.get("historyPage"), 1, 100000);
+  const weeks = boundedInteger(params.get("weeks"), 12, 52);
+  const hidden = db.prepare(`SELECT h.*,u.display_name AS created_by_name FROM hidden_items h
+    LEFT JOIN users u ON u.id=h.created_by${where} ORDER BY h.updated_at DESC,h.item_id LIMIT ? OFFSET ?`)
+    .all(...args, pageSize, (hiddenPage - 1) * pageSize).map(hiddenPayload);
+  const history = db.prepare(`SELECT h.*,u.display_name AS actor_name FROM moderation_events h
+    LEFT JOIN users u ON u.id=h.actor_user_id${where} ORDER BY h.id DESC LIMIT ? OFFSET ?`)
+    .all(...args, pageSize, (historyPage - 1) * pageSize).map(row => ({
+      id: Number(row.id), itemId: row.item_id, itemKind: row.item_kind, edition: row.edition,
+      action: row.action, reasonCode: row.reason_code, reason: row.reason, sourceUrl: row.source_url,
+      actorName: row.actor_name || "", eventAt: row.event_at, recordedAt: row.recorded_at,
+      legacyCreatedAt: row.legacy_created_at, legacyUpdatedAt: row.legacy_updated_at,
+    }));
+  const weekly = db.prepare(`SELECT date(event_at,'+9 hours',printf('-%d days',
+    (CAST(strftime('%w',event_at,'+9 hours') AS INTEGER)+6)%7)) AS week_start,
+    SUM(action='hide') AS hide, SUM(action='reason_changed') AS changed,
+    SUM(action='restore') AS restore, SUM(action='legacy_snapshot') AS legacy
+    FROM moderation_events WHERE event_at >= datetime('now',?) GROUP BY week_start ORDER BY week_start DESC`)
+    .all(`-${weeks * 7} days`).map(row => ({weekStart: row.week_start, hide: Number(row.hide),
+      reasonChanged: Number(row.changed), restore: Number(row.restore), legacySnapshot: Number(row.legacy)}));
+  return { edition: EDITION, reasonCodes: REMOVAL_REASONS,
+    summary: { hiddenCount: Number(db.prepare("SELECT COUNT(*) AS n FROM hidden_items").get().n),
+      eventCount: Number(db.prepare("SELECT COUNT(*) AS n FROM moderation_events").get().n) },
+    reasonCounts: db.prepare("SELECT reason_code,COUNT(*) AS n FROM hidden_items GROUP BY reason_code").all()
+      .map(row => ({ reasonCode: row.reason_code, count: Number(row.n) })), weekly,
+    hidden: {items: hidden, total: Number(db.prepare(`SELECT COUNT(*) AS n FROM hidden_items h${where}`).get(...args).n), page: hiddenPage, pageSize},
+    history: {items: history, total: Number(db.prepare(`SELECT COUNT(*) AS n FROM moderation_events h${where}`).get(...args).n), page: historyPage, pageSize},
+  };
+}
+
 async function handleApi(request, response, requestUrl) {
   const segments = requestUrl.pathname.split("/").filter(Boolean);
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/admin/moderation") {
+    if (!requireAdmin(request, response)) return;
+    const reason = requestUrl.searchParams.get("reasonCode");
+    if (reason && !REMOVAL_REASONS.some(item => item.key === reason)) {
+      apiError(response, 400, "invalid_reason", "Unknown reason category."); return;
+    }
+    sendJson(response, 200, moderationPayload(requestUrl.searchParams)); return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/admin/feedback") {
+    if (!requireAdmin(request, response)) return;
+    const params = requestUrl.searchParams;
+    const status = params.get("status") || "";
+    const category = params.get("category") || "";
+    if ((status && !FEEDBACK_STATUSES.has(status)) || (category && !FEEDBACK_CATEGORIES.has(category))) {
+      apiError(response, 400, "invalid_filter", "Unknown feedback filter."); return;
+    }
+    const clauses = []; const args = [];
+    if (status) { clauses.push("f.status=?"); args.push(status); }
+    if (category) { clauses.push("f.category=?"); args.push(category); }
+    const where = clauses.length ? ` WHERE ${clauses.join(" AND ")}` : "";
+    const page = boundedInteger(params.get("page"), 1, 100000);
+    const pageSize = boundedInteger(params.get("pageSize"), 20, 50);
+    const items = db.prepare(`SELECT f.*,u.display_name FROM feedback f LEFT JOIN users u ON u.id=f.user_id
+      ${where} ORDER BY f.created_at DESC,f.id DESC LIMIT ? OFFSET ?`).all(...args,pageSize,(page-1)*pageSize).map(feedbackPayload);
+    const statusCounts = {new:0,in_review:0,resolved:0,dismissed:0};
+    for (const row of db.prepare("SELECT status,COUNT(*) AS n FROM feedback GROUP BY status").all()) statusCounts[row.status] = Number(row.n);
+    const weeks = boundedInteger(params.get("weeks"),12,52);
+    const weekly = db.prepare(`SELECT date(created_at,'+9 hours',printf('-%d days',
+      (CAST(strftime('%w',created_at,'+9 hours') AS INTEGER)+6)%7)) AS week_start,COUNT(*) AS n
+      FROM feedback WHERE created_at >= datetime('now',?) GROUP BY week_start ORDER BY week_start DESC`)
+      .all(`-${weeks*7} days`).map(row=>({weekStart:row.week_start,count:Number(row.n)}));
+    sendJson(response, 200, {items,total:Number(db.prepare(`SELECT COUNT(*) AS n FROM feedback f${where}`).get(...args).n),page,pageSize,statusCounts,weekly}); return;
+  }
+
+  if (request.method === "PUT" && segments.length === 4 && segments.slice(0,3).join("/") === "api/admin/feedback") {
+    const admin = requireAdmin(request, response); if (!admin) return;
+    const id = Number(segments[3]); const body = await readJson(request);
+    const note = String(body.adminNote || "").trim();
+    if (!Number.isSafeInteger(id) || id < 1 || !FEEDBACK_STATUSES.has(body.status) || note.length > 2000) {
+      apiError(response, 400, "invalid_feedback_update", "Invalid feedback status or note."); return;
+    }
+    if (!db.prepare("SELECT id FROM feedback WHERE id=?").get(id)) { apiError(response,404,"feedback_not_found","Feedback not found."); return; }
+    withTransaction(() => {
+      db.prepare("UPDATE feedback SET status=?,admin_note=?,updated_at=CURRENT_TIMESTAMP,updated_by=? WHERE id=?").run(body.status,note,admin.id,id);
+      db.prepare("INSERT INTO feedback_events(feedback_id,status,admin_note,actor_user_id,source) VALUES (?,?,?,?,?)").run(id,body.status,note,admin.id,"admin");
+    });
+    sendJson(response,200,{feedback:feedbackPayload(db.prepare("SELECT * FROM feedback WHERE id=?").get(id))}); return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/admin/selection-policies") {
+    if (!requireAdmin(request,response)) return;
+    sendJson(response,200,selectionPoliciesPayload()); return;
+  }
+
+  if (request.method === "PUT" && segments.length === 4 && segments.slice(0,3).join("/") === "api/admin/selection-policies") {
+    const admin = requireAdmin(request,response); if (!admin) return;
+    const key = decodeURIComponent(segments[3]); const body = await readJson(request);
+    const note = String(body.adminNote || "").trim();
+    if (!POLICY_PRESETS.some(item => item.key === key) || typeof body.enabled !== "boolean" ||
+        !["approved","pending"].includes(body.reviewStatus) || note.length > 2000 || (body.enabled && body.reviewStatus !== "approved")) {
+      apiError(response,400,"invalid_policy","Choose an approved preset before enabling it."); return;
+    }
+    withTransaction(() => {
+      db.prepare(`UPDATE selection_policy_approvals SET enabled=?,review_status=?,admin_note=?,
+        updated_at=CURRENT_TIMESTAMP,source='admin',approved_by=? WHERE policy_key=?`)
+        .run(body.enabled?1:0,body.reviewStatus,note,admin.id,key);
+      db.prepare(`INSERT INTO selection_policy_events(edition,policy_key,enabled,review_status,admin_note,actor_user_id,source,version)
+        VALUES (?,?,?,?,?,?,'admin',1)`).run(EDITION,key,body.enabled?1:0,body.reviewStatus,note,admin.id);
+    });
+    sendJson(response,200,selectionPoliciesPayload()); return;
+  }
 
   if (request.method === "GET" && requestUrl.pathname === "/api/config") {
     sendJson(response, 200, PUBLIC_CONFIG);
@@ -1648,13 +1909,26 @@ async function handleApi(request, response, requestUrl) {
     if (!user) return;
     const body = await readJson(request);
     const reason = String(body.reason || "").trim();
-    if (!validItemId(itemId) || reason.length < 2 || reason.length > 500) {
+    const reasonCode = body.reasonCode || classifyLegacyRemoval(reason);
+    const itemKind = body.itemKind || itemKindFor(itemId);
+    const sourceUrl = String(body.sourceUrl || "").trim();
+    if (!validItemId(itemId) || reason.length < 2 || reason.length > 500 ||
+        !REMOVAL_REASONS.some(item => item.key === reasonCode) || !["news","idea"].includes(itemKind) ||
+        (body.edition && body.edition !== EDITION) || (sourceUrl && !validImageUrl(sourceUrl))) {
       apiError(response, 400, "invalid_removal", "A removal reason between 2 and 500 characters is required.");
       return;
     }
     withTransaction(() => {
+      const previous = statements.hiddenItem.get(itemId);
+      const nextSourceUrl = sourceUrl || previous?.source_url || "";
+      if (previous && previous.reason === reason && previous.reason_code === reasonCode &&
+          previous.item_kind === itemKind && previous.source_url === nextSourceUrl) return;
       statements.ensureInteraction.run(itemId);
-      statements.hideItem.run(itemId, reason, user.id);
+      statements.hideItem.run(itemId, reason, user.id, reasonCode, itemKind, EDITION, nextSourceUrl);
+      const current = statements.hiddenItem.get(itemId);
+      if (!previous || ["reason","reason_code","item_kind","source_url"].some(key => previous[key] !== current[key])) {
+        appendModerationEvent(current, previous ? "reason_changed" : "hide", user.id);
+      }
     });
     sendJson(response, 200, interactionFor(itemId, body.clientId, true, user));
     return;
@@ -1876,15 +2150,7 @@ async function handleApi(request, response, requestUrl) {
         })),
       notifications: notifications.notifications,
       unreadNotifications: notifications.unreadCount,
-      feedback: statements.userFeedback.all(user.id).map((row) => ({
-        id: Number(row.id),
-        category: row.category,
-        message: row.message,
-        itemId: row.item_id,
-        pageUrl: row.page_url,
-        status: row.status,
-        createdAt: row.created_at,
-      })),
+      feedback: statements.userFeedback.all(user.id).map(feedbackPayload),
     });
     return;
   }
@@ -2015,7 +2281,7 @@ async function handleApi(request, response, requestUrl) {
         comments: users.reduce((sum, user) => sum + user.comments, 0),
         feedback: users.reduce((sum, user) => sum + user.feedback, 0),
         mailRecipients: mailingListPayload().activeCount,
-        hiddenItems: hiddenItems.length,
+        hiddenItems: Number(db.prepare("SELECT COUNT(*) AS n FROM hidden_items").get().n),
       },
       users,
       feedback,
@@ -2039,11 +2305,15 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 400, "invalid_item_id", "Invalid item ID.");
       return;
     }
-    const result = statements.restoreHiddenItem.run(itemId);
-    if (!result.changes) {
+    const hidden = statements.hiddenItem.get(itemId);
+    if (!hidden) {
       apiError(response, 404, "hidden_item_not_found", "Removed item was not found.");
       return;
     }
+    withTransaction(() => {
+      appendModerationEvent(hidden, "restore", admin.id);
+      statements.restoreHiddenItem.run(itemId);
+    });
     sendJson(response, 200, { restored: true, itemId });
     return;
   }
@@ -2125,18 +2395,14 @@ async function handleApi(request, response, requestUrl) {
     const user = requireUser(request, response);
     if (!user) return;
     const body = await readJson(request);
-    const allowedCategories = new Set([
-      "improvement",
-      "bug",
-      "article",
-      "idea",
-      "other",
-    ]);
     const category = String(body.category || "other");
     const message = String(body.message || "").trim();
     const itemId = validItemId(body.itemId) ? body.itemId : null;
+    const itemKind = itemId ? (body.itemKind || itemKindFor(itemId)) : null;
     const pageUrl = String(body.pageUrl || "").slice(0, 500) || null;
-    if (!allowedCategories.has(category) || !message || message.length > 2000) {
+    if (!FEEDBACK_CATEGORIES.has(category) || !message || message.length > 2000 ||
+        (body.itemId && !itemId) || (itemKind && !["news","idea"].includes(itemKind)) ||
+        (body.edition && body.edition !== EDITION)) {
       apiError(response, 400, "invalid_feedback", "Invalid feedback.");
       return;
     }
@@ -2146,6 +2412,8 @@ async function handleApi(request, response, requestUrl) {
       message,
       itemId,
       pageUrl,
+      itemKind,
+      EDITION,
     );
     sendJson(response, 201, { id: Number(result.lastInsertRowid), status: "new" });
     return;

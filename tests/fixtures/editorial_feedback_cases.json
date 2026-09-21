@@ -1,0 +1,115 @@
+{
+  "source": "Saved editorial feedback analysis 2026-09-21; article copy only, no account or feedback-author data",
+  "cases": [
+    {
+      "id": "in1622",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "頭金なし車ローン：メリット・リスクと審査基準",
+        "desc": "頭金なし車ローンは、購入の重要なステップですが、多くの金融機関は車両価値の5〜15%を頭金として要求します。PaymentやDown、Loan、banksといった要素が審査に関わります。",
+        "url": "https://www.indiacarnews.com/news/no-down-payment-car-loan-whats-the-catch-benefits-risks-eligibility-68891/",
+        "country": "in"
+      }
+    },
+    {
+      "id": "in1677",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "Royal Enfield Classic 350とMeteor 350の比較、Honda H'ness CB350とCB350RS、TVS Ronin、Jawa 42の特徴を解説",
+        "desc": "Royal Enfield Classic 350は195kgの重量と伝統的なデザイン、Meteor 350は15リットルのタンクと低座高765mmで巡航に最適。",
+        "url": "https://www.autopunditz.com/post/classic-350-vs-meteor-350-hness-cb350-cb350rs-ronin-jawa-42",
+        "country": "in"
+      }
+    },
+    {
+      "id": "jp1804",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "2026年9月受注開始、ZETA IVより20mm広い「NURMAN」が標準レール装着可能",
+        "desc": "ブリッドは2026年9月7日、ZETA IVをベースに腰まわりを約20mm広げた新フルバケットシート「NURMAN」を発売する。マツダロードスター（ND）など車内がタイトな車種でも、ZETA IVと同じ標準レールで装着可能。背面はバックレストハーフカバー仕様で安全性も考慮している。",
+        "url": "https://news.yahoo.co.jp/articles/0cf02223c92e0bab0f4be914f01c854e95af2b06?source=rss",
+        "country": "jp"
+      }
+    },
+    {
+      "id": "jp1811",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "BRIDE、新スポーツシート『ジーグフォー・クラシック』受注開始、クラシカルデザインと最新性能を融合",
+        "desc": "BRIDE（ブリッド）は9月11日より、FRPシルバーシェルを採用し背面シェルをハーフカバー構造とした新スポーツシート「ZIEGⅣ Classic」および「ZIEGⅣ WIDE Classic」の受注を開始した。小径ベルトホールやローマックスシステムといった先代の特徴と最新性能を融合させ、車検対応に必要な別売プロテクターが不要なモデルとなっている。カラーはブラックのみで日本製の難燃生地を使用し、ジーグフォー・クラシックは約7.7kg、ワイド・クラシックは約8.7kg、価格はそれぞれ17万8200円と18万9200円である。",
+        "url": "https://news.yahoo.co.jp/articles/0ee68327c772e31811b5c0015f86575fc06f4f55?source=rss",
+        "country": "jp"
+      }
+    },
+    {
+      "id": "in1679",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "アプリリア・トゥーノ457スペシャルエディション発売、快適性向上",
+        "desc": "Aprilia Indiaが発売したTuono 457 Special Editionは、より直立したライディングポジションを可能にする高めのハンドルと厚みのあるシートを備える。また、吸煙加工のフライスクリーンや調整可能なフロントブレーキレバーといった快適装備も採用され、2006年モデルのラiveryを基調としたMamba BlackやPuma Greyの2色で販売される。",
+        "url": "https://www.autocarindia.com/auto-images/aprilia-tuono-457-special-edition-image-gallery-440460",
+        "country": "in"
+      }
+    },
+    {
+      "id": "us1638",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "1969 年 11 月 14 日、アポロ 12 号がパッドを離脱してから 36 秒半後、雷がサターン V 号とその排気尾跡を通過しました。その 15 秒半後、2 回目の打撃が加わりました。地上のテレメトリは無意味な数字に溶解し、カビンは警告灯で埋め尽くされました。",
+        "desc": "1969 年 11 月 14 日、アポロ 12 号を運ぶサターン V ロケットは、飛行開始直後の 1 分間に 2 回雷に打たれた。このミッションが生き延びたのは、26 歳のフライトコントローラーが、テレメトリーデータに奇妙なパターンを認識したからである。",
+        "url": "https://theartfulage.com/ap-thirty-six-and-a-half-seconds-after-apollo-12-left-the-pad-on-14-november-1969-lightning-travelled-through-the-saturn-v-and-its-exhaust-trail-and-fifteen-and-a-half-seconds-later-a-second-strike/",
+        "country": "us"
+      }
+    },
+    {
+      "id": "in1689",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "MotoRoverノルウェー100回記念ロードトリップ",
+        "desc": "MotoRoverは100回目として、9台のVolvo SUVとBMWバイクで26名が参加するノルウェー10日間ツアーを実施。LærdalトンネルやTrollstigenなど絶景ルートを通り、筆者は「リラックスした冒険」と評価している。",
+        "url": "https://www.autocarindia.com/auto-features/exploring-norway-on-two-wheels-and-four-norway-our-way-441043",
+        "country": "in"
+      }
+    },
+    {
+      "id": "jp1863",
+      "expected_scope": "keep",
+      "article": {
+        "title": "ブリッド、ヌグレ表皮とカーボンシェル採用のフラッグシップシート発売",
+        "desc": "BRIDEは9月16日、高触感素材「NUGRAIN」を表皮に採用した新モデル「STRADIA III NUGRAIN」を発売した。合成皮革で汚れにくく、チャコールグレーの落ち着いたデザインが特徴である。カーボン製シェルとロークッションを組み合わせた仕様で、税込み価格は33万5500円だ。",
+        "url": "https://news.yahoo.co.jp/articles/6c5295ff22f0c3b2fb2f368f3de1cb5d07f2f216?source=rss",
+        "country": "jp"
+      }
+    },
+    {
+      "id": "jp1861",
+      "expected_scope": "keep",
+      "article": {
+        "title": "ブリッド、ヌグレ採用スーパーセミバケットシート発売",
+        "desc": "BRIDEはアキレスの高触感表皮材「NUGRAIN」を採用したスーパーセミバケットシート「GIAS III NUGRAIN」を9月16日より受注開始した。ヌバック風合成皮革による本革に近い風合いとメンテナンス性を備え、難燃生地使用の日本製で保安基準適合。",
+        "url": "https://news.yahoo.co.jp/articles/d29d8c8289ef7a33427b622643aa9ca7d4a1db4f?source=rss",
+        "country": "jp"
+      }
+    },
+    {
+      "id": "us1682",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "快適性と性能を向上させることができる10のバイクアップグレード",
+        "desc": "バイクの快適性を高めるために、必ずしも性能を犠牲にする必要はありません。いくつかのアップグレードは、大きな妥協を強いることなく、両方を同時に改善します。",
+        "url": "https://www.jalopnik.com/2258838/motorcycle-upgrades-improve-comfort-and-performance/",
+        "country": "us"
+      }
+    },
+    {
+      "id": "in1724",
+      "expected_scope": "exclude",
+      "article": {
+        "title": "Royal Enfield Wanderer防水ブーツ、シーム封止で雨天ツーリングに対応",
+        "desc": "Royal Enfield Wandererはレザー製でTPRプロテクターを備えた防水ブーツだ。9,990ルピーの価格に対し、約300kmの雨天走行では浸水が見られたため都市部や短距離ツーリングでの使用が推奨される。",
+        "url": "https://www.autocarindia.com/bike-reviews/royal-enfield-wanderer-waterproof-boots-review-440568",
+        "country": "in"
+      }
+    }
+  ]
+}

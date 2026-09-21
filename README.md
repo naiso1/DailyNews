@@ -46,4 +46,6 @@
 
 考察の短縮で参照が欠けた場合は、検査を通った短縮前の文章を保持します。[考察を短くするときの引用保持](docs/analysis-citation-preservation.md)を参照してください。
 
+ご意見の対応状況、削除理由と復元履歴、週次件数、確認済みの選定ルールはマイページの管理画面で確認します。内装は対象外記事で件数を埋めず、新規記事の採用根拠を検査します。[ご意見・削除理由と記事選定](docs/editorial-feedback.md)を参照してください。
+
 詳細：[外装試用ガイド](docs/exterior-pilot.md)、[Webと購読](deployment/windows-server/EDITIONS_WEB.md)、[処理PC](deployment/workstation/README.md)。

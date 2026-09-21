@@ -18,6 +18,8 @@ const accountState = {
   admin: null,
   authResolved: false,
   subscriptionBaseline: null,
+  feedbackTarget: null,
+  editorialFilters: { status: "", category: "", reasonCode: "", page: 1, hiddenPage: 1, historyPage: 1 },
 };
 
 function accountClientId() {
@@ -185,6 +187,11 @@ function accountStyles() {
     .admin-hidden-meta { margin-top:4px; color:#8fa1b6; font-size:10px; line-height:1.55; overflow-wrap:anywhere; }
     .admin-hidden-restore { border:1px solid rgba(125,241,194,.35); border-radius:10px; min-height:36px; padding:0 12px; background:rgba(125,241,194,.08); color:#bff6df; font-size:11px; font-weight:800; cursor:pointer; }
     .admin-mail-source { display:inline-block; margin-top:4px; padding:2px 6px; border-radius:999px; background:rgba(111,167,255,.12); color:#a8c9ff; font-size:10px; }
+    .admin-review-card { padding:14px; margin:10px 0; border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow-wrap:anywhere; }
+    .admin-review-card p { white-space:pre-wrap; line-height:1.7; font-size:13px; }
+    .admin-review-filters,.admin-review-pages { display:flex; flex-wrap:wrap; align-items:end; gap:10px; margin:12px 0; }
+    .admin-review-filters .account-field { flex:1; min-width:130px; }
+    .admin-review-pages { justify-content:space-between; font-size:12px; }
     .comment-actions { display:flex; align-items:center; gap:8px; margin-top:8px; }
     .comment-like-btn { border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:3px 8px; background:transparent; color:#9fb0c5; font-size:11px; cursor:pointer; }
     .comment-like-btn.liked { border-color:rgba(125,241,194,.45); background:rgba(125,241,194,.12); color:#7df1c2; }
@@ -674,6 +681,7 @@ async function renderAdminPanel() {
   ];
   list.innerHTML = `
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
+    <div id="adminEditorialPanel"></div>
     <h3 class="account-section-title">朝8時のメール配信先 <span class="account-section-count">${mailingList.filter((item) => item.enabled).length}</span></h3>
     <p class="admin-mail-note">${ACCOUNT_ALLOW_GUEST ? "外装版は受信を選んだ方にのみ配信します。ユーザー登録だけでは受信は有効になりません。" : "新しくユーザー登録した方は自動で追加されます。"} ユーザー登録していない方はここから追加できます。停止した宛先には次回から送信しません。</p>
     <form class="admin-mail-form" id="adminMailForm">
@@ -689,14 +697,7 @@ async function renderAdminPanel() {
     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日時（JST）</th><th>最終利用（JST）</th><th>活動</th></tr></thead><tbody>
       ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 👎 ${user.irrelevant} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
     </tbody></table></div>
-    <h3 class="account-section-title">削除された記事 <span class="account-section-count">${hiddenItems.length}</span></h3>
-    <p class="admin-mail-note">ゴミ箱から削除された記事です。復元すると全ユーザーの一覧・New件数・ランキングへ再表示されます。</p>
-    <div class="admin-hidden-list">${hiddenItems.length ? hiddenItems.map((hidden) => {
-      const item = completeItemIndex.get(String(hidden.itemId));
-      return `<div class="admin-hidden-item"><div><div class="admin-hidden-title">${escapeAccountHtml(item?.title || hidden.itemId)}</div><div class="admin-hidden-meta">${escapeAccountHtml(hidden.itemId)} / 理由: ${escapeAccountHtml(hidden.reason)}<br>${escapeAccountHtml(hidden.createdByName || hidden.createdByEmail || "ユーザー不明")} / ${escapeAccountHtml(formatAccountDateTime(hidden.updatedAt))} JST</div></div><button class="admin-hidden-restore" data-hidden-restore="${escapeAccountHtml(hidden.itemId)}" type="button">復元</button></div>`;
-    }).join("") : '<div class="account-empty">削除された記事はありません。</div>'}</div>
-    <h3 class="account-section-title">最近のご意見 <span class="account-section-count">${feedback.length}</span></h3>
-    <div class="account-list">${feedback.length ? feedback.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(item.displayName)} / ${escapeAccountHtml(item.email)} / ${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("") : '<div class="account-empty">ご意見はまだありません。</div>'}</div>`;
+    `;
   list.querySelector("#adminMailForm").addEventListener("submit", addMailRecipient);
   list.querySelectorAll("[data-mail-toggle]").forEach((input) => {
     input.addEventListener("change", () => setMailRecipientEnabled(input));
@@ -707,6 +708,84 @@ async function renderAdminPanel() {
   list.querySelectorAll("[data-hidden-restore]").forEach((button) => {
     button.addEventListener("click", () => restoreHiddenItem(button));
   });
+  await renderEditorialAdmin();
+}
+
+const FEEDBACK_STATUS_LABELS = { new: "未確認", in_review: "対応中", resolved: "対応済み", dismissed: "見送り" };
+const FEEDBACK_CATEGORY_LABELS = { improvement: "改善要望", bug: "不具合", article: "ニュース・画像の誤り", idea: "アイデア提案", other: "その他" };
+const MODERATION_ACTION_LABELS = { hide: "非表示", reason_changed: "理由変更", restore: "復元", legacy_snapshot: "移行時の記録" };
+
+function reviewOptions(labels, selected, allLabel = "") {
+  return (allLabel ? `<option value="">${escapeAccountHtml(allLabel)}</option>` : "") + Object.entries(labels).map(([key, label]) =>
+    `<option value="${escapeAccountHtml(key)}" ${selected === key ? "selected" : ""}>${escapeAccountHtml(label)}</option>`).join("");
+}
+
+function reviewPager(data, key) {
+  const pages = Math.max(1, Math.ceil(data.total / data.pageSize));
+  return `<div class="admin-review-pages"><button type="button" class="account-secondary" data-review-page="${key}" data-page="${data.page - 1}" ${data.page <= 1 ? "disabled" : ""}>前へ</button><span>${data.total}件 / ${data.page}ページ（全${pages}ページ）</span><button type="button" class="account-secondary" data-review-page="${key}" data-page="${data.page + 1}" ${data.page >= pages ? "disabled" : ""}>次へ</button></div>`;
+}
+
+async function renderEditorialAdmin() {
+  const panel = document.getElementById("adminEditorialPanel");
+  if (!panel || !accountState.user?.isAdmin) return;
+  panel.innerHTML = '<div class="account-empty">ご意見・削除理由を読み込み中...</div>';
+  const filters = accountState.editorialFilters;
+  try {
+    const [feedback, moderation, policy] = await Promise.all([
+      accountApi(`/admin/feedback?${new URLSearchParams({status: filters.status, category: filters.category, page: filters.page, pageSize: 10})}`),
+      accountApi(`/admin/moderation?${new URLSearchParams({reasonCode: filters.reasonCode, hiddenPage: filters.hiddenPage, historyPage: filters.historyPage, pageSize: 10})}`),
+      accountApi("/admin/selection-policies"),
+    ]);
+    if (!panel.isConnected || accountState.activityTab !== "admin") return;
+    const reasons = Object.fromEntries(moderation.reasonCodes.map(reason => [reason.key, reason.label]));
+    const index = accountItemIndex({includeHidden: true});
+    const target = item => item.itemId ? `${item.itemKind === "idea" ? "アイデア" : "記事"} ${item.itemId}：${index.get(String(item.itemId))?.title || "過去の対象"}` : "サイト全体";
+    panel.innerHTML = `
+      <h3 class="account-section-title">ご意見の対応管理（${ACCOUNT_EDITION_LABEL}）</h3>
+      <p class="admin-mail-note">${Object.entries(FEEDBACK_STATUS_LABELS).map(([key,label]) => `${label} ${feedback.statusCounts[key] || 0}件`).join(" / ")}</p>
+      <form id="adminFeedbackFilter" class="admin-review-filters"><label class="account-field">対応状況<select name="status">${reviewOptions(FEEDBACK_STATUS_LABELS,filters.status,"すべて")}</select></label><label class="account-field">種類<select name="category">${reviewOptions(FEEDBACK_CATEGORY_LABELS,filters.category,"すべて")}</select></label><button class="account-secondary" type="submit">絞り込む</button></form>
+      ${feedback.items.map(item => `<form class="admin-review-card account-form" data-feedback-review="${item.id}"><strong>${escapeAccountHtml(FEEDBACK_CATEGORY_LABELS[item.category] || item.category)} / ${escapeAccountHtml(target(item))}</strong><p>${escapeAccountHtml(item.message)}</p><span class="account-note">${escapeAccountHtml(item.displayName || "投稿者")} / ${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST</span><label class="account-field">対応状況<select name="status">${reviewOptions(FEEDBACK_STATUS_LABELS,item.status)}</select></label><label class="account-field">対応メモ（投稿者にも表示）<textarea name="adminNote" maxlength="2000">${escapeAccountHtml(item.adminNote)}</textarea></label><button class="account-secondary" type="submit">対応状況を保存</button><span class="account-note" role="status"></span></form>`).join("") || '<p class="account-empty">該当するご意見はありません。</p>'}
+      ${reviewPager(feedback,"page")}
+      <details><summary>直近12週間のご意見件数（全種類・全状態）</summary><p class="admin-mail-note">${(feedback.weekly || []).map(week => `${escapeAccountHtml(week.weekStart)} の週：${week.count}件`).join("<br>") || "記録なし"}</p></details>
+      <h3 class="account-section-title">削除理由と復元履歴</h3>
+      <p class="admin-mail-note">現在非表示 ${moderation.summary.hiddenCount}件 / ${moderation.reasonCounts.map(row => `${escapeAccountHtml(reasons[row.reasonCode] || row.reasonCode)} ${row.count}件`).join(" / ")}<br>以前の削除は「移行時の記録」です。移行前の理由変更・復元の回数は含みません。</p>
+      <form id="adminReasonFilter" class="admin-review-filters"><label class="account-field">理由<select name="reasonCode">${reviewOptions(reasons,filters.reasonCode,"すべて")}</select></label><button class="account-secondary" type="submit">絞り込む</button></form>
+      <h4>現在非表示の対象</h4>
+      ${moderation.hidden.items.map(item => `<div class="admin-review-card"><strong>${escapeAccountHtml(target(item))}</strong><p>${escapeAccountHtml(reasons[item.reasonCode] || item.reasonCode)}：${escapeAccountHtml(item.reason)}</p><span class="account-note">${escapeAccountHtml(formatAccountDateTime(item.updatedAt))} JST</span> <button type="button" class="account-secondary" data-hidden-edit="${escapeAccountHtml(item.itemId)}" data-item-kind="${escapeAccountHtml(item.itemKind)}">理由を変更</button> <button type="button" class="admin-hidden-restore" data-hidden-restore="${escapeAccountHtml(item.itemId)}">復元</button></div>`).join("") || '<p class="account-empty">該当する対象はありません。</p>'}
+      ${reviewPager(moderation.hidden,"hiddenPage")}
+      <details><summary>操作履歴を見る</summary>${moderation.history.items.map(item => `<div class="admin-review-card"><strong>${escapeAccountHtml(MODERATION_ACTION_LABELS[item.action] || item.action)} / ${escapeAccountHtml(target(item))}</strong><p>${escapeAccountHtml(reasons[item.reasonCode] || item.reasonCode)}：${escapeAccountHtml(item.reason)}</p><span class="account-note">${escapeAccountHtml(formatAccountDateTime(item.eventAt))} JST / ${escapeAccountHtml(item.actorName || "システム記録")}</span></div>`).join("") || '<p class="account-empty">履歴なし</p>'}${reviewPager(moderation.history,"historyPage")}</details>
+      <details><summary>直近12週間の削除・復元（全理由）</summary><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>週の開始日（JST）</th><th>非表示</th><th>理由変更</th><th>復元</th><th>移行時の記録</th></tr></thead><tbody>${moderation.weekly.map(week => `<tr><td>${escapeAccountHtml(week.weekStart)}</td><td>${week.hide}</td><td>${week.reasonChanged}</td><td>${week.restore}</td><td>${week.legacySnapshot}</td></tr>`).join("")}</tbody></table></div></details>
+      <h3 class="account-section-title">次回収集に反映する選定ルール</h3>
+      <p class="admin-mail-note">確認済みのルールだけを次回の収集開始時に読み込みます。ご意見の文章は自動でルール化しません。非表示にした記事のURLは再掲載を防ぎ、復元すると次回から除外を解除します。${ACCOUNT_ALLOW_GUEST ? "外装版は既存の外装製品・市場情報の選定を継続します。" : "取得に失敗した場合は保存済み設定を使い、8日を超えた設定は標準ルールへ戻します。"}</p>
+      ${policy.policies.map(item => `<form class="admin-review-card account-form" data-policy-review="${escapeAccountHtml(item.key)}"><strong>${escapeAccountHtml(item.label)}</strong><p>${escapeAccountHtml(item.description || "")}</p><label class="account-note"><input type="checkbox" name="enabled" ${item.enabled ? "checked" : ""}>このルールを有効にする</label><label class="account-field">確認状態<select name="reviewStatus">${reviewOptions({pending:"未確認",approved:"確認済み"},item.reviewStatus)}</select></label><label class="account-field">判断メモ<textarea name="adminNote" maxlength="2000">${escapeAccountHtml(item.adminNote)}</textarea></label><button class="account-secondary" type="submit">ルールを保存</button><span class="account-note" role="status"></span></form>`).join("")}
+      <details><summary>ルール変更の履歴</summary><p class="admin-mail-note">${policy.history.map(item => `${escapeAccountHtml(formatAccountDateTime(item.eventAt))} JST / ${escapeAccountHtml(policy.policies.find(p => p.key === item.key)?.label || item.key)} / ${item.enabled ? "有効" : "無効"}・${item.reviewStatus === "approved" ? "確認済み" : "未確認"}<br>${escapeAccountHtml(item.adminNote || "")}`).join("<br><br>") || "記録なし"}</p></details>`;
+    panel.querySelector("#adminFeedbackFilter").addEventListener("submit", event => {
+      event.preventDefault(); const values = new FormData(event.currentTarget);
+      Object.assign(filters,{status:values.get("status"),category:values.get("category"),page:1}); renderEditorialAdmin();
+    });
+    panel.querySelector("#adminReasonFilter").addEventListener("submit", event => {
+      event.preventDefault(); filters.reasonCode = new FormData(event.currentTarget).get("reasonCode");
+      filters.hiddenPage = filters.historyPage = 1; renderEditorialAdmin();
+    });
+    panel.querySelectorAll("[data-review-page]").forEach(button => button.addEventListener("click", () => {
+      filters[button.dataset.reviewPage] = Number(button.dataset.page); renderEditorialAdmin();
+    }));
+    panel.querySelectorAll("[data-hidden-restore]").forEach(button => button.addEventListener("click", () => restoreHiddenItem(button)));
+    panel.querySelectorAll("[data-hidden-edit]").forEach(button => button.addEventListener("click", () => window.requestArticleRemoval?.(button.dataset.hiddenEdit, button.dataset.itemKind)));
+    panel.querySelectorAll("[data-feedback-review], [data-policy-review]").forEach(form => form.addEventListener("submit", async event => {
+      event.preventDefault(); const values = new FormData(form), status = form.querySelector('[role="status"]');
+      const button = form.querySelector('button[type="submit"]'); button.disabled = true;
+      try {
+        const isPolicy = Boolean(form.dataset.policyReview);
+        const body = isPolicy ? {enabled:values.has("enabled"), reviewStatus:values.get("reviewStatus"), adminNote:values.get("adminNote")} : {status:values.get("status"),adminNote:values.get("adminNote")};
+        if (isPolicy && body.enabled && body.reviewStatus !== "approved") throw new Error("有効にするには確認状態を「確認済み」にしてください。");
+        await accountApi(isPolicy ? `/admin/selection-policies/${encodeURIComponent(form.dataset.policyReview)}` : `/admin/feedback/${form.dataset.feedbackReview}`, {method:"PUT",body});
+        await refreshActivity(); await renderEditorialAdmin();
+      } catch (error) { status.textContent = `保存できませんでした。${error.message}`; button.disabled = false; }
+    }));
+  } catch (error) {
+    panel.innerHTML = `<p class="account-error show">ご意見の管理情報を取得できませんでした。${escapeAccountHtml(error.message)}</p>`;
+  }
 }
 
 async function restoreHiddenItem(button) {
@@ -778,15 +857,21 @@ async function deleteMailRecipient(button) {
 function renderFeedbackForm() {
   const list = document.getElementById("accountActivityList");
   const previous = accountState.activity?.feedback || [];
+  const target = accountState.feedbackTarget;
+  const targetItem = target ? accountItemIndex({includeHidden:true}).get(String(target.itemId)) : null;
   list.innerHTML = `
     <form class="account-form" id="accountFeedbackForm">
+      ${target ? `<p class="account-note">対象：${escapeAccountHtml(target.itemKind === "idea" ? "アイデア" : "記事")} ${escapeAccountHtml(target.itemId)} / ${escapeAccountHtml(targetItem?.title || "選択した対象")}<br><button class="account-secondary" id="clearFeedbackTarget" type="button">対象を外してサイト全体への意見にする</button></p>` : '<p class="account-note">サイト全体へのご意見です。記事・アイデアの「ご意見」から開くと、その対象を指定できます。</p>'}
       <label class="account-field">種類<select name="category"><option value="improvement">改善要望</option><option value="bug">不具合</option><option value="article">ニュース・画像の誤り</option><option value="idea">アイデア提案</option><option value="other">その他</option></select></label>
       <label class="account-field">内容<textarea name="message" maxlength="2000" required placeholder="ご意見を入力してください"></textarea></label>
       <button class="account-primary" type="submit">送信する</button>
       <div class="account-feedback-status" id="accountFeedbackStatus"></div>
     </form>
-    ${previous.length ? `<div style="margin-top:22px"><strong>送信履歴</strong><div class="account-list" style="margin-top:10px">${previous.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(item.status)}</span></div>`).join("")}</div></div>` : ""}`;
+    ${previous.length ? `<div style="margin-top:22px"><strong>送信履歴・対応状況</strong><div class="account-list" style="margin-top:10px">${previous.map((item) => `<div class="account-list-item" style="cursor:default"><span class="account-list-title">${escapeAccountHtml(item.message)}</span><span class="account-list-sub">${escapeAccountHtml(formatAccountDateTime(item.createdAt))} JST / ${escapeAccountHtml(FEEDBACK_STATUS_LABELS[item.status] || item.status)}${item.itemId ? ` / 対象：${escapeAccountHtml(item.itemId)}` : ""}</span>${item.adminNote ? `<span class="account-list-sub" style="white-space:pre-wrap">対応メモ：${escapeAccountHtml(item.adminNote)}</span>` : ""}</div>`).join("")}</div></div>` : ""}`;
   list.querySelector("#accountFeedbackForm").addEventListener("submit", submitFeedback);
+  list.querySelector("#clearFeedbackTarget")?.addEventListener("click", () => {
+    accountState.feedbackTarget = null; renderFeedbackForm();
+  });
 }
 
 async function submitFeedback(event) {
@@ -794,6 +879,9 @@ async function submitFeedback(event) {
   const form = event.currentTarget;
   const values = new FormData(form);
   const status = form.querySelector("#accountFeedbackStatus");
+  const button = form.querySelector('button[type="submit"]');
+  const target = accountState.feedbackTarget;
+  button.disabled = true;
   try {
     await accountApi("/feedback", {
       method: "POST",
@@ -801,13 +889,22 @@ async function submitFeedback(event) {
         category: values.get("category"),
         message: values.get("message"),
         pageUrl: location.href,
+        edition: window.DAILYNEWS_CONFIG?.id || "interior",
+        itemId: target?.itemId || "",
+        itemKind: target?.itemKind || "",
       },
     });
     form.reset();
-    status.textContent = "送信しました。ありがとうございます。";
-    await refreshActivity();
+    accountState.feedbackTarget = null;
+    await refreshActivity().catch(() => {});
+    if (accountState.activityTab === "feedback") {
+      renderFeedbackForm();
+      document.getElementById("accountFeedbackStatus").textContent = "送信しました。対応状況はこの画面で確認できます。";
+    }
   } catch (_) {
     status.textContent = "送信できませんでした。時間をおいて再度お試しください。";
+  } finally {
+    button.disabled = false;
   }
 }
 
@@ -941,6 +1038,11 @@ window.dailyNewsAccount = {
   },
   open: openAccount,
   openTab: openAccountTab,
+  openFeedback(itemId, itemKind) {
+    accountState.feedbackTarget = itemId ? {itemId: String(itemId), itemKind: itemKind === "idea" ? "idea" : "news"} : null;
+    accountState.activityTab = "feedback";
+    openAccountTab("feedback");
+  },
   openAuth(mode = "login", message = "") {
     openAccount(mode, message || "この操作にはログインが必要です。");
   },
@@ -965,6 +1067,9 @@ window.dailyNewsAccount = {
 
 window.addEventListener("dailynews:activity-updated", () => {
   if (accountState.user) refreshActivity().catch(() => {});
+  if (accountState.user?.isAdmin && accountState.activityTab === "admin" && document.getElementById("accountOverlay")?.classList.contains("open")) {
+    renderEditorialAdmin();
+  }
 });
 document.addEventListener("DOMContentLoaded", initializeAccount);
 

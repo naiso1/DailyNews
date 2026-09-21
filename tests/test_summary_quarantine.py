@@ -32,6 +32,9 @@ class SummaryQuarantineTests(unittest.TestCase):
         self.stack.enter_context(patch.object(collector, "is_same_topic_text", return_value=False))
         self.stack.enter_context(patch.object(collector, "SHEET2_SIMILARITY_THRESHOLD", 1.1))
         self.stack.enter_context(patch.object(collector, "OUTPUT_PAPERS_SHEET2", False))
+        # Isolate language quarantine from the separately tested editorial gate.
+        self.stack.enter_context(patch.object(collector, "apply_editorial_policy",
+                                             return_value={"decision": "keep", "reason": "fixture", "evidence": {}}))
         self.stack.enter_context(patch.object(collector, "published_news", return_value=[]))
         self.stack.enter_context(patch.object(collector, "SHEET2_RESULT", None))
         self.stack.enter_context(patch.object(collector, "SOURCE_FETCH_COUNTS", {"attempted": 1, "succeeded": 1}))
