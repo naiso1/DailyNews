@@ -36,7 +36,7 @@ from dailynews.collection_digest import collection_window, published_news, publi
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
 from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
-                                        extract_evidence, assessment_prompt, exterior_scope_rules)
+                                        extract_evidence, assessment_prompt, exterior_scope_rules, explicit_model_rejection)
 from dailynews.feedback_snapshot import load_feedback_snapshot
 
 EDITION = get_edition()
@@ -81,6 +81,8 @@ OUTPUT_COLUMNS = [
     "\u95a2\u9023\u5ea6\u30b9\u30b3\u30a2",
     "\u5185\u88c5\u95a2\u9023\u5ea6",
     "\u5185\u88c5\u5224\u5b9a\u7406\u7531",
+    "内装関連度_原判定",
+    "内装判定理由_原判定",
     "\u95a2\u9023\u30ad\u30fc\u30ef\u30fc\u30c9",
     "\u51fa\u5c55\u30b5\u30a4\u30c8",
     "\u753b\u50cfURL",
@@ -652,6 +654,10 @@ def store_exterior_assessment(item, assessment):
         for key, column in EVIDENCE_COLUMNS.items():
             item[column] = evidence.get(key, "")
         item["採用根拠_状態"] = {"keep": "検証済み", "exclude": "対象外"}.get(assessment.get("policy_decision"), "根拠不足")
+        item["内装関連度_原判定"] = assessment.get("raw_score", "")
+        item["内装判定理由_原判定"] = assessment.get("raw_reason", "")
+        if assessment.get("policy_decision") == "exclude":
+            item["LLM判定"] = "非対象"
     if EDITION.id == "exterior":
         inferred = exterior_rules.news_category(item.get("タイトル"), item.get("内容"))
         item["記事区分"] = assessment.get("category", inferred[0])
@@ -1603,7 +1609,9 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
                 image_interior = None
         elif not isinstance(image_interior, bool):
             image_interior = None
-        reason = normalize_text(str(data.get("reason", "") or ""))[:80]
+        raw_score = score
+        raw_reason = normalize_text(str(data.get("reason", "") or ""))
+        reason = raw_reason[:80]
         if not reason:
             m = re.search(r'"reason"\s*:\s*"([^"]*)"', txt)
             if m:
@@ -1613,6 +1621,13 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             if m:
                 raw = m.group(1).lower()
                 image_interior = True if raw == "true" else (False if raw == "false" else None)
+        if EDITION.id == "interior" and explicit_model_rejection(raw_score, raw_reason, data.get("evidence")):
+            result = {"score": raw_score, "raw_score": raw_score, "raw_reason": raw_reason,
+                      "image_interior": image_interior, "reason": reason, "evidence": extract_evidence(data),
+                      "policy_decision": "exclude", "policy_reason": "model_explicit_rejection",
+                      "policy_version": POLICY_VERSION}
+            print(f"  [EDITORIAL_EXCLUDED] model_explicit_rejection score={raw_score}: {url}")
+            return result
         if EDITION.id == "interior":
             score = spread_interior_score(score, title, url, image_interior)
         category, trend_topic = "", ""
@@ -1632,7 +1647,8 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             if policy["decision"] != "keep":
                 print(f"  [EDITORIAL_EVIDENCE_HELD] {policy['reason']}: {url}")
                 return None
-            result.update(evidence=policy["evidence"], policy_decision="keep", policy_version=POLICY_VERSION)
+            result.update(evidence=policy["evidence"], policy_decision="keep", policy_version=POLICY_VERSION,
+                          raw_score=raw_score, raw_reason=raw_reason)
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
@@ -2877,8 +2893,9 @@ def apply_interior_selection_policy(work, candidates, protected_urls, rules):
                 row["内装判定理由"] = assessment.get("reason", "")
                 store_exterior_assessment(row, assessment)
                 article = collector_article(row)
-                policy = apply_editorial_policy(article, rules)
-                for column in ["内装関連度", "内装判定理由", *EVIDENCE_COLUMNS.values()]:
+                policy = ({"decision": "exclude", "reason": assessment.get("policy_reason", assessment.get("reason", ""))}
+                          if assessment.get("policy_decision") == "exclude" else apply_editorial_policy(article, rules))
+                for column in ["LLM判定", "内装関連度", "内装判定理由", "内装関連度_原判定", "内装判定理由_原判定", *EVIDENCE_COLUMNS.values()]:
                     work.at[index, column] = row.get(column, "")
                     candidates.at[index, column] = row.get(column, "")
                 changed = True
@@ -4035,6 +4052,8 @@ def enrich_existing_df(df):
         ("関連度スコア", 0.0),
         ("内装関連度", ""),
         ("内装判定理由", ""),
+        ("内装関連度_原判定", ""),
+        ("内装判定理由_原判定", ""),
         *((column, "") for column in EVIDENCE_COLUMNS.values()),
         ("採用根拠_状態", ""),
         ("関連キーワード", ""),

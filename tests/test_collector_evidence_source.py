@@ -57,7 +57,8 @@ class CollectorEvidenceSourceTests(unittest.TestCase):
         self.row = {"タイトル": "Supplier develops capacitive door trim", "内容": SNIPPET,
                     "URL": "https://example.com/capacitive-trim", "画像URL": "https://example.com/trim.jpg",
                     "国": "米国", "日付": "2026-09-21", "ソース": "Example", "LLM判定": "対象",
-                    "採用根拠_状態": "", "LLM後処理": "実施", "内装関連度": "", "内装判定理由": ""}
+                    "採用根拠_状態": "", "LLM後処理": "実施", "内装関連度": "", "内装判定理由": "",
+                    "内装関連度_原判定": "", "内装判定理由_原判定": ""}
 
     def assert_preserved_evidence(self, row):
         self.assertEqual(row["内容"], BODY)
@@ -100,6 +101,25 @@ class CollectorEvidenceSourceTests(unittest.TestCase):
                 row = self.row.copy()
                 self.assertEqual(self.env["interior_evidence_source"](row), SNIPPET)
                 self.assertEqual(row["内容"], SNIPPET)
+
+    def test_sheet2_repair_persists_explicit_rejection_instead_of_repeating_a_hold(self):
+        import pandas as pd
+        self.env["pd"] = pd
+        self.env["call_llm_interior_assessment"].return_value = {
+            "score": 10, "raw_score": 10, "reason": "対象外: 店舗紹介のみ。", "raw_reason": "対象外: 店舗紹介のみ。",
+            "evidence": dict.fromkeys(EVIDENCE_COLUMNS, ""), "policy_decision": "exclude",
+            "policy_reason": "model_explicit_rejection"}
+        frame = pd.DataFrame([self.row])
+        for column in EVIDENCE_COLUMNS.values():
+            frame[column] = ""
+        selected, decisions, changed = self.env["apply_interior_selection_policy"](frame, frame.copy(), set(), [])
+        self.assertTrue(selected.empty)
+        self.assertTrue(changed)
+        self.assertEqual(decisions[0]["decision"], "exclude")
+        self.assertEqual(decisions[0]["reason"], "model_explicit_rejection")
+        self.assertEqual(frame.iloc[0]["LLM判定"], "非対象")
+        self.assertEqual(frame.iloc[0]["採用根拠_状態"], "対象外")
+        self.assertEqual(frame.iloc[0]["内装関連度_原判定"], 10)
 
     def test_translated_summary_never_becomes_source_and_offline_is_unchanged(self):
         row = dict(self.row, **{"内容（日本語）": "要約だけに書かれた根拠を原文へ混ぜない。"})

@@ -2,7 +2,7 @@
 import re
 import unicodedata
 
-POLICY_VERSION = "interior-development-value-v2"
+POLICY_VERSION = "interior-development-value-v3"
 EVIDENCE_COLUMNS = {
     "target_component": "採用根拠_対象部品",
     "new_information": "採用根拠_新情報",
@@ -111,6 +111,19 @@ def extract_evidence(article):
             for key, column in EVIDENCE_COLUMNS.items()}
 
 
+def explicit_model_rejection(score, reason, evidence):
+    """Recognize a complete, unambiguous rejection without weakening evidence gates."""
+    if not isinstance(score, (int, float)) or isinstance(score, bool) or not 0 <= score < 40:
+        return False
+    if not isinstance(evidence, dict) or not all(key in evidence for key in EVIDENCE_COLUMNS):
+        return False
+    if any(not isinstance(evidence[key], str) or evidence[key].strip() for key in EVIDENCE_COLUMNS):
+        return False
+    # Low scores alone and partly filled/malformed rationale remain review holds.
+    return bool(re.match(r"^(?:(?:対象外|非対象|不採用)(?=$|[。、:：\s]|です|と判定)|"
+                         r"(?:out of scope|not relevant|excluded?)(?=$|[\s:.,;-]))", _text(reason), re.I))
+
+
 def evidence_problems(article, evidence=None):
     evidence = evidence if isinstance(evidence, dict) else extract_evidence(article)
     if "seat and display plus cabin image" in _text(article.get("reason") or article.get("interiorReason") or article.get("内装判定理由")).lower():
@@ -196,15 +209,22 @@ def assessment_instructions():
     return (
         "乗用車の内装部品開発に役立つ記事か、以下の原文タイトルと原文本文・抜粋を読んで判定してください。\n"
         "先に原文に現れる具体的な部品・素材名と特性を照合し、evidenceの根拠欄を作成してからscoreを決めてください。"
-        "裏付けのある情報だけを使い、次の優先順位で判定してください。\n"
+        "裏付けのある情報だけを使い、以下の独立した採用分野を判定してください。"
+        "素材・表皮の分野だけが採用対象ではありません。HMI・センシング・車室内の快適性も独立した採用分野です。"
+        "いずれかの分野に具体的な新情報と開発上の参照点があれば採用候補になります。\n"
         "1. 自動車用（自動車レース用も含む）の表皮材・材料について、原文に具体的な素材名と特性"
         "（触感、表面構造、清掃性など）がある場合は、まず素材比較の採用候補にしてください。"
         "この条件に該当すれば、製品がシートでも『シート単体』として除外しません。"
         "素材名と『高触感』『ヌバック風合成皮革』のような定性的な特性の組合せだけでも、この条件を満たします。"
         "原文の素材名と特性をもとに比較・応用を今後の検討仮説として書けます。"
         "採用候補はscoreを60以上とし、根拠4項目を実際の原文から作成してください。\n"
-        "2. 上の素材条件に該当しない場合も、加飾・センシング・HMI・材料工程・車室内の快適性などの"
-        "具体的な新情報があれば採用候補です。素材や機能の知見がなく、シート単体の発売・寸法・装着適合・"
+        "2. 加飾・センシング・HMI・材料工程・車室内の快適性に関する具体的な新情報も、1とは独立した採用条件です。"
+        "HMIではメーターとディスプレイの連携、操作画面・表示領域・入力方式の具体的な変更などを、"
+        "乗員の操作性や内装の配置・インターフェース設計で比較できれば採用候補にしてください。"
+        "センシングでは検知対象・配置・動作条件など、快適性では車室内の具体的な機能・構成を原文で確認します。"
+        "これらの記事を『素材名・触感・材料開発情報がない』という理由だけで対象外にしないでください。"
+        "ただし一般的な機能紹介、原文に具体的な変化のない解説、店舗広告だけの記事は無理に採用しません。"
+        "素材や機能の知見がなく、シート単体の発売・寸法・装着適合・"
         "価格だけの記事は原則対象外です。原文にない性能や数値は作らないでください。\n"
         "3. 二輪車・ライディング用品、購入ローン手続、観光、宇宙史、外装照明だけの記事は対象外です。"
         "この段落の分野だけは、原文に乗用車内装への具体的な技術転用が明記される場合に例外を検討できます。"
@@ -228,7 +248,8 @@ def assessment_instructions():
         "source_quoteは、その新情報と部品・技術を裏付ける原文タイトルまたは本文の連続した一節だけを、"
         "8～240文字で原文のまま引用してください。入力の見出しラベル・URLや別の箇所をつなげないでください。"
         "原文にない内容を採用根拠へ追加しないでください。"
-        "根拠が確認できる採用候補では4項目すべてを記入してください。根拠不足ならscoreを40未満とし、"
+        "根拠が確認できる採用候補では4項目すべてを記入してください。明確な対象外と判定した場合は"
+        "reasonを『対象外:』で始め、その記事固有の理由を続けてください。根拠不足ならscoreを40未満とし、"
         "裏付けられない根拠欄は空にしてください。『内装開発に役立つ』など汎用理由や例文のコピーを避けてください。"
         "内装の画像だけでは本文の根拠を代用できません。\n"
     )
