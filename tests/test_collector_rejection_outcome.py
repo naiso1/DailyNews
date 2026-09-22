@@ -1,10 +1,13 @@
 """A model's explicit rejection is distinct from malformed or missing evidence."""
 import ast
 from contextlib import redirect_stdout
+from datetime import datetime
+import hashlib
 import io
 import json
 from pathlib import Path
 import re
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock
@@ -32,7 +35,7 @@ class CollectorRejectionOutcomeTests(unittest.TestCase):
                     "LLM_MODEL": "fixture-model", "LLM_REASONING_EFFORT": "none", "LLM_TIMEOUT": 1,
                     "spread_interior_score": Mock(side_effect=lambda score, *args: score),
                     "calibrate_interior_score": Mock(return_value=(85, "")),
-                    "record_exterior_llm_failure": Mock()}
+                    "record_exterior_llm_failure": Mock(), "record_interior_assessment_hold": Mock()}
         exec(compile(ast.Module(body=nodes, type_ignores=[]), "isolated-rejection-outcome", "exec"), self.env)
 
     def assess(self, *, score=10, reason="対象外。店舗の営業案内のみで内装機能の具体的な変更がない。", evidence=None):
@@ -60,10 +63,13 @@ class CollectorRejectionOutcomeTests(unittest.TestCase):
         self.assertEqual(row["内装判定理由_原判定"], self.data["reason"])
         self.assertIn("[EDITORIAL_EXCLUDED]", self.output.getvalue())
         self.assertNotIn("[EDITORIAL_EVIDENCE_HELD]", self.output.getvalue())
+        self.env["record_interior_assessment_hold"].assert_not_called()
 
     def test_low_score_without_clear_rejection_remains_held(self):
         self.assertIsNone(self.assess(reason="追加の原文情報が必要であり、現時点では判断できない。"))
         self.assertIn("[EDITORIAL_EVIDENCE_HELD]", self.output.getvalue())
+        self.env["record_interior_assessment_hold"].assert_called_once()
+        self.assertEqual(self.env["record_interior_assessment_hold"].call_args.args[3], self.data)
 
     def test_high_score_or_incomplete_structure_is_not_misread_as_explicit_rejection(self):
         self.assertIsNone(self.assess(score=80))
@@ -77,6 +83,32 @@ class CollectorRejectionOutcomeTests(unittest.TestCase):
         self.assertIn("一般的な機能紹介", prompt)
         self.assertIn("4項目すべて", prompt)
         self.assertIn("原文にない内容を採用根拠へ追加しない", prompt)
+
+    def test_held_response_is_saved_privately_without_source_body_or_image_request(self):
+        tree = ast.parse((ROOT / "ニュース収集/google_search_script.py").read_text(encoding="utf-8-sig"))
+        nodes = [node for node in tree.body if isinstance(node, ast.FunctionDef)
+                 and node.name == "record_interior_assessment_hold"]
+        self.assertEqual(len(nodes), 1)
+        with TemporaryDirectory() as directory:
+            env = {"ROOT": Path(directory), "EDITION": SimpleNamespace(id="interior"),
+                   "LLM_MODEL": "fixture-model", "POLICY_VERSION": POLICY_VERSION,
+                   "datetime": datetime, "hashlib": hashlib, "json": json}
+            exec(compile(ast.Module(body=nodes, type_ignores=[]), "isolated-hold-diagnostic", "exec"), env)
+            data = {"score": 70, "evidence": {"source_quote": "meter display"}}
+            response = {"choices": [{"message": {"content": json.dumps(data)}}], "usage": {"total_tokens": 42}}
+            env["record_interior_assessment_hold"]("Title", "Original full source body", "https://example.com/news",
+                                                    data, response, {"decision": "hold", "reason": "fixture"})
+            files = list(Path(directory).rglob("*.jsonl"))
+            self.assertEqual(len(files), 1)
+            self.assertEqual(files[0].relative_to(directory).as_posix(), "runtime/interior/editorial_assessment_holds.jsonl")
+            saved = json.loads(files[0].read_text(encoding="utf-8"))
+            self.assertEqual(saved["parsed_assessment"], data)
+            self.assertEqual(saved["response"], response)
+            self.assertEqual(saved["source_chars"], len("Original full source body"))
+            self.assertNotIn("Original full source body", files[0].read_text(encoding="utf-8"))
+            env["EDITION"] = SimpleNamespace(id="exterior")
+            env["record_interior_assessment_hold"]("Title", "Other body", "https://example.com/other", {}, {}, {})
+            self.assertEqual(len(files[0].read_text(encoding="utf-8").splitlines()), 1)
 
 
 if __name__ == "__main__":

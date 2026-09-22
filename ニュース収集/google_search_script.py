@@ -1519,6 +1519,23 @@ def calibrate_interior_score(score, title="", content="", summary="", image_inte
 
     return int(max(0, min(100, score))), reason
 
+def record_interior_assessment_hold(title, content, url, data, response_payload, policy):
+    """Keep a private diagnosis of held source evidence, outside published assets."""
+    if EDITION.id != "interior":
+        return
+    try:
+        path = ROOT / "runtime" / "interior" / "editorial_assessment_holds.jsonl"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        record = {"recorded_at": datetime.now().astimezone().isoformat(), "edition_id": EDITION.id,
+                  "model": LLM_MODEL, "policy_version": POLICY_VERSION, "title": title, "url": url,
+                  "source_chars": len(content), "source_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+                  "parsed_assessment": data, "response": response_payload, "policy": policy}
+        with path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except (OSError, TypeError, ValueError) as exc:
+        print(f"  [EDITORIAL_DIAGNOSTIC_WARN] {type(exc).__name__}")
+
+
 def call_llm_interior_assessment(title, content, image_url="", url="", summary=""):
     """Local LLM judgment for fuzzy interior relevance, including image evidence."""
     global LLM_ERROR_LOGGED
@@ -1579,7 +1596,8 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
                 print(resp.text[:200])
                 LLM_ERROR_LOGGED = True
             return None
-        txt = resp.json().get("choices", [{}])[0].get("message", {}).get("content", "")
+        response_payload = resp.json()
+        txt = response_payload.get("choices", [{}])[0].get("message", {}).get("content", "")
         data = extract_json_object(txt)
         if not data:
             # Some local models continue the assistant's {"score": prefix.
@@ -1646,6 +1664,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             policy = apply_editorial_policy(dict(source_article, evidence=data.get("evidence"), reason=reason), rules)
             if policy["decision"] != "keep":
                 print(f"  [EDITORIAL_EVIDENCE_HELD] {policy['reason']}: {url}")
+                record_interior_assessment_hold(title, content, url, data, response_payload, policy)
                 return None
             result.update(evidence=policy["evidence"], policy_decision="keep", policy_version=POLICY_VERSION,
                           raw_score=raw_score, raw_reason=raw_reason)
@@ -3978,11 +3997,24 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
             item["HTML取得"] = "×"
             item["URL"] = ""
             item["画像URL"] = ""
+        content_is_full_article = False
+        # A relevance verdict from a bare RSS stub (title-only aggregator
+        # duplicates commonly have no real snippet) is unreliable; fetch the
+        # full article once and re-check before discarding it as non-target.
+        if (USE_LLM and EDITION.id == "interior" and not is_paper_item
+                and item.get("LLM判定") == "非対象" and len(content) < 150):
+            fetched = interior_evidence_source(item)
+            if len(fetched) >= 150 and fetched != content:
+                content = fetched
+                content_is_full_article = True
+                llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
+                if llm_relevance:
+                    item["LLM判定"] = llm_relevance
         # LLM判定が非対象なら後処理をスキップ
         if USE_LLM and item.get("LLM判定") == "非対象":
             item["LLM後処理"] = "スキップ"
         else:
-            if EDITION.id == "interior" and not is_paper_item:
+            if EDITION.id == "interior" and not is_paper_item and not content_is_full_article:
                 content = interior_evidence_source(item)
             # 要約（日本語）を生成
             summary_title, summary_body = summarize_article(title, content, item.get("URL", ""), country)
@@ -4197,12 +4229,26 @@ def enrich_existing_df(df):
         if is_paper_row:
             row["LLM\u5224\u5b9a"] = "\u5bfe\u8c61"
         force_process = PROCESS_LLM_SKIPPED and str(row.get("LLM後処理")).strip() == "スキップ"
+        content_is_full_article = False
         if USE_LLM and (not is_paper_row) and not force_process:
             if pd.isna(row.get("LLM判定")) or str(row.get("LLM判定")).strip() == "":
                 llm_rel, _ = call_llm_classify(title, content, "", mode="relevance")
                 if llm_rel:
                     row["LLM判定"] = llm_rel
                 llm_calls += 1
+            # A relevance verdict from a bare RSS stub (title-only aggregator
+            # duplicates commonly have no real snippet) is unreliable; fetch the
+            # full article once and re-check before discarding it as non-target.
+            if row.get("LLM判定") == "非対象" and EDITION.id == "interior" and len(content) < 150:
+                fetched = interior_evidence_source(row)
+                if len(fetched) >= 150 and fetched != content:
+                    content = fetched
+                    row["内容"] = content
+                    content_is_full_article = True
+                    llm_rel, _ = call_llm_classify(title, content, "", mode="relevance")
+                    if llm_rel:
+                        row["LLM判定"] = llm_rel
+                    llm_calls += 1
             if row.get("LLM判定") == "非対象":
                 row["LLM後処理"] = "スキップ"
                 df_out.loc[row_idx] = row
@@ -4216,7 +4262,7 @@ def enrich_existing_df(df):
                     except Exception:
                         pass
                 continue
-        if EDITION.id == "interior" and not is_paper_row:
+        if EDITION.id == "interior" and not is_paper_row and not content_is_full_article:
             content = interior_evidence_source(row)
         # 要約（日本語）を生成
         summary_title, summary_body = summarize_article(title, content, row.get("URL", ""), row.get("国", ""))
