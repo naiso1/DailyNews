@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-22 10:04";
+window.NEWS_UPDATED_AT = "2026-09-22 13:08";
 
 window.LOADED_NEWS_DATA = [
 
@@ -228604,6 +228604,51 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "eu",
         img: "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/img_web_800x600_ultrasense_publicar.jpg",
+        note: ""
+    },
+    // 2026-09-21 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1871",
+        title: "ケンウッド彩速ナビ、スマホ連携で車載体験を拡張",
+        desc: "ケンウッドの最新彩速ナビは、Apple CarPlayやAndroid Autoによるワイヤレス接続を標準装備し、SiriやGoogle Geminiでの音声操作に対応する。これにより、従来のカーナビが持つ自車位置精度と、スマホアプリ特有の柔軟性を併用できる環境が整った。",
+        url: "https://news.yahoo.co.jp/articles/f6649737c447dc69b17275431789eba280f10358",
+        source: "MotorFan",
+        date: "2026-09-21",
+        tags: ["AR", "コネクテッド", "AI"],
+    
+        sourceExcerpt: "ケンウッドの最新彩速ナビでは、iPhoneやアンドロイド端末を有線またはワイヤレスで接続し、Apple CarPlayやAndroid Autoを利用できる。",
+        selectionTargetComponent: "Apple CarPlay Ultra / Google built-in (メーター連携・HMI)",
+        selectionNewInformation: "スマホ連携が従来のディスプレイ映し出しから、クルマのシステム(メーター)と深く融合する方向へ進み始めている。",
+        selectionDevelopmentReference: "メーターとスマホ/ナビのデータ連携による表示領域や入力方式の変更を、乗員の操作性向上や内装インターフェース設計の比較検討に活用できる。",
+        selectionSourceQuote: "しかし現在の流れは、クルマのシステム自体とより深く融合する方向へ進み始めている。",
+        selectionPolicyVersion: "interior-development-value-v4",
+        interiorScore: 78,
+        interiorReason: "Apple CarPlay UltraやGoogle built-inによるメーター連携というHMI・センシング分野の具体的な新情報を含んでおり、内装開発におけ",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260921-01600346-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1872",
+        title: "フォルクスワーゲンIDポロ、物理スイッチ復活と13インチモニター採用",
+        desc: "IDポロの内装では、エアコンやオーディオのタッチセンサーに代わり押せる物理ボタンが復活した。また、10.0インチのメーターと13.0インチのセンターモニターを備え、リサイクル素材のクロス内装はグレーかブラックのみとなる。",
+        url: "https://news.yahoo.co.jp/articles/1ef16ea47d196e7e1d06f7d2fb22a811c00f14b0",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-21",
+        tags: ["ディスプレイ", "センシング", "新素材", "音響"],
+    
+        sourceExcerpt: "ただし、リサイクル素材が採用された内装は、クロスのグレーかブラックのみ。",
+        selectionTargetComponent: "エアコン・オーディオ操作部(物理スイッチ)、センターディスプレイ",
+        selectionNewInformation: "タッチセンサーを廃止し、実際に押せるボタンの列が採用された。また13.0インチのセンターモニターはアイコンが大きく設計され、走行中の操作性と運転支援機能のオフ操作の容易さが重視されている。",
+        selectionDevelopmentReference: "近年のEVで普及したタッチ式HMIに対する反動として、物理スイッチ(ボタン)への回帰がトレンドとなっていることを示す。内装開発において、視認性・触覚フィードバックを重視したインターフェース設計や、走行中の誤操作防止のためのUIレイアウト(大きなアイコン)の参考となる。",
+        selectionSourceQuote: "エアコンやオーディオの操作に採用されていた、タッチセンサーは姿を消し、実際に押せるボタンの列が帰ってきた。",
+        selectionPolicyVersion: "interior-development-value-v4",
+        interiorScore: 74,
+        interiorReason: "HMI・車室内快適性の分野で、タッチパネルから物理スイッチへの回帰という具体的な設計変更と、操作性重視のUI設計に関する新情報が含まれているため採用候補とする。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260921-01276893-autocar-000-1-view.jpg",
         note: ""
     },
 ];
