@@ -208,8 +208,26 @@ class InteriorSelectionPolicyTests(unittest.TestCase):
         stored = collector.pd.read_csv(self.context.runtime_dir / "search_results.csv", keep_default_na=False)
         self.assertEqual(stored.iloc[0][EVIDENCE_COLUMNS["new_information"]], assessment["evidence"]["new_information"])
 
-    def test_failed_repair_is_held_and_does_not_displace_valid_rows(self):
+    def test_ungrounded_failed_repair_falls_back_to_the_original_relevance_judgment(self):
+        # No fuller text was ever fetched (repair returns None, same as the
+        # original bare snippet), so a verbatim-quote requirement can never
+        # be met here. The prior "対象" classification is trusted instead of
+        # discarding the article outright.
         broken, valid = self.row("broken", evidence=False), self.row("valid")
+        broken["内装関連度"] = 100
+        selected, assess = self.select([broken, valid])
+        self.assertEqual(set(selected["URL"]), {broken["URL"], valid["URL"]})
+        assess.assert_called_once()
+        self.assertEqual(collector.SHEET2_RESULT["editorial_held_count"], 0)
+        self.assertEqual(collector.SHEET2_RESULT["selected_count"], 2)
+
+    def test_grounded_failed_repair_still_held_and_does_not_displace_valid_rows(self):
+        # Once real article text (>=150 chars) is available, a verbatim quote
+        # is achievable; a repair that still cannot produce one is a genuine
+        # evidence gap, not a fetch failure, and must stay held.
+        long_body = "ドアトリムに静電容量センサーを内蔵し、表皮越しの操作に対応する。" * 8
+        broken, valid = self.row("broken", evidence=False), self.row("valid")
+        broken["内容"] = broken["内容（日本語）"] = long_body
         broken["内装関連度"] = 100
         selected, assess = self.select([broken, valid])
         self.assertEqual(selected["URL"].tolist(), [valid["URL"]])

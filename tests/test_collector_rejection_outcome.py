@@ -13,7 +13,8 @@ import unittest
 from unittest.mock import Mock
 
 from dailynews.editorial_policy import (EVIDENCE_COLUMNS, POLICY_VERSION, apply_policy, assessment_prompt,
-                                        explicit_model_rejection, extract_evidence)
+                                        explicit_model_rejection, extract_evidence,
+                                        article_source as editorial_article_source)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class CollectorRejectionOutcomeTests(unittest.TestCase):
     def setUp(self):
-        names = {"call_llm_interior_assessment", "normalize_interior_score", "extract_json_object", "store_exterior_assessment"}
+        names = {"call_llm_interior_assessment", "normalize_interior_score", "extract_json_object",
+                "store_exterior_assessment", "has_grounded_source_text"}
         tree = ast.parse((ROOT / "ニュース収集/google_search_script.py").read_text(encoding="utf-8-sig"))
         nodes = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in names]
         self.assertEqual(len(nodes), len(names))
@@ -29,10 +31,12 @@ class CollectorRejectionOutcomeTests(unittest.TestCase):
                     "USE_LLM": True, "LLM_ERROR_LOGGED": False, "LLM_IMAGE_INPUT": False,
                     "LLM_CACHE": {}, "POLICY_VERSION": POLICY_VERSION, "EVIDENCE_COLUMNS": EVIDENCE_COLUMNS,
                     "apply_editorial_policy": apply_policy, "extract_evidence": extract_evidence,
+                    "editorial_article_source": editorial_article_source,
                     "explicit_model_rejection": explicit_model_rejection, "assessment_prompt": assessment_prompt,
                     "editorial_feedback": Mock(return_value={"rules": []}),
                     "normalize_text": lambda value: re.sub(r"\s+", " ", value).strip(),
                     "LLM_MODEL": "fixture-model", "LLM_REASONING_EFFORT": "none", "LLM_TIMEOUT": 1,
+                    "UNGROUNDED_KEEP_MIN_SCORE": 60,
                     "spread_interior_score": Mock(side_effect=lambda score, *args: score),
                     "calibrate_interior_score": Mock(return_value=(85, "")),
                     "record_exterior_llm_failure": Mock(), "record_interior_assessment_hold": Mock()}

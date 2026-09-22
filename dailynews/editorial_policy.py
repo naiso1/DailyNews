@@ -188,6 +188,12 @@ def apply_policy(article, rules=(), *, require_evidence=True):
             return reject("seat_only_without_transferable_value", "seat_requires_transferable_value")
     if enabled["interior_lighting_only"] and lighting == "exterior" and not (_matches(_NON_SEAT_PART, source) or explicit_cabin_transfer):
         return reject("exterior_lighting_only", "interior_lighting_only")
+    # A copied prompt example is a sign of a broken response, not merely
+    # incomplete evidence; catch it even when a bare snippet excuses the rest
+    # of the evidence requirement.
+    if enabled["require_development_value"] and "seat and display plus cabin image" in _text(
+            article.get("reason") or article.get("interiorReason") or article.get("内装判定理由")).lower():
+        return reject("copied_prompt_reason", "require_development_value", "hold")
     if require_evidence and enabled["require_development_value"]:
         problems = evidence_problems(article, evidence)
         if problems:

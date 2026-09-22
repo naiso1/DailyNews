@@ -36,7 +36,8 @@ from dailynews.collection_digest import collection_window, published_news, publi
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
 from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
-                                        extract_evidence, assessment_prompt, exterior_scope_rules, explicit_model_rejection)
+                                        extract_evidence, assessment_prompt, exterior_scope_rules, explicit_model_rejection,
+                                        article_source as editorial_article_source)
 from dailynews.feedback_snapshot import load_feedback_snapshot
 
 EDITION = get_edition()
@@ -312,6 +313,10 @@ FETCH_MISSING_IMAGES = True
 ENRICH_ONLY = False
 ENRICH_EXISTING = False
 PROGRESS_EVERY = 5
+# Matches the assessment prompt's own adoption-candidate guidance ("score 60+").
+# Used only as a fallback threshold when no fetched source text exists to
+# ground a structured-evidence decision.
+UNGROUNDED_KEEP_MIN_SCORE = 60
 IMAGE_FETCH_TIMEOUT_SECOND = 12
 IMAGE_FETCH_WORKERS = 12
 OUTPUT_PAPERS_SHEET2 = False
@@ -1536,6 +1541,17 @@ def record_interior_assessment_hold(title, content, url, data, response_payload,
         print(f"  [EDITORIAL_DIAGNOSTIC_WARN] {type(exc).__name__}")
 
 
+def has_grounded_source_text(article, minimum_chars=150):
+    """A verbatim-quote evidence gate is only meaningful once real article text was fetched.
+
+    A bare RSS/search stub (title repeated as its own summary) cannot support a
+    grounded quote; requiring one there would reject articles the old,
+    relevance-only judgment used to accept. Fall back to that judgment instead
+    of forcing a rejection when no fuller source text was ever obtained.
+    """
+    return len(editorial_article_source(article)[1]) >= minimum_chars
+
+
 def call_llm_interior_assessment(title, content, image_url="", url="", summary=""):
     """Local LLM judgment for fuzzy interior relevance, including image evidence."""
     global LLM_ERROR_LOGGED
@@ -1554,7 +1570,8 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         cached = LLM_CACHE[cache_key]
         valid_score = isinstance(cached, dict) and isinstance(cached.get("score"), int) and 0 <= cached["score"] <= 100
         if valid_score and (EDITION.id == "exterior" or apply_editorial_policy(
-                dict(source_article, evidence=cached.get("evidence"), reason=cached.get("reason")), rules)["decision"] == "keep"):
+                dict(source_article, evidence=cached.get("evidence"), reason=cached.get("reason")), rules,
+                require_evidence=has_grounded_source_text(source_article))["decision"] == "keep"):
             return cached
         LLM_CACHE.pop(cache_key, None)
     prompt = assessment_prompt(title, content, url)
@@ -1661,13 +1678,32 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         if EDITION.id == "exterior":
             result.update(category=category, trend_topic=trend_topic)
         else:
-            policy = apply_editorial_policy(dict(source_article, evidence=data.get("evidence"), reason=reason), rules)
+            require_evidence = has_grounded_source_text(source_article)
+            if not require_evidence:
+                # No fetched source text exists to ground a quote in. Fall back to
+                # the model's own relevance judgment (title/summary only, like the
+                # pre-evidence-policy collector), but only when that judgment is
+                # itself a confident, uncontradicted "keep" - a low score or a
+                # reason that reads as a rejection must still be held, not waved
+                # through merely because no fuller text could be fetched.
+                reason_signals_rejection = bool(re.match(
+                    r"^(?:(?:対象外|非対象|不採用)(?=$|[。、:：\s]|です|と判定)|"
+                    r"(?:out of scope|not relevant|excluded?)(?=$|[\s:.,;-]))", raw_reason, re.IGNORECASE))
+                if raw_score < UNGROUNDED_KEEP_MIN_SCORE or reason_signals_rejection:
+                    print(f"  [EDITORIAL_EVIDENCE_HELD] ungrounded_low_confidence: {url}")
+                    record_interior_assessment_hold(title, content, url, data, response_payload,
+                                                    {"decision": "hold", "reason": "ungrounded_low_confidence"})
+                    return None
+            policy = apply_editorial_policy(dict(source_article, evidence=data.get("evidence"), reason=reason), rules,
+                                            require_evidence=require_evidence)
             if policy["decision"] != "keep":
                 print(f"  [EDITORIAL_EVIDENCE_HELD] {policy['reason']}: {url}")
                 record_interior_assessment_hold(title, content, url, data, response_payload, policy)
                 return None
             result.update(evidence=policy["evidence"], policy_decision="keep", policy_version=POLICY_VERSION,
-                          raw_score=raw_score, raw_reason=raw_reason)
+                          raw_score=raw_score, raw_reason=raw_reason, evidence_grounded=require_evidence)
+            if not require_evidence:
+                print(f"  [EDITORIAL_UNGROUNDED_KEEP] title/summary judgment only, no fetched source text: {url}")
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
@@ -2895,7 +2931,7 @@ def apply_interior_selection_policy(work, candidates, protected_urls, rules):
         if str(row.get("LLM判定", "")).strip() != "対象":
             decisions.append({"url": article["url"], "decision": "exclude", "reason": "not_llm_target"})
             continue
-        policy = apply_editorial_policy(article, rules)
+        policy = apply_editorial_policy(article, rules, require_evidence=True)
         if policy["decision"] == "hold" and USE_LLM:
             previous_content = row.get("内容", "")
             interior_evidence_source(row)
@@ -2913,11 +2949,18 @@ def apply_interior_selection_policy(work, candidates, protected_urls, rules):
                 store_exterior_assessment(row, assessment)
                 article = collector_article(row)
                 policy = ({"decision": "exclude", "reason": assessment.get("policy_reason", assessment.get("reason", ""))}
-                          if assessment.get("policy_decision") == "exclude" else apply_editorial_policy(article, rules))
+                          if assessment.get("policy_decision") == "exclude" else apply_editorial_policy(
+                              article, rules, require_evidence=True))
                 for column in ["LLM判定", "内装関連度", "内装判定理由", "内装関連度_原判定", "内装判定理由_原判定", *EVIDENCE_COLUMNS.values()]:
                     work.at[index, column] = row.get(column, "")
                     candidates.at[index, column] = row.get(column, "")
                 changed = True
+            if policy["decision"] == "hold" and not has_grounded_source_text(article):
+                # No fuller article text was ever obtained despite the repair
+                # attempt. A verbatim-quote requirement cannot be met from a
+                # bare title/snippet; fall back to the original relevance
+                # judgment instead of discarding what it already accepted.
+                policy = apply_editorial_policy(article, rules, require_evidence=False)
         state = {"keep": "検証済み", "exclude": "対象外", "hold": "根拠不足"}[policy["decision"]]
         if work.at[index, "採用根拠_状態"] != state:
             work.at[index, "採用根拠_状態"] = state
