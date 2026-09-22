@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-22 13:08";
+window.NEWS_UPDATED_AT = "2026-09-22 13:58";
 
 window.LOADED_NEWS_DATA = [
 
@@ -228649,6 +228649,29 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260921-01276893-autocar-000-1-view.jpg",
+        note: ""
+    },
+    // 2026-09-21 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "us1689",
+        title: "ノイズ低減用内装断熱材およびパネルシステム市場 - openPR.com",
+        desc: "ノイズダンピング（防音）内装断熱材およびパネルシステム市場は、2025年に47億米ドルの規模を記録しました。2026年には50億米ドルに達し、2036年までに88億米ドルへと拡大すると予測されています。",
+        url: "https://www.futuremarketinsights.com/reports/noise-damping-interior-insulation-and-panel-systems-market",
+        source: "news.google.com",
+        date: "2026-09-21",
+        tags: [],
+    
+        sourceExcerpt: "https://www.futuremarketinsights.com/reports/noise-damping-interior-insulation-and-panel-systems-market",
+        selectionTargetComponent: "車室内防音材(フロアシステム、ダッシュパネル)",
+        selectionNewInformation: "AutoneumのPropylat PET内装ソリューションは100%ポリエステルを使用しタイヤ・モーターノイズを吸収する。BASFのElastoflex® EはDIN 75201基準でフォギング値0.5mg未満を実現している。",
+        selectionDevelopmentReference: "EV車におけるロードノイズ低減と軽量化、リサイクル性(PET)、および車室内の快適性(低発散・フォギング抑制)を同時に満たす素材選定や設計上の具体的な指標となる。",
+        selectionSourceQuote: "Autoneum reported in 2025 that its Propylat PET interior solution uses 100% polyester and absorbs tire and electric motor noise. This gives OEMs a practical way to combine sound control with recycling goals.",
+        selectionPolicyVersion: "interior-development-value-v4",
+        interiorScore: 35,
+        interiorReason: "乗用車内装の快適性（NVH・低発散）に関する具体的な素材名と性能指標が記載されており、開発上の参照点として有効なため採用する。; non-passenger v",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.futuremarketinsights.com/report-images/image/noise-damping-interior-insulation-and-panel-systems-market-value-analysis.webp",
         note: ""
     },
 ];
