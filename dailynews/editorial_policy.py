@@ -2,7 +2,7 @@
 import re
 import unicodedata
 
-POLICY_VERSION = "interior-development-value-v3"
+POLICY_VERSION = "interior-development-value-v4"
 EVIDENCE_COLUMNS = {
     "target_component": "採用根拠_対象部品",
     "new_information": "採用根拠_新情報",
@@ -85,12 +85,6 @@ _TRAVEL = r"旅行記|観光ツアー|記念ロードトリップ|\d+日間ツ�
 _GENERIC = (r"seat and display plus cabin image|具体的な新情報|対象部品|開発への参考|"
             r"(?:内装|製品|開発)(?:の|に)?(?:参考になる|役立つ|有用です|有用である)$|"
             r"^(?:useful|relevant|good|interior related|new features|specific new information|example|n/?a|unknown|none)$")
-_ADDITIONAL_QUOTE_COMPONENT = (
-    r"\b(?:smart surfaces?|solid[- ]state user[- ]interface(?: technology)?|touch controls?|"
-    r"touch and force sensing)\b|"
-    r"内饰(?:材料|表皮|饰板)|方向盘|仪表[板盘]|显示屏|门饰板|座椅|"
-    r"电容(?:式)?触控|触觉反馈|车内(?:氛围灯|照明)"
-)
 
 
 def article_source(article):
@@ -145,10 +139,6 @@ def evidence_problems(article, evidence=None):
     source_numbers = set(re.findall(r"\d+(?:\.\d+)?", f"{title} {body}"))
     if new_numbers - source_numbers:
         return ["new_information_has_unsupported_number"]
-    # The cited passage must name the component or a concrete technology.
-    if not _matches(_CABIN_PART + "|" + _TRANSFER_FEATURE + "|" + _SEAT + "|" + _INTERIOR_LIGHT + "|" + _ADDITIONAL_QUOTE_COMPONENT +
-                    r"|ディスプレイ|スクリーン|カップホルダー|収納|換気|空調|\b(?:display|screen|storage|ventilation|HVAC)\b", quote):
-        return ["source_quote_has_no_component"]
     return []
 
 

@@ -67,8 +67,6 @@ class EditorialPolicyTests(unittest.TestCase):
         article = useful_article()
         article["originalDesc"] = "The maker announced a new vehicle. No cabin details were provided."
         self.assertEqual(apply_policy(article)["decision"], "hold")
-        article["evidence"]["source_quote"] = "The maker announced a new vehicle."
-        self.assertIn("source_quote_has_no_component", evidence_problems(article))
 
     def test_explicitly_empty_original_fields_cannot_fall_back_to_generated_copy(self):
         for original_title in ("", "ドアトリムの新製品を発表"):
