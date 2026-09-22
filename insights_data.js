@@ -1,5 +1,22 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-09-22",
+        analysis: {
+            jp: "今回のニュース群では、デジタルコックピットと物理操作の再統合が鮮明になっている[jp1876]フェラーリは静電容量式から物理スイッチへの回帰で操作感を高めた[jp1876]一方、マツダCX-6eは26.0インチモニターへ機能を集約し素材の質感を強調する[jp1874]この対比から、単なる画面拡大ではなく、指先が触れる「触感」と「視覚的没入」を両立させる内装設計が求められる[jp1876,jp1874]スバルソルテラは低床コンソールで開放感を演出し[jp1877]日産ローグHVはベンチレーションシートと音響環境の快適性を重視する[jp1873]これらから、乗員の五感に訴えかける「ウェルネス系コックピット」への進化が示唆される[jp1873,jp1877]豊田合成として、既存のWelpit技術と連動し、大型ディスプレイ周りの照明や素材の温度感を制御する次世代コンソールモジュールの開発が有効であろう[jp1874,jp1876]特に、物理スイッチの質感再現とデジタル表示の調和、そして乗員状態に応じた環境変化を内装に埋め込むことが、今後の高級EV市場での差別化要因となる可能性がある[jp1876,jp1873]",
+            us: "サウジアラビア発のCeer Exobotは、ダッシュボード上部に48インチという大画面を配置し[us1690]、中央10.4インチおよび後席8インチと多層ディスプレイ構成を採用しています。この構成により、従来の物理スイッチが減少する中、ヨーク式ステアリングホイールやAI音声アシスタントによる直感的な操作体験が重視される方向性が示唆されます[us1690]。豊田合成の内装開発室としては、大画面と物理操作の調和、および後席エンターテインメントを支える素材・構造技術が鍵となります[us1690]。特にサステナビリティ観点では、軽量かつリサイクル可能な樹脂骨格による大型ディスプレイ枠の設計が求められます[us1690]。また、センターコンソール周辺では、小型化されたワイヤレス充電ホルダと連動した、ユーザー体験を高める発光や触感技術の統合が次の課題となりそうです[us1690]",
+        },
+        ideas: {
+            jp: [
+                { id: 1819, img: "images/exabase_interior_1819_0e9a716c9eac4b27.jpg", title: "触感同期UIコンソール", desc: "マツダCX-6eの26.0インチモニター集約思想を継承し、物理スイッチ回帰への対応として開発した新製品です。ディスプレイ上のアイコン操作時に限り、センターコンソールの該当箇所のLEDが微細なパルスで反応し、指先の感触と視覚情報を同期させます。大画面の抽象的なUIに不慣れなドライバーでも、誤操作なく直感的に機能を選べるため、操作時の安心感と達成感が得られます。 [jp1874]", imagePrompt: "A close-up of a modern car center console featuring a large 26-inch curved touchscreen. The screen displays a simplified UI map interface. On the physical lower part of the console, specific tactile buttons are illuminated with a soft, synchronized blue pulse light corresponding to the active icon on the screen. The material is premium matte black with subtle carbon fiber texture. Lighting is cool and focused, highlighting the interaction between digital display and physical touch.", sourceNewsIds: ["jp1874"], imageProvider: "exabase", imageModel: "" },
+                { id: 1820, img: "images/exabase_interior_1820_cb388e543c11176f.jpg", title: "呼吸連動ウェルネスイルミ", desc: "マツダCX-6eの上質な素材仕上げを活かし、Welpitの生体センシング技術と連携したコンソール照明モジュールです。ミリ波レーダーで検知した乗員の心拍数やリラックス状態に応じて、センターコンソールの内蔵LEDが呼吸に合わせてゆっくりと明滅します。車内の空気が静かに揺らぐような視覚体験により、ドライブ中の緊張を解きほぐす「心地よい没入感」を提供します。 [jp1874]", imagePrompt: "A serene interior view of a luxury car center console at night. The console features high-quality wood grain and soft-touch materials. Integrated ambient lighting strips along the dashboard edges are glowing in a gentle, rhythmic gradient of warm amber to soft white, mimicking a slow breathing pattern. The light reflects softly on the surrounding surfaces, creating a calm and meditative atmosphere without any harsh glare.", sourceNewsIds: ["jp1874"], imageProvider: "exabase", imageModel: "" },
+            ],
+            us: [
+                { id: 1821, img: "images/exabase_interior_1821_df46e4bdd7c28cf0.jpg", title: "リサイクル樹脂大画面枠", desc: "Ceer Exobotの48インチディスプレイを収容する軽量かつ環境対応のインパネ骨格です。再生PETボトル由来のエンジニアリングプラスチックを採用し、石油由来素材比でカーボンフットプリント30%削減を実現します。大画面の熱変形を抑える高剛性設計により、サウジアラビアの高温環境でも安心感が得られ、エコ意識の高いオーナーに選ばれやすい内装パーツです [us1690]", imagePrompt: "Close-up of a car dashboard frame made from translucent recycled plastic material, showing visible fiber reinforcement structure, sleek and modern design with subtle green tint indicating eco-friendly nature, soft studio lighting highlighting the texture and durability of the polymer", sourceNewsIds: ["us1690"], imageProvider: "exabase", imageModel: "" },
+                { id: 1822, img: "images/exabase_interior_1822_a84d050741a4c660.jpg", title: "充電連動発光コンソール", desc: "Ceer Exobotのセンターコンソールに組み込む小型ワイヤレス充電ホルダ付きパネルです。スマートフォンをセットすると、豊田合成の60%小型化技術を活かしたコンパクト設計内で、充電状態に応じた優しいLEDイルミネーションが発光します。後席8インチ画面との連動で家族全員が快適になり、待ち時間や移動中のストレスが解消される嬉しい仕掛けです [us1690]", imagePrompt: "Center console of a futuristic car interior, featuring a compact wireless charging pad with a smartphone placed on it, emitting a soft blue glow that syncs with the surrounding ambient lighting, clean minimal design with matte black finish and precise LED strips", sourceNewsIds: ["us1690"], imageProvider: "exabase", imageModel: "" },
+            ],
+        }
+    },
+{
         date: "2026-09-21",
         analysis: {
             cn: "ゼクリ009のシートフレームが20トントラックの重量に耐える強度を実証した事例は、内装部品への高剛性要求を示唆する [cn1674]。この構造と振動吸収性を両立させる技術は、安全基準向上に伴う車体軽量化とのバランス解決策となる可能性がある [cn1674]。豊田合成が追求すべき価値は、単なる耐久性ではなく、過酷な外力下でも機能維持を可能にする複合素材の設計知見にある [cn1674]。Nappaレザーや180度回転シートといった快適性要素と高強度フレームの融合は、高級セダンや商用車向け内装の新基準となる [cn1674]。したがって、衝撃吸収性と剛性を同時に実現する次世代モジュール開発が、今後の競争力強化の鍵となる [cn1674]。",
