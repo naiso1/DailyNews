@@ -1,5 +1,21 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-09-21",
+        analysis: {
+            cn: "ゼクリ009のシートフレームが20トントラックの重量に耐える強度を実証した事例は、内装部品への高剛性要求を示唆する [cn1674]。この構造と振動吸収性を両立させる技術は、安全基準向上に伴う車体軽量化とのバランス解決策となる可能性がある [cn1674]。豊田合成が追求すべき価値は、単なる耐久性ではなく、過酷な外力下でも機能維持を可能にする複合素材の設計知見にある [cn1674]。Nappaレザーや180度回転シートといった快適性要素と高強度フレームの融合は、高級セダンや商用車向け内装の新基準となる [cn1674]。したがって、衝撃吸収性と剛性を同時に実現する次世代モジュール開発が、今後の競争力強化の鍵となる [cn1674]。",
+            eu: "欧州市場では、AntolinとUltraSenseが協力して開発する次世代スマートサーフェスHMI[eu1653]のように、従来の機械式コントロールを薄型のソリッドステートシステムに置き換える動きが加速している。この技術はタッチや力感知に加え、視覚・触覚フィードバックおよび装飾照明を統合し、インパネやセンターコンソールの質感と操作性を再定義する[eu1653]。豊田合成としては、グローバル戦略の観点からEU現地での高付加価値HMI部品供給体制を整備しつつ、リサイクル素材との組み合わせで環境負荷低減と機能性を両立させる必要がある[eu1653]。特に、力感知センサーを内蔵した薄型パネルは、ドライバーの操作感を向上させると同時に、車両全体のデザイン言語に溶け込む重要な要素となるため、触感品質と光学特性の最適化が今後の競争力の鍵となる[eu1653]",
+        },
+        ideas: {
+            cn: [
+                { id: 1816, img: "images/idea_dummy.svg", title: "薄型剛性インパネ", desc: "ゼクリ009の20トン耐荷重構造をヒントに、豊田合成のスマート薄型インストルメントパネル技術を発展させました。骨格樹脂化による軽量化と大型ディスプレイ搭載を両立し、乗員が快適な視野と堅牢性を同時に享受できる高機能コンソールを実現します。", imagePrompt: "A sleek, ultra-thin instrument panel with a large integrated display screen, showcasing a lightweight yet robust resin skeleton structure behind the glass, emphasizing modern automotive interior design and structural integrity.", sourceNewsIds: [] },
+            ],
+            eu: [
+                { id: 1817, img: "images/exabase_interior_1817_e7076a7207098192.jpg", title: "EU向け力感知調光HMI", desc: "AntolinとUltraSenseの次世代スマートサーフェスHMI開発を基盤に、EU市場向けの薄型ソリッドステートパネルを提案。力感知センサーと装飾照明を統合し、ドライバーは指先に伝わる確かなクリック感と視覚的なフィードバックで操作ミスを防ぎ、安全かつ快適なドライブを享受できるうれしさを実感する [eu1653]", imagePrompt: "A sleek, ultra-thin automotive dashboard panel featuring a solid-state HMI interface. The surface is matte black with subtle ambient lighting glowing along the edges. A driver's finger is pressing a specific area of the panel, demonstrating haptic feedback interaction. High-end interior materials, modern minimalist design, soft studio lighting emphasizing the smooth texture and depth of the integrated controls.", sourceNewsIds: ["eu1653"], imageProvider: "exabase", imageModel: "" },
+                { id: 1818, img: "images/exabase_interior_1818_f84483b42b6af772.jpg", title: "再生革調光コックピット", desc: "豊田合成のRe-Sブランドが活用する廃ステアリング革やエアバッグ生地を原料に、AntolinとUltraSenseのスマートサーフェスHMIパネルに適用。リサイクル素材特有の温かみのある質感と力感知操作が融合し、環境配慮と高品質な触覚体験を同時に手に入れたオーナーが、持続可能なモビリティライフへの貢献を実感するうれしさを味わえる [eu1653]", imagePrompt: "Close-up of a car center console panel made from upcycled leather materials, showcasing unique texture patterns derived from recycled steering wheels and airbags. The panel integrates a smart HMI surface with soft-touch capabilities. Warm ambient lighting highlights the sustainable material quality against a modern car interior background. Focus on the contrast between eco-friendly raw materials and high-tech functionality.", sourceNewsIds: ["eu1653"], imageProvider: "exabase", imageModel: "" },
+            ],
+        }
+    },
+{
         date: "2026-09-18〜2026-09-20",
         analysis: {
             jp: "メルセデスベンツCLAがMBUXスーパースクリーンを標準化し[jp1868]、大画面と内装素材の一体感を追求している。一方、三菱デリカD:5では液晶ディスプレイ表示不具合によるリコールが発生し[jp1862]、デジタルコックピットの信頼性が問われている。ブリッドの新シートは高触感合成皮革「NUGRAIN」で本革風を追求しているが[jp1863][jp1861]、インパネ周辺でも同様の触感品質とメンテナンス性の両立が期待される。国産高級車や大型SUVでは広大な室内空間と快適装備が重視されつつある[jp1870][jp1866]。豊田合成は、大画面の視認性と物理操作の安心感を両立するHMI設計、そして音響特性を可視化して静寂を実現する内装トリム技術で、デジタル時代の車内体験を定義すべきである[jp1867]。",

@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-21 01:43";
+window.NEWS_UPDATED_AT = "2026-09-22 10:04";
 
 window.LOADED_NEWS_DATA = [
 
@@ -228558,6 +228558,52 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "cn",
         img: "https://upload.wikimedia.org/wikipedia/commons/b/b5/Counting_rod_v3.png?utm_source=ja.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+        note: ""
+    },
+    // 2026-09-21 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "cn1674",
+        title: "ゼクリ009のシートフレームは、20トントラックの重量に耐える強度を備えている。",
+        desc: "Zeekr 009のシートフォームは20トンのFarizonトラックに圧迫されても構造と振動吸収性が維持された。Nappaレザーや180度回転シートを備え、中国市場で43.98万〜46.98万元で販売されている。",
+        url: "https://carnewschina.com/2026/09/21/zeekr-009-mpvs-seat-foam-was-run-over-by-20-ton-truck-and-remained-the-same/",
+        source: "CarNewsChina - All",
+        date: "2026-09-21",
+        tags: ["AR", "シート", "新素材"],
+    
+        sourceExcerpt: "The Geely’s Zeekr 009 minivan’s seat foam was run over by a 20-ton Farizon truck and remained the same, according to the brand’s officials.",
+        selectionTargetComponent: "シート用サンドイッチ構造フォーム(高反発・高密度クイックレスポンス・低密度層)",
+        selectionNewInformation: "ゼークリ009のシートは、上層に高反発フォーム、中層に高密度クイックレスポンスフォーム、下層に柔らかいフォームを積層したサンドイッチ構造を採用。20トンのトラックや合計約20トンの乗用車群で圧迫しても構造が変化せず、振動減衰性能も劣化しないことを確認。",
+        selectionDevelopmentReference: "異なる密度・反発特性のフォームを積層することで、高荷重時の形状保持性と振動吸収性を両立させる設計手法として参考になる。特に「高密度クイックレスポンス」層が衝撃吸収と復元力に与える影響について、素材選定や厚み配分の検討材料となる。",
+        selectionSourceQuote: "It has a pioneering “sandwich” seat suspension structure. Its top layer consists of high-resilience foam. The second layer is made of high-density quick-response foam. The lower layer is softer foam.",
+        selectionPolicyVersion: "interior-development-value-v3",
+        interiorScore: 35,
+        interiorReason: "シートフォームの具体的な積層構造（高反発・高密度クイックレスポンス・低密度）と、20トン荷重下での振動減衰性能維持という定量的な特性が記載されており、素材比較お",
+        imageInterior: true,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/zeekr_009_seat_foam-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "eu1653",
+        title: "AntolinとUltraSense、次世代スマートサーフェスHMI開発へ",
+        desc: "AntolinとUltraSenseは、将来の自動車プラットフォーム向けに次世代スマートサーフェスHMIの開発を進める。従来の機械式コントロールを薄型で設定可能なソリッドステートシステムに置き換え、タッチや力感知に加え視覚・触覚フィードバックおよび装飾照明を備える。",
+        url: "https://www.automotiveinteriorsworld.com/news/hmi/antolin-and-ultrasense-advance-smart-surface-hmi-for-automotive-interiors.html",
+        source: "Automotive Interiors World",
+        date: "2026-09-21",
+        tags: ["HMI"],
+    
+        sourceExcerpt: "The new interface is designed to improve conventional mechanical controls with a",
+        sourceExcerptEnd: "combines touch and force sensing with visual and haptic feedback.",
+        selectionTargetComponent: "スマートサーフェスHMI(車室内の薄型・可変式インターフェース)",
+        selectionNewInformation: "従来の機械式コントロールを、タッチと力覚センシング、視覚および触覚フィードバックを統合した薄型の半導体ソリューションに置き換える技術。センサーフュージョンアーキテクチャにより、自動車用の様々な素材や表面設計を通じてユーザー操作を検知し、物理ボタンのような応答性と確認感を提供する。",
+        selectionDevelopmentReference: "車室内のダッシュボードやドアトリムなどの内装面へのHMI埋め込み設計において、機械式スイッチから電子制御へ移行する際のレイアウト自由度と操作性の維持方法(触覚フィードバックによる操作確認)を参考にする。また、異なる素材表面での検知安定性に関するセンサー配置・アルゴリズム設計の検討材料となる。",
+        selectionSourceQuote: "The new interface is designed to improve conventional mechanical controls with a modern, thin and configurable solid-state system that combines touch and force sensing with visual and haptic feedback.",
+        selectionPolicyVersion: "interior-development-value-v3",
+        interiorScore: 91,
+        interiorReason: "AntolinとUltraSenseによる車室内HMIの次世代技術開発記事であり、素材・表皮分野とは独立した「HMI・センシング」分野において具体的な新情報（タ",
+        imageInterior: true,
+        country: "eu",
+        img: "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/09/img_web_800x600_ultrasense_publicar.jpg",
         note: ""
     },
 ];
