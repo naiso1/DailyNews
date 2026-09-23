@@ -19,16 +19,17 @@ class EditorialPublicationTests(unittest.TestCase):
     def validate(self, items, existing=(), edition="interior"):
         return publisher.validate_editorial_publication(items, set(existing), self.snapshot, edition)
 
-    def test_grounded_material_stores_flat_rationale(self):
-        item = self.validate([self.good])[0]
-        self.assertEqual(item["selectionTargetComponent"], "ドアトリム表皮材")
-        self.assertIn("selectionPolicyVersion", item)
-
-    def test_new_rejected_or_unsubstantiated_rows_abort_before_publication(self):
-        for changes in (dict(llmDecision="非対象"), dict(evidence={}),
+    def test_interior_trusts_the_collectors_own_selection(self):
+        # Interior no longer re-validates evidence or relevance here: the
+        # collector's own coarse classification, score, and same-day quota
+        # backfill already decided what belongs in the sheet. Only explicit
+        # takedowns (excluded_urls) and already-published duplicates are
+        # filtered at this stage (covered by other tests below).
+        for changes in (dict(), dict(llmDecision="非対象"), dict(evidence={}),
                         dict(title="10のバイクアップグレード", desc="motorcycle seats")):
-            with self.subTest(changes=changes), self.assertRaises(RuntimeError):
-                self.validate([{**self.good, **changes}])
+            with self.subTest(changes=changes):
+                item = {**self.good, **changes}
+                self.assertEqual(self.validate([item]), [item])
 
     def test_legacy_existing_article_does_not_require_new_csv_fields(self):
         legacy = dict(url=self.good["url"], country="jp", title="旧記事")

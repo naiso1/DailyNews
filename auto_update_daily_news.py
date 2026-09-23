@@ -412,13 +412,9 @@ def validate_editorial_publication(items, existing_url_keys, snapshot, edition_i
             else:
                 retained.append(item)
             continue
-        result = apply_policy(item, snapshot.get("rules", []), require_evidence=True)
-        if item.get("llmDecision") != "対象" or result["decision"] != "keep":
-            reason = result["reason"] if result["decision"] != "keep" else "not_llm_target"
-            pending.append(f"{item.get('url', '')} ({reason})")
-            continue
-        item.update({field: result["evidence"].get(key, "") for key, field in SELECTION_FIELDS.items()})
-        item["selectionPolicyVersion"] = result["policy_version"]
+        # Interior trusts the collector's own selection (relevance classification,
+        # score, and same-day quota backfill) as-is; only explicit takedowns
+        # (excluded, above) and already-published duplicates are filtered here.
         retained.append(item)
     if pending:
         raise RuntimeError("Editorial validation failed; no news or insights have been updated. "
