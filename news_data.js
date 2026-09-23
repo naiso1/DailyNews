@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-23 13:46";
+window.NEWS_UPDATED_AT = "2026-09-24 01:40";
 
 window.LOADED_NEWS_DATA = [
 
@@ -229317,6 +229317,402 @@ window.LOADED_NEWS_DATA = [
         sourceExcerpt: "At this price, an S-Class with top-level luxury and a punchy 300+ bhp diesel engine is an absolute steal!",
         country: "in",
         img: "https://motoroctane.com/wp-content/uploads/2026/09/2021-Mercedes-S-Class-S-400d-Launch-Edition.jpg",
+        note: ""
+    },
+    // 2026-09-23 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1880",
+        title: "【2027年秋登場か】ダイハツ名車「ラガー」が30年ぶりに復活",
+        desc: "【2027年秋登場か】ダイハツ名車「ラガー」が30年ぶりに復活。",
+        url: "https://news.yahoo.co.jp/articles/b2699c3b46c388c7c062c155adac3f2ec649f6e3",
+        source: "carview!",
+        date: "2026-09-23",
+        tags: [],
+    
+        sourceExcerpt: "ダイハツの本格オフローダー「ラガー」が2027年秋に約30年ぶりに復活する可能性が高まっていると、複数のメディアやネットが伝えています。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-00010003-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1881",
+        title: "【公道テストの目撃も】ホンダ「WR-V」はこのままでいい？",
+        desc: "【公道テストの目撃も】ホンダ「WR-V」はこのままでいい？ 改良で4WDや「トレイルスポーツ」追加の可能性を予想9/23(水) 16:00配信7コメント7件 「WR-V」はなぜ苦戦？ 公道テストで改良の兆候 ホンダ「WR-V」に商品改良の噂が飛び交っています。",
+        url: "https://news.yahoo.co.jp/articles/dc5bb71ccedb77d783aa7600a3e9544ec70c3311",
+        source: "carview!",
+        date: "2026-09-23",
+        tags: [],
+    
+        sourceExcerpt: "ホンダ「WR-V」に商品改良の噂が飛び交っています。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-00010002-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1882",
+        title: "「ルーミー」改良。新カラーや「アナザースタイル」好評も、「ハイブリッド車がないなら購入を見送る」「全面刷新を期待していた」と厳しい声(carview！)",
+        desc: "「ルーミー」改良。新カラーや「アナザースタイル」好評も、「ハイブリッド車がないなら購入を見送る」「全面刷新を期待していた」と厳しい声9/23(水) 11:50配信 「ルーミー」改良。安全装備を強化、装備と選択肢が拡充2026年8月31日、トヨタはコンパクトトールワゴン「ルーミー」を一部改良し発売しました。 【画像】改良型「ルーミー」の内外装を写真で確認する（58枚） 現行モデルは、ダイハツ「トール」のOEMモデルとして2016年11月に登場。全長3700mm×全幅1670mm×全高1735mmの背高ボディで広い室内空間を実現しつつ、低床フロアや両側スライドドアを組み合わせています。 今回の改良では、予防安全機能「スマートアシスト」の検知対象を拡大し、横断する自転車や交差点右折時の対向車、右左折時に対向方向から横断する歩行者を検知できるようになりました。 また、SRSサイドエアバッグとSRSカーテンシールドエアバッグが全車に標準装備され、安全性が向上しています。 グレードは「X」「G」「G-T」「カスタムG」「カスタムG-T」の5種類で、価格は183万400円〜234万6300円です。 ベースグレードの「X」には、運転席アームレストや運転席シート上下アジャスター、助手席シートアンダートレイ、オプティトロンメーターとTFTカラーマルチインフォメーションディスプレイを追加しました。 「G」「G-T」では、電動パーキングブレーキとブレーキホールド、停止保持機能付きの全車速追従ACCをメーカーオプションで選択可能となったほか、9インチディスプレイオーディオやパノラミックビューモニターなどのオプションも設定されています。 ボディカラーも入れ替え、「カスタム」系は「アナザースタイルパッケージ」も設定 また、今回の改良でボディカラーは下記のように変更されています。 【廃止されたカラー】 ・パールホワイトIII・ターコイズブルーマイカメタリック ・プラムブラウンクリスタルマイカ ・ブラックマイカメタリック×ファイアークォーツレッドメタリック ・ブラックマイカメタリック×パールホワイトIII 【追加されたカラー】 ・グレイッシュオリーブメタリック ・イエローイッシュブラッククリスタルマイカ ・シャイニングホワイトパール ・ブラックマイカメタリック×グレイッシュオリーブメタリック ・ブラックマイカメタリック×シャイニングホワイトパール さらに、「カスタムG」「カスタムG-T」には、レザー調とファブリックを組み合わせたシート表皮や内外装パーツによって雰囲気を変えられる「アナザースタイルパッケージ」もオプション設定されています。 では、今回のルーミーの一部改良に対して、インターネット上ではどのような反響が寄せられているのでしょうか。 次ページは：拡大されたオプションと「アナザースタイル」に歓迎の声 前へ1 2次へ1 / 2ページ 【関連記事】 「ルーミー」改良。新カラーや「アナザースタイル」好評も、「ハイブリッド車がないなら購入を見送る」「全面刷新を期待していた」と厳しい声 「パジェロ」復活に大反響！「待っていた」「内装が高級」と喜びの声多数。一方「全幅1925mmは扱いにくい」、電動化を望む声も…再び三菱の柱になれるか？ 【オートサロン初公開から1年】日産「オーラNISMO RS」が2027年1月市販化へ。コンセプトそのままの姿で登場する可能性 【レクサス「NX」から何が変わる？】大幅改良でガソリン車を廃止、2.0L HEVを新設定。トヨタの電動化戦略が見えてきた 【国内販売2位】72万台超えで躍進するスズキになぜ「500万円級」の高級車が存在しないのか？ 最終更新: 9/23(水) 11:50 carview！",
+        url: "https://news.yahoo.co.jp/articles/f811c7a33423fde4b7896b0064e9c2310605a6e6",
+        source: "carview!",
+        date: "2026-09-23",
+        tags: ["AR", "ディスプレイ", "シート", "新素材", "EV", "安全"],
+    
+        sourceExcerpt: "ベースグレードの「X」には、運転席アームレストや運転席シート上下アジャスター、助手席シートアンダートレイ、オプティトロンメーターとTFTカラーマルチインフォメーションディスプレイを追加しました。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-00010001-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1883",
+        title: "新型日産ローグ ハイブリッドは、Cピラーに富士山を宿す",
+        desc: "新型日産ローグ ハイブリッドは、Cピラーに富士山を宿す。NISSANを意味する「2と3」の意匠も随所に9/23(水) 10:19配信24コメント24件 新型日産ローグ ハイブリッド 日産は9月21日、米国で新型「ローグ ハイブリッド」を発表した。日本ではエクストレイルの名称で販売されているミドルサイズSUVで、米国ではいち早く次期モデルが姿を現したこととなる。新型ローグで注目なのは「e-POWER」を搭載していること。日産独自のハイブリッドシステムが米国に投入されるのは、新型ローグが初めてとなる。そうした新しいパワートレインを得たことを受け、デザインもまた従来型とは異なる性格が与えられている。 【写真を見る】 デザインテーマは「Refined and Tough」。洗練されたタフネスを纏う1 / 14新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型日産ローグ ハイブリッド 新型ローグ ハイブリッドのデザインを統括したのは、シニアデザインマネージャーのヒレン・パテル氏だ。パテル氏はロサンゼルスのStudio Sixを拠点とし、2001年から日産に在籍。初期に手掛けたプロジェクトのひとつが初代ローグで、その後タイタン、キックス、フロンティアなどのデザインに携わった。デトロイトのカレッジ・フォー・クリエイティブ・スタディーズで美術学士号（BFA）を取得している。 エクステリアのデザインテーマは「Refined and Tough」、タフさと洗練の両立にある。全長と全幅は従来型と大きく変わらないが、フロントから見たときの印象はよりワイドだ。グリルとヘッドランプは一体的にまとめられ、六角形のパターンがシグネチャーランニングランプへと連続していく。このランニングランプは2つと3つの組み合わせで構成される。日本語の「に」と「さん」、つまりNISSANの語呂に由来するモチーフで、パテル氏によれば、車体のまわりを観察すれば2と3の組み合わせがほかにも見つかるという。 サイドビューでは、彫りの深いフェンダーと強いキャラクターラインが骨格を形づくる。ボディ下部から立ち上がるプレスラインが視線を上方へ導き、キャビンとフェンダーが一体に結びついて見える。 「ハイブリッドと聞くと、人々は効率のことだけを考えます。しかし新型ローグには、そこに高揚感も加わります」。パテル氏は、その高揚感を視覚的に表現するため、光を鋭い交点に集め、そこから前方へ走らせたと説明する。 Cピラーにも日本を意識した処理が盛り込まれた。跳ね上がるベルトラインが三角形を描き、富士山を想起させる。さらにガラスの奥、その山頂にあたる位置には雲を模した2と3のモチーフが隠されている。 ホイールはSVが18インチ、SRとPlatinumが19インチで、いずれも車体のディテールと呼応する幾何学的な造形を採用する。切削加工されたパターンは、回転にともなって光と影を反射する。 テールランプはボディ両サイドまで水平に伸びていいく。そしてランプ内のパターンは中央付近ほど細かく、端に向かうにつれて粗くなる。この粗密の変化が、クルマ全体に視覚的な動きを与えている。 インテリアはクラス最大級となる前席の頭上空間と足元空間を確保したという。ソフトタッチ素材とステッチを多用し、質感を重視した仕立てだ。前席と後席左右にはゼログラビティシートを標準装備する。上級グレード「Platinum」のキルティングパターンは高級ダウンジャケットから着想を得たもので、シートだけでなくセンターコンソールや各部のトリムにも展開される。また、新型はローグとして初めてベンチレーションシートを採用したのもトピックだ。 「テクノロジーは、まさにあるべき場所に配置されています。インテリアは温かく、居心地の良い空間です」とパテル氏は語る。 素材の選択にも新たな試みが取り入れられている。エクステリアではクロームの使用を抑え、面が連続するフラッシュでシームレスな処理へと移行した。スポーティさと効率の良い走りという性格を素材でも示すためだという。 インテリアでもピアノブラック面の使用を意図的に制限し、手が触れる部分には耐久性の高いマット素材を用いている。空調の温度・風量・吹き出し方向、シートヒーターとシートベンチレーションはボタン操作とし、音量はセンタースクリーン下のスクロールホイールとステアリングのボタン、ウインカーとワイパーは従来どおりのレバーを残した。 「ローグ ハイブリッドをつくるうえで、使いやすさは優先事項でした。もっともよく使うものが自然と手に届くようにしたかったのです」とその狙いをパテル氏は説明する。 新型ローグ ハイブリッドは日産自動車九州で生産されて、今秋から米国での発売が開始される。日産アメリカズマネジメントコミッティー議長であるクリスチャン ムニエは次のように述べている。 「米国ではハイブリッドの需要が拡大しており、その傾向は今後さらに加速していくと考えています。『ローグ ハイブリッド』の発売は、日産にとって重要な転換点となります。このモデルは、新たなお客さまの獲得と事業基盤の強化に大きく貢献するものです」 「私たちは、卓越した燃費性能と真に魅力的なドライビング体験を両立する、最高レベルのハイブリッド技術を米国市場に投入します。応答性に優れた滑らかな走り、瞬時に立ち上がるトルク、そしてクラス最高レベルの静粛性を実現した『ローグ ハイブリッド』は、米国の多くのお客さまに支持いただけることでしょう」 Car Styling [カースタイリング] 【関連記事】 サウジアラビアの自動車ブランドは、最初のクルマをどうデザインしたのかCd値0.158――VWが“効率”のためにデザインしたクルマAlfa Romeoは次のデザイン言語をどう作るのか――パリで公開される“未来のマニフェスト” ノイエ・クラッセ時代に向けたBMWデザインの完全再編。公式発表から読み解くマクシミリアン・ミッソーニ加入の真意Polestarの次なる形。“大胆な進化”を掲げる新ヘッド・オブ・デザイン、フィリップ・レーマースが描く「Formula 2030」 最終更新: 9/23(水) 10:19 MotorFan",
+        url: "https://news.yahoo.co.jp/articles/66a1e37abaa4b6e9d412b90a35e5277e98a497a4",
+        source: "MotorFan",
+        date: "2026-09-23",
+        tags: ["AR", "ディスプレイ", "シート", "センターコンソール", "新素材"],
+    
+        sourceExcerpt: "空調の温度・風量・吹き出し方向、シートヒーターとシートベンチレーションはボタン操作とし、音量はセンタースクリーン下のスクロールホイールとステアリングのボタン、ウインカーとワイパーは従来どおりのレバーを残した。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-01630622-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1884",
+        title: "2代目プリウスは「ハイブリッド？ なにそれ？」を変えた偉大なるクルマ！",
+        desc: "2代目プリウスは「ハイブリッド？ なにそれ？」を変えた偉大なるクルマ！",
+        url: "https://news.yahoo.co.jp/articles/84ca69c5ac5026a7b1cf9bf9b7ff2ca06fdce09a",
+        source: "WEB CARTOP",
+        date: "2026-09-23",
+        tags: [],
+    
+        sourceExcerpt: "1997年に誕生した初代プリウスは世界初の量産ハイブリッドカーとして驚異的な燃費を実現した。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1885",
+        title: "サイドミラーを外してカメラ化！ インナーモニターとネオチューンで仕立てるハイエース(Auto Messe Web)",
+        desc: "サイドミラーを外してカメラ化！ インナーモニターとネオチューンで仕立てるハイエース9/23(水) 9:10配信 ガレージZ1と415コブラのエアロを装填！",
+        url: "https://news.yahoo.co.jp/articles/81760c1453f9869f9a0b8e90a7a3dd0f5b4923b0",
+        source: "Auto Messe Web",
+        date: "2026-09-23",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "サイドミラーをカメラ化してインナーモニターへ映し出す画期的なシステムを導入し、洗練されたエアロメイクと融合させたこだわりのスタイルに迫る。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-00010003-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1886",
+        title: "ZFの12速AMT「TraXon 2」を新型日野セレガが採用 インターダー統合で安全性と快適性を向上(AUTO BILD JAPAN Web)",
+        desc: "ZFの12速AMT「TraXon 2」を新型日野セレガが採用 インターダー統合で安全性と快適性を向上9/23(水) 11:52配信1コメント1件ZFは、流体式リターダー「Intarder（インターダー）」を統合した最新世代の12速AMT「TraXon 2 Coach」が、日野自動車の新",
+        url: "https://news.yahoo.co.jp/articles/10bc0c5b3087667684586bb245b5eba0bfe3af10",
+        source: "AUTO BILD JAPAN Web",
+        date: "2026-09-23",
+        tags: ["AR", "安全"],
+    
+        sourceExcerpt: "日野自動車プロダクト推進部部長の向里 憲二氏は、「TraXon 2 CoachとIntarderが生み出す静粛で滑らかな走りと安全性が、新型セレガを新次元へと引き上げました。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260923-00010004-autobild-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "eu1662",
+        title: "Nissan Pixo、TwingoベースのEVとして英国で約£18,000から発売へ",
+        desc: "Nissanは12年ぶりにPixoを復活させ、Renault Twingoをベースとする電気自動車として展開する。内装ではステアリングホイールやダッシュボード、スイッチ類、インフォテインメントシステムをTwingoと共通化し、後部座席は独立スライド式を採用して荷室空間の調整に対応している。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/nissan-pixo-returns-sub-%C2%A320k-twingo-twin-bold-new-look",
+        source: "AUTOCAR UK",
+        date: "2026-09-23",
+        tags: ["コネクテッド", "シート", "コックピット", "EV"],
+    
+        sourceExcerpt: "The interior is much more familiar, though, retaining the Twingo's steering wheel, dashboard, switchgear and infotainment.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/nissan-pixo-2026-037_0.jpg?itok=kTP98mrS",
+        note: ""
+    },
+    {
+        id: "eu1663",
+        title: "VW ID.Buzz Cargo LWB追加、物理ボタン復活と86kWhバッテリー採用",
+        desc: "VolkswagenはID. Buzz Cargoのロングホイールベースモデルを追加し、荷室長を2,458mmに拡大した。ステアリングホイールの物理ボタンを復活させ、温度調整スライダーにはバックライトを備えた。また、充電中のメディアストリーミングに対応するアプリストアや、最大3.6kWのV2L機能も新たに導入されている。",
+        url: "https://www.autoexpress.co.uk/volkswagen/id-buzz/370499/new-volkswagen-id-buzz-cargo-lwb-250mm-longer-and-comes-real-buttons",
+        source: "Auto Express",
+        date: "2026-09-23",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "In addition, Volkswagen has overhauled the infotainment controls, brin",
+        sourceExcerptEnd: "el, plus back-lighting for the sliding temperature controls.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s---EUzV6Fk--/t_rss_image_w_845/v1790160460/autoexpress/2026/09/New%20Volkswagen%20ID.%20Buzz%20Cargo%20LWB%20-%20front%203_4_niefam.jpg",
+        note: ""
+    },
+    {
+        id: "cn1684",
+        title: "長安ネボQ06、中国で販売開始",
+        desc: "長安汽車のクロスオーバーSUV「Nevo Q06」が139,000元から中国市場で発売された。内装はミニマルなデザインを採用し、ダッシュボードには15.6インチタッチスクリーンと物理コントロールブロックを備える。また、キャビン全体の90.6%にソフトマテリアルを使用し、4,450mmにわたるアンビエントライティングが施されている。",
+        url: "https://carnewschina.com/2026/09/23/changan-nevo-q06-ev-crossover-started-sales-in-china-ahead-of-global-rollout/",
+        source: "CarNewsChina - All",
+        date: "2026-09-23",
+        tags: ["ディスプレイ", "コックピット", "イルミ", "EV"],
+    
+        sourceExcerpt: "The car’s ambient lighting spans 4,450 mm across the interior.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/changan_nevo_q06_webhook_1500x900_q85_1790170936.jpg",
+        note: ""
+    },
+    {
+        id: "cn1685",
+        title: "BYD Yangwang、後ヒンジドア採用のフラッグシップセダン開発を公式に確認",
+        desc: "BYDのYangwangは、後ヒンジ式コーチドアやDiPilot 600支援運転システムを備えた新型フラッグシップセダンのティザー画像を公開した。2027年の全固体電池導入計画に沿い、同社初のSSB搭載車となる可能性が報じられている。",
+        url: "https://carnewschina.com/2026/09/23/byds-yangwang-teases-upcoming-rolls-royce-rival-sedan-with-solid-state-battery/",
+        source: "CarNewsChina - All",
+        date: "2026-09-23",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Chinese sources claim the new Yangwang sedan will be BYD’s first vehicle equipped with solid-state batteries (SSB).",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/yw_e.jpg",
+        note: ""
+    },
+    {
+        id: "cn1686",
+        title: "GAC Yue 7およびBYD Ti 7と競合するPHEVクロスオーバーが中国市場で発売",
+        desc: "GAC Yue 7は16万1800元から販売開始され、海外ではXT80として展開予定。内装には1.1mの全景スクリーンや15.6インチタッチパネルを備え、2列目シートは最大127度までリクライニング可能。",
+        url: "https://carnewschina.com/2026/09/23/gac-yue-7-suv-entered-china-as-byd-ti-7-rival-ahead-of-global-rollout/",
+        source: "CarNewsChina - All",
+        date: "2026-09-23",
+        tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        sourceExcerpt: "The car’s interior has five seats.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/gac_yue_7_xt80_webhook_1500x900_q85_1790137851.jpg",
+        note: ""
+    },
+    {
+        id: "cn1687",
+        title: "理想汽車、2026年モデルi6の発売を10月下旬へ延期",
+        desc: "Li Autoは2026年型i6の発売を10月下旬に延期しつつ、納車時期は11月上旬を維持する方針を示した。今回のアップデートでは、自社開発の5CバッテリーとMachチップを搭載し、ドアハンドルには半埋め込みタイプが採用されている。",
+        url: "https://cnevpost.com/2026/09/23/li-auto-moves-2026-i6-launch-to-late-oct/",
+        source: "CnEVPost - All",
+        date: "2026-09-23",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092308084288.jpg",
+        note: ""
+    },
+    {
+        id: "in1741",
+        title: "バジャジ、Pulsar NS400ZにTFTメーター採用の試作車確認",
+        desc: "バジャジはPulsar N160や125・150シリーズにTFT計器クラスターを導入した直後、NS400Zにも同様の装備を備えた新型車両がディーラーで目撃された。これは発売前に新機能の採用が進んでいることを示唆しており、コックピットのデジタル化が拡大している。",
+        url: "https://www.autocarindia.com/bike-news/bajaj-pulsar-ns400z-spotted-with-tft-screen-spotted-ahead-of-launch-440839",
+        source: "Autocar India - All",
+        date: "2026-09-23",
+        tags: ["AR", "コックピット"],
+    
+        sourceExcerpt: "Just a month after Bajaj updated the Pulsar N160 and the Pulsar",
+        sourceExcerptEnd: "preparing to equip the NS400Z with the feature as well.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260923_100425_051031b6.jpg",
+        note: ""
+    },
+    {
+        id: "in1742",
+        title: "主要インド都市におけるMahindra Thar OGの車両価格一覧",
+        desc: "マヒンドラ「Thar OG」のインド主要都市オンロード価格は115.6万〜233.6万ルピーで、ベンガロールが最も高価です。新プラットフォーム採用や内装のプレミアム化を伴い、納車は10月11日から開始されます。",
+        url: "https://www.autocarindia.com/car-news/mahindra-thar-og-on-road-prices-listed-in-major-indian-cities-440837",
+        source: "Autocar India - All",
+        date: "2026-09-23",
+        tags: ["AR"],
+    
+        sourceExcerpt: "With the new Thar OG, Mahindra has introduced a new-gen platform, a",
+        sourceExcerptEnd: "engines, fresh exterior design elements and a more premium interior.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260923_065633_3bb825e5.jpg",
+        note: ""
+    },
+    {
+        id: "in1743",
+        title: "マクラーレン、新ロゴと独自フォント「McLaren Sans」を導入",
+        desc: "マクラーレンは次期モデル向けに、創業者ブライス・マクラーレンの両親がニュージーランドで運営したサービスステーションをモチーフにした新ロゴを発表した。",
+        url: "https://www.autocarindia.com/car-news/mclaren-reveals-new-logo-440835",
+        source: "Autocar India - All",
+        date: "2026-09-23",
+        tags: ["AR"],
+    
+        sourceExcerpt: "It also introduces a new bespoke company typeface called McLaren Sans.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260923_051458_2a461657.png",
+        note: ""
+    },
+    {
+        id: "in1744",
+        title: "日産ピクソEV、スライド式後席と356Lラゲージを備える",
+        desc: "欧州向けに開発されたコンパクトEV「ピクソ」は、2027年初頭の納車開始に向け、50kWのDC充電機能やGemini統合に対応する。内装ではスライド式後部シートを採用し、356リットルのラゲージスペースを確保している。",
+        url: "https://gaadiwaadi.com/nissan-pixo-electric-city-car-debuts-with-259-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-09-23",
+        tags: ["シート", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/nissan-pixo-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu1664",
+        title: "Smart Eye、視線と感情データ活用AIエージェント公開",
+        desc: "スウェーデンのSmart EyeはInCabin Europe 2026で車内AIエージェントを公開した。音声や視線、感情データと車両センサー情報を統合し、ダッシュボードウィジェットの構築などを行う。多様な基盤モデルに対応するこのプラットフォームは、処理負荷を軽減しつつ実用化を加速させるとしている。",
+        url: "https://www.automotiveworld.com/news/smart-eye-shows-in-cabin-ai-agent-that-reads-driver-cues/",
+        source: "Automotive World",
+        date: "2026-09-23",
+        tags: ["AR", "AI", "センシング", "コックピット"],
+    
+        sourceExcerpt: "Smart Eye has built an in-cabin AI agent that blends voice, gaze,",
+        sourceExcerptEnd: "and exterior sensor data to decide on and complete tasks.",
+        interiorScore: 66,
+        interiorReason: "Focuses on in-cabin AI agent and HMI (dashboard widgets) driven by driver monito",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/23122951/smarteye.jpg",
+        note: ""
+    },
+    {
+        id: "eu1665",
+        title: "PateoとArmが車載フィジカルAI開発で覚書締結",
+        desc: "PateoはArmと車載フィジカルAI開発の覚書を締結し、認知やインタラクションを軸としたワークロードを探る。",
+        url: "https://www.automotiveworld.com/news/pateo-and-arm-sign-mou-to-develop-physical-ai-for-cars/",
+        source: "Automotive World",
+        date: "2026-09-23",
+        tags: ["AR", "AI"],
+    
+        sourceExcerpt: "Hong Kong-listed supplier Pateo has signed a memorandum of understanding with Arm to develop physical AI applications for vehicles.",
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/23083422/smart-car-intelligent-ai-connected-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "eu1666",
+        title: "ST、車内監視向け赤外線センサーVD56GAを投入",
+        desc: "STMicroelectronicsは1.1メガピクセルの赤外線センサー「SafeSense VD56GA」を発表した。外部画像処理器が不要な設計でカメラモジュールのコスト低減を図り、2031年までに7,000万台超と予測される市場規模に対応する。",
+        url: "https://www.automotiveworld.com/news/st-launches-safesense-vd56ga-for-in-cabin-monitoring/",
+        source: "Automotive World",
+        date: "2026-09-23",
+        tags: ["センシング"],
+    
+        sourceExcerpt: "STMicroelectronics has launched the ST SafeSense VD56GA, a 1.1-megapix",
+        sourceExcerptEnd: " and occupant monitoring affordable in high-volume vehicles.",
+        interiorScore: 78,
+        interiorReason: "The article details a specific in-cabin driver monitoring sensor (ST SafeSense V",
+        imageInterior: true,
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/23133538/stmicroelectronics-image-sensors-1-scaled.jpg",
+        note: ""
+    },
+    {
+        id: "us1700",
+        title: "BMW iX3、ドイツカー・オブ・ザ・イヤーで内装部門賞を獲得",
+        desc: "BMW iX3は、17.9インチの中央ディスプレイやiDriveロータリーノブを廃止した新コックピットにより、GCOTY 2027の内装デザインおよびインフォテインメント部門を受賞した。この内装設計は、今後発表される3シリーズやiX4にも展開予定である。",
+        url: "https://www.bmwblog.com/2026/09/23/bmw-ix3-wins-best-interior-german-car-of-the-year-awards/",
+        source: "BMWBLOG",
+        date: "2026-09-23",
+        tags: ["ディスプレイ", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "Although the BMW iX3 won for best interior design and infotainment, it's not competing for the overall title.",
+        interiorScore: 83,
+        interiorReason: "The article is highly relevant to interior product planning as it details a flag",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.bmwblog.com/wp-content/uploads/2026/09/BMW-iX3-wins-best-interior-at-2027-German-Car-of-the-Year-Awards-1-830x553.jpg",
+        note: ""
+    },
+    {
+        id: "jp1887",
+        title: "【ジープ】85周年の哲学「どこへでも行ける」を体現",
+        desc: "ジープ、ブランド創設85周年を記念したコマンダー特別仕様車とコンパスの限定モデルを発売 ステランティスジャパンは2026年9月17日、ジープ創設85周年を記念した特別仕様車「ジープ・コマンダー・オーバーランド85thアニバーサリー・エディション（Jeep Commander Overland 85",
+        url: "https://levolant.jp/2026/09/23/455495/",
+        source: "ル・ボラン",
+        date: "2026-09-23",
+        tags: [],
+    
+        sourceExcerpt: "ステランティスジャパンは2026年9月17日、ジープ創設85周年を記念した特別仕様車「ジープ・コマンダー・オーバーランド 85thアニバーサ",
+        sourceExcerptEnd: "ル・エディション（Jeep Compass Field Style Edition）」を全国の正規ディーラーで発売した。",
+        country: "jp",
+        img: "https://levolant.jp/wp-content/uploads/2026/09/260918_Jeep_07.jpg",
+        note: ""
+    },
+    {
+        id: "jp1888",
+        title: "自動開閉ドアや4Dマッサージで極まる快適性。フル電動ポルシェ・カイエンが描く次世代SUVのベンチマーク",
+        desc: "ポルシェ、フル電動「カイエン」の利便性とカスタマイズ性を大幅アップデート ポルシェは、フル電動SUV「カイエン エレクトリック」および「カイエン クーペ エレクトリック」の新たなモデルイヤー導入に伴い、オプションのラインナップを大幅に拡大した。今回のアップデートでは、電動ドアやワイヤレス充電システムが初めて設定された。さらに、100色以上のボディカラーが選べるプログラムの導入や、マッサージ機能の進化など、パーソナライズと快適性の両面で大きな進化を遂げている。 【画像10枚】自動開閉ドアやワイヤレス充電を新採用。利便性が劇的進化した「ポルシェ・カイエン エレクトリック」を写真で確認する スマートな開閉を実現する電動ドアを初採用 新たにオプション設定された自動アシスト付き電動ドアは、サーボモーターの働きにより全ドアをほとんど力をかけずに開閉できる。ドアハンドルを軽く引くだけで残りの動作は自動で行われる。操作は車内のボタンやドアハンドルのほか、ディスプレイやデジタルキーを使った遠隔操作など、多彩な方法で行うことができる。 傾斜地でもスムーズに動作し、ドア周辺をセンサーが常時監視しているため、障害物や人を検知した場合には自動的に動作を停止する。降車警告システムとも連携しており、後方から接近する車両がある場合にはドアが開かないよう制御される。もちろん、手動での開閉も常時可能である。 ケーブル不要のワイヤレス充電システム 日常的な利便性を高める装備として、「ポルシェ・ワイヤレス・チャージング」も新たに導入された。ケーブル接続の手間を省き、所定のグラウンドパッドの上に駐車するだけで自動的に充電が開始される。システムは車両側のハードウェア、車両パッド、駐車スペースのグラウンドパッドの3つで構成される。 全天候型のグラウンドパッドは屋外設置も可能で、最大11kWの出力、約90％の効率でワイヤレス伝送する。生き物が車両やパッドに近づいた場合や、金属物が落ちて加熱された場合には、センサーや異物検知機能が働き、充電を即座に停止する安全な仕組みとなっている。 音楽と連動する新次元のマッサージ機能 快適装備の面では、4Dオーディオと連動するマッサージ機能が採用された。フロントシートには、背もたれと座面に16個のエアクッションと6つのサウンドアクチュエーターが内蔵されている。これにより、音楽のサウンドと振動が組み合わさった、立体的で深みのあるリラクゼーション体験を味わうことができる。 センターディスプレイから設定可能で、5つのバイブレーションマッサージプログラムが用意されている。追加された3つの「ウェルネスムードモード」を選択すると、空気圧マッサージ、振動、厳選されたサウンドが融合し、独自の癒やしの空間を車内に演出する。 100色以上のカラーと充実のインテリア カスタマイズの自由度も、同モデルの歴史上かつてないレベルへ引き上げられた。13色の標準カラーに加え、「ペイント・トゥ・サンプル」プログラムが適用されたことで、合計105色ものペイントカラーから選択できるようになった。これにより、オーナーの個性をより強く反映させることが可能である。 インテリアにおいても、黒と専用の緑色を基調とした洗練された「インテリアスタイルパッケージ」が選択できる。さらにデルガダグリーンのレザートリムなどを追加した拡張パッケージも設定された。シートコンソールなどにRace-Tex素材を使用するオプションも用意され、高いレベルのパーソナライズを実現している。 【ル・ボラン編集部より】 フル電動化されたカイエンに、自動開閉ドアやワイヤレス充電、マッサージ機能など至れり尽くせりの快適装備が追加された。一見するとスポーツカーブランドらしからぬ過剰なおもてなしに映るかもしれない。かつてカイエンが洗練度を増した際、その穏やかな振る舞いに「牙を抜かれたか」と錯覚させられた。だが、それは鞭を入れた瞬間に露わになる本性を際立たせる演出だった。今回の大幅な快適性の向上も、静寂の裏に潜む圧倒的なパフォーマンスを引き立てる布石なのだ。いかに快適になろうと、ポルシェの哲学は微塵も揺らいでいない。 【画像10枚】自動開閉ドアやワイヤレス充電を新採用。利便性が劇的進化した「ポルシェ・カイエン エレクトリック」を写真で確認する ※この記事は、一部でAI（人工知能）を資料の翻訳・整理、および作文の補助として活用し、当編集部が独自の視点と経験に基づき加筆・修正したものです。最終的な編集責任は当編集部にあります。 Photo: Porsche AG",
+        url: "https://levolant.jp/2026/09/23/455151/",
+        source: "ル・ボラン",
+        date: "2026-09-23",
+        tags: ["ディスプレイ", "AI", "センシング", "シート", "センターコンソール", "新素材"],
+    
+        sourceExcerpt: "操作は車内のボタンやドアハンドルのほか、ディスプレイやデジタルキーを使った遠隔操作など、多彩な方法で行うことができる。",
+        interiorScore: 96,
+        interiorReason: "Detailed breakdown of interior comfort features including 4D massage seat specif",
+        imageInterior: true,
+        country: "jp",
+        img: "https://levolant.jp/wp-content/uploads/2026/09/260917_CayenneElectric_09.jpg",
+        note: ""
+    },
+    {
+        id: "us1701",
+        title: "フォルクスワーゲン、Golfなど4車種にHarman Kardon搭載のPremium Sound Edition追加",
+        desc: "フォルクスワーゲングループジャパンは、GolfやPassatを含む4モデルで「Premium Sound Edition」を発売した。この限定グレードにはHarman Kardonをはじめとする高品位なサウンドシステムが標準装備され、車内での音響体験の向上が図られている。",
+        url: "https://www.volkswagen.co.jp/ja.html",
+        source: "news.google.com",
+        date: "2026-09-23",
+        tags: ["AR", "音響"],
+    
+        sourceExcerpt: "■ Premium Sound Edition｜Harman Kardonをはじめとする高品位なサウンドシステム搭載の限定車が、Golf、Golf Variant、Passat、T-Cross の4モデルで登場。",
+        country: "us",
+        img: "https://assets.volkswagen.com/is/image/volkswagenag/campaign?Zm10PXBuZy1hbHBoYSZ3aWQ9ODAwJmJmYz1vZmYmMGFmYw==",
+        note: ""
+    },
+    {
+        id: "eu1667",
+        title: "日産、ピアノブラック内装トリムを誤りと認める",
+        desc: "日産は、ピアノブラックの光沢仕上げの内装トリムが当初から誤りであったと認めた。",
+        url: "https://www.nissan.co.jp/",
+        source: "news.google.com",
+        date: "2026-09-23",
+        tags: [],
+    
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.nissan.co.jp/images/og01.jpg",
+        note: ""
+    },
+    {
+        id: "cn1688",
+        title: "原文が提供されていないため、事実に基づいた見出しと要約の作成はできません。",
+        desc: "入力されたJSONに記事本文が含まれていないため、指定された条件に従った日本語の見出しおよび要約を生成することができません。",
+        url: "https://ja.wikipedia.org/wiki/アザラシ",
+        source: "news.google.com",
+        date: "2026-09-23",
+        tags: [],
+    
+        sourceExcerpt: "鼻腔を閉じることができ、肺の中の空気をほとんど全て吐き出すことで高い水圧に耐えられる。",
+        imageInterior: false,
+        country: "cn",
+        img: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Spotted_Seal_mombestu2.jpg?utm_source=ja.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+        note: ""
+    },
+    {
+        id: "in1745",
+        title: "メルセデス・ベンツSクラス マイベック リア用折りたたみテーブル",
+        desc: "メルセデス・ベンツのSクラスマイベックには、リアシートに備わる折りたたみ式のテーブルが採用されている。",
+        url: "https://www.mercedes-benz.co.jp/",
+        source: "news.google.com",
+        date: "2026-09-23",
+        tags: ["シート"],
+    
+        imageInterior: true,
+        country: "in",
+        img: "https://www.mercedes-benz.co.jp/content/dam/japan/passengercars/stage/mercedes-benz/202609/20260918_The_New_Mercedes_AMG_GLC_53_4matic_home_stage_Bnr_1066x1066.jpg",
         note: ""
     },
 ];

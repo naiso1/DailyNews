@@ -1,5 +1,22 @@
 window.DAILY_INSIGHTS = [
     {
+        date: "2026-09-23",
+        analysis: {
+            jp: "日本市場では電動化と高級化の両立が内装設計を大きく変えつつある[jp1888]。自動開閉ドアや4Dマッサージシートなど、デジタル体験の質向上が求められている[jp1888]。一方、Cピラーへの富士山意匠といった文化的アイデンティティと新素材の融合も注目される[jp1883]。消費者はハイブリッド化や快適装備の欠如を指摘し、既存車種での差別化手段として内装の質感向上が急務になっている[jp1882][jp1881]。特別仕様車では限定カラーや専用エンブレムによる「所有欲」喚起が有効である[jp1887]。これらの動向から、単なる機能追加ではなく、意匠や照明演出を通じてブランド価値を高める内装部品への需要が高まっている[jp1885]。開発現場では、物理操作とデジタル表示の調和、そして車種固有の物語性を宿す素材選定が次の焦点となるだろう[jp1883]。",
+            cn: "中国EV市場では、長安ネボQ06 [cn1684] やGAC Yue 7 [cn1686] に代表されるように、大型スクリーンと物理操作の共存が設計基準となっている。このトレンドは、視認性と触感の両立を前提とした新しいHMIレイアウトを内装部品に要求する。また、BYD Yangwang [cn1685] が示すフラッグシップ化や、理想汽車i6 [cn1687] の高性能バッテリー搭載により、狭いスペースでの熱管理と素材の耐久性が厳格化している。豊田合成としては、低価格帯でも高級感を演出できる再生材活用型インパネの開発が急務である。さらに、環境配慮型ソフトマテリアルによる触感品質向上や、危険情報を光で伝える安全表示システムの進化が必要となる。乗員が直感的に操作でき、かつ多機能なHMI連携照明を備えたキャビン提案が、次の競争優位性を生み出す鍵となる [cn1684,cn1685]。",
+        },
+        ideas: {
+            jp: [
+                { id: 1823, img: "images/exabase_interior_1823_fea4368b7b609e05.jpg", title: "富士山意匠投影コンソール", desc: "新型日産ローグハイブリッドのCピラーに宿る富士山意匠を継承し、センターコンソール上部に専用光導波路を組み込んだ。薄型LEDで山脈の稜線を立体的に演出できるため、夜間のドライブ時に車内空間が静謐な山岳風景へと変化する。限定モデルらしい特別感と日本の自然美を同時に享受でき、乗降時の感動体験を提供する。 [jp1885]", imagePrompt: "A close-up of a car center console featuring a subtle, glowing projection of Mount Fuji's silhouette on the upper dashboard trim. The light is soft blue-white, creating a serene atmosphere in the dark interior. High-end material textures are visible.", sourceNewsIds: ["jp1885"], imageProvider: "exabase", imageModel: "" },
+                { id: 1824, img: "images/exabase_interior_1824_6f6ab8d2f5fa3a3c.jpg", title: "ELV再生調光トレイ", desc: "ジープ・コマンダー85thアニバーサリーのエッジィなデザインを継承し、廃車由来プラスチック50%配合のELV材で軽量かつ高強度なセンターコンソールトレイを実現。環境に優しい素材でオフロード車両らしい堅牢さを保ちながら、内装全体のサステナビリティ価値を高めてユーザーの満足度を向上 [jp1887]", imagePrompt: "A close-up of a rugged center console storage tray made from textured recycled plastic (ELV material) with visible grain, integrated into a Jeep-style dashboard. The tray has a matte dark gray finish with subtle olive green accents matching the 85th anniversary theme. Soft ambient lighting highlights the sustainable texture and durable edges.", sourceNewsIds: ["jp1887"], imageProvider: "exabase", imageModel: "" },
+            ],
+            cn: [
+                { id: 1825, img: "images/exabase_interior_1825_0acd90e32b23f2e6.jpg", title: "バイオ系ソフトタッチインパネ", desc: "長安ネボQ06のキャビン90.6%を占めるソフトマテリアルをヒントに、植物由来樹脂と再生繊維を複合した新触感素材を開発する。従来の合成樹脂より軽量化でき、環境負荷も低減するため地球にも乗員にも優しい選択が可能になる。高価格帯EVだけでなく、幅広い車種で「触れた瞬間の安心感」を提供し、サステナビリティを重視するユーザーに大きな喜びをもたらす内装加飾部品となる。 [cn1684]", imagePrompt: "Close-up of a car dashboard panel made from matte, textured bio-composite material with visible natural fiber weave patterns, warm beige color tone, soft diffused lighting highlighting the tactile surface texture and sustainable aesthetic", sourceNewsIds: ["cn1684"], imageProvider: "exabase", imageModel: "" },
+                { id: 1826, img: "images/exabase_interior_1826_c9c2db7e79a9249b.jpg", title: "安全連携ドアトリムイルミ", desc: "BYD YangwangのDiPilot 600支援運転システムと連動し、ドアトリムのエッジに埋め込んだLED通知イルミネーションを設計する。死角警告や接近車両検知時、乗員の視線が自然と向く位置で光のパターンが変わり、危険を直感的に伝える。音響警告に頼らず視覚だけで安全を確認できるため、静寂な車内で安心して運転を楽しみたいユーザーにとって、まるでパートナーのように守られているような安心感とうれしさを提供する。 [cn1685]", imagePrompt: "Interior side view of a car door trim featuring integrated LED light strips along the handle and window edge, glowing with dynamic blue safety patterns to indicate blind spot alerts, sleek modern design with dark leather texture, cinematic lighting focus on the illuminated elements", sourceNewsIds: ["cn1685"], imageProvider: "exabase", imageModel: "" },
+            ],
+        }
+    },
+{
         date: "2026-09-22",
         analysis: {
             jp: "今回のニュース群では、デジタルコックピットと物理操作の再統合が鮮明になっている[jp1876]フェラーリは静電容量式から物理スイッチへの回帰で操作感を高めた[jp1876]一方、マツダCX-6eは26.0インチモニターへ機能を集約し素材の質感を強調する[jp1874]この対比から、単なる画面拡大ではなく、指先が触れる「触感」と「視覚的没入」を両立させる内装設計が求められる[jp1876,jp1874]スバルソルテラは低床コンソールで開放感を演出し[jp1877]日産ローグHVはベンチレーションシートと音響環境の快適性を重視する[jp1873]これらから、乗員の五感に訴えかける「ウェルネス系コックピット」への進化が示唆される[jp1873,jp1877]豊田合成として、既存のWelpit技術と連動し、大型ディスプレイ周りの照明や素材の温度感を制御する次世代コンソールモジュールの開発が有効であろう[jp1874,jp1876]特に、物理スイッチの質感再現とデジタル表示の調和、そして乗員状態に応じた環境変化を内装に埋め込むことが、今後の高級EV市場での差別化要因となる可能性がある[jp1876,jp1873]",
