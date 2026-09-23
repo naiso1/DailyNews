@@ -36,7 +36,7 @@ class CollectorRejectionOutcomeTests(unittest.TestCase):
                     "editorial_feedback": Mock(return_value={"rules": []}),
                     "normalize_text": lambda value: re.sub(r"\s+", " ", value).strip(),
                     "LLM_MODEL": "fixture-model", "LLM_REASONING_EFFORT": "none", "LLM_TIMEOUT": 1,
-                    "UNGROUNDED_KEEP_MIN_SCORE": 60,
+                    "INTERIOR_KEEP_MIN_SCORE": 60,
                     "spread_interior_score": Mock(side_effect=lambda score, *args: score),
                     "calibrate_interior_score": Mock(return_value=(85, "")),
                     "record_exterior_llm_failure": Mock(), "record_interior_assessment_hold": Mock()}

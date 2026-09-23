@@ -197,43 +197,34 @@ class InteriorSelectionPolicyTests(unittest.TestCase):
         self.assertEqual(set(selected["URL"]), {target["URL"], paper["URL"]})
         assess.assert_not_called()
 
-    def test_missing_rationale_is_repaired_and_stored_once(self):
+    def test_high_score_is_kept_without_requiring_evidence_or_a_repair_call(self):
+        # Aligned with exterior: adoption is decided by the score recorded at
+        # collection time. Sheet-building no longer re-fetches or re-asks the
+        # model for a missing rationale; it just applies the score gate and
+        # the scope-exclusion rules.
         row = self.row(evidence=False)
-        assessment = {"score": 83, "reason": "表皮一体操作部の配置を比較できる", "evidence": useful_article()["evidence"], "policy_decision": "keep"}
-        selected, assess = self.select([row], assessment=assessment)
+        row["内装関連度"] = 75
+        selected, assess = self.select([row])
         self.assertEqual(len(selected), 1)
         self.assertEqual(selected.iloc[0]["採用根拠_状態"], "検証済み")
-        self.assertEqual(selected.iloc[0][EVIDENCE_COLUMNS["source_quote"]], assessment["evidence"]["source_quote"])
-        assess.assert_called_once()
-        stored = collector.pd.read_csv(self.context.runtime_dir / "search_results.csv", keep_default_na=False)
-        self.assertEqual(stored.iloc[0][EVIDENCE_COLUMNS["new_information"]], assessment["evidence"]["new_information"])
+        assess.assert_not_called()
 
-    def test_ungrounded_failed_repair_falls_back_to_the_original_relevance_judgment(self):
-        # No fuller text was ever fetched (repair returns None, same as the
-        # original bare snippet), so a verbatim-quote requirement can never
-        # be met here. The prior "対象" classification is trusted instead of
-        # discarding the article outright.
-        broken, valid = self.row("broken", evidence=False), self.row("valid")
-        broken["内装関連度"] = 100
-        selected, assess = self.select([broken, valid])
-        self.assertEqual(set(selected["URL"]), {broken["URL"], valid["URL"]})
-        assess.assert_called_once()
-        self.assertEqual(collector.SHEET2_RESULT["editorial_held_count"], 0)
-        self.assertEqual(collector.SHEET2_RESULT["selected_count"], 2)
-
-    def test_grounded_failed_repair_still_held_and_does_not_displace_valid_rows(self):
-        # Once real article text (>=150 chars) is available, a verbatim quote
-        # is achievable; a repair that still cannot produce one is a genuine
-        # evidence gap, not a fetch failure, and must stay held.
-        long_body = "ドアトリムに静電容量センサーを内蔵し、表皮越しの操作に対応する。" * 8
-        broken, valid = self.row("broken", evidence=False), self.row("valid")
-        broken["内容"] = broken["内容（日本語）"] = long_body
-        broken["内装関連度"] = 100
-        selected, assess = self.select([broken, valid])
+    def test_low_score_is_held_even_with_complete_evidence(self):
+        valid, low = self.row("valid"), self.row("low")
+        low["内装関連度"] = 40
+        selected, assess = self.select([valid, low])
         self.assertEqual(selected["URL"].tolist(), [valid["URL"]])
-        assess.assert_called_once()
+        assess.assert_not_called()
         self.assertEqual(collector.SHEET2_RESULT["editorial_held_count"], 1)
         self.assertEqual(collector.SHEET2_RESULT["selected_count"], 1)
+
+    def test_missing_score_is_held(self):
+        row = self.row(evidence=True)
+        row["内装関連度"] = ""
+        selected, assess = self.select([row])
+        self.assertTrue(selected.empty)
+        assess.assert_not_called()
+        self.assertEqual(collector.SHEET2_RESULT["editorial_held_count"], 1)
 
     def test_same_issue_legacy_is_preserved_but_reviewed_hidden_url_is_never_restored(self):
         row = self.row(evidence=False)

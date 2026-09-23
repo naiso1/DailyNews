@@ -26,7 +26,7 @@ EVIDENCE = {"target_component": "ドアトリムの静電容量センサー",
 
 def isolated_collector():
     names = {"interior_evidence_source", "store_exterior_assessment", "collector_article",
-             "enrich_results", "enrich_existing_df", "apply_interior_selection_policy"}
+             "enrich_results", "enrich_existing_df"}
     source = (ROOT / "ニュース収集/google_search_script.py").read_text(encoding="utf-8-sig")
     tree = ast.parse(source)
     nodes = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in names]
@@ -80,20 +80,6 @@ class CollectorEvidenceSourceTests(unittest.TestCase):
             result = self.env["enrich_existing_df"](pd.DataFrame([self.row]))
         self.assert_preserved_evidence(result.iloc[0])
 
-    def test_sheet2_evidence_repair_persists_the_same_source_in_checkpoint(self):
-        import pandas as pd
-        self.env["pd"] = pd
-        frame = pd.DataFrame([self.row])
-        for column in EVIDENCE_COLUMNS.values():
-            frame[column] = ""
-        selected, decisions, changed = self.env["apply_interior_selection_policy"](frame, frame.copy(), set(), [])
-        self.assertEqual(len(selected), 1)
-        self.assertEqual(decisions, [])
-        self.assertTrue(changed)
-        self.assert_preserved_evidence(selected.iloc[0])
-        self.assertEqual(frame.iloc[0]["内容"], BODY)
-        self.assertEqual(frame.iloc[0]["採用根拠_出典"], QUOTE)
-
     def test_fetch_failure_short_body_or_error_page_keeps_original_snippet(self):
         for body in ("", "Brief body", "Access Denied " * 30):
             with self.subTest(body=body[:25]):
@@ -101,25 +87,6 @@ class CollectorEvidenceSourceTests(unittest.TestCase):
                 row = self.row.copy()
                 self.assertEqual(self.env["interior_evidence_source"](row), SNIPPET)
                 self.assertEqual(row["内容"], SNIPPET)
-
-    def test_sheet2_repair_persists_explicit_rejection_instead_of_repeating_a_hold(self):
-        import pandas as pd
-        self.env["pd"] = pd
-        self.env["call_llm_interior_assessment"].return_value = {
-            "score": 10, "raw_score": 10, "reason": "対象外: 店舗紹介のみ。", "raw_reason": "対象外: 店舗紹介のみ。",
-            "evidence": dict.fromkeys(EVIDENCE_COLUMNS, ""), "policy_decision": "exclude",
-            "policy_reason": "model_explicit_rejection"}
-        frame = pd.DataFrame([self.row])
-        for column in EVIDENCE_COLUMNS.values():
-            frame[column] = ""
-        selected, decisions, changed = self.env["apply_interior_selection_policy"](frame, frame.copy(), set(), [])
-        self.assertTrue(selected.empty)
-        self.assertTrue(changed)
-        self.assertEqual(decisions[0]["decision"], "exclude")
-        self.assertEqual(decisions[0]["reason"], "model_explicit_rejection")
-        self.assertEqual(frame.iloc[0]["LLM判定"], "非対象")
-        self.assertEqual(frame.iloc[0]["採用根拠_状態"], "対象外")
-        self.assertEqual(frame.iloc[0]["内装関連度_原判定"], 10)
 
     def test_translated_summary_never_becomes_source_and_offline_is_unchanged(self):
         row = dict(self.row, **{"内容（日本語）": "要約だけに書かれた根拠を原文へ混ぜない。"})
