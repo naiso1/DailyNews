@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-23 01:20";
+window.NEWS_UPDATED_AT = "2026-09-23 13:46";
 
 window.LOADED_NEWS_DATA = [
 
@@ -228808,6 +228808,515 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260922-00010001-dime-000-1-view.jpg?pri=l&w=640&h=426&exp=10800",
+        note: ""
+    },
+    // 2026-09-22 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1878",
+        title: "ブリッツがルークス等3車種向けに車高調キット「DAMPER ZZ-R」シリーズを販売開始",
+        desc: "ブリッツは日産『ルークス』など3車種向けに車高調キット「DAMPER ZZ-R」シリーズの適合を拡大した。SpecDSC Plusには2.5インチVA液晶ディスプレイとGセンサーを備えたコントローラーが採用され、車室内から4輪の減衰力を常時表示・調整できる。税込み価格は33万3300円である。",
+        url: "https://news.yahoo.co.jp/articles/80188c4a1648ca297167a690b7364acea811db6c",
+        source: "レスポンス",
+        date: "2026-09-22",
+        tags: ["ディスプレイ", "センシング"],
+    
+        sourceExcerpt: "「DAMPER ZZ-R SpecDSC Plus」は車室内から簡単に減衰力の調整を可能にした、前述の全長調整式サスペンション「DAMPER ZZ-R」と電子制御式の減衰力調整を組み合わせた車高調キット。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260922-00000006-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1879",
+        title: "アルト内装にレカロシートとワゴンR純正メーター",
+        desc: "スズキ・アルト（HA23S）のカスタムでは、シビックタイプR純正の赤いレカロバケットシートを採用し、ホールド性と長距離ドライブ時の快適性を確保している。また、後付け感を避けたいという意向からMCワゴンR・RR純正のタコメーター付きメーターを移植し、モモ製ステアリングとシフトノブで統一感を持たせた。",
+        url: "https://news.yahoo.co.jp/articles/cfe29780b1bd64f599a7c72029bb15c0521da55c",
+        source: "MotorFan",
+        date: "2026-09-22",
+        tags: ["シート", "カスタマイズ"],
+    
+        sourceExcerpt: "【SPECIFICATIONS】WHEEL●ワーク・マイスターCR01（15×F7.5J-12、R8J-18）/TIRE●ピレリ（165/4",
+        sourceExcerptEnd: "アーム=パルテック/MUFFLER●/ワンオフ/AUDIO●ヘッドユニット＆スピーカー＆ウーファー=カロッツェリア/ほか",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260922-01616754-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1691",
+        title: "日産、2027年型ローグに物理ノブ採用し実用性重視の設計方針を表明",
+        desc: "日産北米は2027年型ローグ・ハイブリッドにラジオ音量ノブや温度調整トグルを実装した。同社は機能依存でありデザイン演習ではないと述べ、顧客が慣れ親しんだ触覚フィードバックを重視する姿勢を示している。また、実用性を求める主流クロスオーバーとして操作性を優先する設計であることを強調している。",
+        url: "https://www.thedrive.com/news/nissan-exec-rejects-touchscreen-only-controls-says-its-not-a-jewelry-car",
+        source: "The Drive",
+        date: "2026-09-22",
+        tags: [],
+    
+        sourceExcerpt: "There’s certain things that customers are used to from a tactile feedback.",
+        interiorScore: 96,
+        interiorReason: "The article provides direct strategic insight into HMI design trends (tactile vs",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/2027-Nissan-Rogue-Hybrid-09-1.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1692",
+        title: "Venuum Black、ランボルギーニRevueltoへ全黒ワイドボディキット装着",
+        desc: "スペインのチューニング企業Venuum Blackは、ランボルギーニRevueltoに全黒基調のワイドボディキット「Voltoro V1」を装着した。パワートレインは据え置きだが、インテリアもダークテーマに統一されており、素材やトリム交換の詳細は未公開である。",
+        url: "https://www.motor1.com/news/809078/lamborghini-revuelto-voltoro-v1-dark/",
+        source: "Motor1",
+        date: "2026-09-22",
+        tags: ["新素材", "EV"],
+    
+        sourceExcerpt: "The Spanish tuner calls its build the Voltoro V1 and swaps the",
+        sourceExcerptEnd: "look for a widebody kit finished almost entirely in black.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/KbZBpR/s3/lamborghini-revuelto-by-venuum-black.jpg",
+        note: ""
+    },
+    {
+        id: "us1693",
+        title: "マツダNDロードスター、6台限定のサンフラワーイエロー特別仕様車",
+        desc: "日本国内4ディーラーが共同で開発した「FSW Ver. 2」は、内装にドアカードやエアコン吹き出し口リングへサンフラワーイエローのアクセントを施す。さらにヒーター付きシートなどを備えるツアリングパッケージも装着し、6台限定で抽選販売される。",
+        url: "https://www.carscoops.com/2026/09/mazda-mx-5-nd-yellow/",
+        source: "CarScoops",
+        date: "2026-09-22",
+        tags: ["シート"],
+    
+        sourceExcerpt: "Besides the unique paint, they also get an aero package and interior touches.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Mazda-Roadster-FSW-Ver.-2-main-1024x575.jpg",
+        note: ""
+    },
+    {
+        id: "us1694",
+        title: "レクサスRX、廉価グレード廃止で価格上昇",
+        desc: "2027年型レクサスRXはStandardグレードを廃止し、エントリーモデルの価格が$2,675引き上げられる。14インチタッチスクリーン搭載車のDrive Connect無料期間も3年から3ヶ月に短縮された。",
+        url: "https://www.carscoops.com/2026/09/lexus-raises-the-rxs-entry-price-by-2675-but-hey-red-calipers/",
+        source: "CarScoops",
+        date: "2026-09-22",
+        tags: ["AR", "ディスプレイ"],
+    
+        sourceExcerpt: "Last year, RXs equipped with the 14-inch touchscreen received a three-year Drive Connect trial covering cloud navigation and the “Hey Lexus” assistant.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/2027_Lexus_RX_350h_Premium_AWD_MatadorRedMica_12-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1695",
+        title: "GMC Terrain Denali、上位グレードの価値を問う",
+        desc: "筆者はGMC Terrainの最上級グレードDenaliについて、ベースモデルとの比較で魅力を感じていないと指摘する。レザーシートや14ウェイ調整シートなどの豪華装備よりも、シンプルさやコストパフォーマンスを重視する読者の意見を募る記事である。",
+        url: "https://www.jalopnik.com/2264813/what-upper-trim-just-isnt-worth-it-reader-question/",
+        source: "Jalopnik",
+        date: "2026-09-22",
+        tags: ["AI", "シート", "新素材"],
+    
+        sourceExcerpt: "Do you prefer a stripped-out sports car, something with no leather or",
+        sourceExcerptEnd: "buyer who isn't impressed by glitz and glamor and chrome?",
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/what-upper-trim-just-isnt-worth-it/l-intro-1790032686.jpg",
+        note: ""
+    },
+    {
+        id: "us1696",
+        title: "IIHS Top Safety Pick獲得の最小5車種と安全装備",
+        desc: "IIHSが2026年モデルの小型車5車種にTop Safety Pickを認定した中、Nissan Sentraはブラインドスポット干渉を標準化し、Toyota PriusはProactive Driving Assistを搭載する。",
+        url: "https://www.jalopnik.com/2264126/smallest-cars-still-get-iihs-top-safety-pick-ratings/",
+        source: "Jalopnik",
+        date: "2026-09-22",
+        tags: ["コネクテッド", "安全"],
+    
+        sourceExcerpt: "That's why small-car shoppers may want to check out 2026 models that",
+        sourceExcerptEnd: "Pick ratings from the Insurance Institute for Highway Safety (IIHS).",
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/the-x-smallest-cars-that-still-get-iihs-top-safety-pick-ratings/l-intro-1790005648.jpg",
+        note: ""
+    },
+    {
+        id: "us1697",
+        title: "レクサスES300h、新車コローラより安価な中古市場と静寂のインテリア",
+        desc: "2018年型レクサスES300hの中古価格は約2万1900ドルで、新車トヨタ・カローラLEを下回る。内装は水平基調のダッシュボードが採用され、素材やカラーバリエーションにより落ち着いた空間を演出している。",
+        url: "https://www.topspeed.com/luxury-hybrid-that-costs-less-than-new-corolla/",
+        source: "Top Speed",
+        date: "2026-09-22",
+        tags: ["コックピット", "新素材"],
+    
+        sourceExcerpt: "A predominantly horizontal dashboard layout emphasized the cabin's wid",
+        sourceExcerptEnd: "ious trim and color schemes depending on the variant chosen.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2024/11/2022-lexus-es-300h-hybrid.jpg",
+        note: ""
+    },
+    {
+        id: "us1698",
+        title: "ヤマハYZF-R1M、電子制御サスペンションとカーボンエアロで現行スーパーバイクに挑む",
+        desc: "2026年型YZF-R1Mは、電子制御式Öhlinsサスペンションとカーボンファイバー製ウイングレットを備え、センサー情報で減衰力を調整する。アルミデルタボックスフレームやマグネシウムホイールも採用し、MSRPは27,899ドルとなっている。",
+        url: "https://www.topspeed.com/japanese-sport-bike-still-scares-modern-superbikes/",
+        source: "Top Speed",
+        date: "2026-09-22",
+        tags: ["センシング"],
+    
+        sourceExcerpt: "That motorcycle is none other than the Yamaha YZF-R1M, the highest-specification version",
+        sourceExcerptEnd: "traces back to the radically redesigned R1 launched for 2015.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/08/11-2025-yzfr1ms-smx-us-12-yy-95-jpg.jpg",
+        note: ""
+    },
+    {
+        id: "us1699",
+        title: "ヤマハTracer 9、7インチTFTと軽量設計でスポーツツーリングのバランスを追求",
+        desc: "2026年型Yamaha Tracer 9は、フルカラー7インチTFTディスプレイや調整可能なシート高（33.3〜33.9インチ）を備えつつ、483ポンドの軽量設計で機動性を確保している。117hp・68.6 lb-ftのCP3エンジンを搭載し、基本価格は$12,599と設定されている。",
+        url: "https://www.topspeed.com/the-tourer-balances-luxury-performance-practicality/",
+        source: "Top Speed",
+        date: "2026-09-22",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "In the saddle, Yamaha provides a full-color 7-inch TFT display with multiple",
+        sourceExcerptEnd: "slipper clutch for a light lever pull and smoother downshifts.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/04/11-2025-mtt9sb-smx-us-10-yy-006.jpg",
+        note: ""
+    },
+    {
+        id: "eu1654",
+        title: "フリーランダー2のTD4ディーゼルはトルク310lbftで実用性高し",
+        desc: "2006〜14年型のフリーランダー2は、高い視界と実用性を備えた5ドアSUV。2.2リッターTD4ディーゼルや3.2リッターガソリンなど複数エンジンが設定され、2010年のマイナーチェンジでトルク向上や6速AT採用などの改良が行われた。",
+        url: "https://www.autocar.co.uk/car-news/used-cars/freelanders-back-brilliant-land-rover-original-only-%C2%A32k",
+        source: "AUTOCAR UK",
+        date: "2026-09-22",
+        tags: [],
+    
+        sourceExcerpt: "Back in 2006, prices ranged from £21,000 for the entry-level Freelander 2 TD4 S to £34,000, before options, for the 3.2 i6 HSE.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/freelander_2007a337.jpg?itok=7SV2FR7v",
+        note: ""
+    },
+    {
+        id: "eu1655",
+        title: "McLaren、創業者Bruceの工房から着想した新ロゴ",
+        desc: "McLarenは次期車向けに、創業者Bruce McLarenのニュージーランドの工房看板をヒントにしたミニマルな新ワードマークを発表しました。今後全車両やデジタルチャネルで展開し、ブランド拡大の一環として位置付けています。初採用車は先月発表されたMcL 6GTです。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/mclaren-reveals-new-logo-inspiration-bruces-legacy",
+        source: "AUTOCAR UK",
+        date: "2026-09-22",
+        tags: ["AR"],
+    
+        sourceExcerpt: "However, he said that while McLaren took inspiration from the eponymous workshop",
+        sourceExcerptEnd: "is not just a retro interpretation of who we are.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/mcl_6gt_mclaren.jpg?itok=sGLULmUj",
+        note: ""
+    },
+    {
+        id: "eu1656",
+        title: "BVRLA調査、EVはガソリン車よりMOT合格率が25%高い",
+        desc: "英国のBVRLAが4740万件のMOT検査データを分析した結果、走行距離9万〜12万マイルでEVの不適合率は16.5%に対しガソリン車は22.1%と高かった。ただし、EVはタイヤ欠陥が約1.8倍多く、再生ブレーキの特性上、低走行距離では摩擦ブレーキの腐食が見られる傾向がある。",
+        url: "https://www.autoexpress.co.uk/news/370485/electric-cars-are-more-reliable-petrol-cars-25-better-mot-pass-rates",
+        source: "Auto Express",
+        date: "2026-09-22",
+        tags: ["EV"],
+    
+        sourceExcerpt: "A recent study undertaken by the British Vehicle Rental and Leasing Association",
+        sourceExcerptEnd: "EVs are after prolonged use in comparison with petrol-powered vehicles.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--zzsT_kTn--/t_rss_image_w_845/v1669366752/autoexpress/2022/11/electric%20car%20servicing-12.jpg",
+        note: ""
+    },
+    {
+        id: "eu1657",
+        title: "VW ID 4、ID Tiguanへ改名しEV戦略刷新",
+        desc: "フォルクスワーゲンは、最も人気のある電気自動車であるID 4を、更新されたEVモデル命名戦略に沿って「ID Tiguan」に改名する方針を示している。",
+        url: "https://www.autocar.co.uk/car-review/volkswagen/id-4",
+        source: "Autocar Reviews",
+        date: "2026-09-22",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/vw-id4-2026-001_0.jpg?itok=yExiwiiM",
+        note: ""
+    },
+    {
+        id: "cn1675",
+        title: "BYD次期Han、LiDAR搭載と白基調のミニマル内装を確認",
+        desc: "中国で発見されたBYD次期HanはDragon Faceデザインを継承しルーフにLiDARを搭載している。内装は白い空間にセンターマウントのスクリーンと物理ボタンが配置され、価格は20万元（約29,900米ドル）でEVおよびPHEVモデルを予定している。",
+        url: "https://carnewschina.com/2026/09/22/next-generation-byd-han-sedan-spotted-in-china-with-lidar-and-dragon-face/",
+        source: "CarNewsChina - All",
+        date: "2026-09-22",
+        tags: ["AR", "ディスプレイ", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Its interior doesn’t stray far from other BYDs either, with a minimalist",
+        sourceExcerptEnd: "and a row of physical buttons on the centre console.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/han_a.jpg",
+        note: ""
+    },
+    {
+        id: "cn1676",
+        title: "理想汽車、全固体電池の量産化は2032年以降と予測",
+        desc: "理想汽車は2027〜28年に小ロットでの車両搭載を開始する計画だが、安定した大量生産にはさらに5年を要すると見込まれる。同社は自社工場によるバッテリー開発を進め、L6やi8などに展開済みで、2032〜33年の市場投入を目指している。",
+        url: "https://carnewschina.com/2026/09/22/li-auto-to-begin-small-batch-solid-state-battery-integration-in-2027-or-2028/",
+        source: "CarNewsChina - All",
+        date: "2026-09-22",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "Chinese automaker Li Auto will begin small-batch vehicle integration of solid-state battery technology in 2027 or 2028.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/li_auto_battery-1-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1677",
+        title: "BYDの新型シーガルには、浮遊式スクリーンと新たなシートレイアウトが採用される見通しだ。",
+        desc: "BYDは2代目シーガルのデザインスケッチを公開した。内装では「完全に新しいレイアウト」を採用し、室内空間の拡大を図る。スパイショットで確認された装備には、浮遊式のディスプレイ、ステアリングホイール後方にあるシフトレバー、そして広いセンタートンネルが含まれる。",
+        url: "https://carnewschina.com/2026/09/22/design-sketches-of-the-second-gen-byd-seagull-were-revealed-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-09-22",
+        tags: ["ディスプレイ", "シート", "バッテリー"],
+    
+        sourceExcerpt: "The earlier spy photos of the second-gen Seagull’s cabin revealed a floating screen, a gear shifter behind the wheel, and a sizeable center tunnel.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/byd_great_seagull_second_generation-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1678",
+        title: "Zeekr 9X、UAE向け量産出荷を開始",
+        desc: "吉利傘下のジークルはハイブリッドSUV「9X」のUAE向け量産出荷を開始した。Ultra、Hyper、Obsidianの3グレードで価格は36万9,900ディルハムから43万9,900ディルハムに設定され、新規注文の納車は2026年12月開始予定である。",
+        url: "https://cnevpost.com/2026/09/22/zeekr-begins-volume-shipments-9x-uae/",
+        source: "CnEVPost - All",
+        date: "2026-09-22",
+        tags: [],
+    
+        sourceExcerpt: "The 9X is available in 3 variants in the UAE — Ultra,",
+        sourceExcerptEnd: "dirhams and 439,900 dirhams, respectively, according to Zeekr's local website.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092212032118.jpg",
+        note: ""
+    },
+    {
+        id: "cn1679",
+        title: "BYD、西安拠点で8000人採用へ生産拡大",
+        desc: "BYDは最大拠点である西安工場で8000人以上の採用を開始した。年産150万台規模の同拠点では、第2世代ブレードバッテリーへの移行やライン改修を経て生産が回復し、輸出急増に伴う人手不足を解消する狙いがある。",
+        url: "https://cnevpost.com/2026/09/22/byd-launches-mass-hiring-xian-production-base/",
+        source: "CnEVPost - All",
+        date: "2026-09-22",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "In the first half of this year, the switch to second-generation Blade Battery and production line upgrades constrained output of several models.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092208430337.jpg",
+        note: ""
+    },
+    {
+        id: "cn1680",
+        title: "MIIT関連メディアがCATL排除論調を批判し、健全な競争を強調",
+        desc: "中国MIIT傘下メディアは電池調達先の多様化を「CATL排除」とする見方を批判し、低価格競争による品質劣化を警告した。Li AutoやXiaomiの自社開発はセル製造ではなくパック設計中心であり、これを完全な内製化として宣伝することは消費者を誤解させる恐れがあると指摘している。",
+        url: "https://cnevpost.com/2026/09/22/china-state-media-rebuts-de-catlization/",
+        source: "CnEVPost - All",
+        date: "2026-09-22",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Battery procurement driven excessively by short-term cost considerations could reduce the emphasis on technology, quality and long-term reliability.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092206340869.jpg",
+        note: ""
+    },
+    {
+        id: "cn1681",
+        title: "BYDが5人乗り仕様およびLiDAR搭載モデルの新世代シーガルを予告",
+        desc: "BYDは2代目シーガルのデザインスケッチを公開した。車長4,205mm・ホイールベース2,650mmで先代より大型化し、定員が4人から5人に増える。モーター出力は95kWに向上し、LiDARとレーダーを組み合わせた運転支援システムも設定される。",
+        url: "https://cnevpost.com/2026/09/22/byd-teases-2nd-gen-seagull-design-sketches/",
+        source: "CnEVPost - All",
+        date: "2026-09-22",
+        tags: ["AR", "バッテリー"],
+    
+        sourceExcerpt: "BYD already introduced optional LiDAR on the 2026 Seagull launched in May, with its \"God's Eye B\" system supporting urban navigation-assisted driving.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092205591381.jpg",
+        note: ""
+    },
+    {
+        id: "cn1682",
+        title: "NIO EC6 Aura Edition、紫のアクセントカラーと全席マッサージ機能を搭載",
+        desc: "NioはEC6 Aura Editionを発表し、シートステッチやヘッドレストに紫色を配した。全席にはベンチレーションとマッサージ機能を備えたNappaレザーシートを搭載する。価格は369,800元からで、ベースモデルより10,000元高い設定となっている。",
+        url: "https://cnevpost.com/2026/09/22/nio-launches-ec6-aura-edition/",
+        source: "CnEVPost - All",
+        date: "2026-09-22",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "The model comes standard with Nappa leather seats, with ventilation, massage and",
+        sourceExcerptEnd: "seats, as well as a standard smart electric rear spoiler.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092202532233.jpg",
+        note: ""
+    },
+    {
+        id: "in1734",
+        title: "JSW Combat、Jetour T2ベースのPHEV SUVでFortunerに挑む",
+        desc: "JSW Groupは初代モデルとしてJetour T2を基盤とするプラグインハイブリッドSUV「Combat」を投入する。筆者はドバイでT2を試乗し、同車種の期待される特徴を紹介している。Combatの予想価格は380万ルピーとされ、Fortunerとの競合が想定されている。",
+        url: "https://www.autocarindia.com/car-video-reviews/jsw-combat-video-review-440574",
+        source: "Autocar India - All",
+        date: "2026-09-22",
+        tags: ["EV"],
+    
+        sourceExcerpt: "JSW Group is set to launch its own car brand and its debut model will be the Jetour T2-based JSW Combat.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/reviews/images/20260922_105407_b8420990.jpg",
+        note: ""
+    },
+    {
+        id: "in1735",
+        title: "マヒンドラThar OG、ソフトタッチ素材と10.25インチディスプレイ採用",
+        desc: "新Thar OGはドアパネルにソフトタッチ素材を採用し、LXTグレード以上ではAndroid Auto対応の約10.25インチHDタッチスクリーンを備える。ZXTグレードにはエンボス加工レザーシートやステアリングホイールが追加され、全グレードで後席エアコン吹き出し口とプッシュスタートボタンが標準装備となっている。",
+        url: "https://www.rushlane.com/2026-mahindra-thar-launch-price-rs-10-32-lakh-more-power-new-12556490.html",
+        source: "RushLane",
+        date: "2026-09-22",
+        tags: ["AR", "ディスプレイ", "シート", "新素材"],
+    
+        sourceExcerpt: "ZXT adds embossed leatherette seats, a leatherette-wrapped steering wheel and wireless charging, alongside its exterior and safety upgrades.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/new-mahindra-thar-og-2026.jpg",
+        note: ""
+    },
+    {
+        id: "in1736",
+        title: "ホンダQC3、インドで13.5万ルピーから発売開始",
+        desc: "Hondaはインドで電動スクーター「QC3」を新デリー基準13.5万ルピー（ex-showroom）で発売した。IDCモード航続距離145km、固定式バッテリー3kWhを搭載し、シート下収納容量は32リットルである。",
+        url: "https://gaadiwaadi.com/honda-qc3-launched-in-india-at-rs-1-35-lakh-145-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-09-22",
+        tags: ["シート", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/honda-qc3.jpg",
+        note: ""
+    },
+    {
+        id: "in1737",
+        title: "Royal Enfield Classic 350 Signature White Edition、ブラウンシートとTripper Podを装備",
+        desc: "Royal Enfieldは2026年型Classic 350 Signature White Editionを発表した。Chennaiベースの価格はRs. 2,24,275（ex-showroom）で、内装にはブラウンのツーリングシートとTripper Podが採用されている。",
+        url: "https://gaadiwaadi.com/royal-enfield-classic-350-signature-white-edition-launched-at-rs-2-24-lakh/",
+        source: "GaadiWaadi",
+        date: "2026-09-22",
+        tags: ["AI", "シート"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/Royal-Enfield-Classic-350-Signature-White-Edition-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1738",
+        title: "Mahindra Thar OG、Truffle Brownレザー調シート採用",
+        desc: "Mahindraは3ドアSUV「Thar OG」を103.2万ルピーから発売した。上級グレードにはTruffle Brownのレザー調シートが備わり、ソフトタッチ素材や前後アームレストも導入されている。",
+        url: "https://www.autopunditz.com/post/2026-mahindra-thar-og-launched-at-10-32-lakh-prices-variants-engines-and-key-changes",
+        source: "Auto Punditz",
+        date: "2026-09-22",
+        tags: ["AR", "シート", "新素材"],
+    
+        sourceExcerpt: "The outgoing three-door Thar's compromises were well known: heavy stee",
+        sourceExcerptEnd: "bility and less refinement than conventional monocoque SUVs.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_8b29c89e5b65404496b4f2c5e99f6085~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1739",
+        title: "ホンダQC3、5インチTFTとRoadSync搭載で13.5万ルピーから発売",
+        desc: "Honda Motorcycle & Scooter Indiaは電動スクーター「QC3」をデリー基準で13.5万ルピーから発売した。内装では5インチTFTディスプレイにHonda RoadSyncとターンバイターンナビゲーションを組み込み、シート下収納も32リットル確保している。",
+        url: "https://www.autopunditz.com/post/honda-qc3-launched-at-1-35-lakh-145km-range-3kwh-battery-bookings-open",
+        source: "Auto Punditz",
+        date: "2026-09-22",
+        tags: ["ディスプレイ", "コネクテッド", "シート", "EV"],
+    
+        sourceExcerpt: "The new QC3 becomes Honda’s third electric scooter in India after the",
+        sourceExcerptEnd: "connected features and a comparatively large 32-litre under-seat storage compartment.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_aa15f91bb7fb4eaa9e7a77e6a053c60f~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1658",
+        title: "VW、 Wolfsburgの燃費車生産縮小とID.7追加シフト計画を公表",
+        desc: "VWは欧州でのBEV需要増加を受け、2026年の生産計画を調整し、エムデンとツヴィッカウ工場でID.7やID.3 Neoの追加シフトを導入する。これにより、従来の内燃機関車中心だったヴォルフスブルク工場では生産台数が約58万台に抑制される見込みである。",
+        url: "https://www.electrive.com/2026/09/22/volkswagen-shifts-ev-production-away-from-wolfsburg/",
+        source: "Electrive",
+        date: "2026-09-22",
+        tags: ["EV"],
+    
+        sourceExcerpt: "As a result, fewer combustion engine vehicles will be built in Wolfsburg",
+        sourceExcerptEnd: "will roll off the production lines in Emden and Zwickau.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2024/08/volkswagen-vw-id-7-id7-produktion-emden-3-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1659",
+        title: "Volvo Cars、HorizonでAAOS開発環境移行しテスト高速化",
+        desc: "Volvo CarsはAccentureとGoogle CloudのAAOS開発プラットフォーム「Horizon」へグローバル環境を移行する。仮想テスト環境でビルド時間を数分まで短縮し、インフォテインメント機能の開発コストを最大40%削減できる。",
+        url: "https://www.automotiveworld.com/news/volvo-cars-leads-aaos-cloud-development-push-with-horizon/",
+        source: "Automotive World",
+        date: "2026-09-22",
+        tags: ["AR", "コネクテッド"],
+    
+        sourceExcerpt: "Accenture and Google Cloud have named Volvo Cars as lead industry partner",
+        sourceExcerptEnd: "developing, testing and deploying Android Automotive Operating System (AAOS) software.",
+        country: "eu",
+        img: "https://media.automotiveworld.com/app/uploads/2026/09/22104846/volvo-google-accenture.jpg",
+        note: ""
+    },
+    {
+        id: "eu1660",
+        title: "XPENG G9L、物理AIとインテリジェントコックピットを備える",
+        desc: "XPENGはフラッグシップSUV「G9L」を発表した。VLA 2.0物理AIモデルを搭載し、IRONヒューマノイドロボットと同様のTuring AIチップを用いることで、地域を超えた安定した運転性能とインテリジェントコックピット体験を実現する。10月12日のパリモーターショーで世界初公開される。",
+        url: "https://electriccarsreport.com/2026/09/xpeng-g9l-flagship-suv-revealed-with-bev-and-reev-powertrains/",
+        source: "Electric Cars Report",
+        date: "2026-09-22",
+        tags: ["AI", "コックピット"],
+    
+        sourceExcerpt: "Another notable detail is the use of the same Turing AI chip found in XPENG’s IRON humanoid robot.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/XPeng-GL9.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1661",
+        title: "Ceer Exobot、48インチ曲面ディスプレイとステアリングヨーク採用",
+        desc: "サウジアラビアのCeerがExobotに48インチ曲面ディスプレイや3Dナビゲーションを備えたコックピットを採用し、ステアリングワイヤレス化とヨーク型ハンドルも導入した。2027年1月の量産開始に向けて、湾岸地域向けに展開する。",
+        url: "https://electriccarsreport.com/2026/09/ceer-exobot-debuts-as-saudi-arabias-first-electric-sedan-and-suv/",
+        source: "Electric Cars Report",
+        date: "2026-09-22",
+        tags: ["ディスプレイ", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "Inside, the centerpiece of the Exobot is a massive 48-inch curved Digital",
+        sourceExcerptEnd: "from pillar to pillar at the base of the windshield.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Ceer-Exobot.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "cn1683",
+        title: "北京現代IONIQ V、メーターレスと27インチ4Kディスプレイ採用",
+        desc: "北京現代は9月29日にIONIQ Vを発売する。内装では従来のメーターを廃止し、27インチの4KセンターディスプレイとQualcomm Snapdragon 8295Pチップを搭載したミニマルなコックピットを採用している。",
+        url: "https://chinaevhome.com/2026/09/22/beijing-hyundais-ioniq-v-set-for-sept-29-launch/",
+        source: "ChinaEVHome",
+        date: "2026-09-22",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "It removes the traditional instrument cluster and comes with a 27-inch 4K",
+        sourceExcerptEnd: "8295P chip, AI large-model functions and Momenta’s advanced driver-assistance solution.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/09/image-475-edited-1024x893.png?resize=640%2C558&ssl=1",
+        note: ""
+    },
+    {
+        id: "in1740",
+        title: "Mercedes S-Class 400d、新車比1800万ルピー減額で販売",
+        desc: "2021年式S 400d Launch Editionが795.0万ルピーで出品。3.0L直6ディーゼル（330bhp）搭載のCBU車で、走行距離は5万km。新車価格2600万ルピーから大幅減額された中古車市場での取引事例として紹介されている。",
+        url: "https://motoroctane.com/news/324079-rs-1-8-crore-off-on-the-most-luxurious-mercedes",
+        source: "MotorOctane",
+        date: "2026-09-22",
+        tags: [],
+    
+        sourceExcerpt: "At this price, an S-Class with top-level luxury and a punchy 300+ bhp diesel engine is an absolute steal!",
+        country: "in",
+        img: "https://motoroctane.com/wp-content/uploads/2026/09/2021-Mercedes-S-Class-S-400d-Launch-Edition.jpg",
         note: ""
     },
 ];
