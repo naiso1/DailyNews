@@ -36,8 +36,7 @@ from dailynews.collection_digest import collection_window, published_news, publi
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
 from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
-                                        extract_evidence, assessment_prompt, exterior_scope_rules, explicit_model_rejection,
-                                        article_source as editorial_article_source)
+                                        extract_evidence, exterior_scope_rules)
 from dailynews.feedback_snapshot import load_feedback_snapshot
 
 EDITION = get_edition()
@@ -313,10 +312,6 @@ FETCH_MISSING_IMAGES = True
 ENRICH_ONLY = False
 ENRICH_EXISTING = False
 PROGRESS_EVERY = 5
-# Matches the assessment prompt's own adoption-candidate guidance ("score 60+").
-# The primary interior adoption gate, aligned with how exterior already
-# decides adoption by score rather than a mandatory evidence rationale.
-INTERIOR_KEEP_MIN_SCORE = 60
 IMAGE_FETCH_TIMEOUT_SECOND = 12
 IMAGE_FETCH_WORKERS = 12
 OUTPUT_PAPERS_SHEET2 = False
@@ -653,16 +648,6 @@ def editorial_feedback():
 
 
 def store_exterior_assessment(item, assessment):
-    # Keep the existing exterior call sites; interior now stores its rationale too.
-    if EDITION.id == "interior":
-        evidence = assessment.get("evidence", {})
-        for key, column in EVIDENCE_COLUMNS.items():
-            item[column] = evidence.get(key, "")
-        item["採用根拠_状態"] = {"keep": "検証済み", "exclude": "対象外"}.get(assessment.get("policy_decision"), "根拠不足")
-        item["内装関連度_原判定"] = assessment.get("raw_score", "")
-        item["内装判定理由_原判定"] = assessment.get("raw_reason", "")
-        if assessment.get("policy_decision") == "exclude":
-            item["LLM判定"] = "非対象"
     if EDITION.id == "exterior":
         inferred = exterior_rules.news_category(item.get("タイトル"), item.get("内容"))
         item["記事区分"] = assessment.get("category", inferred[0])
@@ -1524,57 +1509,50 @@ def calibrate_interior_score(score, title="", content="", summary="", image_inte
 
     return int(max(0, min(100, score))), reason
 
-def record_interior_assessment_hold(title, content, url, data, response_payload, policy):
-    """Keep a private diagnosis of held source evidence, outside published assets."""
-    if EDITION.id != "interior":
-        return
-    try:
-        path = ROOT / "runtime" / "interior" / "editorial_assessment_holds.jsonl"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        record = {"recorded_at": datetime.now().astimezone().isoformat(), "edition_id": EDITION.id,
-                  "model": LLM_MODEL, "policy_version": POLICY_VERSION, "title": title, "url": url,
-                  "source_chars": len(content), "source_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
-                  "parsed_assessment": data, "response": response_payload, "policy": policy}
-        with path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
-    except (OSError, TypeError, ValueError) as exc:
-        print(f"  [EDITORIAL_DIAGNOSTIC_WARN] {type(exc).__name__}")
-
-
-def has_grounded_source_text(article, minimum_chars=150):
-    """A verbatim-quote evidence gate is only meaningful once real article text was fetched.
-
-    A bare RSS/search stub (title repeated as its own summary) cannot support a
-    grounded quote; requiring one there would reject articles the old,
-    relevance-only judgment used to accept. Fall back to that judgment instead
-    of forcing a rejection when no fuller source text was ever obtained.
-    """
-    return len(editorial_article_source(article)[1]) >= minimum_chars
-
-
 def call_llm_interior_assessment(title, content, image_url="", url="", summary=""):
     """Local LLM judgment for fuzzy interior relevance, including image evidence."""
     global LLM_ERROR_LOGGED
     if not USE_LLM:
         return None
-    source_article = {"title": title, "desc": content, "originalTitle": title, "originalDesc": content, "url": url}
-    rules = editorial_feedback().get("rules", []) if EDITION.id == "interior" else []
     cache_key = (EDITION.id, "product_assessment", title, content, image_url, url, summary)
-    if EDITION.id == "interior":
-        cache_key += (POLICY_VERSION, json.dumps(rules, sort_keys=True, ensure_ascii=False))
-        scope = apply_editorial_policy(source_article, rules, require_evidence=False)
-        if scope["decision"] == "exclude":
-            return {"score": 0, "reason": scope["reason"], "image_interior": None,
-                    "evidence": scope["evidence"], "policy_decision": "exclude"}
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
-        valid_score = isinstance(cached, dict) and isinstance(cached.get("score"), int) and 0 <= cached["score"] <= 100
-        if valid_score and (EDITION.id == "exterior" or apply_editorial_policy(
-                dict(source_article, evidence=cached.get("evidence"), reason=cached.get("reason")), rules,
-                require_evidence=False)["decision"] == "keep"):
+        if EDITION.id != "exterior" or (isinstance(cached, dict) and isinstance(cached.get("score"), int)
+                                        and 0 <= cached["score"] <= 100):
             return cached
         LLM_CACHE.pop(cache_key, None)
-    prompt = assessment_prompt(title, content, url)
+    prompt = (
+        "Classify this automotive news item for usefulness to vehicle interior product planning.\n"
+        "Continue from the provided JSON prefix. Use real values, for example: 87,\"reason\":\"seat and display plus cabin image\",\"image_interior\":true}\n"
+        "score is an exact integer 0-100. image_interior is true, false, or null.\n"
+        "Avoid coarse buckets and avoid ending most scores in 0 or 5. Use the whole 0-100 range.\n\n"
+        "Scoring method:\n"
+        "Start with product-planning relevance: 0-75 based on how useful the item is for interior parts, materials, HMI, seat, console, trim, comfort, or cabin UX planning.\n"
+        "Add image evidence: +8 to +15 if the image clearly shows useful cabin/interior details; +3 to +7 if partly useful; +0 if exterior/logo/unclear/no image.\n"
+        "Then adjust 0-10 points for specificity: concrete product details, dimensions, materials, suppliers, UI functions, or user experience deserve more.\n\n"
+        "Text relevance guide:\n"
+        "70-75: article is mainly interior accessory, material, seat cover, cockpit, dashboard, HMI, display, center console, trim, ambient lighting, audio, comfort equipment, cabin UX, or a flagship cabin/interior refresh.\n"
+        "50-69: vehicle news/review where concrete interior features are important, or a seat/interior safety issue with limited product-design learning.\n"
+        "30-49: interior/HMI/cabin is present but secondary.\n"
+        "15-29: weak or indirect interior relevance.\n"
+        "0-14: battery, sales volume, production, factory, partnership, policy, exterior-only, price-only, charging, drivetrain, or company news with almost no cabin detail.\n\n"
+        "Strict rules:\n"
+        "No concrete cabin/interior/HMI/display/seat/material/audio/comfort detail in text and no interior image => score 35 or lower.\n"
+        "Interior accessories, seat covers, console/cup-holder products, trim/material changes, and flagship cabin refreshes should generally score higher than defect/recall-only stories.\n"
+        "Seat or dashboard recall/defect stories are relevant but usually cap around 55-68 unless the article explains reusable design, material, or UX lessons.\n"
+        "Battery deployment/share/capacity => 0-18 unless cabin products or a clear cabin image are present.\n"
+        "Sales/factory/partnership/pricing campaign => 0-28 unless interior features are central.\n"
+        "ADAS/LiDAR general is not interior unless in-cabin HMI/driver monitoring/display is central.\n"
+        "Buses/coaches are outside the passenger-car interior scope and must score 28 or lower.\n"
+        "Motorcycles/motorbikes/scooters are outside the cabin scope and must score 18 or lower.\n"
+        "Trucks/lorries are secondary to passenger-car interior planning and must score 35 or lower.\n"
+        "If two items have similar text relevance, rank the one with a clear interior image higher.\n"
+        "Use semantic judgment, not keyword matching.\n"
+        f"Title: {title}\n"
+        f"Article/snippet: {content}\n"
+        f"Japanese summary if available: {summary}\n"
+        f"URL: {url}\n"
+    )
     if EDITION.id == "exterior":
         prompt = exterior_rules.assessment_prompt(title, content, url, summary)
     content_payload = prompt
@@ -1596,11 +1574,6 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         ],
         "temperature": 0.1,
     }
-    if EDITION.id == "interior":
-        # A partial assistant JSON reply can make this model complete an empty
-        # template instead of assessing the source. The schema now defines the
-        # output format, so begin a normal user -> assistant exchange.
-        payload["messages"] = payload["messages"][:1]
     try:
         resp = _post_llm(json=payload, timeout=LLM_TIMEOUT)
         if resp.status_code != 200 and used_image:
@@ -1656,13 +1629,6 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             if m:
                 raw = m.group(1).lower()
                 image_interior = True if raw == "true" else (False if raw == "false" else None)
-        if EDITION.id == "interior" and explicit_model_rejection(raw_score, raw_reason, data.get("evidence")):
-            result = {"score": raw_score, "raw_score": raw_score, "raw_reason": raw_reason,
-                      "image_interior": image_interior, "reason": reason, "evidence": extract_evidence(data),
-                      "policy_decision": "exclude", "policy_reason": "model_explicit_rejection",
-                      "policy_version": POLICY_VERSION}
-            print(f"  [EDITORIAL_EXCLUDED] model_explicit_rejection score={raw_score}: {url}")
-            return result
         if EDITION.id == "interior":
             score = spread_interior_score(score, title, url, image_interior)
         category, trend_topic = "", ""
@@ -1677,29 +1643,6 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         result = {"score": score, "image_interior": image_interior, "reason": reason}
         if EDITION.id == "exterior":
             result.update(category=category, trend_topic=trend_topic)
-        else:
-            # Aligned with exterior: the score is the primary adoption signal.
-            # A structured, verbatim-quote rationale is recorded when available
-            # for transparency, but no longer gates publication - a low score or
-            # a reason that itself reads as a rejection is still held, matching
-            # the same guard exterior gets for free by not having this gate.
-            reason_signals_rejection = bool(re.match(
-                r"^(?:(?:対象外|非対象|不採用)(?=$|[。、:：\s]|です|と判定)|"
-                r"(?:out of scope|not relevant|excluded?)(?=$|[\s:.,;-]))", raw_reason, re.IGNORECASE))
-            if raw_score < INTERIOR_KEEP_MIN_SCORE or reason_signals_rejection:
-                print(f"  [EDITORIAL_EVIDENCE_HELD] low_confidence: {url}")
-                record_interior_assessment_hold(title, content, url, data, response_payload,
-                                                {"decision": "hold", "reason": "low_confidence"})
-                return None
-            policy = apply_editorial_policy(dict(source_article, evidence=data.get("evidence"), reason=reason), rules,
-                                            require_evidence=False)
-            if policy["decision"] != "keep":
-                print(f"  [EDITORIAL_EVIDENCE_HELD] {policy['reason']}: {url}")
-                record_interior_assessment_hold(title, content, url, data, response_payload, policy)
-                return None
-            result.update(evidence=policy["evidence"], policy_decision="keep", policy_version=POLICY_VERSION,
-                          raw_score=raw_score, raw_reason=raw_reason,
-                          evidence_grounded=has_grounded_source_text(source_article))
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
@@ -2913,36 +2856,6 @@ def sheet2_candidate_sort_score(row, title_col, title_jp_col, content_col, conte
         score -= 120.0
     return score
 
-def apply_interior_selection_policy(work, candidates, protected_urls, rules):
-    """Score is the adoption gate (set upstream); apply only scope exclusions here."""
-    retained, decisions = [], []
-    changed = False
-    for index, source_row in candidates.iterrows():
-        row = source_row.copy()
-        article = collector_article(row)
-        is_paper = article["country"].lower() in {"論文", "paper", "papers"}
-        if article["url"] in protected_urls or is_paper:
-            retained.append(index)
-            continue
-        if str(row.get("LLM判定", "")).strip() != "対象":
-            decisions.append({"url": article["url"], "decision": "exclude", "reason": "not_llm_target"})
-            continue
-        score = pd.to_numeric(row.get("内装関連度"), errors="coerce")
-        if pd.isna(score) or score < INTERIOR_KEEP_MIN_SCORE:
-            state, decision, reason = "根拠不足", "hold", "low_or_missing_score"
-        else:
-            policy = apply_editorial_policy(article, rules, require_evidence=False)
-            decision, reason = policy["decision"], policy["reason"]
-            state = {"keep": "検証済み", "exclude": "対象外"}.get(decision, "根拠不足")
-        if work.at[index, "採用根拠_状態"] != state:
-            work.at[index, "採用根拠_状態"] = state
-            candidates.at[index, "採用根拠_状態"] = state
-            changed = True
-        if decision == "keep":
-            retained.append(index)
-        else:
-            decisions.append({"url": article["url"], "decision": decision, "reason": reason})
-    return candidates.loc[retained].copy(), decisions, changed
 
 
 def build_sheet2_and_csv(df, excel_path, target_dates):
@@ -3059,10 +2972,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         filtered = filtered[valid_image | (filtered[col_country] == "論文")]
 
     policy_decisions, policy_changed = [], False
-    if EDITION.id == "interior":
-        filtered, policy_decisions, policy_changed = apply_interior_selection_policy(
-            work, filtered.copy(), same_issue, feedback.get("rules", []))
-    else:
+    if EDITION.id == "exterior":
         approved_scope = exterior_scope_rules(feedback.get("rules", []))
         keep_indices = []
         for index, row in filtered.iterrows():
@@ -3138,8 +3048,9 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             extras = group.iloc[0:0]
         else:
             target_group = group[llm_flag.loc[group.index] == "\u5bfe\u8c61"]
-            # Ten is a ceiling, never a reason to publish an LLM rejection.
-            extras = group.iloc[0:0]
+            # Keep the country quota at 10. Prefer LLM targets, then backfill
+            # with the best remaining candidates from the expanded source pool.
+            extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
             if strict_selection:
                 target_group = target_group[pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("minimum_score", 60)]
                 target_group = target_group[target_group["記事区分"].isin(("product", "trend"))]

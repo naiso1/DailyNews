@@ -1,19 +1,12 @@
 """Feedback-derived scope and grounded adoption evidence, entirely offline."""
-from contextlib import ExitStack, redirect_stdout
-import io
 import json
 from pathlib import Path
-import sys
-import tempfile
 import unittest
-from unittest.mock import Mock, patch
+
+from dailynews.editorial_policy import (EVIDENCE_COLUMNS, apply_policy,
+                                       classify_lighting, evidence_problems, extract_evidence, exterior_scope_rules)
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "ニュース収集"))
-from dailynews.editorial_policy import (EVIDENCE_COLUMNS, POLICY_VERSION, apply_policy,
-                                       classify_lighting, evidence_problems, extract_evidence, exterior_scope_rules)
-from dailynews.editions import get_edition
 
 
 def useful_article():
@@ -147,159 +140,6 @@ class EditorialPolicyTests(unittest.TestCase):
         lighting = {"title": "発光グリルとヘッドライト", "desc": "外装の照明を刷新する。"}
         interior_only = dict(approved, key="interior_lighting_only")
         self.assertEqual(apply_policy(lighting, exterior_scope_rules([interior_only]), require_evidence=False)["decision"], "keep")
-
-
-class InteriorSelectionPolicyTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        global collector
-        import google_search_script as collector
-
-    def setUp(self):
-        directory = tempfile.TemporaryDirectory()
-        self.addCleanup(directory.cleanup)
-        self.context = get_edition("interior", directory.name)
-        self.context.config_dir.mkdir(parents=True)
-        self.context.collection_settings_path.write_text(json.dumps({"interior": {"selection": {"maximum_per_country": 10, "require_original_image": False}}}), encoding="utf-8")
-        self.context.ensure_directories()
-        self.stack = ExitStack()
-        self.addCleanup(self.stack.close)
-        self.stack.enter_context(patch.object(collector, "EDITION", self.context))
-        self.stack.enter_context(patch.object(collector, "OUTPUT_PAPERS_SHEET2", False))
-        self.stack.enter_context(patch.object(collector, "LLM_CACHE", {}))
-        self.stack.enter_context(patch.object(collector, "LLM_IMAGE_INPUT", False))
-        self.snapshot = {"status": "fresh", "rules": [], "excluded_urls": []}
-        self.stack.enter_context(patch.object(collector, "editorial_feedback", return_value=self.snapshot))
-
-    def row(self, key="trim", evidence=True):
-        article = useful_article()
-        row = {"国": "日本", "日付": "2026-09-20", "URL": f"https://example.com/{key}",
-               "タイトル": article["title"], "内容": article["desc"], "タイトル（日本語）": article["title"],
-               "内容（日本語）": article["desc"], "LLM判定": "対象", "LLM後処理": "実施", "内装関連度": 85}
-        if evidence:
-            row.update({column: article["evidence"][name] for name, column in EVIDENCE_COLUMNS.items()})
-        return row
-
-    def select(self, rows, history=(), assessment=None):
-        target = self.context.runtime_dir / "search_results.csv"
-        with patch.object(collector, "published_news", return_value=list(history)), \
-                patch.object(collector, "summarize_article", side_effect=AssertionError("No summary calls")), \
-                patch.object(collector, "call_llm_interior_assessment", return_value=assessment) as assess, redirect_stdout(io.StringIO()):
-            collector.build_sheet2_and_csv(collector.pd.DataFrame(rows), target, ["2026-09-20"])
-        selected = collector.pd.read_csv(target.with_name("sheet2_llm_targets.csv"), keep_default_na=False)
-        return selected, assess
-
-    def test_non_targets_do_not_fill_shortage_but_other_useful_articles_and_papers_survive(self):
-        target, rejected, paper = self.row(), self.row("rejected"), self.row("paper", evidence=False)
-        rejected["LLM判定"] = "非対象"
-        paper.update({"国": "論文", "LLM判定": "非対象", "タイトル（日本語）": "Independent study", "内容（日本語）": "A separate scientific abstract."})
-        selected, assess = self.select([target, rejected, paper])
-        self.assertEqual(set(selected["URL"]), {target["URL"], paper["URL"]})
-        assess.assert_not_called()
-
-    def test_high_score_is_kept_without_requiring_evidence_or_a_repair_call(self):
-        # Aligned with exterior: adoption is decided by the score recorded at
-        # collection time. Sheet-building no longer re-fetches or re-asks the
-        # model for a missing rationale; it just applies the score gate and
-        # the scope-exclusion rules.
-        row = self.row(evidence=False)
-        row["内装関連度"] = 75
-        selected, assess = self.select([row])
-        self.assertEqual(len(selected), 1)
-        self.assertEqual(selected.iloc[0]["採用根拠_状態"], "検証済み")
-        assess.assert_not_called()
-
-    def test_low_score_is_held_even_with_complete_evidence(self):
-        valid, low = self.row("valid"), self.row("low")
-        low["内装関連度"] = 40
-        selected, assess = self.select([valid, low])
-        self.assertEqual(selected["URL"].tolist(), [valid["URL"]])
-        assess.assert_not_called()
-        self.assertEqual(collector.SHEET2_RESULT["editorial_held_count"], 1)
-        self.assertEqual(collector.SHEET2_RESULT["selected_count"], 1)
-
-    def test_missing_score_is_held(self):
-        row = self.row(evidence=True)
-        row["内装関連度"] = ""
-        selected, assess = self.select([row])
-        self.assertTrue(selected.empty)
-        assess.assert_not_called()
-        self.assertEqual(collector.SHEET2_RESULT["editorial_held_count"], 1)
-
-    def test_same_issue_legacy_is_preserved_but_reviewed_hidden_url_is_never_restored(self):
-        row = self.row(evidence=False)
-        published = {"id": "jp1", "url": row["URL"], "date": row["日付"], "country": "jp", "title": row["タイトル"], "desc": row["内容"], "interiorScore": 85}
-        selected, assess = self.select([row], [published])
-        self.assertEqual(len(selected), 1)
-        assess.assert_not_called()
-        self.snapshot["excluded_urls"] = [published["url"]]
-        selected, assess = self.select([row], [published])
-        self.assertTrue(selected.empty)
-        assess.assert_not_called()
-
-    def test_exterior_collector_applies_only_explicitly_approved_shared_scope_rules(self):
-        context = get_edition("exterior", self.context.root / "outer")
-        context.config_dir.mkdir(parents=True)
-        context.collection_settings_path.write_text(json.dumps({"exterior": {"selection": {
-            "lookback_days": 7, "minimum_score": 60, "require_original_image": False}}}), encoding="utf-8")
-        context.ensure_directories()
-        self.context = context
-        row = self.row("bike", evidence=False)
-        row.update({"タイトル": "Royal Enfield motorcycle grille", "内容": "A new grille design was announced.",
-                    "タイトル（日本語）": "ロイヤルエンフィールドのグリル刷新", "内容（日本語）": "新しいグリルの意匠を公開した。"})
-        with patch.object(collector, "EDITION", context):
-            selected, assess = self.select([row])
-            self.assertEqual(len(selected), 1)
-            assess.assert_not_called()
-            self.snapshot["rules"] = [{"key": "exclude_non_passenger_vehicles", "enabled": True,
-                                       "review_status": "approved", "version": 1}]
-            selected, assess = self.select([row])
-            self.assertTrue(selected.empty)
-            assess.assert_not_called()
-    @staticmethod
-    def response(value):
-        return Mock(status_code=200, json=Mock(return_value={"choices": [{"message": {"content": value}}]}))
-
-    def test_assessment_requires_evidence_and_does_not_cache_invalid_reason(self):
-        article = useful_article()
-        invalid = {"score": 98, "reason": "seat and display plus cabin image", "image_interior": True}
-        valid = {"score": 83, "reason": "表皮一体操作部の設計を比較できる", "evidence": article["evidence"], "image_interior": None}
-        with patch.object(collector, "USE_LLM", True), patch.object(collector, "_post_llm", side_effect=[self.response(json.dumps(invalid)), self.response(json.dumps(valid))]) as request, redirect_stdout(io.StringIO()):
-            self.assertIsNone(collector.call_llm_interior_assessment(article["title"], article["desc"]))
-            self.assertEqual(collector.LLM_CACHE, {})
-            repaired = collector.call_llm_interior_assessment(article["title"], article["desc"])
-            self.assertEqual(repaired["policy_decision"], "keep")
-            self.assertEqual(collector.call_llm_interior_assessment(article["title"], article["desc"]), repaired)
-        self.assertEqual(request.call_count, 2)
-        prompt = request.call_args.kwargs["json"]["messages"][0]["content"]
-        self.assertNotIn("seat and display plus cabin image", prompt)
-        self.assertIn("source_quote", prompt)
-
-    def test_unstructured_legacy_cache_cannot_bypass_the_new_policy(self):
-        article = useful_article()
-        old_key = ("interior", "product_assessment", article["title"], article["desc"], "", "", "")
-        collector.LLM_CACHE[old_key] = {"score": 100, "reason": "seat and display plus cabin image"}
-        with patch.object(collector, "USE_LLM", True), patch.object(collector, "_post_llm", return_value=self.response('{}')) as request, redirect_stdout(io.StringIO()):
-            self.assertIsNone(collector.call_llm_interior_assessment(article["title"], article["desc"]))
-        request.assert_called_once()
-
-    def test_assessment_uses_original_source_without_generated_summary_or_prefilled_reply(self):
-        article = useful_article()
-        generated_summary = "要約だけが主張する未確認の燃費50パーセント改善"
-        valid = {"score": 83, "reason": "表皮一体操作部を比較できる", "evidence": article["evidence"], "image_interior": None}
-        with patch.object(collector, "USE_LLM", True), patch.object(collector, "_post_llm", return_value=self.response(json.dumps(valid))) as request, redirect_stdout(io.StringIO()):
-            result = collector.call_llm_interior_assessment(article["title"], article["desc"], summary=generated_summary)
-        self.assertEqual(result["policy_decision"], "keep")
-        messages = request.call_args.kwargs["json"]["messages"]
-        self.assertEqual([message["role"] for message in messages], ["user"])
-        prompt = messages[0]["content"]
-        self.assertNotIn(generated_summary, prompt)
-        self.assertIn(article["title"], prompt)
-        self.assertIn(article["desc"], prompt)
-        schema = json.loads(next(line for line in prompt.splitlines() if line.startswith('{"type":"object"')))
-        self.assertEqual(set(schema["properties"]["evidence"]["required"]), set(EVIDENCE_COLUMNS))
-        self.assertNotIn('"default"', json.dumps(schema))
-        self.assertNotIn('"examples"', json.dumps(schema))
 
 
 if __name__ == "__main__":

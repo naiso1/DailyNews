@@ -11,7 +11,7 @@ from unittest.mock import Mock
 
 from dailynews.article_text import unusable_text
 from dailynews.deduplication import normalize_article_url
-from dailynews.editorial_policy import EVIDENCE_COLUMNS, apply_policy, extract_evidence
+from dailynews.editorial_policy import EVIDENCE_COLUMNS, extract_evidence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,7 +35,7 @@ def isolated_collector():
     env = {"pd": None, "math": math, "json": json,
            "EDITION": SimpleNamespace(id="interior"), "USE_LLM": True,
            "EVIDENCE_COLUMNS": EVIDENCE_COLUMNS, "extract_evidence": extract_evidence,
-           "apply_editorial_policy": apply_policy, "unusable_text": unusable_text,
+           "unusable_text": unusable_text,
            "normalize_article_url": normalize_article_url,
            "is_valid_article_url": lambda url, **kwargs: str(url).startswith("https://") and "news.google.com" not in str(url),
            "fetch_article_text": Mock(return_value=BODY),
@@ -62,9 +62,6 @@ class CollectorEvidenceSourceTests(unittest.TestCase):
 
     def assert_preserved_evidence(self, row):
         self.assertEqual(row["内容"], BODY)
-        self.assertEqual(row["採用根拠_出典"], QUOTE)
-        article = self.env["collector_article"](row)
-        self.assertEqual(apply_policy(article)["decision"], "keep")
         self.assertEqual(self.env["call_llm_interior_assessment"].call_args.args[1], BODY)
 
     def test_new_articles_assess_and_store_the_body_used_for_summary(self):
