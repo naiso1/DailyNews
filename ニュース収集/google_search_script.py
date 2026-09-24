@@ -1206,6 +1206,20 @@ def resolve_with_playwright(url, timeout_ms=15000):
     except Exception:
         return None, None
 
+def search_hit_matches_title(title, hit_title):
+    """True when a search hit's title is recognisably the same headline."""
+    def norm(text):
+        text = re.sub(r"\s+-\s+[^-]{1,40}$", "", str(text or ""))  # " - Publisher"
+        return re.sub(r"[\W_]+", "", text).lower()
+
+    a, b = norm(title), norm(hit_title)
+    if len(a) < 8 or len(b) < 8:
+        return False
+    if a in b or b in a:
+        return True
+    return difflib.SequenceMatcher(None, a, b).ratio() >= 0.6
+
+
 def search_article_url(title, country=""):
     """記事タイトルでWeb検索し、最上位のURLを返す（DDGSが使える場合のみ）"""
     if not DDGS_AVAILABLE:
@@ -1216,8 +1230,17 @@ def search_article_url(title, country=""):
             results = ddgs.text(query, region=None, safesearch="off", max_results=3)
             for r in results:
                 url = r.get("href") or r.get("url")
-                if url and is_valid_article_url(url, allow_google_news=False):
-                    return url
+                if not url or not is_valid_article_url(url, allow_google_news=False):
+                    continue
+                # A top hit is often a homepage or an unrelated page sharing a
+                # word (e.g. "海豹" -> Wikipedia "Seal"); require the hit to be
+                # the same article.
+                path = urlparse(url).path.strip("/")
+                if not path or re.fullmatch(r"(?:[a-z]{2}(?:[-_][a-z]{2})?)(?:\.html?)?", path, re.IGNORECASE):
+                    continue
+                if not search_hit_matches_title(title, r.get("title", "")):
+                    continue
+                return url
     except Exception:
         return ""
     return ""
@@ -3823,6 +3846,10 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
     total = len(items)
     if total:
         print(f"  [{label}] 関連度・翻訳処理 {total}件 開始")
+    if total and USE_LLM:
+        # Collection can outlast the preload TTL; a JIT reload would use
+        # LM Studio's defaults (4 slots) and can crash on memory.
+        _ensure_llm_model_loaded()
     missing_img_urls = []
     for idx, item in enumerate(items, 1):
         title = item.get("タイトル", "")
@@ -4005,6 +4032,8 @@ def enrich_existing_df(df):
     """既存データにも関連度と日本語要約を付与する"""
     if df.empty:
         return df
+    if USE_LLM:
+        _ensure_llm_model_loaded()
     for col, default in [
         ("関連度", ""),
         ("関連度スコア", 0.0),

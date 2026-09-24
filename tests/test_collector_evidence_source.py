@@ -45,6 +45,7 @@ def isolated_collector():
                  "image_interior": None, "evidence": EVIDENCE, "policy_decision": "keep"}),
            "summarize_article": Mock(return_value=("加飾面の下にセンサーを配置", "静電容量センサーをドアトリムへ一体化する。")),
            "check_url_ok": Mock(return_value=True), "is_missing_url": lambda value: not value,
+           "_ensure_llm_model_loaded": Mock(return_value=True),
            "FETCH_MISSING_IMAGES": False, "LLM_SAVE_INTERVAL": 0, "PROGRESS_EVERY": 20,
            "LLM_ONLY": False, "RESUME_LLM": False, "PROCESS_LLM_SKIPPED": False, "ENRICH_ONLY": False}
     exec(compile(ast.Module(body=nodes, type_ignores=[]), "isolated-evidence-source", "exec"), env)
