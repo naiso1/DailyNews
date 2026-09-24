@@ -435,6 +435,51 @@
         "url": "https://www.motoroids.com/feed/",
         "country": "インド",
         "require_feed_image": true
+      },
+      {
+        "name": "Motor1 UK",
+        "url": "https://uk.motor1.com/rss/news/all/",
+        "country": "欧州"
+      },
+      {
+        "name": "Motor1 Germany",
+        "url": "https://de.motor1.com/rss/news/all/",
+        "country": "欧州"
+      },
+      {
+        "name": "Motor1 France",
+        "url": "https://fr.motor1.com/rss/news/all/",
+        "country": "欧州"
+      },
+      {
+        "name": "Motor1 Italy",
+        "url": "https://it.motor1.com/rss/news/all/",
+        "country": "欧州"
+      },
+      {
+        "name": "Motor1 Spain",
+        "url": "https://es.motor1.com/rss/news/all/",
+        "country": "欧州"
+      },
+      {
+        "name": "Autoweek NL",
+        "url": "https://www.autoweek.nl/rss/",
+        "country": "欧州"
+      },
+      {
+        "name": "AutoX",
+        "url": "https://www.autox.com/feed/",
+        "country": "インド"
+      },
+      {
+        "name": "Cartoq",
+        "url": "https://www.cartoq.com/feed/",
+        "country": "インド"
+      },
+      {
+        "name": "Evo India",
+        "url": "https://www.evoindia.com/feed",
+        "country": "インド"
       }
     ],
     "country_settings": {
@@ -665,6 +710,8 @@
     "selection": {
       "minimum_score": 60,
       "trend_minimum_score": 65,
+      "issue_date_minimum_score": 45,
+      "issue_date_trend_minimum_score": 45,
       "product_priority_count": 6,
       "maximum_trends_per_country": 10,
       "maximum_per_country": 10,

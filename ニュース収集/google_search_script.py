@@ -3075,10 +3075,13 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             # with the best remaining candidates from the expanded source pool.
             extras = group[llm_flag.loc[group.index] != "\u5bfe\u8c61"]
             if strict_selection:
-                target_group = target_group[pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("minimum_score", 60)]
-                target_group = target_group[target_group["記事区分"].isin(("product", "trend"))]
-                trend_mask = target_group["記事区分"].eq("trend")
-                target_group = target_group[~trend_mask | (pd.to_numeric(target_group[col_interior_score], errors="coerce") >= selection.get("trend_minimum_score", 65))]
+                issue_day = digest_window.get("issue_date", "")
+                scores = pd.to_numeric(target_group[col_interior_score], errors="coerce")
+                minimum = pd.Series([
+                    exterior_rules.selection_thresholds(selection, row.get(col_date), issue_day)[
+                        1 if row.get("記事区分") == "trend" else 0]
+                    for _, row in target_group.iterrows()], index=target_group.index, dtype=float)
+                target_group = target_group[(scores >= minimum) & target_group["記事区分"].isin(("product", "trend"))]
                 extras = group.iloc[0:0]
         selected = []
         selected_idx = set()
@@ -3285,7 +3288,9 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         reasons = []
         for index, row in dated_candidates.iterrows():
             score = normalize_interior_score(row.get(col_interior_score))
-            threshold = selection.get("trend_minimum_score", 65) if row.get("記事区分") == "trend" else selection.get("minimum_score", 60)
+            product_min, trend_min = exterior_rules.selection_thresholds(
+                selection, row.get(col_date), digest_window.get("issue_date", ""))
+            threshold = trend_min if row.get("記事区分") == "trend" else product_min
             if index in selected_indices:
                 reason = "selected"
             elif str(row.get(col_url)) in published_elsewhere:
@@ -4605,6 +4610,12 @@ def main():
     required_llm_error_count = sum(EXTERIOR_REQUIRED_LLM_ERRORS.values())
     if not SHEET2_RESULT["selected_count"] and required_llm_error_count:
         raise RuntimeError("Exterior LLM processing failed; not a valid no-news day")
+    # Widespread LLM failure leaves the issue day unjudged, so only older
+    # lookback articles would be published; fail instead of shipping that.
+    reviewed = int(COLLECTION_METRICS.get("reviewed_count") or 0)
+    if reviewed and required_llm_error_count >= max(20, reviewed):
+        raise RuntimeError(f"Exterior LLM processing mostly failed ({required_llm_error_count} errors "
+                           f"for {reviewed} reviewed articles); not publishing a stale issue")
     result = {
         "edition_id": EDITION.id,
         "target_dates": TARGET_DATES_RUN,

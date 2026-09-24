@@ -1879,6 +1879,12 @@ def main():
     items = []
     non_paper_rows = 0
     rows_with_relevance_signal = 0
+    selection = EDITION.config.get("selection", {})
+    issue_day = ""
+    if EDITION.id == "exterior":
+        receipt_path = EDITION.runtime_dir / "collection_result.json"
+        if receipt_path.exists():
+            issue_day = max(json.loads(receipt_path.read_text(encoding="utf-8-sig")).get("target_dates") or [""])
     for row in rows:
         country_raw = get(row, idx_country)
         date_val = get(row, idx_date)
@@ -1909,10 +1915,12 @@ def main():
                 rows_with_relevance_signal += 1
 
         llm_is_target = llm_val.strip() == "対象"
-        if EDITION.id == "exterior" and (not llm_is_target or interior_score is None or interior_score < EDITION.config.get("selection", {}).get("minimum_score", 60)):
-            continue
-        if EDITION.id == "exterior" and content_category == "trend" and interior_score < EDITION.config.get("selection", {}).get("trend_minimum_score", 65):
-            continue
+        if EDITION.id == "exterior":
+            product_min, trend_min = exterior_rules.selection_thresholds(selection, date_val, issue_day)
+            if not llm_is_target or interior_score is None or interior_score < product_min:
+                continue
+            if content_category == "trend" and interior_score < trend_min:
+                continue
         # sheet2_llm_targets.csv is the final country-quota selection. Do not
         # drop selected target/paper rows only because the thumbnail itself was
         # judged as non-interior; the article can still be relevant.

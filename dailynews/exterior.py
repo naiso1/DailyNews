@@ -160,3 +160,14 @@ sourceNewsIdsは対応するanchor IDと一致させ、desc末尾に同じIDを[
 トレンド記事を根拠とする案は、観測された変化に対応する外装開発の仮説にとどめる。根拠が弱ければ案を減らす。元記事にない性能や需要量を補わない。
 画像は後段のexaBase連携で生成するため、imagePromptおよびimgは出力しない。外装製品の説明をテキストだけで完結させる。
 """
+
+
+def selection_thresholds(selection, article_date="", issue_date=""):
+    """Return (product, trend) minimum scores; the issue's own day is relaxed
+    so fresh news fills the quota before older lookback articles."""
+    base = int(selection.get("minimum_score", 60))
+    trend = int(selection.get("trend_minimum_score", 65))
+    if issue_date and str(article_date or "")[:10] == str(issue_date)[:10]:
+        return (int(selection.get("issue_date_minimum_score", base)),
+                int(selection.get("issue_date_trend_minimum_score", trend)))
+    return base, trend

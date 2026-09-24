@@ -148,7 +148,7 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         body = "Passenger car sales shifted toward SUVs in August, reaching 55 percent of registrations. " * 3
         item = {"国": "インド", "タイトル": "August market report", "内容": "A monthly report.", "URL": "https://example.com/market", "画像URL": "", "ソース": "RSS"}
         assessment = {"score": 78, "reason": "乗用車の車種別需要の変化", "category": "trend", "trend_topic": "market"}
-        with patch.multiple(collector, USE_LLM=True, FETCH_MISSING_IMAGES=False), patch.object(collector, "fetch_article_text", return_value=body), patch.object(collector, "check_url_ok", return_value=True), patch.object(collector, "call_llm_classify", return_value=("対象", "なし")) as classifier, patch.object(collector, "summarize_article", return_value=("乗用車の需要構成が変化", "SUVの販売構成比が変わった。")), patch.object(collector, "call_llm_interior_assessment", return_value=assessment), redirect_stdout(io.StringIO()):
+        with patch.multiple(collector, USE_LLM=True, FETCH_MISSING_IMAGES=False, _ensure_llm_model_loaded=lambda: True), patch.object(collector, "fetch_article_text", return_value=body), patch.object(collector, "check_url_ok", return_value=True), patch.object(collector, "call_llm_classify", return_value=("対象", "なし")) as classifier, patch.object(collector, "summarize_article", return_value=("乗用車の需要構成が変化", "SUVの販売構成比が変わった。")), patch.object(collector, "call_llm_interior_assessment", return_value=assessment), redirect_stdout(io.StringIO()):
             result = collector.enrich_results([item])
         self.assertEqual(classifier.call_args_list[0].args[1], body)
         self.assertEqual(result[0]["記事区分"], "trend")
