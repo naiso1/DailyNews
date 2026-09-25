@@ -19,11 +19,11 @@ def helpers():
     names = {
         "normalize_text", "ends_with_sentence", "trim_to_sentence", "trim_title_safely",
         "has_suspicious_truncation", "title_looks_incomplete", "parse_json_field",
-        "compact_summary_with_llm", "build_source_faithful_japanese_summary",
+        "compact_summary_with_llm", "build_source_faithful_japanese_summary", "bounded_llm_source",
     }
     selected = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names]
     assert len(selected) == len(names)
-    env = {"re": re, "json": json, "SUMMARY_TITLE_LIMIT": 50, "SUMMARY_CONTENT_LIMIT": 150, "SUMMARY_HTML_CHARS": 8000,
+    env = {"re": re, "json": json, "SUMMARY_TITLE_LIMIT": 50, "SUMMARY_CONTENT_LIMIT": 150, "SUMMARY_HTML_CHARS": 8000, "LLM_SOURCE_CHAR_BUDGET": 3500,
            "_is_valid_japanese": lambda text: bool(re.search(r"[ぁ-んァ-ヶ]", text)),
            "extract_latin_source_anchors": lambda *args, **kwargs: ["Skynomad"]}
     exec(compile(ast.Module(body=selected, type_ignores=[]), "summary-helpers", "exec"), env)

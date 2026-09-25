@@ -426,6 +426,21 @@ def has_japanese_text(text: str):
     return bool(re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", str(text or "")))
 
 
+MAX_PUBLISHED_DESC_CHARS = 400
+
+
+def drop_unsummarised_bodies(items):
+    """A Japanese source that failed summarisation passes the language check
+    with its full article body; never publish such a raw body as the summary."""
+    kept = []
+    for item in items:
+        if item.get("country") != "paper" and len(str(item.get("desc") or "")) > MAX_PUBLISHED_DESC_CHARS:
+            print(f"[SUMMARY_TOO_LONG] {len(str(item.get('desc')))} chars, not published: {item.get('url')}")
+            continue
+        kept.append(item)
+    return kept
+
+
 def validate_japanese_news_items(items):
     """Do not publish untranslated fallbacks or silently reduce the country quota."""
     pending = []
@@ -1968,6 +1983,7 @@ def main():
     existing_url_keys = set(publication_url_id_map(news_text))
     items = validate_editorial_publication(items, existing_url_keys, load_feedback_snapshot(EDITION), EDITION.id)
     items = unique_publication_items(items)
+    items = drop_unsummarised_bodies(items)
     validate_japanese_news_items(items)
     issue_context = None
     if EDITION.id == "exterior":

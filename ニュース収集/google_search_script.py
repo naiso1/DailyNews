@@ -301,6 +301,21 @@ SUMMARY_TITLE_TARGET = 38
 SUMMARY_COMPACT_TITLE_LIMIT = 44
 SUMMARY_CONTENT_LIMIT = 150
 SUMMARY_HTML_CHARS = 8000
+# Japanese runs close to one token per character; with the instructions this
+# keeps every prompt inside the 8192-token context the model is loaded with.
+LLM_SOURCE_CHAR_BUDGET = int(os.environ.get("LLM_SOURCE_CHAR_BUDGET", "3500"))
+
+
+def bounded_llm_source(content, html_text=""):
+    """Return (content, html_text) sized for one prompt, without sending the
+    same article body twice when the stored content already is the body."""
+    budget = LLM_SOURCE_CHAR_BUDGET
+    content, html_text = str(content or ""), str(html_text or "")
+    head = content[:120].strip()
+    if html_text and head and head in html_text:
+        return max(content, html_text, key=len)[:budget], ""
+    content = content[:budget]
+    return content, html_text[:max(0, budget - len(content))]
 
 # Feature flags
 ENABLE_GOOGLE_NEWS = True
@@ -1305,6 +1320,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
             print("  ✗ プロンプト.md を読み込めませんでした（エンコード/パス確認）")
             LLM_ERROR_LOGGED = True
         return "", ""
+    content = bounded_llm_source(content)[0]
     cache_key = (title, content, image_url, mode)
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
@@ -1537,6 +1553,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
     global LLM_ERROR_LOGGED
     if not USE_LLM:
         return None
+    content = bounded_llm_source(content)[0]
     cache_key = (EDITION.id, "product_assessment", title, content, image_url, url, summary)
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
@@ -2288,8 +2305,7 @@ def build_source_faithful_japanese_summary(title, content, html_text=""):
     from summary_grounding import summary_grounding_rules, summary_omits_interior_details, source_identifiers_match
 
     source_title = normalize_text(title)
-    source_content = normalize_text(content)
-    article_excerpt = normalize_text(html_text)[:SUMMARY_HTML_CHARS]
+    source_content, article_excerpt = bounded_llm_source(normalize_text(content), normalize_text(html_text))
     anchors = extract_latin_source_anchors(f"{source_title} {source_content}", limit=5)
     required = ", ".join(anchors) if anchors else "なし"
 
@@ -2436,7 +2452,7 @@ def fetch_article_text(url):
 
 def summarize_article(title, content, url, country=""):
     """URL本文 + 既存タイトル/本文から日本語要約を生成"""
-    from currency_guard import CURRENCY_RULES, repair_indian_price_units
+    from currency_guard import CURRENCY_RULES, CurrencyUnitError, repair_indian_price_units
 
     cache_key = (url or "", title or "", content or "")
     if cache_key in _summary_cache:
@@ -2455,6 +2471,9 @@ def summarize_article(title, content, url, country=""):
     if isinstance(url, str) and url:
         if "gasgoo.com" not in url:
             html_text = fetch_article_text(url)
+    # Prompts get a bounded copy; grounding checks below use the full text.
+    full_content, full_html = content, html_text
+    content, html_text = bounded_llm_source(content, html_text)
     source_text = f"{title} {content}"
     cn_keywords = extract_cjk_keywords(source_text) if country == "中国" else []
     keep_terms = ""
@@ -2674,7 +2693,7 @@ def summarize_article(title, content, url, country=""):
 
     summary_title = normalize_japanese_spacing(summary_title)
     summary_body = normalize_japanese_spacing(summary_body)
-    final_source_text = f"{title} {content} {html_text}"
+    final_source_text = f"{title} {full_content} {full_html}"
     from summary_grounding import reverses_equipment_criticism
 
     if not summary_matches_source(
@@ -2690,8 +2709,8 @@ def summarize_article(title, content, url, country=""):
         else:
             # LLMが完全に利用不能な場合だけ原文を保持し、次回の復旧対象に残す。
             print(f"  [SUMMARY_REPAIR_FAILED] 日本語化失敗、次回復旧対象として保持: {title[:50]}")
-            summary_title = normalize_text(title)
-            summary_body = normalize_text(content)
+            summary_title = trim_title_safely(normalize_text(title), SUMMARY_TITLE_LIMIT)
+            summary_body = trim_to_sentence(normalize_text(content), SUMMARY_CONTENT_LIMIT)
             if summary_body and not ends_with_sentence(summary_body):
                 summary_body += "."
     if reverses_equipment_criticism(f"{summary_title}。{summary_body}", final_source_text):
@@ -2708,8 +2727,14 @@ def summarize_article(title, content, url, country=""):
     summary_title = normalize_known_brand_names(summary_title)
     summary_body = normalize_known_brand_names(summary_body)
     # Run after every LLM rewrite so later compaction cannot drop the scale again.
-    summary_title, title_prices = repair_indian_price_units(summary_title, final_source_text, country)
-    summary_body, body_prices = repair_indian_price_units(summary_body, final_source_text, country)
+    try:
+        summary_title, title_prices = repair_indian_price_units(summary_title, final_source_text, country)
+        summary_body, body_prices = repair_indian_price_units(summary_body, final_source_text, country)
+    except CurrencyUnitError as exc:
+        # One mistranslated price must not abort the whole collection; leave
+        # the article unsummarised so it is quarantined rather than published.
+        print(f"  [CURRENCY_UNIT_REJECTED] {exc}: {url}")
+        return "", ""
     for before, after in title_prices + body_prices:
         print(f"  [CURRENCY_UNIT_FIXED] {before} -> {after}: {url}")
     if _is_valid_japanese(summary_title) and _is_valid_japanese(summary_body):
