@@ -426,5 +426,50 @@ window.DAILYNEWS_CONFIGURED_SOURCES = [
     "country": "インド",
     "name": "Motoroids",
     "rssUrl": "https://www.motoroids.com/feed/"
+  },
+  {
+    "country": "欧州",
+    "name": "Motor1 UK",
+    "rssUrl": "https://uk.motor1.com/rss/news/all/"
+  },
+  {
+    "country": "欧州",
+    "name": "Motor1 Germany",
+    "rssUrl": "https://de.motor1.com/rss/news/all/"
+  },
+  {
+    "country": "欧州",
+    "name": "Motor1 France",
+    "rssUrl": "https://fr.motor1.com/rss/news/all/"
+  },
+  {
+    "country": "欧州",
+    "name": "Motor1 Italy",
+    "rssUrl": "https://it.motor1.com/rss/news/all/"
+  },
+  {
+    "country": "欧州",
+    "name": "Motor1 Spain",
+    "rssUrl": "https://es.motor1.com/rss/news/all/"
+  },
+  {
+    "country": "欧州",
+    "name": "Autoweek NL",
+    "rssUrl": "https://www.autoweek.nl/rss/"
+  },
+  {
+    "country": "インド",
+    "name": "AutoX",
+    "rssUrl": "https://www.autox.com/feed/"
+  },
+  {
+    "country": "インド",
+    "name": "Cartoq",
+    "rssUrl": "https://www.cartoq.com/feed/"
+  },
+  {
+    "country": "インド",
+    "name": "Evo India",
+    "rssUrl": "https://www.evoindia.com/feed"
   }
 ];
