@@ -65,8 +65,13 @@ The script packages only:
 Each package is stored by Git commit ID and activated through
 `active-release.txt`.
 
-Functional UI changes should also add a short entry to `release_history.js`
-so users can see what changed from the header's update-history button.
+User-facing changes must add a short Japanese entry to `release_history.js`
+in the same change (see the root `AGENTS.md`). Include changes to selection,
+generation and publication behavior as well as UI changes. This list is manually
+maintained; commits and successful deployments do not populate it automatically.
+After deployment, open the header's update-history button and verify the latest
+date and text at desktop and mobile widths. Routine daily article additions do
+not require a feature-history entry and must not be blocked by its date.
 
 The administrator account list is configured with the
 `DAILYNEWS_ADMIN_EMAILS` environment variable (comma-separated). If it is not
