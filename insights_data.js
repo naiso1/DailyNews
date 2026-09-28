@@ -1,5 +1,147 @@
 window.DAILY_INSIGHTS = [
-    {
+{
+    date: "2026-09-25〜2026-09-27",
+    analysis: {
+        jp: "後席モニター[jp1901]やテーブル・オットマン[jp1903]、遮光カーテン[jp1902]の事例からは、車内で過ごす時間を快適にする後付け用品の広がりが読み取れる。隙間収納[jp1899]とウォークスルー構造[jp1905]は、限られた空間でも荷物の置き場や移動のしやすさを改善できる例だ。内装開発では、部品単体の機能に加え、乗り降りや清掃、既存装備との干渉まで一緒に評価するとよさそうだ[jp1903][jp1905]。これらの事例を起点に、収納・加飾・取付構造を組み合わせた部品を検討したい[jp1899][jp1907]。",
+        cn: "BYDシーガルのメーターレス化と物理ボタン[cn1710]、Ti 9の大型ディスプレイと白基調の内装[cn1708]は、画面の大きさと操作しやすさを併せて考える材料になる。ネボQ06の天井モニター[cn1709]や奕境X9のAIコンパニオン[cn1713]も含め、表示・操作機能を車内のどこに配置するかが比較ポイントだ。内装開発では、画面周辺の反射、手の届きやすさ、加飾とのつながりを評価したい[cn1710][cn1708]。触れる箇所の清掃性や表面の耐久性も検証候補であり、今回の記事だけでその性能や市場全体の傾向を断定することは避けたい[cn1710]。",
+        in: "タタ・エアリスの大画面と安全装備[in1766]、エルティガの表示・接続機能[in1768]は、比較的手頃な車種でも内装機能が選択材料になることを示す事例だ。Syrosの後席ベンチレーションは、快適装備の対象席やグレードを確認するうえで参考になる[in1767]。一方、Thar OGの短期間の更新[in1761]を踏まえると、部品の共通化や加飾の変更しやすさも検討したい。高級車の仕上げ[in1770]をそのまま低価格帯へ移すのではなく、清掃性、触感、組付け性を絞って評価し、追加コストと得られる使いやすさを比較する進め方が考えられる[in1766][in1768]。",
+        us: "GV90の可動ディスプレイ[us1722]とLX 700hの後席装備[us1724]は、停車中の視聴体験や同乗者の快適性を重視した事例だ。一方、プレリュードへの装備批評[us1718]は、価格や使い方に対して利用者が期待する機能を見極める必要性を示している。内装開発では、可動機構の耐久性やエアバッグとの配置関係に加え、操作の分かりやすさを確認したい[us1722][us1720]。素材の触感や音響表現[us1727]も検討対象となるが、装備を増やすだけで快適になると決めつけず、乗員ごとの使い方を試作で確かめたい[us1718][us1724]。",
+        eu: "EUのBEV市場記事[eu1687]と廉価ブランドとしてのSEATを論じた記事[eu1683]は、電動化と価格の両面から製品を考える材料になる。希少車の内装素材紹介[eu1684]は質感表現の参考例だが、それだけで現在の欧州市場全体の需要とは言えない。内装開発では、装備や加飾を足す効果と、価格・重量の増加を比較して検討したい[eu1681][eu1683]。Leaf電池の再利用[eu1686]は内装材そのものの事例ではないものの、部品の分解・再利用のしやすさを考える起点になる。材料を置き換える場合も、軽量化率や耐久性は実測で確かめたい[eu1686]。"
+    },
+    ideas: {
+        jp: [
+            {
+                id: 1847,
+                img: "images/exabase_interior_1847_050642ca4ac908ad.jpg",
+                title: "自動組立天井マウントトレイ",
+                desc: "40系アルファード用モニターの取付例を起点に、天井部材へ位置決めガイドと確認しやすいロック機構を組み込む案。組付け工数の削減を狙い、保持強度、配線接続、点検時の取り外しやすさを試作で比較する。 [jp1901]",
+                imagePrompt: "Close-up view of a car ceiling mount assembly, showing a 15.6-inch flip-down monitor being automatically aligned by magnetic guides and locking mechanisms, clean industrial design, soft ambient lighting",
+                sourceNewsIds: [
+                    "jp1901"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1848,
+                img: "images/exabase_interior_1848_ce80d41e64248afc.jpg",
+                title: "樹脂骨格隙間収納ボックス",
+                desc: "車内すき間の収納用品を、樹脂製の薄肉構造と滑りにくい表面で設計する案。収納量と取り出しやすさを両立し、振動による異音、荷物保持、清掃性を評価する。軽量化の効果は現行品との比較で確認する。 [jp1899]",
+                imagePrompt: "Interior shot of a Suzuki Jimny door panel, highlighting a sleek resin storage pocket integrated into the gap near the door grip, holding a smartphone, matte finish material, bright natural daylight",
+                sourceNewsIds: [
+                    "jp1899"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
+        ],
+        cn: [
+            {
+                id: 1849,
+                img: "images/exabase_interior_1849_ba44388b8e080d62.jpg",
+                title: "抗菌銀イオン内装パネル",
+                desc: "シーガルの物理スイッチ周辺を参考に、よく触れるコンソール部材へ銀イオンを含む表面処理を検討する案。抗菌性能に加え、繰り返し清掃後の耐久性、色調、触感を検証する。消臭や感染予防など、別の効果を同じものとして扱わない。 [cn1710]",
+                imagePrompt: "Close-up of a modern car center console featuring physical buttons and a wireless charging pad, covered with a subtle anti-bacterial silver coating that reflects soft blue light, clean white background, high-end material texture",
+                sourceNewsIds: [
+                    "cn1710"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1850,
+                img: "images/exabase_interior_1850_93201dc44bb14bb4.jpg",
+                title: "音響最適化ダッシュボード",
+                desc: "Ti 9の大型画面周辺を起点に、インパネ内部の補強や吸音材の配置を調整する案。画面支持部の振動とスピーカー再生時の異音を測り、外観を保ちながら音響・構造の両面を改善できるか確かめる。 [cn1708]",
+                imagePrompt: "Cross-section view of a white dashboard with gold accents, showing internal acoustic damping structures and speaker integration behind a large floating screen, technical schematic style with clean lines, soft lighting",
+                sourceNewsIds: [
+                    "cn1708"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
+        ],
+        in: [
+            {
+                id: 1851,
+                img: "images/exabase_interior_1851_3e8cba1ddff5ad0d.jpg",
+                title: "一体成型インパネ金型",
+                desc: "Thar OGの内装更新を起点に、骨格を共通化しながら加飾部を変更できる成形・組付け構造を検討する案。接着工程や部品点数の削減を狙い、金型費、寸法精度、変更時の工数を比較して適用範囲を判断する。 [in1761]",
+                imagePrompt: "A close-up cross-section view of a car dashboard mold cavity, showing the integrated injection molding process where the structural frame and decorative trim are formed simultaneously in a single cycle. The material appears as a seamless blend of matte black plastic with subtle texture variations indicating different functional zones. Industrial lighting highlights the precision of the mold surfaces, emphasizing the elimination of separate assembly steps.",
+                sourceNewsIds: [
+                    "in1761"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1852,
+                img: "images/exabase_interior_1852_4c54df69207fd548.jpg",
+                title: "漆黒加飾センターコンソール",
+                desc: "エルティガの表示装置周辺を、漆黒調の加飾でまとめる案。画面と周辺部材の見え方、指紋の目立ちやすさ、反射、耐傷性を比較し、価格を抑えた車種にも適用しやすい仕上げ条件を探る。 [in1768]",
+                imagePrompt: "A sleek center console panel featuring a deep, non-reflective black metallic finish that absorbs light rather than reflecting it. The surface surrounds a 7-inch infotainment display, creating a seamless visual frame. Soft ambient lighting from the side highlights the subtle depth of the plating, contrasting with the matte texture of the surrounding dashboard material. The composition focuses on the tactile quality and premium aesthetic of the control area.",
+                sourceNewsIds: [
+                    "in1768"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
+        ],
+        us: [
+            {
+                id: 1853,
+                img: "images/exabase_interior_1853_b6947259d971cc91.jpg",
+                title: "バイオ複合ポップアップ枠",
+                desc: "GV90の可動ディスプレイ周辺に、再生PETと植物由来繊維を用いたフレームを検討する案。重量や環境負荷の低減を狙うが、耐久性能は実証が必要。可動時の寸法安定性、異音、熱変形を現行材料と比較する。 [us1722]",
+                imagePrompt: "A close-up of a car dashboard featuring a retractable OLED display mechanism, highlighting the frame made from textured bio-composite material with visible plant fiber inclusions, soft ambient lighting, eco-friendly aesthetic",
+                sourceNewsIds: [
+                    "us1722"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1854,
+                img: "images/exabase_interior_1854_3a13ac6a3ed6e50c.jpg",
+                title: "漆黒めっきシアターリング",
+                desc: "GV90の車内視聴体験を参考に、画面や音響部品の周辺を漆黒調の加飾でまとめる案。見た目の落ち着きと操作箇所の分かりやすさを評価し、反射や指紋、音響特性への影響を試作で確認する。 [us1722]",
+                imagePrompt: "A luxurious center console detail with a matte black chrome-plated trim piece surrounding speaker grilles, deep glossy reflection-free surface, integrated ambient lighting, high-end audio system context",
+                sourceNewsIds: [
+                    "us1722"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
+        ],
+        eu: [
+            {
+                id: 1855,
+                img: "images/exabase_interior_1855_527f23a54d79e93c.jpg",
+                title: "Born VZ用の抗菌コンソール表面",
+                desc: "Born VZのような日常利用も想定するEVを起点に、触れる頻度が高いコンソール表面へ抗菌材料を検討する案。基本となる清掃しやすさを確保したうえで、抗菌性能、耐摩耗性、コストを比較する。材料採用だけで消臭効果まで保証しない。 [eu1681]",
+                imagePrompt: "Close-up of a sleek electric car center console featuring a matte silver-infused anti-bacterial resin surface, subtle ambient lighting glowing beneath the armrest, clean modern design with soft shadows emphasizing hygiene and premium feel",
+                sourceNewsIds: [
+                    "eu1681"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1856,
+                img: "images/exabase_interior_1856_5c058bf61088fee2.jpg",
+                title: "樹脂骨格軽量化インパネフレーム",
+                desc: "Acura TLの内装素材紹介を参考に、上質な表面材と樹脂製の支持構造を組み合わせる案。質感を保ちながら軽量化できるか、剛性、異音、温度変化、組付け精度を検証する。車両の操縦性への効果は別途評価が必要となる。 [eu1684]",
+                imagePrompt: "Cross-section view of a car dashboard structure showing lightweight high-strength resin frame replacing traditional metal, highlighting material texture and structural integrity with warm interior lighting reflecting off the surfaces",
+                sourceNewsIds: [
+                    "eu1684"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
+        ]
+    }
+},
+{
         date: "2026-09-24",
         analysis: {
             jp: "2026年日本の車載市場では、音響の質的進化と内装機能再定義が顕在化している[jp1889,jp1896]。パイオニアDMH-SF1000はドルビーアトモス再生で空間演出を示唆し[jp1889]、CRAFTWORKSのトレイはデッドスペース活用とマグネット固定が評価された[jp1896]。クラウンGは後席見直しで約100万円安を実現し[jp1890]、GXはシートベンチレーションを標準化して熱環境重視姿勢を見せる[jp1892]。ムラーノ北米仕様はレザーとパノラミックルーフで高級感・開放感を両立させた[jp1894,jp1897]。豊田合成としては、「空気質」「音響反射」「熱環境」を同時最適化する複合部材開発が急務である[jp1889,jp1892]。低価格帯でも質感を保つ型内塗装、抗菌・消臭コンソール、周波数特性制御インパネが次の検討軸となる[jp1896,jp1889].",
