@@ -466,6 +466,7 @@ header.site-header {
 .ranking-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .ranking-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .ranking-sort-label { font-size: 11px; color: var(--muted); }
+.ranking-score-note { margin: 0 0 12px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .ranking-sort { padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.04); color: var(--text); font-size: 11px; }
 .ranking-sort:focus { outline: 2px solid rgba(125, 241, 194, 0.6); outline-offset: 2px; }
 .ranking-sort option { background: #0f1726; color: #e6edf7; }
@@ -1495,13 +1496,14 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     </select>
                     <label class="ranking-sort-label" for="rankingSort">並び替え</label>
                     <select id="rankingSort" class="ranking-sort">
-                        <option value="score">総合</option>
+                        <option value="score">総合（反応重視）</option>
                         <option value="likes">いいね</option>
                         <option value="comments">コメント</option>
                         <option value="reads">閲覧数</option>
                     </select>
                 </div>
             </div>
+            <p class="ranking-score-note">総合はコメント・いいねを重視し、閲覧数は補助的に反映します。</p>
             <div class="ranking-body collapsed" id="rankingBody">
                 <div class="ranking-list" id="rankingList">
                     <div class="ranking-empty">ランキングを計算中...</div>
@@ -1528,7 +1530,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                     </select>
                     <label class="ranking-sort-label" for="paperRankingSort">並び替え</label>
                     <select id="paperRankingSort" class="ranking-sort">
-                        <option value="score">総合</option>
+                        <option value="score">総合（反応重視）</option>
                         <option value="likes">いいね</option>
                         <option value="comments">コメント</option>
                         <option value="reads">閲覧数</option>
@@ -1537,6 +1539,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         aria-expanded="false">開く</button>
                 </div>
             </div>
+            <p class="ranking-score-note">総合はコメント・いいねを重視し、閲覧数は補助的に反映します。</p>
             <div class="ranking-body collapsed" id="paperRankingBody">
                 <div class="ranking-list" id="paperRankingList">
                     <div class="ranking-empty">ランキングを計算中...</div>
@@ -2017,6 +2020,14 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             return select ? select.value : "score";
         }
 
+        function calculateRankingScore(likes, comments, reads) {
+            const count = value => Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0;
+            // Opening an article signals interest, not approval. Even many reads
+            // alone must not outweigh an explicit like or comment.
+            const readPoints = Math.min(count(reads) * 0.05, 1);
+            return count(likes) * 3 + count(comments) * 5 + readPoints;
+        }
+
         function getRankingMetricValue(item, key) {
             if (key === "score") return item.score || 0;
             if (key === "likes") return item.likes || 0;
@@ -2032,7 +2043,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
         function compareRankingItems(a, b, key) {
             const order = key === "score"
-                ? ["score", "likes", "comments", "reads"]
+                ? ["score", "comments", "likes", "reads"]
                 : key === "likes"
                     ? ["likes", "comments", "reads"]
                     : key === "comments"
@@ -2076,7 +2087,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 const reads = (typeof data.reads === "number")
                     ? data.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
-                const score = likes * 3 + comments * 2 + reads;
+                const score = calculateRankingScore(likes, comments, reads);
                 return { ...item, likes, comments, reads, score };
             });
 
@@ -2154,7 +2165,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 const reads = (typeof data.reads === "number")
                     ? data.reads
                     : (window.getLocalReadCount ? window.getLocalReadCount(item.id) : 0);
-                const score = likes * 3 + comments * 2 + reads;
+                const score = calculateRankingScore(likes, comments, reads);
                 return { ...item, likes, comments, reads, score };
             });
 
@@ -3539,6 +3550,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             renderInsights();
             updateRankingVisibility();
             scheduleRankingUpdate();
+            pendingAutomaticNewsRefresh = false;
         }
 
         function loadMore() {
@@ -3551,8 +3563,26 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             updateURL("push");
         }
 
+        let pendingAutomaticNewsRefresh = false;
+
+        function refreshNewsWithoutInterruptingComments() {
+            // Rebuilding cards removes the input node, draft, focus and IME
+            // composition. Keep it intact while reading/writing comments.
+            const hasOpenEditor = document.querySelector(".comment-section.open, .comment-input:focus");
+            const hasDraft = [...document.querySelectorAll(".comment-input")].some(input => input.value.length > 0);
+            if (hasOpenEditor || hasDraft) {
+                pendingAutomaticNewsRefresh = true;
+                return;
+            }
+            applyFilters();
+        }
+
+        window.flushPendingNewsRefresh = () => {
+            if (pendingAutomaticNewsRefresh) refreshNewsWithoutInterruptingComments();
+        };
+
         window.refreshNewsReactionSort = () => {
-            if (document.getElementById("sortOrder")?.value === "new-first") applyFilters();
+            if (document.getElementById("sortOrder")?.value === "new-first") refreshNewsWithoutInterruptingComments();
         };
 
         window.refreshNewsVisibility = () => {
@@ -3561,7 +3591,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             if (window.DAILYNEWS_CONFIG.id === "exterior") {
                 document.getElementById("exteriorPublicationStatus").textContent = describeExteriorPublication(window.EXTERIOR_PUBLICATION_STATUS, NEWS_DATA);
             }
-            applyFilters();
+            refreshNewsWithoutInterruptingComments();
         };
 
 

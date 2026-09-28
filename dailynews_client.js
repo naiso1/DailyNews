@@ -593,7 +593,7 @@ async function loadInteractions() {
       )
       .join("|");
     if (currentReactions !== previousReactions) {
-      window.refreshNewsReactionSort?.();
+      // Visibility refresh also applies the current sort. Do not rebuild twice.
       window.refreshNewsVisibility?.();
     }
     return true;
@@ -1147,6 +1147,7 @@ window.toggleComments = (itemId, button) => {
   const isOpen = section.classList.toggle("open");
   button.classList.toggle("active-comment", isOpen);
   if (isOpen) window.subscribeItem(itemId, null, button, commentList);
+  else window.flushPendingNewsRefresh?.();
 };
 
 async function saveComment(itemId, text, parentCommentId = null, input = null) {
