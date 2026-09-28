@@ -508,7 +508,9 @@ def append_news_items(js_text: str, items_by_date):
         insertion.append(f"    // {date_key} (google検索からExcel sheet2_llm_targets)")
         insertion.extend(items_by_date[date_key])
     block = "\n".join(insertion) + "\n"
-    updated = re.sub(r"\n\];\s*$", f"\n{block}];", js_text, flags=re.MULTILINE)
+    # A string replacement interprets backslashes a second time (e.g. \\n,
+    # \\1), corrupting already escaped JavaScript literals. Insert verbatim.
+    updated = re.sub(r"\n\];\s*$", lambda _: f"\n{block}];", js_text, flags=re.MULTILINE)
     if updated == js_text:
         # Fallback: append before last ]
         idx = js_text.rfind("];")
@@ -1159,7 +1161,7 @@ def preserve_analysis_citations(before_shortening: str, final_text: str, allowed
 
 def insert_insight(js_text: str, new_entry: str):
     # insert after opening bracket
-    return re.sub(r"window\.DAILY_INSIGHTS\s*=\s*\[\s*", f"window.DAILY_INSIGHTS = [\n{new_entry}\n", js_text, count=1)
+    return re.sub(r"window\.DAILY_INSIGHTS\s*=\s*\[\s*", lambda _: f"window.DAILY_INSIGHTS = [\n{new_entry}\n", js_text, count=1)
 
 
 def remove_insight_by_date(js_text: str, date_key: str):
@@ -1244,10 +1246,8 @@ def extract_insight_object_section(js_text: str, date_key: str, section_name: st
 def js_escape(value: str):
     s = str(value or "")
     s = s.replace("\u2028", " ").replace("\u2029", " ")
-    s = s.replace("\\", "\\\\")
-    s = s.replace("\"", "\\\"")
-    s = s.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "\\n")
-    return s
+    s = s.replace("\r\n", "\n").replace("\r", "\n")
+    return json.dumps(s, ensure_ascii=False)[1:-1]
 
 
 def load_idea_angles() -> list[str]:

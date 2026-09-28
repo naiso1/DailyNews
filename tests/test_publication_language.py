@@ -134,6 +134,10 @@ class PublicationTests(unittest.TestCase):
             paths = {key: root / name for key, name in [("NEWS_PATH", "news.js"), ("INSIGHTS_PATH", "insights.js"), ("HTML_PATH", "index.html")]}
             for path in paths.values():
                 path.write_text("UNCHANGED", encoding="utf-8")
+            # The publisher validates stored history before the incoming copy.
+            # Use a valid history so this still exercises the language guard.
+            paths["NEWS_PATH"].write_text("window.LOADED_NEWS_DATA = [];", encoding="utf-8")
+            original = {path: path.read_bytes() for path in paths.values()}
             sheet = root / "source.csv"
             with sheet.open("w", encoding="utf-8", newline="") as handle:
                 writer = csv.writer(handle)
@@ -143,7 +147,7 @@ class PublicationTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "Japanese summary validation failed"):
                     self.publisher.main()
             for path in paths.values():
-                self.assertEqual(path.read_text(encoding="utf-8"), "UNCHANGED")
+                self.assertEqual(path.read_bytes(), original[path])
 
 
 if __name__ == "__main__":
