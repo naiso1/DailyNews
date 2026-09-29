@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-09-29 01:29";
+window.NEWS_UPDATED_AT = "2026-09-30 01:32";
 
 window.LOADED_NEWS_DATA = [
 
@@ -232345,6 +232345,743 @@ window.LOADED_NEWS_DATA = [
         sourceExcerptEnd: "charging pad, automatic AC, cruise control, push-button start/stop, among others.",
         country: "in",
         img: "https://motoroctane.com/wp-content/uploads/2026/09/Renault-Triber-Turbo-Petrol-Launched.png",
+        note: ""
+    },
+    // 2026-09-29 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1919",
+        title: "遠東新世紀、日本法人FEJPが高機能素材Weekに出展",
+        desc: "遠東新世紀グループは日本法人FEJPを通じて2026年9月30日から幕張メッセで開催される「第17回高機能素材Week」に出展する。飲料用PETボトルの水平リサイクル事業を展開する同社は、バージンおよびリサイクルPETを原料とした高機能シート製品の市場認知向上と事業拡大を目指す。",
+        url: "https://news.yahoo.co.jp/articles/d5ccb9a95f055ff6b9eb390db3b8dbf4ebcc2433",
+        source: "レスポンス",
+        date: "2026-09-29",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "台湾を本拠とする遠東新世紀グループの日本法人・ファーイースタンジャパン（FEJP）は、2026年9月30日（水）から10月2日（金）に幕張メッセで開催される「第17回高機能素材Week」に出展する。",
+        interiorScore: 7,
+        interiorReason: "The article discusses high-function PET sheet materials and recycling for indust",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000030-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1920",
+        title: "フォルクスワーゲンID.ティグアンが広々室内空間と直感的操作性でプレミアム性を追求",
+        desc: "フォルクスワーゲンは10月上旬に新型EV『ID.ティグアン』を世界初公開し、2027年初頭の投入を予定する。プレミアムなデザインや広々とした室内空間が特徴で、従来の内燃機関モデルも併売される。",
+        url: "https://news.yahoo.co.jp/articles/efd7e235b6b6a9ab2e888a59583ed5842affb5a9",
+        source: "レスポンス",
+        date: "2026-09-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "フォルクスワーゲンは、新型電気自動車『ID.ティグアン』のワールドプレミアを10月上旬に行うと発表した。",
+        interiorScore: 39,
+        interiorReason: "The article announces a new EV model with explicit mentions of 'spacious interio",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000027-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1921",
+        title: "BYD ATTO 3 EX、AWD車に温冷庫とシートベンチレーションを標準装備",
+        desc: "BYD Auto Japanは2026年9月29日、ミドルサイズSUV『ATTO 3 EX』の販売を開始した。AWDモデルには前席センターコンソールに4.5リットルの車載温冷庫が標準搭載され、シートベンチレーションやステアリングヒーターも備える。",
+        url: "https://news.yahoo.co.jp/articles/52e934de3ab9b3fed51639745fb2c2cda0d39543",
+        source: "レスポンス",
+        date: "2026-09-29",
+        tags: ["シート", "センターコンソール", "バッテリー"],
+    
+        sourceExcerpt: "前席シートベンチレーション、ステアリングヒーター、50Wワイヤレス充電なども装備する。",
+        interiorScore: 68,
+        interiorReason: "Concrete interior comfort and utility details including a center console refrige",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000014-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1922",
+        title: "トヨタハイランダー、860万円の実用SUVが全国販売へ",
+        desc: "米国製3列シートSUVのハイランダーは2026年8月より全国で販売される。全幅1930mm・価格860万円で、ソフトパッドやアンビエントライトを排したタフな表皮と大ぶりのスイッチ類が特徴だ。筆者は過剰なおもてなし感のないドライな内装を評価している。",
+        url: "https://news.yahoo.co.jp/articles/b6aab1fe9a7d68b8fc6905aa373fccd27b41da33",
+        source: "carview!",
+        date: "2026-09-29",
+        tags: ["シート", "イルミ"],
+    
+        sourceExcerpt: "隙間なくソフトパッドが貼られた電動オットマンが音もなくせり上がったと思ったら、今度はアンビエントライトが妖しく灯ったりして、乗員を王様気分にさせてくれる3列シート車の快適空間はたしかに素敵だ。",
+        interiorScore: 60,
+        interiorReason: "The article provides specific qualitative insights into interior design philosop",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00010008-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1923",
+        title: "日産エクストレイル、NISMOやオーテックにGoogle搭載インフォテインメント標準化",
+        desc: "2026年9月3日の一部改良で、NISMO e-4ORCEとオーテックe-4ORCEにGoogle搭載のNissanConnectが標準装備された。エントリーグレード廃止により価格帯は409万2000円から596万2000円となり、Xにはリモコンオートバックドアも標準化されている。",
+        url: "https://news.yahoo.co.jp/articles/21baf62987d8033d9e10d3f522bf1e5952846726",
+        source: "carview!",
+        date: "2026-09-29",
+        tags: ["コネクテッド"],
+    
+        sourceExcerpt: "「NISMO e-4ORCE」と「オーテック e-4ORCE」には、Googleを搭載した「NissanConnectインフォテインメントシステム」が標準装備されました。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00010007-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1924",
+        title: "日産ローグハイブリッド、ゼログラビティシートと大型ディスプレイ採用",
+        desc: "日産は米国向け新型「ローグ ハイブリッド」を発表した。全席にゼログラビティシートを備え、プラチナムグレードには14.3インチのデュアルディスプレイが標準装備される。",
+        url: "https://news.yahoo.co.jp/articles/156638e0b1738b354f1aaa32541f68af0f6346a2",
+        source: "carview!",
+        date: "2026-09-29",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "プラチナムには14.3インチデュアルディスプレイを標準装備し、SRではオプションで用意する。",
+        interiorScore: 74,
+        interiorReason: "Detailed interior specifications including Zero Gravity seats, specific display",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00010005-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1925",
+        title: "ブリッド、高触感表皮NUGRAIN採用のGIAS III NUGRAINを発売",
+        desc: "ブリッドはスーパーセミバケットシート「GIAS III」に高触感表皮材NUGRAINを採用した新モデルを2026年9月16日から受注開始した。ヌバックのような質感とチャコールグレーのデザインが特徴で、合成皮革によるメンテナンス性も備える。",
+        url: "https://news.yahoo.co.jp/articles/4cb0b978137dc1dbbd81305d0f9618e145d9bd7e",
+        source: "ベストカーWeb",
+        date: "2026-09-29",
+        tags: ["AI", "シート", "新素材"],
+    
+        sourceExcerpt: "ブリッドがセミバケットシート「GIAS III」に高触感表皮材NUGRAINを採用した「GIAS III NUGRAIN」を発売。",
+        interiorScore: 35,
+        interiorReason: "The article is highly relevant to interior product planning as it details a spec",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000020-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1926",
+        title: "レンジローバーSV P615、テールゲートイベントスイートを標準装備",
+        desc: "JLRのフラッグシップSUVであるレンジローバーSV P615は、上下分割して開くテールゲートのイベントスイートを標準で備える。上質な素材による内装が評価されており、BMW由来の4.4L V8ツインターボで最高出力614psを発揮する仕様だ。",
+        url: "https://news.yahoo.co.jp/articles/86605f78126ad4bae85c371249c1013d8f706fd6",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-29",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "フラッグシップのレンジローバーでも、最も速いことには変わりないが、ラグジュアリーさやコンフォートさが追求されている。",
+        interiorScore: 63,
+        interiorReason: "Flagship SUV review with explicit focus on high-quality interior materials and c",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-01278498-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1927",
+        title: "アルファ・ロメオ限定車にアルカンターラ採用、感性重視のブランド体験を提示",
+        desc: "アルファ・ロメオは新型限定車『ジュニア・スポルト・スペチアーレ』と『トナーレ・スポルト・スペチアーレ』を発表した。両車にはアルカンターラ素材を用いたインテリアや専用ディテールが採用され、クラフトマンシップを重視するブランドの世界観が表現されている。",
+        url: "https://news.yahoo.co.jp/articles/2214d8e105a06674226618f64a503da46a938ead",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-29",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "【写真】アルファ・ロメオが渋谷を彩った特別な夜『ウナ・ノッテ・スペチアーレ』の様子はこちらから (19枚)新型限定車『ジュニア・スポルト・ス",
+        sourceExcerptEnd: "車の紹介にとどまらず、映画、音楽、食といったイタリアの文化を通じて、アルファ・ロメオが培ってきた世界観が表現されていた。",
+        interiorScore: 39,
+        interiorReason: "Mentions Alcantara interior and specific details for limited edition models, but",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-01281096-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1928",
+        title: "BMW iX3、43.3インチの横長ディスプレイでメーターパネルを廃止",
+        desc: "BMWは次世代EV『iX3』に、従来のメーターパネルを廃止しフロントガラス下に43.3インチの「パノラミックビジョン」を搭載した。17.9インチのセンターディスプレイは右ハンドル仕様に合わせて傾斜が調整され、車両機能のタッチ操作に対応する。価格は50 xドライブが982万円から設定されている。",
+        url: "https://news.yahoo.co.jp/articles/85b05bda0fef7680c27ee7d6285990a35472fa23",
+        source: "AUTOCAR JAPAN",
+        date: "2026-09-29",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "17.5度ドライバー側に傾けられる17.9インチのセンターディスプレイは、車両のほぼ全ての機能をタッチ操作することが可能だ。",
+        interiorScore: 66,
+        interiorReason: "Detailed breakdown of the new cockpit HMI, including specific display dimensions",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-01281139-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1738",
+        title: "ランザンテ95-59、F1 GTR由来の固定カーボンウイング採用",
+        desc: "ランザンテは95-59向けに高ダウンフォースキットを公開し、750S由来のアクティブスポイラーを撤去してマクラーレンF1 GTRから借用した固定式カーボンリアウィングを搭載する。さらにルーフマウントスクープやセンターロックホイールも備え、全59台にオプションとして提供される予定である。",
+        url: "https://www.motor1.com/news/809986/lanzante-95-59-hdk-reveals/",
+        source: "Motor1",
+        date: "2026-09-29",
+        tags: [],
+    
+        sourceExcerpt: "Gone is the 750S-derived active spoiler, replaced by a fixed carbon wing borrowed straight from McLaren F1 GTR heritage.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/OoZ2zo/s3/lanzante-95-59-hdk.jpg",
+        note: ""
+    },
+    {
+        id: "us1739",
+        title: "アルファロメオ33ストラダレ、ペルラネーラは内装にアルカンタラとカーボンインサート",
+        desc: "アルファロメオの33ストラダレ限定車「ペルラネーラ」では、内装がほぼ全面アルカンタラで覆われ、オーナー用にカスタム成形されたフロントシートを備える。ヘッドレストにはカーボンインサートを配し、「Perla Nera」の刻印が施されている。",
+        url: "https://www.motor1.com/news/809964/alfa-romeo-33-stradale-perla/",
+        source: "Motor1",
+        date: "2026-09-29",
+        tags: ["シート", "カスタマイズ"],
+    
+        sourceExcerpt: "Inside, Alcantara covers nearly everything, with front seats custom-shaped for the owner",
+        sourceExcerptEnd: "Autodelta symbols, tucked inside rather than shouted from the outside.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/xqOnjv/s3/alfa-romeo-33-stradale-perla-nera.jpg",
+        note: ""
+    },
+    {
+        id: "us1740",
+        title: "英国MOTデータ、高走行EVは内燃車より信頼性高いがタイヤ欠陥多め",
+        desc: "New AutoMotiveの調査で、9万〜12万マイルのEVはMOT不合格率16.5%と内燃車の22.1%を下回る。ただし電池検査はなく、EVはタイヤ欠陥が約2倍多い傾向が見られた。",
+        url: "https://www.carscoops.com/2026/09/uk-study-shows-high-mileage-evs-are-more-reliable-than-combustion-cars-with-one-big-caveat/",
+        source: "CarScoops",
+        date: "2026-09-29",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "What an MOT doesn’t do is test things like an EV’s remaining battery capacity or recharging health.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/2023-MG-ZS-EV-copy-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1741",
+        title: "RADwood NorCal、2000〜2010年製車両の展示枠を新設",
+        desc: "RADwood NorCalは10月24日にカリフォルニア州アラメダで開催され、入場料が無料となる。従来の80〜90年代中心から脱却し、2000年から2010年にかけて製造された車両を対象とする新クラス「Millenia」を設けたことで、対象車種が大幅に拡大した。",
+        url: "https://www.carscoops.com/2026/09/radwood-is-going-y2k-and-making-its-norcal-show-free/",
+        source: "CarScoops",
+        date: "2026-09-29",
+        tags: [],
+    
+        sourceExcerpt: "RADwood NorCal takes place on October 24 in Alameda, California.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/2007-audi-r8-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1742",
+        title: "現代車のAピラーが厚みを増し、安全性上のリスクとなりつつある理由",
+        desc: "現代車のAピラーが厚くなった理由と、それがもたらす安全上のリスク\\n\\nKiran Menon氏（2026年9月28日）\\n\\n「外側の視界が悪い」と不満を述べているドライバーの多くにとって、Aピラーはその原因の一つとなっている可能性があります。",
+        url: "https://www.jalopnik.com/2270908/car-windshield-a-pillars-thick-visibility-problems/",
+        source: "Jalopnik",
+        date: "2026-09-29",
+        tags: ["安全"],
+    
+        sourceExcerpt: "As you may have guessed already, a major reason for their increased thickness has to do with occupant safety during a rollover.",
+        interiorScore: 35,
+        interiorReason: "The article directly addresses A-pillar design constraints (structural strength,",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/why-windshield-pillars-on-modern-cars-got-so-thick-theyre-now-a-genuine-safety-risk/l-intro-1790613236.jpg",
+        note: ""
+    },
+    {
+        id: "us1743",
+        title: "Ford Mustang Dark Horse SC、795馬力でGT500の座を継承",
+        desc: "2026年型Ford Mustang Dark Horse SCは、Eaton製スーパーチャージャー搭載の5.2リッターV8で795馬力を発揮し、Shelby GT500の後継として登場した。",
+        url: "https://www.caranddriver.com/reviews/a73923238/2026-ford-mustang-dark-horse-sc-drive/",
+        source: "Car and Driver",
+        date: "2026-09-29",
+        tags: ["AR"],
+    
+        relatedUrls: ["https://www.caranddriver.com/photos/a73886684/2026-ford-mustang-dark-horse-sc-drive-gallery/"],
+        sourceExcerpt: "The people in Chevrolet’s Corvette group have learned this lesson well, and",
+        sourceExcerptEnd: "pinnacle of the Mustang roadgoing stable that is the GTD.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/d2db992c-7ad2-419e-9746-1d44757b8e1d.jpg",
+        note: ""
+    },
+    {
+        id: "us1744",
+        title: "カワサキVulcan S、ミドルクルーザーの課題を解決",
+        desc: "筆者は、低シートと前足置きがもたらす快適性の狭い幅に対し、Vulcan Sがライダーの体格に合わせた設計で対応していると評価。中間クラス特有の扱いやすさと実用性を両立する姿勢を指摘している。",
+        url: "https://www.topspeed.com/japanese-cruiser-quietly-does-almost-everything-right/",
+        source: "Top Speed",
+        date: "2026-09-29",
+        tags: ["シート"],
+    
+        sourceExcerpt: "A low seat, forward-placed foot controls, swept-back handlebars, and a long, stretched look are all part of the appeal.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/04/rider-and-passenger-on-2026-kawasaki-vulcan-s-cruising-through-town.jpg",
+        note: ""
+    },
+    {
+        id: "us1745",
+        title: "フォード・タウラスSHO、現代スポーツセダンの先駆け",
+        desc: "1986年登場のフォード・タウラスは、3年で100万台を販売し、FFファミリーカーに性能を求める土壌を作った。筆者は、この車種が当時のドイツ製スポーツセダンと競合する真の性能マシンへと進化させた点を評価している。",
+        url: "https://www.topspeed.com/forgotten-performance-car-predicted-todays-sports-sedans/",
+        source: "Top Speed",
+        date: "2026-09-29",
+        tags: [],
+    
+        sourceExcerpt: "If you hadn’t guessed it yet, the vehicle in question is none other than the 1989 Ford Taurus SHO (Super High Output).",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/05/img_2025-05-06-202630008.jpeg",
+        note: ""
+    },
+    {
+        id: "us1746",
+        title: "レクサスRX4世代、静粛性と快適装備で新車より賢い選択か",
+        desc: "2016〜2022年製のレクサスRXは、 quilted leatherのシートや静寂性の高い内装が特徴。2020年以降のモデルでは大型タッチスクリーンとApple CarPlayを標準装備し、快適性と信頼性を重視する購入者に適している。",
+        url: "https://www.topspeed.com/older-lexus-smarter-purchase-than-new-luxury-suv/",
+        source: "Top Speed",
+        date: "2026-09-29",
+        tags: ["HMI", "AR", "ディスプレイ", "シート"],
+    
+        sourceExcerpt: "What matters most to the average luxury buyer isn't lap-time numbers or",
+        sourceExcerptEnd: "and whether the infotainment system is intuitive rather than frustrating.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/08/2021-lexus-rx-headlight.jpg",
+        note: ""
+    },
+    {
+        id: "eu1700",
+        title: "Cupra Formentor VZ5、スコットランドの1800マイルを巡る",
+        desc: "筆者はClassic & Sports Car誌からの依頼で、グラスゴーからインバネスにかけて約1800マイルに及ぶスコットランドのドライブに出かけた。この長距離走行ではCupra Formentor VZ5を使用し、同車の性能を実際に確かめる機会となった。",
+        url: "https://www.autocar.co.uk/car-news/features/fife-cylinder-frenzy-epic-scottish-road-trip-cupras-five-pot-formentor",
+        source: "AUTOCAR UK",
+        date: "2026-09-29",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The Cupra Formentor VZ5, obviously.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/img_7025.jpg?itok=9b3lQN1F",
+        note: ""
+    },
+    {
+        id: "eu1701",
+        title: "ウェールズの寒夜で観るラリーカーの迫力",
+        desc: "筆者はウェールズ山岳の寒夜にトレッキングし、ラリーカーが全力で走る姿を間近で見守った。F1配信よりこの体験の方が価値があると評価している。",
+        url: "https://www.autocar.co.uk/opinion/motorsport/colder-better-forget-streaming-f1-go-and-watch-rally",
+        source: "AUTOCAR UK",
+        date: "2026-09-29",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/roger-albert-clark-rally-rac-sweetlamb-2025-jh-26.jpg?itok=aIMUiONF",
+        note: ""
+    },
+    {
+        id: "eu1702",
+        title: "テスラロードスター、天候悪化で10月15日に延期",
+        desc: "テスラはテキサス州での屋外イベントを予定していたが、悪天候により10月15日へ延期した。2代目モデルは0-60mph加速1.9秒や620マイル航続距離を掲げ、SpaceX製のロケット推進機も特徴とする。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/tesla-roadster-debut-delayed-%E2%80%93-again-%E2%80%93-due-bad-weather",
+        source: "AUTOCAR UK",
+        date: "2026-09-29",
+        tags: [],
+    
+        sourceExcerpt: "The second-generation Roadster, the follow-up to Tesla's first car, was originally planned",
+        sourceExcerptEnd: "its 2017 debut and which would still outclass most today.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/tesla-roadster-jets-web.jpg?itok=wsxXwxmF",
+        note: ""
+    },
+    {
+        id: "eu1703",
+        title: "ベントレー コンチネンタルGT、内装の質感と維持費を天秤にかける",
+        desc: "2011〜2018年型のコンチネンタルGTは、初期W12が約2万ポンド台から購入できる。内装はダイヤモンドキルティングレザーやMulliner仕様など高級感あふれる作りだが、筆者は維持費の高さと古いインフォテインメントの遅さを指摘し、状態の良い個体を選ぶ重要性を強調している。",
+        url: "https://www.autocar.co.uk/car-news/used-cars/used-bentley-continental-scary-bargain-so-get-good-one",
+        source: "AUTOCAR UK",
+        date: "2026-09-29",
+        tags: ["コネクテッド", "新素材"],
+    
+        sourceExcerpt: "Autocar's testers found the new touchscreen infotainment unit wanting, but compared with today's systems anything from that era will now seem slow and dated.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/continental_gt_speed_2014_678_0.jpg?itok=3wbnZ2mJ",
+        note: ""
+    },
+    {
+        id: "eu1704",
+        title: "Vauxhall Astra Sports Tourer、月£206.54からリース可能",
+        desc: "Vauxhall Astra Sports TourerはPink Car Lease経由で2年契約が月£206.54から利用可能である。UltimateグレードにはマトリクスLEDヘッドライトやパノラミックガラスルーフ、快適性重視のシートが備わり、トランク容量は約597Lに達する。",
+        url: "https://www.autoexpress.co.uk/vauxhall/astra/370542/car-deal-day-vauxhall-astra-sports-tourer-loads-better-just-ps206-month",
+        source: "Auto Express",
+        date: "2026-09-29",
+        tags: ["HMI", "AR", "シート"],
+    
+        sourceExcerpt: "Better still, this deal gets you the top-spec Ultimate spec, which com",
+        sourceExcerptEnd: "panoramic glass roof and super-comfortable supportive seats.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--_ijR_aJw--/t_rss_image_w_845/v1790688220/autoexpress/2026/09/Vauxhall%20Astra%20Sports%20Tourer%20-%20front%203_4_mc1rrn.jpg",
+        note: ""
+    },
+    {
+        id: "eu1705",
+        title: "ホンダ プレリュード限定版、クリスタルガーネットメタリックと赤内装で欧州投入",
+        desc: "ホンダはプレリュードの2027年型限定版を発表した。内装ではステアリングやコンソールに赤いステッチを施し、シートには深い赤色の素材を採用している。また、ダッシュボードには赤い刺繍でモデル名が配され、専用カラーのクリスタルガーネットメタリックと組み合わされている。",
+        url: "https://www.autoexpress.co.uk/honda/prelude/370538/honda-prelude-limited-edition-was-big-japan-and-now-its-here",
+        source: "Auto Express",
+        date: "2026-09-29",
+        tags: ["シート", "コックピット", "センターコンソール", "新素材"],
+    
+        sourceExcerpt: "The interior receives red stitching on the steering wheel, centre console and",
+        sourceExcerptEnd: "a new deeper red upholstery on the doors and seats.",
+        interiorScore: 59,
+        interiorReason: "Article details specific interior trim changes for a limited edition (red stitch",
+        imageInterior: false,
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--Vzf9I5D---/t_rss_image_w_845/v1790671085/autoexpress/2026/09/New%20Honda%20Prelude%20Limited%20Edition%202026%20001.jpg",
+        note: ""
+    },
+    {
+        id: "eu1706",
+        title: "Cupra RavalとRenault 5、電動スーパーミニの比較",
+        desc: "VWグループの新プラットフォームMEB Entry採用のCupra Raval V1（207bhp）が、レトロデザインを特徴とするRenault 5と比較された。Ravalは52kWhバッテリー搭載で公称航続距離276マイル、価格は英国政府補助金込みで£29,995からとなる。",
+        url: "https://www.autoexpress.co.uk/car-group-tests/370536/cupra-raval-vs-renault-5-classy-electric-superminis-go-head-head",
+        source: "Auto Express",
+        date: "2026-09-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The Renault 5 E-Tech (to give it its full name) starts at",
+        sourceExcerptEnd: "smaller Urban Range battery coming in at £21,495 (with ECG).",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--zDLRX7fa--/t_rss_image_w_845/v1790600938/autoexpress/2026/09/Cupra%20Raval%20vs%20Renault%205-6.jpg",
+        note: ""
+    },
+    {
+        id: "cn1724",
+        title: "BYD FCB Ti 9が中国で登録開始、30インチパノラマディスプレイ搭載",
+        desc: "BYD Fang Cheng Baoは旗艦SUV「Ti 9」の顧客登録を開始し、生産車が中国各地のショールームに届き始めた。車内は2+2+2の6席構成で、フロント30インチのパノラマディスプレイと後部座席用天井設置21.4インチスクリーンを備える。",
+        url: "https://carnewschina.com/2026/09/29/byd-fcb-ti9-arrives-at-showrooms-across-china-as-customer-registration-opens/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: ["ディスプレイ", "シート", "バッテリー"],
+    
+        sourceExcerpt: "Automotive hauliers began transporting the six-seat plug-in hybrid to FCB direct-sales showrooms across China on September 28.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/005heursgy1ihj25t4k1xj33b04eohdv-large-large-1363x900.jpg",
+        note: ""
+    },
+    {
+        id: "cn1725",
+        title: "現代自動車のIoniq Vが中国で発売開始、27インチの大型デュアルスクリーンを搭載",
+        desc: "現代自動車は9月29日、中国市場で新型EVセダン「Ioniq V」を10万9,900元から発売した。内装ではSnapdragon 8295チップ搭載の27インチデュアルスクリーンとヘッドアップディスプレイが採用され、センターコンソールにはワイヤレス充電パッドや15リットルの収納スペースを備えている。",
+        url: "https://carnewschina.com/2026/09/29/hyundai-ioniq-v-launched-at-16380-usd-in-china-ahead-of-global-rollout/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: ["HUD", "ディスプレイ", "センターコンソール", "EV"],
+    
+        sourceExcerpt: "The car’s cabin boasts a large 27-inch dual-screen setup and a head-up display.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/hyundai_ioniq_v_launch_webhook_1500x900_q85_1790677502.jpg",
+        note: ""
+    },
+    {
+        id: "cn1726",
+        title: "Geelyが中国の5都市で総出力2,250kW超の急速充電ステーションを構築",
+        desc: "Geelyは杭州を含む中国の5都市で「Smart Charging C12」を導入した。ピーク出力2,250 kWのDC充電に対応し、Zeekr 001やLynk & Co 10は10%から97%まで8分40秒で充電できるという。AIによる温度予測アルゴリズムが電池寿命を20%以上延ばすとしている。",
+        url: "https://carnewschina.com/2026/09/29/geely-has-deployed-2250-kwh-charging-stations-in-five-cities-across-china/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: ["AR", "AI", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Geely reported that its AI-powered temperature-rise prediction algorit",
+        sourceExcerptEnd: "0 seconds in advance, dynamically allocating charging power.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/geely_charging_station_webhook_1500x900_q85_1790673121.jpg",
+        note: ""
+    },
+    {
+        id: "cn1727",
+        title: "長安汽車は、アバターとディーパルのバックエンド統合によりコスト削減を目指す",
+        desc: "長安汽車は「AD Collaborative Development Department」を新設し、AvatrとDeepalの研究開発およびサプライチェーンなどの中後方業務を統合しました。ブランド戦略やユーザー権益は維持しつつ、20〜30%のコスト削減を目指しています。",
+        url: "https://carnewschina.com/2026/09/29/changan-auto-consolidates-avatr-and-deepal-to-streamline-operations-report-says/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Changan Auto has officially launched the “AD Collaborative Development Department” to integrate",
+        sourceExcerptEnd: "two major new energy vehicle (NEV) brands, Avatr and Deepal.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/e59bbee78987-184-e1790671195982.png",
+        note: ""
+    },
+    {
+        id: "cn1728",
+        title: "BYD王朝シリーズ1000万台下線、フラッグシップ大漢が達成",
+        desc: "BYD王朝シリーズが累計1000万台の生産を達成し、記念車として旗艦セダン「大漢」がラインオフした。全長5256mm・ホイールベース3130mmの大漢は、DiSus-Aエアサスペンションと後輪ステアリングにより最小回転半径4.95mを実現している。",
+        url: "https://carnewschina.com/2026/09/29/the-10-millionth-byd-dynasty-car-rolled-off-the-production-line-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Another benefit of this car is rear-wheel steering, bringing the turning radius to just 4.95 meters.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/007qtmdagy1ihkfkigf4ej30zk1bf7wa.jpg",
+        note: ""
+    },
+    {
+        id: "cn1729",
+        title: "GACがFAWトヨタの株式50%を取得し、事業統合へ",
+        desc: "広州汽車（GAC）はFAWトヨタの50%株式取得を計画している。両社はモデルライン整理や研究開発・サプライチェーン効率化を図る方針だ。2026年1〜8月の販売台数はGACトヨタが44万6,591台、FAWトヨタが37万8,872台と減少しており、ガソリン車市場縮小を背景に統合を進める。",
+        url: "https://carnewschina.com/2026/09/29/gac-to-replace-faw-in-the-faw-toyota-joint-venture-to-streamline-operations/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: [],
+    
+        sourceExcerpt: "The Guangzhou-based automaker GAC announced plans to acquire a 50% equity stake in the FAW Toyota joint venture, replacing FAW.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2025/12/e58ebbe999a4e59bbee78987e58f8de58589.png",
+        note: ""
+    },
+    {
+        id: "cn1730",
+        title: "北京現代、中国向けIoniq 5に27インチ4KディスプレイとAI音声機能を搭載",
+        desc: "北京現代が中国市場向けにIoniq Vを発売し、9万9,900元（約1万4,820米ドル）から販売を開始した。内装には27インチの4KディスプレイとSnapdragon 8295Pチップを搭載し、BaiduやByteDanceのAIモデルによる4ゾーン独立音声コントロールに対応する。",
+        url: "https://cnevpost.com/2026/09/29/hyundai-launches-china-tailored-ioniq-v/",
+        source: "CnEVPost - All",
+        date: "2026-09-29",
+        tags: ["ディスプレイ", "AI"],
+    
+        sourceExcerpt: "The cabin has a 27-inch 4K screen and a Qualcomm Snapdragon 8295P chip, with a head-up display also available.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092910471091.jpg",
+        note: ""
+    },
+    {
+        id: "cn1731",
+        title: "Link&Co、LiDAR標準搭載の新型コンパクトSUV「20」を発表",
+        desc: "リンクアンドコは新型コンパクトEV『20』を投入し、全グレードでLiDARと800Vプラットフォームを標準化した。内装にはデジタルメーター、浮遊式センターディスプレイ、AI音声アシスタント「Super Eva」が備わる。",
+        url: "https://cnevpost.com/2026/09/29/lynk-co-launches-20-compact-electric-suv/",
+        source: "CnEVPost - All",
+        date: "2026-09-29",
+        tags: ["AR", "ディスプレイ", "AI", "EV"],
+    
+        sourceExcerpt: "The cabin features a digital dashboard, a floating central touchscreen and the \"Super Eva\" AI voice assistant.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/09/2026092903365477.jpg",
+        note: ""
+    },
+    {
+        id: "in1780",
+        title: "スズキ、フロントレーダー不要な低価格ADASをインド向けに開発中",
+        desc: "スズキは高解像度カメラとAIチップで前部レーダーを不要とする低コストADASを開発中だ。自動緊急ブレーキや車線逸脱防止機能を廉価車に標準化し、インドの交通事情に合わせた「ジャストライトADAS」を目指す。搭載モデルや時期は未定だが、開発目標段階の情報として提示されている。",
+        url: "https://www.autocarindia.com/car-news/suzuki-developing-lower-cost-adas-that-could-reach-affordable-cars-440878",
+        source: "Autocar India - All",
+        date: "2026-09-29",
+        tags: ["AI", "安全"],
+    
+        sourceExcerpt: "To reduce the cost of the system, Suzuki plans to use high-resolution cameras and AI chips while integrating driver and occupant monitoring with ADAS.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260929_124250_a3f5c079.jpg",
+        note: ""
+    },
+    {
+        id: "in1781",
+        title: "Tata AerisとMaruti DzireのCNG上位グレードを比較",
+        desc: "TataはTigorのフェイスリフト版Aerisを投入し、機械系を維持しつつ装備を追加した。Dzireとの比較では、両車ともCNGパワートレインを搭載する上位グレードが同価格帯で競合しており、セダン市場での選択肢として位置づけられている。",
+        url: "https://www.autocarindia.com/auto-features/tata-aeris-vs-maruti-dzire-top-spec-cng-trims-compared-441118",
+        source: "Autocar India - All",
+        date: "2026-09-29",
+        tags: ["AR"],
+    
+        sourceExcerpt: "Tata Aeris vs Maruti Dzire: Dimensions and other specifications",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260928_135947_73e780fc.jpg",
+        note: ""
+    },
+    {
+        id: "in1782",
+        title: "Ultraviolette Shockwave、100Vアーキテクチャ採用で2027年Q1発売へ",
+        desc: "Ultravioletteは電動エンデューロShockwaveの発売を2027年第1四半期に延期し、新開発の100Vアーキテクチャへ移行すると発表した。同車は軽量設計とシングル・デュアルシート構成が特徴で、当初発表時の仕様は参考値として扱われる。",
+        url: "https://www.rushlane.com/ultraviolette-shockwave-launch-delayed-to-q1-2027-12557032.html",
+        source: "RushLane",
+        date: "2026-09-29",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "The company has also confirmed that the motorcycle will be offered in both single- and dual-seat configurations.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2025/03/ultraviolette-shockwave-electric-enduro-bike-launch-specs-features.jpg",
+        note: ""
+    },
+    {
+        id: "in1783",
+        title: "マルチ・スズキ、2026年末公開の次期EVは2番目のモデルでMPV",
+        desc: "マルチ・スズキは2026年末に電気MPVを公開し、2027年第1四半期に発売する予定である。同社はタタ・モーターズやマヒンドラのような広範なEVポートフォリオ構築は当面見送るが、第2弾となる電気自動車の開発を開始している。",
+        url: "https://gaadiwaadi.com/maruti-suzukis-next-big-launch-likely-to-be-an-electric-mpv/",
+        source: "GaadiWaadi",
+        date: "2026-09-29",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/06/New-Maruti-MPV-Rendering-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1784",
+        title: "マールティFronx、ルノーBridgerなど5車種のハイブリッド化計画",
+        desc: "インド市場では排ガス規制対応として、4m未満のコンパクトSUVに強力ハイブリッドが導入される。マールティは1.2Lエンジンとモーターを組み合わせ35km/l超を狙い、ルノーBridgerも同様の構成で30km/l以上を目指す計画だ。",
+        url: "https://www.indiacarnews.com/news/5-upcoming-compact-suvs-with-hybrid-engine-renault-bridger-to-maruti-fronx-69093/",
+        source: "IndiaCarNews",
+        date: "2026-09-29",
+        tags: [],
+    
+        sourceExcerpt: "Renault will introduce the production version of the Bridger compact SUV with Internal Combustion Engine in 2027.",
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/03/Renault-Bridger-India-Launch.webp",
+        note: ""
+    },
+    {
+        id: "in1785",
+        title: "ルノー・トライブー ターボ、78.4万ルピーから発売",
+        desc: "Renault IndiaはTriber TurboのEvolution、Techno、Emotionグレードを発表し、価格はそれぞれ78.4万ルピー、85.3万ルピー、89.9万ルピー（展示場価格）に設定された。内装には7インチデジタルメータークラスターと8インチタッチスクリーンインフォテインメントシステムが採用され、ワイヤレスAndroid Auto/Apple CarPlayや後席独立空調を備える。",
+        url: "https://www.indiacarnews.com/news/rs-7-84-lakh-7-seater-family-car-offers-21kmpl-mileage-69090/",
+        source: "IndiaCarNews",
+        date: "2026-09-29",
+        tags: ["AR", "ディスプレイ", "コネクテッド", "EV"],
+    
+        sourceExcerpt: "In terms of features, the Renault Triber Turbo offers a 7-inch digital",
+        sourceExcerptEnd: "the rear, automatic headlamps and wipers, cruise control, and more.",
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Renault-Triber-Turbo-Prices.webp",
+        note: ""
+    },
+    {
+        id: "in1786",
+        title: "Renault Triber Turbo、新RGEPプラットフォームとモジュールシート採用",
+        desc: "Renaultはインド市場向けにTriberのターボモデルを投入した。新開発のRGEPプラットフォームを搭載し、1.0L 3気筒ターボエンジンで100PS・180Nmを発揮する。内装では5〜7席対応のEasy Fixシートや625リットルのラゲッジスペースなど、既存モデルと同様のレイアウトを維持している。",
+        url: "https://www.carblogindia.com/renault-triber-turbo-driven-review-specs-price-features/",
+        source: "Car Blog India",
+        date: "2026-09-29",
+        tags: ["シート"],
+    
+        sourceExcerpt: "The Renault Triber Turbo continues to carry the same interior layout as the naturally aspirated model.",
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/09/new-renault-triber-turbo-drive-review.jpg",
+        note: ""
+    },
+    {
+        id: "in1787",
+        title: "MG Hector Tomahawk EV、15.6インチディスプレイ搭載で初納車開始",
+        desc: "JSW MG Motor IndiaはサーラットでHector Tomahawk EVを1日に50台納車した。内装には15.6インチタッチスクリーンや通気性フロントシートが備わり、価格はExcite 7人乗りが194.98万ルピーからとなる。",
+        url: "https://www.autopunditz.com/post/mg-hector-tomahawk-ev-50-deliveries-surat",
+        source: "Auto Punditz",
+        date: "2026-09-29",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "Available equipment includes a 15.6-inch touchscreen, an 8.8-inch digi",
+        sourceExcerptEnd: " a panoramic sunroof and a 10-speaker Infinity audio system.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_da9da78f752f432c8991241905110914~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1788",
+        title: "Ultraviolette Shockwave、新100Vアーキテクチャ採用で2027年Q1発売へ",
+        desc: "Ultravioletteは電動バイクShockwaveに新開発の100Vアーキテクチャを採用し、2027年第1四半期に発売すると発表した。単座と二重座席の構成が確認され、既存施設での生産ライン準備が進められている。",
+        url: "https://www.autopunditz.com/post/ultraviolette-shockwave-100v-launch-q1-2027",
+        source: "Auto Punditz",
+        date: "2026-09-29",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "The company has also confirmed single-seat and dual-seat configuration",
+        sourceExcerptEnd: "on line are underway at its existing manufacturing facility.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_27392282a12146fba6874b6a03d80bef~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1707",
+        title: "米市場で注文開始、2027年型メルセデス・ベンツG 580 Electric",
+        desc: "米国では2027年型G 580 Electricの注文受付が始まり、価格は16万5,200ドルからとなった。充電ポートはCCS1からNACSとJ1772へ変更され、DC急速充電の所要時間は32分から29分に短縮された。",
+        url: "https://www.electrive.com/2026/09/29/us-order-books-open-for-2027-mercedes-benz-g-580-electric/",
+        source: "Electrive",
+        date: "2026-09-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Inside EVs reports that Mercedes has replaced the previous CCS1 inlet with",
+        sourceExcerptEnd: "charging and a J1772 port for Level 2 AC charging.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2024/10/mercedes-g-class-g580-e1729171159108-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1708",
+        title: "新たな燃費規制により、米国のEV普及が鈍化",
+        desc: "米運輸省は、2031年までに車種横断平均でガロン当たり34.9マイル（リットルあたり約14.7km）という大幅に引き下げられた燃費基準を策定した。これはバイデン政権下での50.4マイル（同約21.4km）から大きく後退する数値である。",
+        url: "https://www.electrive.com/2026/09/29/new-fuel-consumption-regulation-sees-us-ev-adoption-slow/",
+        source: "Electrive",
+        date: "2026-09-29",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/09/dodge-charger-sixpack-powered-scat-pack-modelljahr-2027-mit-auspuff-und-qualm-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1709",
+        title: "Smart #2、35.8kWh電池と高強度鋼78%超の安全設計を強化",
+        desc: "全長3m未満の2シーターEV「smart #2」はパリモーターショーで正式発表される。CATL製35.8kWhバッテリーとWLTP約300km航続距離を備え、高張力鋼78%以上とTridion Cell Evo構造で安全性を高めている。",
+        url: "https://electriccarsreport.com/2026/09/smart-2-returns-with-a-new-electric-platform-and-advanced-safety-technology/",
+        source: "Electric Cars Report",
+        date: "2026-09-29",
+        tags: ["AR", "EV", "バッテリー", "安全"],
+    
+        sourceExcerpt: "The platform uses a 35.8-kWh CATL battery, with the smart #2 targeting approximately 300 km of WLTP range.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Smart-2-tech.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "cn1732",
+        title: "BYD Fangchengbao Ti9、30インチディスプレイとゼロGシート採用",
+        desc: "BYDのFangchengbaoブランドは、2026年第4四半期発売予定の大型SUV「Ti9」の内装情報を公開した。コックピットには30インチのパノラマディスプレイとARヘッドアップディスプレイを備え、センターコンソール周りを開放するコラムシフトを採用している。",
+        url: "https://chinaevhome.com/2026/09/29/byds-fangchengbao-reveals-ti9-design-details-ahead-of-q4-2026-launch/",
+        source: "ChinaEVHome",
+        date: "2026-09-29",
+        tags: ["HUD", "AR", "ディスプレイ", "シート", "コックピット", "センターコンソール"],
+    
+        sourceExcerpt: "BYD’s Fangchengbao unveiled the Ti9 flagship six-seat plug-in hybrid SUV with rugged styling and family-focused interior ahead of a planned Q4 2026 launch.",
+        interiorScore: 82,
+        interiorReason: "Detailed flagship interior reveal including specific HMI (30-inch panoramic disp",
+        imageInterior: false,
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/09/image-581.png?resize=640%2C469&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn1733",
+        title: "2027年ワールドカーアワード、中国勢27車種が56台の候補に選出",
+        desc: "World Car Awards 2027の初回候補56台のうち、BYDやXPengなど9ブランドの中国車が27台を占める。対象は年産1万台以上かつ2大陸で販売されているモデルで、SUVからセダンまで多様な車種がBMW i3やHyundai Ioniq 3と競い合う。",
+        url: "https://chinaevhome.com/2026/09/29/2027-world-car-awards-list-27-chinese-models-among-first-56-candidates/",
+        source: "ChinaEVHome",
+        date: "2026-09-29",
+        tags: ["AR", "AI", "バッテリー"],
+    
+        sourceExcerpt: "Chinese candidates in the main World Car of the Year category include",
+        sourceExcerptEnd: "XPeng G6 2026, XPeng L03, XPeng P7+ and Zeekr 8X.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/09/image-561.png?resize=640%2C608&ssl=1",
+        note: ""
+    },
+    {
+        id: "in1789",
+        title: "シトロエンAircross X、最大15.5万ルピーの優遇措置",
+        desc: "シトロエン・インドは9月30日までにAircross Xで最大15.5万ルピーの優遇措置を実施する。内装では通気性付きレザー調シートや10.25インチインフォテインメントシステムを備え、価格は88.9万〜147.1万ルピー（税別）となっている。",
+        url: "https://motoroctane.com/news/324454-rs-9-lakh-suv-gets-cheaper-by-rs-1-55-lakh",
+        source: "MotorOctane",
+        date: "2026-09-29",
+        tags: ["コネクテッド", "AI", "シート", "新素材"],
+    
+        sourceExcerpt: "Features include a 10.25-inch infotainment system, a 7-inch instrument cluster, leatherette seats",
+        sourceExcerptEnd: "footwell lights, six airbags, a 360-degree camera, TPMS, and more.",
+        country: "in",
+        img: "https://motoroctane.com/wp-content/uploads/2026/09/Citroen-Aircross-X-Discount-Car-Discount-September.png",
         note: ""
     },
 ];
