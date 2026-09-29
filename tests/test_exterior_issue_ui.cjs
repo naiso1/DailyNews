@@ -16,6 +16,13 @@ const receipt = {edition_id: 'exterior', status: 'published', processed_through:
   source_dates: ['2026-09-09', '2026-09-15'], selected_count: 2, supplemental_count: 1,
   selected_news_ids: ['jp2', 'cn3']};
 assert(context.normalizeExteriorPublication(receipt));
+const paperReceipt = {...receipt, papers_enabled: true, paper_lookback_start: '2026-08-17', maximum_papers: 5,
+  selected_paper_count: 1, selected_news_ids: ['jp2', 'paper3'], source_dates: ['2026-08-20', '2026-09-15'], supplemental_count: 0};
+assert(context.normalizeExteriorPublication(paperReceipt));
+for (const change of [{papers_enabled: false}, {selected_paper_count: 0}, {maximum_papers: 0},
+                      {paper_lookback_start: '2026-08-16'}, {source_dates: ['2026-08-16']}]) {
+  assert.equal(context.normalizeExteriorPublication({...paperReceipt, ...change}), null);
+}
 for (const change of [{selected_news_ids: ['jp2', 'jp2']}, {lookback_start: '2026-09-08'},
                       {source_dates: ['2026-09-16']}, {supplemental_count: 3}]) {
   assert.equal(context.normalizeExteriorPublication({...receipt, ...change}), null);

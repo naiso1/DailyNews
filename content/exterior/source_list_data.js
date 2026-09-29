@@ -471,5 +471,20 @@ window.DAILYNEWS_CONFIGURED_SOURCES = [
     "country": "インド",
     "name": "Evo India",
     "rssUrl": "https://www.evoindia.com/feed"
+  },
+  {
+    "country": "論文",
+    "name": "IJAE / 自動車技術会",
+    "rssUrl": "https://www.jstage.jst.go.jp/AF05S010NewRssDld?btnaction=JT0041&sryCd=jsaeijae&rssLang=en"
+  },
+  {
+    "country": "論文",
+    "name": "Mechanical Engineering Journal / 日本機械学会",
+    "rssUrl": "https://www.jstage.jst.go.jp/AF05S010NewRssDld?btnaction=JT0041&sryCd=mej&rssLang=en"
+  },
+  {
+    "country": "論文",
+    "name": "成形加工 / プラスチック成形加工学会",
+    "rssUrl": "https://www.jstage.jst.go.jp/AF05S010NewRssDld?btnaction=JT0041&sryCd=seikeikakou&rssLang=en"
   }
 ];

@@ -781,7 +781,7 @@ def validate_exterior_sheet_receipt(sheet_path: Path, target_dates, rows):
         raise ValueError("Exterior sheet does not match its completed collection receipt")
     if not receipt.get("issue_date"):
         return None
-    countries = {"日本": "jp", "米国": "us", "欧州": "eu", "中国": "cn", "インド": "in"}
+    countries = {"日本": "jp", "米国": "us", "欧州": "eu", "中国": "cn", "インド": "in", "論文": "paper", "papers": "paper"}
     items = [{"date": (row.get("日付") or "").strip(), "url": (row.get("URL") or "").strip(),
               "country": countries.get((row.get("国") or "").strip(), (row.get("国") or "").strip())}
              for row in rows]

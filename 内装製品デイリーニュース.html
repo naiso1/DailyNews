@@ -1597,13 +1597,21 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 || (payload.status === "no_matching_news") !== (payload.selected_count === 0)) return null;
             if (payload.issue_date) {
                 const days = (Date.parse(payload.issue_date) - Date.parse(payload.lookback_start)) / 86400000;
+                const papers = payload.papers_enabled === true;
+                const paperDays = papers ? (Date.parse(payload.issue_date) - Date.parse(payload.paper_lookback_start)) / 86400000 : 0;
+                if (papers && (!validDate(payload.paper_lookback_start) || paperDays < 0 || paperDays > 29
+                    || !Number.isSafeInteger(payload.maximum_papers) || payload.maximum_papers < 1 || payload.maximum_papers > 10
+                    || !Number.isSafeInteger(payload.selected_paper_count) || payload.selected_paper_count < 0
+                    || payload.selected_paper_count > payload.maximum_papers)) return null;
+                const earliest = papers ? payload.paper_lookback_start : payload.lookback_start;
                 if (payload.issue_date !== payload.processed_through || !validDate(payload.lookback_start)
                     || days < 0 || days > 6 || !Array.isArray(payload.source_dates)
-                    || !payload.source_dates.every(value => validDate(value) && value >= payload.lookback_start && value <= payload.issue_date)
+                    || !payload.source_dates.every(value => validDate(value) && value >= earliest && value <= payload.issue_date)
                     || !Array.isArray(payload.selected_news_ids)
                     || payload.selected_news_ids.length !== payload.selected_count
                     || new Set(payload.selected_news_ids).size !== payload.selected_count
-                    || !payload.selected_news_ids.every(value => typeof value === "string" && /^(jp|us|eu|cn|in)\d+$/.test(value))
+                    || !payload.selected_news_ids.every(value => typeof value === "string" && (papers ? /^(jp|us|eu|cn|in|paper)\d+$/ : /^(jp|us|eu|cn|in)\d+$/).test(value))
+                    || (papers && payload.selected_news_ids.filter(value => /^paper\d+$/.test(value)).length !== payload.selected_paper_count)
                     || !Number.isSafeInteger(payload.supplemental_count) || payload.supplemental_count < 0
                     || payload.supplemental_count > payload.selected_count) return null;
             }
@@ -3465,8 +3473,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 const displayImg = getDisplayImageUrl(resolvedImage);
                 card.innerHTML = `
             <div class="thumb">
-                <img src="${displayImg}" alt="${n.title}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback">
-                <div class="fallback-overlay">イメージ画像</div>
+                ${n.country === 'paper' && n.summaryBasis && !n.img
+                    ? '<div style="height:100%;display:grid;place-items:center;color:var(--muted);font-weight:700">論文（画像なし）</div>'
+                    : `<img src="${displayImg}" alt="${n.title}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
                 ${isNew ? '<span class="new-badge">New</span>' : ''}
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="relevance-badge"${relevanceReason}>関連度 ${relevance}%</span>
@@ -3475,6 +3484,8 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             <div class="content">
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
+                ${n.country === 'paper' && n.summaryBasis ? `<p class="paper-source-details" style="font-size:12px;color:var(--muted);line-height:1.6">${escapeHtml(n.summaryBasis)}${n.paperPublicationDate ? `<br>発行日: ${escapeHtml(n.paperPublicationDate)}` : ''}${n.paperOnlineDate ? `<br>オンライン公開日: ${escapeHtml(n.paperOnlineDate)}` : ''}${n.doi ? `<br>DOI: ${escapeHtml(n.doi)}` : ''}</p>` : ''}
+                ${n.developmentLane === 'transfer' && n.developmentApplication ? `<p class="development-application" style="font-size:12px;line-height:1.6"><strong>外装への応用のヒント（仮説）</strong><br>${escapeHtml(n.developmentApplication)}</p>` : ''}
                 ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
                 ${n.summary ? `
                 <div class="summary-wrapper">

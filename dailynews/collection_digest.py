@@ -2,6 +2,7 @@
 from datetime import date, timedelta
 import json
 import re
+from dailynews.exterior_papers import PAPER_FIELDS
 
 
 def collection_window(target_dates, days=7):
@@ -59,7 +60,7 @@ def published_issue(item):
 
 
 def published_row(item):
-    countries = {"jp": "日本", "us": "米国", "eu": "欧州", "cn": "中国", "in": "インド"}
+    countries = {"jp": "日本", "us": "米国", "eu": "欧州", "cn": "中国", "in": "インド", "paper": "論文"}
     return {
         "国": countries.get(item.get("country"), item.get("country", "")),
         "日付": item["date"], "URL": item["url"],
@@ -70,5 +71,8 @@ def published_row(item):
         "内装関連度": item.get("exteriorScore", item.get("interiorScore", item.get("productScore", 0))),
         "内装判定理由": item.get("exteriorReason", item.get("interiorReason", "既公開記事を同じ号に保持")),
         "記事区分": item.get("contentCategory", "product"), "トレンド分類": item.get("trendTopic", ""),
+        "外装関連区分": item.get("developmentLane", ""), "外装技術根拠": item.get("developmentEvidence", ""),
+        "外装応用仮説": item.get("developmentApplication", ""), "外装選定基準": item.get("developmentPolicyVersion", ""),
+        **{column: item.get(field, "") for field, column in PAPER_FIELDS.items()},
         "関連URL": json.dumps(item.get("relatedUrls", []), ensure_ascii=False),
     }

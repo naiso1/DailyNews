@@ -104,10 +104,10 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
 
     def test_exterior_google_search_keeps_all_original_and_trend_queries(self):
         with patch.dict(os.environ, {}, clear=True):
-            self.assertEqual(collector.google_news_keyword_limit(), 15)
+            self.assertEqual(collector.google_news_keyword_limit(), 29)
             for settings in collector.COUNTRY_SETTINGS.values():
                 queries = collector.edition_search_keywords(settings, collector.google_news_keyword_limit())
-                self.assertEqual(len(queries), 15)
+                self.assertEqual(len(queries), 29)
                 self.assertTrue(set(settings["keywords"]).issubset(queries))
                 self.assertTrue(set(settings["trend_keywords"]).issubset(queries))
             collector.configure_edition("interior")
@@ -199,7 +199,7 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         return rows
 
     def test_balanced_selection_and_diagnostic_counts_do_not_backfill(self):
-        for products, trends, expected in ((8, 6, {"product": 6, "trend": 4}), (2, 8, {"product": 2, "trend": 8}), (8, 1, {"product": 8, "trend": 1})):
+        for products, trends, expected in ((8, 6, {"product": 8, "trend": 2}), (2, 8, {"product": 2, "trend": 8}), (8, 1, {"product": 8, "trend": 1})):
             with self.subTest(products=products, trends=trends), tempfile.TemporaryDirectory() as folder:
                 rows = self.rows(products, trends)
                 rows.append({**rows[0], "URL": "https://example.com/rejected", "LLM判定": "非対象", "内装関連度": 99})

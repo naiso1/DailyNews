@@ -31,9 +31,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
+from dailynews import exterior_scope, exterior_papers
 from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text
 from dailynews.collection_digest import collection_window, published_news, published_issue, published_row
-from dailynews.publication_language import SummaryQuarantineError, summary_language_problem
+from dailynews.publication_language import SummaryQuarantineError, summary_language_problem as base_summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
 from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
                                         extract_evidence, exterior_scope_rules)
@@ -98,7 +99,7 @@ OUTPUT_COLUMNS = [
     "\u30b9\u30c6\u30fc\u30bf\u30b9",
 ]
 BASE_OUTPUT_COLUMNS = list(OUTPUT_COLUMNS)
-EXTERIOR_EDITORIAL_COLUMNS = ["記事区分", "トレンド分類"]
+EXTERIOR_EDITORIAL_COLUMNS = ["記事区分", "トレンド分類", "外装関連区分", "外装技術根拠", "外装応用仮説", "外装選定基準", *exterior_papers.PAPER_COLUMNS]
 
 # Request defaults
 HEADERS = {
@@ -575,6 +576,8 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
             # Market and regulation signals are useful in their own editorial lane.
             weak_words = ["stock price", "株価", "celebrity", "芸能", "gaming"]
             if exterior_rules.matching_trend_topics(text):
+                score += 30.0
+            if exterior_scope.theme_hits(text):
                 score += 60.0
         if any(w.lower() in text for w in weak_words):
             score -= 25.0
@@ -587,20 +590,27 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
         grouped.setdefault(item.get("国", ""), []).append(item)
 
     picked = []
-    for _, group in grouped.items():
+    for group_country, group in grouped.items():
         group.sort(key=lambda x: (x.get("_prefilter_score", 0), -x.get("_prefilter_order", 0)), reverse=True)
         if EDITION.id == "exterior":
             # Reserve review capacity for trends; a product keyword count must not
             # crowd out a market report before the semantic LLM review.
             chosen = []
+            review_limit = min(per_country_limit, int(EDITION.config.get("search", {}).get("maximum_paper_candidates", 20))) if exterior_papers.is_paper(group_country) else per_country_limit
             for day in sorted({str(item.get("日付", "")) for item in group}, reverse=True):
                 daily = [item for item in group if str(item.get("日付", "")) == day]
                 required = [item for item in daily if item.get("_previous_target")]
                 trends = [item for item in daily if item not in required and exterior_rules.news_category(item.get("タイトル"), item.get("内容"))[0] == "trend"]
-                trend_slots = min(max(1, per_country_limit // 3), max(0, per_country_limit - len(chosen) - len(required)))
-                ordered = required + trends[:trend_slots]
+                trend_slots = min(max(1, review_limit // 5), max(0, review_limit - len(chosen) - len(required)))
+                # Give every technical family a chance before keyword-rich articles fill the review budget.
+                diverse = []
+                for theme in exterior_scope.THEMES:
+                    candidate = next((item for item in daily if item not in required + diverse + trends and theme in exterior_scope.theme_hits(str(item.get("タイトル", "")) + " " + str(item.get("内容", "")))), None)
+                    if candidate is not None:
+                        diverse.append(candidate)
+                ordered = required + diverse + trends[:trend_slots]
                 ordered.extend(item for item in daily if item not in ordered)
-                chosen.extend(ordered[:max(0, per_country_limit - len(chosen))])
+                chosen.extend(ordered[:max(0, review_limit - len(chosen))])
             picked.extend(chosen)
         else:
             picked.extend(group[:per_country_limit])
@@ -662,11 +672,20 @@ def editorial_feedback():
     return EDITORIAL_FEEDBACK_CACHE[key]
 
 
+def summary_language_problem(country, title, body):
+    return base_summary_language_problem("paper-checked" if EDITION.id == "exterior" and exterior_papers.is_paper(country) else country, title, body)
+
+
 def store_exterior_assessment(item, assessment):
     if EDITION.id == "exterior":
         inferred = exterior_rules.news_category(item.get("タイトル"), item.get("内容"))
         item["記事区分"] = assessment.get("category", inferred[0])
         item["トレンド分類"] = assessment.get("trend_topic", inferred[1])
+        fields = exterior_scope.review_fields(assessment, item["記事区分"])
+        for key, column in (("development_lane", "外装関連区分"), ("source_evidence", "外装技術根拠"), ("application", "外装応用仮説"), ("policy_version", "外装選定基準")):
+            item[column] = fields[key]
+        if fields["development_lane"] == "exclude":
+            item["LLM判定"] = "非対象"
 
 
 def interior_evidence_source(item):
@@ -1321,7 +1340,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
             LLM_ERROR_LOGGED = True
         return "", ""
     content = bounded_llm_source(content)[0]
-    cache_key = (title, content, image_url, mode)
+    cache_key = (EDITION.id, exterior_scope.POLICY_VERSION if EDITION.id == "exterior" else "", title, content, image_url, mode)
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
         if EDITION.id != "exterior" or (isinstance(cached, (tuple, list)) and len(cached) == 2
@@ -1333,21 +1352,21 @@ def call_llm_classify(title, content, image_url="", mode="both"):
         return "", ""
     if mode == "relevance":
         prompt = (
-            f"{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
+            f"{(exterior_scope.SCOPE_TEXT if EDITION.id == 'exterior' else '')}\n{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
             "以下を簡潔にJSONで回答してください。\n"
             "keys=['relevance']\n"
             "relevanceは対象ならtrue/false。理由は不要。"
         )
     elif mode == "photo":
         prompt = (
-            f"{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
+            f"{(exterior_scope.SCOPE_TEXT if EDITION.id == 'exterior' else '')}\n{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
             "以下を簡潔にJSONで回答してください。\n"
             "keys=['has_target_photo']\n"
             f"has_target_photoは「{PHOTO_TARGET_LABEL}」の写真が本文や画像から確認できそうならtrue/false。理由は不要。"
         )
     else:
         prompt = (
-            f"{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
+            f"{(exterior_scope.SCOPE_TEXT if EDITION.id == 'exterior' else '')}\n{PROMPT_TEXT}\n\nタイトル:\n{title}\n\n本文:\n{content}\n\n"
             "以下を簡潔にJSONで回答してください。\n"
             "keys=['relevance','has_target_photo']\n"
             "relevanceは対象ならtrue/false。\n"
@@ -1554,7 +1573,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
     if not USE_LLM:
         return None
     content = bounded_llm_source(content)[0]
-    cache_key = (EDITION.id, "product_assessment", title, content, image_url, url, summary)
+    cache_key = (EDITION.id, exterior_scope.POLICY_VERSION, "product_assessment", title, content, image_url, url, summary)
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
         if EDITION.id != "exterior" or (isinstance(cached, dict) and isinstance(cached.get("score"), int)
@@ -1682,7 +1701,11 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             reason = (reason + "; " + calibration_reason).strip("; ")[:80]
         result = {"score": score, "image_interior": image_interior, "reason": reason}
         if EDITION.id == "exterior":
-            result.update(category=category, trend_topic=trend_topic)
+            if not data.get("development_lane") and category == "product" and exterior_scope.transfer_candidate(f"{title} {content}") and not exterior_rules.AUTOMOTIVE_CONTEXT.search(f"{title} {content}"):
+                data["development_lane"] = "transfer"
+            result.update(category=category, trend_topic=trend_topic, **exterior_scope.review_fields(data, category))
+            if result["development_lane"] == "exclude":
+                result.update(score=min(score, 35), category="", trend_topic="")
         LLM_CACHE[cache_key] = result
         return result
     except Exception as e:
@@ -1953,6 +1976,10 @@ def extract_latin_source_anchors(text, limit=8):
         "january", "february", "march", "april", "may", "june", "july", "august",
         "september", "october", "november", "december",
     }
+    if EDITION.id == "exterior":
+        generic.update({"laser", "steel", "polymer", "joining", "thermal", "coating", "printing",
+                        "cooling", "noise", "vibration", "film", "plating", "paint", "research", "study",
+                        "evaluation", "mechanical", "voltage", "current", "effect", "effects", "development", "additive"})
     tokens = re.findall(r"\b[A-Za-z][A-Za-z0-9.+-]{1,}\b", str(text or ""))
     counts = Counter(token.casefold() for token in tokens)
     originals = {}
@@ -2468,7 +2495,8 @@ def summarize_article(title, content, url, country=""):
         return fallback_title, fallback_body
 
     html_text = ""
-    if isinstance(url, str) and url:
+    is_exterior_paper = EDITION.id == "exterior" and exterior_papers.is_paper(country)
+    if isinstance(url, str) and url and not is_exterior_paper:
         if "gasgoo.com" not in url:
             html_text = fetch_article_text(url)
     # Prompts get a bounded copy; grounding checks below use the full text.
@@ -2515,6 +2543,8 @@ def summarize_article(title, content, url, country=""):
         )
     if EDITION.id == "exterior":
         prompt = prompt.replace("自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。", exterior_rules.SUMMARY_FOCUS)
+    if is_exterior_paper:
+        prompt += "\n論文の要旨だけに基づく要約。研究の方法・結果と限界を区別し、本文を読んだように書かず、要旨にない実験条件や外装への採用実績を補わない。"
     if keep_terms:
         prompt = prompt + "\n" + keep_terms
     prompt = prompt + "\n" + currency_rule
@@ -2911,6 +2941,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     global SHEET2_RESULT
     feedback = editorial_feedback()
     excluded_urls = set(feedback.get("excluded_urls", []))
+    selection = EDITION.config.get("selection", {})
     digest_window = {}
     if EDITION.id == "exterior":
         digest_window = collection_window(target_dates, EDITION.config.get("selection", {}).get("lookback_days", 7))
@@ -2997,7 +3028,12 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     if target_dates:
         date_set = set(digest_window["collection_dates"] if EDITION.id == "exterior" else target_dates)
         dt = pd.to_datetime(filtered[col_date], errors="coerce")
-        filtered = filtered[dt.dt.strftime("%Y-%m-%d").isin(date_set)]
+        date_mask = dt.dt.strftime("%Y-%m-%d").isin(date_set)
+        if EDITION.id == "exterior":
+            paper_mask = filtered[col_country].apply(exterior_papers.is_paper)
+            paper_dates = exterior_papers.paper_window(digest_window["issue_date"], selection.get("paper_lookback_days", 30))
+            date_mask = (date_mask & ~paper_mask) | (paper_mask & bool(selection.get("papers_enabled")) & dt.dt.strftime("%Y-%m-%d").isin(paper_dates))
+        filtered = filtered[date_mask]
     else:
         dt = pd.to_datetime(filtered[col_date], errors="coerce")
         if dt.notna().any():
@@ -3090,7 +3126,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         sort_cols.append("_order")
         ascending.append(True)
         group = group.sort_values(sort_cols, ascending=ascending)
-        if str(country_name).strip() in ("\u8ad6\u6587", "paper", "papers"):
+        if EDITION.id != "exterior" and str(country_name).strip() in ("\u8ad6\u6587", "paper", "papers"):
             # PubMed RSS is curated for this project; do not gate papers by LLM relevance.
             target_group = group
             extras = group.iloc[0:0]
@@ -3103,14 +3139,14 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                 issue_day = digest_window.get("issue_date", "")
                 scores = pd.to_numeric(target_group[col_interior_score], errors="coerce")
                 minimum = pd.Series([
-                    exterior_rules.selection_thresholds(selection, row.get(col_date), issue_day)[
+                    ((selection.get("paper_minimum_score", 60),) * 2 if exterior_papers.is_paper(row.get(col_country)) else exterior_rules.selection_thresholds(selection, row.get(col_date), issue_day))[
                         1 if row.get("記事区分") == "trend" else 0]
                     for _, row in target_group.iterrows()], index=target_group.index, dtype=float)
                 target_group = target_group[(scores >= minimum) & target_group["記事区分"].isin(("product", "trend"))]
                 extras = group.iloc[0:0]
         selected = []
         selected_idx = set()
-        limit = None if country_name == "論文" else selection.get("maximum_per_country", 10)
+        limit = (selection.get("maximum_papers", 5) if EDITION.id == "exterior" else None) if exterior_papers.is_paper(country_name) else selection.get("maximum_per_country", 10)
 
         def add_rows(df_rows, max_added=None):
             nonlocal selected, selected_idx
@@ -3131,10 +3167,17 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             for day in sorted(target_group[col_date].astype(str).unique(), reverse=True):
                 daily = target_group[target_group[col_date].astype(str).eq(day)]
                 products = daily[daily["記事区分"].eq("product")]
+                direct = products[~products["外装関連区分"].eq("transfer")]
+                transfers = products[products["外装関連区分"].eq("transfer")]
                 trends = daily[daily["記事区分"].eq("trend")]
                 product_count = sum(row.get("記事区分") == "product" for row in selected)
                 trend_count = sum(row.get("記事区分") == "trend" for row in selected)
-                add_rows(products, max_added=max(0, selection.get("product_priority_count", 6) - product_count))
+                direct_slots = selection.get("product_priority_count", 6)
+                if not transfers.empty and limit:
+                    direct_slots = min(direct_slots, max(1, round(limit * 0.7)))
+                add_rows(direct, max_added=max(0, direct_slots - product_count))
+                add_rows(transfers, max_added=max(0, (round(limit * 0.3) if limit else 3) - sum(row.get("外装関連区分") == "transfer" for row in selected)))
+                add_rows(direct, max_added=max(0, selection.get("product_priority_count", 6) - sum(row.get("記事区分") == "product" for row in selected)))
                 add_rows(trends, max_added=max(0, selection.get("maximum_trends_per_country", 10) - trend_count))
                 add_rows(products)
         else:
@@ -3158,7 +3201,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             content_jp = str(row.get(col_content_jp, "")).strip()
             llm_post = str(row.get(col_llm_post, "")).strip()
             is_paper = str(row.get(col_country, "")).strip().lower() in {"論文", "paper", "papers"}
-            if summary_language_problem(row.get(col_country), title_jp, content_jp) or (llm_post == "スキップ" and not is_paper):
+            if summary_language_problem(row.get(col_country), title_jp, content_jp) or (llm_post == "スキップ" and (not is_paper or EDITION.id == "exterior")):
                 need_indices.append(idx)
         if need_indices:
             print(f"  Sheet2補完: {len(need_indices)}件")
@@ -3349,9 +3392,14 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
                              source_dates=sorted(set(sheet2_csv[col_date].tolist())),
                              selected_current_day_count=int(sheet2_csv[col_date].eq(digest_window["issue_date"]).sum()),
                              selected_lookback_count=int(sheet2_csv[col_date].ne(digest_window["issue_date"]).sum()),
+                             papers_enabled=bool(selection.get("papers_enabled")),
+                             paper_lookback_start=exterior_papers.paper_window(digest_window["issue_date"], selection.get("paper_lookback_days", 30))[0],
+                             maximum_papers=int(selection.get("maximum_papers", 5)),
+                             editorial_policy_version=exterior_scope.POLICY_VERSION,
+                             selected_by_development_lane=dict(Counter(sheet2_csv["外装関連区分"].tolist())),
                              **digest_window)
 
-    if OUTPUT_PAPERS_SHEET2:
+    if OUTPUT_PAPERS_SHEET2 and EDITION.id != "exterior":
         build_papers_sheet2(work, excel_path, target_dates)
 
     print(f"  Sheet2/CSV 出力: {len(sheet2_df)}件, {csv_path}")
@@ -3455,6 +3503,11 @@ def fetch_from_rss(target_dates):
                 feed = feedparser.parse(response.content)
                 if getattr(feed, "version", ""):
                     SOURCE_FETCH_COUNTS["succeeded"] += 1
+                if EDITION.id == "exterior" and exterior_papers.is_paper(country):
+                    selection = EDITION.config.get("selection", {})
+                    if selection.get("papers_enabled") and feed_info.get("adapter") == "jstage-paper" and target_dates:
+                        results.extend(exterior_papers.collect_entries(feed.entries, name, max(target_dates), requests.get, HEADERS, selection.get("paper_lookback_days", 30)))
+                    continue
                 rss_item_image_map = extract_item_image_map_from_rss_xml(response.content)
                 count = 0
                 skipped_feed_images = 0
@@ -3882,6 +3935,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         _ensure_llm_model_loaded()
     missing_img_urls = []
     for idx, item in enumerate(items, 1):
+        early_assessment = None
         title = item.get("タイトル", "")
         content = str(item.get("内容", "")).strip()
         item["内容"] = content
@@ -3909,7 +3963,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         # LLM判定（関連性のみ）を先に実施
         llm_relevance = ""
         is_paper_item = str(country).strip() in ("\u8ad6\u6587", "paper", "papers")
-        if is_paper_item:
+        if is_paper_item and EDITION.id != "exterior":
             item["LLM\u5224\u5b9a"] = "\u5bfe\u8c61"
         elif USE_LLM and EDITION.id != "exterior":
             llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
@@ -3932,7 +3986,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                     guessed_image = fetch_image_from_page(guessed)
                     if guessed_image and not is_suspicious_image_url(guessed_image):
                         item["画像URL"] = guessed_image
-        if FETCH_MISSING_IMAGES and item.get("URL") and (
+        if FETCH_MISSING_IMAGES and not (EDITION.id == "exterior" and is_paper_item) and item.get("URL") and (
             is_missing_url(item.get("画像URL")) or is_suspicious_image_url(str(item.get("画像URL", "")))
         ):
             resolved = resolve_final_url(item.get("URL"))
@@ -3954,7 +4008,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
         if EDITION.id == "exterior" and USE_LLM and is_valid_article_url(item.get("URL"), allow_google_news=False):
             # RSS snippets often omit the very exterior details or market data
             # needed for the first decision. Fetch once, reuse the summary cache.
-            article_text = fetch_article_text(item.get("URL"))
+            article_text = "" if is_paper_item else fetch_article_text(item.get("URL"))
             if len(article_text) >= 150:
                 content = article_text
                 item["内容"] = content
@@ -3965,8 +4019,25 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                 record_exterior_llm_failure("relevance", "saved source body is an error page or has invalid encoding")
                 continue
             llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
+            if (llm_relevance == "非対象" and (exterior_rules.has_product_details(f"{title} {content}")
+                                               or exterior_scope.transfer_candidate(f"{title} {content}"))):
+                # The cheap yes/no review can miss mixed articles and non-automotive
+                # process research. A semantic score, never a keyword alone, can rescue it.
+                early_assessment = call_llm_interior_assessment(title, content, "", item.get("URL", ""), "")
+                if early_assessment:
+                    item["内装関連度"] = early_assessment["score"]
+                    item["内装判定理由"] = early_assessment.get("reason", "")
+                    store_exterior_assessment(item, early_assessment)
+                    if (early_assessment["score"] >= 45 and early_assessment.get("category") in ("product", "trend")
+                            and early_assessment.get("development_lane") != "exclude"):
+                        llm_relevance = "対象"
             if llm_relevance:
                 item["LLM判定"] = llm_relevance
+                item["外装選定基準"] = exterior_scope.POLICY_VERSION
+                if llm_relevance == "非対象":
+                    item["外装関連区分"] = "exclude"
+                    if not early_assessment:
+                        item["内装判定理由"] = "原文の初回採用判定で外装開発の対象外"
         # URL健全性チェック（記事）
         if not check_url_ok(item.get("URL"), is_image=False):
             item["HTML取得"] = "×"
@@ -4010,7 +4081,7 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                 _, llm_photo = call_llm_classify(title, content, item.get("画像URL", ""), mode="photo")
                 if llm_photo:
                     item["画像判定"] = llm_photo
-                assessment = call_llm_interior_assessment(
+                assessment = early_assessment or call_llm_interior_assessment(
                     title,
                     content,
                     item.get("画像URL", ""),
@@ -4168,7 +4239,7 @@ def enrich_existing_df(df):
                 row["URL"] = resolved_pw
             if image_pw and is_missing_url(row.get("画像URL")):
                 row["画像URL"] = image_pw
-        if FETCH_MISSING_IMAGES and row.get("URL") and (
+        if FETCH_MISSING_IMAGES and not (EDITION.id == "exterior" and exterior_papers.is_paper(row.get("国"))) and row.get("URL") and (
             is_missing_url(row.get("画像URL")) or is_suspicious_image_url(str(row.get("画像URL", "")))
         ):
             resolved = resolve_final_url(row.get("URL"))
@@ -4211,11 +4282,11 @@ def enrich_existing_df(df):
             row["画像URL"] = ""
         row_country_raw = str(row.get("\u56fd", "")).strip()
         is_paper_row = row_country_raw in ("\u8ad6\u6587", "paper", "papers")
-        if is_paper_row:
+        if is_paper_row and EDITION.id != "exterior":
             row["LLM\u5224\u5b9a"] = "\u5bfe\u8c61"
         force_process = PROCESS_LLM_SKIPPED and str(row.get("LLM後処理")).strip() == "スキップ"
         content_is_full_article = False
-        if USE_LLM and (not is_paper_row) and not force_process:
+        if USE_LLM and (not is_paper_row or EDITION.id == "exterior") and not force_process:
             if pd.isna(row.get("LLM判定")) or str(row.get("LLM判定")).strip() == "":
                 llm_rel, _ = call_llm_classify(title, content, "", mode="relevance")
                 if llm_rel:
@@ -4373,6 +4444,16 @@ def _main():
     elif os.path.exists(LEGACY_EXCEL_FILE):
         df_existing = load_existing_data(LEGACY_EXCEL_FILE)
     reassessment_items = []
+    if (EDITION.id == "exterior" and EDITION.config.get("editorial_policy_version") == exterior_scope.POLICY_VERSION
+            and not df_existing.empty and not (repair_target_dates or ENRICH_ONLY or reassess_target_dates)):
+        # Re-evaluate old-policy candidates once; published issues remain protected by history.
+        policy = df_existing.get("外装選定基準", pd.Series("", index=df_existing.index)).fillna("")
+        dates = pd.to_datetime(df_existing.get("日付"), errors="coerce").dt.strftime("%Y-%m-%d")
+        published_urls = {normalize_article_url(item["url"]) for item in published_news(EDITION.content_dir / "news_data.js")}
+        stale = dates.isin(collection_dates) & policy.ne(exterior_scope.POLICY_VERSION) & ~df_existing["URL"].map(normalize_article_url).isin(published_urls)
+        _, stale_items = split_exterior_reassessment(df_existing.loc[stale], collection_dates)
+        df_existing = df_existing.loc[~stale].copy()
+        reassessment_items.extend(stale_items)
     if reassess_target_dates:
         df_existing, reassessment_items = split_exterior_reassessment(df_existing, target_dates)
         COLLECTION_METRICS["reassessed_existing_count"] = len(reassessment_items)
@@ -4399,7 +4480,7 @@ def _main():
             for count, idx in enumerate(repair_indices, 1):
                 country = str(df_existing.at[idx, "国"] or "").strip()
                 current = str(df_existing.at[idx, "LLM判定"] or "").strip()
-                if country == "論文":
+                if country == "論文" and EDITION.id != "exterior":
                     df_existing.at[idx, "LLM判定"] = "対象"
                 elif not current:
                     result, _ = call_llm_classify(

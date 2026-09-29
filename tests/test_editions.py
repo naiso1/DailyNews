@@ -243,7 +243,7 @@ class CollectorEditionTests(unittest.TestCase):
         return Mock(status_code=status, text="test response", json=Mock(return_value={"choices": [{"message": {"content": content}}]}))
 
     def test_invalid_required_relevance_is_not_cached_or_reused(self):
-        key = ("grille", "", "", "relevance")
+        key = ("exterior", collector.exterior_scope.POLICY_VERSION, "grille", "", "", "relevance")
         collector.LLM_CACHE[key] = ("", "")
         responses = [self.llm_response('{}'), self.llm_response('{"relevance":false}')]
         with patch.multiple(collector, USE_LLM=True, PROMPT_TEXT="test prompt", LLM_ERROR_LOGGED=False), patch.object(collector, "_post_llm", side_effect=responses) as request, redirect_stdout(io.StringIO()):
@@ -255,7 +255,7 @@ class CollectorEditionTests(unittest.TestCase):
             self.assertEqual(collector.EXTERIOR_REQUIRED_LLM_ERRORS["relevance"], 1)
 
     def test_invalid_required_score_is_not_cached_or_reused(self):
-        key = ("exterior", "product_assessment", "grille", "", "", "", "")
+        key = ("exterior", collector.exterior_scope.POLICY_VERSION, "product_assessment", "grille", "", "", "", "")
         collector.LLM_CACHE[key] = {"score": None}
         responses = [self.llm_response('{}'), self.llm_response('{"score":20,"reason":"weak relevance"}')]
         with patch.multiple(collector, USE_LLM=True, LLM_IMAGE_INPUT=False, LLM_ERROR_LOGGED=False), patch.object(collector, "_post_llm", side_effect=responses) as request, redirect_stdout(io.StringIO()):

@@ -16,6 +16,7 @@ import requests
 from ニュース収集.currency_guard import repair_indian_price_units
 from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
+from dailynews import exterior_papers
 from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
 from dailynews.editorial_policy import apply_policy, classify_lighting, exterior_scope_rules, EVIDENCE_COLUMNS
@@ -434,7 +435,7 @@ def drop_unsummarised_bodies(items):
     with its full article body; never publish such a raw body as the summary."""
     kept = []
     for item in items:
-        if item.get("country") != "paper" and len(str(item.get("desc") or "")) > MAX_PUBLISHED_DESC_CHARS:
+        if (item.get("country") != "paper" or EDITION.id == "exterior") and len(str(item.get("desc") or "")) > MAX_PUBLISHED_DESC_CHARS:
             print(f"[SUMMARY_TOO_LONG] {len(str(item.get('desc')))} chars, not published: {item.get('url')}")
             continue
         kept.append(item)
@@ -446,7 +447,7 @@ def validate_japanese_news_items(items):
     pending = []
     for item in items:
         # Preserve the curated paper feed's existing inclusion policy.
-        if item.get("country") == "paper":
+        if item.get("country") == "paper" and EDITION.id != "exterior":
             continue
         title = str(item.get("title") or "")
         body = str(item.get("desc") or "")
@@ -1348,6 +1349,7 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
     if EDITION.id == "exterior":
         candidates = [item for item in exterior_rules.select_items(items, limit=len(items))
                       if (item.get("contentCategory") == "trend" and item.get("trendTopic") in exterior_rules.TREND_TOPICS)
+                      or (item.get("developmentLane") == "transfer" and item.get("developmentApplication"))
                       or not _is_out_of_scope_idea(f"{item.get('title', '')} {item.get('desc', '')}")]
         # Different concepts may share the only available source article.
         return [[candidates[i % len(candidates)]] for i in range(max(0, need_count))] if candidates else []
@@ -1884,6 +1886,10 @@ def main():
     idx_content_category = find_col_exact(header, "記事区分")
     idx_trend_topic = find_col_exact(header, "トレンド分類")
     idx_related_urls = find_col_exact(header, "関連URL")
+    exterior_metadata = {**exterior_papers.PAPER_FIELDS, "developmentLane": "外装関連区分",
+                         "developmentEvidence": "外装技術根拠", "developmentApplication": "外装応用仮説",
+                         "developmentPolicyVersion": "外装選定基準"}
+    exterior_indices = {key: find_col_exact(header, column) for key, column in exterior_metadata.items()}
     evidence_indices = {key: find_col_exact(header, column) for key, column in EVIDENCE_COLUMNS.items()}
 
     def get(row, idx):
@@ -1932,6 +1938,10 @@ def main():
         llm_is_target = llm_val.strip() == "対象"
         if EDITION.id == "exterior":
             product_min, trend_min = exterior_rules.selection_thresholds(selection, date_val, issue_day)
+            if country == "paper":
+                product_min = trend_min = int(selection.get("paper_minimum_score", 60))
+                if not selection.get("papers_enabled"):
+                    continue
             if not llm_is_target or interior_score is None or interior_score < product_min:
                 continue
             if content_category == "trend" and interior_score < trend_min:
@@ -1968,6 +1978,7 @@ def main():
             "tags": tags,
             "contentCategory": content_category,
             "trendTopic": trend_topic,
+            **({key: get(row, idx) for key, idx in exterior_indices.items()} if EDITION.id == "exterior" else {}),
             "relatedUrls": related_source_urls(get(row, idx_related_urls), url),
             "interiorScore": interior_score,
             "interiorReason": interior_reason,
@@ -2018,6 +2029,8 @@ def main():
         from ニュース収集.source_highlights import enrich_items
         # Only newly published rows: never re-fetch the entire news archive.
         highlight_targets = [it for it in items if not existing_url_keys.intersection(publication_item_url_keys(it))]
+        if EDITION.id == "exterior":
+            highlight_targets = [it for it in highlight_targets if it.get("country") != "paper"]
         if highlight_targets:
             if EDITION.id == "exterior":
                 enrich_items(highlight_targets, cache_path=EDITION.runtime_dir / "source_highlights.json")
@@ -2043,6 +2056,9 @@ def main():
             extra_lines.append(f'                relatedUrls: {json.dumps(it["relatedUrls"], ensure_ascii=False)},')
         if EDITION.id == "exterior":
             extra_lines.append(f'                edition: "exterior", productScore: {int(it["interiorScore"])}, exteriorScore: {int(it["interiorScore"])},')
+            for field in exterior_metadata:
+                if it.get(field):
+                    extra_lines.append(f'                {field}: "{js_escape(it[field])}",')
             if it.get("digestDate"):
                 extra_lines.append(f'                digestDate: "{js_escape(it["digestDate"])}",')
             extra_lines.append(f'                contentCategory: "{js_escape(it["contentCategory"])}", trendTopic: "{js_escape(it["trendTopic"])}",')

@@ -124,6 +124,7 @@ class FeedImageRequirementTests(unittest.TestCase):
         self.assertEqual(len(nodes), len(names))
         exec(compile(ast.Module(body=nodes, type_ignores=[]), "rss-fetch-test", "exec"), self.env)
         self.env.update(ET=ET, feedparser=feedparser, time=SimpleNamespace(sleep=Mock()), print=Mock(),
+                        exterior_papers=__import__('dailynews.exterior_papers', fromlist=['is_paper']),
                         SOURCE_FETCH_COUNTS={"attempted": 0, "succeeded": 0},
                         resolve_final_url=Mock(side_effect=lambda url: url),
                         fetch_meta_description=Mock(return_value="Article summary"),

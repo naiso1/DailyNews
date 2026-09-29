@@ -1,6 +1,7 @@
 """Exterior-specific editorial rules; transport and publishing remain shared."""
 
 import re
+from dailynews.exterior_scope import BODY, THEMES, SCOPE_TEXT, transfer_candidate, theme_hits
 
 PRODUCT_TERMS = (
     "グリル", "バンパー", "フェンダー", "エンブレム", "外装", "エクステリア",
@@ -14,6 +15,8 @@ PRODUCT_TERMS = (
     "spoiler", "diffuser", "splitter", "deflector",
     "车外", "外饰", "格栅", "保险杠", "翼子板", "车标", "透波", "密封条", "前大灯", "尾灯",
 )
+LEGACY_PRODUCT_TERMS = PRODUCT_TERMS
+PRODUCT_TERMS += THEMES["body"]
 TECHNOLOGY_TERMS = ("材料", "樹脂", "加飾", "塗装", "成形", "発光", "照明", "透過", "空力", "耐候", "リサイクル", "軽量", "設計", "センサー", "material", "resin", "molding", "coating", "lighting", "sensor", "aerodynamic", "recycl", "lightweight", "design", "surface", "发光", "材料", "传感", "空气动力")
 TOPICS = tuple(re.compile(pattern, re.I) for pattern in (
     r"グリル|格栅|\bgrilles?\b",
@@ -27,6 +30,8 @@ TOPICS = tuple(re.compile(pattern, re.I) for pattern in (
 ))
 
 SUMMARY_RULES = (
+    "比較・評価試験の実施だけが書かれている場合は『比較した』『評価した』と記す。効果が良い・悪い・未実証のいずれも補わず、結果が原文にある場合だけ結果を述べる。laserはレーザー、couponは試験片など、一般技術語を企業名扱いにしない。\n"
+    "車体・開閉体・接合・製造工程・冷却・NV・安全評価の具体情報も残す。周辺技術は原文の材料・方法・特性を要約し、外装への転用を採用済みと書かない。\n"
     "原文にある事実・評価だけを使い、原文にない装備・数値を補わない。\n"
     "要望・批評・否定・仮定を維持し、提案を採用済みと書かない。競合車の装備を対象車の装備へ置き換えない。\n"
     "過去の取材・再掲はその旨を残す。開発車、車名の推定、発売予想を確定した量産仕様と書かず、観察・記者の推測・メーカー発表を区別する。\n"
@@ -35,6 +40,9 @@ SUMMARY_RULES = (
     "市場・規制・材料・競合・デザインのトレンド記事は、対象車種/地域、変化、期間、根拠データを優先し、外装部品の事実を無理に補わない。\n"
 )
 SUMMARY_FOCUS = (
+    "本文にある具体的な部品・材料・製法・評価内容を最低1つ要約に残す。比較試験の実施だけを性能向上の実証と書かない。"
+    "外装・車体の部品、接合、表面処理、製法、軽量化、資源循環、冷却、騒音振動、空力、安全評価も対象。"
+    "自動車用途未記載の周辺技術では材料・方法・特性を優先し、外装への応用は仮説として分離する。"
     "自動車外装の具体情報、または乗用車のデザイン・市場・規制・材料・競合トレンドの本文根拠を優先する。"
     "トレンド記事には対象地域・車種・期間・変化を残し、外装部品の採用や需要増を創作しない。"
     "過去の取材・再掲はその旨を残す。開発車、車名の推定、発売予想を確定した量産仕様と書かず、観察・記者の推測・メーカー発表を区別する。"
@@ -67,7 +75,8 @@ def news_category(title="", content="", category=None, trend_topic=None):
     trend_topic = str(trend_topic or "").strip().lower()
     if category == "trend":
         return ("trend", trend_topic) if trend_topic in topics else ("", "")
-    if has_product_details(text):
+    if (has_product_details(text) or transfer_candidate(text)
+            or (AUTOMOTIVE_CONTEXT.search(text) and set(theme_hits(text)) & {"performance", "sensing", "safety"})):
         return "product", ""
     if category != "product" and topics:
         return "trend", topics[0]
@@ -76,7 +85,8 @@ def news_category(title="", content="", category=None, trend_topic=None):
 
 def has_product_details(text):
     folded = str(text or "").lower()
-    return any(term.lower() in folded for term in PRODUCT_TERMS)
+    return (any(term.lower() in folded for term in LEGACY_PRODUCT_TERMS)
+            or bool(BODY.search(folded) and AUTOMOTIVE_CONTEXT.search(folded)))
 
 
 def summary_omits_details(summary, source):
@@ -95,29 +105,22 @@ def calibrate_score(score, title="", content="", summary="", category=None, tren
 
 def assessment_prompt(title, content, url, summary):
     return (
-        "Classify automotive news for passenger-vehicle EXTERIOR product development.\n"
-        "Return JSON with score (integer 0-100), reason (short Japanese explaining the concrete planning relevance), "
-        "category ('product' or 'trend'), trend_topic (one of design, market, regulation, materials, competitor for trend; empty for product), image_interior (true/false/null). "
-        "The legacy field image_interior means whether this image shows relevant EXTERIOR component details.\n"
-        "Score 80-100: specific exterior component technology, grille, bumper, emblem, radome/radar-transparent cover, "
-        "exterior trim, illumination, weatherstrip/body seal, durable coatings, recycled resin or aerodynamic component.\n"
-        "Score 60-79: vehicle article with concrete exterior part design, function, material or integration details.\n"
-        "For category=trend, score 80-100 for specific evidence useful to exterior product planning: passenger-car segment demand, "
-        "OEM model/design strategy, exterior-relevant regulations, material/supplier developments. Score 60-79 for a clear but narrower planning signal. "
-        "Trend articles need not name an exterior part, but must contain actual facts, changes, comparisons or data, and your reason must explain the planning connection.\n"
-        "Score 36-59: vague styling or weak/indirect relevance. Score 0-35: interior-only, stock prices, dealer discounts, "
-        "battery/engine specifications alone, logistics, general IT, celebrity stories, or a general vehicle photo without useful text evidence. "
-        "Sales is eligible when it reports passenger-vehicle segments, model demand or market structure; a price-only promotion is not.\n"
-        "An exterior photo alone cannot qualify an article. Do not infer material or engineering functions from an image. "
-        "ADAS/LiDAR qualifies only with exterior sensor integration, radome, cleaning, heating, surface or transparency details. "
-        "Passenger cars are the main scope. Motorcycles, buses and heavy trucks without transferable component lessons score below 40.\n"
-        "Use semantic relevance and specificity, not arbitrary keyword or image bonuses.\n"
+        SCOPE_TEXT + "\n"
+        "Return JSON: score (0-100), reason (short Japanese), category ('product' for direct/transfer or 'trend'), "
+        "development_lane ('direct','transfer','trend','exclude'), source_evidence (short source technology fact), "
+        "application (Japanese exterior application hypothesis; required for transfer), "
+        "trend_topic ('design','market','regulation','materials','competitor' or empty), image_interior (true/false/null; legacy name for EXTERIOR image).\n"
+        "80-100: strong specific development information. 60-79: concrete component design changes, process/material/evaluation facts, or credible transfer technology. One theme is sufficient; do not require multiple themes or manufacturing details in a design article. "
+        "36-59: vague styling or weak connection. 0-35: excluded/off-topic. An image alone is insufficient. "
+        "Trends need actual passenger-car demand, design, regulation, supplier or OEM strategy facts; part naming is optional. "
+        "Price-only promotions, stock prices, battery/engine specs alone and generic vehicle photos are excluded. "
+        "Use semantic relevance, not keyword counts. Source evidence must come from the original, not the generated summary.\n"
         f"Title: {title}\nArticle: {content}\nJapanese summary: {summary}\nURL: {url}\n"
     )
 
 
 def out_of_scope_idea(text):
-    return not has_product_details(text)
+    return not (has_product_details(text) or BODY.search(str(text or "")))
 
 
 def select_items(items, limit=6):
@@ -156,7 +159,8 @@ ideasは最大{need_count}件。根拠が足りなければ減らす。titleは�
 descの第1文で根拠ニュースの車名または技術名を明記し、提案する製品と誰にどんな価値があるかを書く。
 提案は仮説と分かる表現にする。出典にない性能・採用実績を事実として書かない。
 sourceNewsIdsは対応するanchor IDと一致させ、desc末尾に同じIDを[]で付記する。
-企画対象はグリル、バンパー、外装加飾、発光エンブレム、レドーム、センサー透過カバー、ウェザーストリップなど。
+{SCOPE_TEXT}
+応用技術からの案は元の材料・製法・特性を起点にし、外装部品への応用仮説と検証する条件を記す。
 トレンド記事を根拠とする案は、観測された変化に対応する外装開発の仮説にとどめる。根拠が弱ければ案を減らす。元記事にない性能や需要量を補わない。
 画像は後段のexaBase連携で生成するため、imagePromptおよびimgは出力しない。外装製品の説明をテキストだけで完結させる。
 """

@@ -24,7 +24,7 @@ def anchor_helpers():
     tree = ast.parse((COLLECTION / "google_search_script.py").read_text(encoding="utf-8-sig"))
     names = {"extract_latin_source_anchors", "extract_cjk_keywords", "summary_matches_source"}
     nodes = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names]
-    env = {"re": re, "Counter": Counter}
+    env = {"re": re, "Counter": Counter, "EDITION": SimpleNamespace(id="interior")}
     exec(compile(ast.Module(body=nodes, type_ignores=[]), "source-anchors", "exec"), env)
     return env
 

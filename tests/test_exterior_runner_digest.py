@@ -79,6 +79,17 @@ class RunnerDigestTests(unittest.TestCase):
             path = self.fixture(directory, rows, issue_date=None)
             self.assertEqual(self.env["validate_resume_sheet"](path, ["2026-09-15"], edition_id="exterior"), 1)
 
+    def test_papers_outside_news_window_are_counted_only_with_explicit_paper_receipt(self):
+        rows = [{"日付":"2026-09-15","国":"日本","URL":"https://example.com/news"},
+                {"日付":"2026-08-20","国":"論文","URL":"https://doi.org/10.1299/mej.26-test"}]
+        with tempfile.TemporaryDirectory() as directory:
+            path=self.fixture(directory,rows,papers_enabled=True,paper_lookback_start="2026-08-17",maximum_papers=5)
+            self.assertEqual(self.env["count_sheet_targets"](path,{"2026-09-15"},edition_id="exterior"),2)
+            self.assertEqual(self.env["validate_resume_sheet"](path,["2026-09-15"],edition_id="exterior"),2)
+            self.fixture(directory,rows,papers_enabled=False)
+            with self.assertRaises(ValueError):
+                self.env["count_sheet_targets"](path,{"2026-09-15"},edition_id="exterior")
+
 
 if __name__ == "__main__":
     unittest.main()
