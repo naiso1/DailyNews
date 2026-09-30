@@ -6,6 +6,7 @@ import datetime
 import json
 import os
 from pathlib import Path
+from subprocess import CalledProcessError
 import re
 import tempfile
 import sys
@@ -28,6 +29,41 @@ def function(name, env):
 
 
 class EditionRunnerTests(unittest.TestCase):
+    def test_only_exterior_incomplete_insights_retry_from_validated_sheet(self):
+        cmd = ["python", "updater"]
+        dates = ["2026-09-29"]
+        env = dict(EDITION=SimpleNamespace(id="exterior"), WORK_DIR=Path("exterior"),
+                   CalledProcessError=CalledProcessError, log=Mock(),
+                   validate_resume_sheet=Mock(), ensure_lm_studio=Mock(return_value=True),
+                   run_cmd=Mock(side_effect=[CalledProcessError(75, cmd), None]))
+        function("run_update_with_checkpoint_resume", env)(cmd, dates, Path("log"))
+        self.assertEqual(env["run_cmd"].call_count, 2)
+        env["validate_resume_sheet"].assert_called_once_with(
+            Path("exterior/sheet2_llm_targets.csv"), dates, edition_id="exterior")
+        self.assertEqual(env["run_cmd"].call_args_list[0], env["run_cmd"].call_args_list[1])
+
+    def test_insight_resume_is_bounded_and_never_retries_other_failures(self):
+        for edition, code, attempts in (("exterior", 75, 3), ("exterior", 1, 1), ("interior", 75, 1)):
+            with self.subTest(edition=edition, code=code):
+                env = dict(EDITION=SimpleNamespace(id=edition), WORK_DIR=Path("unused"),
+                           CalledProcessError=CalledProcessError, log=Mock(),
+                           validate_resume_sheet=Mock(), ensure_lm_studio=Mock(return_value=True),
+                           run_cmd=Mock(side_effect=CalledProcessError(code, ["updater"])))
+                with self.assertRaises(CalledProcessError):
+                    function("run_update_with_checkpoint_resume", env)(["updater"], ["2026-09-29"], Path("log"))
+                self.assertEqual(env["run_cmd"].call_count, attempts)
+                self.assertEqual(env["validate_resume_sheet"].call_count, attempts - 1)
+
+    def test_stale_sheet_stops_insight_resume(self):
+        env = dict(EDITION=SimpleNamespace(id="exterior"), WORK_DIR=Path("unused"),
+                   CalledProcessError=CalledProcessError, log=Mock(),
+                   validate_resume_sheet=Mock(side_effect=ValueError("stale sheet")), ensure_lm_studio=Mock(),
+                   run_cmd=Mock(side_effect=CalledProcessError(75, ["updater"])))
+        with self.assertRaisesRegex(ValueError, "stale sheet"):
+            function("run_update_with_checkpoint_resume", env)(["updater"], ["2026-09-29"], Path("log"))
+        env["run_cmd"].assert_called_once()
+        env["ensure_lm_studio"].assert_not_called()
+
     def test_concurrent_json_writers_use_independent_temp_files(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "mailing_list.json"
@@ -185,6 +221,7 @@ class EditionRunnerTests(unittest.TestCase):
                        get_google_search_entrypoint=Mock(return_value=Path("collector.py")),
                        ensure_lm_studio=Mock(return_value=True), count_sheet_targets=Mock(return_value=1),
                        run_cmd=Mock(), generate_source_list_data=Mock())
+            function("run_update_with_checkpoint_resume", env)
             env["latest_news_date"].return_value = None
             main = function("main", env)
             with patch("sys.argv", ["runner", "--edition", "exterior", "--build-only"]), patch.dict(os.environ, {"GEMINI_API_KEY": "test-not-a-real-key"}):

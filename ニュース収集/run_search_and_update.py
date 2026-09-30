@@ -881,6 +881,22 @@ def run_git_push(branch: str, log_file):
     run_cmd(cmd, "git_push_https", log_file, cwd=ROOT)
 
 
+def run_update_with_checkpoint_resume(cmd, target_dates, log_file):
+    """Retry only explicit exterior insight failures; never recollect or publish here."""
+    for attempt in range(3):
+        try:
+            run_cmd(cmd, "auto_update_daily_news", log_file)
+            return
+        except CalledProcessError as error:
+            # Exit 75 is reserved by ExteriorInsightsIncomplete in the updater.
+            if EDITION.id != "exterior" or error.returncode != 75 or attempt == 2:
+                raise
+            validate_resume_sheet(WORK_DIR / "sheet2_llm_targets.csv", target_dates, edition_id=EDITION.id)
+            log(f"[INSIGHTS_RESUME] attempt {attempt + 2}/3: reusing validated articles and completed regional components.")
+            if not ensure_lm_studio():
+                raise RuntimeError("LM Studio unavailable for exterior insight recovery.")
+
+
 def run_git_sync(log_file):
     if os.environ.get("AUTO_GIT_SYNC", "1").strip().lower() in {"0", "false", "no"}:
         log("[INFO] AUTO_GIT_SYNC disabled; skip git commit/push.")
@@ -1123,7 +1139,7 @@ def main():
             log(f"[INFO] sheet2 target rows for {dates_arg}: {sheet_rows}")
             if not ensure_lm_studio():
                 raise RuntimeError("LM Studio lost the requested model before news update.")
-            run_cmd(
+            run_update_with_checkpoint_resume(
                 [
                     sys.executable,
                     "-u",
@@ -1133,7 +1149,7 @@ def main():
                     "--llm-model",
                     os.environ.get("LLM_MODEL", DEFAULT_LLM_MODEL),
                 ],
-                "auto_update_daily_news",
+                target_dates,
                 LOG_FILE,
             )
             log(f"[INFO] Image generation for {EDITION.id} is handled by the updater (primary/fallback, current issue only).")

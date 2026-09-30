@@ -45,6 +45,12 @@ configure_edition(EDITION.id)
 ENCODINGS = ["utf-8-sig", "utf-8", "cp932", "utf-16"]
 ANALYSIS_CHAR_LIMIT = 420
 
+
+class ExteriorInsightsIncomplete(RuntimeError):
+    """Only this recoverable generation failure permits a checkpoint retry."""
+
+    exit_code = 75
+
 COUNTRY_MAP = {
     "日本": "jp",
     "jp": "jp",
@@ -1399,6 +1405,38 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
     return groups
 
 
+def select_missing_exterior_idea_anchors(items, retained=(), attempt=0):
+    """Choose by retained source IDs, not by the position of a failed idea."""
+    need = max(0, 2 - len(retained))
+    if not need:
+        return []
+    groups = select_idea_anchor_groups(items, need_count=len(items))
+    used = {str(value).lower() for idea in retained for value in idea.get("sourceNewsIds", [])}
+    unused = [group for group in groups if not any(str(item.get("newsId", "")).lower() in used for item in group)]
+    pool = unused or groups
+    if not pool:
+        return []
+    offset = max(0, attempt) * need
+    return [pool[(offset + index) % len(pool)] for index in range(need)]
+
+
+def make_exterior_analysis_recovery_prompt(date_key, country, items):
+    """A resumed analysis needs no idea/history instructions competing for attention."""
+    selected = exterior_rules.select_items(items)
+    ids = [item["newsId"] for item in selected]
+    return (
+        f"対象日: {date_key} / 地域: {country}。完成済みのアイデアは変更せずanalysisだけ生成する。\n"
+        "外装開発の短い考察を日本語3〜5文で書く。記事の具体的な変化と、そこから検討できる課題を示す。\n"
+        "最初の導入文・最後の示唆文も含め、すべての文に直接根拠となる記事IDを句点の前に付ける。\n"
+        "例: 部品の変更[候補ID]が報じられた。これを参考に耐候性の評価を検討する仮説とする[同じ候補ID]。\n"
+        "事実と応用仮説を区別し、記事にない構造・性能・採用実績を作らない。留保も省略しない。\n"
+        "根拠のない総論は書かず、候補以外のIDを割り当てない。地域全体のトレンドと断定しない。\n"
+        f"使用可能ID: {','.join(ids)}\n候補記事:\n"
+        + "\n".join(_item_for_prompt(item) for item in selected)
+        + '\nJSONのみ: {"analysis":"各文に引用のある考察", "ideas":[]}\n'
+    )
+
+
 def prepare_exterior_idea_sources(ideas: list, source_items: list) -> list:
     """Keep valid citations per idea, including citations shared by other ideas."""
     allowed_ids = build_allowed_news_ids(source_items)
@@ -2206,6 +2244,8 @@ def main():
                               f"(analysis={bool(retained_analysis)}, ideas={len(retained_ideas)}/2)")
                 history_ideas = extract_recent_ideas_by_country(insights_text, key, limit=60)
                 idea_anchor_groups = select_idea_anchor_groups(grouped[key], need_count=2)
+                initial_anchors = (select_missing_exterior_idea_anchors(grouped[key], retained_ideas)
+                                   if use_checkpoint else idea_anchor_groups[len(retained_ideas):])
                 prompt = make_country_prompt(
                     insight_date_label,
                     key,
@@ -2213,12 +2253,12 @@ def main():
                     prompt_template,
                     history_ideas=history_ideas + retained_ideas,
                     need_count=2 - len(retained_ideas),
-                    idea_anchor_groups=idea_anchor_groups[len(retained_ideas):],
+                    idea_anchor_groups=initial_anchors,
                 )
                 if retained_analysis:
                     prompt += "\n【最優先】考察は検証済みなのでanalysisは空文字。不足しているideasだけを生成すること。\n"
                 elif len(retained_ideas) == 2:
-                    prompt += "\n【最優先】2案は検証済みなのでideasは空配列。analysisだけを生成すること。\n"
+                    prompt = make_exterior_analysis_recovery_prompt(insight_date_label, key, grouped[key])
                 if args.replace_ideas_only:
                     prompt += (
                         "\n【最優先】今回は既存の考察を保持してideasだけを差し替える。"
@@ -2305,7 +2345,8 @@ def main():
                             prompt_template,
                             history_ideas=(history_ideas + deduped),
                             need_count=(2 - len(deduped)),
-                            idea_anchor_groups=idea_anchor_groups[len(deduped):],
+                            idea_anchor_groups=(select_missing_exterior_idea_anchors(grouped[key], deduped, retry_index + 1)
+                                                if use_checkpoint else idea_anchor_groups[len(deduped):]),
                         )
                         if args.replace_ideas_only or use_checkpoint:
                             retry_prompt += (
@@ -2360,7 +2401,7 @@ def main():
                               if source_items and (not exterior_analysis_complete(analysis_out.get(key), source_items)
                                                    or len(ideas_out.get(key, [])) != 2)]
                 if incomplete:
-                    raise RuntimeError(
+                    raise ExteriorInsightsIncomplete(
                         "Exterior insights incomplete for: " + ", ".join(incomplete)
                         + "; accepted regional components are checkpointed, publication marker was not advanced."
                     )
@@ -2456,4 +2497,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except ExteriorInsightsIncomplete as error:
+        print(f"[INSIGHTS_INCOMPLETE] {error}", file=sys.stderr, flush=True)
+        raise SystemExit(error.exit_code)

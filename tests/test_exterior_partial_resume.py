@@ -116,6 +116,31 @@ class ExteriorPartialResumeTests(unittest.TestCase):
                 [{**self.ideas[0], "sourceNewsIds": ["cn999"]}, self.ideas[1]], self.sources)
         self.assertEqual([x["title"] for x in result], [self.ideas[1]["title"]])
 
+    def test_missing_anchor_uses_ids_even_when_second_idea_survived(self):
+        groups = [[source] for source in self.sources]
+        with patch.object(updater, "select_idea_anchor_groups", return_value=groups):
+            chosen = updater.select_missing_exterior_idea_anchors(self.sources, self.ideas[1:])
+        self.assertEqual(chosen, groups[:1])
+
+    def test_supplement_cycles_unused_anchors_and_handles_one_source(self):
+        third = {"newsId": "jp3", "title": "ルーフ", "desc": "ルーフを軽量化した。"}
+        groups = [[source] for source in self.sources + [third]]
+        with patch.object(updater, "select_idea_anchor_groups", return_value=groups):
+            self.assertEqual(updater.select_missing_exterior_idea_anchors([], self.ideas[:1]), [groups[1]])
+            self.assertEqual(updater.select_missing_exterior_idea_anchors([], self.ideas[:1], 1), [groups[2]])
+            self.assertEqual(updater.select_missing_exterior_idea_anchors([], self.ideas), [])
+        with patch.object(updater, "select_idea_anchor_groups", return_value=groups[:1]):
+            self.assertEqual(updater.select_missing_exterior_idea_anchors([], self.ideas[:1]), groups[:1])
+
+    def test_analysis_recovery_prompt_has_only_selected_news_and_no_idea_instructions(self):
+        prompt = updater.make_exterior_analysis_recovery_prompt("2026-09-21", "jp", self.sources)
+        self.assertIn("analysisだけ", prompt)
+        self.assertIn("最後の示唆文", prompt)
+        self.assertIn("jp1", prompt)
+        self.assertIn("jp2", prompt)
+        self.assertIn('"ideas":[]', prompt)
+        self.assertNotIn("最大2件", prompt)
+
     def test_stale_fingerprint_does_not_reuse_saved_components(self):
         checkpoint = {"edition_id": "exterior", "date": "2026-09-21", "countries": {"jp": {
             "fingerprint": "changed-source", "analysis": self.analysis, "ideas": self.ideas,
