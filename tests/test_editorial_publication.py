@@ -19,17 +19,19 @@ class EditorialPublicationTests(unittest.TestCase):
     def validate(self, items, existing=(), edition="interior"):
         return publisher.validate_editorial_publication(items, set(existing), self.snapshot, edition)
 
-    def test_interior_trusts_the_collectors_own_selection(self):
-        # Interior no longer re-validates evidence or relevance here: the
-        # collector's own coarse classification, score, and same-day quota
-        # backfill already decided what belongs in the sheet. Only explicit
-        # takedowns (excluded_urls) and already-published duplicates are
-        # filtered at this stage (covered by other tests below).
-        for changes in (dict(), dict(llmDecision="非対象"), dict(evidence={}),
-                        dict(title="10のバイクアップグレード", desc="motorcycle seats")):
+    def test_interior_preserves_other_collector_decisions(self):
+        for changes in (dict(), dict(llmDecision="非対象"), dict(evidence={})):
             with self.subTest(changes=changes):
                 item = {**self.good, **changes}
                 self.assertEqual(self.validate([item]), [item])
+
+    def test_interior_drops_new_bikes_in_direct_or_resumed_csv_without_aborting(self):
+        bike = {**self.good, 'url': 'https://example.test/bike-news/tft',
+                'title': 'New TFT display', 'desc': 'The motorcycle gains a new display.', 'interiorScore': 99}
+        self.assertEqual(self.validate([bike, self.good]), [self.good])
+        self.assertEqual(self.validate([dict(bike, country='paper')]), [])
+        # Existing archive and interaction identities are not silently rewritten.
+        self.assertEqual(self.validate([bike], [bike['url']]), [bike])
 
     def test_legacy_existing_article_does_not_require_new_csv_fields(self):
         legacy = dict(url=self.good["url"], country="jp", title="旧記事")

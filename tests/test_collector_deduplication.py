@@ -146,6 +146,18 @@ class CollectorDeduplicationTests(unittest.TestCase):
         self.assertEqual(selected["URL"].tolist(), [newer["URL"]])
         self.assertEqual(json.loads(selected.iloc[0]["関連URL"]), [older["URL"]])
 
+    def test_interior_bikes_cannot_enter_as_targets_or_quota_backfill(self):
+        context = self.context("interior")
+        good = self.row("cabin", "乗用車のドアトリムを更新", "新しい表皮をドアトリムへ採用した。")
+        high = self.row("bike-high", "Bajaj Pulsar NS125にTFT", "二輪車の計器を更新した。", score=99)
+        low = self.row("bike-low", "新型モデルに収納", "The electric scooter gets more under-seat storage.", score=18)
+        low['LLM判定'] = '非対象'
+        selected = self.select(context, [good, high, low])
+        self.assertEqual(selected['URL'].tolist(), [good['URL']])
+        report = json.loads((context.runtime_dir / 'editorial_policy_review.json').read_text(encoding='utf-8'))
+        self.assertEqual(report['editorial_excluded_count'], 2)
+        self.assertEqual({row['url'] for row in report['decisions']}, {high['URL'], low['URL']})
+
     def test_retry_preserves_reviewed_representative_and_does_not_revive_alias(self):
         for edition in ("interior", "exterior"):
             with self.subTest(edition=edition):

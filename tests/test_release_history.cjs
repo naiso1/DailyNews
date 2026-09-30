@@ -32,6 +32,7 @@ for (const edition of ['interior', 'exterior']) {
   const button = f.nodes.get('releaseHistoryButton'), overlay = f.nodes.get('releaseHistoryOverlay');
   assert(button, `${edition}: history entry point is visible`);
   assert.equal(button.textContent, '更新履歴');
+  assert.match(f.context.window.DAILYNEWS_RELEASE_HISTORY[0].title, /内装版の二輪記事/);
   assert.match(overlay.innerHTML, /39キーワード/);
   assert.match(overlay.innerHTML, /2026-09-30/);
   assert.match(overlay.innerHTML, /外装版でもヘッダー/);

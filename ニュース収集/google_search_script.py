@@ -39,6 +39,7 @@ from dailynews.deduplication import normalize_article_url, recent_title_history,
 from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_policy as apply_editorial_policy,
                                         extract_evidence, exterior_scope_rules)
 from dailynews.feedback_snapshot import load_feedback_snapshot
+from dailynews.interior_vehicle_scope import motorcycle_exclusion, POLICY_VERSION as INTERIOR_VEHICLE_SCOPE_VERSION
 
 EDITION = get_edition()
 
@@ -1340,7 +1341,7 @@ def call_llm_classify(title, content, image_url="", mode="both"):
             LLM_ERROR_LOGGED = True
         return "", ""
     content = bounded_llm_source(content)[0]
-    cache_key = (EDITION.id, exterior_scope.POLICY_VERSION if EDITION.id == "exterior" else "", title, content, image_url, mode)
+    cache_key = (EDITION.id, exterior_scope.POLICY_VERSION if EDITION.id == "exterior" else INTERIOR_VEHICLE_SCOPE_VERSION, title, content, image_url, mode)
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
         if EDITION.id != "exterior" or (isinstance(cached, (tuple, list)) and len(cached) == 2
@@ -1573,7 +1574,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
     if not USE_LLM:
         return None
     content = bounded_llm_source(content)[0]
-    cache_key = (EDITION.id, exterior_scope.POLICY_VERSION, "product_assessment", title, content, image_url, url, summary)
+    cache_key = (EDITION.id, exterior_scope.POLICY_VERSION if EDITION.id == "exterior" else INTERIOR_VEHICLE_SCOPE_VERSION, "product_assessment", title, content, image_url, url, summary)
     if cache_key in LLM_CACHE:
         cached = LLM_CACHE[cache_key]
         if EDITION.id != "exterior" or (isinstance(cached, dict) and isinstance(cached.get("score"), int)
@@ -1604,6 +1605,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
         "ADAS/LiDAR general is not interior unless in-cabin HMI/driver monitoring/display is central.\n"
         "Buses/coaches are outside the passenger-car interior scope and must score 28 or lower.\n"
         "Motorcycles/motorbikes/scooters are outside the cabin scope and must score 18 or lower.\n"
+        "A motorcycle TFT meter, seat, switchgear, storage or comfort feature is not a passenger-car cabin feature. Do not infer a car application.\n"
         "Trucks/lorries are secondary to passenger-car interior planning and must score 35 or lower.\n"
         "If two items have similar text relevance, rank the one with a clear interior image higher.\n"
         "Use semantic judgment, not keyword matching.\n"
@@ -3056,6 +3058,18 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
         filtered = filtered[valid_image | (filtered[col_country] == "論文")]
 
     policy_decisions, policy_changed = [], False
+    if EDITION.id == "interior":
+        keep_indices = []
+        for index, row in filtered.iterrows():
+            article = collector_article(row)
+            reason = motorcycle_exclusion(article, feedback.get("rules", []))
+            if not reason:
+                keep_indices.append(index)
+            else:
+                policy_decisions.append({"url": article["url"], "decision": "exclude", "reason": reason})
+        # Filter before both normal selection and quota backfill. A low score
+        # alone did not stop excluded vehicle classes from filling empty slots.
+        filtered = filtered.loc[keep_indices].copy()
     if EDITION.id == "exterior":
         approved_scope = exterior_scope_rules(feedback.get("rules", []))
         keep_indices = []
@@ -3075,6 +3089,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     policy_path.parent.mkdir(parents=True, exist_ok=True)
     policy_temp = policy_path.with_suffix(".json.tmp")
     policy_temp.write_text(json.dumps({"edition_id": EDITION.id, "policy_version": POLICY_VERSION,
+                                      "vehicle_scope_version": INTERIOR_VEHICLE_SCOPE_VERSION if EDITION.id == "interior" else None,
                                       "target_dates": list(target_dates or []), "decisions": policy_decisions,
                                       **policy_result}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     os.replace(policy_temp, policy_path)

@@ -21,6 +21,7 @@ from dailynews.exterior_tags import generate_tags as generate_exterior_tags
 from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
 from dailynews.editorial_policy import apply_policy, classify_lighting, exterior_scope_rules, EVIDENCE_COLUMNS
+from dailynews.interior_vehicle_scope import motorcycle_exclusion
 from dailynews.feedback_snapshot import load_feedback_snapshot
 
 ROOT = Path(__file__).resolve().parent
@@ -408,8 +409,15 @@ def validate_editorial_publication(items, existing_url_keys, snapshot, edition_i
         if normalize_article_url(item.get("url", "")) in excluded:
             print(f"[EDITORIAL_HIDDEN] {item.get('url', '')}")
             continue
-        if (item.get("country") == "paper"
-                or normalize_article_url(item.get("url", "")) in existing_url_keys):
+        if normalize_article_url(item.get("url", "")) in existing_url_keys:
+            retained.append(item)
+            continue
+        if edition_id == "interior":
+            reason = motorcycle_exclusion(item, snapshot.get("rules", []))
+            if reason:
+                print(f"[EDITORIAL_VEHICLE_EXCLUDED] {item.get('url', '')} ({reason})")
+                continue
+        if item.get("country") == "paper":
             retained.append(item)
             continue
         if edition_id == "exterior":
@@ -419,9 +427,8 @@ def validate_editorial_publication(items, existing_url_keys, snapshot, edition_i
             else:
                 retained.append(item)
             continue
-        # Interior trusts the collector's own selection (relevance classification,
-        # score, and same-day quota backfill) as-is; only explicit takedowns
-        # (excluded, above) and already-published duplicates are filtered here.
+        # Preserve the other interior selection rules; this final vehicle gate
+        # also protects direct/resumed CSV publication without rerunning an LLM.
         retained.append(item)
     if pending:
         raise RuntimeError("Editorial validation failed; no news or insights have been updated. "

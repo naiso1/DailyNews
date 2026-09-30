@@ -41,6 +41,7 @@ $copyJson = $sourceJson.Replace(
 ).Replace('DailyNews success ', 'DailyNews exterior success '
 ).Replace('内装製品デイリーニュース', '外装製品デイリーニュース'
 ).Replace('内装開発デイリーニュース', '外装製品デイリーニュース')
+$copyJson = $copyJson.Replace('外装開発デイリーニュース', '外装製品デイリーニュース')
 # A preview can also start from the existing exterior flow without duplicating its path.
 $copyJson = [regex]::Replace($copyJson, '(?i)http://ieweb01/(?!exterior/)', 'http://IEWEB01/exterior/')
 $copy = $copyJson | ConvertFrom-Json
@@ -60,8 +61,9 @@ if (-not $sourceSuccess) { $sourceSuccess = $source.definition.actions.Check_Dai
 foreach ($key in @('emailMessage/Subject', 'emailMessage/Body')) {
     $template = [string]$sourceSuccess.inputs.parameters.$key
     if ([string]::IsNullOrWhiteSpace($template)) { throw "Source mail template is missing: $key" }
-    $template = $template.Replace('内装開発デイリーニュース', '外装開発デイリーニュース'
-    ).Replace('内装製品デイリーニュース', '外装製品デイリーニュース')
+    $template = $template.Replace('内装開発デイリーニュース', '外装製品デイリーニュース'
+    ).Replace('内装製品デイリーニュース', '外装製品デイリーニュース'
+    ).Replace('外装開発デイリーニュース', '外装製品デイリーニュース')
     if ($key -eq 'emailMessage/Body') {
         $template = $template.Replace('内装開発に関連する', '外装開発に関連する')
         $template = [regex]::Replace($template, '(?i)http://ieweb01/?(?=["''<>\s?]|$)', 'http://IEWEB01/exterior/')
