@@ -17,6 +17,7 @@ const accountState = {
   activityTab: "favorites",
   admin: null,
   authResolved: false,
+  registrationPromptDismissed: false,
   subscriptionBaseline: null,
   feedbackTarget: null,
   editorialFilters: { status: "", category: "", reasonCode: "", page: 1, hiddenPage: 1, historyPage: 1 },
@@ -234,13 +235,13 @@ function updateRegistrationPrompt() {
   if (!overlay) return;
   const required = !accountState.user && !ACCOUNT_ALLOW_GUEST;
   overlay.classList.toggle("auth-required", required);
-  if (required) {
+  if (accountState.user) {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  } else if (!overlay.classList.contains("open") && (required || !accountState.registrationPromptDismissed)) {
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
     renderAuth("welcome");
-  } else if (overlay.classList.contains("open")) {
-    overlay.classList.remove("open");
-    document.body.style.overflow = "";
   }
 }
 
@@ -282,13 +283,14 @@ function renderAuth(mode = accountState.mode, message = "") {
   accountState.mode = mode;
   const body = document.getElementById("accountBody");
   if (mode === "welcome") {
-    document.getElementById("accountTitle").textContent = "デイリーニュースをご利用の方へ";
+    document.getElementById("accountTitle").textContent = "IE開発デイリーニュースをご利用の方へ";
     body.innerHTML = `
       <div class="account-welcome">
         <section class="account-welcome-copy">
-          <div class="account-welcome-eyebrow">TG社員向けサービス</div>
-          <h3 class="account-welcome-title">${ACCOUNT_ALLOW_GUEST ? "外装版のメール受信・コメントをご利用の方へ" : "より良いサービスづくりのため、<br>ログイン方式に変更しました"}</h3>
-          <p class="account-welcome-lead">${ACCOUNT_SHARED_IDENTITY ? "内装版・外装版は同じメールアドレスとパスワードで利用できます。内装版に登録済みの方は、そのままログインしてください。メールは内装・外装から受信したい版を選べます。" + (ACCOUNT_ALLOW_GUEST ? " 外装ニュースは登録せずに閲覧できます。" : "") : (ACCOUNT_ALLOW_GUEST ? "ニュースは登録せずに閲覧できます。メール受信やお気に入り・コメントには外装版のアカウントをご登録ください。登録だけではメールは配信されません。" : "TG社員であれば、どなたでも登録してご利用いただけます。")}</p>
+          <div class="account-welcome-eyebrow">TG社員・派遣社員向けサービス</div>
+          <h3 class="account-welcome-title">ユーザー登録して、<br>便利な機能をご利用ください</h3>
+          <p class="account-welcome-lead">TG社員・派遣社員の方は誰でも登録可能です。</p>
+          <p class="account-welcome-lead">${ACCOUNT_SHARED_IDENTITY ? "内装版・外装版は同じメールアドレスとパスワードで利用できます。登録済みの方は、そのままログインしてください。メールは内装・外装から受信したい版を選べます。" + (ACCOUNT_ALLOW_GUEST ? " 外装ニュースは登録せずに閲覧できます。" : "") : (ACCOUNT_ALLOW_GUEST ? "ニュースは登録せずに閲覧できます。メール受信やお気に入り・コメントには外装版のアカウントをご登録ください。登録だけではメールは配信されません。" : "ログインしてニュースの閲覧や、お気に入り・コメントをご利用いただけます。")}</p>
           <ul class="account-welcome-points">
             <li>登録は、表示名・メールアドレス・パスワードの入力だけで完了します。</li>
             <li>お気に入り・いいね・コメントを、端末が変わっても確認できます。</li>
@@ -306,17 +308,20 @@ function renderAuth(mode = accountState.mode, message = "") {
             <span>登録したメールアドレスとパスワードでお進みください。</span>
             <button class="account-secondary" id="accountStartLogin" type="button">ログインへ</button>
           </div>
+          ${ACCOUNT_ALLOW_GUEST ? '<button class="account-link" id="accountContinueGuest" type="button">登録せずに閲覧する</button>' : ""}
           <p class="account-privacy-note">メールアドレスはログインIDとして使用し、コメント欄などには公開されません。</p>
         </aside>
       </div>`;
     body.querySelector("#accountStartRegister").addEventListener("click", () => renderAuth("register"));
     body.querySelector("#accountStartLogin").addEventListener("click", () => renderAuth("login"));
+    body.querySelector("#accountContinueGuest")?.addEventListener("click", closeAccount);
     return;
   }
   const isRegister = mode === "register";
   document.getElementById("accountTitle").textContent = isRegister ? "新規登録" : "ログイン";
   body.innerHTML = `
-    <p class="account-note">${ACCOUNT_SHARED_IDENTITY ? (isRegister ? "内装・外装で共通のアカウントを作成します。すでに内装版に登録済みの方は、再登録せずログインしてください。" : "内装版と同じメールアドレス・パスワードでログインできます。以前両版に別々のパスワードを登録した場合は、内装版のパスワードを使ってください。") : (isRegister ? "TG社員であれば、どなたでも登録できます。" : "登録したメールアドレスとパスワードでログインしてください。")} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
+    ${isRegister ? '<p class="account-note">TG社員・派遣社員の方は誰でも登録可能です。</p>' : ""}
+    <p class="account-note">${ACCOUNT_SHARED_IDENTITY ? (isRegister ? "内装・外装で共通のアカウントを作成します。すでに登録済みの方は、再登録せずログインしてください。" : "内装版と同じメールアドレス・パスワードでログインできます。以前両版に別々のパスワードを登録した場合は、内装版のパスワードを使ってください。") : (isRegister ? "表示名・メールアドレス・パスワードを入力してください。" : "登録したメールアドレスとパスワードでログインしてください。")} メールアドレスは公開されません。ログイン状態はこの端末で180日間維持されます。</p>
     <div class="account-error${message ? " show" : ""}" id="accountError">${escapeAccountHtml(message)}</div>
     <form class="account-form" id="accountAuthForm">
       ${isRegister ? '<label class="account-field">表示名<input name="displayName" maxlength="40" autocomplete="name" required placeholder="コメントに表示する名前"></label>' : ""}
@@ -951,7 +956,9 @@ async function logoutAccount() {
     alert("ログアウトできませんでした。通信状態を確認して再度お試しください。");
     return;
   }
+  closeAccount();
   accountState.user = null;
+  accountState.registrationPromptDismissed = false;
   accountState.activity = null;
   accountState.admin = null;
   localStorage.removeItem(ACCOUNT_FAVORITES_OWNER_KEY);
@@ -962,7 +969,6 @@ async function logoutAccount() {
   window.applyServerFavorites?.([]);
   updateAccountButton();
   updateRegistrationPrompt();
-  closeAccount();
   window.dispatchEvent(new CustomEvent("dailynews:account-changed", { detail: null }));
   notifyAccountChange();
 }
@@ -1012,6 +1018,7 @@ function openAccountTab(tab) {
 
 function closeAccount() {
   if (!accountState.user && !ACCOUNT_ALLOW_GUEST) return;
+  if (!accountState.user) accountState.registrationPromptDismissed = true;
   document.getElementById("accountOverlay")?.classList.remove("open");
   document.body.style.overflow = "";
 }

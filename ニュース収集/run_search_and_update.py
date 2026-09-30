@@ -655,7 +655,7 @@ def send_review_email():
         msg = EmailMessage()
         msg["From"] = cfg["from_address"]
         msg["To"] = cfg["to_address"]
-        msg["Subject"] = f"【確認依頼】内装開発デイリーニュース {datetime.date.today():%Y-%m-%d}"
+        msg["Subject"] = f"【確認依頼】内装製品デイリーニュース {datetime.date.today():%Y-%m-%d}"
         msg.set_content("デイリーニュースを添付します。ご確認の上、配信をお願いします。")
         if REVIEW_EMAIL_ATTACHMENT.exists():
             data = REVIEW_EMAIL_ATTACHMENT.read_bytes()
