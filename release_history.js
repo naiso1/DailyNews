@@ -8,6 +8,7 @@ window.DAILYNEWS_RELEASE_HISTORY = [
       "冷却、3Dプリンター、CN/CE、NV、車体部品、製法・表面処理、接合、センサー、安全評価など、依頼された39キーワードを個別の絞り込みタグへ追加しました。従来の関連ジャンルも利用できます。",
       "日本語・英語・中国語の言い換えを共通化し、掲載済み記事の見出し・要約からもタグを付け直します。NVHやLiDARなどの表記違いをまとめ、短い略語が別の単語に含まれるだけではタグを付けません。",
       "画面表示と今後の収集後のタグ付けで同じ分類を使います。タグ数の上限で関連タグが消える動作をなくし、記事カードのタグと絞り込み結果を一致させます。",
+      "外装版だけ更新履歴のボタンを隠していた条件を修正しました。外装版でもヘッダーの「更新履歴」から、タグ追加を含む変更内容を確認できます。",
     ],
   },
   {
@@ -415,7 +416,6 @@ function escapeReleaseHtml(value) {
 }
 
 function initializeReleaseHistory() {
-  if (window.DAILYNEWS_CONFIG?.id === "exterior") return;
   if (document.documentElement.classList.contains("github-pages-migration")) return;
   const actions = document.querySelector(".header-top-actions");
   if (!actions || document.getElementById("releaseHistoryButton")) return;
@@ -453,7 +453,7 @@ function initializeReleaseHistory() {
   overlay.innerHTML = `
     <section class="release-history-dialog" role="dialog" aria-modal="true" aria-labelledby="releaseHistoryTitle">
       <div class="release-history-head"><h2 id="releaseHistoryTitle">更新履歴</h2><button class="release-history-close" type="button" aria-label="閉じる">&times;</button></div>
-      <p class="release-history-note">機能の改善・不具合修正の記録です。内容は各更新日時点のものです。</p>
+      <p class="release-history-note">共通機能と各版の改善・不具合修正の記録です。内容は各更新日時点のものです。</p>
       <div class="release-history-list">${window.DAILYNEWS_RELEASE_HISTORY.map((entry) => `
         <article class="release-history-entry">
           <time>${escapeReleaseHtml(entry.date)}</time>
