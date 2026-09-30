@@ -1921,7 +1921,7 @@ window.LOADED_NEWS_DATA = [
         source: "www.bing.com",
         date: "2026-09-15",
         tags: [],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -1940,7 +1940,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-15",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -1961,7 +1961,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-15",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -1983,7 +1983,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 107",
         date: "2026-09-16",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2002,7 +2002,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 109",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2021,7 +2021,7 @@ window.LOADED_NEWS_DATA = [
         source: "Dailymail.com",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2040,7 +2040,7 @@ window.LOADED_NEWS_DATA = [
         source: "Ithome.com",
         date: "2026-09-16",
         tags: ["グリル", "バンパー", "センサー透過"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2059,7 +2059,7 @@ window.LOADED_NEWS_DATA = [
         source: "Geekpark.net",
         date: "2026-09-16",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "competitor",
@@ -2079,7 +2079,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2099,7 +2099,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-16",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2120,7 +2120,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2141,7 +2141,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-17",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2161,7 +2161,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-17",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2181,7 +2181,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2201,7 +2201,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2221,7 +2221,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-17",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2241,7 +2241,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Messe Web",
         date: "2026-09-17",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2261,7 +2261,7 @@ window.LOADED_NEWS_DATA = [
         source: "ベストカーWeb",
         date: "2026-09-17",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2281,7 +2281,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-17",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2301,7 +2301,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-17",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2321,7 +2321,7 @@ window.LOADED_NEWS_DATA = [
         source: "日刊自動車新聞",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2341,7 +2341,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "competitor",
@@ -2362,7 +2362,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "design",
@@ -2382,7 +2382,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2402,7 +2402,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2422,7 +2422,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2442,7 +2442,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2462,7 +2462,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2481,7 +2481,7 @@ window.LOADED_NEWS_DATA = [
         source: "Jalopnik",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2502,7 +2502,7 @@ window.LOADED_NEWS_DATA = [
         source: "Jalopnik",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "competitor",
@@ -2521,7 +2521,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "competitor",
@@ -2542,7 +2542,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2562,7 +2562,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2583,7 +2583,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-17",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2604,7 +2604,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-17",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2624,7 +2624,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "competitor",
@@ -2645,7 +2645,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-17",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2665,7 +2665,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2686,7 +2686,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2706,7 +2706,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 107",
         date: "2026-09-17",
         tags: ["センサー透過"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2725,7 +2725,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "competitor",
@@ -2745,7 +2745,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2764,7 +2764,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2785,7 +2785,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2805,7 +2805,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
         contentCategory: "product", trendTopic: "",
@@ -2826,7 +2826,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
         contentCategory: "trend", trendTopic: "market",
@@ -2847,7 +2847,7 @@ window.LOADED_NEWS_DATA = [
         source: "Jalopnik",
         date: "2026-09-15",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -2869,7 +2869,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -2888,7 +2888,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -2908,7 +2908,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-17",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -2929,7 +2929,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-18",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -2950,7 +2950,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-18",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -2969,7 +2969,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-18",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -2988,7 +2988,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-18",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3007,7 +3007,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-18",
         tags: [],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "regulation",
@@ -3028,7 +3028,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-18",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "competitor",
@@ -3047,7 +3047,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-18",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3068,7 +3068,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-19",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "design",
@@ -3087,7 +3087,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-19",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "design",
@@ -3105,7 +3105,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-19",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3125,7 +3125,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-19",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3147,7 +3147,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 88, exteriorScore: 88,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3167,7 +3167,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-20",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3186,7 +3186,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3206,7 +3206,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3226,7 +3226,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-20",
         tags: ["空力"],
-    
+
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3245,7 +3245,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "design",
@@ -3265,7 +3265,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-20",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3285,7 +3285,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Messe Web",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3305,7 +3305,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Messe Web",
         date: "2026-09-20",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3325,7 +3325,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3345,7 +3345,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3364,7 +3364,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3383,7 +3383,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3402,7 +3402,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-20",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3422,7 +3422,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "competitor",
@@ -3443,7 +3443,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3463,7 +3463,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-20",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3484,7 +3484,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3503,7 +3503,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3522,7 +3522,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3543,7 +3543,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-20",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3563,7 +3563,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car Blog India",
         date: "2026-09-20",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-20",
         contentCategory: "product", trendTopic: "",
@@ -3583,7 +3583,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
         contentCategory: "trend", trendTopic: "market",
@@ -3604,7 +3604,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-15",
         tags: ["グリル", "バンパー"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3624,7 +3624,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-16",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -3645,7 +3645,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-17",
         tags: ["バンパー", "外装加飾"],
-    
+
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3665,7 +3665,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 108",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -3684,7 +3684,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -3705,7 +3705,7 @@ window.LOADED_NEWS_DATA = [
         source: "Ithome.com",
         date: "2026-09-20",
         tags: ["グリル", "バンパー", "エンブレム", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "competitor",
@@ -3724,7 +3724,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-20",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3744,7 +3744,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTO BILD JAPAN Web",
         date: "2026-09-20",
         tags: ["空力"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "design",
@@ -3764,7 +3764,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-21",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "design",
@@ -3784,7 +3784,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -3804,7 +3804,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3824,7 +3824,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Messe Web",
         date: "2026-09-21",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3844,7 +3844,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-21",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3864,7 +3864,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR JAPAN",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "competitor",
@@ -3883,7 +3883,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-09-21",
         tags: ["空力"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3903,7 +3903,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "competitor",
@@ -3924,7 +3924,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-21",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 95, exteriorScore: 95,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3945,7 +3945,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -3965,7 +3965,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -3985,7 +3985,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4005,7 +4005,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car and Driver",
         date: "2026-09-21",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4025,7 +4025,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-21",
         tags: ["バンパー", "材料"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4045,7 +4045,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-21",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4065,7 +4065,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4084,7 +4084,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4103,7 +4103,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4122,7 +4122,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4142,7 +4142,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-21",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4162,7 +4162,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-21",
         tags: ["グリル", "バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 80, exteriorScore: 80,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4181,7 +4181,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4200,7 +4200,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-21",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4219,7 +4219,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-21",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4239,7 +4239,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4260,7 +4260,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4280,7 +4280,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4300,7 +4300,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto & Design",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4321,7 +4321,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-21",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4341,7 +4341,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4362,7 +4362,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4383,7 +4383,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorOctane",
         date: "2026-09-21",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4404,7 +4404,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-21",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
         contentCategory: "product", trendTopic: "",
@@ -4423,7 +4423,7 @@ window.LOADED_NEWS_DATA = [
         source: "日本経済新聞",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-21",
         contentCategory: "trend", trendTopic: "market",
@@ -4444,7 +4444,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-22",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4464,7 +4464,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-22",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4484,7 +4484,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4504,7 +4504,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -4524,7 +4524,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -4544,7 +4544,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4564,7 +4564,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Messe Web",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4584,7 +4584,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4604,7 +4604,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4624,7 +4624,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4645,7 +4645,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "design",
@@ -4666,7 +4666,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4686,7 +4686,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4706,7 +4706,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4727,7 +4727,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-22",
         tags: ["シール"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4747,7 +4747,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-22",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4768,7 +4768,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4788,7 +4788,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4808,7 +4808,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-22",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4828,7 +4828,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-22",
         tags: ["グリル", "エンブレム"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4848,7 +4848,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4867,7 +4867,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4886,7 +4886,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4907,7 +4907,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4928,7 +4928,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -4949,7 +4949,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-22",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -4970,7 +4970,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -4990,7 +4990,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5010,7 +5010,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -5029,7 +5029,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-22",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5050,7 +5050,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-22",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5071,7 +5071,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car Blog India",
         date: "2026-09-22",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5091,7 +5091,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -5111,7 +5111,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -5132,7 +5132,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -5153,7 +5153,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -5174,7 +5174,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-22",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5194,7 +5194,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5214,7 +5214,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "competitor",
@@ -5235,7 +5235,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorOctane",
         date: "2026-09-22",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
         contentCategory: "product", trendTopic: "",
@@ -5255,7 +5255,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "design",
@@ -5275,7 +5275,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -5296,7 +5296,7 @@ window.LOADED_NEWS_DATA = [
         source: "高知新聞",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
         contentCategory: "trend", trendTopic: "market",
@@ -5317,7 +5317,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-17",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5337,7 +5337,7 @@ window.LOADED_NEWS_DATA = [
         source: "ベストカーWeb",
         date: "2026-09-17",
         tags: ["照明・発光", "外装加飾"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5358,7 +5358,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5378,7 +5378,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5398,7 +5398,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-23",
         tags: ["空力"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5418,7 +5418,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5438,7 +5438,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5458,7 +5458,7 @@ window.LOADED_NEWS_DATA = [
         source: "WEB CARTOP",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5478,7 +5478,7 @@ window.LOADED_NEWS_DATA = [
         source: "VAGUE",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "regulation",
@@ -5498,7 +5498,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5519,7 +5519,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "competitor",
@@ -5540,7 +5540,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "design",
@@ -5561,7 +5561,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-23",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5581,7 +5581,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-23",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5601,7 +5601,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "competitor",
@@ -5621,7 +5621,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5642,7 +5642,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-23",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5663,7 +5663,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "design",
@@ -5684,7 +5684,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "design",
@@ -5705,7 +5705,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5725,7 +5725,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-23",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5745,7 +5745,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5765,7 +5765,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5785,7 +5785,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5804,7 +5804,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5823,7 +5823,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-23",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5843,7 +5843,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-23",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5864,7 +5864,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-23",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5885,7 +5885,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-23",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5905,7 +5905,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5925,7 +5925,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5945,7 +5945,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -5966,7 +5966,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-23",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -5986,7 +5986,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-23",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -6006,7 +6006,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "competitor",
@@ -6027,7 +6027,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -6047,7 +6047,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -6068,7 +6068,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-23",
         tags: ["材料", "空力"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "materials",
@@ -6088,7 +6088,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -6108,7 +6108,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto & Design",
         date: "2026-09-23",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -6129,7 +6129,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto & Design",
         date: "2026-09-23",
         tags: ["グリル", "照明・発光", "材料"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -6149,7 +6149,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -6170,7 +6170,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
         contentCategory: "trend", trendTopic: "market",
@@ -6191,7 +6191,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-23",
         tags: ["エンブレム", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -6210,7 +6210,7 @@ window.LOADED_NEWS_DATA = [
         source: "www.bing.com",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -6230,7 +6230,7 @@ window.LOADED_NEWS_DATA = [
         source: "Dgtle.com",
         date: "2026-09-23",
         tags: ["エンブレム"],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-23",
         contentCategory: "product", trendTopic: "",
@@ -6251,7 +6251,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6271,7 +6271,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6291,7 +6291,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-24",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6311,7 +6311,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6331,7 +6331,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6351,7 +6351,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-24",
         tags: ["バンパー", "材料"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6371,7 +6371,7 @@ window.LOADED_NEWS_DATA = [
         source: "ベストカーWeb",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 55, exteriorScore: 55,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6391,7 +6391,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6411,7 +6411,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6432,7 +6432,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6452,7 +6452,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Drive",
         date: "2026-09-24",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6473,7 +6473,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6493,7 +6493,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-24",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6514,7 +6514,7 @@ window.LOADED_NEWS_DATA = [
         source: "Jalopnik",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6533,7 +6533,7 @@ window.LOADED_NEWS_DATA = [
         source: "Jalopnik",
         date: "2026-09-24",
         tags: ["バンパー", "照明・発光", "材料"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6554,7 +6554,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car and Driver",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6574,7 +6574,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car and Driver",
         date: "2026-09-24",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6594,7 +6594,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-24",
         tags: ["照明・発光", "外装加飾"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6615,7 +6615,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "competitor",
@@ -6636,7 +6636,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6657,7 +6657,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-24",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6678,7 +6678,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6698,7 +6698,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-24",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6719,7 +6719,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-24",
         tags: ["バンパー", "外装加飾"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6740,7 +6740,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6759,7 +6759,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "competitor",
@@ -6778,7 +6778,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 58, exteriorScore: 58,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6799,7 +6799,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6818,7 +6818,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 109",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6837,7 +6837,7 @@ window.LOADED_NEWS_DATA = [
         source: "Autocar India - All",
         date: "2026-09-24",
         tags: ["バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6857,7 +6857,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-24",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6877,7 +6877,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-24",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -6898,7 +6898,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-24",
         tags: ["エンブレム"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "competitor",
@@ -6917,7 +6917,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "competitor",
@@ -6936,7 +6936,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6957,7 +6957,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6977,7 +6977,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 58, exteriorScore: 58,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -6997,7 +6997,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -7018,7 +7018,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-24",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -7039,7 +7039,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-24",
         tags: ["エンブレム"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -7060,7 +7060,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto & Design",
         date: "2026-09-24",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -7080,7 +7080,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -7100,7 +7100,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-24",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -7120,7 +7120,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -7141,7 +7141,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-24",
         contentCategory: "trend", trendTopic: "market",
@@ -7162,7 +7162,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-24",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -7182,7 +7182,7 @@ window.LOADED_NEWS_DATA = [
         source: "Evo India",
         date: "2026-09-24",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-24",
         contentCategory: "product", trendTopic: "",
@@ -7202,7 +7202,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 108",
         date: "2026-09-21",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7222,7 +7222,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-22",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "competitor",
@@ -7242,7 +7242,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 108",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7261,7 +7261,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "competitor",
@@ -7282,7 +7282,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7303,7 +7303,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7323,7 +7323,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "design",
@@ -7344,7 +7344,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-23",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "competitor",
@@ -7366,7 +7366,7 @@ window.LOADED_NEWS_DATA = [
         source: "Gasgoo CN - Class 409",
         date: "2026-09-24",
         tags: ["バンパー", "材料"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "materials",
@@ -7385,7 +7385,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-24",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7405,7 +7405,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-24",
         tags: [],
-    
+
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7426,7 +7426,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-24",
         tags: ["グリル", "バンパー"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7446,7 +7446,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car Blog India",
         date: "2026-09-24",
         tags: ["グリル", "バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7468,7 +7468,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-25",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7488,7 +7488,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-25",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7508,7 +7508,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-25",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7529,7 +7529,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-26",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7550,7 +7550,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-26",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7570,7 +7570,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-26",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "competitor",
@@ -7589,7 +7589,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-26",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7610,7 +7610,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-27",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7630,7 +7630,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7650,7 +7650,7 @@ window.LOADED_NEWS_DATA = [
         source: "carview!",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7670,7 +7670,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-27",
         tags: ["空力"],
-    
+
         edition: "exterior", productScore: 80, exteriorScore: 80,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7690,7 +7690,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7710,7 +7710,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "design",
@@ -7730,7 +7730,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7750,7 +7750,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Messe Web",
         date: "2026-09-27",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7770,7 +7770,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7790,7 +7790,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-27",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 88, exteriorScore: 88,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7810,7 +7810,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "competitor",
@@ -7829,7 +7829,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7850,7 +7850,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-27",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7871,7 +7871,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7890,7 +7890,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 58, exteriorScore: 58,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7911,7 +7911,7 @@ window.LOADED_NEWS_DATA = [
         source: "BMWBLOG",
         date: "2026-09-27",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "design",
@@ -7932,7 +7932,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1 Spain",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7953,7 +7953,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1 Spain",
         date: "2026-09-27",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
         contentCategory: "product", trendTopic: "",
@@ -7973,7 +7973,7 @@ window.LOADED_NEWS_DATA = [
         source: "Cartoq",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -7992,7 +7992,7 @@ window.LOADED_NEWS_DATA = [
         source: "www.bing.com",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -8011,7 +8011,7 @@ window.LOADED_NEWS_DATA = [
         source: "caranddriver",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -8030,7 +8030,7 @@ window.LOADED_NEWS_DATA = [
         source: "note",
         date: "2026-09-27",
         tags: [],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
         contentCategory: "trend", trendTopic: "market",
@@ -8051,7 +8051,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-28",
         tags: ["グリル"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8071,7 +8071,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-28",
         tags: ["グリル", "バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8091,7 +8091,7 @@ window.LOADED_NEWS_DATA = [
         source: "レスポンス",
         date: "2026-09-28",
         tags: ["バンパー", "エンブレム"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8111,7 +8111,7 @@ window.LOADED_NEWS_DATA = [
         source: "MotorFan",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8131,7 +8131,7 @@ window.LOADED_NEWS_DATA = [
         source: "VAGUE",
         date: "2026-09-28",
         tags: ["エンブレム", "照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8151,7 +8151,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8171,7 +8171,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8191,7 +8191,7 @@ window.LOADED_NEWS_DATA = [
         source: "くるまのニュース",
         date: "2026-09-28",
         tags: ["バンパー"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8211,7 +8211,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR JAPAN",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 88, exteriorScore: 88,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8231,7 +8231,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR JAPAN",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8251,7 +8251,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8271,7 +8271,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "regulation",
@@ -8291,7 +8291,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-28",
         tags: ["外装加飾"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8312,7 +8312,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8333,7 +8333,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8353,7 +8353,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarScoops",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8374,7 +8374,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car and Driver",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8395,7 +8395,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car and Driver",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8415,7 +8415,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Torque Report",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8435,7 +8435,7 @@ window.LOADED_NEWS_DATA = [
         source: "The Torque Report",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8455,7 +8455,7 @@ window.LOADED_NEWS_DATA = [
         source: "AUTOCAR UK",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8475,7 +8475,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8496,7 +8496,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-28",
         tags: ["グリル", "バンパー", "照明・発光"],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8517,7 +8517,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Express",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8538,7 +8538,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8558,7 +8558,7 @@ window.LOADED_NEWS_DATA = [
         source: "CarNewsChina - All",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8578,7 +8578,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8597,7 +8597,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8618,7 +8618,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8639,7 +8639,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8658,7 +8658,7 @@ window.LOADED_NEWS_DATA = [
         source: "CnEVPost - All",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8678,7 +8678,7 @@ window.LOADED_NEWS_DATA = [
         source: "RushLane",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8699,7 +8699,7 @@ window.LOADED_NEWS_DATA = [
         source: "GaadiWaadi",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8718,7 +8718,7 @@ window.LOADED_NEWS_DATA = [
         source: "IndiaCarNews",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 45, exteriorScore: 45,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8739,7 +8739,7 @@ window.LOADED_NEWS_DATA = [
         source: "Car Blog India",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8759,7 +8759,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8780,7 +8780,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8800,7 +8800,7 @@ window.LOADED_NEWS_DATA = [
         source: "Auto Punditz",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8821,7 +8821,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8841,7 +8841,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electrive",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8862,7 +8862,7 @@ window.LOADED_NEWS_DATA = [
         source: "Automotive World",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8883,7 +8883,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8903,7 +8903,7 @@ window.LOADED_NEWS_DATA = [
         source: "Electric Cars Report",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -8923,7 +8923,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "competitor",
@@ -8944,7 +8944,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8965,7 +8965,7 @@ window.LOADED_NEWS_DATA = [
         source: "ChinaEVHome",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "trend", trendTopic: "market",
@@ -8985,7 +8985,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -9005,7 +9005,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motoroids",
         date: "2026-09-28",
         tags: ["グリル", "照明・発光"],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -9025,7 +9025,7 @@ window.LOADED_NEWS_DATA = [
         source: "Motor1 Spain",
         date: "2026-09-28",
         tags: [],
-    
+
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -9046,7 +9046,7 @@ window.LOADED_NEWS_DATA = [
         source: "Evo India",
         date: "2026-09-28",
         tags: ["照明・発光"],
-    
+
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-28",
         contentCategory: "product", trendTopic: "",
@@ -9057,4 +9057,649 @@ window.LOADED_NEWS_DATA = [
         img: "https://www.evoindia.com/h-upload/2026/09/28/469273-renault-8-gordini-concept.webp",
         note: ""
     },
+    // 2026-09-29 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp100",
+        title: "ルノー カングー、トーヨータイヤとコラボした限定車「リミテ」を披露",
+        desc: "ルノーはトーヨータイヤの「OPEN COUNTRY」とコラボレーションし、アウトドアテイストを高めた特別仕様車「カングー・リミテ」を披露した。本車両は限定25台で、黄色いボディに白文字のタイヤが組み合わされ、足元のデザインが特徴付けられている。",
+        url: "https://news.yahoo.co.jp/articles/8dd30a06a963f08e9021c2c88c61ad01233f9845",
+        source: "レスポンス",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 70, exteriorScore: 70,
+        developmentLane: "direct",
+        developmentEvidence: "ルノー『カングー』とトーヨータイヤ「OPEN COUNTRY」のコラボレーションにより、白文字のタイヤを組み合わせた特別仕様車「カングー・リミテ」が設定されている。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "「カングーでアウトドアに出かけるユーザーにとって、オフロード性能とホワイトレターによるデザイン性の両方を兼ね備えたOPEN COUNTRYは",
+        sourceExcerptEnd: "イトレターで足元を大胆に演出カングーには17インチホイールの設定もあるが、カングー・リミテには16インチホイールを採用。",
+        interiorScore: 70,
+        interiorReason: "ルノー・カングーの特別仕様車における、タイヤ（白文字）とボディカラー（黄色）の組み合わせによる外装デザイン変更が具体的に記載されているため対象。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000035-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp101",
+        title: "東洋アルミニウム、蒸着アルミ・磁性フレーク顔料を展示",
+        desc: "東洋アルミニウムは2026年9月30日から10月2日にかけて幕張メッセで開催される高機能素材Week東京展に出展する。同社は蒸着アルミ顔料、磁性フレーク顔料、ステンレスフレーク顔料の3技術を紹介し、塗装例やイメージを展示する予定である。",
+        url: "https://news.yahoo.co.jp/articles/d5a34677f20a23db8b06b87b51dc9841e02749fa",
+        source: "レスポンス",
+        date: "2026-09-29",
+        tags: ["外装加飾", "材料"],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "東洋アルミニウムが高機能素材Week2026で蒸着アルミ顔料の塗装例やイメージを展示予定であること。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "東洋アルミニウムは、2026年9月30日（水）から10月2日（金）まで幕張メッセで開催される「高機能素材Week 東京展 第9回 塗料・塗装設備展」に出展する。",
+        interiorScore: 72,
+        interiorReason: "蒸着アルミ顔料等の塗装技術は、グリルやエンブレムなどの外装加飾・表面処理に直接関連する具体的情報を含むため対象。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000007-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp102",
+        title: "トヨタ クラウンクロスオーバー 一部改良でハイブリッド刷新",
+        desc: "トヨタは2026年9月3日、クラウンクロスオーバーの一部改良を発表した。ハイブリッドシステムを刷新し、リアデザインも変更されている。",
+        url: "https://news.yahoo.co.jp/articles/dfe5353022179aacbde5f64a4a409c6f337c30d8",
+        source: "carview!",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 65, exteriorScore: 65,
+        developmentLane: "direct",
+        developmentEvidence: "「クラウンクロスオーバー」改良で、リアデザインも変更されている。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "2026年9月3日、トヨタは「クラウンクロスオーバー」の一部改良を発表し、同日発売しました。",
+        interiorScore: 65,
+        interiorReason: "トヨタ・クラウンクロスオーバーの改良において、リアデザイン（テールゲート・ランプ）の刷新と燃費向上が具体的に言及されているため、外装設計変更として対象となる。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00010004-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp103",
+        title: "ルノー、64年型名車の電動リバイバル「8ゴルディーニ コンセプト」発表",
+        desc: "ルノーは2026年9月24日、1964年の名車を現代のEVで表現したコンセプトカーを発表した。全長4.12mのボディにダブルストライプを配し、ヘッドライトにはラリー仕様に着想を得た6灯を採用している。",
+        url: "https://news.yahoo.co.jp/articles/58aaf067ce2a2515fbec0c961534cf6ad26d2432",
+        source: "MotorFan",
+        date: "2026-09-29",
+        tags: ["照明・発光"],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "ヘッドライトはラリー仕様に着想を得た6灯を採用し、フロントエンドに特徴的な意匠を施している。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "ルノーは2026年9月24日、「ルノー 8 ゴルディーニ コンセプト」を発表した。",
+        interiorScore: 72,
+        interiorReason: "ルノーのコンセプトカーとして、フロントエンドモジュール（ヘッドライト・バンパー）やボディカラーリング等の外装デザインに関する具体的な情報を含むため対象。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-01634192-motorfan-000-2-view.jpg",
+        note: "", relatedUrls: ["https://news.yahoo.co.jp/articles/4cb215908e5bd7f70a73c735819ad81b48785cae"] },
+    {
+        id: "jp104",
+        title: "トヨタ80ハリアー、PHEV用グリル移植で純正比10cmダウン",
+        desc: "ガッキーさんのトヨタ「80ハリアー」は、PHEV用のフロントグリルを流用しピアノブラックのグロス感とメッシュデザインを取り入れた。さらに21インチホイールやVLAND製立体ランプによるリアの差別化を図り、純正から10cmダウンした足回りで独自の進化を遂げている。",
+        url: "https://news.yahoo.co.jp/articles/4dc6d5a269738945c96dded82cf6db53ae5bfbfb",
+        source: "Auto Messe Web",
+        date: "2026-09-29",
+        tags: ["グリル", "照明・発光"],
+
+        edition: "exterior", productScore: 70, exteriorScore: 70,
+        developmentLane: "direct",
+        developmentEvidence: "トヨタ80ハリアーにPHEV用フロントグリルを流用し、ピアノブラックのグロス感とメッシュデザインを採用している。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "純正から10cmダウンを達成したガッキーさんのトヨタ「80ハリアー」は、21インチホイールやPHEV部品流用により、定番のモデリスタ仕様から独自の進化を遂げている。",
+        interiorScore: 70,
+        interiorReason: "PHEV用フロントグリルの流用、ピアノブラック塗装によるメッシュデザインの変更、およびリアランプの立体化という外装部品の具体的な設計変更と意匠情報が含まれている",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00010008-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp105",
+        title: "アーバン・オートモーティブ、ディフェンダー90ベースのコンバーチブル試作車公開",
+        desc: "英国のカスタムブランド、アーバン・オートモーティブがSMMT Drive Live 2026でランドローバー「ディフェンダー」をベースにした屋根なしモデルを発表した。ショートホイールベースの90型にワイドフェンダーとマンダリンオレンジ革内装を組み合わせた試乗可能車両として、従来のオフロード性能とは異なる都市部での使いやすさを重視したデザインが特徴である。",
+        url: "https://news.yahoo.co.jp/articles/ffd1755b8f5edf2e89c9410645146a136ba3dcbb",
+        source: "Auto Messe Web",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "ランドローバー・ディフェンダーの屋根を撤去したコンバーチブル仕様への改造およびワイドフェンダーの装着",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "英国の高級車カスタムブランドであるアーバン・オートモーティブは2026年9月23日、自動車イベント「SMMT Drive Live 2026（英国自動車工業会が主催するメディア向け合同試乗イベント）」への出展概要を発表した。",
+        interiorScore: 72,
+        interiorReason: "ランドローバー・ディフェンダーの屋根なしコンバーチブル化という車体構造（ルーフ/骨格）の変更と、ワイドフェンダー等の外装部品設計に関する具体的な情報を含むため対",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00010006-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp106",
+        title: "ルノー「8ゴルディーニ・コンセプト」世界初公開",
+        desc: "ルノーは、60年代の名車をオマージュしたワンオフの後輪駆動EV「8ゴルディーニ・コンセプト」を世界初公開した。全長4.1mの2ドアクーペで、「カフェレーサー」をデザインコンセプトとする現代解釈のデザインスタディである。",
+        url: "https://news.yahoo.co.jp/articles/4cb215908e5bd7f70a73c735819ad81b48785cae",
+        source: "VAGUE",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 65, exteriorScore: 65,
+        developmentLane: "direct",
+        developmentEvidence: "カフェレーサーをデザインコンセプトとした2ドアクーペで、特徴的なヘッドライト配置やボンネットのストライプなど外装意匠が詳細に描写されている。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "ただし、これは市販車ではなく、ルノーがブランドの歴史を現代的に再解釈した、世界に1台だけのデザインスタディです。",
+        interiorScore: 65,
+        interiorReason: "ルノーのワンオフコンセプトカーとして、フロントエンドモジュールやバンパー、ヘッドランプなどの外装デザインと形状に関する具体的な情報を含むため対象とする。",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-10460433-vague-000-1-view.jpg",
+        note: "", duplicateOf: "jp103" },
+    {
+        id: "jp107",
+        title: "ランクル300にモデリスタが鍛造ホイールとエアロを発売",
+        desc: "トヨタの新型ランドクルーザー300向けに、モデリスタがカスタマイズアイテムを発売した。専用エアロパーツや20インチの鍛造アルミホイールなどを設定し、「Refined Presence」をテーマに外装の質感を高めた仕様を提供する。",
+        url: "https://news.yahoo.co.jp/articles/723669028aef3cfb989b06ee0c93653a56467396",
+        source: "ベストカーWeb",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "改良型ランドクルーザー300用モデリスタアイテムとして新型リアスポイラーや20インチホイール、バンパー等のカスタマイズパーツを発売し、「Refined Presence」テーマで外装の質感を高めた仕様を提供。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "「Refined Presence」をテーマに、専用エアロや20インチ鍛造アルミホイールなどを設定。",
+        interiorScore: 72,
+        interiorReason: "改良型ランドクルーザー300用のモデリスタカスタマイズアイテムとして、新型リアスポイラーやバンパー、加飾パーツの具体的な形状変更と意匠設計が記載されており、外装",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-00000010-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp108",
+        title: "BMW M440i xDriveグランクーペにBlack Package追加",
+        desc: "BMWジャパンはM440i xDriveグラン クーペの特別仕様車「Black Package」を発表した。黒とカーボン素材を組み合わせたスポーティな外装が特徴で、387馬力の4WDシステムを搭載する高性能4ドアクーペをベースにしている。",
+        url: "https://news.yahoo.co.jp/articles/3976f903c994be11efabfa2f79837424331f9879",
+        source: "くるまのニュース",
+        date: "2026-09-29",
+        tags: ["材料"],
+
+        edition: "exterior", productScore: 55, exteriorScore: 55,
+        developmentLane: "direct",
+        developmentEvidence: "BMW M440i xDriveグラン クーペをベースにした特別仕様車「Black Package」を発表。黒×カーボンのスポーティな外装デザインを採用。387馬力の4WDシステム搭載。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "trend", trendTopic: "design",
+        sourceExcerpt: "BMWジャパンは2026年9月15日、高性能4ドアクーペの「M440i xDriveグラン クーペ（エムヨンヨンマルアイ）」をベース車両にした特別仕様車「Black Package（ブラック・パッケージ）」を発表しました。",
+        interiorScore: 55,
+        interiorReason: "BMW M440i xDriveグラン クーペの特別仕様車「Black Package」に関する記事。黒×カーボンのスポーティな外装デザインが主題であり、グリル",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260929-01118014-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us84",
+        title: "Ford、トラックにツートーンペイントを復活させる",
+        desc: "Fordがトラックのデザインにおいてツートーンペイントを再導入する。",
+        url: "https://www.thedrive.com/news/two-tone-paint-is-making-a-comeback-on-trucks-thanks-to-ford-tds",
+        source: "The Drive",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "Ford is bringing back two-tone paint on trucks.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "🎨 Ford must have gotten sick of watching dealers create throwback two-tone liveries because now the automaker’s getting back into the two-tone paint business.",
+        interiorScore: 72,
+        interiorReason: "Fordがトラックのデザインにおいてツートーンペイントを再導入する具体的な外装設計変更に関する記事であるため、対象とする。",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/f150.jpeg?quality=85",
+        note: "", duplicateOf: "us92" },
+    {
+        id: "us85",
+        title: "795馬力V8搭載の2026年型マスタングダークホースSCが初試乗で登場",
+        desc: "Fordの2026年型Mustang Dark Horse SCは、Track Package採用で150ポンド軽量化し、tealブレーキキャリパーとシートベルトを備える。",
+        url: "https://www.thedrive.com/car-reviews/2026-ford-mustang-dark-horse-sc-first-drive-review-the-perfect-mustang-doesnt-need-a-stick",
+        source: "The Drive",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 75, exteriorScore: 75,
+        developmentLane: "direct",
+        developmentEvidence: "The evolution of the supercharged halo-spec Mustang has produced a wild spectrum of machines.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "And now there’s a new twist: the 2026 Ford Mustang Dark Horse SC throws out old naming conventions, but the formula remains intact.",
+        interiorScore: 75,
+        interiorReason: "2026年型Ford Mustang Dark Horse SCの試乗レビューであり、リアスポイラーやフロントエンドモジュールなどの外装形状変更が具体的に記載さ",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/09/mustang-hero.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us86",
+        title: "Dacia Hipster量産化、2027年英国導入と報道",
+        desc: "Daciaの4人乗り電気都市車Hipsterは全長3mでL7e規格に準拠し、2027年に英国で約9,500ポンドでの販売が報じられている。ただしRenault Groupの最終承認は未定であり、正式な計画ではない。",
+        url: "https://www.motor1.com/news/810000/dacia-hipster-city-ev-production/",
+        source: "Motor1",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 45, exteriorScore: 45,
+        developmentLane: "trend",
+        developmentEvidence: "Dacia Hipster conceptの量産版が2027年に英国で£9,500（約$12,700）で販売される可能性があると報じられている。L7e軽車両規制に基づき設計され、Renault Groupの最終承認は未定である。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "trend", trendTopic: "market",
+        sourceExcerpt: "If Renault Group leadership approves the project and the reported plan holds,",
+        sourceExcerptEnd: "on sale, with Chinese production underpinning both volume and price.",
+        interiorScore: 45,
+        interiorReason: "Dacia Hipsterの量産化検討に関する市場・規制（L7e）トレンド記事。外装部品の具体的な設計変更、材料、製法、性能評価などの技術情報は含まれていないた",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/RqMbwe/s3/dacia-hipster-concept.jpg",
+        note: ""
+    },
+    {
+        id: "us87",
+        title: "ランザンテ、95-59にF1 GTR由来の固定カーボンウイング採用",
+        desc: "ランザンテは限定59台の95-59向けハイダウンフォースキットを公開し、750S由来のアクティブスポイラーを撤去してマクラーレンF1 GTRから借用した固定式カーボンウイングへ変更する。ノーズやボンネットベンツも改められるが、850馬力のV8エンジンは据え置きで、追加ダウンフォースに伴う重量増や抗力変化は未公表だ。",
+        url: "https://www.motor1.com/news/809986/lanzante-95-59-hdk-reveals/",
+        source: "Motor1",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "750S由来のアクティブスポイラーを廃止し、McLaren F1 GTR由来の固定カーボンウイングに交換。ノーズ再設計とボンネットベンツ追加を実施。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "Gone is the 750S-derived active spoiler, replaced by a fixed carbon wing borrowed straight from McLaren F1 GTR heritage.",
+        interiorScore: 72,
+        interiorReason: "リアスポイラーの固定化、ボンネットベンツ追加、ノーズ形状変更など外装部品の具体的な設計変更と走行安定性（ダウンフォース）への言及があるため対象。",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/OoZ2zo/s3/lanzante-95-59-hdk.jpg",
+        note: ""
+    },
+    {
+        id: "us88",
+        title: "アルファロメオ33ストラダレ、塗装を排したマットカーボン仕様のPerla Nera公開",
+        desc: "アルファロメオは、全33台限定の33 Stradaleからペイントを除去し、ノーズからテールまで裸のマットカーボンファイバーで構成された1台限りの「Perla Nera」を発表した。オーナーの要望により約3年かけて仕上げた本車は、Areseの博物館で10月18日まで展示される予定である。",
+        url: "https://www.motor1.com/news/809964/alfa-romeo-33-stradale-perla/",
+        source: "Motor1",
+        date: "2026-09-29",
+        tags: ["外装加飾"],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "Alfa Romeo 33 Stradale Perla Nera is finished with bare, matte carbon fiber from nose to tail.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "The Perla Nera (Black Pearl) unveiled at the Alfa Romeo Museum in Arese wears nothing but bare, matte carbon fiber from nose to tail.",
+        interiorScore: 72,
+        interiorReason: "外装の素材（カーボンファイバー）と表面処理（マット仕上げ・塗装除去）に関する具体的な情報を含む。",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/xqOnjv/s3/alfa-romeo-33-stradale-perla-nera.jpg",
+        note: ""
+    },
+    {
+        id: "us89",
+        title: "ランボルギーニ、Revueltoベースモデルのマイナーチェンジ試作車を発見",
+        desc: "固定ウイングやセンターロックホイールを備えないカモフラージュ車から、標準型ハイブリッド車のフェイスリフトが示唆される。出力は約20hp増の1,021hpに向上し、SV版と同様の7.3kWhバッテリーパックを搭載する可能性がある。",
+        url: "https://www.carscoops.com/2026/09/lamborghini-has-only-just-unleashed-the-revuelto-sv-now-the-base-car-is-getting-some-love/",
+        source: "CarScoops",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 75, exteriorScore: 75,
+        developmentLane: "direct",
+        developmentEvidence: "A camouflaged Reveulto prototype with subtly different bumpers and lights points to a mid-life refresh for the standard hybrid supercar",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "Bigger Battery But No ManualOne detail the Revuelto could inherit from the",
+        sourceExcerptEnd: "consistency” than the 3.8 kWh pack in the standard car.",
+        interiorScore: 75,
+        interiorReason: "ランボルギーニ・レヴエルートのマイナーチェンジ試作車が確認され、バンパーやライトの形状変更という外装部品の具体的な設計変更情報が含まれているため。",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Lambo-spy-Sep292611-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us90",
+        title: "現代車のフロントガラスのピラーが厚くなった理由と、それが安全上のリスクになり得る点",
+        desc: "現代車のAピラーが厚くなった理由と、それがもたらす安全上のリスク\\n\\nKiran Menon（2026年9月28日）\\n\\n前方の視界を確保しにくいと感じているドライバーの中には、その原因としてAピラーを挙げる人もいるだろう。",
+        url: "https://www.jalopnik.com/2270908/car-windshield-a-pillars-thick-visibility-problems/",
+        source: "Jalopnik",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 65, exteriorScore: 65,
+        developmentLane: "direct",
+        developmentEvidence: "Modern cars have thick A-pillars that contribute to visibility issues and safety risks.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        interiorScore: 65,
+        interiorReason: "Aピラーの厚みと視界確保に関する具体的な設計課題を論じており、外装骨格・安全性能の観点から対象となる。",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/why-windshield-pillars-on-modern-cars-got-so-thick-theyre-now-a-genuine-safety-risk/l-intro-1790613236.jpg",
+        note: ""
+    },
+    {
+        id: "us91",
+        title: "Ram Ramcharger、Jeep Grand Wagoneerと骨格共有しV-8 SUVへ",
+        desc: "2028年モデルのRam Ramchargerは、Jeep Grand Wagoneerと骨格を共有し、スーパーチャージャー付き6.2リットルV-8（777馬力）を搭載する。Ramブランド初のSUVとして、より攻撃的な外観デザインが特徴となる。",
+        url: "https://www.caranddriver.com/news/a73931177/2028-ram-ramcharger-future-cars/",
+        source: "Car and Driver",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 45, exteriorScore: 45,
+        developmentLane: "trend",
+        developmentEvidence: "Ram brand's first SUV sharing bones with Jeep Grand Wagoneer, featuring an aggressive exterior design.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "trend", trendTopic: "market",
+        sourceExcerpt: "Set to use the Ramcharger name, which previously adorned a truck-based SUV",
+        sourceExcerptEnd: "SUV will be related to the full-size Jeep Grand Wagoneer.",
+        interiorScore: 45,
+        interiorReason: "Ramブランド初のSUVとしての市場展開と、Jeep Grand Wagoneerとのプラットフォーム共有というトレンド情報を含むが、グリルやバンパー等の外装部",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/edfd6eca-da85-4444-b100-06932523c5d9.jpg",
+        note: ""
+    },
+    {
+        id: "us92",
+        title: "Ford F-150 SuperCrewにツートーンペイントが復活",
+        desc: "フォードは2027年型F-150のSuperCrew XLTとLariat向けに、Ford Custom Garage経由でツートーンペイントパッケージを再導入した。アクセントカラーにはOxford White、Carbonized Gray、Agate Blackが用意されている。",
+        url: "https://www.caranddriver.com/news/a73924905/2027-ford-f-150-two-tone-paint-option/",
+        source: "Car and Driver",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 68, exteriorScore: 68,
+        developmentLane: "direct",
+        developmentEvidence: "Ford Custom Garageを通じてSuperCrew XLT/Lariat向けに2トーンペイントパッケージを再導入し、アクセントカラーとしてOxford Whiteなどを設定した。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "trend", trendTopic: "design",
+        sourceExcerpt: "The new Two-Tone package is available through Ford Custom Garage, though it’s only offered on the XLT and Lariat models with the SuperCrew configuration.",
+        interiorScore: 68,
+        interiorReason: "2027年型F-150におけるツートーンペイントの再導入という具体的な外装デザイン変更と、限定オプションとしての市場戦略が記載されている。",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/48e39eb2-c3a9-4d8f-a333-c76c19eaed58.jpeg",
+        note: "", relatedUrls: ["https://www.thedrive.com/news/two-tone-paint-is-making-a-comeback-on-trucks-thanks-to-ford-tds"] },
+    {
+        id: "cn87",
+        title: "Hyundai Ioniq Vが中国で10.99万元から発売",
+        desc: "現代自動車は電動セダン「Ioniq V」を中国で発売し、割引前価格は10万9,900元（16,380米ドル）から13万9,900元（20,850米ドル）に設定した。同車は滑らかなピラーとボンネットラインによる新デザイン言語を採用し、風阻係数0.23Cdを実現している。",
+        url: "https://carnewschina.com/2026/09/29/hyundai-ioniq-v-launched-at-16380-usd-in-china-ahead-of-global-rollout/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 75, exteriorScore: 75,
+        developmentLane: "direct",
+        developmentEvidence: "New design language adopted, achieving a drag coefficient of 0.23 Cd.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "The Hyundai Ioniq V electric sedan was launched in China at 109,900 yuan (16,380 USD) before discounts.",
+        interiorScore: 75,
+        interiorReason: "新デザイン言語による外装形状と、風阻係数0.23Cdという具体的な性能指標が記載されており、外装開発の設計要件に該当する。",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/hyundai_ioniq_v_launch_webhook_1500x900_q85_1790677502.jpg",
+        note: ""
+    },
+    {
+        id: "cn88",
+        title: "Link & Co 02、中国での発売開始時に1万4663件の注文を獲得",
+        desc: "Link&Co 02は9月28日に中国市場で販売を開始し、開始から1時間で14,663台の注文を獲得した。価格は12.38万〜16.38万元（割引適用後11.88万〜15.88万元）で、16-in-1電動ドライブやLiDAR搭載ADASを備え、CLTCモードでの航続距離は最大630kmである。",
+        url: "https://carnewschina.com/2026/09/29/new-lynk-co-02-got-14663-orders-in-one-hour-after-the-launch-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 75, exteriorScore: 75,
+        developmentLane: "direct",
+        developmentEvidence: "ライブやLiDAR搭載ADASを備え、CLTCモードでの航続距離は最大630kmである。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "This model offers a new 16-in-1 electric drive, a LiDAR-based ADAS, a",
+        sourceExcerptEnd: "up to 630 km of CLTC range (517 km WLTP).",
+        interiorScore: 75,
+        interiorReason: "LiDAR搭載ADASの具体的構成と、画像に示されるフロントエンドモジュール（グリル・ランプ）やピラー形状など、外装部品の設計変更に関する事実が含まれるため対象",
+        imageInterior: false,
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/09/lynk_co_02-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "in97",
+        title: "メルセデスGLC Electric、94kWh搭載でWLTP715kmを達成",
+        desc: "Mercedes-BenzはGLC Electricを2026年11月4日にインドで発売し、PuneのChakan工場で組立する。94kWhバッテリーとWLTP航続距離715kmに加え、前面グリルや星形LEDランプなどの発光要素を備える。",
+        url: "https://www.autocarindia.com/car-news/mercedes-benz-glc-electric-launch-on-november-4-440869",
+        source: "Autocar India - All",
+        date: "2026-09-29",
+        tags: ["グリル", "照明・発光"],
+
+        edition: "exterior", productScore: 72, exteriorScore: 72,
+        developmentLane: "direct",
+        developmentEvidence: "前面グリルや星形LEDランプなどの発光要素を備える。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "At the front, the GLC Electric features a large, rounded-edge grille w",
+        sourceExcerptEnd: "D daytime running lamps (DRLs) and projector LED headlights.",
+        interiorScore: 72,
+        interiorReason: "外装のグリルやLEDランプといった具体的な意匠要素が記載されており、対象範囲内の設計情報を含む。",
+        imageInterior: false,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20260929_053022_3e1c7254.jpg",
+        note: "", duplicateOf: "in100" },
+    {
+        id: "in98",
+        title: "Renault Triber Turbo、78.4万ルピーから発売",
+        desc: "Renault IndiaがTriberのターボ仕様を78.4万ルピーから展開した。外装は新ロゴ付きグリル、LEDヘッドランプ、大型エアダム付きバンパーを備え、リアゲートにTURBOバッジを追加している。",
+        url: "https://www.indiacarnews.com/news/rs-7-84-lakh-7-seater-family-car-offers-21kmpl-mileage-69090/",
+        source: "IndiaCarNews",
+        date: "2026-09-29",
+        tags: ["グリル", "バンパー", "照明・発光"],
+
+        edition: "exterior", productScore: 55, exteriorScore: 55,
+        developmentLane: "direct",
+        developmentEvidence: "大型エアダム付きバンパーを備え、リアゲートにTURBOバッジを追加している。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "trend", trendTopic: "design",
+        sourceExcerpt: "It features the familiar gloss black grille with Renault’s new logo, LED",
+        sourceExcerptEnd: "ORVMs and door handles, LED taillamps connected by gloss-black trim.",
+        interiorScore: 55,
+        interiorReason: "リアゲートバッジやバンパー形状の変更という外装の具体的情報を含むが、主に価格・燃費・エンジン仕様に関するニュースであり、技術的な詳細は乏しい。",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/09/Renault-Triber-Turbo-Prices.webp",
+        note: ""
+    },
+    {
+        id: "us93",
+        title: "テスラ、リアディフューザーに4基の電動ファンを備えた特許を取得",
+        desc: "テスラは後部ディフューザーに4つの電動ダクトファンを配置し、任意の速度で車体を路面へ吸い下ろすシステムの特許を取得した。図面には2026年4月に生産終了したモデルSが描かれており、同社は1年余りで2件目のファンカー特許を得た。",
+        url: "https://electrek.co/2026/09/29/tesla-electric-fan-car-patent-model-s-roadster/",
+        source: "Electrek",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 85, exteriorScore: 85,
+        developmentLane: "direct",
+        developmentEvidence: "Rear diffuser equipped with four electric ducted fans to generate downforce at any speed.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "Tesla was just granted a patent for an “Electric Fan Car,” a",
+        sourceExcerptEnd: "suck the car down to the road at any speed.",
+        interiorScore: 85,
+        interiorReason: "リアディフューザーへの電動ファン配置という具体的な外装構造と、ダウンフォース性能に関する特許情報であり、直接対象となる。",
+        imageInterior: false,
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/09/Tesla-fan-car-patent.png?w=1600",
+        note: ""
+    },
+    {
+        id: "eu88",
+        title: "PEUGEOT E-208 GTI、赤黒アクセントの外装で初代GTiの意匠を継承",
+        desc: "Peugeot Sportが開発したE-208 GTIは、281馬力を発生し0-100km/h加速5.5秒を実現する。54kWhバッテリーによる航続距離375kmに加え、リミテッドスリップデフと25mmローダウンサスペンションを備え、コーナリング時のトラクションと操縦安定性を高めている。",
+        url: "https://autodesignmagazine.com/en/2026/09/peugeot-e-208-gti-a-small-electric-sports-car/",
+        source: "Auto & Design",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 75, exteriorScore: 75,
+        developmentLane: "direct",
+        developmentEvidence: "dedicated grille with a black finish and red inserts, rear spoiler, suspension setup for traction and stability",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "Developed by Peugeot Sport, the E-208 GTi produces 281 hp, sprints from",
+        sourceExcerptEnd: "5.5 seconds and reaches a top speed of 180 km/h.",
+        interiorScore: 75,
+        interiorReason: "E-208 GTIのフロントグリル、バンパー、リアスポイラーなどの外装部品の具体的なデザイン変更と、操縦安定性向上を目的としたサスペンション設定が記載されており",
+        imageInterior: false,
+        country: "eu",
+        img: "https://autodesignmagazine.com/wp-content/uploads/2026/09/PEUGEOT_E208GTITESTDRIVE_2284.jpg?x17940",
+        note: ""
+    },
+    {
+        id: "jp109",
+        title: "BMW iX3試乗、ノイエ・クラッセでキドニーグリルが細く小さく",
+        desc: "BMWのiX3はノイエ・クラッセ採用により、キドニーグリルが1960年代へのオマージュとして細く小さくデザインされている。",
+        url: "https://autoprove.net/imported-car/bmw/x3/257780/",
+        source: "AutoProve",
+        date: "2026-09-29",
+        tags: ["グリル"],
+
+        edition: "exterior", productScore: 45, exteriorScore: 45,
+        developmentLane: "direct",
+        developmentEvidence: "BMW iX3のキドニーグリルがノイエ・クラッセ採用により細く小さくデザインされている",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "trend", trendTopic: "design",
+        sourceExcerpt: "エクステリアデザインは、大きく変わりBMWのアイコンであるキドニーグリルは細く、小さくなってデザインされている。",
+        interiorScore: 45,
+        interiorReason: "BMW iX3の試乗記であり、キドニーグリルのデザイン変更（細く小さくなった）という外装形状に関する言及がある。しかし、具体的な寸法や構造、製法などの技術的詳細",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.autoprove.net/2026/09/d7ba100b88bf4c1a2d8651b520b45b05-3-376x282.jpeg",
+        note: ""
+    },
+    {
+        id: "eu89",
+        title: "Riverti Automobili、BMW M2ベースの3.0 CSLオマージュを公開",
+        desc: "Riverti Automobiliは、BMW M2（G87）をベースに1970年代の3.0 CSLを彷彿とさせるレトロな外装を施したプロトタイプをイタリアの山岳コースで初公開した。フロントマスクやエンジンフード、拡大されたフェンダーに加え、トランク上に重ねたダブルスポイラーが特徴的である。",
+        url: "https://de.motor1.com/news/809881/bmw-m2-g87-csl-riverti/",
+        source: "Motor1 Germany",
+        date: "2026-09-29",
+        tags: [],
+
+        edition: "exterior", productScore: 65, exteriorScore: 65,
+        developmentLane: "direct",
+        developmentEvidence: "マスクやエンジンフード、拡大されたフェンダーに加え、トランク上に重ねたダブルスポイラーが特徴的である。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        sourceExcerpt: "Riverti Automobili hat seine auf dem BMW M2 basierende Hommage an den 3.0 CSL aus dem Studio auf eine Bergrennstrecke gebracht.",
+        interiorScore: 65,
+        interiorReason: "BMW M2 (G87)ベースのレトロスタイル改造車に関する記事で、マスク（フロントエンド）、エンジンフード、フェンダー拡大、リアスポイラーといった外装部品の具",
+        imageInterior: false,
+        country: "eu",
+        img: "https://cdn.motor1.com/images/mgl/eoWOL8/s3/bmw-m2-3.0-csl-retromod-by-riverti-automobili.jpg",
+        note: ""
+    },
+    {
+        id: "in99",
+        title: "Jeep Wrangler Whitecap Mojito、Rubiconベースの特別仕様車として登場",
+        desc: "Jeep IndiaはWrangler Rubiconを基盤にWhitecap Mojito特別仕様車を公開した。外装には鮮やかな緑のMojitoカラーと白いルーフ、グリル周囲の白枠が施され、ドアには1941年のWillys MB登場にちなんだデカールが貼られている。",
+        url: "https://www.evoindia.com/news/car-news/jeep-wrangler-whitecap-mojito-revealed-587758",
+        source: "Evo India",
+        date: "2026-09-29",
+        tags: ["グリル"],
+
+        edition: "exterior", productScore: 62, exteriorScore: 62,
+        developmentLane: "direct",
+        developmentEvidence: "グリル周囲に白枠が施され、ドアには1941年のWillys MB登場にちなんだデカールが貼られている。",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        interiorScore: 62,
+        interiorReason: "グリル周囲の白枠（加飾）やドアデカールなど、外装部品の具体的な意匠変更情報が含まれているため対象とする。",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.evoindia.com/h-upload/2026/09/29/469302-chatgpt-image-sep-29-2026-043901-pm.webp",
+        note: ""
+    },
+    {
+        id: "in100",
+        title: "メルセデス・ベンツ、インドGLC 400 Electricを2026年11月に発表",
+        desc: "Mercedes-Benz Indiaは2026年11月4日にGLC 400 4MATIC Electricを発売し、Chakan工場で現地生産する。フロントグリルには942個の発光ドットが配置され、アニメーション表示に対応している。",
+        url: "https://www.evoindia.com/news/car-news/mercedes-benz-glc-400-4matic-electric-launch-date-news-587754",
+        source: "Evo India",
+        date: "2026-09-29",
+        tags: ["グリル", "照明・発光"],
+
+        edition: "exterior", productScore: 62, exteriorScore: 62,
+        developmentLane: "direct",
+        developmentEvidence: "The vehicle features a grille with 942 light-emitting dots that support animation displays.",
+        developmentPolicyVersion: "exterior-development-20260930",
+        digestDate: "2026-09-29",
+        contentCategory: "product", trendTopic: "",
+        interiorScore: 62,
+        interiorReason: "外装のグリル形状や942個の発光ドットによるアニメーション表示機能など、具体的なデザイン・意匠変更情報が含まれるため対象とする。",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.evoindia.com/h-upload/2026/09/29/469279-26c0275010.webp",
+        note: "", relatedUrls: ["https://www.autocarindia.com/car-news/mercedes-benz-glc-electric-launch-on-november-4-440869"] },
 ];
