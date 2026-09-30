@@ -10,7 +10,7 @@ $content = Join-Path $repo "content\exterior"
 $root = "C:\Users\Administrator\Desktop\DailyNewsExterior"
 $entry = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("5YaF6KOF6KO95ZOB44OH44Kk44Oq44O844OL44Ol44O844K5Lmh0bWw="))
 $shared = @($entry,"header-layout-test.html","activity-preview.html","source-list-preview.html","currency-conversion-preview.html",
-    "exchange_rates.js","dailynews_annotations.js","dailynews_config.js","dailynews_client.js","dailynews_account.js",
+    "exchange_rates.js","dailynews_annotations.js","dailynews_exterior_tags.js","dailynews_config.js","dailynews_client.js","dailynews_account.js",
     "dailynews_activity.js","dailynews_sources.js","release_history.js")
 foreach ($name in @("news_data.js","insights_data.js","source_list_data.js")) {
     if (!(Test-Path -LiteralPath (Join-Path $content $name))) { throw "Exterior content missing: $name" }

@@ -1547,6 +1547,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     <script type="module" src="release_history.js?v=20260915-editions-1"></script>
     <script src="exchange_rates.js?v=20260908-1"></script>
     <script src="dailynews_annotations.js?v=20260911-2"></script>
+    <script src="dailynews_exterior_tags.js?v=20260930-1"></script>
 
     <script>
         function normalizeExteriorPublication(payload) {
@@ -2158,18 +2159,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             { points: 6, words: ["安全", "adas", "センサー", "エアバッグ", "見守り"] },
             { points: 3, words: ["ev", "電動", "充電", "バッテリー", "suv", "mpv", "ミニバン"] }
         ];
-        const EXTERIOR_TAG_RULES = [
-            { tag: "グリル", words: ["グリル", "grille", "フロントパネル", "フロントモジュール"] },
-            { tag: "バンパー", words: ["バンパー", "bumper", "fascia"] },
-            { tag: "加飾", words: ["加飾", "塗装", "めっき", "クロム", "エンブレム", "emblem", "decorat"] },
-            { tag: "照明・発光", words: ["照明", "発光", "ライト", "lighting", "illumin", "led"] },
-            { tag: "センサー対応", words: ["センサー", "レーダー", "ライダー", "lidar", "radar", "adas", "透過"] },
-            { tag: "空力", words: ["空力", "エアロ", "aerodynamic", "シャッター", "shutter", "スポイラー"] },
-            { tag: "新素材", words: ["樹脂", "材料", "成形", "新素材", "polymer", "molding"] },
-            { tag: "サステナビリティ", words: ["リサイクル", "再生", "バイオ", "recycl", "sustainab"] },
-            { tag: "軽量化", words: ["軽量", "lightweight"] },
-            { tag: "サプライチェーン", words: ["工場", "生産拠点", "サプライチェーン", "factory", "plant"] }
-        ];
+        const EXTERIOR_TAG_RULES = window.DailyNewsExteriorTags?.rules || [];
         const EXTERIOR_SCORE_RULES = [
             { points: 18, words: ["外装", "exterior", "フロントモジュール", "フロントパネル"] },
             { points: 18, words: ["グリル", "grille", "バンパー", "bumper", "fascia", "エンブレム"] },
@@ -2193,6 +2183,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         }
 
         function deriveLocalTags(item) {
+            if (window.DAILYNEWS_CONFIG.id === "exterior") return window.DailyNewsExteriorTags.derive(item);
             const blob = ` ${getSearchBlob(item)} `;
             const tags = [];
             (window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES : LOCAL_TAG_RULES).forEach(rule => {
@@ -3157,7 +3148,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                 // Tag Filter (tag text can match title/desc as well)
                 if (!activeTags.has("all")) {
-                    const tagMatches = [...activeTags].some(tag => tag === "イルミ" && window.DAILYNEWS_CONFIG.id !== "exterior" ? n.tags.includes(tag) : searchable.includes(tag.toLowerCase()));
+                    const tagMatches = [...activeTags].some(tag => window.DAILYNEWS_CONFIG.id === "exterior"
+                        ? window.DailyNewsExteriorTags.matches(n, tag)
+                        : tag === "イルミ" ? n.tags.includes(tag) : searchable.includes(tag.toLowerCase()));
                     if (!tagMatches) return false;
                 }
 
@@ -3372,7 +3365,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 ? new Set(params.get("countries").split(",").filter(Boolean))
                 : new Set(["world"]);
             const requestedTags = params.has("tags")
-                ? params.get("tags").split(",").filter(Boolean)
+                ? params.get("tags").split(",").filter(Boolean).map(tag => window.DAILYNEWS_CONFIG.id === "exterior" ? window.DailyNewsExteriorTags.canonical(tag) : tag)
                 : ["all"];
             activeTags = new Set(requestedTags.includes("all") || requestedTags.length === 0 ? ["all"] : requestedTags);
 

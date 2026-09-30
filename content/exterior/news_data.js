@@ -7,7 +7,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/16a0805370a2422175e6e9cb042f8e45a9ede24d?source=rss",
         source: "VAGUE",
         date: "2026-09-14",
-        tags: ["エンブレム"],
+        tags: ["加飾", "エンブレム"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         sourceExcerpt: "リア中央のブランドロゴが、「L」をかたどった従来仕様のエンブレムから、「LEXUS」の文字を一文字ずつ配置した“バラ文字エンブレム”に変更されています。",
@@ -25,7 +25,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/2027-bmw-x5-m-performace-parts/",
         source: "CarScoops",
         date: "2026-09-14",
-        tags: ["グリル", "材料"],
+        tags: ["グリル", "空力", "新素材"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         sourceExcerpt: "Starting up front, customers can get carbon fiber grille inserts as well as a carbon fiber front splitter.",
@@ -44,7 +44,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/5003ae23c7e440ec545e3adff5659fdfccc8ca1e?source=rss",
         source: "Auto Messe Web",
         date: "2026-09-15",
-        tags: ["過去事例", "外装加飾"],
+        tags: ["加飾", "空力"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         sourceExcerpt: "ケンスタイルのエアロブランド「EIK」が選んだ答えは、オリジナルエアロをフロントハーフスポイラー1点に絞り、リアはフジツボ製チタンマフラーと専用ディフューザーのセットに任せる潔い構成だ。",
@@ -62,7 +62,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/amg-gt-black-series-looks-like-its-smashed-the-ring-record-before-its-even-hit-the-track/",
         source: "CarScoops",
         date: "2026-09-15",
-        tags: ["開発車", "空力"],
+        tags: ["フェンダー", "ドア", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         sourceExcerpt: "sets of active flaps mounted in the top of each front fender",
@@ -81,7 +81,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/6178ce0a6d838340cac6bbddc8be5bc302b0afa9?source=rss",
         source: "carview!",
         date: "2026-09-15",
-        tags: ["外装加飾"],
+        tags: ["ドア", "加飾"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         contentCategory: "product", trendTopic: "",
@@ -120,7 +120,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocar.co.uk/car-news/new-cars/report-jlr-collaborating-stellantis-defender-pick",
         source: "AUTOCAR UK",
         date: "2026-09-15",
-        tags: [],
+        tags: ["フェンダー"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         contentCategory: "trend", trendTopic: "market",
@@ -139,7 +139,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/audi/q5/370434/first-ever-audi-rs-q5-spied-massive-phev-power-and-snarling-style",
         source: "Auto Express",
         date: "2026-09-15",
-        tags: ["グリル"],
+        tags: ["フェンダー", "グリル"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         contentCategory: "trend", trendTopic: "competitor",
@@ -158,7 +158,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/15/voyah-dream-9-flagship-mpv-with-701-km-range-set-to-launch-on-september-22/",
         source: "CarNewsChina - All",
         date: "2026-09-15",
-        tags: ["グリル", "照明・発光"],
+        tags: ["フード", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         contentCategory: "product", trendTopic: "",
@@ -177,7 +177,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/15/freelander-8-china-deliveries-to-begin-september-19/",
         source: "CarNewsChina - All",
         date: "2026-09-15",
-        tags: ["照明・発光"],
+        tags: ["ルーフ", "Lidar", "照明・発光", "センサー対応"],
 
         edition: "exterior", productScore: 74, exteriorScore: 74,
         contentCategory: "trend", trendTopic: "competitor",
@@ -216,7 +216,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocarindia.com/car-news/ferrari-296-gt-modificata-debuts-as-supercars-most-extreme-version-yet-440754",
         source: "Autocar India - All",
         date: "2026-09-15",
-        tags: [],
+        tags: ["冷却"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         contentCategory: "product", trendTopic: "",
@@ -236,7 +236,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.rushlane.com/bmw-i5-lwb-review-spacious-fast-and-surprisingly-fun-12555908.html",
         source: "RushLane",
         date: "2026-09-15",
-        tags: ["グリル", "バンパー", "照明・発光"],
+        tags: ["ピラー", "グリル", "バンパー", "照明・発光", "空力"],
 
         edition: "exterior", productScore: 74, exteriorScore: 74,
         contentCategory: "product", trendTopic: "",
@@ -275,7 +275,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.rushlane.com/byd-denza-d9-luxury-mpv-and-z9-gt-1156-bhp-fastback-india-launch-soon-12555798.html",
         source: "RushLane",
         date: "2026-09-15",
-        tags: ["グリル", "照明・発光"],
+        tags: ["グリル", "照明・発光", "空力"],
 
         edition: "exterior", productScore: 70, exteriorScore: 70,
         contentCategory: "trend", trendTopic: "competitor",
@@ -294,7 +294,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.indiacarnews.com/news/new-rs-8-lakh-tata-suv-coming-in-2027-with-new-platform-69005/",
         source: "IndiaCarNews",
         date: "2026-09-15",
-        tags: ["バンパー", "照明・発光"],
+        tags: ["ドア", "リアスポイラー", "ピラー", "バンパー", "照明・発光", "空力"],
 
         edition: "exterior", productScore: 74, exteriorScore: 74,
         contentCategory: "product", trendTopic: "",
@@ -370,7 +370,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/1d7b722ffefac6026d4abc6c8c0097bfdb3c6925?source=rss",
         source: "ベストカーWeb",
         date: "2026-09-15",
-        tags: ["空力"],
+        tags: ["照明・発光", "空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         contentCategory: "product", trendTopic: "",
@@ -408,7 +408,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/volvo-xc60-and-xc90-get-long-range-plug-in-hybrid-power-with-up-to-78-miles-of-ev-range/",
         source: "Electric Cars Report",
         date: "2026-09-15",
-        tags: ["グリル", "バンパー"],
+        tags: ["フェンダー", "フード", "グリル", "バンパー", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         contentCategory: "product", trendTopic: "",
@@ -448,7 +448,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/volkswagen/amarok/370396/new-volkswagen-amarok-dark-label-special-edition-cancels-out-chrome",
         source: "Auto Express Car News",
         date: "2026-09-09",
-        tags: ["バンパー", "外装加飾"],
+        tags: ["ルーフ", "バンパー", "加飾"],
 
         edition: "exterior", productScore: 76, exteriorScore: 76,
         digestDate: "2026-09-15",
@@ -469,7 +469,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.caranddriver.com/news/a73647209/2028-volvo-xc40-refresh-revealed/",
         source: "Car and Driver",
         date: "2026-09-10",
-        tags: ["グリル", "バンパー", "照明・発光"],
+        tags: ["バックドア", "グリル", "バンパー", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-15",
@@ -508,7 +508,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carblogindia.com/hyundai-lounge-edition-creta-alcazar-creta-electric-launched/",
         source: "Car Blog India",
         date: "2026-09-10",
-        tags: ["外装加飾"],
+        tags: ["塗装", "加飾"],
 
         edition: "exterior", productScore: 76, exteriorScore: 76,
         digestDate: "2026-09-15",
@@ -548,7 +548,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.caranddriver.com/news/a73674190/mercedes-amg-cle-646-spezialanfertigung-revealed/",
         source: "Car and Driver",
         date: "2026-09-11",
-        tags: ["バンパー"],
+        tags: ["冷却", "フェンダー", "ルーフ", "フード", "バンパー", "空力"],
 
         edition: "exterior", productScore: 86, exteriorScore: 86,
         digestDate: "2026-09-15",
@@ -587,7 +587,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/09/11/nio-onvo-launches-l80-styling-package/",
         source: "CnEVPost - All",
         date: "2026-09-11",
-        tags: ["外装加飾"],
+        tags: ["塗装", "加飾"],
 
         edition: "exterior", productScore: 87, exteriorScore: 87,
         digestDate: "2026-09-15",
@@ -605,7 +605,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/09/11/tesla-launches-model-y-performance-china/",
         source: "CnEVPost - All",
         date: "2026-09-11",
-        tags: [],
+        tags: ["空力"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-15",
@@ -642,7 +642,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/09/11/china-unveils-five-year-nev-plan/",
         source: "CnEVPost - All",
         date: "2026-09-11",
-        tags: [],
+        tags: ["自動運転"],
 
         edition: "exterior", productScore: 79, exteriorScore: 79,
         digestDate: "2026-09-15",
@@ -660,7 +660,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/09/11/faw-vw-launch-id-aura-t6-sept-20/",
         source: "CnEVPost - All",
         date: "2026-09-11",
-        tags: [],
+        tags: ["Lidar", "センサー対応"],
 
         edition: "exterior", productScore: 71, exteriorScore: 71,
         digestDate: "2026-09-15",
@@ -679,7 +679,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electrek.co/2026/09/11/hyundais-ioniq-6-n-looks-ready-us-launch-image/",
         source: "Electrek",
         date: "2026-09-12",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 79, exteriorScore: 79,
         digestDate: "2026-09-15",
@@ -736,7 +736,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/13/the-new-geely-ex5-reveals-a-huge-front-trunk-in-china-ahead-of-launch-in-sept/",
         source: "CarNewsChina - EV",
         date: "2026-09-13",
-        tags: ["バンパー"],
+        tags: ["フェンダー", "ドア", "ルーフ", "Lidar", "バンパー", "センサー対応"],
 
         edition: "exterior", productScore: 80, exteriorScore: 80,
         digestDate: "2026-09-15",
@@ -756,7 +756,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://autodesignmagazine.com/en/2026/09/volkswagen-mission-efficiency-aerodynamics-takes-the-lead/",
         source: "Auto & Design",
         date: "2026-09-14",
-        tags: ["空力"],
+        tags: ["冷却", "空力"],
 
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-15",
@@ -776,7 +776,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/kia/370424/new-kia-pv7-nine-seats-and-350kw-charging-pv5s-big-brother",
         source: "Auto Express",
         date: "2026-09-14",
-        tags: [],
+        tags: ["ルーフ"],
 
         edition: "exterior", productScore: 76, exteriorScore: 76,
         digestDate: "2026-09-15",
@@ -796,7 +796,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/leapmotor-b03x-arrives-in-europe-with-e24900-starting-price/",
         source: "Electric Cars Report",
         date: "2026-09-14",
-        tags: ["照明・発光"],
+        tags: ["ドア", "ルーフ", "照明・発光"],
 
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-15",
@@ -817,7 +817,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/61a76735572cb27d5e77d0034fa34b50516bd69a?source=rss",
         source: "くるまのニュース",
         date: "2026-09-15",
-        tags: ["グリル", "エンブレム"],
+        tags: ["ドア", "グリル", "加飾", "エンブレム"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-15",
@@ -893,7 +893,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/808297/mitsubishi-pajero-why-lost-external-spare-wheel/",
         source: "Motor1",
         date: "2026-09-15",
-        tags: [],
+        tags: ["バックドア"],
 
         edition: "exterior", productScore: 80, exteriorScore: 80,
         digestDate: "2026-09-15",
@@ -912,7 +912,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.jalopnik.com/2257345/why-california-bans-red-lights-front-of-cars/",
         source: "Jalopnik",
         date: "2026-09-15",
-        tags: ["照明・発光", "外装加飾"],
+        tags: ["法規", "自動運転", "加飾", "照明・発光"],
 
         edition: "exterior", productScore: 76, exteriorScore: 76,
         digestDate: "2026-09-15",
@@ -931,7 +931,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/audi/370440/new-audi-nuvolari-review-stunning-ps500k-supercar-makes-r8-seem-slow",
         source: "Auto Express",
         date: "2026-09-15",
-        tags: ["空力"],
+        tags: ["冷却", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-15",
@@ -951,7 +951,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/rolls-royce/phantom/370437/rolls-royce-phantom-hummingbird-one-worth-shelling-out",
         source: "Auto Express",
         date: "2026-09-15",
-        tags: ["外装加飾"],
+        tags: ["塗装", "加飾"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-15",
@@ -1050,7 +1050,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/b481497897915a0d9ba518ac129b2b48436148fa?source=rss",
         source: "レスポンス",
         date: "2026-09-16",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1109,7 +1109,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/66a7807a50dde1dba00dfa80b8976aee671bff49?source=rss",
         source: "carview!",
         date: "2026-09-16",
-        tags: ["エンブレム", "照明・発光"],
+        tags: ["加飾", "照明・発光", "エンブレム"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-16",
@@ -1129,7 +1129,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/7f6498c4a793af7372c9e64316fd1e9d6aa2bd93?source=rss",
         source: "carview!",
         date: "2026-09-16",
-        tags: ["エンブレム"],
+        tags: ["加飾", "エンブレム"],
 
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-16",
@@ -1149,7 +1149,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/8de8b095f3b77f43b6663afbbb33d78525d2df46?source=rss",
         source: "carview!",
         date: "2026-09-16",
-        tags: ["材料"],
+        tags: ["新素材"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-16",
@@ -1169,7 +1169,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/2d07d4ebfc6a1ad1712107a7249eeff9cbd25b55?source=rss",
         source: "MotorFan",
         date: "2026-09-16",
-        tags: ["グリル"],
+        tags: ["ドア", "グリル"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1209,7 +1209,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/9d34557cc9ed9242db05906eee21f402c863f3db?source=rss",
         source: "Auto Messe Web",
         date: "2026-09-16",
-        tags: ["グリル"],
+        tags: ["グリル", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1269,7 +1269,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/nissan-kicks-europe/",
         source: "CarScoops",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1290,7 +1290,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/10-years-too-late-mclaren-confirms-suv-plans/",
         source: "CarScoops",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1330,7 +1330,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.jalopnik.com/2259754/2027-porsche-cayenne-electric-paint-to-sample-colors-automatic-doors/",
         source: "Jalopnik",
         date: "2026-09-16",
-        tags: ["外装加飾"],
+        tags: ["ドア", "塗装", "加飾", "センサー対応"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1351,7 +1351,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.thetruthaboutcars.com/cars/news-blog/land-rover-s-defender-truck-needs-jeep-here-s-why-45136417?utm_medium=auto&utm_source=rss&utm_campaign=all_full",
         source: "The Truth About Cars",
         date: "2026-09-16",
-        tags: [],
+        tags: ["フェンダー"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-16",
@@ -1370,7 +1370,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocar.co.uk/car-news/new-cars/nissans-plan-build-kicks-sunderland-rests-lower-ev-targets",
         source: "AUTOCAR UK",
         date: "2026-09-16",
-        tags: [],
+        tags: ["法規", "サプライチェーン"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-16",
@@ -1473,7 +1473,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/16/li-auto-launches-i9-ev-in-china-worlds-most-aerodynamic-mass-production-suv-at-0-215-cd/",
         source: "CarNewsChina - All",
         date: "2026-09-16",
-        tags: ["空力"],
+        tags: ["Cd値", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1494,7 +1494,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/16/denza-z9s-with-worlds-longest-ev-range-set-to-launch-on-september-23/",
         source: "CarNewsChina - All",
         date: "2026-09-16",
-        tags: ["照明・発光"],
+        tags: ["ルーフ", "Lidar", "グリル", "照明・発光", "センサー対応", "空力"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-16",
@@ -1617,7 +1617,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocarindia.com/car-news/bovensiepen-spider-revealed-as-bmw-z4-based-roadster-440762",
         source: "Autocar India - All",
         date: "2026-09-16",
-        tags: [],
+        tags: ["空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1837,7 +1837,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/2027-mazda6e-gets-new-powertrain-more-range-and-updated-technology/",
         source: "Electric Cars Report",
         date: "2026-09-16",
-        tags: ["バンパー", "外装加飾", "材料"],
+        tags: ["バンパー", "加飾"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-16",
@@ -1858,7 +1858,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/nissan-kicks-e-power-coming-to-europe-built-in-uk/",
         source: "Electric Cars Report",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-16",
@@ -1879,7 +1879,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.bmwblog.com/2026/09/16/2028-bmw-m3-g84-spy-photos-neue-klasse-long-hood/",
         source: "BMWBLOG",
         date: "2026-09-16",
-        tags: [],
+        tags: ["フェンダー", "フード"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-16",
@@ -1939,7 +1939,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/volvo/xc60/370429/new-volvo-xc60-phev-boasts-whopping-124-miles-ev-range",
         source: "Auto Express",
         date: "2026-09-15",
-        tags: ["照明・発光"],
+        tags: ["フード", "グリル", "バンパー", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
@@ -1960,7 +1960,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocarindia.com/car-news/volvo-xc60-xc90-facelifts-debut-with-upgraded-phev-variants-440756",
         source: "Autocar India - All",
         date: "2026-09-15",
-        tags: ["グリル"],
+        tags: ["グリル", "照明・発光"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
@@ -2020,7 +2020,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.dailymail.com/money/cars/article-16135371/Nissan-Sunderland-factory-Kicks-built-global-markets-UK-plant.html",
         source: "Dailymail.com",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
@@ -2039,7 +2039,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.ithome.com/1/003/064.htm",
         source: "Ithome.com",
         date: "2026-09-16",
-        tags: ["グリル", "バンパー", "センサー透過"],
+        tags: ["フェンダー", "Lidar", "カメラ", "グリル", "バンパー", "センサー対応"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
@@ -2058,7 +2058,7 @@ window.LOADED_NEWS_DATA = [
         url: "http://www.geekpark.net/news/370412",
         source: "Geekpark.net",
         date: "2026-09-16",
-        tags: ["外装加飾"],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-17",
@@ -2098,7 +2098,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.indiacarnews.com/news/first-look-at-hyundai-bayon-suv-revealed-launch-in-october-69020/",
         source: "IndiaCarNews",
         date: "2026-09-16",
-        tags: ["照明・発光"],
+        tags: ["フェンダー", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2140,7 +2140,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/f95bcd8f18ccd620fa1ab7bb377a5dea40b2e4d7?source=rss",
         source: "レスポンス",
         date: "2026-09-17",
-        tags: ["グリル"],
+        tags: ["ADAS", "グリル", "センサー対応"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
@@ -2240,7 +2240,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/bca9b9f4cf033d5ab58253c467aeb25f4f9d56df?source=rss",
         source: "Auto Messe Web",
         date: "2026-09-17",
-        tags: ["バンパー", "照明・発光"],
+        tags: ["バンパー", "照明・発光", "空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-17",
@@ -2260,7 +2260,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/bec19c24a513d7962319c9493ed16f4250fb9a01?source=rss",
         source: "ベストカーWeb",
         date: "2026-09-17",
-        tags: ["バンパー"],
+        tags: ["フェンダー", "バンパー"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
@@ -2280,7 +2280,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/c11cbd930f0829a25b9cba74aec0267f0072f1eb?source=rss",
         source: "くるまのニュース",
         date: "2026-09-17",
-        tags: ["外装加飾"],
+        tags: ["ドア", "バンパー", "加飾"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
@@ -2300,7 +2300,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/3603c5c830a0f586ed1a3fd4c6c6881451d34d20?source=rss",
         source: "くるまのニュース",
         date: "2026-09-17",
-        tags: ["グリル", "照明・発光"],
+        tags: ["メッキ", "グリル", "加飾", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2320,7 +2320,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/f2fbbfd160abefec27b7698b500eb08614e4dcab?source=rss",
         source: "日刊自動車新聞",
         date: "2026-09-17",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-17",
@@ -2361,7 +2361,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/bmws-hydrogen-x5-is-now-closer-than-ever/",
         source: "CarScoops",
         date: "2026-09-17",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-17",
@@ -2401,7 +2401,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/the-bmw-m3-is-going-electric-but-not-every-m3/",
         source: "CarScoops",
         date: "2026-09-17",
-        tags: ["バンパー"],
+        tags: ["バンパー", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2421,7 +2421,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/hyundai-bayon-teaser/",
         source: "CarScoops",
         date: "2026-09-17",
-        tags: ["照明・発光"],
+        tags: ["フェンダー", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2441,7 +2441,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/new-cayenne-electric-adds-power-doors-and-wireless-charging/",
         source: "CarScoops",
         date: "2026-09-17",
-        tags: [],
+        tags: ["NV", "ドア"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2461,7 +2461,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/land-cruiser-japan/",
         source: "CarScoops",
         date: "2026-09-17",
-        tags: [],
+        tags: ["バンパー"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2582,7 +2582,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/mercedes/e-class/370455/new-mercedes-amg-e-class-spotted-all-electric-super-saloon-prepares-launch",
         source: "Auto Express",
         date: "2026-09-17",
-        tags: ["バンパー"],
+        tags: ["フェンダー", "リアスポイラー", "バンパー", "空力"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-17",
@@ -2705,7 +2705,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://auto.gasgoo.com/news/202609/17I70472233C107.shtml",
         source: "Gasgoo CN - Class 107",
         date: "2026-09-17",
-        tags: ["センサー透過"],
+        tags: ["Lidar", "センサー対応"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-17",
@@ -2784,7 +2784,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.automotiveworld.com/news/volvo-cars-targets-8-ebit-margin-with-13-car-offensive/",
         source: "Automotive World",
         date: "2026-09-17",
-        tags: [],
+        tags: ["新素材"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2804,7 +2804,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/porsche-cayenne-electric-gets-new-features-wireless-charging-and-more-customization/",
         source: "Electric Cars Report",
         date: "2026-09-17",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-17",
@@ -2868,7 +2868,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/808469/nissan-kicks-power-confirmed-europe/",
         source: "Motor1",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
@@ -2887,7 +2887,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/nissan/370445/nissan-kicks-new-life-sunderland-hybrid-suv-coming-uk",
         source: "Auto Express",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 68, exteriorScore: 68,
         digestDate: "2026-09-20",
@@ -2968,7 +2968,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/18/xpeng-g9l-5-1-meter-suv-to-reach-global-market-at-the-paris-auto-show/",
         source: "CarNewsChina - All",
         date: "2026-09-18",
-        tags: ["照明・発光"],
+        tags: ["照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
@@ -2987,7 +2987,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.electrive.com/2026/09/18/bmw-intensifies-production-in-hungary-amid-high-ix3-demand/",
         source: "Electrive",
         date: "2026-09-18",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
@@ -3006,7 +3006,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.automotiveworld.com/news/nhtsa-adds-pedestrian-safety-to-5-star-programme-for-2027/",
         source: "Automotive World",
         date: "2026-09-18",
-        tags: [],
+        tags: ["歩行者保護"],
 
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-20",
@@ -3027,7 +3027,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.automotiveworld.com/news/xpeng-g9l-set-for-october-launch-at-paris-motor-show/",
         source: "Automotive World",
         date: "2026-09-18",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-20",
@@ -3146,7 +3146,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/b55c6215b00c1051c187649ffdfee082f292bdd4?source=rss",
         source: "レスポンス",
         date: "2026-09-20",
-        tags: [],
+        tags: ["フェンダー"],
 
         edition: "exterior", productScore: 88, exteriorScore: 88,
         digestDate: "2026-09-20",
@@ -3166,7 +3166,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/ef1092f2c556ad91d3f603af09b111f1eac5477a?source=rss",
         source: "レスポンス",
         date: "2026-09-20",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-20",
@@ -3205,7 +3205,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/97973764697926fd4a0857bc2103a2add9b09755?source=rss",
         source: "carview!",
         date: "2026-09-20",
-        tags: [],
+        tags: ["軽量"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-20",
@@ -3225,7 +3225,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/5cfd8ac956ffb1b4bfb7365c7cfeab93757a1f52?source=rss",
         source: "MotorFan",
         date: "2026-09-20",
-        tags: ["空力"],
+        tags: ["冷却", "Cd値", "空力"],
 
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-20",
@@ -3244,7 +3244,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/8dffaf9e2f974d8632085ce1d1694eb8e9b20714?source=rss",
         source: "MotorFan",
         date: "2026-09-20",
-        tags: [],
+        tags: ["フェンダー", "ドア"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
@@ -3264,7 +3264,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/ebd822b8e22d699f5fe1c351d451e9adf1868bf0?source=rss",
         source: "MotorFan",
         date: "2026-09-20",
-        tags: ["バンパー"],
+        tags: ["フェンダー", "バンパー"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
@@ -3284,7 +3284,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/c35392061c059a7ae6e949643aa43b2445322de8?source=rss",
         source: "Auto Messe Web",
         date: "2026-09-20",
-        tags: [],
+        tags: ["空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
@@ -3304,7 +3304,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/8ac15cb858366886441d506e03fb0ffff57ad96e?source=rss",
         source: "Auto Messe Web",
         date: "2026-09-20",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-20",
@@ -3401,7 +3401,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocarindia.com/auto-features/what-to-expect-from-2026-mahindra-thar-3-door-facelift-441080",
         source: "Autocar India - All",
         date: "2026-09-20",
-        tags: ["グリル", "照明・発光"],
+        tags: ["ドア", "カメラ", "グリル", "照明・発光", "センサー対応"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-20",
@@ -3542,7 +3542,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.indiacarnews.com/news/marutis-smallest-cheapest-7-seater-ev-launch-timeline-69035/",
         source: "IndiaCarNews",
         date: "2026-09-20",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-20",
@@ -3562,7 +3562,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carblogindia.com/mahindra-xuv-3xo-revx-edge-launched-check-price-features/",
         source: "Car Blog India",
         date: "2026-09-20",
-        tags: ["グリル"],
+        tags: ["ルーフ", "グリル"],
 
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-20",
@@ -3623,7 +3623,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.electrive.com/2026/09/16/nissan-kicks-coming-to-europe-as-a-series-hybrid/",
         source: "Electrive",
         date: "2026-09-16",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-21",
@@ -3644,7 +3644,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/887817e88de688a51c31cd6b23d359499bddc413",
         source: "carview!",
         date: "2026-09-17",
-        tags: ["バンパー", "外装加飾"],
+        tags: ["メッキ", "バンパー", "加飾", "空力"],
 
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-21",
@@ -3704,7 +3704,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.ithome.com/1/004/586.htm",
         source: "Ithome.com",
         date: "2026-09-20",
-        tags: ["グリル", "バンパー", "エンブレム", "照明・発光"],
+        tags: ["グリル", "バンパー", "加飾"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
@@ -3723,7 +3723,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/337088c6d6ec01ef4a086a8a8e0a529b848eafe5",
         source: "MotorFan",
         date: "2026-09-20",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-21",
@@ -3803,7 +3803,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/25555d41f960401da85f023f069ef2d4ebb10275",
         source: "MotorFan",
         date: "2026-09-21",
-        tags: [],
+        tags: ["ルーフ", "グリル", "バンパー"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
@@ -3823,7 +3823,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/be721a8a18b836188134ac5996f7e70eb2e62d8a",
         source: "Auto Messe Web",
         date: "2026-09-21",
-        tags: ["バンパー"],
+        tags: ["フェンダー", "バンパー"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
@@ -3843,7 +3843,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/2f0d95e0998005b05f33793dd13fa2f995120fa6",
         source: "くるまのニュース",
         date: "2026-09-21",
-        tags: ["外装加飾"],
+        tags: ["加飾"],
 
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-21",
@@ -3863,7 +3863,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/c1193b123c7c12f850568e524d1eb777a4ce5d49",
         source: "AUTOCAR JAPAN",
         date: "2026-09-21",
-        tags: [],
+        tags: ["法規"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
@@ -3882,7 +3882,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.thedrive.com/news/most-automakers-race-what-they-sell-with-the-gr-gt3-toyota-is-selling-what-it-races",
         source: "The Drive",
         date: "2026-09-21",
-        tags: ["空力"],
+        tags: ["冷却", "空力"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
@@ -3923,7 +3923,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/808871/2027-hyundai-tucson-xrt/",
         source: "Motor1",
         date: "2026-09-21",
-        tags: ["グリル"],
+        tags: ["ドア", "グリル"],
 
         edition: "exterior", productScore: 95, exteriorScore: 95,
         digestDate: "2026-09-21",
@@ -4024,7 +4024,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/21/new-geely-ex5-revealed-officially-ahead-of-launch-on-september-23/",
         source: "CarNewsChina - All",
         date: "2026-09-21",
-        tags: ["バンパー", "材料"],
+        tags: ["フェンダー", "Lidar", "バンパー", "加飾", "センサー対応"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
@@ -4044,7 +4044,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/21/byds-great-seagull-spotted-in-real-life-featuring-lidar-and-2650-mm-wheelbase/",
         source: "CarNewsChina - All",
         date: "2026-09-21",
-        tags: ["グリル", "照明・発光"],
+        tags: ["ルーフ", "Lidar", "グリル", "照明・発光", "センサー対応"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-21",
@@ -4102,7 +4102,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.rushlane.com/stellantis-takes-full-control-of-citroen-india-plant-43k-production-target-12556406.html",
         source: "RushLane",
         date: "2026-09-21",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-21",
@@ -4141,7 +4141,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.rushlane.com/tata-sierra-dark-launch-price-rs-13-99-lakh-65-variants-12556370.html",
         source: "RushLane",
         date: "2026-09-21",
-        tags: ["外装加飾"],
+        tags: ["加飾"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-21",
@@ -4218,7 +4218,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.indiacarnews.com/news/new-mahindra-suv-launching-tomorrow-expected-price-details-69037/",
         source: "IndiaCarNews",
         date: "2026-09-21",
-        tags: ["グリル", "照明・発光"],
+        tags: ["ドア", "グリル", "バンパー", "照明・発光"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-21",
@@ -4279,7 +4279,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/bmw-ix3-demand-surges-as-debrecen-plant-goes-24-7-to-meet-100000-orders/",
         source: "Electric Cars Report",
         date: "2026-09-21",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-21",
@@ -4382,7 +4382,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://motoroctane.com/news/323982-new-mahindra-suv-launching-tomorrow-what-to-expect",
         source: "MotorOctane",
         date: "2026-09-21",
-        tags: ["グリル", "照明・発光"],
+        tags: ["ドア", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-21",
@@ -4483,7 +4483,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/e287924d9c903e1a723cb6577efd3ca4bfeef1d2",
         source: "carview!",
         date: "2026-09-22",
-        tags: [],
+        tags: ["ルーフ"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
@@ -4543,7 +4543,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/14ee4fe51c5e2213f1c42fcc132f3648be66ba3c",
         source: "MotorFan",
         date: "2026-09-22",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 70, exteriorScore: 70,
         digestDate: "2026-09-22",
@@ -4644,7 +4644,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/809078/lamborghini-revuelto-voltoro-v1-dark/",
         source: "Motor1",
         date: "2026-09-22",
-        tags: [],
+        tags: ["フェンダー", "空力"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
@@ -4665,7 +4665,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/809025/ceer-sedan-suv-specs-photos/",
         source: "Motor1",
         date: "2026-09-22",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 74, exteriorScore: 74,
         digestDate: "2026-09-22",
@@ -4705,7 +4705,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/mclaren-new-logo/",
         source: "CarScoops",
         date: "2026-09-22",
-        tags: ["照明・発光"],
+        tags: ["ドア", "照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -4726,7 +4726,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/ceer-exobot/",
         source: "CarScoops",
         date: "2026-09-22",
-        tags: ["シール"],
+        tags: [],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -4767,7 +4767,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/22/next-generation-byd-han-sedan-spotted-in-china-with-lidar-and-dragon-face/",
         source: "CarNewsChina - All",
         date: "2026-09-22",
-        tags: [],
+        tags: ["Lidar", "センサー対応"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -4787,7 +4787,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/22/design-sketches-of-the-second-gen-byd-seagull-were-revealed-in-china/",
         source: "CarNewsChina - All",
         date: "2026-09-22",
-        tags: ["照明・発光"],
+        tags: ["Lidar", "照明・発光", "センサー対応"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -4807,7 +4807,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/22/hyundai-to-launch-ioniq-v-in-china-on-september-29-pre-sale-price-starting-from-17600-usd/",
         source: "CarNewsChina - All",
         date: "2026-09-22",
-        tags: ["グリル"],
+        tags: ["ドア", "グリル"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
@@ -4827,7 +4827,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/22/faws-hongqi-tiangong-07-opens-pre-sales-in-china-800-v-architecture-starting-from-25000-usd/",
         source: "CarNewsChina - All",
         date: "2026-09-22",
-        tags: ["グリル", "エンブレム"],
+        tags: ["グリル", "加飾", "エンブレム"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
@@ -4866,7 +4866,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/09/22/nissan-launches-updated-n7-sedan-china/",
         source: "CnEVPost - All",
         date: "2026-09-22",
-        tags: ["照明・発光"],
+        tags: ["Lidar", "照明・発光", "センサー対応"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
@@ -5070,7 +5070,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carblogindia.com/mg-hector-tomahawk-ev-test-drive-review-watts-in-a-name/",
         source: "Car Blog India",
         date: "2026-09-22",
-        tags: ["バンパー", "照明・発光"],
+        tags: ["ピラー", "バンパー", "照明・発光", "空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
@@ -5090,7 +5090,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.electrive.com/2026/09/22/volkswagen-shifts-ev-production-away-from-wolfsburg/",
         source: "Electrive",
         date: "2026-09-22",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -5152,7 +5152,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/ceer-exobot-debuts-as-saudi-arabias-first-electric-sedan-and-suv/",
         source: "Electric Cars Report",
         date: "2026-09-22",
-        tags: [],
+        tags: ["ピラー"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -5173,7 +5173,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.bmwblog.com/2026/09/22/2027-bmw-7-series-facelift-extravagant-paint/",
         source: "BMWBLOG",
         date: "2026-09-22",
-        tags: ["外装加飾"],
+        tags: ["塗装", "加飾"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
@@ -5193,7 +5193,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.bmwblog.com/2026/09/22/bmw-m2-turbo-design-edition-mexico-launch/",
         source: "BMWBLOG",
         date: "2026-09-22",
-        tags: [],
+        tags: ["フード", "車両骨格", "サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -5234,7 +5234,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://motoroctane.com/news/324048-new-mahindra-suv-launched-in-india",
         source: "MotorOctane",
         date: "2026-09-22",
-        tags: ["照明・発光"],
+        tags: ["ドア", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-22",
@@ -5254,7 +5254,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motoroids.com/news/saudis-ceer-debuts-with-exobot-sedan-and-suv/",
         source: "Motoroids",
         date: "2026-09-22",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-22",
@@ -5274,7 +5274,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motoroids.com/news/stellantis-takes-full-control-of-citroen-india-plant-targets-43000-units-by-2028/",
         source: "Motoroids",
         date: "2026-09-22",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-22",
@@ -5295,7 +5295,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.kochinews.co.jp/article/detail/1046337",
         source: "高知新聞",
         date: "2026-09-22",
-        tags: [],
+        tags: ["NV", "サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-22",
@@ -5336,7 +5336,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/a6116180db41fa6095aeb2399f311f7a5d6436f1",
         source: "ベストカーWeb",
         date: "2026-09-17",
-        tags: ["照明・発光", "外装加飾"],
+        tags: ["加飾", "照明・発光"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
@@ -5397,7 +5397,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/c9cfbd9975462346c5613c35d29379a756d55cfc",
         source: "MotorFan",
         date: "2026-09-23",
-        tags: ["空力"],
+        tags: ["リアスポイラー", "フード", "空力"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-23",
@@ -5437,7 +5437,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/66a1e37abaa4b6e9d412b90a35e5277e98a497a4",
         source: "MotorFan",
         date: "2026-09-23",
-        tags: [],
+        tags: ["ピラー"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-23",
@@ -5477,7 +5477,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/f582a1589201f253be16dc9114d42241960c35de",
         source: "VAGUE",
         date: "2026-09-23",
-        tags: [],
+        tags: ["法規"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
@@ -5539,7 +5539,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/stellantis-wagon-teaser/",
         source: "CarScoops",
         date: "2026-09-23",
-        tags: [],
+        tags: ["空力"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
@@ -5600,7 +5600,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/chinas-gac-wants-to-increase-european-manufacturing-as-it-expands-into-france/",
         source: "CarScoops",
         date: "2026-09-23",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
@@ -5641,7 +5641,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocar.co.uk/car-news/electric-cars/nissan-pixo-returns-sub-%C2%A320k-twingo-twin-bold-new-look",
         source: "AUTOCAR UK",
         date: "2026-09-23",
-        tags: ["バンパー", "照明・発光"],
+        tags: ["フード", "バンパー", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
@@ -5724,7 +5724,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/23/byd-launches-denza-z9s-in-with-worlds-longest-1100-km-range-starting-from-37600-usd-in-china/",
         source: "CarNewsChina - All",
         date: "2026-09-23",
-        tags: ["照明・発光"],
+        tags: ["Lidar", "照明・発光", "センサー対応", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
@@ -5744,7 +5744,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/23/byds-yangwang-teases-upcoming-rolls-royce-rival-sedan-with-solid-state-battery/",
         source: "CarNewsChina - All",
         date: "2026-09-23",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
@@ -5822,7 +5822,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/09/23/nio-onvo-adds-design-package-l90/",
         source: "CnEVPost - All",
         date: "2026-09-23",
-        tags: ["照明・発光"],
+        tags: ["ルーフ", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
@@ -5842,7 +5842,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocarindia.com/auto-features/mahindra-thar-new-vs-old-differences-and-similarities-explained-441101",
         source: "Autocar India - All",
         date: "2026-09-23",
-        tags: ["照明・発光"],
+        tags: ["ドア", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
@@ -6005,7 +6005,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autopunditz.com/post/ceer-exobot-sedan-suv-saudi-arabia-850hp-ev",
         source: "Auto Punditz",
         date: "2026-09-23",
-        tags: [],
+        tags: ["ドア", "ピラー"],
 
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-23",
@@ -6026,7 +6026,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.electrive.com/2026/09/23/nissan-pixo-an-electric-return-to-the-a-segment/",
         source: "Electrive",
         date: "2026-09-23",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-23",
@@ -6067,7 +6067,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.automotiveworld.com/topics/e-mobility/rivian-says-r2-meets-2030-carbon-goal-four-years-early/",
         source: "Automotive World",
         date: "2026-09-23",
-        tags: ["材料", "空力"],
+        tags: ["CN/CE", "印刷", "軽量", "空力", "新素材", "サステナビリティ"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-23",
@@ -6128,7 +6128,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://autodesignmagazine.com/en/2026/09/lepas-l8-quality-with-chinese-twist/",
         source: "Auto & Design",
         date: "2026-09-23",
-        tags: ["グリル", "照明・発光", "材料"],
+        tags: ["グリル", "照明・発光", "新素材"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-23",
@@ -6190,7 +6190,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motoroids.com/news/tata-aeris-new-teaser-reveals-more-details-ahead-of-september-25-launch/",
         source: "Motoroids",
         date: "2026-09-23",
-        tags: ["エンブレム", "照明・発光"],
+        tags: ["加飾", "照明・発光", "エンブレム"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-23",
@@ -6229,7 +6229,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.dgtle.com/news-1554758-14.html",
         source: "Dgtle.com",
         date: "2026-09-23",
-        tags: ["エンブレム"],
+        tags: ["加飾", "エンブレム"],
 
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-23",
@@ -6270,7 +6270,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/be671e37cd3268f8267a54401e1bb3f09a27c515",
         source: "レスポンス",
         date: "2026-09-24",
-        tags: [],
+        tags: ["NV"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
@@ -6290,7 +6290,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/869d57840fd2f8912e8cfe77d1089510f966bf12",
         source: "carview!",
         date: "2026-09-24",
-        tags: ["外装加飾"],
+        tags: ["加飾"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
@@ -6350,7 +6350,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/28a9d66e0a9430c5755f60aec99689481ce869b2",
         source: "MotorFan",
         date: "2026-09-24",
-        tags: ["バンパー", "材料"],
+        tags: ["ドア", "バンパー", "新素材"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
@@ -6472,7 +6472,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/809414/bentley-drops-2030-ev-deadline/",
         source: "Motor1",
         date: "2026-09-24",
-        tags: [],
+        tags: ["法規"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
@@ -6532,7 +6532,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.jalopnik.com/2267531/nissan-pixo-almost-as-cute-renault-twingo/",
         source: "Jalopnik",
         date: "2026-09-24",
-        tags: ["バンパー", "照明・発光", "材料"],
+        tags: ["バンパー", "照明・発光", "新素材"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-24",
@@ -6553,7 +6553,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.caranddriver.com/news/a73866564/nissan-z-kaze-concept-revealed/",
         source: "Car and Driver",
         date: "2026-09-24",
-        tags: [],
+        tags: ["ルーフ", "空力"],
 
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-24",
@@ -6573,7 +6573,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.caranddriver.com/photos/a73825222/2028-bentley-torcal-revealed-exterior-gallery/",
         source: "Car and Driver",
         date: "2026-09-24",
-        tags: ["グリル", "照明・発光"],
+        tags: ["フード", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 90, exteriorScore: 90,
         digestDate: "2026-09-24",
@@ -6593,7 +6593,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocar.co.uk/car-news/electric-cars/gordini-returns-renault-revives-8-futuristic-electric-sports-car",
         source: "AUTOCAR UK",
         date: "2026-09-24",
-        tags: ["照明・発光", "外装加飾"],
+        tags: ["塗装", "加飾", "照明・発光"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-24",
@@ -6635,7 +6635,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/nissan/370512/new-nissan-z-kaze-concept-bold-tribute-1990s-car-tuning-culture",
         source: "Auto Express",
         date: "2026-09-24",
-        tags: [],
+        tags: ["ルーフ", "フード"],
 
         edition: "exterior", productScore: 84, exteriorScore: 84,
         digestDate: "2026-09-24",
@@ -6656,7 +6656,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/bentley/370506/new-bentley-torcal-revealed-brands-first-ev-its-most-powerful-car-ever",
         source: "Auto Express",
         date: "2026-09-24",
-        tags: ["グリル", "照明・発光"],
+        tags: ["フード", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-24",
@@ -6718,7 +6718,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/24/geely-ex5-launches-in-china-now-featuring-6c-fast-charging-and-a-114-hp-power-boost/",
         source: "CarNewsChina - All",
         date: "2026-09-24",
-        tags: ["バンパー", "外装加飾"],
+        tags: ["フェンダー", "Lidar", "カメラ", "バンパー", "加飾", "センサー対応"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-24",
@@ -6897,7 +6897,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://gaadiwaadi.com/tata-aeris-starts-reaching-dealerships-exterior-details-revealed/",
         source: "GaadiWaadi",
         date: "2026-09-24",
-        tags: ["エンブレム"],
+        tags: ["加飾", "エンブレム"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-24",
@@ -7038,7 +7038,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/renault-8-gordini-concept-brings-a-racing-icon-into-the-electric-era/",
         source: "Electric Cars Report",
         date: "2026-09-24",
-        tags: ["エンブレム"],
+        tags: ["ドア", "フード", "加飾", "エンブレム"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-24",
@@ -7059,7 +7059,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://autodesignmagazine.com/en/2026/09/bentley-torcal-a-new-era/",
         source: "Auto & Design",
         date: "2026-09-24",
-        tags: ["グリル", "照明・発光"],
+        tags: ["グリル", "照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
@@ -7099,7 +7099,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://chinaevhome.com/2026/09/24/volkswagen-anhui-id-unyx-09-opens-pre-orders-at-29-7k-launch-set-for-late-october/",
         source: "ChinaEVHome",
         date: "2026-09-24",
-        tags: ["照明・発光"],
+        tags: ["ドア", "照明・発光"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
@@ -7161,7 +7161,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motoroids.com/news/bentley-torcal-revealed-bentleys-first-electric-car-gets-600km-range/",
         source: "Motoroids",
         date: "2026-09-24",
-        tags: ["グリル"],
+        tags: ["グリル", "サプライチェーン"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-24",
@@ -7181,7 +7181,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.evoindia.com/cars/car-reviews/-newscar-newsbentley-torcal-first-look-specs-price-india-587744",
         source: "Evo India",
         date: "2026-09-24",
-        tags: ["グリル", "照明・発光"],
+        tags: ["フード", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 92, exteriorScore: 92,
         digestDate: "2026-09-24",
@@ -7343,7 +7343,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://chinaevhome.com/2026/09/23/byd-yangwang-ultra-luxury-executive-sedan-road-test-photos-leaked/",
         source: "ChinaEVHome",
         date: "2026-09-23",
-        tags: [],
+        tags: ["ドア", "Lidar", "センサー対応"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
@@ -7365,7 +7365,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://auto.gasgoo.com/news/202609/24I70473191C409.shtml",
         source: "Gasgoo CN - Class 409",
         date: "2026-09-24",
-        tags: ["バンパー", "材料"],
+        tags: ["バンパー", "新素材"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
@@ -7384,7 +7384,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/809168/nissan-z-kaze-t-top-concept/",
         source: "Motor1",
         date: "2026-09-24",
-        tags: ["外装加飾"],
+        tags: ["ルーフ", "塗装", "加飾"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
@@ -7404,7 +7404,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autoexpress.co.uk/news/370501/new-renault-8-gordini-concept-retro-coupe-car-your-dreams",
         source: "Auto Express",
         date: "2026-09-24",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 62, exteriorScore: 62,
         digestDate: "2026-09-27",
@@ -7507,7 +7507,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/25/changan-nevo-q06-got-35000-orders-in-24-hours-after-the-launch-in-china/",
         source: "CarNewsChina - All",
         date: "2026-09-25",
-        tags: [],
+        tags: ["ルーフ", "Lidar", "カメラ", "センサー対応"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-27",
@@ -7528,7 +7528,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/byds-flagship-sedan-is-coming-for-the-rolls-royce-phantom/",
         source: "CarScoops",
         date: "2026-09-26",
-        tags: ["グリル", "照明・発光"],
+        tags: ["ドア", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-27",
@@ -7609,7 +7609,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/016da77dafd9bcf46beccddd86c65ceaf2a150cc",
         source: "レスポンス",
         date: "2026-09-27",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
@@ -7649,7 +7649,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/71cff5f9abcc6567fb1f8741f9c8e5e2af910b57",
         source: "carview!",
         date: "2026-09-27",
-        tags: [],
+        tags: ["フード"],
 
         edition: "exterior", productScore: 82, exteriorScore: 82,
         digestDate: "2026-09-27",
@@ -7729,7 +7729,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/ca3f7c87cf84d368a0d78560851f9c3d61f59bb4",
         source: "MotorFan",
         date: "2026-09-27",
-        tags: [],
+        tags: ["フェンダー", "ルーフ"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-27",
@@ -7749,7 +7749,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/e9d09d9aa000e0d68b90256733bb47cec027863b",
         source: "Auto Messe Web",
         date: "2026-09-27",
-        tags: ["バンパー"],
+        tags: ["バンパー", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-27",
@@ -7789,7 +7789,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.rushlane.com/2027-mahindra-scorpio-n-facelift-grille-patent-leaks-12556917.html",
         source: "RushLane",
         date: "2026-09-27",
-        tags: ["グリル"],
+        tags: ["カメラ", "グリル", "センサー対応"],
 
         edition: "exterior", productScore: 88, exteriorScore: 88,
         digestDate: "2026-09-27",
@@ -8090,7 +8090,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/6073b2d9bf0acc1eb19807f3ff0268324511af6b",
         source: "レスポンス",
         date: "2026-09-28",
-        tags: ["バンパー", "エンブレム"],
+        tags: ["バンパー", "加飾", "エンブレム"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         digestDate: "2026-09-28",
@@ -8130,7 +8130,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/f4b2aa4f93c148a788a29ac735f15a074310fb39",
         source: "VAGUE",
         date: "2026-09-28",
-        tags: ["エンブレム", "照明・発光"],
+        tags: ["加飾", "照明・発光", "エンブレム"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
@@ -8190,7 +8190,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/610f24f3dafb529906723753a908f1e5c7ae4687",
         source: "くるまのニュース",
         date: "2026-09-28",
-        tags: ["バンパー"],
+        tags: ["ソナー", "バンパー", "センサー対応", "空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
@@ -8290,7 +8290,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/subaru-brz-zc15-wrx-gd25/",
         source: "CarScoops",
         date: "2026-09-28",
-        tags: ["外装加飾"],
+        tags: ["加飾"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-28",
@@ -8311,7 +8311,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/mazda-ez-60-lidar/",
         source: "CarScoops",
         date: "2026-09-28",
-        tags: [],
+        tags: ["ルーフ", "Lidar", "センサー対応"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         digestDate: "2026-09-28",
@@ -8332,7 +8332,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.carscoops.com/2026/09/an-all-new-mitsubishi-outlander-may-launch-in-2028/",
         source: "CarScoops",
         date: "2026-09-28",
-        tags: ["グリル", "照明・発光"],
+        tags: ["ピラー", "グリル", "照明・発光"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -8677,7 +8677,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.rushlane.com/skoda-slavia-facelift-production-starts-at-pune-plant-launch-soon-12556999.html",
         source: "RushLane",
         date: "2026-09-28",
-        tags: ["グリル", "照明・発光"],
+        tags: ["グリル", "照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 78, exteriorScore: 78,
         digestDate: "2026-09-28",
@@ -8779,7 +8779,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autopunditz.com/post/2026-skoda-slavia-facelift-production-begins",
         source: "Auto Punditz",
         date: "2026-09-28",
-        tags: ["照明・発光"],
+        tags: ["照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -8840,7 +8840,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.electrive.com/2026/09/28/dacia-hipster-to-launch-in-2027-as-an-electric-kei-car/",
         source: "Electrive",
         date: "2026-09-28",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -8902,7 +8902,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electriccarsreport.com/2026/09/denza-z9s-launches-with-up-to-1100-km-of-range/",
         source: "Electric Cars Report",
         date: "2026-09-28",
-        tags: ["照明・発光"],
+        tags: ["ルーフ", "フード", "Lidar", "照明・発光", "センサー対応", "空力"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -8943,7 +8943,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://chinaevhome.com/2026/09/28/changan-reportedly-pushes-avatr-deepal-integration-via-new-ad-unit/",
         source: "ChinaEVHome",
         date: "2026-09-28",
-        tags: [],
+        tags: ["低コスト化"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -8984,7 +8984,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motoroids.com/news/new-jeep-wrangler-whitecap-mojito-edition-revealed-whats-new/",
         source: "Motoroids",
         date: "2026-09-28",
-        tags: [],
+        tags: ["ドア", "ルーフ", "フード"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         digestDate: "2026-09-28",
@@ -9004,7 +9004,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motoroids.com/news/2026-skoda-slavia-facelift-production-begins-in-india/",
         source: "Motoroids",
         date: "2026-09-28",
-        tags: ["グリル", "照明・発光"],
+        tags: ["グリル", "照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -9024,7 +9024,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://es.motor1.com/news/809429/bentley-torcal-2027-suv-electrico/",
         source: "Motor1 Spain",
         date: "2026-09-28",
-        tags: [],
+        tags: ["サプライチェーン"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         digestDate: "2026-09-28",
@@ -9065,7 +9065,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/8dd30a06a963f08e9021c2c88c61ad01233f9845",
         source: "レスポンス",
         date: "2026-09-29",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 70, exteriorScore: 70,
         developmentLane: "direct",
@@ -9089,7 +9089,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/d5a34677f20a23db8b06b87b51dc9841e02749fa",
         source: "レスポンス",
         date: "2026-09-29",
-        tags: ["外装加飾", "材料"],
+        tags: ["塗装", "加飾", "新素材"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         developmentLane: "direct",
@@ -9180,7 +9180,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/ffd1755b8f5edf2e89c9410645146a136ba3dcbb",
         source: "Auto Messe Web",
         date: "2026-09-29",
-        tags: [],
+        tags: ["フェンダー"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         developmentLane: "direct",
@@ -9203,7 +9203,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/4cb215908e5bd7f70a73c735819ad81b48785cae",
         source: "VAGUE",
         date: "2026-09-29",
-        tags: [],
+        tags: ["ドア"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         developmentLane: "direct",
@@ -9225,7 +9225,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/723669028aef3cfb989b06ee0c93653a56467396",
         source: "ベストカーWeb",
         date: "2026-09-29",
-        tags: [],
+        tags: ["空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         developmentLane: "direct",
@@ -9248,7 +9248,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/3976f903c994be11efabfa2f79837424331f9879",
         source: "くるまのニュース",
         date: "2026-09-29",
-        tags: ["材料"],
+        tags: ["ドア", "新素材"],
 
         edition: "exterior", productScore: 55, exteriorScore: 55,
         developmentLane: "direct",
@@ -9293,7 +9293,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.thedrive.com/car-reviews/2026-ford-mustang-dark-horse-sc-first-drive-review-the-perfect-mustang-doesnt-need-a-stick",
         source: "The Drive",
         date: "2026-09-29",
-        tags: [],
+        tags: ["軽量"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         developmentLane: "direct",
@@ -9340,7 +9340,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/809986/lanzante-95-59-hdk-reveals/",
         source: "Motor1",
         date: "2026-09-29",
-        tags: [],
+        tags: ["フード", "空力"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         developmentLane: "direct",
@@ -9363,7 +9363,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.motor1.com/news/809964/alfa-romeo-33-stradale-perla/",
         source: "Motor1",
         date: "2026-09-29",
-        tags: ["外装加飾"],
+        tags: ["塗装", "加飾"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         developmentLane: "direct",
@@ -9410,7 +9410,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.jalopnik.com/2270908/car-windshield-a-pillars-thick-visibility-problems/",
         source: "Jalopnik",
         date: "2026-09-29",
-        tags: [],
+        tags: ["ピラー"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         developmentLane: "direct",
@@ -9478,7 +9478,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/29/hyundai-ioniq-v-launched-at-16380-usd-in-china-ahead-of-global-rollout/",
         source: "CarNewsChina - All",
         date: "2026-09-29",
-        tags: [],
+        tags: ["ピラー", "フード"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         developmentLane: "direct",
@@ -9501,7 +9501,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://carnewschina.com/2026/09/29/new-lynk-co-02-got-14663-orders-in-one-hour-after-the-launch-in-china/",
         source: "CarNewsChina - All",
         date: "2026-09-29",
-        tags: [],
+        tags: ["Lidar", "ADAS", "センサー対応"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         developmentLane: "direct",
@@ -9525,7 +9525,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.autocarindia.com/car-news/mercedes-benz-glc-electric-launch-on-november-4-440869",
         source: "Autocar India - All",
         date: "2026-09-29",
-        tags: ["グリル", "照明・発光"],
+        tags: ["グリル", "照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 72, exteriorScore: 72,
         developmentLane: "direct",
@@ -9572,7 +9572,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://electrek.co/2026/09/29/tesla-electric-fan-car-patent-model-s-roadster/",
         source: "Electrek",
         date: "2026-09-29",
-        tags: [],
+        tags: ["空力"],
 
         edition: "exterior", productScore: 85, exteriorScore: 85,
         developmentLane: "direct",
@@ -9596,7 +9596,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://autodesignmagazine.com/en/2026/09/peugeot-e-208-gti-a-small-electric-sports-car/",
         source: "Auto & Design",
         date: "2026-09-29",
-        tags: [],
+        tags: ["走行安定"],
 
         edition: "exterior", productScore: 75, exteriorScore: 75,
         developmentLane: "direct",
@@ -9643,7 +9643,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://de.motor1.com/news/809881/bmw-m2-g87-csl-riverti/",
         source: "Motor1 Germany",
         date: "2026-09-29",
-        tags: [],
+        tags: ["フェンダー", "フード", "空力"],
 
         edition: "exterior", productScore: 65, exteriorScore: 65,
         developmentLane: "direct",
@@ -9666,7 +9666,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.evoindia.com/news/car-news/jeep-wrangler-whitecap-mojito-revealed-587758",
         source: "Evo India",
         date: "2026-09-29",
-        tags: ["グリル"],
+        tags: ["ドア", "ルーフ", "グリル"],
 
         edition: "exterior", productScore: 62, exteriorScore: 62,
         developmentLane: "direct",
@@ -9688,7 +9688,7 @@ window.LOADED_NEWS_DATA = [
         url: "https://www.evoindia.com/news/car-news/mercedes-benz-glc-400-4matic-electric-launch-date-news-587754",
         source: "Evo India",
         date: "2026-09-29",
-        tags: ["グリル", "照明・発光"],
+        tags: ["グリル", "照明・発光", "サプライチェーン"],
 
         edition: "exterior", productScore: 62, exteriorScore: 62,
         developmentLane: "direct",

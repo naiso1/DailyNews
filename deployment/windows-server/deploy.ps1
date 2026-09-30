@@ -31,6 +31,7 @@ $required = @(
     "currency-conversion-preview.html",
     "exchange_rates.js",
     "dailynews_annotations.js",
+    "dailynews_exterior_tags.js",
     "source_list_data.js",
     "news_data.js",
     "insights_data.js",

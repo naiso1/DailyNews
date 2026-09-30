@@ -95,7 +95,8 @@ function checkPublicationStatus() {
   const rangeFunction = html.match(/        function setNewDateRangeFromNews\(data\) \{[\s\S]*?(?=        function normalizeIsNewFlags)/)[0];
   vm.runInContext('let NEW_DATE_RANGE; window.DAILYNEWS_CONFIG.id = "exterior";', context);
   vm.runInContext(rangeFunction, context);
-  for (const [payload, start, end] of [[zero, "2026-09-14", "2026-09-14"], [mixed, "2026-09-12", "2026-09-14"], [normalize(building), null, null], [null, null, null]]) {
+  // The exterior home page shows the latest issue's single date, including lookback articles.
+  for (const [payload, start, end] of [[zero, "2026-09-14", "2026-09-14"], [mixed, "2026-09-14", "2026-09-14"], [normalize(building), null, null], [null, null, null]]) {
     context.window.EXTERIOR_PUBLICATION_STATUS = payload;
     vm.runInContext('setNewDateRangeFromNews([{date:"2026-09-11"}]);', context);
     assert.equal(vm.runInContext("NEW_DATE_RANGE.start", context), start);

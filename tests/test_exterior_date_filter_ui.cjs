@@ -22,6 +22,7 @@ const context = vm.createContext({
   updateFavoritesActionsVisibility: noop, scheduleRankingUpdate: noop, setRankingBackVisibility: noop,
   newsCategoryLabel: item => item.contentCategory || 'product', isFavorite: () => true,
 });
+vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'dailynews_exterior_tags.js'), 'utf8'), context);
 for (const name of ['getTodayKey', 'getLatestDate', 'setNewDateRangeFromNews', 'getDateFilterBasis',
   'getNewsFilterDate', 'matchesNewsDateRange', 'isShowingDefaultNewRange', 'isNewContent',
   'isGloballyHidden', 'getNewCounts', 'applyFilters', 'restoreFilterStateFromURL', 'updateURL',

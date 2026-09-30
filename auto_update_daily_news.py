@@ -17,6 +17,7 @@ from ニュース収集.currency_guard import repair_indian_price_units
 from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
 from dailynews import exterior_papers
+from dailynews.exterior_tags import generate_tags as generate_exterior_tags
 from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
 from dailynews.editorial_policy import apply_policy, classify_lighting, exterior_scope_rules, EVIDENCE_COLUMNS
@@ -377,8 +378,7 @@ def apply_item_overrides(item: dict):
 
 def generate_tags(text: str):
     if EDITION.id == "exterior":
-        rules = [(r"グリル|格栅|grille", "グリル"), (r"バンパー|保险杠|bumper", "バンパー"), (r"エンブレム|车标|emblem", "エンブレム"), (r"レーダー|透過|レドーム|radome|radar", "センサー透過"), (r"発光|照明|ランプ|ライト|lighting|headlamp|taillamp", "照明・発光"), (r"加飾|塗装|モール|coating|trim", "外装加飾"), (r"ウェザーストリップ|ウエザーストリップ|シール|weatherstrip|sealing", "シール"), (r"素材|樹脂|リサイクル|material|resin|recycl", "材料"), (r"空力|aerodynamic", "空力")]
-        return [tag for pattern, tag in rules if re.search(pattern, text, re.IGNORECASE)][:6]
+        return generate_exterior_tags(text)
     tags = []
     for pattern, tag in TAG_RULES:
         if tag == "イルミ" and classify_lighting(content=text) not in ("interior", "both"):

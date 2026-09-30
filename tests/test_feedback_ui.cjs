@@ -9,6 +9,7 @@ for (const file of ['内装製品デイリーニュース.html','content/exterio
     if (match[1].trim()) new vm.Script(match[1]);
   }
   const context=vm.createContext({window:{DAILYNEWS_CONFIG:{id:'interior'}}});
+  vm.runInContext(fs.readFileSync(path.join(root,'dailynews_exterior_tags.js'),'utf8'), context);
   for(const name of ['getSearchBlob','classifyLighting','deriveLocalTags']) {
     const start=html.indexOf(`        function ${name}(`);
     const end=html.indexOf('\n        }',start)+'\n        }'.length;
@@ -28,7 +29,7 @@ for (const file of ['内装製品デイリーニュース.html','content/exterio
   assert.ok(context.deriveLocalTags({title:'室内灯とヘッドライト',tags:[]}).includes('イルミ'));
   assert.ok(context.deriveLocalTags({title:'Cabin ambient lighting',tags:[]}).includes('イルミ'));
   context.window.DAILYNEWS_CONFIG.id='exterior';
-  assert.ok(context.deriveLocalTags({title:'ヘッドライト',tags:[]}).includes('灯火・照明'));
+  assert.ok(context.deriveLocalTags({title:'ヘッドライト',tags:[]}).includes('照明・発光'));
   assert.match(html,/openFeedback\('\$\{n\.id\}', 'news'\)/);
   assert.match(html,/openFeedback\('\$\{idea\.id\}', 'idea'\)/);
   assert.match(html,/availableIdeas = ideas.filter\(idea => !isGloballyHidden\(idea.id\)/);
