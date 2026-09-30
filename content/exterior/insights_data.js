@@ -18,7 +18,7 @@ window.DAILY_INSIGHTS = [
                 { id: 114, img: "images/exabase_exterior_114_ab95e28cf3100b0e.jpg", title: "低風阻曲面の加飾整合検証", desc: "Ioniq Vが滑らかなピラーとボンネットラインで0.23Cdを実現した事実を参考に、外装開発室向けに低風阻形状における加飾部材の接合精度を検証する。曲面意匠との一体化時に生じるすき間や反りが走行音・冷却効率に与える影響を風洞試験で評価し、デザイン統一性と機能性の両立条件を確認する可能性を検討する仮説とする。 [cn87]", sourceNewsIds: ["cn87"], imageProvider: "exabase", imageModel: "" },
             ],
             in: [
-                { id: 115, img: "", title: "異色グリル枠の耐候評価", desc: "Jeep Wrangler Whitecap Mojitoのグリル周囲白枠を参考に、ベースカラーと異なる加飾部の境界処理における視覚劣化リスクを検証する案を検討する。豊田合成の開発メンバーに対し、紫外線照射や洗車環境下での色差変化を評価し、多色展開時の意匠統一性を保つ可能性を確認する価値を提供する。機能保証ではなく、材料選定と仕上げ条件の最適化可能性を検証する仮説とする。 [in99]", sourceNewsIds: ["in99"] },
+                { id: 115, img: "images/exabase_exterior_115_1d8432199e3df37a.jpg", title: "異色グリル枠の耐候評価", desc: "Jeep Wrangler Whitecap Mojitoのグリル周囲白枠を参考に、ベースカラーと異なる加飾部の境界処理における視覚劣化リスクを検証する案を検討する。豊田合成の開発メンバーに対し、紫外線照射や洗車環境下での色差変化を評価し、多色展開時の意匠統一性を保つ可能性を確認する価値を提供する。機能保証ではなく、材料選定と仕上げ条件の最適化可能性を検証する仮説とする。 [in99]", sourceNewsIds: ["in99"], imageProvider: "exabase", imageModel: "" },
                 { id: 116, img: "images/exabase_exterior_116_8ec2f943e9d4c36f.jpg", title: "発光グリル部材の耐候検証", desc: "GLC 400 Electricの942個発光ドット付きグリルを参考に、豊田合成開発チームへ多数量発光素子と非発光部の境界処理における色ムラリスクを検証する加飾案を検討する。昼夜コントラストと耐候性評価条件を設定し、意匠統一性の確保可能性を確認する価値を提供する。性能保証ではなく、設計自由度向上の可能性を検証する仮説とする。 [in100]", sourceNewsIds: ["in100"], imageProvider: "exabase", imageModel: "" },
             ],
             us: [
