@@ -101,6 +101,7 @@ def main():
                 page = context.new_page()
                 page.on('pageerror', lambda error: result['page_errors'].append(str(error)))
                 page.goto(origin + '/exterior/', wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 page.wait_for_function("document.getElementById('visibleCount').textContent === '1' && window.interactionsData?.cn1?.hidden")
                 assert page.locator('#newsGrid > .card').count() == 1
                 assert page.locator('#card-eu1').count() == 1
@@ -131,6 +132,7 @@ def main():
                 page.locator('.analysis-ref-link').click()
                 page.wait_for_function("document.getElementById('searchInput').value === 'jp1'")
                 page.reload(wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 page.wait_for_function("document.getElementById('visibleCount').textContent === '1'")
                 assert page.locator('#card-jp1').count() == 1
                 assert page.locator('#dateFrom').input_value() == ''
