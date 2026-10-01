@@ -32,7 +32,7 @@ for (const edition of ['interior', 'exterior']) {
   const button = f.nodes.get('releaseHistoryButton'), overlay = f.nodes.get('releaseHistoryOverlay');
   assert(button, `${edition}: history entry point is visible`);
   assert.equal(button.textContent, '更新履歴');
-  assert.equal(f.context.window.DAILYNEWS_RELEASE_HISTORY[0].title, '外装版の画面構成を内装版に統一');
+  assert.equal(f.context.window.DAILYNEWS_RELEASE_HISTORY[0].title, '管理者の追加と登録時の権限反映に対応');
   assert.equal(f.context.window.DAILYNEWS_RELEASE_HISTORY[0].date, '2026-10-01');
   assert.match(overlay.innerHTML, /TG社員・派遣社員の方は誰でも登録可能です。/);
   assert.match(overlay.innerHTML, /39キーワード/);

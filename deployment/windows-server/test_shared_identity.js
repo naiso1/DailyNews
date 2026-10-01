@@ -167,6 +167,51 @@ async function main() {
   assert.deepEqual((await b.request("/api/me/subscriptions")).json.subscriptions, { interior: false, exterior: false });
   const list = (await b.request("/api/admin/mailing-list")).json;
   assert.equal(list.activeCount, 0, "Login and restart must not restore subscriptions");
+  // A private administrator list promotes existing identities and future registrations
+  // through either edition without changing subscriptions or ordinary users.
+  const subscriptionSnapshot = () => Object.fromEntries(["interior", "exterior"].map(edition => {
+    const connection = new DatabaseSync(dbFile(edition), {readOnly: true});
+    try { return [edition, connection.prepare("SELECT * FROM mail_subscriptions ORDER BY id").all()]; }
+    finally { connection.close(); }
+  }));
+  const subscriptionsBefore = subscriptionSnapshot();
+  await stop(a.child); await stop(b.child);
+  for (const edition of ["interior", "exterior"]) {
+    fs.writeFileSync(path.join(roots[edition], "data", "admin-emails.json"),
+      JSON.stringify([" First@Example.com ", "new-inner-admin@example.com", "new-outer-admin@example.com"]));
+  }
+  a = await start("interior", true); b = await start("exterior", true);
+  assert.deepEqual(subscriptionSnapshot(), subscriptionsBefore);
+  await login(a, "first@example.com", "interior-first-123");
+  b.cookie = a.cookie;
+  for (const app of [a, b]) {
+    assert.equal((await app.request("/api/auth/me")).json.user.isAdmin, true);
+    await app.request("/api/admin/mailing-list");
+    await app.request("/data/admin-emails.json", {}, 404);
+  }
+  for (const [app, email] of [[a, "new-inner-admin@example.com"], [b, "new-outer-admin@example.com"]]) {
+    const added = await register(app, email, "new-admin-test-123", {subscriptions: {interior: false, exterior: false}});
+    assert.equal(added.json.user.isAdmin, true);
+    const cookie = app.cookie;
+    for (const target of [a, b]) {
+      target.cookie = cookie;
+      assert.equal((await target.request("/api/auth/me")).json.user.isAdmin, true);
+      await target.request("/api/admin/mailing-list");
+    }
+  }
+  await login(a, "fresh@example.com", "fresh-common-123");
+  b.cookie = a.cookie;
+  for (const app of [a, b]) {
+    assert.equal((await app.request("/api/auth/me")).json.user.isAdmin, false);
+    await app.request("/api/admin/mailing-list", {}, 403);
+  }
+  await login(b, "shared@example.com", "new-shared-123");
+  assert.equal((await b.request("/api/auth/me")).json.user.isAdmin, true, "existing admin remains authorized");
+  await stop(a.child); await stop(b.child);
+  for (const invalid of [["*@example.com"], {email: "first@example.com"}]) {
+    fs.writeFileSync(path.join(roots.interior, "data", "admin-emails.json"), JSON.stringify(invalid));
+    await assert.rejects(start("interior", true), /array of exact email addresses/);
+  }
   console.log("Shared identity tests passed: migration, old interior sessions, colliding local IDs, common login/logout/password, all subscription choices, export compatibility, restart and isolated activity/metrics.");
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; }).finally(async () => {

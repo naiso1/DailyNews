@@ -58,7 +58,7 @@ function checkFrontend() {
     if (exterior) assert.ok(!mailCheckbox.includes("checked"), "Exterior opt-in must start unchecked");
     vm.runInContext('accountState.authResolved = true; renderAuth = () => {}; updateRegistrationPrompt();', context);
     assert.equal(node("accountOverlay").classes.has("auth-required"), !exterior);
-    assert.equal(node("accountOverlay").classes.has("open"), !exterior);
+    assert.equal(node("accountOverlay").classes.has("open"), true);
     const clientPrefix = fs.readFileSync(path.join(repo, "dailynews_client.js"), "utf8").split("const JST_OFFSET_MS")[0];
     vm.runInContext(clientPrefix, context);
     assert.equal(vm.runInContext("CLIENT_ID_KEY === ACCOUNT_CLIENT_ID_KEY", context), true);
@@ -78,20 +78,14 @@ function checkPublicationStatus() {
   const mixed = { ...zero, target_dates: ["2026-09-12", "2026-09-13", "2026-09-14"], selected_count: 2, status: "published" };
   const building = { edition_id: "exterior", status: "building", processed_through: "" };
   const normalize = (payload) => vm.runInContext(`normalizeExteriorPublication(${JSON.stringify(payload)})`, context);
-  const describe = (payload, news) => vm.runInContext(`describeExteriorPublication(${JSON.stringify(payload)}, ${JSON.stringify(news)})`, context);
   assert.equal(normalize(zero).processed_through, "2026-09-14");
   assert.equal(normalize(building).processed_through, "");
-  assert.match(describe(building, []), /初回ニュースを作成中です/);
-  assert.doesNotMatch(describe(building, []), /収集・選定済み/);
-  assert.match(describe(zero, [{ date: "2026-09-11" }]), /2026-09-14まで収集・選定済み/);
-  assert.match(describe(zero, []), /条件に合う記事がありませんでした/);
-  assert.match(describe(mixed, [{ date: "2026-09-12" }, { date: "2026-09-13" }]), /採用は2件/);
-  assert.match(describe(mixed, [{ date: "2026-09-12" }]), /2026-09-14付の新しい掲載記事はありません/);
-  assert.doesNotMatch(describe(mixed, [{ date: "2026-09-14" }]), /新しい掲載記事はありません/);
+  assert.equal(normalize(zero).selected_count, 0);
+  assert.equal(normalize(mixed).selected_count, 2);
+  assert(!html.includes('exteriorPublicationStatus'), 'the exterior-only publication banner was removed');
   for (const invalid of [null, { ...zero, edition_id: "interior" }, { ...zero, processed_through: "2026-02-30" }, { ...zero, status: "failed" }, { ...zero, selected_count: 5 }, { ...zero, target_dates: ["2026-09-13"] }]) {
     assert.equal(normalize(invalid), null);
   }
-  assert.match(describe(null, []), /収集状況を確認できませんでした/);
   const rangeFunction = html.match(/        function setNewDateRangeFromNews\(data\) \{[\s\S]*?(?=        function normalizeIsNewFlags)/)[0];
   vm.runInContext('let NEW_DATE_RANGE; window.DAILYNEWS_CONFIG.id = "exterior";', context);
   vm.runInContext(rangeFunction, context);

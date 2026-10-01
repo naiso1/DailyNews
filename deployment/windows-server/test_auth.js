@@ -5,6 +5,7 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
+const { once } = require("node:events");
 
 const port = 18082 + Math.floor(Math.random() * 1000);
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "dailynews-auth-"));
@@ -313,7 +314,12 @@ main()
     process.stderr.write(`${error.stack || error}\n`);
     process.exitCode = 1;
   })
-  .finally(() => {
-    child.kill();
-    fs.rmSync(root, { recursive: true, force: true });
+  .finally(async () => {
+    if (child.exitCode === null && child.signalCode === null) {
+      const stopped = once(child, "exit");
+      child.kill();
+      await stopped;
+    }
+    if (path.dirname(root) !== path.resolve(os.tmpdir()) || !path.basename(root).startsWith("dailynews-auth-")) throw new Error("Unsafe cleanup path");
+    fs.rmSync(root, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
   });

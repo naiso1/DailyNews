@@ -16,3 +16,4 @@ artifacts/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+admin-emails.json

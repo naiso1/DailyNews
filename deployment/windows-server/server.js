@@ -63,9 +63,16 @@ const SESSION_MAX_AGE_SECONDS = 180 * 24 * 60 * 60;
 const AUTH_ATTEMPT_WINDOW_MS = 10 * 60 * 1000;
 const AUTH_ATTEMPT_LIMIT = 12;
 const authAttempts = new Map();
+// Private, persistent configuration: never packaged with the public release.
+const adminEmailsFile = path.join(DATA_DIR, "admin-emails.json");
+const configuredAdminEmails = fs.existsSync(adminEmailsFile)
+  ? JSON.parse(fs.readFileSync(adminEmailsFile, "utf8").replace(/^\uFEFF/, "")) : [];
+if (!Array.isArray(configuredAdminEmails) || configuredAdminEmails.some((email) =>
+  typeof email !== "string" || email.length > 254 || !/^[^\s@*]+@[^\s@*]+\.[^\s@*]+$/.test(email.trim()))) {
+  throw new Error("admin-emails.json must contain an array of exact email addresses.");
+}
 const ADMIN_EMAILS = new Set(
-  (process.env.DAILYNEWS_ADMIN_EMAILS || "yuki.nakamura@toyoda-gosei.co.jp")
-    .split(",")
+  [...(process.env.DAILYNEWS_ADMIN_EMAILS || "yuki.nakamura@toyoda-gosei.co.jp").split(","), ...configuredAdminEmails]
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean),
 );

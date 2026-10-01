@@ -76,6 +76,15 @@ not require a feature-history entry and must not be blocked by its date.
 The administrator account list is configured with the
 `DAILYNEWS_ADMIN_EMAILS` environment variable (comma-separated). If it is not
 set, `yuki.nakamura@toyoda-gosei.co.jp` is treated as the administrator.
+Additional administrators can be listed as a JSON array of exact email addresses
+in each server's private `data/admin-emails.json`. This file adds to the existing
+administrator list and survives deployments. With shared identity, keep the same
+list in both edition roots and restart both servers, starting with interior.
+Existing accounts are promoted at startup; unregistered addresses become
+administrators when they register. Existing administrator flags are retained;
+removing an address from this file alone does not revoke an existing account's
+administrator flag. This configuration must never be committed or included in a
+public release, and changing it does not change mail subscriptions.
 The administrator panel manages the 08:00 mail recipients. Registered users are
 subscribed automatically; manual recipients can be added, disabled, or removed.
 The recipient list remains in SQLite and is exported to the signed-in business
