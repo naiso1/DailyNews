@@ -171,6 +171,13 @@ function accountStyles() {
     .admin-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:18px; }
     .admin-kpi { padding:13px; border:1px solid rgba(255,255,255,.09); border-radius:13px; background:rgba(255,255,255,.03); color:#91a2b7; font-size:11px; }
     .admin-kpi strong { display:block; margin-top:3px; color:#7df1c2; font-size:22px; }
+    .admin-edition-nav { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:8px; }
+    .admin-edition-nav a { display:flex; align-items:center; text-decoration:none; }
+    .admin-edition-nav [aria-current="page"] { border-color:#7df1c2; background:rgba(125,241,194,.12); color:#eafff7; }
+    .admin-usage-days summary { cursor:pointer; color:#cbd5e1; padding:8px 0; }
+    .admin-usage-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .admin-usage-table th,.admin-usage-table td { padding:9px; border-bottom:1px solid rgba(255,255,255,.07); text-align:right; }
+    .admin-usage-table th:first-child,.admin-usage-table td:first-child { text-align:left; }
     .admin-table-wrap { overflow:auto; border:1px solid rgba(255,255,255,.09); border-radius:13px; }
     .admin-table { width:100%; min-width:760px; border-collapse:collapse; font-size:11px; }
     .admin-table th,.admin-table td { padding:10px; border-bottom:1px solid rgba(255,255,255,.07); text-align:left; vertical-align:top; }
@@ -664,19 +671,17 @@ async function updatePassword(event) {
 async function renderAdminPanel() {
   const list = document.getElementById("accountActivityList");
   if (!list || !accountState.user?.isAdmin) return;
-  list.innerHTML = '<div class="account-empty">登録状況を読み込み中...</div>';
+  list.innerHTML = '<div class="account-empty">この版の管理情報を読み込み中...</div>';
   try {
     accountState.admin = await accountApi("/admin/overview");
   } catch (error) {
     list.innerHTML = `<div class="account-error show">管理情報を取得できませんでした。${escapeAccountHtml(error.message)}</div>`;
     return;
   }
-  const { totals = {}, users = [], feedback = [], mailingList = [], hiddenItems = [] } = accountState.admin;
+  const { totals = {}, users = [], feedback = [], mailingList = [], hiddenItems = [], usage } = accountState.admin;
   const completeItemIndex = accountItemIndex({ includeHidden: true });
   const kpis = [
-    ["登録ユーザー", totals.users],
     ["メール配信先", totals.mailRecipients],
-    ["利用履歴あり", totals.activeUsers],
     ["お気に入り", totals.favorites],
     ["いいね", totals.likes],
     ["関連なし", totals.irrelevant],
@@ -685,6 +690,12 @@ async function renderAdminPanel() {
     ["ご意見", totals.feedback],
   ];
   list.innerHTML = `
+    <nav class="admin-edition-nav" aria-label="管理する版">${[["interior", "内装版", "/"], ["exterior", "外装版", "/exterior/"]].map(([id, label, href]) => `<a class="account-secondary" href="${href}?admin=1" ${id === (window.DAILYNEWS_CONFIG?.id || "interior") ? 'aria-current="page"' : ""}>${label}の管理</a>`).join("")}</nav>
+    <h3 class="account-section-title">${ACCOUNT_EDITION_LABEL}の利用状況</h3>
+    <p class="account-note">この画面の利用状況・ご意見・配信先・記事管理は、すべて${ACCOUNT_EDITION_LABEL}が対象です。上のボタンで管理する版を切り替えられます。</p>
+    ${renderAdminUsage(usage)}
+    <h3 class="account-section-title">${ACCOUNT_EDITION_LABEL}の反応・配信状況</h3>
+    <p class="account-note">反応はこの版に残っている記録の累計、配信先・削除記事は現在の件数です。</p>
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
     <div id="adminEditorialPanel"></div>
     <h3 class="account-section-title">朝8時のメール配信先 <span class="account-section-count">${mailingList.filter((item) => item.enabled).length}</span></h3>
@@ -698,9 +709,10 @@ async function renderAdminPanel() {
     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>配信先</th><th>登録方法</th><th>配信</th><th>操作</th></tr></thead><tbody>
       ${mailingList.map((recipient) => `<tr><td><strong>${escapeAccountHtml(recipient.displayName || "名称未設定")}</strong><br><span class="account-email">${escapeAccountHtml(recipient.email)}</span></td><td><span class="admin-mail-source">${recipient.source === "registered_user" ? "ユーザー登録" : "手動追加"}</span></td><td><label class="admin-mail-toggle"><input type="checkbox" data-mail-toggle="${recipient.id}" ${recipient.enabled ? "checked" : ""}>${recipient.enabled ? "配信中" : "停止中"}</label></td><td>${recipient.source === "manual" && recipient.userId == null ? `<button class="admin-mail-delete" data-mail-delete="${recipient.id}" type="button">削除</button>` : "-"}</td></tr>`).join("")}
     </tbody></table></div>
-    <h3 class="account-section-title">ユーザー登録状況</h3>
-    <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>登録日時（JST）</th><th>最終利用（JST）</th><th>活動</th></tr></thead><tbody>
-      ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${escapeAccountHtml(formatAccountDateTime(user.createdAt))}</td><td>${escapeAccountHtml(formatAccountDateTime(user.lastSeenAt))}</td><td>★ ${user.favorites} / 👍 ${user.likes} / 👎 ${user.irrelevant} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
+    <h3 class="account-section-title">${ACCOUNT_EDITION_LABEL}のユーザー別利用状況</h3>
+    <p class="account-note">最終利用・利用日数は計測開始以降の、この版の画面利用だけを表示します。共通アカウントの登録や他方の版へのログインだけでは加算しません。「記録なし」は未利用と断定するものではありません。</p>
+    <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ユーザー</th><th>この版の最終利用（JST）</th><th>利用日数</th><th>この版での活動</th></tr></thead><tbody>
+      ${users.map((user) => `<tr><td><strong>${escapeAccountHtml(user.displayName)}</strong>${user.isAdmin ? ' <span class="account-card-kind">管理者</span>' : ""}<br><span class="account-email">${escapeAccountHtml(user.email)}</span></td><td>${user.lastSeenAt ? escapeAccountHtml(formatAccountDateTime(user.lastSeenAt)) : "記録なし"}</td><td>${Number(user.usageDays || 0)}日</td><td>★ ${user.favorites} / 👍 ${user.likes} / 👎 ${user.irrelevant} / 💬 ${user.comments} / 意見 ${user.feedback}</td></tr>`).join("")}
     </tbody></table></div>
     `;
   list.querySelector("#adminMailForm").addEventListener("submit", addMailRecipient);
@@ -714,6 +726,18 @@ async function renderAdminPanel() {
     button.addEventListener("click", () => restoreHiddenItem(button));
   });
   await renderEditorialAdmin();
+}
+
+function renderAdminUsage(usage) {
+  if (!usage) return '<p class="account-note">版別の利用人数は準備中です。</p>';
+  const periods = [["本日", usage.today], ["直近7日", usage.last7Days], ["直近30日", usage.last30Days]];
+  const cards = (key, unit, suffix) => periods.map(([label, data]) => `<div class="admin-kpi">${label}の${suffix}<strong>${Number(data?.[key] || 0).toLocaleString()}${unit}</strong></div>`).join("");
+  const startedDay = formatAccountDateTime(usage.startedAt).slice(0, 10).replace(/\//g, "-");
+  return `<div class="admin-kpis">${cards("users", "人", "利用人数")}${cards("visits", "", "アクセス数")}</div>
+    <p class="account-note">利用人数はログインしてこの版を利用した人数（管理者を含む・期間内の重複なし）。計測開始：${escapeAccountHtml(formatAccountDateTime(usage.startedAt))} JST。開始前の人数・最終利用は復元できないため含めません。<br>アクセス数は未ログインを含むブラウザごとの1日1回の訪問を合計しています。同じ人の別端末・別日は別に数えます。累計：${Number(usage.totalVisits || 0).toLocaleString()}。期間は本日を含む日本時間です。</p>
+    <details class="admin-usage-days"><summary>日別の利用状況（直近30日）</summary>
+      <table class="admin-usage-table"><thead><tr><th>日付（JST）</th><th>利用人数</th><th>アクセス数</th></tr></thead><tbody>${(usage.daily || []).map(day => `<tr><td>${escapeAccountHtml(day.date)}</td><td>${day.date < startedDay ? "計測前" : `${Number(day.users || 0)}人`}</td><td>${Number(day.visits || 0)}</td></tr>`).join("")}</tbody></table>
+    </details>`;
 }
 
 const FEEDBACK_STATUS_LABELS = { new: "未確認", in_review: "対応中", resolved: "対応済み", dismissed: "見送り" };
@@ -937,6 +961,7 @@ async function refreshActivity() {
 }
 
 async function afterAuthentication() {
+  await recordEditionUsage();
   const favoriteOwner = localStorage.getItem(ACCOUNT_FAVORITES_OWNER_KEY);
   const favoritesToClaim = favoriteOwner ? [] : localFavoriteIds();
   await accountApi("/auth/claim", {
@@ -947,6 +972,20 @@ async function afterAuthentication() {
   updateAccountButton();
   updateRegistrationPrompt();
   window.dispatchEvent(new CustomEvent("dailynews:account-changed", { detail: accountState.user }));
+}
+
+let accountUsageLastSent = 0;
+let accountUsageUser = null;
+let accountUsageInFlight = null;
+async function recordEditionUsage() {
+  const userId = accountState.user?.id;
+  if (!userId || document.hidden || accountUsageInFlight) return;
+  if (accountUsageUser === userId && Date.now() - accountUsageLastSent < 60000) return;
+  accountUsageInFlight = accountApi("/me/usage", { method: "POST", body: {} }).then(() => {
+    accountUsageLastSent = Date.now();
+    accountUsageUser = userId;
+  }).catch(() => {}).finally(() => { accountUsageInFlight = null; });
+  await accountUsageInFlight;
 }
 
 async function logoutAccount() {
@@ -1037,6 +1076,9 @@ async function initializeAccount() {
   accountState.authResolved = true;
   updateAccountButton();
   updateRegistrationPrompt();
+  if (accountState.user?.isAdmin && new URLSearchParams(window.location?.search || "").get("admin") === "1") {
+    openAccountTab("admin");
+  }
 }
 
 window.dailyNewsAccount = {
@@ -1094,10 +1136,16 @@ async function refreshSharedSession() {
   }).catch(() => {}).finally(() => { accountSessionCheck = null; });
   await accountSessionCheck;
 }
-window.addEventListener("focus", refreshSharedSession);
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") refreshSharedSession();
+window.addEventListener("focus", async () => {
+  await refreshSharedSession();
+  await recordEditionUsage();
 });
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") refreshSharedSession().then(recordEditionUsage);
+});
+// Observe real foreground activity; no timer or background polling inflates use.
+document.addEventListener("pointerdown", recordEditionUsage, { passive: true });
+document.addEventListener("keydown", recordEditionUsage, { passive: true });
 window.addEventListener("storage", (event) => {
   if (event.key === ACCOUNT_REVISION_KEY) refreshSharedSession();
 });

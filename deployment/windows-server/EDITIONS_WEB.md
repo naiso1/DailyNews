@@ -76,6 +76,16 @@ CLI単体は `node migrate-shared-identity.js --interior-db <絶対パス> --ext
 - 管理者の手動追加は明示的な配信操作としてONになる。初期配信先の投入と実際のメール送信・スケジュールは別の運用処理が担当する。Webアプリ自体はメールを送信しない。
 - 管理者の `/api/admin/mailing-list` と `manage-mailing-list.js export-json` は版別DBの現行enabledを出力する。export・ログインで購読を復活させない。
 
+## 版別の管理と利用集計（2026-10-01）
+
+管理者は両版を管理できる。マイページの「管理」にある「内装版の管理」「外装版の管理」で、その版の管理画面へ移動する（`/?admin=1` / `/exterior/?admin=1`）。配信先・ご意見・削除理由・記事操作も移動先の版だけが対象となる。
+
+`GET /api/admin/overview` は対象版の `edition` と `usage` を返す。利用人数は本日・本日を含む7日/30日ごとにユーザーIDを重複排除し、日別データは直近30日を返す。日付境界はJST。共通sessionsのlast_seen_atを版別利用へ流用しない。
+
+`POST /api/me/usage` はログイン必須で、認証した版ローカルのuser IDだけを `user_usage_daily` に記録する。本文のIDや版の指定は使用しない。画面の初期表示・ログイン後・前面復帰・前面での操作時に送信し、同じユーザーは端末上で1分に1回までとする。バックグラウンドの認証/記事更新確認や管理APIの参照だけでは利用を加算しない。画面を放置している時間は測定しない。
+
+計測開始日時は各DBのsettingsに一度だけ保存する。開始前の版別利用人数・最終利用は復元せず、共通アカウント数も版別利用人数とは扱わない。既存のアクセス数（未ログインを含むブラウザ単位、1日1回）・反応・購読設定は維持する。過去アクセスのリセット操作がある場合も、ログイン利用記録とは独立している。
+
 ## 検証
 
-`node deployment/windows-server/test_shared_identity.js` は一時DBで移行・旧内装session維持・ID衝突・共通ログイン/ログアウト/PW変更・4通りの購読・再起動後の停止保持・版別操作履歴/集計を実HTTPで検証する。`test_editions.js` と `test_auth.js` は共通設定なしの従来モードも引き続き検証する。実データやメールにはアクセスしない。
+`node deployment/windows-server/test_shared_identity.js` は一時DBで移行・旧内装session維持・ID衝突・共通ログイン/ログアウト/PW変更・4通りの購読・再起動後の停止保持・版別操作履歴/集計を実HTTPで検証する。`test_editions.js` と `test_auth.js` は共通設定なしの従来モードも引き続き検証する。実データやメールにはアクセスしない。`node tests/test_admin_usage.cjs` は管理先のAPI・リンク、前面のみの利用記録、送信抑制と再試行、管理画面への遷移を検証する。

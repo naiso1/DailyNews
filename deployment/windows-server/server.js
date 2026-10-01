@@ -197,6 +197,17 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS sessions_user_id_idx
     ON sessions(user_id, expires_at);
 
+  CREATE TABLE IF NOT EXISTS user_usage_daily (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    date_key TEXT NOT NULL,
+    first_seen_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_seen_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, date_key)
+  );
+  CREATE INDEX IF NOT EXISTS user_usage_daily_date_idx ON user_usage_daily(date_key);
+  INSERT OR IGNORE INTO settings(setting_key, setting_value)
+    VALUES ('edition_usage_started_at', CURRENT_TIMESTAMP);
+
   CREATE TABLE IF NOT EXISTS user_likes (
     item_id TEXT NOT NULL,
     user_id INTEGER NOT NULL,
@@ -767,16 +778,21 @@ const statements = {
       u.is_admin,
       u.created_at,
       u.updated_at,
-      MAX(s.last_seen_at) AS last_seen_at,
+      MAX(v.last_seen_at) AS last_seen_at,
+      COUNT(v.date_key) AS usage_days,
       (SELECT COUNT(*) FROM user_favorites f WHERE f.user_id = u.id) AS favorites,
       (SELECT COUNT(*) FROM user_likes l WHERE l.user_id = u.id) AS likes,
       (SELECT COUNT(*) FROM user_irrelevant r WHERE r.user_id = u.id) AS irrelevant,
       (SELECT COUNT(*) FROM comments c WHERE c.user_id = u.id) AS comments,
       (SELECT COUNT(*) FROM feedback fb WHERE fb.user_id = u.id) AS feedback
     FROM users u
-    LEFT JOIN sessions s ON s.user_id = u.id
+    LEFT JOIN user_usage_daily v ON v.user_id = u.id
     GROUP BY u.id
-    ORDER BY u.created_at DESC
+    ORDER BY last_seen_at DESC, u.created_at DESC
+  `),
+  recordUserUsage: db.prepare(`
+    INSERT INTO user_usage_daily(user_id, date_key) VALUES (?, ?)
+    ON CONFLICT(user_id, date_key) DO UPDATE SET last_seen_at = CURRENT_TIMESTAMP
   `),
   adminFeedback: db.prepare(`
     SELECT
@@ -1417,6 +1433,32 @@ function assertSameOrigin(request, response) {
   return false;
 }
 
+function editionUsageStats() {
+  const today = jstDateKey();
+  const startDate = (days) => new Date(Date.parse(`${today}T00:00:00Z`) - (days - 1) * 86400000).toISOString().slice(0, 10);
+  const access = accessStats();
+  const usage = db.prepare(`SELECT date_key, COUNT(*) AS users FROM user_usage_daily
+    WHERE date_key BETWEEN ? AND ? GROUP BY date_key`).all(startDate(30), today);
+  const usersByDay = Object.fromEntries(usage.map(row => [row.date_key, Number(row.users)]));
+  const period = (days) => {
+    const from = startDate(days);
+    return {
+      from, through: today,
+      users: Number(db.prepare('SELECT COUNT(DISTINCT user_id) AS n FROM user_usage_daily WHERE date_key BETWEEN ? AND ?').get(from, today).n),
+      visits: Object.entries(access.daily).reduce((sum, [date, count]) => sum + (date >= from && date <= today ? count : 0), 0),
+    };
+  };
+  return {
+    startedAt: db.prepare("SELECT setting_value FROM settings WHERE setting_key = 'edition_usage_started_at'").get().setting_value,
+    today: period(1), last7Days: period(7), last30Days: period(30),
+    totalVisits: access.total,
+    daily: Array.from({ length: 30 }, (_, index) => {
+      const date = startDate(index + 1);
+      return { date, users: usersByDay[date] || 0, visits: access.daily[date] || 0 };
+    }),
+  };
+}
+
 function feedbackPayload(row) {
   return {
     id: Number(row.id), category: row.category, message: row.message,
@@ -1832,6 +1874,16 @@ async function handleApi(request, response, requestUrl) {
         authenticatedUser(request),
       ),
     );
+    return;
+  }
+
+  // Explicit page activity only: shared auth checks and admin report reads do not
+  // establish use of this edition. IDs always belong to this edition's local DB.
+  if (request.method === "POST" && requestUrl.pathname === "/api/me/usage") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    statements.recordUserUsage.run(user.id, jstDateKey());
+    sendJson(response, 200, { edition: EDITION, recorded: true });
     return;
   }
 
@@ -2253,6 +2305,7 @@ async function handleApi(request, response, requestUrl) {
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       lastSeenAt: row.last_seen_at,
+      usageDays: Number(row.usage_days || 0),
       favorites: Number(row.favorites || 0),
       likes: Number(row.likes || 0),
       irrelevant: Number(row.irrelevant || 0),
@@ -2279,6 +2332,8 @@ async function handleApi(request, response, requestUrl) {
       createdByEmail: row.created_by_email,
     }));
     sendJson(response, 200, {
+      edition: { id: EDITION, name: PUBLIC_CONFIG.name },
+      usage: editionUsageStats(),
       totals: {
         users: users.length,
         activeUsers: users.filter((user) => user.lastSeenAt).length,

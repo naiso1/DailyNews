@@ -104,6 +104,54 @@ async function main() {
   assert.equal((await a.request("/api/me/activity")).json.comments.length, 0);
   assert.equal((await a.request("/api/access")).json.total, 0);
   assert.equal((await b.request("/api/access")).json.total, 1);
+  // Shared sessions, report reads and background authentication are not edition use.
+  const overview = async app => (await app.request("/api/admin/overview")).json;
+  const beforeUsage = await overview(b);
+  assert.equal(beforeUsage.edition.id, "exterior");
+  assert.equal(beforeUsage.usage.today.users, 0);
+  assert.equal(beforeUsage.usage.today.visits, 1);
+  assert(beforeUsage.users.every(user => user.lastSeenAt === null && user.usageDays === 0));
+  const usageStartedAt = beforeUsage.usage.startedAt;
+  await b.request("/api/me/usage", {method: "POST", headers: {Cookie: ""}, body: {}}, 401);
+  await b.request("/api/me/usage", {method: "POST", headers: {Origin: "http://evil.invalid"}, body: {}}, 403);
+  for (let i = 0; i < 2; i++) {
+    const recorded = await b.request("/api/me/usage", {method: "POST", body: {userId: inner.id, edition: "interior"}});
+    assert.equal(recorded.json.edition, "exterior");
+  }
+  const outerUsage = await overview(b);
+  assert.equal(outerUsage.usage.today.users, 1);
+  assert.equal(outerUsage.usage.last7Days.users, 1);
+  assert.equal(outerUsage.users.find(user => user.id === outer.id).usageDays, 1);
+  assert(outerUsage.users.find(user => user.id === outer.id).lastSeenAt);
+  await a.request("/api/auth/me");
+  const innerUsage = await overview(a);
+  assert.equal(innerUsage.edition.id, "interior");
+  assert.equal(innerUsage.usage.today.users, 0);
+  assert.equal(innerUsage.usage.today.visits, 0);
+  assert(innerUsage.users.every(user => user.lastSeenAt === null));
+  // Historical fixtures cover JST dates, inclusive windows and unique people.
+  const usageDb = new DatabaseSync(dbFile("exterior"));
+  const today = outerUsage.usage.today.through;
+  assert.equal(today, new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10));
+  const dateAgo = days => new Date(Date.parse(`${today}T00:00:00Z`) - days * 86400000).toISOString().slice(0, 10);
+  const otherLocalId = usageDb.prepare("SELECT id FROM users WHERE email = 'exterior-only@example.com'").get().id;
+  const seedUsage = usageDb.prepare("INSERT INTO user_usage_daily(user_id, date_key) VALUES (?, ?)");
+  seedUsage.run(outer.id, dateAgo(6));
+  seedUsage.run(otherLocalId, dateAgo(7));
+  assert.equal((await overview(b)).usage.last7Days.users, 1);
+  assert.equal((await overview(b)).usage.last30Days.users, 2);
+  usageDb.prepare("DELETE FROM user_usage_daily WHERE user_id = ?").run(otherLocalId);
+  seedUsage.run(otherLocalId, dateAgo(29));
+  assert.equal((await overview(b)).usage.last30Days.users, 2);
+  usageDb.prepare("DELETE FROM user_usage_daily WHERE user_id = ?").run(otherLocalId);
+  seedUsage.run(otherLocalId, dateAgo(30));
+  const boundedUsage = await overview(b);
+  assert.equal(boundedUsage.usage.last30Days.users, 1);
+  assert.equal(boundedUsage.usage.daily.length, 30);
+  assert.equal(boundedUsage.usage.daily[29].date, dateAgo(29));
+  assert.equal(boundedUsage.usage.daily.find(day => day.date === dateAgo(6)).users, 1);
+  assert.equal(boundedUsage.users.find(user => user.id === outer.id).usageDays, 2);
+  usageDb.close();
   assert.equal((await b.request("/api/auth/me", { headers: { Cookie: oldOuterCookie } })).json.authenticated, false);
   await login(b, "shared@example.com", "old-exterior-123", 401);
   const commonLogin = await login(b, "shared@example.com", "interior-shared-123");
@@ -165,13 +213,19 @@ async function main() {
   assert.deepEqual((await b.request("/api/me/subscriptions")).json.subscriptions, { interior: false, exterior: false });
   await login(b, "shared@example.com", "new-shared-123");
   assert.deepEqual((await b.request("/api/me/subscriptions")).json.subscriptions, { interior: false, exterior: false });
+  assert.equal((await overview(b)).usage.startedAt, usageStartedAt, "Measurement start must survive restarts");
+  assert.equal((await overview(b)).users.find(user => user.id === outer.id).usageDays, 2);
+  await a.request("/api/admin/overview", {}, 403);
+  a.cookie = b.cookie;
+  assert.equal((await overview(a)).usage.today.users, 0, "Other edition's use must not leak via shared sessions");
   const list = (await b.request("/api/admin/mailing-list")).json;
   assert.equal(list.activeCount, 0, "Login and restart must not restore subscriptions");
   // A private administrator list promotes existing identities and future registrations
   // through either edition without changing subscriptions or ordinary users.
   const subscriptionSnapshot = () => Object.fromEntries(["interior", "exterior"].map(edition => {
     const connection = new DatabaseSync(dbFile(edition), {readOnly: true});
-    try { return [edition, connection.prepare("SELECT * FROM mail_subscriptions ORDER BY id").all()]; }
+    // Startup refreshes subscription metadata timestamps even when values agree.
+    try { return [edition, connection.prepare("SELECT id, email, display_name, user_id, enabled, source, created_at FROM mail_subscriptions ORDER BY id").all()]; }
     finally { connection.close(); }
   }));
   const subscriptionsBefore = subscriptionSnapshot();
