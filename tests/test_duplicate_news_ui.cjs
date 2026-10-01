@@ -51,7 +51,7 @@ function extract(source, name, indent = '        ') {
   return source.slice(start, source.indexOf(marker, start) + marker.length);
 }
 for (const name of ['isGloballyHidden', 'getNewsLookup', 'resolveNewsItem', 'isNewsListItem',
-  'visibleNewsData', 'isNewContent', 'getNewCounts', 'describeExteriorPublication',
+  'visibleNewsData', 'isNewContent', 'getNewCounts',
   'safeNewsSourceUrl', 'relatedNewsUrls', 'renderRelatedNewsSources', 'escapeHtml',
   'showNewsItem', 'resolvedFavoriteKey', 'isFavorite', 'loadFavorites', 'saveFavorites',
   'updateFavoriteButton', 'updateFavoritesToggle', 'buildIdeaIndex', 'getFavoriteItems',
@@ -80,7 +80,7 @@ assert.equal(ctx.isNewContent(rows[1]), false);
 assert.equal(ctx.getNewCounts(rows).world, 1);
 ctx.window.EXTERIOR_PUBLICATION_STATUS = {issue_date: '2026-09-20', processed_through: '2026-09-20',
   target_dates: ['2026-09-20'], status: 'published', selected_count: 3, selected_news_ids: ['jp2', 'jp3', 'eu1']};
-assert.equal(ctx.describeExteriorPublication(ctx.window.EXTERIOR_PUBLICATION_STATUS, rows), '2026-09-20号：1件');
+assert.equal(ctx.getNewCounts(rows).world, 1);
 
 ctx.showNewsItem('jp3');
 assert.equal(elements.searchInput.value, 'jp1');

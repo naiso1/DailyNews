@@ -105,7 +105,7 @@ def main():
                 assert page.locator('#newsGrid > .card').count() == 1
                 assert page.locator('#card-eu1').count() == 1
                 assert page.locator('#totalCount').inner_text() == '2'
-                assert page.locator('#exteriorPublicationStatus').inner_text() == '2026-09-20号：1件'
+                assert page.locator('#exteriorPublicationStatus').count() == 0
                 assert page.locator('#countryFilters [data-country="world"].new-count').inner_text() == 'New 1'
                 assert page.locator('#countryFilters [data-country="jp"].new-count').is_hidden()
                 assert page.evaluate("JSON.parse(localStorage.getItem('dailynews_exterior:favorites_v1'))") == ['jp2', 'jp3']

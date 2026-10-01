@@ -82,6 +82,7 @@ def main():
                     assert dimensions['bodyWidth'] <= width + 1, dimensions
 
                 page.goto(origin + '/exterior/', wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 check_count(len(selected))
                 assert page.locator('#dateBasis').input_value() == 'issue'
                 assert page.locator('#dateFrom').input_value() == issue_date
@@ -90,10 +91,10 @@ def main():
                 observed['default_count'] = len(selected)
                 observed['default_range'] = [page.locator('#dateFrom').input_value(), page.locator('#dateTo').input_value()]
                 if name == 'mobile':
-                    positions = page.evaluate('''() => Object.fromEntries(['dateBasis', 'dateFrom', 'dateTo']
+                    positions = page.evaluate('''() => Object.fromEntries(['dateFrom', 'dateTo']
                         .map(id => [id, document.getElementById(id).getBoundingClientRect().top]))''')
                     assert abs(positions['dateFrom'] - positions['dateTo']) < 2, positions
-                    assert positions['dateBasis'] < positions['dateFrom'], positions
+                    assert page.locator('#dateBasis').is_hidden()
                     observed['date_control_rows'] = positions
                 check_width('default')
                 page.screenshot(path=str(output / f'{name}_default.png'))
@@ -102,21 +103,24 @@ def main():
                 original_dates = page.evaluate('''() => Object.fromEntries(window.LOADED_NEWS_DATA.map(n => [n.id, n.date]))''')
                 source_count = page.evaluate('(date) => window.LOADED_NEWS_DATA.filter(n => !n.duplicateOf && n.date === date).length', issue_date)
                 earlier_id = next(item_id for item_id in selected if original_dates[item_id] < issue_date)
-                assert page.locator(f'#card-{earlier_id} .card-date-meta').inner_text() == '掲載日 ' + original_dates[earlier_id]
+                assert page.locator(f'#card-{earlier_id} .card-date-meta').inner_text() == original_dates[earlier_id]
                 observed['earlier_original_dates'] = sum(original_dates[item_id] < issue_date for item_id in selected)
                 page.locator(f'#card-{earlier_id}').screenshot(path=str(output / f'{name}_earlier_source_card.png'))
 
-                page.locator('#dateBasis').select_option('source')
+                page.goto(origin + f'/exterior/?dateBasis=source&from={issue_date}&to={issue_date}', wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 check_count(source_count)
                 observed['source_date_count'] = source_count
                 assert all(original_dates[item_id] == issue_date for item_id in rendered_ids())
                 page.reload(wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 check_count(source_count)
                 assert page.locator('#dateBasis').input_value() == 'source'
                 check_width('source')
                 page.locator('.filters').screenshot(path=str(output / f'{name}_source_filters.png'))
 
-                page.locator('#dateBasis').select_option('issue')
+                page.goto(origin + '/exterior/', wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 check_count(len(selected))
                 observed['countries'] = {}
                 for country, expected in receipt['selected_by_country'].items():
@@ -125,6 +129,7 @@ def main():
                     assert page.locator('#dateBasis').input_value() == 'issue'
                     observed['countries'][country] = expected
                 page.reload(wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 check_count(expected)
                 assert page.locator('#dateBasis').input_value() == 'issue'
                 page.locator('#countryFilters [data-country="world"].chip').click()
@@ -136,6 +141,7 @@ def main():
                 assert page.locator('#dateFrom').input_value() == ''
                 assert page.locator('#dateBasis').input_value() == 'issue'
                 page.reload(wait_until='domcontentloaded')
+                page.locator('#accountContinueGuest').click()
                 check_count(archive_count)
                 assert page.locator('#dateFrom').input_value() == ''
                 assert page.locator('#dateBasis').input_value() == 'issue'

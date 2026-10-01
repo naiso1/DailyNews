@@ -30,8 +30,6 @@
 .edition-links { display:flex; grid-column:1 / -1; flex-wrap:wrap; gap:8px; align-items:center; margin:0; }
 .edition-links a,.edition-links button { color:var(--text); border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:12px; background:rgba(255,255,255,.04); text-decoration:none; cursor:pointer; }
 .edition-links a[aria-current="page"] { color:var(--accent-2); border-color:var(--accent-2); }
-.publication-status { grid-column:1 / -1; margin:0; padding:10px 13px; border:1px solid rgba(111,167,255,.22); border-radius:10px; background:rgba(111,167,255,.06); color:var(--muted); font-size:12px; line-height:1.7; }
-.publication-status[hidden] { display:none; }
 /* ============================================================
    Atelier Interior Theme v2 — v1カラー + ランキングホバー + 参照サムネイル
    ============================================================ */
@@ -1371,9 +1369,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         <nav class="edition-links" aria-label="ニュースの版">
             <a href="/" data-edition-link="interior">内装版</a>
             <a href="/exterior/" data-edition-link="exterior">外装版</a>
-            <button type="button" id="editionMailSettings" hidden>外装版のメール受信設定</button>
         </nav>
-        <p class="publication-status" id="exteriorPublicationStatus" role="status" hidden></p>
     </header>
 
     <div class="filters">
@@ -1396,14 +1392,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         class="new-count" data-country="paper"></span></span>
             </div>
         </div>
-        <div class="filter-row" id="contentCategoryRow" style="display:none">
-            <label class="filter-label" for="contentCategory">📰 記事区分</label>
-            <select id="contentCategory" style="max-width:100%; padding:8px 12px; border-radius:10px; border:1px solid var(--border); background:#1e222d; color:var(--text); font-size:13px;">
-                <option value="all">すべて</option>
-                <option value="product">製品・技術</option>
-                <option value="trend">トレンド・マーケット</option>
-            </select>
-        </div>
         <div class="filter-row">
             <span class="filter-label">🏷️ ジャンル</span>
             <div class="tag-filter-container">
@@ -1416,10 +1404,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         <div class="filter-row">
             <span class="filter-label">📅 日付</span>
             <div class="date-inputs">
-                <select id="dateBasis" aria-label="日付の基準" hidden>
-                    <option value="issue">配信号の日付</option>
-                    <option value="source">元記事の日付</option>
-                </select>
+                <input type="hidden" id="dateBasis" value="source">
                 <input type="date" id="dateFrom" value="">
                 <span>〜</span>
                 <input type="date" id="dateTo" value="">
@@ -1619,29 +1604,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             return { ...payload, target_dates: dates };
         }
 
-        function describeExteriorPublication(payload, news) {
-            if (!payload) return "収集状況を確認できませんでした。掲載済みの記事を表示しています。";
-            if (payload.status === "building") return "初回ニュースを作成中です。公開後、このURLからご覧いただけます。";
-            const dates = payload.target_dates;
-            const through = payload.processed_through;
-            const range = dates.length === 1 ? dates[0] : `${dates[0]}〜${through}`;
-            if (payload.status === "no_matching_news") {
-                return `${through}まで収集・選定済み。今回の対象期間（${range}）は条件に合う記事がありませんでした。掲載済みの記事は引き続き閲覧できます。`;
-            }
-            if (payload.issue_date) {
-                const count = Array.isArray(news) && Array.isArray(payload.selected_news_ids)
-                    ? news.filter(item => payload.selected_news_ids.includes(item.id) && !item.duplicateOf
-                        && !window.interactionsData?.[item.id]?.hidden).length
-                    : payload.selected_count;
-                return `${payload.issue_date}号：${count}件`;
-            }
-            let message = `${through}まで収集・選定済み。今回の対象期間（${range}）の採用は${payload.selected_count}件です。`;
-            if (Array.isArray(news) && news.length && !news.some((item) => item.date === through)) {
-                message += ` ${through}付の新しい掲載記事はありません。`;
-            }
-            return message;
-        }
-
         window.EXTERIOR_PUBLICATION_STATUS = null;
         window.__publicationStatusReady = window.DAILYNEWS_CONFIG.id === "exterior"
             ? fetch("publication_status.json", { cache: "no-store", credentials: "same-origin", signal: AbortSignal.timeout(5000) })
@@ -1655,13 +1617,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         document.querySelector("header h1").textContent = editionConfig.name;
         document.querySelector(`[data-edition-link="${editionConfig.id}"]`)?.setAttribute("aria-current", "page");
         if (editionConfig.id === "exterior") {
-            document.querySelector("header .lead").textContent = "国内外の外装製品・技術に加え、デザイン・市場・規制・材料・競合の動きを収集して日本語要約。外装開発につながる考察と企画アイデアを提案します。";
-            document.getElementById("contentCategoryRow").style.display = "";
+            document.querySelector("header .lead").textContent = "国内外の自動車外装ニュースを生成AIで毎日収集・日本語要約。市場トレンドを考察し、豊田合成の外装開発につながる企画アイデアとイメージを提案します。";
             document.querySelector('meta[name="description"]').content = "外装製品のニュース・考察・企画アイデアをお届け。登録せずに閲覧でき、メールは希望者のみ受信できます。";
             document.querySelector('option[value="relevance-desc"]').textContent = "外装関連度順";
-            const mailSettings = document.getElementById("editionMailSettings");
-            mailSettings.hidden = false;
-            mailSettings.addEventListener("click", () => window.dailyNewsAccount?.open("register"));
         }
         // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
         const CACHE_BUSTER = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
@@ -1898,22 +1856,14 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         function updateUpdatedAt() {
             const el = document.getElementById("lastUpdated");
             if (!el) return;
-            if (window.DAILYNEWS_CONFIG.id === "exterior") {
-                const publication = window.EXTERIOR_PUBLICATION_STATUS;
-                if (publication?.status === "building") {
-                    document.getElementById("lastUpdatedLabel").textContent = "準備状況";
-                    el.textContent = "作成中";
-                    return;
-                }
-                document.getElementById("lastUpdatedLabel").textContent = publication ? "収集確認" : "記事更新";
-                if (publication) {
-                    el.textContent = `${publication.processed_through}まで`;
-                    el.title = "この日付までの記事を収集・選定済み";
-                    return;
-                }
-            }
+            document.getElementById("lastUpdatedLabel").textContent = "更新";
             if (window.NEWS_UPDATED_AT) {
                 el.textContent = window.NEWS_UPDATED_AT;
+                return;
+            }
+            const publishedAt = new Date(window.EXTERIOR_PUBLICATION_STATUS?.updated_at || "");
+            if (window.DAILYNEWS_CONFIG.id === "exterior" && !Number.isNaN(publishedAt.getTime())) {
+                el.textContent = formatDateTime(publishedAt);
                 return;
             }
             const latest = getLatestDate(NEWS_DATA);
@@ -1939,7 +1889,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             itemId = target.id;
             beginInternalNavigation(fromRanking ? "rankingSection" : null, returnToAccount);
             document.getElementById("searchInput").value = itemId;
-            document.getElementById("contentCategory").value = "all";
             document.getElementById("dateFrom").value = "";
             document.getElementById("dateTo").value = "";
             newOnly = false;
@@ -2948,7 +2897,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 dateTo: document.getElementById("dateTo").value,
                 dateBasis: getDateFilterBasis(),
                 sortOrder: document.getElementById("sortOrder").value,
-                contentCategory: document.getElementById("contentCategory").value,
                 countries: new Set(activeCountries),
                 tags: new Set(activeTags),
                 favoritesOnly,
@@ -2972,7 +2920,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("dateTo").value = state.dateTo || "";
             document.getElementById("dateBasis").value = state.dateBasis || "source";
             document.getElementById("sortOrder").value = state.sortOrder || "new-first";
-            document.getElementById("contentCategory").value = state.contentCategory || "all";
             activeCountries = new Set(state.countries || ["world"]);
             activeTags = new Set(state.tags || ["all"]);
             favoritesOnly = Boolean(state.favoritesOnly);
@@ -3016,7 +2963,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             beginInternalNavigation(null, returnToAccount);
             document.getElementById("searchInput").value = "";
             document.getElementById("dateFrom").value = day.date;
-            document.getElementById("contentCategory").value = "all";
             document.getElementById("dateTo").value = day.date;
             document.getElementById("dateBasis").value = window.DAILYNEWS_CONFIG.id === "exterior" ? "issue" : "source";
             newOnly = false;
@@ -3070,9 +3016,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 }
                 if (window.DAILYNEWS_CONFIG.id === "exterior") {
                     await window.__publicationStatusReady;
-                    const statusLine = document.getElementById("exteriorPublicationStatus");
-                    statusLine.hidden = false;
-                    statusLine.textContent = describeExteriorPublication(window.EXTERIOR_PUBLICATION_STATUS, window.LOADED_NEWS_DATA);
                     updateUpdatedAt();
                 }
                 if (window.LOADED_NEWS_DATA) {
@@ -3136,11 +3079,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                 document.getElementById("countryFilters").addEventListener("click", handleCountryClick);
                 document.getElementById("tagFilters").addEventListener("click", handleTagClick);
-                document.getElementById("contentCategory").addEventListener("change", () => {
-                    visibleLimit = 30;
-                    applyFilters();
-                    updateURL("push");
-                });
                 const applyManualDateFilter = () => {
                     newOnly = false;
                     applyFilters();
@@ -3148,7 +3086,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 };
                 document.getElementById("dateFrom").addEventListener("change", applyManualDateFilter);
                 document.getElementById("dateTo").addEventListener("change", applyManualDateFilter);
-                document.getElementById("dateBasis").addEventListener("change", applyManualDateFilter);
                 const searchInput = document.getElementById("searchInput");
                 searchInput.addEventListener("input", applyFilters);
                 searchInput.addEventListener("change", () => updateURL("push"));
@@ -3351,7 +3288,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const searchedArticle = getNewsLookup().get(searchText);
             const searchTarget = searchedArticle ? resolveNewsItem(searchedArticle) : null;
             const sortOrder = document.getElementById("sortOrder").value;
-            const contentCategory = window.DAILYNEWS_CONFIG.id === "exterior" ? document.getElementById("contentCategory").value : "all";
 
             if (activeTags.size === 0) activeTags = new Set(["all"]);
             if (activeCountries.size === 0) activeCountries = new Set(["world"]);
@@ -3367,7 +3303,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
                 if (favoritesOnly && !isFavorite(n.id)) return false;
                 if (newOnly && !isNewContent(n)) return false;
-                if (contentCategory !== "all" && (n.contentCategory || "product") !== contentCategory) return false;
 
                 const searchable = (n.id + " " + n.title + " " + n.desc + " " + (n.summary || "") + " " + (n.note || "") + " " + n.tags.join(" ") + " " + newsCategoryLabel(n)).toLowerCase();
 
@@ -3387,7 +3322,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 return true;
             });
 
-            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly || newOnly || contentCategory !== "all");
+            const hasActiveFilter = Boolean(searchText || from || to || !activeTags.has("all") || !activeCountries.has("world") || favoritesOnly || newOnly);
             const availableNews = visibleNewsData();
             if (!hasActiveFilter && filteredData.length === 0 && availableNews.length > 0) {
                 filteredData = [...availableNews];
@@ -3512,7 +3447,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
                     <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
                     <span class="source">${n.source}</span>
-                    <span class="card-date-meta">${window.DAILYNEWS_CONFIG.id === "exterior" ? "掲載日 " : ""}${n.date}</span>
+                    <span class="card-date-meta">${n.date}</span>
                     <span class="id-badge">${n.id}</span>
                 </div>
     
@@ -3592,9 +3527,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
         window.refreshNewsVisibility = () => {
             document.getElementById("totalCount").textContent = visibleNewsData().length;
             updateNewCountBadges();
-            if (window.DAILYNEWS_CONFIG.id === "exterior") {
-                document.getElementById("exteriorPublicationStatus").textContent = describeExteriorPublication(window.EXTERIOR_PUBLICATION_STATUS, NEWS_DATA);
-            }
             refreshNewsWithoutInterruptingComments();
         };
 
@@ -3622,11 +3554,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             document.getElementById("dateFrom").value = params.has("from") ? params.get("from") : defaultFrom;
             document.getElementById("dateTo").value = params.has("to") ? params.get("to") : defaultTo;
             const dateBasis = document.getElementById("dateBasis");
-            dateBasis.hidden = window.DAILYNEWS_CONFIG.id !== "exterior";
-            dateBasis.value = !dateBasis.hidden && (params.get("dateBasis") === "issue"
+            dateBasis.hidden = true;
+            dateBasis.value = window.DAILYNEWS_CONFIG.id === "exterior" && (params.get("dateBasis") === "issue"
                 || (!params.has("dateBasis") && !params.has("from") && !params.has("to"))) ? "issue" : "source";
             document.getElementById("sortOrder").value = params.get("sort") || "new-first";
-            document.getElementById("contentCategory").value = ["product", "trend"].includes(params.get("category")) ? params.get("category") : "all";
 
             const requestedLimit = Number(params.get("limit"));
             const requestedInsightsLimit = Number(params.get("insights"));
@@ -3651,8 +3582,6 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             const params = new URLSearchParams();
             if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
             if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
-            const contentCategory = document.getElementById("contentCategory").value;
-            if (window.DAILYNEWS_CONFIG.id === "exterior" && contentCategory !== "all") params.set("category", contentCategory);
             if (newOnly) params.set("new", "1");
             if (favoritesOnly) params.set("favorites", "1");
             const query = document.getElementById("searchInput").value.trim();

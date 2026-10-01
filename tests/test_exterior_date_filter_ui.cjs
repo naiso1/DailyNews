@@ -70,12 +70,17 @@ context.setNewDateRangeFromNews(context.NEWS_DATA);
 open();
 assert.equal(elements.dateFrom.value, '2026-09-17');
 assert.equal(elements.dateTo.value, '2026-09-17');
-assert.equal(elements.dateBasis.hidden, false);
+assert.equal(elements.dateBasis.hidden, true);
 assert.equal(elements.dateBasis.value, 'issue');
 assert.equal(context.visibleLimit, 46);
 assert.equal(context.isShowingDefaultNewRange(), true);
 assert.deepEqual(show(), issue.map(item => item.id), 'single issue includes all 11 earlier source dates');
 assert.deepEqual(issue.map(item => item.date), originalDates, 'filter must never redate original articles');
+open('?category=trend');
+assert.deepEqual(show(), issue.map(item => item.id), 'removed category control cannot leave a hidden filter active');
+context.updateURL();
+assert(!location.search.includes('category='));
+open();
 
 context.handleCountryClick({target: {closest: () => ({dataset: {country: 'jp'}})}});
 assert.equal(context.newOnly, false);
