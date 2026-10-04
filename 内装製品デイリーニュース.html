@@ -1118,14 +1118,15 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 .idea-body {
     display: flex;
     gap: 20px;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .idea-image-wrapper {
     width: 45%;
     min-width: 220px;
+    flex-shrink: 0;
+    align-self: flex-start;
     position: relative;
-    min-height: 220px;
     border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: #000;
@@ -1133,12 +1134,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 }
 .idea-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     display: block;
-    transition: transform 0.5s ease;
 }
-.idea-card:hover .idea-img { transform: scale(1.03); }
 .idea-image-label {
     position: absolute;
     bottom: 6px;
@@ -1194,7 +1193,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     .ideas-grid { grid-template-columns: 1fr; }
     .idea-body { flex-direction: column; }
     .idea-card { flex-direction: column; }
-    .idea-image-wrapper { width: 100%; height: 240px; min-width: 0; max-width: none; }
+    .idea-image-wrapper { width: 100%; height: auto; min-width: 0; max-width: none; }
     .idea-content { padding: 0; }
     .idea-title { font-size: 1.2rem; }
 }
