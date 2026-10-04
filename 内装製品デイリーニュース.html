@@ -1179,6 +1179,16 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 .idea-desc { color: #b0b8c4; font-size: 14px; line-height: 1.8; margin: 0; }
 .idea-refs { font-size: 11px; color: var(--muted); margin-top: 8px; }
 .idea-ref-link { color: #8ec5ff; text-decoration: underline; text-underline-offset: 2px; }
+.idea-sources { margin-top: 12px; }
+.idea-sources-label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; }
+.idea-source-cards { display: flex; flex-wrap: wrap; gap: 8px; }
+.idea-source-card { float: none; display: block; flex: 0 1 132px; max-width: 100%; margin: 0; padding: 0; }
+.idea-source-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.idea-source-card.idea-source-noimage { display: block; }
+
+@media (max-width: 720px) {
+    .idea-source-card { display: grid; flex-basis: 100%; width: 100%; grid-template-columns: 96px minmax(0, 1fr); }
+}
 
 @media (max-width: 900px) {
     .ideas-grid { grid-template-columns: 1fr; }
@@ -2583,13 +2593,29 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             });
         }
 
-        function formatInlineTextWithRefs(value, newsById) {
-            const normalized = normalizeAnalysisRefs(value)
-                .replace(/\r\n/g, "\n")
-                .replace(/\n\s*(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])/gi, " $1")
-                .replace(/(\[[a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*\])\s*\n/gi, "$1 ")
-                .replace(/\n{2,}/g, "\n");
-            return makeAnalysisRefLinks(formatRichText(normalized), newsById);
+        function renderIdeaDescription(idea, newsById) {
+            const referenceIds = [];
+            const description = normalizeAnalysisRefs(idea.desc)
+                .replace(/\[([a-z]{2,}\d+(?:\s*,\s*[a-z]{2,}\d+)*)\]/gi, (_, ids) => {
+                    referenceIds.push(...ids.split(",").map(id => id.trim()));
+                    return "";
+                }).replace(/[ \t]+([。！？!?])/g, "$1").trim();
+            if (Array.isArray(idea.sourceNewsIds)) referenceIds.push(...idea.sourceNewsIds);
+            const seen = new Set();
+            const returnTarget = /^[A-Za-z0-9_-]+$/.test(String(idea.id)) ? `idea-card-${idea.id}` : "ideasSection";
+            const cards = referenceIds.flatMap(id => {
+                if (typeof id !== "string" || !/^[a-z]{2,}\d+$/i.test(id)) return [];
+                const news = resolveNewsItem(id, newsById);
+                if (!news || seen.has(news.id)) return [];
+                seen.add(news.id);
+                const title = escapeHtml(news.title || "参考ニュース");
+                const image = getDisplayImageUrl(getNewsImageUrl(news));
+                return [`<button type="button" class="analysis-float-source idea-source-card${image ? "" : " idea-source-noimage"}" onclick="showNewsItemFromRef('${id}', '${returnTarget}')" title="${title}" aria-label="参考ニュース：${title}">
+                    ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('idea-source-noimage')">` : ""}
+                    <span class="analysis-float-title">${title}</span>
+                </button>`];
+            });
+            return `<p class="idea-desc">${formatRichText(description)}</p>${cards.length ? `<div class="idea-sources"><span class="idea-sources-label">参考ニュース</span><div class="idea-source-cards">${cards.join("")}</div></div>` : ""}`;
         }
 
         function formatAnalysisTextWithRefs(value, newsById) {
@@ -2944,11 +2970,11 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             }
         }
 
-        /* 考察の参照サムネイル用: 戻り先を analysisSection に指定 */
-        function showNewsItemFromRef(itemId) {
+        /* 考察・企画の参照サムネイル: 元の考察または企画カードへ戻す */
+        function showNewsItemFromRef(itemId, returnTarget = "analysisSection") {
             showNewsItem(itemId, true);
             if (rankingBackState) {
-                rankingBackState.scrollTarget = "analysisSection";
+                rankingBackState.scrollTarget = returnTarget;
             }
         }
 
@@ -3821,7 +3847,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                                     <div class="idea-body">
                                         ${renderIdeaImage(idea)}
                                         <div class="idea-content">
-                                            <p class="idea-desc">${formatInlineTextWithRefs(idea.desc, newsById)}</p>
+                                            ${renderIdeaDescription(idea, newsById)}
                                             <div class="actions">
                                                 ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${ideaKey}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
                                                 <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${ideaKey}', this)">
