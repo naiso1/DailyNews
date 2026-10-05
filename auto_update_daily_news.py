@@ -1480,7 +1480,7 @@ def prepare_exterior_idea_sources(ideas: list, source_items: list) -> list:
     return prepared
 
 
-def validated_exterior_ideas(raw_ideas, source_items, history_ideas=(), retained=()):
+def validated_exterior_ideas(raw_ideas, source_items, history_ideas=(), retained=(), rejections=None):
     """Keep independent valid ideas when another generated idea is unusable."""
     kept = list(retained)
     for candidate in raw_ideas if isinstance(raw_ideas, list) else []:
@@ -1489,16 +1489,51 @@ def validated_exterior_ideas(raw_ideas, source_items, history_ideas=(), retained
         if not isinstance(candidate, dict):
             continue
         picked = dedupe_ideas([candidate], list(history_ideas), limit=1)
-        if not picked or not all(has_japanese_text(picked[0].get(field, "")) for field in ("title", "desc")):
+        if not picked:
+            text = f"{candidate.get('title', '')} {candidate.get('desc', '')}"
+            closest = max(history_ideas, key=lambda idea: _similarity(text, f"{idea.get('title', '')} {idea.get('desc', '')}"), default={})
+            similarity = _similarity(text, f"{closest.get('title', '')} {closest.get('desc', '')}") if closest else 0
+            reason = (f"過去案「{closest.get('title', '')}」と類似（{similarity:.3f}）"
+                      if similarity >= 0.58 else "外装の対象外、またはタイトル・説明が空")
+            print(f"[IDEAS] rejected {candidate.get('title', '')}: {reason}")
+            if rejections is not None:
+                rejections.append({"title": candidate.get("title", ""), "reason": reason, "similarIdea": closest})
+            continue
+        if not all(has_japanese_text(picked[0].get(field, "")) for field in ("title", "desc")):
+            print(f"[IDEAS] rejected {picked[0]['title']}: Japanese title/description required")
             continue
         text = f"{picked[0]['title']} {picked[0]['desc']}"
         if any(_similarity(text, f"{idea.get('title', '')} {idea.get('desc', '')}") >= 0.78 for idea in kept):
+            print(f"[IDEAS] rejected {picked[0]['title']}: duplicate of retained idea")
             continue
         try:
             kept.extend(prepare_exterior_idea_sources(picked, source_items))
         except RuntimeError as error:
             print(f"[IDEAS] rejected invalid source references: {error}")
     return kept
+
+
+def make_exterior_idea_recovery_prompt(date_key, country, anchors, history=(), retained=(), rejections=()):
+    """Regenerate only missing ideas, with the actual rejection as feedback."""
+    need = max(0, 2 - len(retained))
+    sources = list({item['newsId']: item for group in anchors for item in group}.values())
+    avoid = list(retained) + [entry['similarIdea'] for entry in rejections if entry.get('similarIdea')] + list(history[:12])
+    unique = {f"{idea.get('title', '')} {idea.get('desc', '')}": idea for idea in avoid}
+    feedback = '\n'.join(f"- {entry['title']}: {entry['reason']}" for entry in rejections[-4:])
+    return (
+        f"対象日: {date_key} / 地域: {country}。不足しているideasだけを生成する。analysisは空文字。\n"
+        f"ideasは最大{need}件。以下の記事の具体的な事実を起点に、外装製品の開発仮説を日本語で作る。\n"
+        "完成済み案・過去案と異なる対象部品、解決課題または評価方法を選ぶ。語尾・車名の交換だけで作り直さない。\n"
+        "過去案の文章をひな型として写さず、定型的な『設計自由度向上の可能性』『品質安定化を目指す仮説』を繰り返さない。\n"
+        "根拠記事:\n" + '\n'.join(_item_for_prompt(item) for item in sources)
+        + '\n重複を避ける完成済み案・過去案:\n' + '\n'.join(unique)
+        + '\n直前の不採用理由:\n' + (feedback or 'なし')
+        + "\ntitleは日本語20文字以内。descは120〜180字程度。第1文で根拠の車名・技術名を明記する。"
+        "記事の事実と提案を分け、具体的な外装部品と試験条件を記す。性能・採用実績を創作しない。"
+        "根拠が不足なら無理に作らない。sourceNewsIdsは根拠記事のIDのみで、desc末尾にも同じIDを[]で付ける。"
+        "内装だけの提案、二輪車の提案は対象外。画像の指示は不要。\n"
+        'JSONのみ: {"analysis":"", "ideas":[{"title":"...", "desc":"...", "sourceNewsIds":["..."]}]}\n'
+    )
 
 
 def checkpoint_exterior_progress(checkpoint, date_key, country, source_items, analysis, ideas, dry_run=False):
@@ -2233,6 +2268,7 @@ def main():
                 attempted_insight_countries += 1
                 retained_analysis = ""
                 retained_ideas = []
+                idea_rejections = []
                 if use_checkpoint:
                     previous = checkpoint["countries"].get(key, {})
                     if (isinstance(previous, dict)
@@ -2263,7 +2299,9 @@ def main():
                     idea_anchor_groups=initial_anchors,
                 )
                 if retained_analysis:
-                    prompt += "\n【最優先】考察は検証済みなのでanalysisは空文字。不足しているideasだけを生成すること。\n"
+                    prompt = make_exterior_idea_recovery_prompt(
+                        insight_date_label, key, initial_anchors, history_ideas, retained_ideas)
+                    prompt += "\n考察は検証済みなので変更しない。\n"
                 elif len(retained_ideas) == 2:
                     prompt = make_exterior_analysis_recovery_prompt(insight_date_label, key, grouped[key])
                 if args.replace_ideas_only:
@@ -2283,7 +2321,7 @@ def main():
                     print(f"LLM error ({key}): {e}")
                 if data and isinstance(data, dict):
                     if use_checkpoint:
-                        deduped = validated_exterior_ideas(data.get("ideas", []), grouped[key], history_ideas, retained_ideas)
+                        deduped = validated_exterior_ideas(data.get("ideas", []), grouped[key], history_ideas, retained_ideas, idea_rejections)
                         initial_analysis = retained_analysis or normalize_analysis_refs_per_sentence(data.get("analysis", ""))
                         checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
                                                      initial_analysis, deduped, args.dry_run)
@@ -2359,6 +2397,11 @@ def main():
                             retry_prompt += (
                                 "\n【最優先】analysisは空文字にし、不足しているideasだけを生成すること。\n"
                             )
+                        if use_checkpoint:
+                            retry_prompt = make_exterior_idea_recovery_prompt(
+                                insight_date_label, key,
+                                select_missing_exterior_idea_anchors(grouped[key], deduped, retry_index + 1),
+                                history_ideas, deduped, idea_rejections)
                         try:
                             retry_text = call_llm(args.llm_endpoint, args.llm_model, retry_prompt)
                             retry_data = extract_json_block(retry_text)
@@ -2369,7 +2412,7 @@ def main():
                             print(f"LLM retry error ({key}): {e}")
                         if retry_data and isinstance(retry_data, dict):
                             if use_checkpoint:
-                                deduped = validated_exterior_ideas(retry_data.get("ideas", []), grouped[key], history_ideas, deduped)
+                                deduped = validated_exterior_ideas(retry_data.get("ideas", []), grouped[key], history_ideas, deduped, idea_rejections)
                                 checkpoint_exterior_progress(checkpoint, insight_date_label, key, grouped[key],
                                                              analysis_out.get(key), deduped, args.dry_run)
                             else:

@@ -116,6 +116,30 @@ class ExteriorPartialResumeTests(unittest.TestCase):
                 [{**self.ideas[0], "sourceNewsIds": ["cn999"]}, self.ideas[1]], self.sources)
         self.assertEqual([x["title"] for x in result], [self.ideas[1]["title"]])
 
+    def test_duplicate_rejection_is_reported_and_given_to_recovery(self):
+        rejected = []
+        with patch.object(updater, "EDITION", self.edition), redirect_stdout(io.StringIO()) as log:
+            result = updater.validated_exterior_ideas(
+                self.ideas[:1], self.sources, self.ideas[:1], rejections=rejected)
+        self.assertEqual(result, [])
+        self.assertIn("類似", log.getvalue())
+        self.assertEqual(rejected[0]["similarIdea"], self.ideas[0])
+        prompt = updater.make_exterior_idea_recovery_prompt(
+            "2026-10-04", "jp", [self.sources[1:]], self.ideas[:1], self.ideas[1:], rejected)
+        self.assertIn(rejected[0]["reason"], prompt)
+        self.assertIn(self.ideas[1]["desc"], prompt)
+        self.assertIn("語尾・車名の交換だけ", prompt)
+        self.assertIn("ideasは最大1件", prompt)
+        self.assertNotIn("analysisは300", prompt)
+
+    def test_recovery_includes_retained_idea_even_with_long_history(self):
+        history = [{"title": f"過去案{i}", "desc": "古い検討内容"} for i in range(60)]
+        prompt = updater.make_exterior_idea_recovery_prompt(
+            "2026-10-04", "jp", [self.sources[1:]], history, self.ideas[:1])
+        self.assertIn(self.ideas[0]["desc"], prompt)
+        self.assertIn("jp2", prompt)
+        self.assertNotIn("過去案59", prompt)
+
     def test_missing_anchor_uses_ids_even_when_second_idea_survived(self):
         groups = [[source] for source in self.sources]
         with patch.object(updater, "select_idea_anchor_groups", return_value=groups):
