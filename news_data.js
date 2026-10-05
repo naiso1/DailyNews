@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-10-05 01:34";
+window.NEWS_UPDATED_AT = "2026-10-06 01:26";
 
 window.LOADED_NEWS_DATA = [
 
@@ -235245,6 +235245,655 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "in",
         img: "https://motoroctane.com/wp-content/uploads/2026/10/Hyundai-Staria-Front.png",
+        note: ""
+    },
+    // 2026-10-05 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1959",
+        title: "カーメイト、ハイエース等のドアアームレストと積載300kgの荷室ラックを発売",
+        desc: "カーメイトはトヨタ『ハイエース』や日産『キャラバン』など4車種専用の「ドアアームレスト」を販売開始した。低反発ウレタンクッションと本革調素材を採用し、粘着テープで工具不要に装着できる設計だ。またINNOブランドのハイエース用「荷室収納ラック」は最大積載量300kgで、穴あけ不要かつ原状回復可能な点が特長である。",
+        url: "https://news.yahoo.co.jp/articles/30c869dca140decf055e41d4f7387a11cf01a818",
+        source: "レスポンス",
+        date: "2026-10-05",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "また、同社のルーフキャリアブランド「INNO（イノー）」からは、ハイエース用荷室収納ラック［BU100］が発売されている。",
+        interiorScore: 92,
+        interiorReason: "Highly relevant interior accessory launch with specific material details (low-re",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-00000024-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1960",
+        title: "ケンウッド、トヨタ車専用DSP「KXC-AH100T」で純正音響を最適化",
+        desc: "ケンウッドは、トヨタ車のディスプレイオーディオ裏にカプラーオンで接続できるDSP「KXC-AH100T」を発表した。実勢価格は6万円前後（税込）で、アルファードやハリアーなどに対応する。車種別のプリセットをリモコンで選択し、純正スピーカーの音場を整える設計が特徴だ。",
+        url: "https://news.yahoo.co.jp/articles/009d5ec8311b773f1714ea900a67a8312baeabe2",
+        source: "MotorFan",
+        date: "2026-10-05",
+        tags: ["ディスプレイ", "音響"],
+    
+        sourceExcerpt: "近年のトヨタ車では、ディスプレイオーディオが標準化されることで本体交換が難しくなり、さらにサイドエアバッグなどによるドア内部の構造上、スピーカー交換も簡単ではない車種が増えている。",
+        interiorScore: 90,
+        interiorReason: "The article details a specific aftermarket DSP (KXC-AH100T) designed to integrat",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-01599824-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1961",
+        title: "ブガッティ・トゥールビヨン、650点超の部品で構成する機械式メーター採用",
+        desc: "ブガッティ・トゥールビヨンは、スイスの時計メーカーConcepto社と共同開発したアナログメーターを搭載している。このメーターは650点以上の部品からなり、アルミ削り出しハウジングにサファイアガラスを備えたスケルトン構造を採用し、内部の歯車駆動が視認できる設計となっている。",
+        url: "https://news.yahoo.co.jp/articles/9966f7a8ade7bfde7aa88c68e774ae9e2a6140c4",
+        source: "WEB CARTOP",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "そこでブガッティがパートナーに選んだのは、自動車の部品メーカーではなく、スイスの「Concepto（コンセプトレ）社」でした。",
+        interiorScore: 92,
+        interiorReason: "Detailed breakdown of a high-end analog instrument cluster (HMI) including speci",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-00010007-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1962",
+        title: "アルパイン、キャラバン後席用エアコンコントローラー発売",
+        desc: "日産キャラバンの車中泊向けに、後部座席から空調操作が可能なアルパイン製コントローラー「KTX-RAC-CV-26」が登場した。ルーフとサイドパネルの温度センサーで環境変化に応じた自動制御を行い、寝転んだまま使える専用リモコンが付属する。",
+        url: "https://news.yahoo.co.jp/articles/68616573e5fb4eb3043b03cbe235a3b67878bfe8",
+        source: "Auto Messe Web",
+        date: "2026-10-05",
+        tags: ["センシング", "シート"],
+    
+        sourceExcerpt: "【画像】日産キャラバンの車内泊を快適にする後部座席用コントロール機器が登場 を見る（全7枚）",
+        interiorScore: 90,
+        interiorReason: "Specific aftermarket HMI and climate control accessory for the rear cabin. The a",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-00010005-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1963",
+        title: "新型エルグランドの大画面、壁紙5種とメーター表示の使い分け",
+        desc: "新型エルグランドは14.3インチの2枚を横一列に配置した大画面統合型ディスプレイを採用し、ShadeやLiveなど5種類の壁紙から選べる。筆者は時間経過で背景が変化するLiveを気に入っており、停車中にセンターディスプレイで設定するとメーター側の背景も連動して切り替わる仕様を確認した。",
+        url: "https://news.yahoo.co.jp/articles/776f5ccba673293ec434aadac5b18778bd121b9c",
+        source: "ベストカーWeb",
+        date: "2026-10-05",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "メーターとセンターディスプレイをシームレスにつないだ「大画面統合型ディスプレイ」が目を引く、新型エルグランドのコックピット。",
+        interiorScore: 96,
+        interiorReason: "Detailed analysis of the Nissan Elgrand's integrated cockpit display system, inc",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-00000016-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1964",
+        title: "スズキ エブリイワゴン、デジタルメーター採用で快適装備を強化",
+        desc: "2026年型エブリイワゴンは、アナログ速度計に代わり横長パネルのデジタルスピードメーターを採用した。右側には縦型のタコメーターや燃料計を集約し、黒基調の内装と相性の良いデザインとなっている。",
+        url: "https://news.yahoo.co.jp/articles/188d8f6efafcaaeb9afcadfcf2e17160c12a2b23",
+        source: "ベストカーWeb",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "長年親しまれたアナログ速度計に代わり、車速を数字で示すデジタルスピードメーターを採用した。",
+        interiorScore: 69,
+        interiorReason: "Detailed analysis of the new digital instrument cluster (HMI), including layout,",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-00000011-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1965",
+        title: "レクサスLX新グレードFスポーツ追加で内外装スポーティ化",
+        desc: "トヨタはレクサス「LX」を一部改良し、新グレード「Fスポーツ」を追加した。専用チューニングのパフォーマンスダンパーやトルセンLSDを標準装備して操舵安定性を高め、液晶メーターには専用デザインの表示レイアウトを設定している。価格は1560万円（消費税込み）から。",
+        url: "https://news.yahoo.co.jp/articles/805d215d9a6c18188afd906a17f93fe64a314472",
+        source: "日刊自動車新聞",
+        date: "2026-10-05",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "専用チューニングした前後パフォーマンスダンパーをはじめトルセンLSD、リアスタビライザーを標準装備し操舵安定性を高めた。",
+        interiorScore: 43,
+        interiorReason: "Mentions sporty interior design and a dedicated digital meter layout for the F-S",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-00700376-netdenjd-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1966",
+        title: "VW IDティグアン、物理スイッチ復活と後席空間拡大で進化",
+        desc: "フォルクスワーゲンIDティグアンは、フェイスリフトに伴い人間工学に基づいたデザインを維持しつつ、エアコンに物理スイッチが復活する。また全長44mmの延長により後席や荷室の空間が広がり、タッチモニターも高速化される見込みである。",
+        url: "https://news.yahoo.co.jp/articles/3d5b8aaf4f21a441f12f8485070f891213196298",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-05",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "ステアリングホイール上だけでなく、エアコンにも物理スイッチが復活する。",
+        interiorScore: 63,
+        interiorReason: "The article details specific interior improvements for the VW ID Tiguan (facelif",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-01281684-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp1967",
+        title: "トヨタ『ランドクルーザーFJ』は直感的な物理スイッチで機能美を追求",
+        desc: "トヨタの新型オフローダー『ランドクルーザーFJ』では、インテリア担当デザイナーが直感的に操作できる物理スイッチの最適化を図り、ランドクルーザーらしい機能美を実現している。",
+        url: "https://news.yahoo.co.jp/articles/3d7cc4e158c190c5220354eaf240d6144296cba1",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "インテリア担当デザイナーは、直感的に操作ができる物理スイッチの最適化を図ったと説明する。",
+        interiorScore: 57,
+        interiorReason: "The article highlights the interior design philosophy of the Land Cruiser FJ, sp",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261005-01282419-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1777",
+        title: "Angelelli Automobili、Tipo 829の3バリエーション計画を公開",
+        desc: "Angelelli Automobiliが7年かけて開発したTipo 829を発表し、Terra・Strada・Pistaの3バージョンを展開する。",
+        url: "https://www.motor1.com/news/810741/angelelli-tipo-829-italian-v6/",
+        source: "Motor1",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "Angelelli Automobili presents it as one chapter in the Tipo 829 story,",
+        sourceExcerptEnd: "performance rather than a single track or grand touring version.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/E6Xp9R/s3/angelelli-automobili-tipo-829-strada.jpg",
+        note: ""
+    },
+    {
+        id: "us1778",
+        title: "CarPoint、Porsche 944 S2をシューティングブレーク化",
+        desc: "CarPointはPorsche 944 S2をベースに、屋根ラインを延長したシューティングブレーク「GT-K44」を10台限定で提供する。内装はPaschaパターンを採用し、2+2シートのレイアウトを維持する。改造費は税別10万ユーロからだが、ドナー車やホイール・サスペンション等の個別仕様は顧客が指定する形式となる。",
+        url: "https://www.motor1.com/news/810721/porsche-944-gt-k44-shooting/",
+        source: "Motor1",
+        date: "2026-10-05",
+        tags: ["AR", "シート"],
+    
+        sourceExcerpt: "That car wears Oak Green paint and a Pascha-pattern interior, following Söhngen's original sketch for the shape.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/pb8311/s3/carpoint-gt-k44-porsche-944-shooting-brake.jpg",
+        note: ""
+    },
+    {
+        id: "us1779",
+        title: "報告書が示す、インフレの2倍に達した車両修理費の上昇",
+        desc: "報告書が示す車両修理コストのインフレ率2倍超え\\n新しい報告書によると、新車の修理に必要な技術により、修理費用は2019年比で60%上昇している。\\nSam D. Smith 著 | 2時間前\\nデータによれば、2026年の自動車修理コストは2019年比で60%上昇した。",
+        url: "https://www.carscoops.com/2026/10/vehicle-repair-costs-have-risen-twice-as-much-as-inflation/",
+        source: "CarScoops",
+        date: "2026-10-05",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2025/07/Stellantis-Dealership-Repair-QOTD-707-1-1024x682.jpg",
+        note: ""
+    },
+    {
+        id: "us1780",
+        title: "ステランティス、50の品質ワー룸設置し2028年上位進出目標",
+        desc: "Stellantisは約50の品質改善チームを立ち上げ、2,000人以上のエンジニアを投入して品質向上に注力している。",
+        url: "https://www.carscoops.com/2026/10/stellantis-addressing-quality-woes-heard-that-before/",
+        source: "CarScoops",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "A recent JD Power quality study shows Stellantis brands are lagging behind rivals.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/10/Stellantis-quality-improvements-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1781",
+        title: "ランザンテ95-59、HDKでカーボン製大型エアロを装着",
+        desc: "ランザンテは95-59のオプション「High Downforce Kit」を発表した。フロントスポイラーやリアウイングなどカーボンファイバー製の空力パーツが追加され、外観がよりレーシングカー寄りに変化する。動力系の変更はなく、4.0LツインターボV8による850馬力超の性能を維持する。",
+        url: "https://www.carscoops.com/2026/10/lanzante-95-59-high-downforce-kit/",
+        source: "CarScoops",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "The High Downforce Kit will be available for all Lanzante 95-59 models.",
+        country: "us",
+        img: "https://www.carscoops.com/wp-content/uploads/2026/09/Lanzante-95-59-HDK-1-1-1024x576.jpg",
+        note: ""
+    },
+    {
+        id: "us1782",
+        title: "今もなお夢にまで出てくる、あの運転の失敗",
+        desc: "QOTD：夢まで追いかけ続ける運転ミス\\nRyan Erik King 2026年10月5日 EST午前10:25\\n写真：Spirit/Shutterstock\\nJalopnikをGoogleの優先情報源に追加：Google Discover\\n自動運転車がそう思わせるかもしれないが、車を運転す。",
+        url: "https://www.jalopnik.com/2276495/these-driving-blunders-still-haunt-your-dreams-reader-answers/",
+        source: "Jalopnik",
+        date: "2026-10-05",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/these-driving-blunders-still-haunt-your-dreams/l-intro-1790999347.jpg",
+        note: ""
+    },
+    {
+        id: "us1783",
+        title: "1986年型ダッジ・オミニーGLH-T、9500ドルで評価",
+        desc: "1986年型ダッジ・オミニー・シェルビーGLH-Tが9500ドルで出品されている。2.2リッター4気筒ターボは146馬力を発生し、5速マニュアルトランスアクスルを備える。",
+        url: "https://www.jalopnik.com/2275715/1986-dodge-omni-shelby-glh-t-9500-dollars-nice-price/",
+        source: "Jalopnik",
+        date: "2026-10-05",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/at-9500-would-you-go-like-hell-to-buy-this-1986-dodge-omni-shelby-glh-t/l-intro-1790952724.jpg",
+        note: ""
+    },
+    {
+        id: "us1784",
+        title: "ポニーカーは米国発に限定されずHolden MonaroやSoarerも該当",
+        desc: "Ford Mustangが1964年に開拓したポニーカー市場に対し、筆者は米国の独占を否定する。長ボンネット・ショートデッキのスタイルとV8エンジンを備えるこのカテゴリーには、オーストラリアのHolden Monaroや日本のToyota Soarerなど、各国で独自に進化したモデルが存在する。",
+        url: "https://www.jalopnik.com/2273302/pony-cars-arent-always-american-made/",
+        source: "Jalopnik",
+        date: "2026-10-05",
+        tags: ["AR"],
+    
+        sourceExcerpt: "Like the Monaro, you probably know the Toyota Soarer by another name.",
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/pony-cars-dont-always-have-to-be-american-made/l-intro-1790781455.jpg",
+        note: ""
+    },
+    {
+        id: "us1785",
+        title: "2027年型コルベット グランドスポーツXの内装写真公開",
+        desc: "Car and Driverが公開した2027年型コルベット グランドスポーツXの内装は、他のバリアントと大きく変わらないものの、この個体ではブルーの加飾が施されている。ミッドシップスポーツカーらしいシートはトランクをしっかりとホールドし、メーター左にはタッチスクリーンが配置される。",
+        url: "https://www.caranddriver.com/photos/a73980245/2027-chevrolet-corvette-grand-sport-x-test-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-10-05",
+        tags: ["AR", "ディスプレイ", "シート"],
+    
+        sourceExcerpt: "The Grand Sport X’s cabin isn’t much different from what’s in other Corvette variants, although this particular example really piles on the blue.",
+        interiorScore: 86,
+        interiorReason: "Detailed interior photo gallery showing specific HMI layout (touchscreen left of",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/f7658c59-cae7-4590-a68f-0d31f55d89fd.jpg",
+        note: ""
+    },
+    {
+        id: "us1786",
+        title: "Audi Q7、BMW X7 xDrive40iの価格差を覆す新世代モデル",
+        desc: "2027年型Audi Q7は、429馬力を発生するツインターボV6を搭載し、技術面のギャップを解消した新設計のコックピットを採用している。価格はBMW X7 xDrive40iの8万6,700ドルに対し約1万6,000ドル安く設定され、3列シートのラグジュアリーSUV市場で競争力を高めている。",
+        url: "https://www.topspeed.com/audi-q7-steals-attention-from-x7-xdrive40i/",
+        source: "Top Speed",
+        date: "2026-10-05",
+        tags: ["シート", "コックピット"],
+    
+        sourceExcerpt: "If the third row is reserved for occasional carpool duty rather than",
+        sourceExcerptEnd: "the price and power advantage now working in its favor.",
+        interiorScore: 68,
+        interiorReason: "The article highlights a 'reworked cabin' and closing the tech gap in a flagship",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/06/today2027-audi-sq7-wheel-and-front-fender.jpg",
+        note: ""
+    },
+    {
+        id: "eu1740",
+        title: "BMW M3 EV、Neue Klasse意匠継承で来年初頭投入へ",
+        desc: "BMWは電動M3のプロトタイプ画像を公開し、レ・マン風ライトや分割バンパーを採用しつつフロントスプリッターは控えめな設計とした。ファンミール氏は四輪駆動を備えるが高出力より路面伝達性を重視し、ガソリン車M3との競争でダイナミクス向上を図ると述べた。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/bmw-m3-ev-all-revealed-natural-enemy-ice-super-saloon",
+        source: "AUTOCAR UK",
+        date: "2026-10-05",
+        tags: ["EV"],
+    
+        sourceExcerpt: "BMW has all but revealed the electric M3, which bears a strong",
+        sourceExcerptEnd: "M Concept Neue Klasse that was unveiled earlier this year.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/p90658849_highres_one-million-times-th.jpg?itok=eHvviC_9",
+        note: ""
+    },
+    {
+        id: "eu1741",
+        title: "Hyundai Ioniq 3、英国で1万8495ポンドから販売開始",
+        desc: "Ioniq 3は英国で1万8495ポンドから販売開始され、Renault 5 Urban Rangeより3000ポンド安価に設定されている。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/hyundai-ioniq-3-undercuts-key-rivals-%C2%A318k-starting-price",
+        source: "AUTOCAR UK",
+        date: "2026-10-05",
+        tags: ["AI"],
+    
+        sourceExcerpt: "The entry-level Ioniq 3 undercuts the rival Renault 5 Urban Range by",
+        sourceExcerptEnd: "the range stakes, being capable of 213 miles between charges.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/hyundai-ioniq-3-0.jpg?itok=N4oCIdlw",
+        note: ""
+    },
+    {
+        id: "eu1742",
+        title: "英国、EU圧力受け中国車関税導入検討",
+        desc: "英国政府はEUの「Made in Europe」制度への参加交渉中、国家補助金を受けた中国製車両に対する新たな関税導入を検討している。EU側は同制度への英国参入条件として対中関税を求め、SMMTは制度外なら800億ユーロ規模の貿易関係や雇用が脅かされると警告した。",
+        url: "https://www.autoexpress.co.uk/news/370584/uk-tariffs-chinese-cars-under-consideration-amid-pressure-eu",
+        source: "Auto Express",
+        date: "2026-10-05",
+        tags: [],
+    
+        sourceExcerpt: "According to The Times, Business secretary Jonathan Reynolds is in the process",
+        sourceExcerptEnd: "over its controversial, and potentially damaging, ‘Made in Europe’ laws.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--vD5nqrbE--/t_rss_image_w_845/v1738667979/autoexpress/2025/02/Jaecoo%207%202025%20UK-24.jpg",
+        note: ""
+    },
+    {
+        id: "eu1743",
+        title: "KGM Torres EVX、英国補助金適用で35,495ポンドへ値下げ",
+        desc: "KGM Torres EVXが英国の電気自動車補助金Band 2の対象となり、開始価格は35,495ポンドに引き下げられた。BYD製73.4kWhバッテリーを搭載し航続距離は最大287マイルで、同補助金適用後のSkoda Enyaq（38,470ポンド）より低価格を実現している。",
+        url: "https://www.autoexpress.co.uk/kgm/torres/370583/kgm-torres-evx-just-got-tasty-ev-grant-price-cut",
+        source: "Auto Express",
+        date: "2026-10-05",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "As for the Torres EVX, it’s powered by a 73.4kWh battery pack made by BYD, giving a range of up to 287 miles.",
+        country: "eu",
+        img: "https://media.autoexpress.co.uk/image/private/s--LT8XgGx6--/t_rss_image_w_845/v1791194631/autoexpress/2026/10/KGM%20Torres%20EVX%20and%20Musson%20grants_epmkxs.jpg",
+        note: ""
+    },
+    {
+        id: "cn1754",
+        title: "長安汽車のDeepal S07 PHEVがギリシャで欧州初公開",
+        desc: "ChanganのDeepal S07 Ultra PHEVがAuto Athina 2026で欧州デビューを果たした。1.5Lエンジンと18.4kWhバッテリーを備え、最大出力は254hp、航続距離は約1,000kmに達する。価格は36,000ユーロ（40,280米ドル）から設定されている。",
+        url: "https://carnewschina.com/2026/10/05/changan-deepal-s07-phev-makes-european-debut-at-40280-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-10-05",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The S07 Ultra PHEV can run up to 100 km on a single battery charge.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/changan_s07_ultra_phev-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1755",
+        title: "Chery iCaur V27が欧州市場で5万4,900ユーロから販売開始",
+        desc: "CheryのEREVオフローダーiCaur V27がAuto Athina 2026で欧州デビューし、ギリシャ市場に投入された。価格は54,900ユーロ（61,540米ドル）からで、34.3kWhバッテリーによるWLTP航続距離は145km、総走行距離は最大900kmを確保する。内装には15.6インチのセンターディスプレイと小型LCDメーターパネルが採用されている。",
+        url: "https://carnewschina.com/2026/10/05/chery-icaur-v27-erev-off-roader-launches-in-eu-at-61540-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-10-05",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "Its cabin adopts a 15.6-inch center screen and a small LCD instrument panel.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/icaur_v27_greece-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1756",
+        title: "BYDメガワット充電器のケーブルが遊具化し、安全性への懸念が指摘される",
+        desc: "広西チワン族自治区で、BYDの1000V・1MW対応充電ステーションの液冷式ケーブルを子供がブランコ代わりに使用した映像が拡散しました。同社は、設計負荷を超える動的な振動によるリトラクターやコネクタの構造疲労リスクを指摘し、監視体制の強化と現地点検を実施すると表明しています。",
+        url: "https://carnewschina.com/2026/10/05/byd-megawatt-flash-charger-used-as-playground-swing-sparks-infrastructure-safety-concerns/",
+        source: "CarNewsChina - All",
+        date: "2026-10-05",
+        tags: ["EV", "バッテリー", "安全"],
+    
+        sourceExcerpt: "Video footage of two young children using the suspended liquid-cooled cables of",
+        sourceExcerptEnd: "raising concerns about public infrastructure safety and high-power charging ergonomics.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/untitled-1-1500x849.jpg",
+        note: ""
+    },
+    {
+        id: "in1817",
+        title: "マヒンドラVision Tプロトタイプ初公開、デジタルメーター採用",
+        desc: "マヒンドラのVision Tプロトタイプがテスト走行中に撮影された。内装ではAピラーに設置されたグリップハンドルとデジタルドライバーディスプレイが確認されている。量産版にはワイヤレス充電や自動エアコンなどが搭載される可能性がある。",
+        url: "https://www.autocarindia.com/car-news/mahindra-vision-t-prototype-spied-testing-for-the-first-time-440916",
+        source: "Autocar India - All",
+        date: "2026-10-05",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "While the other cabin details are largely hidden, the production-spec SUV could",
+        sourceExcerptEnd: "Android Auto and Apple CarPlay, automatic climate control and more.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261005_082826_1af9afed.png",
+        note: ""
+    },
+    {
+        id: "in1818",
+        title: "バーレーンGP、セパンで開幕混乱もフェルスタッペンがポールから勝利",
+        desc: "9年ぶりのマレーシア・セパン開催となったF1バーレーンGPは、スタート1時間前の降雨とソフトウェア起因の車両停止により中断する波乱の幕開けとなった。そんな中、マックス・フェルスタッペンはポールポジションを獲得し、混乱を切り抜けて勝利を収めた。",
+        url: "https://www.autocarindia.com/motor-sports-news/2026-f1-verstappen-wins-chaotic-bahrain-gp-in-malaysia-440917",
+        source: "Autocar India - All",
+        date: "2026-10-05",
+        tags: [],
+    
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261005_080502_ead03b5e.jpg",
+        note: ""
+    },
+    {
+        id: "in1819",
+        title: "日産テクトン7シーター、パノラミックサンルーフと10.25インチTFTクラスターを継続",
+        desc: "日産はインド市場向けに7人乗りSUV「テクトン7S」の開発を進めており、スパイショットで確認された内装では、パノラミックサンルーフやGoogle組み込みインフォテインメント、10.25インチTFTクラスター、フロントベンチレーションシートなどの快適装備が継続採用される見通しである。",
+        url: "https://www.rushlane.com/nissan-tekton-7-seater-spied-with-radar-based-adas-r18-225-60-tyre-12557545.html",
+        source: "RushLane",
+        date: "2026-10-05",
+        tags: ["コネクテッド", "シート"],
+    
+        sourceExcerpt: "Attributes like panoramic sunroof, Google built-in infotainment screen",
+        sourceExcerptEnd: "r AC vents, front ventilated seats and others will continue.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/10/upcoming-nissan-tekton-7s-spied-larger-tyres-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1820",
+        title: "現代トゥソンPHEV、6速ATと17.1kWhバッテリーで81kmのEV走行を確保",
+        desc: "2027年型トゥソンPHEVは6速ATと17.1kWhバッテリーを搭載し、81kmのEV走行を実現する。システム出力292PSで4WD対応の加速性能も備え、北米市場向けに投入される。",
+        url: "https://www.rushlane.com/2027-hyundai-tucson-phev-details-out-6-at-292-ps-17-1-kwh-81-km-ev-range-12557408.html",
+        source: "RushLane",
+        date: "2026-10-05",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Tucson PHEV uses a 17.1 kWh battery pack, offering a pure electric range of 81 km.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/new-hyundai-tucson-details-xrt-4.jpg",
+        note: ""
+    },
+    {
+        id: "in1821",
+        title: "Honda Elevateフェイスリフト、アンバーイルミネーションとベンチレーションシートを備える",
+        desc: "2026年10月6日にインドで発表されるHonda Elevateのフェイスリフトは、アンバーカラーのアンビエントライティングを備えた新デザインダッシュボードやベンチレーション付きフロントシートなどを採用する。現行モデル（118.1万ルピー〜）から価格がわずかに上昇すると見込まれている。",
+        url: "https://www.indiacarnews.com/news/rs-2-24-lakh-discount-on-this-rs-11-81-lakh-honda-suv-69114/",
+        source: "IndiaCarNews",
+        date: "2026-10-05",
+        tags: ["シート", "コックピット", "イルミ", "EV"],
+    
+        sourceExcerpt: "Inside the cabin, the 2026 Honda Elevate facelift will get a redesigned dashboard with amber ambient lighting strips.",
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2023/07/Honda-Elevate-mileage.jpg",
+        note: ""
+    },
+    {
+        id: "in1822",
+        title: "Renault Triber Turbo、Nissan Graviteなど5車種の7人乗りMPV比較",
+        desc: "Renault Triber Turboは100 PS・180 Nmのターボエンジンとマニュアルトランスミッションを備え、公称燃費は21 km/lです。価格は7,84,900ルピーからで、Nissan GraviteやMaruti Suzuki Ertigaなど他車種と比較されています。",
+        url: "https://www.autopunditz.com/post/triber-turbo-vs-gravite-ertiga-rumion-carens",
+        source: "Auto Punditz",
+        date: "2026-10-05",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The Nissan Gravite offers a lower entry price, while the Maruti Suzuki",
+        sourceExcerptEnd: "Kia Carens models give buyers larger alternatives at higher budgets.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_1945e0bf5ab24ed29d29059d2fb762f0~mv2.png/v1/fit/w_941,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1823",
+        title: "Mercedes-Benz India、Q3販売5422台で過去最高",
+        desc: "Mercedes-Benz Indiaは2026年7〜9月期に5,422台を届け四半期実績として過去最高を更新した。1〜9月の累計は前年同期比7.5%増の15,190台で、上位クラスやAMG、電動車が成長を支えた。",
+        url: "https://www.autopunditz.com/post/mercedes-benz-india-q3-2026-sales-record",
+        source: "Auto Punditz",
+        date: "2026-10-05",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Mercedes-Benz India registered its highest-ever quarterly retail sales in July–September 2026, delivering 5,422 vehicles.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_7d0911e7e61e42c3b936a12fd0468e94~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1824",
+        title: "現代Tucson 5代目、エンジン停止時も空調継続するHEV Stay Mode採用",
+        desc: "現代自動車は5代目Tucsonの技術仕様を公開し、1.6リッターターボとハイブリッドシステムで245PS・380Nmを発揮する。内装面ではエンジン停止時に空調や充電機能を維持するHEV Stay ModeによりEV的な快適性を確保しつつ、次世代コネクテッド技術による先進的なカビンを備えている。",
+        url: "https://www.autopunditz.com/post/5th-gen-hyundai-tucson-hybrid-details-245-ps-17-4-kmpl",
+        source: "Auto Punditz",
+        date: "2026-10-05",
+        tags: ["コネクテッド", "EV"],
+    
+        sourceExcerpt: "Hyundai Motor has released detailed technical specifications for the fifth-generation Tucson, revealing",
+        sourceExcerptEnd: "dimensions and a technology-heavy cabin for its global best-selling SUV.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_86c8f1a72b6d41298612e2c0786308aa~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1825",
+        title: "ホンダElevateに23.5万ルピー優遇、CityやAmazeも対象",
+        desc: "Honda Cars Indiaは2026年10月、Elevateで最大23.5万ルピーの現金割引や交換ボーナスを提供する。ElevateではAVNや360度カメラなどが対象となり、City ZXはダッシュカム付きで最大17.1万ルピー、Amazeは最大66,800ルピーとなる。",
+        url: "https://www.autopunditz.com/post/honda-car-offers-october-2026-amaze-city-elevate",
+        source: "Auto Punditz",
+        date: "2026-10-05",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "The Honda Elevate carries the highest potential benefit of up to ₹2.3",
+        sourceExcerptEnd: "Honda City variants get benefits of up to ₹1.7 lakh.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_38988c32fff44fc983085f6706d12e4d~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1744",
+        title: "トヨタ、ミシガン州に北米向けバッテリー開発センターを開設",
+        desc: "トヨタはミシガン州サリーンに約2800平方メートルのバッテリー開発センターを開設した。同施設では、ハイブリッドや水素燃料電池車を含む多様な電動車両向けのバッテリー評価・開発を行い、北米市場での技術対応力を強化する方針である。",
+        url: "https://www.electrive.com/2026/10/05/toyota-battery-center-in-north-america-opens-in-michigan/",
+        source: "Electrive",
+        date: "2026-10-05",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "Toyota USA has opened a battery development centre in the US state of Michigan.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/toyota-batterie-entwicklungszentrum-usa-michigan-saline-rd-center-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1745",
+        title: "英国、EU基準適合を条件に中国製EVへの追加関税を検討",
+        desc: "英国政府は中国製EVへの追加関税策定を検討中と報じられ、EUの「Made in Europe」基準への対応を狙う。EUでは7.8〜35.3%の補助金対策関税が適用されており、英国も準拠することで市場アクセス維持を図る。ただし現時点で新たな関税は課されておらず、政府は業界との協議を継続している。",
+        url: "https://www.electrive.com/2026/10/05/uk-apparently-considering-special-tariffs-on-chinese-evs/",
+        source: "Electrive",
+        date: "2026-10-05",
+        tags: ["EV"],
+    
+        sourceExcerpt: "This is presumably the only way the UK can be eligible for the EU's upcoming \"Made in Europe\" initiative.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/import-chery-fahrzeuge-grossbritannien-zoll-400x267.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1746",
+        title: "欧州EV市場、2026年に低価格モデル急増",
+        desc: "T&Eの分析では、EU規制により2026年前半に約40種の安価なEVが投入され、2万5000ユーロ未満のモデルは倍増する見込み。ガソリン車より維持費が安く、消費者の需要に応える形で市場が拡大している。",
+        url: "https://electriccarsreport.com/2026/10/affordable-electric-cars-are-finally-arriving-in-europe-as-ev-sales-surge/",
+        source: "Electric Cars Report",
+        date: "2026-10-05",
+        tags: ["EV"],
+    
+        sourceExcerpt: "T&E estimates that sales of electric cars with a starting price below €25,000 will increase sevenfold in 2026 compared with 2024.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/07/Volkswagen-ID-Polo.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1747",
+        title: "Hyundai IONIQ 3、英国で注文開始。Pleos Connect搭載",
+        desc: "Hyundai IONIQ 3は英国で£18,495から注文可能となった。欧州向け初採用のAndroid Automotive OSベースのPleos Connectインフォテインメントシステムを搭載し、上位グレードでは14.6インチディスプレイやヒートシートを備える。",
+        url: "https://electriccarsreport.com/2026/10/hyundai-ioniq-3-now-available-to-order-in-the-uk-from-18495/",
+        source: "Electric Cars Report",
+        date: "2026-10-05",
+        tags: ["ディスプレイ", "コネクテッド", "AI", "シート"],
+    
+        sourceExcerpt: "It is the first Hyundai model developed for Europe to feature the",
+        sourceExcerptEnd: "Connect infotainment system, which is based on Android Automotive OS.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Hyundai-Ioniq-3.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1748",
+        title: "BMW、ドイツに約10億ユーロ投資した第6世代電池工場を稼働",
+        desc: "BMWはバイエルン州に約10億ユーロ投資の第6世代電池工場を稼働させ、新i3向けにセル・トゥー・パック設計とAI品質監視を採用した。この電池はWLTPモードで最大906kmの航続距離と400kWの充電性能を実現する。",
+        url: "https://electriccarsreport.com/2026/10/bmw-opens-new-e1-billion-battery-plant-in-germany-to-supply-new-bmw-i3/",
+        source: "Electric Cars Report",
+        date: "2026-10-05",
+        tags: ["AI", "EV", "バッテリー"],
+    
+        sourceExcerpt: "The First Edition of the BMW i3 50 xDrive features a 108.7",
+        sourceExcerptEnd: "offers a claimed WLTP range of up to 906 kilometres.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/BMW-i3-battery-pack.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "jp1968",
+        title: "ポルシェ、09-16年型向け新型PCCM Plus発表",
+        desc: "ポルシェは2009〜16年型の911・ボクスター・ケイマン向けに後付けインフォテインメント「新型PCCM Plus」を発表した。ブランド伝統のデザインを踏襲しつつ、Apple CarPlayやAndroid Autoのワイヤレス接続に対応し、メーターパネルへの情報表示も可能だ。",
+        url: "https://levolant.jp/2026/10/05/456963/",
+        source: "ル・ボラン",
+        date: "2026-10-05",
+        tags: ["AR", "コネクテッド"],
+    
+        sourceExcerpt: "ポルシェは2026年9月29日、同社の「911」「ボクスター」「ケイマン」の旧型モデルに向けた最新の後付けインフォテインメントシステム「ポルシェ クラシック コミュニケーション マネジメント プラス（PCCM Plus）」の新世代モデルを発表した。",
+        interiorScore: 35,
+        interiorReason: "seat and display plus cabin image; non-passenger vehicle cap: truck",
+        imageInterior: true,
+        country: "jp",
+        img: "https://levolant.jp/wp-content/uploads/2026/09/260930_Porsche_PCCM_Plus_09.jpg",
+        note: ""
+    },
+    {
+        id: "eu1749",
+        title: "VI-Grade、Audi Sport元責任者をMDに起用",
+        desc: "VI-Gradeは2026年10月よりLeonardo Pascali氏をMDに任命し、Audi RS Q e-tronのダカール総合優勝経験やMcLarenでの開発実績を活かす。",
+        url: "https://www.automotivetestingtechnologyinternational.com/news/appointments-partnerships-investments-acquisitions/former-audi-sport-dakar-technical-director-appointed-vi-grade-managing-director.html",
+        source: "Automotive Testing Technology International",
+        date: "2026-10-05",
+        tags: ["AR"],
+    
+        sourceExcerpt: "VI-Grade has appointed Dr Leonardo Pascali as managing director, effective October 1, 2026.",
+        country: "eu",
+        img: "https://www.automotivetestingtechnologyinternational.com/wp-content/uploads/2026/10/LEONARDO_PASCALI_HYPERDOCK_HEXAREV.jpg-400x224.jpeg",
+        note: ""
+    },
+    {
+        id: "in1826",
+        title: "Creta競合iCAUR V23は15.4インチ画面と通気シート搭載予定",
+        desc: "インド市場でCretaに対抗する新車として、JSW Chery iCAUR V23は15.4インチタッチスクリーンや通気性付きフロントシートを備え、Rs. 15 lakhから26 lakh（ムンバイ・オンロード）での販売が予定されている。",
+        url: "https://motoroctane.com/news/324755-top-5-new-hyundai-creta-rivals-coming-to-india",
+        source: "MotorOctane",
+        date: "2026-10-05",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "It is a tech-loaded SUV with features like Level-2 ADAS, passive entry,",
+        sourceExcerptEnd: "from the 540-degree camera, and a 9-inch digital driver’s display.",
+        country: "in",
+        img: "https://motoroctane.com/wp-content/uploads/2026/10/Upcoming-Hyundai-Creta-Rival-New-Jeep-SUV.png",
         note: ""
     },
 ];
