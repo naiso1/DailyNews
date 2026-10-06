@@ -8,7 +8,7 @@
 - フローID: `21cc618b-ffb2-46d9-830f-9ba0444cfbef`
 - [Power Automateの外装フロー](https://make.powerautomate.com/environments/Default-2113d5b5-fefb-4c1d-bc26-12d7f8c3581d/flows/21cc618b-ffb2-46d9-830f-9ba0444cfbef/details)
 - 実行: 月～金 08:00、Tokyo Standard Time
-- 判定RSS: `https://naiso1.github.io/DailyNews/content/exterior/automation_status.xml`
+- 判定RSS: `https://raw.githubusercontent.com/naiso1/DailyNews/main/content/exterior/automation_status.xml`
 - 成功文字列: `DailyNews exterior success <東京時間の本日 yyyy-MM-dd>`
 - 宛先: OneDrive の `/DailyNewsAutomation/exterior/mailing_list.json` にある `to`
 - 案内先: `http://IEWEB01/exterior/`
@@ -17,6 +17,8 @@
 初期配信先は管理者1名。ほかの利用者は社内ネットワークから外装URLを開くだけで閲覧でき、メール購読は必須ではない。2026-09-16からログインは内装・外装共通とし、登録画面またはマイページのチェック欄で内装だけ・外装だけ・両方・受信なしを選ぶ。外装からの新規登録は両方オフ、既存の購読設定は維持する。配信名簿は引き続き版ごとに分ける。
 
 ## 購読変更の反映
+
+2026-10-06：GitHub PagesのRSSが前日版のままで、朝8時の外装メールが見送られた。外装の判定元をGitHubの元ファイルへ変更し、Pagesの公開遅延を経由しないようにした。本日・外装版・公開成功の条件、購読者名簿、通常の件名と本文は維持する。
 
 Webの版別購読設定を正本とし、処理PCが内装・外装それぞれの有効な購読者を業務用OneDriveへ同期する。各Power Automateフローは朝8時の実行時に対応する宛先JSONを読み込む。
 

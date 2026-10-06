@@ -956,6 +956,9 @@
       "maximum_papers": 5,
       "paper_minimum_score": 60
     },
+    "idea_generation": {
+      "model": "qwen3.8-27b"
+    },
     "image_generation": {
       "enabled": true,
       "provider": "exabase",

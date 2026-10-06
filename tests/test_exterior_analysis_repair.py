@@ -142,11 +142,18 @@ class ExteriorAnalysisRepairTests(unittest.TestCase):
             {"title": "塗装色の試験片", "desc": "外装カラーを比較する加飾試験片を提案する。", "sourceNewsIds": ["eu2"]},
         ]
         argv = ["publisher", "--edition", "exterior", "--sheet", str(sheet), "--skip-html", "--skip-images"]
+        def reviewed(_edition, _date, _country, sources, *args, **kwargs):
+            result = updater.prepare_exterior_idea_sources(ideas, sources)
+            for idea in result:
+                idea.update(qualityVersion=updater.idea_quality.VERSION,
+                            qualityDigest=updater.idea_quality.digest(idea, sources))
+            return result, {"accepted": 2, "withheld": 0, "rejections": []}
         with patch.multiple(updater, NEWS_PATH=news, INSIGHTS_PATH=insights), \
                 patch.object(sys, "argv", argv), patch("ニュース収集.source_highlights.enrich_items"), \
                 patch.object(updater, "rewrite_analysis_with_refs", side_effect=lambda _e, _m, _c, text, _s: text), \
                 patch.object(updater, "ensure_analysis_ref_quality", side_effect=lambda _e, _m, _c, text, _s: text), \
                 patch.object(updater, "shorten_analysis_with_llm", side_effect=lambda _e, _m, text: text), \
+                patch.object(updater.idea_quality, "generate_country", side_effect=reviewed), \
                 patch.object(updater, "call_llm", side_effect=[json.dumps({"analysis": self.incomplete, "ideas": ideas}), self.incomplete]) as llm, \
                 redirect_stdout(io.StringIO()):
             updater.main()

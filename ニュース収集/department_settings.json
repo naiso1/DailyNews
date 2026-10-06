@@ -692,6 +692,9 @@
     "prompt_path": "プロンプト.md",
     "subject_name": "内装",
     "photo_target_label": "車内装",
+    "idea_generation": {
+      "model": "qwen3.8-27b"
+    },
     "image_generation": {
       "enabled": true,
       "provider": "exabase",

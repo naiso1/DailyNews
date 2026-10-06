@@ -120,8 +120,10 @@ class EditionTests(unittest.TestCase):
         groups = updater.select_idea_anchor_groups([item], need_count=2)
         self.assertEqual([[entry["newsId"] for entry in group] for group in groups], [["jp1"], ["jp1"]])
         prompt = updater.make_country_prompt("2026-09-14", "jp", [item], "外装開発", need_count=2)
-        self.assertIn("ideas[0] anchor IDs: jp1", prompt)
-        self.assertIn("ideas[1] anchor IDs: jp1", prompt)
+        self.assertIn("ideasは別工程", prompt)
+        idea_prompt = updater.idea_quality.generation_prompt("exterior", "2026-09-14", "jp", [item], [], [], [])
+        self.assertIn("ideasは最大2件", idea_prompt)
+        self.assertIn('"id": "jp1"', idea_prompt)
         ideas = [{"title": "案一", "desc": "グリルを提案する。 [jp1]", "sourceNewsIds": ["jp1"]},
                  {"title": "案二", "desc": "グリルの補修部品を提案する。 [jp1]", "sourceNewsIds": ["jp1"]}]
         result = updater.prepare_exterior_idea_sources(ideas, [item])
@@ -193,8 +195,16 @@ class EditionTests(unittest.TestCase):
                                    "ideas": [{"title": "発光グリル", "desc": "新型グリルの設計を参考に発光機能を提案する。", "sourceNewsIds": [country + "1"]},
                                              {"title": "補修用バンパー", "desc": "新型バンパーの部品交換を容易にする接合構造を提案する。", "sourceNewsIds": [country + "1"]}]}, ensure_ascii=False)
 
-            argv = ["publisher", "--edition", "exterior", "--sheet", str(sheet), "--skip-html"]
-            with patch.multiple(updater, EDITION=context, NEWS_PATH=news, INSIGHTS_PATH=insights), patch.object(sys, "argv", argv), patch("ニュース収集.source_highlights.enrich_items"), patch.object(updater, "make_country_prompt", side_effect=lambda _date, country, *_args, **_kwargs: country), patch.object(updater, "call_llm", side_effect=generate) as llm, redirect_stdout(io.StringIO()):
+            def reviewed(_edition, _date, country, sources, *args, **kwargs):
+                raw = [{"title": "レーダー透過の発光枠", "desc": "発光グリルの透過部を交換できる構造を提案する。", "sourceNewsIds": [country+"1"]},
+                       {"title": "補修用バンパー", "desc": "破損部だけを交換できる締結部を提案する。", "sourceNewsIds": [country+"1"]}]
+                result = updater.prepare_exterior_idea_sources(raw, sources)
+                for idea in result:
+                    idea.update(qualityVersion=updater.idea_quality.VERSION,
+                                qualityDigest=updater.idea_quality.digest(idea, sources))
+                return result, {"accepted": 2, "withheld": 0, "rejections": []}
+            argv = ["publisher", "--edition", "exterior", "--sheet", str(sheet), "--skip-html", "--skip-images"]
+            with patch.multiple(updater, EDITION=context, NEWS_PATH=news, INSIGHTS_PATH=insights), patch.object(sys, "argv", argv), patch("ニュース収集.source_highlights.enrich_items"), patch.object(updater, "make_country_prompt", side_effect=lambda _date, country, *_args, **_kwargs: country), patch.object(updater.idea_quality, "generate_country", side_effect=reviewed), patch.object(updater, "call_llm", side_effect=generate) as llm, redirect_stdout(io.StringIO()):
                 with self.assertRaisesRegex(RuntimeError, "Exterior insights incomplete for: cn"):
                     updater.main()
                 self.assertTrue(news.exists())  # Article text alone is an incomplete first build.

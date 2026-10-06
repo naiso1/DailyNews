@@ -12069,8 +12069,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in121",
-        title: "ス柯达・スラヴィア（Skoda Slavia）の2026年型マイナーチェンジモデルが、明日インドで発売される",
-        desc: "GaadiWaadi - ス柯达・スラビアの2026年型マイナーチェンジモデルが、インド市場向けに8速ATと外装デザインの変更を追加。明日インドで発売され、価格も発表される予定です。これは同車が市場投入されて以来初の大幅な更新となります。",
+        title: "シュコダ・スラヴィア（Skoda Slavia）の2026年型マイナーチェンジモデルが、明日インドで発売される",
+        desc: "GaadiWaadi - シュコダ・スラビアの2026年型マイナーチェンジモデルが、インド市場向けに8速ATと外装デザインの変更を追加。明日インドで発売され、価格も発表される予定です。これは同車が市場投入されて以来初の大幅な更新となります。",
         url: "https://gaadiwaadi.com/2026-skoda-slavia-facelift-to-launch-tomorrow-in-india/",
         source: "GaadiWaadi",
         date: "2026-10-05",
@@ -12091,8 +12091,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in122",
-        title: "ス柯达・スラビア新型試乗、8速AT搭載で高速巡航の快適性向上",
-        desc: "新型ス柯达Slaviaは1.0リットルTSIエンジンに8速ATを新採用し、高速走行の快適性を向上させた。ヘッドライトやグリルのデザイン刷新に加え、ADASや電動テールゲートなど競合車にある装備が未搭載のまま残る。",
+        title: "シュコダ・スラビア新型試乗、8速AT搭載で高速巡航の快適性向上",
+        desc: "新型シュコダSlaviaは1.0リットルTSIエンジンに8速ATを新採用し、高速走行の快適性を向上させた。ヘッドライトやグリルのデザイン刷新に加え、ADASや電動テールゲートなど競合車にある装備が未搭載のまま残る。",
         url: "https://www.carblogindia.com/new-skoda-slavia-test-drive-review/",
         source: "Car Blog India",
         date: "2026-10-05",
@@ -12162,8 +12162,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "us117",
-        title: "BMW 5シリーズLCI、Neue Klasse風ライトと小型化キドニーグリル",
-        desc: "2028年型BMW 5シリーズ（G60）のフェイスリフトは、Neue Klasse由来の照明と小型化した発光式キドニーグリルを備える。側面プロファイルやフラッシュドアハンドルは現行モデルから変更がなく、車体パネルも維持される見込みである。",
+        title: "BMW 5シリーズ改良型の予想CG、小型の発光グリルを描く",
+        desc: "BMWBLOGは2028年型BMW 5シリーズ改良型の予想CGを紹介。Neue Klasse風の照明と小型の発光式キドニーグリルを描き、側面やフラッシュドアハンドルは現行型を維持すると予想している。メーカーが公表した量産車の仕様ではない。",
         url: "https://www.bmwblog.com/2026/10/05/2028-bmw-5-series-facelift-rendering-2/",
         source: "BMWBLOG",
         date: "2026-10-05",

@@ -41,6 +41,15 @@ class ExteriorPartialResumeTests(unittest.TestCase):
         ]
         self.sources = [{"newsId": "jp1", "title": "グリル", "desc": "発光グリルを試作。"},
                         {"newsId": "jp2", "title": "バンパー", "desc": "交換構造を開発。"}]
+        self.quality_ideas = self.ideas
+
+    def reviewed_result(self, edition, date, country, sources, history, retained, *args, **kwargs):
+        # Semantic-review behavior is tested independently in test_idea_quality.
+        ideas = updater.prepare_exterior_idea_sources(self.quality_ideas, sources)
+        for idea in ideas:
+            idea.update(qualityVersion=updater.idea_quality.VERSION,
+                        qualityDigest=updater.idea_quality.digest(idea, sources))
+        return ideas, {"accepted": len(ideas), "withheld": 2-len(ideas), "rejections": []}
 
     def mocked_run(self, outputs):
         stack = ExitStack()
@@ -51,6 +60,7 @@ class ExteriorPartialResumeTests(unittest.TestCase):
         stack.enter_context(patch.object(updater, "rewrite_analysis_with_refs", side_effect=lambda _e, _m, _c, text, _s: text))
         stack.enter_context(patch.object(updater, "ensure_analysis_ref_quality", side_effect=lambda _e, _m, _c, text, _s: text))
         stack.enter_context(patch.object(updater, "shorten_analysis_with_llm", side_effect=lambda _e, _m, text: text))
+        stack.enter_context(patch.object(updater.idea_quality, "generate_country", side_effect=self.reviewed_result))
         stack.enter_context(redirect_stdout(io.StringIO()))
         llm = stack.enter_context(patch.object(updater, "call_llm", side_effect=outputs))
         return stack, llm
@@ -58,29 +68,23 @@ class ExteriorPartialResumeTests(unittest.TestCase):
     def checkpoint(self):
         return json.loads((self.edition.runtime_dir / "insights_checkpoint_2026-09-21.json").read_text(encoding="utf-8"))["countries"]["jp"]
 
-    def test_partial_idea_survives_bounded_failures_and_resume_only_requests_missing_one(self):
-        invalid = {**self.ideas[1], "sourceNewsIds": ["jp999"]}
-        first = [json.dumps({"analysis": self.analysis, "ideas": self.ideas[:1]}, ensure_ascii=False),
-                 json.dumps({"ideas": [invalid]}, ensure_ascii=False),
-                 json.dumps({"ideas": self.ideas[:1]}, ensure_ascii=False)]
+    def test_one_reviewed_idea_publishes_without_filling_or_repeating_generation(self):
+        self.quality_ideas = self.ideas[:1]
+        first = [json.dumps({"analysis": self.analysis, "ideas": []}, ensure_ascii=False)]
         stack, llm = self.mocked_run(first)
         with stack:
-            with self.assertRaisesRegex(RuntimeError, "Exterior insights incomplete for: jp"):
-                updater.main()
-            self.assertEqual(llm.call_count, 3)  # initial request + two bounded supplements
+            updater.main()
+            self.assertEqual(llm.call_count, 1)
         saved = self.checkpoint()
         self.assertEqual(saved["analysis"], self.analysis)
         self.assertEqual(len(saved["ideas"]), 1)
-        self.assertFalse((self.edition.content_dir / "publication_status.json").exists())
-        self.assertEqual(self.insights.read_text(encoding="utf-8"), "window.DAILY_INSIGHTS = [];\n")
-        stack, llm = self.mocked_run([json.dumps({"analysis": "", "ideas": self.ideas[1:]}, ensure_ascii=False)])
+        self.assertTrue((self.edition.content_dir / "publication_status.json").exists())
+        stack, llm = self.mocked_run([])
         with stack:
             updater.main()
-            llm.assert_called_once()
-            self.assertIn("不足しているideasだけ", llm.call_args.args[2])
-            self.assertIn("ideasは最大1件", llm.call_args.args[2])
+            llm.assert_not_called()
         self.assertEqual(self.checkpoint()["analysis"], self.analysis)
-        self.assertEqual(len(self.checkpoint()["ideas"]), 2)
+        self.assertEqual(len(self.checkpoint()["ideas"]), 1)
         self.assertEqual(self.insights.read_text(encoding="utf-8").count('date: "2026-09-21"'), 1)
 
     def test_two_ideas_are_saved_when_analysis_fails_and_resume_only_requests_analysis(self):

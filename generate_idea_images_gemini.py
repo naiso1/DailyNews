@@ -210,6 +210,8 @@ def build_prompt(title: str, desc: str, image_prompt: str = "", has_references: 
         "Do not design a seat, seat cushion, seat frame, seat cover, headrest, or seating product. "
         "Show the physical product clearly in a modern passenger-vehicle cabin with premium materials, "
         "realistic lighting, detailed surfaces, and production-feasible industrial design.\n"
+        "Make the proposed change visible using one close-up, partial cutaway, or exploded component view. "
+        "Show only mechanisms described in the brief; do not invent hidden systems or use a generic whole-cabin view.\n"
         f"{reference_instruction}\n\n"
         f"Concept name: {clean_title}\n"
         f"Design brief: {clean_desc}\n"

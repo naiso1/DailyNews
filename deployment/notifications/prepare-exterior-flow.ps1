@@ -36,12 +36,13 @@ if (-not $source.definition -or -not $source.connectionReferences) {
 $sourceJson = $source | ConvertTo-Json -Depth 100 -Compress
 $copyJson = $sourceJson.Replace(
     'https://naiso1.github.io/DailyNews/automation_status.xml',
-    'https://naiso1.github.io/DailyNews/content/exterior/automation_status.xml'
+    'https://raw.githubusercontent.com/naiso1/DailyNews/main/content/exterior/automation_status.xml'
 ).Replace('/DailyNewsAutomation/mailing_list.json', '/DailyNewsAutomation/exterior/mailing_list.json'
 ).Replace('DailyNews success ', 'DailyNews exterior success '
 ).Replace('内装製品デイリーニュース', '外装製品デイリーニュース'
 ).Replace('内装開発デイリーニュース', '外装製品デイリーニュース')
 $copyJson = $copyJson.Replace('外装開発デイリーニュース', '外装製品デイリーニュース')
+$copyJson = $copyJson.Replace('https://naiso1.github.io/DailyNews/content/exterior/automation_status.xml', 'https://raw.githubusercontent.com/naiso1/DailyNews/main/content/exterior/automation_status.xml')
 # A preview can also start from the existing exterior flow without duplicating its path.
 $copyJson = [regex]::Replace($copyJson, '(?i)http://ieweb01/(?!exterior/)', 'http://IEWEB01/exterior/')
 $copy = $copyJson | ConvertFrom-Json
@@ -165,7 +166,7 @@ $triggers[0].Value | Add-Member -NotePropertyName runtimeConfiguration -NoteProp
 
 $definitionJson = $copy.definition | ConvertTo-Json -Depth 100 -Compress
 foreach ($required in @(
-    'https://naiso1.github.io/DailyNews/content/exterior/automation_status.xml',
+    'https://raw.githubusercontent.com/naiso1/DailyNews/main/content/exterior/automation_status.xml',
     'DailyNews exterior success ',
     '/DailyNewsAutomation/exterior/mailing_list.json',
     'http://IEWEB01/exterior/'
