@@ -18,7 +18,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "jp141"
-                ], imageProvider: "exabase", imageModel: "" },
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
             {
                 id: 152,
                 img: "images/exabase_exterior_152_bed6449729ba6a71.jpg",
@@ -27,7 +30,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "jp140"
-                ], imageProvider: "exabase", imageModel: "" }
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
         ],
         cn: [
             {
@@ -38,7 +44,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "cn94"
-                ], imageProvider: "exabase", imageModel: "" },
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
             {
                 id: 154,
                 img: "images/exabase_exterior_154_80d0a8a74c046338.jpg",
@@ -47,7 +56,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "cn94"
-                ], imageProvider: "exabase", imageModel: "" }
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
         ],
         in: [
             {
@@ -58,6 +70,18 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "in120"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 161,
+                img: "images/exabase_exterior_161_18ed3a080e516068.jpg",
+                title: "点状加飾の交換式グリル片",
+                desc: "新型シュコダ・スラビアはグリルに点状のクローム柄を取り入れている。共通のグリル基材に、模様を付けた薄い加飾片を取り付ける構造を提案する。模様の変更時に交換する部品を絞り、少量の意匠展開をしやすくすることを狙う。全面一体品と比較して意匠変更時の部品費と組付け時間を調べる。 [in122]",
+                imagePrompt: "",
+                sourceNewsIds: [
+                    "in122"
                 ], imageProvider: "exabase", imageModel: "" }
         ],
         us: [
@@ -69,7 +93,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "us117"
-                ], imageProvider: "exabase", imageModel: "" },
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
             {
                 id: 158,
                 img: "images/exabase_exterior_158_9dd57b52f8bb5399.jpg",
@@ -78,7 +105,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "us115"
-                ], imageProvider: "exabase", imageModel: "" }
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
         ],
         eu: [
             {
@@ -89,6 +119,18 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "eu105"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 162,
+                img: "images/exabase_exterior_162_05f21b21b7ff6c7e.jpg",
+                title: "排水溝付きルーフレールカバー",
+                desc: "BMW iX3には高光沢ブラックのルーフレールが追加される。ルーフレールの外観カバー下面に細い排水溝を設け、水を一定の出口へ導く案を提案する。洗車や雨の後にカバー周辺へ残る水を減らし、汚れ筋を付きにくくすることを狙う。同じ表面仕上げで溝の有無を比べ、散水後の残水量と乾燥後の汚れ筋を確認する。 [eu107]",
+                imagePrompt: "",
+                sourceNewsIds: [
+                    "eu107"
                 ], imageProvider: "exabase", imageModel: "" }
         ]
     }

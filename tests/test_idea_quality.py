@@ -81,8 +81,38 @@ class IdeaQualityTests(unittest.TestCase):
             return '{"ideas":[]}'
         kept, audit = q.generate_country("exterior", "2026-10-05", "cn", self.sources, [], [], model, json.loads, lambda a, h, n: a[:n])
         self.assertEqual(kept, [])
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(calls), 4)
         self.assertEqual(audit["withheld"], 2)
+
+    def test_third_attempt_can_fill_second_slot_without_changing_accepted_idea(self):
+        retained,_=q.review_candidates([self.idea],self.sources,'exterior',lambda _:self.review(),json.loads)
+        before=copy.deepcopy(retained[0])
+        second={**self.idea,'title':'排水溝付きハンドルカバー',
+            'proposal':'カバー下側に排水溝を設ける案を提案する。',
+            'benefit':'雨の後に残る水滴を減らすことを狙う。',
+            'verification':'溝あり・なしで散水後の残水量を比較する。'}
+        generation_calls=[]
+        def model(prompt):
+            if 'あなたは自動車部品の企画レビュー担当' in prompt:return self.review()
+            generation_calls.append(prompt)
+            return json.dumps({'ideas':[second] if len(generation_calls)==3 else []},ensure_ascii=False)
+        kept,audit=q.generate_country('exterior','2026-10-05','cn',self.sources,[],retained,
+                                     model,json.loads,lambda a,h,n:a[:n])
+        self.assertEqual(len(kept),2)
+        self.assertEqual(audit['attempts'],3)
+        self.assertEqual(kept[0],before)
+        self.assertIn('異なる部位・仕組み・利用場面',generation_calls[-1])
+
+    def test_retry_uses_untried_articles_before_reusing_first_pair(self):
+        sources=[{**self.sources[0],'newsId':'cn'+str(94+i)} for i in range(6)]
+        loaded=[]
+        q.generate_country('exterior','2026-10-05','cn',sources,[],[],lambda _: '{"ideas":[]}',
+                           json.loads,lambda a,h,n:a[:n],source_loader=lambda items:loaded.append([s['newsId'] for s in items]))
+        self.assertEqual(loaded[:3],[['cn94','cn95'],['cn96','cn97'],['cn98','cn99']])
+
+    def test_cargo_fact_can_support_an_interior_storage_idea(self):
+        source={'newsId':'eu1','originalDesc':'The electric car offers a 441-litre boot.'}
+        self.assertIn('441-litre boot',q.focus_evidence(source,'interior'))
 
     def test_valid_sibling_survives_one_rejected_idea(self):
         bad = {**self.idea, "sourceNewsIds": ["cn999"]}

@@ -18,7 +18,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "jp1963"
-                ], imageProvider: "exabase", imageModel: "" },
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
             {
                 id: 1908,
                 img: "images/exabase_interior_1908_b67549a41112c7c6.jpg",
@@ -27,7 +30,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "jp1959"
-                ], imageProvider: "exabase", imageModel: "" }
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
         ],
         cn: [
             {
@@ -35,6 +41,18 @@ window.DAILY_INSIGHTS = [
                 img: "images/exabase_interior_1909_cf6595277b3057f4.jpg",
                 title: "着脱式センター画面ひさし",
                 desc: "iCaur V27の車内には15.6インチの中央画面が配置されている。画面上部に取り外せる小型の遮光ひさしを設け、上方からの光を遮る案を提案する。日差しで画面が見にくい場面の読み取りを助けることを狙う。同じ表示と照明条件でひさしの有無を比較し、読み取りやすさと操作を妨げない寸法を確認する。 [cn1755]",
+                imagePrompt: "",
+                sourceNewsIds: [
+                    "cn1755"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1917,
+                img: "images/exabase_interior_1917_4299d881de426aa1.jpg",
+                title: "角度を選べる小型メーター台座",
+                desc: "iCaur V27は車内に小型の液晶メーターを備えている。小型メーターの支持台に数段階の角度調整機構を設ける案を提案する。体格や着座姿勢に合わせ、表示を見やすい角度に調整できることを狙う。固定角と調整式で着座位置を変え、画面の見える範囲と外光の反射を比較する。 [cn1755]",
                 imagePrompt: "",
                 sourceNewsIds: [
                     "cn1755"
@@ -49,6 +67,18 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "in1824"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1918,
+                img: "images/exabase_interior_1918_815cf9456e65a3a2.jpg",
+                title: "交換できるピラーグリップ表皮",
+                desc: "Vision Tの試作車ではAピラーのグリップハンドルが確認されている。支持する芯材を残し、手が触れる表皮部だけを取り外して交換できる構造を提案する。汚れや摩耗が目立つ部分の補修で、交換する部品と整備時間を減らすことを狙う。グリップ全体を交換する場合と比較し、表皮交換の作業時間と交換部品費を調べる。 [in1817]",
+                imagePrompt: "",
+                sourceNewsIds: [
+                    "in1817"
                 ], imageProvider: "exabase", imageModel: "" }
         ],
         us: [
@@ -60,7 +90,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "us1785"
-                ], imageProvider: "exabase", imageModel: "" },
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
             {
                 id: 1914,
                 img: "images/exabase_interior_1914_b74083da98729b50.jpg",
@@ -69,7 +102,10 @@ window.DAILY_INSIGHTS = [
                 imagePrompt: "",
                 sourceNewsIds: [
                     "us1778"
-                ], imageProvider: "exabase", imageModel: "" }
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            }
         ],
         eu: [
             {
@@ -77,6 +113,18 @@ window.DAILY_INSIGHTS = [
                 img: "images/exabase_interior_1915_07d85e3873b7d74d.jpg",
                 title: "画面交換用の分割化粧枠",
                 desc: "IONIQ 3の上位仕様には14.6インチのインフォテインメント画面が搭載される。画面の化粧枠と周囲の大型内装パネルを分割し、画面周辺だけを外せる構造を提案する。整備担当者が画面を交換する際、取り外す内装部品を減らすことを狙う。一体枠と分割枠で画面の脱着時間・取り外す部品数を比較し、再組付け後の隙間も確認する。 [eu1747]",
+                imagePrompt: "",
+                sourceNewsIds: [
+                    "eu1747"
+                ],
+                imageProvider: "exabase",
+                imageModel: ""
+            },
+            {
+                id: 1919,
+                img: "images/exabase_interior_1919_370048b0e65579c1.jpg",
+                title: "荷室の起こせる小物仕切り",
+                desc: "IONIQ 3は441リットルの荷室を備えている。荷室の床パネルに、使う時だけ立てて溝で固定する小さな仕切りを設ける案を提案する。小さな荷物の転がりを抑えつつ、大きな荷物を積む時は床を平らに使えることを狙う。仕切りなしと同じ荷物・加減速条件で移動量を比較し、畳んだ時の床の段差を確認する。 [eu1747]",
                 imagePrompt: "",
                 sourceNewsIds: [
                     "eu1747"
