@@ -1,9 +1,11 @@
 # 内装・外装アイデア画像：exaBase連携
 
-`dailynews/exabase.py` がアイデア1件からプロンプト1件を作り、`worker.js` が専用のEdgeコンテキストでexaBaseを操作します。テキスト入力は固定ハッシュで検証した共有ツールの `generateOnPage(count: 1)`、参考写真を使う場合はこのプロジェクト専用の `reference-generation.js` を利用します。画像を版・アイデアID・`sourceNewsIds` に対応づけ、ブラウザの開始・終了はworkerが担当します。共有エンジン本体や他の利用者のツールは変更しません。
+`dailynews/exabase.py` がアイデア1件からプロンプト1件を作り、`worker.js` が専用のEdgeコンテキストでexaBaseを操作します。モデルを指定するテキスト入力は `model-generation.js`、参考写真を使う場合は `reference-generation.js` を利用し、両方とも `image-model.js` で画像生成ツールを選択します。会話の操作と画像候補の検出には固定ハッシュで検証した共有エンジンを使用します。画像を版・アイデアID・`sourceNewsIds` に対応づけ、ブラウザの開始・終了はworkerが担当します。共有エンジン本体や他の利用者のツールは変更しません。
 
 - 外装はexaBaseのみ。最新号の内容点検を通過した各地域0〜2案、既存画像を含めて最大10枚を対象とし、有料画像APIへ代替しません。画像は正方形で、変更する部品や仕組みが見える接写・部分断面などを指定します。
 - 内装は2026-09-15より後の最新号からexaBaseを優先します。exaBaseで画像が得られなかった案だけ既存Gemini APIへ代替します。既存画像を含む上限は10枚です。
+- 2026-10-06から両版の `image_generation.model_priority` は `["gpt-image", "nano-banana"]` です。「画像生成（高性能、GPT-image）」を第一候補とし、送信前に見つからない・無効の場合だけ「画像生成（高速、Nano Banana）」を選択します。選択したツールだけがONであることを確認し、`model-selection.json` と完了結果に保存します。切替失敗・状態不明・送信後の時間切れでは別モデルへ自動再送しません。既存の内装API代替方針は維持します。
+- 優先順と選択処理の版をキャッシュ識別子に含め、旧モデルの未掲載キャッシュをGPT-imageの生成結果として扱いません。掲載済み画像は再生成しません。`model_priority` を省略した旧構成では従来の共有エンジンによる選択を保持します。
 - 両版とも既存画像を再生成せず、過去号の欠損画像を一括生成しません。画像が得られない場合もニュース本文・考察を公開します。
 - 2026-10-05から、両版のexaBaseプロンプトで正方形（1:1）の構図を指定します。内装のAPI代替も定期処理では従来どおり1:1です。サイトのAI画像枠もPC・スマートフォン共通で1:1とし、既存の横長・縦長画像は縦横比を維持して中央を基準に枠いっぱいへ表示します（cover）。黒い余白は生じず、枠からはみ出す端を表示上で切り取ります。生成画像のファイル自体は加工せず、既存画像の再生成は行いません。
 
@@ -57,7 +59,7 @@ $runtimePython = Join-Path $env:LOCALAPPDATA 'DailyNewsRuntime\venv\Scripts\pyth
 & $runtimePython -B -m dailynews.exabase --edition exterior --pilot-idea-id 5 --date 2026-09-15 --publish
 ```
 
-完了済み画像はキャッシュから再利用するため、再生成しません。公開先への配備は別の通常デプロイ手順で行います。掲載画像名は `images/exabase_<版>_<ideaID>_<hash16桁>.<拡張子>` です。画像ごとに `imageProvider: "exabase"` または `"api"` を記録し、画面では「AI生成イメージ（exaBase）」または「AI生成イメージ（API）」と表示します。API画像には実際に使用したモデルを `imageModel` に保存します。exaBase側のモデル名は未確認のため空にします。生成元が確認できない旧画像は「AI生成イメージ」のみ表示します。
+完了済み画像はキャッシュから再利用するため、再生成しません。公開先への配備は別の通常デプロイ手順で行います。掲載画像名は `images/exabase_<版>_<ideaID>_<hash16桁>.<拡張子>` です。画像ごとに `imageProvider: "exabase"` または `"api"` を記録します。新しいexaBase画像では実際に選択を確認した `GPT-image` / `Nano Banana` を `imageModel` に保存し、画面で「AI生成イメージ（exaBase / GPT-image）」などと表示します。選択証跡が確認できない結果は新しい画像として公開しません。API画像には実際のAPIモデル名を保存し、画面は「AI生成イメージ（API）」です。モデル不明の旧exaBase画像は従来の「AI生成イメージ（exaBase）」を維持し、生成元も不明の旧画像は「AI生成イメージ」のみ表示します。
 
 ## 定時処理で有効にする条件
 
@@ -137,6 +139,7 @@ exaBaseの最終応答に失敗しても、画像ファイルと完了記録が�
 - 参考画像の検証・cache・取得失敗時のテキスト代替は `tests/test_exabase_reference.py`、添付受理・1回送信・入力画像の誤回収防止は `tests/test_exabase_reference.cjs` で検証します。これらのテストは実サービスや画像生成を呼びません。
 - 専用セッション、1案単位の処理、キャッシュ、送信後の不明状態、出典ID照合、画像形式とダイジェスト検証を実装しています。
 - オフライン検証は `tests/test_exabase.py`。有料APIもexaBaseも呼ばず、無効化・対応関係・キャッシュ・異常終了後の復旧・認証失敗・キャッシュ改変を確認します。
+- モデル選択は `tests/test_exabase_image_model.cjs`、モデル別キャッシュ・公開時の証跡確認は `tests/test_exabase_models.py` で検証します。2026-10-06に本番と同じ専用セッションでGPT-imageをON・Nano BananaをOFFにした1枚の非公開試験を行い、GPT-imageの完了記録と1254×1254のPNG保存を確認しました。既存画像の置き換えは行っていません。
 - 2026-09-16に専用セッションの保存・認証を確認し、2026-09-15号の外装企画ID5〜14、5地域各2枚の計10枚をexaBaseで実生成・目視確認しました。先に確認したID5〜8の4枚を保持し、欧州・中国・インドの6枚を追加しました。ID10は内容を確認して再生成し、最終画像を採用しています。今回の追加生成に画像APIは使用していません。
 - 2026-09-17の復旧では、9月16日号の内装・外装各10枚をすべてexaBaseで生成し公開しました。API代替の呼出しはありません。
 - 認証更新の検証は `tests/test_exabase_session.cjs`、`tests/test_exabase_generation_session.cjs`、定期確認は `tests/test_exabase_maintenance.py` です。生成中の更新保存はオフラインのブラウザ代替テストで検証し、定期タスクの実接続は画像生成なしで確認します。

@@ -698,6 +698,7 @@
     "image_generation": {
       "enabled": true,
       "provider": "exabase",
+      "model_priority": ["gpt-image", "nano-banana"],
       "fallback_provider": "gemini",
       "max_images": 10,
       "batch_seconds": 6000,

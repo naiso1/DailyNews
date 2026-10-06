@@ -2409,7 +2409,10 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
         function ideaImageLabel(idea) {
             const provider = String(idea?.imageProvider || "").toLowerCase();
-            if (provider === "exabase") return "AI生成イメージ（exaBase）";
+            if (provider === "exabase") {
+                const model = ["GPT-image", "Nano Banana"].includes(idea?.imageModel) ? idea.imageModel : "";
+                return model ? `AI生成イメージ（exaBase / ${model}）` : "AI生成イメージ（exaBase）";
+            }
             if (provider === "api") return "AI生成イメージ（API）";
             if (/^images\/exabase_(interior|exterior)_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea?.img || "")) {
                 return "AI生成イメージ（exaBase）";

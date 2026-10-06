@@ -147,6 +147,7 @@ async function generate(dependencies, request, state, recoveryOnly = false) {
   if (recoveryOnly && (!request.referenceImage
       || !/^\/conversation\/[a-f0-9-]{36}$/.test(request.conversationPath || ''))) throw fail('INVALID_REQUEST');
   fs.mkdirSync(request.outputDir, { recursive: true });
+  if (request.imageModels !== undefined) require('./image-model').validatePriority(request.imageModels);
   const { chromium, edge, engine } = dependencies;
   let browser, context, page, stopWatching;
   let cancelled = false;
@@ -154,7 +155,7 @@ async function generate(dependencies, request, state, recoveryOnly = false) {
   const timer = setTimeout(() => { cancelled = true; }, timeout);
   try {
     if (cancelled) throw fail('GENERATION_TIMEOUT');
-    // Own only the browser lifecycle; keep the pinned engine's generation flow.
+    // Own the isolated browser; named-model extensions leave the shared engine intact.
     browser = await chromium.launch({ executablePath: edge, headless: true });
     stopWatching = engine._test.watchCancellation(browser, () => cancelled);
     context = await browser.newContext({ storageState: state, viewport: { width: 1440, height: 1000 } });
@@ -168,6 +169,7 @@ async function generate(dependencies, request, state, recoveryOnly = false) {
     const settings = {
       prompt: request.prompt, outputDir: request.outputDir, count: 1,
       timeoutMs: timeout, isCancelled: () => cancelled,
+      imageModels: request.imageModels,
       onProgress: progress => {
         if (!['sending', 'submitted', 'done'].includes(progress.status)) return;
         const event = { event: progress.status, key: request.key };
@@ -179,11 +181,22 @@ async function generate(dependencies, request, state, recoveryOnly = false) {
       ? await require('./reference-generation').recoverReference(page, { ...settings, referenceImage: request.referenceImage }, engine)
       : request.referenceImage
       ? await require('./reference-generation').generateWithReference(page, { ...settings, referenceImage: request.referenceImage }, engine)
+      : request.imageModels
+      ? await require('./model-generation').generateWithModel(page, settings, engine)
       : await engine._test.generateOnPage(page, settings);
     if (result.files.length !== 1 || result.errors.length) throw fail('GENERATION_FAILED');
     const file = path.resolve(result.files[0]);
     if (path.dirname(file) !== path.resolve(request.outputDir)) throw fail('INVALID_IMAGE_PATH');
     const receipt = { status: 'DONE', key: request.key, file, ...(recoveryOnly ? { recoveredFromConversation: true } : {}) };
+    if (request.imageModels) {
+      const selection = recoveryOnly
+        ? JSON.parse(fs.readFileSync(path.join(request.outputDir, 'model-selection.json'), 'utf8'))
+        : result.modelSelection;
+      if (!selection || selection.verified !== true || !request.imageModels.includes(selection.selected)
+          || selection.states[selection.selected] !== true) throw fail('IMAGE_MODEL_MISMATCH');
+      receipt.imageModel = require('./image-model').MODELS[selection.selected];
+      receipt.modelSelection = selection;
+    }
     atomicJson(path.join(request.outputDir, 'result.json'), receipt);
     emit(receipt);
   } catch (error) {

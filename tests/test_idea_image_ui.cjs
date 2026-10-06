@@ -13,6 +13,10 @@ for (const name of ['escapeHtml', 'ideaImageLabel', 'renderIdeaImage']) {
 
 const idea = {title: '照明と加飾', img: 'images/concept.png'};
 assert.match(context.renderIdeaImage({...idea, imageProvider: 'exabase'}), /AI生成イメージ（exaBase）/);
+for (const model of ['GPT-image', 'Nano Banana']) {
+  assert.equal(context.ideaImageLabel({...idea, imageProvider: 'exabase', imageModel: model}), `AI生成イメージ（exaBase / ${model}）`);
+}
+assert.equal(context.ideaImageLabel({...idea, imageProvider: 'exabase', imageModel: '<script>'}), 'AI生成イメージ（exaBase）');
 assert.match(context.renderIdeaImage({...idea, imageProvider: 'api', imageModel: 'test-model'}), /AI生成イメージ（API）/);
 assert.equal(context.ideaImageLabel(idea), 'AI生成イメージ');
 assert.equal(context.ideaImageLabel({...idea, imageProvider: 'unknown'}), 'AI生成イメージ');

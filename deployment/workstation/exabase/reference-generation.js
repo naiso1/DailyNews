@@ -36,7 +36,7 @@ async function generatedSources(page, referenceFileName) {
   return page.evaluate(fileName => {
     const markers = [...document.querySelectorAll('p, span, div')].filter(el => {
       const text = String(el.innerText || '').trim();
-      return text.length < 300 && /Nano\s*Banana.*生成.*画像|生成された画像です/i.test(text);
+      return text.length < 300 && /(?:Nano\s*Banana|GPT[-\s]*image).*生成.*画像|生成された画像です/i.test(text);
     }).sort((a, b) => a.innerText.length - b.innerText.length);
     const marker = markers[0];
     return [...document.images].filter(image => {
@@ -94,7 +94,9 @@ async function generateWithReference(page, settings, engine) {
   validateReference(referenceImage, outputDir);
   if (isCancelled()) throw fail('GENERATION_TIMEOUT');
   await engine._test.startNewConversation(page);
-  await engine._test.enableImageGeneration(page);
+  const modelSelection = settings.imageModels
+    ? await require('./image-model').selectImageModel(page, settings.imageModels, engine, outputDir)
+    : (await engine._test.enableImageGeneration(page), undefined);
   const input = await engine._test.visibleChatInput(page);
   if (!input) throw fail('AUTH_REQUIRED');
   const upload = page.locator('input[type="file"]');
@@ -145,7 +147,7 @@ async function generateWithReference(page, settings, engine) {
   receipt.generatedAt = new Date().toISOString();
   fs.writeFileSync(path.join(outputDir, 'attachment.json'), JSON.stringify(receipt));
   onProgress({ status: 'done' });
-  return { files: [file], errors: [] };
+  return { files: [file], errors: [], ...(modelSelection ? { modelSelection } : {}) };
 }
 
 async function recoverReference(page, settings, engine) {
@@ -164,5 +166,5 @@ async function recoverReference(page, settings, engine) {
   return { files: [file], errors: [] };
 }
 
-module.exports = { VERSION, validateReference, attachmentAccepted, generatedSources, waitForGeneratedImage,
+module.exports = { VERSION, validateReference, attachmentAccepted, generatedSources, waitForGeneratedImage, saveGeneratedImage,
   generateWithReference, recoverReference };

@@ -122,10 +122,10 @@ test('React-cleared file input is accepted only with one decoded matching thumbn
   assert.equal(await extension.attachmentAccepted(page, photo.alt), false);
 });
 
-test('provider filename output after generated marker is accepted while upload stays excluded', async () => {
+for (const model of ['Nano Banana', 'GPT-image']) test(`${model} filename output after generated marker is accepted while upload stays excluded`, async () => {
   const upload = { alt:'reference_jp1.jpg',src:'upload-src',closest:()=>null };
   const output = { alt:'tmp1ex_okec.jpeg',src:'output-src',closest:()=>null };
-  const marker = {innerText:'Nano Bananaで生成された画像です！',compareDocumentPosition: image => image===output ? 4 : 2};
+  const marker = {innerText:`${model}で生成された画像です！`,compareDocumentPosition: image => image===output ? 4 : 2};
   const dom = {querySelectorAll:()=>[marker],images:[upload,output]};
   const page = {evaluate:async(callback,name)=>vm.runInNewContext(`(${callback})(${JSON.stringify(name)})`,{
     document:dom,Node:{DOCUMENT_POSITION_FOLLOWING:4}})};
