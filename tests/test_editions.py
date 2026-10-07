@@ -122,7 +122,8 @@ class EditionTests(unittest.TestCase):
         prompt = updater.make_country_prompt("2026-09-14", "jp", [item], "外装開発", need_count=2)
         self.assertIn("ideasは別工程", prompt)
         idea_prompt = updater.idea_quality.generation_prompt("exterior", "2026-09-14", "jp", [item], [], [], [])
-        self.assertIn("ideasは最大2件", idea_prompt)
+        self.assertIn("不足は2件", idea_prompt)
+        self.assertIn("同じ記事から2案でもよい", idea_prompt)
         self.assertIn('"id": "jp1"', idea_prompt)
         ideas = [{"title": "案一", "desc": "グリルを提案する。 [jp1]", "sourceNewsIds": ["jp1"]},
                  {"title": "案二", "desc": "グリルの補修部品を提案する。 [jp1]", "sourceNewsIds": ["jp1"]}]

@@ -121,6 +121,12 @@ class IdeaQualityTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertIn(text,q.focus_evidence({'originalDesc':text},'exterior'))
 
+    def test_repeated_headline_does_not_hide_window_component_detail(self):
+        text=('A new canopy is available.\n'*5)+'The side windows open with hydraulic dampers.'
+        focused=q.focus_evidence({'originalDesc':text},'exterior')
+        self.assertEqual(focused.count('A new canopy is available.'),1)
+        self.assertIn('side windows open',focused)
+
     def test_irrelevant_first_sources_do_not_exhaust_generation_attempts(self):
         sources=[{'newsId':f'cn{i}','originalDesc':'The manufacturer announced quarterly sales.'} for i in range(8)] + self.sources
         calls=[]
@@ -192,6 +198,21 @@ class IdeaQualityTests(unittest.TestCase):
         self.assertEqual(prepared['proposal'],future['proposal'])
         with self.assertRaisesRegex(ValueError,'採用実績'):
             q.prepare({**future,'proposal':future['proposal'].replace('試作する','試作した')},self.sources)
+
+    def test_storage_location_and_pickup_canopy_are_not_wrongly_excluded(self):
+        import auto_update_daily_news as updater
+        previous=updater.EDITION.id
+        try:
+            updater.configure_edition('interior')
+            self.assertFalse(updater._is_out_of_scope_idea('座席下収納の持ち手付き布トレー'))
+            self.assertFalse(updater._is_out_of_scope_idea('A removable under-seat storage tray'))
+            self.assertTrue(updater._is_out_of_scope_idea('座席下収納を設けて座席クッションを変更する'))
+            self.assertTrue(updater._is_out_of_scope_idea('座席のクッション剛性を変更する'))
+            updater.configure_edition('exterior')
+            self.assertFalse(updater._is_out_of_scope_idea('荷台のキャノピー窓に排水ひさしを設ける'))
+            self.assertTrue(updater._is_out_of_scope_idea('センターコンソール用の収納トレー'))
+        finally:
+            updater.configure_edition(previous)
 
     def test_original_fetch_is_cached_and_failures_do_not_repeat(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -81,14 +81,14 @@ def focus_evidence(item, edition):
     pattern = (r"display|screen|dashboard|console|door.trim|steering|switch|interior|cabin|grab.handle|armrest|upholster|storage|weatherstrip|cargo|\bboot\b|インパネ|内装|加飾|画面|ドアトリム|コンソール|肘|アームレスト|収納|荷室|スイッチ"
                if edition == "interior" else
                r"bumper|grille|door.handle|roof|tailgate|spoiler|fender|body.panel|rear.wing|bodywork|pillar|paint|coating|joining|bonding|radar|lidar|sensor|laser|in.mold|hot.stamp|recycl|"
-               r"tail.?light|head.?light|tail.?lamp|head.?lamp|daytime.running|\bDRL\b|light.signature|bonnet|\bhood\b|mirror|canopy|splitter|diffuser|wheel.arch|air.intake|cooling|aerodynamic|"
+               r"tail.?light|head.?light|tail.?lamp|head.?lamp|daytime.running|\bDRL\b|light.signature|bonnet|\bhood\b|mirror|canopy|splitter|diffuser|wheel.arch|air.intake|cooling|aerodynamic|glazing|windshield|window|weather.?strip|"
                r"バンパー|グリル|ハンドル|ルーフ|テールゲート|バックドア|フェンダー|スポイラー|ウイング|ピラー|塗装|接合|ミリ波|センサー|レーザー|再生材|"
-               r"ヘッドライト|テールライト|ヘッドランプ|テールランプ|ボンネット|フード|ミラー|キャノピー|スプリッター|ディフューザー|冷却|空力")
+               r"ヘッドライト|テールライト|ヘッドランプ|テールランプ|ボンネット|フード|ミラー|キャノピー|スプリッター|ディフューザー|冷却|空力|ガラス|窓|ウェザーストリップ")
     original = evidence(item)
     sentences = re.split(r"(?<=[。!?])|(?<=\.)\s+(?=[A-Z])|\n+", original)
-    matches = [s.strip() for s in sentences if re.search(pattern, s, re.I)]
+    matches = list(dict.fromkeys(s.strip() for s in sentences if re.search(pattern, s, re.I)))
     # Never substitute a guessed fact when the component is not documented.
-    return "\n".join(matches[:4])[:1600]
+    return "\n".join(matches[:8 if edition == "exterior" else 4])[:2400 if edition == "exterior" else 1600]
 
 
 def _plain(value):
@@ -166,7 +166,7 @@ componentEvidenceの部品に絞る。交換・固定・表面仕上げ・操作
 現在の固定方法・素材・課題が不明なら『現行は接着』『従来はネジ留め』等と断定しない。比較用に設計する試作品だと明示する。
 変更する仕組みは一つに絞り、対象部品の材料特性に合うものにする。樹脂の錆防止や、外観部品による車体剛性向上などは不可。
 変更によって価値が生じる理由を具体化する。単なる分割・可動化でランプの見やすさが上がるとはしない。交換性なら交換範囲を減らす構造、視認性なら配光・輝度・汚れ等に働く仕組みを示す。
-title: 何を作るか分かる日本語20字程度の名称。
+title: 何を作るか分かる日本語20字程度の名称。本文と部品・動作方向を一致させる。
 sourceFact: componentEvidenceから一つの事実だけを日本語にする。提案・効果・需要を混ぜない。予想・試作等の留保を残す。
 proposal: その部品のどこをどう変えるかを『提案する』と書く。単なる試験計画は不可。
 benefit: 誰の何を改善することを『狙う』か。効果はまだ未確認。
@@ -174,7 +174,7 @@ verification: 提案した価値を確かめるため、何と何を何の指標
 比較対象は『同じ形状で溝の有無』『一体案と分割案の試作品』など具体化する。原文で現行構造が不明なら、量産品の構造を決めつけず試作品同士を比べる。
 4フィールド各1文、各30〜60字程度。専門用語や評価項目を詰め込まない。
 sourceNewsIdsには実際に使った記事だけを指定。各IDに対し根拠の原文をsourceQuotesに8〜160字でそのまま抜き出す。
-原文が英語なら抜粋も英語。要約を原文抜粋と偽らない。本文フィールドにはIDや脚注を書かない。
+原文が英語なら抜粋も英語。要約を原文抜粋と偽らない。本文フィールドにはIDや脚注を書かず、『in131記事では』のような書き出しも使わない。
 出力はJSONのみ。画像指示とanalysisは不要。
 {{"ideas":[{{"title":"...","sourceFact":"...","proposal":"...","benefit":"...","verification":"...","sourceNewsIds":["..."],"sourceQuotes":[{{"sourceId":"...","quote":"原文の連続した短い抜粋"}}]}}]}}
 部品についての根拠原文: {json.dumps(focused, ensure_ascii=False)}
@@ -206,7 +206,7 @@ sourceMatch: 車名、部品、数値、予想/試作等の留保が原文と一
 logicalConnection: 原文にある部品と提案の変更箇所・期待価値が具体的につながるか。単に車名やEVという共通語だけでは不可。
 変更と効果の間に働く仕組みが必要。例えばランプを分割し可動ジョイントでつなぐだけでは視認性向上の理由にならない。分割による交換範囲縮小、表面処理による汚れ低減などはつながりを確認できる。
 一般的な補修性・着せ替え・映り込み等を開発仮説として広げることは許容する。原文にその課題や需要の記載がないという理由だけでfalseにしない。ただし実車に問題があると断定する案や、別の部品・現象への飛躍は不可。
-concreteProposal: 部品と変更する仕組みが具体的か。『最適化・検証・両立』だけの試験計画は不可。
+concreteProposal: 部品と変更する仕組みが具体的か。タイトルと本文の部品や動作方向が一致するか。『最適化・検証・両立』だけの試験計画は不可。
 hypothesisClearlyMarked: 提案・期待する効果が未実施と分かるか。根拠のない採用実績、安全・強度・低炭素・需要・コスト効果の断定は不可。
 testMatchesPurpose: 確認方法が目的に合い、部品と車体全体・外観部と荷重支持部を混同していないか。
 一次検討に合う比較指標があればよい。量産時の全試験が未列挙という理由では不合格にしない。ただし荷重を受ける構造の変更なのに必要な保持・強度確認がない等、提案の成立性に関わる欠落は指摘する。

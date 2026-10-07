@@ -780,6 +780,10 @@ def _is_out_of_scope_idea(text: str) -> bool:
     # Seat belts are safety products rather than seating products, so do not
     # reject an otherwise valid idea only because that term appears.
     normalized = normalized.replace("シートベルト", "").replace("seat belt", "").replace("seatbelt", "")
+    # Storage below a seat is an interior storage product, not a seating design.
+    # Remove only that location phrase; any actual seat modification still fails.
+    normalized = re.sub(r"(?:後部座席|座席|シート|後席)(?:の)?下(?=[^。]{0,12}(?:収納|トレー|トレイ|小物))", "床側", normalized)
+    normalized = re.sub(r"\bunder[- ](?:rear[- ])?seats?(?=[- ](?:storage|trays?|bins?|compartments?)\b)", "floor", normalized)
     if any(
         term in normalized
         for term in [
