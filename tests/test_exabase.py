@@ -64,6 +64,16 @@ class ExaBaseTests(unittest.TestCase):
         start, end = ideas[0].image_span
         self.assertEqual(self.text[start:end], '""')
 
+    def test_exterior_visual_correction_reaches_provider_and_changes_cache_key(self):
+        from dataclasses import replace
+        corrected = replace(self.idea, image_prompt="下方に開くカバーの内側を拡大する")
+        original_prompt = exabase.image_prompt(self.idea, self.sources)
+        corrected_prompt = exabase.image_prompt(corrected, self.sources)
+        self.assertNotIn("表現の補足：", original_prompt)
+        self.assertIn(corrected.image_prompt, corrected_prompt)
+        self.assertNotEqual(exabase.job_key("exterior", self.idea, original_prompt),
+                            exabase.job_key("exterior", corrected, corrected_prompt))
+
     def test_js_literal_tab_and_escaped_tab_keep_content_and_spans(self):
         for literal in ('"前半\t後半"', '"前半\\t後半"'):
             text = '{ desc: ' + literal + ', title: "引用\\\"と{形状}" }'
