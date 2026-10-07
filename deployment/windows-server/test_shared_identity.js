@@ -64,6 +64,9 @@ async function main() {
   const interior = await start("interior");
   const exterior = await start("exterior");
   await register(interior, "first@example.com", "interior-first-123");
+  const standaloneId = (await interior.request("/api/auth/me")).json.user.id;
+  await put(interior, "/api/me/release-history", {userId: standaloneId, seen: ["rh1:2026-10-07:1111111111111111"]});
+  assert.deepEqual((await interior.request("/api/me/release-history")).json.seen, ["rh1:2026-10-07:1111111111111111"]);
   const inner = (await register(interior, "shared@example.com", "interior-shared-123", { favorites: ["inner-favorite"], clientId: "client-interior-123456" })).json.user;
   const oldInnerCookie = interior.cookie;
   await put(interior, "/api/interactions/same1/like", { liked: true, clientId: "client-interior-123456" });
@@ -97,6 +100,21 @@ async function main() {
   const exteriorMe = (await b.request("/api/auth/me")).json.user;
   assert.equal(exteriorMe.id, outer.id);
   assert.equal(exteriorMe.identityId, inner.id);
+  // One common notice acknowledgement, with identity IDs rather than colliding
+  // edition-local IDs. Guest reads and cross-account/cross-origin writes fail.
+  const noticeA = "rh1:2026-10-07:0123456789abcdef";
+  const noticeB = "rh1:2026-10-07:fedcba9876543210";
+  assert.deepEqual((await a.request("/api/me/release-history")).json, {userId: inner.id, seen: []});
+  await b.request("/api/me/release-history", {headers: {Cookie: ""}}, 401);
+  await put(b, "/api/me/release-history", {userId: outer.id, seen: [noticeA]}, 409);
+  await put(a, "/api/me/release-history", {userId: inner.id, seen: ["invalid"]}, 400);
+  await a.request("/api/me/release-history", {method: "PUT", headers: {Origin: "http://evil.invalid"},
+    body: {userId: inner.id, seen: [noticeA]}}, 403);
+  await put(b, "/api/me/release-history", {userId: inner.id, seen: [noticeA, noticeA]});
+  assert.deepEqual((await a.request("/api/me/release-history")).json.seen, [noticeA]);
+  await Promise.all([put(a, "/api/me/release-history", {userId: inner.id, seen: [noticeB]}),
+    put(b, "/api/me/release-history", {userId: inner.id, seen: [noticeA]})]);
+  assert.deepEqual((await b.request("/api/me/release-history")).json.seen, [noticeA, noticeB]);
   assert.deepEqual(exteriorMe.subscriptions, { interior: true, exterior: true });
   assert.deepEqual((await a.request("/api/me/activity")).json.favorites, ["inner-favorite"]);
   assert.deepEqual((await b.request("/api/me/activity")).json.favorites, ["outer-favorite"]);
@@ -238,6 +256,7 @@ async function main() {
   assert.deepEqual(subscriptionSnapshot(), subscriptionsBefore);
   await login(a, "first@example.com", "interior-first-123");
   b.cookie = a.cookie;
+  assert.deepEqual((await b.request("/api/me/release-history")).json.seen, ["rh1:2026-10-07:1111111111111111"], "other account retains its own history after migration");
   for (const app of [a, b]) {
     assert.equal((await app.request("/api/auth/me")).json.user.isAdmin, true);
     await app.request("/api/admin/mailing-list");
@@ -261,6 +280,7 @@ async function main() {
   }
   await login(b, "shared@example.com", "new-shared-123");
   assert.equal((await b.request("/api/auth/me")).json.user.isAdmin, true, "existing admin remains authorized");
+  assert.deepEqual((await b.request("/api/me/release-history")).json.seen, [noticeA, noticeB], "read state survives restart and password change");
   await stop(a.child); await stop(b.child);
   for (const invalid of [["*@example.com"], {email: "first@example.com"}]) {
     fs.writeFileSync(path.join(roots.interior, "data", "admin-emails.json"), JSON.stringify(invalid));

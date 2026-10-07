@@ -1060,6 +1060,7 @@ function closeAccount() {
   if (!accountState.user) accountState.registrationPromptDismissed = true;
   document.getElementById("accountOverlay")?.classList.remove("open");
   document.body.style.overflow = "";
+  window.dispatchEvent(new CustomEvent("dailynews:account-dialog-closed"));
 }
 
 async function initializeAccount() {
@@ -1079,9 +1080,11 @@ async function initializeAccount() {
   if (accountState.user?.isAdmin && new URLSearchParams(window.location?.search || "").get("admin") === "1") {
     openAccountTab("admin");
   }
+  window.dispatchEvent(new CustomEvent("dailynews:account-ready"));
 }
 
 window.dailyNewsAccount = {
+  get ready() { return accountState.authResolved; },
   get user() {
     return accountState.user;
   },

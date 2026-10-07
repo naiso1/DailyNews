@@ -852,6 +852,7 @@ const statements = {
 const sharedIdentity = SHARED_IDENTITY ? require("./shared-identity").openSharedIdentity({
   identityDbFile: IDENTITY_DB_FILE, exteriorDbFile: EXTERIOR_DB_FILE, edition: EDITION, localDbFile: DB_FILE,
 }) : null;
+const releaseHistory = sharedIdentity?.releaseHistory || require("./shared-identity").releaseHistoryStore(db);
 for (const email of ADMIN_EMAILS) statements.markAdmin.run(email);
 for (const user of statements.usersForMailSeed.all()) {
   statements.subscribeRegisteredUser.run(user.email, user.display_name, user.id, IS_EXTERIOR ? 0 : 1);
@@ -1874,6 +1875,28 @@ async function handleApi(request, response, requestUrl) {
         authenticatedUser(request),
       ),
     );
+    return;
+  }
+
+  if (["GET", "PUT"].includes(request.method) && requestUrl.pathname === "/api/me/release-history") {
+    const user = requireUser(request, response);
+    if (!user) return;
+    const userId = user.identityId || user.id;
+    if (request.method === "PUT") {
+      const body = await readJson(request);
+      // An old tab must not mark notices read for a newly signed-in person.
+      if (body.userId !== userId) {
+        apiError(response, 409, "account_changed", "The signed-in account changed. Reload before saving.");
+        return;
+      }
+      if (!Array.isArray(body.seen) || body.seen.length > 200 || body.seen.some(key =>
+        typeof key !== "string" || !/^rh1:\d{4}-\d{2}-\d{2}:[a-f0-9]{16}$/.test(key))) {
+        apiError(response, 400, "invalid_release_history", "Invalid release history entries.");
+        return;
+      }
+      releaseHistory.mark(userId, [...new Set(body.seen)]);
+    }
+    sendJson(response, 200, { userId, seen: releaseHistory.get(userId) });
     return;
   }
 

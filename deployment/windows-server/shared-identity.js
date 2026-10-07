@@ -38,6 +38,25 @@ function transaction(db, work) {
   }
 }
 
+// System notices are shared across editions, unlike article activity.
+function releaseHistoryStore(db) {
+  db.exec(`CREATE TABLE IF NOT EXISTS main.release_history_seen (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    entry_key TEXT NOT NULL,
+    seen_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, entry_key)
+  )`);
+  const list = db.prepare("SELECT entry_key FROM main.release_history_seen WHERE user_id=? ORDER BY entry_key");
+  const insert = db.prepare("INSERT OR IGNORE INTO main.release_history_seen(user_id,entry_key) VALUES(?,?)");
+  return {
+    get: (userId) => list.all(userId).map(row => row.entry_key),
+    mark(userId, keys) {
+      transaction(db, () => { for (const key of keys) insert.run(userId, key); });
+      return this.get(userId);
+    },
+  };
+}
+
 function audit(db) {
   const interior = db.prepare("SELECT * FROM main.users ORDER BY id").all();
   const exterior = db.prepare("SELECT * FROM exterior.users ORDER BY id").all();
@@ -154,6 +173,7 @@ function openSharedIdentity({ identityDbFile, exteriorDbFile, edition, localDbFi
       .run(identity.email, identity.display_name, user.id, enabled ? 1 : 0);
   }
   return {
+    releaseHistory: releaseHistoryStore(db),
     byEmail: (email) => byEmail.get(email), byId: (id) => byId.get(id), localUser, subscriptions,
     register({ email, displayName, hash, salt, isAdmin, choices }) {
       return transaction(db, () => {
@@ -215,4 +235,4 @@ function openSharedIdentity({ identityDbFile, exteriorDbFile, edition, localDbFi
   };
 }
 
-module.exports = { migrate, openSharedIdentity };
+module.exports = { migrate, openSharedIdentity, releaseHistoryStore };

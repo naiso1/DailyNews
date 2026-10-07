@@ -3,6 +3,15 @@
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
     date: "2026-10-07",
+    title: "未読のシステム更新をアクセス時に表示",
+    items: [
+      "本日以降のシステム更新のうち、まだ確認していない内容をアクセス時に自動表示します。確認して閉じた更新は繰り返し表示しません。日々のニュース追加では表示しません。",
+      "ログイン中の既読状態はアカウントに保存し、別の端末や内装・外装の間で共有します。未ログインの場合は利用中のブラウザーに保存します。",
+      "ログイン案内やコメントなどの入力中には割り込まず、過去の履歴はヘッダーの「更新履歴」からいつでも確認できます。",
+    ],
+  },
+  {
+    date: "2026-10-07",
     title: "企画アイデアの不足を補う処理を改善",
     items: [
       "外装のテールランプ・ヘッドライト・ガラスルーフ・ボンネットなど、記事に記載された部品情報を企画づくりに使えるよう、抽出条件の漏れを修正しました。",
@@ -516,6 +525,55 @@ function escapeReleaseHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+const RELEASE_AUTO_START = "2026-10-07";
+const RELEASE_SEEN_PREFIX = "dailynews_release_seen_v1:";
+const RELEASE_KEY_PATTERN = /^rh1:\d{4}-\d{2}-\d{2}:[a-f0-9]{16}$/;
+
+function releaseEntryKey(entry) {
+  // Content fingerprint, not an authentication token. Works on the HTTP site,
+  // and detects two changes on the same date without relying on a browser clock.
+  const text = JSON.stringify([entry.date, entry.title, entry.items]);
+  let first = 0x811c9dc5, second = 0x9e3779b9;
+  for (let i = 0; i < text.length; i++) {
+    first = Math.imul(first ^ text.charCodeAt(i), 0x01000193);
+    second = Math.imul(second ^ text.charCodeAt(i), 0x85ebca6b);
+  }
+  return `rh1:${entry.date}:${(first >>> 0).toString(16).padStart(8, "0")}${(second >>> 0).toString(16).padStart(8, "0")}`;
+}
+
+function releaseOwner() {
+  const account = window.dailyNewsAccount;
+  if (!account?.ready) return null;
+  const user = account.user;
+  if (user) {
+    const shared = Boolean(window.DAILYNEWS_CONFIG?.sharedIdentity);
+    const userId = shared ? user.identityId : user.id;
+    if (!Number.isSafeInteger(userId) || userId <= 0) return null;
+    return { key: `${RELEASE_SEEN_PREFIX}${shared ? "shared" : window.DAILYNEWS_CONFIG?.id || "interior"}:${userId}`, userId };
+  }
+  return window.DAILYNEWS_CONFIG?.allowGuestRead ? { key: `${RELEASE_SEEN_PREFIX}guest`, userId: null } : null;
+}
+
+function readReleaseSeen(key) {
+  try {
+    const values = JSON.parse(localStorage.getItem(key) || "[]");
+    return new Set(Array.isArray(values) ? values.filter(value => typeof value === "string" && RELEASE_KEY_PATTERN.test(value)) : []);
+  } catch (_) { return new Set(); }
+}
+
+async function releaseSeenApi(options = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+  try {
+    const response = await fetch(`${window.DAILYNEWS_CONFIG?.apiBase || "/api"}/me/release-history`, {
+      credentials: "same-origin", cache: "no-store", signal: controller.signal,
+      ...options, headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) throw new Error(`Release history HTTP ${response.status}`);
+    return await response.json();
+  } finally { clearTimeout(timeout); }
+}
+
 function initializeReleaseHistory() {
   if (document.documentElement.classList.contains("github-pages-migration")) return;
   const actions = document.querySelector(".header-top-actions");
@@ -537,6 +595,10 @@ function initializeReleaseHistory() {
     .release-history-entry time { color:#7df1c2; font-size:12px; font-weight:800; }
     .release-history-entry h3 { margin:0 0 7px; font-size:15px; }
     .release-history-entry ul { margin:0; padding-left:18px; color:#aebcce; font-size:12px; line-height:1.75; }
+    .release-history-footer { position:sticky; bottom:0; display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; padding:14px 20px; background:#101925; border-top:1px solid rgba(255,255,255,.09); }
+    .release-history-footer button { min-height:40px; border:1px solid #506682; border-radius:10px; padding:8px 16px; background:#1d3048; color:#edf4fb; font-weight:700; cursor:pointer; }
+    .release-history-footer .release-history-confirm { background:#7df1c2; color:#071d16; border-color:#7df1c2; }
+    .release-history-button:focus-visible, .release-history-dialog button:focus-visible { outline:2px solid #7df1c2; outline-offset:3px; }
     @media(max-width:560px) { .release-history-entry { grid-template-columns:1fr; gap:5px; } .release-history-button { min-height:34px; padding:0 10px; font-size:11px; } }
   `;
   document.head.appendChild(style);
@@ -555,26 +617,137 @@ function initializeReleaseHistory() {
     <section class="release-history-dialog" role="dialog" aria-modal="true" aria-labelledby="releaseHistoryTitle">
       <div class="release-history-head"><h2 id="releaseHistoryTitle">更新履歴</h2><button class="release-history-close" type="button" aria-label="閉じる">&times;</button></div>
       <p class="release-history-note">共通機能と各版の改善・不具合修正の記録です。内容は各更新日時点のものです。</p>
-      <div class="release-history-list">${window.DAILYNEWS_RELEASE_HISTORY.map((entry) => `
-        <article class="release-history-entry">
-          <time>${escapeReleaseHtml(entry.date)}</time>
-          <div><h3>${escapeReleaseHtml(entry.title)}</h3><ul>${entry.items.map((item) => `<li>${escapeReleaseHtml(item)}</li>`).join("")}</ul></div>
-        </article>`).join("")}</div>
+      <div class="release-history-list"></div>
+      <div class="release-history-footer"><button type="button" class="release-history-all">過去の履歴も見る</button><button type="button" class="release-history-confirm">確認して閉じる</button></div>
     </section>`;
   document.body.appendChild(overlay);
 
-  const close = () => {
-    overlay.classList.remove("open");
-    document.body.style.overflow = "";
-  };
-  button.addEventListener("click", () => {
+  const entries = window.DAILYNEWS_RELEASE_HISTORY;
+  const eligible = () => entries.filter(entry => entry.date >= RELEASE_AUTO_START);
+  const dialog = overlay.querySelector(".release-history-dialog");
+  const title = overlay.querySelector("#releaseHistoryTitle");
+  const list = overlay.querySelector(".release-history-list");
+  const allButton = overlay.querySelector(".release-history-all");
+  const closeButton = overlay.querySelector(".release-history-close");
+  const confirmButton = overlay.querySelector(".release-history-confirm");
+  let owner = null, seen = new Set(), loaded = false, generation = 0;
+  let displayed = [], openedOwner = null, previousFocus = null, previousOverflow = "", timer;
+
+  function render(shown, automatic) {
+    displayed = shown.filter(entry => entry.date >= RELEASE_AUTO_START).map(releaseEntryKey);
+    title.textContent = automatic ? "システムの更新のお知らせ" : "更新履歴";
+    allButton.hidden = !automatic;
+    list.innerHTML = shown.map((entry) => `
+        <article class="release-history-entry">
+          <time>${escapeReleaseHtml(entry.date)}</time>
+          <div><h3>${escapeReleaseHtml(entry.title)}</h3><ul>${entry.items.map((item) => `<li>${escapeReleaseHtml(item)}</li>`).join("")}</ul></div>
+        </article>`).join("");
+    dialog.scrollTop = 0;
+  }
+
+  function open(shown, automatic = false) {
+    if (!overlay.classList.contains("open")) {
+      previousFocus = document.activeElement;
+      previousOverflow = document.body.style.overflow;
+      openedOwner = releaseOwner()?.key;
+    }
+    render(shown, automatic);
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
-  });
-  overlay.querySelector(".release-history-close").addEventListener("click", close);
+    closeButton.focus();
+  }
+
+  function saveCache() {
+    if (!owner) return;
+    // Merge another tab's acknowledgements rather than replacing them.
+    seen = new Set([...readReleaseSeen(owner.key), ...seen]);
+    try { localStorage.setItem(owner.key, JSON.stringify([...seen])); } catch (_) { /* Memory still prevents repeat display on this page. */ }
+  }
+
+  async function syncSeen(target, keys) {
+    if (!target?.userId || !keys.length) return;
+    try {
+      for (let offset = 0; offset < keys.length; offset += 200) {
+        await releaseSeenApi({ method: "PUT", body: JSON.stringify({ userId: target.userId, seen: keys.slice(offset, offset + 200) }) });
+      }
+    } catch (_) { /* The account-specific cache retries on the next visit. */ }
+  }
+
+  const close = (acknowledge = true) => {
+    if (!overlay.classList.contains("open")) return;
+    if (acknowledge && owner && openedOwner === owner.key && releaseOwner()?.key === owner.key) {
+      displayed.forEach(key => seen.add(key));
+      saveCache();
+      void syncSeen(owner, displayed);
+    }
+    overlay.classList.remove("open");
+    document.body.style.overflow = otherDialogOpen() ? "hidden" : previousOverflow || "";
+    previousFocus?.focus?.();
+  };
+  button.addEventListener("click", () => open(entries));
+  closeButton.addEventListener("click", () => close());
+  confirmButton.addEventListener("click", () => close());
+  allButton.addEventListener("click", () => render(entries, false));
   overlay.addEventListener("click", (event) => {
     if (event.target === overlay) close();
   });
+  overlay.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { event.preventDefault(); close(); }
+    if (event.key === "Tab") {
+      const controls = [closeButton, ...(!allButton.hidden ? [allButton] : []), confirmButton];
+      const index = controls.indexOf(document.activeElement);
+      if (event.shiftKey && index <= 0) { event.preventDefault(); controls.at(-1).focus(); }
+      else if (!event.shiftKey && (index < 0 || index === controls.length - 1)) { event.preventDefault(); controls[0].focus(); }
+    }
+  });
+
+  function otherDialogOpen() {
+    return [...document.querySelectorAll('[role="dialog"], dialog')].some(node => node !== dialog && node.getClientRects().length);
+  }
+  function maybeOpen() {
+    if (!loaded || !owner || releaseOwner()?.key !== owner.key || document.hidden || overlay.classList.contains("open")) return;
+    if (document.activeElement?.matches?.('input, textarea, select, [contenteditable="true"]')) return;
+    if (otherDialogOpen()) return;
+    if ([...document.querySelectorAll('.comment-input, textarea')].some(node => node.value?.trim() && node.getClientRects().length)) return;
+    seen = new Set([...seen, ...readReleaseSeen(owner.key)]);
+    const unread = eligible().filter(entry => !seen.has(releaseEntryKey(entry)));
+    if (unread.length) open(unread, true);
+  }
+  function schedule() { clearTimeout(timer); timer = setTimeout(maybeOpen, 180); }
+
+  async function loadSeen() {
+    const target = releaseOwner();
+    if (target?.key === owner?.key && loaded) { schedule(); return; }
+    const version = ++generation;
+    close(false);
+    owner = target; loaded = false; seen = target ? readReleaseSeen(target.key) : new Set();
+    if (!target) return;
+    if (target.userId) {
+      try {
+        const result = await releaseSeenApi();
+        if (version !== generation || releaseOwner()?.key !== target.key) return;
+        if (result.userId !== target.userId) return;
+        const remote = new Set((result.seen || []).filter(key => RELEASE_KEY_PATTERN.test(key)));
+        const pending = eligible().map(releaseEntryKey).filter(key => seen.has(key) && !remote.has(key));
+        seen = new Set([...seen, ...remote]);
+        saveCache();
+        void syncSeen(target, pending);
+      } catch (_) { /* Fall back to this person's browser cache during an outage. */ }
+    }
+    if (version !== generation || releaseOwner()?.key !== target.key) return;
+    loaded = true; schedule();
+  }
+
+  window.addEventListener("dailynews:account-ready", loadSeen);
+  window.addEventListener("dailynews:account-changed", loadSeen);
+  window.addEventListener("dailynews:account-dialog-closed", schedule);
+  window.addEventListener("storage", event => { if (event.key === owner?.key) schedule(); });
+  window.addEventListener("focus", schedule);
+  document.addEventListener("visibilitychange", schedule);
+  document.addEventListener("focusout", schedule);
+  new MutationObserver(schedule).observe(document.body, { subtree: true, attributes: true, attributeFilter: ["class", "style", "open"] });
+  render(entries, false);
+  void loadSeen();
 }
 
 document.addEventListener("DOMContentLoaded", initializeReleaseHistory);

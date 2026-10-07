@@ -73,6 +73,20 @@ After deployment, open the header's update-history button and verify the latest
 date and text at desktop and mobile widths. Routine daily article additions do
 not require a feature-history entry and must not be blocked by its date.
 
+System notices dated 2026-10-07 or later open automatically only when unread.
+Closing the dialog acknowledges the displayed entries. Each entry uses a content
+fingerprint, so a second update or correction on the same date is detected.
+The manual header button still shows the full archive.
+
+`GET/PUT /api/me/release-history` stores acknowledged entry keys in
+`release_history_seen`, attached to the authenticated account. With shared
+identity the interior identity database owns this state for both editions;
+article reads, likes and usage remain edition-specific. The PUT request includes
+the expected identity ID to reject acknowledgements from a stale account tab.
+Browser localStorage provides an account-specific offline cache and a separate
+guest record. Guest records are never imported into a signed-in account.
+Automatic notices wait for authentication, other dialogs and unfinished input.
+
 The administrator account list is configured with the
 `DAILYNEWS_ADMIN_EMAILS` environment variable (comma-separated). If it is not
 set, `yuki.nakamura@toyoda-gosei.co.jp` is treated as the administrator.
