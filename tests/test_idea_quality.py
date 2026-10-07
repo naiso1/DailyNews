@@ -114,6 +114,54 @@ class IdeaQualityTests(unittest.TestCase):
         source={'newsId':'eu1','originalDesc':'The electric car offers a 441-litre boot.'}
         self.assertIn('441-litre boot',q.focus_evidence(source,'interior'))
 
+    def test_exterior_lighting_glass_roof_and_hood_are_component_evidence(self):
+        for text in ['The car uses smiling taillights.', 'A glass roof blocks UV light.',
+                     'The logo is fitted to the bonnet.', 'The mirror sits on a narrow arm.',
+                     '細いテールランプとガラスルーフを採用する。']:
+            with self.subTest(text=text):
+                self.assertIn(text,q.focus_evidence({'originalDesc':text},'exterior'))
+
+    def test_irrelevant_first_sources_do_not_exhaust_generation_attempts(self):
+        sources=[{'newsId':f'cn{i}','originalDesc':'The manufacturer announced quarterly sales.'} for i in range(8)] + self.sources
+        calls=[]
+        def model(prompt):
+            calls.append(prompt)
+            return self.review() if 'あなたは自動車部品の企画レビュー担当' in prompt else json.dumps({'ideas':[self.idea]},ensure_ascii=False)
+        kept,audit=q.generate_country('exterior','2026-10-06','cn',sources,[],[],model,json.loads,lambda a,h,n:a[:n],max_attempts=1)
+        self.assertEqual(len(kept),1)
+        self.assertEqual(audit['attempts'],1)
+        self.assertEqual(audit['sourcesChecked'],9)
+        self.assertEqual(len(calls),2)
+
+    def test_failed_idea_is_repaired_and_reviewed_without_changing_valid_sibling(self):
+        second={**self.idea,'title':'排水溝付きハンドルカバー',
+                'proposal':'カバー下面に排水溝を設ける案を提案する。'}
+        bad={**second,'proposal':'カバー下面に排水溝を設けた。'}
+        calls=[]
+        def model(prompt):
+            calls.append(prompt)
+            if 'あなたは自動車部品の企画レビュー担当' in prompt:return self.review()
+            if '企画案の点検で指摘された箇所を修正する' in prompt:
+                self.assertIn('排水溝付きハンドルカバー',prompt)
+                self.assertNotIn('交換式ハンドルカバー',prompt)
+                return json.dumps({'ideas':[second]},ensure_ascii=False)
+            return json.dumps({'ideas':[self.idea,bad]},ensure_ascii=False)
+        kept,audit=q.generate_country('exterior','2026-10-06','cn',self.sources,[],[],model,json.loads,lambda a,h,n:a[:n],max_attempts=1)
+        self.assertEqual(len(kept),2)
+        self.assertEqual(kept[0]['proposal'],self.idea['proposal'])
+        self.assertTrue(all(q.is_reviewed(i,self.sources) for i in kept))
+        self.assertEqual(audit['repairAttempts'],1)
+        self.assertEqual(len(calls),4)
+
+    def test_unsuccessful_repair_cannot_bypass_checks_and_is_bounded(self):
+        def model(prompt):
+            if 'あなたは自動車部品の企画レビュー担当' in prompt:return self.review(testMatchesPurpose=False,reason='確認方法が目的と不一致')
+            return json.dumps({'ideas':[self.idea]},ensure_ascii=False)
+        kept,audit=q.generate_country('exterior','2026-10-06','cn',self.sources,[],[],model,json.loads,lambda a,h,n:a[:n],max_attempts=2)
+        self.assertFalse(kept)
+        self.assertEqual(audit['attempts'],2)
+        self.assertEqual(audit['repairAttempts'],2)
+
     def test_valid_sibling_survives_one_rejected_idea(self):
         bad = {**self.idea, "sourceNewsIds": ["cn999"]}
         passed, _ = q.review_candidates([bad, self.idea], self.sources, "exterior", lambda _: self.review(), json.loads)
@@ -137,6 +185,13 @@ class IdeaQualityTests(unittest.TestCase):
                         {"proposal": "カバーを採用済み。"}, {"benefit": "コストを削減した。"}):
             with self.subTest(changes=changes), self.assertRaises(ValueError):
                 q.prepare({**self.idea, **changes}, self.sources)
+
+    def test_future_prototype_is_a_proposal_but_completed_prototype_is_not(self):
+        future={**self.idea,'proposal':'本体を共通にして外観カバーを交換できる構造を試作する。'}
+        prepared=q.prepare(future,self.sources)
+        self.assertEqual(prepared['proposal'],future['proposal'])
+        with self.assertRaisesRegex(ValueError,'採用実績'):
+            q.prepare({**future,'proposal':future['proposal'].replace('試作する','試作した')},self.sources)
 
     def test_original_fetch_is_cached_and_failures_do_not_repeat(self):
         with tempfile.TemporaryDirectory() as tmp:
