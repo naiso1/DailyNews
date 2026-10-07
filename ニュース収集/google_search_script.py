@@ -1890,7 +1890,8 @@ def compute_relevance(title, content=""):
     return round(score, 2), label, unique_hits
 
 def normalize_text(text):
-    return re.sub(r"\s+", " ", str(text or "")).strip()
+    from dailynews.prose import normalize_prose_whitespace
+    return normalize_prose_whitespace(text)
 
 
 def normalize_japanese_spacing(text):

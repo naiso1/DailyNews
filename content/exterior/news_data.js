@@ -9406,7 +9406,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us90",
         title: "現代車のフロントガラスのピラーが厚くなった理由と、それが安全上のリスクになり得る点",
-        desc: "現代車のAピラーが厚くなった理由と、それがもたらす安全上のリスク\\n\\nKiran Menon（2026年9月28日）\\n\\n前方の視界を確保しにくいと感じているドライバーの中には、その原因としてAピラーを挙げる人もいるだろう。",
+        desc: "現代車のAピラーが厚くなった理由と、それがもたらす安全上のリスク Kiran Menon（2026年9月28日） 前方の視界を確保しにくいと感じているドライバーの中には、その原因としてAピラーを挙げる人もいるだろう。",
         url: "https://www.jalopnik.com/2270908/car-windshield-a-pillars-thick-visibility-problems/",
         source: "Jalopnik",
         date: "2026-09-29",
@@ -11678,7 +11678,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "eu101",
         title: "新シトロエンの1万5000ユーロモデルに迫る",
-        desc: "シトロエンの1万5000ユーロの新車、その姿に迫る\\n2026年パリモーターショーでコンセプトカーとして初公開予定の新モデル「2CV」について、新たな詳細が明らかになりました。",
+        desc: "シトロエンの1万5000ユーロの新車、その姿に迫る 2026年パリモーターショーでコンセプトカーとして初公開予定の新モデル「2CV」について、新たな詳細が明らかになりました。",
         url: "https://fr.motor1.com/news/810699/nouvelle-citroen-nouveau-teaser-2cv/",
         source: "Motor1 France",
         date: "2026-10-04",
@@ -12532,7 +12532,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us123",
         title: "2027年型フォルクスワーゲン アトラスの外観写真を見る",
-        desc: "2027年型Volkswagen Atlasの外観写真を見る\\n\\nMichael Simari撮影 | Car and Driver\\n公開日：2026年10月6日\\n\\n2027年モデルとして、VWの大型3列シートのSUV「Atlas」が待望已久的な大規模刷新を受けた。",
+        desc: "2027年型Volkswagen Atlasの外観写真を見る Michael Simari撮影 | Car and Driver 公開日：2026年10月6日 2027年モデルとして、VWの大型3列シートのSUV「Atlas」が待望已久的な大規模刷新を受けた。",
         url: "https://www.caranddriver.com/photos/a73980686/2027-volkswagen-atlas-test-exterior-gallery/",
         source: "Car and Driver",
         date: "2026-10-06",
@@ -13018,7 +13018,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "in132",
         title: "現代自動車、新型2027年型トゥソンを発表",
-        desc: "現代自動車、2027年型トゥソンを公開\\n\\n現代自動車のSUVラインナップにおいて確固たる地位を築いてきたトゥソンが、フルモデルチェンジを経て「2027年型」として登場した。",
+        desc: "現代自動車、2027年型トゥソンを公開 現代自動車のSUVラインナップにおいて確固たる地位を築いてきたトゥソンが、フルモデルチェンジを経て「2027年型」として登場した。",
         url: "https://www.evoindia.com/news/car-news/hyundai-unveils-all-new-2027-tucson-587782",
         source: "Evo India",
         date: "2026-10-06",

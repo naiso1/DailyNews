@@ -128,6 +128,27 @@ class PublicationTests(unittest.TestCase):
     def test_curated_papers_keep_existing_inclusion_policy(self):
         self.publisher.validate_japanese_news_items([{"country": "paper", "title": "Study title", "desc": "Study abstract."}])
 
+    def test_resumed_csv_normalizes_prose_before_publication_without_touching_urls(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            news = root / "news.js"
+            news.write_text("window.LOADED_NEWS_DATA = [];", encoding="utf-8")
+            sheet = root / "source.csv"
+            url = "https://example.com/story?part=1&next=2"
+            with sheet.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["国", "日付", "タイトル（日本語）", "内容（日本語）", "画像URL", "URL", "LLM判定", "内装関連度"])
+                writer.writerow(["欧州", "2026-10-06", r"新型車\n公開", r"新型車の内装を紹介する。\n\n収納を拡充した。", "https://example.com/image.jpg", url, "対象", "70"])
+            def inspect(items):
+                self.assertEqual(items[0]['title'], "新型車 公開")
+                self.assertEqual(items[0]['desc'], "新型車の内装を紹介する。 収納を拡充した。")
+                self.assertEqual(items[0]['url'], url)
+                raise RuntimeError("CSV_INSPECTED")
+            with patch.multiple(self.publisher, NEWS_PATH=news, INSIGHTS_PATH=root/'insights.js', HTML_PATH=root/'index.html'), patch.object(sys, "argv", ["publisher", "--sheet", str(sheet), "--dry-run"]), patch.object(self.publisher, "validate_japanese_news_items", side_effect=inspect):
+                with self.assertRaisesRegex(RuntimeError, "CSV_INSPECTED"):
+                    self.publisher.main()
+            self.assertEqual(news.read_text(encoding='utf-8'), "window.LOADED_NEWS_DATA = [];")
+
     def test_main_aborts_before_writing_or_generating_anything(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

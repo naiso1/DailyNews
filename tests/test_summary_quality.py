@@ -40,6 +40,20 @@ class SummaryQualityTests(unittest.TestCase):
     def setUp(self):
         self.env = helpers()
 
+    def test_model_line_break_escapes_are_cleaned_after_json_and_fallback_parsing(self):
+        parse = self.env["parse_json_field"]
+        expected = "新型車を公開 詳細を紹介する。"
+        for body in ["新型車を公開\n\n詳細を紹介する。", r"新型車を公開\n\n詳細を紹介する。",
+                     r"新型車を公開\\r\\n詳細を紹介する。"]:
+            self.assertEqual(parse(json.dumps({"summary": body}, ensure_ascii=False), "summary"), expected)
+        self.assertEqual(parse(r'前置き {"summary":"新型車を公開\n\n詳細を紹介する。"}', "summary"), expected)
+
+    def test_cleanup_preserves_unicode_quotes_and_unrelated_escapes(self):
+        from dailynews.prose import normalize_prose_whitespace
+        body = r'「Tucson」 17.1kWh / \u65e5 / \"引用\"'
+        self.assertEqual(normalize_prose_whitespace(body), body)
+        self.assertEqual(normalize_prose_whitespace("本文\r\n次の文。"), "本文 次の文。")
+
     def test_long_headline_is_not_sliced_mid_date_or_model(self):
         title = BROKEN_TITLE + "日に発売、可動式センターコンソールも採用"
         self.assertEqual(self.env["trim_title_safely"](title, 50), title)

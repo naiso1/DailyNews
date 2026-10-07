@@ -231863,7 +231863,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us1735",
         title: "中国で起きたリンク＆コ社の火災事件には、表面に見えている以上の事情がある",
-        desc: "中国のリンク＆コ（Lynk & Co）900に関する火災事件は、一見するよりも複雑な事情がある。同車種は52.4 kWhのバッテリーパックを搭載した高級プラグインハイブリッドである。\\n\\nWeiboで共有された映像によると、杭州の路上でリンク＆コ 900が燃えている様子が確認されている。",
+        desc: "中国のリンク＆コ（Lynk & Co）900に関する火災事件は、一見するよりも複雑な事情がある。同車種は52.4 kWhのバッテリーパックを搭載した高級プラグインハイブリッドである。 Weiboで共有された映像によると、杭州の路上でリンク＆コ 900が燃えている様子が確認されている。",
         url: "https://www.carscoops.com/2026/09/lynk-and-co-fire-china/",
         source: "CarScoops",
         date: "2026-09-28",
@@ -232576,7 +232576,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us1742",
         title: "現代車のAピラーが厚みを増し、安全性上のリスクとなりつつある理由",
-        desc: "現代車のAピラーが厚くなった理由と、それがもたらす安全上のリスク\\n\\nKiran Menon氏（2026年9月28日）\\n\\n「外側の視界が悪い」と不満を述べているドライバーの多くにとって、Aピラーはその原因の一つとなっている可能性があります。",
+        desc: "現代車のAピラーが厚くなった理由と、それがもたらす安全上のリスク Kiran Menon氏（2026年9月28日） 「外側の視界が悪い」と不満を述べているドライバーの多くにとって、Aピラーはその原因の一つとなっている可能性があります。",
         url: "https://www.jalopnik.com/2270908/car-windshield-a-pillars-thick-visibility-problems/",
         source: "Jalopnik",
         date: "2026-09-29",
@@ -235433,7 +235433,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us1779",
         title: "報告書が示す、インフレの2倍に達した車両修理費の上昇",
-        desc: "報告書が示す車両修理コストのインフレ率2倍超え\\n新しい報告書によると、新車の修理に必要な技術により、修理費用は2019年比で60%上昇している。\\nSam D. Smith 著 | 2時間前\\nデータによれば、2026年の自動車修理コストは2019年比で60%上昇した。",
+        desc: "報告書が示す車両修理コストのインフレ率2倍超え 新しい報告書によると、新車の修理に必要な技術により、修理費用は2019年比で60%上昇している。 Sam D. Smith 著 | 2時間前 データによれば、2026年の自動車修理コストは2019年比で60%上昇した。",
         url: "https://www.carscoops.com/2026/10/vehicle-repair-costs-have-risen-twice-as-much-as-inflation/",
         source: "CarScoops",
         date: "2026-10-05",
@@ -235474,7 +235474,7 @@ window.LOADED_NEWS_DATA = [
     {
         id: "us1782",
         title: "今もなお夢にまで出てくる、あの運転の失敗",
-        desc: "QOTD：夢まで追いかけ続ける運転ミス\\nRyan Erik King 2026年10月5日 EST午前10:25\\n写真：Spirit/Shutterstock\\nJalopnikをGoogleの優先情報源に追加：Google Discover\\n自動運転車がそう思わせるかもしれないが、車を運転す。",
+        desc: "QOTD：夢まで追いかけ続ける運転ミス Ryan Erik King 2026年10月5日 EST午前10:25 写真：Spirit/Shutterstock JalopnikをGoogleの優先情報源に追加：Google Discover 自動運転車がそう思わせるかもしれないが、車を運転す。",
         url: "https://www.jalopnik.com/2276495/these-driving-blunders-still-haunt-your-dreams-reader-answers/",
         source: "Jalopnik",
         date: "2026-10-05",

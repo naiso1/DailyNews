@@ -17,6 +17,7 @@ from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
 from dailynews import exterior_papers
 from dailynews import idea_quality
+from dailynews.prose import normalize_prose_whitespace
 from dailynews.exterior_tags import generate_tags as generate_exterior_tags
 from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
@@ -1926,8 +1927,9 @@ def main():
     for row in rows:
         country_raw = get(row, idx_country)
         date_val = get(row, idx_date)
-        title = get(row, idx_title)
-        desc = get(row, idx_desc)
+        # Resumed CSV publication can bypass the summarizer's cleanup.
+        title = normalize_prose_whitespace(get(row, idx_title))
+        desc = normalize_prose_whitespace(get(row, idx_desc))
         img = get(row, idx_image)
         url = get(row, idx_url)
         source = get(row, idx_source)
