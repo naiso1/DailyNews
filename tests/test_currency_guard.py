@@ -3,11 +3,13 @@
 import ast
 import csv
 import importlib.util
+import io
 from pathlib import Path
 import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+from contextlib import redirect_stdout
 
 ROOT = Path(__file__).resolve().parents[1]
 COLLECTION = ROOT / "\u30cb\u30e5\u30fc\u30b9\u53ce\u96c6"
@@ -65,6 +67,34 @@ class CurrencyGuardTests(unittest.TestCase):
     def test_ambiguous_scale_fails_closed_instead_of_guessing(self):
         with self.assertRaises(CurrencyUnitError):
             repair_indian_price_units("2" + RUPEES, "2 lakh or 2 crore rupees", "in")
+
+    def test_partial_source_range_is_not_guessed(self):
+        with self.assertRaises(CurrencyUnitError):
+            repair_indian_price_units("11.80万ルピーから16.90万ルピー", "from Rs 11.80 lakh", "in")
+
+    def test_uncertain_article_is_withheld_without_losing_valid_articles(self):
+        spec = importlib.util.spec_from_file_location("currency_publisher", ROOT / "auto_update_daily_news.py")
+        publisher = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(publisher)
+        with tempfile.TemporaryDirectory() as directory:
+            sheet = Path(directory) / "sheet.csv"
+            with sheet.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["国", "日付", "タイトル", "内容", "タイトル（日本語）", "内容（日本語）", "画像URL", "URL"])
+                writer.writerow(["in", "2026-10-07", "From Rs 11.80 lakh", "From Rs 11.80 lakh",
+                                 "新型車", "11.80万ルピーから16.90万ルピー", "https://example.com/b.jpg", "https://example.com/b"])
+                writer.writerow(["in", "2026-10-07", "Rs 19.21 lakh", "Rs 19.21 lakh",
+                                 "新型車19.21万ルピー", "内装部品を変更した。", "https://example.com/a.jpg", "https://example.com/a"])
+            log = io.StringIO()
+            with patch.object(sys, "argv", ["publisher", "--sheet", str(sheet), "--dry-run"]), patch.object(
+                publisher, "validate_japanese_news_items", side_effect=RuntimeError("stop-before-writes")
+            ) as validate, redirect_stdout(log):
+                with self.assertRaisesRegex(RuntimeError, "stop-before-writes"):
+                    publisher.main()
+            self.assertEqual([item["url"] for item in validate.call_args.args[0]], ["https://example.com/a"])
+            self.assertIn("192.1万ルピー", validate.call_args.args[0][0]["title"])
+            self.assertIn("[CURRENCY_UNIT_WITHHELD] 2026-10-07 https://example.com/b", log.getvalue())
+            self.assertIn("16.90万ルピー", sheet.read_text(encoding="utf-8"))
 
     def test_collection_guard_runs_after_the_last_llm_rewrite_before_caching(self):
         tree = ast.parse((COLLECTION / "google_search_script.py").read_text(encoding="utf-8-sig"))

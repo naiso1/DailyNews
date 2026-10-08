@@ -52,6 +52,18 @@ class SourceArticleExtractionTests(unittest.TestCase):
         self.assertEqual(self.fetch("https://www.plasticsengineering.org/news/story/", html),
                          "Additives improve polymer surface performance.")
 
+    def test_carnewschina_recommendations_removed_from_fresh_and_cached_bodies(self):
+        url = "https://carnewschina.com/2026/10/07/market/"
+        body = "Li Auto plans to enter Thailand."
+        noisy = body + " Recommended for you Li i9 has a new aerodynamic body."
+        for edition in ("interior", "exterior"):
+            with self.subTest(edition=edition):
+                self.env["_article_text_cache"].clear()
+                self.assertEqual(self.fetch(url, "<article>" + noisy + "</article>", edition), body)
+                cache_key = (self.env["ARTICLE_TEXT_VERSION"], url) if edition == "exterior" else url
+                self.env["_article_text_cache"][cache_key] = noisy
+                self.assertEqual(self.env["fetch_article_text"](url), body)
+
 
 if __name__ == "__main__":
     unittest.main()

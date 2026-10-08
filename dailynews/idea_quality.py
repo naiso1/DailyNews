@@ -9,6 +9,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from .article_text import trim_article_noise
 
 VERSION = "2026-10-06-v1"
 FIELDS = ("sourceFact", "proposal", "benefit", "verification")
@@ -16,20 +17,24 @@ CHECKS = ("sourceMatch", "logicalConnection", "concreteProposal", "hypothesisCle
 
 
 def evidence(item):
-    original = str(item.get("originalDesc") or "").strip()
+    original = trim_article_noise(item.get("originalDesc"), item.get("url")).strip()
     if original:
         text = str(item.get("originalTitle") or "") + "\n" + original[:24000]
         excerpt = str(item.get("sourceExcerpt") or "").strip()
         if excerpt and excerpt in original and excerpt not in text:
             text += "\n" + excerpt
-        return text + "\n" + str(item.get("verifiedIdeaExcerpt") or "")
+        # A previously verified page excerpt may still belong to its related
+        # story links. Do not reintroduce anything excluded from the body.
+        excerpts = [part for part in str(item.get("verifiedIdeaExcerpt") or "").splitlines()
+                    if part.strip() and _plain(part) in _plain(original)]
+        return text + "\n" + "\n".join(excerpts)
     return str(item.get("title") or "") + "\n" + str(item.get("desc") or "") + "\n" + str(item.get("verifiedIdeaExcerpt") or "")
 
 
-def sources_for_prompt(items):
+def sources_for_prompt(items, *, evidence_limit=3000):
     return [{"id": it["newsId"], "title": it.get("title", ""),
              "evidenceLevel": "original" if it.get("originalDesc") else "collected_summary",
-             "evidence": evidence(it)[:3000] + "\n" + str(it.get("verifiedIdeaExcerpt") or "")} for it in items]
+             "evidence": evidence(it)[:evidence_limit]} for it in items]
 
 
 def attach_verified_excerpts(items, cache):
@@ -188,7 +193,7 @@ def review_prompt(edition, candidates, sources):
     references = []
     for source in sources:
         text = evidence(source)
-        context = [text[:600], str(source.get("verifiedIdeaExcerpt") or "")]
+        context = [text[:600]]
         for candidate in candidates:
             for quote in candidate["sourceQuotes"]:
                 if quote["sourceId"] == source["newsId"]:

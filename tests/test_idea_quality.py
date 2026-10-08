@@ -43,6 +43,27 @@ class IdeaQualityTests(unittest.TestCase):
         self.assertIn("別IDへの補正は禁止", failures[0]["reason"])
         self.assertEqual(wrong["sourceNewsIds"], ["eu1744"])
 
+    def test_related_story_is_never_quote_evidence_even_when_previously_cached(self):
+        body = "The brand will enter Thailand. Recommended for you Another SUV uses black painted door handles."
+        source = {**self.sources[0], "url": "https://carnewschina.com/2026/10/07/market/",
+                  "originalDesc": body, "verifiedIdeaExcerpt": "Another SUV uses black painted door handles."}
+        self.assertNotIn("black painted", q.evidence(source))
+        self.assertNotIn("black painted", json.dumps(q.sources_for_prompt([source])))
+        self.assertFalse(q.focus_evidence(source, "exterior"))
+        with self.assertRaisesRegex(ValueError, "原文に存在しない"):
+            q.prepare(self.idea, [source])
+        unchanged = {**source, "url": "https://example.com/market/"}
+        self.assertIn("Recommended for you", q.evidence(unchanged))
+
+    def test_exterior_anchor_uses_real_component_detail_missing_from_summary(self):
+        import auto_update_daily_news as updater
+        from dailynews.editions import get_edition
+        source = {"newsId": "cn97", "title": "BYDの新型EV", "desc": "航続距離1008km。",
+                  "url": "https://carnewschina.com/2026/10/07/new-ev/",
+                  "originalDesc": "The roof-mounted LiDAR-equipped system supports Urban NOA."}
+        with patch.object(updater, "EDITION", get_edition("exterior")):
+            self.assertEqual(updater.select_idea_anchor_groups([source], need_count=1), [[source]])
+
     def test_existing_id_with_unrelated_story_fails_semantic_check(self):
         passed, failures = q.review_candidates([self.idea], self.sources, "exterior", lambda _: self.review(sourceMatch=False, reason="本文と出典が異なる"), json.loads)
         self.assertFalse(passed)

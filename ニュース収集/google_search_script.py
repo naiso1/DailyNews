@@ -32,7 +32,7 @@ if str(ROOT) not in sys.path:
 from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
 from dailynews import exterior_scope, exterior_papers
-from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text
+from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text, trim_article_noise
 from dailynews.collection_digest import collection_window, published_news, published_issue, published_row
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem as base_summary_language_problem
 from dailynews.deduplication import normalize_article_url, recent_title_history, same_story, deduplicate_articles
@@ -2405,7 +2405,7 @@ def fetch_article_text(url):
     if cache_key in _article_text_cache:
         cached_text = _article_text_cache[cache_key]
         if not strict_source or not unusable_text(cached_text):
-            return cached_text
+            return trim_article_noise(cached_text, url)
         _article_text_cache.pop(cache_key, None)
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15)
@@ -2467,6 +2467,7 @@ def fetch_article_text(url):
         main = soup.find("article") or soup.find("main") or soup.body or soup
     text = " ".join(main.stripped_strings)
     text = normalize_text(text)
+    text = trim_article_noise(text, url)
     if strict_source and unusable_text(text):
         print(f"  [FETCH_BLOCKED] Unusable article text: {url}")
         return ""

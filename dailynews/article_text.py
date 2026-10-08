@@ -1,8 +1,24 @@
 """Decode exterior source pages and reject transport/error pages as evidence."""
 import codecs
 import re
+from urllib.parse import urlsplit
 
 ARTICLE_TEXT_VERSION = "exterior-html-v2"
+
+
+def trim_article_noise(text, url):
+    """Remove a known site's recommendation/footer boundary from saved bodies.
+
+    Apply to cached CSV evidence too. Scope the marker to the source domain so
+    ordinary article prose on other sites is not silently discarded.
+    """
+    text = str(text or "")
+    host = (urlsplit(str(url or "")).hostname or "").lower().removeprefix("www.")
+    if host == "carnewschina.com":
+        match = re.search(r"\bRecommended for you\b|\bMost important news in your inbox\b", text, re.I)
+        if match:
+            return text[:match.start()].rstrip()
+    return text
 
 
 def decode_html(content, content_type=""):

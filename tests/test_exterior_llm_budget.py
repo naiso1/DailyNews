@@ -1,6 +1,7 @@
 """Oversized Chinese source regression; no collector import or real HTTP/LLM."""
 
 import ast
+import json
 from copy import deepcopy
 from pathlib import Path
 import sys
@@ -13,10 +14,49 @@ sys.path.insert(0, str(ROOT))
 from dailynews.exterior import assessment_prompt
 from dailynews.llm_budget import (
     CHAT_TOKEN_RESERVE, IMAGE_TOKEN_RESERVE, OMISSION, budget_exterior_payload,
+    budget_source_prompt,
 )
 
 
 class ExteriorLLMBudgetTests(unittest.TestCase):
+    def test_regional_analysis_keeps_six_sources_valid_json_and_qualifications(self):
+        sources = [{"id": f"jp{i}", "title": "外装部品の開発", "evidenceLevel": "original",
+                    "evidence": "新しい樹脂部品。" + ('本文に引用符"と改行\nを含む。' * 800) + "量産採用は未定。"}
+                   for i in range(6)]
+        before = deepcopy(sources)
+        prefix = "全記事の出典を明記。\n根拠: "
+        suffix = '\nJSONのみ: {"analysis":"...","ideas":[]}'
+        prompt = budget_source_prompt(prefix, sources, suffix)
+        records = json.loads(prompt[len(prefix):-len(suffix)])
+        self.assertEqual([r["id"] for r in records], [s["id"] for s in sources])
+        for record in records:
+            self.assertTrue(record["evidence"].startswith("新しい樹脂部品。"))
+            self.assertTrue(record["evidence"].endswith("量産採用は未定。"))
+            self.assertIn(OMISSION, record["evidence"])
+            self.assertNotIn("\ufffd", record["evidence"])
+        self.assertEqual(sources, before)
+        self.assertLessEqual(len(prompt.encode("utf-8")) + 1200 + CHAT_TOKEN_RESERVE + 128, 8192)
+
+    def test_regional_budget_preserves_short_sources_and_rejects_oversized_rules(self):
+        sources = [{"id": "cn1", "evidence": "短い原文。"}]
+        self.assertEqual(budget_source_prompt("Rules\n", sources, "\nJSON"),
+                         "Rules\n" + json.dumps(sources, ensure_ascii=False) + "\nJSON")
+        with self.assertRaises(ValueError):
+            budget_source_prompt("規則" * 5000, sources, "JSON")
+
+    def test_publisher_analysis_prompt_is_bounded_before_the_model_call(self):
+        import auto_update_daily_news as updater
+        from dailynews.editions import get_edition
+        from unittest.mock import patch
+        items = [{"newsId": f"jp{i}", "title": "樹脂バンパーを開発", "desc": "外装の試作品。",
+                  "originalDesc": "部品の詳細。" * 1000 + "量産採用は未定。"} for i in range(6)]
+        with patch.object(updater, "EDITION", get_edition("exterior")):
+            prompt = updater.make_country_prompt("2026-10-07", "jp", items, "")
+        self.assertLessEqual(len(prompt.encode("utf-8")) + 1200 + CHAT_TOKEN_RESERVE + 128, 8192)
+        records = json.loads(prompt.split("根拠: ", 1)[1].split("\nideasは", 1)[0])
+        self.assertEqual(len(records), 6)
+        self.assertTrue(all(r["evidence"].strip().endswith("量産採用は未定。") for r in records))
+
     def assert_fits(self, payload, context=8192):
         text_bytes, images = 0, 0
         for message in payload["messages"]:

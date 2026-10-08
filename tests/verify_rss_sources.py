@@ -37,12 +37,13 @@ def collection_helpers(session):
     from dateutil import parser
     if str(ROOT) not in sys.path:
         sys.path.insert(0, str(ROOT))
-    from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text
+    from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text, trim_article_noise
     env = {"re": re, "BeautifulSoup": BeautifulSoup, "parser": parser, "urlparse": urlparse, "urljoin": urljoin,
            "EDITION": SimpleNamespace(id="interior"),
            "JST": timezone(timedelta(hours=9)),
            "ARTICLE_TEXT_VERSION": ARTICLE_TEXT_VERSION, "decode_html": decode_html,
            "is_error_page": is_error_page, "unusable_text": unusable_text,
+           "trim_article_noise": trim_article_noise,
            "requests": SimpleNamespace(get=lambda url, **kwargs: bounded_get(session, url)),
            "_article_text_cache": {}}
     constants = {"SUSPICIOUS_IMAGE_MARKERS", "HEADERS", "SUMMARY_HTML_CHARS"}
