@@ -63,6 +63,22 @@
     return null;
   }
 
+  function isMonetaryPound(text, match) {
+    // Bare Japanese "pound" can denote mass, force or torque. Never infer GBP
+    // just from the country; American articles also contain real UK prices.
+    const boundary = /[。！？!?;；\n、，]|(?<!\d)[,.]|[,.](?!\d)/;
+    const before = text.slice(0, match.index).split(boundary).at(-1).slice(-100);
+    const after = text.slice(match.index + match[0].length).split(boundary)[0].slice(0, 100);
+    const local = `${before}${match[0]}${after}`;
+    const physical = /重量|質量|車重|体重|重さ|軽量|軽く|重く|荷重|積載|牽引|けん引|けんいん|トルク|ダウンフォース|キログラム|キロ\b|\b(?:kg|lbs?|weight|weighs?|torque|downforce|payload|towing)\b/i;
+    const compound = /^\s*[・･·\-‐‑–—]?\s*(?:フィート|フット|インチ|毎平方|平方|(?:ft|feet|inch(?:es)?)\b|\/\s*(?:平方|sq\b|in\b|ft\b))/i;
+    if (compound.test(after) || physical.test(local)) return false;
+    const financial = /価格|販売|売価|発売|受注|購入|買える|買収|売却|支払|費用|コスト|投資|出資|融資|資金|予算|補助金|助成金|値下げ|値引き|値上げ|値段|月額|年額|代金|契約|補償|賠償|準備金|安い|安く|割引|落札|売上|利益|損失|節約|\b(?:price[ds]?|pricing|costs?|invest(?:ment|s|ed)?|budget|sale)\b/i;
+    // Nearby money evidence is preferred. A money-only article can also provide
+    // context for a bare amount in its headline; mixed/unclear uses stay unconverted.
+    return financial.test(local) || (!physical.test(text) && financial.test(text));
+  }
+
   function extractPrices(value, country = "") {
     const text = String(value || "").normalize("NFKC");
     const prices = [];
@@ -76,6 +92,7 @@
       if (/\d\s+$/.test(text.slice(0, match.index))) continue;
       if (/[A-Za-z]/.test(before) || (/[A-Za-z]/.test(after) && (g.scale1 || g.scale2 || g.suffix))) continue;
       const tokens = [g.prefix, g.mid, g.prefix2, g.suffix].filter(Boolean);
+      if (tokens.includes("ポンド") && !tokens.some(t => /^(GBP|£|英ポンド)$/i.test(t)) && !isMonetaryPound(text, match)) continue;
       let currencies = tokens.map(t => currencyCode(t, country, text));
       if (!tokens.length && country === "in" && /lakh|lac|crore|ラック|ラク|クロール/i.test(g.scale1 || g.scale2 || "")) {
         currencies = [{ code: "INR", inferred: true }];

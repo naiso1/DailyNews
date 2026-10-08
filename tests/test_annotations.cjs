@@ -51,6 +51,52 @@ test("compound Japanese money, complete ranges and invalid unit order", () => {
   assert.equal(extractPrices("31万3千ドル", "jp").length, 0);
 });
 
+test("pounds used for load, mass, torque and force are never converted to GBP", () => {
+  for (const raw of [
+    "最大165ポンド（約75kg）まで耐荷重を持つルーフラック。",
+    "3500ポンド牽引対応のヒッチを備える。",
+    "Track Package採用で150ポンド軽量化。",
+    "重量は150〜200ポンド。", "積載量3500ポンド。",
+    "最大165.3ポンドのダウンフォースを発生する。",
+    "1007ポンドフィート", "1007ポンド・フィート", "1007ポンド-ft",
+    "30ポンド/平方インチ", "165ポンド（75kg）", "165ポンド", "米国で3500ポンド。",
+  ]) {
+    for (const country of ["us", "eu", "jp"]) assert.equal(extractPrices(raw, country).length, 0, raw);
+  }
+});
+
+test("actual UK prices and investments retain conversion beside separate weight claims", () => {
+  for (const [raw, expected] of [
+    ["英国で21,610ポンドから販売される。", 21610],
+    ["新工場へ5億ポンドを投資する。", 5e8],
+    ["5億ポンド（6.74億ドル）の投資も発表された。", 5e8],
+    ["価格は12万ポンド。重量は3500ポンド。", 120000],
+    ["車重3500ポンド、価格は3万ポンドから。", 30000],
+    ["ルーフ荷重165ポンド。英国の価格は3万ポンド。", 30000],
+    ["月額337ポンド（3年契約）。", 337],
+    ["新型EVが英国で2万ポンドから発売。軽量プラットフォームを採用。", 20000],
+    ["平均700ポンドの補償。", 700], ["628万ポンドの契約を獲得。", 6280000],
+    ["£100", 100], ["100 GBP", 100], ["100英ポンド", 100], ["GBP 100ポンド", 100],
+  ]) {
+    const prices=extractPrices(raw, "us").filter(p=>p.code === "GBP");
+    assert.equal(prices.length, 1, raw);
+    assert.equal(prices[0].amount, expected, raw);
+  }
+  const range=extractPrices("価格は3万〜4万ポンド。")[0];
+  assert.equal(range.amount, 30000);
+  assert.equal(range.end, 40000);
+});
+
+test("October 7 exterior cards hide physical pound conversions and retain USD prices", () => {
+  const snapshot={base:"JPY",date:"2026-10-08",rates:{GBP:200,USD:150}};
+  const now=new Date("2026-10-08T12:00:00+09:00");
+  for(const desc of ["最大165ポンド（約75kg）まで耐荷重を持つルーフラック。", "3500ポンド牽引対応のヒッチ。"])
+    assert.equal(renderCurrency({desc,country:"us"},snapshot,now), "");
+  const html=renderCurrency({desc:"トルク1007ポンドフィート。価格は13万500ドルから。",country:"us"},snapshot,now);
+  assert.match(html,/130,500 USD/);
+  assert.doesNotMatch(html,/GBP|1007ポンド/);
+});
+
 test("September 11 INR corrections and us1620 yen conversion", () => {
   const snapshot = { base: "JPY", date: "2026-09-10", rates: { INR: 1.61539537, USD: 154.1752754821 } };
   const now = new Date("2026-09-11T12:00:00+09:00");
