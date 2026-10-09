@@ -1394,7 +1394,10 @@ def select_idea_anchor_groups(items: list, need_count: int = 2) -> list[list[dic
         and it.get("title")
         and it.get("desc")
         and not _non_passenger_vehicle_kind(it)
-        and not _is_out_of_scope_idea(f"{it.get('title', '')} {it.get('desc', '')}")
+        # A vehicle article may cover seats alongside displays or door trim.
+        # Scope belongs to the proposed component, not every word in the article.
+        # generate_country checks original component evidence before generation;
+        # independent review and dedupe still reject out-of-scope proposals.
     ]
     preferred = [
         it

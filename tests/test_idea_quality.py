@@ -135,12 +135,57 @@ class IdeaQualityTests(unittest.TestCase):
         source={'newsId':'eu1','originalDesc':'The electric car offers a 441-litre boot.'}
         self.assertIn('441-litre boot',q.focus_evidence(source,'interior'))
 
+    def test_mixed_seat_article_keeps_display_evidence_but_seat_proposal_fails(self):
+        import auto_update_daily_news as updater
+        previous = updater.EDITION.id
+        try:
+            updater.configure_edition('interior')
+            source = {'newsId': 'cn1770', 'title': '大型ディスプレイと革シート',
+                      'desc': '大型画面と通風シートを採用。',
+                      'originalDesc': 'The interior has ventilated seats. A 30-inch panoramic screen is fitted.'}
+            self.assertEqual(updater.select_idea_anchor_groups([source], 1), [[source]])
+            self.assertIn('30-inch panoramic screen', q.focus_evidence(source, 'interior'))
+            self.assertTrue(updater._is_out_of_scope_idea('通風シートのクッションを変更する'))
+        finally:
+            updater.configure_edition(previous)
+
+    def test_generic_cabin_headlines_do_not_hide_actual_component_sentences(self):
+        source = {'originalDesc': 'New interior revealed.\nAn exclusive cabin.\nLuxury interior.\nNew cabin colours.\nThe car has a 30-inch screen.'}
+        self.assertEqual(q.focus_evidence(source, 'interior'), 'The car has a 30-inch screen.')
+        for text in ['The interior has ventilated seats.', 'Three cars were displayed at the event.',
+                     'The braking and steering systems have redundancy.']:
+            self.assertFalse(q.focus_evidence({'originalDesc': text}, 'interior'))
+
+    def test_unmarked_candidate_is_audited_not_silently_relabelled(self):
+        bad = {**self.idea, 'proposal': '外観カバーを交換できる構造を設けた。'}
+        passed, rejected = q.review_candidates([bad], self.sources, 'exterior',
+                                              lambda _: self.fail('unmarked proposal must not pass'), json.loads)
+        self.assertFalse(passed)
+        self.assertEqual(rejected[0]['candidate']['proposal'], bad['proposal'])
+        prompt = q.generation_prompt('exterior', '2026-10-08', 'cn', self.sources, [], [], rejected)
+        self.assertNotIn(bad['proposal'], prompt)
+        self.assertIn('開発案として、', prompt)
+
     def test_exterior_lighting_glass_roof_and_hood_are_component_evidence(self):
         for text in ['The car uses smiling taillights.', 'A glass roof blocks UV light.',
                      'The logo is fitted to the bonnet.', 'The mirror sits on a narrow arm.',
                      '細いテールランプとガラスルーフを採用する。']:
             with self.subTest(text=text):
                 self.assertIn(text,q.focus_evidence({'originalDesc':text},'exterior'))
+
+    def test_rear_wing_spelling_does_not_discard_reviewed_exterior_concept(self):
+        import auto_update_daily_news as updater
+        previous = updater.EDITION.id
+        try:
+            updater.configure_edition('exterior')
+            for part in ['リアウイング', 'リアウィング', 'リヤウイング', 'GTウィング', 'rear wing']:
+                text = part + 'の端部形状を変更して騒音を比べる案。'
+                self.assertFalse(updater._is_out_of_scope_idea(text), part)
+                self.assertTrue(q.focus_evidence({'originalDesc': text}, 'exterior'), part)
+                self.assertEqual(len(updater.dedupe_ideas([{'title':part+'の端部形状', 'desc':text}], [], 1)), 1)
+            self.assertTrue(updater._is_out_of_scope_idea('A new wing chair for a living room'))
+        finally:
+            updater.configure_edition(previous)
 
     def test_repeated_headline_does_not_hide_window_component_detail(self):
         text=('A new canopy is available.\n'*5)+'The side windows open with hydraulic dampers.'
@@ -214,11 +259,13 @@ class IdeaQualityTests(unittest.TestCase):
                 q.prepare({**self.idea, **changes}, self.sources)
 
     def test_future_prototype_is_a_proposal_but_completed_prototype_is_not(self):
-        future={**self.idea,'proposal':'本体を共通にして外観カバーを交換できる構造を試作する。'}
-        prepared=q.prepare(future,self.sources)
-        self.assertEqual(prepared['proposal'],future['proposal'])
-        with self.assertRaisesRegex(ValueError,'採用実績'):
-            q.prepare({**future,'proposal':future['proposal'].replace('試作する','試作した')},self.sources)
+        for future_verb, past_verb in [('試作する', '試作した'), ('試作品を設計する', '試作品を設計した'),
+                                        ('試作品を作る', '試作品を作った')]:
+            future={**self.idea,'proposal':'外観カバーを交換できる構造の'+future_verb+'。'}
+            prepared=q.prepare(future,self.sources)
+            self.assertEqual(prepared['proposal'],future['proposal'])
+            with self.assertRaisesRegex(ValueError,'採用実績'):
+                q.prepare({**future,'proposal':future['proposal'].replace(future_verb,past_verb)},self.sources)
 
     def test_storage_location_and_pickup_canopy_are_not_wrongly_excluded(self):
         import auto_update_daily_news as updater

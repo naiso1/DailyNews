@@ -123,7 +123,7 @@ def out_of_scope_idea(text):
     # A pickup canopy is an exterior enclosure. Keep this idea-only vocabulary
     # separate from article admission, where "canopy" also describes buildings.
     return not (has_product_details(text) or BODY.search(str(text or ""))
-                or re.search(r"キャノピー|\bcanop(?:y|ies)\b", str(text or ""), re.I))
+                or re.search(r"キャノピー|(?:リア|リヤ|GT)ウ[イィ]ング|(?<![a-z])rear[ -]wings?(?![a-z])|\bcanop(?:y|ies)\b", str(text or ""), re.I))
 
 
 def select_items(items, limit=6):
