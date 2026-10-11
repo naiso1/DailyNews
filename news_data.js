@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-10-09 01:33";
+window.NEWS_UPDATED_AT = "2026-10-12 02:01";
 
 window.LOADED_NEWS_DATA = [
 
@@ -237952,6 +237952,774 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "in",
         img: "https://www.motoroids.com/wp-content/uploads/2026/10/Windor-1.jpg",
+        note: ""
+    },
+    // 2026-10-09 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp1999",
+        title: "エムリット、ランクル70専用エアコンフィルター発売",
+        desc: "エムリットがランドクルーザー70専用の「MLITFILTER S-LC70」を発売した。純正のメッシュ状フィルターでは捕集しきれない細かなホコリや花粉まで対応する構造で、8000kmの実走テストを経て開発された。価格は税込7700円。",
+        url: "https://news.yahoo.co.jp/articles/ccb0c4d13a7b09b59e153c4020e89ef7701ea049",
+        source: "WEB CARTOP",
+        date: "2026-10-09",
+        tags: [],
+    
+        sourceExcerpt: "高品質なエアコンフィルターで定評を得ているエムリットが9月末、ランドクルーザー70専用のエアコンフィルター「MLITFILTER（エムリットフィルター）S-LC70」を発売した。",
+        interiorScore: 90,
+        interiorReason: "Specific aftermarket cabin comfort product (air filter) addressing dust/pollen f",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261009-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2001",
+        title: "VW純正アンテナ活用で後付けTVキット発売",
+        desc: "コードテックCAMはフォルクスワーゲン車向けに、純正アンテナとディスプレイを活用した後付けテレビチューナーセットを発売した。専用ハーネスで接続しSmart CarLink経由で映像を表示するため、ガラス面にフィルムアンテナを貼る必要がない。",
+        url: "https://news.yahoo.co.jp/articles/eac697ad3c129e3d24e0ff85c04494a563aaf6ab",
+        source: "Auto Messe Web",
+        date: "2026-10-09",
+        tags: ["AR", "ディスプレイ"],
+    
+        sourceExcerpt: "テレビチューナーからの映像は、「Smart CarLink」を介して純正ディスプレイに表示する。",
+        interiorScore: 93,
+        interiorReason: "seat and display plus cabin image; interior accessory/product",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261009-00010006-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2003",
+        title: "アルパイン、キャラバン後席空調を最適化する専用コントローラー",
+        desc: "アルパインは日産キャラバンの後席向けに「KTX-RAC-CV-26キャラバン専用リアエアコン・コントローラー」を発表した。後席ルーフとサイドパネル付近の2つの温度センサーで体感温度を監視し、冷暖房を制御する。純正と同様のマニュアル操作に加え、「MAX COOL」「MAX HEAT」ボタンや付属リモコンも備える。対応するのは2021年10月以降のリアクーラー/ヒーター付き車で、価格は5万5000円（税込）である。",
+        url: "https://news.yahoo.co.jp/articles/d8499e3768927758f4358dc616b6db79b303f375",
+        source: "ベストカーWeb",
+        date: "2026-10-09",
+        tags: ["センシング"],
+    
+        sourceExcerpt: "純正と同じマニュアル操作を選択できるほか、「MAX COOL」「MAX HEAT」ボタンも用意。",
+        interiorScore: 90,
+        interiorReason: "Detailed review of a specific aftermarket rear HVAC controller with concrete HMI",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/default.jpg",
+        note: ""
+    },
+    {
+        id: "us1814",
+        title: "アルファロメオCuorerosso、4席レイアウトと赤いシートバックを予告",
+        desc: "2026年パリモーターショーで初公開予定のアルファロメオ「Cuorerosso」は、4席レイアウトを採用するGTモデルとなる可能性がある。ティザー映像では赤いシートバックと黒い三角形ヘッドレストを備えたスポーティなシートデザインが確認でき、動力源には3.0リットルV6エンジンが搭載される見込みだ。",
+        url: "https://www.motor1.com/news/811404/alfa-romeo-sports-car-interior-teaser/",
+        source: "Motor1",
+        date: "2026-10-09",
+        tags: ["シート"],
+    
+        sourceExcerpt: "We expected the Cuorerosso to take a page from the 33 Stradale’s playbook, including its two-seat coupe layout.",
+        interiorScore: 81,
+        interiorReason: "Focuses on the four-seat layout and specific seat design details (bolsters, head",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/P3VBb2/s3/alfa-romeo-cuorerosso-interni.jpg",
+        note: ""
+    },
+    {
+        id: "us1815",
+        title: "VW ID.Tiguan、物理ボタン復活と15インチ画面で内装刷新",
+        desc: "VolkswagenはID.4の後継としてID. Tiguanを発表し、エアコンやステアリングホイールに物理ボタンを復活させた。内装には15.0インチの中央ディスプレイと、欧州初となる12.0インチのパッセンジャー用ディスプレイを搭載する。",
+        url: "https://www.motor1.com/news/811249/volkswagen-id-tiguan-debut-details/",
+        source: "Motor1",
+        date: "2026-10-09",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "Tiguan gets physical controls for important functions, including the a",
+        sourceExcerptEnd: "o uses physical buttons instead of touch-sensitive controls.",
+        interiorScore: 68,
+        interiorReason: "Detailed breakdown of the interior refresh including physical controls for HVAC",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/ojEJml/s3/2027-volkswagen-id.-tiguan.jpg",
+        note: ""
+    },
+    {
+        id: "us1816",
+        title: "ホンダ シビックSport-L、レザーシートとヒーターをガス車に追加",
+        desc: "2027年型シビックの新グレードSport-Lは、レザートリムやフロントシートヒーター、パワーシートなどを備えながらハイブリッド化しない。価格はセダンで29,790ドルからとなり、従来はハイブリッド限定だった快適装備をガソリン車でも享受できる構成だ。",
+        url: "https://www.motor1.com/news/811294/2027-honda-civic-sport-l/",
+        source: "Motor1",
+        date: "2026-10-09",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "Slotted between the Sport and Sport Hybrid, the new Sport-L adds leather",
+        sourceExcerptEnd: "seats, a power-adjustable driver's seat, and dual-zone automatic climate control.",
+        interiorScore: 62,
+        interiorReason: "The article details specific interior comfort features (leather upholstery, heat",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/Rqbkkr/s3/2027-honda-civic-sedan-sport-l.jpg",
+        note: ""
+    },
+    {
+        id: "us1817",
+        title: "Rivian、ハロウィン向けゴーストバスターズ内装テーマを配信",
+        desc: "Rivianは2026年ハロウィン向けに、R1T・R1S・R2へ無料OTAで「ゴーストバスターズ」テーマを実装する。赤いトグル操作で内装照明とオーディオが同期し、ドライバーディスプレイには専用アプリが表示される。",
+        url: "https://www.motor1.com/news/811283/rivian-evs-get-a-ghostbusters/",
+        source: "Motor1",
+        date: "2026-10-09",
+        tags: ["ディスプレイ", "コネクテッド", "音響"],
+    
+        sourceExcerpt: "Owners get a red toggle that syncs interior lighting, themed audio and",
+        sourceExcerptEnd: "plus a dedicated Ghostbusters app built into the driver display.",
+        interiorScore: 28,
+        interiorReason: "Details specific HMI and cabin UX features including a driver display app, inter",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/RqbkK9/s3/rivian-ghostbusters-ecto-r1.jpg",
+        note: ""
+    },
+    {
+        id: "eu1781",
+        title: "VW ID Tiguan、物理ボタン復活と初のパッセンジャーディスプレイ搭載",
+        desc: "ID 4の後継となるID Tiguanは、物理ボタンや気候制御スイッチを復活させ、ピラー間を覆うダッシュボードスクリーンを採用した。さらにYouTube再生対応の乗員向けディスプレイを搭載し、メーターパネルも複数デザインから選択可能となっている。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/vw-id-tiguan-revealed-overhauled-id-4-373-mile-range",
+        source: "AUTOCAR UK",
+        date: "2026-10-09",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "The changes are similarly dramatic inside: physical buttons, including climate control switches,",
+        sourceExcerptEnd: "masse, and the dashboard houses screens from pillar to pillar.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/01_vw_id4_r_line_3_4_front.jpg?itok=gTXvUS5f",
+        note: ""
+    },
+    {
+        id: "eu1782",
+        title: "英国3万ポンド未満のEV比較、Abarth 500eは158マイル走行可能",
+        desc: "英国市場で3万ポンド未満の電気自動車が増加し、Abarth 500eやBYD Dolphin Surfなど多様なモデルが揃っている。Citroën ë-C3は政府補助金適用で18,495ポンドから販売され、BYD Dolphin Surfは18,675ポンドからと手頃な価格帯を形成している。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/abarth-vw-every-sub-%C2%A330k-electric-car-sale-%E2%80%93-and-how-far-they-go",
+        source: "AUTOCAR UK",
+        date: "2026-10-09",
+        tags: ["AR", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Compact, efficient and cleverly packaged, ultra-low pricing has helped BYD’s city car find strong demand in the UK.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/everycar.jpg?itok=6lPGfrb5",
+        note: ""
+    },
+    {
+        id: "eu1783",
+        title: "VW ID. Tiguan、物理スイッチとレトロメニュー採用",
+        desc: "ID.4の代替となる新ID. Tiguanは、ピアノブラックボタンに代わり物理コントロールを備えたステアリングホイールを採用した。また、15インチタッチスクリーンには、過去のGolfやTiguanなどのデザインを再現するレトロメニュー機能が搭載されている。",
+        url: "https://www.autoexpress.co.uk/volkswagen/tiguan/370620/new-volkswagen-id-tiguan-revealed-first-look-id4s-replacement",
+        source: "Auto Express",
+        date: "2026-10-09",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "With this mode activated, the main screen can transition to mimic six",
+        sourceExcerptEnd: "to the Tiguan and even the Race Touareg and Beetle.",
+        interiorScore: 77,
+        interiorReason: "Detailed description of interior updates including physical steering wheel contr",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/Volkswagen%20ID%20Tiguan%202026-20.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn1777",
+        title: "BYD初のOcean系MPV、屋根LiDAR装備の試作車を確認",
+        desc: "BYD初のOceanシリーズMPV試作車が中国で確認され、2026年末の発売が予定されている。北京モーターショーで公開されたコンセプト車「Ocean-V」では180度回転するフロントシートや収納式ステアリングホイールなどエンターテインメントに特化した内装が特徴だった。しかし今回の試作車は従来のMPV的な外観デザインを採用しており、本生産モデルの具体的な内装構成やシートの仕様については未確認である。",
+        url: "https://carnewschina.com/2026/10/09/byd-ocean-mpv-spied-testing-with-roof-lidar-ahead-of-year-end-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-10-09",
+        tags: ["AR", "シート", "バッテリー"],
+    
+        sourceExcerpt: "The Ocean-V concept featured a five-seat lounge with 180-degree swivelling front seats,",
+        sourceExcerptEnd: "central display and an interior designed for entertainment and camping.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/1200x0_1_autohomecar__chxpvmrihhcag-aaaae2q76umcw388-large-large-1500x895.jpeg",
+        note: ""
+    },
+    {
+        id: "cn1778",
+        title: "日産フロンティアProのメキシコ市場投入が見込まれる",
+        desc: "日産は中国開発のピックアップトラック「フロンティア プロ」をメキシコで発売し、PHEVモデルが最大出力410馬力と純電動航続距離135kmを実現した。価格は96万9,900ペソからで、2027年までにオーストラリアやニュージーランドでは「ナバラ プロ」として展開される予定である。",
+        url: "https://carnewschina.com/2026/10/09/nissan-to-launches-china-developed-frontier-pro-pickup-in-mexico-and-global-markets-report-says/",
+        source: "CarNewsChina - ICE",
+        date: "2026-10-09",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The PHEV model is capable of towing up to 3.5 tons and offers a pure electric NEDC range of 135 km .",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/e59bbee78987-12-e1791537290408_webhook_1500x900_q85_1791537619.jpg",
+        note: ""
+    },
+    {
+        id: "cn1779",
+        title: "理想汽車が2026年型Li i6を発表",
+        desc: "理想汽車は2026年型Li i6の発表を10月28日に設定し、中国国内485店舗での展示とパリモーターショーへの出展を予定している。同車には自社開発の5CバッテリーとMachチップを搭載し、半隠し式ドアハンドルを採用する。価格は未定だが、納車は11月上旬から開始される見込みである。",
+        url: "https://cnevpost.com/2026/10/09/li-auto-launch-2026-li-i6-oct-28/",
+        source: "CnEVPost - All",
+        date: "2026-10-09",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026100903151622.jpg",
+        note: ""
+    },
+    {
+        id: "cn1780",
+        title: "XPeng P7+に内外装を刷新する「ダークナイトパッケージ」が追加された。",
+        desc: "XpengはP7+向けにミッドナイトブラックとラバグレーの内装を組み合わせる「ダークナイト」パッケージの販売を開始した。赤いシートベルトやメタリック調トリム、20インチホイールなどが備わり、通常1万元の価格が期間限定で6千元となる。",
+        url: "https://cnevpost.com/2026/10/09/xpeng-launches-dark-knight-package-for-p7-sedan-echoing-nios-design-update-playbook/",
+        source: "CnEVPost - All",
+        date: "2026-10-09",
+        tags: ["シート"],
+    
+        sourceExcerpt: "The package includes a new Midnight Black paint finish and a Lava Gray interior, paired with exclusive red seat belts and seat stitching.",
+        interiorScore: 55,
+        interiorReason: "The article details a specific interior styling package (Lava Gray trim, red sti",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026100902401977.jpg",
+        note: ""
+    },
+    {
+        id: "in1856",
+        title: "JSW Combat、15.6インチディスプレイと通気シート採用",
+        desc: "JSW Combatは、15.6インチの大型タッチスクリーンや10.6インチのデジタルメーター、通気性付きフロントシートを備える。26.7kWhバッテリー搭載で航続距離は1,000km超とされる。",
+        url: "https://www.indiacarnews.com/news/new-hybrid-suv-coming-this-december-offers-1000km-range-69147/",
+        source: "IndiaCarNews",
+        date: "2026-10-09",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "As a premium offering, the new JSW plug-in hybrid SUV is expected",
+        sourceExcerptEnd: "powered and ventilated front seats, ambient lighting, and many more.",
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/07/Untitled-design-12.webp",
+        note: ""
+    },
+    {
+        id: "in1860",
+        title: "トヨタ、フォートナー特別仕様車リーダーエディションをインドで発売",
+        desc: "2026年型トヨタ・フォートナーの特別仕様車「リーダーエディション」がインドで発売され、価格は36.51 lakhから38.72 lakh（ex-showroom）に設定された。内装では黒とマルーンのツートーンシートやドアトリムを採用し、アンビエントライティングやTPMSなどを備える。",
+        url: "https://www.autopunditz.com/post/2026-toyota-fortuner-leader-edition-price-features",
+        source: "Auto Punditz",
+        date: "2026-10-09",
+        tags: ["シート", "イルミ"],
+    
+        sourceExcerpt: "The blacked-out styling elements, dual-tone upholstery, ambient lighting and TPMS are welcome additions.",
+        interiorScore: 89,
+        interiorReason: "Article details specific interior updates including dual-tone black and maroon u",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_77b0863132594000940f7b8495ccf789~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1785",
+        title: "Xpeng G9L、後席にリトラクタブルTVとマッサージ機能を備える",
+        desc: "Xpengはパリモーターショーで大型SUV「G9L」を公開した。2列目シートにはヒート・ベンチレーション・マッサージ機能やリトラクタブルディスプレイが備わる。6人乗り仕様では3列目を倒すと1,330リットルの荷室容量を実現し、540kWのDC充電で10〜80%まで12分未満で充電可能だ。",
+        url: "https://www.electrive.com/2026/10/09/l-is-for-luxury-first-seat-test-in-the-xpeng-g9l/",
+        source: "Electrive",
+        date: "2026-10-09",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "In the meantime, we were given an early opportunity to take a seat in the G9L - here's our first impressions.",
+        interiorScore: 76,
+        interiorReason: "Detailed description of luxury rear seat features including massage, ventilation",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/xpeng-g9l-sitzprobe-basel-2026-robin-engelhardt-01-400x263.jpg",
+        note: ""
+    },
+    {
+        id: "eu1787",
+        title: "シトロエンC3系にOUTDOOR追加、ミグー刺繍とダヌ色アクセント採用",
+        desc: "シトロエンはC3およびe-C3、Aircrossシリーズに上位グレードOUTDOORを追加した。内装ではAdvanced Comfortシートにレーザー刺繍のミグーとInfra Redステッチを施し、ダッシュボードやドアパネルにはDune色のアクセントを採用している。",
+        url: "https://electriccarsreport.com/2026/10/citroen-e-c3-and-e-c3-aircross-get-new-outdoor-trim-with-rugged-styling-and-more-features/",
+        source: "Electric Cars Report",
+        date: "2026-10-09",
+        tags: ["AI", "シート", "コックピット"],
+    
+        sourceExcerpt: "The interior also introduces Dune-colored accents across the fabric sections, dashboard, center armrest and door panels.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Citroen-e-C3-Aircross-OUTDOOR.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1788",
+        title: "Kia PV5 Passenger 7-seat、英国で£1,500補助金対象に",
+        desc: "KiaはPV5 Passenger 7-seatを英国のElectric Car Grant対象に加え、Essentialグレードの価格を£35,495とした。",
+        url: "https://electriccarsreport.com/2026/10/kia-pv5-passenger-7-seat-gets-1500-uk-electric-car-grant-now-starts-at-35495/",
+        source: "Electric Cars Report",
+        date: "2026-10-09",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The grant reduces the on-the-road price of the seven-seat electric MPV to £35,495 for the entry-level PV5 Passenger 7-seat Essential.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/06/Kia-PV5-7-seat-variant.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1789",
+        title: "JAECOO 7、英国で月間販売首位に返り咲き",
+        desc: "JAECOO 7は2026年9月に1万813台を登録し、英国の新車販売で再び首位を獲得した。同車は約3万ポンドからという価格設定と、プレミアムな内装および標準装備の充実が評価されており、中国勢の市場シェア拡大を象徴する結果となった。",
+        url: "https://electriccarsreport.com/2026/10/jaecoo-7-becomes-uks-best-selling-car-again-as-chinese-ev-brands-surge/",
+        source: "Electric Cars Report",
+        date: "2026-10-09",
+        tags: [],
+    
+        sourceExcerpt: "With pricing starting at roughly £30,000, the JAECOO 7 is dramatically cheaper",
+        sourceExcerptEnd: "relatively upscale interior and a long list of standard equipment.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Jaecoo-7.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "us1820",
+        title: "VW ID. Tiguan、物理スイッチとデジタルコックピットを備える",
+        desc: "ID.4の後継車となるID. Tiguanは、ステアリングホイールや気候制御に実体ボタンを採用し、デジタルコックピットで旧型VWのメーター表示を再現できる。筆者はR-Line内装が高く評価しており、物理操作の復活を歓迎している。",
+        url: "https://arstechnica.com/cars/2026/10/volkswagens-replacement-for-the-id-4-crossover-is-here/",
+        source: "Ars Technica - Cars",
+        date: "2026-10-09",
+        tags: ["コックピット"],
+    
+        sourceExcerpt: "Even more welcome are the plethora of physical controls: real buttons on",
+        sourceExcerptEnd: "and windows, and real physical air vents, not computer-controlled ones.",
+        interiorScore: 73,
+        interiorReason: "The article focuses heavily on the interior design refresh and HMI changes, spec",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.arstechnica.net/wp-content/uploads/2026/10/DB2026AU00895-1152x648.jpg",
+        note: ""
+    },
+    {
+        id: "cn1782",
+        title: "日産、中国開発ピックアップ「フロンティアプロ」をメキシコで発売",
+        desc: "日産は中国で開発・製造したピックアップ「フロンティアPro」を2026年10月にメキシコへ投入する。PHEV版は最大出力350馬力、トルク660Nmを発揮し、20kWhバッテリーと6kWのV2L機能を備える。価格はMXN 899,900からMXN 969,900に設定されている。",
+        url: "https://chinaevhome.com/2026/10/09/nissan-to-launch-china-developed-frontier-pro-pickup-in-mexico-and-globally/",
+        source: "ChinaEVHome",
+        date: "2026-10-09",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Frontier Pro specs include 5,527 mm length, 3,300 mm wheelbase, five seats,",
+        sourceExcerptEnd: "prices MXN 899,900 (about $49,500) and MXN 969,900 (about $53,400).",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/10/image-47.png?resize=640%2C427&ssl=1",
+        note: ""
+    },
+    {
+        id: "us1821",
+        title: "フェラーリ296 GTBカーボンシートとJBLオーディオ搭載車 米オークションで27万ドル",
+        desc: "2025年型フェラーリ296 GTBは、カーボンファイバー製レーシングシートにクオイオレザーとシグナルグリーンストライプを組み合わせ、JBLサウンドシステムや自動調光ミラーなどを備える。走行距離は約2,400マイルで、米国市場では現在27万ドルの入札額となっている。",
+        url: "https://bringatrailer.com/listing/2025-ferrari-296-gtb-8/",
+        source: "Bringatrailer.com",
+        date: "2026-10-09",
+        tags: ["シート", "新素材", "音響"],
+    
+        sourceExcerpt: "This 2025 Ferrari 296 GTB was ordered with approximately $122k in options,",
+        sourceExcerptEnd: "to carbon-fiber racing seats, which are trimmed in Cuoio leather.",
+        interiorScore: 60,
+        interiorReason: "Detailed description of high-end interior materials (carbon fiber, Cuoio leather",
+        imageInterior: false,
+        country: "us",
+        img: "https://bringatrailer.com/wp-content/uploads/2026/09/2025_ferrari_296-gtb_2025_ferrari_296-gtb_664c9f2f-2af6-45c8-8f64-de5488e52f24-wvh9t3-59530-59530-scaled-1-copy-2026-10-08-7uh-71165.jpg",
+        note: ""
+    },
+    {
+        id: "in1863",
+        title: "Kia Sorento、インドで7人乗り仕様として投入",
+        desc: "KiaはSorentoをインド市場に投入し、7人乗り仕様で展開する。筆者は同車が実用性と信頼性を重視した設計であると評価している。競合のMahindra 7XOやToyota Innova HyCrossより全長4815mmと大型である点が特徴付けられている。",
+        url: "https://www.thehindubusinessline.com/specials/auto-focus/kia-sorento-big-deal/article71563457.ece",
+        source: "BusinessLine",
+        date: "2026-10-09",
+        tags: [],
+    
+        sourceExcerpt: "In India, we expect the Sorento to primarily challenge the likes of",
+        sourceExcerptEnd: "also has competition from the age-old but eternally reliable Crysta.",
+        country: "in",
+        img: "https://bl-i.thgim.com/public/incoming/j56p0u/article71563916.ece/alternates/LANDSCAPE_1200/BL1010_Auto_Lead%201.JPG",
+        note: ""
+    },
+    // 2026-10-10 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2000",
+        title: "ジュナックがレクサスLMへ提案する穴あけ不要のLEDトランスワード",
+        desc: "ジュナックはレクサスLM向けに、ボディ加工不要のLEDトランスワードや面発光リフレクターを提案する。さらに足元や荷室を照らすランプも用意し、純正の品格を保ちながら夜の使い勝手を高める内装カスタムを実現している。",
+        url: "https://news.yahoo.co.jp/articles/f8ab42c55c17bc91c216e596639a388ae5a45389",
+        source: "Auto Messe Web",
+        date: "2026-10-10",
+        tags: ["カスタマイズ"],
+    
+        sourceExcerpt: "ジュナックのLEDトランスワードと面発光リフレクターで夜の品格を高めた「レクサスLM」を見る（全15枚）",
+        interiorScore: 90,
+        interiorReason: "The article details specific interior lighting accessories (welcome lamps, cargo",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261010-00010008-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2002",
+        title: "MAXWIN、シートベルト挟み込み式の子供用クッション枕「K-SC3-C」",
+        desc: "MAXWINは、マジックテープでシートベルトに挟み込む子供用クッション枕「K-SC3-C」を発売した。頭と肩を支えて首への負担をやわらげ、車内仮眠枕としても使える2WAY仕様である。サイズは約43×23×13cmで、手洗いが可能なにんじん型デザインが特徴だ。",
+        url: "https://news.yahoo.co.jp/articles/eb7630b582bc0c3c42aa25bd06874d5adae823df",
+        source: "ベストカーWeb",
+        date: "2026-10-10",
+        tags: ["シート"],
+    
+        sourceExcerpt: "MAXWINの「K-SC3-C」は、シートベルトに挟むだけでクッション枕になるアイテム。",
+        interiorScore: 88,
+        interiorReason: "Specific interior accessory product (seatbelt pillow/cover) with concrete dimens",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261010-00000005-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2005",
+        title: "日産、北米商品責任者が物理ボタン増とピアノブラック削減を明言",
+        desc: "日産の北米商品責任者パンディクティラ氏は、使い勝手を重視しコックピットに物理ボタンを増やす方針を示した。指紋が目立ちやすいピアノブラック加飾は控え、汚れにくい素材を採用する新型ローグハイブリッドを例に挙げている。",
+        url: "https://news.yahoo.co.jp/articles/b660ac682e63e9020f4a914b05e8c04349d2d2e4",
+        source: "AUTO BILD JAPAN Web",
+        date: "2026-10-10",
+        tags: ["コックピット", "新素材"],
+    
+        sourceExcerpt: "日産も今後、コックピットに手で触れて操作できるスイッチ類を増やす方針だ。",
+        interiorScore: 95,
+        interiorReason: "Directly addresses interior HMI strategy (physical buttons vs. touch) and materi",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261011-00010000-autobild-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1813",
+        title: "呼吸する不気味なステアリングホイール：車が「あなたのために」ではなく「あなたとともに」運転する一つの形",
+        desc: "完全自動運転の実現にはまだ長い道のりがあり、その到達まで、ある程度の自動化機能を持ちつつも注意深い運転手の監視を必要とする運転支援システムが主流であり続けるだろう。人間と機械の制御共有は曖昧さを生み、悲劇的な結果につながる可能性があるため、ミシガン大学はそのリスクを最小限に抑える方法を模索している。",
+        url: "https://www.thedrive.com/news/this-creepy-breathing-steering-wheel-is-one-way-your-car-could-drive-with-you-instead-of-for-you",
+        source: "The Drive",
+        date: "2026-10-10",
+        tags: [],
+    
+        sourceExcerpt: "Working with researchers from the Toyota Research Institute (which also provided funding),",
+        sourceExcerptEnd: "built and tested a steering wheel lined with air sacs.",
+        interiorScore: 77,
+        interiorReason: "The article details a specific haptic steering wheel concept with air sacs for d",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/10/Screenshot-2026-10-08-at-4.52.11-PM.jpeg?quality=85",
+        note: ""
+    },
+    {
+        id: "cn1773",
+        title: "中国と欧州連合（EU）は、ハイブリッド車に関する輸出枠で合意した。",
+        desc: "中国とEUがハイブリッド車貿易で理解に達し、追加関税の導入を回避する方向となった。今後4年間の輸出量は予測比で半減する見通しだが、直近水準の即座な半減ではない。2026年前半のPHEV市場では中国勢が最大25%のシェアを獲得しており、業界は安定した環境整備を歓迎している。",
+        url: "https://carnewschina.com/2026/10/10/china-and-eu-reportedly-reach-understanding-on-hybrid-vehicle-trade-averting-potential-tariffs/",
+        source: "CarNewsChina - All",
+        date: "2026-10-10",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/e59bbee78987-17-e1791616673352.png",
+        note: ""
+    },
+    {
+        id: "cn1774",
+        title: "BYDがヒューマノイドロボットの設計に関する特許を公開した。",
+        desc: "BYDは2026年10月9日、「Embodied AI Robot」のデザイン特許を公開した。高さ1.61m・体重58.5kgで31自由度と±1mmの繰り返し位置決め精度を持つ手先を備える。",
+        url: "https://carnewschina.com/2026/10/10/byd-unveils-design-for-its-first-self-developed-humanoid-robot/",
+        source: "CarNewsChina - All",
+        date: "2026-10-10",
+        tags: ["AI", "バッテリー"],
+    
+        sourceExcerpt: "BYD has officially unveiled the design of its first self-developed humanoid robot,",
+        sourceExcerptEnd: "the China National Intellectual Property Administration on October 9, 2026.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/screenshot-2026-10-10-at-14-13-56-e6af94e4ba9ae8bfaae4babae5bda2e69cbae599a8e4babaefbc8ce79c9fe5aeb9e69b9de58589efbc81-e699bae4b89ce8a5bf.png",
+        note: ""
+    },
+    {
+        id: "cn1775",
+        title: "日産NX7 PHEV、CATL-FAW製40.95kWhバッテリー搭載で都市NOA対応",
+        desc: "東風日産はミッドサイズSUV「NX7」を2026年第4四半期に中国市場へ投入する予定だ。CATL-FAW製の40.95kWhバッテリーを搭載し、WLTCモードで最大225kmのEV航続距離を実現する。また、オプションとしてLiDARと都市部での自動運転支援機能（NOA）を備える。",
+        url: "https://carnewschina.com/2026/10/10/nissan-nx7-phev-nears-q4-launch-with-up-to-225-km-of-electric-range/",
+        source: "CarNewsChina - All",
+        date: "2026-10-10",
+        tags: ["AR", "EV", "バッテリー"],
+    
+        sourceExcerpt: "The NX7 uses a 40.95 kWh lithium iron phosphate (LFP) battery with cells supplied by the CATL-FAW joint venture.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/71cf3bc79f3df8dc66ad15733de21e9945102842a-large-1473x900.jpeg",
+        note: ""
+    },
+    {
+        id: "cn1776",
+        title: "NIOのバッテリー交換効率は、BYDのフラッシュチャージの3倍に達する",
+        desc: "中国のゴールデンウィーク期間中、NIOは4,168基のステーションでピーク時1日あたり平均44回の電池交換を実現した。一方、BYDの12,165基のFlash Chargingステーションでは1日あたり平均15.5回にとどまり、NIOの効率は約3倍に達している。",
+        url: "https://carnewschina.com/2026/10/10/chinas-busiest-holiday-reveals-nios-swapping-efficiency-triples-byds-flash-charging/",
+        source: "CarNewsChina - All",
+        date: "2026-10-10",
+        tags: ["AR", "EV", "バッテリー"],
+    
+        sourceExcerpt: "BYD and Nio have both published figures on how their Flash-Charging and battery-swapping networks performed during Golden Week.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/screenshot-2026-10-10-at-09-57-53-e8b685e8af9de8bda6efbd9ce997aae58585e38081e68da2e794b5e58aa9e58a9befbc8ce7bbade888aae784a6e89991_webhook_1000x600_q85_1791599200.jpg",
+        note: ""
+    },
+    {
+        id: "in1857",
+        title: "ホンダElevate facelift、通気シートとソフトタッチ素材を備える",
+        desc: "Honda Elevateのfaceliftでは、ダッシュボードにソフトタッチ素材を採用し偽木目調を廃止した。前後席ベンチレーションシートやアンビエントライティングが追加され、内装はブラックとホワイトで構成される。価格は118万〜183万ルピー（ex-showroom）だ。",
+        url: "https://www.carblogindia.com/new-honda-elevate-facelift-review-is-it-elevated-enough/",
+        source: "Car Blog India",
+        date: "2026-10-10",
+        tags: ["シート", "コックピット", "イルミ", "新素材", "EV"],
+    
+        sourceExcerpt: "With features such as ventilated front and rear seats, a 360-degree ca",
+        sourceExcerptEnd: "ng, the facelift certainly makes the Elevate more appealing.",
+        interiorScore: 61,
+        interiorReason: "Detailed review of a facelift with specific interior updates including soft-touc",
+        imageInterior: false,
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/10/honda-elevate-front-three-quarters.jpg",
+        note: ""
+    },
+    {
+        id: "in1859",
+        title: "JSW Combat、Chery Jetour T2ベースのPHEV SUVを2026年12月に発表",
+        desc: "JSW Motorsは2026年12月4日にCombatを発表予定で、Chery Jetour T2をベースとするプラグインハイブリッドSUVとなる。ドナーモデルには15.6インチタッチスクリーンやレベル2運転支援システムが備わり、インド仕様では400万〜500万ルピーでの発売が見込まれている。",
+        url: "https://www.autopunditz.com/post/jsw-combat-india-debut-december-2026",
+        source: "Auto Punditz",
+        date: "2026-10-10",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "JSW Motors is reportedly preparing to unveil the Combat on December 4,",
+        sourceExcerptEnd: "five-seat plug-in hybrid based on the Chery Group’s Jetour T2.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_e5761f73b96f4fc98395606d369072ac~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1784",
+        title: "EU EV4EU、CCS双方向充電プロトタイプとオープンソース開発完了",
+        desc: "欧州EV4EUはCCS規格の双方向DC充電プロトタイプとオープンソースソフトを完成させた。ポルトガル実証では家庭の充電コストが平均8.6%減、再生可能エネルギー統合率が最大21.9%向上した。",
+        url: "https://www.electrive.com/2026/10/10/ev4eu-project-advances-bidirectional-charging/",
+        source: "Electrive",
+        date: "2026-10-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "A key technical achievement of EV4EU is the development and successful testing",
+        sourceExcerptEnd: "bidirectional DC charging based on the Combined Charging System (CCS).",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/ev4eu-projekt-ladestation-v2x-gen-i-slowenien.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1786",
+        title: "VWとGotion、欧州3拠点でLFP電池の共同生産計画",
+        desc: "フォルクスワーゲン傘下のPowerCoと中国のGotionは、スペイン・バレンシアやスロバキアなど3カ国にLFP電池の合弁工場を建設する。2030年までに欧州市場でのシェアが40〜60%に拡大すると予測されるLFP電池の供給網を強化し、低価格EVの需要に応える狙いがある。",
+        url: "https://electriccarsreport.com/2026/10/volkswagen-powerco-and-gotion-plan-three-european-lfp-battery-sites/",
+        source: "Electric Cars Report",
+        date: "2026-10-10",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "Volkswagen Group, its battery subsidiary PowerCo SE, and Chinese battery manufacturer Gotion",
+        sourceExcerptEnd: "iron phosphate (LFP) battery production in Europe and North Africa.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Volkswagen-PowerCo-Gotion.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "cn1781",
+        title: "中国とEU、ハイブリッド車の輸出制限で合意",
+        desc: "中国商務省と欧州委員会は北京での協議を経て、WTOルールに準拠した形でハイブリッド車の貿易に関する理解を形成した。EU側は中国からのHEVおよびPHEVの輸出量を半減させる方針を示し、CPCAデータでは8月のNEV輸出が前年比154.7%増の51万8000台に達している。",
+        url: "https://chinaevhome.com/2026/10/10/china-eu-reach-hybrid-car-trade-understanding-eu-says-exports-could-halve/",
+        source: "ChinaEVHome",
+        date: "2026-10-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "EU said exports of HEVs and PHEVs from China would be halved,",
+        sourceExcerptEnd: "Chinese NEV exports hit 518,000 in August, up 154.7% year-on-year.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/10/image-53.png?resize=640%2C649&ssl=1",
+        note: ""
+    },
+    {
+        id: "in1862",
+        title: "ホンダ・エレベイト、後席ベンチレーションと360度カメラを標準装備化",
+        desc: "ホンダは新型エレベイトに後席ベンチレーションシートや360度ビューカメラを追加した。10.25インチディスプレイや8スピーカーオーディオも備え、導入価格は118万ルピーからとなっている。",
+        url: "https://motoroctane.com/news/325016-new-rs-11-lakh-japanese-suv-gets-mercedes-like-features",
+        source: "MotorOctane",
+        date: "2026-10-10",
+        tags: ["ディスプレイ", "シート", "音響"],
+    
+        sourceExcerpt: "The SUV in question is the updated Honda Elevate; it now gets rear ventilated seats in the top ZX+ trim.",
+        interiorScore: 84,
+        interiorReason: "Detailed breakdown of interior features including rear ventilated seats, ambient",
+        imageInterior: true,
+        country: "in",
+        img: "https://motoroctane.com/wp-content/uploads/2026/10/Honda-Elevate-Interior-2.png",
+        note: ""
+    },
+    {
+        id: "jp2008",
+        title: "新型ID.ティグアン、欧州初となる助手席用ディスプレイ採用",
+        desc: "新型ID.ティグアンは、欧州車初となる運転席から非表示の12インチ助手席用ディスプレイを備える。さらにステアリングホイールに物理ボタンを採用し、センターコンソール前方にはQi2規格対応のマグネット固定式ワイヤレス充電ポイントを2箇所設けた。",
+        url: "https://www.gqjapan.jp/article/20261010-the-new-id-tiguan-news",
+        source: "GQ JAPAN",
+        date: "2026-10-10",
+        tags: ["ディスプレイ", "センターコンソール", "EV"],
+    
+        interiorScore: 86,
+        interiorReason: "Detailed breakdown of interior HMI (co-driver display with privacy screen), phys",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.gqjapan.jp/photos/6aca2cc4a32afb9c4684dd87/16:9/w_1280,c_limit/DB2026AU00901_large.jpg",
+        note: ""
+    },
+    // 2026-10-11 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2004",
+        title: "テスラサイバーキャブ、ステアリングなしの20.5インチディスプレイ採用",
+        desc: "テスラが完全自動運転タクシー『サイバーキャブ』を日本初公開した。室内はステアリングやペダルがなく、セパレート式ベンチシートと20.5インチのセンターディスプレイのみで構成されている。このディスプレイからドア開閉やエアコン設定などをタッチ操作でき、アプリ連携で環境設定を引き継げる。",
+        url: "https://news.yahoo.co.jp/articles/0a250178158ea2843fd86216fa2dc5b8a5010be9",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-11",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "インテリアを覗くと、セパレートされたベンチタイプのふたり乗りシートと、ダッシュボード中央にテスラ史上最大となる20.5インチのセンターディスプレイが備わるだけ。",
+        interiorScore: 90,
+        interiorReason: "The article provides a detailed breakdown of the Cybercab's interior layout and",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261011-01284049-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1818",
+        title: "自動車メーカーに追加してほしい機能は何か？",
+        desc: "QOTD：自動車メーカーに追加してほしい機能は何か？ Lalita Chemello（2026年10月11日） 新車または中古車を購入する際、搭載されている機能が購買判断を左右することがあります。頻繁に使う機能や、全く使わない機能を考慮する必要があります。",
+        url: "https://www.jalopnik.com/2282888/what-features-do-you-wish-automakers-would-add-reader-question/",
+        source: "Jalopnik",
+        date: "2026-10-11",
+        tags: [],
+    
+        interiorScore: 38,
+        interiorReason: "The article discusses specific cabin comfort and convenience features like elect",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/what-features-do-you-wish-automakers-would-add-to-their-cars/l-intro-1791584607.jpg",
+        note: ""
+    },
+    {
+        id: "us1819",
+        title: "三菱と現代が共同開発した4.5リットルV8エンジンの技術的特徴",
+        desc: "1990年代後半、三菱は現代自動車と提携し、4.5リットルのV8エンジンを開発した。このエンジンはHEMIやCoyoteなど他の大排気量V8に比べ認知度は低いものの、自動車業界において重要な役割を果たしていたとされる。",
+        url: "https://www.topspeed.com/weird-v8-from-japan-nobody-remembers/",
+        source: "Top Speed",
+        date: "2026-10-11",
+        tags: [],
+    
+        sourceExcerpt: "For many of us, Mitsubishi means all-wheel drive, 1990s sports cars, the Lancer Evolution, and the Galant VR-4, not relatively large-displacement V8s.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/10/image1-2.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1780",
+        title: "パリモーターショーで狂気に陥ったロータス：6つの破られた約束",
+        desc: "Elanスーパーカーは、パリでのデビュー直後に計画から削除された（写真：Getty Images）。2010年、Lotusは6台の新型車を発表し業界に衝撃を与えたが、そのうち生産化に至った車種は一台もなかった。16年前のパリモーターショーでは、復活したAudi Qua。",
+        url: "https://www.autocar.co.uk/car-news/from-the-archive/six-broken-promises-when-lotus-went-mad-paris-motor-show",
+        source: "AUTOCAR UK",
+        date: "2026-10-11",
+        tags: [],
+    
+        sourceExcerpt: "At the Paris motor show 16 years ago, the automotive world was",
+        sourceExcerptEnd: "Lotus uncloaking no fewer than six new cars at once.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/gettyimages-104646441.jpg?itok=6iYUITm3",
+        note: ""
+    },
+    {
+        id: "in1855",
+        title: "VW ID. Tiguan、最大600km航続と新キャビン設計で登場",
+        desc: "フォルクスワーゲンはID.4やID.5に代わる新型電動SUV「ID. Tiguan」を発表した。従来のモデルからより一般的なSUVデザインへ転換し、キャビンの再設計を特徴とする。航続距離は最大600kmに達し、複数のバッテリーとモーター構成が用意される。",
+        url: "https://gaadiwaadi.com/volkswagen-id-tiguan-revealed-with-up-to-600-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-10-11",
+        tags: ["EV"],
+    
+        interiorScore: 40,
+        interiorReason: "The article highlights a 'redesigned cabin' for the new ID. Tiguan, which is rel",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/Volkswagen-ID.-Tiguan-4.jpg",
+        note: ""
+    },
+    {
+        id: "in1858",
+        title: "VW ID.Tiguan、3画面コックピットと物理ボタン復活で内装刷新",
+        desc: "VolkswagenはID. Tiguanに15インチのインフォテインメントディスプレイと任意の12インチ乗員用ディスプレイを備えた3画面コックピットを採用した。また、主要な車両操作には物理ボタンが復活し、内装の質感向上を図っている。",
+        url: "https://www.autopunditz.com/post/volkswagen-id-tiguan-electric-suv-2026-range-features",
+        source: "Auto Punditz",
+        date: "2026-10-11",
+        tags: ["ディスプレイ", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "Tiguan electric SUV, featuring two battery options, three powertrain configurations, an advanced three-screen cockpit and a host of new technologies.",
+        interiorScore: 97,
+        interiorReason: "Detailed breakdown of the new three-screen cockpit (15-inch infotainment, option",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_1092b9c1d15f4cbf9f5d36e08f5e43bc~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1861",
+        title: "Genesis GV90、回転シートと25インチHUDを備える",
+        desc: "GenesisのGV90は、180度回転する電動フロントシートや25インチのヘッドアップディスプレイを搭載し、内装に高級感を演出している。さらに23.6インチのインフォテインメント画面やBang & Olufsen製25スピーカーシステムも備え、快適装備を充実させている。",
+        url: "https://motoroctane.com/news/325117-upcoming-hyundai-7-seater-gets-more-features-than-mercedes",
+        source: "MotorOctane",
+        date: "2026-10-11",
+        tags: ["HUD", "ディスプレイ", "コネクテッド", "シート", "EV", "音響"],
+    
+        sourceExcerpt: "The driver misses out on an instrument cluster; instead, Genesis offers a 25-inch head-up display.",
+        country: "in",
+        img: "https://motoroctane.com/wp-content/uploads/2026/08/Genesis-GV90-Sucide-Doors.png",
+        note: ""
+    },
+    {
+        id: "jp2006",
+        title: "中国4省庁、全隠蔽式ドアハンドル禁止と物理ボタン併設を要求",
+        desc: "中国4部門は革新的設計の管理強化案を公表し、全隠蔽式ドアハンドルや折り畳みディスプレイを禁止する。灯火やワイパーには物理操作部品の併設を求め、ゼログラビティシートの走行中使用も制限する方針で、2027年1月1日から新規申告車種に適用予定である。",
+        url: "https://note.com/china_case/n/n2a5b343956d6",
+        source: "note",
+        date: "2026-10-11",
+        tags: ["ディスプレイ", "シート", "新素材"],
+    
+        sourceExcerpt: "ゼログラビティシート、回転シート、大型ディスプレイ、電動ドア、特殊形状のステアリングなどは、いずれも商品差別化の要素となってきた。",
+        interiorScore: 96,
+        interiorReason: "The article details specific regulatory constraints on interior components (zero",
+        imageInterior: true,
+        country: "jp",
+        img: "https://assets.st-note.com/production/uploads/images/323038346/rectangle_large_type_2_d416b9d2a1cbc3d48f5fb97faec6eda4.png?fit=bounds&quality=85&width=1280",
+        note: ""
+    },
+    {
+        id: "jp2007",
+        title: "Ottocast U2Air Edge、放熱設計強化で長時間接続安定化",
+        desc: "Ottocastは有線CarPlayやAndroid Autoをワイヤレス化する新型アダプター「U2Air Edge」を発売した。5GHz Wi-Fiと1.2GHzプロセッサーに加え、放熱孔を設けた新設計で車内環境下での長時間使用時の安定性を高めている。また、本体のボタン操作で登録済みスマートフォン2台の接続先を切り替えられる機能も備え、複数人で車両を共有する際の利便性向上を図っている。",
+        url: "https://autoc-one.jp/news/5045008/",
+        source: "MOTA（モータ）",
+        date: "2026-10-11",
+        tags: ["AR", "AI"],
+    
+        sourceExcerpt: "- Smart Buttonでスマートフォン2台を簡単切り替え 2台のスマートフォンを登録でき、本体のボタン操作で接続先を切り替え可能。",
+        interiorScore: 90,
+        interiorReason: "Wireless CarPlay adapter directly impacts center console cable management and HM",
+        imageInterior: true,
+        country: "jp",
+        img: "https://cdn.autoc-one.jp/images/article/202610/11100715350_a320.webp",
         note: ""
     },
 ];
