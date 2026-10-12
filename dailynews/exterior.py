@@ -2,6 +2,7 @@
 
 import re
 from dailynews.exterior_scope import BODY, THEMES, SCOPE_TEXT, transfer_candidate, theme_hits
+from dailynews.idea_components import COMPONENT_PATTERNS
 
 PRODUCT_TERMS = (
     "グリル", "バンパー", "フェンダー", "エンブレム", "外装", "エクステリア",
@@ -120,10 +121,11 @@ def assessment_prompt(title, content, url, summary):
 
 
 def out_of_scope_idea(text):
-    # A pickup canopy is an exterior enclosure. Keep this idea-only vocabulary
-    # separate from article admission, where "canopy" also describes buildings.
+    # Use the same component vocabulary as evidence extraction. Otherwise a
+    # reviewed bonnet or mirror concept can be silently lost at the final gate.
+    # Article admission still uses its separate automotive-context checks.
     return not (has_product_details(text) or BODY.search(str(text or ""))
-                or re.search(r"キャノピー|(?:リア|リヤ|GT)ウ[イィ]ング|(?<![a-z])rear[ -]wings?(?![a-z])|\bcanop(?:y|ies)\b", str(text or ""), re.I))
+                or re.search(COMPONENT_PATTERNS["exterior"], str(text or ""), re.I))
 
 
 def select_items(items, limit=6):

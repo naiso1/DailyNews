@@ -135,6 +135,18 @@ class IdeaQualityTests(unittest.TestCase):
         source={'newsId':'eu1','originalDesc':'The electric car offers a 441-litre boot.'}
         self.assertIn('441-litre boot',q.focus_evidence(source,'interior'))
 
+    def test_supplement_targets_an_unused_evidenced_component(self):
+        source={'newsId':'cn1','originalDesc':'The concept has a retractable steering wheel and a sliding central display.'}
+        retained=q.prepare({**self.idea,'title':'中央ディスプレイ清掃ブラシ','proposal':'画面の清掃ブラシを試作する。',
+                            'sourceNewsIds':['cn1'],'sourceQuotes':[{'sourceId':'cn1','quote':'a sliding central display'}]},[source])
+        retained.update(qualityVersion=q.VERSION,qualityDigest=q.digest(retained,[source]))
+        calls=[]
+        q.generate_country('interior','2026-10-12','cn',[source],[],[retained],
+            lambda prompt:calls.append(prompt) or '{"ideas":[]}',json.loads,lambda a,h,n:a[:n],
+            max_attempts=0,rescue_attempts=1)
+        self.assertIn('今回の対象部品は『ステアリングホイール周辺』',calls[0])
+        self.assertNotIn('今回の対象部品は『荷室・収納』',calls[0])
+
     def test_mixed_seat_article_keeps_display_evidence_but_seat_proposal_fails(self):
         import auto_update_daily_news as updater
         previous = updater.EDITION.id
@@ -155,6 +167,16 @@ class IdeaQualityTests(unittest.TestCase):
         for text in ['The interior has ventilated seats.', 'Three cars were displayed at the event.',
                      'The braking and steering systems have redundancy.']:
             self.assertFalse(q.focus_evidence({'originalDesc': text}, 'interior'))
+
+    def test_showroom_display_energy_storage_and_outdoor_trim_are_not_parts(self):
+        for text in ['Display vehicles will arrive at stores.', 'Cars will arrive for display.',
+                     'The display cars have a new exterior colour.', 'Buyers switch to electric power.',
+                     'The plant produces cells for stationary battery storage.',
+                     'The robot has a head without a display screen.', 'A new OUTDOOR trim is available.']:
+            with self.subTest(text=text):
+                self.assertFalse(q.focus_evidence({'originalDesc':text},'interior'))
+        text='Display cars have a sliding central display and a door trim panel.'
+        self.assertEqual(q.focus_evidence({'originalDesc':text},'interior'),text)
 
     def test_unmarked_candidate_is_audited_not_silently_relabelled(self):
         bad = {**self.idea, 'proposal': '外観カバーを交換できる構造を設けた。'}
@@ -186,6 +208,56 @@ class IdeaQualityTests(unittest.TestCase):
             self.assertTrue(updater._is_out_of_scope_idea('A new wing chair for a living room'))
         finally:
             updater.configure_edition(previous)
+
+    def test_scope_uses_proposed_component_not_seat_location_in_source_fact(self):
+        import auto_update_daily_news as updater
+        previous = updater.EDITION.id
+        try:
+            updater.configure_edition('interior')
+            idea = {'title':'後席用テレビの収納枠', 'desc':'後部座席にはテレビがある。画面の収納枠を交換可能にする提案。',
+                    'proposal':'開発案として、テレビの収納枠を交換可能にする。'}
+            self.assertEqual(len(updater.dedupe_ideas([idea], [], 1)), 1)
+            bad = {**idea, 'proposal':'開発案として、座席のクッションを交換可能にする。'}
+            self.assertFalse(updater.dedupe_ideas([bad], [], 1))
+            updater.configure_edition('exterior')
+            for part in ['ボンネット', 'ミラー', 'フロントガラス', '窓', 'ヘッドライト', 'バックドア']:
+                text = part+'の形状を変更する。'
+                self.assertTrue(q.focus_evidence({'originalDesc':text}, 'exterior'))
+                self.assertFalse(updater._is_out_of_scope_idea(text))
+            self.assertTrue(updater._is_out_of_scope_idea('センターコンソールの収納トレー'))
+        finally:
+            updater.configure_edition(previous)
+
+    def test_supplement_uses_one_proven_source_and_preserves_accepted_sibling(self):
+        retained,_=q.review_candidates([self.idea],self.sources,'exterior',lambda _:self.review(),json.loads)
+        original=copy.deepcopy(retained[0])
+        other={**self.sources[0],'newsId':'cn95'}
+        second={**self.idea,'title':'排水溝付きハンドルカバー','proposal':'下面に排水溝を設ける案を提案する。'}
+        generations=[]
+        def model(prompt):
+            if 'あなたは自動車部品の企画レビュー担当' in prompt:return self.review()
+            generations.append(prompt)
+            if '不足分の補充段階' in prompt:
+                self.assertNotIn('"id": "cn95"',prompt)
+                return json.dumps({'ideas':[second]},ensure_ascii=False)
+            return '{"ideas":[]}'
+        kept,audit=q.generate_country('exterior','2026-10-11','cn',[other,*self.sources],[],retained,
+            model,json.loads,lambda a,h,n:a[:n],max_attempts=1,rescue_attempts=2)
+        self.assertEqual(len(kept),2)
+        self.assertEqual(kept[0],original)
+        self.assertEqual(audit['rescueAttempts'],1)
+        self.assertEqual(audit['sourceAttempts'][-1],{'stage':'supplement','sourceNewsIds':['cn94']})
+
+    def test_supplement_is_bounded_and_cannot_skip_independent_review(self):
+        def model(prompt):
+            if 'あなたは自動車部品の企画レビュー担当' in prompt:
+                return self.review(sourceMatch=False,reason='根拠と不一致')
+            return json.dumps({'ideas':[self.idea]},ensure_ascii=False)
+        kept,audit=q.generate_country('exterior','2026-10-11','cn',self.sources,[],[],model,json.loads,
+            lambda a,h,n:a[:n],max_attempts=0,rescue_attempts=99)
+        self.assertFalse(kept)
+        self.assertEqual(audit['rescueAttempts'],2)
+        self.assertEqual(audit['withheld'],2)
 
     def test_repeated_headline_does_not_hide_window_component_detail(self):
         text=('A new canopy is available.\n'*5)+'The side windows open with hydraulic dampers.'

@@ -826,7 +826,10 @@ def dedupe_ideas(raw_ideas: list, history_ideas: list, limit: int = 2):
         if not title or not desc:
             continue
         cand = f"{title} {desc}"
-        if _is_out_of_scope_idea(cand):
+        # A structured proposal names the component being changed. The source
+        # fact may mention rear seats merely as the location of a cabin screen.
+        scope_text = f"{title} {idea['proposal']}" if idea.get("proposal") else cand
+        if _is_out_of_scope_idea(scope_text):
             continue
         duplicate = False
         for ht in history_texts:
@@ -2325,6 +2328,7 @@ def main():
                         lambda prompt: call_llm(args.llm_endpoint, EDITION.config.get("idea_generation", {}).get("model", args.llm_model), prompt, max_tokens=2600, temperature=0.2),
                         extract_json_block, dedupe_ideas,
                         source_loader=lambda chosen: idea_quality.enrich_originals(chosen, idea_source_cache, fetch_missing=True),
+                        rescue_attempts=2,
                     )
                     if not args.dry_run:
                         from dailynews.exabase import atomic_json, read_json

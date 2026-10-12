@@ -10,6 +10,7 @@ import json
 import re
 from pathlib import Path
 from .article_text import trim_article_noise
+from .idea_components import COMPONENT_PATTERNS, COMPONENT_TOPICS
 
 VERSION = "2026-10-06-v1"
 FIELDS = ("sourceFact", "proposal", "benefit", "verification")
@@ -83,15 +84,19 @@ def enrich_originals(items, cache_path, *, fetch_missing=False):
 
 def focus_evidence(item, edition):
     """Highlight actual component sentences, not vehicle prices/powertrain specs."""
-    pattern = (r"\bdisplays?\b|\bscreens?\b|touchscreen|dashboard|console|door.trim|steering.wheel|switch|grab.handle|armrest|storage|weatherstrip|cargo|\bboot\b|soundbar|ambient.light|インパネ|加飾|画面|ディスプレイ|モニター|サウンドバー|ドアトリム|コンソール|肘|アームレスト|収納|荷室|スイッチ"
-               if edition == "interior" else
-               r"bumper|grille|door.handle|roof|tailgate|spoiler|fender|body.panel|rear.wing|bodywork|pillar|paint|coating|joining|bonding|radar|lidar|sensor|laser|in.mold|hot.stamp|recycl|"
-               r"tail.?light|head.?light|tail.?lamp|head.?lamp|daytime.running|\bDRL\b|light.signature|bonnet|\bhood\b|mirror|canopy|splitter|diffuser|wheel.arch|air.intake|cooling|aerodynamic|glazing|windshield|window|weather.?strip|"
-               r"バンパー|グリル|ハンドル|ルーフ|テールゲート|バックドア|フェンダー|スポイラー|ウ[イィ]ング|ピラー|塗装|接合|ミリ波|センサー|レーザー|再生材|"
-               r"ヘッドライト|テールライト|ヘッドランプ|テールランプ|ボンネット|フード|ミラー|キャノピー|スプリッター|ディフューザー|冷却|空力|ガラス|窓|ウェザーストリップ")
+    pattern = COMPONENT_PATTERNS[edition]
     original = evidence(item)
     sentences = re.split(r"(?<=[。!?])|(?<=\.)\s+(?=[A-Z])|\n+", original)
-    matches = list(dict.fromkeys(s.strip() for s in sentences if re.search(pattern, s, re.I)))
+    def has_component(sentence):
+        probe = sentence
+        if edition == "interior":
+            # "Display cars", switching to EVs and stationary storage are not
+            # cabin components. Keep the original sentence intact for quotes.
+            probe = re.sub(r"\b(?:display (?:cars|vehicles)|(?:on|for) display|switch(?:ing)? to|"
+                           r"(?:stationary battery|battery|energy) storage(?: systems?)?|"
+                           r"without (?:a |an )?(?:display )?screen)\b", "", probe, flags=re.I)
+        return re.search(pattern, probe, re.I)
+    matches = list(dict.fromkeys(s.strip() for s in sentences if has_component(s)))
     # Never substitute a guessed fact when the component is not documented.
     return "\n".join(matches[:8 if edition == "exterior" else 4])[:2400 if edition == "exterior" else 1600]
 
@@ -275,18 +280,28 @@ sourceNewsIdsは実際の根拠のIDのみ、sourceQuotesはその原文の連�
 """
 
 
-def generate_country(edition, date, country, sources, history, retained, call, decode, dedupe, *, max_attempts=4, source_loader=None):
+def generate_country(edition, date, country, sources, history, retained, call, decode, dedupe, *, max_attempts=4, source_loader=None, rescue_attempts=0):
     kept = [i for i in retained if is_reviewed(i, sources)][:2]
     rejected, attempts, repairs = [], 0, 0
     tried_ids = set()
     unavailable_ids = set()
-    for attempt in range(max_attempts):
+    rescue_count, source_attempts = 0, []
+    for attempt in range(max_attempts + max(0, min(rescue_attempts, 2))):
         if len(kept) == 2 or not sources:
             break
         # Rotate sources on retry. A weak first-ranked story must not force both slots.
         used_ids = {source_id for idea in kept for source_id in idea["sourceNewsIds"]}
         # Exhaust untried sources before revisiting the same article with a new angle.
         ordered = [s for s in sources if s["newsId"] not in used_ids] + [s for s in sources if s["newsId"] in used_ids]
+        rescue = attempt >= max_attempts
+        if rescue:
+            # After ordinary retries, work from one evidenced article instead
+            # of mixing two weak stories again. A successful source can support
+            # a second, different concept; otherwise rotate detailed sources.
+            evidenced = [s for s in sources if s["newsId"] not in unavailable_ids and focus_evidence(s, edition)]
+            proven = [s for s in evidenced if s["newsId"] in used_ids]
+            pool = proven or sorted(evidenced, key=lambda s: len(focus_evidence(s, edition)), reverse=True)
+            ordered = [pool[(attempt - max_attempts) % len(pool)]] if pool else []
         chosen = []
         # Missing component evidence spends a source check, not a generation attempt.
         # Each source is loaded at most once during this bounded regional run.
@@ -307,9 +322,24 @@ def generate_country(edition, date, country, sources, history, retained, call, d
             rejected.append({"reason": "根拠原文に対象部品の具体情報がない"})
             break
         attempts += 1
+        rescue_count += int(rescue)
+        source_attempts.append({"stage": "supplement" if rescue else "initial", "sourceNewsIds": [s["newsId"] for s in chosen]})
         try:
-            result = decode(call(generation_prompt(edition, date, country, chosen, history, kept, rejected)))
+            prompt = generation_prompt(edition, date, country, chosen, history, kept, rejected)
+            if rescue:
+                prompt += "\n不足分の補充段階。根拠は上記の1記事に限定する。完成済み案とは異なる部位または働きを一つ選び、原文の事実と未検証の開発案を分ける。記事にない既存の固定方法や不具合を補わない。原文の部品を使った比較用試作品として提案し、変更が価値につながる仕組みと、その価値を直接比べる指標を書く。安全や強度が関わる保持部の変更では成立性の確認も含める。\n"
+                component_text = focus_evidence(chosen[0], edition)
+                completed_text = "\n".join(i['title'] + " " + i['proposal'] for i in kept)
+                unused = [label for label, pattern in COMPONENT_TOPICS[edition].items()
+                          if re.search(pattern, component_text, re.I)
+                          and not re.search(pattern, completed_text, re.I)]
+                if unused:
+                    target = unused[(attempt - max_attempts) % len(unused)]
+                    prompt += f"今回の対象部品は『{target}』に限定する。根拠原文に記載されたこの部品から新しい案を作り、完成済み案の構造や文章を再利用しない。\n"
+            result = decode(call(prompt))
             raw = result.get("ideas", []) if isinstance(result, dict) else None
+            if raw == []:
+                rejected.append({"reason": "根拠候補から新しい案が生成されなかった", "sourceNewsIds": [s["newsId"] for s in chosen]})
             passed, failures = review_candidates(raw,
                                                 chosen, edition, call, decode)
             rejected.extend(failures)
@@ -338,6 +368,7 @@ def generate_country(edition, date, country, sources, history, retained, call, d
             rejected.append({"reason": "企画生成を完了できない: " + type(error).__name__})
     # Digests are bound to each idea's cited sources, independent of pool order.
     return kept, {"qualityVersion": VERSION, "country": country, "attempts": attempts, "repairAttempts": repairs,
+                  "rescueAttempts": rescue_count, "sourceAttempts": source_attempts,
                   "sourcesChecked": len(tried_ids), "sourcesWithoutComponents": sorted(unavailable_ids),
                   "accepted": len(kept), "withheld": 2-len(kept), "rejections": rejected,
                   "ideas": kept}
