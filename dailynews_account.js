@@ -144,7 +144,7 @@ function accountStyles() {
     .account-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 16px; }
     .account-tab { border:1px solid rgba(255,255,255,.13); border-radius:999px; padding:7px 12px; background:transparent; color:#b7c4d4; cursor:pointer; }
     .account-tab.active { border-color:#7df1c2; background:rgba(125,241,194,.12); color:#eafff7; }
-    .account-list { display:grid; gap:14px; }
+    .account-list { display:grid; grid-template-columns:minmax(0,1fr); gap:14px; }
     .account-list-item { width:100%; border:1px solid rgba(255,255,255,.1); border-radius:13px; padding:12px 14px; background:rgba(255,255,255,.035); color:#e8eef7; text-align:left; cursor:pointer; }
     .account-list-title { display:block; font-weight:800; line-height:1.5; }
     .account-list-sub { display:block; margin-top:4px; color:#91a0b5; font-size:12px; line-height:1.5; }
@@ -694,6 +694,7 @@ async function renderAdminPanel() {
     <h3 class="account-section-title">${ACCOUNT_EDITION_LABEL}の利用状況</h3>
     <p class="account-note">この画面の利用状況・ご意見・配信先・記事管理は、すべて${ACCOUNT_EDITION_LABEL}が対象です。上のボタンで管理する版を切り替えられます。</p>
     ${renderAdminUsage(usage)}
+    <section id="adminWeeklyReports"></section>
     <h3 class="account-section-title">${ACCOUNT_EDITION_LABEL}の反応・配信状況</h3>
     <p class="account-note">反応はこの版に残っている記録の累計、配信先・削除記事は現在の件数です。</p>
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
@@ -726,6 +727,7 @@ async function renderAdminPanel() {
     button.addEventListener("click", () => restoreHiddenItem(button));
   });
   await renderEditorialAdmin();
+  await window.renderDailyNewsWeeklyReports?.(list.querySelector("#adminWeeklyReports"), accountApi);
 }
 
 function renderAdminUsage(usage) {

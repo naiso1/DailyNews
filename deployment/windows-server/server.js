@@ -289,6 +289,23 @@ function ensureColumn(tableName, columnName, definition) {
 ensureColumn("comments", "user_id", "INTEGER REFERENCES users(id)");
 ensureColumn("comments", "parent_comment_id", "INTEGER REFERENCES comments(id)");
 ensureColumn("users", "is_admin", "INTEGER NOT NULL DEFAULT 0");
+ensureColumn("item_image_overrides", "image_urls", "TEXT");
+db.exec(`
+  CREATE TABLE IF NOT EXISTS user_article_reads (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    item_id TEXT NOT NULL, date_key TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(user_id, item_id, date_key)
+  );
+  INSERT OR IGNORE INTO settings(setting_key, setting_value)
+    VALUES ('group_reads_started_at', CURRENT_TIMESTAMP);
+`);
+const recordUserArticleRead = db.prepare("INSERT OR IGNORE INTO user_article_reads(user_id,item_id,date_key) VALUES (?,?,?)");
+function overrideImages(row) {
+  if (!row) return [];
+  try { const urls = JSON.parse(row.image_urls); if (Array.isArray(urls) && urls.length) return urls; } catch (_) {}
+  return row.image_url ? [row.image_url] : [];
+}
 ensureColumn("hidden_items", "reason_code", "TEXT NOT NULL DEFAULT 'other'");
 ensureColumn("hidden_items", "item_kind", "TEXT NOT NULL DEFAULT 'news'");
 ensureColumn("hidden_items", "edition", `TEXT NOT NULL DEFAULT '${EDITION}'`);
@@ -504,18 +521,19 @@ const statements = {
     DELETE FROM hidden_items WHERE item_id = ?
   `),
   itemImageOverride: db.prepare(`
-    SELECT item_id, image_url, updated_by, created_at, updated_at
+    SELECT item_id, image_url, image_urls, updated_by, created_at, updated_at
     FROM item_image_overrides WHERE item_id = ?
   `),
   allItemImageOverrides: db.prepare(`
-    SELECT item_id, image_url, updated_by, created_at, updated_at
+    SELECT item_id, image_url, image_urls, updated_by, created_at, updated_at
     FROM item_image_overrides ORDER BY updated_at DESC
   `),
   upsertItemImageOverride: db.prepare(`
-    INSERT INTO item_image_overrides(item_id, image_url, updated_by)
-    VALUES (?, ?, ?)
+    INSERT INTO item_image_overrides(item_id, image_url, updated_by, image_urls)
+    VALUES (?, ?, ?, ?)
     ON CONFLICT(item_id) DO UPDATE SET
       image_url = excluded.image_url,
+      image_urls = excluded.image_urls,
       updated_by = excluded.updated_by,
       updated_at = CURRENT_TIMESTAMP
   `),
@@ -1362,6 +1380,7 @@ function interactionFor(itemId, clientId, includeComments = true, user = null) {
     hiddenBy: hidden?.created_by_name || "",
     hiddenAt: hidden?.updated_at || "",
     imageUrlOverride: imageOverride?.image_url || "",
+    imageUrlsOverride: overrideImages(imageOverride),
   };
   if (includeComments) {
     value.commentItems = commentsFor(itemId, clientId, user);
@@ -1384,6 +1403,7 @@ function allInteractions(user = null) {
       hiddenBy: "",
       hiddenAt: "",
       imageUrlOverride: "",
+      imageUrlsOverride: [],
     };
   }
   for (const row of statements.allLikeUsers.all()) {
@@ -1401,7 +1421,10 @@ function allInteractions(user = null) {
     result[row.item_id].hiddenAt = row.updated_at;
   }
   for (const row of statements.allItemImageOverrides.all()) {
-    if (result[row.item_id]) result[row.item_id].imageUrlOverride = row.image_url;
+    if (result[row.item_id]) {
+      result[row.item_id].imageUrlOverride = row.image_url;
+      result[row.item_id].imageUrlsOverride = overrideImages(row);
+    }
   }
   if (user) {
     for (const row of statements.userIrrelevant.all(user.id)) {
@@ -2307,13 +2330,23 @@ async function handleApi(request, response, requestUrl) {
       return;
     }
     const body = await readJson(request);
-    const imageUrl = String(body.imageUrl || "").trim();
-    if (!validImageUrl(imageUrl)) {
-      apiError(response, 400, "invalid_image_url", "A valid HTTP or HTTPS image URL is required.");
+    const urls = body.imageUrls === undefined ? [body.imageUrl] : body.imageUrls;
+    if (!Array.isArray(urls) || urls.length < 1 || urls.length > 5 ||
+        urls.some(url => typeof url !== "string" || !validImageUrl(url.trim()))) {
+      apiError(response, 400, "invalid_image_url", "Specify 1 to 5 HTTP or HTTPS image URLs.");
       return;
     }
-    statements.upsertItemImageOverride.run(itemId, imageUrl, admin.id);
+    const imageUrls = [...new Set(urls.map(url => new URL(url.trim()).href))];
+    statements.upsertItemImageOverride.run(itemId, imageUrls[0], admin.id, JSON.stringify(imageUrls));
     sendJson(response, 200, interactionFor(itemId, "", true, admin));
+    return;
+  }
+
+  if (request.method === "GET" && requestUrl.pathname === "/api/admin/weekly-reports") {
+    if (!requireAdmin(request, response)) return;
+    const reportFile = path.join(DATA_DIR, "weekly-reports.json");
+    const reports = fs.existsSync(reportFile) ? JSON.parse(fs.readFileSync(reportFile, "utf8").replace(/^\uFEFF/, "")) : {reports: []};
+    sendJson(response, 200, reports);
     return;
   }
 
@@ -2517,8 +2550,10 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 400, "invalid_request", "Invalid item or client ID.");
       return;
     }
+    const readingUser = authenticatedUser(request);
     withTransaction(() => {
       statements.ensureInteraction.run(itemId);
+      if (readingUser) recordUserArticleRead.run(readingUser.id, itemId, jstDateKey());
       const inserted = statements.insertRead.run(
         itemId,
         body.clientId,

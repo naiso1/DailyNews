@@ -1570,8 +1570,9 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
 
     <!-- DailyNews Server API -->
     <script src="source_list_data.js?v=20260908-4"></script>
-    <script type="module" src="dailynews_client.js?v=20260915-editions-1"></script>
-    <script type="module" src="dailynews_account.js?v=20260915-editions-1"></script>
+    <script type="module" src="dailynews_reports.js?v=20261013-1"></script>
+    <script type="module" src="dailynews_client.js?v=20261013-1"></script>
+    <script type="module" src="dailynews_account.js?v=20261013-1"></script>
     <script type="module" src="dailynews_activity.js?v=20260915-editions-1"></script>
     <script type="module" src="dailynews_sources.js?v=20260915-editions-1"></script>
     <script type="module" src="release_history.js?v=20260915-editions-1"></script>
@@ -2371,10 +2372,16 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             return src;
         }
 
-        function getNewsImageUrl(item) {
-            if (!item) return "";
-            return window.interactionsData?.[item.id]?.imageUrlOverride || item.img || "";
+        function getNewsImageUrls(item) {
+            if (!item) return [];
+            const interaction = window.interactionsData?.[item.id] || {};
+            const urls = interaction.imageUrlsOverride?.length ? interaction.imageUrlsOverride
+                : interaction.imageUrlOverride ? [interaction.imageUrlOverride]
+                : item.images?.length ? item.images : [item.img];
+            return [...new Set(urls.filter(url => typeof url === 'string' && url))].slice(0, 5);
         }
+        window.getNewsImageUrls = getNewsImageUrls;
+        function getNewsImageUrl(item) { return getNewsImageUrls(item)[0] || ""; }
         window.getNewsImageUrl = getNewsImageUrl;
 
         function safeNewsSourceUrl(value) {
@@ -3430,6 +3437,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
                 const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
                 const resolvedImage = getNewsImageUrl(n);
+                const imageCount = getNewsImageUrls(n).length;
                 const displayImg = getDisplayImageUrl(resolvedImage);
                 card.innerHTML = `
             <div class="thumb">
@@ -3442,6 +3450,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
+                ${imageCount > 1 ? `<button class="action-btn" type="button" onclick="openNewsImageGallery('${n.id}')" aria-label="記事の画像${imageCount}枚を見る">🖼️ 画像 ${imageCount}枚を見る</button>` : ''}
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
                 ${n.country === 'paper' && n.summaryBasis ? `<p class="paper-source-details" style="font-size:12px;color:var(--muted);line-height:1.6">${escapeHtml(n.summaryBasis)}${n.paperPublicationDate ? `<br>発行日: ${escapeHtml(n.paperPublicationDate)}` : ''}${n.paperOnlineDate ? `<br>オンライン公開日: ${escapeHtml(n.paperOnlineDate)}` : ''}${n.doi ? `<br>DOI: ${escapeHtml(n.doi)}` : ''}</p>` : ''}

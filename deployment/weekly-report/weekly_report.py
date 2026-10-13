@@ -1,0 +1,221 @@
+"""Private roster snapshots, edition-aware usage reports and a guarded mail packet.
+
+No employee rows or identifiers are published. SSH extraction returns hashed emails.
+The previous complete week is frozen once; later roster updates cannot alter it.
+"""
+from __future__ import annotations
+import argparse, base64, csv, hashlib, html, json, os, re, subprocess, unicodedata, uuid
+from collections import Counter
+from datetime import date, datetime, time, timedelta, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+STATE = ROOT / 'runtime' / 'weekly-report'
+MASTER_ROOT = Path(r'\\tgfs1\ＩＥ開発部\90_その他\フロアー改革\電子掲示板')
+JST = timezone(timedelta(hours=9))
+LABELS = {'interior': '内装版', 'exterior': '外装版', 'combined': '両版合計'}
+TEST_TO = 'yuki.nakamura@toyoda-gosei.co.jp'
+
+def normalized(value): return unicodedata.normalize('NFKC', value).strip().lower()
+def identity(value): return hashlib.sha256(normalized(value).encode()).hexdigest()
+def atomic_json(file, value):
+    file.parent.mkdir(parents=True, exist_ok=True)
+    temp = file.with_name(file.name + '.' + uuid.uuid4().hex + '.tmp')
+    temp.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding='utf8')
+    os.replace(temp, file)
+
+def select_master(root, effective):
+    candidates = []
+    for file in root.glob('*/社員マスタ_*.csv'):
+        match = re.fullmatch(r'社員マスタ_(\d{8})\.csv', file.name)
+        if match:
+            stamp = datetime.strptime(match[1], '%Y%m%d').date()
+            if stamp <= effective: candidates.append((stamp, file))
+    if not candidates: raise ValueError('対象日以前の社員マスタがありません。')
+    stamp = max(row[0] for row in candidates)
+    newest = [file for day, file in candidates if day == stamp]
+    if len({hashlib.sha256(file.read_bytes()).hexdigest() for file in newest}) != 1:
+        raise ValueError('同じ日付の社員マスタの内容が異なります。')
+    file = sorted(newest)[0]
+    with file.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream)
+        if not {'社員コード','メールアドレス','見出し名'}.issubset(reader.fieldnames or []): raise ValueError('社員マスタの必須列がありません。')
+        rows = list(reader)
+    members, codes = {}, set()
+    for row in rows:
+        email, code = normalized(row['メールアドレス']), row['社員コード'].strip()
+        group = ' '.join(unicodedata.normalize('NFKC', row['見出し名']).split())
+        if not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+', email) or not code or not group: raise ValueError('名簿の必須値が不正です。')
+        key = identity(email)
+        if key in members or code in codes: raise ValueError('名簿に重複があります。')
+        room = '内装開発室' if group.startswith('内装開発室') else '外装開発室' if group.startswith('外装開発室') else 'IE開発部（室外）'
+        members[key] = {'group': group, 'room': room}; codes.add(code)
+    if not members: raise ValueError('社員マスタが空です。')
+    return {'masterDate': stamp.isoformat(), 'masterName': file.name,
+            'masterHash': hashlib.sha256(file.read_bytes()).hexdigest(), 'members': members}
+
+def week_start(day): return day - timedelta(days=day.weekday())
+def stamp_day(stamp):
+    if not stamp: return None
+    return (datetime.fromisoformat(stamp.replace('Z', '+00:00')).replace(tzinfo=timezone.utc).astimezone(JST)).date().isoformat()
+
+def build_report(start, end, roster, source, now):
+    members = roster['members']
+    # Registration is owned by the shared interior identity DB, not lazy exterior accounts.
+    registered = {row['key'] for row in source['interior']['accounts'] if stamp_day(row['createdAt']) <= end.isoformat()}
+    rows = []
+    scopes = [('all', 'IE開発部 全体', set(members))]
+    for room in sorted({m['room'] for m in members.values()}): scopes.append(('room', room, {k for k,m in members.items() if m['room']==room}))
+    for group in sorted({m['group'] for m in members.values()}): scopes.append(('group', group, {k for k,m in members.items() if m['group']==group}))
+    def in_week(r): return start.isoformat() <= r['date_key'] <= end.isoformat()
+    by_edition = {}
+    for edition, data in source.items():
+        by_edition[edition] = {metric: [r for r in data[metric] if in_week(r)] for metric in ('usage','reads','likes','comments')}
+    by_edition['combined'] = {metric: sum((by_edition[e][metric] for e in ('interior','exterior')), []) for metric in ('usage','reads','likes','comments')}
+    def metrics(data, keys):
+        active = {r['key'] for metric in data.values() for r in metric if r['key'] in keys}
+        result = {'active': len(active)}
+        for metric in ('reads','likes','comments'):
+            matched = [r for r in data[metric] if r['key'] in keys]
+            result[metric] = sum(r['count'] for r in matched)
+            result[metric+'Users'] = len({r['key'] for r in matched})
+        return result
+    for level, name, keys in scopes:
+        row = {'level':level,'name':name,'headcount':len(keys),'registered':len(keys & registered),'editions':{}}
+        for edition,data in by_edition.items(): row['editions'][edition] = metrics(data, keys)
+        rows.append(row)
+    unmatched = {}
+    for edition, data in by_edition.items():
+        outside = {r['key'] for metric in data.values() for r in metric if r['key'] and r['key'] not in members}
+        unmatched[edition] = metrics(data, outside)
+        unmatched[edition]['unattributedComments'] = sum(r['count'] for r in data['comments'] if not r['key'])
+    coverage = {}
+    for edition,data in source.items():
+        first = stamp_day(data['readsStarted'])
+        coverage[edition] = {'readsStarted': first, 'readsComplete': bool(first and first < start.isoformat()),
+                             'usageStarted': stamp_day(data['usageStarted']),
+                             'browserVisits':sum(r['visit_count'] for r in data['access'] if in_week(r))}
+    return {'week':start.isoformat(), 'end':end.isoformat(), 'generatedAt':now.isoformat(),
+        'complete':end < now.date(), 'masterDate':roster['masterDate'], 'masterName':roster['masterName'],
+        'rows':rows,'unmatched':unmatched,'coverage':coverage,
+        'notes': ['利用率＝期間内の利用人数÷名簿人数。両版の利用人数は同じ人を1人として集計。管理者も含みます。',
+          '閲覧＝「記事を読む」のクリック。同じ人・同じ記事・同じ日は1回（両版は別記事扱い）。ログインした利用者が対象です。',
+          'いいね・コメントは対象週に作成され、集計時点で残っている件数。取消・削除済みは含みません。',
+          '所属は週の名簿スナップショット。初回作成時点で参照できる対象週末以前の最新名簿を使用します。',
+          '名簿にない利用者は別枠。未ログインのアクセスはグループ・人数へ割り当てません。']}
+
+def ssh(script):
+    encoded = base64.b64encode(script.encode('utf-16le')).decode()
+    result = subprocess.run(['ssh','-i',str(Path.home()/'.ssh/dailynews_ieweb01'),'-o','IdentitiesOnly=yes','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','Administrator@IEWEB01','powershell.exe -NoProfile -NonInteractive -EncodedCommand '+encoded], capture_output=True,text=True,encoding='utf8',errors='replace',timeout=75,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+    if result.returncode: raise RuntimeError('サーバー処理に失敗しました: '+result.stderr[-800:])
+    return result.stdout.lstrip('\ufeff')
+
+def upload(file, name):
+    result=subprocess.run(['scp','-i',str(Path.home()/'.ssh/dailynews_ieweb01'),'-o','IdentitiesOnly=yes','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes',str(file),'Administrator@IEWEB01:C:/Users/Administrator/Desktop/DailyNews/incoming/'+name],capture_output=True,timeout=75,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+    if result.returncode: raise RuntimeError('集計ファイルの転送に失敗しました。')
+
+def extract_usage():
+    upload(Path(__file__).with_name('export-usage.cjs'),'weekly-export.cjs')
+    return json.loads(ssh("$ErrorActionPreference='Stop';[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false); & 'C:/Program Files/nodejs/node.exe' 'C:/Users/Administrator/Desktop/DailyNews/incoming/weekly-export.cjs';if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}"))
+
+def read_label(report, edition, value):
+    editions = ('interior','exterior') if edition == 'combined' else (edition,)
+    coverage = [report['coverage'][e] for e in editions]
+    if all(not x['readsStarted'] or x['readsStarted'] > report['end'] for x in coverage): return '計測前'
+    return str(value) + ('' if all(x['readsComplete'] for x in coverage) else '（計測開始後）')
+
+def group_label(row):
+    return row['name'] + ('（グループ記載なし）' if row['level']=='group' and row['name'] in ('内装開発室','外装開発室','IE開発部') else '')
+
+def email_html(report, sample=False):
+    esc = html.escape
+    total = report['rows'][0]
+    body = [f'<html lang="ja"><body style="font-family:Meiryo,sans-serif;color:#24344a;max-width:1050px;margin:auto;padding:24px"><p style="color:#217b72">IE開発デイリーニュース｜週次利用レポート{ "（サンプル）" if sample else ""}</p><h1 style="font-size:26px">グループごとの利用状況</h1><p>{report["week"]} 〜 {report["end"]}（日本時間）</p><p>名簿 {report["masterDate"]} 時点：{total["headcount"]}人 ／ 共通アカウント登録 {total["registered"]}人</p>']
+    if sample: body.append('<p>中村さん向けの確認用です。今後は毎週月曜9時に前週分をお送りします。テスト期間中の送信先は中村さんのみです。</p>')
+    for edition,label in LABELS.items():
+        active = total['editions'][edition]['active']
+        body.append(f'<h2 style="border-bottom:3px solid #268f85;padding-top:20px">{label}：{active}人 / {total["headcount"]}人（{100*active/total["headcount"]:.0f}%）</h2><table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px"><tr style="background:#e5efef"><th align="left">所属</th><th>登録/人数</th><th>利用人数・率</th><th>閲覧</th><th>いいね</th><th>コメント</th></tr>')
+        for row in report['rows']:
+            if row['level']=='all': continue
+            m = row['editions'][edition]; pct = round(100*m['active']/row['headcount'])
+            name = group_label(row)
+            weight = 'bold' if row['level']=='room' else 'normal'
+            body.append(f'<tr style="border-bottom:1px solid #dfe6ee;font-weight:{weight}"><td>{esc(name)}</td><td align="center">{row["registered"]}/{row["headcount"]}</td><td style="min-width:120px">{m["active"]}人・{pct}%<table width="100%" cellspacing="0"><tr><td width="{max(pct,1)}%" style="background:{"#268f85" if pct else "#e7eef2"};height:8px"></td><td width="{max(100-pct,1)}%" style="background:#e7eef2;height:8px"></td></tr></table></td><td align="center">{esc(read_label(report,edition,m["reads"]))}</td><td align="center">{m["likes"]}件/{m["likesUsers"]}人</td><td align="center">{m["comments"]}件/{m["commentsUsers"]}人</td></tr>')
+        body.append(f'</table><p style="font-size:12px">名簿外の利用：{report["unmatched"][edition]["active"]}人（上の利用率には含めません）</p>')
+    body.append('<h2>集計の見方</h2><ul>'+''.join('<li>'+esc(note)+'</li>' for note in report['notes'])+'</ul><p>グループ別閲覧の計測開始：'+esc(' / '.join(LABELS[e]+' '+(c['readsStarted'] or '未開始') for e,c in report['coverage'].items()))+'</p><p><a href="http://IEWEB01/?admin=1">内装版の管理画面</a> ／ <a href="http://IEWEB01/exterior/?admin=1">外装版の管理画面</a></p><p style="font-size:12px;color:#607080">添付PNGはグループ別の利用率グラフです。個人名・メールアドレスはレポートに掲載していません。</p></body></html>')
+    return ''.join(body)
+
+def chart(report, destination):
+    from PIL import Image, ImageDraw, ImageFont
+    font_path = Path(os.environ.get('WINDIR', 'C:/Windows'))/'Fonts/meiryo.ttc'
+    font = lambda size: ImageFont.truetype(str(font_path), size)
+    rows = [r for r in report['rows'] if r['level']=='group']
+    image = Image.new('RGB',(1500,250+len(rows)*113),'#f6f8fb'); d=ImageDraw.Draw(image)
+    d.text((50,30),'IE開発デイリーニュース｜週次利用レポート',font=font(32),fill='#173448')
+    d.text((50,85),f'{report["week"]} 〜 {report["end"]}　利用率＝利用人数 / 名簿人数',font=font(24),fill='#3e5267')
+    for index,(edition,color) in enumerate([('interior','#2375af'),('exterior','#178274'),('combined','#7655a3')]):
+        d.rectangle((55+index*235,140,77+index*235,162),fill=color)
+        d.text((85+index*235,132),LABELS[edition],font=font(23),fill='#20364a')
+    for n,row in enumerate(rows):
+        y=195+n*113
+        label=row['name'].replace(' インテリア開発','').replace(' エクステリア開発','')
+        d.text((50,y+12),label,font=font(23),fill='#213c50')
+        if group_label(row)!=row['name']: d.text((50,y+45),'（グループ記載なし）',font=font(17),fill='#506578')
+        for index,(edition,color) in enumerate([('interior','#2375af'),('exterior','#178274'),('combined','#7655a3')]):
+            value=row['editions'][edition]['active']; pct=value/row['headcount']; by=y+index*29
+            d.rectangle((365,by,1265,by+19),fill='#e1e8ef')
+            if value:d.rectangle((365,by,365+int(900*pct),by+19),fill=color)
+            d.text((1280,by-7),f'{value}/{row["headcount"]}人 {pct:.0%}',font=font(21),fill='#20364a')
+    d.text((50,image.height-40),'同じ人の複数回利用は1人。両版合計も重複を除外。名簿外・未ログインは利用率の対象外。',font=font(18),fill='#506578')
+    image.save(destination)
+
+def publish(reports):
+    file=STATE/'reports.json';atomic_json(file,{'reports':reports});upload(file,'weekly-reports.json')
+    script="$ErrorActionPreference='Stop';$bytes=[IO.File]::ReadAllBytes('C:/Users/Administrator/Desktop/DailyNews/incoming/weekly-reports.json');foreach($folder in @('DailyNews','DailyNewsExterior')){$target='C:/Users/Administrator/Desktop/'+$folder+'/data/weekly-reports.json';$temp=$target+'.tmp';[IO.File]::WriteAllBytes($temp,$bytes);Move-Item -LiteralPath $temp -Destination $target -Force};'published'"
+    ssh(script)
+
+def onedrive_folder():
+    import winreg
+    with winreg.OpenKey(winreg.HKEY_CURRENT_USER,r'Software\Microsoft\OneDrive\Accounts\Business1') as key:
+        return Path(winreg.QueryValueEx(key,'UserFolder')[0])/'DailyNewsAutomation'/'weekly-report'
+
+def run(args):
+    now=datetime.now(JST); today=now.date(); current=week_start(today)
+    STATE.mkdir(parents=True,exist_ok=True)
+    # Single local producer; do not overlap startup and daily scheduled tasks.
+    import msvcrt
+    with (STATE/'producer.lock').open('a+b') as lock:
+        lock.seek(0); lock.write(b'0'); lock.flush(); lock.seek(0)
+        try: msvcrt.locking(lock.fileno(),msvcrt.LK_NBLCK,1)
+        except OSError: raise RuntimeError('レポートの作成処理が既に実行中です。')
+        source=extract_usage(); reports=[]
+        for offset in range(8):
+            start=current-timedelta(weeks=offset); end=start+timedelta(days=6)
+            if end < date(2026,10,1): continue
+            target=STATE/'snapshots'/(start.isoformat()+'.json')
+            if target.exists() and start < current:
+                report=json.loads(target.read_text(encoding='utf8'))
+                if report['complete']: reports.append(report); continue
+            roster_path=STATE/'rosters'/(start.isoformat()+'.json')
+            if roster_path.exists(): roster=json.loads(roster_path.read_text(encoding='utf8'))
+            else:
+                roster=select_master(Path(args.master_root),min(today,end)); atomic_json(roster_path,roster)
+            report=build_report(start,end,roster,source,now)
+            atomic_json(target,report); reports.append(report)
+        previous=next(r for r in reports if r['week']==(current-timedelta(days=7)).isoformat())
+        if args.publish: publish(reports)
+        packet_dir=STATE/'packets'/previous['week']; packet_dir.mkdir(parents=True,exist_ok=True)
+        png=packet_dir/'weekly-usage.png'; chart(previous,png)
+        for sample in (False, True):
+            body=email_html(previous,sample); name='sample' if sample else 'weekly'
+            (packet_dir/(name+'.html')).write_text(body,encoding='utf8')
+            packet={'schema':1,'reportKey':previous['week'],'dueDate':current.isoformat(), 'generatedAt':now.isoformat(),
+                'to':TEST_TO,'subject':f'{"【サンプル】" if sample else ""}IE開発デイリーニュース 週次利用レポート（{previous["week"]}〜{previous["end"]}）',
+                'body':body,'attachmentName':'weekly-usage-'+previous['week']+'.png','attachmentBase64':base64.b64encode(png.read_bytes()).decode()}
+            atomic_json(packet_dir/(name+'.json'),packet)
+            if args.onedrive: atomic_json(onedrive_folder()/(name+'.json'),packet)
+        print(json.dumps({'reports':len(reports),'week':previous['week'],'headcount':previous['rows'][0]['headcount'],'packet':str(packet_dir),'published':args.publish,'oneDrivePrepared':args.onedrive},ensure_ascii=False))
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--master-root',default=str(MASTER_ROOT));parser.add_argument('--publish',action='store_true');parser.add_argument('--onedrive',action='store_true')
+    run(parser.parse_args())

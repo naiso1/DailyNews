@@ -489,6 +489,7 @@ function mergeInteractionData(itemId, data) {
       typeof data.imageUrlOverride === "string"
         ? data.imageUrlOverride
         : previous.imageUrlOverride || "",
+    imageUrlsOverride: Array.isArray(data.imageUrlsOverride) ? data.imageUrlsOverride : previous.imageUrlsOverride || [],
   };
 }
 
@@ -510,6 +511,7 @@ function getInteractionRenderData(itemId) {
     hiddenReason: data.hiddenReason || "",
     hiddenReasonCode: data.hiddenReasonCode || "",
     imageUrlOverride: data.imageUrlOverride || "",
+    imageUrlsOverride: data.imageUrlsOverride || [],
   };
 }
 
@@ -576,7 +578,7 @@ async function loadInteractions() {
     const previousReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
-          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${value.imageUrlOverride || ""}`,
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${JSON.stringify(value.imageUrlsOverride || [])}:${value.imageUrlOverride || ""}`,
       )
       .join("|");
     const payload = await apiRequest("/interactions");
@@ -589,7 +591,7 @@ async function loadInteractions() {
     const currentReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
-          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${value.imageUrlOverride || ""}`,
+          `${id}:${value.likes || 0}:${value.comments || 0}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${JSON.stringify(value.imageUrlsOverride || [])}:${value.imageUrlOverride || ""}`,
       )
       .join("|");
     if (currentReactions !== previousReactions) {
@@ -807,6 +809,7 @@ function renderItem(itemId) {
     hidden: data.hidden,
     hiddenReason: data.hiddenReason,
     imageUrlOverride: data.imageUrlOverride,
+    imageUrlsOverride: data.imageUrlsOverride,
   });
   updateRankings();
 }
@@ -943,6 +946,43 @@ window.requestArticleRemoval = (itemId, itemKind) => {
   window.setTimeout(() => overlay.querySelector("#articleRemovalReason")?.focus(), 0);
 };
 
+window.openNewsImageGallery = (itemId) => {
+  const item = imageEditorItem(itemId);
+  const urls = window.getNewsImageUrls?.(item) || [];
+  if (!urls.length) return;
+  const dialog = document.createElement("dialog");
+  dialog.style.cssText = "width:min(900px,94vw);max-height:94vh;border:1px solid #64748b;border-radius:16px;background:#111b29;color:#f1f5f9;padding:18px";
+  dialog.innerHTML = `<div style="display:flex;justify-content:space-between;gap:16px"><h2 style="font-size:17px;margin:0"></h2><button type="button" data-close aria-label="閉じる">閉じる</button></div><figure style="margin:12px 0"><img style="display:block;width:100%;height:min(55vh,580px);object-fit:contain" referrerpolicy="no-referrer"><figcaption style="text-align:center;margin-top:8px" aria-live="polite"></figcaption></figure><div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap"><button type="button" data-prev aria-label="前の画像">← 前へ</button><div data-thumbs style="display:flex;gap:6px;flex-wrap:wrap"></div><button type="button" data-next aria-label="次の画像">次へ →</button></div>`;
+  dialog.querySelector("h2").textContent = item.title || "記事画像";
+  let index = 0;
+  const image = dialog.querySelector("figure img");
+  const caption = dialog.querySelector("figcaption");
+  const show = value => {
+    index = (value + urls.length) % urls.length;
+    image.alt = `${item.title || '記事画像'}（${index + 1}枚目）`;
+    image.src = window.getDisplayImageUrl?.(urls[index]) || urls[index];
+    caption.textContent = `${index + 1} / ${urls.length}枚`;
+    dialog.querySelectorAll("[data-thumbs] button").forEach((button, n) => button.setAttribute("aria-pressed", String(n === index)));
+  };
+  urls.forEach((url, n) => {
+    const button = document.createElement("button");
+    button.type = "button"; button.setAttribute("aria-label", `${n + 1}枚目を見る`);
+    const thumb = document.createElement("img"); thumb.src = url; thumb.alt = "";
+    thumb.referrerPolicy = "no-referrer"; thumb.style.cssText = "width:56px;height:48px;object-fit:contain";
+    button.append(thumb); button.addEventListener("click", () => show(n));
+    dialog.querySelector("[data-thumbs]").append(button);
+  });
+  image.addEventListener("error", () => { caption.textContent = `${index + 1} / ${urls.length}枚 — 画像を読み込めません`; });
+  dialog.querySelector("[data-prev]").onclick = () => show(index - 1);
+  dialog.querySelector("[data-next]").onclick = () => show(index + 1);
+  dialog.querySelector("[data-close]").onclick = () => dialog.close();
+  dialog.addEventListener("keydown", event => {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); show(index + (event.key === "ArrowLeft" ? -1 : 1)); }
+  });
+  dialog.addEventListener("close", () => dialog.remove(), {once: true});
+  document.body.append(dialog); show(0); dialog.showModal();
+};
+
 function ensureImageEditorDialog() {
   let overlay = document.getElementById("imageUrlEditorOverlay");
   if (overlay) return overlay;
@@ -965,8 +1005,8 @@ function ensureImageEditorDialog() {
       <form class="image-editor-body" id="imageEditorForm">
         <p class="image-editor-title" id="imageEditorItemTitle"></p>
         <div class="image-editor-preview" id="imageEditorPreview"><img alt="画像プレビュー" referrerpolicy="no-referrer"><span>画像をプレビューできません。</span></div>
-        <label class="image-editor-label">新しい画像URL<input class="image-editor-url" id="imageEditorUrl" type="url" maxlength="2048" required placeholder="https://example.com/image.jpg"></label>
-        <p class="image-editor-note">HTTPまたはHTTPSの画像URLを指定してください。保存すると全ユーザーの画面へ反映されます。</p>
+        <label class="image-editor-label">画像URL（1行に1つ、最大5枚）<textarea class="image-editor-url" id="imageEditorUrl" rows="5" maxlength="10244" required placeholder="https://example.com/image.jpg"></textarea></label>
+        <p class="image-editor-note">先頭が代表画像です。行の追加・削除・入れ替えで編集できます。HTTPまたはHTTPSの画像URLを指定してください。保存すると全ユーザーの画面へ反映されます。</p>
         <div class="image-editor-error" id="imageEditorError"></div>
         <div class="image-editor-actions"><button class="image-editor-reset" type="button">元画像に戻す</button><button class="image-editor-cancel" type="button">キャンセル</button><button class="image-editor-save" type="submit">保存する</button></div>
       </form>
@@ -980,7 +1020,7 @@ function ensureImageEditorDialog() {
     const preview = overlay.querySelector("#imageEditorPreview");
     const image = preview.querySelector("img");
     preview.classList.remove("failed");
-    image.src = overlay.querySelector("#imageEditorUrl").value.trim();
+    image.src = overlay.querySelector("#imageEditorUrl").value.trim().split(/\r?\n/)[0] || "";
   };
   overlay.querySelector(".image-editor-close").addEventListener("click", close);
   overlay.querySelector(".image-editor-cancel").addEventListener("click", close);
@@ -1015,21 +1055,22 @@ async function saveImageUrlOverride(event) {
   event.preventDefault();
   const overlay = event.currentTarget.closest(".image-editor-overlay");
   const itemId = overlay.dataset.itemId;
-  const imageUrl = overlay.querySelector("#imageEditorUrl").value.trim();
+  const imageUrls = [...new Set(overlay.querySelector("#imageEditorUrl").value.split(/\r?\n/).map(url => url.trim()).filter(Boolean))];
   const errorElement = overlay.querySelector("#imageEditorError");
   const saveButton = overlay.querySelector(".image-editor-save");
   errorElement.textContent = "";
   saveButton.disabled = true;
   try {
+    if (imageUrls.length < 1 || imageUrls.length > 5 || imageUrls.some(url => !/^https?:\/\//i.test(url))) throw new Error("invalid_image_urls");
     const data = await apiRequest(`/admin/items/${encodeURIComponent(itemId)}/image`, {
       method: "PUT",
-      body: { imageUrl },
+      body: { imageUrls },
     });
     finishImageUrlChange(overlay, itemId, data);
   } catch (error) {
     errorElement.textContent = error.status === 403
       ? "管理者のみ変更できます。"
-      : "画像URLを保存できませんでした。URLと通信状態を確認してください。";
+      : "保存できませんでした。HTTP/HTTPSの画像URLを1行に1つ、1〜5枚指定してください。通信状態も確認してください。";
   } finally {
     saveButton.disabled = false;
   }
@@ -1064,7 +1105,7 @@ window.requestImageUrlChange = (itemId) => {
   overlay.dataset.itemId = itemId;
   overlay.dataset.hasOverride = override ? "1" : "";
   overlay.querySelector("#imageEditorItemTitle").textContent = item.title || itemId;
-  overlay.querySelector("#imageEditorUrl").value = override || item.img || "";
+  overlay.querySelector("#imageEditorUrl").value = (window.getNewsImageUrls?.(item) || [override || item.img || ""]).join("\n");
   overlay.querySelector("#imageEditorError").textContent = "";
   overlay.querySelector(".image-editor-reset").hidden = !override;
   overlay._updateImagePreview?.();

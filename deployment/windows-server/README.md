@@ -57,6 +57,7 @@ The script packages only:
 - `insights_data.js`
 - `dailynews_client.js`
 - `dailynews_account.js`
+- `dailynews_reports.js` (administrator-only group report UI; no roster data)
 - `release_history.js`
 - `setup/` (IEWEB01 certificate and per-user trust installer)
 - `images/`
@@ -64,6 +65,15 @@ The script packages only:
 
 Each package is stored by Git commit ID and activated through
 `active-release.txt`.
+
+Article image overrides support 1–5 ordered HTTP/HTTPS URLs. The legacy
+`image_url` column and `imageUrlOverride` response keep the first image for
+compatibility; `image_urls` and `imageUrlsOverride` store the gallery.
+`user_article_reads` records authenticated article clicks once per user/article/JST
+day. Historical anonymous read counters are not reassigned to users.
+The private `data/weekly-reports.json` is served only through the administrator
+API. See [weekly report operations](../weekly-report/README.md) for roster
+snapshots, collection tasks, scheduling and duplicate-send protection.
 
 User-facing changes must add a short Japanese entry to `release_history.js`
 in the same change (see the root `AGENTS.md`). Include changes to selection,

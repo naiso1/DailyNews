@@ -16,7 +16,8 @@ function fixture(edition) {
   const usage = {startedAt: "2026-09-30 16:00:00", today: {users: 2, visits: 3}, last7Days: {users: 2, visits: 7}, last30Days: {users: 2, visits: 8}, totalVisits: 100,
     daily: [{date: "2026-10-01", users: 2, visits: 3}, {date: "2026-09-30", users: 0, visits: 4}]};
   let fail = false, isAdmin = true;
-  const context = vm.createContext({window, document, URLSearchParams, console,
+  window.dispatchEvent = () => {};
+  const context = vm.createContext({window, document, URLSearchParams, console, CustomEvent: class CustomEvent {},
     fetch: async (url, options) => {
       requests.push({url, options});
       return {ok: !fail, status: fail ? 503 : 200,
