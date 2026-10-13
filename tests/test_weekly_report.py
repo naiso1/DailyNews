@@ -6,6 +6,10 @@ spec=importlib.util.spec_from_file_location('weekly',Path(__file__).resolve().pa
 weekly=importlib.util.module_from_spec(spec);spec.loader.exec_module(weekly)
 
 class WeeklyReportTests(unittest.TestCase):
+    def test_large_roster_change_is_held(self):
+        previous={'members':{str(n):{} for n in range(47)}}
+        weekly.validate_roster_change({'members':{str(n):{} for n in range(48)}},previous)
+        with self.assertRaises(ValueError): weekly.validate_roster_change({'members':{'one':{}}},previous)
     def test_mail_flow_guard_and_recipient(self):
         sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'deployment/weekly-report'))
         from build_flow import build

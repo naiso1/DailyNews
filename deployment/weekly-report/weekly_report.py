@@ -55,6 +55,11 @@ def select_master(root, effective):
             'masterHash': hashlib.sha256(file.read_bytes()).hexdigest(), 'members': members}
 
 def week_start(day): return day - timedelta(days=day.weekday())
+def validate_roster_change(roster, previous):
+    if previous:
+        before, after = len(previous['members']), len(roster['members'])
+        if abs(after-before) > max(5,before*0.2):
+            raise ValueError('名簿人数が前回より大幅に変わっています。前回のレポートを保持しました。新名簿の対象範囲を確認してください。')
 def stamp_day(stamp):
     if not stamp: return None
     return (datetime.fromisoformat(stamp.replace('Z', '+00:00')).replace(tzinfo=timezone.utc).astimezone(JST)).date().isoformat()
@@ -199,7 +204,11 @@ def run(args):
             roster_path=STATE/'rosters'/(start.isoformat()+'.json')
             if roster_path.exists(): roster=json.loads(roster_path.read_text(encoding='utf8'))
             else:
-                roster=select_master(Path(args.master_root),min(today,end)); atomic_json(roster_path,roster)
+                roster=select_master(Path(args.master_root),min(today,end))
+                older=sorted(file for file in (STATE/'rosters').glob('*.json') if file.stem<start.isoformat())
+                previous_roster=json.loads(older[-1].read_text(encoding='utf8')) if older else None
+                validate_roster_change(roster,previous_roster)
+                atomic_json(roster_path,roster)
             report=build_report(start,end,roster,source,now)
             atomic_json(target,report); reports.append(report)
         previous=next(r for r in reports if r['week']==(current-timedelta(days=7)).isoformat())
