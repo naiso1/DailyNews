@@ -1,6 +1,6 @@
 """Private roster snapshots, edition-aware usage reports and a guarded mail packet.
 
-No employee rows or identifiers are published. SSH extraction returns hashed emails.
+Named reports are private to administrators. SSH extraction returns hashed emails.
 The previous complete week is frozen once; later roster updates cannot alter it.
 """
 from __future__ import annotations
@@ -8,6 +8,7 @@ import argparse, base64, csv, hashlib, html, json, os, re, subprocess, unicodeda
 from collections import Counter
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
+from room_reports import build_rooms, email_html, chart
 
 ROOT = Path(__file__).resolve().parents[2]
 STATE = ROOT / 'runtime' / 'weekly-report'
@@ -49,12 +50,25 @@ def select_master(root, effective):
         key = identity(email)
         if key in members or code in codes: raise ValueError('名簿に重複があります。')
         room = '内装開発室' if group.startswith('内装開発室') else '外装開発室' if group.startswith('外装開発室') else 'IE開発部（室外）'
-        members[key] = {'group': group, 'room': room}; codes.add(code)
+        members[key] = {'group': group, 'room': room, 'name': ' '.join(row.get('氏名','').split())}; codes.add(code)
     if not members: raise ValueError('社員マスタが空です。')
     return {'masterDate': stamp.isoformat(), 'masterName': file.name,
             'masterHash': hashlib.sha256(file.read_bytes()).hexdigest(), 'members': members}
 
 def week_start(day): return day - timedelta(days=day.weekday())
+
+def named_roster(roster, root):
+    if all(m.get('name') for m in roster['members'].values()): return roster
+    # Existing snapshots kept hashes/affiliations only. Resolve names exclusively
+    # from that same master, so later transfers never change historical membership.
+    original = select_master(root, date.fromisoformat(roster['masterDate']))
+    if original['masterHash'] != roster['masterHash'] or set(original['members']) != set(roster['members']):
+        raise ValueError('保存済み名簿と同一の社員マスタを確認できません。氏名の推測は行いません。')
+    if any(not m.get('name') for m in original['members'].values()):
+        raise ValueError('社員マスタに氏名がありません。')
+    if any(original['members'][k]['group'] != m['group'] for k,m in roster['members'].items()):
+        raise ValueError('保存済み名簿の所属と一致しません。')
+    return original
 def validate_roster_change(roster, previous):
     if previous:
         before, after = len(previous['members']), len(roster['members'])
@@ -132,48 +146,6 @@ def read_label(report, edition, value):
 def group_label(row):
     return row['name'] + ('（グループ記載なし）' if row['level']=='group' and row['name'] in ('内装開発室','外装開発室','IE開発部') else '')
 
-def email_html(report, sample=False):
-    esc = html.escape
-    total = report['rows'][0]
-    body = [f'<html lang="ja"><body style="font-family:Meiryo,sans-serif;color:#24344a;max-width:1050px;margin:auto;padding:24px"><p style="color:#217b72">IE開発デイリーニュース｜週次利用レポート{ "（サンプル）" if sample else ""}</p><h1 style="font-size:26px">グループごとの利用状況</h1><p>{report["week"]} 〜 {report["end"]}（日本時間）</p><p>名簿 {report["masterDate"]} 時点：{total["headcount"]}人 ／ 共通アカウント登録 {total["registered"]}人</p>']
-    if sample: body.append('<p>中村さん向けの確認用です。今後は毎週月曜9時に前週分をお送りします。テスト期間中の送信先は中村さんのみです。</p>')
-    for edition,label in LABELS.items():
-        active = total['editions'][edition]['active']
-        body.append(f'<h2 style="border-bottom:3px solid #268f85;padding-top:20px">{label}：{active}人 / {total["headcount"]}人（{100*active/total["headcount"]:.0f}%）</h2><table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px"><tr style="background:#e5efef"><th align="left">所属</th><th>登録/人数</th><th>利用人数・率</th><th>閲覧</th><th>いいね</th><th>コメント</th></tr>')
-        for row in report['rows']:
-            if row['level']=='all': continue
-            m = row['editions'][edition]; pct = round(100*m['active']/row['headcount'])
-            name = group_label(row)
-            weight = 'bold' if row['level']=='room' else 'normal'
-            body.append(f'<tr style="border-bottom:1px solid #dfe6ee;font-weight:{weight}"><td>{esc(name)}</td><td align="center">{row["registered"]}/{row["headcount"]}</td><td style="min-width:120px">{m["active"]}人・{pct}%<table width="100%" cellspacing="0"><tr><td width="{max(pct,1)}%" style="background:{"#268f85" if pct else "#e7eef2"};height:8px"></td><td width="{max(100-pct,1)}%" style="background:#e7eef2;height:8px"></td></tr></table></td><td align="center">{esc(read_label(report,edition,m["reads"]))}</td><td align="center">{m["likes"]}件/{m["likesUsers"]}人</td><td align="center">{m["comments"]}件/{m["commentsUsers"]}人</td></tr>')
-        body.append(f'</table><p style="font-size:12px">名簿外の利用：{report["unmatched"][edition]["active"]}人（上の利用率には含めません）</p>')
-    body.append('<h2>集計の見方</h2><ul>'+''.join('<li>'+esc(note)+'</li>' for note in report['notes'])+'</ul><p>グループ別閲覧の計測開始：'+esc(' / '.join(LABELS[e]+' '+(c['readsStarted'] or '未開始') for e,c in report['coverage'].items()))+'</p><p><a href="http://IEWEB01/?admin=1">内装版の管理画面</a> ／ <a href="http://IEWEB01/exterior/?admin=1">外装版の管理画面</a></p><p style="font-size:12px;color:#607080">添付PNGはグループ別の利用率グラフです。個人名・メールアドレスはレポートに掲載していません。</p></body></html>')
-    return ''.join(body)
-
-def chart(report, destination):
-    from PIL import Image, ImageDraw, ImageFont
-    font_path = Path(os.environ.get('WINDIR', 'C:/Windows'))/'Fonts/meiryo.ttc'
-    font = lambda size: ImageFont.truetype(str(font_path), size)
-    rows = [r for r in report['rows'] if r['level']=='group']
-    image = Image.new('RGB',(1500,250+len(rows)*113),'#f6f8fb'); d=ImageDraw.Draw(image)
-    d.text((50,30),'IE開発デイリーニュース｜週次利用レポート',font=font(32),fill='#173448')
-    d.text((50,85),f'{report["week"]} 〜 {report["end"]}　利用率＝利用人数 / 名簿人数',font=font(24),fill='#3e5267')
-    for index,(edition,color) in enumerate([('interior','#2375af'),('exterior','#178274'),('combined','#7655a3')]):
-        d.rectangle((55+index*235,140,77+index*235,162),fill=color)
-        d.text((85+index*235,132),LABELS[edition],font=font(23),fill='#20364a')
-    for n,row in enumerate(rows):
-        y=195+n*113
-        label=row['name'].replace(' インテリア開発','').replace(' エクステリア開発','')
-        d.text((50,y+12),label,font=font(23),fill='#213c50')
-        if group_label(row)!=row['name']: d.text((50,y+45),'（グループ記載なし）',font=font(17),fill='#506578')
-        for index,(edition,color) in enumerate([('interior','#2375af'),('exterior','#178274'),('combined','#7655a3')]):
-            value=row['editions'][edition]['active']; pct=value/row['headcount']; by=y+index*29
-            d.rectangle((365,by,1265,by+19),fill='#e1e8ef')
-            if value:d.rectangle((365,by,365+int(900*pct),by+19),fill=color)
-            d.text((1280,by-7),f'{value}/{row["headcount"]}人 {pct:.0%}',font=font(21),fill='#20364a')
-    d.text((50,image.height-40),'同じ人の複数回利用は1人。両版合計も重複を除外。名簿外・未ログインは利用率の対象外。',font=font(18),fill='#506578')
-    image.save(destination)
-
 def publish(reports):
     file=STATE/'reports.json';atomic_json(file,{'reports':reports});upload(file,'weekly-reports.json')
     script="$ErrorActionPreference='Stop';$bytes=[IO.File]::ReadAllBytes('C:/Users/Administrator/Desktop/DailyNews/incoming/weekly-reports.json');foreach($folder in @('DailyNews','DailyNewsExterior')){$target='C:/Users/Administrator/Desktop/'+$folder+'/data/weekly-reports.json';$temp=$target+'.tmp';[IO.File]::WriteAllBytes($temp,$bytes);Move-Item -LiteralPath $temp -Destination $target -Force};'published'"
@@ -211,6 +183,17 @@ def run(args):
                 atomic_json(roster_path,roster)
             report=build_report(start,end,roster,source,now)
             atomic_json(target,report); reports.append(report)
+        for report in reports:
+            detail_path=STATE/'room-details'/(report['week']+'.json')
+            if detail_path.exists() and report['complete']:
+                details=json.loads(detail_path.read_text(encoding='utf8'))
+            else:
+                roster=json.loads((STATE/'rosters'/(report['week']+'.json')).read_text(encoding='utf8'))
+                roster=named_roster(roster,Path(args.master_root))
+                details={'rooms':build_rooms(report,roster,source),'generatedAt':now.isoformat()}
+                atomic_json(detail_path,details)
+            report['rooms']=details['rooms']
+            report['roomDetailsGeneratedAt']=details['generatedAt']
         previous=next(r for r in reports if r['week']==(current-timedelta(days=7)).isoformat())
         if args.publish: publish(reports)
         packet_dir=STATE/'packets'/previous['week']; packet_dir.mkdir(parents=True,exist_ok=True)
@@ -219,7 +202,7 @@ def run(args):
             body=email_html(previous,sample); name='sample' if sample else 'weekly'
             (packet_dir/(name+'.html')).write_text(body,encoding='utf8')
             packet={'schema':1,'reportKey':previous['week'],'dueDate':current.isoformat(), 'generatedAt':now.isoformat(),
-                'to':TEST_TO,'subject':f'{"【サンプル】" if sample else ""}IE開発デイリーニュース 週次利用レポート（{previous["week"]}〜{previous["end"]}）',
+                'to':TEST_TO,'subject':f'{"【サンプル】" if sample else ""}【室別・氏名付き】デイリーニュース 週次利用レポート（{previous["week"]}〜{previous["end"]}）',
                 'body':body,'attachmentName':'weekly-usage-'+previous['week']+'.png','attachmentBase64':base64.b64encode(png.read_bytes()).decode()}
             atomic_json(packet_dir/(name+'.json'),packet)
             if args.onedrive: atomic_json(onedrive_folder()/(name+'.json'),packet)

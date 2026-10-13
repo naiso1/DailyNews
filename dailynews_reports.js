@@ -1,48 +1,50 @@
 "use strict";
-// Reports contain aggregate counts only. The server enforces administrator access.
+// Named usage details arrive only from the administrator-protected API.
 window.renderDailyNewsWeeklyReports = async (container, request) => {
   if (!container) return;
   container.style.cssText = 'min-width:0;scroll-margin-top:80px';
-  const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-  container.innerHTML = '<p class="account-note">グループ別の週次レポートを読み込み中...</p>';
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const percent = (value,total) => total ? Math.round(100*value/total) : 0;
+  container.innerHTML = '<p class="account-note">各室の週次利用レポートを読み込み中...</p>';
   let reports;
   try { reports = (await request('/admin/weekly-reports')).reports || []; }
   catch (_) { container.innerHTML = '<p class="account-note">週次レポートを読み込めませんでした。管理画面を開き直してください。</p>'; return; }
-  if (!reports.length) { container.innerHTML = '<p class="account-note">グループ別の週次レポートは準備中です。</p>'; return; }
-  let week = reports.find(report => report.complete)?.week || reports[0].week;
-  let edition = window.DAILYNEWS_CONFIG?.id || 'interior';
-  let room = '';
-  const labels = {interior:'内装版', exterior:'外装版', combined:'両版合計（人数の重複なし）'};
-  const groupLabel = row => row.level === 'group' && ['内装開発室','外装開発室','IE開発部'].includes(row.name) ? row.name + '（グループ記載なし）' : row.name;
-  const percent = (value, total) => total ? Math.round(100 * value / total) : 0;
+  if (!reports.length) { container.innerHTML = '<p class="account-note">週次レポートは準備中です。</p>'; return; }
+  let week = reports.find(report=>report.complete)?.week || reports[0].week;
+  let edition = window.DAILYNEWS_CONFIG?.id === 'exterior' ? 'exterior' : 'interior';
+  const labels = {interior:'内装開発室（内装版の利用）',exterior:'外装開発室（外装版の利用）'};
+  const rooms = {interior:'内装開発室',exterior:'外装開発室'};
+  const bar = (active,total) => `<div role="img" aria-label="利用率${percent(active,total)}%" style="min-width:90px;height:9px;background:#25374c;border-radius:5px;overflow:hidden"><div style="width:${percent(active,total)}%;height:100%;background:#74c9b1"></div></div>`;
+  const rowFor = report => report.rooms?.[edition] || (()=>{const row=report.rows.find(r=>r.level==='room'&&r.name===rooms[edition]);return row?{...row,...row.editions[edition]}:null;})();
   const trend = () => {
-    const weeks = reports.slice().reverse();
-    const names = room ? [room] : ['内装開発室','外装開発室','IE開発部 全体'];
-    const colors = ['#72b8f0','#74c9b1','#c2a2ee'];
-    const x = i => 50 + i * 560 / Math.max(1,weeks.length-1), y = value => 160-value*1.2;
-    return `<div style="overflow:auto"><svg viewBox="0 0 660 230" role="img" aria-label="週ごとの利用率の折れ線グラフ" style="width:100%;min-width:480px">${[0,50,100].map(n=>`<line x1="50" x2="610" y1="${y(n)}" y2="${y(n)}" stroke="#344257"/><text x="8" y="${y(n)+4}" fill="#c2ccdc" font-size="12">${n}%</text>`).join('')}${names.map((name,n)=>{const values=weeks.map(r=>{const row=r.rows.find(v=>v.name===name&&v.level!=='group');return row?percent(row.editions[edition].active,row.headcount):null;});return `<polyline points="${values.map((v,i)=>v===null?'':`${x(i)},${y(v)}`).join(' ')}" fill="none" stroke="${colors[n]}" stroke-width="2"/>${values.map((v,i)=>v===null?'':`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${colors[n]}"><title>${esc(name)} ${esc(weeks[i].week)}：${v}%</title></circle>`).join('')}<text x="${50+n*195}" y="220" fill="${colors[n]}" font-size="12">${esc(name)}</text>`;}).join('')}${weeks.map((r,i)=>`<text x="${x(i)}" y="183" text-anchor="middle" fill="#c2ccdc" font-size="11">${esc(r.week.slice(5))}${r.complete?'':'*'}</text>`).join('')}</svg></div><p class="account-note">* は途中の週。2026-09-28の週は10月1日以降の部分計測です。表は横にスクロールできます。</p>`;
+    const weeks=reports.slice().reverse(), x=i=>45+i*550/Math.max(1,weeks.length-1), y=v=>155-v*1.15;
+    const values=weeks.map(r=>{const row=rowFor(r);return row?percent(row.active,row.headcount):null;});
+    return `<div style="overflow:auto"><svg viewBox="0 0 640 205" role="img" aria-label="${esc(labels[edition])}の週次利用率" style="width:100%;min-width:380px">${[0,50,100].map(n=>`<line x1="45" x2="595" y1="${y(n)}" y2="${y(n)}" stroke="#344257"/><text x="4" y="${y(n)+4}" fill="#c2ccdc" font-size="12">${n}%</text>`).join('')}<polyline points="${values.map((v,i)=>v===null?'':`${x(i)},${y(v)}`).join(' ')}" fill="none" stroke="#74c9b1" stroke-width="2"/>${values.map((v,i)=>v===null?'':`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="#74c9b1"><title>${esc(weeks[i].week)}：${v}%</title></circle><text x="${x(i)}" y="${y(v)-9}" text-anchor="middle" fill="#c2ccdc" font-size="12">${v}%</text>`).join('')}${weeks.map((r,i)=>`<text x="${x(i)}" y="183" text-anchor="middle" fill="#c2ccdc" font-size="11">${esc(r.week.slice(5))}${r.complete?'':'*'}</text>`).join('')}</svg></div><p class="account-note">* は途中の週。9月28日の週は10月1日以降の部分計測です。</p>`;
   };
   const draw = () => {
-    const report = reports.find(row => row.week === week);
-    const relevant = edition === 'combined' ? ['interior','exterior'] : [edition];
-    const before = relevant.every(e => !report.coverage[e].readsStarted || report.coverage[e].readsStarted > report.end);
-    const partial = relevant.some(e => !report.coverage[e].readsComplete);
-    const usagePartial = relevant.some(e => !report.coverage[e].usageStarted || report.coverage[e].usageStarted > report.week);
-    const read = m => before ? '計測前' : `${m.reads}回 / ${m.readsUsers}人${partial ? ' ※' : ''}`;
-    const bar = (active, headcount) => `<div role="img" aria-label="利用率${percent(active,headcount)}%" style="min-width:100px;height:9px;background:#25374c;border-radius:5px;overflow:hidden"><div style="width:${percent(active,headcount)}%;height:100%;background:#74c9b1"></div></div>`;
-    const total = report.rows[0];
-    container.innerHTML = `<h3 class="account-section-title">グループ別の週次利用レポート</h3>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px"><label>対象週 <select data-week>${reports.map(row => `<option value="${esc(row.week)}" ${row.week === week ? 'selected' : ''}>${esc(row.week)}〜${esc(row.end)}${row.complete ? '' : '（途中）'}</option>`).join('')}</select></label><label>利用する版 <select data-edition>${Object.entries(labels).map(([value,label])=>`<option value="${value}" ${value===edition?'selected':''}>${label}</option>`).join('')}</select></label><label>所属室 <select data-room>${['','内装開発室','外装開発室','IE開発部（室外）'].map(value=>`<option value="${value}" ${value===room?'selected':''}>${value||'全体'}</option>`).join('')}</select></label></div>
-      ${Date.now()-new Date(reports[0].generatedAt).getTime()>36*3600000?'<p class="account-note">集計の更新から36時間以上経過しています。前回の結果を表示しています。</p>':''}
-      <p class="account-note">名簿：${esc(report.masterDate)}時点・${total.headcount}人 ／ 共通アカウント登録：${total.registered}人（${percent(total.registered,total.headcount)}%）<br>集計：${esc(new Date(report.generatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}))} JST。所属と利用する版を分けて集計しています。</p>
-      ${usagePartial ? '<p class="account-note">この週は利用人数の計測開始を含みます。開始前の利用は含まれません。</p>' : ''}
-      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>所属</th><th>登録 / 名簿</th><th>利用人数・率</th><th>記事閲覧 / 人数</th><th>いいね / 人数</th><th>コメント / 人数</th></tr></thead><tbody>${report.rows.filter(row=>!room || row.level==='room'&&row.name===room || row.level==='group'&&(room==='IE開発部（室外）'?!row.name.startsWith('内装開発室')&&!row.name.startsWith('外装開発室'):row.name.startsWith(room))).map(row => { const m=row.editions[edition]; return `<tr style="${row.level==='group'?'':'font-weight:bold;background:rgba(111,167,255,.06)'}"><td>${esc(groupLabel(row))}</td><td>${row.registered}/${row.headcount}人</td><td>${m.active}人（${percent(m.active,row.headcount)}%）${bar(m.active,row.headcount)}</td><td>${read(m)}</td><td>${m.likes}件 / ${m.likesUsers}人</td><td>${m.comments}件 / ${m.commentsUsers}人</td></tr>`; }).join('')}</tbody></table></div>
-      <p class="account-note">${before ? 'この週のグループ別閲覧数は計測前です。' : partial ? '※ 閲覧数は計測開始後の値です。週全体の数字ではありません。' : ''} 名簿外の利用者：${report.unmatched[edition].active}人（利用率に含めません）。</p>
-      <details open><summary>週ごとの利用率の推移（${esc(labels[edition])}）</summary>${trend()}<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>週</th><th>内装開発室</th><th>外装開発室</th><th>IE開発部 全体</th></tr></thead><tbody>${reports.slice().reverse().map(r=>`<tr><td>${esc(r.week)}${r.complete?'':'（途中）'}</td>${['内装開発室','外装開発室','IE開発部 全体'].map(name=> { const row=r.rows.find(x=>x.name===name && x.level!=='group'); if(!row)return '<td>—</td>'; const active=row.editions[edition].active; return `<td>${active}/${row.headcount}人（${percent(active,row.headcount)}%）${bar(active,row.headcount)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></details>
-      <details><summary>集計方法・注意点</summary><ul class="account-note">${report.notes.map(note=>`<li>${esc(note)}</li>`).join('')}<li>完了した週のレポートは保存した値を表示します。途中の週は毎日の集計で更新します。</li></ul></details>`;
-    container.querySelector('[data-week]').addEventListener('change', event => { week=event.target.value; draw(); });
-    container.querySelector('[data-room]').addEventListener('change', event => { room=event.target.value; draw(); });
-    container.querySelector('[data-edition]').addEventListener('change', event => { edition=event.target.value; draw(); });
+    const report=reports.find(r=>r.week===week), section=report.rooms?.[edition];
+    const controls=`<h3 class="account-section-title">各室のデイリーニュース利用状況</h3><div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px"><label>対象週 <select data-week>${reports.map(r=>`<option value="${esc(r.week)}" ${r.week===week?'selected':''}>${esc(r.week)}〜${esc(r.end)}${r.complete?'':'（途中）'}</option>`).join('')}</select></label><label>対象室・版 <select data-edition>${Object.entries(labels).map(([key,label])=>`<option value="${key}" ${key===edition?'selected':''}>${label}</option>`).join('')}</select></label></div>`;
+    const bind=()=>{container.querySelector('[data-week]').addEventListener('change',e=>{week=e.target.value;draw();});container.querySelector('[data-edition]').addEventListener('change',e=>{edition=e.target.value;draw();});};
+    if(!section){container.innerHTML=controls+'<p class="account-note">この週の氏名付き室別レポートを準備中です。</p>';bind();return;}
+    const c=report.coverage[edition], before=!c.readsStarted||c.readsStarted>report.end;
+    const read=m=>before?'計測前':`${m.reads}回${c.readsComplete?'':' ※'}`;
+    const inactive=section.registeredInactive+section.unregistered;
+    container.innerHTML=controls+`
+      ${Date.now()-new Date(reports[0].generatedAt).getTime()>36*3600000?'<p class="account-note">集計更新から36時間以上経過しています。前回の結果です。</p>':''}
+      <h4>${esc(section.room)}：${esc(section.title)}</h4>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin:16px 0"><div><strong style="font-size:24px">${percent(section.active,section.headcount)}%</strong><br>利用 ${section.active} / ${section.headcount}人</div><div><strong style="font-size:24px">${section.registeredInactive}人</strong><br>登録済・利用記録なし</div><div><strong style="font-size:24px">${section.unregistered}人</strong><br>未登録</div></div>
+      <p class="account-note">利用率＝自室の版を利用したメンバー数 ÷ その室の名簿人数。名簿は${esc(report.masterDate)}時点、登録状態は対象週末時点です。</p>
+      ${!section.usageComplete?'<p class="account-note">この週は利用の部分計測です。利用記録がなくても、計測開始前に利用していた可能性があります。</p>':''}
+      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>グループ</th><th>利用 / 名簿人数</th><th>利用率</th><th>利用記録なし</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${section.groups.map(g=>`<tr><td>${esc(g.label)}</td><td>${g.active}/${g.headcount}人</td><td>${percent(g.active,g.headcount)}%${bar(g.active,g.headcount)}</td><td>${g.registeredInactive+g.unregistered}人</td><td>${read(g)}</td><td>${g.likes}件</td><td>${g.comments}件</td></tr>`).join('')}</tbody></table></div>
+      <h4>フォロー対象の確認（利用記録なし ${inactive}人）</h4>
+      <p class="account-note">未登録の方には登録案内、登録済みで利用記録がない方にはアクセス方法や利用しづらい点の確認にお使いください。</p>
+      ${section.groups.map(g=>`<p><b>${esc(g.label)}</b>：${g.members.filter(m=>!m.active).map(m=>`${esc(m.name)}（${esc(m.status)}）`).join('、')||'利用記録なしの人はいません。'}</p>`).join('')}
+      <h4>グループごとの個人別利用状況</h4>
+      ${section.groups.map(g=>`<details open style="margin-bottom:16px"><summary>${esc(g.label)}（${g.active}/${g.headcount}人が利用）</summary><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>氏名</th><th>対象週の状態</th><th>利用日数</th><th>週内の最終利用</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${g.members.map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.status)}</td><td>${m.days}日</td><td>${esc(m.lastActivity||'—')}</td><td>${read(m)}</td><td>${m.likes}件</td><td>${m.comments}件</td></tr>`).join('')}</tbody></table></div></details>`).join('')}
+      <p class="account-note">${before?'この週の記事閲覧数は計測前です。':!c.readsComplete?'※ 記事閲覧数は計測開始後の値です。':''} 利用記録なしは対象週に利用を確認できない状態です。未ログインの閲覧は個人に割り当てていません。</p>
+      <details open><summary>週ごとの利用率（${esc(labels[edition])}）</summary>${trend()}</details>
+      <details><summary>集計方法</summary><ul class="account-note"><li>ログインした画面利用・記事閲覧・いいね・コメントのいずれかで利用ありとします。同じ人は1人、同じ日は1日です。</li><li>いいね・コメントは対象週に作成され、集計時点で残っている件数です。</li><li>個人別の利用状況は管理者だけが閲覧できます。試行中のメール宛先は中村さんのみです。</li><li>完了した週の所属と利用状況は保存した値を表示します。途中の週は日次更新します。</li><li>集計：${esc(new Date(report.roomDetailsGeneratedAt||report.generatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}))} JST</li></ul></details>`;
+    bind();
   };
   draw();
 };

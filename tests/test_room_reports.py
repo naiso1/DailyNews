@@ -1,0 +1,49 @@
+import sys, unittest
+from pathlib import Path
+from datetime import date, datetime
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'deployment/weekly-report'))
+import weekly_report as weekly
+from room_reports import build_rooms, email_html
+
+class RoomReportsTests(unittest.TestCase):
+    def fixture(self):
+        roster={'masterDate':'2026-09-21','masterName':'fixture','members':{
+            'i1':{'name':'内装 利用者','room':'内装開発室','group':'内装開発室 1G'},
+            'i2':{'name':'内装 外装のみ利用','room':'内装開発室','group':'内装開発室 1G'},
+            'i3':{'name':'内装 未登録','room':'内装開発室','group':'内装開発室 2G'},
+            'e1':{'name':'外装 利用者','room':'外装開発室','group':'外装開発室 1G'},
+            'e2':{'name':'外装 未登録','room':'外装開発室','group':'外装開発室 1G'},
+            'dept':{'name':'部員','room':'IE開発部（室外）','group':'IE開発部'}}}
+        def data(): return {'accounts':[],'usageStarted':'2026-10-01 00:00:00','readsStarted':'2026-10-13 00:00:00','usage':[],'reads':[],'likes':[],'comments':[],'access':[]}
+        source={'interior':data(),'exterior':data()}
+        source['interior']['accounts']=[{'key':k,'createdAt':'2026-10-01 00:00:00'} for k in ('i1','i2','e1','dept')]+[{'key':'i3','createdAt':'2026-10-11 15:00:00'}]
+        source['interior']['usage']=[{'key':'i1','date_key':'2026-10-05'},{'key':'i1','date_key':'2026-10-05'},{'key':'dept','date_key':'2026-10-05'}]
+        source['exterior']['usage']=[{'key':'e1','date_key':'2026-10-06'},{'key':'i2','date_key':'2026-10-06'}]
+        source['interior']['likes']=[{'key':'i1','date_key':'2026-10-06','count':2},{'key':'i2','date_key':'2026-10-12','count':1}]
+        report=weekly.build_report(date(2026,10,5),date(2026,10,11),roster,source,datetime(2026,10,13,tzinfo=weekly.JST))
+        report['rooms']=build_rooms(report,roster,source)
+        return report,roster,source
+    def test_own_room_own_edition_only(self):
+        report,_,_=self.fixture()
+        interior,exterior=report['rooms']['interior'],report['rooms']['exterior']
+        self.assertEqual((interior['active'],interior['headcount'],interior['registeredInactive'],interior['unregistered']),(1,3,1,1))
+        self.assertEqual((exterior['active'],exterior['headcount']),(1,2))
+        people=[m for g in interior['groups'] for m in g['members']]
+        active=next(m for m in people if m['active']);self.assertEqual(active['days'],2);self.assertEqual(active['likes'],2)
+        self.assertEqual(active['lastActivity'],'2026-10-06')
+        self.assertNotIn('部員',str(report['rooms']))
+        self.assertNotIn('外装 利用者',str(interior))
+    def test_named_status_period_and_email(self):
+        report,_,_=self.fixture(); body=email_html(report)
+        self.assertIn('内装 外装のみ利用（登録済・利用記録なし）',body)
+        self.assertIn('内装 未登録（未登録）',body)
+        self.assertIn('計測前',body)
+        self.assertNotIn('両版合計',body)
+        self.assertNotIn('部員',body)
+        self.assertNotIn('i1',body)
+    def test_reconstruction_must_reconcile(self):
+        report,roster,source=self.fixture()
+        source['interior']['usage'].append({'key':'i2','date_key':'2026-10-05'})
+        with self.assertRaises(ValueError):build_rooms(report,roster,source)
+
+if __name__=='__main__':unittest.main()

@@ -1,6 +1,7 @@
 import importlib.util, tempfile, unittest, sys
 from datetime import date, datetime
 from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'deployment/weekly-report'))
 
 spec=importlib.util.spec_from_file_location('weekly',Path(__file__).resolve().parents[1]/'deployment/weekly-report/weekly_report.py')
 weekly=importlib.util.module_from_spec(spec);spec.loader.exec_module(weekly)
@@ -41,6 +42,7 @@ class WeeklyReportTests(unittest.TestCase):
         self.assertEqual(total['editions']['combined']['likesUsers'],1)
         self.assertEqual(result['unmatched']['combined']['active'],1)
         self.assertEqual(weekly.read_label(result,'combined',0),'計測前')
+        result['rooms']=weekly.build_rooms(result,roster,{'interior':source(),'exterior':source()})
         self.assertNotIn('outsider',weekly.email_html(result))
     def test_latest_uses_effective_date_and_validates_duplicates(self):
         with tempfile.TemporaryDirectory() as folder:
