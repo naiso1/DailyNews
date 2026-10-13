@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-10-13 01:37";
+window.NEWS_UPDATED_AT = "2026-10-14 01:50";
 
 window.LOADED_NEWS_DATA = [
 
@@ -239515,6 +239515,753 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://cdn-webcartop.com/wp-content/uploads/2026/10/20261010_esky_accessary_012.jpg",
+        note: ""
+    },
+    // 2026-10-13 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2019",
+        title: "メルセデスAMG G63限定200台、専用5色とカーボン内装で特別仕様",
+        desc: "メルセデス・ベンツ日本は「G 63 MANUFAKTUR Edition」を200台限定で発売した。価格は3468万円で、ナッパレザーのダイヤモンドステッチシートやカーボンファイバートリム、チェリーウッドラゲッジフロアなど特別仕様の内装が特徴だ。",
+        url: "https://news.yahoo.co.jp/articles/4f6c7af42c377748c0638e2cc9c17003f7eb7831",
+        source: "レスポンス",
+        date: "2026-10-13",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "◆カーボンとウッドで特別感を演出するインテリアインテリアは本革（ナッパレザー）のブラックを基調とし、ダイヤモンドステッチを施したシートを採用する。",
+        interiorScore: 56,
+        interiorReason: "Article details specific premium interior materials (Nappa leather with diamond",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-00000025-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2020",
+        title: "オーディオテクニカ、HDMI音声分離対応の車載用DAC『AT-HRD200』を発売",
+        desc: "オーディオテクニカは、HDMI機器の映像と音声を分離出力する車載用D/Aコンバーター『AT-HRD200』を発売した。希望小売価格は2万7500円（税込）で、ESS製「ES9018K2M」による32～192kHz/32bit対応と金属筐体によるノイズ低減が特徴だ。",
+        url: "https://news.yahoo.co.jp/articles/7fae584bcbb006ea09f824854dccf48ed981191c",
+        source: "レスポンス",
+        date: "2026-10-13",
+        tags: ["AI", "音響"],
+    
+        sourceExcerpt: "【画像】オーディオテクニカの車載用DAC『AT-HRD200』『AT-HRD200』は、Amazon Fire TV StickなどのHDMIストリーミングデバイスから入力された信号を映像と音声に分離し、それぞれ最適な品質で出力する製品だ。",
+        interiorScore: 62,
+        interiorReason: "The article details a specific in-car audio accessory (DAC) that integrates with",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-00000015-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2021",
+        title: "三菱デリカD:5ベース車中泊コンプリートカー「P MONOBOX：Di-seat」公開",
+        desc: "フレックス・ドリームが三菱デリカD:5ベースの車中泊仕様のコンプリートカー「P MONOBOX：Di-seat」を公開した。セカンドシートは前向き乗車、対面、フルフラットの3パターンに変形でき、約1680mmのベッドとして利用可能である。展示車両の税込価格は834万6960円となっている。",
+        url: "https://news.yahoo.co.jp/articles/858ab32541fcc8863118c35efe8cb49c73da1fbf",
+        source: "MotorFan",
+        date: "2026-10-13",
+        tags: ["シート"],
+    
+        sourceExcerpt: "■フレックス・ドリーム デリカD:5 P MONOBOX：Di-seat●ベース車両：三菱デリカD:5 P●乗車定員：7名●就寝人数：2人●",
+        sourceExcerptEnd: "00円）●MONOBOX Di-seat（55万円）●ボディラッピング・塗装（88万円）●ほか参考品（37万8400円）",
+        interiorScore: 90,
+        interiorReason: "Focuses on a specific seat customization (MONOBOX Di-seat) with concrete dimensi",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-01563125-motorfan-000-2-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2022",
+        title: "プジョーE-T16コンセプト、Hypersquareとステア・バイ・ワイヤ採用",
+        desc: "プジョーはパリモーターショーで、205 T16をオマージュしたEVコンセプトカー「E-T16コンセプト」を発表した。室内には21インチのパノラマディスプレイを配置し、四角形の操舵デバイス「Hypersquare」とステア・バイ・ワイヤ技術を組み合わせている。",
+        url: "https://news.yahoo.co.jp/articles/7774b6ffd3bf9e40eec76d1f79b53e34f790fe57",
+        source: "WEB CARTOP",
+        date: "2026-10-13",
+        tags: ["AR", "ディスプレイ", "EV"],
+    
+        sourceExcerpt: "室内には21インチの大型パノラマディスプレイを配置し、四角形の操舵デバイス「Hypersquare」と、ステア・バイ・ワイヤ技術を組み合わせている。",
+        interiorScore: 80,
+        interiorReason: "Detailed description of the new digital i-Cockpit features including a 21-inch p",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-00010003-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2023",
+        title: "イフーがハイエース用リアルウッド内装とREVOシートで車中泊を両立",
+        desc: "イフーの「ログギヤ」は、ハイエースハイルーフに天然木の内装を採用したモデルだ。アンティークブラウンシートとマホガニーパネルが温かみのある空間を作り出し、REVOシートのロングスライドレールを活用して8名乗車や対面リビング、フルフラットのベッドモードなど多様なレイアウトへの切り替えを可能にする。",
+        url: "https://news.yahoo.co.jp/articles/b0b79eca17b170fde560c2de2c5062ffcb8a6075",
+        source: "Auto Messe Web",
+        date: "2026-10-13",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "8名乗車に対応する前向き乗車モードはもちろん、セカンドシートとサードシートを対面させて家族や仲間とテーブルを囲むリビングモード、そして室内いっぱいに平らな空間を広げて大人2名が快適に就寝できるフルフラットのベッドモードまで、用途に応じて瞬時に切り替えることが可能だ。",
+        interiorScore: 92,
+        interiorReason: "Detailed interior customization featuring real wood paneling, specific seat mech",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-00010009-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2024",
+        title: "日産新型ムラーノ、左ハンドルで日本復活",
+        desc: "日産は北米仕様の左ハンドルを維持したまま、新型プレミアムSUV「ムラーノ」を約11年ぶりに国内正規導入する。試乗車にはセミアニリンレザーやパノラミックルーフが備わる一方、日本向けのカタログモデルとなるSVグレードでは合成皮革シートを採用し、価格は796万4000円（消費税込）に設定されている。",
+        url: "https://news.yahoo.co.jp/articles/cf26994e2c6f507f3c9637b845f1ed1907c8827c",
+        source: "VAGUE",
+        date: "2026-10-13",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "今回試乗したのは、セミアニリンレザーやパノラミックルーフ、21インチタイヤを備えた上級グレードの開発車両でしたが、日本へ導入される正規カタログモデルは20インチタイヤや合成皮革シートを採用した「SV」グレード（消費税込796万4000円）となります。",
+        interiorScore: 63,
+        interiorReason: "The article details specific interior materials (semi-aniline leather vs. synthe",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-10464189-vague-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2025",
+        title: "BYD新型ラッコ、物理ボタンと後席チルトアップで軽EVの快適性を追求",
+        desc: "BYD新型「ラッコ」は約214万円からという価格設定に加え、内装に物理ボタンのエアコンパネルや後席チルトアップ機構を備える。上級グレードでは合成皮革シートを採用し、助手席下には収納バケツも設けられている。",
+        url: "https://news.yahoo.co.jp/articles/cb00a8aba632b95e121d2994922acd408d2b7ed5",
+        source: "ベストカーWeb",
+        date: "2026-10-13",
+        tags: ["シート", "新素材", "EV", "バッテリー"],
+    
+        sourceExcerpt: "内装の質感や座席の座り心地も素晴らしいが、やはり驚くのは価格。",
+        interiorScore: 28,
+        interiorReason: "Detailed breakdown of interior features including physical AC buttons, seat mate",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-00000004-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2026",
+        title: "メルセデス・ベンツGLB 250+ E、スポーツモードでも快適性を維持",
+        desc: "試乗したGLB 250+ Eは、アダプティブダンパーを備え、うねる路面の振動を巧みに処理してボディをフラットに保つ。筆者は、スポーツ・モードでダンパーが引き締まり正確な操縦性を発揮しながらも快適性が損なわれない点に驚きを感じたと評価している。",
+        url: "https://news.yahoo.co.jp/articles/e70345741a62732799e4b67e989168dc8923c9f1",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-13",
+        tags: [],
+    
+        sourceExcerpt: "うねるような路面を滑らかに均し、細かな振動も巧みに処理し、ボディはフラットに保たれていた。",
+        interiorScore: 39,
+        interiorReason: "The article is a driving review focusing on powertrain performance (acceleration",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-01279119-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2027",
+        title: "メルセデス・ベンツGLB 250＋ エレクトリック、3列7シーターと助手席モニター",
+        desc: "全長4728mmのGLB 250＋エレクトリックは、英国仕様で3列7シーターが標準装備される。内装では、筆者は気が散ると指摘する助手席モニターを搭載し、AMGライン・プレミアム以上ではアダプティブダンパーを備える。",
+        url: "https://news.yahoo.co.jp/articles/6e269133435627d84aa6acb11e00e86f2fe1b074",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-13",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "【写真】スポーツ・モードでも驚くほど快適 メルセデス・ベンツ GLB エレクトリック サイズの近いSUVは？",
+        interiorScore: 59,
+        interiorReason: "Review of a passenger SUV with specific focus on 3rd-row seat comfort and the pr",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-01279057-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2028",
+        title: "VW IDティグアン、物理ボタンと助手席スクリーンを刷新",
+        desc: "フォルクスワーゲンはID.4の後継車であるIDティグアンのインテリアを更新した。エアコン操作などの物理ボタンが復活し、ダッシュボードにはフルワイドのスクリーンが配置される。さらに同社初の助手席用ディスプレイも採用され、YouTubeやSpotifyなどのアプリ利用が可能になった。",
+        url: "https://news.yahoo.co.jp/articles/575d21e0604b3799d1a1e895e39c1e12f22b509b",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "エアコン操作スイッチをはじめとする物理ボタンが多数復活し、ダッシュボードにはフルワイドのスクリーンが配置されている。",
+        interiorScore: 77,
+        interiorReason: "The article details a significant interior refresh including the return of physi",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261013-01284637-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1832",
+        title: "ポルシェの次期スポーツカーは、従来ガソリンエンジンが搭載されていた場所にバッテリーを配置する",
+        desc: "ポルシェCEOのマイケル・ライター氏は「911は決して電動化されない」と明確に述べている一方、ツッフェンハウゼンは718に対して真逆のアプローチを採用している。BoxsterとCaymanは来年、電動スポーツカーとして復活する予定だ。",
+        url: "https://www.motor1.com/news/811750/porsche-electric-718-batteries-instead-engine/",
+        source: "Motor1",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The Boxster and Cayman will return next year as electric sports cars.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/bgOOwM/s3/porsche-718-ev.jpg",
+        note: ""
+    },
+    {
+        id: "us1833",
+        title: "Moke Mk2新型、フロントストレージ追加で内装刷新",
+        desc: "Moke Internationalはパリモーターショーで電動ビーチカー「Electric Moke Mk2」の新型を展示した。86リットルのフロントストレージコンパートメントを追加し、センターコンソールにロータリー式シフトセレクターと明瞭な警告灯を導入している。",
+        url: "https://www.motor1.com/news/811726/electric-moke-mk2-range-specs/",
+        source: "Motor1",
+        date: "2026-10-13",
+        tags: ["センターコンソール", "EV"],
+    
+        sourceExcerpt: "The Mk2 adds an 86-liter (3 cubic foot) lockable front storage compartment,",
+        sourceExcerptEnd: "and luggage that previously had to ride in the cabin.",
+        interiorScore: 52,
+        interiorReason: "The article details specific interior updates including a new center console wit",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/9mW8Ky/s3/moke-mk2-front-3-4.jpg",
+        note: ""
+    },
+    {
+        id: "us1834",
+        title: "ジャガーEV刷新計画、5万人超が関心示す",
+        desc: "ジャガーは全車種電動化と2027年のフラッグシップ「Type 01」でブランド刷新を進めている。ロードン・グロバー氏によると、5万人以上が関心を示しており、その約8割は従来のオーナーではない新規層である。",
+        url: "https://www.motor1.com/news/811711/jaguar-ev-50000-people-interested/",
+        source: "Motor1",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The new chapter begins with the Type 01, a dramatic four-door electric GT that will spearhead Jaguar's revival.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/rK674E/s3/jaguar-type-01.jpg",
+        note: ""
+    },
+    {
+        id: "us1835",
+        title: "Jeep Wrangler Switchback、Nappaレザーとアクセントステッチで内装を演出",
+        desc: "2027年型Wrangler Rubicon X Switchbackは、Black NappaレザーシートにSwitchbackロゴのデボス加工を施し、Sea Saltカラーのダッシュボードトリムやパール・ライムのアクセントステッチを採用している。",
+        url: "https://www.motor1.com/news/811702/2027-jeep-wrangler-switchback-twelve/",
+        source: "Motor1",
+        date: "2026-10-13",
+        tags: ["シート", "コックピット", "新素材"],
+    
+        sourceExcerpt: "Black Nappa leather seats get Switchback branding debossed into the ma",
+        sourceExcerptEnd: "ash elements and pearl-and-lime accent stitching throughout.",
+        interiorScore: 35,
+        interiorReason: "The article provides specific details on interior materials and trim for a speci",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/rK66yX/s3/2027-jeep-wrangler-switchback.jpg",
+        note: ""
+    },
+    {
+        id: "us1836",
+        title: "Peugeot RCZ VisionとE-T16がHypersquareステアリング採用",
+        desc: "パリモーターショーで公開されたRCZ VisionとE-T16は、次期e-208にも搭載予定の「Hypersquare」ステアリングホイールを備える。RCZ Visionはフレームレスガラススクリーンによる浮遊感あるコックピットを実現し、E-T16は織り込みファブリックとPelinova再生レザーでシートを仕立てている。",
+        url: "https://www.caranddriver.com/news/a74113853/peugeot-rcz-vision-et16-revealed/",
+        source: "Car and Driver",
+        date: "2026-10-13",
+        tags: ["AR", "ディスプレイ", "シート", "コックピット", "新素材"],
+    
+        sourceExcerpt: "The steering wheel features a central display here, paired with a long,",
+        sourceExcerptEnd: "are wrapped in a woven fabric and Pelinova recycled leather.",
+        interiorScore: 77,
+        interiorReason: "Highly relevant for HMI and material planning due to the Hypersquare steering wh",
+        imageInterior: false,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/bfd0bd1b-6594-4c76-bdd8-d3abf5e6ebba.jpg",
+        note: ""
+    },
+    {
+        id: "us1837",
+        title: "ジネシスG90、デジタル化が進む中での伝統的ラグジュアリー",
+        desc: "現在の高級車市場は性能指標や大型タッチスクリーンなどデジタル体験を重視する傾向にある。一方、物理的な素材の質感や静寂性を求める層には、外部環境から隔離された空間を提供する伝統的な快適性が求められている。",
+        url: "https://www.topspeed.com/luxury-car-traditionalists/",
+        source: "Top Speed",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "新素材"],
+    
+        sourceExcerpt: "There are current luxury sedans that also display some traditional traits, but",
+        sourceExcerptEnd: "and, in typical Hyundai Group fashion, at a lower price.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/wm/2025/05/2025-genesis-g90-22.jpg",
+        note: ""
+    },
+    {
+        id: "us1838",
+        title: "ホンダCB750ホーネット、755cc並列2気筒でミドルクラスを静かに牽引",
+        desc: "2026年型ホンダCB750ホーネットは、XL750トランザルプと共有する755cc並列2気筒エンジンを搭載し、90馬力を発生する。ヤマハMT-07やスズキGSX-8Sなど競合車に対し、価格帯と性能のバランスでセグメントをリードすると評価されている。",
+        url: "https://www.topspeed.com/the-honda-quietly-leads-its-segment/",
+        source: "Top Speed",
+        date: "2026-10-13",
+        tags: [],
+    
+        sourceExcerpt: "By comparison, popular rivals like the Yamaha MT-07, Suzuki GSX-8S, Kawasaki Z650, and Triumph Trident 660 all fall short in at least one criterion.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/03/2026-honda-cb750-hornet-headlight.jpg",
+        note: ""
+    },
+    {
+        id: "eu1800",
+        title: "ルノー、5 Turbo 3E後継に8 Gordini量産の可能性",
+        desc: "ルノーCEOは2028年発売の限定1980台・約£135,000の5 Turbo 3E後継として、新プラットフォームAPP採用の8 Gordini量産を検討している。同車はパリモーターショーで展示された2ドアクーペで、Gordini伝統と電動スポーツカーとしての情緒を重視した設計思想が示されている。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/renault-mulls-building-8-gordini-follow-5-turbo-3e",
+        source: "AUTOCAR UK",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Renault could follow up its 5 Turbo 3E with a limited-run, high-performance",
+        sourceExcerptEnd: "the new 8 Gordini concept, boss Fabrice Cambolive has confirmed.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/renault-gordini-web.jpg?itok=bge0-28L",
+        note: ""
+    },
+    {
+        id: "eu1801",
+        title: "ルノーE-Space、内装重視のMPV構想もSUV開発が優先",
+        desc: "ルノーはE-Spaceコンセプトを「内側から設計」し、ファーンズワース・ハウスに着想を得た大開口ガラスで開放的なキャビンを実現した。ただし本番化は未定で、次期ScenicではMPV風の室内空間と快適性を重視しつつSUV形状を維持する方針である。",
+        url: "https://www.autocar.co.uk/car-news/motor-shows-paris-motor-show/renault-could-build-bold-espace-mpv-%E2%80%93-suvs-come-first",
+        source: "AUTOCAR UK",
+        date: "2026-10-13",
+        tags: [],
+    
+        sourceExcerpt: "However, he hinted that the Mk6 Scenic will focus on offering more",
+        sourceExcerptEnd: "kind of interior” focused on maximising interior space and comfort.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/dsc_4265.jpg?itok=3KtW-sUT",
+        note: ""
+    },
+    {
+        id: "eu1802",
+        title: "Seat CEO、ブランド存続は規制次第と説明",
+        desc: "VWグループ再編で2029年廃止説がある中、SeatのCEOはパリモーターショーで長期戦略未定だと述べた。IbizaやAronaへのマイルドハイブリッド導入を継続投資とし、2030年のCO2規制や電動化速度が将来像を決めると説明している。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/seat-boss-says-closure-not-only-option-spanish-brand",
+        source: "AUTOCAR UK",
+        date: "2026-10-13",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Seat is part of our strategy, and we keep investing in Seat,” he said.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/seat_model_range_0.jpg?itok=b0zfuWsw",
+        note: ""
+    },
+    {
+        id: "eu1803",
+        title: "Dacia次期Jogger、Sanderoとフロント共有で低価格維持",
+        desc: "ダシアは2028年登場の次期Joggerで、サンデロとのフロントエンド共有によるコスト削減とBピラー後方の車体拡大により7人乗りの低価格競争力を維持する。CMF-Bプラットフォーム採用でハイブリッドやEVなど多様なパワートレインに対応する計画だ。",
+        url: "https://www.autoexpress.co.uk/dacia/jogger/370669/next-gen-dacia-jogger-go-even-bigger-space-and-affordability",
+        source: "Auto Express",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Dacia is able to price the Jogger at a point lower than",
+        sourceExcerptEnd: "it’s a position that will continue for this next-generation model.",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/03/Dacia%20Jogger%20Hybrid%20155%20Extreme-17.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1804",
+        title: "ベストカー広告 - 画像",
+        desc: "Auto Expressチームが選んだ、歴代最高の自動車CMの静止画集。また、新モデルCitroen 2CVはレトロ・フューティスティックなコンセプトで1.3万ポンドのEVを予告しています。",
+        url: "https://www.autoexpress.co.uk/features/370667/best-car-adverts-pictures",
+        source: "Auto Express",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "New Citroen 2CV: retro-futuristic concept previews £13k EV",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/Best%20car%20adverts.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn1793",
+        title: "BYD Da Han EV、白樺木調の内装と40インチのAR-HUDを搭載",
+        desc: "BYDは大型EVセダン「Da Han」を発表した。インテリアには白樺木調のトリムやNappaレザーシートが採用され、40インチのAR-HUDと17.3インチのセンターディスプレイを備えたコックピット構成となっている。",
+        url: "https://carnewschina.com/2026/10/13/byd-launches-da-han-ev-with-1008-km-range-which-can-be-fully-charged-in-9-minutes/",
+        source: "CarNewsChina - All",
+        date: "2026-10-13",
+        tags: ["HUD", "AR", "ディスプレイ", "シート", "コックピット", "新素材"],
+    
+        sourceExcerpt: "The cockpit features a 40-inch AR-HUD, a 12.3-inch instrument cluster, a 17.3-inch 3K floating central PAD, and a 12.3-inch passenger display.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/e59bbee78987-44-e1791896321788_webhook_1350x810_q85_1791897119.jpg",
+        note: ""
+    },
+    {
+        id: "cn1794",
+        title: "BYD Denza Z9 GT、欧州向けにGod's Eye CNOAを初めて搭載",
+        desc: "BYDはパリモーターショーで、ステーションワゴンDenza Z9 GTに欧州初の都市自動運転支援「God's Eye CNOA」を備えると発表。レベル2の機能でドライバー監視下での住所間移動を支援し、中国仕様車には4nm SoCとLiDARが採用されている。",
+        url: "https://carnewschina.com/2026/10/13/denza-z9-gt-to-become-first-byd-car-with-gods-eye-autonomous-navigation-in-europe/",
+        source: "CarNewsChina - All",
+        date: "2026-10-13",
+        tags: ["AR", "センシング", "バッテリー"],
+    
+        sourceExcerpt: "The Denza Z9 GT station wagon will become BYD’s first car with God’s Eye City Navigation Driving Assistant (CNOA) in Europe.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/denza_z9_gt-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1795",
+        title: "吉利Battleship 700、欧州投入へ。18.5L冷蔵庫と23スピーカー搭載",
+        desc: "Geelyは2026年のパリモーターショーでBattleship 700の欧州導入を発表した。内装にはセンターコンソールに15.4インチのタッチスクリーン、運転席前方に10.2インチの液晶メータークラスターを備える。さらに18.5リットルの冷蔵庫や23スピーカーも搭載し、快適性を高めている。",
+        url: "https://carnewschina.com/2026/10/13/geely-battleship-700-will-arrive-in-europe-in-h2-2027/",
+        source: "CarNewsChina - All",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "センターコンソール", "音響"],
+    
+        sourceExcerpt: "The center console adopts a 15.4-inch touchscreen complemented by a 10",
+        sourceExcerptEnd: " a 12.88-inch front passenger screen, and a head-up display.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/geely_battleship_700-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1796",
+        title: "BYD Seagull新型、白内装とダッシュボード無しの設計",
+        desc: "BYDセーグルの2代目モデルが中国のディーラーに到着しました。内装は白色で統一されており、ステアリングホイールは2本スポーク式を採用しています。シフトレバーは後方に配置され、独立したメータークラスターはありません。中央ディスプレイの左側が計器パネルとして機能する設計です。",
+        url: "https://carnewschina.com/2026/10/13/second-gen-byd-seagull-arrived-at-dealers-in-china-ahead-of-launch/",
+        source: "CarNewsChina - All",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "コックピット", "バッテリー"],
+    
+        sourceExcerpt: "The second-gen BYD Seagull arrived at dealers in China ahead of the domestic launch for display, finished in orange.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/byd_seagull_dealer-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1797",
+        title: "BYD、欧州向けに1,500kWの急速充電器3,000基を設置する計画",
+        desc: "BYDはパリモーターショーで、欧州向けに最大出力1500kWのフラッシュ充電器を2026年末までに100基、27年末までに3000基設置する計画を明らかにした。第2世代ブレードバッテリー搭載車で10%から70%まで5分充電でき、初対応モデルは27年1四半期投入予定のAtto 8となる。",
+        url: "https://carnewschina.com/2026/10/13/byd-to-deploy-100-flash-chargers-in-europe-by-the-end-of-2026/",
+        source: "CarNewsChina - All",
+        date: "2026-10-13",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "As a result, vehicles with the second-gen Blade Battery can charge from 10% to 70% in five minutes.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/byd_flash_charger-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1798",
+        title: "Li Auto i6、欧州では「Li 6」の名称で第1四半期に導入予定",
+        desc: "i6は欧州向けにLi 6として展開され、2027年第1四半期にオランダとノルウェーで納車が開始されます。8言語対応の29インチディスプレイや800Vシステムを搭載し、中国版とは異なり半隠し式ドアハンドルが特徴です。",
+        url: "https://carnewschina.com/2026/10/13/li-auto-i6-ev-crossover-to-reach-europe-as-li-6-in-q1-2027-with-8-european-languages/",
+        source: "CarNewsChina - All",
+        date: "2026-10-13",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "The car’s interior gets a massive 29-inch display, similar to the new Li L9.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/li_6_europe-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1799",
+        title: "BYD「ダハンEV」、9分で10%から97%充電可能なフラッシュチャージング機能を実装",
+        desc: "BYDはフラッグシップセダン「Da Han EV」を235,900元から販売開始した。内装では全グレードにNappaレザーシート、フロントのゼログラビティシート、31スピーカー構成のDevialetオーディオシステム、ソフトクローズドアが標準搭載される。",
+        url: "https://cnevpost.com/2026/10/13/byd-launches-da-han-ev/",
+        source: "CnEVPost - All",
+        date: "2026-10-13",
+        tags: ["シート", "新素材", "EV", "バッテリー", "音響"],
+    
+        sourceExcerpt: "Comfort features include 2 front zero-gravity seats, Nappa leather upholstery, a 31-speaker Devialet audio system and soft-close doors on all 4 doors.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026101313074624.jpg",
+        note: ""
+    },
+    {
+        id: "cn1800",
+        title: "中国のNEV輸出市場において、BYDはシェア3割超で首位を維持している",
+        desc: "CPCAの統計によると、2026年9月の中国NEV輸出市場ではBYDが17万4,277台を記録し、シェア31.1%で首位を維持した。一方、Cheryは前月比25.7%増の8万5,990台でGeelyを上回り、シェア15.3%で2位に浮上している。",
+        url: "https://cnevpost.com/2026/10/13/china-nev-export-share-sept-2026/",
+        source: "CnEVPost - All",
+        date: "2026-10-13",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "BYD (HKEX: 1211) continued to lead China's passenger new energy vehicle (NEV)",
+        sourceExcerptEnd: "9973) overtook Geely Auto (HKEX: 0175) to take second place.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026101312420614.jpg",
+        note: ""
+    },
+    {
+        id: "cn1801",
+        title: "小米汽車9月納車4万台超え 年内最高を更新",
+        desc: "Xiaomi Autoの9月納車台数は4万0,015台で年内最高値を記録した。Sky Nomadシリーズが1万2,444台と好調な一方、SU7は1万5,751台で前年同期比4.61%減となり、12ヶ月連続の前年割れが続いている。",
+        url: "https://cnevpost.com/2026/10/13/xiaomi-auto-sept-2026-deliveries-2/",
+        source: "CnEVPost - All",
+        date: "2026-10-13",
+        tags: [],
+    
+        sourceExcerpt: "Xiaomi Auto, the EV unit of Xiaomi (HKEX: 1810), delivered 40,015 vehicles",
+        sourceExcerptEnd: "launched Sky Nomad extended-range SUV lineup began contributing to sales.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026101306274853.jpg",
+        note: ""
+    },
+    {
+        id: "cn1802",
+        title: "NIO ES9、9月納車7706台で今年2番目の高水準を記録",
+        desc: "NIO（ニオ）は、旗艦SUV「ES9」の9月納車を7,706台と報告し、前月の8月から18.94%増となった。同モデルは50万人民元前後の価格帯で4ヶ月連続首位を維持しており、NIO本体ブランド全体の納車数に占める割合は36.15%に達した。",
+        url: "https://cnevpost.com/2026/10/13/nio-es9-deliveries-sept-2026/",
+        source: "CnEVPost - All",
+        date: "2026-10-13",
+        tags: [],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026101303481070.jpg",
+        note: ""
+    },
+    {
+        id: "in1874",
+        title: "Volvo India、高税制と需要不透明感からPHEV導入を見送り",
+        desc: "Volvo Car IndiaのJyoti Malhotra MDは、現在の税制がプラグインハイブリッド車（PHEV）に不利であり、顧客の関心も不透明であるため、インド市場でのPHEV導入を当面見送ると述べた。",
+        url: "https://www.autocarindia.com/car-news/volvo-india-holds-back-on-phevs-amid-high-taxes-uncertain-demand-441027",
+        source: "Autocar India - All",
+        date: "2026-10-13",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "“The regulations are not conducive to plug-in hybrids,” Jyoti Malhotra, MD of",
+        sourceExcerptEnd: "Autocar Professional on the sidelines of the recent EX90 launch.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261013_123731_bcc8dea7.jpg",
+        note: ""
+    },
+    {
+        id: "in1875",
+        title: "MG Windsor EV Indulge Edition、新シート素材と快適装備で登場",
+        desc: "MGはWindsor EVのIndulge Editionを178.9万ルピー（ショールーム外税別）で発売した。標準モデルと比較して、新しいエクステリアカラー、刷新されたシートの張り地、そして車内での快適性と利便性を高める追加機能が備わっている。",
+        url: "https://www.autocarindia.com/car-news/mg-windsor-ev-indulge-edition-launched-at-rs-1789-lakh-441021",
+        source: "Autocar India - All",
+        date: "2026-10-13",
+        tags: ["シート", "新素材", "EV"],
+    
+        sourceExcerpt: "The front seat headrests have an ‘Indulge’ embossing, and the Windsor EV Indulge Edition also gets Indulge-themed cushions and neck pillows.",
+        interiorScore: 78,
+        interiorReason: "Launch of a specific edition highlighting fresh seat upholstery and in-cabin com",
+        imageInterior: true,
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261013_075622_dce923de.jpg",
+        note: ""
+    },
+    {
+        id: "in1876",
+        title: "MG Windsor Indulge Edition、リアPRIVEスクリーンとUrban Tan内装で登場",
+        desc: "JSW MG Motor Indiaは、リアシート向けに標準装備のPRIVEスクリーンとUrban Tan＆ブラックの内装テーマを採用したMG Windsor Indulge Editionを178.9万ルピーで発表した。",
+        url: "https://www.rushlane.com/mg-windsor-indulge-edition-launch-price-rs-17-89-lakh-12558336.html",
+        source: "RushLane",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "The cabin also features Windsor’s 15.6-inch GRANDVIEW touchscreen infotainment display.",
+        interiorScore: 91,
+        interiorReason: "Detailed cabin refresh including specific upholstery colors (Urban Tan), rear en",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/10/mg-windsor-indulge-roof-screen-tv.jpeg",
+        note: ""
+    },
+    {
+        id: "in1877",
+        title: "Skoda Epiq Sportline、欧州市場で上級グレードとして投入",
+        desc: "ス柯达は欧州向けコンパクトEV SUV「Epiq」の最上位グレードSportlineを発表した。Selectionグレードより上位に位置し、19インチ黒アルミホイールとマトリクスLEDヘッドライトを備えるとともに、キャビンのアップグレードが施されている。",
+        url: "https://gaadiwaadi.com/skoda-epiq-sportline-arrives-in-paris-with-208-hp-up-to-440-km-range/",
+        source: "GaadiWaadi",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        interiorScore: 32,
+        interiorReason: "The article mentions an 'upgraded cabin' for the top-tier Sportline variant, whi",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/Skoda-Epiq-Sportline-Front-Quarter.jpg",
+        note: ""
+    },
+    {
+        id: "in1878",
+        title: "BYDアット8、欧州で7人乗りフラッグシップSUVとして初公開",
+        desc: "BYDは2026年パリモーターショーにて、欧州向けフラッグシップEV SUV「Atto 8」を初公開した。7人乗りモデルで、WLTPモード航続距離は最大652kmを確保している。Flash充電技術により10%から97%までの充電にわずか9分しかかからないという高速充電性能が特徴だ。",
+        url: "https://gaadiwaadi.com/flagship-byd-atto-8-debuts-in-europe-10-97-charge-in-just-9-minutes/",
+        source: "GaadiWaadi",
+        date: "2026-10-13",
+        tags: ["EV", "バッテリー"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/BYD-Atto-8.jpg",
+        note: ""
+    },
+    {
+        id: "in1879",
+        title: "現代Tucson N Line、17インチディスプレイとPHEV採用",
+        desc: "現代自動車はパリモーターショーで新型Tucson N Lineを発表した。内装には17インチのPleos Connectタッチスクリーンが搭載され、パワートレインは最大67kmのEV航続距離を持つプラグインハイブリッドシステムを備える。",
+        url: "https://gaadiwaadi.com/new-hyundai-tucson-n-line-revealed-with-288-hp-phev-20-inch-alloys/",
+        source: "GaadiWaadi",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "EV"],
+    
+        interiorScore: 48,
+        interiorReason: "Mentions specific HMI hardware (17-inch Pleos Connect touchscreen) which is rele",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/New-Hyundai-Tucson-N-Line-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1880",
+        title: "MG Windsor EV Indulge Edition、後席用リトラクタブルスクリーンと専用シート採用",
+        desc: "MGがインドでWindsor EVの特別仕様車Indulge Editionを178.9万ルピーから販売開始した。Essenceグレードをベースに約8.9万ルピー上乗せし、後席向けリトラクタブルスクリーンやブラックとタンカラーのレザー調シート、専用ヘッドレストエンボスなどを備える。",
+        url: "https://www.indiacarnews.com/news/rs-17-89-lakh-ev-gets-exclusive-colour-rear-seat-screen-more-69157/",
+        source: "IndiaCarNews",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "シート", "新素材", "EV"],
+    
+        sourceExcerpt: "Inside the cabin, the special edition features a ‘Prive Screen’ – a new flip-down, roof-mounted screen for rear seat passengers.",
+        interiorScore: 87,
+        interiorReason: "Detailed breakdown of specific interior features including a rear flip-down scre",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.indiacarnews.com/wp-content/uploads/2026/10/MG-Windsor-EV-Indulge-Edition-Price.webp",
+        note: ""
+    },
+    {
+        id: "in1881",
+        title: "MG Windsor EV Indulge Edition、後席スクリーンとタン×ブラック内装で178.9万ルピー",
+        desc: "JSW MG Motor Indiaは38kWhバッテリー搭載のWindsor EV Indulge Editionを税別178.9万ルピーで発売した。タンとブラックの内装テーマに、前後席ネッククッションやIndulge刺繍入りヘッドレストが備わる。パノラミックガラスルーフ中央には後席向けエンタメスクリーン「Prive Screen」が新設され、リクライニング135度の後席ベンチとの組み合わせで快適性を高めた。",
+        url: "https://www.autopunditz.com/post/mg-windsor-ev-indulge-edition-price-features-range",
+        source: "Auto Punditz",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "The roof-mounted rear entertainment screen, tan-and-black cabin and ad",
+        sourceExcerptEnd: " where the Windsor already stands out: rear-seat experience.",
+        interiorScore: 91,
+        interiorReason: "Article details specific interior upgrades including a tan-and-black theme, prem",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_afd89dfada01404c932bfd85aab9dfce~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1882",
+        title: "フィアットMultiplay、SUVとピックアップを切り替える変形機構",
+        desc: "フィアットのMultiplayコンセプトは、C-Pillar Metamorfosi機構により後部ボディがスライドし、6+1席の家族用モードから4席のオープンベッド式ピックアップへ変化する。内装には可動式のフロントパッセンジャーラウンジシートやパノラミックルーフを備え、ペット対応機能も搭載している。",
+        url: "https://www.autopunditz.com/post/fiat-multiplay-concept-suv-mpv-pickup-2026",
+        source: "Auto Punditz",
+        date: "2026-10-13",
+        tags: ["AR", "シート"],
+    
+        sourceExcerpt: "Innovative interior: Includes a convertible front passenger lounge seat, panoramic roof and pet-friendly features.",
+        interiorScore: 35,
+        interiorReason: "Concept car with specific interior innovations (convertible lounge seat, pet fea",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_860c267fa13e4dbea034def88dc4234a~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us1839",
+        title: "テスラ、中国製EV枠枯渇でカナダ向けModel 3注文停止",
+        desc: "テスラは中国製電気自動車の輸入枠を使い切ったため、カナダ市場での上海工場製Model 3 Premiumの注文受付を一時停止した。同車は39,490カナダドルで提供されており、再開時期は2027年3月まで見込まれていない。",
+        url: "https://electrek.co/2026/10/13/tesla-model-3-canada-orders-paused-china-import-quota/",
+        source: "Electrek",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Tesla has stopped taking orders for the Model 3 Premium in Canada, the Shanghai-built trim that brought the electric sedan down to $39,490 CAD.",
+        country: "us",
+        img: "https://electrek.co/wp-content/uploads/sites/3/2026/02/Tesla-Model-3.jpeg?quality=82&strip=all&w=1400",
+        note: ""
+    },
+    {
+        id: "eu1805",
+        title: "BMWグループ、欧州でBEV納車37.5%増",
+        desc: "BMWグループは2026年第3四半期に世界で11万0,257台のBEVを納車し前年比7.2%増となった。特に欧州では8万1,941台と37.5%増加し、同地域のBEVシェアは34.7%に達した。",
+        url: "https://www.electrive.com/2026/10/13/bmw-sees-bev-deliveries-rise-in-q3-2026/",
+        source: "Electrive",
+        date: "2026-10-13",
+        tags: ["EV"],
+    
+        sourceExcerpt: "In other words: between July and September, one in five passenger cars delivered by BMW was a BEV.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/03/bmw-ix3-40-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1806",
+        title: "BYD Atto 8、7人乗りとフラッシュ充電を備える",
+        desc: "BYDは新フラッグシップSUV「Atto 8」を発表した。最大7人乗りの室内空間に加え、10%から97%まで9分で充電できるFlash Charging技術を欧州で初採用する。2026年パリモーターショーで公開され、2027年第1四半期に欧州市場へ投入される予定である。",
+        url: "https://www.electrive.com/2026/10/13/byd-unveils-atto-8-flagship-suv-with-nine-minute-charging/",
+        source: "Electrive",
+        date: "2026-10-13",
+        tags: ["AR", "EV", "バッテリー"],
+    
+        sourceExcerpt: "A highlight of the new BYD Atto 8 is undoubtedly its Flash Charging function, which BYD is introducing to Europe for the first time.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/byd-atto-8-2026-01-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1807",
+        title: "Smart #2欧州予約開始、限定999台のCouture Editionも",
+        desc: "Smart #2が10月13日からドイツなど欧州で予約を開始し、Pureは1万9,990ユーロからとなる。内装ではPremiumにSennheiser製7スピーカーや人工皮革シートを備え、限定版Couture Editionはマットホワイトとプラチナゴールドルーフを採用している。",
+        url: "https://www.electrive.com/2026/10/13/smart-2-now-available-to-pre-order-for-under-e20000/",
+        source: "Electrive",
+        date: "2026-10-13",
+        tags: ["AR", "シート", "新素材", "音響"],
+    
+        sourceExcerpt: "The significantly higher-priced #2 Premium already includes features such as a fixed",
+        sourceExcerptEnd: "leather seats and a Sennheiser sound system with seven speakers.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/202610-smart-hashtag2-premium-front-1-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1808",
+        title: "リープモーターB03、14.6インチ画面とOEKO-TEX素材のデジタル内装採用",
+        desc: "リープモーターは新型電気ハッチバックB03を公開した。インテリアには14.6インチのインフォテインメントディスプレイと8.8インチのメーターパネルを組み合わせたデジタルコックピットが備わる。また、ソフトタッチ素材やOEKO-TEX認証済み部品を採用し、快適性と素材への配慮を重視している。",
+        url: "https://electriccarsreport.com/2026/10/leapmotor-b03-electric-hatchback/",
+        source: "Electric Cars Report",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "コネクテッド", "コックピット", "新素材"],
+    
+        sourceExcerpt: "The cabin also includes soft-touch materials and OEKO-TEX-certified elements, reflecting the brand’s focus on comfort and material selection.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Leapmotor-B03.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1809",
+        title: "DS F3VERコンセプト、パリモーターショーで多様なパーソナライズ装備を披露",
+        desc: "DS Automobilesが2026年パリモーターショーで発表したDS F3VERは、車体輪郭に沿ったカスタマイズ可能なルーフリングや、リアライトまで広がるツートーンペイントなど、内装・外装のパーソナライズを重視した設計を採用している。",
+        url: "https://electriccarsreport.com/2026/10/ds-automobiles-unveils-ds-f3ver-concept-at-paris-motor-show/",
+        source: "Electric Cars Report",
+        date: "2026-10-13",
+        tags: ["カスタマイズ"],
+    
+        sourceExcerpt: "The concept features a 2.70-metre wheelbase, which DS Automobiles says supports generous interior space, stability and comfort.",
+        interiorScore: 47,
+        interiorReason: "Concept car unveiling with specific mention of a 'versatile interior' and person",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/DS-F3VER.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "in1883",
+        title: "Honda ElevateとSkoda Slavia、内装装備の比較",
+        desc: "Elevateは後席ベンチレーションや低速追従機能を、Slaviaは後席マッサージ機能をそれぞれセグメント初採用した。また、Elevateは10.25インチディスプレイを、Slaviaは8インチデジタルメーターを採用している。",
+        url: "https://motoroctane.com/news/325238-honda-elevate-vs-skoda-slavia-is-a-sedan-better-than-an-suv",
+        source: "MotorOctane",
+        date: "2026-10-13",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "But compared to the Slavia, the Elevate offers better ground clearance and",
+        sourceExcerptEnd: "few reasons to pick the Honda SUV over the Slavia.",
+        country: "in",
+        img: "https://motoroctane.com/wp-content/uploads/2026/10/Skoda-Slavia-Rear.png",
         note: ""
     },
 ];
