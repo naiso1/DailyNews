@@ -549,6 +549,11 @@ header.site-header {
 .thumb { position: relative; padding-top: 52%; overflow: hidden; background: linear-gradient(135deg, #1a2332, #0d1520); }
 .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.88; }
 .card:hover .thumb img { opacity: 1; }
+.news-image-dots { position:absolute;bottom:7px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:0;padding:1px 5px;border-radius:999px;background:rgba(8,17,29,.65);box-shadow:0 1px 6px rgba(0,0,0,.3); }
+.news-image-dot { display:grid;place-items:center;width:27px;height:27px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer; }
+.news-image-dot::before { content:"";width:8px;height:8px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:rgba(255,255,255,.28); }
+.news-image-dot[aria-pressed="true"]::before { background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.18); }
+.news-image-dot:focus-visible { outline:2px solid #7df1c2;outline-offset:-2px; }
 
 .fallback-overlay {
     position: absolute; inset: 0;
@@ -721,9 +726,8 @@ header.site-header {
 .action-btn.active-comment { color: #4facfe; background: rgba(79, 172, 254, 0.1); }
 .action-btn.remove-news-btn { color: #aeb9c8; }
 .action-btn.remove-news-btn:hover { color: #ff9baa; border-color: rgba(255, 107, 126, 0.4); background: rgba(255, 92, 112, 0.1); }
-.action-btn.admin-image-edit-btn { display: none; color: #9fc3ff; }
-html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
-.action-btn.admin-image-edit-btn:hover { color: #c7dcff; border-color: rgba(111, 167, 255, 0.42); background: rgba(111, 167, 255, 0.11); }
+.action-btn.image-edit-btn { color: #9fc3ff; }
+.action-btn.image-edit-btn:hover { color: #c7dcff; border-color: rgba(111, 167, 255, 0.42); background: rgba(111, 167, 255, 0.11); }
 .action-btn.favorite-btn.active {
     color: #ffd540;
     background: rgba(255, 213, 64, 0.18);
@@ -3416,6 +3420,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
             // 3. Render (Pagination)
             const grid = document.getElementById("newsGrid");
             const previousCardLayout = captureNewsCardLayout(grid);
+            grid.querySelectorAll('.card').forEach(card => card._disposeNewsImageCarousel?.());
             grid.innerHTML = "";
 
             const itemsToShow = filteredData.slice(0, visibleLimit);
@@ -3437,20 +3442,18 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                 const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
                 const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
                 const resolvedImage = getNewsImageUrl(n);
-                const imageCount = getNewsImageUrls(n).length;
                 const displayImg = getDisplayImageUrl(resolvedImage);
                 card.innerHTML = `
             <div class="thumb">
-                ${n.country === 'paper' && n.summaryBasis && !n.img
+                ${n.country === 'paper' && n.summaryBasis && !resolvedImage
                     ? '<div style="height:100%;display:grid;place-items:center;color:var(--muted);font-weight:700">論文（画像なし）</div>'
-                    : `<img src="${displayImg}" alt="${n.title}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
+                    : `<img src="${escapeHtml(displayImg || '')}" alt="${escapeHtml(n.title)}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
                 ${isNew ? '<span class="new-badge">New</span>' : ''}
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="relevance-badge"${relevanceReason}>関連度 ${relevance}%</span>
                 ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
             </div>
             <div class="content">
-                ${imageCount > 1 ? `<button class="action-btn" type="button" onclick="openNewsImageGallery('${n.id}')" aria-label="記事の画像${imageCount}枚を見る">🖼️ 画像 ${imageCount}枚を見る</button>` : ''}
                 <div class="title">${n.title}</div>
                 <p class="desc">${n.desc}</p>
                 ${n.country === 'paper' && n.summaryBasis ? `<p class="paper-source-details" style="font-size:12px;color:var(--muted);line-height:1.6">${escapeHtml(n.summaryBasis)}${n.paperPublicationDate ? `<br>発行日: ${escapeHtml(n.paperPublicationDate)}` : ''}${n.paperOnlineDate ? `<br>オンライン公開日: ${escapeHtml(n.paperOnlineDate)}` : ''}${n.doi ? `<br>DOI: ${escapeHtml(n.doi)}` : ''}</p>` : ''}
@@ -3482,7 +3485,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
                         <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${n.id}', this)">
                         <span>🗑️</span>
                     </button>
-                    <button class="action-btn admin-image-edit-btn" title="画像URLを変更" aria-label="画像URLを変更" onclick="requestImageUrlChange('${n.id}', this)">
+                    <button class="action-btn image-edit-btn" title="画像URLを追加・変更" aria-label="画像URLを追加・変更" onclick="requestImageUrlChange('${n.id}', this)">
                         <span>🖼️</span>
                     </button>
 
@@ -3504,6 +3507,7 @@ html.dailynews-admin .action-btn.admin-image-edit-btn { display: flex; }
     
             </div>`;
                 grid.appendChild(card);
+                window.setupNewsImageCarousel?.(card, n);
             });
             animateNewsCardReorder(grid, previousCardLayout);
 

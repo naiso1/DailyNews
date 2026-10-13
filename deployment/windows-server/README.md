@@ -69,6 +69,14 @@ Each package is stored by Git commit ID and activated through
 Article image overrides support 1–5 ordered HTTP/HTTPS URLs. The legacy
 `image_url` column and `imageUrlOverride` response keep the first image for
 compatibility; `image_urls` and `imageUrlsOverride` store the gallery.
+Authenticated users can PUT/DELETE `/api/items/:id/image` to edit/reset images;
+the prior `/api/admin/items/:id/image` remains administrator-only for cached
+clients. URL validation, same-origin checks and the last editor's user ID apply
+to both routes. Anonymous writes are rejected.
+Multi-image cards use in-image dot controls. Mouse hover rotates every 3 seconds;
+leaving the card, text input, inactive windows/tabs and reduced-motion preference
+stop rotation. Touch and keyboard controls select images manually. Card rebuilds
+dispose timers/listeners and retain the selected image when it still exists.
 `user_article_reads` records authenticated article clicks once per user/article/JST
 day. Historical anonymous read counters are not reassigned to users.
 The private `data/weekly-reports.json` is served only through the administrator

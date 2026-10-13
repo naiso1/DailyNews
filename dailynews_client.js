@@ -946,6 +946,92 @@ window.requestArticleRemoval = (itemId, itemKind) => {
   window.setTimeout(() => overlay.querySelector("#articleRemovalReason")?.focus(), 0);
 };
 
+const selectedNewsImages = new Map();
+window.setupNewsImageCarousel = (card, item) => {
+  card._disposeNewsImageCarousel?.();
+  const urls = window.getNewsImageUrls?.(item) || [];
+  const thumb = card.querySelector('.thumb');
+  const image = thumb?.querySelector('img');
+  if (!image || urls.length < 2) return;
+  const key = String(item.id);
+  let index = Math.max(0, urls.indexOf(selectedNewsImages.get(key)));
+  let hovered = false, disposed = false, timer = null;
+  let focusedWindow = document.hasFocus();
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const dots = document.createElement('div');
+  dots.className = 'news-image-dots';
+  dots.setAttribute('role', 'group');
+  dots.setAttribute('aria-label', '記事画像の切り替え');
+  const buttons = urls.map((url, n) => {
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'news-image-dot';
+    button.setAttribute('aria-label', `${urls.length}枚中${n + 1}枚目の画像を表示`);
+    button.title = `${n + 1} / ${urls.length}枚`;
+    button.addEventListener('click', event => { event.stopPropagation(); show(n); schedule(); });
+    button.addEventListener('keydown', event => {
+      const next = event.key === 'ArrowRight' ? index + 1 : event.key === 'ArrowLeft' ? index - 1
+        : event.key === 'Home' ? 0 : event.key === 'End' ? urls.length - 1 : null;
+      if (next === null) return;
+      event.preventDefault(); event.stopPropagation(); show(next); buttons[index].focus(); schedule();
+    });
+    dots.appendChild(button); return button;
+  });
+  thumb.appendChild(dots);
+  function show(next) {
+    index = (next + urls.length) % urls.length;
+    const url = window.getDisplayImageUrl?.(urls[index]) || urls[index];
+    selectedNewsImages.set(key, urls[index]);
+    // Only replace the image source: comment drafts and the card's layout stay intact.
+    if (image.getAttribute('src') !== url) {
+      delete image.dataset.failed;
+      image.style.objectFit = '';
+      const overlay = thumb.querySelector('.fallback-overlay');
+      if (overlay) overlay.style.display = 'none';
+      const note = thumb.querySelector('.image-note');
+      if (note) note.style.display = /unsplash|placeholder|thumb_default\.png/.test(url) ? '' : 'none';
+      image.src = url;
+    }
+    image.alt = `${item.title || '記事画像'}（${index + 1}枚目）`;
+    buttons.forEach((button,n) => button.setAttribute('aria-pressed', String(n === index)));
+  }
+  function stop() { window.clearTimeout(timer); timer = null; }
+  function canRotate() {
+    return !disposed && card.isConnected && hovered && focusedWindow && !document.hidden && !reducedMotion.matches
+      && !card.querySelector('input:focus,textarea:focus,select:focus,[contenteditable="true"]:focus');
+  }
+  function schedule() {
+    stop();
+    if (canRotate()) timer = window.setTimeout(() => { if (canRotate()) show(index + 1); schedule(); }, 3000);
+  }
+  const enter = event => { if (event.pointerType === 'mouse') { hovered = true; schedule(); } };
+  const leave = () => { hovered = false; stop(); };
+  const blur = () => { focusedWindow = false; stop(); };
+  const focus = () => { focusedWindow = true; schedule(); };
+  const afterFocus = () => window.setTimeout(schedule, 0);
+  card.addEventListener('pointerenter', enter);
+  card.addEventListener('pointerleave', leave);
+  card.addEventListener('focusin', schedule);
+  card.addEventListener('focusout', afterFocus);
+  document.addEventListener('visibilitychange', schedule);
+  window.addEventListener('blur', blur);
+  window.addEventListener('focus', focus);
+  reducedMotion.addEventListener('change', schedule);
+  card._disposeNewsImageCarousel = () => {
+    disposed = true; stop(); dots.remove();
+    card.removeEventListener('pointerenter', enter);
+    card.removeEventListener('pointerleave', leave);
+    card.removeEventListener('focusin', schedule);
+    card.removeEventListener('focusout', afterFocus);
+    document.removeEventListener('visibilitychange', schedule);
+    window.removeEventListener('blur', blur);
+    window.removeEventListener('focus', focus);
+    reducedMotion.removeEventListener('change', schedule);
+  };
+  show(index);
+  hovered = window.matchMedia('(hover: hover)').matches && card.matches(':hover');
+  schedule();
+};
+
 window.openNewsImageGallery = (itemId) => {
   const item = imageEditorItem(itemId);
   const urls = window.getNewsImageUrls?.(item) || [];
@@ -1062,14 +1148,14 @@ async function saveImageUrlOverride(event) {
   saveButton.disabled = true;
   try {
     if (imageUrls.length < 1 || imageUrls.length > 5 || imageUrls.some(url => !/^https?:\/\//i.test(url))) throw new Error("invalid_image_urls");
-    const data = await apiRequest(`/admin/items/${encodeURIComponent(itemId)}/image`, {
+    const data = await apiRequest(`/items/${encodeURIComponent(itemId)}/image`, {
       method: "PUT",
       body: { imageUrls },
     });
     finishImageUrlChange(overlay, itemId, data);
   } catch (error) {
-    errorElement.textContent = error.status === 403
-      ? "管理者のみ変更できます。"
+    errorElement.textContent = error.status === 401
+      ? "ログインの有効期限が切れています。入力したURLを控えてから、ログインし直してください。"
       : "保存できませんでした。HTTP/HTTPSの画像URLを1行に1つ、1〜5枚指定してください。通信状態も確認してください。";
   } finally {
     saveButton.disabled = false;
@@ -1082,7 +1168,7 @@ async function resetImageUrlOverride(event) {
   if (!overlay.dataset.hasOverride || !confirm("登録した画像URLを削除して元画像へ戻しますか？")) return;
   event.currentTarget.disabled = true;
   try {
-    const data = await apiRequest(`/admin/items/${encodeURIComponent(itemId)}/image`, {
+    const data = await apiRequest(`/items/${encodeURIComponent(itemId)}/image`, {
       method: "DELETE",
     });
     finishImageUrlChange(overlay, itemId, data);
@@ -1094,8 +1180,8 @@ async function resetImageUrlOverride(event) {
 }
 
 window.requestImageUrlChange = (itemId) => {
-  if (!window.dailyNewsAccount?.user?.isAdmin) {
-    alert("画像URLを変更できるのは管理者のみです。");
+  if (!window.dailyNewsAccount?.user) {
+    window.dailyNewsAccount?.openAuth("login", "画像URLを追加・変更するにはログインしてください。");
     return;
   }
   const item = imageEditorItem(itemId);

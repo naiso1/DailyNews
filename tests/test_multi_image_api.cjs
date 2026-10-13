@@ -10,6 +10,8 @@ async function test(edition){
   let cookie='';const prefix=edition==='exterior'?'/exterior':'';
   async function request(url,method='GET',body,status=200){const r=await fetch(base+prefix+'/api'+url,{method,headers:{Origin:base,Cookie:cookie,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});const text=await r.text();assert.equal(r.status,status,text);if(r.headers.get('set-cookie'))cookie=r.headers.get('set-cookie').split(';')[0];return JSON.parse(text);}
   await request('/admin/weekly-reports','GET',null,401);
+  await request('/items/jp1/image','PUT',{imageUrls:['https://example.com/guest.jpg']},401);
+  await request('/items/jp1/image','DELETE',null,401);
   await request('/auth/register','POST',{email:'admin@example.com',displayName:'Admin',password:'test-password-123'},201);
   const urls=['https://example.com/1.jpg','https://example.com/2.jpg'];
   let r=await request('/admin/items/jp1/image','PUT',{imageUrls:urls});assert.deepEqual(r.imageUrlsOverride,urls);assert.equal(r.imageUrlOverride,urls[0]);
@@ -26,8 +28,14 @@ async function test(edition){
   fs.writeFileSync(path.join(root,'data/weekly-reports.json'),JSON.stringify({reports:[{week:'2026-10-05'}]}));
   assert.equal((await request('/admin/weekly-reports')).reports[0].week,'2026-10-05');
   await request('/auth/logout','POST',{});
-  await request('/auth/register','POST',{email:'reader@example.com',displayName:'Reader',password:'test-password-123'},201);
+  const reader=await request('/auth/register','POST',{email:'reader@example.com',displayName:'Reader',password:'test-password-123'},201);
   await request('/admin/items/jp1/image','PUT',{imageUrls:urls},403);
+  r=await request('/items/jp1/image','PUT',{imageUrls:urls});assert.deepEqual(r.imageUrlsOverride,urls);
+  r=await request('/items/jp1/image','PUT',{imageUrls:[urls[1],urls[0],urls[1]]});assert.deepEqual(r.imageUrlsOverride,[urls[1],urls[0]]);
+  assert.equal(db.prepare('SELECT updated_by FROM item_image_overrides WHERE item_id=?').get('jp1').updated_by,reader.user.id,'Record member who edited');
+  for(const imageUrls of [[],['javascript:alert(1)'],Array(6).fill(urls[0]),['https://user:pass@example.com/a'],null]) await request('/items/jp1/image','PUT',{imageUrls},400);
+  const crossOrigin=await fetch(base+prefix+'/api/items/jp1/image',{method:'PUT',headers:{Origin:'https://example.org',Cookie:cookie,'Content-Type':'application/json'},body:JSON.stringify({imageUrls:urls})});assert.equal(crossOrigin.status,403);
+  r=await request('/items/jp1/image','DELETE');assert.deepEqual(r.imageUrlsOverride,[]);
   await request('/admin/weekly-reports','GET',null,403);
   await request('/auth/logout','POST',{});
   await request('/interactions/jp1/read','POST',{clientId:'test-browser-000000'});
@@ -35,4 +43,4 @@ async function test(edition){
   db.close();
  }finally{if(child.exitCode===null){const stopped=once(child,'exit');child.kill();await stopped;}fs.rmSync(root,{recursive:true,force:true});}
 }
-(async()=>{await test('interior');await test('exterior');console.log('Images, legacy compatibility, admin authorization and user reads: PASS');})().catch(error=>{console.error(error);process.exitCode=1;});
+(async()=>{await test('interior');await test('exterior');console.log('Member image edits/reset, guest and cross-origin denial, legacy admin route, validation and user reads: PASS');})().catch(error=>{console.error(error);process.exitCode=1;});

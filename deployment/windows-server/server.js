@@ -2310,15 +2310,17 @@ async function handleApi(request, response, requestUrl) {
 
   if (
     (request.method === "PUT" || request.method === "DELETE") &&
-    segments.length === 5 &&
-    segments[0] === "api" &&
-    segments[1] === "admin" &&
-    segments[2] === "items" &&
-    segments[4] === "image"
+    segments[0] === "api" && (
+      (segments.length === 4 && segments[1] === "items" && segments[3] === "image") ||
+      (segments.length === 5 && segments[1] === "admin" && segments[2] === "items" && segments[4] === "image")
+    )
   ) {
-    const admin = requireAdmin(request, response);
-    if (!admin) return;
-    const itemId = decodeURIComponent(segments[3]);
+    // Retain the old administrator URL for cached clients. The member URL
+    // grants only article-image edits, with the same URL validation and author ID.
+    const legacy = segments[1] === "admin";
+    const user = legacy ? requireAdmin(request, response) : requireUser(request, response);
+    if (!user) return;
+    const itemId = decodeURIComponent(segments[legacy ? 3 : 2]);
     if (!validItemId(itemId)) {
       apiError(response, 400, "invalid_item_id", "Invalid item ID.");
       return;
@@ -2326,7 +2328,7 @@ async function handleApi(request, response, requestUrl) {
     statements.ensureInteraction.run(itemId);
     if (request.method === "DELETE") {
       statements.deleteItemImageOverride.run(itemId);
-      sendJson(response, 200, interactionFor(itemId, "", true, admin));
+      sendJson(response, 200, interactionFor(itemId, "", true, user));
       return;
     }
     const body = await readJson(request);
@@ -2337,8 +2339,8 @@ async function handleApi(request, response, requestUrl) {
       return;
     }
     const imageUrls = [...new Set(urls.map(url => new URL(url.trim()).href))];
-    statements.upsertItemImageOverride.run(itemId, imageUrls[0], admin.id, JSON.stringify(imageUrls));
-    sendJson(response, 200, interactionFor(itemId, "", true, admin));
+    statements.upsertItemImageOverride.run(itemId, imageUrls[0], user.id, JSON.stringify(imageUrls));
+    sendJson(response, 200, interactionFor(itemId, "", true, user));
     return;
   }
 
