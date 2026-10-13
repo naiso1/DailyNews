@@ -27,12 +27,14 @@ def build(source, now, sample=False):
         {'equals':['@'+date_expr,now.date().isoformat() if sample else "@outputs('Packet')?['dueDate']"]}]
     def ledger_body(state):
         return "@concat('{\"reportKey\":\"',outputs('Packet')?['reportKey'],'\",\"state\":\""+state+"\",\"runId\":\"',workflow()?['run']?['name'],'\",\"updatedAt\":\"',utcNow(),'\"}')"
+    # Packet JSON holds base64 text. Outlook requires decoded binary, otherwise
+    # a successful send can still attach the text as an unreadable PNG file.
     actions={
         'Get_ledger_metadata':drive('GetFileMetadataByPath',{'path':directory+kind+'-ledger.json'}),
         'Claim_delivery':drive('UpdateFile',{'id':"@body('Get_ledger_metadata')?['Id']",'body':ledger_body('claimed')},'Get_ledger_metadata'),
         'Send_report':api('shared_office365','SendEmailV2',{'emailMessage/To':TEST_TO,
             'emailMessage/Subject':"@outputs('Packet')?['subject']",'emailMessage/Body':"@outputs('Packet')?['body']",
-            'emailMessage/Attachments':[{'Name':"@outputs('Packet')?['attachmentName']",'ContentBytes':"@outputs('Packet')?['attachmentBase64']"}],
+            'emailMessage/Attachments':[{'Name':"@outputs('Packet')?['attachmentName']",'ContentBytes':"@base64ToBinary(outputs('Packet')?['attachmentBase64'])"}],
             'emailMessage/Importance':'Normal'},'Claim_delivery'),
         'Record_sent':drive('UpdateFile',{'id':"@body('Get_ledger_metadata')?['Id']",'body':ledger_body('sent')},'Send_report'),
     }
