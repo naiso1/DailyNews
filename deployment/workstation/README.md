@@ -33,6 +33,12 @@ to DESKTOP-97FRPLP, under the Owner account.
 
 ## Private configuration
 
+For a one-time model comparison, use `run.py --llm-model MODEL` and optionally
+`--gpu-offload RATIO`. These apply only to that process and its two edition
+children; `workstation.json` and the next scheduled run remain unchanged.
+An explicit model also overrides the department idea-generation/review model
+through `DAILYNEWS_IDEA_MODEL`, avoiding a second model being loaded mid-run.
+
 `%LOCALAPPDATA%\DailyNewsRuntime\workstation.json` contains `hostname`,
 `repository`, `oneDriveAccount`, boolean `enabled`, optional `llmModel` and
 `gpuOffload`. Without a model override the fallback remains Qwen3.5 9B.

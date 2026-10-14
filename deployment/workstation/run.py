@@ -141,10 +141,16 @@ def main():
     parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--edition", choices=["interior", "exterior"])
     parser.add_argument("--build-only", action="store_true")
+    parser.add_argument("--llm-model", help="Use this model for this run, including idea generation/review; do not change the saved schedule configuration.")
+    parser.add_argument("--gpu-offload", help="Override the GPU offload ratio for this run only.")
     parser.add_argument("--resume-from-sheet", action="store_true",
                         help="Resume from the existing date-validated collection CSV without collecting again.")
     args = parser.parse_args()
     config = json.loads((RUNTIME / "workstation.json").read_text(encoding="utf-8-sig"))
+    if args.llm_model:
+        config["llmModel"] = args.llm_model
+    if args.gpu_offload is not None:
+        config["gpuOffload"] = args.gpu_offload
     if not args.check_only and not config.get("enabled"):
         raise RuntimeError("Migration has not been activated")
     lock = (RUNTIME / "run.lock").open("a+b")
@@ -159,6 +165,13 @@ def main():
         if not isinstance(editions, list) or not editions or len(set(editions)) != len(editions):
             raise ValueError("editions must be a nonempty list without duplicates")
         proxies = prepare(config, editions)
+        # The department may normally use a different idea model. An explicit
+        # one-run model must apply to that stage too, without loading two models.
+        if args.llm_model:
+            os.environ["DAILYNEWS_IDEA_MODEL"] = os.environ["LLM_MODEL"]
+        else:
+            os.environ.pop("DAILYNEWS_IDEA_MODEL", None)
+        print(f"RUN MODEL {os.environ['LLM_MODEL']} GPU={os.environ['LLM_GPU_OFFLOAD']} override={bool(args.llm_model)}", flush=True)
         if args.check_only:
             result = check(config, proxies, editions)
             (RUNTIME / "preflight-result.json").write_text(json.dumps(result, indent=2), encoding="utf-8")

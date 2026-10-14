@@ -1873,6 +1873,8 @@ def main():
     ap.add_argument("--fix-existing", action="store_true", help="Fix url/source for existing entries using CSV rows")
     ap.add_argument("--llm-endpoint", default=os.getenv("LLM_ENDPOINT", "http://127.0.0.1:1234/v1/chat/completions"))
     ap.add_argument("--llm-model", default=os.getenv("LLM_MODEL", "qwen/qwen3.5-9b"))
+    ap.add_argument("--idea-model", default=os.getenv("DAILYNEWS_IDEA_MODEL", ""),
+                    help="Explicit model for idea generation/review, before the department default.")
     args = ap.parse_args()
     if args.edition != EDITION.id:
         configure_edition(args.edition)
@@ -2325,7 +2327,7 @@ def main():
                     quality_sources = list({it["newsId"]: it for it in quality_sources}.values())
                     deduped, quality_report = idea_quality.generate_country(
                         EDITION.id, insight_date_label, key, quality_sources, history_ideas, retained_ideas,
-                        lambda prompt: call_llm(args.llm_endpoint, EDITION.config.get("idea_generation", {}).get("model", args.llm_model), prompt, max_tokens=2600, temperature=0.2),
+                        lambda prompt: call_llm(args.llm_endpoint, args.idea_model or EDITION.config.get("idea_generation", {}).get("model", args.llm_model), prompt, max_tokens=2600, temperature=0.2),
                         extract_json_block, dedupe_ideas,
                         source_loader=lambda chosen: idea_quality.enrich_originals(chosen, idea_source_cache, fetch_missing=True),
                         rescue_attempts=2,
