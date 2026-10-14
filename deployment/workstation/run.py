@@ -239,7 +239,11 @@ def main():
 if __name__ == "__main__":
     logs = RUNTIME / "logs"
     logs.mkdir(exist_ok=True)
-    log = (logs / ("launcher_" + dt.date.today().isoformat() + ".log")).open("a", encoding="utf-8", buffering=1)
+    # Recovery checks may run while a child writes to the nightly launcher's
+    # inherited stdout handle. Keep their logs separate to avoid file offsets
+    # from different processes overwriting each other's progress messages.
+    prefix = "recovery_" if "--recover-if-needed" in sys.argv else "launcher_"
+    log = (logs / (prefix + dt.date.today().isoformat() + ".log")).open("a", encoding="utf-8", buffering=1)
     sys.stdout = sys.stderr = log
     print("START", dt.datetime.now().astimezone().isoformat(), flush=True)
     try:
