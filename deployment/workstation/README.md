@@ -11,6 +11,18 @@ to DESKTOP-97FRPLP, under the Owner account.
 - Weekdays at 00:00 JST. Task: `DailyNews_RunSearchAndUpdate`.
 - Owner must remain signed in. Locking the screen is OK; signing out is not.
   After a reboot, sign in as Owner. This is not a logged-off service.
+- `DailyNews_ResumeAfterSignIn` checks two minutes after sign-in and every 30
+  minutes while signed in. It uses `run.py --recover-if-needed`, the same process
+  lock, weekday/holiday policy and saved model settings. It skips an active run
+  and verifies published article/insight data before skipping completed editions.
+  Recovery is limited to two attempts per edition/JST day; it never directly
+  sends mail or opens a sign-in dialog. Install with `install-recovery.ps1`.
+  A surviving collector/updater child also blocks recovery. The recovery task
+  allows 12 hours. The installer tries to extend the nightly task's 7-hour limit
+  too; if that protected task denies the change, it is left intact and a warning
+  is logged. Recovery never treats a surviving child as a failed, stopped run.
+  A reboot still requires Windows sign-in, and expired exaBase authentication
+  may require the user's identity verification. No password is saved for auto-login.
 - Overlapping invocations are rejected by Task Scheduler and a process lock.
 - `processing_host.json` selects the sole active processing host. The scheduled
   runner checks this before log/status writes, network requests or subprocesses.

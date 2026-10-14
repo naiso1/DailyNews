@@ -143,6 +143,8 @@ def main():
     parser.add_argument("--build-only", action="store_true")
     parser.add_argument("--llm-model", help="Use this model for this run, including idea generation/review; do not change the saved schedule configuration.")
     parser.add_argument("--gpu-offload", help="Override the GPU offload ratio for this run only.")
+    parser.add_argument("--recover-if-needed", action="store_true",
+                        help="On weekdays, run only unpublished editions, at most twice per edition/day.")
     parser.add_argument("--resume-from-sheet", action="store_true",
                         help="Resume from the existing date-validated collection CSV without collecting again.")
     args = parser.parse_args()
@@ -159,12 +161,32 @@ def main():
         lock.write(b"0")
         lock.flush()
     lock.seek(0)
-    msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+    try:
+        msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+    except OSError:
+        lock.close()
+        if args.recover_if_needed:
+            print("RECOVERY SKIP: another DailyNews process is running", flush=True)
+            return 0
+        raise
     try:
         editions = [args.edition] if args.edition else config.get("editions", ["interior"])
         if not isinstance(editions, list) or not editions or len(set(editions)) != len(editions):
             raise ValueError("editions must be a nonempty list without duplicates")
+        if args.recover_if_needed:
+            from recovery import running_pipeline_pids
+            if running_pipeline_pids(ROOT):
+                print("RECOVERY SKIP: a collection/publication child is still running", flush=True)
+                return 0
         proxies = prepare(config, editions)
+        if args.recover_if_needed:
+            from recovery import pending_editions, reserve_attempt
+            pending = pending_editions(ROOT, editions)
+            editions = reserve_attempt(RUNTIME / 'recovery-attempts.json', pending)
+            if not editions:
+                print("RECOVERY SKIP: complete, outside schedule, or daily retry limit reached", flush=True)
+                return 0
+            print("RECOVERY START " + ','.join(editions), flush=True)
         # The department may normally use a different idea model. An explicit
         # one-run model must apply to that stage too, without loading two models.
         if args.llm_model:
