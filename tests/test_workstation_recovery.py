@@ -1,6 +1,7 @@
 """Recovery must skip current publications and bound retries without sending mail."""
 import datetime as dt
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import tempfile
@@ -48,7 +49,25 @@ class RecoveryTests(unittest.TestCase):
                 self.responses[base+name] = data
 
     def pending(self, today=TODAY):
-        return recovery.pending_editions(self.root,['interior','exterior'],today,self.responses.__getitem__)
+        def hashes(edition):
+            base = 'http://IEWEB01/' + ('exterior/' if edition == 'exterior' else '')
+            return {name: hashlib.sha256(self.responses[base+name]).hexdigest()
+                    for name in ('news_data.js', 'insights_data.js')}
+        def public_fetch(url):
+            if url.endswith(('news_data.js', 'insights_data.js')):
+                raise AssertionError('Protected article HTTP must not be used without login')
+            return self.responses[url]
+        return recovery.pending_editions(self.root,['interior','exterior'],today,public_fetch,hashes)
+
+    def test_server_digest_reader_rejects_malformed_or_missing_hashes(self):
+        expected = {'news_data.js': 'a'*64, 'insights_data.js': 'b'*64}
+        with patch.object(recovery.subprocess, 'run', return_value=Mock(stdout=json.dumps(expected))):
+            self.assertEqual(recovery.published_hashes('interior'), expected)
+        for output in ('null', '{}', '{"news_data.js":"token"}'):
+            with self.subTest(output=output), patch.object(
+                    recovery.subprocess, 'run', return_value=Mock(stdout=output)):
+                with self.assertRaises(ValueError):
+                    recovery.published_hashes('exterior')
 
     def test_current_publications_survive_ui_only_release_changes(self):
         self.assertEqual(self.pending(), [])

@@ -1,7 +1,9 @@
 """Read-only completion checks and bounded recovery planning for signed-in users."""
+import base64
 import datetime as dt
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import urllib.request
@@ -27,11 +29,46 @@ def running_pipeline_pids(root):
     return [pid for pid in values if pid is not None]
 
 
-def pending_editions(root, editions, today=None, fetch=None):
+def published_hashes(edition):
+    """Read public-release digests over existing SSH; article HTTP requires login."""
+    folders = {'interior': 'DailyNews', 'exterior': 'DailyNewsExterior'}
+    folder = folders[edition]
+    script = r"""
+$ErrorActionPreference='Stop'
+$base='C:\Users\Administrator\Desktop\__FOLDER__'
+$release=(Get-Content -LiteralPath (Join-Path $base 'active-release.txt') -Raw).Trim()
+if ($release -cnotmatch '^[a-f0-9]{40}$') { throw 'Invalid active release' }
+$published=Join-Path (Join-Path $base 'releases') $release
+$hashes=@{}
+foreach($name in @('news_data.js','insights_data.js')) {
+  $hashes[$name]=(Get-FileHash -LiteralPath (Join-Path $published $name) -Algorithm SHA256).Hash.ToLowerInvariant()
+}
+ConvertTo-Json -Compress -InputObject $hashes
+""".replace('__FOLDER__', folder)
+    encoded = base64.b64encode(script.encode('utf-16le')).decode('ascii')
+    identity = os.environ.get('DAILYNEWS_SERVER_IDENTITY', str(Path.home()/'.ssh/dailynews_ieweb01'))
+    server = os.environ.get('DAILYNEWS_SERVER_SSH', 'Administrator@IEWEB01')
+    result = subprocess.run(
+        ['ssh', '-i', identity, '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes',
+         '-o', 'ConnectTimeout=10', server,
+         'powershell.exe -NoProfile -NonInteractive -EncodedCommand ' + encoded],
+        capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=30,
+        creationflags=subprocess.CREATE_NO_WINDOW, check=True)
+    hashes = json.loads(result.stdout)
+    if not isinstance(hashes, dict) or any(
+            not isinstance(hashes.get(name), str) or len(hashes[name]) != 64
+            or any(c not in '0123456789abcdef' for c in hashes[name])
+            for name in ('news_data.js', 'insights_data.js')):
+        raise ValueError('Invalid publication digests')
+    return hashes
+
+
+def pending_editions(root, editions, today=None, fetch=None, publication_reader=None):
     today = today or dt.datetime.now(JST).date()
     if today.weekday() >= 5:
         return []
     expected = (today - dt.timedelta(days=1)).isoformat()
+    publication_reader = publication_reader or published_hashes
     if fetch is None:
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         def fetch(url):
@@ -55,14 +92,15 @@ def pending_editions(root, editions, today=None, fetch=None):
                 raise ValueError('Unhealthy publication')
             # UI-only releases may change the release ID after a successful run.
             # Compare article/insight data instead, so they do not trigger a rerun.
+            hashes = publication_reader(edition)
             for name in ('news_data.js', 'insights_data.js'):
-                if hashlib.sha256(fetch(base+name)).digest() != hashlib.sha256((content/name).read_bytes()).digest():
+                if hashes[name] != hashlib.sha256((content/name).read_bytes()).hexdigest():
                     raise ValueError('Publication content differs')
             if edition == 'exterior':
                 remote = json.loads(fetch(base+'publication_status.json'))
                 if remote.get('edition_id') != edition or remote.get('processed_through', '') < expected:
                     raise ValueError('Exterior issue is stale')
-        except (OSError, ValueError, TypeError, KeyError):
+        except (OSError, ValueError, TypeError, KeyError, subprocess.SubprocessError):
             pending.append(edition)
     return pending
 
