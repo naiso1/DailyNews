@@ -64,6 +64,19 @@ class SourceArticleExtractionTests(unittest.TestCase):
                 self.env["_article_text_cache"][cache_key] = noisy
                 self.assertEqual(self.env["fetch_article_text"](url), body)
 
+    def test_yahoo_and_cnevpost_related_links_removed_from_cached_and_fresh_bodies(self):
+        for url, body, footer in (
+            ('https://news.yahoo.co.jp/articles/new-film', '防雪フィルムを発売。', '【関連リンク】パリモーターショー2026'),
+            ('https://cnevpost.com/new-car/', 'A model update.', ' Related Posts Paris Motor Show 2026'),
+        ):
+            for edition in ('interior', 'exterior'):
+                with self.subTest(url=url, edition=edition):
+                    self.env['_article_text_cache'].clear()
+                    self.assertEqual(self.fetch(url, '<article>'+body+footer+'</article>', edition), body)
+                    key = (self.env['ARTICLE_TEXT_VERSION'], url) if edition == 'exterior' else url
+                    self.env['_article_text_cache'][key] = body+footer
+                    self.assertEqual(self.env['fetch_article_text'](url), body)
+
 
 if __name__ == "__main__":
     unittest.main()

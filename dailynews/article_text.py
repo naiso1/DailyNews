@@ -3,7 +3,15 @@ import codecs
 import re
 from urllib.parse import urlsplit
 
-ARTICLE_TEXT_VERSION = "exterior-html-v2"
+ARTICLE_TEXT_VERSION = "article-body-v3"
+
+# Shared with the generated browser event classifier. These are section
+# boundaries observed on the named sites, not keywords in normal article prose.
+NOISE_BOUNDARIES = {
+    "carnewschina.com": r"\bRecommended for you\b|\bMost important news in your inbox\b",
+    "news.yahoo.co.jp": r"【(?:関連リンク|関連記事|あわせて読みたい)】",
+    "cnevpost.com": r"\bRelated Posts\b|\bRelated Articles\b",
+}
 
 
 def trim_article_noise(text, url):
@@ -13,9 +21,12 @@ def trim_article_noise(text, url):
     ordinary article prose on other sites is not silently discarded.
     """
     text = str(text or "")
-    host = (urlsplit(str(url or "")).hostname or "").lower().removeprefix("www.")
-    if host == "carnewschina.com":
-        match = re.search(r"\bRecommended for you\b|\bMost important news in your inbox\b", text, re.I)
+    try:
+        host = (urlsplit(str(url or "")).hostname or "").lower().removeprefix("www.")
+    except ValueError:
+        return text
+    if host in NOISE_BOUNDARIES:
+        match = re.search(NOISE_BOUNDARIES[host], text, re.I)
         if match:
             return text[:match.start()].rstrip()
     return text

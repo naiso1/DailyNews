@@ -10,6 +10,8 @@ import re
 import unicodedata
 from urllib.parse import unquote
 
+from dailynews.article_text import NOISE_BOUNDARIES, trim_article_noise
+
 RULES = [
     {"tag": "CEATEC×JMS2026", "year": "2026", "pattern": r"(?<![a-z])CEATEC(?![a-z])|シーテック|(?<![a-z])Japan[\s_-]+Mobility[\s_-]+Show(?:[\s_-]+Bizweek)?(?![a-z])|ジャパン[\s・_-]*モビリティ[\s・_-]*ショー(?:[\s・_-]*ビズウィーク)?|(?<![a-z])JMS(?:[\s_-]*Bizweek)?(?![a-z])"},
     {"tag": "パリモーターショー2026", "year": "2026", "pattern": r"パリ[\s・_-]*(?:モーター[\s・_-]*ショー|オート[\s・_-]*ショー|自動車ショー)|(?<![a-z])Paris[\s_-]+(?:Motor|Auto|Automobile)[\s_-]+Show(?![a-z])|(?<![a-z])Mondial[\s_-]+(?:de[\s_-]+l['’\s_-]*|de[\s_-]+)(?:Automobile|Auto)(?![a-z])|巴黎(?:国际|國際)?(?:汽車|汽车|車|车)展"},
@@ -23,7 +25,7 @@ PAST_AFTER = r"^\s*(?:\d+\s+years?\s+ago|last\s+year)(?![a-z])"
 
 
 def derive(item):
-    texts = [unicodedata.normalize("NFKC", unquote(str(item.get(field) or ""))) for field in FIELDS]
+    texts = [trim_article_noise(unicodedata.normalize("NFKC", unquote(str(item.get(field) or ""))), item.get("url")) for field in FIELDS]
     article_year = str(item.get("date") or "")[:4]
     result = []
     for rule in RULES:
@@ -49,16 +51,21 @@ def browser_script():
 (() => {
   const rules = ''' + json.dumps(RULES, ensure_ascii=False, indent=2) + ''';
   const fields = ''' + json.dumps(FIELDS) + ''';
+  const noiseBoundaries = ''' + json.dumps(NOISE_BOUNDARIES, ensure_ascii=False) + ''';
   const before = new RegExp(''' + json.dumps(BEFORE) + ''', "i");
   const after = new RegExp(''' + json.dumps(AFTER) + ''', "i");
   const pastBefore = new RegExp(''' + json.dumps(PAST_BEFORE) + ''', "i");
   const pastAfter = new RegExp(''' + json.dumps(PAST_AFTER) + ''', "i");
   const labels = rules.map(rule => rule.tag);
   function derive(item) {
+    let host = "";
+    try { host = new URL(item?.url).hostname.toLowerCase().replace(/^www\\./, ""); } catch (_) { /* no source URL */ }
     const texts = fields.map(field => {
       let text = String(item?.[field] || "");
       try { text = decodeURIComponent(text); } catch (_) { /* literal URL */ }
-      return text.normalize("NFKC");
+      text = text.normalize("NFKC");
+      const boundary = noiseBoundaries[host] && new RegExp(noiseBoundaries[host], "i").exec(text);
+      return boundary ? text.slice(0, boundary.index).trimEnd() : text;
     });
     return rules.filter(rule => {
       const explicit = []; let undated = false, past = false;

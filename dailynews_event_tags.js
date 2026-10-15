@@ -14,16 +14,21 @@
   }
 ];
   const fields = ["title", "desc", "summary", "sourceExcerpt", "sourceExcerptEnd", "originalTitle", "originalDesc", "url"];
+  const noiseBoundaries = {"carnewschina.com": "\\bRecommended for you\\b|\\bMost important news in your inbox\\b", "news.yahoo.co.jp": "【(?:関連リンク|関連記事|あわせて読みたい)】", "cnevpost.com": "\\bRelated Posts\\b|\\bRelated Articles\\b"};
   const before = new RegExp("(?<!\\d)(20\\d{2})(?:\\s*\u5e74[\u6625\u590f\u79cb\u51ac]?(?:\u306e|\u306b\u958b\u50ac\u3055\u308c\u305f)?|[\\s_-]+edition)?[\\s:\uff1a\u30fb\u00b7/_()\uff08\uff09\u300c\u300d\u3010\u3011-]*$", "i");
   const after = new RegExp("^[\\s:\uff1a\u30fb\u00b7/_()\uff08\uff09\u300c\u300d\u3010\u3011-]*(?:in\\s+)?(20\\d{2})(?!\\d)", "i");
   const pastBefore = new RegExp("(?:\u6628\u5e74|\u4e00\u6628\u5e74|\u6628\u79cb|\\d+\\s*\u5e74\u524d)(?:\u306e)?\\s*$", "i");
   const pastAfter = new RegExp("^\\s*(?:\\d+\\s+years?\\s+ago|last\\s+year)(?![a-z])", "i");
   const labels = rules.map(rule => rule.tag);
   function derive(item) {
+    let host = "";
+    try { host = new URL(item?.url).hostname.toLowerCase().replace(/^www\./, ""); } catch (_) { /* no source URL */ }
     const texts = fields.map(field => {
       let text = String(item?.[field] || "");
       try { text = decodeURIComponent(text); } catch (_) { /* literal URL */ }
-      return text.normalize("NFKC");
+      text = text.normalize("NFKC");
+      const boundary = noiseBoundaries[host] && new RegExp(noiseBoundaries[host], "i").exec(text);
+      return boundary ? text.slice(0, boundary.index).trimEnd() : text;
     });
     return rules.filter(rule => {
       const explicit = []; let undated = false, past = false;

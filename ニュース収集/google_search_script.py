@@ -32,6 +32,7 @@ if str(ROOT) not in sys.path:
 from dailynews.editions import get_edition
 from dailynews import exterior as exterior_rules
 from dailynews import exterior_scope, exterior_papers
+from dailynews import event_collection
 from dailynews.article_text import ARTICLE_TEXT_VERSION, decode_html, is_error_page, unusable_text, trim_article_noise
 from dailynews.collection_digest import collection_window, published_news, published_issue, published_row
 from dailynews.publication_language import SummaryQuarantineError, summary_language_problem as base_summary_language_problem
@@ -609,12 +610,19 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
                     candidate = next((item for item in daily if item not in required + diverse + trends and theme in exterior_scope.theme_hits(str(item.get("タイトル", "")) + " " + str(item.get("内容", "")))), None)
                     if candidate is not None:
                         diverse.append(candidate)
-                ordered = required + diverse + trends[:trend_slots]
+                event_slots_left = event_collection.REVIEW_SLOTS - len(event_collection.review_candidates(chosen))
+                event_candidates = event_collection.review_candidates(daily, event_slots_left)
+                ordered = list(required)
+                for item in event_candidates + diverse + trends[:trend_slots]:
+                    if item not in ordered:
+                        ordered.append(item)
                 ordered.extend(item for item in daily if item not in ordered)
                 chosen.extend(ordered[:max(0, review_limit - len(chosen))])
             picked.extend(chosen)
         else:
-            picked.extend(group[:per_country_limit])
+            event_candidates = event_collection.review_candidates(group)
+            ordered = event_candidates + [item for item in group if item not in event_candidates]
+            picked.extend(ordered[:per_country_limit])
     picked.sort(key=lambda x: x.get("_prefilter_order", 0))
     for item in picked:
         item.pop("_prefilter_order", None)
@@ -661,6 +669,11 @@ def google_news_keyword_limit():
     if EDITION.id == "exterior" and "GOOGLE_NEWS_KEYWORD_LIMIT" not in os.environ:
         return int(EDITION.config.get("search", {}).get("google_news_keyword_limit", GOOGLE_NEWS_KEYWORD_LIMIT))
     return GOOGLE_NEWS_KEYWORD_LIMIT
+
+
+def google_news_search_keywords(country, target_dates):
+    ordinary = edition_search_keywords(COUNTRY_SETTINGS.get(country, {}), google_news_keyword_limit())
+    return list(dict.fromkeys(ordinary + event_collection.search_keywords(country, target_dates)))
 
 
 def editorial_feedback():
@@ -3791,7 +3804,7 @@ def fetch_from_google_news(target_dates):
     }
     
     for country, region_params in google_news_regions.items():
-        keywords = edition_search_keywords(COUNTRY_SETTINGS.get(country, {}), google_news_keyword_limit())
+        keywords = google_news_search_keywords(country, target_dates)
         print(f"  [{country}] 検索中...")
         country_count = 0
         
@@ -3809,7 +3822,14 @@ def fetch_from_google_news(target_dates):
                     continue
                 
                 feed = feedparser.parse(response.content)
-                for entry in feed.entries[:15]:
+                entries = feed.entries
+                if keyword in event_collection.search_keywords(country, target_dates):
+                    # Event RSS is relevance-ordered and may begin with old
+                    # announcements. Apply the date window before the fetch cap.
+                    entries = [entry for entry in entries if is_target_date(
+                        parse_date(entry.get("published", "") or entry.get("updated", "")), target_dates)]
+                    entries.sort(key=lambda entry: parse_date(entry.get("published", "") or entry.get("updated", "")) or "", reverse=True)
+                for entry in entries[:15]:
                     title = entry.get("title", "")
                     link = entry.get("link", "")
                     published = entry.get("published", "") or entry.get("updated", "")
