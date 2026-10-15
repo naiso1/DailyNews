@@ -241099,9 +241099,8 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/4f1dc4486e65779aca68b7ba85b80c7b28056314",
         source: "レスポンス",
         date: "2026-10-15",
-        tags: ["パリモーターショー2026", "ディスプレイ", "シート", "コックピット", "新素材", "EV"],
+        tags: ["ディスプレイ", "シート", "コックピット", "新素材", "EV"],
     
-        eventTags: ["パリモーターショー2026"],
         sourceExcerpt: "助手席には初めてディスプレイを設定し、コックピットとインフォテインメント向けに新開発の「Retro（レトロ）」ディスプレイも用意する。",
         interiorScore: 98,
         interiorReason: "The article focuses heavily on the interior design refresh, specifically highlig",
@@ -241584,9 +241583,8 @@ window.LOADED_NEWS_DATA = [
         url: "https://cnevpost.com/2026/10/15/avatr-launches-2026-avatr-06/",
         source: "CnEVPost - All",
         date: "2026-10-15",
-        tags: ["パリモーターショー2026", "シート"],
+        tags: ["シート"],
     
-        eventTags: ["パリモーターショー2026"],
         sourceExcerpt: "In addition to the cash incentive, the package includes a free upgrade",
         sourceExcerptEnd: "drive motor and electronic control system for the original owner.",
         interiorScore: 43,
