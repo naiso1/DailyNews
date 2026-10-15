@@ -99,6 +99,43 @@ class ImageProviderTests(unittest.TestCase):
         api.assert_not_called()
         self.assertEqual(report["status"], "unavailable")
 
+    def test_production_settings_do_not_use_api_when_exabase_fails(self):
+        production_root = Path(__file__).resolve().parents[1]
+        for edition_id in ("interior", "exterior"):
+            edition = get_edition(edition_id, self.root)
+            edition.config_dir.mkdir(parents=True, exist_ok=True)
+            config = get_edition(edition_id, production_root).image_generation
+            edition.collection_settings_path.write_text(
+                json.dumps({edition_id: {"image_generation": config}}), encoding="utf-8")
+            edition.ensure_directories()
+            path = edition.content_dir / "insights_data.js"
+            path.write_text(self.text, encoding="utf-8")
+            for code in ("AUTH_REQUIRED", "WORKER_TIMEOUT"):
+                with self.subTest(edition=edition_id, error=code):
+                    primary = Mock(side_effect=exabase.ImageJobError(code))
+                    api = Mock(side_effect=AssertionError("Paid API is disabled"))
+                    report = idea_images.optional_images(
+                        edition, exabase_runner=primary, api_generator=api)
+                    primary.assert_called_once()
+                    api.assert_not_called()
+                    self.assertEqual(report["status"], "unavailable")
+                    self.assertEqual(report["missing"], [5, 6])
+                    self.assertEqual(path.read_text(encoding="utf-8"), self.text)
+
+    def test_production_interior_keeps_primary_image_without_api_backfill(self):
+        self.config = get_edition("interior", Path(__file__).resolve().parents[1]).image_generation
+        self.write_config()
+        api = Mock(side_effect=AssertionError("Paid API is disabled"))
+        report = idea_images.optional_images(
+            self.edition, exabase_runner=self.publish_primary, api_generator=api)
+        api.assert_not_called()
+        self.assertEqual(report["status"], "partial")
+        self.assertEqual(report["providers"], {"exabase": 1})
+        self.assertEqual(report["missing"], [6])
+        ideas = exabase.select_ideas(self.path.read_text(encoding="utf-8"))
+        self.assertTrue(exabase.has_image(ideas[0]))
+        self.assertEqual((ideas[1].title, ideas[1].desc), ("発光パネル", "照明 [jp1]"))
+
     def test_previous_issue_and_wrong_target_never_generate(self):
         primary, api = Mock(), Mock()
         wrong = idea_images.optional_images(self.edition, issue_date="2026-09-17", exabase_runner=primary, api_generator=api)

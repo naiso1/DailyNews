@@ -35,7 +35,10 @@ to DESKTOP-97FRPLP, under the Owner account.
   The launcher starts LM Studio's
   daemon; the collector prepares the requested model without overlapping loads.
 - No post-run sleep. Sleep is inhibited during the process only.
-- Gemini image generation remains Standard 512px / 1:1.
+- Both editions generate idea images through exaBase only. Since 2026-10-15,
+  interior's `fallback_provider` is `none`; authentication or image failures do
+  not invoke the paid image API. Existing images remain, and text publication
+  continues when an image is unavailable.
 - OneDrive starts in Owner's session. Existing Power Automate weekday 08:00
   success/failure delivery and mailing-list management stay unchanged.
 - `DailyNews_ExaBaseSessionMaintenance` checks and refreshes exaBase authentication
