@@ -18300,9 +18300,8 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/8e539d5b8ea0c0993a41f6541ac7a415535b2ee0",
         source: "レスポンス",
         date: "2026-10-15",
-        tags: ["パリモーターショー2026", "フィルム", "照明・発光"],
+        tags: ["フィルム", "照明・発光"],
     
-        eventTags: ["パリモーターショー2026"],
         edition: "exterior", productScore: 72, exteriorScore: 72,
         doi: "nan",
         paperPublicationDate: "nan",
@@ -18358,9 +18357,8 @@ window.LOADED_NEWS_DATA = [
         url: "https://news.yahoo.co.jp/articles/a72161f504919d28bb2e537e69984ae251175013",
         source: "レスポンス",
         date: "2026-10-15",
-        tags: ["パリモーターショー2026", "フィルム"],
+        tags: ["フィルム"],
     
-        eventTags: ["パリモーターショー2026"],
         edition: "exterior", productScore: 72, exteriorScore: 72,
         doi: "nan",
         paperPublicationDate: "nan",
