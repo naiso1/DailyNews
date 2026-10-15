@@ -17,7 +17,14 @@ def running_pipeline_pids(root):
     result = subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',script],
                             capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=30,
                             creationflags=subprocess.CREATE_NO_WINDOW,check=True)
-    return json.loads(result.stdout)
+    values = json.loads(result.stdout)
+    if not isinstance(values, list):
+        raise ValueError('Unexpected process list')
+    # Windows PowerShell serializes @($emptyArray.ProcessId) as [null].
+    # Treat that as no process rather than a truthy list that blocks recovery.
+    if any(pid is not None and (type(pid) is not int or pid <= 0) for pid in values):
+        raise ValueError('Unexpected process ID')
+    return [pid for pid in values if pid is not None]
 
 
 def pending_editions(root, editions, today=None, fetch=None):

@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('recovery', ROOT/'deployment/workstation/recovery.py')
@@ -14,6 +15,19 @@ TODAY = dt.date(2026,10,15)
 
 
 class RecoveryTests(unittest.TestCase):
+    def test_empty_windows_process_output_does_not_block_recovery(self):
+        for output, expected in (('[null]', []), ('[]', []), ('[124,456]', [124,456])):
+            with self.subTest(output=output), patch.object(
+                    recovery.subprocess, 'run', return_value=Mock(stdout=output)):
+                self.assertEqual(recovery.running_pipeline_pids(ROOT), expected)
+
+    def test_malformed_process_output_cannot_start_duplicate_work(self):
+        for output in ('null', '"124"', '["124"]', '[0]', '[true]'):
+            with self.subTest(output=output), patch.object(
+                    recovery.subprocess, 'run', return_value=Mock(stdout=output)):
+                with self.assertRaises(ValueError):
+                    recovery.running_pipeline_pids(ROOT)
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
