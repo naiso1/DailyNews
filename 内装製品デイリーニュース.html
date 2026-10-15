@@ -1583,6 +1583,7 @@ header.site-header {
     <script src="exchange_rates.js?v=20260908-1"></script>
     <script src="dailynews_annotations.js?v=20260911-2"></script>
     <script src="dailynews_exterior_tags.js?v=20260930-1"></script>
+    <script src="dailynews_event_tags.js?v=20261015-1"></script>
 
     <script>
         function normalizeExteriorPublication(payload) {
@@ -2346,6 +2347,7 @@ header.site-header {
 
         function enhanceNewsItem(item) {
             const localTags = deriveLocalTags(item);
+            const eventTags = window.DailyNewsEventTags.forItem(item);
             const storedScore = Number(window.DAILYNEWS_CONFIG.id === "exterior" ? item.exteriorScore ?? item.relevanceScore : item.interiorScore);
             const baseInteriorScore = Number.isFinite(storedScore)
                 ? Math.max(0, Math.min(100, Math.round(storedScore)))
@@ -2356,7 +2358,7 @@ header.site-header {
                 : Math.min(baseInteriorScore, vehicleScoreCap);
             return {
                 ...item,
-                tags: localTags,
+                tags: [...new Set([...eventTags, ...localTags])],
                 localTags,
                 interiorScore
             };
@@ -3092,7 +3094,7 @@ header.site-header {
 
                 const tagFilters = document.getElementById("tagFilters");
                 const baseTags = window.DAILYNEWS_CONFIG.id === "exterior" ? EXTERIOR_TAG_RULES.map(rule => rule.tag) : ALL_TAGS;
-                const displayTags = [...new Set([...baseTags, ...NEWS_DATA.flatMap(n => n.tags || [])])];
+                const displayTags = [...new Set([...window.DailyNewsEventTags.labels, ...baseTags, ...NEWS_DATA.flatMap(n => n.tags || [])])];
                 displayTags.forEach(tag => {
                     const chip = document.createElement("span");
                     chip.className = "chip";

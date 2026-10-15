@@ -19,6 +19,7 @@ from dailynews import exterior_papers
 from dailynews import idea_quality
 from dailynews.prose import normalize_prose_whitespace
 from dailynews.exterior_tags import generate_tags as generate_exterior_tags
+from dailynews.event_tags import derive as derive_event_tags
 from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
 from dailynews.editorial_policy import apply_policy, classify_lighting, exterior_scope_rules, EVIDENCE_COLUMNS
@@ -389,6 +390,11 @@ def generate_tags(text: str):
             if tag not in tags:
                 tags.append(tag)
     return tags[:6]
+
+
+def generate_item_tags(item):
+    """Keep event labels ahead of, and outside, the normal genre count cap."""
+    return derive_event_tags(item) + generate_tags(f"{item.get('title', '')} {item.get('desc', '')}")
 
 
 SELECTION_FIELDS = {
@@ -2084,12 +2090,15 @@ def main():
         max_ids[prefix] = next_id
         it_id = f"{prefix}{next_id}" if prefix != "paper" else f"paper{next_id}"
         text_blob = f"{it['title']} {it['desc']}"
-        tags = generate_tags(text_blob)
+        tags = generate_item_tags(it)
         source = derive_source(it["url"], it["source"])
         note = ""
         if any(k in it["img"] for k in ["unsplash", "placeholder", "thumb_default"]):
             note = "※イメージ画像"
         extra_lines = []
+        event_tags = derive_event_tags(it)
+        if event_tags:
+            extra_lines.append(f'                eventTags: {json.dumps(event_tags, ensure_ascii=False)},')
         if it.get("relatedUrls"):
             extra_lines.append(f'                relatedUrls: {json.dumps(it["relatedUrls"], ensure_ascii=False)},')
         if EDITION.id == "exterior":

@@ -53,6 +53,7 @@ The script packages only:
 - `currency-conversion-preview.html`
 - `exchange_rates.js` (dated ECB reference rates, refreshed once per collection day)
 - `dailynews_annotations.js` (currency conversion and verified source links)
+- `dailynews_exterior_tags.js` and `dailynews_event_tags.js` (shared genre/event rules)
 - `news_data.js`
 - `insights_data.js`
 - `dailynews_client.js`
