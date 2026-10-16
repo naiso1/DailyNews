@@ -11,7 +11,7 @@ $root = "C:\Users\Administrator\Desktop\DailyNewsExterior"
 $entry = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("5YaF6KOF6KO95ZOB44OH44Kk44Oq44O844OL44Ol44O844K5Lmh0bWw="))
 $shared = @($entry,"header-layout-test.html","activity-preview.html","source-list-preview.html","currency-conversion-preview.html",
     "exchange_rates.js","dailynews_annotations.js","dailynews_exterior_tags.js","dailynews_event_tags.js","dailynews_config.js","dailynews_client.js","dailynews_account.js","dailynews_reports.js",
-    "dailynews_activity.js","dailynews_sources.js","release_history.js")
+    "dailynews_activity.js","dailynews_sources.js","release_history.js","dailynews_header.js","dailynews_header.css")
 foreach ($name in @("news_data.js","insights_data.js","source_list_data.js")) {
     if (!(Test-Path -LiteralPath (Join-Path $content $name))) { throw "Exterior content missing: $name" }
 }
@@ -40,6 +40,8 @@ foreach ($folder in @("images","page_images")) {
         }
     }
 }
+# The masthead is shared by both editions; article images remain edition-local.
+Copy-Item -LiteralPath (Join-Path $repo "page_images\header_automotive_20261016.png") -Destination (Join-Path $staging "page_images\header_automotive_20261016.png")
 # Content-addressed releases allow publication without bundling unrelated working-tree changes.
 $manifest = Get-ChildItem -LiteralPath $staging -Recurse -File | Sort-Object FullName | ForEach-Object {
     $_.FullName.Substring($staging.Length) + ":" + (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash

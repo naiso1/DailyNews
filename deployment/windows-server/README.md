@@ -57,6 +57,7 @@ The script packages only:
 - `news_data.js`
 - `insights_data.js`
 - `dailynews_client.js`
+- `dailynews_header.js` / `dailynews_header.css` (shared visual header; classic fallback)
 - `dailynews_account.js`
 - `dailynews_reports.js` (administrator-only group report UI; no roster data)
 - `release_history.js`
@@ -66,6 +67,11 @@ The script packages only:
 
 Each package is stored by Git commit ID and activated through
 `active-release.txt`.
+
+The shared title background is `page_images/header_automotive_20261016.png`.
+It is a fixed generated asset, packaged for both editions; no scheduled image
+generation is involved. See [header rollback](header-rollback.md) to switch
+back to the previous header while preserving newer articles and interaction data.
 
 Article image overrides support 1–5 ordered HTTP/HTTPS URLs. The legacy
 `image_url` column and `imageUrlOverride` response keep the first image for

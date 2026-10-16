@@ -1,0 +1,93 @@
+/* C proposal. All rules are scoped so the classic header remains available. */
+header.site-header.header-visual {
+  --header-accent: #9cdcc8;
+  display: block;
+  padding: 0;
+  border-radius: 14px;
+  background: #0d1723 url("page_images/header_automotive_20261016.png") center center / cover no-repeat;
+  border-color: #2b3b49;
+  overflow: visible;
+}
+[data-edition="exterior"] header.header-visual { --header-accent: #abc7f3; }
+.header-visual .header-visual-utility {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 13px 28px;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(180deg, #07121def, #07121da3);
+}
+.header-visual .header-visual-department { display: flex; align-items: center; gap: 12px; color: #e7f0f6; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.header-visual-department > span { height: 13px; width: 1px; background: #8ea4b6; }
+.header-visual-department small { font-size: 10px; font-weight: 400; letter-spacing: .16em; color: #b4c4d1; }
+.header-visual .header-top-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; min-width: 0; width: auto; max-width: 100%; margin-left: auto; }
+.header-visual .interiorgram-link { margin-left: 0; min-height: 36px; padding: 0 4px; background: none; border-color: transparent; color: #d1e4ee; font-size: 12px; border-radius: 5px; }
+.header-visual .interiorgram-link > span:first-child { display: none; }
+.header-visual .interiorgram-link-label { display: inline; }
+.header-visual .interiorgram-link-short { display: none; }
+.header-visual .interiorgram-link-label::after { content: " ↗"; }
+.header-visual .activity-bell,
+.header-visual .source-list-button,
+.header-visual .release-history-button,
+.header-visual .account-button { min-height: 36px; border-radius: 7px; background: #091724b3; color: #dce7ef; border: 1px solid #8098af40; font-size: 12px; }
+.header-visual #accountHeaderSlot { min-width: 0; max-width: 100%; }
+.header-visual .account-button { max-width: 240px; overflow: hidden; text-overflow: ellipsis; }
+.header-visual .header-visual-hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 185px; padding: 30px 30px 32px; background: linear-gradient(90deg, #09152177, #09152100 75%); }
+.header-visual .header-brand { display: block; min-width: 0; }
+.header-visual #titleIcon { display: none; }
+.header-visual h1 {
+  display: block;
+  margin: 0;
+  overflow: visible;
+  white-space: normal;
+  text-overflow: clip;
+  font-size: 36px;
+  line-height: 1.4;
+  letter-spacing: .07em;
+  font-weight: 700;
+  color: #f1f6fa;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.header-visual .header-title-main { display: block; }
+.header-visual .header-title-sub { display: block; font-size: 24px; font-weight: 500; letter-spacing: .1em; margin-top: 3px; }
+.header-visual .lead { min-width: 0; max-width: 520px; margin-top: 13px; color: #c0d3df; font-size: 13px; line-height: 1.8; letter-spacing: .02em; }
+.header-visual-signature { align-self: flex-end; flex-shrink: 0; text-align: right; padding-bottom: 4px; text-shadow: 0 2px 14px #000; }
+.header-visual-signature > span { display: block; font: 26px/1.5 Georgia, serif; color: var(--header-accent); letter-spacing: .02em; }
+.header-visual-signature > small { display: block; font-size: 9px; color: #c1d1df; letter-spacing: .17em; margin-top: 5px; }
+.header-visual .header-visual-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0 24px; padding: 0 28px; background: #091521ed; border-top: 1px solid #8098af36; border-radius: 0 0 14px 14px; }
+.header-visual .edition-links { flex-wrap: nowrap; flex-shrink: 0; gap: 25px; }
+.header-visual .edition-links a { display: block; padding: 14px 1px 12px; background: none; border: 0; border-bottom: 2px solid transparent; border-radius: 0; color: #aabccd; font-size: 13px; }
+.header-visual .edition-links a[aria-current="page"] { color: #edf6fb; border-bottom-color: var(--header-accent); font-weight: 700; }
+.header-visual .header-visual-status { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 4px 18px; padding: 7px 0; min-width: 0; }
+.header-visual .header-update-status { overflow: visible; flex-wrap: wrap; white-space: normal; padding: 0; border: 0; border-radius: 0; color: #9fb5c7; font-size: 11px; }
+.header-visual .header-update-status strong { color: #e2edf5; font-weight: 500; }
+.header-visual .compact-access-counter { flex: 0 1 auto; min-width: 0; width: auto; flex-wrap: wrap; overflow: visible; padding: 0; gap: 5px 12px; }
+.header-visual .access-metric { padding: 0; border: 0; background: none; color: #9fb5c7; font-size: 11px; gap: 4px; min-height: 30px; align-items: center; }
+.header-visual .access-metric strong { color: #e5f0f7; font-size: 12px; font-weight: 600; }
+.header-visual .analysis-toggle { color: var(--header-accent); font-size: 17px; min-width: 36px; min-height: 36px; }
+.header-visual a:focus-visible, .header-visual button:focus-visible { outline: 2px solid var(--header-accent); outline-offset: 3px; }
+@media (max-width: 900px) {
+  .header-visual .header-visual-utility { padding: 12px 22px; gap: 8px 16px; }
+  .header-visual .header-visual-footer { padding: 0 22px; }
+  .header-visual .header-visual-status { justify-content: flex-start; }
+}
+@media (max-width: 620px) {
+  header.site-header.header-visual { background-position: 58% center; overflow: visible; }
+  .header-visual .header-visual-utility { padding: 12px 18px; background: #091521de; }
+  .header-visual .header-top-actions { margin-left: 0; justify-content: flex-start; gap: 7px; width: 100%; }
+  .header-visual .header-visual-hero { min-height: 194px; padding: 26px 21px 28px; background: linear-gradient(90deg, #091621de, #09162188 80%, #09162133); }
+  .header-visual h1 { font-size: 30px; letter-spacing: .06em; }
+  .header-visual .header-title-sub { font-size: clamp(19px, 5vw, 23px); letter-spacing: .045em; }
+  .header-visual .lead { font-size: 12px; max-width: 290px; }
+  .header-visual .header-visual-signature { display: none; }
+  .header-visual .header-visual-footer { display: block; padding: 0 18px; }
+  .header-visual .edition-links a { padding-top: 12px; padding-bottom: 10px; }
+  .header-visual .header-visual-status { display: block; border-top: 1px solid #8098af36; padding: 11px 0; }
+  .header-visual .header-update-status { margin-bottom: 5px; font-size: 11px; }
+  .header-visual .compact-access-counter { gap: 4px 10px; }
+  .header-visual .access-metric { font-size: 11px; }
+  .header-visual .account-button { max-width: 210px; }
+}

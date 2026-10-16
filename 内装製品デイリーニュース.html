@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="dailynews-header-style" content="visual">
     <title>内装製品デイリーニュース [v2]</title>
     <meta name="description" content="生成AIによって前日の内装製品ニュースを収集、要約・翻訳、分析、考察、企画アイデア例をお届け。">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <script src="dailynews_config.js?v=20260915-editions-1"></script>
+    <script defer src="dailynews_header.js?v=20261016-c1"></script>
     <script>
         const exteriorPath = /^\/exterior(?:\/|$)/.test(location.pathname);
         window.DAILYNEWS_CONFIG = window.DAILYNEWS_CONFIG || { id: exteriorPath ? "exterior" : "interior", name: exteriorPath ? "外装製品デイリーニュース" : "内装製品デイリーニュース", basePath: exteriorPath ? "/exterior" : "", apiBase: exteriorPath ? "/exterior/api" : "/api", allowGuestRead: exteriorPath, imageGenerationEnabled: !exteriorPath };
@@ -1363,6 +1365,7 @@ header.site-header {
             overflow-wrap: anywhere;
         }
     </style>
+    <link id="dailyNewsHeaderStyles" rel="stylesheet" href="dailynews_header.css?v=20261016-c1">
 </head>
 
 <body>
