@@ -140,4 +140,29 @@ assert.equal(show().length, 35, 'interior retains original publication-date filt
 open('?dateBasis=issue&from=2026-09-16&to=2026-09-16');
 assert.equal(context.getDateFilterBasis(), 'source');
 assert.equal(show().length, 11, 'exterior URL parameter cannot change interior date semantics');
-console.log('Exterior date UI: 46-item issue, original dates, countries/tags, URLs, detail return, archives, interior PASS');
+// A reviewed old article joins today's issue without changing its actual date.
+const supplement = {id: 'supplement1', date: '2026-08-01', supplementIssueDate: '2026-09-17',
+  country: 'jp', tags: ['照明'], title: '展示会の追加記事', desc: '技術の説明'};
+installNews([...issue, ...archives, supplement]);
+open();
+assert.equal(context.getDateFilterBasis(), 'issue');
+assert(show().includes(supplement.id), 'interior default New includes an earlier supplemental source');
+context.handleTagClick({target: {closest: () => ({dataset: {tag: '照明'}})}});
+assert(filtered.some(item => item.id === supplement.id), 'tag click keeps additions after clearing New');
+context.updateURL(); open(location.search);
+assert(show().includes(supplement.id), 'shared filter URL preserves issue membership');
+open('?from=2026-08-01&to=2026-08-01');
+assert.deepEqual(show(), [supplement.id], 'source-date search still finds the original date');
+assert.equal(supplement.date, '2026-08-01');
+context.NEW_DATE_RANGE = {start: '2026-09-18', end: '2026-09-18'};
+assert.equal(context.isNewContent(supplement), false, 'addition stops being New in the next issue');
+context.NEW_DATE_RANGE = {start: '2026-09-17', end: '2026-09-17'};
+assert.equal(context.isNewContent({...supplement, duplicateOf: 'original'}), false);
+context.window.DAILYNEWS_CONFIG.id = 'exterior';
+open();
+assert(show().includes(supplement.id), 'exterior additions do not require rewriting the automatic receipt');
+open('?dateBasis=source&from=2026-09-17&to=2026-09-17');
+assert(!show().includes(supplement.id), 'exterior source filter excludes earlier source dates');
+open('?dateBasis=source&from=2026-08-01&to=2026-08-01');
+assert.deepEqual(show(), [supplement.id]);
+console.log('Date UI: issues, source dates, tags, URLs, archives and reviewed supplements PASS');

@@ -1693,6 +1693,10 @@ header.site-header {
         // New????????????New?????
         function isNewContent(itemOrDate) {
             if (itemOrDate && typeof itemOrDate === "object" && itemOrDate.duplicateOf) return false;
+            // Reviewed additions can join an issue without rewriting the source date.
+            const supplementDate = itemOrDate?.supplementIssueDate;
+            if (/^\d{4}-\d{2}-\d{2}$/.test(supplementDate || "") && NEW_DATE_RANGE.start && NEW_DATE_RANGE.end
+                && supplementDate >= NEW_DATE_RANGE.start && supplementDate <= NEW_DATE_RANGE.end) return true;
             if (window.DAILYNEWS_CONFIG.id === "exterior" && itemOrDate && typeof itemOrDate === "object"
                 && Array.isArray(window.EXTERIOR_PUBLICATION_STATUS?.selected_news_ids)) {
                 return window.EXTERIOR_PUBLICATION_STATUS.selected_news_ids.includes(itemOrDate.id);
@@ -1849,13 +1853,16 @@ header.site-header {
         }
 
         function getDateFilterBasis() {
-            return window.DAILYNEWS_CONFIG.id === "exterior" && document.getElementById("dateBasis").value === "issue"
+            return document.getElementById("dateBasis").value === "issue"
                 ? "issue" : "source";
         }
 
         function getNewsFilterDate(item) {
+            // An issue includes reviewed additions, including after tag/country changes.
+            if (getDateFilterBasis() === "issue"
+                && /^\d{4}-\d{2}-\d{2}$/.test(item.supplementIssueDate || "")) return item.supplementIssueDate;
             if (getDateFilterBasis() === "issue") {
-                const publication = window.EXTERIOR_PUBLICATION_STATUS;
+                const publication = window.DAILYNEWS_CONFIG.id === "exterior" ? window.EXTERIOR_PUBLICATION_STATUS : null;
                 if (publication?.issue_date && publication.selected_news_ids?.includes(item.id)) return publication.issue_date;
                 if (/^\d{4}-\d{2}-\d{2}$/.test(item.digestDate || "")) return item.digestDate;
             }
@@ -3126,6 +3133,7 @@ header.site-header {
                 document.getElementById("tagFilters").addEventListener("click", handleTagClick);
                 const applyManualDateFilter = () => {
                     newOnly = false;
+                    if (window.DAILYNEWS_CONFIG.id === "interior") document.getElementById("dateBasis").value = "source";
                     applyFilters();
                     updateURL("push");
                 };
@@ -3602,7 +3610,8 @@ header.site-header {
             document.getElementById("dateTo").value = params.has("to") ? params.get("to") : defaultTo;
             const dateBasis = document.getElementById("dateBasis");
             dateBasis.hidden = true;
-            dateBasis.value = window.DAILYNEWS_CONFIG.id === "exterior" && (params.get("dateBasis") === "issue"
+            const hasIssueDates = window.DAILYNEWS_CONFIG.id === "exterior" || NEWS_DATA.some(item => item.supplementIssueDate);
+            dateBasis.value = hasIssueDates && (params.get("dateBasis") === "issue"
                 || (!params.has("dateBasis") && !params.has("from") && !params.has("to"))) ? "issue" : "source";
             document.getElementById("sortOrder").value = params.get("sort") || "new-first";
 
@@ -3638,7 +3647,7 @@ header.site-header {
             const articleSearch = getNewsLookup().has(query.toLowerCase());
             if (from || window.DAILYNEWS_CONFIG.id === "exterior" || articleSearch) params.set("from", from);
             if (to || window.DAILYNEWS_CONFIG.id === "exterior" || articleSearch) params.set("to", to);
-            if (window.DAILYNEWS_CONFIG.id === "exterior") params.set("dateBasis", getDateFilterBasis());
+            if (window.DAILYNEWS_CONFIG.id === "exterior" || getDateFilterBasis() === "issue") params.set("dateBasis", getDateFilterBasis());
             const sortOrder = document.getElementById("sortOrder").value;
             if (sortOrder && sortOrder !== "new-first") params.set("sort", sortOrder);
             if (visibleLimit > 30) params.set("limit", String(visibleLimit));
