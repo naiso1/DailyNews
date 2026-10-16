@@ -9,6 +9,7 @@ const LOCAL_READS_KEY = clientStorageKey("local_article_reads");
 const LOCAL_ACCESS_MARK_KEY = clientStorageKey("local_access_mark_date_v3");
 const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
 let accessStatsCache = null;
+const accessAnalyticsView = { period: "30", view: "chart" };
 let localInteractionsCache = null;
 let interactionPollTimer = null;
 let mentionUsersCache = null;
@@ -314,47 +315,71 @@ function buildAccessSeries(data) {
 function renderAccessChart(data) {
   const chart = document.getElementById("accessChart");
   if (!chart) return;
-  const series = buildAccessSeries(
+  const fullSeries = buildAccessSeries(
     data || accessStatsCache || loadLocalAccessStats(),
   );
+  const series = accessAnalyticsView.period === "all"
+    ? fullSeries : fullSeries.slice(-Number(accessAnalyticsView.period));
+  const table = document.getElementById("accessTable");
+  const help = document.getElementById("accessChartHelp");
+  const range = document.getElementById("accessChartRange");
+  const tableView = accessAnalyticsView.view === "table";
+  chart.hidden = tableView;
+  if (table) table.hidden = !tableView;
+  if (help) help.hidden = tableView || !series.length;
   if (!series.length) {
     chart.innerHTML = '<div class="chart-empty">データがありません。</div>';
+    if (table) table.innerHTML = '<div class="chart-empty">データがありません。</div>';
+    if (range) range.textContent = "データがありません";
     return;
   }
-  const range = document.getElementById("accessChartRange");
   if (range) {
     range.textContent = `${series[0].key.replace(/-/g, "/")}〜${series.at(-1).key.replace(/-/g, "/")} (${series.length}日)`;
   }
-  const max = Math.max(...series.map((item) => item.value), 1);
-  const width = Math.max(760, (series.length - 1) * 26 + 72);
-  const height = 220;
-  const padding = { top: 18, right: 18, bottom: 38, left: 42 };
+  if (tableView && table) {
+    table.innerHTML = `<table class="analysis-table">
+      <caption>日別アクセス数（新しい日付順）</caption>
+      <thead><tr><th scope="col">日付</th><th scope="col">アクセス数</th></tr></thead>
+      <tbody>${[...series].reverse().map((item) => `<tr><td>${item.key.replace(/-/g, "/")}（${item.dow}）</td><td>${Number(item.value).toLocaleString()} 件</td></tr>`).join("")}</tbody>
+    </table>`;
+    return;
+  }
+  const peak = Math.max(...series.map((item) => item.value), 1);
+  const tickStep = Math.max(1, Math.ceil(peak / 4));
+  const max = tickStep * 4;
+  // Match the SVG's displayed size to its coordinate system. Fitting a long
+  // history into width:100% shrinks the entire chart, including text and height.
+  const width = Math.max(chart.clientWidth || 900, (series.length - 1) * 32 + 90);
+  const expanded = document.getElementById("accessAnalytics")?.classList.contains("expanded");
+  const height = expanded ? Math.max(320, Math.min(520, window.innerHeight - 340)) : 320;
+  const padding = { top: 28, right: 30, bottom: 40, left: 60 };
   const plotWidth = width - padding.left - padding.right;
   const plotHeight = height - padding.top - padding.bottom;
   const xFor = (index) => padding.left + (series.length === 1 ? plotWidth / 2 : (index / (series.length - 1)) * plotWidth);
   const yFor = (value) => padding.top + plotHeight - (value / max) * plotHeight;
   const points = series.map((item, index) => `${xFor(index).toFixed(1)},${yFor(item.value).toFixed(1)}`).join(" ");
   const areaPoints = `${padding.left},${padding.top + plotHeight} ${points} ${padding.left + plotWidth},${padding.top + plotHeight}`;
-  const labelStep = Math.max(1, Math.ceil(series.length / 10));
+  const labelStep = Math.max(1, Math.ceil(64 / (plotWidth / Math.max(1, series.length - 1))));
 
   const gridLines = [0, 0.25, 0.5, 0.75, 1].map((ratio) => {
     const y = padding.top + plotHeight - ratio * plotHeight;
-    return `<line class="access-line-grid" x1="${padding.left}" y1="${y}" x2="${padding.left + plotWidth}" y2="${y}"></line>
-      <text class="access-line-axis-label" x="${padding.left - 8}" y="${y + 3}" text-anchor="end">${Math.round(max * ratio)}</text>`;
+    return `<line class="access-line-grid" x1="${padding.left}" y1="${y}" x2="${padding.left + plotWidth}" y2="${y}"></line>`;
   }).join("");
+  const yLabels = [0, 0.25, 0.5, 0.75, 1].map((ratio) =>
+    `<text class="access-line-axis-label" x="${padding.left - 8}" y="${padding.top + plotHeight - ratio * plotHeight + 4}" text-anchor="end">${Math.round(max * ratio).toLocaleString()}</text>`).join("");
 
   const xLabels = series.map((item, index) => {
-    if (index % labelStep !== 0 && index !== series.length - 1) return "";
+    if ((series.length - 1 - index) % labelStep !== 0) return "";
     return `<text class="access-line-axis-label" x="${xFor(index)}" y="${height - 12}" text-anchor="middle">${item.label}</text>`;
   }).join("");
 
   const pointNodes = series.map((item, index) => `
-    <circle class="access-line-point" cx="${xFor(index)}" cy="${yFor(item.value)}" r="4" tabindex="0">
-      <title>${item.key}: ${item.value}</title>
-    </circle>`).join("");
+    <circle class="access-line-point" cx="${xFor(index)}" cy="${yFor(item.value)}" r="4">
+      <title>${item.key}（${item.dow}）: ${Number(item.value).toLocaleString()} 件</title>
+    </circle>${series.length <= 7 ? `<text class="access-line-value" x="${xFor(index)}" y="${yFor(item.value) - 12}" text-anchor="middle">${Number(item.value).toLocaleString()}</text>` : ""}`).join("");
 
   chart.innerHTML = `
-    <svg class="access-line-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="日別アクセス数の折れ線グラフ">
+    <svg class="access-line-chart" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="日別アクセス数の折れ線グラフ。${series.length}日分。日別の数値は表で確認できます。">
       <defs>
         <linearGradient id="accessAreaGradient" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#7df1c2" stop-opacity="0.32"></stop>
@@ -366,7 +391,9 @@ function renderAccessChart(data) {
       <polyline class="access-line-path" points="${points}"></polyline>
       ${pointNodes}
       ${xLabels}
-    </svg>`;
+    </svg>
+    <svg class="access-chart-axis" width="${padding.left - 1}" height="${height}" style="margin-top:-${height}px" aria-hidden="true">${yLabels}</svg>`;
+  if (help) help.textContent = `${width > chart.clientWidth + 1 ? "横にスクロールして各日を確認できます。" : ""}点にマウスを重ねると件数を確認できます。日別の数値は「表」でも確認できます。`;
 }
 
 function loadLocalInteractions() {
@@ -676,6 +703,7 @@ function setupAccessAnalyticsToggle() {
   const close = document.getElementById("accessAnalyticsClose");
   if (!toggle || !panel || toggle.__dailyNewsBound) return;
   toggle.__dailyNewsBound = true;
+  let firstOpen = true;
   const setOpen = (open) => {
     panel.classList.toggle("hidden", !open);
     panel.setAttribute("aria-hidden", open ? "false" : "true");
@@ -683,7 +711,14 @@ function setupAccessAnalyticsToggle() {
     document.body.style.overflow = open ? "hidden" : "";
     if (open) {
       renderAccessChart(accessStatsCache || loadLocalAccessStats());
+      if (firstOpen) {
+        const chart = document.getElementById("accessChart");
+        if (chart) chart.scrollLeft = chart.scrollWidth;
+        firstOpen = false;
+      }
       close?.focus();
+    } else {
+      toggle.focus();
     }
   };
   toggle.addEventListener("click", () => setOpen(true));
@@ -693,6 +728,46 @@ function setupAccessAnalyticsToggle() {
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !panel.classList.contains("hidden")) setOpen(false);
+    if (event.key === "Tab" && !panel.classList.contains("hidden")) {
+      const focusable = [...panel.querySelectorAll('button, select, [tabindex="0"]')]
+        .filter((element) => element.getClientRects().length);
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first?.focus();
+      }
+    }
+  });
+  document.getElementById("accessChartPeriod")?.addEventListener("change", (event) => {
+    accessAnalyticsView.period = event.target.value;
+    renderAccessChart();
+    // Start long periods at the latest recorded days.
+    const chart = document.getElementById("accessChart");
+    if (chart) chart.scrollLeft = chart.scrollWidth;
+    const table = document.getElementById("accessTable");
+    if (table) table.scrollTop = 0;
+  });
+  for (const view of ["chart", "table"]) {
+    document.getElementById(view === "chart" ? "accessViewChart" : "accessViewTable")?.addEventListener("click", () => {
+      accessAnalyticsView.view = view;
+      document.getElementById("accessViewChart")?.setAttribute("aria-pressed", String(view === "chart"));
+      document.getElementById("accessViewTable")?.setAttribute("aria-pressed", String(view === "table"));
+      renderAccessChart();
+    });
+  }
+  document.getElementById("accessAnalyticsExpand")?.addEventListener("click", (event) => {
+    const expanded = panel.classList.toggle("expanded");
+    event.currentTarget.textContent = expanded ? "通常サイズに戻す" : "大きく表示";
+    event.currentTarget.setAttribute("aria-pressed", String(expanded));
+    renderAccessChart();
+  });
+  let resizeFrame;
+  window.addEventListener("resize", () => {
+    if (panel.classList.contains("hidden")) return;
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(() => renderAccessChart());
   });
 }
 window.setupAccessAnalyticsToggle = setupAccessAnalyticsToggle;

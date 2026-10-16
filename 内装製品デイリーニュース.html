@@ -427,6 +427,7 @@ header.site-header {
     background: linear-gradient(145deg, #151f2c, #0c131f);
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
 }
+.analysis-panel.expanded .analysis-dialog { width: 100%; max-height: calc(100dvh - 36px); }
 .analysis-panel-header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; border-bottom: 1px solid var(--border); background: rgba(15, 23, 35, 0.96); }
 .analysis-panel-title { font-size: 20px; font-weight: 800; }
 .analysis-panel-sub { margin-top: 3px; font-size: 12px; color: var(--muted); }
@@ -436,19 +437,44 @@ header.site-header {
 .analysis-summary-card { padding: 13px 15px; border: 1px solid var(--border); border-radius: 13px; background: rgba(255, 255, 255, 0.03); color: var(--muted); font-size: 11px; }
 .analysis-summary-card strong { display: block; margin-top: 3px; color: var(--accent); font-size: 24px; }
 
-.analysis-chart { display: block; min-height: 220px; overflow-x: auto; overflow-y: hidden; }
-.access-line-chart { display: block; width: 100%; min-width: 760px; height: 220px; }
+.analysis-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+.analysis-period { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.analysis-toolbar select, .analysis-toolbar button { padding: 9px 12px; border: 1px solid var(--border); border-radius: 9px; background: #172333; color: var(--text); font: inherit; font-size: 14px; cursor: pointer; }
+.analysis-view-switch { display: flex; gap: 4px; }
+.analysis-view-switch button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: rgba(125, 241, 194, 0.1); }
+.analysis-expand { margin-left: auto; }
+.analysis-toolbar :focus-visible, .analysis-chart:focus-visible, .analysis-table-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.analysis-chart { display: block; min-height: 320px; overflow-x: auto; overflow-y: hidden; }
+.analysis-chart[hidden], .analysis-table-wrap[hidden], .analysis-chart-help[hidden] { display: none; }
+.access-line-chart { display: block; max-width: none; }
+.access-chart-axis { display: block; position: sticky; left: 0; max-width: none; background: #111b28; pointer-events: none; }
 .access-line-grid { stroke: rgba(154, 164, 184, 0.16); stroke-width: 1; }
-.access-line-axis-label { fill: var(--muted); font-size: 10px; }
+.access-line-axis-label { fill: #b9c6d7; font-size: 13px; }
+.access-line-value { fill: var(--text); font-size: 13px; font-weight: 700; }
 .access-line-area { fill: url(#accessAreaGradient); }
 .access-line-path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 4px 7px rgba(125, 241, 194, 0.28)); }
 .access-line-point { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
 .access-line-point:hover { fill: var(--accent); }
+.analysis-chart-help { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
+.analysis-table-wrap { max-height: 400px; overflow: auto; border: 1px solid var(--border); border-radius: 10px; }
+.analysis-panel.expanded .analysis-table-wrap { max-height: max(280px, calc(100dvh - 310px)); }
+.analysis-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.analysis-table caption { padding: 12px; text-align: left; color: var(--muted); font-size: 13px; }
+.analysis-table th, .analysis-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); text-align: left; }
+.analysis-table thead th { position: sticky; top: 0; background: #172333; }
+.analysis-table td:last-child, .analysis-table th:last-child { text-align: right; }
+.analysis-table tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.025); }
 .chart-empty { font-size: 13px; color: var(--muted); }
 @media (max-width: 620px) {
     .analysis-panel { padding: 10px; }
     .analysis-dialog { max-height: 94vh; }
-    .analysis-summary { grid-template-columns: 1fr; }
+    .analysis-panel.expanded { padding: 0; }
+    .analysis-panel.expanded .analysis-dialog { max-height: 100dvh; border-radius: 0; }
+    .analysis-content { padding: 14px; }
+    .analysis-panel-header { padding: 14px; }
+    .analysis-summary-card { padding: 10px 8px; font-size: 12px; }
+    .analysis-summary-card strong { font-size: 22px; overflow-wrap: anywhere; }
+    .analysis-toolbar { gap: 10px; }
 }
 
 /* ── Jump Anchor ─────────────────────────── */
@@ -1475,9 +1501,25 @@ header.site-header {
                     <div class="analysis-summary-card">今日<strong id="accessModalToday">-</strong></div>
                     <div class="analysis-summary-card">昨日<strong id="accessModalYesterday">-</strong></div>
                 </div>
-                <div class="analysis-chart" id="accessChart">
+                <div class="analysis-toolbar">
+                    <label class="analysis-period" for="accessChartPeriod">期間
+                        <select id="accessChartPeriod">
+                            <option value="7">直近7日</option>
+                            <option value="30" selected>直近30日</option>
+                            <option value="all">全期間</option>
+                        </select>
+                    </label>
+                    <div class="analysis-view-switch" role="group" aria-label="表示方法">
+                        <button id="accessViewChart" type="button" aria-pressed="true" aria-controls="accessChart">グラフ</button>
+                        <button id="accessViewTable" type="button" aria-pressed="false" aria-controls="accessTable">表</button>
+                    </div>
+                    <button class="analysis-expand" id="accessAnalyticsExpand" type="button" aria-pressed="false">大きく表示</button>
+                </div>
+                <div class="analysis-chart" id="accessChart" tabindex="0" role="region" aria-label="日別アクセスのグラフ。左右にスクロールできます" aria-describedby="accessChartHelp">
                     <div class="chart-empty">データを取得中...</div>
                 </div>
+                <p class="analysis-chart-help" id="accessChartHelp">点にマウスを重ねると件数を確認できます。正確な日別の数値は「表」で確認できます。</p>
+                <div class="analysis-table-wrap" id="accessTable" tabindex="0" role="region" aria-label="日別アクセスの表" hidden></div>
             </div>
         </div>
     </section>
@@ -1575,7 +1617,7 @@ header.site-header {
     <!-- DailyNews Server API -->
     <script src="source_list_data.js?v=20260908-4"></script>
     <script type="module" src="dailynews_reports.js?v=20261013-1"></script>
-    <script type="module" src="dailynews_client.js?v=20261013-1"></script>
+    <script type="module" src="dailynews_client.js?v=20261016-access-1"></script>
     <script type="module" src="dailynews_account.js?v=20261013-1"></script>
     <script type="module" src="dailynews_activity.js?v=20260915-editions-1"></script>
     <script type="module" src="dailynews_sources.js?v=20260915-editions-1"></script>
