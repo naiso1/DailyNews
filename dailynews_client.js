@@ -370,13 +370,13 @@ function renderAccessChart(data) {
 
   const xLabels = series.map((item, index) => {
     if ((series.length - 1 - index) % labelStep !== 0) return "";
-    return `<text class="access-line-axis-label" x="${xFor(index)}" y="${height - 12}" text-anchor="middle">${item.label}</text>`;
+    return `<text class="access-line-axis-label" x="${xFor(index)}" y="${height - 12}" text-anchor="${index === 0 ? "start" : index === series.length - 1 ? "end" : "middle"}">${item.label}</text>`;
   }).join("");
 
   const pointNodes = series.map((item, index) => `
     <circle class="access-line-point" cx="${xFor(index)}" cy="${yFor(item.value)}" r="4">
       <title>${item.key}（${item.dow}）: ${Number(item.value).toLocaleString()} 件</title>
-    </circle>${series.length <= 7 ? `<text class="access-line-value" x="${xFor(index)}" y="${yFor(item.value) - 12}" text-anchor="middle">${Number(item.value).toLocaleString()}</text>` : ""}`).join("");
+    </circle>${series.length <= 7 ? `<text class="access-line-value" x="${xFor(index)}" y="${yFor(item.value) - 12}" text-anchor="${index === 0 ? "start" : index === series.length - 1 ? "end" : "middle"}">${Number(item.value).toLocaleString()}</text>` : ""}`).join("");
 
   chart.innerHTML = `
     <svg class="access-line-chart" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="日別アクセス数の折れ線グラフ。${series.length}日分。日別の数値は表で確認できます。">
