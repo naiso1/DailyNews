@@ -2,9 +2,11 @@
 param(
     [string]$Server = "Administrator@IEWEB01",
     [string]$IdentityFile = "$env:USERPROFILE\.ssh\dailynews_ieweb01",
-    [switch]$PackageOnly
+    [switch]$PackageOnly,
+    [switch]$InstallServer
 )
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot 'remote-command.ps1')
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\.."))
 $content = Join-Path $repo "content\exterior"
 $root = "C:\Users\Administrator\Desktop\DailyNewsExterior"
@@ -56,20 +58,25 @@ Copy-Item -LiteralPath (Join-Path $staging $entry) -Destination (Join-Path $stag
 @{edition="exterior";release=$releaseId;archive=$archive;preview=$staging} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $tempRoot "package.json") -Encoding UTF8
 if ($PackageOnly) { Write-Output "PACKAGE_READY $staging"; return }
 
-$sshOptions = @("-i",$IdentityFile,"-o","IdentitiesOnly=yes","-o","BatchMode=yes","-o","StrictHostKeyChecking=yes")
+$sshOptions = @("-i",$IdentityFile,"-o","IdentitiesOnly=yes","-o","BatchMode=yes","-o","StrictHostKeyChecking=yes","-o","ConnectTimeout=15","-o","ServerAliveInterval=15","-o","ServerAliveCountMax=2")
 function Invoke-Remote([string]$Script) {
-    $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes("`$ErrorActionPreference='Stop';`$ProgressPreference='SilentlyContinue';" + $Script))
-    & ssh @sshOptions $Server "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand $encoded"
+    $encoded = New-DailyNewsRemoteCommand -Script $Script -TimeoutSeconds 180
+    & ssh -n @sshOptions $Server "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand $encoded"
     if ($LASTEXITCODE -ne 0) { throw "Exterior remote operation failed." }
 }
 Invoke-Remote "foreach (`$part in @('app','incoming','data','logs','releases')) {New-Item -ItemType Directory -Path (Join-Path '$root' `$part) -Force | Out-Null}"
-foreach ($name in @("server.js","shared-identity.js","migrate-shared-identity.js","enable-shared-identity.ps1","backup.js","manage-mailing-list.js","activate-release.ps1","install-exterior.ps1")) {
+foreach ($name in @("server.js","shared-identity.js","migrate-shared-identity.js","enable-shared-identity.ps1","backup.js","manage-mailing-list.js","activate-release.ps1","install-exterior.ps1","restart-server.ps1")) {
     & scp @sshOptions (Join-Path $PSScriptRoot $name) "${Server}:Desktop/DailyNewsExterior/app/$name"
     if ($LASTEXITCODE -ne 0) { throw "Exterior application upload failed: $name" }
 }
 & scp @sshOptions $archive "${Server}:Desktop/DailyNewsExterior/incoming/$releaseId.tar"
 if ($LASTEXITCODE -ne 0) { throw "Exterior archive upload failed." }
-Invoke-Remote "& '$root\app\activate-release.ps1' -Root '$root' -ArchivePath '$root\incoming\$releaseId.tar' -ReleaseId '$releaseId'; & '$root\app\install-exterior.ps1' -Root '$root'"
+Invoke-Remote "& '$root\app\activate-release.ps1' -Root '$root' -ArchivePath '$root\incoming\$releaseId.tar' -ReleaseId '$releaseId'"
+if ($InstallServer) {
+    Invoke-Remote "& '$root\app\install-exterior.ps1' -Root '$root'"
+} else {
+    Invoke-Remote "& '$root\app\restart-server.ps1' -Edition exterior"
+}
 $health = $null
 $deadline = (Get-Date).AddSeconds(30)
 do {

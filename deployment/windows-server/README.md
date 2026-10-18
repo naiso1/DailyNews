@@ -68,6 +68,16 @@ The script packages only:
 Each package is stored by Git commit ID and activated through
 `active-release.txt`.
 
+Normal deployments restart the existing server task through Task Scheduler COM;
+they do not re-register the task or IIS application. This avoids the CIM provider
+stall that left the exterior publication status `running` on 2026-10-19 after
+content activation. Remote prepare/activate/restart operations run in a bounded
+job (180 seconds each); a timeout or child error fails deployment and cannot mark
+the notification feed successful. Health must report the expected release.
+For a first exterior installation or an intentional infrastructure reconfiguration,
+use `deploy-exterior.ps1 -InstallServer`. Ordinary daily publication uses
+`deploy.ps1 -Edition exterior`. Do not use installation as a routine update step.
+
 The shared title background is `page_images/header_automotive_20261016.png`.
 It is a fixed generated asset, packaged for both editions; no scheduled image
 generation is involved. See [header rollback](header-rollback.md) to switch

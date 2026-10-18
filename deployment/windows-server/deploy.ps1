@@ -6,6 +6,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot 'remote-command.ps1')
 if ($Edition -eq "exterior") {
     & (Join-Path $PSScriptRoot "deploy-exterior.ps1") -Server $Server -IdentityFile $IdentityFile
     if (-not $?) { throw "Exterior deployment failed." }
@@ -93,7 +94,7 @@ finally {
     Pop-Location
 }
 
-$sshOptions = @("-i", $IdentityFile, "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes")
+$sshOptions = @("-i", $IdentityFile, "-o", "IdentitiesOnly=yes", "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes", "-o", "ConnectTimeout=15", "-o", "ServerAliveInterval=15", "-o", "ServerAliveCountMax=2")
 $remoteArchive = "Desktop/DailyNews/incoming/$releaseId.tar"
 $remoteApp = "Desktop/DailyNews/app"
 
@@ -101,10 +102,8 @@ $prepareCommand = @"
 New-Item -ItemType Directory -Path 'C:\Users\Administrator\Desktop\DailyNews\incoming' -Force | Out-Null
 New-Item -ItemType Directory -Path 'C:\Users\Administrator\Desktop\DailyNews\app' -Force | Out-Null
 "@
-$prepareEncoded = [Convert]::ToBase64String(
-    [Text.Encoding]::Unicode.GetBytes($prepareCommand)
-)
-& ssh @sshOptions $Server `
+$prepareEncoded = New-DailyNewsRemoteCommand -Script $prepareCommand
+& ssh -n @sshOptions $Server `
     "powershell.exe -NoProfile -NonInteractive -EncodedCommand $prepareEncoded"
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to prepare the server incoming directory."
@@ -119,6 +118,7 @@ $appFiles = @(
     "manage-mailing-list.js",
     "import_legacy.js",
     "activate-release.ps1",
+    "restart-server.ps1",
     "install.ps1",
     "configure-iis.ps1"
 )
@@ -138,24 +138,16 @@ if ($LASTEXITCODE -ne 0) {
 $activate = "C:\Users\Administrator\Desktop\DailyNews\app\activate-release.ps1"
 $remoteArchivePath = "C:\Users\Administrator\Desktop\DailyNews\incoming\$releaseId.tar"
 $activateCommand = "& '$activate' -ArchivePath '$remoteArchivePath' -ReleaseId '$releaseId'"
-$activateEncoded = [Convert]::ToBase64String(
-    [Text.Encoding]::Unicode.GetBytes($activateCommand)
-)
-& ssh @sshOptions $Server `
+$activateEncoded = New-DailyNewsRemoteCommand -Script $activateCommand
+& ssh -n @sshOptions $Server `
     "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -EncodedCommand $activateEncoded"
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to activate the release."
 }
 
-$restartCommand = @"
-Stop-ScheduledTask -TaskName 'DailyNewsServer' -ErrorAction SilentlyContinue
-Start-Sleep -Seconds 1
-Start-ScheduledTask -TaskName 'DailyNewsServer'
-"@
-$restartEncoded = [Convert]::ToBase64String(
-    [Text.Encoding]::Unicode.GetBytes($restartCommand)
-)
-& ssh @sshOptions $Server `
+$restartCommand = "& 'C:\Users\Administrator\Desktop\DailyNews\app\restart-server.ps1' -Edition interior"
+$restartEncoded = New-DailyNewsRemoteCommand -Script $restartCommand
+& ssh -n @sshOptions $Server `
     "powershell.exe -NoProfile -NonInteractive -EncodedCommand $restartEncoded"
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to restart the DailyNews server."
@@ -170,7 +162,7 @@ do {
     catch {
         Start-Sleep -Seconds 1
     }
-} until ($health -or (Get-Date) -ge $deadline)
+} until (($health -and $health.release -eq $releaseId) -or (Get-Date) -ge $deadline)
 
 if ($health.status -ne "ok" -or $health.release -ne $releaseId) {
     throw "DailyNews health check did not return the expected release."
