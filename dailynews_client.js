@@ -475,6 +475,38 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function formatCommentText(value) {
+  const text = String(value ?? "");
+  // Recognize plain web URLs, then escape both the label and attribute. Never
+  // treat a comment as HTML. Japanese punctuation terminates a pasted URL.
+  const pattern = /https?:\/\/[^\s<>"'`\u0000-\u001f\u007f「」『』【】〈〉《》、。！？]+/gi;
+  let result = "";
+  let position = 0;
+  for (const match of text.matchAll(pattern)) {
+    let url = match[0];
+    const pairs = { ")": "(", "]": "[", "}": "{", "）": "（" };
+    while (url) {
+      const last = url.at(-1);
+      const opening = pairs[last];
+      if (/[.,;:!?，．；：]/.test(last) || (opening &&
+          url.split(last).length > url.split(opening).length)) {
+        url = url.slice(0, -1);
+      } else break;
+    }
+    result += escapeHtml(text.slice(position, match.index));
+    let valid = false;
+    try {
+      const parsed = new URL(url);
+      valid = ["http:", "https:"].includes(parsed.protocol) && Boolean(parsed.hostname);
+    } catch (_) {}
+    result += valid
+      ? `<a class="comment-url" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(url)}</a>${escapeHtml(match[0].slice(url.length))}`
+      : escapeHtml(match[0]);
+    position = match.index + match[0].length;
+  }
+  return result + escapeHtml(text.slice(position));
+}
+
 function mergeInteractionData(itemId, data) {
   const previous = window.interactionsData[itemId] || {};
   const commentItems = Array.isArray(data.commentItems)
@@ -862,7 +894,7 @@ function renderItem(itemId) {
               <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${escapeHtml(comment.date || "")}</span>
               ${comment.parentId ? '<span class="comment-reply-label">返信</span>' : ""}
             </div>
-            <div class="comment-text">${escapeHtml(comment.text || "")}</div>
+            <div class="comment-text">${formatCommentText(comment.text || "")}</div>
             <div class="comment-actions">
               ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
               ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
