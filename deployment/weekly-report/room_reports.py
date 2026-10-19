@@ -68,6 +68,23 @@ def reads(report, edition, value):
     if not c['readsStarted'] or c['readsStarted'] > report['end']: return '計測前'
     return str(value) + ('回' if c['readsComplete'] else '回※')
 
+def read_note(report, edition):
+    c = report['coverage'][edition]
+    if not c['readsStarted'] or c['readsStarted'] > report['end']:
+        return '記事閲覧数はこの週にはまだ計測していません。「計測前」と表示します。'
+    if not c['readsComplete']:
+        return f'※ 記事閲覧数は{c["readsStarted"]}の計測開始後の記録です。この印は閲覧数だけに付き、利用日数・いいね・コメントには付きません。'
+    return ''
+
+def member_row(report, edition, member):
+    esc = html.escape
+    m = member
+    followup = not m['active']
+    style = 'border-bottom:1px solid #dce4ed' + (';background:#fff4dc' if followup else '')
+    name = f'<b>{esc(m["name"])}</b>' if followup else esc(m['name'])
+    label = '<br><span style="color:#795000;font-size:12px;font-weight:bold">フォロー対象</span>' if followup else ''
+    return f'<tr style="{style}"><td>{name}{label}</td><td>{esc(m["status"])}</td><td align="center">{m["days"]}日</td><td align="center">{(m["lastActivity"] or "—")}</td><td align="center">{reads(report,edition,m["reads"])}</td><td align="center">{m["likes"]}件</td><td align="center">{m["comments"]}件</td></tr>'
+
 def email_html(report, sample=False):
     esc = html.escape
     sections = report['rooms']
@@ -81,6 +98,9 @@ def email_html(report, sample=False):
         color = '#2375af' if edition == 'interior' else '#178274'
         body.append(f'<h2 style="border-bottom:3px solid {color};padding-top:24px">{section["room"]}：{section["title"]}の利用</h2><p><b>{section["active"]} / {section["headcount"]}人（{percentage(section["active"],section["headcount"])}%）</b>が利用。利用記録なしは{section["registeredInactive"]+section["unregistered"]}人です。</p>')
         if not section['usageComplete']: body.append('<p>この週は利用人数の部分計測です。利用記録がない人も、計測開始前に利用していた可能性があります。</p>')
+        note = read_note(report, edition)
+        note_html = f'<p style="font-size:13px;background:#f1f5f9;padding:10px">{esc(note)}</p>' if note else ''
+        body.append(note_html)
         body.append('<table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:14px"><tr style="background:#edf3f7"><th align="left">グループ</th><th>利用人数 / 人数</th><th>利用率</th><th>利用記録なし</th><th>閲覧</th><th>いいね</th><th>コメント</th></tr>')
         for group in section['groups']:
             pct = percentage(group['active'],group['headcount'])
@@ -91,12 +111,14 @@ def email_html(report, sample=False):
             text = '、'.join(esc(m['name'])+'（'+esc(m['status'])+'）' for m in inactive) or '利用記録なしの人はいません。'
             body.append(f'<p><b>{esc(group["label"])}</b>：{text}</p>')
         body.append('<h3>グループごとの個人別利用状況</h3>')
+        body.append('<p style="font-size:13px"><b>薄い黄色・太字・「フォロー対象」</b>は、対象週の利用記録がない方です。未登録なら登録案内、登録済みなら利用状況の確認にお使いください。<br>利用日数＝自室の版で、ログインした画面利用・記事閲覧・いいね・コメントのいずれかを記録した日数。同じ日は1日と数えます。</p>')
+        body.append(note_html)
         for group in section['groups']:
             body.append(f'<h4>{esc(group["label"])}</h4><table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px"><tr style="background:#edf3f7"><th align="left">氏名</th><th align="left">対象週の状態</th><th>利用日数</th><th>週内の最終利用</th><th>閲覧</th><th>いいね</th><th>コメント</th></tr>')
             for m in group['members']:
-                body.append(f'<tr style="border-bottom:1px solid #dce4ed"><td>{esc(m["name"])}</td><td>{esc(m["status"])}</td><td align="center">{m["days"]}日</td><td align="center">{(m["lastActivity"] or "—")}</td><td align="center">{reads(report,edition,m["reads"])}</td><td align="center">{m["likes"]}件</td><td align="center">{m["comments"]}件</td></tr>')
+                body.append(member_row(report, edition, m))
             body.append('</table>')
-    body.append(f'<h3>集計の見方</h3><ul style="font-size:13px"><li>名簿：{report["masterDate"]}時点。各室の所属グループで表示しています。</li><li>利用あり＝ログインした画面利用・記事閲覧・いいね・コメントのいずれかを対象週に確認。同じ人は1人、同じ日は1日です。</li><li>利用記録なし＝対象週の記録を確認できない状態。未ログインの閲覧は個人へ割り当てていません。</li><li>グループ・個人別の閲覧数は2026年10月13日から計測。過去分は「計測前」と表示します。※は週の途中からの計測です。</li><li>いいね・コメントは対象週に作成され、集計時点で残っている件数です。</li><li>このメールには管理者のフォローに使う個人別の利用状況を含みます。</li></ul><p><a href="http://IEWEB01/?admin=1">内装版の管理画面</a> ／ <a href="http://IEWEB01/exterior/?admin=1">外装版の管理画面</a></p></body></html>')
+    body.append(f'<h3>集計の見方</h3><ul style="font-size:13px"><li>名簿：{report["masterDate"]}時点。各室の所属グループで表示しています。</li><li>利用あり＝ログインした画面利用・記事閲覧・いいね・コメントのいずれかを対象週に確認。同じ人は1人、同じ日は1日です。</li><li>利用記録なし＝対象週の記録を確認できない状態。未ログインの閲覧は個人へ割り当てていません。</li><li>閲覧数は「記事を読む」のクリック数です。同じ人・同じ記事・同じ日は1回と数えます。計測範囲は各室の表の注記をご確認ください。</li><li>いいね・コメントは対象週に作成され、集計時点で残っている件数です。</li><li>このメールには管理者のフォローに使う個人別の利用状況を含みます。</li></ul><p><a href="http://IEWEB01/?admin=1">内装版の管理画面</a> ／ <a href="http://IEWEB01/exterior/?admin=1">外装版の管理画面</a></p></body></html>')
     return ''.join(body)
 
 def chart(report, destination):

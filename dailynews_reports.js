@@ -28,6 +28,9 @@ window.renderDailyNewsWeeklyReports = async (container, request) => {
     if(!section){container.innerHTML=controls+'<p class="account-note">この週の氏名付き室別レポートを準備中です。</p>';bind();return;}
     const c=report.coverage[edition], before=!c.readsStarted||c.readsStarted>report.end;
     const read=m=>before?'計測前':`${m.reads}回${c.readsComplete?'':' ※'}`;
+    const readNote=before?'記事閲覧数はこの週にはまだ計測していません。「計測前」と表示します。':!c.readsComplete?`※ 記事閲覧数は${esc(c.readsStarted)}の計測開始後の記録です。この印は閲覧数だけに付き、利用日数・いいね・コメントには付きません。`:'';
+    const noteHtml=readNote?`<p class="account-note" style="padding:10px;border-left:3px solid #8ba7c8;background:#1b2a3b">${readNote}</p>`:'';
+    const memberRow=m=>`<tr${m.active?'':' style="background:#3b301b;color:#fff0ce"'}><td>${m.active?esc(m.name):`<strong>${esc(m.name)}</strong><br><span style="font-size:12px;font-weight:bold;color:#ffdb8f">フォロー対象</span>`}</td><td>${esc(m.status)}</td><td>${m.days}日</td><td>${esc(m.lastActivity||'—')}</td><td>${read(m)}</td><td>${m.likes}件</td><td>${m.comments}件</td></tr>`;
     const inactive=section.registeredInactive+section.unregistered;
     container.innerHTML=controls+`
       ${Date.now()-new Date(reports[0].generatedAt).getTime()>36*3600000?'<p class="account-note">集計更新から36時間以上経過しています。前回の結果です。</p>':''}
@@ -35,13 +38,16 @@ window.renderDailyNewsWeeklyReports = async (container, request) => {
       <div style="display:flex;gap:18px;flex-wrap:wrap;margin:16px 0"><div><strong style="font-size:24px">${percent(section.active,section.headcount)}%</strong><br>利用 ${section.active} / ${section.headcount}人</div><div><strong style="font-size:24px">${section.registeredInactive}人</strong><br>登録済・利用記録なし</div><div><strong style="font-size:24px">${section.unregistered}人</strong><br>未登録</div></div>
       <p class="account-note">利用率＝自室の版を利用したメンバー数 ÷ その室の名簿人数。名簿は${esc(report.masterDate)}時点、登録状態は対象週末時点です。</p>
       ${!section.usageComplete?'<p class="account-note">この週は利用の部分計測です。利用記録がなくても、計測開始前に利用していた可能性があります。</p>':''}
+      ${noteHtml}
       <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>グループ</th><th>利用 / 名簿人数</th><th>利用率</th><th>利用記録なし</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${section.groups.map(g=>`<tr><td>${esc(g.label)}</td><td>${g.active}/${g.headcount}人</td><td>${percent(g.active,g.headcount)}%${bar(g.active,g.headcount)}</td><td>${g.registeredInactive+g.unregistered}人</td><td>${read(g)}</td><td>${g.likes}件</td><td>${g.comments}件</td></tr>`).join('')}</tbody></table></div>
       <h4>フォロー対象の確認（利用記録なし ${inactive}人）</h4>
       <p class="account-note">未登録の方には登録案内、登録済みで利用記録がない方にはアクセス方法や利用しづらい点の確認にお使いください。</p>
       ${section.groups.map(g=>`<p><b>${esc(g.label)}</b>：${g.members.filter(m=>!m.active).map(m=>`${esc(m.name)}（${esc(m.status)}）`).join('、')||'利用記録なしの人はいません。'}</p>`).join('')}
       <h4>グループごとの個人別利用状況</h4>
-      ${section.groups.map(g=>`<details open style="margin-bottom:16px"><summary>${esc(g.label)}（${g.active}/${g.headcount}人が利用）</summary><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>氏名</th><th>対象週の状態</th><th>利用日数</th><th>週内の最終利用</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${g.members.map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.status)}</td><td>${m.days}日</td><td>${esc(m.lastActivity||'—')}</td><td>${read(m)}</td><td>${m.likes}件</td><td>${m.comments}件</td></tr>`).join('')}</tbody></table></div></details>`).join('')}
-      <p class="account-note">${before?'この週の記事閲覧数は計測前です。':!c.readsComplete?'※ 記事閲覧数は計測開始後の値です。':''} 利用記録なしは対象週に利用を確認できない状態です。未ログインの閲覧は個人に割り当てていません。</p>
+      <p class="account-note">背景色・太字・「フォロー対象」は、対象週の利用記録がない方です。利用日数は、自室の版でログインした画面利用・記事閲覧・いいね・コメントのいずれかを記録した日数です。同じ日は1日と数えます。</p>
+      ${noteHtml}
+      ${section.groups.map(g=>`<details open style="margin-bottom:16px"><summary>${esc(g.label)}（${g.active}/${g.headcount}人が利用）</summary><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>氏名</th><th>対象週の状態</th><th>利用日数</th><th>週内の最終利用</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${g.members.map(memberRow).join('')}</tbody></table></div></details>`).join('')}
+      <p class="account-note">利用記録なしは対象週に利用を確認できない状態です。未ログインの閲覧は個人に割り当てていません。</p>
       <details open><summary>週ごとの利用率（${esc(labels[edition])}）</summary>${trend()}</details>
       <details><summary>集計方法</summary><ul class="account-note"><li>ログインした画面利用・記事閲覧・いいね・コメントのいずれかで利用ありとします。同じ人は1人、同じ日は1日です。</li><li>いいね・コメントは対象週に作成され、集計時点で残っている件数です。</li><li>個人別の利用状況は管理者だけが閲覧できます。試行中のメール宛先は中村さんのみです。</li><li>完了した週の所属と利用状況は保存した値を表示します。途中の週は日次更新します。</li><li>集計：${esc(new Date(report.roomDetailsGeneratedAt||report.generatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}))} JST</li></ul></details>`;
     bind();

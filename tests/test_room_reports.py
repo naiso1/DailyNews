@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import date, datetime
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'deployment/weekly-report'))
 import weekly_report as weekly
-from room_reports import build_rooms, email_html
+from room_reports import build_rooms, email_html, read_note, member_row
 
 class RoomReportsTests(unittest.TestCase):
     def fixture(self):
@@ -45,5 +45,45 @@ class RoomReportsTests(unittest.TestCase):
         report,roster,source=self.fixture()
         source['interior']['usage'].append({'key':'i2','date_key':'2026-10-05'})
         with self.assertRaises(ValueError):build_rooms(report,roster,source)
+
+    def test_days_combine_distinct_dates_without_counting_other_edition(self):
+        _,roster,source=self.fixture()
+        source['interior']['usage']=[{'key':'i1','date_key':'2026-10-13'}]*2
+        source['interior']['reads']=[{'key':'i1','date_key':'2026-10-13','count':20}]
+        source['interior']['likes']=[{'key':'i1','date_key':'2026-10-13','count':3}]
+        source['interior']['comments']=[{'key':'i1','date_key':'2026-10-13','count':3}]
+        source['exterior']['usage']=[{'key':'i1','date_key':'2026-10-14'}]
+        report=weekly.build_report(date(2026,10,12),date(2026,10,18),roster,source,datetime(2026,10,19,tzinfo=weekly.JST))
+        def person():
+            return next(m for g in build_rooms(report,roster,source)['interior']['groups'] for m in g['members'] if m['name']=='内装 利用者')
+        self.assertEqual((person()['days'],person()['lastActivity']),(1,'2026-10-13'))
+        source['interior']['comments'].append({'key':'i1','date_key':'2026-10-15','count':1})
+        report=weekly.build_report(date(2026,10,12),date(2026,10,18),roster,source,datetime(2026,10,19,tzinfo=weekly.JST))
+        self.assertEqual(person()['days'],2)
+
+    def test_partial_read_note_is_near_both_tables_and_uses_actual_start(self):
+        report,_,_=self.fixture()
+        report['coverage']['interior'].update(readsStarted='2026-10-08',readsComplete=False)
+        body=email_html(report)
+        note=read_note(report,'interior')
+        self.assertIn('2026-10-08',note)
+        self.assertIn('閲覧数だけ',note)
+        self.assertEqual(body.count(note),2)
+        self.assertLess(body.index(note),body.index('回※'))
+        detail=body.index('グループごとの個人別利用状況')
+        self.assertLess(body.index(note,detail),body.index('<th>利用日数</th>',detail))
+        report['coverage']['interior']['readsComplete']=True
+        self.assertEqual(read_note(report,'interior'),'')
+        self.assertNotIn('※',email_html(report))
+
+    def test_followup_marked_for_both_inactive_statuses_and_escapes_names(self):
+        report,_,_=self.fixture()
+        people=[m for g in report['rooms']['interior']['groups'] for m in g['members']]
+        for m in people:
+            row=member_row(report,'interior',{**m,'name':'<名前 & 確認>'})
+            self.assertIn('&lt;名前 &amp; 確認&gt;',row)
+            self.assertEqual('フォロー対象' in row,not m['active'])
+            self.assertEqual('background:#fff4dc' in row,not m['active'])
+            self.assertIn(m['status'],row)
 
 if __name__=='__main__':unittest.main()
