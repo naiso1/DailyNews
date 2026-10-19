@@ -551,10 +551,10 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
     """Limit expensive LLM processing to the strongest candidates per country."""
     if per_country_limit is None:
         try:
-            default_limit = EDITION.config.get("search", {}).get("maximum_candidates_per_country", 60) if EDITION.id == "exterior" else 30
+            default_limit = EDITION.config.get("search", {}).get("maximum_candidates_per_country", 30) if EDITION.id == "exterior" else 30
             per_country_limit = int(os.getenv("MAX_ENRICH_PER_COUNTRY", str(default_limit)))
         except Exception:
-            per_country_limit = 60 if EDITION.id == "exterior" else 30
+            per_country_limit = 30
     if not per_country_limit or per_country_limit <= 0:
         return items
 
@@ -672,7 +672,18 @@ def google_news_keyword_limit():
 
 
 def google_news_search_keywords(country, target_dates):
-    ordinary = edition_search_keywords(COUNTRY_SETTINGS.get(country, {}), google_news_keyword_limit())
+    settings = COUNTRY_SETTINGS.get(country, {})
+    limit = google_news_keyword_limit()
+    ordinary = edition_search_keywords(settings, limit)
+    if EDITION.id == "exterior" and EDITION.config.get("search", {}).get("rotate_google_news_keywords"):
+        pool = edition_search_keywords(settings)
+        if pool and 0 < limit < len(pool):
+            # Keep every configured technical/market query in circulation while
+            # matching the interior per-run budget. Anchor to the latest issue
+            # day (not the clock) so retries and multi-day runs use the same set.
+            day = datetime.strptime(max(target_dates), "%Y-%m-%d").date() if target_dates else datetime.now(JST).date()
+            offset = (day.toordinal() * limit) % len(pool)
+            ordinary = [pool[(offset + index) % len(pool)] for index in range(limit)]
     return list(dict.fromkeys(ordinary + event_collection.search_keywords(country, target_dates)))
 
 

@@ -725,6 +725,8 @@ def latest_news_date():
 
 def run_cmd(cmd, label, log_file, cwd=None):
     log(f"[RUN] {label}: {' '.join(cmd)}")
+    started_at = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+    started_clock = time.monotonic()
     proc = None
     try:
         configure_loopback_no_proxy()
@@ -768,6 +770,14 @@ def run_cmd(cmd, label, log_file, cwd=None):
         except Exception:
             pass
         raise
+    finally:
+        log(
+            f"[TIMING] edition={EDITION.id} step={label} "
+            f"seconds={time.monotonic() - started_clock:.1f} "
+            f"exit={proc.returncode if proc else 'not_started'} "
+            f"started_at={started_at} "
+            f"ended_at={datetime.datetime.now().astimezone().isoformat(timespec='seconds')}"
+        )
 
 
 def validate_exterior_sheet_receipt(sheet_path: Path, target_dates, rows):

@@ -21,11 +21,15 @@ class EventCollectionTests(unittest.TestCase):
     def test_queries_added_for_both_editions_only_in_japan_event_window(self):
         for edition in ('interior', 'exterior'):
             collector.configure_edition(edition)
-            ordinary = collector.edition_search_keywords(collector.COUNTRY_SETTINGS['日本'], collector.google_news_keyword_limit())
+            all_ordinary = set(collector.edition_search_keywords(collector.COUNTRY_SETTINGS['日本']))
             current = collector.google_news_search_keywords('日本', ['2026-10-15'])
-            self.assertEqual(current, ordinary + list(event_collection.QUERIES))
+            self.assertEqual(current[-2:], list(event_collection.QUERIES))
+            self.assertEqual(len(current), collector.google_news_keyword_limit() + 2)
+            self.assertTrue(set(current[:-2]).issubset(all_ordinary))
             for dates in ([], ['2025-10-15'], ['2026-10-24'], ['2027-10-15']):
-                self.assertEqual(collector.google_news_search_keywords('日本', dates), ordinary)
+                ordinary = collector.google_news_search_keywords('日本', dates)
+                self.assertEqual(len(ordinary), collector.google_news_keyword_limit())
+                self.assertTrue(set(ordinary).issubset(all_ordinary))
             self.assertEqual(event_collection.search_keywords('欧州', ['2026-10-15']), [])
 
     def test_prefilter_reserves_three_candidates_without_increasing_budget(self):

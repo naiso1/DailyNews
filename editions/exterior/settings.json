@@ -936,8 +936,9 @@
     ],
     "prompt_path": "prompts/collection.md",
     "search": {
-      "google_news_keyword_limit": 29,
-      "maximum_candidates_per_country": 60,
+      "google_news_keyword_limit": 10,
+      "rotate_google_news_keywords": true,
+      "maximum_candidates_per_country": 30,
       "maximum_paper_candidates": 20
     },
     "selection": {

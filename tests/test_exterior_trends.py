@@ -104,17 +104,34 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
 
     def test_exterior_google_search_keeps_all_original_and_trend_queries(self):
         with patch.dict(os.environ, {}, clear=True):
-            self.assertEqual(collector.google_news_keyword_limit(), 29)
-            for settings in collector.COUNTRY_SETTINGS.values():
-                queries = collector.edition_search_keywords(settings, collector.google_news_keyword_limit())
-                self.assertEqual(len(queries), 29)
-                self.assertTrue(set(settings["keywords"]).issubset(queries))
-                self.assertTrue(set(settings["trend_keywords"]).issubset(queries))
+            self.assertEqual(collector.google_news_keyword_limit(), 10)
+            for country, settings in collector.COUNTRY_SETTINGS.items():
+                batches = [collector.google_news_search_keywords(country, [day])
+                           for day in ("2026-10-24", "2026-10-25", "2026-10-26")]
+                self.assertTrue(all(len(batch) == len(set(batch)) == 10 for batch in batches))
+                covered = set().union(*map(set, batches))
+                self.assertEqual(covered, set(settings["keywords"] + settings["trend_keywords"]))
+                self.assertEqual(batches[-1], collector.google_news_search_keywords(country, ["2026-10-24", "2026-10-26"]))
             collector.configure_edition("interior")
             self.assertEqual(collector.google_news_keyword_limit(), collector.GOOGLE_NEWS_KEYWORD_LIMIT)
+            for country, settings in collector.COUNTRY_SETTINGS.items():
+                self.assertEqual(collector.google_news_search_keywords(country, ["2026-10-24"]),
+                                 settings["keywords"][:collector.GOOGLE_NEWS_KEYWORD_LIMIT])
         collector.configure_edition("exterior")
         with patch.dict(os.environ, {"GOOGLE_NEWS_KEYWORD_LIMIT": "3"}), patch.object(collector, "GOOGLE_NEWS_KEYWORD_LIMIT", 3):
             self.assertEqual(collector.google_news_keyword_limit(), 3)
+            self.assertEqual(len(collector.google_news_search_keywords("日本", ["2026-10-24"])), 3)
+
+    def test_default_review_budget_matches_interior_and_keeps_paper_lane(self):
+        countries = ["日本", "米国", "欧州", "中国", "インド", "論文"]
+        rows = [{"国": country, "日付": "2026-10-18", "タイトル": f"樹脂バンパー 冷却 {i}",
+                 "内容": "外装部品の材料を開発", "URL": f"https://example.test/{country}/{i}"}
+                for country in countries for i in range(70)]
+        with patch.dict(os.environ, {}, clear=True):
+            picked = collector.prefilter_results_for_enrichment(rows)
+        for country in countries:
+            self.assertEqual(sum(item["国"] == country for item in picked), 20 if country == "論文" else 30)
+        self.assertEqual(collector.EDITION.config["selection"]["maximum_per_country"], 10)
 
     def test_google_redirect_keeps_s_characters_and_rejects_image_urls(self):
         source = "https://news.google.com/articles/test"
@@ -255,7 +272,8 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
         groups = updater.select_idea_anchor_groups([item], 2)
         self.assertEqual([[entry["newsId"] for entry in group] for group in groups], [["in7"], ["in7"]])
         prompt = updater.make_country_prompt("2026-09-15", "in", [item], "", idea_anchor_groups=groups)
-        self.assertIn("trend/market", prompt)
+        self.assertIn('"id": "in7"', prompt)
+        self.assertIn("SUVの需要が増えた。", prompt)
         self.assertIn("仮説", prompt)
 
     def test_csv_category_reaches_js_and_existing_url_keeps_its_id_across_dates(self):

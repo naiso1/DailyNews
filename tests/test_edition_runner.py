@@ -29,6 +29,26 @@ def function(name, env):
 
 
 class EditionRunnerTests(unittest.TestCase):
+    def test_step_timing_records_success_and_failure_without_swallowing_errors(self):
+        for code in (0, 7):
+            messages = []
+            proc = Mock(pid=123, stdout=iter(["message\n"]), returncode=code)
+            env = dict(log=messages.append, datetime=datetime,
+                       time=SimpleNamespace(monotonic=Mock(side_effect=[100.0, 112.5])),
+                       EDITION=SimpleNamespace(id="exterior"), os=os,
+                       configure_loopback_no_proxy=lambda: None, Popen=Mock(return_value=proc),
+                       CREATE_NEW_PROCESS_GROUP=0, PIPE=-1, STDOUT=-2, CalledProcessError=CalledProcessError)
+            run = function("run_cmd", env)
+            if code:
+                with self.assertRaises(CalledProcessError): run(["fake"], "collector", None)
+            else:
+                run(["fake"], "collector", None)
+            timing = [line for line in messages if line.startswith("[TIMING]")]
+            self.assertEqual(len(timing), 1)
+            self.assertIn(f"edition=exterior step=collector seconds=12.5 exit={code}", timing[0])
+            self.assertIn("started_at=", timing[0])
+            self.assertIn("ended_at=", timing[0])
+
     def test_only_exterior_incomplete_insights_retry_from_validated_sheet(self):
         cmd = ["python", "updater"]
         dates = ["2026-09-29"]
