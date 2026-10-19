@@ -4,6 +4,8 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 const crypto = require("crypto");
+const { gzip } = require("zlib");
+const { promisify } = require("util");
 const { DatabaseSync } = require("node:sqlite");
 
 const EDITION = process.env.DAILYNEWS_EDITION || "interior";
@@ -2576,7 +2578,47 @@ async function handleApi(request, response, requestUrl) {
   apiError(response, 404, "api_not_found", "API endpoint was not found.");
 }
 
-function serveFile(request, response, releaseDir, pathname) {
+const gzipAsync = promisify(gzip);
+const compressedAssets = new Map();
+const pendingAssets = new Map();
+const ASSET_CACHE_LIMIT = 32 * 1024 * 1024;
+let assetCacheBytes = 0;
+
+function acceptsGzip(value = "") {
+  const encodings = new Map(String(value).split(",").map(part => {
+    const [name, ...parameters] = part.trim().toLowerCase().split(";");
+    const quality = parameters.find(parameter => /^\s*q\s*=/.test(parameter));
+    return [name, quality ? Number(quality.split("=")[1]) : 1];
+  }));
+  return (encodings.get("gzip") ?? encodings.get("*") ?? 0) > 0;
+}
+
+async function compressedAsset(filePath, key) {
+  if (compressedAssets.has(key)) {
+    const value = compressedAssets.get(key);
+    compressedAssets.delete(key);
+    compressedAssets.set(key, value);
+    return value;
+  }
+  if (pendingAssets.has(key)) return pendingAssets.get(key);
+  const pending = (async () => {
+    const value = await gzipAsync(await fs.promises.readFile(filePath), { level: 6 });
+    while (assetCacheBytes + value.length > ASSET_CACHE_LIMIT && compressedAssets.size) {
+      const oldest = compressedAssets.keys().next().value;
+      assetCacheBytes -= compressedAssets.get(oldest).length;
+      compressedAssets.delete(oldest);
+    }
+    if (value.length <= ASSET_CACHE_LIMIT) {
+      compressedAssets.set(key, value);
+      assetCacheBytes += value.length;
+    }
+    return value;
+  })();
+  pendingAssets.set(key, pending);
+  try { return await pending; } finally { pendingAssets.delete(key); }
+}
+
+async function serveFile(request, response, releaseDir, pathname) {
   let decodedPath;
   try {
     decodedPath = decodeURIComponent(pathname);
@@ -2592,6 +2634,16 @@ function serveFile(request, response, releaseDir, pathname) {
 
   if (!filePath.startsWith(releasePrefix)) {
     send(response, 403, "Forbidden", "text/plain; charset=utf-8");
+    return;
+  }
+
+  const normalizedPath = path.relative(releaseDir, filePath).replace(/\\/g, "/").toLowerCase();
+  const protectedContent = normalizedPath === "news_data.js" || normalizedPath === "insights_data.js"
+    || normalizedPath.startsWith("images/");
+  // Authorize the resolved path before checking ETags, including encoded URLs.
+  if (protectedContent && !PUBLIC_CONFIG.allowGuestRead && !authenticatedUser(request)) {
+    send(response, 401, "Login is required to access DailyNews content.", "text/plain; charset=utf-8",
+      { "Cache-Control": "no-store" });
     return;
   }
 
@@ -2615,20 +2667,39 @@ function serveFile(request, response, releaseDir, pathname) {
     return;
   }
 
-  const cacheControl =
-    extension === ".html" || extension === ".js" || extension === ".json"
-      ? "no-store, max-age=0, must-revalidate"
-      : "public, max-age=86400";
-
-  response.writeHead(200, {
+  // Releases have immutable paths. Revalidate changing URLs on every visit so
+  // publication becomes visible immediately while unchanged bodies are reused.
+  const key = `${filePath}:${stat.size}:${stat.mtimeMs}:${stat.ctimeMs}`;
+  const etag = `W/"${crypto.createHash("sha256").update(key).digest("hex").slice(0, 32)}"`;
+  const compressible = /\.(html|js|json|css|svg|txt|xml)$/.test(extension)
+    && stat.size >= 1024 && stat.size <= ASSET_CACHE_LIMIT;
+  const headers = {
     "Content-Type": contentType,
-    "Content-Length": stat.size,
-    "Cache-Control": cacheControl,
+    "Cache-Control": "private, no-cache",
+    ETag: etag,
+    ...(compressible ? { Vary: "Accept-Encoding" } : {}),
     ...commonHeaders(),
-  });
+  };
+  const matches = String(request.headers["if-none-match"] || "").split(",")
+    .some(value => value.trim() === "*" || value.trim().replace(/^W\//, "") === etag.slice(2));
+  if (matches) {
+    response.writeHead(304, headers);
+    response.end();
+    return;
+  }
+  const compressed = compressible && acceptsGzip(request.headers["accept-encoding"])
+    ? await compressedAsset(filePath, key) : null;
+  if (compressed) headers["Content-Encoding"] = "gzip";
+  headers["Content-Length"] = compressed ? compressed.length : stat.size;
+  response.writeHead(200, headers);
 
   if (request.method === "HEAD") {
     response.end();
+    return;
+  }
+
+  if (compressed) {
+    response.end(compressed);
     return;
   }
 
@@ -2719,21 +2790,13 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  const protectedContent =
-    requestUrl.pathname === "/news_data.js" ||
-    requestUrl.pathname === "/insights_data.js" ||
-    requestUrl.pathname.startsWith("/images/");
-  if (protectedContent && !PUBLIC_CONFIG.allowGuestRead && !authenticatedUser(request)) {
-    send(
-      response,
-      401,
-      "Login is required to access DailyNews content.",
-      "text/plain; charset=utf-8",
-    );
-    return;
+  try {
+    await serveFile(request, response, release.releaseDir, requestUrl.pathname);
+  } catch (error) {
+    log(`Static file error: ${error.message}`);
+    if (!response.headersSent) send(response, 500, "Internal server error", "text/plain; charset=utf-8");
+    else response.destroy(error);
   }
-
-  serveFile(request, response, release.releaseDir, requestUrl.pathname);
 });
 
 server.on("error", (error) => {

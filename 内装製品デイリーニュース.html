@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
     <style>
 [data-edition="exterior"] .interiorgram-link { display:none; }
 .edition-links { display:flex; grid-column:1 / -1; flex-wrap:wrap; gap:8px; align-items:center; margin:0; }
@@ -1365,7 +1365,7 @@ header.site-header {
             overflow-wrap: anywhere;
         }
     </style>
-    <link id="dailyNewsHeaderStyles" rel="stylesheet" href="dailynews_header.css?v=20261016-c1">
+    <link id="dailyNewsHeaderStyles" rel="stylesheet" href="dailynews_header.css?v=20261019-c2">
 </head>
 
 <body>
@@ -1685,32 +1685,26 @@ header.site-header {
             document.querySelector('meta[name="description"]').content = "外装製品のニュース・考察・企画アイデアをお届け。登録せずに閲覧でき、メールは希望者のみ受信できます。";
             document.querySelector('option[value="relevance-desc"]').textContent = "外装関連度順";
         }
-        // 強力なキャッシュバスティング: タイムスタンプ + ランダム値
-        const CACHE_BUSTER = `${Date.now()}_${Math.random().toString(36).slice(2)}`;
-
+        // 同じURLで毎回更新を確認し、変更がないデータはブラウザの保存分を再利用する。
         window.__dataScriptsReady = new Promise((resolve) => {
             const sources = ["news_data.js", "insights_data.js"];
             let loaded = 0;
-            const loadScript = (src, useCacheBuster) => {
+            const loadScript = (src) => {
                 const script = document.createElement("script");
-                script.src = useCacheBuster ? `${src}?v=${CACHE_BUSTER}` : src;
+                script.src = src;
                 script.async = false;
                 script.onload = () => {
                     loaded += 1;
                     if (loaded === sources.length) resolve();
                 };
                 script.onerror = () => {
-                    if (useCacheBuster) {
-                        loadScript(src, false);
-                        return;
-                    }
                     console.warn(`Failed to load ${src}`);
                     loaded += 1;
                     if (loaded === sources.length) resolve();
                 };
                 document.head.appendChild(script);
             };
-            sources.forEach((src) => loadScript(src, true));
+            sources.forEach(loadScript);
         });
 
     </script>

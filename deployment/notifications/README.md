@@ -46,6 +46,29 @@ Webの版別購読設定を正本とし、処理PCが内装・外装それぞれ
 
 ## 再作成・保守
 
+### 手動配信・履歴確認の認証（2026-10-19更新）
+
+共通処理 [`flow-session.ps1`](flow-session.ps1) を同じPowerShellプロセスへ読み込み、内装・外装で認証を共有する。
+
+```powershell
+. ./deployment/notifications/flow-session.ps1
+Connect-DailyNewsFlow -SignIn
+# 以降のAPI呼び出しは Invoke-DailyNewsFlowRequest を使用する。
+```
+
+- 既存の有効なFlow認証を再利用し、期限が近い場合はMicrosoftのMSALで画面を開かず更新を試す。別のPowerShellプロセスやWindows再起動後も、同じWindowsユーザーの暗号化キャッシュを読み込んで更新を試す。
+- 初回はFlow用に直接サインインする。サインイン画面を開く試行は1プロセスに1回まで。キャンセルや失敗の後も自動で開き直さない。
+- 履歴確認・送信処理は画面を開かない。認証を更新できない場合やHTTP401/403は理由を返して停止し、自動再認証・自動再送をしない。
+- MSALキャッシュは `%LOCALAPPDATA%\DailyNewsRuntime\auth\flow-msal.dpapi` にWindows DPAPIのCurrentUser方式で暗号化して保存し、フォルダー権限も本人だけに限定する。パスワードは保存せず、復号できない場合の平文保存もしない。OneDrive・Git・公開ファイルには含めない。ファイルの置換と更新は排他制御する。
+- この方式を初めて使う際は1回サインインしてキャッシュを作る。会社のMFA・サインイン期限・認証失効は維持するため、Microsoftが再確認を求めたときは明示した1回のサインインが必要。Windowsへの自動サインインを行う機能ではない。
+- 保存済み認証を削除するには共通処理を読み込んだ同じプロセスで `Clear-DailyNewsFlowCache` を実行する。これはローカルキャッシュの削除であり、Microsoft側の全セッション失効操作ではない。
+- Microsoft Power Apps PowerShell 1.0.45の既定サインインはPower Apps用で、Flow呼び出しでは別の認証が必要になり得る。また `Get-JwtToken` は必要時に対話認証へ進むため、画面を出せない確認処理には直接使わない。インストール済みMicrosoftモジュール本体は変更しない。
+- この共通処理は認証と1回のAPI呼び出しだけを扱う。公開成功・最新購読者・通常文面・当日送信履歴・二重送信防止台帳のチェックは、配信側で引き続き行う。メールのPOSTは結果不明でも繰り返さず、送信済み・受信記録で確認する。
+
+通常の朝8時クラウド配信、配信先同期、exaBase認証維持は、この手動保守用サインインとは別の処理。
+
+参考: [Microsoftのトークン再利用手順](https://learn.microsoft.com/en-us/entra/identity-platform/msal-acquire-cache-tokens)、[MSALキャッシュの永続化](https://learn.microsoft.com/en-us/entra/msal/dotnet/how-to/token-cache-serialization)、[Get-JwtTokenの動作](https://learn.microsoft.com/en-us/powershell/module/microsoft.powerapps.administration.powershell/get-jwttoken?view=pa-ps-latest)。
+
 [`prepare-exterior-flow.ps1`](prepare-exterior-flow.ps1) は、内装フローの構成を読み取り、独立した外装フローを停止状態で作成するためのスクリプト。通常運用では上記の作成済み外装フローを使用する。再作成時には既存フローの有無を確認し、重複配信になるコピーを増やさない。
 
 作成リクエストやフローIDの記録はGit対象外の `runtime/notifications/exterior` に保存する。購読者の氏名・メールアドレス、認証情報はこのREADMEや公開設定へ記載しない。内装フローIDは `94732731-b972-483b-b973-16dea2efa3fd`、環境は `Default-2113d5b5-fefb-4c1d-bc26-12d7f8c3581d`。

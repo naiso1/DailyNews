@@ -66,6 +66,7 @@ if (-not (Test-Path -LiteralPath $releasePath)) {
             (Join-Path $staging "dailynews_header.js"),
             (Join-Path $staging "dailynews_header.css"),
             (Join-Path $staging "page_images\header_automotive_20261016.png"),
+            (Join-Path $staging "page_images\header_automotive_20261016.webp"),
             (Join-Path $staging "dailynews_account.js"),
             (Join-Path $staging "dailynews_activity.js"),
             (Join-Path $staging "dailynews_sources.js"),

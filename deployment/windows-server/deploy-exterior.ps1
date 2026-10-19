@@ -44,6 +44,7 @@ foreach ($folder in @("images","page_images")) {
 }
 # The masthead is shared by both editions; article images remain edition-local.
 Copy-Item -LiteralPath (Join-Path $repo "page_images\header_automotive_20261016.png") -Destination (Join-Path $staging "page_images\header_automotive_20261016.png")
+Copy-Item -LiteralPath (Join-Path $repo "page_images\header_automotive_20261016.webp") -Destination (Join-Path $staging "page_images\header_automotive_20261016.webp")
 # Content-addressed releases allow publication without bundling unrelated working-tree changes.
 $manifest = Get-ChildItem -LiteralPath $staging -Recurse -File | Sort-Object FullName | ForEach-Object {
     $_.FullName.Substring($staging.Length) + ":" + (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash

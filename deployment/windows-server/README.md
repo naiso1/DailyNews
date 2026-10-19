@@ -78,7 +78,15 @@ For a first exterior installation or an intentional infrastructure reconfigurati
 use `deploy-exterior.ps1 -InstallServer`. Ordinary daily publication uses
 `deploy.ps1 -Edition exterior`. Do not use installation as a routine update step.
 
-The shared title background is `page_images/header_automotive_20261016.png`.
+Static HTML, JavaScript, CSS and data use private browser caches with ETag
+revalidation on each request. Text assets are gzip-compressed when supported;
+compressed representations are held in a bounded 32 MB server cache. API and
+account responses remain `no-store`, and authentication is checked before any
+protected static response, including 304 responses. Data script URLs stay stable
+so unchanged archives are reused. A new release changes ETags immediately.
+
+The shared title background is `page_images/header_automotive_20261016.webp`
+(the original PNG remains available for rollback).
 It is a fixed generated asset, packaged for both editions; no scheduled image
 generation is involved. See [header rollback](header-rollback.md) to switch
 back to the previous header while preserving newer articles and interaction data.
