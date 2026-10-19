@@ -89,7 +89,7 @@ def email_html(report, sample=False):
     esc = html.escape
     sections = report['rooms']
     body = [f'<html lang="ja"><head><meta charset="utf-8"></head><body style="font-family:Meiryo,sans-serif;color:#20364a;max-width:1050px;margin:auto;padding:24px"><h1 style="font-size:25px">各室のデイリーニュース利用状況</h1><p>{report["week"]} 〜 {report["end"]}（月曜〜日曜・日本時間）</p><p>内装開発室は内装版、外装開発室は外装版の利用を集計しています。</p>']
-    if sample: body.append('<p>中村さん向けの確認用です。試行中は中村さんのみに送信します。</p>')
+    if sample: body.append('<p>中村さん向けの確認用です。このサンプルは中村さんのみに送信します。</p>')
     body.append('<table cellpadding="9" cellspacing="0" style="border-collapse:collapse;width:100%;background:#edf3f7"><tr><th align="left">対象</th><th>利用人数 / 室の人数</th><th>利用率</th><th>登録済・利用記録なし</th><th>未登録</th></tr>')
     for edition, section in sections.items():
         body.append(f'<tr><td>{section["room"]}（{section["title"][:2]}版）</td><td align="center">{section["active"]} / {section["headcount"]}人</td><td align="center"><b>{percentage(section["active"],section["headcount"])}%</b></td><td align="center">{section["registeredInactive"]}人</td><td align="center">{section["unregistered"]}人</td></tr>')

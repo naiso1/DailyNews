@@ -1,4 +1,4 @@
-import importlib.util, tempfile, unittest, sys
+import importlib.util, tempfile, unittest, sys, json
 from datetime import date, datetime
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'deployment/weekly-report'))
@@ -16,7 +16,7 @@ class WeeklyReportTests(unittest.TestCase):
         from build_flow import build
         source={'properties':{'connectionReferences':{'shared_office365':{},'shared_onedriveforbusiness':{},'unused':{}},'definition':{'parameters':{}},'environment':{}}}
         for sample in (True,False):
-            flow=build(source,datetime(2026,10,13,10,tzinfo=weekly.JST),sample)['properties']
+            flow=build(source,datetime(2026,10,13,10,tzinfo=weekly.JST),sample,delivery_config=Path(__file__).parent/'nonexistent-delivery-fixture.json')['properties']
             self.assertEqual(flow['state'],'Stopped')
             self.assertEqual(len(flow['connectionReferences']),2)
             trigger=flow['definition']['triggers']['Weekly_schedule']
@@ -28,6 +28,29 @@ class WeeklyReportTests(unittest.TestCase):
             self.assertNotIn('emailMessage/Cc',mail['inputs']['parameters'])
             self.assertEqual(mail['runAfter'],{'Claim_delivery':['Succeeded']})
             self.assertEqual(mail['inputs']['retryPolicy'],{'type':'none'})
+    def test_approved_delivery_and_sample_isolation(self):
+        from delivery import recipient_to, TEST_TO
+        from build_flow import build
+        source={'properties':{'connectionReferences':{'shared_office365':{},'shared_onedriveforbusiness':{}},'definition':{'parameters':{}},'environment':{}}}
+        with tempfile.TemporaryDirectory() as folder:
+            config=Path(folder)/'delivery.json'
+            config.write_text(json.dumps({'schema':1,'mode':'administrators','approvedAt':'2026-10-19','recipients':['z@example.toyoda-gosei.co.jp','a@toyoda-gosei.co.jp']}),encoding='utf8')
+            to='a@toyoda-gosei.co.jp;z@example.toyoda-gosei.co.jp'
+            self.assertEqual(recipient_to(config=config),to)
+            self.assertEqual(recipient_to(sample=True,config=config),TEST_TO)
+            for sample,expected in ((False,to),(True,TEST_TO)):
+                props=build(source,datetime(2026,10,19,tzinfo=weekly.JST),sample,delivery_config=config)['properties']
+                guard=props['definition']['actions']['Check_ready_and_unsent']
+                self.assertEqual(guard['expression']['and'][1]['equals'][1],expected)
+                self.assertEqual(guard['actions']['Send_report']['inputs']['parameters']['emailMessage/To'],expected)
+                self.assertEqual(props['state'],'Stopped')
+    def test_invalid_delivery_is_blocked(self):
+        from delivery import validate_recipients, recipient_to
+        for values in ([],None,['a@toyoda-gosei.co.jp']*2,['a@external.example'],['a@toyoda-gosei.co.jp;another@toyoda-gosei.co.jp'],['a@toyoda-gosei.co.jp\nBcc:x@toyoda-gosei.co.jp']):
+            with self.assertRaises(ValueError):validate_recipients(values)
+        with tempfile.TemporaryDirectory() as folder:
+            config=Path(folder)/'delivery.json';config.write_text('{}',encoding='utf8')
+            with self.assertRaises(ValueError):recipient_to(config=config)
     def test_identity_and_period(self):
         self.assertEqual(weekly.identity(' Ａ@EXAMPLE.com '),weekly.identity('a@example.com'))
         self.assertEqual(weekly.week_start(date(2026,10,11)),date(2026,10,5))

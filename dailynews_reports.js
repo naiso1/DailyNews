@@ -49,7 +49,7 @@ window.renderDailyNewsWeeklyReports = async (container, request) => {
       ${section.groups.map(g=>`<details open style="margin-bottom:16px"><summary>${esc(g.label)}（${g.active}/${g.headcount}人が利用）</summary><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>氏名</th><th>対象週の状態</th><th>利用日数</th><th>週内の最終利用</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${g.members.map(memberRow).join('')}</tbody></table></div></details>`).join('')}
       <p class="account-note">利用記録なしは対象週に利用を確認できない状態です。未ログインの閲覧は個人に割り当てていません。</p>
       <details open><summary>週ごとの利用率（${esc(labels[edition])}）</summary>${trend()}</details>
-      <details><summary>集計方法</summary><ul class="account-note"><li>ログインした画面利用・記事閲覧・いいね・コメントのいずれかで利用ありとします。同じ人は1人、同じ日は1日です。</li><li>いいね・コメントは対象週に作成され、集計時点で残っている件数です。</li><li>個人別の利用状況は管理者だけが閲覧できます。試行中のメール宛先は中村さんのみです。</li><li>完了した週の所属と利用状況は保存した値を表示します。途中の週は日次更新します。</li><li>集計：${esc(new Date(report.roomDetailsGeneratedAt||report.generatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}))} JST</li></ul></details>`;
+      <details><summary>集計方法</summary><ul class="account-note"><li>ログインした画面利用・記事閲覧・いいね・コメントのいずれかで利用ありとします。同じ人は1人、同じ日は1日です。</li><li>いいね・コメントは対象週に作成され、集計時点で残っている件数です。</li><li>個人別の利用状況は管理者だけが閲覧できます。週次メールは承認済みの管理者宛てに配信します。</li><li>完了した週の所属と利用状況は保存した値を表示します。途中の週は日次更新します。</li><li>集計：${esc(new Date(report.roomDetailsGeneratedAt||report.generatedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}))} JST</li></ul></details>`;
     bind();
   };
   draw();

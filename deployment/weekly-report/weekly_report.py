@@ -10,13 +10,13 @@ from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from room_reports import build_rooms, email_html, chart
 from identity_matching import load_aliases, match_source
+from delivery import TEST_TO, recipient_to
 
 ROOT = Path(__file__).resolve().parents[2]
 STATE = ROOT / 'runtime' / 'weekly-report'
 MASTER_ROOT = Path(r'\\tgfs1\ＩＥ開発部\90_その他\フロアー改革\電子掲示板')
 JST = timezone(timedelta(hours=9))
 LABELS = {'interior': '内装版', 'exterior': '外装版', 'combined': '両版合計'}
-TEST_TO = 'yuki.nakamura@toyoda-gosei.co.jp'
 
 def normalized(value): return unicodedata.normalize('NFKC', value).strip().lower()
 def identity(value): return hashlib.sha256(normalized(value).encode()).hexdigest()
@@ -158,6 +158,7 @@ def onedrive_folder():
         return Path(winreg.QueryValueEx(key,'UserFolder')[0])/'DailyNewsAutomation'/'weekly-report'
 
 def run(args):
+    weekly_to = recipient_to()
     now=datetime.now(JST); today=now.date(); current=week_start(today)
     STATE.mkdir(parents=True,exist_ok=True)
     # Single local producer; do not overlap startup and daily scheduled tasks.
@@ -205,7 +206,7 @@ def run(args):
             body=email_html(previous,sample); name='sample' if sample else 'weekly'
             (packet_dir/(name+'.html')).write_text(body,encoding='utf8')
             packet={'schema':1,'reportKey':previous['week'],'dueDate':current.isoformat(), 'generatedAt':now.isoformat(),
-                'to':TEST_TO,'subject':f'{"【サンプル】" if sample else ""}【室別・氏名付き】デイリーニュース 週次利用レポート（{previous["week"]}〜{previous["end"]}）',
+                'to':TEST_TO if sample else weekly_to,'subject':f'{"【サンプル】" if sample else ""}【室別・氏名付き】デイリーニュース 週次利用レポート（{previous["week"]}〜{previous["end"]}）',
                 'body':body,'attachmentName':'weekly-usage-'+previous['week']+'.png','attachmentBase64':base64.b64encode(png.read_bytes()).decode()}
             atomic_json(packet_dir/(name+'.json'),packet)
             if args.onedrive: atomic_json(onedrive_folder()/(name+'.json'),packet)
