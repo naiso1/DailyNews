@@ -9,6 +9,7 @@ from collections import Counter
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from room_reports import build_rooms, email_html, chart
+from identity_matching import load_aliases, match_source
 
 ROOT = Path(__file__).resolve().parents[2]
 STATE = ROOT / 'runtime' / 'weekly-report'
@@ -165,6 +166,7 @@ def run(args):
         lock.seek(0); lock.write(b'0'); lock.flush(); lock.seek(0)
         try: msvcrt.locking(lock.fileno(),msvcrt.LK_NBLCK,1)
         except OSError: raise RuntimeError('レポートの作成処理が既に実行中です。')
+        aliases=load_aliases(STATE/'identity-aliases.json')
         source=extract_usage(); reports=[]
         for offset in range(8):
             start=current-timedelta(weeks=offset); end=start+timedelta(days=6)
@@ -181,7 +183,8 @@ def run(args):
                 previous_roster=json.loads(older[-1].read_text(encoding='utf8')) if older else None
                 validate_roster_change(roster,previous_roster)
                 atomic_json(roster_path,roster)
-            report=build_report(start,end,roster,source,now)
+            roster=named_roster(roster,Path(args.master_root))
+            report=build_report(start,end,roster,match_source(roster,source,aliases),now)
             atomic_json(target,report); reports.append(report)
         for report in reports:
             detail_path=STATE/'room-details'/(report['week']+'.json')
@@ -190,7 +193,7 @@ def run(args):
             else:
                 roster=json.loads((STATE/'rosters'/(report['week']+'.json')).read_text(encoding='utf8'))
                 roster=named_roster(roster,Path(args.master_root))
-                details={'rooms':build_rooms(report,roster,source),'generatedAt':now.isoformat()}
+                details={'rooms':build_rooms(report,roster,match_source(roster,source,aliases)),'generatedAt':now.isoformat()}
                 atomic_json(detail_path,details)
             report['rooms']=details['rooms']
             report['roomDetailsGeneratedAt']=details['generatedAt']
