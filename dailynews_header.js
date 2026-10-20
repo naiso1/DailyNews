@@ -24,8 +24,8 @@
   department.className = "header-visual-department";
   department.innerHTML = 'IE開発部<span aria-hidden="true"></span><small>DAILY NEWS</small>';
   utility.append(department, actions);
-  const interiorgram = brand.querySelector(".interiorgram-link");
-  if (interiorgram) actions.prepend(interiorgram);
+  const resourceLinks = brand.querySelector(".header-resource-links") || brand.querySelector(".interiorgram-link");
+  if (resourceLinks) actions.prepend(resourceLinks);
 
   const mainTitle = document.createElement("span");
   mainTitle.className = "header-title-main";

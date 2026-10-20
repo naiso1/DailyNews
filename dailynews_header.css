@@ -23,11 +23,14 @@ header.site-header.header-visual {
 .header-visual-department > span { height: 13px; width: 1px; background: #8ea4b6; }
 .header-visual-department small { font-size: 10px; font-weight: 400; letter-spacing: .16em; color: #b4c4d1; }
 .header-visual .header-top-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; min-width: 0; width: auto; max-width: 100%; margin-left: auto; }
+.header-visual .header-resource-links { flex: 0 1 auto; }
+.header-visual .header-resource-link,
 .header-visual .interiorgram-link { margin-left: 0; min-height: 36px; padding: 0 4px; background: none; border-color: transparent; color: #d1e4ee; font-size: 12px; border-radius: 5px; }
-.header-visual .interiorgram-link > span:first-child { display: none; }
+.header-visual .interiorgram-link:not(.header-resource-link) > span:first-child { display: none; }
 .header-visual .interiorgram-link-label { display: inline; }
 .header-visual .interiorgram-link-short { display: none; }
-.header-visual .interiorgram-link-label::after { content: " ↗"; }
+.header-visual .interiorgram-link-label::after,
+.header-visual .header-resource-link-label::after { content: " ↗"; }
 .header-visual .activity-bell,
 .header-visual .source-list-button,
 .header-visual .release-history-button,

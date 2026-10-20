@@ -2,6 +2,13 @@
 
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
+    date: "2026-10-20",
+    title: "内装HPとTOEIC問題配信へのリンクを追加",
+    items: [
+      "内装版のページ上部に、Interiorgramと並べて「内装HP」「TOEIC問題配信」を追加しました。内装HPは新ポータル版、TOEICは配信登録ページを別タブで開きます。",
+    ],
+  },
+  {
     date: "2026-10-19",
     title: "外装の処理量を内装に合わせ、管理者と週次配信先を追加",
     items: [

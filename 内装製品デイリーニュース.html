@@ -28,7 +28,7 @@
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
         rel="stylesheet" media="print" onload="this.media='all'">
     <style>
-[data-edition="exterior"] .interiorgram-link { display:none; }
+[data-edition="exterior"] .header-resource-links { display:none; }
 .edition-links { display:flex; grid-column:1 / -1; flex-wrap:wrap; gap:8px; align-items:center; margin:0; }
 .edition-links a,.edition-links button { color:var(--text); border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:12px; background:rgba(255,255,255,.04); text-decoration:none; cursor:pointer; }
 .edition-links a[aria-current="page"] { color:var(--accent-2); border-color:var(--accent-2); }
@@ -84,6 +84,7 @@ header.site-header {
     min-width: 0;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .site-header h1 {
@@ -101,14 +102,24 @@ header.site-header {
     white-space: nowrap;
 }
 
-.interiorgram-link {
+.header-resource-links {
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.header-resource-link {
     display: inline-flex;
     flex: 0 0 auto;
     min-height: 36px;
     align-items: center;
     justify-content: center;
     gap: 7px;
-    margin-left: auto;
+    margin-left: 0;
     padding: 0 13px;
     border: 1px solid rgba(255, 135, 195, 0.34);
     border-radius: 999px;
@@ -122,18 +133,16 @@ header.site-header {
     transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.interiorgram-link:hover {
+.header-resource-link:hover {
     border-color: rgba(255, 154, 205, 0.72);
     background: linear-gradient(135deg, rgba(255, 171, 82, 0.2), rgba(222, 70, 180, 0.22));
     transform: translateY(-1px);
 }
 
-.interiorgram-link:focus-visible {
+.header-resource-link:focus-visible {
     outline: 2px solid #ff9acd;
     outline-offset: 3px;
 }
-
-.interiorgram-link-short { display: none; }
 
 .header-top-actions {
     display: flex;
@@ -228,9 +237,7 @@ header.site-header {
     body { overflow-x: hidden; }
     header.site-header { width: 100%; max-width: 100%; gap: 12px; padding: 16px; overflow: hidden; border-radius: 15px; }
     .site-header h1 { font-size: 21px; }
-    .interiorgram-link { min-width: 38px; padding: 0 9px; }
-    .interiorgram-link-label { display: none; }
-    .interiorgram-link-short { display: inline; }
+    .header-resource-link { padding: 0 9px; }
     .header-top-actions { grid-template-columns: minmax(0, 1fr); }
     #accountHeaderSlot { justify-self: start; }
     .header-update-status { padding: 6px 8px; font-size: 10px; }
@@ -1391,11 +1398,17 @@ header.site-header {
         <div class="header-brand">
             <img id="titleIcon" class="title-globe-icon" src="page_images/icon_world.png" alt="地域">
             <h1>内装製品デイリーニュース</h1>
-            <a class="interiorgram-link" href="/interiorgram/" title="Interiorgramを開く">
-                <span aria-hidden="true">💡</span>
-                <span class="interiorgram-link-label">Interiorgram</span>
-                <span class="interiorgram-link-short" aria-hidden="true">IG</span>
-            </a>
+            <nav class="header-resource-links" aria-label="関連サイト">
+                <a class="header-resource-link interiorgram-link" href="/interiorgram/" title="Interiorgramを開く">
+                    <span class="header-resource-link-label">Interiorgram</span>
+                </a>
+                <a class="header-resource-link" href="http://202.15.67.132/interior-portal/" target="_blank" rel="noopener noreferrer" title="内装HP（新ポータル）を別タブで開く">
+                    <span class="header-resource-link-label">内装HP</span>
+                </a>
+                <a class="header-resource-link" href="https://script.google.com/macros/s/AKfycbyoxe-gGD7fpSoNgUx9_1KToRQLaYSoubAQ37dE6YNKiS3O_GOrWR-4I1DrMBVR3KUl7w/exec" target="_blank" rel="noopener noreferrer" title="TOEIC問題配信の登録ページを別タブで開く">
+                    <span class="header-resource-link-label">TOEIC問題配信</span>
+                </a>
+            </nav>
         </div>
         <div class="header-top-actions">
             <span class="header-update-status">
