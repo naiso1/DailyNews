@@ -4,13 +4,13 @@
     <title>DailyNews automation status</title>
     <link>http://IEWEB01/exterior/</link>
     <description>DailyNews publication status for Power Automate</description>
-    <lastBuildDate>Fri, 23 Oct 2026 04:44:24 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 04:52:53 +0900</lastBuildDate>
     <item>
-      <title>DailyNews exterior success 2026-10-23</title>
+      <title>DailyNews exterior success 2026-10-26</title>
       <link>http://IEWEB01/exterior/</link>
-      <guid isPermaLink="false">DailyNews-exterior-2026-10-23-success</guid>
-      <pubDate>Fri, 23 Oct 2026 04:44:24 +0900</pubDate>
-      <description>{"status":"success","run_date":"2026-10-23","expected_news_date":"2026-10-22","published_news_date":"2026-10-22","updated_at":"2026-10-23T04:44:24+09:00","edition_id":"exterior","run_id":"1b6ca199-072b-4a97-8b49-b376a3682b90"}</description>
+      <guid isPermaLink="false">DailyNews-exterior-2026-10-26-success</guid>
+      <pubDate>Mon, 26 Oct 2026 04:52:53 +0900</pubDate>
+      <description>{"status":"success","run_date":"2026-10-26","expected_news_date":"2026-10-25","published_news_date":"2026-10-25","updated_at":"2026-10-26T04:52:53+09:00","edition_id":"exterior","run_id":"2cbbbdc6-b311-4f87-896c-45432ce3893e"}</description>
     </item>
   </channel>
 </rss>
