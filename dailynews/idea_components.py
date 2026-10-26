@@ -7,7 +7,7 @@ Article admission uses its own automotive-context rules.
 COMPONENT_PATTERNS = {
     "interior": (
         r"\bdisplays?\b|\bscreens?\b|touchscreen|dashboard|console|(?<![a-z])door[ -](?:trim|panel)s?(?![a-z])|steering.wheel|switch|grab.handle|armrest|storage|weatherstrip|cargo|\bboot\b|soundbar|ambient.light|"
-        r"インパネ|加飾|画面|ディスプレイ|モニター|サウンドバー|ドアトリム|コンソール|肘|アームレスト|収納|荷室|スイッチ"
+        r"インパネ|加飾|画面|ディスプレイ|モニター|サウンドバー|ドアトリム|コンソール|肘|アームレスト|収納|荷室|スイッチ|ウェザーストリップ"
     ),
     "exterior": (
         r"bumper|grille|door.handle|roof|tailgate|spoiler|fender|body.panel|rear.wing|bodywork|pillar|paint|coating|joining|bonding|radar|lidar|sensor|laser|in.mold|hot.stamp|recycl|"
@@ -29,6 +29,7 @@ COMPONENT_TOPICS = {
         "荷室・収納": r"storage|cargo|\bboot\b|収納|荷室",
         "アームレスト": r"armrest|アームレスト|肘掛",
         "照明": r"ambient.light|アンビエント|照明",
+        "ウェザーストリップ": r"weather.?strip|ウェザーストリップ",
     },
     "exterior": {
         "ボンネット": r"bonnet|\bhood\b|ボンネット|フード",

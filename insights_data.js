@@ -11,6 +11,7 @@ window.DAILY_INSIGHTS = [
         ideas: {
             jp: [
                 { id: 2047, img: "images/exabase_interior_2047_deab6e81d981a231.png", title: "後席モニターの着脱式ブラケット案", desc: "カロッツェリアの後席用モニターは、カーナビやディスプレイオーディオと組み合わせて使える製品として紹介されている。開発案として、後席用モニターの固定部をネジ留めからマグネット着脱式に変更する試作品を設計する。車種変更時やメンテナンス時に、モニター本体の取り外しと再装着の手間を減らすことを狙う。同じ形状で固定方式が異なる2種の試作品を作り、着脱時間・必要力・保持強度を比較する。 [jp2111]", imagePrompt: "", sourceNewsIds: ["jp2111"], imageProvider: "exabase", imageModel: "GPT-image" },
+                { id: 2056, img: "images/exabase_interior_2056_c51f7a842d35ea57.png", title: "位置合わせしやすい分割剥離紙付きテープ", desc: "風切り音防止テープを貼る位置は、水性ペンでウェザーストリップの接触跡を車体側に写して確認する方法が紹介されている。開発案として、テープ中央の細い剥離紙だけを先に剥がして仮固定し、位置合わせ後に両側の剥離紙を引き抜く仕様を試作する。施工者が接触跡に沿って貼る位置を調整しやすくし、貼り直しと位置ずれを減らすことを狙う。一括剥離と中央仮固定のテープ試作品で、位置ずれ量・貼り直し回数・施工時間と貼付後の剥がれを比較する。 [jp2114]", imagePrompt: "", sourceNewsIds: ["jp2114"], imageProvider: "exabase", imageModel: "GPT-image" },
             ],
             cn: [
                 { id: 2048, img: "images/exabase_interior_2048_b89829f988a3bab7.png", title: "64面クリスタルシフトノブの清掃性向上案", desc: "Denza N8は浮遊センターコンソールに64面のクリスタルドライブセレクターを備えている。開発案として、多面体形状のシフトノブ表面に撥水コーティングを施す構造を試作する。ユーザーが指紋や汚れを拭き取りやすくし、見た目の清潔感を維持することを狙う。無処理試作品とコーティング試作品で、指紋付着後の除去に必要な力と時間を比較する。 [cn1875]", imagePrompt: "", sourceNewsIds: ["cn1875"], imageProvider: "exabase", imageModel: "GPT-image" },

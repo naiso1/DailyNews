@@ -18,10 +18,12 @@ for (const edition of ["interior", "exterior"]) {
     interactionsData: {cn1: {hidden: true}}}, rankingBackState: null,
     showNewsItem(id) { ctx.rankingBackState = {id}; }});
   for (const name of ["escapeHtml", "formatRichText", "normalizeAnalysisRefs", "getNewsLookup", "isGloballyHidden",
-    "resolveNewsItem", "getNewsImageUrl", "getDisplayImageUrl", "renderIdeaDescription", "showNewsItemFromRef"]) {
+    "resolveNewsItem", "getNewsImageUrls", "getNewsImageUrl", "getDisplayImageUrl", "renderIdeaDescription", "showNewsItemFromRef"]) {
     const start = html.indexOf(`        function ${name}(`);
     assert(start >= 0, name);
-    const end = html.indexOf("\n        }", start) + "\n        }".length;
+    const nextLine = html.indexOf("\n", start);
+    const singleLine = html.slice(start, nextLine).trimEnd().endsWith("}");
+    const end = singleLine ? nextLine : html.indexOf("\n        }", start) + "\n        }".length;
     vm.runInContext(html.slice(start, end), ctx);
   }
   const rendered = ctx.renderIdeaDescription({id: 1897,

@@ -259,6 +259,52 @@ class IdeaQualityTests(unittest.TestCase):
         self.assertEqual(audit['rescueAttempts'],2)
         self.assertEqual(audit['withheld'],2)
 
+    def test_supplement_checks_last_untried_article_and_loads_its_original(self):
+        retained, _ = q.review_candidates([self.idea], self.sources, 'exterior', lambda _: self.review(), json.loads)
+        sources = [*self.sources, {'newsId': 'cn95', 'originalDesc': 'Quarterly sales.'}]
+        loaded = []
+        def loader(items):
+            loaded.extend(s['newsId'] for s in items)
+            for source in items:
+                if source['newsId'] == 'cn95':
+                    source['originalDesc'] = 'The car has a glass roof.'
+        kept, audit = q.generate_country('exterior', '2026-10-26', 'cn', sources, [], retained,
+            lambda _: '{"ideas":[]}', json.loads, lambda a, h, n: a[:n],
+            source_loader=loader, max_attempts=0, rescue_attempts=2)
+        self.assertEqual(audit['sourceAttempts'][0]['sourceNewsIds'], ['cn94'])
+        self.assertEqual(audit['sourceAttempts'][1]['sourceNewsIds'], ['cn95'])
+        self.assertIn('cn95', loaded)
+        self.assertEqual(kept, retained)
+
+    def test_supplement_does_not_repeat_proven_anchor_while_another_is_available(self):
+        retained, _ = q.review_candidates([self.idea], self.sources, 'exterior', lambda _: self.review(), json.loads)
+        sources = [*self.sources, {**self.sources[0], 'newsId': 'cn95'}]
+        _, audit = q.generate_country('exterior', '2026-10-26', 'cn', sources, [], retained,
+            lambda _: '{"ideas":[]}', json.loads, lambda a, h, n: a[:n],
+            max_attempts=1, rescue_attempts=2)
+        self.assertEqual([step['sourceNewsIds'] for step in audit['sourceAttempts']],
+                         [['cn95', 'cn94'], ['cn94'], ['cn95']])
+
+    def test_supplement_reaches_sources_beyond_ordinary_attempt_budget(self):
+        sources = [{**self.sources[0], 'newsId': f'cn{i}'} for i in range(10)]
+        _, audit = q.generate_country('exterior', '2026-10-26', 'cn', sources, [], [],
+            lambda _: '{"ideas":[]}', json.loads, lambda a, h, n: a[:n],
+            max_attempts=4, rescue_attempts=2)
+        self.assertEqual([step['sourceNewsIds'] for step in audit['sourceAttempts'][-2:]],
+                         [['cn8'], ['cn9']])
+        self.assertEqual(audit['sourcesChecked'], 10)
+        self.assertEqual(audit['withheld'], 2)
+
+    def test_japanese_weatherstrip_evidence_can_support_interior_idea(self):
+        sentence = 'ドア側のウェザーストリップが車体に当たる場所にテープを貼る。'
+        self.assertEqual(q.focus_evidence({'originalDesc': sentence}, 'interior'), sentence)
+        import auto_update_daily_news as updater
+        from dailynews.editions import get_edition
+        with patch.object(updater, 'EDITION', get_edition('interior')):
+            self.assertFalse(updater._is_out_of_scope_idea('ウェザーストリップの密着性を高める形状案'))
+        self.assertIn('内装の対象には生成指示と同じくウェザーストリップを含む',
+                      q.review_prompt('interior', [], []))
+
     def test_repeated_headline_does_not_hide_window_component_detail(self):
         text=('A new canopy is available.\n'*5)+'The side windows open with hydraulic dampers.'
         focused=q.focus_evidence({'originalDesc':text},'exterior')
