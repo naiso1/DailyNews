@@ -12,7 +12,7 @@ class SourcePolicyTests(unittest.TestCase):
         for url in ('https://not-autoc-one.jp/news', 'https://autoc-one.jp.example.com/news',
                     'https://prtimes.jp/article?reference=autoc-one.jp', 'https://[invalid'):
             self.assertFalse(is_excluded_source(url, 'exterior'))
-        self.assertFalse(is_excluded_source('https://autoc-one.jp/news/5045411/', 'interior'))
+        self.assertTrue(is_excluded_source('https://autoc-one.jp/news/5045411/', 'interior'))
 
     def test_search_wrapper_is_excluded_without_network(self):
         target = quote('https://autoc-one.jp/news/5045411/', safe='')
@@ -25,14 +25,14 @@ class SourcePolicyTests(unittest.TestCase):
         original = {'URL': 'https://prtimes.jp/main/html/rd/p/000000415.000007223.html'}
         mota = {'URL': 'https://autoc-one.jp/news/5045411/'}
         self.assertEqual(filter_sources([mota, original], 'exterior'), [original])
-        self.assertEqual(filter_sources([mota, original], 'interior'), [mota, original])
+        self.assertEqual(filter_sources([mota, original], 'interior'), [original])
 
     def test_publisher_excludes_mota_even_when_resume_recognises_existing_url(self):
         item = dict(url='https://autoc-one.jp/news/5045411/', country='jp', title='自動車フィルム新工法')
         snapshot = dict(excluded_urls=[], rules=[])
         for existing in (set(), {item['url']}):
             self.assertEqual(validate_editorial_publication([item], existing, snapshot, 'exterior'), [])
-        self.assertEqual(validate_editorial_publication([item], set(), snapshot, 'interior'), [item])
+        self.assertEqual(validate_editorial_publication([item], {item['url']}, snapshot, 'interior'), [])
 
 
 if __name__ == '__main__':

@@ -2,6 +2,37 @@
   "interior": {
     "rss_feeds": [
       {
+        "name": "PR TIMES（自動車・内装関連）",
+        "url": "https://prtimes.jp/index.rdf",
+        "country": "日本",
+        "require_article_image": true,
+        "include_pattern": "自動車|車両|車体|四輪|乗用車|モビリティ|オートモーティブ|内装|車載|コックピット|ステアリング|ドアトリム|シート|座席|\\b(?:automotive|vehicle|automobile|car|EV|SUV|cockpit)\\b"
+      },
+      {
+        "name": "PR TIMES（林テレンプ）",
+        "url": "https://prtimes.jp/companyrdf.php?company_id=57165",
+        "country": "日本",
+        "require_article_image": true
+      },
+      {
+        "name": "PR TIMES（東海理化）",
+        "url": "https://prtimes.jp/companyrdf.php?company_id=88570",
+        "country": "日本",
+        "require_article_image": true
+      },
+      {
+        "name": "PR TIMES（ヴァレオジャパン）",
+        "url": "https://prtimes.jp/companyrdf.php?company_id=4446",
+        "country": "日本",
+        "require_article_image": true
+      },
+      {
+        "name": "PR TIMES（オートリブ）",
+        "url": "https://prtimes.jp/companyrdf.php?company_id=97129",
+        "country": "日本",
+        "require_article_image": true
+      },
+      {
         "name": "レスポンス",
         "url": "https://news.yahoo.co.jp/rss/media/rps/all.xml",
         "country": "日本"

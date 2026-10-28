@@ -2,9 +2,10 @@
 from urllib.parse import parse_qs, urlsplit
 
 
-# 2026-10-28: exterior readers requested the original publisher instead of MOTA.
+# 2026-10-28: readers confirmed MOTA's ad-permission wall; use the original
+# publisher for both editions. Historical independent reports retain their IDs.
 # A bot challenge or a single connection failure never adds a host to this list.
-EXCLUDED_HOSTS = {"exterior": ("autoc-one.jp",)}
+EXCLUDED_HOSTS = {"interior": ("autoc-one.jp",), "exterior": ("autoc-one.jp",)}
 
 
 def is_excluded_source(url, edition_id):

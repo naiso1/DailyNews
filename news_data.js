@@ -14098,9 +14098,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "・世界最大級の家電見本市「 CES 2026 」に、ALCANTARA(R)（アルカンターラ）が大手ハイテクブランドTCLのパートナーとして参画 ・BMW上海デザインワークスと共同開発された次世代モビリティのためのシートモデル「 TCL Future Seat Buck",
 
-        url: "https://autoc-one.jp/news/5039080/",
+        url: "https://prtimes.jp/main/html/rd/p/000000117.000044421.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-01-10",
 
@@ -14108,7 +14108,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202601/10100713430_1c31.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/44421/117/44421-117-7a916eef82c081cbb74f39901319ca40-1280x853.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -36036,9 +36036,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "オートリブとTensorが「Tensor Robocar」向けに世界初の折り畳み式ステアリングホイールを開発。2026年後半量産予定で、自動運転時格納可能。アダプティブセーフティを実現。",
 
-        url: "https://autoc-one.jp/news/5039574/",
+        url: "https://prtimes.jp/main/html/rd/p/000000024.000097129.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-02-04",
 
@@ -36046,7 +36046,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202602/04170748227_1e8c.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/97129/24/97129-24-7f6423bcbc62d4c565dd96068e048c14-3900x1953.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -42076,9 +42076,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "ヴァレオのXRゲーミング「R:Racing」が、ルノー・コリアの新型「フィランテ」に搭載。2024年SXSWで発表された世界初の量産車統合XR体験で、車両センサーとAIを活用し、没入型ゲーム体験を実現。安全性を維持しつつ、乗り物酔いを軽減。",
 
-        url: "https://autoc-one.jp/news/5039724/",
+        url: "https://prtimes.jp/main/html/rd/p/000000209.000004446.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-02-12",
 
@@ -42086,7 +42086,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202602/12220712773_d64d_l.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/4446/209/4446-209-a0dc217dc7b190cfdc8b8a090c1483a5-3557x1290.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -44748,9 +44748,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "東海理化は、自動車用シートベルト端材を再生し、尾州編技術で生地化した新素材「尾州編 再生シートベルト生地」を、2026年2月19日～20日開催の「第23回 JAPAN YARN FAIR & THE BISHU」で初公開する。",
 
-        url: "https://autoc-one.jp/news/5039770/",
+        url: "https://prtimes.jp/main/html/rd/p/000000277.000088570.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-02-16",
 
@@ -44758,7 +44758,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202602/16120743034_cc7c.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/88570/277/88570-277-9db9cd283052ff8a6211cc1e2e872577-3900x1856.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -53192,9 +53192,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "林テレンプとNDR Auto Componentsが設立した合弁会社NDR HAYASHI AUTOMOTIVE INDIA PRIVATE LIMITED（NHI）は2026年1月1日からインド・グルグラムで稼働開始。スズキ、トヨタ、ホンダ向け内装部品製造を展開。",
 
-        url: "https://autoc-one.jp/news/5039947/",
+        url: "https://prtimes.jp/main/html/rd/p/000000031.000057165.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-02-25",
 
@@ -53202,7 +53202,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202602/25150721603_4ab2_o.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/57165/31/57165-31-1d9492b694261baff1ee83ec4a552381-261x155.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -60360,9 +60360,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "スマホの双方向操作が、ついに有線CarPlay対応のホンダ純正ナビでも可能に!接続したスマートフォンの映像を、迫力あるカースピーカーの音声と共に走行中も同乗者がお楽しみいただけます! APPミラータッチファームウェアアップデート。",
 
-        url: "https://autoc-one.jp/news/5040142/",
+        url: "https://prtimes.jp/main/html/rd/p/000000227.000039659.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-03-05",
 
@@ -60370,7 +60370,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202603/05180715235_0f99.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/39659/227/39659-227-d2d199de5129eea7e469b45cf1caaed3-1440x760.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -68686,9 +68686,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "株式会社東海理化は、日本自動車会議所主催の第5回クルマ・文化・社会・パートナーシップ大賞で、シートベルト端材を有効活用するアップサイクルブランド『THINK SCRAP』が環境貢献賞を受賞しました。",
 
-        url: "https://autoc-one.jp/news/5040355/",
+        url: "https://prtimes.jp/main/html/rd/p/000000281.000088570.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-03-16",
 
@@ -68696,7 +68696,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202603/16130714981_66b3.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/88570/281/88570-281-e89f3b49687838fbb50029f87f4c5f0d-1358x591.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -71306,9 +71306,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "ユニオンエタニティは、花粉や泥汚れ対策として防水600Dオックスフォード素材の「ドライブシート」を発売。ペットや子ども、荷物の乗車時に後部座席を保護し、可視メッシュ窓や安全ベルト付属など快適装備も備える。",
 
-        url: "https://autoc-one.jp/news/5040411/",
+        url: "https://prtimes.jp/main/html/rd/p/000000058.000030950.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-03-18",
 
@@ -71316,7 +71316,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202603/18110712222_9298.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/30950/58/30950-58-c5874a8653b9161a89ba39d6d68287a9-1200x1200.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -195632,9 +195632,9 @@ window.LOADED_NEWS_DATA = [
 
         desc: "ディーフはスズキ車専用液晶保護フィルムを販売開始。パナソニックやケンウッド製ナビなど10製品に対応し、映り込み防止と指紋防止機能を備える。スズキセレクトプラス用品として販売店でも購入可能だ。",
 
-        url: "https://autoc-one.jp/news/5043537/",
+        url: "https://prtimes.jp/main/html/rd/p/000000021.000150682.html",
 
-        source: "MOTA（モータ）",
+        source: "PR TIMES",
 
         date: "2026-08-06",
 
@@ -195650,7 +195650,7 @@ window.LOADED_NEWS_DATA = [
 
         country: "jp",
 
-        img: "https://cdn.autoc-one.jp/images/article/202608/06070738962_52de_o.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/150682/21/150682-21-df58e531398b0bba3f0ad3e92fa4312b-1619x971.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
 
         note: ""
 
@@ -230782,8 +230782,8 @@ window.LOADED_NEWS_DATA = [
         id: "jp1896",
         title: "CRAFTWORKS、RAV4用ダッシュボードトレイを仕様見直し後再販",
         desc: "Fun Standardが展開するCRAFTWORKSは、トヨタRAV4（60系）専用のダッシュボードトレイを2026年9月中旬より販売再開した。8月の初回販売時に不具合が見つかり一時停止していたが、仕様見直しを経て再販に至った。本製品はナビ背面のデッドスペースを活用し、マグネット式スマホホルダー2個と滑り止めマットを搭載する。素材には耐熱ABS樹脂を採用し、両面テープによる30秒での設置を可能にした。参考価格は3,780円からで、適合車種はZ・アドベンチャー・GRスポーツの各グレードとなる。",
-        url: "https://autoc-one.jp/news/5044567/",
-        source: "MOTA（モータ）",
+        url: "https://prtimes.jp/main/html/rd/p/000001172.000079792.html",
+        source: "PR TIMES",
         date: "2026-09-24",
         tags: ["AR", "コネクテッド", "コックピット", "新素材"],
     
@@ -230793,7 +230793,7 @@ window.LOADED_NEWS_DATA = [
         interiorReason: "The article details a specific interior accessory (dashboard tray) with concrete",
         imageInterior: true,
         country: "jp",
-        img: "https://cdn.autoc-one.jp/images/article/202609/24180729326_6712.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/79792/1172/79792-1172-469f8b4eaa8eb40f32441a6bd92ee103-1920x1280.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
         note: ""
     },
     {
@@ -238709,8 +238709,8 @@ window.LOADED_NEWS_DATA = [
         id: "jp2007",
         title: "Ottocast U2Air Edge、放熱設計強化で長時間接続安定化",
         desc: "Ottocastは有線CarPlayやAndroid Autoをワイヤレス化する新型アダプター「U2Air Edge」を発売した。5GHz Wi-Fiと1.2GHzプロセッサーに加え、放熱孔を設けた新設計で車内環境下での長時間使用時の安定性を高めている。また、本体のボタン操作で登録済みスマートフォン2台の接続先を切り替えられる機能も備え、複数人で車両を共有する際の利便性向上を図っている。",
-        url: "https://autoc-one.jp/news/5045008/",
-        source: "MOTA（モータ）",
+        url: "https://prtimes.jp/main/html/rd/p/000000006.000175940.html",
+        source: "PR TIMES",
         date: "2026-10-11",
         tags: ["AR", "AI"],
     
@@ -238719,7 +238719,7 @@ window.LOADED_NEWS_DATA = [
         interiorReason: "Wireless CarPlay adapter directly impacts center console cable management and HM",
         imageInterior: true,
         country: "jp",
-        img: "https://cdn.autoc-one.jp/images/article/202610/11100715350_a320.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/175940/6/175940-6-2a6b57f9b9a8665e1d400a4ad00efb74-1672x941.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
         note: ""
     },
     // 2026-10-12 (google検索からExcel sheet2_llm_targets)

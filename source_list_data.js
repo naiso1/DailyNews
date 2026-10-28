@@ -4,6 +4,31 @@
 window.DAILYNEWS_CONFIGURED_SOURCES = [
   {
     "country": "日本",
+    "name": "PR TIMES（自動車・内装関連）",
+    "rssUrl": "https://prtimes.jp/index.rdf"
+  },
+  {
+    "country": "日本",
+    "name": "PR TIMES（林テレンプ）",
+    "rssUrl": "https://prtimes.jp/companyrdf.php?company_id=57165"
+  },
+  {
+    "country": "日本",
+    "name": "PR TIMES（東海理化）",
+    "rssUrl": "https://prtimes.jp/companyrdf.php?company_id=88570"
+  },
+  {
+    "country": "日本",
+    "name": "PR TIMES（ヴァレオジャパン）",
+    "rssUrl": "https://prtimes.jp/companyrdf.php?company_id=4446"
+  },
+  {
+    "country": "日本",
+    "name": "PR TIMES（オートリブ）",
+    "rssUrl": "https://prtimes.jp/companyrdf.php?company_id=97129"
+  },
+  {
+    "country": "日本",
     "name": "レスポンス",
     "rssUrl": "https://news.yahoo.co.jp/rss/media/rps/all.xml"
   },
