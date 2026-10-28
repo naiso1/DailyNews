@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-10-28 01:35";
+window.NEWS_UPDATED_AT = "2026-10-29 01:40";
 
 window.LOADED_NEWS_DATA = [
 
@@ -248115,6 +248115,759 @@ window.LOADED_NEWS_DATA = [
         sourceExcerpt: "As nice as it is in the front of the Audi Q9, the rear seats are where you really want to be.",
         country: "eu",
         img: "https://carwow-uk-wp-3.imgix.net/audi-q9-sq9-review-thumbnail-draft-1-2-scaled.jpg?auto=format&cs=tinysrgb&fit=crop&h=800&ixlib=rb-1.1.0&q=60&w=1600",
+        note: ""
+    },
+    // 2026-10-28 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2135",
+        title: "トヨタ クラウンエステート 年末改良でG追加か 本革シートやベンチレーションの扱いに注目",
+        desc: "クラウンエステートの2026年末改良では、エントリーグレード「G」が追加される可能性が指摘されている。現行Zには10スピーカーのトヨタプレミアムサウンドシステムやデジタルインナーミラーが標準装備されており、Gでは本革シートやベンチレーションなどの快適装備が省かれるかどうかが注目点となっている。",
+        url: "https://news.yahoo.co.jp/articles/bffeb6e9af822863abdbb1bcccc73764262fdd97",
+        source: "carview!",
+        date: "2026-10-28",
+        tags: ["シート", "新素材", "音響"],
+    
+        sourceExcerpt: "今回の北米仕様の変更は小規模なもので、ボディカラー「ブラック」に代わって新色「インクド」が追加されたほか、上級グレードでは従来オプションだったパノラミックビューモニターや渋滞時支援などの運転支援機能が標準装備となりました。",
+        interiorScore: 59,
+        interiorReason: "The article details specific interior equipment differences between the 'Z' and",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-00010008-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2136",
+        title: "ホンダステップワゴンに赤アルカンターラ内装とBBSホイール",
+        desc: "オーナーが休日に自ら張り替えた赤いアルカンターラの内装が特徴のホンダ「ステップワゴン」である。シートカバーにはクラッツィオ製を採用し、スポーティな雰囲気を演出している。また、若い頃から憧れていたBBS製の20インチホイールを装着し、クールレーシングのエアロパーツと合わせてカスタマイズされている。",
+        url: "https://news.yahoo.co.jp/articles/c18af051496acb9f6397977b61807e15c804e18a",
+        source: "Auto Messe Web",
+        date: "2026-10-28",
+        tags: ["シート", "カスタマイズ"],
+    
+        sourceExcerpt: "自ら手を加えた赤いアルカンターラの内装や、家族みんなが好きなクレヨンしんちゃんのアイテムにも注目だ。",
+        interiorScore: 90,
+        interiorReason: "Article details a specific DIY interior modification using red Alcantara and Cla",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-00010005-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2137",
+        title: "レアル、ハリアー用5mm小径ステアリングを6タイプ展開",
+        desc: "名古屋プラミングのレアル事業部は、トヨタ「ハリアー」80系向けに純正スイッチ類を移設した37φの小径ステアリングを販売する。ウォルスドルフ社製ナッパレザーを使用し、カーボンやウッドなど6つの素材バリエーションを用意している。",
+        url: "https://news.yahoo.co.jp/articles/29b11870ae8e70bb2be8ae12659ed1fac460b571",
+        source: "Auto Messe Web",
+        date: "2026-10-28",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "純正ステアリングの中央部に組み込まれているエアバッグ、オーディオスイッチ、クルーズコントロールのスイッチ類は、交換後のフレームへそのまま移設される。",
+        interiorScore: 93,
+        interiorReason: "Highly relevant for interior trim and HMI planning; details specific materials (",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-00010003-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2138",
+        title: "レクサスTZ、薄型パノラマルーフとセンサリーコンシェルジュ採用",
+        desc: "レクサスはBEV専用SUV「TZ」に、世界最大級の開口部を持つ薄型可動パノラマルーフを備えた。室内は3列シート構成で、助手席と2列目にオットマンを設定し、光・音・香りを連動させるセンサリーコンシェルジュやMark Levinsonオーディオを搭載する。",
+        url: "https://news.yahoo.co.jp/articles/4a40e8c78a236e42ef20a2220ae4dbb4034e19c7",
+        source: "くるまのニュース",
+        date: "2026-10-28",
+        tags: ["AR", "シート", "EV", "音響"],
+    
+        sourceExcerpt: "また、レクサスのSUVとして初めて助手席と2列目シートにオットマンを設定。",
+        interiorScore: 74,
+        interiorReason: "Detailed flagship cabin features including Sensory Concierge (light/sound/smell)",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-01132439-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2139",
+        title: "マツダ、米国でCX-70販売終了CX-90に2列シート追加し統合",
+        desc: "マツダは米国の大型SUV「CX-70」の販売を終了し、3列シートの「CX-90」に2列シート車を設定してラインアップを統合する。2027年型から導入される新モデルでは、リアサスペンションの改良により乗り心地の向上を図る。",
+        url: "https://news.yahoo.co.jp/articles/ab2e566be10fcb050a3118a532a3a1b221f67fbe",
+        source: "日刊自動車新聞",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "3列シートの大型SUV「CX-90」の2027年型から、2列シート車を新たに設定する。",
+        interiorScore: 43,
+        interiorReason: "The news item discusses a lineup integration where the CX-90 will offer a 2-row",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-00706623-netdenjd-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2140",
+        title: "マツダ新型CX-5、生成AI「ジェミニ」を無線更新で追加",
+        desc: "マツダは10月27日、新型CX-5のインフォテインメントシステムにグーグルの生成AI「ジェミニ」を追加した。米国や日本仕様など4地域が対象で、日本語会話にも対応する。「ガラスが曇っている」といった自然な指示でエアコンを調整できる点が特徴だ。無線更新により無償で提供される。",
+        url: "https://news.yahoo.co.jp/articles/5f65a123f5828aa8cd58895f690ca1eb0f8304aa",
+        source: "日刊自動車新聞",
+        date: "2026-10-28",
+        tags: ["コネクテッド", "AI"],
+    
+        sourceExcerpt: "ユーザーはインフォテインメントシステムの表示に沿って無線更新でジェミニを追加でき、費用も発生しないという。",
+        interiorScore: 95,
+        interiorReason: "The article focuses on the integration of Google Gemini into the Mazda CX-5's in",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-00706561-netdenjd-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2141",
+        title: "アイオニック3ロングレンジ、欧州仕様の静粛性と操縦性を評価",
+        desc: "ヒョンデ・アイオニック3ロングレンジは、61.0kWhバッテリー搭載で495kmの航続距離を確保する。試乗では車内が非常に静かで、トルコでの走行でも欧州開発らしい落ち着きのある乗り心地を確認できた。ステアリングは正確だがボディロールはやや大きく、筆者は扱いやすいと評価している。",
+        url: "https://news.yahoo.co.jp/articles/2fc5fdaaa3ead23920b52d2b715794e7d044ad5e",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "ステアリングは、路面からのフィードバックが乏しいものの、重み付けは丁度良い。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-01286061-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2142",
+        title: "メルセデス・ベンツ190 SLがオークションで落札されず",
+        desc: "1960年式のメルセデス・ベンツ190 SL（W121）が「Bring a Trailer」のオークションに出されたが、最高入札額74,105米ドルでは最低落札価格に届かず落札に至らなかった。内装は赤いレザーシートとベージュの布製ソフトトップを備え、2008年にレストアされている。",
+        url: "https://news.yahoo.co.jp/articles/6ee7aa4f8a6ccfd04e848826eda2f492b811c5bb",
+        source: "AUTO BILD JAPAN Web",
+        date: "2026-10-28",
+        tags: ["AI", "シート", "新素材"],
+    
+        sourceExcerpt: "赤いレザーシート、ベージュの布製ソフトトップ – 本来なら、この「メルセデス・ベンツ 190 SL」は、クラシックカーファンが好む要素を数多く備えているはずだ。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261028-00010002-autobild-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1937",
+        title: "安価なヘッドユニットに中国向けアプリの自動復元スクリプト",
+        desc: "シビックオーナーが安価なアフターマーケットヘッドユニットをClaude Codeで解析し、WebView搭載の音声アシスタントやBaidu位置情報サービス、通話録音機能など不要なソフトウェアを確認した。",
+        url: "https://www.thedrive.com/news/cheap-aftermarket-head-units-are-loaded-with-spyware-by-the-way",
+        source: "The Drive",
+        date: "2026-10-28",
+        tags: ["AI"],
+    
+        sourceExcerpt: "One Civic owner purchased a cheap aftermarket head unit off Amazon, and",
+        sourceExcerptEnd: "its magic on it, like it would a smart TV.",
+        interiorScore: 78,
+        interiorReason: "Focuses on aftermarket head unit software (HMI) and privacy issues, directly rel",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.thedrive.com/wp-content/uploads/2026/10/reddit-claude-hero3.jpg?quality=85",
+        note: ""
+    },
+    {
+        id: "us1938",
+        title: "ポルシェ、次期718用EVプラットフォームをアウディへ提供",
+        desc: "ポルシェは次期718ボクスターとカイマンの電動プラットフォームを、アウディのスポーツカー「C-Sport」に提供すると明かした。アウディ車には初となる電動タルガトップやシミュレートされたギアチェンジが備わる見込みである。",
+        url: "https://www.motor1.com/news/813516/audi-electric-sports-car-porsche-based/",
+        source: "Motor1",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Case in point: Porsche has effectively confirmed that Audi's upcoming electric sports",
+        sourceExcerptEnd: "the platform developed for the next-generation 718 Boxster and Cayman.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/rK7j39/s3/2025-audi-concept-c.jpg",
+        note: ""
+    },
+    {
+        id: "us1939",
+        title: "アストンマーティンValhalla Spiderにカーボン製Touringシート標準採用",
+        desc: "アストンマーティンはミッドシップハイブリッドのオープンモデル「Valhalla Spider」を発表した。内装では新設計のカーボンファイバー製Touringシートが標準装備され、オプションでクーペ仕様のスポーツシートも無償選択できる。さらに屋根を開放した際の風切り音対策として折りたたみ式のウィンドディフレクターが備わる。",
+        url: "https://www.motor1.com/news/813475/aston-martin-valhalla-spider-debuts/",
+        source: "Motor1",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "The Valhalla Spider marks a first for Aston Martin: It's the brand's first production mid-engined supercar with an open cockpit.",
+        interiorScore: 63,
+        interiorReason: "Mentions specific interior components including a standard carbon-fiber Touring",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/ZnlQ4e/s3/aston-martin-valhalla-spider.jpg",
+        note: ""
+    },
+    {
+        id: "us1940",
+        title: "日産SEMA出展ZとDatsun S30の競技特化モデルを披露",
+        desc: "日産はSEMAでProject NAT2とDatsun S30 Conceptを展示した。前者はSabelt製シートやロールケージなど競技仕様の内装を備え、後者は現行Zと同様のツインターボV6を搭載しクラシックなボディにモダンな動力システムを組み合わせた構成となっている。",
+        url: "https://www.carscoops.com/2299303/nissan-z-datsun-restomod-sema-show-vehicles/",
+        source: "CarScoops",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "The cabin has been stripped out and includes a roll cage, Sabelt steering wheel, new paddle shifters, a custom dashboard, and Sabelt racing seats.",
+        interiorScore: 46,
+        interiorReason: "The article details specific interior modifications for a track-focused concept",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.carscoops.com/img/gallery/nissan-brings-datsun-restomod-and-scca-track-z-to-sema/l-intro-1793189305.jpg",
+        note: ""
+    },
+    {
+        id: "us1941",
+        title: "トヨタ シエナ リコール 第2列シートバックが衝突時に動く恐れ",
+        desc: "トヨタは2022〜2026年式シエナの約22.8万台をリコールし、7人乗り車の中間列キャプテンズチェアで衝突時のシートバック移動リスクに対処する。大半の車両はソフトウェア更新で対応し、約200台には異なるリクライナ機構を持つ新しいシートバックを装着する。",
+        url: "https://www.jalopnik.com/2298546/toyota-recalls-228000-sienna-minivans-second-row-seat-crash-safety/",
+        source: "Jalopnik",
+        date: "2026-10-28",
+        tags: ["シート", "安全"],
+    
+        sourceExcerpt: "Toyota discovered that in certain frontal collisions, the load produced by the",
+        sourceExcerptEnd: "the seat backs to potentially move around during the crash.",
+        interiorScore: 50,
+        interiorReason: "Seat recliner mechanism and belt pretensioner interaction defect with specific f",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/toyota-recalls-228000-siennas-over-second-row-seat-backs-that-could-move-around-in-a-crash/l-intro-1793121065.jpg",
+        note: ""
+    },
+    {
+        id: "us1942",
+        title: "アストンマーティンValhalla Spider、カーボン製ツーリングシートとフレームレス化されたダイヘドラルドアを備える",
+        desc: "Valhalla Spiderは屋根の有無にかかわらずスムーズな乗降性を確保するため、カーボンファイバー製のTouring Seatを標準装備とする。また、従来のダイヘドラルドアはフレームレスデザインへ移行し、ガラスの曲率も調整されて操作性が向上している。",
+        url: "https://www.jalopnik.com/2298994/aston-martin-valhalla-spider-debuts-217-mph-top-speed/",
+        source: "Jalopnik",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "A new carbon fiber Touring Seat comes standard on the Valhalla Spider,",
+        sourceExcerptEnd: "can be optioned at no extra cost for better support.",
+        interiorScore: 64,
+        interiorReason: "The article provides specific details on interior components relevant to product",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/aston-martin-valhalla-spider-wants-you-to-go-topless-at-217-mph/l-intro-1793133257.jpg",
+        note: ""
+    },
+    {
+        id: "us1943",
+        title: "アストンマーティンValhalla Spiderの赤いカーボン内装公開",
+        desc: "2028年型アストンマーティンValhalla Spiderの内装写真が公開された。赤を基調としたインテリアにはカーボンファイバー素材が組み込まれ、センターコンソールには金メッキのシフトノブが配置されている。また、高G力でのコーナリング時に体を固定するための軽量パフォーマンスシートも備わっている。",
+        url: "https://www.caranddriver.com/photos/a74248637/2028-aston-martin-valhalla-spider-revealed-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-10-28",
+        tags: ["シート", "センターコンソール", "新素材"],
+    
+        sourceExcerpt: "This Valhalla Spider features a predominantly red interior, which is interwoven with a mix of exotic materials like real carbon fiber.",
+        interiorScore: 99,
+        interiorReason: "Detailed interior photo gallery showcasing specific materials (red leather, carb",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/b4e4c3bf-18d4-467d-bbda-a5e39d34790a.jpg",
+        note: ""
+    },
+    {
+        id: "us1944",
+        title: "W222 Sクラス中古が2万ドル台、エアサスとマッサージシート搭載",
+        desc: "W222型メルセデス・ベンツSクラスの中古価格は新車比で大幅に低下し、2万ドル台から流通している。内装には通気・加熱・マッサージ機能付きシートやオープンポアウッド仕上げが採用され、ステレオカメラによる路面予測サスペンション制御も備わる。",
+        url: "https://www.topspeed.com/w222-s-class-costs-economy-car-money/",
+        source: "Top Speed",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "It has massaging seats, an air suspension that floats over broken tarmac, and a cabin finished in open-pore wood.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/04/2014-mercedes-benz-s550-sedan-6.jpg",
+        note: ""
+    },
+    {
+        id: "us1945",
+        title: "トヨタ カムリハイブリッド、RAV4やハイランダー超える燃費と室内空間",
+        desc: "2026年型カムリハイブリッドは都市部52mpgの燃費を実現し、同社のSUVであるハイランダーやRAV4ハイブリッドを上回る。後席レッグルーム38インチを確保した広々とした座席空間と、低重心による安定した乗り心地が特徴で、年間走行距離1万2000マイルでの燃料コスト差は約300ドルに達する。",
+        url: "https://www.topspeed.com/toyota-camry-hybrid-makes-strong-case-against-rav4-highlander/",
+        source: "Top Speed",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "Starting at $29,600, the Camry is now hybrid only, rated at up",
+        sourceExcerptEnd: "the city, and it still seats five adults without drama.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/12/image-212.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1910",
+        title: "パリモーターショーでLeapmotorがStellantisの注目を集める",
+        desc: "Leapmotorは小規模な出展だったが、Stellantis傘下ブランドの中で最大のインパクトを持つ可能性があると指摘されている。",
+        url: "https://www.autocar.co.uk/opinion/business-electric-vehicles/why-bland-leapmotor-was-real-star-paris-motor-show",
+        source: "AUTOCAR UK",
+        date: "2026-10-28",
+        tags: ["パリモーターショー2026"],
+    
+        eventTags: ["パリモーターショー2026"],
+        sourceExcerpt: "'Jam tomorrow' was the alternative theme on the Stellantis stand at Paris.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/dsc_4483_0.jpg?itok=gYJDXmZY",
+        note: ""
+    },
+    {
+        id: "eu1911",
+        title: "GFG Style Peralta D、手打ち銅パネルとシャンパンホルダーを備える",
+        desc: "Fabrizio Giugiaro設計の1台限定車Peralta Dは、Maserati GranTurismoをベースにカーボンファイバー構造へ手打ち銅パネルを配置している。内装では銅とブラウンのアップホルスターリーを採用し、後席にはシャンパンホルダーや照明付きバニティミラーが備わる。",
+        url: "https://www.autoexpress.co.uk/news/370775/futuristic-gfg-style-peralta-d-maserati-granturismo-copper-body",
+        source: "Auto Express",
+        date: "2026-10-28",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The cabin can’t fully hide its Maserati origins, but GFG has certainly had a go, with a lurid mix of copper and brown upholstery.",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/GFG%20Style%20Peralta%20D%20-%20front%203_4%20studio_edfvce.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1912",
+        title: "GFG Style、マセラティGranTurismoをベースに銅製ボディのPeralta D公開",
+        desc: "Fabrizio Giugiaroがデザインを手掛けたGFG Style Peralta Dは、マセラティGranTurismoをベースにしたワンオフスーパーカーである。最大の特徴は、手作業で叩き上げられた純銅製のボディーワークを採用している点にある。",
+        url: "https://www.autoexpress.co.uk/news/370774/new-maserati-based-gfg-style-peralta-d-supercar-pictures",
+        source: "Auto Express",
+        date: "2026-10-28",
+        tags: ["AR"],
+    
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/GFG%20Style%20Peralta%20D%20-%20front%203_4%20studio_edfvce.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1913",
+        title: "レンジローバー・スポーツ・エレクトリックのレビュー",
+        desc: "Land Rover Range Rover Sport Electricレビュー：全地形対応力と静粛性を両立したEV Steve Walker氏によるAuto Expressのレビューでは、Range Rover Sport Electricはオフロードでの圧倒的な能力と、オンロードにおける洗練さ。",
+        url: "https://www.autoexpress.co.uk/land-rover/range-rover-sport/electric",
+        source: "Auto Express",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Cheap to run - for a Range Rover Sport",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/Range%20Rover%20Sport%20Electric%202026%20UK-11.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1914",
+        title: "アストンマーティンValhalla Spider、カーボン製Touringシートと収納式ウィンドディフレクター採用",
+        desc: "アストンマーティンはValhallaのコンバーチブル版Spiderを公開した。内装では屋根開閉時の乗降性を高める新設計のカーボンファイバー「Touring」シートを採用し、風防として3分割で15リットルのサイドシル収納に格納できるウィンドディフレクターを搭載している。",
+        url: "https://www.autoexpress.co.uk/aston-martin/370766/new-aston-martin-valhalla-spider-very-british-217mph-convertible",
+        source: "Auto Express",
+        date: "2026-10-28",
+        tags: ["シート"],
+    
+        sourceExcerpt: "Inside, there’s also a new carbon fibre ‘Touring’ seat to make it",
+        sourceExcerptEnd: "hip-hugging design back in at no extra cost if preferred.",
+        interiorScore: 54,
+        interiorReason: "The article details specific interior adaptations for the convertible model, inc",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/Aston%20Martin%20Valhalla%20Spider%202026-2.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn1902",
+        title: "Epicland X9のCATL製バッテリー、衝突火災後も無傷を確認",
+        desc: "中国で発生したEpicland X9の後方追突事故では車両に火災が発生したが、調査の結果、火源は燃料系であり、CATL製のリン酸鉄リチウムイオン電池パックは無傷だったと報告されている。",
+        url: "https://carnewschina.com/2026/10/28/ev-battery-safety-proven-the-hard-way-an-epicland-x9-battery-remains-intact-after-severe-collision-fire/",
+        source: "CarNewsChina - All",
+        date: "2026-10-28",
+        tags: ["EV", "バッテリー", "安全"],
+    
+        sourceExcerpt: "Safety performanceBased on the company’s response, the fire originated from the vehicle’s",
+        sourceExcerptEnd: "to the fuel system – rather than the battery pack.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/e688aae5b18f2026-10-28-22-29-27-e1793198780160.png",
+        note: ""
+    },
+    {
+        id: "cn1903",
+        title: "FAVベストン ポニーの5ドアモデルが販売開始",
+        desc: "FAWは中国市場で5ドアのBestune Ponyを発売しました。3ドアモデルと比較して全長が350mm、ホイールベースが262mm拡大し、4人乗り仕様と最大328km（CLTC）の航続距離を実現しています。価格は4万4900元から設定されています。",
+        url: "https://carnewschina.com/2026/10/28/five-door-faw-bestune-pony-launched-in-china-at-6735-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-10-28",
+        tags: [],
+    
+        sourceExcerpt: "The five-door modification of the FAW Bestune Pony (known as Bestune Xiaoma",
+        sourceExcerptEnd: "China with a starting price of 44,900 yuan (6,735 USD).",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/bestune_pony_xiaoma-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1904",
+        title: "理想汽車、2026年型i6にQualcomm製チップとデュアルゼロ重力シートを採用",
+        desc: "Li Autoは2026年型Li i6を中国で発売し、期間限定価格は35,800ドルからとなった。車内にはQualcomm 8797チップとデュアルゼログラビティシートが採用され、29インチ6Kディスプレイや-6℃冷却冷蔵庫も備わる。",
+        url: "https://carnewschina.com/2026/10/28/li-auto-launches-2026-li-i6-in-china-upgraded-hardware-and-starting-at-35800-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-10-28",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "Other premium features include a 29-inch 6K panoramic front screen, a 21-inch",
+        sourceExcerptEnd: "and an onboard refrigerator capable of cooling down to -6°C.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/e59bbee78987-113.png",
+        note: ""
+    },
+    {
+        id: "cn1905",
+        title: "BYDシーガルは時速140kmでのタイヤバースト試験を通過した",
+        desc: "BYDの2代目Seagullは中国で時速140km走行中の急激なタイヤパンク試験に成功し、車体の安定性を維持した。65,900元からという価格帯では珍しく、LiDAR搭載のDiPilot 300や15.6インチディスプレイ、シートマッサージ機能など快適装備も備える。",
+        url: "https://carnewschina.com/2026/10/28/second-gen-byd-seagull-completed-140-km-h-tire-blowout-test/",
+        source: "CarNewsChina - All",
+        date: "2026-10-28",
+        tags: ["AR", "ディスプレイ", "シート", "バッテリー"],
+    
+        sourceExcerpt: "The new BYD Seagull can be equipped with a LiDAR-based God’s Eye (DiPilot 300) assisted driving system.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/byd_seagull_tire-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1906",
+        title: "CATLが全固体電池の試作容量を20Ahに拡大し、2027年の小規模量産を目指している",
+        desc: "CATLは全固体電池開発を20Ahサンプル試験へ進め、2027年の小量生産と約500Wh/kgのエネルギー密度達成を目標としています。ただし硫化物電解質の界面安定性や製造歩留まりが課題であり、曽会長は技術成熟度を9段階中の4段階と評価しています。",
+        url: "https://carnewschina.com/2026/10/28/catl-advances-20-ah-solid-state-battery-cells-ahead-of-2027-trial-production/",
+        source: "CarNewsChina - All",
+        date: "2026-10-28",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Toyota and Idemitsu aim to commercialise sulfide-based all-solid-state batteries for battery-electric vehicles",
+        sourceExcerptEnd: "has targeted mass production in the second half of 2027.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/image-5.png",
+        note: ""
+    },
+    {
+        id: "cn1907",
+        title: "GWMがハバルH10の上位モデルとしてWEYランシャンを投入",
+        desc: "GWMは中国市場でHaval H10の高級版となる新型Wey Lanshanを投入しました。内装ではデュアルチャンバーエアサスペンションと後輪ステアリングを備え、2リッターターボとモーターによるシステム出力687馬力を発揮します。",
+        url: "https://carnewschina.com/2026/10/28/gwm-releases-new-wey-lanshan-as-a-luxury-version-of-the-haval-h10/",
+        source: "CarNewsChina - All",
+        date: "2026-10-28",
+        tags: [],
+    
+        sourceExcerpt: "At the same time, the Lanshan adopts dual-chamber air suspension and rear-wheel steering.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/gwm_wey_lanshan_new-1-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1908",
+        title: "CATLが9MWhのESS「Tener+」でコンテナ数を最大40%削減",
+        desc: "CATLは2026年10月28日、オーストラリア・メルボルンで開催されたAll Energy Australia 2026において、9MWhの大容量エネルギー貯蔵システム「Tener+」とナトリウムイオン電池採用の「Tener Sodium」を初披露した。Tener+は従来の方式と比較してコンテナ数を最大40%削減し、プロジェクトの敷地面積を12%縮小できる設計となっている。また、高温環境下でも性能を維持するトップ排気構造や、補助電力消費を低減するインテリジェントな熱管理システムを搭載している。",
+        url: "https://cnevpost.com/2026/10/28/catl-unveils-tener-plus-deepens-australian-presence/",
+        source: "CnEVPost - All",
+        date: "2026-10-28",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "The company launched the product at All Energy Australia 2026 in Melbourne",
+        sourceExcerptEnd: "debut of its Tener Sodium sodium-ion battery energy storage system.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026102812271648.jpg",
+        note: ""
+    },
+    {
+        id: "cn1909",
+        title: "中国のNEV（新エネルギー車）小売販売台数は、10月前半時点で前年同期比13%減少した。",
+        desc: "CPCA（中国乗用車市場情報連合会）のデータによると、2026年10月1日から25日までの中国におけるNEV（新エネルギー車）の小売販売台数は75.3万台で、前年同期比13%減となった。9月は同16.7%減と9ヶ月連続のマイナスを記録しており、10月もこの傾向が続けば10ヶ月連続となる見通しだ。",
+        url: "https://cnevpost.com/2026/10/28/china-nev-retail-fall-oct-1-25/",
+        source: "CnEVPost - All",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "NEV retail sales totaled 753,000 units from October 1 to 25, down",
+        sourceExcerptEnd: "by the China Passenger Car Association (CPCA) on October 28.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/10/2026102809331769.jpg",
+        note: ""
+    },
+    {
+        id: "in1980",
+        title: "ARAI公称航続距離で比較する、14車種ある電気中型SUV",
+        desc: "燃焼エンジン車だけでなくEVでも競争が激しい中型SUV市場では、現在14車種の電動車が販売されている。このボディサイズは実用的な航続距離を確保しつつ、最新技術の搭載も可能にするため、各メーカーが参入している。",
+        url: "https://www.autocarindia.com/auto-features/hyundai-creta-electric-range-be-6-range-tata-curvv-ev-range-electric-suvs-with-highest-range-434423",
+        source: "Autocar India - All",
+        date: "2026-10-28",
+        tags: ["AR", "AI", "EV"],
+    
+        sourceExcerpt: "Here we have ranked all the midsize electric SUVs currently available in India as per their ARAI-rated range.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20260417_133834_0bef2296.jpg",
+        note: ""
+    },
+    {
+        id: "in1981",
+        title: "アストンマーティンValhalla Spider、カーボンシートと10.25インチスクリーン採用",
+        desc: "Valhalla Spiderはフレームレスのカーボンファイバー・ダイヘドラルドアを備え、標準でカーボン製Touringシートとデュアル10.25インチディスプレイを搭載している。Q部門では着色カーボン仕上げやカスタム内装素材などのオーダーメイド対応も提供されている。",
+        url: "https://www.autocarindia.com/auto-images/aston-martin-valhalla-spider-image-gallery-440508",
+        source: "Autocar India - All",
+        date: "2026-10-28",
+        tags: ["ディスプレイ", "シート", "新素材", "カスタマイズ"],
+    
+        sourceExcerpt: "The cabin gets twin 10.25-inch screens and plenty of exposed carbon fibre.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/image-galleries/images/20261028_101235_464fd1d3.jpg",
+        note: ""
+    },
+    {
+        id: "in1982",
+        title: "アストンマーティンValhalla Spider、屋根開閉で空力特性を最適化",
+        desc: "アストンマーティンはValhalla Spiderを公開し、屋根を開けた状態でも時速350km/hに到達する最速オープンモデルとした。内装ではフレームレス化されたカーボンファイバー製ダイヘドラルドアや、風防の収納スペースとして新設された15リットルのサイドポケットが特徴である。",
+        url: "https://www.autocarindia.com/car-news/aston-martin-valhalla-spider-revealed-as-brands-fastest-open-top-car-441149",
+        source: "Autocar India - All",
+        date: "2026-10-28",
+        tags: [],
+    
+        sourceExcerpt: "With the roof on, the deflector folds into three parts and fits inside new 15-litre storage compartments in the sills.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261028_080257_19a8ea4c.jpg",
+        note: ""
+    },
+    {
+        id: "in1983",
+        title: "ヒュンダイBayon、Cretaより安価な99.9万ルピーから販売開始",
+        desc: "Hyundai Bayonは全グレードで99.9万ルピーから181.4万ルピーと設定され、Creta 1.5 MPiの開始価格である109万ルピーを下回る。マニュアルやiVTなど多様な構成が用意されたこの価格は、同クラスのガソリンSUVと比較して競争力のある水準にある。",
+        url: "https://gaadiwaadi.com/hyundai-bayon-all-prices-revealed-competitively-priced-against-rivals/",
+        source: "GaadiWaadi",
+        date: "2026-10-28",
+        tags: ["AI"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/Hyundai-Bayon-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1984",
+        title: "インドCNG車市場、2026年9月は前年比26.5%増の10万5410台",
+        desc: "2026年9月のインドCNG車販売は10万5410台で、前年同期比26.5%増加した。マルチ・スズキが引き続き市場を主導する中、タタ・パンチやヒュンダイ・オーラもシェア拡大を見せている。",
+        url: "https://gaadiwaadi.com/top-10-cng-cars-in-september-2026-ertiga-dzire-punch-aura-victoris-brezza/",
+        source: "GaadiWaadi",
+        date: "2026-10-28",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/05/Maruti-Victoris-10.jpg",
+        note: ""
+    },
+    {
+        id: "in1985",
+        title: "バジャジ・オートQ2 FY27 EBITDA4000クローレ超え",
+        desc: "バジャジ・オートはQ2 FY27において、輸出・EV・商用車の好調によりEBITDAが4000 croreルピー、純利益が3000 croreルピーを超え過去最高を更新した。記事ではPulsar関連の追加情報も予告されている。",
+        url: "https://gaadiwaadi.com/bajaj-auto-records-notable-q2-fy27-sales-more-pulsar-updates-coming/",
+        source: "GaadiWaadi",
+        date: "2026-10-28",
+        tags: ["AR", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/08/New-Bajaj-Pulsar-150-Pulsar-125-Launched.jpg",
+        note: ""
+    },
+    {
+        id: "in1986",
+        title: "中国の自動車産業は世界市場での躍進を遂げている一方、国内では販売台数の減少、生産能力の過剰、そして価格競争がEVブームに影を落としている",
+        desc: "2026年の中国自動車業界は、深刻な矛盾に直面している。国内の乗用車販売が急減する一方で、輸出は過去最高水準まで急増している。推定生産能力が6300万台に達し、EV（電気自動車）価格競争が激化して利益が圧迫される中、中国の自動車メーカーは...",
+        url: "https://www.autopunditz.com/post/china-auto-industry-crisis-2026-sales-exports-ev-price-war",
+        source: "Auto Punditz",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "However, behind this international success lies a deepening domestic c",
+        sourceExcerptEnd: "apacity, aggressive discounting and shrinking profitability.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_f4b76733e7be438eb3126c80e2efb504~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in1987",
+        title: "VinFast VF5ファセリフト、大型スクリーンと新ステアリング採用",
+        desc: "VinFastはインドでVF5ファセリフト版のデザイン特許を申請した。スパイショットでは大型独立タッチスクリーンと2本スポークステアリングが確認され、従来のデジタルメーターは廃止されてセンターディスプレイに統合される見込みである。さらにレザー調シート材への切り替えも示唆されており、120万ルピー台の価格帯でTataやMahindraのEVと競合する内装品質の向上が期待される。",
+        url: "https://www.autopunditz.com/post/vinfast-vf5-facelift-india-price-range-launch",
+        source: "Auto Punditz",
+        date: "2026-10-28",
+        tags: ["ディスプレイ", "シート", "新素材", "EV"],
+    
+        sourceExcerpt: "The facelift is expected to introduce meaningful improvements inside the cabin, particularly in its dashboard layout and infotainment interface.",
+        interiorScore: 84,
+        interiorReason: "Detailed breakdown of interior changes including a larger freestanding touchscre",
+        imageInterior: true,
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_6a9803e6fa5b47b18b0c4c873cedca1a~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu1915",
+        title: "VWバッテリーリコール、米国でAudi Q4 e-tron約9000台に拡大",
+        desc: "VWグループのEV向けバッテリー欠陥リコールが米国のAudi Q4 e-tron系約9,048台に拡大した。ハンガリーSK Battery製セルを搭載し、NHTSAは火災リスクを排除できないとして充電上限80%の暫定措置を指示している。",
+        url: "https://www.electrive.com/2026/10/28/volkswagen-battery-recall-extends-to-audi-with-us-focus/",
+        source: "Electrive",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Audi found that the relevant battery and production characteristics identified in the",
+        sourceExcerptEnd: "apply to certain Q4 e-tron and Q4 Sportback e-tron models.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2023/09/audi-q4-e-tron-2023-01-min-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1916",
+        title: "アストンマーティンValhalla Spider、F1技術で風防を最適化",
+        desc: "アストンマーティンはオープントップのValhalla Spiderを発表した。F1チームと共同開発した専用ウィンドディフレクターがコックピット内の空気を制御し、快適性を確保する。屋根収納時はサイドシルに設けた15リットルの収納スペースへ折り畳み、内装の一体感を損なわない設計となっている。",
+        url: "https://electriccarsreport.com/2026/10/aston-martin-valhalla-spider-phev-debuts-as-brands-fastest-open-cockpit-supercar/",
+        source: "Electric Cars Report",
+        date: "2026-10-28",
+        tags: ["コックピット"],
+    
+        sourceExcerpt: "Described as the fastest open-cockpit Aston Martin ever produced, the Valhalla Spider",
+        sourceExcerptEnd: "road and racetrack, whether its roof is fitted or removed.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Aston-Martin-Valhalla-Spider.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1917",
+        title: "BYD Qin Plus DM-i、内装技術刷新とLiDAR搭載で中国市場投入",
+        desc: "BYDは第3世代Qin Plus DM-iを中国で発売し、更新された内装技術やLiDARベースの運転支援機能を備えた。価格は79,900元からで、CLTC基準の航続距離は最大220kmとなる。",
+        url: "https://electriccarsreport.com/2026/10/new-byd-qin-plus-dm-i-phev-launches-with-220-km-electric-range/",
+        source: "Electric Cars Report",
+        date: "2026-10-28",
+        tags: ["AR", "バッテリー"],
+    
+        sourceExcerpt: "The third-generation Qin Plus DM-i responds with a combination of a larger body, improved electric range, updated cabin technology and aggressive pricing.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/BYD-Qin-Plus-DM-i.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1918",
+        title: "XPeng、広州でL4ロボタクシー実証運行の承認を取得",
+        desc: "XPengは広州市内でレベル4（L4）自動運転ロボタクシーの実証運行を開始した。自社のTuring AIチップ4基とVLA 2.0モデルを搭載し、注文処理や車両管理などの運用要素を実環境で検証する。初期段階では招待コード制で提供し、将来的には技術プロバイダーとしてグローバル展開を目指す。",
+        url: "https://electriccarsreport.com/2026/10/xpeng-gets-approval-for-citywide-l4-robotaxi-demonstrations-in-guangzhou/",
+        source: "Electric Cars Report",
+        date: "2026-10-28",
+        tags: ["AI"],
+    
+        sourceExcerpt: "According to XPeng, the Robotaxi system is equipped with four self-developed Turing",
+        sourceExcerptEnd: "deliver 3,000 trillion operations per second (TOPS) of computing power.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/XPeng-Robotaxi.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "jp2143",
+        title: "ホンダ ヴェゼル、快適装備追加と上質感向上でマイナーチェンジ",
+        desc: "ホンダは2026年10月23日発売のヴェゼルをマイナーチェンジし、「G」と「e:HEV X」にリヤベンチレーションや後席用USBチャージャーを追加した。また上位グレードではバンパーガーニッシュなどをボディ同色化して上質感を高めている。",
+        url: "https://autoprove.net/japanese-car/honda/vezel/258382/",
+        source: "AutoProve",
+        date: "2026-10-28",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "また、「e:HEV Z」と「e:HEV Z・PLaYパッケージ」は、ホイールアーチ、フロント/サイド/リヤのバンパーガーニッシュをボディ同色にすることで、より都会的で洗練された上質感の仕上げとしている。",
+        interiorScore: 43,
+        interiorReason: "The article details a minor facelift with specific interior comfort upgrades (re",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.autoprove.net/2026/10/1-4261022-vezel_016H-376x282.jpg",
+        note: ""
+    },
+    {
+        id: "us1946",
+        title: "二極板電極法でCFRPの樹脂分離効率を向上",
+        desc: "研究チームは、外部回路接続不要な二極板電極電気処理システムを開発した。不規則形状の廃材を一括処理できるが、電位勾配による電流密度不均一から陽極側での反応集中という課題がある。",
+        url: "https://www.plasticsengineering.org/2026/10/new-electrical-method-targets-carbon-fiber-recovery-012506/",
+        source: "Plastics Engineering - Automotive & Transportation",
+        date: "2026-10-28",
+        tags: [],
+    
+        sourceExcerpt: "Electrical treatment (ET) is a promising CFRP recycling method as it requires mild conditions and has a low environmental burden.",
+        interiorScore: 3,
+        interiorReason: "The article focuses on a laboratory-scale recycling method for carbon fiber rein",
+        imageInterior: false,
+        country: "us",
+        img: "https://www.plasticsengineering.org/wp-content/uploads/2026/10/CarbonFiber_1026_2.jpeg",
+        note: ""
+    },
+    {
+        id: "eu1919",
+        title: "Huber、CO2冷媒への完全移行でFガス規制に対応",
+        desc: "HuberはAutomotive Testing Expo North Americaにて、CCK6やCC902といった温度制御ユニットを展示した。同社はFガス規制への対応として、CO2や炭化水素系など天然冷媒への完全移行をすでに実現しており、今後の規制変更にも備えていると説明している。",
+        url: "https://www.automotivetestingtechnologyinternational.com/videos/expo-interview-kristin-odegaard-and-sam-hudson-sales-managers-at-huber-usa.html",
+        source: "Automotive Testing Technology International",
+        date: "2026-10-28",
+        tags: [],
+    
+        sourceExcerpt: "We caught up with Kristin Odegaard and Sam Hudson at Automotive Testing",
+        sourceExcerptEnd: "to the company’s temperature-control technology on show at the expo.",
+        country: "eu",
+        img: "https://www.automotivetestingtechnologyinternational.com/wp-content/uploads/2026/10/Screenshot-2026-10-28-at-14.22.33-e1793198630248.png",
+        note: ""
+    },
+    {
+        id: "cn1910",
+        title: "中国乗用車小売が10月前半で26%減、NEV販売比率は65.7%に上昇",
+        desc: "中国乗用車協会のデータで、10月1〜25日の小売販売は前年比26%減の114.5万台となった。新エネルギー車は75.3万台でシェア65.7%を占める一方、純ガソリン車の生産量は同52%減少し需要の弱さが続いている。",
+        url: "https://chinaevhome.com/2026/10/28/china-passenger-car-retail-sales-drop-26-in-oct-1-25-nev-retail-reaches-753k/",
+        source: "ChinaEVHome",
+        date: "2026-10-28",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The slump pressures legacy ICE production—ICE output fell 52% while hybrids dipped",
+        sourceExcerptEnd: "margin squeeze, and ramping NEV supply amid uncertain consumer recovery.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/10/image-424.png?resize=640%2C390&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn1911",
+        title: "CATLは欧州向けに3GWh規模のTENNAナトリウムイオン蓄電システムを導入する",
+        desc: "CATLとINTILIONは5年間の覚書に署名し、ドイツ・スイス・オーストリアで合計3GWhのTENER蓄電システムを導入する。同システムは1基あたり30MWh超を出力し、-20℃でも高放電電力を維持できる設計が特徴である。",
+        url: "https://chinaevhome.com/2026/10/28/catl-signs-five-year-european-deal-for-3-gwh-sodium-ion-energy-storage/",
+        source: "ChinaEVHome",
+        date: "2026-10-28",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "CATL signed a five-year MoU with INTILION to deploy 3 GWh of",
+        sourceExcerptEnd: "to capture European grid and C&I demand amid fierce competition.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/10/image-409.png?resize=640%2C378&ssl=1",
+        note: ""
+    },
+    {
+        id: "in1988",
+        title: "アストンマーティンValhalla Spider、カーボンシートとデジタルミラー採用",
+        desc: "アストンマーティンはValhalla Spiderを発表し、カーボンファイバー製Touringシートや10.25インチディスプレイ2基を標準装備した。オプションでBowers & Wilkinsオーディオシステムも選べる。",
+        url: "https://www.motoroids.com/news/aston-martin-valhalla-spider-debuts-1079ps-mid-engined-hybrid-unleashed/",
+        source: "Motoroids",
+        date: "2026-10-28",
+        tags: ["ディスプレイ", "シート", "音響"],
+    
+        sourceExcerpt: "Standard carbon-fibre Touring seats",
+        country: "in",
+        img: "https://www.motoroids.com/wp-content/uploads/2026/10/Aston_Martin_Valhalla_Spider_5.jpg",
+        note: ""
+    },
+    {
+        id: "jp2144",
+        title: "AndTech、塗装レス加飾技術セミナー開催",
+        desc: "AndTechが2026年12月15日に開講する自動車内外装向けセミナーでは、塗装レスやバイオマス素材といったサステナブル加飾の最新動向を解説する。元住友化学の桝井氏が講師を務め、実物サンプルを用いて質感の違いを実際に体感できる構成となっている。",
+        url: "https://www.jiji.com/jc/article?k=000001870.000080053&g=prt",
+        source: "時事ドットコム",
+        date: "2026-10-28",
+        tags: ["新素材"],
+    
+        interiorScore: 64,
+        interiorReason: "Highly relevant to interior material and surface finish planning (sustainable tr",
+        imageInterior: false,
+        country: "jp",
+        img: "https://prcdn.freetls.fastly.net/release_image/80053/1870/80053-1870-97516b26c056e998e644e55db3850dee-1920x1005.jpg?width=536&quality=85,75&format=jpeg&auto=webp&fit=bounds&bg-color=fff",
         note: ""
     },
 ];
