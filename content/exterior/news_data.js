@@ -23708,8 +23708,8 @@ window.LOADED_NEWS_DATA = [
         id: "jp287",
         title: "日本ペイント、大気社と自動車部品向けフィルム加飾の新工法を共同開発",
         desc: "日本ペイントと大気社は、バンパー向けフィルム加飾で材料・プロセスコストを削減し、サイクルタイム短縮やエネルギー低減も図る新工法を開発した。",
-        url: "https://autoc-one.jp/news/5045411/",
-        source: "www.bing.com",
+        url: "https://prtimes.jp/main/html/rd/p/000000415.000007223.html",
+        source: "PR TIMES（日本ペイント）",
         date: "2026-10-27",
         tags: ["フィルム", "バンパー", "加飾", "新素材"],
     
@@ -23725,7 +23725,7 @@ window.LOADED_NEWS_DATA = [
         interiorReason: "バンパー向けフィルム加飾の新工法開発であり、材料・プロセスコスト削減やサイクルタイム短縮など具体的な技術情報を含む。",
         imageInterior: false,
         country: "jp",
-        img: "https://cdn.autoc-one.jp/images/article/202610/27170729679_5f5c.webp",
+        img: "https://prcdn.freetls.fastly.net/release_image/7223/415/7223-415-e867d311eeee1cde89adfab126587d86-3738x1219.png?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff", images: ["https://prcdn.freetls.fastly.net/release_image/7223/415/7223-415-e867d311eeee1cde89adfab126587d86-3738x1219.png?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff", "https://prcdn.freetls.fastly.net/release_image/7223/415/7223-415-03164b35d487f1e0f0eabdceb62fee14-2597x1473.png?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff", "https://prcdn.freetls.fastly.net/release_image/7223/415/7223-415-52410034def58f51b01e868507a64303-1642x1780.png?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff"],
         note: ""
     },
     {

@@ -24,6 +24,7 @@ from dailynews.collection_digest import parse_published_news
 from dailynews.deduplication import normalize_article_url
 from dailynews.editorial_policy import apply_policy, classify_lighting, exterior_scope_rules, EVIDENCE_COLUMNS
 from dailynews.interior_vehicle_scope import motorcycle_exclusion
+from dailynews.source_policy import is_excluded_source
 from dailynews.feedback_snapshot import load_feedback_snapshot
 
 ROOT = Path(__file__).resolve().parent
@@ -410,6 +411,9 @@ def validate_editorial_publication(items, existing_url_keys, snapshot, edition_i
     excluded = set(snapshot.get("excluded_urls", []))
     retained, pending = [], []
     for item in items:
+        if is_excluded_source(item.get("url"), edition_id):
+            print(f"[EDITORIAL_SOURCE_EXCLUDED] {item.get('url', '')}")
+            continue
         # The snapshot already expands a hidden representative to its aliases.
         # Hiding only an alias must not suppress an unhidden representative that
         # still mentions that URL as a related source (collector uses primary URL).

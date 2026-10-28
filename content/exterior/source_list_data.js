@@ -4,6 +4,16 @@
 window.DAILYNEWS_CONFIGURED_SOURCES = [
   {
     "country": "日本",
+    "name": "PR TIMES（自動車関連）",
+    "rssUrl": "https://prtimes.jp/index.rdf"
+  },
+  {
+    "country": "日本",
+    "name": "PR TIMES（日本ペイント）",
+    "rssUrl": "https://prtimes.jp/companyrdf.php?company_id=7223"
+  },
+  {
+    "country": "日本",
     "name": "レスポンス",
     "rssUrl": "https://news.yahoo.co.jp/rss/media/rps/all.xml"
   },

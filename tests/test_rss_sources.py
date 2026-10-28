@@ -13,6 +13,7 @@ import feedparser
 import requests
 
 from verify_rss_sources import collection_helpers
+from dailynews.source_policy import is_excluded_source
 
 ROOT = Path(__file__).resolve().parents[1]
 COLLECTION = ROOT / "\u30cb\u30e5\u30fc\u30b9\u53ce\u96c6"
@@ -58,6 +59,18 @@ class ArticleExtractionTests(unittest.TestCase):
         ):
             with self.subTest(entry=entry):
                 self.assertEqual(self.env["extract_image_from_rss"](entry), url)
+
+    def test_prtimes_plain_image_link_uses_complete_path_before_truncated_query(self):
+        url = 'https://prcdn.freetls.fastly.net/release_image/7223/415/figure-3738x1219.png'
+        entry = dict(link='https://prtimes.jp/main/html/rd/p/000000415.000007223.html',
+                     summary=f'[画像1: {url}?width=536&amp;quality=85%2C75&amp;format=jpeg&...')
+        self.assertEqual(self.env['extract_image_from_rss'](entry), url)
+        entry['summary'] = '[日本ペイント] 自動車部品の発表。画像URLは省略。'
+        self.assertEqual(self.env['extract_image_from_rss'](entry), '')
+        entry['summary'] = f'[画像1: {url}.truncated...'
+        self.assertEqual(self.env['extract_image_from_rss'](entry), '')
+        entry.update(link='https://example.com/article', summary=f'[画像1: {url}]')
+        self.assertEqual(self.env['extract_image_from_rss'](entry), '')
 
     def test_relative_lazy_uppercase_and_entity_images(self):
         entry = {"link": "https://example.com/news/story", "content": [{
@@ -124,6 +137,7 @@ class FeedImageRequirementTests(unittest.TestCase):
         self.assertEqual(len(nodes), len(names))
         exec(compile(ast.Module(body=nodes, type_ignores=[]), "rss-fetch-test", "exec"), self.env)
         self.env.update(ET=ET, feedparser=feedparser, time=SimpleNamespace(sleep=Mock()), print=Mock(),
+                        EDITION=SimpleNamespace(id='exterior'), is_excluded_source=is_excluded_source,
                         exterior_papers=__import__('dailynews.exterior_papers', fromlist=['is_paper']),
                         SOURCE_FETCH_COUNTS={"attempted": 0, "succeeded": 0},
                         resolve_final_url=Mock(side_effect=lambda url: url),
@@ -134,13 +148,14 @@ class FeedImageRequirementTests(unittest.TestCase):
                         is_yimg_placeholder=Mock(return_value=False),
                         is_missing_url=lambda value: not value)
 
-    def run_feed(self, items, *, required=True, dates=("2026-09-20",)):
+    def run_feed(self, items, *, required=True, dates=("2026-09-20",), **options):
         xml = ('<rss version="2.0"><channel><title>Test</title>' + "".join(items) + '</channel></rss>').encode()
         response = Mock(status_code=200, content=xml)
         self.env["requests"].get = Mock(return_value=response)
         feed = {"name": "Test", "url": "https://example.com/feed", "country": "米国"}
         if required:
             feed["require_feed_image"] = True
+        feed.update(options)
         self.env["RSS_FEEDS"] = [feed]
         return self.env["fetch_from_rss"](dates)
 
@@ -182,6 +197,28 @@ class FeedImageRequirementTests(unittest.TestCase):
         image = '<enclosure url="https://example.com/cabin.jpg" type="image/jpeg"/>'
         rows = self.run_feed([self.item(1, image, published="Sat, 19 Sep 2026 17:00:00 +0000")])
         self.assertEqual(rows[0]["日付"], "2026-09-20")
+
+    def test_article_image_required_accepts_og_but_rejects_missing_images(self):
+        rows = self.run_feed([self.item(1)], required=False, require_article_image=True)
+        self.assertEqual(rows[0]['画像URL'], 'https://example.com/page.jpg')
+        for missing in ('', 'https://example.com/logo.jpg'):
+            self.env['fetch_image_from_page'].return_value = missing
+            self.assertEqual(self.run_feed([self.item(1)], required=False, require_article_image=True), [])
+        self.env['resolve_with_playwright'].assert_not_called()
+
+    def test_prtimes_prefilter_avoids_fetching_unrelated_entries(self):
+        image = '<enclosure url="https://example.com/part.jpg" type="image/jpeg"/>'
+        items = [self.item(1, image), self.item(2, image).replace('Article 2', '自動車フィルムの新工法')]
+        rows = self.run_feed(items, include_pattern='自動車|automotive')
+        self.assertEqual(len(rows), 1)
+        self.env['resolve_final_url'].assert_called_once_with('https://example.com/news/2')
+
+    def test_mota_direct_and_redirected_sources_are_excluded(self):
+        image = '<enclosure url="https://example.com/part.jpg" type="image/jpeg"/>'
+        self.assertEqual(self.run_feed([self.item(1, image).replace('example.com/news', 'autoc-one.jp/news')]), [])
+        self.env['resolve_final_url'].assert_not_called()
+        self.env['resolve_final_url'].side_effect = lambda url: 'https://autoc-one.jp/news/5045411/'
+        self.assertEqual(self.run_feed([self.item(1, image)]), [])
 
 
 class SourceConfigurationTests(unittest.TestCase):

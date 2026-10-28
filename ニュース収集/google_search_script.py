@@ -41,6 +41,7 @@ from dailynews.editorial_policy import (POLICY_VERSION, EVIDENCE_COLUMNS, apply_
                                         extract_evidence, exterior_scope_rules)
 from dailynews.feedback_snapshot import load_feedback_snapshot
 from dailynews.interior_vehicle_scope import motorcycle_exclusion, POLICY_VERSION as INTERIOR_VEHICLE_SCOPE_VERSION
+from dailynews.source_policy import is_excluded_source, filter_sources
 
 EDITION = get_edition()
 
@@ -809,6 +810,15 @@ def extract_image_from_rss(entry, base_url=""):
     for html_field in fields:
         if not isinstance(html_field, str) or not html_field:
             continue
+        # PR TIMES RDF descriptions carry plain-text [画像1: URL] links. The
+        # resize query may be truncated by "..."; use only the intact, explicit
+        # CDN image path, never guess an image from the release/article ID.
+        if (urlparse(base_url).hostname or "").lower() in ("prtimes.jp", "www.prtimes.jp"):
+            for candidate in re.findall(
+                r'\[画像\d*\s*[:：]\s*(https://prcdn\.freetls\.fastly\.net/release_image/[^\s?<>"\]]+\.(?:png|jpe?g|webp|gif|avif))(?=[?\s\]])',
+                unescape(html_field), re.IGNORECASE,
+            ):
+                add(candidate)
         for img in BeautifulSoup(html_field, "html.parser").find_all("img"):
             for attr in ("srcset", "data-srcset"):
                 variants = []
@@ -2980,7 +2990,8 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
             issue_dates = {latest.strftime("%Y-%m-%d")}
     published = [dict(item, url=normalize_article_url(item["url"]))
                  for item in published_news(EDITION.content_dir / "news_data.js")
-                 if normalize_article_url(item["url"]) not in excluded_urls]
+                 if normalize_article_url(item["url"]) not in excluded_urls
+                 and not is_excluded_source(item["url"], EDITION.id)]
     published_by_id = {item.get("id"): item for item in published}
     published_aliases = {item["url"] for item in published if item.get("duplicateOf")}
     for item in published:
@@ -2997,6 +3008,7 @@ def build_sheet2_and_csv(df, excel_path, target_dates):
     df = df.copy().astype(object) if df is not None else pd.DataFrame()
     if "URL" in df.columns:
         df["URL"] = df["URL"].map(normalize_article_url)
+        df = df.loc[~df["URL"].map(lambda url: is_excluded_source(url, EDITION.id))].copy()
     for url, item in same_issue.items():
         source_row = published_row(item)
         source_row["関連URL"] = json.dumps(item.get("relatedUrls", []), ensure_ascii=False)
@@ -3562,6 +3574,13 @@ def fetch_from_rss(target_dates):
                         continue
                     if not is_target_date(pub_date, target_dates):
                         continue
+                    if is_excluded_source(link, EDITION.id):
+                        continue
+                    include_pattern = feed_info.get("include_pattern")
+                    if include_pattern and not re.search(
+                        include_pattern, f"{title} {entry.get('summary', '')}", re.IGNORECASE
+                    ):
+                        continue
                     # Newly approved feeds must carry an article image in the
                     # feed itself. Do not turn an image-less entry into a match
                     # through page scraping or browser fallback.
@@ -3578,6 +3597,8 @@ def fetch_from_rss(target_dates):
                         desc = BeautifulSoup(str(entry.get("summary", "")), "html.parser").get_text()
                     # Google News??????????URL???????????
                     resolved_link = resolve_final_url(link)
+                    if is_excluded_source(resolved_link, EDITION.id):
+                        continue
                     if not desc and resolved_link:
                         desc = fetch_meta_description(resolved_link)
                     # ??URL?RSS?????
@@ -3587,7 +3608,9 @@ def fetch_from_rss(target_dates):
                         image_url = fetch_image_from_page(resolved_link) if resolved_link else ""
                     if is_missing_url(image_url):
                         # Playwright???URL?????????
-                        resolved_pw, image_pw = resolve_with_playwright(resolved_link or link)
+                        # PR TIMES OG images are server-rendered; no browser or
+                        # generated image is needed if an image cannot be found.
+                        resolved_pw, image_pw = (None, None) if feed_info.get("require_article_image") else resolve_with_playwright(resolved_link or link)
                         if resolved_pw:
                             resolved_link = resolved_pw
                         if image_pw:
@@ -3600,6 +3623,11 @@ def fetch_from_rss(target_dates):
                         alt = fetch_image_from_page(resolved_link) if resolved_link else ""
                         if alt:
                             image_url = alt
+                    if feed_info.get("require_article_image") and (
+                        is_missing_url(image_url) or is_suspicious_image_url(image_url)
+                    ):
+                        skipped_feed_images += 1
+                        continue
                     results.append({
                         "国": country,
                         "検索ワード": "RSS",
@@ -3616,7 +3644,7 @@ def fetch_from_rss(target_dates):
                 if count > 0:
                     print(f"  ✓ [{name}] {count}件")
                 if skipped_feed_images:
-                    print(f"  [RSS_IMAGE_REQUIRED] [{name}] RSS画像なし/プレースホルダー {skipped_feed_images}件を除外")
+                    print(f"  [RSS_IMAGE_REQUIRED] [{name}] 必須画像なし/プレースホルダー {skipped_feed_images}件を除外")
                     
         except KeyboardInterrupt:
             print("  ✗ RSS取得を中断しました。")
@@ -3677,6 +3705,8 @@ def fetch_from_bing_search(target_dates):
                         image_url = extract_image_from_rss(entry)
                         # Bingリンクが msn/bing の場合も最終URLを解決して画像再取得
                         resolved_link = resolve_final_url(link)
+                        if is_excluded_source(link, EDITION.id) or is_excluded_source(resolved_link, EDITION.id):
+                            continue
                         if resolved_link and is_missing_url(image_url):
                             image_url = fetch_image_from_page(resolved_link)
 
@@ -3974,6 +4004,7 @@ def fetch_from_newsapi(target_dates):
 
 def enrich_results(items, label="新規", existing_df=None, save_path=None):
     """関連度スコアと日本語要約を付与する"""
+    items = filter_sources(items, EDITION.id)
     total = len(items)
     if total:
         print(f"  [{label}] 関連度・翻訳処理 {total}件 開始")
@@ -4046,6 +4077,9 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                     item["URL"] = resolved_pw
                 if image_pw and not is_suspicious_image_url(image_pw):
                     item["画像URL"] = image_pw
+        if is_excluded_source(item.get("URL"), EDITION.id):
+            item.update({"HTML取得": "×", "LLM判定": "非対象", "LLM後処理": "出典除外"})
+            continue
         # Google Newsは実記事URLまで解決できたものだけを採用する。
         if source == "GoogleNews" and not is_valid_article_url(item.get("URL"), allow_google_news=False):
             item["HTML取得"] = "×"
@@ -4666,6 +4700,9 @@ def _main():
     
     # 重複除去
     print("\n=== 重複除去処理 ===")
+    allowed_results = filter_sources(all_results, EDITION.id)
+    print(f"  [SOURCE_EXCLUDED] {len(all_results) - len(allowed_results)}件")
+    all_results = allowed_results
     unique_results, entry_duplicate_decisions = deduplicate_fetched_articles(all_results, df_existing.to_dict("records"))
     dup_by_source = Counter(item["source"] for item in entry_duplicate_decisions)
     dup_by_reason = Counter("既存URL" if item["reason"] == "normalized_url" else item["reason"]

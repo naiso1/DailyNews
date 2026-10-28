@@ -4,6 +4,20 @@
     "photo_target_label": "自動車外装部品",
     "rss_feeds": [
       {
+        "name": "PR TIMES（自動車関連）",
+        "url": "https://prtimes.jp/index.rdf",
+        "country": "日本",
+        "require_article_image": true,
+        "include_pattern": "自動車|車両|車体|四輪|乗用車|モビリティ|オートモーティブ|バンパー|フェンダー|スポイラー|ラジエーター|ADAS|LiDAR|ミリ波|\\b(?:automotive|vehicle|automobile|car|EV|SUV)\\b"
+      },
+      {
+        "name": "PR TIMES（日本ペイント）",
+        "url": "https://prtimes.jp/companyrdf.php?company_id=7223",
+        "country": "日本",
+        "require_article_image": true,
+        "include_pattern": "自動車|車両|車体|四輪|乗用車|モビリティ|オートモーティブ|バンパー|フェンダー|スポイラー|ラジエーター|ADAS|LiDAR|ミリ波|\\b(?:automotive|vehicle|automobile|car|EV|SUV)\\b"
+      },
+      {
         "name": "レスポンス",
         "url": "https://news.yahoo.co.jp/rss/media/rps/all.xml",
         "country": "日本"

@@ -75,6 +75,17 @@ class CollectorDeduplicationTests(unittest.TestCase):
         self.assertEqual(len(decisions), 1)
         self.assertEqual(decisions[0]["reason"], "normalized_url")
 
+    def test_exterior_checkpoint_and_published_history_cannot_restore_mota(self):
+        context = self.context('exterior')
+        mota = self.row('mota')
+        mota['URL'] = 'https://autoc-one.jp/news/5045411/'
+        original = self.row('prtimes', title='自動車バンパーのフィルム加飾を開発')
+        original['URL'] = 'https://prtimes.jp/main/html/rd/p/000000415.000007223.html'
+        history = [dict(id='jp1', country='jp', date='2026-09-20', digestDate='2026-09-20',
+                        title=mota['タイトル'], desc=mota['内容'], url=mota['URL'], img=mota['画像URL'])]
+        selected = self.select(context, [mota, original], history)
+        self.assertEqual(list(selected['URL']), [original['URL']])
+
     def test_recent_history_uses_explicit_dates_not_checkpoint_tail(self):
         newest = self.kicks("new")
         old = [self.row(f"old{i}", day="2026-01-01") for i in range(501)]
