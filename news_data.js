@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-10-29 01:40";
+window.NEWS_UPDATED_AT = "2026-10-30 01:43";
 
 window.LOADED_NEWS_DATA = [
 
@@ -248868,6 +248868,713 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://prcdn.freetls.fastly.net/release_image/80053/1870/80053-1870-97516b26c056e998e644e55db3850dee-1920x1005.jpg?width=536&quality=85,75&format=jpeg&auto=webp&fit=bounds&bg-color=fff",
+        note: ""
+    },
+    // 2026-10-29 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2145",
+        title: "アルファロメオジュニア限定車、サベルト製スポーツシートとアルカンターラ内装を備える",
+        desc: "ステランティスジャパンは、アルファロメオ『ジュニア』の120台限定モデル「Pilota by Sabelt」を532万円から発売した。最大の特徴はサベルト製スポーツシートで、アルカンターラ素材によるホールド性と上質感を両立している。さらにステアリングホイールやダッシュボードにも同素材を採用し、統一感のあるコックピット空間を実現している。",
+        url: "https://news.yahoo.co.jp/articles/759d93d3b0b92d17ee94bb3bf2cfe4011addeaf5",
+        source: "レスポンス",
+        date: "2026-10-29",
+        tags: ["シート", "コックピット", "新素材"],
+    
+        sourceExcerpt: "インテリアはステアリングホイール、ダッシュボード、センターコンソールにもアルカンターラ素材を採用し、統一感を持たせた。",
+        interiorScore: 81,
+        interiorReason: "The article details a specific interior refresh featuring Sabelt sport seats wit",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00000024-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2146",
+        title: "車内動画再生はスマホミラーリング主流、テレビキャンセラー装着必須",
+        desc: "車内動画視聴の主流はUSB-CからHDMI変換ケーブルを用いたスマホミラーリングだが、走行中の表示にはテレビキャンセラーが必須となる。データシステムのTV-KITなど製品タイプや適合確認が必要で、メインユニット裏へのアクセスを伴うためカーオーディオプロショップでの取り付けが推奨される。",
+        url: "https://news.yahoo.co.jp/articles/2c58ad9b5423ae4d908c457f8b1e17c8f084662b",
+        source: "レスポンス",
+        date: "2026-10-29",
+        tags: ["音響"],
+    
+        sourceExcerpt: "使用するスマホにより必要なケーブルのタイプが異なるが、スマホの出力端子がUSB-CであればUSB-C to HDMI変換ケーブルを用意して、それをHDMI入力端子へと繋げばOKだ。",
+        interiorScore: 90,
+        interiorReason: "Detailed guide on in-cabin video entertainment setup (HDMI mirroring) and TV can",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00000021-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2147",
+        title: "レクサスRX改良でIRカット機能追加、全車にデジタルミラーも標準化",
+        desc: "レクサスは2026年9月30日にRXの一部改良を発表し、全車のフロントドアガラスに赤外線を遮るIRカット機能を追加した。また、従来は上位グレードのみだったデジタルインナーミラーや前後方ドライブレコーダーを全車標準装備とし、快適性を高めた。価格は704万円から929万円で設定されている。",
+        url: "https://news.yahoo.co.jp/articles/916074e0feb21f6167286a2c55be1aad8df18a08",
+        source: "carview!",
+        date: "2026-10-29",
+        tags: [],
+    
+        sourceExcerpt: "2026年9月30日、レクサスは「RX」の一部改良を発表し、同日に発売しました。",
+        interiorScore: 82,
+        interiorReason: "Article details specific interior comfort and HMI updates including IR-cut glass",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00010006-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2148",
+        title: "三菱新型パジェロ、3列7人乗り室内と4グレード構成を公開",
+        desc: "三菱自動車は2026年12月17日発売の新型「パジェロ」で、歴代意匠を継承した3列7人乗りの室内空間を備える。SUPER EXCEEDなど全4グレードを展開し、価格は619万3000円から795万800円となる。",
+        url: "https://news.yahoo.co.jp/articles/f3cdb28a89455d431df96f5af20dcf9ff9d08b41",
+        source: "carview!",
+        date: "2026-10-29",
+        tags: [],
+    
+        sourceExcerpt: "国内では「SUPER EXCEED（スーパーエクシード）」「EXCEED（エクシード）」「GSR」「GLS」の全4グレードを展開し、価格は619万3000円から795万800円となる。",
+        interiorScore: 82,
+        interiorReason: "The article announces the new Pajero with a focus on pricing and grades, but exp",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00010004-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2149",
+        title: "新型パジェロ、ソフトマテリアルと大型連動ディスプレイで上質なコックピットを構築",
+        desc: "三菱の新型パジェロは、ダッシュボードやドアトリムにソフトマテリアルを用い、従来のクロスカントリー車とは異なる高級感を演出している。また、14.3インチディスプレイを2枚連結したモノリスディスプレイを搭載し、高度や方位などの情報を高い視認性で表示する。",
+        url: "https://news.yahoo.co.jp/articles/eab54a65008b3cfb5a15e9f5b22aa8ee000353d2",
+        source: "WEB CARTOP",
+        date: "2026-10-29",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "ダッシュボードパネルやドアトリムにソフトマテリアルを用い、従来のクロスカントリー車の質実剛健な印象を大きく更新した。",
+        interiorScore: 73,
+        interiorReason: "Detailed description of interior materials (soft touch), specific HMI hardware (",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00010003-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2150",
+        title: "シエンタの3列目とbZ4Xの内装質感に改善余地",
+        desc: "ベストカーWebが検証したトヨタ車では、シエンタは床下収納の影響で3列目の座り心地や後席エアコン吹き出し口の不在が課題。またbZ4Xはソルテラとデザインが似通っており、素材の質感や先進性、高速域での電費向上が求められている。",
+        url: "https://news.yahoo.co.jp/articles/3ea3d27b7cdf225faef7f2d72c9cd81ee6cfe149",
+        source: "ベストカーWeb",
+        date: "2026-10-29",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "ただし、3列目は床下収納を採用していることもあり、プアーな作りだから座り心地は今一歩。",
+        interiorScore: 62,
+        interiorReason: "The article provides specific interior critique and product planning insights fo",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00000009-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2151",
+        title: "メルセデス新型エレクトリックGLC、幅1mスクリーンとMB.OSでコックピット刷新",
+        desc: "メルセデス・ベンツ新型「エレクトリックGLC」はEV専用プラットフォームで静粛性や居住性を高めた。内装では幅約1メートルの巨大スクリーンと次世代OS「MB.OS」を備え、デジタルコックピット環境を整える。",
+        url: "https://news.yahoo.co.jp/articles/0a6f6bd7c47bb30ce9f12752f499b387468f62d5",
+        source: "THE EV TIMES",
+        date: "2026-10-29",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        sourceExcerpt: "2026年10月28日、メルセデス・ベンツの新型電気自動車「エレクトリック GLC」の発表会へ行ってきました。",
+        interiorScore: 82,
+        interiorReason: "The article explicitly highlights the new 'MB.OS' and a massive 1-meter wide scr",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-00010000-evtimes-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2152",
+        title: "ジーリー、欧州向けFlyme改良へ マルチタスク機能追加",
+        desc: "ジーリーは欧州市場向けにインフォテインメントシステム「Flyme」の第2世代を開発中だ。中国版とは異なる操作感を目指し、マルチタスクや分割画面機能を備える。また、運転支援システムの警告音についても、音量や音色を調整して現地の嗜好に合わせる改良を進めている。",
+        url: "https://news.yahoo.co.jp/articles/020b6d0ea5ba7a1dd1f2e5a8f01241325ddbf781",
+        source: "AUTOCAR JAPAN",
+        date: "2026-10-29",
+        tags: ["コネクテッド"],
+    
+        sourceExcerpt: "ワイネル氏はその改良点の一例として、インフォテインメント・システム「Flyme」を挙げた。",
+        interiorScore: 82,
+        interiorReason: "The article details specific improvements to the in-cabin HMI (Flyme OS) and dri",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261029-01289913-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us1947",
+        title: "ジープ コンパス2027年型、ワイヤレス充電とリアUSBポートを標準装備化",
+        desc: "2027年型Jeep Compassは、Limited系とTrailhawkでワイヤレス充電パッドと後席USBポートを標準化した。ベースのLatitudeではアダプティブクルーズコントロールが初採用され、価格は3万1985ドルからとなった。",
+        url: "https://www.motor1.com/news/813697/2027-jeep-compass-pricing-equipment/",
+        source: "Motor1",
+        date: "2026-10-29",
+        tags: ["AI", "EV"],
+    
+        sourceExcerpt: "Beyond the base trims gaining adaptive cruise control, Jeep is adding a",
+        sourceExcerptEnd: "ports as standard equipment on Limited, Limited Altitude and Trailhawk.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/L36rkj/s3/2027-jeep-compass-trailhawk-in-hydro-blue-pearl.jpg",
+        note: ""
+    },
+    {
+        id: "us1948",
+        title: "VW Group、EVの利益率が内燃機関車より低いと認める",
+        desc: "VWグループは9ヶ月間の営業利益率が3.8%にとどまり、電気自動車の販売拡大が収益を圧迫していると説明した。欧州ではEVの注文比率が40%に達する一方、2027年投入予定のエントリーモデルID. Every1は薄利構造になる見込みで、規制対応と利益確保の両立が課題となっている。",
+        url: "https://www.motor1.com/news/813667/vw-group-electric-cars-less-profitable/",
+        source: "Motor1",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The VW Group is struggling to turn its electric vehicle push into",
+        sourceExcerptEnd: "battery-powered cars still generate lower earnings than their combustion-engine counterparts.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/Qe7LJO/s3/2026-volkswagen-id.-polo-gti.jpg",
+        note: ""
+    },
+    {
+        id: "us1949",
+        title: "Audi、Scoutのボディーオンフレーム基盤でオフローダー開発を検討",
+        desc: "米当局者がサウスカロライナ州Blythewood工場で年間25,000台生産の可能性を漏らした。VWグループは同地に20億ドル投資し、Scoutのボディーオンフレーム基盤を活用する構想が示唆されている。",
+        url: "https://www.motor1.com/news/813660/audi-scout-based-south-carolina/",
+        source: "Motor1",
+        date: "2026-10-29",
+        tags: [],
+    
+        sourceExcerpt: "That is the first reported link tying the Audi brand to Scout's factory floor.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/NGPZL9/s3/2025-audi-q6-e-tron-offroad-concept.jpg",
+        note: ""
+    },
+    {
+        id: "us1950",
+        title: "1928年製ベントレー4.5リットルの希少バーンファインド発見",
+        desc: "英国の廃墟で、Vanden Plas製のオリジナルボディを備えた1928年製ベントレー4.5リットルが確認された。同車は自然吸気式4.4L直列4気筒エンジンを搭載し、希少な4シーター・スポーツ・トゥーラー仕様である。",
+        url: "https://www.motor1.com/news/813649/forgotten-1928-bentley-barn-find/",
+        source: "Motor1",
+        date: "2026-10-29",
+        tags: [],
+    
+        sourceExcerpt: "Colin Smith was filming an abandoned UK property for his YouTube channel",
+        sourceExcerptEnd: "Tourer, its Vanden Plas coachwork still intact after years untouched.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/YAbvlW/s3/1928-bentley-4.5-liter-barn-find.jpg",
+        note: ""
+    },
+    {
+        id: "us1951",
+        title: "AC Motorsport、5速マニュアルV8とカーボンボディで308 GTBを再解釈",
+        desc: "AC Motorsportが公開したMichelotto Gruppo 4 Tributoは、Ferrari 308 GTBへのオマージュとして設計された新車だ。",
+        url: "https://www.motor1.com/news/813641/michelotto-gruppo-4-tributo-ferrari/",
+        source: "Motor1",
+        date: "2026-10-29",
+        tags: ["AR"],
+    
+        sourceExcerpt: "Called the Michelotto Gruppo 4 Tributo, it is a ground-up reinterpretation of",
+        sourceExcerptEnd: "competition, and it made its public debut in Padova, Italy.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/JO6rXn/s3/michelotto-gruppo-4-tributo.jpg",
+        note: ""
+    },
+    {
+        id: "us1952",
+        title: "ポルシェ減損でVW、過去10年最大級の営業赤字",
+        desc: "フォルクスワーゲンは第3四半期に66億ドルの営業損失を計上し、2015年第4四半期以来の大幅な赤字となった。主な要因はポルシェ株式の減損を含む89億ドルの一時的費用で、中国市場での競争やEV移行に伴う投資負担が背景にある。",
+        url: "https://www.jalopnik.com/2300865/porsche-writedown-plunges-vw-deeper-into-financial-abyss/",
+        source: "Jalopnik",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "In this morning's edition, Porsche is stumbling and bringing Volkswagen down with",
+        sourceExcerptEnd: "just saw its third-straight month of sales and production slides.",
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/porsche-writedown-plunges-volkswagen-deeper-into-the-financial-abyss/l-intro-1793282868.jpg",
+        note: ""
+    },
+    {
+        id: "us1953",
+        title: "あなたが購入した中で最も不気味だった車は何ですか？",
+        desc: "QOTD：あなたが今までに購入した中で、最も「呪われた」車はどれですか？ Ryan Erik King（2026年10月29日 午前9:25 EST） またこの季節が巡ってきました。空気には冷たさが漂い、葉の色が変わり始めます。",
+        url: "https://www.jalopnik.com/2300732/most-haunted-car-reader-question/",
+        source: "Jalopnik",
+        date: "2026-10-29",
+        tags: [],
+    
+        country: "us",
+        img: "https://www.jalopnik.com/img/gallery/whats-the-most-haunted-car-youve-ever-bought/l-intro-1793276077.jpg",
+        note: ""
+    },
+    {
+        id: "eu1920",
+        title: "国内のEV充電料金が公共充電器にも適用される可能性あり",
+        desc: "「車庫の分断」を解消し、低速の公共充電器で家庭用料金を実現へ。政府は、高価格がドライバーの3分の1をEVへの乗り換えから遠ざけているとする独立報告書を受け、公共充電のコストを自宅での充電と同等にするための措置を講じている。",
+        url: "https://www.autocar.co.uk/car-news/electric-cars/domestic-ev-charging-tariffs-could-be-applied-public-chargers",
+        source: "AUTOCAR UK",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "According to the latest Zapmap data, the average price of an AC",
+        sourceExcerptEnd: "than the off-peak rates (7p) offered by some utility companies.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/night-charging-feature-3_0.jpg?itok=VV-kk-3L",
+        note: ""
+    },
+    {
+        id: "eu1921",
+        title: "英国秋予算、2030年EV・PHEVのBIK税率引き上げを確定",
+        desc: "英国政府は2030年度からEVのBIK税率を4%から10%へ引き上げ、PHEVも最大20%とする方針を確認した。これにより月々の税負担が大幅に増加し、Fleet Operations氏は中古EVの課税基準見直しを期待していたが実現せず、コスト圧力が高まる企業車市場への影響を指摘している。",
+        url: "https://www.autocar.co.uk/car-news/company-cars/budget-%E2%80%9Cmissed-opportunity%E2%80%9D-phev-and-ev-tax-hikes-hit-cost-pressured-fleets",
+        source: "AUTOCAR UK",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Dave Bushnell, director of consultancy and strategy at Fleet Operations, said that",
+        sourceExcerptEnd: "step towards restoring confidence but it could have gone further.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/phev-group-2026-jh-2a_1.jpg?itok=BGGgX7nb",
+        note: ""
+    },
+    {
+        id: "eu1922",
+        title: "Audi A6 Allroad、疑似バケットシートと空気サスペンションで個性を主張",
+        desc: "筆者は新登場のAudi A6 Allroadについて、疑似バケットシートや空気サスペンションに触れながら、SUV買い手層を大きく動かす可能性は低いと評価している。",
+        url: "https://www.autocar.co.uk/opinion/new-cars/how-jacked-estates-can-find-their-niche-last",
+        source: "AUTOCAR UK",
+        date: "2026-10-29",
+        tags: ["シート"],
+    
+        sourceExcerpt: "Last week a new Audi A6 Allroad showed up and I was",
+        sourceExcerptEnd: "pseudo-bucket seats almost before the delivery driver could get out.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/audi-a6-allroad-2026.jpg?itok=HmbOavmZ",
+        note: ""
+    },
+    {
+        id: "eu1923",
+        title: "フォトンTunland、英国導入へ 本革とパノラミックルーフ採用",
+        desc: "フォトンは2027年初頭、英国でミルドハイブリッド搭載のピックアップトラック「Tunland」を発売する。2.0リッターディーゼルエンジンと8速AT、マルチリンク式リアサスペンションを備え、大型タッチスクリーンやデジタルメーター、レザーシートなど快適装備を搭載した。",
+        url: "https://www.autoexpress.co.uk/news/370790/new-foton-tunland-chinese-luxury-pick-thats-way-uk",
+        source: "Auto Express",
+        date: "2026-10-29",
+        tags: ["ディスプレイ", "シート", "新素材"],
+    
+        sourceExcerpt: "That makes news of the Foton Tunland’s impending UK launch something of a rarity amid the influx of affordable SUVs.",
+        interiorScore: 35,
+        interiorReason: "The article details specific interior features such as a large touchscreen, digi",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/Foton%20Tunland%20-%20front%203_4_a8xau6.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1924",
+        title: "マツダ3新型でSkyactiv-X廃止、Homura Plus新設",
+        desc: "マツダは2026年後半発売の新型マツダ3からSkyactiv-Xを撤去し、138bhpの2.5L Skyactiv-Gのみとする。グレード構成には黒革シートや電動調整シート、Boseサウンドシステムなどを備えるHomura Plusが新設された。また全車に運転者注意モニターを標準化し、Exclusive-Lineにはガンメタルグレーの内装トリムを追加した。",
+        url: "https://www.autoexpress.co.uk/mazda/qoros-3/370787/streamlined-mazda-3-range-drops-unusual-skyactiv-x-engine",
+        source: "Auto Express",
+        date: "2026-10-29",
+        tags: ["ディスプレイ", "シート", "新素材", "EV"],
+    
+        sourceExcerpt: "There are gunmetal grey interior trim pieces in the Exclusive-Line cars, plus",
+        sourceExcerptEnd: "models have a new chrome decoration inside the LED headlights.",
+        interiorScore: 60,
+        interiorReason: "The article details specific interior upgrades for the new trim levels, includin",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/2027%20Mazda%203%20-%20front%203_4_r2kkhs.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1925",
+        title: "マツダ3 2027年型ラインナップ刷新、Skyactiv-X廃止と新グレード追加",
+        desc: "マツダは2027年型のマツダ3ハッチバック向けに、高圧縮ガソリンエンジンであるSkyactiv-Xを廃止し、新しいトリムレベルを追加する。",
+        url: "https://www.autoexpress.co.uk/mazda/qoros-3/370786/2027-mazda-3-range-refresh-pictures",
+        source: "Auto Express",
+        date: "2026-10-29",
+        tags: [],
+    
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/10/2027%20Mazda%203%20-%20front%203_4_r2kkhs.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn1912",
+        title: "XPeng Mona L05、メーターレス化と大型スクリーン採用",
+        desc: "Xpeng Mona L05は中国で14万4800元から発売され、メータークラスターに代わる26.8インチHUDや17.3インチの天井スクリーンを備えます。センターコンソールには17.3インチディスプレイが配置され、内装カラーはダークグレーとライトグレーの2色展開です。",
+        url: "https://carnewschina.com/2026/10/29/xpeng-mona-l05-launched-in-china-at-21720-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-10-29",
+        tags: ["HUD", "ディスプレイ", "センターコンソール"],
+    
+        sourceExcerpt: "The center console adopts a 17.3-inch main screen paired with a 26.8-inch head-up display.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/xpeng_mona_l05_launch-8-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1913",
+        title: "Chery Tiggo 2は4エアバッグとESC搭載でもLatin NCAPで0星評価",
+        desc: "Chery Tiggo 2は4つのエアバッグとESC（電子安定化制御）を標準装備しているものの、成人乗員および子供乗員の保護性能で0%を獲得し、Latin NCAPから0つ星の評価を受けた。同車には側面ヘッドプロテクションや後席プリテンショナーが備わっておらず、ADASも非搭載である。",
+        url: "https://carnewschina.com/2026/10/29/chery-tiggo-2-awarded-zero-star-rating-in-latest-latin-ncap-safety-assessment/",
+        source: "CarNewsChina - All",
+        date: "2026-10-29",
+        tags: ["安全"],
+    
+        sourceExcerpt: "Chinese automaker and the top exporter Chery is facing intense scrutiny over",
+        sourceExcerptEnd: "a disastrous performance in the latest Latin NCAP crash tests.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/e59bbee78987-117-e1793269238471.png",
+        note: ""
+    },
+    {
+        id: "cn1914",
+        title: "BYD Yangwang U9 Xtremeがドバイで時速500km超えに挑む計画",
+        desc: "BYD副社長のStella Li氏は、出力2,220kWのYangwang U9 Xtremeが11月にドバイで時速500km超えに挑戦すると述べた。同車は2025年9月に496.22km/hを記録しており、残りの3.78km/h達成に向け15kmの直線道路確保と警察への申請を進めている。",
+        url: "https://carnewschina.com/2026/10/29/why-dubai-has-entered-the-yangwang-u9-xtremes-500-km-h-record-attempt/",
+        source: "CarNewsChina - All",
+        date: "2026-10-29",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "BYD executive vice president Stella Li said the 2,220 kW Yangwang U9 Xtreme will attempt to exceed 500 km/h in Dubai this November.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/image-6.png",
+        note: ""
+    },
+    {
+        id: "cn1915",
+        title: "中国SAE、2027年の10大技術トレンドを発表",
+        desc: "第33回中国自動車工学会年次大会において、400Wh/kgの全固体電池やV2G技術などが選定されました。これらの革新は、性能向上とコスト削減、そして量産化の実現を目的としています。",
+        url: "https://carnewschina.com/2026/10/29/engineers-named-ten-automotive-technology-trends-in-china-for-2027/",
+        source: "CarNewsChina - All",
+        date: "2026-10-29",
+        tags: ["新素材", "バッテリー"],
+    
+        sourceExcerpt: "They mentioned 400 Wh/kg solid-state batteries, Vehicle-to-Grid systems, integrated die-cast magnesium alloy body elements, and other tech.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/10/top_ten_technologies_-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn1916",
+        title: "Wuling Hongguang MINI EV、累計200万台達成",
+        desc: "SGMWは10月20日、200万台目の生産完了を発表した。現行の4ドアモデルは全長3,268mmで、LFPバッテリーによりCLTCモードで最大301kmの航続距離を実現している。価格は人民元4万4,800元から5万4,800元とされている。",
+        url: "https://insidechinaauto.com/2026/10/29/wuling-hongguang-mini-ev-passes-two-million-sales/",
+        source: "Inside China Auto - All",
+        date: "2026-10-29",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "It is 3,268mm long on a 2,190mm wheelbase, with a 30kW motor and LFP batteries giving 205km or 301km of CLTC range.",
+        country: "cn",
+        img: "https://insidechinaauto.com/wp-content/uploads/2026/10/wuling-hongguang-mini-ev-2-millionth-ceremony.jpg",
+        note: ""
+    },
+    {
+        id: "cn1917",
+        title: "GWMが欧州市場にH7を導入、15.6インチのセンターディスプレイを備える",
+        desc: "GWMは欧州市場向けにSUV「H7」を投入した。内装には12.3インチのメーターディスプレイと15.6インチのセンターディスプレイが備わる。イタリアでの価格はHi2ハイブリッドPremiumが3万7000ユーロから設定されている。",
+        url: "https://insidechinaauto.com/2026/10/29/gwm-launches-h7-in-europe-and-confirms-bulgarian-assembly/",
+        source: "Inside China Auto - All",
+        date: "2026-10-29",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "Hi2 hybrid Premium: €37,0002.0T 4WD Premium: €39,500Hi2 plug-in Business: €41,490Hi2 plug-in Premium: €43,490Hi4 plug-in Premium: €46,000",
+        country: "cn",
+        img: "https://insidechinaauto.com/wp-content/uploads/2026/10/haval-h7-mint-green-front-three-quarter.jpg",
+        note: ""
+    },
+    {
+        id: "cn1918",
+        title: "理想i6、29インチ6Kディスプレイとゼログラビティシートで刷新",
+        desc: "理想汽車の2026年型Li i6は、Snapdragon 8797搭載の29インチ6Kパノラマスクリーンと16方向調整可能なゼログラビティシートを採用し、価格はRMB 249,800を維持しています。",
+        url: "https://insidechinaauto.com/2026/10/29/li-auto-launches-2026-li-i6-with-bigger-battery-and-in-house-chip/",
+        source: "Inside China Auto - All",
+        date: "2026-10-29",
+        tags: ["パリモーターショー2026", "ディスプレイ", "シート"],
+    
+        eventTags: ["パリモーターショー2026"],
+        sourceExcerpt: "Li Auto has launched the 2026 Li i6, giving its electric family",
+        sourceExcerptEnd: "chip and a new single-screen dashboard, without touching the price.",
+        interiorScore: 69,
+        interiorReason: "Detailed specifications for the new single 29-inch 6K panoramic screen, zero-gra",
+        imageInterior: false,
+        country: "cn",
+        img: "https://insidechinaauto.com/wp-content/uploads/2026/10/2026-li-auto-i6-front-three-quarter.jpg",
+        note: ""
+    },
+    {
+        id: "cn1919",
+        title: "VW、合肥でL3自動運転の公道テストを開始",
+        desc: "フォルクスワーゲングループ中国は安徽省合肥市でL3自動運転の公道テストを開始し、複雑な交差点や夜間走行など実環境でのデータ収集を進めている。2027年の技術導入を目指すが、今回の許可は製品承認ではなく顧客利用を認めるものではない。",
+        url: "https://insidechinaauto.com/2026/10/29/volkswagen-gets-l3-autonomous-driving-road-test-permit-in-hefei/",
+        source: "Inside China Auto - All",
+        date: "2026-10-29",
+        tags: [],
+    
+        sourceExcerpt: "Volkswagen Group China can now test L3 autonomous driving on public roads in Hefei, as it works towards a 2027 launch for the technology.",
+        country: "cn",
+        img: "https://insidechinaauto.com/wp-content/uploads/2026/10/volkswagen-id-unyx-09.jpg",
+        note: ""
+    },
+    {
+        id: "in1989",
+        title: "現代、インド向けEV「Ioniq P」の投入計画を明かす",
+        desc: "現代自動車は2026年第3四半期決算説明会で、インド市場向けのコンパクトEV「Ioniq P」を2027年1月に投入する方針を示した。同車はE-GMP(K)プラットフォームを採用し、標準・ロングレンジの2種バッテリーを搭載予定である。",
+        url: "https://www.autocarindia.com/car-news/hyundai-entry-level-ev-for-india-expected-to-be-called-ioniq-p-441165",
+        source: "Autocar India - All",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Likely to be offered with two battery packs",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261029_123115_e8c104d8.jpeg",
+        note: ""
+    },
+    {
+        id: "in1990",
+        title: "BYD傘下Denza、Z9 GTのインド導入予告と5画面内装を公開",
+        desc: "BYD傘下のDenzaは2026年11月13日のインドデビューに向け、全電動シューティングブレーク「Z9 GT」のティザー動画を公開した。中国仕様の内装にはドアにカメラ映像を表示する5つのデジタルディスプレイが備わり、電動開閉ドアやマッサージ機能付きシートも採用されている。",
+        url: "https://www.autocarindia.com/car-news/denza-z9-gt-teased-ahead-of-india-debut-441160",
+        source: "Autocar India - All",
+        date: "2026-10-29",
+        tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        sourceExcerpt: "For reference, the latter gets five digital displays, with the two units",
+        sourceExcerptEnd: "cooled and massaging seats, Level 2+ ADAS and rear-wheel steering.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/news/images/20261029_100352_04acff07.jpeg",
+        note: ""
+    },
+    {
+        id: "in1991",
+        title: "Kia Carens Clavis EVとMG Hector Tomahawk EVの実走行航続距離比較",
+        desc: "Kia Carens Clavis EVとMG Hector Tomahawk EVは、250万ルピー以下の価格帯で競合する3列シートの電気自動車である。Clavis EVは6人乗りまたは7人乗りの構成が選べる一方、Hector Tomahawk EVの3列モデルは7人乗り仕様となっている。",
+        url: "https://www.autocarindia.com/auto-features/kia-carens-clavis-ev-vs-mg-hector-tomahawk-ev-real-world-range-compared-441241",
+        source: "Autocar India - All",
+        date: "2026-10-29",
+        tags: ["AR", "シート", "EV"],
+    
+        sourceExcerpt: "The Kia Carens Clavis EV and MG Hector Tomahawk EV are both three-row offerings that find themselves in a similar price band.",
+        country: "in",
+        img: "https://asset.autocarindia.com/static/features/images/20261029_081542_31b83b2f.jpeg",
+        note: ""
+    },
+    {
+        id: "in1992",
+        title: "トライアンフThruxton 400、TFTメーターとクルーズコントロールをテスト",
+        desc: "2027年型Thruxton 400の試作車が、Bonneville T40に搭載される4インチ円形TFTメーターと新スイッチギアでテストされている。左側にはD-Padとクルーズコントロール、右側にはエンジンキルスイッチが配置され、5つのライディングモードやナビゲーション機能に対応する。現行モデルは276,552ルピーだが、新装備版は30万ルピー前後での展開が予想される。",
+        url: "https://www.rushlane.com/2027-triumph-thruxton-400-spied-testing-tft-screen-from-bonneville-t40-12559759.html",
+        source: "RushLane",
+        date: "2026-10-29",
+        tags: ["HMI", "コネクテッド", "EV"],
+    
+        sourceExcerpt: "This TFT cluster was first seen with Bonneville T40 and it supports",
+        sourceExcerptEnd: "features including phone controls, music controls, ‘full-map navigation’ and more.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/10/2027-triumph-thruxton-400-spied-with-tft-cruise-control-3.jpg",
+        note: ""
+    },
+    {
+        id: "in1993",
+        title: "タタ、2027年1月発売予定のSafari EVをActi.ev+基盤で展開",
+        desc: "タタは2027年1月にSafari EVを発表する見通し。Acti.ev+プラットフォーム採用で6人乗りと7人乗りを提供し、80kWhバッテリー搭載で航続距離の向上を図る。内装にはトリプルスクリーンやベンチレーションシートなどを備え、価格は約20万ルピーから32万ルピーを想定している。",
+        url: "https://www.rushlane.com/tata-safari-ev-launch-expected-in-jan-2027-details-12559734.html",
+        source: "RushLane",
+        date: "2026-10-29",
+        tags: ["AR", "ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "Safari EV will also challenge MG Hector Tomahawk EV, which is equipped",
+        sourceExcerptEnd: "battery pack, offering a range of up to 517 km.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/tata-sierra-ev-triple-screen-spied-new-4.jpg",
+        note: ""
+    },
+    {
+        id: "in1994",
+        title: "JSW Motors、中国SAICと提携し2027年までに電動SUV3車種を投入",
+        desc: "JSWグループは中国のSAICモーターとの合弁事業を通じて、2027年までにインド市場へ電動化されたSUV3車種を導入する計画である。これらは中国からKDキットとして輸入され、マハラシュトラ州チャトラパティ・サンブジャイナガルで組み立てられる見込みだ。",
+        url: "https://gaadiwaadi.com/jsw-motors-to-launch-3-electrified-suvs-by-2027/",
+        source: "GaadiWaadi",
+        date: "2026-10-29",
+        tags: ["AI", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/02/chery-icar-v23-india-mg.-1.jpg",
+        note: ""
+    },
+    {
+        id: "in1995",
+        title: "トヨタ、インドでInnova Hycrossのマイナーチェンジ版を来月投入",
+        desc: "トヨタは2026年11月26日にインド市場へInnova Hycrossのフェイスリフトモデルを発売する予定である。今回の更新では外装と内装の変更が施され、フレックス燃料対応ハイブリッド派生車の導入も検討されている。",
+        url: "https://gaadiwaadi.com/toyota-innova-hycross-facelift-to-launch-in-india-next-month/",
+        source: "GaadiWaadi",
+        date: "2026-10-29",
+        tags: [],
+    
+        interiorScore: 34,
+        interiorReason: "Article mentions interior updates for a facelift but provides no specific detail",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/07/Toyota-Innova-Hycross-Facelift-Spied-2.jpg",
+        note: ""
+    },
+    {
+        id: "in1996",
+        title: "ヒュンダイインド、Q2 FY27で過去最高販売台数と売上高を記録",
+        desc: "ヒュンダイモーターインドは第2四半期（FY27）に21万9,072台を販売し、前期比15%増の過去最高を更新した。国内販売量は19%増加し、売上高もRs. 20,000 croreを突破している。",
+        url: "https://gaadiwaadi.com/hyundai-india-posts-highest-ever-quarterly-sales-in-q2-fy27/",
+        source: "GaadiWaadi",
+        date: "2026-10-29",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/02/Hyundai-Creta-5.jpg",
+        note: ""
+    },
+    {
+        id: "us1954",
+        title: "Lucid Air Pure、4万マイル使用で快適性と装備の安定性を確認",
+        desc: "Car and Driverが2024年型Lucid Air Pureを4万マイル使用し、81,350ドルの車両は後部シートヒーターや高品質オーディオシステムを備え、4名の乗車空間と十分な積載量を確保している。主要な故障はなく、快適性と基本性能が維持されていることを確認した。",
+        url: "https://insideevs.com/news/813727/lucid-air-pure-ownership-review-video/",
+        source: "InsideEVs",
+        date: "2026-10-29",
+        tags: ["AR", "AI", "シート", "音響"],
+    
+        sourceExcerpt: "That’s roughly $10,000 on top of the base price, which went to",
+        sourceExcerptEnd: "a fancier driver assistance system, and a fantastic audio system.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/3WB6mR/s3/2024-lucid-air-pure.jpg",
+        note: ""
+    },
+    {
+        id: "us1955",
+        title: "Kia EV9 Land、ブラックアウト内装とトルクブーストを標準装備化",
+        desc: "2027年型Kia EV9のLandグレードは、ブラックアウトされたインテリアとトルクブースト機能を標準装備とする。価格は前年比1,090ドル高の71,635ドルだが、2026年のNightfall Editionより410ドル安くなった。",
+        url: "https://insideevs.com/news/813665/2027-kia-ev9-price-torque-increase/",
+        source: "InsideEVs",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The EV9 Land trim gets a torque boost function and a blacked-out interior as standard.",
+        interiorScore: 40,
+        interiorReason: "Mentions a 'blacked-out interior' as a standard feature for the Land trim, which",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/VzbQoG/s3/2027-kia-ev9.jpg",
+        note: ""
+    },
+    {
+        id: "eu1926",
+        title: "ポルトガル、EV購入補助金として80%の支援を検討",
+        desc: "ポルトガルは、低所得世帯が電気自動車（EV）を購入する際に車両価格の最大80%を補助金として支援する新制度を検討している。このプログラムでは約2万台のEVを対象とする予定で、並行して政府は5,000万ユーロの予算枠を持つ通常のEV補助金制度も継続する。",
+        url: "https://www.electrive.com/2026/10/29/portugal-considers-80-per-cent-ev-purchase-subsidies/",
+        source: "Electrive",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Portugal will support low-income households in purchasing an electric car with up to 80 per cent of the vehicle price in the future.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2024/02/dacia-spring-electric-facelift-2024-09-min-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1927",
+        title: "フォードModel e部門、Q3で11億ドル赤字",
+        desc: "Fordは2026年第3四半期にModel e部門で約11億USドルの損失を計上した。前年同期比では3億USドル改善したが、依然として大幅な赤字が続いている。同部門にはMustang Mach-EやPuma Gen-Eなどの完全電気自動車が含まれ、2025年の税制優遇措置終了後の需要減が背景にある。",
+        url: "https://www.electrive.com/2026/10/29/ford-model-e-division-reports-sustained-losses-in-q3/",
+        source: "Electrive",
+        date: "2026-10-29",
+        tags: ["EV"],
+    
+        sourceExcerpt: "For context: it’s important to note that Ford’s Model e segment includes",
+        sourceExcerptEnd: "the Puma Gen-E, the Cologne-built Explorer, or the Mustang Mach-E.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2024/06/ford-explorer-fahrbericht-slowenien-2024-17-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1928",
+        title: "Skoda Kodiaq、272PSのPHEVとマッサージシート搭載の新グレード追加",
+        desc: "SkodaはKodiaqの上位グレードLaurin & Klementを追加し、シートのマッサージ機能を導入した。同時にプラグインハイブリッドのシステム出力を272 PSへ引き上げ、50 kWのDC急速充電に対応して長距離走行時の利便性を高めた。",
+        url: "https://electriccarsreport.com/2026/10/skoda-kodiaq-200kw-plug-in-hybrid-laurin-klement/",
+        source: "Electric Cars Report",
+        date: "2026-10-29",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "Skoda is expanding the Kodiaq lineup with a more powerful plug-in hybrid",
+        sourceExcerptEnd: "that brings additional luxury and comfort to its popular SUV.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Skoda-Kodiaq-Plug-in-Hybrid.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1929",
+        title: "メルセデスベンツ、2027年までに40超の新車でEVとハイブリッド強化",
+        desc: "Mercedes-Benzは2027年末までに40車種以上の新車を投入し、800V技術や固形電池など次世代パワートレインの開発を加速する。車両機能を統合したソフトウェア基盤MB.OSを搭載し、異なるモデル間で快適性と走行性能の一貫性を確保する戦略を展開している。",
+        url: "https://electriccarsreport.com/2026/10/mercedes-benz-plans-more-than-40-new-models-by-2027-expands-ev-and-hybrid-technology/",
+        source: "Electric Cars Report",
+        date: "2026-10-29",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "By integrating the battery, electric drive unit, thermal management and charging system, Mercedes-Benz aims to improve overall energy efficiency.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/10/Mercedes-Benz-platforms.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "us1956",
+        title: "MINI、9.4インチ円形OLEDの維持とAndroid Auto改善へ",
+        desc: "MINIはブランドアイデンティティとして9.4インチの円形OLEDディスプレイを継続採用する方針を示した。ただしApple CarPlayやAndroid Autoが矩形画面前提のため表示領域が制限される課題があり、Googleが非標準形状に対応する新インターフェースを開発中である。",
+        url: "https://www.bmwblog.com/2026/10/29/mini-keeping-circular-screen/",
+        source: "BMWBLOG",
+        date: "2026-10-29",
+        tags: ["HMI", "AR", "ディスプレイ"],
+    
+        sourceExcerpt: "MINI will keep its signature 9.4-inch circular OLED display, viewing the unconventional design as an essential part of its heritage.",
+        interiorScore: 98,
+        interiorReason: "The article focuses on the design rationale and usability challenges of a specif",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.bmwblog.com/wp-content/uploads/2026/10/mini-countryman-untamed-nomad-blue-00-830x553.jpg",
+        note: ""
+    },
+    {
+        id: "jp2153",
+        title: "マツダ新型CX-5、Google車載システムへGemini追加",
+        desc: "マツダは2026年10月27日、新型CX-5の米国・カナダ・欧州・日本仕様で採用するGoogle車載システムにAIアシスタント「Google Gemini」を追加した。ユーザーは自然な会話形式でエアコン調整や音楽再生などの車両操作をハンズフリーで行える。",
+        url: "https://autoprove.net/japanese-car/mazda/cx-5/258488/",
+        source: "AutoProve",
+        date: "2026-10-29",
+        tags: ["CEATEC×JMS2026", "AI"],
+    
+        eventTags: ["CEATEC×JMS2026"],
+        sourceExcerpt: "マツダは2026年10月27日、新型「CX-5」の米国、カナダ、欧州、日本仕様で採用しているGoogleが、AIアシスタント「Google Gemini」への対応を開始したと発表した。",
+        interiorScore: 89,
+        interiorReason: "The article details the integration of Google Gemini into the Mazda CX-5's in-ca",
+        imageInterior: true,
+        country: "jp",
+        img: "https://media.autoprove.net/2026/10/20261027a_gemini_s-376x282.jpg",
+        note: ""
+    },
+    {
+        id: "jp2154",
+        title: "AndTech、塗装レスや構造色など自動車内外装のサステナブル加飾技術を解説",
+        desc: "AndTechが2026年12月15日に開催する自動車内外装セミナーでは、塗装レスや植物由来材料によるサステナブル加飾と、光・電磁波透過などの機能融合技術を解説する。当日は多数のサンプルを実際に触れて質感を確認できるとしている。",
+        url: "https://www.rbbtoday.com/release/prtimes2-today/20261029/1390330.html",
+        source: "RBB TODAY",
+        date: "2026-10-29",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "※当日は多数の加飾サンプルをご用意し、写真や資料だけでは分かりにくい表面の質感・触感や仕上がりの違いを、実際に見て・触れて体感いただけます。",
+        interiorScore: 84,
+        interiorReason: "The article details a specialized seminar on sustainable and functional automoti",
+        imageInterior: false,
+        country: "jp",
+        img: "https://www.rbbtoday.com/release/imgs/list/8168401.jpg",
         note: ""
     },
 ];
