@@ -202,6 +202,14 @@ class ExaBaseTests(unittest.TestCase):
         self.assertEqual(recovered["cached"], 1)
         self.assertEqual(worker.call_count, 1)
 
+    def test_setup_required_stops_the_batch_after_one_blocked_idea(self):
+        self.edition.collection_settings_path.write_text(json.dumps({"exterior": {
+            "image_generation": {"enabled": True, "provider": "exabase", "max_images": 4}}}), encoding="utf-8")
+        worker = Mock(side_effect=exabase.ImageJobError("SETUP_REQUIRED"))
+        report = exabase.generate_for_edition(self.edition, worker=worker)
+        worker.assert_called_once()
+        self.assertEqual(report["errors"], [{"idea_id": 5, "code": "SETUP_REQUIRED"}])
+
     def test_auth_failure_is_retryable_and_raw_error_is_not_logged(self):
         worker = Mock(side_effect=[RuntimeError("secret-provider-diagnostic"), exabase.ImageJobError("AUTH_REQUIRED")])
         first = exabase.generate_for_edition(self.edition, pilot_idea_id=5, worker=worker)

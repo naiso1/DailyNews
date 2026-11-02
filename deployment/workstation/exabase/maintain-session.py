@@ -15,7 +15,7 @@ RUNTIME = Path(os.environ.get('LOCALAPPDATA', '')) / 'DailyNewsRuntime'
 sys.path.insert(0, str(ROOT))
 from ニュース収集.processing_host import processing_host_status
 
-SAFE_CODES = {'AUTH_REQUIRED', 'BUSY', 'ENGINE_CHANGED', 'EDGE_MISSING', 'RUNTIME_MISSING',
+SAFE_CODES = {'AUTH_REQUIRED', 'SETUP_REQUIRED', 'BUSY', 'ENGINE_CHANGED', 'EDGE_MISSING', 'RUNTIME_MISSING',
               'WINDOWS_REQUIRED', 'SESSION_UNAVAILABLE', 'EXABASE_UNAVAILABLE'}
 
 
@@ -98,7 +98,7 @@ def refresh(root):
         return 'authenticated', ''
     code = last.get('code')
     code = code if code in SAFE_CODES else 'EXABASE_UNAVAILABLE'
-    return ('action_required' if code == 'AUTH_REQUIRED' else 'skipped' if code == 'BUSY' else 'error'), code
+    return ('action_required' if code in {'AUTH_REQUIRED', 'SETUP_REQUIRED'} else 'skipped' if code == 'BUSY' else 'error'), code
 
 
 def record(runtime, status, code):

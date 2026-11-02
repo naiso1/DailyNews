@@ -90,18 +90,30 @@ async function captureSessionState(context) {
 async function authenticated(page, engine) {
   return page.url().startsWith(URL) && Boolean(await engine._test.visibleChatInput(page));
 }
+async function setupRequired(page) {
+  // exaBase's renewed UI can show the composer behind mandatory onboarding.
+  // Do not mistake it for a usable image-generation session or choose a profile
+  // on the user's behalf. This text was observed in the actual setup dialog.
+  if (!page.getByText) return false;
+  return page.getByText(/^あなたの職種は[？?]$/).isVisible().catch(() => false);
+}
 async function login(dependencies) {
   const { chromium, edge, engine } = dependencies;
   const browser = await chromium.launch({ executablePath: edge, headless: false });
   try {
-    const context = await browser.newContext();
+    let saved;
+    try { saved = await sessionState(); } catch (_) { /* first sign-in */ }
+    const context = await browser.newContext(saved ? { storageState: saved } : undefined);
     const page = await context.newPage();
     await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
     emit({ status: 'LOGIN_REQUIRED', timeoutSeconds: 600 });
     const deadline = Date.now() + 600000;
     while (Date.now() < deadline) {
       for (const candidate of context.pages()) {
-        if (!candidate.isClosed() && await authenticated(candidate, engine)) {
+        if (!candidate.isClosed() && await authenticated(candidate, engine) && !await setupRequired(candidate)) {
+          // Give asynchronously loaded onboarding a chance to appear.
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          if (await setupRequired(candidate)) continue;
           const refreshed = await captureSessionState(context);
           if (candidate.isClosed() || !await authenticated(candidate, engine)) throw fail('AUTH_REQUIRED');
           await saveSessionState(refreshed);
@@ -123,6 +135,7 @@ async function checkSession(dependencies, state) {
     const deadline = Date.now() + 15000;
     while (Date.now() < deadline) {
       if (await authenticated(page, engine)) {
+        if (await setupRequired(page)) throw fail('SETUP_REQUIRED');
         // Navigation may refresh cookies or local storage. Persist only after
         // the signed-in conversation is confirmed, and use this state below.
         const refreshed = await captureSessionState(context);
@@ -130,7 +143,8 @@ async function checkSession(dependencies, state) {
         await saveSessionState(refreshed);
         return refreshed;
       }
-      if (/login|signin|microsoftonline/i.test(page.url())) throw fail('AUTH_REQUIRED');
+      // A saved SSO session may briefly redirect through the identity provider.
+      // Allow that redirect to finish; never enter a password or approve MFA.
       await new Promise(resolve => setTimeout(resolve, 500));
     }
     throw fail('AUTH_REQUIRED');
@@ -201,6 +215,9 @@ async function generate(dependencies, request, state, recoveryOnly = false) {
     emit(receipt);
   } catch (error) {
     if (cancelled) throw fail('GENERATION_TIMEOUT');
+    // Onboarding can arrive after the initial readiness check. Preserve the
+    // send receipt, but stop the batch instead of repeating a blocked click.
+    if (page && !page.isClosed() && await setupRequired(page)) throw fail('SETUP_REQUIRED');
     throw error;
   } finally {
     clearTimeout(timer);

@@ -30,7 +30,7 @@ SQUARE_COMPOSITION = (
 )
 JSON_STRING = r'"(?:\\.|[^"\\])*"'
 LEAF_OBJECT = re.compile(r'\{(?:"(?:\\.|[^"\\])*"|[^"{}])*\}', re.DOTALL)
-SAFE_CODES = {"AUTH_REQUIRED", "BUSY", "EDGE_MISSING", "ENGINE_CHANGED", "RUNTIME_MISSING",
+SAFE_CODES = {"AUTH_REQUIRED", "SETUP_REQUIRED", "BUSY", "EDGE_MISSING", "ENGINE_CHANGED", "RUNTIME_MISSING",
               "GENERATION_TIMEOUT", "GENERATION_FAILED", "EXABASE_UNAVAILABLE", "WORKER_TIMEOUT",
               "CONTENT_CHANGED", "INVALID_IMAGE", "NEEDS_REVIEW", "INVALID_SOURCE_IDS",
               "REFERENCE_CHANGED", "REFERENCE_INVALID_IMAGE", "REFERENCE_URL_REJECTED",
@@ -542,7 +542,7 @@ def generate_for_edition(edition, *, pilot_idea_id=None, date=None, publish=True
                                          "reference_mode": references.MODE if reference else "text-only"})
             except ImageJobError as error:
                 report["errors"].append({"idea_id": idea.id, "code": str(error)})
-                if str(error) in {"AUTH_REQUIRED", "BUSY", "ENGINE_CHANGED", "RUNTIME_MISSING", "EDGE_MISSING"}:
+                if str(error) in {"AUTH_REQUIRED", "SETUP_REQUIRED", "BUSY", "ENGINE_CHANGED", "RUNTIME_MISSING", "EDGE_MISSING"}:
                     break
         if report["errors"]:
             report["status"] = "partial" if report["images"] else "unavailable"

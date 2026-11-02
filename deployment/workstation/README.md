@@ -39,6 +39,11 @@ to DESKTOP-97FRPLP, under the Owner account.
   interior's `fallback_provider` is `none`; authentication or image failures do
   not invoke the paid image API. Existing images remain, and text publication
   continues when an image is unavailable.
+- Since 2026-11-02, the existing recovery task also resumes missing images in
+  today's successfully published issue after exaBase authentication returns.
+  It uses a private image-only journal, retains completed images, and retries a
+  failed deployment without generating again. No mail or API fallback is used.
+  See [image recovery](exabase/README.md#認証復帰後の画像補完2026-11-02).
 - OneDrive starts in Owner's session. Existing Power Automate weekday 08:00
   success/failure delivery and mailing-list management stay unchanged.
 - `DailyNews_ExaBaseSessionMaintenance` checks and refreshes exaBase authentication

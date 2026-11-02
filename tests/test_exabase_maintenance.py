@@ -125,6 +125,13 @@ class MaintenanceTests(unittest.TestCase):
              patch.object(maintenance.subprocess, 'Popen', return_value=process):
             self.assertEqual(maintenance.refresh(ROOT), ('skipped', 'BUSY'))
 
+    def test_onboarding_is_action_required(self):
+        process = Mock(returncode=1)
+        process.communicate.return_value = ('{"status":"ERROR","code":"SETUP_REQUIRED"}', '')
+        with patch.object(maintenance.shutil, 'which', return_value='node.exe'), \
+             patch.object(maintenance.subprocess, 'Popen', return_value=process):
+            self.assertEqual(maintenance.refresh(ROOT), ('action_required', 'SETUP_REQUIRED'))
+
 
 if __name__ == '__main__':
     unittest.main()

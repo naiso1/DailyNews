@@ -181,7 +181,13 @@ def main():
         proxies = prepare(config, editions)
         if args.recover_if_needed:
             from recovery import pending_editions, reserve_attempt
-            pending = pending_editions(ROOT, editions)
+            from image_recovery import recover_latest_images
+            # Text can be successfully published while optional images await
+            # sign-in. Resume just those images without rebuilding the news.
+            if not ctypes.windll.kernel32.SetThreadExecutionState(0x80000001):
+                raise RuntimeError("Could not prevent sleep during image recovery")
+            image_repairs = recover_latest_images(ROOT, RUNTIME, editions)
+            pending = pending_editions(ROOT, [e for e in editions if e not in image_repairs])
             editions = reserve_attempt(RUNTIME / 'recovery-attempts.json', pending)
             if not editions:
                 print("RECOVERY SKIP: complete, outside schedule, or daily retry limit reached", flush=True)

@@ -20,6 +20,7 @@ function fixture(options = {}) {
   const refreshed = { cookies: [{ name: 'test-session', value: 'updated-fixture' }], origins: [] };
   let storedSnapshots = 0;
   let closed = 0;
+  let elapsed = 0;
   const fakeFs = {
     existsSync: file => files.has(file),
     writeFileSync: (file, bytes) => { files.set(file, Buffer.from(bytes)); events.push('write-encrypted'); },
@@ -31,12 +32,13 @@ function fixture(options = {}) {
   };
   const page = {
     goto: async () => events.push('navigate'),
-    url: () => options.unauthenticated || (options.signOutDuringSnapshot && storedSnapshots) ? 'https://login.microsoftonline.com/test' : 'https://gai.exabase.ai/conversation',
+    url: () => options.unauthenticated || (options.ssoRedirect && elapsed < 1000) || (options.signOutDuringSnapshot && storedSnapshots) ? 'https://login.microsoftonline.com/test' : 'https://gai.exabase.ai/conversation',
     isClosed: () => false,
+    getByText: () => ({ isVisible: async () => Boolean(options.setupRequired || (options.setupThenComplete && elapsed < 2000)) }),
   };
   const browser = {
     newContext: async config => {
-      if (options.mode === '--login') assert.equal(config, undefined);
+      if (options.mode === '--login' && options.noSavedSession) assert.equal(config, undefined);
       else assert.equal(config.storageState, previous);
       return { newPage: async () => page, pages: () => [page], storageState: async settings => {
         assert.equal(settings.indexedDB, true);
@@ -57,7 +59,9 @@ function fixture(options = {}) {
   }
   fakeRequire.main = {};
   const context = vm.createContext({
-    require: fakeRequire, module: { exports: {} }, Buffer, setTimeout, clearTimeout,
+    require: fakeRequire, module: { exports: {} }, Buffer,
+    Date: { now: () => elapsed },
+    setTimeout: callback => { elapsed += 500; callback(); }, clearTimeout,
     process: { env: { LOCALAPPDATA: 'C:/session-test-only' }, pid: 12345,
       argv: ['node', 'worker', options.mode || '--generate'],
       stdout: { write: value => emitted.push(value) } },
@@ -71,7 +75,10 @@ function fixture(options = {}) {
     return Buffer.from('new-encrypted-test-state');
   };
   context.runtime = () => dependencies;
-  context.sessionState = async () => previous;
+  context.sessionState = async () => {
+    if (options.noSavedSession) throw new Error('AUTH_REQUIRED');
+    return previous;
+  };
   context.acquireLock = () => { events.push('lock'); return () => events.push('unlock'); };
   context.readRequest = async () => ({ fixtureRequest: true });
   context.generate = async (receivedDependencies, request, state) => {
@@ -126,6 +133,29 @@ test('failed authentication keeps the old encrypted session and releases the loc
   assert.equal(f.snapshots(), 0);
   assert.deepEqual(f.events, ['lock', 'navigate', 'unlock']);
   assert.equal(f.closed(), 1);
+});
+
+test('saved SSO may finish a silent redirect without interactive sign-in', async () => {
+  const f = fixture({ ssoRedirect: true });
+  await vm.runInContext('main()', f.context);
+  assert.equal(f.events.includes('generate'), true);
+  assert.equal(f.emitted.join(''), '');
+});
+
+test('mandatory setup is action-required even when the composer exists behind it', async () => {
+  const f = fixture({ setupRequired: true });
+  await assert.rejects(vm.runInContext('main()', f.context), e => e.safeCode === 'SETUP_REQUIRED');
+  assert.equal(f.snapshots(), 0);
+  assert.equal(f.events.includes('generate'), false);
+});
+
+test('manual login waits for user setup and supports first login without a saved state', async () => {
+  for (const noSavedSession of [true, false]) {
+    const f = fixture({ mode: '--login', setupThenComplete: true, noSavedSession });
+    await vm.runInContext('main()', f.context);
+    assert.equal(f.snapshots(), 1);
+    assert.equal(JSON.parse(f.emitted.at(-1)).status, 'SESSION_SAVED');
+  }
 });
 
 for (const mode of ['--login', '--check-session']) {
