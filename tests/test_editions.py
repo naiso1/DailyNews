@@ -41,7 +41,7 @@ class EditionTests(unittest.TestCase):
         self.assertEqual(exterior_context.image_generation["provider"], "exabase")
         self.assertEqual(exterior_context.image_generation["max_images"], 10)
         self.assertEqual(interior.image_generation["provider"], "exabase")
-        self.assertEqual(interior.image_generation["fallback_provider"], "gemini")
+        self.assertEqual(interior.image_generation["fallback_provider"], "none")
         self.assertEqual(interior.image_generation["start_after_date"], "2026-09-15")
         self.assertNotEqual(exterior_context.image_generation["provider"], "gemini")
         for value in ("", "exterir", "../interior"):

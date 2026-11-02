@@ -163,13 +163,40 @@ class ExteriorTrendPipelineTests(unittest.TestCase):
 
     def test_first_relevance_decision_sees_article_body(self):
         body = "Passenger car sales shifted toward SUVs in August, reaching 55 percent of registrations. " * 3
-        item = {"国": "インド", "タイトル": "August market report", "内容": "A monthly report.", "URL": "https://example.com/market", "画像URL": "", "ソース": "RSS"}
+        item = {"国": "インド", "タイトル": "August market report", "内容": "A monthly report.", "URL": "https://example.com/market", "画像URL": "https://example.com/car.jpg", "ソース": "RSS"}
         assessment = {"score": 78, "reason": "乗用車の車種別需要の変化", "category": "trend", "trend_topic": "market"}
-        with patch.multiple(collector, USE_LLM=True, FETCH_MISSING_IMAGES=False, _ensure_llm_model_loaded=lambda: True), patch.object(collector, "fetch_article_text", return_value=body), patch.object(collector, "check_url_ok", return_value=True), patch.object(collector, "call_llm_classify", return_value=("対象", "なし")) as classifier, patch.object(collector, "summarize_article", return_value=("乗用車の需要構成が変化", "SUVの販売構成比が変わった。")), patch.object(collector, "call_llm_interior_assessment", return_value=assessment), redirect_stdout(io.StringIO()):
+        with patch.multiple(collector, USE_LLM=True, FETCH_MISSING_IMAGES=False, _ensure_llm_model_loaded=lambda: True), patch.object(collector, "fetch_article_text", return_value=body), patch.object(collector, "check_url_ok", return_value=True), patch.object(collector, "call_llm_classify", side_effect=AssertionError("No duplicate relevance/photo requests")), patch.object(collector, "summarize_article", return_value=("乗用車の需要構成が変化", "SUVの販売構成比が変わった。")), patch.object(collector, "call_llm_interior_assessment", return_value=assessment) as scorer, redirect_stdout(io.StringIO()):
             result = collector.enrich_results([item])
-        self.assertEqual(classifier.call_args_list[0].args[1], body)
+        self.assertEqual(scorer.call_count, 1)
+        self.assertEqual(scorer.call_args.args[1], body)
+        self.assertEqual(scorer.call_args.args[2], "")  # Preserve text context; no vision request.
+        self.assertEqual(result[0]["画像URL"], "https://example.com/car.jpg")
+        self.assertEqual(result[0]["LLM判定"], "対象")
         self.assertEqual(result[0]["記事区分"], "trend")
         self.assertEqual(result[0]["トレンド分類"], "market")
+
+    def test_failed_or_excluded_assessment_is_not_translated_or_reused(self):
+        for assessment in (None, {"score": 20, "category": "", "development_lane": "exclude"}):
+            item = {"国": "日本", "タイトル": "Motorcycle sales", "内容": "Motorcycles sold this month.",
+                    "URL": "https://example.com/bike", "画像URL": "", "ソース": "RSS", "LLM判定": "対象"}
+            with patch.multiple(collector, USE_LLM=True, FETCH_MISSING_IMAGES=False, _ensure_llm_model_loaded=lambda: True), \
+                    patch.object(collector, "fetch_article_text", return_value=""), \
+                    patch.object(collector, "check_url_ok", return_value=True), \
+                    patch.object(collector, "call_llm_classify", side_effect=AssertionError("No second gate")), \
+                    patch.object(collector, "call_llm_interior_assessment", return_value=assessment), \
+                    patch.object(collector, "summarize_article", side_effect=AssertionError("Do not translate")), redirect_stdout(io.StringIO()):
+                result = collector.enrich_results([item])[0]
+            self.assertNotEqual(result["LLM判定"], "対象")
+
+    def test_related_lookback_candidates_beat_unrelated_fresh_items_with_same_budget(self):
+        weak = [{"国": "米国", "日付": "2026-11-01", "タイトル": f"Engine repair {i}", "内容": "Oil change tips.", "URL": str(i)} for i in range(30)]
+        relevant = [{"国": "米国", "日付": "2026-10-31", "タイトル": f"Ford grille design {i}", "内容": "New bumper design.", "URL": str(100+i)} for i in range(10)]
+        fresh = {"国": "米国", "日付": "2026-11-01", "タイトル": "Passenger car sales", "内容": "SUV share rose 20%.", "URL": "market"}
+        picked = collector.prefilter_results_for_enrichment(weak + relevant + [fresh], 10)
+        self.assertEqual(len(picked), 10)
+        self.assertIn(fresh, picked)
+        self.assertEqual(sum(item in relevant for item in picked), 9)
+        self.assertFalse(any(item in weak for item in picked))
 
     def test_compact_headline_preserves_trend_subject_without_interior_focus(self):
         with patch.object(collector, "call_llm_text", return_value="SUVの販売構成比が55％に上昇") as model:

@@ -600,8 +600,18 @@ def prefilter_results_for_enrichment(items, per_country_limit=None):
             # crowd out a market report before the semantic LLM review.
             chosen = []
             review_limit = min(per_country_limit, int(EDITION.config.get("search", {}).get("maximum_paper_candidates", 20))) if exterior_papers.is_paper(group_country) else per_country_limit
-            for day in sorted({str(item.get("日付", "")) for item in group}, reverse=True):
-                daily = [item for item in group if str(item.get("日付", "")) == day]
+            # Spend the same budget on relevant-looking recent candidates before
+            # unrelated fresh feed items. Within each tier, newest still wins;
+            # this is not a quota per day. Hints never establish final acceptance.
+            def review_tier(item):
+                hinted = (item.get("_previous_target")
+                          or exterior_rules.news_category(item.get("タイトル"), item.get("内容"))[0]
+                          or event_collection.review_candidates([item], 1))
+                return bool(hinted), str(item.get("日付", ""))
+
+            tiers = {id(item): review_tier(item) for item in group}
+            for tier in sorted(set(tiers.values()), reverse=True):
+                daily = [item for item in group if tiers[id(item)] == tier]
                 required = [item for item in daily if item.get("_previous_target")]
                 trends = [item for item in daily if item not in required and exterior_rules.news_category(item.get("タイトル"), item.get("内容"))[0] == "trend"]
                 trend_slots = min(max(1, review_limit // 5), max(0, review_limit - len(chosen) - len(required)))
@@ -1712,6 +1722,8 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
                 image_interior = None
         elif not isinstance(image_interior, bool):
             image_interior = None
+        if EDITION.id == "exterior" and not used_image:
+            image_interior = None  # No visual verdict without image evidence.
         raw_score = score
         raw_reason = normalize_text(str(data.get("reason", "") or ""))
         reason = raw_reason[:80]
@@ -1719,7 +1731,7 @@ def call_llm_interior_assessment(title, content, image_url="", url="", summary="
             m = re.search(r'"reason"\s*:\s*"([^"]*)"', txt)
             if m:
                 reason = normalize_text(m.group(1))[:80]
-        if image_interior is None:
+        if image_interior is None and (EDITION.id != "exterior" or used_image):
             m = re.search(r'"image_interior"\s*:\s*(true|false|null)', txt, re.IGNORECASE)
             if m:
                 raw = m.group(1).lower()
@@ -4100,26 +4112,28 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                 item["LLM後処理"] = "本文取得失敗"
                 record_exterior_llm_failure("relevance", "saved source body is an error page or has invalid encoding")
                 continue
-            llm_relevance, _ = call_llm_classify(title, content, "", mode="relevance")
-            if (llm_relevance == "非対象" and (exterior_rules.has_product_details(f"{title} {content}")
-                                               or exterior_scope.transfer_candidate(f"{title} {content}"))):
-                # The cheap yes/no review can miss mixed articles and non-automotive
-                # process research. A semantic score, never a keyword alone, can rescue it.
-                early_assessment = call_llm_interior_assessment(title, content, "", item.get("URL", ""), "")
-                if early_assessment:
-                    item["内装関連度"] = early_assessment["score"]
-                    item["内装判定理由"] = early_assessment.get("reason", "")
-                    store_exterior_assessment(item, early_assessment)
-                    if (early_assessment["score"] >= 45 and early_assessment.get("category") in ("product", "trend")
-                            and early_assessment.get("development_lane") != "exclude"):
-                        llm_relevance = "対象"
-            if llm_relevance:
-                item["LLM判定"] = llm_relevance
-                item["外装選定基準"] = exterior_scope.POLICY_VERSION
-                if llm_relevance == "非対象":
-                    item["外装関連区分"] = "exclude"
-                    if not early_assessment:
-                        item["内装判定理由"] = "原文の初回採用判定で外装開発の対象外"
+            # One text assessment covers relevance, category and score.
+            # A separate binary gate incorrectly discarded valid market reports;
+            # repeating scoring/photo calls also consumed the collection budget.
+            # Image input shrinks the available source text and is not an
+            # admission requirement. Keep the article image URL for publication.
+            early_assessment = call_llm_interior_assessment(
+                title, content, "", item.get("URL", ""), "")
+            if not early_assessment:
+                # The scorer records a required LLM error. Do not translate or
+                # reuse a previous target verdict after this failed review.
+                item.update({"LLM判定": "", "LLM後処理": "採点失敗"})
+                continue
+            item["内装関連度"] = early_assessment["score"]
+            item["内装判定理由"] = early_assessment.get("reason", "")
+            store_exterior_assessment(item, early_assessment)
+            accepted = (early_assessment["score"] >= 45
+                        and early_assessment.get("category") in ("product", "trend")
+                        and early_assessment.get("development_lane") != "exclude")
+            item["LLM判定"] = "対象" if accepted else "非対象"
+            item["外装選定基準"] = exterior_scope.POLICY_VERSION
+            if not accepted:
+                item["外装関連区分"] = "exclude"
         # URL健全性チェック（記事）
         if not check_url_ok(item.get("URL"), is_image=False):
             item["HTML取得"] = "×"
@@ -4160,9 +4174,10 @@ def enrich_results(items, label="新規", existing_df=None, save_path=None):
                 item["内容（日本語）"] = summary_body
             # 画像判定（対象のみ）
             if USE_LLM:
-                _, llm_photo = call_llm_classify(title, content, item.get("画像URL", ""), mode="photo")
-                if llm_photo:
-                    item["画像判定"] = llm_photo
+                if EDITION.id != "exterior":
+                    _, llm_photo = call_llm_classify(title, content, item.get("画像URL", ""), mode="photo")
+                    if llm_photo:
+                        item["画像判定"] = llm_photo
                 assessment = early_assessment or call_llm_interior_assessment(
                     title,
                     content,

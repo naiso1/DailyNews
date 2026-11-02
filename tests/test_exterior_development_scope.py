@@ -163,14 +163,14 @@ class DevelopmentPipelineTests(unittest.TestCase):
              patch.object(collector,"fetch_article_text",side_effect=AssertionError("Abstract already verified")), \
              patch.object(collector,"resolve_with_playwright",side_effect=AssertionError("No paper image scraping")), \
              patch.object(collector,"check_url_ok",return_value=True), \
-             patch.object(collector,"call_llm_classify",return_value=("非対象","なし")) as classify, \
-             patch.object(collector,"call_llm_interior_assessment",return_value=dict(score=20,category="",development_lane="exclude")), \
+             patch.object(collector,"call_llm_classify",side_effect=AssertionError("No duplicate decision")), \
+             patch.object(collector,"call_llm_interior_assessment",return_value=dict(score=20,category="",development_lane="exclude")) as scorer, \
              patch.object(collector,"summarize_article",side_effect=AssertionError("Rejected paper must not be summarized")), redirect_stdout(io.StringIO()):
             result=collector.enrich_results([row])
         self.assertEqual(result[0]["LLM判定"],"非対象")
-        self.assertEqual(classify.call_args.args[1],abstract)
+        self.assertEqual(scorer.call_args.args[1],abstract)
 
-    def test_detailed_review_rescues_transfer_after_false_negative_without_keyword_acceptance(self):
+    def test_single_review_accepts_transfer_only_with_semantic_evidence(self):
         for accepted in (True,False):
             row=self.row(1)
             row.update(タイトル="Steel polymer laser joining",内容="Laser joining was tested with steel and polymer coupons. Joint strength was compared after thermal cycling.")

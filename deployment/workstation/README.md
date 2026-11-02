@@ -34,6 +34,18 @@ to DESKTOP-97FRPLP, under the Owner account.
   leaving room for context and vision on a 16 GiB GPU. No value means automatic.
   The launcher starts LM Studio's
   daemon; the collector prepares the requested model without overlapping loads.
+- Exterior collection keeps a maximum of 30 AI-reviewed candidates per region
+  (20 for papers) and 10 rotating search keywords. Since 2026-11-02, candidates
+  with exterior/trend clues are reviewed before weak feed matches, newest first
+  within each group and within the existing seven-day window. Dates do not get
+  equal quotas. Clues only prioritize review; they never approve publication.
+  One structured text assessment now supplies relevance, category and score,
+  replacing the separate binary gate and repeated photo/score requests. Images
+  do not decide admission; their URLs are retained, while omitting vision input
+  leaves more context for source facts. Grounded market/design reports qualify without
+  component engineering details. Only accepted candidates are summarized;
+  failed assessments cannot reuse an old target verdict. Source-date thresholds,
+  duplicate checks, exclusions and the 10-per-region publication target remain.
 - No post-run sleep. Sleep is inhibited during the process only.
 - Both editions generate idea images through exaBase only. Since 2026-10-15,
   interior's `fallback_provider` is `none`; authentication or image failures do

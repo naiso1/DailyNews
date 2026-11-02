@@ -107,15 +107,17 @@ def calibrate_score(score, title="", content="", summary="", category=None, tren
 def assessment_prompt(title, content, url, summary):
     return (
         SCOPE_TEXT + "\n"
-        "Return JSON: score (0-100), reason (short Japanese), category ('product' for direct/transfer or 'trend'), "
-        "development_lane ('direct','transfer','trend','exclude'), source_evidence (short source technology fact), "
-        "application (Japanese exterior application hypothesis; required for transfer), "
-        "trend_topic ('design','market','regulation','materials','competitor' or empty), image_interior (true/false/null; legacy name for EXTERIOR image).\n"
-        "80-100: strong specific development information. 60-79: concrete component design changes, process/material/evaluation facts, or credible transfer technology. One theme is sufficient; do not require multiple themes or manufacturing details in a design article. "
-        "36-59: vague styling or weak connection. 0-35: excluded/off-topic. An image alone is insufficient. "
-        "Trends need actual passenger-car demand, design, regulation, supplier or OEM strategy facts; part naming is optional. "
-        "Price-only promotions, stock prices, battery/engine specs alone and generic vehicle photos are excluded. "
-        "Use semantic relevance, not keyword counts. Source evidence must come from the original, not the generated summary.\n"
+        "Return JSON: score (0-100), reason (short Japanese), category ('product'/'trend'), "
+        "development_lane ('direct'/'transfer'/'trend'/'exclude'), source_evidence (original fact), "
+        "application (Japanese hypothesis, required for transfer), "
+        "trend_topic ('design'/'market'/'regulation'/'materials'/'competitor' or empty), "
+        "image_interior (true/false/null, legacy name for EXTERIOR image).\n"
+        "80-100: strong development evidence. 60-79: concrete component/process/material/evaluation or transfer facts; one theme suffices. "
+        "65-79: grounded passenger-car trends, including monthly sales/exports; no component details required. "
+        "Set category=trend, development_lane=trend; record the market fact without inventing exterior applications. "
+        "36-59: vague styling/speculation/weak connection. 0-35: off-topic. "
+        "Exclude price-only promotions, stock prices, battery/engine specs alone. "
+        "Use semantic relevance and source facts, not keywords, photos alone or generated summaries.\n"
         f"Title: {title}\nArticle: {content}\nJapanese summary: {summary}\nURL: {url}\n"
     )
 
