@@ -4,7 +4,7 @@ Named reports are private to administrators. SSH extraction returns hashed email
 The previous complete week is frozen once; later roster updates cannot alter it.
 """
 from __future__ import annotations
-import argparse, base64, csv, hashlib, html, json, os, re, subprocess, unicodedata, uuid
+import argparse, base64, html, json, os, subprocess, sys, uuid
 from collections import Counter
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
@@ -13,48 +13,18 @@ from identity_matching import load_aliases, match_source
 from delivery import TEST_TO, recipient_to
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from dailynews.employee_master import MASTER_ROOT, normalized, identity, select_master
+
 STATE = ROOT / 'runtime' / 'weekly-report'
-MASTER_ROOT = Path(r'\\tgfs1\ＩＥ開発部\90_その他\フロアー改革\電子掲示板')
 JST = timezone(timedelta(hours=9))
 LABELS = {'interior': '内装版', 'exterior': '外装版', 'combined': '両版合計'}
 
-def normalized(value): return unicodedata.normalize('NFKC', value).strip().lower()
-def identity(value): return hashlib.sha256(normalized(value).encode()).hexdigest()
 def atomic_json(file, value):
     file.parent.mkdir(parents=True, exist_ok=True)
     temp = file.with_name(file.name + '.' + uuid.uuid4().hex + '.tmp')
     temp.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding='utf8')
     os.replace(temp, file)
-
-def select_master(root, effective):
-    candidates = []
-    for file in root.glob('*/社員マスタ_*.csv'):
-        match = re.fullmatch(r'社員マスタ_(\d{8})\.csv', file.name)
-        if match:
-            stamp = datetime.strptime(match[1], '%Y%m%d').date()
-            if stamp <= effective: candidates.append((stamp, file))
-    if not candidates: raise ValueError('対象日以前の社員マスタがありません。')
-    stamp = max(row[0] for row in candidates)
-    newest = [file for day, file in candidates if day == stamp]
-    if len({hashlib.sha256(file.read_bytes()).hexdigest() for file in newest}) != 1:
-        raise ValueError('同じ日付の社員マスタの内容が異なります。')
-    file = sorted(newest)[0]
-    with file.open(encoding='utf-8-sig', newline='') as stream:
-        reader = csv.DictReader(stream)
-        if not {'社員コード','メールアドレス','見出し名'}.issubset(reader.fieldnames or []): raise ValueError('社員マスタの必須列がありません。')
-        rows = list(reader)
-    members, codes = {}, set()
-    for row in rows:
-        email, code = normalized(row['メールアドレス']), row['社員コード'].strip()
-        group = ' '.join(unicodedata.normalize('NFKC', row['見出し名']).split())
-        if not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+', email) or not code or not group: raise ValueError('名簿の必須値が不正です。')
-        key = identity(email)
-        if key in members or code in codes: raise ValueError('名簿に重複があります。')
-        room = '内装開発室' if group.startswith('内装開発室') else '外装開発室' if group.startswith('外装開発室') else 'IE開発部（室外）'
-        members[key] = {'group': group, 'room': room, 'name': ' '.join(row.get('氏名','').split())}; codes.add(code)
-    if not members: raise ValueError('社員マスタが空です。')
-    return {'masterDate': stamp.isoformat(), 'masterName': file.name,
-            'masterHash': hashlib.sha256(file.read_bytes()).hexdigest(), 'members': members}
 
 def week_start(day): return day - timedelta(days=day.weekday())
 
@@ -75,6 +45,22 @@ def validate_roster_change(roster, previous):
         before, after = len(previous['members']), len(roster['members'])
         if abs(after-before) > max(5,before*0.2):
             raise ValueError('名簿人数が前回より大幅に変わっています。前回のレポートを保持しました。新名簿の対象範囲を確認してください。')
+
+def weekly_roster(path, root, effective, *, refresh, previous=None):
+    stored = json.loads(path.read_text(encoding='utf8')) if path.exists() else None
+    if stored and not refresh:
+        return named_roster(stored, root)
+    latest = select_master(root, effective)
+    if stored and latest['masterDate'] < stored['masterDate']:
+        raise ValueError('社員マスタが保存済みの名簿より古いため、取り込みを保留しました。')
+    validate_roster_change(latest, stored or previous)
+    if not stored or (latest['masterDate'], latest['masterHash']) != (stored['masterDate'], stored['masterHash']):
+        if stored:
+            # Keep a private rollback copy before replacing an in-progress week's roster.
+            archive = path.parent/'history'/path.stem/(stored['masterDate']+'_'+stored['masterHash']+'.json')
+            if not archive.exists(): atomic_json(archive, stored)
+        atomic_json(path, latest)
+    return latest
 def stamp_day(stamp):
     if not stamp: return None
     return (datetime.fromisoformat(stamp.replace('Z', '+00:00')).replace(tzinfo=timezone.utc).astimezone(JST)).date().isoformat()
@@ -121,7 +107,7 @@ def build_report(start, end, roster, source, now):
         'notes': ['利用率＝期間内の利用人数÷名簿人数。両版の利用人数は同じ人を1人として集計。管理者も含みます。',
           '閲覧＝「記事を読む」のクリック。同じ人・同じ記事・同じ日は1回（両版は別記事扱い）。ログインした利用者が対象です。',
           'いいね・コメントは対象週に作成され、集計時点で残っている件数。取消・削除済みは含みません。',
-          '所属は週の名簿スナップショット。初回作成時点で参照できる対象週末以前の最新名簿を使用します。',
+          '進行中の週は最新の社員マスタで所属を更新します。確定済みの過去週は、その週の保存済み名簿を保持します。',
           '名簿にない利用者は別枠。未ログインのアクセスはグループ・人数へ割り当てません。']}
 
 def ssh(script):
@@ -177,14 +163,10 @@ def run(args):
                 report=json.loads(target.read_text(encoding='utf8'))
                 if report['complete']: reports.append(report); continue
             roster_path=STATE/'rosters'/(start.isoformat()+'.json')
-            if roster_path.exists(): roster=json.loads(roster_path.read_text(encoding='utf8'))
-            else:
-                roster=select_master(Path(args.master_root),min(today,end))
-                older=sorted(file for file in (STATE/'rosters').glob('*.json') if file.stem<start.isoformat())
-                previous_roster=json.loads(older[-1].read_text(encoding='utf8')) if older else None
-                validate_roster_change(roster,previous_roster)
-                atomic_json(roster_path,roster)
-            roster=named_roster(roster,Path(args.master_root))
+            older=sorted(file for file in (STATE/'rosters').glob('*.json') if file.stem<start.isoformat())
+            previous_roster=json.loads(older[-1].read_text(encoding='utf8')) if older else None
+            roster=weekly_roster(roster_path,Path(args.master_root),min(today,end),
+                                 refresh=start == current,previous=previous_roster)
             report=build_report(start,end,roster,match_source(roster,source,aliases),now)
             atomic_json(target,report); reports.append(report)
         for report in reports:

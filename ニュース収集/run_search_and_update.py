@@ -30,6 +30,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(ROOT))
 from dailynews.editions import get_edition
+from dailynews.employee_master import mailing_payload
 
 _edition_parser = argparse.ArgumentParser(add_help=False)
 _edition_parser.add_argument("--edition", choices=["interior", "exterior"])
@@ -237,7 +238,7 @@ def write_run_status(status, **details):
 
 
 def sync_power_automate_mailing_list():
-    """Copy the private server-side recipient list into the business OneDrive."""
+    """Enroll new roster members, preserve choices, then export the edition list."""
     destination = _power_automate_mailing_list_path()
     if destination is None:
         raise RuntimeError("Business OneDrive is not configured for the mailing list export.")
@@ -249,6 +250,15 @@ def sync_power_automate_mailing_list():
     ).expanduser()
     server = os.environ.get("DAILYNEWS_SERVER_SSH", "Administrator@IEWEB01").strip()
     remote_script = rf'C:\Users\Administrator\Desktop\{REMOTE_FOLDER}\app\manage-mailing-list.js'
+    roster_input = None
+    roster_failure = None
+    try:
+        today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date()
+        roster_input = json.dumps(mailing_payload(EDITION.id, today), ensure_ascii=True)
+    except (OSError, ValueError) as exc:
+        # Keep serving existing subscribers when the share or a new CSV is unavailable.
+        roster_failure = {"status": "failed", "errorType": type(exc).__name__}
+    operation = "sync-roster-export" if roster_input is not None else "export-json"
     command = [
         "ssh",
         "-i",
@@ -258,12 +268,13 @@ def sync_power_automate_mailing_list():
         "-o",
         "BatchMode=yes",
         server,
-        f'node "{remote_script}" export-json',
+        f'node "{remote_script}" {operation}',
     ]
     result = subprocess.run(
         command,
         cwd=str(ROOT),
         capture_output=True,
+        input=roster_input,
         text=True,
         encoding="utf-8",
         errors="replace",
@@ -287,6 +298,13 @@ def sync_power_automate_mailing_list():
         raise RuntimeError("Mailing list export contained inconsistent addresses.")
     # Zero is a valid opt-out state. Publish it so an older list cannot keep sending.
     payload["edition_id"] = EDITION.id
+    if roster_failure:
+        payload["rosterSync"] = roster_failure
+    enrollment = payload.get("rosterSync", {})
+    if enrollment.get("status") == "failed":
+        log("[WARN] Employee master enrollment held; existing subscription choices exported.")
+    elif enrollment.get("added"):
+        log(f"[INFO] Employee master enrolled {enrollment['added']} new {EDITION.id} recipients.")
     _write_json_atomic(destination, payload)
     log(f"[INFO] Power Automate mailing list updated: {count} recipients -> {destination}")
     return count

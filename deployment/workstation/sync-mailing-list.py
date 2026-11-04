@@ -1,4 +1,4 @@
-"""Refresh each edition's opt-in list without running news or sending mail."""
+"""Enroll new room members and refresh choices without running news or sending mail."""
 import argparse
 import datetime as dt
 import importlib.util
@@ -24,7 +24,9 @@ def sync_edition(edition):
     spec = importlib.util.spec_from_file_location("mailing_list_runner", collection / "run_search_and_update.py")
     runner = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(runner)
-    return runner.sync_power_automate_mailing_list()
+    count = runner.sync_power_automate_mailing_list()
+    packet = json.loads(runner._power_automate_mailing_list_path().read_text(encoding="utf-8"))
+    return {"status": "success", "recipient_count": count, "roster_sync": packet.get("rosterSync")}
 
 
 def refresh_editions(editions):
@@ -65,8 +67,7 @@ def main():
     if args.edition:
         if args.edition not in editions:
             raise ValueError("Edition is not enabled")
-        count = sync_edition(args.edition)
-        print(json.dumps({"status": "success", "recipient_count": count}))
+        print(json.dumps(sync_edition(args.edition)))
         return 0
     lock = (RUNTIME / "mailing-list.lock").open("a+b")
     lock.seek(0, 2)

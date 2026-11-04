@@ -700,7 +700,7 @@ async function renderAdminPanel() {
     <div class="admin-kpis">${kpis.map(([label, value]) => `<div class="admin-kpi">${label}<strong>${Number(value || 0).toLocaleString()}</strong></div>`).join("")}</div>
     <div id="adminEditorialPanel"></div>
     <h3 class="account-section-title">朝8時のメール配信先 <span class="account-section-count">${mailingList.filter((item) => item.enabled).length}</span></h3>
-    <p class="admin-mail-note">${ACCOUNT_ALLOW_GUEST ? "外装版は受信を選んだ方にのみ配信します。ユーザー登録だけでは受信は有効になりません。" : "新しくユーザー登録した方は自動で追加されます。"} ユーザー登録していない方はここから追加できます。停止した宛先には次回から送信しません。</p>
+    <p class="admin-mail-note">社員マスタに載った${ACCOUNT_EDITION_LABEL === "外装版" ? "外装開発室" : "内装開発室"}の方は、同期時にこの版の配信先へ自動追加します。既存の配信停止と、取り込み後に削除した宛先は維持します。名簿外の方もここから追加できます。本人はマイページで受信する版を変更できます。</p>
     <form class="admin-mail-form" id="adminMailForm">
       <label class="account-field">表示名（任意）<input name="displayName" maxlength="40" placeholder="氏名・部署など"></label>
       <label class="account-field">メールアドレス<input name="email" type="email" maxlength="254" required placeholder="name@example.com"></label>

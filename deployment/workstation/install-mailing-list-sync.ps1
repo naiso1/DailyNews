@@ -6,9 +6,9 @@ $python = Join-Path $runtime "venv\Scripts\pythonw.exe"
 $script = Join-Path $PSScriptRoot "sync-mailing-list.py"
 $task = "DailyNews_ExteriorMailingListSync"
 $action = New-ScheduledTaskAction -Execute $python -Argument ('-B "' + $script + '"') -WorkingDirectory $PSScriptRoot
-$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes 2)
+$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At '07:50'
 $principal = New-ScheduledTaskPrincipal -UserId ([Security.Principal.WindowsIdentity]::GetCurrent().Name) -LogonType Interactive -RunLevel Limited
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 3) -MultipleInstances IgnoreNew
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -MultipleInstances IgnoreNew
 # Keep the installed task name so upgrades cannot leave two syncing tasks running.
-Register-ScheduledTask -TaskName $task -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Refresh interior and exterior opt-in recipients every two minutes; no news collection or mail sending." -Force | Out-Null
+Register-ScheduledTask -TaskName $task -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Enroll new room members and refresh recipients at 07:50 on weekdays before daily mail; no mail sending." -Force | Out-Null
 Write-Output "EDITION_MAILING_LIST_SYNC_INSTALLED"

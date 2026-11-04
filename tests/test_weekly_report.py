@@ -7,6 +7,35 @@ spec=importlib.util.spec_from_file_location('weekly',Path(__file__).resolve().pa
 weekly=importlib.util.module_from_spec(spec);spec.loader.exec_module(weekly)
 
 class WeeklyReportTests(unittest.TestCase):
+    def test_in_progress_roster_refresh_preserves_history_and_completed_weeks(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder); (root/'master').mkdir()
+            header='社員コード,メールアドレス,見出し名,氏名\n'
+            (root/'master/社員マスタ_20260921.csv').write_text(header+'1,a@toyoda-gosei.co.jp,内装開発室 3G,A\n',encoding='utf-8-sig')
+            path=root/'rosters/2026-11-02.json'
+            original=weekly.weekly_roster(path,root,date(2026,11,2),refresh=True)
+            (root/'master/社員マスタ_20261102.csv').write_text(header+'1,a@toyoda-gosei.co.jp,内装開発室 3G,A\n2,b@toyoda-gosei.co.jp,内装開発室 3G,B\n',encoding='utf-8-sig')
+            frozen=weekly.weekly_roster(path,root,date(2026,11,4),refresh=False)
+            self.assertEqual(frozen,original)
+            current=weekly.weekly_roster(path,root,date(2026,11,4),refresh=True)
+            self.assertEqual(len(current['members']),2)
+            self.assertEqual(current['masterDate'],'2026-11-02')
+            archive=path.parent/'history'/path.stem/(original['masterDate']+'_'+original['masterHash']+'.json')
+            self.assertEqual(json.loads(archive.read_text(encoding='utf8')),original)
+            self.assertFalse(any('email' in row for row in current['members'].values()))
+
+    def test_mail_roster_is_room_specific_and_future_master_is_not_used(self):
+        from dailynews.employee_master import mailing_payload
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder); (root/'master').mkdir()
+            header='社員コード,メールアドレス,見出し名,氏名\n'
+            (root/'master/社員マスタ_20261102.csv').write_text(header+'1,a@toyoda-gosei.co.jp,内装開発室 3G,A\n2,b@ts.toyoda-gosei.co.jp,外装開発室 1G,B\n3,c@toyoda-gosei.co.jp,IE開発部,C\n',encoding='utf-8-sig')
+            (root/'master/社員マスタ_20261201.csv').write_text(header+'4,future@toyoda-gosei.co.jp,内装開発室,F\n',encoding='utf-8-sig')
+            for edition,expected in [('interior','a@toyoda-gosei.co.jp'),('exterior','b@ts.toyoda-gosei.co.jp')]:
+                result=mailing_payload(edition,date(2026,11,4),root)
+                self.assertEqual(result['masterDate'],'2026-11-02')
+                self.assertEqual(result['memberCount'],3)
+                self.assertEqual([r['email'] for r in result['recipients']],[expected])
     def test_large_roster_change_is_held(self):
         previous={'members':{str(n):{} for n in range(47)}}
         weekly.validate_roster_change({'members':{str(n):{} for n in range(48)}},previous)

@@ -1,5 +1,6 @@
 """Mail opt-outs and independent edition sync; no server or email access."""
 import ast
+import datetime
 import importlib.util
 import json
 from pathlib import Path
@@ -38,6 +39,7 @@ class MailingListSyncTests(unittest.TestCase):
         destination = Path("unused-test-mailing-list.json")
         write = Mock()
         env = dict(Path=Path, os=SimpleNamespace(environ={}), json=json, ROOT=ROOT,
+                   datetime=datetime, mailing_payload=Mock(return_value={"schema": 1}),
                    REMOTE_FOLDER="UnusedTestRoot", EDITION=SimpleNamespace(id=edition),
                    _power_automate_mailing_list_path=lambda: destination,
                    _write_json_atomic=write, log=Mock(),
@@ -58,6 +60,15 @@ class MailingListSyncTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             call()
         write.assert_not_called()
+
+    def test_unavailable_master_still_exports_current_opt_outs(self):
+        call, write, _ = self._export({"recipientCount": 0, "to": "", "recipients": []})
+        call.__globals__["mailing_payload"].side_effect = OSError("Share unavailable")
+        self.assertEqual(call(), 0)
+        run = call.__globals__["subprocess"].run
+        self.assertTrue(run.call_args.args[0][-1].endswith(" export-json"))
+        self.assertIsNone(run.call_args.kwargs["input"])
+        self.assertEqual(write.call_args.args[1]["rosterSync"]["status"], "failed")
 
 
 if __name__ == "__main__":

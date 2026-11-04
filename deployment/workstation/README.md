@@ -58,6 +58,14 @@ to DESKTOP-97FRPLP, under the Owner account.
   See [image recovery](exabase/README.md#認証復帰後の画像補完2026-11-02).
 - OneDrive starts in Owner's session. Existing Power Automate weekday 08:00
   success/failure delivery and mailing-list management stay unchanged.
+- Before daily delivery, `DailyNews_ExteriorMailingListSync` runs at 07:50 on
+  weekdays (with missed-start recovery). The former two-minute repetition was
+  removed on 2026-11-04. The same enrollment/export runs during news updates and
+  explicit manual mail preparation. It reads the latest dated employee CSV,
+  enrolls missing interior/exterior room members in their own edition, and keeps
+  existing disabled subscriptions and previously imported/deleted recipients.
+  No login account, administrator permission or weekly-mail recipient is created.
+  See [mail operations](../notifications/README.md) for checks and rollback.
 - `DailyNews_ExaBaseSessionMaintenance` checks and refreshes exaBase authentication
   at :10 and :40 while the user is signed in and the workstation is awake. It skips
   while the news pipeline holds `run.lock` and does not generate images or send mail.

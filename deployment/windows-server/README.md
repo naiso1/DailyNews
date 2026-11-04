@@ -147,3 +147,10 @@ subscribed automatically; manual recipients can be added, disabled, or removed.
 The recipient list remains in SQLite and is exported to the signed-in business
 OneDrive by `ニュース収集/run_search_and_update.py`; it is never published with
 the public release.
+
+Since 2026-11-04, `roster-mailing-list.js` adds missing recipients from the latest
+validated employee master to their room's edition before export. Existing disabled
+choices are preserved. The private `roster_mail_enrollment` ledger prevents
+re-adding a recipient deleted after import; `roster_mail_state` guards against
+older or substantially changed masters. Neither table is served by the web API.
+This does not create accounts, administrator permissions, or weekly report recipients.

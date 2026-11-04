@@ -40,7 +40,23 @@ db.exec(`
 const command = process.argv[2] || "export-json";
 
 try {
-  if (command === "export-json") {
+  let rosterSync;
+  if (command === "sync-roster-export" || command === "preview-roster") {
+    const edition = path.basename(root) === "DailyNews" ? "interior" :
+      path.basename(root) === "DailyNewsExterior" ? "exterior" : null;
+    if (!edition) throw new Error("Unexpected edition root");
+    try {
+      rosterSync = require("./roster-mailing-list").syncRoster(db,
+        JSON.parse(fs.readFileSync(0, "utf8")), edition, {dryRun: command === "preview-roster"});
+    } catch (error) {
+      if (command === "preview-roster") throw error;
+      // A bad/unavailable new master cannot undo existing subscription choices.
+      rosterSync = {status: "failed", errorType: error.name};
+    }
+  }
+  if (command === "preview-roster") {
+    process.stdout.write(`${JSON.stringify(rosterSync)}\n`);
+  } else if (command === "export-json" || command === "sync-roster-export") {
     const recipients = db.prepare(`
       SELECT email, COALESCE(display_name, '') AS display_name, source
       FROM mail_subscriptions
@@ -57,6 +73,7 @@ try {
       recipientCount: recipients.length,
       to: recipients.map((recipient) => recipient.email).join(";"),
       recipients,
+      ...(rosterSync ? {rosterSync} : {}),
     })}\n`);
   } else if (command === "import-file") {
     const sourceFile = process.argv[3];

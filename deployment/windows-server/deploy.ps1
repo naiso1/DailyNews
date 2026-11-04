@@ -116,6 +116,7 @@ $appFiles = @(
     "enable-shared-identity.ps1",
     "backup.js",
     "manage-mailing-list.js",
+    "roster-mailing-list.js",
     "import_legacy.js",
     "activate-release.ps1",
     "restart-server.ps1",
