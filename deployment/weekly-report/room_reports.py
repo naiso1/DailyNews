@@ -58,7 +58,8 @@ def build_rooms(report, roster, source):
             if any(summary[k] != v for k, v in expected.items()):
                 raise ValueError('氏名付き集計が保存済みの室別集計と一致しません。元の週次結果を保持して確認してください。')
         result[edition] = {'room': room, 'edition': edition, 'title': TITLES[edition], **summary,
-                           'groups': groups, 'usageComplete': complete}
+                           'groups': groups, 'usageComplete': complete,
+                           **report.get('population', {}).get('byRoom', {}).get(room, {})}
     return result
 
 def percentage(active, total): return round(100*active/total) if total else 0
@@ -93,10 +94,12 @@ def email_html(report, sample=False):
     body.append('<table cellpadding="9" cellspacing="0" style="border-collapse:collapse;width:100%;background:#edf3f7"><tr><th align="left">対象</th><th>利用人数 / 室の人数</th><th>利用率</th><th>登録済・利用記録なし</th><th>未登録</th></tr>')
     for edition, section in sections.items():
         body.append(f'<tr><td>{section["room"]}（{section["title"][:2]}版）</td><td align="center">{section["active"]} / {section["headcount"]}人</td><td align="center"><b>{percentage(section["active"],section["headcount"])}%</b></td><td align="center">{section["registeredInactive"]}人</td><td align="center">{section["unregistered"]}人</td></tr>')
-    body.append('</table><p style="font-size:13px">利用率＝自室の版を利用したメンバー数 ÷ その室の名簿人数。未登録の人も分母に含めます。</p>')
+    body.append('</table><p style="font-size:13px">利用率＝自室の版を利用したメンバー数 ÷ その室の集計対象人数。未登録の人も分母に含め、設定された集計除外者は含めません。</p>')
     for edition, section in sections.items():
         color = '#2375af' if edition == 'interior' else '#178274'
         body.append(f'<h2 style="border-bottom:3px solid {color};padding-top:24px">{section["room"]}：{section["title"]}の利用</h2><p><b>{section["active"]} / {section["headcount"]}人（{percentage(section["active"],section["headcount"])}%）</b>が利用。利用記録なしは{section["registeredInactive"]+section["unregistered"]}人です。</p>')
+        if section.get('excludedCount'):
+            body.append(f'<p style="font-size:13px">名簿 {section["masterHeadcount"]}人のうち、集計除外 {section["excludedCount"]}人。利用率・個人別一覧・フォロー対象には含めていません。</p>')
         if not section['usageComplete']: body.append('<p>この週は利用人数の部分計測です。利用記録がない人も、計測開始前に利用していた可能性があります。</p>')
         note = read_note(report, edition)
         note_html = f'<p style="font-size:13px;background:#f1f5f9;padding:10px">{esc(note)}</p>' if note else ''
@@ -128,7 +131,7 @@ def chart(report, destination):
     count = sum(len(r['groups']) for r in report['rooms'].values())
     image = Image.new('RGB',(1500,410+count*85),'#f6f8fb'); d = ImageDraw.Draw(image)
     d.text((50,25),'各室のデイリーニュース利用状況',font=font(34),fill='#20364a')
-    d.text((50,85),f'{report["week"]} 〜 {report["end"]}　利用人数 / 各室・グループの名簿人数',font=font(23),fill='#506578')
+    d.text((50,85),f'{report["week"]} 〜 {report["end"]}　利用人数 / 各室・グループの集計対象人数',font=font(23),fill='#506578')
     y = 140
     for edition, section in report['rooms'].items():
         color = '#2375af' if edition == 'interior' else '#178274'
@@ -142,5 +145,5 @@ def chart(report, destination):
             d.text((235,y+42),f'利用記録なし {group["registeredInactive"]+group["unregistered"]}人（登録済 {group["registeredInactive"]}人 / 未登録 {group["unregistered"]}人）',font=font(18),fill='#506578')
             y+=85
         y+=25
-    d.text((50,image.height-48),'同じ人は1人として集計。個人名と週内の利用状況はメール本文に掲載しています。',font=font(21),fill='#506578')
+    d.text((50,image.height-48),'同じ人は1人として集計。設定された集計除外者は対象に含めません。',font=font(21),fill='#506578')
     image.save(destination)

@@ -36,10 +36,11 @@ window.renderDailyNewsWeeklyReports = async (container, request) => {
       ${Date.now()-new Date(reports[0].generatedAt).getTime()>36*3600000?'<p class="account-note">集計更新から36時間以上経過しています。前回の結果です。</p>':''}
       <h4>${esc(section.room)}：${esc(section.title)}</h4>
       <div style="display:flex;gap:18px;flex-wrap:wrap;margin:16px 0"><div><strong style="font-size:24px">${percent(section.active,section.headcount)}%</strong><br>利用 ${section.active} / ${section.headcount}人</div><div><strong style="font-size:24px">${section.registeredInactive}人</strong><br>登録済・利用記録なし</div><div><strong style="font-size:24px">${section.unregistered}人</strong><br>未登録</div></div>
-      <p class="account-note">利用率＝自室の版を利用したメンバー数 ÷ その室の名簿人数。名簿は${esc(report.masterDate)}時点、登録状態は対象週末時点です。</p>
+      <p class="account-note">利用率＝自室の版を利用したメンバー数 ÷ その室の集計対象人数。名簿は${esc(report.masterDate)}時点、登録状態は対象週末時点です。</p>
+      ${section.excludedCount?`<p class="account-note">名簿 ${esc(section.masterHeadcount)}人のうち、集計除外 ${esc(section.excludedCount)}人。利用率・個人別一覧・フォロー対象には含めていません。</p>`:''}
       ${!section.usageComplete?'<p class="account-note">この週は利用の部分計測です。利用記録がなくても、計測開始前に利用していた可能性があります。</p>':''}
       ${noteHtml}
-      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>グループ</th><th>利用 / 名簿人数</th><th>利用率</th><th>利用記録なし</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${section.groups.map(g=>`<tr><td>${esc(g.label)}</td><td>${g.active}/${g.headcount}人</td><td>${percent(g.active,g.headcount)}%${bar(g.active,g.headcount)}</td><td>${g.registeredInactive+g.unregistered}人</td><td>${read(g)}</td><td>${g.likes}件</td><td>${g.comments}件</td></tr>`).join('')}</tbody></table></div>
+      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>グループ</th><th>利用 / 集計対象人数</th><th>利用率</th><th>利用記録なし</th><th>記事閲覧</th><th>いいね</th><th>コメント</th></tr></thead><tbody>${section.groups.map(g=>`<tr><td>${esc(g.label)}</td><td>${g.active}/${g.headcount}人</td><td>${percent(g.active,g.headcount)}%${bar(g.active,g.headcount)}</td><td>${g.registeredInactive+g.unregistered}人</td><td>${read(g)}</td><td>${g.likes}件</td><td>${g.comments}件</td></tr>`).join('')}</tbody></table></div>
       <h4>フォロー対象の確認（利用記録なし ${inactive}人）</h4>
       <p class="account-note">未登録の方には登録案内、登録済みで利用記録がない方にはアクセス方法や利用しづらい点の確認にお使いください。</p>
       ${section.groups.map(g=>`<p><b>${esc(g.label)}</b>：${g.members.filter(m=>!m.active).map(m=>`${esc(m.name)}（${esc(m.status)}）`).join('、')||'利用記録なしの人はいません。'}</p>`).join('')}

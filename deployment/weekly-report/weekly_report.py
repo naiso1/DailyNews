@@ -10,6 +10,7 @@ from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from room_reports import build_rooms, email_html, chart
 from identity_matching import load_aliases, match_source
+from report_exclusions import load_exclusions, keys_for_week, validate_keys, prepare_inputs
 from delivery import TEST_TO, recipient_to
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -104,7 +105,8 @@ def build_report(start, end, roster, source, now):
     return {'week':start.isoformat(), 'end':end.isoformat(), 'generatedAt':now.isoformat(),
         'complete':end < now.date(), 'masterDate':roster['masterDate'], 'masterName':roster['masterName'],
         'rows':rows,'unmatched':unmatched,'coverage':coverage,
-        'notes': ['利用率＝期間内の利用人数÷名簿人数。両版の利用人数は同じ人を1人として集計。管理者も含みます。',
+        **({'population': roster['population']} if 'population' in roster else {}),
+        'notes': ['利用率＝期間内の利用人数÷集計対象人数。設定された集計除外者は分母・分子・個人別一覧・フォロー対象から除きます。管理者も対象に含みます。',
           '閲覧＝「記事を読む」のクリック。同じ人・同じ記事・同じ日は1回（両版は別記事扱い）。ログインした利用者が対象です。',
           'いいね・コメントは対象週に作成され、集計時点で残っている件数。取消・削除済みは含みません。',
           '進行中の週は最新の社員マスタで所属を更新します。確定済みの過去週は、その週の保存済み名簿を保持します。',
@@ -154,7 +156,9 @@ def run(args):
         try: msvcrt.locking(lock.fileno(),msvcrt.LK_NBLCK,1)
         except OSError: raise RuntimeError('レポートの作成処理が既に実行中です。')
         aliases=load_aliases(STATE/'identity-aliases.json')
+        exclusions=load_exclusions(STATE/'report-exclusions.json')
         source=extract_usage(); reports=[]
+        inputs={}
         for offset in range(8):
             start=current-timedelta(weeks=offset); end=start+timedelta(days=6)
             if end < date(2026,10,1): continue
@@ -167,16 +171,33 @@ def run(args):
             previous_roster=json.loads(older[-1].read_text(encoding='utf8')) if older else None
             roster=weekly_roster(roster_path,Path(args.master_root),min(today,end),
                                  refresh=start == current,previous=previous_roster)
-            report=build_report(start,end,roster,match_source(roster,source,aliases),now)
+            exclusion_path=STATE/'exclusions-by-week'/(start.isoformat()+'.json')
+            if start < current and exclusion_path.exists():
+                saved=json.loads(exclusion_path.read_text(encoding='utf8'))
+                if saved.get('schema') != 1 or saved.get('week') != start.isoformat():
+                    raise ValueError('保存済みの集計除外設定が不正です。')
+                keys=validate_keys(saved.get('keys'))
+            else:
+                keys=keys_for_week(exclusions,start.isoformat())
+            eligible,matched=prepare_inputs(roster,source,aliases,keys)
+            inputs[start.isoformat()]=(eligible,matched)
+            report=build_report(start,end,eligible,matched,now)
+            atomic_json(exclusion_path,{'schema':1,'week':start.isoformat(),'keys':keys})
             atomic_json(target,report); reports.append(report)
         for report in reports:
             detail_path=STATE/'room-details'/(report['week']+'.json')
             if detail_path.exists() and report['complete']:
                 details=json.loads(detail_path.read_text(encoding='utf8'))
             else:
-                roster=json.loads((STATE/'rosters'/(report['week']+'.json')).read_text(encoding='utf8'))
-                roster=named_roster(roster,Path(args.master_root))
-                details={'rooms':build_rooms(report,roster,match_source(roster,source,aliases)),'generatedAt':now.isoformat()}
+                if report['week'] in inputs:
+                    eligible,matched=inputs[report['week']]
+                else:
+                    roster=json.loads((STATE/'rosters'/(report['week']+'.json')).read_text(encoding='utf8'))
+                    roster=named_roster(roster,Path(args.master_root))
+                    exclusion_path=STATE/'exclusions-by-week'/(report['week']+'.json')
+                    keys=validate_keys(json.loads(exclusion_path.read_text(encoding='utf8')).get('keys')) if exclusion_path.exists() else []
+                    eligible,matched=prepare_inputs(roster,source,aliases,keys)
+                details={'rooms':build_rooms(report,eligible,matched),'generatedAt':now.isoformat()}
                 atomic_json(detail_path,details)
             report['rooms']=details['rooms']
             report['roomDetailsGeneratedAt']=details['generatedAt']
