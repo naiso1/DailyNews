@@ -111,6 +111,21 @@ function closeMentionMenus(except = null) {
   });
 }
 
+function fitMentionMenu(input, menu) {
+  const area = input.closest(".comment-input-area");
+  const card = input.closest(".card, .idea-card");
+  if (!area || !card) return;
+  const availableAbove = () => {
+    const viewportTop = window.visualViewport?.offsetTop || 0;
+    const top = Math.max(viewportTop + 12, card.getBoundingClientRect().top + 12);
+    return area.getBoundingClientRect().top - top - 7;
+  };
+  // Short idea cards clip absolutely positioned menus too. Fit inside both the
+  // card and viewport, and bring an editor near the viewport top into view.
+  if (availableAbove() < 100) input.scrollIntoView({ block: "center", inline: "nearest", behavior: "instant" });
+  menu.style.setProperty("--mention-menu-space", `${Math.max(1, Math.floor(availableAbove()))}px`);
+}
+
 async function showMentionCandidates(input, showAll = false) {
   const area = input.closest(".comment-input-area");
   const menu = area?.querySelector(".comment-mention-menu");
@@ -141,6 +156,7 @@ async function showMentionCandidates(input, showAll = false) {
     : '<span class="comment-mention-empty">一致するユーザーがいません。</span>';
   menu._mentionCandidates = candidates;
   closeMentionMenus(menu);
+  fitMentionMenu(input, menu);
   menu.classList.add("open");
 }
 

@@ -863,6 +863,15 @@ header.site-header {
     bottom: calc(100% + 7px);
     z-index: 20;
     display: none;
+    max-height: min(300px, 45vh, var(--mention-menu-space, 300px));
+    max-height: min(300px, 45dvh, var(--mention-menu-space, 300px));
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+    scrollbar-color: #71859d #111b29;
+    align-content: start;
+    grid-auto-rows: max-content;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 5px;
     padding: 8px;
