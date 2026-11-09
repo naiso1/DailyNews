@@ -26,7 +26,7 @@ window.DAILY_INSIGHTS = [
                 { id: 2152, img: "images/exabase_interior_2152_2551047edfd5b34b.png", title: "木製インサートの反り防止用接着補強層", desc: "Yangwangはキャビンに天然木のインサートを使用している。開発案として、ドアトリムの天然木インサート裏面に熱膨張差を吸収する柔軟な接着補強層を追加する。温湿度変化による木材の反りや剥離リスクを低減し、内装の耐久性向上を狙う。補強層有無の試作品で、高温高湿環境後の接着面剥離面積と変形量を比較する。 [us2021]", imagePrompt: "", sourceNewsIds: ["us2021"], imageProvider: "exabase", imageModel: "GPT-image" },
             ],
             eu: [
-                { id: 2153, img: "images/idea_dummy.svg", title: "センターコンソール冷却室用着脱式断熱トレイ", desc: "後部中央コンソールには5.5リットルの飲料を冷温できる収納スペースがある。開発案として、コンソールの冷却室底面に磁石で固定する着脱式断熱トレイを追加する。長距離移動時の飲料温度維持を狙う。有無の試作品で1時間後の水温変化を比較する。 [eu1993]", imagePrompt: "", sourceNewsIds: ["eu1993"] },
+                { id: 2153, img: "images/exabase_interior_2153_3e02fa5f98453167.png", title: "センターコンソール冷却室用着脱式断熱トレイ", desc: "後部中央コンソールには5.5リットルの飲料を冷温できる収納スペースがある。開発案として、コンソールの冷却室底面に磁石で固定する着脱式断熱トレイを追加する。長距離移動時の飲料温度維持を狙う。有無の試作品で1時間後の水温変化を比較する。 [eu1993]", imagePrompt: "", sourceNewsIds: ["eu1993"], imageProvider: "exabase", imageModel: "GPT-image" },
                 { id: 2154, img: "images/exabase_interior_2154_a59877bd1f58148d.png", title: "インパネ操作部用着脱式ショートカットボタン", desc: "ステアリングホイールにはライト点灯などのショートカットボタンが2つある。開発案として、インパネ右側に磁石で固定する着脱式物理ボタンを追加する。頻繁に使う機能の操作時間を短縮する狙いを持つ。有無の試作品でライト点灯までの平均操作時間を比較する。 [eu1991]", imagePrompt: "", sourceNewsIds: ["eu1991"], imageProvider: "exabase", imageModel: "GPT-image" },
             ],
         }
