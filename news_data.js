@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-11-09 01:54";
+window.NEWS_UPDATED_AT = "2026-11-10 01:31";
 
 window.LOADED_NEWS_DATA = [
 
@@ -254066,6 +254066,726 @@ window.LOADED_NEWS_DATA = [
         imageInterior: true,
         country: "in",
         img: "https://static.wixstatic.com/media/1da610_90703f7dcb564c36a414bbb02b556ba2~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    // 2026-11-09 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2215",
+        title: "日産エルグランド用後付け電子シェード発売、スイッチで透過と遮蔽を瞬時切替",
+        desc: "正興電機製作所が日産『エルグランド』向けに後付け調光製品「電子シェード」を発売した。ガラスの室内側へ貼り付ける方式で、スイッチ操作によりクリアとスモークモードを瞬時に切り替えられる。運転席や2列目からも操作可能だが、ガラスごとの独立制御はできず一括切替となる。",
+        url: "https://news.yahoo.co.jp/articles/c42cdbfc87086e3dfd9c71492e5d98523140b5c7",
+        source: "レスポンス",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "スイッチのON/OFF操作でウインドウの透過（クリアモード）と遮蔽（スモークモード）を瞬時に切り替えられる調光機能が付加される製品で、5枚仕様が36万6000円、2枚仕様が22万円（いずれも製品代のみ、取付費別途）。",
+        interiorScore: 84,
+        interiorReason: "Specific aftermarket electrochromic window product with detailed HMI controls (m",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00000022-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2216",
+        title: "豊田合成、メッセナゴヤでリサイクル素材の内装部品活用技術を展示",
+        desc: "豊田合成は2026年11月11日から13日にポートメッセなごやで開催される「メッセナゴヤ2026」に出展する。廃車のプラスチック部品を新車向け内装・外装部品へ再生させる技術を紹介し、リサイクル材50%配合でも新材同等の性能を実現した素材開発の成果を披露する。",
+        url: "https://news.yahoo.co.jp/articles/28d2b2a379bd8b439f7ca1c810b44696cf09e077",
+        source: "レスポンス",
+        date: "2026-11-09",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "■プラスチック部品の水平リサイクル廃車のプラスチック部品を新車の内装・外装部品へリサイクルする取り組みも紹介する。",
+        interiorScore: 57,
+        interiorReason: "The article details specific material recycling technologies for automotive inte",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00000018-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2217",
+        title: "シエンタ専用車中泊キット、木製床とフルフラット構造で常設展示",
+        desc: "YURTの『シエンタ』専用ルームキット「VANLIFE ROOMKIT」は、木製の床やフルフラット構造を備え、5人乗りから大人2人がくつろげる空間へ変換できる。トヨタカローラ埼玉のコンセプト店「TCS三郷上彦名」で常設展示されており、災害時の授乳室など防災活動への活用も予定されている。",
+        url: "https://news.yahoo.co.jp/articles/6cf2e1b3e92ae1a83a3038c24631dc99e43dc43d",
+        source: "レスポンス",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "YURTは、トヨタ『シエンタ』専用車中泊キット「VANLIFE ROOMKIT」を搭載したデモ車両を、トヨタカローラ埼玉のコンセプト店「TCS三郷上彦名」において、常設展示を開始した。",
+        interiorScore: 73,
+        interiorReason: "The article details a specific aftermarket interior conversion kit (VANLIFE ROOM",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00000016-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2218",
+        title: "広島Kサウンド、車内静音化と断熱対策の施工事例",
+        desc: "広島県のカーオーディオ専門店Kサウンドでは、ロードノイズや雨音への不満が増加し、車内環境の快適化を求める相談が拡大している。同店はドア内部の音響調整ノウハウを活かし、タイヤハウスへのデッドニングで1箇所3万〜4万円、ルーフ全体への施工で10万〜15万円の費用目安を提示している。",
+        url: "https://news.yahoo.co.jp/articles/4478f72055fea02d2067d8f22d1d7a0d13bc08e3",
+        source: "レスポンス",
+        date: "2026-11-09",
+        tags: ["音響"],
+    
+        sourceExcerpt: "ちなみに部材代も含めた工賃の目安は、タイヤハウスへのデッドニングが1箇所あたり税込3万円から4万円程度、ルーフデッドニングは10万円から15万円程度です」車内の快適性を向上させたいと思っている貴方は、お近くならぜひ『Kサウンド』まで。",
+        interiorScore: 79,
+        interiorReason: "Focuses on cabin comfort (NVH and thermal) with specific material application de",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00000014-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2219",
+        title: "豊田通商、メッセナゴヤでCar to Carリサイクルを披露",
+        desc: "豊田通商は2026年11月、ポートメッセなごやで開催される「メッセナゴヤ2026」に出展し、Car to Carプラスチックリサイクル（プラニック）などのサーキュラーエコノミー事業を紹介する。",
+        url: "https://news.yahoo.co.jp/articles/296bd229608ed7b3c37d88271a6214c578b83efd",
+        source: "レスポンス",
+        date: "2026-11-09",
+        tags: ["AR", "新素材"],
+    
+        sourceExcerpt: "豊田通商およびグループ会社のエレマテック、豊通ファシリティーズ、豊通マシナリー、豊通ユニファッション、ネクスティ エレクトロニクスの6社は、2026年11月11日（水）から13日（金）に開催される異業種交流展示会「メッセナゴヤ2026」に出展する。",
+        interiorScore: 11,
+        interiorReason: "The article focuses on a trade show exhibition for circular economy and recyclin",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00000013-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2220",
+        title: "レクサスRZ、タヅナコンセプト採用で14インチディスプレイ搭載",
+        desc: "レクサス「RZ」は、視線移動を抑える「タヅナコンセプト」に基づいたコックピットを採用している。室内には14インチのタッチディスプレイやダイヤル式シフトを備え、シンプルで開放感のある空間を実現している。価格は790万円から950万円で設定されている。",
+        url: "https://news.yahoo.co.jp/articles/643949f98b8a5be79c02ce4624d1c457796db581",
+        source: "carview!",
+        date: "2026-11-09",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "インテリアには、運転中の視線移動を抑える「タヅナコンセプト」に基づいたコックピットを採用しているほか、14インチのタッチディスプレイやダイヤル式シフトを備え、シンプルで開放感のある室内空間となっています。",
+        interiorScore: 61,
+        interiorReason: "The article details specific interior features of the Lexus RZ, including the 'T",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00010003-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2221",
+        title: "ワークスベルR35GT-R後期用ステアリング移設キットSRD発売",
+        desc: "ワークスベルはR35GT-R後期型向けに純正パドルシフターとスイッチを社外ステアリングへ移設できる「SRD KIT」を12万1000円で展開した。ボス上部のパドルマウントフレームと下部のスイッチマウントで構成され、モモやナルディなど幅広い社外品に対応する。純正コネクターを使用し電気系統の信頼性を確保しつつ、脱着式システム「RAPFIX II」との組み合わせも可能だ。",
+        url: "https://news.yahoo.co.jp/articles/670023e11925b383615817b00b9dff19470d7385",
+        source: "MotorFan",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "純正パドル＆スイッチを残せるワークスベルのSRDキットが凄いドライバーがクルマを操るうえで、もっとも長い時間触れているパーツのひとつがステアリングだ。",
+        interiorScore: 94,
+        interiorReason: "The article details a specific interior accessory (steering wheel switch relocat",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-01669696-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2222",
+        title: "クラフトワークス、ランクル250用フルフラット収納キット発売",
+        desc: "クラフトワークスはランドクルーザー250専用「ラゲッジボックス フルフラット収納キット」を9万8800円から販売開始した。荷室下段に左右独立引き出し収納を備え、内側はフェルト調素材を採用している。付属天板を展開すれば2列目シートまでフルフラットな空間が形成され、車中泊スペースとしても活用できる仕様だ。",
+        url: "https://news.yahoo.co.jp/articles/78fccdc605574b4f902cfd2f05612ddd25d44f3a",
+        source: "MotorFan",
+        date: "2026-11-09",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "クラフトワークスが発売する専用ラゲッジキットは、荷室に大容量の引き出し収納を追加できるだけでなく、2列目シートまで続くフルフラットなベッドスペースも実現。",
+        interiorScore: 90,
+        interiorReason: "Detailed accessory product with specific interior material (felt lining), HMI/UX",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-01672967-motorfan-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2223",
+        title: "N-VANの快適装備とフラットシート、オーナーが評価",
+        desc: "ホンダN-VANはN-BOXベースで自然な運転姿勢を実現し、助手席をフラットに格納できる設計が特徴だ。筆者は肉厚なシートやアームレスト（GグレードとMT車除く）を快適性と評価している。",
+        url: "https://news.yahoo.co.jp/articles/d82e086075bec252715e500b0e44d77afa78a48c",
+        source: "ベストカーWeb",
+        date: "2026-11-09",
+        tags: ["シート"],
+    
+        sourceExcerpt: "それまでのセミキャブオーバースタイルのアクティから、2代目N-BOXベースの前輪駆動レイアウトとなったことで、荷室長は短くなってしまったもの",
+        sourceExcerptEnd: "か、助手席シートまでもフラットに格納することができるようにするなど、従来の軽商用バンとは異なる魅力を持つモデルとなった。",
+        interiorScore: 62,
+        interiorReason: "Detailed owner review focusing on interior comfort, seat ergonomics (armrests),",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-00000015-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2224",
+        title: "三菱アウトランダー ダイヤモンドトレイルエディションSEMAで専用シートと新素材初公開",
+        desc: "三菱はSEMAショーで新型アウトランダー ダイヤモンドトレイルエディションを初公開した。インテリアではダークグレー基調にカーキ色のステッチを施した専用シートを採用し、水や汚れをはじく新素材の表皮を使用している。",
+        url: "https://news.yahoo.co.jp/articles/6462263e257cacc915de0d49a712811dca4b5061",
+        source: "くるまのニュース",
+        date: "2026-11-09",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "シート表皮には水をはじき、汚れを落としやすい新素材を使用しており、アウトドアでの使用を想定した実用性も確保しています。",
+        interiorScore: 90,
+        interiorReason: "The article details specific interior material and HMI updates for the Outlander",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261109-01137022-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us2015",
+        title: "ジャレミー・クラークソンのフェラーリF355 GTS、20万ポンド台で再出品",
+        desc: "1996年型フェラーリF355 GTSが2026年11月14日のオークションに再登場し、推定価格は20万〜25万ポンドと設定された。車内はクリーム色レザーに赤いインサートとカーボンバックスポーツシートを備え、V8エンジンと6速マニュアルトランスミッションのシリアル番号も一致している。",
+        url: "https://www.motor1.com/news/814829/jeremy-clarkson-ferrari-f355-gts/",
+        source: "Motor1",
+        date: "2026-11-09",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "The car wears Rosso Corsa paint over Crema leather with Rosso carpets,",
+        sourceExcerptEnd: "factory carbon-backed sports seats, trimmed in Crema with red inserts.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/W8bvOj/s3/jeremy-clarkson-s-1996-ferrari-f355-gts.jpg",
+        note: ""
+    },
+    {
+        id: "us2016",
+        title: "ソニー、広告連動で車内に香りを出す特許",
+        desc: "ソニーは、車外カメラとGPSで広告を検知し、登録された香りを座席へ送る特許を公開した。乗員の属性や接近度に応じて調整でき、インフォテインメントのCMにも対応する仕組みです。",
+        url: "https://www.motor1.com/news/814810/sony-car-smell-ad-patent/",
+        source: "Motor1",
+        date: "2026-11-09",
+        tags: ["コネクテッド", "シート"],
+    
+        sourceExcerpt: "The car would also use GPS to establish whether it's actually passing the registered advertising display.",
+        interiorScore: 61,
+        interiorReason: "Sony's patent for an in-cabin scent system directly impacts interior comfort and",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/NG6NXb/s3/in-car-scent-that-matches-nearby-ads-made-with-ai.jpg",
+        note: ""
+    },
+    {
+        id: "us2017",
+        title: "ベントレーの最新ミューリナー作品、塗装に56時間要する",
+        desc: "Bentleyは、塗装へのこだわりを表現するために12台のContinental GTを製造した。MullinerによるOlympia Collectionは、1926年のロンドン・オリンピアモーターショーで完成車として初公開されたBentley 6 ½ Litreの100周年を記念するものである。",
+        url: "https://www.motor1.com/news/814816/bentley-olympia-collection-honors-1926/",
+        source: "Motor1",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "The Olympia Collection by Mulliner marks 100 years since the Bentley 6",
+        sourceExcerptEnd: "Speed Six that won Le Mans in 1929 and 1930.",
+        interiorScore: 28,
+        interiorReason: "Detailed description of bespoke interior materials (leather split, patinated fin",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/jl8Ayy/s3/bentley-continental-gt-olympia-collection-by-mulliner.jpg",
+        note: ""
+    },
+    {
+        id: "us2018",
+        title: "Hudson Auto Films、80年代コンセプトカーNovaのFRPボディ修復に着手",
+        desc: "Hudson Auto Filmsは、英国で開発されたVW Beetleベースのキットカー「Nova」を修復している。FRP製ボディは劣化が激しく、約10週間の研磨や補修を経て最終プライマー塗布まであと25時間程度と推定されている。",
+        url: "https://www.motor1.com/news/814812/restoring-fiberglass-body-abandoned-80s/",
+        source: "Motor1",
+        date: "2026-11-09",
+        tags: ["HUD"],
+    
+        sourceExcerpt: "Hudson Auto Films bought the Nova a year ago, a strange 1980s concept car that sat abandoned in undergrowth for decades.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/rK6lQV/s3/nova-sterling-sebring-kit-car.jpg",
+        note: ""
+    },
+    {
+        id: "us2019",
+        title: "ランボルギーニRevuelto、サウジ向けに砂漠をモチーフにした内装のワンオフ2台",
+        desc: "ランボルギーニはAd Personamプログラムで、サウジアラビアの砂丘をイメージしたワンオフRevueltoを2台納車した。両車ともNero Adeレザーとカーボンファイバートリムを採用し、ダunesの流れを表現する刺繍や「Legacy」の文字を施した専用パネルが特徴である。",
+        url: "https://www.motor1.com/news/814786/lamborghini-revuelto-personam-saudi-desert/",
+        source: "Motor1",
+        date: "2026-11-09",
+        tags: ["新素材", "EV"],
+    
+        sourceExcerpt: "Interior work follows the same logic as the paint.",
+        interiorScore: 50,
+        interiorReason: "The article details specific interior customization elements (Nero Ade leather,",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/0ep0B2/s3/lamborghini-revuelto-ad-personam-ksa-edition.jpg",
+        note: ""
+    },
+    {
+        id: "us2020",
+        title: "Giocattolo Group B希少個体 レザー内装搭載",
+        desc: "アルファロメオ・スプリントをベースにホールドン製V8を搭載した1988年デビューの15台限定車である。今回販売される4号車にはAU$2,500で選択されたレザー内装が備わっており、後部座席を撤去してエンジンルームとした構造と組み合わさっている。",
+        url: "https://www.carscoops.com/2310560/giocattolo-group-b-supercar/",
+        source: "CarScoops",
+        date: "2026-11-09",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "Australia didn't have an abundance of alternative V6 engines, but it did have plenty of V8s, and that's exactly what replaced the rear seats.",
+        country: "us",
+        img: "https://www.carscoops.com/img/gallery/australia-built-a-1980s-supercar-out-of-a-front-drive-alfa-romeo/l-intro-1794199839.jpg",
+        note: ""
+    },
+    {
+        id: "us2021",
+        title: "BYD Yangwang Altior、天然木とシルク刺繍を備えた4人乗り高級セダン",
+        desc: "BYDのハイエンドブランドYangwangが発表したフラッグシップEV「Altior」は、天然木のインサートや半アニリンレザー、シルク刺繍を採用した豪華な4人乗りキャビンを実現している。また、後部座席には電動リクライニング機能付きのゼログラビティシートを備え、39スピーカー構成のオーディオシステムで快適性を高めている。",
+        url: "https://www.carscoops.com/2310226/byd-yangwang-altior/",
+        source: "CarScoops",
+        date: "2026-11-09",
+        tags: ["シート", "新素材", "EV", "バッテリー", "音響"],
+    
+        sourceExcerpt: "Party tricks include a screen-covered dashboard, a powered 21.4-inch overhead display for",
+        sourceExcerptEnd: "door-mounted umbrella holders just so Rolls-Royce owners feel at home.",
+        interiorScore: 95,
+        interiorReason: "Flagship luxury sedan with highly specific interior details (semi-aniline leathe",
+        imageInterior: true,
+        country: "us",
+        img: "https://www.carscoops.com/img/gallery/byds-yangwang-altior-is-a-310k-rolls-royce-copycat-that-can-tank-turn/l-intro-1794129125.jpg",
+        note: ""
+    },
+    {
+        id: "us2022",
+        title: "Audi Nuvolari、ミクロファイバーとアルミで仕立てた内装公開",
+        desc: "2028 Audi Nuvolariの内装はマイクロファイバーとレザーで構成され、アルミニウムアクセントが施されている。ステアリングホイールやインフォテインメントスクリーンはLamborghini RevueltoおよびTemerarioと共用されており、筆者は高級感あふれる雰囲気を評価している。",
+        url: "https://www.caranddriver.com/photos/a74348194/2028-audi-nuvolari-track-drive-interior-gallery/",
+        source: "Car and Driver",
+        date: "2026-11-09",
+        tags: ["AR", "ディスプレイ", "コネクテッド", "新素材", "EV"],
+    
+        sourceExcerpt: "The 2028 Audi Nuvolari shares most of its architecture and hardware with",
+        sourceExcerptEnd: "and interior designs are for the most part completely different.",
+        interiorScore: 96,
+        interiorReason: "The article is a dedicated interior photo gallery providing high-value visual an",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/0f1bc901-543f-4be4-82b9-bab9c60ffb15.jpg",
+        note: ""
+    },
+    {
+        id: "us2023",
+        title: "Ford Taurus SHO、Yamaha製V6と5速MTの30年経っても魅力",
+        desc: "1986年のFord Taurus SHOは、Yamaha製の3.0リッターDOHC V6を搭載し220馬力を発生する。5速マニュアルトランスミッションを組み合わせ、外観は控えめながら高性能なハードウェアを備えた。現在も手頃な価格で入手可能だが、維持状態の良い個体を見つけるには慎重さが求められる。",
+        url: "https://www.topspeed.com/ford-taurus-sho-cheap-enthusiast-car/",
+        source: "Top Speed",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "For 1996, the third-generation SHO replaced the Yamaha V6 with a jointly developed Ford–Yamaha 3.4-liter V8.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2025/03/2017-ford-taurus-sho.jpg",
+        note: ""
+    },
+    {
+        id: "eu1989",
+        title: "BMW、V8搭載のAlpinaコンセプト量産化検討",
+        desc: "BMWは5月にヴィラ・デステで発表したVision BMW Alpinaコンセプトの量産化を検討している。最終決定は未定だが、今年初頭に完了した創業者家からの買収を経てブランドを再始動させる狙いがあり、関係者はこれを「M1の瞬間」と呼んでいる。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/bmw-could-build-v8-alpina-concept-luxury-brands-m1-moment",
+        source: "AUTOCAR UK",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "BMW executives are hoping to put the Vision BMW Alpina concept, which",
+        sourceExcerptEnd: "at the Villa d'Este concours in May, into full production.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/alpina_v8_bmw_1.jpg?itok=cIyLJvM3",
+        note: ""
+    },
+    {
+        id: "eu1990",
+        title: "VW ID. Polo、内装品質と実用性を備えた小型EV",
+        desc: "Volkswagen ID. Poloは、優れた内装品質と広いトランクスペースを特徴とする。価格は£23,935から£32,445で、後部座席の足元空間が狭い点が指摘されている。",
+        url: "https://www.autoexpress.co.uk/volkswagen/polo/370857/volkswagen-id-polo-review",
+        source: "Auto Express",
+        date: "2026-11-09",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "However, as we’ve seen with the Volkswagen Passat and its Skoda Superb",
+        sourceExcerptEnd: "the back seat for development isn’t necessarily a bad thing.",
+        interiorScore: 57,
+        interiorReason: "Review highlights excellent interior quality and ergonomics, which are key for c",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/DB2026AU00791_0.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1991",
+        title: "マツダ6eタクミプラス、タンカラー内装と14.6インチディスプレイ",
+        desc: "マツダ6eの長期テストで、筆者は外観のシンプルさと対照的なタンカラーの内装を特徴として挙げている。装備面では、14.6インチのセンターディスプレイや10.2インチのドライバーズディスプレイ、さらに14スピーカーのソニー製オーディオシステムが標準搭載されている。",
+        url: "https://www.autoexpress.co.uk/mazda/6/370855/long-term-test-mazda-6e-takumi-plus-richard-ingram",
+        source: "Auto Express",
+        date: "2026-11-09",
+        tags: ["ディスプレイ", "音響"],
+    
+        sourceExcerpt: "I’m so glad our Mazda 6e isn’t another boring saloon; the tan interior really lifts your mood every time you get in.",
+        interiorScore: 73,
+        interiorReason: "Detailed review of interior features including specific display sizes (14.6-inch",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/Mazda%206e%20-%20mullet.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu1992",
+        title: "BYDのYangwang、Rolls-Royceと競うが伝統に勝てない",
+        desc: "BYD傘下の高級ブランドYangwangは新車Altiorを投入し、中国勢の大型化・高機能化で市場を狙う。しかし筆者は、長年の歴史を持つRolls-Royceのブランド力には、単なるサイズや技術では太刀打ちできないと指摘している。",
+        url: "https://www.autocar.co.uk/opinion/new-cars/yangwang-vs-rolls-royce-size-and-tech-cant-beat-legacy",
+        source: "Autocar Reviews",
+        date: "2026-11-09",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "With the unveiling of the new Yangwang Altior comes a real test",
+        sourceExcerptEnd: "car buyers and lure them away from the Rolls-Royce showroom?",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/l19_0.jpg?itok=IkVC04ha",
+        note: ""
+    },
+    {
+        id: "cn1977",
+        title: "BYD Ti7がJLRから特許侵害を理由に提訴され、オランダの事務所が捜索を受けた",
+        desc: "ジャガー・ランドローバー（JLR）は、BYDのSUV「Ti7」がランドローバー・ディフェンダーの知的財産権を侵害したと主張しています。2026年8月にはオランダにあるBYDの2つのオフィスで捜索が行われ、当局がデジタル記録を押収しました。11月11日にはハーグで予備審理が開かれる予定です。",
+        url: "https://carnewschina.com/2026/11/09/byd-offices-raided-over-allegations-ti7-suv-copied-the-land-rover-defender/",
+        source: "CarNewsChina - All",
+        date: "2026-11-09",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "JLR reportedly suspects that BYD dismantled a Defender to reverse-engineer some of its technology for the Ti7.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/HI2BKTIWGNDBHETRF43VGOW6ME.avif",
+        note: ""
+    },
+    {
+        id: "cn1978",
+        title: "BYD、1900万台目NEVにTi 9を据えラダーフレームからモノコックへ転換",
+        desc: "BYDは2026年11月9日、累計生産台数1,900万台を達成した。記念車として選ばれたFang Cheng Bao Ti 9には、独立式2列目シートや最大300kgの耐荷重を持つ分割式電動テールゲートが備わっている。",
+        url: "https://carnewschina.com/2026/11/09/byd-rolls-out-19-millionth-nev-as-fang-cheng-bao-ti-9-opens-reservations/",
+        source: "CarNewsChina - All",
+        date: "2026-11-09",
+        tags: ["シート", "EV", "バッテリー"],
+    
+        sourceExcerpt: "BYD produced its 19 millionth new energy vehicle (NEV) on November 9, with the Fang Cheng Bao Ti 9 becoming the milestone vehicle.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/0e7a5310-440c-4b51-a6ee-95b91f393afc-large-1401x900.jpeg",
+        note: ""
+    },
+    {
+        id: "cn1979",
+        title: "BYDがUAEで1000kW出力の自動プラグイン式ロボット充電器を実演",
+        desc: "BYDはUAEで視覚認識と力フィードバック制御による自動充電ロボットを実演し、ポート特定からコネクタ挿入・抜去までを自動化した。出力1000kWのシステムに加え、車両が自律駐車して充電するワンタップ機能も併せて公開された。",
+        url: "https://carnewschina.com/2026/11/09/byd-debuts-1000-kw-robotic-ev-charger-with-fully-automated-plug-in-in-uae-video/",
+        source: "CarNewsChina - All",
+        date: "2026-11-09",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "BYD has demonstrated its flash-charging robotic arm in the United Arab Emirates",
+        sourceExcerptEnd: "vehicles to charge without drivers manually connecting a charging cable.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/byd-debuts-1000-kw-robotic-ev-charger-with-fully-automated-4308c0-1500x663.jpeg",
+        note: ""
+    },
+    {
+        id: "cn1980",
+        title: "テスラ中国の10月販売台数は8,817台となり、輸出比率は過去最高の87%を記録した。",
+        desc: "テスラは2026年10月の中国国内販売で前年比66.1%減の8,817台となり、2022年7月以来の低水準を記録した。一方、上海工場の輸出は59,012台と急増し、卸売総数に占める比率が過去最高の87%に達している。",
+        url: "https://carnewschina.com/2026/11/09/teslas-china-sales-fall-to-8800-in-october-the-lowest-since-july-2022-as-exports-surge/",
+        source: "CarNewsChina - All",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "Tesla sold 8,817 cars in China in October, down 66.1% year-on-year.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/teslas-china-sales-fall-to-8800-in-october-the-lowest-since-85fa98-1200x900.jpg",
+        note: ""
+    },
+    {
+        id: "cn1981",
+        title: "小米汽車、10月に5万168台を納車。EREVが全体の半数以上を占める",
+        desc: "小米汽車（Xiaomi Auto）2026年10月の納車台数は5万168台で、年間最高記録を更新した。このうちSky Nomadシリーズ（N70とN90）の合計納車台数は2万7,147台となり、初めて総販売台数の54.11%を占めた。一方、純電動モデルであるSU7とYU7の納車台数は減少した。",
+        url: "https://cnevpost.com/2026/11/09/xiaomi-deliveries-oct-2026-erevs-half-total/",
+        source: "CnEVPost - All",
+        date: "2026-11-09",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Xiaomi launched the Sky Nomad series and began deliveries on September 7, marking its entry into the extended-range electric vehicle (EREV) market.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026110911214242.jpg",
+        note: ""
+    },
+    {
+        id: "cn1982",
+        title: "マセラティはファーウェイおよびJACと連携し、中国市場向けの新型車を共同開発する。",
+        desc: "マセラティがファーウェイと江淮汽車（JAC）と連携し、中国市場向けのローカライズ生産プロジェクトを進めると報じられています。この共同開発では、中国国内で「Maextro」ブランドを通じて販売し、海外向けにはマセラティのブランドを維持する二重戦略を採用する計画です。",
+        url: "https://cnevpost.com/2026/11/09/maserati-partner-with-maextro-localized-production-china/",
+        source: "CnEVPost - All",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "Maserati will reportedly partner with Maextro, the brand jointly developed by Huawei",
+        sourceExcerptEnd: "in China, using different brands for domestic and overseas sales.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026110906452874.jpg",
+        note: ""
+    },
+    {
+        id: "cn1983",
+        title: "JLRは、BYDのTi7がDefenderの特許を侵害したとして提訴した。",
+        desc: "ジャガー・ランドローバー（JLR）はオランダでBYDを提訴し、7人乗りSUV「Ti7」がランドローバー・ディフェンダーの知的財産権を侵害したと主張している。BYDは英国で4万7995ポンドから販売予定だが、JLRは欧州市場での販売停止を求めている。",
+        url: "https://insidechinaauto.com/2026/11/09/land-rover-takes-byd-to-court-over-defender-style-ti7/",
+        source: "Inside China Auto - All",
+        date: "2026-11-09",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Jaguar Land Rover has taken legal action against BYD in the Netherlands,",
+        sourceExcerptEnd: "SUV infringes the intellectual property of the Land Rover Defender.",
+        country: "cn",
+        img: "https://insidechinaauto.com/wp-content/uploads/2026/11/byd-ti7-mountain-green-front-three-quarter.jpg",
+        note: ""
+    },
+    {
+        id: "in2052",
+        title: "BYD Atto 2、チennaiで無カモフラージュ撮影",
+        desc: "インドのチennaiで、BYD Atto 2がカモフラージュなしで目撃された。内装には15.6インチの回転式インフォテインメントディスプレイや8.8インチのメータークラスターを備え、ベンチレーションシートやレザー調素材も採用されている。",
+        url: "https://www.rushlane.com/byd-atto-2-spied-in-chennai-sierra-ev-rival-launch-2027-12560754.html",
+        source: "RushLane",
+        date: "2026-11-09",
+        tags: ["ディスプレイ", "コネクテッド", "AI", "シート", "新素材", "バッテリー"],
+    
+        sourceExcerpt: "Inside, BYD Atto 2 packs a premium cabin with a 15.6-inch rotatable",
+        sourceExcerptEnd: "upholstery, front and side airbags, advanced Level-2 ADAS and more.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/byd-atto-2-spied-in-chennai-before-launch-2.jpg",
+        note: ""
+    },
+    {
+        id: "in2053",
+        title: "BYD Yangwang Altior、4モーターと後席専用空間でフラッグシップを宣言",
+        desc: "BYDの高級ブランドYangwangが展開する電気セダンAltiorは、4つの独立したモーターを搭載し、後部座席にエグゼクティブな専用カビンを備える。CLTCモードでの航続距離は1,000km超とされ、同社のU8やU9に続く技術の集大成として位置づけられている。",
+        url: "https://gaadiwaadi.com/byd-yangwang-altior-comes-to-the-fore-as-a-flagship-luxury-statement/",
+        source: "GaadiWaadi",
+        date: "2026-11-09",
+        tags: ["シート", "バッテリー"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/11/BYD-Yangwang-Altior-.jpg",
+        note: ""
+    },
+    {
+        id: "in2054",
+        title: "マルチ・スズキ、祝祭期販売40万台超で前年比増",
+        desc: "2026年のガネーシャ・チャトゥルティからダンタラスまでの期間に、マルチ・スズキは40万台以上の車両を販売した。これは前年同期の34万6,000台を上回る数字である。一方、FADAが記録した10月のインド国内登録台数は317.2万台となり、小売ベースでは前年比で24%減少している。",
+        url: "https://gaadiwaadi.com/auto-festive-sales-2026-dhanteras-spurs-deliveries-october-retail-down-24/",
+        source: "GaadiWaadi",
+        date: "2026-11-09",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/11/Renault-Duster-Strong-Hybrid-Delivery-1.jpg.jpeg",
+        note: ""
+    },
+    {
+        id: "in2055",
+        title: "Kiaインド、ハイブリッドとEVの拡充計画",
+        desc: "Kiaはインド市場でのポートフォリオ拡大を準備しており、新開発のハイブリッドパワートレインやプレミアムSUV、現地開発の電気自動車（EV）を導入する方針を示している。",
+        url: "https://gaadiwaadi.com/upcoming-kia-cars-in-india-more-evs-and-hybrids-incoming/",
+        source: "GaadiWaadi",
+        date: "2026-11-09",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/kia-seltos-hybrid.jpg",
+        note: ""
+    },
+    {
+        id: "in2056",
+        title: "2026年10月インド新車販売でマルチ・スズキが7車種を占める",
+        desc: "2026年10月のインド新車販売で、マルチ・スズキが上位10車種のうち7車種を占めた。フェイスリフト後のブレッザは前年比86%増と伸長し、祝祭期に伴う生産拡大により上位10車種のうち8車種が年間増加を記録した。",
+        url: "https://gaadiwaadi.com/top-10-most-sold-cars-oct-2026-wagonr-brezza-nexon-punch-scorpio/",
+        source: "GaadiWaadi",
+        date: "2026-11-09",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/07/2026-Maruti-brezza-7.jpg",
+        note: ""
+    },
+    {
+        id: "us2024",
+        title: "BYD Yangwang Altior、ダッシュボード全面スクリーンと金装飾を備える",
+        desc: "BYDのフラッグシップEVセダンYangwang Altiorは、ダッシュボード全体を覆う大型スクリーンや24カラット金のエンブレムなど、豪華な内装装備を採用している。",
+        url: "https://insideevs.com/news/814803/byd-yangwang-altior-luxury-ev-rolls-royce-rival/",
+        source: "InsideEVs",
+        date: "2026-11-09",
+        tags: ["ディスプレイ", "コックピット", "EV", "バッテリー"],
+    
+        sourceExcerpt: "A huge screen takes up the whole dashboard—a feature that’s all the rage in China, but might seem outdated in a few years.",
+        interiorScore: 28,
+        interiorReason: "Flagship luxury sedan with specific interior details like a full-width dashboard",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/6ZOxbb/s3/yangwang-altior.jpg",
+        note: ""
+    },
+    {
+        id: "eu1993",
+        title: "BYD Yangwang Altior、全長5.6mでアブダビ初公開",
+        desc: "BYD傘下のYangwangが展開する電気式リムジン「Altior」は、全長約5.60メートルの車体にDiSusアクティブボディコントロールを搭載し、路面をスキャンしてサスペンションをリアルタイム調整することで振動と横揺れを抑える。",
+        url: "https://www.electrive.com/2026/11/09/yangwangs-electric-chauffeur-limousine-the-altiors-luxury-offering/",
+        source: "Electrive",
+        date: "2026-11-09",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "BYD's Yangwang brand presents the Altior - a luxury sedan primarily designed for the Chinese market and the Middle East.",
+        interiorScore: 82,
+        interiorReason: "The article describes a luxury limousine with 'generously designed' interior and",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/11/01-yangwang-altior-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu1994",
+        title: "Smart #2、Mercedes-Benzデザインと専用EVプラットフォームで量産開始",
+        desc: "Smartは広州でsmart #2 Premiumの量産開始と発売を発表した。Mercedes-Benzデザインチームが手掛けた同車は、専用プラットフォームECAと35.8kWhバッテリーを搭載し、WLTP航続距離は290kmとなる。",
+        url: "https://electriccarsreport.com/2026/11/smart-2-electric-city-car-officially-launches-in-china/",
+        source: "Electric Cars Report",
+        date: "2026-11-09",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "The electric city car features a 35.8 kWh battery pack and a targeted combined WLTP driving range of up to 290 kilometers (180 miles).",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/smart-2.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1995",
+        title: "BYD Yangwang Altior、4席構成とコーチドア採用",
+        desc: "BYDの超高級セダンYangwang Altiorは、後方ヒンジ式コーチドアと4席構成の専用内装を備える。リアシートにはリクライニング機能や電動プライバシーシェードが設定され、Hetian玉や金メッキスピーカーグリルなどの加飾で伝統的な素材感を強調する。",
+        url: "https://electriccarsreport.com/2026/11/byds-yangwang-altior-debuts-with-coach-doors-and-1000-km-range/",
+        source: "Electric Cars Report",
+        date: "2026-11-09",
+        tags: ["シート", "新素材", "EV", "バッテリー", "音響"],
+    
+        sourceExcerpt: "BYD is taking its luxury ambitions to a new level with the",
+        sourceExcerptEnd: "and a claimed driving range exceeding 1,000 kilometers (621 miles).",
+        interiorScore: 28,
+        interiorReason: "Detailed description of a flagship ultra-luxury cabin including specific materia",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/Yangwang-Altior.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu1996",
+        title: "Valeo、ADAS向けスマートカメラにQNX安全OS採用",
+        desc: "ValeoはBlackBerry傘下のQNXと提携し、新開発のフロントビュースマートカメラプラットフォームへQNX OS for Safetyを統合した。この生産対応可能な基盤により、車両・歩行者・道路標識などの検知機能を備えたADASシステムを、開発複雑性を抑えつつ効率的に展開できる。",
+        url: "https://www.automotivetestingtechnologyinternational.com/news/sensors-transducers/valeo-selects-qnx-safety-software-for-smart-front-view-camera-platform.html",
+        source: "Automotive Testing Technology International",
+        date: "2026-11-09",
+        tags: ["安全"],
+    
+        sourceExcerpt: "The production-ready platform combines QNX’s safety-certified software with Valeo’s extensive expertise in",
+        sourceExcerptEnd: "advanced front-view camera capabilities to market efficiently and with confidence.",
+        country: "eu",
+        img: "https://www.automotivetestingtechnologyinternational.com/wp-content/uploads/2026/11/Partnership-Announcement-QNX-Valeo-2048x1152-1.jpg",
+        note: ""
+    },
+    {
+        id: "eu1997",
+        title: "IST、7日超の電池駆動で車体振動を同時計測する15chデータ収録システム発表",
+        desc: "ISTは、自動車NVHや耐久性評価向けのポータブルデータ収集システム「EDR-15 FieldDAQ」を発売した。同機は15チャネルのIEPE対応加速度計入力を備え、内蔵バッテリーで7日以上の自律動作が可能だ。",
+        url: "https://www.automotivetestingtechnologyinternational.com/news/measurement-tools-test-systems-equipment/ist-launches-15-channel-data-acquisition-system-for-nvh-and-durability-testing.html",
+        source: "Automotive Testing Technology International",
+        date: "2026-11-09",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "Instrumented Sensor Technology (IST) has launched the EDR-15 FieldDAQ, a new 15-channel",
+        sourceExcerptEnd: "featuring more than seven days of autonomous rechargeable battery operation.",
+        country: "eu",
+        img: "https://www.automotivetestingtechnologyinternational.com/wp-content/uploads/2026/11/Screenshot-2026-11-06-at-16.16.08.png",
+        note: ""
+    },
+    {
+        id: "cn1984",
+        title: "BYD、累計生産台数1,900万台を達成",
+        desc: "BYDの累計生産台数が1900万台に到達しました。直近の1700万台から約4ヶ月で200万台を追加しており、国内市場が前年比22.3%減と低迷する中での拡大を示しています。記念車はFangchengbao Ti9で、10月の販売台数は48万3,125台（前年比+10.6%）を記録しました。",
+        url: "https://chinaevhome.com/2026/11/09/byd-rolls-out-19-millionth-nev-adds-2-million-units-in-just-four-months/",
+        source: "ChinaEVHome",
+        date: "2026-11-09",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "BYD pushed out its 19 millionth NEV, accelerating production with 2 million",
+        sourceExcerptEnd: "months amid a softer domestic auto market and intensified competition.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-144.png?resize=640%2C427&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn1985",
+        title: "CALB、商用車向け電池の出荷量は133%増と予測",
+        desc: "CALBは2026年9月までの電池搭載量50.1GWhで世界シェア約5%を確保し、商用車向けの出荷量を直近12ヶ月で133%拡大した。同社はeVTOLやロボティクスなど新領域へ展開し、生産能力の解消に伴い2027年の出荷量が数倍に成長すると予測している。",
+        url: "https://chinaevhome.com/2026/11/09/calb-projected-to-post-exponential-shipment-growth-by-2027/",
+        source: "ChinaEVHome",
+        date: "2026-11-09",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "CALB is pivoting from passenger EV batteries into commercial vehicles, marine, eVTOL,",
+        sourceExcerptEnd: "capture adjacent high-growth segments pressured by cost and share battles.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-143.png?resize=640%2C400&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn1986",
+        title: "BYDセカンドジェネレーションシーガル、外装微修正とメーター廃止で実車公開",
+        desc: "BYDのセカンドジェネレーションシーガルの実車が公開され、外観は小規模な改良が施された。また、従来のインストルメントパネル（計器類）を廃止する設計に変更されていることが確認された。",
+        url: "https://chejiahao.autohome.com.cn/info/26545627",
+        source: "news.google.com",
+        date: "2026-11-09",
+        tags: ["バッテリー"],
+    
+        interiorScore: 65,
+        interiorReason: "Cancelling the instrument cluster is a major HMI and cockpit layout change direc",
+        imageInterior: true,
+        country: "cn",
+        img: "https://img3.autoimg.cn/chejiahaodfs/g33/M00/D2/08/autohomecar__ChxpVWq3bfOAJOcBAAP9s4iMrhM106.jpg",
+        note: ""
+    },
+    {
+        id: "in2057",
+        title: "Kia SonetとRenault Bridgerなど5車種のハイブリッドSUV",
+        desc: "インド市場で発売予定の手頃な価格帯のハイブリッドSUVとして、新型Kia SonetやRenault Bridgerを含む5車種が挙げられている。",
+        url: "https://www.cartoq.com/car-news/upcoming-hybrid-suvs-india-affordable-new/",
+        source: "news.google.com",
+        date: "2026-11-09",
+        tags: [],
+    
+        sourceExcerpt: "To fulfil the growing demand for hybrid vehicles, a number of major",
+        sourceExcerptEnd: "to launch their hybrid technology-equipped SUVs in the Indian market.",
+        country: "in",
+        img: "https://cdn.cartoq.com/photos/5_Upcoming_Affordable_Hybrid_SU_Vs_Featured_2ad72bfb84.webp",
+        note: ""
+    },
+    {
+        id: "in2058",
+        title: "パンジャブ州の公立学校に通う4人の生徒が、Wi-Fi対応のロボットカーと顔認証による出席管理システムを開発した。",
+        desc: "パンジャブ州アムリトサルの公立高校の生徒4名が、教室にある資源を活用してWi-Fi制御ロボットカーと顔認識による出席管理システムを開発した。これらのプロジェクトは11月18日に開催される地区レベルのデジタルイノベーション技術展示会で発表予定である。",
+        url: "https://timesofindia.indiatimes.com/education/news/four-punjab-government-school-students-build-a-wi-fi-robot-car-and-facial-recognition-attendance-system-projects-set-for-district-technology-fair/articleshow/135678224.cms",
+        source: "news.google.com",
+        date: "2026-11-09",
+        tags: [],
+    
+        country: "in",
+        img: "https://static.toiimg.com/thumb/msid-135679674,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
         note: ""
     },
 ];
