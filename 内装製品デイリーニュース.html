@@ -2492,6 +2492,7 @@ header.site-header {
 
         function ideaImageLabel(idea) {
             const provider = String(idea?.imageProvider || "").toLowerCase();
+            if (provider === "copilot") return "AI生成イメージ（Copilot）";
             if (provider === "exabase") {
                 const model = ["GPT-image", "Nano Banana"].includes(idea?.imageModel) ? idea.imageModel : "";
                 return model ? `AI生成イメージ（exaBase / ${model}）` : "AI生成イメージ（exaBase）";

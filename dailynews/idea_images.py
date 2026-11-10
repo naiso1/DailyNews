@@ -1,4 +1,4 @@
-"""Latest-issue image generation: exaBase first, optional interior-only API fallback."""
+"""Latest-issue images with browser-provider priority and durable receipts."""
 from __future__ import annotations
 
 import hashlib
@@ -6,8 +6,9 @@ import json
 import os
 from pathlib import Path
 import re
+import time
 
-from . import exabase
+from . import exabase, copilot
 
 API_CODES = {"API_KEY_MISSING", "API_HTTP_ERROR", "API_HTTP_REJECTED", "API_NO_IMAGE", "API_UNAVAILABLE", "API_NEEDS_REVIEW"}
 
@@ -82,11 +83,11 @@ def api_image(edition, idea, model, generator):
         raise exabase.ImageJobError(code) from error
 
 
-def optional_images(edition, *, issue_date=None, exabase_runner=None, api_generator=None):
+def optional_images(edition, *, issue_date=None, exabase_runner=None, copilot_runner=None, api_generator=None):
     """Image failures never fail text publication; never backfill a previous issue."""
     report = {"status": "disabled", "generated": 0, "cached": 0, "images": [], "errors": [], "providers": {}}
     config = edition.image_generation
-    if not config.get("enabled") or config.get("provider") not in {"exabase", "gemini"}:
+    if not config.get("enabled") or config.get("provider") not in {"copilot", "exabase", "gemini"}:
         return report
     path = edition.content_dir / "insights_data.js"
     if not path.exists():
@@ -104,6 +105,42 @@ def optional_images(edition, *, issue_date=None, exabase_runner=None, api_genera
                 report["status"] = "before_start_date"
                 return report
             report.update(status="complete", date=date)
+            if config.get("provider") == "copilot":
+                deadline = time.monotonic() + max(140, int(config.get("batch_seconds", 1800)))
+                global_deferred = False
+                try:
+                    primary = (copilot_runner or copilot.generate_for_edition)(edition, date=date, deadline=deadline)
+                except Exception as error:
+                    code = str(error) if isinstance(error, exabase.ImageJobError) and str(error) in exabase.SAFE_CODES else "COPILOT_UNAVAILABLE"
+                    primary = {"errors": [{"code": code}]}
+                    # An unexpected dispatcher failure provides no per-idea proof.
+                    global_deferred = code not in {"AUTH_REQUIRED", "SETUP_REQUIRED", "RUNTIME_MISSING", "EDGE_MISSING", "ENGINE_CHANGED"}
+                report["copilot_status"] = primary.get("status", "unavailable")
+                for field in ("generated", "cached"):
+                    report[field] += primary.get(field, 0)
+                report["images"].extend(primary.get("images", []))
+                report["errors"].extend(primary.get("errors", []))
+                busy = any(e.get("code") == "BUSY" for e in report["errors"])
+                if busy or global_deferred:
+                    report["fallback_deferred"] = "BUSY" if busy else "NEEDS_REVIEW"
+                elif config.get("fallback_provider") == "exabase":
+                    latest = exabase.select_ideas(path.read_text(encoding="utf-8"), date=date)
+                    blocked = {e.get("idea_id") for e in primary.get("errors", []) if e.get("uncertain") or e.get("code") == "NEEDS_REVIEW"}
+                    blocked.update(i.id for i in latest if not exabase.has_image(i) and copilot.unresolved(edition, i))
+                    if blocked:
+                        report["fallback_excluded_ideas"] = sorted(i for i in blocked if i is not None)
+                    if any(not exabase.has_image(i) and i.id not in blocked for i in latest):
+                        try:
+                            fallback = (exabase_runner or exabase.generate_for_edition)(
+                                edition, date=date, as_fallback=True, exclude_idea_ids=blocked, deadline=deadline)
+                        except Exception as error:
+                            code = str(error) if isinstance(error, exabase.ImageJobError) and str(error) in exabase.SAFE_CODES else "EXABASE_UNAVAILABLE"
+                            fallback = {"errors": [{"code": code, "provider": "exabase"}]}
+                        report["exabase_status"] = fallback.get("status", "unavailable")
+                        for field in ("generated", "cached"):
+                            report[field] += fallback.get(field, 0)
+                        report["images"].extend(fallback.get("images", []))
+                        report["errors"].extend(fallback.get("errors", []))
             if config.get("provider") == "exabase":
                 try:
                     primary = (exabase_runner or exabase.generate_for_edition)(edition, date=date)
@@ -117,7 +154,7 @@ def optional_images(edition, *, issue_date=None, exabase_runner=None, api_genera
                 report["errors"].extend(primary.get("errors", []))
 
             # Paid API is authorized for interior only, even if an exterior setting is mistyped.
-            use_api = edition.id == "interior" and (
+            use_api = config.get("provider") != "copilot" and edition.id == "interior" and (
                 config.get("provider") == "gemini" or config.get("fallback_provider") == "gemini")
             # Another browser job may still be generating these images. Do not
             # race it with a paid API request; preserve text and retry after the lock clears.
@@ -153,7 +190,7 @@ def optional_images(edition, *, issue_date=None, exabase_runner=None, api_genera
                                 break
             final = exabase.select_ideas(path.read_text(encoding="utf-8"), date=date)
             for idea in final:
-                if exabase.has_image(idea) and idea.image_provider in {"exabase", "api"}:
+                if exabase.has_image(idea) and idea.image_provider in {"copilot", "exabase", "api"}:
                     report["providers"][idea.image_provider] = report["providers"].get(idea.image_provider, 0) + 1
             report["missing"] = [idea.id for idea in final if not exabase.has_image(idea)]
             if report["missing"]:

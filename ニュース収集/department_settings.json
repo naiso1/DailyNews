@@ -728,11 +728,12 @@
     },
     "image_generation": {
       "enabled": true,
-      "provider": "exabase",
+      "provider": "copilot",
       "model_priority": ["gpt-image", "nano-banana"],
-      "fallback_provider": "none",
+      "fallback_provider": "exabase",
+      "copilot_timeout_seconds": 180,
       "max_images": 10,
-      "batch_seconds": 6000,
+      "batch_seconds": 1800,
       "timeout_seconds": 420,
       "start_after_date": "2026-09-15"
     }

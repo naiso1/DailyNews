@@ -97,14 +97,18 @@ $runtimePython = Join-Path $env:LOCALAPPDATA 'DailyNewsRuntime\venv\Scripts\pyth
 
 完成画像が会話に残る場合に限り、workerの `--recover-reference` は明示した既存会話からの回収を行えます。既存requestのkey・prompt・referenceImage・outputDirと、実画面で確認した `conversationPath` を標準入力のJSONに渡します。元の企画文と添付名の一致を検証し、新規会話、アップロード、送信を行いません。回収後は同じkeyのDONE結果を通常の画像検証に通して再利用します。送信結果が確認できないまま `--generate` を直接呼び直さないでください。
 
-外装の設定：
+2026-11-10以降は両版ともCopilot優先・exaBase代替です。接続と復旧は
+[Copilot運用手順](../copilot/README.md)も参照してください。現在の外装の設定：
 
 ```json
 {
   "enabled": true,
-  "provider": "exabase",
+  "provider": "copilot",
+  "fallback_provider": "exabase",
+  "copilot_timeout_seconds": 180,
+  "model_priority": ["gpt-image", "nano-banana"],
   "timeout_seconds": 420,
-  "batch_seconds": 6000,
+  "batch_seconds": 1800,
   "max_images": 10
 }
 ```
@@ -113,14 +117,13 @@ $runtimePython = Join-Path $env:LOCALAPPDATA 'DailyNewsRuntime\venv\Scripts\pyth
 
 ```json
 {
-  "fallback_provider": "none",
   "start_after_date": "2026-09-15"
 }
 ```
 
 最新号の既存画像を上限から差し引き、残りの枠だけ未生成の案を順番に処理します。同じ号の再実行やアイデアの並び替えでも上限を超えません。1画像の待機と全体の時間予算を制限し、認証切れや実行環境の不足が判明したら残りのexaBase処理を中止します。`provider: "none"` の間は通常処理からexaBaseを呼びません。
 
-両版ともexaBaseで得られなかった画像は未生成のままとし、ニュース・考察・企画アイデアの本文を公開します。内装の有料画像API代替は `fallback_provider: "none"` で無効です。外装はAPI代替を設定しても実行しません。通常処理の `image-generation-last-result.json` で号の日付、生成元別の結果、未生成案、エラーを確認できます。内装の作業先は `ニュース収集/`、外装は `runtime/exterior/` です。
+両版ともCopilot、exaBaseの順で試し、得られなかった画像は未生成のままとしてニュース・考察・企画アイデアの本文を公開します。Copilotモードでは有料画像APIを呼びません。通常処理の `image-generation-last-result.json` で号の日付、生成元別の結果、未生成案、エラーを確認できます。内装の作業先は `ニュース収集/`、外装は `runtime/exterior/` です。
 
 exaBaseの最終応答に失敗しても、画像ファイルと完了記録が保存済みなら回収して利用します。他の画像処理が進行中の `BUSY` は保留します。結果不明ジョブを自動で再送せず、掲載済み画像も再生成しません。過去のAPI生成コードと記録は残しますが、現在の通常処理では呼び出しません。
 

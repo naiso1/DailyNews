@@ -87,6 +87,21 @@ class ImageRecoveryTests(unittest.TestCase):
         self.assertEqual(exabase.select_ideas(after, date='2026-10-31')[0].image, '')
         self.assertEqual(self.remote, self.hashes())
 
+    def test_copilot_configuration_and_provenance_are_recoverable(self):
+        self.set_config(provider='copilot', fallback_provider='exabase')
+        def add_copilot(edition, issue_date):
+            self.add_image(edition, issue_date)
+            text = self.path.read_text(encoding='utf-8')
+            old = exabase.select_ideas(text)[0]
+            new_image = old.image.replace('exabase_', 'copilot_')
+            (edition.content_dir / new_image).write_bytes((edition.content_dir / old.image).read_bytes())
+            self.path.write_text(exabase.image_fields(text, old, img=new_image, imageProvider='copilot', imageModel=''), encoding='utf-8')
+            return {'generated': 1, 'errors': []}
+        self.generate.side_effect = add_copilot
+        self.assertEqual(self.run_recovery(), {'exterior'})
+        self.assertEqual(self.state()['status'], 'complete')
+        self.publish.assert_called_once()
+
     def test_auth_and_setup_wait_without_spending_generation_attempts(self):
         for code in ('AUTH_REQUIRED', 'SETUP_REQUIRED'):
             self.auth.return_value = ('action_required', code)

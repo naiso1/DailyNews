@@ -48,7 +48,7 @@ class ImageProviderTests(unittest.TestCase):
         self.edition.collection_settings_path.write_text(
             json.dumps({self.edition.id: {"image_generation": self.config}}), encoding="utf-8")
 
-    def publish_primary(self, edition, *, date):
+    def publish_primary(self, edition, *, date, **kwargs):
         text = self.path.read_text(encoding="utf-8")
         idea = exabase.select_ideas(text, date=date)[0]
         test_image = self.root / "test.jpg"
@@ -115,7 +115,7 @@ class ImageProviderTests(unittest.TestCase):
                     primary = Mock(side_effect=exabase.ImageJobError(code))
                     api = Mock(side_effect=AssertionError("Paid API is disabled"))
                     report = idea_images.optional_images(
-                        edition, exabase_runner=primary, api_generator=api)
+                        edition, exabase_runner=primary, copilot_runner=Mock(side_effect=exabase.ImageJobError("AUTH_REQUIRED")), api_generator=api)
                     primary.assert_called_once()
                     api.assert_not_called()
                     self.assertEqual(report["status"], "unavailable")
@@ -127,7 +127,8 @@ class ImageProviderTests(unittest.TestCase):
         self.write_config()
         api = Mock(side_effect=AssertionError("Paid API is disabled"))
         report = idea_images.optional_images(
-            self.edition, exabase_runner=self.publish_primary, api_generator=api)
+            self.edition, exabase_runner=self.publish_primary,
+            copilot_runner=Mock(side_effect=exabase.ImageJobError("AUTH_REQUIRED")), api_generator=api)
         api.assert_not_called()
         self.assertEqual(report["status"], "partial")
         self.assertEqual(report["providers"], {"exabase": 1})

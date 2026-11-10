@@ -18,6 +18,7 @@ for (const model of ['GPT-image', 'Nano Banana']) {
 }
 assert.equal(context.ideaImageLabel({...idea, imageProvider: 'exabase', imageModel: '<script>'}), 'AI生成イメージ（exaBase）');
 assert.match(context.renderIdeaImage({...idea, imageProvider: 'api', imageModel: 'test-model'}), /AI生成イメージ（API）/);
+assert.equal(context.ideaImageLabel({...idea, imageProvider: 'copilot', imageModel: '<script>'}), 'AI生成イメージ（Copilot）');
 assert.equal(context.ideaImageLabel(idea), 'AI生成イメージ');
 assert.equal(context.ideaImageLabel({...idea, imageProvider: 'unknown'}), 'AI生成イメージ');
 assert.equal(context.ideaImageLabel({...idea, img: 'images/exabase_interior_2026-09-16_42.webp'}), 'AI生成イメージ（exaBase）');

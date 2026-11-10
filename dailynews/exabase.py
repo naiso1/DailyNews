@@ -36,7 +36,8 @@ SAFE_CODES = {"AUTH_REQUIRED", "SETUP_REQUIRED", "BUSY", "EDGE_MISSING", "ENGINE
               "REFERENCE_CHANGED", "REFERENCE_INVALID_IMAGE", "REFERENCE_URL_REJECTED",
               "REFERENCE_DOWNLOAD_FAILED", "REFERENCE_UNSUPPORTED", "REFERENCE_NOT_ACCEPTED",
               "INVALID_MODEL_CONFIG", "IMAGE_MODEL_UNAVAILABLE", "IMAGE_MODEL_NOT_ENABLED",
-              "IMAGE_MODEL_AMBIGUOUS", "IMAGE_MODEL_MISMATCH"}
+              "IMAGE_MODEL_AMBIGUOUS", "IMAGE_MODEL_MISMATCH", "COPILOT_UNAVAILABLE",
+              "NOT_A_FRESH_CONVERSATION", "DOWNLOAD_UNAVAILABLE", "INVALID_REQUEST"}
 
 
 class ImageJobError(RuntimeError):
@@ -307,13 +308,15 @@ def recovered_image(directory: Path, key: str):
     return file
 
 
-def run_worker(root: Path, request: dict, timeout_seconds: int):
+def run_worker(root: Path, request: dict, timeout_seconds: int, *, provider="exabase", check_session=False):
+    if provider not in {"exabase", "copilot"}:
+        raise ValueError("Unknown browser provider")
     node = shutil.which("node")
     if not node:
         raise ImageJobError("RUNTIME_MISSING")
-    worker = root / "deployment/workstation/exabase/worker.js"
+    worker = root / f"deployment/workstation/{provider}/worker.js"
     flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
-    process = subprocess.Popen([node, str(worker), "--generate"], stdin=subprocess.PIPE,
+    process = subprocess.Popen([node, str(worker), "--check-session" if check_session else "--generate"], stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
                                encoding="utf-8", errors="replace", creationflags=flags)
     try:
@@ -326,7 +329,7 @@ def run_worker(root: Path, request: dict, timeout_seconds: int):
             process.kill()
         process.communicate()
         if os.name == "nt" and os.environ.get("LOCALAPPDATA"):
-            session = Path(os.environ["LOCALAPPDATA"]) / "DailyNewsRuntime/exabase" / f"session-{process.pid}.json"
+            session = Path(os.environ["LOCALAPPDATA"]) / f"DailyNewsRuntime/{provider}" / f"session-{process.pid}.json"
             session.unlink(missing_ok=True)
         raise ImageJobError("WORKER_TIMEOUT") from error
     # Only known codes cross the provider boundary. Never log stderr/raw responses.
@@ -338,9 +341,9 @@ def run_worker(root: Path, request: dict, timeout_seconds: int):
                 result = event
         except (ValueError, TypeError):
             pass
-    if result.get("status") != "DONE":
+    if result.get("status") != ("AUTHENTICATED" if check_session else "DONE"):
         code = result.get("code")
-        raise ImageJobError(code if code in SAFE_CODES else "EXABASE_UNAVAILABLE")
+        raise ImageJobError(code if code in SAFE_CODES else f"{provider.upper()}_UNAVAILABLE")
 
 
 def generate_one(edition, idea: Idea, sources, timeout_seconds=420, retry_uncertain=False, worker=run_worker,
@@ -469,7 +472,7 @@ def publish_image(edition, original_text: str, idea: Idea, image: Path, key: str
     if insights.read_text(encoding="utf-8") != original_text:
         raise ImageJobError("CONTENT_CHANGED")
     extension, _ = valid_image(image)
-    if provider not in {"exabase", "api"}:
+    if provider not in {"exabase", "copilot", "api"}:
         raise ValueError("Unknown image provider")
     relative = f"images/{provider}_{edition.id}_{idea.id}_{key[:16]}{extension}"
     destination = edition.content_dir / relative
@@ -484,16 +487,19 @@ def publish_image(edition, original_text: str, idea: Idea, image: Path, key: str
 
 def generate_for_edition(edition, *, pilot_idea_id=None, date=None, publish=True,
                          retry_uncertain=False, worker=run_worker, reference_source_id=None,
-                         reference_loader=references.download_reference):
+                         reference_loader=references.download_reference, as_fallback=False,
+                         exclude_idea_ids=(), deadline=None):
     if reference_source_id is not None and (pilot_idea_id is None or not date or publish):
         raise ValueError("A reference comparison requires one explicit idea/date and cannot publish")
     config = edition.image_generation
-    if pilot_idea_id is None and (not config.get("enabled") or config.get("provider") != "exabase"):
+    enabled_provider = config.get("provider") == "exabase" or (
+        as_fallback and config.get("provider") == "copilot" and config.get("fallback_provider") == "exabase")
+    if pilot_idea_id is None and (not config.get("enabled") or not enabled_provider):
         return {"status": "disabled", "generated": 0, "cached": 0, "errors": []}
     report = {"status": "complete", "provider": "exabase", "generated": 0, "cached": 0, "images": [], "errors": [], "warnings": []}
     timeout = max(30, min(int(config.get("timeout_seconds", 420)), 600))
     limit = 1 if pilot_idea_id is not None else max(1, min(int(config.get("max_images", 10)), 20))
-    deadline = time.monotonic() + max(timeout + 110, int(config.get("batch_seconds", 900)))
+    deadline = deadline if deadline is not None else time.monotonic() + max(timeout + 110, int(config.get("batch_seconds", 900)))
     with edition_lock(edition.runtime_dir / "exabase.lock"):
         path = edition.content_dir / "insights_data.js"
         text = path.read_text(encoding="utf-8")
@@ -502,7 +508,8 @@ def generate_for_edition(edition, *, pilot_idea_id=None, date=None, publish=True
             raise ValueError("The requested idea/date was not found")
         existing_images = sum(has_image(idea) for idea in ideas)
         remaining_capacity = limit if pilot_idea_id is not None else max(0, limit - existing_images)
-        pending_ideas = [idea for idea in ideas if reference_source_id is not None or not has_image(idea)][:remaining_capacity]
+        pending_ideas = [idea for idea in ideas if idea.id not in exclude_idea_ids
+                         and (reference_source_id is not None or not has_image(idea))][:remaining_capacity]
         report["existing_images"] = existing_images
         report["remaining_capacity"] = remaining_capacity
         sources = source_articles((edition.content_dir / "news_data.js").read_text(encoding="utf-8"))

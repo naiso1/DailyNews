@@ -47,12 +47,13 @@ to DESKTOP-97FRPLP, under the Owner account.
   failed assessments cannot reuse an old target verdict. Source-date thresholds,
   duplicate checks, exclusions and the 10-per-region publication target remain.
 - No post-run sleep. Sleep is inhibited during the process only.
-- Both editions generate idea images through exaBase only. Since 2026-10-15,
-  interior's `fallback_provider` is `none`; authentication or image failures do
-  not invoke the paid image API. Existing images remain, and text publication
-  continues when an image is unavailable.
+- Since 2026-11-10, both editions prioritize Copilot and use exaBase for missing
+  images when Copilot is unavailable. Uncertain submissions are held for review;
+  paid image APIs are never used in Copilot mode. Existing images remain, and
+  text publication continues when an image is unavailable.
+  See [Copilot operations and rollback](copilot/README.md).
 - Since 2026-11-02, the existing recovery task also resumes missing images in
-  today's successfully published issue after exaBase authentication returns.
+  today's successfully published issue after browser-provider authentication returns.
   It uses a private image-only journal, retains completed images, and retries a
   failed deployment without generating again. No mail or API fallback is used.
   See [image recovery](exabase/README.md#認証復帰後の画像補完2026-11-02).

@@ -11,7 +11,7 @@ import os
 import re
 import subprocess
 
-from dailynews import exabase, idea_images
+from dailynews import exabase, copilot, idea_images
 from dailynews.editions import get_edition
 
 JST = dt.timezone(dt.timedelta(hours=9))
@@ -28,13 +28,19 @@ def check_session(root):
         'image_recovery_session', root / 'deployment/workstation/exabase/maintain-session.py')
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    # Recovery must not be blocked by exaBase expiry when Copilot is usable.
+    if any(get_edition(name, root).image_generation.get('provider') == 'copilot'
+           for name in ('interior', 'exterior')):
+        result = copilot.check_session(root)
+        if result[0] == 'authenticated':
+            return result
     return module.refresh(root)
 
 
 def latest_issue(edition, today):
     config = edition.image_generation
-    if (not config.get('enabled') or config.get('provider') != 'exabase'
-            or config.get('fallback_provider', 'none') != 'none'):
+    if (not config.get('enabled') or config.get('provider') not in {'exabase', 'copilot'}
+            or config.get('fallback_provider', 'none') not in {'none', 'exabase'}):
         return None
     status = exabase.read_json(edition.runtime_dir / 'logs/latest_run_status.json', {})
     expected = (today - dt.timedelta(days=1)).isoformat()
@@ -62,9 +68,11 @@ def image_additions(edition, before, after, issue):
             raise ValueError('CONTENT_CHANGED')
         if (first.image, first.image_provider, first.image_model) == (last.image, last.image_provider, last.image_model):
             continue
-        pattern = rf'images/exabase_{edition.id}_{first.id}_[a-f0-9]{{16}}\.(png|jpg|webp)'
+        pattern = rf'images/{re.escape(last.image_provider)}_{edition.id}_{first.id}_[a-f0-9]{{16}}\.(png|jpg|webp)'
+        valid_model = ((last.image_provider == 'exabase' and last.image_model in {'GPT-image', 'Nano Banana'})
+                       or (last.image_provider == 'copilot' and last.image_model == ''))
         if (exabase.has_image(first) or not exabase.has_image(last)
-                or last.image_provider != 'exabase' or last.image_model not in {'GPT-image', 'Nano Banana'}
+                or not valid_model
                 or not re.fullmatch(pattern, last.image)):
             raise ValueError('CONTENT_CHANGED')
         file = edition.content_dir / last.image

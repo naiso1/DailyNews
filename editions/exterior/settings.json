@@ -976,10 +976,12 @@
     },
     "image_generation": {
       "enabled": true,
-      "provider": "exabase",
+      "provider": "copilot",
+      "fallback_provider": "exabase",
+      "copilot_timeout_seconds": 180,
       "model_priority": ["gpt-image", "nano-banana"],
       "max_images": 10,
-      "batch_seconds": 6000,
+      "batch_seconds": 1800,
       "timeout_seconds": 420
     },
     "date_timezone": "Asia/Tokyo",
