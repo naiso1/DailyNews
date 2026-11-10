@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-11-10 01:31";
+window.NEWS_UPDATED_AT = "2026-11-11 01:28";
 
 window.LOADED_NEWS_DATA = [
 
@@ -254786,6 +254786,790 @@ window.LOADED_NEWS_DATA = [
     
         country: "in",
         img: "https://static.toiimg.com/thumb/msid-135679674,width-1280,height-720,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg",
+        note: ""
+    },
+    // 2026-11-10 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2225",
+        title: "ジムニーAT車専用3Dフロアマット発売",
+        desc: "カーショップコネクトの新ブランドKHIASMから、ジムニーAT車専用の3Dフロアマットが発売された。複雑なフロア形状にフィットする立体設計と外周の立ち上がりで汚れを受け止めやすく、表面の溝が足元のデザイン性を高める。",
+        url: "https://news.yahoo.co.jp/articles/2d026131328b453b0057bd5f521a0f1decef6ff6",
+        source: "レスポンス",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "CONNECTが運営するシートカバー専門店・カーショップコネクトの新ブランド「KHIASM（キアスム）」から、スズキ『ジムニー』（JB64W）および『ジムニーシエラ』（JB74W）のAT車専用フロアマット「CHROMA 3D FLOOR MAT（クロマ 3Dフロアマット）」が新発売。",
+        interiorScore: 90,
+        interiorReason: "The article details a specific interior accessory (3D floor mat) with concrete d",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-00000030-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2226",
+        title: "ステップワゴンe:HEVスパーダにピアノブラック加飾の特別仕様車",
+        desc: "ホンダは2026年10月、ステップワゴンのe:HEVスパーダに特別仕様車を追加した。インテリアではステアリングロアーガーニッシュにピアノブラックが採用され、外装にはブラッククロームメッキのフロントグリルガーニッシュやベルリナブラック塗装のアルミホイールが備わる。価格は418万5500円である。",
+        url: "https://news.yahoo.co.jp/articles/c64e7b99a26b978186c85e1a4b851888b12b5d35",
+        source: "carview!",
+        date: "2026-11-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "インテリアでは、ステアリングロアーガーニッシュにピアノブラックが採用されています。",
+        interiorScore: 50,
+        interiorReason: "The article details a special edition trim with specific interior changes (piano",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-00010004-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2227",
+        title: "起亜とBASF、EV3 Study Car 2.0で樹脂一体構造の解体容易シートを公開",
+        desc: "現代自動車・起亜、Alten Korea、BASFがKia EV3 Study Car 2.0向けに、金属フレームをポリアミド樹脂「Ultramid CR RC4」で代替した一体構造シートを開発。バックカバーとフレームの統合により部品点数を削減し、廃車時の素材分別を容易にする設計とした。",
+        url: "https://news.yahoo.co.jp/articles/0414ed9ccdc10d9305b39ab6e70ffc3d847b96d7",
+        source: "MotorFan",
+        date: "2026-11-10",
+        tags: ["AR", "シート", "新素材", "EV"],
+    
+        sourceExcerpt: "現代自動車・起亜（Hyundai Motor Company-Kia）、エンジニアリングサービス企業のAlten Korea、素材メーカーの",
+        sourceExcerptEnd: "にする「解体設計（Design-for-disassembly）」原則を取り入れたコンセプトシートを共同開発・公開した。",
+        interiorScore: 72,
+        interiorReason: "Detailed breakdown of seat material selection (BASF Ultramid, Elastoflex, Haptex",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/default.jpg",
+        note: ""
+    },
+    {
+        id: "jp2228",
+        title: "メルセデスAMG A 35 Final Edition、限定100台で発売",
+        desc: "メルセデス・ベンツ日本は、A 35の最終特別仕様車「Final Edition」を全国100台限定で税込890万円で発売した。内装はブラック基調に限定のAMGアルミニウムインテリアトリムを採用し、通常モデルでは有償オプションとなるAMGパフォーマンスシートとレッドシートベルトを標準装備している。",
+        url: "https://news.yahoo.co.jp/articles/0d0a9ca8fd3d067c1e6f20fa91429783a5b26696",
+        source: "WEB CARTOP",
+        date: "2026-11-10",
+        tags: ["シート"],
+    
+        sourceExcerpt: "シートは、通常モデルでは有償オプションの「AMGパフォーマンスシート」を採用し、エクステリアと同じく「MANUFAKTURレッドシートベルト」を差し色にしている。",
+        interiorScore: 28,
+        interiorReason: "Limited edition model with specific interior details including AMG aluminum trim",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-00010007-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2229",
+        title: "新型スペーシアベース、分割式マルチボードとR06Aターボ採用",
+        desc: "2026年冬にフルモデルチェンジする新型スペーシアベースは、後席を撤去した2シーター構成を採用し、荷室の使い勝手を高める分割式マルチボードが特徴だ。車内は派手な加飾を抑えたシンプルなモノトーン調で、ディスプレイオーディオが備わる。",
+        url: "https://news.yahoo.co.jp/articles/b9c12c1f87f6afad81c1bbc1951b217c5c4ed149",
+        source: "WEB CARTOP",
+        date: "2026-11-10",
+        tags: ["ディスプレイ", "音響"],
+    
+        sourceExcerpt: "車内はディスプレイオーディオが取り付けられているが、基本的には派手な加飾のないシンプルなモノトーンコーデとなりそうだ。",
+        interiorScore: 38,
+        interiorReason: "The article details specific interior utility features like a split multi-board",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-00010004-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2230",
+        title: "ランクル250の7人乗り専用、引き出し式で車中泊も叶える収納キット登場",
+        desc: "CRAFT WORKS OVERLANDがランドクルーザー250の7人乗り向け「ラゲッジボックス フルフラット収納キット」を発売。天板はPU仕上げでバネヒンジ式、下段にはスライドレール付きの大型ハンドル備えた左右2つの引き出しを設け、荷室を上下2段に活用できる。付属板で2列目シート上にフルフラット空間を作り出せる設計で、参考価格は9万8800円〜。",
+        url: "https://news.yahoo.co.jp/articles/e1051aaae703611688999d3ee92046b599989d36",
+        source: "ベストカーWeb",
+        date: "2026-11-10",
+        tags: ["シート"],
+    
+        sourceExcerpt: "Fun Standardが展開するカーアクセサリーブランド「CRAFT WORKS(クラフトワークス)」の新シリーズ「CRAFT WORKS OVERLAND」から発売される「ラゲッジボックス フルフラット収納キット」だ。",
+        interiorScore: 73,
+        interiorReason: "Specific aftermarket storage solution with detailed material (PU finish) and mec",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-00000012-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2231",
+        title: "日産ノートオーラ、プロパイロットとBOSEを全車標準化",
+        desc: "日産は2026年8月24日、ノートオーラの一部改良を発表した。NissanConnectナビゲーションやBOSEサウンドシステム、プロパイロットが全車標準装備となり、ステアリングには合成皮革素材「テーラーフィット」を採用して質感を高めた。価格は284万9000円から361万200円である。",
+        url: "https://news.yahoo.co.jp/articles/9f2089f905aad8d854be09cd4aa290cad91e463b",
+        source: "くるまのニュース",
+        date: "2026-11-10",
+        tags: ["コネクテッド", "新素材"],
+    
+        sourceExcerpt: "ステアリングには、上質なナッパレザーのような触感と優れた耐久性を兼ね備えた合成皮革素材「テーラーフィット」が採用され、インテリア全体の質感が一段と引き上げられました。",
+        interiorScore: 70,
+        interiorReason: "Detailed interior refresh including specific material (Tailor Fit leather), audi",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-01128900-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2232",
+        title: "BMW i3 50 xドライブ、低座席とパノラマ・ディスプレイで開放感を演出",
+        desc: "BMWは新世代電動アーキテクチャ「ノイエクラッセ」採用のi3 50 xドライブを発表した。バッテリーがフロアを構成する構造によりシートが低く配置され、頭上空間に余裕がある。フロントガラス下にはメーターモニターを兼ねるパノラマ・ディスプレイが備わり、ステアリングホイール位置が低くなることで開放的なコックピットを実現している。",
+        url: "https://news.yahoo.co.jp/articles/3025c1f455a6880fca48ada43e653c111e1defb3",
+        source: "AUTOCAR JAPAN",
+        date: "2026-11-10",
+        tags: ["ディスプレイ", "シート", "コックピット", "EV"],
+    
+        sourceExcerpt: "バッテリーの上へ位置するキャビンは、シートが低く据えられ、頭上には充分な余裕がある。",
+        interiorScore: 79,
+        interiorReason: "Detailed review of a flagship EV featuring specific interior design elements lik",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261110-01292438-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us2025",
+        title: "KTM X-Bow Arrow、Audi製エンジン搭載のオフロードUTV",
+        desc: "KTM X-Bowは初のサイドバイサイドUTV「Arrow」を発表した。内装はSabeltシートとハーネスを備え、限定モデルにはエアコンと油圧式ハンドブレーキが標準装備される。価格は5万9800ドルからで、11月17日に予約を開始する。",
+        url: "https://www.motor1.com/news/814941/ktm-x-bow-arrow-utv/",
+        source: "Motor1",
+        date: "2026-11-10",
+        tags: ["AR", "シート"],
+    
+        sourceExcerpt: "The cabin is fully enclosed, with Sabelt seating and harness systems, and",
+        sourceExcerptEnd: "adds standard air conditioning along with a hydraulic fly-off handbrake.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/0ep3N9/s3/ktm-x-bow-arrow.jpg",
+        note: ""
+    },
+    {
+        id: "us2026",
+        title: "Ford Explorerのサイドエアバッグ燃焼報告でNHTSAが調査開始",
+        desc: "NHTSAは、2021〜2026年型Ford Explorer約123.6万台を対象に、フロントシート側面のサイドエアバッグ展開時に乗員が火傷を負ったとの報告を受け、予備調査を開始した。対象は前席のサイドエアバッグのみで、リコールはまだ発表されていない。",
+        url: "https://www.motor1.com/news/815005/ford-explorer-airbag-probe-targets/",
+        source: "Motor1",
+        date: "2026-11-10",
+        tags: ["シート", "安全"],
+    
+        sourceExcerpt: "2025 Ford Explorer Platinum Front Seats With Side Airbags",
+        interiorScore: 58,
+        interiorReason: "Seat-mounted airbag defect investigation with specific injury data and model-yea",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/0eNZX9/s3/2025-ford-explorer-platinum.jpg",
+        note: ""
+    },
+    {
+        id: "us2027",
+        title: "Fiat Topolino、米国試行販売で300台の大半が即完売",
+        desc: "Fiatは米国でTopolinoの300台を試験出荷し大半が販売済みとなった。6割がオープンエア仕様「Dolce Vita」を選ばれ、都市居住者向けの荷物を施錠できるクローズドモデルもラインナップに並ぶ。",
+        url: "https://www.motor1.com/news/814986/fiat-topolino-us-trial-15/",
+        source: "Motor1",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "Fiat bet small on the Topolino, and that bet is paying off",
+        sourceExcerptEnd: "dealers as a test run, and most are already gone.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/3WB2Vp/s3/2027-fiat-topolino-first-drive-review.jpg",
+        note: ""
+    },
+    {
+        id: "us2028",
+        title: "欧州議会、BYDのサイバーセキュリティ調査をEUに要請",
+        desc: "欧州議会の14人の議員が、BYDの車両に搭載されるカメラやGPSなどのセンサーから得られるデータが中国当局に渡る懸念を指摘し、EU委員会への調査を求めた。BYDは欧州で9月までに283,997台を販売し、市場シェア2.7%を獲得しているが、今回の要請により将来的な規制の可能性も浮上した。",
+        url: "https://www.motor1.com/news/814970/europe-byd-investigation-spying-fears/",
+        source: "Motor1",
+        date: "2026-11-10",
+        tags: ["センシング", "バッテリー"],
+    
+        sourceExcerpt: "That's how many cars BYD sold in Europe through September, according to data published by the European Automobile Manufacturers' Association (ACEA).",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/7ZEA47/s3/byd-dolphin-surf-2026-im-test.jpg",
+        note: ""
+    },
+    {
+        id: "us2029",
+        title: "Bentley、旧型Continental GTに9.7インチタッチスクリーンを後付け",
+        desc: "Bentleyは2012〜2019年型のContinental GTおよびFlying Spur向けに、ディーラー経由でインフォテインメントのハードウェア交換を提供する。従来の物理式気候調整ダイヤルと旧型ディスプレイを撤去し、2K解像度の9.7インチタッチスクリーンへ置き換えることで、センターコンソールをよりクリーンなデザインへと刷新した。新システムには無線対応のApple CarPlayやAndroid Autoが搭載され、ナビゲーション機能も最新化されている。",
+        url: "https://www.motor1.com/news/814971/bentley-continental-gt-retrofit-adds/",
+        source: "Motor1",
+        date: "2026-11-10",
+        tags: ["AR", "ディスプレイ", "コネクテッド", "センターコンソール"],
+    
+        sourceExcerpt: "The automaker's retailers now offer a factory-backed infotainment retrofit for second-generation Continental",
+        sourceExcerptEnd: "Convertible and Flying Spur models built between 2012 and 2019.",
+        interiorScore: 92,
+        interiorReason: "Highly relevant for HMI and center console planning; details the replacement of",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/3WBV4A/s3/bentley-infotainment-upgrade.jpg",
+        note: ""
+    },
+    {
+        id: "us2030",
+        title: "Polestar Formula 2030、運転席に20インチ曲面ディスプレイと8つの物理スイッチ",
+        desc: "PolestarのコンセプトカーFormula 2030は、ステアリングコラム直結の20インチ曲面ディスプレイとセンターコンソールに12.2インチタッチスクリーンを備える。中央ディスプレイ下には8つのカスタマイズ可能な物理コントロールが配置され、運転モードに応じてシートやホイールの位置が変化する。",
+        url: "https://www.motor1.com/news/814935/polestar-formula-2030-concept-revealed/",
+        source: "Motor1",
+        date: "2026-11-10",
+        tags: ["AR", "ディスプレイ", "シート", "センターコンソール", "カスタマイズ"],
+    
+        sourceExcerpt: "In Autonomous mode, the central display rises from the dashboard while the steering wheel and seat move apart.",
+        interiorScore: 76,
+        interiorReason: "Detailed description of HMI (column-mounted display), physical controls, and ada",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/AkOVmV/s3/polestar-formula-2030-concept.jpg",
+        note: ""
+    },
+    {
+        id: "us2031",
+        title: "2027年型Silverado HD、新8.3LディーゼルV8で牽引性能向上",
+        desc: "2027年型Chevrolet Silverado HDは、555馬力・1230 lb-ftの新8.3リッターDuramax V-8ターボディーゼルを搭載し、最大38,000ポンドの牽引能力を実現した。",
+        url: "https://www.caranddriver.com/reviews/a74345146/2027-chevrolet-silverado-hd-drive/",
+        source: "Car and Driver",
+        date: "2026-11-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Still, it has some new delights, the biggest and most delightful being the new 8.3-liter Duramax V-8 turbo-diesel engine.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/ed701f3e-3a77-43e8-93be-57bc69679102.jpg",
+        note: ""
+    },
+    {
+        id: "us2032",
+        title: "トヨタ・グランドハイランダー、Range Rover級の快適性と信頼性を両立",
+        desc: "2026年型Toyota Grand HighlanderのPlatinumグレードは、レザーと合成スエードのシートやパノラミックサンルーフを備え、静粛性と乗り心地で高級SUVに匹敵する。筆者は、Range Roverのような快適性をトヨタの信頼性とともに提供できると評価している。",
+        url: "https://www.topspeed.com/toyota-grand-highlander-range-rover-comfort-toyota-reliability/",
+        source: "Top Speed",
+        date: "2026-11-10",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "The Range Rover comes in two wheelbase lengths, with the standard model offering only two rows of seats.",
+        interiorScore: 35,
+        interiorReason: "The article provides a detailed breakdown of interior comfort features (ventilat",
+        imageInterior: false,
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/04/today3vsl5vqv.jpg",
+        note: ""
+    },
+    {
+        id: "us2033",
+        title: "ホンダ パスポート、2列構成にV6とAWDを標準装備",
+        desc: "2027年型パスポートは3列シートを持たない2列構成で、全グレードにAWDを標準搭載している。285馬力の3.5リットルV6エンジンとトルクベクタリング機構を備え、RTLが4万5195ドルから、TrailSport Eliteが5万3695ドル（いずれもデリバリー料別）で設定されている。",
+        url: "https://www.topspeed.com/honda-passport-two-row-suv-v6-awd-off-road/",
+        source: "Top Speed",
+        date: "2026-11-10",
+        tags: ["AI", "シート"],
+    
+        sourceExcerpt: "The 2027 Honda Passport RTL starts at $45,195, the TrailSport at $49,995, and the TrailSport Elite at $53,695, all before a $1,595 destination fee.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/2026/09/12-2027-honda-passport-trailsport.jpg",
+        note: ""
+    },
+    {
+        id: "us2034",
+        title: "VWステアリング制御系長期保証延長で調査終了",
+        desc: "米国NHTSAは、2010-2014年型CCやGolfなど多数の車種で、ステアリングホイールの時計バネが異物混入により損傷しエアバッグ警告灯点灯や操作系故障を引き起こした件について、9年続いた調査を終了した。VWは対象車の15年間無制限走行保証に加え、リコール外車両にも別途保証延長を実施している。",
+        url: "https://www.carcomplaints.com/news/2026/feds-close-9-year-volkswagen-clock-spring-recall-investigation.shtml",
+        source: "CarComplaints",
+        date: "2026-11-10",
+        tags: ["安全"],
+    
+        sourceExcerpt: "Simple human hair was causing the flat ribbon to tear which destroyed",
+        sourceExcerptEnd: "the front driver airbag and any steering wheel mounted controls.",
+        interiorScore: 57,
+        interiorReason: "Clock spring failure is a steering wheel hub component issue directly affecting",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.carcomplaints.com/news/images/volkswagen-clock-spring-failures-nhtsa.jpg",
+        note: ""
+    },
+    {
+        id: "eu1998",
+        title: "Polestar、ドライバー重視の新コンセプトでスポーツ志向を提示",
+        desc: "Polestarはドライバー志向のコンセプトカー「Formula 2030」を公開し、次世代Polestar 2や新7番目のコンパクトSUVへ導入予定のスポーティな設計思想を示した。4ドア2+2ハッチバックのこの車両は、Hyundai Ioniq 5 Nのような性能重視のアプローチを採用している。",
+        url: "https://www.autocar.co.uk/car-news/new-cars/polestar%E2%80%99s-future-revealed-radical-coup%C3%A9-shows-sporting-ambitions",
+        source: "AUTOCAR UK",
+        date: "2026-11-10",
+        tags: ["AR", "AI"],
+    
+        sourceExcerpt: "Polestar has pledged to make performance car thrills a higher priority in",
+        sourceExcerptEnd: "with the unveiling of its new, driver-centric Formula 2030 concept.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/polestar-formula-2030-exterior_24.jpg?itok=NBDvFacT",
+        note: ""
+    },
+    {
+        id: "eu1999",
+        title: "Tesla Cybertruck、DeLorean的な存在として記憶される",
+        desc: "筆者はCybertruckがModel T FordやMiniではなくDeLoreanのように記憶されると評価している。2019年の発表時、Franz Von Holzhausenが鋼鉄球を投げた際のガラス破損が後の運命の兆候だったと指摘する。",
+        url: "https://www.autoexpress.co.uk/tesla/cybertruck/370871/teslas-cybertruck-will-be-remembered-more-delorean-model-t-ford-or-mini",
+        source: "Auto Express",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "It came when Tesla chief designer, Franz Von Holzhausen, tried to demonstrate",
+        sourceExcerptEnd: "hurling a steel ball at the window: the glass shattered.",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/Steve%20Walker%20Cybertruck%20opinion.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2000",
+        title: "Kia PV5 Cargo L2/H2とChassis Cabがラインナップに追加",
+        desc: "KiaはPV5 Cargoの大型版L2/H2と、多様な用途へカスタマイズ可能なChassis Cabを新たに投入した。",
+        url: "https://www.autoexpress.co.uk/kia/pv5-cargo/370874/new-kia-pv5-cargo-l2h2-and-chassis-pictures",
+        source: "Auto Express",
+        date: "2026-11-10",
+        tags: ["AR", "カスタマイズ"],
+    
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/Kia%20PV5%20Cargo%20L2_H2%20-%20front%203_4_0.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2001",
+        title: "シトロエンC5 Aircrossに新フラッグシップ「Emerald」追加",
+        desc: "シトロエンはC5 Aircrossとe-C5 Aircrossに上位グレード「Emerald」を追加した。内装ではグレーのファブリックとレザー調素材を組み合わせたトリム、エメラルドカラーの内装ディテールや照明を備える。また、パノラミックサンルーフやフレームレスミラーも標準装備となり、価格は37,290ポンドからとなる。",
+        url: "https://www.autoexpress.co.uk/citroen/c5-aircross/370873/citroen-c5-aircross-emerald-launched-new-flagship-could-be-not-so-hidden",
+        source: "Auto Express",
+        date: "2026-11-10",
+        tags: ["AI", "新素材"],
+    
+        sourceExcerpt: "The seats are covered in a new grey part-cloth, part-leather-effect trim, once again “complemented” by “Emerald interior detailing and lighting”.",
+        interiorScore: 59,
+        interiorReason: "Flagship trim launch detailing specific interior upgrades including seat materia",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/CITROEN-AIRCROSS-EMERALD%283%29.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2002",
+        title: "Mercedes-Maybach S-Class、V8ハイブリッドで604bhpと静粛性を両立",
+        desc: "欧州仕様はEuro 7規制によりV12が廃止され、6.0リッターV8ハイブリッドに置換された。出力は604bhp、トルクは850Nmで、空気サスペンションと予測式路面スキャンによる快適性を維持している。",
+        url: "https://www.autoexpress.co.uk/maybach/370869/new-mercedes-maybach-s-class-review-masterpiece-luxury",
+        source: "Auto Express",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "The updated Maybach S-Class remains a masterpiece of luxury, delivering cloud-like comfort and dazzling tech.",
+        interiorScore: 82,
+        interiorReason: "Review of a flagship luxury sedan with specific mentions of 'cloud-like comfort'",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/Mercedes%20Maybach%20S%202026%20001.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2003",
+        title: "BMW i3の2本スポークホイールとPanoramic Vision表示",
+        desc: "BMW i3はNeue Klasseプラットフォームを採用し、87kWhと113.4kWhのバッテリーから選べる。筆者は2本スポークのステアリングホイールに違和感を覚え、運転中にハンドルが切れていないように錯覚したと指摘する。",
+        url: "https://www.autoexpress.co.uk/bmw/i3/370862/bmw-i3-vs-mercedes-c-class-electric-vs-hyundai-ioniq-6-big-test-3-series-ev",
+        source: "Auto Express",
+        date: "2026-11-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The BMW Drive Challenge logs your steering, acceleration and braking inputs in",
+        sourceExcerptEnd: "three, showing a green block when you meet the requirements.",
+        interiorScore: 53,
+        interiorReason: "The article provides specific feedback on the BMW i3's two-spoke steering wheel",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/DSC_1235.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn1987",
+        title: "BYDがエッガー氏設計の2ドアマイクロカー特許を公開",
+        desc: "BYDはWolfgang Egger氏らが関与した2ドアのマイクロカーデザイン特許を公開しました。フロントにはフル幅ライトバーと二層構造ノーズを採用し、前後で対称的な「スマイル」意匠が特徴です。",
+        url: "https://carnewschina.com/2026/11/10/byd-files-patent-for-two-door-microcar-designed-by-wolfgang-egger-and-team/",
+        source: "CarNewsChina - All",
+        date: "2026-11-10",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "The patent, published today by the China National Intellectual Propert",
+        sourceExcerptEnd: " design with input from BYD’s chief designer Wolfgang Egger.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-56-e1794310766329.png",
+        note: ""
+    },
+    {
+        id: "cn1988",
+        title: "BYDは中国のEV輸出で首位をキープする一方、市場シェアが低下傾向にある。",
+        desc: "CPCAの10月データによると、BYDは16万4,679台を輸出して首位を維持したものの、シェアは28.3%に低下しました。一方、Tesla Chinaは前月比で93.3%増の5万9,012台となり、シェアを10.1%まで拡大しています。",
+        url: "https://cnevpost.com/2026/11/10/automakers-shares-china-nev-exports-oct-2026/",
+        source: "CnEVPost - All",
+        date: "2026-11-10",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "BYD (HKEX: 1211) continued to lead China's passenger new energy vehicle (NEV)",
+        sourceExcerptEnd: "share declined further, while Tesla China's share rose above 10%.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026111012442669.jpg",
+        note: ""
+    },
+    {
+        id: "cn1989",
+        title: "BYDが22.4%で中国NEV首位、テスラはトップ10から脱落",
+        desc: "CPCAの2026年10月データによると、BYDは25万301台を販売し、シェア22.4%で首位を維持した。一方、9月に4位だったTeslaはトップ10から外れ、Xiaomi AutoとGWMが上位に食い込んだ。",
+        url: "https://cnevpost.com/2026/11/10/china-nev-share-oct-2026/",
+        source: "CnEVPost - All",
+        date: "2026-11-10",
+        tags: ["EV", "バッテリー"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026111012085296.jpg",
+        note: ""
+    },
+    {
+        id: "cn1990",
+        title: "Li Autoが右ハンドル仕様のLi Megaを東南アジア市場に投入",
+        desc: "Li Autoはタイと香港を含む5つの市場で販売準備を進め、12月に右ハンドル仕様のフラッグシップMPV「Li Mega」を投入します。車内ではASEAN NCAP基準への適合や現地言語対応のインフォテインメントシステムを整備し、地域特性に応じた快適装備を提供する方針です。",
+        url: "https://cnevpost.com/2026/11/10/li-auto-asia-pacific-expansion-5-markets-prepare-launch/",
+        source: "CnEVPost - All",
+        date: "2026-11-10",
+        tags: ["パリモーターショー2026", "コネクテッド"],
+    
+        eventTags: ["パリモーターショー2026"],
+        sourceExcerpt: "The company has also adapted window glass, license plate sizes, in-cabin 220-volt",
+        sourceExcerptEnd: "and infotainment ecosystems to meet local regulations and user habits.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026111009554195.jpg",
+        note: ""
+    },
+    {
+        id: "cn1991",
+        title: "BYDはEggerとの共同設計による2ドア・マイクロカーに関する特許を取得した。",
+        desc: "BYDがWolfgang Josef Egger関与の2ドアマイクロカー意匠特許を取得した。図面は横長ライトと曲線で笑顔のような表情を表現し、現行最小モデルSeagullとは異なりSmart #2に近い印象を与える。ただし動力源や寸法等の仕様は記載がなく、量産化計画も不明なままとなっている。",
+        url: "https://cnevpost.com/2026/11/10/byd-design-patent-2-door-microcar/",
+        source: "CnEVPost - All",
+        date: "2026-11-10",
+        tags: ["AR", "バッテリー"],
+    
+        sourceExcerpt: "The 5 listed designers include BYD's global design director, Wolfgang Josef Egger.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026111009250924.jpg",
+        note: ""
+    },
+    {
+        id: "cn1992",
+        title: "Li Auto i6、内装刷新で注文5万台超えとDeutsche Bank試算",
+        desc: "2026年型Li i6は、自社製チップやバッテリーに加えキャビン機能のアップグレードを施しながら価格を据え置いた。Deutsche Bankは11月の納車待ちが9〜11週に達しており、累計注文が5万台を超えると試算している。",
+        url: "https://cnevpost.com/2026/11/10/li-auto-updated-i6-orders-estimated-above-50000/",
+        source: "CnEVPost - All",
+        date: "2026-11-10",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Li Auto launched the 2026 Li i6 on October 28 and began",
+        sourceExcerptEnd: "battery and cabin features while keeping the starting price unchanged.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026111006020769.jpg",
+        note: ""
+    },
+    {
+        id: "cn1993",
+        title: "GWM Wey Lanshan IIが角張ったデザインと5・6人乗りを備え予約開始",
+        desc: "GWM Weyは角張ったデザインの新世代Lanshanの予約販売を開始した。Snapdragon 8797とNvidia Drive Thor-UによるCoffee AI OS 4コックピットを搭載し、5人乗り・6人乗りの4グレードで構成される。",
+        url: "https://cnevpost.com/2026/11/10/gwm-wey-opens-pre-sales-2nd-gen-lanshan/",
+        source: "CnEVPost - All",
+        date: "2026-11-10",
+        tags: ["AI", "コックピット"],
+    
+        sourceExcerpt: "The model uses a Qualcomm Snapdragon 8797 chip and an Nvidia Drive Tho",
+        sourceExcerptEnd: "t interaction and driver-assistance functions, respectively.",
+        interiorScore: 58,
+        interiorReason: "Mentions specific cockpit hardware (Snapdragon 8797) and OS (Coffee AI OS 4), bu",
+        imageInterior: false,
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026111003361251.jpg",
+        note: ""
+    },
+    {
+        id: "in2059",
+        title: "新Creta内装目撃、電動シートと広々空間",
+        desc: "偽装車両の映像で、大型センターディスプレイやオフホワイト基調の内装が確認された。前後席にアームレストを備え、運転席・助手席は電動調整に対応する。後部座席も足を伸ばせる余裕があり、2027年の発売が見込まれる。",
+        url: "https://www.rushlane.com/new-hyundai-creta-interiors-spied-more-space-features-12560830.html",
+        source: "RushLane",
+        date: "2026-11-10",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "The giant central infotainment screen along with the sleek and horizontal driver’s instrument cluster are a highlight point of upcoming Creta.",
+        interiorScore: 100,
+        interiorReason: "Detailed spy shots of a flagship SUV interior refresh with specific features lik",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/new-hyundai-creta-interiors-spied-before-launch-6.jpg",
+        note: ""
+    },
+    {
+        id: "in2060",
+        title: "インド車市場10月、マルチが4割超えで首位",
+        desc: "2026年10月のインド新車販売は52万4,226台と前年比12.18%増となった。マールティ・スズキは21万2,384台を売り上げ、市場シェアが40.51%に拡大して首位を維持した。タタ・モーターズとマヒンドラは僅差で2位争いを演じ、トヨタは前年比で最大の減少幅となった。",
+        url: "https://www.rushlane.com/car-sales-oct-2026-maruti-tata-mahindra-hyundai-kia-toyota-12560810.html",
+        source: "RushLane",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "Maruti Suzuki accounted for nearly half of the 64,769 units added over",
+        sourceExcerptEnd: "just 556 units apart in the race for second place.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/07/new-brezza-booster-jet-review.jpg",
+        note: ""
+    },
+    {
+        id: "in2061",
+        title: "BYD Yangwang Altior、Hetian玉とSuzhou刺繍を内装に採用",
+        desc: "BYDの超ラグジュアリーブランドYangwangが発表したAltiorは、中国伝統文化を内装に反映した4人乗りEVセダンである。エアコン吹き出し口にはHetian玉素材を用い、シート張地には精密な穴あけ加工を施したSuzhou刺繍を採用している。また、リアルメタルスイッチや純毛カーペットなど高級素材が多用され、2列目には航空機スタイルのゼログラビティシートと4つのボール型マッサージヘッドを備えた専用システムを搭載している。",
+        url: "https://www.rushlane.com/byd-yangwang-altior-debuts-cny-2-million-rs-2-9-cr-rolls-royce-phantom-rival-12560775.html",
+        source: "RushLane",
+        date: "2026-11-10",
+        tags: ["シート", "新素材", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Inside, the Yangwang Altior uses premium materials and exquisite finishes.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/byd-yangwang-altior-debuts-as-rolls-royce-phantom-rival.jpg",
+        note: ""
+    },
+    {
+        id: "in2062",
+        title: "インドでTataやHyundaiが7人乗りEV・ハイブリッドSUVを投入へ",
+        desc: "インドでは今後12〜15ヶ月でTataやHyundaiなどが3列シートEV・ハイブリッドSUVを投入予定。7人乗り空間と環境配慮パワートレインの組み合わせが、既存ガソリン車の代替選択肢として注目されている。",
+        url: "https://gaadiwaadi.com/5-upcoming-7-seater-electric-hybrid-suvs-in-india-tata-to-hyundai/",
+        source: "GaadiWaadi",
+        date: "2026-11-10",
+        tags: ["AI", "シート", "EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2025/04/2026-Kia-Palisade-Hybrid-SUV-2.jpg",
+        note: ""
+    },
+    {
+        id: "in2063",
+        title: "Renault、Diwali向けに最大21万ルピーの値引きを実施",
+        desc: "Renaultは11月のDiwali期間中に新車販売を促進するため、4万ルピーから最大21万ルピー（Rs. 2.10 lakh）までの値引きや各種優遇措置を導入した。",
+        url: "https://gaadiwaadi.com/renault-offering-savings-of-up-to-rs-2-10-lakh-on-new-cars-this-november/",
+        source: "GaadiWaadi",
+        date: "2026-11-10",
+        tags: [],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/11/New-Duster.jpg",
+        note: ""
+    },
+    {
+        id: "in2064",
+        title: "BMW、高級EV市場で53%のシェア確保",
+        desc: "2026年10月の高級EV登録台数は前月比15.6%減となったが、BMWは全体の53.2%を占め、Teslaとの差を171台に縮小した。",
+        url: "https://gaadiwaadi.com/luxury-electric-car-sales-rise-53-in-oct-2026-bmw-outsells-tesla-merc/",
+        source: "GaadiWaadi",
+        date: "2026-11-10",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/09/BMW-i5-LWB.jpg",
+        note: ""
+    },
+    {
+        id: "in2065",
+        title: "Honda Elevate、スタイルと機能強化で10月販売68%増",
+        desc: "Honda Cars Indiaは2026年10月の国内出荷が前年比19%増の7,609台となった。Elevateはスタイルや機能面の向上により3,673台を記録し、全体の48.3%を占めた。Amazeは3,337台で前年比8.1%減だが、両車種が合計で販売の約9割を構成している。",
+        url: "https://www.autopunditz.com/post/honda-car-sales-october-2026-elevate-amaze-city",
+        source: "Auto Punditz",
+        date: "2026-11-10",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "The recently updated Elevate emerged as the biggest growth driver, whi",
+        sourceExcerptEnd: "line despite remaining Honda's second-highest-selling model.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_1b92bf6e8f154076bc8a2d9fc2ef30f7~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu2004",
+        title: "Kia PV5 Chassisと高屋根Cargo L2/H2の英国価格が判明",
+        desc: "KiaはPV5にChassisと高屋根Cargo L2/H2を追加し、ZEVG適用後の価格はそれぞれ£25,605から£27,355となる。",
+        url: "https://www.electrive.com/2026/11/10/kia-reveals-uk-prices-for-pv5-chassis-and-high-roof-electric-van/",
+        source: "Electrive",
+        date: "2026-11-10",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Two new additions to Kia's PV5 electric van range, the Chassis and",
+        sourceExcerptEnd: "they qualify for the UK's Zero Emission Van Grant (ZEVG).",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/11/auto-2026-01-18-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2005",
+        title: "VW、Martorell工場でSSP採用を検討",
+        desc: "VWはスペインMartorell工場へのSSP採用を示唆し、Cupra LeonやFormentorの後継EV生産を視野に入れている。ただし導入には2030年までのコスト削減目標達成が条件とされ、最終決定は未定だ。",
+        url: "https://www.electrive.com/2026/11/10/vw-hints-at-ssp-model-production-at-martorell-seat-plant/",
+        source: "Electrive",
+        date: "2026-11-10",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Awarding the SSP architecture would secure the production of the electric successors to the Leon and Formentor in Catalonia.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/11/volkswagen-werk-martorell-id-polo-raval-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2006",
+        title: "Polestar、持続可能素材とモータースポーツ意匠融合したFormula 2030コンセプト",
+        desc: "Polestarは4ドアスポーツカーのFormula 2030コンセプトを発表し、Dual BladeヘッドライトやSingle Bladeテールランプなど次期モデルへ反映されるデザイン言語を提示した。",
+        url: "https://electriccarsreport.com/2026/11/polestar-formula-2030-concept-maps-out-the-brands-electric-future/",
+        source: "Electric Cars Report",
+        date: "2026-11-10",
+        tags: ["AR", "新素材"],
+    
+        sourceExcerpt: "Combining Scandinavian minimalism, motorsport-inspired styling, advanc",
+        sourceExcerptEnd: " Formula 2030 concept represents a new chapter for Polestar.",
+        interiorScore: 45,
+        interiorReason: "The article describes a concept car that explicitly mentions 'sustainable materi",
+        imageInterior: false,
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/Polestar-Formula-2030-concept.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu2007",
+        title: "Samsung Display、ISO/SAE 21434とENX VCSの二重認証を取得",
+        desc: "Samsung DisplayはISO/SAE 21434とENX VCSの認証を業界初として取得した。自動車向けOLED事業では、物理分解による脆弱性特定や設計段階での対策導入を通じてサイバーセキュリティ管理体制を整備している。",
+        url: "https://www.automotiveinteriorsworld.com/news/connectivity/samsung-display-earns-iso-sae-21434-and-enx-vehicle-cyber-security-label.html",
+        source: "Automotive Interiors World",
+        date: "2026-11-10",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "As Samsung Display expands its automotive OLED business, the company has established a cybersecurity management system for its automotive products.",
+        interiorScore: 26,
+        interiorReason: "The article focuses on cybersecurity certification (ISO/SAE 21434) for automotiv",
+        imageInterior: false,
+        country: "eu",
+        img: "https://www.automotiveinteriorsworld.com/wp-content/uploads/2026/11/Photo1.-Kyung-jin-Yoo-Executive-Vice-President-of-Samsung-Display-and-Ingo-M.-Rubenach-CEO-of-DQS-Group-at-the-certification-ceremony-e1794304861355-1536x860-1.jpg",
+        note: ""
+    },
+    {
+        id: "cn1994",
+        title: "BYD、2026年の海外販売目標を180万台に引き上げ",
+        desc: "BYDは需要増と現地生産を背景に、2026年の海外販売目標を当初の130万台から180万台へ引き上げました。",
+        url: "https://chinaevhome.com/2026/11/10/byd-raises-2026-overseas-sales-forecast-to-1-8-million/",
+        source: "ChinaEVHome",
+        date: "2026-11-10",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Production projects in Thailand, Indonesia and other markets are also progressing.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-160.png?resize=640%2C746&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn1995",
+        title: "中国のトップ10人気車種に、新エネルギー車が9台ランクイン",
+        desc: "Geely Xingyuanが5万190台で首位を獲得した。BYDはYuan UPとTi 7を含む4車種をトップ10にランクインさせた。",
+        url: "https://chinaevhome.com/2026/11/10/nevs-take-9-of-chinas-top-10-best-selling-spots-in-october/",
+        source: "ChinaEVHome",
+        date: "2026-11-10",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "Geely’s Xingyuan surged to the top with 50,190 retail sales in October",
+        sourceExcerptEnd: "marking rapid volume growth and a one‑million cumulative production milestone.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/img_v3_0217a_3f01ef94-a557-4f1d-9efc-a716fe70033g.png?resize=640%2C854&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn1996",
+        title: "Xiaomi Auto、SkyNomad SUVで10月の販売台数が5万台を突破",
+        desc: "Xiaomi Autoは10月に5万123台を納車し、初めて月間5万台の大台を突破した。新発売のSkyNomadシリーズが2万7,132台と全体の約5割を占め、特にN90はフルサイズSUV市場で首位を獲得している。純電モデルSU7やYU7も堅調に推移し、年間目標達成に向けた生産拡大が進んでいる。",
+        url: "https://chinaevhome.com/2026/11/10/xiaomi-auto-delivers-50-1k-vehicles-in-october-as-skynomad-reaches-27-1k/",
+        source: "ChinaEVHome",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "Xiaomi’s deliveries topped 50,000 in October as SkyNomad SUVs drove a new",
+        sourceExcerptEnd: "extended-range family models to regain volume amid fierce domestic competition.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-150.png?resize=640%2C385&ssl=1",
+        note: ""
+    },
+    {
+        id: "in2066",
+        title: "BYD Yangwang Altior、半アニリンレザーと蘇州刺繍を備えた4席キャビン",
+        desc: "BYDの高級ブランドYangwangがAbu Dhabiで発表した電気セダンAltiorは、4席レイアウトを採用し、半アニリンレザーや天然木、羊毛マットなど上質な素材で内装を構成している。さらに、エアコン吹き出し口周囲にはHetian玉があしらわれ、シートには中国のデザインに着想を得た蘇州刺繍が施されている。",
+        url: "https://www.motoroids.com/news/byd-yangwang-altior-revealed-electric-luxury-sedan-takes-on-rolls-royce-phantom/",
+        source: "Motoroids",
+        date: "2026-11-10",
+        tags: ["シート", "新素材", "バッテリー"],
+    
+        sourceExcerpt: "Unveiled in Abu Dhabi, the Altior brings together an imposing design, a spacious four-seat cabin and a range of advanced technologies.",
+        country: "in",
+        img: "https://www.motoroids.com/wp-content/uploads/2026/11/image-1-7.jpg",
+        note: ""
+    },
+    {
+        id: "jp2233",
+        title: "無限Super-ONE用スポーツステアリング公開N-BOX等も装着可",
+        desc: "無限はホンダのスポーツEV「Super-ONE」向けに新作スポーツステアリングホイールを開発した。上部と左右グリップにはパンチング加工を施したナッパレザーを採用し、下部にはカーボン調合成皮革を組み合わせている。12時方向にはライトグレーのセンターマークを配置し、ブラック基調のデザインにアクセントを加えている。価格は12万1000円で、N-ONEやN-BOX、フリードなどにも適合する。",
+        url: "https://motor-fan.jp/article/1672297/",
+        source: "Motor-Fan",
+        date: "2026-11-10",
+        tags: ["新素材", "EV"],
+    
+        sourceExcerpt: "【無限（MUGEN）／スポーツステアリングホイール】価格：12万1000円適合：Super-ONE、N-ONE e:、N-ONE（JG3／JG4）、N-BOX（JF5／JF6）、N-VAN（2026年3月発売以降のJJ1／JJ2）、FREED（GT1〜GT8）",
+        interiorScore: 18,
+        interiorReason: "Detailed breakdown of a steering wheel accessory with specific material specs (n",
+        imageInterior: true,
+        country: "jp",
+        img: "https://motor-fan.jp/wp-content/uploads/2026/11/202611-006-004.jpg?v=1793862453",
+        note: ""
+    },
+    {
+        id: "jp2234",
+        title: "トヨタ アルファード 一部改良で内装加飾と快適装備を刷新",
+        desc: "アルファードは6月3日の改良でZグレードにPHEVを追加し、本革巻きステアリングや14インチディスプレイオーディオを備えた。Executive Loungeではブロンズスパッタリング加飾を採用し、全車に周波数感応型ショックアブソーバーを設定して乗り心地も改善している。",
+        url: "https://news.infoseek.co.jp/article/kurumanews_1133512/",
+        source: "Infoseekニュース",
+        date: "2026-11-10",
+        tags: ["ディスプレイ", "新素材", "EV", "音響"],
+    
+        interiorScore: 63,
+        interiorReason: "Detailed breakdown of interior material changes (bronze splatter trim), HMI upgr",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.image.infoseek.co.jp/isnews/photos/kurumanews/kurumanews_1133512_0-enlarge.jpg",
+        note: ""
+    },
+    {
+        id: "in2067",
+        title: "インド市場の車載空気清浄機搭載状況と価格帯を整理",
+        desc: "北インドの大気汚染対策として、Tata PunchやMaruti Suzuki Brezzaなど5車種の上位グレードに限定された車載空気清浄機の現状をまとめた。Brezza ZXI+は10.1インチディスプレイ連動で、価格は112.6万〜135.5万ルピー（ショールーム外税別）とされている。",
+        url: "https://www.news9live.com/auto/worried-about-aqi-whilst-commuting-5-affordable-cars-with-built-in-air-purifiers-to-consider-3023439",
+        source: "news.google.com",
+        date: "2026-11-10",
+        tags: ["AR", "ディスプレイ"],
+    
+        sourceExcerpt: "The updated Brezza also has a 10.1-inch touchscreen infotainment system, which integrates the air purifier functionality.",
+        interiorScore: 68,
+        interiorReason: "The article focuses on a specific cabin comfort feature (built-in air purifier)",
+        imageInterior: false,
+        country: "in",
+        img: "https://images.news9live.com/wp-content/uploads/2026/11/With-AQI-on-the-rise-having-air-purifiers-inside-the-cars-are-becoming-more-necessary-than-ever.png",
+        note: ""
+    },
+    {
+        id: "in2068",
+        title: "トヨタ5車種発表 次期フォートナー含む",
+        desc: "今後50日以内にトヨタの5車種が発表される見通しで、ハイクロスフェイスリフトと次世代フォートナーが含まれる。",
+        url: "https://www.cartoq.com/car-news/new-cars-launching-next-50-days/",
+        source: "news.google.com",
+        date: "2026-11-10",
+        tags: [],
+    
+        sourceExcerpt: "Toyota will officially launch the Hycross facelift on 25 November this year.",
+        country: "in",
+        img: "https://cdn.cartoq.com/photos/5_new_cars_in_the_next_50_days_989c2a3198.webp",
         note: ""
     },
 ];
