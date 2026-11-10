@@ -31358,7 +31358,7 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in269",
-        title: "BYD Atto 2、チェンナイで無カモフラージュ試作車を確認",
+        title: "BYD Atto 2、チェンナイで偽装なしの試験車両を目撃",
         desc: "BYDのエントリーEV「Atto 2」のテスト車両がインド・チェンナイで目撃された。カモフラージュなしの姿から量産仕様に近いとみられ、64.8kWhバッテリーや15.6インチ回転式ディスプレイを搭載する。",
         url: "https://www.rushlane.com/byd-atto-2-spied-in-chennai-sierra-ev-rival-launch-2027-12560754.html",
         source: "RushLane",

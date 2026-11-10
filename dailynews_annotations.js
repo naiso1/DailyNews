@@ -13,7 +13,10 @@
   const units = { lakh: 1e5, lakhs: 1e5, lac: 1e5, lacs: 1e5, crore: 1e7, crores: 1e7,
     ラック: 1e5, ラク: 1e5, クロール: 1e7, 千: 1e3, 万: 1e4, 百万: 1e6, 億: 1e8,
     billion: 1e9, million: 1e6, thousand: 1e3 };
-  const currency = "US\\$|U\\.S\\.\\$|A\\$|C\\$|HK\\$|S\\$|NT\\$|USD|EUR|GBP|CNY|RMB|INR|KRW|AUD|CAD|HKD|SGD|TWD|CHF|Rs\\.?|₹|€|£|₩|\\$|米ドル|米国ドル|人民元|中国元|インドルピー|ルピー|ユーロ|英ポンド|ポンド|韓国ウォン|ウォン|豪ドル|豪州ドル|カナダドル|香港ドル|台湾ドル|シンガポールドル|スイスフラン|ドル|元";
+  // Codes may touch digits/Japanese text, but must not be part of a Latin word
+  // (e.g. the model year in "2028 Audi" is not 2,028 Australian dollars).
+  const currencyCodeToken = "(?<![A-Za-z])(?:USD|EUR|GBP|CNY|RMB|INR|KRW|AUD|CAD|HKD|SGD|TWD|CHF|Rs\\.?)(?![A-Za-z])";
+  const currency = `US\\$|U\\.S\\.\\$|A\\$|C\\$|HK\\$|S\\$|NT\\$|${currencyCodeToken}|₹|€|£|₩|\\$|米ドル|米国ドル|人民元|中国元|インドルピー|ルピー|ユーロ|英ポンド|ポンド|韓国ウォン|ウォン|豪ドル|豪州ドル|カナダドル|香港ドル|台湾ドル|シンガポールドル|スイスフラン|ドル|元`;
   const number = "(?:\\d{1,3}(?:,\\d{3})+|\\d{1,2}(?:,\\d{2})*,\\d{3}|\\d+)(?:\\.\\d+)?";
   const quantity = `${number}(?:\\s*[億万千]\\s*${number})*`;
   const scale = "billion|million|thousand|lakhs?|lacs?|crores?|クロール|ラック|ラク|百万|千|万|億";
@@ -57,7 +60,7 @@
     };
     if (labels[token]) return { code: labels[token], inferred: false };
     if (/^(RS\.?|ルピー)$/.test(key) && country === "in") return { code: "INR", inferred: true };
-    if (/^(\$|ドル)$/.test(key) && country === "us" && !/豪|カナダ|香港|台湾|シンガポール|AUD|CAD|HKD|SGD|TWD/i.test(text)) {
+    if (/^(\$|ドル)$/.test(key) && country === "us" && !/豪|カナダ|香港|台湾|シンガポール|(?<![A-Za-z])(?:AUD|CAD|HKD|SGD|TWD)(?![A-Za-z])/i.test(text)) {
       return { code: "USD", inferred: true };
     }
     return null;
@@ -86,12 +89,16 @@
     for (const match of text.matchAll(pricePattern)) {
       const g = match.groups;
       const before = text[match.index - 1] || "";
-      const after = text[match.index + match[0].length] || "";
+      const after = text[match.index + match[0].trimEnd().length] || "";
       // Do not partially interpret malformed grouping, decimal commas or JPY symbols.
       if (/[\d,.¥￥億万千兆京−-]/.test(before) || /[\d,.]/.test(after)) continue;
       if (/\d\s+$/.test(text.slice(0, match.index))) continue;
-      if (/[A-Za-z]/.test(before) || (/[A-Za-z]/.test(after) && (g.scale1 || g.scale2 || g.suffix))) continue;
+      // Do not turn an unsupported suffix such as "$90k" into just $90.
+      if (/[A-Za-z]/.test(before) || /[A-Za-z]/.test(after)) continue;
       const tokens = [g.prefix, g.mid, g.prefix2, g.suffix].filter(Boolean);
+      // A bare "RS5" is also a vehicle model. Without a separator or a scale,
+      // prefer no conversion to inferring a rupee price from the model name.
+      if (/^Rs\d/i.test(match[0].trim()) && !g.scale1 && !g.scale2) continue;
       if (tokens.includes("ポンド") && !tokens.some(t => /^(GBP|£|英ポンド)$/i.test(t)) && !isMonetaryPound(text, match)) continue;
       let currencies = tokens.map(t => currencyCode(t, country, text));
       if (!tokens.length && country === "in" && /lakh|lac|crore|ラック|ラク|クロール/i.test(g.scale1 || g.scale2 || "")) {

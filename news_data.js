@@ -254553,8 +254553,8 @@ window.LOADED_NEWS_DATA = [
     },
     {
         id: "in2052",
-        title: "BYD Atto 2、チennaiで無カモフラージュ撮影",
-        desc: "インドのチennaiで、BYD Atto 2がカモフラージュなしで目撃された。内装には15.6インチの回転式インフォテインメントディスプレイや8.8インチのメータークラスターを備え、ベンチレーションシートやレザー調素材も採用されている。",
+        title: "BYD Atto 2、チェンナイで偽装なしの試験車両を目撃",
+        desc: "インド・チェンナイで、BYD Atto 2の試験車両が偽装なしの姿で目撃された。内装には15.6インチの回転式インフォテインメントディスプレイや8.8インチのメータークラスターを備え、ベンチレーションシートやレザー調素材も採用されている。",
         url: "https://www.rushlane.com/byd-atto-2-spied-in-chennai-sierra-ev-rival-launch-2027-12560754.html",
         source: "RushLane",
         date: "2026-11-09",

@@ -36,6 +36,55 @@ test("explicit currencies and regional ambiguity", () => {
   }
 });
 
+test("currency codes never match inside model or place names", () => {
+  for (const text of ["2028 Audi Nuvolari", "2028 AUDI", "2026 Cadillac", "2026 European market",
+    "100 Rsport", "100 CHFutures", "ABCUSD123", "2028Ａｕｄｉ", "2028 Audi〜2029 Audi"]) {
+    assert.deepEqual(extractPrices(text, "us"), [], text);
+  }
+  // Do not reject a real price merely because its amount looks like a year.
+  for (const text of ["2028 AUD", "AUD2028", "2028AUD", "2028 aud", "価格はAUD2028から", "価格2028AUDから"]) {
+    const prices = extractPrices(text, "us");
+    assert.equal(prices.length, 1, text);
+    assert.equal(prices[0].code, "AUD", text);
+    assert.equal(prices[0].amount, 2028, text);
+  }
+  for (const brand of ["Audi", "Cadillac"]) {
+    for (const price of ["$50,000", "50,000ドル", "USD 50,000", "50,000 USD"]) {
+      const prices = extractPrices(`2028 ${brand}の価格は${price}。`, "us");
+      assert.equal(prices.length, 1, price);
+      assert.equal(prices[0].code, "USD", price);
+      assert.equal(prices[0].amount, 50000, price);
+    }
+  }
+  const range = extractPrices("2028 Audi、価格はAUD 50,000〜60,000", "us")[0];
+  assert.equal(range.amount, 50000);
+  assert.equal(range.end, 60000);
+  assert.equal(range.code, "AUD");
+});
+
+test("us2022 does not display the model year as yen", () => {
+  const snapshot = {base:"JPY", date:"2026-11-10", rates:{AUD:109, USD:150}};
+  const now = new Date("2026-11-10T12:00:00+09:00");
+  const item = {title:"Audi Nuvolari、ミクロファイバーとアルミで仕立てた内装公開",
+    desc:"2028 Audi Nuvolariの内装はマイクロファイバーとレザーで構成されている。", country:"us"};
+  assert.equal(renderCurrency(item, snapshot, now), "");
+  assert.match(renderCurrency({...item, desc:item.desc + "価格は50,000 USD。"}, snapshot, now), /約750万円/);
+});
+
+test("model-like rupee abbreviations and unsupported amount suffixes stay unconverted", () => {
+  for (const text of ["Audi RS5 PHEV", "Audi rs5", "RS200", "Rs100", "$90k", "$90K", "$1.2m"]) {
+    for (const country of ["in", "us"]) assert.deepEqual(extractPrices(text, country), [], text);
+  }
+  for (const text of ["Rs 100", "Rs.100", "100 Rs", "Rs100 lakh", "Rs100〜200 lakh"]) {
+    const price = extractPrices(text, "in")[0];
+    assert.equal(price.code, "INR", text);
+    assert.equal(price.amount, text.includes("lakh") ? 1e7 : 100, text);
+  }
+  assert.equal(extractPrices("$100 for a new display", "us")[0]?.amount, 100);
+  assert.equal(extractPrices("100 USD per month", "us")[0]?.amount, 100);
+  assert.equal(extractPrices("$90k; price is USD 90,000", "us")[0]?.amount, 90000);
+});
+
 test("compound Japanese money, complete ranges and invalid unit order", () => {
   for (const [raw, amount] of [
     ["31万3千ドル", 313000], ["３１万３千ドル", 313000],
