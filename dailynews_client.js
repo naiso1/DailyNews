@@ -626,6 +626,7 @@ function refreshInteractionCounts() {
       const commentCount = card.querySelector(".btn-comment .count");
       const readCount = card.querySelector(".read-count");
       if (likeCount) likeCount.textContent = data.likes || 0;
+      if (likeButton && typeof data.liked === "boolean") likeButton.classList.toggle("liked", data.liked);
       if (commentCount) commentCount.textContent = data.comments || 0;
       if (readCount) readCount.textContent = `閲覧 ${data.reads || 0}`;
       updateLikeTooltip(likeButton, data);
@@ -650,6 +651,11 @@ function enableLocalInteractions() {
 
 async function loadInteractions() {
   try {
+    const visibilitySignature = () => Object.entries(window.interactionsData || {})
+      .filter(([, value]) => value.hidden || value.irrelevant || value.imageUrlOverride || value.imageUrlsOverride?.length)
+      .map(([id, value]) => `${id}:${value.irrelevant || 0}:${value.hidden ? 1 : 0}:${JSON.stringify(value.imageUrlsOverride || [])}:${value.imageUrlOverride || ""}`)
+      .sort().join("|");
+    const previousVisibility = visibilitySignature();
     const previousReactions = Object.entries(window.interactionsData || {})
       .map(
         ([id, value]) =>
@@ -670,8 +676,10 @@ async function loadInteractions() {
       )
       .join("|");
     if (currentReactions !== previousReactions) {
-      // Visibility refresh also applies the current sort. Do not rebuild twice.
-      window.refreshNewsVisibility?.();
+      // Counts only require reordering existing cards, not closing editors or
+      // rebuilding the idea section. Actual visibility/image changes still rebuild.
+      if (visibilitySignature() !== previousVisibility) window.refreshNewsVisibility?.();
+      else window.refreshNewsReactionSort?.();
     }
     return true;
   } catch (error) {
@@ -1341,6 +1349,7 @@ window.toggleLike = async (itemId, button) => {
   mergeInteractionData(itemId, {
     ...(window.interactionsData[itemId] || {}),
     likes: optimisticCount,
+    liked: desiredLiked,
   });
   updateRankings();
 
@@ -1377,7 +1386,10 @@ window.toggleLike = async (itemId, button) => {
     mergeInteractionData(itemId, {
       ...(window.interactionsData[itemId] || {}),
       likes: previousCount,
+      liked: wasLiked,
     });
+    updateRankings();
+    window.refreshNewsReactionSort?.();
     if (error.status === 401) {
       window.dailyNewsAccount?.openAuth(
         "login",
@@ -1401,15 +1413,16 @@ window.toggleComments = (itemId, button) => {
 };
 
 async function saveComment(itemId, text, parentCommentId = null, input = null) {
-  if (!text) return;
-  if (input) input.value = "";
+  if (!text || input?.dataset.commentSubmitting === "true" || input?.dataset.commentComposing === "true") return;
+  const submittedValue = input?.value;
 
   if (window.useLocalInteractions) {
-    if (input) input.value = text;
     alert("サーバーに接続できないため、コメントを保存できません。時間をおいて再度お試しください。");
     return;
   }
 
+  if (input) input.dataset.commentSubmitting = "true";
+  let saved = false;
   try {
     const data = await apiRequest(
       `/interactions/${encodeURIComponent(itemId)}/comments`,
@@ -1418,15 +1431,18 @@ async function saveComment(itemId, text, parentCommentId = null, input = null) {
         body: { clientId: getClientId(), text, parentCommentId },
       },
     );
+    saved = true;
+    // Do not erase a new draft typed while this request was in flight.
+    if (input && input.value === submittedValue) input.value = "";
     mergeInteractionData(itemId, data);
     if (liveElements[itemId]) {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
     }
+    updateRankings();
     window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
   } catch (error) {
     console.error("Comment save failed:", error);
-    if (input) input.value = text;
     if (error.status === 401) {
       window.dailyNewsAccount?.openAuth(
         "login",
@@ -1435,6 +1451,10 @@ async function saveComment(itemId, text, parentCommentId = null, input = null) {
       return;
     }
     alert("コメントの保存に失敗しました。通信状態を確認してください。");
+  } finally {
+    if (input) delete input.dataset.commentSubmitting;
+    if (saved) window.refreshNewsReactionSort?.({ completedInput: input });
+    else window.flushPendingNewsRefresh?.();
   }
 }
 
@@ -1500,6 +1520,8 @@ window.deleteComment = async (itemId, commentIndex) => {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
     }
+    updateRankings();
+    window.refreshNewsReactionSort?.();
     return;
   }
 
@@ -1513,6 +1535,8 @@ window.deleteComment = async (itemId, commentIndex) => {
       liveElements[itemId].lastData = getInteractionRenderData(itemId);
       renderItem(itemId);
     }
+    updateRankings();
+    window.refreshNewsReactionSort?.();
     window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
   } catch (error) {
     console.error("Comment delete failed:", error);

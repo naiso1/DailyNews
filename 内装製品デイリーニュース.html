@@ -3398,7 +3398,7 @@ header.site-header {
             });
         }
 
-        function applyFilters() {
+        function applyFilters({ preserveCards = false } = {}) {
             let from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
             const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
@@ -3494,12 +3494,23 @@ header.site-header {
             // 3. Render (Pagination)
             const grid = document.getElementById("newsGrid");
             const previousCardLayout = captureNewsCardLayout(grid);
-            grid.querySelectorAll('.card').forEach(card => card._disposeNewsImageCarousel?.());
-            grid.innerHTML = "";
+            const focusedElement = preserveCards && grid.contains(document.activeElement) ? document.activeElement : null;
+            const retainedCards = new Map(preserveCards
+                ? [...grid.querySelectorAll(":scope > .card")].map(card => [card.dataset.newsId, card]) : []);
+            if (!preserveCards) {
+                grid.querySelectorAll('.card').forEach(card => card._disposeNewsImageCarousel?.());
+                grid.innerHTML = "";
+            }
 
             const itemsToShow = filteredData.slice(0, visibleLimit);
 
-            itemsToShow.forEach(n => {
+            itemsToShow.forEach((n, index) => {
+                const retained = retainedCards.get(n.id);
+                if (retained) {
+                    retainedCards.delete(n.id);
+                    if (grid.children[index] !== retained) grid.insertBefore(retained, grid.children[index] || null);
+                    return;
+                }
                 const interaction = window.interactionsData?.[n.id] || {};
                 const likeCount = interaction.likes || 0;
                 const commentCount = interaction.comments || 0;
@@ -3574,15 +3585,17 @@ header.site-header {
                         <!-- Demo Comments -->
                     </div>
                     <div class="comment-input-area">
-                        <input type="text" class="comment-input" placeholder="コメントを入力..." onkeypress="if(event.key==='Enter') submitComment('${n.id}', this)">
+                        <input type="text" class="comment-input" placeholder="コメントを入力..." onkeypress="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229) submitComment('${n.id}', this)">
                         <button class="comment-submit" onclick="submitComment('${n.id}', this.previousElementSibling)">送信</button>
                     </div>
                 </div>
     
             </div>`;
-                grid.appendChild(card);
+                grid.insertBefore(card, grid.children[index] || null);
                 window.setupNewsImageCarousel?.(card, n);
             });
+            retainedCards.forEach(card => { card._disposeNewsImageCarousel?.(); card.remove(); });
+            if (focusedElement?.isConnected && document.activeElement !== focusedElement) focusedElement.focus({ preventScroll: true });
             animateNewsCardReorder(grid, previousCardLayout);
 
             // Update Counts
@@ -3605,10 +3618,11 @@ header.site-header {
             // Empty state removed
             wireImageFallbacks(document);
             if (window.refreshInteractionCounts) window.refreshInteractionCounts();
-            renderInsights();
+            if (!preserveCards) renderInsights();
             updateRankingVisibility();
             scheduleRankingUpdate();
-            pendingAutomaticNewsRefresh = false;
+            if (!preserveCards) pendingAutomaticNewsRefresh = false;
+            pendingReactionRefresh = false;
         }
 
         function loadMore() {
@@ -3622,26 +3636,47 @@ header.site-header {
         }
 
         let pendingAutomaticNewsRefresh = false;
+        let pendingReactionRefresh = false;
+        let pendingCommentRefreshTimer = null;
 
-        function refreshNewsWithoutInterruptingComments() {
-            // Rebuilding cards removes the input node, draft, focus and IME
-            // composition. Keep it intact while reading/writing comments.
-            const hasOpenEditor = document.querySelector(".comment-section.open, .comment-input:focus");
-            const hasDraft = [...document.querySelectorAll(".comment-input")].some(input => input.value.length > 0);
-            if (hasOpenEditor || hasDraft) {
-                pendingAutomaticNewsRefresh = true;
+        function refreshNewsWithoutInterruptingComments({ reactionOnly = false, completedInput = null } = {}) {
+            // Reaction sorting reuses the cards and their comment nodes. While
+            // a draft, composition or save is active, defer movement as well.
+            const editing = [...document.querySelectorAll(".comment-input")].some(input =>
+                input.value.length > 0 || input.dataset.commentComposing === "true" || input.dataset.commentSubmitting === "true"
+                || (input === document.activeElement && input !== completedInput));
+            // A pending visibility change must not sneak into a reaction sort
+            // and remove an article whose comments are still being read.
+            const openComments = (!reactionOnly || pendingAutomaticNewsRefresh) && document.querySelector(".comment-section.open");
+            if (editing || openComments) {
+                if (reactionOnly) pendingReactionRefresh = true;
+                else pendingAutomaticNewsRefresh = true;
                 return;
             }
-            applyFilters();
+            applyFilters({ preserveCards: reactionOnly });
         }
 
         window.flushPendingNewsRefresh = () => {
             if (pendingAutomaticNewsRefresh) refreshNewsWithoutInterruptingComments();
+            if (pendingReactionRefresh) window.refreshNewsReactionSort?.();
         };
 
-        window.refreshNewsReactionSort = () => {
-            if (document.getElementById("sortOrder")?.value === "new-first") refreshNewsWithoutInterruptingComments();
+        window.refreshNewsReactionSort = (options = {}) => {
+            if (["new-first", "likes-desc", "comments-desc"].includes(document.getElementById("sortOrder")?.value)) {
+                refreshNewsWithoutInterruptingComments({ ...options, reactionOnly: true });
+            } else pendingReactionRefresh = false;
         };
+
+        for (const type of ["input", "focusout", "compositionstart", "compositionend"]) {
+            document.addEventListener(type, event => {
+                const input = event.target.closest?.(".comment-input");
+                if (!input) return;
+                if (type === "compositionstart") input.dataset.commentComposing = "true";
+                if (type === "compositionend") delete input.dataset.commentComposing;
+                clearTimeout(pendingCommentRefreshTimer);
+                pendingCommentRefreshTimer = setTimeout(() => window.flushPendingNewsRefresh?.(), 150);
+            });
+        }
 
         window.refreshNewsVisibility = () => {
             document.getElementById("totalCount").textContent = visibleNewsData().length;
@@ -3959,7 +3994,7 @@ header.site-header {
                                             <div class="comment-section">
                                                 <div class="comment-list"></div>
                                                 <div class="comment-input-area">
-                                                    <input type="text" class="comment-input" placeholder="コメント..." onkeypress="if(event.key==='Enter') submitComment('${idea.id}', this)">
+                                                    <input type="text" class="comment-input" placeholder="コメント..." onkeypress="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229) submitComment('${idea.id}', this)">
                                                     <button class="comment-submit" onclick="submitComment('${idea.id}', this.previousElementSibling)">送信</button>
                                                 </div>
                                             </div>

@@ -131,7 +131,7 @@ def verify(browser, base, edition, width, artifacts):
         page.wait_for_function("id => document.querySelector('#' + id + ' .comment-list .comment-item')", arg=card_id)
         assert card.locator(".comment-section.open").count() == 1
         card.locator(".btn-comment").click()
-        assert editor.evaluate("el => el !== window.testEditor"), "pending refresh was not applied after editing ended"
+        assert editor.evaluate("el => el === window.testEditor"), "reaction refresh must preserve existing editor nodes"
 
     # Visibility changes follow the same protection, then apply on close.
     card = page.locator("#card-jp-idle")
@@ -160,7 +160,7 @@ def main():
     threading.Thread(target=server.serve_forever, daemon=True).start()
     try:
         with sync_playwright() as pw:
-            browser = pw.chromium.launch(channel="msedge")
+            browser = pw.chromium.launch(channel="msedge", headless=True)
             for edition in ["interior", "exterior"]:
                 for width in [1400, 390]:
                     verify(browser, args.base or f"http://127.0.0.1:{server.server_port}", edition, width, args.artifacts)
