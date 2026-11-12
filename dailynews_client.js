@@ -1120,7 +1120,7 @@ window.setupNewsImageCarousel = (card, item) => {
       if (overlay) overlay.style.display = 'none';
       const note = thumb.querySelector('.image-note');
       if (note) note.style.display = /unsplash|placeholder|thumb_default\.png/.test(url) ? '' : 'none';
-      image.src = url;
+      window.setNewsImageSource(image, urls[index]);
     }
     image.alt = `${item.title || '記事画像'}（${index + 1}枚目）`;
     buttons.forEach((button,n) => button.setAttribute('aria-pressed', String(n === index)));
@@ -1177,19 +1177,20 @@ window.openNewsImageGallery = (itemId) => {
   const show = value => {
     index = (value + urls.length) % urls.length;
     image.alt = `${item.title || '記事画像'}（${index + 1}枚目）`;
-    image.src = window.getDisplayImageUrl?.(urls[index]) || urls[index];
+    window.setNewsImageSource(image, urls[index]);
     caption.textContent = `${index + 1} / ${urls.length}枚`;
     dialog.querySelectorAll("[data-thumbs] button").forEach((button, n) => button.setAttribute("aria-pressed", String(n === index)));
   };
   urls.forEach((url, n) => {
     const button = document.createElement("button");
     button.type = "button"; button.setAttribute("aria-label", `${n + 1}枚目を見る`);
-    const thumb = document.createElement("img"); thumb.src = url; thumb.alt = "";
+    const thumb = document.createElement("img"); window.setNewsImageSource(thumb, url); thumb.alt = "";
+    thumb.addEventListener("error", () => window.retryOriginalNewsImage(thumb));
     thumb.referrerPolicy = "no-referrer"; thumb.style.cssText = "width:56px;height:48px;object-fit:contain";
     button.append(thumb); button.addEventListener("click", () => show(n));
     dialog.querySelector("[data-thumbs]").append(button);
   });
-  image.addEventListener("error", () => { caption.textContent = `${index + 1} / ${urls.length}枚 — 画像を読み込めません`; });
+  image.addEventListener("error", () => { if (!window.retryOriginalNewsImage(image)) caption.textContent = `${index + 1} / ${urls.length}枚 — 画像を読み込めません`; });
   dialog.querySelector("[data-prev]").onclick = () => show(index - 1);
   dialog.querySelector("[data-next]").onclick = () => show(index + 1);
   dialog.querySelector("[data-close]").onclick = () => dialog.close();
@@ -1237,7 +1238,7 @@ function ensureImageEditorDialog() {
     const preview = overlay.querySelector("#imageEditorPreview");
     const image = preview.querySelector("img");
     preview.classList.remove("failed");
-    image.src = overlay.querySelector("#imageEditorUrl").value.trim().split(/\r?\n/)[0] || "";
+    window.setNewsImageSource(image, overlay.querySelector("#imageEditorUrl").value.trim().split(/\r?\n/)[0] || "");
   };
   overlay.querySelector(".image-editor-close").addEventListener("click", close);
   overlay.querySelector(".image-editor-cancel").addEventListener("click", close);
@@ -1245,7 +1246,8 @@ function ensureImageEditorDialog() {
     if (event.target === overlay) close();
   });
   overlay.querySelector("#imageEditorUrl").addEventListener("change", updatePreview);
-  overlay.querySelector("#imageEditorPreview img").addEventListener("error", () => {
+  overlay.querySelector("#imageEditorPreview img").addEventListener("error", event => {
+    if (window.retryOriginalNewsImage(event.currentTarget)) return;
     overlay.querySelector("#imageEditorPreview").classList.add("failed");
   });
   overlay.querySelector("#imageEditorForm").addEventListener("submit", saveImageUrlOverride);

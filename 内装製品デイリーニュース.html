@@ -2163,8 +2163,8 @@ header.site-header {
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
-                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                            <img src="${escapeHtml(getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC)}" data-original-src="${escapeHtml(getNewsImageUrl(item))}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
+                                onerror="if(retryOriginalNewsImage(this))return;this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
                         </div>
                         <div class="ranking-title-text">${item.title}</div>
                     </div>
@@ -2245,8 +2245,8 @@ header.site-header {
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'paper image'}"
-                                onerror="this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                            <img src="${escapeHtml(getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC)}" data-original-src="${escapeHtml(getNewsImageUrl(item))}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'paper image'}"
+                                onerror="if(retryOriginalNewsImage(this))return;this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
                         </div>
                         <div class="ranking-title-text">${item.title}</div>
                     </div>
@@ -2435,17 +2435,59 @@ header.site-header {
         }
 
         function getDisplayImageUrl(src) {
-            if (!src) return src;
+            if (typeof src !== "string" || !src) return src;
             // RSS/CSV values may retain an HTML entity. Normalize it before
             // inserting the URL so analysis cards do not double-escape it.
             src = src.replace(/&amp;/gi, "&");
-            if (src.includes("images.cdn.autocar.co.uk") && src.includes("/styles/car_review_image_190/public/")) {
+            let url;
+            try { url = new URL(src); } catch (_) { return src; }
+            if (!["http:", "https:"].includes(url.protocol) || url.username || url.password) return src;
+            // Do not rewrite signed links, local/generated images, or unknown CDNs.
+            if ([...url.searchParams.keys()].some(key => /^(?:x-amz-|x-goog-|s$|sig$|signature$|token$|access_token$|auth$|authorization$|exp$|expires$|policy$|key-pair-id$)/i.test(key))) return src;
+            const width = 980; // ~2x the news card width; fetched directly from the publisher.
+            const raster = /\.(?:jpe?g|png|webp|avif)$/i.test(url.pathname);
+            if (url.hostname === "hips.hearstapps.com" && url.pathname.startsWith("/hmg-prod/images/") && raster) {
+                const resize = url.searchParams.get("resize");
+                const dimensions = resize?.match(/^(\d+):(\d+|\*)$/);
+                if (resize && (!dimensions || Number(dimensions[1]) <= width)) return src;
+                const height = dimensions && dimensions[2] !== "*" ? Math.max(1, Math.round(Number(dimensions[2]) * width / Number(dimensions[1]))) : "*";
+                url.searchParams.set("resize", `${width}:${height}`);
+                return url.href;
+            }
+            const valnet = ["static0.topspeedimages.com", "static0.carbuzzimages.com"].includes(url.hostname)
+                && url.pathname.startsWith("/wordpress/wp-content/uploads/");
+            const prtimes = url.hostname === "prcdn.freetls.fastly.net" && url.pathname.startsWith("/release_image/");
+            if ((valnet || prtimes) && raster) {
+                const widthKey = valnet ? "w" : "width", heightKey = valnet ? "h" : "height";
+                const currentWidth = url.searchParams.get(widthKey), currentHeight = url.searchParams.get(heightKey);
+                if (currentWidth !== null && (!/^\d+$/.test(currentWidth) || Number(currentWidth) <= width)) return src;
+                if (currentHeight !== null && (!currentWidth || !/^\d+$/.test(currentHeight))) return src;
+                if (currentHeight !== null) url.searchParams.set(heightKey, String(Math.max(1, Math.round(Number(currentHeight) * width / Number(currentWidth)))));
+                url.searchParams.set(widthKey, String(width));
+                return url.href;
+            }
+            // Preserve the existing publisher-specific RSS thumbnail upgrades.
+            if (url.hostname === "images.cdn.autocar.co.uk" && url.pathname.includes("/styles/car_review_image_190/public/")) {
                 return src.replace("/styles/car_review_image_190/public/", "/").split("?")[0];
             }
-            if (src.includes("media.autoexpress.co.uk") && src.includes("/t_rss_image_w_845/")) {
+            if (url.hostname === "media.autoexpress.co.uk" && url.pathname.includes("/t_rss_image_w_845/")) {
                 return src.replace("/t_rss_image_w_845/", "/f_auto,t_content-image-full-desktop@1/");
             }
             return src;
+        }
+
+        function setNewsImageSource(img, src) {
+            img.dataset.originalSrc = (src || "").replace(/&amp;/gi, "&");
+            delete img.dataset.originalRetried;
+            img.src = getDisplayImageUrl(src) || "";
+        }
+
+        function retryOriginalNewsImage(img) {
+            const original = img.dataset?.originalSrc?.replace(/&amp;/gi, "&");
+            if (!original || img.dataset.originalRetried || original === img.getAttribute("src")) return false;
+            img.dataset.originalRetried = "1";
+            img.src = original;
+            return true;
         }
 
         function getNewsImageUrls(item) {
@@ -2701,7 +2743,7 @@ header.site-header {
                 const title = escapeHtml(news.title || "参考ニュース");
                 const image = getDisplayImageUrl(getNewsImageUrl(news));
                 return [`<button type="button" class="analysis-float-source idea-source-card${image ? "" : " idea-source-noimage"}" onclick="showNewsItemFromRef('${id}', '${returnTarget}')" title="${title}" aria-label="参考ニュース：${title}">
-                    ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('idea-source-noimage')">` : ""}
+                    ${image ? `<img src="${escapeHtml(image)}" data-original-src="${escapeHtml(getNewsImageUrl(news))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="if(retryOriginalNewsImage(this))return;this.style.display='none';this.parentElement.classList.add('idea-source-noimage')">` : ""}
                     <span class="analysis-float-title">${title}</span>
                 </button>`];
             });
@@ -2734,7 +2776,7 @@ header.site-header {
                 const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
                 return `
                     <button class="analysis-float-source" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
-                        <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-float-source').style.display='none'">
+                        <img src="${img}" data-original-src="${escapeHtml(getNewsImageUrl(n))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="if(retryOriginalNewsImage(this))return;this.closest('.analysis-float-source').style.display='none'">
                         <span class="analysis-float-title">${title}</span>
                     </button>`;
             };
@@ -2778,7 +2820,7 @@ header.site-header {
                 const img = escapeHtml(getDisplayImageUrl(getNewsImageUrl(n)));
                 return `
                     <button class="analysis-source-card" onclick="showNewsItemFromRef('${escapeHtml(id)}')" title="${title}">
-                        <img src="${img}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.analysis-source-card').style.display='none'">
+                        <img src="${img}" data-original-src="${escapeHtml(getNewsImageUrl(n))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="if(retryOriginalNewsImage(this))return;this.closest('.analysis-source-card').style.display='none'">
                         <span class="analysis-source-title">${title}</span>
                     </button>`;
             }).join("");
@@ -3532,7 +3574,7 @@ header.site-header {
             <div class="thumb">
                 ${n.country === 'paper' && n.summaryBasis && !resolvedImage
                     ? '<div style="height:100%;display:grid;place-items:center;color:var(--muted);font-weight:700">論文（画像なし）</div>'
-                    : `<img src="${escapeHtml(displayImg || '')}" alt="${escapeHtml(n.title)}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
+                    : `<img src="${escapeHtml(displayImg || '')}" data-original-src="${escapeHtml(resolvedImage)}" alt="${escapeHtml(n.title)}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
                 ${isNew ? '<span class="new-badge">New</span>' : ''}
                 <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
                 <span class="relevance-badge"${relevanceReason}>関連度 ${relevance}%</span>
@@ -4068,6 +4110,7 @@ header.site-header {
                     }
                 });
                 img.addEventListener("error", () => {
+                    if (retryOriginalNewsImage(img)) return;
                     if (img.dataset.failed) return;
                     img.dataset.failed = "1";
                     img.src = FALLBACK_SRC;

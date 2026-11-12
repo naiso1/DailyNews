@@ -9,7 +9,7 @@ OUTPUT = ROOT / 'runtime/image-carousel-ui'
 def test_edition(browser, edition, port):
     root=OUTPUT/edition;release=root/'releases/abcdef3'
     release.mkdir(parents=True,exist_ok=True);(root/'active-release.txt').write_text('abcdef3')
-    for name in ('dailynews_client.js','dailynews_account.js','dailynews_reports.js','dailynews_annotations.js','exchange_rates.js','release_history.js','dailynews_config.js','dailynews_activity.js','dailynews_sources.js','dailynews_exterior_tags.js','source_list_data.js'):
+    for name in ('dailynews_client.js','dailynews_account.js','dailynews_reports.js','dailynews_annotations.js','exchange_rates.js','release_history.js','dailynews_config.js','dailynews_activity.js','dailynews_sources.js','dailynews_exterior_tags.js','dailynews_event_tags.js','dailynews_header.js','dailynews_header.css','source_list_data.js'):
         shutil.copy2(ROOT/name,release/name)
     shutil.copy2(ROOT/'内装製品デイリーニュース.html',release/'index.html')
     base=f'http://127.0.0.1:{port}';site=base+('/exterior' if edition=='exterior' else '')

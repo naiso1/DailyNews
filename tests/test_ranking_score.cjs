@@ -45,7 +45,7 @@ for (const name of [
   'calculateRankingScore', 'compareRankingItems', 'getRankingMetricValue',
   'filterRankingByCountry', 'getRankingEmptyMessage', 'getRankingScopeValue',
   'getRankingSortKey', 'getPaperRankingScopeValue', 'getPaperRankingSortKey',
-  'renderRanking', 'renderPaperRanking',
+  'renderRanking', 'renderPaperRanking', 'escapeHtml',
 ]) vm.runInContext(extract(name), ctx);
 
 const score = ctx.calculateRankingScore;

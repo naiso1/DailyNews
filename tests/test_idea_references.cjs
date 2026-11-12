@@ -14,11 +14,11 @@ const rows = [
 ];
 const map = new Map(rows.map(row => [row.id, row]));
 for (const edition of ["interior", "exterior"]) {
-  const ctx = vm.createContext({NEWS_DATA: rows, window: {DAILYNEWS_CONFIG: {id: edition},
+  const ctx = vm.createContext({URL, NEWS_DATA: rows, window: {DAILYNEWS_CONFIG: {id: edition},
     interactionsData: {cn1: {hidden: true}}}, rankingBackState: null,
     showNewsItem(id) { ctx.rankingBackState = {id}; }});
   for (const name of ["escapeHtml", "formatRichText", "normalizeAnalysisRefs", "getNewsLookup", "isGloballyHidden",
-    "resolveNewsItem", "getNewsImageUrls", "getNewsImageUrl", "getDisplayImageUrl", "renderIdeaDescription", "showNewsItemFromRef"]) {
+    "resolveNewsItem", "getNewsImageUrls", "getNewsImageUrl", "getDisplayImageUrl", "retryOriginalNewsImage", "renderIdeaDescription", "showNewsItemFromRef"]) {
     const start = html.indexOf(`        function ${name}(`);
     assert(start >= 0, name);
     const nextLine = html.indexOf("\n", start);

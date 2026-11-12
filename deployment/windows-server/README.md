@@ -91,6 +91,17 @@ It is a fixed generated asset, packaged for both editions; no scheduled image
 generation is involved. See [header rollback](header-rollback.md) to switch
 back to the previous header while preserving newer articles and interaction data.
 
+News image sizing is display-only and shared by both editions. For verified
+Hearst (`hips.hearstapps.com/hmg-prod/images/`), TopSpeed/CarBuzz (`static0.*images.com/wordpress/wp-content/uploads/`),
+and PR TIMES (`prcdn.freetls.fastly.net/release_image/`) raster URLs, the client
+requests a publisher-hosted variant up to 980 pixels wide, retaining crop and
+aspect ratio settings. Smaller variants, signed URLs, unknown hosts and local
+generated images are kept intact. Stored article/override URLs are never
+rewritten. Image bytes are fetched by the browser from the publisher; this sizing
+does not download or cache images on the DailyNews server. Each image retries its
+original URL once if the display variant fails, before the normal missing-image
+handling. Existing Autocar/Auto Express RSS thumbnail rules remain in use.
+
 Article image overrides support 1–5 ordered HTTP/HTTPS URLs. The legacy
 `image_url` column and `imageUrlOverride` response keep the first image for
 compatibility; `image_urls` and `imageUrlsOverride` store the gallery.
