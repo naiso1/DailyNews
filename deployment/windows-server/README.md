@@ -91,6 +91,13 @@ It is a fixed generated asset, packaged for both editions; no scheduled image
 generation is involved. See [header rollback](header-rollback.md) to switch
 back to the previous header while preserving newer articles and interaction data.
 
+The temporary 2026-11-13 update-delay notice is in `dailynews_header.js` and
+`dailynews_header.css`. Both packages include the small, transparent generated
+illustration `page_images/update_delay_worker_20261113.png`. It disappears on
+page load once that edition has published both news and insights for 2026-11-12
+or later. A UI-only deployment does not dismiss it. Exterior uses its own
+publication status; the notice does not modify or restart the daily pipeline.
+
 News image sizing is display-only and shared by both editions. For verified
 Hearst (`hips.hearstapps.com/hmg-prod/images/`), TopSpeed/CarBuzz (`static0.*images.com/wordpress/wp-content/uploads/`),
 and PR TIMES (`prcdn.freetls.fastly.net/release_image/`) raster URLs, the client

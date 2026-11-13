@@ -1,3 +1,31 @@
+/* Temporary publication notice, shared by the classic and visual headers. */
+.publication-delay-notice {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0 0 22px;
+  padding: 18px 26px;
+  border: 1px solid #70634a;
+  border-left: 4px solid #e6bf70;
+  border-radius: 14px;
+  background: linear-gradient(110deg, #302e29, #182530 85%);
+  color: #f4eee1;
+}
+.publication-delay-notice[hidden] { display: none; }
+.publication-delay-illustration { flex: 0 0 128px; width: 128px; height: 128px; object-fit: contain; }
+.publication-delay-copy { min-width: 0; }
+.publication-delay-label { display: inline-block; color: #efd294; font-size: 11px; font-weight: 700; letter-spacing: .08em; margin-bottom: 5px; }
+.publication-delay-notice h2 { margin: 0 0 8px; font-size: 20px; line-height: 1.5; color: #fff1d4; }
+.publication-delay-notice p { margin: 0; font-size: 13px; line-height: 1.8; color: #e0e1df; overflow-wrap: anywhere; }
+.publication-delay-notice .publication-delay-note { margin-top: 5px; color: #c0c9ce; font-size: 12px; }
+@media (max-width: 620px) {
+  .publication-delay-notice { align-items: flex-start; gap: 12px; margin-bottom: 16px; padding: 17px 13px 17px 9px; }
+  .publication-delay-illustration { flex-basis: 68px; width: 68px; height: 85px; margin-top: 12px; }
+  .publication-delay-notice h2 { font-size: 16px; line-height: 1.6; margin-bottom: 7px; }
+  .publication-delay-notice p { font-size: 12px; line-height: 1.75; }
+  .publication-delay-notice .publication-delay-note { font-size: 11px; }
+}
+
 /* C proposal. All rules are scoped so the classic header remains available. */
 header.site-header.header-visual {
   --header-accent: #9cdcc8;

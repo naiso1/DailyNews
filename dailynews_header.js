@@ -57,3 +57,38 @@
   header.replaceChildren(utility, hero, footer);
   header.classList.add("header-visual");
 })();
+
+// Temporary notice for the missed 2026-11-13 run. Read each edition's published
+// data, not the browser's date or a UI deployment timestamp, before removing it.
+(() => {
+  const header = document.querySelector("header#top");
+  if (!header || document.getElementById("publicationDelayNotice")) return;
+  const notice = document.createElement("section");
+  notice.id = "publicationDelayNotice";
+  notice.className = "publication-delay-notice";
+  notice.hidden = true;
+  notice.setAttribute("aria-labelledby", "publicationDelayTitle");
+  notice.innerHTML = `
+    <img class="publication-delay-illustration" src="page_images/update_delay_worker_20261113.png"
+         width="128" height="128" alt="お辞儀をする作業員のイラスト">
+    <div class="publication-delay-copy">
+      <span class="publication-delay-label">更新作業中</span>
+      <h2 id="publicationDelayTitle">11月13日更新分の公開が遅れています</h2>
+      <p>Windows更新に伴う処理用PCの再起動により、更新が遅れています。現在、公開に向けて処理を進めています。</p>
+      <p class="publication-delay-note">お待たせして申し訳ありません。これまでの記事は引き続きご覧いただけます。</p>
+    </div>`;
+  header.after(notice);
+
+  Promise.allSettled([window.__dataScriptsReady, window.__publicationStatusReady]).then(() => {
+    const targetDate = "2026-11-12";
+    const insightsPublished = Array.isArray(window.DAILY_INSIGHTS)
+      && window.DAILY_INSIGHTS.some(issue => typeof issue.date === "string" && issue.date >= targetDate);
+    const newsPublished = window.DAILYNEWS_CONFIG?.id === "exterior"
+      ? window.EXTERIOR_PUBLICATION_STATUS?.processed_through >= targetDate
+      : String(window.NEWS_UPDATED_AT || "").slice(0, 10) >= "2026-11-13"
+        && Array.isArray(window.LOADED_NEWS_DATA)
+        && window.LOADED_NEWS_DATA.some(item => typeof item.date === "string" && item.date >= targetDate);
+    if (newsPublished && insightsPublished) notice.remove();
+    else notice.hidden = false;
+  });
+})();
