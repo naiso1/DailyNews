@@ -1581,21 +1581,34 @@ function moderationPayload(params) {
 
 let copilotService;
 let copilotArticles = {release: null, rows: []};
+function copilotCatalog() {
+  const release = activeRelease();
+  if (!release) throw Object.assign(new Error(), {safeCode:'NO_NEWS'});
+  if (copilotArticles.release !== release.releaseId) {
+    const sandbox = {window:{}};
+    require('node:vm').runInNewContext(fs.readFileSync(path.join(release.releaseDir,'news_data.js'),'utf8'),sandbox,{timeout:3000});
+    const html = fs.readFileSync(path.join(release.releaseDir,'index.html'),'utf8');
+    const rows = sandbox.window.LOADED_NEWS_DATA || [];
+    const match = html.match(/const NEW_DATE_RANGE_OVERRIDE = \{ start: "(\d{4}-\d{2}-\d{2})", end: "(\d{4}-\d{2}-\d{2})" \}/);
+    const latest = rows.map(r => r.date).filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d || '')).sort().at(-1);
+    let range = match ? {start:match[1],end:match[2]} : {start:latest,end:latest},newIds;
+    if (EDITION === 'exterior') {
+      let status;try {status=JSON.parse(fs.readFileSync(path.join(release.releaseDir,'publication_status.json'),'utf8'));} catch {}
+      newIds = status?.selected_news_ids || [];
+      range = {start:status?.issue_date || '',end:status?.issue_date || ''};
+    }
+    copilotArticles = {release:release.releaseId,rows,range,newIds};
+  }
+  const hidden = new Set(db.prepare('SELECT item_id FROM hidden_items').all().map(r => r.item_id));
+  return {...copilotArticles,rows:copilotArticles.rows.filter(r => !hidden.has(r.id) && !r.duplicateOf)};
+}
 function getCopilotService() {
   if (copilotService) return copilotService;
   copilotService = require('./copilot-client').createClient({
     configFile: path.join(IDENTITY_DB_FILE ? path.dirname(IDENTITY_DB_FILE) : DATA_DIR, 'copilot-worker.json'),
     edition: EDITION,
-    article: itemId => {
-      const release = activeRelease();
-      if (!release) return null;
-      if (copilotArticles.release !== release.releaseId) {
-        const sandbox = {window: {}};
-        require('node:vm').runInNewContext(fs.readFileSync(path.join(release.releaseDir, 'news_data.js'), 'utf8'), sandbox, {timeout: 3000});
-        copilotArticles = {release: release.releaseId, rows: sandbox.window.LOADED_NEWS_DATA || []};
-      }
-      return copilotArticles.rows.find(row => row.id === itemId);
-    },
+    article: itemId => copilotCatalog().rows.find(row => row.id === itemId),
+    question: input => require('./copilot-context').buildQuestion(input,copilotCatalog()),
     comment: (itemId, id) => db.prepare('SELECT comment_text FROM comments WHERE id=? AND item_id=?').get(id, itemId),
   });
   return copilotService;
@@ -1636,6 +1649,10 @@ async function handleCopilot(request, response, requestUrl) {
     else if (/^\/connection\/[a-f0-9-]+\/action$/.test(route) && request.method === 'POST') result=await service.action(user,route.split('/')[2],await readJson(request,4096));
     else if (route === '/current' && request.method === 'GET') result={job:await service.current(user,requestUrl.searchParams.get('itemId'),Number(requestUrl.searchParams.get('commentId')))};
     else if (/^\/jobs\/[a-f0-9]{64}$/.test(route) && request.method === 'GET') result={job:await service.getJob(user,route.split('/')[2])};
+    else if (route === '/questions' && request.method === 'POST') {
+      const input=require('./copilot-context').validateQuestion(await readJson(request,8192));
+      result={job:await service.submitQuestion(user,input)};
+    }
     else if (route === '/jobs' && request.method === 'POST') {
       const body=await readJson(request,1024);
       if(Object.keys(body).some(key=>!['itemId','commentId'].includes(key)))throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
@@ -2194,6 +2211,7 @@ async function handleApi(request, response, requestUrl) {
       apiError(response, 400, "invalid_parent_comment", "Reply target was not found.");
       return;
     }
+    let createdCommentId;
     withTransaction(() => {
       statements.ensureInteraction.run(itemId);
       const inserted = statements.insertComment.run(
@@ -2204,6 +2222,7 @@ async function handleApi(request, response, requestUrl) {
         user.id,
         parentCommentId,
       );
+      createdCommentId = Number(inserted.lastInsertRowid);
       notifyCommentParticipants(
         itemId,
         Number(inserted.lastInsertRowid),
@@ -2212,7 +2231,7 @@ async function handleApi(request, response, requestUrl) {
         mentionedUserIds(text, user.id),
       );
     });
-    sendJson(response, 201, interactionFor(itemId, body.clientId, true, user));
+    sendJson(response, 201, {...interactionFor(itemId, body.clientId, true, user), createdCommentId});
     return;
   }
 

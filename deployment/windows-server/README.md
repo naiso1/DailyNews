@@ -38,12 +38,41 @@ use the user-selected display name.
 
 ## Deployment
 
-### Personal Copilot questions (2026-11-17)
+### Personal Copilot questions (2026-11-18)
 
 `dailynews_copilot.js` adds a question button to article comments. The API takes
 only an article ID and comment ID; the authenticated server supplies their current
 published text and the caller's identity. Replies are private and do not modify
 comments, likes or rankings. The same member connection serves both editions.
+
+An article comment containing `@Copilot` now triggers that question after the
+comment POST succeeds. The POST returns the exact `createdCommentId`; the client
+never guesses from the latest comment. The question is a normal public comment
+and counts as one; the AI answer stays private. Reading somebody else's mention
+does not trigger their account or an automatic question. Existing question buttons
+remain available for reconnecting/retrying without posting another comment.
+
+The header's news-question dialog uses POST `/api/copilot/questions` with only
+`scope` (`new`, `all`, or `article`), `question` (1–1000 characters) and, only for
+`article`, `itemId`. `copilot-context.js` resolves published, visible articles on
+the server; clients cannot supply sources or identity. Interior NEW uses the
+active release's NEW range and supplements; exterior uses its publication IDs.
+Hidden/duplicate articles are excluded. All-news retrieval searches the archive
+by question words and topic synonyms, then sends at most 30 matching summaries.
+NEW allows up to 80 summaries, with a 24,000-character source budget. Generic
+personalized requests supply the available NEW news to the member's own Copilot;
+no duty/interest questionnaire is required. The model is told not to invent
+personal knowledge. Coverage and source links are displayed, and cross-news
+answers are capped at 400 characters (article comments remain at 200).
+This is a bounded summary search, not an exhaustive market analysis or a full
+article crawler. If there are no matching articles, no provider request is sent.
+
+Question/edition/issue fingerprints and member-owned durable jobs deduplicate
+double clicks and uncertain responses. Changing the issue permits a fresh answer.
+The UI saves only a last-job ID in member/edition-scoped sessionStorage; the server
+and worker recheck ownership. Updating `copilot-service.js` or the workstation
+worker requires a graceful restart of the personal worker when idle. Do not
+interrupt a sign-in or question already holding the shared browser lock.
 
 The SYSTEM web process does not run a browser or hold Microsoft sessions.
 `copilot-client.js` passes jobs in memory to an authenticated HTTPS worker at
@@ -89,11 +118,20 @@ provide the certificate instructions or a trusted certificate before onboarding.
 The worker shares the image worker lock. Questions wait up to five minutes;
 submitted questions are marked before the click and never auto-resubmitted when
 their outcome is unknown. The workstation must remain signed in and awake.
+The account manager must close before preparing the composer. Draft text is
+checked after the UI settles, ignoring Copilot's zero-width editor markers.
+At most three draft fills are permitted before the first Send click; a lost
+draft is not a question resend. `SEND_NOT_READY` has zero send attempts and can
+be retried; uncertain clicks remain `needs_review`. `test_copilot_preparation.js`
+covers draft reset, marker normalization and a single actual Send.
 If it is unavailable the site reports that condition; it does not use another
 person's session. Existing private replies can be retrieved when it reconnects.
 
 Validation: `node deployment/windows-server/test_copilot.js` (isolated real
 HTTP/SQLite routes and a simulated provider; no real question sends).
+`test_copilot_context.js` verifies NEW/supplement/selection matching, retrieval
+and prompt bounds. `tests/verify_copilot_questions_ui.py` checks actual UI with
+fixture accounts, questions and comments, without production writes.
 `test_copilot_http.js` verifies the opt-in on both editions, network bounds,
 connection ownership, origin checks and HTTPS-only worker routes with mock sign-in.
 

@@ -21,8 +21,14 @@ async function verifyProviderIdentity(){
 async function verifyEdition(edition){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'dailynews-http-signin-')),app=path.join(root,'app'),release=path.join(root,'releases/abcdef2');
  fs.mkdirSync(app);fs.mkdirSync(release,{recursive:true});fs.mkdirSync(path.join(root,'data'));
- for(const n of ['server.js','shared-identity.js','copilot-client.js'])fs.copyFileSync(path.join(__dirname,n),path.join(app,n));
+ for(const n of ['server.js','shared-identity.js','copilot-client.js','copilot-context.js'])fs.copyFileSync(path.join(__dirname,n),path.join(app,n));
  fs.writeFileSync(path.join(root,'active-release.txt'),'abcdef2');fs.writeFileSync(path.join(release,'index.html'),'<title>test</title>');
+ fs.writeFileSync(path.join(release,'news_data.js'),'window.LOADED_NEWS_DATA='+JSON.stringify([
+  {id:'jp1',date:'2026-11-17',title:'公開記事',desc:'test',url:'https://example.com'},
+  {id:'jp2',date:'2026-11-17',title:'非表示記事',desc:'test',url:'https://example.com'},
+  {id:'jp3',date:'2026-11-17',duplicateOf:'jp1',title:'重複記事'},
+  {id:'eu1',date:'2026-11-15',title:'外装のNEW補充',desc:'test',url:'https://example.com'}])+ ';');
+ fs.writeFileSync(path.join(release,'publication_status.json'),JSON.stringify({issue_date:'2026-11-17',selected_news_ids:['eu1']}));
  fs.writeFileSync(path.join(root,'data/copilot-worker.json'),JSON.stringify({token:'a'.repeat(64)}));
  fs.writeFileSync(path.join(root,'data/copilot-connection.json'),JSON.stringify({allowIntranetHttpSignIn:true}));
  const port=20100+Math.floor(Math.random()*1000),origin='http://127.0.0.1:'+port,base=origin+(edition==='exterior'?'/exterior':''),api=base+'/api';
@@ -33,7 +39,9 @@ async function verifyEdition(edition){
  async function mockWorker(){while(polling){try{
   const response=await fetch(api+'/copilot-worker/poll',{method:'POST',headers:workerHeaders,body:'{}',signal:workerController.signal});const {job}=await response.json();if(!job)continue;
   let result,code;
-  if(job.operation==='accountStatus')result={connected:false,email:job.user.email};
+  if(job.operation==='submitQuestion'){
+   assert.equal(job.edition,edition);assert.deepEqual(job.context.question.sources.map(s=>s.id),edition==='exterior'?['eu1']:['jp1']);code='ACCOUNT_NOT_CONNECTED';
+  }else if(job.operation==='accountStatus')result={connected:false,email:job.user.email};
   else if(job.operation==='begin'){const id=crypto.randomUUID();connections.set(id,job.user.email);result={id,status:'signing_in'};}
   else if(['frame','action','cancel'].includes(job.operation)){
    if(connections.get(job.args[0])!==job.user.email)code='NOT_FOUND';
@@ -51,6 +59,10 @@ async function verifyEdition(edition){
   let r=await fetch(api+'/copilot/connection',{method:'POST',headers:headers(),body:'{}'});assert.equal(r.status,401);
   async function register(email){const r=await fetch(api+'/auth/register',{method:'POST',headers:headers(),body:JSON.stringify({email,displayName:'Test',password:'local-fixture-only-123',clientId:crypto.randomUUID()})});assert.equal(r.status,201);return r.headers.get('set-cookie').split(';')[0];}
   const alice=await register('alice@example.com'),bob=await register('bob@example.com');
+  const {DatabaseSync}=require('node:sqlite');const fixtureDb=new DatabaseSync(path.join(root,'data/dailynews.sqlite'));
+  fixtureDb.prepare("INSERT INTO interactions(item_id) VALUES ('jp2')").run();
+  fixtureDb.prepare("INSERT INTO hidden_items(item_id,reason,created_by) VALUES ('jp2','test',1)").run();fixtureDb.close();
+  r=await fetch(api+'/copilot/questions',{method:'POST',headers:headers(alice),body:JSON.stringify({scope:'new',question:'今日のニュースで私に関係するニュースをピックアップして'})});assert.equal(r.status,409);assert.equal((await r.json()).error.code,'ACCOUNT_NOT_CONNECTED');
   r=await fetch(api+'/copilot/connection',{method:'POST',headers:{...headers(alice),Origin:'https://other.invalid'},body:'{}'});assert.equal(r.status,403);
   for(const addr of ['198.51.100.12','172.29.1.2, 198.51.100.12']){
    r=await fetch(api+'/copilot/connection',{method:'POST',headers:{...headers(alice),'X-Forwarded-For':addr},body:'{}'});assert.equal(r.status,426);

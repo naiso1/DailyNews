@@ -148,11 +148,15 @@ async function showMentionCandidates(input, showAll = false) {
     return;
   }
   const query = active?.query || "";
-  const candidates = users.filter((user) => (
+  const itemId = input.closest('.card[id^="card-"]')?.id.slice(5);
+  const mentionUsers = window.dailyNewsCopilot?.supportsArticle(itemId)
+    ? [{displayName:'Copilot',copilot:true}, ...users.filter(u => String(u.displayName).toLowerCase() !== 'copilot')]
+    : users;
+  const candidates = mentionUsers.filter((user) => (
     !query || String(user.displayName || "").toLocaleLowerCase("ja").includes(query)
   ));
   menu.innerHTML = candidates.length
-    ? candidates.map((user, index) => `<button class="comment-mention-option" type="button" data-mention-index="${index}"><span>@</span>${escapeHtml(user.displayName)}</button>`).join("")
+    ? candidates.map((user, index) => `<button class="comment-mention-option${user.copilot ? ' copilot-mention-option' : ''}" type="button" data-mention-index="${index}"><span>@</span>${escapeHtml(user.displayName)}${user.copilot ? 'に質問' : ''}</button>`).join("")
     : '<span class="comment-mention-empty">一致するユーザーがいません。</span>';
   menu._mentionCandidates = candidates;
   closeMentionMenus(menu);
@@ -168,6 +172,7 @@ function insertMention(input, displayName) {
   input.setRangeText(`@${displayName} `, start, end, "end");
   input.focus();
   closeMentionMenus();
+  input.dispatchEvent(new Event('input', {bubbles:true}));
 }
 
 function setupMentionInputs(root = document) {
@@ -1417,6 +1422,7 @@ window.toggleComments = (itemId, button) => {
 async function saveComment(itemId, text, parentCommentId = null, input = null) {
   if (!text || input?.dataset.commentSubmitting === "true" || input?.dataset.commentComposing === "true") return;
   const submittedValue = input?.value;
+  const postingMember = window.dailyNewsAccount?.user?.email;
 
   if (window.useLocalInteractions) {
     alert("サーバーに接続できないため、コメントを保存できません。時間をおいて再度お試しください。");
@@ -1443,6 +1449,10 @@ async function saveComment(itemId, text, parentCommentId = null, input = null) {
     }
     updateRankings();
     window.dispatchEvent(new CustomEvent("dailynews:activity-updated"));
+    if (postingMember === window.dailyNewsAccount?.user?.email && data.createdCommentId &&
+        /(?:^|\s)@copilot(?=$|[\s、,:：?？])/i.test(text)) {
+      void window.dailyNewsCopilot?.askComment(itemId, data.createdCommentId);
+    }
   } catch (error) {
     console.error("Comment save failed:", error);
     if (error.status === 401) {
@@ -1462,6 +1472,7 @@ async function saveComment(itemId, text, parentCommentId = null, input = null) {
 
 window.submitComment = async (itemId, input) => {
   const text = input.value.trim();
+  if (/^@copilot\s*$/i.test(text)) { alert('@Copilot の後に質問を入力してください。'); return; }
   await saveComment(itemId, text, null, input);
 };
 

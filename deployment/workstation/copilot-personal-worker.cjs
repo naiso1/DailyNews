@@ -12,13 +12,14 @@ const services=Object.fromEntries(['interior','exterior'].map(edition=>[edition,
   sharedBrowserLock:path.join(runtime,'../copilot/worker.lock'),
   article:id=>requestContext?.article?.id===id?requestContext.article:null,
   comment:(id,c)=>requestContext?.comment?.itemId===id&&requestContext.comment.id===c?{comment_text:requestContext.comment.text}:null,
+  question:()=>requestContext?.question,
   launchOverride:async(state)=>{
     const browser=await chromium.launch({executablePath:path.join(process.env['ProgramFiles(x86)'],'Microsoft/Edge/Application/msedge.exe'),headless:true});
     try {const context=await browser.newContext({storageState:state,viewport:{width:1000,height:760},locale:'ja-JP',acceptDownloads:false}),page=await context.newPage();page.setDefaultTimeout(10000);return {browser,context,page};}
     catch(e){await browser.close();throw e;}
   }
 })]));
-const allowed=new Set(['accountStatus','begin','frame','action','disconnect','cancel','current','getJob','submit']);
+const allowed=new Set(['accountStatus','begin','frame','action','disconnect','cancel','current','getJob','submit','submitQuestion']);
 async function execute(data){
  if(!allowed.has(data.operation)||!services[data.edition]||!Array.isArray(data.args)||!data.user||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.user.email)||data.user.email.length>254)throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
  requestContext=data.context||null;const pending=services[data.edition][data.operation](data.user,...data.args);requestContext=null;return await pending;
@@ -28,7 +29,7 @@ const server=http.createServer(async(req,res)=>{
  try {
   const token=String(req.headers.authorization||'').replace(/^Bearer /,'');
   if(req.method!=='POST'||req.url!=='/rpc'||token.length!==settings.token.length||!crypto.timingSafeEqual(Buffer.from(token),Buffer.from(settings.token)))return send(403,{code:'DENIED'});
-  let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>32000)throw Error('size');}
+  req.setEncoding('utf8');let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>262144)throw Error('size');}
   const data=JSON.parse(body);body='';
   if(data.operation==='shutdown'){send(200,{ok:true});setTimeout(stop,50);return;}
   send(200,{result:await execute(data)});
@@ -44,7 +45,7 @@ const ca=new crypto.X509Certificate(fs.readFileSync(path.join(settings.repo,'set
 const agent=new https.Agent({ca,keepAlive:true});
 function exchange(edition,route,body){return new Promise((resolve,reject)=>{
  const encoded=JSON.stringify(body),req=https.request({host:'IEWEB01',port:443,path:(edition==='exterior'?'/exterior':'')+'/api/copilot-worker/'+route,method:'POST',agent,headers:{Authorization:'Bearer '+settings.token,'Content-Type':'application/json','Content-Length':Buffer.byteLength(encoded)}},res=>{
-  let result='';res.on('data',b=>{result+=b;if(result.length>32000)req.destroy();});res.on('end',()=>{try{if(res.statusCode!==200)throw Error('HTTP_'+res.statusCode);resolve(JSON.parse(result));}catch(e){reject(e);}});
+  res.setEncoding('utf8');let result='';res.on('data',b=>{result+=b;if(result.length>262144)req.destroy();});res.on('end',()=>{try{if(res.statusCode!==200)throw Error('HTTP_'+res.statusCode);resolve(JSON.parse(result));}catch(e){reject(e);}});
  });req.on('error',reject);req.setTimeout(30000,()=>req.destroy());req.end(encoded);
 });}
 async function loop(edition){while(!closing){try{
