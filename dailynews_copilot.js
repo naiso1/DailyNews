@@ -3,6 +3,7 @@
   const base=window.DAILYNEWS_CONFIG?.apiBase || '/api',states=new Map();let userKey='',scanPending=false,initialized=false;
   const messages={ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。',AUTH_REQUIRED:'Microsoftへの再接続が必要です。',ACCOUNT_MISMATCH:'DailyNewsと異なるMicrosoftアカウントです。ご本人の会社アカウントで接続してください。',BUSY:'別の接続・質問を処理しています。少し待ってから操作してください。',https_required:'安全な接続画面をHTTPSで開いてください。',RESULT_UNCONFIRMED:'送信済みですが回答を確認できませんでした。重複送信を防ぐため停止しています。',INTERRUPTED:'処理が中断されました。送信済みの場合は自動再送しません。',CONNECTION_FAILED:'Copilotへの接続を確認できませんでした。',ACCOUNT_CHANGED:'接続が変更されました。接続状態を確認してください。'};
   const who=()=>window.dailyNewsAccount?.user;
+  const inlineConnection=()=>location.protocol==='https:' || window.DAILYNEWS_CONFIG?.copilotIntranetHttpSignIn===true;
   messages.WORKER_OFFLINE='Copilot連携用のPCに接続できません。PCの起動・サインイン後にお試しください。';
   const errorText=e=>messages[e?.code]||'接続を確認して、もう一度操作してください。';
   async function api(route,method='GET',body) {
@@ -40,8 +41,11 @@
       if(a.connected){const off=element('button','Copilotの接続を解除');off.onclick=async()=>{off.disabled=true;await api('/account','DELETE');d.close();};controls.append(off);}
       const connect=element('button',a.connected?'接続し直す':'Microsoftに接続');controls.append(connect);
       const secure=new URL(location.href);secure.protocol='https:';secure.port='';secure.hash='copilot-connect';
-      connect.onclick=()=>{d.close();if(location.protocol==='https:')void connectScreen();else window.open(secure.href,'dailynews-copilot-connect','noopener');};
-      if(location.protocol!=='https:'){
+      connect.onclick=()=>{d.close();if(inlineConnection())void connectScreen();else window.open(secure.href,'dailynews-copilot-connect','noopener');};
+      if(location.protocol!=='https:' && inlineConnection()){
+        d.append(element('p','社内HTTP接続が有効です。この画面で本人のMicrosoftサインインを進められます。証明書の登録やツールのインストールは不要です。','copilot-connect-note'));
+        d.append(element('p','社内PCとDailyNewsサーバー間の入力・画面通信は暗号化されません。パスワードは保存せず、接続情報は本人ごとに暗号化して保存します。','copilot-connect-note'));
+      }else if(location.protocol!=='https:'){
         const help=element('div',undefined,'copilot-certificate-help');
         help.append(element('p','「接続がプライベートではありません」と表示される場合は、Microsoftの認証より前の、PC側の証明書設定で止まっています。IEWEB01の自己署名証明書を確認し、このPCの現在のWindowsユーザーに登録する初回操作が必要です。'));
         const guide=element('a','証明書の確認・登録手順を開く');guide.href='/setup/copilot-connection.html';guide.target='_blank';guide.rel='noopener noreferrer';help.append(guide);
@@ -53,6 +57,7 @@
   async function connectScreen() {
     if(!who())return;
     const d=dialog('Microsoftサインイン — 自分のCopilot'),status=element('p','接続画面を準備しています…','copilot-connect-status');d.append(status);
+    if(location.protocol==='http:')d.append(element('p','社内HTTP接続：入力と画面は社内PC―サーバー間で暗号化されません。本人の会社アカウントで操作してください。','copilot-connect-note'));
     d.append(element('p','下のMicrosoft画面をクリックし、そのままキーボードで入力できます。貼り付け・Tab・Enterも使えます。本人の会社アカウントでサインインしてください。接続は10分で終了します。'));
     const host=element('p','','copilot-auth-host'),img=element('img');img.alt='本人のMicrosoftサインイン画面';img.tabIndex=0;img.hidden=true;d.append(host,img);
     const tools=element('div',undefined,'copilot-connect-tools');d.append(tools);
@@ -69,6 +74,7 @@
     for(const label of ['Tab','Enter','Backspace']){const b=element('button',label);b.onclick=()=>action({type:'key',key:label});tools.append(b);}
     d.addEventListener('close',()=>{alive=false;if(id)void api('/connection/'+id,'DELETE').catch(()=>{});},{once:true});
     try {id=(await api('/connection','POST',{})).id;
+      if(!alive||userKey!==key){const cancelled=id;id=null;await api('/connection/'+cancelled,'DELETE');return;}
       while(alive&&userKey===key){await serial;const f=await api('/connection/'+id+'/frame');if(!alive)break;
         if(f.status==='connected'){id=null;img.hidden=true;status.textContent='本人のCopilotに接続できました。元のニュースページで「Copilotへ質問」を押してください。';host.textContent='接続完了';break;}
         if(f.status!=='signing_in'){status.textContent=f.status==='expired'?'接続の待ち時間が終了しました。':errorText({code:f.code});break;}
@@ -101,7 +107,7 @@
   }
   function changed(){userKey=who()?.email||'';states.clear();document.querySelectorAll('.copilot-controls').forEach(el=>el.remove());document.querySelectorAll('.copilot-dialog').forEach(el=>el.close());scan();}
   function ready(){if(initialized)return;initialized=true;changed();new MutationObserver(()=>{if(!scanPending){scanPending=true;requestAnimationFrame(scan);}}).observe(document.body,{childList:true,subtree:true});
-    if(location.hash==='#copilot-connect'&&who()&&location.protocol==='https:'){history.replaceState(null,'',location.pathname+location.search);void connectScreen();}}
+    if(location.hash==='#copilot-connect'&&who()&&inlineConnection()){history.replaceState(null,'',location.pathname+location.search);void connectScreen();}}
   window.addEventListener('dailynews:account-changed',changed);window.addEventListener('dailynews:account-ready',ready,{once:true});
   if(window.dailyNewsAccount?.ready)ready();
 })();

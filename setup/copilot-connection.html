@@ -3,14 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Copilot 初回接続の証明書設定 | IE開発デイリーニュース</title>
+<title>Copilot 初回接続 | IE開発デイリーニュース</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#eef3f7;color:#182e41;font:16px/1.85 system-ui,"Yu Gothic",sans-serif}main{max-width:820px;margin:40px auto;padding:32px;background:#fff;border:1px solid #d7e0e8;border-radius:16px}h1{font-size:26px;line-height:1.5;margin:8px 0 20px}h2{font-size:19px;margin:28px 0 10px}p{margin:10px 0}a{color:#075e99;text-underline-offset:3px}li{padding-left:4px;margin-bottom:14px}ol{padding-left:26px}.label{font-size:13px;color:#536c80}.note{padding:14px 18px;background:#fff5df;border-left:4px solid #ba8124;border-radius:4px}.download{display:inline-block;padding:10px 18px;background:#126581;color:#fff;border-radius:8px;text-decoration:none;margin:8px 0}code{display:block;overflow-wrap:anywhere;padding:10px 12px;background:#eef3f7;border-radius:6px;font-size:14px;line-height:1.8}dl{display:grid;grid-template-columns:100px 1fr;gap:4px 12px}dt{color:#536c80}dd{margin:0}summary{cursor:pointer;color:#075e99}footer{border-top:1px solid #d7e0e8;margin-top:30px;padding-top:18px;font-size:13px;color:#536c80}@media(max-width:600px){main{margin:12px;padding:20px}h1{font-size:22px}body{font-size:15px}}
 </style>
 </head>
 <body><main>
 <div class="label">IE開発デイリーニュース · 内装／外装 共通</div>
-<h1>Copilotの初回接続で<br>証明書の警告が出た場合</h1>
+<h1>各自のPCからCopilotを接続</h1>
+<p>社内HTTPのDailyNews画面で、本人のMicrosoftアカウントを接続できます。証明書の登録、接続用ツールのインストール、連携用PCへの来訪は不要です。</p>
+<ol>
+<li><strong><a href="http://ieweb01/">内装版</a>または<a href="http://ieweb01/exterior/">外装版</a>を開き、本人のDailyNewsアカウントでログインします。</strong><br>以前のHTTPS画面で証明書警告が出ている場合は、その画面を閉じて上記のHTTPリンクから開き直してください。</li>
+<li><strong>記事のコメント欄で「接続設定」→「Microsoftに接続」を押します。</strong><br>同じページ内にMicrosoftのサインイン画面が表示されます。</li>
+<li><strong>表示されたMicrosoft画面で、本人の会社アカウントへサインインします。</strong><br>画面をクリックしてキーボードで入力できます。貼り付け・Tab・Enterも使えます。追加の本人確認が表示された場合は、その案内に従ってください。</li>
+<li><strong>「接続できました」と表示されたら、画面を閉じて「Copilotへ質問」を押します。</strong><br>回答は本人だけに表示されます。接続情報は内装・外装で共通です。</li>
+</ol>
+<p class="note"><strong>社内HTTP接続の取り扱い：</strong>社内PCとDailyNewsサーバー間では、サインイン時の入力・画面通信は暗号化されません。パスワードはファイルやログへ保存せず、本人確認済みの接続情報を利用者ごとに暗号化して連携用PCへ保存します。Microsoft側との通信はHTTPSです。</p>
+<p>接続をやめる場合は「接続設定」→「Copilotの接続を解除」を選んでください。Microsoftから再認証を求められた場合は、同じ画面で接続し直します。連携用PCの稼働中に利用できます。</p>
+<details><summary>HTTPSを使う場合の証明書確認・登録手順</summary>
 <p>「接続がプライベートではありません」「NET::ERR_CERT_AUTHORITY_INVALID」は、このPCがIEWEB01の証明書を信頼していないときの表示です。Microsoftアカウントの認証より前で止まっている状態です。</p>
 <p class="note">現在のIEWEB01は<strong>自己署名のサーバー証明書</strong>を使っています。会社の認証局が発行した証明書ではありません。以下の証明書を信頼する操作は、本人が内容を確認して行ってください。警告の無視や、ブラウザーのセキュリティ機能の無効化は不要です。</p>
 
@@ -26,8 +36,9 @@
 </ol>
 <p>登録済みなら繰り返す必要はありません。PCやWindowsユーザーを変えた場合は別の設定になります。会社の管理ポリシーで登録できない場合や、登録後も警告が残る場合は、画面のエラーコードを管理者へ知らせてください。</p>
 
-<h2>全員の初回操作をなくすには</h2>
-<p>会社の認証局が発行した証明書への切り替え、または会社管理による証明書の配布が必要です。これは社内の証明書管理担当と調整する設定で、DailyNewsのページから自動では変更しません。</p>
+<h2>HTTPSの証明書登録を不要にするには</h2>
+<p>会社の認証局が発行した証明書への切り替え、または会社管理による証明書の配布が必要です。現在の社内HTTP接続では、この登録は必要ありません。</p>
 <details><summary>管理者向け：SHA-256での照合</summary><p>証明書ファイルのSHA-256（配信中のTLS証明書と一致を確認済み）：</p><code>9E4969EDB90A8F840584E537D36F2EE41A76AD7859D0EF075EDAEC470A951557</code><p>この手順はWindowsのEdgeを対象としています。ブラウザーがローカルに登録された証明書を参照する仕様は、<a href="https://learn.microsoft.com/en-us/deployedge/microsoft-edge-security-cert-verification" target="_blank" rel="noopener noreferrer">Microsoftの説明</a>をご覧ください。</p></details>
-<footer>確認日：2026年11月17日 · <a href="/">内装版へ戻る</a> · <a href="/exterior/">外装版へ戻る</a><br>このページは設定手順のみです。サインイン情報の入力や、証明書の自動インストールは行いません。</footer>
+</details>
+<footer>確認日：2026年11月17日 · <a href="/">内装版へ戻る</a> · <a href="/exterior/">外装版へ戻る</a><br>このページは手順の案内のみです。</footer>
 </main></body></html>

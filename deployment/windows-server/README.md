@@ -57,21 +57,34 @@ Request/action payloads exist only in memory; result acknowledgements can be
 retried but browser actions cannot. Existing SSH forwarding restrictions stay intact.
 Do not publish it or put Microsoft authentication material on IEWEB01.
 
-Initial connection uses the HTTPS page's live Microsoft sign-in view. Credentials
+Initial connection uses the page's live Microsoft sign-in view. Credentials
 are forwarded only to that member's isolated browser, never saved in files/logs.
 Only Microsoft top-level hosts are allowed. The actual Copilot account email must
 match DailyNews. The 10-minute view is owner-bound and closes on cancellation.
-Members need the existing IEWEB01 certificate installed before using HTTPS; do
-not bypass certificate warnings. Saved sessions can still require MFA again.
+Saved sessions can still require MFA again.
 
-The HTTP connection settings link to `/setup/copilot-connection.html` on the
-interior root (also from exterior). It explains the current self-signed IEWEB01
-certificate, its verified SHA-1/SHA-256 fingerprints and the manual CurrentUser
-trust step. It does not execute a script or change a trust store. On 2026-11-17,
-the served TLS certificate and downloadable `.cer` matched the repository file;
-TLS hostname and certificate verification passed using that explicit certificate.
-The guide is not a claim of corporate CA approval. Enterprise CA issuance or
-centrally managed trust distribution needs the company's certificate administrator.
+On 2026-11-17 the user explicitly requested intranet HTTP initial sign-in after
+being informed that sign-in inputs/screens would not be encrypted between the
+member PC and IEWEB01. This is an application-specific opt-in, not a browser
+certificate bypass. With shared identity, the private interior
+`data/copilot-connection.json` holds `{ "allowIntranetHttpSignIn": true }` for
+both editions. Absent/invalid/false keeps the HTTPS-only default. Restart both
+web processes after changing the flag. HTTP sign-in remains restricted to the
+existing office networks `202.15.67.0/24`, `172.29.0.0/16` and loopback, even if
+the broader site allowlist changes. The HTTP check uses the rightmost client
+address appended by the trusted IIS proxy. Same-origin JSON writes, login,
+per-member ownership and exact Microsoft account matching remain required.
+The `/api/copilot-worker/*` broker still requires HTTPS and its bridge key; the
+worker still validates the pinned server certificate. Provider traffic remains
+HTTPS. Passwords are not persisted, but DPAPI encryption of stored sessions does
+not encrypt the member-to-IEWEB01 HTTP hop. The UI states this distinction.
+
+`/setup/copilot-connection.html` now explains the in-page sign-in steps. No client
+EXE, extension, local certificate or Windows trust change is needed in intranet
+HTTP mode. The certificate and old installer remain available for optional HTTPS
+use; never bypass a certificate warning. To roll back, set the private policy
+to false and restart both web tasks. The UI then returns to HTTPS-only connection;
+provide the certificate instructions or a trusted certificate before onboarding.
 
 The worker shares the image worker lock. Questions wait up to five minutes;
 submitted questions are marked before the click and never auto-resubmitted when
@@ -81,6 +94,8 @@ person's session. Existing private replies can be retrieved when it reconnects.
 
 Validation: `node deployment/windows-server/test_copilot.js` (isolated real
 HTTP/SQLite routes and a simulated provider; no real question sends).
+`test_copilot_http.js` verifies the opt-in on both editions, network bounds,
+connection ownership, origin checks and HTTPS-only worker routes with mock sign-in.
 
 Workstation autostart: `deployment/workstation/install-copilot-personal.ps1`
 registers `DailyNewsCopilotPersonal` for the current user's interactive logon,

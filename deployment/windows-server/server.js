@@ -18,16 +18,6 @@ const IDENTITY_DB_FILE = process.env.DAILYNEWS_IDENTITY_DB || sharedConfig.ident
 const EXTERIOR_DB_FILE = process.env.DAILYNEWS_EXTERIOR_DB || sharedConfig.exteriorDb;
 const SHARED_IDENTITY = Boolean(IDENTITY_DB_FILE);
 if (Boolean(EXTERIOR_DB_FILE) !== SHARED_IDENTITY) throw new Error("Both shared identity database paths are required.");
-const PUBLIC_CONFIG = Object.freeze({
-  id: EDITION,
-  name: IS_EXTERIOR ? "外装製品デイリーニュース" : "内装製品デイリーニュース",
-  basePath: BASE_PATH,
-  apiBase: `${BASE_PATH}/api`,
-  allowGuestRead: IS_EXTERIOR,
-  imageGenerationEnabled: !IS_EXTERIOR,
-  sharedIdentity: SHARED_IDENTITY,
-  copilotQuestions: true,
-});
 const REMOVAL_REASONS = Object.freeze([
   { key: "out_of_scope", label: "対象外" }, { key: "duplicate", label: "重複" },
   { key: "summary_error", label: "誤要約" }, { key: "image_mismatch", label: "画像不一致" },
@@ -49,6 +39,24 @@ const ROOT = path.resolve(process.env.DAILYNEWS_ROOT || path.join(__dirname, "..
 const RELEASES_DIR = path.join(ROOT, "releases");
 const ACTIVE_RELEASE_FILE = path.join(ROOT, "active-release.txt");
 const DATA_DIR = path.join(ROOT, "data");
+// An explicitly enabled, private deployment policy; absent/invalid means HTTPS only.
+const copilotConnectionPolicyFile = path.join(IDENTITY_DB_FILE ? path.dirname(IDENTITY_DB_FILE) : DATA_DIR, 'copilot-connection.json');
+let copilotIntranetHttpSignIn = false;
+try {
+  copilotIntranetHttpSignIn = JSON.parse(fs.readFileSync(copilotConnectionPolicyFile, 'utf8').replace(/^\uFEFF/, '')).allowIntranetHttpSignIn === true;
+} catch (_) { /* Keep the HTTPS-only default. */ }
+const COPILOT_HTTP_CLIENTS = ['127.0.0.1', '::1', '202.15.67.0/24', '172.29.0.0/16'];
+const PUBLIC_CONFIG = Object.freeze({
+  id: EDITION,
+  name: IS_EXTERIOR ? "外装製品デイリーニュース" : "内装製品デイリーニュース",
+  basePath: BASE_PATH,
+  apiBase: `${BASE_PATH}/api`,
+  allowGuestRead: IS_EXTERIOR,
+  imageGenerationEnabled: !IS_EXTERIOR,
+  sharedIdentity: SHARED_IDENTITY,
+  copilotQuestions: true,
+  copilotIntranetHttpSignIn,
+});
 const DB_FILE = path.join(DATA_DIR, "dailynews.sqlite");
 const LOG_FILE = path.join(ROOT, "logs", "server.log");
 const HOST = process.env.DAILYNEWS_HOST || "202.15.67.132";
@@ -1596,6 +1604,15 @@ function copilotSecureRequest(request) {
   const peer = String(request.socket.remoteAddress || '').replace(/^::ffff:/, '');
   return !!request.socket.encrypted || (TRUSTED_PROXIES.includes(peer) && requestUsesHttps(request));
 }
+function copilotConnectionAllowed(request) {
+  const peer = normalizeAddress(request.socket.remoteAddress);
+  // ARR appends the actual client at the right edge; do not trust an earlier
+  // client-supplied address for this HTTP sign-in exception.
+  const source = TRUSTED_PROXIES.includes(peer) && request.headers['x-forwarded-for']
+    ? normalizeAddress(String(request.headers['x-forwarded-for']).split(',').at(-1).trim()) : peer;
+  return copilotSecureRequest(request) || (copilotIntranetHttpSignIn &&
+    COPILOT_HTTP_CLIENTS.some(rule => addressMatches(source, rule)));
+}
 async function handleCopilot(request, response, requestUrl) {
   const user = requireUser(request, response); if (!user) return;
   try {
@@ -1607,7 +1624,7 @@ async function handleCopilot(request, response, requestUrl) {
       }
     }
     const route = requestUrl.pathname.slice('/api/copilot'.length);
-    if (route.startsWith('/connection') && !copilotSecureRequest(request)) {
+    if (route.startsWith('/connection') && !copilotConnectionAllowed(request)) {
       apiError(response,426,'https_required','Microsoftへの接続はHTTPS画面で行ってください。');return;
     }
     const service = getCopilotService();let result;
