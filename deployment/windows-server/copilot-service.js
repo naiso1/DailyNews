@@ -33,16 +33,20 @@ async function preparePrompt(page,prompt) {
   const input=page.locator(INPUT),send=page.getByRole('button',{name:'送信',exact:true});
   // Copilot appends zero-width editor markers (U+200B/U+200C) to the draft.
   const normalized=text=>text.replace(/[\u200B-\u200D\uFEFF]/g,'').replace(/\s+/g,' ').trim();
+  const checks=[];
   for(let attempt=1;attempt<=3;attempt++){
     if(safeConversation(page.url())||await page.locator('[data-testid="markdown-reply"]').count())throw fail('NOT_A_FRESH_CONVERSATION');
     await input.fill(prompt);await page.waitForTimeout(700);
     // The account-manager focus restoration/SPA initialization can clear a
     // freshly filled draft. Refill only before ANY Send click, never resubmit.
-    if(normalized(await input.innerText())!==normalized(prompt))continue;
+    const actual=normalized(await input.innerText()),expected=normalized(prompt);let diff=0;
+    while(diff<expected.length&&expected[diff]===actual[diff])diff++;
+    checks.push({actualLength:actual.length,expectedLength:expected.length,firstDifference:diff,actualCode:actual.charCodeAt(diff),expectedCode:expected.charCodeAt(diff)});
+    if(actual!==expected)continue;
     try{await send.click({trial:true,timeout:5000});}catch{if(!(await input.innerText()).trim())continue;throw fail('SEND_NOT_READY');}
     if(normalized(await input.innerText())===normalized(prompt))return {send,attempt};
   }
-  throw fail('SEND_NOT_READY');
+  throw Object.assign(fail('SEND_NOT_READY'),{preparation:checks});
 }
 function createService({root,edition,article,comment,question,launchOverride,sharedBrowserLock}) {
   fs.mkdirSync(root,{recursive:true});
@@ -179,7 +183,7 @@ function createService({root,edition,article,comment,question,launchOverride,sha
       // Keep the complete response private; show a bounded preview without a second query.
       const limit=job.maxAnswerChars || 200;
       update({status:'done',answer:[...answer].length<=limit?answer:[...answer].slice(0,limit-1).join('')+'…',completedAt:new Date().toISOString()});
-    }catch(e){const code=e.safeCode||(job.sendAttemptCount?'RESULT_UNCONFIRMED':'CONNECTION_FAILED');update({status:job.sendAttemptCount?'needs_review':'error',code,errorStage:stage,errorKind:e.name==='TimeoutError'?'TimeoutError':'Error'});
+    }catch(e){const code=e.safeCode||(job.sendAttemptCount?'RESULT_UNCONFIRMED':'CONNECTION_FAILED');update({status:job.sendAttemptCount?'needs_review':'error',code,errorStage:stage,errorKind:e.name==='TimeoutError'?'TimeoutError':'Error',preparation:e.preparation});
       if(['AUTH_REQUIRED','ACCOUNT_MISMATCH'].includes(code)&&account(user)?.revision===job.revision)saveAccount(user,{...account(user),connected:false});
     }finally{clearTimeout(timer);await runtime?.browser.close().catch(()=>{});if(release)release();running.delete(runningKey(user,job.id));}
   }
