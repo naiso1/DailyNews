@@ -41,7 +41,13 @@
       const connect=element('button',a.connected?'接続し直す':'Microsoftに接続');controls.append(connect);
       const secure=new URL(location.href);secure.protocol='https:';secure.port='';secure.hash='copilot-connect';
       connect.onclick=()=>{d.close();if(location.protocol==='https:')void connectScreen();else window.open(secure.href,'dailynews-copilot-connect','noopener');};
-      if(location.protocol!=='https:'){d.append(element('p','接続画面はHTTPSで別に開きます。証明書の警告が出る場合は、会社のIEWEB01証明書の登録が必要です。警告を無視して進めず、管理者に確認してください。'));}
+      if(location.protocol!=='https:'){
+        const help=element('div',undefined,'copilot-certificate-help');
+        help.append(element('p','「接続がプライベートではありません」と表示される場合は、Microsoftの認証より前の、PC側の証明書設定で止まっています。IEWEB01の自己署名証明書を確認し、このPCの現在のWindowsユーザーに登録する初回操作が必要です。'));
+        const guide=element('a','証明書の確認・登録手順を開く');guide.href='/setup/copilot-connection.html';guide.target='_blank';guide.rel='noopener noreferrer';help.append(guide);
+        help.append(element('p','登録後に「Microsoftに接続」を開き直してください。証明書の警告を無視して進めず、手順に沿って内容を確認してください。'));
+        d.append(help);
+      }
     }catch(e){p.textContent=errorText(e);}
   }
   async function connectScreen() {

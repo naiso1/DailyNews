@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copilot 初回接続の証明書設定 | IE開発デイリーニュース</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef3f7;color:#182e41;font:16px/1.85 system-ui,"Yu Gothic",sans-serif}main{max-width:820px;margin:40px auto;padding:32px;background:#fff;border:1px solid #d7e0e8;border-radius:16px}h1{font-size:26px;line-height:1.5;margin:8px 0 20px}h2{font-size:19px;margin:28px 0 10px}p{margin:10px 0}a{color:#075e99;text-underline-offset:3px}li{padding-left:4px;margin-bottom:14px}ol{padding-left:26px}.label{font-size:13px;color:#536c80}.note{padding:14px 18px;background:#fff5df;border-left:4px solid #ba8124;border-radius:4px}.download{display:inline-block;padding:10px 18px;background:#126581;color:#fff;border-radius:8px;text-decoration:none;margin:8px 0}code{display:block;overflow-wrap:anywhere;padding:10px 12px;background:#eef3f7;border-radius:6px;font-size:14px;line-height:1.8}dl{display:grid;grid-template-columns:100px 1fr;gap:4px 12px}dt{color:#536c80}dd{margin:0}summary{cursor:pointer;color:#075e99}footer{border-top:1px solid #d7e0e8;margin-top:30px;padding-top:18px;font-size:13px;color:#536c80}@media(max-width:600px){main{margin:12px;padding:20px}h1{font-size:22px}body{font-size:15px}}
+</style>
+</head>
+<body><main>
+<div class="label">IE開発デイリーニュース · 内装／外装 共通</div>
+<h1>Copilotの初回接続で<br>証明書の警告が出た場合</h1>
+<p>「接続がプライベートではありません」「NET::ERR_CERT_AUTHORITY_INVALID」は、このPCがIEWEB01の証明書を信頼していないときの表示です。Microsoftアカウントの認証より前で止まっている状態です。</p>
+<p class="note">現在のIEWEB01は<strong>自己署名のサーバー証明書</strong>を使っています。会社の認証局が発行した証明書ではありません。以下の証明書を信頼する操作は、本人が内容を確認して行ってください。警告の無視や、ブラウザーのセキュリティ機能の無効化は不要です。</p>
+
+<h2>初回だけ、このPCで行うこと</h2>
+<ol>
+<li><strong>登録用の証明書をダウンロードします。</strong><br><a class="download" href="/setup/IEWEB01-DailyNews.cer" download="IEWEB01-DailyNews.cer">IEWEB01の証明書をダウンロード</a><br>これは証明書のデータファイルです。ダウンロードだけではPCの設定は変わりません。</li>
+<li><strong>ファイルを開き、登録前に内容を照合します。</strong><br>「詳細」タブの「拇印」（SHA-1）を、下記の値および管理者から案内された値と比較してください。証明書のダウンロード元はHTTPのため、管理者の案内と一致することも確認してください。
+<dl><dt>発行先</dt><dd>IEWEB01</dd><dt>発行者</dt><dd>IEWEB01</dd><dt>有効期間</dt><dd>2026年7月28日 ～ 2029年7月28日</dd></dl>
+<code>63 7A E4 0A 8E C0 3E 1C E6 38 C7 30 E4 88 3F 3B 28 33 77 A0</code>
+<p>一致しない場合や、別の発行者・有効期限が表示される場合は登録せず、管理者に確認してください。</p></li>
+<li><strong>内容に同意した場合だけ、証明書を登録します。</strong><br>「全般」→「証明書のインストール」→「現在のユーザー」を選びます。「証明書をすべて次のストアに配置する」→「参照」→「信頼されたルート証明機関」→「完了」と進みます。最後の確認画面でも証明書の内容を確認してから登録してください。現在のWindowsユーザーの信頼設定に追加されます。</li>
+<li><strong>Edgeをすべて閉じ、開き直します。</strong><br>DailyNewsに戻り、コメントの「接続設定」→「Microsoftに接続」を再度押してください。HTTPSの証明書警告が消えたことを確認し、表示されるMicrosoftの画面で本人の会社アカウントに接続します。</li>
+</ol>
+<p>登録済みなら繰り返す必要はありません。PCやWindowsユーザーを変えた場合は別の設定になります。会社の管理ポリシーで登録できない場合や、登録後も警告が残る場合は、画面のエラーコードを管理者へ知らせてください。</p>
+
+<h2>全員の初回操作をなくすには</h2>
+<p>会社の認証局が発行した証明書への切り替え、または会社管理による証明書の配布が必要です。これは社内の証明書管理担当と調整する設定で、DailyNewsのページから自動では変更しません。</p>
+<details><summary>管理者向け：SHA-256での照合</summary><p>証明書ファイルのSHA-256（配信中のTLS証明書と一致を確認済み）：</p><code>9E4969EDB90A8F840584E537D36F2EE41A76AD7859D0EF075EDAEC470A951557</code><p>この手順はWindowsのEdgeを対象としています。ブラウザーがローカルに登録された証明書を参照する仕様は、<a href="https://learn.microsoft.com/en-us/deployedge/microsoft-edge-security-cert-verification" target="_blank" rel="noopener noreferrer">Microsoftの説明</a>をご覧ください。</p></details>
+<footer>確認日：2026年11月17日 · <a href="/">内装版へ戻る</a> · <a href="/exterior/">外装版へ戻る</a><br>このページは設定手順のみです。サインイン情報の入力や、証明書の自動インストールは行いません。</footer>
+</main></body></html>

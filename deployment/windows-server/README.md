@@ -21,7 +21,7 @@ C:\Users\Administrator\Desktop\DailyNews
 
 The Node.js server listens on `202.15.67.132:8082`. The canonical internal URL
 is `http://IEWEB01/`. IIS also retains the existing HTTPS binding as an optional
-fallback, but the application does not direct users to it. The application and DailyNews
+fallback and the personal Copilot sign-in screen uses it. The application and DailyNews
 firewall rules allow the internal networks `172.29.0.0/16` and
 `202.15.67.0/24`.
 
@@ -63,6 +63,15 @@ Only Microsoft top-level hosts are allowed. The actual Copilot account email mus
 match DailyNews. The 10-minute view is owner-bound and closes on cancellation.
 Members need the existing IEWEB01 certificate installed before using HTTPS; do
 not bypass certificate warnings. Saved sessions can still require MFA again.
+
+The HTTP connection settings link to `/setup/copilot-connection.html` on the
+interior root (also from exterior). It explains the current self-signed IEWEB01
+certificate, its verified SHA-1/SHA-256 fingerprints and the manual CurrentUser
+trust step. It does not execute a script or change a trust store. On 2026-11-17,
+the served TLS certificate and downloadable `.cer` matched the repository file;
+TLS hostname and certificate verification passed using that explicit certificate.
+The guide is not a claim of corporate CA approval. Enterprise CA issuance or
+centrally managed trust distribution needs the company's certificate administrator.
 
 The worker shares the image worker lock. Questions wait up to five minutes;
 submitted questions are marked before the click and never auto-resubmitted when
