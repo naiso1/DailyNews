@@ -38,6 +38,8 @@ $required = @(
     "news_data.js",
     "insights_data.js",
     "dailynews_client.js",
+    "dailynews_copilot.js",
+    "dailynews_copilot.css",
     "dailynews_header.js",
     "dailynews_header.css",
     "dailynews_config.js",
@@ -111,6 +113,7 @@ if ($LASTEXITCODE -ne 0) {
 
 $appFiles = @(
     "server.js",
+    "copilot-client.js",
     "shared-identity.js",
     "migrate-shared-identity.js",
     "enable-shared-identity.ps1",

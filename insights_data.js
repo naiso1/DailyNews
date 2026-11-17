@@ -27,6 +27,7 @@ window.DAILY_INSIGHTS = [
             ],
             eu: [
                 { id: 2203, img: "images/exabase_interior_2203_12759f8133d2f5c7.png", title: "アンビエントライト用着脱式光拡散プレート", desc: "MG4 Premium Long Rangeにはアンビエントライティングが標準装備されている。開発案として、インパネのアンビエントライト部材に交換可能な光拡散プレートを追加する。乗員が好みに応じて光の広がりや色味を調整できる利便性向上を狙う。同一光源でプレート有無の試作品を照度分布と視覚的快適性指標で比較する。 [eu2042]", imagePrompt: "", sourceNewsIds: ["eu2042"], imageProvider: "exabase", imageModel: "GPT-image" },
+                {id: 2204, img: "images/copilot_interior_2204_15378c928f97ff55.png", title: "冬の冷感を和らげる低温アームレスト", desc: "MG4 Urban Design Editionのベース車には、シートヒーターが標準装備されている。開発案として、ドアの肘置き表皮の裏に薄膜ヒーターと温度センサーを組み込み、腕が触れる部分を低温で暖める。座面だけでなく腕の接触部にも暖かさを届け、冬季の接触時の冷たさを和らげることを狙う。加熱なしの同一肘置きと比較し、表面温度分布・消費電力・触れた際の冷感を測る。長時間接触時の温度上限と異常時の停止も確認する。 [eu2042]", sourceNewsIds: ["eu2042"], imageProvider: "copilot", imageModel: "" },
             ],
         }
     },

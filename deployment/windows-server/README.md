@@ -38,6 +38,47 @@ use the user-selected display name.
 
 ## Deployment
 
+### Personal Copilot questions (2026-11-17)
+
+`dailynews_copilot.js` adds a question button to article comments. The API takes
+only an article ID and comment ID; the authenticated server supplies their current
+published text and the caller's identity. Replies are private and do not modify
+comments, likes or rankings. The same member connection serves both editions.
+
+The SYSTEM web process does not run a browser or hold Microsoft sessions.
+`copilot-client.js` passes jobs in memory to an authenticated HTTPS worker at
+`deployment/workstation/copilot-personal-worker.cjs`. The worker runs
+as the signed-in workstation user. `%LOCALAPPDATA%/DailyNewsRuntime/copilot-personal`
+holds member-hashed directories, DPAPI CurrentUser-encrypted sessions, account
+revisions and durable question records. It never falls back to the image account.
+The private `data/copilot-worker.json` contains only the bridge key. The worker
+validates IEWEB01 TLS against the shipped certificate and long-polls both editions.
+Request/action payloads exist only in memory; result acknowledgements can be
+retried but browser actions cannot. Existing SSH forwarding restrictions stay intact.
+Do not publish it or put Microsoft authentication material on IEWEB01.
+
+Initial connection uses the HTTPS page's live Microsoft sign-in view. Credentials
+are forwarded only to that member's isolated browser, never saved in files/logs.
+Only Microsoft top-level hosts are allowed. The actual Copilot account email must
+match DailyNews. The 10-minute view is owner-bound and closes on cancellation.
+Members need the existing IEWEB01 certificate installed before using HTTPS; do
+not bypass certificate warnings. Saved sessions can still require MFA again.
+
+The worker shares the image worker lock. Questions wait up to five minutes;
+submitted questions are marked before the click and never auto-resubmitted when
+their outcome is unknown. The workstation must remain signed in and awake.
+If it is unavailable the site reports that condition; it does not use another
+person's session. Existing private replies can be retrieved when it reconnects.
+
+Validation: `node deployment/windows-server/test_copilot.js` (isolated real
+HTTP/SQLite routes and a simulated provider; no real question sends).
+
+Workstation autostart: `deployment/workstation/install-copilot-personal.ps1`
+registers `DailyNewsCopilotPersonal` for the current user's interactive logon,
+with no stored Windows password and a hidden launcher. The private loopback
+worker endpoint accepts only the bridge key, and normal UI cannot call it.
+`connection-status.json` reports connectivity without recording credentials.
+
 Run from the repository root on the DailyNews workstation:
 
 ```powershell

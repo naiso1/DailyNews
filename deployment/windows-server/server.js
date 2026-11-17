@@ -26,6 +26,7 @@ const PUBLIC_CONFIG = Object.freeze({
   allowGuestRead: IS_EXTERIOR,
   imageGenerationEnabled: !IS_EXTERIOR,
   sharedIdentity: SHARED_IDENTITY,
+  copilotQuestions: true,
 });
 const REMOVAL_REASONS = Object.freeze([
   { key: "out_of_scope", label: "対象外" }, { key: "duplicate", label: "重複" },
@@ -1570,7 +1571,79 @@ function moderationPayload(params) {
   };
 }
 
+let copilotService;
+let copilotArticles = {release: null, rows: []};
+function getCopilotService() {
+  if (copilotService) return copilotService;
+  copilotService = require('./copilot-client').createClient({
+    configFile: path.join(IDENTITY_DB_FILE ? path.dirname(IDENTITY_DB_FILE) : DATA_DIR, 'copilot-worker.json'),
+    edition: EDITION,
+    article: itemId => {
+      const release = activeRelease();
+      if (!release) return null;
+      if (copilotArticles.release !== release.releaseId) {
+        const sandbox = {window: {}};
+        require('node:vm').runInNewContext(fs.readFileSync(path.join(release.releaseDir, 'news_data.js'), 'utf8'), sandbox, {timeout: 3000});
+        copilotArticles = {release: release.releaseId, rows: sandbox.window.LOADED_NEWS_DATA || []};
+      }
+      return copilotArticles.rows.find(row => row.id === itemId);
+    },
+    comment: (itemId, id) => db.prepare('SELECT comment_text FROM comments WHERE id=? AND item_id=?').get(id, itemId),
+  });
+  return copilotService;
+}
+function copilotSecureRequest(request) {
+  const peer = String(request.socket.remoteAddress || '').replace(/^::ffff:/, '');
+  return !!request.socket.encrypted || (TRUSTED_PROXIES.includes(peer) && requestUsesHttps(request));
+}
+async function handleCopilot(request, response, requestUrl) {
+  const user = requireUser(request, response); if (!user) return;
+  try {
+    if (!['GET','POST','DELETE'].includes(request.method)) throw Object.assign(new Error(), {safeCode:'INVALID_REQUEST'});
+    if (request.method !== 'GET') {
+      const expected = `${copilotSecureRequest(request) ? 'https' : 'http'}://${request.headers.host}`;
+      if (request.headers.origin !== expected || (request.method === 'POST' && !String(request.headers['content-type'] || '').startsWith('application/json'))) {
+        apiError(response,403,'origin_required','同じページから操作してください。'); return;
+      }
+    }
+    const route = requestUrl.pathname.slice('/api/copilot'.length);
+    if (route.startsWith('/connection') && !copilotSecureRequest(request)) {
+      apiError(response,426,'https_required','Microsoftへの接続はHTTPS画面で行ってください。');return;
+    }
+    const service = getCopilotService();let result;
+    if (route === '/account' && request.method === 'GET') result=await service.accountStatus(user);
+    else if (route === '/account' && request.method === 'DELETE') result=await service.disconnect(user);
+    else if (route === '/connection' && request.method === 'POST') result=await service.begin(user);
+    else if (/^\/connection\/[a-f0-9-]+$/.test(route) && request.method === 'DELETE') result=await service.cancel(user,route.split('/')[2]);
+    else if (/^\/connection\/[a-f0-9-]+\/frame$/.test(route) && request.method === 'GET') result=await service.frame(user,route.split('/')[2]);
+    else if (/^\/connection\/[a-f0-9-]+\/action$/.test(route) && request.method === 'POST') result=await service.action(user,route.split('/')[2],await readJson(request,4096));
+    else if (route === '/current' && request.method === 'GET') result={job:await service.current(user,requestUrl.searchParams.get('itemId'),Number(requestUrl.searchParams.get('commentId')))};
+    else if (/^\/jobs\/[a-f0-9]{64}$/.test(route) && request.method === 'GET') result={job:await service.getJob(user,route.split('/')[2])};
+    else if (route === '/jobs' && request.method === 'POST') {
+      const body=await readJson(request,1024);
+      if(Object.keys(body).some(key=>!['itemId','commentId'].includes(key)))throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
+      result={job:await service.submit(user,body.itemId,body.commentId)};
+    } else {apiError(response,404,'not_found','見つかりません。');return;}
+    sendJson(response,200,result);
+  } catch(error) {
+    // Sign-in actions may contain credentials. Never log request bodies or provider errors.
+    const code=error.safeCode || 'CONNECTION_FAILED';
+    apiError(response,code==='NOT_FOUND'?404:code==='INVALID_REQUEST'||code==='INVALID_ACTION'?400:409,code,'Copilotへの接続状態を確認してください。');
+  }
+}
+
 async function handleApi(request, response, requestUrl) {
+  if (requestUrl.pathname.startsWith('/api/copilot-worker/')) {
+    const bridge=getCopilotService();
+    if(request.method!=='POST'||!copilotSecureRequest(request)||!bridge.authorized(request)){apiError(response,403,'worker_required','Forbidden');return;}
+    try {
+      if(requestUrl.pathname==='/api/copilot-worker/poll'){sendJson(response,200,{job:await bridge.poll()});return;}
+      if(requestUrl.pathname==='/api/copilot-worker/result'){bridge.complete(await readJson(request,4*1024*1024));sendJson(response,200,{ok:true});return;}
+      apiError(response,404,'not_found','Not Found');
+    }catch{apiError(response,400,'worker_request_failed','Invalid worker request');}
+    return;
+  }
+  if (requestUrl.pathname.startsWith('/api/copilot/')) return handleCopilot(request,response,requestUrl);
   const segments = requestUrl.pathname.split("/").filter(Boolean);
 
   if (request.method === "GET" && requestUrl.pathname === "/api/admin/moderation") {
@@ -2810,6 +2883,7 @@ server.listen(PORT, HOST, () => {
 
 function shutdown(signal) {
   log(`Received ${signal}; shutting down`);
+  void copilotService?.close();
   server.close(() => {
     sharedIdentity?.close();
     db.close();

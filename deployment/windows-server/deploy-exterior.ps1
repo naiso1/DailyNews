@@ -13,7 +13,7 @@ $root = "C:\Users\Administrator\Desktop\DailyNewsExterior"
 $entry = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("5YaF6KOF6KO95ZOB44OH44Kk44Oq44O844OL44Ol44O844K5Lmh0bWw="))
 $shared = @($entry,"header-layout-test.html","activity-preview.html","source-list-preview.html","currency-conversion-preview.html",
     "exchange_rates.js","dailynews_annotations.js","dailynews_exterior_tags.js","dailynews_event_tags.js","dailynews_config.js","dailynews_client.js","dailynews_account.js","dailynews_reports.js",
-    "dailynews_activity.js","dailynews_sources.js","release_history.js","dailynews_header.js","dailynews_header.css")
+    "dailynews_activity.js","dailynews_sources.js","release_history.js","dailynews_header.js","dailynews_header.css","dailynews_copilot.js","dailynews_copilot.css")
 foreach ($name in @("news_data.js","insights_data.js","source_list_data.js")) {
     if (!(Test-Path -LiteralPath (Join-Path $content $name))) { throw "Exterior content missing: $name" }
 }
@@ -67,7 +67,7 @@ function Invoke-Remote([string]$Script) {
     if ($LASTEXITCODE -ne 0) { throw "Exterior remote operation failed." }
 }
 Invoke-Remote "foreach (`$part in @('app','incoming','data','logs','releases')) {New-Item -ItemType Directory -Path (Join-Path '$root' `$part) -Force | Out-Null}"
-foreach ($name in @("server.js","shared-identity.js","migrate-shared-identity.js","enable-shared-identity.ps1","backup.js","manage-mailing-list.js","roster-mailing-list.js","activate-release.ps1","install-exterior.ps1","restart-server.ps1")) {
+foreach ($name in @("server.js","copilot-client.js","shared-identity.js","migrate-shared-identity.js","enable-shared-identity.ps1","backup.js","manage-mailing-list.js","roster-mailing-list.js","activate-release.ps1","install-exterior.ps1","restart-server.ps1")) {
     & scp @sshOptions (Join-Path $PSScriptRoot $name) "${Server}:Desktop/DailyNewsExterior/app/$name"
     if ($LASTEXITCODE -ne 0) { throw "Exterior application upload failed: $name" }
 }
