@@ -3731,6 +3731,8 @@ header.site-header {
 
         function restoreFilterStateFromURL(options = {}) {
             const params = new URLSearchParams(window.location.search);
+            // A UI trial flag must not change the default NEW news filter.
+            params.delete("copilot");
             const latestDate = getLatestDate(NEWS_DATA);
             const exteriorNoNew = window.DAILYNEWS_CONFIG.id === "exterior"
                 && (!window.EXTERIOR_PUBLICATION_STATUS || window.EXTERIOR_PUBLICATION_STATUS.selected_count === 0);
@@ -3779,6 +3781,7 @@ header.site-header {
 
         function updateURL(mode = "replace") {
             const params = new URLSearchParams();
+            if (new URLSearchParams(location.search).get("copilot") === "companion") params.set("copilot", "companion");
             if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
             if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
             if (newOnly) params.set("new", "1");
