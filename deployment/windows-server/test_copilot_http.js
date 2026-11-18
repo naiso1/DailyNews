@@ -63,6 +63,7 @@ async function verifyEdition(edition){
   fixtureDb.prepare("INSERT INTO interactions(item_id) VALUES ('jp2')").run();
   fixtureDb.prepare("INSERT INTO hidden_items(item_id,reason,created_by) VALUES ('jp2','test',1)").run();fixtureDb.close();
   r=await fetch(api+'/copilot/questions',{method:'POST',headers:headers(alice),body:JSON.stringify({scope:'new',question:'今日のニュースで私に関係するニュースをピックアップして'})});assert.equal(r.status,409);assert.equal((await r.json()).error.code,'ACCOUNT_NOT_CONNECTED');
+  r=await fetch(api+'/copilot/questions',{method:'POST',headers:headers(alice),body:JSON.stringify({scope:'new',question:'今日のニュースの考察教えて'})});assert.equal(r.status,409);assert.equal((await r.json()).error.code,'ACCOUNT_NOT_CONNECTED');
   r=await fetch(api+'/copilot/connection',{method:'POST',headers:{...headers(alice),Origin:'https://other.invalid'},body:'{}'});assert.equal(r.status,403);
   for(const addr of ['198.51.100.12','172.29.1.2, 198.51.100.12']){
    r=await fetch(api+'/copilot/connection',{method:'POST',headers:{...headers(alice),'X-Forwarded-For':addr},body:'{}'});assert.equal(r.status,426);

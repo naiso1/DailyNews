@@ -5,6 +5,8 @@
   const who=()=>window.dailyNewsAccount?.user;
   const inlineConnection=()=>location.protocol==='https:' || window.DAILYNEWS_CONFIG?.copilotIntranetHttpSignIn===true;
   messages.WORKER_OFFLINE='Copilot連携用のPCに接続できません。PCの起動・サインイン後にお試しください。';
+  messages.NETWORK_ERROR='DailyNewsとの通信を確認できませんでした。社内ネットワークへの接続を確認し、少し待って画面を開き直してください。質問は自動再送しません。';
+  messages.SERVER_UNAVAILABLE='DailyNewsサーバーの応答を確認できませんでした。少し待って画面を開き直してください。質問は自動再送しません。';
   messages.SEND_NOT_READY='Copilotの入力画面を準備できませんでした。質問は未送信です。時間をおいてお試しください。';
   messages.STALE_QUESTION='対象のニュースが更新されています。対象と質問を選び直して送信してください。';
   Object.assign(messages,{NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'質問に合う記事が見つかりませんでした。言葉を変えてお試しください。',INVALID_REQUEST:'質問は1〜1000文字で入力してください。',NOT_FOUND:'対象の記事・質問が見つかりません。',ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。「接続設定」から操作できます。'});
@@ -13,8 +15,20 @@
   const savedKey=()=>`dailynews-copilot-question:${window.DAILYNEWS_CONFIG?.id||'interior'}:${who()?.id}`;
   const errorText=e=>messages[e?.code]||'接続を確認して、もう一度操作してください。';
   async function api(route,method='GET',body) {
-    const response=await fetch(base+'/copilot'+route,{method,credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json'},...(body!==undefined?{body:JSON.stringify(body)}:{})});
-    const data=await response.json();if(!response.ok)throw Object.assign(new Error(data.error?.message||data.message||'接続エラー'),{code:data.error?.code||data.error||data.code});return data;
+    try{return await request(route,method,body);}
+    catch(e){
+      // Only retry the read-only preflight, never a question or sign-in action.
+      if(method!=='GET'||route!=='/account'||!['NETWORK_ERROR','SERVER_UNAVAILABLE','WORKER_OFFLINE'].includes(e.code))throw e;
+      await new Promise(resolve=>setTimeout(resolve,1000));
+      return request(route,method,body);
+    }
+  }
+  async function request(route,method,body) {
+    let response,data;
+    try{response=await fetch(base+'/copilot'+route,{method,credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json'},...(body!==undefined?{body:JSON.stringify(body)}:{})});}
+    catch{throw Object.assign(new Error('NETWORK_ERROR'),{code:'NETWORK_ERROR'});}
+    try{data=await response.json();}catch{throw Object.assign(new Error('SERVER_UNAVAILABLE'),{code:'SERVER_UNAVAILABLE'});}
+    if(!response.ok)throw Object.assign(new Error(data.error?.message||data.message||'接続エラー'),{code:data.error?.code||data.error||data.code||(response.status>=500?'SERVER_UNAVAILABLE':undefined)});return data;
   }
   function element(tag,text,className) {const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
   function articleLink(source,text) {
@@ -177,7 +191,7 @@
     const send=element('button','質問する','copilot-question');send.type='submit';
     const settingsButton=element('button','接続設定','copilot-settings');settingsButton.type='button';settingsButton.onclick=()=>void settings();
     const reply=element('div',undefined,'copilot-reply');reply.setAttribute('aria-live','polite');reply.hidden=true;box.append(send,settingsButton,reply);
-    form.append(scopeLabel,scope,label,input,examples,element('small','NEWは画面のNEW表示と同じ対象です。「掲載ニュース全体から検索」は全掲載記事から質問に関連する最大30件を選び、タイトル・掲載要約などを参照します。全記事の本文は送りません。回答中の参照リンクからDailyNewsの記事を開けます。'),box);d.append(form);render(state);
+    form.append(scopeLabel,scope,label,input,examples,element('small','「本日のNEW」は表示中のNEWニュースをまとめて参照します（最大80件・文字数上限あり）。「掲載ニュース全体から検索」は全掲載記事から質問に関連する最大30件を選びます。参照するのはタイトル・掲載要約などで、全記事の本文は送りません。回答中のリンクからDailyNewsの記事を開けます。'),box);d.append(form);render(state);
     form.onsubmit=async e=>{e.preventDefault();if(state.loading||state.job&&!['done','error','needs_review'].includes(state.job.status))return;
       const member=userKey,question=input.value.trim();if(!question)return;
       state.loading=true;state.error='';render(state);

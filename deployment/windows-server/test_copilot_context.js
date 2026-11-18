@@ -11,9 +11,17 @@ const personal={scope:'new',question:'今日のニュースで私に関係する
 let result=buildQuestion(personal,catalog);
 assert.deepEqual(result.sources.map(s=>s.id).sort(),['cn1','eu1','jp1']);
 assert.equal(result.context.used,3);assert.match(result.prompt,/本人のCopilotで利用可能/);
+for(const question of ['今日のニュースの考察教えて','本日のニュースを分析して','重要な変化と開発への示唆は？','私に関係するニュースをピックアップして','照明担当として気になる話題を整理して','宇宙ロケットの話はある？']){
+ result=buildQuestion({scope:'new',question},catalog);
+ assert.deepEqual(result.sources.map(s=>s.id).sort(),['cn1','eu1','jp1'],question);
+ assert.equal(result.context.matched,result.context.total);
+}
+result=buildQuestion({scope:'all',question:'ニュース全体の考察を教えて'},catalog);
+assert.equal(result.context.used,5);assert.match(result.prompt,/製品開発への示唆/);
 result=buildQuestion({scope:'all',question:'内装イルミに関するトレンドを教えて'},catalog);
 assert.deepEqual(result.sources.map(s=>s.id).sort(),['jp1','us1']);assert.equal(result.context.total,5);
 assert.throws(()=>buildQuestion({scope:'all',question:'宇宙ロケット'},catalog),{safeCode:'NO_RELEVANT_NEWS'});
+assert.deepEqual(buildQuestion({scope:'all',question:'内装イルミの考察と分析を教えて'},catalog).sources.map(s=>s.id).sort(),['jp1','us1']);
 result=buildQuestion(personal,{...catalog,newIds:['us1','in2']});assert.deepEqual(result.sources.map(s=>s.id).sort(),['cn1','in2','us1']);
 assert.throws(()=>buildQuestion(personal,{...catalog,newIds:[],range:{}}),{safeCode:'NO_NEWS'});
 assert.notEqual(buildQuestion(personal,catalog).fingerprint,buildQuestion(personal,{...catalog,range:{start:'2026-11-18',end:'2026-11-18'},newIds:['jp1']}).fingerprint);

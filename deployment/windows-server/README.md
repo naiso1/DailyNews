@@ -59,13 +59,18 @@ the server; clients cannot supply sources or identity. Interior NEW uses the
 active release's NEW range and supplements; exterior uses its publication IDs.
 Hidden/duplicate articles are excluded. All-news retrieval searches the archive
 by question words and topic synonyms, then sends at most 30 matching summaries.
-NEW allows up to 80 summaries, with a 24,000-character source budget. Generic
+NEW keeps the whole issue instead of requiring question keywords in the articles;
+topic scores only prioritize it within the existing 80-summary / 24,000-character
+source budget. Analysis requests such as "今日のニュースの考察教えて" therefore reach
+Copilot even when no headline contains "考察". Archive search ignores generic
+analysis instructions while retaining topic filtering. Generic
 personalized requests supply the available NEW news to the member's own Copilot;
 no duty/interest questionnaire is required. The model is told not to invent
 personal knowledge. Coverage and source links are displayed, and cross-news
 answers are capped at 400 characters (article comments remain at 200).
 This is a bounded summary search, not an exhaustive market analysis or a full
-article crawler. If there are no matching articles, no provider request is sent.
+article crawler. An empty NEW issue or an archive search with no matching topic
+does not send a provider request.
 
 Question/edition/issue fingerprints and member-owned durable jobs deduplicate
 double clicks and uncertain responses. Changing the issue permits a fresh answer.

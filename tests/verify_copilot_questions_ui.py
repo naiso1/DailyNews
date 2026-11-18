@@ -27,15 +27,20 @@ def verify(browser, base, edition, width, out):
     height=780 if width<500 else 1000
     ctx = browser.new_context(viewport={'width': width, 'height': height}, service_workers='block')
     interactions = {'likes':0, 'comments':0, 'reads':0, 'commentItems':[]}
-    writes=[]; questions=[]; errors=[]; fail_comment=False; jobs={}; connected=True
+    writes=[]; questions=[]; errors=[]; fail_comment=False; jobs={}; connected=True;account_failure=''
     def intercept(route):
-        nonlocal interactions
+        nonlocal interactions,account_failure
         req=route.request; parsed=urlparse(req.url); path=unquote(parsed.path).removeprefix('/exterior'); name=path.rsplit('/',1)[-1]
         if parsed.hostname!=urlparse(base).hostname: route.abort(); return
         if '/api/' in path:
             api=path.split('/api/',1)[1]; data={}
             if req.method!='GET': writes.append((api,req.post_data_json))
-            if api=='copilot/account': data={'connected':connected,'email':'fixture@example.invalid'}
+            if api=='copilot/account':
+                if account_failure=='once-html':
+                    account_failure='';route.fulfill(status=502,body='<html>Gateway error</html>',content_type='text/html');return
+                if account_failure=='html': route.fulfill(status=502,body='<html>Gateway error</html>',content_type='text/html');return
+                if account_failure=='network': route.abort('connectionfailed');return
+                data={'connected':connected,'email':'fixture@example.invalid'}
             elif api=='copilot/current': data={'job':None}
             elif api in ('copilot/jobs','copilot/questions'):
                 body=req.post_data_json; questions.append(body); job_id=str(len(questions)).zfill(64)
@@ -131,6 +136,19 @@ def verify(browser, base, edition, width, out):
     assert linked.evaluate('window.DAILYNEWS_CONFIG.id')==edition
     linked.close();assert len(questions)==before
     page.locator('#copilotNewsButton').click();dialog=page.locator('.copilot-news-dialog')
+    # Infrastructure failures must not look like article selection or sign-in errors.
+    before=len(questions)
+    for failure,message in [('html','DailyNewsサーバーの応答'),('network','DailyNewsとの通信')]:
+        account_failure=failure
+        dialog.get_by_role('button',name='質問する',exact=True).click()
+        page.wait_for_function('(text)=>document.querySelector(".copilot-news-dialog .copilot-reply p")?.textContent.includes(text)',arg=message)
+        assert len(questions)==before
+    account_failure=''
+    # One read-only reconnect may recover a transient 502; submit the question once.
+    account_failure='once-html'
+    dialog.get_by_role('button',name='質問する',exact=True).click()
+    page.wait_for_function('()=>!document.querySelector(".copilot-news-dialog .copilot-question").disabled')
+    assert account_failure=='' and len(questions)==before+1
     dialog.locator('header button').click(); page.locator('#copilotNewsButton').click()
     assert 'トレンド' in page.locator('.copilot-news-dialog .copilot-reply').inner_text()
     page.locator('.copilot-news-dialog header button').click()
