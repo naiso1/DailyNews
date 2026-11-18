@@ -17,6 +17,20 @@
     const data=await response.json();if(!response.ok)throw Object.assign(new Error(data.error?.message||data.message||'接続エラー'),{code:data.error?.code||data.error||data.code});return data;
   }
   function element(tag,text,className) {const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
+  function articleLink(source,text) {
+    if(!supportsArticle(source?.id))return element('span',text);
+    const a=element('a',text,'copilot-article-link');
+    const params=new URLSearchParams({q:source.id,from:'',to:'',new:'0'});
+    a.href=(window.DAILYNEWS_CONFIG?.basePath||'')+'/?'+params+'#card-'+source.id;
+    a.title='DailyNewsの記事を表示：'+source.title;
+    a.setAttribute('aria-label',`[${source.id}] ${source.title} — DailyNewsの記事を表示`);
+    a.onclick=e=>{
+      if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||typeof window.showNewsItem!=='function')return;
+      if(!window.resolveDailyNewsItem?.(source.id))return;
+      e.preventDefault();a.closest('dialog')?.close();window.showNewsItem(source.id);
+    };
+    return a;
+  }
   function render(state) {
     for(const box of document.querySelectorAll(`[data-copilot-key="${state.key}"]`)){
       const button=box.querySelector('.copilot-question'),reply=box.querySelector('.copilot-reply');reply.replaceChildren();
@@ -30,13 +44,13 @@
       const text=state.error||(j.status==='done'?j.answer:j.status==='needs_review'?'送信済みです。結果を確認できないため自動再送を停止しました。':j.status==='error'?errorText({code:j.code}):j.status==='queued'?'順番を待っています…':'本人のCopilotで回答を取得しています…');
       for(const part of String(text||'').split(/(\[(?:jp|us|eu|cn|in|paper)\d+\])/g)){
         const source=j?.sources?.find(s=>'['+s.id+']'===part);
-        if(source?.url && /^https?:\/\//i.test(source.url)){const a=element('a',part);a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.title=source.title;answer.append(a);}else answer.append(document.createTextNode(part));
+        if(source)answer.append(articleLink(source,part));else answer.append(document.createTextNode(part));
       }
       reply.append(answer);
       if(j?.context){const c=j.context,label=c.scope==='new'?'本日のNEW':c.scope==='all'?'掲載ニュース全体':'この記事';
         reply.append(element('small',`${label} ${c.total}件から${c.used}件の掲載要約を参照（${c.dateFrom||'日付不明'}〜${c.dateTo||'日付不明'}）`));
         if(j.sources?.length){const details=element('details'),summary=element('summary',`参照候補の記事 ${j.sources.length}件`),list=element('ul');details.append(summary,list);
-          for(const s of j.sources){const li=element('li'),a=element(s.url?'a':'span',`[${s.id}] ${s.title}`);if(s.url){a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';}li.append(a);list.append(li);}reply.append(details);}}
+          for(const s of j.sources){const li=element('li');li.append(articleLink(s,`[${s.id}] ${s.title}`));list.append(li);}reply.append(details);}}
       if(j?.conversationUrl){const link=element('a','Copilotで会話を開く');link.href=j.conversationUrl;link.target='_blank';link.rel='noopener noreferrer';reply.append(link);}
       if(j?.status==='needs_review'){
         const retry=element('button','確認して再試行','copilot-retry');retry.type='button';retry.disabled=!!state.loading;
@@ -152,7 +166,7 @@
     d.append(element('p','本人のCopilotに質問し、短い回答をここに表示します。この質問は公開コメントには投稿されません。'));
     let state=states.get('news-question');if(!state){state={key:'news-question',kind:'question',job:null};states.set(state.key,state);}
     const form=element('form'),scopeLabel=element('label','対象'),scope=element('select');scope.id='copilotNewsScope';scopeLabel.htmlFor=scope.id;
-    for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体']]){const o=element('option',label);o.value=value;scope.append(o);}
+    for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索']]){const o=element('option',label);o.value=value;scope.append(o);}
     scope.value=state.scope||'new';scope.onchange=()=>{state.scope=scope.value;};
     const label=element('label','質問'),input=element('textarea');input.id='copilotNewsQuestion';label.htmlFor=input.id;input.rows=3;input.maxLength=1000;input.required=true;input.value=state.draft||'';
     input.placeholder='例：内装イルミに関するトレンドを教えて';input.oninput=()=>{state.draft=input.value;};
@@ -163,7 +177,7 @@
     const send=element('button','質問する','copilot-question');send.type='submit';
     const settingsButton=element('button','接続設定','copilot-settings');settingsButton.type='button';settingsButton.onclick=()=>void settings();
     const reply=element('div',undefined,'copilot-reply');reply.setAttribute('aria-live','polite');reply.hidden=true;box.append(send,settingsButton,reply);
-    form.append(scopeLabel,scope,label,input,examples,element('small','NEWは画面のNEW表示と同じ対象です。全体への質問では関連する記事を最大30件選び、参照範囲を回答と一緒に表示します。'),box);d.append(form);render(state);
+    form.append(scopeLabel,scope,label,input,examples,element('small','NEWは画面のNEW表示と同じ対象です。「掲載ニュース全体から検索」は全掲載記事から質問に関連する最大30件を選び、タイトル・掲載要約などを参照します。全記事の本文は送りません。回答中の参照リンクからDailyNewsの記事を開けます。'),box);d.append(form);render(state);
     form.onsubmit=async e=>{e.preventDefault();if(state.loading||state.job&&!['done','error','needs_review'].includes(state.job.status))return;
       const member=userKey,question=input.value.trim();if(!question)return;
       state.loading=true;state.error='';render(state);

@@ -5,17 +5,27 @@ import json
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 import threading
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 from playwright.sync_api import sync_playwright
 from verify_ranking_comments_ui import Handler, IMAGE, ROOT
 
 DAY = '2026-11-17'
 NEWS = [dict(id='jp1', country='jp', date=DAY, title='光の演出を広げるアンビエント照明',
              desc='ドアとインパネの照明を連動させる内装技術の検討。', tags=['イルミ'], img=IMAGE,
-             source='表示確認用の記事', url='https://example.invalid/jp1')]
+             source='表示確認用の記事', url='https://example.invalid/jp1'),
+        dict(id='jp2', country='jp', date='2026-10-01', title='過去の車室内照明の記事',
+             desc='表示期間外の記事もDailyNews内で開けることを確認。', tags=['イルミ'], img=IMAGE,
+             source='表示確認用の記事', url='https://example.invalid/broken')]
+
+class PageHandler(Handler):
+    def translate_path(self, path):
+        if urlparse(path).path in ('/', '/exterior/'):
+            path='/内装製品デイリーニュース.html'
+        return super().translate_path(path)
 
 def verify(browser, base, edition, width, out):
-    ctx = browser.new_context(viewport={'width': width, 'height': 1000}, service_workers='block')
+    height=780 if width<500 else 1000
+    ctx = browser.new_context(viewport={'width': width, 'height': height}, service_workers='block')
     interactions = {'likes':0, 'comments':0, 'reads':0, 'commentItems':[]}
     writes=[]; questions=[]; errors=[]; fail_comment=False; jobs={}; connected=True
     def intercept(route):
@@ -32,6 +42,11 @@ def verify(browser, base, edition, width, out):
                 j={'id':job_id,'status':'done','answer':'光の統合制御と体験価値の両立に注目です。内装イルミへの適用は検証が必要です。[jp1]', 'createdAt':'2026-11-18T00:00:00Z','completedAt':'2026-11-18T00:00:01Z'}
                 if api.endswith('questions'):
                     j.update(question=body['question'],scope=body['scope'],context={'scope':body['scope'],'total':47,'used':1,'dateFrom':DAY,'dateTo':DAY},sources=[{'id':'jp1','title':NEWS[0]['title'],'url':NEWS[0]['url']}])
+                    if body['scope']=='all':
+                        j['answer']+='過去の照明事例も参照できます。[jp2] 未確認のID [jp999]'
+                        j['context'].update(used=2,dateFrom=NEWS[1]['date'])
+                        # Link by article ID even if the old provider record has no external URL.
+                        j['sources'].append({'id':'jp2','title':NEWS[1]['title']})
                 if len(questions)==1: j.update(status='needs_review',sendAttemptCount=1)
                 jobs[job_id]=j; data={'job':j}
             elif api.startswith('copilot/jobs/') and api.endswith('/retry'):
@@ -60,6 +75,7 @@ def verify(browser, base, edition, width, out):
     page=ctx.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept())
     page.goto(base+('/exterior' if edition=='exterior' else '')+'/内装製品デイリーニュース.html?from='+DAY+'&to='+DAY+'&new=0',wait_until='domcontentloaded')
     page.locator('#card-jp1').wait_for()
+    assert page.locator('#card-jp2').count()==0
     if page.locator('#releaseHistoryOverlay.open').count(): page.locator('.release-history-close').click()
     page.locator('#copilotNewsButton').click(); dialog=page.locator('.copilot-news-dialog')
     dialog.locator('.copilot-examples button').first.click()
@@ -76,12 +92,45 @@ def verify(browser, base, edition, width, out):
     confirm.get_by_role('button',name='1回だけ再送する',exact=True).evaluate('(el)=>{el.click();el.click();}')
     page.wait_for_function("document.querySelector('.copilot-news-dialog .copilot-reply p')?.textContent.includes('光の統合')")
     assert len([w for w in writes if w[0].endswith('/retry')])==1
-    assert '47件から1件' in dialog.inner_text(); assert dialog.locator('.copilot-reply p a').get_attribute('href')==NEWS[0]['url']
+    assert '47件から1件' in dialog.inner_text()
+    href=dialog.locator('.copilot-reply p a').get_attribute('href')
+    assert urlparse(href).path==('/exterior/' if edition=='exterior' else '/')
+    assert parse_qs(urlparse(href).query,keep_blank_values=True)=={'q':['jp1'],'from':[''],'to':[''],'new':['0']}
     dialog.locator('.copilot-examples button').last.click(); dialog.get_by_role('button',name='質問する',exact=True).click()
     page.wait_for_function("document.querySelector('.copilot-reply small').textContent.includes('トレンド')")
     assert questions[-1]['scope']=='all'; assert not any('/comments' in w[0] for w in writes)
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
-    out.mkdir(parents=True,exist_ok=True);dialog.screenshot(path=str(out/f'news-question-{edition}-{width}.png'))
+    rect=dialog.bounding_box()
+    assert abs(rect['x']+rect['width']/2-width/2)<2,rect
+    assert abs(rect['y']+rect['height']/2-height/2)<2,rect
+    assert rect['y']>=0 and rect['height']<=height*.94+1,rect
+    assert '全記事の本文は送りません' in dialog.inner_text()
+    assert dialog.locator('.copilot-reply p a').count()==2
+    if width<500:
+        dialog.evaluate('(el)=>{el.scrollTop=el.scrollHeight;}')
+        close_rect=dialog.locator('header button').bounding_box()
+        assert close_rect['y']>=rect['y'] and close_rect['y']+close_rect['height']<=rect['y']+rect['height']
+    out.mkdir(parents=True,exist_ok=True)
+    page.screenshot(path=str(out/f'news-question-{edition}-{width}.png'))
+    # Both citation and list use a reloadable link to this edition, never the source website.
+    old_link=dialog.locator('.copilot-reply p a').last
+    old_href=old_link.evaluate('(a)=>a.href')
+    dialog.locator('.copilot-reply summary').click()
+    assert dialog.locator('.copilot-reply li a').last.evaluate('(a)=>a.href')==old_href
+    before=len(questions)
+    old_link.click();dialog.wait_for(state='detached')
+    page.locator('#card-jp2').wait_for()
+    assert page.locator('#card-jp1').count()==0
+    assert page.locator('#dateFrom').input_value()=='' and page.locator('#dateTo').input_value()==''
+    assert len(questions)==before
+    page.go_back();page.locator('#card-jp1').wait_for()
+    assert page.locator('#card-jp2').count()==0
+    # New-tab/reload fallback also removes date filters and respects the edition path.
+    linked=ctx.new_page();linked.goto(old_href,wait_until='domcontentloaded')
+    linked.locator('#card-jp2').wait_for();assert linked.locator('#card-jp1').count()==0
+    assert linked.evaluate('window.DAILYNEWS_CONFIG.id')==edition
+    linked.close();assert len(questions)==before
+    page.locator('#copilotNewsButton').click();dialog=page.locator('.copilot-news-dialog')
     dialog.locator('header button').click(); page.locator('#copilotNewsButton').click()
     assert 'トレンド' in page.locator('.copilot-news-dialog .copilot-reply').inner_text()
     page.locator('.copilot-news-dialog header button').click()
@@ -114,15 +163,15 @@ def verify(browser, base, edition, width, out):
     page.locator('#copilotNewsButton').click();assert page.locator('.copilot-news-dialog .copilot-reply').is_hidden()
     page.locator('.copilot-news-dialog header button').click()
     page.locator('#releaseHistoryButton').click();history=page.locator('#releaseHistoryOverlay')
-    assert '2026-11-18' in history.inner_text() and '@Copilotで質問・ニュース全体を相談' in history.inner_text()
+    assert '2026-11-18' in history.inner_text() and 'Copilotの質問画面を中央に配置' in history.inner_text()
     history.screenshot(path=str(out/f'history-{edition}-{width}.png'))
     assert not errors,errors
-    print(f'PASS {edition} {width}px: NEW/all, cited links, public mention once, failed post no question, IME, private-account reset, history')
+    print(f'PASS {edition} {width}px: centered/scrollable dialog, internal archive links/back/reload, scope explanation, NEW/all, public mention once, private-account reset, history')
     ctx.close()
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--base');parser.add_argument('--artifacts',type=Path,default=ROOT/'artifacts/copilot-questions-20261118');args=parser.parse_args()
-    server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(ROOT)))
+    server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(PageHandler,directory=str(ROOT)))
     threading.Thread(target=server.serve_forever,daemon=True).start()
     try:
         with sync_playwright() as p:
