@@ -36,15 +36,21 @@ async function preparePrompt(page,prompt) {
   const checks=[];
   for(let attempt=1;attempt<=3;attempt++){
     if(safeConversation(page.url())||await page.locator('[data-testid="markdown-reply"]').count())throw fail('NOT_A_FRESH_CONVERSATION');
-    await input.fill(prompt);await page.waitForTimeout(700);
+    // Lexical's model can discard fill() after the account menu restores focus.
+    // Focus by an actual pointer action, then use browser text insertion so the
+    // editor receives its normal beforeinput/input events. Never press Enter.
+    try {await input.click({timeout:5000});await page.keyboard.press('Control+A');await page.keyboard.insertText(prompt);}
+    catch(e){checks.push({stage:'editor_focus',kind:e.name==='TimeoutError'?'TimeoutError':'Error'});await page.waitForTimeout(1500);continue;}
+    await page.waitForTimeout(1000);
     // The account-manager focus restoration/SPA initialization can clear a
     // freshly filled draft. Refill only before ANY Send click, never resubmit.
     const actual=normalized(await input.innerText()),expected=normalized(prompt);let diff=0;
     while(diff<expected.length&&expected[diff]===actual[diff])diff++;
     checks.push({actualLength:actual.length,expectedLength:expected.length,firstDifference:diff,actualCode:actual.charCodeAt(diff),expectedCode:expected.charCodeAt(diff)});
-    if(actual!==expected)continue;
+    if(actual!==expected){await page.waitForTimeout(1500);continue;}
     try{await send.click({trial:true,timeout:5000});}catch{if(!(await input.innerText()).trim())continue;throw fail('SEND_NOT_READY');}
-    if(normalized(await input.innerText())===normalized(prompt))return {send,attempt};
+    await page.waitForTimeout(400);
+    if(normalized(await input.innerText())===expected)return {send,attempt};
   }
   throw Object.assign(fail('SEND_NOT_READY'),{preparation:checks});
 }
@@ -208,7 +214,26 @@ function createService({root,edition,article,comment,question,launchOverride,sha
       maxAnswerChars:r.maxAnswerChars,revision:a.revision,status:'queued',createdAt:new Date().toISOString(),sendAttemptCount:0};
     atomic(file,job);running.add(runningKey(user,id));void run(user,job,r.prompt);return publicJob(job);
   }
+  function retry(user,id,expectedCreatedAt) {
+    // Explicit member action only. A double-click with the previous generation
+    // token returns the same retry; unknown sends are never retried by polling.
+    getJob(user,id);const file=jobFile(user,id),old=read(file);
+    if(typeof expectedCreatedAt!=='string'||expectedCreatedAt.length>40)throw fail('INVALID_REQUEST');
+    if(old.createdAt!==expectedCreatedAt)return publicJob(old);
+    if(old.status!=='needs_review')throw fail('INVALID_REQUEST');
+    const r=old.scope?question?.({scope:old.scope,question:old.question,...(old.itemId?{itemId:old.itemId}:{})}):requestFor(old.itemId,old.commentId);
+    const expectedId=old.scope?hash(edition+'|question|'+r?.fingerprint):hash(edition+'|'+old.itemId+'|'+old.commentId+'|'+r.fingerprint);
+    if(expectedId!==id)throw fail('STALE_QUESTION');
+    const a=account(user);if(!a?.connected)throw fail('ACCOUNT_NOT_CONNECTED');
+    if([...running].some(k=>k.startsWith(owner(user)+':')))throw fail('BUSY');
+    const archive=path.join(folder(user),'attempt-history',id+'.'+hash(old.createdAt)+'.json');
+    if(!fs.existsSync(archive))atomic(archive,old);
+    const job={id,edition,itemId:old.itemId,commentId:old.commentId,scope:old.scope,question:old.question,
+      context:r.context,sources:r.sources,maxAnswerChars:r.maxAnswerChars,revision:a.revision,
+      status:'queued',createdAt:new Date().toISOString(),sendAttemptCount:0,explicitRetryOf:old.createdAt};
+    atomic(file,job);running.add(runningKey(user,id));void run(user,job,r.prompt);return publicJob(job);
+  }
   async function close(){closing=true;await Promise.allSettled([...connections.values()].map(closeConnection));}
-  return {accountStatus,begin,frame,action,disconnect,cancel,current,getJob,submit,submitQuestion,close};
+  return {accountStatus,begin,frame,action,disconnect,cancel,current,getJob,submit,submitQuestion,retry,close};
 }
 module.exports={createService,publicJob,safeConversation,identity,dpapi,preparePrompt};

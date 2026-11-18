@@ -1649,6 +1649,11 @@ async function handleCopilot(request, response, requestUrl) {
     else if (/^\/connection\/[a-f0-9-]+\/action$/.test(route) && request.method === 'POST') result=await service.action(user,route.split('/')[2],await readJson(request,4096));
     else if (route === '/current' && request.method === 'GET') result={job:await service.current(user,requestUrl.searchParams.get('itemId'),Number(requestUrl.searchParams.get('commentId')))};
     else if (/^\/jobs\/[a-f0-9]{64}$/.test(route) && request.method === 'GET') result={job:await service.getJob(user,route.split('/')[2])};
+    else if (/^\/jobs\/[a-f0-9]{64}\/retry$/.test(route) && request.method === 'POST') {
+      const body=await readJson(request,256);
+      if(Object.keys(body).some(k=>k!=='createdAt')||typeof body.createdAt!=='string'||body.createdAt.length>40)throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
+      result={job:await service.retry(user,route.split('/')[2],body.createdAt)};
+    }
     else if (route === '/questions' && request.method === 'POST') {
       const input=require('./copilot-context').validateQuestion(await readJson(request,8192));
       result={job:await service.submitQuestion(user,input)};

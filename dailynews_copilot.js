@@ -6,6 +6,7 @@
   const inlineConnection=()=>location.protocol==='https:' || window.DAILYNEWS_CONFIG?.copilotIntranetHttpSignIn===true;
   messages.WORKER_OFFLINE='Copilot連携用のPCに接続できません。PCの起動・サインイン後にお試しください。';
   messages.SEND_NOT_READY='Copilotの入力画面を準備できませんでした。質問は未送信です。時間をおいてお試しください。';
+  messages.STALE_QUESTION='対象のニュースが更新されています。対象と質問を選び直して送信してください。';
   Object.assign(messages,{NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'質問に合う記事が見つかりませんでした。言葉を変えてお試しください。',INVALID_REQUEST:'質問は1〜1000文字で入力してください。',NOT_FOUND:'対象の記事・質問が見つかりません。',ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。「接続設定」から操作できます。'});
   const supportsArticle=id=>/^(jp|us|eu|cn|in|paper)\d+$/.test(id||'');
   const mentionPattern=/(?:^|\s)@copilot(?=$|[\s、,:：?？])/i;
@@ -37,6 +38,18 @@
         if(j.sources?.length){const details=element('details'),summary=element('summary',`参照候補の記事 ${j.sources.length}件`),list=element('ul');details.append(summary,list);
           for(const s of j.sources){const li=element('li'),a=element(s.url?'a':'span',`[${s.id}] ${s.title}`);if(s.url){a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';}li.append(a);list.append(li);}reply.append(details);}}
       if(j?.conversationUrl){const link=element('a','Copilotで会話を開く');link.href=j.conversationUrl;link.target='_blank';link.rel='noopener noreferrer';reply.append(link);}
+      if(j?.status==='needs_review'){
+        const retry=element('button','確認して再試行','copilot-retry');retry.type='button';retry.disabled=!!state.loading;
+        retry.onclick=()=>{
+          const d=dialog('Copilotへの再試行');
+          d.append(element('p','前の質問はCopilotに送信済みの可能性があります。再試行すると、Copilot側に同じ質問がもう一つ残る場合があります。前回の記録を保存し、1回だけ再送します。'));
+          const send=element('button','1回だけ再送する');send.type='button';d.append(send);
+          const id=j.id,createdAt=j.createdAt,member=userKey;
+          send.onclick=async()=>{if(state.loading)return;send.disabled=true;d.close();state.loading=true;state.error='';render(state);
+            try{const r=await api('/jobs/'+id+'/retry','POST',{createdAt});if(userKey!==member)return;state.job=r.job;void poll(state,member);}
+            catch(e){if(userKey===member)state.error=errorText(e);}finally{if(userKey===member){state.loading=false;render(state);}}};
+        };reply.append(retry);
+      }
       if(j?.status==='done')reply.append(element('small','AIの回答です。記事で確認できる事実と仮説を分けてご確認ください。回答日時：'+new Date(j.completedAt||j.createdAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})));
     }
   }
@@ -48,7 +61,7 @@
     }}catch(e){if(userKey===key){state.error=errorText(e);render(state);}}finally{state.polling=false;}
   }
   function dialog(title) {
-    const d=element('dialog',undefined,'copilot-dialog'),header=element('header'),h=element('h2',title),close=element('button','閉じる');close.type='button';close.onclick=()=>d.close();header.append(h,close);d.append(header);document.body.append(d);d.showModal();d.addEventListener('close',()=>d.remove(),{once:true});return d;
+    const d=element('dialog',undefined,'copilot-dialog'),header=element('header'),h=element('h2',title),close=element('button','閉じる');d.setAttribute('aria-label',title);close.type='button';close.onclick=()=>d.close();header.append(h,close);d.append(header);document.body.append(d);d.showModal();d.addEventListener('close',()=>d.remove(),{once:true});return d;
   }
   async function settings() {
     const d=dialog('本人のCopilotを接続'),p=element('p','接続状態を確認しています…');d.append(p);

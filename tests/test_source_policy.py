@@ -6,6 +6,14 @@ from auto_update_daily_news import validate_editorial_publication
 
 
 class SourcePolicyTests(unittest.TestCase):
+    def test_dictionary_is_rejected_for_both_editions_and_resume(self):
+        item = dict(url='https://www.linguee.jp/英語-日本語/翻訳/technological.html',
+                    country='us', title='Technological Advancements Drive Growth in the Car Seat and Accessories Market')
+        for edition in ('interior', 'exterior'):
+            self.assertTrue(is_excluded_source(item['url'], edition))
+            self.assertFalse(is_excluded_source('https://linguee.jp.example.com/article', edition))
+            self.assertEqual(validate_editorial_publication([item], {item['url']}, dict(excluded_urls=[],rules=[]), edition), [])
+
     def test_exterior_mota_exclusion_uses_host_boundaries(self):
         for host in ('autoc-one.jp', 'www.autoc-one.jp', 'AUTOC-ONE.JP.'):
             self.assertTrue(is_excluded_source(f'https://{host}/news/5045411/', 'exterior'))

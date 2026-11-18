@@ -32,7 +32,12 @@ def verify(browser, base, edition, width, out):
                 j={'id':job_id,'status':'done','answer':'光の統合制御と体験価値の両立に注目です。内装イルミへの適用は検証が必要です。[jp1]', 'createdAt':'2026-11-18T00:00:00Z','completedAt':'2026-11-18T00:00:01Z'}
                 if api.endswith('questions'):
                     j.update(question=body['question'],scope=body['scope'],context={'scope':body['scope'],'total':47,'used':1,'dateFrom':DAY,'dateTo':DAY},sources=[{'id':'jp1','title':NEWS[0]['title'],'url':NEWS[0]['url']}])
+                if len(questions)==1: j.update(status='needs_review',sendAttemptCount=1)
                 jobs[job_id]=j; data={'job':j}
+            elif api.startswith('copilot/jobs/') and api.endswith('/retry'):
+                job_id=api.split('/')[-2];j=jobs[job_id]
+                assert req.post_data_json=={'createdAt':j['createdAt']}
+                j.update(status='done');data={'job':j}
             elif api.startswith('copilot/jobs/'): data={'job':jobs[api.rsplit('/',1)[-1]]}
             elif api=='interactions': data={'interactions':{'jp1':interactions}}
             elif api.startswith('interactions/jp1'):
@@ -61,6 +66,16 @@ def verify(browser, base, edition, width, out):
     dialog.get_by_role('button',name='質問する',exact=True).click()
     dialog.locator('.copilot-reply').wait_for(state='visible')
     assert questions[-1]=={'scope':'new','question':'今日のニュースで私に関係するニュースをピックアップして'}
+    assert not any(w[0].endswith('/retry') for w in writes)
+    dialog.get_by_role('button',name='確認して再試行',exact=True).click()
+    confirm=page.get_by_role('dialog',name='Copilotへの再試行',exact=True)
+    confirm.locator('header button').click();confirm.wait_for(state='detached')
+    assert not any(w[0].endswith('/retry') for w in writes)
+    dialog.get_by_role('button',name='確認して再試行',exact=True).click()
+    confirm=page.get_by_role('dialog',name='Copilotへの再試行',exact=True)
+    confirm.get_by_role('button',name='1回だけ再送する',exact=True).evaluate('(el)=>{el.click();el.click();}')
+    page.wait_for_function("document.querySelector('.copilot-news-dialog .copilot-reply p')?.textContent.includes('光の統合')")
+    assert len([w for w in writes if w[0].endswith('/retry')])==1
     assert '47件から1件' in dialog.inner_text(); assert dialog.locator('.copilot-reply p a').get_attribute('href')==NEWS[0]['url']
     dialog.locator('.copilot-examples button').last.click(); dialog.get_by_role('button',name='質問する',exact=True).click()
     page.wait_for_function("document.querySelector('.copilot-reply small').textContent.includes('トレンド')")

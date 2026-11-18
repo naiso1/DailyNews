@@ -1294,7 +1294,9 @@ def search_hit_matches_title(title, hit_title):
     a, b = norm(title), norm(hit_title)
     if len(a) < 8 or len(b) < 8:
         return False
-    if a in b or b in a:
+    # A dictionary hit such as "technological - Linguee" is contained in a
+    # longer headline but is not that article. Require comparable coverage.
+    if (a in b or b in a) and min(len(a), len(b)) / max(len(a), len(b)) >= 0.7:
         return True
     return difflib.SequenceMatcher(None, a, b).ratio() >= 0.6
 
@@ -1311,6 +1313,14 @@ def search_article_url(title, country=""):
                 url = r.get("href") or r.get("url")
                 if not url or not is_valid_article_url(url, allow_google_news=False):
                     continue
+                if is_excluded_source(url, EDITION.id):
+                    continue
+                publisher = re.search(r"\s+-\s+([A-Za-z0-9.-]+\.[A-Za-z]{2,})$", title)
+                if publisher:
+                    host = (urlparse(url).hostname or "").lower().removeprefix("www.")
+                    expected = publisher.group(1).lower().removeprefix("www.")
+                    if host != expected and not host.endswith("." + expected):
+                        continue
                 # A top hit is often a homepage or an unrelated page sharing a
                 # word (e.g. "海豹" -> Wikipedia "Seal"); require the hit to be
                 # the same article.

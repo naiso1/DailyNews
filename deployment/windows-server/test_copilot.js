@@ -10,7 +10,7 @@ const mock=async()=>{let sent=false,inputText='';const locator=(kind)=>({
  click:async(options)=>{if(kind==='send'&&!options?.trial){sends++;sent=true;}},fill:async(text)=>{inputText=text;},
  innerText:async()=>kind==='manager'?alice.email:kind==='input'?inputText:kind==='reply'&&sent?'記事の要約からは仕様を確認できません。元記事で操作方法を確認するとよいでしょう。':'',
  count:async()=>sent?1:0,last(){return this;},
-});const page={url:()=>sent?'https://copilot.cloud.microsoft/chat/conversation/test-123':'https://copilot.cloud.microsoft/chat/',goto:async()=>{},setDefaultTimeout(){},waitForTimeout:async()=>{},keyboard:{press:async()=>{}},locator:s=>locator(s.includes('markdown')?'reply':'input'),getByRole:(role,{name})=>locator(role==='dialog'?'manager':name instanceof RegExp?'profile':({'送信':'send','サイド バーの展開':'expand','サイド バーを折りたたむ':'collapse','生成を停止する':'stop','応答のコピー':'copy'})[name])};return {browser:{close:async()=>{}},context:{storageState:async()=>({cookies:[],origins:[]})},page};};
+});const page={url:()=>sent?'https://copilot.cloud.microsoft/chat/conversation/test-123':'https://copilot.cloud.microsoft/chat/',goto:async()=>{},setDefaultTimeout(){},waitForTimeout:async()=>{},keyboard:{press:async()=>{},insertText:async text=>{inputText=text;}},locator:s=>locator(s.includes('markdown')?'reply':'input'),getByRole:(role,{name})=>locator(role==='dialog'?'manager':name instanceof RegExp?'profile':({'送信':'send','サイド バーの展開':'expand','サイド バーを折りたたむ':'collapse','生成を停止する':'stop','応答のコピー':'copy'})[name])};return {browser:{close:async()=>{}},context:{storageState:async()=>({cookies:[],origins:[]})},page};};
 async function main(){
  const member=path.join(root,'private/accounts',hash(alice.email));fs.mkdirSync(member,{recursive:true});
  fs.writeFileSync(path.join(member,'account.json'),JSON.stringify({email:alice.email,revision:'abcdef01',connected:true}));fs.writeFileSync(path.join(member,'abcdef01.bin'),await dpapi(Buffer.from('{"cookies":[],"origins":[]}'),true));
@@ -27,6 +27,17 @@ async function main(){
  for(let n=0;n<45;n++){await new Promise(r=>setTimeout(r,300));j=svc.getJob(alice,query.id);if(j.status==='done')break;}
  assert.equal(j.status,'done');assert.equal(sends,2);assert.equal(j.sources[0].id,'jp1');assert.equal(j.context.used,1);
  assert.equal(svc.submitQuestion(alice,question).sendAttemptCount,1);
+ // Simulate an unknown result persisted before a restart. Ordinary submits do
+ // not resend it; an explicit retry archives it and deduplicates its token.
+ const file=path.join(member,'jobs',query.id+'.json'),unknown=JSON.parse(fs.readFileSync(file));
+ Object.assign(unknown,{status:'needs_review',code:'RESULT_UNCONFIRMED'});delete unknown.answer;
+ fs.writeFileSync(file,JSON.stringify(unknown));assert.equal(svc.submitQuestion(alice,question).status,'needs_review');
+ assert.throws(()=>svc.retry(bob,query.id,unknown.createdAt),{safeCode:'NOT_FOUND'});
+ const retry=svc.retry(alice,query.id,unknown.createdAt);
+ assert.equal(svc.retry(alice,query.id,unknown.createdAt).createdAt,retry.createdAt);
+ assert.equal(fs.readdirSync(path.join(member,'attempt-history')).length,1);
+ for(let n=0;n<45;n++){await new Promise(r=>setTimeout(r,300));j=svc.getJob(alice,query.id);if(j.status==='done')break;}
+ assert.equal(j.status,'done');assert.equal(sends,3);assert.equal(svc.retry(alice,query.id,unknown.createdAt).status,'done');
  await svc.disconnect(alice);assert.equal(svc.accountStatus(alice).connected,false);assert.equal(fs.existsSync(path.join(member,'abcdef01.bin')),false);await svc.close();
  const app=path.join(root,'app'),release=path.join(root,'releases/abcdef1');fs.mkdirSync(app);fs.mkdirSync(release,{recursive:true});
  for(const name of ['server.js','copilot-client.js','copilot-context.js','shared-identity.js'])fs.copyFileSync(path.join(__dirname,name),path.join(app,name));

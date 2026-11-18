@@ -120,10 +120,20 @@ submitted questions are marked before the click and never auto-resubmitted when
 their outcome is unknown. The workstation must remain signed in and awake.
 The account manager must close before preparing the composer. Draft text is
 checked after the UI settles, ignoring Copilot's zero-width editor markers.
+The Lexical composer is explicitly clicked and receives keyboard text insertion;
+direct `fill()` could leave its model empty. Pre-send focus failures retry within
+the bounded preparation loop, without pressing Enter or clicking Send.
 At most three draft fills are permitted before the first Send click; a lost
 draft is not a question resend. `SEND_NOT_READY` has zero send attempts and can
 be retried; uncertain clicks remain `needs_review`. `test_copilot_preparation.js`
 covers draft reset, marker normalization and a single actual Send.
+For `needs_review`, the member can choose "確認して再試行" and confirm one resend.
+POST `/api/copilot/jobs/:id/retry` takes the prior `createdAt` as a generation
+token. The worker archives the old record under `attempt-history`, validates
+member/edition and the current source fingerprint, then starts one new attempt.
+Duplicate confirmations with that token return the same attempt; polling and
+ordinary submissions never retry an unknown send. A changed issue/comment must
+be submitted as a new question. No test comments are posted to the public site.
 If it is unavailable the site reports that condition; it does not use another
 person's session. Existing private replies can be retrieved when it reconnects.
 

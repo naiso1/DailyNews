@@ -19,7 +19,7 @@ const services=Object.fromEntries(['interior','exterior'].map(edition=>[edition,
     catch(e){await browser.close();throw e;}
   }
 })]));
-const allowed=new Set(['accountStatus','begin','frame','action','disconnect','cancel','current','getJob','submit','submitQuestion']);
+const allowed=new Set(['accountStatus','begin','frame','action','disconnect','cancel','current','getJob','submit','submitQuestion','retry']);
 async function execute(data){
  if(!allowed.has(data.operation)||!services[data.edition]||!Array.isArray(data.args)||!data.user||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.user.email)||data.user.email.length>254)throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
  requestContext=data.context||null;const pending=services[data.edition][data.operation](data.user,...data.args);requestContext=null;return await pending;

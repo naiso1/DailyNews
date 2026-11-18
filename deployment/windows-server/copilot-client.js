@@ -12,6 +12,15 @@ function createClient({configFile,edition,article,comment,question}) {
     return new Promise((resolve,reject)=>{
       let context;
       if(operation==='submitQuestion')context={question:question(args[0])};
+      if(operation==='retry'){
+        const j=args[2];args=args.slice(0,2);
+        if(j.scope)context={question:question({scope:j.scope,question:j.question,...(j.itemId?{itemId:j.itemId}:{})})};
+        else {
+          const a=article(j.itemId),c=comment(j.itemId,j.commentId);
+          if(!a||!c){reject(Object.assign(new Error(),{safeCode:'NOT_FOUND'}));return;}
+          context={article:{id:a.id,title:a.title,desc:a.desc,url:a.url},comment:{id:j.commentId,itemId:j.itemId,text:c.comment_text}};
+        }
+      }
       if(['submit','current'].includes(operation)){
         const [itemId,commentId]=args;
         if(typeof itemId!=='string'||!/^(jp|us|eu|cn|in|paper)\d+$/.test(itemId)||!Number.isSafeInteger(commentId)||commentId<1){reject(Object.assign(new Error(),{safeCode:'INVALID_REQUEST'}));return;}
@@ -30,6 +39,12 @@ function createClient({configFile,edition,article,comment,question}) {
   function complete(data){const p=pending.get(data.id);if(!p)return;clearTimeout(p.timer);pending.delete(data.id);data.code?p.reject(Object.assign(new Error(),{safeCode:String(data.code).slice(0,80)})):p.resolve(data.result);}
   const client={authorized,poll,complete,close:async()=>{closed=true;wake?.();for(const p of pending.values()){clearTimeout(p.timer);p.reject(Object.assign(new Error(),{safeCode:'WORKER_OFFLINE'}));}pending.clear();}};
   for(const operation of ['accountStatus','begin','frame','action','disconnect','cancel','current','getJob','submit','submitQuestion'])client[operation]=(user,...args)=>invoke(operation,user,...args);
+  client.retry=async(user,id,createdAt)=>{
+    const j=await client.getJob(user,id);
+    if(j.createdAt!==createdAt)return j;
+    if(j.status!=='needs_review')throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
+    return invoke('retry',user,id,createdAt,j);
+  };
   return client;
 }
 module.exports={createClient};

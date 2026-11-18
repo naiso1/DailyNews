@@ -5,7 +5,10 @@ from urllib.parse import parse_qs, urlsplit
 # 2026-10-28: readers confirmed MOTA's ad-permission wall; use the original
 # publisher for both editions. Historical independent reports retain their IDs.
 # A bot challenge or a single connection failure never adds a host to this list.
-EXCLUDED_HOSTS = {"interior": ("autoc-one.jp",), "exterior": ("autoc-one.jp",)}
+# Dictionaries are not article sources; title-search recovery once substituted
+# a Linguee word definition and its logo for an automotive market headline.
+EXCLUDED_HOSTS = {edition: ("autoc-one.jp", "linguee.jp", "linguee.com")
+                  for edition in ("interior", "exterior")}
 
 
 def is_excluded_source(url, edition_id):
