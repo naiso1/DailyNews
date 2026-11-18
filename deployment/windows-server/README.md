@@ -123,6 +123,10 @@ checked after the UI settles, ignoring Copilot's zero-width editor markers.
 The Lexical composer is explicitly clicked and receives keyboard text insertion;
 direct `fill()` could leave its model empty. Pre-send focus failures retry within
 the bounded preparation loop, without pressing Enter or clicking Send.
+Before focusing the composer, move the pointer off the profile/sidebar area and
+press Escape to close the responsive sidebar backdrop. It can reopen after the
+account manager closes and intercept all pointer events. Do not force-click
+through the backdrop or remove DOM elements.
 At most three draft fills are permitted before the first Send click; a lost
 draft is not a question resend. `SEND_NOT_READY` has zero send attempts and can
 be retried; uncertain clicks remain `needs_review`. `test_copilot_preparation.js`

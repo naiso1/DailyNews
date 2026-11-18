@@ -36,6 +36,12 @@ async function preparePrompt(page,prompt) {
   const checks=[];
   for(let attempt=1;attempt<=3;attempt++){
     if(safeConversation(page.url())||await page.locator('[data-testid="markdown-reply"]').count())throw fail('NOT_A_FRESH_CONVERSATION');
+    // The responsive sidebar can re-open while the pointer remains over the
+    // profile button after identity verification. Its backdrop blocks input.
+    // Move away, dismiss it normally, then require an actionable editor.
+    const bounds=await input.boundingBox();
+    if(bounds){await page.mouse.move(bounds.x+bounds.width-10,bounds.y+bounds.height/2);}
+    await page.keyboard.press('Escape');await page.waitForTimeout(350);
     // Lexical's model can discard fill() after the account menu restores focus.
     // Focus by an actual pointer action, then use browser text insertion so the
     // editor receives its normal beforeinput/input events. Never press Enter.

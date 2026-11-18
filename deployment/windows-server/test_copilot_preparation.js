@@ -3,11 +3,12 @@ const assert=require('node:assert/strict');
 const {preparePrompt}=require('./copilot-service');
 async function main(){
  let fills=0,trials=0,clicks=0,value='';
- let focused=false;
- const input={click:async()=>{focused=true;},innerText:async()=>value};
+ let focused=false,overlay=true,pointerAway=false;
+ const input={boundingBox:async()=>({x:200,y:200,width:500,height:50}),click:async()=>{assert.equal(overlay,false);focused=true;},innerText:async()=>value};
  const page={url:()=> 'https://copilot.cloud.microsoft/chat/',waitForTimeout:async()=>{},
   locator:s=>s.includes('markdown')?{count:async()=>0}:input,
-  keyboard:{press:async key=>{assert.equal(key,'Control+A');assert.ok(focused);},insertText:async text=>{fills++;value=fills===1?'':text+'\u200b\u200c';}},
+  mouse:{move:async()=>{pointerAway=true;}},
+  keyboard:{press:async key=>{if(key==='Escape'){assert.ok(pointerAway);overlay=false;}else{assert.equal(key,'Control+A');assert.ok(focused);}},insertText:async text=>{fills++;value=fills===1?'':text+'\u200b\u200c';}},
   getByRole:()=>({click:async options=>{if(options?.trial)trials++;else clicks++;}})};
  const r=await preparePrompt(page,'確認する質問\n資料');assert.equal(r.attempt,2);assert.equal(fills,2);assert.equal(trials,1);assert.equal(clicks,0);
  await r.send.click();assert.equal(clicks,1);

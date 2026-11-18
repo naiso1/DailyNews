@@ -6,7 +6,7 @@ const {buildQuestion}=require('./copilot-context');
 const root=fs.mkdtempSync(path.join(os.tmpdir(),'dailynews-copilot-')),hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 const alice={email:'alice@example.com'},bob={email:'bob@example.com'};let sends=0;
 const mock=async()=>{let sent=false,inputText='';const locator=(kind)=>({
- waitFor:async()=>{},isVisible:async()=>kind!=='expand'&&kind!=='collapse'&&kind!=='stop',
+ waitFor:async()=>{},boundingBox:async()=>null,isVisible:async()=>kind!=='expand'&&kind!=='collapse'&&kind!=='stop',
  click:async(options)=>{if(kind==='send'&&!options?.trial){sends++;sent=true;}},fill:async(text)=>{inputText=text;},
  innerText:async()=>kind==='manager'?alice.email:kind==='input'?inputText:kind==='reply'&&sent?'記事の要約からは仕様を確認できません。元記事で操作方法を確認するとよいでしょう。':'',
  count:async()=>sent?1:0,last(){return this;},
