@@ -172,7 +172,7 @@
   function ensureEntry(){
     if(document.getElementById('copilotNewsButton'))return;
     const parent=document.querySelector('.header-top-actions')||document.querySelector('header#top');if(!parent)return;
-    const b=element('button','Copilot · ニュースに質問','copilot-news-entry');b.id='copilotNewsButton';b.type='button';b.onclick=()=>void newsDialog();parent.append(b);
+    const b=element('button','Copilot · ニュースに質問','copilot-news-entry');b.id='copilotNewsButton';b.type='button';b.onclick=()=>window.dailyNewsCopilotCompanion?window.dailyNewsCopilotCompanion.open():void newsDialog();parent.append(b);
   }
   async function newsDialog(){
     if(!who()){window.dailyNewsAccount?.openAuth?.('login','Copilotへの質問にはログインが必要です。');return;}
@@ -204,7 +204,7 @@
     if(!state.job&&!state.loading){let id;try{id=sessionStorage.getItem(savedKey());}catch{}
       if(/^[a-f0-9]{64}$/.test(id||'')){const member=userKey;try{const r=await api('/jobs/'+id);if(userKey===member&&!state.loading&&!state.job){state.job=r.job;render(state);void poll(state,member);}}catch{}}}
   }
-  window.dailyNewsCopilot={supportsArticle,askComment:async(itemId,commentId)=>{
+  window.dailyNewsCopilot={supportsArticle,openSettings:settings,askComment:async(itemId,commentId)=>{
     if(!supportsArticle(itemId)||!who())return;
     scan();const key=itemId+'-'+commentId;let state=states.get(key);
     if(!state){state={key,itemId,commentId,job:null};states.set(key,state);}
@@ -215,4 +215,9 @@
     if(location.hash==='#copilot-connect'&&who()&&inlineConnection()){history.replaceState(null,'',location.pathname+location.search);void connectScreen();}}
   window.addEventListener('dailynews:account-changed',changed);window.addEventListener('dailynews:account-ready',ready,{once:true});
   if(window.dailyNewsAccount?.ready)ready();
+  // The companion is an opt-in production trial. Normal URLs keep the existing UI.
+  if(new URLSearchParams(location.search).get('copilot')==='companion'){
+    const css=element('link');css.rel='stylesheet';css.href=(window.DAILYNEWS_CONFIG?.basePath||'')+'/dailynews_copilot_companion.css';document.head.append(css);
+    const script=element('script');script.src=(window.DAILYNEWS_CONFIG?.basePath||'')+'/dailynews_copilot_companion.js';document.head.append(script);
+  }
 })();

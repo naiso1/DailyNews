@@ -40,6 +40,8 @@ $required = @(
     "dailynews_client.js",
     "dailynews_copilot.js",
     "dailynews_copilot.css",
+    "dailynews_copilot_companion.js",
+    "dailynews_copilot_companion.css",
     "dailynews_header.js",
     "dailynews_header.css",
     "dailynews_config.js",

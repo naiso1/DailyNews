@@ -40,6 +40,25 @@ use the user-selected display name.
 
 ### Personal Copilot questions (2026-11-18)
 
+The opt-in companion UI is enabled only by `?copilot=companion`, e.g.
+`http://IEWEB01/?copilot=companion`. It uses the same authenticated production
+question API and the caller's existing personal Copilot session. Normal URLs
+keep the previous dialog. `dailynews_copilot_companion.js` / `.css` and the
+shared mascot PNG are explicitly included in release packages. The initial
+production trial is the interior edition; do not imply the exterior has been
+deployed merely because its packaging supports these files.
+
+The companion retains draft text and job IDs in member/edition-scoped
+sessionStorage. Answers are loaded from owner-checked jobs, never cached there.
+Account changes clear private UI and the previous tab state. Article citations
+open an independent preview without modifying the news filters or page scroll.
+Follow-up is explicit: the chosen prior question/answer excerpt is added to the
+new question within the existing 1000-character limit. It is not a claim to reuse
+the provider's conversation session. Source selection and answer bounds remain
+server-side. The UI submits once and polls read-only; uncertain POST responses
+are recorded before submission and block repeating the same question. No
+reconnect, resend, public comment, or email is triggered on page load.
+
 `dailynews_copilot.js` adds a question button to article comments. The API takes
 only an article ID and comment ID; the authenticated server supplies their current
 published text and the caller's identity. Replies are private and do not modify
