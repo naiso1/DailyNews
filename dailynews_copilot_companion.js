@@ -50,7 +50,7 @@
   }
   const host=el('div',undefined,'dncp-host');host.id='dailynewsCompanion';document.body.append(host);document.body.classList.add('dncp-enabled');
   const launcher=el('div',undefined,'dncp-launcher');
-  const bubble=button('Copilotに相談',()=>open(),'dncp-bubble');bubble.append(el('small','ニュースのこと、聞いてみませんか'));
+  const bubble=button('Copilotに相談',()=>open(),'dncp-bubble');bubble.append(el('small','ニュースも、ちょっとした疑問も'));
   const pet=button('',()=>open(),'dncp-pet');pet.setAttribute('aria-label','Copilotを開く');pet.append(avatar());launcher.append(bubble,pet);
   const panel=el('aside',undefined,'dncp-panel');panel.setAttribute('aria-label','Copilotとの会話');panel.hidden=true;
   const header=el('header',undefined,'dncp-header'),heading=el('div');heading.append(el('h2','Copilot'),el('small','本人のアカウント · 自分だけの会話'));
@@ -59,11 +59,11 @@
   const transcript=el('div',undefined,'dncp-transcript');transcript.tabIndex=0;transcript.setAttribute('aria-label','質問と回答');
   const status=el('p',undefined,'dncp-status');status.setAttribute('role','status');
   const composer=el('form',undefined,'dncp-composer'),contextRow=el('div',undefined,'dncp-context'),scopeLabel=el('label','対象'),select=el('select');select.id='dncpScope';scopeLabel.htmlFor=select.id;
-  for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索'],['article','開いている記事']]){const o=el('option',label);o.value=value;if(value==='article')o.disabled=true;select.append(o);}
+  for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索'],['general','一般的な質問'],['article','開いている記事']]){const o=el('option',label);o.value=value;if(value==='article')o.disabled=true;select.append(o);}
   select.onchange=()=>{scope=select.value;save();};
   const detailToggle=button('詳細',()=>{details.hidden=!details.hidden;detailToggle.setAttribute('aria-expanded',String(!details.hidden));},'dncp-text-button');detailToggle.setAttribute('aria-expanded','false');contextRow.append(scopeLabel,select,detailToggle);
   const details=el('div',undefined,'dncp-details');details.hidden=true;
-  details.append(el('p','NEWは対象ニュースの要約をまとめて参照します（最大80件）。全体は関連する最大30件。参照した範囲は回答と一緒に表示します。質問・回答は公開コメントに投稿されません。'));
+  details.append(el('p','NEWは対象ニュースの要約をまとめて参照します（最大80件）。全体は関連する最大30件。「一般的な質問」は記事を指定せず相談できます。必要に応じて一般知識や利用可能なWeb検索も使います。元記事や読者コメントを取得できるとは限りません。質問・回答は公開コメントに投稿されません。'));
   details.append(button('接続設定',()=>window.dailyNewsCopilot?.openSettings?.(),'dncp-text-button'),button('接続状態を確認',()=>void refresh(),'dncp-text-button'));
   const normal=el('a','従来の質問画面を使う');const normalUrl=new URL(location.href);normalUrl.searchParams.set('copilot','classic');normal.href=normalUrl.href;details.append(normal);
   const followup=el('div',undefined,'dncp-followup-context');followup.hidden=true;
@@ -116,7 +116,7 @@
         const s=j.sources?.find(s=>validId(s.id)&&`[${s.id}]`===part);
         if(s)p.append(sourceLink(s,(s.title||s.id).slice(0,28)+((s.title||'').length>28?'…':'')));else p.append(document.createTextNode(part));
       }answer.append(p);
-      if(j.context){const c=j.context;answer.append(el('small',`${c.scope==='new'?'本日のNEW':c.scope==='all'?'掲載ニュース全体':'この記事'} ${c.total}件から${c.used}件の掲載要約を参照（${c.dateFrom||'日付不明'}〜${c.dateTo||'日付不明'}）`));}
+      if(j.context){const c=j.context;answer.append(el('small',c.scope==='general'?'一般的な質問 · 掲載記事の指定なし':`${c.scope==='new'?'本日のNEW':c.scope==='all'?'掲載ニュース全体':'この記事'} ${c.total}件から${c.used}件の掲載要約を参照（${c.dateFrom||'日付不明'}〜${c.dateTo||'日付不明'}）`));}
       if(j.sources?.length){const candidates=el('details'),summary=el('summary',`参照候補 ${j.sources.length}件`),links=el('div',undefined,'dncp-source-list');for(const s of j.sources)if(validId(s.id))links.append(sourceLink(s));candidates.append(summary,links);answer.append(candidates);}
       const conversation=httpUrl(j.conversationUrl,true);if(conversation){const a=el('a','Copilotで会話を開く ↗');a.href=conversation;a.target='_blank';a.rel='noopener noreferrer';answer.append(a);}
       if(j.status==='done'){answer.append(el('small','AIの回答です。事実と仮説を分けてご確認ください。'),button('この回答を踏まえて質問',()=>{replyTo=j.id;setDraft('もう少し具体的に教えて');},'dncp-followup'))}
@@ -126,7 +126,7 @@
   }
   function render(scrollToEnd=false){const old=transcript.scrollTop;transcript.replaceChildren();
     if(!records.length){const welcome=el('div',undefined,'dncp-welcome');welcome.append(el('small','YOUR NEWS COMPANION'),el('h3','気になるニュースから、少し先の話を。'),el('p','本人のCopilotに質問します。記事を開いても、この会話は残ります。'));
-      const examples=el('div',undefined,'dncp-examples');for(const [text,target] of [['今日のニュースで私に関係するニュースをピックアップして','new'],['今日のニュースの考察を教えて','new'],[`${config.id==='exterior'?'外装':'内装'}イルミに関するトレンドを教えて`,'all']])examples.append(button(text,()=>setDraft(text,target)));welcome.append(examples);transcript.append(welcome);
+      const examples=el('div',undefined,'dncp-examples');for(const [text,target] of [['今日のニュースで私に関係するニュースをピックアップして','new'],['今日のニュースの考察を教えて','new'],[`${config.id==='exterior'?'外装':'内装'}イルミに関するトレンドを教えて`,'all'],['なぜ車に乗ると酔うの？','general']])examples.append(button(text,()=>setDraft(text,target)));welcome.append(examples);transcript.append(welcome);
     }else for(const r of records)transcript.append(renderRecord(r));
     transcript.scrollTop=scrollToEnd?transcript.scrollHeight:old;scroll=transcript.scrollTop;renderStatus();save();}
   async function readJob(r,stamp){await verifyMember(stamp);const result=await request('/copilot/jobs/'+r.id);await verifyMember(stamp);if(!same(stamp))return;r.job=result.job;r.error='';}
@@ -150,7 +150,7 @@
   }
   function clearPrivate(){epoch++;clearTimeout(pollTimer);clearTimeout(saveTimer);if(member){try{sessionStorage.removeItem(key());}catch{}}member='';records=[];draft='';input.value='';replyTo=null;account=null;sending=false;restoring=false;checking=null;close();render();}
   async function changed(){const next=identity(who());if(next===member)return;if(member)clearPrivate();member=next;epoch++;const stamp=epoch;if(!member){renderStatus();return;}
-    const saved=sessionRead();draft=typeof saved.draft==='string'?saved.draft.slice(0,1000):'';scope=['new','all'].includes(saved.scope)?saved.scope:'new';input.value=draft;select.value=scope;scroll=Number(saved.scroll)||0;opened=!!saved.open;
+    const saved=sessionRead();draft=typeof saved.draft==='string'?saved.draft.slice(0,1000):'';scope=['new','all','general'].includes(saved.scope)?saved.scope:'new';input.value=draft;select.value=scope;scroll=Number(saved.scroll)||0;opened=!!saved.open;
     records=Array.isArray(saved.records)?saved.records.filter(r=>validJob(r.id)||r.uncertain).slice(-20):[];restoring=true;const savedScroll=scroll;render();if(opened)open();
     try{await verifyMember(stamp);for(const r of records.filter(r=>validJob(r.id))){await readJob(r,stamp);if(!same(stamp))return;}}
     catch(e){if(same(stamp))notice=errText(e);}finally{if(same(stamp)){restoring=false;replyTo=records.some(r=>r.job?.id===saved.replyTo&&r.job.status==='done')?saved.replyTo:null;render();transcript.scrollTop=savedScroll;scroll=savedScroll;save();schedulePoll();}}

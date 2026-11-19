@@ -9,7 +9,7 @@
   messages.SERVER_UNAVAILABLE='DailyNewsサーバーの応答を確認できませんでした。少し待って画面を開き直してください。質問は自動再送しません。';
   messages.SEND_NOT_READY='Copilotの入力画面を準備できませんでした。質問は未送信です。時間をおいてお試しください。';
   messages.STALE_QUESTION='対象のニュースが更新されています。対象と質問を選び直して送信してください。';
-  Object.assign(messages,{NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'質問に合う記事が見つかりませんでした。言葉を変えてお試しください。',INVALID_REQUEST:'質問は1〜1000文字で入力してください。',NOT_FOUND:'対象の記事・質問が見つかりません。',ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。「接続設定」から操作できます。'});
+  Object.assign(messages,{NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'質問に合う記事が見つかりませんでした。記事を指定しない相談は「一般的な質問」を選んでください。',INVALID_REQUEST:'質問は1〜1000文字で入力してください。',NOT_FOUND:'対象の記事・質問が見つかりません。',ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。「接続設定」から操作できます。'});
   const supportsArticle=id=>/^(jp|us|eu|cn|in|paper)\d+$/.test(id||'');
   const savedKey=()=>`dailynews-copilot-question:${window.DAILYNEWS_CONFIG?.id||'interior'}:${who()?.id}`;
   const errorText=e=>messages[e?.code]||'接続を確認して、もう一度操作してください。';
@@ -72,7 +72,7 @@
       }
       reply.append(answer);
       if(j?.context){const c=j.context,label=c.scope==='new'?'本日のNEW':c.scope==='all'?'掲載ニュース全体':'この記事';
-        reply.append(element('small',`${label} ${c.total}件から${c.used}件の掲載要約を参照（${c.dateFrom||'日付不明'}〜${c.dateTo||'日付不明'}）`));
+        reply.append(element('small',c.scope==='general'?'一般的な質問 · 掲載記事の指定なし':`${label} ${c.total}件から${c.used}件の掲載要約を参照（${c.dateFrom||'日付不明'}〜${c.dateTo||'日付不明'}）`));
         if(j.sources?.length){const details=element('details'),summary=element('summary',`参照候補の記事 ${j.sources.length}件`),list=element('ul');details.append(summary,list);
           for(const s of j.sources){const li=element('li');li.append(articleLink(s,`[${s.id}] ${s.title}`));list.append(li);}reply.append(details);}}
       if(j?.conversationUrl){const link=element('a','Copilotで会話を開く');link.href=j.conversationUrl;link.target='_blank';link.rel='noopener noreferrer';actions.append(link);}
@@ -194,7 +194,7 @@
     d.append(element('p','本人のCopilotに質問し、短い回答をここに表示します。この質問は公開コメントには投稿されません。'));
     let state=states.get('news-question');if(!state){state={key:'news-question',kind:'question',job:null};states.set(state.key,state);}
     const form=element('form'),scopeLabel=element('label','対象'),scope=element('select');scope.id='copilotNewsScope';scopeLabel.htmlFor=scope.id;
-    for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索']]){const o=element('option',label);o.value=value;scope.append(o);}
+    for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索'],['general','一般的な質問']]){const o=element('option',label);o.value=value;scope.append(o);}
     scope.value=state.scope||'new';scope.onchange=()=>{state.scope=scope.value;};
     const label=element('label','質問'),input=element('textarea');input.id='copilotNewsQuestion';label.htmlFor=input.id;input.rows=3;input.maxLength=1000;input.required=true;input.value=state.draft||'';
     input.placeholder='例：内装イルミに関するトレンドを教えて';input.oninput=()=>{state.draft=input.value;};
@@ -205,7 +205,7 @@
     const send=element('button','質問する','copilot-question');send.type='submit';
     const settingsButton=element('button','接続設定','copilot-settings');settingsButton.type='button';settingsButton.onclick=()=>void settings();
     const reply=element('div',undefined,'copilot-reply');reply.setAttribute('aria-live','polite');reply.hidden=true;box.append(send,settingsButton,reply);
-    form.append(scopeLabel,scope,label,input,examples,element('small','「本日のNEW」は表示中のNEWニュースをまとめて参照します（最大80件・文字数上限あり）。「掲載ニュース全体から検索」は全掲載記事から質問に関連する最大30件を選びます。参照するのはタイトル・掲載要約などで、全記事の本文は送りません。回答中のリンクからDailyNewsの記事を開けます。'),box);d.append(form);render(state);
+    form.append(scopeLabel,scope,label,input,examples,element('small','「本日のNEW」は表示中のNEWニュースをまとめて参照します（最大80件・文字数上限あり）。「掲載ニュース全体から検索」は全掲載記事から質問に関連する最大30件を選びます。参照するのはタイトル・掲載要約などで、全記事の本文は送りません。「一般的な質問」は記事を指定せず相談できます。回答中のリンクからDailyNewsの記事を開けます。'),box);d.append(form);render(state);
     form.onsubmit=async e=>{e.preventDefault();if(state.loading||state.job&&!['done','error','needs_review'].includes(state.job.status))return;
       const member=userKey,question=input.value.trim();if(!question)return;
       state.loading=true;state.error='';render(state);

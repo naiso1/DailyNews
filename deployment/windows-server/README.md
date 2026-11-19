@@ -40,6 +40,19 @@ use the user-selected display name.
 
 ### Personal Copilot questions (2026-11-19)
 
+The companion and classic dialog also offer `scope: "general"` for questions
+without an article. It sends no news summaries and works with an empty catalog;
+the existing member/edition/question/issue deduplication still applies. Article
+comments and news questions may explain general concepts beyond their summaries.
+When original pages, reader comments or current information are needed, the
+prompt asks Copilot to try its available web search, distinguish actually read
+material from unavailable material, and never substitute the author's opinion
+for reader comments. This is a prompt change, not a guaranteed comment crawler
+or verification of the member's web-search settings. Comment answers remain
+bounded to 200 characters and personal questions to 400. Public comment prompts
+exclude personal memory, email and internal files; private questions still use
+the same member account. Existing answers are not regenerated on deployment.
+
 The companion UI is the default on the normal interior and exterior URLs.
 It uses the same authenticated production question API and the caller's existing
 personal Copilot session. The earlier `?copilot=companion` trial links still work;
@@ -92,7 +105,7 @@ does not trigger their account or an automatic question. Existing question butto
 remain available for reconnecting/retrying without posting another comment.
 
 The header's news-question dialog uses POST `/api/copilot/questions` with only
-`scope` (`new`, `all`, or `article`), `question` (1–1000 characters) and, only for
+`scope` (`new`, `all`, `article`, or `general`), `question` (1–1000 characters) and, only for
 `article`, `itemId`. `copilot-context.js` resolves published, visible articles on
 the server; clients cannot supply sources or identity. Interior NEW uses the
 active release's NEW range and supplements; exterior uses its publication IDs.

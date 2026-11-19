@@ -38,6 +38,12 @@ async function main(){
  assert.equal(fs.readdirSync(path.join(member,'attempt-history')).length,1);
  for(let n=0;n<45;n++){await new Promise(r=>setTimeout(r,300));j=svc.getJob(alice,query.id);if(j.status==='done')break;}
  assert.equal(j.status,'done');assert.equal(sends,3);assert.equal(svc.retry(alice,query.id,unknown.createdAt).status,'done');
+ const generalInput={scope:'general',question:'なぜ車に乗ると酔うの？'},generalJob=svc.submitQuestion(alice,generalInput);
+ assert.equal(svc.submitQuestion(alice,generalInput).id,generalJob.id);
+ assert.throws(()=>svc.getJob(bob,generalJob.id),{safeCode:'NOT_FOUND'});
+ for(let n=0;n<45;n++){await new Promise(r=>setTimeout(r,300));j=svc.getJob(alice,generalJob.id);if(j.status==='done')break;}
+ assert.equal(j.status,'done');assert.equal(sends,4);assert.equal(j.scope,'general');assert.equal(j.context.used,0);assert.deepEqual(j.sources,[]);
+ assert.equal(svc.submitQuestion(alice,generalInput).sendAttemptCount,1);
  await svc.disconnect(alice);assert.equal(svc.accountStatus(alice).connected,false);assert.equal(fs.existsSync(path.join(member,'abcdef01.bin')),false);await svc.close();
  const app=path.join(root,'app'),release=path.join(root,'releases/abcdef1');fs.mkdirSync(app);fs.mkdirSync(release,{recursive:true});
  for(const name of ['server.js','copilot-client.js','copilot-comment-answers.js','copilot-context.js','shared-identity.js'])fs.copyFileSync(path.join(__dirname,name),path.join(app,name));
@@ -51,7 +57,10 @@ async function main(){
    const r=await fetch(base+'/api/copilot-worker/poll',{method:'POST',headers,body:'{}'}),d=(await r.json()).job;if(!d)continue;
    assert.equal(d.user.email,alice.email);
    if(d.operation==='submit')assert.equal(d.context.comment.text,'仕様は？');
-   if(d.operation==='submitQuestion'){assert.equal(d.context.question.sources[0].id,'jp1');assert.equal(d.context.question.context.used,1);assert.match(d.context.question.prompt,/イルミの要約/);}
+   if(d.operation==='submitQuestion'){
+    if(d.context.question.scope==='general'){assert.deepEqual(d.context.question.sources,[]);assert.equal(d.context.question.context.used,0);assert.match(d.context.question.prompt,/記事との関連付けは不要/);}
+    else {assert.equal(d.context.question.sources[0].id,'jp1');assert.equal(d.context.question.context.used,1);assert.match(d.context.question.prompt,/イルミの要約/);}
+   }
    await fetch(base+'/api/copilot-worker/result',{method:'POST',headers,body:JSON.stringify(d.operation==='accountStatus'?{id:d.id,result:{connected:false,email:alice.email}}:{id:d.id,code:'ACCOUNT_NOT_CONNECTED'})});
   }catch(e){if(polling)throw e;}}
  }
@@ -65,6 +74,7 @@ async function main(){
   r=await fetch(base+'/api/interactions/jp1/comments',{method:'POST',headers,body:JSON.stringify({text:'仕様は？',clientId:'abcdefghijklmnop1234'})});assert.equal(r.status,201);const detail=await r.json(),commentId=detail.commentItems[0].id;
   assert.equal(detail.createdCommentId,commentId);
   r=await fetch(base+'/api/copilot/questions',{method:'POST',headers,body:JSON.stringify({scope:'new',question:'今日のニュースで私に関係するニュースをピックアップして'})});assert.equal(r.status,409);assert.equal((await r.json()).error.code,'ACCOUNT_NOT_CONNECTED');
+  r=await fetch(base+'/api/copilot/questions',{method:'POST',headers,body:JSON.stringify(generalInput)});assert.equal(r.status,409);assert.equal((await r.json()).error.code,'ACCOUNT_NOT_CONNECTED');
   for(const body of [{scope:'new',question:'test',userId:1},{scope:'all',question:'test',sources:[{id:'jp9'}]},{scope:'all',question:'x'.repeat(1001)}]){
    r=await fetch(base+'/api/copilot/questions',{method:'POST',headers,body:JSON.stringify(body)});assert.equal(r.status,400);}
   r=await fetch(base+'/api/copilot/questions',{method:'POST',headers:{...headers,Origin:'https://evil.example'},body:'{}'});assert.equal(r.status,403);
