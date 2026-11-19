@@ -11,7 +11,6 @@
   messages.STALE_QUESTION='対象のニュースが更新されています。対象と質問を選び直して送信してください。';
   Object.assign(messages,{NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'質問に合う記事が見つかりませんでした。言葉を変えてお試しください。',INVALID_REQUEST:'質問は1〜1000文字で入力してください。',NOT_FOUND:'対象の記事・質問が見つかりません。',ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。「接続設定」から操作できます。'});
   const supportsArticle=id=>/^(jp|us|eu|cn|in|paper)\d+$/.test(id||'');
-  const mentionPattern=/(?:^|\s)@copilot(?=$|[\s、,:：?？])/i;
   const savedKey=()=>`dailynews-copilot-question:${window.DAILYNEWS_CONFIG?.id||'interior'}:${who()?.id}`;
   const errorText=e=>messages[e?.code]||'接続を確認して、もう一度操作してください。';
   async function api(route,method='GET',body) {
@@ -47,20 +46,26 @@
   }
   function render(state) {
     for(const box of document.querySelectorAll(`[data-copilot-key="${state.key}"]`)){
-      const button=box.querySelector('.copilot-question'),reply=box.querySelector('.copilot-reply');reply.replaceChildren();
+      const button=box.querySelector('.copilot-question'),privateReply=box.querySelector('.copilot-reply');
+      const shared=box.closest('.comment-item')?.querySelector('[data-copilot-public-answer]'),reply=shared||privateReply;
+      privateReply.replaceChildren();privateReply.hidden=true;
+      privateReply.classList.toggle('copilot-answer-actions',!!shared);
+      const actions=shared?privateReply:reply;
       const j=state.job,busy=state.loading||j&&!['done','error','needs_review'].includes(j.status);button.disabled=!!busy;
+      // Reuse the saved comment's answer slot, including while the owner's job is pending.
+      if(shared?.dataset.copilotPublicAnswer==='published'){button.textContent='Copilotの回答';continue;}
       if(j?.publicCommentAnswer?.status==='published'){
-        reply.hidden=false;reply.append(element('strong','Copilotの回答 · 公開保存済み'),element('p',j.publicCommentAnswer.answer));button.textContent='Copilotの回答（公開済み）';
+        reply.replaceChildren();reply.hidden=false;reply.append(element('strong','Copilotの回答'),element('p',j.publicCommentAnswer.answer),element('small','AIの回答です。事実と仮説を分けてご確認ください。'));button.textContent='Copilotの回答';
         if(!state.publicRefreshed){state.publicRefreshed=true;void window.dailyNewsRefreshCommentAnswers?.(state.itemId)?.catch(()=>{state.publicRefreshed=false;});}
         continue;
       }
       button.textContent=busy?'Copilotが回答中…':state.kind==='question'?'質問する':j?.status==='done'?'Copilotの回答':'Copilotへ質問';
-      reply.hidden=!(state.error||j);
-      if(reply.hidden)continue;
-      reply.append(element('strong','Copilot · 自分だけに表示'));
+      if(!(state.error||j||state.loading))continue;
+      reply.replaceChildren();reply.hidden=false;
+      reply.append(element('strong','Copilotの回答'));
       if(j?.question)reply.append(element('small','質問：'+j.question));
       const answer=element('p');
-      const text=state.error||(j.status==='done'?j.answer:j.status==='needs_review'?'送信済みです。結果を確認できないため自動再送を停止しました。':j.status==='error'?errorText({code:j.code}):j.status==='queued'?'順番を待っています…':'本人のCopilotで回答を取得しています…');
+      const text=state.error||(j?.status==='done'?j.answer:j?.status==='needs_review'?'送信済みです。結果を確認できないため自動再送を停止しました。':j?.status==='error'?errorText({code:j.code}):j?.status==='queued'?'順番を待っています…':'本人のCopilotで回答を取得しています…');
       for(const part of String(text||'').split(/(\[(?:jp|us|eu|cn|in|paper)\d+\])/g)){
         const source=j?.sources?.find(s=>'['+s.id+']'===part);
         if(source)answer.append(articleLink(source,part));else answer.append(document.createTextNode(part));
@@ -70,7 +75,7 @@
         reply.append(element('small',`${label} ${c.total}件から${c.used}件の掲載要約を参照（${c.dateFrom||'日付不明'}〜${c.dateTo||'日付不明'}）`));
         if(j.sources?.length){const details=element('details'),summary=element('summary',`参照候補の記事 ${j.sources.length}件`),list=element('ul');details.append(summary,list);
           for(const s of j.sources){const li=element('li');li.append(articleLink(s,`[${s.id}] ${s.title}`));list.append(li);}reply.append(details);}}
-      if(j?.conversationUrl){const link=element('a','Copilotで会話を開く');link.href=j.conversationUrl;link.target='_blank';link.rel='noopener noreferrer';reply.append(link);}
+      if(j?.conversationUrl){const link=element('a','Copilotで会話を開く');link.href=j.conversationUrl;link.target='_blank';link.rel='noopener noreferrer';actions.append(link);}
       if(j?.status==='needs_review'){
         const retry=element('button','確認して再試行','copilot-retry');retry.type='button';retry.disabled=!!state.loading;
         retry.onclick=()=>{
@@ -81,15 +86,16 @@
           send.onclick=async()=>{if(state.loading)return;send.disabled=true;d.close();state.loading=true;state.error='';render(state);
             try{const r=await api('/jobs/'+id+'/retry','POST',{createdAt});if(userKey!==member)return;state.job=r.job;void poll(state,member);}
             catch(e){if(userKey===member)state.error=errorText(e);}finally{if(userKey===member){state.loading=false;render(state);}}};
-        };reply.append(retry);
+        };actions.append(retry);
       }
       if(j?.status==='done')reply.append(element('small','AIの回答です。記事で確認できる事実と仮説を分けてご確認ください。回答日時：'+new Date(j.completedAt||j.createdAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})));
-      if(j?.status==='done'&&!j.scope&&state.own){
+      if(j?.status==='done'&&!j.scope&&!shared&&state.own){
         const share=element('button','この回答をコメント欄に公開して残す','copilot-share');share.type='button';share.disabled=!!state.loading;
         share.onclick=async()=>{if(state.loading)return;const member=userKey;state.loading=true;state.error='';render(state);
           try{const r=await api('/jobs/'+j.id+'/publish','POST',{});if(userKey!==member)return;state.job=r.job;}
           catch(e){if(userKey===member)state.error=errorText(e);}finally{if(userKey===member){state.loading=false;render(state);}}};reply.append(share);
       }
+      if(shared)privateReply.hidden=!privateReply.childElementCount;
     }
   }
   async function poll(state,key) {
@@ -104,7 +110,7 @@
   }
   async function settings() {
     const d=dialog('本人のCopilotを接続'),p=element('p','接続状態を確認しています…');d.append(p);
-    try {const a=await api('/account');p.textContent=a.connected?`${a.email} のCopilotに接続済みです。回答はこのアカウントだけに表示します。`:'初回は本人のMicrosoftサインインが必要です。接続画面のMicrosoft表示を操作します。パスワードは保存せず、本人確認済みのセッションだけを暗号化して保存します。';
+    try {const a=await api('/account');p.textContent=a.connected?`${a.email} のCopilotに接続済みです。`:'初回は本人のMicrosoftサインインが必要です。接続画面のMicrosoft表示を操作します。パスワードは保存せず、本人確認済みのセッションだけを暗号化して保存します。';
       const controls=element('div',undefined,'copilot-connect-tools');d.append(controls);
       if(a.connected){const off=element('button','Copilotの接続を解除');off.onclick=async()=>{off.disabled=true;await api('/account','DELETE');d.close();};controls.append(off);}
       const connect=element('button',a.connected?'接続し直す':'Microsoftに接続');controls.append(connect);
@@ -152,7 +158,7 @@
   }
   async function ask(state) {
     if(!who()){window.dailyNewsAccount?.open?.();return;}
-    if(state.job?.status==='done'){const box=document.querySelector(`[data-copilot-key="${state.key}"] .copilot-reply`);if(box)box.hidden=!box.hidden;return;}
+    if(state.job?.status==='done'){const box=document.querySelector(`[data-copilot-key="${state.key}"] .copilot-reply`);if(box&&!box.closest('.comment-item')?.querySelector('[data-copilot-public-answer]'))box.hidden=!box.hidden;return;}
     const key=userKey;state.loading=true;state.error='';render(state);
     try {const a=await api('/account');if(userKey!==key)return;if(!a.connected){state.error=messages.ACCOUNT_NOT_CONNECTED;await settings();return;}
       const r=await api('/jobs','POST',{itemId:state.itemId,commentId:state.commentId});if(userKey!==key)return;state.job=r.job;void poll(state,key);
@@ -161,12 +167,6 @@
   function scan() {
     scanPending=false;if(!who())return;
     ensureEntry();
-    document.querySelectorAll('.card[id^="card-"] .comment-input-area').forEach(area=>{
-      if(!supportsArticle(area.closest('.card').id.slice(5))||area.dataset.copilotHint)return;
-      area.dataset.copilotHint='true';const input=area.querySelector('.comment-input');if(!input)return;
-      const hint=element('small','@Copilot の質問と回答は、コメント欄でみんなに公開されます。','copilot-mention-hint');hint.hidden=!mentionPattern.test(input.value);area.after(hint);
-      input.addEventListener('input',()=>{hint.hidden=!mentionPattern.test(input.value);});
-    });
     for(const comment of document.querySelectorAll('.comment-item[data-comment-id]')){
       const shared=comment.querySelector('[data-copilot-public-answer]');
       if(shared?.dataset.copilotPublicAnswer==='published'||shared&&comment.dataset.commentOwn!=='true')continue;

@@ -62,7 +62,9 @@ reconnect, resend, public comment, or email is triggered on page load.
 ### Public comment answers (2026-11-19)
 
 New article `@Copilot` comments explicitly carry `copilotAnswerVisibility: "public"`
-after the UI discloses that both question and answer are shared. Older clients and
+and retain the answer beneath the question. The comment UI uses one answer slot
+through pending and completed states, titled simply "Copilotの回答"; audience labels
+and the repeated audience hint are omitted. Older clients and
 existing comments without that flag remain private. Completed legacy answers may
 be published only by the comment author via POST `/api/copilot/jobs/:id/publish`;
 the server retrieves the owner-checked job and verifies the current comment job.

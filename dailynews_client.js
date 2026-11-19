@@ -930,7 +930,7 @@ function renderItem(itemId) {
             </div>
             <div class="comment-text">${formatCommentText(comment.text || "")}</div>
             ${comment.copilotAnswer ? `<div class="copilot-public-answer" data-copilot-public-answer="${escapeHtml(comment.copilotAnswer.status)}">
-              <strong>Copilotの回答 · みんなに表示</strong>
+              <strong>Copilotの回答</strong>
               <p>${comment.copilotAnswer.status === 'published' ? escapeHtml(comment.copilotAnswer.answer || '') : comment.copilotAnswer.status === 'unavailable' ? '回答を取得できませんでした。投稿者が接続・送信結果を確認してください。' : '回答を待っています。取得でき次第ここに保存します。'}</p>
               ${comment.copilotAnswer.status === 'published' ? '<small>AIの回答です。事実と仮説を分けてご確認ください。</small>' : ''}
             </div>` : ''}
