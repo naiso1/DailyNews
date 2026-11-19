@@ -172,7 +172,7 @@
   function ensureEntry(){
     if(document.getElementById('copilotNewsButton'))return;
     const parent=document.querySelector('.header-top-actions')||document.querySelector('header#top');if(!parent)return;
-    const b=element('button','Copilot · ニュースに質問','copilot-news-entry');b.id='copilotNewsButton';b.type='button';b.onclick=()=>window.dailyNewsCopilotCompanion?window.dailyNewsCopilotCompanion.open():void newsDialog();parent.append(b);
+    const b=element('button','Copilotに相談','copilot-news-entry');b.id='copilotNewsButton';b.type='button';b.onclick=()=>window.dailyNewsCopilotCompanion?window.dailyNewsCopilotCompanion.open():void newsDialog();parent.append(b);
   }
   async function newsDialog(){
     if(!who()){window.dailyNewsAccount?.openAuth?.('login','Copilotへの質問にはログインが必要です。');return;}
@@ -215,8 +215,8 @@
     if(location.hash==='#copilot-connect'&&who()&&inlineConnection()){history.replaceState(null,'',location.pathname+location.search);void connectScreen();}}
   window.addEventListener('dailynews:account-changed',changed);window.addEventListener('dailynews:account-ready',ready,{once:true});
   if(window.dailyNewsAccount?.ready)ready();
-  // The companion is an opt-in production trial. Normal URLs keep the existing UI.
-  if(new URLSearchParams(location.search).get('copilot')==='companion'){
+  // Default for both editions; the classic dialog remains an explicit fallback.
+  if(new URLSearchParams(location.search).get('copilot')!=='classic'){
     const css=element('link');css.rel='stylesheet';css.href=(window.DAILYNEWS_CONFIG?.basePath||'')+'/dailynews_copilot_companion.css';document.head.append(css);
     const script=element('script');script.src=(window.DAILYNEWS_CONFIG?.basePath||'')+'/dailynews_copilot_companion.js';document.head.append(script);
   }

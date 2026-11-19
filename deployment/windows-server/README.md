@@ -38,15 +38,15 @@ use the user-selected display name.
 
 ## Deployment
 
-### Personal Copilot questions (2026-11-18)
+### Personal Copilot questions (2026-11-19)
 
-The opt-in companion UI is enabled only by `?copilot=companion`, e.g.
-`http://IEWEB01/?copilot=companion`. It uses the same authenticated production
-question API and the caller's existing personal Copilot session. Normal URLs
-keep the previous dialog. `dailynews_copilot_companion.js` / `.css` and the
-shared mascot PNG are explicitly included in release packages. The initial
-production trial is the interior edition; do not imply the exterior has been
-deployed merely because its packaging supports these files.
+The companion UI is the default on the normal interior and exterior URLs.
+It uses the same authenticated production question API and the caller's existing
+personal Copilot session. The earlier `?copilot=companion` trial links still work;
+`?copilot=classic` explicitly selects the previous dialog as a fallback.
+Both flags survive news-filter navigation and do not affect the default NEW range.
+`dailynews_copilot_companion.js` / `.css` and the shared mascot PNG are explicitly
+included in both release packages. Deploy and verify each edition separately.
 
 The companion retains draft text and job IDs in member/edition-scoped
 sessionStorage. Answers are loaded from owner-checked jobs, never cached there.

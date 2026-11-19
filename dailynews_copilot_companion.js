@@ -1,5 +1,5 @@
 "use strict";
-// Opt-in real-account UI. Provider identity, article selection and deduplication stay server-side.
+// Personal-account UI. Provider identity, article selection and deduplication stay server-side.
 (() => {
   const validId = id => /^(jp|us|eu|cn|in|paper)\d+$/.test(id || '');
   const validJob = id => /^[a-f0-9]{64}$/.test(id || '');
@@ -19,7 +19,7 @@
   function identity(user) {return user?.id&&user?.email?`${user.id}:${String(user.email).toLowerCase()}`:'';}
   function canRepeat(records,input) {return !records.some(r=>r.uncertain&&r.input?.scope===input.scope&&r.input?.itemId===input.itemId&&r.input?.question===input.question);}
   if(typeof module==='object'&&module.exports){module.exports={validId,validJob,terminal,httpUrl,composeQuestion,identity,canRepeat};return;}
-  if(new URLSearchParams(location.search).get('copilot')!=='companion'||window.dailyNewsCopilotCompanion)return;
+  if(new URLSearchParams(location.search).get('copilot')==='classic'||window.dailyNewsCopilotCompanion)return;
   const config=window.DAILYNEWS_CONFIG||{},base=config.apiBase||'/api',path=config.basePath||'';
   const image=path+'/page_images/copilot_companion_20261118.png';
   const errors={ACCOUNT_NOT_CONNECTED:'本人のCopilotが未接続です。「接続設定」を開いてください。',AUTH_REQUIRED:'Microsoftへの再接続が必要です。「接続設定」を開いてください。',ACCOUNT_MISMATCH:'DailyNewsとMicrosoftのアカウントが一致しません。本人の会社アカウントで接続してください。',ACCOUNT_CHANGED:'ログイン中のアカウントが変わりました。ページを再読み込みしてください。',WORKER_OFFLINE:'Copilot連携用のPCに接続できません。少し待って接続状態を確認してください。',BUSY:'別の質問・接続処理が実行中です。少し待ってからお試しください。',NETWORK_ERROR:'通信を確認できませんでした。質問の自動再送は行いません。',SERVER_UNAVAILABLE:'サーバーの応答を確認できませんでした。質問の自動再送は行いません。',NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'この条件に合う記事がありません。対象か質問を変えてお試しください。',INVALID_REQUEST:'質問を1〜1000文字で入力してください。',FOLLOWUP_TOO_LONG:'前の回答と合わせて長くなっています。追加の質問を短くするか、「前の回答を参照」を解除してください。',NO_PRIOR_ANSWER:'前の回答を読み込んでからお試しください。',SEND_NOT_READY:'Copilotの入力画面を準備できませんでした。質問は未送信です。',NOT_FOUND:'対象の記事・質問が見つかりません。',RESULT_UNCONFIRMED:'送信済みの可能性があるため、自動再送を停止しています。',INTERRUPTED:'処理が中断されました。送信済みの場合は自動再送しません。'};
@@ -48,12 +48,12 @@
       account=a;notice=a.connected?'':errors.ACCOUNT_NOT_CONNECTED;
     }catch(e){if(same(stamp)){account=null;notice=errText(e);if(e.code==='ACCOUNT_CHANGED')clearPrivate();}}finally{checking=null;renderStatus();}})();return checking;
   }
-  const host=el('div',undefined,'dncp-host');host.id='dailynewsCompanion';document.body.append(host);
+  const host=el('div',undefined,'dncp-host');host.id='dailynewsCompanion';document.body.append(host);document.body.classList.add('dncp-enabled');
   const launcher=el('div',undefined,'dncp-launcher');
   const bubble=button('Copilotに相談',()=>open(),'dncp-bubble');bubble.append(el('small','ニュースのこと、聞いてみませんか'));
   const pet=button('',()=>open(),'dncp-pet');pet.setAttribute('aria-label','Copilotを開く');pet.append(avatar());launcher.append(bubble,pet);
   const panel=el('aside',undefined,'dncp-panel');panel.setAttribute('aria-label','Copilotとの会話');panel.hidden=true;
-  const header=el('header',undefined,'dncp-header'),heading=el('div');heading.append(el('h2','Copilot'),el('small','本人のアカウント · 試用中'));
+  const header=el('header',undefined,'dncp-header'),heading=el('div');heading.append(el('h2','Copilot'),el('small','本人のアカウント · 自分だけの会話'));
   const minimize=button('−',()=>close(),'dncp-minimize');minimize.setAttribute('aria-label','会話を最小化');header.append(avatar(),heading,minimize);
   const connection=el('div','接続状態を確認します','dncp-connection');
   const transcript=el('div',undefined,'dncp-transcript');transcript.tabIndex=0;transcript.setAttribute('aria-label','質問と回答');
@@ -65,7 +65,7 @@
   const details=el('div',undefined,'dncp-details');details.hidden=true;
   details.append(el('p','NEWは対象ニュースの要約をまとめて参照します（最大80件）。全体は関連する最大30件。参照した範囲は回答と一緒に表示します。質問・回答は公開コメントに投稿されません。'));
   details.append(button('接続設定',()=>window.dailyNewsCopilot?.openSettings?.(),'dncp-text-button'),button('接続状態を確認',()=>void refresh(),'dncp-text-button'));
-  const normal=el('a','通常の表示に戻る');const normalUrl=new URL(location.href);normalUrl.searchParams.delete('copilot');normal.href=normalUrl.href;details.append(normal);
+  const normal=el('a','従来の質問画面を使う');const normalUrl=new URL(location.href);normalUrl.searchParams.set('copilot','classic');normal.href=normalUrl.href;details.append(normal);
   const followup=el('div',undefined,'dncp-followup-context');followup.hidden=true;
   const field=el('div',undefined,'dncp-field'),input=el('textarea');input.rows=2;input.maxLength=1000;input.placeholder='気になることを聞いてみる…';input.setAttribute('aria-label','Copilotへの質問');
   input.oninput=()=>{draft=input.value;save();renderStatus();};
@@ -121,12 +121,12 @@
       const conversation=httpUrl(j.conversationUrl,true);if(conversation){const a=el('a','Copilotで会話を開く ↗');a.href=conversation;a.target='_blank';a.rel='noopener noreferrer';answer.append(a);}
       if(j.status==='done'){answer.append(el('small','AIの回答です。事実と仮説を分けてご確認ください。'),button('この回答を踏まえて質問',()=>{replyTo=j.id;setDraft('もう少し具体的に教えて');},'dncp-followup'))}
       if(!terminal(j)||r.error)answer.append(button('回答の状態を確認',()=>void refresh(),'dncp-text-button'));
-      if(j.status==='needs_review')answer.append(el('small','再送が必要な場合は通常の質問画面で確認してください。ここから自動再送はしません。'));
+      if(j.status==='needs_review')answer.append(el('small','送信済みの可能性があります。「Copilotで会話を開く」から確認してください。自動再送はしません。'));
     }fragment.append(answer);return fragment;
   }
   function render(scrollToEnd=false){const old=transcript.scrollTop;transcript.replaceChildren();
     if(!records.length){const welcome=el('div',undefined,'dncp-welcome');welcome.append(el('small','YOUR NEWS COMPANION'),el('h3','気になるニュースから、少し先の話を。'),el('p','本人のCopilotに質問します。記事を開いても、この会話は残ります。'));
-      const examples=el('div',undefined,'dncp-examples');for(const [text,target] of [['今日のニュースで私に関係するニュースをピックアップして','new'],['今日のニュースの考察を教えて','new'],['内装イルミに関するトレンドを教えて','all']])examples.append(button(text,()=>setDraft(text,target)));welcome.append(examples);transcript.append(welcome);
+      const examples=el('div',undefined,'dncp-examples');for(const [text,target] of [['今日のニュースで私に関係するニュースをピックアップして','new'],['今日のニュースの考察を教えて','new'],[`${config.id==='exterior'?'外装':'内装'}イルミに関するトレンドを教えて`,'all']])examples.append(button(text,()=>setDraft(text,target)));welcome.append(examples);transcript.append(welcome);
     }else for(const r of records)transcript.append(renderRecord(r));
     transcript.scrollTop=scrollToEnd?transcript.scrollHeight:old;scroll=transcript.scrollTop;renderStatus();save();}
   async function readJob(r,stamp){await verifyMember(stamp);const result=await request('/copilot/jobs/'+r.id);await verifyMember(stamp);if(!same(stamp))return;r.job=result.job;r.error='';}

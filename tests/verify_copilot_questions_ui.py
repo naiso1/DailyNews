@@ -78,7 +78,8 @@ def verify(browser, base, edition, width, out):
         route.fulfill(body=body,content_type='application/javascript')
     ctx.route('**/*',intercept)
     page=ctx.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda d:d.accept())
-    page.goto(base+('/exterior' if edition=='exterior' else '')+'/内装製品デイリーニュース.html?from='+DAY+'&to='+DAY+'&new=0',wait_until='domcontentloaded')
+    # Keep covering the supported classic fallback after the companion becomes default.
+    page.goto(base+('/exterior' if edition=='exterior' else '')+'/内装製品デイリーニュース.html?copilot=classic&from='+DAY+'&to='+DAY+'&new=0',wait_until='domcontentloaded')
     page.locator('#card-jp1').wait_for()
     assert page.locator('#card-jp2').count()==0
     if page.locator('#releaseHistoryOverlay.open').count(): page.locator('.release-history-close').click()

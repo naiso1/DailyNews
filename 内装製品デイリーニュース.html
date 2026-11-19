@@ -3781,7 +3781,8 @@ header.site-header {
 
         function updateURL(mode = "replace") {
             const params = new URLSearchParams();
-            if (new URLSearchParams(location.search).get("copilot") === "companion") params.set("copilot", "companion");
+            const copilotView = new URLSearchParams(location.search).get("copilot");
+            if (["companion", "classic"].includes(copilotView)) params.set("copilot", copilotView);
             if (!activeCountries.has("world")) params.set("countries", [...activeCountries].join(","));
             if (!activeTags.has("all")) params.set("tags", [...activeTags].join(","));
             if (newOnly) params.set("new", "1");

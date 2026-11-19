@@ -2,6 +2,19 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const ui=require('../../dailynews_copilot_companion.js');
+test('normal URLs load the companion once, classic remains available, and loading never sends a question',()=>{
+ const vm=require('node:vm'),fs=require('node:fs');
+ const script=fs.readFileSync(require.resolve('../../dailynews_copilot.js'),'utf8');
+ for(const basePath of ['', '/exterior'])for(const search of ['', '?new=1', '?copilot=companion', '?copilot=classic']){
+  const appended=[];let requests=0;
+  const window={DAILYNEWS_CONFIG:{basePath},addEventListener(){}};
+  const context={window,location:{search,hash:'',protocol:'http:'},URLSearchParams,Map,
+   document:{createElement:tag=>({tag}),head:{append:node=>appended.push(node)}},fetch:()=>{requests++;throw new Error('Unexpected request on load');}};
+  vm.runInNewContext(script,context);
+  assert.equal(requests,0);
+  assert.deepEqual(appended.map(n=>n.src||n.href),search.includes('classic')?[]:[basePath+'/dailynews_copilot_companion.css',basePath+'/dailynews_copilot_companion.js']);
+ }
+});
 test('follow-up includes only an explicitly completed answer within server limit',()=>{
  assert.equal(ui.composeQuestion(' 質問 '),'質問');
  assert.throws(()=>ui.composeQuestion('x',{status:'needs_review',question:'prior',answer:'unknown'}),/NO_PRIOR_ANSWER/);
