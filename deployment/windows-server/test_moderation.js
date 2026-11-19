@@ -30,6 +30,7 @@ async function fixture(edition, legacy = false) {
   fs.mkdirSync(path.join(root,"releases","abcdef1"),{recursive:true});
   fs.writeFileSync(path.join(root,"active-release.txt"),"abcdef1");
   fs.copyFileSync(path.join(__dirname,"server.js"),path.join(app,"server.js"));
+  fs.copyFileSync(path.join(__dirname,"copilot-comment-answers.js"),path.join(app,"copilot-comment-answers.js"));
   const dbPath = path.join(root,"data","dailynews.sqlite");
   if (legacy) {
     const db = new DatabaseSync(dbPath);

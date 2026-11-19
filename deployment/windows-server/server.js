@@ -1269,6 +1269,7 @@ function commentsFor(itemId, clientId, user = null) {
     parentId: comment.parent_comment_id ? Number(comment.parent_comment_id) : null,
     user: comment.user_name,
     text: comment.comment_text,
+    copilotAnswer: publicCopilotAnswers.publicAnswer(Number(comment.id)),
     createdAt: comment.created_at,
     date: new Date(
       String(comment.created_at).includes("T")
@@ -1580,6 +1581,9 @@ function moderationPayload(params) {
 }
 
 let copilotService;
+const publicCopilotAnswers = require('./copilot-comment-answers').createStore({
+  db, readJob: (user, id) => getCopilotService().getJob(user, id),
+});
 let copilotArticles = {release: null, rows: []};
 function copilotCatalog() {
   const release = activeRelease();
@@ -1649,6 +1653,16 @@ async function handleCopilot(request, response, requestUrl) {
     else if (/^\/connection\/[a-f0-9-]+\/action$/.test(route) && request.method === 'POST') result=await service.action(user,route.split('/')[2],await readJson(request,4096));
     else if (route === '/current' && request.method === 'GET') result={job:await service.current(user,requestUrl.searchParams.get('itemId'),Number(requestUrl.searchParams.get('commentId')))};
     else if (/^\/jobs\/[a-f0-9]{64}$/.test(route) && request.method === 'GET') result={job:await service.getJob(user,route.split('/')[2])};
+    else if (/^\/jobs\/[a-f0-9]{64}\/publish$/.test(route) && request.method === 'POST') {
+      const body=await readJson(request,256);
+      if(Object.keys(body).length)throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
+      const job=await service.getJob(user,route.split('/')[2]);
+      const c=job&&!job.scope&&statements.findComment.get(job.commentId,job.itemId);
+      if(!c||Number(c.user_id)!==user.id)throw Object.assign(new Error(),{safeCode:'NOT_FOUND'});
+      const current=await service.current(user,job.itemId,job.commentId);
+      if(current?.id!==job.id)throw Object.assign(new Error(),{safeCode:'STALE_QUESTION'});
+      publicCopilotAnswers.publish(user,job);result={job};
+    }
     else if (/^\/jobs\/[a-f0-9]{64}\/retry$/.test(route) && request.method === 'POST') {
       const body=await readJson(request,256);
       if(Object.keys(body).some(k=>k!=='createdAt')||typeof body.createdAt!=='string'||body.createdAt.length>40)throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
@@ -1661,8 +1675,10 @@ async function handleCopilot(request, response, requestUrl) {
     else if (route === '/jobs' && request.method === 'POST') {
       const body=await readJson(request,1024);
       if(Object.keys(body).some(key=>!['itemId','commentId'].includes(key)))throw Object.assign(new Error(),{safeCode:'INVALID_REQUEST'});
-      result={job:await service.submit(user,body.itemId,body.commentId)};
+      try {result={job:await service.submit(user,body.itemId,body.commentId)};}
+      catch(error){publicCopilotAnswers.failed(user,body.itemId,body.commentId);throw error;}
     } else {apiError(response,404,'not_found','見つかりません。');return;}
+    if(result?.job)result.job.publicCommentAnswer=publicCopilotAnswers.record(user,result.job);
     sendJson(response,200,result);
   } catch(error) {
     // Sign-in actions may contain credentials. Never log request bodies or provider errors.
@@ -2196,6 +2212,11 @@ async function handleApi(request, response, requestUrl) {
     const text = String(body.text || "").trim();
     const user = requireUser(request, response);
     if (!user) return;
+    if (body.copilotAnswerVisibility !== undefined &&
+        (body.copilotAnswerVisibility !== 'public' ||
+         !require('./copilot-comment-answers').mention(text) || !/^(jp|us|eu|cn|in|paper)\d+$/.test(itemId))) {
+      apiError(response,400,'invalid_copilot_visibility','公開回答は記事への@Copilot質問で指定してください。');return;
+    }
     if (
       !validItemId(itemId) ||
       !text ||
@@ -2228,6 +2249,7 @@ async function handleApi(request, response, requestUrl) {
         parentCommentId,
       );
       createdCommentId = Number(inserted.lastInsertRowid);
+      if(body.copilotAnswerVisibility==='public')publicCopilotAnswers.consent(user,itemId,createdCommentId);
       notifyCommentParticipants(
         itemId,
         Number(inserted.lastInsertRowid),
@@ -2924,6 +2946,7 @@ server.listen(PORT, HOST, () => {
 
 function shutdown(signal) {
   log(`Received ${signal}; shutting down`);
+  publicCopilotAnswers.close();
   void copilotService?.close();
   server.close(() => {
     sharedIdentity?.close();

@@ -49,6 +49,11 @@
     for(const box of document.querySelectorAll(`[data-copilot-key="${state.key}"]`)){
       const button=box.querySelector('.copilot-question'),reply=box.querySelector('.copilot-reply');reply.replaceChildren();
       const j=state.job,busy=state.loading||j&&!['done','error','needs_review'].includes(j.status);button.disabled=!!busy;
+      if(j?.publicCommentAnswer?.status==='published'){
+        reply.hidden=false;reply.append(element('strong','Copilotの回答 · 公開保存済み'),element('p',j.publicCommentAnswer.answer));button.textContent='Copilotの回答（公開済み）';
+        if(!state.publicRefreshed){state.publicRefreshed=true;void window.dailyNewsRefreshCommentAnswers?.(state.itemId)?.catch(()=>{state.publicRefreshed=false;});}
+        continue;
+      }
       button.textContent=busy?'Copilotが回答中…':state.kind==='question'?'質問する':j?.status==='done'?'Copilotの回答':'Copilotへ質問';
       reply.hidden=!(state.error||j);
       if(reply.hidden)continue;
@@ -79,6 +84,12 @@
         };reply.append(retry);
       }
       if(j?.status==='done')reply.append(element('small','AIの回答です。記事で確認できる事実と仮説を分けてご確認ください。回答日時：'+new Date(j.completedAt||j.createdAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})));
+      if(j?.status==='done'&&!j.scope&&state.own){
+        const share=element('button','この回答をコメント欄に公開して残す','copilot-share');share.type='button';share.disabled=!!state.loading;
+        share.onclick=async()=>{if(state.loading)return;const member=userKey;state.loading=true;state.error='';render(state);
+          try{const r=await api('/jobs/'+j.id+'/publish','POST',{});if(userKey!==member)return;state.job=r.job;}
+          catch(e){if(userKey===member)state.error=errorText(e);}finally{if(userKey===member){state.loading=false;render(state);}}};reply.append(share);
+      }
     }
   }
   async function poll(state,key) {
@@ -153,15 +164,18 @@
     document.querySelectorAll('.card[id^="card-"] .comment-input-area').forEach(area=>{
       if(!supportsArticle(area.closest('.card').id.slice(5))||area.dataset.copilotHint)return;
       area.dataset.copilotHint='true';const input=area.querySelector('.comment-input');if(!input)return;
-      const hint=element('small','@Copilot の質問はコメントとして公開されます。回答は本人だけに表示します。','copilot-mention-hint');hint.hidden=!mentionPattern.test(input.value);area.after(hint);
+      const hint=element('small','@Copilot の質問と回答は、コメント欄でみんなに公開されます。','copilot-mention-hint');hint.hidden=!mentionPattern.test(input.value);area.after(hint);
       input.addEventListener('input',()=>{hint.hidden=!mentionPattern.test(input.value);});
     });
     for(const comment of document.querySelectorAll('.comment-item[data-comment-id]')){
+      const shared=comment.querySelector('[data-copilot-public-answer]');
+      if(shared?.dataset.copilotPublicAnswer==='published'||shared&&comment.dataset.commentOwn!=='true')continue;
       if(comment.querySelector('.copilot-controls'))continue;
       const card=comment.closest('.card[id^="card-"]'),itemId=card?.id.slice(5),commentId=Number(comment.dataset.commentId);
       if(!/^(jp|us|eu|cn|in|paper)\d+$/.test(itemId||'')||!commentId)continue;
       const key=itemId+'-'+commentId;let state=states.get(key);const fresh=!state;
       if(!state){state={key,itemId,commentId,job:null};states.set(key,state);}
+      state.own=comment.dataset.commentOwn==='true';
       const box=element('div',undefined,'copilot-controls');box.dataset.copilotKey=key;
       const button=element('button','Copilotへ質問','copilot-question');button.type='button';button.onclick=()=>void ask(state);
       const account=element('button','接続設定','copilot-settings');account.type='button';account.onclick=()=>void settings();

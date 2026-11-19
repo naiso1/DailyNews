@@ -116,6 +116,7 @@ if ($LASTEXITCODE -ne 0) {
 $appFiles = @(
     "server.js",
     "copilot-client.js",
+    "copilot-comment-answers.js",
     "copilot-context.js",
     "shared-identity.js",
     "migrate-shared-identity.js",

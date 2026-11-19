@@ -59,15 +59,33 @@ server-side. The UI submits once and polls read-only; uncertain POST responses
 are recorded before submission and block repeating the same question. No
 reconnect, resend, public comment, or email is triggered on page load.
 
+### Public comment answers (2026-11-19)
+
+New article `@Copilot` comments explicitly carry `copilotAnswerVisibility: "public"`
+after the UI discloses that both question and answer are shared. Older clients and
+existing comments without that flag remain private. Completed legacy answers may
+be published only by the comment author via POST `/api/copilot/jobs/:id/publish`;
+the server retrieves the owner-checked job and verifies the current comment job.
+The client cannot supply answer text, another identity, or a cross-news job.
+
+`copilot-comment-answers.js` keeps consent and pending job IDs in SQLite. A bounded
+read-only poller saves completed answers even after the browser closes, resumes
+after web-server restart, and never generates or resends a question. Published
+answers contain only text, completion time and status; personal Copilot conversation
+URLs and account data are not exposed. They appear beneath the parent comment,
+cascade-delete with it, and do not increase human comment/ranking counts. Each
+edition has its own store. The companion's personal questions remain private.
+Article-comment prompts exclude personal memory, email and internal files.
+
 `dailynews_copilot.js` adds a question button to article comments. The API takes
 only an article ID and comment ID; the authenticated server supplies their current
-published text and the caller's identity. Replies are private and do not modify
-comments, likes or rankings. The same member connection serves both editions.
+published text and the caller's identity. Replies without publication consent remain
+private. The same member connection serves both editions.
 
 An article comment containing `@Copilot` now triggers that question after the
 comment POST succeeds. The POST returns the exact `createdCommentId`; the client
 never guesses from the latest comment. The question is a normal public comment
-and counts as one; the AI answer stays private. Reading somebody else's mention
+and counts as one; the AI answer follows the publication consent above. Reading somebody else's mention
 does not trigger their account or an automatic question. Existing question buttons
 remain available for reconnecting/retrying without posting another comment.
 

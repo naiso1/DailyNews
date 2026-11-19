@@ -40,7 +40,7 @@ async function main(){
  assert.equal(j.status,'done');assert.equal(sends,3);assert.equal(svc.retry(alice,query.id,unknown.createdAt).status,'done');
  await svc.disconnect(alice);assert.equal(svc.accountStatus(alice).connected,false);assert.equal(fs.existsSync(path.join(member,'abcdef01.bin')),false);await svc.close();
  const app=path.join(root,'app'),release=path.join(root,'releases/abcdef1');fs.mkdirSync(app);fs.mkdirSync(release,{recursive:true});
- for(const name of ['server.js','copilot-client.js','copilot-context.js','shared-identity.js'])fs.copyFileSync(path.join(__dirname,name),path.join(app,name));
+ for(const name of ['server.js','copilot-client.js','copilot-comment-answers.js','copilot-context.js','shared-identity.js'])fs.copyFileSync(path.join(__dirname,name),path.join(app,name));
  fs.writeFileSync(path.join(root,'active-release.txt'),'abcdef1');fs.writeFileSync(path.join(release,'news_data.js'),'window.LOADED_NEWS_DATA=[{id:"jp1",date:"2026-11-17",title:"内装照明",desc:"イルミの要約",url:"https://example.com"}];');fs.writeFileSync(path.join(release,'index.html'),'<title>test</title>');
  fs.mkdirSync(path.join(root,'data'),{recursive:true});fs.writeFileSync(path.join(root,'data/copilot-worker.json'),JSON.stringify({token:'a'.repeat(64),port:19084}));
  const port=19700+Math.floor(Math.random()*300),base='http://127.0.0.1:'+port;

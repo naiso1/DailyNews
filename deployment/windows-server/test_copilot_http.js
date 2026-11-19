@@ -21,7 +21,7 @@ async function verifyProviderIdentity(){
 async function verifyEdition(edition){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'dailynews-http-signin-')),app=path.join(root,'app'),release=path.join(root,'releases/abcdef2');
  fs.mkdirSync(app);fs.mkdirSync(release,{recursive:true});fs.mkdirSync(path.join(root,'data'));
- for(const n of ['server.js','shared-identity.js','copilot-client.js','copilot-context.js'])fs.copyFileSync(path.join(__dirname,n),path.join(app,n));
+ for(const n of ['server.js','shared-identity.js','copilot-client.js','copilot-comment-answers.js','copilot-context.js'])fs.copyFileSync(path.join(__dirname,n),path.join(app,n));
  fs.writeFileSync(path.join(root,'active-release.txt'),'abcdef2');fs.writeFileSync(path.join(release,'index.html'),'<title>test</title>');
  fs.writeFileSync(path.join(release,'news_data.js'),'window.LOADED_NEWS_DATA='+JSON.stringify([
   {id:'jp1',date:'2026-11-17',title:'公開記事',desc:'test',url:'https://example.com'},

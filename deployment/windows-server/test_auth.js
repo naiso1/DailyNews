@@ -14,6 +14,7 @@ const releaseDir = path.join(root, "releases", "abcdef1");
 fs.mkdirSync(appDir, { recursive: true });
 fs.mkdirSync(releaseDir, { recursive: true });
 fs.copyFileSync(path.join(__dirname, "server.js"), path.join(appDir, "server.js"));
+fs.copyFileSync(path.join(__dirname, "copilot-comment-answers.js"), path.join(appDir, "copilot-comment-answers.js"));
 fs.copyFileSync(path.join(__dirname, "shared-identity.js"), path.join(appDir, "shared-identity.js"));
 fs.writeFileSync(path.join(root, "active-release.txt"), "abcdef1\n", "ascii");
 fs.writeFileSync(path.join(releaseDir, "index.html"), "<!doctype html><title>test</title>");

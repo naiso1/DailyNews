@@ -697,7 +697,12 @@ async function loadInteractions() {
 function startInteractionPolling() {
   if (interactionPollTimer) return;
   interactionPollTimer = setInterval(() => {
-    if (!document.hidden) loadInteractions();
+    if (!document.hidden) {
+      loadInteractions();
+      const pending = document.querySelectorAll('.comment-section.open [data-copilot-public-answer="waiting"], .comment-section.open [data-copilot-public-answer="pending"]');
+      const ids = new Set(Array.from(pending, el => el.closest('.card[id^="card-"]')?.id.slice(5)).filter(Boolean));
+      for (const id of ids) void fetchInteractionDetail(id).catch(() => {});
+    }
   }, 15000);
 }
 
@@ -918,12 +923,17 @@ function renderItem(itemId) {
     elements.commentList.innerHTML = (data.comments || [])
       .map(
         (comment, index) => `
-          <div class="comment-item${comment.parentId ? " reply-comment" : ""}" data-comment-id="${Number(comment.id || 0)}">
+          <div class="comment-item${comment.parentId ? " reply-comment" : ""}" data-comment-id="${Number(comment.id || 0)}" data-comment-own="${comment.canDelete === true}">
             <div class="comment-user">${escapeHtml(comment.user || "Guest")}
               <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${escapeHtml(comment.date || "")}</span>
               ${comment.parentId ? '<span class="comment-reply-label">返信</span>' : ""}
             </div>
             <div class="comment-text">${formatCommentText(comment.text || "")}</div>
+            ${comment.copilotAnswer ? `<div class="copilot-public-answer" data-copilot-public-answer="${escapeHtml(comment.copilotAnswer.status)}">
+              <strong>Copilotの回答 · みんなに表示</strong>
+              <p>${comment.copilotAnswer.status === 'published' ? escapeHtml(comment.copilotAnswer.answer || '') : comment.copilotAnswer.status === 'unavailable' ? '回答を取得できませんでした。投稿者が接続・送信結果を確認してください。' : '回答を待っています。取得でき次第ここに保存します。'}</p>
+              ${comment.copilotAnswer.status === 'published' ? '<small>AIの回答です。事実と仮説を分けてご確認ください。</small>' : ''}
+            </div>` : ''}
             <div class="comment-actions">
               ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
               ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
@@ -961,6 +971,7 @@ async function fetchInteractionDetail(itemId) {
   }
   return detail;
 }
+window.dailyNewsRefreshCommentAnswers = fetchInteractionDetail;
 
 window.subscribeItem = (itemId, btnLike, btnComment, commentList) => {
   if (!liveElements[itemId]) liveElements[itemId] = {};
@@ -1436,7 +1447,8 @@ async function saveComment(itemId, text, parentCommentId = null, input = null) {
       `/interactions/${encodeURIComponent(itemId)}/comments`,
       {
         method: "POST",
-        body: { clientId: getClientId(), text, parentCommentId },
+        body: { clientId: getClientId(), text, parentCommentId,
+          ...(/^(jp|us|eu|cn|in|paper)\d+$/.test(itemId) && /(?:^|\s)@copilot(?=$|[\s、,:：?？])/i.test(text) ? {copilotAnswerVisibility:'public'} : {}) },
       },
     );
     saved = true;
