@@ -2551,7 +2551,7 @@ header.site-header {
         function renderIdeaImage(idea) {
             const config = window.DAILYNEWS_CONFIG;
             const existingExteriorImage = config.id === "exterior"
-                && /^images\/exabase_exterior_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea?.img || "");
+                && /^images\/(?:exabase|copilot)_exterior_[A-Za-z0-9_-]+\.(png|jpe?g|webp)$/i.test(idea?.img || "");
             if (!idea?.img || !(config.imageGenerationEnabled || existingExteriorImage)) return "";
             const label = ideaImageLabel(idea);
             return `<div class="idea-image-wrapper"><img src="${escapeHtml(idea.img)}" alt="${escapeHtml(idea.title)}の${label}" class="idea-img img-with-fallback" loading="lazy"><div class="fallback-overlay">イメージ画像</div><span class="idea-image-label">${label}</span></div>`;

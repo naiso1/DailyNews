@@ -33,4 +33,6 @@ assert.match(escaped, /src="images\/concept.png\?x=&quot;&amp;y=1"/);
 context.window.DAILYNEWS_CONFIG = {id: 'exterior', imageGenerationEnabled: false};
 assert.equal(context.renderIdeaImage(idea), '');
 assert.match(context.renderIdeaImage({...idea, img: 'images/exabase_exterior_2026-09-15_9.png'}), /AI生成イメージ（exaBase）/);
+assert.match(context.renderIdeaImage({...idea, img: 'images/copilot_exterior_460_4572843c9512a65f.png', imageProvider: 'copilot'}), /AI生成イメージ（Copilot）/);
+assert.equal(context.renderIdeaImage({...idea, img: 'images/copilot_interior_460_test.png', imageProvider: 'copilot'}), '');
 console.log('Idea image UI: provider attribution, legacy unknown images, escaping and visibility PASS');

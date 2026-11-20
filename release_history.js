@@ -2,6 +2,13 @@
 
 window.DAILYNEWS_RELEASE_HISTORY = [
   {
+    date: "2026-11-20",
+    title: "外装版のCopilot企画画像の表示を修正",
+    items: [
+      "外装版で生成済みのCopilot画像が表示されない不具合を修正しました。exaBaseとCopilotの両方の企画画像を表示します。掲載済みの画像を使い、画像の再生成や生成プロンプトの変更は行っていません。",
+    ],
+  },
+  {
     date: "2026-11-19",
     title: "Copilotで記事以外の疑問も相談",
     items: [
