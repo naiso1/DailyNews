@@ -171,7 +171,7 @@
       const shared=comment.querySelector('[data-copilot-public-answer]');
       if(shared?.dataset.copilotPublicAnswer==='published'||shared&&comment.dataset.commentOwn!=='true')continue;
       if(comment.querySelector('.copilot-controls'))continue;
-      const card=comment.closest('.card[id^="card-"]'),itemId=card?.id.slice(5),commentId=Number(comment.dataset.commentId);
+      const card=comment.closest('.card[data-news-id]'),itemId=card?.dataset.newsId,commentId=Number(comment.dataset.commentId);
       if(!/^(jp|us|eu|cn|in|paper)\d+$/.test(itemId||'')||!commentId)continue;
       const key=itemId+'-'+commentId;let state=states.get(key);const fresh=!state;
       if(!state){state={key,itemId,commentId,job:null};states.set(key,state);}
@@ -188,13 +188,15 @@
     const parent=document.querySelector('.header-top-actions')||document.querySelector('header#top');if(!parent)return;
     const b=element('button','Copilotに相談','copilot-news-entry');b.id='copilotNewsButton';b.type='button';b.onclick=()=>window.dailyNewsCopilotCompanion?window.dailyNewsCopilotCompanion.open():void newsDialog();parent.append(b);
   }
-  async function newsDialog(){
+  async function newsDialog(itemId){
     if(!who()){window.dailyNewsAccount?.openAuth?.('login','Copilotへの質問にはログインが必要です。');return;}
     const d=dialog('Copilot · ニュースに質問');d.classList.add('copilot-news-dialog');
     d.append(element('p','本人のCopilotに質問し、短い回答をここに表示します。この質問は公開コメントには投稿されません。'));
-    let state=states.get('news-question');if(!state){state={key:'news-question',kind:'question',job:null};states.set(state.key,state);}
+    const stateKey=itemId?'article-question-'+itemId:'news-question';
+    let state=states.get(stateKey);if(!state){state={key:stateKey,kind:'question',job:null};states.set(state.key,state);}
     const form=element('form'),scopeLabel=element('label','対象'),scope=element('select');scope.id='copilotNewsScope';scopeLabel.htmlFor=scope.id;
     for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索'],['general','一般的な質問']]){const o=element('option',label);o.value=value;scope.append(o);}
+    if(itemId){const o=element('option','この記事');o.value='article';scope.append(o);state.scope='article';state.itemId=itemId;}
     scope.value=state.scope||'new';scope.onchange=()=>{state.scope=scope.value;};
     const label=element('label','質問'),input=element('textarea');input.id='copilotNewsQuestion';label.htmlFor=input.id;input.rows=3;input.maxLength=1000;input.required=true;input.value=state.draft||'';
     input.placeholder='例：内装イルミに関するトレンドを教えて';input.oninput=()=>{state.draft=input.value;};
@@ -211,14 +213,18 @@
       state.loading=true;state.error='';render(state);
       try{const account=await api('/account');if(userKey!==member)return;
         if(!account.connected){state.error=messages.ACCOUNT_NOT_CONNECTED;await settings();return;}
-        const r=await api('/questions','POST',{scope:scope.value,question});if(userKey!==member)return;state.job=r.job;
+        const r=await api('/questions','POST',{scope:scope.value,question,...(scope.value==='article'?{itemId:state.itemId}:{})});if(userKey!==member)return;state.job=r.job;
         try{sessionStorage.setItem(savedKey(),state.job.id);}catch{}void poll(state,member);
       }catch(error){if(userKey===member)state.error=errorText(error);}finally{if(userKey===member){state.loading=false;render(state);}}
     };
-    if(!state.job&&!state.loading){let id;try{id=sessionStorage.getItem(savedKey());}catch{}
+    if(!itemId&&!state.job&&!state.loading){let id;try{id=sessionStorage.getItem(savedKey());}catch{}
       if(/^[a-f0-9]{64}$/.test(id||'')){const member=userKey;try{const r=await api('/jobs/'+id);if(userKey===member&&!state.loading&&!state.job){state.job=r.job;render(state);void poll(state,member);}}catch{}}}
   }
-  window.dailyNewsCopilot={supportsArticle,openSettings:settings,askComment:async(itemId,commentId)=>{
+  window.dailyNewsCopilot={supportsArticle,openSettings:settings,askArticle:itemId=>{
+    if(!supportsArticle(itemId))return;
+    if(window.dailyNewsCopilotCompanion)return window.dailyNewsCopilotCompanion.askArticle(itemId);
+    return newsDialog(itemId);
+  },askComment:async(itemId,commentId)=>{
     if(!supportsArticle(itemId)||!who())return;
     scan();const key=itemId+'-'+commentId;let state=states.get(key);
     if(!state){state={key,itemId,commentId,job:null};states.set(key,state);}

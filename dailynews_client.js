@@ -148,7 +148,7 @@ async function showMentionCandidates(input, showAll = false) {
     return;
   }
   const query = active?.query || "";
-  const itemId = input.closest('.card[id^="card-"]')?.id.slice(5);
+  const itemId = input.closest('.card[data-news-id]')?.dataset.newsId;
   const mentionUsers = window.dailyNewsCopilot?.supportsArticle(itemId)
     ? [{displayName:'Copilot',copilot:true}, ...users.filter(u => String(u.displayName).toLowerCase() !== 'copilot')]
     : users;
@@ -700,7 +700,7 @@ function startInteractionPolling() {
     if (!document.hidden) {
       loadInteractions();
       const pending = document.querySelectorAll('.comment-section.open [data-copilot-public-answer="waiting"], .comment-section.open [data-copilot-public-answer="pending"]');
-      const ids = new Set(Array.from(pending, el => el.closest('.card[id^="card-"]')?.id.slice(5)).filter(Boolean));
+      const ids = new Set(Array.from(pending, el => el.closest('.card[data-news-id]')?.dataset.newsId).filter(Boolean));
       for (const id of ids) void fetchInteractionDetail(id).catch(() => {});
     }
   }, 15000);
@@ -906,42 +906,53 @@ window.setupHoverReadTracking = setupHoverReadTracking;
 const liveElements = {};
 
 function renderItem(itemId) {
-  const elements = liveElements[itemId];
-  if (!elements) return;
-  const data = elements.lastData || getInteractionRenderData(itemId);
-  if (elements.btnLike) {
-    const count = elements.btnLike.querySelector(".count");
-    if (count) count.textContent = data.likes || 0;
-    elements.btnLike.classList.toggle("liked", data.liked);
-    updateLikeTooltip(elements.btnLike, data);
-  }
-  if (elements.btnComment) {
-    const count = elements.btnComment.querySelector(".count");
-    if (count) count.textContent = data.commentCount || 0;
-  }
-  if (elements.commentList) {
-    elements.commentList.innerHTML = (data.comments || [])
-      .map(
-        (comment, index) => `
-          <div class="comment-item${comment.parentId ? " reply-comment" : ""}" data-comment-id="${Number(comment.id || 0)}" data-comment-own="${comment.canDelete === true}">
-            <div class="comment-user">${escapeHtml(comment.user || "Guest")}
-              <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${escapeHtml(comment.date || "")}</span>
-              ${comment.parentId ? '<span class="comment-reply-label">返信</span>' : ""}
-            </div>
-            <div class="comment-text">${formatCommentText(comment.text || "")}</div>
-            ${comment.copilotAnswer ? `<div class="copilot-public-answer" data-copilot-public-answer="${escapeHtml(comment.copilotAnswer.status)}">
-              <strong>Copilotの回答</strong>
-              <p>${comment.copilotAnswer.status === 'published' ? escapeHtml(comment.copilotAnswer.answer || '') : comment.copilotAnswer.status === 'unavailable' ? '回答を取得できませんでした。投稿者が接続・送信結果を確認してください。' : '回答を待っています。取得でき次第ここに保存します。'}</p>
-              ${comment.copilotAnswer.status === 'published' ? '<small>AIの回答です。事実と仮説を分けてご確認ください。</small>' : ''}
-            </div>` : ''}
-            <div class="comment-actions">
-              ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
-              ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
-              ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">&#21066;&#38500;</button>`}
-            </div>
-          </div>`,
-      )
-      .join("");
+  const subscription = liveElements[itemId];
+  if (!subscription) return;
+  const data = subscription.lastData || getInteractionRenderData(itemId);
+  // A citation preview and the list can show the same article simultaneously.
+  const targets = [...document.querySelectorAll('.card[data-news-id]')]
+    .filter(card => card.dataset.newsId === itemId)
+    .map(card => ({
+      btnLike: card.querySelector('.action-btn[onclick*="toggleLike"]'),
+      btnComment: card.querySelector('.btn-comment'),
+      commentList: card.querySelector('.comment-section.open .comment-list'),
+    }));
+  if (!targets.length) targets.push(subscription); // Idea cards keep their existing subscription.
+  for (const elements of targets) {
+    if (elements.btnLike) {
+      const count = elements.btnLike.querySelector(".count");
+      if (count) count.textContent = data.likes || 0;
+      elements.btnLike.classList.toggle("liked", data.liked);
+      updateLikeTooltip(elements.btnLike, data);
+    }
+    if (elements.btnComment) {
+      const count = elements.btnComment.querySelector(".count");
+      if (count) count.textContent = data.commentCount || 0;
+    }
+    if (elements.commentList) {
+      elements.commentList.innerHTML = (data.comments || [])
+        .map(
+          (comment, index) => `
+            <div class="comment-item${comment.parentId ? " reply-comment" : ""}" data-comment-id="${Number(comment.id || 0)}" data-comment-own="${comment.canDelete === true}">
+              <div class="comment-user">${escapeHtml(comment.user || "Guest")}
+                <span style="font-weight:normal;color:#888;font-size:10px;margin-left:6px;">${escapeHtml(comment.date || "")}</span>
+                ${comment.parentId ? '<span class="comment-reply-label">返信</span>' : ""}
+              </div>
+              <div class="comment-text">${formatCommentText(comment.text || "")}</div>
+              ${comment.copilotAnswer ? `<div class="copilot-public-answer" data-copilot-public-answer="${escapeHtml(comment.copilotAnswer.status)}">
+                <strong>Copilotの回答</strong>
+                <p>${comment.copilotAnswer.status === 'published' ? escapeHtml(comment.copilotAnswer.answer || '') : comment.copilotAnswer.status === 'unavailable' ? '回答を取得できませんでした。投稿者が接続・送信結果を確認してください。' : '回答を待っています。取得でき次第ここに保存します。'}</p>
+                ${comment.copilotAnswer.status === 'published' ? '<small>AIの回答です。事実と仮説を分けてご確認ください。</small>' : ''}
+              </div>` : ''}
+              <div class="comment-actions">
+                ${comment.id ? `<button class="comment-like-btn${comment.liked ? " liked" : ""}" type="button" onclick="toggleCommentLike('${escapeHtml(itemId)}', ${comment.id}, ${comment.liked ? "false" : "true"})">&#128077; ${Number(comment.likes || 0)}</button>` : ""}
+                ${comment.id ? `<button class="comment-reply-btn" type="button" onclick="replyToComment('${escapeHtml(itemId)}', ${comment.id})">返信</button>` : ""}
+                ${comment.canDelete === false ? "" : `<button class="delete-btn" onclick="deleteComment('${escapeHtml(itemId)}', ${index})">&#21066;&#38500;</button>`}
+              </div>
+            </div>`,
+        )
+        .join("");
+    }
   }
   mergeInteractionData(itemId, {
     ...window.interactionsData[itemId],
@@ -1605,6 +1616,7 @@ const interactionObserver = new IntersectionObserver(
 
 function observeInteractionCards(root = document) {
   setupMentionInputs(root);
+  if (root.matches?.('.card, .idea-card')) interactionObserver.observe(root);
   root.querySelectorAll?.(".card, .idea-card").forEach((element) => {
     interactionObserver.observe(element);
   });

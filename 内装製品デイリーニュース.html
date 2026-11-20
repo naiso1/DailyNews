@@ -763,6 +763,10 @@ header.site-header {
 .action-btn.remove-news-btn:hover { color: #ff9baa; border-color: rgba(255, 107, 126, 0.4); background: rgba(255, 92, 112, 0.1); }
 .action-btn.image-edit-btn { color: #9fc3ff; }
 .action-btn.image-edit-btn:hover { color: #c7dcff; border-color: rgba(111, 167, 255, 0.42); background: rgba(111, 167, 255, 0.11); }
+.action-btn.article-copilot-btn { color: #a0e5d5; gap: 5px; }
+.article-copilot-btn svg, .article-settings-btn svg { width: 18px; height: 18px; flex: none; }
+.article-settings-popover { position: fixed; inset: auto; margin: 0; width: 200px; padding: 7px; border: 1px solid #45616c; border-radius: 12px; background: #142530; color: var(--text); box-shadow: 0 12px 35px #0008; }
+.article-settings-popover .action-btn { width: 100%; height: auto; min-height: 40px; border: 0; border-radius: 7px; justify-content: flex-start; }
 .action-btn.favorite-btn.active {
     color: #ffd540;
     background: rgba(255, 213, 64, 0.18);
@@ -2180,10 +2184,7 @@ header.site-header {
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
                         </button>
-                        <button class="action-btn" title="この記事へのご意見" onclick="window.dailyNewsAccount?.openFeedback('${item.id}', 'news'); event.stopPropagation();">ご意見</button>
-                        <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${item.id}', this); event.stopPropagation();">
-                            <span>🗑️</span>
-                        </button>
+                        ${renderArticleTools(item.id)}
                     </div>
                 </div>
             `).join("");
@@ -2262,10 +2263,7 @@ header.site-header {
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
                         </button>
-                        <button class="action-btn" title="この記事へのご意見" onclick="window.dailyNewsAccount?.openFeedback('${item.id}', 'news'); event.stopPropagation();">ご意見</button>
-                        <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${item.id}', this); event.stopPropagation();">
-                            <span>🗑️</span>
-                        </button>
+                        ${renderArticleTools(item.id)}
                     </div>
                 </div>
             `).join("");
@@ -3031,6 +3029,9 @@ header.site-header {
             }
             saveFavorites();
             updateFavoriteButton(btn, isFavorite(target));
+            document.querySelectorAll('.card[data-news-id]').forEach(card => {
+                if (card.dataset.newsId === target) updateFavoriteButton(card.querySelector('.favorite-btn'), isFavorite(target));
+            });
             updateFavoritesToggle();
             updateFavoritesActionsState();
             const changedKeys = existingKeys.length ? existingKeys : [target];
@@ -3442,6 +3443,133 @@ header.site-header {
             });
         }
 
+        function renderArticleTools(itemId) {
+            if (!/^(?:jp|us|eu|cn|in|paper)\d+$/.test(String(itemId))) return "";
+            return `<button type="button" class="action-btn article-copilot-btn" title="この記事をCopilotに質問" aria-label="この記事をCopilotに質問" onclick="window.dailyNewsCopilot?.askArticle('${itemId}'); event.stopPropagation();">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 10v7a3 3 0 0 1-3 3H9l-5 2v-5a3 3 0 0 1-2-3V7a3 3 0 0 1 3-3h6"/><path d="m17 1 1.7 4.3L23 7l-4.3 1.7L17 13l-1.7-4.3L11 7l4.3-1.7Z"/></svg><span>Copilot</span></button>
+                <button type="button" class="action-btn article-settings-btn" title="記事の設定" aria-label="記事の設定" aria-haspopup="dialog" aria-expanded="false" onclick="toggleArticleSettings('${itemId}', this); event.stopPropagation();">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m9 3-.6 2.2-2 .9L4.3 5.5 2 9.5l1.5 1.6v1.8L2 14.5l2.3 4 2.1-.6 2 .9L9 21h6l.6-2.2 2-.9 2.1.6 2.3-4-1.5-1.6v-1.8L22 9.5l-2.3-4-2.1.6-2-.9L15 3Z"/><circle cx="12" cy="12" r="3"/></svg></button>`;
+        }
+
+        function toggleArticleSettings(itemId, trigger) {
+            let menu = document.getElementById("articleSettingsPopover");
+            if (!menu) {
+                menu = document.createElement("div");
+                menu.id = "articleSettingsPopover";
+                menu.className = "article-settings-popover";
+                menu.setAttribute("popover", "auto");
+                menu.setAttribute("role", "dialog");
+                menu.setAttribute("aria-label", "記事の設定");
+                menu.addEventListener("toggle", () => menu._trigger?.setAttribute("aria-expanded", String(menu.matches(":popover-open"))));
+                document.body.append(menu);
+            }
+            const wasThis = menu.matches(":popover-open") && menu._trigger === trigger;
+            if (menu.matches(":popover-open")) menu.hidePopover();
+            menu._trigger?.setAttribute("aria-expanded", "false");
+            if (wasThis) return;
+            menu._trigger = trigger;
+            trigger.setAttribute("aria-controls", menu.id);
+            menu.replaceChildren();
+            for (const [label, className, action] of [
+                ["画像を変更", "image-edit-btn", () => window.requestImageUrlChange(itemId, trigger)],
+                ["一覧から削除…", "remove-news-btn", () => window.requestArticleRemoval(itemId, trigger)],
+            ]) {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = `action-btn ${className}`;
+                button.textContent = label;
+                button.onclick = () => { menu.hidePopover(); action(); };
+                menu.append(button);
+            }
+            menu.showPopover();
+            const rect = trigger.getBoundingClientRect();
+            menu.style.left = `${Math.max(8, Math.min(rect.left, innerWidth - menu.offsetWidth - 8))}px`;
+            menu.style.top = `${Math.max(8, Math.min(rect.bottom + 6, innerHeight - menu.offsetHeight - 8))}px`;
+            trigger.setAttribute("aria-expanded", "true");
+            menu.firstElementChild.focus({ preventScroll: true });
+        }
+
+        // The list and Copilot citations share one card, including image and interaction controls.
+        function createNewsCard(n, { preview = false } = {}) {
+            const interaction = window.interactionsData?.[n.id] || {};
+            const likeCount = interaction.likes || 0;
+            const commentCount = interaction.comments || 0;
+            const readCount = (typeof interaction.reads === "number")
+                ? interaction.reads
+                : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
+            const favActive = isFavorite(n.id);
+            const favSelected = !preview && favoritesOnly && selectedFavoriteKeys.has(n.id);
+            const card = document.createElement("article");
+            card.className = "card";
+            card.id = `${preview ? "companion-card" : "card"}-${n.id}`;
+            card.dataset.newsId = n.id;
+            const isNew = isNewContent(n);
+            const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
+            const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
+            const resolvedImage = getNewsImageUrl(n);
+            const displayImg = getDisplayImageUrl(resolvedImage);
+            card.innerHTML = `
+        <div class="thumb">
+            ${n.country === 'paper' && n.summaryBasis && !resolvedImage
+                ? '<div style="height:100%;display:grid;place-items:center;color:var(--muted);font-weight:700">論文（画像なし）</div>'
+                : `<img src="${escapeHtml(displayImg || '')}" data-original-src="${escapeHtml(resolvedImage)}" alt="${escapeHtml(n.title)}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
+            ${isNew ? '<span class="new-badge">New</span>' : ''}
+            <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
+            <span class="relevance-badge"${relevanceReason}>関連度 ${relevance}%</span>
+            ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
+        </div>
+        <div class="content">
+            <div class="title">${n.title}</div>
+            <p class="desc">${n.desc}</p>
+            ${n.country === 'paper' && n.summaryBasis ? `<p class="paper-source-details" style="font-size:12px;color:var(--muted);line-height:1.6">${escapeHtml(n.summaryBasis)}${n.paperPublicationDate ? `<br>発行日: ${escapeHtml(n.paperPublicationDate)}` : ''}${n.paperOnlineDate ? `<br>オンライン公開日: ${escapeHtml(n.paperOnlineDate)}` : ''}${n.doi ? `<br>DOI: ${escapeHtml(n.doi)}` : ''}</p>` : ''}
+            ${n.developmentLane === 'transfer' && n.developmentApplication ? `<p class="development-application" style="font-size:12px;line-height:1.6"><strong>外装への応用のヒント（仮説）</strong><br>${escapeHtml(n.developmentApplication)}</p>` : ''}
+            ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
+            ${n.summary ? `
+            <div class="summary-wrapper">
+                <button class="summary-btn" onclick="toggleSummary(this)">詳細要約を見る</button>
+                <div class="summary-content">${n.summary}</div>
+            </div>` : ''}
+            ${renderRelatedNewsSources(n)}
+            <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
+
+
+            <div class="actions">
+                <a class="btn" href="${escapeHtml(window.DailyNewsAnnotations?.articleUrl(n) ?? n.url)}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
+
+                ${!preview && favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
+                    <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                </button>
+                <button class="action-btn" onclick="toggleLike('${n.id}', this)">
+                    <span>👍</span> <span class="count">${likeCount}</span>
+                </button>
+                <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
+                    <span>💬</span> <span class="count">${commentCount}</span>
+                </button>
+                ${renderArticleTools(n.id)}
+
+                <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
+                <span class="source">${n.source}</span>
+                <span class="card-date-meta">${n.date}</span>
+                <span class="id-badge">${n.id}</span>
+            </div>
+
+            <div class="comment-section">
+                <div class="comment-list">
+                    <!-- Demo Comments -->
+                </div>
+                <div class="comment-input-area">
+                    <input type="text" class="comment-input" placeholder="コメントを入力..." onkeypress="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229) submitComment('${n.id}', this)">
+                    <button class="comment-submit" onclick="submitComment('${n.id}', this.previousElementSibling)">送信</button>
+                </div>
+            </div>
+
+        </div>`;
+
+            return card;
+        }
+        window.createDailyNewsCard = (item) => createNewsCard(item, { preview: true });
+
         function applyFilters({ preserveCards = false } = {}) {
             let from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
@@ -3555,86 +3683,7 @@ header.site-header {
                     if (grid.children[index] !== retained) grid.insertBefore(retained, grid.children[index] || null);
                     return;
                 }
-                const interaction = window.interactionsData?.[n.id] || {};
-                const likeCount = interaction.likes || 0;
-                const commentCount = interaction.comments || 0;
-                const readCount = (typeof interaction.reads === "number")
-                    ? interaction.reads
-                    : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
-                const favActive = isFavorite(n.id);
-                const favSelected = favoritesOnly && selectedFavoriteKeys.has(n.id);
-                const card = document.createElement("article");
-                card.className = "card";
-                card.id = `card-${n.id}`;
-                card.dataset.newsId = n.id;
-                const isNew = isNewContent(n);
-                const relevance = typeof n.interiorScore === "number" ? n.interiorScore : computeInteriorRelevance(n);
-                const relevanceReason = n.interiorReason ? ` title="${escapeHtml(n.interiorReason)}"` : "";
-                const resolvedImage = getNewsImageUrl(n);
-                const displayImg = getDisplayImageUrl(resolvedImage);
-                card.innerHTML = `
-            <div class="thumb">
-                ${n.country === 'paper' && n.summaryBasis && !resolvedImage
-                    ? '<div style="height:100%;display:grid;place-items:center;color:var(--muted);font-weight:700">論文（画像なし）</div>'
-                    : `<img src="${escapeHtml(displayImg || '')}" data-original-src="${escapeHtml(resolvedImage)}" alt="${escapeHtml(n.title)}" loading="lazy" referrerpolicy="no-referrer" class="img-with-fallback"><div class="fallback-overlay">イメージ画像</div>`}
-                ${isNew ? '<span class="new-badge">New</span>' : ''}
-                <span class="country-badge">${COUNTRY_FLAGS[n.country]} ${COUNTRY_NAMES[n.country]}</span>
-                <span class="relevance-badge"${relevanceReason}>関連度 ${relevance}%</span>
-                ${((n.img || "").includes('unsplash') || (n.img || "").includes('placeholder') || (n.note && n.note.includes('※'))) ? '<div class="image-note">※イメージ画像</div>' : ''}
-            </div>
-            <div class="content">
-                <div class="title">${n.title}</div>
-                <p class="desc">${n.desc}</p>
-                ${n.country === 'paper' && n.summaryBasis ? `<p class="paper-source-details" style="font-size:12px;color:var(--muted);line-height:1.6">${escapeHtml(n.summaryBasis)}${n.paperPublicationDate ? `<br>発行日: ${escapeHtml(n.paperPublicationDate)}` : ''}${n.paperOnlineDate ? `<br>オンライン公開日: ${escapeHtml(n.paperOnlineDate)}` : ''}${n.doi ? `<br>DOI: ${escapeHtml(n.doi)}` : ''}</p>` : ''}
-                ${n.developmentLane === 'transfer' && n.developmentApplication ? `<p class="development-application" style="font-size:12px;line-height:1.6"><strong>外装への応用のヒント（仮説）</strong><br>${escapeHtml(n.developmentApplication)}</p>` : ''}
-                ${window.DailyNewsAnnotations?.renderCurrency(n) || ""}
-                ${n.summary ? `
-                <div class="summary-wrapper">
-                    <button class="summary-btn" onclick="toggleSummary(this)">詳細要約を見る</button>
-                    <div class="summary-content">${n.summary}</div>
-                </div>` : ''}
-                ${renderRelatedNewsSources(n)}
-                <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
-
-                
-                <div class="actions">
-                    <a class="btn" href="${escapeHtml(window.DailyNewsAnnotations?.articleUrl(n) ?? n.url)}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
-                    
-                    ${favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
-                    <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
-                        <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
-                    </button>
-                    <button class="action-btn" onclick="toggleLike('${n.id}', this)">
-                        <span>👍</span> <span class="count">${likeCount}</span>
-                    </button>
-                    <button class="action-btn btn-comment" onclick="toggleComments('${n.id}', this)">
-                        <span>💬</span> <span class="count">${commentCount}</span>
-                    </button>
-                    <button class="action-btn" title="この記事へのご意見" onclick="window.dailyNewsAccount?.openFeedback('${n.id}', 'news'); event.stopPropagation();">ご意見</button>
-                        <button class="action-btn remove-news-btn" title="理由を入力して一覧から削除" aria-label="理由を入力して一覧から削除" onclick="requestArticleRemoval('${n.id}', this)">
-                        <span>🗑️</span>
-                    </button>
-                    <button class="action-btn image-edit-btn" title="画像URLを追加・変更" aria-label="画像URLを追加・変更" onclick="requestImageUrlChange('${n.id}', this)">
-                        <span>🖼️</span>
-                    </button>
-
-                    <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
-                    <span class="source">${n.source}</span>
-                    <span class="card-date-meta">${n.date}</span>
-                    <span class="id-badge">${n.id}</span>
-                </div>
-    
-                <div class="comment-section">
-                    <div class="comment-list">
-                        <!-- Demo Comments -->
-                    </div>
-                    <div class="comment-input-area">
-                        <input type="text" class="comment-input" placeholder="コメントを入力..." onkeypress="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229) submitComment('${n.id}', this)">
-                        <button class="comment-submit" onclick="submitComment('${n.id}', this.previousElementSibling)">送信</button>
-                    </div>
-                </div>
-    
-            </div>`;
+                const card = createNewsCard(n);
                 grid.insertBefore(card, grid.children[index] || null);
                 window.setupNewsImageCarousel?.(card, n);
             });
@@ -3723,6 +3772,7 @@ header.site-header {
         }
 
         window.refreshNewsVisibility = () => {
+            window.dailyNewsCopilotCompanion?.refreshArticle?.();
             document.getElementById("totalCount").textContent = visibleNewsData().length;
             updateNewCountBadges();
             refreshNewsWithoutInterruptingComments();

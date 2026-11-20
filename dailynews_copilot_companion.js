@@ -60,7 +60,7 @@
   const status=el('p',undefined,'dncp-status');status.setAttribute('role','status');
   const composer=el('form',undefined,'dncp-composer'),contextRow=el('div',undefined,'dncp-context'),scopeLabel=el('label','対象'),select=el('select');select.id='dncpScope';scopeLabel.htmlFor=select.id;
   for(const [value,label] of [['new','本日のNEW'],['all','掲載ニュース全体から検索'],['general','一般的な質問'],['article','開いている記事']]){const o=el('option',label);o.value=value;if(value==='article')o.disabled=true;select.append(o);}
-  select.onchange=()=>{scope=select.value;save();};
+  select.onchange=()=>{scope=select.value;save();renderStatus();};
   const detailToggle=button('詳細',()=>{details.hidden=!details.hidden;detailToggle.setAttribute('aria-expanded',String(!details.hidden));},'dncp-text-button');detailToggle.setAttribute('aria-expanded','false');contextRow.append(scopeLabel,select,detailToggle);
   const details=el('div',undefined,'dncp-details');details.hidden=true;
   details.append(el('p','NEWは対象ニュースの要約をまとめて参照します（最大80件）。全体は関連する最大30件。「一般的な質問」は記事を指定せず相談できます。必要に応じて一般知識や利用可能なWeb検索も使います。元記事や読者コメントを取得できるとは限りません。質問・回答は公開コメントに投稿されません。'));
@@ -71,13 +71,16 @@
   input.oninput=()=>{draft=input.value;save();renderStatus();};
   input.onkeydown=e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)&&!e.isComposing){e.preventDefault();void submit();}};
   const send=el('button','送信','dncp-send');send.type='submit';send.setAttribute('aria-label','質問する');field.append(input,send);
-  const hint=el('small','Ctrl＋Enterで送信 · 回答は自分だけに表示','dncp-hint');composer.append(contextRow,details,followup,status,field,hint);composer.onsubmit=e=>{e.preventDefault();void submit();};panel.append(header,connection,transcript,composer);
+  const articleContext=button('',()=>{article.hidden=false;reading=true;host.classList.add('dncp-reading');},'dncp-current-article');articleContext.hidden=true;
+  const hint=el('small','Ctrl＋Enterで送信 · 回答は自分だけに表示','dncp-hint');composer.append(contextRow,articleContext,details,followup,status,field,hint);composer.onsubmit=e=>{e.preventDefault();void submit();};panel.append(header,connection,transcript,composer);
   const article=el('section',undefined,'dncp-article');article.hidden=true;article.setAttribute('aria-label','参照記事');
   host.append(launcher,panel,article);
   transcript.onscroll=()=>{scroll=transcript.scrollTop;clearTimeout(saveTimer);saveTimer=setTimeout(save,150);};
   function renderStatus(){
     connection.textContent=!member?'DailyNewsへのログインが必要です':account?.connected?`${who()?.displayName||who()?.name||'本人'}のCopilotに接続済み · 自分だけに表示`:'接続を確認してください';
     status.textContent=notice;status.hidden=!notice;
+    articleContext.hidden=scope!=='article'||!previewItem;
+    articleContext.textContent=previewItem?'参照記事：'+previewItem.title:'';
     send.disabled=!member||sending||restoring||records.some(r=>r.job&&!terminal(r.job))||!draft.trim();
     send.textContent=sending||records.some(r=>r.job&&!terminal(r.job))?'回答中…':'送信';
     select.disabled=sending;followup.replaceChildren();followup.hidden=!replyTo;
@@ -87,21 +90,35 @@
   function open(){if(!member){window.dailyNewsAccount?.openAuth?.('login','本人のCopilotへの質問にはログインが必要です。');return;}
     opened=true;reading=false;panel.hidden=false;launcher.hidden=true;host.classList.remove('dncp-reading');document.body.classList.add('dncp-open');transcript.scrollTop=scroll;save();void checkAccount();}
   function close(){scroll=transcript.scrollTop;opened=false;panel.hidden=true;launcher.hidden=false;document.body.classList.remove('dncp-open');hideArticle();save();}
-  function hideArticle(){article.hidden=true;reading=false;host.classList.remove('dncp-reading');previewItem=null;select.querySelector('[value="article"]').disabled=true;if(scope==='article'){scope='new';select.value=scope;}openingSource?.focus({preventScroll:true});}
+  function disposeArticle(){article.querySelectorAll('.card').forEach(card=>card._disposeNewsImageCarousel?.());article.replaceChildren();}
+  function hideArticle(){article.hidden=true;reading=false;host.classList.remove('dncp-reading');previewItem=null;disposeArticle();select.querySelector('[value="article"]').disabled=true;if(scope==='article'){scope='new';select.value=scope;}openingSource?.focus({preventScroll:true});renderStatus();}
   function showArticle(source,sourceButton){
-    const item=window.resolveDailyNewsItem?.(source.id);article.replaceChildren();openingSource=sourceButton;
-    const bar=el('div',undefined,'dncp-article-bar');bar.append(button('← ニュース一覧に戻る',hideArticle,'dncp-text-button'),el('small','DailyNews 掲載記事'));article.append(bar);
-    if(!item){article.append(el('p','この記事は現在の掲載一覧にありません。非表示・更新された可能性があります。回答は会話欄に残っています。'));}
+    const item=window.resolveDailyNewsItem?.(source.id);disposeArticle();openingSource=sourceButton;previewItem=null;
+    const bar=el('div',undefined,'dncp-article-bar');bar.append(button('← 記事を閉じる',hideArticle,'dncp-text-button'),el('small','DailyNews 掲載記事'));article.append(bar);
+    if(!item){select.querySelector('[value="article"]').disabled=true;if(scope==='article'){scope='new';select.value=scope;}article.append(el('p','この記事は現在の掲載一覧にありません。非表示・更新された可能性があります。回答は会話欄に残っています。'));}
     else{
       previewItem=item;select.querySelector('[value="article"]').disabled=false;
-      const body=el('div',undefined,'dncp-article-body'),url=httpUrl(window.getNewsImageUrl?.(item)||item.img);
-      if(url){const img=el('img');img.src=url;img.alt='';img.onerror=()=>img.remove();img.onload=()=>{if(img.naturalWidth<=2)img.remove();};body.append(img);}
-      const copy=el('div',undefined,'dncp-article-copy'),title=el('h2',item.title);title.tabIndex=-1;
-      copy.append(el('small',`${item.source||''} · ${item.date||''}`),title,el('h3','掲載要約'),el('p',item.desc||'要約は登録されていません。'));
-      const actions=el('div',undefined,'dncp-article-actions');actions.append(button('この記事について相談',()=>{scope='article';select.value=scope;reading=false;host.classList.remove('dncp-reading');input.focus();save();},'dncp-primary'));
-      const sourceUrl=httpUrl(item.url);if(sourceUrl){const a=el('a','元サイトを別タブで開く ↗');a.href=sourceUrl;a.target='_blank';a.rel='noopener noreferrer';actions.append(a);}copy.append(actions);body.append(copy);article.append(body);
+      const card=window.createDailyNewsCard(item);article.append(card);
+      window.setupNewsImageCarousel?.(card,item);window.wireImageFallbacks?.(article);
+      window.refreshInteractionCounts?.();
     }
-    const back=button('会話に戻る',()=>{reading=false;host.classList.remove('dncp-reading');},'dncp-mobile-return dncp-primary');article.append(back);article.hidden=false;article.scrollTop=0;reading=true;host.classList.add('dncp-reading');
+    const back=button('会話に戻る',()=>{reading=false;host.classList.remove('dncp-reading');},'dncp-mobile-return dncp-primary');article.append(back);article.hidden=false;article.scrollTop=0;reading=true;host.classList.add('dncp-reading');renderStatus();
+  }
+  function askArticle(itemId){
+    if(!member){open();return;}
+    const item=window.resolveDailyNewsItem?.(itemId);if(!item)return;
+    const trigger=document.activeElement;open();
+    if(previewItem?.id!==item.id||!article.querySelector('.card'))showArticle(item,trigger);
+    scope='article';select.value=scope;reading=false;host.classList.remove('dncp-reading');
+    renderStatus();save();input.focus();
+  }
+  function refreshArticle(){
+    if(!previewItem)return;
+    const item=window.resolveDailyNewsItem?.(previewItem.id);
+    if(!item){hideArticle();return;}
+    const card=article.querySelector('.card'),img=card?.querySelector('.thumb img');
+    if(img){delete img.dataset.failed;img.style.objectFit='';window.setNewsImageSource?.(img,window.getNewsImageUrl?.(item));}
+    if(card)window.setupNewsImageCarousel?.(card,item);
   }
   function sourceLink(source,label){const b=button(label||source.title||source.id,()=>showArticle(source,b),'dncp-source');b.title=source.title||source.id;b.setAttribute('aria-label','記事を開く：'+(source.title||source.id));return b;}
   function renderRecord(r){
@@ -155,7 +172,7 @@
     try{await verifyMember(stamp);for(const r of records.filter(r=>validJob(r.id))){await readJob(r,stamp);if(!same(stamp))return;}}
     catch(e){if(same(stamp))notice=errText(e);}finally{if(same(stamp)){restoring=false;replyTo=records.some(r=>r.job?.id===saved.replyTo&&r.job.status==='done')?saved.replyTo:null;render();transcript.scrollTop=savedScroll;scroll=savedScroll;save();schedulePoll();}}
   }
-  window.dailyNewsCopilotCompanion={open};
+  window.dailyNewsCopilotCompanion={open,askArticle,refreshArticle};
   window.addEventListener('dailynews:account-changed',()=>void changed());window.addEventListener('dailynews:account-ready',()=>void changed(),{once:true});
   window.addEventListener('focus',()=>{if(opened&&member)void checkAccount();});
   if(window.dailyNewsAccount?.ready)void changed();

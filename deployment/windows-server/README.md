@@ -65,6 +65,11 @@ The companion retains draft text and job IDs in member/edition-scoped
 sessionStorage. Answers are loaded from owner-checked jobs, never cached there.
 Account changes clear private UI and the previous tab state. Article citations
 open an independent preview without modifying the news filters or page scroll.
+The preview uses the same news-card renderer and controls as the list, with a
+separate DOM ID and a shared `data-news-id`. Counts and open comment answers are
+updated in both places. The per-article Copilot button selects that article in
+the caller's companion without submitting; image changes and reasoned removal
+remain behind the article settings popover. The card feedback shortcut is removed.
 Follow-up is explicit: the chosen prior question/answer excerpt is added to the
 new question within the existing 1000-character limit. It is not a claim to reuse
 the provider's conversation session. Source selection and answer bounds remain
