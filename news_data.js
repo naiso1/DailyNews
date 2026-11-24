@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-11-24 01:32";
+window.NEWS_UPDATED_AT = "2026-11-25 01:40";
 
 window.LOADED_NEWS_DATA = [
 
@@ -262389,6 +262389,700 @@ window.LOADED_NEWS_DATA = [
         imageInterior: false,
         country: "jp",
         img: "https://media.image.infoseek.co.jp/isnews/photos/motorfan/motorfan_20261123717_0-enlarge.jpg",
+        note: ""
+    },
+    // 2026-11-24 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2325",
+        title: "トヨタセコイア改良新型、オフロード仕様「トレイルハンター」初設定",
+        desc: "トヨタはフルサイズSUV『セコイア』の改良新型を発表し、オフロード仕様「トレイルハンター」を初設定した。同パッケージにはオールドマンエミュー製サスペンションやスキッドプレートが標準装備され、全グレードにi-FORCE MAXハイブリッドを搭載して最大牽引能力約4140kgを実現している。",
+        url: "https://news.yahoo.co.jp/articles/e92f06d08efc67658181ff1417718c8cbfeaa22a",
+        source: "レスポンス",
+        date: "2026-11-24",
+        tags: [],
+    
+        sourceExcerpt: "■ 全グレードにi-FORCE MAXハイブリッドを搭載改良新型セコイアの全グレードに、3.4リッターツインターボV6エンジンとモータージェネレーターを組み合わせたトヨタのi-FORCE MAXハイブリッドシステムが搭載される。",
+        interiorScore: 33,
+        interiorReason: "The article focuses on exterior design, off-road hardware (suspension, tires), a",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-00000007-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2326",
+        title: "オグショー、ディフェンダー110用ベッドキットを2026年11月発売",
+        desc: "オグショーはランドローバー「ディフェンダー110」専用の車中泊キットを2026年11月20日に販売開始する。ブラックレザー素材のマットが純正インテリアと調和し、セカンドシートまで活用したフラットな就寝スペースを実現している。片側を外せば3名乗車も可能で、ベッド下には大型荷物を収納できる設計となっている。",
+        url: "https://news.yahoo.co.jp/articles/b4d1e6f8874b56220c19d0eae8fc51fc2b75c39d",
+        source: "Auto Messe Web",
+        date: "2026-11-24",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "セカンドシート部分まで活用してフラットな就寝スペースを確保しながら、ベッド下には大型荷物を収納できる設計とした。",
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-00010005-amweb-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2327",
+        title: "フェラーリ「ルーチェ」、物理ボタン採用のコックピットが欧州で革新賞",
+        desc: "フェラーリ初の量産BEV「ルーチェ」は、ジョニー・アイブ氏率いるLoveFromと共同開発し、物理ボタンやダイヤルを備えたコックピットが特徴だ。「ゴールデン・ステアリング・ホイール2026」でベスト・イノベーション賞を受賞した。",
+        url: "https://news.yahoo.co.jp/articles/841b500a0947418a1a6cdc7ee0134787ed6ac0e2",
+        source: "VAGUE",
+        date: "2026-11-24",
+        tags: ["コックピット", "新素材", "EV"],
+    
+        sourceExcerpt: "フェラーリ初のBEV「ルーチェ」を写真で見る（30枚以上） ゴールデン・ステアリング・ホイールは1976年に創設され、2026年に50周年を迎えた歴史ある欧州の自動車賞。",
+        interiorScore: 68,
+        interiorReason: "The article explicitly details the interior design philosophy of the Ferrari Luc",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-10477529-vague-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2328",
+        title: "Ottocast、配線不要のポータブルディスプレイオーディオ「OttoScreen Link」を発売",
+        desc: "Ottocastは2026年11月19日、シガーソケット給電で使える9.3インチのポータブルディスプレイオーディオ「OttoScreen Link」を発売した。純正ナビ交換や配線加工が不要で、ワイヤレス接続によりApple CarPlayやAndroid Autoを利用できる。通常価格は2万2800円（税込）だが、クーポン適用で1万3430円（税込）となる。BluetoothやFMトランスミッターなど4種の音声出力に対応し、別売りのヘッドレストホルダーを使えば後席モニターとしても活用できる。",
+        url: "https://news.yahoo.co.jp/articles/7eac4d9f8e7faedfc851db698d6f0a1553d0d329",
+        source: "ベストカーWeb",
+        date: "2026-11-24",
+        tags: ["AR", "ディスプレイ", "コネクテッド", "AI", "音響"],
+    
+        sourceExcerpt: "Ottocastから登場した「OttoScreen Link」は、シガーソケットから電源を取るだけで使える9.3インチのポータブルディスプレイオーディオだ。",
+        interiorScore: 95,
+        interiorReason: "The article details a specific portable display audio device (OttoScreen Link) w",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-00000017-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2329",
+        title: "チェリーiCAR V27、タンカラー内装に15.4インチディスプレイ",
+        desc: "チェリー「iCAR V27」の内装は合皮とスエードを組み合わせタンカラーで統一した暖かみのある空間が特徴です。ダッシュボード中央の15.4インチディスプレイの下にエアコン操作用の物理ボタンを設け、インストルメントパネルには8.8インチディスプレイを採用しています。",
+        url: "https://news.yahoo.co.jp/articles/a76d3db02f1d3fae2a50c052ad760b4c86b80b46",
+        source: "くるまのニュース",
+        date: "2026-11-24",
+        tags: ["AR", "ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "昨今の中国車らしく、ダッシュボードの中央には15.4インチのディスプレイを配置、操作性を重視して真下にはエアコン操作用の物理ボタンも設けています。",
+        interiorScore: 77,
+        interiorReason: "Detailed review of interior materials (suede/leather), specific display sizes (1",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-01143565-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2330",
+        title: "トヨタ ハリアー最安グレード「G」に8ウェイ電動シートと12.3インチメーターを標準装備",
+        desc: "トヨタハリアーの最廉価グレード「G」は、運転席に前後・背もたれ・座面高さを調整できる8ウェイパワーシートと2ウェイランバーサポートを備える。また、ファブリックと合成皮革を組み合わせたシートや12.3インチTFTカラーメーターが標準で、助手席は手動調整式となる。",
+        url: "https://news.yahoo.co.jp/articles/2f66207f75aaa1a2ef6cf1fb64033082f262e678",
+        source: "くるまのニュース",
+        date: "2026-11-24",
+        tags: ["シート", "新素材", "EV"],
+    
+        sourceExcerpt: "室内では、ファブリックと合成皮革を組み合わせたシートを採用しています。",
+        interiorScore: 75,
+        interiorReason: "Detailed breakdown of interior equipment (seats, HMI displays, climate control)",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-01145017-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2331",
+        title: "ステップワゴンe:HEVスパーダの特別仕様車、2列目シートヒーターを新採用",
+        desc: "ホンダはステップワゴンe:HEVスパーダの特別仕様車「ブラックエディション」を発売した。3列シートの室内にはファブリックとプライムスムースを組み合わせたシートを備え、2列目にはオットマンに加え、3段階温度調節可能なシートヒーターが新採用された。さらにステアリング下部ガーニッシュはピアノブラック仕上げとなり、ルームランプやスライドドアのカーテシーランプもLED化されている。価格は418万5500円（消費税込）である。",
+        url: "https://news.yahoo.co.jp/articles/bf01bc293ac04aa4fa6b704ca75275c3b56284a5",
+        source: "くるまのニュース",
+        date: "2026-11-24",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "3列シートの室内には、ファブリックとプライムスムース（合皮）を組み合わせたシートを備えます。",
+        interiorScore: 67,
+        interiorReason: "Article details specific interior comfort and trim upgrades for a minivan, inclu",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-01144747-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2332",
+        title: "BYD方程豹Ti9、折りたたみ式ステアリングと30インチディスプレイ採用",
+        desc: "BYDの「方程豹Ti9」は、運転席に30インチ大型ディスプレイを備え、最上級グレードでは停車中に約10秒でステアリングを収納できる機能を搭載している。2列目には電動レッグレスト付き独立シートが設けられ、中国市場では27万9900元から販売されている。",
+        url: "https://news.yahoo.co.jp/articles/f1a413a1244eb060b69064c19eace5dddad08a05",
+        source: "くるまのニュース",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        sourceExcerpt: "ステアリングを収納することで、運転席でもゆったりとくつろげる空間を実現しています。",
+        interiorScore: 100,
+        interiorReason: "Detailed flagship interior refresh featuring a folding steering wheel (steer-by-",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-01145099-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2333",
+        title: "VW ID.バズ・ビーチ、折りたたみベッドや遮光カーテンで車中泊対応",
+        desc: "フォルクスワーゲンは電動ミニバン『ID.バズ』のキャンピング仕様『ID.バズ・ビーチ』を公開した。後部に折りたたみ式のダブルベッド、小型モジュラー式ダイニングセット、遮光カーテン、フロントウィンドウ用換気グリルを備え、車中泊に対応する。5人乗りと7人乗りの両モデルで選択可能で、家具は使用しない際にリアベンチシートの後ろに収納できる。また、『オーバーナイト』モードを搭載し、充電せずに48時間エアコンを使用できる。英国では来月から5万4000ポンドから販売予定だ。",
+        url: "https://news.yahoo.co.jp/articles/741719326b2170c44d4c78116ce1657e703c125e",
+        source: "AUTOCAR JAPAN",
+        date: "2026-11-24",
+        tags: ["シート", "EV"],
+    
+        sourceExcerpt: "このパッケージは5人乗りと7人乗りの両モデルで選択可能で、家具を使用しない際はリアベンチシートの後ろに収納できる。",
+        interiorScore: 66,
+        interiorReason: "The article details a specific interior configuration (ID. Buzz Beach) featuring",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261124-01296890-autocar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us2123",
+        title: "カーロール・シェルビーが運転した1965年型フォードGT40 MkIがMecumオークションに再登場",
+        desc: "1965年型Ford GT40 MkIのChassis P/1018は、Carroll Shelbyの運転記録が残る希少車で、2027年1月のMecum Kissimmeeオークションに出品される。",
+        url: "https://www.motor1.com/news/816605/carroll-shelby-1965-ford-gt40/",
+        source: "Motor1",
+        date: "2026-11-24",
+        tags: ["AR"],
+    
+        sourceExcerpt: "1965 Ford GT40 MkI Driven By Carroll Shelby For Sale",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/0epkV9/s3/1965-ford-gt40-mki-driven-by-carroll-shelby-for-sale.jpg",
+        note: ""
+    },
+    {
+        id: "us2124",
+        title: "ポルシェ、コーナリング性能を高める大胆な構想",
+        desc: "Porscheは、フロントトランクの蓋とリアガラスから回転して展開するフィン（舵）に関する特許を申請した。この機構は、コーナーリング時に横方向の力を発生させることを目的としている。ボートの舵が水を流路に誘導するように、車体をターン内に押し込むのが基本理念である。",
+        url: "https://www.motor1.com/news/816588/porsche-rudder-patent-cornering/",
+        source: "Motor1",
+        date: "2026-11-24",
+        tags: [],
+    
+        sourceExcerpt: "Porsche has filed a patent for fins that pivot out of the",
+        sourceExcerptEnd: "and rear glass to generate sideways force in a corner.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/kolgqN/s3/porsche-911-gt3-rs-manthey.jpg",
+        note: ""
+    },
+    {
+        id: "us2125",
+        title: "Amazon Autos、新車取扱ブランドをHyundaiから14社へ拡大",
+        desc: "Amazon Autosは2024年12月のHyundai単独開始から約2年で、AudiやKiaなど計35ブランドの車両販売を開始した。ただし新車対応は14ブランドに限られ、残りは中古車中心である。",
+        url: "https://www.motor1.com/news/816557/amazon-autos-35-car-brands/",
+        source: "Motor1",
+        date: "2026-11-24",
+        tags: ["AI"],
+    
+        sourceExcerpt: "Amazon Autos launched in December 2024 with a single partner, Hyundai.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/2N2z7z/s3/amazon-ford-cpo-used-car-sales.jpg",
+        note: ""
+    },
+    {
+        id: "us2126",
+        title: "Pirelliサイバータイヤ、Pagani Utopia Roadsterで標準搭載開始",
+        desc: "Pirelliが米市場でCyber Tireを投入し、Pagani Utopia Roadsterが初搭載車となった。タイヤ内センサーが圧力や温度をBluetooth経由で送信し、Boschと共同開発したABSやトラクションコントロールの最適化を実現する。",
+        url: "https://www.motor1.com/news/816552/pirelli-cyber-tire-launched-usa/",
+        source: "Motor1",
+        date: "2026-11-24",
+        tags: ["センシング"],
+    
+        sourceExcerpt: "The Pagani Utopia Roadster is the first car to come standard with Pirelli Cyber Tyre",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/7Z1XgP/s3/pirelli-lancia-il-cyber-tyre-negli-usa-con-pagani-e-1-000-nuovi-posti-a-rome.jpg",
+        note: ""
+    },
+    {
+        id: "us2127",
+        title: "Audi、画面裏から物理ボタンが出現する可動パネル特許出願",
+        desc: "Audiはダッシュボードのタッチスクリーン下縁に収納されたモーター式物理ボタンバーを必要時に展開する特許を出願した。車種未定だが、新A2 E-Tronで音量ノブや窓スイッチ等の物理操作を復活させた流れに沿い、画面専用に起因する操作性への不満を解消する意図がうかがえる。",
+        url: "https://www.motor1.com/news/816546/audi-patent-retractable-button-bar/",
+        source: "Motor1",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "コックピット"],
+    
+        sourceExcerpt: "A design built for a clean, screen-dominated dashboard could fold in tactile controls only when the driver wants them.",
+        interiorScore: 100,
+        interiorReason: "Highly relevant HMI and dashboard design concept featuring a motorized physical",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/407z2Y/s3/audi-patents-hidden-buttons-that-pop-out-from-behind-the-screen-ai-generated-rendering.jpg",
+        note: ""
+    },
+    {
+        id: "us2128",
+        title: "Acura Integra GS-R、赤黒内装とカーボン加飾で映画出演車として出品",
+        desc: "『2 Fast 2 Furious』のエキストラ車両だったAcura Integra GS-Rが米国で落札なしのオークションに出品された。内装はシートやフロアマットを赤黒で統一し、Momo製ステアリングホイールとカーボンファイバー加飾を備える。さらに後付けオーディオシステムも搭載されている。",
+        url: "https://www.carscoops.com/2326234/2-fast-2-furious-acura-gs-r-auction/",
+        source: "CarScoops",
+        date: "2026-11-24",
+        tags: ["シート", "音響"],
+    
+        sourceExcerpt: "The wild red theme continues into the cabin, where the seats are",
+        sourceExcerptEnd: "red instrument cluster, and red on the Momo steering wheel.",
+        country: "us",
+        img: "https://www.carscoops.com/img/gallery/this-acura-integra-gs-r-for-sale-is-the-2-fast-2-furious-car-of-your-dreams/l-intro-1795496848.jpg",
+        note: ""
+    },
+    {
+        id: "us2129",
+        title: "ポルシェ718ボクスターEV試作車、後方重心でミッドシップ感覚",
+        desc: "Porsche Experience Center Los Angelesでの試乗では、992.2 911 Carrera GTS由来のステアリングとリアアクスル操舵が備わり、シャープな操作感を確認した。",
+        url: "https://www.caranddriver.com/reviews/a74493752/2027-porsche-718-boxster-ev-prototype-drive/",
+        source: "Car and Driver",
+        date: "2026-11-24",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "The steering, inherited from the 992.2 911 Carrera GTS, is eager and sharp, and rear-axle steering will also be available.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/0fb0e3ef-0d1c-4a35-bc9c-b9bc958668ae.jpg",
+        note: ""
+    },
+    {
+        id: "us2130",
+        title: "BYD Fang Cheng Bao Tai 9、ステアリングホイールがダッシュボード内に収納可能",
+        desc: "BYDの大型SUV「Tai 9」最上級グレードでは、ステアバイワイヤー技術によりステアリングホイールをダッシュボード内に折り畳み収納できる。停車時のみ有効なこの機能は、シートをほぼフラットにリクライニングさせ、充電中の休憩や作業スペースを確保する内装設計となっている。",
+        url: "https://www.caranddriver.com/news/a74497694/byd-fold-away-steering-wheel-production-car/",
+        source: "Car and Driver",
+        date: "2026-11-24",
+        tags: ["AI", "シート", "コックピット", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Thanks to a steer-by-wire system, the vehicle’s steering wheel can fold into the dashboard for more space.",
+        interiorScore: 92,
+        interiorReason: "The article details a production-ready fold-away steering wheel and flat-reclini",
+        imageInterior: true,
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/2256d2e4-6b2a-4368-8b35-e20915e97420.png",
+        note: ""
+    },
+    {
+        id: "eu2097",
+        title: "BMW iX3、快適性と広々した空間で長距離移動に最適",
+        desc: "Autocar誌の長期テスト車両であるBMW iX3は、フランスやイタリアへの2500マイルのロードトリップにおいて、乗員3名でも十分な快適性と広い室内空間を提供し、ディーゼル車よりも安価かつ快適な移動手段として評価されている。",
+        url: "https://www.autocar.co.uk/car-news/features/i-drove-our-bmw-ix3-2500-miles-it-was-cheaper-and-more-pleasant-diesel",
+        source: "AUTOCAR UK",
+        date: "2026-11-24",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The BMW iX3 has quickly become the favoured road trip car in the Autocar long-term garage.",
+        country: "eu",
+        img: "https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/car_review_image_190/public/images/car-reviews/first-drives/legacy/bmw-ix3-european-road-trip-static.jpg?itok=NEXTKXHs",
+        note: ""
+    },
+    {
+        id: "eu2098",
+        title: "新型Porsche 718 Boxster EVプロトタイプ試乗",
+        desc: "マヨルカ島で実施された試乗では、911 Carrera GTS由来のリアサスペンションと後輪操舵を備えた新世代Boxsterが確認された。E-Shiftモードにより7速PDKシミュレーションを提供し、約1,700kgの車重ながら優れた機動力を発揮した。",
+        url: "https://www.autoexpress.co.uk/porsche/boxster/370988/new-porsche-718-boxster-prototype-review-true-sports-car-dna-ev-age",
+        source: "Auto Express",
+        date: "2026-11-24",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Up front it uses familiar MacPherson strut suspension, but the rear chassis",
+        sourceExcerptEnd: "including rear-wheel steering for the first time on a Boxster.",
+        interiorScore: 60,
+        interiorReason: "The article details specific in-cabin audio and HMI features, including the 'E-S",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/porsche-983-boxter-rg26-030.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2099",
+        title: "Audi、画面下に収納する物理ボタン機構の特許出願",
+        desc: "Audiはインフォメーションディスプレイ下部に物理ボタンを収納する折りたたみ式パネルの特許を出願した。非使用時はデジタルツインを表示し、操作時にモーター駆動で展開してパームレストも備える仕組みだ。",
+        url: "https://www.autoexpress.co.uk/audi/370990/audi-plans-hidden-buttons-solve-its-touchscreen-problems",
+        source: "Auto Express",
+        date: "2026-11-24",
+        tags: ["ディスプレイ"],
+    
+        sourceExcerpt: "The problem, Audi reckons, is that “physical switches also require installation space,”",
+        sourceExcerptEnd: "the cabin looking cluttered when a larger display is fitted.",
+        interiorScore: 90,
+        interiorReason: "Highly relevant HMI and center console design concept. The article details a spe",
+        imageInterior: true,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/audi-hidden-buttons-patent-drawing-1.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn2086",
+        title: "BYD新型Tang EV、30インチディスプレイと6.8L冷蔵庫を装備",
+        desc: "BYDは中国で新型Tang EVを発売し、フラッシュ充電と最大850kmの航続距離を実現した。内装には30インチタッチスクリーンや6.8リットルの冷蔵庫が備わり、前後左右すべてのシートにヒーター・ベンチレーション・マッサージ機能を搭載している。",
+        url: "https://carnewschina.com/2026/11/24/new-byd-tang-enters-china-with-up-to-850-km-of-ev-range-at-28195-usd/",
+        source: "CarNewsChina - All",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Other highlights of the cabin include ambient lighting, a 6.8-liter built-in fridge, and heated, ventilated & massaged front and rear (left and right) seats.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/new_byd_tang_launch-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn2087",
+        title: "Geely Galaxy M8はM9と同じ車体に大容量バッテリーを搭載し予約開始",
+        desc: "GeelyはGalaxy M8の予約販売を開始した。内装には17.3インチの3KディスプレイとFlyme Auto 2.5システムを搭載し、運転席は16点マッサージ機能を備える。後部座席には142度までリクライニング可能なデュアルエグゼクティブシートが採用されている。",
+        url: "https://carnewschina.com/2026/11/24/geely-galaxy-m8-pre-sale-starts-the-5-seater-m9-with-larger-battery/",
+        source: "CarNewsChina - All",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "The cabin features a wrap-around design with a 17.3-inch 3K display and the Flyme Auto 2.5 smart cockpit system.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-143.png",
+        note: ""
+    },
+    {
+        id: "cn2088",
+        title: "Jetour初BEV「TX」、13,400ドルから発売開始",
+        desc: "Chery傘下のJetourは初のBEV「TX」を中国市場に投入し、89,900元（13,400 USD）から販売を開始した。内装には15.6インチのセンターディスプレイと8.8インチのメータークラスターが備わり、上位グレードではシートヒーター・ベンチレーション・マッサージ機能を設定している。",
+        url: "https://carnewschina.com/2026/11/24/jetours-first-bev-hits-the-market-a-boxy-suv-priced-from-13400-usd-in-china/",
+        source: "CarNewsChina - All",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "シート", "EV"],
+    
+        sourceExcerpt: "Inside, the cabin features a 15.6-inch central touchscreen and an 8.8-inch digital instrument cluster.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-140.png",
+        note: ""
+    },
+    {
+        id: "cn2089",
+        title: "BYD Fang Cheng Bao Shark、12月2日に発売予定",
+        desc: "BYD Fang Cheng Bao Sharkは12月2日に中国で発売される。内装はBao 5と同様のデザイン言語を採用し、センターコンソールにメカニカルボタンを配置した。さらにDiLink搭載の15.6インチタッチスクリーンとW-HUDを備え、デジタルコックピット環境を整えている。",
+        url: "https://carnewschina.com/2026/11/24/byds-fang-cheng-bao-shark-pickup-to-launch-in-china-on-december-2nd/",
+        source: "CarNewsChina - All",
+        date: "2026-11-24",
+        tags: ["HUD", "AR", "ディスプレイ", "コックピット", "センターコンソール", "バッテリー"],
+    
+        sourceExcerpt: "The cabin is equipped with a 15.6-inch high-resolution central touchscreen running the",
+        sourceExcerptEnd: "10.2-inch digital instrument cluster, and a W-HUD (Windshield Head-Up Display).",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-133.png",
+        note: ""
+    },
+    {
+        id: "cn2090",
+        title: "Geely Galaxy M8の予約受付を開始、Flyme Auto 2を搭載",
+        desc: "Geely Galaxyは大型SUV「M8」の予約販売を開始した。内装にはFlyme Auto 2、物理AIロボットEva、9.1L冷暖房ボックスを備える。またCATL製バッテリーによるCLTC航続360kmとLiDAR搭載G-ASD H5運転支援システムも標準装備とする。",
+        url: "https://cnevpost.com/2026/11/24/geely-galaxy-starts-pre-sales-m8/",
+        source: "CnEVPost - All",
+        date: "2026-11-24",
+        tags: ["AR", "AI", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Inside, it runs the Flyme Auto 2 smart cockpit system and features",
+        sourceExcerptEnd: "9.1-liter heating and cooling box, and a 25-speaker audio system.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026112414221289.jpg",
+        note: ""
+    },
+    {
+        id: "cn2091",
+        title: "BYDが第3世代Tang EVを18万7,900元から発売、次世代デジタルシャーシを搭載",
+        desc: "BYDは5人乗りSUVの3代目Tang EVを187,900元（28,000ドル）から発売した。内装では、35.4インチの統合ディスプレイと30インチのパノラマスクリーンによるデュアルスクリーン構成を採用し、全席にベンチレーション・ヒーター・10点式マッサージ機能を備えた。",
+        url: "https://cnevpost.com/2026/11/24/byd-launches-3rd-gen-tang-electric-suv/",
+        source: "CnEVPost - All",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "シート", "EV", "バッテリー"],
+    
+        sourceExcerpt: "Inside, the cabin features a dual-screen setup combining a 35.4-inch integrated far-end display and a 30-inch panoramic screen.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026112413315737.jpg",
+        note: ""
+    },
+    {
+        id: "cn2092",
+        title: "EUが12月からハイブリッド車の輸入枠を設定、中国はWTO紛争処理権限の行使を表明",
+        desc: "欧州委員会は12月1日からハイブリッド車の輸入枠を設定し、2025年比で約15%上回る水準とする暫定措置を発表した。対象はHEV・PHEV・MHEVで最大200日間適用される。中国商務省はWTOの非差別原則を遵守するよう求め、紛争処理を含む権利行使を保留している。",
+        url: "https://cnevpost.com/2026/11/24/eu-import-quotas-hybrids-dec-china-urges-adherence-consensus/",
+        source: "CnEVPost - All",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026112412545744.jpg",
+        note: ""
+    },
+    {
+        id: "in2154",
+        title: "Tata Motors、2026年12月から乗用車を平均0.5%値上げ",
+        desc: "Tata Motorsは2026年12月1日から乗用車価格を平均0.5%引き上げます。ICE車とEVが対象で、モデルやバリエーションにより個別の値上がり幅は異なります。原材料費の高騰が要因ですが、同社はコスト増の一部を自社負担し続けます。",
+        url: "https://www.rushlane.com/tata-motors-december-2026-price-hike-ice-ev-12561914.html",
+        source: "RushLane",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Tata Motors December 2026 price hike – Customers bear part of the increased input cost through the revised vehicle prices.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/09/new-tata-sierra-legend-series-launch-price-features-4.jpg",
+        note: ""
+    },
+    {
+        id: "in2155",
+        title: "現代自動車インド、12月より最大8,000ルピーの値上げ",
+        desc: "現代自動車インド（HMIL）は、原材料コスト上昇を理由に2026年12月1日から対象車種の価格を改定する。最大の上昇幅は8,000ルピーに設定されており、具体的な金額はモデルやグレードによって異なる。",
+        url: "https://www.rushlane.com/hyundai-december-2026-price-hike-india-12561910.html",
+        source: "RushLane",
+        date: "2026-11-24",
+        tags: ["HMI"],
+    
+        sourceExcerpt: "HMIL has attributed the planned increase primarily to steep input cost increases.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/new-hyundai-bayon-16.jpg",
+        note: ""
+    },
+    {
+        id: "in2156",
+        title: "Audi India、2027年1月より車両価格を最大2%引き上げ",
+        desc: "Audi Indiaは原材料費の上昇と事業の持続可能性を理由に、2027年1月1日から車両のショールーム外価格を最大2%引き上げる方針を示した。具体的な車種別の値上げ幅は未定だが、同社は可能な限り抑制的な調整を行い、顧客との信頼関係を維持することを重視しているという。",
+        url: "https://www.rushlane.com/audi-india-price-update-hike-january-2027-12561897.html",
+        source: "RushLane",
+        date: "2026-11-24",
+        tags: [],
+    
+        sourceExcerpt: "Audi India price update – Audi India is set to increase ex-showroom",
+        sourceExcerptEnd: "models by up to 2 percent from 1 January 2027.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/Audi-Q7.jpeg",
+        note: ""
+    },
+    {
+        id: "in2157",
+        title: "トヨタ インノバハイクロス 大型ディスプレイと新フロントスタイルで刷新",
+        desc: "インドで約4年ぶりにフルモデルチェンジを迎えるインノバ・ハイクロスは、フロントスタイリングの刷新と大型ディスプレイの採用が特徴である。",
+        url: "https://gaadiwaadi.com/toyota-innova-hycross-facelift-to-launch-tomorrow-top-5-highlights/",
+        source: "GaadiWaadi",
+        date: "2026-11-24",
+        tags: ["ディスプレイ"],
+    
+        interiorScore: 58,
+        interiorReason: "Mentions larger displays and facelift highlights which are relevant to HMI plann",
+        imageInterior: false,
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/11/Toyota-Innova-Hycross-Facelift-2.jpg",
+        note: ""
+    },
+    {
+        id: "in2158",
+        title: "タタ・モーターズ、2026年12月から全車種で価格を0.5%引き上げ",
+        desc: "Tata Motors Passenger Vehiclesは、ガソリン車（ICE）および電気自動車（EV）の全ラインナップにおいて、2026年12月1日付で平均0.5%の価格引き上げを発表しました。",
+        url: "https://www.autopunditz.com/post/tata-motors-price-hike-december-2026",
+        source: "Auto Punditz",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Tata Motors Passenger Vehicles has announced an average price increase of 0.5% across its entire passenger vehicle portfolio, effective December 1, 2026.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_df71da8b2b6f412481701ac1502973fa~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in2159",
+        title: "Audi India、2027年1月より最大2%の値上げを発表",
+        desc: "Audi Indiaは原材料費高騰を理由に、2027年1月1日付で全車種を最大2%値上げすると発表した。同社は2026年内に2度目の価格改定を実施し、プレミアムな所有体験の維持と長期的な事業持続可能性を重視する姿勢を示している。",
+        url: "https://www.autopunditz.com/post/audi-india-price-hike-january-2027",
+        source: "Auto Punditz",
+        date: "2026-11-24",
+        tags: [],
+    
+        sourceExcerpt: "Audi India has announced a price increase of up to 2% across its entire model portfolio, effective January 1, 2027.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_ff9243f8c13f4e41a56939d7dd9806cd~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "in2160",
+        title: "Paytm、ChargeZoneと提携しインドのEV充電QR決済を拡大",
+        desc: "PaytmはChargeZoneと提携し、インド国内1,200か所の15,000以上の高速充電ポイントでQR決済を可能にする。この連携により、ユーザーは特定のアプリ登録なしに充電料金を支払え、ChargeIndiaプラットフォーム経由で他ネットワークとの統合も視野に入れている。",
+        url: "https://www.autopunditz.com/post/paytm-chargezone-partnership-ev-charging-qr-payments",
+        source: "Auto Punditz",
+        date: "2026-11-24",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "India's electric vehicle charging ecosystem is taking another step towards greater accessibility,",
+        sourceExcerptEnd: "a strategic partnership with ChargeZone, an EV fast-charging network operator.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_2b2485cb66e54c55b38073d62323abaa~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "us2131",
+        title: "VW ID. Polo納期が最大21ヶ月、スペイン工場は3シフト体制へ移行",
+        desc: "Volkswagen ID. Poloはドイツで最廉価グレードの納期が最大21ヶ月に延びている。Martorell工場では日産1,000台から1,200台への増産を進め、電池セル供給を確保する方針だ。",
+        url: "https://insideevs.com/news/816560/vw-id-polo-cupra-raval-skoda-epiq-demand-high-wait-times/",
+        source: "InsideEVs",
+        date: "2026-11-24",
+        tags: ["AR", "バッテリー"],
+    
+        sourceExcerpt: "The automaker is scrambling to secure enough battery cells and expand vehicle production in Spain to keep up with orders.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/Mk6ZBE/s3/volkswagen-id.-polo-production.jpg",
+        note: ""
+    },
+    {
+        id: "eu2100",
+        title: "インフィニオン、商用EV向けSiCパワーモジュールHybridPACK HDを投入",
+        desc: "インフィニオンは商用電気自動車向けのパワーモジュール「HybridPACK HD」を発表した。同製品は1,400Vの耐圧と最大1,200Aの出力電流に対応し、長距離トラックや都市配送車など多様な用途で高出力駆動を可能にする。",
+        url: "https://www.electrive.com/2026/11/24/infineon-introduces-power-module-for-commercial-electric-vehicles/",
+        source: "Electrive",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "According to Infineon, the HybridPACK HD offers an effective output current of",
+        sourceExcerptEnd: "the CoolSiC family, with a blocking voltage of 1,400 volts.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/11/202611-infineon-hybridpack-hd-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2101",
+        title: "EU市場でBEVが3割に、ハイブリッドは横ばい",
+        desc: "ACEA統計によると、10月のEU新車登録台数93万9,447台中、BEVは27万9,799台と前年比61.4%増の約3割を占めた。一方、非プラグインハイブリッドは34%で首位だが成長率は0.3%と横ばいであり、市場は電動化へ移行しつつある。",
+        url: "https://www.electrive.com/2026/11/24/acea-battery-electric-cars-capture-30-per-cent-of-eu-passenger-car-market/",
+        source: "Electrive",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "According to the latest monthly statistics from the European Automobile Manufacturers’ Association",
+        sourceExcerptEnd: "registered, representing a 61.4 per cent increase over last October.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/10/qwello-ladestation-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2102",
+        title: "VW、ID. Buzz Cargoロングホイールベースの量産開始",
+        desc: "Volkswagen Commercial Vehiclesはハンノーバー工場でID. Buzz Cargoのロングホイールベース版の量産を開始した。荷室長は2,458mmに拡大し、側面スライドドアからユーロパレットが通る設計となった。",
+        url: "https://www.electrive.com/2026/11/24/vw-starts-production-of-the-long-wheelbase-id-buzz-cargo/",
+        source: "Electrive",
+        date: "2026-11-24",
+        tags: ["AR"],
+    
+        sourceExcerpt: "Volkswagen Commercial Vehicles has started series production of the long wheelbase ID.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/11/20261120vwn-volkswagen-id-buzz-produktion-hannover-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2103",
+        title: "BYD Dolphin Surf、Green NCAPで5つ星を獲得し快適装備も拡充",
+        desc: "BYD Dolphin SurfはGreen NCAPで96%のスコアを獲得した。Comfort版では大型タッチスクリーンディスプレイを備え、Boost版にはフロントシートヒーターが追加され、内装と快適性の向上が進んでいる。",
+        url: "https://electriccarsreport.com/2026/11/byd-dolphin-surf-earns-five-star-green-ncap-rating-with-96-score/",
+        source: "Electric Cars Report",
+        date: "2026-11-24",
+        tags: ["ディスプレイ", "シート", "バッテリー"],
+    
+        sourceExcerpt: "The range-topping Comfort version benefits from a larger touchscreen display, while Boost models gain heated front seats and a heated steering wheel.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/BYD-DOLPHIN-SURF-Green-NCAP.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu2104",
+        title: "Leapmotor、中国NEV新興企業として初の生産200万台達成",
+        desc: "Leapmotorは中国NEV新興企業として初めて累計生産200万台に到達した。1〜10月の納車数は前年比65.88%増の77万2,666台で、C10やC11が各35万台以上を販売し、フルスタック開発によるコスト管理と品質維持でグローバル市場での存在感を高めている。",
+        url: "https://electriccarsreport.com/2026/11/leapmotor-becomes-first-chinese-nev-startup-to-produce-2-million-vehicles/",
+        source: "Electric Cars Report",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Leapmotor has reached a major production milestone, becoming the first Chinese new-energy vehicle (NEV) startup to manufacture 2 million vehicles.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/2000000th-Leapmotor.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu2105",
+        title: "VW ID.Buzz Cargo LWB、4.4m³荷室と新ソフトでハンブルク量産開始",
+        desc: "VolkswagenはID. Buzz Cargo LWBの量産を開始した。内装ではアプリストア拡張版の最新世代ID.ソフトウェアを搭載し、自動信号認識機能付きTravel Assistやワンペダルドライブを標準装備とする。",
+        url: "https://electriccarsreport.com/2026/11/volkswagen-starts-production-of-long-wheelbase-id-buzz-cargo-in-hanover/",
+        source: "Electric Cars Report",
+        date: "2026-11-24",
+        tags: ["AR"],
+    
+        sourceExcerpt: "Buzz Cargo Long Wheelbase (LWB) addresses growing demand for electric vans offering greater transport capacity.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/09/Volkswagen-ID-Buzz-Cargo-LWB.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu2106",
+        title: "Nissan、腐食加速試験室で北米市場の耐久性検証を強化",
+        desc: "NissanはArizona Testing Centerに新たな腐食試験室を建設中であり、4ヶ月未満で実車10〜15年分の腐食を再現する。塩水噴霧と高温乾燥による劣化評価を通じて、極端な気候環境下での車両の耐久性向上を図る。",
+        url: "https://www.automotivetestingtechnologyinternational.com/features/inside-nissans-weather-time-machine-engineering-vehicles-for-a-world-of-extremes.html",
+        source: "Automotive Testing Technology International",
+        date: "2026-11-24",
+        tags: ["AR"],
+    
+        sourceExcerpt: "A new corrosion chamber, currently under construction at the Nissan Arizona Testing",
+        sourceExcerptEnd: "effects of environmental factors on vehicles in a controlled setting.",
+        country: "eu",
+        img: "https://www.automotivetestingtechnologyinternational.com/wp-content/uploads/2026/11/Screenshot-2026-10-29-150727.jpg",
+        note: ""
+    },
+    {
+        id: "cn2093",
+        title: "欧州のBEV市場でシェアが3割を超え、Leapmotorの登録台数が急増",
+        desc: "欧州の新車市場において、BEVのシェアは10月に31.2%に達し、前年同期比で大きく上昇しました。中国勢ではリープモーターが14,056台を登録し、前年比246.4%増と急成長しています。",
+        url: "https://chinaevhome.com/2026/11/24/europes-bev-share-reaches-31-2-in-oct-as-leapmotor-registrations-jump-246/",
+        source: "ChinaEVHome",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Chinese brands sharply increased footprint in Europe as BEV adoption rose, driven",
+        sourceExcerptEnd: "to take share from legacy incumbents amid market electrification pressure.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-370.png?resize=640%2C284&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn2094",
+        title: "中国の10月の中古車取引は151万件、うち3年未満の車両が32.2%を占める",
+        desc: "中国の中古車市場は10月に弱含み、地域内および地域間の取引が広く減少する中、月次で4.16%、年次で14.25%の下落となった。",
+        url: "https://chinaevhome.com/2026/11/24/china-logs-1-51m-used-car-transactions-in-oct-vehicles-under-3-yrs-old-hit-32-2-share/",
+        source: "ChinaEVHome",
+        date: "2026-11-24",
+        tags: [],
+    
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-362.png?resize=640%2C369&ssl=1",
+        note: ""
+    },
+    {
+        id: "cn2095",
+        title: "CATLがイスタンブールで初のバッテリー修理拠点を設置",
+        desc: "CATLはAscendum Groupと提携し、トルコ・イスタンブールに1,200平方メートルのNING SERVICE体験センターを開設した。施設には顧客ラウンジや展示エリアが設けられ、スケーターシャーシやポータブル電源などの製品が備わっている。バッテリー診断から修理まで対応するこの拠点は、同国におけるEV普及とエネルギー貯蔵需要拡大への対応として機能する。",
+        url: "https://chinaevhome.com/2026/11/24/catl-opens-first-battery-aftermarket-service-center-in-turkey/",
+        source: "ChinaEVHome",
+        date: "2026-11-24",
+        tags: ["EV", "バッテリー"],
+    
+        sourceExcerpt: "CATL opened a NING SERVICE traction-battery experience center in Istanbul, signaling a",
+        sourceExcerptEnd: "full-lifecycle battery support amid rising Turkish electrification and storage demand.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-361.png?resize=640%2C427&ssl=1",
+        note: ""
+    },
+    {
+        id: "jp2334",
+        title: "ボルボ「アマゾン」の内装は新車当時のまま、電動エアコンを装着",
+        desc: "1968年式の右ハンドルボルボ「アマゾン」2ドアセダンは、北欧自動車が正規輸入したディーラー車で、内装は新車当時の状態を保っている。オーナーが3年かけて不調を解消し、日産の110Aオルタネーターへ交換して電動エアコンを組み込むことで、夏場も快適に走らせる仕様とした。",
+        url: "https://www.automesseweb.jp/2026/11/24/2008499",
+        source: "AUTO MESSE WEB",
+        date: "2026-11-24",
+        tags: ["EV"],
+    
+        sourceExcerpt: "北欧自動車が正規輸入した右ハンドルのディーラー車で、内装は新車当時のまま。",
+        country: "jp",
+        img: "https://image-automesseweb.com/wp-content/uploads/2026/11/09_AMW_261112_volvo_amazon.jpg",
         note: ""
     },
 ];
