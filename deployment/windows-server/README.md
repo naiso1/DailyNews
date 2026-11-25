@@ -234,6 +234,12 @@ The script packages only:
 - `dailynews_annotations.js` (currency conversion and verified source links)
 - `dailynews_exterior_tags.js` and `dailynews_event_tags.js` (shared genre/event rules)
 - `news_data.js`
+- `policy_data.js` (interior only, same sign-in requirement as the news archive).
+  The interior runner builds up to five regulatory developments per issue date from
+  its collection CSV and dedicated searches, grouped independently of country quotas.
+  A failed policy build is logged and does not block regional publication. To retry
+  a missing issue, run `ニュース収集/update_policy_news.py --dates YYYY-MM-DD` with
+  the workstation Python, then use the normal interior publication procedure.
 - `insights_data.js`
 - `dailynews_client.js`
 - `dailynews_header.js` / `dailynews_header.css` (shared visual header; classic fallback)

@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const html = fs.readFileSync(path.join(__dirname, '..', '内装製品デイリーニュース.html'), 'utf8');
-const elements = Object.fromEntries(['dateFrom', 'dateTo', 'dateBasis', 'searchInput', 'sortOrder', 'contentCategory']
+const elements = Object.fromEntries(['dateFrom', 'dateTo', 'dateBasis', 'searchInput', 'sortOrder', 'contentCategory', 'policySection', 'policyResults']
   .map(id => [id, {value: '', hidden: false}]));
 const location = {pathname: '/exterior/', search: ''};
 const history = {state: {}, pushState(state, title, url) {
@@ -13,7 +13,7 @@ const history = {state: {}, pushState(state, title, url) {
 const noop = () => {};
 const context = vm.createContext({
   window: {DAILYNEWS_CONFIG: {id: 'exterior'}, location, scrollY: 0, scrollTo: noop},
-  document: {getElementById: id => elements[id]}, location, history, URLSearchParams, setTimeout: noop,
+  document: {getElementById: id => elements[id], body: {classList: {toggle: noop}}}, location, history, URLSearchParams, setTimeout: noop,
   NEW_DATE_RANGE: {}, INITIAL_DATE_RANGE_OVERRIDES: {}, ONE_DAY_NEW_DATE_RANGE_OVERRIDES: {},
   NEW_DATE_RANGE_OVERRIDE: {start: '2026-09-17', end: '2026-09-17'},
   NEWS_DATA: [], activeCountries: new Set(['world']), activeTags: new Set(['all']),
@@ -26,7 +26,7 @@ vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'dailynews_exterior_t
 for (const name of ['getTodayKey', 'getLatestDate', 'setNewDateRangeFromNews', 'getDateFilterBasis',
   'getNewsFilterDate', 'matchesNewsDateRange', 'isShowingDefaultNewRange', 'isNewContent',
   'isGloballyHidden', 'getNewCounts', 'applyFilters', 'restoreFilterStateFromURL', 'updateURL',
-  'isNewsListItem', 'getNewsLookup', 'resolveNewsItem',
+  'isNewsListItem', 'getNewsLookup', 'resolveNewsItem', 'renderPolicyNews', 'escapeHtml',
   'captureFilterState', 'restoreRankingState', 'handleCountryClick', 'handleTagClick', 'loadMore']) {
   const start = html.indexOf(`        function ${name}(`);
   assert(start >= 0, name);
@@ -165,4 +165,19 @@ open('?dateBasis=source&from=2026-09-17&to=2026-09-17');
 assert(!show().includes(supplement.id), 'exterior source filter excludes earlier source dates');
 open('?dateBasis=source&from=2026-08-01&to=2026-08-01');
 assert.deepEqual(show(), [supplement.id]);
-console.log('Date UI: issues, source dates, tags, URLs, archives and reviewed supplements PASS');
+open('?countries=policy');
+assert(context.activeCountries.has('world'), 'exterior ignores an interior policy link');
+context.window.DAILYNEWS_CONFIG.id = 'interior';
+context.window.DAILYNEWS_POLICY_ISSUES = {'2026-09-17': [{region: '欧州', stage: '審議中', title: 'EV 調達', summary: '案の説明', question: '条件は？', links: [['資料', 'https://example.test/ev']]}]};
+open('?countries=policy&from=2026-09-17&to=2026-09-17&q=ev');
+show();
+assert.equal(elements.policySection.hidden, false);
+assert.match(elements.policyResults.innerHTML, /EV 調達/);
+assert.match(elements.policyResults.innerHTML, /https:\/\/example\.test\/ev/);
+open('?countries=policy&from=2026-09-18&to=2026-09-18');
+show();
+assert.match(elements.policyResults.textContent, /まだ掲載/);
+open();
+show();
+assert.equal(elements.policySection.hidden, true);
+console.log('Date UI: issues, filters, archives, supplements and interior policy PASS');

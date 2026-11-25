@@ -131,6 +131,8 @@ def publish(edition, images):
               'dailynews_activity.js', 'dailynews_sources.js', 'release_history.js', 'dailynews_header.js',
               'dailynews_header.css', 'news_data.js', 'insights_data.js', 'source_list_data.js',
               'setup', 'images', 'page_images', 'content/exterior']
+    if edition.id == 'interior':
+        public.append('policy_data.js')
     # The exterior packager uses working-tree files. Do not include unrelated
     # uncommitted UI/data changes in an automatic image-only release.
     if command(root, ['git', 'status', '--porcelain', '--untracked-files=normal', '--', *public]):

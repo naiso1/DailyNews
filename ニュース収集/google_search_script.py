@@ -2202,14 +2202,14 @@ def title_looks_incomplete(text):
     return bool(re.search(r"(?:と|や|および|及び)\s*[A-Za-z0-9][A-Za-z0-9 .+/_-]*$", s))
 
 
-def call_llm_text(prompt):
+def call_llm_text(prompt, *, system_prompt=None):
     from summary_grounding import summary_grounding_rules
 
     payload = {
         "model": LLM_MODEL,
         "reasoning_effort": LLM_REASONING_EFFORT,
         "messages": [
-            {"role": "system", "content": summary_grounding_rules()},
+            {"role": "system", "content": system_prompt or summary_grounding_rules()},
             {"role": "user", "content": prompt},
             {"role": "assistant", "content": "<think>\n</think>\n"},
         ],
@@ -3680,14 +3680,15 @@ def fetch_from_rss(target_dates):
     return results
 
 # ========== ソース2: Bing News 検索（Google News代替）==========
-def fetch_from_bing_search(target_dates):
+def fetch_from_bing_search(target_dates, *, policy_queries=None):
     """Bing News RSS検索（キーワード検索対応）"""
     print("\n=== Bing News 検索 ===")
     results = []
+    policy_feeds_read = 0
     
     for country, settings in COUNTRY_SETTINGS.items():
         market = settings["bing_market"]
-        keywords = edition_search_keywords(settings)
+        keywords = policy_queries.get(country, []) if policy_queries is not None else edition_search_keywords(settings)
         
         print(f"  [{country}] 検索中...")
         country_count = 0
@@ -3697,8 +3698,9 @@ def fetch_from_bing_search(target_dates):
             if force_skip:
                 break
             encoded_keyword = quote(keyword)
-            # Bing側も日付を1日に絞るため when:1d を付与
-            rss_url = f"https://www.bing.com/news/search?q={encoded_keyword}%20{quote(search_date_clause(target_dates))}&format=rss&mkt={market}"
+            # Policy searches may cover several news dates after a weekend.
+            date_filter = "" if policy_queries is not None else "%20" + quote(search_date_clause(target_dates))
+            rss_url = f"https://www.bing.com/news/search?q={encoded_keyword}{date_filter}&format=rss&mkt={market}"
             
             try:
                 response = requests.get(rss_url, headers=HEADERS, timeout=10)
@@ -3711,8 +3713,14 @@ def fetch_from_bing_search(target_dates):
                             force_skip = True  # 中国マーケットがHTMLなら後続キーワードをスキップ
                         continue
                     feed = feedparser.parse(response.content)
+                    if policy_queries is not None and (feed.entries or not feed.bozo):
+                        policy_feeds_read += 1
                     
-                    for entry in feed.entries[:15]:
+                    entries = feed.entries[:15]
+                    if policy_queries is not None:
+                        entries = [entry for entry in feed.entries if
+                                   parse_date(entry.get("published", "")) in target_dates][:5]
+                    for entry in entries:
                         title = entry.get("title", "")
                         link = entry.get("link", "")
                         published = entry.get("published", "")
@@ -3724,12 +3732,12 @@ def fetch_from_bing_search(target_dates):
                             continue
 
                         desc = BeautifulSoup(entry.get("summary", ""), "html.parser").get_text()
-                        image_url = extract_image_from_rss(entry)
+                        image_url = "" if policy_queries is not None else extract_image_from_rss(entry)
                         # Bingリンクが msn/bing の場合も最終URLを解決して画像再取得
                         resolved_link = resolve_final_url(link)
                         if is_excluded_source(link, EDITION.id) or is_excluded_source(resolved_link, EDITION.id):
                             continue
-                        if resolved_link and is_missing_url(image_url):
+                        if policy_queries is None and resolved_link and is_missing_url(image_url):
                             image_url = fetch_image_from_page(resolved_link)
 
                         results.append({
@@ -3756,6 +3764,8 @@ def fetch_from_bing_search(target_dates):
             print("    -> 0件（RSS無し/日付不一致/重複の可能性）")
     
     print(f"  Bing検索合計: {len(results)}件")
+    if policy_queries is not None and not policy_feeds_read:
+        raise RuntimeError("法規の専用検索を取得できません")
     return results
 
 # ========== ソース3: DuckDuckGo News 検索 ==========

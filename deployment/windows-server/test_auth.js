@@ -19,6 +19,7 @@ fs.copyFileSync(path.join(__dirname, "shared-identity.js"), path.join(appDir, "s
 fs.writeFileSync(path.join(root, "active-release.txt"), "abcdef1\n", "ascii");
 fs.writeFileSync(path.join(releaseDir, "index.html"), "<!doctype html><title>test</title>");
 fs.writeFileSync(path.join(releaseDir, "news_data.js"), "window.LOADED_NEWS_DATA=[];");
+fs.writeFileSync(path.join(releaseDir, "policy_data.js"), "window.DAILYNEWS_POLICY_ISSUES={};");
 
 const child = spawn(process.execPath, [path.join(appDir, "server.js")], {
   cwd: appDir,
@@ -76,6 +77,7 @@ async function main() {
   await waitForServer();
   const protectedBeforeLogin = await fetch(`${base}/news_data.js`);
   assert.equal(protectedBeforeLogin.status, 401);
+  assert.equal((await fetch(`${base}/policy_data.js`)).status, 401);
 
   const registration = await request("/api/auth/register", {
     method: "POST",
@@ -98,6 +100,7 @@ async function main() {
     headers: { Cookie: cookie },
   });
   assert.equal(protectedAfterLogin.status, 200);
+  assert.equal((await fetch(`${base}/policy_data.js`, { headers: { Cookie: cookie } })).status, 200);
 
   const like = await request("/api/interactions/jp1/like", {
     method: "PUT",

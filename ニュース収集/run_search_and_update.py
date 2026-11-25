@@ -933,7 +933,7 @@ def run_git_sync(log_file):
     # Publication jobs must never stage unrelated source, credentials or another edition.
     candidates = (["content/exterior"] if EDITION.id == "exterior" else [
         "news_data.js", "insights_data.js", "内装製品デイリーニュース.html",
-        "source_list_data.js", "images", "page_images", "exchange_rates.js",
+        "source_list_data.js", "policy_data.js", "images", "page_images", "exchange_rates.js",
     ])
     pathspecs = [value for value in candidates if (ROOT / value).exists()]
 
@@ -1198,6 +1198,13 @@ def main():
         except Exception as e:
             log(f"[ERROR] Unexpected error: {type(e).__name__}: {e}")
             failure_message = f"Unexpected error: {type(e).__name__}: {e}"
+
+    if run_succeeded and EDITION.id == "interior":
+        try:
+            run_cmd([sys.executable, "-u", str(SCRIPT_DIR / "update_policy_news.py"),
+                     "--dates", ",".join(target_dates or [end.isoformat()])], "policy_news", LOG_FILE)
+        except CalledProcessError:
+            log("[POLICY_WARNING] 法規枠の未確定日を保留し、通常記事の公開を続行します。")
 
     if args.build_only:
         log(f"[BUILD_ONLY] {EDITION.id}: {'built' if run_succeeded else 'failed'}; publication and mail status unchanged.")

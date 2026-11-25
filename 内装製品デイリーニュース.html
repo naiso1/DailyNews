@@ -356,6 +356,23 @@ header.site-header {
     background: rgba(255, 120, 120, 0.12);
 }
 .chip .new-count.hidden { display: none; }
+html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { display: none; }
+#policyChip { font: inherit; font-size: 13px; }
+#policySection { max-width: 1400px; margin: 20px auto 40px; }
+#policySection h2 { margin: 0 0 4px; }
+#policyCoverage { color: var(--muted); margin: 0 0 16px; }
+#policySection .policy-day { margin: 18px 0 8px; font-size: 14px; }
+.policy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); gap: 16px; }
+.policy-story { padding: 18px; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 14px; background: var(--panel,#101c29); }
+.policy-meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: 13px; }
+.policy-stage { color: var(--accent,#8be8cf); border: 1px solid currentColor; border-radius: 6px; padding: 2px 8px; }
+.policy-story h4 { margin: 14px 0 6px; font-size: 18px; }
+.policy-story p { margin: 0; line-height: 1.7; }
+.policy-question { margin: 16px 0; padding: 8px 12px; border-left: 3px solid #72c4af; background: rgba(100,197,171,.09); }
+.policy-question strong { color: #8be8cf; font-size: 13px; }
+.policy-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; }
+.policy-links a { color: #a4dbea; font-size: 13px; overflow-wrap: anywhere; }
+.policy-view :is(#engagementRow,#rankingWrapper,#paperRankingWrapper,#rankingBack,#newsGrid,#insightsContainer,#favoritesActions,.quick-nav,#newsGrid + div,.filters .stats,.filter-row:has(#tagFilters),#sortOrder,#favoritesToggle) { display: none !important; }
 .chip.active .new-count { color: #0c1224; background: rgba(255, 255, 255, 0.7); border-color: transparent; }
 
 .chip.country-jp.active  { background: linear-gradient(135deg, #ff6b6b, #ffd93d); }
@@ -1464,6 +1481,7 @@ header.site-header {
                         class="new-count" data-country="eu"></span></span>
                 <span class="chip country-paper" data-country="paper"><span class="paper-icon">📄</span>論文<span
                         class="new-count" data-country="paper"></span></span>
+                <button class="chip" id="policyChip" data-country="policy" type="button" aria-pressed="false" aria-controls="policySection">法規・政策<span class="new-count hidden" data-country="policy"></span></button>
             </div>
         </div>
         <div class="filter-row">
@@ -1504,6 +1522,11 @@ header.site-header {
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
     </div>
 
+    <section id="policySection" hidden aria-labelledby="policyHeading">
+        <h2 id="policyHeading">法規・政策</h2>
+        <p id="policyCoverage">設計・調達・生産に関わる制度の動き　全地域から各号最大5件</p>
+        <div id="policyResults"></div>
+    </section>
     <section class="favorites-actions hidden" id="favoritesActions">
         <div class="favorites-actions-title">★ お気に入り共有</div>
         <div class="favorites-actions-controls">
@@ -1718,6 +1741,7 @@ header.site-header {
         // 同じURLで毎回更新を確認し、変更がないデータはブラウザの保存分を再利用する。
         window.__dataScriptsReady = new Promise((resolve) => {
             const sources = ["news_data.js", "insights_data.js"];
+            if (editionConfig.id === "interior") sources.push("policy_data.js");
             let loaded = 0;
             const loadScript = (src) => {
                 const script = document.createElement("script");
@@ -1838,6 +1862,11 @@ header.site-header {
 
         function updateNewCountBadges() {
             const counts = getNewCounts(NEWS_DATA);
+            if (editionConfig.id === "interior") {
+                counts.policy = Object.entries(window.DAILYNEWS_POLICY_ISSUES || {})
+                    .filter(([day]) => day >= NEW_DATE_RANGE.start && day <= NEW_DATE_RANGE.end)
+                    .reduce((sum, [, cards]) => sum + cards.length, 0);
+            }
             document.querySelectorAll("#countryFilters .new-count").forEach(el => {
                 const country = el.dataset.country;
                 const count = counts[country] || 0;
@@ -3382,6 +3411,7 @@ header.site-header {
             document.querySelectorAll("#countryFilters .chip").forEach(c => {
                 c.classList.toggle("active", activeCountries.has(c.dataset.country));
             });
+            document.getElementById("policyChip").setAttribute("aria-pressed", String(activeCountries.has("policy")));
             updateTitleIcon();
         }
 
@@ -3570,6 +3600,31 @@ header.site-header {
         }
         window.createDailyNewsCard = (item) => createNewsCard(item, { preview: true });
 
+        function renderPolicyNews(from, to, query) {
+            const results = document.getElementById("policyResults");
+            const issues = window.DAILYNEWS_POLICY_ISSUES || {};
+            const days = Object.keys(issues).filter(day => (!from || day >= from) && (!to || day <= to)).sort().reverse();
+            const sections = [];
+            for (const day of days) {
+                const cards = issues[day].filter(card =>
+                    [card.region, card.stage, card.title, card.summary, card.question].join(" ").toLowerCase().includes(query));
+                if (!cards.length) continue;
+                const stories = cards.map(card => {
+                    const links = card.links.map(([label, url]) => /^https?:\/\//i.test(url)
+                        ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ↗</a>` : "").join("");
+                    return `<article class="policy-story"><div class="policy-meta"><strong>${escapeHtml(card.region)}</strong>
+                        <span class="policy-stage">${escapeHtml(card.stage)}</span></div><h4>${escapeHtml(card.title)}</h4>
+                        <p>${escapeHtml(card.summary)}</p><div class="policy-question"><strong>TGで確認したいこと</strong>
+                        <p>${escapeHtml(card.question)}</p></div><div class="policy-links">${links}</div></article>`;
+                });
+                sections.push(`<h3 class="policy-day">${escapeHtml(day)}　${cards.length}件</h3><div class="policy-grid">${stories.join("")}</div>`);
+            }
+            if (sections.length) results.innerHTML = sections.join("");
+            else results.textContent = !window.DAILYNEWS_POLICY_ISSUES ? "法規・政策のデータを読み込めませんでした。"
+                : !days.length ? "指定期間の法規・政策はまだ掲載されていません。"
+                : query ? "検索条件に合う法規・政策はありません。" : "指定期間に掲載対象となる新しい制度の動きはありません。";
+        }
+
         function applyFilters({ preserveCards = false } = {}) {
             let from = document.getElementById("dateFrom").value;
             const to = document.getElementById("dateTo").value;
@@ -3583,6 +3638,17 @@ header.site-header {
             if (from && to && from > to) {
                 document.getElementById("dateFrom").value = "";
                 from = "";
+            }
+            if (window.DAILYNEWS_CONFIG.id === "interior") {
+                const policyView = activeCountries.has("policy");
+                document.body.classList.toggle("policy-view", policyView);
+                document.getElementById("policySection").hidden = !policyView;
+                if (policyView) {
+                    if (!preserveCards) renderPolicyNews(from, to, searchText);
+                    pendingAutomaticNewsRefresh = false;
+                    pendingReactionRefresh = false;
+                    return;
+                }
             }
 
             // 1. Filter
@@ -3795,6 +3861,7 @@ header.site-header {
             activeCountries = params.has("countries")
                 ? new Set(params.get("countries").split(",").filter(Boolean))
                 : new Set(["world"]);
+            if (window.DAILYNEWS_CONFIG.id !== "interior" && activeCountries.has("policy")) activeCountries = new Set(["world"]);
             const requestedTags = params.has("tags")
                 ? params.get("tags").split(",").filter(Boolean).map(tag => window.DAILYNEWS_CONFIG.id === "exterior" ? window.DailyNewsExteriorTags.canonical(tag) : tag)
                 : ["all"];

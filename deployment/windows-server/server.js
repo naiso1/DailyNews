@@ -2774,7 +2774,7 @@ async function serveFile(request, response, releaseDir, pathname) {
   }
 
   const normalizedPath = path.relative(releaseDir, filePath).replace(/\\/g, "/").toLowerCase();
-  const protectedContent = normalizedPath === "news_data.js" || normalizedPath === "insights_data.js"
+  const protectedContent = normalizedPath === "news_data.js" || normalizedPath === "policy_data.js" || normalizedPath === "insights_data.js"
     || normalizedPath.startsWith("images/");
   // Authorize the resolved path before checking ETags, including encoded URLs.
   if (protectedContent && !PUBLIC_CONFIG.allowGuestRead && !authenticatedUser(request)) {

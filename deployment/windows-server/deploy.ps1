@@ -36,6 +36,7 @@ $required = @(
     "dailynews_event_tags.js",
     "source_list_data.js",
     "news_data.js",
+    "policy_data.js",
     "insights_data.js",
     "dailynews_client.js",
     "dailynews_copilot.js",
