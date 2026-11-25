@@ -3,8 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const html = fs.readFileSync(path.join(__dirname, '..', '内装製品デイリーニュース.html'), 'utf8');
-const elements = Object.fromEntries(['dateFrom', 'dateTo', 'dateBasis', 'searchInput', 'sortOrder', 'contentCategory', 'policySection', 'policyResults']
-  .map(id => [id, {value: '', hidden: false}]));
+const elements = Object.fromEntries(['dateFrom', 'dateTo', 'dateBasis', 'searchInput', 'sortOrder', 'contentCategory', 'policySection', 'policyResults', 'policyPeriod', 'policyHighlightResults']
+  .map(id => [id, {value: '', hidden: false, querySelectorAll: () => [], classList: {toggle() {}}}]));
 const location = {pathname: '/exterior/', search: ''};
 const history = {state: {}, pushState(state, title, url) {
   this.state = state;
@@ -19,14 +19,18 @@ const context = vm.createContext({
   NEWS_DATA: [], activeCountries: new Set(['world']), activeTags: new Set(['all']),
   favoritesOnly: false, newOnly: false, visibleLimit: 30, insightsVisibleLimit: 1, rankingBackState: null,
   updateCountryChips: noop, updateTagChips: noop, updateFavoritesToggle: noop,
-  updateFavoritesActionsVisibility: noop, scheduleRankingUpdate: noop, setRankingBackVisibility: noop,
+  updateFavoritesActionsVisibility: noop, scheduleRankingUpdate: noop, updateRankingVisibility: noop, setRankingBackVisibility: noop,
+  COUNTRY_FLAGS: {policy:''}, POLICY_COVER: 'cover.webp', getNewsImageUrl: n => n.img || '', getDisplayImageUrl: s => s,
+  URL, renderNewsActions: () => '', renderCommentSection: () => '',
   newsCategoryLabel: item => item.contentCategory || 'product', isFavorite: () => true,
 });
 vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'dailynews_exterior_tags.js'), 'utf8'), context);
+vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'dailynews_policy.js'), 'utf8'), context);
 for (const name of ['getTodayKey', 'getLatestDate', 'setNewDateRangeFromNews', 'getDateFilterBasis',
   'getNewsFilterDate', 'matchesNewsDateRange', 'isShowingDefaultNewRange', 'isNewContent',
   'isGloballyHidden', 'getNewCounts', 'applyFilters', 'restoreFilterStateFromURL', 'updateURL',
-  'isNewsListItem', 'getNewsLookup', 'resolveNewsItem', 'renderPolicyNews', 'escapeHtml',
+  'isNewsListItem', 'getNewsLookup', 'resolveNewsItem', 'renderPolicyNews', 'policyStories',
+  'renderPolicyStory', 'renderPolicyImage', 'safeNewsSourceUrl', 'escapeHtml',
   'captureFilterState', 'restoreRankingState', 'handleCountryClick', 'handleTagClick', 'loadMore']) {
   const start = html.indexOf(`        function ${name}(`);
   assert(start >= 0, name);
@@ -176,7 +180,7 @@ assert.match(elements.policyResults.innerHTML, /EV 調達/);
 assert.match(elements.policyResults.innerHTML, /https:\/\/example\.test\/ev/);
 open('?countries=policy&from=2026-09-18&to=2026-09-18');
 show();
-assert.match(elements.policyResults.textContent, /まだ掲載/);
+assert.match(elements.policyResults.textContent, /指定期間の日別ニュースはありません/);
 open();
 show();
 assert.equal(elements.policySection.hidden, true);
