@@ -1,6 +1,7 @@
 window.DAILYNEWS_POLICY_ISSUES = {
   "2026-11-24": [
     {
+      "id": "policy-2026-11-24-1",
       "region": "欧州連合",
       "stage": "審議中",
       "title": "欧州製EVの優遇案、日本製部品の扱いは？",
@@ -18,6 +19,7 @@ window.DAILYNEWS_POLICY_ISSUES = {
       ]
     },
     {
+      "id": "policy-2026-11-24-2",
       "region": "米国・NY州",
       "stage": "成立・施行前",
       "title": "シートヒーターなど、搭載済み装備の定額課金を制限",
@@ -36,6 +38,7 @@ window.DAILYNEWS_POLICY_ISSUES = {
     },
     {
       "region": "欧州連合",
+      "id": "policy-2026-11-24-3",
       "stage": "12月1日適用予定",
       "title": "EU、ハイブリッド乗用車に暫定輸入枠",
       "summary": "欧州委員会は11月24日、ハイブリッド乗用車の輸入数量を制限する暫定措置を発表。中国を含む各原産地からの対象車に適用し、輸入枠を超える台数は輸入できない。適用期間は12月1日から最長200日。",

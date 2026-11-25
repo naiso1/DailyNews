@@ -33,4 +33,5 @@ class RegulatoryNewsTests(unittest.TestCase):
             policy.save_issue(path, "2026-11-24", [{"title": "確認済み"}])
             policy.save_issue(path, "2026-11-25", [])
             policy.save_issue(path, "2026-11-24", [])
-            self.assertEqual(policy.read_issues(path), {"2026-11-24": [{"title": "確認済み"}], "2026-11-25": []})
+            self.assertEqual(policy.read_issues(path), {
+                "2026-11-24": [{"title": "確認済み", "id": "policy-2026-11-24-1"}], "2026-11-25": []})

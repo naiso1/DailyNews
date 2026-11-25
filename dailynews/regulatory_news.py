@@ -155,7 +155,9 @@ def save_issue(path: Path, issue_date, cards):
     issues = read_issues(path)
     if issue_date in issues:
         return
-    issues[issue_date] = cards
+    issues[issue_date] = [
+        {**card, "id": f"policy-{issue_date}-{slot}"} for slot, card in enumerate(cards, 1)
+    ]
     data = PREFIX + json.dumps(issues, ensure_ascii=False, indent=2, sort_keys=True) + ";\n"
     with NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent, delete=False) as stream:
         temporary = Path(stream.name)

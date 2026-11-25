@@ -379,6 +379,7 @@ async function submitAuth(event) {
 function accountItemIndex(options = {}) {
   const index = new Map();
   const includeHidden = Boolean(options.includeHidden);
+  window.addPolicyItemsToIndex?.(index, includeHidden);
   const countryNames = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
   for (const item of window.LOADED_NEWS_DATA || window.NEWS_DATA || []) {
     if (!includeHidden && window.interactionsData?.[String(item.id)]?.hidden) continue;
@@ -499,6 +500,7 @@ function openActivityItem(itemId) {
 }
 
 function activityCard(entry) {
+  const kind = { idea: "企画アイデア", policy: "法規・政策" }[entry.type] || "ニュース";
   const image = entry.image
     ? `<img class="account-card-image" src="${escapeAccountHtml(entry.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
     : `<span class="account-card-image-fallback" aria-hidden="true">${entry.type === "idea" ? "💡" : "📰"}</span>`;
@@ -508,7 +510,7 @@ function activityCard(entry) {
   return `<button class="account-activity-card${entry.unread ? " account-card-unread" : ""}" type="button" data-item-id="${escapeAccountHtml(entry.activityId || entry.id)}"${entry.notificationId ? ` data-notification-id="${entry.notificationId}"` : ""}>
     ${image}
     <span class="account-card-copy">
-      <span class="account-card-meta"><span class="account-card-kind ${entry.type === "idea" ? "idea" : ""}">${entry.type === "idea" ? "企画アイデア" : "ニュース"}</span><span>${escapeAccountHtml(entry.country || "")}</span><span>${escapeAccountHtml(entry.date || formatAccountDateTime(entry.activityDate))}</span>${entry.unread ? '<span class="account-unread-label">未読</span>' : ""}</span>
+      <span class="account-card-meta"><span class="account-card-kind ${entry.type === "idea" ? "idea" : ""}">${kind}</span><span>${escapeAccountHtml(entry.country || "")}</span><span>${escapeAccountHtml(entry.date || formatAccountDateTime(entry.activityDate))}</span>${entry.unread ? '<span class="account-unread-label">未読</span>' : ""}</span>
       <span class="account-card-title">${escapeAccountHtml(entry.title)}</span>
       <span class="account-card-desc">${escapeAccountHtml(entry.description || "")}</span>
       ${comment}
@@ -525,11 +527,12 @@ function renderActivityList() {
     return;
   }
   const ideas = entries.filter((entry) => entry.type === "idea");
-  const news = entries.filter((entry) => entry.type !== "idea");
+  const policies = entries.filter((entry) => entry.type === "policy");
+  const news = entries.filter((entry) => entry.type === "news");
   const section = (title, values) => values.length
     ? `<div class="account-section-title">${title}<span class="account-section-count">${values.length}</span></div><div class="account-card-grid">${values.map(activityCard).join("")}</div>`
     : "";
-  list.innerHTML = section("企画アイデア", ideas) + section("ニュース", news);
+  list.innerHTML = section("企画アイデア", ideas) + section("ニュース", news) + section("法規・政策", policies);
   list.querySelectorAll("[data-item-id]").forEach((button) => {
     button.addEventListener("click", () => {
       if (button.dataset.notificationId) {

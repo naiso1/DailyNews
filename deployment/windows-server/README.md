@@ -240,6 +240,8 @@ The script packages only:
   A failed policy build is logged and does not block regional publication. To retry
   a missing issue, run `ニュース収集/update_policy_news.py --dates YYYY-MM-DD` with
   the workstation Python, then use the normal interior publication procedure.
+- `policy_highlights.js` contains the separately reviewed interior retrospective.
+  The daily collector leaves it intact. Policy card IDs identify persistent likes and comment threads.
 - `insights_data.js`
 - `dailynews_client.js`
 - `dailynews_header.js` / `dailynews_header.css` (shared visual header; classic fallback)

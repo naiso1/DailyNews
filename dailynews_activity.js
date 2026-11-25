@@ -43,6 +43,7 @@ async function activityApi(path, options = {}) {
 
 function activityItemIndex() {
   const index = new Map();
+  window.addPolicyItemsToIndex?.(index);
   for (const item of window.LOADED_NEWS_DATA || window.NEWS_DATA || []) {
     if (window.interactionsData?.[String(item.id)]?.hidden) continue;
     const resolved = window.resolveDailyNewsItem
