@@ -5,6 +5,13 @@ to DESKTOP-97FRPLP, under the Owner account.
 
 ## Runtime and schedule
 
+Both editions default to Copilot for the Japanese news headline and summary.
+The collector uses the image worker's dedicated account and browser lock.
+If the worker is busy, unavailable, or returns an unusable answer, the article
+uses the existing local LLM path. The collection log records the first-pass
+provider and fallback reason. For a local-only run set
+`DAILYNEWS_SUMMARY_PROVIDER=local`. Relevance scoring still uses the local model.
+
 - Repository: `C:\Users\Owner\Desktop\DailyNews`
 - Python: `%LOCALAPPDATA%\DailyNewsRuntime\venv\Scripts\pythonw.exe`
 - Action: `-B C:\Users\Owner\Desktop\DailyNews\deployment\workstation\run.py`

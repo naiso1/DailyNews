@@ -2537,6 +2537,26 @@ def fetch_article_text(url):
     _article_text_cache[cache_key] = text
     return text
 
+def copilot_summary_usable(headline, body, country, source_title, source):
+    from currency_guard import CurrencyUnitError, repair_indian_price_units
+    from summary_grounding import reverses_equipment_criticism
+
+    if (len(headline) > SUMMARY_TITLE_LIMIT or len(body) > SUMMARY_CONTENT_LIMIT
+            or headline.endswith("。") or not body.endswith("。")
+            or not _is_valid_japanese(body) or summary_language_problem(country, headline, body)):
+        return False
+    combined = f"{headline}。{body}"
+    if (not summary_matches_source(combined, source, title=source_title)
+            or reverses_equipment_criticism(combined, source)):
+        return False
+    try:
+        repair_indian_price_units(headline, source, country)
+        repair_indian_price_units(body, source, country)
+    except CurrencyUnitError:
+        return False
+    return True
+
+
 def summarize_article(title, content, url, country=""):
     """URL本文 + 既存タイトル/本文から日本語要約を生成"""
     from currency_guard import CURRENCY_RULES, CurrencyUnitError, repair_indian_price_units
@@ -2577,10 +2597,6 @@ def summarize_article(title, content, url, country=""):
         "条件5: 内容は必ず句点で終える。\\n"
         "条件6: 自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。\\n"
         "条件7: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\\n\\n"
-        f"既存タイトル: {title}\\n"
-        f"既存内容: {content}\\n"
-        f"本文HTML抽出: {html_text}\\n"
-        f"URL: {url}"
     )
     if country == "中国":
         prompt = (
@@ -2596,21 +2612,34 @@ def summarize_article(title, content, url, country=""):
             "条件7: 漢字や一般的なカタカナ表記を優先し、ひらがな主体の当て字は使わない。\n"
             "条件8: 固有名詞は英字表記か一般的な日本語表記（例: Huawei=ファーウェイ、Dongfeng=東風）を使う。不明な場合はカタカナ読みに変換する。\n"
             "条件9: 出力はJSONのみ。形式: {\"title\":\"...\",\"summary\":\"...\"}\n\n"
-            f"既存タイトル: {title}\n"
-            f"既存内容: {content}\n"
-            f"本文HTML抽出: {html_text}\n"
-            f"URL: {url}"
         )
     if EDITION.id == "exterior":
         prompt = prompt.replace("自動車内装・シート・インテリア（素材/HMI/コックピット/加飾/快適装備）に関連する情報を中心に要約すること。該当情報がない場合は記事全体を要約する。", exterior_rules.SUMMARY_FOCUS)
+    instructions = prompt.replace("\\n", "\n")
+    separator = "\n" if country == "中国" else "\\n"
+    prompt += separator.join((f"既存タイトル: {title}", f"既存内容: {content}",
+                              f"本文HTML抽出: {html_text}", f"URL: {url}"))
+    extra_rules = []
     if is_exterior_paper:
-        prompt += "\n論文の要旨だけに基づく要約。研究の方法・結果と限界を区別し、本文を読んだように書かず、要旨にない実験条件や外装への採用実績を補わない。"
+        extra_rules.append("論文の要旨だけに基づく要約。研究の方法・結果と限界を区別し、本文を読んだように書かず、要旨にない実験条件や外装への採用実績を補わない。")
     if keep_terms:
-        prompt = prompt + "\n" + keep_terms
-    prompt = prompt + "\n" + currency_rule
-    output = call_llm_text(prompt)
-    summary_title = parse_json_field(output, "title")
-    summary_body = parse_json_field(output, "summary")
+        extra_rules.append(keep_terms)
+    prompt += "\n" + "\n".join([*extra_rules, currency_rule])
+    pair = None
+    if os.environ.get("DAILYNEWS_SUMMARY_PROVIDER") == "copilot":
+        from dailynews.article_summaries import build_prompt, try_summary
+        from summary_grounding import summary_grounding_rules
+
+        editor_rules = "\n".join([instructions, *extra_rules, summary_grounding_rules()])
+        source = f"{title} {full_content} {full_html}"
+        pair = try_summary(build_prompt(editor_rules, title, content, html_text),
+                           lambda h, b: copilot_summary_usable(h, b, country, title, source))
+    if pair:
+        summary_title, summary_body = pair
+    else:
+        output = call_llm_text(prompt)
+        summary_title = parse_json_field(output, "title")
+        summary_body = parse_json_field(output, "summary")
 
     if len(summary_title) > SUMMARY_TITLE_LIMIT or len(summary_body) > SUMMARY_CONTENT_LIMIT or not ends_with_sentence(summary_body):
         refine_prompt = (
@@ -4858,4 +4887,7 @@ def main():
     (EDITION.runtime_dir / "collection_result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
+    # Enable Copilot on scheduled and manual collection runs. Library imports
+    # used for offline analysis do not connect to the workstation account.
+    os.environ.setdefault("DAILYNEWS_SUMMARY_PROVIDER", "copilot")
     main()

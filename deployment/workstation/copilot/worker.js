@@ -120,21 +120,66 @@ async function readRequest(){
   const chunks=[];let size=0;for await(const b of process.stdin){size+=b.length;if(size>65536)throw fail('INVALID_REQUEST');chunks.push(b);}
   try{return JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{throw fail('INVALID_REQUEST');}
 }
+// Text jobs share the image worker's account and lock. A receipt is created
+// before Send, so an interrupted job can fall back locally without resending.
+async function summarize(page, request, receipt) {
+  const {preparePrompt} = require('../../windows-server/copilot-service');
+  const {send} = await preparePrompt(page, request.prompt);
+  if (!await authenticated(page)) throw fail('AUTH_REQUIRED');
+  fs.writeFileSync(receipt, JSON.stringify({status:'sending'}), {flag:'wx'});
+  await send.click({timeout:10000});
+  const reply = page.locator('[data-testid="markdown-reply"]').last();
+  const copied = page.getByRole('button',{name:'応答のコピー',exact:true}).last();
+  const stopping = page.getByRole('button',{name:'生成を停止する',exact:true});
+  let previous = '', changed = 0;
+  const deadline = Date.now() + 65000;
+  while (Date.now() < deadline) {
+    await sleep(750);
+    if (!await reply.isVisible() || !await copied.isVisible() || await stopping.isVisible()) continue;
+    const code = reply.locator('pre code');
+    const content = await code.count() === 1 ? code : reply;
+    const result = (await content.innerText({timeout:2000})).trim();
+    if (result !== previous) { previous = result; changed = Date.now(); continue; }
+    if (!result || Date.now() - changed < 2500) continue;
+    if (result.length > 4000) throw fail('INVALID_ANSWER');
+    const record = {status:'DONE', answer:result};
+    atomic(receipt, record);
+    emit(record);
+    return;
+  }
+  throw fail('RESULT_UNCONFIRMED');
+}
 async function main(){
   const mode=process.argv[2];
-  if(!['--generate','--check-session','--login'].includes(mode))throw fail('INVALID_REQUEST');
-  const request=mode==='--generate'?await readRequest():null;if(request)validateRequest(request);
+  if(!['--generate','--summarize','--check-session','--login'].includes(mode))throw fail('INVALID_REQUEST');
+  const request=['--generate','--summarize'].includes(mode)?await readRequest():null;
+  if(mode==='--generate')validateRequest(request);
+  if(mode==='--summarize' && (typeof request?.prompt!=='string' || !request.prompt.trim()
+      || request.prompt.length>12000))throw fail('INVALID_REQUEST');
   const {chromium,edge}=runtime(),release=lock();let browser,context,page,timer,timedOut=false;
   try{
+    let receipt;
+    if(mode==='--summarize'){
+      const dir=path.join(RUNTIME,'article-summaries');
+      fs.mkdirSync(dir,{recursive:true});
+      receipt=path.join(dir,crypto.createHash('sha256').update(request.prompt).digest('hex')+'.json');
+      if(fs.existsSync(receipt)){
+        const saved=JSON.parse(fs.readFileSync(receipt,'utf8'));
+        if(saved.status!=='DONE')throw fail('ALREADY_SUBMITTED');
+        emit(saved);return;
+      }
+    }
     let state;try{state=await loadSession();}catch(e){if(mode!=='--login')throw e;}
     browser=await chromium.launch({executablePath:edge,headless:mode!=='--login'});
-    timer=setTimeout(()=>{timedOut=true;browser.close().catch(()=>{});},mode==='--login'?600000:(request?.timeoutMs||20000)+80000);
+    const timeout=mode==='--summarize'?135000:(mode==='--login'?600000:(request?.timeoutMs||20000)+80000);
+    timer=setTimeout(()=>{timedOut=true;browser.close().catch(()=>{});},timeout);
     context=await browser.newContext({...(state?{storageState:state}:{}),viewport:{width:1440,height:1000},acceptDownloads:true});
     page=await context.newPage();await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
     if(mode==='--login'){
       emit({status:'LOGIN_REQUIRED'});while(!await authenticated(page)){if(timedOut)throw fail('AUTH_REQUIRED');await sleep(500);}
     }else await ready(page);
-    if(request)await generate(page,request);
+    if(mode==='--summarize')await summarize(page,request,receipt);
+    if(mode==='--generate')await generate(page,request);
     try{if(!timedOut&&await authenticated(page))await saveSession(context);}catch{emit({event:'warning',code:'SESSION_REFRESH_FAILED'});}
     if(!request)emit({status:'AUTHENTICATED'});
   }catch(e){if(timedOut)throw fail('GENERATION_TIMEOUT');throw e;}
