@@ -43,6 +43,47 @@ def check(browser, base):
     expect(first.locator(".thumb img")).to_have_js_property("naturalWidth", 768)
     expect(first.locator(".policy-photo-credit")).to_have_count(0)
     item_id = first.get_attribute("data-news-id")
+    for card in page.locator(".policy-story").all():
+        for selector in (".btn", ".card-tag", ".favorite-btn", ".article-copilot-btn", ".article-settings-btn",
+                         ".read-count", ".source", ".card-date-meta", ".id-badge"):
+            expect(card.locator(selector).first).to_be_visible()
+        expect(card.locator(".id-badge")).to_have_text(card.get_attribute("data-news-id"))
+    tag = first.locator(".card-tag").first
+    tag_name = tag.inner_text()
+    tag.click()
+    expect(page.locator("#searchInput")).to_have_value(tag_name)
+    expect(page.locator(f"#card-{item_id}")).to_be_visible()
+    page.goto(base + "/?countries=policy")
+    with page.expect_response(lambda r: r.url.endswith("/favorites/" + item_id) and r.status == 200):
+        first.locator(".favorite-btn").click()
+    page.reload()
+    expect(first.locator(".fav-icon")).to_have_text("★")
+    page.locator("#favoritesToggle").click()
+    expect(page.locator(".policy-story")).to_have_count(1)
+    page.locator('#countryFilters .chip[data-country="world"]').click()
+    expect(page.locator(f"#newsGrid #card-{item_id} .favorite-select")).to_be_visible()
+    page.goto(base + "/?countries=policy")
+    first.locator(".article-copilot-btn").click()
+    expect(page.locator(".dncp-current-article")).to_contain_text(first.locator(".title").inner_text())
+    expect(page.locator("#companion-card-" + item_id)).to_have_count(1)
+    page.get_by_role("button", name="会話を最小化").click()
+    first.locator(".article-settings-btn").click()
+    page.get_by_role("button", name="一覧から削除…").click()
+    expect(page.locator("#articleRemovalItemTitle")).to_have_text(first.locator(".title").inner_text())
+    page.locator(".article-removal-cancel").click()
+    first.locator(".article-settings-btn").click()
+    page.get_by_role("button", name="画像を変更").click()
+    expect(page.locator("#imageEditorItemTitle")).to_have_text(first.locator(".title").inner_text())
+    replacement = "https://cdn.motor1.com/test.jpg"
+    page.locator("#imageEditorUrl").fill(replacement)
+    page.locator(".image-editor-save").click()
+    expect(first.locator(".thumb img")).to_have_attribute("src", replacement)
+    expect(first.locator(".policy-photo-credit")).to_have_count(0)
+    first.locator(".article-settings-btn").click()
+    page.get_by_role("button", name="画像を変更").click()
+    page.once("dialog", lambda dialog: dialog.accept())
+    page.locator(".image-editor-reset").click()
+    expect(first.locator(".thumb img")).to_have_attribute("src", "page_images/policy_cover.webp")
     like = first.locator('button[onclick*="toggleLike"]')
     with page.expect_response(lambda r: r.url.endswith(f"/{item_id}/like") and r.request.method == "PUT"):
         like.click()
@@ -133,7 +174,7 @@ def main():
         finally:
             server.terminate()
             server.wait(timeout=10)
-    print("PASS: 5 highlights, daily and retrospective threads, persistent likes/replies, navigation and history at both widths")
+    print("PASS: daily and archived card controls, favorites, tags, article context, image override/reset, reactions, navigation and responsive history")
 
 
 if __name__ == "__main__":

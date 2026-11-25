@@ -1585,7 +1585,7 @@ const publicCopilotAnswers = require('./copilot-comment-answers').createStore({
   db, readJob: (user, id) => getCopilotService().getJob(user, id),
 });
 let copilotArticles = {release: null, rows: []};
-function copilotCatalog() {
+function copilotCatalog(includePolicy = false) {
   const release = activeRelease();
   if (!release) throw Object.assign(new Error(), {safeCode:'NO_NEWS'});
   if (copilotArticles.release !== release.releaseId) {
@@ -1603,8 +1603,19 @@ function copilotCatalog() {
     }
     copilotArticles = {release:release.releaseId,rows,range,newIds};
   }
+  if (includePolicy && EDITION === 'interior' && !copilotArticles.policyRows) {
+    const sandbox = {window:{}};
+    for (const file of ['dailynews_policy.js', 'policy_data.js', 'policy_highlights.js']) {
+      const filename = path.join(release.releaseDir, file);
+      if (fs.existsSync(filename)) require('node:vm').runInNewContext(fs.readFileSync(filename,'utf8'),sandbox,{timeout:3000});
+    }
+    copilotArticles.policyRows = Array.from(sandbox.window.DailyNewsPolicy?.articles().values() || [], card => ({
+      ...card, desc: [card.stage, card.summary, card.question && `TGで確認したいこと：${card.question}`].filter(Boolean).join(' ')
+    }));
+  }
   const hidden = new Set(db.prepare('SELECT item_id FROM hidden_items').all().map(r => r.item_id));
-  return {...copilotArticles,rows:copilotArticles.rows.filter(r => !hidden.has(r.id) && !r.duplicateOf)};
+  const visible = r => !hidden.has(r.id) && !r.duplicateOf;
+  return {...copilotArticles, rows:copilotArticles.rows.filter(visible), policyRows: includePolicy ? (copilotArticles.policyRows || []).filter(visible) : []};
 }
 function getCopilotService() {
   if (copilotService) return copilotService;
@@ -1612,7 +1623,7 @@ function getCopilotService() {
     configFile: path.join(IDENTITY_DB_FILE ? path.dirname(IDENTITY_DB_FILE) : DATA_DIR, 'copilot-worker.json'),
     edition: EDITION,
     article: itemId => copilotCatalog().rows.find(row => row.id === itemId),
-    question: input => require('./copilot-context').buildQuestion(input,copilotCatalog()),
+    question: input => require('./copilot-context').buildQuestion(input,copilotCatalog(input.scope === 'article' && input.itemId?.startsWith('policy-'))),
     comment: (itemId, id) => db.prepare('SELECT comment_text FROM comments WHERE id=? AND item_id=?').get(id, itemId),
   });
   return copilotService;

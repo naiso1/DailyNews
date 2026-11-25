@@ -8,7 +8,7 @@ test('citations and list use identical normal cards with distinct DOM IDs and th
  const ctx=vm.createContext({document:{createElement:()=>({dataset:{}})},window:{interactionsData:{jp2298:{likes:2,comments:1,reads:12}}},
   isFavorite:()=>false,favoritesOnly:false,selectedFavoriteKeys:new Set(),isNewContent:()=>true,
   getNewsImageUrl:n=>n.img,getDisplayImageUrl:s=>s,renderRelatedNewsSources:()=>'',COUNTRY_FLAGS:{jp:'🇯🇵'},COUNTRY_NAMES:{jp:'日本'}});
- for(const name of ['escapeHtml','renderArticleTools','createNewsCard'])vm.runInContext(extract(html,name),ctx);
+ for(const name of ['escapeHtml','renderArticleTools','renderReactionButtons','renderCommentSection','renderNewsActions','createNewsCard'])vm.runInContext(extract(html,name),ctx);
  const item={id:'jp2298',country:'jp',title:'日産ルークス',desc:'快適パック',tags:['音響'],date:'2026-11-19',source:'MotorFan',img:'https://example.test/a.png',url:'https://example.test/a',interiorScore:60};
  const list=ctx.createNewsCard(item),preview=ctx.createNewsCard(item,{preview:true});
  assert.notEqual(preview.id,list.id);assert.equal(preview.dataset.newsId,list.dataset.newsId);assert.equal(preview.innerHTML,list.innerHTML);

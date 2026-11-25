@@ -11,6 +11,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <script src="dailynews_config.js?v=20260915-editions-1"></script>
+    <script src="dailynews_policy.js"></script>
     <script defer src="dailynews_header.js?v=20261016-c1"></script>
     <script>
         const exteriorPath = /^\/exterior(?:\/|$)/.test(location.pathname);
@@ -365,6 +366,8 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
 .policy-icon { display:inline-block; width:1.35em; height:1.35em; vertical-align:middle; background:center/contain no-repeat url("page_images/icon_policy.png"); flex:none; }
 #policyHeading { display:flex; align-items:center; gap:8px; }
 .policy-story .title, .policy-story p { margin: 0; }
+.policy-story button.card-tag { font-family:inherit; cursor:pointer; }
+.policy-story .source, .policy-story .id-badge { max-width:100%; overflow-wrap:anywhere; }
 .policy-story .country-badge { max-width:50%; }
 .policy-story .relevance-badge { max-width:43%; }
 .policy-photo-credit { position:absolute; right:6px; bottom:6px; padding:2px 6px; border-radius:4px; background:#0b1422dd; color:#fff; font-size:10px; }
@@ -378,7 +381,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
 #policyHighlights { margin-top: 28px; scroll-margin-top: 16px; }
 #policyHighlights h3 { margin-bottom: 4px; }
 #policyPeriod { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
-.policy-view :is(#paperRankingWrapper,#newsGrid,#insightsContainer,#favoritesActions,.quick-nav,#newsGrid + div,.filters .stats,.filter-row:has(#tagFilters),#sortOrder,#favoritesToggle) { display: none !important; }
+.policy-view :is(#paperRankingWrapper,#newsGrid,#insightsContainer,.quick-nav,#newsGrid + div,.filters .stats,.filter-row:has(#tagFilters),#sortOrder) { display: none !important; }
 .chip.active .new-count { color: #0c1224; background: rgba(255, 255, 255, 0.7); border-color: transparent; }
 
 .chip.country-jp.active  { background: linear-gradient(135deg, #ff6b6b, #ffd93d); }
@@ -1837,6 +1840,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
 
         function resolveNewsItem(itemOrId, newsById = getNewsLookup()) {
             let item = typeof itemOrId === "object" ? itemOrId : newsById.get(String(itemOrId));
+            if (!item && String(itemOrId).startsWith("policy-")) item = window.DailyNewsPolicy?.articles().get(itemOrId);
             const paper = item?.country === "paper";
             const seen = new Set();
             while (item) {
@@ -2020,8 +2024,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         }
 
         function showNewsItem(itemId, fromRanking = false, returnToAccount = false) {
-            const policy = String(itemId).startsWith("policy-") && policyStories().find(story => story.id === itemId);
-            const target = policy || resolveNewsItem(itemId);
+            const target = resolveNewsItem(itemId);
             if (!target) return;
             itemId = target.id;
             beginInternalNavigation(fromRanking ? "rankingSection" : null, returnToAccount);
@@ -2030,7 +2033,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             document.getElementById("dateTo").value = "";
             newOnly = false;
             favoritesOnly = false;
-            activeCountries = new Set([policy ? "policy" : "world"]);
+            activeCountries = new Set([target.country === "policy" ? "policy" : "world"]);
             activeTags = new Set(["all"]);
             updateFavoritesToggle();
             updateFavoritesActionsVisibility();
@@ -2169,7 +2172,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             const news = visibleNewsData();
             const policies = window.DAILYNEWS_CONFIG?.id === "interior" ? policyStories()
                 .filter(item => !interactions[item.id]?.hidden)
-                .map(item => ({ ...item, country: "policy" })) : [];
+                : [];
             const candidates = news.filter(item => item.country !== "paper").concat(policies);
             const latest = getLatestDate(news.concat(policies));
 
@@ -2215,7 +2218,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            ${item.country === "policy" ? renderPolicyImage(item.img) : `<img src="${escapeHtml(getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC)}" data-original-src="${escapeHtml(getNewsImageUrl(item))}" loading="lazy" referrerpolicy="no-referrer" alt=""
+                            ${item.country === "policy" ? renderPolicyImage(getNewsImageUrl(item)) : `<img src="${escapeHtml(getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC)}" data-original-src="${escapeHtml(getNewsImageUrl(item))}" loading="lazy" referrerpolicy="no-referrer" alt=""
                                 onerror="if(retryOriginalNewsImage(this))return;this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">`}
                         </div>
                         <div class="ranking-title-text">${escapeHtml(item.title)}</div>
@@ -2230,7 +2233,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
                         </button>
-                        ${item.country === "policy" ? "" : renderArticleTools(item.id)}
+                        ${renderArticleTools(item.id)}
                     </div>
                 </div>
             `).join("");
@@ -2906,7 +2909,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         function getFavoriteItems(keys = null) {
             const targetKeys = keys && keys.length ? keys : [...favoriteIds];
             const items = [];
-            const newsMap = new Map(NEWS_DATA.map(n => [n.id, n]));
+            const newsMap = new Map([...getNewsLookup(), ...(window.DailyNewsPolicy?.articles() || [])]);
             const ideaMap = buildIdeaIndex();
             const seen = new Set();
             targetKeys.forEach(key => {
@@ -3493,7 +3496,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         }
 
         function renderArticleTools(itemId) {
-            if (!/^(?:jp|us|eu|cn|in|paper)\d+$/.test(String(itemId))) return "";
+            if (!/^(?:jp|us|eu|cn|in|paper)\d+$/.test(String(itemId)) && !window.DailyNewsPolicy?.articles().has(itemId)) return "";
             return `<button type="button" class="action-btn article-copilot-btn" title="この記事をCopilotに質問" aria-label="この記事をCopilotに質問" onclick="window.dailyNewsCopilot?.askArticle('${itemId}'); event.stopPropagation();">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 10v7a3 3 0 0 1-3 3H9l-5 2v-5a3 3 0 0 1-2-3V7a3 3 0 0 1 3-3h6"/><path d="m17 1 1.7 4.3L23 7l-4.3 1.7L17 13l-1.7-4.3L11 7l4.3-1.7Z"/></svg><span>Copilot</span></button>
                 <button type="button" class="action-btn article-settings-btn" title="記事の設定" aria-label="記事の設定" aria-haspopup="dialog" aria-expanded="false" onclick="toggleArticleSettings('${itemId}', this); event.stopPropagation();">
@@ -3559,14 +3562,38 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             </div>`;
         }
 
-        // The list and Copilot citations share one card, including image and interaction controls.
-        function createNewsCard(n, { preview = false } = {}) {
+        function renderNewsActions(n, preview = false) {
             const interaction = window.interactionsData?.[n.id] || {};
             const readCount = (typeof interaction.reads === "number")
                 ? interaction.reads
                 : (window.getLocalReadCount ? window.getLocalReadCount(n.id) : 0);
             const favActive = isFavorite(n.id);
             const favSelected = !preview && favoritesOnly && selectedFavoriteKeys.has(n.id);
+            const url = n.country === "policy" ? safeNewsSourceUrl(n.url) : (window.DailyNewsAnnotations?.articleUrl(n) ?? n.url);
+            return `<div class="actions">
+                ${url ? `<a class="btn" href="${escapeHtml(url)}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>` : ""}
+
+                ${!preview && favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
+                <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
+                    <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
+                </button>
+                ${renderReactionButtons(n.id)}
+                ${renderArticleTools(n.id)}
+
+                <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
+                <span class="source">${escapeHtml(n.source)}</span>
+                <span class="card-date-meta">${escapeHtml(n.date)}</span>
+                <span class="id-badge">${n.id}</span>
+            </div>`;
+        }
+
+        // The list and Copilot citations share one card, including image and interaction controls.
+        function createNewsCard(n, { preview = false } = {}) {
+            if (n.country === "policy") {
+                const template = document.createElement("template");
+                template.innerHTML = renderPolicyStory(n, true, preview);
+                return template.content.firstElementChild;
+            }
             const card = document.createElement("article");
             card.className = "card";
             card.id = `${preview ? "companion-card" : "card"}-${n.id}`;
@@ -3601,21 +3628,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             <div class="card-tags">${n.tags.map(t => `<span class="card-tag" onclick="searchByTag('${t}')" style="cursor:pointer;">${t}</span>`).join("")}</div>
 
 
-            <div class="actions">
-                <a class="btn" href="${escapeHtml(window.DailyNewsAnnotations?.articleUrl(n) ?? n.url)}" target="_blank" rel="noopener" onclick="trackArticleRead('${n.id}')">記事を読む</a>
-
-                ${!preview && favoritesOnly ? `<label class="favorite-select-wrap"><input type="checkbox" class="favorite-select" data-fav-key="${n.id}" ${favSelected ? 'checked' : ''}><span>選択</span></label>` : ''}
-                <button class="action-btn favorite-btn${favActive ? ' active' : ''}" onclick="toggleFavorite('${n.id}', this)">
-                    <span class="fav-icon">${favActive ? '★' : '☆'}</span> <span>お気に入り</span>
-                </button>
-                ${renderReactionButtons(n.id)}
-                ${renderArticleTools(n.id)}
-
-                <span class="read-count" data-read-id="${n.id}">閲覧 ${readCount}</span>
-                <span class="source">${n.source}</span>
-                <span class="card-date-meta">${n.date}</span>
-                <span class="id-badge">${n.id}</span>
-            </div>
+            ${renderNewsActions(n, preview)}
 
             ${renderCommentSection(n.id)}
 
@@ -3626,16 +3639,14 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         window.createDailyNewsCard = (item) => createNewsCard(item, { preview: true });
 
         function policyStories() {
-            const daily = Object.entries(window.DAILYNEWS_POLICY_ISSUES || {}).flatMap(([date, cards]) =>
-                cards.map((card, i) => ({ ...card, date, id: card.id || `policy-${date}-${i + 1}` })));
-            return daily.concat(window.DAILYNEWS_POLICY_HIGHLIGHTS?.cards || []);
+            return Array.from(window.DailyNewsPolicy?.articles().values() || []);
         }
 
         function addPolicyItemsToIndex(index, includeHidden = false) {
             for (const story of policyStories()) {
                 if (!includeHidden && window.interactionsData?.[story.id]?.hidden) continue;
                 index.set(story.id, { id: story.id, targetId: story.id, title: story.title, date: story.date,
-                    type: "policy", country: story.region, description: story.summary, image: story.img || POLICY_COVER });
+                    type: "policy", country: story.region, description: story.summary, image: getNewsImageUrl(story) || POLICY_COVER });
             }
         }
 
@@ -3654,16 +3665,16 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                 data-original-src="${escapeHtml(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="policyImageError(this)">`;
         }
 
-        function renderPolicyStory(card, showNew = false) {
+        function renderPolicyStory(card, showNew = false, preview = false) {
             const id = card.id;
             if (!/^policy-[a-z0-9-]+$/.test(id)) return "";
             const sources = (card.links || []).filter(([, url]) => safeNewsSourceUrl(url));
             const links = sources.map(([label, url]) =>
                 `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" onclick="trackArticleRead('${id}')">${escapeHtml(label)} ↗</a>`).join("");
-            const photo = safeNewsSourceUrl(card.img) && safeNewsSourceUrl(card.imageSource || sources[0]?.[1]);
-            const reads = window.interactionsData?.[id]?.reads ?? window.getLocalReadCount?.(id) ?? 0;
-            return `<article class="card policy-story" id="card-${id}" data-news-id="${id}">
-                <div class="thumb">${renderPolicyImage(card.img)}
+            const image = getNewsImageUrl(card);
+            const photo = image && image === card.img && safeNewsSourceUrl(card.img) && safeNewsSourceUrl(card.imageSource || sources[0]?.[1]);
+            return `<article class="card policy-story" id="${preview ? "companion-card" : "card"}-${id}" data-news-id="${id}">
+                <div class="thumb">${renderPolicyImage(image)}
                     <span class="country-badge">${COUNTRY_FLAGS.policy} ${escapeHtml(card.region)}</span>
                     <span class="relevance-badge">${escapeHtml(card.stage)}</span>
                     ${showNew && isNewContent(card.date) ? '<span class="new-badge">New</span>' : ''}
@@ -3673,22 +3684,20 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                     <h4 class="title">${escapeHtml(card.title)}</h4><p class="desc">${escapeHtml(card.summary)}</p>
                     <div class="policy-question"><strong>TGで確認したいこと</strong><p>${escapeHtml(card.question)}</p></div>
                     ${sources.length ? `<details class="policy-links"><summary>出典（${sources.length}件）</summary>${links}</details>` : ''}
-                    <div class="actions">
-                        ${sources.length ? `<a class="btn" href="${escapeHtml(sources[0][1])}" target="_blank" rel="noopener noreferrer" onclick="trackArticleRead('${id}')">出典を読む</a>` : ''}
-                        ${renderReactionButtons(id)}
-                        <span class="read-count" data-read-id="${id}">閲覧 ${Number(reads) || 0}</span>
-                        <time class="card-date-meta">${escapeHtml(card.date)}</time>
-                    </div>${renderCommentSection(id)}
+                    <div class="card-tags">${card.tags.map(tag => `<button type="button" class="card-tag" onclick="searchByTag(this.textContent)">${escapeHtml(tag)}</button>`).join("")}</div>
+                    ${renderNewsActions(card, preview)}${renderCommentSection(id)}
                 </div></article>`;
         }
 
         function renderPolicyNews(from, to, query) {
             const results = document.getElementById("policyResults");
+            const section = document.getElementById("policySection");
+            section.querySelectorAll(".policy-story").forEach(card => card._disposeNewsImageCarousel?.());
             const issues = window.DAILYNEWS_POLICY_ISSUES || {};
             const inRange = date => (!from || date >= from) && (!to || date <= to);
             const days = Object.keys(issues).filter(inRange).sort().reverse();
-            const stories = policyStories().filter(card => !window.interactionsData?.[card.id]?.hidden &&
-                [card.id, card.region, card.stage, card.title, card.summary, card.question].join(" ").toLowerCase().includes(query));
+            const stories = policyStories().filter(card => !isGloballyHidden(card) && (!favoritesOnly || isFavorite(card.id)) &&
+                [card.id, card.region, card.stage, card.title, card.summary, card.question, card.source, ...card.tags].join(" ").toLowerCase().includes(query));
             const sections = [];
             const highlights = window.DAILYNEWS_POLICY_HIGHLIGHTS;
             const highlightIds = new Set(highlights?.cards.map(card => card.id));
@@ -3714,6 +3723,9 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             archive.classList.toggle("grid", cards.length > 0);
             if (cards.length) archive.innerHTML = cards.map(card => renderPolicyStory(card)).join("");
             else archive.textContent = highlights ? "条件に合う過去の注目法規はありません。" : "過去の注目法規を読み込めませんでした。";
+            section.querySelectorAll(".policy-story").forEach(card => {
+                window.setupNewsImageCarousel?.(card, window.DailyNewsPolicy.articles().get(card.dataset.newsId));
+            });
         }
 
         function applyFilters({ preserveCards = false } = {}) {
@@ -3745,7 +3757,8 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             }
 
             // 1. Filter
-            let filteredData = NEWS_DATA.filter(n => {
+            const listData = favoritesOnly && activeCountries.has("world") ? NEWS_DATA.concat(policyStories()) : NEWS_DATA;
+            let filteredData = listData.filter(n => {
                 if (!isNewsListItem(n)) return false;
                 // Country Filter
                 if (!activeCountries.has("world") && !activeCountries.has(n.country)) return false;
@@ -3762,7 +3775,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                     if (!tagMatches) return false;
                 }
 
-                if (!matchesNewsDateRange(n, from, to)) return false;
+                if (!(favoritesOnly && n.country === "policy" && isShowingDefaultNewRange()) && !matchesNewsDateRange(n, from, to)) return false;
 
                 // Text Search
                 if (searchedArticle ? n.id !== searchTarget?.id : (searchText && !searchable.includes(searchText))) return false;

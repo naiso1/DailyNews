@@ -3,7 +3,7 @@
 const crypto = require('node:crypto');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const fail = code => Object.assign(new Error(code), {safeCode: code});
-const validId = id => typeof id === 'string' && /^(jp|us|eu|cn|in|paper)\d+$/.test(id);
+const validId = id => typeof id === 'string' && /^(?:(?:jp|us|eu|cn|in|paper)\d+|policy-[a-z0-9][a-z0-9-]{0,92})$/.test(id);
 const clean = (text, max) => String(text || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 const dateKey = value => /^\d{4}-\d{2}-\d{2}$/.test(value || '') ? value : '';
 const responseGuidance = '質問の意図を優先し、掲載記事は必要に応じた補足資料として扱ってください。用語・仕組み・比較・日常の疑問には一般知識でも答え、記事に書かれていないという理由だけで回答を打ち切らないでください。ただし一般論を、その記事の製品の仕様や採用実績として断定しないでください。元記事の本文・読者コメント・最新情報の確認が必要なら、利用可能なWeb検索で指定URLや公開情報の確認を試みてください。URLが渡されただけで閲覧済みとは扱わず、実際に取得できた内容だけを根拠にしてください。読者コメントと記事筆者の論調は別です。コメントを読めなければ確認できないと明記し、筆者の意見や想像を読者の評価として代用しないでください。取得できた場合も、確認できた範囲の傾向として述べ、世間全体の評価と断定しないでください。Webで確認した事実は参照元を示し、参照元を創作しないでください。確認できなかった事実と、一般知識で説明できることを分けて簡潔に答えてください。';
@@ -37,7 +37,8 @@ function buildQuestion(input, catalog) {
     return {fingerprint:hash(JSON.stringify([q,catalog.range||{}])),scope:q.scope,question:q.question,context,sources:[],maxAnswerChars:400,
       prompt:'あなたは一般的な疑問や相談に答えるアシスタントです。以下のJSONのquestionに、日本語400文字以内、最大3項目で簡潔に答えてください。今回は掲載ニュースを指定していません。記事との関連付けは不要です。知らない個人情報は創作しないでください。事実と推論を区別してください。' + responseGuidance + '\n' + JSON.stringify({question:q.question})};
   }
-  const available = catalog.rows.filter(a => validId(a.id) && !a.duplicateOf);
+  const rows = q.scope === 'article' && q.itemId.startsWith('policy-') ? catalog.policyRows || [] : catalog.rows;
+  const available = rows.filter(a => validId(a.id) && !a.duplicateOf);
   const ids = catalog.newIds ? new Set(catalog.newIds) : null;
   const range = catalog.range || {};
   const inRange = d => dateKey(d) && range.start && range.end && d >= range.start && d <= range.end;

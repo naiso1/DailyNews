@@ -1,7 +1,7 @@
 "use strict";
 // Personal-account UI. Provider identity, article selection and deduplication stay server-side.
 (() => {
-  const validId = id => /^(jp|us|eu|cn|in|paper)\d+$/.test(id || '');
+  const validId = id => /^(?:(?:jp|us|eu|cn|in|paper)\d+|policy-[a-z0-9][a-z0-9-]{0,92})$/.test(id || '');
   const validJob = id => /^[a-f0-9]{64}$/.test(id || '');
   const terminal = job => ['done','error','needs_review'].includes(job?.status);
   function httpUrl(value, conversation = false) {
@@ -129,7 +129,7 @@
     if(j){
       const p=el('p',undefined,'dncp-answer-text');
       const value=j.status==='done'?j.answer:j.status==='needs_review'?'送信結果を確認できませんでした。重複を防ぐため自動再送を停止しています。':j.status==='error'?errText({code:j.code}):j.status==='queued'?'順番を待っています…':'本人のCopilotで回答を取得しています…';
-      for(const part of String(value||'').split(/(\[(?:jp|us|eu|cn|in|paper)\d+\])/g)){
+      for(const part of String(value||'').split(/(\[(?:(?:jp|us|eu|cn|in|paper)\d+|policy-[a-z0-9-]+)\])/g)){
         const s=j.sources?.find(s=>validId(s.id)&&`[${s.id}]`===part);
         if(s)p.append(sourceLink(s,(s.title||s.id).slice(0,28)+((s.title||'').length>28?'…':'')));else p.append(document.createTextNode(part));
       }answer.append(p);

@@ -1087,9 +1087,7 @@ window.requestArticleRemoval = (itemId, itemKind) => {
     return;
   }
   const overlay = ensureRemovalDialog();
-  let item = (window.LOADED_NEWS_DATA || window.NEWS_DATA || []).find(
-    (entry) => String(entry.id) === String(itemId),
-  );
+  let item = imageEditorItem(itemId);
   if (!item) {
     item = (window.DAILY_INSIGHTS || []).flatMap(day => Object.values(day.ideas || {}).flat()).find(entry => String(entry.id) === String(itemId));
     itemKind = "idea";
@@ -1290,7 +1288,7 @@ function ensureImageEditorDialog() {
 function imageEditorItem(itemId) {
   return (window.LOADED_NEWS_DATA || window.NEWS_DATA || []).find(
     (entry) => String(entry.id) === String(itemId),
-  );
+  ) || window.DailyNewsPolicy?.articles().get(itemId);
 }
 
 function finishImageUrlChange(overlay, itemId, data) {

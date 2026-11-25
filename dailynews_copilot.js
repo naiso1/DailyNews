@@ -11,6 +11,7 @@
   messages.STALE_QUESTION='対象のニュースが更新されています。対象と質問を選び直して送信してください。';
   Object.assign(messages,{NO_NEWS:'対象のニュースがまだありません。',NO_RELEVANT_NEWS:'質問に合う記事が見つかりませんでした。記事を指定しない相談は「一般的な質問」を選んでください。',INVALID_REQUEST:'質問は1〜1000文字で入力してください。',NOT_FOUND:'対象の記事・質問が見つかりません。',ACCOUNT_NOT_CONNECTED:'本人のCopilotを接続してください。「接続設定」から操作できます。'});
   const supportsArticle=id=>/^(jp|us|eu|cn|in|paper)\d+$/.test(id||'');
+  const supportsQuestion=id=>supportsArticle(id)||Boolean(window.DailyNewsPolicy?.articles().has(id));
   const savedKey=()=>`dailynews-copilot-question:${window.DAILYNEWS_CONFIG?.id||'interior'}:${who()?.id}`;
   const errorText=e=>messages[e?.code]||'接続を確認して、もう一度操作してください。';
   async function api(route,method='GET',body) {
@@ -31,9 +32,10 @@
   }
   function element(tag,text,className) {const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;}
   function articleLink(source,text) {
-    if(!supportsArticle(source?.id))return element('span',text);
+    if(!supportsQuestion(source?.id))return element('span',text);
     const a=element('a',text,'copilot-article-link');
     const params=new URLSearchParams({q:source.id,from:'',to:'',new:'0'});
+    if(source.id.startsWith('policy-'))params.set('countries','policy');
     a.href=(window.DAILYNEWS_CONFIG?.basePath||'')+'/?'+params+'#card-'+source.id;
     a.title='DailyNewsの記事を表示：'+source.title;
     a.setAttribute('aria-label',`[${source.id}] ${source.title} — DailyNewsの記事を表示`);
@@ -66,7 +68,7 @@
       if(j?.question)reply.append(element('small','質問：'+j.question));
       const answer=element('p');
       const text=state.error||(j?.status==='done'?j.answer:j?.status==='needs_review'?'送信済みです。結果を確認できないため自動再送を停止しました。':j?.status==='error'?errorText({code:j.code}):j?.status==='queued'?'順番を待っています…':'本人のCopilotで回答を取得しています…');
-      for(const part of String(text||'').split(/(\[(?:jp|us|eu|cn|in|paper)\d+\])/g)){
+      for(const part of String(text||'').split(/(\[(?:(?:jp|us|eu|cn|in|paper)\d+|policy-[a-z0-9-]+)\])/g)){
         const source=j?.sources?.find(s=>'['+s.id+']'===part);
         if(source)answer.append(articleLink(source,part));else answer.append(document.createTextNode(part));
       }
@@ -221,7 +223,7 @@
       if(/^[a-f0-9]{64}$/.test(id||'')){const member=userKey;try{const r=await api('/jobs/'+id);if(userKey===member&&!state.loading&&!state.job){state.job=r.job;render(state);void poll(state,member);}}catch{}}}
   }
   window.dailyNewsCopilot={supportsArticle,openSettings:settings,askArticle:itemId=>{
-    if(!supportsArticle(itemId))return;
+    if(!supportsQuestion(itemId))return;
     if(window.dailyNewsCopilotCompanion)return window.dailyNewsCopilotCompanion.askArticle(itemId);
     return newsDialog(itemId);
   },askComment:async(itemId,commentId)=>{
