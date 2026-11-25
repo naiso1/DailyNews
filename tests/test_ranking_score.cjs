@@ -29,6 +29,7 @@ const ctx = vm.createContext({
   getLatestDate: items => items.map(n => n.date).sort().at(-1),
   activeCountries: new Set(['world']),
   updateRankingHeight() {},
+  renderArticleTools() { return ''; },
   getDisplayImageUrl: src => src,
   getNewsImageUrl: n => n.img,
   COUNTRY_FLAGS: {}, COUNTRY_NAMES: {}, FALLBACK_SRC: '',

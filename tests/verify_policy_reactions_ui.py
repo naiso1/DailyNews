@@ -22,11 +22,26 @@ def check(browser, base):
     assert response.ok, response.status
     page = ctx.new_page()
     page.route("**/*", lambda route: route.continue_() if route.request.url.startswith(base + "/") else route.abort())
+    page.route("https://cdn.motor1.com/**", lambda route: route.fulfill(
+        content_type="image/webp", path=ROOT / "page_images/policy_cover.webp"))
     page.goto(base + "/?countries=policy")
     expect(page.locator("#policyHighlightResults article")).to_have_count(5)
     expect(page.locator("#policyResults article")).to_have_count(3)
     page.locator(".release-history-confirm").click()
+    expect(page.locator("#policyChip .policy-icon")).to_be_visible()
+    expect(page.locator("#policyResults .new-badge")).to_have_count(3)
+    expect(page.locator("#policyHighlightResults .new-badge")).to_have_count(0)
+    daily = page.locator("#policyResults article").first
+    daily_id = daily.get_attribute("data-news-id")
+    photo = page.locator("#policyResults article").nth(1)
+    photo.scroll_into_view_if_needed()
+    expect(photo.locator(".thumb img")).to_have_js_property("naturalWidth", 768)
+    expect(photo.locator(".policy-photo-credit")).to_be_visible()
     first = page.locator("#policyHighlightResults article").first
+    first.scroll_into_view_if_needed()
+    expect(first.locator(".thumb img")).to_have_attribute("src", "page_images/policy_cover.webp")
+    expect(first.locator(".thumb img")).to_have_js_property("naturalWidth", 768)
+    expect(first.locator(".policy-photo-credit")).to_have_count(0)
     item_id = first.get_attribute("data-news-id")
     like = first.locator('button[onclick*="toggleLike"]')
     with page.expect_response(lambda r: r.url.endswith(f"/{item_id}/like") and r.request.method == "PUT"):
@@ -46,6 +61,19 @@ def check(browser, base):
     expect(first.locator(".comment-item")).to_have_count(2)
     expect(page.locator("#policyHighlightResults article").nth(1).locator(".btn-comment .count")).to_have_text("0")
     expect(page.locator("#policyResults article").first.locator(".btn-comment .count")).to_have_text("0")
+    with page.expect_response(lambda r: r.url.endswith(f"/{daily_id}/like") and r.request.method == "PUT"):
+        daily.locator('button[onclick*="toggleLike"]').click()
+    rank = page.locator("#rankingList")
+    historical_rank = rank.locator(f'[data-news-id="{item_id}"]')
+    expect(rank.locator(f'[data-news-id="{daily_id}"]')).to_contain_text("法規・政策")
+    expect(historical_rank).to_have_count(0)
+    page.locator('#countryFilters .chip[data-country="world"]').click()
+    page.locator("#rankingScope").select_option("all")
+    expect(historical_rank.locator(".btn-comment .count")).to_have_text("2")
+    expect(historical_rank.locator("button").first.locator(".count")).to_have_text("1")
+    historical_rank.locator(".btn-comment").click()
+    expect(page.locator(f'#card-{item_id} .comment-section')).to_be_visible()
+    expect(page.locator(f'#card-{item_id} .reply-comment')).to_contain_text("設計チームで確認します。")
     page.locator('#countryFilters .chip[data-country="world"]').click()
     page.locator(f'#activityGrid [data-activity-item="{item_id}"]').first.click()
     expect(page.locator(".policy-story")).to_have_count(1)
@@ -54,10 +82,13 @@ def check(browser, base):
     expect(page.locator(".policy-story")).to_have_count(1)
     for width in (390, 1440):
         page.set_viewport_size({"width": width, "height": 900})
+        box = page.locator(".policy-story").bounding_box()
+        assert box and box["x"] >= 0 and box["x"] + box["width"] <= width + 1
         page.locator("#releaseHistoryButton").evaluate("el => el.click()")
         overlay = page.locator("#releaseHistoryOverlay")
         expect(overlay).to_be_visible()
         expect(overlay.locator(".release-history-list")).to_contain_text("過去の注目法規")
+        expect(overlay.locator(".release-history-entry").first).to_contain_text("人気ニュースランキング")
         expect(overlay.locator(".release-history-list")).to_contain_text("2026-11-25")
         assert overlay.evaluate("el => el.scrollWidth <= el.clientWidth")
         overlay.locator(".release-history-confirm").click()
@@ -70,6 +101,9 @@ def main():
         release = root / "releases" / "abcdef1"
         release.mkdir(parents=True)
         (root / "active-release.txt").write_text("abcdef1", encoding="ascii")
+        (release / "page_images").mkdir()
+        for filename in ("icon_policy.png", "policy_cover.webp"):
+            shutil.copyfile(ROOT / "page_images" / filename, release / "page_images" / filename)
         for pattern in ("dailynews_*.js", "dailynews_*.css", "policy_*.js", "release_history.js"):
             for asset in ROOT.glob(pattern):
                 shutil.copyfile(asset, release / asset.name)

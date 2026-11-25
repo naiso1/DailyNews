@@ -887,7 +887,10 @@ function cancelHoverRead(itemId) {
 }
 
 function setupHoverReadTracking() {
-  const grid = document.getElementById("newsGrid");
+  document.querySelectorAll("#newsGrid, #policySection").forEach(bindHoverReadTracking);
+}
+
+function bindHoverReadTracking(grid) {
   if (!grid || grid.__hoverReadBound) return;
   grid.__hoverReadBound = true;
   grid.addEventListener("mouseover", (event) => {

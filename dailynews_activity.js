@@ -223,6 +223,7 @@ function setActivityDrawer(open) {
 }
 
 function activityImage(item) {
+  if (item?.type === "policy") return renderPolicyImage(item.image);
   if (!item?.image) return '<span class="activity-image-fallback" aria-hidden="true">📰</span>';
   return `<img src="${activityEscape(item.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">`;
 }

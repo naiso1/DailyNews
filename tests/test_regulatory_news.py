@@ -26,6 +26,19 @@ class RegulatoryNewsTests(unittest.TestCase):
                 policy.select_cards(sources, lambda prompt: unusable)
         self.assertEqual(policy.select_cards(sources, lambda prompt: {"cards": []}), [])
 
+    def test_images_follow_selected_source_without_refetching_rss_images_or_pdfs(self):
+        urls = ["https://example.org/" + name for name in ("article", "notice", "law.pdf")]
+        cards = [{"links": [["出典", url]]} for url in urls]
+        rows = [{"URL": urls[0], "画像URL": "https://example.org/photo.jpg"},
+                {"URL": urls[1], "画像URL": "https://example.org/logo.jpg"}]
+        fetched = []
+        def fetch(url):
+            fetched.append(url)
+            return "https://example.org/other.jpg"
+        policy.add_source_images(cards, rows, lambda url: "logo" in url, fetch)
+        self.assertEqual(fetched, [urls[1]])
+        self.assertEqual([card.get("img") for card in cards], [rows[0]["画像URL"], "https://example.org/other.jpg", None])
+
     def test_retry_does_not_replace_a_reviewed_day(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "policy_data.js"

@@ -362,22 +362,23 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
 #policySection h2 { margin: 0 0 4px; }
 #policyCoverage { color: var(--muted); margin: 0 0 16px; }
 #policySection .policy-day { margin: 18px 0 8px; font-size: 14px; }
-.policy-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,300px),1fr)); gap: 16px; }
-.policy-story { padding: 18px; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 14px; background: var(--panel,#101c29); }
-.policy-meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: 13px; }
-.policy-stage { color: var(--accent,#8be8cf); border: 1px solid currentColor; border-radius: 6px; padding: 2px 8px; }
-.policy-story h4 { margin: 14px 0 6px; font-size: 18px; }
-.policy-story p { margin: 0; line-height: 1.7; }
-.policy-question { margin: 16px 0; padding: 8px 12px; border-left: 3px solid #72c4af; background: rgba(100,197,171,.09); }
+.policy-icon { display:inline-block; width:1.35em; height:1.35em; vertical-align:middle; background:center/contain no-repeat url("page_images/icon_policy.png"); flex:none; }
+#policyHeading { display:flex; align-items:center; gap:8px; }
+.policy-story .title, .policy-story p { margin: 0; }
+.policy-story .country-badge { max-width:50%; }
+.policy-story .relevance-badge { max-width:43%; }
+.policy-photo-credit { position:absolute; right:6px; bottom:6px; padding:2px 6px; border-radius:4px; background:#0b1422dd; color:#fff; font-size:10px; }
+.policy-question { padding: 8px 12px; border-left: 3px solid #72c4af; background: rgba(100,197,171,.09); font-size:13px; line-height:1.6; }
 .policy-question strong { color: #8be8cf; font-size: 13px; }
-.policy-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; }
+.policy-links { font-size:13px; color:var(--muted); }
+.policy-links summary { width:fit-content; cursor:pointer; }
+.policy-links a { display:block; margin:4px 0; }
 .policy-links a { color: #a4dbea; font-size: 13px; overflow-wrap: anywhere; }
 .policy-jump { color: var(--accent); font-size: 14px; }
 #policyHighlights { margin-top: 28px; scroll-margin-top: 16px; }
 #policyHighlights h3 { margin-bottom: 4px; }
 #policyPeriod { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
-.policy-story .actions { margin-top: 14px; }
-.policy-view :is(#engagementRow,#rankingWrapper,#paperRankingWrapper,#rankingBack,#newsGrid,#insightsContainer,#favoritesActions,.quick-nav,#newsGrid + div,.filters .stats,.filter-row:has(#tagFilters),#sortOrder,#favoritesToggle) { display: none !important; }
+.policy-view :is(#paperRankingWrapper,#newsGrid,#insightsContainer,#favoritesActions,.quick-nav,#newsGrid + div,.filters .stats,.filter-row:has(#tagFilters),#sortOrder,#favoritesToggle) { display: none !important; }
 .chip.active .new-count { color: #0c1224; background: rgba(255, 255, 255, 0.7); border-color: transparent; }
 
 .chip.country-jp.active  { background: linear-gradient(135deg, #ff6b6b, #ffd93d); }
@@ -1486,7 +1487,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                         class="new-count" data-country="eu"></span></span>
                 <span class="chip country-paper" data-country="paper"><span class="paper-icon">📄</span>論文<span
                         class="new-count" data-country="paper"></span></span>
-                <button class="chip" id="policyChip" data-country="policy" type="button" aria-pressed="false" aria-controls="policySection">法規・政策<span class="new-count hidden" data-country="policy"></span></button>
+                <button class="chip" id="policyChip" data-country="policy" type="button" aria-pressed="false" aria-controls="policySection"><span class="policy-icon" aria-hidden="true"></span> 法規・政策<span class="new-count hidden" data-country="policy"></span></button>
             </div>
         </div>
         <div class="filter-row">
@@ -1527,17 +1528,6 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         <div class="stats">表示中: <strong id="visibleCount">0</strong> / <span id="totalCount">0</span> 件</div>
     </div>
 
-    <section id="policySection" hidden aria-labelledby="policyHeading">
-        <h2 id="policyHeading">法規・政策</h2>
-        <p id="policyCoverage">設計・調達・生産に関わる制度の動き　全地域から各号最大5件</p>
-        <a class="policy-jump" href="#policyHighlights">過去の注目法規へ ↓</a>
-        <div id="policyResults"></div>
-        <section id="policyHighlights" aria-labelledby="policyHighlightsHeading">
-            <h3 id="policyHighlightsHeading">過去の注目法規</h3>
-            <p id="policyPeriod"></p>
-            <div id="policyHighlightResults"></div>
-        </section>
-    </section>
     <section class="favorites-actions hidden" id="favoritesActions">
         <div class="favorites-actions-title">★ お気に入り共有</div>
         <div class="favorites-actions-controls">
@@ -1662,6 +1652,17 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
     </div>
 
     <div id="newsSection" class="jump-anchor"></div>
+    <section id="policySection" hidden aria-labelledby="policyHeading">
+        <h2 id="policyHeading"><span class="policy-icon" aria-hidden="true"></span>法規・政策</h2>
+        <p id="policyCoverage">設計・調達・生産に関わる制度の動き　全地域から各号最大5件</p>
+        <a class="policy-jump" href="#policyHighlights">過去の注目法規へ ↓</a>
+        <div id="policyResults"></div>
+        <section id="policyHighlights" aria-labelledby="policyHighlightsHeading">
+            <h3 id="policyHighlightsHeading">過去の注目法規</h3>
+            <p id="policyPeriod"></p>
+            <div id="policyHighlightResults"></div>
+        </section>
+    </section>
     <section class="grid" id="newsGrid"></section>
     <div style="text-align: center; margin: 2rem 0;">
         <button id="loadMoreBtn" onclick="loadMore()" class="btn" style="display: none;">もっと見る</button>
@@ -2044,13 +2045,12 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                 card.classList.add("card-highlight");
                 setTimeout(() => card.classList.remove("card-highlight"), 1500);
             }, 100);
+            return itemId;
         }
 
         function openCommentsFor(itemId) {
-            const target = resolveNewsItem(itemId);
-            if (!target) return;
-            itemId = target.id;
-            showNewsItem(itemId);
+            itemId = showNewsItem(itemId, true);
+            if (!itemId) return;
             setTimeout(() => {
                 const card = document.getElementById(`card-${itemId}`);
                 if (!card) return;
@@ -2166,7 +2166,12 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             const interactions = window.interactionsData || {};
             const sortKey = getRankingSortKey();
             const scope = getRankingScopeValue();
-            const latest = getLatestDate(visibleNewsData());
+            const news = visibleNewsData();
+            const policies = window.DAILYNEWS_CONFIG?.id === "interior" ? policyStories()
+                .filter(item => !interactions[item.id]?.hidden)
+                .map(item => ({ ...item, country: "policy" })) : [];
+            const candidates = news.filter(item => item.country !== "paper").concat(policies);
+            const latest = getLatestDate(news.concat(policies));
 
             if ((scope === "today" || scope === "weekly") && !latest) {
                 list.innerHTML = '<div class="ranking-empty">データがありません。</div>';
@@ -2174,7 +2179,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                 return;
             }
 
-            let ranked = filterRankingByCountry(visibleNewsData().filter(item => item.country !== "paper")).map(item => {
+            let ranked = filterRankingByCountry(candidates).map(item => {
                 const data = interactions[item.id] || {};
                 const likes = data.likes || 0;
                 const comments = data.comments || 0;
@@ -2210,10 +2215,10 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                     <div class="ranking-left">
                         <div class="ranking-rank">${idx + 1}</div>
                         <div class="ranking-thumb">
-                            <img src="${escapeHtml(getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC)}" data-original-src="${escapeHtml(getNewsImageUrl(item))}" loading="lazy" referrerpolicy="no-referrer" alt="${item.title || 'news image'}"
-                                onerror="if(retryOriginalNewsImage(this))return;this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">
+                            ${item.country === "policy" ? renderPolicyImage(item.img) : `<img src="${escapeHtml(getDisplayImageUrl(getNewsImageUrl(item)) || FALLBACK_SRC)}" data-original-src="${escapeHtml(getNewsImageUrl(item))}" loading="lazy" referrerpolicy="no-referrer" alt=""
+                                onerror="if(retryOriginalNewsImage(this))return;this.onerror=null;this.src=FALLBACK_SRC;this.style.objectFit='contain';">`}
                         </div>
-                        <div class="ranking-title-text">${item.title}</div>
+                        <div class="ranking-title-text">${escapeHtml(item.title)}</div>
                     </div>
                     <div class="ranking-meta">
                         <span>${COUNTRY_FLAGS[item.country] || ""} ${COUNTRY_NAMES[item.country] || ""}</span>
@@ -2225,7 +2230,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                         <button class="action-btn btn-comment" onclick="openCommentsFor('${item.id}'); event.stopPropagation();">
                             <span>💬</span> <span class="count">${item.comments}</span>
                         </button>
-                        ${renderArticleTools(item.id)}
+                        ${item.country === "policy" ? "" : renderArticleTools(item.id)}
                     </div>
                 </div>
             `).join("");
@@ -2336,9 +2341,10 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             in: "<span class='flag-icon flag-in'></span>",
             us: "<span class='flag-icon flag-us'></span>",
             eu: "<span class='flag-icon flag-eu'></span>",
-            paper: "<span class='paper-icon'>📄</span>"
+            paper: "<span class='paper-icon'>📄</span>",
+            policy: "<span class='policy-icon' aria-hidden='true'></span>"
         };
-        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文" };
+        const COUNTRY_NAMES = { jp: "日本", cn: "中国", in: "インド", us: "米国", eu: "欧州", paper: "論文", policy: "法規・政策" };
         const TREND_TOPIC_NAMES = { design: "デザイン", market: "市場", regulation: "規制", materials: "材料", competitor: "競合" };
         function newsCategoryLabel(item) {
             if (window.DAILYNEWS_CONFIG.id !== "exterior") return "";
@@ -2597,6 +2603,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         }
         const TITLE_ICONS = {
             world: "page_images/icon_world.png",
+            policy: "page_images/icon_policy.png",
             jp: "page_images/icon_jp.png",
             cn: "page_images/icon_cn.png",
             in: "page_images/icon_in.png",
@@ -3628,22 +3635,51 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             for (const story of policyStories()) {
                 if (!includeHidden && window.interactionsData?.[story.id]?.hidden) continue;
                 index.set(story.id, { id: story.id, targetId: story.id, title: story.title, date: story.date,
-                    type: "policy", country: story.region, description: story.summary, image: "" });
+                    type: "policy", country: story.region, description: story.summary, image: story.img || POLICY_COVER });
             }
         }
 
-        function renderPolicyStory(card) {
-            const links = card.links.map(([label, url]) => /^https?:\/\//i.test(url)
-                ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ↗</a>` : "").join("");
+        const POLICY_COVER = "page_images/policy_cover.webp";
+
+        function policyImageError(img) {
+            if (retryOriginalNewsImage(img)) return;
+            img.onerror = null;
+            img.src = POLICY_COVER;
+            img.closest(".thumb")?.querySelector(".policy-photo-credit")?.remove();
+        }
+
+        function renderPolicyImage(imageUrl, className = "") {
+            const src = safeNewsSourceUrl(imageUrl);
+            return `<img class="${className}" src="${escapeHtml(getDisplayImageUrl(src) || POLICY_COVER)}"
+                data-original-src="${escapeHtml(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="policyImageError(this)">`;
+        }
+
+        function renderPolicyStory(card, showNew = false) {
             const id = card.id;
             if (!/^policy-[a-z0-9-]+$/.test(id)) return "";
+            const sources = (card.links || []).filter(([, url]) => safeNewsSourceUrl(url));
+            const links = sources.map(([label, url]) =>
+                `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" onclick="trackArticleRead('${id}')">${escapeHtml(label)} ↗</a>`).join("");
+            const photo = safeNewsSourceUrl(card.img) && safeNewsSourceUrl(card.imageSource || sources[0]?.[1]);
+            const reads = window.interactionsData?.[id]?.reads ?? window.getLocalReadCount?.(id) ?? 0;
             return `<article class="card policy-story" id="card-${id}" data-news-id="${id}">
-                <div class="policy-meta"><strong>${escapeHtml(card.region)}</strong>
-                    <span class="policy-stage">${escapeHtml(card.stage)}</span></div>
-                <h4>${escapeHtml(card.title)}</h4><p>${escapeHtml(card.summary)}</p>
-                <div class="policy-question"><strong>TGで確認したいこと</strong><p>${escapeHtml(card.question)}</p></div>
-                <div class="policy-links">${links}</div>
-                <div class="actions">${renderReactionButtons(id)}</div>${renderCommentSection(id)}</article>`;
+                <div class="thumb">${renderPolicyImage(card.img)}
+                    <span class="country-badge">${COUNTRY_FLAGS.policy} ${escapeHtml(card.region)}</span>
+                    <span class="relevance-badge">${escapeHtml(card.stage)}</span>
+                    ${showNew && isNewContent(card.date) ? '<span class="new-badge">New</span>' : ''}
+                    ${photo ? `<a class="policy-photo-credit" href="${escapeHtml(photo)}" target="_blank" rel="noopener noreferrer">参考画像 · ${escapeHtml(new URL(photo).hostname.replace(/^www\./, ""))}</a>` : ''}
+                </div>
+                <div class="content">
+                    <h4 class="title">${escapeHtml(card.title)}</h4><p class="desc">${escapeHtml(card.summary)}</p>
+                    <div class="policy-question"><strong>TGで確認したいこと</strong><p>${escapeHtml(card.question)}</p></div>
+                    ${sources.length ? `<details class="policy-links"><summary>出典（${sources.length}件）</summary>${links}</details>` : ''}
+                    <div class="actions">
+                        ${sources.length ? `<a class="btn" href="${escapeHtml(sources[0][1])}" target="_blank" rel="noopener noreferrer" onclick="trackArticleRead('${id}')">出典を読む</a>` : ''}
+                        ${renderReactionButtons(id)}
+                        <span class="read-count" data-read-id="${id}">閲覧 ${Number(reads) || 0}</span>
+                        <time class="card-date-meta">${escapeHtml(card.date)}</time>
+                    </div>${renderCommentSection(id)}
+                </div></article>`;
         }
 
         function renderPolicyNews(from, to, query) {
@@ -3665,7 +3701,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             for (const day of days) {
                 const cards = daily.get(day) || [];
                 if (cards.length) sections.push(`<h3 class="policy-day">${escapeHtml(day)}　${cards.length}件</h3>
-                    <div class="policy-grid">${cards.map(renderPolicyStory).join("")}</div>`);
+                    <div class="grid">${cards.map(card => renderPolicyStory(card, true)).join("")}</div>`);
             }
             if (sections.length) results.innerHTML = sections.join("");
             else results.textContent = !window.DAILYNEWS_POLICY_ISSUES ? "法規・政策のデータを読み込めませんでした。"
@@ -3675,10 +3711,8 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             const archive = document.getElementById("policyHighlightResults");
             document.getElementById("policyPeriod").textContent = highlights ? `${highlights.from} 〜 ${highlights.to} の振り返り` : "";
             const cards = stories.filter(card => highlightIds.has(card.id) && (isShowingDefaultNewRange() || inRange(card.date)));
-            archive.classList.toggle("policy-grid", cards.length > 0);
-            if (cards.length) archive.innerHTML = cards.map(card => renderPolicyStory({
-                ...card, region: `${card.region}　${card.date}`
-            })).join("");
+            archive.classList.toggle("grid", cards.length > 0);
+            if (cards.length) archive.innerHTML = cards.map(card => renderPolicyStory(card)).join("");
             else archive.textContent = highlights ? "条件に合う過去の注目法規はありません。" : "過去の注目法規を読み込めませんでした。";
         }
 
@@ -3702,6 +3736,8 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                 document.getElementById("policySection").hidden = !policyView;
                 if (policyView) {
                     if (!preserveCards) renderPolicyNews(from, to, searchText);
+                    updateRankingVisibility();
+                    scheduleRankingUpdate();
                     pendingAutomaticNewsRefresh = false;
                     pendingReactionRefresh = false;
                     return;

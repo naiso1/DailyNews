@@ -140,6 +140,19 @@ def select_cards(sources, ask):
     return cards
 
 
+def add_source_images(cards, rows, is_suspicious_image, fetch_image):
+    """Only look up imagery for the selected articles. Keep publisher URLs."""
+    images = {row.get("URL", "").strip(): row["画像URL"].strip() for row in rows
+              if row.get("画像URL") and not is_suspicious_image(row["画像URL"])}
+    for card in cards:
+        url = card["links"][0][1]
+        image = images.get(url)
+        if not image and not urlsplit(url).path.lower().endswith(".pdf"):
+            image = fetch_image(url)
+        if image and not is_suspicious_image(image):
+            card["img"] = image
+
+
 def read_issues(path):
     raw = path.read_text(encoding="utf-8-sig").strip()
     if not raw.startswith(PREFIX) or not raw.endswith(";"):

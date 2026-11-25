@@ -20,6 +20,8 @@ window.DAILYNEWS_POLICY_ISSUES = {
     },
     {
       "id": "policy-2026-11-24-2",
+      "img": "https://cdn.motor1.com/images/mgl/1Zwpvp/s3/volvo-xc90-touchscreen.jpg",
+      "imageSource": "https://www.motor1.com/news/816542/new-york-bans-car-subscriptions/",
       "region": "米国・NY州",
       "stage": "成立・施行前",
       "title": "シートヒーターなど、搭載済み装備の定額課金を制限",
@@ -39,6 +41,8 @@ window.DAILYNEWS_POLICY_ISSUES = {
     {
       "region": "欧州連合",
       "id": "policy-2026-11-24-3",
+      "img": "https://carnewschina.com/wp-content/uploads/2026/11/eu-to-cap-hybrid-car-imports-from-china-at-191780-from-fa29d1.jpeg",
+      "imageSource": "https://carnewschina.com/2026/11/24/eu-to-cap-hybrid-car-imports-from-china-at-191780-from-december-2026-to-june-2027/",
       "stage": "12月1日適用予定",
       "title": "EU、ハイブリッド乗用車に暫定輸入枠",
       "summary": "欧州委員会は11月24日、ハイブリッド乗用車の輸入数量を制限する暫定措置を発表。中国を含む各原産地からの対象車に適用し、輸入枠を超える台数は輸入できない。適用期間は12月1日から最長200日。",

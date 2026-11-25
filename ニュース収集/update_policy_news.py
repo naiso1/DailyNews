@@ -48,6 +48,7 @@ def main():
         return collector.extract_json_object(answer)
 
     cards = policy.select_cards(sources, ask)
+    policy.add_source_images(cards, rows, collector.is_suspicious_image_url, collector.fetch_image_from_page)
     policy.save_issue(target, issue, cards)
     print(f"[POLICY] {issue}: 確認候補{len(candidates)}件、掲載{len(cards)}件")
     return 0

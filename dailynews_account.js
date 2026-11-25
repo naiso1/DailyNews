@@ -501,7 +501,7 @@ function openActivityItem(itemId) {
 
 function activityCard(entry) {
   const kind = { idea: "企画アイデア", policy: "法規・政策" }[entry.type] || "ニュース";
-  const image = entry.image
+  const image = entry.type === "policy" ? renderPolicyImage(entry.image, "account-card-image") : entry.image
     ? `<img class="account-card-image" src="${escapeAccountHtml(entry.image)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
     : `<span class="account-card-image-fallback" aria-hidden="true">${entry.type === "idea" ? "💡" : "📰"}</span>`;
   const comment = entry.comment
