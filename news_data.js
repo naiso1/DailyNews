@@ -1,4 +1,4 @@
-window.NEWS_UPDATED_AT = "2026-11-26 01:22";
+window.NEWS_UPDATED_AT = "2026-11-27 01:22";
 
 window.LOADED_NEWS_DATA = [
 
@@ -263855,6 +263855,725 @@ window.LOADED_NEWS_DATA = [
         sourceExcerptEnd: "Europe and blunt price and delivery advantages held by incumbents.",
         country: "cn",
         img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/caa1571d-c889-4c48-bcee-d18509b6b778.png?resize=640%2C309&ssl=1",
+        note: ""
+    },
+    // 2026-11-26 (google検索からExcel sheet2_llm_targets)
+    {
+        id: "jp2345",
+        title: "カロッツェリア、ジムニーなど5車種に専用音響設定を追加",
+        desc: "パイオニアは「DMH-SF900」「DMH-SF600」に、車室内音響特性に合わせた車種専用オーディオ設定を追加。PxLinkで対象車種を選び転送するだけで利用でき、純正カースピーカーを活用する。",
+        url: "https://news.yahoo.co.jp/articles/9729107f5dc78a450bc79472bf2ed78d1617c32f",
+        source: "レスポンス",
+        date: "2026-11-26",
+        tags: ["音響"],
+    
+        sourceExcerpt: "パイオニアが11月26日、カーAVブランド・カロッツェリアのディスプレイオーディオ「DMH-SF900」「DMH-SF600」と専用アプリ「PxLink」のソフトウェアアップデートを実施、5車種対象の「車種専用オーディオ設定」が追加された。",
+        interiorScore: 94,
+        interiorReason: "The article details a software update for Pioneer Carrozzeria display audio unit",
+        imageInterior: true,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-00000028-rps-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2346",
+        title: "欧州で中国車が日本勢を逆転、インフォテインメントでも先行",
+        desc: "欧州ではインパネ全面をディスプレイ化するようなインテリアがトレンドとなり、中国勢が先行。筆者は日本車が手堅いUIにとどまり、地味な印象につながっていると指摘する。",
+        url: "https://news.yahoo.co.jp/articles/7ab6238e48fa4e43a7de3071a19860d07d65e29a",
+        source: "carview!",
+        date: "2026-11-26",
+        tags: ["HMI", "ディスプレイ", "コネクテッド", "コックピット"],
+    
+        sourceExcerpt: "日本車に慣れたユーザーのなかには、インパネ全面をディスプレイにしたような、まるでゲーミングPCのようなド派手なインテリアに引いてしまう人もいるかもしれません。",
+        interiorScore: 39,
+        interiorReason: "The article discusses market share shifts but explicitly highlights the trend of",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-00010015-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2347",
+        title: "ホンダ新型アヴァンシア、2列目の快適性を軸に上質な室内空間を追求",
+        desc: "2列目は脚を組めるゆとりを確保し、大型アームレストにタッチパネルを装備。ホンダのハイブリッド車で初となる後席用ベンチレーションとシートヒーターも採用し、長距離移動での快適性を重視した。",
+        url: "https://news.yahoo.co.jp/articles/2e78e3d2ca94b6bf68c5aed7578ebb24ec833f20",
+        source: "carview!",
+        date: "2026-11-26",
+        tags: ["シート"],
+    
+        sourceExcerpt: "大型アームレストにはタッチパネルを備え、ホンダのハイブリッド車として初となる後席用ベンチレーションとシートヒーターも採用しました。",
+        interiorScore: 82,
+        interiorReason: "Detailed description of second-row comfort features including touchpad armrests,",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-00010014-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2348",
+        title: "光岡LA1、専用レザーシートを設定し200台限定で展開",
+        desc: "光岡LA1は、合成皮革とウルトラスエードを組み合わせた専用レザーシートをメーカーオプションとして41万2500円で設定。クラシカルな外観と現代的な機構を組み合わせ、職人の手作業で生産される。",
+        url: "https://news.yahoo.co.jp/articles/a0adce691dbfd757f042cd69a915fd98eec74ba2",
+        source: "carview!",
+        date: "2026-11-26",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "クラシカルな外観と現代的な機構を組み合わせ、職人の手作業によって生産される。",
+        interiorScore: 37,
+        interiorReason: "The article details a specific interior option (synthetic leather and Ultrasuede",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-00010010-carv-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2349",
+        title: "スズキ新型イグニス、e SKYベースの欧州仕様を2027年夏に発売予定",
+        desc: "床下へのバッテリー配置で広い室内空間を確保。インパネからドアへ続くラウンドライン、フラットなディスプレイとトレイを組み合わせ、温かみと使いやすさを演出する。",
+        url: "https://news.yahoo.co.jp/articles/f550d46042c4e424b8416f6f6efbbe4bb9cbf352",
+        source: "WEB CARTOP",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        sourceExcerpt: "エクステリアは流れるようなショルダーラインやフローティングルーフ、デジタル数字をモチーフとしたLEDシグネチャーランプが特徴で、インテリアもインパネからドアへとつながるラウンドラインやフラットなディスプレイ、トレイを組み合わせ、温かみと使いやすさを演出する。",
+        interiorScore: 58,
+        interiorReason: "The article describes the interior design language of the new Ignis, specificall",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-00010005-wcartop-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2350",
+        title: "ホンダ「フリード クロスター」、撥水・撥油シートでアウトドアに対応",
+        desc: "ブラック×カーキの水平基調ダッシュボードを備え、シートには撥水・撥油機能付き「FABTECT」を採用。3列6人乗りに加え、荷室を広く使える2列5人乗り仕様も設定する。",
+        url: "https://news.yahoo.co.jp/articles/4c62450eea645445206ddd999120a723a24a4d02",
+        source: "VAGUE",
+        date: "2026-11-26",
+        tags: ["シート", "コックピット"],
+    
+        sourceExcerpt: "くわえて、シート素材には汚れや水に強い撥水・撥油機能付きの「FABTECT（ファブテクト）」を採用したコンビシートを設定し、3列シートの6人乗りに加え、荷室を広く使える2列シートの5人乗り仕様も用意されています。",
+        interiorScore: 63,
+        interiorReason: "Detailed description of interior materials (FABTECT water/oil-repellent seats),",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-10478492-vague-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2351",
+        title: "マツダ ロードスター、1.5L軽量モデルと電動ルーフRFを比較",
+        desc: "ロードスターRFは約13秒で開閉する電動メタルトップを備え、閉じた際の遮閉性も高い。1.5Lのソフトトップ車は軽量ボディによる軽快な走り、RFは2L・182psと6ATの良好な組み合わせが特徴だ。",
+        url: "https://news.yahoo.co.jp/articles/d07a74cafdf554a2f9ab6f860c5898dca19dd703",
+        source: "ベストカーWeb",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "ソフトトップ車に対し約100kg重くなった車体に対応するため、エンジンは182ps、21.0kgmを発揮する2L・NAが搭載される。",
+        interiorScore: 18,
+        interiorReason: "Comparison of two roadster variants focusing on engine power and the electric me",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-00000003-bestcar-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "jp2352",
+        title: "レクサス新型TZ、3列6人乗りと上質な室内空間を英国に投入",
+        desc: "3列6人乗りのBEVで、全列にゆとりある居住空間と柔軟なシートアレンジを確保。上位グレードは人工スエードやアンビエントライト、前席用輻射ヒーターを備え、最上級車には竹の加飾を施す。",
+        url: "https://news.yahoo.co.jp/articles/f50280a54d10c160f4d1b5b4544e23d97f0ea049",
+        source: "くるまのニュース",
+        date: "2026-11-26",
+        tags: ["シート", "イルミ", "EV"],
+    
+        sourceExcerpt: "パワーシートの調整機能が充実するほか、さまざまな色で室内を彩るアンビエントライトや、前席用の輻射ヒーターも備わります。",
+        interiorScore: 87,
+        interiorReason: "The article provides a detailed breakdown of the Lexus TZ's interior features, w",
+        imageInterior: false,
+        country: "jp",
+        img: "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20261126-01146633-kurumans-000-1-view.jpg",
+        note: ""
+    },
+    {
+        id: "us2142",
+        title: "2027年型Toyota 4Runner、全車で前席ヒーターを標準化",
+        desc: "2027年型4Runnerは全グレードで前席ヒーターを標準化。SR5には8ウェイ電動調整式前席も標準装備され、価格は配送費込みで45,085ドルとなる。",
+        url: "https://www.motor1.com/news/816890/2027-toyota-4runner-price-updates/",
+        source: "Motor1",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Buyers cross-shopping the brand's other recently repriced models can check how the 2027 Camry's price increases compare before settling on a 4Runner trim.",
+        interiorScore: 35,
+        interiorReason: "The article details a specific interior comfort upgrade (heated seats) and seat",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/NG6Ev9/s3/2027-toyota-4runner-trd-pro-in-hot-honey-color.jpg",
+        note: ""
+    },
+    {
+        id: "us2143",
+        title: "ポルシェ911 GT3、1996年GT1勝利を内外装で再現",
+        desc: "室内はバケットシートをGuards Redレザーで覆い、白のシートベルト通しとダッシュボード加飾を組み合わせる。ドアオープナーとイグニッションスイッチもGuards Redとし、1996年GT1の意匠を反映した。",
+        url: "https://www.motor1.com/news/816889/porsche-911-gt3-tribute-gt1/",
+        source: "Motor1",
+        date: "2026-11-26",
+        tags: ["AR", "シート", "コックピット", "新素材"],
+    
+        sourceExcerpt: "Inside, Guards Red leather covers the bucket seats, and white seatbelt pass-throughs sit against a white trim strip running across the dashboard.",
+        interiorScore: 48,
+        interiorReason: "One-off Sonderwunsch build with specific interior details (Guards Red leather bu",
+        imageInterior: false,
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/qk8PER/s3/porsche-911-gt3-tribute-to-911-gt1.jpg",
+        note: ""
+    },
+    {
+        id: "us2144",
+        title: "Range Rover GT、低く車寄りのEVとして2027年投入",
+        desc: "Range Rover GTは低く車寄りのクーペSUV形状とし、洗練性とオンロード性能を重視する。JLRは2027年初頭にEVを先行投入し、ハイブリッド版はその後に導入する。",
+        url: "https://www.motor1.com/news/816835/range-rover-gt-electric-2027/",
+        source: "Motor1",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "JLR has only said the GT will be positioned a little below the big Range Rover on price.",
+        country: "us",
+        img: "https://cdn.motor1.com/images/mgl/y2lkJ7/s3/2028-range-rover-gt-rendering-by-motor1.jpg",
+        note: ""
+    },
+    {
+        id: "us2145",
+        title: "BMW E30 M3、黒革シートとカセットステレオを保つ1オーナー車",
+        desc: "1989年式E30 M3は黒革シートに経年の跡があるものの、車内はカセットステレオまで概ねオリジナルを維持する。新車時から1オーナーで走行8万5000マイル、エアコンは作動しない。",
+        url: "https://www.carscoops.com/2329011/bmw-e30-m3-single-owner-auction/",
+        source: "CarScoops",
+        date: "2026-11-26",
+        tags: ["シート", "新素材"],
+    
+        sourceExcerpt: "The black leather seats show signs of aging, but the cabin appears largely original, right down to the cassette stereo.",
+        country: "us",
+        img: "https://www.carscoops.com/img/gallery/good-luck-finding-another-single-owner-bmw-e30-m3-like-this/l-intro-1795678530.jpg",
+        note: ""
+    },
+    {
+        id: "us2146",
+        title: "米国版ロンドン・ブライトン、初期20世紀アンティーク車で57マイルを巡る",
+        desc: "Car and Driver誌が米ミシガン州でFordやOldsmobileなどの初期アンティーク車を用い、英国のVeteran Car Runに倣った57マイルの走行イベントを実施した。参加者は低速での走破を通じて当時の車両特性とコミュニティの結束を確認した。",
+        url: "https://www.caranddriver.com/features/a74455233/2026-london-to-brighton-vintage-car-tour/",
+        source: "Car and Driver",
+        date: "2026-11-26",
+        tags: ["AR"],
+    
+        sourceExcerpt: "The London-to-Brighton event, or, as it’s now known, the RM Sotheby’s London",
+        sourceExcerptEnd: "London and Brighton in Michigan with some antique American cars.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/8d0a4604-086a-45c5-9427-dc2e3499bc52.jpg",
+        note: ""
+    },
+    {
+        id: "us2147",
+        title: "1979 Buick Century Turbo Coupeの内外装を写真で確認",
+        desc: "Car and Driverが公開した1979年型Buick Century Turbo Coupeの写真ギャラリーでは、車体の内装と外観を多角的に捉えた画像が掲載されている。",
+        url: "https://www.caranddriver.com/photos/a74522047/1979-buick-century-turbo-coupe-archive-test-gallery/",
+        source: "Car and Driver",
+        date: "2026-11-26",
+        tags: ["HMI", "AR"],
+    
+        sourceExcerpt: "The Buick Century Turbo Coupe is stuck between two different places without truly fitting into either.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/9cc6a955-1571-4bc5-a322-a31d4089ca9f.jpg",
+        note: ""
+    },
+    {
+        id: "us2148",
+        title: "1886年Benz Patent Motorwagen、革張りベンチと原初の操作系",
+        desc: "3輪の車体は革張りベンチを備え、ステアリングホイールではなく木製ハンドルで操舵する。加速は左側の長いレバーで駆動用革ベルトを車軸につなぎ、停止時は同じレバーで車軸にシューを押し当てる。",
+        url: "https://www.caranddriver.com/features/columns/a74466840/editors-letter-benz-patent-motorwagen/",
+        source: "Car and Driver",
+        date: "2026-11-26",
+        tags: ["新素材"],
+    
+        sourceExcerpt: "Steering the first car involves grabbing what appears to be the wood handle of an awl—the automotive steering wheel hadn’t been invented yet either.",
+        country: "us",
+        img: "https://hips.hearstapps.com/hmg-prod/images/ee8cd901-7aab-4877-8c89-0b831ec0acdf.png",
+        note: ""
+    },
+    {
+        id: "us2149",
+        title: "2026年型Nissan Z、強化6速MTで走りの選択肢を維持",
+        desc: "Nissan Zの6速MTは従来のCD009をルーツに持ち、ツインターボV6の出力に対応して強化。大型クラッチや改良ベルハウジング、1・2速の大型シンクロ、潤滑改善を施す。",
+        url: "https://www.topspeed.com/new-cars-manual-transmission/",
+        source: "Top Speed",
+        date: "2026-11-26",
+        tags: [],
+    
+        sourceExcerpt: "The FS6R31A six-speed manual transmission found in the Nissan Z shares its",
+        sourceExcerptEnd: "to handle the increased output of the twin-turbo V-6 engine.",
+        country: "us",
+        img: "https://static0.topspeedimages.com/wordpress/wp-content/uploads/wm/2026/09/2026-cadillac-ct5-v-blackwing-6.jpg",
+        note: ""
+    },
+    {
+        id: "eu2117",
+        title: "Audi、Technik仕様でデジタル装備と価格競争力を強化",
+        desc: "Technik仕様は運転席表示とセンタータッチスクリーンを統合した曲面デジタルパネル、ワイヤレス充電、後退カメラを備える。A3は£28,650、Q3は£37,470からとし、Audiは英国で価値向上を図る。",
+        url: "https://www.autoexpress.co.uk/audi/371008/new-audi-technik-models-and-a2-e-tron-spearhead-fresh-focus-value",
+        source: "Auto Express",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "EV"],
+    
+        sourceExcerpt: "So Audi’s focus is to boost value: the Technik trim includes a",
+        sourceExcerptEnd: "and central touchscreen, wireless smartphone charging and a reversing camera.",
+        interiorScore: 51,
+        interiorReason: "The article details specific interior features for the Technik trim (curved digi",
+        imageInterior: false,
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/audi-a3-technik-front.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2118",
+        title: "新型日産テラノ、中国開発の大型SUVで5人乗り仕様",
+        desc: "新型日産テラノは5人乗りで、内装はまだ公開されていない。全長約5,100mmのラダーフレームSUVで、2.3Lディーゼル、2.0Lガソリン、PHEVを設定する。7人乗りの追加や英国導入は未確定である。",
+        url: "https://www.autoexpress.co.uk/nissan/371006/new-nissan-terrano-leaked-tough-toyota-land-cruiser-rival-being-made-china",
+        source: "Auto Express",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "We haven’t had a look at the interior just yet, but we do know it seats five.",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/nissan-terrano-miit-leak-front-3-4-0.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2119",
+        title: "Xiaomi SU7 Ultra、2シーター仕様でニュル最速EVを狙う",
+        desc: "SU7 Ultraは大型リアウイングなどの空力部品を強化し、標準5人乗りから2人乗り仕様も選択可能となる。3モーターの最高出力は1,505bhpを維持し、ニュルブルクリンク量産EV最速記録を狙う。",
+        url: "https://www.autoexpress.co.uk/xiaomi/371005/new-xiaomi-su7-ultra-hunting-porsche-taycans-nurburgring-ev-lap-record",
+        source: "Auto Express",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "An updated version of the Xiaomi SU7 Ultra has been revealed by",
+        sourceExcerptEnd: "it seems to be gunning for a Nurburgring lap record.",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2026/11/xiaomi-su7-ultra-front-0.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "eu2120",
+        title: "MG ZS、£18,000未満の特価と12.3インチ画面",
+        desc: "MG ZSは12.3インチタッチスクリーン、6スピーカーオーディオ、自動空調を装備する。1.5 Hybrid+ Auto SEの事前登録車は£18,000未満で、定価から£6,613安い。",
+        url: "https://www.autoexpress.co.uk/mg/zs/371003/black-friday-car-deal-alert-mg-zs-price-slashed-over-ps6500",
+        source: "Auto Express",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "音響"],
+    
+        sourceExcerpt: "Efficient hybrid powertrain",
+        country: "eu",
+        img: "https://images.autoexpress.co.uk/autoexpress/2024/12/DSC_3257_ftzb7n.jpg?w=845&fit=scale&auto=format,compress",
+        note: ""
+    },
+    {
+        id: "cn2105",
+        title: "Chery Arrizo 9、Audi A7を思わせるフラッグシップ・セダン",
+        desc: "Chery Arrizo 9は中国MIITが主要仕様を公開した新旗艦セダンです。筆者はグリルやルーフライン、テールライトがAudi A7に酷似すると指摘しています。全長5000mm、ホイールベース2900mmで、1.6L、2.0Lターボと1.5L HEVを設定します。",
+        url: "https://carnewschina.com/2026/11/26/audi-a7-resembling-chery-arrizo-9-revealed-as-the-brands-flagship-sedan/",
+        source: "CarNewsChina - All",
+        date: "2026-11-26",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "The Chery Arrizo 9 was revealed by the Chinese MIIT in China",
+        sourceExcerptEnd: "flagship sedan, positioned one step above the Arrizo 8 Pro.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/arrizo_9-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn2106",
+        title: "中国製BMW iX5はX7超えの3165mmホイールベースで認証取得",
+        desc: "中国市場向けに開発されたBMW iX5は5人乗り仕様で、ホイールベースは3165mmとX7より60mm長い。サンルーフを標準装備し、エアサスペンションも選択可能である。",
+        url: "https://carnewschina.com/2026/11/26/china-made-bmw-ix5-broke-covers-with-wheelbase-longer-than-that-of-the-x7/",
+        source: "CarNewsChina - All",
+        date: "2026-11-26",
+        tags: [],
+    
+        sourceExcerpt: "The China-made BMW iX5 electric crossover revealed its specs during the homologation process.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/bmw_ix5-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn2107",
+        title: "現代自動車（Hyundai）は、Ioniq 5にEREV（拡張航続距離電気自動車）を追加し、中国市場での販売低迷を挽回する狙いを見せる。",
+        desc: "HyundaiはIoniq 5に、1.5リッター自然吸気エンジンと151kWの後輪駆動モーターを組み合わせたEREVを追加する。CATL製のLFP電池を搭載し、遮音フロントガラスやUVカットフロントウインドウもオプション設定される。",
+        url: "https://carnewschina.com/2026/11/26/hyundai-ioniq-v-sedan-to-get-the-erev-powertrain-to-boost-slow-sales/",
+        source: "CarNewsChina - All",
+        date: "2026-11-26",
+        tags: ["AI", "EV", "バッテリー"],
+    
+        sourceExcerpt: "The EREV variant of this Hyundai-branded vehicle utilizes an LFP battery from CATL.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/hyundai_ioniq_v_erev-1500x844.jpg",
+        note: ""
+    },
+    {
+        id: "cn2108",
+        title: "Leapmotor DXがLiDARと三モーター構成を備え、MIITに届け出た",
+        desc: "Leapmotor DXは5人乗りで、全長5,151mm・ホイールベース3,110mmのサイズです。EVとEREVを設定し、LiDARや連続式デイタイムランニングライト、アクティブフロントグリルを備えます。",
+        url: "https://carnewschina.com/2026/11/26/new-leapmotor-dx-suv-revealed-in-regulatory-filings-offering-both-ev-and-erev-options/",
+        source: "CarNewsChina - All",
+        date: "2026-11-26",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Leapmotor has unveiled its latest addition to the D-series family, the Leapmotor",
+        sourceExcerptEnd: "filings with the Ministry of Industry and Information Technology (MIIT).",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-157-1151x900.png",
+        note: ""
+    },
+    {
+        id: "cn2109",
+        title: "MGは、EVとPHEVの2系統をラインナップする新型ツーリングモデル「07T」を発表した。",
+        desc: "MG 07Tは全長4,889mm・ホイールベース2,825mmのツーリングモデルで、EVとPHEVを設定する。ルーフレールや後方のワイドフェンダー、全面スモーク調テールライトを備える。",
+        url: "https://carnewschina.com/2026/11/26/mg-07t-wagon-revealed-new-touring-model-from-mg-offers-both-ev-and-phev-powertrains/",
+        source: "CarNewsChina - All",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The latest filing from the Ministry of Industry and Information Technology has",
+        sourceExcerptEnd: "a choice between pure electric and plug-in hybrid (PHEV) powertrains.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-153-e1795656288359.png",
+        note: ""
+    },
+    {
+        id: "cn2110",
+        title: "Zeekr 8Xは、5〜6人乗り対応の大型SUVとして登場する電気自動車です。",
+        desc: "Zeekr 8Xの電気自動車版は5人乗りと6人乗りの設定を備えています。全長は5,100mm、ホイールベースは3,069mmで、680kW（912hp）のデュアルモーター四輪駆動システムを搭載しています。",
+        url: "https://carnewschina.com/2026/11/26/zeekr-8x-bev-revealed-a-5100mm-long-suv-with-912-hp-powertrain/",
+        source: "CarNewsChina - All",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "The latest product announcement from China’s Ministry of Industry and ",
+        sourceExcerptEnd: "revealed the upcoming Zeekr 8X pure electric SUV from Geely.",
+        country: "cn",
+        img: "https://carnewschina.com/wp-content/uploads/2026/11/e59bbee78987-149-e1795655002490.png",
+        note: ""
+    },
+    {
+        id: "cn2111",
+        title: "NioのOnvo L90、累計7万台到達も直近の納車ペース鈍化",
+        desc: "Onvo L90の累計納車台数は7万台に達しました。購入者の約90%が家族旅行を目的としており、40%以上が多子世帯です。2026年型は900V高電圧アーキテクチャを採用し、航続距離600kmとバッテリー交換に対応します。",
+        url: "https://cnevpost.com/2026/11/26/nio-onvo-l90-70000-deliveries/",
+        source: "CnEVPost - All",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Built on a 900V high-voltage architecture, the 2026 L90 offers a CLTC combined range of 600 kilometers (373 miles) and supports rapid battery swapping.",
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026112614411537.jpg",
+        note: ""
+    },
+    {
+        id: "cn2112",
+        title: "Xiaomi SU7 Ultra新型に2シート設定追加、1,138kW三モーター維持",
+        desc: "新型SU7 Ultraは従来の5人乗りに加え、2人乗り仕様も設定される。前軸288kW、後軸各425kWの3モーターによる四輪駆動システムを搭載し、総出力1,138kWと最高速度318km/hを実現する。",
+        url: "https://cnevpost.com/2026/11/26/xiaomi-files-updated-su7-ultra/",
+        source: "CnEVPost - All",
+        date: "2026-11-26",
+        tags: ["シート"],
+    
+        country: "cn",
+        img: "https://cnevpost.com/wp-content/uploads/2026/11/2026112608583910.jpg",
+        note: ""
+    },
+    {
+        id: "cn2113",
+        title: "NIOが車内AIエージェントで意図推論と機能実行を実現したNOMI 4.0を公開",
+        desc: "NOMI Intelligence 4.0は、定型音声指示への応答から、利用者の意図を判断して手順を計画・実行する車載アシスタントへ進化します。Cedar 2.0.0で初投入し、規制当局の承認後に展開されます。",
+        url: "https://insidechinaauto.com/2026/11/26/nio-unveils-worldmodel-3-0-and-nomi-intelligence-4-0-at-nio-in-2026/",
+        source: "Inside China Auto - All",
+        date: "2026-11-26",
+        tags: ["AR", "AI"],
+    
+        sourceExcerpt: "It combines NIO’s own foundation models, trained with in-vehicle reinforcement learning, with",
+        sourceExcerptEnd: "the car and call on tools across the vehicle’s systems.",
+        interiorScore: 56,
+        interiorReason: "The article details the evolution of NIO's in-car assistant (NOMI Intelligence 4",
+        imageInterior: false,
+        country: "cn",
+        img: "https://insidechinaauto.com/wp-content/uploads/2026/11/nio-worldmodel-3-shaoqing-ren.jpg",
+        note: ""
+    },
+    {
+        id: "in2171",
+        title: "VinFast VF5改良型、インド仕様の右ハンドル内装を確認",
+        desc: "右ハンドル車は中央タッチスクリーンに走行情報を集約し、独立メーターを省いた。2スポークステアリングやステアリング後方のドライブセレクター、柄入りステッチの暗色内装、手動調整式フロントシートも確認された。",
+        url: "https://www.rushlane.com/vinfast-vf5-facelift-spied-again-ahead-of-india-launch-interiors-revealed-12562085.html",
+        source: "RushLane",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "シート"],
+    
+        sourceExcerpt: "There is no separate instrument binnacle behind the steering wheel, with driving information displayed on the central screen.",
+        interiorScore: 90,
+        interiorReason: "The article is highly relevant to interior product planning as it details the sp",
+        imageInterior: true,
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/vinfast-vf5-new-electric-suv-spied.jpg",
+        note: ""
+    },
+    {
+        id: "in2172",
+        title: "Bajaj Wego、1充電394.2km走行と南北4,023kmを達成",
+        desc: "Bajaj Wegoは1回の充電で394.2kmを走行し、認証航続距離296kmを約33％上回った。さらにスリナガルからカニャークマリまで4,023kmを9日間で走破した。",
+        url: "https://www.rushlane.com/bajaj-wego-electric-3w-covers-394-km-kashmir-to-kanyakumari-run-12562077.html",
+        source: "RushLane",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Bajaj Auto has announced two records for its Wego electric three-wheeler, including a 394.2 km journey on a single charge.",
+        country: "in",
+        img: "https://www.rushlane.com/wp-content/uploads/2026/11/bajaj-wego-electric-3w-record-3.jpg",
+        note: ""
+    },
+    {
+        id: "in2173",
+        title: "Mahindra BE 07、2027年6月までのインド投入を見込む",
+        desc: "Mahindra BE 07は2027年6月までにインド投入が見込まれる電動SUVで、最近の試作車目撃から7人乗り仕様の可能性も示唆されている。",
+        url: "https://gaadiwaadi.com/all-new-mahindra-be-07-electric-suv-arriving-next-year-key-info/",
+        source: "GaadiWaadi",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/10/Mahindra-BE-07-2.jpg",
+        note: ""
+    },
+    {
+        id: "in2174",
+        title: "Mahindra、来年4月までに上級SUV4モデルを投入へ",
+        desc: "Mahindraは来年4月までに、内燃機関車と電気自動車を含む上級SUV4モデルの投入を計画している。記事資料には内装に関する具体的な情報はない。",
+        url: "https://gaadiwaadi.com/mahindra-to-launch-four-new-models-in-the-coming-months/",
+        source: "GaadiWaadi",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        country: "in",
+        img: "https://gaadiwaadi.com/wp-content/uploads/2026/03/Mahindra-BE07.jpg",
+        note: ""
+    },
+    {
+        id: "in2175",
+        title: "Toyota Innova HycrossにE85対応ハイブリッドを設定",
+        desc: "E85対応の2.0L Flex Hybrid Electricを設定し、197hp・206Nm、e-Driveを組み合わせる。G、GX、VX、ZX Hybridを用意し、E20燃料で22.58km/lをうたう。",
+        url: "https://www.carblogindia.com/new-toyota-innova-hycross-flex-hybrid-electric-launched/",
+        source: "Car Blog India",
+        date: "2026-11-26",
+        tags: [],
+    
+        sourceExcerpt: "The new Toyota Innova Hycross Flex Hybrid Electric has been launched for the Indian market.",
+        country: "in",
+        img: "https://www.carblogindia.com/wp-content/uploads/2026/11/toyota-innova-hycross-flex-hybrid-electric-launch-india.jpg",
+        note: ""
+    },
+    {
+        id: "in2176",
+        title: "Tata Punch EVが月間5,000台突破、インドEV市場75％増",
+        desc: "2026年10月のインド電動乗用車出荷は前年同月比75％増の39,170台。Tata Punch EVは5,060台で首位となり、インドの電動乗用車で初めて月間5,000台を超えた。",
+        url: "https://www.autopunditz.com/post/electric-car-sales-october-2026-india",
+        source: "Auto Punditz",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "Tata Punch EV emerged as the country's best-selling electric car, becoming the",
+        sourceExcerptEnd: "dispatch milestone, as per the historical milestone highlighted by AutoPunditz.",
+        country: "in",
+        img: "https://static.wixstatic.com/media/1da610_375fb2f971494a1b89afc565ddfa04cc~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png",
+        note: ""
+    },
+    {
+        id: "eu2121",
+        title: "英国のエネルギー価格上限引き上げでEV充電コストが最大£9増",
+        desc: "英国Ofgemは2027年第1四半期の家庭用電気料金上限を32.69p/kWhに引き上げる。これにより、標準可変料金のユーザーは60kWhバッテリーのフル充電で約£3.82のコスト増となる見込みである。",
+        url: "https://www.electrive.com/2026/11/26/uk-energy-price-cap-increase-could-add-up-to-9-to-ev-charging-costs/",
+        source: "Electrive",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        sourceExcerpt: "For example, a 60 kWh battery could cost approximately £19.61 to fill from empty at the new capped rate, compared with £15.79 at present.",
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/08/ohme-smart-charging-wallbox-ireland-2026-400x267.webp",
+        note: ""
+    },
+    {
+        id: "eu2122",
+        title: "BMW、12月更新でPanoramic Visionの操作性向上",
+        desc: "OS X搭載車ではBMW Panoramic Visionの表示選択を使いやすくし、大型ウィジェットを自由に配置可能とする。中央ディスプレイやマルチファンクションステアリングのボタンから操作でき、車内カメラとAIによる個人アバター作成機能も追加する。",
+        url: "https://www.electrive.com/2026/11/26/bmw-to-roll-out-a-new-software-update-in-december/",
+        source: "Electrive",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "AI"],
+    
+        sourceExcerpt: "These can be controlled via the central display or the buttons on the multifunction steering wheel.",
+        interiorScore: 94,
+        interiorReason: "Detailed HMI and cabin UX updates including Panoramic Vision widgets, steering w",
+        imageInterior: true,
+        country: "eu",
+        img: "https://www.electrive.com/media/2026/11/bmw-ota-update-2026-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2123",
+        title: "予算を使い切ったスペイン、電気自動車の購入補助金を削減",
+        desc: "スペインの電気自動車購入補助金「Auto+」で、個人向けの予算が枯渇した。産業省は11月19日時点で予算を使い切ったことを確認しており、現在は待機リスト制となっている。これは申請が取り下げられたり却下されたりした場合にのみ、新規申請者が繰り上がる仕組みだ。",
+        url: "https://www.electrive.com/2026/11/26/budget-exhausted-spain-cuts-purchase-subsidies-for-electric-cars/",
+        source: "Electrive",
+        date: "2026-11-26",
+        tags: ["EV"],
+    
+        country: "eu",
+        img: "https://www.electrive.com/media/2025/12/spanien-pedro-sanchez-2025-400x267.jpg",
+        note: ""
+    },
+    {
+        id: "eu2124",
+        title: "Volkswagen、独で最大11kW対応のV2G充放電サービスを展開",
+        desc: "Elli BiDi Chargerは最大11kWで充放電し、400V・800V車両に対応する。ドイツで2026年12月に開始し、価格はVAT・送料込み€1,995。アプリで出発時刻と必要充電量を指定できる。",
+        url: "https://electriccarsreport.com/2026/11/volkswagen-launches-e1995-vehicle-to-grid-charger-with-elli/",
+        source: "Electric Cars Report",
+        date: "2026-11-26",
+        tags: ["AR", "EV"],
+    
+        sourceExcerpt: "Developed by its energy subsidiary Elli, the package combines a bidirectional DC",
+        sourceExcerptEnd: "Elli BiDi Charger priced at €1,995 including VAT and shipping.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/Volkswagen-Elli-V2G-charger.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "eu2125",
+        title: "Mercedes-Benz、独で全経路対応の運転支援が承認",
+        desc: "MB.DRIVE ASSIST PROは高速道路から市街地まで走行経路全体を支援するSAEレベル2システム。車線変更や合流、交差点での右左折、信号での停止・発進を支援し、ドイツで2027年前半に導入予定である。",
+        url: "https://electriccarsreport.com/2026/11/mercedes-benz-mb-drive-assist-pro-germany-approval/",
+        source: "Electric Cars Report",
+        date: "2026-11-26",
+        tags: [],
+    
+        sourceExcerpt: "The German Federal Motor Transport Authority (Kraftfahrt-Bundesamt, KBA) has approved MB.DRIVE ASSIST",
+        sourceExcerptEnd: "throughout an entire journey, from motorways to complex urban traffic.",
+        country: "eu",
+        img: "https://electriccarsreport.com/wp-content/uploads/2026/11/Mercedes-Benz-point-to-point-driving.jpg?a3781e&a3781e",
+        note: ""
+    },
+    {
+        id: "in2177",
+        title: "Suzuki Ignis EV、10.1インチ画面と前席ヒーターを装備",
+        desc: "車内には10.1インチタッチスクリーン、半デジタルメーター、前席ヒーターを備える。26kWh LFP電池と91HPモーターを搭載し、WLTP航続距離は310kmとしている。",
+        url: "https://www.motorbeam.com/suzuki-ignis-ev-revealed-310km-range/",
+        source: "MotorBeam",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "EV", "バッテリー"],
+    
+        country: "in",
+        img: "https://dvps8uz7lyvra.cloudfront.net/wp-content/uploads/Suzuki-Ignis-EV.jpg",
+        note: ""
+    },
+    {
+        id: "eu2126",
+        title: "新型スズキIgnis、陶芸を意識した内装とEV専用設計",
+        desc: "室内はダッシュボードからドアパネルへ丸みのあるラインを連続させ、大型パネルにディスプレイと収納を一体化。陶芸のクラフト感を意識し、実用性と温かみの両立を図った。",
+        url: "https://autodesignmagazine.com/en/2026/11/suzuki-ignis-pocket-revolution/",
+        source: "Auto & Design",
+        date: "2026-11-26",
+        tags: ["ディスプレイ", "コックピット", "EV"],
+    
+        sourceExcerpt: "The dashboard is dominated by a large panel that integrates the display",
+        sourceExcerptEnd: "warmth to a cabin that is also designed for practicality.",
+        country: "eu",
+        img: "https://autodesignmagazine.com/wp-content/uploads/2026/11/csa16-new-ignis-image-2-.jpg?x58186",
+        note: ""
+    },
+    {
+        id: "us2150",
+        title: "BMW、欧州販売でメルセデスに9.6万台差をつけ首位維持",
+        desc: "2026年1～10月のEU・EFTA・英国で、BMWは67万2,258台を登録し、Mercedes-Benzを9万6,132台上回った。市場シェアはBMWが5.8%、Mercedes-Benzが4.9%だった。",
+        url: "https://www.bmwblog.com/2026/11/26/bmw-outsells-mercedes-100000-cars-through-october-2026/",
+        source: "BMWBLOG",
+        date: "2026-11-26",
+        tags: [],
+    
+        sourceExcerpt: "BMW captured 5.8% of the EU+EFTA+UK market, compared to Mercedes-Benz’s 4.9%.",
+        country: "us",
+        img: "https://cdn.bmwblog.com/wp-content/uploads/2025/03/bmw-m235-gran-coupe-vs-mercedes-benz-cla-01-830x830.jpg",
+        note: ""
+    },
+    {
+        id: "us2151",
+        title: "BMW X7のMerinoレザー、Fullはダッシュボードまで拡張",
+        desc: "Extended Merinoは前後席やアームレストなどを覆い、Full Merinoはダッシュボードやドア上部などにも同じレザーを拡張する。2027年X7 xDrive40iでは両仕様に2,700ドルの差がある。",
+        url: "https://www.bmwblog.com/2026/11/25/bmw-extended-vs-full-merino-leather/",
+        source: "BMWBLOG",
+        date: "2026-11-26",
+        tags: ["コックピット", "新素材"],
+    
+        sourceExcerpt: "Both options put the same Merino hide on the seats, and Full",
+        sourceExcerptEnd: "dashboard, the upper door panels, and the lower center console.",
+        interiorScore: 97,
+        interiorReason: "Detailed breakdown of interior material coverage (seats vs. dash/doors) and spec",
+        imageInterior: true,
+        country: "us",
+        img: "https://cdn.bmwblog.com/wp-content/uploads/2022/10/bmw-x7-40i-blue-ridge-mountain-36-830x553.jpg",
+        note: ""
+    },
+    {
+        id: "jp2353",
+        title: "三菱デリカD:5「シャモニー」、鍛造カーボン調パネルで専用内装",
+        desc: "インパネとドアトリムにフォージドカーボンをモチーフとした専用パネルを設定。シートやダッシュボードなどにシルバーステッチ、天井照明にホワイトを用い、最上級「P」をベースに専用内装とした。",
+        url: "https://autoprove.net/japanese-car/mitsubishi/delica-d-5/259230/",
+        source: "AutoProve",
+        date: "2026-11-26",
+        tags: ["シート", "コックピット"],
+    
+        sourceExcerpt: "シートやダッシュボード、ドアトリムにシルバーステッチを施したほか、ルーフビームガーニッシュ（天井照明）にホワイトを採用するなど、専用仕上げとしている。",
+        interiorScore: 68,
+        interiorReason: "Detailed description of specific interior materials (forged carbon motif panels)",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.autoprove.net/2026/11/5-20261119_1_03-376x282.jpg",
+        note: ""
+    },
+    {
+        id: "jp2354",
+        title: "アウディ、車内音声でMicrosoft 365を操作するAIを世界初採用",
+        desc: "車内の自然会話インターフェースからTeamsやOutlookを音声操作でき、メール・予定確認や会議参加に対応する。2026年モデル以降のA5、Q5、A6など6車種を対象に世界28カ国で提供する。",
+        url: "https://autoprove.net/imported-car/audi/259225/",
+        source: "AutoProve",
+        date: "2026-11-26",
+        tags: ["HMI", "AI"],
+    
+        sourceExcerpt: "このアプリにより、車載向けに設計された自然会話のインターフェースを通じて、Microsoft TeamsとOutlookが利用可能になる。",
+        interiorScore: 73,
+        interiorReason: "Covers in-cabin HMI and voice UX for productivity apps (Teams/Outlook) with spec",
+        imageInterior: false,
+        country: "jp",
+        img: "https://media.autoprove.net/2026/11/d9fdac86d50b0923aacab2aa00555ea9-376x282.jpg",
+        note: ""
+    },
+    {
+        id: "cn2114",
+        title: "BYDのオーシャンシリーズに属する初のMPVが、広州にて世界初公開される予定です。",
+        desc: "BYD初のオーシャンシリーズMPVは、分割型ヘッドライトや波形の横一文字テールライトを備える。内装や車体寸法は未公表で、11月27日に広州で世界初公開、12月の発売を予定する。",
+        url: "https://chinaevhome.com/2026/11/26/byd-ocean-series-first-mpv-to-debut-tomorrow-expected-to-launch-in-dec/",
+        source: "ChinaEVHome",
+        date: "2026-11-26",
+        tags: ["バッテリー"],
+    
+        sourceExcerpt: "BYD has yet to disclose the interior or the vehicle’s dimensions.",
+        country: "cn",
+        img: "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-425.png?resize=640%2C503&ssl=1",
         note: ""
     },
 ];

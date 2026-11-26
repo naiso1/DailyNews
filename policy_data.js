@@ -71,5 +71,37 @@ window.DAILYNEWS_POLICY_ISSUES = {
       "summary": "EU外交官によると、加盟国は英国製電気自動車を「Made in Europe」ガイドラインに統合する意向を示している。アイスランドやノルウェーなど他のEEA諸国にも同様の資格が適用される可能性がある。",
       "title": "英国製EVの「Made in Europe」準則への統合方針"
     }
+  ],
+  "2026-11-26": [
+    {
+      "id": "policy-2026-11-26-1",
+      "img": "https://i0.wp.com/chinaevhome.com/wp-content/uploads/2026/11/image-422.png?resize=640%2C388&ssl=1",
+      "links": [
+        [
+          "chinaevhome.com",
+          "https://chinaevhome.com/2026/11/26/u-s-weighs-new-tariffs-on-chinese-goods-puts-auto-industry-in-focus/"
+        ]
+      ],
+      "question": "内装部品を含む中国製輸入品への適用範囲と税率はどのようになっているか",
+      "region": "米国/中国",
+      "stage": "検討・審議中",
+      "summary": "米通商代表部（USTR）はセクション301調査の結果として、中国製品に最大20%の関税を課すことを提案した。自動車業界やサプライヤー、NEV輸出に対して不確実性を高めていると報じられている。",
+      "title": "米USTR、対中関税引き上げ提案（セクション301調査後）"
+    },
+    {
+      "id": "policy-2026-11-26-2",
+      "img": "https://www.electrive.com/media/2025/12/spanien-pedro-sanchez-2025-400x267.jpg",
+      "links": [
+        [
+          "www.electrive.com",
+          "https://www.electrive.com/2026/11/26/budget-exhausted-spain-cuts-purchase-subsidies-for-electric-cars/"
+        ]
+      ],
+      "question": "補助金対象車両の要件変更や代替措置は内装仕様に影響するか",
+      "region": "スペイン",
+      "stage": "施行・適用中",
+      "summary": "スペイン政府の個人向けAuto+補助プログラムにおいて、電気自動車およびプラグインハイブリッド車の購入奨励金として3億5,000万ユーロが配分され、予算が枯渇した。議会選挙を控えた資金枠の問題が報じられている。",
+      "title": "スペイン、EV購入補助金（Auto+）予算枯渇"
+    }
   ]
 };
