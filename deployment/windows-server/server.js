@@ -1603,7 +1603,7 @@ function copilotCatalog(includePolicy = false) {
     }
     copilotArticles = {release:release.releaseId,rows,range,newIds};
   }
-  if (includePolicy && EDITION === 'interior' && !copilotArticles.policyRows) {
+  if (includePolicy && !copilotArticles.policyRows) {
     const sandbox = {window:{}};
     for (const file of ['dailynews_policy.js', 'policy_data.js', 'policy_highlights.js']) {
       const filename = path.join(release.releaseDir, file);

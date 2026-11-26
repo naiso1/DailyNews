@@ -1,6 +1,8 @@
 """Exercise policy threads against a disposable, loopback-only DailyNews database."""
+import json
 import os
 from pathlib import Path
+import re
 import shutil
 import socket
 import subprocess
@@ -13,9 +15,10 @@ from playwright.sync_api import expect, sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def check(browser, base):
+def check(browser, origin, edition):
+    base = origin + ("/exterior" if edition == "exterior" else "")
     ctx = browser.new_context(viewport={"width": 1440, "height": 950})
-    response = ctx.request.post(base + "/api/auth/register", headers={"Origin": base}, data={
+    response = ctx.request.post(base + "/api/auth/register", headers={"Origin": origin}, data={
         "email": "policy.reader@example.com", "displayName": "検証用",
         "password": "policy-test-only-4827", "clientId": "policyfixtureclient1234",
     })
@@ -129,14 +132,13 @@ def check(browser, base):
         overlay = page.locator("#releaseHistoryOverlay")
         expect(overlay).to_be_visible()
         expect(overlay.locator(".release-history-list")).to_contain_text("過去の注目法規")
-        expect(overlay.locator(".release-history-entry").first).to_contain_text("人気ニュースランキング")
-        expect(overlay.locator(".release-history-list")).to_contain_text("2026-11-25")
+        expect(overlay.locator(".release-history-list")).to_contain_text("外装版に「法規・政策」を追加")
         assert overlay.evaluate("el => el.scrollWidth <= el.clientWidth")
         overlay.locator(".release-history-confirm").click()
     ctx.close()
 
 
-def main():
+def verify(edition):
     with tempfile.TemporaryDirectory(prefix="dailynews-policy-") as temp:
         root = Path(temp)
         release = root / "releases" / "abcdef1"
@@ -148,7 +150,20 @@ def main():
         for pattern in ("dailynews_*.js", "dailynews_*.css", "policy_*.js", "release_history.js"):
             for asset in ROOT.glob(pattern):
                 shutil.copyfile(asset, release / asset.name)
-        shutil.copyfile(ROOT / "内装製品デイリーニュース.html", release / "index.html")
+        if edition == "exterior":
+            shutil.copyfile(ROOT / "content/exterior/policy_highlights.js", release / "policy_highlights.js")
+        # Keep the issue dates and sample photo stable as production data grows.
+        policy_file = release / "policy_data.js"
+        prefix = "window.DAILYNEWS_POLICY_ISSUES = "
+        cards = json.loads(policy_file.read_text(encoding="utf-8").strip()[len(prefix):-1])["2026-11-24"]
+        policy_file.write_text(prefix + json.dumps({"2026-11-25": cards}) + ";", encoding="utf-8")
+        (release / "publication_status.json").write_text(json.dumps({
+            "edition_id": "exterior", "status": "published", "processed_through": "2026-11-25",
+            "target_dates": ["2026-11-25"], "selected_count": 1,
+        }), encoding="ascii")
+        html = (ROOT / "内装製品デイリーニュース.html").read_text(encoding="utf-8")
+        html = re.sub(r'const NEW_DATE_RANGE_OVERRIDE = .*?;', 'const NEW_DATE_RANGE_OVERRIDE = { start: "2026-11-25", end: "2026-11-25" };', html)
+        (release / "index.html").write_text(html, encoding="utf-8")
         (release / "news_data.js").write_text(
             'window.LOADED_NEWS_DATA=[{id:"jp1",country:"jp",title:"記事",desc:"確認",date:"2026-11-24",tags:[],isNew:true}];',
             encoding="utf-8")
@@ -158,7 +173,7 @@ def main():
             port = sock.getsockname()[1]
         base = f"http://127.0.0.1:{port}"
         env = {k: v for k, v in os.environ.items() if not k.startswith("DAILYNEWS_")}
-        env.update(DAILYNEWS_ROOT=str(root), DAILYNEWS_HOST="127.0.0.1", DAILYNEWS_PORT=str(port))
+        env.update(DAILYNEWS_EDITION=edition, DAILYNEWS_ROOT=str(root), DAILYNEWS_HOST="127.0.0.1", DAILYNEWS_PORT=str(port))
         server = subprocess.Popen(["node", str(ROOT / "deployment/windows-server/server.js")], env=env)
         try:
             for _ in range(50):
@@ -169,13 +184,14 @@ def main():
                     time.sleep(.1)
             with sync_playwright() as pw:
                 browser = pw.chromium.launch(channel="msedge")
-                check(browser, base)
+                check(browser, base, edition)
                 browser.close()
         finally:
             server.terminate()
             server.wait(timeout=10)
-    print("PASS: daily and archived card controls, favorites, tags, article context, image override/reset, reactions, navigation and responsive history")
+    print(f"PASS {edition}: daily and archived card controls, favorites, tags, article context, image override/reset, reactions, navigation and responsive history")
 
 
 if __name__ == "__main__":
-    main()
+    for edition in ("interior", "exterior"):
+        verify(edition)

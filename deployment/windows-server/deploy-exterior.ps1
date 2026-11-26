@@ -14,8 +14,8 @@ $entry = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("5YaF6KOF6K
 $shared = @($entry,"header-layout-test.html","activity-preview.html","source-list-preview.html","currency-conversion-preview.html",
     "exchange_rates.js","dailynews_annotations.js","dailynews_exterior_tags.js","dailynews_event_tags.js","dailynews_config.js","dailynews_client.js","dailynews_account.js","dailynews_reports.js",
     "dailynews_activity.js","dailynews_sources.js","release_history.js","dailynews_header.js","dailynews_header.css","dailynews_copilot.js","dailynews_copilot.css",
-    "dailynews_copilot_companion.js","dailynews_copilot_companion.css")
-foreach ($name in @("news_data.js","insights_data.js","source_list_data.js")) {
+    "dailynews_copilot_companion.js","dailynews_copilot_companion.css","dailynews_policy.js")
+foreach ($name in @("news_data.js","insights_data.js","source_list_data.js","policy_data.js","policy_highlights.js")) {
     if (!(Test-Path -LiteralPath (Join-Path $content $name))) { throw "Exterior content missing: $name" }
 }
 $tempRoot = Join-Path $repo "runtime\exterior\deployment"
@@ -24,7 +24,7 @@ $staging = Join-Path $tempRoot ("package_" + [guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $staging | Out-Null
 foreach ($name in $shared) { Copy-Item -LiteralPath (Join-Path $repo $name) -Destination (Join-Path $staging $name) }
 # Always package the current common UI. Exterior derives NEW dates from its own data.
-foreach ($name in @("news_data.js","insights_data.js","source_list_data.js","publication_status.json")) {
+foreach ($name in @("news_data.js","insights_data.js","source_list_data.js","policy_data.js","policy_highlights.js","publication_status.json")) {
     if (Test-Path -LiteralPath (Join-Path $content $name)) {
         Copy-Item -LiteralPath (Join-Path $content $name) -Destination (Join-Path $staging $name)
     }
@@ -44,6 +44,7 @@ foreach ($folder in @("images","page_images")) {
     }
 }
 # The masthead is shared by both editions; article images remain edition-local.
+Copy-Item -LiteralPath (Join-Path $repo "page_images\policy_cover.webp") -Destination (Join-Path $staging "page_images\policy_cover.webp")
 Copy-Item -LiteralPath (Join-Path $repo "page_images\header_automotive_20261016.png") -Destination (Join-Path $staging "page_images\header_automotive_20261016.png")
 Copy-Item -LiteralPath (Join-Path $repo "page_images\header_automotive_20261016.webp") -Destination (Join-Path $staging "page_images\header_automotive_20261016.webp")
 Copy-Item -LiteralPath (Join-Path $repo "page_images\update_delay_worker_20261113.png") -Destination (Join-Path $staging "page_images\update_delay_worker_20261113.png")

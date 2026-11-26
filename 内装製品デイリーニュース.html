@@ -357,7 +357,7 @@ header.site-header {
     background: rgba(255, 120, 120, 0.12);
 }
 .chip .new-count.hidden { display: none; }
-html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { display: none; }
+#policySection[hidden] { display: none; }
 #policyChip { font: inherit; font-size: 13px; }
 #policySection { max-width: 1400px; margin: 20px auto 40px; }
 #policySection h2 { margin: 0 0 4px; }
@@ -1755,8 +1755,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
         }
         // 同じURLで毎回更新を確認し、変更がないデータはブラウザの保存分を再利用する。
         window.__dataScriptsReady = new Promise((resolve) => {
-            const sources = ["news_data.js", "insights_data.js"];
-            if (editionConfig.id === "interior") sources.push("policy_data.js", "policy_highlights.js");
+            const sources = ["news_data.js", "insights_data.js", "policy_data.js", "policy_highlights.js"];
             let loaded = 0;
             const loadScript = (src) => {
                 const script = document.createElement("script");
@@ -1878,11 +1877,9 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
 
         function updateNewCountBadges() {
             const counts = getNewCounts(NEWS_DATA);
-            if (editionConfig.id === "interior") {
-                counts.policy = Object.entries(window.DAILYNEWS_POLICY_ISSUES || {})
-                    .filter(([day]) => day >= NEW_DATE_RANGE.start && day <= NEW_DATE_RANGE.end)
-                    .reduce((sum, [, cards]) => sum + cards.length, 0);
-            }
+            counts.policy = Object.entries(window.DAILYNEWS_POLICY_ISSUES || {})
+                .filter(([day]) => day >= NEW_DATE_RANGE.start && day <= NEW_DATE_RANGE.end)
+                .reduce((sum, [, cards]) => sum + cards.length, 0);
             document.querySelectorAll("#countryFilters .new-count").forEach(el => {
                 const country = el.dataset.country;
                 const count = counts[country] || 0;
@@ -2170,9 +2167,7 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             const sortKey = getRankingSortKey();
             const scope = getRankingScopeValue();
             const news = visibleNewsData();
-            const policies = window.DAILYNEWS_CONFIG?.id === "interior" ? policyStories()
-                .filter(item => !interactions[item.id]?.hidden)
-                : [];
+            const policies = policyStories().filter(item => !interactions[item.id]?.hidden);
             const candidates = news.filter(item => item.country !== "paper").concat(policies);
             const latest = getLatestDate(news.concat(policies));
 
@@ -3742,18 +3737,16 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
                 document.getElementById("dateFrom").value = "";
                 from = "";
             }
-            if (window.DAILYNEWS_CONFIG.id === "interior") {
-                const policyView = activeCountries.has("policy");
-                document.body.classList.toggle("policy-view", policyView);
-                document.getElementById("policySection").hidden = !policyView;
-                if (policyView) {
-                    if (!preserveCards) renderPolicyNews(from, to, searchText);
-                    updateRankingVisibility();
-                    scheduleRankingUpdate();
-                    pendingAutomaticNewsRefresh = false;
-                    pendingReactionRefresh = false;
-                    return;
-                }
+            const policyView = activeCountries.has("policy");
+            document.body.classList.toggle("policy-view", policyView);
+            document.getElementById("policySection").hidden = !policyView;
+            if (policyView) {
+                if (!preserveCards) renderPolicyNews(from, to, searchText);
+                updateRankingVisibility();
+                scheduleRankingUpdate();
+                pendingAutomaticNewsRefresh = false;
+                pendingReactionRefresh = false;
+                return;
             }
 
             // 1. Filter
@@ -3967,7 +3960,6 @@ html:not([data-edition="interior"]) #policyChip, #policySection[hidden] { displa
             activeCountries = params.has("countries")
                 ? new Set(params.get("countries").split(",").filter(Boolean))
                 : new Set(["world"]);
-            if (window.DAILYNEWS_CONFIG.id !== "interior" && activeCountries.has("policy")) activeCountries = new Set(["world"]);
             const requestedTags = params.has("tags")
                 ? params.get("tags").split(",").filter(Boolean).map(tag => window.DAILYNEWS_CONFIG.id === "exterior" ? window.DailyNewsExteriorTags.canonical(tag) : tag)
                 : ["all"];

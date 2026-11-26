@@ -6,6 +6,23 @@ from dailynews import regulatory_news as policy
 
 
 class RegulatoryNewsTests(unittest.TestCase):
+    def test_exterior_prioritises_exterior_evidence_and_uses_its_own_brief(self):
+        body = "Headlamp beam mounting arrangements under FMVSS 108 are under review. " * 3
+        rows = [{"国": "米国", "タイトル": "Headlamp layout under FMVSS 108", "内容": body,
+                 "URL": "https://example.org/lighting"},
+                {"国": "米国", "タイトル": "Vehicle import quotas", "内容": "Trade policy for cars. " * 20,
+                 "URL": "https://example.org/trade"}]
+        self.assertEqual([c[2] for c in policy.shortlist(rows, "exterior")], [r["URL"] for r in rows])
+        self.assertEqual([c[2] for c in policy.shortlist(rows, "interior")], [rows[1]["URL"]])
+        prompts = []
+        sources = policy.collect_evidence(policy.shortlist(rows, "exterior"), lambda url: "")
+        def ask(prompt):
+            prompts.append(prompt)
+            return {"cards": []}
+        policy.select_cards(sources, ask, "exterior")
+        self.assertIn("乗用車外装", prompts[0])
+        self.assertIn("歩行者保護", prompts[0])
+
     def test_selection_preserves_source_and_requires_evidence(self):
         body = "The proposed vehicle safety regulation concerns occupant protection. " * 3
         rows = [{"国": "米国", "タイトル": "New vehicle safety regulation", "内容": body,

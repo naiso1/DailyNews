@@ -234,13 +234,13 @@ The script packages only:
 - `dailynews_annotations.js` (currency conversion and verified source links)
 - `dailynews_exterior_tags.js` and `dailynews_event_tags.js` (shared genre/event rules)
 - `news_data.js`
-- `policy_data.js` (interior only, same sign-in requirement as the news archive).
-  The interior runner builds up to five regulatory developments per issue date from
+- `policy_data.js` (edition-specific, same access rules as that edition's news archive).
+  Each runner builds up to five regulatory developments per issue date from
   its collection CSV and dedicated searches, grouped independently of country quotas.
   A failed policy build is logged and does not block regional publication. To retry
-  a missing issue, run `ニュース収集/update_policy_news.py --dates YYYY-MM-DD` with
-  the workstation Python, then use the normal interior publication procedure.
-- `policy_highlights.js` contains the separately reviewed interior retrospective.
+  a missing issue, run `ニュース収集/update_policy_news.py --edition interior --dates YYYY-MM-DD`
+  or use `--edition exterior`, then publish that edition.
+- `policy_highlights.js` contains each edition's separately reviewed retrospective.
   The daily collector leaves it intact. Policy card IDs identify persistent likes and comment threads.
 - `insights_data.js`
 - `dailynews_client.js`

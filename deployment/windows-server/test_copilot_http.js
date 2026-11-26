@@ -29,10 +29,11 @@ async function verifyEdition(edition){
   {id:'jp3',date:'2026-11-17',duplicateOf:'jp1',title:'重複記事'},
   {id:'eu1',date:'2026-11-15',title:'外装のNEW補充',desc:'test',url:'https://example.com'}])+ ';');
  fs.writeFileSync(path.join(release,'publication_status.json'),JSON.stringify({issue_date:'2026-11-17',selected_news_ids:['eu1']}));
- const policyId='policy-2026-11-17-1';
+ const policyId=edition==='exterior'?'policy-ext-2026-11-17-1':'policy-2026-11-17-1';
+ const subject=edition==='exterior'?'前照灯':'シート';
  fs.copyFileSync(path.join(__dirname,'../../dailynews_policy.js'),path.join(release,'dailynews_policy.js'));
  fs.writeFileSync(path.join(release,'policy_data.js'),'window.DAILYNEWS_POLICY_ISSUES='+JSON.stringify({
-  '2026-11-17':[{id:policyId,title:'安全基準の改正案',stage:'審議中',summary:'シートの要件について審議中です。',links:[['発表元','https://example.org/notice']]}]}));
+  '2026-11-17':[{id:policyId,title:'安全基準の改正案',stage:'審議中',summary:subject+'の要件について審議中です。',links:[['発表元','https://example.org/notice']]}]}));
  fs.writeFileSync(path.join(root,'data/copilot-worker.json'),JSON.stringify({token:'a'.repeat(64)}));
  fs.writeFileSync(path.join(root,'data/copilot-connection.json'),JSON.stringify({allowIntranetHttpSignIn:true}));
  const port=20100+Math.floor(Math.random()*1000),origin='http://127.0.0.1:'+port,base=origin+(edition==='exterior'?'/exterior':''),api=base+'/api';
@@ -48,8 +49,8 @@ async function verifyEdition(edition){
    assert.equal(job.edition,edition);
    if(q.scope==='article'){
     assert.equal(job.user.email,'alice@example.com');assert.deepEqual(q.sources.map(s=>s.id),[policyId]);
-    assert.equal(q.sources[0].url,'https://example.org/notice');assert.match(q.prompt,/シートの要件/);
-    result={id:'1'.repeat(64),scope:'article',status:'done',answer:'対象はシートです。',sources:q.sources};
+    assert.equal(q.sources[0].url,'https://example.org/notice');assert.ok(q.prompt.includes(subject+'の要件'));
+    result={id:'1'.repeat(64),scope:'article',status:'done',answer:'対象は'+subject+'です。',sources:q.sources};
    }else{assert.deepEqual(q.sources.map(s=>s.id),edition==='exterior'?['eu1']:['jp1']);code='ACCOUNT_NOT_CONNECTED';}
   }else if(job.operation==='accountStatus')result={connected:false,email:job.user.email};
   else if(job.operation==='begin'){const id=crypto.randomUUID();connections.set(id,job.user.email);result={id,status:'signing_in'};}
@@ -70,8 +71,7 @@ async function verifyEdition(edition){
   async function register(email){const r=await fetch(api+'/auth/register',{method:'POST',headers:headers(),body:JSON.stringify({email,displayName:'Test',password:'local-fixture-only-123',clientId:crypto.randomUUID()})});assert.equal(r.status,201);return r.headers.get('set-cookie').split(';')[0];}
   const alice=await register('alice@example.com'),bob=await register('bob@example.com');
   r=await fetch(api+'/copilot/questions',{method:'POST',headers:headers(alice),body:JSON.stringify({scope:'article',itemId:policyId,question:'何が変わりますか？'})});
-  if(edition==='interior'){assert.equal(r.status,200);assert.equal((await r.json()).job.answer,'対象はシートです。');}
-  else assert.equal((await r.json()).error.code,'NOT_FOUND');
+  assert.equal(r.status,200);assert.equal((await r.json()).job.answer,'対象は'+subject+'です。');
   const {DatabaseSync}=require('node:sqlite');const fixtureDb=new DatabaseSync(path.join(root,'data/dailynews.sqlite'));
   fixtureDb.prepare("INSERT INTO interactions(item_id) VALUES ('jp2')").run();
   fixtureDb.prepare("INSERT INTO hidden_items(item_id,reason,created_by) VALUES ('jp2','test',1)").run();fixtureDb.close();
